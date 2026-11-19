@@ -1,6 +1,6 @@
 /* Carrier tests only. Actual device metadata hooks and guest execution are
  * separate required gates; artificial slot values cannot prove wiring. */
-#include "ntvdm-exe/softpc/include/mvdm_keyboard_history.h"
+#include "compat/include/mvdm_keyboard_history.h"
 #include <stdio.h>
 #include <string.h>
 #define CHECK(x) do { if(!(x)) { printf("FAIL line=%u: %s\n",(unsigned)__LINE__,#x);return 1;} } while(0)

@@ -43,7 +43,7 @@ $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tool
 $lines=& cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && set')
 foreach($line in $lines){$i=$line.IndexOf('=');if($i -gt 0){Set-Item -LiteralPath ('env:'+$line.Substring(0,$i)) -Value $line.Substring($i+1)}}
 if($OriginReturn){
-    & cl.exe /nologo /MT /W4 /WX /c (Join-Path $root 'src/ntvdm-exe/softpc/mvdm_keyboard_history.c') "/Fo:$build/origin.obj"
+    & cl.exe /nologo /MT /W4 /WX /c (Join-Path $root 'src/compat/mvdm_keyboard_history.c') "/Fo:$build/origin.obj"
     if($LASTEXITCODE){throw 'Origin carrier compilation failed'}
     $extraObjects+=Join-Path $build 'origin.obj'
 }

@@ -43,7 +43,7 @@ foreach($line in $lines){
     }
     Set-Item -LiteralPath ('env:'+$name) -Value $line.Substring($i+1)
 }
-& cl.exe /nologo /MT /W4 /WX /c (Join-Path $root 'src/ntvdm-exe/softpc/mvdm_keyboard_history.c') "/Fo:$build/origin.obj"
+& cl.exe /nologo /MT /W4 /WX /c (Join-Path $root 'src/compat/mvdm_keyboard_history.c') "/Fo:$build/origin.obj"
 if($LASTEXITCODE){throw 'Origin carrier compilation failed'}
 & cl.exe /nologo /MT /W4 /I $build /I (Join-Path $root 'src') (Join-Path $root 'test/app/keyboard_origin_device_test.c') (Join-Path $build 'origin.obj') "/Fo:$build/test.obj" "/Fe:$build/test.exe"
 if($LASTEXITCODE){throw 'Original device fixture compilation failed'}

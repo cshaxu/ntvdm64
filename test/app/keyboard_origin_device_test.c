@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ntvdm-exe/softpc/include/mvdm_keyboard_history.h"
+#include "compat/include/mvdm_keyboard_history.h"
 #define NTVDM
 #define GLOBAL
 #define LOCAL static

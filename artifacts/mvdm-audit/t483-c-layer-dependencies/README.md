@@ -140,3 +140,11 @@ Sequential review is 12/116, five cleared and seven lifecycle files for S13.
 013-016 without changing product code. Review is 16/116: five cleared, eight
 lifecycle files for S13 and three source/ABI files for S14; 100 unreviewed.
 531 of 617 stable IDs remain open. The P16 release remains current.
+
+## P18 keyboard metadata
+
+[Delivery evidence](s12-p18-keyboard-history.json) records the B migration and
+three targeted suites. Seven stable IDs are eliminated; 524/617 remain open.
+[Files 017-018](s12-file017-018-ownership.json) remain S14 composition/ABI work.
+Review is 19/116: six direct-header clears, eight lifecycle files, five source/ABI
+files, 97 unreviewed. C0204 remains a direct link dependency.

@@ -290,7 +290,6 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20
                         'mvdm_softpc_event_thread.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_text_video.c',
-                        'mvdm_keyboard_history.c',
                         'mvdm_keyboard_reset.c', 'mvdm_interrupt_export.c',
                         'mvdm_softpc_mouse_input.c', 'mvdm_softpc_mouse_bridge.c',
                         'mvdm_softpc_mouse_guest.c',
@@ -1216,6 +1215,9 @@ $graph.Add('build obj/adapter-softpc/mvdm_shadow_registry.obj: cc ' + (NinjaPath
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_shadow_registry.obj'
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj'
+$graph.Add('build obj/adapter-softpc/mvdm_keyboard_history.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_keyboard_history.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_keyboard_history.obj'
 $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
     $object = 'obj/vdmredir-dll/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $redirDllBindingRoot $name)))
@@ -1736,9 +1738,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build console-video-test.exe: console_test_link obj/tests/console_video.obj obj/frontend/console_frontend.obj frontend-base.lib ' + $consoleGridObject)
     # Standalone carrier fixture; the same source is selected in the worker
     # adapter list above. Device/history and guest gates remain separate tests.
-    $graph.Add('build obj/tests/keyboard_history_carrier.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/mvdm_keyboard_history.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/tests/keyboard_origin.obj: cc ' + (NinjaPath (Join-Path $root 'test/app/keyboard_origin_test.c')))
+    $graph.Add('build obj/tests/keyboard_history_carrier.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_keyboard_history.c')))
+    $graph.Add('  cflags = ' + $libraryFlags)
+    $graph.Add('build obj/tests/keyboard_origin.obj: cc ' + (NinjaPath (Join-Path $root 'test/compat/keyboard_origin_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build keyboard-origin-test.exe: rtl_fixture_link obj/tests/keyboard_origin.obj obj/tests/keyboard_history_carrier.obj')
     $graph.Add('build obj/common/native_launch.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/codec/native_launch.c')))

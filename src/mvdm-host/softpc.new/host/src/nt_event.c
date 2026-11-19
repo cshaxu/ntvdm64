@@ -80,7 +80,7 @@
 #include "worker-base/connection.h"
 #include "mvdm_softpc_event_thread.h"
 #include "ntvdm-exe/win32/worker_lifecycle.h"
-#include "mvdm_keyboard_history.h"
+#include "compat/include/mvdm_keyboard_history.h"
 #include "ntvdm-exe/win32/console_input.h"
 #include "ntvdm-exe/win32/console_text.h"
 #include "mvdm_softpc_text_video.h"

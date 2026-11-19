@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ntvdm-exe/softpc/include/mvdm_keyboard_history.h"
+#include "compat/include/mvdm_keyboard_history.h"
 #define MAX_KEY_EVENTS 100
 #define GLOBAL
 #define BUFF_6805_PMAX 512

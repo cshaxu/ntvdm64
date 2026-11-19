@@ -7,7 +7,7 @@
 #include <sas.h>
 #include <ica.h>
 #include "ntvdm-exe/session/session.h"
-#include "ntvdm-exe/softpc/include/mvdm_keyboard_history.h"
+#include "compat/include/mvdm_keyboard_history.h"
 extern mvdm_keyboard_history nt_keyboard_history;
 extern void Reset6805and8042(void);
 

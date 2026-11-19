@@ -119,13 +119,19 @@
 
 - 直接包含 · C0033 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h
 
+017：ev_glue.c::setup_vga_globals 调用 F 的 bind_vectors，实际装配 C 的 Cpu/Sas/Video 表及 c_* 提供者，无通用 Windows 适配职责。不能下沉 B；归 S14 对照原版生成绑定及现有 C 载体，先核对初始化次序与镜像增量。C0033 保持开放；源码未改，镜像净变 0 点、0 行。
+
 ## 018 — src/mvdm-host/softpc.new/base/inc/sas.h
 
 - 直接包含 · C0032 · ntvdm-exe · src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h
 
+018：sas.h 通过 sas4gen.h 取得 C 的 SAS_MEM_TYPE、SasVector 及调用签名。x86 外部生成载体较原版另含 sas_touch/VirtualiseInstruction/IsPageInstanceData 接口，受 NTVDMx64 来源例外约束。与 014-016 归 S14 来源/ABI 审核，不能把同名头直接互换；C0032 保持开放。源码未改，镜像净变 0 点、0 行。
+
 ## 019 — src/mvdm-host/softpc.new/base/keymouse/keyba.c
 
 - 直接包含 · C0035 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_keyboard_history.h
+
+019 P18：历史元数据实现/声明及独立单测迁 B，保持函数体和布局；C nt_event.c 继续拥有实例，锁与事件所有权不变。keyba.c 和 nt_event.c 只改 include，#error/#line 不变，镜像净变 0 点、0 行。C0035、C0198-C0203 消除，keyba.c 的 C0204 IRQ 接线仍开放。两架构 cached 构建、八产品图边界、历史/实际设备函数/输入归还三组专项通过；11组件双端发布哈希通过。累计分类 19/116：六文件解除直接外层头、八生命周期项、五来源/ABI/组合项、97 未审查；524/617 依赖开放，累计镜像缩减 2 点、10 行。第024文件仅同步共享头，不提前计作完成。
 
 ## 020 — src/mvdm-host/softpc.new/base/keymouse/mouse_io.c
 

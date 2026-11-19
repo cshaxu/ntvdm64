@@ -15,7 +15,7 @@ $envLines=& cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && s
 foreach($line in $envLines){$i=$line.IndexOf('=');if($i -gt 0){Set-Item -Path ('env:'+$line.Substring(0,$i)) -Value $line.Substring($i+1)}}
 $sources=@('test/app/console_input_batch_test.c',
  'test/app/console_input_batch_stubs.c',
- 'src/ntvdm-exe/softpc/mvdm_keyboard_history.c',
+ 'src/compat/mvdm_keyboard_history.c',
  'src/common/console/client.c',
  'src/lib-win32/pipe/pipe_transfer.c','src/lib-win32/handle/duplicate.c',
  'src/ntvdm-exe/win32/console_client.c','src/ntvdm-exe/win32/console_graphics.c',

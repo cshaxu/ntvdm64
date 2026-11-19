@@ -1,0 +1,22 @@
+{
+  "baseline": "880ac6cde906977b358a6751c56e3ef09baf7a1d",
+  "question": "Classify ordered files017-018 direct dependency ownership",
+  "procedure": "Read C caller and complete vector binder; read SAS declaration boundary and recorded upstream carrier differences.",
+  "files": {
+    "17": "017：ev_glue.c::setup_vga_globals 调用 F 的 bind_vectors，实际装配 C 的 Cpu/Sas/Video 表及 c_* 提供者，无通用 Windows 适配职责。不能下沉 B；归 S14 对照原版生成绑定及现有 C 载体，先核对初始化次序与镜像增量。C0033 保持开放；源码未改，镜像净变 0 点、0 行。",
+    "18": "018：sas.h 通过 sas4gen.h 取得 C 的 SAS_MEM_TYPE、SasVector 及调用签名。x86 外部生成载体较原版另含 sas_touch/VirtualiseInstruction/IsPageInstanceData 接口，受 NTVDMx64 来源例外约束。与 014-016 归 S14 来源/ABI 审核，不能把同名头直接互换；C0032 保持开放。源码未改，镜像净变 0 点、0 行。"
+  },
+  "sha256": {
+    "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c": "b016c166b818e1619f03ae7f7ffc1feca886872cd088bda6f7ab102e45f7cc54",
+    "src/mvdm-host/softpc.new/base/inc/sas.h": "c82e004edf4be6f26a7c5bf5ce78af88172540c9c5c40f688c59055dd945ef26",
+    "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c": "a3d6f35fef8bae86a04b49ecc2bc4ece34d103c80f31b4248d403035831c3364",
+    "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h": "7f4520389338f9d265ce4d4a3e72980356687aebc9ed836b4707d5a250519afa"
+  },
+  "interpretation": "C internal ABI/composition is currently located in F; moving it to B alone does not remove C coupling.",
+  "followUp": "S14: compare actual original binding carriers, preserve vector ABI and initialization order, obtain approval before any net mirror increase or changed source admission.",
+  "validation": "Source-only classification; no code modification or runtime claim.",
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  }
+}

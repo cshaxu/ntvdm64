@@ -88,7 +88,7 @@
 
 #include "debug.h"
 
-#include "mvdm_keyboard_history.h"
+#include "compat/include/mvdm_keyboard_history.h"
 extern mvdm_keyboard_history nt_keyboard_history;
 extern void mvdm_keyboard_reset_pending_irq(int pending); /* DIVERGENCE(MVDM-HOST-DIV-321) */
 

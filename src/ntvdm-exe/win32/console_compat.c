@@ -14,7 +14,7 @@
 #include "console_input.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
-#include "ntvdm-exe/softpc/include/mvdm_keyboard_history.h"
+#include "compat/include/mvdm_keyboard_history.h"
 #include "common/protocol/console_io.h"
 typedef char keyboard_live_capacity_check[(MVDM_KEY_HISTORY_CAPACITY<=CONSOLE_IO_INPUT_LIVE_CAPACITY) ? 1 : -1];
 extern mvdm_keyboard_history nt_keyboard_history;

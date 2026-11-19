@@ -60,6 +60,8 @@ P16 moves the unchanged CCPU wake event carrier to B; F retains its lifetime and
 
 P17 is evidence-only: [files 013-016](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p17-mapping-generated-ownership.json) establish session mapping ownership and external generated-header ABI constraints. Classification is 16/116: five cleared, eight lifecycle files for S13, three source/ABI files for S14 and 100 unreviewed. 531/617 IDs remain open. No source, build or release changed; P16 remains current.
 
+P18 moves unchanged caller-owned keyboard metadata into B and classifies files 017-018 for S14. Both cached architectures, eight A/B graphs and three keyboard suites passed; eleven images are published and hash-verified. [P18 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p18-keyboard-history.json) records 19/116 classified, six direct-header clears, eight lifecycle files, five source/ABI/composition files and 97 unreviewed. Seven IDs are eliminated; 524/617 remain open. C0204 IRQ binding remains open. Mirror delta is zero; cumulative reduction stays two points and ten lines.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

@@ -1,0 +1,103 @@
+{
+  "baseline": "880ac6cde906977b358a6751c56e3ef09baf7a1d",
+  "scope": "S12 P18 file019 keyboard metadata, with files017-018 ownership classification",
+  "sourceIdentity": "Provider/header byte-identical after LF normalization; two mirror consumers differ only by include path. No algorithm, constants or structure changes.",
+  "owner": "C nt_event.c owns nt_keyboard_history and existing keyboard locking; B routines receive explicit state and perform no callbacks.",
+  "eliminated": [
+    "C0035",
+    "C0198",
+    "C0199",
+    "C0200",
+    "C0201",
+    "C0202",
+    "C0203"
+  ],
+  "remaining": "C0204 keyboard IRQ reset remains F-owned direct link; clearing the header is not all link-dependency cleanup. File024 nt_event.c is not yet fully reviewed.",
+  "mirror": {
+    "files": [
+      "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "src/mvdm-host/softpc.new/host/src/nt_event.c"
+    ],
+    "pointsDelta": 0,
+    "linesDelta": 0,
+    "errorAndLineUnchanged": true
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "counts": {
+    "totalFiles": 116,
+    "reviewedFiles": 19,
+    "clearedDirectHeaderFiles": 6,
+    "deferredLifecycleFiles": 8,
+    "deferredSourceAbiCompositionFiles": 5,
+    "unreviewedFiles": 97,
+    "totalStableIds": 617,
+    "open": 524,
+    "eliminated": 43,
+    "supporting": 44,
+    "eliminatedTransitive": 5,
+    "diagnostic": 1
+  },
+  "build": {
+    "x86": 0,
+    "x64": 0,
+    "eightABGraphs": "passed",
+    "providerFlags": "Independent libraryFlags, no C/F private headers or historical selectors"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "a3d12940-b0df-478f-8e1b-0218cc6361e4",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "targeted": {
+    "exit": 0,
+    "suites": [
+      "keyboard-origin-test.exe",
+      "verify-keyboard-origin-device.ps1",
+      "verify-keyboard-buffer-count.ps1 -OriginReturn"
+    ],
+    "passMarkers": [
+      "PASS zero/many device expansion, deduplication and original history order",
+      "PASS modeled slot movement and unattributed output never select consumed history",
+      "PASS actual pending-slot selector, wrapped ring, held/prefix/output gates and reset-before-return",
+      "PASS history wrap expires old origins instead of aliasing overwritten records",
+      "PASS distinct receipts survive selection and device reset; wrap rejects overwritten origins",
+      "PASS ordered per-batch receipt staging and unfinished-batch rejection",
+      "PASS serial overflow refusal and empty reset",
+      "PASS actual enqueue/remove/output/EOI preserves then retires origin; ignored release has none",
+      "PASS actual wrapped two-byte translation preserves one raw release",
+      "PASS actual held admission/replay transfers identity once and ignores inactive held storage",
+      "PASS actual split-prefix translation keeps pending origin until output retirement",
+      "PASS actual internal response has no raw origin and buffer clear discards pending metadata",
+      "PASS original full hardware reset clears device provenance but preserves captured return selection",
+      "PASS original suspend reset erases host held-key state before later release-all",
+      "PASS ignored release after unread make does not displace it",
+      "PASS ignored release before unread make retains original order",
+      "PASS Ctrl-Break/PrintScreen expansion returns its one raw record, never consumed M",
+      "PASS synthetic data and unattributed output do not replay consumed M",
+      "PASS unread output returns once; consumed output awaiting EOI is not replayed",
+      "PASS captured-history shape preserves first M despite ignored duplicate release",
+      "PASS wrapped device metadata retains paired original order",
+      "PASS held/output/prefix duplicate identity survives hardware reset once",
+      "PASS original history ring wrap rejects overwritten identities without aliasing",
+      "PASS failed Console prepend keeps original cleanup and no fabricated BIOS join"
+    ]
+  },
+  "limits": [
+    "Device and return suites extract actual selected original functions into controlled fixtures; not a complete guest integration or interactive keyboard run.",
+    "Other keyboard lifecycle/IRQ and nt_event dependencies remain open."
+  ],
+  "artifacts": {
+    "x86.log": "539ed421cc50c8a0218788d315ee553870058ac1a4a2e5868ffb8fa750577729",
+    "x64.log": "5d961cb38553df9ccd6972ef4ead5552989e591ddbc7a42bb5154ba4bc09e366",
+    "checks.log": "a47502ee763ef59c1f587c7bc17d0798dbf9cef5791f4a3dc268233f7ed2bc9a",
+    "checks.err": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

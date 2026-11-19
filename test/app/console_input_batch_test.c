@@ -4,7 +4,7 @@
 #include <string.h>
 #include "conapi.h"
 #include "common/protocol/console_mouse.h"
-#include "ntvdm-exe/softpc/include/mvdm_keyboard_history.h"
+#include "compat/include/mvdm_keyboard_history.h"
 static mvdm_keyboard_history nt_keyboard_history;
 static INPUT_RECORD queue[1024];
 static DWORD queued, position, reads, peeks;static BOOL use_receipts;
