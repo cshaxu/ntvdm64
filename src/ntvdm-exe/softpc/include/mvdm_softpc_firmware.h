@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "compat/include/system_root.h"
+#include "compat/include/pif_path.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,10 +45,6 @@ int __cdecl mvdm_softpc_system_copy_root(char *path_out,
  * nor creates package media. */
 int __cdecl mvdm_softpc_system_copy_system_directory(char *path_out,
     uint32_t path_out_bytes);
-
-/* In-place, bounded OEM-to-ANSI boundary for original PIF configuration
- * file consumers. Returns zero if conversion cannot fit; opens no file. */
-int mvdm_softpc_config_path_to_ansi(char *path, uint32_t capacity);
 
 #ifdef __cplusplus
 }

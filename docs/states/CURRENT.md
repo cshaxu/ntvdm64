@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P81-P85: [Activity delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p81-activity-owner.json), [PIF reconciliation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p85-pif-directory-reconciliation.json). Reviewed116/116 compile and32/74 link-only; file33 in progress. 496/618 IDs open,72 eliminated (two stale P11 statuses corrected). Mirror delta0/0; cumulative reduction2 points/10 lines. P81 package0b6c2aa7-47e7-46f2-8fd7-1daad97a3716 remains published;22 hashes verified. S12 active.
+P86: [PIF path delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p86-pif-path-owner.json). Reviewed116/116 compile and33/74 link-only. 495/618 IDs open,73 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Package914c1251-6d03-48d2-a792-41a95810326e published;22 hashes verified. Cached full builds, OEM/ANSI and three DOS cases, eight A/B graphs passed. S12 active.

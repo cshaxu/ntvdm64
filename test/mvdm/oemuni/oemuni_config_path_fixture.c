@@ -1,8 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include "mvdm_softpc_firmware.h"
-#include "ntvdm-exe/session/session.h"
+#include "compat/include/pif_path.h"
 
 int main(void)
 {

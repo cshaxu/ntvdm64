@@ -1217,6 +1217,9 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
 $graph.Add('build obj/adapter-softpc/mvdm_shadow_registry.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_shadow_registry.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_shadow_registry.obj'
+$graph.Add('build obj/compat/pif_path.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/pif_path.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterSoftpcObjects += 'obj/compat/pif_path.obj'
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj'
 $graph.Add('build obj/adapter-softpc/mvdm_keyboard_history.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_keyboard_history.c')))
 $graph.Add('  cflags = ' + $libraryFlags)

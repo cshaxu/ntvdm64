@@ -287,3 +287,5 @@ P83: [Console transition ownership](s12-p83-console-transition-ownership.json); 
 P84: [Host/printer/serial ownership](s12-p84-host-printer-serial-ownership.json); files30-32 classified, including explicit unsupported printer-control boundary.
 
 P85: [PIF directory reconciliation](s12-p85-pif-directory-reconciliation.json); two stale P11 statuses corrected; file33 remains in progress for C0221. No product change.
+
+P86: [PIF path ownership delivery](s12-p86-pif-path-owner.json); C0221 moved unchanged to B, file33 complete; cached builds, dual publication, path/DOS tests and A/B gates passed.
