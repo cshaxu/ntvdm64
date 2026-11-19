@@ -361,3 +361,5 @@ S13 P13: [BIOS VM boundary](s13-p13-bios-vm-boundary.json);14 DIR units reviewed
 S13 CPU follow-up: [c_main dependency review](s13-ccpu-dependency-review.json) resolves all34 COMMON definitions to C, retains generated ABI IDs for S14, and identifies the coupled physical-mapping query/register/unregister boundary for the next implementation batch. No product edits or new eliminated IDs.
 
 S13 P14: [physical mapping boundary](s13-p14-physical-mapping-boundary.json) eliminates9 direct IDs through B contracts while F keeps all mapping/session state. Three mirrors stay22 points/92 lines. Cached builds, dual publication and targeted mapping/CCPU/WOW/NESticle/DIR verification passed; the initial DIR wrapper marker failure remains recorded.
+
+S13 [CCPU/comms/C-VID follow-up](s13-cpu-comms-ownership-review.json):13 files and12 current dependency records; generated/vector ABI remains S14. C0193 now shares C0033 ownership evidence. No product edits or newly eliminated IDs.

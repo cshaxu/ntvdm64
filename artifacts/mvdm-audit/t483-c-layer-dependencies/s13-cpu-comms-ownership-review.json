@@ -1,0 +1,280 @@
+{
+  "scope": "T483 S13 CCPU/comms/C-VID DIR follow-up",
+  "baseline": "cf840c9ac",
+  "question": "Separate product services from original CPU/vector ABI ownership.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "sha256": "1a21caf7f22b7271e4be6df6cb23a891fd8af6d31998a593692551a0e7fb6055",
+      "original_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "sha256": "22a4c8ea19036b35388a5286a992bbd63b19ecfa05157cd71f075f73546c382b",
+      "original_sha256": "091378ab6583c06e7593b5b34f336531d874e695be633596d652ea42f5446eb3",
+      "non_error_diff": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/localfm.c",
+      "sha256": "1296da38c0d62145e8b867f2f504e649d2caf449039be55acdf60e7e26cf6b67",
+      "original_sha256": "5dbb2bd74e82d5b87910db81f1411610c84a2d57a553e8cb78080871d19835df",
+      "non_error_diff": {
+        "blocks": 1,
+        "added": 2,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+      "sha256": "66c4fcaf0f3329dc6d7021a0ad8ba910fa775e84d63ad35404ee2a3134dd46c3",
+      "original_sha256": "66c4fcaf0f3329dc6d7021a0ad8ba910fa775e84d63ad35404ee2a3134dd46c3",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c",
+      "sha256": "b8b7832d02bd8f4161e1f71df2968051609da065f4da8287a65e6b14b38a749c",
+      "original_sha256": "b8b7832d02bd8f4161e1f71df2968051609da065f4da8287a65e6b14b38a749c",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "sha256": "d574ec80aa660373212d12f1859534ffe78911665491f1caa47cd8e9359a9f85",
+      "original_sha256": "3beaf1ec7ca8ac2092bb88de4597a19de8aecdd564fa2b55ccb1a4009041e961",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "sha256": "6979afbd90dda9b56a997412165f63dc8c6edc12e96048535016703a8db84823",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "sha256": "da3698180fe42634cce3dbf83367cfa468f9a6cb66e028e5dcd7ea144c5666f7",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "sha256": "e8fae23dadd88bb67a27594139df4aa464ed9dc136a7e98cbcd7e12d3c38bbaa",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "sha256": "37ad433389b2b57a7302395c9a966b2d5d3d8dd78e1646f807425bd46fbdc990",
+      "original_sha256": "534f7058f657be386f25950d5e1750a4f5017f67e4890201983fbbb3d74f379f",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c",
+      "sha256": "e695a9807285703119cffb0c3bc8a3aa6433ede43efa499f21a6e736f94395d8",
+      "original_sha256": "e695a9807285703119cffb0c3bc8a3aa6433ede43efa499f21a6e736f94395d8",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "sha256": "326046c10f56b4da4eb4d7fe8b7e2052a46955a229cd94f717ab3ff6b52a1a37",
+      "original_sha256": "326046c10f56b4da4eb4d7fe8b7e2052a46955a229cd94f717ab3ff6b52a1a37",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "sha256": "b016c166b818e1619f03ae7f7ffc1feca886872cd088bda6f7ab102e45f7cc54",
+      "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
+      "non_error_diff": {
+        "blocks": 3,
+        "added": 22,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    }
+  ],
+  "compiled_dependencies": [
+    {
+      "object": "obj/ccpu/iret.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h"
+      ]
+    },
+    {
+      "object": "obj/ccpu/localfm.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+      ]
+    },
+    {
+      "object": "obj/ccpu/popf.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h"
+      ]
+    },
+    {
+      "object": "obj/ccpu/sasCdef.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/PigReg_c.h",
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+      ]
+    },
+    {
+      "object": "obj/ccpu/zfrsrvd.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+      ]
+    },
+    {
+      "object": "obj/comms/com.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+      ]
+    },
+    {
+      "object": "obj/comms/printer.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+      ]
+    },
+    {
+      "object": "obj/comms/printer_.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+      ]
+    },
+    {
+      "object": "obj/comms/rs232_io.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+      ]
+    },
+    {
+      "object": "obj/cvidc/vglob.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h"
+      ]
+    },
+    {
+      "object": "obj/cvidc/accessfn.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+      ]
+    },
+    {
+      "object": "obj/cvidc/ev_glue.obj",
+      "outer_headers": [
+        "../../../../src/ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h"
+      ]
+    }
+  ],
+  "conclusions": [
+    "Generated C0030/C0031/C0032 carriers remain open for S14.",
+    "C0193 is coupled to C0033: byte-unchanged binder assembles C-owned Cpu/Sas/Video, CCPU setters and qevJumpRestart. No product session/lifecycle or B Windows capability. Keep S14 ownership review; do not add B indirection.",
+    "printer.c broad D/F include search roots remain to clean; current includes select only generated ABI carriers. Shared root IDs remain open.",
+    "No source change or runtime validation; this dependency review does not approve unrelated mirror differences."
+  ],
+  "follow_up": "Continue DIR debug cohort and include comms search-root cleanup in next coherent build batch.",
+  "counts": {
+    "eliminated": 144,
+    "open": 424,
+    "supporting": 44,
+    "eliminated_transitive": 5,
+    "excluded": 1,
+    "total": 618
+  },
+  "mirror": {
+    "points": 5,
+    "lines": 26,
+    "delta_points": 0,
+    "delta_lines": 0,
+    "cumulative_reduced_points": 3,
+    "cumulative_reduced_lines": 12
+  },
+  "evidence": [
+    {
+      "path": "build/t483-s13-cpu-comms-review/deps.txt",
+      "sha256": "b8a894a1f9d8c5116be232af2695d890ec614dabc39fa1c4a29e605ea7c0dce8"
+    },
+    {
+      "path": "build/t483-s13-cpu-comms-review/before.json",
+      "sha256": "e34b27536de4070c429aa6b86b754da18ddd95046b762cad3f77dba37467e184"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
+      "sha256": "a3d6f35fef8bae86a04b49ecc2bc4ece34d103c80f31b4248d403035831c3364"
+    }
+  ]
+}

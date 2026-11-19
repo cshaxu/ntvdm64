@@ -39,7 +39,7 @@ S13 P14: [physical mapping boundary](../../artifacts/mvdm-audit/t483-c-layer-dep
 
 Cached x86/x64/reference builds and8 A/B graphs passed. Package4f34bf15-fc3b-4ccc-96a4-be3a154dd923 published to both destinations;22 hashes verified. Mapping, original external memory, CCPU high-linear-page, WOW page-domain, NESticle graphics/Escape and final isolated DOS DIR pass. The first DIR wrapper failed on an obsolete receipt name before product execution; preserved aggregate failure is superseded only for DIR by strict-final.exit0. No Full or desktop acceptance claimed.
 
-[CPU dependency follow-up](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-ccpu-dependency-review.json) confirms COMMON definitions belong to C. Generated ABI remains S14. Continue remaining CCPU DIR entries after ccpusas4.c; S13 active, S14 unadmitted.
+[CPU dependency follow-up](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-ccpu-dependency-review.json) confirms COMMON definitions belong to C. Generated ABI remains S14. [Remaining CCPU/comms/C-VID review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-cpu-comms-ownership-review.json) confirms generated/vector ABI ownership remains S14; no new eliminated IDs or code edits. Next DIR cohort is base/debug, with pending unused comms search-root cleanup. S13 active, S14 unadmitted.
 
 ## S12 Closure Record
 
