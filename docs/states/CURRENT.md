@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P98: [Resource ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p98-resource-binding-ownership.json). Reviewed190/190 files;481/618 IDs open,87 eliminated. C0169/C0170 moved to B with unchanged operation bodies. Cached builds,actual x86/x64 object tests,8 A/B graphs and22 dual-release hashes passed. Mirror delta0/0; cumulative reduction2 points/10 lines. S12 final ledger reconciliation pending; not closed.
+P99: [Ledger correction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p99-ledger-correction.json). Reviewed190/190 files;480/618 IDs open,88 eliminated. C0430 was already eliminated in P28; current COFF/map confirms direct KERNEL32 CreateProcessA binding. Production remains P98 package614ed535-8262-4093-8dd4-d6d3f4b649de;22 dual-release hashes verified. No source/build/runtime change. Mirror delta0/0; cumulative reduction2 points/10 lines. S12 final ledger reconciliation pending; not closed.

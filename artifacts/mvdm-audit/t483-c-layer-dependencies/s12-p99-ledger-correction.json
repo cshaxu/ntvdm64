@@ -1,0 +1,142 @@
+{
+  "baseline": "0268ff8cfc27519a610d500f0897c90dbd490acc",
+  "question": "Does the open C0430 row still describe current production?",
+  "inputs": {
+    "src/mvdm-host/wow32/wkman.c": "5616c3f53667b7fa92024cf4bec32452b231addded7c56d78b18d528a63a1b0d",
+    "src/wow32-dll/include/wow_native_process.h": "2edeaa3437e5ceac2986ab82196436081963f56f9c09ef768f93aead69b26c82",
+    "build/.ninja/msvc-x86-release/wow32/obj/wkman.obj": "81f3e1178ad06d16f6a5ffa71e6b786255cef05dad76da5edc8114b2b11017c4",
+    "build/.ninja/msvc-x86-release/wow32/wow32.dll.map": "89a6d7e9c2332e0d7d7e531a9bea484261706e74feb41e27a9052982793bc73e"
+  },
+  "procedure": [
+    "Read P28 source and delivery evidence.",
+    "Read current COFF external symbols and resolved WOW map.",
+    "Check all open symbol/header provider paths; only C0430 points to a removed file.",
+    "Verify all eleven published images at both destinations against manifest."
+  ],
+  "observations": [
+    "wkman.obj imports __imp__CreateProcessA@40, not wow_native_create_process_a.",
+    "WOW map resolves __imp__CreateProcessA@40 to kernel32:KERNEL32.dll.",
+    "WK32LoadModule32 passes addresses of StartupInfo and ProcessInformation.",
+    "P28 removed only redundant wrapper null checks; other lifecycle adapters in wow_native_process.h remain."
+  ],
+  "conclusion": "C0430 eliminated in P28; stale open row corrected now. No new production change or runtime claim.",
+  "priorEvidence": "s12-p28-native-process.json",
+  "progress": {
+    "reviewedFiles": 190,
+    "totalFiles": 190,
+    "totalIds": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 480,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 88
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "publication": {
+    "package": "614ed535-8262-4093-8dd4-d6d3f4b649de",
+    "hashes": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "c305e0b5cc24005485373cfb7f47af7e870818f6f382c76841f8bb6e9768b6c5"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "aea9d54d3c102d39f2c5792aa87d2b002eb34a8949e3960250897e2214831e52"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "cc705b76f63abe727218df71c0b3aeed3cbd29346bfe2a4981f6804dc37895d1"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "c9b57d4b379c74dc76954ed9206e7601078320b2d17f4dd01c627a96f1e9f100"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "1d5b05208e3114d780eef52df408946c069b1441340bb4edc074ea14c893002c"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "c3c1739b7c6520e8a676b72b8e605b86ff641774664f579a46f191fdfd3d616f"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "13a7bcd2f2d43502e484299ecf08f522dd154aa30d8accd5ce6cb738216c06e6"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "7e2f430cd90254841899e5a16ea81a4e4dd5e8e9a9f5284eec856185134c9920"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "43257a0bb77614744285c443f6ecf180b0f39b7647c4641871ef1a3f70bf0f1b"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "a9011f93b387ecaf3c99a69df594dabc575123ea1df265a4c275b5364f2376b1"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "1367d90122b6f9f2e5a99fba7e837c2a2f23740aedfdf504b8439baab0620772"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "c305e0b5cc24005485373cfb7f47af7e870818f6f382c76841f8bb6e9768b6c5"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "aea9d54d3c102d39f2c5792aa87d2b002eb34a8949e3960250897e2214831e52"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "cc705b76f63abe727218df71c0b3aeed3cbd29346bfe2a4981f6804dc37895d1"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "c9b57d4b379c74dc76954ed9206e7601078320b2d17f4dd01c627a96f1e9f100"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "1d5b05208e3114d780eef52df408946c069b1441340bb4edc074ea14c893002c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "c3c1739b7c6520e8a676b72b8e605b86ff641774664f579a46f191fdfd3d616f"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "13a7bcd2f2d43502e484299ecf08f522dd154aa30d8accd5ce6cb738216c06e6"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "7e2f430cd90254841899e5a16ea81a4e4dd5e8e9a9f5284eec856185134c9920"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "43257a0bb77614744285c443f6ecf180b0f39b7647c4641871ef1a3f70bf0f1b"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "a9011f93b387ecaf3c99a69df594dabc575123ea1df265a4c275b5364f2376b1"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "1367d90122b6f9f2e5a99fba7e837c2a2f23740aedfdf504b8439baab0620772"
+      }
+    ]
+  },
+  "verification": {
+    "build": "Not repeated: evidence-only correction; production inputs unchanged.",
+    "runtime": "Not repeated; P28 coverage limitations remain.",
+    "documentation": "Passed: build/t483-s12-ledger-correction/docs.log",
+    "abGraphs": "Eight current product A/B graphs passed: build/t483-s12-ledger-correction/ab.log"
+  },
+  "followUp": "S12 remains active. Reconcile remaining eliminated edges and ownership dispositions before closure; existing file review count alone does not establish closure."
+}

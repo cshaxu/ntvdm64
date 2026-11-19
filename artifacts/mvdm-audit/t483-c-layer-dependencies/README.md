@@ -313,3 +313,5 @@ P96: [Menu and timer ownership](s12-p96-menu-timer-ownership.json); files70-72 r
 P97: [Final file ownership review](s12-p97-final-file-ownership.json); all190 files reviewed, not all dependencies removed. C0169/C0170 remain S12 native-resource migration candidates before closure.
 
 P98: [Resource binding ownership](s12-p98-resource-binding-ownership.json); C0169/C0170 moved to SDK-only compat, exact bodies/state retained; cached builds, actual x86/x64 object tests and dual release.
+
+P99: [Ledger correction](s12-p99-ledger-correction.json); C0430 was eliminated in P28, confirmed against current product COFF/map and both release hashes. No production change.
