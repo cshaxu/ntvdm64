@@ -94,6 +94,8 @@ The existing migration plan groups ten chains; exact C carriers and outer-policy
 control-flow separation remain unfinished. Provider coverage is not whole-root closure.
 P53 [storage-owner design](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-original-storage-owner-design.json) specifies nine symbol rows: B suffix/capture resources and C disabled hook storage.
 Mirror cost and final ABI candidates remain to validate; statuses stay open.
+P54 [C caller reconciliation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-c-caller-reconciliation.json) covers190 prior callers:179 source-unchanged,11 cumulative deltas reviewed.
+COMMAND/DPMI/VM header forwarding remains unresolved, separately from delivered SAS/XMS/mapping implementations.
 S14 P19 removes the F guest-location source/private header and three-operation
 forwarding table/installers. Nine operation bodies now execute in B using the
 existing thread binding and a typed reference to the same B lease object.

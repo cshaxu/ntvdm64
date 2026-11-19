@@ -1,0 +1,5285 @@
+{
+  "baseline": "22ca360db",
+  "historical_closure_baseline": "bf53bd5084465460d4829244e90f1e913f973521",
+  "question": "Which historical C caller-body reviews can be reused without repeating the full file audit, and which changed call boundaries need current reconciliation?",
+  "procedure": "Compare all C paths since S12 closure with git diff; read entire cumulative diff for eleven changed files; read current COMMAND/directory/DPMI/VM macro contracts and guest-memory implementation; join stable IDs without altering status.",
+  "counts": {
+    "caller_files": 190,
+    "unchanged_source": 179,
+    "changed_source_delta_reviewed": 11,
+    "dependency_ids_eliminated": 0,
+    "callers_without_evidence_navigation": 0
+  },
+  "limits": [
+    "179 unchanged caller bodies are not 179 clean dependencies. Included headers and providers can change independently.",
+    "The 190 historical direct compile/link callers are not the entire 1494-file inventory. Transitive-only and previously unobserved files still require explicit disposition.",
+    "Evidence navigation entries do not automatically endorse older conclusions; P19/P24/P25 and P51 supersede the identified old mechanism descriptions.",
+    "No new build, runtime test or production modification.",
+    "Source-path references are exact JSON string/key matches in earlier S12 records, excluding the aggregate file/index/handoff inventories. They are navigation, not a fresh approval or body-review certificate."
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "sha256": "b5cd0b2ac265adb831a50ca265d55b906d2d9cf4b17d2a134d86cea0fb730f89",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0039",
+        "C0220"
+      ],
+      "current_id_statuses": {
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p85-pif-directory-reconciliation.json",
+        "s13-p7-cmdmisc-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "sha256": "5a09037ce28844ddeb5ac1c5107f576c7ccc35360822e715b88e6df91a60845a",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0024",
+        "C0036",
+        "C0159",
+        "C0161",
+        "C0174",
+        "C0175",
+        "C0176",
+        "C0177",
+        "C0178",
+        "C0179",
+        "C0180",
+        "C0181",
+        "C0182",
+        "C0208",
+        "C0209",
+        "C0211",
+        "C0260",
+        "C0261"
+      ],
+      "current_id_statuses": {
+        "eliminated": 18
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p103-config-ownership.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s13-p3-thread-boundary.json",
+        "s13-p4-command-boundary.json"
+      ],
+      "disposition": "Header changed to B command_native_child; current macro still dispatches through installed F command_services. Original execution algorithm unchanged; not inward implementation closure.",
+      "source_path_evidence_navigation": [
+        "s12-p12-registry-candidate.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "sha256": "a410fd2b9b71d765ec2807b6e91485d9aba080e7c7a0c5183448a5fa62685804",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0017",
+        "C0039",
+        "C0208",
+        "C0209",
+        "C0211",
+        "C0219",
+        "C0262",
+        "C0268"
+      ],
+      "current_id_statuses": {
+        "eliminated": 8
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p85-pif-directory-reconciliation.json",
+        "s13-p5-console-keyboard-boundary.json",
+        "s13-p7-cmdmisc-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p12-registry-candidate.json",
+        "s12-p13-directory-callers.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "sha256": "cdeb4f58009cd3f95f5cae10ec6f6eb5e5dfbef26fae168c2757aff99a68614f",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0034",
+        "C0039",
+        "C0195",
+        "C0197",
+        "C0223",
+        "C0273",
+        "C0282"
+      ],
+      "current_id_statuses": {
+        "eliminated": 7
+      },
+      "historical_evidence_navigation": [
+        "s12-p71-console-title-native-io.json",
+        "s12-p72-dem-buffer-ownership.json",
+        "s13-p7-cmdmisc-boundary.json",
+        "s13-p9-dem-lease-boundary.json",
+        "s14-p19-location-implementation.json"
+      ],
+      "disposition": "Guest-location/environment includes now B. Location implementation moved at P19; retain its guest lease/CPU coupling review rather than infer whole COMMAND closure.",
+      "source_path_evidence_navigation": [
+        "s12-p10-guest-location.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "sha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0282"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p71-console-title-native-io.json",
+        "s13-p7-cmdmisc-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "sha256": "652884f8227bf1c5dc3f3bfeb91c4353a131b5c77638d655b41544356be9862b",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0039",
+        "C0219"
+      ],
+      "current_id_statuses": {
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p85-pif-directory-reconciliation.json",
+        "s13-p7-cmdmisc-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p10-guest-location.json",
+        "s12-p13-directory-callers.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "sha256": "d77770c816eeb406e14f5227d2b1d6fd94c6fc0f1c262c5447121e28f3a554a7",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0034"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s13-p7-cmdmisc-boundary.json",
+        "s13-p9-dem-lease-boundary.json",
+        "s14-p19-location-implementation.json"
+      ],
+      "disposition": "Guest-location header moved B; transitive consumers follow same implemented location contract. Header move alone is not an additional eliminated implementation.",
+      "source_path_evidence_navigation": [
+        "s12-p10-guest-location.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demerror.c",
+      "sha256": "c7bc55645504700dbf85da5f04b4a90b3fc28f8e28ea0d313446cbfd2ad808e9",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0311",
+        "C0314",
+        "C0315",
+        "C0316"
+      ],
+      "current_id_statuses": {
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p71-console-title-native-io.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p10-guest-location.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "sha256": "e428f480b4d134b29e2a76d3d712cf390d21b666c2b3e7c25dd964bb79cc3f6a",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0017",
+        "C0023",
+        "C0172",
+        "C0173",
+        "C0208",
+        "C0209",
+        "C0211",
+        "C0310",
+        "C0316"
+      ],
+      "current_id_statuses": {
+        "eliminated": 9
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p88-thread-callback-abi.json",
+        "s13-p10-demgset-directory-boundary.json"
+      ],
+      "disposition": "B directory header maps register/clear through command_services; actual F DOSWOW state remains. Include elimination did not migrate this registration implementation.",
+      "source_path_evidence_navigation": [
+        "s12-p10-guest-location.json",
+        "s12-p12-registry-candidate.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "sha256": "ffe30feeafd8e968bbf0f9b4671824d051c0932c77bdb626de51f5490241c784",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0194",
+        "C0196",
+        "C0197"
+      ],
+      "current_id_statuses": {
+        "eliminated": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p72-dem-buffer-ownership.json",
+        "s13-p7-cmdmisc-boundary.json",
+        "s13-p9-dem-lease-boundary.json",
+        "s14-p19-location-implementation.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p10-guest-location.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p72-dem-buffer-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "sha256": "50ca789a57f5cbf5412a9109b1b5f4baedd6819d8b5efe4cf2a5b531310b2c28",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0027",
+        "C0188",
+        "C0310",
+        "C0312"
+      ],
+      "current_id_statuses": {
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p88-thread-callback-abi.json",
+        "s13-p11-demsrch-vdm-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p10-guest-location.json",
+        "s12-p14-native-io.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "sha256": "ad41b4ed7a1b541d890075a8b843c50ff7e707fb6f73f07116827188c7c9297c",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0045",
+        "C0183",
+        "C0184",
+        "C0248",
+        "C0250"
+      ],
+      "current_id_statuses": {
+        "open": 1,
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s13-p12-dpmi-services-boundary.json"
+      ],
+      "disposition": "B dpmi_host replaces F declarations/header; four macros still call installed F debug/mode providers. Keep chain unresolved.",
+      "source_path_evidence_navigation": [
+        "s12-file009-011-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "sha256": "20c85513ed25cac3ac5b3403cf5c0ffb6d1cc5b6c78d5f2b5d0e36419d06ee0b",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0045",
+        "C0248",
+        "C0250"
+      ],
+      "current_id_statuses": {
+        "open": 1,
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s13-p12-dpmi-services-boundary.json"
+      ],
+      "disposition": "B dpmi_host header still forwards page-domain leave/reenter to F; P51 assigns machine context to C, exact carrier remains pending.",
+      "source_path_evidence_navigation": [
+        "s12-file009-011-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "sha256": "1fc89c42e984de945a96ada6922b961dce443e465b9f7ee964c142179602022b",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0218"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p73-bop-exit-binding.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p73-bop-exit-binding.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/build_id.c",
+      "sha256": "9ff03f58980437d69cf245e18907ed5e5f4760622d90c870c617e410eeafd6e4",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p74-bios-address-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "sha256": "35f65b92c0724addb70410895a21a87aa110450446fb4c39707b55f5be4523de",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p74-bios-address-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "sha256": "02fa173185a30dbf245603661901806e587f9af487eacbe671ca15292ee83449",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p74-bios-address-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "sha256": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p74-bios-address-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "sha256": "e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0214",
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "sha256": "3b269f396d545cafb9a892b45530d51b24f82ed3189cebd9f1cc11cc2ea06260",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0043",
+        "C0047",
+        "C0241",
+        "C0256",
+        "C0258"
+      ],
+      "current_id_statuses": {
+        "open": 1,
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s13-p13-bios-vm-boundary.json"
+      ],
+      "disposition": "B vm_host macro still forwards mvdm_vm_bridge_bop to F product ingress. Product policy cannot move wholesale B.",
+      "source_path_evidence_navigation": [
+        "s12-file009-011-ownership.json",
+        "s12-p15-native-failure.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "sha256": "6679c57d5809cfff486fc6818198e2f12eb67f1d09612a812b7fd290c58f327e",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0037",
+        "C0190",
+        "C0212",
+        "C0213"
+      ],
+      "current_id_statuses": {
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p107-vector-defaults.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p16-ccpu-wait.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p73-bop-exit-binding.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "sha256": "19491bec815e7533dc00a0018e4749294770e42056c5877f5a66f2f60bcba282",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0041",
+        "C0238",
+        "C0240"
+      ],
+      "current_id_statuses": {
+        "eliminated": 3
+      },
+      "historical_evidence_navigation": [
+        "s13-p17-mapping-implementation.json"
+      ],
+      "disposition": "Physical mapping header now B; approved P24 added range preflight/read/write as real C SAS providers. B guest lease still invokes their callbacks, a separate unresolved ownership edge.",
+      "source_path_evidence_navigation": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "sha256": "1a21caf7f22b7271e4be6df6cb23a891fd8af6d31998a593692551a0e7fb6055",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0031"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p74-bios-address-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c",
+      "sha256": "b8b7832d02bd8f4161e1f71df2968051609da065f4da8287a65e6b14b38a749c",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0030",
+        "C0191",
+        "C0192"
+      ],
+      "current_id_statuses": {
+        "open": 1,
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p107-vector-defaults.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c",
+      "sha256": "e695a9807285703119cffb0c3bc8a3aa6433ede43efa499f21a6e736f94395d8",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0031"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "sha256": "b016c166b818e1619f03ae7f7ffc1feca886872cd088bda6f7ab102e45f7cc54",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0033",
+        "C0193"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-file017-018-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "sha256": "5c7b58e229a4c6f40dc0f3b8e3e4164118d92ae9e642a3417d8af55308f15992",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "sha256": "d9c57d64cd85cd50b0386fb65ac7988cdaf15c9906527486bfc6c3e40773971f",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "sha256": "065310a6f32d1bd562caac9f3fa0fb9503c5d46645eb69869e91112e6982fdfe",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "sha256": "c82e004edf4be6f26a7c5bf5ce78af88172540c9c5c40f688c59055dd945ef26",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0032"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-file017-018-ownership.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "sha256": "6242b3bce259a66c7f084813bd662cacb6c12e4917b08a8bbac70b721477f42d",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0035",
+        "C0200",
+        "C0202",
+        "C0204"
+      ],
+      "current_id_statuses": {
+        "eliminated": 3,
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p18-keyboard-history.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "sha256": "241162d7ed09455bd1c8c5900d01902152c623ef762cd194c4a2338d2fcfe2a9",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "sha256": "a41f2eea922987cdc43ab4c5d87558a79b13eb931997909fb48fe05bd0efee0a",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0049",
+        "C0215",
+        "C0232"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "sha256": "6975575c0c3b98e3cc4a246cd5910fbb93370506d593a13e212c1dfb69834898",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0608"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p6-common-storage.json",
+        "s12-p76-init-termination-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "sha256": "ab8e3b60456e945b1f32864f9741ea0595a3ec5647774ce9ac3ab678a46743fb",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0318"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p76-init-termination-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "sha256": "4d1f5114376ef5142aade4aa8a8fc53aaf9c8cfa2eecb8f3df68b147f73d39b4",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p77-system-address-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "sha256": "bacb75c018512cc2d70c3dde370aeb2e2057180b26162ab94560eaf5e9fa8cab",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0215"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p77-system-address-ownership.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p87-rom-resource-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "sha256": "6852d6f38de18e87ab96481f6f1b370e7e1b0e1c33984179f77b30b8e4271e0d",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0216"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p78-video-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p78-video-address-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "sha256": "9935aa8c68acf42cafc96a7a46403bcb015f347509b25780b7f56920d11756c3",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0216"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p78-video-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p78-video-address-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "sha256": "e76cdce88dc8bad15f84afc903f265f37f78e9d0fe5e5fb846c42863235e99da",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0216"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p78-video-address-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p78-video-address-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "sha256": "892519573d6013db4c4725209fbe44fb66651b681d73ab215c2fbcfe852a6bea",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0017",
+        "C0208",
+        "C0209",
+        "C0211",
+        "C0273",
+        "C0282",
+        "C0294"
+      ],
+      "current_id_statuses": {
+        "eliminated": 6,
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p71-console-title-native-io.json",
+        "s13-p7-cmdmisc-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p12-registry-candidate.json",
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "sha256": "8ff3d15be855aef22138c04d74e3090bf36ca1b580bb2fb385e76c44ded8a158",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0031",
+        "C0045",
+        "C0246",
+        "C0247",
+        "C0255"
+      ],
+      "current_id_statuses": {
+        "open": 5
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "sha256": "036b05b4902a934d783b05fa4fa0b9fba6b7f55ef78138a282977fe0b7a48a8b",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0292"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "sha256": "2b1eb93e32d33751bf2913f714bc370fb05918166921b60f9ef3e4cf4a283178",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0157"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p103-config-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s12-p90-rap-owner.json",
+        "s13-p3-thread-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "sha256": "23c6f5890fb60aae48f319b7b0426ed8c9dff8656c8eaf8a2f911acf23b700fc",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0317"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p79-presentation-thread-start-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "sha256": "070cfee114fdb3c7277f6584bfc449e1d5737ea94aaf279a61f74237af48b86f",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0293"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p80-console-registration-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "sha256": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0292"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p80-console-registration-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "sha256": "187c1dc7a07e05bab70e8e827d7060c0501f82de06686412e5c0c63bd79e317d",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0040",
+        "C0041",
+        "C0216",
+        "C0225",
+        "C0226",
+        "C0227",
+        "C0233",
+        "C0235",
+        "C0239"
+      ],
+      "current_id_statuses": {
+        "eliminated": 8,
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p78-video-address-ownership.json",
+        "s13-p17-mapping-implementation.json",
+        "s14-p20-memory-access-implementation.json",
+        "s14-p25-xms-owner-delivery.json",
+        "s14-residual-chain-review.json"
+      ],
+      "disposition": "Physical mapping and memory-access headers now B; mapping is implemented inward, memory access still uses lease callbacks to C. Do not equate their ownership.",
+      "source_path_evidence_navigation": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "sha256": "76fc5add9050196cc2067387d458568e9be3e27574d208305d2a3efe8dceada6",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0189"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p81-activity-owner.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p81-activity-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "sha256": "23750428bf62daaf8490d2668b60749fd3f608d4053139ebea918d0c5613366d",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0160",
+        "C0300"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1,
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p103-config-ownership.json",
+        "s12-p105-console-close-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s13-p3-thread-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p105-console-close-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p82-error-disk-bindings.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "sha256": "4794c19843beb5a3ffbc2aa8356a03108e405c7a35969077a4b17b564a8195df",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0035",
+        "C0038",
+        "C0044",
+        "C0050",
+        "C0052",
+        "C0054",
+        "C0055",
+        "C0057",
+        "C0060",
+        "C0157",
+        "C0161",
+        "C0198",
+        "C0199",
+        "C0201",
+        "C0203",
+        "C0217",
+        "C0228",
+        "C0229",
+        "C0231",
+        "C0244",
+        "C0272",
+        "C0280",
+        "C0287",
+        "C0288",
+        "C0289",
+        "C0291",
+        "C0297",
+        "C0298",
+        "C0299",
+        "C0300",
+        "C0305",
+        "C0307",
+        "C0308",
+        "C0319",
+        "C0321"
+      ],
+      "current_id_statuses": {
+        "eliminated": 11,
+        "open": 24
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p103-config-ownership.json",
+        "s12-p105-console-close-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s12-p90-rap-owner.json",
+        "s13-p3-thread-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p105-console-close-ownership.json",
+        "s12-p18-keyboard-history.json",
+        "s12-p20-event-thread.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+      "sha256": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0308",
+        "C0309",
+        "C0310",
+        "C0313"
+      ],
+      "current_id_statuses": {
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p88-thread-callback-abi.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p82-error-disk-bindings.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "sha256": "8617a5690ccc0d8926fe948e2bd31e28192bfad74551085297ba34111bad500a",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0269",
+        "C0271",
+        "C0272",
+        "C0277",
+        "C0278",
+        "C0279",
+        "C0280",
+        "C0281",
+        "C0283",
+        "C0293"
+      ],
+      "current_id_statuses": {
+        "open": 10
+      },
+      "historical_evidence_navigation": [
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p83-console-transition-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "sha256": "029acccddfa56c2d147603beefbaf1ef26240d9436561dc191cd89c7cfa700bc",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0044",
+        "C0053",
+        "C0055",
+        "C0243",
+        "C0245",
+        "C0265",
+        "C0266",
+        "C0270",
+        "C0272",
+        "C0274",
+        "C0278",
+        "C0279",
+        "C0281",
+        "C0283",
+        "C0285",
+        "C0286",
+        "C0295",
+        "C0300",
+        "C0301",
+        "C0302",
+        "C0303",
+        "C0304",
+        "C0305",
+        "C0306"
+      ],
+      "current_id_statuses": {
+        "open": 24
+      },
+      "historical_evidence_navigation": [
+        "s12-p105-console-close-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p105-console-close-ownership.json",
+        "s12-p21-display-mapping-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "sha256": "a1f23673515b408894109ed5367821bb50f77bc156a643cea997798da9865aa7",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0264",
+        "C0269",
+        "C0271",
+        "C0272",
+        "C0276",
+        "C0280",
+        "C0296"
+      ],
+      "current_id_statuses": {
+        "open": 7
+      },
+      "historical_evidence_navigation": [
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "sha256": "0792f971d765eb9523ed73620ebfdcac710704db01cfad6601f65b60b9bf8542",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0031"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p21-display-mapping-ownership.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "sha256": "d0f71dd769536e845e42b601ddd3e10e4b4a52386fb94236293afa4144cd8943",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0185",
+        "C0186",
+        "C0187"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p84-host-printer-serial-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "sha256": "2a053c656a7564308b3e24f96948c39c55c2d0f25bc176071f501b5bb034cf56",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0041",
+        "C0234",
+        "C0236",
+        "C0237"
+      ],
+      "current_id_statuses": {
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s13-p17-mapping-implementation.json"
+      ],
+      "disposition": "Physical-mapping header now B with delivered S13 actual implementation and P19 location work. Preserve original allocator algorithms and current mapping lifetime.",
+      "source_path_evidence_navigation": [
+        "s12-p21-display-mapping-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "sha256": "853de6fccfa21b8a4465e4255db83bc119cb0424d6f761a1406486ca537ee472",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0045",
+        "C0050",
+        "C0230",
+        "C0232",
+        "C0249",
+        "C0263",
+        "C0267",
+        "C0275",
+        "C0284",
+        "C0287",
+        "C0290",
+        "C0297"
+      ],
+      "current_id_statuses": {
+        "open": 12
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p21-display-mapping-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "sha256": "aecc3e4f6073e038652a6f94454cf34875650754a3886f0ab64b3f9517be0b8e",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0017",
+        "C0039",
+        "C0208",
+        "C0209",
+        "C0210",
+        "C0211",
+        "C0219",
+        "C0264",
+        "C0300"
+      ],
+      "current_id_statuses": {
+        "eliminated": 7,
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p105-console-close-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p85-pif-directory-reconciliation.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s13-p7-cmdmisc-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p105-console-close-ownership.json",
+        "s12-p12-registry-candidate.json",
+        "s12-p22-system-loader.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "sha256": "14a734378272bf6cf08aafe072a427bf63cdde2eb7face818509ad07cfe6adf8",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0308"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p88-thread-callback-abi.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+      "sha256": "94bba68ddaa77ceac7fe5eef585e439f9b4b05b69829866488efd0913e63731a",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0219",
+        "C0220",
+        "C0221"
+      ],
+      "current_id_statuses": {
+        "eliminated": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p85-pif-directory-reconciliation.json",
+        "s12-p86-pif-path-owner.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p85-pif-directory-reconciliation.json",
+        "s12-p86-pif-path-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "sha256": "9b42cf3434167bef3bdaa5c981d5877d1489ad28f3eb4b6aa96c0648b6ef0ad8",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0057",
+        "C0318",
+        "C0320"
+      ],
+      "current_id_statuses": {
+        "open": 2,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p104-start-glass-ownership.json",
+        "s12-p76-init-termination-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p22-system-loader.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "sha256": "2448aec8c1645a93f237cfeb394227a12d1c1c4306d25a1c26516fc2c782806c",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0222"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p87-rom-resource-owner.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p87-rom-resource-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "sha256": "71408ce0c925397b2e2e0ba6176118390be2a7556a53e29e504379537ecb9b07",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0158",
+        "C0308",
+        "C0310",
+        "C0313"
+      ],
+      "current_id_statuses": {
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p103-config-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p88-thread-callback-abi.json",
+        "s13-p3-thread-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p88-thread-callback-abi.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "sha256": "4f34340926f9fb942befeb2c8051765e8cda7750e3f514a8960f4d0f900ab0ec",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0307",
+        "C0308"
+      ],
+      "current_id_statuses": {
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p88-thread-callback-abi.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p88-thread-callback-abi.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "sha256": "fe4b7fcd886663109de83b204ad89cd57b5630d2ccd1c13933babbe4aef9e381",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0160",
+        "C0161",
+        "C0259"
+      ],
+      "current_id_statuses": {
+        "eliminated": 2,
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p103-config-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s13-p3-thread-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p88-thread-callback-abi.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "sha256": "7c4a0fd51a07ad761b9ea35a5e288f66bca7fd47416675c239cea871d9e2816f",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0157",
+        "C0161",
+        "C0300"
+      ],
+      "current_id_statuses": {
+        "eliminated": 2,
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p103-config-ownership.json",
+        "s12-p105-console-close-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s12-p90-rap-owner.json",
+        "s13-p3-thread-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p105-console-close-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "sha256": "59ff5502badd8e75136da1ab1b4bf69b50add4b2d11731bd2fd678f83d842cab",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0189"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p81-activity-owner.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "sha256": "e02b45a17b7ae8c171a880c2dc4df3d87e478126a2b8ce1c479667e17b96e03e",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0292"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "sha256": "e9fb203a7f1797d6513f2046825def6a72d9b88f035a98c6e28f257da2335130",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0043",
+        "C0242"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p22-system-loader.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "sha256": "9ceb6b8091f7afe39f138a088719e5cf4884b57f0536d617ad147da5975d0aba",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0036",
+        "C0205",
+        "C0206",
+        "C0207"
+      ],
+      "current_id_statuses": {
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p12-registry-candidate.json",
+        "s12-p22-system-loader.json",
+        "s12-p3-entry.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "sha256": "e5ea79e573003ec98cef6f0f8a98884941d4aef31993712fa8c732d0b8822695",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0157"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p103-config-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s12-p90-rap-owner.json",
+        "s13-p3-thread-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p90-rap-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "sha256": "dc48bd6f0ade800b1b8387cce259c1da41ae573d6214014fce72480157b674a3",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0157"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p103-config-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s12-p90-rap-owner.json",
+        "s13-p3-thread-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p90-rap-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "sha256": "481ef3fa15499d2b9b607099ce71b4a3e581ca66e2bcfe558a868aa30f00095d",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0058",
+        "C0600",
+        "C0601",
+        "C0602",
+        "C0603",
+        "C0604",
+        "C0605"
+      ],
+      "current_id_statuses": {
+        "open": 4,
+        "eliminated": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p90-rap-owner.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "sha256": "3c760b7c0a991f6034207b7d6cea18f73d882ea5ab5ae5db65c7506ce7def50b",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0012",
+        "C0157"
+      ],
+      "current_id_statuses": {
+        "open": 1,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p103-config-ownership.json",
+        "s12-p106-header-dispositions.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s12-p90-rap-owner.json",
+        "s13-p3-thread-boundary.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "sha256": "e85a1f718c4b19c370a2a3f52f6c1c7726113628392c203ce14b7081b53c6689",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0605"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p90-rap-owner.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p90-rap-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "sha256": "21e5b1811d8be25289c87c4934edcb6738315049dae15a974daa6a6a8f0a8381",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0114",
+        "C0443",
+        "C0444",
+        "C0446",
+        "C0448",
+        "C0451",
+        "C0453"
+      ],
+      "current_id_statuses": {
+        "open": 7
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "sha256": "2d023cf0ec5014d334eae420563eb966fc6777c019def155017504d307948f0d",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0016",
+        "C0069",
+        "C0082",
+        "C0108",
+        "C0125"
+      ],
+      "current_id_statuses": {
+        "open": 4,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p106-header-dispositions.json",
+        "s12-p24-wow-precomp.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p24-wow-precomp.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "sha256": "15ea7ed69f6acd6d2c10196339b6eec4b4a1d2898879dbff7be1eb73d4cda544",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456",
+        "C0479",
+        "C0481",
+        "C0489",
+        "C0490",
+        "C0492",
+        "C0495",
+        "C0530"
+      ],
+      "current_id_statuses": {
+        "open": 8
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "sha256": "5e3eea7a9232b391fba5c2230cb8c9142da223462e8c5dc5566c7bb9822288a3",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0014"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p25-gdi-alias.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "sha256": "ebec54988f77dc3d6e72145603d85241ddffa383b9d00b1c8010d2e5195c2ecf",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0075",
+        "C0328",
+        "C0329",
+        "C0456",
+        "C0481"
+      ],
+      "current_id_statuses": {
+        "open": 5
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall32.c",
+      "sha256": "0f72ae39e691f3ef672df4f1aeb3ebb6443e87f091fb6322ef1c13604ab3d571",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0481",
+        "C0492",
+        "C0495"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.c",
+      "sha256": "584255ed1ad8119029647d26020ffad0a6112d8e213fd5ede60356175008f123",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0110",
+        "C0424",
+        "C0425",
+        "C0456",
+        "C0555"
+      ],
+      "current_id_statuses": {
+        "open": 5
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "sha256": "faa4d21e2f0350855729e8457ea554ef8b0ed03dc4d2d4441ea773d2e367b625",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0083",
+        "C0110",
+        "C0334",
+        "C0335",
+        "C0336",
+        "C0337",
+        "C0338",
+        "C0339",
+        "C0340",
+        "C0341",
+        "C0342",
+        "C0343",
+        "C0424",
+        "C0425",
+        "C0426",
+        "C0427",
+        "C0429",
+        "C0456",
+        "C0481",
+        "C0492",
+        "C0555"
+      ],
+      "current_id_statuses": {
+        "open": 21
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcuricon.c",
+      "sha256": "5f654ab2a98b2925474dffd49c5a3abaaefacf6193375af3794e70731c4e8673",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456",
+        "C0481"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.c",
+      "sha256": "8f288d930793eb9449a926071d0688b9d3fda1e4d0dd94e50a978c457e8acfe7",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0114",
+        "C0443",
+        "C0449",
+        "C0456",
+        "C0481",
+        "C0492"
+      ],
+      "current_id_statuses": {
+        "open": 6
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p27-wow-vdd-abi.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "sha256": "aee83d2674daf5e8ec29be0a8b5855566fa1bd7985da7fa815640f73743ebb98",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456",
+        "C0481"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p92-font-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "sha256": "cf9f03650cce420116b6bf87f1a9c95f21b8a26ce4861159520e95453aaf9a41",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0436",
+        "C0456",
+        "C0481"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1,
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p92-font-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "sha256": "b641b59025211900d4b01ce610879983f3bf5e88c1b92b100c41028c0d5386b5",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0437",
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1,
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p92-font-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgfont.c",
+      "sha256": "383a2aecb42c3b96aee822559f9c9d331c1ed7bcdc7e089d018defc33c3fc969",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0434",
+        "C0438",
+        "C0439",
+        "C0481"
+      ],
+      "current_id_statuses": {
+        "eliminated": 3,
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p92-font-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456",
+        "C0481"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p92-font-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "sha256": "ee0a7c3ad040edfd9712eccd02c2eec1b89d85861b00d3b49ffc5ecfb3a00ce2",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p92-font-owner.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgtext.c",
+      "sha256": "863efa2383afddc1419d291c94112cbc87e918da59a33ecd483884c323d3afdd",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkbman.c",
+      "sha256": "d5d728a2e7527814343bd2470bce98ca9028796ff7e404c7fe7b57abbcfe4367",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "sha256": "ac5ae96da876eeaa32181df73f92a1ca1c127f572b3de44867fd1bc86efffb39",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0114",
+        "C0443",
+        "C0446",
+        "C0447",
+        "C0448",
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "open": 6
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p27-wow-vdd-abi.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "sha256": "e8a9a5246447394670edb7427068c4567e5532885049e10207be60b901b8513a",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0068",
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1,
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p27-wow-vdd-abi.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "sha256": "c826aaeceff4640a7a205eefb6b504713f65c868b499f4902c1fb915f0a3f26e",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0123",
+        "C0484",
+        "C0485",
+        "C0486"
+      ],
+      "current_id_statuses": {
+        "open": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p28-native-process.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p28-native-process.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "sha256": "5616c3f53667b7fa92024cf4bec32452b231addded7c56d78b18d528a63a1b0d",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0017",
+        "C0105",
+        "C0112",
+        "C0119",
+        "C0430",
+        "C0440",
+        "C0441",
+        "C0456",
+        "C0457",
+        "C0460",
+        "C0461",
+        "C0462",
+        "C0463",
+        "C0479",
+        "C0481",
+        "C0489",
+        "C0500",
+        "C0501",
+        "C0503",
+        "C0555",
+        "C0556",
+        "C0585",
+        "C0586"
+      ],
+      "current_id_statuses": {
+        "eliminated": 4,
+        "open": 19
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p104-start-glass-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json",
+        "s12-p99-ledger-correction.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p12-registry-candidate.json",
+        "s12-p28-native-process.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json",
+        "s12-p99-ledger-correction.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "sha256": "456124e440cdd6665b222fc76996eac9c3847ad94d68bf362cbd45a3a68abb34",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0110",
+        "C0423",
+        "C0424",
+        "C0425",
+        "C0426",
+        "C0427",
+        "C0429",
+        "C0456",
+        "C0481",
+        "C0492",
+        "C0495",
+        "C0498",
+        "C0517"
+      ],
+      "current_id_statuses": {
+        "open": 13
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p29-message-progress.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "sha256": "24daa53dfb2c25eeb24848c5cac9e4280c8f099c9b3b48cde140c5f4b0686d8b",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0110",
+        "C0456",
+        "C0492"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p29-message-progress.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "sha256": "ad6e5f6f39cd72e8d84c463e3ef9796f1a52a6158bdcfd0f6a52eb9d57d6137e",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0110"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p29-message-progress.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "sha256": "f9001d1786c3bffb745cb42ab0fa64796446b2c7a4a2db321ebfe11f48c4b9b8",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0481",
+        "C0555"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "sha256": "680995940632c19876e196e7cd68d55b7775f7226ec86559596d4e25b8a14a99",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0017",
+        "C0119",
+        "C0128",
+        "C0440",
+        "C0456",
+        "C0460",
+        "C0481",
+        "C0497",
+        "C0587",
+        "C0588",
+        "C0589"
+      ],
+      "current_id_statuses": {
+        "eliminated": 2,
+        "open": 9
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p104-start-glass-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p12-registry-candidate.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "sha256": "a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0114",
+        "C0443",
+        "C0444",
+        "C0449",
+        "C0452",
+        "C0454",
+        "C0479",
+        "C0495",
+        "C0498"
+      ],
+      "current_id_statuses": {
+        "open": 9
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "sha256": "5cecffbb0af6734cd797c4b8dc849a0fc4d923030964c10e25fe1f7fb999a6b1",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0110",
+        "C0401",
+        "C0423",
+        "C0426",
+        "C0427",
+        "C0428",
+        "C0429",
+        "C0456",
+        "C0481",
+        "C0492",
+        "C0511"
+      ],
+      "current_id_statuses": {
+        "open": 11
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "sha256": "0fedfaf8c7ca77b7e8781717046ea211fc805627dc45bdc8c5f2c7acf524e2db",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0482",
+        "C0483"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p93-gdi-cache-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wreldc.c",
+      "sha256": "f4ede08ef2d6bc949cd2500c75af546ec68c0e017abecc1a6c624f7c1b5a0d20",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0435"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "sha256": "822f6a9f232eadee4a6f8d3b12a3bc49f43e5c85d85c2574a328ec97f5ad1f9f",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0481"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "sha256": "748f8ffcf553696df0fd2fa313d01555417868f41a65e11bf79d692453ebe5e2",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "sha256": "23ec40b58bfd5afa1bb051328535a10aadb7d5fb9a2a6430c601414c8d57d1d5",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456",
+        "C0481",
+        "C0501",
+        "C0521"
+      ],
+      "current_id_statuses": {
+        "open": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshell.c",
+      "sha256": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0114",
+        "C0443",
+        "C0444",
+        "C0445",
+        "C0446",
+        "C0448",
+        "C0449",
+        "C0450",
+        "C0451",
+        "C0453",
+        "C0455",
+        "C0456",
+        "C0481"
+      ],
+      "current_id_statuses": {
+        "open": 13
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsraw.c",
+      "sha256": "671210892e0ac174860ef9b2da141c471dc45b20e48dcc5b40a5185164262ce0",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "sha256": "4a7300940a0da14ead319b6b8ce2451b21932a2dfd6fcc9390e6f5d6b98dd0bd",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456",
+        "C0492"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "sha256": "e75b7cae0844a4503d1bf281e14393b9552ae495ef069f6c86366f59baa38c2b",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456",
+        "C0479"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucaret.c",
+      "sha256": "e31545f6ddaad250517b0566287fb6b99c6f5ce3da2517d55a25536a046ac4d8",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0513",
+        "C0519",
+        "C0545",
+        "C0560",
+        "C0577"
+      ],
+      "current_id_statuses": {
+        "open": 5
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p94-wstruc-public-style.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "sha256": "e88dbe493e58e12f8fd2b55395e8ebcff1ce7858c06a3dae944c5c3e742e4485",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456",
+        "C0489",
+        "C0490",
+        "C0491",
+        "C0493",
+        "C0494",
+        "C0496"
+      ],
+      "current_id_statuses": {
+        "open": 7
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p95-hook-native-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "sha256": "f5c9ec8bda84a0547b8ae03cc0be046170dbd692b85e05086d935f60744a8a47",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0124",
+        "C0333",
+        "C0431",
+        "C0456",
+        "C0487",
+        "C0488"
+      ],
+      "current_id_statuses": {
+        "open": 6
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "sha256": "db0b755c83fccedc8a5c935e72ba12569d723df99f05986ed171e5dffe4214f2",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p95-hook-native-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "sha256": "1f8cb2f28e8f3d320cc322512b273915f20aed4a2aa336678c1c7d78acae9736",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0110",
+        "C0364",
+        "C0365",
+        "C0366",
+        "C0367",
+        "C0368",
+        "C0369",
+        "C0370",
+        "C0426",
+        "C0427",
+        "C0428",
+        "C0429",
+        "C0442",
+        "C0456",
+        "C0477",
+        "C0478",
+        "C0481",
+        "C0492",
+        "C0589"
+      ],
+      "current_id_statuses": {
+        "open": 19
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuhook.c",
+      "sha256": "a4f31ee8cc2258fb177471647066238f7bb406b2466dca0249f4d6e6a98022b2",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0402"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p95-hook-native-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p95-hook-native-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wulang.c",
+      "sha256": "f6eeb696a1f2878e52586d9496924c5c8064c63f800f5a25e55f7848aa68d13c",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p95-hook-native-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "sha256": "a1c34a9b9554b9db8a7163742433521c0280e79621e9626fc68fe9aee6592936",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0015",
+        "C0456",
+        "C0479"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p106-header-dispositions.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumenu.c",
+      "sha256": "0fc60e98713f9c37f6fee8c5df25dcba55277dbaef5b82c49a90e62ae6db72c6",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0403",
+        "C0404",
+        "C0405",
+        "C0406",
+        "C0407",
+        "C0408",
+        "C0409",
+        "C0410",
+        "C0413",
+        "C0414",
+        "C0415",
+        "C0417",
+        "C0418",
+        "C0419",
+        "C0420",
+        "C0421",
+        "C0433",
+        "C0456"
+      ],
+      "current_id_statuses": {
+        "open": 18
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "sha256": "c73b954e96c769d07f2a48ade2ee8147f41a8894c830369670b135b099bfa465",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0110",
+        "C0428",
+        "C0481",
+        "C0492",
+        "C0495",
+        "C0498",
+        "C0499",
+        "C0501",
+        "C0505",
+        "C0509",
+        "C0514",
+        "C0515",
+        "C0516",
+        "C0517",
+        "C0521",
+        "C0555"
+      ],
+      "current_id_statuses": {
+        "open": 16
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "sha256": "c0a1045b8c020c91c414add27b781a12a005cc31f0163225bb8dcf2aabf1c4da",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0015",
+        "C0456",
+        "C0468",
+        "C0473",
+        "C0474",
+        "C0476",
+        "C0481",
+        "C0507",
+        "C0523",
+        "C0527",
+        "C0528",
+        "C0532",
+        "C0535",
+        "C0536",
+        "C0537",
+        "C0538",
+        "C0539",
+        "C0546",
+        "C0547",
+        "C0549",
+        "C0551",
+        "C0552",
+        "C0559",
+        "C0564",
+        "C0567",
+        "C0569",
+        "C0570",
+        "C0579",
+        "C0583",
+        "C0584",
+        "C0589"
+      ],
+      "current_id_statuses": {
+        "open": 31
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p106-header-dispositions.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "sha256": "3842f61e9548db5fbeb0af9ed09b19925d38672466485b14aff3e39a2f495c5d",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0124",
+        "C0366",
+        "C0367",
+        "C0456",
+        "C0487",
+        "C0501",
+        "C0521",
+        "C0524",
+        "C0533",
+        "C0550",
+        "C0554",
+        "C0572"
+      ],
+      "current_id_statuses": {
+        "open": 12
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "sha256": "265db11048df58488afa75b2d352355b1e6077841ab5bd0a8906ee63dcc7dfe9",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0411",
+        "C0412",
+        "C0456",
+        "C0530",
+        "C0531",
+        "C0534",
+        "C0541"
+      ],
+      "current_id_statuses": {
+        "open": 7
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutmr.c",
+      "sha256": "ac32decdb5712f1dbfcdd0948095c2995426f6734b2b284bd85e6ee28a59c296",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0464",
+        "C0481"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "sha256": "37753bd0f1dd5fd95be9c49f6759449dda18221c7a195792ece26397f63eccc8",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0456",
+        "C0466",
+        "C0467",
+        "C0469",
+        "C0470",
+        "C0471",
+        "C0472",
+        "C0475",
+        "C0479",
+        "C0480",
+        "C0481",
+        "C0491",
+        "C0492",
+        "C0494",
+        "C0495",
+        "C0506",
+        "C0508",
+        "C0512",
+        "C0518",
+        "C0520",
+        "C0525",
+        "C0526",
+        "C0529",
+        "C0530",
+        "C0534",
+        "C0540",
+        "C0541",
+        "C0542",
+        "C0543",
+        "C0548",
+        "C0553",
+        "C0555",
+        "C0558",
+        "C0566",
+        "C0573",
+        "C0574",
+        "C0576",
+        "C0580",
+        "C0581",
+        "C0582"
+      ],
+      "current_id_statuses": {
+        "open": 40
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "sha256": "0ef45fb9d0737cf0bdd50c126b8fa183f9b70c63c731533a16c2553823c5fd6e",
+      "source_changed_since_s12": true,
+      "ids": [
+        "C0040",
+        "C0048",
+        "C0224",
+        "C0225",
+        "C0257"
+      ],
+      "current_id_statuses": {
+        "eliminated": 4,
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s14-p20-memory-access-implementation.json",
+        "s14-p25-xms-owner-delivery.json",
+        "s14-residual-chain-review.json"
+      ],
+      "disposition": "P25 removes F forward-copy/cancellation: C preflight and SAS forward move; invalid access sets ERROR_INVALID_ADDRESS and calls TerminateVDM. Descriptor copy still uses B lease/C provider chain. No new failure policy is introduced in this audit.",
+      "source_path_evidence_navigation": [
+        "s12-p32-user-probe.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntdll/csrutil.c",
+      "sha256": "a424054e40fee1a72ecf6a8f37d367ffd84156d29cdf4cbd81826e84bef99415",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0002",
+        "C0607",
+        "C0612"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p106-header-dispositions.json",
+        "s12-p6-common-storage.json",
+        "s14-original-storage-owner-design.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p32-user-probe.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "sha256": "3ddbfc864587f99547877ace1b42e65315ee62e9462805c1c2150083e442d36a",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0126"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p32-user-probe.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "sha256": "b6adab886c5ddc55935f5969175f83d90543231cb7a94672647219607cb4855f",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0003",
+        "C0004",
+        "C0005",
+        "C0006",
+        "C0152",
+        "C0153",
+        "C0154",
+        "C0155",
+        "C0156",
+        "C0162",
+        "C0163",
+        "C0164",
+        "C0609",
+        "C0610",
+        "C0611"
+      ],
+      "current_id_statuses": {
+        "open": 11,
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p102-classifier-path-ownership.json",
+        "s12-p103-config-ownership.json",
+        "s12-p106-header-dispositions.json",
+        "s12-p6-common-storage.json",
+        "s14-original-storage-owner-design.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p33-console-handle.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "sha256": "f117b69ebce871cb8b850b1bca8588c8d592e706abcde1d23e7f7319b5c59ee4",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0022"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p34-remote-browser.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "sha256": "644a28e3674cb6c17c461a7376e23d99fd1cb0673214dc106ba38c539dd7b67c",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0166",
+        "C0167",
+        "C0168",
+        "C0169",
+        "C0170",
+        "C0171"
+      ],
+      "current_id_statuses": {
+        "open": 4,
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p97-final-file-ownership.json",
+        "s12-p98-resource-binding-ownership.json",
+        "s14-original-storage-owner-design.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+      "sha256": "2c069996be218dd858c0c242607d2fa5e3a550a126bff9f65e939fe921476732",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0113",
+        "C0432",
+        "C0613"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p6-common-storage.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p34-remote-browser.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+      "sha256": "42da6c5b322b9b7f458cddb9619dfe2af88d1a49e672b1334b173a522a6c6326",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0059",
+        "C0606"
+      ],
+      "current_id_statuses": {
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p34-remote-browser.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0323",
+        "C0324",
+        "C0325",
+        "C0348",
+        "C0349",
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0357",
+        "C0386",
+        "C0388",
+        "C0392",
+        "C0507",
+        "C0520",
+        "C0527",
+        "C0546",
+        "C0551",
+        "C0557",
+        "C0559",
+        "C0564",
+        "C0590",
+        "C0591",
+        "C0596",
+        "C0615",
+        "C0617"
+      ],
+      "current_id_statuses": {
+        "open": 24,
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p6-common-storage.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p35-bitmap-native.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "sha256": "75961b8fa0b90934d9367a271c8f94ac338fba7c5322846940bee7f9beec23ed",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0072"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p35-bitmap-native.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0109",
+        "C0387",
+        "C0406",
+        "C0409",
+        "C0416"
+      ],
+      "current_id_statuses": {
+        "open": 5
+      },
+      "historical_evidence_navigation": [
+        "s12-p96-menu-timer-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p36-menu-resource-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "sha256": "fc6bbaa3a31d557e8faf231e1eb9a5545db1eaec07f4d3e1dd963233054740a7",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0353",
+        "C0354",
+        "C0355",
+        "C0356",
+        "C0557",
+        "C0590",
+        "C0594",
+        "C0615",
+        "C0616",
+        "C0617"
+      ],
+      "current_id_statuses": {
+        "open": 9,
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p6-common-storage.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p36-menu-resource-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "sha256": "4311695750f9554bb4c9d3d9df60d70347974e2ba949d5ef228272a30d6a3436",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0072",
+        "C0109",
+        "C0322",
+        "C0504",
+        "C0614"
+      ],
+      "current_id_statuses": {
+        "open": 6
+      },
+      "historical_evidence_navigation": [
+        "s12-p6-common-storage.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p36-menu-resource-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0350",
+        "C0357",
+        "C0388",
+        "C0392",
+        "C0507",
+        "C0520",
+        "C0525",
+        "C0527",
+        "C0546",
+        "C0551",
+        "C0557",
+        "C0559",
+        "C0564",
+        "C0573",
+        "C0575",
+        "C0581",
+        "C0582",
+        "C0590",
+        "C0591",
+        "C0596",
+        "C0615",
+        "C0617"
+      ],
+      "current_id_statuses": {
+        "open": 22,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p6-common-storage.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p37-combo-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combodir.c",
+      "sha256": "0f3aa1f93e7e6fba011504e1090231aef5ed2488af98dc9ac757a90cb10925b9",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0596"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p37-combo-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+      "sha256": "b54a3787073f51e0578acf2aa52afec144abde1c367f30ddba8855810d5c4ec8",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0392",
+        "C0520",
+        "C0546",
+        "C0548",
+        "C0557",
+        "C0566",
+        "C0573",
+        "C0581",
+        "C0590",
+        "C0596",
+        "C0598"
+      ],
+      "current_id_statuses": {
+        "open": 15
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p37-combo-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "sha256": "a3513065a68716f066a6dd143c854151d905dea8f6e22b9a5b06b4b354f2680b",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0360",
+        "C0363",
+        "C0372",
+        "C0373",
+        "C0374",
+        "C0376",
+        "C0382",
+        "C0387",
+        "C0393",
+        "C0398",
+        "C0409",
+        "C0413",
+        "C0504",
+        "C0520",
+        "C0557",
+        "C0565",
+        "C0571",
+        "C0581",
+        "C0582",
+        "C0590",
+        "C0596",
+        "C0597",
+        "C0599"
+      ],
+      "current_id_statuses": {
+        "open": 21,
+        "eliminated": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "sha256": "a8fbf7c90496774075cecdde77f5ed52bab0c1cf195a02babf44bbc8a045ad3c",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0362",
+        "C0472",
+        "C0474",
+        "C0525",
+        "C0558",
+        "C0564",
+        "C0573",
+        "C0596"
+      ],
+      "current_id_statuses": {
+        "open": 9
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p39-dialog-end-manager.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "sha256": "859c909bcb7110f031b503f853bb18af7a5a840b942759496c59ad2f40b7d3cb",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0357",
+        "C0359",
+        "C0361",
+        "C0363",
+        "C0371",
+        "C0373",
+        "C0375",
+        "C0377",
+        "C0378",
+        "C0379",
+        "C0380",
+        "C0381",
+        "C0383",
+        "C0387",
+        "C0388",
+        "C0472",
+        "C0473",
+        "C0474",
+        "C0502",
+        "C0504",
+        "C0505",
+        "C0520",
+        "C0522",
+        "C0525",
+        "C0557",
+        "C0561",
+        "C0562",
+        "C0564",
+        "C0565",
+        "C0573",
+        "C0578",
+        "C0581",
+        "C0582",
+        "C0591",
+        "C0596",
+        "C0597"
+      ],
+      "current_id_statuses": {
+        "open": 39,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p39-dialog-end-manager.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "sha256": "e814918e8e7470a9bcaae9e8241b26627b2b0193d17a58fcdb1a7121d8a5f44d",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0326",
+        "C0327",
+        "C0357",
+        "C0474",
+        "C0510",
+        "C0522",
+        "C0557",
+        "C0596",
+        "C0597"
+      ],
+      "current_id_statuses": {
+        "open": 10
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p40-dialog-navigation.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "sha256": "ee6d76745fa047a2181d536212c089a362b31be846e899fe67e1c061cecf8f6a",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p40-dialog-navigation.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "sha256": "e59074c1e33943f5827af85d4c0fcaafd07e70fcc33bc9b2ff2c47e79f28f795",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0326",
+        "C0327",
+        "C0544",
+        "C0557"
+      ],
+      "current_id_statuses": {
+        "open": 5
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p40-dialog-navigation.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+      "sha256": "fa3f545ee11f6da095d28c7db6e68f13d583c53cf5e97b877cfc16772ae492e1",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0596"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p41-drawing-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0066",
+        "C0392",
+        "C0393"
+      ],
+      "current_id_statuses": {
+        "open": 2,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p41-drawing-ownership.json",
+        "s12-p42-native-controls.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "sha256": "666b36de91b14f2d02a4f304f1c2933c308da5da9eb393307a6e926b6d47ed47",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0357",
+        "C0387",
+        "C0392",
+        "C0393",
+        "C0394",
+        "C0504",
+        "C0513",
+        "C0519",
+        "C0545",
+        "C0546",
+        "C0577"
+      ],
+      "current_id_statuses": {
+        "open": 13,
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p94-wstruc-public-style.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p43-edit-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0357",
+        "C0358",
+        "C0387",
+        "C0388",
+        "C0390",
+        "C0400",
+        "C0409",
+        "C0411",
+        "C0422",
+        "C0504",
+        "C0520",
+        "C0545",
+        "C0546",
+        "C0557",
+        "C0564",
+        "C0577",
+        "C0582",
+        "C0590",
+        "C0591",
+        "C0596",
+        "C0615"
+      ],
+      "current_id_statuses": {
+        "open": 25
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p6-common-storage.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p43-edit-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "sha256": "fc4b0192251586b594ef38052282667b613e2afa939dc0d2683f8eca5b9e6258",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0357",
+        "C0383",
+        "C0387",
+        "C0392",
+        "C0395",
+        "C0396",
+        "C0504",
+        "C0507",
+        "C0513",
+        "C0519",
+        "C0527",
+        "C0545",
+        "C0546",
+        "C0550",
+        "C0551",
+        "C0557",
+        "C0559",
+        "C0560",
+        "C0561",
+        "C0564",
+        "C0568",
+        "C0577",
+        "C0582",
+        "C0590",
+        "C0596"
+      ],
+      "current_id_statuses": {
+        "open": 24,
+        "eliminated": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p44-control-brushes.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "sha256": "815c7b2fdec2d031adce1d75416fe198fd86760e572c242dc1421a022bab1059",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0357",
+        "C0507",
+        "C0513",
+        "C0519",
+        "C0527",
+        "C0545",
+        "C0546",
+        "C0551",
+        "C0557",
+        "C0559",
+        "C0560",
+        "C0564",
+        "C0577",
+        "C0596",
+        "C0617"
+      ],
+      "current_id_statuses": {
+        "open": 15,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p6-common-storage.json",
+        "s12-p94-wstruc-public-style.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p44-control-brushes.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "sha256": "fda986f3a2a331a5eb0a6c7dc3ed80645949ec3e578838a9893040ffab747069",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0351",
+        "C0399"
+      ],
+      "current_id_statuses": {
+        "open": 2,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p45-edit-create-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "sha256": "3d16bbb263f52f3ccec899c9fc7f32b60eb6609176c4c7d0992d60d2223e414d",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0504",
+        "C0546",
+        "C0557"
+      ],
+      "current_id_statuses": {
+        "open": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "sha256": "a356c448d85fcdbb213e693b366416ef44f3943d5227c3f1439fd57427c16a72",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0399"
+      ],
+      "current_id_statuses": {
+        "open": 1,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+      "sha256": "5dae0151df2db480b834886a744c94f718cb27f0733ce299c7c12d715460aec4",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0086"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p47-dde-header.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lb1.c",
+      "sha256": "73dd9dffbf8c7184cc51771e34a4ace046ec476de4a5b9db3ee50fcd08c7c1a7",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0350",
+        "C0357",
+        "C0383",
+        "C0386",
+        "C0388",
+        "C0392",
+        "C0507",
+        "C0520",
+        "C0527",
+        "C0546",
+        "C0557",
+        "C0559",
+        "C0591",
+        "C0596",
+        "C0615"
+      ],
+      "current_id_statuses": {
+        "open": 16
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json",
+        "s12-p6-common-storage.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p48-list-entry-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl1.c",
+      "sha256": "47681bf76054cc55de0533d29a012d344d96efce7aaa60199857a166597b4b73",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0392",
+        "C0546",
+        "C0557",
+        "C0568",
+        "C0590"
+      ],
+      "current_id_statuses": {
+        "open": 6
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p49-list-items-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "sha256": "495380be7c339b629f4eb543e34765c350c75e815b7743d88deff19c02e8da48",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0348",
+        "C0354",
+        "C0389",
+        "C0391",
+        "C0392",
+        "C0523",
+        "C0546",
+        "C0550",
+        "C0551",
+        "C0554",
+        "C0557",
+        "C0559",
+        "C0564",
+        "C0582",
+        "C0590",
+        "C0594",
+        "C0596",
+        "C0617"
+      ],
+      "current_id_statuses": {
+        "open": 18,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p6-common-storage.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "sha256": "54d79ac2804e45da36760642a2d7af0c807cd119a65a228fd41ba23894bad078",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0387",
+        "C0546",
+        "C0557",
+        "C0563",
+        "C0596"
+      ],
+      "current_id_statuses": {
+        "open": 6
+      },
+      "historical_evidence_navigation": [
+        "s12-p101-open-evidence-index.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p51-list-directory-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxmult.c",
+      "sha256": "fb3569b4ddcd34e17a3426b97f3e23c6c9371ff8f2e874a61fbd7d16b013f363",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p51-list-directory-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0350",
+        "C0392",
+        "C0393",
+        "C0546",
+        "C0548",
+        "C0557",
+        "C0573",
+        "C0594"
+      ],
+      "current_id_statuses": {
+        "open": 8,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p101-open-evidence-index.json",
+        "s12-p97-final-file-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxvar.c",
+      "sha256": "b4a452b32ba7cc19ccf45bdb79ef273641e200033c72d74a27ee0f1b4a05641c",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0392"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "sha256": "e3c78a070cd6a42293358cdadb762755ecdecfbd86bae727298b1fb53d582964",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0062",
+        "C0065",
+        "C0323",
+        "C0324",
+        "C0345",
+        "C0346",
+        "C0347",
+        "C0349",
+        "C0397",
+        "C0616",
+        "C0617"
+      ],
+      "current_id_statuses": {
+        "open": 7,
+        "eliminated": 4
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p6-common-storage.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p53-drawing-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "sha256": "cfd55dbba23584bf5490a225d1cce0b95c3df885f0daaa931f72b1803cbe193c",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0077",
+        "C0095",
+        "C0344",
+        "C0382",
+        "C0384",
+        "C0385",
+        "C0465",
+        "C0591",
+        "C0595",
+        "C0596"
+      ],
+      "current_id_statuses": {
+        "open": 10,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p54-client-stubs-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "sha256": "8f461a2506dec5f89e9daa1e9ac5846daa966c131969897a322f58f23eaa61d5",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0121"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p55-capture-lookaside-ownership.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "sha256": "7bdc635f086160eb4f0ac6902c890234c79169597e788943e97f4fdfbf5b0aa2",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0387",
+        "C0596"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p56-class-lookup-abi.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "sha256": "56ecb777d126c5614e0e9a2008529b9471f1aae71d553bb2ee9a34e714f97ef3",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0076",
+        "C0078",
+        "C0079",
+        "C0330"
+      ],
+      "current_id_statuses": {
+        "eliminated": 1,
+        "open": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p56-class-lookup-abi.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "sha256": "888f066477eec6ed78d9a86bc45d5c2f7cd8ec2f4b4081d8e837305ba4f0334a",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0081",
+        "C0331",
+        "C0332"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p57-cleanup-event.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "sha256": "1a4a6b65882593cf8ec079e650366013a3b87ff4968d64f3b8e000624fa89197",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0117",
+        "C0458"
+      ],
+      "current_id_statuses": {
+        "open": 1,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p57-cleanup-event.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "sha256": "b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0382",
+        "C0388",
+        "C0592",
+        "C0595"
+      ],
+      "current_id_statuses": {
+        "open": 4,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p58-private-word-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "sha256": "430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0118",
+        "C0459"
+      ],
+      "current_id_statuses": {
+        "open": 1,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p59-profile-native.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "sha256": "393591adf5233a17ff9384fef39d9fd96baeb0df4bada2740d029e5f38a1d686",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0116"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p60-task-init-ownership.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p60-task-init-ownership.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "sha256": "aae6f7a6cfdf89be9ca1f41e027d4ab536978b9e9f3eb7897ec6693d11bcd283",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0087",
+        "C0615"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p6-common-storage.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p6-common-storage.json",
+        "s12-p61-message-table-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "sha256": "4321a7b4b60f6a65f5ee7d3beec75b8f6ddd55a971774d0230567d5d109ac99f",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0117"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p62-scheduler-ownership.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "sha256": "c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0066",
+        "C0392",
+        "C0397",
+        "C0616",
+        "C0617"
+      ],
+      "current_id_statuses": {
+        "open": 2,
+        "eliminated": 3
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json",
+        "s12-p6-common-storage.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p6-common-storage.json",
+        "s12-p63-rtl-drawing-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "sha256": "e9c91f5c1d98c054807f3f6dc8dd32708c2008bfec0072c5b6d31dac4bf5c0e9",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0066"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p64-rtl-text-ownership.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "sha256": "1437e8b870f5971a07dd00879c378c4a8f0dd1bd182110f21db170b4c3c21e3b",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0379",
+        "C0388",
+        "C0595"
+      ],
+      "current_id_statuses": {
+        "open": 3,
+        "eliminated": 1
+      },
+      "historical_evidence_navigation": [
+        "s12-p100-eliminated-recheck.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p6-common-storage.json",
+        "s12-p65-rtl-private-reader.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+      "sha256": "71a7f728b92f27bb49a1596461362109cac8c3fe28a51af3477ffd19e22a3668",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0122",
+        "C0129",
+        "C0593"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p66-help-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+      "sha256": "9f1649694ddde8510b4986421a7564957efb7144711c5ec96a0794e936a5a35c",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0066"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p67-text-measure.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "sha256": "78d510df047693a43f08450d38ac36c69d053f7035506cc06e52ab5e25163dbe",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064",
+        "C0067",
+        "C0356"
+      ],
+      "current_id_statuses": {
+        "open": 3
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p6-common-storage.json",
+        "s12-p68-window-geometry-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "sha256": "47c5e5544aa3b1f8c663ebcd4974b5110b94d0dd91915b8c60b2fb70e9499886",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0064"
+      ],
+      "current_id_statuses": {
+        "open": 1
+      },
+      "historical_evidence_navigation": [],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p6-common-storage.json",
+        "s12-p69-final-file-ownership.json",
+        "s12-p70-inventory-reconciliation.json"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "sha256": "73c78576137fa1b6326ac5685f5bbb7e8c0862e2022ab783b1dfeefecab957fa",
+      "source_changed_since_s12": false,
+      "ids": [
+        "C0020",
+        "C0165"
+      ],
+      "current_id_statuses": {
+        "open": 2
+      },
+      "historical_evidence_navigation": [
+        "s12-p106-header-dispositions.json"
+      ],
+      "disposition": "Reuse historical caller-body review; unchanged source does not prove unchanged headers, providers, indirect callbacks or lifetime. Reconcile against current provider/migration chain before closure.",
+      "source_path_evidence_navigation": [
+        "s12-p69-final-file-ownership.json",
+        "s12-p70-inventory-reconciliation.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    }
+  ]
+}

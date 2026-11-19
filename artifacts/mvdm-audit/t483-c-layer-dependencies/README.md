@@ -529,3 +529,8 @@ P53 [original storage owner design](s14-original-storage-owner-design.json)
 resolves destinations for nine open symbol rows without moving product cores:
 B suffix/capture resources, C disabled notification cell. No production change
 or mirror-increase approval is inferred; the ledger retains open status.
+
+P54 [C caller reconciliation](s14-c-caller-reconciliation.json) joins190 historical
+caller files with current IDs:179 source-unchanged and11 cumulative source
+deltas reviewed. Forwarding-only header changes are explicitly distinguished
+from P19/P24/P25 implementation migration; no dependency status promotion.
