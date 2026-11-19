@@ -1,5 +1,5 @@
 {
-  "baseline": "5cc40c455",
+  "baseline": "375b7c6b6",
   "kind": "open-dependency-to-provider-crosswalk-not-closure",
   "source_ledger_sha256": "b094cccf3aee51eb32e31201d8ecc2ff0ba7a4dc0a1d8d21735f9b08df021cfb",
   "method": "Group every existing open record by exact target; attach only explicit complete-body coverage from the WOW record. Absence of that coverage does not erase other historical research. No status promotion, new IDs or dependency rescan.",
@@ -13,9 +13,9 @@
     },
     "target_groups": 152,
     "symbol_provider_files": 79,
-    "wow_reviewed_bodies": 49,
-    "symbol_provider_files_with_wow_body_review": 41,
-    "symbol_records_in_reviewed_bodies": 194,
+    "wow_reviewed_bodies": 52,
+    "symbol_provider_files_with_wow_body_review": 44,
+    "symbol_records_in_reviewed_bodies": 211,
     "reviewed_bodies_without_direct_symbol_record": [
       "src/ntvdm-exe/wow/wow_user_session_binding.c",
       "src/wow32-dll/source/wow_button_resources.c",
@@ -2938,9 +2938,9 @@
           "name": "wow_registry_set_value_ex"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
-      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "Token translation is B-compatible but must share the existing B registry instance across images; EXE export lookup remains outward composition until replaced without duplicate state."
     },
     {
       "path": "src/wow32-dll/source/wow_shell_callback.c",
@@ -2995,9 +2995,9 @@
           "name": "W32FreeTask"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
-      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "Separate original TD/task-list and async retirement in C from runtime admission and terminal policy in F; preserve pre-segment-free ordering."
     },
     {
       "path": "src/wow32-dll/source/wow_task_termination.c",
@@ -3029,9 +3029,9 @@
           "name": "wow_task_termination_retire"
         }
       ],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
-      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
+      "wow_body_review": "complete-source-read-not-migration",
+      "review_evidence": "s14-wow-resource-callback-ownership.md",
+      "implementation_disposition": "Ticket binding, request retirement and process exit authorization stay outer; original hung-task handler stays C. Requires orchestration boundary, not whole-file B migration."
     },
     {
       "path": "src/wow32-dll/source/wow_timer_callback.c",

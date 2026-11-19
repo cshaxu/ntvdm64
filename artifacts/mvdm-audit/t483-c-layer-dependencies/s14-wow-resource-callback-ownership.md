@@ -504,3 +504,25 @@ from the nonexistent wow32-dll/source location to ntvdm-exe/wow. The earlier
 body review already identified the latter component; this corrects the mapping
 artifact, not its count or a production file. Validate associated paths as
 well as direct-target hashes. No dependency status, source or release changes.
+
+
+## S14 P44: registry and task termination ownership
+
+Baseline 375b7c6b6. Complete body reads: wow_registry_binding.c,
+wow_task_cleanup_entry.c and wow_task_termination.c under wow32-dll/source.
+Total: 52 bodies. Source review only; production and mirror delta zero.
+
+| Chain | Ownership and migration constraint |
+| --- | --- |
+| Registry | DWORD token translation and locking qualify as B mechanics. The backing tree already resides in compat/mvdm_shadow_registry.c; New-T310OriginalSoftpcNinja.ps1 links it into NTVDM. Current EXE export lookup remains an outer image binding. Preserve one tree instance rather than linking a second copy into WOW32. |
+| Registry lifetime | Keep the token lock through backing operations; failed token publication closes the new raw key; token wrap must not reuse stale authority. New-T404S5Wow32ProviderNinja.ps1 generates explicit-unload shutdown (reserved == 0) and force-includes the binding header for selected original callers. Cross-image ownership and unload order must be established before migration. |
+| Incomplete startup | CURRENTPTD, gptdTaskHead, gcsWOW, htask16, absent hThread and native thread identity establish original task eligibility. These checks belong C; runtime binding admission remains outer. A stale TEB is not sufficient identity. |
+| Resource cleanup | W32FreeTask prepares exit before WowOriginalFreeTask. Async socket users retire before guest segments are freed; original late cleanup still owns thread/socket release. Preserve both boundaries rather than relying on final session destruction. |
+| Termination | Ticket bind/retire/failure RPC and NtvdmAuthorizeExit belong outer request policy. Original W32HungAppNotifyThread belongs C and exits its caller, hence the fresh local thread. Preserve serialization of its source-global completion state; do not move the ticket registry into B or introduce a B callback exception. |
+
+Consumers checked by source references: wkman.c task binding/process exit,
+wow32.c fatal exit, wow_user_task_lifecycle.c async retirement and
+wow_user_registration_bridge.c incomplete-startup cleanup. These three bodies
+add 17 covered symbol rows, not 17 eliminated dependencies. Exact migration
+interfaces and runtime validation remain outstanding; no production relocation
+or successful runtime test is claimed.
