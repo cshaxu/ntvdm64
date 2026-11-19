@@ -446,3 +446,18 @@ new ledger IDs or approved exceptions. The two original B USER exceptions
 do not establish that existing callback implementations are independent of C.
 Actual machine access, product orchestration and generic resource management
 must be separated by complete chain before claiming architectural closure.
+
+[Worker family ownership review](s14-worker-families-ownership.json) records
+seven implementation files under debugger, monitor, redir and vdd. It separates
+machine/private-layout responsibilities, compatibility staging and product
+termination. The task-frame carrier is a retirement candidate with a remaining
+fixture, not a claimed deletion. Every row states remaining design/provenance
+work; none changes production or closes a dependency ID.
+
+[Compatibility mechanism ownership](s14-compat-mechanism-ownership.json)
+reviews 13 complete B implementation bodies and their named callers/providers.
+It distinguishes bounded input metadata, native wait/configuration mechanics
+from the BASE resource callbacks into NTSRV reservation and delivery policy.
+Those two additional callback slots are not approved exceptions. Empty idle
+and unavailable vector providers, and unstarted event-thread cleanup, retain
+explicit evidence limits. No production source or dependency status changes.

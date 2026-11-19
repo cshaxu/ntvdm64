@@ -1,0 +1,108 @@
+{
+  "baseline": "145462c48dfdf1ba89c060981b961241a7bfe0cc",
+  "kind": "source-body-and-provider-review-not-runtime-validation",
+  "question": "Which current B bodies explain their behavior independently of product task orchestration?",
+  "procedure": "Read each listed complete implementation, inspect named caller/provider bodies and search symbol references. This is a bounded review of 13 of the 49 compat C files, not a complete component audit or proof of runtime reachability.",
+  "rows": [
+    {
+      "file": "src/compat/base_classifier_path.c",
+      "decision": "retain B ABI adaptation",
+      "evidence": "Calls native RtlDosPathNameToNtPathName_U without a modern relative-output structure; clears the caller's original output structure. No task lookup or outward provider.",
+      "remaining": "Historical necessity and selected original caller ABI remain governed by existing mirror evidence; no new equivalence test run.",
+      "sha256": "00702B733F0815415B5962BA357B3C99B236C5D2BF403D6C2A108A265BC42276"
+    },
+    {
+      "file": "src/compat/base_console_handle.c",
+      "decision": "retain B capability predicate",
+      "evidence": "Combines the original low-bit handle predicate with GetConsoleMode and preserves LastError. No frontend selection or product protocol.",
+      "sha256": "C2AC3A035FA043DA6B8A7D31B26964F7C384138080E83E3616C6666E293E7B63"
+    },
+    {
+      "file": "src/compat/base_resource.c",
+      "decision": "split native resource mechanics from product delivery; not independent today",
+      "evidence": "TLS binding dispatches Duplicate and Close to service_duplicate_resource/service_close_resource in src/ntsrv-exe/opennt/source/base_service.c. The latter resolve worker reservations, console-associated worker connections, stream receipts and parent/worker wait delivery. src/ntsrv-exe/opennt/include/base_server.h remaps NtDuplicateObject/NtClose to these B entrypoints for retained server code.",
+      "state": "Borrowed synchronous resource scope; prior TLS binding is restored by the F dispatch caller. Local unbound duplicate allows only current-process resources.",
+      "migration": "Keep handle operations with explicit resolved resources in B; retain authenticated reservation/recipient selection and request wait policy in F. Redesign the retained C operation boundary before replacing this dispatch. Simply moving provider bodies to B or using raw cross-process handles is rejected.",
+      "remaining": "Trace each retained C request operation, delivery and failure unwind to design an explicit non-callback execution boundary. Two additional source-resolved F callback slots, not new approved exceptions or closed ledger IDs.",
+      "sha256": "BA2249C41CB99E70B2C04313B5908746B0F973C1AB78EFEC33771BBE6EECE80C"
+    },
+    {
+      "file": "src/compat/base_vdm_config.c",
+      "decision": "retain B explicit configuration mechanics",
+      "evidence": "Owns bounded DOS/WOW command strings and borrowed immutable TLS configuration; no lookup or request selection. worker_registry.c selects product paths and binary kind, binds the configuration around BaseGetVdmConfigInfo, then restores the previous binding.",
+      "contract": "Caller retains configuration lifetime; preserve capacity failures and original reservation value. Do not migrate worker selection into this unit.",
+      "sha256": "47C530EAFAE91857A3D3CCC004167FD134A482E5C5ECA9787F690C3427D5A3C4"
+    },
+    {
+      "file": "src/compat/console_grid.c",
+      "decision": "retain B native console cell-grid mechanics",
+      "evidence": "Reads and writes the supplied console handle, copies/clips cells on resize, frees temporary buffers and propagates incomplete transfer failure. No NTCON transport or session lookup.",
+      "sha256": "22BFE031AB93824AA0BF0A4F16A42571FA7BD853D4DAA098860EA98EFDEF9DC4"
+    },
+    {
+      "file": "src/compat/dem_restart_hint.c",
+      "decision": "retain B directory enumeration compatibility",
+      "evidence": "demsrch.c captures and searches a filename/index hint using an explicit directory handle and native NtQueryDirectoryFile. No task or CPU state is consulted.",
+      "contract": "Preserve native enumeration status and caller-owned buffer lifetime. This review is ownership evidence, not a new proof of directory mutation semantics.",
+      "sha256": "215EB2A4BD8977741A0F86440F452E2307798A0D35617A9172AB587A280079F9"
+    },
+    {
+      "file": "src/compat/invalid_virtual_instance.c",
+      "decision": "retain B explicit invariant failure primitive",
+      "evidence": "virtual.c supplies an invalid instance identifier. The function constructs a noncontinuable failure record and invokes native fail-fast; it does not select a task, cancel a session or complete a request.",
+      "contract": "Do not replace with session cancellation or a returning failure. Runtime fault behavior was not rerun.",
+      "sha256": "3FC7C8887C4A4FD3740EC349669D5AF6B68F8A2B4C72C19D675A65A357273100"
+    },
+    {
+      "file": "src/compat/mvdm_ccpu_activity_check.c",
+      "decision": "no outward implementation; retained no-op requires separate necessity evidence",
+      "evidence": "Body is empty; references occur in nt_eoi.c and nt_unix.c. It does not delegate to a product scheduler.",
+      "remaining": "Symbol references and the ownership comment do not prove original idle semantics equivalent. Reconcile selected call paths and original responsibility before changing or claiming full semantic review.",
+      "sha256": "6263BBFFEFE2102BBA0E8FFA919FD12DB4D674BF832E7FD26DC5C4945905EEEC"
+    },
+    {
+      "file": "src/compat/mvdm_ccpu_vector_defaults.c",
+      "decision": "no outward implementation; explicit unavailable ABI providers",
+      "evidence": "EDL_fast_bop, c_VirtualiseInstruction and c_sas_touch invoke __debugbreak; the latter two return zero if execution continues. C c_main.c references the BOP symbol; sascdef.c references the SAS entries.",
+      "remaining": "Do not describe debugbreak as guaranteed termination or restore unsupported machine algorithms into B. Selected vector reachability and historical unavailable-provider semantics still need reconciliation.",
+      "sha256": "615074326E83E5A6CD7902E2A784E97DD3D697AC08CA98CFF5B88B4B673F3215"
+    },
+    {
+      "file": "src/compat/mvdm_keyboard_history.c",
+      "decision": "retain B bounded input metadata mechanism",
+      "evidence": "Uses caller-owned counters, ring metadata and opaque numeric receipts. C nt_event.c/keyba.c maintain hardware history; F console_compat.c stages and consumes receipts. B never resolves a receipt to a task or frontend.",
+      "contract": "Original keyboard lock must cover tags and device state; preserve overwritten-slot rejection and selected ages across reset. No second input or session state machine.",
+      "sha256": "C294C5ED91B047CEC7C9D1135F369ED109932420A0D518E8A10AE871B01A8FAA"
+    },
+    {
+      "file": "src/compat/mvdm_softpc_ccpu_wait.c",
+      "decision": "retain B native wait resource with explicit outer lifetime",
+      "evidence": "Owns one auto-reset event, signal/wait/create/close only. C c_main.c waits/signals; F mvdm_standalone_worker.c starts it before host execution and ends it after producer shutdown.",
+      "contract": "The single-execution-thread and stopped-producer lifetime is a caller precondition, not internally synchronized teardown. Do not convert it to a scheduler or claim concurrent close safe.",
+      "sha256": "9079644F878EB604CD61B3FAB9B8D936A840A921768573FAA120A4A95B59C5B0"
+    },
+    {
+      "file": "src/compat/mvdm_softpc_event_thread.c",
+      "decision": "native join mechanics with lifecycle contract needing clarification",
+      "evidence": "For a started thread, duplicates a synchronization handle, alerts the original handle, waits and closes the duplicate. For !started returns success without starting or joining the suspended thread. C nt_remove_event_thread supplies nt_init_called and ignores the result.",
+      "remaining": "Document/resolve the unstarted-thread process-exit policy and retained handle ownership at C/F teardown before calling this a generic join. No behavior change or bug assertion from source inspection alone.",
+      "sha256": "AE20A46F36733DE7C947BB3F2AB8847F8702B04BD069409085C2A5C8C424AB25"
+    },
+    {
+      "file": "src/compat/vdm_control.c",
+      "decision": "retain B explicit unavailable native-service boundary",
+      "evidence": "Returns STATUS_NOT_IMPLEMENTED for every request and owns no task state or callback. This does not implement hardware VDM monitoring.",
+      "remaining": "Callers must retain their existing unsupported-service behavior; this file alone does not prove every caller handles that status.",
+      "sha256": "AD46444AB8CDD5E7EEADCC13A7AA293928A2C44B854BDDA6D6536D0984169E03"
+    }
+  ],
+  "accounting": {
+    "complete_bodies_read_this_record": 13,
+    "new_product_edits": 0,
+    "mirror_point_delta": 0,
+    "mirror_line_delta": 0,
+    "dependency_ids_closed": 0,
+    "additional_explicit_F_provider_slots": 2
+  },
+  "validation": "Read-only source inspection; no new build, runtime test or publication. Full four-component migration ledger remains incomplete."
+}

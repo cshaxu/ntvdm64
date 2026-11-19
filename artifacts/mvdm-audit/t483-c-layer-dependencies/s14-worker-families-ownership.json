@@ -1,0 +1,97 @@
+{
+  "baseline": "145462c48dfdf1ba89c060981b961241a7bfe0cc",
+  "kind": "ownership-migration-review-partial",
+  "inputs": [
+    {
+      "path": "src/ntvdm-exe/debugger/source/dbg_registers.c",
+      "sha256": "1CDD4880662983694881DD67595DB263E54C2FF2A28DD8FA1C08A610320C726E"
+    },
+    {
+      "path": "src/ntvdm-exe/monitor/mvdm_vdm_tib.c",
+      "sha256": "769E2BB1FCF521E917F0AB86A9D5FB9A5753FFEBD6567123CA70CE7168D8C23C"
+    },
+    {
+      "path": "src/ntvdm-exe/monitor/mvdm_wow_task_frame.c",
+      "sha256": "77075FBED4541AFE949BCF2DF626A1078F58A465F46F2161774EC5890BBC505A"
+    },
+    {
+      "path": "src/ntvdm-exe/monitor/source/monitor_printer.c",
+      "sha256": "F45B156F5704B4F5AE79CD83CDD856468FAC7AD8BDDB0CDB047403FDB9F80268"
+    },
+    {
+      "path": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+      "sha256": "569FAC4E08DC48DD990B17F9B6314A5CCF778A06337ED72DE7D391C1EC2127F6"
+    },
+    {
+      "path": "src/ntvdm-exe/redir/mvdm_redirector_worker_copy.c",
+      "sha256": "D7811CE9B7080D5C57BDB62CB27948A79B60ECFB6022EA015A4D75F911ED4F1D"
+    },
+    {
+      "path": "src/ntvdm-exe/vdd/mvdm_softpc_vdd_unavailable.c",
+      "sha256": "30A79D61EC86C63D75255990C31A354B7EFF31487787D11BCAC9E4B11840A55B"
+    }
+  ],
+  "rows": [
+    {
+      "decision": "C-owned machine operations candidate, not whole-file B move",
+      "path": "src/ntvdm-exe/debugger/source/dbg_registers.c",
+      "ids": [
+        "C0183",
+        "C0184"
+      ],
+      "status": "partial-chain-review",
+      "evidence": "DPMI debug input decodes CCPU descriptors/CPL/VM and applies debug registers. Full debug task ownership still requires review."
+    },
+    {
+      "decision": "Original VDM_TIB storage and printer initialization require C-owner provenance assessment; F should retain product startup timing only",
+      "path": "src/ntvdm-exe/monitor/mvdm_vdm_tib.c",
+      "ids": [],
+      "status": "source-reviewed-original-owner-pending",
+      "evidence": "Process-global original-layout VdmTib, scalar state, initial printer modes, assignment to compat TEB.Vdm; no Run16/NTSRV request knowledge."
+    },
+    {
+      "decision": "Retirement candidate, not migration",
+      "path": "src/ntvdm-exe/monitor/mvdm_wow_task_frame.c",
+      "ids": [],
+      "status": "pending-final-reference-export-check",
+      "evidence": "No C/H production caller found, not in eight selected product command graphs; New-T291S3WowTaskFrameNinja.ps1 still compiles it for a fixture."
+    },
+    {
+      "decision": "C original semantic carrier candidate; preserve no-kernel-monitor restriction",
+      "path": "src/ntvdm-exe/monitor/source/monitor_printer.c",
+      "ids": [
+        "C0185",
+        "C0186",
+        "C0187"
+      ],
+      "status": "source-reviewed-provenance-and-close-provider-pending",
+      "evidence": "nt_lpt.c calls three functions; they operate on original VdmTib.PrinterInfo, including NtVdmControl close; no product task policy."
+    },
+    {
+      "decision": "B staging/lifetime mechanism plus C original request decoding/field writes",
+      "path": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+      "ids": [],
+      "status": "source-reviewed-final-split-pending",
+      "evidence": "vrnmpipe.c calls prepare/complete/release; must preserve owner/epoch checks, data-before-error-before-count completion, and explicit release on all original failure paths."
+    },
+    {
+      "decision": "Remove F copy forwarding after C effective-address and B/C memory ownership resolved",
+      "path": "src/ntvdm-exe/redir/mvdm_redirector_worker_copy.c",
+      "ids": [],
+      "status": "source-reviewed-prerequisite-pending",
+      "evidence": "Only numeric effective-address lookup then memory copy; no product task knowledge."
+    },
+    {
+      "decision": "Product controlled-stop policy F; remove C-to-F coupling through the owning caller chain, not B wrapper",
+      "path": "src/ntvdm-exe/vdd/mvdm_softpc_vdd_unavailable.c",
+      "ids": [
+        "C0258"
+      ],
+      "status": "source-reviewed-caller-failure-boundary-pending",
+      "evidence": "ClearInstanceDataMarking service invokes mvdm_softpc_terminate_current_session(ERROR_CALL_NOT_IMPLEMENTED); success no-op changes semantics."
+    }
+  ],
+  "documentation_debt": "monitor README references removed files and duplicates an ID; reconcile after final ownership list, do not use stale prose as production evidence.",
+  "runtime": "not run",
+  "production_modified": false
+}
