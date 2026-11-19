@@ -1,0 +1,193 @@
+{
+  "baseline": "a6f68869163d724050967b474814469f56b0fef7",
+  "question": "Can C0152 leave D without moving classifier policy or importing C headers into B?",
+  "conclusion": "Yes. Move the unchanged full-path adaptation into B, with a forward-declared original output type and a private exact original layout. C caller and mirror unchanged.",
+  "source": "src/common/base_srv/base_classifier_path.c",
+  "destination": "src/compat/base_classifier_path.c",
+  "symbol": "BOOLEAN NTAPI OpenNtBaseDosPathNameToNtPathName_U(PCWSTR,PUNICODE_STRING,PWSTR *,RTL_RELATIVE_NAME *)",
+  "original": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "public/sdk/inc/nturtl.h",
+    "lines": [
+      205,
+      208
+    ],
+    "contract": "Original STRING RelativeName plus HANDLE ContainingDirectory,12 bytes x86 and24 x64. Not modern RTL_RELATIVE_NAME_U. Function receives same tagged structure pointer; B definition is independent of C headers."
+  },
+  "behavior": "Exact previous function body: native RTL gets NULL relative output; on success only, zero the original-size relative result. No parser, borrowed handle or new lifetime. Historical behavior/limitations retained, not new original-equivalence proof.",
+  "ownership": "Native path conversion and fixed legacy ABI are B responsibilities. Classification policy, RPC and task state remain outside; no dependency on their headers.",
+  "sourceHashes": {
+    "src/compat/base_classifier_path.c": "00702b733f0815415b5962ba357b3c99b236c5d2bf403d6c2a108a265bc42276",
+    "src/compat/include/base_classifier_path.h": "b9b9f9ba31bf97d3081fa8e7b5be66ecad38ba132eab4ea61a05440a2cef1615",
+    "src/common/base_srv/base_classifier.h": "a92fa8c404cb33aba457a27e05bb0e0f6244d52b5354643145e8f3822693f819",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "6c70d987de4214974bfd5ceca2a50a129d31e555f405313c746e62dfa66b9bf9",
+    "tools/build/New-NativeHook64Ninja.ps1": "13cd5fc70647bb71778d0c7ed97b1025a80c4196d95322102f5ae7a302dc8255",
+    "test/compat/base_classifier_path.c": "e258e81eeb3d641f1291d4bf45f52aded45bf1af7271d89e63500ed6b17af251",
+    "test/observation/verify-base-classifier-path.ps1": "1921b0d9884df6057679c0615c657e069e7784bbb05128d1140eb8e6fde86b91"
+  },
+  "objects": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\opennt-base-bindings\\classifier-path.obj",
+      "sha256": "a4def4b4258e3e576160600751c6f6d8defe49acc0ae8b597a8d56915dcbf8d4",
+      "undefined": [
+        "_RtlDosPathNameToNtPathName_U@16"
+      ]
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\launcher\\obj\\opennt-base-bindings\\classifier-path.obj",
+      "sha256": "6b422f8ce8cd79829bfed293b084c4888984f89bf748f292bc4bbe3d665c4bee",
+      "undefined": [
+        "RtlDosPathNameToNtPathName_U"
+      ]
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\hook\\unit18.obj",
+      "sha256": "7a39ef5cb8338472afa7f5031ea13b7791679e51e9bb701d32ae6d72d9e89d8e",
+      "undefined": [
+        "RtlDosPathNameToNtPathName_U"
+      ]
+    }
+  ],
+  "verification": {
+    "cachedBuild": "x86/x64 plus explicit x86 worker four targets and reference worker passed.",
+    "publication": "Complete11 both destinations;22 hashes verified.",
+    "normalized": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "normalization": "Only package GUID and PE/debug timestamps masked; raw identities differ. All11 otherwise equal P98, so repeated guest/runtime tests skipped under authorization.",
+    "focused": "Actual product objects linked against original-header caller; x86 layout12 and x64 layout24. Three cases each: two successful paths and one rejected empty path. Prefix/suffix guards, full path/part agreement, success-zero/failure-preserved original result, and NULL optional output checked.",
+    "testRunner": "test/observation/verify-base-classifier-path.ps1 -BuildRoot build/t483-s12-classifier-path/path-test-verified",
+    "results": [
+      "CLASSIFIER_PATH failures=0 layout=12 cases=3 successes=2 rejected=1",
+      "CLASSIFIER_PATH failures=0 layout=24 cases=3 successes=2 rejected=1"
+    ],
+    "initialFailure": "First fixture compile /WX promoted existing original-header warnings. External headers now /external:W0; test code retains /W4 /WX. Final original-layout C_ASSERT and product-object tests pass.",
+    "abGraphs": 8,
+    "documentation": "Passed: build/t483-s12-classifier-path/docs.log"
+  },
+  "publication": {
+    "package": "255f118a-8385-4b31-a642-a87789987122",
+    "verified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "a1fd62814bb8fa80ceb8299bde85b2dc66087d610520ee00cc17fd02886873b4"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "68756e68bf7fc7c638df93c9087c327d250b8267b4f30cb0487fd96801ea1f62"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "e0f6774615daafc85189bcf8fcaa302b509bd9ba076ce0ab41a1d5f7c1eec838"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "802d34d7a875849a544fd28fcde98261287d325944b2229b42af020be569934f"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "3f7c31ef8916c502ab03eeb9b21f950b9baa905f1dc0d05bf6052855c862cf02"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "aca40ed21e58c88f0187a8bbfb481b8eea5de31e41bbf5f3025f107aeca56de8"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "ff844384e7ae77501377ec72714fd0b7f6f3236f4575b38d77d6ecb7763c02b1"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "d49baccb0c50af68925167da513c278dd25ca57039c147762101b0776dd6fedf"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "17f66040c63c8f7c497a00b81f2e7e0eb55fd55f2b9a603cf5c523da217c1dbf"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "5b6b4bb967b214aaa3a1c14dee55952c365059b660b08e382a1bcd898a1a0442"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "e4411e3857634d3b38f8aa91ec889aafe0a7e77b95c325f16c4b7e4ccc73276d"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "a1fd62814bb8fa80ceb8299bde85b2dc66087d610520ee00cc17fd02886873b4"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "68756e68bf7fc7c638df93c9087c327d250b8267b4f30cb0487fd96801ea1f62"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "e0f6774615daafc85189bcf8fcaa302b509bd9ba076ce0ab41a1d5f7c1eec838"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "802d34d7a875849a544fd28fcde98261287d325944b2229b42af020be569934f"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "3f7c31ef8916c502ab03eeb9b21f950b9baa905f1dc0d05bf6052855c862cf02"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "aca40ed21e58c88f0187a8bbfb481b8eea5de31e41bbf5f3025f107aeca56de8"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "ff844384e7ae77501377ec72714fd0b7f6f3236f4575b38d77d6ecb7763c02b1"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "d49baccb0c50af68925167da513c278dd25ca57039c147762101b0776dd6fedf"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "17f66040c63c8f7c497a00b81f2e7e0eb55fd55f2b9a603cf5c523da217c1dbf"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "5b6b4bb967b214aaa3a1c14dee55952c365059b660b08e382a1bcd898a1a0442"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "e4411e3857634d3b38f8aa91ec889aafe0a7e77b95c325f16c4b7e4ccc73276d"
+      }
+    ]
+  },
+  "progress": {
+    "reviewedFiles": 190,
+    "totalFiles": 190,
+    "totalIds": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 479,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 89
+    },
+    "newEliminated": [
+      "C0152"
+    ]
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "S12 remains active for remaining disposition reconciliation. C0152 moved from open to eliminated; other classifier declarations/ABI and lifecycle edges remain independent."
+}

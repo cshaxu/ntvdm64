@@ -5,9 +5,18 @@
  * rather than the original 12. Request its supported full-path result only;
  * publish an empty original relative result so unchanged BaseClient takes
  * its existing full-path branch. No parser, borrowed handle or new lifetime. */
-#include <nt.h>
-#include <base_classifier.h>
-#undef RtlDosPathNameToNtPathName_U
+#include "include/base_classifier_path.h"
+
+/* OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c,
+ * public/sdk/inc/nturtl.h:205-208. This is the caller's original output ABI,
+ * not modern RTL_RELATIVE_NAME_U (which adds a directory reference). */
+typedef struct _RTL_RELATIVE_NAME {
+    STRING RelativeName;
+    HANDLE ContainingDirectory;
+} RTL_RELATIVE_NAME;
+
+BOOLEAN NTAPI RtlDosPathNameToNtPathName_U(PCWSTR, PUNICODE_STRING,
+    PWSTR *, PVOID);
 BOOLEAN NTAPI OpenNtBaseDosPathNameToNtPathName_U(PCWSTR name,
     PUNICODE_STRING path, PWSTR *part, RTL_RELATIVE_NAME *relative)
 {

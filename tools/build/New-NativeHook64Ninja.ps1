@@ -48,7 +48,7 @@ $sources=@('src/nthook-dll/entry.c','src/common/native-hook/context.c','src/comm
     'src/common/native_image.c','src/lib-win32/process-image/image.c','src/lib-win32/handle/duplicate.c','src/lib-win32/file/identity.c',
     'src/nthook-dll/hook_classification.c',
     'src/non-mvdm/base/win32/client/vdm.c',
-    'src/common/base_srv/base_classifier_path.c',
+    'src/compat/base_classifier_path.c',
     'src/compat/opennt_support_rtl.c',
     'src/non-mvdm/base/ntos/rtl/error.c')
 $sources+=@('src/lib-win32/rpc/local_binding.c','src/common/rpc/management.c','src/common/base_srv/scope.c')

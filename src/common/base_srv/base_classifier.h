@@ -15,7 +15,7 @@
 #define STATUS_INVALID_IMAGE_NOT_MZ ((NTSTATUS)0xC000012FL)
 #define STATUS_INVALID_IMAGE_PROTECT ((NTSTATUS)0xC0000130L)
 #define STATUS_INVALID_IMAGE_WIN_16 ((NTSTATUS)0xC0000131L)
-BOOLEAN NTAPI OpenNtBaseDosPathNameToNtPathName_U(PCWSTR, PUNICODE_STRING, PWSTR *, RTL_RELATIVE_NAME *);
+#include "compat/include/base_classifier_path.h"
 #define RtlDosPathNameToNtPathName_U OpenNtBaseDosPathNameToNtPathName_U
 typedef struct _SECTION_IMAGE_INFORMATION {
     PVOID TransferAddress;

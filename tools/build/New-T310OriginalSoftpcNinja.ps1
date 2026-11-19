@@ -1366,7 +1366,7 @@ if ($Architecture -eq 'x86') {
             @('config', 'src/common/base_srv/base_config.c', $baseOwnerFlags),
             @('process', 'src/compat/base_console_handle.c', $libraryFlags),
             @('interactive', 'src/ntsrv-exe/opennt/source/base_interactive.c', $baseOwnerFlags),
-            @('classifier-path', 'src/common/base_srv/base_classifier_path.c', $baseOwnerFlags))
+            @('classifier-path', 'src/compat/base_classifier_path.c', $libraryFlags))
     }
     foreach ($group in @('opennt-base-client', 'opennt-base-server', 'opennt-base-bindings')) {
         $members = foreach ($member in $baseOwnerGroups[$group]) {
