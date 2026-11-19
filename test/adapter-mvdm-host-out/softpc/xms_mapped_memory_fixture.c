@@ -8,7 +8,7 @@
 
 #define MEMORY_SIZE 131072u
 static unsigned char memory[MEMORY_SIZE], expected[MEMORY_SIZE];
-static unsigned reads, writes, commits, decommits, forward_moves;
+static unsigned reads, writes, commits, decommits;
 static int reject_io;
 
 /* Original xmsMoveMemory's flat backing and overwrite notification endpoints. */
@@ -30,25 +30,6 @@ BOOL sas_manage_xms(PVOID address, ULONG size, int action)
     else if (action == 2) ++decommits;
     else return FALSE;
     return TRUE;
-}
-/* This fixture models the nonpaged XMS call context; paging is not exercised. */
-int c_getPG(void) { return 0; }
-int c_getVM(void) { abort(); }
-uint32_t c_getCPL(void) { abort(); }
-int xtrn2phy(uint32_t address, uint8_t access, uint32_t *physical)
-{
-    (void)address; (void)access; (void)physical; abort();
-}
-uint32_t c_sas_memory_size(void) { return MEMORY_SIZE; }
-void c_sas_loads(uint32_t a, uint8_t *b, uint32_t n) { memcpy(b, memory+a, n); }
-void c_sas_stores(uint32_t a, uint8_t *b, uint32_t n) { memcpy(memory+a, b, n); }
-void c_sas_move_bytes_forward(uint32_t source, uint32_t destination, uint32_t n)
-{
-    uint32_t offset;
-
-    ++forward_moves;
-    for (offset = 0; offset < n; ++offset)
-        memory[destination + offset] = memory[source + offset];
 }
 static int read_memory(void *ctx, uint32_t a, uint8_t *b, uint32_t n)
 {
@@ -93,14 +74,6 @@ int main(void)
     CHECK(SAQueryFree(pool, &available, &largest) && available == MEMORY_SIZE);
     free(pool);
     puts("S36_ORIGINAL_XMS_MANAGE_NO_BOUNCE_NO_ZERO_REUSE_OK");
-    for (i=0; i<5000; ++i) memory[100+i]=(unsigned char)(i*17);
-    memcpy(expected, memory, sizeof(memory)); memmove(expected+100, expected+200, 5000);
-    reads = writes = forward_moves = 0;
-    CHECK(mvdm_softpc_guest_memory_copy_forward(100, 200, 5000));
-    CHECK(forward_moves == 1 && reads == 0 && writes == 0 &&
-        !memcmp(memory, expected, sizeof(memory)));
-    CHECK(!mvdm_softpc_guest_memory_copy_forward(MEMORY_SIZE - 1, 100, 2) &&
-        forward_moves == 1);
     for (i=0; i<5000; ++i) memory[100+i]=(unsigned char)(i*17);
     memcpy(expected, memory, sizeof(memory)); memmove(expected+200, expected+100, 5000);
     xmsMoveMemory(200, 100, 5000);

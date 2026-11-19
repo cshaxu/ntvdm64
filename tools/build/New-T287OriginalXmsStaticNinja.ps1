@@ -40,7 +40,7 @@ $environmentNinja = $environment.Replace('\', '/')
 # the selected x86 session callback path uses the original SAS callback unit.
 $units = @('xms', 'xmsa20', 'xmsblock', 'xmsdisp', 'xmsmisc', 'xmsumb', 'xmsmemr')
 $sources = $units | ForEach-Object { "$root/src/mvdm-host/xms.486/$_.c" }
-$adapterSources = @('src/ntvdm-exe/softpc/mvdm_xms_memory.c')
+$adapterSources = @()
 $adapterSourcePaths = $adapterSources | ForEach-Object { "$root/$_" }
 $hashLines = @($sources + $adapterSourcePaths) | ForEach-Object {
     $path = $_.Replace('/', '\')

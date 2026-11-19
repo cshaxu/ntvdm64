@@ -1,0 +1,126 @@
+{
+  "delivery": "T483 S14 P25",
+  "status": "compiled-published-targeted-tests-passed; commit/push recorded by delivery history",
+  "approval": "Owner approved repair after explicit explanation that invalid host transport terminates the entire worker; approved non-error mirror +1 point/+4 lines. Owner requested small five-step delivery only.",
+  "baseline_commit": "507305c00",
+  "package_id": "8b383dfc-9e18-4c1a-ace8-f449a81f2669",
+  "publication_hashes_verified": 22,
+  "chain": {
+    "descriptor": "C xmsMoveBlock -> B mvdm_softpc_guest_memory_copy_from",
+    "copy": "C range_valid -> C c_sas_move_bytes_forward",
+    "failure": "C VdmExitCode=ERROR_INVALID_ADDRESS -> C TerminateVDM -> existing lifecycle authorization/cleanup -> ExitVDM/ExitProcess",
+    "boundary": "Generic worker policy remains F; no claim that all transitive lifecycle dependencies are removed."
+  },
+  "removed": [
+    "F mvdm_xms_cancel_current_operation implementation/header",
+    "F mvdm_softpc_guest_memory_copy_forward implementation/declaration and selected build inputs"
+  ],
+  "mirror": {
+    "path": "src/mvdm-host/xms.486/xmsblock.c",
+    "before": {
+      "blocks": 5,
+      "added": 17,
+      "deleted": 12
+    },
+    "after": {
+      "blocks": 6,
+      "added": 21,
+      "deleted": 12
+    },
+    "delta_points": 1,
+    "delta_lines": 4,
+    "cumulative_net_points": -1,
+    "cumulative_net_lines": 43,
+    "line_mapping": "Existing error arm preserved; #line 183/197/209 retained; original closing brace restored with #line 211; following original comment remains 213."
+  },
+  "dependencies": {
+    "eliminated_this_delivery": [
+      "C0040",
+      "C0224",
+      "C0257"
+    ],
+    "counts": {
+      "excluded-diagnostic": 1,
+      "open": 418,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 150
+    },
+    "total": 618
+  },
+  "verification": {
+    "cached_full": "x86/x64 CMake products and x86 reference passed; final two worker links repeat after zero-copy/#line correction",
+    "normalized_images": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": false,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "lease": "75 boundary assertions plus session lease fixture passed",
+    "ccpu": "Actual CCPU high-linear page and no-partial-write marker passed; existing fixture duplicate seam warnings remain",
+    "xms_leaf": "135 allocation assertions and 8 real-xmsMoveBlock assertions passed; leaf termination seam is not product-exit proof",
+    "xms_legacy_fixtures": "Mapped-memory and startup passed; obsolete F inputs and no-op SAS substitutes removed; actual B host_context dependency selected",
+    "guest": {
+      "InvalidRange": {
+        "result": "PASS guest XMS case=InvalidRange",
+        "report": "container=console-owning-nondebug\npid=20828\nresult=exited\nexit=0x0000042b\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=25284\nconsole-members-after-wait=1\nconsole-member=25284\ndirect-child pid=10684 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\n725\\system32\\ntsrv.exe\ntimeout-ms=60000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nwindow-key-failure=none error=0 message=0 key=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\n725/tests\nfixed-system-root-chars=17\nfixed-system-root-short-chars=17\nfixed-system-root-short=O:\\tmp\\n725/tests\nimage-identity=unavailable\n",
+        "fixture_sha256": "0a35f7c9ddf25b78a3d2f53738612444c5eb9eef10f945464a0be936fdeba34c",
+        "worker": {
+          "returned": false,
+          "worker_pid": 29004,
+          "worker_exit": 487,
+          "package_sha256": "3F8F4F63042F0AC9854FC8D3CF68FBA4DC39F4B9B346570FCF772D0275AA0735",
+          "worker_sha256": "B8696DF17876A3D809EB2311C283A4C7B45EB244DF9BCCC9E58789B9FAB61A55",
+          "worker_start": "2026-11-19T10:38:11.9611607-08:00",
+          "entered": true
+        }
+      },
+      "Boundaries": {
+        "result": "PASS guest XMS case=Boundaries",
+        "report": "container=console-owning-nondebug\npid=30060\nresult=exited\nexit=0x00000000\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=19100\nconsole-members-after-wait=2\nconsole-member=35784\nconsole-member=19100\ndirect-child pid=29276 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\nd8f\\system32\\ntsrv.exe\ntimeout-ms=60000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nwindow-key-failure=none error=0 message=0 key=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\nd8f/tests\nfixed-system-root-chars=17\nfixed-system-root-short-chars=17\nfixed-system-root-short=O:\\tmp\\nd8f/tests\nimage-identity=unavailable\n",
+        "fixture_sha256": "b70c248c8e7246591c19ffc28851ede3910b5c2114cf31643c41a00e74fcc595"
+      },
+      "InvalidDescriptor": {
+        "result": "PASS guest XMS case=InvalidDescriptor",
+        "report": "container=console-owning-nondebug\npid=10704\nresult=exited\nexit=0x0000042b\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=35376\nconsole-members-after-wait=1\nconsole-member=35376\ndirect-child pid=24280 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\nc50\\system32\\ntsrv.exe\ntimeout-ms=60000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nwindow-key-failure=none error=0 message=0 key=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\nc50/tests\nfixed-system-root-chars=17\nfixed-system-root-short-chars=17\nfixed-system-root-short=O:\\tmp\\nc50/tests\nimage-identity=unavailable\n",
+        "fixture_sha256": "dbe56bddebfed5f4b8138a60ae375138b2d96c2aef457897cbe84a562480b41a",
+        "worker": {
+          "returned": false,
+          "worker_pid": 4396,
+          "worker_exit": 487,
+          "package_sha256": "3F8F4F63042F0AC9854FC8D3CF68FBA4DC39F4B9B346570FCF772D0275AA0735",
+          "worker_sha256": "B8696DF17876A3D809EB2311C283A4C7B45EB244DF9BCCC9E58789B9FAB61A55",
+          "worker_start": "2026-11-19T10:38:21.9270090-08:00",
+          "entered": true
+        }
+      },
+      "Existing": {
+        "result": "PASS guest XMS case=Existing",
+        "report": "container=console-owning-nondebug\npid=35068\nresult=exited\nexit=0x00000000\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=30376\nconsole-members-after-wait=2\nconsole-member=21884\nconsole-member=30376\ndirect-child pid=30940 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\na13\\system32\\ntsrv.exe\ntimeout-ms=60000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nwindow-key-failure=none error=0 message=0 key=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\na13/tests\nfixed-system-root-chars=17\nfixed-system-root-short-chars=17\nfixed-system-root-short=O:\\tmp\\na13/tests\nimage-identity=unavailable\n",
+        "fixture_sha256": "e3be64cd3b823b96e6ff2e16ebc74fd1bbba2a92c9b5f62f4cf43070d41a4656"
+      }
+    },
+    "full": "Not run, owner explicitly requested targeted tests only"
+  },
+  "failed_attempts": [
+    "Initial lease runner used absolute path instead of its required relative build path; corrected before any case started.",
+    "Startup fixture exposed missing B host_context and unused original callback link endpoints; corrected with actual B implementation and fail-fast out-of-scope seams.",
+    "First private run encountered live unowned broker and did not start; later it was gone.",
+    "First invalid-range run expected worker code at Run16; actual broker contract gives ERROR_PROCESS_ABORTED. Added file handshake and retained worker handle to prove worker=487 separately, instead of weakening exit assertion."
+  ],
+  "limits": [
+    "No new Win3.x/Win95 manual acceptance or Full gate claimed.",
+    "Fatal probes are independently authored DOS programs invoking original BOP; original guest/HIMEM untouched.",
+    "S14 WOW USER/page-domain ownership remains incomplete; S14 stays active."
+  ],
+  "source_sha256": "0ef45fb9d0737cf0bdd50c126b8fa183f9b70c63c731533a16c2553823c5fd6e",
+  "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+  "run_root": "build/t483-s14-xms-delivery"
+}

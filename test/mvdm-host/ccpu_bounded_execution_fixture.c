@@ -10,6 +10,7 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_effective_address.h"
 #include "compat/include/physical_mapping_host.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
+extern int mvdm_softpc_guest_memory_range_valid(uint32_t, uint32_t, int);
 #include "insignia.h"
 #include "host_def.h"
 #include "xt.h"
@@ -469,7 +470,7 @@ static int fixture_high_linear_page(void)
         if (mvdm_softpc_guest_memory_copy_to(linear + 4094u, sentinel, 4u) ||
             c_sas_dw_at(first + 4092u) != 0x44332211u ||
             mvdm_softpc_guest_memory_copy_from(0xfffffff0u, bytes, 32u) ||
-            mvdm_softpc_guest_memory_copy_forward(linear + 4094u, first, 4u) ||
+            mvdm_softpc_guest_memory_range_valid(linear + 4094u, 4u, 1) ||
             c_sas_dw_at(first + 4092u) != 0x44332211u)
             goto done;
         phy_w32(pte, first | 5u);

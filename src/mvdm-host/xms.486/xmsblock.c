@@ -12,8 +12,10 @@
  */
 
 #include "xms.h"
-#include "mvdm_xms_memory.h"
-#include "mvdm_softpc_guest_memory.h"
+#include "compat/include/guest_memory_access.h"
+extern int mvdm_softpc_guest_memory_range_valid(uint32_t, uint32_t, int);
+extern void c_sas_move_bytes_forward(uint32_t, uint32_t, uint32_t);
+extern UINT VdmExitCode;
 #line 15
 #include <memory.h>
 #include <string.h>
@@ -186,8 +188,7 @@ ULONG MoveInfoAddress = ((ULONG)getSS() << 4) + getBP();
 
     if (!mvdm_softpc_guest_memory_copy_from(
             MoveInfoAddress - sizeof(MoveInfo), MoveInfo, sizeof(MoveInfo))) {
-        mvdm_xms_cancel_current_operation();
-        return;
+        goto invalid_address;
     }
 
     pExtMoveInfo = MoveInfo + sizeof(MoveInfo);
@@ -208,16 +209,20 @@ ULONG MoveInfoAddress = ((ULONG)getSS() << 4) + getBP();
 #error DIVERGENCE MVDM-HOST-DIV-594: historical i386 XMS path is not selected
 #else
 #line 197
-    if (!mvdm_softpc_guest_memory_copy_forward((ULONG)pDst,
-            (ULONG)pSrc, cbTransfer)) {
-        mvdm_xms_cancel_current_operation();
-        return;
-    }
+    if (cbTransfer && (!mvdm_softpc_guest_memory_range_valid((ULONG)pSrc, cbTransfer, 0) ||
+            !mvdm_softpc_guest_memory_range_valid((ULONG)pDst, cbTransfer, 1)))
+        goto invalid_address;
+    if (cbTransfer) c_sas_move_bytes_forward((ULONG)pSrc, (ULONG)pDst, cbTransfer);
 
 #endif
 #line 209
     setAX(1);
     return;
+
+invalid_address:
+    VdmExitCode = ERROR_INVALID_ADDRESS;
+    TerminateVDM();
+#line 211
 }
 
 /* xmsQueryExtMem - Process query extended memory

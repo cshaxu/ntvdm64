@@ -20,10 +20,9 @@ const sources = [
   "src/mvdm-host/xms.486/xms.c",
   "src/mvdm-host/xms.486/xmsmemr.c",
   "src/mvdm-host/suballoc/suballoc.c",
-  "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
-  "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
   "src/compat/guest_memory_lease.c",
   "src/compat/guest_memory_access.c",
+  "src/compat/host_context.c",
   "src/ntvdm-exe/session/session.c"
 ];
 const includes = [

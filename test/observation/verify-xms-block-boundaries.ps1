@@ -1,5 +1,6 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$OutputRoot,[string]$ProviderSource='src/mvdm-host/xms.486/xmsblock.c')
+param([Parameter(Mandatory)][string]$OutputRoot,[string]$ProviderSource='src/mvdm-host/xms.486/xmsblock.c',
+ [ValidateSet('allocation','move')][string]$Case='allocation')
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $out=[IO.Path]::GetFullPath((Join-Path $repo $OutputRoot))
@@ -12,7 +13,8 @@ $graph=Get-Content "$cache/build.ninja" -Raw
 $m=[regex]::Match($graph,'(?m)^build obj/xms/xmsblock.obj:.*\r?\n\s+cflags = (.+)$')
 if(!$m.Success){throw 'Production XMS compile contract absent'}
 $flags=$m.Groups[1].Value.Replace('$:',':')
-foreach($unit in @(@('provider',$ProviderSource),@('fixture','test/mvdm-host/xms/xms_block_boundary_fixture.c'))){
+$fixture=if($Case -eq 'move'){'test/mvdm-host/xms/xms_move_failure_fixture.c'}else{'test/mvdm-host/xms/xms_block_boundary_fixture.c'}
+foreach($unit in @(@('provider',$ProviderSource),@('fixture',$fixture))){
  $rsp="$out/$($unit[0]).rsp"
  ($flags+' /Gy /Fo"'+$out+'/'+$unit[0]+'.obj" "'+$repo+'/'+$unit[1]+'"') | Set-Content $rsp -Encoding ASCII
  & $wrapper cl "@$rsp" 2>&1 | Out-File "$out/build.txt" -Append
@@ -20,11 +22,12 @@ foreach($unit in @(@('provider',$ProviderSource),@('fixture','test/mvdm-host/xms
 }
 $exe="$out/xms-boundary.exe"
 # Unused move/query dependencies fail fast if accidentally called; no success seams.
-$seams=@('mvdm_xms_cancel_current_operation','mvdm_softpc_guest_memory_copy_from','mvdm_softpc_guest_memory_copy_forward','getBP','setDX','getSS','Sim32pGetVDMPointer','sas_overwrite_memory') | ForEach-Object {"/alternatename:_$($_)=_fixture_unexpected"}
+$seams=@('TerminateVDM','mvdm_softpc_guest_memory_copy_from','mvdm_softpc_guest_memory_range_valid','c_sas_move_bytes_forward','getAX','getBX','getDX','setCX','getBP','setDX','getSS','Sim32pGetVDMPointer','sas_overwrite_memory') | ForEach-Object {"/alternatename:_$($_)=_fixture_unexpected"}
 & $wrapper link /nologo /OPT:REF @seams "/OUT:$exe" "/MAP:$exe.map" "$out/fixture.obj" "$out/provider.obj" "$cache/original-mvdm-host-suballoc.lib" kernel32.lib ntdll.lib legacy_stdio_definitions.lib 2>&1 | Out-File "$out/build.txt" -Append
 if($LASTEXITCODE){throw 'Link failed'}
 $map=Get-Content "$exe.map" -Raw
-foreach($symbol in @('xmsAllocBlock','xmsReallocBlock','xmsFreeBlock')){if($map -notmatch "_$symbol\s+.*provider.obj"){throw "Missing original owner $symbol"}}
+$symbols=if($Case -eq 'move'){@('xmsMoveBlock')}else{@('xmsAllocBlock','xmsReallocBlock','xmsFreeBlock')}
+foreach($symbol in $symbols){if($map -notmatch "_$symbol\s+.*provider.obj"){throw "Missing original owner $symbol"}}
 $started=Get-Date
 $p=Start-Process $exe -WindowStyle Hidden -PassThru -RedirectStandardOutput "$out/result.txt" -RedirectStandardError "$out/error.txt"
 if(!$p.WaitForExit(10000)){$p.Kill();throw 'Fixture timeout'}

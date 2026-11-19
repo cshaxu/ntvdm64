@@ -1,5 +1,4 @@
 #include "ntvdm-exe/session/session.h"
-#include "mvdm_xms_memory.h"
 #include "memapi.h"
 #include "suballoc.h"
 #include "umb.h"
@@ -31,26 +30,20 @@ BOOL sas_manage_xms(PVOID address, ULONG size, int action)
     return TRUE; /* Original CPU40 preallocated backing contract. */
 }
 
-/* The fixture binds an explicit lease transport below.  These CCPU exports
- * remain link witnesses for the generic fallback only and are not reached. */
-ULONG c_sas_memory_size(void)
-{
-    return 0u;
-}
-
-void c_sas_loads(ULONG address, UCHAR *bytes, ULONG byte_count)
+/* Startup registers this original callback but must not execute a move. */
+unsigned char *Sim32pGetVDMPointer(ULONG address, unsigned char protected_mode)
 {
     (void)address;
-    (void)bytes;
-    (void)byte_count;
+    (void)protected_mode;
+    abort();
 }
-
-void c_sas_stores(ULONG address, UCHAR const *bytes, ULONG byte_count)
+void sas_overwrite_memory(void *address, ULONG size)
 {
     (void)address;
-    (void)bytes;
-    (void)byte_count;
+    (void)size;
+    abort();
 }
+
 
 static int fixture_read(void *context, uint32_t address, uint8_t *bytes,
     uint32_t byte_count)

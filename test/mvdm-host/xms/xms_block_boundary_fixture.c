@@ -8,6 +8,7 @@
 #define BASE 0x110000u
 #define SIZE 0x10000u
 PVOID ExtMemSA;
+UINT VdmExitCode;
 static uint16_t ax,bx,cx,dx;
 static unsigned checks, failures, commits, decommits, moves;
 static unsigned char bytes[SIZE];

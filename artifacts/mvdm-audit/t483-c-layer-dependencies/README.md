@@ -408,3 +408,11 @@ delta0/0; direct ledger147 eliminated/421 open unchanged. USER/SAS remains open.
 [Remaining S14 call chains](s14-residual-chain-review.json) trace SAS failure behavior, XMS void dispatch and ignored return, and WOW backing prerequisites. These are unresolved ownership findings, not delivered migrations or S14 closure.
 
 [S14 P24 checked SAS provider](s14-p24-sas-provider.json) records the owner-approved CCPU implementation relocation, mirror increase and final verification state. XMS cancellation remains unresolved.
+
+[S14 P25 XMS ownership delivery](s14-p25-xms-owner-delivery.json) supersedes
+that unresolved XMS disposition: F cancellation and copy providers are
+removed, checked copying stays C-owned and invalid transport enters the
+existing termination chain. Real BOP failures prove worker487/launcher1067,
+no guest continuation and successful restart. C0040/C0224/C0257 are eliminated;
+150 eliminated/418 open. Owner-approved mirror increment is1 point/4 lines.
+WOW page-domain ownership remains open; this is not S14 closure.

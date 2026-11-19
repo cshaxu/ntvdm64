@@ -28,6 +28,19 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+S14 P25 completes the XMS-specific outward-provider cleanup. Descriptor reads
+use B; range validation and forward copying use C; invalid transport enters
+the existing C termination chain. F cancellation/copy providers are removed.
+Owner approved the worker-fatal policy and non-error mirror increase
+5 points/29 lines to6/33. Cumulative net is-1 point/+43 lines. Cached full
+builds, dual11 publication/22 hashes and targeted tests passed. Package
+8b383dfc-9e18-4c1a-ace8-f449a81f2669 is published. Real BOP probes prove
+worker exit487, launcher error1067, no guest continuation and successful
+subsequent starts. Full was not run under the owner's small-delivery scope.
+[P25 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p25-xms-owner-delivery.json)
+closes C0040/C0224/C0257:150 eliminated/418 open of618. Generic F lifecycle
+authority and WOW USER/page-domain ownership remain; S14 is still active.
+
 S14 P24 moves the three checked SAS provider bodies from F to C. Final
 production and real-CCPU fixture maps resolve them to ccpusas4.obj; F retains
 registration/lifetime and forward-copy admission. Cached full builds,

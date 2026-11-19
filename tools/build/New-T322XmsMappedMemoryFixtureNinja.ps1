@@ -37,8 +37,7 @@ $sources = @(
     'src/mvdm-host/suballoc/suballoc.c',
     'src/mvdm-host/xms.486/xmsmemr.c',
     'test/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c',
-    'src/ntvdm-exe/softpc/mvdm_xms_memory.c',
-    'src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/compat/guest_memory_access.c',
+    'src/compat/guest_memory_access.c',
     'src/compat/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c'
 )
