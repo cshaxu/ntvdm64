@@ -201,3 +201,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P41 drawing ownership](s12-p41-drawing-ownership.json): file080 classified; file081 native export/context investigation remains open. Review80/116,510/617 open.
 
 [P42 native controls](s12-p42-native-controls.json): file081, unified native export carrier in B; five direct symbols cleared. Review81/116,505/617 open.
+
+[P43 EDIT ownership](s12-p43-edit-ownership.json): files082-083, current-task/callback and native-return boundaries distinguished from original algorithms and storage. Review83/116,505/617 open.

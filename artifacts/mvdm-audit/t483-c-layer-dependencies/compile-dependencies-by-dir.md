@@ -539,9 +539,13 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+082 P43: Keep original creation/destruction, font metrics, password, numeric classification and layout algorithms in C. Font/width native providers are already B under P42. GetDC/ReleaseDC/heap/GDI are native imports; FreeLookasideEntry resolves C rtlinit.obj and EditLookaside is defined in C editec.c. The BUTTON-only free macro is not selected for this object. Twelve residual outer symbols are task/client identity, registered callbacks, retained window state and caret/native-call lifecycle: S13 boundary plus S14 original state/FNID extraction cohort. Mirror delta0 points/0 lines; see s12-p43-edit-ownership.json.
+
 ## 083 — src/non-mvdm/windows/core/ntuser/client/editec.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
+
+083 P43: Keep original text/undo/selection, EDIT dispatch and clipboard policy in C. Twenty-four actual outer bindings include task-aware menu/dispatch/borrow and A/W conversion, not SDK-only wrappers. Shared S13 entry/native-return ownership; S14 original extent/message-table/state composition. No whole-file migration or parallel EDIT implementation. Mirror delta0 points/0 lines; see s12-p43-edit-ownership.json.
 
 ## 084 — src/non-mvdm/windows/core/ntuser/client/editml.c
 

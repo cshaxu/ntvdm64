@@ -1,0 +1,397 @@
+{
+  "baseline": "d57b51b6ad784aba786196cd89fd51c1ec0f36b5",
+  "status": "P43 source-only EDIT ownership classification",
+  "files": [
+    {
+      "number": 82,
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "sha256": "666b36de91b14f2d02a4f304f1c2933c308da5da9eb393307a6e926b6d47ed47",
+      "compilerObject": "obj/opennt-user/control-body-edecrare.obj",
+      "dependencyRecord": "obj/opennt-user/control-body-edecrare.obj: #deps 65, deps mtime 8167723128070772 (VALID)",
+      "header": "C0064",
+      "verifiedSymbols": [
+        {
+          "id": "C0350",
+          "status": "open",
+          "symbol": "wow_edit_set_window_fnid"
+        },
+        {
+          "id": "C0351",
+          "status": "open",
+          "symbol": "ClearWindowState"
+        },
+        {
+          "id": "C0352",
+          "status": "open",
+          "symbol": "SetWindowState"
+        },
+        {
+          "id": "C0357",
+          "status": "open",
+          "symbol": "wow_default_window_proc"
+        },
+        {
+          "id": "C0387",
+          "status": "open",
+          "symbol": "wow_edit_client_info"
+        },
+        {
+          "id": "C0392",
+          "status": "open",
+          "symbol": "wow_edit_current"
+        },
+        {
+          "id": "C0393",
+          "status": "eliminated",
+          "symbol": "wow_edit_native_GdiGetCharDimensions"
+        },
+        {
+          "id": "C0394",
+          "status": "eliminated",
+          "symbol": "wow_edit_native_GetCharWidthInfo"
+        },
+        {
+          "id": "C0504",
+          "status": "open",
+          "symbol": "wow_user_registered_callbacks"
+        },
+        {
+          "id": "C0513",
+          "status": "open",
+          "symbol": "wow_native_CreateCaret"
+        },
+        {
+          "id": "C0519",
+          "status": "open",
+          "symbol": "wow_native_DestroyCaret"
+        },
+        {
+          "id": "C0545",
+          "status": "open",
+          "symbol": "wow_native_HideCaret"
+        },
+        {
+          "id": "C0546",
+          "status": "open",
+          "symbol": "wow_native_InvalidateRect"
+        },
+        {
+          "id": "C0577",
+          "status": "open",
+          "symbol": "wow_native_ShowCaret"
+        }
+      ],
+      "coffUndefined": [
+        "__imp__HeapAlloc@12",
+        "__imp__HeapReAlloc@16",
+        "__imp__HeapFree@12",
+        "_GetProcessHeap@0",
+        "__imp__GetModuleHandleW@4",
+        "__imp__GlobalFree@4",
+        "__imp__GetCharWidthA@16",
+        "__imp__GetCharABCWidthsA@16",
+        "__imp__GetTextExtentPointW@16",
+        "__imp__GetTextCharset@4",
+        "__imp__SelectObject@8",
+        "__imp__GetKeyboardLayout@4",
+        "__imp__GetSystemMetrics@4",
+        "__imp__GetDC@4",
+        "__imp__ReleaseDC@8",
+        "__imp__InflateRect@12",
+        "__imp__GetStringTypeW@16",
+        "__imp__GetStringTypeA@20",
+        "__GetClientRect@8",
+        "_wow_edit_client_info@0",
+        "_wow_edit_native_GdiGetCharDimensions@12",
+        "_wow_edit_native_GetCharWidthInfo@8",
+        "_FreeLookasideEntry@8",
+        "_wow_user_registered_callbacks@0",
+        "_ECLock@4",
+        "_ECUnlock@4",
+        "_ECInvalidateClient@8",
+        "_ECGetEditDC@8",
+        "_ECReleaseEditDC@12",
+        "_MLBuildchLines@24",
+        "_MLSize@8",
+        "_SetWindowState@8",
+        "_ClearWindowState@8",
+        "_ComboBoxWndProcWorker@20",
+        "_wow_edit_set_window_fnid@8",
+        "_wow_native_CreateCaret@16",
+        "_wow_native_DestroyCaret@0",
+        "_wow_native_HideCaret@4",
+        "_wow_native_ShowCaret@4",
+        "_wow_native_InvalidateRect@12",
+        "_wow_default_window_proc@20",
+        "@__security_check_cookie@4",
+        "_memcpy",
+        "_wow_edit_current",
+        "_EditLookaside",
+        "___security_cookie",
+        "__tls_array",
+        "__tls_index"
+      ],
+      "conclusion": "Keep original creation/destruction, font metrics, password, numeric classification and layout algorithms in C. Font/width native providers are already B under P42. GetDC/ReleaseDC/heap/GDI are native imports; FreeLookasideEntry resolves C rtlinit.obj and EditLookaside is defined in C editec.c. The BUTTON-only free macro is not selected for this object. Twelve residual outer symbols are task/client identity, registered callbacks, retained window state and caret/native-call lifecycle: S13 boundary plus S14 original state/FNID extraction cohort."
+    },
+    {
+      "number": 83,
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07",
+      "compilerObject": "obj/opennt-user/control-body-editec.obj",
+      "dependencyRecord": "obj/opennt-user/control-body-editec.obj: #deps 65, deps mtime 8167723128536106 (VALID)",
+      "header": "C0064",
+      "verifiedSymbols": [
+        {
+          "id": "C0350",
+          "status": "open",
+          "symbol": "wow_edit_set_window_fnid"
+        },
+        {
+          "id": "C0351",
+          "status": "open",
+          "symbol": "ClearWindowState"
+        },
+        {
+          "id": "C0352",
+          "status": "open",
+          "symbol": "SetWindowState"
+        },
+        {
+          "id": "C0357",
+          "status": "open",
+          "symbol": "wow_default_window_proc"
+        },
+        {
+          "id": "C0358",
+          "status": "open",
+          "symbol": "wow_edit_default_control_color"
+        },
+        {
+          "id": "C0387",
+          "status": "open",
+          "symbol": "wow_edit_client_info"
+        },
+        {
+          "id": "C0388",
+          "status": "open",
+          "symbol": "wow_edit_control_extent"
+        },
+        {
+          "id": "C0390",
+          "status": "open",
+          "symbol": "wow_edit_CsSendMessage"
+        },
+        {
+          "id": "C0400",
+          "status": "open",
+          "symbol": "wow_edit_window_thread_id"
+        },
+        {
+          "id": "C0409",
+          "status": "open",
+          "symbol": "wow_menu_native_DestroyMenu"
+        },
+        {
+          "id": "C0411",
+          "status": "open",
+          "symbol": "wow_menu_native_EnableMenuItem"
+        },
+        {
+          "id": "C0422",
+          "status": "open",
+          "symbol": "wow_menu_native_TrackPopupMenuEx"
+        },
+        {
+          "id": "C0504",
+          "status": "open",
+          "symbol": "wow_user_registered_callbacks"
+        },
+        {
+          "id": "C0520",
+          "status": "open",
+          "symbol": "wow_native_DestroyWindow"
+        },
+        {
+          "id": "C0545",
+          "status": "open",
+          "symbol": "wow_native_HideCaret"
+        },
+        {
+          "id": "C0546",
+          "status": "open",
+          "symbol": "wow_native_InvalidateRect"
+        },
+        {
+          "id": "C0557",
+          "status": "open",
+          "symbol": "wow_native_SendMessageW"
+        },
+        {
+          "id": "C0564",
+          "status": "open",
+          "symbol": "wow_native_SetFocus"
+        },
+        {
+          "id": "C0577",
+          "status": "open",
+          "symbol": "wow_native_ShowCaret"
+        },
+        {
+          "id": "C0582",
+          "status": "open",
+          "symbol": "wow_native_UpdateWindow"
+        },
+        {
+          "id": "C0590",
+          "status": "open",
+          "symbol": "wow_window_client_send_message"
+        },
+        {
+          "id": "C0591",
+          "status": "open",
+          "symbol": "wow_window_client_set_window_long"
+        },
+        {
+          "id": "C0596",
+          "status": "open",
+          "symbol": "wow_window_client_validate_window"
+        },
+        {
+          "id": "C0615",
+          "status": "open",
+          "symbol": "wow_default_message_state"
+        }
+      ],
+      "coffUndefined": [
+        "__imp__GetCurrentThreadId@0",
+        "__imp__GlobalAlloc@8",
+        "__imp__GlobalReAlloc@12",
+        "__imp__GlobalUnlock@4",
+        "__imp__GlobalLock@4",
+        "__imp__GlobalFree@4",
+        "__imp__GetBkColor@4",
+        "__imp__GetBkMode@4",
+        "__imp__GetCharABCWidthsW@16",
+        "__imp__GetTextExtentPointA@16",
+        "__imp__GetTextExtentPointW@16",
+        "__imp__IntersectClipRect@20",
+        "__imp__SelectObject@8",
+        "__imp__SetBkMode@8",
+        "__imp__SetTextColor@8",
+        "__imp__ExtTextOutA@32",
+        "__imp__ExtTextOutW@32",
+        "__imp__IsWindow@4",
+        "__imp__OpenClipboard@4",
+        "__imp__CloseClipboard@0",
+        "__imp__SetClipboardData@8",
+        "__imp__EmptyClipboard@0",
+        "__imp__IsClipboardFormatAvailable@4",
+        "__imp__CharToOemBuffA@12",
+        "__imp__CharToOemBuffW@12",
+        "__imp__OemToCharBuffA@12",
+        "__imp__OemToCharBuffW@12",
+        "__imp__CharUpperBuffA@8",
+        "__imp__CharUpperBuffW@8",
+        "__imp__CharLowerBuffA@8",
+        "__imp__CharLowerBuffW@8",
+        "__imp__IsCharLowerA@4",
+        "__imp__IsCharLowerW@4",
+        "__imp__GetKeyState@4",
+        "__imp__GetSystemMetrics@4",
+        "__imp__GetSubMenu@8",
+        "__imp__GetDC@4",
+        "__imp__ReleaseDC@8",
+        "__imp__GetWindowRect@8",
+        "__imp__MessageBeep@4",
+        "__imp__GetSysColor@4",
+        "__imp__InflateRect@12",
+        "__imp__IntersectRect@12",
+        "__imp__PtInRect@12",
+        "__imp__GetParent@4",
+        "_RtlRunEncodeUnicodeString@8",
+        "_RtlRunDecodeUnicodeString@8",
+        "__GetClientRect@8",
+        "__IsWindowVisible@4",
+        "_wow_edit_client_info@0",
+        "_wow_edit_window_thread_id@4",
+        "_wow_edit_control_extent@4",
+        "_wow_window_client_validate_window@4",
+        "_wow_window_client_set_window_long@16",
+        "_wow_window_client_send_message@20",
+        "_InitLookaside@12",
+        "_AllocLookasideEntry@4",
+        "_wow_user_registered_callbacks@0",
+        "_ECNcCreate@12",
+        "_ECNcDestroyHandler@8",
+        "_ECSetPasswordChar@8",
+        "_ECGetText@16",
+        "_ECSetFont@12",
+        "_ECSetMargin@16",
+        "_MLBuildchLines@24",
+        "_MLEditWndProc@20",
+        "_SLEditWndProc@20",
+        "_SetWindowState@8",
+        "_ClearWindowState@8",
+        "_wow_edit_set_window_fnid@8",
+        "_wow_edit_CsSendMessage@28",
+        "_wow_native_SetFocus@4",
+        "_wow_native_DestroyWindow@4",
+        "_wow_native_HideCaret@4",
+        "_wow_native_ShowCaret@4",
+        "_wow_native_InvalidateRect@12",
+        "_wow_native_UpdateWindow@4",
+        "_wow_native_SendMessageW@16",
+        "_wow_menu_native_DestroyMenu@4",
+        "_wow_menu_native_EnableMenuItem@12",
+        "_wow_menu_native_TrackPopupMenuEx@24",
+        "_wow_default_window_proc@20",
+        "_wow_edit_default_control_color@20",
+        "_wow_user_load_menuW@8",
+        "@__security_check_cookie@4",
+        "_memcpy",
+        "_memmove",
+        "_gabThunkMessage",
+        "_wow_default_message_state",
+        "_hmodWOW32",
+        "___security_cookie"
+      ],
+      "conclusion": "Keep original text/undo/selection, EDIT dispatch and clipboard policy in C. Twenty-four actual outer bindings include task-aware menu/dispatch/borrow and A/W conversion, not SDK-only wrappers. Shared S13 entry/native-return ownership; S14 original extent/message-table/state composition. No whole-file migration or parallel EDIT implementation."
+    }
+  ],
+  "progress": {
+    "reviewedFiles": 83,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 55,
+    "deferredSourceAbiCompositionFiles": 12,
+    "unreviewedFiles": 33,
+    "totalFiles": 116,
+    "openIds": 505,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: production bytes unchanged from P42.",
+    "runtime": "Not run: source ownership evidence, not lifecycle acceptance.",
+    "publication": "P42 package retained, both eleven-image destinations rechecked against manifest.",
+    "documentation": "Verify-DocumentationGovernance.ps1; build/t483-s12-edit-ownership/docs.log and docs.exit"
+  },
+  "limits": "Classification does not eliminate edges, approve current adapter necessity/minimality, or admit S13/S14 implementation. No guest or mirror #error/#line changes.",
+  "mechanisms": {
+    "entry": "wow_edit_window_procA/W -> edit_entry establishes current task, borrowed WND and scoped metric/default context -> original EditWndProcA/W -> EditWndProcWorker; finally restores TLS and releases references while scopes still live. Terminal finalization skips fresh metric acquisition.",
+    "ansi": "Original EditWndProcWorker selects opposite-encoding procedure. wow_edit_CsSendMessage checks that exact original route, obtains native class CPD and calls the opposite scoped F entry. Conversion and token lifetime cannot be replaced by a direct unscoped original procedure.",
+    "clipboard": "ECCopy checks current CI_16BIT after EmptyClipboard and invokes registered pfnWowEmptyClipBoard; actual GetClientInfo derives the current original task flag. Original Local* and WOW callback registration remain the allocation authority.",
+    "caret": "Mapped native calls translate HWND, enter shared native-call scope, call modern USER and restore in finally. C owns hide/create/show ordering. Scope implementation needs S13 whole-chain review, not a permanent retention exception.",
+    "tables": "wow_edit_control_extent uses original C ABI size expressions in wow_control_registered_extent; wow_default_message_state is initialized through original InitMessageTables with native once/publication. S14 must assess C-owned state restoration without moving original algorithms into F.",
+    "menus": "MENU_TRACK resolves menu/window and native-call scope; MENU_MUTATION additionally republishes live menu trees. Neither is a bare modern SDK call."
+  },
+  "followup": {
+    "S13": "Treat EDIT entry, opposite-encoding CPD return, task callbacks, retained WND lifetime and menu/native-return publication as one ownership group. Validate nested callbacks/destruction, original Local*16 and clipboard callback task identity, A/W conversion and cleanup without acquiring new drawing resources. C retains original EDIT state machine.",
+    "S14": "Compare original client.c state functions, kernel/ntstubs.c FNID operation, registered control size expressions and server.c message table initialization against current extracted owners. Measure each proposed C return separately; existing extraction approval is not approval of a net mirror increase. Preserve original field layouts and original C message algorithms.",
+    "inPlace": "Actual direct native imports already stay native; two font services were cleared in P42. No additional SDK-only provider was identified among the remaining production relocations of these two files."
+  }
+}
