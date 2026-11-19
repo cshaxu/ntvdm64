@@ -285,3 +285,5 @@ P82: [Error/disk bindings](s12-p82-error-disk-bindings.json); files27-28 reviewe
 P83: [Console transition ownership](s12-p83-console-transition-ownership.json); file29 ten bindings traced through NTCON; original VGA/cursor calculations stay C.
 
 P84: [Host/printer/serial ownership](s12-p84-host-printer-serial-ownership.json); files30-32 classified, including explicit unsupported printer-control boundary.
+
+P85: [PIF directory reconciliation](s12-p85-pif-directory-reconciliation.json); two stale P11 statuses corrected; file33 remains in progress for C0221. No product change.

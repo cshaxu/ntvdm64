@@ -1,0 +1,162 @@
+{
+  "baseline": "cdfadf04ec71bede2abb241fbfd57ea6a37d09cf",
+  "scope": "Correct stale provider statuses. nt_pif.c review remains in progress until C0221 in-place migration is delivered.",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_pif.c",
+  "linkOnlyOrder": 33,
+  "findings": {
+    "C0219": "Eliminated by P11 commit 68755e645e669dac159569697d29ae9966c61ffe; this receipt corrects stale inventory, not a new production change.",
+    "C0220": "Same P11 migration and present B provider.",
+    "C0221": "Still F. Pure bounded OEM-to-ANSI conversion using Windows APIs and local WCHAR buffer, with no session dependency; move unchanged implementation/declaration to B and adjust build ownership, retain caller and encoding/error behavior. Not yet implemented."
+  },
+  "compiledEvidence": [
+    {
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "18ad6c214c0b36aea1c293d0b814bd8fe6566f6418ab508e487150c3d5e4fcf7",
+      "bindings": {
+        "_NtvdmGetSystemDirectoryA": [
+          "0001:0017d740       _NtvdmGetSystemDirectoryA  0057e740 f   common-root:system_root.obj"
+        ],
+        "_NtvdmGetWindowsDirectoryA": [
+          "0001:0017d780       _NtvdmGetWindowsDirectoryA 0057e780 f   common-root:system_root.obj"
+        ],
+        "_mvdm_softpc_config_path_to_ansi": [
+          "0001:001690c0       _mvdm_softpc_config_path_to_ansi 0056a0c0 f   softpc-bindings:mvdm_softpc_firmware.obj"
+        ]
+      },
+      "source": [
+        "build obj/common/system_root.obj: cc O$:/repos.hobby/ntvdm64/src/compat/system_root.c"
+      ]
+    },
+    {
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "sha256": "2a108ea5c0475ae48e145ef4e2c1d2d70c94cb2b4ccefdac2e5193dba14dc27d",
+      "bindings": {
+        "_NtvdmGetSystemDirectoryA": [
+          "0001:0017d740       _NtvdmGetSystemDirectoryA  0057e740 f   common-root:system_root.obj"
+        ],
+        "_NtvdmGetWindowsDirectoryA": [
+          "0001:0017d780       _NtvdmGetWindowsDirectoryA 0057e780 f   common-root:system_root.obj"
+        ],
+        "_mvdm_softpc_config_path_to_ansi": [
+          "0001:001690c0       _mvdm_softpc_config_path_to_ansi 0056a0c0 f   softpc-bindings:mvdm_softpc_firmware.obj"
+        ]
+      },
+      "source": [
+        "build obj/common/system_root.obj: cc O$:/repos.hobby/ntvdm64/src/compat/system_root.c"
+      ]
+    }
+  ],
+  "publicationHashes": [
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "a3c4bd5e5e62787d3f8b245ef874ef9db40401aee34343e152e3cf94330a59fa"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+      "sha256": "a3c4bd5e5e62787d3f8b245ef874ef9db40401aee34343e152e3cf94330a59fa"
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "4fa7fc9f4953f1e083ad40c46dc6e330ac389f1220ef1382093d830ca85a4052"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\run16.exe",
+      "sha256": "4fa7fc9f4953f1e083ad40c46dc6e330ac389f1220ef1382093d830ca85a4052"
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "a6dbdcd45efe1243e26058580fbdf05639f0934046ef43f8928ba9e843bd4075"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntsrv.exe",
+      "sha256": "a6dbdcd45efe1243e26058580fbdf05639f0934046ef43f8928ba9e843bd4075"
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "9aa5c1d168dd308799c79ea53faf41ae7d2882e20c70828ba8dade3739fd2639"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntcon.exe",
+      "sha256": "9aa5c1d168dd308799c79ea53faf41ae7d2882e20c70828ba8dade3739fd2639"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "2573896d6b22377e71210df654804c26a2302675927a01086434336031053733"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvdm.exe",
+      "sha256": "2573896d6b22377e71210df654804c26a2302675927a01086434336031053733"
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "533cd7a12dccb83316c056f2c68397347101e4ed7753f63df2182b52f7b219bd"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvwm.exe",
+      "sha256": "533cd7a12dccb83316c056f2c68397347101e4ed7753f63df2182b52f7b219bd"
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "abfaa4591bd3c0a03b0f5f57058180691d766dbe48b8fb1297c6bd94e4315e8e"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntmon.exe",
+      "sha256": "abfaa4591bd3c0a03b0f5f57058180691d766dbe48b8fb1297c6bd94e4315e8e"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "5259cbb4cf98df1793cae383a572b98af60d119f3c9002b99c1d4585f9562a11"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\WOW32.DLL",
+      "sha256": "5259cbb4cf98df1793cae383a572b98af60d119f3c9002b99c1d4585f9562a11"
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "f771d1897d6e97057c1aba34d5710110987a3512d235785d7735a00b524ae8b2"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "sha256": "f771d1897d6e97057c1aba34d5710110987a3512d235785d7735a00b524ae8b2"
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "e4a3de4f18c3c9bb45740db62931b360e7c9fb15d47a291e2a6d57f0db72c2cc"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook32.dll",
+      "sha256": "e4a3de4f18c3c9bb45740db62931b360e7c9fb15d47a291e2a6d57f0db72c2cc"
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "659807c3111352add8b9c3d38ec44d37d98e419b2619ce28085a32bbd51ca1ce"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook64.dll",
+      "sha256": "659807c3111352add8b9c3d38ec44d37d98e419b2619ce28085a32bbd51ca1ce"
+    }
+  ],
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyCompleted": 32,
+    "linkOnlyTotal": 74,
+    "currentFileInProgress": 33,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 496,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 72
+    }
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "validation": "No source/build changes; current maps and 22 release hashes verified. No new runtime test claim."
+}
