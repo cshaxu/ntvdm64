@@ -293,11 +293,14 @@ selects this directory. No C include, table or implementation is introduced into
 
 `command_services.c` and `include/command_services.h` hold an immutable operation
 table installed before COMMAND execution. The source-shaped facades in
-`command_native_child.h` and `command_process_compat.h` preserve the selected
+`command_native_child.h`, `command_guest_directory.h` and
+`command_process_compat.h` preserve the selected
 call signatures. B owns no captured guest data, request/session lifecycle or
 native launch policy and imports no outer provider. The installing product
 retains those responsibilities; a missing binding fails rather than silently
 selecting another execution route.
+The DOSWOW location registration uses the same table; its session allocation,
+locking, epochs and live CDS resolution remain in the product provider.
 
 ## Console service boundary
 

@@ -8,7 +8,8 @@ BOOL compat_command_install(const compat_command_services *services)
     if (!services || !services->capture_guest || !services->capture_host_command ||
             !services->std_handles || !services->command || !services->environment ||
             !services->replace_command || !services->select_service || !services->finish ||
-            !services->set_std_handle || !services->create_process) {
+            !services->set_std_handle || !services->create_process ||
+            !services->clear_doswow || !services->register_doswow) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }

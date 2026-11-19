@@ -26,7 +26,7 @@
 #include <winbase.h>
 #include "demdasd.h"
 #include "compat/include/wow_registry.h"
-#include "mvdm_command_guest_directory.h"
+#include "compat/include/command_guest_directory.h"
 #line 28
 
 #define BOOTDRIVE_PATH "Software\\Microsoft\\Windows\\CurrentVersion\\Setup"

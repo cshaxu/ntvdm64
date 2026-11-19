@@ -1,4 +1,5 @@
 #include "ntvdm-exe/command/include/command_launch.h"
+#include "ntvdm-exe/command/include/mvdm_command_guest_directory.h"
 #include "compat/include/command_services.h"
 
 BOOL ntvdm_command_initialize(void)
@@ -13,7 +14,9 @@ BOOL ntvdm_command_initialize(void)
         mvdm_command_native_child_select_command_service,
         mvdm_command_native_child_finish,
         opennt_command_set_std_handle,
-        opennt_command_create_process_a
+        opennt_command_create_process_a,
+        mvdm_command_guest_state_clear_doswow,
+        mvdm_command_guest_state_register_doswow
     };
     return compat_command_install(&services);
 }

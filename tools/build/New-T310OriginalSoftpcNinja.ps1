@@ -1024,7 +1024,6 @@ $demObjects = foreach ($name in $demNames) {
     # DEVL trace declarations through these compile definitions.  They do not
     # add a new product path; the source owns the zero-initialized trace mask.
     $demFlags = $demCommandFlags + ' /DWIN_32 /DDEVL'
-    if ($name -eq 'demgset.c') { $demFlags += $commandInclude }
     $graph.Add('  cflags = ' + $demFlags)
     $object
 }
@@ -1619,6 +1618,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/ntvdm_command_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_capture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/adapter-softpc/mvdm_guest_location.obj obj/compat/guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')
+    $graph.Add('build obj/tests/ntvdm_command_directory.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/basesrv/t394_s4_command_scalar_state_fixture.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build ntvdm-command-directory-test.exe: broker_test_link obj/tests/ntvdm_command_directory.obj obj/adapter-basesrv/mvdm_command_guest_state.obj obj/compat/guest_location.obj session.lib')
     $graph.Add('build obj/tests/win32_process_launch.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-launch/process.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-process-launch-test.exe: broker_test_link obj/tests/win32_process_launch.obj lib-process-launch.lib')

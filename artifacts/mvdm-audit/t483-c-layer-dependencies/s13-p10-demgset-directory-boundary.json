@@ -1,0 +1,380 @@
+{
+  "scope": "T483 S13 P10: DIR-ordered demgset.c DOSWOW registration boundary",
+  "baseline": "8a7c86009564d197e2024ae0a9600ddab8f4e6ed",
+  "file": "src/mvdm-host/dos/dem/demgset.c",
+  "mirror": {
+    "beforePoints": 3,
+    "beforeLines": 7,
+    "afterPoints": 3,
+    "afterLines": 7,
+    "added": 6,
+    "deleted": 1,
+    "deltaPoints": 0,
+    "deltaLines": 0,
+    "errorLine": "Exactly one same-line include substitution. All selected original statements and #line bytes unchanged; no excluded body change."
+  },
+  "problem": "demSetDTALocation registers DOSWOWDATA through two F-owned symbols and an F header; demgset also selects a private F COMMAND include root.",
+  "callChain": "Original demSetDTALocation -> B source-shaped facade -> existing immutable COMMAND service table -> unchanged F clear/register provider -> session registration and teardown. F VM notification operation6 later queries live DOSWOWDATA.lpCDSBuffer through the same registration.",
+  "rationale": "The location is supplied by original DOS initialization. Session/epoch/lock/retirement ownership and VM directory querying are existing product responsibilities, not a self-contained original C algorithm to migrate or an inner B state owner. Extend the already installed table; do not add another registration or registry.",
+  "stateOwnership": {
+    "C": "Original initialization and register order, including clear before register and ignored result, retained.",
+    "B": "Two operation signatures and source-shaped facade using the existing immutable table. No outer headers, static imports or mutable directory state.",
+    "F": "Whole guest-state source byte-unchanged, including owner, lock, allocation, epoch validation, current CDS resolution, clear and teardown."
+  },
+  "providerIdentity": {
+    "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+    "sha256": "27795331d87db89b6ad3f5af8fc9dc2b892013e1120cb61d4e23e9bdb9ed394c",
+    "unchangedFromBaseline": true
+  },
+  "eliminatedIds": [
+    "C0023",
+    "C0172",
+    "C0173"
+  ],
+  "sharedIds": "C0135/C0137/C0141/C0142/C0145/C0146 retain other consumers; only demgset caller cleared, not counted as new elimination.",
+  "counts": {
+    "excluded-diagnostic": 1,
+    "open": 441,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 127
+  },
+  "total": 618,
+  "S13Eliminated": 31,
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "build": "Cached full x86/x64 products, explicit x86 images and reference-x86 worker passed. Eight A/B production graphs passed. All16 DEM units in both graphs have no D/E/F headers or include roots.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "34eac5a1-5c97-4a56-bc2d-45d1e8040f72",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalized": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "verification": {
+    "capture": "151 assertions, including exact clear/register callback dispatch and numeric arguments; controlled fixture callbacks do not prove directory lifecycle.",
+    "launch": "65 per-request launch assertions.",
+    "directory": "Existing scalar fixture selected as ntvdm-command-directory-test.exe, real session/registration/memory provider: live CDS change, session isolation, stale memory epoch, re-registration, clear and disposal all pass.",
+    "console": "Three normal/broken/hung-close expected outcomes.",
+    "guest": "Actual native EDIT exit to COMMAND, CMD echo, DOS MEM and strict full DIR pass on candidate publication."
+  },
+  "limitations": [
+    "No guest source/binary change or new driver behavior.",
+    "No Full or Win3.x/Win95 multitasking runtime acceptance claimed; F directory algorithm is byte-unchanged.",
+    "Remaining direct DOS dependency in DIR order is demsrch.c C0188; other DEM caller roots were verified removed, without counting shared root IDs as eliminated.",
+    "S13 remains active; S14 remains unadmitted."
+  ],
+  "evidence": [
+    {
+      "path": "build/t483-s13-demgset-boundary/after.json",
+      "sha256": "b6e60263d1c72bc213560079bb70f60491466b20ea0b540affc350ecfbeaa8e3"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/b-symbols.txt",
+      "sha256": "0896eadef0d7c45bc757f0a7f656d1bacc8db2acc1af0d8383fba918d44a6820"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/before.json",
+      "sha256": "2196aca957b9c9f601cc6e77fbb3a3270dffffe48def59f8d6d79132e4ad7d04"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/build.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/build.ps1",
+      "sha256": "1b62b86b394527f6238522accb5b76d4c9cf5d23e1707003cd21a88f498b5e24"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/check.ps1",
+      "sha256": "874399645932bc62c7151639b9ce325c40755e491e953a2ef6c17caee10975c2"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/commands/results.json",
+      "sha256": "a67f5f66c4197813cc6ac2cac45baeae9cf100f5c02b3a105960021fdc5a5b63"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/deliver.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/deliver.ps1",
+      "sha256": "b30925fb4488350d6cc29d9ac817f4892e0e5d2a83eca5ffdfcc1efdd2ec1280"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/directory.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/directory.json",
+      "sha256": "36774a4a9ea7cf77b28ffc910d09ab673f91703d9c3b6c59188af69d7991b257"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/directory.out",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/final-check.ps1",
+      "sha256": "08d8320180f831c0ca34d26ee6ad314359a7556f4ab53f3567a0d58631bc83ca"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/final-metric.json",
+      "sha256": "b6e60263d1c72bc213560079bb70f60491466b20ea0b540affc350ecfbeaa8e3"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/identity.py",
+      "sha256": "9e339b2c484a323d66546cb338b4e3ad6a135b596d475bb0087b6394a2c0fd2e"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/measure.py",
+      "sha256": "4563a46e12797c4ae34ea47ca39397bf9172e603d9275d7d6e0eac1ce0dfdd76"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/msvc-x64-release-worker-reference-x86-commands.txt",
+      "sha256": "00e669ca596d6dbd31d8e95902f1725a8606a9db4e28084a2600a1599a842a8a"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/msvc-x64-release-worker-reference-x86-deps.txt",
+      "sha256": "e24cebd52a233fbbf7f3549aeb53ba82861b8dac732cd68675d24b4e19c793d5"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/msvc-x86-release-worker-commands.txt",
+      "sha256": "00e669ca596d6dbd31d8e95902f1725a8606a9db4e28084a2600a1599a842a8a"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/msvc-x86-release-worker-deps.txt",
+      "sha256": "b1358a5e9459ffdc14165f99dafc57c0ff906fc6e303b49c50400cf47a81a9c7"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt",
+      "sha256": "6210a604773838817614d4a35c2ed9b8a381bcefbda19934bd35af85d831936c"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.command-line.txt",
+      "sha256": "38e9bef923d1c18f66d870b9eb7f1558dc6cd4ab9caaeb153b9fabfd22e88578"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.console.txt",
+      "sha256": "ef5dcb14486d6bc378f841de10fc6936aa130d109b4270838cec37b98852e917"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.initial-console.txt",
+      "sha256": "176ceceacb218723a9d35c770749882c74f19321062e1149288be3b7a62bd1a6"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.line-01.console.txt",
+      "sha256": "d7eb1041ba01b62b10077b8edb3120e1c53276d19b1c0ae60db5263d6cdb5ff8"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.line-02.console.txt",
+      "sha256": "f799f33e9511e42338c78895cd5d26a75b93fb5cbf269187e8dc0e10e0062e43"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.line-03.console.txt",
+      "sha256": "631b8724cb4136de04308ab73d01c15e1467121a020a0b2f1902a551e91d5a2a"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.line-04.console.txt",
+      "sha256": "4dc0c1fa61ac62971a4b2eff973e46472fc79a1e4abd3314892f82125060810e"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.line-05.console.txt",
+      "sha256": "0843672df86081cc54f3d9e25a87d7f5ca20cf3f6d3b74fa9b1b6607bffed57e"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.line-06.console.txt",
+      "sha256": "a7133893c3015e4919ecbe2d18633434f81df051ba65db3d38d728388058ddff"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.line-07.console.txt",
+      "sha256": "ef5dcb14486d6bc378f841de10fc6936aa130d109b4270838cec37b98852e917"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/native-edit.txt.pre-input-console.txt.console.txt",
+      "sha256": "75d411e196fa87c77f359ffce8958a2bbbb3d620bd9f7ff3c8abc06dc0362d19"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/normalized-final.json",
+      "sha256": "bc238c38b9911c56e264bf41fadb3dc2182bf0e7a818734aef042c04f29e064f"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/package-id.txt",
+      "sha256": "4d826307ec50046bc51cf82f912e7f1dafb10afe645e69d3124c200162747866"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/pipeline-process.json",
+      "sha256": "fec8b2af8368a7e6348b25536adc3a88b1d1b2a8084073a7ed3fea7fc2c9260b"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/pipeline.err",
+      "sha256": "3a1cf97d15a56535669ccb5a40687dff36e0f08006196f0cfbbbc82a70345e7a"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/pipeline.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/pipeline.out",
+      "sha256": "67cf12e793e831f1bc9d9cee8e90878464077931d743660763b7dfadc46fd5fc"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/pipeline.ps1",
+      "sha256": "01fe18ec79c6c4b577886d18ecd28d6be09fcebb8cc6d1a336ddf3f153468a29"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/proof.ps1",
+      "sha256": "61a6fa3df681921c989d4486344c9c412a7400bb77186d7f4d6b6e2b1fe004da"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/publication-final.json",
+      "sha256": "8ad2ddfcf7974a99c10fb7aea87828d0a49ac4f57d5dfac768317a8536d3988d"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/publish.ps1",
+      "sha256": "19e31bf3761b726c8f2f9fa130f03491664ffb36663e743892e08b6909cbb8c8"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/record.py",
+      "sha256": "069d7307983fdf65ad57457a0709eea58e4d00d88aeb038ebea9c96f72740c62"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/stage.ps1",
+      "sha256": "3bcd7df55ed504f14f0580a39fdfdfcb29e9a2c1b84ec12aa466ff2b4a81fee8"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/strict-dir-final.txt",
+      "sha256": "a1b2d055747067b0e5d8fd11bf9f48c9fd92e40640e79216359d717225cdcd14"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/strict-dir-final.txt.cells.txt",
+      "sha256": "4d03fb863bee38b8833f3b4ced46183979650df030110fa3c62cbdf0a3909be7"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/strict-final.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/strict-final.ps1",
+      "sha256": "3f22fb90548a019df45e2d8c81d0cbdbce930e96cd66e7994a845e38e4a47f3b"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/targeted.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/targeted.ps1",
+      "sha256": "b4c031f447fb3166dcdbcbc7de999d39f450adabf559325d729b2356c0573033"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/tests-process.json",
+      "sha256": "2feded295892a6bca77fd4e9bf1993546cf7411fef8ef5d0f38899390a04ec4a"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/tests.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/tests.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/tests.out",
+      "sha256": "50acc7d36573bd21a8217edf530bf96b82ac2c15a33fdc1a7e055ae755584888"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/tests.ps1",
+      "sha256": "233f97f9488ba51bca620f3ba6fd8a3c314bbcfaa3cb992940938dcd390f3f56"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-broken.txt",
+      "sha256": "33f79faaf650603318513cafdda79c44a7baa4b4f90f67598ab58074cd71edd9"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-broken.txt.command-line.txt",
+      "sha256": "8a93572011b8d59db2f3e3ed6c2d9a3dbd037f1f601e9135f8183f3d640860e6"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-broken.txt.console.txt",
+      "sha256": "d8736979605d767333a465be1085e8090a493ecf6c466953505504643c1c1e0d"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-broken.txt.initial-console.txt",
+      "sha256": "28d754ccdcb4b608ec9de359c5d44387b775c422be068d1b1cac1764495e5c31"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-close-hang.txt",
+      "sha256": "333502c6d65bfd6ab79d95f7af8b4fd112f3131bbea8b5187220715e90f67d3f"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-close-hang.txt.command-line.txt",
+      "sha256": "f6253d37d72fe6aff041d1780cb7d197c0bde4804425e1cb39591696f114f316"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-close-hang.txt.console.txt",
+      "sha256": "ab73671d2d328e310812ee18d3db939e5349ca2ea73fc8ed3e74c118f9285b93"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-close-hang.txt.initial-console.txt",
+      "sha256": "e9206c021e6ee848ebece5f2307cb32baf6dcac496661d423272ae7965d1dbea"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-normal.txt",
+      "sha256": "c1f0e5fa198ba18319901d7d8eda3d55cf402f38dc7da4df1ba56cd4ec48c6b4"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-normal.txt.command-line.txt",
+      "sha256": "86acf193a09c5b24b39495073ca0185d72bf6f794758e59d7b76442a947be618"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-normal.txt.console.txt",
+      "sha256": "ab73671d2d328e310812ee18d3db939e5349ca2ea73fc8ed3e74c118f9285b93"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/transport/keyboard-console-client-test-normal.txt.initial-console.txt",
+      "sha256": "4a38de8cb2368faee97d67635a373a9a744111f7964a9811bfaad3741bdc93cb"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/check.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/check.out",
+      "sha256": "0894e21f7d61cb0f00b4b4a7e0acc772d8e823a2e4190085fe047b5db02ef99b"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/check.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/check-process.json",
+      "sha256": "e66e4eca01735d1d173f2aa07e2cb94da3d0538e97962c6d373646417f0858be"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/final-hashes.json",
+      "sha256": "c6900590de307e93359a5726515546ad1c379328144d5073c3e7eae328a55f7f"
+    },
+    {
+      "path": "build/t483-s13-demgset-boundary/c-symbols.txt",
+      "sha256": "6d7cb0275c79f8e41b51bc8207cd2bc0055e9ab2fab67f771f2ba41e6750bc7b"
+    }
+  ],
+  "finalChecks": "Documentation governance, relative links, git diff check and worker-thread boundary pass. C demgset object imports compat_command_current_services, not the two F registration symbols. All22 published image hashes rechecked after runtime tests."
+}

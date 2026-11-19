@@ -1,4 +1,4 @@
-#include "mvdm_command_guest_directory.h"
+#include "ntvdm-exe/command/include/mvdm_command_guest_directory.h"
 
 #include <string.h>
 

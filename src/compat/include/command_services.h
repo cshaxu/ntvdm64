@@ -27,6 +27,8 @@ typedef struct compat_command_services {
     BOOL (*create_process)(LPCSTR, LPSTR, LPSECURITY_ATTRIBUTES,
         LPSECURITY_ATTRIBUTES, BOOL, DWORD, LPVOID, LPCSTR,
         LPSTARTUPINFOA, LPPROCESS_INFORMATION);
+    void (*clear_doswow)(void);
+    int (*register_doswow)(uint16_t, uint16_t);
 } compat_command_services;
 
 BOOL compat_command_install(const compat_command_services *services);

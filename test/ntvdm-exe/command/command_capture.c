@@ -32,6 +32,18 @@ int session_guest_memory_acquire(session *s,uint32_t address,uint32_t n,
 int session_guest_memory_release(session *s,guest_memory_lease *p,int commit)
 {(void)s;(void)p;(void)commit;--leases;return !fail_release;}
 
+static unsigned directory_clears;
+static uint16_t directory_segment, directory_offset;
+void mvdm_command_guest_state_clear_doswow(void)
+{
+    ++directory_clears;
+}
+int mvdm_command_guest_state_register_doswow(uint16_t segment, uint16_t offset)
+{
+    directory_segment = segment;
+    directory_offset = offset;
+    return 1;
+}
 /* This capture fixture must never launch a host child. The real F composition
  * is installed; its two launch endpoints fail loudly if capture reaches them. */
 BOOL opennt_command_set_std_handle(DWORD standard, HANDLE handle)
@@ -49,6 +61,7 @@ BOOL opennt_command_create_process_a(LPCSTR app, LPSTR command,
     ExitProcess(99);
 }
 #include "compat/include/command_native_child.h"
+#include "compat/include/command_guest_directory.h"
 
 int main(void)
 {
@@ -63,6 +76,10 @@ int main(void)
     const char *ordinary_command,*ordinary_environment;
     CHECK(!compat_command_install(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
     CHECK(ntvdm_command_initialize() && ntvdm_command_initialize());
+    mvdm_command_guest_state_clear_doswow();
+    CHECK(directory_clears == 1);
+    CHECK(mvdm_command_guest_state_register_doswow(0x1234, 0x5678) &&
+        directory_segment == 0x1234 && directory_offset == 0x5678);
     owner.state=SESSION_STATE_ACTIVE;owner.epoch=1;
     memcpy(memory+100,"ordinary\r",9);memcpy(memory+400,"A=ordinary\0",12);
     memcpy(memory+800,handles,sizeof(handles));
