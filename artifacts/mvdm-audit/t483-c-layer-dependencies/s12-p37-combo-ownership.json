@@ -1,0 +1,113 @@
+{
+  "baseline": "ebfa3bc27efa40ce2996578bb57b1480054ad578",
+  "status": "P37 source-only ownership classification",
+  "files": [
+    {
+      "number": 71,
+      "file": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "header": "C0064",
+      "linkedIds": [
+        "C0350",
+        "C0357",
+        "C0388",
+        "C0392",
+        "C0507",
+        "C0520",
+        "C0525",
+        "C0527",
+        "C0546",
+        "C0551",
+        "C0557",
+        "C0559",
+        "C0564",
+        "C0573",
+        "C0575",
+        "C0581",
+        "C0582",
+        "C0590",
+        "C0591",
+        "C0596",
+        "C0615",
+        "C0617"
+      ],
+      "disposition": "S13 original control entry, task/borrow lifetime and native call restoration; coordinate S14 state/FNID provenance.",
+      "evidence": [
+        "F edit_entry validates current WOW task and registered class atoms, retains existing window binding, enters task/borrow scopes, captures display geometry, calls original ComboBoxWndProc, then restores TLS and releases references/scopes in finally.",
+        "C remains owner of combo message/state behavior. Native paint/focus/capture/message/window operations use shared task-aware provider; private CBOX/PWND state cannot become a modern native pointer by cast. Do not move original combo algorithm wholesale to F or put mixed layout/runtime precomp into B."
+      ],
+      "sha256": "640c145ccf211c26ade86838c9491c4ae5f34ac14213d1186790aff302cf714e",
+      "compilerObject": "obj/opennt-user/control-body-combo.obj",
+      "dependencyRecord": "obj/opennt-user/control-body-combo.obj: #deps 62, deps mtime 8167692024556707 (VALID)"
+    },
+    {
+      "number": 72,
+      "file": "src/non-mvdm/windows/core/ntuser/client/combodir.c",
+      "header": "C0064",
+      "linkedIds": [
+        "C0596"
+      ],
+      "disposition": "S13 current-runtime HWND-to-retained-state validation; original directory/list algorithms stay C.",
+      "evidence": [
+        "Only observed direct external symbol is wow_window_client_validate_window. It obtains current runtime, enters it if necessary, borrows exact retained window state, then restores runtime and last error. This is not interchangeable with public IsWindow.",
+        "Original routines use _GetDlgItem, CBOX/LBIV fields and original directory helper/lock order. Existing approved _GetDlgItem B/C exception is unchanged; this audit does not expand it."
+      ],
+      "sha256": "0f3aa1f93e7e6fba011504e1090231aef5ed2488af98dc9ac757a90cb10925b9",
+      "compilerObject": "obj/opennt-user/control-body-combodir.obj",
+      "dependencyRecord": "obj/opennt-user/control-body-combodir.obj: #deps 62, deps mtime 8167692022428431 (VALID)"
+    },
+    {
+      "number": 73,
+      "file": "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+      "header": "C0064",
+      "linkedIds": [
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0392",
+        "C0520",
+        "C0546",
+        "C0548",
+        "C0557",
+        "C0566",
+        "C0573",
+        "C0581",
+        "C0590",
+        "C0596",
+        "C0598"
+      ],
+      "disposition": "S13 native creation/task/class binding; S14 original extracted state/FNID review.",
+      "evidence": [
+        "C chooses list/edit child classes from atomSysClass, geometry/styles, ANSI creator flag and ordered cleanup, including list destruction before parent becomes zombie. Preserve that creation/destruction policy and original state allocation/free.",
+        "F entry copies already registered class atoms before invoking C; _CreateWindowEx maps to wow_control_create_window_ex, which validates admitted call shape, reads current class provider/version and forwards explicit version/encoding to common create_bound path before native callbacks.",
+        "Original SetWindowState/ClearWindowState and selected NtUserSetWindowFNID were previously extracted to F; their origin is a separate S14 decision, not proof all adapter code belongs permanently in F."
+      ],
+      "sha256": "b54a3787073f51e0578acf2aa52afec144abde1c367f30ddba8855810d5c4ec8",
+      "compilerObject": "obj/opennt-user/control-body-comboini.obj",
+      "dependencyRecord": "obj/opennt-user/control-body-comboini.obj: #deps 62, deps mtime 8167692025388029 (VALID)"
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "progress": {
+    "reviewedFiles": 73,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 46,
+    "deferredSourceAbiCompositionFiles": 11,
+    "unreviewedFiles": 43,
+    "totalFiles": 116,
+    "openIds": 514,
+    "totalIds": 617
+  },
+  "limits": "No source/ABI changes. Actual state ownership and current call chains are recorded, not a necessity/minimality approval for every adapter or authorization to remove original algorithms. Existing C0064 and symbol IDs remain open; S13/S14 are not implemented.",
+  "validation": {
+    "compiler": "Three existing P35 product dependency records are VALID; shared control-client precomp and actual providers inspected.",
+    "build": "Not run: no product/source changes.",
+    "runtime": "No new runtime evidence claimed.",
+    "publication": "P35 eleven-image package unchanged; ded79739-09b9-491c-a76b-18ca13401237.",
+    "documentation": "Verify-DocumentationGovernance.ps1 before commit; build/t483-s12-combo-audit/docs.log and docs.exit."
+  }
+}

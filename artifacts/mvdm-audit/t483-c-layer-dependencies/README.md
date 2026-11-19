@@ -189,3 +189,5 @@ P34: [BaseSrv/OLE ownership and Browser compatibility](s12-p34-remote-browser.js
 P35: [Button ownership and native bitmap/icon leaves](s12-p35-bitmap-native.json).
 
 P36: [Menu/default-window/resource ownership and actual compile contexts](s12-p36-menu-resource-ownership.json).
+
+P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-combo-ownership.json).

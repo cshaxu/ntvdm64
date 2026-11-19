@@ -80,7 +80,9 @@ P34 delivered the unchanged private Browser unavailable provider F to B; origina
 
 P35 delivered native bitmap macros and icon-size provider to B; original button/scaling algorithms unchanged. Both cached builds, dual publication, bitmap/drawing/icon checks and three retained Win16 frontiers passed. [P35 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p35-bitmap-native.json).
 
-P36 classified files068-070: menu task identity, default-window exact-state/name borrowing and both clres production contexts. Original parsing/conversion stays C; remaining ownership remains S13/S14 work, not permanent exceptions. [P36 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p36-menu-resource-ownership.json). Review70/116:16 clears,43 lifecycle,11 source/ABI,46 unreviewed;514/617 open. Source-only review; P35 package unchanged, no new runtime claim. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P36 recorded menu/default/resource ownership and both clres compiler contexts, with source identities and unchanged release verified. [P36 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p36-menu-resource-ownership.json).
+
+P37 classified files071-073: original combo/directory/child lifecycle algorithms stay C; task entry, exact-object validation and creation binding require S13 work, extracted state/FNID needs S14 review. [P37 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p37-combo-ownership.json). Review73/116:16 clears,46 lifecycle,11 source/ABI,43 unreviewed;514/617 open. Source-only; no new build/runtime claim, P35 package unchanged. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

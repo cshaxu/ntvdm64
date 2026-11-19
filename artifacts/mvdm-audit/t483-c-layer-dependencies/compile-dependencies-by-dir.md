@@ -473,13 +473,19 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+071 P37: S13 original control entry, task/borrow lifetime and native call restoration; coordinate S14 state/FNID provenance. F edit_entry validates current WOW task and registered class atoms, retains existing window binding, enters task/borrow scopes, captures display geometry, calls original ComboBoxWndProc, then restores TLS and releases references/scopes in finally. Source unchanged; mirror delta0 points/0 lines. See s12-p37-combo-ownership.json.
+
 ## 072 — src/non-mvdm/windows/core/ntuser/client/combodir.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+072 P37: S13 current-runtime HWND-to-retained-state validation; original directory/list algorithms stay C. Only observed direct external symbol is wow_window_client_validate_window. It obtains current runtime, enters it if necessary, borrows exact retained window state, then restores runtime and last error. This is not interchangeable with public IsWindow. Source unchanged; mirror delta0 points/0 lines. See s12-p37-combo-ownership.json.
+
 ## 073 — src/non-mvdm/windows/core/ntuser/client/comboini.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
+
+073 P37: S13 native creation/task/class binding; S14 original extracted state/FNID review. C chooses list/edit child classes from atomSysClass, geometry/styles, ANSI creator flag and ordered cleanup, including list destruction before parent becomes zombie. Preserve that creation/destruction policy and original state allocation/free. Source unchanged; mirror delta0 points/0 lines. See s12-p37-combo-ownership.json.
 
 ## 074 — src/non-mvdm/windows/core/ntuser/client/dlgbegin.c
 
