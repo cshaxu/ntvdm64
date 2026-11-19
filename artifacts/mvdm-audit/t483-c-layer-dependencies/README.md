@@ -271,3 +271,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P76 Initialization and termination ownership](s12-p76-init-termination-ownership.json): link-only files12-15/74. C0215 CPU address and C0608 original storage require S14; C0318 product admission precedes original destruction and belongs to S13 entry treatment. Current objects/common definitions and22 published hashes verified; no production change.
 
 P77: [System address ownership](s12-p77-system-address-ownership.json); link-only files16-17 stay C; shared provider goes to S14 review. No production change.
+
+P78: [Video address ownership](s12-p78-video-address-ownership.json); files18-20 remain C; C0216 joins C0215 CPU provider review in S14. No product change.
