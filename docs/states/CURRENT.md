@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P69: [Final sequential files](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p69-final-file-ownership.json). Reviewed116/116;500/618 open. Classification:18 cleared,78 lifecycle,20 source/ABI. Reconcile remaining evidence before S12 closure. Mirror0/0; cumulative -2 points/-10 lines. P67 release hashes verified.
+P69-P70: [Final files](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p69-final-file-ownership.json) and [inventory reconciliation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p70-inventory-reconciliation.json). Direct compile review116/116; baseline also has74 link-only files to reconcile (136 IDs;87 exclusive,82 open). Total500/618 open. No production change; cumulative mirror reduction2 points/10 lines. P67 release22 hashes verified. S12 remains active.

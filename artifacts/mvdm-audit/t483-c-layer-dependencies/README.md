@@ -255,3 +255,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P68 Window geometry](s12-p68-window-geometry-ownership.json): file114; both compile contexts traced, original algorithms retained. Review114/116;500/618 open. No product changes.
 
 [P69 Final sequential files](s12-p69-final-file-ownership.json): files115-116; original declaration composition and service admission scope classified. Review116/116;500/618 open. Reconciliation remains before S12 closure; no product changes.
+
+[P70 Inventory reconciliation](s12-p70-inventory-reconciliation.json): all618 stable IDs cross-indexed with the original190-file inventory;116 direct compile and74 link-only files. No status promotion. The latter136 symbol IDs include87 exclusive IDs (82 open,5 eliminated). Source-only;22 release hashes verified.
