@@ -5,10 +5,11 @@
 #include <stdint.h>
 
 #include "guest_memory_lease.h"
+#include "compat/include/host_context.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
-#define SESSION_ABI_VERSION UINT32_C(10)
-#define SESSION_MAX_TEARDOWNS 8u
+#define SESSION_ABI_VERSION UINT32_C(11)
+#define SESSION_MAX_TEARDOWNS COMPAT_HOST_CLEANUP_LIMIT
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
 #define SESSION_FIRMWARE_ROOT_BYTES 1024u
@@ -75,16 +76,11 @@ typedef struct session_video_event {
 typedef int (*session_video_event_fn)(void *context,
     const session_video_event *event);
 
-typedef void (*session_teardown_fn)(void *context);
+typedef compat_host_cleanup_fn session_teardown_fn;
 typedef int (*session_thread_bind_fn)(void *context);
 /* A failed unbind retains the thread/session binding for cleanup and retry.
  * Hooks must accept repeated unbind after their own successful retirement. */
 typedef int (*session_thread_unbind_fn)(void *context);
-
-typedef struct session_teardown {
-    session_teardown_fn function;
-    void *context;
-} session_teardown;
 
 typedef struct session_thread_hook {
     session_thread_bind_fn bind;
@@ -104,7 +100,6 @@ typedef struct session {
     uint32_t cancellation_reason;
     uint32_t machine_backend;
     uint32_t video_event_active;
-    uint32_t teardown_count;
     uint32_t thread_hook_count;
     uint32_t termination_armed;
     volatile long binding_count;
@@ -112,7 +107,7 @@ typedef struct session {
     volatile long binding_original_worker_count;
     volatile long binding_unspecified_count;
     char original_worker_source[SESSION_WORKER_SOURCE_MAX];
-    session_teardown teardowns[SESSION_MAX_TEARDOWNS];
+    compat_host_context host_context;
     session_thread_hook thread_hooks[SESSION_MAX_THREAD_HOOKS];
     /* Private storage owned by the source-shaped COMMAND native-child
      * adapter.  It never holds guest data or a cross-component ABI value;

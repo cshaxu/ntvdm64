@@ -4,7 +4,6 @@
 #include <windows.h>
 #include "ntvdm-exe/session/session.h"
 #include "compat/include/physical_mapping_host.h"
-extern int ntvdm_physical_mapping_initialize(void);
 
 /* Adapter-only contract test, not a guest/CCPU or WOW acceptance workload. */
 #define CHECK(condition) do { if (!(condition)) { \
@@ -14,6 +13,7 @@ extern int ntvdm_physical_mapping_initialize(void);
 int main(int argc, char **argv)
 {
     session owner;
+    session other;
     uint8_t *bytes = (uint8_t *)VirtualAlloc(NULL, 8192,
         MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
     uint8_t *normal = (uint8_t *)VirtualAlloc(NULL, 0x800000,
@@ -23,10 +23,6 @@ int main(int argc, char **argv)
     unsigned i;
     HANDLE locked_log = INVALID_HANDLE_VALUE;
 
-    CHECK(!compat_physical_mapping_install(NULL));
-    CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
-    CHECK(ntvdm_physical_mapping_initialize());
-    CHECK(ntvdm_physical_mapping_initialize());
     (void)argv;
     if (argc > 1) {
         FILETIME created, exited, kernel, user;
@@ -51,6 +47,20 @@ int main(int argc, char **argv)
     CHECK(mvdm_softpc_physical_mapping_initialize(normal, 0x800000));
     CHECK(!mvdm_softpc_physical_mapping_initialize(normal, 0x800000));
     CHECK(VdmMapDosMemory(0x100, 0x200, 1) == 0);
+    /* An alias-only instance has its own cleanup even before page storage is
+     * initialized. Switching back must recover the first instance unchanged. */
+    session_initialize(&other, 407u);
+    CHECK(session_activate(&other));
+    CHECK(session_thread_unbind(&owner) && session_thread_bind(&other));
+    CHECK(!mvdm_softpc_physical_mapping_translate(0x100005, &translated));
+    CHECK(translated == 0x100005);
+    CHECK(VdmMapDosMemory(0x100, 0x500, 1) == 0);
+    CHECK(other.host_context.cleanup_count == 1u);
+    CHECK(mvdm_softpc_physical_mapping_translate(0x100005, &translated));
+    CHECK(translated == 0x500005);
+    CHECK(session_thread_unbind(&other) && session_thread_bind(&owner));
+    CHECK(session_dispose(&other));
+    CHECK(owner.host_context.cleanup_count == 1u);
     CHECK(mvdm_softpc_physical_mapping_translate(0x100005, &translated));
     CHECK(translated == 0x200005);
     CHECK(VdmMapDosMemory(0x100, 0x300, 1) == 0);
@@ -78,6 +88,16 @@ int main(int argc, char **argv)
     CHECK(!mvdm_softpc_physical_mapping_resolve(0x401fff, &resolved));
     CHECK(session_thread_unbind(&owner));
     CHECK(session_dispose(&owner));
+    /* Reusing the same owner address must not recover old aliases or pages. */
+    session_initialize(&owner, 408u);
+    CHECK(session_activate(&owner) && session_thread_bind(&owner));
+    CHECK(!mvdm_softpc_physical_mapping_translate(0x100005, &translated));
+    CHECK(!mvdm_softpc_physical_mapping_resolve(0x400001, &resolved));
+    session_complete(&owner, 0u);
+    CHECK(VdmMapDosMemory(0x100, 0x200, 1) == (int32_t)0xc0000001u);
+    CHECK(!mvdm_softpc_physical_mapping_initialize(normal, 0x800000));
+    CHECK(!mvdm_softpc_physical_mapping_translate(0x100005, &translated));
+    CHECK(session_thread_unbind(&owner) && session_dispose(&owner));
     CHECK(VirtualFree(bytes, 0, MEM_RELEASE));
     CHECK(VirtualFree(normal, 0, MEM_RELEASE));
     if (locked_log != INVALID_HANDLE_VALUE) {

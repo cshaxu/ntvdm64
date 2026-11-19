@@ -7,7 +7,7 @@ New-Item -ItemType Directory -Path $out -Force | Out-Null
 $sources=@('test/adapter-mvdm-host-out/wow/wow_user_session_binding_fixture.c',
     'src/ntvdm-exe/wow/wow_user_runtime.c',
     'src/ntvdm-exe/wow/wow_user_session_binding.c',
-    'src/ntvdm-exe/session/session.c',
+    'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/ntvdm-exe/session/guest_memory_lease.c')
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $args=($sources | ForEach-Object {'"'+(Join-Path $repo $_)+'"'}) -join ' '

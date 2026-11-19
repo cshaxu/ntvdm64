@@ -63,9 +63,10 @@ const ninja = [
   "build obj/guest-copy.obj: cc $root/src/vdmredir-dll/source/mvdm_redirector_guest_copy.c",
   "  cflags = $cflags /DMVDM_GUEST_MEMORY_FIXTURE",
   "build obj/session.obj: cc $root/src/ntvdm-exe/session/session.c",
+  "build obj/host_context.obj: cc $root/src/compat/host_context.c",
   "build obj/lease.obj: cc $root/src/ntvdm-exe/session/guest_memory_lease.c",
   "build obj/fixture.obj: cc $root/test/mvdm-host/vdmredir/redirector_guest_copy_fixture.c",
-  "build bin/redirector-guest-copy-fixture.exe: link obj/guest-copy.obj obj/session.obj obj/lease.obj obj/fixture.obj",
+  "build bin/redirector-guest-copy-fixture.exe: link obj/guest-copy.obj obj/session.obj obj/host_context.obj obj/lease.obj obj/fixture.obj",
   "default obj/vrnetapi.obj obj/vrremote.obj bin/redirector-guest-copy-fixture.exe",
   ""
 ].join("\n");

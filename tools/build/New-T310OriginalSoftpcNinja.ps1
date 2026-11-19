@@ -280,7 +280,7 @@ $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
-$adapterSoftpcNames = @('mvdm_physical_mapping_binding.c', 'mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
+$adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c',
                          'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                          'mvdm_vm_notification.c',
                          'mvdm_vm_wake.c',
@@ -1253,9 +1253,12 @@ $adapterSoftpcObjects += 'obj/compat/dpmi_services.obj'
 $graph.Add('build obj/compat/vm_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/vm_services.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/vm_services.obj'
-$graph.Add('build obj/compat/physical_mapping_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/physical_mapping_services.c')))
+$graph.Add('build obj/compat/host_context.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/host_context.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
-$adapterSoftpcObjects += 'obj/compat/physical_mapping_services.obj'
+$sessionObjects += 'obj/compat/host_context.obj'
+$graph.Add('build obj/compat/physical_mapping.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/physical_mapping.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$adapterSoftpcObjects += 'obj/compat/physical_mapping.obj'
 $graph.Add('build obj/compat/mvdm_firmware.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_firmware.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/compat/mvdm_firmware.obj'
@@ -2044,7 +2047,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build monitor-session-test.exe: console_test_link obj/tests/monitor_session.obj')
     $graph.Add('build obj/tests/session_lifecycle.obj: cc ' + (NinjaPath (Join-Path $root 'test/session/session_lifecycle_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build session-lifecycle-test.exe: console_test_link obj/tests/session_lifecycle.obj obj/ntvdm/session/session.obj obj/ntvdm/session/guest_memory_lease.obj')
+    $graph.Add('build session-lifecycle-test.exe: console_test_link obj/tests/session_lifecycle.obj session.lib')
     $monitorRpcTestObject = 'obj/tests/monitor_rpc_test.obj'
     $graph.Add('build ' + $monitorRpcTestObject + ': cc ' + (NinjaPath (Join-Path $root 'test/adapter-basesrv/monitor_rpc_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -2185,8 +2188,8 @@ $ccpuThroughputFixtureObject = 'obj/tests/ccpu_throughput_fixture.obj'
 $graph.Add('build ' + $ccpuThroughputFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/ccpu_throughput_fixture.c')))
 $graph.Add('build ccpu-throughput-fixture.exe: event_test_link ' + $ccpuThroughputFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $physicalMappingFixtureObject = 'obj/tests/physical_mapping_observation_test.obj'
-$graph.Add('build ' + $physicalMappingFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/physical_mapping_observation_test.c')))
-$graph.Add('build physical-mapping-observation-test.exe: event_test_link ' + $physicalMappingFixtureObject + ' obj/adapter-softpc/mvdm_softpc_physical_mapping.obj obj/adapter-softpc/mvdm_physical_mapping_binding.obj obj/compat/physical_mapping_services.obj session.lib')
+$graph.Add('build ' + $physicalMappingFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'test/compat/physical_mapping_test.c')))
+$graph.Add('build physical-mapping-observation-test.exe: event_test_link ' + $physicalMappingFixtureObject + ' obj/compat/physical_mapping.obj session.lib')
 # Test-only debug boundaries: original matching body and actual checked binding.
 $graph.Add('rule debug_unit_link')
 $graph.Add('  command = link.exe /nologo /machine:x86 /opt:ref /out:$out $in legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')

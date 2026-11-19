@@ -8,7 +8,7 @@ $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned evidence required'}
 $null=New-Item -ItemType Directory $root
 $worker=(Resolve-Path $WorkerBuildRoot).Path
-$mapping="$repo/src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c"
+$mapping="$repo/src/compat/physical_mapping.c"
 $fixture="$repo/test/adapter-mvdm-host-out/physical_alias_empty_fixture.c"
 function Owned($name,$exe,$line,$seconds){
  $p=Start-Process $exe -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt";$null=$p.Handle
@@ -19,10 +19,10 @@ function Owned($name,$exe,$line,$seconds){
 try{
  # Snapshot the exact selected production object/archive before mutable roots
  # can be rebuilt. Never substitute a successful mock mapping implementation.
- Copy-Item "$worker/obj/adapter-softpc/mvdm_softpc_physical_mapping.obj" "$root/physical-mapping.obj"
+ Copy-Item "$worker/obj/compat/physical_mapping.obj" "$root/physical-mapping.obj"
  Copy-Item "$worker/session.lib" "$root/session.lib"
  Copy-Item $mapping "$root/mapping-source.c"
- Get-FileHash $PSCommandPath,$fixture,"$repo/test/adapter-mvdm-host-out/physical_mapping_observation_test.c",$mapping,"$worker/build.ninja",$CompilerDriver,"$root/physical-mapping.obj","$root/session.lib"|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Get-FileHash $PSCommandPath,$fixture,"$repo/test/compat/physical_mapping_test.c",$mapping,"$worker/build.ninja",$CompilerDriver,"$root/physical-mapping.obj","$root/session.lib"|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $line='/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /c /MT /O2 /W4 /WX /I"'+$repo+'/src" /I"'+$repo+'/src/ntvdm-exe/softpc/include" /Fo"'+$root+'/fixture.obj" "'+$fixture+'""'
  Owned compile $env:ComSpec $line 120
  $line='/d /s /c "call "'+$CompilerDriver+'" link.exe /nologo /MACHINE:X86 /OPT:REF /OUT:"'+$root+'/fixture.exe" "'+$root+'/fixture.obj" "'+$root+'/physical-mapping.obj" "'+$root+'/session.lib" kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib"'

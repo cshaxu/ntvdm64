@@ -1,0 +1,213 @@
+{
+  "baseline": "0d0465b83",
+  "delivery": "T483 S13 P17",
+  "package": "92f469bf-1555-4ff0-b16d-ef2d9292934a",
+  "implementation": "Eight physical mapping operations now execute in compat; no F mapping provider or install table remains. One current-instance TLS relocated, not duplicated. Product lifecycle decisions remain in F.",
+  "source_inputs": [
+    {
+      "path": "src/compat/host_context.c",
+      "sha256": "ef24a8fc596db917ed862a62183fc3613e7168b4fb1c2733e3e61b199baaaaf2"
+    },
+    {
+      "path": "src/compat/include/host_context.h",
+      "sha256": "523651f078d15a725bb90ffe872db3d424bfb69eb299ea86455572b774e85b8f"
+    },
+    {
+      "path": "src/compat/physical_mapping.c",
+      "sha256": "0a238e4a6958cf884af1c593572d0a36eb7b3a206113477ce3f8b4a8d3c64cd1"
+    },
+    {
+      "path": "src/compat/include/physical_mapping_host.h",
+      "sha256": "796917006afa8c2a006d22089868cb896c954847be6772df43f278a7d09accc8"
+    },
+    {
+      "path": "src/ntvdm-exe/session/session.c",
+      "sha256": "8d8f245814592e85fb12ade878ad9e94701532c8fb6949f0bda889bdf07558b7"
+    },
+    {
+      "path": "src/ntvdm-exe/session/session.h",
+      "sha256": "60046fbcd70b24f6fc4b34f87be8029746d7cd83a08d3eb6ffc2121df45913ce"
+    },
+    {
+      "path": "test/compat/physical_mapping_test.c",
+      "sha256": "cc2069785c3fe6ffde3db49125cd28d2e3854ea3fb8ab74cfd70457eb0f71c37"
+    },
+    {
+      "path": "test/session/session_lifecycle_test.c",
+      "sha256": "847d347360ad4398dfc6549fa5902db09db351d85747162471ade8659c2088ff"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/physical_alias_empty_fixture.c",
+      "sha256": "5216656457562c101851c5a829a96e91f13f15b913c4d5eb5f762a64fcd8f7f2"
+    }
+  ],
+  "removed": [
+    "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c",
+    "src/ntvdm-exe/softpc/mvdm_physical_mapping_binding.c",
+    "src/ntvdm-exe/softpc/include/mvdm_softpc_physical_mapping.h",
+    "src/compat/physical_mapping_services.c",
+    "src/compat/include/physical_mapping_services.h"
+  ],
+  "ownership_semantics": [
+    "B resource-registration permission is opened/closed by F lifecycle transitions, not a task state machine",
+    "F owns binding counts, hook rollback, cancellation/completion and termination escape",
+    "F accessor retains cdecl and ordinal218, recovering its containing session from the single embedded B context",
+    "B owns cleanup record storage and reverse invocation; existing registration order/capacity retained",
+    "Invalid mapping-owner test now invalidates B-owned cleanup metadata instead of unrelated F session magic"
+  ],
+  "receipts": {
+    "build.exit": "build\\t483-s13-mapping-implementation\\build.exit",
+    "publication.exit": "build\\t483-s13-mapping-implementation\\publication.exit",
+    "tests.exit": "build\\t483-s13-mapping-implementation\\tests.exit",
+    "check.exit": "build\\t483-s13-mapping-implementation\\check.exit",
+    "strict-final.exit": "build\\t483-s13-mapping-implementation\\strict-final.exit"
+  },
+  "failed_attempts": [
+    {
+      "attempt": 1,
+      "cause": "Stale F provider filename in adapter source array; failed before compilation",
+      "evidence": "build\\t483-s13-mapping-implementation\\build-attempt1.err"
+    },
+    {
+      "attempt": 2,
+      "cause": "New B object rule emitted before libraryFlags initialized; failed graph generation",
+      "evidence": "build\\t483-s13-mapping-implementation\\build-attempt2.err"
+    }
+  ],
+  "verification": [
+    "cached full x86/x64 plus reference-x86",
+    "8 A/B build graphs",
+    "mapping, original external memory, CCPU high-linear page",
+    "session rollback, failed-unbind retention, reverse cleanup and termination escape",
+    "empty alias, invalid B context, two-owner isolation, remap and teardown",
+    "real VDMREDIR module thread ownership",
+    "WOW page-domain CCPU lifecycle",
+    "NESticle actual rendered menu and Escape hide/restore",
+    "isolated DOS DIR final exit0",
+    "governance, relative links, changed PowerShell/JS syntax, whitespace"
+  ],
+  "normalized_images": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "published": [
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "8e3655dac757dae47340fac6704a163d16884f6f134d1bedb5496b715b180fec"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+      "sha256": "8e3655dac757dae47340fac6704a163d16884f6f134d1bedb5496b715b180fec"
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "5e815fece3f74f489310650b6391f84e6506b460a4cf46e76f503bf6320214e0"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\run16.exe",
+      "sha256": "5e815fece3f74f489310650b6391f84e6506b460a4cf46e76f503bf6320214e0"
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "90a5e1717bcfc5b42fc74b18af90b64fbe9cddd1c5ca362df850afce21d66bae"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntsrv.exe",
+      "sha256": "90a5e1717bcfc5b42fc74b18af90b64fbe9cddd1c5ca362df850afce21d66bae"
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "56c3b8153d99f67143e3228f0d376092684caf1dd01203726341b7fe648989ba"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntcon.exe",
+      "sha256": "56c3b8153d99f67143e3228f0d376092684caf1dd01203726341b7fe648989ba"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "951406246c2d3fc0185465d5656780e746f118c1e407c617e560f56f304f5055"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvdm.exe",
+      "sha256": "951406246c2d3fc0185465d5656780e746f118c1e407c617e560f56f304f5055"
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "6866cf35374f5b98546700d2d3ff237b84fe9f0672eb3b4d9888d75ff4d01657"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvwm.exe",
+      "sha256": "6866cf35374f5b98546700d2d3ff237b84fe9f0672eb3b4d9888d75ff4d01657"
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "eaa2b2da30d9bc87ce6dc864b114533286daf8c3ae39a71f2094d775325a0b7b"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntmon.exe",
+      "sha256": "eaa2b2da30d9bc87ce6dc864b114533286daf8c3ae39a71f2094d775325a0b7b"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "1090bb462e4775e933eb5790a6bebe037f485b0bb361ca91fb705c9bc17322c7"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\WOW32.DLL",
+      "sha256": "1090bb462e4775e933eb5790a6bebe037f485b0bb361ca91fb705c9bc17322c7"
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "1c34bc3256ef1f55312ceec7ee03cc70f25aedcc8b91967645ca31796e678412"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "sha256": "1c34bc3256ef1f55312ceec7ee03cc70f25aedcc8b91967645ca31796e678412"
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "4e9d30f49137adc2d7af489f5519c1848ba0cf45c34663a16452691d96c390f2"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook32.dll",
+      "sha256": "4e9d30f49137adc2d7af489f5519c1848ba0cf45c34663a16452691d96c390f2"
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "c36030b08519fd22c9705f3a428e0556dcf0c6a82fabb85fd1ad33fdeda814ce"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook64.dll",
+      "sha256": "c36030b08519fd22c9705f3a428e0556dcf0c6a82fabb85fd1ad33fdeda814ce"
+    }
+  ],
+  "mirror": {
+    "cohort_points": 22,
+    "cohort_lines": 92,
+    "delta_points": 0,
+    "delta_lines": 0,
+    "cumulative_reduced_points": 3,
+    "cumulative_reduced_lines": 12
+  },
+  "tracker": {
+    "eliminated": 144,
+    "open": 424,
+    "supporting": 44,
+    "eliminated_transitive": 5,
+    "excluded": 1,
+    "total": 618
+  },
+  "limitations": [
+    "Targeted regression, not Full",
+    "No new manual Win3.x/Win95 desktop acceptance",
+    "S14-S19 implementation migration remains pending"
+  ]
+}

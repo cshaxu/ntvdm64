@@ -48,6 +48,58 @@ static int check_escape_owner(void)
     return 0;
 }
 
+typedef struct binding_test_hook {
+    int fail_bind;
+    int fail_unbind;
+    unsigned binds;
+    unsigned unbinds;
+} binding_test_hook;
+
+static int bind_test_hook(void *opaque)
+{
+    binding_test_hook *hook = opaque;
+    ++hook->binds;
+    return !hook->fail_bind;
+}
+
+static int unbind_test_hook(void *opaque)
+{
+    binding_test_hook *hook = opaque;
+    ++hook->unbinds;
+    return !hook->fail_unbind;
+}
+
+static int check_binding_rollback(void)
+{
+    session owner;
+    binding_test_hook first = {0};
+    binding_test_hook second = {0};
+    session_initialize(&owner, 505u);
+    if (!session_activate(&owner) ||
+        !session_register_thread_hook(&owner, bind_test_hook, unbind_test_hook, &first) ||
+        !session_register_thread_hook(&owner, bind_test_hook, unbind_test_hook, &second))
+        return 20;
+    second.fail_bind = 1;
+    if (session_thread_bind(&owner) || session_thread_current() ||
+        compat_host_context_current() || owner.binding_count || first.unbinds != 1u)
+        return 21;
+    first.fail_unbind = 1;
+    if (session_thread_bind(&owner) || session_thread_current() != &owner ||
+        compat_host_context_current() != &owner.host_context ||
+        owner.binding_count != 1 || session_dispose(&owner)) return 22;
+    first.fail_unbind = 0;
+    if (!session_thread_unbind(&owner) || session_thread_current() ||
+        compat_host_context_current() || owner.binding_count) return 23;
+    second.fail_bind = 0;
+    if (!session_thread_bind(&owner)) return 24;
+    second.fail_unbind = 1;
+    if (session_thread_unbind(&owner) || session_thread_current() != &owner ||
+        owner.binding_count != 1) return 25;
+    second.fail_unbind = 0;
+    if (!session_thread_unbind(&owner) || !session_dispose(&owner)) return 26;
+    return 0;
+}
+
 static void record_teardown(void *context)
 {
     teardown_order[teardown_count++] = *(const uint32_t *)context;
@@ -92,7 +144,7 @@ int main(void)
     if (session_register_teardown(&first, record_teardown, (void *)&one) == 0 ||
         session_register_teardown(&first, record_teardown, (void *)&two) == 0 ||
         session_register_teardown(&first, record_teardown, (void *)&one) == 0 ||
-        first.teardown_count != 2u)
+        first.host_context.cleanup_count != 2u)
         return 3;
     session_complete(&second, 37u);
     if (second.state != SESSION_STATE_COMPLETED || second.completion_code != 37u ||
@@ -107,5 +159,8 @@ int main(void)
         teardown_count != 2u || teardown_order[0] != 2u || teardown_order[1] != 1u ||
         session_dispose(&second) == 0)
         return 6;
-    return check_escape_owner();
+    {
+        int result = check_binding_rollback();
+        return result ? result : check_escape_owner();
+    }
 }

@@ -50,8 +50,8 @@ a new accepted baseline and its cached objects are not release evidence.
 
 | S | Bounded scope | Completion evidence |
 | --- | --- | --- |
-| S13, revised and active | Extract the minimum shared instance/thread binding needed by physical mapping; move the mapping implementation, records and cleanup into B as the first complete chain. | Production C calls B implementations; old F mapping provider and eight-operation forwarding table removed; one binding authority, correct bind rollback/unbind/dispose and instance isolation. |
-| S14, planned | Remaining guest-memory access/lease, XMS and WOW page-domain adaptation. | Each complete acquire/use/release chain has one state owner; C algorithms retained, F owns configuration and product lifetime only; no remaining F implementation hidden behind these B contracts. |
+| S13, closed by P17 | Extract the minimum shared instance/thread binding needed by physical mapping; move the mapping implementation, records and cleanup into B as the first complete chain. | Production C calls B implementations; old F mapping provider and eight-operation forwarding table removed; one binding authority, correct bind rollback/unbind/dispose and instance isolation. |
+| S14, admitted after P17 | Remaining guest-memory access/lease, XMS and WOW page-domain adaptation. | Each complete acquire/use/release chain has one state owner; C algorithms retained, F owns configuration and product lifetime only; no remaining F implementation hidden behind these B contracts. |
 | S15, planned | Console compatibility, keyboard/mouse state and text/graphics adaptation. | Common operation bodies/state/cleanup move inward; frontend channels and presentation policy stay external; switching, input, cleanup and isolation validated. Classify C-owned IRQ helpers for S19 instead of wrapping them. |
 | S16, planned | COMMAND capture/environment/directories/handles and CSR/BASE boundary separation. | Common mechanics execute inward; NTSRV retains request identity, authorization, scheduling, completion and waiter ownership. Resolve D transport dependencies by explicit ownership, not another B forwarding table. |
 | S17, planned | Redirector, async device and printer compatibility. | Common guest-copy/device operations and cleanup migrate with their state; product connection and authorization policy stay external; real selected caller and provider tested. |
@@ -127,3 +127,5 @@ include count is not completion. Sync the pending mirror decision ledger
 and dependency ledger without losing stable IDs or historical evidence.
 
 The [first-chain inventory](../../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-implementation-migration-first-chain.json) pins source hashes and all eight operation locations, binding invariants and test gaps. It is source evidence, not a delivered migration.
+
+[S13 closure](../evidence/m0-t483-s13-implementation-closure.md) records the completed first chain and its limits. Current now admits S14; subsequent rows remain planned.

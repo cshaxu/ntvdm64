@@ -2,9 +2,9 @@
 
 #include <intrin.h>
 #include <stdlib.h>
+#include <stddef.h>
 #include <string.h>
 
-static __declspec(thread) session *thread_instance;
 static __declspec(thread) uint32_t thread_binding_owner;
 static __declspec(thread) int thread_finishing;
 /* A saved C stack belongs to its arming thread, not every session binding. */
@@ -33,7 +33,7 @@ int session_valid(const session *instance)
         instance->struct_bytes == sizeof(*instance) &&
         instance->identity != 0u && instance->state <= SESSION_STATE_COMPLETED &&
         instance->machine_backend <= SESSION_MACHINE_BACKEND_SOFTPC &&
-        instance->teardown_count <= SESSION_MAX_TEARDOWNS &&
+        compat_host_context_valid(&instance->host_context) &&
         instance->thread_hook_count <= SESSION_MAX_THREAD_HOOKS &&
         instance->termination_armed <= 1u &&
         session_binding_count(instance) <= INT32_MAX &&
@@ -46,6 +46,7 @@ int session_activate(session *instance)
         return 0;
     if (++instance->epoch == 0u) ++instance->epoch;
     instance->state = SESSION_STATE_ACTIVE;
+    instance->host_context.registration_open = 1;
     return 1;
 }
 
@@ -67,18 +68,9 @@ uint32_t session_machine_backend(const session *instance)
 int session_register_teardown(session *instance, session_teardown_fn function,
     void *context)
 {
-    uint32_t index;
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
-        function == NULL) return 0;
-    for (index = 0u; index < instance->teardown_count; ++index) {
-        if (instance->teardowns[index].function == function &&
-            instance->teardowns[index].context == context) return 1;
-    }
-    if (instance->teardown_count == SESSION_MAX_TEARDOWNS) return 0;
-    instance->teardowns[instance->teardown_count].function = function;
-    instance->teardowns[instance->teardown_count].context = context;
-    ++instance->teardown_count;
-    return 1;
+    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+        return 0;
+    return compat_host_context_register(&instance->host_context, function, context);
 }
 
 int session_register_thread_hook(session *instance, session_thread_bind_fn bind,
@@ -126,6 +118,7 @@ int session_request_cancellation(session *instance, uint32_t reason)
         reason != SESSION_CANCELLATION_REQUESTED) return 0;
     instance->cancellation_reason = reason;
     instance->state = SESSION_STATE_CANCELLED;
+    instance->host_context.registration_open = 0;
     return 1;
 }
 
@@ -135,6 +128,7 @@ void session_complete(session *instance, uint32_t completion_code)
         return;
     instance->completion_code = completion_code;
     instance->state = SESSION_STATE_COMPLETED;
+    instance->host_context.registration_open = 0;
 }
 
 int session_set_video_event_sink(session *instance, session_video_event_fn sink,
@@ -248,15 +242,11 @@ static uint32_t session_dispose_reason(const session *instance)
 
 int session_dispose_with_reason(session *instance, uint32_t *reason_out)
 {
-    uint32_t index;
     uint32_t reason = session_dispose_reason(instance);
 
     if (reason_out != NULL) *reason_out = reason;
     if (reason != SESSION_DISPOSE_REASON_NONE) return 0;
-    for (index = instance->teardown_count; index != 0u; --index) {
-        session_teardown teardown = instance->teardowns[index - 1u];
-        teardown.function(teardown.context);
-    }
+    compat_host_context_dispose(&instance->host_context);
     session_presentation_text_clear(instance);
     session_guest_memory_end(instance);
     memset(instance, 0, sizeof(*instance));
@@ -303,12 +293,12 @@ int session_thread_bind_owned_source(session *instance, uint32_t binding_owner,
     uint32_t index;
     volatile long *owner_counter;
     if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
-        thread_instance != NULL ||
+        session_thread_current() != NULL ||
         (owner_counter = session_binding_owner_counter(instance, binding_owner)) == NULL)
         return 0;
     _InterlockedIncrement(&instance->binding_count);
     _InterlockedIncrement(owner_counter);
-    thread_instance = instance;
+    (void)compat_host_context_bind(&instance->host_context);
     thread_binding_owner = binding_owner;
     if (binding_owner == SESSION_THREAD_BINDING_ORIGINAL_WORKER)
         session_record_original_worker_source(instance, source_name);
@@ -321,7 +311,7 @@ int session_thread_bind_owned_source(session *instance, uint32_t binding_owner,
                         instance->thread_hooks[index].context))
                     return 0;
             }
-            thread_instance = NULL;
+            (void)compat_host_context_unbind(&instance->host_context);
             thread_binding_owner = SESSION_THREAD_BINDING_UNSPECIFIED;
             _InterlockedDecrement(owner_counter);
             _InterlockedDecrement(&instance->binding_count);
@@ -346,14 +336,14 @@ int session_thread_unbind(session *instance)
 {
     uint32_t index;
     volatile long *owner_counter;
-    if (instance == NULL || thread_instance != instance) return 0;
+    if (instance == NULL || session_thread_current() != instance) return 0;
     owner_counter = session_binding_owner_counter(instance, thread_binding_owner);
     if (owner_counter == NULL) return 0;
     for (index = instance->thread_hook_count; index != 0u; --index) {
         session_thread_hook *hook = &instance->thread_hooks[index - 1u];
         if (!hook->unbind(hook->context)) return 0;
     }
-    thread_instance = NULL;
+    (void)compat_host_context_unbind(&instance->host_context);
     thread_binding_owner = SESSION_THREAD_BINDING_UNSPECIFIED;
     _InterlockedDecrement(owner_counter);
     _InterlockedDecrement(&instance->binding_count);
@@ -363,7 +353,7 @@ int session_thread_unbind(session *instance)
 int session_thread_finish(session *instance)
 {
     int result = 0;
-    if (instance == NULL || thread_instance != instance || thread_finishing)
+    if (instance == NULL || session_thread_current() != instance || thread_finishing)
         return 0;
     thread_finishing = 1;
     __try {
@@ -381,7 +371,9 @@ int session_thread_is_finishing(void)
 
 session *session_thread_current(void)
 {
-    return thread_instance;
+    compat_host_context *context = compat_host_context_current();
+    return context == NULL ? NULL :
+        (session *)((char *)context - offsetof(session, host_context));
 }
 
 int session_binding_diagnostic_snapshot(const session *instance,
@@ -405,7 +397,7 @@ int session_binding_diagnostic_snapshot(const session *instance,
 int session_arm_termination_escape(session *instance)
 {
     if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
-        thread_instance != instance || instance->termination_armed != 0u ||
+        session_thread_current() != instance || instance->termination_armed != 0u ||
         thread_termination_escape != NULL)
         return 0;
     thread_termination_escape = instance;
@@ -424,13 +416,14 @@ void session_disarm_termination_escape(session *instance)
 
 int session_terminate_current(uint32_t completion_code)
 {
-    session *instance = thread_instance;
+    session *instance = session_thread_current();
     if (instance != thread_termination_escape ||
         !session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
         instance->termination_armed == 0u)
         return 0;
     instance->completion_code = completion_code;
     instance->state = SESSION_STATE_COMPLETED;
+    instance->host_context.registration_open = 0;
     longjmp(instance->termination_escape, 1);
 }
 

@@ -1,11 +1,11 @@
-#include "mvdm_softpc_physical_mapping.h"
+#include "include/physical_mapping_host.h"
 
 #include <stdlib.h>
 
-#include "ntvdm-exe/session/session.h"
+#include "include/host_context.h"
 
 typedef struct physical_mapping_record {
-    session *owner;
+    compat_host_context *owner;
     uintptr_t normal_base;
     uint32_t page_count;
     uint32_t *pages;
@@ -13,7 +13,7 @@ typedef struct physical_mapping_record {
 } physical_mapping_record;
 
 typedef struct physical_alias_record {
-    session *owner;
+    compat_host_context *owner;
     uint32_t destination_base;
     uint32_t source_base;
     uint32_t byte_count;
@@ -23,7 +23,7 @@ typedef struct physical_alias_record {
 static physical_mapping_record *records;
 static physical_alias_record *aliases;
 
-static physical_mapping_record *find_owner(session *owner)
+static physical_mapping_record *find_owner(compat_host_context *owner)
 {
     physical_mapping_record *record;
     for (record = records; record != NULL; record = record->next)
@@ -65,7 +65,7 @@ static int page_span(uint32_t page, uint32_t count, uint32_t *base_out,
 
 static void release_owner(void *context)
 {
-    session *owner = (session *)context;
+    compat_host_context *owner = (compat_host_context *)context;
     physical_mapping_record *record = records;
     while (record != NULL) {
         physical_mapping_record *next = record->next;
@@ -90,9 +90,9 @@ static void release_owner(void *context)
  * not an extra protocol imposed on VdmAddVirtualMemory callers. */
 int mvdm_softpc_physical_mapping_initialize(void *normal_base, uint32_t size)
 {
-    session *owner = session_thread_current();
+    compat_host_context *owner = compat_host_context_current();
     physical_mapping_record *record;
-    if (owner == NULL || !session_valid(owner) || normal_base == NULL ||
+    if (!compat_host_context_valid(owner) || normal_base == NULL ||
         size == 0 || (size & 4095u) != 0 || find_owner(owner) != NULL)
         return 0;
     record = (physical_mapping_record *)calloc(1, sizeof(*record));
@@ -102,7 +102,7 @@ int mvdm_softpc_physical_mapping_initialize(void *normal_base, uint32_t size)
     record->owner = owner;
     record->normal_base = (uintptr_t)normal_base;
     record->page_count = size >> 12;
-    if (!session_register_teardown(owner, release_owner, owner)) {
+    if (!compat_host_context_register(owner, release_owner, owner)) {
         free(record->pages);
         free(record);
         return 0;
@@ -115,14 +115,14 @@ int mvdm_softpc_physical_mapping_initialize(void *normal_base, uint32_t size)
 
 void mvdm_softpc_physical_mapping_release(void)
 {
-    session *owner = session_thread_current();
+    compat_host_context *owner = compat_host_context_current();
     if (owner != NULL) release_owner(owner);
 }
 
 int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
     uint32_t page_count)
 {
-    session *owner = session_thread_current();
+    compat_host_context *owner = compat_host_context_current();
     physical_alias_record *record;
     physical_mapping_record *mapping;
     uint32_t destination_base;
@@ -131,7 +131,7 @@ int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
     int teardown_registered = 0;
 
 
-    if (owner == NULL || !session_valid(owner) ||
+    if (!compat_host_context_valid(owner) ||
         !page_span(dos_intel_page, page_count, &destination_base, &byte_count) ||
         !page_span(vdm_intel_page, page_count, &source_base, NULL))
         return (int32_t)0xc000000du; /* STATUS_INVALID_PARAMETER */
@@ -166,7 +166,7 @@ int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
     record->next = aliases;
     aliases = record;
     if (!teardown_registered &&
-        !session_register_teardown(owner, release_owner, owner)) {
+        !compat_host_context_register(owner, release_owner, owner)) {
         remove_alias(record);
         return (int32_t)0xc0000001u; /* STATUS_UNSUCCESSFUL */
     }
@@ -176,12 +176,12 @@ int32_t VdmMapDosMemory(uint32_t dos_intel_page, uint32_t vdm_intel_page,
 
 int32_t VdmUnmapDosMemory(uint32_t dos_intel_page, uint32_t page_count)
 {
-    session *owner = session_thread_current();
+    compat_host_context *owner = compat_host_context_current();
     physical_alias_record *record;
     uint32_t destination_base;
     uint32_t byte_count;
 
-    if (owner == NULL || !session_valid(owner) ||
+    if (!compat_host_context_valid(owner) ||
         !page_span(dos_intel_page, page_count, &destination_base, &byte_count))
         return (int32_t)0xc000000du; /* STATUS_INVALID_PARAMETER */
     for (record = aliases; record != NULL; record = record->next) {
@@ -199,7 +199,7 @@ int32_t VdmUnmapDosMemory(uint32_t dos_intel_page, uint32_t page_count)
 int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
     uint32_t *translated_address_out)
 {
-    session *owner;
+    compat_host_context *owner;
     physical_alias_record *record;
 
     if (translated_address_out != NULL) *translated_address_out = intel_address;
@@ -208,8 +208,8 @@ int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
      * lookup still uses every original owner/session/range check below. */
     if (aliases == NULL || translated_address_out == NULL)
         return 0;
-    owner = session_thread_current();
-    if (owner == NULL || !session_valid(owner))
+    owner = compat_host_context_current();
+    if (!compat_host_context_valid(owner))
         return 0;
     for (record = aliases; record != NULL; record = record->next) {
         uint32_t offset;
@@ -227,7 +227,7 @@ int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
 int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
     uint8_t **host_byte_out)
 {
-    physical_mapping_record *record = find_owner(session_thread_current());
+    physical_mapping_record *record = find_owner(compat_host_context_current());
     uint32_t host;
     if (host_byte_out != NULL) *host_byte_out = NULL;
     if (record == NULL || host_byte_out == NULL ||
@@ -242,11 +242,11 @@ int mvdm_softpc_physical_mapping_resolve(uint32_t intel_address,
 int mvdm_softpc_physical_mapping_span_is_aliased(uint32_t intel_address,
     uint32_t byte_count)
 {
-    session *owner = session_thread_current();
+    compat_host_context *owner = compat_host_context_current();
     physical_alias_record *record;
     uint32_t end;
 
-    if (owner == NULL || !session_valid(owner) || byte_count == 0u ||
+    if (!compat_host_context_valid(owner) || byte_count == 0u ||
         byte_count > UINT32_MAX - intel_address) return 0;
     end = intel_address + byte_count;
     for (record = aliases; record != NULL; record = record->next) {
@@ -268,7 +268,7 @@ int mvdm_softpc_physical_mapping_span_is_aliased(uint32_t intel_address,
 void VdmSetPhysRecStructs(uint32_t host_address, uint32_t intel_address,
     uint32_t byte_count)
 {
-    physical_mapping_record *record = find_owner(session_thread_current());
+    physical_mapping_record *record = find_owner(compat_host_context_current());
     uint32_t first = intel_address >> 12, count = byte_count >> 12, i;
     int normal;
 

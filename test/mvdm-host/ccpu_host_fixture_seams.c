@@ -13,18 +13,6 @@
 #include "ntvdm-exe/softpc/include/mvdm_vm_bridge.h"
 #include "ntvdm-exe/softpc/include/mvdm_vm_ingress.h"
 
-/* These executables bypass worker startup. Install the same immutable mapping
- * capability before any fixture main; do not create sessions or mappings here. */
-extern int ntvdm_physical_mapping_initialize(void);
-static void __cdecl initialize_mapping_services(void)
-{
-    if (!ntvdm_physical_mapping_initialize()) ExitProcess(GetLastError());
-}
-#pragma section(".CRT$XCU", read)
-__declspec(allocate(".CRT$XCU"))
-static void (__cdecl *const mapping_services_initializer)(void) =
-    initialize_mapping_services;
-
 /* CPU-only fixtures cannot reach a broker or frontend. Keep new adapter
  * imports fail-closed, just like ExitVDM below; do not connect real products. */
 static DWORD unexpected_broker(void)

@@ -32,7 +32,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 
 $sources = @(
     'src/ntvdm-exe/session/guest_memory_lease.c',
-    'src/ntvdm-exe/session/session.c',
+    'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/common/worker-thread/bridge.c',
     'src/compat/mvdm_softpc_event_thread.c',
     'test/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c',

@@ -38,11 +38,12 @@ rule link
   description = LINK `$out
 build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
+build obj/host_context.obj: cc `$root/src/compat/host_context.c
 build obj/mvdm_softpc_guest_memory.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c
 build obj/wow_callback_frame_lease.obj: cc `$root/src/wow32-dll/source/wow_callback_frame_lease.c
 build obj/opennt_support_rtl.obj: cc `$root/src/compat/opennt_support_rtl.c
 build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/wow/t335_s3_wow_callback_frame_lease_fixture.c
-build bin/t335-s3-wow-callback-frame-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/mvdm_softpc_guest_memory.obj obj/wow_callback_frame_lease.obj obj/opennt_support_rtl.obj obj/fixture.obj
+build bin/t335-s3-wow-callback-frame-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/host_context.obj obj/mvdm_softpc_guest_memory.obj obj/wow_callback_frame_lease.obj obj/opennt_support_rtl.obj obj/fixture.obj
 default bin/t335-s3-wow-callback-frame-fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

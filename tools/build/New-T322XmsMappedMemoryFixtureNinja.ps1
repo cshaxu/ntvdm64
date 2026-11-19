@@ -40,7 +40,7 @@ $sources = @(
     'src/ntvdm-exe/softpc/mvdm_xms_memory.c',
     'src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c',
     'src/ntvdm-exe/session/guest_memory_lease.c',
-    'src/ntvdm-exe/session/session.c'
+    'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c'
 )
 $cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DCPU_40_STYLE ' +
     '/FI ' + $root + '/src/non-mvdm/public/sdk/inc/nt.h ' +

@@ -2,7 +2,7 @@
  * Keep the prior mapping/observation matrix and add the complete inactive
  * alias predicate, nonempty owner separation and a non-gating microbenchmark. */
 #define main physical_observation_contract
-#include "physical_mapping_observation_test.c"
+#include "../compat/physical_mapping_test.c"
 #undef main
 
 static int unchanged(uint32_t address)
@@ -21,7 +21,7 @@ int main(void)
     const uint32_t probes[] = {0u, 0xfffffu, 0x100000u, 0x101fffu,
         0x102000u, 0x7fffffffu, UINT32_MAX};
     session first, second;
-    uint32_t output, magic, i, invalid = 0;
+    uint32_t output, cleanup_count, i, invalid = 0;
     LARGE_INTEGER start, stop, frequency;
     CHECK(physical_observation_contract(1, NULL) == 0);
     for (i = 0; i < sizeof(probes) / sizeof(probes[0]); ++i)
@@ -31,14 +31,18 @@ int main(void)
     CHECK(session_thread_bind(&first));
     for (i = 0; i < sizeof(probes) / sizeof(probes[0]); ++i)
         CHECK(unchanged(probes[i]) == 0);
-    magic = first.magic;first.magic = 0;
-    CHECK(unchanged(0x100000u) == 0);first.magic = magic;
+    cleanup_count = first.host_context.cleanup_count;
+    first.host_context.cleanup_count = COMPAT_HOST_CLEANUP_LIMIT + 1u;
+    CHECK(unchanged(0x100000u) == 0);
+    first.host_context.cleanup_count = cleanup_count;
     CHECK(VdmMapDosMemory(0x100u, 0x200u, 2u) == 0);
     CHECK(unchanged(0xfffffu) == 0 && unchanged(0x102000u) == 0);
     CHECK(mvdm_softpc_physical_mapping_translate(0x100000u, &output) && output == 0x200000u);
     CHECK(mvdm_softpc_physical_mapping_translate(0x101fffu, &output) && output == 0x201fffu);
-    magic = first.magic;first.magic = 0;
-    CHECK(unchanged(0x100000u) == 0);first.magic = magic;
+    cleanup_count = first.host_context.cleanup_count;
+    first.host_context.cleanup_count = COMPAT_HOST_CLEANUP_LIMIT + 1u;
+    CHECK(unchanged(0x100000u) == 0);
+    first.host_context.cleanup_count = cleanup_count;
     CHECK(session_thread_unbind(&first));
     CHECK(unchanged(0x100000u) == 0); /* Nonempty, no bound owner. */
     CHECK(session_thread_bind(&second));

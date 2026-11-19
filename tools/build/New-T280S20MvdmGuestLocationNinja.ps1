@@ -28,10 +28,11 @@ rule link
 
 build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
+build obj/host_context.obj: cc `$root/src/compat/host_context.c
 build obj/guest_location_binding.obj: cc `$root/src/compat/guest_location.c
 build obj/mvdm_guest_location.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_guest_location.c
 build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/softpc/t280_s20_mvdm_guest_location_fixture.c
-build mvdm_guest_location_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/mvdm_guest_location.obj obj/guest_location_binding.obj obj/fixture.obj
+build mvdm_guest_location_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/host_context.obj obj/mvdm_guest_location.obj obj/guest_location_binding.obj obj/fixture.obj
 default mvdm_guest_location_fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

@@ -13,6 +13,5 @@
 int mvdm_softpc_execution_run_until_return(session *owner);
 int ntvdm_dpmi_initialize(void);
 int ntvdm_vm_services_initialize(void);
-int ntvdm_physical_mapping_initialize(void);
 
 #endif

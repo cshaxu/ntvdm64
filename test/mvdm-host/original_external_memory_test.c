@@ -3,7 +3,7 @@
 #include <windows.h>
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_physical_mapping.h"
+#include "compat/include/physical_mapping_host.h"
 
 /* Link the formal CCPU40/nt_mem libraries, never replacement memory bodies. */
 extern void sas_init(uint32_t);

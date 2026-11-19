@@ -1404,3 +1404,8 @@ the pinned source intersection, compatibility findings and generic-test plan.
 [T483 implementation migration plan](operations/t483-compat-implementation-migration-plan.md)
 records the owner-approved actual implementation descent into compat and the
 revised S13-S19 sequence, superseding the old residual allocation.
+
+[T483 S13 implementation closure](evidence/m0-t483-s13-implementation-closure.md)
+records the actual physical-mapping descent, binding/lifetime verification
+and dual publication, with the remaining implementation migration assigned
+to the sequential successor packets.
