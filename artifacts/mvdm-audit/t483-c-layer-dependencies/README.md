@@ -167,3 +167,5 @@ P23: [redirector memory and WOW registry token ownership](s12-p23-redir-wow-bind
 P24: [WOW precompiled-header ownership and native ordinal](s12-p24-wow-precomp.json).
 
 P25: [GDI alias compatibility ownership and publication](s12-p25-gdi-alias.json).
+
+P26: [WOW callback/message unwind and native-dialog ownership](s12-p26-wow-unwind-ownership.json).

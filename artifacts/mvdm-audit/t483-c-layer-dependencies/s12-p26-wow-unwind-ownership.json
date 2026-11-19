@@ -1,0 +1,90 @@
+{
+  "baseline": "7571c22291812c24c7971f306cd5a87be17c244d",
+  "question": "Classify all direct outward headers in files038-040 by actual uses and complete provider ownership; distinguish plain platform adaptation from WOW unwind/handoff.",
+  "procedure": "Read complete selected headers/providers, relevant original and current call bodies, actual F wrapper, worker-active provider and build forced-include selection; inspect existing fixture assertions as future verification requirements, not passing evidence.",
+  "files": [
+    {
+      "number": 38,
+      "file": "src/mvdm-host/wow32/wcall16.c",
+      "ids": [
+        "C0075"
+      ],
+      "actualUse": "Only wow_callback_control plus capture/restore, not acquire/release memory leases from the same header.",
+      "chain": "F CallBack16 enters callback/resource scope -> C wow_original_CallBack16 saves TD fields and captures CCPU control -> host_simulate -> C finally restores on abnormal termination -> F wow_task_callback_leave.",
+      "ownership": "CCPU owns architectural state; original TD owns callback-stack fields; F session_thread_current/state determines whether restoration may touch the abandoned execution.",
+      "disposition": "S13: use existing F CallBack16 wrapper as candidate owner for abnormal control/TD restoration; preserve capture after scope entry and restoration before callback_leave. Do not move mixed header into B or remove restoration based on the lease-oriented filename.",
+      "proofLimit": "Existing abort fixtures describe control reload against current GDT and terminal no-touch behavior. This review did not execute them or prove the proposed migration equivalent."
+    },
+    {
+      "number": 39,
+      "file": "src/mvdm-host/wow32/wcntl32.c",
+      "ids": [
+        "C0110"
+      ],
+      "actualUse": "wow_message_heap32 records successful original malloc16 result in WM32MSGPARAMEX.dwTmp[1]; wow_message_release32 consumes recorded tokens through original free16 and worker-active check.",
+      "chain": "Original message converter allocation -> capture token -> original copyback/unthunk -> shared release; outer exception cleanup shares the same captured token.",
+      "ownership": "C owns converters, allocation and message scratch; F currently supplies exception/lifetime completion around these C-owned records.",
+      "disposition": "S13: audit allocation/completion and outer unwind together; do not remove normal release tracking alone and leave exception completion able to free the same key. Provider cannot move wholesale into B because it calls C allocators and interprets original C message layouts.",
+      "proofLimit": "Compared original WM32EMGetRect/WM32EMSetRect malloc16/free16 with current calls. This proves structural coupling, not that every adaptation is minimal or must remain."
+    },
+    {
+      "number": 40,
+      "file": "src/mvdm-host/wow32/wcommdlg.c",
+      "ids": [
+        "C0110",
+        "C0083"
+      ],
+      "actualUse": "Message scratch/stack cleanup in CommonDialogProc and SHAREVIOLATION; forced SDK-name bindings for seven common-dialog calls.",
+      "chain": "C conversion -> F native-dialog wrapper -> wow_user_native_call_begin -> native API -> end/end_no_publication; conversion callback finalizer separately unwinds call scratch and callback stack.",
+      "ownership": "C retains COMMDLGTD and original argument/output conversion. F runtime binding manages execution ownership, native callback return and publication.",
+      "disposition": "S13: treat message cleanup with file039 and native leaves with the existing runtime handoff boundary. No wholesale B move or direct API substitution without preserving handoff; keep original conversion in C.",
+      "proofLimit": "Source and generator prove forced binding reaches wcommdlg; native_call_begin may xxxSleepTask/leave runtime, end reenters/yields/publishes. No new common-dialog or guest runtime test claimed."
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10,
+    "proof": "No production source, build generator, mirror, error or line directive changed."
+  },
+  "progress": {
+    "reviewedFiles": 40,
+    "clearedDirectHeaderFiles": 10,
+    "deferredLifecycleFiles": 24,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 76,
+    "totalFiles": 116,
+    "openIds": 520,
+    "totalIds": 617
+  },
+  "validation": {
+    "kind": "source review only",
+    "build": "Not run: no source/build changes.",
+    "runtime": "Not run; existing fixtures were read only.",
+    "publication": "Unchanged P25 package 737038e1-abbf-4353-b808-cab8019238f4.",
+    "documentation": "PASS: documentation governance and links, git diff --check.",
+    "documentationPid": 10376,
+    "documentationLog": "build\\t483-s12-wow-unwind-review\\docs.log",
+    "documentationLogSha256": "cfd597275399951ea25568faae268fe21175399ca22c178221c702249af14d45"
+  },
+  "followup": "S13 must design and verify full cleanup boundaries. Classification is not approval of permanent layering exceptions or proof that existing diff is minimal.",
+  "inputsSha256": {
+    "src/mvdm-host/wow32/wcall16.c": "ebec54988f77dc3d6e72145603d85241ddffa383b9d00b1c8010d2e5195c2ecf",
+    "src/mvdm-host/wow32/wcntl32.c": "584255ed1ad8119029647d26020ffad0a6112d8e213fd5ede60356175008f123",
+    "src/mvdm-host/wow32/wcommdlg.c": "faa4d21e2f0350855729e8457ea554ef8b0ed03dc4d2d4441ea773d2e367b625",
+    "src/wow32-dll/include/wow_callback_frame_lease.h": "9068eb5b7d5276a8433c1b55a057888736398708f8f31d0268d85d32ac3e1c79",
+    "src/wow32-dll/source/wow_callback_frame_lease.c": "bffc0b9b7836a78f19df2e5e764a2aae8fb66a33bd2ed1e1ee6a2e7ce344908e",
+    "src/wow32-dll/source/wow_user_native_extension.c": "d0dc0dfb97303e3f53344c24d0f3283a0ed5e28d638f93c0902014f010d25d37",
+    "src/ntvdm-exe/wow/wow_user_session_binding.c": "97b35a96c4c406b703e72f46ea49a8e89bd8add8a04977e5f5336d447f1eb660",
+    "src/wow32-dll/source/wow_message_lifetime.c": "a5b966ab4c8cbf2122665efba4679153fd1ba81c2ce6da585f695a94f8d4c72e",
+    "src/wow32-dll/source/wow_common_dialog_calls.c": "4373dd6bad1f4b3a1a517f450c327d997c5169d66ecad9f157e5c2417b52c702",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "eeb9751ae4e2d8bc3fdfaee737fc874771be349ffba46ae77fe20d879f15cd2a",
+    "test/mvdm-host/wow_callback_abort_ccpu_fixture.c": "b04718d67b4e9532440dada93bcdb2f63e724aecc5df8853666668aafd02d96b",
+    "test/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c": "a03f3774ffc38a8c242bf8be594a6be630bba39fb79439d6f0997f3c9a9cf13b",
+    "test/observation/verify-wow-message-construction.ps1": "a37d24d76b156e980dd9d7fe4f4124a6685d80f67242d6e554bfe5fd58d1929c",
+    "O:/repos.external/OpenNT/base/mvdm/wow32/wcall16.c": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+    "O:/repos.external/OpenNT/base/mvdm/wow32/wcntl32.c": "36c8cb9a46f13998d0459bc4869dc6dd4191423c0429a7335ebd26f68c804b59"
+  }
+}

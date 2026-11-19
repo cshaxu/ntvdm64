@@ -263,14 +263,20 @@
 
 - 直接包含 · C0075 · wow32-dll · src/wow32-dll/include/wow_callback_frame_lease.h
 
+038 P26：wcall16 实际仅用 control capture/restore，并未用该头的内存租约。CCPU/TD恢复与F worker存活、callback scope的退栈有时序约束；S13以现有F CallBack16包装为承接候选，恢复必须先于callback_leave。 本文件未修改，镜像净变0点、0行，依赖保持开放；详见s12-p26-wow-unwind-ownership.json。仅源码审查，不宣称运行通过。
+
 ## 039 — src/mvdm-host/wow32/wcntl32.c
 
 - 直接包含 · C0110 · wow32-dll · src/wow32-dll/include/wow_message_lifetime.h
+
+039 P26：wcntl32原版分配/转换仍在C；F helper记录dwTmp[1]并供正常和异常清理共同消费，且调用原版free16。S13成组处理捕获、正常释放、异常释放，不整体搬B，也不只移除正常路径记录。 本文件未修改，镜像净变0点、0行，依赖保持开放；详见s12-p26-wow-unwind-ownership.json。仅源码审查，不宣称运行通过。
 
 ## 040 — src/mvdm-host/wow32/wcommdlg.c
 
 - 直接包含 · C0110 · wow32-dll · src/wow32-dll/include/wow_message_lifetime.h
 - 强制包含 · C0083 · wow32-dll · src/wow32-dll/include/wow_common_dialog_calls.h
+
+040 P26：wcommdlg同时有消息/回调栈清理和七个原生对话框调用绑定。后者实际交还/重获WOW执行权并恢复返回状态，不是纯SDK转发。S13拆分产品接线，原版转换仍留C。 本文件未修改，镜像净变0点、0行，依赖保持开放；详见s12-p26-wow-unwind-ownership.json。仅源码审查，不宣称运行通过。
 
 ## 041 — src/mvdm-host/wow32/wdde.c
 
