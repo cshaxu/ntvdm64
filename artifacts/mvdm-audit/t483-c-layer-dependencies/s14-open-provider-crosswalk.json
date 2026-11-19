@@ -1,17 +1,17 @@
 {
   "baseline": "d676f1150",
   "kind": "open-dependency-to-provider-crosswalk-not-closure",
-  "source_ledger_sha256": "75941c58b89905e88f5ef8142dd26ee41008ef7ef5fbdc65fd271cbc2b057b6b",
-  "method": "Group every existing open record by exact target; attach only explicit complete-body coverage from the WOW record. Absence of that coverage does not erase other historical research. No status promotion, new IDs or dependency rescan.",
+  "source_ledger_sha256": "ab67578f8da9a1af05d38137044e238266d643957a8e165f7b091870c4ba7e18",
+  "method": "Group every existing open record by exact target; attach only explicit complete-body coverage from the WOW record. Absence of that coverage does not erase other historical research. Original crosswalk did not promote statuses or rescan dependencies; P56 separately reconciles the previously removed C0048.",
   "summary": {
-    "open_records": 418,
+    "open_records": 417,
     "kinds": {
-      "header": 60,
+      "header": 59,
       "image-import": 1,
       "include-root": 12,
       "symbol": 345
     },
-    "target_groups": 152,
+    "target_groups": 151,
     "symbol_provider_files": 79,
     "wow_reviewed_bodies": 59,
     "symbol_provider_files_with_wow_body_review": 51,
@@ -529,20 +529,6 @@
       "sha256": "0bcb56eeca450d4eb1dadcf8319eacd5700f45bdd2960bfd30c39f628749fa56",
       "ids": [
         "C0045"
-      ],
-      "kinds": {
-        "header": 1
-      },
-      "symbols": [],
-      "wow_body_review": "not-covered-by-wow-body-record",
-      "review_evidence": null,
-      "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
-    },
-    {
-      "path": "src/ntvdm-exe/softpc/include/mvdm_xms_memory.h",
-      "sha256": null,
-      "ids": [
-        "C0048"
       ],
       "kinds": {
         "header": 1
@@ -3995,5 +3981,6 @@
       "review_evidence": "s14-wow-resource-callback-ownership.md",
       "implementation_disposition": "open; complete chain, destination, mirror cost and final verification still required"
     }
-  ]
+  ],
+  "reconciliation": "P56 removes C0048, already eliminated by P25; see s14-p56-xms-header-reconciliation.json."
 }

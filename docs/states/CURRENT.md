@@ -239,3 +239,7 @@ The owner accepted [A and B cleanup](../etc/evidence/m0-t483-s11-layer-boundarie
 ## Recent Governance
 
 Each file entry and exit reports both file and whole-audit totals. The unrelated [TODO](TODO.md) remains separate. The active goal is not complete; S13 implementation and S14 remain.
+
+P56 [XMS header reconciliation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p56-xms-header-reconciliation.json) corrects C0048, removed in P25 but omitted from ledger closure.
+Current counts supersede the historical figures above:151 eliminated/417 open of618;
+open coverage is345 symbols,59 headers,12 roots and1 image import. No product change.

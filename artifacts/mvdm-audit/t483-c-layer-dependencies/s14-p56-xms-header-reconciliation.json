@@ -1,0 +1,53 @@
+{
+  "delivery": "T483 S14 P56",
+  "kind": "ledger-correction-no-production-change",
+  "baseline": "7011ad252",
+  "question": "Does C0048 still represent a C-to-F header dependency?",
+  "inputs": {
+    "removal_commit": "96033ed479a0881b8c198496b0c4ce84e175c705",
+    "removed_header": "src/ntvdm-exe/softpc/include/mvdm_xms_memory.h",
+    "caller": "src/mvdm-host/xms.486/xmsblock.c",
+    "caller_sha256": "0ef45fb9d0737cf0bdd50c126b8fa183f9b70c63c731533a16c2553823c5fd6e",
+    "delivery_evidence": "s14-p25-xms-owner-delivery.json"
+  },
+  "procedure": [
+    "Inspect P25 deletion and current caller includes.",
+    "Search src, tools/build, tools/audit and test for removed header spelling: no matches.",
+    "Check all 60 open header targets: C0048 alone missing.",
+    "Read existing selected x86 worker Ninja dependency record; no compilation performed."
+  ],
+  "compile_dependency_record": [
+    {
+      "graph": "x86/worker",
+      "object": "obj/xms/xmsblock.obj",
+      "deps_sha256": "c68e50a8227b9e0075d1ec6a7a2430b4c044ce5fa74d7fadd15263763081154d",
+      "record": [
+        "obj/xms/xmsblock.obj: #deps 19, deps mtime 8168162218729373 (VALID)",
+        "    ../../../../src/compat/include/guest_memory_access.h"
+      ],
+      "removed_header_present": false,
+      "guest_access_header_present": true
+    }
+  ],
+  "conclusion": "C0048 eliminated in P25; its ledger status was omitted. Correct accounting only, not a new implementation migration.",
+  "counts": {
+    "excluded-diagnostic": 1,
+    "open": 417,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 151
+  },
+  "total": 618,
+  "remaining_open_kinds": {
+    "header": 59,
+    "image-import": 1,
+    "include-root": 12,
+    "symbol": 345
+  },
+  "limitations": [
+    "Existing dependency record is compilation evidence, not a new runtime test.",
+    "Generic termination still reaches outer lifecycle policy.",
+    "B guest-memory access still has C lease callbacks; no claim of whole-chain independence."
+  ],
+  "follow_up": "Complete remaining header/include-root ownership design before production relocation."
+}
