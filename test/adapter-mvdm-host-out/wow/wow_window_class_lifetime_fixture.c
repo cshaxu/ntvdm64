@@ -298,6 +298,21 @@ int __cdecl main(void)
     CHECK(wow_user_set_window_longA(window, GWL_USERDATA, 77) == 0);
     CHECK(GetWindowLongA(window, GWL_USERDATA) == 77);
     CHECK(wow_user_get_window_longA(window, GWL_USERDATA) == 77);
+    /* Public style reads must not require or mutate WOW-private state. */
+    {
+        HWND targets[2] = { window, NULL };
+        unsigned n;
+        for (n = 0; n != 2; ++n) {
+            LONG expected, actual;
+            DWORD error;
+            SetLastError(0x1234);
+            expected = GetWindowLongA(targets[n], GWL_STYLE);
+            error = GetLastError();
+            SetLastError(0x1234);
+            actual = wow_user_get_window_longA(targets[n], GWL_STYLE);
+            CHECK(actual == expected && GetLastError() == error);
+        }
+    }
     CHECK(wow_user_get_class_longA(window, GCW_ATOM) == atom);
     CHECK(!wow_user_borrow_enter(&outer) && GetLastError() == ERROR_ALREADY_EXISTS);
     CHECK(wow_user_borrow_enter(&inner));

@@ -429,6 +429,9 @@ foreach ($source in $sources) {
         $ninja.Add('  cflags = $wow_cflags /DWOWSysErrorBox=wow_user_sys_error_box')
     } elseif ($source -eq 'wkman.c') {
         $ninja.Add('  cflags = $wow_cflags /DWOW_NATIVE_PROCESS_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_native_process.h')) + '"')
+    } elseif ($source -eq 'wstruc.c') {
+        # Structure conversion reads public GWL_STYLE, not WOW-private words.
+        $ninja.Add('  cflags = $cflags')
     } elseif ($source -eq 'wudlg.c') {
         $ninja.Add('  cflags = $wow_cflags /DWOWSysErrorBox=wow_user_sys_error_box')
     } elseif ($source -eq 'wkfileio.c') {

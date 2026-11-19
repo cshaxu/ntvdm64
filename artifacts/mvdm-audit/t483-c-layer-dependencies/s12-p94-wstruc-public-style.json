@@ -1,0 +1,400 @@
+{
+  "baseline": "47fe4bb7fc824b097382556987aea02a7bc201d2",
+  "files": [
+    {
+      "order": 61,
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "decision": "Keep original Winsock conversions and blocking hook C. Real flush at558 (template comment131 is not a call); CallBack16 at867 and message pump886/894 enter F callback/lifecycle scopes, S13; C0456 mapping/ABI pairing S14.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        },
+        {
+          "id": "C0481",
+          "symbols": [
+            "_CallBack16@16"
+          ],
+          "providers": [
+            "0001:0006f650       _CallBack16@16             10070650 f   wow_user_native_extension.obj"
+          ]
+        },
+        {
+          "id": "C0501",
+          "symbols": [
+            "_wow_user_peek_messageA@20"
+          ],
+          "providers": [
+            "0001:000741b0       _wow_user_peek_messageA@20 100751b0 f   wow_user_registration_bridge.obj"
+          ]
+        },
+        {
+          "id": "C0521",
+          "symbols": [
+            "_wow_native_DispatchMessageA@4"
+          ],
+          "providers": [
+            "0001:00061750       _wow_native_DispatchMessageA@4 10062750 f   wow_user_task_lifecycle.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wsext.obj",
+      "sha256": "88b1e3a3e3d91f446fdca813186e932260a7c65b59b4942e2768875fb3011b76",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 62,
+      "path": "src/mvdm-host/wow32/wsraw.c",
+      "decision": "Keep original socket option, address, fd-set and receive conversions C. Real flushes at639,640,745,785,886,1266,1276,1286,2091,2099,2233; C0456 mapping/ABI pairing S14; template comment not counted.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wsraw.obj",
+      "sha256": "fdcca0f6ee4b96bad94b387b9f48aaa6a6b0c15c69c55ef1fba062f267fe554d",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 63,
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "decision": "Remove unnecessary WOW_ORIGINAL_THUNK_BUILD for this source only. Original getmeasureitem16 uses GetWindowLong only for GWL_STYLE at529/533, now native USER32 directly. All other undefined symbols unchanged. Original structure conversion and C0456 remain C/S14.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        },
+        {
+          "id": "C0492",
+          "status": "this caller edge eliminated; stable ID remains open elsewhere",
+          "replacement": "__imp__GetWindowLongA@8"
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wstruc.obj",
+      "sha256": "b1dc5bfd8a3188d8128df63391929663dc616a14754d7c6797020d8a68508d9e",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 64,
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "decision": "Keep original subclass class-check and thunk-list algorithms C. Same-process check163 reaches F full/short HWND discovery under owned runtime; S13 scoped identity group. Flush241 and codeflush263 remain C0456 S14.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        },
+        {
+          "id": "C0479",
+          "symbols": [
+            "_wow_native_GetWindowThreadProcessId@8"
+          ],
+          "providers": [
+            "0001:00058d50       _wow_native_GetWindowThreadProcessId@8 10059d50 f   wow_user_discovery.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wsubcls.obj",
+      "sha256": "15c1826c1ceccf5f179391fe22c61740dd6614b81f48fa27721747bcbaef60c5",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 65,
+      "path": "src/mvdm-host/wow32/wucaret.c",
+      "decision": "Keep original five caret thunks C. F native-call wrappers perform paired execution scope/runtime release and restoration, with nullable HWND rules for Hide/Show. Not bare API leaf migration; group with S13 execution ownership. No claim that every existing yield policy is minimal.",
+      "bindings": [
+        {
+          "id": "C0513",
+          "symbols": [
+            "_wow_native_CreateCaret@16"
+          ],
+          "providers": [
+            "0001:00060e30       _wow_native_CreateCaret@16 10061e30 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0519",
+          "symbols": [
+            "_wow_native_DestroyCaret@0"
+          ],
+          "providers": [
+            "0001:00061560       _wow_native_DestroyCaret@0 10062560 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0545",
+          "symbols": [
+            "_wow_native_HideCaret@4"
+          ],
+          "providers": [
+            "0001:000631d0       _wow_native_HideCaret@4    100641d0 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0560",
+          "symbols": [
+            "_wow_native_SetCaretPos@8"
+          ],
+          "providers": [
+            "0001:00064150       _wow_native_SetCaretPos@8  10065150 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0577",
+          "symbols": [
+            "_wow_native_ShowCaret@4"
+          ],
+          "providers": [
+            "0001:00065610       _wow_native_ShowCaret@4    10066610 f   wow_user_task_lifecycle.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wucaret.obj",
+      "sha256": "2dc020d9ad2471a5448ba3df49c1643bc079a0e7c92d9d570a3aa55708c58821",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "change": {
+    "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+    "scope": "wstruc.c only, remove existing private-thunk selector",
+    "beforeUndefined": [
+      "@__security_check_cookie@4",
+      "_FindTimer16@12",
+      "_FindTimer32@8",
+      "_GetPModeVDMPointerAssert@4",
+      "_IntelMemoryBase",
+      "_Sim32FlushVDMPointer@16",
+      "_ThunkMsg16@4",
+      "_UnThunkWMMsg16@4",
+      "___security_cookie",
+      "__except_handler4",
+      "__imp__GetDlgItem@8",
+      "__imp__GetKeyState@4",
+      "_aw32Msg",
+      "_fWowMode",
+      "_malloc_w@4",
+      "_memcpy",
+      "_mvdm_wow_gdi_handle_from_native",
+      "_mvdm_wow_gdi_handle_to_native",
+      "_opennt_support_current_teb@0",
+      "_strncpy",
+      "_wow_user_get_window_longA@8"
+    ],
+    "afterUndefined": [
+      "@__security_check_cookie@4",
+      "_FindTimer16@12",
+      "_FindTimer32@8",
+      "_GetPModeVDMPointerAssert@4",
+      "_IntelMemoryBase",
+      "_Sim32FlushVDMPointer@16",
+      "_ThunkMsg16@4",
+      "_UnThunkWMMsg16@4",
+      "___security_cookie",
+      "__except_handler4",
+      "__imp__GetDlgItem@8",
+      "__imp__GetKeyState@4",
+      "__imp__GetWindowLongA@8",
+      "_aw32Msg",
+      "_fWowMode",
+      "_malloc_w@4",
+      "_memcpy",
+      "_mvdm_wow_gdi_handle_from_native",
+      "_mvdm_wow_gdi_handle_to_native",
+      "_opennt_support_current_teb@0",
+      "_strncpy"
+    ],
+    "removed": [
+      "_wow_user_get_window_longA@8"
+    ],
+    "added": [
+      "__imp__GetWindowLongA@8"
+    ],
+    "callerEdgesEliminated": 1,
+    "stableIdsEliminated": 0,
+    "authority": "Modern USER owns public style. C conversion retains HWND32/GetDlgItem and original guest reads. No added provider, ABI, state or mirror change.",
+    "proof": [
+      "wow_window_client_try_get_long rejects negative indices before private-state lookup.",
+      "GWL_STYLE is neither procedure nor WOW-private slot, so wow_user_get_window_longA delegates to wow_native_GetWindowLongA.",
+      "wow_native_GetWindowLongA only postprocesses GWL_HWNDPARENT, not GWL_STYLE.",
+      "Real compiler undefined-symbol comparison shows precisely one replacement; actual final product object rechecked."
+    ]
+  },
+  "verification": {
+    "buildExit": 0,
+    "targetedExit": 0,
+    "deliveryExit": 0,
+    "test": "test/observation/verify-wow-task-lifecycle.ps1 -Case class-lifetime",
+    "testScope": "Actual product owner objects; shared-class/lifetime plus valid and NULL HWND GWL_STYLE result/last-error equivalence. Not real Win16 interactive acceptance.",
+    "markers": [
+      "WOW_WINDOW_CLASS_SHARED_LIFETIME errors=0",
+      "WOW_FIXTURE_OK case=class-lifetime"
+    ],
+    "abGraphs": 8,
+    "normalizedIdentity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityRule": "Only package GUID and PE/debug timestamps masked; raw identity not claimed."
+  },
+  "publication": {
+    "package": "bb8e7d8b-4056-4596-beee-6af22730d319",
+    "verified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "9a18d3f57331fca94f49209cb96ded43efeaa01ddda46bec1e76f2459e8f95ab"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "92221921548cb5ba246523dc7ea929731dc2e5ecd33e39c9fdbc58b8d780a7bf"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "8cc0ed8942d09c1780ec7d91f34b30f95fecb3df5a7f801b987c1b62bda4c4b9"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "61c36f097d21899c371c492ef6538e5f00a5e06ff046b1ef9dc1d0e531970725"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "85319d80971ebd0f0a30c0bf9e541ff569dcc32256fcf439d1ccb973290ed891"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "564e358d6934461b27bb685b67f511a257b348e4857058d04ee24dcd419acd1a"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "4f68d80245002620e9ce8853bc32340889c791e6366279b43b23a0d0c5ab83b0"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "18e97f3f83a6dd5a9a7c53285a27e9ab4140417db73defc94e019653a24d511d"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "f97c06b233da7a92e90310804860bb8bb3c9b87ba4ee86abb21813fe046fbd49"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "85d54471857aab7456d2f0c7a1a30c4dff9e13cd75076cb2b3010569139d1296"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "6bc052f97ae0c4626ae2d0baeae3d4592880a054177a548e944bf290980ac453"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "9a18d3f57331fca94f49209cb96ded43efeaa01ddda46bec1e76f2459e8f95ab"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "92221921548cb5ba246523dc7ea929731dc2e5ecd33e39c9fdbc58b8d780a7bf"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "8cc0ed8942d09c1780ec7d91f34b30f95fecb3df5a7f801b987c1b62bda4c4b9"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "61c36f097d21899c371c492ef6538e5f00a5e06ff046b1ef9dc1d0e531970725"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "85319d80971ebd0f0a30c0bf9e541ff569dcc32256fcf439d1ccb973290ed891"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "564e358d6934461b27bb685b67f511a257b348e4857058d04ee24dcd419acd1a"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "4f68d80245002620e9ce8853bc32340889c791e6366279b43b23a0d0c5ab83b0"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "18e97f3f83a6dd5a9a7c53285a27e9ab4140417db73defc94e019653a24d511d"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "f97c06b233da7a92e90310804860bb8bb3c9b87ba4ee86abb21813fe046fbd49"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "85d54471857aab7456d2f0c7a1a30c4dff9e13cd75076cb2b3010569139d1296"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "6bc052f97ae0c4626ae2d0baeae3d4592880a054177a548e944bf290980ac453"
+      }
+    ]
+  },
+  "progress": {
+    "compileReviewed": 116,
+    "compileTotal": 116,
+    "linkOnlyReviewed": 65,
+    "linkOnlyTotal": 74,
+    "filesReviewed": 181,
+    "filesTotal": 190,
+    "remainingFiles": 9,
+    "total": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 484,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 84
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "S12 active. Remaining F callback/identity/execution cohorts assigned S13; mapping/flush contract S14. Classification is not elimination. Original guest untouched."
+}

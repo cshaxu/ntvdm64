@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P93: [GDI cache ownership delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p93-gdi-cache-ownership.json). Reviewed116/116 compile and60/74 link-only;484/618 IDs open,84 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Package78fc8d5b-3a2d-4145-8fb8-710896683d58 published to both destinations;22 hashes verified. Cached builds and8 A/B graphs passed; runtime omitted for byte-identical function relocation. S12 active.
+P94: [Public style binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p94-wstruc-public-style.json). Reviewed116/116 compile and65/74 link-only (181/190);484/618 IDs open,84 eliminated. One wstruc caller edge cleared; C0492 remains open elsewhere. Mirror delta0/0; cumulative reduction2 points/10 lines. Complete11 published to both destinations;22 hashes verified. Cached builds, focused lifecycle tests and8 A/B graphs passed. S12 active.
