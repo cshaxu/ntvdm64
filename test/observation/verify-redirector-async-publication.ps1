@@ -23,7 +23,7 @@ $sources = @('src/ntvdm-exe/redir/mvdm_redirector_async.c',
 $objects = @()
 foreach ($source in $sources) {
     $object = Join-Path $out ([IO.Path]::GetFileNameWithoutExtension($source) + '.obj')
-    & $wrapper cl /nologo /TC /c /MT /W4 /DWIN_32 /DVDMREDIR_DLL /DNTVDM /DCPU_40_STYLE /DCCPU "/I$root/src" "/I$root/src/ntvdm-exe/redir/include" "/I$root/src/ntvdm-exe/softpc/include" "/Fo$object" (Join-Path $root $source) 2>&1 |
+    & $wrapper cl /nologo /TC /c /MT /W4 /DWIN_32 /DVDMREDIR_DLL /DNTVDM /DCPU_40_STYLE /DCCPU "/I$root/src" "/I$root/src/ntvdm-exe/softpc/include" "/Fo$object" (Join-Path $root $source) 2>&1 |
         Tee-Object -FilePath (Join-Path $out 'build.txt') -Append
     if ($LASTEXITCODE -ne 0) { throw "Compile failed: $source" }
     $objects += $object

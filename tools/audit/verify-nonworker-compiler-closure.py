@@ -35,7 +35,7 @@ def inspect(graph_root: Path, inject: bool) -> int:
             deps[current].append(line.replace("\\", "/"))
     if inject:
         deps.setdefault("obj/nthook32/entry.obj", []).append(
-            "src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h")
+            "src/ntvdm-exe/softpc/include/mvdm_shadow_registry.h")
     total = 0
     for target in ("nthook32.dll", "VDMREDIR.dll"):
         stack = [target]

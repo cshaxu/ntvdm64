@@ -27,7 +27,7 @@
 
 ## Current Technical Baseline
 
-S12 starts with 598 open tracker IDs from the delivered S11 package.
+S12 P1 eliminated C0042, C0139 and C0143 in place. The worker build selects its historical terminate symbol name directly. The two unused private search directories have been removed from product and fixture generators. All eight production graphs covering eleven images passed the command check. The 27 async publication and 14 OEM assertions, original COM lifecycle, 98-object nonworker compiler closure and its injected negative control passed. Both cached architectures built. Both release manifests match package 7fe6d388-ad54-4952-a212-1abeefe9cb75. All executable sections match P7. Mirror block and line deltas are zero. Of 599 stable IDs, 544 remain open, 51 are supporting evidence, three eliminated and one excluded diagnostic. S12 remains active.
 
 ## Successor scopes
 

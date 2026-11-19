@@ -26,7 +26,6 @@ $include = @(
     'src\mvdm-host\softpc.new\base\inc',
     'src\mvdm-host\softpc.new\host\inc',
     'src\non-mvdm\public\sdk\inc',
-    'src\non-mvdm\public\sdk\inc',
     'src\non-mvdm\public\internal\base\inc',
     'src\non-mvdm\public\internal\windows\inc',
     'src\mvdm-host\inc',
@@ -36,8 +35,8 @@ $include = @(
 $compile = @(
     'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x86 >nul &&',
     'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',
-    '/FI "' + (Join-Path $repo 'src\compat\include\nt.h') + '"',
-    '/FI "' + (Join-Path $repo 'src\ntvdm-exe\softpc\include\mvdm_softpc_symbol_compat.h') + '"',
+    '/FI "' + (Join-Path $repo 'src\non-mvdm\public\sdk\inc\nt.h') + '"',
+    '/Dterminate=mvdm_softpc_terminate',
     ($include -join ' '),
     '"' + $fixture + '"',
     '/link /OPT:REF /OUT:"' + $exe + '" kernel32.lib user32.lib libcmt.lib libvcruntime.lib libucrt.lib'

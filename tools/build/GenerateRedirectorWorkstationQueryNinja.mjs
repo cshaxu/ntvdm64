@@ -17,7 +17,6 @@ const includeRoots = [
   "src/compat/include",
   "src/mvdm-host/inc",
   "src/mvdm-host/vdmredir",
-  "src/ntvdm-exe/redir/include",
   "src/vdmredir-dll/include",
   "src/mvdm-host/dos/command",
   "src/mvdm-host/softpc.new/base/inc",

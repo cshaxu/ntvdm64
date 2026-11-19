@@ -25,7 +25,7 @@ $inputs = $sources | ForEach-Object { Join-Path $root $_ }
 $objects = $sources | ForEach-Object {
     Join-Path $out ([IO.Path]::GetFileNameWithoutExtension($_) + '.obj')
 }
-& $wrapper cl /nologo /TC /c /MT /W4 /DNTVDM /DCPU_40_STYLE /DCCPU /DWIN_32 /DVDMREDIR_DLL /DMVDM_GUEST_MEMORY_FIXTURE "/I$root/src" "/I$root/src/vdmredir-dll/include" "/I$root/src/ntvdm-exe/redir/include" "/I$root/src/ntvdm-exe/softpc/include" "/FI$root/test/mvdm-host/vdmredir/redirector_oem_fixture_binding.h" "/Fo$out/" @inputs 2>&1 |
+& $wrapper cl /nologo /TC /c /MT /W4 /DNTVDM /DCPU_40_STYLE /DCCPU /DWIN_32 /DVDMREDIR_DLL /DMVDM_GUEST_MEMORY_FIXTURE "/I$root/src" "/I$root/src/vdmredir-dll/include" "/I$root/src/ntvdm-exe/softpc/include" "/FI$root/test/mvdm-host/vdmredir/redirector_oem_fixture_binding.h" "/Fo$out/" @inputs 2>&1 |
     Tee-Object -FilePath (Join-Path $out 'build.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Compile failed.' }
 if ($OriginalProviders) {

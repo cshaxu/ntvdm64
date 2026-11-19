@@ -124,7 +124,7 @@ $adapterSoftpcRoot = Join-Path $root 'src/ntvdm-exe/softpc'
 $adapterWin32Root = Join-Path $root 'src/ntvdm-exe/win32'
 $hostCompatSource = Join-Path $root 'src/compat/opennt_support_rtl.c'
 $hostCrtRedirect = Join-Path $root 'src/ntvdm-exe/win32/mvdm_crt_redirect.h'
-$softpcSymbolCompat = Join-Path $root 'src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h'
+$softpcRename = '/Dterminate=mvdm_softpc_terminate '
 $run16Root = Join-Path $root 'src/run16-exe'
 $frontendRoot = Join-Path $root 'src/ntcon-exe'
 $frontendWindowSources = @()
@@ -682,9 +682,7 @@ $includeRootPaths = @(
     'src',
     'src/common/base_srv',
     'src/vdmredir-dll/include',
-    'src/ntvdm-exe/redir/include',
     'src/non-mvdm/ds/netapi/xactsrv',
-    'src/ntvdm-exe/vdd/include',
     # The adapter owns the modern `nt.h` type binding. Original reached NT
     # public-header subsets are retained under non-mvdm below, so source
     # files still resolve historical short names without an adapter copy.
@@ -773,12 +771,11 @@ $cvidcFirstIncludeRoots = $cvidcFirstRootPaths | ForEach-Object { '/I "' + (Ninj
 # fabricating an unavailable `vga.rom` alias.
 $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')) + '" ' +
-    '/FI "' + (NinjaPath $softpcSymbolCompat) + '" ' +
-    ''
+    $softpcRename
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
 # VDMREDIR does not use SoftPC's private `terminate` symbol. Keep the
 # namespace shim only on the SoftPC compilation units that actually need it.
-$redirBaseFlags = $baseFlags.Replace('/FI "' + (NinjaPath $softpcSymbolCompat) + '" ', '')
+$redirBaseFlags = $baseFlags.Replace($softpcRename, '')
 # Authored adapters consume the selected interfaces, not the SoftPC profile.
 $authoredCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')) + '" '
@@ -2289,13 +2286,12 @@ if($Architecture -eq 'x86') {
 }
 # The SoftPC terminate namespace shim belongs to worker-specific compilation.
 # Shared and non-MVDM objects can be selected by other products, so do not
-# force that private header into their compiler dependency closures. Preserve
+# apply the worker symbol rename to them. Preserve
 # each object's remaining flags, including any explicit per-file bindings.
-$privateSymbolForce = '/FI "' + (NinjaPath $softpcSymbolCompat) + '" '
 for ($index = 0; $index -lt $graph.Count; ++$index) {
     if ($graph[$index] -match '^build obj/[^:]+\.obj: cc(?:_rtl)? [^\r\n]*src/(?:common|compat|lib-win32|lib-nxvm|non-mvdm)/') {
         if ($index + 1 -lt $graph.Count -and $graph[$index + 1] -match '^  (?:rtl_)?cflags = ') {
-            $graph[$index + 1] = $graph[$index + 1].Replace($privateSymbolForce, '')
+            $graph[$index + 1] = $graph[$index + 1].Replace($softpcRename, '')
         } else {
             $binding = if ($graph[$index] -match ': cc_rtl ') {
                 '  rtl_cflags = ' + $redirBaseFlags + ' /Gz'

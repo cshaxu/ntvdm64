@@ -389,7 +389,6 @@ $includeRoots = @(
     'src/ntvdm-exe/softpc/include',
     'src/ntvdm-exe/command/include',
     'src/ntvdm-exe/monitor/include',
-    'src/ntvdm-exe/vdd/include',
     'src/ntvdm-exe/session'
 )
 $includes = ($includeRoots | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '
