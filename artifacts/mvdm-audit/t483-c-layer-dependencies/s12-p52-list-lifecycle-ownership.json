@@ -1,0 +1,220 @@
+{
+  "baseline": "dfb38c23b51f2f66ae515cc4c8a4af3d99dce8c7",
+  "status": "P52 ListBox creation, destruction and variable-height ownership",
+  "files": [
+    {
+      "number": 95,
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "sha256": "4f912054042efbcd32c7edf682aeade02a0829e819f0cadc7b836b8b016430a8",
+      "compilerObject": "obj/opennt-user/control-body-lboxrare.obj",
+      "objectSha256": "ea2a450e7e232e11a8e89243b0c57e2cef4613307d86927b693a69d83452c3e2",
+      "dependencyRecord": "obj/opennt-user/control-body-lboxrare.obj: #deps 66, deps mtime 8167732559063106 (VALID)",
+      "header": "C0064",
+      "coffUndefined": [
+        "__imp__SetLastError@4",
+        "__imp__HeapAlloc@12",
+        "__imp__HeapFree@12",
+        "_GetProcessHeap@0",
+        "__imp__SelectObject@8",
+        "__imp__PostMessageW@16",
+        "__imp__GetSystemMetrics@4",
+        "__imp__GetDC@4",
+        "__imp__ReleaseDC@8",
+        "__imp__GetThreadLocale@0",
+        "_GetWindowBorders@16",
+        "__GetClientRect@8",
+        "_IsVisible@4",
+        "_CopyInflateRect@16",
+        "_wow_window_client_desktop@0",
+        "_wow_edit_native_GdiGetCharDimensions@12",
+        "_FreeLookasideEntry@8",
+        "_ComboBoxWndProcWorker@20",
+        "_ISelFromPt@16",
+        "_xxxLBoxDeleteItem@8",
+        "_xxxLBoxCtlHScroll@12",
+        "_xxxLBoxCtlScroll@12",
+        "_xxxLBShowHideScrollBars@4",
+        "_CItemInWindow@8",
+        "_xxxCheckRedraw@12",
+        "_xxxNewITop@8",
+        "_LBCalcItemRowsAndColumns@4",
+        "_LBGetItemRect@12",
+        "_LBSetVariableHeightItemHeight@12",
+        "_LBGetVariableHeightItemHeight@8",
+        "_wow_edit_set_window_fnid@8",
+        "_wow_native_SetWindowPos@28",
+        "_wow_native_MoveWindow@24",
+        "_wow_native_InvalidateRect@12",
+        "_wow_native_SendMessageW@16",
+        "@__security_check_cookie@4",
+        "_wow_edit_current",
+        "_ListboxLookaside",
+        "___security_cookie",
+        "__tls_array",
+        "__tls_index"
+      ],
+      "verifiedSymbols": [
+        {
+          "id": "C0350",
+          "symbol": "wow_edit_set_window_fnid",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_control_fnid.c"
+        },
+        {
+          "id": "C0392",
+          "symbol": "wow_edit_current",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_edit_entry_bindings.c"
+        },
+        {
+          "id": "C0393",
+          "symbol": "wow_edit_native_GdiGetCharDimensions",
+          "status": "eliminated",
+          "target": "src/wow32-dll/source/wow_edit_native_bindings.c"
+        },
+        {
+          "id": "C0546",
+          "symbol": "wow_native_InvalidateRect",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0548",
+          "symbol": "wow_native_MoveWindow",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0557",
+          "symbol": "wow_native_SendMessageW",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0573",
+          "symbol": "wow_native_SetWindowPos",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0594",
+          "symbol": "wow_window_client_desktop",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_window_client_state_bindings.c"
+        }
+      ],
+      "mapProviders": [
+        "0000:0000002c       __tls_array                0000002c     <absolute>",
+        "0001:0003c570       _ComboBoxWndProcWorker@20  1003d570 f   control-body-combo.obj",
+        "0001:00040ec0       _xxxLBShowHideScrollBars@4 10041ec0 f   control-body-lboxctl1.obj",
+        "0001:000412e0       _xxxLBoxDeleteItem@8       100422e0 f   control-body-lboxctl1.obj",
+        "0001:000415e0       _CItemInWindow@8           100425e0 f   control-body-lboxctl2.obj",
+        "0001:00041690       _ISelFromPt@16             10042690 f   control-body-lboxctl2.obj",
+        "0001:00041870       _LBGetItemRect@12          10042870 f   control-body-lboxctl2.obj",
+        "0001:000420e0       _xxxCheckRedraw@12         100430e0 f   control-body-lboxctl2.obj",
+        "0001:00043640       _xxxLBoxCtlHScroll@12      10044640 f   control-body-lboxctl2.obj",
+        "0001:00043f50       _xxxLBoxCtlScroll@12       10044f50 f   control-body-lboxctl2.obj",
+        "0001:00044150       _xxxNewITop@8              10045150 f   control-body-lboxctl2.obj",
+        "0001:00045c40       _LBCalcItemRowsAndColumns@4 10046c40 f   control-body-lboxmult.obj",
+        "0001:00046a10       _LBGetVariableHeightItemHeight@8 10047a10 f   control-body-lboxvar.obj",
+        "0001:00046bf0       _LBSetVariableHeightItemHeight@12 10047bf0 f   control-body-lboxvar.obj",
+        "0001:0004a3c0       _IsVisible@4               1004b3c0 f   control-view-winmgr.obj",
+        "0001:0004a500       __GetClientRect@8          1004b500 f   control-view-wow.obj",
+        "0001:0004c280       _FreeLookasideEntry@8      1004d280 f   rtlinit.obj",
+        "0001:0004ccd0       _wow_edit_set_window_fnid@8 1004dcd0 f   wow_control_fnid.obj",
+        "0001:0004ce00       _CopyInflateRect@16        1004de00 f   wow-control-rect.obj",
+        "0001:0004db00       _GetWindowBorders@16       1004eb00 f   default-borders.obj",
+        "0001:000634a0       _wow_native_InvalidateRect@12 100644a0 f   wow_user_task_lifecycle.obj",
+        "0001:000636c0       _wow_native_MoveWindow@24  100646c0 f   wow_user_task_lifecycle.obj",
+        "0001:00064030       _wow_native_SendMessageW@16 10065030 f   wow_user_task_lifecycle.obj",
+        "0001:00065340       _wow_native_SetWindowPos@28 10066340 f   wow_user_task_lifecycle.obj",
+        "0001:0006ca90       _wow_window_client_desktop@0 1006da90 f   wow_window_client_state_bindings.obj",
+        "0001:00075430       _wow_edit_native_GdiGetCharDimensions@12 10076430 f   wow_native_controls.obj",
+        "0001:00075b07       _GetProcessHeap@0          10076b07 f   kernel32:KERNEL32.dll",
+        "0001:00075b49       @__security_check_cookie@4 10076b49 f   LIBCMT:secchk.obj",
+        "0002:00000068       __imp__SelectObject@8      1008e068     gdi32:GDI32.dll",
+        "0002:0000041c       __imp__GetThreadLocale@0   1008e41c     kernel32:KERNEL32.dll",
+        "0002:00000580       __imp__SetLastError@4      1008e580     kernel32:KERNEL32.dll",
+        "0002:000005c8       __imp__HeapFree@12         1008e5c8     kernel32:KERNEL32.dll",
+        "0002:000005d0       __imp__HeapAlloc@12        1008e5d0     kernel32:KERNEL32.dll",
+        "0002:000009c0       __imp__PostMessageW@16     1008e9c0     user32:USER32.dll",
+        "0002:00000a10       __imp__GetSystemMetrics@4  1008ea10     user32:USER32.dll",
+        "0002:00000c00       __imp__ReleaseDC@8         1008ec00     user32:USER32.dll",
+        "0002:00000c04       __imp__GetDC@4             1008ec04     user32:USER32.dll",
+        "0002:0000a92c       _wow_edit_current          1009892c     wow_edit_entry_bindings.obj",
+        "0003:000038c0       ___security_cookie         100a38c0     LIBCMT:gs_cookie.obj",
+        "0003:000052a4       __tls_index                100a52a4     LIBCMT:tlssup.obj",
+        "0003:000062c0       _ListboxLookaside          100a62c0     <common>"
+      ],
+      "conclusion": "Original control creation/destruction/storage/resize remain C; seven outer symbols stay open, font measurement is already B."
+    },
+    {
+      "number": 96,
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxvar.c",
+      "sha256": "b4a452b32ba7cc19ccf45bdb79ef273641e200033c72d74a27ee0f1b4a05641c",
+      "compilerObject": "obj/opennt-user/control-body-lboxvar.obj",
+      "objectSha256": "7c482122b740cdc87e8769d2a2d939a231611ea6f4726aefa5ac6fdb842e9c1d",
+      "dependencyRecord": "obj/opennt-user/control-body-lboxvar.obj: #deps 66, deps mtime 8167732558626390 (VALID)",
+      "header": "C0064",
+      "coffUndefined": [
+        "__GetClientRect@8",
+        "_LBGetItemRect@12",
+        "@__security_check_cookie@4",
+        "_wow_edit_current",
+        "___security_cookie",
+        "__tls_array",
+        "__tls_index"
+      ],
+      "verifiedSymbols": [
+        {
+          "id": "C0392",
+          "symbol": "wow_edit_current",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_edit_entry_bindings.c"
+        }
+      ],
+      "mapProviders": [
+        "0000:0000002c       __tls_array                0000002c     <absolute>",
+        "0001:00041870       _LBGetItemRect@12          10042870 f   control-body-lboxctl2.obj",
+        "0001:0004a500       __GetClientRect@8          1004b500 f   control-view-wow.obj",
+        "0001:00075b49       @__security_check_cookie@4 10076b49 f   LIBCMT:secchk.obj",
+        "0002:0000a92c       _wow_edit_current          1009892c     wow_edit_entry_bindings.obj",
+        "0003:000038c0       ___security_cookie         100a38c0     LIBCMT:gs_cookie.obj",
+        "0003:000052a4       __tls_index                100a52a4     LIBCMT:tlssup.obj"
+      ],
+      "conclusion": "Original variable-height storage/page/scroll arithmetic stays C; only outward business symbol is invocation metric snapshot wow_edit_current, plus shared header."
+    }
+  ],
+  "mechanisms": {
+    "creation": "xxxLBCreate derives original style flags, creates string storage, measures font and sends original WM_MEASUREITEM; fallback dimensions use current invocation metrics. Native GetThreadLocale/GetDC/ReleaseDC, heap and GDI are not F ownership. GdiGetCharDimensions maps to B wow_native_controls (C0393 already eliminated).",
+    "destruction": "Original xxxDestroyLBox sends owner-draw delete notifications before freeing item/string/tab/search storage; then FreeLookasideEntry, FNID_CLEANEDUP_BIT and original combo WM_PARENTNOTIFY. FreeLookasideEntry resolves C rtlinit; ListboxLookaside source definition and initialization are C lb1.c. The map common label alone does not establish ownership.",
+    "fnid": "F wow_edit_set_window_fnid derives original ntstubs NtUserSetWindowFNID, validates current retained window then applies original FNID/CLEANEDUP logic. It consumes private C layout through F window identity. Keep lifecycle state ownership coherent in S13; original subset choice remains S14, not an unapproved whole-file mirror reimport.",
+    "resize": "Original xxxLBSize expects SetWindowPos-triggered recursive resize and returns immediately after the call. GetWindowBorders resolves C rtl/winmgr.c; CopyInflateRect resolves B wow_control_rect. Shared edit entry captures geometry context before original call, restores prior context in finally. MoveWindow/SetWindowPos/InvalidateRect/SendMessage use F native-call boundary; retain synchronous/reentrant semantics when removing outward dependency.",
+    "variableHeight": "lboxvar stores byte item heights after item/selection arrays, computes pages and visible-item bounds using C helpers. Empty-list height reads gpsi->cySysFontChar. This maps to F TLS wow_edit_current, owned by shared edit_entry; a new global cache would introduce a second state owner. S13 must untangle metric representation and invocation ownership together.",
+    "method": "Both complete source files read; actual COFF undefined lists, VALID Ninja dependencies, link map and source edges checked. No runtime verification claim; classification does not prove adapter minimality."
+  },
+  "progress": {
+    "reviewedFiles": 96,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 64,
+    "deferredSourceAbiCompositionFiles": 15,
+    "unreviewedFiles": 20,
+    "totalFiles": 116,
+    "openIds": 502,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: no production changes.",
+    "runtime": "Not run: ownership classification only.",
+    "publication": "P47 retained; all22 actual image hashes verified against manifest, package 52216b4e-b210-4b25-81d1-e9c923d4750c.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-list-lifecycle-ownership/docs.log and docs.exit. git diff --check passed."
+  },
+  "followup": "S13 shared control invocation/native-return/FNID ownership, including nested resize and owner-draw deletion. S14 original type/header composition; preserve C algorithms. No new standalone state cache or wholesale C->F move.",
+  "limits": "No source, guest, #error or #line changes; no dependency claimed eliminated."
+}

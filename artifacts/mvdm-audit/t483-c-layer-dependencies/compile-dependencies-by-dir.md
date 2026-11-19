@@ -617,9 +617,13 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+095 P52: Original creation/destruction/resize remain C, font measurement B; seven F symbols stay open. Mirror0/0; see s12-p52-list-lifecycle-ownership.json.
+
 ## 096 — src/non-mvdm/windows/core/ntuser/client/lboxvar.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
+
+096 P52: Original variable-height algorithms stay C. Only direct outer business symbol is current invocation metric snapshot; mixed header also open. Mirror0/0; see s12-p52-list-lifecycle-ownership.json.
 
 ## 097 — src/non-mvdm/windows/core/ntuser/client/mngrayc.c
 

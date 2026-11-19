@@ -219,3 +219,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P50 ListBox interaction](s12-p50-list-interaction-ownership.json): file092; original interaction remains C, timer/drawing/native-return obligations and reset leaf separated. Review92/116,502/617 open.
 
 [P51 ListBox directories](s12-p51-list-directory-ownership.json): files093-094; native filesystem/original geometry retained; five shared invocation symbols and mixed header remain. Review94/116,502/617 open.
+
+[P52 ListBox lifecycle and heights](s12-p52-list-lifecycle-ownership.json): files095-096; original algorithms/storage retained, shared invocation and mixed header stay open. Review96/116,502/617 open.
