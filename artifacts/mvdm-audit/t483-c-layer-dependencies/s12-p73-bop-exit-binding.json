@@ -1,0 +1,104 @@
+{
+  "baseline": "b952fc337a45ea657c32e7ebe584aeac3ed47c25",
+  "file": "src/mvdm-host/softpc.new/base/bios/bios.c",
+  "linkOnlyOrder": 4,
+  "ids": [
+    "C0218"
+  ],
+  "conclusion": "Eliminated outward link in place. The BIOS-only build binding resolves original host_unsimulate spelling directly to original c_cpu_unsimulate; removed the F no-state forwarding body. Original BIOS source and CCPU implementation are unchanged.",
+  "proof": [
+    "The sole real source caller is BOP FE in bios.c; bios.h provides its no-argument void declaration. Other host_unsimulate text is a diagnostic string.",
+    "Deleted wrapper was exactly c_cpu_unsimulate(); no state, return adaptation, calling-convention adapter, or cleanup. Both names use the selected C ABI.",
+    "Original c_cpu_unsimulate calls ccpu386Unsimulate, which owns the selected CPU TLS simulation-frame return. The current F session runner is not part of this wrapper.",
+    "The alias is a single translation-unit name binding, not a new conditional branch or another state machine. Existing MONITOR selection is unchanged."
+  ],
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\bios.obj",
+      "sha256": "05408565bf080a6663f244af27348c7d59f41f2429470a773f91c63dd9673f62",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "mapSha256": "8ffb96406cceb980e9e3404934a5d738c1938fa8c200005167a606227c8ed854",
+      "binding": "0001:00008760       _c_cpu_unsimulate          00409760 f   original-ccpu386:c_main.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\bios\\bios.obj",
+      "sha256": "91f88291aecff9a75ce021bb665189ec2089a6fc339301abaae91a6f63d04994",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "mapSha256": "a4aba167aba776d528407b3fa9c28a759199fe6e0308242ef09b85385c467f97",
+      "binding": "0001:00008760       _c_cpu_unsimulate          00409760 f   original-ccpu386:c_main.obj"
+    }
+  ],
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 4,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 70,
+    "openIds": 499,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "cachedBuild": "x86 WOW32 + four x86 worker images, six x64 product targets, and explicitly rebuilt x86 reference NTVDM; build.exit and reference.exit are0. Existing compiler warnings remain; not claimed warning-free.",
+    "focused": "CCPU high-linear fixture exit0 including initial and recursive returns; BIOS90 cases failures0; eight actual A/B dependency graphs pass. Existing fixture /FORCE duplicate seam warnings are not product-link warnings.",
+    "publishedRuntime": "Isolated same-hash published package: direct-mem, command-c, command-c-mem all PASS exit0. No guest modifications.",
+    "normalizedIdentity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": false,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "26a87d88-8d03-4947-9982-69574aafd87e",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "publishedHashChecks": [
+      "assets\\release\\VCDEX.DLL",
+      "O:\\WINNT\\system32\\VCDEX.DLL",
+      "assets\\release\\run16.exe",
+      "O:\\WINNT\\system32\\run16.exe",
+      "assets\\release\\ntsrv.exe",
+      "O:\\WINNT\\system32\\ntsrv.exe",
+      "assets\\release\\ntcon.exe",
+      "O:\\WINNT\\system32\\ntcon.exe",
+      "assets\\release\\ntvdm.exe",
+      "O:\\WINNT\\system32\\ntvdm.exe",
+      "assets\\release\\ntvwm.exe",
+      "O:\\WINNT\\system32\\ntvwm.exe",
+      "assets\\release\\ntmon.exe",
+      "O:\\WINNT\\system32\\ntmon.exe",
+      "assets\\release\\WOW32.DLL",
+      "O:\\WINNT\\system32\\WOW32.DLL",
+      "assets\\release\\VDMREDIR.DLL",
+      "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "assets\\release\\nthook32.dll",
+      "O:\\WINNT\\system32\\nthook32.dll",
+      "assets\\release\\nthook64.dll",
+      "O:\\WINNT\\system32\\nthook64.dll"
+    ]
+  },
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/base/bios/bios.c": "1fc89c42e984de945a96ada6922b961dce443e465b9f7ee964c142179602022b",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": "6679c57d5809cfff486fc6818198e2f12eb67f1d09612a812b7fd290c58f327e",
+    "src/ntvdm-exe/softpc/mvdm_softpc_execution.c": "97d239565e1ace23b72979f3eea7c678382891477292d8487fc72eeff2606477",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "4b95247f913fb98144af2aeb7cca9e3eea51c129fac098aa31151d339f8f0e71"
+  }
+}

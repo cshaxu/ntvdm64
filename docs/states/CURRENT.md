@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P70-P72: [Inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p70-inventory-reconciliation.json), [DEM buffer ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p72-dem-buffer-ownership.json). Reviewed116/116 direct compile and3/74 link-only files. Page-aware copy proven; entire lease design not thereby justified. Total500/618 open. Mirror delta0/0; cumulative reduction2 points/10 lines. P67 release22 hashes verified. S12 active.
+P73: [BOP FE delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p73-bop-exit-binding.json). BIOS binds original CCPU exit directly; F wrapper removed. Reviewed116/116 compile and4/74 link-only files;499/618 IDs open. Mirror delta0/0; cumulative reduction2 points/10 lines. Cached build, dual11-image publication, CPU/BIOS and DOS return tests passed. Package26a87d88-8d03-4947-9982-69574aafd87e;22 hashes verified. S12 active.

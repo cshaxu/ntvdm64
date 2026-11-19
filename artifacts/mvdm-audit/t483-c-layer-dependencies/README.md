@@ -261,3 +261,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P71 Console title and native I/O](s12-p71-console-title-native-io.json): link-only files1-2/74. C0282 requires session Console ownership treatment in S13; demerror four native I/O edges already eliminated in P14. Both actual product maps checked; no new elimination or mirror delta.
 
 [P72 DEM buffer ownership](s12-p72-dem-buffer-ownership.json): link-only file3/74. Separates proven page-aware-copy requirement from unproven necessity of the whole lease design. C0194/C0196/C0197 remain open for S13. Both product COFF/maps and22 publication hashes checked; no production change.
+
+[P73 BOP FE binding](s12-p73-bop-exit-binding.json): link-only file4/74. BIOS directly binds original CCPU exit; F wrapper removed; C0218 eliminated without mirror changes. Cached complete build, dual publication, CPU/BIOS and real DOS return checks passed. Current package26a87d88-8d03-4947-9982-69574aafd87e;499/618 IDs open.

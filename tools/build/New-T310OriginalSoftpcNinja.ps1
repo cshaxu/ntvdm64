@@ -929,7 +929,8 @@ $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $biosRoot $name)
         # The original BIOS BOP table publishes FD only in its monitor
         # product profile.  CPU40 uses the same original DOSX continuation
         # frame through the restored dpmi32/i386/dpmi386.c provider.
-        $graph.Add('  cflags = ' + $baseFlags + ' /DMONITOR')
+        # BOP FE binds directly to the original CCPU exit entry; no F wrapper.
+        $graph.Add('  cflags = ' + $baseFlags + ' /DMONITOR /Dhost_unsimulate=c_cpu_unsimulate')
     }
     $object
 }
