@@ -70,6 +70,8 @@ P25 moves the independent GDI alias implementation from F and declaration from D
 
 P26 classifies files038-040 for S13: callback control restoration, message allocation/unwind and native-dialog execution handoff. [Source evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p26-wow-unwind-ownership.json) identifies actual providers and candidate boundaries without modifying production code. Review is 40/116: ten direct-header clears, twenty-four lifecycle files, six source/ABI files and 76 unreviewed. Open IDs remain520/617; mirror delta is zero and cumulative reduction remains two points/ten lines. P25 package remains published; no new runtime result is claimed. S12 remains active.
 
+P27 classifies registry callers041-042 for S13 and removes file043 wkfileio private-header dependency using a B-owned three-declaration cdecl ABI. [Evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p27-wow-vdd-abi.json) records both cached builds, dual publication, normalized identity and corrected obsolete VDD source check. No mirror changed. Review is43/116:11 clears,26 lifecycle,6 source/ABI,73 unreviewed;519/617 IDs remain open. Cumulative mirror reduction remains2 points/10 lines. S12 remains active.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

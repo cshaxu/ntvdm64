@@ -1,0 +1,159 @@
+{
+  "baseline": "a13df6d8901f05ab86e111333bc13f79bf6c57e3",
+  "question": "Files041-043: distinguish WOW registry token ownership from the independent VDD cdecl declaration boundary.",
+  "procedure": "Trace DDE registry check and kernel DWORD key round trips to token provider/parent exports; inspect full original nt_vdd.h, selected WK file calls and DEM link symbols. Replace only private declaration carrier and caller build search scope; verify actual compiled dependencies and complete package identity.",
+  "files": [
+    {
+      "number": 41,
+      "file": "src/mvdm-host/wow32/wdde.c",
+      "id": "C0114",
+      "disposition": "Open/S13: DDEIsTargetMSDraw uses RegOpenKeyEx and RegCloseKey. The forced binding selects the same NTVDM.REG parent view. Not an unused header. This call uses a temporary DLL token and does not expose it to guest; do not misdescribe it as guest DWORD storage."
+    },
+    {
+      "number": 42,
+      "file": "src/mvdm-host/wow32/wkernel.c",
+      "id": "C0114",
+      "disposition": "Open/S13: original WK32 registry thunks store/receive guest DWORD HKEY; preserve token-to-parent lookup and lock across use/close. System.ini shadow is a separate shared-header dependency recorded at precomp, not this direct forced include."
+    },
+    {
+      "number": 43,
+      "file": "src/mvdm-host/wow32/wkfileio.c",
+      "id": "C0068",
+      "disposition": "Eliminated: three SDK-typed cdecl declarations in B replace the F macro wrapper. Only wkfileio compilation selects B wow-vdd header directory. Original wkfileio and C nt_vdd.h stay unchanged. C DEM implementations and NTVDM export/WOW32 import remain unchanged."
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10,
+    "proof": "No C file changed. Three explicit cdecl prototypes replace a private F macro wrapper; original public SDK header and WOW caller stay byte-identical."
+  },
+  "source": {
+    "tree": "O:/repos.external/OpenNT",
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "public/sdk/inc/nt_vdd.h",
+    "lines": [
+      209,
+      210,
+      212
+    ],
+    "role": "Three selected original declaration signatures; explicit cdecl matches current selected C worker bodies. Existing source notice says VDD services exports and defines. No new runtime body or guest input."
+  },
+  "progress": {
+    "reviewedFiles": 43,
+    "clearedDirectHeaderFiles": 11,
+    "deferredLifecycleFiles": 26,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 73,
+    "totalFiles": 116,
+    "openIds": 519,
+    "totalIds": 617,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 519,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 48
+    }
+  },
+  "validation": {
+    "build": "Both cached architectures passed; x86 and x64 complete selected targets.",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "ae719fb8-287b-4f67-b3cd-dd4ecae4ab83",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "identity": "All eleven full images equal P25 after masking package GUID and COFF/debug-directory timestamps only; raw hashes differ.",
+    "runtime": "Repeated guest runtime waived under owner authorization for identical normalized binaries.",
+    "checks": "PASS eight product A/B graphs,151 WOW objects and9 private-header negatives; current VDD source ownership check. This last check is textual, not guest lifecycle execution.",
+    "documentation": "PASS documentation governance including links; git diff --check passed."
+  },
+  "limitations": [
+    "Registry token ownership is not resolved by this batch.",
+    "No claim of new guest runtime coverage; ABI-only move is subject to complete normalized binary identity check."
+  ],
+  "inputsSha256": {
+    "src/mvdm-host/wow32/wdde.c": "8f288d930793eb9449a926071d0688b9d3fda1e4d0dd94e50a978c457e8acfe7",
+    "src/mvdm-host/wow32/wkernel.c": "ac5ae96da876eeaa32181df73f92a1ca1c127f572b3de44867fd1bc86efffb39",
+    "src/mvdm-host/wow32/wkfileio.c": "e8a9a5246447394670edb7427068c4567e5532885049e10207be60b901b8513a",
+    "src/non-mvdm/public/sdk/inc/nt_vdd.h": "7e89fd4420381a54bc89e9807e54ccfe138a0767996ab7c74712e5e96aeb6609",
+    "src/compat/include/wow-vdd/nt_vdd.h": "33e412a2e0ee6ab878d1ab795d9ca34fa148c7f8526d351fcad272db18c8f0e2",
+    "src/wow32-dll/source/wow_registry_binding.c": "f7ba62630f538d45fcefb2985f4093d5769e848829350dac1c6f818b271f8544",
+    "O:/repos.external/OpenNT/public/sdk/inc/nt_vdd.h": "7e89fd4420381a54bc89e9807e54ccfe138a0767996ab7c74712e5e96aeb6609",
+    "test/mvdm-host/dos/Verify-T409OriginalVddLifecycle.ps1": "fc03c8455245bf6f95897eddc3c1d654bccab9801f4c6f8f3e191edc980c5255"
+  },
+  "testCorrection": {
+    "failure": "Initial boundary run failed old T409 check demanding demSftHeadPointer and sft_head_location.",
+    "cause": "8a0a55ff3 restored original global pSFTHead chain and removed the extra resolver; this test still demanded it.",
+    "change": "Check demdata NULL definition, original demgset GetVDMAddr assignment, demfile extern/use and absence of the retired helper. Existing allocate/retrieve/release checks retained. No product fix made for a stale test.",
+    "originalEvidence": "OpenNT base/mvdm/dos/dem/demdata.c:18 and demgset.c:568",
+    "failedLog": "build\\t483-s12-wow-vdd\\boundary.log",
+    "fixedLog": "build\\t483-s12-wow-vdd\\boundary-final.log"
+  },
+  "compilerEvidence": {
+    "caller": [
+      "obj/wkfileio.obj: #deps 131, deps mtime 8167652376121301 (VALID)",
+      "    ../../../../src/compat/include/wow-vdd/nt_vdd.h"
+    ],
+    "provider": [
+      "obj/dem/demfile.obj: #deps 27, deps mtime 8167545383916437 (VALID)",
+      "    ../../../../src/non-mvdm/public/sdk/inc/nt_vdd.h"
+    ]
+  },
+  "runs": {
+    "x86": {
+      "pid": 9004,
+      "exit": 0,
+      "stdout": "build\\t483-s12-wow-vdd\\x86.log",
+      "stderr": "build\\t483-s12-wow-vdd\\x86.err",
+      "stdoutSha256": "ab7ebc63f791059c8b3c04083f5b3b549b7cb1a8cd9a6c63a9fc7c115ca92e16"
+    },
+    "x64": {
+      "pid": 23960,
+      "exit": 0,
+      "stdout": "build\\t483-s12-wow-vdd\\x64.log",
+      "stderr": "build\\t483-s12-wow-vdd\\x64.err",
+      "stdoutSha256": "9f4067bf0657f8f96d13a524f541d3218ad75c13b688376d2d6da28e5fbe2220"
+    },
+    "stage": {
+      "pid": 37136,
+      "exit": 0,
+      "stdout": "build\\t483-s12-wow-vdd\\stage.log",
+      "stderr": "build\\t483-s12-wow-vdd\\stage.err",
+      "stdoutSha256": "a37e1ac7bb1281f6f791d8097b9c3dd19c0f4bbbfc6d0184cbb049bf57f2ff72"
+    },
+    "publish": {
+      "pid": 25516,
+      "exit": 0,
+      "stdout": "build\\t483-s12-wow-vdd\\publish.log",
+      "stderr": "build\\t483-s12-wow-vdd\\publish.err",
+      "stdoutSha256": "31a84ed47df364a8e385dbfb35bd0ca4079da042a6c3101f3b4fd0c3c642c1e2"
+    },
+    "boundary": {
+      "pid": 16456,
+      "exit": 1,
+      "stdout": "build\\t483-s12-wow-vdd\\boundary.log",
+      "stderr": "build\\t483-s12-wow-vdd\\boundary.err",
+      "stdoutSha256": "e5e097f05c75ea55d35d8c22930a0584ea63e6e836fdd8a38c025b88a871304d"
+    },
+    "boundary-final": {
+      "pid": 11196,
+      "exit": 0,
+      "stdout": "build\\t483-s12-wow-vdd\\boundary-final.log",
+      "stderr": "build\\t483-s12-wow-vdd\\boundary-final.err",
+      "stdoutSha256": "c403b4b5dec062f0aa4e131a34234b14c145e618def4018c9426f1ed853f8617"
+    },
+    "docs": {
+      "pid": 30068,
+      "exit": 0,
+      "stdout": "build\\t483-s12-wow-vdd\\docs.log",
+      "stdoutSha256": "cfd597275399951ea25568faae268fe21175399ca22c178221c702249af14d45"
+    }
+  }
+}

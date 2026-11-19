@@ -282,13 +282,19 @@
 
 - 强制包含 · C0114 · wow32-dll · src/wow32-dll/include/wow_registry_binding.h
 
+041 P27：wdde的DDEIsTargetMSDraw确实调用RegOpenKeyEx/RegCloseKey；局部token不进入guest，但仍需使用父NTVDM注册表视图。C0114不是无用强制头，归S13同一token/父提供者组。源码未改，镜像净变0点0行。 详见s12-p27-wow-vdd-abi.json。
+
 ## 042 — src/mvdm-host/wow32/wkernel.c
 
 - 强制包含 · C0114 · wow32-dll · src/wow32-dll/include/wow_registry_binding.h
 
+042 P27：wkernel的原版注册表thunk将HKEY存入guest DWORD并在后续调用传回，不能替换成父端raw key。C0114归S13；profile shadow属于precomp已登记的共享头边。源码未改，镜像净变0点0行。 详见s12-p27-wow-vdd-abi.json。
+
 ## 043 — src/mvdm-host/wow32/wkfileio.c
 
 - 直接包含 · C0068 · wow32-dll · src/wow32-dll/include/nt_vdd.h
+
+043 P27：wkfileio与原版nt_vdd.h均未改动。F宏包装删除，三个保持原符号/参数/返回类型的cdecl声明改由B专用头提供，仅本编译入口选择该目录。原DEM提供者、导出/导入不变，C0068消除。两架构cached构建、双端11组件发布、8产品图/151WOW对象检查通过；11映像仅包GUID和PE时间戳不同，依授权跳过重复guest运行。旧VDD源码检查对已退役SFT适配的断言已修正为原版初始化/消费链并通过。本文件镜像净变0点0行，累计缩减2点10行。累计43/116：11头依赖解除、26生命周期、6来源ABI、73未审查；519/617开放。 详见s12-p27-wow-vdd-abi.json。
 
 ## 044 — src/mvdm-host/wow32/wkgthunk.c
 

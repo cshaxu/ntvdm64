@@ -274,3 +274,11 @@ locks; it has no session, guest-memory or mirror dependency. It is linked
 once into NTVDM, whose unchanged exports supply WOW32 imports, so callers
 continue to share one table. Native GDI remains the object validator.
 The independent alias and native brush fixtures live under `test/compat`.
+
+## WOW file-handle call convention
+
+`include/wow-vdd/nt_vdd.h` exposes only the three native-typed DEM file-handle
+operations used by the original WOW file provider. Symbols, parameter types
+and return types follow OpenNT public/sdk/inc/nt_vdd.h:209-212; explicit
+cdecl matches the worker exports despite WOW's /Gz default. Only wkfileio.c
+selects this directory. No C include, table or implementation is introduced into B.

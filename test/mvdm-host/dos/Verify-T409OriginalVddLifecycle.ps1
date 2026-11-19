@@ -12,6 +12,8 @@ $demFile = Join-Path $root 'src/mvdm-host/dos/dem/demfile.c'
 $wowFile = Join-Path $root 'src/mvdm-host/wow32/wkfileio.c'
 $graphFile = Join-Path $root 'tools/build/New-T310OriginalSoftpcNinja.ps1'
 $dem = Get-Content -LiteralPath $demFile -Raw
+$demData = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-host/dos/dem/demdata.c') -Raw
+$demSetup = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-host/dos/dem/demgset.c') -Raw
 $wow = Get-Content -LiteralPath $wowFile -Raw
 $graph = Get-Content -LiteralPath $graphFile -Raw
 
@@ -30,9 +32,14 @@ if ($dem -notmatch 'Sim32GetVDMPointer\s*\(pPDB' -or
     $dem -notmatch 'pSFT->SFT_Ref_Count--') {
     throw 'The original VDD allocation/retrieval/release ordering is incomplete.'
 }
-if ($dem -notmatch 'static PDOSSF demSftHeadPointer\(VOID\)' -or
-    $dem -notmatch 'Sim32GetVDMPointer\(sftHead, 0, 0\)') {
-    throw 'The only retained SFT-head adapter is not the checked synchronous Sim32 binding.'
+# S5 P10 restored the original shared SFT head and removed the extra resolver.
+# Check initialization and its two consumers, not the retired adapter shape.
+if ($demData -notmatch 'PDOSSF\s+pSFTHead\s*=\s*NULL' -or
+    $demSetup -notmatch 'pSFTHead\s*=\s*\(PDOSSF\)\s*GetVDMAddr\(getDS\(\),\(WORD\)pDosWowData->lpSftAddr\)' -or
+    $dem -notmatch 'extern\s+PDOSSF\s+pSFTHead' -or
+    $dem -notmatch 'pSfFlat\s*=\s*pSFTHead' -or
+    $dem -match 'demSftHeadPointer|sft_head_location') {
+    throw 'The restored original shared SFT-head initialization/use chain is incomplete.'
 }
 if ($wow -match 'mvdm_vdd_sft_shadow_(commit|discard)' -or
     $graph -match 'mvdm_vdd_sft_shadow') {

@@ -536,10 +536,10 @@ address imports explicitly retain the worker's cdecl ABI, including the local
 fixed-width declaration in `wow_callback_frame_lease.c`. No pointer, mapping,
 ownership or cleanup behavior changes. The provider build restores STD_CALL,
 the original stdcall DLL initializer and the two private system import names.
-The WOW32-local `nt_vdd.h` shim qualifies three worker declarations while
-keeping the imported ABI carrier byte-identical.  It is owned by
-`src/wow32-dll/include` because the late-loaded target, not the worker,
-includes it. DIV-294 records the original MVDM worker header qualifications.
+The B-owned `src/compat/include/wow-vdd/nt_vdd.h` declares the three worker
+file-handle imports with explicit cdecl; only wkfileio.c selects it. Both
+mirror files are unchanged by this move. DIV-294 records the original MVDM
+worker header qualifications.
 This is not real guest acceptance.
 
 ADAPTER-WOW-023 is retired with the entire five-function callback ABI bridge.

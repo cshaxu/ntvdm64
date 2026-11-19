@@ -434,6 +434,8 @@ foreach ($source in $sources) {
         $ninja.Add('  cflags = $wow_cflags /DWOW_NATIVE_PROCESS_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_native_process.h')) + '"')
     } elseif ($source -eq 'wudlg.c') {
         $ninja.Add('  cflags = $wow_cflags /DWOWSysErrorBox=wow_user_sys_error_box')
+    } elseif ($source -eq 'wkfileio.c') {
+        $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/include/wow-vdd')) + '" $wow_cflags')
     } elseif ($source -eq 'wcommdlg.c') {
         $ninja.Add('  cflags = $wow_cflags /DWOW_COMMON_DIALOG_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_common_dialog_calls.h')) + '"')
     } elseif ($source -in @('wuser.c','wuser31.c','wuwind.c')) {
