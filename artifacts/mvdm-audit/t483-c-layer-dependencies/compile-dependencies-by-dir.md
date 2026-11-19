@@ -19,6 +19,11 @@
 - 直接包含 · C0024 · ntvdm-exe · src/ntvdm-exe/command/include/mvdm_command_native_child.h
 - 直接包含 · C0036 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_shadow_registry.h
 
+002 调用链核查：
+- C0024：C mvdm-host → F ntvdm-exe，mvdm_command_native_child。实际管理 guest 命令/环境/标准句柄快照、命令服务类型和 session epoch/teardown。F 提供者依赖 guest_location 的租约和 session 生命周期。不能仅搬声明到 B。配置解析和原版执行逻辑仍留 C，需审查如何从 F 交付有明确寿命的输入与完成通知，或将产品专有接线迁至 F 的原版入口适配。接口设计未完成，保持开放。
+- C0036：C mvdm-host → F ntvdm-exe，mvdm_shadow_registry。cmdexec.c 实际仅调用 RegOpenKeyEx、RegQueryValueEx、RegCloseKey，头文件通过 common/wow/registry.h 将其映射到 NTVDM.REG 兼容查询。原版 IsWowAppRunnable 具有相同三个 API 调用。提供者源码无 session/guest/mirror 依赖，仅系统 API、C 运行库和已下沉的 compat 包目录函数。建议将注册表兼容实现和共用声明整体归 B，F 保持初始化/关闭调用，C 保留原版查询流程。该迁移须覆盖其他原生及 WOW 查询调用方，不能恢复查询宿主注册表而丢失产品注册表语义。
+- 本文件尚未修改，镜像变化 0 点、0 行。两项直接外层头依赖仍为 2。上述为职责证据和整改方向，尚未计为文件完成或依赖消除。
+
 ## 003 — src/mvdm-host/dos/command/cmdkeyb.c
 
 - 直接包含 · C0017 · common · src/common/wow/registry.h
