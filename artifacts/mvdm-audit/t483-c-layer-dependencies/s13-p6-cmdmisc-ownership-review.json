@@ -1,0 +1,117 @@
+{
+  "baseline": "b95710945c74c55c1d3457f776711f9c8da84b0c",
+  "scope": "T483 S13 P6 cmdmisc.c complete ownership review before coupled implementation; documentation only",
+  "productionChanged": false,
+  "fileMetric": {
+    "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+    "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+    "files": [
+      {
+        "path": "src/mvdm-host/dos/command/cmdmisc.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdmisc.c",
+        "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+        "current_sha256": "ed8067d60dfa322ae96bcefff8b34a0b44865d58c55d88462e63314887bcf88a",
+        "raw": {
+          "blocks": 10,
+          "added": 47,
+          "deleted": 62
+        },
+        "filtered": {
+          "blocks": 9,
+          "added": 46,
+          "deleted": 6
+        },
+        "excluded": [
+          {
+            "original": [
+              657,
+              712
+            ],
+            "current": [
+              716,
+              718
+            ]
+          }
+        ],
+        "issues": [],
+        "rank": 1
+      }
+    ]
+  },
+  "currentDirectSymbols": [
+    "C0195",
+    "C0197",
+    "C0223",
+    "C0273",
+    "C0282"
+  ],
+  "sharedHeaders": [
+    "C0034",
+    "C0039"
+  ],
+  "sharedBuildSearchRoots": [
+    "C0135",
+    "C0137",
+    "C0141",
+    "C0142",
+    "C0145",
+    "C0146"
+  ],
+  "evidence": {
+    "compile": "build/t483-s13-cmdmisc-boundary/cmdmisc-deps.txt records F guest-location, F lease and firmware headers plus D guest-memory/access.h. They cannot be ignored as merely transitive.",
+    "selectedLocationSurface": "cmdmisc uses only the numeric location struct, set_real_mode and copy_to_guest. It never inspects or acquires a lease; that outer private dependency arrives through the overbroad header.",
+    "environment": "mvdm_softpc_project_wow_initial_environment uses compat_system_root_a, Win32 short path, common_guest_environment_root and CRT/process-heap ownership. Its body never accesses session. The shared transform is also used by Run16.",
+    "console": "Title query/set use current session client, actual frontend protocol/lock, and supplemental caption publication. Moving these bodies into B would violate ownership; query/routing must remain F."
+  },
+  "implementationGroups": [
+    {
+      "name": "WOW boot projection",
+      "action": "Move the bounded environment transformation and boot projection into B with their existing symbol/signature and ownership rules. Update Run16, F firmware and tests to the same B declaration/source. Do not introduce an environment callback merely to retain the old F file placement.",
+      "validation": "Existing guest_environment_test and softpc_wow_boot_environment_fixture, including invalid input preserving allocation, host environment unchanged, CRT free and trailing separator semantics; actual WOW startup on final package."
+    },
+    {
+      "name": "Bounded guest directory output",
+      "action": "Expose the numeric location carrier and pure setter in B. Preserve the F copy implementation and lease lifecycle behind an explicitly installed narrow write operation. Split declarations so cmdmisc does not import private lease/session types. Do not duplicate the mapping path or change page/commit behavior.",
+      "rejectedShortcut": "Moving the entire location implementation to B by substituting the public acquire/release calls is not mechanically equivalent: current location_release returns before clearing the wrapper when no current session exists; blindly clearing after a failed public release changes that boundary. Keep the F body intact for this scope.",
+      "validation": "Existing guest-location fixture through actual installed binding, refused acquire/commit, overflow and session retirement; actual COMMAND directory query. Audit all production and fixture consumers of relocated symbols."
+    },
+    {
+      "name": "Console title service",
+      "action": "Consolidate title get/set with the existing immutable Console query binding instead of adding a second Console registry. Retain original C call shapes, F bodies, native no-frontend fallback and supplementary caption publication ordering.",
+      "validation": "Existing Console client normal/error/lifetime assertions and actual COMMAND title/return behavior; map and COFF prove B provider rather than F direct import."
+    },
+    {
+      "name": "Current file build closure",
+      "action": "After removing actual outer headers, narrow cmdmisc compile search roots against its real dependency closure; verify actual supported compile commands. Shared root IDs remain open wherever another file still uses them.",
+      "validation": "Cached product and reference-worker builds; exact cmdmisc headers/relocations, eight A/B graphs; compare mirrored byte/line and non-error diff metrics before publication."
+    }
+  ],
+  "deliveryRule": "Implement all groups for this file before building the substantive batch. Preserve #error/#line and guest bytes. No current dependency marked eliminated by this review. Net mirror points/lines increases still require prior approval.",
+  "progress": {
+    "total": 618,
+    "eliminated": 115,
+    "open": 453,
+    "supportingEvidence": 44,
+    "eliminatedTransitive": 5,
+    "excluded": 1,
+    "S13Cleared": 19,
+    "cumulativeMirrorReduction": {
+      "points": 2,
+      "lines": 10
+    }
+  },
+  "sourceHashes": {
+    "src/mvdm-host/dos/command/cmdmisc.c": "ed8067d60dfa322ae96bcefff8b34a0b44865d58c55d88462e63314887bcf88a",
+    "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c": "990e033a1262e78c06621356f0eb5662f83aaeebaae75a6118a093398909d851",
+    "src/common/guest_environment.c": "79c5424e8efe1628d053bad7d0758e8c4f3c1601fb40512486e97669402e9a0c",
+    "src/common/guest_environment.h": "5c4473703f89aa35d696a5d9ad952658e0c07f0fb13a2e7075b1ba22baa4354c",
+    "src/ntvdm-exe/softpc/mvdm_guest_location.c": "c1c1498531e727c3049c90eeb9ef8c15ea0a09f8dbc09b8e41ad55dfb3e4a203",
+    "src/ntvdm-exe/softpc/include/mvdm_guest_location.h": "8933cf95e0bc00f9b2d43504975efb6d3af26d5f1f1f6d310380ea7230dd09dd",
+    "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c": "681b9e93f652b321a5a6ee8292dbc6449a60edd41499961e39d8caf1323f4b46",
+    "src/ntvdm-exe/win32/console_client.c": "be687b9a4df8ba4cfb62394864f02cde6eb508d93f301e47dce54d1a9d441210",
+    "src/compat/console_keyboard.c": "6e1dd57eb7ff8f11b55fbc807c15c29548c4617acebb90149a84e2a0a9a538de",
+    "src/compat/include/console_title.h": "52e804a0d51c32230fd87ed8d2cd34dbe82f57a987f77a2ff0d36ea90152aca1"
+  },
+  "runtimeEvidence": "No new runtime claim in this review. Published P5 package and its tests remain the verified product baseline.",
+  "documentationGate": "Passed: build/t483-s13-cmdmisc-boundary/review-check.exit=0; documentation governance, relative links and diff check. No product build or runtime test necessary for this research-only change."
+}

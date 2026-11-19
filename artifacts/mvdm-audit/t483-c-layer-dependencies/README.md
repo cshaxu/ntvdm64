@@ -341,3 +341,5 @@ S13 P3: [Shared thread boundary delivery](s13-p3-thread-boundary.json); five dir
 S13 P4: [COMMAND boundary delivery](s13-p4-command-boundary.json); twelve direct outward edges now use an explicitly installed B service ABI. Original C algorithm and F mutable ownership remain unchanged. Cached builds, dual eleven-image publication, capture/launch fixtures and actual native EDIT/DIR pass. Mirror delta0 points/0 lines;113 eliminated,455 open.
 
 S13 P5: [Console keyboard query boundary](s13-p5-console-keyboard-boundary.json); cmdkeyb retains its original algorithm and both query symbols now resolve to B, with explicit F routing operations. No mirror change; cached builds, dual publication, three Console transport cases and actual native EDIT return pass.115 eliminated,453 open.
+
+S13 P6: [cmdmisc ownership review](s13-p6-cmdmisc-ownership-review.json); bounded environment, guest output and Console title groups mapped before implementation. No product change or dependency elimination; P5 remains the released baseline.

@@ -33,6 +33,8 @@ S13 P5: [Console keyboard query boundary](../../artifacts/mvdm-audit/t483-c-laye
 
 The preceding [P4 COMMAND delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p4-command-boundary.json) closes cmdexec.c outward edges; [P3 thread delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p3-thread-boundary.json) retains per-image lifecycle and actual guest redirector evidence.
 
+Next file: [cmdmisc.c ownership review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p6-cmdmisc-ownership-review.json). Its non-error mirror baseline is9 points/52 lines. Three coupled ownership groups and the actual compile search roots must be completed together before a product build; review does not eliminate any ID. P6 is documentation only; P5 remains the published product.
+
 ## S12 Closure Record
 
 [In-place cleanup closure](../etc/evidence/m0-t483-s12-closure.md).
