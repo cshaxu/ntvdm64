@@ -2,11 +2,32 @@
 #include <wchar.h>
 
 #include "ntvdm-exe/session/session.h"
+#include "common/guest-memory/access.h"
+#include "common/guest-memory/address.h"
 #include "mvdm_redirector_guest_copy.h"
 
 typedef struct fixture_memory { unsigned char bytes[0x200]; } fixture_memory;
 static int read_memory(void *c, uint32_t a, uint8_t *b, uint32_t n) { fixture_memory *m=c; if (!m||!b||a>sizeof(m->bytes)||n>sizeof(m->bytes)-a) return 0; memcpy(b,m->bytes+a,n); return 1; }
 static int write_memory(void *c, uint32_t a, uint8_t const *b, uint32_t n) { fixture_memory *m=c; if (!m||!b||a>sizeof(m->bytes)||n>sizeof(m->bytes)-a) return 0; memcpy(m->bytes+a,b,n); return 1; }
+/* Controlled real-mode address provider; this fixture tests copy and lease
+ * lifetime, not the production CCPU selector resolver. */
+int __cdecl mvdm_softpc_effective_address(uint16_t segment, uint32_t offset,
+    uint32_t *address_out)
+{
+    if (address_out == NULL) return 0;
+    *address_out = ((uint32_t)segment << 4) + offset;
+    return 1;
+}
+int __cdecl mvdm_softpc_guest_memory_acquire(uint32_t address, uint32_t count,
+    uint32_t access, guest_memory_lease **lease, uint8_t **bytes)
+{
+    return session_guest_memory_acquire(session_thread_current(), address, count,
+        access, lease, bytes);
+}
+int __cdecl mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int commit)
+{
+    return session_guest_memory_release(session_thread_current(), lease, commit);
+}
 int main(void) {
  fixture_memory m; session s; memset(&m,0,sizeof(m)); session_initialize(&s,1u);
  if (mvdm_redirector_copy_ansi_to_guest(0,0,"x",2)) return 1;

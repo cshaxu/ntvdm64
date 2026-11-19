@@ -1,0 +1,508 @@
+{
+  "scope": "T483 S13 P9: DEM guest-location and borrowed-buffer boundary",
+  "baseline": "6f693ccfad6478f1bdac0b6ab0ff8e32942e4f48",
+  "conclusion": "Keep original DEM algorithms. C consumes the B numeric location/opaque lease ABI; F installs unchanged acquisition, commit and release providers. No session state or mapping implementation moved to B.",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "before": {
+        "blocks": 12,
+        "added": 31,
+        "deleted": 14
+      },
+      "after": {
+        "blocks": 12,
+        "added": 31,
+        "deleted": 14
+      },
+      "deltaPoints": 0,
+      "deltaLines": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "before": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "after": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 1
+      },
+      "deltaPoints": 0,
+      "deltaLines": 0
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "before": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "after": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "deltaPoints": 0,
+      "deltaLines": 0
+    }
+  ],
+  "ownership": {
+    "B": "Numeric location, opaque borrowed lease declaration and immutable dispatch table. No outer includes or static provider imports.",
+    "C": "Original DEM file I/O and error handling; dem.c and demhndl.c byte-unchanged.",
+    "F": "Current-session selection, mapping, copy, commit, retirement and all mutable lease state. Provider function bodies unchanged."
+  },
+  "sourceProof": [
+    {
+      "originalSymbol": "mvdm_guest_location_acquire",
+      "currentSymbol": "acquire",
+      "bodyUnchanged": true,
+      "sha256": "64e0b5a304cc3e89d0330d8961b66af7dc942b466fbc7b1e83d1ab99e9c88ae0"
+    },
+    {
+      "originalSymbol": "mvdm_guest_location_release",
+      "currentSymbol": "release",
+      "bodyUnchanged": true,
+      "sha256": "44028de561df5bbca6660af36f80073e1c8fc69e933853a903c07a3acf62bfa0"
+    },
+    {
+      "originalSymbol": "copy_to_guest",
+      "currentSymbol": "copy_to_guest",
+      "bodyUnchanged": true,
+      "sha256": "4f8f75335666d2c11c6586d6f28a6d5c2fb8adf3556880acd4d4d02fb07f6bbd"
+    },
+    {
+      "originalSymbol": "mvdm_guest_location_acquire_vm",
+      "currentSymbol": "mvdm_guest_location_acquire_vm",
+      "bodyUnchanged": true,
+      "sha256": "d3d48de111773d110885cc530eb92b1cbf3e5a78a58a57896124d1f2ae36a898"
+    }
+  ],
+  "errorLine": "dem.h has exactly one same-line include substitution; all #error and #line bytes unchanged. dem.c/demhndl.c unchanged.",
+  "compileClosure": "16 DEM objects in each of product x86 and reference-x86 graphs contain no D/F memory headers. Remove unused outward search directories. demgset still deliberately selects its F COMMAND-directory contract; not claimed clean.",
+  "linkProof": "Product ntvdm.exe.map resolves acquire/release to compat guest_location.obj. Its only undefined imports are SetLastError and RaiseFailFastException; F providers are explicitly installed before original worker execution.",
+  "eliminatedIds": [
+    "C0034",
+    "C0194",
+    "C0196"
+  ],
+  "counts": {
+    "excluded-diagnostic": 1,
+    "open": 444,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 124
+  },
+  "total": 618,
+  "S13Eliminated": 28,
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "build": "Cached complete x86/x64 products, explicit x86 NTVDM/VCDEX/VDMREDIR/nthook32 and reference-x86 NTVDM pass. Eight A/B production graphs pass.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "a7109467-ae47-4128-8211-5ca2e8474305",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalized": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "verification": {
+    "command": "149 capture and 65 launch assertions pass",
+    "location": "Real guest-location provider fixture exit 0",
+    "demFileLifecycle": "Real Win32 file and session lease fixture exit 0; not an original DEM execution substitute",
+    "redirectorCopy": "Existing seven bounded-copy/lifetime outcomes pass after binding repair",
+    "lease": "45 boundary checks and session lease fixture exit 0",
+    "redirector": "27 async and 14 OEM assertions pass",
+    "console": "Normal, broken and hung-close transport expectations pass",
+    "guest": "Actual native EDIT return and strict full DIR acceptance pass on the published candidate identity"
+  },
+  "failureDisposition": "Initial verification failed linking the old redirector-copy fixture: three current worker guest-memory imports lacked providers. Updated fixture to the existing controlled real-mode provider contract, removed obsolete guest-location links, preserved assertions. Test-only repair did not change published production inputs. Initial failure logs retained.",
+  "limitations": [
+    "No Full or Win3.x/Win95 acceptance claimed; targeted verification selected for unchanged original algorithms and bounded ABI relocation.",
+    "Controlled redirector fixture does not prove protected-mode CCPU selector resolution.",
+    "C0007/C0028 transitive witnesses and shared directory IDs remain open/supporting for other consumers.",
+    "S13 remains active; S14 not admitted. Next DIR file demgset.c retains COMMAND-directory dependency."
+  ],
+  "evidence": [
+    {
+      "path": "build/t483-s13-dem-boundary/after.json",
+      "sha256": "2af142ee255cc900afd5923d3c2a891855eb783c83b9e2ce670b6607d22d2e49"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/async/build.txt",
+      "sha256": "bbd6bcf1b1109cc5a34b35a770f41913a5ea5d15d327c28757dd8703c380043b"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/async/result.json",
+      "sha256": "5e6e7408ca5012f18437232936435485821f5cd4aa4e39e71ca784dc95a30c1d"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/async/result.txt",
+      "sha256": "86ca9159ef08041981a426aa49e683c6c923d75e9075525c8eaf28f775a3a2a5"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/b-symbols.txt",
+      "sha256": "788743df827ae74f3220fe15d719317f507436a9ed6432a63f372269a2df14d2"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/before.json",
+      "sha256": "9ae7089d089760f4d3a00aca535222ecce80a3dd2fde1fbd37f163b97b45ed30"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/build-process.json",
+      "sha256": "8cdcd66385804c90034acdf34d722327cdf56e38d89866774e69cda4bb140542"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/build.err",
+      "sha256": "3a1cf97d15a56535669ccb5a40687dff36e0f08006196f0cfbbbc82a70345e7a"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/build.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/build.out",
+      "sha256": "fe4cc4fdc830d1c9c5598d409996633ad71c63342115dd3d9c92f6ac8861f342"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/build.ps1",
+      "sha256": "1b62b86b394527f6238522accb5b76d4c9cf5d23e1707003cd21a88f498b5e24"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/check.ps1",
+      "sha256": "874399645932bc62c7151639b9ce325c40755e491e953a2ef6c17caee10975c2"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/commands/results.json",
+      "sha256": "2dbf372540b8066d270319a489e64322df5b6922f246acc37704d332a2f00875"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/deliver.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/deliver.ps1",
+      "sha256": "b30925fb4488350d6cc29d9ac817f4892e0e5d2a83eca5ffdfcc1efdd2ec1280"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/dem-file-lifecycle.json",
+      "sha256": "f8ca86af8d574d150fc0f5a80d27628fae2b2b437a7274f6e441f48e84297d1d"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/final-metric.json",
+      "sha256": "2af142ee255cc900afd5923d3c2a891855eb783c83b9e2ce670b6607d22d2e49"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/identity.py",
+      "sha256": "d8cc8a1f28873750a5380d4a310dd3135c2f9a5eaa86dd14c872508a68e20a98"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/lease/guest_memory_lease_boundary_test/build.txt",
+      "sha256": "1b247c197c4583749e0950d8054bb1a55e5baf9f31e83509b115bc828edb2c47"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/lease/guest_memory_lease_boundary_test/identity.json",
+      "sha256": "7df750c1c5eab97970ea19cea4c54eff6cf476dad90d24e95a1c1c5afc264d54"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/lease/guest_memory_lease_boundary_test/result.txt",
+      "sha256": "029a2446b03c9056218a8be68d1623760a292894aabea48ff02f214b75f690d1"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/lease/guest_memory_lease_test/build.txt",
+      "sha256": "c319b673ce42aead9fabdfc0a9254cbf92a978f658834b17ad0f8259b52b2b7d"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/lease/guest_memory_lease_test/identity.json",
+      "sha256": "592622971ce0125e0bc14c84df80b135164ad317d6c2c475214ff2c069733365"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/lease/guest_memory_lease_test/result.txt",
+      "sha256": "2095d5302e465922147e220c0389f7a923ea0c1509a23097f04b3c220798aef8"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/location.json",
+      "sha256": "1d5e7e27bc266bcc08b7d26586bf4930cfc7a6ab5b5834c2bf1925803a73758b"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/measure.py",
+      "sha256": "7d02dee6236345f33ca387bb7e5d9a2403f6cf059fb7d9006e4842a19db7bad6"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/msvc-x64-release-worker-reference-x86-commands.txt",
+      "sha256": "8e3cb84bf955ed1142ce4e2f49f33b1be9d87fb57d2de038e41436d75fa974ba"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/msvc-x64-release-worker-reference-x86-deps.txt",
+      "sha256": "5c73cf5534ae1f3ef25f590ab765bc00ddab34a6e7339985487656f8f66afc23"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/msvc-x86-release-worker-commands.txt",
+      "sha256": "8e3cb84bf955ed1142ce4e2f49f33b1be9d87fb57d2de038e41436d75fa974ba"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/msvc-x86-release-worker-deps.txt",
+      "sha256": "c2c67afaa8beec82f0af53265abbb883541d8ee87ddcecb8581face785a3524a"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt",
+      "sha256": "95b9ad6ff51f01fab37d6c287f3b3b9ae44a71ad09107caa9a5e4b95cbe982c3"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.command-line.txt",
+      "sha256": "b3ce0158cff768fe1af58bb0b2577a9dcdd9b794a73de03e8558851c521c8248"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.console.txt",
+      "sha256": "2ac41054dc81cb3964ebae3f4248375ef92013b6d28dc81b5c8b5e14a3dab97a"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.initial-console.txt",
+      "sha256": "fcf51e9ad57affb78091f87d58f54055c6d8551fbea8daa1e1632bdf13d9953a"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.line-01.console.txt",
+      "sha256": "eaee53b69f167a5e10c6a1304cd13e32b254a5be35abdc59d4a6ee7ce292c0ae"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.line-02.console.txt",
+      "sha256": "f799f33e9511e42338c78895cd5d26a75b93fb5cbf269187e8dc0e10e0062e43"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.line-03.console.txt",
+      "sha256": "2135e7acc737e563944e40e2a69cb64b82ef1c502720a443a89651fc526b360a"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.line-04.console.txt",
+      "sha256": "0e61ff99d3d37dd26499f4272c209d78897209b13e5af134cc01c27e5f68de51"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.line-05.console.txt",
+      "sha256": "17bad2e80b685ec84ef32c308e706b957f1a8b745f628c1b23c4325c738e9925"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.line-06.console.txt",
+      "sha256": "b7eb332bc610b83a9f0c5842147ba5a5ed9713f1bca728e4d1a8aa7c1bc52e87"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.line-07.console.txt",
+      "sha256": "2ac41054dc81cb3964ebae3f4248375ef92013b6d28dc81b5c8b5e14a3dab97a"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/native-edit.txt.pre-input-console.txt.console.txt",
+      "sha256": "5a6bf6644d1c8f19b20b1d3726a1b9244559ded9c10d1b26f26b09ec0c68b284"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/normalized-final.json",
+      "sha256": "bc238c38b9911c56e264bf41fadb3dc2182bf0e7a818734aef042c04f29e064f"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/oem/build.txt",
+      "sha256": "b00cccd9e153b4c9ca1933aaa3f2f32f9075a67a1a439a6c79850c3427d0e25b"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/oem/result.json",
+      "sha256": "0f42aea6e7015b639c0ed0bbe1529277064694d5ae57bf8a8ab3602ab873c083"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/oem/result.txt",
+      "sha256": "01440e466e2110b6a315548c4037933361834f2f2150783d6cbd0449f60ac8f2"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/prior-release-final/assets/release-manifest.json",
+      "sha256": "af3d1d54c43c2808eedfeec8a7ccf243154eff3891d332f4562dd779085bee4a"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/prior-release-final/system32/release-manifest.json",
+      "sha256": "af3d1d54c43c2808eedfeec8a7ccf243154eff3891d332f4562dd779085bee4a"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/proof.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/proof.ps1",
+      "sha256": "a6eee5d4407301c853c39a13115acdcee929b2833b8082ed9d3f4edd04223617"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/provider-body-identity.json",
+      "sha256": "89dec0b1ec8b890e3dabeca87f822f2567572106c68e97a1aed6105fd13d0ad4"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/publication-final.json",
+      "sha256": "10d0070ef8f5c1ca00618b0c51b392d9b82af22aced3c1405fe93761f439e667"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/publish.ps1",
+      "sha256": "ac1d3ade722bb3b436961ff395d13782118318c3a39cae9c09f7d7d7ccce2575"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/record.py",
+      "sha256": "7aab5bd64057b4da0f1df3456944f2b4fb676cd16d00a8852483bc426db3a196"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/redirector-copy.json",
+      "sha256": "44fe8d85fe2917192821d114a98e93a8304b4b39dc8f1f03cc470bd9648033d9"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/resume-process.json",
+      "sha256": "5e530f6dbd5996255d60142cace4ce29dd2b370d1dc736299cf9665750250588"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/resume.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/resume.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/resume.out",
+      "sha256": "75a83dd2788bddb2c1fa1f36607a1d0d5e24b864765b8d632225532ec5f4bcc3"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/resume.ps1",
+      "sha256": "2a67049b672afe25853baa5f00e19cc5c36f58e7780a0ecce64dba77101a6788"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/stage.ps1",
+      "sha256": "dbcf03e8550bd3ad53dae3d2b9a945f1ee518be2bd7b3c6785a1f081853a76ce"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/strict-dir-final.txt",
+      "sha256": "c38907af5f4282c6da2a2c286e7aba43f9cccf62c647a942d0c000723e918a85"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/strict-dir-final.txt.cells.txt",
+      "sha256": "bdd5f63779d1f17f5ab5b882f5eedf1f842753c1972af8b06444a8fb9b7f7daa"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/strict-final.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/strict-final.ps1",
+      "sha256": "3f22fb90548a019df45e2d8c81d0cbdbce930e96cd66e7994a845e38e4a47f3b"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/targeted.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/targeted.ps1",
+      "sha256": "b4c031f447fb3166dcdbcbc7de999d39f450adabf559325d729b2356c0573033"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/tests.ps1",
+      "sha256": "8f521b03af40b1e27aa77bda971df686141d266062eddccbfe63dd96fff74b26"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-broken.txt",
+      "sha256": "eee567f2f4f3a9c5cb90bc7b6851813f80251066bee3e8ad1db98fb74c790bf1"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-broken.txt.command-line.txt",
+      "sha256": "8a93572011b8d59db2f3e3ed6c2d9a3dbd037f1f601e9135f8183f3d640860e6"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-broken.txt.console.txt",
+      "sha256": "d8736979605d767333a465be1085e8090a493ecf6c466953505504643c1c1e0d"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-broken.txt.initial-console.txt",
+      "sha256": "78caca5cc86565eb801d8432ee40665adbeda87ccd23ccfcd4c415d6d5f24de6"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-close-hang.txt",
+      "sha256": "cc7c068ed8a97bafd6f796205dce314e6252ae6f3eb58ebcc83e7b63994338f6"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-close-hang.txt.command-line.txt",
+      "sha256": "f6253d37d72fe6aff041d1780cb7d197c0bde4804425e1cb39591696f114f316"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-close-hang.txt.console.txt",
+      "sha256": "ab73671d2d328e310812ee18d3db939e5349ca2ea73fc8ed3e74c118f9285b93"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-close-hang.txt.initial-console.txt",
+      "sha256": "6b3aa468aef5592229dbfb02690b42d365b0e68b06f69723737d950a214e313c"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-normal.txt",
+      "sha256": "34131d6496e9f5ccf7acdf14c8bfa2fc333a150b6e20ab5aa0fd0340ce0f8526"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-normal.txt.command-line.txt",
+      "sha256": "86acf193a09c5b24b39495073ca0185d72bf6f794758e59d7b76442a947be618"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-normal.txt.console.txt",
+      "sha256": "ab73671d2d328e310812ee18d3db939e5349ca2ea73fc8ed3e74c118f9285b93"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/transport/keyboard-console-client-test-normal.txt.initial-console.txt",
+      "sha256": "d2ea547879f938fcae12c35ab8af519771d990fd4cae2f1c0e77a9ce118ef0ca"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/verify-process.json",
+      "sha256": "0b831b9d406f94496f15808fb280449656d1d66c68383d89c60b0c72b973f857"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/verify.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/verify.exit",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/verify.out",
+      "sha256": "710a24395b69e2cd06f9c53aa8d960a0e792ee814416d046f407c7a5e160ed12"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/check.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/check.out",
+      "sha256": "0894e21f7d61cb0f00b4b4a7e0acc772d8e823a2e4190085fe047b5db02ef99b"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/check.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/check-process.json",
+      "sha256": "fd8038669a93cf3fc7366a04ca1a9090d33bdb231895d174905f7d38e815739f"
+    },
+    {
+      "path": "build/t483-s13-dem-boundary/final-hashes.json",
+      "sha256": "3b85453cfc0f004f64e643ad24e4b369ff273652d1b1e91f3f90df934e367b05"
+    }
+  ],
+  "finalChecks": "Worker thread boundary, documentation governance, relative links and git diff --check pass. Re-read all22 published file hashes after runtime tests; all match manifest."
+}

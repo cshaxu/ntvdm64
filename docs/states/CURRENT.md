@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has447 open direct dependency IDs.
+**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has444 open direct dependency IDs.
 
 ## Active Packet
 
@@ -27,13 +27,15 @@
 
 ## Current Technical Baseline
 
-S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P8 below supersedes both published copies.
+S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P9 below supersedes both published copies.
 
-S13 P8: [cmdpif complete compilation boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p8-cmdpif-search-boundary.json). Original cmdpif.c remains byte-identical:0 mirror points/0 lines. Its title provider was resolved in [P7](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p7-cmdmisc-boundary.json); this delivery removes three unused D/F search directories in both product and reference graphs. Their shared IDs remain open for other files. No new ID elimination:121 eliminated/447 open of618;S13 has cleared25 IDs.
+S13 P9: [DEM guest-lease boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p9-dem-lease-boundary.json). Original DEM algorithms remain C-owned; the B contract declares numeric addresses and an opaque borrowed lease, while unchanged F providers own mapping, commit and retirement. dem.h changes only its include; dem.c and demhndl.c are byte-unchanged. Both compiler graphs cover16 DEM objects. C0034/C0194/C0196 eliminated:124 eliminated/444 open of618;S13 has cleared28 IDs.
 
-Cached x86/x64 and reference builds,8 A/B graphs and both final cmdpif include/command closures passed. Packageece2cccb-2735-4d74-9227-5033bb53f514 is published to both destinations with22 hashes verified. All11 images equal P7 after masking only package GUID and PE/debug timestamps; raw hashes differ. Owner-authorized repeated-runtime waiver applies; no new runtime or Full pass claimed. P7 targeted COMMAND/Console/WOW/location evidence remains the behavioral baseline.
+Cached full x86/x64 products, reference-x86 worker and8 A/B graphs pass. Packagea7109467-ae47-4128-8211-5ca2e8474305 is published to both destinations with22 hashes verified. Only NTVDM differs after masking package GUID and PE/debug timestamps; other10 images equal P8, not raw-byte identical.
 
-This file mirror delta0/0;cumulative reduction2 points/10 lines. Next DIR file:dos/dem/dem.c and its coupled dem.h lifecycle declarations. S13 remains active;S14 remains unadmitted.
+COMMAND capture/launch, guest-location, DEM file/lease, redirector copy/async/OEM, Console transport and actual native EDIT return/full DIR targeted checks pass. An obsolete redirector fixture initially failed to link; its current provider binding was repaired and rerun successfully. No Full or Win3.x/Win95 pass claimed.
+
+This cohort remains15 non-error mirror points/49 lines;delta0/0;cumulative reduction2 points/10 lines. Shared search-directory IDs and transitive witnesses retain their remaining consumers. Next DIR file:dos/dem/demgset.c. S13 remains active;S14 remains unadmitted.
 
 ## S12 Closure Record
 

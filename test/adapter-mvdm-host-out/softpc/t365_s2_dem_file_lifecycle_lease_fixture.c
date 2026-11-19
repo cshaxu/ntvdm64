@@ -35,6 +35,7 @@ static int write_memory(void *context, uint32_t address,
 
 int main(void)
 {
+    if (!mvdm_guest_location_initialize()) return 255;
     static uint8_t const payload[] = { 'C', 'O', 'M', 0x1au };
     CHAR temporaryDirectory[MAX_PATH];
     CHAR temporaryPath[MAX_PATH];

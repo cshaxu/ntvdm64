@@ -312,6 +312,9 @@ no-frontend queries; B holds no Console state and imports no outer provider.
 WOW boot-block allocation contract. It uses native APIs and `system_root.c`,
 not worker/session state; tests reside under `test/compat`.
 
-`guest_location.c` exposes numeric real-mode locations and an immutable guest-copy
-operation installed by the product. Mapping leases, session selection and copy
-failure semantics remain in the NTVDM provider; no mapping pointer crosses B.
+`guest_location.c` exposes numeric real-mode locations and immutable copy,
+acquire and release operations installed by the product. The borrowed buffer
+and opaque lease retain their original synchronous lifetime. B declares the
+opaque type and access flags in `include/guest_memory_types.h`; it neither
+allocates nor inspects the lease. Session selection, mapping, commit and failure
+semantics remain in the NTVDM provider.

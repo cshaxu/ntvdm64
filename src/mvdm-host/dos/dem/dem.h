@@ -130,7 +130,7 @@ typedef struct _DISKINFO {
 
 #include "dosdef.h"
 #include "dossvc.h"
-#include <mvdm_guest_location.h>
+#include "compat/include/guest_location.h"
 #line 117
 
 

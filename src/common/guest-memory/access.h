@@ -1,14 +1,6 @@
 #ifndef COMMON_GUEST_MEMORY_ACCESS_H
 #define COMMON_GUEST_MEMORY_ACCESS_H
-#include <stdint.h>
-
-/* The lease is borrowed from the current worker's single memory context.
- * Consumers must return it to that provider and must not inspect its fields. */
-typedef struct guest_memory_lease guest_memory_lease;
-enum guest_memory_access {
-    GUEST_MEMORY_ACCESS_READ = 1u,
-    GUEST_MEMORY_ACCESS_WRITE = 2u
-};
+#include "compat/include/guest_memory_types.h"
 
 #if defined(_MSC_VER)
 #define COMMON_GUEST_CDECL __cdecl

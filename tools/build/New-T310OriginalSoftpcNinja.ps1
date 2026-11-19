@@ -1010,13 +1010,20 @@ $dosObjects = foreach ($name in $dosNames) {
 $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $dosRoot $name)))
     $object
 }
+$demCommandFlags = $baseFlags
+foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
+    'src/ntvdm-exe/softpc/include', 'src/ntvdm-exe/softpc/include/generated/x86/prod',
+    'src/vdmredir-dll/include', 'src/wow32-dll/include')) {
+    $demCommandFlags = $demCommandFlags.Replace(' /I "' +
+        (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
+}
 $demObjects = foreach ($name in $demNames) {
     $object = 'obj/dem/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $demRoot $name)))
     # Exact original `sources` contract: this package exposes its Win32 and
     # DEVL trace declarations through these compile definitions.  They do not
     # add a new product path; the source owns the zero-initialized trace mask.
-    $demFlags = $baseFlags + ' /DWIN_32 /DDEVL'
+    $demFlags = $demCommandFlags + ' /DWIN_32 /DDEVL'
     if ($name -eq 'demgset.c') { $demFlags += $commandInclude }
     $graph.Add('  cflags = ' + $demFlags)
     $object
@@ -1025,14 +1032,7 @@ $commandObjects = foreach ($name in $commandNames) {
     $object = 'obj/command/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commandRoot $name)))
     if ($name -in @('cmdmisc.c','cmdpif.c')) {
-        $commandFlags = $baseFlags
-        foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
-            'src/ntvdm-exe/softpc/include', 'src/ntvdm-exe/softpc/include/generated/x86/prod',
-            'src/vdmredir-dll/include', 'src/wow32-dll/include')) {
-            $commandFlags = $commandFlags.Replace(' /I "' +
-                (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
-        }
-        $graph.Add('  cflags = ' + $commandFlags + ' /FI "' +
+        $graph.Add('  cflags = ' + $demCommandFlags + ' /FI "' +
             (NinjaPath (Join-Path $root 'src/compat/include/console_title.h')) + '"')
     }
     $object

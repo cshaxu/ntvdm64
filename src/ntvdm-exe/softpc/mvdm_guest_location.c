@@ -109,13 +109,7 @@ static int copy_to_guest(mvdm_guest_location const *location,
     return mvdm_guest_location_release(&lease, 1);
 }
 
-int mvdm_guest_location_initialize(void)
-{
-    static const compat_guest_location_services services = {copy_to_guest};
-    return compat_guest_location_install(&services);
-}
-
-int mvdm_guest_location_acquire(mvdm_guest_location const *location,
+static int acquire(mvdm_guest_location const *location,
     uint32_t byte_count, uint32_t access,
     mvdm_guest_location_lease *lease_out)
 {
@@ -139,7 +133,7 @@ int mvdm_guest_location_acquire_vm(mvdm_guest_location const *location,
         &lease_out->lease, &lease_out->bytes);
 }
 
-int mvdm_guest_location_release(mvdm_guest_location_lease *lease,
+static int release(mvdm_guest_location_lease *lease,
     int commit)
 {
     session *instance = session_thread_current();
@@ -149,4 +143,12 @@ int mvdm_guest_location_release(mvdm_guest_location_lease *lease,
     result = session_guest_memory_release(instance, lease->lease, commit);
     memset(lease, 0, sizeof(*lease));
     return result;
+}
+
+int mvdm_guest_location_initialize(void)
+{
+    static const compat_guest_location_services services = {
+        copy_to_guest, acquire, release
+    };
+    return compat_guest_location_install(&services);
 }

@@ -10,11 +10,6 @@
 extern "C" {
 #endif
 
-typedef struct mvdm_guest_location_lease {
-    guest_memory_lease *lease;
-    uint8_t *bytes;
-} mvdm_guest_location_lease;
-
 int mvdm_guest_location_initialize(void);
 int mvdm_guest_location_from_far_value(mvdm_guest_location *location,
     uint32_t far_value);
@@ -27,16 +22,11 @@ int mvdm_guest_location_read_u16(mvdm_guest_location const *location,
     uint16_t *value_out);
 int mvdm_guest_location_copy_c_string(mvdm_guest_location const *location,
     uint8_t *bytes_out, uint32_t capacity, uint32_t *byte_count_out);
-int mvdm_guest_location_acquire(mvdm_guest_location const *location,
-    uint32_t byte_count, uint32_t access,
-    mvdm_guest_location_lease *lease_out);
 /* Synchronous VMM alias access: base is the actual VM's CB_High_Linear,
  * never a native pointer. Ordinary real-mode access uses base zero. */
 int mvdm_guest_location_acquire_vm(mvdm_guest_location const *location,
     uint32_t linear_base, uint32_t byte_count, uint32_t access,
     mvdm_guest_location_lease *lease_out);
-int mvdm_guest_location_release(mvdm_guest_location_lease *lease,
-    int commit);
 
 #ifdef __cplusplus
 }
