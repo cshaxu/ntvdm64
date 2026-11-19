@@ -638,6 +638,8 @@
 - 直接包含 · C0077 · wow32-dll · src/wow32-dll/include/wow_class_query_bindings.h
 - 直接包含 · C0095 · wow32-dll · src/wow32-dll/include/wow_edit_call_bindings.h
 
+098 P54: Five production contexts verified; original client policy stays C, seven F symbols remain. Native dialog setter and worker-exported NtCurrentPeb have B source owners. Mirror0/0; see s12-p54-client-stubs-ownership.json.
+
 ## 099 — src/non-mvdm/windows/core/ntuser/client/rtlinit.c
 
 - 直接包含 · C0121 · wow32-dll · src/wow32-dll/include/wow_user_capture_bindings.h

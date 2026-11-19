@@ -223,3 +223,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P52 ListBox lifecycle and heights](s12-p52-list-lifecycle-ownership.json): files095-096; original algorithms/storage retained, shared invocation and mixed header stay open. Review96/116,502/617 open.
 
 [P53 DrawState contexts](s12-p53-drawing-ownership.json): file097; both production compositions verified, five F symbols remain; native leaves already B. Review97/116,502/617 open.
+
+[P54 Client stubs](s12-p54-client-stubs-ownership.json): file098; five contexts, seven F symbols and three mixed headers remain. Worker export NtCurrentPeb verified B source ownership. Review98/116,502/617 open.
