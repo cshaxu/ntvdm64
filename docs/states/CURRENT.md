@@ -30,7 +30,7 @@
 
 S12 P1-P2 build, publication and direct-header evidence are indexed in the [C dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
 
-P2 removed C0056, C0138, C0140 and C0144 without changing either mirror. The WOW32 graph also dropped its inherited worker command and SoftPC search roots. P2 package 93bb7b13-4fcd-42ce-bbfe-c318a53669ba was built with both cached toolchains and hash-verified at both destinations. Every byte of all eleven P2 images equals P1 after masking only the package GUID and COFF/debug-directory timestamps. The WOW32 formal graph, worker session lifecycle and A/B production boundary checks passed. The expanded compile commands and a VDMREDIR link map corrected the baseline coverage. See the C tracker for the updated counts.
+P2: [Build-root cleanup, identity and dual-publication evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
 
 P3: [Worker entry delivery and mirror reduction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p3-entry.json).
 
@@ -186,4 +186,6 @@ P61: [Message-table ownership](../../artifacts/mvdm-audit/t483-c-layer-dependenc
 
 P62: [Scheduler ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p62-scheduler-ownership.json).
 
-P63: [RTL drawing ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p63-rtl-drawing-ownership.json). Reviewed109/116;7 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P59 hashes verified; S12 active.
+P63: [RTL drawing ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p63-rtl-drawing-ownership.json).
+
+P64: [RTL text ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p64-rtl-text-ownership.json). Reviewed110/116;6 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P59 hashes verified; S12 active.

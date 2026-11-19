@@ -712,6 +712,8 @@
 
 - 直接包含 · C0066 · wow32-dll · src/wow32-dll/include/control-drawing/precomp.h
 
+110 P64: C0066/C0392 compile dependency remains; live text helpers use inner/platform services. Preserve compiled original DT helpers and reconcile context/declarations in S13/S14. Mirror0/0; reviewed110/116, open500/618. See s12-p64-rtl-text-ownership.json.
+
 ## 111 — src/non-mvdm/windows/core/ntuser/rtl/getset.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h

@@ -243,3 +243,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P62 Scheduler ownership](s12-p62-scheduler-ownership.json): file108; original scheduler policy and host wait/context boundary traced. Review108/116;500/618 open. No product changes.
 
 [P63 RTL drawing](s12-p63-rtl-drawing-ownership.json): file109; native providers already B, captured color-depth context remains F. Review109/116;500/618 open. No product changes.
+
+[P64 RTL text](s12-p64-rtl-text-ownership.json): file110; compiled context dependency distinguished from live prefix/underline/font helpers. Review110/116;500/618 open. No product changes.
