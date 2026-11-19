@@ -1,0 +1,188 @@
+{
+  "baseline": "8e861a513536a122ae37c25d7fc4544c9bd2fdf2",
+  "status": "P57 native event reference migration and cleanup ownership audit",
+  "original": {
+    "repository": "O:/repos.external/OpenNT",
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "files": [
+      "windows/core/ntuser/kernel/cleanup.c",
+      "windows/core/ntuser/kernel/exitwin.c"
+    ],
+    "review": "Original complete cleanup algorithm and original registration function inspected; no source copied or guest modified."
+  },
+  "files": [
+    {
+      "number": 102,
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "sha256": "888f066477eec6ed78d9a86bc45d5c2f7cd8ec2f4b4081d8e837305ba4f0334a",
+      "object": "obj/opennt-user/cleanup.obj",
+      "coffUndefined": [
+        "_ProbeForRead@12",
+        "_wow_cleanup_set_window_procedure@12",
+        "_wow_cleanup_set_class_procedure@8",
+        "__imp__RtlRaiseStatus@4",
+        "__except_handler4",
+        "_gabObjectCreateFlags",
+        "___security_cookie"
+      ],
+      "stableSymbols": [
+        "C0331",
+        "C0332"
+      ],
+      "objectSha256": "c7cf5312aed57e45cc093bfd61c9d7dc5c6c95e1fd13ae94b2146286ad950f74",
+      "dependencies": [
+        "obj/opennt-user/cleanup.obj: #deps 27, deps mtime 8167774211563242 (VALID)",
+        "    ../../../../src/common/wow/user_runtime.h",
+        "    ../../../../src/compat/include/nt_event_declarations.h",
+        "    ../../../../src/compat/include/ntioapi.h",
+        "    ../../../../src/compat/include/opennt_support_thread.h",
+        "    ../../../../src/compat/include/opennt_support_types.h",
+        "    ../../../../src/compat/include/winuserp.h",
+        "    ../../../../src/compat/include/wow_class_lookup_bindings.h",
+        "    ../../../../src/compat/include/wow_task_event_binding.h",
+        "    ../../../../src/compat/include/wow_user_declarations.h",
+        "    ../../../../src/compat/include/wow_user_probe_bindings.h",
+        "    ../../../../src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+        "    ../../../../src/wow32-dll/include/opennt_user_multipass.h",
+        "    ../../../../src/wow32-dll/include/wow_cleanup_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_input_group_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_shared_user_abi.h",
+        "    ../../../../src/wow32-dll/include/wow_task_order_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_user_client_view_layout.h",
+        "    ../../../../src/wow32-dll/include/wow_user_object_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_window_dispatch_bindings.h",
+        ""
+      ],
+      "mapProviders": [
+        "0001:00051590       _ProbeForRead@12           10052590 f   probe.obj",
+        "0001:0005be40       _wow_cleanup_set_class_procedure@8 1005ce40 f   wow_cleanup_bindings.obj",
+        "0001:0005be50       _wow_cleanup_set_window_procedure@12 1005ce50 f   wow_cleanup_bindings.obj",
+        "0001:00076cc0       __except_handler4          10077cc0 f   libvcruntime:chandler4.obj",
+        "0002:00000704       __imp__RtlRaiseStatus@4    1008e704     legacy-wow-ntdll:NTDLL.DLL",
+        "0002:000024b4       _gabObjectCreateFlags      100904b4     wow-object-ownership.obj",
+        "0003:000038c0       ___security_cookie         100a38c0     LIBCMT:gs_cookie.obj"
+      ]
+    },
+    {
+      "number": 103,
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "sha256": "1a4a6b65882593cf8ec079e650366013a3b87ff4968d64f3b8e000624fa89197",
+      "object": "obj/opennt-user/exitwin.obj",
+      "coffUndefined": [
+        "__imp__HeapAlloc@12",
+        "__imp__HeapFree@12",
+        "__imp__GetProcessHeap@0",
+        "_wow_task_reference_event@8",
+        "_memset"
+      ],
+      "stableSymbols": [
+        "C0458"
+      ],
+      "objectSha256": "af65c6535662a9798f5455105047dc1691b64216eff26904e45cbf8eaacf3684",
+      "dependencies": [
+        "obj/opennt-user/exitwin.obj: #deps 19, deps mtime 8167774236550373 (VALID)",
+        "    ../../../../src/common/wow/user_runtime.h",
+        "    ../../../../src/compat/include/nt_event_declarations.h",
+        "    ../../../../src/compat/include/ntioapi.h",
+        "    ../../../../src/compat/include/opennt_support_thread.h",
+        "    ../../../../src/compat/include/opennt_support_types.h",
+        "    ../../../../src/compat/include/wow_task_event_binding.h",
+        "    ../../../../src/compat/include/wow_user_declarations.h",
+        "    ../../../../src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+        "    ../../../../src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "    ../../../../src/wow32-dll/include/opennt_user_multipass.h",
+        "    ../../../../src/wow32-dll/include/wow_shared_user_abi.h",
+        "    ../../../../src/wow32-dll/include/wow_task_order_bindings.h",
+        "    ../../../../src/wow32-dll/include/wow_user_client_view_layout.h",
+        ""
+      ],
+      "mapProviders": [
+        "0001:00075650       _wow_task_reference_event@8 10076650 f   wow_task_event_binding.obj",
+        "0001:000773a0       _memset                    100783a0 f   libvcruntime:memset.obj",
+        "0002:000003e4       __imp__GetProcessHeap@0    1008e3e4     kernel32:KERNEL32.dll",
+        "0002:000005c8       __imp__HeapFree@12         1008e5c8     kernel32:KERNEL32.dll",
+        "0002:000005d0       __imp__HeapAlloc@12        1008e5d0     kernel32:KERNEL32.dll"
+      ]
+    }
+  ],
+  "change": {
+    "from": "src/wow32-dll/source/wow_task_event_binding.c",
+    "to": "src/compat/wow_task_event_binding.c",
+    "declarations": "src/compat/include/wow_task_event_binding.h",
+    "bodyIdentical": true,
+    "compile": "SDK-only native flags, no mirror selectors or forced F headers; actual provider deps contain only its B project header. Single original function, no second provider. F task-order header imports declaration; producer graph selects B object.",
+    "machineCode": "Old F and new B object .text$mn both352 bytes, SHA256 747f0c5f836577505031504ba5e55ac50f4973b02df5a296a202de753d7556c3. This does not alone prove entire-image identity."
+  },
+  "mechanisms": {
+    "cleanup": "Original ClientDied raises through native RtlRaiseStatus; selector searches, module/task/thread selection and deferred class cleanup remain C. ProbeForRead is existing B binding. gabObjectCreateFlags is the already-approved B/C exception, not a new F edge.",
+    "cleanupOutward": "C0331/C0332 set class/window procedures through F existing live storage. Window leaf validates native identity and existing enrollment then replaces actual native WNDPROC; class leaf changes the existing class binding under its procedure lock. Moving these leaves to B would require F storage ownership and is not a simple API move.",
+    "cleanupCallbacks": "destroy_class resolves to wow_user_task_lifecycle.c cleanup_destroy_class and existing class destruction. destroy_object resolves to wow_menu_client_cleanup; allocate/release are native heap callbacks. C0081 composes F task/window/object headers and original C userk flags, so cannot wholesale move to B. Indirect callbacks counted as lifecycle evidence, not ignored because absent from COFF.",
+    "entryAndFailure": "F wow_user_cleanup_bound constructs temporary tree links from existing enrolled table and restores root/clears links in finally. It folds object_release_failed into return. Lifecycle entry holds existing USER serialization and prepares exiting task windows outside that lock; thread retirement only withdraws after cleanup succeeds. Module unload is not thread destruction. S13 must preserve these relationships; no runtime proof of all failure/reentrancy cases claimed.",
+    "event": "Original exitwin registration allocates/zeros record, references event with EVENT_ALL_ACCESS, then stores callback/client handle and links record; failure frees allocation. Current native event reference only duplicates, queries granted access and object type, and releases failed duplicate. It has no task, window, guest or product state. Function body and signature unchanged when moved B.",
+    "eventLifetime": "F wow_user_task_lifecycle_register holds existing runtime serialization around original registration. Original taskman consumes retained event; F process disposal closes it after threads/classes/objects retire. Event primitive ownership B does not transfer lifecycle ownership or introduce a second event. C0117 mixed task-order header remains open."
+  },
+  "progress": {
+    "reviewedFiles": 103,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 70,
+    "deferredSourceAbiCompositionFiles": 16,
+    "unreviewedFiles": 13,
+    "totalFiles": 116,
+    "openIds": 500,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Cached x86/x64 and explicit four x86 worker images passed; package staged.",
+    "identity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityLimit": "WOW32 does not equal P56 after GUID/COFF/debug timestamp normalization; other10 match. finish.exit1 is the explicit no-runtime-waiver guard, not a compilation failure. Candidate must run targeted runtime before publication.",
+    "targeted": "Existing task-order fixture passed errors=0: registration6, sequences5, send_reply4, same_worker_nested4, native_send3, native_same_thread1, locks6, destruction7, waits4, directed6, init8; eligibility passed. Registration test repeats invalid/null/limited-right/semaphore/process cases32 times with no handle-count growth, verifies retained event after original close.",
+    "boundaries": "Eight A/B graphs passed;148 selected WOW objects and9 negative controls passed.",
+    "runtime": "runtime-verified.exit0: existing real x86 CCPU40 Winmine/Sol/Write frontier checks passed; owned short physical stage removed in finally. Historical SOL/Write status frontiers allowed by existing verifier are not full interaction or gameplay acceptance. Initial stage-allocation failure was resolved using authorized access to O:/tmp, without product changes.",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "e2ac4078-5418-42c5-a280-0eb1b4708635",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-cleanup-event/docs.log and docs.exit. git diff --check passed. New declaration header normalized to LF; no token or ABI change.",
+    "publicationOrder": "Automatic approval initially rejected publication before targeted runtime. Required tests then passed; publication approved and completed, no running production instance stopped.",
+    "providerDependencies": "obj/compat/wow_task_event_binding.obj: #deps 1, deps mtime 8167774362815302 (VALID)\n    ../../../../src/compat/include/wow_task_event_binding.h\n\n"
+  },
+  "limits": "No original guest, mirror #error/#line, winnt.zip or addon modifications. This audit identifies remaining coupled lifecycle work, not approval to retain all historical mirror deviations."
+}

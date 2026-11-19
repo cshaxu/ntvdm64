@@ -40,7 +40,7 @@ P6: [Common storage evidence](../../artifacts/mvdm-audit/t483-c-layer-dependenci
 
 P7: [Mixed storage ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json).
 
-P8 indexed all 462 open link symbols against 170 fixed original caller sources. The [caller anchors](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p8-caller-anchors.json) distinguish name occurrences from product relocations. C0456 requires a calling-convention and guest-buffer ownership review before restoring the original flush provider. Package and tracker totals remain at P7.
+P8: [Original caller anchors](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p8-caller-anchors.json).
 
 P9 removed the redundant forced service header from srvvdm.c. The normal include remains. Both release destinations have the eleven verified images. The [per-file inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p9-file-dependencies.json) covers 539 product compile contexts and records 116 distinct C-layer files with a direct compile dependency and 170 with a direct link binding (190 in their union). The stable tracker still has 555 open items.
 
@@ -172,4 +172,6 @@ Owner accepted and closed T483 S10. P1 shipped at 14969ed80 with the targeted ve
 Each sequential-file entry and exit reports both file and whole-audit totals.
 The unrelated project [TODO](TODO.md) remains separate.
 
-P56: [Class lookup ABI](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p56-class-lookup-abi.json). Reviewed101/116:17 clear,68 lifecycle,16 ABI;15 remain. Open501/617. Mirror0/0; cumulative reduction2 points/10 lines. Both cached builds, dual publication, class lookup and boundary checks passed. S12 active.
+P56: [Class lookup ABI](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p56-class-lookup-abi.json).
+
+P57: [Cleanup/event ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p57-cleanup-event.json). Reviewed103/116:17 clear,70 lifecycle,16 ABI;13 remain. Open500/617. Mirror0/0; cumulative reduction2 points/10 lines. Cached builds, task-order, retained Win16 frontiers and dual publication passed. S12 active.

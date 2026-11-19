@@ -78,7 +78,6 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_cleanup_bindings.c'),
     (Join-Path $adapterWow 'wow_user_borrow_scope.c'),
     (Join-Path $adapterWow 'wow_class_client_bindings.c'),
-    (Join-Path $adapterWow 'wow_task_event_binding.c'),
     (Join-Path $adapterWow 'wow_task_profile_binding.c'),
     (Join-Path $adapterWow 'wow_task_termination.c'),
     (Join-Path $adapterWow 'wow_task_parent.c'),
@@ -696,6 +695,9 @@ $ninja.Add('build obj/compat/wow_dialog_slots.obj: cc ' + (ConvertTo-NinjaPath (
 $ninja.Add('  cflags = ' + $nativeCflags)
 $supportObjects.Add('obj/compat/wow_native_controls.obj')
 $ninja.Add('build obj/compat/wow_native_controls.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_native_controls.c')))
+$ninja.Add('  cflags = ' + $nativeCflags)
+$supportObjects.Add('obj/compat/wow_task_event_binding.obj')
+$ninja.Add('build obj/compat/wow_task_event_binding.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_task_event_binding.c')))
 $ninja.Add('  cflags = ' + $nativeCflags)
 $supportObjects.Add('obj/compat/wow_native_environment.obj')
 $ninja.Add('build obj/compat/wow_native_environment.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_native_environment.c')))

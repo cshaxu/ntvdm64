@@ -664,9 +664,13 @@
 
 - 直接包含 · C0081 · wow32-dll · src/wow32-dll/include/wow_cleanup_bindings.h
 
+102 P57: Cleanup algorithms remain C; two procedure storage leaves C0331/C0332, mixed C0081 header and indirect resource callbacks remain lifecycle work. Existing B object-table exception unchanged; mirror0/0. See s12-p57-cleanup-event.json.
+
 ## 103 — src/non-mvdm/windows/core/ntuser/kernel/exitwin.c
 
 - 直接包含 · C0117 · wow32-dll · src/wow32-dll/include/wow_task_order_bindings.h
+
+103 P57: C0458 native event reference moved F to B with unchanged body; original registration remains C, retained handle teardown F. C0117 mixed task header remains; mirror0/0. See s12-p57-cleanup-event.json.
 
 ## 104 — src/non-mvdm/windows/core/ntuser/kernel/getset.c
 

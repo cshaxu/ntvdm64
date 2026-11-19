@@ -2,6 +2,7 @@
 #define WOW_TASK_ORDER_BINDINGS_H
 #include <windows.h>
 #include <winternl.h>
+#include "wow_task_event_binding.h"
 #include "common/wow/user_runtime.h"
 
 /* Original kernel declarations share the existing checked client layouts. */
@@ -176,7 +177,6 @@ BOOL WINAPI wow_task_resource_cleanup_enter(wow_task_callback_scope *);
 BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *);
 typedef VOID (WINAPI *wow_task_end_callback)(VOID);
 BOOL WINAPI xxxRegisterUserHungAppHandlers(wow_task_end_callback, HANDLE, wow_task_order_process *);
-BOOL WINAPI wow_task_reference_event(HANDLE, HANDLE *);
 #define WOW_TASK_TIF_INCLEANUP 0x00000001u
 #define WOW_TASK_TIF_16BIT 0x00000002u
 #define WOW_TASK_TIF_FIRSTIDLE 0x00002000u

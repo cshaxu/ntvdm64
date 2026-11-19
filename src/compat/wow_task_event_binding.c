@@ -1,4 +1,5 @@
-#include "wow_task_order_bindings.h"
+#include "include/wow_task_event_binding.h"
+#include <winternl.h>
 #include <string.h>
 
 /* ADAPTER-WOW-040: retain an event reference without publishing a kernel

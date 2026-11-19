@@ -229,3 +229,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P55 Capture/lookaside](s12-p55-capture-lookaside-ownership.json): file099; no F business calls, mixed original declaration header remains. Review99/116,502/617 open.
 
 [P56 Class lookup ABI](s12-p56-class-lookup-abi.json): files100-101; shared SDK-only header moves F to B, original algorithms unchanged. Review101/116,501/617 open.
+
+[P57 Cleanup/event ownership](s12-p57-cleanup-event.json): files102-103; native event reference moved to B, lifecycle responsibilities remain explicit. Review103/116,500/617 open.
