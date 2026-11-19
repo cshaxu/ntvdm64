@@ -1,0 +1,78 @@
+{
+  "baseline": "3012d3a4913cf37ccb9f40023b7dc8789f15d093",
+  "question": "Can C0300 be removed in place without changing the mirror or mixing graphics lifetime into native handle closing?",
+  "id": "C0300",
+  "procedure": [
+    "Inspect all five mirror callers listed by the existing linked-relocation evidence.",
+    "Trace event creation and graphics identity ownership in current source.",
+    "Compile nt_timer.c with its actual production command plus isolated /DMvdmCloseConsoleHandle=CloseHandle; inspect COFF references and compiler diagnostics."
+  ],
+  "trial": {
+    "baseline": "3012d3a4913cf37ccb9f40023b7dc8789f15d093",
+    "trialExit": 0,
+    "change": "isolated compilation only: /DMvdmCloseConsoleHandle=CloseHandle",
+    "objects": [
+      {
+        "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_timer.obj",
+        "sha256": "fab4729831c323f00bdb7a28eb3b1986e5dd8ad2d683b9ee782b17b8879cc807",
+        "closeReferences": [
+          "_MvdmCloseConsoleHandle@4"
+        ]
+      },
+      {
+        "path": "build\\t483-s12-timer-close-trial\\nt_timer.obj",
+        "sha256": "5516050cece4d529bafd74a06ad6b4c1a6a447e52ab2cefca2cd6d6e34adeade",
+        "closeReferences": [
+          "_CloseHandle@4"
+        ]
+      }
+    ],
+    "newDiagnostic": "conapi.h(24): C4273 CloseHandle inconsistent dll linkage",
+    "decision": "Do not promote this command-line alias. It rewrites the provider declaration as well as the call and conflicts with the SDK dllimport declaration. No production source or graph changed. C0300 remains open.",
+    "scope": "Only nt_timer.c native heartbeat thread CloseHandle; not proof that all callers can bypass graphics owner."
+  },
+  "callers": {
+    "nt_error.c": "CloseHandle(hThread) closes the CreateThread result after waiting. Native thread.",
+    "nt_event.c": "EventMgr thread and hConsoleWait/hConsoleSuspend CreateEvent results. Native thread/events.",
+    "nt_timer.c": "ThreadInfo.HeartBeat.Handle closes native heartbeat thread on STATUS_ALERTED.",
+    "nt_msscs.c": "NTIO/ROM input file handles from CreateFile. Native files.",
+    "nt_graph.c": "sc.ScreenBufHandle needs graphics object retirement; sc.ConsoleBufInfo.hMutex is native. The same file contains both kinds."
+  },
+  "decision": "Reject command-line alias: introduces C4273 and changes imported declaration. Keep C0300 open. Assign the graphics identity creation/activation/retirement group to S13; preserve original C drawing algorithms. Resolve native-handle fallthrough together with the graphics binding, not separate per-file macros. Do not move session-owned F graphics implementation wholesale into B.",
+  "evidenceLimits": [
+    "This is source/compile classification, not new runtime acceptance.",
+    "No solution is implemented or dependency counted eliminated by this receipt.",
+    "Existing base_resource binding owns authenticated BaseSrv resource requests, not graphics lifetime; reusing it would require an ownership redesign, not a simple function move."
+  ],
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_error.c": "23750428bf62daaf8490d2668b60749fd3f608d4053139ebea918d0c5613366d",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c": "4794c19843beb5a3ffbc2aa8356a03108e405c7a35969077a4b17b564a8195df",
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": "029acccddfa56c2d147603beefbaf1ef26240d9436561dc191cd89c7cfa700bc",
+    "src/mvdm-host/softpc.new/host/src/nt_msscs.c": "aecc3e4f6073e038652a6f94454cf34875650754a3886f0ab64b3f9517be0b8e",
+    "src/mvdm-host/softpc.new/host/src/nt_timer.c": "7c4a0fd51a07ad761b9ea35a5e288f66bca7fd47416675c239cea871d9e2816f",
+    "src/compat/include/conapi.h": "6f66445927ad772e87e9fd1b1e95d08de9ec6f00e44b9efc3bc14e6503cf7094",
+    "src/ntvdm-exe/win32/console_graphics.c": "77dd8ca309a906f2cd5789577bf516698569d717a1792cb786ab39a0a676661a",
+    "src/compat/base_resource.c": "ba2249c41cb99e70b2c04313b5908746b0f973c1ab78efec33771bbe6eece80c"
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "progress": {
+    "reviewedFiles": 190,
+    "totalFiles": 190,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 475,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 93
+    },
+    "totalIds": 618
+  },
+  "verification": "Isolated compile exited 0 but is rejected due to new C4273 diagnostic. Documentation governance and git diff --check passed. No product change: no new build, runtime test or publication claimed."
+}

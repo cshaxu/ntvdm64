@@ -325,3 +325,5 @@ P102: [Classifier path ownership delivery](s12-p102-classifier-path-ownership.js
 P103: [Immutable config ownership](s12-p103-config-ownership.json); C0154/C0155 move D to B unchanged, actual x86/x64 object tests and dual release pass. Five session-thread edges explicitly remain S13.
 
 P104: [Start-glass ownership](s12-p104-start-glass-ownership.json); C0320/C0440 use one B source with original per-product ABI, identical function bytes, cached builds and complete dual publication. Pure-relocation runtime waiver applies.
+
+P105: [Console close ownership](s12-p105-console-close-ownership.json); five callers classified, isolated macro alias rejected for C4273. Graphics lifetime remains an open S13 cohort; no product change or new runtime claim.
