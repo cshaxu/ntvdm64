@@ -222,3 +222,9 @@ original-host CRT redirect. Their historical divergence records remain indexed
 in compat/README.md. Shared original declarations and genuinely
 multi-owner bindings remain separate; this relocation does not introduce a
 generic compatibility library or modify original guest media.
+
+The COMMAND composition entry `command/source/mvdm_command_binding.c` installs
+the B service contract before original worker execution. Existing native-child
+capture/release and native launch providers remain product-owned. Borrowed
+strings retain their existing lifetime through finish; the table does not
+introduce another snapshot, request registry or mutable command state.

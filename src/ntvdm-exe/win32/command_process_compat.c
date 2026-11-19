@@ -1,4 +1,3 @@
-#include "command_process_compat.h"
 #include "ntvdm-exe/command/include/mvdm_command_native_child.h"
 #include "ntvdm-exe/command/include/command_launch.h"
 #include "lib-win32/process-launch/attributes.h"

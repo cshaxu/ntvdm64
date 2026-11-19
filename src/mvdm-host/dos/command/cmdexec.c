@@ -16,7 +16,7 @@
 #line 16
 #include <oemuni.h>
 #include <wowcmpat.h>
-#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
+#include "compat/include/command_native_child.h"
 #include "compat/include/thread_start_compat.h"
 #undef CreateThread
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \

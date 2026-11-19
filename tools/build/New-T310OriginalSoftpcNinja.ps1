@@ -264,7 +264,8 @@ $adapterWin32Names = @('ccpu_thread_exit_compat.c',
 # never be rebuilt into an audit or production archive.
 $adapterBaseSrvNames = @('mvdm_command_guest_state.c',
                           'mvdm_command_launch.c',
-                          'mvdm_command_native_child.c')
+                          'mvdm_command_native_child.c',
+                          'mvdm_command_binding.c')
 $adapterVddNames = @('mvdm_softpc_vdd_unavailable.c')
 $adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_registers.c')
@@ -1607,7 +1608,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ntvdm-command-launch-test.exe: broker_test_link obj/tests/ntvdm_command_launch.obj obj/adapter-win32/command_process_compat.obj lib-process-launch.lib')
     $graph.Add('build obj/tests/ntvdm_command_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_capture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-softpc/mvdm_vm_command.obj obj/adapter-softpc/mvdm_guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')
+    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/adapter-softpc/mvdm_guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')
     $graph.Add('build obj/tests/win32_process_launch.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-launch/process.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-process-launch-test.exe: broker_test_link obj/tests/win32_process_launch.obj lib-process-launch.lib')
@@ -2111,7 +2112,9 @@ $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressOb
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
 # Worker composition contains only reached COMMAND/BOP support.  It has no
 # local BaseVDM producer, retry loop or single-process queue.
-$graph.Add('build worker-command-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' '))
+$graph.Add('build obj/compat/command_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/command_services.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$graph.Add('build worker-command-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' ') + ' obj/compat/command_services.obj')
 $graph.Add('build monitor-bindings.lib: lib ' + ($adapterMonitorObjects -join ' '))
 $graph.Add('build kernel-vdm-printer.lib: lib ' + $kernelVdmPrinterObject)
 $graph.Add('build debugger-bindings.lib: lib ' + ((@($adapterDebuggerObjects) + @($originalDebuggerObject)) -join ' '))

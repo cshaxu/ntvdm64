@@ -1,0 +1,290 @@
+{
+  "baseline": "c637885bf09c630dc3110d014e1b4cb99f15e963",
+  "scope": "T483 S13 P4: complete remaining cmdexec.c direct outward COMMAND cohort, without relocating its original algorithm",
+  "ids": [
+    "C0024",
+    "C0174",
+    "C0175",
+    "C0176",
+    "C0177",
+    "C0178",
+    "C0179",
+    "C0180",
+    "C0181",
+    "C0182",
+    "C0260",
+    "C0261"
+  ],
+  "ownership": {
+    "C": "Original conversion, launch/wait/reentry and return-code algorithm retained bytewise except one include spelling.",
+    "B": "Immutable ten-operation COMMAND service contract and one installed table pointer. No session, guest pointers, snapshot, TLS standard-handle or launch policy state. Source-shaped call facade maps to table operations.",
+    "F": "Existing native-child captures, copies, session teardown, child handles, launch/hooks and service selection unchanged. NTVDM worker entry installs its static table before original execution."
+  },
+  "designEvidence": {
+    "priorReview": "s13-p2-command-thread-boundary.json",
+    "notDeclarationOnly": "cmdexec.obj no longer has relocations to mvdm_command_native_child_* or opennt_command_*; actual provider is B compat_command_current_services in command_services.obj. The product callbacks are explicit runtime operations, not B imports.",
+    "noSecondStateMachine": "Only immutable function pointers added. Existing F capture/request/teardown remains sole mutable owner. Abort selects the existing finish operation, matching its former one-call body.",
+    "sourceRecoveryLimit": "This closes architecture dependencies, not a claim that all 16 remaining mirror hunks are proved irreducible. Original COMMAND algorithm stays C; this batch does not recover unavailable NT4 process/session composition."
+  },
+  "providerEvidence": {
+    "undefinedSymbols": {
+      "C": [
+        "___report_rangecheckfailure",
+        "_strchr",
+        "_strrchr",
+        "__strlwr",
+        "_strncpy",
+        "__imp__GetEnvironmentVariableA@12",
+        "__imp__CloseHandle@4",
+        "__imp__GetLastError@0",
+        "__imp__SetLastError@4",
+        "__imp__WaitForSingleObject@8",
+        "__imp__GetExitCodeProcess@8",
+        "__imp__ResumeThread@4",
+        "__imp__GetBinaryTypeA@8",
+        "_RtlNtStatusToDosError@4",
+        "_RtlFreeAnsiString@4",
+        "_RtlFreeUnicodeString@4",
+        "_RtlInitString@8",
+        "_RtlUnicodeStringToAnsiString@12",
+        "_RtlOemStringToUnicodeString@12",
+        "_sscanf",
+        "_GetNextVDMCommand@4",
+        "_cmdCheckCopyForRedirection",
+        "_cmdXformEnvironment",
+        "_cmdUpdateCurrentDirectories",
+        "_nt_std_handle_notification",
+        "_nt_block_event_thread",
+        "_nt_resume_event_thread",
+        "_Sim32pGetVDMPointer",
+        "_getAL",
+        "_getAH",
+        "_setAL",
+        "_getCX",
+        "_getDX",
+        "_getBX",
+        "_getBP",
+        "_getSI",
+        "_setAX",
+        "_setDX",
+        "_setBX",
+        "_getES",
+        "_getSS",
+        "_getDS",
+        "_setES",
+        "_setDS",
+        "_setCF",
+        "_compat_command_current_services",
+        "_opennt_create_void_cdecl_thread_named",
+        "_opennt_exit_thread@4",
+        "_ntvdm_shadow_reg_open_key_ex@20",
+        "_ntvdm_shadow_reg_query_value_ex@24",
+        "_ntvdm_shadow_reg_close_key@4",
+        "@__security_check_cookie@4",
+        "_memcpy",
+        "_VDMForWOW",
+        "_lpszComSpec",
+        "_IsFirstCall",
+        "_IsRepeatCall",
+        "_IsFirstWOWCheckBinary",
+        "_fBlock",
+        "_pCommand32",
+        "_pEnv32",
+        "_dwExitCode32",
+        "_pSCSInfo",
+        "_VDMInfo",
+        "_SCS_hStdIn",
+        "_SCS_hStdOut",
+        "_SCS_hStdErr",
+        "_chDefaultDrive",
+        "_DontCheckDosBinaryType",
+        "_Exe32ActiveCount",
+        "_fSoftpcRedirection",
+        "_fSoftpcRedirectionOnShellOut",
+        "_CntrlHandlerState",
+        "___security_cookie"
+      ],
+      "B": [
+        "__imp__SetLastError@4",
+        "__imp__RaiseFailFastException@12"
+      ],
+      "mirror_edit": "Only one include spelling changes; all other bytes, #error and logical #line directives preserved."
+    },
+    "compilerHeaders": "build/t483-s13-command-boundary/cmdexec-deps.txt: B contract selected; no D/E/F source header remains.",
+    "actualMap": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map: both compat_command functions resolve to worker-command-bindings:command_services.obj",
+    "libraryBoundaries": "8 product graphs passed, B command_services compiled with SDK and B headers only"
+  },
+  "mirror": {
+    "file": "src/mvdm-host/dos/command/cmdexec.c",
+    "before": {
+      "points": 16,
+      "added": 63,
+      "deleted": 15,
+      "lines": 78
+    },
+    "after": {
+      "points": 16,
+      "added": 63,
+      "deleted": 15,
+      "lines": 78
+    },
+    "delta": {
+      "points": 0,
+      "lines": 0
+    },
+    "lineProof": "Exact byte replacement of only one include path; remaining bytes and original #line/#error identity checked. No excluded branch changed.",
+    "metric": {
+      "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+      "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+      "files": [
+        {
+          "path": "src/mvdm-host/dos/command/cmdexec.c",
+          "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdexec.c",
+          "original_sha256": "98a941095d47ae73ef9731d389a433203c7184b0a016b62e24b202bb89f829d0",
+          "current_sha256": "5a09037ce28844ddeb5ac1c5107f576c7ccc35360822e715b88e6df91a60845a",
+          "raw": {
+            "blocks": 16,
+            "added": 63,
+            "deleted": 15
+          },
+          "filtered": {
+            "blocks": 16,
+            "added": 63,
+            "deleted": 15
+          },
+          "excluded": [],
+          "issues": [],
+          "rank": 1
+        }
+      ]
+    }
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "verification": {
+    "cachedBuild": "build.exit=0: x86/x64 products and explicit x86 four-image targets",
+    "referenceWorker": "deliver.exit=0: reference-x86 NTVDM build",
+    "finalFixtures": [
+      {
+        "Case": "ntvdm-command-capture-test",
+        "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm-command-capture-test.exe",
+        "SHA256": "DAB8D99C1F1F1D5EF56D4F59BB1220E45929EC6A0E9471641882E43D985A4B50",
+        "PID": 14956,
+        "Started": "2026-11-19T13:08:47.3629918Z",
+        "Exit": 0,
+        "TimedOut": false,
+        "Passed": true
+      },
+      {
+        "Case": "ntvdm-command-launch-test",
+        "Image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm-command-launch-test.exe",
+        "SHA256": "E2B62B97DE65F6BFBD5BDD5B6DA4226F8AACAA0746EAD8983AF3267230C71F16",
+        "PID": 23684,
+        "Started": "2026-11-19T13:08:48.0244622Z",
+        "Exit": 0,
+        "TimedOut": false,
+        "Passed": true
+      }
+    ],
+    "assertions": {
+      "capture": 149,
+      "launch": 65
+    },
+    "nativeGuest": "targeted.out and native-edit.txt: actual modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and expected launcher completion passed against published package. Controlled test-only short PATH; guest unchanged.",
+    "strictDir": "strict-final.exit=0; entered-dos=1, dirty-prompt=0, final=0; real repeated DIR on private desktop and helper-owned physical runtime.",
+    "failedAttempts": [
+      "Initial restricted-token launch fixture failed with child STATUS_INVALID_HANDLE. Exact same binaries passed in normal execution context before any production change; retained commands and commands-normal-token evidence. Exact invalid-handle exception site not established; not classified as a repaired product defect.",
+      "First targeted strict-DIR wrapper omitted the canonical short PATH setup from Invoke-ProductVerification. No prompt observed. Matched canonical PATH and input policy in strict-final; same published binaries pass. No product change or guest rebuild."
+    ],
+    "fullSuite": "Not run per owner default of targeted verification. No Full or Windows 3.x lifecycle claim."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "f30baa1d-9c83-4034-a7e7-0ca3d6bc7a3c",
+    "hashVerified": true,
+    "stopped": 0,
+    "finalPreCommitHashCheck": true
+  },
+  "normalizedImages": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "progress": {
+    "stableIds": 618,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 455,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 113
+    },
+    "S13Cleared": 17,
+    "cmdexecRemainingOpenIds": 0,
+    "S14": "not admitted"
+  },
+  "sourceHashes": {
+    "src/compat/include/command_process_compat.h": "ce790ef8e4c96ec77435c8e689e5ef8f2932d04e5abc79efb17ed4958c78a026",
+    "src/mvdm-host/dos/command/cmdexec.c": "5a09037ce28844ddeb5ac1c5107f576c7ccc35360822e715b88e6df91a60845a",
+    "src/ntvdm-exe/command/include/command_launch.h": "26909175bd1f4d0a619736bd39f7cd692dcf4ae4fd144d2711f10292d704021f",
+    "src/ntvdm-exe/command/include/mvdm_command_native_child.h": "2f4425c5cec386bef8ce704a733762cd72fd50a098fde873eb596acdbe577975",
+    "src/ntvdm-exe/softpc/mvdm_standalone_worker.c": "66e8e7bdaecd8bacc2a41cb59486280c99352f7fc8ccc96fc4929391f2fd9eca",
+    "src/ntvdm-exe/win32/command_process_compat.c": "7e7fa0f7bb9da0bb17529a8f6be9ba6d723858112bcee4b3a50594c31f078ebe",
+    "test/adapter-mvdm-host-out/win32/command_process_compat_fixture.c": "fab012079656ac8c11bb8292a55f2d0a4518c698d8a9fd526a7ec813bc3b009a",
+    "test/ntvdm-exe/command/command_capture.c": "71e8fe59c81fd5c6b5a7cff31e8fceed6274eebee4ffbbc57242192598b0b443",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "b0d55aae488d1410235eb906c6fd6d1d0f2baa447e34d464e5fcd6b32e370074",
+    "src/compat/command_services.c": "2d38fd013b7200da68f0bff2e4dcf190dec85d86564b8e4558e80633dc7ab271",
+    "src/compat/include/command_native_child.h": "d4e5d2bf02f2713fd92c2ab737d718be6e0e9993bbac398fe69bafbb2b4b6f97",
+    "src/compat/include/command_services.h": "15f8ce9f2e14d2e4842f54249345a2d648ae43d1d3358ea697a83f922229202f",
+    "src/ntvdm-exe/command/source/mvdm_command_binding.c": "240e5e2761cc02c53a2f0b4e774908ffbaaeca792d776a91af65f787a6df4e24",
+    "src/compat/README.md": "d3e37d43aef4c311e5db0cca6f25276b8a6c9eca5351b060563a4fcc2f8423a6",
+    "src/ntvdm-exe/README.md": "48f6f4156a13396f4771396025e50eea80749c4f12ca49afb50b83b9f911cb86"
+  },
+  "documentationGate": "Passed: check-final.exit=0; worker boundary, documentation governance, relative links and git diff --check. Initial PID14024 ended without a result and was not counted.",
+  "executionEvidence": {
+    "build": {
+      "pid": 6284,
+      "command": "build.ps1",
+      "start": "2026-11-19T12:58:40.4744365Z"
+    },
+    "deliver": {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "start": "2026-11-19T13:07:46.9772606Z",
+      "pid": 13840,
+      "command": "& 'O:/repos.hobby/ntvdm64/build/t483-s13-command-boundary/deliver.ps1'; $rc=$LASTEXITCODE; $rc | Set-Content 'O:/repos.hobby/ntvdm64/build/t483-s13-command-boundary/deliver.exit'; exit $rc"
+    },
+    "targeted": {
+      "pid": 37228,
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "command": "targeted.ps1",
+      "start": "2026-11-19T13:08:39.8404883Z"
+    },
+    "strict-final": {
+      "pid": 5844,
+      "start": "2026-11-19T13:10:42.2868135Z",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "command": "strict-final.ps1"
+    },
+    "check-final": {
+      "command": "try { & 'O:/repos.hobby/ntvdm64/build/t483-s13-command-boundary/check.ps1'; $rc=$LASTEXITCODE } catch { $_ | Out-String | Write-Output; $rc=1 }; $rc | Set-Content 'O:/repos.hobby/ntvdm64/build/t483-s13-command-boundary/check-final.exit'; exit $rc",
+      "pid": 11868,
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "prior": "PID 14024 absent; no result, no success claimed",
+      "start": "2026-11-19T13:12:52.2962807Z"
+    }
+  }
+}

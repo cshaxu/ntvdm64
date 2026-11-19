@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "command_process_compat.h"
+#include "ntvdm-exe/command/include/command_launch.h"
 
 int main(int argc, char **argv)
 {

@@ -288,3 +288,13 @@ selects this directory. No C include, table or implementation is introduced into
 `include/wow_user_probe_bindings.h` supplies the SDK-only environment for the original C-layer `ProbeForRead`; it owns no worker state and does not change the original range/alignment algorithm.
 
 `base_console_handle.c` supplies the shared original Console pseudo-handle / modern Console capability predicate. It preserves LastError and owns no product lifetime or transport state.
+
+## COMMAND service boundary
+
+`command_services.c` and `include/command_services.h` hold an immutable operation
+table installed before COMMAND execution. The source-shaped facades in
+`command_native_child.h` and `command_process_compat.h` preserve the selected
+call signatures. B owns no captured guest data, request/session lifecycle or
+native launch policy and imports no outer provider. The installing product
+retains those responsibilities; a missing binding fails rather than silently
+selecting another execution route.

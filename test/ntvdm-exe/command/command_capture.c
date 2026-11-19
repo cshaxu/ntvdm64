@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
+#include "ntvdm-exe/command/include/command_launch.h"
 #include "ntvdm-exe/softpc/include/mvdm_guest_location.h"
 #include "ntvdm-exe/softpc/include/mvdm_vm_command.h"
 #include "ntvdm-exe/frontend/vm_text.h"
@@ -32,6 +32,24 @@ int session_guest_memory_acquire(session *s,uint32_t address,uint32_t n,
 int session_guest_memory_release(session *s,guest_memory_lease *p,int commit)
 {(void)s;(void)p;(void)commit;--leases;return !fail_release;}
 
+/* This capture fixture must never launch a host child. The real F composition
+ * is installed; its two launch endpoints fail loudly if capture reaches them. */
+BOOL opennt_command_set_std_handle(DWORD standard, HANDLE handle)
+{
+    (void)standard; (void)handle;
+    ExitProcess(98);
+}
+BOOL opennt_command_create_process_a(LPCSTR app, LPSTR command,
+    LPSECURITY_ATTRIBUTES pa, LPSECURITY_ATTRIBUTES ta, BOOL inherit, DWORD flags,
+    LPVOID environment, LPCSTR directory, LPSTARTUPINFOA startup,
+    LPPROCESS_INFORMATION process)
+{
+    (void)app; (void)command; (void)pa; (void)ta; (void)inherit; (void)flags;
+    (void)environment; (void)directory; (void)startup; (void)process;
+    ExitProcess(99);
+}
+#include "compat/include/command_native_child.h"
+
 int main(void)
 {
     mvdm_command_capture_input input={0};
@@ -42,10 +60,23 @@ int main(void)
     DWORD comspec_length;
     ULONG handles[3]={10,20,30};
     const char *ordinary_command,*ordinary_environment;
+    CHECK(!compat_command_install(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
+    CHECK(ntvdm_command_initialize() && ntvdm_command_initialize());
     owner.state=SESSION_STATE_ACTIVE;owner.epoch=1;
     memcpy(memory+100,"ordinary\r",9);memcpy(memory+400,"A=ordinary\0",12);
     memcpy(memory+800,handles,sizeof(handles));
     CHECK(mvdm_command_native_child_capture_guest(0,100,0,400,0,800));
+    {
+        ULONG captured_handles[3];
+        const char *tail=NULL;
+        CHECK(mvdm_command_native_child_std_handles(captured_handles));
+        CHECK(!memcmp(captured_handles,handles,sizeof(handles)));
+        CHECK(mvdm_command_native_child_select_command_service(MVDM_COMMAND_SERVICE_EXECUTE));
+        CHECK(mvdm_command_native_child_command_service(&tail)==MVDM_COMMAND_SERVICE_EXECUTE);
+        CHECK(tail && !strcmp(tail,"ordinary"));
+        CHECK(mvdm_command_native_child_select_command_service(MVDM_COMMAND_SERVICE_INTERACTIVE));
+        CHECK(mvdm_command_native_child_command_service(&tail)==MVDM_COMMAND_SERVICE_INTERACTIVE);
+    }
     input.command_offset=100;input.environment_offset=400;input.standard_offset=800;
     input.default_drive=2;input.service=MVDM_COMMAND_SERVICE_EXECUTE;
     memcpy(memory+100,"first\r",6);memcpy(memory+400,"A=first\0",9);
@@ -243,7 +274,7 @@ int main(void)
         CHECK(mvdm_vm_command_snapshot(8, 65530, 20, &b, &text) == ERROR_INVALID_ADDRESS);
         CHECK(!b && !text && !leases);
     }
-    mvdm_command_capture_destroy(a);mvdm_command_native_child_finish();
+    mvdm_command_capture_destroy(a);mvdm_command_native_child_abort();
 
     {
         static const unsigned endings[] = {0, 123, 124, 126};

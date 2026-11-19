@@ -9,22 +9,11 @@
  * its own standard streams, so retain the original SetStdHandle/CreateProcess
  * call sequence while making its endpoints child-local STARTUPINFO state.
  */
-BOOL opennt_command_set_std_handle(DWORD standard_handle, HANDLE handle);
-BOOL opennt_command_create_process_a(
-    LPCSTR application_name,
-    LPSTR command_line,
-    LPSECURITY_ATTRIBUTES process_attributes,
-    LPSECURITY_ATTRIBUTES thread_attributes,
-    BOOL inherit_handles,
-    DWORD creation_flags,
-    LPVOID environment,
-    LPCSTR current_directory,
-    LPSTARTUPINFOA startup_info,
-    LPPROCESS_INFORMATION process_information);
+#include "command_services.h"
 
 #undef SetStdHandle
-#define SetStdHandle opennt_command_set_std_handle
+#define SetStdHandle compat_command_current_services()->set_std_handle
 #undef CreateProcess
-#define CreateProcess opennt_command_create_process_a
+#define CreateProcess compat_command_current_services()->create_process
 
 #endif

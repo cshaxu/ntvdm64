@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <windows.h>
+#include "compat/include/command_services.h"
 
 /*
  * Source-shaped lifetime seam for COMMAND cmdExec32.  OpenNT keeps command,
@@ -27,11 +28,7 @@ int mvdm_command_native_child_replace_command(const char *command);
 DWORD mvdm_command_prepare_comspec(char command[MAX_PATH], const char *tail);
 /* The branch itself is the authority.  The adapter must never recover it by
  * parsing COMSPEC, a program name, or shell punctuation. */
-enum {
-    MVDM_COMMAND_SERVICE_NONE = 0,
-    MVDM_COMMAND_SERVICE_INTERACTIVE = 1,
-    MVDM_COMMAND_SERVICE_EXECUTE = 2
-};
+
 int mvdm_command_native_child_select_command_service(unsigned int mode);
 unsigned int mvdm_command_native_child_command_service(const char **tail_out);
 void mvdm_command_native_child_finish(void);

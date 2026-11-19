@@ -4,6 +4,22 @@
 #include <stddef.h>
 #include "mvdm_command_native_child.h"
 
+BOOL opennt_command_set_std_handle(DWORD standard_handle, HANDLE handle);
+BOOL opennt_command_create_process_a(
+    LPCSTR application_name,
+    LPSTR command_line,
+    LPSECURITY_ATTRIBUTES process_attributes,
+    LPSECURITY_ATTRIBUTES thread_attributes,
+    BOOL inherit_handles,
+    DWORD creation_flags,
+    LPVOID environment,
+    LPCSTR current_directory,
+    LPSTARTUPINFOA startup_info,
+    LPPROCESS_INFORMATION process_information);
+
+
+BOOL ntvdm_command_initialize(void);
+
 typedef struct ntvdm_command_launch ntvdm_command_launch;
 
 /* Inputs have already crossed the original command/encoding boundary. The
