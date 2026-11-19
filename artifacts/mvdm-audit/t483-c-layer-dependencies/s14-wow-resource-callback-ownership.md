@@ -526,3 +526,38 @@ wow_user_registration_bridge.c incomplete-startup cleanup. These three bodies
 add 17 covered symbol rows, not 17 eliminated dependencies. Exact migration
 interfaces and runtime validation remain outstanding; no production relocation
 or successful runtime test is claimed.
+
+
+## S14 P45: discovery, private state and registration
+
+Baseline b8380ebfa. Seven complete bodies read under wow32-dll/source:
+wow_user_discovery.c, wow_user_native_extension.c, wow_user_private_access.c,
+wow_user_registration_bridge.c, wow_user_thunk_scope.c,
+wow_window_client_access_bindings.c, wow_window_client_state_bindings.c.
+Total: 59 complete bodies. No product source or mirror changes.
+
+| Chain | Concrete ownership decision and preservation requirement |
+| --- | --- |
+| Discovery | Native USER finds/enumerates windows; C publication must precede original guest conversion. An enumerated HWND does not select execution ownership. Recover short EnumProps HWNDs through the retained full identity; enumeration stop, no-callback and publication failure remain distinct. Keep synchronous native-stack handoff around callbacks. |
+| Private procedure access | Public native slots and CPD conversion remain modern USER-owned. Original WW/WC aliases and tagged guest targets belong C. Allocate immutable guest entry before touching native slots; never interpret a native CPD by layout or install/query/restore it. Untyped public setters must not infer guest intent from numeric tags. |
+| Private extra bytes | Retain original _GetWindowLong/_SetWindowLong and xxxSetWindowLong owners. Failed retention of an owned private view is handled failure, not permission to fall through to unrelated native extra bytes. Exact PWND generation is retained before native sends/style notifications; never dereference it afterward or overwrite reentrant results with requested values. |
+| WND projection | Original WND extent, compatibility flags, creation facts and guest-generation help ID belong C. Keep class extra bytes in the same allocation; a bound view must refresh before ordinary original entry, but not during final destruction. Ownership of a retired retained alias differs from current HWND validity. Native caption capture is a B-compatible leaf; InternalGetWindowText avoids an application callback and a full buffer triggers growth, not silent truncation. |
+| Native extensions | Original CallBack16, yield and thunk algorithms remain C. Teardown admission uses the explicit kernel resource return IDs, not all guest callbacks or a numeric range. Loader APIs are native leaves, but wrapping them with the current execution scope cannot itself count as independent B implementation. |
+| Thunk/exception entry | Original W32Dispatch/W32TryCall keep exception policy. During filtering only, W32Exception sees the saved entry stack; the pending callback stack is restored afterward. Thunk finally restores fWhoCalled/fThunkDDEmsg and releases borrowed identities. Modal error service may reenter tasks, so its handoff is distinct from original exception ownership. Diagnostic trace is not a second task registry or completion authority. |
+| Registration | C owns the original handler ABI, guest shared view and original callback algorithms. Native API leaves belong B; startup acknowledgement, separate-launch selection and authenticated BaseClient remain outer. If InitTask committed but view publication/notification failed, retry must resume that transaction, never create a second task carrier. |
+| Registered cleanup | Failed original cleanup cannot be ignored before guest GlobalFreeAll. Only the explicitly validated incomplete-startup case can succeed without admitted USER resources. Full handle callbacks return the original shared index/uniqueness representation; RegisterWowExec separately resolves a live native HWND and preserves broker validation. |
+
+Concrete source linkage checked: wow32.c calls registration, thunk entry and
+exception filter; wuclass.c and wuwind.c call typed procedure get/set;
+wcall16.c contains wow_original_CallBack16. The WOW build generator renames
+original extension entry points and hard-error calls, so include-only scanning
+would miss dependencies. Native CPD CallWindowProc and tagged-WOW callback
+paths retain distinct contracts; the latter deliberately passes NULL WW.
+
+Migration must proceed by these responsibilities, not by moving all seven
+files or their headers. Original-view/task scopes need C ownership before
+native-only leaves can be lifted into B without callbacks back to C. Outer
+startup notifications must be separated from committed original initialization.
+Exact carrier patches, mirror costs and final runtime tests remain required;
+this source review does not claim those changes exist. The diagnostic trace
+stack's bounded-depth behavior was read but not runtime-validated here.

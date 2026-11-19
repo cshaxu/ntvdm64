@@ -73,14 +73,14 @@ and [callback chains](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-c
 record source findings, not migrated-code or runtime acceptance. The complete
 migration ledger remains unfinished; no production change follows this review.
 The [WOW resource/callback review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-resource-callback-ownership.md)
-classifies 52 complete provider bodies and their ownership constraints.
+classifies 59 complete provider bodies and their ownership constraints.
 Private USER/CPU operations cannot move wholesale to B; class publication,
 abnormal callback return and message reentry retain explicit ordering duties.
 These are source findings, not eliminated dependencies or runtime verification.
 The [provider crosswalk](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-open-provider-crosswalk.json)
 maps all418 open records:345 symbols from79 provider files,60 headers,
-12 include roots and1 image import. The WOW record covers44 of those79 files
-and211 symbol records, plus8 associated bodies; no row is marked eliminated.
+12 include roots and1 image import. The WOW record covers51 of those79 files
+and260 symbol records, plus8 associated bodies; no row is marked eliminated.
 S14 P19 removes the F guest-location source/private header and three-operation
 forwarding table/installers. Nine operation bodies now execute in B using the
 existing thread binding and a typed reference to the same B lease object.

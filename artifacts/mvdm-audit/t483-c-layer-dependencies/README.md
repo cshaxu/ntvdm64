@@ -478,7 +478,7 @@ cleanup requires C ownership. Preserve caller-specific teardown order rather
 than adding a second registry or moving every callback into B.
 
 [WOW resource and callback ownership](s14-wow-resource-callback-ownership.md)
-classifies 52 complete implementation bodies, including native resources,
+classifies 59 complete implementation bodies, including native resources,
 private USER state, CPU continuation and message return ordering. It identifies
 required splits and unresolved provider chains, not completed migrations.
 No production source, mirror difference or dependency status changes.
@@ -486,7 +486,7 @@ No production source, mirror difference or dependency status changes.
 [Open-provider crosswalk](s14-open-provider-crosswalk.json) groups all 418
 remaining direct records without changing their status: 345 symbol records
 resolve to 79 provider files, alongside 60 headers, 12 include roots and one
-image import. The WOW body review covers 44 of those provider files and 211
+image import. The WOW body review covers 51 of those provider files and 260
 symbol records; eight other reviewed bodies are associated-chain providers.
 The remaining 38 symbol-provider files are not covered by that particular
 record; this does not discard their earlier investigation evidence. Each row
