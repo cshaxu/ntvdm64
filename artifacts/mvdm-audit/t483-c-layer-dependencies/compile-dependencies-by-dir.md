@@ -205,17 +205,25 @@
 - 直接包含 · C0017 · common · src/common/wow/registry.h
 - 直接包含 · C0039 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h
 
+029 P22：Only NtvdmGetSystemDirectoryA is used from the F firmware header, to locate ntio.sys. Include the existing B system_root directly. Registry queries already use B; no loading/reset order changes. Mirror delta 0 points/0 lines; verification in s12-p22-system-loader.json.
+
 ## 030 — src/mvdm-host/softpc.new/host/src/nt_reset.c
 
 - 直接包含 · C0057 · ntvdm-exe · src/ntvdm-exe/win32/worker_lifecycle.h
+
+030 P22：host_applClose calls F lifecycle authorization before teardown. It requests NTSRV exit, waits for service/worker/console close and quiesces VM frontends. S13; not a generic B exit operation. Mirror delta 0 points/0 lines; verification in s12-p22-system-loader.json.
 
 ## 031 — src/mvdm-host/softpc.new/host/src/sim32.c
 
 - 直接包含 · C0043 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h
 
+031 P22：Failed InitIntelMemory calls F terminate_current_session, which calls original host_applClose then session_terminate_current. S13 failure/escape lifecycle; cannot replace with native ExitProcess without changing execution boundary. Mirror delta 0 points/0 lines; verification in s12-p22-system-loader.json.
+
 ## 032 — src/mvdm-host/softpc.new/obj.vdm/ntvdm.c
 
 - 直接包含 · C0036 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_shadow_registry.h
+
+032 P22：P12 already moved native registry projection to B. CpuEnvInit uses B NtOpenKey/NtEnumerateValueKey/NtClose macros; original CPU environment remains C. Direct outer header cleared, no new change. Mirror delta 0 points/0 lines; verification in s12-p22-system-loader.json.
 
 ## 033 — src/mvdm-host/vdmredir/vrnetapi.c
 

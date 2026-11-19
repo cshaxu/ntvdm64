@@ -68,6 +68,8 @@ P20 moves the unchanged native event-thread join into B and completes file024 ow
 
 P21 is evidence-only: [files025-028](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p21-display-mapping-ownership.json) classify display, mapping and mouse lifetime dependencies and identify nt_inthk as an original but apparently unused GDP include. No product change; P20 remains published. Classification is 28/116: seven direct-header clears, fifteen lifecycle files, six source/ABI files and 88 unreviewed. Open IDs remain 522/617; cumulative mirror reduction is two points and ten lines.
 
+P22 clears the NTIO loader directory header in nt_msscs.c and classifies files029-032. Both cached architectures built; final publication/identity verification is recorded in [P22 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p22-system-loader.json). Classification is 32/116: nine direct-header clears, seventeen lifecycle files, six source/ABI files and 84 unreviewed. C0039 remains open for cmdmisc; open IDs remain 522/617. Mirror delta is zero; cumulative reduction remains two points and ten lines.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

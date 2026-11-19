@@ -38,7 +38,7 @@
 #include "emm.h"
 #include <demexp.h>
 #include <vint.h>
-#include "mvdm_softpc_firmware.h"
+#include "compat/include/system_root.h"
 #include "compat/include/wow_registry.h"
 
 #line 41

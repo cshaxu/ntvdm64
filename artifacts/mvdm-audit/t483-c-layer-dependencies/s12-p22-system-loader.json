@@ -1,0 +1,63 @@
+{
+  "baseline": "082c8bc3e98d9085158f53f9899369ab2ae9150a",
+  "question": "Complete directory-ordered files029-032 review and remove nt_msscs firmware-header dependency.",
+  "procedure": "Trace NTIO directory query, original VDD registry calls, teardown authorization and session escape. Change only directory header; build both cached architectures and verify full package identity before applying repeat-test waiver.",
+  "files": {
+    "29": {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "finding": "Only NtvdmGetSystemDirectoryA is used from the F firmware header, to locate ntio.sys. Include the existing B system_root directly. Registry queries already use B; no loading/reset order changes."
+    },
+    "30": {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "finding": "host_applClose calls F lifecycle authorization before teardown. It requests NTSRV exit, waits for service/worker/console close and quiesces VM frontends. S13; not a generic B exit operation."
+    },
+    "31": {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "finding": "Failed InitIntelMemory calls F terminate_current_session, which calls original host_applClose then session_terminate_current. S13 failure/escape lifecycle; cannot replace with native ExitProcess without changing execution boundary."
+    },
+    "32": {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "finding": "P12 already moved native registry projection to B. CpuEnvInit uses B NtOpenKey/NtEnumerateValueKey/NtClose macros; original CPU environment remains C. Direct outer header cleared, no new change."
+    }
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10,
+    "proof": "nt_msscs only replaces include; unchanged original line/error directives and remaining bytes."
+  },
+  "progress": {
+    "reviewedFiles": 32,
+    "clearedDirectHeaderFiles": 9,
+    "deferredLifecycleFiles": 17,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 84,
+    "totalFiles": 116,
+    "openIds": 522,
+    "totalIds": 617
+  },
+  "validation": {
+    "build": "x86/x64 cached explicit product targets exit 0",
+    "publication": "11 images at both assets/release and O:/winnt/system32 verified; no processes stopped",
+    "package": "22c3d8bc-659e-449f-aa60-685a231300bd",
+    "identity": "All 11 complete images equal P20 after masking only embedded package GUID and COFF/debug-directory timestamps. Raw hashes differ; no other bytes differ.",
+    "runtime": "Repeated runtime tests waived under owner authorization based on normalized full-image identity; no new runtime execution claimed.",
+    "boundaryAndDocs": "PASS: eight production A/B compiler/include graphs; documentation governance."
+  },
+  "sha256": {
+    "src/mvdm-host/softpc.new/host/src/nt_msscs.c": "aecc3e4f6073e038652a6f94454cf34875650754a3886f0ab64b3f9517be0b8e",
+    "src/mvdm-host/softpc.new/host/src/nt_reset.c": "9b42cf3434167bef3bdaa5c981d5877d1489ad28f3eb4b6aa96c0648b6ef0ad8",
+    "src/mvdm-host/softpc.new/host/src/sim32.c": "e9fb203a7f1797d6513f2046825def6a72d9b88f035a98c6e28f257da2335130",
+    "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c": "9ceb6b8091f7afe39f138a088719e5cf4884b57f0536d617ad147da5975d0aba",
+    "src/compat/include/system_root.h": "8c2fd2203048417050206bb2e4295d3499df70875c343618cb4a8d5e27ca4b1b",
+    "src/compat/system_root.c": "56967b05cc4d5d89cd525d6672e7847ca6ead3f49d50b8a1d981deaf4377ce8b",
+    "src/ntvdm-exe/win32/worker_lifecycle.c": "c82db52b06708386f8a6ad141d5676f2c1be2d2fd6f62c56a9726a09363952b2",
+    "src/ntvdm-exe/softpc/mvdm_softpc_termination.c": "638d005185cd67a49af857102b59af1f36832328596c228a58e44f9a55065455",
+    "src/ntvdm-exe/session/session.c": "e59ab2a6ebe824c11553eaf6f758ef67b568c495a75d1f720675f6761ab12506",
+    "build/t483-s12-system-loader/x86.log": "839f0057d0deaf3ae2b53e82a716200bd77a49e42b71d0451bb887649b8616b0",
+    "build/t483-s12-system-loader/x64.log": "db817773b2f9a3fbdc836734932d2c90d4127df50845d8822190a25d6c9b4a9a",
+    "build/t483-s12-system-loader/normalized.json": "a619014f7c381dd87239c0626a7afb4c24a74b71e74c3f0fe5ab7c91c263e5a4",
+    "build/t483-s12-system-loader/identity.py": "d8c9e20de50a0795cf6242ceed887ace60051b8a2b3628df4862186c91174c61"
+  }
+}
