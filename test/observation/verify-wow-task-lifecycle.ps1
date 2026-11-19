@@ -163,7 +163,7 @@ $workerObjects = @(
     (Join-Path $worker 'obj/adapter-wow-worker/wow_gdi_alias.obj'),
     (Join-Path $worker 'obj/adapter-wow-worker/wow_user_runtime.obj'),
     (Join-Path $worker 'obj/adapter-wow-worker/wow_user_session_binding.obj'),
-    (Join-Path $worker 'obj/ntvdm/session/guest_memory_lease.obj'),
+    (Join-Path $worker 'obj/compat/guest_memory_lease.obj'),
     (Join-Path $worker 'obj/ntvdm/session/session.obj')
 )
 Invoke-NinjaTarget $worker (($workerObjects | ForEach-Object {

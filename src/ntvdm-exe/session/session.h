@@ -4,7 +4,7 @@
 #include <setjmp.h>
 #include <stdint.h>
 
-#include "guest_memory_lease.h"
+#include "compat/include/guest_memory_lease.h"
 #include "compat/include/host_context.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)

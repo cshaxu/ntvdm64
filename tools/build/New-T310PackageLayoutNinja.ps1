@@ -31,7 +31,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
   'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T310_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 
-$sources = @('src/ntvdm-exe/session/guest_memory_lease.c',
+$sources = @('src/compat/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c', 'src/ntvdm-exe/package_layout.c',
     'test/app/package_layout_fixture.c', 'src/compat/system_root.c')
 $graph = [Collections.Generic.List[string]]::new()

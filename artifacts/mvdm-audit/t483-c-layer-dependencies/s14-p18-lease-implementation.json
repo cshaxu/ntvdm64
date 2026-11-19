@@ -1,0 +1,335 @@
+{
+  "delivery": "T483 S14 P18",
+  "baseline": "33b179b54",
+  "status": "verified P18 delivery evidence; S14 remains active",
+  "package": "f0903b3b-8522-4e86-97fd-2999957c1f95",
+  "implementation": "Move actual bounded lease implementation and structure definitions from F to B; F retains composition, ACTIVE admission, begin/end timing and SAS providers. No guest-location forwarding elimination claimed.",
+  "source_equivalence": {
+    "implementation_equal_except_include": true,
+    "definitions_equal_except_include": true,
+    "package": "f0903b3b-8522-4e86-97fd-2999957c1f95"
+  },
+  "sources": [
+    {
+      "path": "src/ntvdm-exe/session/session.h",
+      "sha256": "a9cda59cf74e501d5dd5ffff78d8ad69116091ef3832952cfd65a06dfd17c906"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+      "sha256": "c9c157a540131d68a2c29063a1248f6ad83048f784b5150e3ec43d5b23cde14a"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h",
+      "sha256": "de3a14abc404d3d6e7f1bec80f7fd09c278fde113af619928620fabb6d855cc9"
+    },
+    {
+      "path": "test/ntvdm-exe/softpc/CMakeLists.txt",
+      "sha256": "cc11bdbb8e171fce28836a6efca70362b88a5112f28a070639c75f1fbc690dd1"
+    },
+    {
+      "path": "test/observation/verify-console-input-batch.ps1",
+      "sha256": "68c154eeb836157de2409c4e04f9907290ab775082a878a7929aa9518e64eaeb"
+    },
+    {
+      "path": "test/observation/verify-guest-memory-lease.ps1",
+      "sha256": "f744b30363b8bcf1f30f373ea3b47baf49c967f016e696d29b741599b9332835"
+    },
+    {
+      "path": "test/observation/verify-redirector-async-publication.ps1",
+      "sha256": "bceba64bcf2f0b3c0e4e4bd30a0373e53c9feb66f871215f33e4e3696b5424dd"
+    },
+    {
+      "path": "test/observation/verify-redirector-oem-capacity.ps1",
+      "sha256": "cbee40265982bcb8d5e728f1d5890355d2f6036657ac89b32ffff5a624bb5a24"
+    },
+    {
+      "path": "test/observation/verify-thread-start-boundary.ps1",
+      "sha256": "9c2ad5b5cd73e9dc8be7ed62e8c261154b8cf37b7cc377a4fd04ee9b0372d162"
+    },
+    {
+      "path": "test/observation/verify-wow-task-lifecycle.ps1",
+      "sha256": "2cf87f87840b33e7d23080891a22b7666602e8d1a1694133f16af2d974cdfbba"
+    },
+    {
+      "path": "test/observation/verify-wow-user-session-binding.ps1",
+      "sha256": "c8b6a97be2077b63266d2f4bc8531d275ef881fedeb05ea96b202019c2398a0f"
+    },
+    {
+      "path": "tools/audit/verify-guest-memory-boundary.ps1",
+      "sha256": "bb8ffa8e519265d46f5ce843d58d2c76751b634b79d4c6a13dd88406fc874b0f"
+    },
+    {
+      "path": "tools/audit/verify-wow-shared-boundary.ps1",
+      "sha256": "ed0fdc8340195e3fb39000dbeffd3b300848498674c2021d5ed7154c09041660"
+    },
+    {
+      "path": "tools/build/Generate-T371XmsStartupNinja.mjs",
+      "sha256": "f3229686cddc5aba43b7bb31f4f21e6e073e822d0c535fa31fa4b2dca02229f5"
+    },
+    {
+      "path": "tools/build/Generate-T420S17OemUniNinja.mjs",
+      "sha256": "04b0d378a39127e4b7fc21046dd8e6f62a537fb2ec9948dbba5b4201e3076cb2"
+    },
+    {
+      "path": "tools/build/GenerateRedirectorWorkstationQueryNinja.mjs",
+      "sha256": "85208b9564fee2f5789575610ac83c69166937b75b4d458e0b6c4bfdf8b51996"
+    },
+    {
+      "path": "tools/build/New-T280S20MvdmGuestLocationNinja.ps1",
+      "sha256": "55b0cb230f5f600646a73937a55b7867632ac18b0ecbb32335878ffb69488843"
+    },
+    {
+      "path": "tools/build/New-T282CommandBoundedCopyNinja.ps1",
+      "sha256": "038e0c3255f45e359f4bb6a66d836abc151756e5b9badf1265df0aa8b46739ce"
+    },
+    {
+      "path": "tools/build/New-T290S3CmdRedirNinja.ps1",
+      "sha256": "ab0ab8804bbbe72998124c64c2060eb9dea20bb0998239391a11d3b8d0df0a7a"
+    },
+    {
+      "path": "tools/build/New-T291S3WowTaskFrameNinja.ps1",
+      "sha256": "4b430893514f517e19d83bead10472f7de1241d77ed998000e4c166f88dc2560"
+    },
+    {
+      "path": "tools/build/New-T308MonitorControlNinja.ps1",
+      "sha256": "0e8a5f5265eb1229866e32d5f9e49dfa9926e2e72d87fb5d76388f06d14b1cb5"
+    },
+    {
+      "path": "tools/build/New-T310FirmwareResourceNinja.ps1",
+      "sha256": "49d1541fe9613c3a1a76e0cea1d49cc734fb55c37f6ffe2f1360e1e91951b521"
+    },
+    {
+      "path": "tools/build/New-T310HeartbeatNinja.ps1",
+      "sha256": "faedff4fdadcba51bea05112d312c6ae23061b4224ba73c113a2824b11a2e82a"
+    },
+    {
+      "path": "tools/build/New-T310HostInputNinja.ps1",
+      "sha256": "ab0e42d43863629bf4557c7f0a1e18a4443012e2f711f533b51580e47eee6062"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "22b90fda4336c0957b66b9fe982785f3b31f620199511f29058f7226295dc97b"
+    },
+    {
+      "path": "tools/build/New-T310PackageLayoutNinja.ps1",
+      "sha256": "1d9bc1f850b2d5abe05a750e97f3897738b8e858d4a25557ade79ffde54bb145"
+    },
+    {
+      "path": "tools/build/New-T313CcpuLifecycleNinja.ps1",
+      "sha256": "c99d6d7d2bd8e90dd6287cd86cebdf00df4286fefaf57433765347d0fe5083d5"
+    },
+    {
+      "path": "tools/build/New-T322XmsMappedMemoryFixtureNinja.ps1",
+      "sha256": "21d5c6c3d95b5d6b09b83a2cb199b33f236241d00c4cb145343d75c1f0a74080"
+    },
+    {
+      "path": "tools/build/New-T324S2LocalRedirectorNinja.ps1",
+      "sha256": "6b08e7980c9aac75b1fd7e8db93c5c95518aeebb13a5d208da4e834863a1e4a2"
+    },
+    {
+      "path": "tools/build/New-T335S3WowCallbackFrameNinja.ps1",
+      "sha256": "563ef004d443210151fdae9f2c61e9a0d956bb0ea26c3c53feab8bd0e75cb248"
+    },
+    {
+      "path": "tools/build/New-T365S2DemFileLifecycleNinja.mjs",
+      "sha256": "30605db5e0b3c2aa504d809d714695bfd22b72ce11f183e867d02b85b33c82e7"
+    },
+    {
+      "path": "src/compat/guest_memory_lease.c",
+      "sha256": "f60a88a8691fbc8fb2c787e10ae58d7014f5129c7188606f538217ec65d55ad5"
+    },
+    {
+      "path": "src/compat/include/guest_memory_lease.h",
+      "sha256": "ffb7a0c5f6e9c1795939745e358323ae1ffa1e22797d52486439452a11fdf008"
+    },
+    {
+      "path": "test/compat/guest_memory_lease_boundary_test.c",
+      "sha256": "320c600276abe60a1b728c298806c7772190cd4566afa747327a7b53524b3c91"
+    }
+  ],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "cumulative_reduction_points": 3,
+    "cumulative_reduction_lines": 12
+  },
+  "ledger_counts": {
+    "eliminated": 144,
+    "open": 424,
+    "supporting": 44,
+    "eliminated_transitive": 5,
+    "excluded": 1,
+    "total": 618
+  },
+  "published_hashes": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\VCDEX.DLL",
+      "sha256": "b66193ed1e8517e082bfefe6bfe590d06bf01fd15b4bcf5cbf58a514653ab4ee"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\run16.exe",
+      "sha256": "9f40c5d42f436442c3a5ccdb64bcb6912c7878af9b37321d9df405a3f2a8d493"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntsrv.exe",
+      "sha256": "9890723bb453408d209b840d781362d7eaaf4b94461f86373b2346957a487fd8"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntcon.exe",
+      "sha256": "cf45b201531d7e8aa3762331cce40b5815655e375a3ba2aedc37f93710bcfea6"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvdm.exe",
+      "sha256": "25ea328de38c0915c02c0c897845ed33216e5ca532a6d7a6761f015668ed369b"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvwm.exe",
+      "sha256": "5e6b467458a08b71eadea0090dc0c80a686b763b5549006ebb5c802e74f7734d"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntmon.exe",
+      "sha256": "b0130993b25de77ae2f935771f831bbaa9842da37f0bcc15903d3e3b67736877"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\WOW32.DLL",
+      "sha256": "1d3194ce58d5b579a190148b3aac984f3a89aa0cc90b0ab6aa4b427d3f7990e6"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\VDMREDIR.DLL",
+      "sha256": "64ee62448f429204dbfe359347be43b90cc6ed4d0142602e546e1681f257b5e2"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\nthook32.dll",
+      "sha256": "770d5cbe746cccbee8de95491c7e45d5ebbde6a8062366375a7e2eb4a867a01c"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\nthook64.dll",
+      "sha256": "4173c63a24daaab47f9dd9765e9dfee17bf9be317ea242fef78d695dd8a2b021"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+      "sha256": "b66193ed1e8517e082bfefe6bfe590d06bf01fd15b4bcf5cbf58a514653ab4ee"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\run16.exe",
+      "sha256": "9f40c5d42f436442c3a5ccdb64bcb6912c7878af9b37321d9df405a3f2a8d493"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntsrv.exe",
+      "sha256": "9890723bb453408d209b840d781362d7eaaf4b94461f86373b2346957a487fd8"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntcon.exe",
+      "sha256": "cf45b201531d7e8aa3762331cce40b5815655e375a3ba2aedc37f93710bcfea6"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvdm.exe",
+      "sha256": "25ea328de38c0915c02c0c897845ed33216e5ca532a6d7a6761f015668ed369b"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvwm.exe",
+      "sha256": "5e6b467458a08b71eadea0090dc0c80a686b763b5549006ebb5c802e74f7734d"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntmon.exe",
+      "sha256": "b0130993b25de77ae2f935771f831bbaa9842da37f0bcc15903d3e3b67736877"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\WOW32.DLL",
+      "sha256": "1d3194ce58d5b579a190148b3aac984f3a89aa0cc90b0ab6aa4b427d3f7990e6"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "sha256": "64ee62448f429204dbfe359347be43b90cc6ed4d0142602e546e1681f257b5e2"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook32.dll",
+      "sha256": "770d5cbe746cccbee8de95491c7e45d5ebbde6a8062366375a7e2eb4a867a01c"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook64.dll",
+      "sha256": "4173c63a24daaab47f9dd9765e9dfee17bf9be317ea242fef78d695dd8a2b021"
+    }
+  ],
+  "normalized_images": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "tests": [
+    "lease boundary:45 assertions",
+    "session lease composition",
+    "physical mapping observation",
+    "original external memory",
+    "CCPU high linear page",
+    "session lifecycle",
+    "empty alias isolation",
+    "thread bind rollback/unbind and VDMREDIR cross-image",
+    "actual CCPU WOW page-domain",
+    "published-package NESticle menu pixels and Escape hide/restore",
+    "published-package DOS DIR normal return"
+  ],
+  "checks": [
+    "eight production A/B build graphs;55 worker A/B objects",
+    "worker thread compiler boundary",
+    "changed PS and MJS syntax",
+    "documentation governance and relative links",
+    "git diff --check"
+  ],
+  "attempts": [
+    {
+      "build": 1,
+      "result": "failed before compile: PowerShell single-item foreach yielded string; += concatenated object paths",
+      "correction": "make sessionObjects explicitly array-valued",
+      "evidence": "build/t483-s14-lease-implementation/attempt1-build.err"
+    },
+    {
+      "build": 2,
+      "result": "cached x86/x64/reference passed"
+    }
+  ],
+  "processes": {
+    "build": {
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-lease-implementation\\build-only.ps1",
+      "workingDirectory": "O:\\repos.hobby\\ntvdm64",
+      "start": "2026-11-19T08:34:01.4102607-08:00",
+      "pid": 27684
+    },
+    "publication": {
+      "start": "2026-11-19T08:37:43.7037526-08:00",
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-lease-implementation\\publish-only.ps1",
+      "pid": 29504
+    },
+    "tests": {
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-lease-implementation\\tests.ps1",
+      "pid": 17508,
+      "start": "2026-11-19T08:38:12.4918075-08:00"
+    },
+    "check": {
+      "start": "2026-11-19T08:39:42.2825643-08:00",
+      "pid": 35292,
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-lease-implementation\\check.ps1"
+    },
+    "check_final": {
+      "start": "2026-11-19T08:42:34.1965323-08:00",
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-lease-implementation\\check.ps1",
+      "pid": 17636
+    }
+  },
+  "evidence_root": "build/t483-s14-lease-implementation",
+  "remaining": [
+    "guest-location actual body descent and removal of forwarding",
+    "SAS/CCPU original-owner boundary",
+    "XMS cancellation product-policy boundary",
+    "mixed WOW page-domain ownership"
+  ],
+  "limitations": "No Full or manual Win3.x/Win95 acceptance claimed. No new direct-edge elimination. Ten images equal P17 after package GUID and PE/debug timestamps are masked; NTVDM differs."
+}

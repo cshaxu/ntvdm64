@@ -1,0 +1,90 @@
+{
+  "task": "T483 S14",
+  "kind": "source ownership investigation; not implementation or runtime acceptance",
+  "baseline": "33b179b54531feab8a4a5ee0d7cbab3aa64533f0",
+  "inputs": [
+    {
+      "path": "src/ntvdm-exe/session/guest_memory_lease.c",
+      "sha256": "98f1fb811e769ff00e9ed98ac8311b4d07dcd4b5c9d4d137f536eeea634b2d5c"
+    },
+    {
+      "path": "src/ntvdm-exe/session/guest_memory_lease.h",
+      "sha256": "e145503ce07cb71e7a29a577ea16e09e34d99ef23d9bd652d593fa026dd499b8"
+    },
+    {
+      "path": "src/ntvdm-exe/session/session.c",
+      "sha256": "8d8f245814592e85fb12ade878ad9e94701532c8fb6949f0bda889bdf07558b7"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+      "sha256": "681b9e93f652b321a5a6ee8292dbc6449a60edd41499961e39d8caf1323f4b46"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_guest_location.c",
+      "sha256": "3690a9a12287154193e6b0d76444bba4ab914371db84a957ea4ff226f02ab63b"
+    },
+    {
+      "path": "src/compat/guest_location.c",
+      "sha256": "f4e52f36cac66e93c8da96a8e1fa701974abe6624788ac3851446e8076e8ab34"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "sha256": "565d0149004bae0d13970e78d7fed16b6f42117328c5dbbee98e8602431a711b"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "sha256": "b36334e5f935a1e9face8676b35d3752fa5658d5cc6392a0b61958b601af97ee"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+      "sha256": "c685d4cc5ef52d4b8301946e386f5824245f7699bce90ac52f0b2d2f3c5b6f8c"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "sha256": "27795331d87db89b6ad3f5af8fc9dc2b892013e1120cb61d4e23e9bdb9ed394c"
+    }
+  ],
+  "findings": [
+    {
+      "chain": "lease storage",
+      "evidence": "guest_memory_lease.c owns eight bounded bounce slots, epoch checks, SRW copy/retirement serialization; no session access in its function bodies. Header imports D access.h although it needs B guest_memory_types.h.",
+      "disposition": "Move actual lease implementation and definitions to B; preserve existing object composition and provider retirement, symbols, slot ownership, epochs and failures.",
+      "not_yet_proved": "This alone does not eliminate the F SAS provider or guest-location forwarding."
+    },
+    {
+      "chain": "guest location",
+      "evidence": "compat/guest_location.c forwards three operations to mvdm_guest_location.c; that provider obtains session_thread_current and uses session_guest_memory_acquire/release.",
+      "disposition": "Move numeric location and lease operations together after replacing private-session selection with the existing B context. Remove superseded forwarding rather than add a second table.",
+      "prerequisite": "Preserve ACTIVE admission checks and termination behavior without moving session lifecycle or creating duplicate state."
+    },
+    {
+      "chain": "SAS provider",
+      "evidence": "mvdm_softpc_guest_memory.c performs page preflight through xtrn2phy and c_getPG/CPL/VM, then c_sas_loads/stores; copy_forward uses c_sas_move_bytes_forward.",
+      "disposition": "Do not move this provider unchanged to B. Identify original C ownership of address translation and memory semantics before eliminating outward dependency.",
+      "prerequisite": "No new B-to-C exception and no replacement SAS forwarding table presented as completed migration."
+    },
+    {
+      "chain": "XMS failure",
+      "evidence": "xmsblock.c xmsMoveBlock calls mvdm_xms_cancel_current_operation on parameter-read or forward-copy failure. Its implementation requests session cancellation, not memory allocation or cleanup.",
+      "disposition": "Product cancellation remains product-owned. Resolve C caller error propagation separately; no blind move into B.",
+      "not_yet_proved": "Original error delivery equivalence and minimal mirror delta have not yet been established."
+    },
+    {
+      "chain": "WOW page domain",
+      "evidence": "page_domain_create constructs guest page tables/GDT and clock mapping using C exports; enter/leave/reenter changes CR0/CR3/GDT. Same file owns projected USER objects, borrows, retirement lists and Win32 clock resources.",
+      "disposition": "Mixed ownership, not a generic movable whole file. Separate original CPU boundary from compatibility storage/view mechanics with one lifecycle.",
+      "prerequisite": "Audit allocation and retained backing closure before extraction; do not move C layouts/CPU algorithms into B or hide them behind callbacks."
+    },
+    {
+      "chain": "cross-thread copied state",
+      "evidence": "mvdm_command_guest_state.c saves both session epoch and lease epoch, then invokes guest_memory_lease_copy; lease copy serializes against provider retirement.",
+      "disposition": "Keep task registration/session epoch authority F; preserve B lease epoch and retirement synchronization. Do not conflate the two generations."
+    }
+  ],
+  "verification": "Source reads and caller searches only. No source modifications, build, publication or test performed for S14.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "next": "Complete lease/location/provider ownership design and implement first complete eligible chain; audit WOW separately without counting mere header movement."
+}

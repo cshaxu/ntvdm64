@@ -16,7 +16,7 @@ foreach($line in $raw){
     }
     if($current -and $line -match '^\s+'){ $blocks[$current]+=$line.Replace('\','/')+"`n" }
 }
-$forbidden=@('ntvdm-exe/session/session.h','ntvdm-exe/session/guest_memory_lease.h',
+$forbidden=@('ntvdm-exe/session/session.h','compat/include/guest_memory_lease.h',
     'ntvdm-exe/softpc/include/mvdm_softpc_firmware.h',
     'ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h',
     'ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h',

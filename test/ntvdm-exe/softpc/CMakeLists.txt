@@ -19,7 +19,7 @@ add_test(NAME mvdm-vm-notification COMMAND mvdm-vm-notification-test)
 add_executable(mvdm-guest-memory-test
   mvdm_softpc_guest_memory_test.c
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c"
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/session/guest_memory_lease.c")
+  "${CMAKE_SOURCE_DIR}/src/compat/guest_memory_lease.c")
 target_include_directories(mvdm-guest-memory-test PRIVATE
   "${CMAKE_SOURCE_DIR}/src"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/include")

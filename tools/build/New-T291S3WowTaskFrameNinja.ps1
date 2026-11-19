@@ -26,7 +26,7 @@ rule cc
 rule link
   command = cmd /c "`$environment link /nologo /out:`$out `$in"
   description = LINK `$out
-build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
+build obj/guest_memory_lease.obj: cc `$root/src/compat/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/host_context.obj: cc `$root/src/compat/host_context.c
 build obj/task_frame.obj: cc `$root/src/ntvdm-exe/monitor/mvdm_wow_task_frame.c

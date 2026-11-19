@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "compat/include/guest_location.h"
 
-#include "ntvdm-exe/session/guest_memory_lease.h"
+#include "compat/include/guest_memory_lease.h"
 
 #ifdef __cplusplus
 extern "C" {

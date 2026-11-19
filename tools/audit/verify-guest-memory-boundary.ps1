@@ -17,7 +17,7 @@ function Assert-ConsumerBoundary([string]$text,[string]$shared,[string[]]$privat
 }
 $wow=Get-Dependencies $WowBuildRoot 'obj/wow32-dll/wow_callback_frame_lease.obj'
 $redir=Get-Dependencies $WorkerBuildRoot 'obj/vdmredir-dll/mvdm_redirector_guest_copy.obj'
-$wowPrivate=@('src/ntvdm-exe/session/guest_memory_lease.h',
+$wowPrivate=@('src/compat/include/guest_memory_lease.h',
     'src/ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h')
 $redirPrivate=@('src/ntvdm-exe/redir/include/mvdm_redirector_worker_copy.h',
     'src/common/guest-memory/redirector.h')

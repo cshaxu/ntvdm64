@@ -224,7 +224,7 @@ $dpmiNames = @((Get-OriginalSources $dpmiManifest) + 'dpmimemr.c' + 'dpmimscr.c'
 # missing adapter symbols, rather than selecting their original owner.
 $suballocNames = @(Get-OriginalSources $suballocManifest)
 $oemuniNames = @(Get-OriginalSources $oemuniManifest)
-$sessionNames = @('guest_memory_lease.c', 'session.c')
+$sessionNames = @('session.c')
 # One `ntvdm.exe` owns the worker-local USER runtime.  WOW32.DLL imports its
 # current-thread operations from that parent; it must not acquire a second TLS
 # copy of the same worker domain.
@@ -1086,12 +1086,12 @@ $oemuniObjects = foreach ($name in $oemuniNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $oemuniRoot $name)))
     $object
 }
-$sessionObjects = foreach ($name in $sessionNames) {
+$sessionObjects = @(foreach ($name in $sessionNames) {
     $object = 'obj/ntvdm/session/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sessionRoot $name)))
     $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
-}
+})
 $adapterWowWorkerObjects = foreach ($name in $adapterWowWorkerNames) {
     $object = 'obj/adapter-wow-worker/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWowRoot $name)))
@@ -1256,6 +1256,9 @@ $adapterSoftpcObjects += 'obj/compat/vm_services.obj'
 $graph.Add('build obj/compat/host_context.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/host_context.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/host_context.obj'
+$graph.Add('build obj/compat/guest_memory_lease.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/guest_memory_lease.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$sessionObjects += 'obj/compat/guest_memory_lease.obj'
 $graph.Add('build obj/compat/physical_mapping.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/physical_mapping.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/physical_mapping.obj'

@@ -2,6 +2,7 @@
 #define MVDM_SOFTPC_GUEST_MEMORY_H
 
 #include "ntvdm-exe/session/session.h"
+#include "common/guest-memory/access.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -365,3 +365,11 @@ S13 P14: [physical mapping boundary](s13-p14-physical-mapping-boundary.json) eli
 S13 [CCPU/comms/C-VID follow-up](s13-cpu-comms-ownership-review.json):13 files and12 current dependency records; generated/vector ABI remains S14. C0193 now shares C0033 ownership evidence. No product edits or newly eliminated IDs.
 
 S13 P15: [base device search roots](s13-p15-base-device-search-roots.json) removes unused D/F roots from24 compilation contexts. All source bytes and selected headers remain identical;11 normalized images equal P14. Cached builds, dual publication and22 hashes passed; repeat runtime tests waived. Shared tracker IDs remain open.
+
+S14 P18: [actual lease implementation migration](s14-p18-lease-implementation.json)
+moves bounded lease bodies and definitions to B without changing layout or
+algorithms. Session keeps admission and lifetime policy. Cached full builds,
+dual11 publication and targeted lease/memory/WOW/DOS tests passed. Mirror delta
+is0 points/0 lines; direct ledger144 eliminated/424 open is unchanged. The
+[source ownership inventory](s14-memory-ownership-inventory.json) retains the
+separate SAS, XMS cancellation, guest-location and WOW page-domain obligations.

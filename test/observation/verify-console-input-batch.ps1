@@ -20,7 +20,7 @@ $sources=@('test/app/console_input_batch_test.c',
  'src/lib-win32/pipe/pipe_transfer.c','src/lib-win32/handle/duplicate.c',
  'src/ntvdm-exe/win32/console_client.c','src/ntvdm-exe/win32/console_graphics.c',
  'src/ntvdm-exe/win32/console_bitmap.c','src/ntvdm-exe/softpc/v7_pointer.c','src/compat/console_grid.c',
- 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c','src/ntvdm-exe/session/guest_memory_lease.c') |
+ 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c','src/compat/guest_memory_lease.c') |
  ForEach-Object {Join-Path $root $_}
 $exe=Join-Path $build 'console-input-batch.exe'
 $objects=@()

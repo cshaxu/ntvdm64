@@ -1,7 +1,7 @@
 #ifndef GUEST_MEMORY_LEASE_H
 #define GUEST_MEMORY_LEASE_H
 
-#include "common/guest-memory/access.h"
+#include "guest_memory_types.h"
 
 #define GUEST_MEMORY_LEASE_MAXIMUM 8u
 

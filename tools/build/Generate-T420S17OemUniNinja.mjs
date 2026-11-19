@@ -112,7 +112,7 @@ const lines = [
   `  cflags = ${formalFlags}`,
   "build obj/pif-session.obj: cc $root/src/ntvdm-exe/session/session.c",
   `  cflags = ${formalFlags}`,
-  "build obj/pif-lease.obj: cc $root/src/ntvdm-exe/session/guest_memory_lease.c",
+  "build obj/pif-lease.obj: cc $root/src/compat/guest_memory_lease.c",
   `  cflags = ${formalFlags}`,
   "build obj/pif-firmware.obj: cc $root/src/ntvdm-exe/softpc/mvdm_softpc_firmware.c",
   `  cflags = ${formalFlags}`,

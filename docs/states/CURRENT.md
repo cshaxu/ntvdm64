@@ -28,6 +28,20 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+S14 P18: the bounded guest-memory lease implementation and definitions have
+moved to B, with the leaf boundary test under test/compat. Session still
+composes the lease object and owns ACTIVE admission and retirement timing.
+Implementation bodies and layouts match P17 apart from include paths; mirror
+delta is zero. Cached full x86/x64/reference builds, dual11 publication and22
+hashes, lease/session/memory/WOW targeted checks, NESticle and DOS DIR passed.
+Package f0903b3b-8522-4e86-97fd-2999957c1f95 is the P18 publication; S14 remains active.
+[P18 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p18-lease-implementation.json)
+records the corrected build-generator array failure and final verification.
+The [memory ownership inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-memory-ownership-inventory.json)
+separates lease mechanics, SAS providers, XMS cancellation and WOW page-domain
+ownership. Guest-location forwarding and the mixed CCPU/WOW provider remain
+open; the leaf migration does not count them as eliminated dependencies.
+
 [S13 implementation closure](../etc/evidence/m0-t483-s13-implementation-closure.md)
 and [P17 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p17-mapping-implementation.json)
 record the eight actual B mapping implementations, removed F provider/table,

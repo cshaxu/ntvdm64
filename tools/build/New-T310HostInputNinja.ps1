@@ -53,7 +53,7 @@ build obj/console_bitmap.obj: cc `$root/src/ntvdm-exe/win32/console_bitmap.c
 build obj/console_grid.obj: cc `$root/src/compat/console_grid.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/host_context.obj: cc `$root/src/compat/host_context.c
-build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
+build obj/guest_memory_lease.obj: cc `$root/src/compat/guest_memory_lease.c
 build console_input_contract_fixture.exe: link obj/fixture.obj obj/console_compat.obj obj/console_client.obj obj/console_keyboard.obj obj/worker_client.obj obj/common_pipe_transfer.obj obj/console_graphics.obj obj/console_bitmap.obj obj/console_grid.obj obj/session.obj obj/host_context.obj obj/guest_memory_lease.obj
 build test: run console_input_contract_fixture.exe
 default console_input_contract_fixture.exe

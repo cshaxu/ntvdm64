@@ -1,4 +1,4 @@
-#include "ntvdm-exe/session/guest_memory_lease.h"
+#include "compat/include/guest_memory_lease.h"
 #include <stdio.h>
 #include <string.h>
 

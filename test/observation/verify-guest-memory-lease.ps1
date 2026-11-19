@@ -9,13 +9,14 @@ if (Test-Path $out) { throw 'Require a fresh evidence directory' }
 if (Test-Path $out) { throw 'Require a fresh evidence directory' }
 New-Item -ItemType Directory -Force $out | Out-Null
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$lease = Join-Path $repo 'src/ntvdm-exe/session/guest_memory_lease.c'
+$lease = Join-Path $repo 'src/compat/guest_memory_lease.c'
 $session = Join-Path $repo 'src/ntvdm-exe/session/session.c'
 $hostContext = Join-Path $repo 'src/compat/host_context.c'
 foreach ($name in @('guest_memory_lease_boundary_test', 'guest_memory_lease_test')) {
     $dir = Join-Path $out $name
     New-Item -ItemType Directory -Force $dir | Out-Null
-    $fixture = Join-Path $repo ('test/session/' + $name + '.c')
+    $component = if ($name -eq 'guest_memory_lease_boundary_test') { 'compat' } else { 'session' }
+    $fixture = Join-Path $repo ('test/' + $component + '/' + $name + '.c')
     $sources = '"' + $fixture + '" "' + $lease + '"'
     if ($name -eq 'guest_memory_lease_test') { $sources += ' "' + $session + '" "' + $hostContext + '"' }
     $command = 'call "' + $vs + '" -arch=x86 -host_arch=x64 >nul && cl /nologo /W4 /MT /TC /I"' +

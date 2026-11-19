@@ -1,4 +1,4 @@
-#include "guest_memory_lease.h"
+#include "compat/include/guest_memory_lease.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

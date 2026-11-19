@@ -31,7 +31,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
     Set-Content -LiteralPath $environment -Encoding ascii
 
 $sources = @(
-    'src/ntvdm-exe/session/guest_memory_lease.c',
+    'src/compat/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/common/worker-thread/bridge.c',
     'src/compat/mvdm_softpc_event_thread.c',

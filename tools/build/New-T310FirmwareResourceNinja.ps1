@@ -38,7 +38,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 # resource graph is architecture-neutral; source-local exceptions, if ever
 # required, must be separately audited and registered.
 $sources = @(
-    'src/ntvdm-exe/session/guest_memory_lease.c',
+    'src/compat/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/ntvdm-exe/softpc/mvdm_softpc_firmware.c',
     'test/session/softpc_firmware_resource_fixture.c',

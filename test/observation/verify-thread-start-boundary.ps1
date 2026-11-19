@@ -22,7 +22,7 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds)
     if ($p.ExitCode) { throw "Failed: $name ($($p.ExitCode))" }
 }
 try {
-    $sources=@('src/ntvdm-exe/session/guest_memory_lease.c',
+    $sources=@('src/compat/guest_memory_lease.c',
         'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
         'src/common/worker-thread/bridge.c', 'src/compat/thread_start.c',
         'src/lib-win32/thread/thread.c',
