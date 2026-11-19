@@ -1,0 +1,186 @@
+{
+  "baseline": "03baaedbe5c0fe6f4f5a31d271df0d03e41c2bfb",
+  "files": [
+    {
+      "linkOnlyOrder": 24,
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "ids": [
+        "C0293"
+      ],
+      "decision": "Keep original registration/unregistration caller in C. Current provider obtains active session text backing with four-byte interleaved cells and preserves it across unregister; S13 registration, buffer lifetime and presentation must be handled as one boundary.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "linkOnlyOrder": 25,
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "ids": [
+        "C0292"
+      ],
+      "decision": "Keep original EGA conversion and dirty-rectangle calculation in C. Same presentation boundary as nt_cga in P79; S13 grouped presentation responsibility.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_det.obj",
+      "sha256": "85e3d8543e00b28a352e9138b0982a28af5819f6bb44e5afe6538853a7372e41",
+      "symbol": "_RegisterConsoleVDM@44",
+      "provider": "0001:00178750       _RegisterConsoleVDM@44     00579750 f   softpc-win32-bindings:console_compat.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_det.obj",
+      "sha256": "73cf7c790cb68d5a721b4c779bc44b63c4f7a2c74bfdf37bcf64cf24ed6747c8",
+      "symbol": "_RegisterConsoleVDM@44",
+      "provider": "0001:00178750       _RegisterConsoleVDM@44     00579750 f   softpc-win32-bindings:console_compat.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_ega.obj",
+      "sha256": "9d7ec8049bf2c7ed5b32924c3726620b686dd5830ee1e361d4926961b51f4ef1",
+      "symbol": "_InvalidateConsoleDIBits@8",
+      "provider": "0001:001786b0       _InvalidateConsoleDIBits@8 005796b0 f   softpc-win32-bindings:console_compat.obj"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_ega.obj",
+      "sha256": "4d2b46eccf372edc3c9c9b32fd0ebcef44b49977e0936c9f38e82fbe95ee0c09",
+      "symbol": "_InvalidateConsoleDIBits@8",
+      "provider": "0001:001786b0       _InvalidateConsoleDIBits@8 005796b0 f   softpc-win32-bindings:console_compat.obj"
+    }
+  ],
+  "originalEvidence": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "registration": "Pinned nt_det.c retains RegisterConsoleVDM register/unregister ABI. Current selected path passes no hardware fullscreen event handles; original caller accepts no state mapping.",
+    "presentation": "Shared provider review s12-p79-presentation-thread-start-ownership.json; EGA-specific rectangle consumers inspected in current nt_ega.c."
+  },
+  "limitations": [
+    "Classification does not prove all present compatibility behavior necessary or minimal. S13 must review original contract and current caller lifetimes, not justify retained code merely by its own dependencies.",
+    "No new runtime evidence. Compiled bindings and current published identity checked."
+  ],
+  "nextFile": {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+    "id": "C0189",
+    "status": "Not counted reviewed: in-place candidate identified",
+    "finding": "F mvdm_ccpu_activity_check.c exports an empty ActivityCheckAfterTimeSlice. Pinned original base/mvdm grep finds declarations and nt_eoi/nt_unix calls, no implementation body. No session state in current provider. Next investigate minimal B compatibility ownership/build selection and validate entire caller group; do not defer automatically to S13 or invent scheduler semantics."
+  },
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 25,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 49,
+    "openIds": 499,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "No product change; four COFF imports and both maps checked.",
+    "runtime": "No new runtime run.",
+    "publishedHashesVerified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "07649f43856c9861fdcac2e9c91988380faaa47c339a70af9aaeabb06f127a32"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+        "sha256": "07649f43856c9861fdcac2e9c91988380faaa47c339a70af9aaeabb06f127a32"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "58d492dbe0502df9f89ef93c4c764f7e04d5446723be902c012cc8bca818b2f5"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\run16.exe",
+        "sha256": "58d492dbe0502df9f89ef93c4c764f7e04d5446723be902c012cc8bca818b2f5"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "ed066184b2c13008fca7985e548e3377f1455eaa588de026b257f50c5b123091"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntsrv.exe",
+        "sha256": "ed066184b2c13008fca7985e548e3377f1455eaa588de026b257f50c5b123091"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "eed8d7538adc66f834b869816b8dbe2b2dced8f842790ac9e9ae6ab405fa0ffc"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntcon.exe",
+        "sha256": "eed8d7538adc66f834b869816b8dbe2b2dced8f842790ac9e9ae6ab405fa0ffc"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "81f69fa4a3e3344f4e70a15a97f184f25216c6e1652314b131467f0eeb9e1fdd"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvdm.exe",
+        "sha256": "81f69fa4a3e3344f4e70a15a97f184f25216c6e1652314b131467f0eeb9e1fdd"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "4f91c1d14d17ddc1c11a0b3c85a73e0e43759b3bd87485a7daf15439d1579164"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvwm.exe",
+        "sha256": "4f91c1d14d17ddc1c11a0b3c85a73e0e43759b3bd87485a7daf15439d1579164"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "c8eed0ffa29d2bf53c6bba5fb81e192cb22370c3ef55426a0a0578ad22532c2e"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntmon.exe",
+        "sha256": "c8eed0ffa29d2bf53c6bba5fb81e192cb22370c3ef55426a0a0578ad22532c2e"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "a2c4245ddcfbd096fe7c8919b1bb5b94f8088d114988a86efd62008440cd66de"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\WOW32.DLL",
+        "sha256": "a2c4245ddcfbd096fe7c8919b1bb5b94f8088d114988a86efd62008440cd66de"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "42651965c1883062fe629b72babc6cbf248249b5ff092d9a86565129b2228bdb"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "sha256": "42651965c1883062fe629b72babc6cbf248249b5ff092d9a86565129b2228bdb"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "7f4c2960052c01d785e83614a528e53ee0a1bd49be82e6170c67799498df4e24"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook32.dll",
+        "sha256": "7f4c2960052c01d785e83614a528e53ee0a1bd49be82e6170c67799498df4e24"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "3a10f59abf81aae57730f01ecd6a0474d37dcff18b17431188e57aa3890ca2e6"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook64.dll",
+        "sha256": "3a10f59abf81aae57730f01ecd6a0474d37dcff18b17431188e57aa3890ca2e6"
+      }
+    ]
+  },
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_det.c": "070cfee114fdb3c7277f6584bfc449e1d5737ea94aaf279a61f74237af48b86f",
+    "src/mvdm-host/softpc.new/host/src/nt_ega.c": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
+    "src/ntvdm-exe/win32/console_compat.c": "f0c45d8b63ffcebad73724348cf0577c902a9e4efbf0e99ffe84415594439065",
+    "src/ntvdm-exe/softpc/mvdm_ccpu_activity_check.c": "6263bbffefe2102bba0e8ffa919fd12db4d674bf832e7fd26dc5c4945905eeec",
+    "src/mvdm-host/softpc.new/host/src/nt_eoi.c": "76fc5add9050196cc2067387d458568e9be3e27574d208305d2a3efe8dceada6"
+  }
+}

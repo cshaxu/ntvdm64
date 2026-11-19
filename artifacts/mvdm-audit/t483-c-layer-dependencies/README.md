@@ -275,3 +275,5 @@ P77: [System address ownership](s12-p77-system-address-ownership.json); link-onl
 P78: [Video address ownership](s12-p78-video-address-ownership.json); files18-20 remain C; C0216 joins C0215 CPU provider review in S14. No product change.
 
 P79: [Presentation/thread/start ownership](s12-p79-presentation-thread-start-ownership.json); files21-23 assigned to grouped S13 responsibility review, no product change.
+
+P80: [Console registration ownership](s12-p80-console-registration-ownership.json); files24-25 classified; C0189 remains the next in-place candidate. No product change.
