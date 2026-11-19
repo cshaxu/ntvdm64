@@ -10,7 +10,9 @@
 
 001 核查：仅使用 NtvdmGetWindowsDirectoryA。原版 cmdconf.c:209 查询宿主 Windows 目录，当前函数读取 session_mvdm_system_root。结果用于 SHELL、COUNTRY 与 SystemRoot 展开。包目录绑定仍需解决，C0039 保持开放。未修改源码，镜像变化 0 点、0 行。
 
-001 处理方向：保留原版配置解析在 C；F 保有包选择及 session 生命周期。当前无可直接复用的目录注入入口。实际入口是 cmddisp.c 的 apfnSVCCmd 调用 cmdGetConfigSys(void) 或 cmdGetAutoexecBat(void)，再调用 ExpandConfigFiles(BOOLEAN)，均不接收根目录。现有 achSysRoot/dwLenSysRoot 会被 ExpandConfigFiles 覆写，且处理时会去掉末尾反斜线，不能仅在 F 启动时预填它们。解除边界需要设计由 F 初始化、C/B 持有的目录契约，并同时审查其他包目录消费者；不能把当前读取 session 的函数直接搬入 B。归入后续所有权设计，未证明可以原地删除依赖。当前文件保留在 C 的结论明确，接口实施仍待完成。
+001 修正后的归属：目录兼容查询及长度、编码和系统目录拼接由 B compat 提供，C cmdconf.c 保留原版配置处理。F 选择目录并负责其生命周期。生产 app_package_layout_set_process_media_roots 经 common_system_root_a 从已加载 EXE 推导根目录；显式 setter 仍为已有接口和夹具所用，不应以 EXE 推导替换所有查询。
+
+001 具体接线候选：B 持有当前线程的只读目录上下文，提供现有 NtvdmGetWindowsDirectoryA/W 与 NtvdmGetSystemDirectoryA/W 同形接口。F 通过现有 session_register_thread_hook 在 bind 时绑定目录、unbind 时解除，复用 session 的失败回滚和线程计数。B 不包含 session、common 或任何外层头，也不回调 F 取目录。上下文所指存储的寿命必须覆盖绑定，禁止额外维护第二份可变根目录。需验证无绑定失败、显式根、两个线程不同根、解绑后查询、短缓冲和编码转换。当前仅设计，未实施；镜像变化 0 点、0 行。
 
 ## 002 — src/mvdm-host/dos/command/cmdexec.c
 
