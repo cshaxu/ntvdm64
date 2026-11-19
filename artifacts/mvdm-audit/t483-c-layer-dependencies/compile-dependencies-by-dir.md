@@ -599,6 +599,8 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+092 P50: Keep original interaction in C; seventeen outer symbols stay open. Timer callback requires shared entry; reset native leaf is B-eligible but its VOID wrapper failure policy remains outer. Mirror delta0/0; see s12-p50-list-interaction-ownership.json.
+
 ## 093 — src/non-mvdm/windows/core/ntuser/client/lboxctl3.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h

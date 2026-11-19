@@ -215,3 +215,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P48 ListBox entry](s12-p48-list-entry-ownership.json): file090; original dispatch/storage/encoding remain C, shared lifecycle and ABI dependencies stay open. Review90/116,502/617 open.
 
 [P49 ListBox items](s12-p49-list-items-ownership.json): file091; original algorithms and native memory/encoding remain their current inner owners; five lifecycle dependencies stay open. Review91/116,502/617 open.
+
+[P50 ListBox interaction](s12-p50-list-interaction-ownership.json): file092; original interaction remains C, timer/drawing/native-return obligations and reset leaf separated. Review92/116,502/617 open.

@@ -106,7 +106,9 @@ P47: [DDE declaration delivery](../../artifacts/mvdm-audit/t483-c-layer-dependen
 
 P48: [ListBox entry ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p48-list-entry-ownership.json).
 
-P49: [ListBox item ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p49-list-items-ownership.json). Review91/116:17 clears,60 lifecycle,14 source/ABI,25 unreviewed;502/617 open. Source classification only; P47 release22 hashes reverified. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P49: [ListBox item ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p49-list-items-ownership.json).
+
+P50: [Interaction evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p50-list-interaction-ownership.json). Reviewed92/116:17 clear,61 lifecycle,14 ABI;24 remain. Open502/617. Mirror0/0; cumulative reduction2 points/10 lines. S12 active.
 
 ## S11 Closure Record
 

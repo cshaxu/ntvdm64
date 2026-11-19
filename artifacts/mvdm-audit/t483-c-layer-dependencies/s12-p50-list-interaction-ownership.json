@@ -1,0 +1,291 @@
+{
+  "baseline": "47ad57978659fa0fa011af6f9625fadec4016485",
+  "status": "P50 source-only ListBox interaction ownership classification",
+  "files": [
+    {
+      "number": 92,
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "sha256": "495380be7c339b629f4eb543e34765c350c75e815b7743d88deff19c02e8da48",
+      "compilerObject": "obj/opennt-user/control-body-lboxctl2.obj",
+      "objectSha256": "ae20de5340e2f38672f48270a7cf6051563cbadd5a3a6c36967ba1d255f8644a",
+      "dependencyRecord": "obj/opennt-user/control-body-lboxctl2.obj: #deps 66, deps mtime 8167732547517344 (VALID)",
+      "header": "C0064",
+      "coffUndefined": [
+        "__imp__SetLastError@4",
+        "__imp__HeapAlloc@12",
+        "_GetProcessHeap@0",
+        "__imp__GetBkColor@4",
+        "__imp__GetStockObject@4",
+        "__imp__IntersectClipRect@20",
+        "__imp__SelectObject@8",
+        "__imp__SetBkColor@8",
+        "__imp__SetBkMode@8",
+        "__imp__SetTextColor@8",
+        "__imp__ExtTextOutW@32",
+        "__imp__OffsetWindowOrgEx@16",
+        "__imp__PostMessageW@16",
+        "__imp__GetKeyState@4",
+        "__imp__KillTimer@8",
+        "__imp__GetDC@4",
+        "__imp__ReleaseDC@8",
+        "__imp__MessageBeep@4",
+        "__imp__GetSysColor@4",
+        "__imp__DrawFocusRect@8",
+        "__imp__FillRect@12",
+        "__imp__IntersectRect@12",
+        "__imp__PtInRect@12",
+        "__imp__GetScrollInfo@12",
+        "__imp__CompareStringW@24",
+        "__GetClientRect@8",
+        "__ClientToScreen@8",
+        "_IsVisible@4",
+        "_GetControlColor@16",
+        "_GetControlBrush@12",
+        "_wow_list_reset_double_click@0",
+        "_wow_window_client_validate_window@4",
+        "_wow_window_client_desktop@0",
+        "_wow_window_client_send_message@20",
+        "_wow_control_set_timer@16",
+        "_TabTextOut@36",
+        "_xxxCBHideListBoxWindow@12",
+        "_xxxCBShowListBoxWindow@8",
+        "_LBCalcVarITopScrollAmt@12",
+        "_xxxLBoxCtlHScrollMultiColumn@12",
+        "_xxxLBShowHideScrollBars@4",
+        "_GetLpszItem@8",
+        "_LBGetItemData@8",
+        "_xxxSetLBScrollParms@8",
+        "_CItemInWindowVarOwnerDraw@8",
+        "_LBPage@12",
+        "_LBGetVariableHeightItemHeight@8",
+        "_wow_native_DragDetect@12",
+        "_wow_native_SetFocus@4",
+        "_wow_native_SetCapture@4",
+        "_wow_native_ReleaseCapture@0",
+        "_wow_native_ScrollWindowEx@32",
+        "_wow_native_InvalidateRect@12",
+        "_wow_native_UpdateWindow@4",
+        "_wow_native_RedrawWindow@16",
+        "_wow_native_SendMessageW@16",
+        "_wow_default_find_nc_hit@8",
+        "_wow_control_draw_state@40",
+        "@__security_check_cookie@4",
+        "_wow_edit_current",
+        "_wow_edit_system_brushes",
+        "___security_cookie",
+        "__tls_array",
+        "__tls_index"
+      ],
+      "verifiedSymbols": [
+        {
+          "id": "C0348",
+          "symbol": "wow_control_draw_state",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_control_draw_state.c"
+        },
+        {
+          "id": "C0354",
+          "symbol": "wow_default_find_nc_hit",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_default_native_bindings.c"
+        },
+        {
+          "id": "C0389",
+          "symbol": "wow_list_reset_double_click",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_edit_call_bindings.c"
+        },
+        {
+          "id": "C0391",
+          "symbol": "wow_control_set_timer",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_edit_entry_bindings.c"
+        },
+        {
+          "id": "C0392",
+          "symbol": "wow_edit_current",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_edit_entry_bindings.c"
+        },
+        {
+          "id": "C0523",
+          "symbol": "wow_native_DragDetect",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0546",
+          "symbol": "wow_native_InvalidateRect",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0550",
+          "symbol": "wow_native_RedrawWindow",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0551",
+          "symbol": "wow_native_ReleaseCapture",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0554",
+          "symbol": "wow_native_ScrollWindowEx",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0557",
+          "symbol": "wow_native_SendMessageW",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0559",
+          "symbol": "wow_native_SetCapture",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0564",
+          "symbol": "wow_native_SetFocus",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0582",
+          "symbol": "wow_native_UpdateWindow",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0590",
+          "symbol": "wow_window_client_send_message",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_window_client_access_bindings.c"
+        },
+        {
+          "id": "C0594",
+          "symbol": "wow_window_client_desktop",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_window_client_state_bindings.c"
+        },
+        {
+          "id": "C0596",
+          "symbol": "wow_window_client_validate_window",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_window_client_state_bindings.c"
+        },
+        {
+          "id": "C0617",
+          "symbol": "wow_edit_system_brushes",
+          "status": "eliminated",
+          "target": "src/wow32-dll/source/wow_edit_drawing_bindings.c"
+        }
+      ],
+      "mapProviders": [
+        "0000:0000002c       __tls_array                0000002c     <absolute>",
+        "0001:0003de10       _xxxCBHideListBoxWindow@12 1003ee10 f   control-body-combo.obj",
+        "0001:0003e4f0       _xxxCBShowListBoxWindow@8  1003f4f0 f   control-body-combo.obj",
+        "0001:0003f3d0       _GetLpszItem@8             100403d0 f   control-body-lb1.obj",
+        "0001:000405a0       _LBGetItemData@8           100415a0 f   control-body-lboxctl1.obj",
+        "0001:00040ec0       _xxxLBShowHideScrollBars@4 10041ec0 f   control-body-lboxctl1.obj",
+        "0001:000413c0       _xxxSetLBScrollParms@8     100423c0 f   control-body-lboxctl1.obj",
+        "0001:00045cc0       _xxxLBoxCtlHScrollMultiColumn@12 10046cc0 f   control-body-lboxmult.obj",
+        "0001:000468c0       _CItemInWindowVarOwnerDraw@8 100478c0 f   control-body-lboxvar.obj",
+        "0001:00046970       _LBCalcVarITopScrollAmt@12 10047970 f   control-body-lboxvar.obj",
+        "0001:00046a10       _LBGetVariableHeightItemHeight@8 10047a10 f   control-body-lboxvar.obj",
+        "0001:00046a70       _LBPage@12                 10047a70 f   control-body-lboxvar.obj",
+        "0001:0004a3c0       _IsVisible@4               1004b3c0 f   control-view-winmgr.obj",
+        "0001:0004a4e0       __ClientToScreen@8         1004b4e0 f   control-view-wow.obj",
+        "0001:0004a500       __GetClientRect@8          1004b500 f   control-view-wow.obj",
+        "0001:0004cc00       _GetControlColor@16        1004dc00 f   control-color.obj",
+        "0001:0004cc10       _GetControlBrush@12        1004dc10 f   control-brush-client.obj",
+        "0001:0004e080       _TabTextOut@36             1004f080 f   control-text-client.obj",
+        "0001:00061b00       _wow_native_DragDetect@12  10062b00 f   wow_user_task_lifecycle.obj",
+        "0001:000634a0       _wow_native_InvalidateRect@12 100644a0 f   wow_user_task_lifecycle.obj",
+        "0001:000638f0       _wow_native_RedrawWindow@16 100648f0 f   wow_user_task_lifecycle.obj",
+        "0001:00063a00       _wow_native_ReleaseCapture@0 10064a00 f   wow_user_task_lifecycle.obj",
+        "0001:00063d10       _wow_native_ScrollWindowEx@32 10064d10 f   wow_user_task_lifecycle.obj",
+        "0001:00064030       _wow_native_SendMessageW@16 10065030 f   wow_user_task_lifecycle.obj",
+        "0001:00064210       _wow_native_SetCapture@4   10065210 f   wow_user_task_lifecycle.obj",
+        "0001:000647f0       _wow_native_SetFocus@4     100657f0 f   wow_user_task_lifecycle.obj",
+        "0001:00065d00       _wow_native_UpdateWindow@4 10066d00 f   wow_user_task_lifecycle.obj",
+        "0001:000699a0       _wow_default_find_nc_hit@8 1006a9a0 f   wow_default_native_bindings.obj",
+        "0001:0006a670       _wow_list_reset_double_click@0 1006b670 f   wow_edit_call_bindings.obj",
+        "0001:0006aa70       _wow_control_draw_state@40 1006ba70 f   wow_control_draw_state.obj",
+        "0001:0006bbf0       _wow_control_set_timer@16  1006cbf0 f   wow_edit_entry_bindings.obj",
+        "0001:0006c250       _wow_window_client_send_message@20 1006d250 f   wow_window_client_access_bindings.obj",
+        "0001:0006ca90       _wow_window_client_desktop@0 1006da90 f   wow_window_client_state_bindings.obj",
+        "0001:0006cd90       _wow_window_client_validate_window@4 1006dd90 f   wow_window_client_state_bindings.obj",
+        "0001:00075b07       _GetProcessHeap@0          10076b07 f   kernel32:KERNEL32.dll",
+        "0001:00075b49       @__security_check_cookie@4 10076b49 f   LIBCMT:secchk.obj",
+        "0002:00000068       __imp__SelectObject@8      1008e068     gdi32:GDI32.dll",
+        "0002:000000a4       __imp__OffsetWindowOrgEx@16 1008e0a4     gdi32:GDI32.dll",
+        "0002:00000140       __imp__GetBkColor@4        1008e140     gdi32:GDI32.dll",
+        "0002:000001f8       __imp__GetStockObject@4    1008e1f8     gdi32:GDI32.dll",
+        "0002:00000200       __imp__IntersectClipRect@20 1008e200     gdi32:GDI32.dll",
+        "0002:0000024c       __imp__SetBkColor@8        1008e24c     gdi32:GDI32.dll",
+        "0002:00000250       __imp__SetBkMode@8         1008e250     gdi32:GDI32.dll",
+        "0002:00000330       __imp__SetTextColor@8      1008e330     gdi32:GDI32.dll",
+        "0002:00000340       __imp__ExtTextOutW@32      1008e340     gdi32:GDI32.dll",
+        "0002:00000400       __imp__CompareStringW@24   1008e400     kernel32:KERNEL32.dll",
+        "0002:00000580       __imp__SetLastError@4      1008e580     kernel32:KERNEL32.dll",
+        "0002:000005d0       __imp__HeapAlloc@12        1008e5d0     kernel32:KERNEL32.dll",
+        "0002:000009b0       __imp__GetScrollInfo@12    1008e9b0     user32:USER32.dll",
+        "0002:000009c0       __imp__PostMessageW@16     1008e9c0     user32:USER32.dll",
+        "0002:000009cc       __imp__PtInRect@12         1008e9cc     user32:USER32.dll",
+        "0002:000009d0       __imp__IntersectRect@12    1008e9d0     user32:USER32.dll",
+        "0002:000009f4       __imp__GetSysColor@4       1008e9f4     user32:USER32.dll",
+        "0002:00000a58       __imp__KillTimer@8         1008ea58     user32:USER32.dll",
+        "0002:00000a78       __imp__FillRect@12         1008ea78     user32:USER32.dll",
+        "0002:00000a7c       __imp__DrawFocusRect@8     1008ea7c     user32:USER32.dll",
+        "0002:00000bbc       __imp__MessageBeep@4       1008ebbc     user32:USER32.dll",
+        "0002:00000c00       __imp__ReleaseDC@8         1008ec00     user32:USER32.dll",
+        "0002:00000c04       __imp__GetDC@4             1008ec04     user32:USER32.dll",
+        "0002:00000c20       __imp__GetKeyState@4       1008ec20     user32:USER32.dll",
+        "0002:0000a92c       _wow_edit_current          1009892c     wow_edit_entry_bindings.obj",
+        "0003:000038c0       ___security_cookie         100a38c0     LIBCMT:gs_cookie.obj",
+        "0003:000052a4       __tls_index                100a52a4     LIBCMT:tlssup.obj",
+        "0003:00005d00       _wow_edit_system_brushes   100a5d00     <common>"
+      ],
+      "conclusion": "Keep original list selection, input, scrolling and owner-draw algorithms in C. Seventeen still-open outer symbols and shared precomp are not eliminated by this review. System brushes already have B ownership from P44."
+    }
+  ],
+  "mechanisms": {
+    "mouse": "xxxTrackMouse owns selection/modifiers, capture transitions and drag policy. xxxLBButtonUp kills scroll timer and clears fMouseDown/fCaptured before optional ReleaseCapture and notifications. Preserve this ordering, including recursive synthesized button-up on double click.",
+    "keyboard": "Original keyboard navigation, range selection and type search stay C; original Compare uses native CompareStringW. Owner-draw WM_COMPAREITEM, WM_CHARTOITEM and WM_DRAWITEM retain their original data and notification rules.",
+    "caretTimer": "Non-NULL timer callback is xxxLBoxCaretBlinker. F wow_control_set_timer maps it to list_caret_timer -> shared edit_entry -> list_caret_entry -> original callback. list_caret_entry validates retained WND/fnid before accessing LBIV; timer callback cannot be replaced with a raw SetTimer cast without considering current task/borrow entry. NULL timer callbacks share native SetTimer.",
+    "drawing": "LBPrintCallback and original ClientDrawState remain C. F wow_control_draw_state supplies per-call scratch DC/bitmap ownership, nested TLS restoration and finally cleanup using current screen metrics; B system brushes are already separate. S13 must handle invocation lifetime, S14 original drawing-state composition; no new drawing engine.",
+    "hitTest": "F wow_default_find_nc_hit reads original PWND handle, retains it in borrow scope, invokes native DefWindowProcW WM_NCHITTEST, and publishes return through shared native-call scope. Do not replace it with SendMessage to the same window.",
+    "doubleClick": "C0389 wrapper calls F wow_list_native_reset_double_click, a Windows-only INIT_ONCE named win32u NtUserResetDblClk resolver. This native leaf is eligible for B ownership. The current VOID wrapper also calls F wow_user_native_call_failed, which records retirement_trace then raises failfast. Moving only resolver does not eliminate C0389; whole-edge cleanup must decide failure ownership without adding B->F. Existing wrapper dependency is not proof that this implementation is minimal. Keep this specific required follow-up explicit.",
+    "method": "Complete 3522-line source inspection, current production COFF and VALID include graph, link providers and actual timer/drawing/hit-test/reset implementations. Static evidence only; no new runtime claim."
+  },
+  "progress": {
+    "reviewedFiles": 92,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 61,
+    "deferredSourceAbiCompositionFiles": 14,
+    "unreviewedFiles": 24,
+    "totalFiles": 116,
+    "openIds": 502,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: no production changes.",
+    "runtime": "Not run: ownership classification only.",
+    "publication": "P47 retained; all22 actual image hashes verified against manifest, package 52216b4e-b210-4b25-81d1-e9c923d4750c.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-list-interaction-ownership/docs.log and docs.exit. git diff --check passed."
+  },
+  "followup": "S13 shared callback/borrow/native-return cleanup, including timer teardown and reentrancy; C0389 native resolver can move to B but failure policy must be resolved with the complete edge. S14 mixed header/original state composition. Classification does not approve permanent retention of current adapters.",
+  "limits": "No source, guest, #error or #line changes; no dependency claimed eliminated."
+}
