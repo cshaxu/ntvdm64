@@ -1223,6 +1223,9 @@ $adapterSoftpcObjects += 'obj/compat/pif_path.obj'
 $graph.Add('build obj/compat/mvdm_firmware.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_firmware.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/compat/mvdm_firmware.obj'
+$graph.Add('build obj/compat/wow_start_glass.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_start_glass.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterSoftpcObjects += 'obj/compat/wow_start_glass.obj'
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj'
 $graph.Add('build obj/adapter-softpc/mvdm_keyboard_history.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_keyboard_history.c')))
 $graph.Add('  cflags = ' + $libraryFlags)

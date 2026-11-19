@@ -21,17 +21,6 @@ static void mvdm_wow_private_product_unavailable(void)
     SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
 }
 
-/* DIVERGENCE(ADAPTER-WIN32-039): original USER client `ShowStartGlass`
- * invokes the private `NtUserCallOneParam(SFI__SHOWSTARTGLASS)` compound
- * server action.  That void call has no result or MVDM-visible state and is
- * presentation-only.  The declared non-GUI profile therefore preserves its
- * name, parameter and caller ordering while intentionally provides no
- * presentation.  It must not be generalized into a USER/GDI provider.
- * Hard-error handling below remains an unavailable, controlled-stop path. */
-void ShowStartGlass(DWORD timeout)
-{
-    (void)timeout;
-}
 
 /* DIVERGENCE(ADAPTER-WIN32-040): original `nt_error.c` forwards this exact
  * NT4 hard-error ABI to CSRSS.  Public Win32 does not provide the same

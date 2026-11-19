@@ -686,6 +686,9 @@ foreach ($source in $providerSupportSources) {
         $ninja.Add('  cflags = $adapter_cflags')
     }
 }
+$supportObjects.Add('obj/compat/wow_start_glass.obj')
+$ninja.Add('build obj/compat/wow_start_glass.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_start_glass.c')))
+$ninja.Add('  cflags = ' + $nativeCflags)
 $supportObjects.Add('obj/compat/wow_hook_native_binding.obj')
 $ninja.Add('build obj/compat/wow_hook_native_binding.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_hook_native_binding.c')))
 $ninja.Add('  cflags = ' + $nativeCflags)

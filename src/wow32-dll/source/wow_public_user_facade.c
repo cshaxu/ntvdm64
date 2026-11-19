@@ -20,12 +20,3 @@ int WINAPI wow_user_dialog_box_indirect_param(HINSTANCE module,
     return wow_user_modal_dialog_box(module,dialog_template,
         owner,dialog_proc,init_param,flags);
 }
-
-/* DIVERGENCE(ADAPTER-WIN32-039): the original private USER request changes
- * only NT4's server-managed start-glass presentation.  This selected product
- * has no CSRSS GUI presentation owner; retain the void call/order without
- * synthesizing a cursor, dialog or task result. */
-void ShowStartGlass(DWORD timeout)
-{
-    UNREFERENCED_PARAMETER(timeout);
-}

@@ -1,0 +1,200 @@
+{
+  "baseline": "5de1e37149884c8aa4c3f0cbb12c4908b16979be",
+  "question": "Can duplicate no-state ShowStartGlass bindings leave F without changing either product ABI?",
+  "conclusion": "Both existing empty implementations become one B source compiled with the existing per-product default calling convention.",
+  "eliminated": [
+    "C0320",
+    "C0440"
+  ],
+  "original": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "windows/core/ntuser/client/client.c",
+    "lines": [
+      2998,
+      3002
+    ],
+    "behavior": "Original forwards to private NtUserCallOneParam(SFI__SHOWSTARTGLASS). Existing product intentionally does not implement that presentation action; this move preserves the limitation, not original equivalence."
+  },
+  "unchanged": "Except removed ShowStartGlass function/comment, both F source bodies match baseline. Hard-error/session termination and modal-dialog delegation remain in F. No mirror change or new runtime state.",
+  "machineCode": [
+    {
+      "symbol": "_ShowStartGlass",
+      "old": "before-worker.obj",
+      "new": "build/.ninja/msvc-x86-release/worker/obj/compat/wow_start_glass.obj",
+      "bytes": "c20000",
+      "equal": true
+    },
+    {
+      "symbol": "_ShowStartGlass@4",
+      "old": "before-wow.obj",
+      "new": "build/.ninja/msvc-x86-release/wow32/obj/compat/wow_start_glass.obj",
+      "bytes": "c20400",
+      "equal": true
+    }
+  ],
+  "finalMaps": [
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map",
+      "sha256": "d68fc3befe984e107c48b007e10c9256bef01fe5877e571f4f99663058ce4f8d",
+      "binding": "0001:00005e80       _ShowStartGlass            00406e80 f   softpc-bindings:wow_start_glass.obj"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/wow32.dll.map",
+      "sha256": "e883ac6cc55a00d695ac8973d896ea5c05bc38a40fffce1bc8d92dfd14a67e4d",
+      "binding": "0001:0000b9e0       _ShowStartGlass@4          1000c9e0 f   wow_start_glass.obj"
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/worker-reference-x86/ntvdm.exe.map",
+      "sha256": "ccc68f65a3fdc017a0a645c1ecdbe0534b5ecee2a9f21255c8e96bacc730f51b",
+      "binding": "0001:00005e80       _ShowStartGlass            00406e80 f   softpc-bindings:wow_start_glass.obj"
+    }
+  ],
+  "sourceHashes": {
+    "src/compat/wow_start_glass.c": "792e04e24ef27e4f0abdcaaeca31f27cc6db6996c132f45c805b5f13f5ec906f",
+    "src/ntvdm-exe/win32/wow_private_unavailable.c": "721471105a891964f94d459c3681c29991abf8c5da11867453b268a93fe182ce",
+    "src/wow32-dll/source/wow_public_user_facade.c": "e74e2ad47408f8ce83203b2d52029407d4a3f5e0980b25b8e40010b1c979f239",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "bf3189251bf12add0bd8496cc94738ecd2f4d62d42b5289a1e2aba90e5be5268",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "a801e2f32ff8f2563814271eb4c5aaa6b6074bd827d48700224b92dd97fd13a0"
+  },
+  "verification": {
+    "build": "Cached x86/x64 full products, explicit four x86 worker outputs and reference-x86 worker passed.",
+    "abGraphs": 8,
+    "normalized": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": false,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "normalization": "Only GUID and PE/debug timestamps masked. Nine images equal; NTVDM/WOW32 differ. Do not call these raw or normalized identical.",
+    "runtime": "Not rerun under owner pure-relocation build/publication authorization. Function-byte/ABI and source checks support this bounded relocation; no new guest behavior claim.",
+    "publication": "Complete11 both destinations and22 hashes verified.",
+    "documentation": "Passed: build/t483-s12-start-glass/docs.log",
+    "formatOnlyAfterBuild": "Removed extra blank line at EOF in wow_public_user_facade.c to pass diff-check. Non-whitespace source identical; no rebuild under format-only authorization. Compiled and final source hashes recorded separately."
+  },
+  "publication": {
+    "package": "5180945b-69e6-4556-8e21-0853a5aae788",
+    "verified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "8ef7f23ea30277e2c9e321958aacaffd1b9cc62a1625d88b447ae57c95280ca6"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "0f594987eae9476587f321f9132da11da38f9990c936cfb8d56630029bbb37ac"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "9f1a69a325a413241b1a8e1880f4e07fb8a91722a3afd15a887b6206fc76aded"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "ed6b7c88eae498f09e490bf4371d14f59fd248cc2761364d1f5e288b1eec1d6f"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "189f7b4554074aed03f627ffe35db9e08d9cd4c516d67e054d0ae5eb9104fadc"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "23f81baa0d913d88ab9e9e05dff7e3a695098b7ca513d2d412452d5d7b8cebef"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "c724f4473bf92c860ef4ee1a835713f02c14f1738a14770bde6d69bc57a01abd"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "f9409bd5330aed698b024da90327d2b5e41c23fd01272d145679383dce0143c5"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "0e8de8c3ed70513e5222dc0c7a091081fa412728b5f52eb1cbc64622221cfa47"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "4718a10d32654854c647511502be30be6ffd053db3e264878ae0bc945bc2fe59"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "98b3f60a3b17120c0279629de8961e5cb72f0fb47ba2b28681323438d2f05b97"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "8ef7f23ea30277e2c9e321958aacaffd1b9cc62a1625d88b447ae57c95280ca6"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "0f594987eae9476587f321f9132da11da38f9990c936cfb8d56630029bbb37ac"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "9f1a69a325a413241b1a8e1880f4e07fb8a91722a3afd15a887b6206fc76aded"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "ed6b7c88eae498f09e490bf4371d14f59fd248cc2761364d1f5e288b1eec1d6f"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "189f7b4554074aed03f627ffe35db9e08d9cd4c516d67e054d0ae5eb9104fadc"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "23f81baa0d913d88ab9e9e05dff7e3a695098b7ca513d2d412452d5d7b8cebef"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "c724f4473bf92c860ef4ee1a835713f02c14f1738a14770bde6d69bc57a01abd"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "f9409bd5330aed698b024da90327d2b5e41c23fd01272d145679383dce0143c5"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "0e8de8c3ed70513e5222dc0c7a091081fa412728b5f52eb1cbc64622221cfa47"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "4718a10d32654854c647511502be30be6ffd053db3e264878ae0bc945bc2fe59"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "98b3f60a3b17120c0279629de8961e5cb72f0fb47ba2b28681323438d2f05b97"
+      }
+    ]
+  },
+  "progress": {
+    "reviewedFiles": 190,
+    "totalFiles": 190,
+    "totalIds": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 475,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 93
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "S12 remaining ownership disposition reconciliation; no S13/S14 admission yet.",
+  "compiledSourceHashes": {
+    "src/compat/wow_start_glass.c": "792e04e24ef27e4f0abdcaaeca31f27cc6db6996c132f45c805b5f13f5ec906f",
+    "src/ntvdm-exe/win32/wow_private_unavailable.c": "721471105a891964f94d459c3681c29991abf8c5da11867453b268a93fe182ce",
+    "src/wow32-dll/source/wow_public_user_facade.c": "4b165f048a29fb6aa579fb81f56774a33c3387f5861afb2ae70d128a109320aa",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "bf3189251bf12add0bd8496cc94738ecd2f4d62d42b5289a1e2aba90e5be5268",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "a801e2f32ff8f2563814271eb4c5aaa6b6074bd827d48700224b92dd97fd13a0"
+  }
+}
