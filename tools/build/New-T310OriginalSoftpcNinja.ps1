@@ -267,7 +267,7 @@ $adapterBaseSrvNames = @('mvdm_command_guest_state.c',
                           'mvdm_command_native_child.c',
                           'mvdm_command_binding.c')
 $adapterVddNames = @('mvdm_softpc_vdd_unavailable.c')
-$adapterMonitorNames = @('vdm_control.c', '../mvdm_vdm_tib.c')
+$adapterMonitorNames = @('../mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_registers.c')
 $adapterRedirWorkerNames = @('mvdm_redirector_worker_copy.c',
                               'mvdm_redirector_async.c')
@@ -1621,6 +1621,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/ntvdm_command_directory.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/basesrv/t394_s4_command_scalar_state_fixture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvdm-command-directory-test.exe: broker_test_link obj/tests/ntvdm_command_directory.obj obj/adapter-basesrv/mvdm_command_guest_state.obj obj/compat/guest_location.obj session.lib')
+    $graph.Add('build obj/tests/vdm_control.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/vdm_control_test.c')))
+    $graph.Add('  cflags = ' + $baseFlags)
+    $graph.Add('build vdm-control-test.exe: broker_test_link obj/tests/vdm_control.obj obj/compat/vdm_control.obj')
     $graph.Add('build obj/tests/win32_process_launch.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-launch/process.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-process-launch-test.exe: broker_test_link obj/tests/win32_process_launch.obj lib-process-launch.lib')
@@ -2128,6 +2131,9 @@ $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join
 # local BaseVDM producer, retry loop or single-process queue.
 $graph.Add('build obj/compat/command_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/command_services.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$graph.Add('build obj/compat/vdm_control.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/vdm_control.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$adapterMonitorObjects = @($adapterMonitorObjects) + 'obj/compat/vdm_control.obj'
 $graph.Add('build worker-command-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' ') + ' obj/compat/command_services.obj')
 $graph.Add('build monitor-bindings.lib: lib ' + ($adapterMonitorObjects -join ' '))
 $graph.Add('build kernel-vdm-printer.lib: lib ' + $kernelVdmPrinterObject)

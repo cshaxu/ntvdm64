@@ -1,0 +1,356 @@
+{
+  "scope": "T483 S13 P11: DIR-ordered demsrch.c NtVdmControl boundary",
+  "baseline": "18c2619846e9e6c0dc2364b7ff11dad615fcd444",
+  "file": "src/mvdm-host/dos/dem/demsrch.c",
+  "mirror": {
+    "beforePoints": 5,
+    "beforeLines": 25,
+    "afterPoints": 5,
+    "afterLines": 25,
+    "added": 25,
+    "deleted": 0,
+    "deltaPoints": 0,
+    "deltaLines": 0,
+    "errorLine": "Entire mirror byte-unchanged, including selected/excluded branches and diagnostic mappings."
+  },
+  "problem": "Original FileFindReset calls NtVdmControl(VdmQueryDir). The F implementation carries session/thread callback binding that only an obsolete unit fixture ever installs.",
+  "callChain": "demsrch FileFindReset builds VDMQUERYDIRINFO -> NtVdmControl returns STATUS_NOT_IMPLEMENTED -> original in-file filename enumeration fallback. The separate F printer-close caller also retains its existing unsupported result.",
+  "evidenceOfUnavailability": "Repository source/build/export search finds no production bind/unbind caller or exported dynamic installer. Old current_binding is thread-local zero-initialized and can only change through those uncalled functions. Thus all selected production calls return STATUS_NOT_IMPLEMENTED already, with no output-data mutation or LastError modification.",
+  "implementation": "Move only the cdecl unavailable NtVdmControl provider into compat. Delete F callback binding, private header and test-only synthetic capability fixture; retain original directory algorithm and original status result. Reuse existing directory reset acceptance and replace obsolete fixture with original-declaration ABI/unavailability checks.",
+  "ABI": {
+    "declaration": "src/non-mvdm/public/internal/base/inc/vdm.h: VDMSERVICECLASS(enum _VdmServiceClass), PVOID -> NTSTATUS, cdecl",
+    "provider": "The same enum tag is forward-declared in supported MSVC C. LONG is the original NTSTATUS underlying type; no enum value/structure is duplicated or interpreted.",
+    "proof": "Compile real provider together with original vdm.h and original-signature function pointer under /we4113. Production independently compiles B without C headers; library graph and COFF checks verify isolation.",
+    "rejected": "First int-parameter experiment produced C4113 and also used unsupported _Static_assert syntax in the historical C mode. It was not used in product. Final probe uses same enum tag and typedef width assertion; passes."
+  },
+  "ownership": {
+    "B": "Stateless deterministic unavailable boundary; no outer header, import, callback, thread or session state.",
+    "C": "All original search and fallback behavior remains in demsrch.c.",
+    "F": "Removed unused query callback installation and teardown. VDM_TIB and other monitor ownership unchanged."
+  },
+  "eliminatedIds": [
+    "C0188"
+  ],
+  "counts": {
+    "excluded-diagnostic": 1,
+    "open": 440,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 128
+  },
+  "total": 618,
+  "S13Eliminated": 32,
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "build": "Cached full x86/x64 products, explicit x86 images and reference-x86 worker pass. Eight A/B production graphs pass.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "b93146bd-24be-4120-a919-3dd1e5f58502",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalized": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "verification": {
+    "originalABI": "All original service classes return STATUS_NOT_IMPLEMENTED, preserve data and LastError; NULL and deliberately unreadable service data are not accessed.",
+    "directory": "115 assertions on actual original FileFindOpen/FileFindReset/FileFindNext/FillFCBSrchBuf, real NT filesystem operations, six mutation/reset scenarios and resource cleanup pass. This is a provider fixture, not guest INT21 proof.",
+    "guest": "Separate strict full DIR passes through actual immutable DOS guest on the published candidate."
+  },
+  "failureDisposition": "First full build failed before publication: a single remaining monitor object was a PowerShell scalar and += concatenated object names. Changed to explicit array concatenation, regenerated and passed complete build. Both attempts retained.",
+  "limitations": [
+    "No kernel VDM capability added; unsupported services remain unsupported.",
+    "The enum forward-declaration proof is for supported MSVC C, not a portability claim for arbitrary C compilers.",
+    "No Full/Win3.x/Win95 acceptance claimed.",
+    "Next remaining DIR file is dpmi32/i386/dpmi386.c; S13 active, S14 unadmitted."
+  ],
+  "evidence": [
+    {
+      "path": "build/t483-s13-demsrch-boundary/abi-process.json",
+      "sha256": "89fb21ac8c08d9d38128e6f3dda7e7c1b535e25aa3610dec2593546761285819"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/abi.c",
+      "sha256": "cfadbca4d44daec798df7deec1e004eabda1fd4444352f343174acd8448ffc2a"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/abi.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/abi.exit",
+      "sha256": "df4e26a04a444901b95afef44e4a96cfae34690fff2ad2c66389c70079cdff2b"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/abi.out",
+      "sha256": "360447007c8553ac1dea04e2e450b175b9c783095e3a87de3117abebae88d0ca"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/abi.ps1",
+      "sha256": "12f6a77baa3ce6e63fafde1620232b3ade0eff903504d1c48412ea1535b2a72b"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/abi.rsp",
+      "sha256": "83227b9249030757873bb94db9a536f5b96f72df315ee298b192edcc60346847"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/b-deps.txt",
+      "sha256": "2744b670a923042459cf40ef48d310b40fc3e9cb8a0822c3b808a17733e06865"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/b-symbols.txt",
+      "sha256": "67dee2a71ca4245ec225ba38884a5c1dfb4a6ebaccca7c65fde65c818a86a826"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/before.json",
+      "sha256": "23f6851e4611582c5e42128f52087b1127c192bb74342989f20212d01450a476"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/build.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/build.ps1",
+      "sha256": "1b62b86b394527f6238522accb5b76d4c9cf5d23e1707003cd21a88f498b5e24"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/check.ps1",
+      "sha256": "874399645932bc62c7151639b9ce325c40755e491e953a2ef6c17caee10975c2"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/deliver.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/deliver.ps1",
+      "sha256": "b30925fb4488350d6cc29d9ac817f4892e0e5d2a83eca5ffdfcc1efdd2ec1280"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/directory-reset/build.txt",
+      "sha256": "df1b7508a9232289b126f4ac79341e05233a1e0ad4e3650ff15f39887605f8c5"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/directory-reset/compile.rsp",
+      "sha256": "998159c03e62bb0e176620c95fb8eb4f37a53b6714ceee61db334c721963d474"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/directory-reset/result.json",
+      "sha256": "68c35a4c529e76d34f79e51ad2a8e6425102849ef4d2af5294eeabe11dbb055d"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/directory-reset/result.txt",
+      "sha256": "52c36790ac21e0b954e4aa29ecf0fcef2f0ec6bd82d5aa27d2658b6b3a3aee5a"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/final-abi.c",
+      "sha256": "87601512e06ec0a44ad526a4f7702aafda89f8d1cacb3bc87f9427174111b8a5"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/final-abi.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/final-abi.ps1",
+      "sha256": "e639c0fc04b8cfb8e936f7692c48da37d1e39ca3473132755f2c122eab4700b8"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/final-abi.rsp",
+      "sha256": "3a9dfc858892fcd1167e81747a2ac87d245c0a83975e753aa722ccc035a313d2"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/final-check.ps1",
+      "sha256": "08d8320180f831c0ca34d26ee6ad314359a7556f4ab53f3567a0d58631bc83ca"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/final-metric.json",
+      "sha256": "23f6851e4611582c5e42128f52087b1127c192bb74342989f20212d01450a476"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/forward-process.json",
+      "sha256": "594279d48f40af314f222fd430718896d608b440fbd0c6e8e2fb216cc116d1b4"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/forward.c",
+      "sha256": "300e6511de2b5b156b0defdf27552badd3009564b7080e14d95fadb054dc7935"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/forward.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/forward.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/forward.out",
+      "sha256": "9a88c70edd0fc0cc6513e82d08760959d339e275478b15045547c4334fc02daa"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/forward.ps1",
+      "sha256": "1bcccc57dba4575ac466fc05ad6b6251720a8689972a688732b97f6dac45cf9d"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/forward.rsp",
+      "sha256": "15dc894700fc8f04fab013289927a0c459ab50b2b81dec3ae28566c7d9cef734"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/identity.py",
+      "sha256": "ba0c9177a079b1dc28153e7900e1cc5436fcfd4fce876ac77d368e6f700d3d84"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/measure.py",
+      "sha256": "e41df8e8f67f576667457abb8109255d3708df12d0f536a794f4cdbb68b236fe"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/normalized-final.json",
+      "sha256": "bc238c38b9911c56e264bf41fadb3dc2182bf0e7a818734aef042c04f29e064f"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/package-id.txt",
+      "sha256": "c24a180f51d2f5164933251916819986ecf0335fb82cb602c1e11009b4569d3f"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/pipeline-attempt1.exit",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/pipeline-process.json",
+      "sha256": "f2b42db3b945b121171240ac0c39bf75267bbee7bbfaf34e13782903208a74b4"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/pipeline.err",
+      "sha256": "9baaf3047ec7fc4806f6b22ab665ec20e12ad428efb5e264ba10fd96167b7c01"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/pipeline.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/pipeline.out",
+      "sha256": "5231e784aca982b4602af7913dfeba2a5c0900f4edf0cab8f746662bb433778b"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/pipeline.ps1",
+      "sha256": "f50001a4d27ab94e5070abeb69395a7993f888fc467c5280fe7d6a1cacccabb4"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/pipeline2-process.json",
+      "sha256": "8502bf2b7a97ee3a4f1f270c4494a43483f741cb290a24d8816109938c28fadc"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/pipeline2.err",
+      "sha256": "3a1cf97d15a56535669ccb5a40687dff36e0f08006196f0cfbbbc82a70345e7a"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/pipeline2.out",
+      "sha256": "52e3ca9256d0d135885795813bf958db15f19c632afdf3e4e0c1e0026ac1374a"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/publication-final.json",
+      "sha256": "57c9f5c94d8c7f83dfcce3bdcfe6567119dfd8851931a39cf0683211bfc322ff"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/publish.ps1",
+      "sha256": "df3a551d505ac7a8943429141b9e4c567b5e2e89f23f5d79c61441339d5564a7"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/record.py",
+      "sha256": "1f7eb6ff1f977c933454fc4aaf4698164aa07201ab4debbe022f41d2793a3c89"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/stage.ps1",
+      "sha256": "91b289931d30195660b922aa03b78977f9e52f97f2054303943d0e9d4f868e8c"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/strict-dir-final.txt",
+      "sha256": "63d19e4cd211afdc735f71afdb092f2a01948748f84f01619f04c307ca3143ca"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/strict-dir-final.txt.cells.txt",
+      "sha256": "7c6c7ffc84beb898bd4ff82976232d3e96c1715c1cc3978baf83042c8e24f3ae"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/strict-final.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/strict-final.ps1",
+      "sha256": "3f22fb90548a019df45e2d8c81d0cbdbce930e96cd66e7994a845e38e4a47f3b"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/targeted.ps1",
+      "sha256": "b4c031f447fb3166dcdbcbc7de999d39f450adabf559325d729b2356c0573033"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/tests-process.json",
+      "sha256": "02654a92a59345d6452ef6ebe0b900e362ff0771daf6a1bd4c894d4bfb53fe90"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/tests.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/tests.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/tests.out",
+      "sha256": "d850ca7fa85c564a1f867e424f8180eeb7f01962efdbe33222e1dc56f2071cc1"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/tests.ps1",
+      "sha256": "0927d866cfceb3f9bef4cb7ab6b8a2361c2835013608775556f8e7de26eb506c"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/vdm-control.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/vdm-control.json",
+      "sha256": "e70ffc8e6ead4ada76df9470e4717c6eb52626edcb8fc42838785fa6e85bff34"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/vdm-control.out",
+      "sha256": "0eae580e5298ee89b7ec4c8fc2c00c7cd89e9f1bbba5e8dc984e1509c42f034a"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/check.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/check.out",
+      "sha256": "0894e21f7d61cb0f00b4b4a7e0acc772d8e823a2e4190085fe047b5db02ef99b"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/check.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/check-process.json",
+      "sha256": "6c4c9ca16d7f849a8b8b2b398fa67b11a4c9a0466b207ce708f51766f569daa2"
+    },
+    {
+      "path": "build/t483-s13-demsrch-boundary/final-hashes.json",
+      "sha256": "f0720825be4fed1887843845898fd59e85dad004dd3b7eb0c6618c92a565034b"
+    }
+  ],
+  "finalChecks": "Worker thread boundary, documentation governance, relative links and git diff check pass. All22 published image hashes rechecked after runtime tests. B object has no undefined symbols and no non-SDK header dependencies.",
+  "historicalGeneratorScope": "T280/T308 references updated to the replacement original-declaration fixture; acceptance used the current production Ninja target and current DEM reset runner, not these historical standalone generators.",
+  "removedProviderBaselineSHA256": "b1b1504a351c79f0036ddd49c845561e929f60fc5ffd164aa7216ed5f32dfc29"
+}

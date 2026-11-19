@@ -321,3 +321,10 @@ and opaque lease retain their original synchronous lifetime. B declares the
 opaque type and access flags in `include/guest_memory_types.h`; it neither
 allocates nor inspects the lease. Session selection, mapping, commit and failure
 semantics remain in the NTVDM provider.
+
+`vdm_control.c` retains the selected `NtVdmControl` cdecl ABI and its existing
+production `STATUS_NOT_IMPLEMENTED` result. Original DEM owns the directory
+enumeration fallback. The former F callback binding had no production installer
+and has been removed; this boundary owns no session, thread or callback state.
+The original enum tag is forward-declared using the supported MSVC C contract,
+without importing C headers or duplicating its service values.

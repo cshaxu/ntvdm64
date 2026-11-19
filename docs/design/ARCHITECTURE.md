@@ -849,7 +849,9 @@ process-local bindings have moved to the owning executable root.
   family binds the original executable SoftPC CCPU40 call graph. It never
   includes a retired Bochs type, object or global, an NT4 kernel-VDM
   `CPU_30_STYLE` monitor, or a fallback/second executor.
-  The `monitor` family owns same-shaped `NtVdmControl`, `VDM_TIB`, V86-event
+  `compat` owns the unavailable `NtVdmControl` entry; original DEM retains
+  directory enumeration after that result. There is no callback registration.
+  The `monitor` family owns same-shaped `VDM_TIB`, V86-event
   and interrupt/fault-handler facades, and unsupported kernel/CSRSS behavior
   fails deterministically. The remaining families preserve their named
   Redirector, WOW, VDD and debugger external boundaries without importing

@@ -15,10 +15,10 @@ if (!(Test-Path $vs) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) { t
 $sources = @(
     'src/ntvdm-exe/session/guest_memory_lease.c', 'src/ntvdm-exe/session/session.c',
     'src/compat/opennt_support_rtl.c',
-    'src/ntvdm-exe/monitor/source/vdm_control.c',
+    'src/compat/vdm_control.c',
     'src/ntvdm-exe/monitor/mvdm_vdm_tib.c')
 $fixtures = @(
-    'test/adapter-mvdm-host-out/monitor/vdm_control_fixture.c',
+    'test/mvdm-host/vdm_control_test.c',
     'test/adapter-mvdm-host-out/monitor/vdm_tib_fixture.c')
 foreach ($path in $sources + $fixtures) { if (!(Test-Path (Join-Path $root $path)) -or $path -match '(^|/)src\.old(/|$)') { throw "Invalid T308 input: $path" } }
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj'), (Join-Path $build 'bin') | Out-Null
@@ -32,7 +32,7 @@ $g = [Collections.Generic.List[string]]::new(); $g.Add('ninja_required_version =
 $g.Add('rule cc'); $g.Add('  command = cmd.exe /d /s /c call '+(NinjaPath $envFile)+' cl.exe $cflags /Fo$out $in'); $g.Add('  deps = msvc'); $g.Add('  msvc_deps_prefix = Note: including file:')
 $g.Add('rule link'); $g.Add('  command = cmd.exe /d /s /c cd /d $build_root && call '+(NinjaPath $envFile)+' link.exe /nologo /OUT:$out @$out.rsp')
 $g.Add('rule run'); $g.Add('  command = $in'); $g.Add('  description = RUN $in')
-$objects = [Collections.Generic.List[string]]::new(); foreach ($source in $sources) { $object = 'obj/'+(ObjectName $source); $g.Add('build '+$object+': cc '+(NinjaPath (Join-Path $root $source))); $objects.Add($object) }
+$objects = [Collections.Generic.List[string]]::new(); foreach ($source in $sources) { $object = 'obj/'+(ObjectName $source); $g.Add('build '+$object+': cc '+(NinjaPath (Join-Path $root $source))); if ($source -eq 'src/compat/vdm_control.c') { $g.Add('  cflags = /nologo /TC /c /MT /W4 /WX /showIncludes') }; $objects.Add($object) }
 $outputs = [Collections.Generic.List[string]]::new(); foreach ($fixture in $fixtures) { $object = 'obj/'+(ObjectName $fixture); $output = 'bin/'+([IO.Path]::GetFileNameWithoutExtension($fixture))+'.exe'; $g.Add('build '+$object+': cc '+(NinjaPath (Join-Path $root $fixture))); [IO.File]::WriteAllLines((Join-Path $build ($output+'.rsp')), @($object)+@($objects)+@('kernel32.lib'), [Text.UTF8Encoding]::new($false)); $g.Add('build '+$output+': link '+$object+' '+($objects -join ' ')); $g.Add('build test-'+([IO.Path]::GetFileNameWithoutExtension($fixture))+': run '+$output); $outputs.Add('test-'+([IO.Path]::GetFileNameWithoutExtension($fixture)))}
 $g.Add('build test: phony '+($outputs -join ' ')); $g.Add('default test')
 [IO.File]::WriteAllLines((Join-Path $build 'build.ninja'), $g, [Text.UTF8Encoding]::new($false))

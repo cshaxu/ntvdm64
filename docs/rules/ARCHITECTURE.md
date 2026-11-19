@@ -306,7 +306,9 @@ Both preserve their original relative paths and provenance.
    same-shaped SoftPC/CCPU, monitor, Win32, Redirector, WOW, VDD and debugger
    bindings. They preserve original name, ABI, ordering and failure shape, do
    not become an alternate provider, and never include Bochs or CPU30.
-4. `ntvdm/monitor` owns the bounded user-mode `NtVdmControl`, `VDM_TIB`,
+4. `compat` owns the unavailable `NtVdmControl` ABI; original DEM owns its
+   directory-enumeration fallback. No production callback provider is installed.
+   `ntvdm/monitor` owns `VDM_TIB`,
    V86-event and interrupt/fault binding. It binds worker-local state around
    imported MVDM code, does not recreate kernel/CSRSS internals, and fails
    unavailable operations deterministically.
