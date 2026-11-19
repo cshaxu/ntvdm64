@@ -6,7 +6,7 @@
   "inputs": {
     "points.jsonl": "bf4d44bb15a1a6680ea371d5ceedcbe4fe6fd78f93ac0c3abaec100a19471ce3",
     "s14-open-provider-crosswalk.json": "1d92be59ff0bdde3e4d960329a67496218cc5c670f3f046240bc8c58f14ef3dd",
-    "s14-header-contract-ownership.json": "77c6857f616b9800a8dead45815e9fc4204c067a04a9e945cf77c79928a37a56"
+    "s14-header-contract-ownership.json": "a6eb21d4c5cfa34810125adc8748be86f9291608b58b5a56a4b5d2ec93b0fbde"
   },
   "readiness_rule": "A whole chain is ready only with exact destinations and caller/state/failure/teardown edits, removal of outward implementations (including callbacks), measured mirror delta and required approval, and final-code validation plan. Source-read or primary-chain assignment alone never satisfies readiness.",
   "chains": [
@@ -705,7 +705,8 @@
       "planned_scope": "S19",
       "execution_ownership": "C machine algorithms; B independent resource storage; F entrypoints",
       "evidence": [
-        "s14-build-abi-boundary-reconciliation.json"
+        "s14-build-abi-boundary-reconciliation.json",
+        "s14-generated-header-disposition.json"
       ],
       "open_ids": [
         "C0003",
@@ -766,7 +767,7 @@
         9
       ],
       "design_status": "incomplete",
-      "next_design_gate": "Resolve generated-header provenance/layout carrier, original helper insertion/mirror cost, remaining include roots and VCDEX binary contract.",
+      "next_design_gate": "Three generated headers classified C-private ABI with exact original-carrier proposals in P61; obtain actual x86 layout/selection and final mirror-cost evidence and policy approval. Other helper insertion, roots and VCDEX disposition still pending.",
       "newly_implemented_ids": [],
       "newly_delivered_ids": []
     }
@@ -794,6 +795,9 @@
       "supporting-evidence": 44,
       "eliminated-transitive": 5,
       "eliminated": 152
-    }
-  }
+    },
+    "classified_headers": 59,
+    "generated_header_migrations_pending": 3
+  },
+  "updated_by": "T483 S14 P61"
 }

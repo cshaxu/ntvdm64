@@ -10,7 +10,8 @@
     "s14-device-presentation-provider-ownership.md",
     "s14-request-lifecycle-provider-ownership.md",
     "s14-console-provider-ownership.md",
-    "s14-page-domain-complete-ownership.md"
+    "s14-page-domain-complete-ownership.md",
+    "s14-generated-header-disposition.json"
   ],
   "headers": [
     {
@@ -241,10 +242,10 @@
         "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c"
       ],
       "ledger_status": "open",
-      "review": "generated-declaration-slot-review-pending",
+      "review": "C-private-machine-ABI-classified; source-recovery-candidate-not-approved",
       "chain": "vectors",
-      "owner": "C machine declarations expected; provenance and selected slots require reconciliation",
-      "action": "Inspect full generated declaration sets and original baseline before choosing C carrier; no status promotion."
+      "owner": "C original CPU/SAS private declarations and dispatch; not B independent compatibility and not F product policy",
+      "action": "Proposed original carrier: src/mvdm-host/softpc.new/host/inc/mips/prod/pigreg_c.h. Preserve selected x86 layout; source-policy and mirror-increase approval plus actual layout/compile verification required before relocation."
     },
     {
       "id": "C0031",
@@ -323,10 +324,10 @@
         "src/mvdm-host/softpc.new/host/src/sim32.c"
       ],
       "ledger_status": "open",
-      "review": "generated-declaration-slot-review-pending",
+      "review": "C-private-machine-ABI-classified; source-recovery-candidate-not-approved",
       "chain": "vectors",
-      "owner": "C machine declarations expected; provenance and selected slots require reconciliation",
-      "action": "Inspect full generated declaration sets and original baseline before choosing C carrier; no status promotion."
+      "owner": "C original CPU/SAS private declarations and dispatch; not B independent compatibility and not F product policy",
+      "action": "Proposed original carrier: src/mvdm-host/softpc.new/base/cvidc/gdpvar.h. Preserve selected x86 layout; source-policy and mirror-increase approval plus actual layout/compile verification required before relocation."
     },
     {
       "id": "C0032",
@@ -420,10 +421,10 @@
         "src/mvdm-host/softpc.new/host/src/stubs.c"
       ],
       "ledger_status": "open",
-      "review": "generated-declaration-slot-review-pending",
+      "review": "C-private-machine-ABI-classified; source-recovery-candidate-not-approved",
       "chain": "vectors",
-      "owner": "C machine declarations expected; provenance and selected slots require reconciliation",
-      "action": "Inspect full generated declaration sets and original baseline before choosing C carrier; no status promotion."
+      "owner": "C original CPU/SAS private declarations and dispatch; not B independent compatibility and not F product policy",
+      "action": "Proposed original carrier: src/mvdm-host/softpc.new/base/cvidc/sas4gen.h. Preserve selected x86 layout; source-policy and mirror-increase approval plus actual layout/compile verification required before relocation."
     },
     {
       "id": "C0033",
@@ -1664,16 +1665,20 @@
   "summary": {
     "open_headers": 59,
     "header_bodies_read": 56,
-    "generated_pending": 3,
+    "generated_pending": 0,
     "dependencies_eliminated": 0,
     "production_changes": 0,
     "mirror_delta_points": 0,
-    "mirror_delta_lines": 0
+    "mirror_delta_lines": 0,
+    "classified_headers": 59,
+    "generated_classified_by_full_file_comparison": 3,
+    "generated_migration_pending": 3
   },
   "remaining": [
-    "Twelve include roots require per-selected-command removal/dependency validation.",
+    "Eleven include roots require per-selected-command removal/dependency validation.",
     "Image import requires final provider ABI/link ownership, not import-name substitution.",
     "Exact C carriers, ABI candidates and mirror costs remain prerequisites; this classification is not final migration approval.",
     "Four-root inventory coverage and indirect callbacks remain part of the goal."
-  ]
+  ],
+  "updated_by": "T483 S14 P61"
 }

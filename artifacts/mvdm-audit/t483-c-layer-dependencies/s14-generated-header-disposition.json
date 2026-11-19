@@ -1,0 +1,228 @@
+{
+  "delivery": "T483 S14 P61",
+  "baseline": "328bcb400",
+  "question": "Finish responsibility classification of the three generated headers before further chain candidate work.",
+  "method": "Compare entire selected files to OpenNT counterparts with line-based SequenceMatcher(auto-junk disabled); retain original paths and hashes. Inspect original declarations, selected C consumers and vector initialization. No source movement or compilation.",
+  "conclusion": "All three are C-owned private machine ABI, not independent B compatibility resources. F currently carries them only due historical generated-source selection. Ownership classification is complete; migration remains unapproved/unverified.",
+  "rows": [
+    {
+      "id": "C0030",
+      "current_path": "src/ntvdm-exe/softpc/include/generated/x86/prod/PigReg_c.h",
+      "current_sha256": "fac49a3797900896f2c84a9c7484cb456312511482d80edf08305b5f034ec784",
+      "original_path": "O:/repos.external/OpenNT/base/mvdm/softpc.new/host/inc/mips/prod/pigreg_c.h",
+      "original_sha256": "30113bfb9ac8e521895189480fb0070295751d43dab47179ec1c43083be62b44",
+      "proposed_original_carrier": "src/mvdm-host/softpc.new/host/inc/mips/prod/pigreg_c.h",
+      "carrier_exists": false,
+      "existing_carrier_equals_original_bytes": null,
+      "original_lines": 71,
+      "selected_lines": 71,
+      "raw_line_diff": {
+        "points": 1,
+        "removed": 1,
+        "added": 1
+      },
+      "changes": [
+        {
+          "operation": "replace",
+          "original_start": 24,
+          "original": [
+            "\tIU32 LDT_limit;"
+          ],
+          "selected_start": 24,
+          "selected": [
+            "\tIU16 LDT_limit;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C0031",
+      "current_path": "src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+      "current_sha256": "7b942fbf7d32c8f4f274f5cadf8612c15a67c3235488b4476e5a00970c058bb0",
+      "original_path": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/cvidc/gdpvar.h",
+      "original_sha256": "557c5d1d0effd1f8b1a18e0df5415924d63773edbc7ee762a624720229c24042",
+      "proposed_original_carrier": "src/mvdm-host/softpc.new/base/cvidc/gdpvar.h",
+      "carrier_exists": true,
+      "existing_carrier_equals_original_bytes": true,
+      "original_lines": 698,
+      "selected_lines": 702,
+      "raw_line_diff": {
+        "points": 3,
+        "removed": 2,
+        "added": 6
+      },
+      "changes": [
+        {
+          "operation": "replace",
+          "original_start": 693,
+          "original": [
+            "#define GLOBAL_TraceVector ((IU8 *)((IUH)Gdp + 3512))"
+          ],
+          "selected_start": 693,
+          "selected": [
+            "#define GLOBAL_CurrentUniverse (*(IU32 *)((IUH)Gdp + 3512))",
+            "#define SET_GLOBAL_CurrentUniverse(v) (GLOBAL_CurrentUniverse = (v)) ",
+            "#define GLOBAL_TraceVector ((IU8 *)((IUH)Gdp + 3516))"
+          ]
+        },
+        {
+          "operation": "replace",
+          "original_start": 695,
+          "original": [
+            "#define GDP_SIZE 43513"
+          ],
+          "selected_start": 697,
+          "selected": [
+            "#define GDP_SIZE 43517"
+          ]
+        },
+        {
+          "operation": "insert",
+          "original_start": 698,
+          "original": [],
+          "selected_start": 700,
+          "selected": [
+            "#define GDP_PTR Gdp",
+            ""
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C0032",
+      "current_path": "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+      "current_sha256": "7f4520389338f9d265ce4d4a3e72980356687aebc9ed836b4707d5a250519afa",
+      "original_path": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/cvidc/sas4gen.h",
+      "original_sha256": "ecda9cc4909ec3b945f90441a1ec441adaf807dcf6f419523c80c334e87067a0",
+      "proposed_original_carrier": "src/mvdm-host/softpc.new/base/cvidc/sas4gen.h",
+      "carrier_exists": false,
+      "existing_carrier_equals_original_bytes": null,
+      "original_lines": 837,
+      "selected_lines": 881,
+      "raw_line_diff": {
+        "points": 6,
+        "removed": 0,
+        "added": 44
+      },
+      "changes": [
+        {
+          "operation": "insert",
+          "original_start": 60,
+          "original": [],
+          "selected_start": 60,
+          "selected": [
+            "typedef\tIU8 *\tTYPE_sas_touch\tIPT2(IU32,\taddr, IU32,\tlength);"
+          ]
+        },
+        {
+          "operation": "insert",
+          "original_start": 61,
+          "original": [],
+          "selected_start": 62,
+          "selected": [
+            "typedef\tIU32\tTYPE_VirtualiseInstruction\tIPT4(IU32,\teipInRom, IUH,\tsize, IU32,\tlinearAddrOrPort, IU32,\tdataIn);",
+            "typedef\tIBOOL\tTYPE_IsPageInstanceData\tIPT1(IU32,\tphysAddr);"
+          ]
+        },
+        {
+          "operation": "insert",
+          "original_start": 117,
+          "original": [],
+          "selected_start": 120,
+          "selected": [
+            "\tIU8 *\t(*Sas_touch)\tIPT2(IU32,\taddr, IU32,\tlength);"
+          ]
+        },
+        {
+          "operation": "insert",
+          "original_start": 118,
+          "original": [],
+          "selected_start": 122,
+          "selected": [
+            "\tIU32\t(*SasVirtualiseInstruction)\tIPT4(IU32,\teipInRom, IUH,\tsize, IU32,\tlinearAddrOrPort, IU32,\tdataIn);",
+            "\tIBOOL\t(*IsPageInstanceData)\tIPT1(IU32,\tphysAddr);"
+          ]
+        },
+        {
+          "operation": "insert",
+          "original_start": 824,
+          "original": [],
+          "selected_start": 830,
+          "selected": [
+            "IMPORT\tIU8 *\tc_sas_touch\tIPT2(IU32, addr, IU32, length);",
+            "#define\tsas_touch(addr, length)\tc_sas_touch(addr, length)",
+            "#else\t/* CCPU */",
+            "",
+            "#ifdef PROD",
+            "#define\tsas_touch(addr, length)\t(*(Sas.Sas_touch))(addr, length)",
+            "#else /* PROD */",
+            "IMPORT\tIU8 *\tsas_touch\tIPT2(IU32, addr, IU32, length);",
+            "#endif /*PROD*/",
+            "",
+            "#endif\t/* CCPU */",
+            "",
+            "#ifdef\tCCPU"
+          ]
+        },
+        {
+          "operation": "insert",
+          "original_start": 836,
+          "original": [],
+          "selected_start": 855,
+          "selected": [
+            "#ifdef\tCCPU",
+            "IMPORT\tIU32\tc_VirtualiseInstruction\tIPT4(IU32, eipInRom, IUH, size, IU32, linearAddrOrPort, IU32, dataIn);",
+            "#define\tVirtualiseInstruction(eipInRom, size, linearAddrOrPort, dataIn)\tc_VirtualiseInstruction(eipInRom, size, linearAddrOrPort, dataIn)",
+            "#else\t/* CCPU */",
+            "",
+            "#ifdef PROD",
+            "#define\tVirtualiseInstruction(eipInRom, size, linearAddrOrPort, dataIn)\t(*(Sas.SasVirtualiseInstruction))(eipInRom, size, linearAddrOrPort, dataIn)",
+            "#else /* PROD */",
+            "IMPORT\tIU32\tVirtualiseInstruction\tIPT4(IU32, eipInRom, IUH, size, IU32, linearAddrOrPort, IU32, dataIn);",
+            "#endif /*PROD*/",
+            "",
+            "#endif\t/* CCPU */",
+            "",
+            "#ifdef\tCCPU",
+            "",
+            "#else\t/* CCPU */ ",
+            "",
+            "#ifdef PROD",
+            "#define\tIsPageInstanceData(physAddr)\t(*(Sas.IsPageInstanceData))(physAddr)",
+            "#else /* PROD */",
+            "IMPORT\tIBOOL\tIsPageInstanceData\tIPT1(IU32, physAddr);",
+            "#endif /*PROD*/",
+            "",
+            "#endif\t/* CCPU */",
+            ""
+          ]
+        }
+      ]
+    }
+  ],
+  "policy_gate": "T417 S2 and current source policy prohibit copying NTVDMx64 generated inputs as new mirror files. Proposed source recovery must explicitly use pinned original OpenNT counterparts with separately approved minimal x86 adaptations, and obtain owner approval before any mirror increase; no provenance relabeling.",
+  "proposal": "Recover the original PigReg and SAS header files at their original paths; retain existing CVID gdpvar carrier. Adapt only selected x86 declaration differences after full selected-context layout proof. Do not move MIPS execution code or select a MIPS product profile. Delete F copies only after final C include selection is proven.",
+  "alternatives_rejected": [
+    "Moving all three unchanged into B would hide C private layout and C dispatch dependencies in B.",
+    "Using unmodified original headers is not currently justified: LDT_limit width, GDP offsets/size and SasVector slot order differ.",
+    "Overwriting the excluded ccpu386/gdpvar.h with the selected patch would replace a different 1859-line original layout, enlarging the mirror discrepancy."
+  ],
+  "verification_required": [
+    "Measure actual supported x86 struct sizes/offsets and SasVector slots in old and candidate contexts.",
+    "Check which translation units resolve same-directory gdpvar.h versus selected include root before modifying shared CVID header.",
+    "Validate all current compile contexts and final links, then affected CCPU/SAS and DOS/WOW tests.",
+    "Compute final non-error mirror diff including required line directives and selection changes; raw file comparison below is not final approved mirror delta."
+  ],
+  "raw_comparison_totals": {
+    "points": 10,
+    "added": 51,
+    "removed": 3
+  },
+  "production_changes": 0,
+  "dependencies_eliminated": 0,
+  "existing_PIG_declaration_alternative": {
+    "path": "src/mvdm-host/softpc.new/base/cvidc/pigger_c.h",
+    "sha256": "61c86d668bddaf998101a0da469115325ad822f751d4b964dcaad35ea4e7de9f",
+    "observation": "Also declares CpuRegsREC/NpxRegsREC/CpuStateREC. Uses IU32 LDT_limit and IBOOL for twenty_bit_wrap/NPX_valid whereas selected PigReg uses IU16 and IU8. It includes additional PIG declarations; it is not a proven drop-in substitute. No PIG runtime admission is proposed."
+  }
+}

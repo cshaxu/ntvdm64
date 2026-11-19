@@ -78,3 +78,12 @@ Check exact open-ID set equality, uniqueness, per-kind totals, input hashes,
 provider source hashes and evidence paths. Documentation governance and link
 checks accompany delivery. These checks prove ledger consistency only. They do
 not replace candidate compilation, product tests or final dependency elimination.
+
+## P61 header classification update
+
+All59 headers now have responsibility classification. The three generated
+headers belong to C private machine ABI; their original-carrier proposals and
+whole-file differences are in [the disposition](s14-generated-header-disposition.json).
+Migration of those three still requires layout/selection verification, final
+mirror-cost measurement and applicable source-policy approval. This supersedes
+the56/59 classification count above, not the0/10 whole-chain readiness count.

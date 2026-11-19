@@ -563,3 +563,9 @@ P60 [migration readiness](s14-migration-readiness.md) partitions all416 open IDs
 into the existing ten chains, with explicit owner and next design gate.
 Whole-chain readiness is0/10, not79 reviewed files counted as migrated.
 No ledger elimination or product change is claimed.
+
+P61 [generated-header disposition](s14-generated-header-disposition.json)
+completes responsibility classification:59/59 headers. All three generated
+headers are C private CPU/SAS ABI, not independent B resources. Exact original
+carrier proposals have raw comparison evidence; no migration is approved or
+implemented, and all416 direct IDs remain open.

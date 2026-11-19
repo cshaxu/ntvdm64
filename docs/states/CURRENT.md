@@ -262,3 +262,9 @@ coverage79/79 and header classification56/59 remain source-review counts.
 Whole-chain candidate readiness is0/10; exact destinations, control-flow
 separation and mirror cost remain required. No production changes or new
 eliminations;152 eliminated/416 open remains current.
+
+S14 P61 [generated-header disposition](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-generated-header-disposition.json)
+completes header responsibility classification59/59. Three original-carrier
+proposals preserve the selected CPU/SAS ABI but still require layout/selection
+proof, final mirror measurement and policy approval. No production change;
+152 eliminated/416 open, whole-chain readiness0/10.
