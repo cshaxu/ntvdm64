@@ -1,0 +1,456 @@
+{
+  "paired_compiles": [
+    {
+      "id": "C0022",
+      "graph": "service",
+      "obj": "obj/opennt-base-server/srvvdm.obj",
+      "source": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "targets": [
+        "ntsrv.exe"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "43b272a0dec28f7a1ec5d92fb8a4107d74ca33994641919e384823971d3526ed",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4100",
+        "C4101",
+        "C4131",
+        "C4201",
+        "C4273",
+        "C4701",
+        "C4703",
+        "C4706",
+        "C4715"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "43b272a0dec28f7a1ec5d92fb8a4107d74ca33994641919e384823971d3526ed",
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4100",
+        "C4101",
+        "C4131",
+        "C4201",
+        "C4273",
+        "C4701",
+        "C4703",
+        "C4706",
+        "C4715"
+      ],
+      "new_externals": [],
+      "lost_externals": [],
+      "equal": true
+    },
+    {
+      "id": "C0006",
+      "graph": "launcher",
+      "obj": "obj/opennt-base-client/classifier.obj",
+      "source": "src/non-mvdm/base/win32/client/vdm.c",
+      "targets": [
+        "run16.exe"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "e5b80f8872042ff1997bedbcb508a39e1f85241cce53fdc57a7dc72481a3e09b",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4100",
+        "C4133",
+        "C4201",
+        "C4244",
+        "C4273"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "e4f37609ef91037d368e09940829f1443a65d55921896b7d69978b08b056ae87",
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4100",
+        "C4133",
+        "C4201",
+        "C4244",
+        "C4273"
+      ],
+      "new_externals": [],
+      "lost_externals": [],
+      "equal": false
+    },
+    {
+      "id": "C0006",
+      "graph": "hook",
+      "obj": "unit17.obj",
+      "source": "src/non-mvdm/base/win32/client/vdm.c",
+      "targets": [
+        "nthook64.dll"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "a6b6506798ecc7729d2b7500996eb6a29b8084e10d00d2d773539f903fabbc37",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4100",
+        "C4133",
+        "C4201",
+        "C4244",
+        "C4273"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "80059fa466c11d0fc486bc60cb923e333f5a45c813a17df892a24ca4f7077153",
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4100",
+        "C4133",
+        "C4201",
+        "C4244",
+        "C4273"
+      ],
+      "new_externals": [],
+      "lost_externals": [],
+      "equal": false
+    },
+    {
+      "id": "C0114",
+      "graph": "wow32",
+      "obj": "obj/mapembed.obj",
+      "source": "src/mvdm-host/wow32/mapembed.c",
+      "targets": [
+        "wow32.dll"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "88be6acb65736033fe62bc0612bbfd7df2e2fd60e9c8faa4f1e595b249e6f6ec",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4273"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "e8610a08ffca0a124d9e7606d6b2312beaef93636a97dc90cff4a386a74b3a86",
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4273"
+      ],
+      "new_externals": [
+        "__imp__RegCloseKey@4",
+        "__imp__RegCreateKeyA@12",
+        "__imp__RegEnumKeyA@16",
+        "__imp__RegOpenKeyA@12",
+        "__imp__RegQueryValueA@16",
+        "__imp__RegSetValueA@20"
+      ],
+      "lost_externals": [
+        "_wow_registry_close_key@4",
+        "_wow_registry_create_key@12",
+        "_wow_registry_enum_key@16",
+        "_wow_registry_open_key@12",
+        "_wow_registry_query_value@16",
+        "_wow_registry_set_value@20"
+      ],
+      "equal": false
+    },
+    {
+      "id": "C0114",
+      "graph": "wow32",
+      "obj": "obj/wdde.obj",
+      "source": "src/mvdm-host/wow32/wdde.c",
+      "targets": [
+        "wow32.dll"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "d54f3e6431955c40f0ebb8f9ea4939bae6766e6308b39b572cda74a0288756a8",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4273"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "29984c3cde5518fa210a474c37ee876a5a49b2fda094e90038b4241fa08f4344",
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4273"
+      ],
+      "new_externals": [
+        "__imp__RegCloseKey@4",
+        "__imp__RegOpenKeyExA@20"
+      ],
+      "lost_externals": [
+        "_wow_registry_close_key@4",
+        "_wow_registry_open_key_ex@20"
+      ],
+      "equal": false
+    },
+    {
+      "id": "C0123",
+      "graph": "wow32",
+      "obj": "obj/wkgthunk.obj",
+      "source": "src/mvdm-host/wow32/wkgthunk.c",
+      "targets": [
+        "wow32.dll"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "c3bf4d4360fcf1c59c112ef93cb796dbc1bd2336865b6135aa8307c9b8943ce9",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4273"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "6cf36aaab420ffb27fcead910919b751fb8419b4935c51f8d1c013634125fd96",
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4273"
+      ],
+      "new_externals": [
+        "__imp__FreeLibrary@4",
+        "__imp__GetProcAddress@8",
+        "__imp__LoadLibraryExA@12"
+      ],
+      "lost_externals": [
+        "_wow_extension_free_library@4",
+        "_wow_extension_get_proc_address@8",
+        "_wow_extension_load_library_a@12"
+      ],
+      "equal": false
+    },
+    {
+      "id": "C0112",
+      "graph": "wow32",
+      "obj": "obj/wkman.obj",
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "targets": [
+        "wow32.dll"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "845026535b42bb3f90b93955a274dd27b2e33d4564f8bc98319e3929464ee42d",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4273",
+        "C4477",
+        "C4996"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "d05cbcd3e669e030e9feaa4039317bb0afaa78eafdeb38d47b794bdf7b02f42a",
+      "omitted_warnings": [
+        "C4005",
+        "C4013",
+        "C4028",
+        "C4273",
+        "C4477",
+        "C4996"
+      ],
+      "new_externals": [
+        "__imp__CreateProcessA@40",
+        "__imp__MsgWaitForMultipleObjects@20"
+      ],
+      "lost_externals": [
+        "_wow_native_create_process_a@40",
+        "_wow_user_msg_wait@20"
+      ],
+      "equal": false
+    },
+    {
+      "id": "C0114",
+      "graph": "wow32",
+      "obj": "obj/wkernel.obj",
+      "source": "src/mvdm-host/wow32/wkernel.c",
+      "targets": [
+        "wow32.dll"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "4bb558658f9176afd19fe8013321f539933b3d95192e8c8d15a9b1a3e99a4e14",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4273",
+        "C4996"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "28bd08f60c5dba468d38db48d6088af4dcc6e0cd7c9033155bb89e2e149f4c99",
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4273",
+        "C4996"
+      ],
+      "new_externals": [
+        "__imp__RegCloseKey@4",
+        "__imp__RegEnumKeyA@16",
+        "__imp__RegEnumValueA@32",
+        "__imp__RegOpenKeyA@12"
+      ],
+      "lost_externals": [
+        "_wow_registry_close_key@4",
+        "_wow_registry_enum_key@16",
+        "_wow_registry_enum_value@32",
+        "_wow_registry_open_key@12"
+      ],
+      "equal": false
+    },
+    {
+      "id": "C0114",
+      "graph": "wow32",
+      "obj": "obj/wow32fax.obj",
+      "source": "src/mvdm-host/wow32/wow32fax.c",
+      "targets": [
+        "wow32.dll"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "84b82cfd90c3daafc10b6be8871c00e085693be0ed822cae22776800dbb1f8bb",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4273",
+        "C4996"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "6d87650d38fb277b753bbff519aabfe07c3daffc5e293869063a6f155dff389a",
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4273",
+        "C4996"
+      ],
+      "new_externals": [
+        "__imp__RegCloseKey@4",
+        "__imp__RegCreateKeyA@12",
+        "__imp__RegOpenKeyExA@20",
+        "__imp__RegQueryValueExA@24",
+        "__imp__RegSetValueExA@24"
+      ],
+      "lost_externals": [
+        "_wow_registry_close_key@4",
+        "_wow_registry_create_key@12",
+        "_wow_registry_open_key_ex@20",
+        "_wow_registry_query_value_ex@24",
+        "_wow_registry_set_value_ex@24"
+      ],
+      "equal": false
+    },
+    {
+      "id": "C0114",
+      "graph": "wow32",
+      "obj": "obj/wshell.obj",
+      "source": "src/mvdm-host/wow32/wshell.c",
+      "targets": [
+        "wow32.dll"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "3b02ebd9e24170070f665b8381c8c70413d655a2c7ff5ba953d68d707c653dfb",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4273",
+        "C4715",
+        "C4996"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "7c400d5c57c0c6e09cf3cfdaade8c8747aeb2eb1bb9bc0e7871d1d335c1c8f37",
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4273",
+        "C4715",
+        "C4996"
+      ],
+      "new_externals": [
+        "__imp__RegCloseKey@4",
+        "__imp__RegCreateKeyA@12",
+        "__imp__RegDeleteKeyA@8",
+        "__imp__RegEnumKeyA@16",
+        "__imp__RegOpenKeyA@12",
+        "__imp__RegOpenKeyExA@20",
+        "__imp__RegQueryInfoKeyA@48",
+        "__imp__RegQueryValueA@16",
+        "__imp__RegSetValueA@20"
+      ],
+      "lost_externals": [
+        "_wow_registry_close_key@4",
+        "_wow_registry_create_key@12",
+        "_wow_registry_delete_key@8",
+        "_wow_registry_enum_key@16",
+        "_wow_registry_open_key@12",
+        "_wow_registry_open_key_ex@20",
+        "_wow_registry_query_info_key@48",
+        "_wow_registry_query_value@16",
+        "_wow_registry_set_value@20"
+      ],
+      "equal": false
+    },
+    {
+      "id": "C0083",
+      "graph": "wow32",
+      "obj": "obj/wcommdlg.obj",
+      "source": "src/mvdm-host/wow32/wcommdlg.c",
+      "targets": [
+        "wow32.dll"
+      ],
+      "baseline_rc": 0,
+      "baseline_sha": "d86c9c4bdc9e2a9ce37f862c5dc57676f0c1477ee07e7fe12f66ec45b599f672",
+      "baseline_warnings": [
+        "C4005",
+        "C4028",
+        "C4273",
+        "C4996"
+      ],
+      "omitted_rc": 0,
+      "omitted_sha": "545f4720cba2b168950a0b2334d1b940b32d41fdace9078d4d180676f944f72c",
+      "omitted_warnings": [
+        "C4005",
+        "C4028",
+        "C4273",
+        "C4996"
+      ],
+      "new_externals": [
+        "__imp__ChooseColorA@4",
+        "__imp__ChooseFontA@4",
+        "__imp__FindTextA@4",
+        "__imp__GetOpenFileNameA@4",
+        "__imp__GetSaveFileNameA@4",
+        "__imp__PrintDlgA@4",
+        "__imp__ReplaceTextA@4"
+      ],
+      "lost_externals": [
+        "_wow_native_choose_color@4",
+        "_wow_native_choose_font@4",
+        "_wow_native_find_text@4",
+        "_wow_native_open_file@4",
+        "_wow_native_print_dialog@4",
+        "_wow_native_replace_text@4",
+        "_wow_native_save_file@4"
+      ],
+      "equal": false
+    }
+  ],
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "be17e166-ceae-4762-ac54-381f2f1d4e84",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalized_vs_P5": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": true,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "tests": [
+    "PASS native-service-layout-test",
+    "PASS basesrv-service-reservation-test --native-command"
+  ]
+}

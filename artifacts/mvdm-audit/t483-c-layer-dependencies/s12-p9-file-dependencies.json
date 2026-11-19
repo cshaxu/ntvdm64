@@ -1,0 +1,2096 @@
+{
+  "contexts": {
+    "x86": 528,
+    "x64": 11
+  },
+  "counts": {
+    "mvdm-host": {
+      "source_includes": 53,
+      "c_like": 48,
+      "headers": 5,
+      "forced": 8,
+      "both_source_and_forced": 2,
+      "direct_compile": 59,
+      "linked": 124,
+      "compile_and_link": 51,
+      "either": 132,
+      "compile_units": 434,
+      "outer_header_in_closure": 194
+    },
+    "non-mvdm": {
+      "source_includes": 57,
+      "c_like": 56,
+      "headers": 1,
+      "forced": 1,
+      "both_source_and_forced": 1,
+      "direct_compile": 57,
+      "linked": 46,
+      "compile_and_link": 45,
+      "either": 58,
+      "compile_units": 85,
+      "outer_header_in_closure": 57
+    },
+    "total": {
+      "source_includes": 110,
+      "c_like": 104,
+      "headers": 6,
+      "forced": 9,
+      "both_source_and_forced": 3,
+      "direct_compile": 116,
+      "linked": 170,
+      "compile_and_link": 96,
+      "either": 190,
+      "compile_units": 519,
+      "outer_header_in_closure": 251
+    }
+  },
+  "distinct_direct_file_header_pairs": 158,
+  "distinct_direct_target_headers": 80,
+  "files": {
+    "src/mvdm-host/dos/command/cmdconf.c": {
+      "linked_symbols": [
+        "C0220"
+      ],
+      "source_includes": [
+        "C0039"
+      ]
+    },
+    "src/mvdm-host/dos/command/cmdexec.c": {
+      "linked_symbols": [
+        "C0159",
+        "C0161",
+        "C0174",
+        "C0175",
+        "C0176",
+        "C0177",
+        "C0178",
+        "C0179",
+        "C0180",
+        "C0181",
+        "C0182",
+        "C0208",
+        "C0209",
+        "C0211",
+        "C0260",
+        "C0261"
+      ],
+      "source_includes": [
+        "C0024",
+        "C0036"
+      ]
+    },
+    "src/mvdm-host/dos/command/cmdkeyb.c": {
+      "linked_symbols": [
+        "C0208",
+        "C0209",
+        "C0211",
+        "C0219",
+        "C0262",
+        "C0268"
+      ],
+      "source_includes": [
+        "C0017",
+        "C0039"
+      ]
+    },
+    "src/mvdm-host/dos/command/cmdmisc.c": {
+      "linked_symbols": [
+        "C0195",
+        "C0197",
+        "C0223",
+        "C0273",
+        "C0282"
+      ],
+      "source_includes": [
+        "C0034",
+        "C0039"
+      ]
+    },
+    "src/mvdm-host/dos/command/cmdpif.c": {
+      "linked_symbols": [
+        "C0282"
+      ]
+    },
+    "src/mvdm-host/dos/dem/dem.c": {
+      "linked_symbols": [
+        "C0219"
+      ],
+      "source_includes": [
+        "C0039"
+      ]
+    },
+    "src/mvdm-host/dos/dem/dem.h": {
+      "source_includes": [
+        "C0034"
+      ]
+    },
+    "src/mvdm-host/dos/dem/demerror.c": {
+      "linked_symbols": [
+        "C0311",
+        "C0314",
+        "C0315",
+        "C0316"
+      ]
+    },
+    "src/mvdm-host/dos/dem/demgset.c": {
+      "linked_symbols": [
+        "C0172",
+        "C0173",
+        "C0208",
+        "C0209",
+        "C0211",
+        "C0310",
+        "C0316"
+      ],
+      "source_includes": [
+        "C0017",
+        "C0023"
+      ]
+    },
+    "src/mvdm-host/dos/dem/demhndl.c": {
+      "linked_symbols": [
+        "C0194",
+        "C0196",
+        "C0197"
+      ]
+    },
+    "src/mvdm-host/dos/dem/demsrch.c": {
+      "linked_symbols": [
+        "C0188",
+        "C0310",
+        "C0312"
+      ],
+      "source_includes": [
+        "C0027"
+      ]
+    },
+    "src/mvdm-host/dpmi32/i386/dpmi386.c": {
+      "linked_symbols": [
+        "C0183",
+        "C0184",
+        "C0248",
+        "C0250"
+      ],
+      "source_includes": [
+        "C0045"
+      ]
+    },
+    "src/mvdm-host/dpmi32/modesw.c": {
+      "linked_symbols": [
+        "C0248",
+        "C0250"
+      ],
+      "source_includes": [
+        "C0045"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/bios/bios.c": {
+      "linked_symbols": [
+        "C0218"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/bios/build_id.c": {
+      "linked_symbols": [
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/bios/emm_fncs.c": {
+      "linked_symbols": [
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/bios/reset.c": {
+      "linked_symbols": [
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/bios/rtc_bios.c": {
+      "linked_symbols": [
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/bios/tape_io.c": {
+      "linked_symbols": [
+        "C0214",
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/bios/virtual.c": {
+      "linked_symbols": [
+        "C0241",
+        "C0256",
+        "C0258"
+      ],
+      "source_includes": [
+        "C0043",
+        "C0047"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": {
+      "linked_symbols": [
+        "C0190",
+        "C0212",
+        "C0213"
+      ],
+      "source_includes": [
+        "C0037"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c": {
+      "linked_symbols": [
+        "C0238",
+        "C0240"
+      ],
+      "source_includes": [
+        "C0041"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h": {
+      "source_includes": [
+        "C0031"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c": {
+      "linked_symbols": [
+        "C0191",
+        "C0192"
+      ],
+      "source_includes": [
+        "C0030"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c": {
+      "source_includes": [
+        "C0031"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c": {
+      "linked_symbols": [
+        "C0193"
+      ],
+      "source_includes": [
+        "C0033"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/disks/diskbios.c": {
+      "linked_symbols": [
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/disks/floppy.c": {
+      "linked_symbols": [
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/dos/emm_mngr.c": {
+      "linked_symbols": [
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/inc/sas.h": {
+      "source_includes": [
+        "C0032"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/keymouse/keyba.c": {
+      "linked_symbols": [
+        "C0200",
+        "C0202",
+        "C0204"
+      ],
+      "source_includes": [
+        "C0035"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c": {
+      "linked_symbols": [
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c": {
+      "linked_symbols": [
+        "C0215",
+        "C0232"
+      ],
+      "source_includes": [
+        "C0049"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/support/main.c": {
+      "linked_symbols": [
+        "C0608"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/support/terminat.c": {
+      "linked_symbols": [
+        "C0318"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/system/illegalp.c": {
+      "linked_symbols": [
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/system/rom.c": {
+      "linked_symbols": [
+        "C0215"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/video/ega_vide.c": {
+      "linked_symbols": [
+        "C0216"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/video/vga_vide.c": {
+      "linked_symbols": [
+        "C0216"
+      ]
+    },
+    "src/mvdm-host/softpc.new/base/video/video.c": {
+      "linked_symbols": [
+        "C0216"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/config.c": {
+      "linked_symbols": [
+        "C0208",
+        "C0209",
+        "C0211",
+        "C0273",
+        "C0282",
+        "C0294"
+      ],
+      "source_includes": [
+        "C0017"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_bop.c": {
+      "linked_symbols": [
+        "C0246",
+        "C0247",
+        "C0255"
+      ],
+      "source_includes": [
+        "C0031",
+        "C0045"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_cga.c": {
+      "linked_symbols": [
+        "C0292"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_com.c": {
+      "linked_symbols": [
+        "C0157"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_cpu.c": {
+      "linked_symbols": [
+        "C0317"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_det.c": {
+      "linked_symbols": [
+        "C0293"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_ega.c": {
+      "linked_symbols": [
+        "C0292"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_emm.c": {
+      "linked_symbols": [
+        "C0216",
+        "C0225",
+        "C0226",
+        "C0227",
+        "C0233",
+        "C0235",
+        "C0239"
+      ],
+      "source_includes": [
+        "C0040",
+        "C0041"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_eoi.c": {
+      "linked_symbols": [
+        "C0189"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_error.c": {
+      "linked_symbols": [
+        "C0160",
+        "C0300"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_event.c": {
+      "linked_symbols": [
+        "C0157",
+        "C0161",
+        "C0198",
+        "C0199",
+        "C0201",
+        "C0203",
+        "C0217",
+        "C0228",
+        "C0229",
+        "C0231",
+        "C0244",
+        "C0272",
+        "C0280",
+        "C0287",
+        "C0288",
+        "C0289",
+        "C0291",
+        "C0297",
+        "C0298",
+        "C0299",
+        "C0300",
+        "C0305",
+        "C0307",
+        "C0308",
+        "C0319",
+        "C0321"
+      ],
+      "source_includes": [
+        "C0035",
+        "C0038",
+        "C0044",
+        "C0050",
+        "C0052",
+        "C0054",
+        "C0055",
+        "C0057",
+        "C0060"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_fdisk.c": {
+      "linked_symbols": [
+        "C0308",
+        "C0309",
+        "C0310",
+        "C0313"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_fulsc.c": {
+      "linked_symbols": [
+        "C0269",
+        "C0271",
+        "C0272",
+        "C0277",
+        "C0278",
+        "C0279",
+        "C0280",
+        "C0281",
+        "C0283",
+        "C0293"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": {
+      "linked_symbols": [
+        "C0243",
+        "C0245",
+        "C0265",
+        "C0266",
+        "C0270",
+        "C0272",
+        "C0274",
+        "C0278",
+        "C0279",
+        "C0281",
+        "C0283",
+        "C0285",
+        "C0286",
+        "C0295",
+        "C0300",
+        "C0301",
+        "C0302",
+        "C0303",
+        "C0304",
+        "C0305",
+        "C0306"
+      ],
+      "source_includes": [
+        "C0044",
+        "C0053",
+        "C0055"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_hosts.c": {
+      "linked_symbols": [
+        "C0264",
+        "C0269",
+        "C0271",
+        "C0272",
+        "C0276",
+        "C0280",
+        "C0296"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_inthk.c": {
+      "source_includes": [
+        "C0031"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_lpt.c": {
+      "linked_symbols": [
+        "C0185",
+        "C0186",
+        "C0187"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_mem.c": {
+      "linked_symbols": [
+        "C0234",
+        "C0236",
+        "C0237"
+      ],
+      "source_includes": [
+        "C0041"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_mouse.c": {
+      "linked_symbols": [
+        "C0230",
+        "C0232",
+        "C0249",
+        "C0263",
+        "C0267",
+        "C0275",
+        "C0284",
+        "C0287",
+        "C0290",
+        "C0297"
+      ],
+      "source_includes": [
+        "C0045",
+        "C0050"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_msscs.c": {
+      "linked_symbols": [
+        "C0208",
+        "C0209",
+        "C0210",
+        "C0211",
+        "C0219",
+        "C0264",
+        "C0300"
+      ],
+      "source_includes": [
+        "C0017",
+        "C0039"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_ntfun.c": {
+      "linked_symbols": [
+        "C0308"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_pif.c": {
+      "linked_symbols": [
+        "C0219",
+        "C0220",
+        "C0221"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_reset.c": {
+      "linked_symbols": [
+        "C0318",
+        "C0320"
+      ],
+      "source_includes": [
+        "C0057"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_rez.c": {
+      "linked_symbols": [
+        "C0222"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_rflop.c": {
+      "linked_symbols": [
+        "C0158",
+        "C0308",
+        "C0310",
+        "C0313"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_sound.c": {
+      "linked_symbols": [
+        "C0307",
+        "C0308"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_thred.c": {
+      "linked_symbols": [
+        "C0160",
+        "C0161",
+        "C0259"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_timer.c": {
+      "linked_symbols": [
+        "C0157",
+        "C0161",
+        "C0300"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_unix.c": {
+      "linked_symbols": [
+        "C0189"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/nt_vga.c": {
+      "linked_symbols": [
+        "C0292"
+      ]
+    },
+    "src/mvdm-host/softpc.new/host/src/sim32.c": {
+      "linked_symbols": [
+        "C0242"
+      ],
+      "source_includes": [
+        "C0043"
+      ]
+    },
+    "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c": {
+      "linked_symbols": [
+        "C0205",
+        "C0206",
+        "C0207"
+      ],
+      "source_includes": [
+        "C0036"
+      ]
+    },
+    "src/mvdm-host/vdmredir/vrdlc5c.c": {
+      "linked_symbols": [
+        "C0157"
+      ]
+    },
+    "src/mvdm-host/vdmredir/vrdlcpst.c": {
+      "linked_symbols": [
+        "C0157"
+      ]
+    },
+    "src/mvdm-host/vdmredir/vrnetapi.c": {
+      "linked_symbols": [
+        "C0600",
+        "C0601",
+        "C0602",
+        "C0603",
+        "C0604",
+        "C0605"
+      ],
+      "source_includes": [
+        "C0058"
+      ]
+    },
+    "src/mvdm-host/vdmredir/vrnmpipe.c": {
+      "linked_symbols": [
+        "C0157"
+      ],
+      "source_includes": [
+        "C0012"
+      ]
+    },
+    "src/mvdm-host/vdmredir/vrremote.c": {
+      "linked_symbols": [
+        "C0605"
+      ]
+    },
+    "src/mvdm-host/wow32/mapembed.c": {
+      "forced_headers": [
+        "C0114"
+      ],
+      "linked_symbols": [
+        "C0443",
+        "C0444",
+        "C0446",
+        "C0448",
+        "C0451",
+        "C0453"
+      ]
+    },
+    "src/mvdm-host/wow32/precomp.h": {
+      "source_includes": [
+        "C0016",
+        "C0069",
+        "C0082",
+        "C0108",
+        "C0125"
+      ]
+    },
+    "src/mvdm-host/wow32/waccel.c": {
+      "linked_symbols": [
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/walias.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0479",
+        "C0481",
+        "C0489",
+        "C0490",
+        "C0492",
+        "C0495",
+        "C0530"
+      ]
+    },
+    "src/mvdm-host/wow32/walias.h": {
+      "source_includes": [
+        "C0014"
+      ]
+    },
+    "src/mvdm-host/wow32/wcall16.c": {
+      "linked_symbols": [
+        "C0328",
+        "C0329",
+        "C0456",
+        "C0481"
+      ],
+      "source_includes": [
+        "C0075"
+      ]
+    },
+    "src/mvdm-host/wow32/wcall32.c": {
+      "linked_symbols": [
+        "C0481",
+        "C0492",
+        "C0495"
+      ]
+    },
+    "src/mvdm-host/wow32/wcntl32.c": {
+      "linked_symbols": [
+        "C0424",
+        "C0425",
+        "C0456",
+        "C0555"
+      ],
+      "source_includes": [
+        "C0110"
+      ]
+    },
+    "src/mvdm-host/wow32/wcommdlg.c": {
+      "forced_headers": [
+        "C0083"
+      ],
+      "linked_symbols": [
+        "C0334",
+        "C0335",
+        "C0336",
+        "C0337",
+        "C0338",
+        "C0339",
+        "C0340",
+        "C0341",
+        "C0342",
+        "C0343",
+        "C0424",
+        "C0425",
+        "C0426",
+        "C0427",
+        "C0429",
+        "C0456",
+        "C0481",
+        "C0492",
+        "C0555"
+      ],
+      "source_includes": [
+        "C0110"
+      ]
+    },
+    "src/mvdm-host/wow32/wcuricon.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0481"
+      ]
+    },
+    "src/mvdm-host/wow32/wdde.c": {
+      "forced_headers": [
+        "C0114"
+      ],
+      "linked_symbols": [
+        "C0443",
+        "C0449",
+        "C0456",
+        "C0481",
+        "C0492"
+      ]
+    },
+    "src/mvdm-host/wow32/wdib.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0481"
+      ]
+    },
+    "src/mvdm-host/wow32/wgdi.c": {
+      "linked_symbols": [
+        "C0436",
+        "C0456",
+        "C0481"
+      ]
+    },
+    "src/mvdm-host/wow32/wgdi31.c": {
+      "linked_symbols": [
+        "C0437",
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/wgfont.c": {
+      "linked_symbols": [
+        "C0434",
+        "C0438",
+        "C0439",
+        "C0481"
+      ]
+    },
+    "src/mvdm-host/wow32/wgmeta.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0481"
+      ]
+    },
+    "src/mvdm-host/wow32/wgprnset.c": {
+      "linked_symbols": [
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/wgtext.c": {
+      "linked_symbols": [
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/wkbman.c": {
+      "linked_symbols": [
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/wkernel.c": {
+      "forced_headers": [
+        "C0114"
+      ],
+      "linked_symbols": [
+        "C0443",
+        "C0446",
+        "C0447",
+        "C0448",
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/wkfileio.c": {
+      "linked_symbols": [
+        "C0456"
+      ],
+      "source_includes": [
+        "C0068"
+      ]
+    },
+    "src/mvdm-host/wow32/wkgthunk.c": {
+      "forced_headers": [
+        "C0123"
+      ],
+      "linked_symbols": [
+        "C0484",
+        "C0485",
+        "C0486"
+      ]
+    },
+    "src/mvdm-host/wow32/wkman.c": {
+      "forced_headers": [
+        "C0112"
+      ],
+      "linked_symbols": [
+        "C0430",
+        "C0440",
+        "C0441",
+        "C0456",
+        "C0457",
+        "C0460",
+        "C0461",
+        "C0462",
+        "C0463",
+        "C0479",
+        "C0481",
+        "C0489",
+        "C0500",
+        "C0501",
+        "C0503",
+        "C0555",
+        "C0556",
+        "C0585",
+        "C0586"
+      ],
+      "source_includes": [
+        "C0017",
+        "C0105",
+        "C0119"
+      ]
+    },
+    "src/mvdm-host/wow32/wmdisp32.c": {
+      "linked_symbols": [
+        "C0423",
+        "C0424",
+        "C0425",
+        "C0426",
+        "C0427",
+        "C0429",
+        "C0456",
+        "C0481",
+        "C0492",
+        "C0495",
+        "C0498",
+        "C0517"
+      ],
+      "source_includes": [
+        "C0110"
+      ]
+    },
+    "src/mvdm-host/wow32/wmsg16.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0492"
+      ],
+      "source_includes": [
+        "C0110"
+      ]
+    },
+    "src/mvdm-host/wow32/wmsgcb.c": {
+      "source_includes": [
+        "C0110"
+      ]
+    },
+    "src/mvdm-host/wow32/wmsgem.c": {
+      "linked_symbols": [
+        "C0481",
+        "C0555"
+      ]
+    },
+    "src/mvdm-host/wow32/wow32.c": {
+      "linked_symbols": [
+        "C0440",
+        "C0456",
+        "C0460",
+        "C0481",
+        "C0497",
+        "C0587",
+        "C0588",
+        "C0589"
+      ],
+      "source_includes": [
+        "C0017",
+        "C0119",
+        "C0128"
+      ]
+    },
+    "src/mvdm-host/wow32/wow32fax.c": {
+      "forced_headers": [
+        "C0114"
+      ],
+      "linked_symbols": [
+        "C0443",
+        "C0444",
+        "C0449",
+        "C0452",
+        "C0454",
+        "C0479",
+        "C0495",
+        "C0498"
+      ]
+    },
+    "src/mvdm-host/wow32/wowhooks.c": {
+      "linked_symbols": [
+        "C0401",
+        "C0423",
+        "C0426",
+        "C0427",
+        "C0428",
+        "C0429",
+        "C0456",
+        "C0481",
+        "C0492",
+        "C0511"
+      ],
+      "source_includes": [
+        "C0110"
+      ]
+    },
+    "src/mvdm-host/wow32/wowtbl.c": {
+      "linked_symbols": [
+        "C0482",
+        "C0483"
+      ]
+    },
+    "src/mvdm-host/wow32/wreldc.c": {
+      "linked_symbols": [
+        "C0435"
+      ]
+    },
+    "src/mvdm-host/wow32/wres16.c": {
+      "linked_symbols": [
+        "C0481"
+      ]
+    },
+    "src/mvdm-host/wow32/wsdata.c": {
+      "linked_symbols": [
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/wsext.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0481",
+        "C0501",
+        "C0521"
+      ]
+    },
+    "src/mvdm-host/wow32/wshell.c": {
+      "forced_headers": [
+        "C0114"
+      ],
+      "linked_symbols": [
+        "C0443",
+        "C0444",
+        "C0445",
+        "C0446",
+        "C0448",
+        "C0449",
+        "C0450",
+        "C0451",
+        "C0453",
+        "C0455",
+        "C0456",
+        "C0481"
+      ]
+    },
+    "src/mvdm-host/wow32/wsraw.c": {
+      "linked_symbols": [
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/wstruc.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0492"
+      ]
+    },
+    "src/mvdm-host/wow32/wsubcls.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0479"
+      ]
+    },
+    "src/mvdm-host/wow32/wucaret.c": {
+      "linked_symbols": [
+        "C0513",
+        "C0519",
+        "C0545",
+        "C0560",
+        "C0577"
+      ]
+    },
+    "src/mvdm-host/wow32/wuclass.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0489",
+        "C0490",
+        "C0491",
+        "C0493",
+        "C0494",
+        "C0496"
+      ]
+    },
+    "src/mvdm-host/wow32/wuclip.c": {
+      "linked_symbols": [
+        "C0333",
+        "C0431",
+        "C0456",
+        "C0487",
+        "C0488"
+      ],
+      "source_includes": [
+        "C0124"
+      ]
+    },
+    "src/mvdm-host/wow32/wucomm.c": {
+      "linked_symbols": [
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/wudlg.c": {
+      "linked_symbols": [
+        "C0364",
+        "C0365",
+        "C0366",
+        "C0367",
+        "C0368",
+        "C0369",
+        "C0370",
+        "C0426",
+        "C0427",
+        "C0428",
+        "C0429",
+        "C0442",
+        "C0456",
+        "C0477",
+        "C0478",
+        "C0481",
+        "C0492",
+        "C0589"
+      ],
+      "source_includes": [
+        "C0110"
+      ]
+    },
+    "src/mvdm-host/wow32/wuhook.c": {
+      "linked_symbols": [
+        "C0402"
+      ]
+    },
+    "src/mvdm-host/wow32/wulang.c": {
+      "linked_symbols": [
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/wuman.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0479"
+      ],
+      "source_includes": [
+        "C0015"
+      ]
+    },
+    "src/mvdm-host/wow32/wumenu.c": {
+      "linked_symbols": [
+        "C0403",
+        "C0404",
+        "C0405",
+        "C0406",
+        "C0407",
+        "C0408",
+        "C0409",
+        "C0410",
+        "C0413",
+        "C0414",
+        "C0415",
+        "C0417",
+        "C0418",
+        "C0419",
+        "C0420",
+        "C0421",
+        "C0433",
+        "C0456"
+      ]
+    },
+    "src/mvdm-host/wow32/wumsg.c": {
+      "linked_symbols": [
+        "C0428",
+        "C0481",
+        "C0492",
+        "C0495",
+        "C0498",
+        "C0499",
+        "C0501",
+        "C0505",
+        "C0509",
+        "C0514",
+        "C0515",
+        "C0516",
+        "C0517",
+        "C0521",
+        "C0555"
+      ],
+      "source_includes": [
+        "C0110"
+      ]
+    },
+    "src/mvdm-host/wow32/wuser.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0468",
+        "C0473",
+        "C0474",
+        "C0476",
+        "C0481",
+        "C0507",
+        "C0523",
+        "C0527",
+        "C0528",
+        "C0532",
+        "C0535",
+        "C0536",
+        "C0537",
+        "C0538",
+        "C0539",
+        "C0546",
+        "C0547",
+        "C0549",
+        "C0551",
+        "C0552",
+        "C0559",
+        "C0564",
+        "C0567",
+        "C0569",
+        "C0570",
+        "C0579",
+        "C0583",
+        "C0584",
+        "C0589"
+      ],
+      "source_includes": [
+        "C0015"
+      ]
+    },
+    "src/mvdm-host/wow32/wuser31.c": {
+      "linked_symbols": [
+        "C0366",
+        "C0367",
+        "C0456",
+        "C0487",
+        "C0501",
+        "C0521",
+        "C0524",
+        "C0533",
+        "C0550",
+        "C0554",
+        "C0572"
+      ],
+      "source_includes": [
+        "C0124"
+      ]
+    },
+    "src/mvdm-host/wow32/wusercli.c": {
+      "linked_symbols": [
+        "C0411",
+        "C0412",
+        "C0456",
+        "C0530",
+        "C0531",
+        "C0534",
+        "C0541"
+      ]
+    },
+    "src/mvdm-host/wow32/wutmr.c": {
+      "linked_symbols": [
+        "C0464",
+        "C0481"
+      ]
+    },
+    "src/mvdm-host/wow32/wuwind.c": {
+      "linked_symbols": [
+        "C0456",
+        "C0466",
+        "C0467",
+        "C0469",
+        "C0470",
+        "C0471",
+        "C0472",
+        "C0475",
+        "C0479",
+        "C0480",
+        "C0481",
+        "C0491",
+        "C0492",
+        "C0494",
+        "C0495",
+        "C0506",
+        "C0508",
+        "C0512",
+        "C0518",
+        "C0520",
+        "C0525",
+        "C0526",
+        "C0529",
+        "C0530",
+        "C0534",
+        "C0540",
+        "C0541",
+        "C0542",
+        "C0543",
+        "C0548",
+        "C0553",
+        "C0555",
+        "C0558",
+        "C0566",
+        "C0573",
+        "C0574",
+        "C0576",
+        "C0580",
+        "C0581",
+        "C0582"
+      ]
+    },
+    "src/mvdm-host/xms.486/xmsblock.c": {
+      "linked_symbols": [
+        "C0224",
+        "C0225",
+        "C0257"
+      ],
+      "source_includes": [
+        "C0040",
+        "C0048"
+      ]
+    },
+    "src/non-mvdm/base/ntdll/csrutil.c": {
+      "linked_symbols": [
+        "C0607",
+        "C0612"
+      ],
+      "source_includes": [
+        "C0002"
+      ]
+    },
+    "src/non-mvdm/base/ntos/ex/probe.c": {
+      "source_includes": [
+        "C0126"
+      ]
+    },
+    "src/non-mvdm/base/win32/client/vdm.c": {
+      "forced_headers": [
+        "C0006"
+      ],
+      "linked_symbols": [
+        "C0152",
+        "C0153",
+        "C0154",
+        "C0155",
+        "C0156",
+        "C0162",
+        "C0163",
+        "C0164",
+        "C0609",
+        "C0610",
+        "C0611"
+      ],
+      "source_includes": [
+        "C0003",
+        "C0004",
+        "C0005"
+      ]
+    },
+    "src/non-mvdm/base/win32/server/basesrv.h": {
+      "source_includes": [
+        "C0022"
+      ]
+    },
+    "src/non-mvdm/base/win32/server/srvvdm.c": {
+      "linked_symbols": [
+        "C0166",
+        "C0167",
+        "C0168",
+        "C0169",
+        "C0170",
+        "C0171"
+      ]
+    },
+    "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx": {
+      "linked_symbols": [
+        "C0432",
+        "C0613"
+      ],
+      "source_includes": [
+        "C0113"
+      ]
+    },
+    "src/non-mvdm/ds/netapi/xactsrv/apisrv.c": {
+      "linked_symbols": [
+        "C0606"
+      ],
+      "source_includes": [
+        "C0059"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/btnctl.c": {
+      "linked_symbols": [
+        "C0323",
+        "C0324",
+        "C0325",
+        "C0348",
+        "C0349",
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0357",
+        "C0386",
+        "C0388",
+        "C0392",
+        "C0507",
+        "C0520",
+        "C0527",
+        "C0546",
+        "C0551",
+        "C0557",
+        "C0559",
+        "C0564",
+        "C0590",
+        "C0591",
+        "C0596",
+        "C0615",
+        "C0617"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/cldib.c": {
+      "source_includes": [
+        "C0072"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/clmenu.c": {
+      "linked_symbols": [
+        "C0387",
+        "C0406",
+        "C0409",
+        "C0416"
+      ],
+      "source_includes": [
+        "C0109"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/clmsg.c": {
+      "linked_symbols": [
+        "C0353",
+        "C0354",
+        "C0355",
+        "C0356",
+        "C0557",
+        "C0590",
+        "C0594",
+        "C0615",
+        "C0616",
+        "C0617"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/clres.c": {
+      "linked_symbols": [
+        "C0322",
+        "C0504",
+        "C0614"
+      ],
+      "source_includes": [
+        "C0064",
+        "C0072",
+        "C0109"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/combo.c": {
+      "linked_symbols": [
+        "C0350",
+        "C0357",
+        "C0388",
+        "C0392",
+        "C0507",
+        "C0520",
+        "C0525",
+        "C0527",
+        "C0546",
+        "C0551",
+        "C0557",
+        "C0559",
+        "C0564",
+        "C0573",
+        "C0575",
+        "C0581",
+        "C0582",
+        "C0590",
+        "C0591",
+        "C0596",
+        "C0615",
+        "C0617"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/combodir.c": {
+      "linked_symbols": [
+        "C0596"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/comboini.c": {
+      "linked_symbols": [
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0392",
+        "C0520",
+        "C0546",
+        "C0548",
+        "C0557",
+        "C0566",
+        "C0573",
+        "C0581",
+        "C0590",
+        "C0596",
+        "C0598"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c": {
+      "linked_symbols": [
+        "C0360",
+        "C0363",
+        "C0372",
+        "C0373",
+        "C0374",
+        "C0376",
+        "C0382",
+        "C0387",
+        "C0393",
+        "C0398",
+        "C0409",
+        "C0413",
+        "C0504",
+        "C0520",
+        "C0557",
+        "C0565",
+        "C0571",
+        "C0581",
+        "C0582",
+        "C0590",
+        "C0596",
+        "C0597",
+        "C0599"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgend.c": {
+      "linked_symbols": [
+        "C0362",
+        "C0472",
+        "C0474",
+        "C0525",
+        "C0558",
+        "C0564",
+        "C0573",
+        "C0596"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c": {
+      "linked_symbols": [
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0357",
+        "C0359",
+        "C0361",
+        "C0363",
+        "C0371",
+        "C0373",
+        "C0375",
+        "C0377",
+        "C0378",
+        "C0379",
+        "C0380",
+        "C0381",
+        "C0383",
+        "C0387",
+        "C0388",
+        "C0472",
+        "C0473",
+        "C0474",
+        "C0502",
+        "C0504",
+        "C0505",
+        "C0520",
+        "C0522",
+        "C0525",
+        "C0557",
+        "C0561",
+        "C0562",
+        "C0564",
+        "C0565",
+        "C0573",
+        "C0578",
+        "C0581",
+        "C0582",
+        "C0591",
+        "C0596",
+        "C0597"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c": {
+      "linked_symbols": [
+        "C0326",
+        "C0327",
+        "C0357",
+        "C0474",
+        "C0510",
+        "C0522",
+        "C0557",
+        "C0596",
+        "C0597"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c": {
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/dmmnem.c": {
+      "linked_symbols": [
+        "C0326",
+        "C0327",
+        "C0544",
+        "C0557"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/draw.c": {
+      "linked_symbols": [
+        "C0596"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/drawtext.c": {
+      "linked_symbols": [
+        "C0392",
+        "C0393"
+      ],
+      "source_includes": [
+        "C0066"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/edecrare.c": {
+      "linked_symbols": [
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0357",
+        "C0387",
+        "C0392",
+        "C0393",
+        "C0394",
+        "C0504",
+        "C0513",
+        "C0519",
+        "C0545",
+        "C0546",
+        "C0577"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/editec.c": {
+      "linked_symbols": [
+        "C0350",
+        "C0351",
+        "C0352",
+        "C0357",
+        "C0358",
+        "C0387",
+        "C0388",
+        "C0390",
+        "C0400",
+        "C0409",
+        "C0411",
+        "C0422",
+        "C0504",
+        "C0520",
+        "C0545",
+        "C0546",
+        "C0557",
+        "C0564",
+        "C0577",
+        "C0582",
+        "C0590",
+        "C0591",
+        "C0596",
+        "C0615"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/editml.c": {
+      "linked_symbols": [
+        "C0357",
+        "C0383",
+        "C0387",
+        "C0392",
+        "C0395",
+        "C0396",
+        "C0504",
+        "C0507",
+        "C0513",
+        "C0519",
+        "C0527",
+        "C0545",
+        "C0546",
+        "C0550",
+        "C0551",
+        "C0557",
+        "C0559",
+        "C0560",
+        "C0561",
+        "C0564",
+        "C0568",
+        "C0577",
+        "C0582",
+        "C0590",
+        "C0596"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/editsl.c": {
+      "linked_symbols": [
+        "C0357",
+        "C0507",
+        "C0513",
+        "C0519",
+        "C0527",
+        "C0545",
+        "C0546",
+        "C0551",
+        "C0557",
+        "C0559",
+        "C0560",
+        "C0564",
+        "C0577",
+        "C0596",
+        "C0617"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/edmlonce.c": {
+      "linked_symbols": [
+        "C0351",
+        "C0399"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/edmlrare.c": {
+      "linked_symbols": [
+        "C0504",
+        "C0546",
+        "C0557"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/edslrare.c": {
+      "linked_symbols": [
+        "C0399"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/hdata.c": {
+      "source_includes": [
+        "C0086"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lb1.c": {
+      "linked_symbols": [
+        "C0350",
+        "C0357",
+        "C0383",
+        "C0386",
+        "C0388",
+        "C0392",
+        "C0507",
+        "C0520",
+        "C0527",
+        "C0546",
+        "C0557",
+        "C0559",
+        "C0591",
+        "C0596",
+        "C0615"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxctl1.c": {
+      "linked_symbols": [
+        "C0392",
+        "C0546",
+        "C0557",
+        "C0568",
+        "C0590"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c": {
+      "linked_symbols": [
+        "C0348",
+        "C0354",
+        "C0389",
+        "C0391",
+        "C0392",
+        "C0523",
+        "C0546",
+        "C0550",
+        "C0551",
+        "C0554",
+        "C0557",
+        "C0559",
+        "C0564",
+        "C0582",
+        "C0590",
+        "C0594",
+        "C0596",
+        "C0617"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c": {
+      "linked_symbols": [
+        "C0387",
+        "C0546",
+        "C0557",
+        "C0563",
+        "C0596"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxmult.c": {
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxrare.c": {
+      "linked_symbols": [
+        "C0350",
+        "C0392",
+        "C0393",
+        "C0546",
+        "C0548",
+        "C0557",
+        "C0573",
+        "C0594"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/lboxvar.c": {
+      "linked_symbols": [
+        "C0392"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/mngrayc.c": {
+      "linked_symbols": [
+        "C0323",
+        "C0324",
+        "C0345",
+        "C0346",
+        "C0347",
+        "C0349",
+        "C0397",
+        "C0616",
+        "C0617"
+      ],
+      "source_includes": [
+        "C0062",
+        "C0065"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/ntstubs.c": {
+      "linked_symbols": [
+        "C0344",
+        "C0382",
+        "C0384",
+        "C0385",
+        "C0465",
+        "C0591",
+        "C0595",
+        "C0596"
+      ],
+      "source_includes": [
+        "C0064",
+        "C0077",
+        "C0095"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/rtlinit.c": {
+      "source_includes": [
+        "C0121"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/client/winmgrc.c": {
+      "linked_symbols": [
+        "C0387",
+        "C0596"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/class.c": {
+      "linked_symbols": [
+        "C0330"
+      ],
+      "source_includes": [
+        "C0076",
+        "C0078",
+        "C0079"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c": {
+      "linked_symbols": [
+        "C0331",
+        "C0332"
+      ],
+      "source_includes": [
+        "C0081"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c": {
+      "linked_symbols": [
+        "C0458"
+      ],
+      "source_includes": [
+        "C0117"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/getset.c": {
+      "linked_symbols": [
+        "C0382",
+        "C0388",
+        "C0592",
+        "C0595"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/profile.c": {
+      "linked_symbols": [
+        "C0459"
+      ],
+      "source_includes": [
+        "C0118"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/queue.c": {
+      "source_includes": [
+        "C0116"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/server.c": {
+      "linked_symbols": [
+        "C0615"
+      ],
+      "source_includes": [
+        "C0087"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/kernel/taskman.c": {
+      "source_includes": [
+        "C0117"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/draw.c": {
+      "linked_symbols": [
+        "C0392",
+        "C0397",
+        "C0616",
+        "C0617"
+      ],
+      "source_includes": [
+        "C0066"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c": {
+      "source_includes": [
+        "C0066"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/getset.c": {
+      "linked_symbols": [
+        "C0379",
+        "C0388",
+        "C0595"
+      ],
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/help.c": {
+      "linked_symbols": [
+        "C0593"
+      ],
+      "source_includes": [
+        "C0122",
+        "C0129"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/text.c": {
+      "source_includes": [
+        "C0066"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c": {
+      "linked_symbols": [
+        "C0356"
+      ],
+      "source_includes": [
+        "C0064",
+        "C0067"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/rtl/wow.c": {
+      "source_includes": [
+        "C0064"
+      ]
+    },
+    "src/non-mvdm/windows/core/ntuser/server/exports.c": {
+      "linked_symbols": [
+        "C0165"
+      ],
+      "source_includes": [
+        "C0020"
+      ]
+    }
+  }
+}

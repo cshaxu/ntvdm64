@@ -44,6 +44,8 @@ P7 traced all ten mixed storage groups: seven redirector slots and the USER whee
 
 P8 indexed all 462 open link symbols against 170 fixed original caller sources. The [caller anchors](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p8-caller-anchors.json) distinguish name occurrences from product relocations. C0456 requires a calling-convention and guest-buffer ownership review before restoring the original flush provider. Package and tracker totals remain at P7.
 
+P9 removed the redundant forced service header from srvvdm.c. The normal include remains. Both release destinations have the eleven verified images. The [per-file inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p9-file-dependencies.json) covers 539 product compile contexts and records 116 distinct C-layer files with a direct compile dependency and 170 with a direct link binding (190 in their union). The stable tracker still has 555 open items.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

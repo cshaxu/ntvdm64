@@ -151,7 +151,7 @@ function Add-Edge([string]$target) {
  }
  if($target -eq 'obj/opennt-base-server/srvvdm.obj'){
   # OPENNT-HOST-068: integer-zero binding is local to this original TU.
-  $flags+=' /DNULL=0 /FI "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include/base_server.h'))+'"'
+  $flags+=' /DNULL=0'
  }
  $binding=[regex]::Match($edge.Bindings,'(?m)^\s+\w*cflags = (.*)$').Groups[1].Value
  # Carry source-specific semantic defines, not old global machine/ABI flags.
