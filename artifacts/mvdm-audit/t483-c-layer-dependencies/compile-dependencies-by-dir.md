@@ -229,13 +229,19 @@
 
 - 直接包含 · C0058 · vdmredir-dll · src/vdmredir-dll/include/mvdm_redirector_guest_copy.h
 
+033 P23：C0058：F guest-copy performs segmented-address conversion and bounded worker lease acquire/release via D guest-memory imports. ANSI/OEM conversion is coupled to copy failure/commit; not a standalone B platform service. S13 redirector/worker memory boundary. No source change; mirror delta 0 points/0 lines.
+
 ## 034 — src/mvdm-host/vdmredir/vrnmpipe.c
 
 - 直接包含 · C0012 · common · src/common/redirector/async.h
 
+034 P23：C0012：D async header imports F worker prepare/complete/release. F owns session/epoch, guest addresses and staging; completion validates owner/epoch then commits payload before error/count, release clears PrivateAsyncState. S13; declaration relocation alone cannot remove this dependency. No source change; mirror delta 0 points/0 lines.
+
 ## 035 — src/mvdm-host/wow32/mapembed.c
 
 - 强制包含 · C0114 · wow32-dll · src/wow32-dll/include/wow_registry_binding.h
+
+035 P23：C0114：forced F Registry aliases provide DLL-owned DWORD HKEY tokens over parent EXE exported registry providers. Calls pin parent keys under a token lock. Generated DLL entry calls shutdown on explicit unload. S13 DLL binding/token lifetime; not interchangeable with B raw registry API. No source change; mirror delta 0 points/0 lines.
 
 ## 036 — src/mvdm-host/wow32/precomp.h
 

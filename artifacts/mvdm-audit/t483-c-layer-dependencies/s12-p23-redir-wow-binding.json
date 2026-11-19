@@ -1,0 +1,49 @@
+{
+  "baseline": "2b9e66a2159e08b216305dcbbd97a10a5ecedce4",
+  "question": "Classify files033-035 direct dependencies, including actual cross-image provider and generated lifecycle calls.",
+  "procedure": "Read consumer calls and full redirector copy/async providers, shared import headers, WOW token provider and generator forced includes/generated DLL entry.",
+  "files": {
+    "33": {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "finding": "C0058：F guest-copy performs segmented-address conversion and bounded worker lease acquire/release via D guest-memory imports. ANSI/OEM conversion is coupled to copy failure/commit; not a standalone B platform service. S13 redirector/worker memory boundary."
+    },
+    "34": {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "finding": "C0012：D async header imports F worker prepare/complete/release. F owns session/epoch, guest addresses and staging; completion validates owner/epoch then commits payload before error/count, release clears PrivateAsyncState. S13; declaration relocation alone cannot remove this dependency."
+    },
+    "35": {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "finding": "C0114：forced F Registry aliases provide DLL-owned DWORD HKEY tokens over parent EXE exported registry providers. Calls pin parent keys under a token lock. Generated DLL entry calls shutdown on explicit unload. S13 DLL binding/token lifetime; not interchangeable with B raw registry API."
+    }
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "progress": {
+    "reviewedFiles": 35,
+    "clearedDirectHeaderFiles": 9,
+    "deferredLifecycleFiles": 20,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 81,
+    "totalFiles": 116,
+    "openIds": 522,
+    "totalIds": 617
+  },
+  "validation": "Source classification only. No product source/build/release change or new runtime validation. Published P22 remains current.",
+  "followUp": "S13: preserve redirector payload/error/count ordering and session epoch; separate module token lifecycle from raw B registry provider without introducing duplicate registry state.",
+  "sha256": {
+    "src/mvdm-host/vdmredir/vrnetapi.c": "481ef3fa15499d2b9b607099ce71b4a3e581ca66e2bcfe558a868aa30f00095d",
+    "src/mvdm-host/vdmredir/vrnmpipe.c": "3c760b7c0a991f6034207b7d6cea18f73d882ea5ab5ae5db65c7506ce7def50b",
+    "src/mvdm-host/wow32/mapembed.c": "21e5b1811d8be25289c87c4934edcb6738315049dae15a974daa6a6a8f0a8381",
+    "src/vdmredir-dll/source/mvdm_redirector_guest_copy.c": "6818fcf2b34c10ebf721c5ad0b615b566512e82788dddb7702df368631eb4d8a",
+    "src/common/guest-memory/access.h": "fc6693f96ae99a92e7983df9edf493a044eac693ad95a9e4966297567d1c9f7c",
+    "src/common/redirector/async.h": "30c873e67ab002c7d7962c47ed19979e48fcba73614a6bffdc92af805a1a0a4a",
+    "src/ntvdm-exe/redir/mvdm_redirector_async.c": "5f1b3385179cde7f7e60f040ebdeafe92ecf6ff84dbc562f4cd392a7889e3428",
+    "src/wow32-dll/source/wow_registry_binding.c": "f7ba62630f538d45fcefb2985f4093d5769e848829350dac1c6f818b271f8544",
+    "src/wow32-dll/include/wow_registry_binding.h": "f0f20904101782095c79bf697dd8225ee481ff2c4b40ce6f07b2dcc854cbef26",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "eeb9751ae4e2d8bc3fdfaee737fc874771be349ffba46ae77fe20d879f15cd2a"
+  }
+}

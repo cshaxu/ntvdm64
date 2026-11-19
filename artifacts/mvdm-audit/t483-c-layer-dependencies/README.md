@@ -161,3 +161,5 @@ P20: [event-thread ownership and native join delivery](s12-p20-event-thread.json
 P21: [display, mapping and callback header ownership](s12-p21-display-mapping-ownership.json).
 
 P22: [NTIO directory and host exit ownership](s12-p22-system-loader.json).
+
+P23: [redirector memory and WOW registry token ownership](s12-p23-redir-wow-binding.json).

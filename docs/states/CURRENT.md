@@ -70,6 +70,8 @@ P21 is evidence-only: [files025-028](../../artifacts/mvdm-audit/t483-c-layer-dep
 
 P22 clears the NTIO loader directory header in nt_msscs.c and classifies files029-032. Both cached architectures built; final publication/identity verification is recorded in [P22 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p22-system-loader.json). Classification is 32/116: nine direct-header clears, seventeen lifecycle files, six source/ABI files and 84 unreviewed. C0039 remains open for cmdmisc; open IDs remain 522/617. Mirror delta is zero; cumulative reduction remains two points and ten lines.
 
+P23 is evidence-only: [files033-035](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p23-redir-wow-binding.json) trace redirector guest-copy/async ownership and WOW registry tokens, including generated DLL cleanup. Classification is 35/116: nine direct-header clears, twenty lifecycle files, six source/ABI files and 81 unreviewed. Open IDs remain 522/617; P22 remains published, with no new product changes.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.
