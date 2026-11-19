@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has433 open direct dependency IDs.
+**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has424 open direct dependency IDs.
 
 ## Active Packet
 
@@ -27,7 +27,7 @@
 
 ## Current Technical Baseline
 
-S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P13 below supersedes both published copies.
+S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P14 below supersedes both published copies.
 
 S13 P13: [BIOS VM boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p13-bios-vm-boundary.json).14 BIOS DIR units reviewed. Original algorithms stay C; generated ABI/address owners remain S14. virtual.c changes only its contract include; B owns the immutable interface, F retains all VM/IRQ and controlled-stop state/behavior. Unused D/F search roots removed from BIOS compilation.
 
@@ -35,7 +35,11 @@ C0047/C0256/C0258 eliminated:135 eliminated/433 open of618; S13 cleared39 IDs. C
 
 Cached full x86/x64,reference-x86 and8 A/B graphs pass. Packagea9ed59d4-6106-40e7-8dab-85d23c0f3009 published to both destinations with22 hashes.3183 VM unit assertions,NIDDB original-object positive/negative controls and actual DOS DIR pass. Initial NIDDB fixture include failure and omitted outer exit-code check are retained; acceptance uses separate successful final NIDDB receipt. No Full or real Win3.x/Win95 desktop acceptance claimed.
 
-[CPU dependency follow-up](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-ccpu-dependency-review.json): c_main.c COMMON definitions resolved to C; generated ABI remains S14. Next implementation is ccpusas4.c physical-mapping boundary with coupled nt_emm.c/nt_mem.c owners. No product changes or new eliminated IDs. S13 active;S14 unadmitted.
+S13 P14: [physical mapping boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p14-physical-mapping-boundary.json). CCPU/EMS/nt_mem use B immutable contracts; F provider bodies and session lifecycle remain unchanged.9 IDs eliminated:144 eliminated/424 open of618; S13 cleared48. Three mirrors remain22 points/92 lines, cumulative reduction3 points/12 lines.
+
+Cached x86/x64/reference builds and8 A/B graphs passed. Package4f34bf15-fc3b-4ccc-96a4-be3a154dd923 published to both destinations;22 hashes verified. Mapping, original external memory, CCPU high-linear-page, WOW page-domain, NESticle graphics/Escape and final isolated DOS DIR pass. The first DIR wrapper failed on an obsolete receipt name before product execution; preserved aggregate failure is superseded only for DIR by strict-final.exit0. No Full or desktop acceptance claimed.
+
+[CPU dependency follow-up](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-ccpu-dependency-review.json) confirms COMMON definitions belong to C. Generated ABI remains S14. Continue remaining CCPU DIR entries after ccpusas4.c; S13 active, S14 unadmitted.
 
 ## S12 Closure Record
 

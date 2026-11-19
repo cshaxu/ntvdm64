@@ -1,0 +1,547 @@
+{
+  "scope": "T483 S13 P14 physical mapping boundary",
+  "baseline": "59dbf6c9abc40b7f16b1cb42f9bad75df5939eca",
+  "question": "Remove C direct dependencies on product physical mapping services without moving session ownership or changing CCPU/EMS semantics.",
+  "decision": "Immutable B capability ABI installed by F before guest execution. All eight existing F providers and session teardown unchanged. C replaces only contract includes.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "current_sha256": "ca0d52f1646efebaae64b7f8e79764ce800b79bb443ef2fecfe2e5161eaa78fd",
+      "non_error_diff": {
+        "blocks": 12,
+        "added": 17,
+        "deleted": 10
+      },
+      "delta_points": 0,
+      "delta_lines": 0,
+      "error_line_unchanged": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "original_sha256": "d51310af362e60023feb59c89afb21ff6fae8e1bb74ae8614231f4ec3a001729",
+      "current_sha256": "8e6a91287be5db3cce2801124ffd5d4d307ae4a31089f9cb0182b63f1cfe602f",
+      "non_error_diff": {
+        "blocks": 7,
+        "added": 51,
+        "deleted": 8
+      },
+      "delta_points": 0,
+      "delta_lines": 0,
+      "error_line_unchanged": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "original_sha256": "55832ee249e18683e6d80c582ac8dff47318a5d467d1b1017777fc961bdccf5e",
+      "current_sha256": "2a053c656a7564308b3e24f96948c39c55c2d0f25bc176071f501b5bb034cf56",
+      "non_error_diff": {
+        "blocks": 3,
+        "added": 6,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0,
+      "error_line_unchanged": true
+    }
+  ],
+  "eliminated_ids": [
+    "C0041",
+    "C0233",
+    "C0234",
+    "C0235",
+    "C0236",
+    "C0237",
+    "C0238",
+    "C0239",
+    "C0240"
+  ],
+  "ownership": {
+    "B": "Immutable function table and install validation only; no guest, paging, alias or session state.",
+    "C": "Original CCPU SAS and host EMS/memory algorithms.",
+    "F": "Existing physical records, aliases, owner selection, initialization, remap, release and registered teardown."
+  },
+  "verification": {
+    "build": "cached full x86/x64, explicit x86 host images, reference-x86 and eight A/B graphs passed",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "4f34bf15-fc3b-4ccc-96a4-be3a154dd923",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "normalized": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": false,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "tests": [
+      "Physical mapping through installed B contract; invalid/repeated install, map/remap/unmap, range bounds, unchanged errno/LastError, 10000 resolution calls and teardown.",
+      "Original SAS reversed pages, allocation grow/shrink, exported memory APIs and real GDI/guest bidirectional DIB sharing.",
+      "CCPU high-linear-page and recursive entry boundary.",
+      "WOW page-domain lifecycle.",
+      "Published-package NESticle real menu pixel mask and Escape hide/restore.",
+      "Isolated DOS DIR final run."
+    ],
+    "failed_attempt": "Aggregate tests.exit remains1: final DIR wrapper checked obsolete deliver.exit before launching product. Corrected to publication.exit; dedicated strict-final.exit0 is the acceptance receipt. Other successful tests were not rerun.",
+    "limits": "Targeted tests, not Full or Win3.x/Win95 desktop acceptance. Fixture /FORCE duplicate boundary stubs are not a proof of real hardware interrupt behavior.",
+    "final_checks": "Thread-boundary, documentation governance, relative links and diff check passed."
+  },
+  "tracker": {
+    "eliminated": 144,
+    "open": 424,
+    "supporting": 44,
+    "eliminated_transitive": 5,
+    "excluded": 1,
+    "total": 618,
+    "S13_eliminated": 48
+  },
+  "mirror": {
+    "batch_points": 22,
+    "batch_lines": 92,
+    "delta_points": 0,
+    "delta_lines": 0,
+    "cumulative_reduced_points": 3,
+    "cumulative_reduced_lines": 12
+  },
+  "evidence": [
+    {
+      "path": "build/t483-s13-physical-mapping/before.json",
+      "sha256": "2ecea343737bcc9777a29b26f7278499a31fb4d7cb7e79c14323f122cbd2f645"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/build-only.ps1",
+      "sha256": "9642a2254bf3ba5a6d3f322dbf91a0c52fe2d8d1ab1801f52bb08a5c992e7022"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/build-process.json",
+      "sha256": "bbf062c77918f1ebaedeafc1be206e0622e4afa687f5057ef3e74a1729015352"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/build.err",
+      "sha256": "3a1cf97d15a56535669ccb5a40687dff36e0f08006196f0cfbbbc82a70345e7a"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/build.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/build.out",
+      "sha256": "5982bc48c6fb0f7aa10660b85a8efae87c26bb80baf97069375efcffafa077cb"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/build.ps1",
+      "sha256": "1b62b86b394527f6238522accb5b76d4c9cf5d23e1707003cd21a88f498b5e24"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/candidate.json",
+      "sha256": "cf7fa25ddca43943f9ef731096c7fb792b7229b3c7f4faa4c503208ce2abebb8"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/ccpu-high-linear-page-test-process.json",
+      "sha256": "a0e0ee1350c5319b4718186764d8a594994e385ff77f9300eaed9496d466294a"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/ccpu-high-linear-page-test.err",
+      "sha256": "b90805695a6a80834c899d8b92b7660193bad3ec7548093957be1fe3ad4c3a84"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/ccpu-high-linear-page-test.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/ccpu-high-linear-page-test.out",
+      "sha256": "08d7795693cb00e7cf7cafdb720633099cf745954d16462276bb2f427ac53da5"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/check.ps1",
+      "sha256": "938abad5ef24a718f5309cee3cee25404acd08a5022285240eb935bea3d5a4ab"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/deliver-test-process.json",
+      "sha256": "15fd2f56463e59f92f29fd597c9ff04cfb38815eae937a9b93aaf63451b04fe9"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/deliver-test.err",
+      "sha256": "377f84e370d610968badb7972e0756fb1fc46fec4bb71b08e3378449be36f6b1"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/deliver-test.out",
+      "sha256": "823fe910b996823a56f1b6e84ab5982b859f220a7931390aea8d074fb0eea8dd"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/deliver-test.ps1",
+      "sha256": "bf1906bd5974c027881ef67d832317b369d2738111a7d1bf50f7b27c27d40849"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/final-deps.txt",
+      "sha256": "1fe67a3f49f13c1255bb2a697e04a81703917d5f213ad86f8d69f6cda0d92917"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/final-hashes.json",
+      "sha256": "e93e74f4b2fdb5ffc570694be5ffd09e35d3899e55563508f2348e8cb18228b8"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/final-symbols.txt",
+      "sha256": "3cce1d9a51a0e9699b38b891499d93227d95a50ec834418b15fcdf078b98f9ac"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/identity-proof.json",
+      "sha256": "4c91e39c0a9c61bb92fe33fa101189fbca1543a6ded1c18d7e036e5a9680c8c3"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/inputs.json",
+      "sha256": "2d89c398f3aa0b5988f58150286868151e67a8fdc0b1be929afcf0287c0c01e0"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/nesticle.txt",
+      "sha256": "f6a0f425da2b3c875817f8bc3a457a389198101d53438149b185aaec831d3ec8"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/nesticle.txt.command-line.txt",
+      "sha256": "525e2c6af3ce655459b51e6eeda8bb18d97d13afa0e805c101a9079b9067454b"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/nesticle.txt.console.txt",
+      "sha256": "72d2faad3bdbb88f1b827f1b657cdd3d28d15356958bcf712b7925066d65bbdf"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/nesticle.txt.geometry.txt",
+      "sha256": "5ffdbbe00c03c3fddbcc52515e3777b9c284145fa455ddc507ebea5d0f743935"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/nesticle.txt.graphics-result.json",
+      "sha256": "37a7b9ddedd7fcc20d2b70db062ea45e9ee31f59163fe82946e805b87e8aab48"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/nesticle.txt.graphics-witness.txt",
+      "sha256": "b4c4bea4854ed5ad8ed06471849131fa731cb18eaddbc11dce446d23e8332073"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/nesticle.txt.initial-console.txt",
+      "sha256": "05993d9da8934dba248a679db12085fea7fa6f822c87b302ba6546fa9754a79c"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/nesticle.txt.timeout-live.txt",
+      "sha256": "c9641dc88cc461ab5de80ebc53906372da8d9c4c13571c746839c2b28599468c"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/observer-process.json",
+      "sha256": "aff746a805ff24650abb282a75a275d68483afe7afc22e379b58e826b9a2c436"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/runtime-manifest.json",
+      "sha256": "e7c15f5968c53c3bf43406d39270997954d6653551c0706467506c14bdcf8741"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/nesticle/staged-pif.txt",
+      "sha256": "9223e774449f7604f609b2b889e262cda0f81d4ef906fd516f38b7b93dddef7f"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/normalized-final.json",
+      "sha256": "bc238c38b9911c56e264bf41fadb3dc2182bf0e7a818734aef042c04f29e064f"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/original-external-memory-test-process.json",
+      "sha256": "7447027287ffefbf3d1253aabb4219f776bc4a2b57e8d7a5e4dde0e59e5ce127"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/original-external-memory-test.err",
+      "sha256": "5f051c22bf01e7d103ccb2db7299e0d0a3a96536824aded91bf9d622dc07db48"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/original-external-memory-test.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/original-external-memory-test.out",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/package-id.txt",
+      "sha256": "534b9bfbdac30c433ce3c6af2fc7095635391e5a7c3d4f24b496fe5816ffaa17"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-1.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-1.process.json",
+      "sha256": "9410eb9dbd6d7228d54db8a80f7dc7b0e38feb68e32016325aee6ad77962bb93"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-10.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-10.process.json",
+      "sha256": "bbeef669a44b5ab95e4b5ef4e64287311a64cb4b12952df47fc2f2d93916f536"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-11.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-11.process.json",
+      "sha256": "cb71bcf150a7d20fb44414a644f7f85ac553aa10e7972fb2c33a90effb570c3f"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-12.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-12.process.json",
+      "sha256": "abe09ec8e3337557834c2ccac4274789327479d618f08bb29d004214c5699ab3"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-13.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-13.process.json",
+      "sha256": "32cb0f9c822ea4044ed3658799949723e39dbfc06f00908642044863930838e3"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-14.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-14.process.json",
+      "sha256": "0eac27870b07323f07c612d6eebf96eb7e4bd98374dd91badb7d533cf27ae9b6"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-15.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-15.process.json",
+      "sha256": "335be52123f021c59b009ae9933df5a8cb31a9b1f8e07ccdeb10e456b2ca3353"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-16.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-16.process.json",
+      "sha256": "e60052e52b7fb1f8b478caaa344ca395a8155566de0a9aba8f17342b9a9fe90b"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-17.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-17.process.json",
+      "sha256": "0b0dc4559ec8be6890a7d6193f7dfef82d9955bc0a82dc9639666c8d3ade5925"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-18.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-18.process.json",
+      "sha256": "6786709d9344c09f630bb24a54d4de098f70f084458cf34e42968c4bcb2ef8a3"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-19.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-19.process.json",
+      "sha256": "1e59de1758fe78ac573577122b5f9ee4e4d4a2c30c869875a05659f9ec56b9b4"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-2.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-2.process.json",
+      "sha256": "3d67205831959bfa44784379b0957f2bfd6d38883327d175999731d9a5ef5c5a"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-20.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-20.process.json",
+      "sha256": "8d0efecfb156e212ce1a78a7a15f67c3b7de366f32be158c1d7a46b53aff7e36"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-3.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-3.process.json",
+      "sha256": "5f9d7ccdaf30e9f66c13152d13beb08dd5461a6cec542d001e01cc9d6f08f341"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-4.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-4.process.json",
+      "sha256": "d6713079c80fa8252563ac85f68d4c6d8664b33d8f8e31ef263644cbf6dfeeae"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-5.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-5.process.json",
+      "sha256": "2d7c530a02158307ab62f93e09503c47347bbce5635517e52c43ced027624de0"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-6.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-6.process.json",
+      "sha256": "ce513558e07efef63576bbfdefa6dccddbb82106e003bd2c875cdc5b225daf5e"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-7.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-7.process.json",
+      "sha256": "8addeb95f779c85a94c6d06bedebf9c9551affac3b2b277e75c31efaae8abde6"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-8.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-8.process.json",
+      "sha256": "03268664cb832c7e93400c031ad2ee42826e17d1beac3007e9b20ba9586ee2f5"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-9.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-command-9.process.json",
+      "sha256": "d3ac39a9fea1a634de528a29b969e752d0feb88e3543ed72d115b165da279ce0"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-environment.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-environment.json",
+      "sha256": "8f9948ea2cf76fe45b119ae8e202e7f0890cd4ee08bf8c05d81074385bfbdd7d"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/compiler-environment.process.json",
+      "sha256": "29b8db46d9806fba4f3f497496c4462f239922ee2abc5fad61fd64aa6a7d9484"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/fixture-exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/stderr.txt",
+      "sha256": "30383c5a91150188aa58707bed65721a812a940be90745728ff98c0880b745bd"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/page-domain/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/physical-mapping-observation-test-process.json",
+      "sha256": "371a6e505de1c25304d805cfbc4083329dc2ab0c85ed2f98cbeae1ed0dc67e23"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/physical-mapping-observation-test.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/physical-mapping-observation-test.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/physical-mapping-observation-test.out",
+      "sha256": "838c0041df5da51583f68be640d67571f7dea1a2377e3069cf398fb3504d2190"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/publication-final.json",
+      "sha256": "2a871a74ffd4c6cdbac58ef9110107dda8e63bd4c6fa5f0f93795384ac18b87e"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/publication.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/publish-only.ps1",
+      "sha256": "4a4714e0d11113d92e85a3b677cc4c0c27c29d36f24c91381827051f99d88b24"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/publish.ps1",
+      "sha256": "902305f600b26b8e310e10c5bf2618dc4ca2b08ae4ca7237936ab39a221e6cd1"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/stage.ps1",
+      "sha256": "cd34fb9b90a24e33e0e1f9ab3a81aa60307776bc9921cba5c37983d311b903cf"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/strict-dir-final.txt",
+      "sha256": "5ae77a37a5951a4f40a161727e9abc6bc8544e066088512841fc2d3ddc8c903e"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/strict-dir-final.txt.cells.txt",
+      "sha256": "6ccba88b08803fad69462a775e16910d6dac302ca9801c59597bd33d37145e17"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/strict-final.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/strict-final.ps1",
+      "sha256": "524357c34bbfbe6915478a438e3807c2c4c659ed97df562e633f9b4247c86e36"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/strict-rerun-process.json",
+      "sha256": "bd29055c9f64131a6da72efc5c73d9976e430c63335a99547009129793cca20e"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/strict-rerun.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/strict-rerun.out",
+      "sha256": "dd0ddb907c07c49be545e55abfa313ef9110a821a78c8319bbc957f01e84c961"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/tests.exit",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/tests.ps1",
+      "sha256": "1ba8df3af585a91365bb80b695836f09e6be48107e14f30d0d45595d3c33d00b"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/check.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/check.out",
+      "sha256": "0894e21f7d61cb0f00b4b4a7e0acc772d8e823a2e4190085fe047b5db02ef99b"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/check.err",
+      "sha256": "f0e7f03408b05f4c42d4d8fee509509202277720526a63afb949ec57a841aad6"
+    },
+    {
+      "path": "build/t483-s13-physical-mapping/check-process.json",
+      "sha256": "e790ac7fbd74efae53598497f227af970527d3f6986618adcfce5669e491f2d7"
+    }
+  ]
+}

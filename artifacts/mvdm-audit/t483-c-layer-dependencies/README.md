@@ -359,3 +359,5 @@ S13 P12: [DPMI service boundary](s13-p12-dpmi-services-boundary.json); four dire
 S13 P13: [BIOS VM boundary](s13-p13-bios-vm-boundary.json);14 DIR units reviewed,13 retain S14 ABI/address ownership. virtual.c only changes its contract include; F VM and controlled-stop bodies retained. Three IDs eliminated:135 eliminated,433 open. Cached builds,dual11 publication,3183 VM assertions,NIDDB positive/negative controls and DOS DIR pass. Mirror9 points/27 lines unchanged; cumulative reduction3 points/12 lines.
 
 S13 CPU follow-up: [c_main dependency review](s13-ccpu-dependency-review.json) resolves all34 COMMON definitions to C, retains generated ABI IDs for S14, and identifies the coupled physical-mapping query/register/unregister boundary for the next implementation batch. No product edits or new eliminated IDs.
+
+S13 P14: [physical mapping boundary](s13-p14-physical-mapping-boundary.json) eliminates9 direct IDs through B contracts while F keeps all mapping/session state. Three mirrors stay22 points/92 lines. Cached builds, dual publication and targeted mapping/CCPU/WOW/NESticle/DIR verification passed; the initial DIR wrapper marker failure remains recorded.

@@ -336,3 +336,7 @@ debug-thread and WOW page-domain state and teardown remain in NTVDM.
 VM service contracts (`vm_services.h`, `vm_host.h`) preserve original NIDDB
 callers and the independent BOP result ABI. The product installs its existing
 VM dispatch and controlled-stop providers; compat owns no VM or IRQ state.
+
+`physical_mapping_services` is an immutable capability contract installed by the
+NTVDM product before guest execution. Physical page records, EMS aliases, session
+selection and teardown remain in the product; compat owns no mapping state.

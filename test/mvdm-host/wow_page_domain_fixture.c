@@ -16,6 +16,7 @@
 #include "ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_physical_mapping.h"
+extern int ntvdm_physical_mapping_initialize(void);
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 #include "wow32-dll/include/wow_user_object_bindings.h"
 #include "wow32-dll/include/wow_window_dispatch_bindings.h"
@@ -6249,6 +6250,7 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 
 int main(int argc, char **argv)
 {
+    if (!ntvdm_physical_mapping_initialize()) return 15;
     if (argc == 5 && !strcmp(argv[1], "--terminal-log")) {
         FILE *output;
         /* Test-only log protocol: retain CreateProcess(FALSE), original

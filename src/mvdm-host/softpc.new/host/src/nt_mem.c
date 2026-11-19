@@ -40,7 +40,7 @@
 #include <stdlib.h>
 
 #include "nt_mem.h"
-#include "mvdm_softpc_physical_mapping.h"
+#include "compat/include/physical_mapping_host.h"
 #line 42
 #include "debug.h"
 #include "sas.h"

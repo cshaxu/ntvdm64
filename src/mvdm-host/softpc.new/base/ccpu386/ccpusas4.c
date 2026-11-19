@@ -58,7 +58,7 @@
 #include <c_reg.h>
 #include <timer.h>
 #include <yoda.h>
-#include "mvdm_softpc_physical_mapping.h"
+#include "compat/include/physical_mapping_host.h"
 
 #line 65
 /********************************************************/

@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <windows.h>
 #include "ntvdm-exe/session/session.h"
-#include "mvdm_softpc_physical_mapping.h"
+#include "compat/include/physical_mapping_host.h"
+extern int ntvdm_physical_mapping_initialize(void);
 
 /* Adapter-only contract test, not a guest/CCPU or WOW acceptance workload. */
 #define CHECK(condition) do { if (!(condition)) { \
@@ -22,6 +23,10 @@ int main(int argc, char **argv)
     unsigned i;
     HANDLE locked_log = INVALID_HANDLE_VALUE;
 
+    CHECK(!compat_physical_mapping_install(NULL));
+    CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(ntvdm_physical_mapping_initialize());
+    CHECK(ntvdm_physical_mapping_initialize());
     (void)argv;
     if (argc > 1) {
         FILETIME created, exited, kernel, user;
