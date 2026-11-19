@@ -1,0 +1,57 @@
+{
+  "baseline": "35be549c97977d231c0751416a9d633133311e0f",
+  "question": "Classify files025-028 direct outward dependencies by actual provider and caller use.",
+  "procedure": "Read all three nt_graph direct headers and reached providers; compare nt_inthk original include and retained body; trace mapping initialization/release and mouse/page-domain cursor publication.",
+  "files": {
+    "25": {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "finding": "C0044/C0053/C0055：文本刷新/配置和路由查询使用当前session发布者；图形begin/end维护覆盖层、update_depth和dirty通知。不是平台独立能力，归S13原版绘图与产品发布接线。"
+    },
+    "26": {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "finding": "C0031：固定原版第34行已有gdpvar.h include；当前保留的回调实现没有直接GDP访问。不能把无使用误记成需要GDP；删除原版include会新增镜像差异，本批不实施。归S14生成载体统一归属及必要性审查。"
+    },
+    "27": {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "finding": "C0041：InitIntelMemory成功发布前初始化F映射记录并注册session teardown；FreeIntelMemory先释放记录再释放Intel内存。归S13映射生命周期，与013/023成组，不迁声明掩盖调用。"
+    },
+    "28": {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "finding": "C0045/C0050：route_active和mouse_apply使用当前session鼠标队列；publish_cursor校验domain.active、owner、PG、CR3后写入既有WOW视图。归S13输入路由与页域生命周期，保留原版ICA锁和调用顺序。"
+    }
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "progress": {
+    "reviewedFiles": 28,
+    "clearedDirectHeaderFiles": 7,
+    "deferredLifecycleFiles": 15,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 88,
+    "totalFiles": 116,
+    "openIds": 522,
+    "totalIds": 617
+  },
+  "validation": "Source classification only. No source/build/runtime/release change. P20 package remains current; this is not behavioral proof or dependency elimination.",
+  "followUp": {
+    "S13": "Group display publication, mapping lifetime and mouse/page-domain callers with prior reviewed consumers.",
+    "S14": "Resolve generated ABI carrier ownership; nt_inthk is an original but apparently unused direct include, not a demonstrated GDP consumer."
+  },
+  "sha256": {
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": "029acccddfa56c2d147603beefbaf1ef26240d9436561dc191cd89c7cfa700bc",
+    "src/mvdm-host/softpc.new/host/src/nt_inthk.c": "0792f971d765eb9523ed73620ebfdcac710704db01cfad6601f65b60b9bf8542",
+    "src/mvdm-host/softpc.new/host/src/nt_mem.c": "268471dcdd53bb2366aa98bcad1fa66f3c9be89ec7e81afcc7a25f46935a1a56",
+    "src/mvdm-host/softpc.new/host/src/nt_mouse.c": "853de6fccfa21b8a4465e4255db83bc119cb0424d6f761a1406486ca537ee472",
+    "src/ntvdm-exe/win32/console_graphics.c": "77dd8ca309a906f2cd5789577bf516698569d717a1792cb786ab39a0a676661a",
+    "src/ntvdm-exe/win32/console_text.c": "220f7637c3e94e70a2bd7456f445d974ff4a20178d9fc1c963ca8f420f007b39",
+    "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c": "47c339b9a3cd5ba07630cfe24c878b0629d9fc9806840199894747d490b52747",
+    "src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c": "dd07c28b27004de60df0a040598a8428396504056386d1b648e9b6bfc1712b05",
+    "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c": "a83a8103f3e4adbce9d04fbd8bd85466ea936ad48aba6d3578dad6e81fb3f014",
+    "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c": "c685d4cc5ef52d4b8301946e386f5824245f7699bce90ac52f0b2d2f3c5b6f8c",
+    "O:/repos.external/OpenNT/base/mvdm/softpc.new/host/src/nt_inthk.c": "a3465d006a88549ce5fd52ac3f8d9c0dcf1f2b2c6825f35db3d2dc683fbc7abe"
+  }
+}

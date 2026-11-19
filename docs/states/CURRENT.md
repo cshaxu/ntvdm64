@@ -66,6 +66,8 @@ P19 is evidence-only: [files 020-023](../../artifacts/mvdm-audit/t483-c-layer-de
 
 P20 moves the unchanged native event-thread join into B and completes file024 ownership classification. Both cached architectures, six native thread cases, eight A/B graph checks and eleven-image dual publication passed; see [P20 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p20-event-thread.json). C0038/C0217 are eliminated. Classification is 24/116: seven direct-header clears, twelve lifecycle files, five source/ABI files and 92 unreviewed. 522/617 IDs remain open. Mirror delta is zero; cumulative reduction remains two points and ten lines.
 
+P21 is evidence-only: [files025-028](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p21-display-mapping-ownership.json) classify display, mapping and mouse lifetime dependencies and identify nt_inthk as an original but apparently unused GDP include. No product change; P20 remains published. Classification is 28/116: seven direct-header clears, fifteen lifecycle files, six source/ABI files and 88 unreviewed. Open IDs remain 522/617; cumulative mirror reduction is two points and ten lines.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

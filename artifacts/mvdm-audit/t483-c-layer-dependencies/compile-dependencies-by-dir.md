@@ -179,18 +179,26 @@
 - 直接包含 · C0053 · ntvdm-exe · src/ntvdm-exe/win32/console_graphics.h
 - 直接包含 · C0055 · ntvdm-exe · src/ntvdm-exe/win32/console_text.h
 
+025 P21：C0044/C0053/C0055：文本刷新/配置和路由查询使用当前session发布者；图形begin/end维护覆盖层、update_depth和dirty通知。不是平台独立能力，归S13原版绘图与产品发布接线。 源码未改，镜像净变0点、0行。
+
 ## 026 — src/mvdm-host/softpc.new/host/src/nt_inthk.c
 
 - 直接包含 · C0031 · ntvdm-exe · src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h
+
+026 P21：C0031：固定原版第34行已有gdpvar.h include；当前保留的回调实现没有直接GDP访问。不能把无使用误记成需要GDP；删除原版include会新增镜像差异，本批不实施。归S14生成载体统一归属及必要性审查。 源码未改，镜像净变0点、0行。
 
 ## 027 — src/mvdm-host/softpc.new/host/src/nt_mem.c
 
 - 直接包含 · C0041 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_physical_mapping.h
 
+027 P21：C0041：InitIntelMemory成功发布前初始化F映射记录并注册session teardown；FreeIntelMemory先释放记录再释放Intel内存。归S13映射生命周期，与013/023成组，不迁声明掩盖调用。 源码未改，镜像净变0点、0行。
+
 ## 028 — src/mvdm-host/softpc.new/host/src/nt_mouse.c
 
 - 直接包含 · C0045 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h
 - 直接包含 · C0050 · ntvdm-exe · src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h
+
+028 P21：C0045/C0050：route_active和mouse_apply使用当前session鼠标队列；publish_cursor校验domain.active、owner、PG、CR3后写入既有WOW视图。归S13输入路由与页域生命周期，保留原版ICA锁和调用顺序。 源码未改，镜像净变0点、0行。
 
 ## 029 — src/mvdm-host/softpc.new/host/src/nt_msscs.c
 
