@@ -8,6 +8,8 @@
 
 - 直接包含 · C0039 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h
 
+001 核查：仅使用 NtvdmGetWindowsDirectoryA。原版 cmdconf.c:209 查询宿主 Windows 目录，当前函数读取 session_mvdm_system_root。结果用于 SHELL、COUNTRY 与 SystemRoot 展开。包目录绑定仍需解决，C0039 保持开放。未修改源码，镜像变化 0 点、0 行。
+
 ## 002 — src/mvdm-host/dos/command/cmdexec.c
 
 - 直接包含 · C0024 · ntvdm-exe · src/ntvdm-exe/command/include/mvdm_command_native_child.h
