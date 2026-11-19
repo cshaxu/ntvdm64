@@ -1,0 +1,450 @@
+{
+  "baseline": "102e2750999c3129b1c405e4f3b518e9f8426794",
+  "files": [
+    {
+      "order": 70,
+      "path": "src/mvdm-host/wow32/wumenu.c",
+      "decision": "Retain original C Win16 menu conversion. F native mutations resolve short/full HMENU, enter/restore execution and publish/retire menu state; create also registers task ownership with rollback; SetMenu/GetMenu update WND edges. S13 must handle this ownership cohort, not move isolated native calls to B. C0433 is separately S14 original-parser rewire candidate, not a task-state provider; C0456 remains S14 mapping/ABI.",
+      "bindings": [
+        {
+          "id": "C0403",
+          "symbols": [
+            "_wow_menu_native_AppendMenuA@16"
+          ],
+          "providers": [
+            "0001:00059fb0       _wow_menu_native_AppendMenuA@16 1005afb0 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0404",
+          "symbols": [
+            "_wow_menu_native_ChangeMenuA@20"
+          ],
+          "providers": [
+            "0001:0005a110       _wow_menu_native_ChangeMenuA@20 1005b110 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0405",
+          "symbols": [
+            "_wow_menu_native_CheckMenuItem@12"
+          ],
+          "providers": [
+            "0001:0005a280       _wow_menu_native_CheckMenuItem@12 1005b280 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0406",
+          "symbols": [
+            "_wow_menu_native_CreateMenu@0"
+          ],
+          "providers": [
+            "0001:0005a3e0       _wow_menu_native_CreateMenu@0 1005b3e0 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0407",
+          "symbols": [
+            "_wow_menu_native_CreatePopupMenu@0"
+          ],
+          "providers": [
+            "0001:0005a3f0       _wow_menu_native_CreatePopupMenu@0 1005b3f0 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0408",
+          "symbols": [
+            "_wow_menu_native_DeleteMenu@12"
+          ],
+          "providers": [
+            "0001:0005a400       _wow_menu_native_DeleteMenu@12 1005b400 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0409",
+          "symbols": [
+            "_wow_menu_native_DestroyMenu@4"
+          ],
+          "providers": [
+            "0001:0005a560       _wow_menu_native_DestroyMenu@4 1005b560 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0410",
+          "symbols": [
+            "_wow_menu_native_DrawMenuBar@4"
+          ],
+          "providers": [
+            "0001:0005a6c0       _wow_menu_native_DrawMenuBar@4 1005b6c0 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0413",
+          "symbols": [
+            "_wow_menu_native_GetSystemMenu@8"
+          ],
+          "providers": [
+            "0001:0005aa70       _wow_menu_native_GetSystemMenu@8 1005ba70 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0414",
+          "symbols": [
+            "_wow_menu_native_HiliteMenuItem@16"
+          ],
+          "providers": [
+            "0001:0005abe0       _wow_menu_native_HiliteMenuItem@16 1005bbe0 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0415",
+          "symbols": [
+            "_wow_menu_native_InsertMenuA@20"
+          ],
+          "providers": [
+            "0001:0005ad60       _wow_menu_native_InsertMenuA@20 1005bd60 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0417",
+          "symbols": [
+            "_wow_menu_native_ModifyMenuA@20"
+          ],
+          "providers": [
+            "0001:0005b030       _wow_menu_native_ModifyMenuA@20 1005c030 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0418",
+          "symbols": [
+            "_wow_menu_native_RemoveMenu@12"
+          ],
+          "providers": [
+            "0001:0005b1a0       _wow_menu_native_RemoveMenu@12 1005c1a0 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0419",
+          "symbols": [
+            "_wow_menu_native_SetMenu@8"
+          ],
+          "providers": [
+            "0001:0005b300       _wow_menu_native_SetMenu@8 1005c300 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0420",
+          "symbols": [
+            "_wow_menu_native_SetMenuItemBitmaps@20"
+          ],
+          "providers": [
+            "0001:0005b460       _wow_menu_native_SetMenuItemBitmaps@20 1005c460 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0421",
+          "symbols": [
+            "_wow_menu_native_TrackPopupMenu@28"
+          ],
+          "providers": [
+            "0001:0005b5d0       _wow_menu_native_TrackPopupMenu@28 1005c5d0 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0433",
+          "symbols": [
+            "_wow_user_load_menu_indirect@4"
+          ],
+          "providers": [
+            "0001:00052ef0       _wow_user_load_menu_indirect@4 10053ef0 f   wow_private_user_compat.obj"
+          ]
+        },
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wumenu.obj",
+      "sha256": "810b863c9f678b0e8ece5e6c4b02e3c8b980ae9c44e808d0fb944b9978ddb6fd",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 71,
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "decision": "Retain original C class-name, rect and HWND/HMENU conversion. F GetClassNameA/GetClientRect/GetWindowRect/GetParent resolve owned HWND and pair native execution scopes; GetParent also publishes returned window. GetMenu and EnableMenuItem use menu identity/state publication. S13 shared ownership cohort; C0456 output flush S14.",
+      "bindings": [
+        {
+          "id": "C0411",
+          "symbols": [
+            "_wow_menu_native_EnableMenuItem@12"
+          ],
+          "providers": [
+            "0001:0005a7d0       _wow_menu_native_EnableMenuItem@12 1005b7d0 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0412",
+          "symbols": [
+            "_wow_menu_native_GetMenu@4"
+          ],
+          "providers": [
+            "0001:0005a930       _wow_menu_native_GetMenu@4 1005b930 f   wow_menu_native_bindings.obj"
+          ]
+        },
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        },
+        {
+          "id": "C0530",
+          "symbols": [
+            "_wow_native_GetClassNameA@12"
+          ],
+          "providers": [
+            "0001:00062020       _wow_native_GetClassNameA@12 10063020 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0531",
+          "symbols": [
+            "_wow_native_GetClientRect@8"
+          ],
+          "providers": [
+            "0001:00062140       _wow_native_GetClientRect@8 10063140 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0534",
+          "symbols": [
+            "_wow_native_GetParent@4"
+          ],
+          "providers": [
+            "0001:00062460       _wow_native_GetParent@4    10063460 f   wow_user_task_lifecycle.obj"
+          ]
+        },
+        {
+          "id": "C0541",
+          "symbols": [
+            "_wow_native_GetWindowRect@8"
+          ],
+          "providers": [
+            "0001:00062bf0       _wow_native_GetWindowRect@8 10063bf0 f   wow_user_task_lifecycle.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wusercli.obj",
+      "sha256": "844b1e834cd06a58deb56cf5a29b54a73c5fecafb925df934570048ef713c250",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 72,
+      "path": "src/mvdm-host/wow32/wutmr.c",
+      "decision": "Retain original C timer slot/list and queued-after-KillTimer algorithm in WowOriginalTimerFunc:219-258. Original 27 callback stubs enter W32TimerFunc; F wrapper protects the entire lookup/conversion with task-callback and borrow scopes, restores both in nested finally, then C calls CallBack16 with its own callback contract. S13 paired boundary; do not delete outer protection merely because the body finally invokes CallBack16.",
+      "bindings": [
+        {
+          "id": "C0464",
+          "symbols": [
+            "_W32TimerFunc@16"
+          ],
+          "providers": [
+            "0001:0006d0c0       _W32TimerFunc@16           1006e0c0 f   wow_timer_callback.obj"
+          ]
+        },
+        {
+          "id": "C0481",
+          "symbols": [
+            "_CallBack16@16"
+          ],
+          "providers": [
+            "0001:0006f4d0       _CallBack16@16             100704d0 f   wow_user_native_extension.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wutmr.obj",
+      "sha256": "56ae996178a8f498b5bab57038b9d491b1ac26219dd6c3c03b62805a1db3a06e",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "sourceEvidence": [
+    {
+      "path": "src/wow32-dll/source/wow_menu_native_bindings.c",
+      "sha256": "641a1cd995ec39391c237b64211573931afd58446cfdfe115c0d394347fc84e2"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_menu_client_bindings.c",
+      "sha256": "dfcece3ced80a7887db1393520060aad2733f4974321439b6bfff2e8100ed225"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_private_user_compat.c",
+      "sha256": "7d6392e71fff4fee054cb2eedec29f6ff3d711d2d849c58ac9252970c6fdd40c"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "sha256": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_timer_callback.c",
+      "sha256": "173ba3ab5e0299c6cf7b8400f0b48790055b4ef664bd7b2d3ba6233c304f12d9"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_native_extension.c",
+      "sha256": "d0dc0dfb97303e3f53344c24d0f3283a0ed5e28d638f93c0902014f010d25d37"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c"
+    }
+  ],
+  "parserBoundary": {
+    "id": "C0433",
+    "current": "wow_private_user_compat.c:86-92 NULL guard then existing C parser",
+    "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c windows/core/ntuser/client/clres.c WowServerLoadCreateMenu:4040-4051 delegates non-NULL template to CreateMenuFromResource; current clmenu.c:328 parser dereferences template header without NULL guard.",
+    "decision": "S14 bounded rewire candidate using already retained parser, not evidence that autonomous parser is needed. Original Win16 ConvertMenu16 and current task CLIENTINFO ownership remain."
+  },
+  "verification": {
+    "actualObjects": true,
+    "map": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+    "mapSha256": "89a6d7e9c2332e0d7d7e531a9bea484261706e74feb41e27a9052982793bc73e",
+    "abGraphs": 8,
+    "productSourceChanged": false,
+    "build": "Not repeated: evidence-only audit, actual P95 objects and published package retained.",
+    "runtime": "Not run; no new behavior acceptance claimed."
+  },
+  "publication": {
+    "package": "8bb49d26-18e4-4925-8b13-f341211b438d",
+    "action": "Verified existing P95 release, not a new publication.",
+    "verified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "fcc1d281deda4195eadcb203aa63b384cc6f7a675e3eea0d8b1b6d4442f96988"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "9df9afee5734cef1cc924ba4d20714f982588efd166af024247d3bdd5bf55243"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "4a53d4bc236c5fabe33483a3ea4343ba9688a3b6c54370c938a1301d1af1e460"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "ec074c29a8ea2932760f38a8f39f6b9c9d1fe67386bc80c2140175730bd5a47c"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "7bdc17f4153ded993ef8cdf4d81b85456a855d8b21c5e700b707019875066f53"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "d245875d58ffc3ee39539d53bf8d71e07b10f5036107d40e09ed7e9b0d1bf72f"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "1886df89aa427ddc31153da76c462047d8199017b9526f464696aab0adf3de03"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "c83fde45f8775c311ca6855e1040000fb866ae172f11867b93b774d95b90ed3c"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "29dc80db70bdc03062e8d1948c64173d334b15cf342f7aee3c990d87febdd963"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "ce8d8ef52cc42f077217e73bfdf03736ea3b6f11d86b4545dfe8d08d679427c3"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "befdc22b98af83c1f91f2ce01bfe87dbf957ba7611c511f00683710f4fbfad96"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "fcc1d281deda4195eadcb203aa63b384cc6f7a675e3eea0d8b1b6d4442f96988"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "9df9afee5734cef1cc924ba4d20714f982588efd166af024247d3bdd5bf55243"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "4a53d4bc236c5fabe33483a3ea4343ba9688a3b6c54370c938a1301d1af1e460"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "ec074c29a8ea2932760f38a8f39f6b9c9d1fe67386bc80c2140175730bd5a47c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "7bdc17f4153ded993ef8cdf4d81b85456a855d8b21c5e700b707019875066f53"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "d245875d58ffc3ee39539d53bf8d71e07b10f5036107d40e09ed7e9b0d1bf72f"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "1886df89aa427ddc31153da76c462047d8199017b9526f464696aab0adf3de03"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "c83fde45f8775c311ca6855e1040000fb866ae172f11867b93b774d95b90ed3c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "29dc80db70bdc03062e8d1948c64173d334b15cf342f7aee3c990d87febdd963"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "ce8d8ef52cc42f077217e73bfdf03736ea3b6f11d86b4545dfe8d08d679427c3"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "befdc22b98af83c1f91f2ce01bfe87dbf957ba7611c511f00683710f4fbfad96"
+      }
+    ]
+  },
+  "progress": {
+    "compileReviewed": 116,
+    "compileTotal": 116,
+    "linkOnlyReviewed": 72,
+    "linkOnlyTotal": 74,
+    "filesReviewed": 188,
+    "filesTotal": 190,
+    "remainingFiles": 2,
+    "total": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 483,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 85
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "S12 remains active. Next files wuwind.c and srvvdm.c. Classification is not elimination or proof that every current wrapper is minimal."
+}
