@@ -136,7 +136,7 @@ $redirDllRoot = Join-Path $root 'src/vdmredir-dll'
 $redirDllBindingRoot = Join-Path $redirDllRoot 'source'
 $adapterVddRoot = Join-Path $root 'src/ntvdm-exe/vdd'
 $ccpuVectorSource = Join-Path $adapterSoftpcRoot 'mvdm_ccpu_vector_defaults.c'
-$ccpuActivitySource = Join-Path $adapterSoftpcRoot 'mvdm_ccpu_activity_check.c'
+$ccpuActivitySource = Join-Path $root 'src/compat/mvdm_ccpu_activity_check.c'
 $ccpuProductIncludeRoot = Join-Path $adapterSoftpcRoot 'include/generated/x86/prod'
 $ccpuManifest = Join-Path $ccpuRoot 'sources'
 $biosManifest = Join-Path $biosRoot 'sources'
@@ -2056,7 +2056,7 @@ $graph.Add('build ' + $patchVectorDefaultsObject + ': cc ' + (NinjaPath $ccpuVec
 $graph.Add('  cflags = ' + $baseAdapterFlags)
 $patchActivityCheckObject = 'obj/ccpu/fmstubs_activity_check.obj'
 $graph.Add('build ' + $patchActivityCheckObject + ': cc ' + (NinjaPath $ccpuActivitySource))
-$graph.Add('  cflags = ' + $nativeServiceFlags)
+$graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes')
 $redirResourceObject = 'obj/redir/vdmredir.res'
 $graph.Add('build ' + $redirResourceObject + ': rc ' + (NinjaPath $redirResourceSource))
 $graph.Add('build original-ccpu386.lib: lib ' + ($ccpuObjects -join ' '))
@@ -2597,7 +2597,7 @@ sources = @('src/common/protocol/native_hook.h', 'src/nthook-dll/hook.h', 'src/n
             buildDisposition = 'compile-and-force-link-debugbreak-vector-defaults-only'
         }
         [ordered]@{
-            path = 'src/ntvdm-exe/softpc/mvdm_ccpu_activity_check.c'
+            path = 'src/compat/mvdm_ccpu_activity_check.c'
             symbols = @('ActivityCheckAfterTimeSlice')
             buildDisposition = 'compile-and-normal-link-empty-activity-callback-only'
         }

@@ -277,3 +277,5 @@ P78: [Video address ownership](s12-p78-video-address-ownership.json); files18-20
 P79: [Presentation/thread/start ownership](s12-p79-presentation-thread-start-ownership.json); files21-23 assigned to grouped S13 responsibility review, no product change.
 
 P80: [Console registration ownership](s12-p80-console-registration-ownership.json); files24-25 classified; C0189 remains the next in-place candidate. No product change.
+
+P81: [Activity compatibility delivery](s12-p81-activity-owner.json); C0189 eliminated F-to-B, unchanged callback; final cached builds, normalized identity and eight A/B graphs passed.

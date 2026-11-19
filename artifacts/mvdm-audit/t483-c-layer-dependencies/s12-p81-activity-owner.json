@@ -1,0 +1,172 @@
+{
+  "baseline": "e3783bebdac3cb6b6b2a10aa0dcdf89947bba842",
+  "id": "C0189",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+  "linkOnlyOrder": 26,
+  "decision": "Eliminate outward F dependency by moving the unchanged stateless compatibility callback to B. Original caller, lock release, time-slice check and return remain untouched. Other nt_unix callers share the same provider.",
+  "originalEvidence": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "procedure": "Pinned git grep ActivityCheckAfterTimeSlice under base/mvdm finds cpu4gen declarations and nt_eoi/nt_unix callers, no implementation body. This migration preserves the existing empty binding, not a claim of restoring unavailable scheduler behavior."
+  },
+  "provider": {
+    "old": "src/ntvdm-exe/softpc/mvdm_ccpu_activity_check.c",
+    "new": "src/compat/mvdm_ccpu_activity_check.c",
+    "sha256": "6263bbffefe2102bba0e8ffa919fd12db4d674bf832e7fd26dc5c4945905eeec",
+    "byteIdentical": true
+  },
+  "buildEvidence": [
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "command": [
+        "build obj/ccpu/fmstubs_activity_check.obj: cc O$:/repos.hobby/ntvdm64/src/compat/mvdm_ccpu_activity_check.c",
+        "  cflags = /nologo /c /MT /W4 /we4013 /showIncludes"
+      ],
+      "binding": "0001:00005e80       _ActivityCheckAfterTimeSlice 00406e80 f   softpc-activity-check:fmstubs_activity_check.obj",
+      "objectSha256": "71e9a86590acee1ed126c5cfa455ffadf53f91da8b7df2166476c92e5c85cdd0"
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja",
+      "command": [
+        "build obj/ccpu/fmstubs_activity_check.obj: cc O$:/repos.hobby/ntvdm64/src/compat/mvdm_ccpu_activity_check.c",
+        "  cflags = /nologo /c /MT /W4 /we4013 /showIncludes"
+      ],
+      "binding": "0001:00005e80       _ActivityCheckAfterTimeSlice 00406e80 f   softpc-activity-check:fmstubs_activity_check.obj",
+      "objectSha256": "4009e032acdb34a7231b679d331d28fda8b9e21bd4cc65fcf2978b7ff495d043"
+    }
+  ],
+  "correction": "Initial build/publication normalized equal, but A/B boundary gate rejected inherited /I obj/basesrv. Removed all unnecessary include directories from this source rule; repeated cached build and gate on final code. Earlier failure is not counted passed.",
+  "validation": {
+    "build": "Final cached x86/x64 builds plus explicit x86 four images and worker-reference-x86 passed.",
+    "boundary": "Eight product A/B graphs passed after include-path correction.",
+    "runtime": "Repeated runtime tests omitted under owner identity authorization: all eleven final images equal P73 after masking only package GUID and PE/debug timestamps. Not raw-byte identity.",
+    "normalized": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "0b6c2aa7-47e7-46f2-8fd7-1daad97a3716",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "publishedHashesVerified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "a3c4bd5e5e62787d3f8b245ef874ef9db40401aee34343e152e3cf94330a59fa"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+        "sha256": "a3c4bd5e5e62787d3f8b245ef874ef9db40401aee34343e152e3cf94330a59fa"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "4fa7fc9f4953f1e083ad40c46dc6e330ac389f1220ef1382093d830ca85a4052"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\run16.exe",
+        "sha256": "4fa7fc9f4953f1e083ad40c46dc6e330ac389f1220ef1382093d830ca85a4052"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "a6dbdcd45efe1243e26058580fbdf05639f0934046ef43f8928ba9e843bd4075"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntsrv.exe",
+        "sha256": "a6dbdcd45efe1243e26058580fbdf05639f0934046ef43f8928ba9e843bd4075"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "9aa5c1d168dd308799c79ea53faf41ae7d2882e20c70828ba8dade3739fd2639"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntcon.exe",
+        "sha256": "9aa5c1d168dd308799c79ea53faf41ae7d2882e20c70828ba8dade3739fd2639"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "2573896d6b22377e71210df654804c26a2302675927a01086434336031053733"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvdm.exe",
+        "sha256": "2573896d6b22377e71210df654804c26a2302675927a01086434336031053733"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "533cd7a12dccb83316c056f2c68397347101e4ed7753f63df2182b52f7b219bd"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvwm.exe",
+        "sha256": "533cd7a12dccb83316c056f2c68397347101e4ed7753f63df2182b52f7b219bd"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "abfaa4591bd3c0a03b0f5f57058180691d766dbe48b8fb1297c6bd94e4315e8e"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntmon.exe",
+        "sha256": "abfaa4591bd3c0a03b0f5f57058180691d766dbe48b8fb1297c6bd94e4315e8e"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "5259cbb4cf98df1793cae383a572b98af60d119f3c9002b99c1d4585f9562a11"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\WOW32.DLL",
+        "sha256": "5259cbb4cf98df1793cae383a572b98af60d119f3c9002b99c1d4585f9562a11"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "f771d1897d6e97057c1aba34d5710110987a3512d235785d7735a00b524ae8b2"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "sha256": "f771d1897d6e97057c1aba34d5710110987a3512d235785d7735a00b524ae8b2"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "e4a3de4f18c3c9bb45740db62931b360e7c9fb15d47a291e2a6d57f0db72c2cc"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook32.dll",
+        "sha256": "e4a3de4f18c3c9bb45740db62931b360e7c9fb15d47a291e2a6d57f0db72c2cc"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "659807c3111352add8b9c3d38ec44d37d98e419b2619ce28085a32bbd51ca1ce"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook64.dll",
+        "sha256": "659807c3111352add8b9c3d38ec44d37d98e419b2619ce28085a32bbd51ca1ce"
+      }
+    ]
+  },
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 26,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 48,
+    "openIds": 498,
+    "eliminatedIds": 70,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  }
+}
