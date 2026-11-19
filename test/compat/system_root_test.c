@@ -1,4 +1,4 @@
-#include "common/system_root.h"
+#include "compat/include/system_root.h"
 #include <stdio.h>
 #include <string.h>
 #include <wchar.h>
@@ -24,31 +24,36 @@ int main(int argc,char **argv)
     if(slash==image+2 && image[1]==L':')slash[1]=0;else *slash=0;
     CHECK(SetEnvironmentVariableW(L"NtvdmSystemRoot",L"C:\\not-the-product"));
     CHECK(SetCurrentDirectoryW(L"C:\\"));
-    CHECK(common_system_root_w(root,ARRAYSIZE(root))==ERROR_SUCCESS);
+    CHECK(compat_system_root_w(root,ARRAYSIZE(root))==ERROR_SUCCESS);
     CHECK(!wcscmp(root,image));
-    CHECK(common_product_path_w(L"system32\\krnl386",path,ARRAYSIZE(path))==0);
+    CHECK(compat_product_path_w(L"system32\\krnl386",path,ARRAYSIZE(path))==0);
     length=wcslen(root);
     CHECK(!wcsncmp(path,root,length));
     CHECK(!wcscmp(path+length+(root[length-1]!=L'\\'),L"system32\\krnl386"));
-    CHECK(common_system_root_w(tiny_wide,ARRAYSIZE(tiny_wide))==ERROR_INSUFFICIENT_BUFFER);
+    CHECK(compat_system_root_w(tiny_wide,ARRAYSIZE(tiny_wide))==ERROR_INSUFFICIENT_BUFFER);
     CHECK(tiny_wide[0]==0);
-    CHECK(common_product_path_w(L"ntvdm.exe",tiny_wide,ARRAYSIZE(tiny_wide))==ERROR_INSUFFICIENT_BUFFER);
+    CHECK(compat_product_path_w(L"ntvdm.exe",tiny_wide,ARRAYSIZE(tiny_wide))==ERROR_INSUFFICIENT_BUFFER);
     CHECK(tiny_wide[0]==0);
-    CHECK(common_system_root_a(ansi,sizeof(ansi))==0);
+    CHECK(compat_system_root_a(ansi,sizeof(ansi))==0);
+    CHECK(NtvdmGetWindowsDirectoryA(ansi,sizeof(ansi))==strlen(ansi));
+    CHECK(NtvdmGetWindowsDirectoryA(NULL,0)==strlen(ansi)+1);
+    CHECK(NtvdmGetWindowsDirectoryA(tiny,sizeof(tiny))==strlen(ansi)+1 && tiny[0]==0);
+    CHECK(NtvdmGetWindowsDirectoryW(path,ARRAYSIZE(path))==wcslen(root));
+    CHECK(!wcscmp(path,root));
     CHECK(argc==1 || (argc==2 && !_stricmp(ansi,argv[1])));
-    CHECK(common_product_path_a(L"ntvdm.exe",ansi,sizeof(ansi))==0);
+    CHECK(compat_product_path_a(L"ntvdm.exe",ansi,sizeof(ansi))==0);
     CHECK(strstr(ansi,"ntvdm.exe")!=NULL);
-    CHECK(common_product_path_a(L"ntvdm.exe",tiny,sizeof(tiny))==ERROR_INSUFFICIENT_BUFFER);
+    CHECK(compat_product_path_a(L"ntvdm.exe",tiny,sizeof(tiny))==ERROR_INSUFFICIENT_BUFFER);
     CHECK(tiny[0]==0);
     for(index=0;index<ARRAYSIZE(invalid);++index) {
         path[0]=L'x';ansi[0]='x';
-        CHECK(common_product_path_w(invalid[index],path,ARRAYSIZE(path))==ERROR_INVALID_PARAMETER);
+        CHECK(compat_product_path_w(invalid[index],path,ARRAYSIZE(path))==ERROR_INVALID_PARAMETER);
         CHECK(path[0]==0);
-        CHECK(common_product_path_a(invalid[index],ansi,sizeof(ansi))==ERROR_INVALID_PARAMETER);
+        CHECK(compat_product_path_a(invalid[index],ansi,sizeof(ansi))==ERROR_INVALID_PARAMETER);
         CHECK(ansi[0]==0);
     }
-    CHECK(common_system_root_w(NULL,1)==ERROR_INVALID_PARAMETER);
-    CHECK(common_system_root_a(NULL,1)==ERROR_INVALID_PARAMETER);
+    CHECK(compat_system_root_w(NULL,1)==ERROR_INVALID_PARAMETER);
+    CHECK(compat_system_root_a(NULL,1)==ERROR_INVALID_PARAMETER);
     puts("COMMON-SYSTEM-ROOT-PASS");
     return 0;
 }

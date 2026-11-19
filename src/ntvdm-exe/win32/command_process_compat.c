@@ -5,7 +5,7 @@
 #include "vdmapi.h"
 #include "console_client.h"
 #include "common/protocol/console_io.h"
-#include "common/system_root.h"
+#include "compat/include/system_root.h"
 #include "common/native-hook/installer.h"
 
 #include <stdio.h>
@@ -196,7 +196,7 @@ static BOOL opennt_command_launch_vdm_child(
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
-    error = common_product_path_a(L"system32\\run16.exe", launcher, sizeof(launcher));
+    error = compat_product_path_a(L"system32\\run16.exe", launcher, sizeof(launcher));
     if (error) { SetLastError(error); return FALSE; }
     if (service == MVDM_COMMAND_SERVICE_INTERACTIVE)
         /* SVC_EXECCOMSPEC32 selects the host COMSPEC, not guest COMMAND.COM.

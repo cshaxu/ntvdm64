@@ -43,10 +43,13 @@ $sources = @(
     'src/ntvdm-exe/softpc/mvdm_softpc_firmware.c',
     'test/session/softpc_firmware_resource_fixture.c',
     'test/session/softpc_media_resource_fixture.c',
-    'src/common/system_root.c',
+    'src/compat/system_root.c',
     'src/common/guest_environment.c',
     'test/session/softpc_wow_boot_environment_fixture.c'
 )
+[IO.Directory]::CreateDirectory((Join-Path $build 'system32')) | Out-Null
+Copy-Item -LiteralPath (Join-Path $runtime 'system32/NTIO.SYS') -Destination (Join-Path $build 'system32/NTIO.SYS') -Force
+Copy-Item -LiteralPath (Join-Path $runtime 'system.ini') -Destination (Join-Path $build 'system.ini') -Force
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('cflags = /nologo /TC /c /MT /W4 /showIncludes' +
@@ -61,7 +64,7 @@ $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' l
 $graph.Add('rule run')
 $graph.Add('  command = $in "' + (NinjaPath (Join-Path $root 'src/mvdm-guest/softpc.new/roms')) + '"')
 $graph.Add('rule run_dos')
-$graph.Add('  command = $in "' + (NinjaPath $runtime) + '"')
+$graph.Add('  command = $in "' + (NinjaPath $build) + '"')
 $objects = @()
 for ($index = 0; $index -lt $sources.Count; ++$index) {
     $object = 'obj/' + $index + '-' + ([IO.Path]::GetFileNameWithoutExtension($sources[$index])) + '.obj'
@@ -69,13 +72,13 @@ for ($index = 0; $index -lt $sources.Count; ++$index) {
     $objects += $object
 }
 $graph.Add('build softpc-firmware-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/3-softpc_firmware_resource_fixture.obj obj/5-system_root.obj obj/6-guest_environment.obj')
-$graph.Add('build softpc-media-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/4-softpc_media_resource_fixture.obj obj/5-system_root.obj obj/6-guest_environment.obj')
+$graph.Add('build system32/softpc-media-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/4-softpc_media_resource_fixture.obj obj/5-system_root.obj obj/6-guest_environment.obj')
 $graph.Add('build softpc-wow-boot-environment-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/5-system_root.obj obj/6-guest_environment.obj obj/7-softpc_wow_boot_environment_fixture.obj')
 $graph.Add('rule run_boot')
 $graph.Add('  command = $in')
 $graph.Add('build verify-boot: run_boot softpc-wow-boot-environment-fixture.exe')
 $graph.Add('build verify: run softpc-firmware-resource-fixture.exe')
-$graph.Add('build verify-media: run_dos softpc-media-resource-fixture.exe')
+$graph.Add('build verify-media: run_dos system32/softpc-media-resource-fixture.exe')
 $graph.Add('build all-verify: phony verify verify-media verify-boot')
 $graph.Add('default all-verify')
 [IO.File]::WriteAllText((Join-Path $build 'build.ninja'), (($graph -join [Environment]::NewLine) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))

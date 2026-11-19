@@ -9,13 +9,17 @@
 int main(int argc, char **argv)
 {
     session instance;
+    char media_root[MAX_PATH];
     char path[SESSION_FIRMWARE_ROOT_BYTES + 32u];
     char system_path[SESSION_FIRMWARE_ROOT_BYTES + 32u];
     char small_path[4];
+    char executable_root[MAX_PATH];
     wchar_t expected_path[SESSION_FIRMWARE_ROOT_BYTES + 32u];
     wchar_t wide_path[SESSION_FIRMWARE_ROOT_BYTES + 32u];
 
     if (argc != 2 && argc != 3) return 10;
+    if (!GetFullPathNameA(argv[1], sizeof(media_root), media_root, NULL)) return 18;
+    argv[1] = media_root;
     session_initialize(&instance, 1u);
     if (!session_set_mvdm_system_root(&instance, argv[1]) ||
         !session_activate(&instance) || !session_thread_bind(&instance)) return 1;
@@ -34,14 +38,15 @@ int main(int argc, char **argv)
         strcmp(path, argv[1]) != 0) return 5;
     if (mvdm_softpc_system_copy_root(small_path, (uint32_t)sizeof(small_path)) ||
         small_path[0] != '\0') return 6;
+    if (compat_system_root_a(executable_root, sizeof(executable_root))) return 17;
     if (NtvdmGetWindowsDirectoryA(path, (uint32_t)sizeof(path)) !=
-            strlen(argv[1]) || strcmp(path, argv[1]) != 0) return 7;
+            strlen(executable_root) || strcmp(path, executable_root) != 0) return 7;
     if (NtvdmGetWindowsDirectoryA(small_path, (uint32_t)sizeof(small_path)) !=
-            strlen(argv[1]) + 1u) return 8;
+            strlen(executable_root) + 1u) return 8;
     if (!NtvdmGetSystemDirectoryA(system_path,
             (uint32_t)sizeof(system_path)) ||
         strstr(system_path, "system32") == NULL) return 9;
-    if (!MultiByteToWideChar(CP_ACP, 0, argv[1], -1, expected_path,
+    if (!MultiByteToWideChar(CP_ACP, 0, executable_root, -1, expected_path,
             sizeof(expected_path) / sizeof(expected_path[0]))) return 10;
     if (!NtvdmGetWindowsDirectoryW(wide_path,
             (uint32_t)(sizeof(wide_path) / sizeof(wide_path[0]))) ||

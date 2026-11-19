@@ -4,7 +4,7 @@
 #include <windows.h>
 
 #include "ntvdm-exe/session/session.h"
-#include "common/system_root.h"
+#include "compat/include/system_root.h"
 #include "common/guest_environment.h"
 #include <stdlib.h>
 
@@ -16,7 +16,7 @@ int mvdm_softpc_project_wow_initial_environment(char **environment,unsigned long
     char root[MAX_PATH],short_root[MAX_PATH],*projected=NULL,*copy;
     DWORD error,length,projected_bytes=0;
     if(!environment || !*environment || !bytes){SetLastError(ERROR_INVALID_PARAMETER);return 0;}
-    error=common_system_root_a(root,sizeof(root));
+    error=compat_system_root_a(root,sizeof(root));
     if(error){SetLastError(error);return 0;}
     length=GetShortPathNameA(root,short_root,sizeof(short_root));
     if(!length)return 0;
@@ -211,65 +211,6 @@ int mvdm_softpc_system_copy_system_directory(char *path_out,
         return 0;
     }
     return 1;
-}
-
-static uint32_t mvdm_softpc_copy_ntvdm_directory(int system_directory,
-    char *path_out, uint32_t path_out_chars)
-{
-    char path[MAX_PATH];
-    size_t path_chars;
-
-    if (path_out != NULL && path_out_chars != 0u) path_out[0] = '\0';
-    if (!(system_directory ? mvdm_softpc_system_copy_system_directory(path,
-            (uint32_t)sizeof(path)) : mvdm_softpc_system_copy_root(path,
-            (uint32_t)sizeof(path)))) return 0;
-    path_chars = strlen(path);
-    if (path_out == NULL || path_out_chars == 0u ||
-        path_chars >= path_out_chars) return (uint32_t)(path_chars + 1u);
-    memcpy(path_out, path, path_chars + 1u);
-    return (uint32_t)path_chars;
-}
-
-uint32_t NtvdmGetWindowsDirectoryA(char *path_out, uint32_t path_out_chars)
-{
-    return mvdm_softpc_copy_ntvdm_directory(0, path_out, path_out_chars);
-}
-
-uint32_t NtvdmGetSystemDirectoryA(char *path_out, uint32_t path_out_chars)
-{
-    return mvdm_softpc_copy_ntvdm_directory(1, path_out, path_out_chars);
-}
-
-static uint32_t mvdm_softpc_copy_ntvdm_directory_wide(int system_directory,
-    wchar_t *path_out, uint32_t path_out_chars)
-{
-    char path[MAX_PATH];
-    int path_chars;
-
-    if (path_out != NULL && path_out_chars != 0u) path_out[0] = L'\0';
-    if (!mvdm_softpc_copy_ntvdm_directory(system_directory, path,
-            (uint32_t)sizeof(path))) return 0;
-    path_chars = MultiByteToWideChar(CP_ACP, 0, path, -1, NULL, 0);
-    if (path_chars <= 0) return 0;
-    if (path_out == NULL || path_out_chars == 0u ||
-        (uint32_t)path_chars > path_out_chars) return (uint32_t)path_chars;
-    if (!MultiByteToWideChar(CP_ACP, 0, path, -1, path_out,
-            (int)path_out_chars)) return 0;
-    return (uint32_t)(path_chars - 1);
-}
-
-uint32_t NtvdmGetWindowsDirectoryW(wchar_t *path_out,
-    uint32_t path_out_chars)
-{
-    return mvdm_softpc_copy_ntvdm_directory_wide(0, path_out,
-        path_out_chars);
-}
-
-uint32_t NtvdmGetSystemDirectoryW(wchar_t *path_out,
-    uint32_t path_out_chars)
-{
-    return mvdm_softpc_copy_ntvdm_directory_wide(1, path_out,
-        path_out_chars);
 }
 
 int mvdm_softpc_config_path_to_ansi(char *path, uint32_t capacity)

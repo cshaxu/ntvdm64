@@ -41,12 +41,12 @@ static BOOL WINAPI test_exit(HANDLE handle, LPDWORD code)
 #define CloseHandle test_close
 #define WaitForSingleObject test_wait
 #define GetExitCodeProcess test_exit
-#define common_product_path_w test_product_path
+#define compat_product_path_w test_product_path
 #define wWinMain unused_launcher_entry
 #include "../../src/run16-exe/main.c"
 #undef GetTickCount64
 
-DWORD common_product_path_w(PCWSTR relative, PWSTR out, DWORD capacity)
+DWORD compat_product_path_w(PCWSTR relative, PWSTR out, DWORD capacity)
 { (void)relative; CHECK(capacity >= 12); wcscpy_s(out,capacity,L"ntsrv.exe"); return 0; }
 static void reset(DWORD first, DWORD second, DWORD third, DWORD rest)
 {

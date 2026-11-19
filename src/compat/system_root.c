@@ -1,4 +1,4 @@
-#include "system_root.h"
+#include "include/system_root.h"
 #include <string.h>
 #include <wchar.h>
 
@@ -14,7 +14,7 @@ static DWORD image_directory(PWSTR image)
     return ERROR_SUCCESS;
 }
 
-DWORD common_system_root_w(PWSTR output,DWORD capacity)
+DWORD compat_system_root_w(PWSTR output,DWORD capacity)
 {
     PWSTR image;
     DWORD length,error=ERROR_SUCCESS;
@@ -57,7 +57,7 @@ static BOOL relative_path_valid(PCWSTR relative)
     }
 }
 
-DWORD common_product_path_w(PCWSTR relative,PWSTR output,DWORD capacity)
+DWORD compat_product_path_w(PCWSTR relative,PWSTR output,DWORD capacity)
 {
     PWSTR root;
     DWORD error;
@@ -67,7 +67,7 @@ DWORD common_product_path_w(PCWSTR relative,PWSTR output,DWORD capacity)
     if(!relative_path_valid(relative)) return ERROR_INVALID_PARAMETER;
     root=HeapAlloc(GetProcessHeap(),0,ROOT_PATH_CHARS*sizeof(WCHAR));
     if(!root) return ERROR_NOT_ENOUGH_MEMORY;
-    error=common_system_root_w(root,ROOT_PATH_CHARS);
+    error=compat_system_root_w(root,ROOT_PATH_CHARS);
     if(!error) {
         length=wcslen(root); suffix=wcslen(relative);
         separator=root[length-1]!=L'\\' ? 1u : 0u;
@@ -111,19 +111,19 @@ static DWORD local_path_a(PCWSTR relative,PSTR output,DWORD capacity)
     output[0]=0;
     path=HeapAlloc(GetProcessHeap(),0,ROOT_PATH_CHARS*sizeof(WCHAR));
     if(!path) return ERROR_NOT_ENOUGH_MEMORY;
-    error=relative ? common_product_path_w(relative,path,ROOT_PATH_CHARS) :
-        common_system_root_w(path,ROOT_PATH_CHARS);
+    error=relative ? compat_product_path_w(relative,path,ROOT_PATH_CHARS) :
+        compat_system_root_w(path,ROOT_PATH_CHARS);
     if(!error) error=path_to_ansi(path,output,capacity);
     HeapFree(GetProcessHeap(),0,path);
     return error;
 }
 
-DWORD common_system_root_a(PSTR output,DWORD capacity)
+DWORD compat_system_root_a(PSTR output,DWORD capacity)
 {
     return local_path_a(NULL,output,capacity);
 }
 
-DWORD common_product_path_a(PCWSTR relative,PSTR output,DWORD capacity)
+DWORD compat_product_path_a(PCWSTR relative,PSTR output,DWORD capacity)
 {
     if(!relative) {
         if(output && capacity) output[0]=0;
@@ -131,3 +131,68 @@ DWORD common_product_path_a(PCWSTR relative,PSTR output,DWORD capacity)
     }
     return local_path_a(relative,output,capacity);
 }
+
+static uint32_t compat_copy_ntvdm_directory(int system_directory,
+    char *path_out, uint32_t path_out_chars)
+{
+    char path[MAX_PATH];
+    size_t path_chars;
+
+    if (path_out != NULL && path_out_chars != 0u) path_out[0] = '\0';
+    if ((system_directory ? compat_product_path_a(L"system32", path,
+            (uint32_t)sizeof(path)) : compat_system_root_a(path,
+            (uint32_t)sizeof(path))) != ERROR_SUCCESS) return 0;
+    if (system_directory) {
+        DWORD attributes = GetFileAttributesA(path);
+        if (attributes == INVALID_FILE_ATTRIBUTES ||
+            !(attributes & FILE_ATTRIBUTE_DIRECTORY)) return 0;
+    }
+    path_chars = strlen(path);
+    if (path_out == NULL || path_out_chars == 0u ||
+        path_chars >= path_out_chars) return (uint32_t)(path_chars + 1u);
+    memcpy(path_out, path, path_chars + 1u);
+    return (uint32_t)path_chars;
+}
+
+uint32_t NtvdmGetWindowsDirectoryA(char *path_out, uint32_t path_out_chars)
+{
+    return compat_copy_ntvdm_directory(0, path_out, path_out_chars);
+}
+
+uint32_t NtvdmGetSystemDirectoryA(char *path_out, uint32_t path_out_chars)
+{
+    return compat_copy_ntvdm_directory(1, path_out, path_out_chars);
+}
+
+static uint32_t compat_copy_ntvdm_directory_wide(int system_directory,
+    wchar_t *path_out, uint32_t path_out_chars)
+{
+    char path[MAX_PATH];
+    int path_chars;
+
+    if (path_out != NULL && path_out_chars != 0u) path_out[0] = L'\0';
+    if (!compat_copy_ntvdm_directory(system_directory, path,
+            (uint32_t)sizeof(path))) return 0;
+    path_chars = MultiByteToWideChar(CP_ACP, 0, path, -1, NULL, 0);
+    if (path_chars <= 0) return 0;
+    if (path_out == NULL || path_out_chars == 0u ||
+        (uint32_t)path_chars > path_out_chars) return (uint32_t)path_chars;
+    if (!MultiByteToWideChar(CP_ACP, 0, path, -1, path_out,
+            (int)path_out_chars)) return 0;
+    return (uint32_t)(path_chars - 1);
+}
+
+uint32_t NtvdmGetWindowsDirectoryW(wchar_t *path_out,
+    uint32_t path_out_chars)
+{
+    return compat_copy_ntvdm_directory_wide(0, path_out,
+        path_out_chars);
+}
+
+uint32_t NtvdmGetSystemDirectoryW(wchar_t *path_out,
+    uint32_t path_out_chars)
+{
+    return compat_copy_ntvdm_directory_wide(1, path_out,
+        path_out_chars);
+}
+

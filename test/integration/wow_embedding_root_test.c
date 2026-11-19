@@ -35,7 +35,7 @@ typedef struct _KEY_VALUE_FULL_INFORMATION {
 } KEY_VALUE_FULL_INFORMATION,*PKEY_VALUE_FULL_INFORMATION;
 #endif
 
-DWORD common_product_path_a(LPCWSTR relative, LPSTR path, DWORD capacity)
+DWORD compat_product_path_a(LPCWSTR relative, LPSTR path, DWORD capacity)
 {
     DWORD length;
     (void)relative;
@@ -69,7 +69,7 @@ static char szServerKey[]="protocol\\StdFileEditing\\server";
 static void enumeration(HKEY handle){calls=updated=0;enum_override=handle;if(!setjmp(budget)){UpdateEmbeddingAllKeys();check(calls==4&&updated==2,"original skip-too-long then end");}else check(0,"original enumeration terminates");}
 int main(void){
  char path[MAX_PATH],data[1024],longname[271],name[32];DWORD written;HANDLE f;HKEY opened;LONG status;char profile[]="Description,Class,Server,Forms",out[32];LONG size;
- if(common_product_path_a(L"",path,sizeof(path)))return 2;
+ if(compat_product_path_a(L"",path,sizeof(path)))return 2;
  memset(longname,'x',270);longname[270]=0;
  sprintf_s(data,sizeof(data),"Windows Registry Editor Version 5.00\r\n[HKEY_CLASSES_ROOT\\Alpha]\r\n[HKEY_CLASSES_ROOT\\%s]\r\n[HKEY_CLASSES_ROOT\\Beta]\r\n",longname);
  f=CreateFileA(path,GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);if(f==INVALID_HANDLE_VALUE)return 3;

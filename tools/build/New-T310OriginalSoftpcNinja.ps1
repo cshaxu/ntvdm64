@@ -1541,10 +1541,10 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/win32_pipe_pair.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/pipe/pipe_pair_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build win32-pipe-pair-test.exe: broker_test_link obj/tests/win32_pipe_pair.obj lib-pipe.lib')
-    $graph.Add('build obj/common/system_root.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/system_root.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/common/system_root.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/system_root.c')))
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build common-root.lib: lib obj/common/system_root.obj obj/common/guest_environment.obj')
-    $graph.Add('build obj/tests/common_system_root.obj: cc ' + (NinjaPath (Join-Path $root 'test/common/system_root_test.c')))
+    $graph.Add('build obj/tests/common_system_root.obj: cc ' + (NinjaPath (Join-Path $root 'test/compat/system_root_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build common-system-root-test.exe: broker_test_link obj/tests/common_system_root.obj common-root.lib')
     $graph.Add('build obj/lib-win32/process-observation/console_members.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/process-observation/console_members.c')))
@@ -2409,7 +2409,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'common-root.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'checked actual-own-EXE root and relative internal paths; no RPC peer validation, search or environment authority'
-        sources = @('src/common/system_root.c', 'src/common/system_root.h', 'src/common/guest_environment.c', 'src/common/guest_environment.h' | ForEach-Object {
+        sources = @('src/compat/system_root.c', 'src/compat/include/system_root.h', 'src/common/guest_environment.c', 'src/common/guest_environment.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

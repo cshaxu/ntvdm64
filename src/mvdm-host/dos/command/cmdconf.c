@@ -9,7 +9,7 @@
 #include <cmdsvc.h>
 #include <demexp.h>
 #include <softpc.h>
-#include "mvdm_softpc_firmware.h"
+#include "compat/include/system_root.h"
 #line 12
 #include <mvdm.h>
 #include <ctype.h>

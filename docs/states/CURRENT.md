@@ -46,6 +46,8 @@ P8 indexed all 462 open link symbols against 170 fixed original caller sources. 
 
 P9 removed the redundant forced service header from srvvdm.c. The normal include remains. Both release destinations have the eleven verified images. The [per-file inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p9-file-dependencies.json) covers 539 product compile contexts and records 116 distinct C-layer files with a direct compile dependency and 170 with a direct link binding (190 in their union). The stable tracker still has 555 open items.
 
+P11 moved shared package directory mechanics and guest directory queries into B compat. cmdconf.c now includes the B header. Both cached product builds, directory/PIF/media/boot tests and the eight-graph library boundary check passed. Eleven images were published and hash-verified at both destinations. See [directory receipt](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p11-directory.json). The sequential compile-dependency review is 1/116; 115 mirror files remain directly dependent. Mirror delta is zero blocks and lines.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

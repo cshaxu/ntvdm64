@@ -12,7 +12,7 @@
 #include "launch_options.h"
 #include "image_classification.h"
 #include "common/protocol/console_io.h"
-#include "common/system_root.h"
+#include "compat/include/system_root.h"
 #include "common/guest_environment.h"
 #include "common/application_search.h"
 #include "common/protocol/frontend_lifecycle.h"
@@ -52,7 +52,7 @@ static BOOL begin_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
         return FALSE;
     }
     ZeroMemory(scope, sizeof(*scope));
-    error = common_system_root_w(root, ARRAYSIZE(root));
+    error = compat_system_root_w(root, ARRAYSIZE(root));
     if (error) {
         SetLastError(error);
         return FALSE;
@@ -105,7 +105,7 @@ static void end_worker_win16_directory(WORKER_WIN16DIR_SCOPE *scope)
 
 static BOOL sibling_path(PCWSTR name, PWSTR output, DWORD capacity)
 {
-    DWORD error = common_product_path_w(name, output, capacity);
+    DWORD error = compat_product_path_w(name, output, capacity);
     if (error) SetLastError(error);
     return error == ERROR_SUCCESS;
 }
@@ -272,7 +272,7 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
         (binary & ~BINARY_SUBTYPE_MASK)==BINARY_TYPE_SEPWOW) {
         CHAR root[MAX_PATH],short_root[MAX_PATH];
         PSTR guest=NULL;DWORD bytes=0,length;
-        result=common_system_root_a(root,sizeof(root));
+        result=compat_system_root_a(root,sizeof(root));
         if(result)goto done;
         length=GetShortPathNameA(root,short_root,sizeof(short_root));
         if(!length){result=GetLastError();goto done;}

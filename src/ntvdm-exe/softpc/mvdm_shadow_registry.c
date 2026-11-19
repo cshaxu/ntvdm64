@@ -1,5 +1,5 @@
 #include "mvdm_shadow_registry.h"
-#include "common/system_root.h"
+#include "compat/include/system_root.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -95,7 +95,7 @@ static VOID shadow_trace_section(LPCSTR event, LPCSTR section)
 
 static BOOL shadow_path(char *path, DWORD capacity)
 {
-    DWORD error=common_product_path_a(L"system32\\NTVDM.REG",path,capacity);
+    DWORD error=compat_product_path_a(L"system32\\NTVDM.REG",path,capacity);
     if(error)SetLastError(error);
     return error==ERROR_SUCCESS;
 }

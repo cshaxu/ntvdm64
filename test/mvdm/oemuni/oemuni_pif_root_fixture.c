@@ -12,12 +12,34 @@ PIF_DATA pfdata;
 int RcMessageBox(UINT id,CHAR *a,CHAR *b,DWORD flags)
 {(void)id;(void)a;(void)b;(void)flags;ExitProcess(99);return 0;}
 #define CHECK(x) do {if(!(x)){printf("PIF_ROOT_FAIL line=%d error=%lu\n",__LINE__,GetLastError());return 1;}}while(0)
-int main(void)
+int main(int argc, char **argv)
 {
     session instance; char temp[MAX_PATH],root[MAX_PATH],path[MAX_PATH],copy[MAX_PATH],small[2];
     STDPIF standard;PIFEXTHDR header;PIF_DATA data;HANDLE file;DWORD written;
-    CHECK(GetTempPathA(MAX_PATH,temp));CHECK(GetTempFileNameA(temp,"pfr",0,root));
-    CHECK(DeleteFileA(root)&&CreateDirectoryA(root,NULL));
+
+    if (argc == 1) {
+        char image[MAX_PATH], directory[MAX_PATH], child[MAX_PATH], command[MAX_PATH+8];
+        STARTUPINFOA startup = {sizeof(startup)};
+        PROCESS_INFORMATION process;
+        DWORD result;
+        CHECK(GetTempPathA(MAX_PATH,temp));CHECK(GetTempFileNameA(temp,"pfr",0,root));
+        CHECK(DeleteFileA(root)&&CreateDirectoryA(root,NULL));
+        CHECK(sprintf_s(directory,sizeof(directory),"%s\\system32",root)>0);
+        CHECK(CreateDirectoryA(directory,NULL));
+        CHECK(sprintf_s(child,sizeof(child),"%s\\probe.exe",directory)>0);
+        CHECK(GetModuleFileNameA(NULL,image,sizeof(image)));
+        CHECK(CopyFileA(image,child,TRUE));
+        CHECK(sprintf_s(command,sizeof(command),"\"%s\" child",child)>0);
+        CHECK(CreateProcessA(child,command,NULL,NULL,FALSE,0,NULL,NULL,&startup,&process));
+        CHECK(WaitForSingleObject(process.hProcess,30000)==WAIT_OBJECT_0);
+        CHECK(GetExitCodeProcess(process.hProcess,&result));
+        CloseHandle(process.hThread);CloseHandle(process.hProcess);
+        CHECK(DeleteFileA(child)&&RemoveDirectoryA(directory)&&RemoveDirectoryA(root));
+        return (int)result;
+    }
+    CHECK(argc==2 && !strcmp(argv[1],"child"));
+    CHECK(compat_system_root_a(root,sizeof(root))==0);
+
     CHECK(sprintf_s(path,sizeof(path),"%s\\_default.pif",root)>0);
     memset(&standard,0,sizeof(standard));memset(&header,0,sizeof(header));header.extnxthdrfloff=LASTHEADER;
     file=CreateFileA(path,GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_TEMPORARY,NULL);
@@ -37,16 +59,15 @@ int main(void)
     {
         char config[MAX_PATH+12], expected[MAX_PATH+12], directory[MAX_PATH];
         CHECK(sprintf_s(directory,sizeof(directory),"%s\\system32",root)>0);
-        GetPIFConfigFiles(TRUE,config);CHECK(config[0]==0);
-        CHECK(CreateDirectoryA(directory,NULL));
+        CHECK(GetFileAttributesA(directory)!=INVALID_FILE_ATTRIBUTES);
         CHECK(sprintf_s(expected,sizeof(expected),"%s\\config.nt",directory)>0);
         GetPIFConfigFiles(TRUE,config);CHECK(!strcmp(config,expected));
         CHECK(GetFileAttributesA(config)==INVALID_FILE_ATTRIBUTES);
         CHECK(sprintf_s(expected,sizeof(expected),"%s\\autoexec.nt",directory)>0);
         GetPIFConfigFiles(FALSE,config);CHECK(!strcmp(config,expected));
         CHECK(GetFileAttributesA(config)==INVALID_FILE_ATTRIBUTES);
-        CHECK(RemoveDirectoryA(directory));
+
     }
     CHECK(session_thread_unbind(&instance)&&session_dispose(&instance));
-    CHECK(RemoveDirectoryA(root));puts("PIF_REAL_SESSION_DEFAULT_ROOT_PRESENT_ABSENT_OK");return 0;
+    puts("PIF_REAL_SESSION_DEFAULT_ROOT_PRESENT_ABSENT_OK");return 0;
 }

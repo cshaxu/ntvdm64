@@ -6,15 +6,13 @@
 
 ## 001 — src/mvdm-host/dos/command/cmdconf.c
 
-- 直接包含 · C0039 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h
-
-001 核查：仅使用 NtvdmGetWindowsDirectoryA。原版 cmdconf.c:209 查询宿主 Windows 目录，当前函数读取 session_mvdm_system_root。结果用于 SHELL、COUNTRY 与 SystemRoot 展开。包目录绑定仍需解决，C0039 保持开放。未修改源码，镜像变化 0 点、0 行。
-
-001 修正后的归属：目录兼容查询及长度、编码和系统目录拼接由 B compat 提供，C cmdconf.c 保留原版配置处理。F 选择目录并负责其生命周期。生产 app_package_layout_set_process_media_roots 经 common_system_root_a 从已加载 EXE 推导根目录；显式 setter 仍为已有接口和夹具所用，不应以 EXE 推导替换所有查询。
-
-001 具体接线候选：B 持有当前线程的只读目录上下文，提供现有 NtvdmGetWindowsDirectoryA/W 与 NtvdmGetSystemDirectoryA/W 同形接口。F 通过现有 session_register_thread_hook 在 bind 时绑定目录、unbind 时解除，复用 session 的失败回滚和线程计数。B 不包含 session、common 或任何外层头，也不回调 F 取目录。上下文所指存储的寿命必须覆盖绑定，禁止额外维护第二份可变根目录。需验证无绑定失败、显式根、两个线程不同根、解绑后查询、短缓冲和编码转换。当前仅设计，未实施；镜像变化 0 点、0 行。
-
-001 隔离候选验证：从现有 firmware.c 提取目录查询函数，仅将 session 查根替换为线程绑定的 const char * 根指针。x86 MSVC /W4 编译通过，无警告；显式根、空绑定、所需长度、短缓冲、ANSI/Wide、双线程根隔离、解绑查询通过。证据位于 build/t483-s12-directory。尚未接入产品，不计为依赖消除；系统目录存在性、非 ASCII 编码及 session 回滚仍待验证。
+- 原直接外层依赖 · C0039 · F ntvdm-exe · mvdm_softpc_firmware.h
+- 当前直接依赖 · B compat · compat/include/system_root.h
+- 处理：原版配置解析留在 C，公共 EXE 包目录能力由 D common 下沉到 B，四个 NtvdmGet 目录兼容查询由 F 下沉到 B。统一按 GetModuleFileNameW(NULL) 的 EXE 路径定位根目录，不再通过 session 取这四个查询的根目录。
+- 当前文件直接外层头依赖 1→0；C0039 其他调用者仍开放。镜像非排除点位和行数均净变 0，原 #line 保留。本 S 累计镜像变化仍为 -2 点、-10 行。
+- 两架构实际产品构建、包根目录专项、真实原版 PIF 专项、ROM/媒体/WOW 初始环境专项和八产品图 A/B 边界检查通过。11 映像双端发布哈希通过。无全量运行回归。
+- 本次处理完成 1/116 个清单文件；当前直接向外编译依赖文件 115 个。原始清单保持编号顺序，其余条目按实际处理再更新。
+- 原线程目录绑定候选已放弃，产品使用统一的进程 EXE 目录来源。
 
 ## 002 — src/mvdm-host/dos/command/cmdexec.c
 

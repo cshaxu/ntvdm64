@@ -2,7 +2,7 @@
  * not an original OpenNT mirror. Instance associations use the existing service
  * lock; original task owners and direct frontend/backend I/O remain separate. */
 #include <service_internal.h>
-#include "common/system_root.h"
+#include "compat/include/system_root.h"
 
 typedef struct service_vdm_admission {
     OPENNT_BASE_CONNECTION *connection;
@@ -642,9 +642,9 @@ DWORD OpenNtBaseServiceStartVdmWorker(OPENNT_BASE_CONNECTION *connection,DWORD p
     if(error)return error;
     error=OpenNtBaseServiceCreateReservation(connection,pid,generation,connection->task,&reservation);
     if(error)goto done;
-    error=common_product_path_w(L"system32\\ntvdm.exe",image,ARRAYSIZE(image));
-    if(!error)error=common_product_path_a(L"system32\\ntvdm.exe",ansi,sizeof(ansi));
-    if(!error)error=common_product_path_a(L"system32\\krnl386",kernel,sizeof(kernel));
+    error=compat_product_path_w(L"system32\\ntvdm.exe",image,ARRAYSIZE(image));
+    if(!error)error=compat_product_path_a(L"system32\\ntvdm.exe",ansi,sizeof(ansi));
+    if(!error)error=compat_product_path_a(L"system32\\krnl386",kernel,sizeof(kernel));
     if(error)goto done;
     if(!OpenNtBaseInitializeVdmConfig(&config,ansi,kernel))
         {error=ERROR_BAD_PATHNAME;goto done;}
@@ -711,7 +711,7 @@ DWORD OpenNtBaseServiceStartNativeWorker(OPENNT_BASE_CONNECTION *connection,DWOR
     LeaveCriticalSection(&connection->service->lock);
     if(error || *worker)return error;
     /* Same-package product worker only. No remote executable/flags command. */
-    error=common_product_path_w(L"system32\\ntvwm.exe",image,ARRAYSIZE(image));
+    error=compat_product_path_w(L"system32\\ntvwm.exe",image,ARRAYSIZE(image));
     if(error)goto done;
     if(swprintf_s(command,ARRAYSIZE(command),L"\"%ls\" %ls",image,
         text ? L"--cui-worker" : L"--gui-launcher")<0)

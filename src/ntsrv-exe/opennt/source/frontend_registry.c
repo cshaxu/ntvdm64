@@ -6,7 +6,7 @@
 #include <service_internal.h>
 #include "common/protocol/frontend_protocol.h"
 #include "common/protocol/frontend_lifecycle.h"
-#include "common/system_root.h"
+#include "compat/include/system_root.h"
 
 
 static void service_console_return_ack(OPENNT_BASE_CONNECTION *root);
@@ -677,7 +677,7 @@ DWORD OpenNtBaseServiceStartFrontend(OPENNT_BASE_CONNECTION *caller,DWORD pid,
     if(!DuplicateHandle(GetCurrentProcess(),verified,GetCurrentProcess(),&creator,
         PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,TRUE,0)){error=GetLastError();goto done;}
     CloseHandle(verified);verified=NULL;
-    error=common_product_path_w(L"system32\\ntcon.exe",image,ARRAYSIZE(image));
+    error=compat_product_path_w(L"system32\\ntcon.exe",image,ARRAYSIZE(image));
     if(error)goto done;
     notification=CreateEventW(&security,TRUE,FALSE,NULL);
     retire=CreateEventW(&security,TRUE,FALSE,NULL);

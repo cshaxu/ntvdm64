@@ -1,0 +1,29 @@
+{
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "0518db4b-1843-4a67-8403-b40d80b68805",
+    "hashVerified": true,
+    "stopped": 2
+  },
+  "build_exit": {
+    "x86": 0,
+    "x64": 0
+  },
+  "tests": [
+    "directory-root",
+    "original PIF isolated package",
+    "firmware ROM",
+    "media lookup",
+    "WOW boot environment",
+    "eight product A/B compile boundary"
+  ],
+  "mirror_delta": {
+    "blocks": 0,
+    "lines": 0
+  },
+  "remaining": "Other 115 directly dependent mirror files and all unreviewed link bindings remain open."
+}

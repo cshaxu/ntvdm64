@@ -2,6 +2,7 @@
 #define MVDM_SOFTPC_FIRMWARE_H
 
 #include <stdint.h>
+#include "compat/include/system_root.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -43,21 +44,6 @@ int __cdecl mvdm_softpc_system_copy_root(char *path_out,
  * nor creates package media. */
 int __cdecl mvdm_softpc_system_copy_system_directory(char *path_out,
     uint32_t path_out_bytes);
-
-/* Directory-shaped standalone equivalents of the original host-directory
- * queries.  They expose the selected worker package, not the host Windows
- * installation.  Return values follow GetWindowsDirectoryA/W and
- * GetSystemDirectoryA/W: zero is failure, a too-small caller buffer receives
- * the required character count including NUL, otherwise the copied length
- * excludes NUL. */
-uint32_t __cdecl NtvdmGetWindowsDirectoryA(char *path_out,
-    uint32_t path_out_chars);
-uint32_t __cdecl NtvdmGetSystemDirectoryA(char *path_out,
-    uint32_t path_out_chars);
-uint32_t __cdecl NtvdmGetWindowsDirectoryW(wchar_t *path_out,
-    uint32_t path_out_chars);
-uint32_t __cdecl NtvdmGetSystemDirectoryW(wchar_t *path_out,
-    uint32_t path_out_chars);
 
 /* In-place, bounded OEM-to-ANSI boundary for original PIF configuration
  * file consumers. Returns zero if conversion cannot fit; opens no file. */

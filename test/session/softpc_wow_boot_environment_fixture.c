@@ -1,6 +1,6 @@
 #include <windows.h>
 #include "mvdm_softpc_firmware.h"
-#include "common/system_root.h"
+#include "compat/include/system_root.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -13,7 +13,7 @@ int main(void)
     char root[MAX_PATH],short_root[MAX_PATH],host[MAX_PATH],after[MAX_PATH];
     char expected[MAX_PATH+32],*block,*original;
     DWORD bytes,host_bytes;
-    CHECK(common_system_root_a(root,sizeof(root))==0);
+    CHECK(compat_system_root_a(root,sizeof(root))==0);
     CHECK(GetShortPathNameA(root,short_root,sizeof(short_root))>0);
     while(*short_root && short_root[strlen(short_root)-1]=='\\')short_root[strlen(short_root)-1]=0;
     host_bytes=GetEnvironmentVariableA("SYSTEMROOT",host,sizeof(host));

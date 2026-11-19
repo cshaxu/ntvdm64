@@ -1,5 +1,5 @@
 #include "package_layout.h"
-#include "common/system_root.h"
+#include "compat/include/system_root.h"
 
 #include <string.h>
 #include <windows.h>
@@ -109,7 +109,7 @@ int app_package_layout_validate_command_configuration_root(
 int app_package_layout_set_process_firmware_root(session *owner)
 {
     char root[SESSION_FIRMWARE_ROOT_BYTES];
-    if (common_product_path_a(L"softpc", root, sizeof(root))) return 0;
+    if (compat_product_path_a(L"softpc", root, sizeof(root))) return 0;
     return session_set_firmware_root(owner, root);
 }
 
@@ -117,8 +117,8 @@ int app_package_layout_set_process_media_roots(session *owner)
 {
     char system_root[SESSION_FIRMWARE_ROOT_BYTES];
     char firmware_root[SESSION_FIRMWARE_ROOT_BYTES];
-    if (common_system_root_a(system_root, sizeof(system_root)) ||
-        common_product_path_a(L"softpc", firmware_root, sizeof(firmware_root)))
+    if (compat_system_root_a(system_root, sizeof(system_root)) ||
+        compat_product_path_a(L"softpc", firmware_root, sizeof(firmware_root)))
         return 0;
     return session_set_mvdm_system_root(owner, system_root) &&
         session_set_firmware_root(owner, firmware_root);

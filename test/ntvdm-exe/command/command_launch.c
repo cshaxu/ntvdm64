@@ -13,7 +13,7 @@ static DWORD install_error,path_error;
 static HANDLE endpoint;
 static LONG ambient_reads;
 
-DWORD common_product_path_a(PCWSTR relative,char *out,size_t capacity)
+DWORD compat_product_path_a(PCWSTR relative,char *out,size_t capacity)
 {
     (void)relative;
     if(path_error)return path_error;
