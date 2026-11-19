@@ -1,0 +1,125 @@
+{
+  "baseline": "43ad98e2989c7407d8a087a24306e058732ab7f2",
+  "files": [
+    {
+      "order": 1,
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "ids": [
+        "C0282"
+      ],
+      "result": "S13 Console session routing; keep original C title call. B header redirects to F current-session channel; NTCON owns native SetConsoleTitleA. Moving declaration cannot remove provider ownership, replacing it with worker-local SDK call bypasses the selected console and caption publication.",
+      "original": "OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c base/mvdm/dos/command/cmdpif.c:265-266 matches current title call.",
+      "chain": [
+        "compat/include/conapi.h -> console_title.h macro",
+        "ntvdm-exe/win32/console_client.c:589-617",
+        "common/console/client.c:183",
+        "ntcon-exe/console_frontend.c:292"
+      ],
+      "action": "S13 must separate product Console binding from C call boundary as a group; no standalone title callback/state machine is introduced in S12."
+    },
+    {
+      "order": 2,
+      "path": "src/mvdm-host/dos/dem/demerror.c",
+      "ids": [
+        "C0311",
+        "C0314",
+        "C0315",
+        "C0316"
+      ],
+      "result": "Already eliminated in P14. Current linked provider source is B compat/ntioapi_facade.c in both product graphs. Historical F target in original evidence does not describe current provider.",
+      "action": "Reuse P14 native ABI/error validation; no repeat migration or extra eliminated-ID credit."
+    }
+  ],
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 2,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 72,
+    "openIds": 500,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: no production changes. Existing actual COFF undefined symbols and exact map providers checked in both product graphs.",
+    "runtime": "Not run: classification is not runtime acceptance.",
+    "publishedImagesVerified": [
+      "assets\\release\\VCDEX.DLL",
+      "O:\\WINNT\\system32\\VCDEX.DLL",
+      "assets\\release\\run16.exe",
+      "O:\\WINNT\\system32\\run16.exe",
+      "assets\\release\\ntsrv.exe",
+      "O:\\WINNT\\system32\\ntsrv.exe",
+      "assets\\release\\ntcon.exe",
+      "O:\\WINNT\\system32\\ntcon.exe",
+      "assets\\release\\ntvdm.exe",
+      "O:\\WINNT\\system32\\ntvdm.exe",
+      "assets\\release\\ntvwm.exe",
+      "O:\\WINNT\\system32\\ntvwm.exe",
+      "assets\\release\\ntmon.exe",
+      "O:\\WINNT\\system32\\ntmon.exe",
+      "assets\\release\\WOW32.DLL",
+      "O:\\WINNT\\system32\\WOW32.DLL",
+      "assets\\release\\VDMREDIR.DLL",
+      "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "assets\\release\\nthook32.dll",
+      "O:\\WINNT\\system32\\nthook32.dll",
+      "assets\\release\\nthook64.dll",
+      "O:\\WINNT\\system32\\nthook64.dll"
+    ]
+  },
+  "evidence": [
+    {
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "8c32e5527259e251559e415255ee3296efe5df426bf2d53dcc7daa666f92cdea",
+      "bindings": [
+        "0001:001762f0       _MvdmSetConsoleTitleA@4    005772f0 f   softpc-win32-bindings:console_client.obj",
+        "0001:00175390       _opennt_NtQueryVolumeInformationFile@20 00576390 f   softpc-win32-bindings:ntioapi_facade.obj",
+        "0001:00175220       _opennt_NtOpenSymbolicLinkObject@12 00576220 f   softpc-win32-bindings:ntioapi_facade.obj",
+        "0001:00175360       _opennt_NtQuerySymbolicLinkObject@12 00576360 f   softpc-win32-bindings:ntioapi_facade.obj",
+        "0001:00175330       _opennt_NtQueryObject@20   00576330 f   softpc-win32-bindings:ntioapi_facade.obj"
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\command\\cmdpif.obj",
+      "sha256": "fd201d1a4fac44182d9d5ca5380b36fb352c971773d1db43b042cc98849a55a1"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demerror.obj",
+      "sha256": "6bf68bc9ff9f9cca57c374aa4c81589ebf4e3c99df2a03e89c47eb621f643b2e"
+    },
+    {
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "sha256": "28578c3eefc280bc16d1132c7545e8b56ef39806d17e580d224ccde3150f86c8",
+      "bindings": [
+        "0001:00176820       _MvdmSetConsoleTitleA@4    00577820 f   softpc-win32-bindings:console_client.obj",
+        "0001:001758c0       _opennt_NtQueryVolumeInformationFile@20 005768c0 f   softpc-win32-bindings:ntioapi_facade.obj",
+        "0001:00175750       _opennt_NtOpenSymbolicLinkObject@12 00576750 f   softpc-win32-bindings:ntioapi_facade.obj",
+        "0001:00175890       _opennt_NtQuerySymbolicLinkObject@12 00576890 f   softpc-win32-bindings:ntioapi_facade.obj",
+        "0001:00175860       _opennt_NtQueryObject@20   00576860 f   softpc-win32-bindings:ntioapi_facade.obj"
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\command\\cmdpif.obj",
+      "sha256": "5aed02f1fcc659eab591581a224f10ed7cd8cb533bde1847beffc9d9824e2388"
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\dem\\demerror.obj",
+      "sha256": "41e202f99d5bfa10e42f5470812213d009144f7a799d2219ab02108d2d85e95f"
+    }
+  ],
+  "sourceHashes": {
+    "src/mvdm-host/dos/command/cmdpif.c": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+    "src/mvdm-host/dos/dem/demerror.c": "c7bc55645504700dbf85da5f04b4a90b3fc28f8e28ea0d313446cbfd2ad808e9",
+    "src/compat/include/console_title.h": "52e804a0d51c32230fd87ed8d2cd34dbe82f57a987f77a2ff0d36ea90152aca1",
+    "src/ntvdm-exe/win32/console_client.c": "76bdfa7fbd39e52e01f6eda1f81687691411b019fb5e96fec0f8c16866a28e74",
+    "src/ntcon-exe/console_frontend.c": "3107d2aa1f92d58f4bf5a712a8afedf6c2f4159df7fbf4337d485572bd79d72d",
+    "src/common/console/client.c": "4780d8723a4de3ff5f9a4a2d075b323bc3bd48b80053b2e7f884692fb86aa780",
+    "src/compat/ntioapi_facade.c": "c1575ce20f958ca226e362c614d9419cdbf118049e4006db81049eb1597f7014"
+  }
+}
