@@ -64,8 +64,8 @@ review explicitly includes the B lease callbacks to C SAS.
 
 The owner-directed four-component audit now precedes further relocation.
 The [B implementation ledger](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-compat-implementation-ledger.json)
-covers all49 C implementation files:48 complete body reads and one partial
-shadow-registry review. It does not establish full caller/lifetime validation.
+covers all49 C implementation files with complete body reads, including
+shadow registry. It does not establish full caller/lifetime validation.
 Private service, thread and memory callbacks remain explicit unresolved
 ownership chains; no dependency count or production baseline changes.
 [Coverage and session history](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-four-component-ownership-baseline.json)

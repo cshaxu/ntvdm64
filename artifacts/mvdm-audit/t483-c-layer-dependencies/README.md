@@ -464,8 +464,8 @@ explicit evidence limits. No production source or dependency status changes.
 
 [Compatibility implementation ledger](s14-compat-implementation-ledger.json)
 lists all 49 B C implementation files in path order, with source hashes,
-existing direct-ledger IDs and selected compile graphs. 48 complete bodies
-have been read; shadow registry remains a partial review. These counts do not
+existing direct-ledger IDs and selected compile graphs. All 49 implementation
+bodies have been read, including shadow registry. These counts do not
 claim full caller/lifetime validation or include header audits. Rows distinguish
 native resource mechanisms, the two approved USER exceptions, private service
 callbacks and unresolved lifecycle contracts. No dependency is closed by this

@@ -1,12 +1,12 @@
 {
-  "baseline": "dbd4b5f32cab538a916e74c5ff488b02b58a0aaa",
+  "baseline": "a1d26302d938cc217e6b5550a3526cb20d0cce03",
   "kind": "compat-complete-file-inventory-partial-chain-audit",
   "question": "Classify B implementation ownership without confusing generic state with product orchestration.",
-  "procedure": "Complete body reads except explicit partial row; reuse P28 evidence and existing source-resolved callbacks. Attach unchanged source hashes and eight-graph compile-command selection. Compile selection is not live runtime proof.",
+  "procedure": "Complete implementation body reads; reuse P28 evidence and existing source-resolved callbacks. Attach unchanged source hashes and eight-graph compile-command selection. Compile selection is not live runtime proof.",
   "counts": {
     "files": 49,
-    "complete_bodies_read": 48,
-    "partial_bodies": 1,
+    "complete_bodies_read": 49,
+    "partial_bodies": 0,
     "dependency_ids_closed": 0,
     "mirror_point_delta": 0,
     "mirror_line_delta": 0
@@ -345,10 +345,13 @@
     },
     {
       "file": "src/compat/mvdm_shadow_registry.c",
-      "review": "partial-body-review",
-      "decision": "finish resource/view/commit lifecycle review before disposition",
-      "evidence": "Read globals and initial tracing; enumerated native registry facades and overlay mutation entrypoints. 1723-line implementation not fully read in this batch.",
-      "remaining": "Review initialization, live serial view, mutable overlay, synchronization, atomic persistence and shutdown; do not infer independence from include list.",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "retain B finite registry view and file-overlay implementation; no session migration",
+      "evidence": "Read all 1723 lines: file baseline parser, bounded native HKLM snapshots, DOS-device serial discovery, opaque key handles, overlay/tombstone mutation, named-mutex commit, reload and cleanup. No Run16/NTSRV/NTCON/task-chain provider. F standalone worker initializes and shuts down; C cmdexec/obj.vdm and WOW callers consume B facades.",
+      "state": "Process-global file image, live key list, overlay list and commit mutex. Each open key owns its native snapshot. Writes reload under the mutex, replace the file and restore overlay on reported failure; shutdown releases all records and handle resources.",
+      "boundary": "Retain selected host-section restrictions and unsupported native query behavior. Do not widen registry access or reinterpret named writer mutex as synchronization for arbitrary readers/close/shutdown. F owns startup/stop timing. This ownership finding is not proof that parsing, sizing, concurrency and rollback are bug-free.",
+      "tests": "Existing test/mvdm-host/t461_registry_overlay_fixture.c contains restart, two-process writers and replacement-failure checks. It does not establish same-process concurrent read/close safety; no tests run in this source-only audit.",
+      "remaining": "Reconcile compile remaps and consumer shutdown/quiescence in full C call-chain audit. Do not add core session solely because this provider has state.",
       "sha256": "02039132fdbe1f49f9409ec4241061e5934fd9856ceeb925ba63c3a2c320c55e",
       "lines": 1723,
       "selected_compile_graphs": [
@@ -831,5 +834,5 @@
     }
   ],
   "verification": "No production changes, new compilation or runtime tests. Read-only source and existing build-context evidence.",
-  "follow_up": "Complete shadow registry, reconcile all B cleanup/callback consumers and finish C/F chain migration designs before relocation."
+  "follow_up": "Reconcile all B cleanup/callback consumers and finish C/F chain migration designs before relocation."
 }
