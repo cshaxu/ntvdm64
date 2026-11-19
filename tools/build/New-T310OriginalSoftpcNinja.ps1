@@ -287,7 +287,6 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20
                          'mvdm_softpc_wow_page_domain.c',
                          'mvdm_standalone_worker.c',
                          'ntvdm_dos_observer.c',
-                        'mvdm_softpc_event_thread.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_text_video.c',
                         'mvdm_keyboard_reset.c', 'mvdm_interrupt_export.c',
@@ -1218,6 +1217,9 @@ $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj'
 $graph.Add('build obj/adapter-softpc/mvdm_keyboard_history.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_keyboard_history.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_keyboard_history.obj'
+$graph.Add('build obj/adapter-softpc/mvdm_softpc_event_thread.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_event_thread.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_softpc_event_thread.obj'
 $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
     $object = 'obj/vdmredir-dll/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $redirDllBindingRoot $name)))

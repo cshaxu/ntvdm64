@@ -155,3 +155,5 @@ files, 97 unreviewed. C0204 remains a direct link dependency.
 Config registry was already cleared by P12. Three lifecycle callers remain open.
 Review is 23/116: seven direct-header clears, eleven lifecycle files and five
 source/ABI/composition files; 93 unreviewed, 524/617 open IDs. P18 release unchanged.
+
+P20: [event-thread ownership and native join delivery](s12-p20-event-thread.json).

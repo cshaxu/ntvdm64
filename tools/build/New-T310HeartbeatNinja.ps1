@@ -34,10 +34,10 @@ $sources = @(
     'src/ntvdm-exe/session/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c',
     'src/common/worker-thread/bridge.c',
-    'src/ntvdm-exe/softpc/mvdm_softpc_event_thread.c',
+    'src/compat/mvdm_softpc_event_thread.c',
     'test/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c',
     'test/adapter-mvdm-host-out/thread_start_session_fixture.c',
-    'test/adapter-mvdm-host-out/softpc/softpc_event_thread_shutdown_fixture.c',
+    'test/compat/softpc_event_thread_shutdown_fixture.c',
     'src/lib-win32/thread/thread.c',
     'src/ntvdm-exe/win32/ccpu_thread_exit_compat.c'
 )
@@ -59,6 +59,9 @@ $graph.Add('  command = $in')
 for ($index = 0; $index -lt $sources.Count; ++$index) {
     $object = 'obj/' + $index + '-' + ([IO.Path]::GetFileNameWithoutExtension($sources[$index])) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $sources[$index])))
+    if ($index -eq 3 -or $index -eq 6) {
+        $graph.Add('  cflags = /nologo /TC /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"')
+    }
 }
 $graph.Add('build nt-thread-alert-fixture.exe: link obj/4-nt_thread_alert_compat_fixture.obj')
 $graph.Add('build thread-start-session-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-bridge.obj obj/5-thread_start_session_fixture.obj obj/7-thread.obj obj/8-ccpu_thread_exit_compat.obj')

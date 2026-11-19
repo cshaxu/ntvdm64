@@ -78,7 +78,7 @@
 #include "nt_ega.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
 #include "worker-base/connection.h"
-#include "mvdm_softpc_event_thread.h"
+#include "compat/include/mvdm_softpc_event_thread.h"
 #include "ntvdm-exe/win32/worker_lifecycle.h"
 #include "compat/include/mvdm_keyboard_history.h"
 #include "ntvdm-exe/win32/console_input.h"

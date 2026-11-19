@@ -250,3 +250,11 @@ successor recovery algorithm; it calls this B provider and native NTDLL
 RtlCompareUnicodeString. Its SDK/B input types are checked by
 `test/compat/ntioapi_facade_test.c`; the selected original DEM unit is exercised
 by `test/observation/verify-dem-directory-reset.ps1`.
+
+## Native event-worker join
+
+`mvdm_softpc_event_thread.c` and `include/mvdm_softpc_event_thread.h`
+provide the existing alert-and-join operation using only native host handles.
+The caller retains thread startup and lifetime policy. The native import
+keeps the NtAlertThread ABI from OpenNT public/sdk/inc/ntpsapi.h:792-797;
+no original header, session state or outer component is required by B.

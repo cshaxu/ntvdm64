@@ -171,6 +171,8 @@
 - 直接包含 · C0057 · ntvdm-exe · src/ntvdm-exe/win32/worker_lifecycle.h
 - 直接包含 · C0060 · worker-base · src/worker-base/connection.h
 
+024 P20：全部九项原始头依赖已核查。键盘历史已由P18迁B；native alert/join现迁B，保持函数体、签名和原生NtAlertThread导入，C0038/C0217消除。剩余七项涉及session输入、鼠标队列、显示发布、通道激活及服务退出授权，归S13，不以迁声明掩盖。直接外层头8→7，镜像净变0点、0行，#error/#line不变；累计缩减2点、10行。24/116分类：7直接头清理、12生命周期、5来源ABI、92未审查。522/617开放。产品双架构已构建及双端发布，专项验证状态见P20证据。
+
 ## 025 — src/mvdm-host/softpc.new/host/src/nt_graph.c
 
 - 直接包含 · C0044 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_text_video.h

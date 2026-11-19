@@ -1,0 +1,60 @@
+{
+  "baseline": "6ba3eb18d9a1d046c19cdbb42abed36b7a494866",
+  "question": "Complete file024 nt_event.c direct-header ownership review and move independent native alert/join to B.",
+  "procedure": "Read all direct header consumers and their providers; compare unchanged helper function body/signature; build both cached product architectures, publish eleven images, then run native thread fixtures and A/B graph gate.",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+  "dispositions": {
+    "C0035": "Already eliminated by P18: caller-owned keyboard metadata in B.",
+    "C0038/C0217": "Native alert/join moved F to B; same HANDLE/BOOL -> int contract and body. Native NTDLL declaration matches OpenNT public/sdk/inc/ntpsapi.h:792-797; no C header needed. Caller still decides started state and cleanup timing.",
+    "C0044": "text_video_pause calls console_video_async(FALSE), selects current session publication and E publisher. S13 presentation lifetime; not a platform-only B helper.",
+    "C0050": "mouse_receive submits into current session console mouse; pending/cancel use the same state. S13 original input versus product route boundary.",
+    "C0052": "set_active selects session console_client and changes authenticated channel/input watch state. S13.",
+    "C0054": "read_pc_input limits input removal by mouse queue capacity; reads tagged channel events, normalizes key transitions and stages receipts into C-owned keyboard history. Not plain native console input. S13.",
+    "C0055": "UpdateText snapshots session text and original VGA state, constructs and publishes a frontend frame. S13.",
+    "C0057": "input_terminal checks service/worker/console close handles owned by F lifecycle. S13.",
+    "C0060": "request_console_exit delegates BaseSrv request. Service-authorized lifecycle cannot become B host mechanism. S13."
+  },
+  "changes": [
+    "Move helper/header and independent shutdown fixture to compat owners; keep object identity and native import.",
+    "Use independent B compile flags in product and fixture graphs.",
+    "Remove stale event-alert fixture edge referencing a deleted source; link existing native NTDLL provider."
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10,
+    "scope": "One include replacement; error/line directives and every other mirror byte unchanged."
+  },
+  "progress": {
+    "reviewedFiles": 24,
+    "clearedDirectHeaderFiles": 7,
+    "deferredLifecycleFiles": 12,
+    "deferredSourceAbiCompositionFiles": 5,
+    "unreviewedFiles": 92,
+    "totalFiles": 116,
+    "openIds": 522,
+    "totalIds": 617
+  },
+  "validation": {
+    "build": "x86/x64 cached explicit product targets exit 0",
+    "publication": "11 images, assets/release and O:/winnt/system32 hash verified; no processes stopped",
+    "package": "ee1e57df-29ca-423b-afa4-dd966a9b277e",
+    "tests": "PASS: x86 and x64 native alert/join, suspended-not-started and running-thread exit (six cases); eight production A/B compiler/dependency graphs.",
+    "limitations": "Native thread tests do not constitute a guest Windows shutdown acceptance or Full regression."
+  },
+  "sha256": {
+    "src/compat/mvdm_softpc_event_thread.c": "ae20a46f36733de7c947bb3f2ab8847f8702b04bd069409085c2a5c8c424ab25",
+    "src/compat/include/mvdm_softpc_event_thread.h": "00b29a7b504cd676e22ee8c7dd8f795193e74526d92858a0ccdee248bb429ce0",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c": "4794c19843beb5a3ffbc2aa8356a03108e405c7a35969077a4b17b564a8195df",
+    "src/ntvdm-exe/win32/console_compat.c": "f0c45d8b63ffcebad73724348cf0577c902a9e4efbf0e99ffe84415594439065",
+    "src/ntvdm-exe/win32/console_client.c": "76bdfa7fbd39e52e01f6eda1f81687691411b019fb5e96fec0f8c16866a28e74",
+    "src/ntvdm-exe/win32/console_text.c": "220f7637c3e94e70a2bd7456f445d974ff4a20178d9fc1c963ca8f420f007b39",
+    "src/ntvdm-exe/win32/worker_lifecycle.c": "c82db52b06708386f8a6ad141d5676f2c1be2d2fd6f62c56a9726a09363952b2",
+    "src/worker-base/connection.c": "9b88445427acf5ec599fe07743fc3806839c69c2ec43e119c7f83ecbf324e810",
+    "build/t483-s12-event-thread/x86.log": "b47decb268a1a648ed247990f7321773f6155785e2083391a0c161f435360015",
+    "build/t483-s12-event-thread/x64.log": "057b631391914ca03c06c1b9337d940fc78755ae5831d0583ea2ae0f82adec33",
+    "build/t483-s12-event-thread/test.log": "71488af1afa0b9eeb9e3b1092b7b074831d549179c7c1a01c49c69767c07150f",
+    "build/t483-s12-event-thread/source-review.txt": "351fb1260f32c61fe0a388029268b97e3685502c5ecb3f9c3751da40c693adb9"
+  }
+}

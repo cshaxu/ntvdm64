@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include "mvdm_softpc_event_thread.h"
+#include "compat/include/mvdm_softpc_event_thread.h"
 __declspec(dllimport) LONG NTAPI NtDelayExecution(BOOLEAN, LARGE_INTEGER *);
 
 static DWORD WINAPI waiter(LPVOID unused)

@@ -1,8 +1,9 @@
-#include "mvdm_softpc_event_thread.h"
+#include "include/mvdm_softpc_event_thread.h"
 
 #include <windows.h>
 #include <winternl.h>
-#include <ntpsapi.h>
+/* Native NTDLL ABI; OpenNT public/sdk/inc/ntpsapi.h:792-797. */
+NTSYSAPI NTSTATUS NTAPI NtAlertThread(HANDLE ThreadHandle);
 
 int mvdm_softpc_event_thread_alert_and_join(HANDLE event_thread, BOOL started)
 {
