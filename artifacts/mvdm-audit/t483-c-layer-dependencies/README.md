@@ -175,3 +175,5 @@ P27: [WOW registry callers and VDD declaration boundary](s12-p27-wow-vdd-abi.jso
 P28: [WOW execution ownership and native process simplification](s12-p28-native-process.json).
 
 P29: [Message progress constants and lifecycle ownership](s12-p29-message-progress.json).
+
+P30: [Dispatch, fax registry, hooks and guest registry ownership](s12-p30-wow-registry-dispatch.json).

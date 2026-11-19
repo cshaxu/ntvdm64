@@ -1,0 +1,70 @@
+{
+  "baseline": "e71fb03c0fe35ca8b653f30652c3c138db87f22e",
+  "status": "P30 source-only classification",
+  "files": [
+    {
+      "number": 49,
+      "file": "src/mvdm-host/wow32/wow32.c",
+      "ids": [
+        "C0119",
+        "C0128"
+      ],
+      "actualChain": "W32Dispatch/W32TryCall invoke F borrow scope around original thunk; dispatch filter temporarily selects entry frame for original W32Exception and restores it before unwind. WOWSysErrorBox has native-call handoff; WOWStartupFailed calls service-authorized exit.",
+      "disposition": "S13: preserve original exception policy in C; assess entry/exception/exit binding together at existing F dispatch boundary. Do not move C TD/layout-dependent adapter into B. Registry C0017 already cleared.",
+      "sourceSha256": "680995940632c19876e196e7cd68d55b7775f7226ec86559596d4e25b8a14a99"
+    },
+    {
+      "number": 50,
+      "file": "src/mvdm-host/wow32/wow32fax.c",
+      "ids": [
+        "C0114"
+      ],
+      "actualChain": "Read supported fax driver list; create/set shadow fax configuration. HKEY values stay in native locals, unlike WS32 guest registry thunks. Existing B wow_registry.h provides read-only projection but not complete create/set contract.",
+      "disposition": "S13: split local raw-key access from guest-token conversion through the same parent registry authority. Guest token wrapping is not proven necessary for this file; direct modern Registry substitution would select a different store. No new adapter or mirror change implemented.",
+      "sourceSha256": "a40a38b43d197669262e22fcea7eccd771e20906383941c9f9490658f1961bad"
+    },
+    {
+      "number": 51,
+      "file": "src/mvdm-host/wow32/wowhooks.c",
+      "ids": [
+        "C0110"
+      ],
+      "actualChain": "Hook callbacks capture stack before conversion; finalizers restore recursion/message/Parm16 state, release acquired16/32 keys, restore stack and fThunkDDEmsg. Journal and mouse callbacks also use stack scope.",
+      "disposition": "S13: group with wmdisp32/wcntl32 callback allocation/unwind; keep original hook conversion and normal copyback. Do not remove normal release while leaving outer unwind able to double-release, or move C-layout-aware release wholesale to B.",
+      "sourceSha256": "5cecffbb0af6734cd797c4b8dc849a0fc4d923030964c10e25fe1f7fb999a6b1"
+    },
+    {
+      "number": 52,
+      "file": "src/mvdm-host/wow32/wshell.c",
+      "ids": [
+        "C0114"
+      ],
+      "actualChain": "WS32RegOpenKey/CreateKey store returned HKEY into guest DWORD; close/query/delete retrieve guest-supplied value. WOWRegDeleteKey recursively enumerates/deletes using same handle domain. F provider translates tokens to parent raw keys under lock; DLL explicit-unload invokes shutdown.",
+      "disposition": "S13: retain C conversion/recursive-delete policy; place token representation and lifecycle at explicit product integration boundary without parallel registry store. Token mapping and parent storage must not be conflated; no permanent exception approved.",
+      "sourceSha256": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40"
+    }
+  ],
+  "limits": "Actual source/generator ownership proof; no new runtime evidence, no assertion that every existing adapter is minimal or permanently required. S13 must establish equivalence before lifecycle moves.",
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "progress": {
+    "reviewedFiles": 52,
+    "clearedDirectHeaderFiles": 13,
+    "deferredLifecycleFiles": 33,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 64,
+    "totalFiles": 116,
+    "openIds": 519,
+    "totalIds": 617
+  },
+  "validation": {
+    "build": "Not run: no source/build changes.",
+    "runtime": "Not run; P29 package unchanged.",
+    "publication": "P29 09b1e845-1132-4570-b217-12281f4891ab unchanged.",
+    "documentation": "Passed Verify-DocumentationGovernance.ps1; build/t483-s12-message-progress/p30-docs.log"
+  }
+}

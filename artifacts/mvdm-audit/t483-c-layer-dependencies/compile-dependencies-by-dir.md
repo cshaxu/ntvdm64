@@ -335,17 +335,25 @@
 - 直接包含 · C0119 · wow32-dll · src/wow32-dll/include/wow_task_termination.h
 - 直接包含 · C0128 · wow32-dll · src/wow32-dll/include/wow_user_thunk_scope.h
 
+049 P30: W32Dispatch/W32TryCall invoke F borrow scope around original thunk; dispatch filter temporarily selects entry frame for original W32Exception and restores it before unwind. WOWSysErrorBox has native-call handoff; WOWStartupFailed calls service-authorized exit. S13: preserve original exception policy in C; assess entry/exception/exit binding together at existing F dispatch boundary. Do not move C TD/layout-dependent adapter into B. Registry C0017 already cleared. Mirror delta0/0; see s12-p30-wow-registry-dispatch.json.
+
 ## 050 — src/mvdm-host/wow32/wow32fax.c
 
 - 强制包含 · C0114 · wow32-dll · src/wow32-dll/include/wow_registry_binding.h
+
+050 P30: Read supported fax driver list; create/set shadow fax configuration. HKEY values stay in native locals, unlike WS32 guest registry thunks. Existing B wow_registry.h provides read-only projection but not complete create/set contract. S13: split local raw-key access from guest-token conversion through the same parent registry authority. Guest token wrapping is not proven necessary for this file; direct modern Registry substitution would select a different store. No new adapter or mirror change implemented. Mirror delta0/0; see s12-p30-wow-registry-dispatch.json.
 
 ## 051 — src/mvdm-host/wow32/wowhooks.c
 
 - 直接包含 · C0110 · wow32-dll · src/wow32-dll/include/wow_message_lifetime.h
 
+051 P30: Hook callbacks capture stack before conversion; finalizers restore recursion/message/Parm16 state, release acquired16/32 keys, restore stack and fThunkDDEmsg. Journal and mouse callbacks also use stack scope. S13: group with wmdisp32/wcntl32 callback allocation/unwind; keep original hook conversion and normal copyback. Do not remove normal release while leaving outer unwind able to double-release, or move C-layout-aware release wholesale to B. Mirror delta0/0; see s12-p30-wow-registry-dispatch.json.
+
 ## 052 — src/mvdm-host/wow32/wshell.c
 
 - 强制包含 · C0114 · wow32-dll · src/wow32-dll/include/wow_registry_binding.h
+
+052 P30: WS32RegOpenKey/CreateKey store returned HKEY into guest DWORD; close/query/delete retrieve guest-supplied value. WOWRegDeleteKey recursively enumerates/deletes using same handle domain. F provider translates tokens to parent raw keys under lock; DLL explicit-unload invokes shutdown. S13: retain C conversion/recursive-delete policy; place token representation and lifecycle at explicit product integration boundary without parallel registry store. Token mapping and parent storage must not be conflated; no permanent exception approved. Mirror delta0/0; see s12-p30-wow-registry-dispatch.json.
 
 ## 053 — src/mvdm-host/wow32/wuclip.c
 

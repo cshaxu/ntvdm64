@@ -70,6 +70,8 @@ P28 removes the redundant F CreateProcess wrapper used by original wkman.c; no m
 
 P29 classifies file046 lifecycle ownership and clears files047-048 F header dependencies using B shared progress constants. [Evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p29-message-progress.json) records both cached builds, dual11-image publication, identical normalized images, three focused suites and a corrected fixture conditional. Review48/116:13 header clears,29 lifecycle,6 source/ABI,68 unreviewed;519/617 open IDs. Mirror delta0/0; cumulative reduction2 points/10 lines. S12 remains active.
 
+P30 classifies files049-052 dispatch, fax registry, hook unwind and guest registry for S13. [Evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p30-wow-registry-dispatch.json) distinguishes local fax HKEYs from guest-visible WS32 tokens, and original policy from product lifecycle. No source/build changes or new runtime claim. Review52/116:13 header clears,33 lifecycle,6 source/ABI,64 unreviewed;519/617 open. Mirror delta0/0; cumulative reduction2 points/10 lines. P29 publication remains current. Only S12 active.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.
