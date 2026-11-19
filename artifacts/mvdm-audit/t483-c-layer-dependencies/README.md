@@ -291,3 +291,5 @@ P85: [PIF directory reconciliation](s12-p85-pif-directory-reconciliation.json); 
 P86: [PIF path ownership delivery](s12-p86-pif-path-owner.json); C0221 moved unchanged to B, file33 complete; cached builds, dual publication, path/DOS tests and A/B gates passed.
 
 P87: [ROM resource ownership delivery](s12-p87-rom-resource-owner.json); C0222 moved unchanged to B, file34 complete; six published ROM resources match immutable bytes, builds and focused gates passed.
+
+P88: [Thread callback ABI](s12-p88-thread-callback-abi.json); files35-37 reviewed; corrected nt_thred actual callback selection without mirror edits; lifecycle ownership remains S13.

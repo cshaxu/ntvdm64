@@ -1,0 +1,298 @@
+{
+  "baseline": "ccd6f00ee6e1e118083ffce563dc5f65f85d4784",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "order": 35,
+      "ids": [
+        "C0158",
+        "C0308",
+        "C0310",
+        "C0313"
+      ],
+      "decision": "C0158 remains D worker/session thread orchestration, S13 paired creation/finish. Original void(PFDC_PARMS) callback cannot be cast to DWORD WINAPI. Three native I/O providers already B since P14; no new elimination."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "order": 36,
+      "ids": [
+        "C0307",
+        "C0308"
+      ],
+      "decision": "Original OpenBeepDevice and LazyBeep use native I/O facade already B. Binding review does not prove audible output or modern Beep driver support."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "order": 37,
+      "ids": [
+        "C0160",
+        "C0161",
+        "C0259"
+      ],
+      "decision": "Fix build selector: actual ThreadStartupRoutine callback is cdecl, while public host_CreateThread and its supplied callback are WINAPI. Current creation edge now uses C0157 instead of C0160. Retain original CPU creation/suspend/resume and session-finish-before-CPU-stack-release ordering. D/F lifecycle dependencies remain for S13; no elimination credit."
+    }
+  ],
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_rflop.obj",
+      "sha256": "4549e444f2869eb37887b53846b923851b4e1fbd7dabdc6e57114d695c0da69e",
+      "bindings": {
+        "_opennt_support_current_teb@0": [
+          "0001:00173a70       _opennt_support_current_teb@0 00574a70 f   softpc-win32-bindings:opennt_support_rtl.obj"
+        ],
+        "_opennt_NtOpenFile@24": [
+          "0001:00175070       _opennt_NtOpenFile@24      00576070 f   softpc-win32-bindings:ntioapi_facade.obj"
+        ],
+        "_opennt_NtQueryInformationFile@20": [
+          "0001:00175190       _opennt_NtQueryInformationFile@20 00576190 f   softpc-win32-bindings:ntioapi_facade.obj"
+        ],
+        "_opennt_NtDeviceIoControlFile@40": [
+          "0001:00174f70       _opennt_NtDeviceIoControlFile@40 00575f70 f   softpc-win32-bindings:ntioapi_facade.obj"
+        ],
+        "_opennt_create_void_cdecl_parameter_thread": [
+          "0001:0017ed50       _opennt_create_void_cdecl_parameter_thread 0057fd50 f   common-worker-thread:bridge.obj"
+        ]
+      }
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_sound.obj",
+      "sha256": "59d5b19769ee0878cecc5b4d49df891bb583d6948eeeb0dee08dd7c619b3d0c1",
+      "bindings": {
+        "_opennt_NtCreateFile@44": [
+          "0001:00174ef0       _opennt_NtCreateFile@44    00575ef0 f   softpc-win32-bindings:ntioapi_facade.obj"
+        ],
+        "_opennt_NtDeviceIoControlFile@40": [
+          "0001:00174f70       _opennt_NtDeviceIoControlFile@40 00575f70 f   softpc-win32-bindings:ntioapi_facade.obj"
+        ]
+      }
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_thred.obj",
+      "sha256": "9f58a44dacfc4fed973f782332803337ab3d2943c3ae309887981543c2d8eb77",
+      "bindings": {
+        "_opennt_create_cdecl_thread_named": [
+          "0001:0017ed00       _opennt_create_cdecl_thread_named 0057fd00 f   common-worker-thread:bridge.obj"
+        ],
+        "_opennt_exit_thread@4": [
+          "0001:0017ee30       _opennt_exit_thread@4      0057fe30 f   common-worker-thread:bridge.obj"
+        ],
+        "_opennt_ccpu_exit_thread": [
+          "0001:0018f530       _opennt_ccpu_exit_thread   00590530 f   softpc-win32-bindings:ccpu_thread_exit_compat.obj"
+        ]
+      }
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_rflop.obj",
+      "sha256": "1e5d371409204028d13c1e66e009c23a5a68edc3cce18d51397c084a0359b1b5",
+      "bindings": {
+        "_opennt_support_current_teb@0": [
+          "0001:00173a70       _opennt_support_current_teb@0 00574a70 f   softpc-win32-bindings:opennt_support_rtl.obj"
+        ],
+        "_opennt_NtOpenFile@24": [
+          "0001:00175070       _opennt_NtOpenFile@24      00576070 f   softpc-win32-bindings:ntioapi_facade.obj"
+        ],
+        "_opennt_NtQueryInformationFile@20": [
+          "0001:00175190       _opennt_NtQueryInformationFile@20 00576190 f   softpc-win32-bindings:ntioapi_facade.obj"
+        ],
+        "_opennt_NtDeviceIoControlFile@40": [
+          "0001:00174f70       _opennt_NtDeviceIoControlFile@40 00575f70 f   softpc-win32-bindings:ntioapi_facade.obj"
+        ],
+        "_opennt_create_void_cdecl_parameter_thread": [
+          "0001:0017ed50       _opennt_create_void_cdecl_parameter_thread 0057fd50 f   common-worker-thread:bridge.obj"
+        ]
+      }
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_sound.obj",
+      "sha256": "c04e92dfd53548b9870e0db811e9a824f7fc830ca13ac867b5840d9fb2810767",
+      "bindings": {
+        "_opennt_NtCreateFile@44": [
+          "0001:00174ef0       _opennt_NtCreateFile@44    00575ef0 f   softpc-win32-bindings:ntioapi_facade.obj"
+        ],
+        "_opennt_NtDeviceIoControlFile@40": [
+          "0001:00174f70       _opennt_NtDeviceIoControlFile@40 00575f70 f   softpc-win32-bindings:ntioapi_facade.obj"
+        ]
+      }
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_thred.obj",
+      "sha256": "d7e08e03a19e810f8fb0d421ec4eb80407ab901a9c5eb68ae16ab5cb8f2bbd2b",
+      "bindings": {
+        "_opennt_create_cdecl_thread_named": [
+          "0001:0017ed00       _opennt_create_cdecl_thread_named 0057fd00 f   common-worker-thread:bridge.obj"
+        ],
+        "_opennt_exit_thread@4": [
+          "0001:0017ee30       _opennt_exit_thread@4      0057fe30 f   common-worker-thread:bridge.obj"
+        ],
+        "_opennt_ccpu_exit_thread": [
+          "0001:0018f530       _opennt_ccpu_exit_thread   00590530 f   softpc-win32-bindings:ccpu_thread_exit_compat.obj"
+        ]
+      }
+    }
+  ],
+  "change": "Remove OPENNT_HOST_CREATE_THREAD_ABI only for nt_thred.c; retain it for ErrorDialogBoxThread. Correct misleading comment. No original source changes.",
+  "abiEvidence": "Source DWORD ThreadStartupRoutine(PVOID), product COFF/map _ThreadStartupRoutine, no /Gz, versus WINAPI LPTHREAD_START_ROUTINE selected by old graph. This proves ABI mismatch, not attribution of a reported user crash.",
+  "verification": {
+    "cachedFullBuild": "build/t483-s12-thread-abi/build.log",
+    "targeted": "build/t483-s12-thread-abi/targeted-final.log",
+    "runtime": "build/t483-s12-thread-abi/runtime.log",
+    "libraryGate": "build/t483-s12-thread-abi/boundary.log",
+    "targetedPass": [
+      "CCPU normal/nonzero explicit exit",
+      "CCPU ordinary return:10000000 iterations,640ms",
+      "lib-thread unit"
+    ],
+    "runtimePass": [
+      "direct-mem",
+      "command-c",
+      "command-c-mem"
+    ],
+    "initialAttempt": "deliver.exit=1: throughput override 100000 iterations returned6 (combined exit/AX/nonzero-time assertion). Restored default10000000; all assertions pass. Initial run lacks field diagnostics, so zero elapsed is plausible rather than measured. Initial failure retained in deliver.log/err; not claimed passed.",
+    "normalizedImageIdentity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": false,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "limitation": "Focused tests only; no new Full-suite, physical floppy or audible-sound acceptance claim."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "843cb8d8-4bb3-4d88-af5e-d98b34b887f7",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "publicationHashes": [
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "d1355ffdea6a9213f452642d937578331ad6fd4928770f5ce8bf6c08c432ab50"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+      "sha256": "d1355ffdea6a9213f452642d937578331ad6fd4928770f5ce8bf6c08c432ab50"
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "9874d86cccbda9de66eb7acf26ba5411e7b0d1499c467ddc8e9cce760e8a2a41"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\run16.exe",
+      "sha256": "9874d86cccbda9de66eb7acf26ba5411e7b0d1499c467ddc8e9cce760e8a2a41"
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "866b9681369bd113cb038963e8a94160e6ec6b04fb1343b67f97cc914e77b789"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntsrv.exe",
+      "sha256": "866b9681369bd113cb038963e8a94160e6ec6b04fb1343b67f97cc914e77b789"
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "c9497c09e10f1202136d0c818b7c7fa45d82dcc70f4553fc693c5c7f0e7da670"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntcon.exe",
+      "sha256": "c9497c09e10f1202136d0c818b7c7fa45d82dcc70f4553fc693c5c7f0e7da670"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "00a4d026ff724d9fee91fad4004d02094cd9b842fa21cfd04a9aa34d93d53873"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvdm.exe",
+      "sha256": "00a4d026ff724d9fee91fad4004d02094cd9b842fa21cfd04a9aa34d93d53873"
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "6d567496ecd25e4619163ec585aacf2371ff004012405b0747788c3e39ef0e6f"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvwm.exe",
+      "sha256": "6d567496ecd25e4619163ec585aacf2371ff004012405b0747788c3e39ef0e6f"
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "d52042c4ba5b7fad4400b779006c3c57b50abf3c40289a025b4c9edb7529179b"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntmon.exe",
+      "sha256": "d52042c4ba5b7fad4400b779006c3c57b50abf3c40289a025b4c9edb7529179b"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "03d1c712eea67519716f02df9e0ac083a97f4ee6b8be49bacdbd31c0ae5cac9e"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\WOW32.DLL",
+      "sha256": "03d1c712eea67519716f02df9e0ac083a97f4ee6b8be49bacdbd31c0ae5cac9e"
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "167a60fd5bcfc15a51b00a479db665b48678e33dbe8da030a530b4e75e73d7b1"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "sha256": "167a60fd5bcfc15a51b00a479db665b48678e33dbe8da030a530b4e75e73d7b1"
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "ca21d35a67b65749ee0383258d69dcb8b1e7e22e40bbe45c40ade2385afb46be"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook32.dll",
+      "sha256": "ca21d35a67b65749ee0383258d69dcb8b1e7e22e40bbe45c40ade2385afb46be"
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "702d9996332634a2a49d605b9b37d514c926e03c0836ef9ca65f2d5d4ddaf97d"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook64.dll",
+      "sha256": "702d9996332634a2a49d605b9b37d514c926e03c0836ef9ca65f2d5d4ddaf97d"
+    }
+  ],
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 37,
+    "linkOnlyTotal": 74,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 494,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 74
+    }
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_rflop.c": "71408ce0c925397b2e2e0ba6176118390be2a7556a53e29e504379537ecb9b07",
+    "src/mvdm-host/softpc.new/host/src/nt_sound.c": "4f34340926f9fb942befeb2c8051765e8cda7750e3f514a8960f4d0f900ab0ec",
+    "src/mvdm-host/softpc.new/host/src/nt_thred.c": "fe4b7fcd886663109de83b204ad89cd57b5630d2ccd1c13933babbe4aef9e381",
+    "src/common/worker-thread/bridge.c": "ad58270fdeb72b37a44ffd951a8a4a6d0c7c176da4ed7d476b32ab1e5316db87",
+    "src/lib-win32/thread/thread.c": "0add0b0b7a480902c1ae7f3863799363d0cc2c5cf03db57820c4597f6844960c",
+    "src/ntvdm-exe/win32/ccpu_thread_exit_compat.c": "74fe8c46b469386d6288438d81f0795d95d6f64e16e64a859be53a85a5975dac",
+    "src/mvdm-host/softpc.new/base/ccpu386/ntthread.c": "8dd53012bfac7fc25b818ce78017766420fec650772fbdc7c68825b87c82e188",
+    "src/compat/include/thread_start_compat.h": "0680a691fc8bf4145c7747ce9ad2d93d5d8d8c8f4c144c4631a84312147690be",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "cd3d3976ead128668bda8be4ae110d16eeec5236f1b55b7b51a261cfe9e89a5d"
+  }
+}

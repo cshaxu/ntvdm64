@@ -1118,9 +1118,9 @@ $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $
         # The timer uses the selected original NT service declarations even
         # though it does not include <ntexapi.h> directly.
         $ntexapiSubset = NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/ntexapi.h')
-        # Both entry points already use WINAPI; a cdecl thunk double-pops
-        # their callback argument on x86 when the thread routine returns.
-        $threadAbiFlag = if ($name -in @('nt_thred.c', 'nt_error.c')) { ' /DOPENNT_HOST_CREATE_THREAD_ABI' } else { '' }
+        # Select the actual callback ABI, not host_CreateThread's public ABI.
+        # ThreadStartupRoutine is cdecl; ErrorDialogBoxThread is WINAPI.
+        $threadAbiFlag = if ($name -eq 'nt_error.c') { ' /DOPENNT_HOST_CREATE_THREAD_ABI' } else { '' }
         # Preserve original CPU release, but finish WOW/session retirement
         # before its simulation stack disappears. Never rename ntthread.c's
         # definition or other callers by making this a global compiler flag.

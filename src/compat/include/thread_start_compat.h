@@ -26,10 +26,9 @@ HANDLE opennt_create_cdecl_thread_named(
     LPDWORD thread_id,
     const char *source_name);
 
-/* `nt_thred.c::host_CreateThread` already has the public Win32
- * LPTHREAD_START_ROUTINE contract.  It must not cross the cdecl-only bridge
- * used by the historical timer and redirector callbacks: on x86 that would
- * make both caller and callee pop the one callback argument. */
+/* Select this bridge only for an actual WINAPI callback. The public
+ * host_CreateThread API accepts WINAPI, but its internal ThreadStartupRoutine
+ * is cdecl and must use the cdecl bridge before calling that public callback. */
 HANDLE opennt_create_winapi_thread_named(
     LPSECURITY_ATTRIBUTES attributes,
     SIZE_T stack_bytes,
