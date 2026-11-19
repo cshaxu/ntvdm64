@@ -496,3 +496,7 @@ does not prove a complete migration design or dependency elimination.
 [CPU/execution ownership](s14-cpu-execution-provider-ownership.md): six additional
 provider bodies and seven symbol records reviewed. Combined coverage is57/79
 provider files and267/345 symbol records; direct statuses remain unchanged.
+
+[Device/presentation ownership](s14-device-presentation-provider-ownership.md)
+adds eight complete provider bodies/twenty symbol rows. Combined coverage
+is65/79 providers and287/345 symbol rows; no dependencies eliminated.

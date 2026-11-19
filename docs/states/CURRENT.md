@@ -82,7 +82,8 @@ maps all418 open records:345 symbols from79 provider files,60 headers,
 12 include roots and1 image import. The WOW record covers51 of those79 files
 and260 symbol records, plus8 associated bodies; no row is marked eliminated.
 [CPU/execution review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-cpu-execution-provider-ownership.md)
-adds six providers/seven symbol records: combined57/79 files and267/345
+and [device/presentation review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-device-presentation-provider-ownership.md)
+add14 providers/27 symbol records: combined65/79 files and287/345
 symbol records. C descriptor/IRQ carriers are identified; initialization and
 thread-exit orchestration still need lifetime proof. No production changes.
 S14 P19 removes the F guest-location source/private header and three-operation
