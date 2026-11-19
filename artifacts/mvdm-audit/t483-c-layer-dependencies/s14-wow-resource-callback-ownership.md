@@ -115,3 +115,61 @@ same directory checks that a live owned window makes unbind fail with
 ERROR_BUSY while retaining the exact task and binding. Keep these negative
 requirements after splitting the entrypoints. No production change, test run,
 new exception, or dependency elimination follows from this source review.
+
+## Complete lifecycle body review
+
+Against P33 `f449bde29`, finish reading all of
+`src/wow32-dll/source/wow_user_task_lifecycle.c`, including its generated
+native wrapper definitions, initialization rollback, message loop, launch
+notification and terminal-window destruction. Together with the preceding
+reviews this covers ten complete implementation bodies (the original seven,
+two NTVDM runtime/binding files, and this lifecycle file). It does not mean
+all transitively called providers have been audited.
+
+| Responsibility | Concrete implementation/state | Required disposition |
+| --- | --- | --- |
+| Product start notification | `notify_start`, `launch_request`, `start_pending`, `start_attempt` | Keep product request identity and RPC transaction outside B/C. Preserve the current call-frame attempt identity across reentrant notification, without retaining a task pointer across RPC. The exact carrier change must not create duplicate task identity/state. |
+| Original task execution | `xxxInitTask`, `xxxSleepTask`, `xxxUserYield`, `xxxDirectedYield`, `DestroyTask`; private TDB/process/queue fields | C owns these algorithms and their original state. Host readiness and callback adapters must be traced to finite original owner seams, not moved as an arbitrary 1,800-line C insertion. |
+| Data lock and thread binding | `wow_user_runtime_enter/leave/current/set_context` | Independent mechanics are B candidates; separate retirement as described above, and preserve one authoritative binding. |
+| Native USER call wrappers | HWND conversion, result roots, native call begin/end, publication, destruction without publication | Mixed C representation/execution contract and native USER operation. They are not ready for whole-file B migration. Keep the single shared handoff implementation; adding one callback bridge per wrapper would preserve the outward dependency. |
+| Task/module resource cleanup | `wow_user_task_lifecycle_exit`, original `_WOWCleanup` | Resource cleanup does not retire THREADINFO. Task-zero module cleanup must not destroy the task's native windows. |
+| Native-thread retirement | `retire_task`, terminal window destruction, hook/input withdrawal, `DestroyTask` | Preserve destruction while guest resource callbacks are still usable, followed by original cleanup and final thread-carrier release. Retirement refusal retains ownership; product thread completion remains outer. |
+
+### Start-chain evidence
+
+`mvdm-host/wow32/wkman.c::W32Thread` retries `pfnInitTask` up to its existing
+bounded loop before destroying a failed task. The selected
+`wow_user_registration_bridge.c::registered_init_task` resumes an already
+initialized task's pending view publication and notification instead of
+calling `xxxInitTask` again. Its notification callback is
+`common/base_srv/base_rpc_client_launch.c::OpenNtBaseClientWowStarted`, which
+uses the authenticated execution connection and `Client_WowStarted` RPC.
+This is concrete product-service knowledge, not an independent compatibility
+operation or a guessed meaning of the callback name.
+
+### Wait, callback and teardown evidence
+
+`wait_for_task_or_message` uses native queue/event waits, then updates original
+`ptdb->nEvents` and shared `nEvents` under the existing runtime lock. It
+distinguishes native sent-message dispatch from guest execution ownership;
+an input-plan transaction defers receiving until original InitTask releases
+that plan. `client_context` exchanges debugger task identity and active WOW
+page-domain client state. Moving only the native wait into B cannot transfer
+these C responsibilities.
+
+The native wrappers deliberately distinguish ordinary return publication
+from DestroyWindow's no-publication return. Terminal cleanup first marks and
+prepares owned windows under the lock, retains each window's storage, drops
+the lock for native destruction/reentrant calls, and then reconciles surviving
+relations and retired classes. Replacing this with generic resource freeing
+would lose the required callback lifetime.
+
+### Verification requirements for the eventual split
+
+Preserve existing runtime/lifecycle fixtures and add assertions at changed
+boundaries only: failed start notification does not rerun InitTask; module
+cleanup leaves the task bound; retirement failure retains exact owner state;
+native callouts do not hold the data lock; callback return reacquires the
+original execution owner; destroyed HWNDs are not republished. Reuse existing
+Win16 lifecycle/dialog acceptance for final code. No test was run in this
+research checkpoint, and no mirror-increase candidate is approved by it.
