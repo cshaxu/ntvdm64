@@ -64,7 +64,7 @@ Subsequent delivered batches are recorded in the dependency tracker:
 - [P20](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p20-event-thread.json) moves native event join into B; both builds, six native thread cases, eight A/B graphs and dual publication passed.
 - [P22](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p22-system-loader.json) clears the NTIO directory header; both builds and dual publication passed. All eleven images match P20 after masking only package GUID and PE timestamps; repeated runtime tests were waived. C0039 remains open for cmdmisc.
 
-P24-P27 delivered native ordinal, GDI alias and VDD ABI boundary cleanup, plus lifecycle classifications. Detailed evidence is retained in the [C tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md). P27 published package ae719fb8-287b-4f67-b3cd-dd4ecae4ab83; both builds and applicable checks passed. Review reached43/116 with519/617 open IDs.
+P24-P27 delivered native ordinal, GDI alias and VDD ABI boundary cleanup, plus lifecycle classifications. Detailed evidence is retained in the [C tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md). P27 delivery and its superseded counts remain in those receipts.
 
 P28-P31 are delivered and indexed in the [C dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md): P28 removed the redundant CreateProcess wrapper, P29 moved shared message progress constants into B, and P30/P31 classified lifecycle and page-domain consumers. P29 package09b1e845-1132-4570-b217-12281f4891ab is the published product baseline. Review reached58/116,13 header clears,39 lifecycle,6 source/ABI;519/617 IDs open. Source-only classifications do not claim runtime proof.
 
@@ -104,7 +104,9 @@ P46: [rare EDIT operations](../../artifacts/mvdm-audit/t483-c-layer-dependencies
 
 P47: [DDE declaration delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p47-dde-header.json).
 
-P48: [ListBox entry ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p48-list-entry-ownership.json). Review90/116:17 clears,59 lifecycle,14 source/ABI,26 unreviewed;502/617 open. Source classification only; P47 release22 hashes reverified. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P48: [ListBox entry ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p48-list-entry-ownership.json).
+
+P49: [ListBox item ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p49-list-items-ownership.json). Review91/116:17 clears,60 lifecycle,14 source/ABI,25 unreviewed;502/617 open. Source classification only; P47 release22 hashes reverified. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

@@ -593,6 +593,8 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+091 P49: Original item/scroll/sort/encoding policy remains C. Five actual outer symbols are shared metrics/message/native-return boundaries for S13; C0064 composition remains open. Mirror delta0/0; see s12-p49-list-items-ownership.json.
+
 ## 092 — src/non-mvdm/windows/core/ntuser/client/lboxctl2.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h

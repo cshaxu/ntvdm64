@@ -1,0 +1,159 @@
+{
+  "baseline": "0cfd6349fd2d965ee0c7a0cab802017bf47fcb38",
+  "status": "P49 source-only ListBox item operation ownership classification",
+  "files": [
+    {
+      "number": 91,
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl1.c",
+      "sha256": "47681bf76054cc55de0533d29a012d344d96efce7aaa60199857a166597b4b73",
+      "compilerObject": "obj/opennt-user/control-body-lboxctl1.obj",
+      "objectSha256": "289363b2888d3463aaa81408ad6cf40977d19549dbebbfd3feaa15d340549c3f",
+      "dependencyRecord": "obj/opennt-user/control-body-lboxctl1.obj: #deps 66, deps mtime 8167732548415340 (VALID)",
+      "header": "C0064",
+      "coffUndefined": [
+        "__imp__SetLastError@4",
+        "__imp__HeapAlloc@12",
+        "__imp__HeapReAlloc@16",
+        "__imp__HeapFree@12",
+        "_GetProcessHeap@0",
+        "__imp__CharUpperBuffW@8",
+        "__imp__CharLowerBuffW@8",
+        "__imp__IsCharAlphaNumericW@4",
+        "__imp__CompareStringW@24",
+        "_RtlUnicodeToMultiByteSize@12",
+        "_IsVisible@4",
+        "_WCSToMBEx@24",
+        "_wow_window_client_send_message@20",
+        "_xxxCBInternalUpdateEditWindow@8",
+        "_InitHStrings@4",
+        "_LBSetCItemFullMax@4",
+        "_xxxLBoxDoDeleteItems@4",
+        "_xxxLBoxCtlHScroll@12",
+        "_xxxLBInvalidateRect@12",
+        "_xxxCheckRedraw@12",
+        "_GetLpszItem@8",
+        "_xxxInsureVisible@12",
+        "_xxxNewITop@8",
+        "_xxxNotifyOwner@8",
+        "_xxxLBSetRedraw@8",
+        "_LBGetItemRect@12",
+        "_wow_native_SetScrollInfo@16",
+        "_wow_native_InvalidateRect@12",
+        "_wow_native_SendMessageW@16",
+        "@__security_check_cookie@4",
+        "_memcpy",
+        "_memmove",
+        "_memset",
+        "_wow_edit_current",
+        "___security_cookie",
+        "__tls_array",
+        "__tls_index"
+      ],
+      "verifiedSymbols": [
+        {
+          "id": "C0392",
+          "symbol": "wow_edit_current",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_edit_entry_bindings.c"
+        },
+        {
+          "id": "C0546",
+          "symbol": "wow_native_InvalidateRect",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0557",
+          "symbol": "wow_native_SendMessageW",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0568",
+          "symbol": "wow_native_SetScrollInfo",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_user_task_lifecycle.c"
+        },
+        {
+          "id": "C0590",
+          "symbol": "wow_window_client_send_message",
+          "status": "open",
+          "target": "src/wow32-dll/source/wow_window_client_access_bindings.c"
+        }
+      ],
+      "mapProviders": [
+        "0000:0000002c       __tls_array                0000002c     <absolute>",
+        "0001:0003df20       _xxxCBInternalUpdateEditWindow@8 1003ef20 f   control-body-combo.obj",
+        "0001:0003f3d0       _GetLpszItem@8             100403d0 f   control-body-lb1.obj",
+        "0001:00041870       _LBGetItemRect@12          10042870 f   control-body-lboxctl2.obj",
+        "0001:000420e0       _xxxCheckRedraw@12         100430e0 f   control-body-lboxctl2.obj",
+        "0001:000423a0       _xxxInsureVisible@12       100433a0 f   control-body-lboxctl2.obj",
+        "0001:00042a40       _xxxLBInvalidateRect@12    10043a40 f   control-body-lboxctl2.obj",
+        "0001:00043160       _xxxLBSetRedraw@8          10044160 f   control-body-lboxctl2.obj",
+        "0001:00043640       _xxxLBoxCtlHScroll@12      10044640 f   control-body-lboxctl2.obj",
+        "0001:00044150       _xxxNewITop@8              10045150 f   control-body-lboxctl2.obj",
+        "0001:000442a0       _xxxNotifyOwner@8          100452a0 f   control-body-lboxctl2.obj",
+        "0001:00045da0       _InitHStrings@4            10046da0 f   control-body-lboxrare.obj",
+        "0001:00045ec0       _LBSetCItemFullMax@4       10046ec0 f   control-body-lboxrare.obj",
+        "0001:00046880       _xxxLBoxDoDeleteItems@4    10047880 f   control-body-lboxrare.obj",
+        "0001:0004a3c0       _IsVisible@4               1004b3c0 f   control-view-winmgr.obj",
+        "0001:000634a0       _wow_native_InvalidateRect@12 100644a0 f   wow_user_task_lifecycle.obj",
+        "0001:00064030       _wow_native_SendMessageW@16 10065030 f   wow_user_task_lifecycle.obj",
+        "0001:00064c60       _wow_native_SetScrollInfo@16 10065c60 f   wow_user_task_lifecycle.obj",
+        "0001:0006c250       _wow_window_client_send_message@20 1006d250 f   wow_window_client_access_bindings.obj",
+        "0001:000747f0       _WCSToMBEx@24              100757f0 f   chartran.obj",
+        "0001:00075b07       _GetProcessHeap@0          10076b07 f   kernel32:KERNEL32.dll",
+        "0001:00075b49       @__security_check_cookie@4 10076b49 f   LIBCMT:secchk.obj",
+        "0001:00076e00       _memcpy                    10077e00 f   libvcruntime:memcpy.obj",
+        "0001:00076e00       _memmove                   10077e00 f   libvcruntime:memmove.obj",
+        "0001:00077380       _memset                    10078380 f   libvcruntime:memset.obj",
+        "0001:0008cb5f       _RtlUnicodeToMultiByteSize@12 1008db5f f   legacy-wow-ntdll:NTDLL.DLL",
+        "0002:00000400       __imp__CompareStringW@24   1008e400     kernel32:KERNEL32.dll",
+        "0002:00000580       __imp__SetLastError@4      1008e580     kernel32:KERNEL32.dll",
+        "0002:000005c8       __imp__HeapFree@12         1008e5c8     kernel32:KERNEL32.dll",
+        "0002:000005cc       __imp__HeapReAlloc@16      1008e5cc     kernel32:KERNEL32.dll",
+        "0002:000005d0       __imp__HeapAlloc@12        1008e5d0     kernel32:KERNEL32.dll",
+        "0002:000009a4       __imp__IsCharAlphaNumericW@4 1008e9a4     user32:USER32.dll",
+        "0002:000009e0       __imp__CharLowerBuffW@8    1008e9e0     user32:USER32.dll",
+        "0002:000009e4       __imp__CharUpperBuffW@8    1008e9e4     user32:USER32.dll",
+        "0002:0000a92c       _wow_edit_current          1009892c     wow_edit_entry_bindings.obj",
+        "0003:000038c0       ___security_cookie         100a38c0     LIBCMT:gs_cookie.obj",
+        "0003:000052a4       __tls_index                100a52a4     LIBCMT:tlssup.obj"
+      ],
+      "conclusion": "Original scrollbar-cache policy, item/string/selection storage, sort, insertion, deletion, reset and no-data count stay C. Five direct outer symbols belong to shared invocation metrics and message/native-return boundary S13; shared mixed precomp remains open for original ABI composition. No in-place SDK-only provider identified."
+    }
+  ],
+  "mechanisms": {
+    "scroll": "xxxSetLBScrollParms computes original horizontal/vertical page/range and uses its original no-change cache. It calls mapped SetScrollInfo, then stores the actual return. Native wrapper translates HWND and enters/exits the same native-call boundary in finally. Keep cache algorithm C; inspect boundary as one group, not a second scroll implementation.",
+    "items": "Original GrowMem/xxxLBInsertItem/LBCalcAllocNeeded own item data, string offsets, selection and variable-height storage. Actual HeapAlloc/ReAlloc/Free and locale APIs are native imports. No F allocator or sorting engine is required.",
+    "encoding": "WCSToMBEx resolves C chartran.obj; RtlUnicodeToMultiByteSize resolves NTDLL. Do not replace original conversion or introduce a duplicate encoding path.",
+    "callbacks": "Original insertion sends WM_MEASUREITEM after incrementing cMac, then stores returned itemHeight. Sorting sends WM_COMPAREITEM; deletion notifies WM_DELETEITEM. Selected SendMessageW uses current native-call scope and result-publication hook. Original wmtbl32/wmdisp32 already select and implement WM32MeasureItem/DeleteItem/CompareItem; WM32MeasureItem handles MIFLAG_FLAT and updates returned fields. This is static chain evidence, not proof of arbitrary callback mutation safety.",
+    "internalDispatch": "Single-item deletion and zero SetCount call SendMessageWorker for LB_RESETCONTENT. F wow_window_client_send_message retains exact PWND in existing borrow scope before converting to HWND and calling native A/W. A numeric HWND alone does not preserve the original allocation across reentrant destruction. S13 must preserve that ownership while eliminating outward C coupling.",
+    "metrics": "Default measure height reads gpsi->cySysFontChar through wow_edit_current TLS snapshot established by the shared control entry. It is not per-item persistent ownership.",
+    "method": "Read complete1138-line lboxctl1.c; decode selected production COFF, inspect VALID Ninja dependency record, correlate link map and native wrappers; trace original measure-item thunk and original callback table. No new runtime test."
+  },
+  "progress": {
+    "reviewedFiles": 91,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 60,
+    "deferredSourceAbiCompositionFiles": 14,
+    "unreviewedFiles": 25,
+    "totalFiles": 116,
+    "openIds": 502,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: production bytes unchanged from P47.",
+    "runtime": "Not run: source/link classification only.",
+    "publication": "P47 retained; all22 actual image hashes verified against released eleven-image manifest.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-list-items-ownership/docs.log and docs.exit. git diff --check passed."
+  },
+  "followup": "S13 shared message/borrow/native-return group must cover owner-draw input/output, nested notifications/destruction and scrollbar return publication. Source classification is not permanent approval of each current wrapper. Keep original C algorithms; mixed original header composition remains S14.",
+  "limits": "No original source, #error/#line or guest changes. No dependency elimination or S13/S14 admission in this batch."
+}
