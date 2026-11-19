@@ -5,7 +5,10 @@ page projections, package paths, FastBOP offsets and registry reads. The
 worker remains the sole owner of the underlying state and its lifecycle.
 
 `worker-thread/` binds the existing worker session around original thread
-entries. The generic calling-convention mechanism is in `lib-win32/thread`.
+entries. Each consuming image installs these operations before its original
+entry runs. `compat/thread_start.c` preserves the historical call shapes; the
+generic calling-convention mechanism is in `lib-win32/thread`. Session state
+remains owned by the worker, not the compatibility bridge.
 
 `redirector/` declares the shared asynchronous request boundary; the worker
 retains the one session-owned staging and completion provider.

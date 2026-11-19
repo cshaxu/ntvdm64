@@ -15,7 +15,7 @@ $wrapper = Join-Path $out 'compiler.cmd'
     'if errorlevel 1 exit /b %errorlevel%', '%*') |
     Set-Content -LiteralPath $wrapper -Encoding ASCII
 $sources = @('src/ntvdm-exe/redir/mvdm_redirector_async.c',
-    'src/common/worker-thread/bridge.c', 'src/lib-win32/thread/thread.c',
+    'src/common/worker-thread/bridge.c', 'src/compat/thread_start.c', 'src/lib-win32/thread/thread.c',
     'src/ntvdm-exe/softpc/mvdm_guest_location.c',
     'src/ntvdm-exe/session/session.c',
     'src/ntvdm-exe/session/guest_memory_lease.c',

@@ -1183,7 +1183,10 @@ $graph.Add('build lib-thread-test.exe: broker_test_link obj/tests/lib_thread.obj
 $threadBridgeObject = 'obj/common/worker-thread/bridge.obj'
 $graph.Add('build ' + $threadBridgeObject + ': cc ' + (NinjaPath (Join-Path $root 'src/common/worker-thread/bridge.c')))
 $graph.Add('  cflags = ' + $authoredSoftpcFlags)
-$graph.Add('build common-worker-thread.lib: lib ' + $threadBridgeObject)
+$threadStartObject = 'obj/compat/thread_start.obj'
+$graph.Add('build ' + $threadStartObject + ': cc ' + (NinjaPath (Join-Path $root 'src/compat/thread_start.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$graph.Add('build common-worker-thread.lib: lib ' + $threadBridgeObject + ' ' + $threadStartObject)
 $adapterBaseSrvObjects = foreach ($name in $adapterBaseSrvNames) {
     $object = 'obj/adapter-basesrv/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterBaseSrvRoot $name)))

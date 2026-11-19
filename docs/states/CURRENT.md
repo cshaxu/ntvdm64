@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C still has472 open direct dependency IDs.
+**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has467 open direct dependency IDs.
 
 ## Active Packet
 
@@ -27,9 +27,9 @@
 
 ## Current Technical Baseline
 
-S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. Both assets/release and O:/WINNT/system32 contain package94150155-5251-42f3-b587-9803d82bc178.
+S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P3 below supersedes both published copies.
 
-S13 P2: [COMMAND/thread boundary design](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p2-command-thread-boundary.json). First remaining file cmdexec.c retains original algorithms. Shared thread bridge is present in both EXE and redirector DLL; implementation must cover per-image bindings and terminal cleanup. No product change or new elimination;96 eliminated/472 open.
+S13 P3: [Shared thread boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p3-thread-boundary.json). Original callers remain unchanged; B callback-shape wrappers receive explicit lifecycle operations from both product entries. C0157-C0161 eliminated:101 eliminated/467 open of618 IDs. Cached x86/x64/reference builds,8 A/B graphs, thread/module/async fixtures and actual guest redirector read/write/NetAPI passed. Package55424377-d51a-4eef-beb7-6650b7b49885 is published to both destinations with22 verified hashes. Only NTVDM and VDMREDIR differ after approved identity normalization; no Full claim. Mirror delta0 points/0 lines; cumulative reduction2 points/10 lines. cmdexec.c snapshot/native-launch coupling remains open, so the file is not complete.
 
 ## S12 Closure Record
 

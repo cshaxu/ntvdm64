@@ -1,4 +1,5 @@
 #include <windows.h>
+#include "common/worker-thread/initialize.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -92,6 +93,11 @@ int main(int argc, char **argv)
 
     reject_unbind = argc == 2 && strcmp(argv[1], "--reject") == 0;
     if (reject_unbind) SetErrorMode(SEM_NOGPFAULTERRORBOX | SEM_FAILCRITICALERRORS);
+    if (opennt_create_cdecl_thread_named(NULL, 0, bound_worker, NULL, 0, NULL,
+            "uninitialized") != NULL || GetLastError() != ERROR_INVALID_STATE)
+        return 91;
+    if (!worker_thread_initialize() || !worker_thread_initialize()) return 90;
+    puts("THREAD_LIFECYCLE uninitialized_rejected=1 repeated_install=1");
     session_initialize(&instance, 1u);
     if (!session_activate(&instance)) return 1;
     if (!session_register_thread_hook(&instance, bind_hook, unbind_hook, NULL)) return 5;
@@ -172,5 +178,18 @@ int main(int argc, char **argv)
     if (verify_rejected_exit()) return 6;
     puts("THREAD_TERMINAL_UNBIND normal=5 once=1 rejected_exit=c0000420");
     puts("THREAD_TERMINAL_INTENT terminal=5 ordinary=1 rejected_reset=1 exception_reset=1");
+    if (argc == 3) {
+        HMODULE module;
+        int (__cdecl *run)(void *);
+        session_initialize(&instance, 2u);
+        if (!session_activate(&instance) || !session_thread_bind(&instance)) return 92;
+        module = LoadLibraryA(argv[2]);
+        if (!module) return 93;
+        run = (int (__cdecl *)(void *))GetProcAddress(module, "thread_module_run");
+        if (!run || run(&instance) || session_thread_current() != &instance) return 94;
+        if (!FreeLibrary(module) || !session_thread_unbind(&instance) ||
+                !session_dispose(&instance)) return 95;
+        puts("THREAD_MODULE actual_redirector_entry=1 separate_binding=1 same_owner=1");
+    }
     return 0;
 }

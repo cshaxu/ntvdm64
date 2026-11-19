@@ -35,7 +35,7 @@ if ($Boundary -eq 'command-dispatch') {
     $traceSource = 'command_dispatch_trace.c'
 }
 if ($Boundary -eq 'thread-exit') {
-    $memberName = 'obj/common/worker-thread/bridge.obj'
+    $memberName = 'obj/compat/thread_start.obj'
     $libraryName = 'common-worker-thread.lib'
     $traceSource = 'wow_thread_exit_trace.c'
 }

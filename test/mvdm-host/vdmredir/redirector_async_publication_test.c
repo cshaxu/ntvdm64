@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "compat/include/thread_start_compat.h"
+#include "common/worker-thread/initialize.h"
 
 /* Exercise the production staging adapter and real session leases. Only the
  * guest-memory provider is controlled; failed writes must not look completed. */
@@ -86,6 +87,7 @@ int main(void)
     DOS_ASYNC_NAMED_PIPE_INFO request;
     unsigned i;
     static uint32_t const destinations[] = {0x140, 0x182, 0x180};
+    if (!worker_thread_initialize()) return 90;
     session_initialize(&s, 1);
     if (!session_activate(&s) || !session_guest_memory_begin(&s, &m,
         read_memory, write_memory) || !session_thread_bind(&s)) return 2;

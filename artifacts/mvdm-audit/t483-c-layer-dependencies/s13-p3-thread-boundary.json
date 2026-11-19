@@ -1,0 +1,123 @@
+{
+  "baseline": "ff50edef1",
+  "scope": "S13 P3 shared thread boundary, a coupled foundation of cmdexec.c; not whole-file COMMAND closure",
+  "ids": [
+    "C0157",
+    "C0158",
+    "C0159",
+    "C0160",
+    "C0161"
+  ],
+  "ownership": {
+    "C": "Original CreateThread/ExitThread call sites unchanged.",
+    "B": "Source-shaped callback ABI wrappers; immutable explicitly installed lifecycle operations; no session state or outer linked provider.",
+    "A": "Existing win32_thread_create and thunk unchanged.",
+    "D": "Capture current session, bind entry, finish terminal thread and fail fast on refused cleanup; existing F session authority.",
+    "F": "NTVDM begin and VDMREDIR existing loader entry initialize their own module bindings before original execution."
+  },
+  "why_not_direct_native": "Four existing original callback shapes differ from WINAPI on x86. Removing session binding changes ownership and pre-CCPU cleanup ordering; the actual ABI/rollback/exit fixture remains authoritative.",
+  "providerEvidence": {
+    "map": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map: opennt creation/exit symbols resolve to common-worker-thread:thread_start.obj",
+    "source": "actual graph maps thread_start.obj to src/compat/thread_start.c",
+    "undefinedCoffSymbols": [
+      "__imp__SetLastError@4",
+      "__imp__RaiseFailFastException@12",
+      "__imp__ExitThread@4",
+      "_win32_thread_create"
+    ],
+    "includeClosure": "8 production A/B graphs pass; B compiler inputs/recorded headers checked, not just source spelling"
+  },
+  "verification": {
+    "cachedBuild": "build/t483-s13-thread-boundary/build.exit=0; x86 and x64 products, explicit x86 four-image targets",
+    "referenceWorker": "deliver.exit=0; worker-reference-x86 ntvdm.exe",
+    "thread": "Initial full fixture passed. Extended final fixture passed after correcting test DLL CRT link; fixture.exit=0 and all six markers in build/t483-s13-thread-module-fixture/fixture.out.",
+    "moduleBoundary": "Actual F VDMREDIR entry compiled in independently linked test DLL, shared real EXE session imports, separate B storage; original VrDllInitialize is a controlled witness here. This alone is not actual redirector validation.",
+    "async": "build/t483-s13-thread-async/result.json; production adapter/session/thread implementation,27 assertions zero failures; controlled guest-memory provider.",
+    "actualGuest": [
+      {
+        "mode": "async",
+        "exit_code": 0,
+        "elapsed_ms": 15192
+      },
+      {
+        "mode": "async-write",
+        "exit_code": 0,
+        "elapsed_ms": 15162
+      },
+      {
+        "mode": "netapi",
+        "exit_code": 0,
+        "elapsed_ms": 13429
+      }
+    ],
+    "guestScope": "Existing checked-in redirector runner, P186 immutable probes/observer, private desktop, physical isolated copy of published package. Successful async read/write and NetAPI are real guest results; raw observer launcher exit=1 is existing witness output, not asserted normal Windows shutdown.",
+    "testHarnessCorrection": "First module link lacked explicit static CRT libraries, LNK2019 __except_handler4. Added same libcmt/libvcruntime/libucrt libraries as product link; relink-module.exit=0, final fixture.exit=0. Initial failed harness logs retained.",
+    "fullSuite": "Not run: owner default is focused tests; this batch is not Full acceptance."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "55424377-d51a-4eef-beb7-6650b7b49885",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalizedImages": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": false,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "reason": "No C mirror source touched; #error and #line byte identities unchanged."
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "progress": {
+    "stableIds": 618,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 467,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 101
+    },
+    "S13Cleared": 5,
+    "cmdexecComplete": false
+  },
+  "remaining": "COMMAND snapshot/native-launch coupling remains open in current file. No wholesale original algorithm migration. S14 not admitted.",
+  "sourceHashes": {
+    "src/common/README.md": "15bb59df21a58072ee53cc7874f1240778ca361343c0dace3fba3a71824e658f",
+    "src/common/worker-thread/bridge.c": "de75d242e074e5fc628010e4d6cfe9e03a87ef933ab625990dcdbc2e9ae1901b",
+    "src/compat/README.md": "48c0aaae9923ff3fdb8ec76ce0b7d37d461aa0d1c8f32b6e64d074556369413b",
+    "src/ntvdm-exe/softpc/mvdm_standalone_worker.c": "b5313b28bf08f43ebe21444eb1c23890a466d1f1e02a3956836d69ec8d717d12",
+    "src/vdmredir-dll/source/mvdm_redirector_dll_entry.c": "30a3237071f583e1675373643002f964b7bf1cfba06ca912e87f38f6bea25d69",
+    "test/adapter-mvdm-host-out/thread_start_session_fixture.c": "812985cf08a8412d1ddb38483d867b2c45aa6c386d0fb75e810de8ca3333fb23",
+    "test/mvdm-host/vdmredir/redirector_async_publication_test.c": "d61498bc2ee5878f65b56900c49973b3821bbeebe3b1002e14e21fcfdafe7a51",
+    "test/observation/verify-redirector-async-publication.ps1": "5ff3084d049cfcb2363f3a23b976b5ed5a21f7233b87b252ad189cde2d062120",
+    "test/observation/verify-thread-start-boundary.ps1": "4bdb47c04b463c34edc6734a2656caa0aa51d752971d5c3f195e31ae85467e37",
+    "test/observation/wow_thread_exit_trace.c": "3ecd391e9a7402b70eff8539340aef3cd6f697671b574e5bddb33a8835273084",
+    "tools/audit/verify-worker-thread-boundary.ps1": "48ae1fd7acbcc08469246b5fde226121a94664ee39874c88e8efa1be8bd6d6a2",
+    "tools/build/Build-T420S35EnvironmentTrace.ps1": "be68d360f2cb2e5784c6911a24b92061542820c151168eac0126585086b72319",
+    "tools/build/New-T310HeartbeatNinja.ps1": "0e493adc695f4701a10aa0da00bbf6dee57448d7811e968f29569372a6dbc642",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "efa9753d5e87a6d5eb1e2077c3a7f76a72af5915d33098fc4b69aa4e4e58e2d4",
+    "src/common/worker-thread/initialize.h": "c2e55898944a7b086ac9e42c332de89f0e7baaed76a93b69eb53e8bf3c6309e0",
+    "src/compat/include/thread_lifecycle.h": "b9bf655f4331c277729a30f94efc3905a8ebc267c248be1d5505873531b1c7c3",
+    "src/compat/thread_start.c": "8805850700c767e169dd33ebffc43b029d36632984ee9f93fb6a41df0bac5c92",
+    "test/adapter-mvdm-host-out/thread_start_module_fixture.c": "584f889c7b5b53f09bb1266bbde5359a57ba35b7777db393ff93eee43a654152"
+  },
+  "documentationGate": "Passed: build/t483-s13-thread-boundary/check.out, exit0; worker boundary, documentation governance, relative links and git diff --check."
+}

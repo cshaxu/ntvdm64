@@ -1,5 +1,6 @@
 #include "mvdm_standalone_worker.h"
 #include "worker-base/connection.h"
+#include "common/worker-thread/initialize.h"
 
 #include "ntvdm-exe/package_layout.h"
 #include "common/base_srv/base_rpc_client.h"
@@ -141,6 +142,7 @@ static DWORD mvdm_standalone_worker_begin(void)
     BOOL character_io=TRUE;
 
     if (worker_started) return ERROR_ALREADY_EXISTS;
+    if (!worker_thread_initialize()) return GetLastError();
     session_initialize(&worker_session,1u);
     worker_session_initialized=TRUE;
     mvdm_softpc_v7_pointer_attach();

@@ -39,7 +39,8 @@ $sources = @(
     'test/adapter-mvdm-host-out/thread_start_session_fixture.c',
     'test/compat/softpc_event_thread_shutdown_fixture.c',
     'src/lib-win32/thread/thread.c',
-    'src/ntvdm-exe/win32/ccpu_thread_exit_compat.c'
+    'src/ntvdm-exe/win32/ccpu_thread_exit_compat.c',
+    'src/compat/thread_start.c'
 )
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
@@ -64,7 +65,7 @@ for ($index = 0; $index -lt $sources.Count; ++$index) {
     }
 }
 $graph.Add('build nt-thread-alert-fixture.exe: link obj/4-nt_thread_alert_compat_fixture.obj')
-$graph.Add('build thread-start-session-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-bridge.obj obj/5-thread_start_session_fixture.obj obj/7-thread.obj obj/8-ccpu_thread_exit_compat.obj')
+$graph.Add('build thread-start-session-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-bridge.obj obj/5-thread_start_session_fixture.obj obj/7-thread.obj obj/8-ccpu_thread_exit_compat.obj obj/9-thread_start.obj')
 $graph.Add('build softpc-event-thread-shutdown-fixture.exe: link obj/3-mvdm_softpc_event_thread.obj obj/6-softpc_event_thread_shutdown_fixture.obj')
 $graph.Add('build verify: run nt-thread-alert-fixture.exe')
 $graph.Add('build verify-thread-session: run thread-start-session-fixture.exe')

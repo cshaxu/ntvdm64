@@ -335,3 +335,5 @@ P107: [CCPU fallback ownership delivery](s12-p107-vector-defaults.json); three u
 P108: [S12 closure and complete successor handoff](s12-p108-closure-handoff.json); 96 eliminated,472 still open. S13 receives428 lifecycle edges and21 mixed groups;23 original-owner edges reserved for S14. Allocation is not implementation approval or dependency elimination.
 
 S13 P2: [COMMAND and shared thread boundary design](s13-p2-command-thread-boundary.json); first remaining file reviewed as a coupled snapshot/thread/launch group. Per-image VDMREDIR initialization must be verified; no product migration or dependency elimination yet.
+
+S13 P3: [Shared thread boundary delivery](s13-p3-thread-boundary.json); five direct C-to-D edges now resolve to B, with explicit per-image outer lifecycle binding. Cached builds, dual11 publication, ABI/module/async fixtures and real guest redirector read/write/NetAPI pass; no mirror change. COMMAND snapshot/native launch remains open.

@@ -22,4 +22,15 @@ try{Assert-Independent ($thread+"`n#include `"common/worker-thread/session.h`"")
 if(!$rejected){throw 'Product dependency negative control accepted'}
 $bridge=Get-Content (Join-Path $root 'src/common/worker-thread/bridge.c') -Raw
 if($bridge -match 'ntvdm-exe/|worker-base/'){throw 'Shared bridge uses private component'}
+$compat=(Get-Content (Join-Path $root 'src/compat/thread_start.c') -Raw) +
+    (Get-Content (Join-Path $root 'src/compat/include/thread_lifecycle.h') -Raw)
+if($compat -match 'common/|worker-base/|ntvdm-exe/|mvdm-host/|session_thread_') {
+    throw 'Compatibility thread bridge depends on an outer owner'
+}
+foreach($entry in @('src/ntvdm-exe/softpc/mvdm_standalone_worker.c',
+        'src/vdmredir-dll/source/mvdm_redirector_dll_entry.c')) {
+    if((Get-Content (Join-Path $root $entry) -Raw) -notmatch 'worker_thread_initialize\(\)') {
+        throw "Missing per-image initialization: $entry"
+    }
+}
 Write-Output 'PASS VDMREDIR shared thread closure and generic-library negative control'

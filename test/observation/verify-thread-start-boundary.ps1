@@ -24,7 +24,7 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds)
 try {
     $sources=@('src/ntvdm-exe/session/guest_memory_lease.c',
         'src/ntvdm-exe/session/session.c',
-        'src/common/worker-thread/bridge.c',
+        'src/common/worker-thread/bridge.c', 'src/compat/thread_start.c',
         'src/lib-win32/thread/thread.c',
         'src/ntvdm-exe/win32/ccpu_thread_exit_compat.c',
         'test/adapter-mvdm-host-out/thread_start_session_fixture.c')
@@ -35,11 +35,24 @@ try {
         $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /c /O2 /MT /W4 /I "'+$repo+'\src" /I "'+$repo+'\src\compat\include" /Fo"'+$root+'\'+$object+'" "'+$repo+'\'+$source+'""'
         Run-Owned ('compile-'+[IO.Path]::GetFileNameWithoutExtension($source)) 'cmd.exe' $argsLine 120
     }
-    $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /out:"'+$root+'\fixture.exe" '+($objects -join ' ')+' kernel32.lib"'
+    $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /out:"'+$root+'\fixture.exe" '+($objects -join ' ')+' /export:session_thread_current /export:session_thread_bind_owned_source /export:session_thread_finish /implib:"'+$root+'\fixture.lib" kernel32.lib"'
     Run-Owned 'link' 'cmd.exe' $argsLine 120
-    Run-Owned 'fixture' "$root/fixture.exe" '--verify' 45
+    foreach ($source in @('src/vdmredir-dll/source/mvdm_redirector_dll_entry.c',
+            'test/adapter-mvdm-host-out/thread_start_module_fixture.c')) {
+        $object=[IO.Path]::GetFileNameWithoutExtension($source)+'.obj'
+        $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /c /O2 /MT /W4 /I "'+$repo+'\src" /Fo"'+$root+'\'+$object+'" "'+$repo+'\'+$source+'""'
+        Run-Owned ('compile-'+[IO.Path]::GetFileNameWithoutExtension($source)) 'cmd.exe' $argsLine 120
+    }
+    $moduleObjects=@('mvdm_redirector_dll_entry.obj','thread_start_module_fixture.obj',
+        'bridge.obj','thread_start.obj','thread.obj','fixture.lib') |
+        ForEach-Object { '"'+$root+'\'+$_+'"' }
+    $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /dll /entry:mvdm_vdmredir_dll_entry@12 /export:thread_module_run /out:"'+$root+'\thread-module.dll" '+($moduleObjects -join ' ')+' kernel32.lib libcmt.lib libvcruntime.lib libucrt.lib"'
+    Run-Owned 'link-module' 'cmd.exe' $argsLine 120
+    Run-Owned 'fixture' "$root/fixture.exe" ('--verify "'+$root+'/thread-module.dll"') 45
     $output=Get-Content "$root/fixture.out" -Raw
-    foreach ($marker in @('THREAD_TERMINAL_UNBIND normal=5 once=1 rejected_exit=c0000420',
+    foreach ($marker in @('THREAD_MODULE actual_redirector_entry=1 separate_binding=1 same_owner=1',
+            'THREAD_LIFECYCLE uninitialized_rejected=1 repeated_install=1',
+            'THREAD_TERMINAL_UNBIND normal=5 once=1 rejected_exit=c0000420',
             'THREAD_TERMINAL_INTENT terminal=5 ordinary=1 rejected_reset=1 exception_reset=1',
             'THREAD_START_ROLLBACK rejected=4 owner_count=1 no_worker_entry=1',
             'THREAD_PRE_CCPU actual_adapter=1 unbind_before_cpu=1 once=1')) {
