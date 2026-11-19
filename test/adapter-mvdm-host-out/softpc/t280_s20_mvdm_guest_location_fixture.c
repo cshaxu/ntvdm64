@@ -1,4 +1,4 @@
-#include "mvdm_guest_location.h"
+#include "compat/include/guest_location.h"
 
 #include <string.h>
 
@@ -32,7 +32,6 @@ static int write_memory(void *context, uint32_t address, uint8_t const *bytes,
 
 int main(void)
 {
-    if (!mvdm_guest_location_initialize()) return 255;
     fixture_memory memory;
     session instance;
     mvdm_guest_location location;
@@ -116,6 +115,27 @@ int main(void)
     memory.reject_write = 1;
     if (mvdm_guest_location_release(&lease, 1) || lease.lease != NULL ||
         lease.bytes != NULL || mvdm_guest_location_release(&lease, 0)) return 17;
+    {
+        session other;
+        mvdm_guest_location_lease saved;
+        if (!mvdm_guest_location_acquire(&location, 1u,
+                GUEST_MEMORY_ACCESS_READ, &lease)) return 18;
+        saved = lease;
+        if (!session_thread_unbind(&instance)) return 19;
+        session_initialize(&other, 2u);
+        if (!session_activate(&other) ||
+                !session_guest_memory_begin(&other, &memory, read_memory, write_memory) ||
+                !session_thread_bind(&other)) return 20;
+        if (mvdm_guest_location_release(&lease, 0) || lease.lease || lease.bytes ||
+                !saved.lease->active) return 21;
+        if (!session_thread_unbind(&other) || !session_dispose(&other) ||
+                !session_thread_bind(&instance)) return 22;
+        lease = saved;
+        if (!mvdm_guest_location_release(&lease, 0)) return 23;
+        if (!session_request_cancellation(&instance, SESSION_CANCELLATION_REQUESTED) ||
+                mvdm_guest_location_acquire(&location, 1u, GUEST_MEMORY_ACCESS_READ,
+                    &lease) || lease.lease || lease.bytes) return 24;
+    }
     if (!session_thread_unbind(&instance)) return 11;
     session_guest_memory_end(&instance);
     return session_dispose(&instance) ? 0 : 12;

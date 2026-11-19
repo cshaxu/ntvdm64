@@ -14,7 +14,7 @@ $wrapper = Join-Path $out 'compiler.cmd'
     'if errorlevel 1 exit /b %errorlevel%', '%*') |
     Set-Content -LiteralPath $wrapper -Encoding ASCII
 $sources = @('src/vdmredir-dll/source/mvdm_redirector_guest_copy.c',
-    'src/ntvdm-exe/softpc/mvdm_guest_location.c', 'src/compat/guest_location.c', 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
+    'src/compat/guest_location.c', 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/compat/guest_memory_lease.c',
     'test/mvdm-host/vdmredir/redirector_oem_capacity_test.c')
 if ($OriginalProviders) {

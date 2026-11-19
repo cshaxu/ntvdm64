@@ -281,7 +281,7 @@ $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
 $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c',
-                         'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
+                         'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                          'mvdm_vm_notification.c',
                          'mvdm_vm_wake.c',
                          'mvdm_vm_continuation.c', 'mvdm_vm_command.c', 'mvdm_vm_application.c', 'mvdm_vm_execute.c', 'mvdm_vm_io.c', 'mvdm_vm_executor.c', 'mvdm_vm_ingress.c',
@@ -1646,7 +1646,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ntvdm-command-launch-test.exe: broker_test_link obj/tests/ntvdm_command_launch.obj obj/adapter-win32/command_process_compat.obj lib-process-launch.lib')
     $graph.Add('build obj/tests/ntvdm_command_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_capture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/adapter-softpc/mvdm_guest_location.obj obj/compat/guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')
+    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/compat/guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')
     $graph.Add('build obj/tests/ntvdm_command_directory.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/basesrv/t394_s4_command_scalar_state_fixture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvdm-command-directory-test.exe: broker_test_link obj/tests/ntvdm_command_directory.obj obj/adapter-basesrv/mvdm_command_guest_state.obj obj/compat/guest_location.obj session.lib')
@@ -2051,6 +2051,9 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build obj/tests/session_lifecycle.obj: cc ' + (NinjaPath (Join-Path $root 'test/session/session_lifecycle_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build session-lifecycle-test.exe: console_test_link obj/tests/session_lifecycle.obj session.lib')
+    $graph.Add('build obj/tests/guest_location.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/softpc/t280_s20_mvdm_guest_location_fixture.c')))
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
+    $graph.Add('build guest-location-test.exe: console_test_link obj/tests/guest_location.obj obj/compat/guest_location.obj session.lib')
     $monitorRpcTestObject = 'obj/tests/monitor_rpc_test.obj'
     $graph.Add('build ' + $monitorRpcTestObject + ': cc ' + (NinjaPath (Join-Path $root 'test/adapter-basesrv/monitor_rpc_test.c')) + ' | obj/basesrv/service.h')
     $graph.Add('  cflags = ' + $nativeServiceFlags)

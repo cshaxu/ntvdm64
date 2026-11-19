@@ -16,7 +16,7 @@ $wrapper = Join-Path $out 'compiler.cmd'
     Set-Content -LiteralPath $wrapper -Encoding ASCII
 $sources = @('src/ntvdm-exe/redir/mvdm_redirector_async.c',
     'src/common/worker-thread/bridge.c', 'src/compat/thread_start.c', 'src/lib-win32/thread/thread.c',
-    'src/ntvdm-exe/softpc/mvdm_guest_location.c', 'src/compat/guest_location.c',
+    'src/compat/guest_location.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/compat/guest_memory_lease.c',
     'test/mvdm-host/vdmredir/redirector_async_publication_test.c')

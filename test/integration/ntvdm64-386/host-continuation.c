@@ -5,7 +5,7 @@
 #include "mvdm_vm_bridge.h"
 #include "mvdm_vm_wake.h"
 #include "mvdm_vm_continuation.h"
-#include "mvdm_guest_location.h"
+#include "compat/include/guest_location.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_vm_command.h"
 #include "ntvdm-exe/session/session.h"

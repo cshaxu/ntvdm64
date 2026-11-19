@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+struct guest_memory_lease_context;
+
 #define COMPAT_HOST_CLEANUP_LIMIT 8u
 
 typedef void (*compat_host_cleanup_fn)(void *);
@@ -17,6 +19,8 @@ typedef struct compat_host_cleanup {
 typedef struct compat_host_context {
     uint32_t cleanup_count;
     int registration_open;
+    /* Borrowed B resource; the composing owner controls its begin/end lifetime. */
+    struct guest_memory_lease_context *guest_memory;
     compat_host_cleanup cleanups[COMPAT_HOST_CLEANUP_LIMIT];
 } compat_host_context;
 

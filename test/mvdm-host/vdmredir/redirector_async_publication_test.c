@@ -1,4 +1,4 @@
-#include "ntvdm-exe/softpc/include/mvdm_guest_location.h"
+#include "compat/include/guest_location.h"
 #define MVDM_REDIRECTOR_WORKER_EXPORTS
 #include "common/redirector/async.h"
 #include "mvdm-host/inc/vrnmpipe.h"
@@ -83,7 +83,6 @@ static int no_live_leases(session const *s)
 }
 int main(void)
 {
-    if (!mvdm_guest_location_initialize()) return 255;
     memory_fixture m;
     session s;
     DOS_ASYNC_NAMED_PIPE_INFO request;

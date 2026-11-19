@@ -24,6 +24,7 @@ void session_initialize(session *instance, uint32_t identity)
     instance->abi_version = SESSION_ABI_VERSION;
     instance->struct_bytes = (uint32_t)sizeof(*instance);
     instance->identity = identity;
+    instance->host_context.guest_memory = &instance->guest_memory_lease;
 }
 
 int session_valid(const session *instance)

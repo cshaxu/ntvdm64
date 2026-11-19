@@ -1,5 +1,5 @@
 #include "mvdm_vm_command.h"
-#include "mvdm_guest_location.h"
+#include "compat/include/guest_location.h"
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/frontend/vm_text.h"
 #include <string.h>

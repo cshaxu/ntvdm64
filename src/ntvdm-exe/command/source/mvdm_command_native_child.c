@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-#include "mvdm_guest_location.h"
+#include "compat/include/guest_location.h"
 #include "ntvdm-exe/session/session.h"
 
 

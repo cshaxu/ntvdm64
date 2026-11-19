@@ -17,7 +17,7 @@
 #include "ntvdm-exe/wow/include/wow_user_session_binding.h"
 #include "compat/include/mvdm_shadow_registry.h"
 #include "ntvdm-exe/win32/console_client.h"
-#include "ntvdm-exe/softpc/include/mvdm_guest_location.h"
+#include "compat/include/guest_location.h"
 #include "ntvdm-exe/win32/worker_lifecycle.h"
 #include <stdlib.h>
 #include <ctype.h>
@@ -145,7 +145,7 @@ static DWORD mvdm_standalone_worker_begin(void)
 
     if (worker_started) return ERROR_ALREADY_EXISTS;
     if (!worker_thread_initialize() || !ntvdm_command_initialize() ||
-            !ntvdm_console_services_initialize() || !mvdm_guest_location_initialize() ||
+            !ntvdm_console_services_initialize() ||
             !ntvdm_dpmi_initialize() || !ntvdm_vm_services_initialize()) return GetLastError();
     session_initialize(&worker_session,1u);
     worker_session_initialized=TRUE;

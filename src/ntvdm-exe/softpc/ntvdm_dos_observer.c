@@ -1,5 +1,5 @@
 #include "ntvdm_dos_observer.h"
-#include "mvdm_guest_location.h"
+#include "compat/include/guest_location.h"
 #include "common/base_srv/base_rpc_client.h"
 #include <nt_vdd.h>
 #include <string.h>

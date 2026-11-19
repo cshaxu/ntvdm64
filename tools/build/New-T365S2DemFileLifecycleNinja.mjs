@@ -30,9 +30,8 @@ fs.writeFileSync(path.join(build, 'build.ninja'), [
   'build obj/session.obj: cc $root/src/ntvdm-exe/session/session.c',
   'build obj/host_context.obj: cc $root/src/compat/host_context.c',
   'build obj/location_binding.obj: cc $root/src/compat/guest_location.c',
-  'build obj/location.obj: cc $root/src/ntvdm-exe/softpc/mvdm_guest_location.c',
   'build obj/fixture.obj: cc $root/test/adapter-mvdm-host-out/softpc/t365_s2_dem_file_lifecycle_lease_fixture.c',
-  'build dem_file_lifecycle_lease_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/host_context.obj obj/location.obj obj/location_binding.obj obj/fixture.obj',
+  'build dem_file_lifecycle_lease_fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/host_context.obj obj/location_binding.obj obj/fixture.obj',
   'default dem_file_lifecycle_lease_fixture.exe',
   ''
 ].join('\n'), { encoding: 'utf8' });

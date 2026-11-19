@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "ntvdm-exe/softpc/include/mvdm_guest_location.h"
+#include "compat/include/guest_location.h"
 #include "ntvdm-exe/session/session.h"
 #include "mvdm-host/inc/vrnmpipe.h"
 

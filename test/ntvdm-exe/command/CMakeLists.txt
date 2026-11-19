@@ -2,7 +2,7 @@ add_executable(mvdm-command-capture-test
   command_capture.c
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/command/source/mvdm_command_native_child.c"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_command.c"
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_guest_location.c"
+  "${CMAKE_SOURCE_DIR}/src/compat/guest_location.c"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/frontend/vm_text.c"
   "${CMAKE_SOURCE_DIR}/src/frontend-base/video.c")
 target_include_directories(mvdm-command-capture-test PRIVATE

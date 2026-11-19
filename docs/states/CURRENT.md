@@ -28,6 +28,18 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+S14 P19 removes the F guest-location source/private header and three-operation
+forwarding table/installers. Nine operation bodies now execute in B using the
+existing thread binding and a typed reference to the same B lease object.
+F retains composition, resource admission and retirement timing; private session
+ABI is12. [P19 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p19-location-implementation.json)
+records cached full x86/x64/reference builds, dual11 publication/22 hashes,
+wrong-owner/cancellation and lease tests, redirector27/14 assertions, thread,
+WOW page-domain, NESticle and DOS DIR. Package e26d2851-fb17-4d62-805f-43713cd2c470
+is published. Mirror delta0/0; cumulative reduction3 points/12 lines. The direct
+ledger remains144 eliminated/424 open; five implementation receipts are updated,
+not counted again. S14 remains active for SAS/XMS/WOW ownership.
+
 S14 P18: the bounded guest-memory lease implementation and definitions have
 moved to B, with the leaf boundary test under test/compat. Session still
 composes the lease object and owns ACTIVE admission and retirement timing.
@@ -39,8 +51,8 @@ Package f0903b3b-8522-4e86-97fd-2999957c1f95 is the P18 publication; S14 remains
 records the corrected build-generator array failure and final verification.
 The [memory ownership inventory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-memory-ownership-inventory.json)
 separates lease mechanics, SAS providers, XMS cancellation and WOW page-domain
-ownership. Guest-location forwarding and the mixed CCPU/WOW provider remain
-open; the leaf migration does not count them as eliminated dependencies.
+ownership. P19 removes guest-location forwarding; the mixed CCPU/WOW provider
+and SAS lease provider remain open and are not claimed as migrated.
 
 [S13 implementation closure](../etc/evidence/m0-t483-s13-implementation-closure.md)
 and [P17 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p17-mapping-implementation.json)

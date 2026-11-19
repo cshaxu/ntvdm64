@@ -1,0 +1,288 @@
+{
+  "delivery": "T483 S14 P19",
+  "baseline": "91ad5151c",
+  "status": "build, publication and targeted runtime verification complete",
+  "package": "e26d2851-fb17-4d62-805f-43713cd2c470",
+  "implementation": "Nine former F guest-location operations now execute in B. Deleted F source/private header, three-operation forwarding table and both installer functions. Existing B thread context borrows the same typed B lease object; F composes it and retains admission/retirement decisions. No new TLS, session manager or provider dispatcher.",
+  "private_session_abi": 12,
+  "sources": [
+    {
+      "path": "src/compat/guest_location.c",
+      "sha256": "64625b0cb2f50720dc152db9a9526508141ccb4d8cb0344b51167af723344af3"
+    },
+    {
+      "path": "src/compat/include/guest_location.h",
+      "sha256": "76e7340b5da6cf8b4239bd8adeb76552e1bb6c4bc4ebe493977c12a8accfa745"
+    },
+    {
+      "path": "src/compat/include/host_context.h",
+      "sha256": "952e1841755f869096df5ab9c02b123a1adc8d529858888f8ad7836d5aad9b29"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "sha256": "b365b3bc47acbe8ffcddc0bd9c589d2ba40faca089850882e8464bde832a6445"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "sha256": "339f0efedf145debffc2a28253fcddfd71fd0f5e1861c1a0ed21cc59cb3233fd"
+    },
+    {
+      "path": "src/ntvdm-exe/redir/mvdm_redirector_async.c",
+      "sha256": "569fac4e08dc48dd990b17f9b6314a5ccf778a06337ed72de7d391c1ec2127f6"
+    },
+    {
+      "path": "src/ntvdm-exe/session/session.c",
+      "sha256": "5bd4dc53cfa781f00d3c3d6f750d45be33bbb5ab027719c079101ff9df6fdb80"
+    },
+    {
+      "path": "src/ntvdm-exe/session/session.h",
+      "sha256": "697dbf171fb56bcbdd8a3ceacc98bc2783e6658ef92ce0b09f2e5dc7b11b602c"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+      "sha256": "b735c7e189e1c4d404c3474d4e44dc7c7e5160aa251e6acfe81721a387708963"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_vm_command.c",
+      "sha256": "58bd3ac7a40b402fefaa7c326213847cb89af5bc267709ded4867de0a33b6768"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/ntvdm_dos_observer.c",
+      "sha256": "3f7f5b3a5733b361e0eb3a4ccad22eae6f96e6ff5d4473445bf398b5cb5cf54d"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/softpc/t280_s20_mvdm_guest_location_fixture.c",
+      "sha256": "747cc69b476f1e5516d7e6b1270e7dd1b88ccb2c3a769bf14230b64148db11ff"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/softpc/t359_s2_sas_store_fixture_stubs.c",
+      "sha256": "1e70a305873d25feb4871ec2afc11eff748ad76dee185e1f68eb81cd9ab944cd"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/softpc/t365_s2_dem_file_lifecycle_lease_fixture.c",
+      "sha256": "df4b73aad7d67b30c734db8b42205781d972aa6d72dc969d2ddb4344dd2e0086"
+    },
+    {
+      "path": "test/integration/ntvdm64-386/host-continuation.c",
+      "sha256": "9d93c009a2412053fda28d5921666ad1afd124f23a9501f5e0ce747cc26dd58d"
+    },
+    {
+      "path": "test/mvdm-host/vdmredir/redirector_async_publication_test.c",
+      "sha256": "a883734d0f69d37d0de1568ee268b631e198bc664834bfccfd481a5903ca75b7"
+    },
+    {
+      "path": "test/mvdm-host/vdmredir/redirector_netapi_provider_test.c",
+      "sha256": "e4a57b84355ce51dc9b15425e19ec1869474ecf0a9efc6d2ecea3c19bea94cf7"
+    },
+    {
+      "path": "test/mvdm-host/vdmredir/redirector_oem_capacity_test.c",
+      "sha256": "da12fc02572bf0eea501b3f8936aa51be3e6e52b2f17d2420ea381c5db09104c"
+    },
+    {
+      "path": "test/ntvdm-exe/command/CMakeLists.txt",
+      "sha256": "6a32cf56cdd0a78672b2d9da6562fff3fef75434334f6c8befaa4e210fdbce74"
+    },
+    {
+      "path": "test/ntvdm-exe/command/command_capture.c",
+      "sha256": "c9ff4b97d32126a2179febcc9ca7f1e7abf8d5b3e217ff93569ece2417c92ac4"
+    },
+    {
+      "path": "test/observation/verify-redirector-async-publication.ps1",
+      "sha256": "936d05d0e9a41ef185215c0f820d35c3875f6ae6beb0673607faa040c0e4d11d"
+    },
+    {
+      "path": "test/observation/verify-redirector-oem-capacity.ps1",
+      "sha256": "cbf7ae6ca410449d8f30a9a567c6bdaa92464e9145d401a5300742f964c1d439"
+    },
+    {
+      "path": "tools/build/New-T280S20MvdmGuestLocationNinja.ps1",
+      "sha256": "1251b33f1c10a48b7152e92a25f0eae13624ee66d100b9271d74b299c5630796"
+    },
+    {
+      "path": "tools/build/New-T282CommandBoundedCopyNinja.ps1",
+      "sha256": "3152a1b2f1a97352588bc36370bcd2493415819a6a702631cc46d908438c8066"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "e9a686b970694023d044a9526feffba51edcfc26d3c1315270d7f68b188fc54b"
+    },
+    {
+      "path": "tools/build/New-T324S2LocalRedirectorNinja.ps1",
+      "sha256": "81ad1d287c93ccd0784d473ac916031c5cc4552a9b7f8e26395e04ad9a624539"
+    },
+    {
+      "path": "tools/build/New-T365S2DemFileLifecycleNinja.mjs",
+      "sha256": "5d42472d91b929038375ec73d1f5781f8bb61dcad2fa40580e45d6065ae4328b"
+    }
+  ],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "cumulative_reduction_points": 3,
+    "cumulative_reduction_lines": 12
+  },
+  "ledger_counts": {
+    "eliminated": 144,
+    "open": 424,
+    "supporting": 44,
+    "eliminated_transitive": 5,
+    "excluded": 1,
+    "total": 618
+  },
+  "published_hashes": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\VCDEX.DLL",
+      "sha256": "419c1b3551c0d60dd65cbf6405d964ea95ac19d24d0e592cba8350feaf071644"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\run16.exe",
+      "sha256": "e7737cf5efc12b07d1390b1e18e277bbbbe660b314b885b9d18e0fec7d7c91f4"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntsrv.exe",
+      "sha256": "2d79ee2c00d73e141102a2ce4511902f66f52a629f9711a5b8c616f9f260cd28"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntcon.exe",
+      "sha256": "0eee7f1775659a66e0ee7f714ad78f3af13d3d722a93442a3c7b255277421da5"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvdm.exe",
+      "sha256": "9eb43f355c181d4198e22b26a8343ec991bf06c6ed9a81a8125e891b1296259e"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvwm.exe",
+      "sha256": "b6cf3dec20ba0db8fca78806253dacc843941ac12af0b4cbec76d920441943fa"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntmon.exe",
+      "sha256": "7f2b4ab699969d7945e9fd6cb7f4d7cc946c3687b3c1db2b3e6459f7e5eaa394"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\WOW32.DLL",
+      "sha256": "cd3fab856a332bb5de011927e7750917c15a8cab64002bfcdbd5a5a4385d06ca"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\VDMREDIR.DLL",
+      "sha256": "171a25177af885143b12fc369458775f7219ab406696beff5abe22e18eba2554"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\nthook32.dll",
+      "sha256": "88b04943d329dd0f376bcf9761eac8dec2ca63cbdd0164d0c2b62c2e39414bdb"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\nthook64.dll",
+      "sha256": "d36c42dd51f7a0763e4b2f2cecb47bde821f0888fd0b6a6659a5dc0fd61288a4"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+      "sha256": "419c1b3551c0d60dd65cbf6405d964ea95ac19d24d0e592cba8350feaf071644"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\run16.exe",
+      "sha256": "e7737cf5efc12b07d1390b1e18e277bbbbe660b314b885b9d18e0fec7d7c91f4"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntsrv.exe",
+      "sha256": "2d79ee2c00d73e141102a2ce4511902f66f52a629f9711a5b8c616f9f260cd28"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntcon.exe",
+      "sha256": "0eee7f1775659a66e0ee7f714ad78f3af13d3d722a93442a3c7b255277421da5"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvdm.exe",
+      "sha256": "9eb43f355c181d4198e22b26a8343ec991bf06c6ed9a81a8125e891b1296259e"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvwm.exe",
+      "sha256": "b6cf3dec20ba0db8fca78806253dacc843941ac12af0b4cbec76d920441943fa"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntmon.exe",
+      "sha256": "7f2b4ab699969d7945e9fd6cb7f4d7cc946c3687b3c1db2b3e6459f7e5eaa394"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\WOW32.DLL",
+      "sha256": "cd3fab856a332bb5de011927e7750917c15a8cab64002bfcdbd5a5a4385d06ca"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "sha256": "171a25177af885143b12fc369458775f7219ab406696beff5abe22e18eba2554"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook32.dll",
+      "sha256": "88b04943d329dd0f376bcf9761eac8dec2ca63cbdd0164d0c2b62c2e39414bdb"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook64.dll",
+      "sha256": "d36c42dd51f7a0763e4b2f2cecb47bde821f0888fd0b6a6659a5dc0fd61288a4"
+    }
+  ],
+  "normalized_images": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "tests": [
+    "guest-location numeric/far/string/bounds/failed-commit behavior, wrong-owner release rejection, rebind/release, cancellation admission",
+    "lease boundary:45 assertions",
+    "session lease composition",
+    "physical mapping observation",
+    "original external memory",
+    "CCPU high linear page",
+    "session lifecycle",
+    "empty alias isolation",
+    "redirector async publication:27 assertions",
+    "redirector capacity:14 assertions",
+    "thread bind/unbind rollback and cross-DLL binding",
+    "actual CCPU WOW page-domain",
+    "published NESticle menu/Escape pixels",
+    "published DOS DIR normal return"
+  ],
+  "processes": {
+    "build": {
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-location-implementation\\build-only.ps1",
+      "start": "2026-11-19T08:48:03.9277972-08:00",
+      "pid": 14820
+    },
+    "publication": {
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-location-implementation\\publish-only.ps1",
+      "pid": 33228,
+      "start": "2026-11-19T08:51:34.1153549-08:00"
+    },
+    "tests": {
+      "pid": 20876,
+      "start": "2026-11-19T08:52:06.3183692-08:00",
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-location-implementation\\tests.ps1"
+    },
+    "check": {
+      "start": "2026-11-19T08:57:26.9977404-08:00",
+      "pid": 16620,
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-location-implementation\\check.ps1"
+    }
+  },
+  "checks": [
+    "eight production A/B graphs;55 worker A/B units",
+    "worker thread boundary",
+    "changed PS/MJS syntax",
+    "documentation governance and relative links",
+    "git diff --check"
+  ],
+  "admission_contract": "The existing registration_open signal is controlled only by F activation/cancellation/completion and gates B current-owner access. Invalid leases are rejected by the same B lease implementation. No claim of detecting arbitrary corruption of private F metadata.",
+  "evidence_root": "build/t483-s14-location-implementation",
+  "remaining": [
+    "SAS/CCPU original-owner and physical/linear copy boundary",
+    "XMS cancellation remains product policy",
+    "mixed WOW page-domain ownership"
+  ],
+  "limitations": "No Full or new manual Win3.x/Win95 acceptance. No new direct-edge elimination. The generic lease read/write provider remains F and is explicitly not claimed migrated."
+}

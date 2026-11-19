@@ -3,7 +3,7 @@
 #include <winternl.h>
 #include "mvdm_redirector_guest_copy.h"
 #include "ntvdm-exe/session/session.h"
-#include "ntvdm-exe/softpc/include/mvdm_guest_location.h"
+#include "compat/include/guest_location.h"
 #include <stdio.h>
 #include <string.h>
 #undef WideCharToMultiByte
@@ -123,7 +123,6 @@ static void put32(unsigned address, uint32_t value)
 }
 int main(void)
 {
-    if (!mvdm_guest_location_initialize()) return 255;
     session s;
     session_initialize(&s, 1);
     if (!session_activate(&s) || !session_guest_memory_begin(&s, NULL,

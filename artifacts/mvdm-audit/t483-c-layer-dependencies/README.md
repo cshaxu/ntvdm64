@@ -373,3 +373,11 @@ dual11 publication and targeted lease/memory/WOW/DOS tests passed. Mirror delta
 is0 points/0 lines; direct ledger144 eliminated/424 open is unchanged. The
 [source ownership inventory](s14-memory-ownership-inventory.json) retains the
 separate SAS, XMS cancellation, guest-location and WOW page-domain obligations.
+
+S14 P19: [actual guest-location implementation migration](s14-p19-location-implementation.json)
+removes the F source/header and three-operation forwarding table/installers.
+Nine bodies now run in B against the existing bound lease object. F retains
+admission and lifetime policy; no duplicate TLS or session manager. Cached full
+builds, dual11 publication, location/lease/redirector/thread/WOW and real DOS
+checks passed. Mirror delta0/0;144 eliminated/424 open remains unchanged.
+SAS providers, XMS cancellation and mixed WOW page-domain ownership remain open.

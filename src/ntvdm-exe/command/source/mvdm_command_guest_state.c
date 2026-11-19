@@ -1,5 +1,5 @@
 #include "mvdm_command_guest_directory.h"
-#include "mvdm_guest_location.h"
+#include "compat/include/guest_location.h"
 
 #include <stdlib.h>
 #include <string.h>
