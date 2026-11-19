@@ -251,3 +251,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P66 Help inheritance](s12-p66-help-ownership.json): file112; retained-generation scalar distinguished from fresh native query. Review112/116;500/618 open. No product changes.
 
 [P67 Text measurement boundary](s12-p67-text-measure.json): file113 cleared; SDK-only declarations shared in B, mirror unchanged. Cached builds, focused tests, eight A/B graphs and dual publication passed. Review113/116;500/618 open.
+
+[P68 Window geometry](s12-p68-window-geometry-ownership.json): file114; both compile contexts traced, original algorithms retained. Review114/116;500/618 open. No product changes.

@@ -194,4 +194,6 @@ P65: [RTL private reader](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s
 
 P66: [Help ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p66-help-ownership.json).
 
-P67: [Text measurement boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p67-text-measure.json). Reviewed113/116;3 remain;500/618 open. SDK-only text declarations moved to B. Cached builds, focused tests and dual publication passed. All11 images normalized-equal P59. Mirror0/0; cumulative -2 points/-10 lines. S12 active.
+P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p67-text-measure.json).
+
+P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json). Reviewed114/116;2 remain;500/618 open. Mirror0/0; cumulative -2 points/-10 lines. P67 release hashes verified; S12 active.

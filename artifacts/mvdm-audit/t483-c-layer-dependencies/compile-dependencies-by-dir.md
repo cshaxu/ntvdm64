@@ -738,6 +738,8 @@
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 - 直接包含 · C0067 · wow32-dll · src/wow32-dll/include/control-geometry/precomp.h
 
+114 P68: two product contexts checked; retained border TLS and compiled desktop/EDIT inputs remain for S13/S14. Original algorithms unchanged. Mirror0/0; reviewed114/116, open500/618. See s12-p68-window-geometry-ownership.json.
+
 ## 115 — src/non-mvdm/windows/core/ntuser/rtl/wow.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
