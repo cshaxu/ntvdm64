@@ -83,7 +83,6 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_task_termination.c'),
     (Join-Path $adapterWow 'wow_task_parent.c'),
     (Join-Path $adapterWow 'wow_launch_identity.c'),
-    (Join-Path $adapterWow 'wow_native_process.c'),
     (Join-Path $adapterWow 'wow_user_message_bridge.c'),
     (Join-Path $adapterWow 'wow_user_task_lifecycle.c'),
     (Join-Path $adapterWow 'wow_input_group_lifetime.c'),

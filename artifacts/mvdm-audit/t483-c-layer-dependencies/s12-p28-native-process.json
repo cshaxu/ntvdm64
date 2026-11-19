@@ -1,0 +1,78 @@
+{
+  "baseline": "9caf99ecf8edc7e1b644d7a947ca6d1d1b350d04",
+  "status": "verified P28 delivery",
+  "files": [
+    {
+      "number": 44,
+      "file": "src/mvdm-host/wow32/wkgthunk.c",
+      "ids": [
+        "C0123"
+      ],
+      "conclusion": "S13 execution/callback handoff, not a generic SDK wrapper. Existing F EXTENSION_CALL enters native_call_begin_inline and always native_call_end; WOWYield16/DirectedYield16 enter and leave callback scope. Keep original argument conversion in C; audit handoff with existing F entry rather than moving it to B. No dependency eliminated."
+    },
+    {
+      "number": 45,
+      "file": "src/mvdm-host/wow32/wkman.c",
+      "ids": [
+        "C0105",
+        "C0119",
+        "C0112"
+      ],
+      "conclusion": "Remove redundant CreateProcess macro/function. Sole caller WK32LoadModule32 passes addresses of StartupInfo and ProcessInformation; wrapper only rejects NULL and then calls CreateProcessA. Preserve original command construction, flags, wait and error mapping. Idle observer derives from current runtime lifecycle; termination binds/retires service tickets and authorizes process exit; MsgWait borrows and restores WOW execution. Those lifecycle bindings remain S13, not generic B capabilities. C0017 registry already eliminated in P12."
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10,
+    "proof": "No mirror file edited; original call now uses SDK binding."
+  },
+  "progress": {
+    "reviewedFiles": 45,
+    "clearedDirectHeaderFiles": 11,
+    "deferredLifecycleFiles": 28,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 71,
+    "totalFiles": 116,
+    "openIds": 519,
+    "totalIds": 617
+  },
+  "validation": {
+    "build": {
+      "x86": 0,
+      "x64": 0,
+      "root": "build/t483-s12-native-process"
+    },
+    "publication": {
+      "package": "9237d2ce-70df-4ac7-bbf0-a035c01c122c",
+      "receipt": "build/t483-s12-native-process/publication.json",
+      "images": 11,
+      "destinations": [
+        "assets/release",
+        "O:/winnt/system32"
+      ]
+    },
+    "identity": "10 images equal P27 after GUID and PE timestamps only; WOW32 differs substantively, so runtime validation required. See normalized.json.",
+    "boundaries": "Eight A/B graphs and 150 WOW objects / 9 negative controls passed.",
+    "runtime": "Controlled rerun exit0; exact final Winmine/Sol/Write window signatures and expected observer completion markers passed. Private desktop only; owned short-path runtime removed. No gameplay claim.",
+    "coverageLimit": "WOW frontend smoke does not directly execute WK32LoadModule32 CreateProcess branch. Source proof establishes sole call with nonnull addresses and no other wrapper side effects; linked original provider imports CreateProcessA. No complete native launch behavior matrix claimed.",
+    "commit": "This receipt is included in the P28 delivery commit; verify repository HEAD and origin/main after push.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed; build/t483-s12-native-process/docs.log",
+    "evidenceHashes": {
+      "publication.json": "af172340c65d7164a93c7f7361d768a32995fef284d3545d2837025af56d46ea",
+      "normalized.json": "f992f0398e0008d70faa94750c8b44ecf5e485e112f0b3d81bdf360bb1b9a3a9",
+      "runtime-controlled.log": "00d20247829eace32ca13054c55d7d69f1e1df7b279e82bda82abebd2fee6c08",
+      "p28-controlled-winmine-windows.txt": "f73f3eea075c5e76c7a5af8922f0c50bdc6226d16b4a707883884bcfadadc664",
+      "p28-controlled-sol-windows.txt": "f44da63ab2a23cb30a7a84802080cadf49afc86f780adacbd38ec7c31c0c5835",
+      "p28-controlled-write-windows.txt": "72d5270ac78c5b9d2fdfd07c4834d6a059d1f3a87f68e3896ecf79388c43b0d7"
+    }
+  },
+  "sourceHashes": {
+    "src/mvdm-host/wow32/wkman.c": "5616c3f53667b7fa92024cf4bec32452b231addded7c56d78b18d528a63a1b0d",
+    "src/mvdm-host/wow32/wkgthunk.c": "c826aaeceff4640a7a205eefb6b504713f65c868b499f4902c1fb915f0a3f26e",
+    "src/wow32-dll/include/wow_native_process.h": "2edeaa3437e5ceac2986ab82196436081963f56f9c09ef768f93aead69b26c82",
+    "src/wow32-dll/source/wow_user_native_extension.c": "d0dc0dfb97303e3f53344c24d0f3283a0ed5e28d638f93c0902014f010d25d37",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089"
+  }
+}

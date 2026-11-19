@@ -300,12 +300,16 @@
 
 - 强制包含 · C0123 · wow32-dll · src/wow32-dll/include/wow_user_native_extension.h
 
+044 P28: Existing F native-call and callback scopes own execution handoff. Original conversion stays C; classify S13. C0123 remains open. Mirror delta 0 points/0 lines.
+
 ## 045 — src/mvdm-host/wow32/wkman.c
 
 - 直接包含 · C0017 · common · src/common/wow/registry.h
 - 直接包含 · C0105 · wow32-dll · src/wow32-dll/include/wow_idle_hook_binding.h
 - 直接包含 · C0119 · wow32-dll · src/wow32-dll/include/wow_task_termination.h
 - 强制包含 · C0112 · wow32-dll · src/wow32-dll/include/wow_native_process.h
+
+045 P28: remove redundant CreateProcess wrapper; sole caller passes two local structure addresses. Idle, termination and MsgWait remain S13 lifecycle bindings. Mirror delta 0/0, cumulative reduction 2 points/10 lines. Classified45/116, unreviewed71, open519/617. Both cached builds, dual eleven-image publication, eight A/B graphs, 150 WOW objects / nine negative controls and controlled Winmine/Sol/Write frontend checks passed. Recorded in P28 delivery. See s12-p28-native-process.json.
 
 ## 046 — src/mvdm-host/wow32/wmdisp32.c
 
