@@ -1,0 +1,66 @@
+{
+  "baseline": "1c5b270fbe835b32cc3f7bbc049a3fb4221b8f9f",
+  "question": "Which registered cleanup bodies belong in B, C or product composition?",
+  "procedure": "Search all production C/H references to compat_host_context_register and session_register_teardown; read the five F registrations and cleanup bodies, session disposal, B registry disposal and the existing B mapping cleanup.",
+  "observations": {
+    "F_registration_sites": 5,
+    "B_registration_sites": 2,
+    "B_distinct_cleanup_functions": 1,
+    "scope": "Explicit source call sites, not an exhaustive runtime callback trace or macro-generated call proof",
+    "current_order": "session_dispose_with_reason rejects bound threads and armed termination, calls compat_host_context_dispose in reverse registration order, clears presentation text, ends guest memory, then zeros the session. The standalone worker additionally ends memory before its final session disposal; consumers must preserve the actual caller-specific sequence."
+  },
+  "rows": [
+    {
+      "file": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "callback": "state_teardown",
+      "actual_work": "Unlinks the owner's capture pointer, securely clears capture state, frees its heap allocation. Does not wait for or complete a child request.",
+      "destination": "B capture resource with B-owned slot/context; F selects admission and lifetime",
+      "requirements": "Preserve owner generation, single active capture, heap ownership, secure clearing and registration-failure rollback. Do not weaken session_valid by mechanically replacing it with the narrower B validity predicate.",
+      "status": "ownership resolved; complete capture/access migration design pending"
+    },
+    {
+      "file": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "callback": "registration_teardown",
+      "actual_work": "Clears owner slot and frees numeric DOSWOW registration. Same file separately decodes C DOSWOWDATA and CDS using guest memory.",
+      "destination": "B numeric registration and lifetime; C private structure interpretation",
+      "requirements": "Retain lock, context/memory generations, registration before FDC workers and no live-bound-thread disposal. Split private layout access rather than importing DOS headers into B.",
+      "status": "split ownership resolved; memory-provider boundary pending"
+    },
+    {
+      "file": "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c",
+      "callback": "mvdm_softpc_profile_shadow_dispose",
+      "actual_work": "Closes temporary INI handle, deletes temporary path and zeros state. Creation copies selected system.ini and retains delete-on-close handle; failure disposes partially built state.",
+      "destination": "B temporary profile-copy resource and existing package-path capability",
+      "requirements": "C wkernel.c uses this through W32PrivateProfileFileName, falling back to the supplied filename on failure. Preserve that observable failure behavior. package_layout.c supplies both process-derived and explicit roots; do not silently substitute current-image root for explicit-root callers. Preserve owner association and reuse of the same copy.",
+      "caller_evidence": "Production C/H call search finds mvdm_standalone_worker.c using set_process_media_roots. Explicit set_media_roots callers are in test/app/package_layout_fixture.c; no production explicit-root caller found. The fixture exercises path derivation and validation, not an alternative product media selection.",
+      "status": "ownership and source callers resolved; final context carrier and compile/link selection reconciliation pending"
+    },
+    {
+      "file": "src/ntvdm-exe/win32/console_client.c",
+      "callback": "console_client_end",
+      "actual_work": "Clears F console slot and COMMAND binding, stops publisher/input watcher, closes transport/capabilities, disposes NTCON channel and graphics resources.",
+      "destination": "F product composition; generic resource implementations remain inward",
+      "requirements": "Do not move worker-base publication, NTCON transport or command routing into B. Replace registration of this product callback in B with explicit outer-owned cleanup when the complete initialization/failure/disposal chain is restructured; preserve partial-start cleanup and producer-stop ordering.",
+      "status": "F policy confirmed; explicit outer teardown design pending"
+    },
+    {
+      "file": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+      "callback": "page_domain_dispose",
+      "actual_work": "Leaves protected paging, retires original-layout USER storage, stops clock, releases VDM allocations and mappings, disposes clock and zeros domain.",
+      "destination": "C machine/private-layout domain; B clock and independent storage mechanics; F startup/disposal timing",
+      "requirements": "Preserve stop-clock-before-unmap, original VDM allocation ownership, retired borrow handling and protected-mode transition. Do not place the whole callback in B behind CPU/SAS function pointers. Candidate C placement and mirror cost require complete domain review and approval if net diff increases.",
+      "status": "split ownership resolved; C carrier and full domain design pending"
+    },
+    {
+      "file": "src/compat/physical_mapping.c",
+      "callback": "release_owner",
+      "actual_work": "Two registration sites share one callback; removes B-owned numeric mapping/alias records and frees allocations.",
+      "destination": "retain B",
+      "requirements": "Keep owner isolation and existing cleanup ordering with C mappings; this callback does not call a product provider.",
+      "status": "existing inward implementation"
+    }
+  ],
+  "design_constraint": "Do not add a second generic cleanup registry. Use explicit product cleanup in F, B resource disposal for B objects and C domain teardown for machine objects. Preserve dependency ordering across those operations instead of mechanically partitioning the current LIFO list.",
+  "verification": "Source-only architecture review; no production mutation, build, runtime test or new release. No dependency ID closed and mirror delta zero.",
+  "follow_up": "Complete the remaining four-component inventory, resolve explicit-root call sites and C page-domain carrier, then implement the coupled context and teardown changes with lifecycle/failure tests."
+}

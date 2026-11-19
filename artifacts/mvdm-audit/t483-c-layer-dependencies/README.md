@@ -470,3 +470,9 @@ claim full caller/lifetime validation or include header audits. Rows distinguish
 native resource mechanisms, the two approved USER exceptions, private service
 callbacks and unresolved lifecycle contracts. No dependency is closed by this
 inventory; the four-component migration plan remains incomplete.
+
+[Cleanup ownership](s14-cleanup-ownership.json) traces the five F teardown
+registrations and the B mapping callback. Capture/registration/profile-copy
+resources can move inward, Console composition stays F, and WOW machine-domain
+cleanup requires C ownership. Preserve caller-specific teardown order rather
+than adding a second registry or moving every callback into B.
