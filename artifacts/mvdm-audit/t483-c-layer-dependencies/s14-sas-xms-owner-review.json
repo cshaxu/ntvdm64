@@ -1,0 +1,84 @@
+{
+  "task": "T483 S14",
+  "baseline": "30cbe98462baca5a32affa85a6e0cfc1b13a5799",
+  "kind": "source-based SAS/XMS ownership and failure-contract investigation; no runtime acceptance",
+  "inputs": [
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+      "sha256": "681b9e93f652b321a5a6ee8292dbc6449a60edd41499961e39d8caf1323f4b46"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "sha256": "565d0149004bae0d13970e78d7fed16b6f42117328c5dbbee98e8602431a711b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "sha256": "ca0d52f1646efebaae64b7f8e79764ce800b79bb443ef2fecfe2e5161eaa78fd"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "sha256": "b36334e5f935a1e9face8676b35d3752fa5658d5cc6392a0b61958b601af97ee"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "sha256": "8e6a91287be5db3cce2801124ffd5d4d307ae4a31089f9cb0182b63f1cfe602f"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/base/mvdm/xms.486/xmsblock.c",
+      "sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391"
+    }
+  ],
+  "findings": [
+    {
+      "function": "c_sas_loads / c_sas_stores",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c:928-969",
+      "evidence": "Original linear loops return void and dispatch through c_sas_hw_at / c_sas_store. There is no returned whole-range failure status.",
+      "conclusion": "Not a drop-in replacement for a fallible synchronous lease provider."
+    },
+    {
+      "function": "bios_read_byte / bios_write_byte",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c:1553-1613,1744-1804",
+      "evidence": "On xtrn2phy failure, selected PM or VM paths call biosDoInst; PM without selectors returns without a value/status.",
+      "conclusion": "Removing range preflight changes the lease no-guest-entry/failure contract. Preserve it until a source-owned equivalent is implemented and verified."
+    },
+    {
+      "function": "xmsMoveBlock",
+      "source": "src/mvdm-host/xms.486/xmsblock.c:177-219",
+      "original": "OpenNT/base/mvdm/xms.486/xmsblock.c:177-209",
+      "evidence": "Original descriptor uses a host pointer decremented across fields; non-i386 move assumes GetVDMAddr(0,0)+linear address is affine. Current code reads numeric descriptor bytes and uses forward SAS copying.",
+      "conclusion": "Do not restore affine pointers over the admitted noncontiguous mapping model merely to remove F dependencies. Historical R1933-R1941 evidence corroborates the mechanism but does not prove cancellation equals original AX/BL errors."
+    },
+    {
+      "function": "mvdm_xms_cancel_current_operation",
+      "source": "src/ntvdm-exe/softpc/mvdm_xms_memory.c:5",
+      "evidence": "Requests SESSION_CANCELLATION_REQUESTED on the current product session.",
+      "conclusion": "Not a B memory primitive. Keep product cancellation authority outside B; original failure propagation remains a separate design obligation."
+    },
+    {
+      "function": "mvdm_softpc_guest_memory_acquire/release/copy_from/copy_to/move",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c:84-195",
+      "evidence": "These five exported operations use lease mechanics, numeric ranges and bounded buffers. They do not call CPU registers, xtrn2phy or SAS directly.",
+      "conclusion": "Eligible next complete implementation cohort for B, using the existing typed lease binding. Preserve zero-length results, captured owner, per-operation admission, chunk boundaries, partial commit, overlap direction and errors."
+    },
+    {
+      "function": "mvdm_softpc_guest_memory_copy_forward and read/write providers",
+      "source": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c:22-81,150-169",
+      "evidence": "Uses CPU access bits, xtrn2phy, c_sas_memory_size and original c_sas_* operations. Forward-copy preflights source and destination before executing original forward order; WRITE lease hydration is not equivalent.",
+      "conclusion": "Cannot migrate unchanged to B. Do not add a CPU forwarding table or pretend a renamed header removes this implementation dependency."
+    }
+  ],
+  "next_cohort": {
+    "eligible_operations": 5,
+    "owner": "compat",
+    "required_tests": [
+      "existing original-memory and CCPU mapped-memory tests",
+      "zero length and UINT32 boundary",
+      "owner capture and cancellation",
+      "second chunk failure preserving first commit",
+      "overlap direction",
+      "existing redirector and actual DOS regression"
+    ],
+    "mirror_change_requires": "Compute actual original-relative point and line delta before any mirror edit. Net increases require owner approval."
+  },
+  "changes": "Evidence only; product remains P19. No new build or runtime test performed for this investigation."
+}

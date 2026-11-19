@@ -381,3 +381,11 @@ admission and lifetime policy; no duplicate TLS or session manager. Cached full
 builds, dual11 publication, location/lease/redirector/thread/WOW and real DOS
 checks passed. Mirror delta0/0;144 eliminated/424 open remains unchanged.
 SAS providers, XMS cancellation and mixed WOW page-domain ownership remain open.
+
+S14 P20: [actual memory access implementation](s14-p20-memory-access-implementation.json)
+moves five generic access/copy/move bodies into B without mirror edits. Final
+links eliminate C0225-C0227:147 eliminated/421 open. Cached full builds,dual11
+publication,75 lease assertions,33 linear-memory assertions,redirector/thread/
+WOW and published NESticle/DIR pass. [SAS/XMS source review](s14-sas-xms-owner-review.json)
+keeps original CPU algorithms and product cancellation separate; C0040 remains
+open. No new TLS, dispatch table or session manager. Mirror delta0/0.

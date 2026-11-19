@@ -1,0 +1,163 @@
+{
+  "delivery": "T483 S14 P20",
+  "baseline": "30cbe98462baca5a32affa85a6e0cfc1b13a5799",
+  "status": "cached build, dual publication, targeted runtime tests and boundary/governance checks passed",
+  "package": "3b7fca15-11f2-47b3-b598-37319f654d3d",
+  "implementation": "Five guest-memory access/copy/move bodies and their contract now in B; superseded F bodies removed. Uses existing typed lease binding, with captured context across copy chunks. No new TLS, dispatcher, state machine or private session access. Existing SAS read/write callbacks no longer receive an unused session pointer.",
+  "source_review": "s14-sas-xms-owner-review.json",
+  "sources": [
+    {
+      "path": "src/common/guest-memory/access.h",
+      "sha256": "ac107dad120745f5e87e4cdc6d3bfdf7cb010e7a688fbc7e422ea2b01e47d9d4"
+    },
+    {
+      "path": "src/compat/guest_memory_access.c",
+      "sha256": "997a61a96aa1e64943ce24e369a0743749951e7f402dfff2830d725b519de570"
+    },
+    {
+      "path": "src/compat/include/guest_memory_access.h",
+      "sha256": "cacc14ac08ab6852d6dd98e37c5695f838148ee612f4e1abb0f08eba34556658"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h",
+      "sha256": "cb303af9ccf8d7ed213d7ccf62c3631d37741228e98efea9a50274371e070d79"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+      "sha256": "463b132d82537c7108510404568e998a8d11605e8389247f2f8e0a891985df0e"
+    },
+    {
+      "path": "test/compat/guest_memory_lease_boundary_test.c",
+      "sha256": "27842c2851a8e1e086dc7c068f9dbea58e09b93953f10343ded4e05fd7c88d5b"
+    },
+    {
+      "path": "test/ntvdm-exe/softpc/CMakeLists.txt",
+      "sha256": "b27c1b4326fb1824427cdddcb28e0700d9b005fe45c6d83a127543fc641ee4d5"
+    },
+    {
+      "path": "test/ntvdm-exe/softpc/mvdm_softpc_guest_memory_test.c",
+      "sha256": "7bc639e0921c1452aae06e238d9b7abc5fea64435d04ace0de7682b23e24cf3c"
+    },
+    {
+      "path": "test/observation/verify-guest-memory-lease.ps1",
+      "sha256": "5c364b1f774c2954259109b4491f50dce3750f8f0ee30e59324aef0c2d72d182"
+    },
+    {
+      "path": "tools/build/Generate-T371XmsStartupNinja.mjs",
+      "sha256": "a2842ce64c91bee818ac440cc45eccde77fbdb7086272d12ff8718bd40954252"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "5d9a71824cdc0a95decb7bbd01c44efac52445bcd4324b74476b716fe0954df9"
+    },
+    {
+      "path": "tools/build/New-T313CcpuLifecycleNinja.ps1",
+      "sha256": "41253ebbc472fada90aff85904334e815c39b6f890efb4016524b20669c9bf47"
+    },
+    {
+      "path": "tools/build/New-T322XmsMappedMemoryFixtureNinja.ps1",
+      "sha256": "df7a20bc01b18376962815d9bf20386d96ab62ebd9db13b4b2b9701302a9493b"
+    },
+    {
+      "path": "tools/build/New-T335S3WowCallbackFrameNinja.ps1",
+      "sha256": "ab8b7a444e33654246cb191b1e52081f58a76b0fb68813a7e568c3a981d778c0"
+    }
+  ],
+  "link_evidence": {
+    "path": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map",
+    "sha256": "ed1ab89e8d93ba271adc5d8a97b602f93604afeaa6a5724d3ae9d85c271577a0",
+    "symbols": [
+      " 0001:00002c90       _mvdm_softpc_guest_memory_acquire 00403c90 f   session:guest_memory_access.obj",
+      " 0001:00002ce0       _mvdm_softpc_guest_memory_copy_from 00403ce0 f   session:guest_memory_access.obj",
+      " 0001:00002de0       _mvdm_softpc_guest_memory_copy_to 00403de0 f   session:guest_memory_access.obj",
+      " 0001:00002ee0       _mvdm_softpc_guest_memory_move 00403ee0 f   session:guest_memory_access.obj",
+      " 0001:00003160       _mvdm_softpc_guest_memory_release 00404160 f   session:guest_memory_access.obj"
+    ]
+  },
+  "mirror": {
+    "changed_files": 0,
+    "delta_points": 0,
+    "delta_lines": 0,
+    "cumulative_reduction_points": 3,
+    "cumulative_reduction_lines": 12
+  },
+  "ledger": {
+    "total": 618,
+    "eliminated": 147,
+    "open": 421,
+    "supporting_evidence": 44,
+    "eliminated_transitive": 5,
+    "excluded_diagnostic": 1,
+    "newly_eliminated": [
+      "C0225",
+      "C0226",
+      "C0227"
+    ],
+    "mixed_header_still_open": "C0040"
+  },
+  "build": "cached x86/x64 products and reference-x86 worker",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "3b7fca15-11f2-47b3-b598-37319f654d3d",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "tests": [
+    "lease boundary75 assertions: slot isolation, overlap both directions, second-chunk failure retains first commit, context switch during copy, cancellation, zero count and UINT32 bounds",
+    "linear guest-memory33 assertions through unchanged SAS provider with simulated CCPU services",
+    "session lease composition",
+    "physical mapping observation",
+    "original external memory",
+    "CCPU high linear page",
+    "guest location",
+    "session lifecycle",
+    "empty alias",
+    "redirector async27 assertions",
+    "redirector capacity14 assertions",
+    "thread binding rollback and cross-DLL ownership",
+    "actual CCPU WOW page-domain",
+    "published DOS4GW/NESticle menu pixels and Escape hide/restore",
+    "published DOS DIR final0 entered-dos1 dirty-prompt0"
+  ],
+  "processes": {
+    "build": {
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-memory-access-implementation/build-only.ps1",
+      "pid": 9908,
+      "start": "2026-11-19T09:07:36.3819826-08:00"
+    },
+    "publication": {
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-memory-access-implementation/publish-only.ps1",
+      "start": "2026-11-19T09:10:56.3581745-08:00",
+      "pid": 32172
+    },
+    "tests": {
+      "pid": 35180,
+      "start": "2026-11-19T09:11:30.6776612-08:00",
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-memory-access-implementation/tests.ps1"
+    },
+    "check": {
+      "start": "2026-11-19T09:17:33.5509808-08:00",
+      "pid": 15604,
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-memory-access-implementation/check.ps1"
+    }
+  },
+  "evidence_root": "build/t483-s14-memory-access-implementation",
+  "limitations": [
+    "No Full or new manual Windows acceptance claimed.",
+    "B admission uses the existing F-controlled registration_open, as P19; arbitrary private F metadata corruption detection is not claimed.",
+    "SAS provider and copy_forward remain F-to-C original-owner work; XMS cancellation remains product policy; WOW page-domain ownership remains open.",
+    "C0040 mixed header remains F-owned; public copy/move implementations are B-owned."
+  ],
+  "normalized_images": "NTVDM differs; other10 equal after package GUID and PE COFF/debug timestamp masking.",
+  "checks": [
+    "eight A/B graphs;56 worker A/B units",
+    "worker thread boundary",
+    "changed PS/MJS syntax",
+    "documentation governance and relative links",
+    "git diff --check"
+  ]
+}

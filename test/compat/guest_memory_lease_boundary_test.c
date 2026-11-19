@@ -1,19 +1,29 @@
 #include "compat/include/guest_memory_lease.h"
+#include "compat/include/guest_memory_access.h"
+#include "compat/include/host_context.h"
 #include <stdio.h>
 #include <string.h>
 
 typedef struct memory {
-    uint8_t bytes[64];
+    uint8_t bytes[12288];
     unsigned reads, writes;
     int fail_read, fail_write;
+    uint32_t fail_address;
+    compat_host_context *switch_from, *switch_to;
 } memory;
 
 static int read_bytes(void *opaque, uint32_t address, uint8_t *bytes, uint32_t count)
 {
     memory *m = (memory *)opaque;
     ++m->reads;
-    if (m->fail_read || address > 64u || count > 64u - address) return 0;
+    if (m->fail_read || address > sizeof(m->bytes) || count > sizeof(m->bytes) - address) return 0;
+    if (m->fail_address && address >= m->fail_address) return 0;
     memcpy(bytes, m->bytes + address, count);
+    if (m->switch_to) {
+        compat_host_context_unbind(m->switch_from);
+        compat_host_context_bind(m->switch_to);
+        m->switch_to = NULL;
+    }
     return 1;
 }
 
@@ -21,7 +31,7 @@ static int write_bytes(void *opaque, uint32_t address, const uint8_t *bytes, uin
 {
     memory *m = (memory *)opaque;
     ++m->writes;
-    if (m->fail_write || address > 64u || count > 64u - address) return 0;
+    if (m->fail_write || address > sizeof(m->bytes) || count > sizeof(m->bytes) - address) return 0;
     memcpy(m->bytes + address, bytes, count);
     return 1;
 }
@@ -33,6 +43,8 @@ static int write_bytes(void *opaque, uint32_t address, const uint8_t *bytes, uin
 int main(void)
 {
     guest_memory_lease_context a = {0}, b = {0};
+    compat_host_context ca = {0}, cb = {0};
+    uint8_t reference[12288], copied[8192];
     memory ma = {0}, mb = {0};
     guest_memory_lease *lease, *slots[GUEST_MEMORY_LEASE_MAXIMUM];
     guest_memory_lease forged = {0};
@@ -88,6 +100,41 @@ int main(void)
     guest_memory_lease_end(&a);
     a.epoch = UINT32_MAX;
     CHECK(guest_memory_lease_begin(&a, &ma, read_bytes, write_bytes) && a.epoch == 1u);
+    ca.guest_memory = &a; cb.guest_memory = &b;
+    ca.registration_open = cb.registration_open = 1;
+    CHECK(compat_host_context_bind(&ca));
+    for (i = 0; i < sizeof(ma.bytes); ++i) ma.bytes[i] = (uint8_t)(i * 13u);
+    memcpy(reference, ma.bytes, sizeof(reference));
+    memmove(reference + 123, reference, 8192);
+    CHECK(mvdm_softpc_guest_memory_move(123, 0, 8192));
+    CHECK(!memcmp(reference, ma.bytes, sizeof(reference)));
+    memmove(reference, reference + 123, 8192);
+    CHECK(mvdm_softpc_guest_memory_move(0, 123, 8192));
+    CHECK(!memcmp(reference, ma.bytes, sizeof(reference)));
+    memset(copied, 0xab, sizeof(copied));
+    ma.fail_address = 4096;
+    CHECK(!mvdm_softpc_guest_memory_copy_to(0, copied, sizeof(copied)));
+    CHECK(!memcmp(ma.bytes, copied, 4096));
+    CHECK(!memcmp(ma.bytes + 4096, reference + 4096, 4096));
+    ma.fail_address = 0;
+    ma.switch_from = &ca; ma.switch_to = &cb;
+    CHECK(mvdm_softpc_guest_memory_copy_from(0, copied, sizeof(copied)));
+    CHECK(!memcmp(copied, ma.bytes, sizeof(copied)));
+    CHECK(compat_host_context_current() == &cb);
+    for (i = 0; i < GUEST_MEMORY_LEASE_MAXIMUM; ++i) CHECK(!a.leases[i].active);
+    CHECK(compat_host_context_unbind(&cb));
+    CHECK(compat_host_context_bind(&ca));
+    CHECK(mvdm_softpc_guest_memory_acquire(0, 1, GUEST_MEMORY_ACCESS_READ, &lease, &bytes));
+    ca.registration_open = 0;
+    CHECK(!mvdm_softpc_guest_memory_release(lease, 0));
+    CHECK(!mvdm_softpc_guest_memory_copy_from(0, copied, 1));
+    CHECK(mvdm_softpc_guest_memory_copy_from(UINT32_MAX, NULL, 0));
+    ca.registration_open = 1;
+    CHECK(mvdm_softpc_guest_memory_release(lease, 0));
+    CHECK(!mvdm_softpc_guest_memory_copy_to(UINT32_MAX, copied, 1));
+    CHECK(compat_host_context_unbind(&ca));
+    CHECK(!mvdm_softpc_guest_memory_copy_from(0, NULL, 0));
+    CHECK(mvdm_softpc_guest_memory_move(0, 0, 0));
     guest_memory_lease_end(&a);
     guest_memory_lease_end(&b);
     printf("LEASE_BOUNDARY_PASS checks=%u\n", checks);

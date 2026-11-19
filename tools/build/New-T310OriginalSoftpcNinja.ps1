@@ -1259,6 +1259,9 @@ $sessionObjects += 'obj/compat/host_context.obj'
 $graph.Add('build obj/compat/guest_memory_lease.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/guest_memory_lease.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/guest_memory_lease.obj'
+$graph.Add('build obj/compat/guest_memory_access.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/guest_memory_access.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$sessionObjects += 'obj/compat/guest_memory_access.obj'
 $graph.Add('build obj/compat/physical_mapping.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/physical_mapping.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/physical_mapping.obj'

@@ -28,6 +28,19 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+S14 P20 migrates five guest-memory acquire/release/copy/move implementations
+and their contract into B. F keeps SAS providers and lifecycle ownership;
+there is no new binding or state machine. Cached full builds, dual11 publication
+and22 hashes,75 lease-boundary assertions,33 linear-memory assertions,
+redirector27/14,thread,WOW page-domain,NESticle and DOS DIR passed.
+Package3b7fca15-11f2-47b3-b598-37319f654d3d is published.
+[P20 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p20-memory-access-implementation.json)
+records actual symbol ownership. C0225-C0227 are eliminated:147 eliminated,
+421 open of618. Mirror delta0/0; cumulative reduction3 points/12 lines.
+The mixed SAS header/provider, XMS cancellation and WOW ownership remain open;
+[source investigation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-sas-xms-owner-review.json)
+explains why raw SAS void operations cannot replace fallible leases.
+
 S14 P19 removes the F guest-location source/private header and three-operation
 forwarding table/installers. Nine operation bodies now execute in B using the
 existing thread binding and a typed reference to the same B lease object.

@@ -23,6 +23,7 @@ const sources = [
   "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
   "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
   "src/compat/guest_memory_lease.c",
+  "src/compat/guest_memory_access.c",
   "src/ntvdm-exe/session/session.c"
 ];
 const includes = [

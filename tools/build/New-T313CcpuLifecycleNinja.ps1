@@ -38,7 +38,7 @@ $ccpu = @(Get-OriginalSources (Join-Path $ccpuRoot 'sources'))
 $hostSources = @('nt_cpu.c', 'sim32.c', 'nt_mem.c')
 $controllerSources = @('at_dma.c', 'ica.c')
 $supportSources = @('ios.c')
-$adapterSources = @('src/ntvdm-exe/softpc/mvdm_softpc_execution.c', 'src/ntvdm-exe/softpc/mvdm_softpc_termination.c', 'src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c', 'src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/compat/physical_mapping.c', 'src/ntvdm-exe/softpc/mvdm_a20.c', 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c', 'src/compat/guest_memory_lease.c')
+$adapterSources = @('src/ntvdm-exe/softpc/mvdm_softpc_execution.c', 'src/ntvdm-exe/softpc/mvdm_softpc_termination.c', 'src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c', 'src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/compat/guest_memory_access.c', 'src/compat/physical_mapping.c', 'src/ntvdm-exe/softpc/mvdm_a20.c', 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c', 'src/compat/guest_memory_lease.c')
 $testSources = @('test/mvdm-host/ccpu_bounded_execution_fixture.c', 'test/mvdm-host/ccpu_bounded_execution_fixture_seams.c')
 foreach ($name in $ccpu) { if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Missing original CCPU source: $name" } }
 foreach ($name in $hostSources) { if (!(Test-Path -LiteralPath (Join-Path $hostRoot $name))) { throw "Missing original host source: $name" } }

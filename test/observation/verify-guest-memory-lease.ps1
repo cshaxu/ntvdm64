@@ -11,6 +11,7 @@ New-Item -ItemType Directory -Force $out | Out-Null
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $lease = Join-Path $repo 'src/compat/guest_memory_lease.c'
 $session = Join-Path $repo 'src/ntvdm-exe/session/session.c'
+$access = Join-Path $repo 'src/compat/guest_memory_access.c'
 $hostContext = Join-Path $repo 'src/compat/host_context.c'
 foreach ($name in @('guest_memory_lease_boundary_test', 'guest_memory_lease_test')) {
     $dir = Join-Path $out $name
@@ -18,6 +19,7 @@ foreach ($name in @('guest_memory_lease_boundary_test', 'guest_memory_lease_test
     $component = if ($name -eq 'guest_memory_lease_boundary_test') { 'compat' } else { 'session' }
     $fixture = Join-Path $repo ('test/' + $component + '/' + $name + '.c')
     $sources = '"' + $fixture + '" "' + $lease + '"'
+    if ($name -eq 'guest_memory_lease_boundary_test') { $sources += ' "' + $access + '" "' + $hostContext + '"' }
     if ($name -eq 'guest_memory_lease_test') { $sources += ' "' + $session + '" "' + $hostContext + '"' }
     $command = 'call "' + $vs + '" -arch=x86 -host_arch=x64 >nul && cl /nologo /W4 /MT /TC /I"' +
         (Join-Path $repo 'src') + '" /Fo"' + $dir.Replace('\', '/') + '/" /Fe"' + $dir + '\fixture.exe" ' + $sources
@@ -27,6 +29,6 @@ foreach ($name in @('guest_memory_lease_boundary_test', 'guest_memory_lease_test
     $code = $LASTEXITCODE
     "exit=$code" | Add-Content (Join-Path $dir 'result.txt')
     if ($code) { throw "Lease test failed: $name" }
-    Get-FileHash $fixture, $lease, $session, $hostContext, (Join-Path $dir 'fixture.exe') |
+    Get-FileHash $fixture, $lease, $session, $hostContext, $access, (Join-Path $dir 'fixture.exe') |
         ConvertTo-Json | Set-Content (Join-Path $dir 'identity.json')
 }

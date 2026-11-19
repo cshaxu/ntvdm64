@@ -51,6 +51,9 @@ int main(void)
     guest_memory_lease *lease;
     unsigned before;
     owner.state = SESSION_STATE_ACTIVE;
+    owner.host_context.registration_open = 1;
+    owner.host_context.guest_memory = &owner.guest_memory_lease;
+    CHECK(compat_host_context_bind(&owner.host_context));
     CHECK(mvdm_softpc_guest_memory_begin(&owner));
     CHECK(mvdm_softpc_guest_memory_copy_from(0x3ff0, bytes, 16));
     CHECK(!translations && reads == 1 && bytes[0] == 0x5a);
@@ -86,6 +89,7 @@ int main(void)
         CHECK(!owner.guest_memory_lease.leases[i].active);
     mvdm_softpc_guest_memory_end(&owner);
     CHECK(!owner.guest_memory_lease.active);
+    CHECK(compat_host_context_unbind(&owner.host_context));
     printf("PASS %u linear guest-memory assertions\n", checks);
     return 0;
 }
