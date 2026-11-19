@@ -1,0 +1,36 @@
+{
+  "head": "7ad424347",
+  "scope": "S12 sequential file006-008 ownership review, no product change",
+  "files": {
+    "006 dem.h": "F guest lease consumed by demhndl.c through shared header; S13 coupled with cmdmisc. No removal claimed.",
+    "007 demgset.c": "F DOSWOWDATA registration, epochs and teardown; VM notification operation6 consumes it. S13 lifecycle boundary.",
+    "008 demsrch.c": "In progress: hint calls F ntioapi facade through B macro. Facade is standalone native API adaptation; isolated B-only compilation passed."
+  },
+  "candidate": {
+    "input": "build/t483-s12-ntio-review/facade.c",
+    "sha256": "c1575ce20f958ca226e362c614d9419cdbf118049e4006db81049eb1597f7014",
+    "exit": 0,
+    "flags": "/c /W4 /we4013 /showIncludes /I src",
+    "original": "src/ntvdm-exe/win32/ntioapi_facade.c",
+    "change": "Replace only nt.h include with windows.h, ntstatus.h, winternl.h, devioctl.h and compat/include/ntioapi.h; no function body change"
+  },
+  "priorCounterexample": "r0117-r0133-requalification.json: removing hint fallback fails three of 115 assertions. Historical necessity evidence, not a new current runtime pass.",
+  "progress": {
+    "fullyReviewed": 7,
+    "inProgress": 8,
+    "fullyClearedDirectHeader": 3,
+    "totalFiles": 116,
+    "openStableIds": 546,
+    "totalStableIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "limits": [
+    "B migration not implemented or published",
+    "Independent compile is not product-link/runtime evidence",
+    "Existing lifecycle dependencies remain open for S13"
+  ],
+  "supersededBy": "s12-p14-native-io.json resolves file008; 006 and 007 remain S13 lifecycle work."
+}

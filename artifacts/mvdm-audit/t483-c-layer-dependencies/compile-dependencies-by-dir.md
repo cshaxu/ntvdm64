@@ -49,14 +49,20 @@
 
 - 直接包含 · C0034 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_guest_location.h
 
+006 核查：dem.h 本身不使用 guest_location；demhndl.c 的 DOS 读写通过它使用 acquire/release 和数值地址。提供者调用 session_guest_memory_acquire/release，具有 F 生命周期依赖。不能单删头，也不能把 include 移到 demhndl.c 就宣称依赖消除。与 004 归入 S13 同一租约接线组；源码未改，镜像变化 0 点、0 行。
+
 ## 007 — src/mvdm-host/dos/dem/demgset.c
 
 - 直接包含 · C0017 · common · src/common/wow/registry.h
 - 直接包含 · C0023 · ntvdm-exe · src/ntvdm-exe/command/include/mvdm_command_guest_directory.h
 
+007 核查：C0017 注册表头已下沉 B。C0023 在 demSetDTALocation 登记 DOSWOWDATA 数值地址；F command_registration 保存 session/memory epoch，teardown 释放。消费者 mvdm_vm_notification operation 6 返回 CDS 数值地址与大小给驱动桥。归 S13 产品注册/销毁接线，当前一项直接外层依赖仍开放；源码未改，镜像变化 0 点、0 行。
+
 ## 008 — src/mvdm-host/dos/dem/demsrch.c
 
 - 直接包含 · C0027 · ntvdm-exe · src/ntvdm-exe/session/dem_restart_hint.h
+
+008 P14 结论：目录恢复 helper 与 NT I/O 包装整体下沉 B。helper 为独立 B 编译单元，仅头文件暴露原有状态/入口；避免重复原版 C 的 NTDLL 导入属性。两架构独立 B 接口测试及原版 DEM 115 断言通过。生产两架构 cached 构建、八产品图依赖检查通过；本文件直接外层头依赖 1→0。仅改 include 路径，镜像净变 0 点、0 行，#error/#line 不变。累计审查 8/116，直接外层编译依赖已清理 4，四个生命周期文件留待 S13，尚未审查 108。
 
 ## 009 — src/mvdm-host/dpmi32/i386/dpmi386.c
 

@@ -251,7 +251,7 @@ if (!(Test-Path -LiteralPath $hostEntryResourceSource)) { throw "Original SoftPC
 if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC export definition missing: $hostExportDefinition" }
 if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector resource missing: $redirResourceSource" }
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
-$adapterWin32Names = @('ntioapi_facade.c', 'ccpu_thread_exit_compat.c',
+$adapterWin32Names = @('ccpu_thread_exit_compat.c',
                           'console_compat.c', 'console_client.c', 'worker_lifecycle.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c', 'wow_hard_error_decoder.c',
@@ -1158,6 +1158,12 @@ $graph.Add('build ' + $consoleGridObject + ': cc ' + (NinjaPath (Join-Path $root
 $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes')
 $adapterWin32Objects += $consoleGridObject
 $libraryFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+$graph.Add('build obj/adapter-win32/ntioapi_facade.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/ntioapi_facade.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterWin32Objects += 'obj/adapter-win32/ntioapi_facade.obj'
+$graph.Add('build obj/adapter-win32/dem_restart_hint.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/dem_restart_hint.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterWin32Objects += 'obj/adapter-win32/dem_restart_hint.obj'
 $crtCompatObject = 'obj/lib-win32/crt-compat/crt_compat.obj'
 $graph.Add('build ' + $crtCompatObject + ': cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/crt-compat/crt_compat.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT')

@@ -1,14 +1,16 @@
-/* Bounded user-mode fallback for DEM's unavailable indexed directory query. */
-#ifndef DEM_RESTART_HINT_H
-#define DEM_RESTART_HINT_H
+#define WIN32_NO_STATUS
+#include <windows.h>
+#undef WIN32_NO_STATUS
+#include <ntstatus.h>
+#include <winternl.h>
+#include <devioctl.h>
+#include "compat/include/ntioapi.h"
+#include "compat/include/dem_restart_hint.h"
 
-typedef struct _DEM_RESTART_HINT {
-    ULONG Index;
-    ULONG Length;
-    WCHAR Name[MAXIMUM_FILENAME_LENGTH + 1];
-} DEM_RESTART_HINT;
+NTSYSAPI LONG NTAPI RtlCompareUnicodeString(PCUNICODE_STRING String1,
+    PCUNICODE_STRING String2, BOOLEAN CaseInSensitive);
 
-static void DemCaptureRestartHint(DEM_RESTART_HINT *hint, PFILE_BOTH_DIR_INFORMATION next)
+void DemCaptureRestartHint(DEM_RESTART_HINT *hint, PFILE_BOTH_DIR_INFORMATION next)
 {
     hint->Length = 0;
     if (next && next->FileNameLength && !(next->FileNameLength & 1) &&
@@ -19,7 +21,7 @@ static void DemCaptureRestartHint(DEM_RESTART_HINT *hint, PFILE_BOTH_DIR_INFORMA
     }
 }
 
-static NTSTATUS DemFindRestartHint(const DEM_RESTART_HINT *hint, HANDLE directory,
+NTSTATUS DemFindRestartHint(const DEM_RESTART_HINT *hint, HANDLE directory,
                                   PVOID buffer, ULONG size, PVOID *next)
 {
     IO_STATUS_BLOCK io;
@@ -51,4 +53,3 @@ static NTSTATUS DemFindRestartHint(const DEM_RESTART_HINT *hint, HANDLE director
         }
     }
 }
-#endif

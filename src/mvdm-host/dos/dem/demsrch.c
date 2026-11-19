@@ -19,7 +19,7 @@
 #include <mvdm.h>
 #include <memory.h>
 #include <nt_vdd.h>
-#include "../../../ntvdm-exe/session/dem_restart_hint.h"
+#include "compat/include/dem_restart_hint.h"
 #line 22
 
 #line 23

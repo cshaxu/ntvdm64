@@ -1,0 +1,91 @@
+{
+  "baseline": "7ad424347",
+  "eliminated": [
+    "C0027",
+    "C0307",
+    "C0308",
+    "C0309",
+    "C0310",
+    "C0311",
+    "C0312",
+    "C0313",
+    "C0314",
+    "C0315",
+    "C0316"
+  ],
+  "mirror": {
+    "path": "src/mvdm-host/dos/dem/demsrch.c",
+    "pointsDelta": 0,
+    "linesDelta": 0,
+    "errorAndLineUnchanged": true
+  },
+  "ownership": "SDK/B-only native I/O and restart helper; no session/guest state. RtlCompareUnicodeString resolves to native ntdll.",
+  "behavior": "All function bodies retained byte-for-byte after LF normalization; restart helper changes from static in C translation unit to B external functions with same parameters/returns.",
+  "tests": {
+    "x86": 0,
+    "x64": 0,
+    "directoryAssertions": 115,
+    "directoryFailures": 0,
+    "directoryScope": "Actual selected original DEM translation unit and native filesystem; not guest INT21 coverage",
+    "initialFailures": [
+      "New negative test incorrectly required INVALID_HANDLE for -1 pseudo handle; now compares exact native status.",
+      "Repeated native import declaration conflicted with original C linkage; definitions isolated in B.",
+      "Test archived stale pre-P11 fixture objects; runner now refreshes dependency closure before linking."
+    ]
+  },
+  "counts": {
+    "totalStableIds": 617,
+    "open": 535,
+    "eliminated": 32,
+    "supporting": 44,
+    "eliminatedTransitive": 5,
+    "diagnostic": 1,
+    "reviewedFiles": 8,
+    "clearedDirectHeaderFiles": 4,
+    "deferredLifecycleFiles": 4,
+    "unreviewedFiles": 108,
+    "totalFiles": 116
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "438e50cb-4b46-435a-923a-2b22a6a3561f",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "build": "Both cached architectures pass",
+  "fullRuntime": "Not run; targeted scope authorized",
+  "sourceHashes": {
+    "src/compat/ntioapi_facade.c": "c1575ce20f958ca226e362c614d9419cdbf118049e4006db81049eb1597f7014",
+    "src/compat/dem_restart_hint.c": "215eb2a4bd8977741a0f86440f452e2307798a0d35617a9172ab587a280079f9",
+    "src/compat/include/dem_restart_hint.h": "8212ded52ea1b495279ca92e94724e649063683f50962e321459579ba50fdf6b",
+    "src/mvdm-host/dos/dem/demsrch.c": "50ca789a57f5cbf5412a9109b1b5f4baedd6819d8b5efe4cf2a5b531310b2c28",
+    "test/compat/ntioapi_facade_test.c": "f0c416c7ea9a58b364da14d3963eed816d93b86095921a0d94408ab990f49749",
+    "test/observation/verify-dem-directory-reset.ps1": "40c223b70dcaa1604713b330eaedae4ade102fdae621412a309c436fc57d47c6"
+  },
+  "directoryResult": {
+    "exit_code": 0,
+    "elapsed_ms": 272,
+    "original_sha256": "50CA789A57F5CBF5412A9109B1B5F4BAEDD6819D8B5EFE4CF2A5B531310B2C28",
+    "executable_sha256": "C71DC54F7C7D05B899E5947CEA51F3BAAA3362CB87D004842CA1279EE8D73DAF",
+    "scope": "Actual original DEM functions and real NT directory calls; provider fixture, not guest INT21 proof"
+  },
+  "commands": [
+    "build/t483-s12-registry/build.cmd x86",
+    "build/t483-s12-registry/build.cmd x64",
+    "tools/build/New-T280S11NtioapiFacadeNinja.ps1 -Architecture x86 / x64; ninja; ntioapi_facade_fixture.exe",
+    "test/observation/verify-dem-directory-reset.ps1 -OutputRoot build/t483-s12-ntio/directory-refreshed",
+    "python tools/audit/verify-library-build-boundary.py"
+  ],
+  "postPublication": {
+    "nativeX86": 0,
+    "nativeX64": 0,
+    "directoryAssertions": 115,
+    "directoryFailures": 0,
+    "documentation": 0,
+    "gitDiffCheck": 0
+  }
+}

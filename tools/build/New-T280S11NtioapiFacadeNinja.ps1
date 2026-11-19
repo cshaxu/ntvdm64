@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T280/{0}-ntioapi-facade" -f $Architecture)
 New-Item -ItemType Directory -Force -Path $build | Out-Null
-$cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DDEVL=1 /showIncludes /I ' + $root + '/src /I ' + $root + '/src/compat/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/mvdm-host/dos/dem /I ' + $root + '/src/mvdm-host/inc /I ' + $root + '/src/non-mvdm/public/sdk/inc /I ' + $root + '/src/non-mvdm/public/ddk/inc /I ' + $root + '/src/mvdm-host/softpc.new/base/inc /I ' + $root + '/src/mvdm-host/softpc.new/host/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /we4013 /showIncludes /I ' + $root + '/src'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -23,12 +23,13 @@ rule cc
   deps = msvc
   description = CC `$in
 rule link
-  command = link /nologo /out:`$out `$in kernel32.lib
+  command = link /nologo /out:`$out `$in kernel32.lib ntdll.lib
   description = LINK `$out
 
-build obj/ntioapi_facade.obj: cc `$root/src/ntvdm-exe/win32/ntioapi_facade.c
-build obj/ntioapi_fixture.obj: cc `$root/test/adapter-mvdm-host-out/win32/t280_s11_ntioapi_facade_fixture.c
-build ntioapi_facade_fixture.exe: link obj/ntioapi_facade.obj obj/ntioapi_fixture.obj
+build obj/ntioapi_facade.obj: cc `$root/src/compat/ntioapi_facade.c
+build obj/dem_restart_hint.obj: cc `$root/src/compat/dem_restart_hint.c
+build obj/ntioapi_fixture.obj: cc `$root/test/compat/ntioapi_facade_test.c
+build ntioapi_facade_fixture.exe: link obj/ntioapi_facade.obj obj/dem_restart_hint.obj obj/ntioapi_fixture.obj
 default ntioapi_facade_fixture.exe
 "@
 [System.IO.File]::WriteAllText((Join-Path $build 'build.ninja'), $content + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))

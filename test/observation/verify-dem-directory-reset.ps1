@@ -31,6 +31,11 @@ $dependencies=@('obj/tests/ccpu_bounded_execution_fixture_seams.obj','obj/tests/
     'lib-pipe.lib','lib-process-observation.lib','lib-file.lib','common-codec.lib','common-console.lib',
     'common-worker-thread.lib','lib-thread.lib','lib-process-hook.lib','lib-process-image.lib',
     'lib-handle.lib','lib-process-launch.lib','lib-crt-compat.lib')
+# Refresh the selected fixture closure: a product-only build does not relink
+# every fixture archive, and existing files alone do not prove current inputs.
+& $wrapper ninja -C (Join-Path $repo $BuildCache) @dependencies 2>&1 |
+    Tee-Object (Join-Path $out 'build.txt') -Append
+if($LASTEXITCODE){throw 'Fixture dependency build failed'}
 $libraries=$dependencies | ForEach-Object {
     $p=Join-Path (Join-Path $repo $BuildCache) $_
     if(!(Test-Path $p)){throw "Missing cache input $_"}; $p

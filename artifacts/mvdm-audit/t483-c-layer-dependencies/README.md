@@ -106,3 +106,12 @@ include B system_root.h. C0039 remains open for other consumers. Five files
 reviewed, three cleared, two lifecycle moves for S13, 111 unreviewed.
 Both cached architectures and normalized eleven-image identity passed; both
 release destinations are hash-verified. No repeated runtime tests.
+
+## P14 native I/O ownership
+
+[Evidence](s12-p14-native-io.json) completes file 008. C0027 and C0307-C0316
+now bind to B. 617 stable IDs remain: 535 open, 32 eliminated, 44 supporting,
+five eliminated transitive, one diagnostic. Sequential review: 8/116, four
+cleared direct header dependencies, four lifecycle moves reserved for S13.
+Both cached architectures, native ABI tests and original DEM 115 assertions
+passed. Eleven images are published and hash-verified. Mirror delta is zero.

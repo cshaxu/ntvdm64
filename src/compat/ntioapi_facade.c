@@ -1,4 +1,10 @@
-#include <nt.h>
+#define WIN32_NO_STATUS
+#include <windows.h>
+#undef WIN32_NO_STATUS
+#include <ntstatus.h>
+#include <winternl.h>
+#include <devioctl.h>
+#include "compat/include/ntioapi.h"
 
 #undef IO_STATUS_BLOCK
 #undef PIO_STATUS_BLOCK
