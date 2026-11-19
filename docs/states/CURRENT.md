@@ -76,7 +76,7 @@ P33: [Console-handle delivery](../../artifacts/mvdm-audit/t483-c-layer-dependenc
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.
 
-P34 delivered the unchanged private Browser unavailable provider F to B; original public enumeration remains C. Both builds, dual publication,37 original enumeration assertions and96 actual DOS calls passed. [P34 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p34-remote-browser.json).
+P34: [native Browser boundary delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p34-remote-browser.json).
 
 P35: [bitmap and icon provider delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p35-bitmap-native.json).
 
@@ -102,7 +102,9 @@ P45: [EDIT creation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependenc
 
 P46: [rare EDIT operations](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p46-edit-rare-ownership.json).
 
-P47: [DDE declaration delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p47-dde-header.json). Review89/116:17 clears,58 lifecycle,14 source/ABI,27 unreviewed;502/617 open. Cached builds, dual publication, DDE and boundary checks passed;11 images normalized-equal P44. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P47: [DDE declaration delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p47-dde-header.json).
+
+P48: [ListBox entry ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p48-list-entry-ownership.json). Review90/116:17 clears,59 lifecycle,14 source/ABI,26 unreviewed;502/617 open. Source classification only; P47 release22 hashes reverified. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

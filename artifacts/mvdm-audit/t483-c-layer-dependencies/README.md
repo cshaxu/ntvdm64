@@ -211,3 +211,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P46 rare EDIT operations](s12-p46-edit-rare-ownership.json): files087-088; callback/native-return and mixed-header dependencies distinguished. Review88/116,503/617 open; production unchanged.
 
 [P47 DDE declarations](s12-p47-dde-header.json): file089 cleared by unchanged header move to B; both builds, dual publication and DDE fixture passed. Review89/116,502/617 open.
+
+[P48 ListBox entry](s12-p48-list-entry-ownership.json): file090; original dispatch/storage/encoding remain C, shared lifecycle and ABI dependencies stay open. Review90/116,502/617 open.

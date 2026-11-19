@@ -587,6 +587,8 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+090 P48: Original ListBox algorithms stay C;15 actual outer symbols classified as shared entry/borrow/native return (S13), with original FNID/extent/message-table cohort (S14). No pure native provider remains to move in place. Mirror delta0/0; see s12-p48-list-entry-ownership.json.
+
 ## 091 — src/non-mvdm/windows/core/ntuser/client/lboxctl1.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
