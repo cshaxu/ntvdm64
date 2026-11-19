@@ -1,4 +1,4 @@
-#include "wow_user_probe_bindings.h"
+#include "compat/include/wow_user_probe_bindings.h"
 #include <stdio.h>
 static unsigned errors;
 #define CHECK(x) do { if(!(x)){++errors;printf("FAIL %d\n",__LINE__);} } while(0)

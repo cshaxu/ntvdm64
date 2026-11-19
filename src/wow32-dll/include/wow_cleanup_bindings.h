@@ -3,7 +3,7 @@
 #include "wow_class_lookup_bindings.h"
 #include "wow_window_dispatch_bindings.h"
 #include "wow_input_group_bindings.h"
-#include "wow_user_probe_bindings.h"
+#include "compat/include/wow_user_probe_bindings.h"
 #include "wow_user_object_bindings.h"
 #include "wow_shared_user_abi.h"
 

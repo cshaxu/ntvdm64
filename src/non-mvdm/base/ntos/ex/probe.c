@@ -23,7 +23,7 @@ Revision History:
 --*/
 
 #define WOW_ORIGINAL_USER_PROBE
-#include "wow_user_probe_bindings.h"
+#include "compat/include/wow_user_probe_bindings.h"
 #line 27
 #if defined(ALLOC_PRAGMA)
 #line 28

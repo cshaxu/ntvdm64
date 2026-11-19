@@ -1,0 +1,58 @@
+{
+  "baseline": "a657b7153ad72df868d67aa213e956b9a852b99e",
+  "status": "verified P32 delivery",
+  "files": [
+    {
+      "number": 59,
+      "file": "src/mvdm-host/xms.486/xmsblock.c",
+      "ids": [
+        "C0040",
+        "C0048"
+      ],
+      "disposition": "S13: bounded guest-copy lease and cancellation owned by current session; copy_from reads move descriptor, copy_forward preserves forward overlapping-copy contract. Cancellation requests SESSION_CANCELLATION_REQUESTED; no new CPU486 change."
+    },
+    {
+      "number": 60,
+      "file": "src/non-mvdm/base/ntdll/csrutil.c",
+      "ids": [
+        "C0002"
+      ],
+      "disposition": "S14 original CSR declaration/header ownership, coordinated with S13 worker heap lifetime. D header includes C nt/ntlpcapi/ntcsrmsg and exposes original capture declarations plus CsrPortHeap/tag macros. F standalone worker creates/destroys heap. Moving this mixed header wholesale to B would recreate B-to-C dependency."
+    },
+    {
+      "number": 61,
+      "file": "src/non-mvdm/base/ntos/ex/probe.c",
+      "ids": [
+        "C0126"
+      ],
+      "disposition": "Move unchanged SDK-only declaration/environment shim header F to B; original range/alignment ProbeForRead remains C. Change its include and existing F/fixture consumer includes only. Header uses GetSystemInfo/RtlRaiseStatus, no runtime/product state."
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "progress": {
+    "reviewedFiles": 61,
+    "deferredLifecycleFiles": 40,
+    "deferredSourceAbiCompositionFiles": 7,
+    "unreviewedFiles": 55,
+    "totalFiles": 116,
+    "totalIds": 617,
+    "clearedDirectHeaderFiles": 14,
+    "openIds": 518
+  },
+  "validation": {
+    "build": "Both cached product builds exit0.",
+    "fixture": "Original ProbeForRead fixture exit0: five alignments, three ranges, zero-length bypass, no page touch and caught access fault.",
+    "boundaries": "Eight A/B product graphs,150 WOW objects/nine negative controls and VDD source check passed. Actual probe+cleanup dependencies select B only for this header.",
+    "identity": "All11 images equal P29 after package GUID and PE timestamp normalization only; repeated guest tests waived.",
+    "publication": "11 images hash verified assets/release and O:/winnt/system32; package3ec93bab-20bd-4e4a-8f22-fb38b6fca837.",
+    "evidenceRoot": "build\\t483-s12-user-probe",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed; build/t483-s12-user-probe/docs.log",
+    "commit": "Receipt included in P32 delivery commit."
+  },
+  "headerByteIdentity": "51ec9b920e98b357315efec543206aa942538a0372d83620d65331aac90f9b76"
+}

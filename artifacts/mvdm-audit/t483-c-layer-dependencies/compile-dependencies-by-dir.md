@@ -396,13 +396,19 @@
 - 直接包含 · C0040 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h
 - 直接包含 · C0048 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_xms_memory.h
 
+059 P32: S13: bounded guest-copy lease and cancellation owned by current session; copy_from reads move descriptor, copy_forward preserves forward overlapping-copy contract. Cancellation requests SESSION_CANCELLATION_REQUESTED; no new CPU486 change. Mirror delta0/0; both builds, targeted probe/boundary checks and dual publication passed. C0126 eliminated;61/116 classified,14 clears,40 lifecycle,7 source/ABI,55 unreviewed,518/617 open. See s12-p32-user-probe.json.
+
 ## 060 — src/non-mvdm/base/ntdll/csrutil.c
 
 - 直接包含 · C0002 · common · src/common/base_srv/base_capture.h
 
+060 P32: S14 original CSR declaration/header ownership, coordinated with S13 worker heap lifetime. D header includes C nt/ntlpcapi/ntcsrmsg and exposes original capture declarations plus CsrPortHeap/tag macros. F standalone worker creates/destroys heap. Moving this mixed header wholesale to B would recreate B-to-C dependency. Mirror delta0/0; both builds, targeted probe/boundary checks and dual publication passed. C0126 eliminated;61/116 classified,14 clears,40 lifecycle,7 source/ABI,55 unreviewed,518/617 open. See s12-p32-user-probe.json.
+
 ## 061 — src/non-mvdm/base/ntos/ex/probe.c
 
 - 直接包含 · C0126 · wow32-dll · src/wow32-dll/include/wow_user_probe_bindings.h
+
+061 P32: Move unchanged SDK-only declaration/environment shim header F to B; original range/alignment ProbeForRead remains C. Change its include and existing F/fixture consumer includes only. Header uses GetSystemInfo/RtlRaiseStatus, no runtime/product state. Mirror delta0/0; both builds, targeted probe/boundary checks and dual publication passed. C0126 eliminated;61/116 classified,14 clears,40 lifecycle,7 source/ABI,55 unreviewed,518/617 open. See s12-p32-user-probe.json.
 
 ## 062 — src/non-mvdm/base/win32/client/vdm.c
 

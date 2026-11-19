@@ -284,3 +284,5 @@ cdecl matches the worker exports despite WOW's /Gz default. Only wkfileio.c
 selects this directory. No C include, table or implementation is introduced into B.
 
 `include/wow_message_progress.h` owns shared message conversion acquisition bits only. C converters and F unwind use the same values; allocation, task state and cleanup remain with their existing owners.
+
+`include/wow_user_probe_bindings.h` supplies the SDK-only environment for the original C-layer `ProbeForRead`; it owns no worker state and does not change the original range/alignment algorithm.
