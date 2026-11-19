@@ -30,14 +30,20 @@
 - 直接包含 · C0017 · common · src/common/wow/registry.h
 - 直接包含 · C0039 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h
 
+003 结论：固件头仅用于 NtvdmGetSystemDirectoryA。改为直接包含 B system_root.h；注册表已由 P12 迁入 B。直接外层头依赖 1→0；原版键盘流程及 #line/#error 不变，镜像差异净变 0 点、0 行。P13 两架构 cached 构建、11组件归一化身份核对及双端发布哈希通过。
+
 ## 004 — src/mvdm-host/dos/command/cmdmisc.c
 
 - 直接包含 · C0034 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_guest_location.h
 - 直接包含 · C0039 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h
 
+004 结论：C0034 的 cmdGetCurrentDir 保持数值地址并在结果确定后同步取得 guest 写入租约，F 提供者依赖 session 映射。C0039 的初始 WOW 环境投影发生于 cmdCreateVDMEnvironment 后、guest 复制前，内部调用 D common_guest_environment_root，并将进程堆结果转换为 CRT 所有权；不能只搬声明或让 B 反向依赖 D。两项归 S13 按输入准备、调用时序与释放契约处理，本文件未改，两个直接外层依赖仍开放；镜像变化 0 点、0 行。
+
 ## 005 — src/mvdm-host/dos/dem/dem.c
 
 - 直接包含 · C0039 · ntvdm-exe · src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h
+
+005 结论：固件头仅用于 NtvdmGetSystemDirectoryA。直接包含 B system_root.h 即可；原版 DOS 初始化保留。外层头依赖 1→0；#line/#error 不变，镜像差异净变 0 点、0 行。P13 两架构 cached 构建、11组件归一化身份核对及双端发布哈希通过。
 
 ## 006 — src/mvdm-host/dos/dem/dem.h
 

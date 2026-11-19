@@ -50,6 +50,8 @@ P11 moved shared package directory mechanics and guest directory queries into B 
 
 P12 moves the existing registry provider and shared declarations from F/D to B. Eight mirror callers only change include paths; mirror delta is zero points/lines and #error/#line remain unchanged. Both cached architectures, final corrected x86 rebuild, eight product A/B graphs, native enum/persistence and 31 embedding checks passed. Eleven images were published and hash-verified at both destinations. See [registry evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p12-registry-candidate.json). File 002 retains its native-child lifecycle dependency for S13. Two files have been reviewed; only file 001 is fully cleared. S12 remains active.
 
+P13 clears the remaining directory-query header dependencies in cmdkeyb.c and dem.c. Both cached architectures built. All eleven images equal P12 after masking only package GUID and PE timestamps; repeated runtime tests were omitted under owner authorization. Both releases were hash-verified. [P13 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p13-directory-callers.json) records 5/116 files reviewed, three fully cleared and two deferred lifecycle moves. Mirror delta is zero; cumulative S12 reduction remains two points and ten lines.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

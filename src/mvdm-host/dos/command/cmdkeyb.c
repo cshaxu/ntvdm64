@@ -15,7 +15,7 @@
 #include <string.H>
 #include "cmdkeyb.h"
 #include "compat/include/wow_registry.h"
-#include "mvdm_softpc_firmware.h"
+#include "compat/include/system_root.h"
 #line 17
 
 CHAR szPrev[5] = "US";

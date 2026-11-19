@@ -1,0 +1,66 @@
+{
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "b97762f2-8b72-4efd-80ce-92e21aee6095",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "build": {
+    "x86": 0,
+    "x64": 0
+  },
+  "normalizedIdentity": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": true,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "normalization": "Only package GUID, COFF timestamp and debug-directory timestamps; every other byte must match P12. Not raw SHA equality.",
+  "runtimeTests": "Not repeated under owner authorization for nonbehavioral binding changes with identical normalized artifacts.",
+  "sequential": {
+    "reviewed": 5,
+    "fullyCleared": 3,
+    "deferredLifecycle": 2,
+    "unreviewed": 111,
+    "total": 116
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorDelta": {
+    "points": -2,
+    "lines": -10
+  },
+  "stableTracker": {
+    "total": 617,
+    "open": 546
+  },
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "directOuterHeaderBefore": 1,
+      "after": 0,
+      "errorAndLineUnchanged": true,
+      "reason": "Only firmware-header use is NtvdmGetSystemDirectoryA, already owned by B compat."
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "directOuterHeaderBefore": 1,
+      "after": 0,
+      "errorAndLineUnchanged": true,
+      "reason": "Only firmware-header use is NtvdmGetSystemDirectoryA, already owned by B compat."
+    }
+  ]
+}

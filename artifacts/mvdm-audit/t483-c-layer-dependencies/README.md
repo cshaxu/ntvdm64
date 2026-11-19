@@ -98,3 +98,11 @@ the rejected local class-2 candidate failed the new test and was never published
 The tracker has 617 IDs: 546 open, 44 supporting, 21 eliminated,
 five eliminated transitive and one diagnostic. Mirror delta is zero points/lines.
 File 002 retains C0024 for S13; it is not fully cleared.
+
+## P13 directory callers
+
+[Evidence](s12-p13-directory-callers.json): cmdkeyb.c and dem.c now directly
+include B system_root.h. C0039 remains open for other consumers. Five files
+reviewed, three cleared, two lifecycle moves for S13, 111 unreviewed.
+Both cached architectures and normalized eleven-image identity passed; both
+release destinations are hash-verified. No repeated runtime tests.

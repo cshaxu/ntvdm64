@@ -6,7 +6,7 @@
 
 #include "io.h"
 #include "dem.h"
-#include "mvdm_softpc_firmware.h"
+#include "compat/include/system_root.h"
 
 #line 10
 /* DemInit - DEM Initialiazation routine. (This name may change when DEM is
