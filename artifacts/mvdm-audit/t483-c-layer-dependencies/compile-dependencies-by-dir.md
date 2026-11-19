@@ -315,13 +315,19 @@
 
 - 直接包含 · C0110 · wow32-dll · src/wow32-dll/include/wow_message_lifetime.h
 
+046 P29: lifecycle/rollback group S13; shared normal and exception release require coordinated ownership. Mirror unchanged.
+
 ## 047 — src/mvdm-host/wow32/wmsg16.c
 
 - 直接包含 · C0110 · wow32-dll · src/wow32-dll/include/wow_message_lifetime.h
 
+047 P29: six progress constants move to B; C converter retains all behavior. Only include target changed, error/line untouched.
+
 ## 048 — src/mvdm-host/wow32/wmsgcb.c
 
 - 直接包含 · C0110 · wow32-dll · src/wow32-dll/include/wow_message_lifetime.h
+
+048 P29: two text progress constants now selected from B; no F lifecycle use. Mirror delta0/0, cumulative reduction2 points/10 lines.48/116 classified,13 header clears verified by build,29 lifecycle,6 source/ABI,68 unreviewed;519/617 open. Both cached builds, dual publication and three focused suites passed; all11 images normalized-identical to P28. See s12-p29-message-progress.json.
 
 ## 049 — src/mvdm-host/wow32/wow32.c
 

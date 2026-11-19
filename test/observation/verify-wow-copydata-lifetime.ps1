@@ -67,8 +67,8 @@ try{
  [IO.File]::WriteAllText("$root/queue_selector_intervals.h",$queueBodies)
  $script:selections|ConvertTo-Json|Set-Content "$root/selections.json"
  $fixture="$PSScriptRoot/wow_copydata_lifetime_fixture.c"
- Get-FileHash "$original/walloc16.c","$original/wdde.c","$original/wmdisp32.c","$original/wmsg16.c","$original/wowhooks.c","$original/wumsg.c",$adapter,"$repo/src/wow32-dll/include/wow_message_lifetime.h",$fixture,$header,"$root/queue_selector_intervals.h",$CompilerDriver,$PSCommandPath|Export-Csv -NoTypeInformation "$root/inputs.csv"
- Owned compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4127 /wd4706 /wd4055 /wd4054 /I"'+$root+'" /I"'+$repo+'/src/wow32-dll/include" "'+$fixture+'" /Fo"'+$root+'/unit.obj" /Fe"'+$root+'/unit.exe" /link user32.lib"') 180
+ Get-FileHash "$original/walloc16.c","$original/wdde.c","$original/wmdisp32.c","$original/wmsg16.c","$original/wowhooks.c","$original/wumsg.c",$adapter,"$repo/src/wow32-dll/include/wow_message_lifetime.h","$repo/src/compat/include/wow_message_progress.h",$fixture,$header,"$root/queue_selector_intervals.h",$CompilerDriver,$PSCommandPath|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Owned compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4127 /wd4706 /wd4055 /wd4054 /I"'+$repo+'/src" /I"'+$root+'" /I"'+$repo+'/src/wow32-dll/include" "'+$fixture+'" /Fo"'+$root+'/unit.obj" /Fe"'+$root+'/unit.exe" /link user32.lib"') 180
  Owned body "$root/unit.exe" '' 30
  $output=Get-Content "$root/body.stdout.txt" -Raw
  if($output -notmatch 'COPYDATA_LIFETIME errors=0 scenarios=59 directions=2 stages=4 nested=1 immutable_release=1 exception=2 thread_status=1 hook_roles=2 filter_nested_different=1 embedded_headers=2 filter_output_rollback=1 guest_proof=0' -or
@@ -85,7 +85,7 @@ try{
  $negative=Join-Path $root 'before-selector'
  $null=New-Item -ItemType Directory $negative
  [IO.File]::WriteAllText("$negative/copydata_exact_body.h",$whole.Replace($currentFilter,$oldFilter))
- Owned negative-compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4127 /wd4706 /wd4055 /wd4054 /I"'+$negative+'" /I"'+$root+'" /I"'+$repo+'/src/wow32-dll/include" "'+$fixture+'" /Fo"'+$negative+'/unit.obj" /Fe"'+$negative+'/unit.exe" /link user32.lib"') 180
+ Owned negative-compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4127 /wd4706 /wd4055 /wd4054 /I"'+$negative+'" /I"'+$repo+'/src" /I"'+$root+'" /I"'+$repo+'/src/wow32-dll/include" "'+$fixture+'" /Fo"'+$negative+'/unit.obj" /Fe"'+$negative+'/unit.exe" /link user32.lib"') 180
  Owned negative-body "$negative/unit.exe" '' 30 1
  $oldOutput=Get-Content "$root/negative-body.stdout.txt" -Raw
  if($oldOutput -notmatch 'FILTER_SELECTOR cases=14 entry_values=2 modes=7 errors=7 guest_proof=0' -or

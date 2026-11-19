@@ -22,7 +22,7 @@ function Run($name,$file,$arguments,$expected,$seconds){
  if(!$p.WaitForExit($seconds*1000)){$p.Kill($true);throw "$name deadline"};$p.Refresh();$row.exit=$p.ExitCode;$row.end=[DateTime]::UtcNow.ToString('o');$script:steps|ConvertTo-Json -Depth 5|Set-Content "$root/steps.json";if($p.ExitCode -ne $expected){throw "$name actual $($p.ExitCode), expected $expected"}
 }
 try{
- $paths=@('src/mvdm-host/inc/wow.h','src/mvdm-host/inc/wowusr.h','src/mvdm-host/inc/wowcmpat.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wmdisp32.h','src/mvdm-host/wow32/wparam.h','src/mvdm-host/wow32/wparam.c','src/mvdm-host/wow32/wmsg16.c','src/mvdm-host/wow32/wmsgcb.c','src/mvdm-host/wow32/wmdisp32.c','src/mvdm-host/wow32/wcntl32.c','src/mvdm-host/wow32/wuwind.c','src/wow32-dll/source/wow_message_lifetime.c','src/wow32-dll/include/wow_message_lifetime.h','test/observation/wow_parameter_map_fixture.c','test/observation/verify-wow-parameter-map.ps1')
+ $paths=@('src/mvdm-host/inc/wow.h','src/mvdm-host/inc/wowusr.h','src/mvdm-host/inc/wowcmpat.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wmdisp32.h','src/mvdm-host/wow32/wparam.h','src/mvdm-host/wow32/wparam.c','src/mvdm-host/wow32/wmsg16.c','src/mvdm-host/wow32/wmsgcb.c','src/mvdm-host/wow32/wmdisp32.c','src/mvdm-host/wow32/wcntl32.c','src/mvdm-host/wow32/wuwind.c','src/wow32-dll/source/wow_message_lifetime.c','src/wow32-dll/include/wow_message_lifetime.h','src/compat/include/wow_message_progress.h','test/observation/wow_parameter_map_fixture.c','test/observation/verify-wow-parameter-map.ps1')
  $paths|ForEach-Object{Get-FileHash "$repo/$_"}|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Get-FileHash "$repo/src/compat/include/wow_control_message_abi.h"|Export-Csv -NoTypeInformation "$root/control-abi-input.csv"
  foreach($kind in @('baseline','candidate')){
@@ -58,7 +58,7 @@ try{
   foreach($name in @('wow_message_unwind32','wow_message_unwind16')){$bodies+=Body $lifetime $name}
   [IO.File]::WriteAllText("$dir/parameter_exact.h",($bodies -join "`n`n"))
   $define=if($old){'/DBASELINE_IMAGE'}else{''}
-  [IO.File]::WriteAllText("$dir/build.cmd","@echo off`r`ncall `"$CompilerDriver`" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4706 /wd4127 /wd4213 /wd4306 $define /I`"$dir`" `"$PSScriptRoot/wow_parameter_map_fixture.c`" /Fo`"$dir/unit.obj`" /Fe`"$dir/unit.exe`"`r`nexit /b %errorlevel%`r`n")
+  [IO.File]::WriteAllText("$dir/build.cmd","@echo off`r`ncall `"$CompilerDriver`" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4706 /wd4127 /wd4213 /wd4306 $define /I`"$repo/src`" /I`"$dir`" `"$PSScriptRoot/wow_parameter_map_fixture.c`" /Fo`"$dir/unit.obj`" /Fe`"$dir/unit.exe`"`r`nexit /b %errorlevel%`r`n")
   Run "compile-$kind" cmd.exe @('/d','/c',"`"$dir/build.cmd`"") 0 180
   Run "body-$kind" "$dir/unit.exe" @() $(if($old){1}else{0}) 30
  }

@@ -68,6 +68,8 @@ P24-P27 delivered native ordinal, GDI alias and VDD ABI boundary cleanup, plus l
 
 P28 removes the redundant F CreateProcess wrapper used by original wkman.c; no mirror changed. Files044-045 are classified:45/116,11 cleared headers,28 lifecycle,6 source/ABI,71 unreviewed;519/617 IDs remain open. Cumulative mirror reduction remains2 points/10 lines. Both cached builds and dual eleven-image publication passed. WOW32 differs substantively; eight A/B graphs, 150 WOW objects / nine negative controls and three controlled private-desktop WOW frontend checks passed. The first probe missed standard environment settings and was not counted as a pass. P28 records the verified delivery. See [P28 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p28-native-process.json). Only S12 is active.
 
+P29 classifies file046 lifecycle ownership and clears files047-048 F header dependencies using B shared progress constants. [Evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p29-message-progress.json) records both cached builds, dual11-image publication, identical normalized images, three focused suites and a corrected fixture conditional. Review48/116:13 header clears,29 lifecycle,6 source/ABI,68 unreviewed;519/617 open IDs. Mirror delta0/0; cumulative reduction2 points/10 lines. S12 remains active.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

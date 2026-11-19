@@ -15,7 +15,7 @@
 #include "precomp.h"
 #pragma hdrstop
 #include "wmtbl32.h"
-#include "wow_message_lifetime.h"
+#include "compat/include/wow_message_progress.h"
 
 static BOOL W16FinishDDEPack(LPMSGPARAMEX message, PDDECONVERSION conversion,
                              HWND16 receiver, WORD sender)

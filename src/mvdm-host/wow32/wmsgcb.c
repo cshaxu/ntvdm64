@@ -14,7 +14,7 @@
 
 #include "precomp.h"
 #pragma hdrstop
-#include "wow_message_lifetime.h"
+#include "compat/include/wow_message_progress.h"
 
 #line 18
 MODNAME(wmsgcb.c);

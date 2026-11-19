@@ -282,3 +282,5 @@ operations used by the original WOW file provider. Symbols, parameter types
 and return types follow OpenNT public/sdk/inc/nt_vdd.h:209-212; explicit
 cdecl matches the worker exports despite WOW's /Gz default. Only wkfileio.c
 selects this directory. No C include, table or implementation is introduced into B.
+
+`include/wow_message_progress.h` owns shared message conversion acquisition bits only. C converters and F unwind use the same values; allocation, task state and cleanup remain with their existing owners.

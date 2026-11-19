@@ -44,7 +44,7 @@ function Owned($name,$file,$arguments,$seconds,$expected){
 }
 try{
  $fixture="$PSScriptRoot/wow_message_construction_fixture.c"
- Get-FileHash "$repo/src/mvdm-host/inc/wow.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$repo/src/mvdm-host/wow32/wmdisp32.h","$repo/src/mvdm-host/wow32/wmsg16.c","$repo/src/mvdm-host/wow32/wmsgcb.c","$repo/src/compat/include/wow_control_message_abi.h","$repo/src/mvdm-host/wow32/wparam.c","$repo/src/mvdm-host/wow32/walias.h","$repo/src/wow32-dll/include/wow_message_lifetime.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
+ Get-FileHash "$repo/src/mvdm-host/inc/wow.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$repo/src/mvdm-host/wow32/wmdisp32.h","$repo/src/mvdm-host/wow32/wmsg16.c","$repo/src/mvdm-host/wow32/wmsgcb.c","$repo/src/compat/include/wow_control_message_abi.h","$repo/src/mvdm-host/wow32/wparam.c","$repo/src/mvdm-host/wow32/walias.h","$repo/src/wow32-dll/include/wow_message_lifetime.h","$repo/src/compat/include/wow_message_progress.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
  Get-FileHash "$repo/src/mvdm-host/wow32/wudlg.c","$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/wow32-dll/source/wow_message_lifetime.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
@@ -152,7 +152,7 @@ try{
   [IO.File]::WriteAllText("$dir/message_construction_exact_body.h",($bodies -join "`n`n"))
   $define=if($old){'/DBASELINE_IMAGE'}else{''}
   if($Transaction){$define+=' /DTRANSACTION_GROUP'}
-  $command="@echo off`r`ncall `"$CompilerDriver`" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4700 /wd4701 /wd4706 /wd4127 /wd4213 $define /I`"$dir`" `"$fixture`" /Fo`"$dir/unit.obj`" /Fe`"$dir/unit.exe`"`r`nexit /b %errorlevel%`r`n"
+  $command="@echo off`r`ncall `"$CompilerDriver`" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4700 /wd4701 /wd4706 /wd4127 /wd4213 $define /I`"$repo/src`" /I`"$dir`" `"$fixture`" /Fo`"$dir/unit.obj`" /Fe`"$dir/unit.exe`"`r`nexit /b %errorlevel%`r`n"
   [IO.File]::WriteAllText("$dir/build.cmd",$command)
   Owned "compile-$kind" cmd.exe @('/d','/c',"`"$dir/build.cmd`"") 180 0
   Owned "body-$kind" "$dir/unit.exe" @() 30 $(if($old){1}else{0})

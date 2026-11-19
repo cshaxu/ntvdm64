@@ -1,0 +1,65 @@
+{
+  "baseline": "66f23e7241ab33bb2ad6d070eae9d4b6daa74b38",
+  "status": "verified P29 delivery",
+  "files": [
+    {
+      "number": 46,
+      "file": "src/mvdm-host/wow32/wmdisp32.c",
+      "disposition": "S13 lifetime group",
+      "proof": "W32Win16WndProcEx captures callback stack before conversion and finishes in finally; normal converters and unwind share captured keys. F provider calls original free16/WM32CopyData and tests worker-active before touching current TD. Not a platform-independent B implementation. No code changed."
+    },
+    {
+      "number": 47,
+      "file": "src/mvdm-host/wow32/wmsg16.c",
+      "disposition": "B-only progress constants",
+      "proof": "Only WOW_COPY_HEADER/DATA/DATA_NODE/HEADER_NODE and WOW_TEXT_ACTIVE/MAPPED are used from mixed F header. Values describe completed acquisitions in existing message scratch. Replace include with B constant-only header; keep converters and normal cleanup unchanged."
+    },
+    {
+      "number": 48,
+      "file": "src/mvdm-host/wow32/wmsgcb.c",
+      "disposition": "B-only progress constants",
+      "proof": "Only WOW_TEXT_ACTIVE/MAPPED used. Shared values stay identical for C conversion and F unwind; no lifecycle function/type dependency needed."
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10,
+    "proof": "Two include substitutions only; existing #error/#line directives and all other mirror bytes unchanged."
+  },
+  "progress": {
+    "reviewedFiles": 48,
+    "clearedDirectHeaderFiles": 13,
+    "deferredLifecycleFiles": 29,
+    "deferredSourceAbiCompositionFiles": 6,
+    "unreviewedFiles": 68,
+    "totalFiles": 116,
+    "openIds": 519,
+    "totalIds": 617
+  },
+  "validation": {
+    "build": "x86 and x64 cached selected full product builds exit0",
+    "publication": "11 images hash-verified in assets/release and O:/winnt/system32; package09b1e845-1132-4570-b217-12281f4891ab",
+    "identity": "All11 match P28 after masking only GUID and PE timestamps; repeated guest runs waived.",
+    "focused": "COPYDATA exit0; parameter-map result.passed true; construction-final result.passed true including six negative source controls.",
+    "fixtureRepair": "Initial nontransaction construction candidate failed C4013: fault_filter declaration was wrongly enclosed by TRANSACTION_GROUP although common text-conversion test uses it. Moved function definition immediately outside that conditional. Retained failed evidence; rerun passed. Initial batch script exit0 did not prove all tests passed; individual result files checked.",
+    "boundaries": "8 A/B graphs;150 WOW objects and9 negative controls passed; actual ninja deps prove both C units omit F lifetime header and C/F share B constants.",
+    "evidenceRoot": "build\\t483-s12-message-progress",
+    "documentation": "Verify-DocumentationGovernance.ps1 exit0; build/t483-s12-message-progress/docs.log",
+    "commit": "Included in P29 commit; verify HEAD/origin after push."
+  },
+  "compileClosure": {
+    "obj/wmsg16.obj": [
+      "../../../../src/compat/include/wow_message_progress.h"
+    ],
+    "obj/wmsgcb.obj": [
+      "../../../../src/compat/include/wow_message_progress.h"
+    ],
+    "obj/wow32-dll/wow_message_lifetime.obj": [
+      "obj/wow32-dll/wow_message_lifetime.obj: #deps 122, deps mtime 8167664959573371 (VALID)",
+      "../../../../src/compat/include/wow_message_progress.h",
+      "../../../../src/wow32-dll/include/wow_message_lifetime.h"
+    ]
+  }
+}

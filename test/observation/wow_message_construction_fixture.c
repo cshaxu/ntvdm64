@@ -397,8 +397,8 @@ static void adjacent_cases(void){
  expect(WM32WinHelp(&value) && owned()==1,"WINHELP_CONSTRUCT");value.fThunk=FALSE;
  expect(WM32WinHelp(&value) && !owned(),"WINHELP_RELEASE");
 }
-#ifdef TRANSACTION_GROUP
 static int fault_filter(DWORD code){return code==fault_code ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH;}
+#ifdef TRANSACTION_GROUP
 static void heap_transactions(void){
  static const struct {LPFNM32 function;UINT message,count;BOOL line;} cases[]={
   {WM32GetText,WM_GETTEXT,8,FALSE},{WM32GetDlgCode,WM_GETDLGCODE,0,FALSE},

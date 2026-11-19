@@ -173,3 +173,5 @@ P26: [WOW callback/message unwind and native-dialog ownership](s12-p26-wow-unwin
 P27: [WOW registry callers and VDD declaration boundary](s12-p27-wow-vdd-abi.json).
 
 P28: [WOW execution ownership and native process simplification](s12-p28-native-process.json).
+
+P29: [Message progress constants and lifecycle ownership](s12-p29-message-progress.json).
