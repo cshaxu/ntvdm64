@@ -317,3 +317,5 @@ P98: [Resource binding ownership](s12-p98-resource-binding-ownership.json); C016
 P99: [Ledger correction](s12-p99-ledger-correction.json); C0430 was eliminated in P28, confirmed against current product COFF/map and both release hashes. No production change.
 
 P100: [Eliminated-edge reconciliation](s12-p100-eliminated-recheck.json); all88 eliminated IDs checked against current production objects/compiler inputs and specific retired-edge evidence; seven stale follow-up instructions corrected.
+
+P101: [Open-ID evidence index](s12-p101-open-evidence-index.json); navigation for480 remaining IDs and explicit S13 cohort disposition for81 WOW native-call/lifecycle symbols. No dependency elimination claimed.

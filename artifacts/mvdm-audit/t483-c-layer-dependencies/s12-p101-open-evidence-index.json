@@ -1,0 +1,4800 @@
+{
+  "baseline": "27e4f636447cc85f3ab440d66488ce1b1f881ec0",
+  "question": "Connect remaining stable IDs to existing file reviews without restarting the file audit.",
+  "indexRule": "Exact stable-ID references preferred, then provider path, then actual caller path. These are navigation references, not automatic proof of disposition or necessity.",
+  "index": [
+    {
+      "id": "C0002",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p32-user-probe.json"
+      ]
+    },
+    {
+      "id": "C0003",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p33-console-handle.json"
+      ]
+    },
+    {
+      "id": "C0004",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p33-console-handle.json"
+      ]
+    },
+    {
+      "id": "C0005",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p33-console-handle.json"
+      ]
+    },
+    {
+      "id": "C0006",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p33-console-handle.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0012",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p23-redir-wow-binding.json"
+      ]
+    },
+    {
+      "id": "C0015",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json"
+      ]
+    },
+    {
+      "id": "C0016",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p24-wow-precomp.json"
+      ]
+    },
+    {
+      "id": "C0020",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p69-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0022",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p34-remote-browser.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0023",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p10-guest-location.json",
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0024",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p12-registry-candidate.json"
+      ]
+    },
+    {
+      "id": "C0030",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json"
+      ]
+    },
+    {
+      "id": "C0031",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0032",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-file017-018-ownership.json"
+      ]
+    },
+    {
+      "id": "C0033",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-file017-018-ownership.json"
+      ]
+    },
+    {
+      "id": "C0034",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p10-guest-location.json"
+      ]
+    },
+    {
+      "id": "C0039",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p86-pif-path-owner.json",
+        "s12-p87-rom-resource-owner.json"
+      ]
+    },
+    {
+      "id": "C0040",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p32-user-probe.json"
+      ]
+    },
+    {
+      "id": "C0041",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0043",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-file009-011-ownership.json",
+        "s12-p15-native-failure.json"
+      ]
+    },
+    {
+      "id": "C0044",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0045",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-file009-011-ownership.json",
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0047",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-file009-011-ownership.json"
+      ]
+    },
+    {
+      "id": "C0048",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p32-user-probe.json"
+      ]
+    },
+    {
+      "id": "C0049",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json"
+      ]
+    },
+    {
+      "id": "C0050",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0052",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p20-event-thread.json"
+      ]
+    },
+    {
+      "id": "C0053",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0054",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p20-event-thread.json"
+      ]
+    },
+    {
+      "id": "C0055",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0057",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p20-event-thread.json"
+      ]
+    },
+    {
+      "id": "C0058",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p23-redir-wow-binding.json"
+      ]
+    },
+    {
+      "id": "C0060",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p20-event-thread.json"
+      ]
+    },
+    {
+      "id": "C0062",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p53-drawing-ownership.json"
+      ]
+    },
+    {
+      "id": "C0064",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p36-menu-resource-ownership.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p40-dialog-navigation.json",
+        "s12-p41-drawing-ownership.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p45-edit-create-ownership.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p54-client-stubs-ownership.json",
+        "s12-p56-class-lookup-abi.json",
+        "s12-p58-private-word-ownership.json",
+        "s12-p65-rtl-private-reader.json",
+        "s12-p69-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0065",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p53-drawing-ownership.json"
+      ]
+    },
+    {
+      "id": "C0066",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p41-drawing-ownership.json",
+        "s12-p63-rtl-drawing-ownership.json",
+        "s12-p64-rtl-text-ownership.json",
+        "s12-p67-text-measure.json"
+      ]
+    },
+    {
+      "id": "C0067",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p68-window-geometry-ownership.json"
+      ]
+    },
+    {
+      "id": "C0072",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p36-menu-resource-ownership.json"
+      ]
+    },
+    {
+      "id": "C0075",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0077",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p54-client-stubs-ownership.json"
+      ]
+    },
+    {
+      "id": "C0078",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p56-class-lookup-abi.json"
+      ]
+    },
+    {
+      "id": "C0079",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p56-class-lookup-abi.json"
+      ]
+    },
+    {
+      "id": "C0081",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p57-cleanup-event.json"
+      ]
+    },
+    {
+      "id": "C0082",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p24-wow-precomp.json"
+      ]
+    },
+    {
+      "id": "C0083",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0087",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p61-message-table-ownership.json"
+      ]
+    },
+    {
+      "id": "C0095",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p54-client-stubs-ownership.json"
+      ]
+    },
+    {
+      "id": "C0105",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p28-native-process.json"
+      ]
+    },
+    {
+      "id": "C0108",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p24-wow-precomp.json"
+      ]
+    },
+    {
+      "id": "C0109",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p36-menu-resource-ownership.json"
+      ]
+    },
+    {
+      "id": "C0110",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p31-wow-clipboard-page-domain.json"
+      ]
+    },
+    {
+      "id": "C0112",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p28-native-process.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0113",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p34-remote-browser.json"
+      ]
+    },
+    {
+      "id": "C0114",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0116",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p60-task-init-ownership.json"
+      ]
+    },
+    {
+      "id": "C0117",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p57-cleanup-event.json",
+        "s12-p62-scheduler-ownership.json"
+      ]
+    },
+    {
+      "id": "C0118",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p59-profile-native.json"
+      ]
+    },
+    {
+      "id": "C0119",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p28-native-process.json",
+        "s12-p30-wow-registry-dispatch.json"
+      ]
+    },
+    {
+      "id": "C0121",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p55-capture-lookaside-ownership.json"
+      ]
+    },
+    {
+      "id": "C0122",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p66-help-ownership.json"
+      ]
+    },
+    {
+      "id": "C0123",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p28-native-process.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0124",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json"
+      ]
+    },
+    {
+      "id": "C0125",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p24-wow-precomp.json"
+      ]
+    },
+    {
+      "id": "C0128",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p30-wow-registry-dispatch.json"
+      ]
+    },
+    {
+      "id": "C0129",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p66-help-ownership.json"
+      ]
+    },
+    {
+      "id": "C0134",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p10-guest-location.json",
+        "s12-p13-directory-callers.json",
+        "s12-p15-native-failure.json",
+        "s12-p25-gdi-alias.json",
+        "s12-p34-remote-browser.json",
+        "s12-p35-bitmap-native.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p42-native-controls.json",
+        "s12-p44-control-brushes.json",
+        "s12-p47-dde-header.json",
+        "s12-p5-worker-roots.json",
+        "s12-p54-client-stubs-ownership.json",
+        "s12-p55-capture-lookaside-ownership.json",
+        "s12-p56-class-lookup-abi.json",
+        "s12-p57-cleanup-event.json",
+        "s12-p59-profile-native.json",
+        "s12-p6-common-storage.json",
+        "s12-p60-task-init-ownership.json",
+        "s12-p61-message-table-ownership.json",
+        "s12-p62-scheduler-ownership.json",
+        "s12-p63-rtl-drawing-ownership.json",
+        "s12-p64-rtl-text-ownership.json",
+        "s12-p65-rtl-private-reader.json",
+        "s12-p66-help-ownership.json",
+        "s12-p67-text-measure.json",
+        "s12-p68-window-geometry-ownership.json",
+        "s12-p69-final-file-ownership.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p72-dem-buffer-ownership.json",
+        "s12-p73-bop-exit-binding.json",
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json",
+        "s12-p78-video-address-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p81-activity-owner.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p85-pif-directory-reconciliation.json",
+        "s12-p86-pif-path-owner.json",
+        "s12-p87-rom-resource-owner.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s12-p9-forced-headers.json",
+        "s12-p90-rap-owner.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json",
+        "s12-p98-resource-binding-ownership.json"
+      ]
+    },
+    {
+      "id": "C0135",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0136",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0137",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0141",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0142",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0145",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0146",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0147",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0148",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0149",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0150",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0151",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p4-native-roots.json",
+        "s12-p5-worker-roots.json"
+      ]
+    },
+    {
+      "id": "C0152",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p33-console-handle.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0154",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p33-console-handle.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0155",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p33-console-handle.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0156",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p33-console-handle.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0157",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json",
+        "s12-p90-rap-owner.json"
+      ]
+    },
+    {
+      "id": "C0158",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p88-thread-callback-abi.json"
+      ]
+    },
+    {
+      "id": "C0159",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0160",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p82-error-disk-bindings.json",
+        "s12-p88-thread-callback-abi.json"
+      ]
+    },
+    {
+      "id": "C0161",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p88-thread-callback-abi.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0162",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p33-console-handle.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0163",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p33-console-handle.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0164",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p33-console-handle.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0165",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p69-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0166",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0167",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0168",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0171",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0172",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p10-guest-location.json",
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0173",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p10-guest-location.json",
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0174",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0175",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0176",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0177",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0178",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0179",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0180",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0181",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0182",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0183",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-file009-011-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0184",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-file009-011-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0185",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0186",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0187",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0188",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0190",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p16-ccpu-wait.json",
+        "s12-p73-bop-exit-binding.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0191",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0192",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0193",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-file017-018-ownership.json"
+      ]
+    },
+    {
+      "id": "C0194",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p72-dem-buffer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0195",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p72-dem-buffer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0196",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p72-dem-buffer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0197",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p72-dem-buffer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0204",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p18-keyboard-history.json"
+      ]
+    },
+    {
+      "id": "C0214",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p75-disk-descriptor-ownership.json"
+      ]
+    },
+    {
+      "id": "C0215",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p74-bios-address-ownership.json",
+        "s12-p75-disk-descriptor-ownership.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p77-system-address-ownership.json",
+        "s12-p78-video-address-ownership.json"
+      ]
+    },
+    {
+      "id": "C0216",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p78-video-address-ownership.json"
+      ]
+    },
+    {
+      "id": "C0223",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p86-pif-path-owner.json",
+        "s12-p87-rom-resource-owner.json"
+      ]
+    },
+    {
+      "id": "C0224",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p72-dem-buffer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0225",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p72-dem-buffer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0226",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p72-dem-buffer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0227",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p72-dem-buffer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0228",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p18-keyboard-history.json",
+        "s12-p20-event-thread.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0229",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p18-keyboard-history.json",
+        "s12-p20-event-thread.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0230",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0231",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0232",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0233",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0234",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0235",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0236",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0237",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0238",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json"
+      ]
+    },
+    {
+      "id": "C0239",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0240",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p17-mapping-generated-ownership.json"
+      ]
+    },
+    {
+      "id": "C0242",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p22-system-loader.json"
+      ]
+    },
+    {
+      "id": "C0243",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0244",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0245",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0246",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-file009-011-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0247",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-file009-011-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0248",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-file009-011-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0249",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-file009-011-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0250",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-file009-011-ownership.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0255",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json"
+      ]
+    },
+    {
+      "id": "C0256",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-file009-011-ownership.json"
+      ]
+    },
+    {
+      "id": "C0257",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p32-user-probe.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0258",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-file009-011-ownership.json",
+        "s12-p15-native-failure.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0259",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p88-thread-callback-abi.json"
+      ]
+    },
+    {
+      "id": "C0260",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0261",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0262",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0263",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0264",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0265",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0266",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0267",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0268",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0269",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0270",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0271",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0272",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0273",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0274",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0275",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0276",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0277",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p83-console-transition-ownership.json"
+      ]
+    },
+    {
+      "id": "C0278",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p83-console-transition-ownership.json"
+      ]
+    },
+    {
+      "id": "C0279",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p83-console-transition-ownership.json"
+      ]
+    },
+    {
+      "id": "C0280",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0281",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p83-console-transition-ownership.json"
+      ]
+    },
+    {
+      "id": "C0282",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p71-console-title-native-io.json"
+      ]
+    },
+    {
+      "id": "C0283",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p83-console-transition-ownership.json"
+      ]
+    },
+    {
+      "id": "C0284",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0285",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0286",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0287",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0288",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0289",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p19-mouse-bop-ems-ownership.json",
+        "s12-p20-event-thread.json",
+        "s12-p71-console-title-native-io.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0290",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0291",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0292",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0293",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json"
+      ]
+    },
+    {
+      "id": "C0294",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0295",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0296",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p84-host-printer-serial-ownership.json"
+      ]
+    },
+    {
+      "id": "C0297",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0298",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0299",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p80-console-registration-ownership.json",
+        "s12-p83-console-transition-ownership.json",
+        "s12-p84-host-printer-serial-ownership.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0300",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p82-error-disk-bindings.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0301",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p21-display-mapping-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0302",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p21-display-mapping-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0303",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p21-display-mapping-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0304",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p21-display-mapping-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json",
+        "s12-p82-error-disk-bindings.json",
+        "s12-p89-timer-idle-vga-ownership.json"
+      ]
+    },
+    {
+      "id": "C0305",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0306",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p21-display-mapping-ownership.json"
+      ]
+    },
+    {
+      "id": "C0317",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p79-presentation-thread-start-ownership.json"
+      ]
+    },
+    {
+      "id": "C0318",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p76-init-termination-ownership.json"
+      ]
+    },
+    {
+      "id": "C0319",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json",
+        "s12-p22-system-loader.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p79-presentation-thread-start-ownership.json"
+      ]
+    },
+    {
+      "id": "C0320",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p22-system-loader.json",
+        "s12-p76-init-termination-ownership.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0321",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p20-event-thread.json"
+      ]
+    },
+    {
+      "id": "C0322",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p6-common-storage.json"
+      ]
+    },
+    {
+      "id": "C0323",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p53-drawing-ownership.json"
+      ]
+    },
+    {
+      "id": "C0324",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p53-drawing-ownership.json"
+      ]
+    },
+    {
+      "id": "C0325",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json"
+      ]
+    },
+    {
+      "id": "C0326",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p40-dialog-navigation.json"
+      ]
+    },
+    {
+      "id": "C0327",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p40-dialog-navigation.json"
+      ]
+    },
+    {
+      "id": "C0328",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0329",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0330",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p56-class-lookup-abi.json"
+      ]
+    },
+    {
+      "id": "C0331",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p57-cleanup-event.json"
+      ]
+    },
+    {
+      "id": "C0332",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p57-cleanup-event.json"
+      ]
+    },
+    {
+      "id": "C0333",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json"
+      ]
+    },
+    {
+      "id": "C0334",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0335",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0336",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0337",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0338",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0339",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0340",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0341",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0342",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0343",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0344",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p54-client-stubs-ownership.json"
+      ]
+    },
+    {
+      "id": "C0345",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p53-drawing-ownership.json"
+      ]
+    },
+    {
+      "id": "C0346",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p53-drawing-ownership.json"
+      ]
+    },
+    {
+      "id": "C0347",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p53-drawing-ownership.json"
+      ]
+    },
+    {
+      "id": "C0348",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0350",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json"
+      ]
+    },
+    {
+      "id": "C0351",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p45-edit-create-ownership.json"
+      ]
+    },
+    {
+      "id": "C0352",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json"
+      ]
+    },
+    {
+      "id": "C0353",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0354",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0355",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p36-menu-resource-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0356",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p68-window-geometry-ownership.json"
+      ]
+    },
+    {
+      "id": "C0357",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p40-dialog-navigation.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json"
+      ]
+    },
+    {
+      "id": "C0358",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p43-edit-ownership.json"
+      ]
+    },
+    {
+      "id": "C0359",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0360",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json"
+      ]
+    },
+    {
+      "id": "C0361",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0362",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0363",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0364",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0365",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0366",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0367",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0368",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0369",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0370",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0371",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0372",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json"
+      ]
+    },
+    {
+      "id": "C0373",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0374",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json"
+      ]
+    },
+    {
+      "id": "C0375",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0376",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json"
+      ]
+    },
+    {
+      "id": "C0377",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0378",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0380",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0381",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0383",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json"
+      ]
+    },
+    {
+      "id": "C0384",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p54-client-stubs-ownership.json"
+      ]
+    },
+    {
+      "id": "C0385",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p54-client-stubs-ownership.json"
+      ]
+    },
+    {
+      "id": "C0386",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p48-list-entry-ownership.json"
+      ]
+    },
+    {
+      "id": "C0387",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p56-class-lookup-abi.json"
+      ]
+    },
+    {
+      "id": "C0388",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p58-private-word-ownership.json",
+        "s12-p65-rtl-private-reader.json"
+      ]
+    },
+    {
+      "id": "C0389",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0390",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p43-edit-ownership.json"
+      ]
+    },
+    {
+      "id": "C0391",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0392",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p41-drawing-ownership.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p63-rtl-drawing-ownership.json",
+        "s12-p64-rtl-text-ownership.json",
+        "s12-p68-window-geometry-ownership.json"
+      ]
+    },
+    {
+      "id": "C0400",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p43-edit-ownership.json"
+      ]
+    },
+    {
+      "id": "C0401",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0403",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0404",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0405",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0406",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0407",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0408",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0409",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0410",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0411",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p43-edit-ownership.json",
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0412",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0413",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0414",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0415",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0416",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0417",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0418",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0419",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0420",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0421",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0422",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p43-edit-ownership.json"
+      ]
+    },
+    {
+      "id": "C0423",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0424",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0425",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0426",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0427",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0428",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0429",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json"
+      ]
+    },
+    {
+      "id": "C0431",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p6-common-storage.json"
+      ]
+    },
+    {
+      "id": "C0432",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p6-common-storage.json"
+      ]
+    },
+    {
+      "id": "C0433",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0440",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "id": "C0442",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "id": "C0443",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0444",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0445",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0446",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0447",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0448",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0449",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0450",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0451",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0452",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0453",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0454",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json",
+        "s12-p27-wow-vdd-abi.json"
+      ]
+    },
+    {
+      "id": "C0455",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0456",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p95-hook-native-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0457",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p28-native-process.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0460",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p28-native-process.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "id": "C0461",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p28-native-process.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0462",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p28-native-process.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0463",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p28-native-process.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p9-forced-headers.json"
+      ]
+    },
+    {
+      "id": "C0464",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0465",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p54-client-stubs-ownership.json"
+      ]
+    },
+    {
+      "id": "C0466",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0467",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0468",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0469",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0470",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0471",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0472",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0473",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0474",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json",
+        "s12-p40-dialog-navigation.json"
+      ]
+    },
+    {
+      "id": "C0475",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0476",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0477",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0478",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0479",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0480",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0481",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p92-font-owner.json",
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0482",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "id": "C0483",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p93-gdi-cache-ownership.json"
+      ]
+    },
+    {
+      "id": "C0484",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0485",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0486",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0487",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0488",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json"
+      ]
+    },
+    {
+      "id": "C0489",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p95-hook-native-ownership.json"
+      ]
+    },
+    {
+      "id": "C0490",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p95-hook-native-ownership.json"
+      ]
+    },
+    {
+      "id": "C0491",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p95-hook-native-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0492",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p94-wstruc-public-style.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0493",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p95-hook-native-ownership.json"
+      ]
+    },
+    {
+      "id": "C0494",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p95-hook-native-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0495",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0496",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p95-hook-native-ownership.json"
+      ]
+    },
+    {
+      "id": "C0497",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p46-edit-rare-ownership.json"
+      ]
+    },
+    {
+      "id": "C0498",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p46-edit-rare-ownership.json"
+      ]
+    },
+    {
+      "id": "C0499",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p46-edit-rare-ownership.json"
+      ]
+    },
+    {
+      "id": "C0500",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p46-edit-rare-ownership.json"
+      ]
+    },
+    {
+      "id": "C0501",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "id": "C0502",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0503",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p46-edit-rare-ownership.json"
+      ]
+    },
+    {
+      "id": "C0504",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p46-edit-rare-ownership.json"
+      ]
+    },
+    {
+      "id": "C0505",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0506",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0507",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json"
+      ]
+    },
+    {
+      "id": "C0508",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0509",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0510",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p40-dialog-navigation.json"
+      ]
+    },
+    {
+      "id": "C0511",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0512",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0513",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "id": "C0514",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0515",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0516",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0517",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0518",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0519",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "id": "C0520",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0521",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "id": "C0522",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json",
+        "s12-p40-dialog-navigation.json"
+      ]
+    },
+    {
+      "id": "C0523",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0524",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0525",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0526",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0527",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json"
+      ]
+    },
+    {
+      "id": "C0528",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0529",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0530",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0531",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json"
+      ]
+    },
+    {
+      "id": "C0532",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0533",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0534",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0535",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0536",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0537",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0538",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0539",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0540",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0541",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0542",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0543",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0544",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p40-dialog-navigation.json"
+      ]
+    },
+    {
+      "id": "C0545",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "id": "C0546",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json"
+      ]
+    },
+    {
+      "id": "C0547",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0548",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p37-combo-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0549",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0550",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p44-control-brushes.json",
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0551",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0552",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0553",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0554",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0555",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p93-gdi-cache-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0556",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0557",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p40-dialog-navigation.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json"
+      ]
+    },
+    {
+      "id": "C0558",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0559",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0560",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p44-control-brushes.json",
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "id": "C0561",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json",
+        "s12-p44-control-brushes.json"
+      ]
+    },
+    {
+      "id": "C0562",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0563",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p51-list-directory-ownership.json"
+      ]
+    },
+    {
+      "id": "C0564",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0565",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0566",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p37-combo-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0567",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0568",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p44-control-brushes.json",
+        "s12-p49-list-items-ownership.json"
+      ]
+    },
+    {
+      "id": "C0569",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0570",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0571",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json"
+      ]
+    },
+    {
+      "id": "C0572",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0573",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0574",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0575",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p37-combo-ownership.json"
+      ]
+    },
+    {
+      "id": "C0576",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0577",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p94-wstruc-public-style.json"
+      ]
+    },
+    {
+      "id": "C0578",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p39-dialog-end-manager.json"
+      ]
+    },
+    {
+      "id": "C0579",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0580",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0581",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0582",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0583",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0584",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0585",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0586",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p24-wow-precomp.json",
+        "s12-p26-wow-unwind-ownership.json",
+        "s12-p28-native-process.json",
+        "s12-p46-edit-rare-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p91-wow-alias-flush-ownership.json",
+        "s12-p96-menu-timer-ownership.json",
+        "s12-p97-final-file-ownership.json"
+      ]
+    },
+    {
+      "id": "C0587",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "id": "C0588",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "id": "C0589",
+      "referenceKind": "caller-path",
+      "records": [
+        "s12-p12-registry-candidate.json",
+        "s12-p30-wow-registry-dispatch.json",
+        "s12-p31-wow-clipboard-page-domain.json",
+        "s12-p8-caller-anchors.json",
+        "s12-p91-wow-alias-flush-ownership.json"
+      ]
+    },
+    {
+      "id": "C0590",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p49-list-items-ownership.json",
+        "s12-p50-list-interaction-ownership.json"
+      ]
+    },
+    {
+      "id": "C0591",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p54-client-stubs-ownership.json"
+      ]
+    },
+    {
+      "id": "C0592",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p58-private-word-ownership.json"
+      ]
+    },
+    {
+      "id": "C0593",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p66-help-ownership.json"
+      ]
+    },
+    {
+      "id": "C0594",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p52-list-lifecycle-ownership.json",
+        "s12-p68-window-geometry-ownership.json"
+      ]
+    },
+    {
+      "id": "C0595",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p54-client-stubs-ownership.json",
+        "s12-p58-private-word-ownership.json",
+        "s12-p65-rtl-private-reader.json"
+      ]
+    },
+    {
+      "id": "C0596",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p40-dialog-navigation.json",
+        "s12-p41-drawing-ownership.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p44-control-brushes.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p50-list-interaction-ownership.json",
+        "s12-p51-list-directory-ownership.json",
+        "s12-p54-client-stubs-ownership.json",
+        "s12-p56-class-lookup-abi.json"
+      ]
+    },
+    {
+      "id": "C0597",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json",
+        "s12-p39-dialog-end-manager.json",
+        "s12-p40-dialog-navigation.json"
+      ]
+    },
+    {
+      "id": "C0598",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p37-combo-ownership.json"
+      ]
+    },
+    {
+      "id": "C0599",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p38-dialog-native-leaves.json"
+      ]
+    },
+    {
+      "id": "C0600",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json"
+      ]
+    },
+    {
+      "id": "C0601",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json"
+      ]
+    },
+    {
+      "id": "C0602",
+      "referenceKind": "provider-path",
+      "records": [
+        "s12-p23-redir-wow-binding.json"
+      ]
+    },
+    {
+      "id": "C0607",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p6-common-storage.json"
+      ]
+    },
+    {
+      "id": "C0608",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p6-common-storage.json",
+        "s12-p76-init-termination-ownership.json"
+      ]
+    },
+    {
+      "id": "C0609",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p6-common-storage.json"
+      ]
+    },
+    {
+      "id": "C0610",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p6-common-storage.json"
+      ]
+    },
+    {
+      "id": "C0611",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p6-common-storage.json"
+      ]
+    },
+    {
+      "id": "C0612",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p6-common-storage.json"
+      ]
+    },
+    {
+      "id": "C0613",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p6-common-storage.json"
+      ]
+    },
+    {
+      "id": "C0614",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p6-common-storage.json"
+      ]
+    },
+    {
+      "id": "C0615",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p35-bitmap-native.json",
+        "s12-p37-combo-ownership.json",
+        "s12-p43-edit-ownership.json",
+        "s12-p48-list-entry-ownership.json",
+        "s12-p6-common-storage.json",
+        "s12-p61-message-table-ownership.json"
+      ]
+    },
+    {
+      "id": "C0618",
+      "referenceKind": "stable-id",
+      "records": [
+        "s12-p60-task-init-ownership.json",
+        "s12-p62-scheduler-ownership.json"
+      ]
+    }
+  ],
+  "referenceKinds": {
+    "stable-id": 284,
+    "caller-path": 54,
+    "provider-path": 142
+  },
+  "confirmedCohort": {
+    "provider": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+    "sourceSha256": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089",
+    "mapSha256": "89a6d7e9c2332e0d7d7e531a9bea484261706e74feb41e27a9052982793bc73e",
+    "entries": [
+      {
+        "id": "C0506",
+        "symbol": "wow_native_ArrangeIconicWindows",
+        "line": 1459,
+        "binding": "0001:000605a0       _wow_native_ArrangeIconicWindows@4 100615a0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0507",
+        "symbol": "wow_native_BeginPaint",
+        "line": 1494,
+        "binding": "0001:000606b0       _wow_native_BeginPaint@8   100616b0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0508",
+        "symbol": "wow_native_BringWindowToTop",
+        "line": 1318,
+        "binding": "0001:000607c0       _wow_native_BringWindowToTop@4 100617c0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0509",
+        "symbol": "wow_native_CallMsgFilterA",
+        "line": 1543,
+        "binding": "0001:000608d0       _wow_native_CallMsgFilterA@8 100618d0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0510",
+        "symbol": "wow_native_CallMsgFilterW",
+        "line": 1545,
+        "binding": "0001:000609c0       _wow_native_CallMsgFilterW@8 100619c0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0511",
+        "symbol": "wow_native_CallNextHookEx",
+        "line": 1028,
+        "binding": "0001:00060ab0       _wow_native_CallNextHookEx@16 10061ab0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0512",
+        "symbol": "wow_native_CloseWindow",
+        "line": 1461,
+        "binding": "0001:00060ba0       _wow_native_CloseWindow@4  10061ba0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0513",
+        "symbol": "wow_native_CreateCaret",
+        "line": 1501,
+        "binding": "0001:00060cb0       _wow_native_CreateCaret@16 10061cb0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0514",
+        "symbol": "wow_native_DefDlgProcA",
+        "line": 1569,
+        "binding": "0001:00060dd0       _wow_native_DefDlgProcA@16 10061dd0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0515",
+        "symbol": "wow_native_DefFrameProcA",
+        "line": 1591,
+        "binding": "0001:00060ef0       _wow_native_DefFrameProcA@20 10061ef0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0516",
+        "symbol": "wow_native_DefMDIChildProcA",
+        "line": 1590,
+        "binding": "0001:00060fd0       _wow_native_DefMDIChildProcA@16 10061fd0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0517",
+        "symbol": "wow_native_DefWindowProcA",
+        "line": 1567,
+        "binding": "0001:000610b0       _wow_native_DefWindowProcA@16 100620b0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0518",
+        "symbol": "wow_native_DeferWindowPos",
+        "line": 1402,
+        "binding": "0001:00061270       _wow_native_DeferWindowPos@32 10062270 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0519",
+        "symbol": "wow_native_DestroyCaret",
+        "line": 1504,
+        "binding": "0001:000613e0       _wow_native_DestroyCaret@0 100623e0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0520",
+        "symbol": "wow_native_DestroyWindow",
+        "line": 1361,
+        "binding": "0001:000614c0       _wow_native_DestroyWindow@4 100624c0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0521",
+        "symbol": "wow_native_DispatchMessageA",
+        "line": 1593,
+        "binding": "0001:000615d0       _wow_native_DispatchMessageA@4 100625d0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0522",
+        "symbol": "wow_native_DispatchMessageW",
+        "line": 1594,
+        "binding": "0001:000616c0       _wow_native_DispatchMessageW@4 100626c0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0523",
+        "symbol": "wow_native_DragDetect",
+        "line": 1354,
+        "binding": "0001:000617b0       _wow_native_DragDetect@12  100627b0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0524",
+        "symbol": "wow_native_EnableScrollBar",
+        "line": 1486,
+        "binding": "0001:000618d0       _wow_native_EnableScrollBar@12 100628d0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0525",
+        "symbol": "wow_native_EnableWindow",
+        "line": 1342,
+        "binding": "0001:000619f0       _wow_native_EnableWindow@8 100629f0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0526",
+        "symbol": "wow_native_EndDeferWindowPos",
+        "line": 1455,
+        "binding": "0001:00061b00       _wow_native_EndDeferWindowPos@4 10062b00 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0527",
+        "symbol": "wow_native_EndPaint",
+        "line": 1496,
+        "binding": "0001:00061cf0       _wow_native_EndPaint@8     10062cf0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0528",
+        "symbol": "wow_native_ExcludeUpdateRgn",
+        "line": 1322,
+        "binding": "0001:00061e00       _wow_native_ExcludeUpdateRgn@8 10062e00 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0529",
+        "symbol": "wow_native_FlashWindow",
+        "line": 1320,
+        "binding": "0001:00061f10       _wow_native_FlashWindow@8  10062f10 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0530",
+        "symbol": "wow_native_GetClassNameA",
+        "line": 1330,
+        "binding": "0001:00062020       _wow_native_GetClassNameA@12 10063020 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0531",
+        "symbol": "wow_native_GetClientRect",
+        "line": 1332,
+        "binding": "0001:00062140       _wow_native_GetClientRect@8 10063140 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0532",
+        "symbol": "wow_native_GetDC",
+        "line": 1490,
+        "binding": "0001:00062250       _wow_native_GetDC@4        10063250 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0533",
+        "symbol": "wow_native_GetDCEx",
+        "line": 1492,
+        "binding": "0001:00062350       _wow_native_GetDCEx@12     10063350 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0534",
+        "symbol": "wow_native_GetParent",
+        "line": 1336,
+        "binding": "0001:00062460       _wow_native_GetParent@4    10063460 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0535",
+        "symbol": "wow_native_GetPropA",
+        "line": 1324,
+        "binding": "0001:00062570       _wow_native_GetPropA@8     10063570 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0536",
+        "symbol": "wow_native_GetScrollPos",
+        "line": 1481,
+        "binding": "0001:00062680       _wow_native_GetScrollPos@8 10063680 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0537",
+        "symbol": "wow_native_GetScrollRange",
+        "line": 1483,
+        "binding": "0001:00062790       _wow_native_GetScrollRange@16 10063790 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0538",
+        "symbol": "wow_native_GetUpdateRect",
+        "line": 1519,
+        "binding": "0001:000628b0       _wow_native_GetUpdateRect@12 100638b0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0539",
+        "symbol": "wow_native_GetUpdateRgn",
+        "line": 1521,
+        "binding": "0001:000629d0       _wow_native_GetUpdateRgn@12 100639d0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0540",
+        "symbol": "wow_native_GetWindowDC",
+        "line": 1491,
+        "binding": "0001:00062af0       _wow_native_GetWindowDC@4  10063af0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0541",
+        "symbol": "wow_native_GetWindowRect",
+        "line": 1334,
+        "binding": "0001:00062bf0       _wow_native_GetWindowRect@8 10063bf0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0542",
+        "symbol": "wow_native_GetWindowTextA",
+        "line": 1535,
+        "binding": "0001:00062d00       _wow_native_GetWindowTextA@12 10063d00 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0543",
+        "symbol": "wow_native_GetWindowTextLengthA",
+        "line": 1547,
+        "binding": "0001:00062e20       _wow_native_GetWindowTextLengthA@4 10063e20 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0544",
+        "symbol": "wow_native_GetWindowTextW",
+        "line": 1540,
+        "binding": "0001:00062f30       _wow_native_GetWindowTextW@12 10063f30 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0545",
+        "symbol": "wow_native_HideCaret",
+        "line": 1506,
+        "binding": "0001:00063050       _wow_native_HideCaret@4    10064050 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0546",
+        "symbol": "wow_native_InvalidateRect",
+        "line": 1510,
+        "binding": "0001:00063150       _wow_native_InvalidateRect@12 10064150 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0547",
+        "symbol": "wow_native_InvalidateRgn",
+        "line": 1513,
+        "binding": "0001:00063260       _wow_native_InvalidateRgn@12 10064260 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0548",
+        "symbol": "wow_native_MoveWindow",
+        "line": 1337,
+        "binding": "0001:00063370       _wow_native_MoveWindow@24  10064370 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0549",
+        "symbol": "wow_native_OpenIcon",
+        "line": 1463,
+        "binding": "0001:00063490       _wow_native_OpenIcon@4     10064490 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0550",
+        "symbol": "wow_native_RedrawWindow",
+        "line": 1529,
+        "binding": "0001:000635a0       _wow_native_RedrawWindow@16 100645a0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0551",
+        "symbol": "wow_native_ReleaseCapture",
+        "line": 1360,
+        "binding": "0001:000636b0       _wow_native_ReleaseCapture@0 100646b0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0552",
+        "symbol": "wow_native_RemovePropA",
+        "line": 1328,
+        "binding": "0001:00063790       _wow_native_RemovePropA@8  10064790 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0553",
+        "symbol": "wow_native_ScrollWindow",
+        "line": 1467,
+        "binding": "0001:000638a0       _wow_native_ScrollWindow@20 100648a0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0554",
+        "symbol": "wow_native_ScrollWindowEx",
+        "line": 1470,
+        "binding": "0001:000639c0       _wow_native_ScrollWindowEx@32 100649c0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0555",
+        "symbol": "wow_native_SendMessageA",
+        "line": 1561,
+        "binding": "0001:00063af0       _wow_native_SendMessageA@16 10064af0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0556",
+        "symbol": "wow_native_SendMessageTimeoutA",
+        "line": 1565,
+        "binding": "0001:00063bd0       _wow_native_SendMessageTimeoutA@28 10064bd0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0557",
+        "symbol": "wow_native_SendMessageW",
+        "line": 1564,
+        "binding": "0001:00063ce0       _wow_native_SendMessageW@16 10064ce0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0558",
+        "symbol": "wow_native_SetActiveWindow",
+        "line": 1344,
+        "binding": "0001:00063dc0       _wow_native_SetActiveWindow@4 10064dc0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0559",
+        "symbol": "wow_native_SetCapture",
+        "line": 1358,
+        "binding": "0001:00063ec0       _wow_native_SetCapture@4   10064ec0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0560",
+        "symbol": "wow_native_SetCaretPos",
+        "line": 1505,
+        "binding": "0001:00063fd0       _wow_native_SetCaretPos@8  10064fd0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0561",
+        "symbol": "wow_native_SetCursor",
+        "line": 1532,
+        "binding": "0001:000641d0       _wow_native_SetCursor@4    100651d0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0562",
+        "symbol": "wow_native_SetCursorPos",
+        "line": 1350,
+        "binding": "0001:000642b0       _wow_native_SetCursorPos@8 100652b0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0563",
+        "symbol": "wow_native_SetDlgItemTextW",
+        "line": 1556,
+        "binding": "0001:00064390       _wow_native_SetDlgItemTextW@12 10065390 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0564",
+        "symbol": "wow_native_SetFocus",
+        "line": 1356,
+        "binding": "0001:000644a0       _wow_native_SetFocus@4     100654a0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0565",
+        "symbol": "wow_native_SetForegroundWindow",
+        "line": 1346,
+        "binding": "0001:000645a0       _wow_native_SetForegroundWindow@4 100655a0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0566",
+        "symbol": "wow_native_SetParent",
+        "line": 1364,
+        "binding": "0001:000646b0       _wow_native_SetParent@8    100656b0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0567",
+        "symbol": "wow_native_SetPropA",
+        "line": 1326,
+        "binding": "0001:000647f0       _wow_native_SetPropA@12    100657f0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0568",
+        "symbol": "wow_native_SetScrollInfo",
+        "line": 1498,
+        "binding": "0001:00064910       _wow_native_SetScrollInfo@16 10065910 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0569",
+        "symbol": "wow_native_SetScrollPos",
+        "line": 1479,
+        "binding": "0001:00064a30       _wow_native_SetScrollPos@16 10065a30 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0570",
+        "symbol": "wow_native_SetScrollRange",
+        "line": 1476,
+        "binding": "0001:00064b50       _wow_native_SetScrollRange@20 10065b50 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0571",
+        "symbol": "wow_native_SetWindowContextHelpId",
+        "line": 1348,
+        "binding": "0001:00064c70       _wow_native_SetWindowContextHelpId@8 10065c70 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0572",
+        "symbol": "wow_native_SetWindowPlacement",
+        "line": 1423,
+        "binding": "0001:00064ee0       _wow_native_SetWindowPlacement@8 10065ee0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0573",
+        "symbol": "wow_native_SetWindowPos",
+        "line": 1382,
+        "binding": "0001:00064ff0       _wow_native_SetWindowPos@28 10065ff0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0574",
+        "symbol": "wow_native_SetWindowTextA",
+        "line": 1549,
+        "binding": "0001:00065150       _wow_native_SetWindowTextA@8 10066150 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0575",
+        "symbol": "wow_native_SetWindowTextW",
+        "line": 1551,
+        "binding": "0001:00065260       _wow_native_SetWindowTextW@8 10066260 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0576",
+        "symbol": "wow_native_SetWindowWord",
+        "line": 1429,
+        "binding": "0001:00065370       _wow_native_SetWindowWord@12 10066370 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0577",
+        "symbol": "wow_native_ShowCaret",
+        "line": 1508,
+        "binding": "0001:00065490       _wow_native_ShowCaret@4    10066490 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0578",
+        "symbol": "wow_native_ShowCursor",
+        "line": 1351,
+        "binding": "0001:00065590       _wow_native_ShowCursor@4   10066590 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0579",
+        "symbol": "wow_native_ShowOwnedPopups",
+        "line": 1465,
+        "binding": "0001:00065670       _wow_native_ShowOwnedPopups@8 10066670 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0580",
+        "symbol": "wow_native_ShowScrollBar",
+        "line": 1474,
+        "binding": "0001:00065780       _wow_native_ShowScrollBar@12 10066780 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0581",
+        "symbol": "wow_native_ShowWindow",
+        "line": 1340,
+        "binding": "0001:000658a0       _wow_native_ShowWindow@8   100668a0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0582",
+        "symbol": "wow_native_UpdateWindow",
+        "line": 1527,
+        "binding": "0001:000659b0       _wow_native_UpdateWindow@4 100669b0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0583",
+        "symbol": "wow_native_ValidateRect",
+        "line": 1515,
+        "binding": "0001:00065ac0       _wow_native_ValidateRect@8 10066ac0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0584",
+        "symbol": "wow_native_ValidateRgn",
+        "line": 1517,
+        "binding": "0001:00065bc0       _wow_native_ValidateRgn@8  10066bc0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0585",
+        "symbol": "wow_user_idle_hook_for_current",
+        "line": 84,
+        "binding": "0001:00065db0       _wow_user_idle_hook_for_current@0 10066db0 f   wow_user_task_lifecycle.obj"
+      },
+      {
+        "id": "C0586",
+        "symbol": "wow_user_msg_wait",
+        "line": 714,
+        "binding": "0001:00065e80       _wow_user_msg_wait@20      10066e80 f   wow_user_task_lifecycle.obj"
+      }
+    ],
+    "disposition": "S13 native-call/return and lifecycle owner boundary. Keep original C argument conversion and algorithms; review selected caller binding with F native-call scopes as a cohort. Do not move runtime ownership into B or mechanically migrate entire original translation units.",
+    "evidence": [
+      "Mapped wrappers resolve the narrow HWND carrier before native calls; begin/end owns runtime execution and return publication.",
+      "DestroyWindow uses end_no_publication after USER consumes identity; ordinary return is not an interchangeable substitute.",
+      "SetParent/SetWindowPos/DeferWindowPos preserve separate parent/pseudo-zorder conversions.",
+      "Message wrappers retain payload/returned-window publication, not merely API forwarding.",
+      "idle_hook_for_current selects the active runtime task and native thread; msg_wait brackets nonzero waits with native-call begin/end_wait."
+    ],
+    "limits": "This classifies actual current responsibilities, not proof that every existing mechanism is minimal or a completed C-to-F migration. Current direct edges remain open. S13 must verify each migration and measure mirror delta."
+  },
+  "progress": {
+    "reviewedFiles": 190,
+    "totalFiles": 190,
+    "totalIds": 618,
+    "openIds": 480,
+    "eliminatedIds": 88,
+    "newEliminations": 0
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "verification": {
+    "source": "All81 names matched current provider definitions/macro invocations and product map.",
+    "runtime": "No new runtime claims; product unchanged.",
+    "documentation": "Passed: build/t483-s12-open-index/docs.log",
+    "index": "480 distinct open IDs, all referenced record paths exist;81 exact provider/map witnesses.",
+    "publication": "All22 existing release image hashes match manifest; P98 package unchanged."
+  },
+  "followUp": "Remaining ownership disposition reconciliation is unfinished. The480-entry navigation index is not480 verified migration decisions. S12 stays active."
+}
