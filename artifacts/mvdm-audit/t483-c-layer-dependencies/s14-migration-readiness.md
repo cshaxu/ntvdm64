@@ -1,14 +1,14 @@
 # S14 migration readiness and counts
 
-Initial P60 baseline `85700b2a5`; P61/P62/P63 updates below supersede its
+Initial P60 baseline `85700b2a5`; P61/P62/P63/P65 updates below supersede its
 classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
-assigns all 413 currently open stable IDs to the existing ten chains.
+assigns all 412 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
 
 | Chain | Symbols | Headers | Include roots | Image imports | Total |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| 1. guest-access-leases | 1 | 0 | 0 | 0 | 1 |
+| 1. guest-access-leases | 0 | 0 | 0 | 0 | 0 |
 | 2. wow-machine-context | 1 | 0 | 0 | 0 | 1 |
 | 3. user-projection-generations | 10 | 3 | 0 | 0 | 13 |
 | 4. console-mechanics | 50 | 7 | 0 | 0 | 57 |
@@ -18,7 +18,7 @@ assigns all 413 currently open stable IDs to the existing ten chains.
 | 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
 | 9. native-user | 152 | 26 | 0 | 0 | 178 |
 | 10. original-helpers-build-abi | 13 | 6 | 11 | 1 | 31 |
-| Total | 343 | 58 | 11 | 1 | 413 |
+| Total | 342 | 58 | 11 | 1 | 412 |
 
 79 distinct provider files have complete body-read records. Header classification
 is 56/59, with three generated contracts still awaiting their final owner/ABI
@@ -31,10 +31,11 @@ design: **10/10**. This does not discard previously delivered subchains. It make
 the missing candidate-level decisions explicit rather than treating source reading
 or broad B/C/F classification as a completed migration design.
 
-Ledger status is 155 eliminated, 413 open, 44 supporting, five
-eliminated-transitive and one excluded diagnostic, total 618. This delivery
-implements/delivers zero new dependency removals and changes zero mirror points
-or lines. Production remains the P26 package.
+Ledger status is 156 eliminated, 412 open, 44 supporting, five
+eliminated-transitive and one excluded diagnostic, total 618. P65 eliminates
+C0456 with +1 non-error mirror point/+2 lines; current package is
+`d071bef3-e777-4e65-a2ee-c1563b18bc0e`. Direct-ID closure is not whole-chain
+or indirect callback/lifecycle closure.
 
 ## What these counts do not hide
 
@@ -112,3 +113,12 @@ P63 removes C0075/C0328/C0329 by moving abort cleanup into the existing F
 CallBack16 wrapper. [Delivery evidence](s14-p63-callback-owner.json) records
 7/26 ->3/9 non-error mirror differences and final package/targeted tests.
 Chain1 retains C0456; this does not close the whole chain.
+
+## P65 direct completion delivery
+
+[P65 evidence](s14-p65-wow-flush-owner.json) removes the F empty SIM32
+completion and its link input. C owns the selected CCPU direct-view macro;
+original paired SIM32 scratch-video writes remain unchanged. Cached full
+builds, dual11 publication, argument/frame/abort, real CCPU/page-domain and
+immutable Win16 dialog checks pass. Chain1 now has zero open direct IDs;
+chain2 machine/context ownership remains the next implementation work.

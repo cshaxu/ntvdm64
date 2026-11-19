@@ -1,0 +1,148 @@
+{
+  "delivery": "T483 S14 P65",
+  "baseline": "d3a50f5baa3b84e3ebd0c6f84efd165f89955cd3",
+  "status": "Verified P65 delivery; enclosing commit is source/publication receipt; push verified after commit",
+  "id": "C0456",
+  "decision": "Remove F empty completion; selected CCPU direct-mapping completion belongs to C macro. No B callback or replacement provider.",
+  "evidence": {
+    "original": "P64 real original SIM32 scratch test disproves blind redirect: stale scratch overwrites direct views. Original paired scratch clients remain unchanged.",
+    "supported_context": "Only production CCPU40; c_sas_overwrite_memory has no compiled-cache work. WOW uses FlatAddress/IntelMemoryBase direct views, not paired SIM32 scratch buffers.",
+    "callers": "150 statement calls in 38 C files; arguments evaluated and explicitly converted; return remains TRUE. Census is source evidence, not runtime reachability.",
+    "ABI": "Deleted WOW local stdcall provider; original worker cdecl SIM32 export remains. No calling convention alias.",
+    "approval": "Owner explicitly approved C0456; standing small increase authorization: net fewer than5 non-error diff lines and at most2 points.",
+    "limits": "Not a new generic emulator completion contract; a future translated CPU would require its own cache semantics."
+  },
+  "mirror": {
+    "path": "src/mvdm-host/wow32/wow32.h",
+    "before": {
+      "points": 0,
+      "lines": 0
+    },
+    "after": {
+      "points": 1,
+      "lines": 2
+    },
+    "delta": {
+      "points": 1,
+      "lines": 2
+    },
+    "line_mapping": "One physical line replaces one line; excluded frameworks and every #error/#line byte unchanged."
+  },
+  "verification": {
+    "build": "PASS cached x86/x64/reference build; build.exit=0",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "d071bef3-e777-4e65-a2ee-c1563b18bc0e",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "tests": {
+      "runner": "build\\t483-s14-wow-flush-owner\\product-tests.ps1",
+      "exit": 0,
+      "sim32_contract": 0,
+      "frame": "4 normal +11 abort; WOW_DIRECT_FLUSH_OK argument_evaluation=1 no_external_provider=1",
+      "real_ccpu": [
+        "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1",
+        "CCPU_ABORT_OK thread=17120 escaped=1 nested=1 continue=1 normal-fe=1",
+        "CCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1",
+        "CCPU_ABORT_OK thread=30376 escaped=1 nested=1 continue=1 normal-fe=1",
+        "CCPU_ABORT_OK thread=31912 escaped=1 nested=1 continue=1 normal-fe=1"
+      ],
+      "page_domain": "WOW_PAGE_DOMAIN_LIFECYCLE_OK; WOW_FIXTURE_OK case=page-domain",
+      "win16": "WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+      "scope": "Targeted only; Full not run per owner small-five authorization."
+    },
+    "normalized_images": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "link_line_proof": {
+      "same_physical_line_count": true,
+      "error_line_directives_byte_equal": true,
+      "wow_flush_provider_absent": true,
+      "worker_original_preserved": true
+    },
+    "governance": "PASS documentation governance, relative links, A/B build boundaries and git diff --check",
+    "run_evidence": {
+      "build-process.json": {
+        "sha256": "060214c73f36d6f876d9a65cd536368b1caeb50b6b7bf6e817e1606ff9d932c0",
+        "bytes": 318
+      },
+      "build.exit": {
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      "publication-final.json": {
+        "sha256": "0901143abaf7f352e2903c3717783a694d0443f4c281fd5ef923b8a62f0486fe",
+        "bytes": 218
+      },
+      "normalized-final.json": {
+        "sha256": "f992f0398e0008d70faa94750c8b44ecf5e485e112f0b3d81bdf360bb1b9a3a9",
+        "bytes": 255
+      },
+      "tests-process.json": {
+        "sha256": "a2369582c7828cc94775498eddbf2facfeb23c4507613fc059b0e2909ac5201a",
+        "bytes": 321
+      },
+      "product-tests.exit": {
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      },
+      "frame/fixture.out": {
+        "sha256": "c76cd1b11017c64e551a5b09e05cd8129894f7ab725576eb6717450241cf6677",
+        "bytes": 510
+      },
+      "frame/abort.out": {
+        "sha256": "8ba24615201dcadb0415ff3e5bdc93c4f12363c06c44bfd69e34ba5feb747896",
+        "bytes": 624
+      },
+      "ccpu.out": {
+        "sha256": "c8726cc47f5e05f253217fc2ff85af5c9034f998852b0a277da37750fe3145e6",
+        "bytes": 329
+      },
+      "real-ccpu/verify.out": {
+        "sha256": "464e756b639474aa6331009400f62066e5c987c9106cfb7f0db37c6ec0564578",
+        "bytes": 376
+      },
+      "page-domain/stdout.txt": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "dialog-guest/result.txt": {
+        "sha256": "0cce8cd25a3f56f5006d0ac4b299ea694733ebafa68e401b03b80a3081af3292",
+        "bytes": 80
+      },
+      "governance.exit": {
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes": 3
+      }
+    }
+  },
+  "ledger": {
+    "baseline_eliminated": 155,
+    "baseline_open": 413,
+    "expected_after_eliminated": 156,
+    "expected_after_open": 412,
+    "total": 618,
+    "eliminated": 156,
+    "open": 412
+  },
+  "sources": {
+    "src\\mvdm-host\\wow32\\wow32.h": "c098768518e5bf766aad1f4dd800081e88b80bd9394f750b62eb6eee8f1de00c",
+    "tools\\build\\New-T404S5Wow32ProviderNinja.ps1": "6ad26454b4ba95a2fb1fc8ee92f75baf138deef237a6205967119c1a62b20128",
+    "test\\adapter-mvdm-host-out\\wow\\wow_original_callback_frame_fixture.c": "b400a1c3a0bf092453eb71ceb15a82f5eeae33976d54edc001c70899fd493e86"
+  }
+}

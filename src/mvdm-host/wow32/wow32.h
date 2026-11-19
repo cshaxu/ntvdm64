@@ -557,7 +557,7 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 // code affected.
 //
 
-#define FLUSHVDMCODEPTR(vp,cb,p) Sim32FlushVDMPointer( (vp), (USHORT)(cb), (PBYTE)(p), (fWowMode))
+#define FLUSHVDMCODEPTR(vp,cb,p) ((void)(ULONG)(vp), (void)(USHORT)(cb), (void)(PBYTE)(p), (void)fWowMode, TRUE)
 //#define FLUSHVDMPTR(vp,cb,p)     TRUE          // BUGBUG! davehart
 #define FLUSHVDMPTR(vp,cb,p)     FLUSHVDMCODEPTR(vp,cb,p)
 

@@ -23,10 +23,17 @@ implementation migration. The broader C-layer cleanup remains active.
 | Expected Markers | Actual inward implementations and state ownership, removed superseded providers/forwarding, retained original memory semantics and lifetime. |
 | Similar-Issue Sweep | All acquire/use/release, thread and cross-image consumers of each selected chain; distinguish original C provider algorithms from common compatibility mechanics. |
 | Reporting Requirements | File entry/exit, mirror points/lines and cumulative totals; direct edges, actual migration, deleted forwarding and remaining ownership counted separately. |
-| Stop Conditions | Prior approval for net mirror-diff increases or materially changed semantic/ownership boundaries; investigate before migration. |
+| Stop Conditions | Owner standing approval covers net non-error mirror increases below5 lines and at most2 points; larger increases or materially changed semantic/ownership boundaries require prior approval. C outward dependencies must be eliminated, not retained as exceptions. |
 | Exit Criteria | Complete four-component ownership and migration ledger before further relocation; implement admitted complete chains with final-code targeted tests, coherent dual release and commit/push. Overall closure requires no C-to-D/E/F implementation dependency; unresolved dispositions are not elimination. |
 
 ## Current Technical Baseline
+
+P65 [WOW direct-pointer completion](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p65-wow-flush-owner.json)
+removes the F empty provider into the existing C macro. Owner approved
+non-error mirror +1 point/+2 lines. Cached builds and dual11 publication pass;
+package d071bef3-e777-4e65-a2ee-c1563b18bc0e. SIM32, frame/abort, real CCPU/page-domain and immutable Win16 dialog tests pass.
+C0456 is eliminated:156 eliminated/412 open; only WOW32 materially differs
+from P63. Commit/push receipt is the enclosing P65 delivery commit. S14 remains active.
 
 P64 [SIM32 contract probe](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p64-sim32-contract.json)
 rejects a blind original-provider redirect: real CCPU/SIM32 evidence shows stale

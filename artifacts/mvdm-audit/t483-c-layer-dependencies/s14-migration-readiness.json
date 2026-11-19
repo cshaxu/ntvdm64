@@ -4,7 +4,7 @@
   "question": "Make reviewed source coverage and unfinished migration design independently countable; assign every current open ID to one accountable chain.",
   "method": "Manual assignment from the P52 ten-chain decisions, P57 header dispositions and complete provider review records; machine-checked exact partition of current open IDs. Primary chain is accounting responsibility, not proof a provider file can move whole.",
   "inputs": {
-    "points.jsonl": "6b564d432ecce7d9103a1037c2dbfe84777576350af5856653186e447e89943c",
+    "points.jsonl": "f10aec92f715a7d096466f262f0982db72db1c73972b94ba92116e4fe3af8be9",
     "s14-open-provider-crosswalk.json": "1d92be59ff0bdde3e4d960329a67496218cc5c670f3f046240bc8c58f14ef3dd",
     "s14-header-contract-ownership.json": "a6eb21d4c5cfa34810125adc8748be86f9291608b58b5a56a4b5d2ec93b0fbde"
   },
@@ -19,34 +19,27 @@
         "s14-command-root-and-lease-contract.json",
         "s14-p62-lease-owner.json",
         "s14-p63-callback-owner.json",
-        "s14-p64-sim32-contract.json"
+        "s14-p64-sim32-contract.json",
+        "s14-p65-wow-flush-owner.json"
       ],
-      "open_ids": [
-        "C0456"
-      ],
+      "open_ids": [],
       "counts": {
         "header": 0,
-        "symbol": 1
+        "symbol": 0
       },
-      "provider_files": [
-        "src/wow32-dll/source/wow_sim32_pointer_compat.c"
-      ],
+      "provider_files": [],
       "coupled_chains": [
         2,
         3,
         8
       ],
-      "design_status": "C coordinator/B resources implemented and verified; remaining consumer ownership is not a whole-chain closure",
-      "next_design_gate": "Trace actual writable views and all flush return uses; select a C-owned completion interface appropriate to direct mappings, preserving original paired SIM32 callers. Measure any required C ABI/mirror change for approval before implementation.",
+      "design_status": "Listed direct IDs eliminated by P62/P63/P65; cross-chain lifetime/indirect dependency audit remains separate.",
+      "next_design_gate": "Continue chain2 machine-context ownership; do not interpret zero direct IDs as proof of all cross-chain lifecycle closure.",
       "newly_implemented_ids": [
-        "C0075",
-        "C0328",
-        "C0329"
+        "C0456"
       ],
       "newly_delivered_ids": [
-        "C0075",
-        "C0328",
-        "C0329"
+        "C0456"
       ],
       "coordinator_delivery": "T483 S14 P62"
     },
@@ -781,31 +774,31 @@
     }
   ],
   "coverage_limits": [
-    "413 is the direct open-ID population, not all outward implementation edges. Earlier eliminated includes can still hide executable callbacks.",
+    "412 is the direct open-ID population, not all outward implementation edges. Earlier eliminated includes can still hide executable callbacks.",
     "Guest leases and access callbacks are tracked additionally by P55/P59; their B-to-C callbacks are not made lawful by absence from the direct C-to-outer ledger.",
     "The 1494-file four-root inventory is not 1494 fully reviewed files. Provider body coverage is 79/79; 190 C callers were reconciled separately in P54.",
     "Some provider files occur in multiple chains; use distinct paths, not a sum of per-chain file counts.",
     "All ten chains remain design-incomplete as whole migration units; this does not undo delivered P17-P26 subchains."
   ],
   "summary": {
-    "assigned_open_ids": 413,
+    "assigned_open_ids": 412,
     "unassigned_open_ids": 0,
     "duplicate_open_ids": 0,
     "distinct_symbol_provider_files": 79,
     "chains": 10,
     "whole_chains_design_ready": 0,
     "whole_chains_design_incomplete": 10,
-    "newly_implemented_ids": 3,
-    "newly_delivered_ids": 3,
+    "newly_implemented_ids": 1,
+    "newly_delivered_ids": 1,
     "ledger_status_counts": {
       "excluded-diagnostic": 1,
-      "open": 413,
+      "open": 412,
       "supporting-evidence": 44,
       "eliminated-transitive": 5,
-      "eliminated": 155
+      "eliminated": 156
     },
     "classified_headers": 59,
     "generated_header_migrations_pending": 3
   },
-  "updated_by": "T483 S14 P64"
+  "updated_by": "T483 S14 P65"
 }

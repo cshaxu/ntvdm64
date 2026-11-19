@@ -47,12 +47,7 @@ PVOID FASTCALL GetPModeVDMPointerAssert(DWORD address)
     default: ++errors; RaiseException(0xe4470003,0,0,NULL); return NULL;
     }
 }
-#ifndef Sim32FlushVDMPointer
-BOOL Sim32FlushVDMPointer(ULONG address,USHORT size,PBYTE bytes,BOOL mode)
-{
-    (void)address;(void)size;(void)bytes;(void)mode;return TRUE;
-}
-#endif
+
 void __cdecl host_simulate(void)
 {
     ++simulations;
@@ -69,7 +64,13 @@ void __cdecl host_simulate(void)
 }
 int __cdecl main(void)
 {
-    unsigned test;
+    unsigned test, address_evaluations=0, size_evaluations=0, pointer_evaluations=0;
+    if (!FLUSHVDMCODEPTR(++address_evaluations, ++size_evaluations,
+            (++pointer_evaluations, (PBYTE)NULL)) ||
+        address_evaluations!=1 || size_evaluations!=1 || pointer_evaluations!=1)
+        return 91;
+    puts("WOW_DIRECT_FLUSH_OK argument_evaluation=1 no_external_provider=1");
+
     caller=VirtualAlloc(NULL,4096,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);
     outbound=VirtualAlloc(NULL,4096,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);
     returned=VirtualAlloc(NULL,4096,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);

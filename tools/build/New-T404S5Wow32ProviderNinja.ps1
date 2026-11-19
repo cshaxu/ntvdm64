@@ -65,7 +65,6 @@ if (!(Test-Path -LiteralPath $parentImportLibraryPath -PathType Leaf)) {
 }
 $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_callback_frame_lease.c'),
-    (Join-Path $adapterWow 'wow_sim32_pointer_compat.c'),
     (Join-Path $adapterWow 'wow_private_user_compat.c'),
     (Join-Path $adapterWow 'wow_bitmap_bindings.c'),
     (Join-Path $adapterWow 'wow_window_words_binding.c'),

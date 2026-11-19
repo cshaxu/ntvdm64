@@ -747,6 +747,11 @@ instructions for this audit:
    necessity evidence and proposed disposition.
 8. Obtain approval before increasing the original-relative mirror difference.
    This measures differences from original, not total source line count.
+   Owner standing approval (2026-11-19) covers an implementation batch with
+   a net increase of fewer than five original-relative non-excluded diff lines and at most
+   two additional diff points. Record both metrics and necessity evidence;
+   larger increases still require prior approval. This does not waive tests
+   or permit hiding outward dependencies through callbacks.
 9. Formatting, newline and reference-only changes without behavior or binding
    effects may accumulate without immediate build or test.
 10. After the whole file containing substantive restoration or minimization
