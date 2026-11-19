@@ -96,7 +96,9 @@ P42: [native control migration and verified eleven-image publication](../../arti
 
 P43: [EDIT ownership classification](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p43-edit-ownership.json).
 
-P44: [control brushes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p44-control-brushes.json). Review85/116:16 clears,57 lifecycle,12 source/ABI,31 unreviewed;503/617 open. Native resources moved B unchanged. Both cached builds, drawing fixture and isolated Win16 frontiers passed; eleven images published and hash-verified at both destinations. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P44: [control brushes and verified publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p44-control-brushes.json).
+
+P45: [EDIT creation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p45-edit-create-ownership.json). Review86/116:16 clears,57 lifecycle,13 source/ABI,30 unreviewed;503/617 open. No production changes; P44 release22 hashes reverified. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

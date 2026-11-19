@@ -563,6 +563,8 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+086 P45: MLCreate remains C. One remaining outer function, extracted original ClearWindowState, is S14 source ownership coupled to S13 native-state publication; C0064 mixed header remains open. Native address query already B. Mirror delta0/0; see s12-p45-edit-create-ownership.json.
+
 ## 087 — src/non-mvdm/windows/core/ntuser/client/edmlrare.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h

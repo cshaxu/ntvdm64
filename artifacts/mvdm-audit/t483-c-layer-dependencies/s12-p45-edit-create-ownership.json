@@ -1,0 +1,67 @@
+{
+  "baseline": "6f0922157ac7c8192eac7fc2b04c50ce5c444d99",
+  "status": "P45 source-only multiline EDIT creation ownership classification",
+  "files": [
+    {
+      "number": 86,
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "sha256": "fda986f3a2a331a5eb0a6c7dc3ed80645949ec3e578838a9893040ffab747069",
+      "compilerObject": "obj/opennt-user/control-body-edmlonce.obj",
+      "objectSha256": "ded3835c05db3d238e3fd2476ba9ed914bb33b93869c9590162fc93cd50fe467",
+      "dependencyRecord": "obj/opennt-user/control-body-edmlonce.obj: #deps 66, deps mtime 8167732531359892 (VALID)",
+      "header": "C0064",
+      "coffUndefined": [
+        "__imp__LocalAlloc@8",
+        "_wow_edit_native_highest_user_address@0",
+        "_ECCreate@12",
+        "_ECSetText@8",
+        "_ECSetFont@12",
+        "_ClearWindowState@8"
+      ],
+      "verifiedSymbols": [
+        {
+          "id": "C0351",
+          "symbol": "ClearWindowState",
+          "status": "open",
+          "provider": "src/wow32-dll/source/wow_control_state.c"
+        },
+        {
+          "id": "C0399",
+          "symbol": "wow_edit_native_highest_user_address",
+          "status": "eliminated",
+          "provider": "src/compat/wow_native_environment.c"
+        }
+      ],
+      "conclusion": "Keep MLCreate in C: original multiline construction, local line-array allocation, alignment/autoscroll policy, font/text initialization. Only remaining outer function is extracted ClearWindowState. Its original client.c body and the mixed precomp are S14 source/ABI composition, coupled to S13 existing native-state publication. No whole-file move."
+    }
+  ],
+  "mechanisms": {
+    "state": "MLCreate clears WFHSCROLL for non-left alignment. ClearWindowState retains original TestWF/no-op policy then calls the mapped wow_edit_clear_window_state. Native NtUserClearWindowState provider is already B; F change_window_state refreshes the retained WND after mutation. The WFWIN40COMPAT private-bit branch is not selected by this WFHSCROLL call. Do not replace this chain with raw public SetWindowLong or move the C-dependent wrapper into B.",
+    "allocation": "Actual COFF references LocalAlloc directly from Windows, ECCreate/ECSetFont from C control-body-edecrare.obj and ECSetText from C control-body-editec.obj. No new allocator is needed.",
+    "address": "MM_HIGHEST_USER_ADDRESS maps to the B GetSystemInfo query already delivered P38. Original REBASEPTR/initial-text decision remains C.",
+    "evidenceMethod": "Read full current edmlonce.c; decode selected production COFF undefined symbols; inspect VALID Ninja dependencies and final wow32.dll.map providers; trace precomp, wow_control_state.c, wow_edit_call_bindings.c and B native environment. This is source/link ownership evidence, not new runtime validation."
+  },
+  "progress": {
+    "reviewedFiles": 86,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 57,
+    "deferredSourceAbiCompositionFiles": 13,
+    "unreviewedFiles": 30,
+    "totalFiles": 116,
+    "openIds": 503,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: no production source changes.",
+    "runtime": "Not run: classification does not establish runtime acceptance.",
+    "publication": "Retained P44 package; verified all 22 actual image hashes against released eleven-image manifest.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed, exit 0; build/t483-s12-edit-create-ownership/docs.log and docs.exit. git diff --check passed."
+  },
+  "limits": "C0064/C0351 remain open. No new retention exception or successor admission. Mirror bytes and #error/#line unchanged. S14 must compare restoration of original client.c unit and measure both mirror metrics before deciding; S13 must preserve authoritative native mutation and retained-view publication."
+}

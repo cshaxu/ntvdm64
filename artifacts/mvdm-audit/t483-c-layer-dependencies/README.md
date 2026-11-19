@@ -205,3 +205,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P43 EDIT ownership](s12-p43-edit-ownership.json): files082-083, current-task/callback and native-return boundaries distinguished from original algorithms and storage. Review83/116,505/617 open.
 
 [P44 control brushes](s12-p44-control-brushes.json): files084-085; unchanged native resource carrier moves B, two storage dependencies cleared. Review85/116,503/617 open.
+
+[P45 EDIT creation](s12-p45-edit-create-ownership.json): file086; original construction stays C, extracted state function and mixed header remain open. Review86/116,503/617 open; no production changes.
