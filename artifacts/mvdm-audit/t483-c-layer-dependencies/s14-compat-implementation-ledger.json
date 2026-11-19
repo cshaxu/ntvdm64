@@ -1,0 +1,835 @@
+{
+  "baseline": "dbd4b5f32cab538a916e74c5ff488b02b58a0aaa",
+  "kind": "compat-complete-file-inventory-partial-chain-audit",
+  "question": "Classify B implementation ownership without confusing generic state with product orchestration.",
+  "procedure": "Complete body reads except explicit partial row; reuse P28 evidence and existing source-resolved callbacks. Attach unchanged source hashes and eight-graph compile-command selection. Compile selection is not live runtime proof.",
+  "counts": {
+    "files": 49,
+    "complete_bodies_read": 48,
+    "partial_bodies": 1,
+    "dependency_ids_closed": 0,
+    "mirror_point_delta": 0,
+    "mirror_line_delta": 0
+  },
+  "scope_limit": "49 C implementation files only; headers, full caller lifetimes and the four-component migration inventory remain incomplete. Retain decision concerns separately from body-read count.",
+  "rows": [
+    {
+      "file": "src/compat/base_classifier_path.c",
+      "decision": "retain B ABI adaptation",
+      "evidence": "Calls native RtlDosPathNameToNtPathName_U without a modern relative-output structure; clears the caller's original output structure. No task lookup or outward provider.",
+      "remaining": "Historical necessity and selected original caller ABI remain governed by existing mirror evidence; no new equivalence test run.",
+      "sha256": "00702b733f0815415b5962ba357b3c99b236c5d2bf403d6c2a108a265bc42276",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 26,
+      "selected_compile_graphs": [
+        "x64/frontend",
+        "x64/hook",
+        "x64/launcher",
+        "x64/service",
+        "x64/worker",
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0152"
+      ]
+    },
+    {
+      "file": "src/compat/base_console_handle.c",
+      "decision": "retain B capability predicate",
+      "evidence": "Combines the original low-bit handle predicate with GetConsoleMode and preserves LastError. No frontend selection or product protocol.",
+      "sha256": "c2ac3a035fa043da6b8a7d31b26964f7c384138080e83e3616c6666e293e7b63",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 14,
+      "selected_compile_graphs": [
+        "x64/frontend",
+        "x64/launcher",
+        "x64/service",
+        "x64/worker",
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/base_resource.c",
+      "decision": "split native resource mechanics from product delivery; not independent today",
+      "evidence": "TLS binding dispatches Duplicate and Close to service_duplicate_resource/service_close_resource in src/ntsrv-exe/opennt/source/base_service.c. The latter resolve worker reservations, console-associated worker connections, stream receipts and parent/worker wait delivery. src/ntsrv-exe/opennt/include/base_server.h remaps NtDuplicateObject/NtClose to these B entrypoints for retained server code.",
+      "state": "Borrowed synchronous resource scope; prior TLS binding is restored by the F dispatch caller. Local unbound duplicate allows only current-process resources.",
+      "migration": "Keep handle operations with explicit resolved resources in B; retain authenticated reservation/recipient selection and request wait policy in F. Redesign the retained C operation boundary before replacing this dispatch. Simply moving provider bodies to B or using raw cross-process handles is rejected.",
+      "remaining": "Trace each retained C request operation, delivery and failure unwind to design an explicit non-callback execution boundary. Two additional source-resolved F callback slots, not new approved exceptions or closed ledger IDs.",
+      "sha256": "ba2249c41cb99e70b2c04313b5908746b0f973c1ab78efec33771bbe6eece80c",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 39,
+      "selected_compile_graphs": [
+        "x64/service"
+      ],
+      "existing_ledger_ids": [
+        "C0169",
+        "C0170"
+      ]
+    },
+    {
+      "file": "src/compat/base_vdm_config.c",
+      "decision": "retain B explicit configuration mechanics",
+      "evidence": "Owns bounded DOS/WOW command strings and borrowed immutable TLS configuration; no lookup or request selection. worker_registry.c selects product paths and binary kind, binds the configuration around BaseGetVdmConfigInfo, then restores the previous binding.",
+      "contract": "Caller retains configuration lifetime; preserve capacity failures and original reservation value. Do not migrate worker selection into this unit.",
+      "sha256": "47c530eafae91857a3d3ccc004167fd134a482e5c5eca9787f690c3427d5a3c4",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 59,
+      "selected_compile_graphs": [
+        "x64/frontend",
+        "x64/launcher",
+        "x64/service",
+        "x64/worker",
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0154",
+        "C0155"
+      ]
+    },
+    {
+      "file": "src/compat/command_services.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "split/remove private F dispatch after provider migration",
+      "evidence": "Immutable 12-slot binding, providers resolved in s14-callback-provider-ownership.json.",
+      "boundary": "Capture buffers and selected-mode storage are mechanics; process creation and guest directory responsibilities require separate chains.",
+      "sha256": "67d7d14d451210efbbc238501fffe47005ee06e4ee3cf318e1acae33990a92d0",
+      "lines": 30,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0174",
+        "C0175",
+        "C0176",
+        "C0177",
+        "C0178",
+        "C0179",
+        "C0180",
+        "C0181",
+        "C0182",
+        "C0260",
+        "C0261"
+      ]
+    },
+    {
+      "file": "src/compat/console_grid.c",
+      "decision": "retain B native console cell-grid mechanics",
+      "evidence": "Reads and writes the supplied console handle, copies/clips cells on resize, frees temporary buffers and propagates incomplete transfer failure. No NTCON transport or session lookup.",
+      "sha256": "22bfe031ab93824aa0bf0a4f16a42571fa7bd853d4daa098860ea98efdef9dc4",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 90,
+      "selected_compile_graphs": [
+        "x64/frontend",
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/console_services.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "split/remove private F dispatch",
+      "evidence": "Four functions call installed F code-page/layout/title providers.",
+      "boundary": "Do not substitute current-thread native queries for frontend-routed values without equivalence.",
+      "sha256": "0661262db0e2215ed91aa2e45727b4b8849a2353330bc183c1e97f7e5a365f37",
+      "lines": 44,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0262",
+        "C0268",
+        "C0273",
+        "C0282"
+      ]
+    },
+    {
+      "file": "src/compat/dem_restart_hint.c",
+      "decision": "retain B directory enumeration compatibility",
+      "evidence": "demsrch.c captures and searches a filename/index hint using an explicit directory handle and native NtQueryDirectoryFile. No task or CPU state is consulted.",
+      "contract": "Preserve native enumeration status and caller-owned buffer lifetime. This review is ownership evidence, not a new proof of directory mutation semantics.",
+      "sha256": "215eb2a4bd8977741a0f86440f452e2307798a0d35617a9172ab587a280079f9",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 55,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0027"
+      ]
+    },
+    {
+      "file": "src/compat/dpmi_services.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "move machine providers to C; remove private F dispatch",
+      "evidence": "Four-slot immutable table for debug context/registers and protected-mode transitions.",
+      "boundary": "CPU/private descriptor and WOW page-domain operations are not generic B session mechanisms.",
+      "sha256": "ff200b7a2256a6334ce46e9447429c474d1d1ab6074566f3f23293f34a5f5abe",
+      "lines": 26,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/guest_environment.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B bounded environment projection",
+      "evidence": "Explicit MULTI_SZ root replacement and package-root ingress; heap/malloc ownership conversion without launch or task lookup.",
+      "boundary": "Preserve original environment separately; package layout is already owner-approved B capability.",
+      "sha256": "850560bdd6093811c804723b88f1f4ed9c5174ed0d3d7ba7c26ce0d32381328f",
+      "lines": 72,
+      "selected_compile_graphs": [
+        "x64/launcher",
+        "x64/service",
+        "x64/worker",
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0223"
+      ]
+    },
+    {
+      "file": "src/compat/guest_location.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "split transport mechanics from existing C memory provider dependency",
+      "evidence": "Real-mode numeric location conversion, far reads and leases through current B host context.",
+      "boundary": "Lease operations still reach C SAS via guest_memory_lease; numerical independence is not runtime independence. Registration/epoch and failure behavior retained.",
+      "sha256": "64625b0cb2f50720dc152db9a9526508141ccb4d8cb0344b51167af723344af3",
+      "lines": 159,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0194",
+        "C0195",
+        "C0196",
+        "C0197"
+      ]
+    },
+    {
+      "file": "src/compat/guest_memory_access.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "split memory staging from C provider access",
+      "evidence": "Current context, chunked lease copies and overlap-aware move; no F task lookup in bodies.",
+      "boundary": "Transitive C read/write dependency remains. Partial-copy and context closure behavior must survive complete-chain redesign.",
+      "sha256": "997a61a96aa1e64943ce24e369a0743749951e7f402dfff2830d725b519de570",
+      "lines": 112,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0225",
+        "C0226",
+        "C0227"
+      ]
+    },
+    {
+      "file": "src/compat/guest_memory_lease.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "split generic lease ownership from C SAS dispatch",
+      "evidence": "Owns bounce buffers, epochs and bounded slots; read/write callbacks resolve to C providers. Copy-only API holds SRW shared lock during provider call.",
+      "boundary": "Do not replace with reentrant SAS or raw memory; preserve failed-write release and end lifetime. Existing two C callbacks are not newly approved exceptions.",
+      "sha256": "f60a88a8691fbc8fb2c787e10ae58d7014f5129c7188606f538217ec65d55ad5",
+      "lines": 145,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/host_context.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B minimal context mechanics with callback targets separately audited",
+      "evidence": "One TLS binding, registration flag and bounded reverse cleanup registry.",
+      "boundary": "Registry ownership does not make F cleanup bodies inward. F owns admission/disposal policy; no third session registry.",
+      "sha256": "ef24a8fc596db917ed862a62183fc3613e7168b4fb1c2733e3e61b199baaaaf2",
+      "lines": 55,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/invalid_virtual_instance.c",
+      "decision": "retain B explicit invariant failure primitive",
+      "evidence": "virtual.c supplies an invalid instance identifier. The function constructs a noncontinuable failure record and invokes native fail-fast; it does not select a task, cancel a session or complete a request.",
+      "contract": "Do not replace with session cancellation or a returning failure. Runtime fault behavior was not rerun.",
+      "sha256": "3fc7c8887c4a4fd3740ec349669d5af6b68f8a2b4c72c19d675a65a357273100",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 14,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0241"
+      ]
+    },
+    {
+      "file": "src/compat/mvdm_ccpu_activity_check.c",
+      "decision": "no outward implementation; retained no-op requires separate necessity evidence",
+      "evidence": "Body is empty; references occur in nt_eoi.c and nt_unix.c. It does not delegate to a product scheduler.",
+      "remaining": "Symbol references and the ownership comment do not prove original idle semantics equivalent. Reconcile selected call paths and original responsibility before changing or claiming full semantic review.",
+      "sha256": "6263bbffefe2102bba0e8ffa919fd12db4d674bf832e7fd26dc5c4945905eeec",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 4,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0189"
+      ]
+    },
+    {
+      "file": "src/compat/mvdm_ccpu_vector_defaults.c",
+      "decision": "no outward implementation; explicit unavailable ABI providers",
+      "evidence": "EDL_fast_bop, c_VirtualiseInstruction and c_sas_touch invoke __debugbreak; the latter two return zero if execution continues. C c_main.c references the BOP symbol; sascdef.c references the SAS entries.",
+      "remaining": "Do not describe debugbreak as guaranteed termination or restore unsupported machine algorithms into B. Selected vector reachability and historical unavailable-provider semantics still need reconciliation.",
+      "sha256": "615074326e83e5a6cd7902e2a784e97dd3d697ac08ca98cff5b88b4b673f3215",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 27,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0190",
+        "C0191",
+        "C0192"
+      ]
+    },
+    {
+      "file": "src/compat/mvdm_firmware.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B immutable embedded-resource lookup",
+      "evidence": "Three ROM names map to resources in current image and copy to bounded caller buffer.",
+      "boundary": "Resource composition belongs to outer build; no guest execution, CPU algorithm or task policy here.",
+      "sha256": "26b1b3114e0bc2ffba861ecc706c9eb6c7f97ca719d57b7df4c88fdcefe83c19",
+      "lines": 31,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0222"
+      ]
+    },
+    {
+      "file": "src/compat/mvdm_keyboard_history.c",
+      "decision": "retain B bounded input metadata mechanism",
+      "evidence": "Uses caller-owned counters, ring metadata and opaque numeric receipts. C nt_event.c/keyba.c maintain hardware history; F console_compat.c stages and consumes receipts. B never resolves a receipt to a task or frontend.",
+      "contract": "Original keyboard lock must cover tags and device state; preserve overwritten-slot rejection and selected ages across reset. No second input or session state machine.",
+      "sha256": "c294c5ed91b047cec7c9d1135f369ed109932420a0d518e8a10ae871b01a8faa",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 100,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0035",
+        "C0198",
+        "C0199",
+        "C0200",
+        "C0201",
+        "C0202",
+        "C0203"
+      ]
+    },
+    {
+      "file": "src/compat/mvdm_shadow_registry.c",
+      "review": "partial-body-review",
+      "decision": "finish resource/view/commit lifecycle review before disposition",
+      "evidence": "Read globals and initial tracing; enumerated native registry facades and overlay mutation entrypoints. 1723-line implementation not fully read in this batch.",
+      "remaining": "Review initialization, live serial view, mutable overlay, synchronization, atomic persistence and shutdown; do not infer independence from include list.",
+      "sha256": "02039132fdbe1f49f9409ec4241061e5934fd9856ceeb925ba63c3a2c320c55e",
+      "lines": 1723,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0017",
+        "C0036",
+        "C0205",
+        "C0206",
+        "C0207",
+        "C0208",
+        "C0209",
+        "C0210",
+        "C0211"
+      ]
+    },
+    {
+      "file": "src/compat/mvdm_softpc_ccpu_wait.c",
+      "decision": "retain B native wait resource with explicit outer lifetime",
+      "evidence": "Owns one auto-reset event, signal/wait/create/close only. C c_main.c waits/signals; F mvdm_standalone_worker.c starts it before host execution and ends it after producer shutdown.",
+      "contract": "The single-execution-thread and stopped-producer lifetime is a caller precondition, not internally synchronized teardown. Do not convert it to a scheduler or claim concurrent close safe.",
+      "sha256": "9079644f878eb604cd61b3fab9b8d936a840a921768573faa120a4a95b59c5b0",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 37,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0037",
+        "C0212",
+        "C0213"
+      ]
+    },
+    {
+      "file": "src/compat/mvdm_softpc_event_thread.c",
+      "decision": "native join mechanics with lifecycle contract needing clarification",
+      "evidence": "For a started thread, duplicates a synchronization handle, alerts the original handle, waits and closes the duplicate. For !started returns success without starting or joining the suspended thread. C nt_remove_event_thread supplies nt_init_called and ignores the result.",
+      "remaining": "Document/resolve the unstarted-thread process-exit policy and retained handle ownership at C/F teardown before calling this a generic join. No behavior change or bug assertion from source inspection alone.",
+      "sha256": "ae20a46f36733de7c947bb3f2ab8847f8702b04bd069409085c2a5c8c424ab25",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 38,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0038",
+        "C0217"
+      ]
+    },
+    {
+      "file": "src/compat/ntioapi_facade.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native IO ABI translation",
+      "evidence": "Resolves NTDLL exports, adapts native IO_STATUS_BLOCK to original output form.",
+      "boundary": "No F provider. Full caller contract must ensure stack status lifetime for selected async-capable APIs; not established merely by this ownership read.",
+      "sha256": "c1575ce20f958ca226e362c614d9419cdbf118049e4006db81049eb1597f7014",
+      "lines": 186,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0307",
+        "C0308",
+        "C0309",
+        "C0310",
+        "C0311",
+        "C0312",
+        "C0313",
+        "C0314",
+        "C0315",
+        "C0316"
+      ]
+    },
+    {
+      "file": "src/compat/ntuser_rtl_compat.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native locale and allocation leaves",
+      "evidence": "Current native keyboard-layout code page and LocalAlloc/LocalFree pairing.",
+      "boundary": "Different from frontend-routed Console layout; do not merge those distinct authorities.",
+      "sha256": "07da47ddec2bf1beb76b4eb2c45f72754824a26df83d9fbd03df11ba2ea9c083",
+      "lines": 33,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/opennt_support_rtl.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native RTL compatibility mechanics",
+      "evidence": "Native heap/string/path/crypto bindings and private TLS TEB/PEB snapshot; no task completion or Run16 selection.",
+      "boundary": "Opaque TEB fields may hold C-owned data without transferring algorithm ownership. Snapshot teardown and imported/native symbol selection need caller verification, not new product session state.",
+      "sha256": "12e153f8f1858498ce8b2a1e734829d877a853ba7bfd98255e5f653b4381fc68",
+      "lines": 250,
+      "selected_compile_graphs": [
+        "x64/frontend",
+        "x64/hook",
+        "x64/launcher",
+        "x64/service",
+        "x64/worker",
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/physical_mapping.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B numeric mapping records and cleanup",
+      "evidence": "Owner-keyed host/page/alias tables, bounds checks and B cleanup registration; no CPU page walk or outer callbacks.",
+      "boundary": "Host context controls lifetime; existing production single-owner/concurrency preconditions remain. C owns actual machine translation semantics.",
+      "sha256": "0a238e4a6958cf884af1c593572d0a36eb7b3a206113477ce3f8b4a8d3c64cd1",
+      "lines": 287,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0233",
+        "C0234",
+        "C0235",
+        "C0236",
+        "C0237",
+        "C0238",
+        "C0239",
+        "C0240"
+      ]
+    },
+    {
+      "file": "src/compat/pif_path.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B bounded OEM-to-ANSI conversion",
+      "evidence": "Explicit buffer/capacity and native code page conversion only.",
+      "boundary": "No PIF launch selection or product lifecycle.",
+      "sha256": "239c065c42806a23aa121a211489cb99e7e19f3ef196dd9a2bbffc51df7d5d95",
+      "lines": 19,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0221"
+      ]
+    },
+    {
+      "file": "src/compat/remote_browser.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B unavailable native import",
+      "evidence": "I_BrowserServerEnumForXactsrv returns ERROR_CALL_NOT_IMPLEMENTED.",
+      "boundary": "Original public branch remains C; no replacement browser protocol or claimed feature restoration.",
+      "sha256": "ee952ad360b517a058c45653610b960846bc93bebd22d75a86e3c9d286e65b65",
+      "lines": 17,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/remote_rap.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B unavailable native imports",
+      "evidence": "Three historical remote providers return ERROR_CALL_NOT_IMPLEMENTED; no network/outer service implementation.",
+      "boundary": "Preserve original caller status handling. Absence of outward dependencies does not mean RAP implemented.",
+      "sha256": "6f43f1f477e3378f76c690c30a61ee117eb7b33896c64aed7df56b215a295d61",
+      "lines": 69,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0603",
+        "C0604",
+        "C0605"
+      ]
+    },
+    {
+      "file": "src/compat/system_root.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B package path capability",
+      "evidence": "Derives root from current image, validates relative suffixes, converts encoding and implements directory ABI.",
+      "boundary": "Owner explicitly admitted package layout knowledge to B; no request/worker selection.",
+      "sha256": "56967b05cc4d5d89cd525d6672e7847ca6ead3f49d50b8a1d981deaf4377ce8b",
+      "lines": 198,
+      "selected_compile_graphs": [
+        "x64/launcher",
+        "x64/service",
+        "x64/worker",
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0219",
+        "C0220"
+      ]
+    },
+    {
+      "file": "src/compat/thread_start.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "split B thread mechanics from D/F lifecycle callbacks",
+      "evidence": "Validates entry ABI, invokes lifecycle capture/finish, delegates thread creation to A.",
+      "boundary": "D worker-thread bridge binds F session and WOW retirement hooks. Existing callback ledger records chain; do not move whole session retirement into B.",
+      "sha256": "8805850700c767e169dd33ebffc43b029d36632984ee9f93fb6a41df0bac5c92",
+      "lines": 103,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": [
+        "C0157",
+        "C0158",
+        "C0159",
+        "C0160",
+        "C0161"
+      ]
+    },
+    {
+      "file": "src/compat/vdm_control.c",
+      "decision": "retain B explicit unavailable native-service boundary",
+      "evidence": "Returns STATUS_NOT_IMPLEMENTED for every request and owns no task state or callback. This does not implement hardware VDM monitoring.",
+      "remaining": "Callers must retain their existing unsupported-service behavior; this file alone does not prove every caller handles that status.",
+      "sha256": "ad46444ab8cdd5e7eeadcc13a7aa293928a2c44b854bdda6d6536d0984169e03",
+      "review": "complete-body-read-provider-scope-as-recorded",
+      "evidence_record": "s14-compat-mechanism-ownership.json",
+      "lines": 16,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/vm_services.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "split machine BOP and outer lifecycle policy",
+      "evidence": "Two-slot table; ClearInstanceDataMarking forwards to F controlled session termination.",
+      "boundary": "No success no-op or B cancellation policy; owning C failure/return boundary still requires design.",
+      "sha256": "7b25d5b7f6f9fa0835b952b8c4d0c66a8007a9e92c46c29dbc4c19efff183596",
+      "lines": 30,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/wow_control_brushes.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native drawing resources",
+      "evidence": "Borrows system brushes, allocates one pattern brush once, publishes only after creation succeeds.",
+      "boundary": "Owned gray brush has process lifetime; do not replace it with per-task cleanup.",
+      "sha256": "2ad62cc10bfa55ee37a8907320198c85765daef9a5f2ad7768e739f0fe39f023",
+      "lines": 44,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": [
+        "C0616",
+        "C0617"
+      ]
+    },
+    {
+      "file": "src/compat/wow_control_rect.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B extracted pure rectangle arithmetic",
+      "evidence": "CopyInflateRect operates only on explicit RECT values.",
+      "boundary": "No task, callback or machine state.",
+      "sha256": "1e25becfb243d7bcae9fc4b753951ea16a6f7535fd6b07c2e5e40f396f349ab6",
+      "lines": 25,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/wow_dialog_lookup.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "existing approved B-to-C exception",
+      "evidence": "_GetDlgItem traverses C PWND using REBASEPWND through control-client/precomp.h.",
+      "boundary": "Not independent B; preserve owner-approved exception, do not duplicate C layout.",
+      "sha256": "47baf07f9dbc8f626d559e2037baeed6057681751c41aa72ad2c8c5b621cd6cf",
+      "lines": 22,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/wow_dialog_slots.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native HWND slot access",
+      "evidence": "ANSI/Unicode GetWindowLong/SetWindowLong selected by explicit parameter; original C getset/dlgmgr callers.",
+      "boundary": "Caller owns dialog procedure and lifetime; these bodies do not dispatch a task.",
+      "sha256": "fe6e1a3d602ec4df0a216c4d29b6fb539746665b6cbc1646f07107b6189023fd",
+      "lines": 12,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": [
+        "C0379",
+        "C0382"
+      ]
+    },
+    {
+      "file": "src/compat/wow_fonts.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native font resources keyed by opaque owner",
+      "evidence": "Native GDI operations plus remote-font path/count records. C wgfont supplies CURRENTPTD as numeric key; wkman calls UnloadNetworkFonts at task cleanup.",
+      "boundary": "B does not interpret task identity or decide completion. Preserve load counts, native resource ownership and externally timed unload; allocation-failure behavior not newly validated.",
+      "sha256": "05cc637fa8983216e7f8e0bce04251555c583f49102d45ac7894b6395af9d5d6",
+      "lines": 216,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": [
+        "C0434",
+        "C0436",
+        "C0437",
+        "C0438",
+        "C0439",
+        "C0441"
+      ]
+    },
+    {
+      "file": "src/compat/wow_gdi_alias.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native-handle alias table",
+      "evidence": "Locked process-local table converts WORD aliases, retires slots and reserves pseudo-brush indices; C walias macros call retire.",
+      "boundary": "B owns alias metadata, not native GDI object destruction or task completion. No independent session added.",
+      "sha256": "74b40d4ba24dd66c7d450442e7a66e30cff6e6a617ffa606ad340b3ffacc8c56",
+      "lines": 64,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/wow_hook_native_binding.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native thread-local hook ABI adaptation",
+      "evidence": "Checks callback module and same-process thread; delegates to native SetWindowsHookExA and preserves LastError.",
+      "boundary": "Native hook protocol accepts caller callbacks; this is not a private F service table. Caller retains unhook and code lifetime.",
+      "sha256": "6d8ab3a6835e53ec868b46edc0bc18df16806b8a365c36a3b3db22d54403f43e",
+      "lines": 38,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": [
+        "C0402"
+      ]
+    },
+    {
+      "file": "src/compat/wow_icon_size.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native icon inspection",
+      "evidence": "GetIconInfo/GetObject; destroys returned bitmap resources; supports frame zero only.",
+      "boundary": "No private guest cursor layout, frontend choice or retained task state.",
+      "sha256": "7e694ed17420361e9d0781873e9a1e8b81d17ea604c4c749f36597d21a153872",
+      "lines": 25,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/wow_native_controls.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native USER/GDI ABI leaves",
+      "evidence": "Resolves twelve exports only from loaded GDI32/win32u; x86 ABI and text descriptor are explicit; rejects non-null system timer callback.",
+      "boundary": "Installed OS exports are not repository F providers. Existing private ABI evidence must remain; this ownership read is not renewed OS-version compatibility proof.",
+      "sha256": "55a330736a476ddc8ecc87f189acd334da1382b4b579c171993a2b9ee8600dcd",
+      "lines": 195,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": [
+        "C0393",
+        "C0394",
+        "C0395",
+        "C0396",
+        "C0397",
+        "C0435"
+      ]
+    },
+    {
+      "file": "src/compat/wow_native_environment.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B native USER thread/environment queries",
+      "evidence": "IsGUIThread conversion and GetSystemInfo query with LastError preservation; no cached task connection.",
+      "boundary": "Original/current WOW task metadata remains outside this function.",
+      "sha256": "8d562eeb055143068d1cc58a0ae126fefb1c21a80d6c35b74e6462f07368896e",
+      "lines": 34,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": [
+        "C0398",
+        "C0399"
+      ]
+    },
+    {
+      "file": "src/compat/wow_object_ownership.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "existing approved B-to-C exception",
+      "evidence": "gabObjectCreateFlags retains C object type/flag definitions from USER headers.",
+      "boundary": "Static table only; do not describe B as having no C coupling.",
+      "sha256": "c7ba84187e2005f33cabd3e7c642f0591e0a8255e85179514ddd17d990c3b02a",
+      "lines": 32,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/wow_profile_native.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B finite native profile access",
+      "evidence": "Read-only native machine compatibility view or current-user desktop key; absent key returns unavailable.",
+      "boundary": "No impersonation, registry synthesis or task-specific configuration owner.",
+      "sha256": "9b35ed470ba398ffcc175333db15f2b11f4d80e9d088477d246b56c370166229",
+      "lines": 22,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": [
+        "C0459"
+      ]
+    },
+    {
+      "file": "src/compat/wow_shared_clock.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B explicit clock resource lifecycle",
+      "evidence": "Allocates page, starts periodic native publisher, signals/joins it and frees resources. F page_domain stops before unmapping and disposes later.",
+      "boundary": "Guest page mapping remains machine responsibility. Preserve stop-before-unmap and partial start cleanup; existing P21/P26 evidence, no new test.",
+      "sha256": "94a3e3757c496ba3526b7cfa0bccba2690eb8dfb0072e8cd109199181935adde",
+      "lines": 52,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    },
+    {
+      "file": "src/compat/wow_start_glass.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B unavailable native presentation operation",
+      "evidence": "ShowStartGlass is a void no-op, no outward call.",
+      "boundary": "Does not prove original presentation implemented; retain existing unavailable-service decision.",
+      "sha256": "792e04e24ef27e4f0abdcaaeca31f27cc6db6996c132f45c805b5f13f5ec906f",
+      "lines": 11,
+      "selected_compile_graphs": [
+        "x86/worker",
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": [
+        "C0320",
+        "C0440"
+      ]
+    },
+    {
+      "file": "src/compat/wow_task_event_binding.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B retained native event handle",
+      "evidence": "Duplicates with same access, verifies event type and existing EVENT_ALL_ACCESS, closes failure resources; C exitwin consumes retained handle.",
+      "boundary": "Reference acquisition is distinct from task scheduling/completion. Caller owns final CloseHandle.",
+      "sha256": "b711eef55c7323e687f1e5b69cedaaea968c4b464a68334c2e757d32fd519b54",
+      "lines": 40,
+      "selected_compile_graphs": [
+        "x86/wow32"
+      ],
+      "existing_ledger_ids": [
+        "C0458"
+      ]
+    },
+    {
+      "file": "src/compat/wow_window_graph.c",
+      "review": "complete-body-read-not-full-chain-validation",
+      "decision": "B copied graph validation",
+      "evidence": "Validates explicit node links and cycles, frees transaction scratch; delivered P26 implementation.",
+      "boundary": "Does not snapshot native USER or prove concurrent native graph consistency.",
+      "sha256": "119231eda97d9483092273ae7b5d58577bc0276d6ede7d6e66ea6ca0580d98ba",
+      "lines": 64,
+      "selected_compile_graphs": [
+        "x86/worker"
+      ],
+      "existing_ledger_ids": []
+    }
+  ],
+  "verification": "No production changes, new compilation or runtime tests. Read-only source and existing build-context evidence.",
+  "follow_up": "Complete shadow registry, reconcile all B cleanup/callback consumers and finish C/F chain migration designs before relocation."
+}
