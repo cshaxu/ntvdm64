@@ -27,7 +27,7 @@
 
 ## Current Technical Baseline
 
-S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P14 below supersedes both published copies.
+S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P15 below supersedes both published copies.
 
 S13 P13: [BIOS VM boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p13-bios-vm-boundary.json).14 BIOS DIR units reviewed. Original algorithms stay C; generated ABI/address owners remain S14. virtual.c changes only its contract include; B owns the immutable interface, F retains all VM/IRQ and controlled-stop state/behavior. Unused D/F search roots removed from BIOS compilation.
 
@@ -39,7 +39,7 @@ S13 P14: [physical mapping boundary](../../artifacts/mvdm-audit/t483-c-layer-dep
 
 Cached x86/x64/reference builds and8 A/B graphs passed. Package4f34bf15-fc3b-4ccc-96a4-be3a154dd923 published to both destinations;22 hashes verified. Mapping, original external memory, CCPU high-linear-page, WOW page-domain, NESticle graphics/Escape and final isolated DOS DIR pass. The first DIR wrapper failed on an obsolete receipt name before product execution; preserved aggregate failure is superseded only for DIR by strict-final.exit0. No Full or desktop acceptance claimed.
 
-[CPU dependency follow-up](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-ccpu-dependency-review.json) confirms COMMON definitions belong to C. Generated ABI remains S14. [Remaining CCPU/comms/C-VID review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-cpu-comms-ownership-review.json) confirms generated/vector ABI ownership remains S14; no new eliminated IDs or code edits. Next DIR cohort is base/debug, with pending unused comms search-root cleanup. S13 active, S14 unadmitted.
+[CPU dependency follow-up](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-ccpu-dependency-review.json) confirms COMMON definitions belong to C. Generated ABI remains S14. [Remaining CCPU/comms/C-VID review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-cpu-comms-ownership-review.json) confirms generated/vector ABI ownership remains S14; no new eliminated IDs or code edits. S13 P15: [base device search roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p15-base-device-search-roots.json) removes unused D/F search roots from24 comms/debug/disks/DOS units. All source bytes and selected headers unchanged. Full cached x86/x64/reference builds and8 A/B graphs pass. All11 images equal P14 after package GUID and PE/debug timestamp masking; repeated runtime tests waived. New package137949a3-b4bd-457d-82c4-1b455762eb17 published twice with22 matching manifest hashes. Shared root IDs remain open:144 eliminated/424 open of618. Mirror delta0/0; cumulative reduction3 points/12 lines. Next DIR file is base/keymouse/keyba.c; sas.h generated ABI remains S14. S13 active, S14 unadmitted.
 
 ## S12 Closure Record
 

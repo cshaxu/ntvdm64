@@ -363,3 +363,5 @@ S13 CPU follow-up: [c_main dependency review](s13-ccpu-dependency-review.json) r
 S13 P14: [physical mapping boundary](s13-p14-physical-mapping-boundary.json) eliminates9 direct IDs through B contracts while F keeps all mapping/session state. Three mirrors stay22 points/92 lines. Cached builds, dual publication and targeted mapping/CCPU/WOW/NESticle/DIR verification passed; the initial DIR wrapper marker failure remains recorded.
 
 S13 [CCPU/comms/C-VID follow-up](s13-cpu-comms-ownership-review.json):13 files and12 current dependency records; generated/vector ABI remains S14. C0193 now shares C0033 ownership evidence. No product edits or newly eliminated IDs.
+
+S13 P15: [base device search roots](s13-p15-base-device-search-roots.json) removes unused D/F roots from24 compilation contexts. All source bytes and selected headers remain identical;11 normalized images equal P14. Cached builds, dual publication and22 hashes passed; repeat runtime tests waived. Shared tracker IDs remain open.

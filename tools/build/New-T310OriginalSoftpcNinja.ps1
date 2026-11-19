@@ -923,11 +923,11 @@ $graph.Add('build ' + $object + ': cc_ccpu ' + (NinjaPath $source))
     }
     $object
 }
-$biosFlags = $baseFlags
+$baseDeviceFlags = $baseFlags
 foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
         'src/ntvdm-exe/softpc/include', 'src/vdmredir-dll/include',
         'src/wow32-dll/include')) {
-    $biosFlags = $biosFlags.Replace(' /I "' +
+    $baseDeviceFlags = $baseDeviceFlags.Replace(' /I "' +
         (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
 }
 $biosObjects = foreach ($name in $biosNames) {
@@ -938,9 +938,9 @@ $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $biosRoot $name)
         # product profile.  CPU40 uses the same original DOSX continuation
         # frame through the restored dpmi32/i386/dpmi386.c provider.
         # BOP FE binds directly to the original CCPU exit entry; no F wrapper.
-        $graph.Add('  cflags = ' + $biosFlags + ' /DMONITOR /Dhost_unsimulate=c_cpu_unsimulate')
+        $graph.Add('  cflags = ' + $baseDeviceFlags + ' /DMONITOR /Dhost_unsimulate=c_cpu_unsimulate')
     } else {
-        $graph.Add('  cflags = ' + $biosFlags)
+        $graph.Add('  cflags = ' + $baseDeviceFlags)
     }
     $object
 }
@@ -960,6 +960,7 @@ $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $systemRoot $nam
 $disksObjects = foreach ($name in $disksNames) {
     $object = 'obj/disks/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
 $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $disksRoot $name)))
+    $graph.Add('  cflags = ' + $baseDeviceFlags)
     $object
 }
 $supportObjects = foreach ($name in $supportNames) {
@@ -1010,13 +1011,16 @@ $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commsRoot $name
         # Original NTIO.SYS vector setup initializes this original printer
         # status-table provider.  The function is gated independently of the
         # retired CPU30 execution shell.
-        $graph.Add('  cflags = ' + $baseFlags + ' /DMONITOR')
+        $graph.Add('  cflags = ' + $baseDeviceFlags + ' /DMONITOR')
+    } else {
+        $graph.Add('  cflags = ' + $baseDeviceFlags)
     }
     $object
 }
 $dosObjects = foreach ($name in $dosNames) {
     $object = 'obj/dos/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
 $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $dosRoot $name)))
+    $graph.Add('  cflags = ' + $baseDeviceFlags)
     $object
 }
 $demCommandFlags = $baseFlags
@@ -1119,6 +1123,7 @@ $graph.Add('build ' + $cvidcVectorProviderStubObject + ': cc ' + $cvidcVectorPro
 $baseDebugObjects = foreach ($name in $baseDebugNames) {
     $object = 'obj/base-debug/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $baseDebugRoot $name)))
+    $graph.Add('  cflags = ' + $baseDeviceFlags)
     $object
 }
 $hostObjects = foreach ($name in $hostNames) {

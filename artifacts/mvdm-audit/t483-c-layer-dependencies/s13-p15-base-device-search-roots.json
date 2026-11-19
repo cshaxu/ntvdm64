@@ -1,0 +1,501 @@
+{
+  "scope": "T483 S13 P15 base device compiler search roots",
+  "baseline": "2e71f592993fe8c68478f8781817fd5258dd5da8",
+  "question": "Remove unused outer include search roots without changing original selected code or ABI.",
+  "change": "Reuse the existing BIOS filtered flags for24 comms/debug/disks/DOS translation units; preserve generated ABI include root and printer MONITOR profile.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "sha256": "6979afbd90dda9b56a997412165f63dc8c6edc12e96048535016703a8db84823",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "sha256": "da3698180fe42634cce3dbf83367cfa468f9a6cb66e028e5dcd7ea144c5666f7",
+      "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "sha256": "e8fae23dadd88bb67a27594139df4aa464ed9dc136a7e98cbcd7e12d3c38bbaa",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/prt_scrn.c",
+      "sha256": "8be0f3950eb2daa5b35d7e789fc7b7895dc68b2b841b97f056e2a304b157ea23",
+      "original_sha256": "8be0f3950eb2daa5b35d7e789fc7b7895dc68b2b841b97f056e2a304b157ea23",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "sha256": "37ad433389b2b57a7302395c9a966b2d5d3d8dd78e1646f807425bd46fbdc990",
+      "original_sha256": "534f7058f657be386f25950d5e1750a4f5017f67e4890201983fbbb3d74f379f",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "sha256": "2c1465908bdefee80bf1394a313efa6168697e14e7cc2f11d8dd05836f473adb",
+      "original_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "sha256": "1fbe2c8970dc308d6145dd37de69b7300425bd276eab93dab21946e9bbf1dbb3",
+      "original_sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+      "sha256": "c0206ca86ef8659c239c78de9d3f1c9ebf50bc11e3ef5f7df6119f3558c130d8",
+      "original_sha256": "c483e5ef755f537c7197fc7ce929ed3837b1227f57f6b874b5c8ab46b15045ad",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+      "sha256": "a1562069aaf6a9ff00bb6f8a7890dc00a58367a23407162d344f261252772f14",
+      "original_sha256": "18c7205169a62e40e80122deba5645f1cd7ce0d760ea71d95e9688a5a1da98aa",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+      "sha256": "f351453f515087eec402ce1fbcf028526c158a7f472fe6c530165331c57f831f",
+      "original_sha256": "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "sha256": "fa65bdaae3f07dce263ff3c2307a51bd0520a4d3e1132860f86913562a4058fc",
+      "original_sha256": "93a1891b0a27b336ccecd99a4b198e1d26f769fe31ed83023df52178e3364a51",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "sha256": "ce6df65f98751c65d9f1e662c3b065b22903548e9a8331b900102d80fc81ca60",
+      "original_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "sha256": "b5915770a1bdae5f8afc8aaad950f07b064156e08f1b05601d8e125cca972497",
+      "original_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "sha256": "5c7b58e229a4c6f40dc0f3b8e3e4164118d92ae9e642a3417d8af55308f15992",
+      "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "sha256": "aa27cf44088c5331ebc5ab5f40254920cbfb321c10482bc024b289a9dd2a3412",
+      "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "sha256": "d076c39d5566c369dc2cdbec2718d2ef52523898dca2892e0daad1aef23ff63c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "sha256": "d9c57d64cd85cd50b0386fb65ac7988cdaf15c9906527486bfc6c3e40773971f",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "sha256": "6543253ff7d404cd775969d1fae543ae4179074d1f2d4a43980e1a4fb28f573b",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "sha256": "1c465622c09e1072dc1ab8f49edd366afbfc0419fd376ad7ea4bb19ebc68bcd8",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "sha256": "c4824481efbd33a6db998ca8e96928820136c86daa0fa4e7b543feb4b7776ff5",
+      "original_sha256": "234d4fdac97c117a01ee642242dbab691e6809d0a3d25e63df4604d5fbbd955f",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "sha256": "ea802079d1aac9b702cf73e0bbaa3387d6bf72a4cfd438fc8accae2d3d32033b",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "sha256": "300702c4444d999a399614467b0b19f07f9be9e3553cc03cada6affdae353ab9",
+      "original_sha256": "396c621a6c6abf135fdec730a0be91c8bc5582de51687ed006ca5df97d354dc5",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "sha256": "ad0a3b57e944e56546161145b89d1608d1f77070e8813188678f41ca18d75f93",
+      "original_sha256": "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+      "non_error_diff": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "sha256": "065310a6f32d1bd562caac9f3fa0fb9503c5d46645eb69869e91112e6982fdfe",
+      "original_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9",
+      "non_error_diff": {
+        "blocks": 1,
+        "added": 190,
+        "deleted": 0
+      },
+      "delta_points": 0,
+      "delta_lines": 0
+    }
+  ],
+  "compiler_proof": {
+    "units": 24,
+    "unwanted_roots_absent": [
+      "src/common/base_srv",
+      "src/ntvdm-exe/command/include",
+      "src/ntvdm-exe/softpc/include",
+      "src/vdmredir-dll/include",
+      "src/wow32-dll/include"
+    ],
+    "generated_ABI_root_retained": true,
+    "printer_monitor_retained": true,
+    "actual_include_selection_identical": true,
+    "all_source_bytes_unchanged": true,
+    "reference_x86_units_verified": 24
+  },
+  "ownership": [
+    "C0031/C0032 generated ABI and C0215 effective-address implementation remain S14 matters, not eliminated.",
+    "Shared search-root IDs C0135/C0137/C0141/C0145/C0146 retain other consumers. This batch removes24 compilation-context usages, not24 tracker IDs."
+  ],
+  "verification": {
+    "cached_build": "full x86/x64 plus explicit x86 images and reference-x86 passed",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "137949a3-b4bd-457d-82c4-1b455762eb17",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "images_equal_after_package_GUID_and_PE_debug_timestamp_mask": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "runtime_tests": "Repeated runtime tests waived by owner: all11 images identical after only package GUID and PE/debug timestamp masking. Raw published hashes differ;22 destination hashes match new manifest.",
+    "A_B_boundary": "eight production graphs passed",
+    "source": "all24 source files byte-identical; selected include sets identical in x86; both x86 compile contexts have unwanted roots absent.",
+    "final_checks": "thread boundary, documentation governance, relative links and diff check passed"
+  },
+  "tracker": {
+    "eliminated": 144,
+    "open": 424,
+    "supporting": 44,
+    "eliminated_transitive": 5,
+    "excluded": 1,
+    "total": 618,
+    "S13_eliminated": 48
+  },
+  "mirror": {
+    "batch_points": 1,
+    "batch_lines": 190,
+    "delta_points": 0,
+    "delta_lines": 0,
+    "cumulative_reduced_points": 3,
+    "cumulative_reduced_lines": 12
+  },
+  "next": "base/keymouse/keyba.c after generated sas.h ownership handoff",
+  "evidence": [
+    {
+      "path": "build/t483-s13-base-device-roots/all-before.json",
+      "sha256": "7c8a5d9861b24037fe61963b974ac65edb809f293e21959d04828f578fed5ecf"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/before.json",
+      "sha256": "a2a0128960c503eb86108d5f6fc6cd418b9d66632c88796cf231219a4ceeafe6"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/build-only.ps1",
+      "sha256": "9642a2254bf3ba5a6d3f322dbf91a0c52fe2d8d1ab1801f52bb08a5c992e7022"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/build-process.json",
+      "sha256": "5d2c8e686bade9fd11228fbbf936bbd392daf33d744aff6898b00287cddea01f"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/build.err",
+      "sha256": "3a1cf97d15a56535669ccb5a40687dff36e0f08006196f0cfbbbc82a70345e7a"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/build.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/build.out",
+      "sha256": "f4d4b92a8dda6228fedd41cada1be3a7c9569dd90bb966f33b3684ad40a0abe3"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/build.ps1",
+      "sha256": "1b62b86b394527f6238522accb5b76d4c9cf5d23e1707003cd21a88f498b5e24"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/check-run.ps1",
+      "sha256": "20717f53781a25d2694aa94aedf41829750dfae397a6b646c784df0df6441df1"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/check.ps1",
+      "sha256": "938abad5ef24a718f5309cee3cee25404acd08a5022285240eb935bea3d5a4ab"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/commands-after-reference.txt",
+      "sha256": "6854399a94b2c455b11952a216cbdcfdefdc994cd65670dbf8f919539034d655"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/commands-after-x86.txt",
+      "sha256": "6854399a94b2c455b11952a216cbdcfdefdc994cd65670dbf8f919539034d655"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/compile-proof.json",
+      "sha256": "4acff6a48b78526c539e94b8ec52d3b5e5dc6253628f8658a7de5932ada8015d"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/deliver-process.json",
+      "sha256": "bdda3ade4d47081d1d30ec38e19c40db5b8d84a299e6b1a9b05c4169ebc3fbf7"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/deliver.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/deliver.out",
+      "sha256": "35801ff0890ea68bf5f81201e6d0da7e39eee33ee751bd151966f8f6268f0ba4"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/deliver.ps1",
+      "sha256": "f95d6f633e473632631a5ef7552db3ae0ffd76c85ed0607f8f348f82a6f73686"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/deps-after-x86.txt",
+      "sha256": "87c79962d7761f9655f966cef791ac243bfd8741de7e0f986f346f365c8ed27b"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/deps-before.txt",
+      "sha256": "68aa12e95b0589fd56233bb3fa022e96f3201ff8b999c63456abbfb0e3b0c396"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/final-hashes.json",
+      "sha256": "a8c68dc62a4f954832cc27ad6d6aff56608a491c2ffd20750a0c8a3bf773a1d7"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/normalized-final.json",
+      "sha256": "a619014f7c381dd87239c0626a7afb4c24a74b71e74c3f0fe5ab7c91c263e5a4"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/objects.json",
+      "sha256": "bf4eb1b4b7ced4ac930873602ab7c946093f51f0952b4affac819ddc488730cb"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/package-id.txt",
+      "sha256": "383ca11326457bb4f4fb93d8717461266088bd694c6de9c74eddafa6098957f2"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/publication-final.json",
+      "sha256": "f42ed942806b63d7b5a0eeb8a6923c785187c6f3aab47f6d0fdf89c87eef9dbc"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/publication.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/publish.ps1",
+      "sha256": "aad056e4f8fbd051576ff43a0138e33bfc2370f4dbb2471504a83ad5a61c1ceb"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/selected-deps-before.txt",
+      "sha256": "e836b2d89f0dc6e2ff21d9cc01eb3760e071b943f8a4ea2b53c0a7caaaa44a25"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/sources-before.json",
+      "sha256": "18d9ab0262ef7d6f95ee724b45e52746f884c1754cd9bc8e3abfe215b47d2949"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/sources.json",
+      "sha256": "f55fe30b872449216c116d3fc6d4db350381452bcb6d8dc3b80574b9a6a3bf87"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/stage.ps1",
+      "sha256": "34fa78482f6e9a92ebc1767f589c3f3f0775597c2bac40528b2cd76950625548"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/check.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/check.out",
+      "sha256": "0894e21f7d61cb0f00b4b4a7e0acc772d8e823a2e4190085fe047b5db02ef99b"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/check.err",
+      "sha256": "cf0cf7974077cbc04411eb5d0451941f734be558e3718305dd8cb7fe7edea2c4"
+    },
+    {
+      "path": "build/t483-s13-base-device-roots/check-process.json",
+      "sha256": "b9479554f53d6ac0e91abc1379b05e8be0ad12bb8eee8983445817d58a8b9b2e"
+    }
+  ]
+}
