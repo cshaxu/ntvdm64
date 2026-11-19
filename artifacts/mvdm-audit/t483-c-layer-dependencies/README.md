@@ -281,3 +281,5 @@ P80: [Console registration ownership](s12-p80-console-registration-ownership.jso
 P81: [Activity compatibility delivery](s12-p81-activity-owner.json); C0189 eliminated F-to-B, unchanged callback; final cached builds, normalized identity and eight A/B graphs passed.
 
 P82: [Error/disk bindings](s12-p82-error-disk-bindings.json); files27-28 reviewed; error thread close is native-only, disk bindings already B since P14.
+
+P83: [Console transition ownership](s12-p83-console-transition-ownership.json); file29 ten bindings traced through NTCON; original VGA/cursor calculations stay C.

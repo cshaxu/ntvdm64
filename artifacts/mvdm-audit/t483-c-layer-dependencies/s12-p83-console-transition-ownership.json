@@ -1,0 +1,261 @@
+{
+  "baseline": "fe5eda30cfb4a6cbc9173dab7a5f093cd93c4189",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+  "linkOnlyOrder": 29,
+  "ids": [
+    "C0269",
+    "C0271",
+    "C0272",
+    "C0277",
+    "C0278",
+    "C0279",
+    "C0280",
+    "C0281",
+    "C0283",
+    "C0293"
+  ],
+  "decision": "S13 grouped frontend Console ownership. Keep original VGA regen conversion, BIOS cursor conversion and selected transition calculations in C. Product client/channel/session ownership stays outside C; do not migrate the complete original file.",
+  "callChain": {
+    "cursorModeGeometry": "Original API spelling -> compat conapi alias -> F console_client output_client/mode_client -> state_operation -> channel -> NTCON console_frontend native operation on owner input/output. Unbound handles retain native fallback.",
+    "textCells": "copyConsoleToRegen -> ReadConsoleOutputA -> cells_operation tiles -> NTCON ReadConsoleOutputA -> returned CHAR_INFO -> original EGA_planes conversion.",
+    "registration": "DoFullScreenResume -> RegisterConsoleVDM -> session text buffer, same C0293 lifetime boundary as nt_det. Selected non-X86GFX path passes no hardware fullscreen events."
+  },
+  "originalEvidence": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "procedure": "Read pinned base/mvdm/softpc.new/host/src/nt_fulsc.c call contexts for all ten interfaces; inspect current selected branches and native NTCON dispatch."
+  },
+  "limitations": [
+    "No runtime coverage claim for each transition; source and compiled binding evidence only.",
+    "Existing transport proves current execution owner, not minimality or necessity of every adapter line. S13 must preserve owner semantics while reducing coupling.",
+    "Do not replace frontend-owned handles with worker local Console APIs or move shared session state into B."
+  ],
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_fulsc.obj",
+      "sha256": "454b78a61ae634c8b604e6c6225593a60b43b0d6890dcca4101fcd66c648b80b",
+      "bindings": [
+        {
+          "id": "C0269",
+          "symbol": "_MvdmGetConsoleCursorInfo@8",
+          "provider": "0001:00175950       _MvdmGetConsoleCursorInfo@8 00576950 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0271",
+          "symbol": "_MvdmGetConsoleMode@8",
+          "provider": "0001:00175ab0       _MvdmGetConsoleMode@8      00576ab0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0272",
+          "symbol": "_MvdmGetConsoleScreenBufferInfo@8",
+          "provider": "0001:00175bd0       _MvdmGetConsoleScreenBufferInfo@8 00576bd0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0277",
+          "symbol": "_MvdmReadConsoleOutputA@20",
+          "provider": "0001:00176030       _MvdmReadConsoleOutputA@20 00577030 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0278",
+          "symbol": "_MvdmSetConsoleCursorInfo@8",
+          "provider": "0001:00176070       _MvdmSetConsoleCursorInfo@8 00577070 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0279",
+          "symbol": "_MvdmSetConsoleCursorPosition@8",
+          "provider": "0001:001760f0       _MvdmSetConsoleCursorPosition@8 005770f0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0280",
+          "symbol": "_MvdmSetConsoleMode@8",
+          "provider": "0001:00176150       _MvdmSetConsoleMode@8      00577150 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0281",
+          "symbol": "_MvdmSetConsoleScreenBufferSize@8",
+          "provider": "0001:00176280       _MvdmSetConsoleScreenBufferSize@8 00577280 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0283",
+          "symbol": "_MvdmSetConsoleWindowInfo@12",
+          "provider": "0001:00176470       _MvdmSetConsoleWindowInfo@12 00577470 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0293",
+          "symbol": "_RegisterConsoleVDM@44",
+          "provider": "0001:00178750       _RegisterConsoleVDM@44     00579750 f   softpc-win32-bindings:console_compat.obj"
+        }
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\host\\nt_fulsc.obj",
+      "sha256": "57f12d3cb7d55997aac64b6fa80ec193a876bf731d64e482acb3049ec4c4c5e8",
+      "bindings": [
+        {
+          "id": "C0269",
+          "symbol": "_MvdmGetConsoleCursorInfo@8",
+          "provider": "0001:00175950       _MvdmGetConsoleCursorInfo@8 00576950 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0271",
+          "symbol": "_MvdmGetConsoleMode@8",
+          "provider": "0001:00175ab0       _MvdmGetConsoleMode@8      00576ab0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0272",
+          "symbol": "_MvdmGetConsoleScreenBufferInfo@8",
+          "provider": "0001:00175bd0       _MvdmGetConsoleScreenBufferInfo@8 00576bd0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0277",
+          "symbol": "_MvdmReadConsoleOutputA@20",
+          "provider": "0001:00176030       _MvdmReadConsoleOutputA@20 00577030 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0278",
+          "symbol": "_MvdmSetConsoleCursorInfo@8",
+          "provider": "0001:00176070       _MvdmSetConsoleCursorInfo@8 00577070 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0279",
+          "symbol": "_MvdmSetConsoleCursorPosition@8",
+          "provider": "0001:001760f0       _MvdmSetConsoleCursorPosition@8 005770f0 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0280",
+          "symbol": "_MvdmSetConsoleMode@8",
+          "provider": "0001:00176150       _MvdmSetConsoleMode@8      00577150 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0281",
+          "symbol": "_MvdmSetConsoleScreenBufferSize@8",
+          "provider": "0001:00176280       _MvdmSetConsoleScreenBufferSize@8 00577280 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0283",
+          "symbol": "_MvdmSetConsoleWindowInfo@12",
+          "provider": "0001:00176470       _MvdmSetConsoleWindowInfo@12 00577470 f   softpc-win32-bindings:console_client.obj"
+        },
+        {
+          "id": "C0293",
+          "symbol": "_RegisterConsoleVDM@44",
+          "provider": "0001:00178750       _RegisterConsoleVDM@44     00579750 f   softpc-win32-bindings:console_compat.obj"
+        }
+      ]
+    }
+  ],
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 29,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 45,
+    "openIds": 498,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "No changes; twenty imports checked in two P81 objects and link maps.",
+    "runtime": "No new runtime run.",
+    "publishedHashesVerified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "a3c4bd5e5e62787d3f8b245ef874ef9db40401aee34343e152e3cf94330a59fa"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+        "sha256": "a3c4bd5e5e62787d3f8b245ef874ef9db40401aee34343e152e3cf94330a59fa"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "4fa7fc9f4953f1e083ad40c46dc6e330ac389f1220ef1382093d830ca85a4052"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\run16.exe",
+        "sha256": "4fa7fc9f4953f1e083ad40c46dc6e330ac389f1220ef1382093d830ca85a4052"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "a6dbdcd45efe1243e26058580fbdf05639f0934046ef43f8928ba9e843bd4075"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntsrv.exe",
+        "sha256": "a6dbdcd45efe1243e26058580fbdf05639f0934046ef43f8928ba9e843bd4075"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "9aa5c1d168dd308799c79ea53faf41ae7d2882e20c70828ba8dade3739fd2639"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntcon.exe",
+        "sha256": "9aa5c1d168dd308799c79ea53faf41ae7d2882e20c70828ba8dade3739fd2639"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "2573896d6b22377e71210df654804c26a2302675927a01086434336031053733"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvdm.exe",
+        "sha256": "2573896d6b22377e71210df654804c26a2302675927a01086434336031053733"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "533cd7a12dccb83316c056f2c68397347101e4ed7753f63df2182b52f7b219bd"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntvwm.exe",
+        "sha256": "533cd7a12dccb83316c056f2c68397347101e4ed7753f63df2182b52f7b219bd"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "abfaa4591bd3c0a03b0f5f57058180691d766dbe48b8fb1297c6bd94e4315e8e"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\ntmon.exe",
+        "sha256": "abfaa4591bd3c0a03b0f5f57058180691d766dbe48b8fb1297c6bd94e4315e8e"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "5259cbb4cf98df1793cae383a572b98af60d119f3c9002b99c1d4585f9562a11"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\WOW32.DLL",
+        "sha256": "5259cbb4cf98df1793cae383a572b98af60d119f3c9002b99c1d4585f9562a11"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "f771d1897d6e97057c1aba34d5710110987a3512d235785d7735a00b524ae8b2"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+        "sha256": "f771d1897d6e97057c1aba34d5710110987a3512d235785d7735a00b524ae8b2"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "e4a3de4f18c3c9bb45740db62931b360e7c9fb15d47a291e2a6d57f0db72c2cc"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook32.dll",
+        "sha256": "e4a3de4f18c3c9bb45740db62931b360e7c9fb15d47a291e2a6d57f0db72c2cc"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "659807c3111352add8b9c3d38ec44d37d98e419b2619ce28085a32bbd51ca1ce"
+      },
+      {
+        "path": "O:\\WINNT\\system32\\nthook64.dll",
+        "sha256": "659807c3111352add8b9c3d38ec44d37d98e419b2619ce28085a32bbd51ca1ce"
+      }
+    ]
+  },
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/host/src/nt_fulsc.c": "8617a5690ccc0d8926fe948e2bd31e28192bfad74551085297ba34111bad500a",
+    "src/ntvdm-exe/win32/console_client.c": "76bdfa7fbd39e52e01f6eda1f81687691411b019fb5e96fec0f8c16866a28e74",
+    "src/ntvdm-exe/win32/console_compat.c": "f0c45d8b63ffcebad73724348cf0577c902a9e4efbf0e99ffe84415594439065",
+    "src/ntcon-exe/console_frontend.c": "3107d2aa1f92d58f4bf5a712a8afedf6c2f4159df7fbf4337d485572bd79d72d"
+  }
+}

@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P81-P82: [Activity delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p81-activity-owner.json), [error/disk review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p82-error-disk-bindings.json). Reviewed116/116 compile and28/74 link-only;498/618 IDs open,70 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. P81 package0b6c2aa7-47e7-46f2-8fd7-1daad97a3716 remains published;22 hashes verified. S12 active.
+P81-P83: [Activity delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p81-activity-owner.json), [Console transition review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p83-console-transition-ownership.json). Reviewed116/116 compile and29/74 link-only;498/618 IDs open,70 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. P81 package0b6c2aa7-47e7-46f2-8fd7-1daad97a3716 remains published;22 hashes verified. S12 active.
