@@ -40,6 +40,8 @@ P5 scoped three private header roots on x86. The worker graph drops 1171 C-layer
 
 P6 audited coalesced storage in the eleven product link maps, cross-checking C relocations with tentative definitions in selected COFF objects. The [storage evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json) adds eleven direct bindings and distinguishes ten mixed declaration groups. The tracker has 617 IDs; 555 remain open. P6 is evidence-only and retains the P5 package.
 
+P7 traced all ten mixed storage groups: seven redirector slots and the USER wheel remainder have C owners. Two BASE server globals require a startup-binding review in S14. The original server initializes both; the current lifecycle fixture supplies its own heap. Product failure has not been demonstrated. See the [per-symbol review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json).
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

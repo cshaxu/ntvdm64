@@ -512,7 +512,16 @@
           "other_symbol_in_map": true
         }
       ],
-      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map.",
+      "storage_review": {
+        "owner": "C declaration; startup binding requires S14 review",
+        "declaration": "src/non-mvdm/base/win32/server/basesrv.h:216",
+        "original_init": "base/win32/server/srvinit.c:455",
+        "image_address": "0x140062ed0",
+        "direct_rip_relative_reads": 7,
+        "direct_rip_relative_writes": 0,
+        "contract": "The original server initializes its process heap and heap tag. No production assignment found in the current selected service source. The lifecycle test supplies BaseSrvHeap itself. Do not attribute storage to F based on tentative definitions; verify startup and a request taking the original heap path before any restoration."
+      }
     },
     {
       "image": "ntsrv.exe",
@@ -604,7 +613,16 @@
           "other_symbol_in_map": true
         }
       ],
-      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map.",
+      "storage_review": {
+        "owner": "C declaration; startup binding requires S14 review",
+        "declaration": "src/non-mvdm/base/win32/server/basesrv.h:217",
+        "original_init": "base/win32/server/srvinit.c:456",
+        "image_address": "0x140062ec8",
+        "direct_rip_relative_reads": 17,
+        "direct_rip_relative_writes": 0,
+        "contract": "The original server initializes its process heap and heap tag. No production assignment found in the current selected service source. The lifecycle test supplies BaseSrvHeap itself. Do not attribute storage to F based on tentative definitions; verify startup and a request taking the original heap path before any restoration."
+      }
     },
     {
       "image": "ntvdm.exe",
@@ -659,7 +677,14 @@
           "other_symbol_in_map": true
         }
       ],
-      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map.",
+      "storage_review": {
+        "owner": "C",
+        "assignment": "src/mvdm-host/softpc.new/host/src/nt_bop.c:521",
+        "provider": "src/mvdm-host/vdmredir/vrnmpipe.c",
+        "map_object": "vrnmpipe.obj",
+        "contract": "LoadVdmRedir obtains the selected DLL, resolves this export into a C slot, follows the existing failure branch on a missing export and sets VdmRedirLoaded after successful resolution. Track package loading separately from C-owned callback storage."
+      }
     },
     {
       "image": "ntvdm.exe",
@@ -714,7 +739,14 @@
           "other_symbol_in_map": true
         }
       ],
-      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map.",
+      "storage_review": {
+        "owner": "C",
+        "assignment": "src/mvdm-host/softpc.new/host/src/nt_bop.c:527",
+        "provider": "src/mvdm-host/vdmredir/vrnmpipe.c",
+        "map_object": "vrnmpipe.obj",
+        "contract": "LoadVdmRedir obtains the selected DLL, resolves this export into a C slot, follows the existing failure branch on a missing export and sets VdmRedirLoaded after successful resolution. Track package loading separately from C-owned callback storage."
+      }
     },
     {
       "image": "ntvdm.exe",
@@ -769,7 +801,14 @@
           "other_symbol_in_map": true
         }
       ],
-      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map.",
+      "storage_review": {
+        "owner": "C",
+        "assignment": "src/mvdm-host/softpc.new/host/src/nt_bop.c:515",
+        "provider": "src/mvdm-host/vdmredir/vrnmpipe.c",
+        "map_object": "vrnmpipe.obj",
+        "contract": "LoadVdmRedir obtains the selected DLL, resolves this export into a C slot, follows the existing failure branch on a missing export and sets VdmRedirLoaded after successful resolution. Track package loading separately from C-owned callback storage."
+      }
     },
     {
       "image": "ntvdm.exe",
@@ -813,7 +852,14 @@
           "other_symbol_in_map": true
         }
       ],
-      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map.",
+      "storage_review": {
+        "owner": "C",
+        "assignment": "src/mvdm-host/softpc.new/host/src/nt_bop.c:509",
+        "provider": "src/mvdm-host/vdmredir/vrnmpipe.c",
+        "map_object": "vrnmpipe.obj",
+        "contract": "LoadVdmRedir obtains the selected DLL, resolves this export into a C slot, follows the existing failure branch on a missing export and sets VdmRedirLoaded after successful resolution. Track package loading separately from C-owned callback storage."
+      }
     },
     {
       "image": "ntvdm.exe",
@@ -866,7 +912,14 @@
           "other_symbol_in_map": true
         }
       ],
-      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map.",
+      "storage_review": {
+        "owner": "C",
+        "assignment": "src/mvdm-host/softpc.new/host/src/nt_bop.c:497",
+        "provider": "src/mvdm-host/vdmredir/vrnmpipe.c",
+        "map_object": "vrnmpipe.obj",
+        "contract": "LoadVdmRedir obtains the selected DLL, resolves this export into a C slot, follows the existing failure branch on a missing export and sets VdmRedirLoaded after successful resolution. Track package loading separately from C-owned callback storage."
+      }
     },
     {
       "image": "ntvdm.exe",
@@ -919,7 +972,14 @@
           "other_symbol_in_map": true
         }
       ],
-      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map.",
+      "storage_review": {
+        "owner": "C",
+        "assignment": "src/mvdm-host/softpc.new/host/src/nt_bop.c:533",
+        "provider": "src/mvdm-host/vdmredir/vrnmpipe.c",
+        "map_object": "vrnmpipe.obj",
+        "contract": "LoadVdmRedir obtains the selected DLL, resolves this export into a C slot, follows the existing failure branch on a missing export and sets VdmRedirLoaded after successful resolution. Track package loading separately from C-owned callback storage."
+      }
     },
     {
       "image": "ntvdm.exe",
@@ -972,7 +1032,14 @@
           "other_symbol_in_map": true
         }
       ],
-      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map.",
+      "storage_review": {
+        "owner": "C",
+        "assignment": "src/mvdm-host/softpc.new/host/src/nt_bop.c:503",
+        "provider": "src/mvdm-host/vdmredir/vrnmpipe.c",
+        "map_object": "vrnmpipe.obj",
+        "contract": "LoadVdmRedir obtains the selected DLL, resolves this export into a C slot, follows the existing failure branch on a missing export and sets VdmRedirLoaded after successful resolution. Track package loading separately from C-owned callback storage."
+      }
     },
     {
       "image": "wow32.dll",
@@ -1247,7 +1314,19 @@
           "other_symbol_in_map": true
         }
       ],
-      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map."
+      "disposition": "Coalesced declarations also exist in the mirror; no unique outward storage provider is established by the map.",
+      "storage_review": {
+        "owner": "C",
+        "definitions": [
+          "src/non-mvdm/windows/core/ntuser/client/globals.h:22",
+          "src/non-mvdm/windows/core/ntuser/client/clglobal.c:37"
+        ],
+        "mutators": [
+          "src/non-mvdm/windows/core/ntuser/client/lb1.c:277",
+          "src/non-mvdm/windows/core/ntuser/client/editml.c:3087"
+        ],
+        "contract": "Original USER owns the wheel remainder. Outer consumers compile declarations of the shared datum. The selected listbox and multiline-edit handlers update it. No independent F storage owner identified."
+      }
     }
   ],
   "per_image": {
@@ -1320,5 +1399,7 @@
       "reached_refs": 0,
       "unowned_objects": []
     }
-  }
+  },
+  "shared_review_baseline": "b6c98b830",
+  "shared_review_service_sha256": "28b756337b366b06daa7f552bc5e9303a284e3ab87a0013270c4a2b6199fe539"
 }
