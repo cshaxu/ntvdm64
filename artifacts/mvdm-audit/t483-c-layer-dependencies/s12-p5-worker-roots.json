@@ -1,0 +1,91 @@
+{
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "8dc4a879-e851-4037-86ab-93e3a08caded",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "baseline": "38cf778f7",
+  "commands": {
+    "x86/worker": {
+      "contexts": 392,
+      "before": {
+        "C0135": 391,
+        "C0136": 3,
+        "C0137": 391,
+        "C0141": 391,
+        "C0142": 391,
+        "C0145": 391,
+        "C0146": 391
+      },
+      "after": {
+        "C0135": 391,
+        "C0136": 3,
+        "C0137": 1,
+        "C0141": 391,
+        "C0142": 391,
+        "C0145": 1
+      }
+    },
+    "x86/wow32": {
+      "contexts": 136,
+      "before": {
+        "C0146": 136,
+        "C0147": 1,
+        "C0148": 34,
+        "C0149": 1,
+        "C0150": 4,
+        "C0151": 1
+      },
+      "after": {
+        "C0146": 136,
+        "C0147": 1,
+        "C0148": 34,
+        "C0149": 1,
+        "C0150": 4,
+        "C0151": 1
+      }
+    }
+  },
+  "reduction": 1171,
+  "measurement": "Explicit /I occurrences on C-owned worker object commands.",
+  "worker_remaining": {
+    "C0137": "demgset.c",
+    "C0145": "vrnetapi.c",
+    "C0146": null
+  },
+  "mirror_delta": {
+    "blocks": 0,
+    "lines": 0
+  },
+  "tests": {
+    "OEM_capacity": 14,
+    "original_NetAPI_providers": 18,
+    "WOW_page_domain": "WOW_FIXTURE_OK case=page-domain",
+    "WOW_task_lifecycle": "WOW_FIXTURE_OK case=task-lifecycle"
+  },
+  "test_corrections": [
+    "Two menu fixtures explicitly include the worker-owned WOW runtime header.",
+    "The combined fixture owns main, uses the fixture binding archive and has no started standalone worker. Selecting the full worker archive as well pulled product main and an unresolved SoftPC entry. Unexpected worker access now fails the fixture."
+  ],
+  "comparison": {
+    "normalized_equal": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "mask": "Embedded 16-byte package GUID, COFF TimeDateStamp, IMAGE_DEBUG_DIRECTORY TimeDateStamp; compare all other bytes."
+  }
+}

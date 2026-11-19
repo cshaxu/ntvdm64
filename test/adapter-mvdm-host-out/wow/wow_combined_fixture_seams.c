@@ -1,4 +1,20 @@
 #include "lib-win32/rpc/local_binding.h"
+#include "ntvdm-exe/softpc/include/mvdm_standalone_worker.h"
+
+/* This executable has its own main and never starts a standalone worker. */
+PVOID CsrPortHeap;
+
+struct mvdm_vm_executor *mvdm_standalone_worker_executor(void)
+{
+    ExitProcess(ERROR_CALL_NOT_IMPLEMENTED);
+    return NULL;
+}
+
+DWORD mvdm_standalone_worker_close_frontends(void)
+{
+    ExitProcess(ERROR_CALL_NOT_IMPLEMENTED);
+    return ERROR_CALL_NOT_IMPLEMENTED;
+}
 
 /* Combined CCPU/WOW fixtures retain the production BaseClient functions.
  * Their one external service boundary is forbidden: an unexpected attempt

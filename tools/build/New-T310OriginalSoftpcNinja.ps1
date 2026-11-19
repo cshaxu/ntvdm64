@@ -680,7 +680,6 @@ $includeRootPaths = @(
     'src/lib-nxvm',
     'src',
     'src/common/base_srv',
-    'src/vdmredir-dll/include',
     'src/non-mvdm/ds/netapi/xactsrv',
     # The adapter owns the modern `nt.h` type binding. Original reached NT
     # public-header subsets are retained under non-mvdm below, so source
@@ -720,10 +719,10 @@ $includeRootPaths = @(
     'src/mvdm-host/softpc.new/base/cvidc',
     'src/mvdm-host/dos/dem',
     'src/mvdm-host/softpc.new/base/inc',
-    'src/ntvdm-exe/softpc/include',
-    'src/ntvdm-exe/command/include',
-    'src/wow32-dll/include'
+    'src/ntvdm-exe/softpc/include'
 )
+$commandInclude = ' /I "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/command/include')) + '"'
+$redirInclude = ' /I "' + (NinjaPath (Join-Path $root 'src/vdmredir-dll/include')) + '"'
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $softpcIncludeRootPaths = [System.Collections.Generic.List[string]]::new()
 foreach ($path in $includeRootPaths) {
@@ -1018,7 +1017,9 @@ $demObjects = foreach ($name in $demNames) {
     # Exact original `sources` contract: this package exposes its Win32 and
     # DEVL trace declarations through these compile definitions.  They do not
     # add a new product path; the source owns the zero-initialized trace mask.
-    $graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32 /DDEVL')
+    $demFlags = $baseFlags + ' /DWIN_32 /DDEVL'
+    if ($name -eq 'demgset.c') { $demFlags += $commandInclude }
+    $graph.Add('  cflags = ' + $demFlags)
     $object
 }
 $commandObjects = foreach ($name in $commandNames) {
@@ -1038,6 +1039,7 @@ $redirObjects = foreach ($name in $redirNames) {
     # entries use the historical cdecl CreateThread callback contract; this
     # translation-unit-local forced facade is the finite modern ABI boundary.
     $redirFlags = $redirBaseFlags + ' /DWIN_32 /DVDMREDIR_DLL /FI "' + $redirThreadCompat + '"'
+    if ($name -eq 'vrnetapi.c') { $redirFlags += $redirInclude }
     $graph.Add('  cflags = ' + $redirFlags)
     $object
 }
@@ -1173,7 +1175,7 @@ $graph.Add('build common-worker-thread.lib: lib ' + $threadBridgeObject)
 $adapterBaseSrvObjects = foreach ($name in $adapterBaseSrvNames) {
     $object = 'obj/adapter-basesrv/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterBaseSrvRoot $name)))
-    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags + $commandInclude)
     $object
 }
 $adapterMonitorObjects = foreach ($name in $adapterMonitorNames) {
@@ -1203,7 +1205,7 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
 $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
     $object = 'obj/vdmredir-dll/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $redirDllBindingRoot $name)))
-    $graph.Add('  cflags = ' + $redirBaseFlags)
+    $graph.Add('  cflags = ' + $redirBaseFlags + $redirInclude)
     $object
 }
 $adapterRedirWorkerObjects = foreach ($name in $adapterRedirWorkerNames) {

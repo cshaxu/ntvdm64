@@ -36,6 +36,8 @@ P3 restored the original SoftPC entry and placed process startup and exit in the
 
 P4 removed 60 private include-directory occurrences from AMD64 mirror object commands. Six root IDs remain open across the supported graphs. Both cached architectures built, both eleven-image releases were verified and four targeted native fixtures passed. See the [P4 receipt](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p4-native-roots.json).
 
+P5 scoped three private header roots on x86. The worker graph drops 1171 C-layer search-root occurrences. Eleven published images match P4 after normalizing only the package GUID and PE timestamps. Two redirector and two WOW fixture runs passed. The [P5 receipt](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p5-worker-roots.json) records the counts and fixture corrections.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.
