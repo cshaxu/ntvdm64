@@ -1,4 +1,4 @@
-#include "mvdm_softpc_firmware.h"
+#include "compat/include/mvdm_firmware.h"
 
 int main(void)
 {

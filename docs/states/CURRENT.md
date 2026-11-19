@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P86: [PIF path delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p86-pif-path-owner.json). Reviewed116/116 compile and33/74 link-only. 495/618 IDs open,73 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Package914c1251-6d03-48d2-a792-41a95810326e published;22 hashes verified. Cached full builds, OEM/ANSI and three DOS cases, eight A/B graphs passed. S12 active.
+P87: [ROM reader delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p87-rom-resource-owner.json). Reviewed116/116 compile and34/74 link-only. 494/618 IDs open,74 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Package15bbe270-d60e-4a03-a416-5372c56091b5 published;22 hashes and six ROM resources verified. Cached full builds, resource failure and three DOS cases, eight A/B graphs passed. S12 active.

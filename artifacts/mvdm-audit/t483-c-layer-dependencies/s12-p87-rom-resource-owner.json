@@ -1,0 +1,225 @@
+{
+  "baseline": "1a6936a521322bb1d4124cbba549391e6a97ca42",
+  "file": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+  "linkOnlyOrder": 34,
+  "ids": [
+    "C0222"
+  ],
+  "decision": "Move only unchanged fixed-name Windows RCDATA reader to B. Keep nt_rez resource dispatch, non-ROM file path and original rom.c SAS mapping in C. Resource selection/packaging unchanged; no session or F data ownership in moved function.",
+  "functionIdentity": {
+    "equalIgnoringLineEndings": true,
+    "sha256": "08a0844e3cb69dcbed3f2bccf65fd10cd7ca227af4fb175d815f556e6fb830d2",
+    "symbol": "mvdm_softpc_firmware_read_embedded_rom",
+    "contract": "Same C ABI, three accepted names, capacity checks and zero-on-failure contract; no alternative file lookup."
+  },
+  "compiledEvidence": [
+    {
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "binding": "0001:0018caa0       _mvdm_softpc_firmware_read_embedded_rom 0058daa0 f   softpc-bindings:mvdm_firmware.obj",
+      "source": "build obj/compat/mvdm_firmware.obj: cc O$:/repos.hobby/ntvdm64/src/compat/mvdm_firmware.c",
+      "mapHash": "f1dd9c21ddd60ac1f0addb3a59015d9038a31196a8aa85b3ec9fecb623c1359d"
+    },
+    {
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "binding": "0001:0018caa0       _mvdm_softpc_firmware_read_embedded_rom 0058daa0 f   softpc-bindings:mvdm_firmware.obj",
+      "source": "build obj/compat/mvdm_firmware.obj: cc O$:/repos.hobby/ntvdm64/src/compat/mvdm_firmware.c",
+      "mapHash": "9e30241c71635842b36f3d46f567c7ebedf731af8ede9cbb81dd7150cf9685f9"
+    }
+  ],
+  "verification": {
+    "cachedFullBuild": "build/t483-s12-rom-owner/build.log",
+    "referenceBuildAndLibraryGate": "build/t483-s12-rom-owner/deliver.log",
+    "libraryGraphs": 8,
+    "unknownRomNameFixtureExit": 0,
+    "publishedRomByteIdentity": [
+      {
+        "exe": "assets/release/ntvdm.exe",
+        "resource": "SOFTPC_BIOS1",
+        "bytes": 28420,
+        "sha256": "1ce33544249fef59865b91308faf60f354563cf854f80eb196d47c968899a574"
+      },
+      {
+        "exe": "assets/release/ntvdm.exe",
+        "resource": "SOFTPC_BIOS4",
+        "bytes": 8191,
+        "sha256": "b09fdff1a500971d54233378ce9c36f1b6a58bf577e4a544da03a0d78d7e0d6f"
+      },
+      {
+        "exe": "assets/release/ntvdm.exe",
+        "resource": "SOFTPC_V7VGA",
+        "bytes": 18832,
+        "sha256": "970f105cd9e42ee56f07aae695bac89786d3455ab9d4c1ea9a1d1643b1e8f6f0"
+      },
+      {
+        "exe": "O:/WINNT/system32/ntvdm.exe",
+        "resource": "SOFTPC_BIOS1",
+        "bytes": 28420,
+        "sha256": "1ce33544249fef59865b91308faf60f354563cf854f80eb196d47c968899a574"
+      },
+      {
+        "exe": "O:/WINNT/system32/ntvdm.exe",
+        "resource": "SOFTPC_BIOS4",
+        "bytes": 8191,
+        "sha256": "b09fdff1a500971d54233378ce9c36f1b6a58bf577e4a544da03a0d78d7e0d6f"
+      },
+      {
+        "exe": "O:/WINNT/system32/ntvdm.exe",
+        "resource": "SOFTPC_V7VGA",
+        "bytes": 18832,
+        "sha256": "970f105cd9e42ee56f07aae695bac89786d3455ab9d4c1ea9a1d1643b1e8f6f0"
+      }
+    ],
+    "runtime": [
+      "direct-mem:0",
+      "command-c:0",
+      "command-c-mem:0"
+    ],
+    "runtimeLog": "build/t483-s12-rom-owner/runtime.log",
+    "normalizedImageIdentity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": false,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": true,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "limitations": "NTVDM is not normalized-byte-identical. Selected negative resource case, six resource-byte checks and three DOS cases passed; not a new full-runtime-suite claim. No mirror/guest changes."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "15bbe270-d60e-4a03-a416-5372c56091b5",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "publicationHashes": [
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "5a3375b5966cd5db6599077b4f2de8c96c2a4c6fd956516e41e0f22d81a86739"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VCDEX.DLL",
+      "sha256": "5a3375b5966cd5db6599077b4f2de8c96c2a4c6fd956516e41e0f22d81a86739"
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "afd1f5b9c43874cac5cf6157e45f2469ab35c8974b62e56e500ff2e8cf6fdf5d"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\run16.exe",
+      "sha256": "afd1f5b9c43874cac5cf6157e45f2469ab35c8974b62e56e500ff2e8cf6fdf5d"
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "fe528a894abbe7a041ac46b5f0cb8b15385a73ccb9141caba1b1cb33757d9b14"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntsrv.exe",
+      "sha256": "fe528a894abbe7a041ac46b5f0cb8b15385a73ccb9141caba1b1cb33757d9b14"
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "0e208f8fe6546f7168f416504cbc31570967f5c9108449ee8e48ab97ae5c2563"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntcon.exe",
+      "sha256": "0e208f8fe6546f7168f416504cbc31570967f5c9108449ee8e48ab97ae5c2563"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "b8c5fdce38bb1bdb019d5c5a7738700c744a566a06eedd54335d65234828dc16"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvdm.exe",
+      "sha256": "b8c5fdce38bb1bdb019d5c5a7738700c744a566a06eedd54335d65234828dc16"
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "0eb16e4a4c79e9c608e81037ab353c39142224794b19c82912d4dfdad6d66a68"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntvwm.exe",
+      "sha256": "0eb16e4a4c79e9c608e81037ab353c39142224794b19c82912d4dfdad6d66a68"
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "6fe40d04a609c42ded2b8848c3f94a6c4058e065ca0a172499e0e7ef49fdc21b"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\ntmon.exe",
+      "sha256": "6fe40d04a609c42ded2b8848c3f94a6c4058e065ca0a172499e0e7ef49fdc21b"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "b177d4c92288222aa56a06e55bf73320018b009273356db9d61a2085cff405b7"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\WOW32.DLL",
+      "sha256": "b177d4c92288222aa56a06e55bf73320018b009273356db9d61a2085cff405b7"
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "a6cef7a057653138b8d32a2f6dc492041d9cb89c9756629a0b8bf8372061a3fe"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "sha256": "a6cef7a057653138b8d32a2f6dc492041d9cb89c9756629a0b8bf8372061a3fe"
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "ac0b8bae0e3f50d5093bd6f35911df0ca02add8e44e8bdd2b48b00ef232f7001"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook32.dll",
+      "sha256": "ac0b8bae0e3f50d5093bd6f35911df0ca02add8e44e8bdd2b48b00ef232f7001"
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "7a4193d0aa581cdac086b40e37dc1764e096f669f61f1bdecd8f4a4007b6a007"
+    },
+    {
+      "path": "O:\\WINNT\\system32\\nthook64.dll",
+      "sha256": "7a4193d0aa581cdac086b40e37dc1764e096f669f61f1bdecd8f4a4007b6a007"
+    }
+  ],
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 34,
+    "linkOnlyTotal": 74,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 494,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 74
+    }
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "sourceHashes": {
+    "src/compat/mvdm_firmware.c": "26b1b3114e0bc2ffba861ecc706c9eb6c7f97ca719d57b7df4c88fdcefe83c19",
+    "src/compat/include/mvdm_firmware.h": "c07a4b3e9c95306292d5b94a01477ad8a3d8b38db69753bae4a17d0f0f360808",
+    "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c": "990e033a1262e78c06621356f0eb5662f83aaeebaae75a6118a093398909d851",
+    "src/ntvdm-exe/softpc/include/mvdm_softpc_firmware.h": "67c60898936e2b9d84ebadaad34794f1a74ac39d9756514cd89a5c7aba9ed1fb",
+    "src/mvdm-host/softpc.new/host/src/nt_rez.c": "2448aec8c1645a93f237cfeb394227a12d1c1c4306d25a1c26516fc2c782806c",
+    "src/mvdm-host/softpc.new/base/system/rom.c": "bacb75c018512cc2d70c3dde370aeb2e2057180b26162ab94560eaf5e9fa8cab",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "5fe24e881151f2e6b3bc695d913f9d14f314e63a779e28099358db4418172eee",
+    "tools/build/New-T310FirmwareResourceNinja.ps1": "f3d36132984e9003672ce708340bc5076e5a925b53bc4591058e72402c2a3875",
+    "test/session/softpc_firmware_resource_fixture.c": "56399602ee97d9d523e9d1410c5c89bf730207a2ff8648a3cc9f0ce5ec0aafdd"
+  }
+}
