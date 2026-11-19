@@ -16,19 +16,6 @@ target_compile_options(mvdm-vm-notification-test PRIVATE /W4 /WX)
 target_compile_features(mvdm-vm-notification-test PRIVATE c_std_11)
 add_test(NAME mvdm-vm-notification COMMAND mvdm-vm-notification-test)
 
-add_executable(mvdm-guest-memory-test
-  mvdm_softpc_guest_memory_test.c
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c"
-  "${CMAKE_SOURCE_DIR}/src/compat/guest_memory_lease.c"
-  "${CMAKE_SOURCE_DIR}/src/compat/guest_memory_access.c"
-  "${CMAKE_SOURCE_DIR}/src/compat/host_context.c")
-target_include_directories(mvdm-guest-memory-test PRIVATE
-  "${CMAKE_SOURCE_DIR}/src"
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/include")
-target_compile_options(mvdm-guest-memory-test PRIVATE /W4 /WX)
-target_compile_features(mvdm-guest-memory-test PRIVATE c_std_11)
-add_test(NAME mvdm-guest-memory COMMAND mvdm-guest-memory-test)
-
 add_executable(mvdm-vm-execute-test mvdm_vm_execute_test.c
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_execute.c")
 target_include_directories(mvdm-vm-execute-test PRIVATE

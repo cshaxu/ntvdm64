@@ -1,0 +1,148 @@
+{
+  "delivery": "T483 S14 P24",
+  "baseline": "50840ce4e",
+  "approval": "Owner explicitly approved SAS ownership move and net +1 point/+52 raw lines, including the >3-line mirror insertion exception.",
+  "implementation": "Range preflight and read/write bodies move from F to C ccpusas4.c; F keeps registration/lifetime and forward-copy admission. No B-to-C edge added.",
+  "symbols": [
+    "mvdm_softpc_guest_memory_range_valid",
+    "mvdm_softpc_guest_memory_read",
+    "mvdm_softpc_guest_memory_write"
+  ],
+  "mirror": {
+    "before": {
+      "blocks": 12,
+      "added": 17,
+      "deleted": 10
+    },
+    "after": {
+      "blocks": 13,
+      "added": 68,
+      "deleted": 10
+    },
+    "raw_inserted_lines": 52,
+    "error_arms_unchanged": true,
+    "mask_issues": [],
+    "original_final_endif_line": 1960,
+    "prior_cumulative_reduction": {
+      "points": 3,
+      "lines": 12
+    },
+    "cumulative_net_change": {
+      "points": -2,
+      "lines": 39
+    }
+  },
+  "test_migration": "Retire mocked CCPU translation fixture; preserve B lease tests and consolidate provider checks into real CCPU bounded fixture (read-only/noncontiguous/absent pages, no partial write, forward-copy refusal, overflow and nonpaged limit).",
+  "remaining": "XMS failure ownership and WOW USER backing unresolved; no S14 closure.",
+  "status": "Final-code cached full build, dual publication, targeted tests and governance passed; reviewed P24 delivery.",
+  "package": "3df9d92c-3912-4efa-8866-7e2667f45785",
+  "sources": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "sha256": "19491bec815e7533dc00a0018e4749294770e42056c5877f5a66f2f60bcba282"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+      "sha256": "6371b20f4009ecd613eb899d2a3ebb27504a19d2e686cd175e35bc8e531c5285"
+    },
+    {
+      "path": "test/mvdm-host/ccpu_bounded_execution_fixture.c",
+      "sha256": "09534eff0a203f73a55cb955ccf8fd3c0a1bc072397ac40a07d57fff27f54218"
+    },
+    {
+      "path": "test/ntvdm-exe/softpc/CMakeLists.txt",
+      "sha256": "d3f0b812953b9795692bbca7635ebe04493b931aa600a26d14fc4bde1e847df3"
+    }
+  ],
+  "link_maps": {
+    "ntvdm.exe.map": {
+      "sha256": "d32baffc5f0f63fc603ebe61055dea7cf124e25162e493a55a53a4692d3ab1d5",
+      "provider_symbols": [
+        " 0001:00016ca0       _mvdm_softpc_guest_memory_range_valid 00417ca0 f   original-ccpu386:ccpusas4.obj",
+        " 0001:00016d90       _mvdm_softpc_guest_memory_read 00417d90 f   original-ccpu386:ccpusas4.obj",
+        " 0001:00016dd0       _mvdm_softpc_guest_memory_write 00417dd0 f   original-ccpu386:ccpusas4.obj"
+      ]
+    },
+    "ccpu-high-linear-page-test.exe.map": {
+      "sha256": "26b5f56d6e75d418245c773e76a3b816179813c148d0feba5e1da3aa944d2b2c",
+      "provider_symbols": [
+        " 0001:00007d30       _mvdm_softpc_guest_memory_range_valid 00408d30 f   original-ccpu386:ccpusas4.obj",
+        " 0001:00007e20       _mvdm_softpc_guest_memory_read 00408e20 f   original-ccpu386:ccpusas4.obj",
+        " 0001:00007e60       _mvdm_softpc_guest_memory_write 00408e60 f   original-ccpu386:ccpusas4.obj"
+      ]
+    }
+  },
+  "build_exit": "0",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "3df9d92c-3912-4efa-8866-7e2667f45785",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalized_equal_previous": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "body_comparison": {
+    "mvdm_softpc_guest_memory_range_valid": "Same body tokens; range helper only uses original PHY_ADDR output type and splits that declaration.",
+    "mvdm_softpc_guest_memory_read": "Identical body tokens.",
+    "mvdm_softpc_guest_memory_write": "Identical body tokens."
+  },
+  "lifecycle": "F begin/end and forward-copy function bodies unchanged; no new state, TLS, callbacks or guest modification.",
+  "runtime": {
+    "tests_exit": 0,
+    "lease_assertions": 75,
+    "real_CCPU": "PASS mapped noncontiguous and read-only pages, absent-page preflight/no partial write, forward refusal, overflow, nonpaged limits and mode reentry",
+    "redirector_assertions": [
+      27,
+      14
+    ],
+    "thread": "PASS rollback and cross-DLL ownership",
+    "wow": "PASS page-domain lifecycle and shared clock",
+    "nesticle": "PASS actual published menu pixels and Escape hide/restore; screenshot visually checked; no ROM gameplay claim",
+    "dos_dir": "final=0 entered-dos=1 dirty-prompt=0",
+    "scope": "Targeted suite, not Full or new manual Win3.x/95 acceptance"
+  },
+  "processes": {
+    "build": {
+      "start": "2026-11-19T09:57:18.1072591-08:00",
+      "pid": 13196,
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-sas-provider/build-only.ps1"
+    },
+    "publish": {
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-sas-provider/publish-only.ps1",
+      "pid": 25992,
+      "start": "2026-11-19T10:01:20.8700722-08:00"
+    },
+    "tests": {
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-sas-provider/tests.ps1",
+      "pid": 15740,
+      "start": "2026-11-19T10:01:59.9479038-08:00"
+    },
+    "check": {
+      "pid": 29292,
+      "start": "2026-11-19T10:06:42.0244258-08:00"
+    }
+  },
+  "ledger": {
+    "excluded-diagnostic": 1,
+    "open": 421,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 147
+  },
+  "governance": "worker thread boundary, final documentation governance, relative links and git diff --check passed"
+}

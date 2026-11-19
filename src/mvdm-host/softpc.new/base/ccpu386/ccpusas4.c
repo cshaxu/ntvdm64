@@ -1954,4 +1954,56 @@ GLOBAL IBOOL c_sas_PigCmpPage IFN3(IU32, src, IU8 *, dest, IU32, len)
 {
 	return(FALSE);
 }
+/* Checked SAS provider; approved T483 S14 ownership adaptation. */
+int mvdm_softpc_guest_memory_range_valid(uint32_t address,
+    uint32_t byte_count, int write)
+{
+    uint32_t memory_size = c_sas_memory_size();
+    uint8_t access = write ? 1u : 0u;
+
+    if (byte_count && byte_count - 1u > UINT32_MAX - address) return 0;
+    if (!c_getPG())
+        return address <= memory_size && byte_count <= memory_size - address;
+
+    /* Match bios_read/write_* in original ccpusas4.c. xtrn2phy checks the
+     * current TLB/page tables without taking a guest fault. Preflight every
+     * page before SAS copies: a failed lease must not enter BIOS emulation
+     * or partially write its destination. Called synchronously on the CPU
+     * thread; no mapping or guest pointer survives this operation. */
+    if (c_getCPL() == 3u) access |= 2u;
+    if (c_getVM()) access |= 4u;
+    while (byte_count) {
+        PHY_ADDR physical;
+        uint32_t chunk = 4096u - (address & 4095u);
+        if (chunk > byte_count) chunk = byte_count;
+        if (!xtrn2phy(address, access, &physical) ||
+            physical > memory_size || chunk > memory_size - physical)
+            return 0;
+        address += chunk;
+        byte_count -= chunk;
+    }
+    return 1;
+}
+
+int mvdm_softpc_guest_memory_read(void *context, uint32_t address,
+    uint8_t *bytes, uint32_t byte_count)
+{
+    (void)context;
+    if (bytes == NULL || !mvdm_softpc_guest_memory_range_valid(address,
+        byte_count, 0)) return 0;
+    if (byte_count != 0u) c_sas_loads(address, bytes, byte_count);
+    return 1;
+}
+
+int mvdm_softpc_guest_memory_write(void *context, uint32_t address,
+    const uint8_t *bytes, uint32_t byte_count)
+{
+    (void)context;
+    if (bytes == NULL || !mvdm_softpc_guest_memory_range_valid(address,
+        byte_count, 1)) return 0;
+    if (byte_count != 0u) c_sas_stores(address, (uint8_t *)bytes, byte_count);
+    return 1;
+}
+
+#line 1960
 #endif 				/* CCPU */

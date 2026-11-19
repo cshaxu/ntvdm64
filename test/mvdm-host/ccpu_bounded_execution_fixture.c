@@ -458,6 +458,26 @@ static int fixture_high_linear_page(void)
         fputs("guest did not observe the published clock update\n", stderr);
         goto done;
     }
+    /* Real CCPU provider negative controls: no mocked translation or SAS.
+     * A missing second page must reject the whole four-byte write before
+     * changing the two valid bytes at the end of the first page. */
+    {
+        IU8 sentinel[4] = {0x11, 0x22, 0x33, 0x44};
+        phy_w32(pte, first | 7u);
+        phy_w32(pte + 4u, 0u);
+        c_setCR3(directory);
+        if (mvdm_softpc_guest_memory_copy_to(linear + 4094u, sentinel, 4u) ||
+            c_sas_dw_at(first + 4092u) != 0x44332211u ||
+            mvdm_softpc_guest_memory_copy_from(0xfffffff0u, bytes, 32u) ||
+            mvdm_softpc_guest_memory_copy_forward(linear + 4094u, first, 4u) ||
+            c_sas_dw_at(first + 4092u) != 0x44332211u)
+            goto done;
+        phy_w32(pte, first | 5u);
+        phy_w32(pte + 4u, second | 7u);
+        c_setCR3(directory);
+        if (!fixture_stdout("CCPU_SAS_PROVIDER_PREFLIGHT_NO_PARTIAL_WRITE_OK\n"))
+            goto done;
+    }
     /* Original MOV_CR rejects PG=1/PE=0. A standalone mode boundary must
      * suspend PG before DOSX clears PE, then restore it after PE is set.
      * This proves only that order, not the product's DOSX frame handling. */
@@ -469,6 +489,10 @@ static int fixture_high_linear_page(void)
         fputs("low-address lease changed when paging was suspended\n", stderr);
         goto done;
     }
+    if (mvdm_softpc_guest_memory_copy_from(c_sas_memory_size(), bytes, 1u) ||
+        mvdm_softpc_guest_memory_copy_from(0xfffffff0u, bytes, 32u) ||
+        !mvdm_softpc_guest_memory_copy_from(c_sas_memory_size(), bytes, 0u))
+        goto done;
     c_setMSW((IU16)(c_getMSW() | 1u));
     c_setCR3(directory);
     c_setCR0(c_getCR0() | 0x80000000u);

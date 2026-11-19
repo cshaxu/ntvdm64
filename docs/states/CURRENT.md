@@ -28,6 +28,19 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+S14 P24 moves the three checked SAS provider bodies from F to C. Final
+production and real-CCPU fixture maps resolve them to ccpusas4.obj; F retains
+registration/lifetime and forward-copy admission. Cached full builds,
+dual11 publication/22 hashes and targeted lease/memory/thread/redirector/WOW,
+published NESticle and DOS DIR tests passed. Package
+3df9d92c-3912-4efa-8866-7e2667f45785 is published.
+[P24 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p24-sas-provider.json)
+records owner approval for +1 point/+52 raw inserted lines. Non-error diff
+changes12 points/27 lines to13/78; one extra #line is counted separately.
+Prior gross reduction3/12 remains recorded; cumulative net is-2 points/+39
+lines after this approved ownership adaptation. Direct ledger147 eliminated/
+421 open is unchanged. XMS and USER boundaries remain; S14 is not closed.
+
 S14 P22 removes the remaining F guest-memory include from EMS; actual copy
 implementations already moved to B in P20. Cached full builds and dual11
 publication/22 hashes passed. All11 normalized images match P21 after
