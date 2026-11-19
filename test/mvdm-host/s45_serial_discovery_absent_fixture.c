@@ -20,7 +20,7 @@ DWORD WINAPI s45_empty_query_dos_device(LPCSTR device, LPSTR targets,
 }
 
 #define QueryDosDeviceA s45_empty_query_dos_device
-#include "../../src/ntvdm-exe/softpc/mvdm_shadow_registry.c"
+#include "../../src/compat/mvdm_shadow_registry.c"
 
 int main(void)
 {

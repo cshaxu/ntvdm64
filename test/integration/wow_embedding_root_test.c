@@ -5,36 +5,6 @@
 #include <stdio.h>
 #include <string.h>
 
-/* The fixture exercises only the Win32 façade half.  Supply the small NT
- * declaration subset reached by the production source's native-reader
- * helpers, rather than pulling the full original SDK into this standalone
- * test binary. */
-#ifndef STATUS_SUCCESS
-#define STATUS_SUCCESS ((NTSTATUS)0)
-#endif
-#ifndef STATUS_OBJECT_NAME_NOT_FOUND
-#define STATUS_OBJECT_NAME_NOT_FOUND ((NTSTATUS)0xC0000034L)
-#endif
-#ifndef STATUS_BUFFER_TOO_SMALL
-#define STATUS_BUFFER_TOO_SMALL ((NTSTATUS)0xC0000023L)
-#endif
-#ifndef STATUS_UNSUCCESSFUL
-#define STATUS_UNSUCCESSFUL ((NTSTATUS)0xC0000001L)
-#endif
-#ifndef STATUS_INVALID_HANDLE
-#define STATUS_INVALID_HANDLE ((NTSTATUS)0xC0000008L)
-#endif
-#ifndef STATUS_NO_MEMORY
-#define STATUS_NO_MEMORY ((NTSTATUS)0xC0000017L)
-#endif
-#ifndef KeyValueFullInformation
-#define KeyValueFullInformation 2u
-typedef struct _KEY_VALUE_FULL_INFORMATION {
-    ULONG TitleIndex,Type,DataOffset,DataLength,NameLength;
-    WCHAR Name[1];
-} KEY_VALUE_FULL_INFORMATION,*PKEY_VALUE_FULL_INFORMATION;
-#endif
-
 DWORD compat_product_path_a(LPCWSTR relative, LPSTR path, DWORD capacity)
 {
     DWORD length;

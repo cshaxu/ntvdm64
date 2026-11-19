@@ -222,3 +222,20 @@ class registration. Provenance is recorded in each unit.
 P27 preserves the original OpenNT CopyInflateRect implementation in
 [wow_control_rect.c](wow_control_rect.c) for the WOW controls. The remaining
 public rectangle operations used by the product come from USER32.
+
+## Registry compatibility ownership (T483 S12)
+
+`mvdm_shadow_registry.c` and `include/mvdm_shadow_registry.h` own the
+existing NTVDM.REG view. `include/wow_registry.h` retains the shared caller
+API bindings. This B provider uses public Windows APIs, the C runtime and
+B package-directory queries; F still owns initialization and shutdown.
+There is no guest/session or mirror-header dependency in this provider.
+
+Its private full-value output layout follows OpenNT revision
+`5c5b979ec08c17d3ca2eb70e8aad62d26515d01c`,
+`public/sdk/inc/ntregapi.h:223-231`; the information-class enum at
+252-259 assigns full information **1**, partial information **2**.
+The public adapter ABI remains ULONG/void-pointer based. This bounded
+layout is not a second native-registry implementation. The registry fixture
+checks full-value bytes/offsets, short buffers and rejection of partial
+information, in addition to persistence, concurrent writers and rollback.

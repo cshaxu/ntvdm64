@@ -279,7 +279,7 @@ $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
-$adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
+$adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                          'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                          'mvdm_softpc_ccpu_wait.c',
                          'mvdm_vm_notification.c',
@@ -1202,6 +1202,9 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $graph.Add('  cflags = ' + $authoredSoftpcFlags + $videoInclude)
     $object
 }
+$graph.Add('build obj/adapter-softpc/mvdm_shadow_registry.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_shadow_registry.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_shadow_registry.obj'
 $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
     $object = 'obj/vdmredir-dll/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $redirDllBindingRoot $name)))

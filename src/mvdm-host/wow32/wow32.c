@@ -38,7 +38,7 @@
 #include <ntcsrdll.h>
 #define SHAREWOW_MAIN
 #include <sharewow.h>
-#include <common/wow/registry.h>
+#include <compat/include/wow_registry.h>
 
 
 #line 38

@@ -3,7 +3,7 @@
 
 #include <windows.h>
 #include <winternl.h>
-#include "common/wow/registry.h"
+#include "compat/include/wow_registry.h"
 
 /* `NTVDM.REG` is the product overlay. Selected original reads use its values
  * first, then a bounded, read-only snapshot of their admitted HKLM key. The

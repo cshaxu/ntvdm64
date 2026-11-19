@@ -48,6 +48,8 @@ P9 removed the redundant forced service header from srvvdm.c. The normal include
 
 P11 moved shared package directory mechanics and guest directory queries into B compat. cmdconf.c now includes the B header. Both cached product builds, directory/PIF/media/boot tests and the eight-graph library boundary check passed. Eleven images were published and hash-verified at both destinations. See [directory receipt](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p11-directory.json). The sequential compile-dependency review is 1/116; 115 mirror files remain directly dependent. Mirror delta is zero blocks and lines.
 
+P12 moves the existing registry provider and shared declarations from F/D to B. Eight mirror callers only change include paths; mirror delta is zero points/lines and #error/#line remain unchanged. Both cached architectures, final corrected x86 rebuild, eight product A/B graphs, native enum/persistence and 31 embedding checks passed. Eleven images were published and hash-verified at both destinations. See [registry evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p12-registry-candidate.json). File 002 retains its native-child lifecycle dependency for S13. Two files have been reviewed; only file 001 is fully cleared. S12 remains active.
+
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.

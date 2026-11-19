@@ -39,7 +39,7 @@
 #include <demexp.h>
 #include <vint.h>
 #include "mvdm_softpc_firmware.h"
-#include "common/wow/registry.h"
+#include "compat/include/wow_registry.h"
 
 #line 41
 PMEM_HOOK_DATA MemHookHead = NULL;

@@ -33,7 +33,7 @@
 #include "wowfax.h"
 #include "wow_task_termination.h"
 #include "wow_idle_hook_binding.h"
-#include <common/wow/registry.h>
+#include <compat/include/wow_registry.h>
 
 #line 32
 extern void UnloadNetworkFonts( UINT id );

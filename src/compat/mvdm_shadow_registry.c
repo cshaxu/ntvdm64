@@ -1,4 +1,7 @@
-#include "mvdm_shadow_registry.h"
+#define WIN32_NO_STATUS
+#include "compat/include/mvdm_shadow_registry.h"
+#undef WIN32_NO_STATUS
+#include <ntstatus.h>
 #include "compat/include/system_root.h"
 #include <stdlib.h>
 #include <string.h>
@@ -7,9 +10,15 @@
 #define MVDM_SHADOW_KEY_FILE 0u
 #define MVDM_SHADOW_KEY_SERIALCOMM 1u
 #define MVDM_SERIALCOMM_SUBKEY "HARDWARE\\DEVICEMAP\\SERIALCOMM"
-#ifndef STATUS_NO_MORE_ENTRIES
-#define STATUS_NO_MORE_ENTRIES ((NTSTATUS)0x8000001AL)
-#endif
+/* OpenNT public/sdk/inc/ntregapi.h:223-231 and :252-259.
+ * Native full-value output is five ULONG fields followed by UTF-16 name. */
+typedef struct shadow_key_value_full_information {
+    ULONG TitleIndex, Type, DataOffset, DataLength, NameLength;
+    WCHAR Name[1];
+} shadow_key_value_full_information;
+enum { shadow_key_value_full_information_class = 1 };
+C_ASSERT(sizeof(ULONG) == 4);
+C_ASSERT(offsetof(shadow_key_value_full_information, Name) == 20);
 typedef struct _MVDM_SHADOW_KEY {
     DWORD magic;
     struct _MVDM_SHADOW_KEY *next;
@@ -531,14 +540,14 @@ static NTSTATUS section_from_nt_name(PUNICODE_STRING name, char *section,
 static NTSTATUS native_host_value(const MVDM_SHADOW_VALUE *value, PVOID information,
     ULONG information_length, PULONG result_length)
 {
-    PKEY_VALUE_FULL_INFORMATION full=(PKEY_VALUE_FULL_INFORMATION)information;
+    shadow_key_value_full_information * full=(shadow_key_value_full_information *)information;
     int name_chars;
     ULONG required,data_offset;
 
     if (!value || !information || !result_length) return STATUS_INVALID_HANDLE;
     name_chars=MultiByteToWideChar(CP_ACP,0,value->name,-1,NULL,0)-1;
     if (name_chars<0) return STATUS_UNSUCCESSFUL;
-    required=(ULONG)offsetof(KEY_VALUE_FULL_INFORMATION,Name)+
+    required=(ULONG)offsetof(shadow_key_value_full_information,Name)+
         (ULONG)name_chars*sizeof(WCHAR);
     required=(required+sizeof(ULONG)-1u)&~(sizeof(ULONG)-1u);
     data_offset=required;
@@ -609,7 +618,7 @@ NTSTATUS NTAPI ntvdm_shadow_nt_enumerate_value_key(HANDLE handle, ULONG index,
     ULONG current=0;
 
     if (!key || !information || !result_length) return STATUS_INVALID_HANDLE;
-    if (information_class!=KeyValueFullInformation) return STATUS_UNSUCCESSFUL;
+    if (information_class!=shadow_key_value_full_information_class) return STATUS_UNSUCCESSFUL;
     line=find_section(key->section);
     if (!line) {
         MVDM_SHADOW_VALUE *value=key->host_values;
@@ -625,7 +634,7 @@ NTSTATUS NTAPI ntvdm_shadow_nt_enumerate_value_key(HANDLE handle, ULONG index,
             DWORD type,length;
             LONG decoded_status=decode_value(raw,end,&type,&decoded,&length);
             if (decoded_status==ERROR_SUCCESS && current++==index) {
-                PKEY_VALUE_FULL_INFORMATION full=(PKEY_VALUE_FULL_INFORMATION)information;
+                shadow_key_value_full_information * full=(shadow_key_value_full_information *)information;
                 int name_chars,data_chars;
                 ULONG required;
 
@@ -636,7 +645,7 @@ NTSTATUS NTAPI ntvdm_shadow_nt_enumerate_value_key(HANDLE handle, ULONG index,
                 }
                 name_chars=MultiByteToWideChar(CP_ACP,0,name,(int)name_length,NULL,0);
                 data_chars=MultiByteToWideChar(CP_ACP,0,(LPCSTR)decoded,(int)(length-1u),NULL,0);
-                required=(ULONG)offsetof(KEY_VALUE_FULL_INFORMATION,Name)+
+                required=(ULONG)offsetof(shadow_key_value_full_information,Name)+
                     (ULONG)name_chars*sizeof(WCHAR);
                 required=(required+sizeof(ULONG)-1u)&~(sizeof(ULONG)-1u);
                 required+=(ULONG)data_chars*sizeof(WCHAR);

@@ -23,7 +23,7 @@
 #include "xt.h"
 #include "error.h"
 #include "config.h"
-#include "common/wow/registry.h"
+#include "compat/include/wow_registry.h"
 #line 26
 #include "sas.h"
 

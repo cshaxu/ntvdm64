@@ -1,39 +1,11 @@
 /* S2 parent-façade contract.  The runner supplies a new, build-owned leaf in
  * T461_REGISTRY_FIXTURE_ROOT.  This fixture refuses pre-existing input and
  * only removes the exact file it created. */
+#define WIN32_NO_STATUS
 #include <windows.h>
+#undef WIN32_NO_STATUS
 #include <stdio.h>
 #include <string.h>
-
-/* The fixture exercises only the Win32 façade half.  Supply the small NT
- * declaration subset reached by the production source's native-reader
- * helpers, rather than pulling the full original SDK into this standalone
- * test binary. */
-#ifndef STATUS_SUCCESS
-#define STATUS_SUCCESS ((NTSTATUS)0)
-#endif
-#ifndef STATUS_OBJECT_NAME_NOT_FOUND
-#define STATUS_OBJECT_NAME_NOT_FOUND ((NTSTATUS)0xC0000034L)
-#endif
-#ifndef STATUS_BUFFER_TOO_SMALL
-#define STATUS_BUFFER_TOO_SMALL ((NTSTATUS)0xC0000023L)
-#endif
-#ifndef STATUS_UNSUCCESSFUL
-#define STATUS_UNSUCCESSFUL ((NTSTATUS)0xC0000001L)
-#endif
-#ifndef STATUS_INVALID_HANDLE
-#define STATUS_INVALID_HANDLE ((NTSTATUS)0xC0000008L)
-#endif
-#ifndef STATUS_NO_MEMORY
-#define STATUS_NO_MEMORY ((NTSTATUS)0xC0000017L)
-#endif
-#ifndef KeyValueFullInformation
-#define KeyValueFullInformation 2u
-typedef struct _KEY_VALUE_FULL_INFORMATION {
-    ULONG TitleIndex,Type,DataOffset,DataLength,NameLength;
-    WCHAR Name[1];
-} KEY_VALUE_FULL_INFORMATION,*PKEY_VALUE_FULL_INFORMATION;
-#endif
 
 DWORD compat_product_path_a(LPCWSTR relative, LPSTR path, DWORD capacity)
 {
@@ -46,7 +18,7 @@ DWORD compat_product_path_a(LPCWSTR relative, LPSTR path, DWORD capacity)
     return ERROR_SUCCESS;
 }
 
-#include "../../src/ntvdm-exe/softpc/mvdm_shadow_registry.c"
+#include "../../src/compat/mvdm_shadow_registry.c"
 
 static int require(LONG actual, LONG expected, LPCSTR label)
 {
@@ -78,6 +50,22 @@ int main(int argc, char **argv)
     CloseHandle(file);
     if (!ntvdm_shadow_registry_initialize()) return 5;
     if (require(ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"Baseline",&root),ERROR_SUCCESS,"open baseline")) return 52;
+    /* Native full-value ABI uses class 1; class 2 is partial information.
+     * Check wire offsets independently of the provider's private C layout. */
+    {
+        ULONG record[64], required=0;
+        memset(record,0xcc,sizeof(record));
+        if (require(ntvdm_shadow_nt_enumerate_value_key(root,1,1,record,
+                sizeof(record),&required),STATUS_SUCCESS,"native full enum")) return 84;
+        if (record[1]!=REG_SZ || record[2]!=28 || record[3]!=6 ||
+            record[4]!=6 || required!=34 ||
+            memcmp((BYTE *)record+20,L"Old",6) ||
+            memcmp((BYTE *)record+28,L"old",6)) return 85;
+        if (require(ntvdm_shadow_nt_enumerate_value_key(root,1,1,record,
+                20,&required),STATUS_BUFFER_TOO_SMALL,"native enum short")) return 86;
+        if (require(ntvdm_shadow_nt_enumerate_value_key(root,0,2,record,
+                sizeof(record),&required),STATUS_UNSUCCESSFUL,"native partial unsupported")) return 87;
+    }
     if (require(ntvdm_shadow_reg_set_value_ex(root,"Old",0,REG_SZ,(const BYTE *)"new",4),ERROR_SUCCESS,"override baseline")) return 53;
     if (require(ntvdm_shadow_reg_set_value_ex(root,"Added",0,REG_SZ,(const BYTE *)"added",6),ERROR_SUCCESS,"add baseline value")) return 54;
     data_size=sizeof(value);

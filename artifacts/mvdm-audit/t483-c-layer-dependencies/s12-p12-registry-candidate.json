@@ -1,0 +1,150 @@
+{
+  "status": "P12 final verified publication; included in delivery commit",
+  "nativeAbi": {
+    "source": "OpenNT/public/sdk/inc/ntregapi.h",
+    "fullClass": 1,
+    "partialClass": 2,
+    "nameOffset": 20,
+    "negative": "native-negative.exit=84; native full enum STATUS_UNSUCCESSFUL",
+    "positive": "native-positive.exit=0; T461_S3_REGISTRY_PERSISTENCE_OK"
+  },
+  "mirrorIncludeChanges": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "changes": [
+        [
+          "#include \"ntvdm-exe/softpc/include/mvdm_shadow_registry.h\"",
+          "#include \"compat/include/mvdm_shadow_registry.h\""
+        ]
+      ],
+      "lineCountUnchanged": true,
+      "errorAndLineUnchanged": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "changes": [
+        [
+          "#include \"common/wow/registry.h\"",
+          "#include \"compat/include/wow_registry.h\""
+        ]
+      ],
+      "lineCountUnchanged": true,
+      "errorAndLineUnchanged": true
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "changes": [
+        [
+          "#include \"common/wow/registry.h\"",
+          "#include \"compat/include/wow_registry.h\""
+        ]
+      ],
+      "lineCountUnchanged": true,
+      "errorAndLineUnchanged": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "changes": [
+        [
+          "#include \"common/wow/registry.h\"",
+          "#include \"compat/include/wow_registry.h\""
+        ]
+      ],
+      "lineCountUnchanged": true,
+      "errorAndLineUnchanged": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "changes": [
+        [
+          "#include \"common/wow/registry.h\"",
+          "#include \"compat/include/wow_registry.h\""
+        ]
+      ],
+      "lineCountUnchanged": true,
+      "errorAndLineUnchanged": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "changes": [
+        [
+          "#include \"ntvdm-exe/softpc/include/mvdm_shadow_registry.h\"",
+          "#include \"compat/include/mvdm_shadow_registry.h\""
+        ]
+      ],
+      "lineCountUnchanged": true,
+      "errorAndLineUnchanged": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "changes": [
+        [
+          "#include <common/wow/registry.h>",
+          "#include <compat/include/wow_registry.h>"
+        ]
+      ],
+      "lineCountUnchanged": true,
+      "errorAndLineUnchanged": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "changes": [
+        [
+          "#include <common/wow/registry.h>",
+          "#include <compat/include/wow_registry.h>"
+        ]
+      ],
+      "lineCountUnchanged": true,
+      "errorAndLineUnchanged": true
+    }
+  ],
+  "limits": [
+    "C0024 native-child snapshot lifetime remains open for S13",
+    "No full runtime regression claimed"
+  ],
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "ba983c55-ac73-48de-8c8c-d64d9956c865",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "finalBuild": {
+    "cachedBothArchitectures": 0,
+    "correctedX86": 0
+  },
+  "tests": {
+    "nativeNegative": 84,
+    "nativePositive": 0,
+    "embeddingChecks": 31,
+    "productBoundaryGraphs": 8
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "postPublication": {
+    "registryPersistence": "PASS",
+    "embedding": "31 checks, 0 failures",
+    "documentation": "PASS after updating two moved-source links",
+    "note": "First postpublication runner exit 1 was a missing Markdown link, after both behavioral tests passed."
+  },
+  "inputHashesVerified": 11,
+  "sourceSha256": "02039132fdbe1f49f9409ec4241061e5934fd9856ceeb925ba63c3a2c320c55e",
+  "tracker": {
+    "total": 617,
+    "open": 546,
+    "eliminated": 21,
+    "supporting": 44,
+    "eliminatedTransitive": 5,
+    "diagnostic": 1
+  },
+  "sequential": {
+    "reviewed": 2,
+    "fullyCleared": 1,
+    "total": 116
+  }
+}

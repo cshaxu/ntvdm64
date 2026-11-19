@@ -25,7 +25,7 @@
 #include <mvdm.h>
 #include <winbase.h>
 #include "demdasd.h"
-#include "common/wow/registry.h"
+#include "compat/include/wow_registry.h"
 #include "mvdm_command_guest_directory.h"
 #line 28
 

@@ -14,7 +14,7 @@
 #include <ctype.h>
 #include <string.H>
 #include "cmdkeyb.h"
-#include "common/wow/registry.h"
+#include "compat/include/wow_registry.h"
 #include "mvdm_softpc_firmware.h"
 #line 17
 

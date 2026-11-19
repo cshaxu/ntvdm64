@@ -88,3 +88,13 @@ C0165–C0171 已登记针对服务端绑定的处理判断。C0456 的 38 个�
 [逐文件明细](s12-p9-file-dependencies.json)按实际包含者或 COFF 调用者归责，每个文件列出直接包含、强制包含和链接符号编号。539 个编译上下文对应 519 个不同源文件，其中 251 个读到了外层头。110 个文件直接包含外层头（含 6 个头文件），9 个源文件被强制包含，3 个文件同时出现，去重共 116 个文件、158 个文件到目标头组合。链接绑定来自 170 个文件，编译与链接重叠 96 个，共涉及 190 个文件。仅搜索目录、间接包含和产品导入单独跟踪。
 
 [强制头对照](s12-p9-forced-headers.json)中 11 个对象分别在相同输出路径编译两次，只剔除 COFF 时间戳。仅 srvvdm.obj 等价。移除该对象多余的强制头后，basesrv.h 仍直接包含它，C0022 保持开放。两个 x64 服务夹具通过，11 个发布映像与 P5 的区别限于包 GUID 和 PE 时间戳。镜像差异变化 0 块、0 行。
+
+## P12 registry ownership
+
+[Evidence](s12-p12-registry-candidate.json): C0017, C0036 and C0205–C0211
+now resolve to B compat. WOW's product export bridge remains separately open.
+Native full-value enumeration uses original class 1 and Name offset 20;
+the rejected local class-2 candidate failed the new test and was never published.
+The tracker has 617 IDs: 546 open, 44 supporting, 21 eliminated,
+five eliminated transitive and one diagnostic. Mirror delta is zero points/lines.
+File 002 retains C0024 for S13; it is not fully cleared.

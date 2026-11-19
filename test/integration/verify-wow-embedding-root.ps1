@@ -1,4 +1,4 @@
-param([string]$Output='build/t478-s24/current',[string]$ProviderSource='src/ntvdm-exe/softpc/mvdm_shadow_registry.c')
+param([string]$Output='build/t478-s24/current',[string]$ProviderSource='src/compat/mvdm_shadow_registry.c')
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path;Set-Location $repo
 $target=[IO.Path]::GetFullPath((Join-Path $repo $Output))

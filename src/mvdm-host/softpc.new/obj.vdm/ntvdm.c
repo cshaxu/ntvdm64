@@ -10,7 +10,7 @@
 #include "host_rrr.h"
 #include "host_nls.h"
 #include "nt_timer.h"
-#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
+#include "compat/include/mvdm_shadow_registry.h"
 
 
 

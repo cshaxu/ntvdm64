@@ -24,7 +24,7 @@
         (OPENNT_VOID_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), \
         (flags), (thread_id), #start_routine)
 #include "compat/include/command_process_compat.h"
-#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
+#include "compat/include/mvdm_shadow_registry.h"
 #line 18
 
 //*****************************************************************************

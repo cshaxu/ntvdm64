@@ -13,7 +13,7 @@
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/monitor/include/monitor_context.h"
 #include "ntvdm-exe/wow/include/wow_user_session_binding.h"
-#include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
+#include "compat/include/mvdm_shadow_registry.h"
 #include "ntvdm-exe/win32/console_client.h"
 #include "ntvdm-exe/win32/worker_lifecycle.h"
 #include <stdlib.h>
