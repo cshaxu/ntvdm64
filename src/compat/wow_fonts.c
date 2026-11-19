@@ -214,4 +214,3 @@ void UnloadNetworkFonts(UINT owner_id)
     }
     LeaveCriticalSection(&wow_network_font_lock);
 }
-

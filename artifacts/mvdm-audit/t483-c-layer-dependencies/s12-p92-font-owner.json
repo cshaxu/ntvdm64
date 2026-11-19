@@ -512,7 +512,8 @@
       "nthook64.dll": true
     },
     "identityRule": "Only GUID and PE/debug timestamps masked; WOW32 differs, other 10 match.",
-    "documentationGate": "passed; build/t483-s12-font-owner/docs.exit=0"
+    "documentationGate": "passed; build/t483-s12-font-owner/docs.exit=0",
+    "formatFollowUp": "Removed trailing blank line after initial P92 commit; function tokens unchanged. Published binary and runtime evidence unchanged; no rebuild for whitespace-only cleanup under owner authorization."
   },
   "publication": {
     "package": "81afdfb3-2a7e-4b14-a08e-917573c7ed5b",
