@@ -14,6 +14,8 @@
 
 001 具体接线候选：B 持有当前线程的只读目录上下文，提供现有 NtvdmGetWindowsDirectoryA/W 与 NtvdmGetSystemDirectoryA/W 同形接口。F 通过现有 session_register_thread_hook 在 bind 时绑定目录、unbind 时解除，复用 session 的失败回滚和线程计数。B 不包含 session、common 或任何外层头，也不回调 F 取目录。上下文所指存储的寿命必须覆盖绑定，禁止额外维护第二份可变根目录。需验证无绑定失败、显式根、两个线程不同根、解绑后查询、短缓冲和编码转换。当前仅设计，未实施；镜像变化 0 点、0 行。
 
+001 隔离候选验证：从现有 firmware.c 提取目录查询函数，仅将 session 查根替换为线程绑定的 const char * 根指针。x86 MSVC /W4 编译通过，无警告；显式根、空绑定、所需长度、短缓冲、ANSI/Wide、双线程根隔离、解绑查询通过。证据位于 build/t483-s12-directory。尚未接入产品，不计为依赖消除；系统目录存在性、非 ASCII 编码及 session 回滚仍待验证。
+
 ## 002 — src/mvdm-host/dos/command/cmdexec.c
 
 - 直接包含 · C0024 · ntvdm-exe · src/ntvdm-exe/command/include/mvdm_command_native_child.h
