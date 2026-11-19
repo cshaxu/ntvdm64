@@ -40,6 +40,7 @@ $units = @(
     @('profile_existing_fixture', 'test/adapter-mvdm-host-out/wow/wow_task_profile_fixture.c', '/DWOW_PROFILE_EXISTING_KEY'),
     @('profile_owner', 'src/non-mvdm/windows/core/ntuser/kernel/profile.c', ''),
     @('profile_binding', 'src/wow32-dll/source/wow_task_profile_binding.c', ''),
+    @('profile_native', 'src/compat/wow_profile_native.c', ''),
     @('capture_fixture', 'test/adapter-mvdm-host-out/wow/wow_user_capture_fixture.c', ''),
     @('capture_owner', 'src/non-mvdm/windows/core/ntuser/client/rtlinit.c', '/Gy'),
     @('capture_tls', 'src/compat/opennt_support_rtl.c', '/Gy'),
@@ -311,7 +312,7 @@ $lines.Add('  libs = /OPT:REF')
 $lines.Add('build original-default-bits-boundary: phony bin/wow_def_window_bits_fixture.exe')
 $lines.Add('build bin/wow_original_dde_free_fixture.exe: link obj/dde_data_fixture.obj obj/dde_data_owner.obj')
 $lines.Add('build original-dde-data-boundary: phony bin/wow_original_dde_free_fixture.exe')
-$lines.Add('build bin/wow_task_profile_fixture.exe: link obj/profile_fixture.obj obj/profile_owner.obj obj/profile_binding.obj')
+$lines.Add('build bin/wow_task_profile_fixture.exe: link obj/profile_fixture.obj obj/profile_owner.obj obj/profile_binding.obj obj/profile_native.obj')
 $lines.Add('  libs = advapi32.lib ntdll.lib')
 $lines.Add('build bin/wow_task_profile_existing_fixture.exe: link obj/profile_existing_fixture.obj obj/profile_owner.obj')
 $lines.Add('  libs = advapi32.lib ntdll.lib')

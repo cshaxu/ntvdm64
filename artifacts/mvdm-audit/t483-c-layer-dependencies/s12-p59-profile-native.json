@@ -1,0 +1,134 @@
+{
+  "baseline": "1ccb5183800234727844b1bd3adb9e211ad42990",
+  "status": "P59 native profile opening boundary migration",
+  "files": [
+    {
+      "number": 105,
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "sha256": "430b9033d7767f4112fec8cd9c492df249b8356934877b1c16de379b3c45c911",
+      "compilerObject": "obj/opennt-user/profile.obj",
+      "coffUndefined": [
+        "__imp__HeapAlloc@12",
+        "__imp__HeapFree@12",
+        "__imp__GetProcessHeap@0",
+        "__imp__RegCloseKey@4",
+        "_RtlInitUnicodeString@8",
+        "_RtlIntegerToUnicodeString@12",
+        "_RtlUnicodeStringToInteger@12",
+        "__imp__NtQueryValueKey@24",
+        "_wow_profile_open_key@8",
+        "@__security_check_cookie@4",
+        "___security_cookie"
+      ],
+      "stableSymbols": [
+        "C0459"
+      ],
+      "objectSha256": "f8286233da0eaed18d6386199ce16299b6c6e5c9ae7075e55b04a43030d7dcfc",
+      "dependencies": [
+        "obj/opennt-user/profile.obj: #deps 13, deps mtime 8167781897329432 (VALID)",
+        "    ../../../../src/compat/include/nt_event_declarations.h",
+        "    ../../../../src/compat/include/ntioapi.h",
+        "    ../../../../src/compat/include/opennt_support_thread.h",
+        "    ../../../../src/compat/include/opennt_support_types.h",
+        "    ../../../../src/compat/include/wow_profile_native.h",
+        "    ../../../../src/compat/include/wow_user_declarations.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/devioctl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nt.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "    ../../../../src/non-mvdm/public/sdk/inc/nturtl.h",
+        "    ../../../../src/wow32-dll/include/wow_task_profile_bindings.h",
+        ""
+      ],
+      "mapProviders": [
+        "0001:000755b0       _wow_profile_open_key@8    100765b0 f   wow_profile_native.obj",
+        "0001:00075b39       @__security_check_cookie@4 10076b39 f   LIBCMT:secchk.obj",
+        "0001:0008cb01       _RtlInitUnicodeString@8    1008db01 f   legacy-wow-ntdll:NTDLL.DLL",
+        "0001:0008cb5b       _RtlIntegerToUnicodeString@12 1008db5b f   legacy-wow-ntdll:NTDLL.DLL",
+        "0001:0008cb61       _RtlUnicodeStringToInteger@12 1008db61 f   legacy-wow-ntdll:NTDLL.DLL",
+        "0002:00000004       __imp__RegCloseKey@4       1008e004     advapi32:ADVAPI32.dll",
+        "0002:000003e4       __imp__GetProcessHeap@0    1008e3e4     kernel32:KERNEL32.dll",
+        "0002:000005c8       __imp__HeapFree@12         1008e5c8     kernel32:KERNEL32.dll",
+        "0002:000005d0       __imp__HeapAlloc@12        1008e5d0     kernel32:KERNEL32.dll",
+        "0002:00000710       __imp__NtQueryValueKey@24  1008e710     legacy-wow-ntdll:NTDLL.DLL",
+        "0003:000038c0       ___security_cookie         100a38c0     LIBCMT:gs_cookie.obj"
+      ],
+      "nativeProviderDependencies": [
+        "obj/compat/wow_profile_native.obj: #deps 1, deps mtime 8167781247531135 (VALID)",
+        "    ../../../../src/compat/include/wow_profile_native.h",
+        ""
+      ]
+    }
+  ],
+  "original": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "windows/core/ntuser/kernel/profile.c",
+    "review": "Original aFastRegMap, OpenCacheKeyEx, current-user setup/close and complete selected current FastGetProfile* source inspected. Original indexes5/14 select current-user Desktop and machine Compatibility. No new original code copied."
+  },
+  "change": {
+    "from": "src/wow32-dll/source/wow_task_profile_binding.c::wow_profile_open_key",
+    "to": "src/compat/wow_profile_native.c",
+    "declarations": "src/compat/include/wow_profile_native.h",
+    "bodyIdentical": true,
+    "remainingWrapperIdentical": true,
+    "header": "Replace unused task-order include with SDK headers and opaque wow_task_order_process declaration. Preserve parameter type and calling convention. Mixed NT profile declarations remain in F header pending S14; no duplicated original NT layouts.",
+    "build": "Native B object uses SDK-only flags; actual VALID dependencies contain only its B project header. Production and existing profile fixture graphs select one provider."
+  },
+  "mechanisms": {
+    "algorithm": "Original C FastGetProfileDwordW/StringW/IntW own queries, defaults, allocation/free/close, text conversion and returned lengths. Product map resolves RTL conversions and NtQueryValueKey to NTDLL, heap to KERNEL32 and close to ADVAPI32; no F implementation hidden behind an image export.",
+    "native": "Moved body accepts only KEY_READ; section14 uses HKLM Compatibility with explicit64-bit view, section5 uses HKCU Desktop. No registry writes, synthetic values, task state, cache or impersonation. Unsupported section/access returns null. This is existing finite compatibility binding, not reimplementation of original query policy.",
+    "wrapper": "wow_task_profile remains F with existing opaque process argument and bounded caller validation before invoking C FastGetProfileStringW. C profile.c does not call this wrapper. Removing the header dependency does not move task policy B.",
+    "header": "C0118 still directly includes F wow_task_profile_bindings.h because it composes original NT registry declarations and selected mirror macros. Moving wholesale B would create B-to-C dependency. S14 must review original header placement instead of copying NT structures.",
+    "limits": "This move does not prove modern user/registry views globally equivalent to NT4 impersonation. It preserves the currently selected machine/current-user read-only contract."
+  },
+  "progress": {
+    "reviewedFiles": 105,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 71,
+    "deferredSourceAbiCompositionFiles": 17,
+    "unreviewedFiles": 11,
+    "totalFiles": 116,
+    "openIds": 499,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Cached x86/x64 completed; final x86 rebuild after opaque declaration cleanup, four x86 worker images and coherent staging passed.",
+    "identity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityLimit": "Ten images equal P57 after masking GUID and PE timestamps; WOW32 differs. No runtime waiver for WOW32.",
+    "targeted": "Existing original-profile-boundary: WOW_TASK_PROFILE errors0 native_absence1 repeats32 invalid4, handles83->83. WOW_PROFILE_EXISTING errors0 repeats32 success1 truncation2 missing2 dword_success1 dword_missing1. Existing-key fixture substitutes only opening boundary; production-opening absence fixture uses actual native function. No registry writes.",
+    "boundaries": "Eight A/B production graphs passed;148 selected WOW objects and9 negative controls passed.",
+    "runtime": "runtime.exit0: existing real x86 CCPU40 Winmine/Sol/Write frontier checks passed; owned short physical stage cleaned in finally. These include retained historical status frontiers, not full interaction/gameplay acceptance.",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "a287f10d-c93a-4720-833c-5eee7bfd6e99",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-profile-native/docs.log and docs.exit. git diff --check passed; changed autonomous sources LF, mirror profile.c byte-identical to HEAD; all22 published hashes reverified.",
+    "publicationOrder": "Targeted and isolated runtime checks before publication; no production processes stopped."
+  },
+  "limits": "No mirror byte/#error/#line change, guest build/edit, addon or winnt.zip change. Only S12 active."
+}

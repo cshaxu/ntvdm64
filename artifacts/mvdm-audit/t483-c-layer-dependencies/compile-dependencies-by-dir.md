@@ -682,6 +682,8 @@
 
 - 直接包含 · C0118 · wow32-dll · src/wow32-dll/include/wow_task_profile_bindings.h
 
+105 P59: C0459 native profile opener moved B unchanged; unused task include removed. Original query/default policy stays C; C0118 NT ABI composition remains S14. Mirror0/0. See s12-p59-profile-native.json.
+
 ## 106 — src/non-mvdm/windows/core/ntuser/kernel/queue.c
 
 - 直接包含 · C0116 · wow32-dll · src/wow32-dll/include/wow_task_init_bindings.h

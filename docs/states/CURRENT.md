@@ -176,4 +176,6 @@ P56: [Class lookup ABI](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12
 
 P57: [Cleanup/event delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p57-cleanup-event.json).
 
-P58: [Private-word setter](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p58-private-word-ownership.json). Reviewed104/116:17 clear,71 lifecycle,16 ABI;12 remain. Open500/617. Mirror0/0; cumulative reduction2 points/10 lines. Production unchanged; P57 publication hashes verified. S12 active.
+P58: [Private-word ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p58-private-word-ownership.json).
+
+P59: [Native profile boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p59-profile-native.json). Reviewed105/116:17 clear,71 lifecycle,17 ABI;11 remain. Open499/617. Mirror0/0; cumulative reduction2 points/10 lines. Cached builds, profile checks, retained Win16 frontiers and dual publication passed. S12 active.

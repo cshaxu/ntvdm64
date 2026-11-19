@@ -233,3 +233,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P57 Cleanup/event ownership](s12-p57-cleanup-event.json): files102-103; native event reference moved to B, lifecycle responsibilities remain explicit. Review103/116,500/617 open.
 
 [P58 Private-word setter](s12-p58-private-word-ownership.json): file104; original storage rules retained, three F edges classified. Review104/116,500/617 open; production unchanged.
+
+[P59 Native profile boundary](s12-p59-profile-native.json): file105; native read-only opener moves to B, original query policy unchanged. Review105/116,499/617 open.

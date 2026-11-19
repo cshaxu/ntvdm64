@@ -1,12 +1,14 @@
 #ifndef WOW_TASK_PROFILE_BINDINGS_H
 #define WOW_TASK_PROFILE_BINDINGS_H
-#include "wow_task_order_bindings.h"
+#include <windows.h>
+#include <winternl.h>
+typedef struct wow_task_order_process wow_task_order_process;
 #include <nt.h>
 #include <stddef.h>
+#include "wow_profile_native.h"
 #include <wchar.h>
 #include "non-mvdm/public/sdk/inc/ntregapi.h"
 UINT WINAPI wow_task_profile(wow_task_order_process *, UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
-HANDLE WINAPI wow_profile_open_key(UINT, ACCESS_MASK);
 DWORD WINAPI FastGetProfileStringW(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
 UINT WINAPI FastGetProfileIntW(UINT, LPCWSTR, UINT);
 DWORD WINAPI FastGetProfileDwordW(UINT, LPCWSTR, DWORD);
