@@ -298,3 +298,11 @@ call signatures. B owns no captured guest data, request/session lifecycle or
 native launch policy and imports no outer provider. The installing product
 retains those responsibilities; a missing binding fails rather than silently
 selecting another execution route.
+
+## Console keyboard query boundary
+
+`console_keyboard.c` retains the `GetConsoleKeyboardLayoutNameA` and
+`MvdmGetConsoleCP` symbols and WINAPI signatures. Its immutable operation table
+is installed by the NTVDM product before original execution. The product
+continues to own frontend selection, session state, channel locking and native
+no-frontend queries; B holds no Console state and imports no outer provider.

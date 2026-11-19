@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has455 open direct dependency IDs.
+**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has453 open direct dependency IDs.
 
 ## Active Packet
 
@@ -27,11 +27,11 @@
 
 ## Current Technical Baseline
 
-S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P4 below supersedes both published copies.
+S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P5 below supersedes both published copies.
 
-S13 P4: [COMMAND boundary delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p4-command-boundary.json). cmdexec.c retains its original algorithm and now uses an explicitly installed B service contract; F retains snapshots, session lifetime and native launch policy. Twelve IDs eliminated:113 eliminated/455 open of618. Cached x86/x64/reference builds,8 A/B graphs,149 capture and65 launch assertions,actual native EDIT return and repeated DIR passed. Packagef30baa1d-9c83-4034-a7e7-0ca3d6bc7a3c is published to both destinations with22 verified hashes. Only NTVDM changes after identity normalization; no Full claim. File mirror diff remains16 points/78 lines,delta0/0;cumulative reduction2 points/10 lines. S13 has cleared17 IDs; the remaining ownership groups are not complete. S14 remains unadmitted.
+S13 P5: [Console keyboard query boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p5-console-keyboard-boundary.json). cmdkeyb.c remains byte-identical; both query symbols now resolve to B, with explicit F-installed operations retaining frontend/session ownership. Two IDs eliminated:115 eliminated/453 open of618. Cached x86/x64/reference builds,8 A/B graphs,three Console transport cases and actual native EDIT return passed. Package3b266c46-62fd-4735-9c9c-fbae59c3acac is published to both destinations with22 verified hashes. Only NTVDM changes after identity normalization; no Full claim. File mirror diff remains2 points/4 lines,delta0/0;cumulative reduction2 points/10 lines. S13 has cleared19 IDs;remaining ownership groups are not complete. S14 remains unadmitted.
 
-The preceding [P3 thread delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p3-thread-boundary.json) remains evidence for both NTVDM and VDMREDIR composition and real guest redirector checks.
+The preceding [P4 COMMAND delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p4-command-boundary.json) closes cmdexec.c outward edges; [P3 thread delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p3-thread-boundary.json) retains per-image lifecycle and actual guest redirector evidence.
 
 ## S12 Closure Record
 

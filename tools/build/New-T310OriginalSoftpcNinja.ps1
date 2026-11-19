@@ -1951,7 +1951,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/worker_lifecycle.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/worker_lifecycle.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj frontend-base.lib worker-base.lib lib-handle.lib ' + $consoleGridObject)
+    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/compat/console_keyboard.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj frontend-base.lib worker-base.lib lib-handle.lib ' + $consoleGridObject)
     $graph.Add('build obj/tests/softpc_text_video.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/softpc/softpc_text_video_test.c')))
     $graph.Add('build softpc-text-video-test.exe: console_test_link obj/tests/softpc_text_video.obj obj/adapter-softpc/mvdm_softpc_text_video.obj')
     $graph.Add('build obj/tests/console_text_producer.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/win32/console_text_producer_test.c')))
@@ -2109,7 +2109,9 @@ $graph.Add('build wow-worker-bindings.lib: lib ' + ($adapterWowWorkerObjects -jo
 $graph.Add('build rtl-x86-fixture.exe: rtl_fixture_link ' + $rtlX86FixtureObject + ' original-opennt-rtl-x86.lib')
 $graph.Add('build environment-projection-fixture.exe: rtl_fixture_link ' + $environmentProjectionFixtureObject + ' original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-win32-bindings.lib')
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
-$graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' '))
+$graph.Add('build obj/compat/console_keyboard.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_keyboard.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' ') + ' obj/compat/console_keyboard.obj')
 # Worker composition contains only reached COMMAND/BOP support.  It has no
 # local BaseVDM producer, retry loop or single-process queue.
 $graph.Add('build obj/compat/command_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/command_services.c')))

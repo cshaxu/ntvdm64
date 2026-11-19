@@ -339,6 +339,8 @@ int main(int argc,char **argv)
     BOOL broken_video=argc==2 && !strcmp(argv[1],"--broken-video");
     BOOL broken_pipe=broken_video || (argc==2 && !strcmp(argv[1],"--broken-pipe"));
     BOOL variable_video=argc==2 && !strcmp(argv[1],"--variable-video");
+    CHECK(!compat_console_keyboard_install(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
+    CHECK(ntvdm_console_keyboard_initialize() && ntvdm_console_keyboard_initialize());
     if(argc==2 && !strcmp(argv[1],"--input-terminal")) {
         SetLastError(ERROR_PIPE_NOT_CONNECTED);
         CHECK(!ntvdm_worker_lifecycle_input_terminal());

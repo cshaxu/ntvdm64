@@ -9,6 +9,7 @@
 #include "common/console/client.h"
 #include "common/protocol/frontend_protocol.h"
 #include "compat/include/console_grid.h"
+#include "compat/include/console_keyboard.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "worker-base/connection.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
@@ -503,7 +504,7 @@ COORD WINAPI MvdmGetConsoleFontSize(HANDLE output,DWORD index)
     return size;
 }
 
-UINT WINAPI MvdmGetConsoleCP(void) { return console_code_page(TRUE); }
+static UINT WINAPI input_code_page(void) { return console_code_page(TRUE); }
 UINT WINAPI MvdmGetConsoleOutputCP(void) { return console_code_page(FALSE); }
 
 BOOL WINAPI MvdmGetConsoleDisplayMode(LPDWORD mode)
@@ -535,7 +536,7 @@ BOOL WINAPI MvdmSetConsoleDisplayMode(HANDLE output,DWORD flags,PCOORD size)
 
 /* DIVERGENCE(ADAPTER-WIN32-034): retain the historical BOOL/name contract
  * through the actual Console owner. No thread-HKL fallback or locale cache. */
-BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name)
+static BOOL WINAPI keyboard_layout_name(LPSTR name)
 {
     session *owner=session_thread_current();
     console_client *client=owner ? owner->console_client : NULL;
@@ -560,6 +561,14 @@ BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name)
     LeaveCriticalSection(&client->lock);
     SetLastError(error);
     return error==ERROR_SUCCESS;
+}
+
+BOOL ntvdm_console_keyboard_initialize(void)
+{
+    static const compat_console_keyboard services = {
+        input_code_page, keyboard_layout_name
+    };
+    return compat_console_keyboard_install(&services);
 }
 
 DWORD WINAPI MvdmGetConsoleTitleA(LPSTR title,DWORD capacity)

@@ -228,3 +228,7 @@ the B service contract before original worker execution. Existing native-child
 capture/release and native launch providers remain product-owned. Borrowed
 strings retain their existing lifetime through finish; the table does not
 introduce another snapshot, request registry or mutable command state.
+
+`ntvdm_console_keyboard_initialize` installs the two existing Console keyboard
+queries at worker entry. Their frontend/native selection and error behavior
+remain in `win32/console_client.c`; B retains the original query symbols.

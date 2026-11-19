@@ -4,7 +4,8 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$LogPrefix,
     [string]$LogRoot='O:/winnt/logs',
-    [switch]$ExpandedBackend
+    [switch]$ExpandedBackend,
+    [string[]]$Only
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
@@ -29,6 +30,12 @@ $cases=@(
     @{Name='console-client-test';Suffix='broken';Arg='--broken-pipe';Witness='native error and idle frontend loss'},
     @{Name='console-client-test';Suffix='close-hang';Arg='--close-hang';Exit='c000013a';Witness='original-shape close callback'}
 )
+if($Only){
+    foreach($name in $Only){
+        if($name -notin $cases.Name){throw "Unknown contract: $name"}
+    }
+    $cases=@($cases | Where-Object {$_.Name -in $Only})
+}
 if($ExpandedBackend){
     & (Join-Path $repo 'test/observation/verify-ntvwm-console-state.ps1') `
         -BuildRoot ((Join-Path $BuildRoot ($LogPrefix+'-ntvwm-state')).Substring($repo.Length+1)) `

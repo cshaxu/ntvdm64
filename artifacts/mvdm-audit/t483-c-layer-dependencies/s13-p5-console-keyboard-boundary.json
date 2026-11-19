@@ -1,0 +1,162 @@
+{
+  "baseline": "156dba44f14b397217505f166d6ffe3de9130bf5",
+  "scope": "T483 S13 P5: cmdkeyb.c direct keyboard-layout and input-code-page query dependencies",
+  "ids": [
+    "C0262",
+    "C0268"
+  ],
+  "ownership": {
+    "C": "cmdkeyb.c remains byte-identical, including original keyboard decision, registry queries and guest output behavior.",
+    "B": "Same symbols and WINAPI signatures dispatch through one immutable two-operation table. SDK-only imports; no session, channel, lock or keyboard state.",
+    "F": "Existing session_console selection, protocol exchange, locking, error transfer and no-frontend native query bodies preserved. Worker entry installs before original execution."
+  },
+  "whyNotNativeInC": "The code calls the authenticated frontend Console when a session has a client. Direct worker Console APIs would query a different Console, losing the established remote ownership. No locale/HKL inference or cache is introduced.",
+  "providerEvidence": {
+    "preservedBodies": [
+      "MvdmGetConsoleCP -> static input_code_page",
+      "GetConsoleKeyboardLayoutNameA -> static keyboard_layout_name"
+    ],
+    "Bundefined": [
+      "__imp__SetLastError@4",
+      "__imp__RaiseFailFastException@12"
+    ],
+    "mirrorUnchanged": true
+  },
+  "actualMap": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map: GetConsoleKeyboardLayoutNameA@4 and MvdmGetConsoleCP@0 now resolve to softpc-win32-bindings:console_keyboard.obj; graph source is src/compat/console_keyboard.c.",
+  "headerEvidence": "cmdkeyb compiler dependency listing contains no D/E/F header. C0039 retains cmdkeyb only as historical evidence; its still-open current consumer is cmdmisc, not this file.",
+  "mirror": {
+    "file": "src/mvdm-host/dos/command/cmdkeyb.c",
+    "before": {
+      "points": 2,
+      "added": 3,
+      "deleted": 1,
+      "lines": 4
+    },
+    "after": {
+      "points": 2,
+      "added": 3,
+      "deleted": 1,
+      "lines": 4
+    },
+    "delta": {
+      "points": 0,
+      "lines": 0
+    },
+    "lineProof": "No mirror file modified. Original #error/#line and exact source hashes unchanged.",
+    "metric": {
+      "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+      "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+      "files": [
+        {
+          "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+          "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdkeyb.c",
+          "original_sha256": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba",
+          "current_sha256": "a410fd2b9b71d765ec2807b6e91485d9aba080e7c7a0c5183448a5fa62685804",
+          "raw": {
+            "blocks": 2,
+            "added": 3,
+            "deleted": 1
+          },
+          "filtered": {
+            "blocks": 2,
+            "added": 3,
+            "deleted": 1
+          },
+          "excluded": [],
+          "issues": [],
+          "rank": 1
+        }
+      ]
+    }
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "verification": {
+    "cachedBuild": "build.exit=0: x86/x64 production graphs and explicit x86 image targets",
+    "referenceWorker": "deliver.exit=0: reference-x86 NTVDM",
+    "ABgraphs": "Eight production graphs pass in deliver-test.out. B COFF imports only SetLastError and RaiseFailFastException.",
+    "fixtures": "Existing verify-frontend-transport-contracts.ps1 -Only console-client-test: normal exit0x49, broken-pipe exit0, hung-close exit0xc000013a all pass on owned private desktop. Main positive flow exercises actual frontend layout API result/error and unchanged output, null argument rejection and CP437/850 queries; callbacks for lifecycle and broker are fixture substitutes.",
+    "testSelection": "Optional -Only filters existing named contracts, rejects unknown names, leaves default full selection unchanged. No assertion weakened or replacement fixture created.",
+    "nativeGuest": "Existing verify-command-native-edit-return.ps1 against published package: actual EDIT screen, Ctrl+Q, CMD echo, DOS MEM and expected launcher completion passed. Physical isolated stage and short PATH; no guest changes.",
+    "sourceBodyProof": "Both F query operation bodies equal pre-change bodies; only their private names and B dispatch ownership changed.",
+    "notClaimed": [
+      "No Full suite run; owner default targeted tests applies.",
+      "Not a claim that native layout API always succeeds: original failure is returned, not fabricated as a layout.",
+      "Historical standalone host-input graph has its new link dependency updated; not independently exercised in this batch."
+    ]
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "3b266c46-62fd-4735-9c9c-fbae59c3acac",
+    "hashVerified": true,
+    "stopped": 0,
+    "finalPreCommitHashCheck": true
+  },
+  "normalizedImages": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "executionEvidence": {
+    "build": {
+      "command": "try { & 'O:/repos.hobby/ntvdm64/build/t483-s13-console-boundary/build.ps1'; $rc=$LASTEXITCODE } catch { $_ | Out-String | Write-Output; $rc=1 }; $rc | Set-Content 'O:/repos.hobby/ntvdm64/build/t483-s13-console-boundary/build.exit'; exit $rc",
+      "pid": 23152,
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "start": "2026-11-19T13:17:25.4309376Z"
+    },
+    "deliver-test": {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "command": "try { & 'O:/repos.hobby/ntvdm64/build/t483-s13-console-boundary/deliver.ps1'; $rc=$LASTEXITCODE } catch { $_ | Out-String | Write-Output; $rc=1 }; $rc | Set-Content 'O:/repos.hobby/ntvdm64/build/t483-s13-console-boundary/deliver.exit'; if ($rc -eq 0) { & 'O:/repos.hobby/ntvdm64/build/t483-s13-console-boundary/targeted.ps1'; exit $LASTEXITCODE }; exit $rc",
+      "start": "2026-11-19T13:20:18.3354469Z",
+      "pid": 38032
+    },
+    "check": {
+      "pid": 1012,
+      "start": "2026-11-19T13:22:34.5165894Z",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "command": "try { & 'O:/repos.hobby/ntvdm64/build/t483-s13-console-boundary/check.ps1'; $rc=$LASTEXITCODE } catch { $_ | Out-String | Write-Output; $rc=1 }; $rc | Set-Content 'O:/repos.hobby/ntvdm64/build/t483-s13-console-boundary/check.exit'; exit $rc"
+    }
+  },
+  "progress": {
+    "stableIds": 618,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 453,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 115
+    },
+    "S13Cleared": 19,
+    "cmdkeybRemainingActualDirectEdges": 0,
+    "S14": "not admitted"
+  },
+  "sourceHashes": {
+    "src/compat/README.md": "9a256add7156cd8e7a84e54a20fa3c8e89f138012a2b87ef2d1a9836f2f7633c",
+    "src/compat/include/winconp.h": "a46a81d80950c835f59e89ca07c979c57093a89a0ee49e91962ebd02867e5cef",
+    "src/ntvdm-exe/README.md": "fba8fc9e3589b8544ff36f6dc5115e7eedcc9377dbc394a6c326208153e61f5b",
+    "src/ntvdm-exe/softpc/mvdm_standalone_worker.c": "ddcfa9131eecd9307e926be480c9f26d8c55d9b3d6c966c44659d3e690761745",
+    "src/ntvdm-exe/win32/console_client.c": "be687b9a4df8ba4cfb62394864f02cde6eb508d93f301e47dce54d1a9d441210",
+    "src/ntvdm-exe/win32/console_client.h": "43ba3dbd57465724fff750e7da0d0aa6f9a204c04015dfe7ff7d32906df005bb",
+    "test/integration/verify-frontend-transport-contracts.ps1": "c9fefda57e291edf00477a077bf8bc7cc05598bb7140ca46ff2f5eb0eda2406f",
+    "test/ntvdm-exe/win32/console_client_test.c": "75f6bdd64f8b9ff660c36f98148697bb8bb31d10fd4432f27a2fd6571b0bb012",
+    "tools/build/New-T310HostInputNinja.ps1": "ded9a389fab905de97bd7acb9e9efab5446ec1fae9f8371da47b94dfaaa2edf1",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "2ff0b5b743264c57154be08d746ac1f322934b2e3202b46aaf19ae304b28a1d6",
+    "src/compat/console_keyboard.c": "6e1dd57eb7ff8f11b55fbc807c15c29548c4617acebb90149a84e2a0a9a538de",
+    "src/compat/include/console_keyboard.h": "2879af400abb62112553b9388022608ab15e6caea9f31475b8f2fbf962a8ad20"
+  },
+  "documentationGate": "Passed: check.exit=0; worker boundary, documentation governance, relative links and git diff --check."
+}
