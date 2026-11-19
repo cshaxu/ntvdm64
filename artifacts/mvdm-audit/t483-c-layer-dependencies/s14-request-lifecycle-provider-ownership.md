@@ -32,3 +32,30 @@ record interpretation and outer dispatch. Existing C carrier selection and
 mirror cost remain required for record/state operations; moving declarations
 or callbacks is not closure. No product code changed, no runtime tests run,
 and no ledger IDs eliminated. Eight bodies cover fifteen open symbol records.
+
+
+## S14 P49: complete service, launch transport and Run16 bodies
+
+Baseline abaf38657. Full reads now include ntsrv-exe/opennt/source/service_core.c
+(previously partial), common/base_srv/base_rpc_client_launch.c and
+run16-exe/main.c. This adds three provider files/six symbol records, not
+eliminated dependencies. Production and mirror changes remain zero.
+
+| Chain | Concrete migration decision |
+| --- | --- |
+| Service core | Keep NTSRV connections, reservations, authenticated frontend association, process watches and shutdown orchestration outer. The one direct-ledger symbol in this file is not authority to move the service core. UserNotifyProcessCreate is a null original optional hook: recover its original storage ownership separately, without importing NTSRV management into C/B or inventing a callback. |
+| Connection versus process lifetime | Disconnect abandons connection work but does not call original VDM cleanup for a still-running resident worker; the retained process watch owns that event. Registration derives PID/generation from retained handles. Route matching prefers exact authenticated process grant before Console fallback. Preserve late-binding close transactions, not just list membership. |
+| RPC launch transport | Request/reply generation checks, typed stream attachments, parent receipt and broker protocol remain D/outer. Original BASE interpretation should be separated at C's call boundary, not move this whole RPC file to B. Independent byte/handle mechanics can reuse existing A/B providers, with no second authenticated connection. |
+| Attachments and waits | Preserve stdout/stderr alias receipts and revoke each distinct receipt once. Unconsumed returned handles are closed even on cancellation. WaitObjectForVDM duplicates are retained as one ConsoleRecord event until ExitVDM, distinct from a launcher's parent event/receipt. Receipt consumption on exit-code retrieval must remain tied to its matching parent handle. |
+| Command delivery | observation_direct is stored on actual delivery and is one client-level value, not a permanent identity for simultaneous guest programs. command_ready executes only after a successful actual command delivery. Neither field can become completion authority during architecture migration; earlier multi-task identity limits remain explicit. |
+| Run16 | CLI resolution, frontend selection, broker bootstrap, submission and receipt waits stay F. Original BaseCheckVDM and environment projection remain C. Suffix descriptors and CsrPortHeap are separately identifiable original-facing storage; their ownership can be moved without moving the CLI entry. |
+| Launch sequencing | Preserve matching ANSI/Unicode environment projection and child-only WIN16DIR, leaving host SYSTEMROOT intact. Existing resident-worker reply waits on parent receipt rather than creating a worker. After service startup is attempted, NTSRV owns rollback; before that boundary the launcher uses original undo-creation. Do not duplicate both cleanup paths. |
+| Completion and readiness | WOW startup readiness is re-read after waits to handle completion racing publication; task exit zero is not automatically InitTask success. Worker-process death is not a substitute for a task receipt. Bootstrap retry is bounded before submission; it cannot be reused to replay an admitted request. Numeric task exit codes remain distinct from latched transport failure. |
+
+Implementation order: separate original-owned storage from product entry units;
+retain C classification/record algorithms; retain authenticated transport and
+request lifecycle outside; design the narrow C-to-host operation boundary
+without importing the broker or hiding an outer callback in B. The present
+bodies prove these responsibilities, but do not yet provide a reviewed patch
+or measured mirror cost. Those remain required before relocation. No new
+runtime or failure-path verification is claimed by this source review.

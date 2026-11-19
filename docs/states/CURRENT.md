@@ -84,7 +84,7 @@ and260 symbol records, plus8 associated bodies; no row is marked eliminated.
 [CPU/execution review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-cpu-execution-provider-ownership.md)
 and [device/presentation review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-device-presentation-provider-ownership.md)
 and [request/lifecycle review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-request-lifecycle-provider-ownership.md)
-add22 providers/42 symbol records: combined73/79 files and302/345
+add25 providers/48 symbol records: combined76/79 files and308/345
 symbol records. C descriptor/IRQ carriers are identified; initialization and
 thread-exit orchestration still need lifetime proof. No production changes.
 S14 P19 removes the F guest-location source/private header and three-operation

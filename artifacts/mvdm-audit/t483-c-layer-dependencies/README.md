@@ -504,3 +504,8 @@ is65/79 providers and287/345 symbol rows; no dependencies eliminated.
 [Request/lifecycle ownership](s14-request-lifecycle-provider-ownership.md) adds eight complete bodies.
 Combined coverage is73/79 providers and302/345 symbol rows; no dependency
 elimination or production migration is claimed.
+
+P49 completes service_core, launch RPC and Run16 entry body reviews in the
+[request/lifecycle record](s14-request-lifecycle-provider-ownership.md).
+Combined coverage is76/79 providers and308/345 symbol rows; no dependency
+elimination is claimed.
