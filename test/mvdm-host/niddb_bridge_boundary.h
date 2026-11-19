@@ -1,6 +1,6 @@
 /* NIDDB-only fixtures never issue the independent frontend bridge signature.
  * Reject that separate test scope rather than fabricate a successful bridge. */
-#include "../../src/ntvdm-exe/softpc/include/mvdm_vm_bridge.h"
+#include "../../src/compat/include/vm_services.h"
 
 uint32_t c_getECX(void) { return 0; }
 uint32_t c_getEDX(void) { return 0; }
@@ -18,4 +18,13 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
     (void)vm; (void)ring0; (void)result;
     if (signature == MVDM_VM_BRIDGE_SIGNATURE) abort();
     return 0;
+}
+
+/* The original object now reaches this same rejecting fixture through B. */
+const compat_vm_services *compat_vm_current_services(void)
+{
+    static const compat_vm_services services = {
+        mvdm_vm_bridge_bop, ClearInstanceDataMarking
+    };
+    return &services;
 }

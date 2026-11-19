@@ -1,5 +1,6 @@
 add_executable(mvdm-vm-notification-test
   mvdm_vm_notification_test.c
+  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_binding.c"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_notification.c"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_wake.c"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_continuation.c"

@@ -13,7 +13,7 @@
 /* DIVERGENCE(ADAPTER-SOFTPC-034): retain the original VDD cleanup entrypoint
  * name.  When the unsupported VDD path is actually entered, mark the bound
  * session unavailable and return through its typed controlled-stop boundary. */
-VOID ClearInstanceDataMarking(VOID)
+VOID ntvdm_clear_instance_data_marking(VOID)
 {
     session *owner = session_thread_current();
 

@@ -40,7 +40,7 @@
 #include "bios.h"
 #include "virtual.h"
 #include "compat/include/invalid_virtual_instance.h"
-#include "mvdm_vm_bridge.h"
+#include "compat/include/vm_host.h"
 #line 36
 #include "error.h"
 #include "debug.h"

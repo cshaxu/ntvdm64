@@ -280,7 +280,7 @@ $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
-$adapterSoftpcNames = @('mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
+$adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                          'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                          'mvdm_vm_notification.c',
                          'mvdm_vm_wake.c',
@@ -923,6 +923,13 @@ $graph.Add('build ' + $object + ': cc_ccpu ' + (NinjaPath $source))
     }
     $object
 }
+$biosFlags = $baseFlags
+foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
+        'src/ntvdm-exe/softpc/include', 'src/vdmredir-dll/include',
+        'src/wow32-dll/include')) {
+    $biosFlags = $biosFlags.Replace(' /I "' +
+        (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
+}
 $biosObjects = foreach ($name in $biosNames) {
     $object = 'obj/bios/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
 $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $biosRoot $name)))
@@ -931,7 +938,9 @@ $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $biosRoot $name)
         # product profile.  CPU40 uses the same original DOSX continuation
         # frame through the restored dpmi32/i386/dpmi386.c provider.
         # BOP FE binds directly to the original CCPU exit entry; no F wrapper.
-        $graph.Add('  cflags = ' + $baseFlags + ' /DMONITOR /Dhost_unsimulate=c_cpu_unsimulate')
+        $graph.Add('  cflags = ' + $biosFlags + ' /DMONITOR /Dhost_unsimulate=c_cpu_unsimulate')
+    } else {
+        $graph.Add('  cflags = ' + $biosFlags)
     }
     $object
 }
@@ -1236,6 +1245,9 @@ $adapterSoftpcObjects += 'obj/compat/guest_location.obj'
 $graph.Add('build obj/compat/dpmi_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/dpmi_services.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/dpmi_services.obj'
+$graph.Add('build obj/compat/vm_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/vm_services.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$adapterSoftpcObjects += 'obj/compat/vm_services.obj'
 $graph.Add('build obj/compat/mvdm_firmware.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_firmware.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/compat/mvdm_firmware.obj'

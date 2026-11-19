@@ -1,0 +1,2246 @@
+{
+  "scope": "T483 S13 P13: DIR-ordered BIOS cohort",
+  "baseline": "3e1c03ffdfa2ddb670d9ec04771bc4b167060da1",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bios.c",
+      "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+      "current_sha256": "1fc89c42e984de945a96ada6922b961dce443e465b9f7ee964c142179602022b",
+      "raw": {
+        "blocks": 55,
+        "added": 74,
+        "deleted": 369
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            20,
+            20
+          ],
+          "current": [
+            20,
+            21
+          ]
+        },
+        {
+          "original": [
+            24,
+            29
+          ],
+          "current": [
+            26,
+            32
+          ]
+        },
+        {
+          "original": [
+            53,
+            53
+          ],
+          "current": [
+            57,
+            58
+          ]
+        },
+        {
+          "original": [
+            64,
+            64
+          ],
+          "current": [
+            70,
+            71
+          ]
+        },
+        {
+          "original": [
+            71,
+            71
+          ],
+          "current": [
+            79,
+            80
+          ]
+        },
+        {
+          "original": [
+            85,
+            86
+          ],
+          "current": [
+            95,
+            96
+          ]
+        },
+        {
+          "original": [
+            91,
+            92
+          ],
+          "current": [
+            102,
+            103
+          ]
+        },
+        {
+          "original": [
+            96,
+            98
+          ],
+          "current": [
+            108,
+            109
+          ]
+        },
+        {
+          "original": [
+            102,
+            102
+          ],
+          "current": [
+            114,
+            115
+          ]
+        },
+        {
+          "original": [
+            106,
+            106
+          ],
+          "current": [
+            120,
+            121
+          ]
+        },
+        {
+          "original": [
+            110,
+            111
+          ],
+          "current": [
+            126,
+            127
+          ]
+        },
+        {
+          "original": [
+            125,
+            125
+          ],
+          "current": [
+            142,
+            143
+          ]
+        },
+        {
+          "original": [
+            130,
+            130
+          ],
+          "current": [
+            150,
+            151
+          ]
+        },
+        {
+          "original": [
+            135,
+            135
+          ],
+          "current": [
+            158,
+            159
+          ]
+        },
+        {
+          "original": [
+            144,
+            144
+          ],
+          "current": [
+            170,
+            171
+          ]
+        },
+        {
+          "original": [
+            170,
+            170
+          ],
+          "current": [
+            198,
+            199
+          ]
+        },
+        {
+          "original": [
+            179,
+            179
+          ],
+          "current": [
+            209,
+            210
+          ]
+        },
+        {
+          "original": [
+            185,
+            185
+          ],
+          "current": [
+            218,
+            219
+          ]
+        },
+        {
+          "original": [
+            192,
+            192
+          ],
+          "current": [
+            228,
+            229
+          ]
+        },
+        {
+          "original": [
+            202,
+            203
+          ],
+          "current": [
+            241,
+            242
+          ]
+        },
+        {
+          "original": [
+            210,
+            211
+          ],
+          "current": [
+            251,
+            252
+          ]
+        },
+        {
+          "original": [
+            217,
+            220
+          ],
+          "current": [
+            260,
+            261
+          ]
+        },
+        {
+          "original": [
+            228,
+            247
+          ],
+          "current": [
+            271,
+            282
+          ]
+        },
+        {
+          "original": [
+            267,
+            267
+          ],
+          "current": [
+            304,
+            305
+          ]
+        },
+        {
+          "original": [
+            276,
+            278
+          ],
+          "current": [
+            315,
+            316
+          ]
+        },
+        {
+          "original": [
+            310,
+            338
+          ],
+          "current": [
+            351,
+            352
+          ]
+        },
+        {
+          "original": [
+            344,
+            344
+          ],
+          "current": [
+            359,
+            360
+          ]
+        },
+        {
+          "original": [
+            350,
+            350
+          ],
+          "current": [
+            368,
+            369
+          ]
+        },
+        {
+          "original": [
+            359,
+            361
+          ],
+          "current": [
+            380,
+            381
+          ]
+        },
+        {
+          "original": [
+            364,
+            365
+          ],
+          "current": [
+            385,
+            386
+          ]
+        },
+        {
+          "original": [
+            371,
+            371
+          ],
+          "current": [
+            394,
+            395
+          ]
+        },
+        {
+          "original": [
+            376,
+            376
+          ],
+          "current": [
+            402,
+            403
+          ]
+        },
+        {
+          "original": [
+            383,
+            383
+          ],
+          "current": [
+            412,
+            413
+          ]
+        },
+        {
+          "original": [
+            391,
+            391
+          ],
+          "current": [
+            423,
+            424
+          ]
+        },
+        {
+          "original": [
+            401,
+            402
+          ],
+          "current": [
+            435,
+            436
+          ]
+        },
+        {
+          "original": [
+            436,
+            438
+          ],
+          "current": [
+            472,
+            473
+          ]
+        },
+        {
+          "original": [
+            442,
+            444
+          ],
+          "current": [
+            478,
+            479
+          ]
+        },
+        {
+          "original": [
+            455,
+            458
+          ],
+          "current": [
+            492,
+            493
+          ]
+        },
+        {
+          "original": [
+            466,
+            467
+          ],
+          "current": [
+            503,
+            504
+          ]
+        },
+        {
+          "original": [
+            473,
+            473
+          ],
+          "current": [
+            512,
+            513
+          ]
+        },
+        {
+          "original": [
+            478,
+            478
+          ],
+          "current": [
+            520,
+            521
+          ]
+        },
+        {
+          "original": [
+            484,
+            487
+          ],
+          "current": [
+            529,
+            530
+          ]
+        },
+        {
+          "original": [
+            496,
+            497
+          ],
+          "current": [
+            541,
+            542
+          ]
+        },
+        {
+          "original": [
+            506,
+            507
+          ],
+          "current": [
+            553,
+            554
+          ]
+        },
+        {
+          "original": [
+            515,
+            517
+          ],
+          "current": [
+            564,
+            565
+          ]
+        },
+        {
+          "original": [
+            525,
+            528
+          ],
+          "current": [
+            575,
+            576
+          ]
+        },
+        {
+          "original": [
+            539,
+            539
+          ],
+          "current": [
+            589,
+            590
+          ]
+        },
+        {
+          "original": [
+            567,
+            573
+          ],
+          "current": [
+            619,
+            620
+          ]
+        },
+        {
+          "original": [
+            582,
+            583
+          ],
+          "current": [
+            630,
+            631
+          ]
+        },
+        {
+          "original": [
+            591,
+            593
+          ],
+          "current": [
+            641,
+            642
+          ]
+        },
+        {
+          "original": [
+            634,
+            635
+          ],
+          "current": [
+            685,
+            686
+          ]
+        },
+        {
+          "original": [
+            647,
+            647
+          ],
+          "current": [
+            700,
+            701
+          ]
+        },
+        {
+          "original": [
+            652,
+            656
+          ],
+          "current": [
+            707,
+            712
+          ]
+        },
+        {
+          "original": [
+            660,
+            670
+          ],
+          "current": [
+            717,
+            718
+          ]
+        },
+        {
+          "original": [
+            682,
+            886
+          ],
+          "current": [
+            731,
+            732
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/build_id.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\build_id.c",
+      "original_sha256": "9ff03f58980437d69cf245e18907ed5e5f4760622d90c870c617e410eeafd6e4",
+      "current_sha256": "9ff03f58980437d69cf245e18907ed5e5f4760622d90c870c617e410eeafd6e4",
+      "raw": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [],
+      "issues": [],
+      "rank": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cmos_bis.c",
+      "original_sha256": "e3b6710db5887ef77c5a38c881ebb4eeff2575db65e86a3468258aaa9293e1bd",
+      "current_sha256": "8246b718d443d44c4651859a63ef31c9676e30303df54cc6e9eb7f2d3dbb076d",
+      "raw": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 75
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            39,
+            44
+          ],
+          "current": [
+            39,
+            40
+          ]
+        },
+        {
+          "original": [
+            56,
+            124
+          ],
+          "current": [
+            54,
+            55
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cntlbop.c",
+      "original_sha256": "c65121f592f91efbea0db0b3282f3252f4a58a4a87a281570ee3a0e50686cc87",
+      "current_sha256": "812e8edc8bf1d70942c47990a3536865a2ca681d0ab5be0bff122d29980550db",
+      "raw": {
+        "blocks": 8,
+        "added": 13,
+        "deleted": 22
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            34,
+            39
+          ],
+          "current": [
+            34,
+            40
+          ]
+        },
+        {
+          "original": [
+            50,
+            50
+          ],
+          "current": [
+            52,
+            53
+          ]
+        },
+        {
+          "original": [
+            54,
+            54
+          ],
+          "current": [
+            58,
+            59
+          ]
+        },
+        {
+          "original": [
+            58,
+            58
+          ],
+          "current": [
+            64,
+            65
+          ]
+        },
+        {
+          "original": [
+            64,
+            64
+          ],
+          "current": [
+            72,
+            73
+          ]
+        },
+        {
+          "original": [
+            67,
+            67
+          ],
+          "current": [
+            77,
+            78
+          ]
+        },
+        {
+          "original": [
+            70,
+            79
+          ],
+          "current": [
+            82,
+            83
+          ]
+        },
+        {
+          "original": [
+            82,
+            82
+          ],
+          "current": [
+            87,
+            88
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\emm_fncs.c",
+      "original_sha256": "2ffb142bb4ad67958493668e06bec3d81936790497965cdc5ca8a2ac0e142722",
+      "current_sha256": "35f65b92c0724addb70410895a21a87aa110450446fb4c39707b55f5be4523de",
+      "raw": {
+        "blocks": 23,
+        "added": 38,
+        "deleted": 285
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            5,
+            8
+          ],
+          "current": [
+            6,
+            7
+          ]
+        },
+        {
+          "original": [
+            71,
+            76
+          ],
+          "current": [
+            71,
+            77
+          ]
+        },
+        {
+          "original": [
+            96,
+            96
+          ],
+          "current": [
+            98,
+            99
+          ]
+        },
+        {
+          "original": [
+            104,
+            104
+          ],
+          "current": [
+            108,
+            109
+          ]
+        },
+        {
+          "original": [
+            114,
+            114
+          ],
+          "current": [
+            120,
+            121
+          ]
+        },
+        {
+          "original": [
+            132,
+            135
+          ],
+          "current": [
+            140,
+            141
+          ]
+        },
+        {
+          "original": [
+            139,
+            140
+          ],
+          "current": [
+            146,
+            147
+          ]
+        },
+        {
+          "original": [
+            179,
+            180
+          ],
+          "current": [
+            187,
+            188
+          ]
+        },
+        {
+          "original": [
+            215,
+            216
+          ],
+          "current": [
+            224,
+            225
+          ]
+        },
+        {
+          "original": [
+            221,
+            256
+          ],
+          "current": [
+            231,
+            232
+          ]
+        },
+        {
+          "original": [
+            262,
+            262
+          ],
+          "current": [
+            239,
+            240
+          ]
+        },
+        {
+          "original": [
+            294,
+            296
+          ],
+          "current": [
+            273,
+            274
+          ]
+        },
+        {
+          "original": [
+            301,
+            303
+          ],
+          "current": [
+            280,
+            281
+          ]
+        },
+        {
+          "original": [
+            322,
+            327
+          ],
+          "current": [
+            301,
+            307
+          ]
+        },
+        {
+          "original": [
+            354,
+            364
+          ],
+          "current": [
+            335,
+            336
+          ]
+        },
+        {
+          "original": [
+            368,
+            372
+          ],
+          "current": [
+            341,
+            342
+          ]
+        },
+        {
+          "original": [
+            383,
+            434
+          ],
+          "current": [
+            355,
+            356
+          ]
+        },
+        {
+          "original": [
+            467,
+            467
+          ],
+          "current": [
+            391,
+            392
+          ]
+        },
+        {
+          "original": [
+            475,
+            480
+          ],
+          "current": [
+            401,
+            407
+          ]
+        },
+        {
+          "original": [
+            2333,
+            2333
+          ],
+          "current": [
+            2261,
+            2262
+          ]
+        },
+        {
+          "original": [
+            2567,
+            2663
+          ],
+          "current": [
+            2497,
+            2498
+          ]
+        },
+        {
+          "original": [
+            2786,
+            2786
+          ],
+          "current": [
+            2622,
+            2623
+          ]
+        },
+        {
+          "original": [
+            2793,
+            2831
+          ],
+          "current": [
+            2631,
+            2632
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 9
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\equipmnt.c",
+      "original_sha256": "08b798882c49443b2641ebf091adf07959059d46bc703467d860ab22659f2967",
+      "current_sha256": "66d60a591b70920f76dc7b0ca9b1f5282793b022622425d32082cfc532dc8ed7",
+      "raw": {
+        "blocks": 1,
+        "added": 6,
+        "deleted": 6
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            24,
+            29
+          ],
+          "current": [
+            24,
+            29
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 10
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "current_sha256": "6ec95ec46d9c6511b19c4e3338025be57ebdd3f289861f9be050e3cf29e95a0c",
+      "raw": {
+        "blocks": 5,
+        "added": 10,
+        "deleted": 103
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            18,
+            18
+          ],
+          "current": [
+            18,
+            19
+          ]
+        },
+        {
+          "original": [
+            22,
+            27
+          ],
+          "current": [
+            24,
+            30
+          ]
+        },
+        {
+          "original": [
+            49,
+            55
+          ],
+          "current": [
+            53,
+            54
+          ]
+        },
+        {
+          "original": [
+            59,
+            59
+          ],
+          "current": [
+            60,
+            61
+          ]
+        },
+        {
+          "original": [
+            65,
+            152
+          ],
+          "current": [
+            68,
+            69
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 11
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\mem_size.c",
+      "original_sha256": "2e8937e8fc10fbc69425692fb8b127b20e786fae37fd453049b62dd0472c9e8f",
+      "current_sha256": "58c3c6151854ed5cc1a49e448a21db7959bdfab349b4497e06965a1ffb58e267",
+      "raw": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 7
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            17,
+            17
+          ],
+          "current": [
+            17,
+            18
+          ]
+        },
+        {
+          "original": [
+            21,
+            26
+          ],
+          "current": [
+            23,
+            24
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 12
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "current_sha256": "02fa173185a30dbf245603661901806e587f9af487eacbe671ca15292ee83449",
+      "raw": {
+        "blocks": 40,
+        "added": 38,
+        "deleted": 384
+      },
+      "filtered": {
+        "blocks": 2,
+        "added": 0,
+        "deleted": 2
+      },
+      "excluded": [
+        {
+          "original": [
+            22,
+            27
+          ],
+          "current": [
+            22,
+            24
+          ]
+        },
+        {
+          "original": [
+            76,
+            76
+          ],
+          "current": [
+            74,
+            75
+          ]
+        },
+        {
+          "original": [
+            83,
+            83
+          ],
+          "current": [
+            82,
+            83
+          ]
+        },
+        {
+          "original": [
+            87,
+            87
+          ],
+          "current": [
+            88,
+            89
+          ]
+        },
+        {
+          "original": [
+            99,
+            99
+          ],
+          "current": [
+            102,
+            103
+          ]
+        },
+        {
+          "original": [
+            105,
+            105
+          ],
+          "current": [
+            109,
+            110
+          ]
+        },
+        {
+          "original": [
+            109,
+            109
+          ],
+          "current": [
+            115,
+            116
+          ]
+        },
+        {
+          "original": [
+            113,
+            114
+          ],
+          "current": [
+            121,
+            123
+          ]
+        },
+        {
+          "original": [
+            118,
+            118
+          ],
+          "current": [
+            128,
+            129
+          ]
+        },
+        {
+          "original": [
+            155,
+            155
+          ],
+          "current": [
+            166,
+            167
+          ]
+        },
+        {
+          "original": [
+            200,
+            209
+          ],
+          "current": [
+            213,
+            215
+          ]
+        },
+        {
+          "original": [
+            301,
+            318
+          ],
+          "current": [
+            309,
+            311
+          ]
+        },
+        {
+          "original": [
+            324,
+            328
+          ],
+          "current": [
+            319,
+            321
+          ]
+        },
+        {
+          "original": [
+            340,
+            340
+          ],
+          "current": [
+            336,
+            337
+          ]
+        },
+        {
+          "original": [
+            357,
+            357
+          ],
+          "current": [
+            356,
+            357
+          ]
+        },
+        {
+          "original": [
+            386,
+            506
+          ],
+          "current": [
+            388,
+            390
+          ]
+        },
+        {
+          "original": [
+            512,
+            516
+          ],
+          "current": [
+            397,
+            399
+          ]
+        },
+        {
+          "original": [
+            647,
+            647
+          ],
+          "current": [
+            535,
+            536
+          ]
+        },
+        {
+          "original": [
+            704,
+            705
+          ],
+          "current": [
+            595,
+            597
+          ]
+        },
+        {
+          "original": [
+            722,
+            763
+          ],
+          "current": [
+            616,
+            618
+          ]
+        },
+        {
+          "original": [
+            770,
+            770
+          ],
+          "current": [
+            626,
+            627
+          ]
+        },
+        {
+          "original": [
+            777,
+            777
+          ],
+          "current": [
+            634,
+            635
+          ]
+        },
+        {
+          "original": [
+            790,
+            797
+          ],
+          "current": [
+            648,
+            650
+          ]
+        },
+        {
+          "original": [
+            813,
+            813
+          ],
+          "current": [
+            667,
+            668
+          ]
+        },
+        {
+          "original": [
+            826,
+            826
+          ],
+          "current": [
+            682,
+            683
+          ]
+        },
+        {
+          "original": [
+            843,
+            849
+          ],
+          "current": [
+            701,
+            703
+          ]
+        },
+        {
+          "original": [
+            860,
+            866
+          ],
+          "current": [
+            715,
+            717
+          ]
+        },
+        {
+          "original": [
+            871,
+            872
+          ],
+          "current": [
+            723,
+            725
+          ]
+        },
+        {
+          "original": [
+            887,
+            887
+          ],
+          "current": [
+            741,
+            742
+          ]
+        },
+        {
+          "original": [
+            891,
+            983
+          ],
+          "current": [
+            746,
+            748
+          ]
+        },
+        {
+          "original": [
+            991,
+            991
+          ],
+          "current": [
+            758,
+            759
+          ]
+        },
+        {
+          "original": [
+            1001,
+            1001
+          ],
+          "current": [
+            770,
+            771
+          ]
+        },
+        {
+          "original": [
+            1018,
+            1018
+          ],
+          "current": [
+            789,
+            790
+          ]
+        },
+        {
+          "original": [
+            1022,
+            1023
+          ],
+          "current": [
+            794,
+            796
+          ]
+        },
+        {
+          "original": [
+            1027,
+            1028
+          ],
+          "current": [
+            801,
+            803
+          ]
+        },
+        {
+          "original": [
+            1033,
+            1061
+          ],
+          "current": [
+            809,
+            811
+          ]
+        },
+        {
+          "original": [
+            1071,
+            1071
+          ],
+          "current": [
+            822,
+            823
+          ]
+        },
+        {
+          "original": [
+            1094,
+            1094
+          ],
+          "current": [
+            847,
+            848
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\rom_basc.c",
+      "original_sha256": "2e6f1783fcb3695443ab0a3a6fcb5dbf2bd3e2e7905217cd61021e031a8a709a",
+      "current_sha256": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+      "raw": {
+        "blocks": 1,
+        "added": 6,
+        "deleted": 6
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            17,
+            22
+          ],
+          "current": [
+            17,
+            22
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 13
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\rtc_bios.c",
+      "original_sha256": "bc5e3a66a552e293ae1ec9653205f8432867b4290e3d4ecad6ae5cd1ccab4cb6",
+      "current_sha256": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
+      "raw": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 19
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            44,
+            62
+          ],
+          "current": [
+            44,
+            45
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 14
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
+      "original_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368",
+      "current_sha256": "c745fabc4cb99f2e8a9e2173c49d2a8082b431d0f4b0a145bea1fe08792c8140",
+      "raw": {
+        "blocks": 3,
+        "added": 3,
+        "deleted": 8
+      },
+      "filtered": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "excluded": [
+        {
+          "original": [
+            34,
+            34
+          ],
+          "current": [
+            34,
+            35
+          ]
+        },
+        {
+          "original": [
+            38,
+            43
+          ],
+          "current": [
+            40,
+            41
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "current_sha256": "e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9",
+      "raw": {
+        "blocks": 13,
+        "added": 13,
+        "deleted": 46
+      },
+      "filtered": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            20,
+            25
+          ],
+          "current": [
+            20,
+            22
+          ]
+        },
+        {
+          "original": [
+            89,
+            90
+          ],
+          "current": [
+            94,
+            95
+          ]
+        },
+        {
+          "original": [
+            101,
+            101
+          ],
+          "current": [
+            110,
+            111
+          ]
+        },
+        {
+          "original": [
+            119,
+            119
+          ],
+          "current": [
+            132,
+            133
+          ]
+        },
+        {
+          "original": [
+            129,
+            129
+          ],
+          "current": [
+            144,
+            145
+          ]
+        },
+        {
+          "original": [
+            144,
+            155
+          ],
+          "current": [
+            162,
+            163
+          ]
+        },
+        {
+          "original": [
+            188,
+            190
+          ],
+          "current": [
+            198,
+            198
+          ]
+        },
+        {
+          "original": [
+            202,
+            203
+          ],
+          "current": [
+            211,
+            212
+          ]
+        },
+        {
+          "original": [
+            267,
+            268
+          ],
+          "current": [
+            277,
+            278
+          ]
+        },
+        {
+          "original": [
+            276,
+            277
+          ],
+          "current": [
+            287,
+            288
+          ]
+        },
+        {
+          "original": [
+            287,
+            292
+          ],
+          "current": [
+            300,
+            301
+          ]
+        },
+        {
+          "original": [
+            304,
+            311
+          ],
+          "current": [
+            315,
+            316
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\virtual.c",
+      "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
+      "current_sha256": "3b269f396d545cafb9a892b45530d51b24f82ed3189cebd9f1cc11cc2ea06260",
+      "raw": {
+        "blocks": 8,
+        "added": 25,
+        "deleted": 3
+      },
+      "filtered": {
+        "blocks": 5,
+        "added": 22,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            14,
+            14
+          ],
+          "current": [
+            15,
+            16
+          ]
+        },
+        {
+          "original": [
+            22,
+            22
+          ],
+          "current": [
+            26,
+            27
+          ]
+        },
+        {
+          "original": [
+            794,
+            794
+          ],
+          "current": [
+            825,
+            826
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    }
+  ],
+  "before": {
+    "points": 9,
+    "lines": 27
+  },
+  "after": {
+    "points": 9,
+    "lines": 27
+  },
+  "delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 3,
+    "lines": 12
+  },
+  "counts": {
+    "excluded-diagnostic": 1,
+    "open": 433,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 135
+  },
+  "total": 618,
+  "S13Eliminated": 39,
+  "eliminatedIds": [
+    "C0047",
+    "C0256",
+    "C0258"
+  ],
+  "ownership": {
+    "C": "14 original BIOS units retained. virtual.c changes only one include; original NIDDB dispatch and independent BOP register/privilege ordering byte-unchanged.",
+    "B": "VM result ABI and immutable two-provider contract, same ClearInstanceDataMarking external symbol; no VM/IRQ/task/session state.",
+    "F": "Existing BOP implementation unchanged. VDD controlled-stop body unchanged except its internal provider name; product initializes both before guest execution."
+  },
+  "generatedABIBoundary": "C0031/C0032 remain F-located generated carriers selected by original cpu4gen/sas includes. Source policy prohibits blindly treating imported generated carrier as OpenNT mirror. C0214/C0215 address/descriptor ownership also remains S14. No inference that original BIOS consumers should be extracted.",
+  "sourceIdentity": {
+    "files": {
+      "src/mvdm-host/softpc.new/base/bios/virtual.c": "3b269f396d545cafb9a892b45530d51b24f82ed3189cebd9f1cc11cc2ea06260",
+      "src/mvdm-host/softpc.new/base/bios/reset.c": "02fa173185a30dbf245603661901806e587f9af487eacbe671ca15292ee83449",
+      "src/mvdm-host/softpc.new/base/bios/slave_bs.c": "c745fabc4cb99f2e8a9e2173c49d2a8082b431d0f4b0a145bea1fe08792c8140",
+      "src/mvdm-host/softpc.new/base/bios/tape_io.c": "e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9",
+      "src/mvdm-host/softpc.new/base/bios/bios.c": "1fc89c42e984de945a96ada6922b961dce443e465b9f7ee964c142179602022b",
+      "src/mvdm-host/softpc.new/base/bios/build_id.c": "9ff03f58980437d69cf245e18907ed5e5f4760622d90c870c617e410eeafd6e4",
+      "src/mvdm-host/softpc.new/base/bios/cmos_bis.c": "8246b718d443d44c4651859a63ef31c9676e30303df54cc6e9eb7f2d3dbb076d",
+      "src/mvdm-host/softpc.new/base/bios/cntlbop.c": "812e8edc8bf1d70942c47990a3536865a2ca681d0ab5be0bff122d29980550db",
+      "src/mvdm-host/softpc.new/base/bios/emm_fncs.c": "35f65b92c0724addb70410895a21a87aa110450446fb4c39707b55f5be4523de",
+      "src/mvdm-host/softpc.new/base/bios/equipmnt.c": "66d60a591b70920f76dc7b0ca9b1f5282793b022622425d32082cfc532dc8ed7",
+      "src/mvdm-host/softpc.new/base/bios/ill_bop.c": "6ec95ec46d9c6511b19c4e3338025be57ebdd3f289861f9be050e3cf29e95a0c",
+      "src/mvdm-host/softpc.new/base/bios/mem_size.c": "58c3c6151854ed5cc1a49e448a21db7959bdfab349b4497e06965a1ffb58e267",
+      "src/mvdm-host/softpc.new/base/bios/rom_basc.c": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+      "src/mvdm-host/softpc.new/base/bios/rtc_bios.c": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
+      "src/ntvdm-exe/softpc/mvdm_vm_notification.c": "d8b843492c84d77fb39812f8af1fc1669e36e63ed5d04012a1b9d829c7740f40",
+      "src/ntvdm-exe/vdd/mvdm_softpc_vdd_unavailable.c": "30a79d61ec86c63d75255990c31a354b7eff31487787d11bcac9e4b11840a55b"
+    },
+    "remainingOuterHeaders": [
+      "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+      "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+    ],
+    "mirrorChange": "Only virtual.c include changed; all #line/#error and function bodies byte-identical."
+  },
+  "build": "Cached full x86/x64,explicit x86 images,reference-x86 and eight A/B graphs pass. 14 BIOS unit search paths no longer include unused D/F roots, except admitted generated ABI root.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "a9ed59d4-6106-40e7-8dab-85d23c0f3009",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalized": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": false,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "tests": {
+    "vm": "3183 existing notification assertions through installed B contract; no real PIC claim.",
+    "niddb": {
+      "started": "2026-11-19T15:04:53.2477678Z",
+      "owner_pid": 33748,
+      "result": "pass",
+      "contract": "niddb",
+      "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+      "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t483-s13-bios-boundary\\niddb-final",
+      "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t483-s13-bios-boundary\\niddb-final\\niddb-object-contract.exe",
+      "inputs": [
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\test\\observation\\verify-softpc-object-contract.ps1",
+          "sha256": "16C259F338724D989D3377DB439EFF98C5D658841F784107BBBEB9B27371F093"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd",
+          "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_object_contract_fixture.c",
+          "sha256": "CD553CCBBCF884A6CA5F42E3039CA681CED5E963260F8599941303F75F08EA64"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\bios\\virtual.c",
+          "sha256": "3B269F396D545CAFB9A892B45530D51B24F82ED3189CEBD9F1CC11CC2EA06260"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj",
+          "sha256": "69CD99CCD6E45A5F72EF1C794E04701BE6F49C97BCD14C187193C3024844FCAB"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+          "sha256": "E4030A57E2E9C46E7C4D127D580773976FE3294E895715590C978A509EDF8103"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\virtual.h",
+          "sha256": "D4576F40B4C22A3F83BBB76CD07DB800275C0C61154983966B67EA3AAFBBA976"
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\sas.h",
+          "sha256": "C82E004EDF4BE6F26A7C5BF5CE78AF88172540C9C5C40F688C59055DD945EF26"
+        }
+      ],
+      "runs": [
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS \"O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t483-s13-bios-boundary\\niddb-final\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\build\\t483-s13-bios-boundary\\niddb-final\\niddb-object-contract.exe\" /link kernel32.lib\"",
+          "pid": 34144,
+          "exit": 0,
+          "kind": "build"
+        },
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_NIDDB_EXPECT_POINTER_BYTES=8 \"O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t483-s13-bios-boundary\\niddb-final\\negative-abi.obj\"\"",
+          "pid": 34900,
+          "exit": 2,
+          "kind": "negative-abi-compile"
+        },
+        {
+          "diagnostic_budget_ms": 30000,
+          "pid": 33696,
+          "exit": 0,
+          "kind": "fixture"
+        },
+        {
+          "pid": 25504,
+          "exit": "0xC0000420",
+          "kind": "invalid-stale"
+        },
+        {
+          "pid": 15356,
+          "exit": "0xC0000420",
+          "kind": "invalid-out-of-range"
+        },
+        {
+          "pid": 27420,
+          "exit": "0xC0000420",
+          "kind": "invalid-active-stale"
+        }
+      ],
+      "checks": 15,
+      "callbacks": 3,
+      "three_vm_reuse": "pass",
+      "invalid_identity_controls": "pass (fixture termination seam)",
+      "fixture_sha256": "23724FA9E8149DBF0C93028207D99A98EB8D3BF0812821CB2FBAFA63B1A6CEE9",
+      "finished": "2026-11-19T15:05:04.6341246Z"
+    },
+    "dos": "Actual strict full DIR passed on published candidate."
+  },
+  "failure": "Initial NIDDB fixture included an F wrapper without src search path and failed compilation. It now includes B contract directly. Outer batch script initially omitted checking runner exit; aggregate tests.exit0 is not acceptance evidence. Require separately successful niddb-final.exit/result and strict-final.exit; failed logs retained. No product changes during retry.",
+  "limitations": [
+    "No Full or real Win3.x/Win95 desktop acceptance claimed.",
+    "13 earlier DIR units retain S14 ABI/address-owner dependencies; review is not elimination.",
+    "Generated ABI/header IDs and shared search-root IDs remain open for other consumers.",
+    "S13 active;S14 unadmitted; next DIR file ccpu386/c_main.c."
+  ],
+  "evidence": [
+    {
+      "path": "build/t483-s13-bios-boundary/before.json",
+      "sha256": "0b815111641ebae10f64c43484afe7494220967044bbc4aad60bd8473f4f52e7"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/build.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/build.ps1",
+      "sha256": "1b62b86b394527f6238522accb5b76d4c9cf5d23e1707003cd21a88f498b5e24"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/candidate.json",
+      "sha256": "47ca5da33cf9bfce2a7352fc327c2d67f66c4ce5999f88bd87fe03f37be564d2"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/check.ps1",
+      "sha256": "874399645932bc62c7151639b9ce325c40755e491e953a2ef6c17caee10975c2"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/compiled-deps.txt",
+      "sha256": "cd42c6a3e6497dddad90d353c8e02ae097896f82e2e8afefce38dd927ffec55a"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/deliver.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/deliver.ps1",
+      "sha256": "b30925fb4488350d6cc29d9ac817f4892e0e5d2a83eca5ffdfcc1efdd2ec1280"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/file-ids.json",
+      "sha256": "134c899a3b89f526a03ae89ed0aa276fc3a94eed5ddb2561779e266093b8d725"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/final-check.ps1",
+      "sha256": "01a1f7d3a10948111db558840b5e34055883f043b40bfd5995b5476736d354fd"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/final-deps.txt",
+      "sha256": "50cdb38f3962bf71e5fe75c3f942c1af6793dde630f8948d99924afc5c5cb8ef"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/final-symbols.txt",
+      "sha256": "1f5a04891f196985c98c257aaabaf0042db00519cb1fbdb8b3089a0f69dcbc41"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/identity-proof.json",
+      "sha256": "ac72de21120f6bf21e20629063970f0b6a6da2bd6f104741ac0fe9142a373694"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/identity.py",
+      "sha256": "8778bfa027cda97d40d36504b7b208658de1c968584038f868b5738f8a400d60"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/measure.py",
+      "sha256": "0494965b1b48cda203fe811e7751cc4415a5e37f5e70a4182b5c8be7dbf8938a"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb/build.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb/build.stdout.txt",
+      "sha256": "be752c6c7406a613d758efd75dce605915c03b45a7725638716993585e764deb"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb/result.json",
+      "sha256": "7e1f27cbf90988c7d1ec88eef1bac2154328faabf80919dea78ce0fc88718b0e"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/active-stale.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/active-stale.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/build.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/build.stdout.txt",
+      "sha256": "2f8aa73f8f4b44300034be9438b4854dd9e37487b3b0ae9157b4b3ce7a236d96"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/negative-abi.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/negative-abi.stdout.txt",
+      "sha256": "9eb972b70d4326bcf156d567afa79b7df728fa13770efa9c8d71ae3424e3100c"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/out-of-range.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/out-of-range.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/result.json",
+      "sha256": "d22b786b8e7ee9743d6f063a37a1b648c3d90adc6087fcc4bb4f094bd6e82cf0"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/run.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/run.stdout.txt",
+      "sha256": "f3c108fd053ef0a84f625c2ecef8213ddde9c24363bcc5d3829b7f0805bcfeb9"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/stale.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final/stale.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final-process.json",
+      "sha256": "12c688f365c48b81587d005912089602c78dbba8a4d9fe78c14ce2cab9b13d10"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final.err",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final.out",
+      "sha256": "d22b786b8e7ee9743d6f063a37a1b648c3d90adc6087fcc4bb4f094bd6e82cf0"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/niddb-final.ps1",
+      "sha256": "8bafdb39a3433519f870728d2d992c83777fe81f200a6b8f51d9688829dfeb8b"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/normalized-final.json",
+      "sha256": "bc238c38b9911c56e264bf41fadb3dc2182bf0e7a818734aef042c04f29e064f"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/outer-header-summary.json",
+      "sha256": "50185312e2fd74a363fa23c899e0ca7a23ecee179e0cfe95a059bd9bc2accf69"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/package-id.txt",
+      "sha256": "0ba53de856053e7352eee75ad2e7fef4657ee43181b13610c6022d3f3772969d"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/pipeline-process.json",
+      "sha256": "5b800db59c7483e2efc10f366e24305265529be63f1ea0ae24c408b0098f7ea9"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/pipeline.err",
+      "sha256": "3a1cf97d15a56535669ccb5a40687dff36e0f08006196f0cfbbbc82a70345e7a"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/pipeline.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/pipeline.out",
+      "sha256": "7af18407d9697980e274e34f6861f54d5bd4c96b5c30a5c142100deb26d589ca"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/pipeline.ps1",
+      "sha256": "f344b090cdef0779336678645b6d5b7f31468108035e6ca4b065fb2df8df51e5"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/publication-final.json",
+      "sha256": "9dd813c6cfbdb002e5a1aaba3113bd7bd113f7388d529c6b5d7b62ea6f7b64e9"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/publish.ps1",
+      "sha256": "1f40044f3e945afd1ef8628c268e2d00011557a905ed23e4bcc914a36c2cfae7"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/stage.ps1",
+      "sha256": "94902be3518ec55db37b57383b55df7fb27831fd58f18e462071e9a2c9c2b60f"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/strict-dir-final.txt",
+      "sha256": "0cdba07d709e7ca2044e9f28084afdce689892ccb143b9924640f80a055807cf"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/strict-dir-final.txt.cells.txt",
+      "sha256": "5c8da8ea98e3c6c8d9def82a630283eefa2f15fcf30adb359a921902452cdbae"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/strict-final.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/strict-final.ps1",
+      "sha256": "3f22fb90548a019df45e2d8c81d0cbdbce930e96cd66e7994a845e38e4a47f3b"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/tests-process.json",
+      "sha256": "4f8ee4d97d16c0a319a6dff4f50fb0621ae4fd0d31cd50da6cfb780d08865b1b"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/tests.err",
+      "sha256": "9fb0b803d46b2edd81e77aaa615d5721c961271cdd410f5bda368f36f57b57eb"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/tests.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/tests.out",
+      "sha256": "246a5725d348631f5558663ddf14bfa1358c2e1b30d8e7a9677f9d0f852e09a4"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/tests.ps1",
+      "sha256": "49b5c60040e504a40f881ee612d770f36bdffc8135ce9a680121b7a7a6483e48"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/wrapper-failure.txt",
+      "sha256": "7c94b35c00998fbef7f800dbce85bc8eaba74851b1b63d21c988bbabd4c8cc40"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/check.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/check.out",
+      "sha256": "0894e21f7d61cb0f00b4b4a7e0acc772d8e823a2e4190085fe047b5db02ef99b"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/check.err",
+      "sha256": "cf0cf7974077cbc04411eb5d0451941f734be558e3718305dd8cb7fe7edea2c4"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/check-process.json",
+      "sha256": "96e6075a802cf8efd787a99966f995f8c383bfb198f3582a48f15142f55470a7"
+    },
+    {
+      "path": "build/t483-s13-bios-boundary/final-hashes.json",
+      "sha256": "789813228487f913a4debc4c3bbff11bfbba7b42734d74a7338ac0aaa8a8e2e2"
+    }
+  ],
+  "finalChecks": "Thread boundary, documentation governance, relative links, git diff check and22 post-test published hashes passed."
+}

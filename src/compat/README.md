@@ -332,3 +332,7 @@ without importing C headers or duplicating its service values.
 DPMI caller contracts live in `include/dpmi_services.h` and `include/dpmi_host.h`.
 The product installs immutable function addresses before guest execution; all
 debug-thread and WOW page-domain state and teardown remain in NTVDM.
+
+VM service contracts (`vm_services.h`, `vm_host.h`) preserve original NIDDB
+callers and the independent BOP result ABI. The product installs its existing
+VM dispatch and controlled-stop providers; compat owns no VM or IRQ state.

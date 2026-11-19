@@ -8,6 +8,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "compat/vm_services.c"
+#include "compat/include/vm_host.h"
+
+static unsigned clear_calls;
+void ntvdm_clear_instance_data_marking(void) { ++clear_calls; }
+extern BOOL ntvdm_vm_services_initialize(void);
 
 static unsigned char guest_memory[256];
 static mvdm_vm_executor *input_executor;
@@ -1193,6 +1199,11 @@ int main(void)
     HANDLE thread;
     DWORD thread_result;
     InitializeCriticalSection(&ica);
+    CHECK(!compat_vm_install(NULL) && GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(ntvdm_vm_services_initialize());
+    CHECK(ntvdm_vm_services_initialize());
+    ClearInstanceDataMarking();
+    CHECK(clear_calls == 1);
     CHECK(!mvdm_vm_bridge_bop(0, 0, 0, 0, 0, 1, &result));
     CHECK(result.status == 123 && result.value == 456);
     CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 0, 0, 0, 0, 0, &result));

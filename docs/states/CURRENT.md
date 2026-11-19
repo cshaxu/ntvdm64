@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has436 open direct dependency IDs.
+**Active: M0 T483 S13** (Ordinary Mode). S12 is closed at its in-place cleanup boundary; C now has433 open direct dependency IDs.
 
 ## Active Packet
 
@@ -27,15 +27,15 @@
 
 ## Current Technical Baseline
 
-S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P12 below supersedes both published copies.
+S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P13 below supersedes both published copies.
 
-S13 P12: [DPMI service boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p12-dpmi-services-boundary.json). dpmi386.c and modesw.c retain all function bodies and diagnostic mappings. C uses an immutable B contract; F installs unchanged debug-context and page-domain providers before guest execution. No state moved into B.
+S13 P13: [BIOS VM boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p13-bios-vm-boundary.json).14 BIOS DIR units reviewed. Original algorithms stay C; generated ABI/address owners remain S14. virtual.c changes only its contract include; B owns the immutable interface, F retains all VM/IRQ and controlled-stop state/behavior. Unused D/F search roots removed from BIOS compilation.
 
-C0183/C0184/C0248/C0250 eliminated:132 eliminated/436 open of618; S13 has cleared36 IDs. C0015/C0045 remain open for other consumers. Cohort mirror20 points/292 lines ->19/290; cumulative reduction3 points/12 lines. No guest changes.
+C0047/C0256/C0258 eliminated:135 eliminated/433 open of618; S13 cleared39 IDs. Cohort mirror9 points/27 lines unchanged; cumulative reduction3 points/12 lines. No guest changes.
 
-Cached full x86/x64,reference-x86 and8 A/B graphs pass. Package015f6cb9-b41f-46d1-8325-5e9479734fa1 published to both destinations with22 hashes. Debug contract/lifecycle,65538 mock PM-entry cases,WOW page-domain,actual NESticle graphics/Escape and DOS DIR pass. Two observer-selection failures are retained; final runtime verification uses the rebuilt current observer. No Full or real Win3.x/Win95 desktop acceptance claimed.
+Cached full x86/x64,reference-x86 and8 A/B graphs pass. Packagea9ed59d4-6106-40e7-8dab-85d23c0f3009 published to both destinations with22 hashes.3183 VM unit assertions,NIDDB original-object positive/negative controls and actual DOS DIR pass. Initial NIDDB fixture include failure and omitted outer exit-code check are retained; acceptance uses separate successful final NIDDB receipt. No Full or real Win3.x/Win95 desktop acceptance claimed.
 
-Next remaining DIR file:softpc.new/base/bios/bios.c. S13 active;S14 unadmitted.
+Next remaining DIR file:softpc.new/base/ccpu386/c_main.c. S13 active;S14 unadmitted.
 
 ## S12 Closure Record
 
