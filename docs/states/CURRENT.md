@@ -78,7 +78,9 @@ S13 will assess and implement safe C-to-F moves of product-owned behavior, with 
 
 P34 delivered the unchanged private Browser unavailable provider F to B; original public enumeration remains C. Both builds, dual publication,37 original enumeration assertions and96 actual DOS calls passed. [P34 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p34-remote-browser.json).
 
-P35 final cached builds and dual eleven-image publication passed. Files066-067: native bitmap macros and unchanged icon-size provider moved F to B; original button/scaling algorithms remain C. Remaining button lifetime belongs to S13, extracted original state/FNID requires S14 review. C0349 eliminated; C0072 stays open for clres. Review67/116:16 clears,41 lifecycle,10 source/ABI,49 unreviewed;514/617 open. Mirror delta0/0; cumulative reduction2 points/10 lines. Bitmap normal/failure cleanup, original drawing/icon assertions, product boundaries and three retained Win16 window-frontier probes passed. This is targeted verification, not full interaction acceptance. [P35 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p35-bitmap-native.json). Only S12 active.
+P35 delivered native bitmap macros and icon-size provider to B; original button/scaling algorithms unchanged. Both cached builds, dual publication, bitmap/drawing/icon checks and three retained Win16 frontiers passed. [P35 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p35-bitmap-native.json).
+
+P36 classified files068-070: menu task identity, default-window exact-state/name borrowing and both clres production contexts. Original parsing/conversion stays C; remaining ownership remains S13/S14 work, not permanent exceptions. [P36 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p36-menu-resource-ownership.json). Review70/116:16 clears,43 lifecycle,11 source/ABI,46 unreviewed;514/617 open. Source-only review; P35 package unchanged, no new runtime claim. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

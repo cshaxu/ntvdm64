@@ -453,15 +453,21 @@
 
 - 直接包含 · C0109 · wow32-dll · src/wow32-dll/include/wow_menu_resource_bindings.h
 
+068 P36: S13 menu task identity/publication and invocation lifetime; coordinate S14 original resource declaration ownership. W32FindResource/W32LoadResource/W32LockResource/W32UnlockResource are C wres32.c providers, not F implementations. CommonLoadMenu retains original lock/parse/unlock ordering and its resource-retention behavior. Source unchanged; mirror delta0 points/0 lines. See s12-p36-menu-resource-ownership.json.
+
 ## 069 — src/non-mvdm/windows/core/ntuser/client/clmsg.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
+
+069 P36: S13 default entry/borrow/name lifetime, with S14 selected original declaration cohort. Production default-client.obj selects WOW_ORIGINAL_DEFAULT_WINDOW and control-client/default-precomp.h, not the ordinary edit context branch. Source unchanged; mirror delta0 points/0 lines. See s12-p36-menu-resource-ownership.json.
 
 ## 070 — src/non-mvdm/windows/core/ntuser/client/clres.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 - 直接包含 · C0072 · wow32-dll · src/wow32-dll/include/wow_bitmap_bindings.h
 - 直接包含 · C0109 · wow32-dll · src/wow32-dll/include/wow_menu_resource_bindings.h
+
+070 P36: S14 multi-context source/ABI composition, coordinated with S13 resource and drawing lifetime. Actual products compile this file as clres.obj and dialog-template.obj; latter selects WOW_ORIGINAL_DIALOG_TEMPLATE with control-client precomp, former bitmap/resource headers. Source unchanged; mirror delta0 points/0 lines. See s12-p36-menu-resource-ownership.json.
 
 ## 071 — src/non-mvdm/windows/core/ntuser/client/combo.c
 

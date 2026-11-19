@@ -1,0 +1,98 @@
+{
+  "baseline": "9bdf16bed3b4dbea31ef77aa225bc12f2ccf955d",
+  "status": "P36 source-only ownership classification",
+  "files": [
+    {
+      "number": 68,
+      "file": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "ids": [
+        "C0109"
+      ],
+      "disposition": "S13 menu task identity/publication and invocation lifetime; coordinate S14 original resource declaration ownership.",
+      "evidence": [
+        "W32FindResource/W32LoadResource/W32LockResource/W32UnlockResource are C wres32.c providers, not F implementations. CommonLoadMenu retains original lock/parse/unlock ordering and its resource-retention behavior.",
+        "Parser reads bound CLIENTINFO for owner-draw payload interpretation; native Create/Insert/Destroy providers require current task/runtime and update registered menu identity plus guest page-domain publication.",
+        "Keep original parsing in C. Assess existing F resource/native entry as one integration boundary; do not replace it with raw USER32 calls or move mixed task/mirror header wholesale into B."
+      ],
+      "sha256": "a6a7855f1305e86cac1351248a262425f15e813111be1d9349b23fd1c4b62d3c"
+    },
+    {
+      "number": 69,
+      "file": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "ids": [
+        "C0064"
+      ],
+      "disposition": "S13 default entry/borrow/name lifetime, with S14 selected original declaration cohort.",
+      "evidence": [
+        "Production default-client.obj selects WOW_ORIGINAL_DEFAULT_WINDOW and control-client/default-precomp.h, not the ordinary edit context branch.",
+        "F wow_default_window_proc retains exact local PWND allocation, captures state, binds TLS, invokes original default body and restores TLS in finally. WM_GETTEXT/WM_GETTEXTLENGTH additionally lock/unlock the retained name.",
+        "F CsSendMessage checks supported FNID/extra then uses existing task-aware native boundary; nonclient hit testing also enters/leaves that boundary. Keep original client message classification/conversion C."
+      ],
+      "sha256": "fc6bbaa3a31d557e8faf231e1eb9a5545db1eaec07f4d3e1dd963233054740a7"
+    },
+    {
+      "number": 70,
+      "file": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "ids": [
+        "C0064",
+        "C0072",
+        "C0109"
+      ],
+      "disposition": "S14 multi-context source/ABI composition, coordinated with S13 resource and drawing lifetime.",
+      "evidence": [
+        "Actual products compile this file as clres.obj and dialog-template.obj; latter selects WOW_ORIGINAL_DIALOG_TEMPLATE with control-client precomp, former bitmap/resource headers.",
+        "Registration bridge installs F wow_bitmap_load, which enters serialized native bitmap context, calls C WOWLoadBitmapA and leaves in finally. C conversion uses gcsHdc/ghdcBits2; explicit DLL detach shuts down provider. Shared native macros already moved B in P35, remaining mixed header still includes C newres and invocation context.",
+        "WOWFindResourceExWCover retains C resource-name conversion and invokes original W32 resource discrimination. Template context retains its separate original template/module helpers and control environment. Neither whole-file move nor whole-header B move respects the two existing contexts."
+      ],
+      "sha256": "4311695750f9554bb4c9d3d9df60d70347974e2ba949d5ef228272a30d6a3436"
+    }
+  ],
+  "compilerContexts": {
+    "clmenu": [
+      "../../../../src/wow32-dll/include/wow_menu_parser_bindings.h",
+      "../../../../src/wow32-dll/include/wow_menu_resource_bindings.h"
+    ],
+    "default-client": [
+      "../../../../src/wow32-dll/include/control-client/default-precomp.h",
+      "../../../../src/wow32-dll/include/control-client/precomp.h",
+      "../../../../src/wow32-dll/include/wow_default_window_bindings.h",
+      "../../../../src/wow32-dll/include/wow_menu_parser_bindings.h",
+      "../../../../src/wow32-dll/include/wow_menu_resource_bindings.h"
+    ],
+    "clres": [
+      "../../../../src/wow32-dll/include/wow_bitmap_bindings.h",
+      "../../../../src/wow32-dll/include/wow_menu_parser_bindings.h",
+      "../../../../src/wow32-dll/include/wow_menu_resource_bindings.h"
+    ],
+    "dialog-template": [
+      "../../../../src/wow32-dll/include/control-client/precomp.h",
+      "../../../../src/wow32-dll/include/wow_default_window_bindings.h",
+      "../../../../src/wow32-dll/include/wow_menu_parser_bindings.h",
+      "../../../../src/wow32-dll/include/wow_menu_resource_bindings.h"
+    ]
+  },
+  "limits": "These are observed call-chain/ownership classifications, not proof that each existing adapter is necessary or minimal. No permanent exception or S13/S14 implementation admitted. No source/build/runtime changes and no new build/test pass claim.",
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "progress": {
+    "reviewedFiles": 70,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 43,
+    "deferredSourceAbiCompositionFiles": 11,
+    "unreviewedFiles": 46,
+    "totalFiles": 116,
+    "openIds": 514,
+    "totalIds": 617
+  },
+  "validation": {
+    "compiler": "Existing P35 product Ninja dependency records are VALID for clmenu/default-client/clres/dialog-template; actual two clres compile edges and selector flags inspected.",
+    "publication": "P35 package ded79739-09b9-491c-a76b-18ca13401237 remains unchanged at both destinations.",
+    "build": "Not run: no product source/build change.",
+    "runtime": "Not run: no new runtime evidence claimed.",
+    "documentation": "Verify-DocumentationGovernance.ps1 required before commit; evidence build/t483-s12-menu-resource-audit/docs.log and docs.exit."
+  }
+}

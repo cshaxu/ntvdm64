@@ -187,3 +187,5 @@ P33: [BaseClient dependencies and native console handle compatibility](s12-p33-c
 P34: [BaseSrv/OLE ownership and Browser compatibility](s12-p34-remote-browser.json).
 
 P35: [Button ownership and native bitmap/icon leaves](s12-p35-bitmap-native.json).
+
+P36: [Menu/default-window/resource ownership and actual compile contexts](s12-p36-menu-resource-ownership.json).
