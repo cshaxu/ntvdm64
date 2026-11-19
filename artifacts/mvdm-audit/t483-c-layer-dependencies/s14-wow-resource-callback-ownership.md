@@ -67,3 +67,51 @@ entry/return and USER retirement providers, then reconcile destination files,
 source provenance, mirror cost and final-code validation. Full four-component
 inventory and caller/lifetime verification remain unfinished. No guest source
 or binary was changed; no tests or release package were rerun for this review.
+
+## Runtime binding and retirement follow-up
+
+Against P32 `be33fdff8`, read both complete NTVDM implementations
+`src/ntvdm-exe/wow/wow_user_runtime.c` and `wow_user_session_binding.c`,
+their headers and `src/common/wow/user_runtime.h`. Also read the selected
+native-call, callback, publication, initialization and retirement functions
+in `wow_user_task_lifecycle.c`; this is not a complete read of that large file.
+
+The concrete C0618 path is original `taskman.c`/`queue.c` current-thread
+access, expanded through the existing task-order bindings to
+`wow_user_runtime_current`, resolved to the NTVDM provider. The ledger's
+COFF/map evidence matters here: absence of the expanded symbol spelling in
+the original C source is not absence of the dependency.
+
+The runtime has independent SRW-lock/binding mechanics, but its unbind
+operation invokes `retire_thread` before clearing TLS. Initialization in
+WOW32 installs `retire_current_thread` and `dispose_process`. Retirement
+performs original USER cleanup, refuses live owned windows, removes native
+hooks and input associations, calls `DestroyTask`, and frees task resources.
+These bodies cannot be treated as B-owned generic resource callbacks.
+
+The migration design is to separate fallible retirement from the B binding
+primitive. The composing outer boundary must validate the binding, perform
+retirement while it is still current, and only then clear the B binding.
+Failure retains the binding and provider state. Process disposal remains
+after all thread retirement and before removal of session hooks. Production
+unbind calls occur in `wow_user_session_binding.c`; direct test callers must
+be divided into primitive tests and complete retirement tests, not weakened
+to accept premature unbind. Reuse the existing binding; do not introduce a
+second TLS current pointer. Final representation of C task/class references
+and the destination of their algorithms remain part of the complete design.
+
+The native-call return path reacquires the data lock, marks the suspended
+scope ready, reacquires original execution ownership through
+`xxxDirectedYield` if needed, pops the scope, then publishes native window/menu
+results before guest continuation. A scheduler wait without execution
+ownership defers publication until ownership is acquired. Callback entry
+likewise uses original `xxxSleepTask`/`xxxDirectedYield`; these are C scheduler
+semantics, not a generic B mutex operation.
+
+Existing tests supply relevant contracts, not fresh acceptance:
+`test/adapter-mvdm-host-out/wow/wow_user_runtime_fixture.c` checks lock
+release/reacquire and rejects unbind while held. The lifecycle fixture in the
+same directory checks that a live owned window makes unbind fail with
+ERROR_BUSY while retaining the exact task and binding. Keep these negative
+requirements after splitting the entrypoints. No production change, test run,
+new exception, or dependency elimination follows from this source review.
