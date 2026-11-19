@@ -225,3 +225,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P53 DrawState contexts](s12-p53-drawing-ownership.json): file097; both production compositions verified, five F symbols remain; native leaves already B. Review97/116,502/617 open.
 
 [P54 Client stubs](s12-p54-client-stubs-ownership.json): file098; five contexts, seven F symbols and three mixed headers remain. Worker export NtCurrentPeb verified B source ownership. Review98/116,502/617 open.
+
+[P55 Capture/lookaside](s12-p55-capture-lookaside-ownership.json): file099; no F business calls, mixed original declaration header remains. Review99/116,502/617 open.

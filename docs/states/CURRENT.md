@@ -36,7 +36,7 @@ P3 restored the original SoftPC entry and placed process startup and exit in the
 
 P4-P5: [AMD64 roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p4-native-roots.json) and [x86 roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p5-worker-roots.json) include verified builds, dual publication and targeted checks.
 
-P6 audited coalesced storage in the eleven product link maps, cross-checking C relocations with tentative definitions in selected COFF objects. The [storage evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json) adds eleven direct bindings and distinguishes ten mixed declaration groups. The tracker has 617 IDs; 555 remain open. P6 is evidence-only and retains the P5 package.
+P6: [Common storage evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json) expanded the tracker to617 IDs using production COFF/link ownership; release unchanged.
 
 P7 traced all ten mixed storage groups: seven redirector slots and the USER wheel remainder have C owners. Two BASE server globals require a startup-binding review in S14. The original server initializes both; the current lifecycle fixture supplies its own heap. Product failure has not been demonstrated. See the [per-symbol review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p6-common-storage.json).
 
@@ -114,7 +114,9 @@ P52: [List lifecycle](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p
 
 P53: [Drawing contexts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p53-drawing-ownership.json).
 
-P54: [Client stubs](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p54-client-stubs-ownership.json). Reviewed98/116:17 clear,66 lifecycle,15 ABI;18 remain. Open502/617. Mirror0/0; cumulative reduction2 points/10 lines. S12 active.
+P54: [Client stubs](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p54-client-stubs-ownership.json).
+
+P55: [Capture/lookaside](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p55-capture-lookaside-ownership.json). Reviewed99/116:17 clear,66 lifecycle,16 ABI;17 remain. Open502/617. Mirror0/0; cumulative reduction2 points/10 lines. S12 active.
 
 ## S11 Closure Record
 

@@ -644,6 +644,8 @@
 
 - 直接包含 · C0121 · wow32-dll · src/wow32-dll/include/wow_user_capture_bindings.h
 
+099 P55: Original capture/pool logic and lock remain C; scratch provider B, native heap/locks/conversion. No F link edge, but C0121 mixed declaration header remains. Mirror0/0; see s12-p55-capture-lookaside-ownership.json.
+
 ## 100 — src/non-mvdm/windows/core/ntuser/client/winmgrc.c
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h

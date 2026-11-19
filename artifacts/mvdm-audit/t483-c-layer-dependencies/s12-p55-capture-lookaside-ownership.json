@@ -1,0 +1,73 @@
+{
+  "baseline": "20da848af79d6110d9f581747988bc6db2da9841",
+  "status": "P55 original capture and lookaside ownership",
+  "files": [
+    {
+      "number": 99,
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "sha256": "8f461a2506dec5f89e9daa1e9ac5846daa966c131969897a322f58f23eaa61d5",
+      "compilerObject": "obj/opennt-user/rtlinit.obj",
+      "objectSha256": "58c5538a173b6b22e1b069aafeb0aee244502868de414eca467c5ab5c8b866ad",
+      "dependencyRecord": "obj/opennt-user/rtlinit.obj: #deps 18, deps mtime 8167519768913237 (VALID)",
+      "header": "C0121",
+      "coffUndefined": [
+        "__imp__HeapAlloc@12",
+        "__imp__HeapFree@12",
+        "__imp__GetProcessHeap@0",
+        "__imp__EnterCriticalSection@4",
+        "__imp__LeaveCriticalSection@4",
+        "_opennt_support_current_teb@0",
+        "_NtCurrentPeb@0",
+        "_RtlMultiByteToUnicodeN@20",
+        "_memset",
+        "_gcsLookaside"
+      ],
+      "verifiedSymbols": [],
+      "mapProviders": [
+        "0001:00077380       _memset                    10078380 f   libvcruntime:memset.obj",
+        "0001:0008caff       _RtlMultiByteToUnicodeN@20 1008daff f   legacy-wow-ntdll:NTDLL.DLL",
+        "0001:0008cb7d       _opennt_support_current_teb@0 1008db7d f   ntvdm:ntvdm.exe",
+        "0001:0008cb83       _NtCurrentPeb@0            1008db83 f   ntvdm:ntvdm.exe",
+        "0002:000003e4       __imp__GetProcessHeap@0    1008e3e4     kernel32:KERNEL32.dll",
+        "0002:00000508       __imp__LeaveCriticalSection@4 1008e508     kernel32:KERNEL32.dll",
+        "0002:0000050c       __imp__EnterCriticalSection@4 1008e50c     kernel32:KERNEL32.dll",
+        "0002:000005c8       __imp__HeapFree@12         1008e5c8     kernel32:KERNEL32.dll",
+        "0002:000005d0       __imp__HeapAlloc@12        1008e5d0     kernel32:KERNEL32.dll",
+        "0003:00005f40       _gcsLookaside              100a5f40     <common>"
+      ],
+      "conclusion": "No direct F implementation call in selected object. Original capture/pool algorithms remain C, heap/locks native, scratch descriptors B. Direct F capture header and its mixed lookaside declaration composition remain open."
+    }
+  ],
+  "mechanisms": {
+    "capture": "Original RtlCaptureAnsiString/LargeAnsiString select B thread scratch descriptor versus native heap, convert with RtlMultiByteToUnicodeN, free on conversion failure and preserve fAllocated contract. Caller cleanup owns successful allocation. Do not replace with another converter or read modern private TEB layout.",
+    "lookaside": "Original InitLookaside builds free-list segment, AllocLookasideEntry takes zone or heap fallback and zeroes entry; FreeLookasideEntry returns in-range entries to zone otherwise heap. Both original algorithm and storage stay C. gcsLookaside is declared globals.h and defined clglobal.c; do not infer F ownership from external reference or map common label.",
+    "initialization": "F wow_edit_lookaside_ready wraps INIT_ONCE/InitializeCriticalSectionEx for C gcsLookaside; rtlinit object does not call this initializer. Its consumers establish readiness before original operations. Source/header split must retain startup-before-use but must not attribute F callers as direct rtlinit link edges.",
+    "header": "wow_user_capture_bindings.h includes nt.h and F wow_edit_lookaside_bindings.h. That header composes original LARGE_STRING and LOOKASIDE through F multipass headers that include C user.h/usercli.h; it also contains zone subset, C lock extern, native heap macros and F ready declaration. Moving entire header into B would preserve forbidden outward type dependency. Separate C ABI declarations from F startup owner in S14; do not duplicate layouts in B merely to silence includes.",
+    "packaging": "opennt_support_current_teb/NtCurrentPeb are imported from NTVDM image but implemented by src/compat/opennt_support_rtl.c. Native heap imports and NTDLL conversion are direct. Product image export is not implementation-layer ownership.",
+    "method": "Complete rtlinit source, capture/lookaside/multipass headers, initializer, original lock definition, actual COFF and VALID deps/map read. No runtime verification or elimination claimed."
+  },
+  "progress": {
+    "reviewedFiles": 99,
+    "clearedDirectHeaderFiles": 17,
+    "deferredLifecycleFiles": 66,
+    "deferredSourceAbiCompositionFiles": 16,
+    "unreviewedFiles": 17,
+    "totalFiles": 116,
+    "openIds": 502,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "build": "Not run: no production changes.",
+    "runtime": "Not run: ownership classification only.",
+    "publication": "P47 retained; all22 actual image hashes verified against manifest, package 52216b4e-b210-4b25-81d1-e9c923d4750c.",
+    "documentation": "Verify-DocumentationGovernance.ps1 passed exit0; build/t483-s12-capture-lookaside-ownership/docs.log and docs.exit. git diff --check passed."
+  },
+  "followup": "S14 shared original capture/lookaside type composition. Retain original algorithms, B scratch provider and one process-lifetime C lock; F initializer ordering belongs to shared entry review. No mirror/header change authorized solely by this classification.",
+  "limits": "No source, guest, #error or #line changes; no dependency claimed eliminated."
+}
