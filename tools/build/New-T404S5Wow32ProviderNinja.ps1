@@ -684,6 +684,9 @@ foreach ($source in $providerSupportSources) {
         $ninja.Add('  cflags = $adapter_cflags')
     }
 }
+$supportObjects.Add('obj/compat/wow_fonts.obj')
+$ninja.Add('build obj/compat/wow_fonts.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_fonts.c')))
+$ninja.Add('  cflags = ' + $nativeCflags)
 $supportObjects.Add('obj/compat/wow_control_brushes.obj')
 $ninja.Add('build obj/compat/wow_control_brushes.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_brushes.c')))
 $ninja.Add('  cflags = ' + $nativeCflags)

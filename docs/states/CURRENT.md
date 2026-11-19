@@ -198,4 +198,4 @@ P67: [Text measurement delivery](../../artifacts/mvdm-audit/t483-c-layer-depende
 
 P68: [Window geometry](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p68-window-geometry-ownership.json).
 
-P90-P91: [RAP delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p90-rap-owner.json), [WOW ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p91-wow-alias-flush-ownership.json). Reviewed116/116 compile and47/74 link-only;491/618 IDs open,77 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Packagebcdecd3d-405c-4367-a428-892650e11c8b remains published;22 hashes verified. S12 active.
+P92: [Font ownership delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p92-font-owner.json). Reviewed116/116 compile and53/74 link-only;485/618 IDs open,83 eliminated. Mirror delta0/0; cumulative reduction2 points/10 lines. Package81afdfb3-2a7e-4b14-a08e-917573c7ed5b published to both destinations;22 hashes verified. Cached builds, final font checks and8 A/B graphs passed. S12 active.

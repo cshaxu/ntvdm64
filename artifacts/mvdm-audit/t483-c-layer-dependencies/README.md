@@ -299,3 +299,5 @@ P89: [Timer/idle/VGA ownership](s12-p89-timer-idle-vga-ownership.json); files38-
 P90: [RAP provider ownership](s12-p90-rap-owner.json); files41-43 reviewed; three SDK-only provider symbols moved unchanged F to B, all cached builds, focused redirector tests and dual publication passed. DLC lifetime remains S13.
 
 P91: [WOW alias and flush ownership](s12-p91-wow-alias-flush-ownership.json); files44-47 reviewed using current COFF/maps; C0456 original-provider/ABI pairing reserved for S14, product alias/callback scopes for S13. No code migration or new elimination.
+
+P92: [Font provider ownership delivery](s12-p92-font-owner.json); files48-53 reviewed; six public-GDI/font-resource symbols moved F to B with SDK metrics layout, actual-object/native/negative checks and dual publication.

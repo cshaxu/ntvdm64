@@ -1,0 +1,217 @@
+#include <windows.h>
+#include <winddi.h>
+#include <prntfont.h>
+
+/* DIVERGENCE(ADAPTER-WIN32-052): OpenNT's GetHFONT retrieves the font
+ * currently selected by the DC.  The selected WOW32 caller only returns that
+ * handle through its existing 16/32 handle conversion, which is exactly the
+ * public GetCurrentObject(OBJ_FONT) contract. */
+HFONT WINAPI GetHFONT(HDC device_context)
+{
+    return (HFONT)GetCurrentObject(device_context, OBJ_FONT);
+}
+
+/* DIVERGENCE(ADAPTER-WIN32-053): OpenNT dcquery.c calls the private glyph
+ * query with bIgnoreRotation=TRUE for the Win3.1 caller.  The public API has
+ * no flag for that policy.  Preserve its finite observable input by selecting
+ * a one-shot equivalent font with only escapement/orientation cleared, then
+ * restore the caller's selected font before returning.  Modern GDI remains
+ * authoritative for the DC, glyph buffer, metrics and result/error contract;
+ * there is deliberately no font cache or private GDI reconstruction. */
+DWORD WINAPI GetGlyphOutlineWow(HDC device_context, UINT character,
+    UINT format, LPGLYPHMETRICS metrics, DWORD buffer_size, LPVOID buffer,
+    const MAT2 *matrix)
+{
+    LOGFONTA log_font;
+    HFONT current_font, compatible_font;
+    HGDIOBJ old_object;
+    DWORD result;
+
+    current_font = (HFONT)GetCurrentObject(device_context, OBJ_FONT);
+    if (current_font == NULL ||
+        GetObjectA(current_font, sizeof(log_font), &log_font) != sizeof(log_font) ||
+        (log_font.lfEscapement == 0 && log_font.lfOrientation == 0)) {
+        return GetGlyphOutlineA(device_context, character, format, metrics,
+            buffer_size, buffer, matrix);
+    }
+    log_font.lfEscapement = 0;
+    log_font.lfOrientation = 0;
+    compatible_font = CreateFontIndirectA(&log_font);
+    if (compatible_font == NULL) {
+        return GetGlyphOutlineA(device_context, character, format, metrics,
+            buffer_size, buffer, matrix);
+    }
+    old_object = SelectObject(device_context, compatible_font);
+    if (old_object == NULL || old_object == HGDI_ERROR) {
+        (void)DeleteObject(compatible_font);
+        return GetGlyphOutlineA(device_context, character, format, metrics,
+            buffer_size, buffer, matrix);
+    }
+    result = GetGlyphOutlineA(device_context, character, format, metrics,
+        buffer_size, buffer, matrix);
+    (void)SelectObject(device_context, old_object);
+    (void)DeleteObject(compatible_font);
+    return result;
+}
+
+/* DIVERGENCE(ADAPTER-WIN32-054): OpenNT's public client ExtEscape handling
+ * routes GETEXTENDEDTEXTMETRICS through GetETM, then updates exactly the
+ * kerning-pair count from GetKerningPairsA.  Retain that same public escape,
+ * structure size and BOOL result direction; no driver-font or private GDI
+ * table is modeled. */
+BOOL GetETM(HDC device_context, EXTTEXTMETRIC *metrics)
+{
+    int result;
+
+    if (metrics == NULL) return FALSE;
+    result = ExtEscape(device_context, GETEXTENDEDTEXTMETRICS, 0, NULL,
+        sizeof(*metrics), (LPSTR)metrics);
+    if (result <= 0) return FALSE;
+    metrics->emKernPairs = (WORD)GetKerningPairsA(device_context, 0, NULL);
+    return TRUE;
+}
+
+typedef struct _WOW_NETWORK_FONT {
+    struct _WOW_NETWORK_FONT *next;
+    UINT owner_id;
+    UINT load_count;
+    WCHAR path[MAX_PATH];
+} WOW_NETWORK_FONT;
+
+static INIT_ONCE wow_network_font_once = INIT_ONCE_STATIC_INIT;
+static CRITICAL_SECTION wow_network_font_lock;
+static WOW_NETWORK_FONT *wow_network_fonts;
+
+static BOOL CALLBACK wow_network_font_initialize(PINIT_ONCE once,
+    PVOID parameter, PVOID *context)
+{
+    UNREFERENCED_PARAMETER(once);
+    UNREFERENCED_PARAMETER(parameter);
+    UNREFERENCED_PARAMETER(context);
+    InitializeCriticalSection(&wow_network_font_lock);
+    return TRUE;
+}
+
+static BOOL wow_network_font_is_remote(LPCWSTR path, LPWSTR full_path)
+{
+    WCHAR root[4], fonts[MAX_PATH];
+    DWORD length = 0;
+    UINT windows_length;
+
+    /* The tracking caller uses bMakePathNameW with pfl == NULL: fonts
+     * directory first for relative paths, then the default search path.
+     * No font-sweeper relocation or shared GDI directory cache is needed. */
+    windows_length = GetWindowsDirectoryW(fonts, MAX_PATH);
+    if (windows_length == 0 || windows_length >= MAX_PATH) return FALSE;
+    if (fonts[windows_length - 1] == L'\\') --windows_length;
+    if (windows_length + ARRAYSIZE(L"\\fonts") > MAX_PATH) return FALSE;
+    lstrcpyW(fonts + windows_length, L"\\fonts");
+    if (path[0] != L'\\' && !(path[0] && path[1] == L':' && path[2] == L'\\'))
+        length = SearchPathW(fonts, path, NULL, MAX_PATH, full_path, NULL);
+    if (length == 0)
+        length = SearchPathW(NULL, path, NULL, MAX_PATH, full_path, NULL);
+    if (length == 0 || length >= MAX_PATH) return FALSE;
+    /* OpenNT font.c::bFileIsOnTheHardDrive treats every non-drive path
+     * as remote, and excludes only these four local drive classes. */
+    if (full_path[1] != ':') return TRUE;
+    root[0] = full_path[0];
+    root[1] = ':';
+    root[2] = '\\';
+    root[3] = '\0';
+    switch (GetDriveTypeW(root)) {
+    case DRIVE_REMOVABLE:
+    case DRIVE_FIXED:
+    case DRIVE_CDROM:
+    case DRIVE_RAMDISK:
+        return FALSE;
+    default:
+        return TRUE;
+    }
+}
+
+/* DIVERGENCE(ADAPTER-WIN32-055): preserve the OpenNT private font tracking
+ * contract with public font APIs and a narrow task-id/reference-count list.
+ * The original non-local drive predicate selects tracked fonts. Teardown
+ * repeats the public remove call once for every recorded load. Original
+ * ANSI-to-Unicode, fonts-first search and Unicode identity are retained,
+ * matching the original ownership
+ * rule without modeling GDI's font internals. */
+int AddFontResourceTracking(LPCSTR path, UINT owner_id)
+{
+    WOW_NETWORK_FONT *entry;
+    WCHAR name[MAX_PATH], full_path[MAX_PATH];
+    int result;
+
+    if (!MultiByteToWideChar(CP_ACP, 0, path, -1, name, MAX_PATH)) return 0;
+    result = AddFontResourceW(name);
+    if (result == 0 || !wow_network_font_is_remote(name, full_path)) return result;
+    (void)InitOnceExecuteOnce(&wow_network_font_once,
+        wow_network_font_initialize, NULL, NULL);
+    EnterCriticalSection(&wow_network_font_lock);
+    for (entry = wow_network_fonts; entry != NULL; entry = entry->next) {
+        if (entry->owner_id == owner_id && _wcsicmp(entry->path, full_path) == 0) {
+            ++entry->load_count;
+            LeaveCriticalSection(&wow_network_font_lock);
+            return result;
+        }
+    }
+    entry = (WOW_NETWORK_FONT *)LocalAlloc(LMEM_FIXED, sizeof(*entry));
+    if (entry != NULL) {
+        entry->owner_id = owner_id;
+        entry->load_count = 1;
+        lstrcpynW(entry->path, full_path, MAX_PATH);
+        entry->next = wow_network_fonts;
+        wow_network_fonts = entry;
+    }
+    LeaveCriticalSection(&wow_network_font_lock);
+    return result;
+}
+
+int RemoveFontResourceTracking(LPCSTR path, UINT owner_id)
+{
+    WOW_NETWORK_FONT **link;
+    WOW_NETWORK_FONT *entry;
+    WCHAR name[MAX_PATH], full_path[MAX_PATH];
+    int result;
+
+    if (!MultiByteToWideChar(CP_ACP, 0, path, -1, name, MAX_PATH)) return 0;
+    result = RemoveFontResourceW(name);
+    if (result == 0 || !wow_network_font_is_remote(name, full_path)) return result;
+    (void)InitOnceExecuteOnce(&wow_network_font_once,
+        wow_network_font_initialize, NULL, NULL);
+    EnterCriticalSection(&wow_network_font_lock);
+    for (link = &wow_network_fonts; (entry = *link) != NULL; link = &entry->next) {
+        if (entry->owner_id == owner_id && _wcsicmp(entry->path, full_path) == 0) {
+            if (--entry->load_count == 0) {
+                *link = entry->next;
+                (void)LocalFree(entry);
+            }
+            break;
+        }
+    }
+    LeaveCriticalSection(&wow_network_font_lock);
+    return result;
+}
+
+void UnloadNetworkFonts(UINT owner_id)
+{
+    WOW_NETWORK_FONT **link;
+    WOW_NETWORK_FONT *entry;
+    UINT count;
+
+    (void)InitOnceExecuteOnce(&wow_network_font_once,
+        wow_network_font_initialize, NULL, NULL);
+    EnterCriticalSection(&wow_network_font_lock);
+    for (link = &wow_network_fonts; (entry = *link) != NULL;) {
+        if (entry->owner_id != owner_id) {
+            link = &entry->next;
+            continue;
+        }
+        *link = entry->next;
+        count = entry->load_count;
+        while (count-- != 0) (void)RemoveFontResourceW(entry->path);
+        (void)LocalFree(entry);
+    }
+    LeaveCriticalSection(&wow_network_font_lock);
+}
+

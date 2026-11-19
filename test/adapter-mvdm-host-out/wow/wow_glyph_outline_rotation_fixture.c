@@ -3,19 +3,6 @@
 #include <string.h>
 #include "compat/include/wow32_provider_private.h"
 
-int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE instance,
-    LPCDLGTEMPLATEW template_data, HWND owner, DLGPROC procedure,
-    LPARAM parameter, UINT flags)
-{
-    UNREFERENCED_PARAMETER(instance);
-    UNREFERENCED_PARAMETER(template_data);
-    UNREFERENCED_PARAMETER(owner);
-    UNREFERENCED_PARAMETER(procedure);
-    UNREFERENCED_PARAMETER(parameter);
-    UNREFERENCED_PARAMETER(flags);
-    return -1;
-}
-
 typedef struct _OUTLINE_RESULT {
     GLYPHMETRICS metrics;
     DWORD size;
@@ -63,7 +50,7 @@ static BOOL fixture_equal_outline(const OUTLINE_RESULT *left,
         (left->size == 0 || memcmp(left->data, right->data, left->size) == 0);
 }
 
-int main(void)
+int __cdecl main(void)
 {
     HDC dc;
     HFONT rotated, plain, old;
@@ -82,7 +69,7 @@ int main(void)
     old = (HFONT)SelectObject(dc, rotated);
     if (old == NULL || !fixture_outline(dc, FALSE, &raw) ||
         !fixture_outline(dc, TRUE, &adapted) ||
-        GetCurrentObject(dc, OBJ_FONT) != rotated) return 3;
+        GetCurrentObject(dc, OBJ_FONT) != rotated || GetHFONT(dc) != rotated) return 3;
     raw_differs = !fixture_equal_outline(&raw, &adapted);
     if (SelectObject(dc, plain) == NULL || !fixture_outline(dc, FALSE, &expected))
         return 4;

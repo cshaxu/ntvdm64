@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory = $true)][string]$BuildRoot,
     [string]$RepositoryRoot,
+    [string]$ProviderObject,
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
 
@@ -12,10 +13,10 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $out = [IO.Path]::GetFullPath($BuildRoot)
 $vs = (Resolve-Path -LiteralPath $VsDevCmd).Path
 $fixture = Join-Path $root 'test\adapter-mvdm-host-out\wow\wow_glyph_outline_rotation_fixture.c'
-$provider = Join-Path $root 'src\wow32-dll\source\wow_public_user_facade.c'
+$provider = if ($ProviderObject) { (Resolve-Path $ProviderObject).Path } else { Join-Path $root 'src\compat\wow_fonts.c' }
 New-Item -ItemType Directory -Force -Path $out | Out-Null
 $compile = 'call "' + $vs + '" -arch=x86 -host_arch=x64 >nul && cd /d "' +
-    $out + '" && cl /nologo /TC /MT /W4 /WX /I"' + $root + '\src" /I"' + $root + '\src\non-mvdm\public\internal\windows\inc" /Fe:wow_glyph_outline_rotation_fixture.exe "' +
+    $out + '" && cl /nologo /MT /Gz /W4 /WX /external:anglebrackets /external:W0 /I"' + $root + '\src" /Fe:wow_glyph_outline_rotation_fixture.exe "' +
     $fixture + '" "' + $provider + '" /link gdi32.lib user32.lib kernel32.lib'
 & cmd.exe /d /s /c $compile
 if ($LASTEXITCODE) { throw 'x86 WOW glyph-outline fixture build failed.' }

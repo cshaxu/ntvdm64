@@ -1,4 +1,12 @@
 #include <windows.h>
+#include <winddi.h>
+#include <prntfont.h>
+#include <stddef.h>
+
+/* Original wingdip.h: 24 SHORT fields followed by two WORD counts. */
+C_ASSERT(sizeof(EXTTEXTMETRIC) == 52);
+C_ASSERT(offsetof(EXTTEXTMETRIC, emKernPairs) == 48);
+C_ASSERT(offsetof(EXTTEXTMETRIC, emKernTracks) == 50);
 #include <stdio.h>
 #include <string.h>
 #include "compat/include/wow32_provider_private.h"
@@ -16,7 +24,7 @@ static int WINAPI fixture_ext_escape(HDC dc, int escape, int input_size,
     arguments_valid = dc == (HDC)(ULONG_PTR)1 &&
         escape == GETEXTENDEDTEXTMETRICS && input_size == 0 && input == NULL &&
         output_size == sizeof(*metrics) && output != NULL;
-    if (escape_result > 0) metrics->etmSize = sizeof(*metrics);
+    if (escape_result > 0) metrics->emSize = sizeof(*metrics);
     return escape_result;
 }
 
@@ -33,12 +41,12 @@ static DWORD WINAPI fixture_kerning(HDC dc, DWORD count, LPKERNINGPAIR pairs)
 #define ExtEscape fixture_ext_escape
 #define GetKerningPairsA fixture_kerning
 #endif
-#include "../../../src/wow32-dll/source/wow_public_user_facade.c"
+#include "../../../src/compat/wow_fonts.c"
 #ifndef WOW_ETM_NATIVE
 #undef GetKerningPairsA
 #undef ExtEscape
 
-int main(void)
+int __cdecl main(void)
 {
     const int results[] = {-1, -1234, 0, 1, 17};
     unsigned index;
@@ -58,8 +66,8 @@ int main(void)
             kerning_calls != (unsigned)expected) return 1;
         if (!expected && memcmp(&metrics, &before, sizeof(metrics)) != 0)
             return 2;
-        if (expected && (metrics.etmSize != sizeof(metrics) ||
-                metrics.etmNKernPairs != 7)) return 3;
+        if (expected && (metrics.emSize != sizeof(metrics) ||
+                metrics.emKernPairs != 7)) return 3;
     }
     escape_calls = 0;
     if (GetETM((HDC)(ULONG_PTR)1, NULL) || escape_calls != 0) return 4;
@@ -67,7 +75,7 @@ int main(void)
     return 0;
 }
 #else
-int main(void)
+int __cdecl main(void)
 {
     HDC dc = CreateCompatibleDC(NULL);
     HFONT font, old;
@@ -90,7 +98,7 @@ int main(void)
     actual = GetETM(dc, &adapted);
     printf("native_face=%s escape=%d adapted=%d\n", face, result, actual);
     if (result > 0)
-        direct.etmNKernPairs = (WORD)GetKerningPairsA(dc, 0, NULL);
+        direct.emKernPairs = (WORD)GetKerningPairsA(dc, 0, NULL);
     SelectObject(dc, old);
     DeleteObject(font);
     DeleteDC(dc);

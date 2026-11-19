@@ -1,0 +1,631 @@
+{
+  "baseline": "38d07dddd28986bd1bc41f0033c46ff742d70242",
+  "files": [
+    {
+      "order": 48,
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "decision": "Retain C DIB mapping and conversion. CallBack16 ownership S13; C0456 mapping/ABI pairing S14.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        },
+        {
+          "id": "C0481",
+          "symbols": [
+            "_CallBack16@16"
+          ],
+          "providers": [
+            "0001:0006f650       _CallBack16@16             10070650 f   wow_user_native_extension.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wdib.obj",
+      "sha256": "ee5370848217b079f6166ffd183d08d07277c817101977a893adbc99d7b7d423",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 49,
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "decision": "Keep original C Escape dispatch; GetETM now SDK-only B provider with identical metrics layout. Flush S14 and callback S13 remain.",
+      "bindings": [
+        {
+          "id": "C0436",
+          "symbols": [
+            "_GetETM@8"
+          ],
+          "providers": [
+            "0001:00074990       _GetETM@8                  10075990 f   wow_fonts.obj"
+          ]
+        },
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        },
+        {
+          "id": "C0481",
+          "symbols": [
+            "_CallBack16@16"
+          ],
+          "providers": [
+            "0001:0006f650       _CallBack16@16             10070650 f   wow_user_native_extension.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wgdi.obj",
+      "sha256": "082c3d6ce0884198594de90505889004cc36f7e9446fe7135f06c61860db21da",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 50,
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "decision": "Keep original glyph thunk and guest-output conversion C. GetGlyphOutlineWow moves unchanged to B using public GDI; flush S14 remains.",
+      "bindings": [
+        {
+          "id": "C0437",
+          "symbols": [
+            "_GetGlyphOutlineWow@28"
+          ],
+          "providers": [
+            "0001:000749e0       _GetGlyphOutlineWow@28     100759e0 f   wow_fonts.obj"
+          ]
+        },
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wgdi31.obj",
+      "sha256": "cabb443264f0f5fb5d9b474be54d236ed1c2d7a6ace45ba6401845fdf03fe2ff",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 51,
+      "path": "src/mvdm-host/wow32/wgfont.c",
+      "decision": "Keep original WOW font thunks C. Explicit owner ID is passed into SDK-only B font load/refcount/unload cohort; GetHFONT B. Callback ownership remains S13.",
+      "bindings": [
+        {
+          "id": "C0434",
+          "symbols": [
+            "_AddFontResourceTracking@8"
+          ],
+          "providers": [
+            "0001:00074850       _AddFontResourceTracking@8 10075850 f   wow_fonts.obj"
+          ]
+        },
+        {
+          "id": "C0438",
+          "symbols": [
+            "_GetHFONT@4"
+          ],
+          "providers": [
+            "0001:00074b00       _GetHFONT@4                10075b00 f   wow_fonts.obj"
+          ]
+        },
+        {
+          "id": "C0439",
+          "symbols": [
+            "_RemoveFontResourceTracking@8"
+          ],
+          "providers": [
+            "0001:00074b10       _RemoveFontResourceTracking@8 10075b10 f   wow_fonts.obj"
+          ]
+        },
+        {
+          "id": "C0481",
+          "symbols": [
+            "_CallBack16@16"
+          ],
+          "providers": [
+            "0001:0006f650       _CallBack16@16             10070650 f   wow_user_native_extension.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wgfont.obj",
+      "sha256": "a2ed7e6118c73bdade2c57dbba65bfb185c108b7f7b4afa0164ecd4f5c536a68",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 52,
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "decision": "Keep original metafile conversion and enumeration callback algorithm C. Flush S14; callback scopes S13.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        },
+        {
+          "id": "C0481",
+          "symbols": [
+            "_CallBack16@16"
+          ],
+          "providers": [
+            "0001:0006f650       _CallBack16@16             10070650 f   wow_user_native_extension.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wgmeta.obj",
+      "sha256": "bd24db18f778060607f2dee03f1357da7a9db346e7185e1da48a5e30f88f3a25",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "order": 53,
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "decision": "Keep original printer-settings conversion C. Sole recorded outward link is flush, assigned S14 paired provider review.",
+      "bindings": [
+        {
+          "id": "C0456",
+          "symbols": [
+            "_Sim32FlushVDMPointer@16"
+          ],
+          "providers": [
+            "0001:00052d60       _Sim32FlushVDMPointer@16   10053d60 f   wow_sim32_pointer_compat.obj"
+          ]
+        }
+      ],
+      "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wgprnset.obj",
+      "sha256": "a7e2b27fcf3feb878f29a1aca3597cec23c74bd278fe7d3d2b91ec64e41cfb57",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "migration": {
+    "source": "src/wow32-dll/source/wow_public_user_facade.c",
+    "destination": "src/compat/wow_fonts.c",
+    "eliminated": [
+      "C0434",
+      "C0436",
+      "C0437",
+      "C0438",
+      "C0439",
+      "C0441"
+    ],
+    "behavior": "Identical six function bodies and private helpers/state except equivalent SDK field spelling etmNKernPairs -> emKernPairs. Stdcall remains selected by actual /Gz product command.",
+    "authority": "Modern GDI owns native DC/font; compat owns explicit owner-id/load-count list. No lookup or dereference of owner_id; C controls task teardown and calls UnloadNetworkFonts.",
+    "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\compat\\wow_fonts.obj",
+    "sha256": "5a20aa9e53889a235da910cb8b60008e16077ff1b3a8e82f44ba2a2b4f4875d3",
+    "undefined": [
+      "__wcsicmp",
+      "__imp__SearchPathW@24",
+      "__imp__GetDriveTypeW@4",
+      "__imp__InitializeCriticalSection@4",
+      "__imp__EnterCriticalSection@4",
+      "__imp__LeaveCriticalSection@4",
+      "__imp__InitOnceExecuteOnce@16",
+      "__imp__GetWindowsDirectoryW@8",
+      "__imp__LocalAlloc@8",
+      "__imp__LocalFree@4",
+      "__imp__lstrcpynW@12",
+      "__imp__lstrcpyW@8",
+      "__imp__AddFontResourceW@4",
+      "__imp__CreateFontIndirectA@4",
+      "__imp__DeleteObject@4",
+      "__imp__ExtEscape@24",
+      "__imp__GetCurrentObject@8",
+      "__imp__GetGlyphOutlineA@28",
+      "__imp__RemoveFontResourceW@4",
+      "__imp__SelectObject@8",
+      "__imp__GetObjectA@12",
+      "__imp__GetKerningPairsA@12",
+      "__imp__MultiByteToWideChar@24",
+      "@__security_check_cookie@4",
+      "___security_cookie"
+    ]
+  },
+  "originalBoundaries": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "paths": [
+      "windows/core/ntgdi/client/ldc.c:758 GetHFONT",
+      "windows/core/ntgdi/client/dcquery.c:2407 GetGlyphOutlineWow",
+      "windows/core/ntgdi/client/dcquery.c:3009 GetETM",
+      "windows/core/ntgdi/client/font.c:2528 AddFontResourceTracking,2697 RemoveFontResourceTracking,2745 UnloadNetworkFonts"
+    ],
+    "decision": "Existing public-GDI adaptation preserved; no private kernel GDI import. Ownership migration is not new proof of full original GDI equivalence."
+  },
+  "metricsLayout": {
+    "originalFields": [
+      [
+        "SHORT",
+        "etmSize"
+      ],
+      [
+        "SHORT",
+        "etmPointSize"
+      ],
+      [
+        "SHORT",
+        "etmOrientation"
+      ],
+      [
+        "SHORT",
+        "etmMasterHeight"
+      ],
+      [
+        "SHORT",
+        "etmMinScale"
+      ],
+      [
+        "SHORT",
+        "etmMaxScale"
+      ],
+      [
+        "SHORT",
+        "etmMasterUnits"
+      ],
+      [
+        "SHORT",
+        "etmCapHeight"
+      ],
+      [
+        "SHORT",
+        "etmXHeight"
+      ],
+      [
+        "SHORT",
+        "etmLowerCaseAscent"
+      ],
+      [
+        "SHORT",
+        "etmLowerCaseDescent"
+      ],
+      [
+        "SHORT",
+        "etmSlant"
+      ],
+      [
+        "SHORT",
+        "etmSuperScript"
+      ],
+      [
+        "SHORT",
+        "etmSubScript"
+      ],
+      [
+        "SHORT",
+        "etmSuperScriptSize"
+      ],
+      [
+        "SHORT",
+        "etmSubScriptSize"
+      ],
+      [
+        "SHORT",
+        "etmUnderlineOffset"
+      ],
+      [
+        "SHORT",
+        "etmUnderlineWidth"
+      ],
+      [
+        "SHORT",
+        "etmDoubleUpperUnderlineOffset"
+      ],
+      [
+        "SHORT",
+        "etmDoubleLowerUnderlineOffset"
+      ],
+      [
+        "SHORT",
+        "etmDoubleUpperUnderlineWidth"
+      ],
+      [
+        "SHORT",
+        "etmDoubleLowerUnderlineWidth"
+      ],
+      [
+        "SHORT",
+        "etmStrikeOutOffset"
+      ],
+      [
+        "SHORT",
+        "etmStrikeOutWidth"
+      ],
+      [
+        "WORD",
+        "etmNKernPairs"
+      ],
+      [
+        "WORD",
+        "etmNKernTracks"
+      ]
+    ],
+    "sdkFields": [
+      [
+        "short",
+        "emSize"
+      ],
+      [
+        "short",
+        "emPointSize"
+      ],
+      [
+        "short",
+        "emOrientation"
+      ],
+      [
+        "short",
+        "emMasterHeight"
+      ],
+      [
+        "short",
+        "emMinScale"
+      ],
+      [
+        "short",
+        "emMaxScale"
+      ],
+      [
+        "short",
+        "emMasterUnits"
+      ],
+      [
+        "short",
+        "emCapHeight"
+      ],
+      [
+        "short",
+        "emXHeight"
+      ],
+      [
+        "short",
+        "emLowerCaseAscent"
+      ],
+      [
+        "short",
+        "emLowerCaseDescent"
+      ],
+      [
+        "short",
+        "emSlant"
+      ],
+      [
+        "short",
+        "emSuperScript"
+      ],
+      [
+        "short",
+        "emSubScript"
+      ],
+      [
+        "short",
+        "emSuperScriptSize"
+      ],
+      [
+        "short",
+        "emSubScriptSize"
+      ],
+      [
+        "short",
+        "emUnderlineOffset"
+      ],
+      [
+        "short",
+        "emUnderlineWidth"
+      ],
+      [
+        "short",
+        "emDoubleUpperUnderlineOffset"
+      ],
+      [
+        "short",
+        "emDoubleLowerUnderlineOffset"
+      ],
+      [
+        "short",
+        "emDoubleUpperUnderlineWidth"
+      ],
+      [
+        "short",
+        "emDoubleLowerUnderlineWidth"
+      ],
+      [
+        "short",
+        "emStrikeOutOffset"
+      ],
+      [
+        "short",
+        "emStrikeOutWidth"
+      ],
+      [
+        "WORD",
+        "emKernPairs"
+      ],
+      [
+        "WORD",
+        "emKernTracks"
+      ]
+    ],
+    "size": 52,
+    "kernPairsOffset": 48,
+    "kernTracksOffset": 50,
+    "proof": "Same ordered 24 SHORT and 2 WORD fields; compiled static size/offset assertions and result canaries."
+  },
+  "verification": {
+    "buildExit": 0,
+    "postExit": 0,
+    "markers": [
+      "WOW_GLYPH_OUTLINE_IGNORE_ROTATION_OK",
+      "WOW_GDI_ETM_RESULT_CONTRACT_OK",
+      "WOW_GDI_ETM_NATIVE_BOUNDARY_OK",
+      "WOW_FONT_ORIGINAL_DRIVE_CLASSIFICATION_OK",
+      "WOW_FONT_TASK_REFERENCE_AND_FAILURE_CONTRACT_OK",
+      "WOW_FONT_SEARCH_ORDER_AND_UNICODE_UNLOAD_OK",
+      "WOW_FONT_NATIVE_READ_ONLY_SEARCH_OK"
+    ],
+    "abGraphs": 8,
+    "runner": "test/observation/verify-wow-font-compat.ps1",
+    "arguments": "-BuildRoot build/t483-s12-font-owner/font-tests-final -ProviderObject build/.ninja/msvc-x86-release/wow32/obj/compat/wow_fonts.obj",
+    "scope": "Actual product object for glyph/font-selection runtime; actual source body with controlled/native dependencies for metrics and font tracking. No installed network-font mutation or Full/Win16 interactive acceptance claimed.",
+    "failures": [
+      "Initial full build failed because prntfont.h prerequisite winddi.h was missing; fixed SDK includes and full rebuild passed.",
+      "Initial glyph runner selected C winddi.h through obsolete include root; removed root, SDK external warnings separated from /WX product warnings.",
+      "First post-publication test passed .obj under global /TC; corrected test command, final post suite passed. Publication itself succeeded; deliver.exit=1 remains historical test-runner failure."
+    ],
+    "normalizedIdentity": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "identityRule": "Only GUID and PE/debug timestamps masked; WOW32 differs, other 10 match.",
+    "documentationGate": "passed; build/t483-s12-font-owner/docs.exit=0"
+  },
+  "publication": {
+    "package": "81afdfb3-2a7e-4b14-a08e-917573c7ed5b",
+    "verified": [
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "a49567e16762f2f63dc5a060046e25c592bc15c0b182b3a2d81dd98085bcc8a5"
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "743b950f4f7d51aaa97e501867a2d8f9e7ccf42a456e5a87f1e52c4d289ff958"
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "5907f3d796dc2083cbda2d8d0da06d102cadc6a8f398b9cf7abc7e63bfff8d81"
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "68411abf75244c29b24ddc79ab7291ced5891151b561289987fdfc5fb0585127"
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "074c831691d0a47d9c1336e0c8dcef4503124b219600855564bfb0fac1fd01ac"
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "deda1e100ec7d3fc702665bc8950bd3902774783339b142b9a86713637313401"
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "b93c59da9b53ae4386241bb61db30a18678e10bc418356963a09dbd2eb366274"
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "3c765301c669dcc2530a88e1d3257d630eac4707c8a23bc369a5677c3ab39a0b"
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "9a360d4ec71efbddfb46b59ccb79cabff06b06cb723e63254bb7983a59937ba6"
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "85ce009720f51c59added5077de450d9cc8ecaed18f8394867a4fd2afb138745"
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "b9917c94c74ec9a93f04aca524df35154806dc0a56f232bc7a8c465428cc798c"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VCDEX.DLL",
+        "sha256": "a49567e16762f2f63dc5a060046e25c592bc15c0b182b3a2d81dd98085bcc8a5"
+      },
+      {
+        "path": "O:\\winnt\\system32\\run16.exe",
+        "sha256": "743b950f4f7d51aaa97e501867a2d8f9e7ccf42a456e5a87f1e52c4d289ff958"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntsrv.exe",
+        "sha256": "5907f3d796dc2083cbda2d8d0da06d102cadc6a8f398b9cf7abc7e63bfff8d81"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntcon.exe",
+        "sha256": "68411abf75244c29b24ddc79ab7291ced5891151b561289987fdfc5fb0585127"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvdm.exe",
+        "sha256": "074c831691d0a47d9c1336e0c8dcef4503124b219600855564bfb0fac1fd01ac"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntvwm.exe",
+        "sha256": "deda1e100ec7d3fc702665bc8950bd3902774783339b142b9a86713637313401"
+      },
+      {
+        "path": "O:\\winnt\\system32\\ntmon.exe",
+        "sha256": "b93c59da9b53ae4386241bb61db30a18678e10bc418356963a09dbd2eb366274"
+      },
+      {
+        "path": "O:\\winnt\\system32\\WOW32.DLL",
+        "sha256": "3c765301c669dcc2530a88e1d3257d630eac4707c8a23bc369a5677c3ab39a0b"
+      },
+      {
+        "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+        "sha256": "9a360d4ec71efbddfb46b59ccb79cabff06b06cb723e63254bb7983a59937ba6"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook32.dll",
+        "sha256": "85ce009720f51c59added5077de450d9cc8ecaed18f8394867a4fd2afb138745"
+      },
+      {
+        "path": "O:\\winnt\\system32\\nthook64.dll",
+        "sha256": "b9917c94c74ec9a93f04aca524df35154806dc0a56f232bc7a8c465428cc798c"
+      }
+    ]
+  },
+  "progress": {
+    "compileReviewed": 116,
+    "compileTotal": 116,
+    "linkOnlyReviewed": 53,
+    "linkOnlyTotal": 74,
+    "total": 618,
+    "statusCounts": {
+      "excluded-diagnostic": 1,
+      "open": 485,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 83
+    }
+  },
+  "mirror": {
+    "batchPoints": 0,
+    "batchLines": 0,
+    "cumulativeReducedPoints": 2,
+    "cumulativeReducedLines": 10
+  },
+  "followUp": "S12 active. Remaining callback/flush owner groups stay S13/S14; original guest and all mirrors unchanged."
+}

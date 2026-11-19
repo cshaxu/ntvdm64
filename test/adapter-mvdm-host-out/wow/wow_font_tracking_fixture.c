@@ -58,7 +58,7 @@ static HLOCAL WINAPI fixture_alloc(UINT flags, SIZE_T size)
 #define AddFontResourceW fixture_add
 #define RemoveFontResourceW fixture_remove
 #define LocalAlloc fixture_alloc
-#include "../../../src/wow32-dll/source/wow_public_user_facade.c"
+#include "../../../src/compat/wow_fonts.c"
 #undef LocalAlloc
 #undef RemoveFontResourceW
 #undef AddFontResourceW
@@ -67,7 +67,7 @@ static HLOCAL WINAPI fixture_alloc(UINT flags, SIZE_T size)
 
 #define CHECK(c) do { if (!(c)) { printf("FAIL line %d: %s\n", __LINE__, #c); return 1; } } while (0)
 
-int main(void)
+int __cdecl main(void)
 {
 #ifdef WOW_FONT_NATIVE_SEARCH
     WCHAR directory[MAX_PATH], pattern[MAX_PATH], expected[MAX_PATH], actual[MAX_PATH];
