@@ -1,11 +1,12 @@
 /* DIVERGENCE(MVDM-HOST-DIV-127): unavailable fallback providers retain the
  * source-proven fail-fast behavior. */
-#include <nt.h>
-#include <ntrtl.h>
-#include <nturtl.h>
 #include <windows.h>
-#include "insignia.h"
 #include <intrin.h>
+
+/* Selected OpenNT softpc.new/host/inc/insignia.h:64,72,78 scalar ABI. */
+typedef unsigned char IU8;
+typedef unsigned long IU32;
+typedef unsigned int IUH;
 
 VOID EDL_fast_bop(ULONG immed)
 {

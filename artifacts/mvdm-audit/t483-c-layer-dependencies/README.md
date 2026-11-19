@@ -329,3 +329,5 @@ P104: [Start-glass ownership](s12-p104-start-glass-ownership.json); C0320/C0440 
 P105: [Console close ownership](s12-p105-console-close-ownership.json); five callers classified, isolated macro alias rejected for C4273. Graphics lifetime remains an open S13 cohort; no product change or new runtime claim.
 
 P106: [First nine open header dispositions](s12-p106-header-dispositions.json); S13 lifecycle and S14 original declaration ownership separated, P102/P103 delivered providers excluded from remaining work. No dependency counted eliminated.
+
+P107: [CCPU fallback ownership delivery](s12-p107-vector-defaults.json); three unchanged breakpoint providers move F to B, C0190-C0192 eliminated. Cached builds, eight boundary graphs and dual publication pass; all eleven normalized images equal P104.

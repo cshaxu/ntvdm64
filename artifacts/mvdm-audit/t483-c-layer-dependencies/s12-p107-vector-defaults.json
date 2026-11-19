@@ -1,0 +1,201 @@
+{
+  "baseline": "fe419f3624d23a3f22672181f99fd86733f32bb3",
+  "question": "Remove three F fallback providers from C direct linkage without changing fallback behavior or mirror source.",
+  "source": "src/compat/mvdm_ccpu_vector_defaults.c",
+  "previousSource": "src/ntvdm-exe/softpc/mvdm_ccpu_vector_defaults.c",
+  "ids": [
+    "C0190",
+    "C0191",
+    "C0192"
+  ],
+  "implementation": "Move the three unchanged breakpoint function bodies into B. Replace unused NT and mirror includes with SDK windows.h/intrin.h and exact scalar typedefs. Production and lifecycle fixture generators select the B source with native-only compilation flags. Preserve symbol names and cdecl ABI.",
+  "typeEvidence": {
+    "path": "softpc.new/host/inc/insignia.h",
+    "lines": [
+      64,
+      72,
+      78
+    ],
+    "types": {
+      "IU8": "unsigned char",
+      "IU32": "unsigned long",
+      "IUH": "unsigned int"
+    },
+    "note": "Selected mirrored definitions; no C header is imported by B. Existing ADAPTER-SOFTPC-052 fallback behavior is preserved, not claimed as recovered original implementation."
+  },
+  "functionIdentity": [
+    {
+      "object": "build\\t483-s12-vector-defaults\\before.obj",
+      "functions": {
+        "_EDL_fast_bop": "ccc3",
+        "_c_VirtualiseInstruction": "cc33c0c3",
+        "_c_sas_touch": "cc33c0c3"
+      }
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\fmstubs_vector_defaults.obj",
+      "functions": {
+        "_EDL_fast_bop": "ccc3",
+        "_c_VirtualiseInstruction": "cc33c0c3",
+        "_c_sas_touch": "cc33c0c3"
+      }
+    }
+  ],
+  "build": {
+    "exit": 0,
+    "log": "build\\t483-s12-vector-defaults\\build.log",
+    "scope": "cached x86/x64 products, explicit x86 NTVDM/VCDEX/VDMREDIR/nthook32, reference-x86 worker compiled in initial deliver.log"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "94150155-5251-42f3-b587-9803d82bc178",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "publicationHashes": [
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "d2900ae27e1c798b51c1c45fd03e7f39d25efc3749d01acd7d058cd3dad2dee6"
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "8613ecf5bb1d2987a364a5f47b86816183bddb180240c3f38a0d291e3ec38a3c"
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "b8ed0c386122711dda360685cba4e09423f15d1a56d9e1f479ed52f3ab5d106d"
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "6639f3b1fdd159750cea774a9b50f18fc276bc4f17a1d0492a669b70ccece079"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "3b69a38813f9ac18582ed45f143d7c460725c67d2cc337c8677fec993f21a8ca"
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "fc9bcd3fa258aaf8ecdab885e86893b036caa8f26e99b6c9b15c8e8f56dbcd5a"
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "0cf4631b81051b89e5d6ed913bee0e643f9fc102682064f2a0cceec86a8e8573"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "e5c7db849b7c2cd972a30d4b5796665380fa1699728072cff2f9a9ecd8760cef"
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "b61d9cbc74b0674bdf4ce737898be727ebf0fac000ab8b0c0159e64ce5591ce4"
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "a296329d940e8e37647c8e08aac5d68cba234019b8c3d20dd356ef8fc264a7f2"
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "5f129ee733fbc47b757e0c11d65523402bddac2a1fe61987209461b4b3c4c3c2"
+    },
+    {
+      "path": "O:\\winnt\\system32\\VCDEX.DLL",
+      "sha256": "d2900ae27e1c798b51c1c45fd03e7f39d25efc3749d01acd7d058cd3dad2dee6"
+    },
+    {
+      "path": "O:\\winnt\\system32\\run16.exe",
+      "sha256": "8613ecf5bb1d2987a364a5f47b86816183bddb180240c3f38a0d291e3ec38a3c"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntsrv.exe",
+      "sha256": "b8ed0c386122711dda360685cba4e09423f15d1a56d9e1f479ed52f3ab5d106d"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntcon.exe",
+      "sha256": "6639f3b1fdd159750cea774a9b50f18fc276bc4f17a1d0492a669b70ccece079"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntvdm.exe",
+      "sha256": "3b69a38813f9ac18582ed45f143d7c460725c67d2cc337c8677fec993f21a8ca"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntvwm.exe",
+      "sha256": "fc9bcd3fa258aaf8ecdab885e86893b036caa8f26e99b6c9b15c8e8f56dbcd5a"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntmon.exe",
+      "sha256": "0cf4631b81051b89e5d6ed913bee0e643f9fc102682064f2a0cceec86a8e8573"
+    },
+    {
+      "path": "O:\\winnt\\system32\\WOW32.DLL",
+      "sha256": "e5c7db849b7c2cd972a30d4b5796665380fa1699728072cff2f9a9ecd8760cef"
+    },
+    {
+      "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+      "sha256": "b61d9cbc74b0674bdf4ce737898be727ebf0fac000ab8b0c0159e64ce5591ce4"
+    },
+    {
+      "path": "O:\\winnt\\system32\\nthook32.dll",
+      "sha256": "a296329d940e8e37647c8e08aac5d68cba234019b8c3d20dd356ef8fc264a7f2"
+    },
+    {
+      "path": "O:\\winnt\\system32\\nthook64.dll",
+      "sha256": "5f129ee733fbc47b757e0c11d65523402bddac2a1fe61987209461b4b3c4c3c2"
+    }
+  ],
+  "normalizedIdentity": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": true,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "normalization": "Only package GUID and PE/debug timestamps; raw hashes are separately recorded and not claimed equal.",
+  "boundaryVerification": "Eight product graphs passed in publish-verified.log; B object has native SDK dependencies only.",
+  "runtime": "Repeated guest tests omitted under owner pure-relocation and identical-normalized-image authorization; no new runtime pass claimed.",
+  "attempts": [
+    {
+      "runner": "Windows PowerShell",
+      "result": "delivery exited 1 before publication writes: ConvertFrom-Json array shape failed count guard; reference worker and candidate staging completed."
+    },
+    {
+      "runner": "pwsh",
+      "result": "publish-verified.exit 0; reused staged candidate, published and verified both destinations, ran normalized comparison and eight A/B graphs."
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "progress": {
+    "reviewedFiles": 190,
+    "totalFiles": 190,
+    "totalIds": 618,
+    "statuses": {
+      "excluded-diagnostic": 1,
+      "open": 472,
+      "supporting-evidence": 44,
+      "eliminated-transitive": 5,
+      "eliminated": 96
+    }
+  },
+  "sourceHashes": {
+    "src/compat/mvdm_ccpu_vector_defaults.c": "615074326e83e5a6cd7902e2a784e97dd3d697ac08ca98cff5b88b4b673f3215",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "b1f8b26af70ed2dfac2bdf4c1744ae182749e771ecabd711ceb765d2db1dc0d5",
+    "tools/build/New-T313CcpuLifecycleNinja.ps1": "f9fb9d10a0727d1bc39ea7d22cef41f81a9ada5cefe8518481bbe53898fe6ecd"
+  },
+  "documentationGate": "passed: build/t483-s12-vector-defaults/docs.log, exit0; git diff --check passed; no mirror source changes."
+}

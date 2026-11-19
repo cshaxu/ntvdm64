@@ -33,7 +33,7 @@ if (!(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) { throw "Node 22 i
 
 $ccpuRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/ccpu386'
 $hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
-$ccpuFallbackSource = Join-Path $root 'src/ntvdm-exe/softpc/mvdm_ccpu_vector_defaults.c'
+$ccpuFallbackSource = Join-Path $root 'src/compat/mvdm_ccpu_vector_defaults.c'
 $ccpu = @(Get-OriginalSources (Join-Path $ccpuRoot 'sources'))
 $hostSources = @('nt_cpu.c', 'sim32.c', 'nt_mem.c')
 $controllerSources = @('at_dma.c', 'ica.c')
@@ -67,6 +67,7 @@ $supportObjects = Add-Objects 'support' 'cc' (Join-Path $root 'src/mvdm-host/sof
 $adapterObjects = Add-Objects 'adapter' 'cc' $root $adapterSources
 $testObjects = Add-Objects 'test' 'cc' $root $testSources
 $patchObject = 'obj/patch/fmstubs_vector_defaults.obj'; $graph.Add('build ' + $patchObject + ': cc_patch ' + (NinjaPath $ccpuFallbackSource))
+$graph.Add('  cflags = /nologo /c /MT /W4 /showIncludes')
 $graph.Add('build original-ccpu40.lib: lib ' + ($ccpuObjects -join ' '))
 $graph.Add('build original-host-lifecycle.lib: lib ' + ($hostObjects -join ' '))
 $graph.Add('build lifecycle-adapter.lib: lib ' + ($adapterObjects -join ' '))
