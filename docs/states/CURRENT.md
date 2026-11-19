@@ -243,3 +243,7 @@ Each file entry and exit reports both file and whole-audit totals. The unrelated
 P56 [XMS header reconciliation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p56-xms-header-reconciliation.json) corrects C0048, removed in P25 but omitted from ledger closure.
 Current counts supersede the historical figures above:151 eliminated/417 open of618;
 open coverage is345 symbols,59 headers,12 roots and1 image import. No product change.
+
+P57 [header contract ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-header-contract-ownership.json) classifies56 of59 open headers with their implementation chains.
+Three generated headers,12 include roots and the image import remain to reconcile;
+exact migration carriers/ABI and mirror cost are not yet complete. Counts unchanged.

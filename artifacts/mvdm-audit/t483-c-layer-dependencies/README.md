@@ -543,3 +543,8 @@ is not proof of B independence. No production or ledger-status changes.
 P56 [XMS header reconciliation](s14-p56-xms-header-reconciliation.json) corrects
 C0048, already removed and verified in P25. Current ledger151 eliminated/417 open;
 this is accounting correction, not new migration or runtime verification.
+
+P57 [header contract ownership](s14-header-contract-ownership.json) classifies
+56 complete non-generated headers against prior provider reviews. Three
+generated headers and12 include roots still require detailed reconciliation.
+No dependency is eliminated and no production migration is claimed.
