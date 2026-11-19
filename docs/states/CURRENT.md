@@ -247,3 +247,7 @@ open coverage is345 symbols,59 headers,12 roots and1 image import. No product ch
 P57 [header contract ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-header-contract-ownership.json) classifies56 of59 open headers with their implementation chains.
 Three generated headers,12 include roots and the image import remain to reconcile;
 exact migration carriers/ABI and mirror cost are not yet complete. Counts unchanged.
+
+P58 [build/ABI reconciliation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-build-abi-boundary-reconciliation.json) traces12 include roots and12 VCDEX ordinal imports to C providers.
+Generated headers retain provenance/layout constraints; C0137 has no current
+C-command hit and needs historical reconciliation. No dependency status change.

@@ -548,3 +548,8 @@ P57 [header contract ownership](s14-header-contract-ownership.json) classifies
 56 complete non-generated headers against prior provider reviews. Three
 generated headers and12 include roots still require detailed reconciliation.
 No dependency is eliminated and no production migration is claimed.
+
+P58 [build and ABI reconciliation](s14-build-abi-boundary-reconciliation.json)
+records12 current include-root observations, generated declaration constraints
+and the12 VCDEX imports resolving to C providers. C0137 has no current C-command
+hit; this is not removal proof. No ledger status or production change.

@@ -1,0 +1,551 @@
+{
+  "delivery": "T483 S14 P58",
+  "baseline": "2b7675087",
+  "kind": "read-only-build-and-ABI-reconciliation",
+  "generated_headers": [
+    {
+      "path": "src/ntvdm-exe/softpc/include/generated/x86/prod/PigReg_c.h",
+      "sha256": "fac49a3797900896f2c84a9c7484cb456312511482d80edf08305b5f034ec784",
+      "lines": 71,
+      "observation": "Complete 71-line read: CpuRegsREC, NpxRegsREC, CpuStateREC; FPSTACKENTRY and scalar ABI are required inputs. No implementation body.",
+      "next_step": "Choose an independent ABI declaration carrier only after proving record layout/type closure; cannot import this external patch header as a new C mirror file."
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+      "sha256": "7b942fbf7d32c8f4f274f5cadf8612c15a67c3235488b4476e5a00970c058bb0",
+      "lines": 702,
+      "observation": "Whole-file pattern classification: 691 fixed-offset GDP cast macros, ten other nonblank lines inspected, one blank. CurrentUniverse offset3512; TraceVector3516; GDP_SIZE43517.",
+      "next_step": "Preserve selected x86 offsets. Current C cvidc header uses TraceVector3512/GDP_SIZE43513 and is not a drop-in replacement. Resolve generated ABI ownership without pretending symbolic C accesses become independent B mechanisms."
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+      "sha256": "7f4520389338f9d265ce4d4a3e72980356687aebc9ed836b4707d5a250519afa",
+      "lines": 881,
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sas4gen.h",
+      "original_sha256": "ecda9cc4909ec3b945f90441a1ec441adaf807dcf6f419523c80c334e87067a0",
+      "comparison": [
+        {
+          "operation": "insert",
+          "original_start": 60,
+          "original_count": 0,
+          "current_start": 60,
+          "current_count": 1
+        },
+        {
+          "operation": "insert",
+          "original_start": 61,
+          "original_count": 0,
+          "current_start": 62,
+          "current_count": 2
+        },
+        {
+          "operation": "insert",
+          "original_start": 117,
+          "original_count": 0,
+          "current_start": 120,
+          "current_count": 1
+        },
+        {
+          "operation": "insert",
+          "original_start": 118,
+          "original_count": 0,
+          "current_start": 122,
+          "current_count": 2
+        },
+        {
+          "operation": "insert",
+          "original_start": 824,
+          "original_count": 0,
+          "current_start": 830,
+          "current_count": 13
+        },
+        {
+          "operation": "insert",
+          "original_start": 836,
+          "original_count": 0,
+          "current_start": 855,
+          "current_count": 25
+        }
+      ],
+      "observation": "Whole-file comparison confirms added sas_touch, VirtualiseInstruction and IsPageInstanceData declarations/vector slots/dispatch arms. Current C sascdef.c initializes c_sas_touch and c_VirtualiseInstruction; their actual defaults now live in compat, not the historical F fallback file.",
+      "next_step": "Original C counterpart exists in reference tree, but patch provenance restriction forbids copying external patch as a new mirror. Evaluate original restoration and minimal separately registered ABI extension; preserve vector order. No implementation or approval inferred."
+    }
+  ],
+  "source_policy_evidence": [
+    "docs/etc/operations/policy/source-policy.md",
+    "docs/etc/evidence/m0-t417-s2-softpc-patch-boundary-recovery.md",
+    "docs/etc/evidence/m0-t411-s1-ccpu40-cvid-event-audit.md"
+  ],
+  "include_roots": {
+    "roots": [
+      {
+        "id": "C0135",
+        "path": "src/common/base_srv",
+        "commands": 346,
+        "graphs": [
+          "x64/hook",
+          "x64/launcher",
+          "x64/service",
+          "x64/worker",
+          "x86/worker"
+        ],
+        "observed_headers": [
+          "src/common/base_srv/base_capture.h",
+          "src/common/base_srv/base_classifier.h",
+          "src/common/base_srv/base_client.h",
+          "src/common/base_srv/base_config.h",
+          "src/common/base_srv/legacy_classifier_arch.h"
+        ],
+        "action": "Split original Base declarations from native B resources and outer transport before removing root."
+      },
+      {
+        "id": "C0136",
+        "path": "src/ntsrv-exe/opennt/include",
+        "commands": 9,
+        "graphs": [
+          "x64/launcher",
+          "x64/service",
+          "x86/worker"
+        ],
+        "observed_headers": [
+          "src/ntsrv-exe/opennt/include/base_interactive.h",
+          "src/ntsrv-exe/opennt/include/base_server.h"
+        ],
+        "action": "Separate C CSR records/B native bindings/F authenticated context; remove root after selected caller closure."
+      },
+      {
+        "id": "C0137",
+        "path": "src/ntvdm-exe/command/include",
+        "commands": 0,
+        "graphs": [],
+        "observed_headers": [],
+        "action": "No matching C compile command or header observed in current eight graphs. Reconcile historical evidence and generator branches before closing this stale-root candidate."
+      },
+      {
+        "id": "C0141",
+        "path": "src/ntvdm-exe/softpc/include",
+        "commands": 335,
+        "graphs": [
+          "x86/worker"
+        ],
+        "observed_headers": [
+          "src/ntvdm-exe/softpc/include/generated/x86/prod/PigReg_c.h",
+          "src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+          "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+          "src/ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h",
+          "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
+          "src/ntvdm-exe/softpc/include/mvdm_softpc_text_video.h",
+          "src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+        ],
+        "action": "Remove after machine/lifecycle/text/page-domain contract splits; seven observed headers are not seven independent resources."
+      },
+      {
+        "id": "C0142",
+        "path": "src/ntvdm-exe/softpc/include/generated/x86/prod",
+        "commands": 373,
+        "graphs": [
+          "x86/worker"
+        ],
+        "observed_headers": [
+          "src/ntvdm-exe/softpc/include/generated/x86/prod/PigReg_c.h",
+          "src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+          "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+        ],
+        "action": "Three generated ABI carriers above; do not replace by same-named C headers without layout proof."
+      },
+      {
+        "id": "C0145",
+        "path": "src/vdmredir-dll/include",
+        "commands": 1,
+        "graphs": [
+          "x86/worker"
+        ],
+        "observed_headers": [
+          "src/vdmredir-dll/include/mvdm_redirector_guest_copy.h"
+        ],
+        "action": "Single redirector guest-copy contract; move actual copy chain with C/B ownership."
+      },
+      {
+        "id": "C0146",
+        "path": "src/wow32-dll/include",
+        "commands": 136,
+        "graphs": [
+          "x86/wow32"
+        ],
+        "observed_headers": [
+          "src/wow32-dll/include/button-drawing/precomp.h",
+          "src/wow32-dll/include/control-client/default-precomp.h",
+          "src/wow32-dll/include/control-client/precomp.h",
+          "src/wow32-dll/include/control-draw-state/precomp.h",
+          "src/wow32-dll/include/control-drawing/precomp.h",
+          "src/wow32-dll/include/control-geometry/precomp.h",
+          "src/wow32-dll/include/opennt_user_multipass.h",
+          "src/wow32-dll/include/opennt_usercli_multipass.h",
+          "src/wow32-dll/include/wow_bitmap_bindings.h",
+          "src/wow32-dll/include/wow_button_lifetime.h",
+          "src/wow32-dll/include/wow_button_resources.h",
+          "src/wow32-dll/include/wow_callback_frame_lease.h",
+          "src/wow32-dll/include/wow_class_query_bindings.h",
+          "src/wow32-dll/include/wow_class_register_bindings.h",
+          "src/wow32-dll/include/wow_class_remove_bindings.h",
+          "src/wow32-dll/include/wow_class_words_binding.h",
+          "src/wow32-dll/include/wow_cleanup_bindings.h",
+          "src/wow32-dll/include/wow_clipboard_epoch.h",
+          "src/wow32-dll/include/wow_common_dialog_calls.h",
+          "src/wow32-dll/include/wow_control_brush_bindings.h",
+          "src/wow32-dll/include/wow_control_draw_state.h",
+          "src/wow32-dll/include/wow_default_message_bindings.h",
+          "src/wow32-dll/include/wow_default_window_bindings.h",
+          "src/wow32-dll/include/wow_dialog_api_bindings.h",
+          "src/wow32-dll/include/wow_dialog_context_bindings.h",
+          "src/wow32-dll/include/wow_dialog_creation_binding.h",
+          "src/wow32-dll/include/wow_dialog_native_bindings.h",
+          "src/wow32-dll/include/wow_dialog_procedure_bindings.h",
+          "src/wow32-dll/include/wow_dialog_state_bindings.h",
+          "src/wow32-dll/include/wow_edit_call_bindings.h",
+          "src/wow32-dll/include/wow_edit_conversion_bindings.h",
+          "src/wow32-dll/include/wow_edit_drawing_bindings.h",
+          "src/wow32-dll/include/wow_edit_entry_bindings.h",
+          "src/wow32-dll/include/wow_edit_lookaside_bindings.h",
+          "src/wow32-dll/include/wow_edit_memory_bindings.h",
+          "src/wow32-dll/include/wow_edit_menu_bindings.h",
+          "src/wow32-dll/include/wow_edit_native_bindings.h",
+          "src/wow32-dll/include/wow_edit_state_bindings.h",
+          "src/wow32-dll/include/wow_idle_hook_binding.h",
+          "src/wow32-dll/include/wow_input_group_bindings.h",
+          "src/wow32-dll/include/wow_menu_native_bindings.h",
+          "src/wow32-dll/include/wow_menu_parser_bindings.h",
+          "src/wow32-dll/include/wow_menu_resource_bindings.h",
+          "src/wow32-dll/include/wow_message_lifetime.h",
+          "src/wow32-dll/include/wow_native_gui_thread.h",
+          "src/wow32-dll/include/wow_native_process.h",
+          "src/wow32-dll/include/wow_ole_descriptor_private.h",
+          "src/wow32-dll/include/wow_registry_binding.h",
+          "src/wow32-dll/include/wow_shared_user_abi.h",
+          "src/wow32-dll/include/wow_task_init_bindings.h",
+          "src/wow32-dll/include/wow_task_order_bindings.h",
+          "src/wow32-dll/include/wow_task_profile_bindings.h",
+          "src/wow32-dll/include/wow_task_termination.h",
+          "src/wow32-dll/include/wow_user_borrow_scope.h",
+          "src/wow32-dll/include/wow_user_capture_bindings.h",
+          "src/wow32-dll/include/wow_user_client_view_layout.h",
+          "src/wow32-dll/include/wow_user_native_extension.h",
+          "src/wow32-dll/include/wow_user_object_bindings.h",
+          "src/wow32-dll/include/wow_user_private_access.h",
+          "src/wow32-dll/include/wow_user_registered_callbacks.h",
+          "src/wow32-dll/include/wow_user_thunk_scope.h",
+          "src/wow32-dll/include/wow_window_client_state_bindings.h",
+          "src/wow32-dll/include/wow_window_creation_binding.h",
+          "src/wow32-dll/include/wow_window_dispatch_bindings.h",
+          "src/wow32-dll/include/wow_window_procedure_entry.h",
+          "src/wow32-dll/include/wow_window_words_binding.h"
+        ],
+        "action": "66 observed headers include indirect dependencies beyond direct-ledger59 population. Retain complete transitive include closure during WOW split."
+      },
+      {
+        "id": "C0147",
+        "path": "src/wow32-dll/include/button-drawing",
+        "commands": 1,
+        "graphs": [
+          "x86/wow32"
+        ],
+        "observed_headers": [
+          "src/wow32-dll/include/button-drawing/precomp.h"
+        ],
+        "action": "Button atlas/resource scope and original helper ABI split."
+      },
+      {
+        "id": "C0148",
+        "path": "src/wow32-dll/include/control-client",
+        "commands": 34,
+        "graphs": [
+          "x86/wow32"
+        ],
+        "observed_headers": [
+          "src/wow32-dll/include/control-client/default-precomp.h",
+          "src/wow32-dll/include/control-client/precomp.h"
+        ],
+        "action": "Original control-client/default precomp environments must migrate with their providers."
+      },
+      {
+        "id": "C0149",
+        "path": "src/wow32-dll/include/control-draw-state",
+        "commands": 1,
+        "graphs": [
+          "x86/wow32"
+        ],
+        "observed_headers": [
+          "src/wow32-dll/include/control-draw-state/precomp.h"
+        ],
+        "action": "DrawState independent resource context and original declarations split."
+      },
+      {
+        "id": "C0150",
+        "path": "src/wow32-dll/include/control-drawing",
+        "commands": 3,
+        "graphs": [
+          "x86/wow32"
+        ],
+        "observed_headers": [
+          "src/wow32-dll/include/control-drawing/precomp.h"
+        ],
+        "action": "Native GDI scope versus original drawing declarations split."
+      },
+      {
+        "id": "C0151",
+        "path": "src/wow32-dll/include/control-geometry",
+        "commands": 1,
+        "graphs": [
+          "x86/wow32"
+        ],
+        "observed_headers": [
+          "src/wow32-dll/include/control-geometry/precomp.h"
+        ],
+        "action": "Geometry compile facade follows actual default-window binding owner."
+      }
+    ],
+    "graphs": [
+      {
+        "graph": "x86/worker",
+        "commands_sha256": "deb5689abe8e2457602166c8b3b8a9c55f66887b08d3641032b648193be425c0",
+        "deps_sha256": "f7e0ec6172629ec33d816096b8b9cd97b779ce379091247bb497614969dc6631",
+        "C_objects": 394
+      },
+      {
+        "graph": "x86/wow32",
+        "commands_sha256": "3cee70c36076ca24c2eeecea03bf853d433a989a271135dfd15bb1111c22f263",
+        "deps_sha256": "a786283d18bf724003cf24918cc5c04c3437e45141270e0173573a66b04cf21c",
+        "C_objects": 137
+      },
+      {
+        "graph": "x64/frontend",
+        "commands_sha256": "1072b4f26dda004e21702888d5ee564e7ed58a3dcc6d3512dda07a93e6ba456f",
+        "deps_sha256": "ad1f9be05f0417606f1e6ae3cecf6a25266c52f80e10baf7e24048f97e26a9f9",
+        "C_objects": 0
+      },
+      {
+        "graph": "x64/service",
+        "commands_sha256": "a84bdafe1bd20ae7d92528ffd0dcca67e102e6198e48b3eb89602dca4aa684f1",
+        "deps_sha256": "1c09a1a655b993d153659dbb600756278d778272f2dadcac8567025dccdfab81",
+        "C_objects": 3
+      },
+      {
+        "graph": "x64/launcher",
+        "commands_sha256": "67109c847dc4ddf2b8e8253aa4e501e82a1cb79cd506305bc22f00bebe9d0ef0",
+        "deps_sha256": "2fda16350ad5608a12dad2fa1fdaf3ab74d3afdb2dc5cd8bf40bbabf233770d1",
+        "C_objects": 5
+      },
+      {
+        "graph": "x64/monitor",
+        "commands_sha256": "0b64f8c07e90828ace4e9b65635fb4cfdc8ceb48e55590f591377f55385f1a58",
+        "deps_sha256": "a2a177185047f05c4aba56dd72547e0e927ee0f5f61ebc5b99233cc212e9f625",
+        "C_objects": 0
+      },
+      {
+        "graph": "x64/worker",
+        "commands_sha256": "bfb74feb409fd3840f1a62dfb2dc1adec2cde8263639ffffa964e071ed4e2976",
+        "deps_sha256": "0d48742b993aba4981ccc09d30a053eb45f62a9f7a8171070d5f5a6e80d50a8b",
+        "C_objects": 1
+      },
+      {
+        "graph": "x64/hook",
+        "commands_sha256": "0ec59420627f4b12dc095db504a76c283b5435c850f467a7f69505310957dab6",
+        "deps_sha256": "fa7e13e5df63f3b348c12942428d15cede9e67180df039083f0e1a5776cdbf5d",
+        "C_objects": 2
+      }
+    ],
+    "limitations": "Existing command/dependency observations only; no removal build, no inference that zero hits proves exclusion. Nested root counts can overlap."
+  },
+  "vcdex": {
+    "path": "assets/release/VCDEX.DLL",
+    "sha256": "ee956083ae0bb07696c615be4fad54d7c62cbeb33def1ce2565a34761a7473de",
+    "imports": [
+      {
+        "ordinal": 229,
+        "name": "setCF",
+        "rva": "0x94970",
+        "map_matches": [
+          "0001:00093970       _setCF                     00494970 f   original-softpc-cvidc:accessfn.obj"
+        ]
+      },
+      {
+        "ordinal": 233,
+        "name": "setCX",
+        "rva": "0x949d0",
+        "map_matches": [
+          "0001:000939d0       _setCX                     004949d0 f   original-softpc-cvidc:accessfn.obj"
+        ]
+      },
+      {
+        "ordinal": 228,
+        "name": "setBX",
+        "rva": "0x94960",
+        "map_matches": [
+          "0001:00093960       _setBX                     00494960 f   original-softpc-cvidc:accessfn.obj"
+        ]
+      },
+      {
+        "ordinal": 224,
+        "name": "setAX",
+        "rva": "0x94910",
+        "map_matches": [
+          "0001:00093910       _setAX                     00494910 f   original-softpc-cvidc:accessfn.obj"
+        ]
+      },
+      {
+        "ordinal": 116,
+        "name": "getES",
+        "rva": "0x94780",
+        "map_matches": [
+          "0001:00093780       _getES                     00494780 f   original-softpc-cvidc:accessfn.obj"
+        ]
+      },
+      {
+        "ordinal": 130,
+        "name": "getSS",
+        "rva": "0x94850",
+        "map_matches": [
+          "0001:00093850       _getSS                     00494850 f   original-softpc-cvidc:accessfn.obj"
+        ]
+      },
+      {
+        "ordinal": 59,
+        "name": "VDDInstallUserHook",
+        "rva": "0x61d40",
+        "map_matches": [
+          "0001:00060d40       _VDDInstallUserHook        00461d40 f   original-softpc-host-roots:nt_msscs.obj"
+        ]
+      },
+      {
+        "ordinal": 129,
+        "name": "getSP",
+        "rva": "0x94840",
+        "map_matches": [
+          "0001:00093840       _getSP                     00494840 f   original-softpc-cvidc:accessfn.obj"
+        ]
+      },
+      {
+        "ordinal": 108,
+        "name": "getDX",
+        "rva": "0x946f0",
+        "map_matches": [
+          "0001:000936f0       _getDX                     004946f0 f   original-softpc-cvidc:accessfn.obj"
+        ]
+      },
+      {
+        "ordinal": 102,
+        "name": "getCX",
+        "rva": "0x94690",
+        "map_matches": [
+          "0001:00093690       _getCX                     00494690 f   original-softpc-cvidc:accessfn.obj"
+        ]
+      },
+      {
+        "ordinal": 97,
+        "name": "getBX",
+        "rva": "0x94630",
+        "map_matches": [
+          "0001:00093630       _getBX                     00494630 f   original-softpc-cvidc:accessfn.obj"
+        ]
+      },
+      {
+        "ordinal": 35,
+        "name": "MGetVdmPointer",
+        "rva": "0x52c40",
+        "map_matches": [
+          "0001:00051c40       _ExpSim32GetVDMPointer     00452c40 f   original-softpc-host-roots:sim32.obj"
+        ]
+      }
+    ],
+    "map_path": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map",
+    "map_sha256": "4779b6de823330b04408ffba5513ba6d2ae7479f320135eda6866acda950881a",
+    "image_section_identity": [
+      {
+        "path": "assets/release/ntvdm.exe",
+        "sha256": "4837e14f6c68968e19075fd968856fe4271dcdbb4ea8bb21207a019b5210f49b",
+        "sections": [
+          {
+            "name": ".text",
+            "rva": 4096,
+            "raw": 1024,
+            "size": 1636352,
+            "sha256": "cf024b1a827930f5c0db97fc0ceb9b4077d1205b1b32b023885173f3a6949a6e"
+          },
+          {
+            "name": ".rdata",
+            "rva": 1642496,
+            "raw": 1637376,
+            "size": 161280,
+            "sha256": "ad9c643a30849c581581dd52cf8a4c7fdbd5ed0bb88b6891956d8d79f36c4dfc"
+          },
+          {
+            "name": ".data",
+            "rva": 1806336,
+            "raw": 1798656,
+            "size": 36352,
+            "sha256": "3c89ec5ca30ffd9b67b3117b91e2c409426de54d969881c8c2924067cc7674a1"
+          },
+          {
+            "name": ".rsrc",
+            "rva": 4280320,
+            "raw": 1835008,
+            "size": 62976,
+            "sha256": "f1f092d19eec94d32c1cbef7b4757318f1c7dba932ff21f76f9540ca95b2679a"
+          },
+          {
+            "name": ".reloc",
+            "rva": 4345856,
+            "raw": 1897984,
+            "size": 209408,
+            "sha256": "be75f1d04e2119156a5dc9f9fd37d6e34760a81440f6f8dfde542c74d53d13b6"
+          }
+        ]
+      },
+      {
+        "path": "build/.ninja/msvc-x86-release/worker/ntvdm.exe",
+        "sha256": "f1652a2d7eba8fdbd7b1a938885224144eaee76310b2ef53e52e2da9bdbcc39f",
+        "sections": [
+          {
+            "name": ".text",
+            "rva": 4096,
+            "raw": 1024,
+            "size": 1636352,
+            "sha256": "cf024b1a827930f5c0db97fc0ceb9b4077d1205b1b32b023885173f3a6949a6e"
+          },
+          {
+            "name": ".rdata",
+            "rva": 1642496,
+            "raw": 1637376,
+            "size": 161280,
+            "sha256": "ad9c643a30849c581581dd52cf8a4c7fdbd5ed0bb88b6891956d8d79f36c4dfc"
+          },
+          {
+            "name": ".data",
+            "rva": 1806336,
+            "raw": 1798656,
+            "size": 36352,
+            "sha256": "3c89ec5ca30ffd9b67b3117b91e2c409426de54d969881c8c2924067cc7674a1"
+          },
+          {
+            "name": ".rsrc",
+            "rva": 4280320,
+            "raw": 1835008,
+            "size": 62976,
+            "sha256": "9813700f51c4e5ac13befd5eb03a85f67b8565552454c3295b673646a615063f"
+          },
+          {
+            "name": ".reloc",
+            "rva": 4345856,
+            "raw": 1897984,
+            "size": 209408,
+            "sha256": "be75f1d04e2119156a5dc9f9fd37d6e34760a81440f6f8dfde542c74d53d13b6"
+          }
+        ]
+      }
+    ],
+    "conclusion": "All twelve NTVDM ordinal imports resolve to C accessfn.obj, nt_msscs.obj or sim32.obj. Image-import name alone is not a direct F implementation dependency. Preserve VDD runtime ABI and one CPU instance; no need to create another CPU DLL merely to change image name.",
+    "limitation": "Published and build EXEs are not byte-identical: 22390 differing bytes, confined to PE headers and .rsrc. Their .text/.rdata/.data/.reloc hashes match. This verifies the inspected code/export identity, not full package identity or resource equivalence. C0134 remains recorded pending final binary-boundary disposition."
+  },
+  "status": "All ledger statuses unchanged; production/mirror delta zero. Not a migration delivery or fresh runtime test.",
+  "remaining": "Generated final destination/ABI, C0137 historical reconciliation, actual root removal builds, exact implementation carriers and complete four-root coverage remain required."
+}
