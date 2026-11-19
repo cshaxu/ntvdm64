@@ -173,3 +173,47 @@ native callouts do not hold the data lock; callback return reacquires the
 original execution owner; destroyed HWNDs are not republished. Reuse existing
 Win16 lifecycle/dialog acceptance for final code. No test was run in this
 research checkpoint, and no mirror-increase candidate is approved by it.
+
+## Class, creation and common-dialog follow-up
+
+Against P34 `e53451ba8`, read five more complete WOW32 implementation files:
+`wow_class_words_binding.c` (567 lines), `wow_window_creation_binding.c`
+(836 lines), `wow_common_dialog_callback.c`, `wow_common_dialog_calls.c` and
+`wow_clipboard_epoch.c`. This record now covers 15 complete bodies; it does
+not count that as 15 migrated files or a complete transitive closure.
+
+| Implementation | Evidence-based disposition |
+| --- | --- |
+| `wow_native_class_resolve_procedure` | Independent B candidate: only native class registration/query/unregistration, scalar procedure input/output and native error preservation. It creates no HWND and reads no session, C layout or guest state. Preserve failure to unregister as failure, and keep the non-FFFF fast path. Existing native-creation fixture has real token and procedure assertions; final relocated code still needs that test. |
+| Remaining class-word storage | Mixed ownership, not a wholesale B candidate. A binding embeds B `wow_class_lookup_entry` plus original C `CLS` atom projection, selects original class lists with `GetClassPtr`, dispatches recovered control procedures and publishes/retires guest CLS through page-domain operations. Split native resource/storage mechanics from original layout and guest publication without adding B-to-C callbacks. |
+| Window creation | Shared scope supports explicit original creators and native implicit creation. It composes class selection, WW metadata, task execution/borrow scopes, CBT publication, native creation, menus and rollback. Native hook mechanics alone do not describe the function's behavior; keep original conversion/policy at C and independent native mechanics at B. Resolve original owner placement and mirror costs before migration. |
+| Common-dialog calls | Seven native COMMDLG operations already share one wrapper; all use the existing execution handoff. Moving that wrapper to B with calls back into the F lifecycle would not remove the dependency. Modeless Find/Replace use no-publication return, unlike modal operations. Preserve that difference while separating ownership. |
+| Common-dialog callbacks | Original dialog callbacks are wrapped by task execution and copied-view borrow scopes. Find/Replace binds resource destruction at WM_INITDIALOG and consumes it at WM_DESTROY before original guest resource release. This is a C callback/lifetime boundary plus outer entry, not a generic B event callback. |
+| Clipboard epoch | Native sequence/owner query is independent; the operation then calls original `W32EmptyClipboard`. Keep the invalidation decision with its C caller and use native query directly or an independent B leaf. Moving the whole operation to B would add a C callback dependency. No decision to change clipboard behavior follows from this classification. |
+
+Class storage has distinct `references` (registration/borrowed storage) and
+`cWndReferenceCount` (window associations). Original cleanup decisions use the
+latter; do not collapse them into one count. Borrowed native standard-class
+metadata is forgotten without unregistering USER's class. Owned application
+classes are unregistered first; failure to release the already-unregistered
+class's guest projection is terminal, not a retryable native-registration
+failure. A proposed split must keep those different resource owners explicit.
+
+The class lookup carrier header is already in B, but its original lookup
+algorithm is C and its complete registration storage is still F. This is a
+specific example of why header ownership is not implementation ownership.
+
+Creation publishes ownership before downstream CBT or WNDPROC callbacks.
+Rollback checks that the same binding and installed procedure still own the
+window before restoring it. Class references transfer into the window binding
+on attachment; remaining local references are released on failure/unwind.
+The scope is popped and the hook removed before final retained-object release.
+The native creator does not replace original guest menu loading: the original
+resource path is used before WM_NCCREATE, without using SetMenu to introduce
+premature size/move callbacks. These sequencing constraints prohibit a simple
+replacement with an unwrapped CreateWindowEx call.
+
+No production edit or test run occurred. Direct ledger and mirror-difference
+counts remain unchanged. Next resolve window-word storage, guest projections
+and provider cleanup against the proposed B/C split; independently movable
+leaf identification is not permission to skip the complete migration ledger.
