@@ -476,3 +476,9 @@ registrations and the B mapping callback. Capture/registration/profile-copy
 resources can move inward, Console composition stays F, and WOW machine-domain
 cleanup requires C ownership. Preserve caller-specific teardown order rather
 than adding a second registry or moving every callback into B.
+
+[WOW resource and callback ownership](s14-wow-resource-callback-ownership.md)
+classifies seven complete implementation bodies, including native resources,
+private USER state, CPU continuation and message return ordering. It identifies
+required splits and unresolved provider chains, not completed migrations.
+No production source, mirror difference or dependency status changes.

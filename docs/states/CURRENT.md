@@ -72,6 +72,11 @@ ownership chains; no dependency count or production baseline changes.
 and [callback chains](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-callback-provider-ownership.json)
 record source findings, not migrated-code or runtime acceptance. The complete
 migration ledger remains unfinished; no production change follows this review.
+The [WOW resource/callback review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-resource-callback-ownership.md)
+classifies seven additional provider bodies and their ownership constraints.
+Private USER/CPU operations cannot move wholesale to B; class publication,
+abnormal callback return and message reentry retain explicit ordering duties.
+These are source findings, not eliminated dependencies or runtime verification.
 S14 P19 removes the F guest-location source/private header and three-operation
 forwarding table/installers. Nine operation bodies now execute in B using the
 existing thread binding and a typed reference to the same B lease object.
