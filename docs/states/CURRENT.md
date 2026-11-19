@@ -70,13 +70,15 @@ P28-P31 are delivered and indexed in the [C dependency tracker](../../artifacts/
 
 P32 delivered the unchanged native probe environment to B; original ProbeForRead remains C. [P32 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p32-user-probe.json) records source ownership, both builds, probe tests and dual publication.
 
-P33 moves the unchanged Console handle predicate D to B, preserving object and link order; original vdm.c stays untouched. File062 mixed ABI/configuration/transport declarations are classified for S14/S13. [Evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p33-console-handle.json). Review62/116:14 header clears,40 lifecycle,8 source/ABI,54 unreviewed;517/617 open; C0153 eliminated. Both cached builds, product boundaries and dual11-image publication passed. All images match P32 after GUID/PE timestamp normalization; repeated runtime tests waived. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P33 delivered the unchanged Console predicate D to B; file062 mixed declarations remain S14/S13. Both builds, boundaries and dual publication passed;11 images normalized-equal P32. [P33 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p33-console-handle.json).
 
 ## Successor scopes
 
 S13 will assess and implement safe C-to-F moves of product-owned behavior, with before/after mirror block and line counts. S14 will review each proposed F-to-C restoration against original ownership, existing mirror differences and production use. Only S12 is active.
 
-P34 completed verification for files063-065: BaseSrv/OLE mixed ownership remains open for S14/S13; standalone unavailable Browser provider and header move to B. [P34 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p34-remote-browser.json). Both cached builds and targeted checks passed; eleven-image package published to both destinations. Actual DOS redirector probe passed96 calls, native-matched enumeration and exit0;37 original enumeration assertions passed. VDMREDIR changed beyond GUID/timestamps; other10 images normalize equal P33. Review65/116:15 clears,40 lifecycle,10 source/ABI,51 unreviewed;515/617 open. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P34 delivered the unchanged private Browser unavailable provider F to B; original public enumeration remains C. Both builds, dual publication,37 original enumeration assertions and96 actual DOS calls passed. [P34 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p34-remote-browser.json).
+
+P35 final cached builds and dual eleven-image publication passed. Files066-067: native bitmap macros and unchanged icon-size provider moved F to B; original button/scaling algorithms remain C. Remaining button lifetime belongs to S13, extracted original state/FNID requires S14 review. C0349 eliminated; C0072 stays open for clres. Review67/116:16 clears,41 lifecycle,10 source/ABI,49 unreviewed;514/617 open. Mirror delta0/0; cumulative reduction2 points/10 lines. Bitmap normal/failure cleanup, original drawing/icon assertions, product boundaries and three retained Win16 window-frontier probes passed. This is targeted verification, not full interaction acceptance. [P35 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p35-bitmap-native.json). Only S12 active.
 
 ## S11 Closure Record
 

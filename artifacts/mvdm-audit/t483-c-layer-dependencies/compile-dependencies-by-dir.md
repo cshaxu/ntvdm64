@@ -441,9 +441,13 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+066 P35: S13 task/borrow/button-state and drawing-resource lifecycle; coordinate S14 for extracted original SetWindowState/ClearWindowState and FNID. Original btnctl.c stays unchanged. Pure SDK icon-size body moves F to B unchanged; actual WOW32 map selects B wow_icon_size.obj, C0349 eliminated. Other dependencies remain open. Mirror delta0 points/0 lines; #error/#line unchanged. See s12-p35-bitmap-native.json.
+
 ## 067 — src/non-mvdm/windows/core/ntuser/client/cldib.c
 
 - 直接包含 · C0072 · wow32-dll · src/wow32-dll/include/wow_bitmap_bindings.h
+
+067 P35: Only five native macros plus SDK are used. Definitions moved to shared B header, reused by F bitmap header; original algorithms/globals unchanged. Actual cldib compiler dependencies no longer include F bitmap header. C0072 remains open for clres.c. Mirror delta0 points/0 lines; #error/#line unchanged. See s12-p35-bitmap-native.json.
 
 ## 068 — src/non-mvdm/windows/core/ntuser/client/clmenu.c
 

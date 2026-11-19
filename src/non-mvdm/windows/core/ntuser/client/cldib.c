@@ -7,7 +7,7 @@
 * 09-26-95 ChrisWil  Ported dib-scale code.
 \***************************************************************************/
 
-#include "wow_bitmap_bindings.h"
+#include "compat/include/wow_bitmap_native.h"
 #pragma hdrstop
 
 /*

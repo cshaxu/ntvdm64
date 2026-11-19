@@ -1,7 +1,7 @@
 #ifndef WOW_BITMAP_BINDINGS_H
 #define WOW_BITMAP_BINDINGS_H
 #include <windows.h>
-#include <assert.h>
+#include "compat/include/wow_bitmap_native.h"
 #include "non-mvdm/public/internal/windows/inc/newres.h"
 
 /* Finite USER client environment for the original bitmap owners.
@@ -27,20 +27,15 @@ void WINAPI wow_bitmap_bindings_shutdown(void);
 #define gpsi (&wow_bitmap_current->server)
 #define GETINITDC() GetDC(NULL)
 #define RELEASEINITDC(hdc) ReleaseDC(NULL, hdc)
-#define UserLocalAlloc(flags, bytes) LocalAlloc(flags, bytes)
-#define UserLocalFree(p) LocalFree((HLOCAL)(p))
 #define RtlEnterCriticalSection EnterCriticalSection
 #define RtlLeaveCriticalSection LeaveCriticalSection
 #define SelectBitmap(hdc, bitmap) ((HBITMAP)SelectObject(hdc, bitmap))
-#define UserAssert(condition) assert(condition)
 #define RIPMSG0(level, message) ((void)0)
 #define RIPMSG1(flags, format, value)
 #define WIDTHBYTES(i) ((((i) + 31) & ~31) >> 3)
 #define SYSMET(index) GetSystemMetrics(SM_##index)
-#define BitmapWidth(cx, bpp) (((((cx)*(bpp)) + 31) & ~31) >> 3)
 #define SetBestStretchMode(hdc, planes, bpp) \
     SetStretchBltMode(hdc, (((planes) * (bpp)) == 1 ? BLACKONWHITE : COLORONCOLOR))
-#define RGBX(rgb) RGB(GetBValue(rgb), GetGValue(rgb), GetRValue(rgb))
 #define SYSRGB(index) GetSysColor(COLOR_##index)
 #define CBM_CREATEDIB 0x02L
 #define LR_CREATEREALDIB 0x0800

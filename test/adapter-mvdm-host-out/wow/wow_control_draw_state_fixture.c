@@ -82,6 +82,23 @@ static BOOL CALLBACK paint(HDC dc, LPARAM data, WPARAM parameter, int width, int
     CHECK(PatBlt(dc, 0, 0, width, height, BLACKNESS));
     return FALSE; /* Original non-MONO branch returns TRUE despite callback FALSE. */
 }
+static void check_icon_size(void)
+{
+    BYTE mask[12] = {0}, colors[24] = {0};
+    HICON icon = CreateIcon(GetModuleHandleW(NULL), 2, 3, 1, 32, mask, colors);
+    int width = -1, height = -1;
+    CHECK(icon != NULL);
+    if (!icon) return;
+    CHECK(wow_control_icon_size(icon, 0, &width, &height));
+    CHECK(width == 2 && height == 6);
+    width = height = -1;
+    CHECK(!wow_control_icon_size(icon, 1, &width, &height));
+    CHECK(GetLastError() == ERROR_INVALID_PARAMETER && width == -1 && height == -1);
+    CHECK(!wow_control_icon_size(icon, 0, NULL, &height));
+    CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    DestroyIcon(icon);
+}
+
 int __cdecl main(void)
 {
     wow_edit_context context = {0};
@@ -140,6 +157,7 @@ int __cdecl main(void)
     DeleteDC(dc);
     DeleteObject(bitmap);
     DeleteObject(borrowed);
+    check_icon_size();
     printf("control_draw_state_failures=%u\n", failures);
     return failures ? 1 : 0;
 }

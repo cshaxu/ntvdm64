@@ -686,6 +686,9 @@ foreach ($source in $providerSupportSources) {
         $ninja.Add('  cflags = $adapter_cflags')
     }
 }
+$supportObjects.Add('obj/compat/wow_icon_size.obj')
+$ninja.Add('build obj/compat/wow_icon_size.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_icon_size.c')))
+$ninja.Add('  cflags = ' + $nativeCflags)
 $systemImportAliasObject = 'obj/wow32-system-import-abi-aliases.obj'
 $ninja.Add('build ' + $systemImportAliasObject + ': cc ' + (ConvertTo-NinjaPath $systemImportAliasSource))
 $ninja.Add('  cflags = $adapter_cflags')

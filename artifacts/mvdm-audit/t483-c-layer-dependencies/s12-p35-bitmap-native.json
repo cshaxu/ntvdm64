@@ -1,0 +1,122 @@
+{
+  "baseline": "857f66831a667acec1276209284ae9b578b80722",
+  "status": "P35 final build, publication and targeted verification complete; commit/push follows",
+  "files": [
+    {
+      "number": 66,
+      "file": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "sha256": "b82afed28aad4e7af6ea47f62698d30d890b6855fbeee584ef08f78dada57af1"
+    },
+    {
+      "number": 67,
+      "file": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "sha256": "75961b8fa0b90934d9367a271c8f94ac338fba7c5322846940bee7f9beec23ed"
+    }
+  ],
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "button": {
+    "header": "C0064",
+    "linkedIds": [
+      "C0323",
+      "C0324",
+      "C0325",
+      "C0348",
+      "C0349",
+      "C0350",
+      "C0351",
+      "C0352",
+      "C0357",
+      "C0386",
+      "C0388",
+      "C0392",
+      "C0507",
+      "C0520",
+      "C0527",
+      "C0546",
+      "C0551",
+      "C0557",
+      "C0559",
+      "C0564",
+      "C0590",
+      "C0591",
+      "C0596",
+      "C0615",
+      "C0617"
+    ],
+    "disposition": "S13 task/borrow/private-state and drawing-context lifecycle; original button algorithms remain C. Scope enter precedes original ButtonWndProc and finally scope leave releases resources and delayed state. Full mixed precomp header depends on original USER layouts and F runtime; do not move wholesale B. C0349 icon-size leaf independently moves B unchanged; this does not approve every other adapter necessary/minimal.",
+    "originalExtractionReview": "Coordinate S14 for SetWindowState/ClearWindowState (original client/client.c) and selected NtUserSetWindowFNID (kernel/ntstubs.c:6170-6188). Current F providers are prior owner-approved extractions, not proof they must remain F; avoid wholesale restoration or renewed B-to-C coupling."
+  },
+  "bitmap": {
+    "header": "C0072",
+    "disposition": "cldib only requires SDK and five existing native macros. Move those definitions to shared B header; F bitmap header reuses it, retaining F lifetime context and C newres. Actual clres consumer still uses F header, so C0072 remains open. All original cldib algorithm/global state untouched; no new synchronization or state owner."
+  },
+  "iconSize": {
+    "from": "src/wow32-dll/source/wow_control_draw_state.c:115",
+    "to": "src/compat/wow_icon_size.c:4",
+    "symbol": "wow_control_icon_size",
+    "contract": "BOOL WINAPI(HICON,UINT,int*,int*), original body unchanged. Step zero only, legacy doubled color height and monochrome mask height; GetIconInfo-owned bitmaps freed; last error preserved across cleanup. No native task or C structure dependency.",
+    "lines": 22
+  },
+  "limits": "S12 direct-dependency cleanup only; S13/S14 not implemented. Initial build precedes the additional icon-provider extraction and does not validate final code.",
+  "progress": {
+    "reviewedFiles": 67,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 41,
+    "deferredSourceAbiCompositionFiles": 10,
+    "unreviewedFiles": 49,
+    "totalFiles": 116,
+    "openIds": 514,
+    "totalIds": 617
+  },
+  "validation": {
+    "build": "Both final cached architectures passed, plus explicit four x86 worker images. First pre-icon build is not final proof.",
+    "publication": {
+      "package": "ded79739-09b9-491c-a76b-18ca13401237",
+      "images": 11,
+      "destinations": [
+        "assets/release",
+        "O:/WINNT/system32"
+      ],
+      "hashVerified": true
+    },
+    "comparison": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": true,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "targeted": {
+      "bitmap": "WOW_BITMAP_BINDING_OK nested=30 parallel=4x50 named=2 missing=2 gdi-before=0 gdi-after=0",
+      "failure": "WOW_BITMAP_BINDING_FAILURE_OK locks=2 screen=10/10",
+      "registrationExit": 0,
+      "controlDrawAndIcon": "control_draw_state_failures=0",
+      "ABGraphs": 8,
+      "WOWObjects": 150,
+      "WOWNegativeControls": 9,
+      "firstControlAttempt": "Task-local BuildRoot rejected by Ninja-tree governance before compilation; corrected to build/.ninja/t483-s12-bitmap-native-control, final run passed. Failure retained, no product change."
+    },
+    "runtime": {
+      "result": "passed",
+      "frontiers": [
+        "winmine",
+        "sol",
+        "write"
+      ],
+      "evidence": "build/t483-s12-bitmap-native/runtime.log and p35-controlled-*",
+      "scope": "Retained application-window frontiers and controlled cleanup; not full native-control interaction or gameplay acceptance."
+    },
+    "documentation": "Final governance check required before commit"
+  }
+}

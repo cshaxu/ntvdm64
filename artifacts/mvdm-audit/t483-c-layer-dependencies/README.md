@@ -185,3 +185,5 @@ P32: [XMS/CSR ownership and original probe environment](s12-p32-user-probe.json)
 P33: [BaseClient dependencies and native console handle compatibility](s12-p33-console-handle.json).
 
 P34: [BaseSrv/OLE ownership and Browser compatibility](s12-p34-remote-browser.json).
+
+P35: [Button ownership and native bitmap/icon leaves](s12-p35-bitmap-native.json).
