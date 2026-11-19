@@ -1,0 +1,156 @@
+{
+  "baseline": "0d93d8e24f599726d4463fa4c9fd49f75a1492f5",
+  "files": [
+    {
+      "linkOnlyOrder": 9,
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "ids": [
+        "C0214",
+        "C0215"
+      ],
+      "role": "INT15 move-block parameter address plus descriptor output conversion; source/target bases then reach original SAS move with A20 handling.",
+      "decision": "Preserve original consumer in C. S14 shared CPU address/descriptor owner review, not C-to-F migration of original BIOS/device algorithms.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "linkOnlyOrder": 10,
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "ids": [
+        "C0215"
+      ],
+      "role": "Guest data buffer and disk parameter table addresses; retain original SAS transfer-buffer read/write ordering.",
+      "decision": "Preserve original consumer in C. S14 shared CPU address/descriptor owner review, not C-to-F migration of original BIOS/device algorithms.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "linkOnlyOrder": 11,
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "ids": [
+        "C0215"
+      ],
+      "role": "Guest disk parameters and DMA address/page register programming; numerical guest address, never native pointer.",
+      "decision": "Preserve original consumer in C. S14 shared CPU address/descriptor owner review, not C-to-F migration of original BIOS/device algorithms.",
+      "mirrorDelta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "descriptorEvidence": {
+    "original": "Fixed OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c softpc.new has retrieve_descr_fields declaration and two calls only, in base/bios/tape_io.c:73,158,161. No same-named C function body in this fixed subtree.",
+    "current": "F mvdm_softpc_descriptor_fields.c calls original CPU40 read_descriptor_linear, then stores AR as half_word, base as sys_addr and limit as word. No session or lifecycle owner.",
+    "CPU": "base/ccpu386/c_bsic.c:167 uses supervisor reads of two guest-linear dwords, decodes base/access/granular limit and preserves CPU page-fault mechanism. This is not a Windows API service that can move independently into B.",
+    "ABI": "The caller expects three narrow separate output pointers, not CPU_DESCR*. Simple symbol alias to read_descriptor_linear would corrupt arguments/output; preserve call shape or adapt with explicit mirror accounting in S14.",
+    "limitations": "Source/ABI evidence identifies responsibility and rules out alias-only cleanup. It does not prove every current adapter detail should remain unchanged or constitute a new runtime test."
+  },
+  "addressEvidence": "Reuse s12-p74-bios-address-ownership.json for C0215 CPU40 vs CPU30 distinction; each of the three caller paths inspected separately.",
+  "progress": {
+    "directCompileReviewed": 116,
+    "directCompileTotal": 116,
+    "linkOnlyReviewed": 11,
+    "linkOnlyTotal": 74,
+    "linkOnlyRemaining": 63,
+    "openIds": 499,
+    "totalIds": 618
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "compiledEvidence": [
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\tape_io.obj",
+      "sha256": "8ca27404f769b9d8c4b41f8f8c78a2c98abc96ac30ccc6675c419616c476a1e7",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "bindings": [
+        "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj",
+        "0001:0016e2e0       _retrieve_descr_fields     0056f2e0 f   softpc-bindings:mvdm_softpc_descriptor_fields.obj"
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\disks\\diskbios.obj",
+      "sha256": "af1e752855f16dec0fef98ac300edc789319a4ab4dd685d3fd7b7782813d59ea",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "bindings": [
+        "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x86-release\\worker\\obj\\disks\\floppy.obj",
+      "sha256": "1c4683747830f0ce35af0a87412add6d080d69836c1bb1f3dfaeee28725a586e",
+      "map": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "bindings": [
+        "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\bios\\tape_io.obj",
+      "sha256": "98760cc92e3c73a20e0ca9157f02aaf7a736dae97b09c13fdf7126384718d12c",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "bindings": [
+        "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj",
+        "0001:0016e2e0       _retrieve_descr_fields     0056f2e0 f   softpc-bindings:mvdm_softpc_descriptor_fields.obj"
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\disks\\diskbios.obj",
+      "sha256": "24cc973ac81cd5a4688b44850f9c3f679c9b83b4c2e137e6a7dfbc1413f0d7b9",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "bindings": [
+        "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+      ]
+    },
+    {
+      "object": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\disks\\floppy.obj",
+      "sha256": "944e0b70a50ba6a1deabfb7e081884cb2f703e95b0873c3c7fc3d0d1a2cf1685",
+      "map": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\ntvdm.exe.map",
+      "bindings": [
+        "0001:00004fb0       _c_effective_addr          00405fb0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+      ]
+    }
+  ],
+  "validation": {
+    "build": "No production change; existing P73 objects/maps checked, no new build.",
+    "runtime": "No new runtime run; source and ABI classification only.",
+    "publishedHashChecks": [
+      "assets\\release\\VCDEX.DLL",
+      "O:\\WINNT\\system32\\VCDEX.DLL",
+      "assets\\release\\run16.exe",
+      "O:\\WINNT\\system32\\run16.exe",
+      "assets\\release\\ntsrv.exe",
+      "O:\\WINNT\\system32\\ntsrv.exe",
+      "assets\\release\\ntcon.exe",
+      "O:\\WINNT\\system32\\ntcon.exe",
+      "assets\\release\\ntvdm.exe",
+      "O:\\WINNT\\system32\\ntvdm.exe",
+      "assets\\release\\ntvwm.exe",
+      "O:\\WINNT\\system32\\ntvwm.exe",
+      "assets\\release\\ntmon.exe",
+      "O:\\WINNT\\system32\\ntmon.exe",
+      "assets\\release\\WOW32.DLL",
+      "O:\\WINNT\\system32\\WOW32.DLL",
+      "assets\\release\\VDMREDIR.DLL",
+      "O:\\WINNT\\system32\\VDMREDIR.DLL",
+      "assets\\release\\nthook32.dll",
+      "O:\\WINNT\\system32\\nthook32.dll",
+      "assets\\release\\nthook64.dll",
+      "O:\\WINNT\\system32\\nthook64.dll"
+    ]
+  },
+  "sourceHashes": {
+    "src/mvdm-host/softpc.new/base/bios/tape_io.c": "e40527fa3ed8d7e1760b2c48d67142354b9bf18c921a35864a3a3f78abc8b6c9",
+    "src/mvdm-host/softpc.new/base/disks/diskbios.c": "5c7b58e229a4c6f40dc0f3b8e3e4164118d92ae9e642a3417d8af55308f15992",
+    "src/mvdm-host/softpc.new/base/disks/floppy.c": "d9c57d64cd85cd50b0386fb65ac7988cdaf15c9906527486bfc6c3e40773971f",
+    "src/ntvdm-exe/softpc/mvdm_softpc_descriptor_fields.c": "683e5e835b48d7918621e6c72279807f441ad4dc0c5e7dca248f4b9621876d3d",
+    "src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c": "b712adf510bcddc316616bbf9c8df775a114a0f94d42c2a558716d039f8c56b5",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c": "e5e482a5acfea11e6406060b25f3f2a7630e5d057accc902e80133c44d4340a5"
+  }
+}

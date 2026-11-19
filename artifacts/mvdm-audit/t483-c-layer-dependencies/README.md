@@ -265,3 +265,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P73 BOP FE binding](s12-p73-bop-exit-binding.json): link-only file4/74. BIOS directly binds original CCPU exit; F wrapper removed; C0218 eliminated without mirror changes. Cached complete build, dual publication, CPU/BIOS and real DOS return checks passed. Current package26a87d88-8d03-4947-9982-69574aafd87e;499/618 IDs open.
 
 [P74 BIOS address ownership](s12-p74-bios-address-ownership.json): link-only files5-8/74, all C0215. Original consumers stay C; CPU30 body is not a direct CPU40 replacement. S14 evaluates common address owner. Eight current objects and22 published hashes checked; no production changes.
+
+[P75 Disk and descriptor ownership](s12-p75-disk-descriptor-ownership.json): link-only files9-11/74. Original INT15/disk/DMA consumers stay C; C0214 cannot alias CPU_DESCR reader because output ABI differs. C0214/C0215 need S14 CPU owner treatment. Six actual objects and22 publication hashes checked; no production change.
