@@ -1,0 +1,91 @@
+{
+  "task": "T483 S14",
+  "baseline": "f564af1d6f766ef651d192b3163c35294ce93a2b",
+  "kind": "source-only residual call-chain investigation; no new runtime test or product modification",
+  "inputs": [
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+      "sha256": "463b132d82537c7108510404568e998a8d11605e8389247f2f8e0a891985df0e"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "sha256": "565d0149004bae0d13970e78d7fed16b6f42117328c5dbbee98e8602431a711b"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+      "sha256": "172b26d70b1f2d942e06ffba043feef0c8a3e93319336c5effe8aa5b6ad9849e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "sha256": "ca0d52f1646efebaae64b7f8e79764ce800b79bb443ef2fecfe2e5161eaa78fd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "sha256": "8ff3d15be855aef22138c04d74e3090bf36ca1b580bb2fb385e76c44ded8a158"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "sha256": "a062de312853f50f47764882f0e929a971a390ba50e08b4fff39c1aa8bdde774"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "sha256": "b36334e5f935a1e9face8676b35d3752fa5658d5cc6392a0b61958b601af97ee"
+    },
+    {
+      "path": "src/mvdm-host/inc/xmsexp.h",
+      "sha256": "35b7f0c5f15250d40076df9f101cea9ca565973b951cae85e3366f8591ae0655"
+    }
+  ],
+  "boundaries": [
+    {
+      "ids": [
+        "C0040",
+        "C0224"
+      ],
+      "chain": "XMS -> F forward-copy -> CCPU SAS",
+      "current_ownership": "F combines session admission with CPU permission/page preflight and C forward-copy invocation. B owns ordinary bounded copying, but not this function.",
+      "required_separation": "Keep lifecycle admission with its existing owner; resolve CCPU-specific preflight/copy at the C owner. Do not transplant CPU calls into B or substitute destination-hydrating generic leases.",
+      "source_evidence": [
+        "mvdm_softpc_guest_memory_copy_forward rejects inactive session/provider before whole-range source/read and destination/write preflight.",
+        "c_sas_move_bytes_forward performs ordered byte loads/stores and returns void.",
+        "bios_read_byte may enter biosDoInst when translation fails; moving to a fallible B lease changes that failure contract."
+      ],
+      "status": "unresolved original-owner prerequisite; not eliminated"
+    },
+    {
+      "ids": [
+        "C0257"
+      ],
+      "chain": "MS_bop_2 -> XMSDispatch -> void apfnXMSSvc -> xmsMoveBlock -> product cancellation",
+      "source_evidence": [
+        "MS_bop_2 discards the BOOL from XMSDispatch, then advances guest IP.",
+        "XMSDispatch invokes the void handler and returns TRUE unconditionally.",
+        "HIMEM overwrites AX/BL through A20 handling and derives the final result from its stack MEReturn; see s14-xms-return-owner-review.json."
+      ],
+      "conclusion": "Changing only the C leaf return or moving the cancellation helper does not repair ownership. A failure-result design must cover the dispatch and BOP caller as well; no second pending-error state or guest patch is admitted.",
+      "status": "unresolved complete-chain redesign; no production change"
+    },
+    {
+      "chain": "WOW page-domain backing and projection",
+      "source_evidence": [
+        "page_domain_store_owned_words tries a permission-aware physical copy, then falls back to original c_sas_storedw.",
+        "page_domain_copy_owned_ram uses a one-page direct mapped alias or c_sas_loads for a crossing span.",
+        "The original SAS fallback can reenter guest; generic lease refusal is not equivalent.",
+        "Domain creation and activation manage CR0/CR3/GDT as well as USER projection backing."
+      ],
+      "conclusion": "Shared clock is already B-owned. Remaining object storage cannot be moved wholesale to B with CCPU imports or made equivalent by new F callbacks. Resolve CPU/SAS backing before moving complete USER ownership groups.",
+      "status": "unresolved; not counted as migrated"
+    }
+  ],
+  "completion_audit": "S14 remains active: its no-hidden-F-provider criterion is not yet met. Do not close S14 or admit S15 based only on the eligible mechanics already delivered.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulative_mirror_reduction": {
+    "points": 3,
+    "lines": 12
+  },
+  "verification": "Source reads and searches only. P22 remains the published and runtime-equivalent product baseline. Documentation governance, relative links and diff whitespace checks passed; no source rebuild or package republish for this evidence-only change.",
+  "delivery": "T483 S14 P23"
+}

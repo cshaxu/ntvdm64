@@ -109,6 +109,12 @@ not a second elimination count. Build-generation failures are retained in P17.
 
 ## Sequential Work
 
+[Residual chain review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-residual-chain-review.json)
+confirms XMS failure propagation spans the void service table and BOP caller,
+which ignores the dispatch return. SAS/USER backing retains CPU-specific
+failure semantics. S14 remains active until these provider boundaries are
+resolved; this source investigation is not new runtime acceptance.
+
 [WOW page-domain ownership review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-page-domain-owner-review.json)
 separates clock ownership from CPU and USER backing. P21 completes the
 shared host-clock extraction. USER backing remains coupled to SAS and still
