@@ -28,7 +28,7 @@
 
 ## Current Technical Baseline
 
-S12 P1 eliminated C0042, C0139 and C0143 in place. The worker build selects its historical terminate symbol name directly. The two unused private search directories have been removed from product and fixture generators. All eight production graphs covering eleven images passed the command check. The 27 async publication and 14 OEM assertions, original COM lifecycle, 98-object nonworker compiler closure and its injected negative control passed. Both cached architectures built. Both release manifests match package 7fe6d388-ad54-4952-a212-1abeefe9cb75. All executable sections match P7. Mirror block and line deltas are zero. Of 599 stable IDs, 544 remain open, 51 are supporting evidence, three eliminated and one excluded diagnostic. S12 remains active.
+S12 P1-P2 build, publication and direct-header evidence are indexed in the [C dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
 
 P2 removed C0056, C0138, C0140 and C0144 without changing either mirror. The WOW32 graph also dropped its inherited worker command and SoftPC search roots. P2 package 93bb7b13-4fcd-42ce-bbfe-c318a53669ba was built with both cached toolchains and hash-verified at both destinations. Every byte of all eleven P2 images equals P1 after masking only the package GUID and COFF/debug-directory timestamps. The WOW32 formal graph, worker session lifecycle and A/B production boundary checks passed. The expanded compile commands and a VDMREDIR link map corrected the baseline coverage. See the C tracker for the updated counts.
 
@@ -88,7 +88,9 @@ P38: [native-leaf migration, build, publication and tests](../../artifacts/mvdm-
 
 P39: [dialog end/manager ownership and 22-case verification](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p39-dialog-end-manager.json).
 
-P40 classified keyboard/mnemonic lifecycle as S13 and pure navigation header/layout composition as S14. [P40 evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p40-dialog-navigation.json). Review79/116:16 clears,51 lifecycle,12 source/ABI,37 unreviewed;510/617 open. Source unchanged; P38 package retained. Four targeted fixtures passed. Mirror delta0/0; cumulative reduction2 points/10 lines. Only S12 active.
+P40: [dialog navigation classification and four targeted fixtures](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p40-dialog-navigation.json).
+
+P41: [drawing ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s12-p41-drawing-ownership.json). Review80/116:16 clears,52 lifecycle,12 source/ABI,36 unreviewed;510/617 open. File081 remains under investigation for grouped native-export ownership. Source unchanged; P38 release retained. Mirror delta0/0, cumulative reduction2 points/10 lines. Only S12 active.
 
 ## S11 Closure Record
 

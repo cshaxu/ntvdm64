@@ -197,3 +197,5 @@ P37: [Combo entry, directory validation and child lifecycle ownership](s12-p37-c
 [P39 dialog end and manager](s12-p39-dialog-end-manager.json): files075-076, original end/default/modal policy stays C; explicit task/borrow/message boundaries remain open.
 
 [P40 dialog navigation](s12-p40-dialog-navigation.json): files077-079; keyboard/mnemonic lifecycle and original tree-layout composition distinguished.
+
+[P41 drawing ownership](s12-p41-drawing-ownership.json): file080 classified; file081 native export/context investigation remains open. Review80/116,510/617 open.

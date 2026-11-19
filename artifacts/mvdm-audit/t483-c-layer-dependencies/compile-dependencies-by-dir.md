@@ -527,6 +527,8 @@
 
 - 直接包含 · C0064 · wow32-dll · src/wow32-dll/include/control-client/precomp.h
 
+080 P41: Original PaintRect remains C. Shared retained-window validation is S13; no source changes or dependency elimination. File081 investigation remains active; see s12-p41-drawing-ownership.json.
+
 ## 081 — src/non-mvdm/windows/core/ntuser/client/drawtext.c
 
 - 直接包含 · C0066 · wow32-dll · src/wow32-dll/include/control-drawing/precomp.h

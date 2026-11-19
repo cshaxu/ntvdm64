@@ -1,0 +1,63 @@
+{
+  "baseline": "3172b5e83f39059611be8a6c8127acdb387bc774",
+  "status": "P41 source-only classification of file080; file081 investigation remains open",
+  "files": [
+    {
+      "number": 80,
+      "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+      "sha256": "fa3f545ee11f6da095d28c7db6e68f13d583c53cf5e97b877cfc16772ae492e1",
+      "compilerObject": "obj/opennt-user/control-client-draw.obj",
+      "dependencyRecord": "obj/opennt-user/control-client-draw.obj: #deps 64, deps mtime 8167706472280560 (VALID)",
+      "complete": true,
+      "header": "C0064",
+      "linkedIds": [
+        "C0596"
+      ],
+      "conclusion": "Keep original PaintRect in C: original client-coordinate brush origin, control-color conversion, FillRect and origin restore. Only outer linked operation is HWND-to-retained-WND validation. Its runtime exclusion and borrow lifetime belong to the shared S13 boundary; do not move the drawing algorithm or substitute IsWindow for a PWND provider.",
+      "linkEvidence": "wow32.dll.map: PaintRect -> control-client-draw.obj; GetControlColor -> control-color.obj. FillRect/SetBrushOrgEx/GetDesktopWindow are native imports, not F owners.",
+      "provider": "src/wow32-dll/source/wow_window_client_state_bindings.c:177, wow_window_client_validate_window acquires current runtime if needed, borrows retained state and restores scope/LastError."
+    },
+    {
+      "number": 81,
+      "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "sha256": "507055fd8593e29f2fb4b015de6b895f9dad6af814f54a39898092bd7389aac1",
+      "compilerObject": "obj/opennt-user/control-text-client.obj",
+      "dependencyRecord": "obj/opennt-user/control-text-client.obj: #deps 22, deps mtime 8167706460036731 (VALID)",
+      "complete": false,
+      "header": "C0066",
+      "linkedIds": [
+        "C0392",
+        "C0393"
+      ],
+      "findings": [
+        "Original TabTextOut remains C. IsSysFontAndDefaultMode resolves to C control-text-rtl.obj; DrawTextExW is USER32 import.",
+        "gpsi aliases F TLS wow_edit_current; system font metrics are captured in wow_edit_capture_context. This is a context/lifetime dependency, not a reason to migrate the text algorithm.",
+        "GdiGetCharDimensions aliases F native wrapper. Its SDK-only signature is a B candidate; the current wrapper calls one INIT_ONCE loader requiring eleven exports and shared C ABI declarations (LARGE_STRING, CHWIDTHINFO, POLYPATBLT). Existing loader coupling does not prove F ownership necessary."
+      ],
+      "nextAction": "Resolve the native-export group and its original ABI declarations as one bounded change. Do not add a second per-function resolver merely to relocate one wrapper. Keep file081 open until the in-place B migration opportunity has a concrete disposition."
+    }
+  ],
+  "progress": {
+    "reviewedFiles": 80,
+    "clearedDirectHeaderFiles": 16,
+    "deferredLifecycleFiles": 52,
+    "deferredSourceAbiCompositionFiles": 12,
+    "unreviewedFiles": 36,
+    "totalFiles": 116,
+    "openIds": 510,
+    "totalIds": 617
+  },
+  "mirrorDelta": {
+    "points": 0,
+    "lines": 0,
+    "cumulativeReductionPoints": 2,
+    "cumulativeReductionLines": 10
+  },
+  "validation": {
+    "productBuild": "Not run; no production source changes.",
+    "runtime": "Not run; this receipt proves source/provider attribution only.",
+    "publication": "Existing P38 package retained; no new product publication claimed.",
+    "documentation": "Verify-DocumentationGovernance.ps1; build/t483-s12-drawing-ownership/docs.log and docs.exit"
+  },
+  "limits": "No dependency elimination or blanket approval of retained adapters. No source, guest, #error or #line modifications. File081 is not counted complete."
+}
