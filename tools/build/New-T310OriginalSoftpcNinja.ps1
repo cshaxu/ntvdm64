@@ -1026,13 +1026,11 @@ $commandObjects = foreach ($name in $commandNames) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $commandRoot $name)))
     if ($name -in @('cmdmisc.c','cmdpif.c')) {
         $commandFlags = $baseFlags
-        if ($name -eq 'cmdmisc.c') {
-            foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
-                'src/ntvdm-exe/softpc/include', 'src/ntvdm-exe/softpc/include/generated/x86/prod',
-                'src/vdmredir-dll/include', 'src/wow32-dll/include')) {
-                $commandFlags = $commandFlags.Replace(' /I "' +
-                    (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
-            }
+        foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
+            'src/ntvdm-exe/softpc/include', 'src/ntvdm-exe/softpc/include/generated/x86/prod',
+            'src/vdmredir-dll/include', 'src/wow32-dll/include')) {
+            $commandFlags = $commandFlags.Replace(' /I "' +
+                (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
         }
         $graph.Add('  cflags = ' + $commandFlags + ' /FI "' +
             (NinjaPath (Join-Path $root 'src/compat/include/console_title.h')) + '"')

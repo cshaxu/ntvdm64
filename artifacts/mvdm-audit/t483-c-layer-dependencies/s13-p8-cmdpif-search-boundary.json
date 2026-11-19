@@ -1,0 +1,125 @@
+{
+  "scope": "T483 S13 P8: next DIR-ordered file cmdpif.c, complete outward compilation closure",
+  "baseline": "110a3b02411dafa952efe8ace5a5b11cddd35110",
+  "file": {
+    "path": "src/mvdm-host/dos/command/cmdpif.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdpif.c",
+    "originalSHA256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+    "currentSHA256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+    "byteIdentical": true,
+    "points": 0,
+    "added": 0,
+    "deleted": 0
+  },
+  "conclusion": "Original mirror byte-identical. Title provider already moved to the B contract in P7; this batch removes three unused outward include search directories in both supported C compilation graphs. No C source, provider, state or ABI change.",
+  "priorActualRoots": [
+    "src/common/base_srv",
+    "src/ntvdm-exe/softpc/include",
+    "src/ntvdm-exe/softpc/include/generated/x86/prod"
+  ],
+  "currentActualOutwardRoots": [],
+  "currentActualOutwardHeaders": [],
+  "sharedIds": [
+    "C0135",
+    "C0141",
+    "C0142"
+  ],
+  "newlyEliminatedIds": 0,
+  "sharedIdDisposition": "Other files still use these roots. Keep IDs open and clear only this caller. C0137/C0145/C0146 were already absent in the actual command, not newly removed.",
+  "mirror": {
+    "beforePoints": 0,
+    "beforeLines": 0,
+    "afterPoints": 0,
+    "afterLines": 0,
+    "deltaPoints": 0,
+    "deltaLines": 0,
+    "byteIdenticalToOriginal": true,
+    "errorLineDisposition": "No source bytes changed; original conditional and diagnostic line structure unchanged."
+  },
+  "cumulativeMirrorReduction": {
+    "points": 2,
+    "lines": 10
+  },
+  "counts": {
+    "excluded-diagnostic": 1,
+    "open": 447,
+    "supporting-evidence": 44,
+    "eliminated-transitive": 5,
+    "eliminated": 121
+  },
+  "total": 618,
+  "S13Eliminated": 25,
+  "build": "Cached x86/x64 full products plus explicit x86 images and reference-x86 worker pass. Eight A/B object graphs pass.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "ece2cccb-2735-4d74-9227-5033bb53f514",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "normalized": {
+    "VCDEX.DLL": true,
+    "run16.exe": true,
+    "ntsrv.exe": true,
+    "ntcon.exe": true,
+    "ntvdm.exe": true,
+    "ntvwm.exe": true,
+    "ntmon.exe": true,
+    "WOW32.DLL": true,
+    "VDMREDIR.DLL": true,
+    "nthook32.dll": true,
+    "nthook64.dll": true
+  },
+  "runtime": "Owner-authorized repetition waiver: all eleven images equal the P7 tested package after masking only package GUID and PE/debug timestamps. Raw SHA256 differs due to publication identity; do not call them raw-byte equal. No new runtime pass claimed; P7 targeted COMMAND/Console/WOW/location evidence retained.",
+  "implementation": "Remove the extra cmdmisc-only guard around the existing directory-pruning loop, applying the same policy to cmdmisc and cmdpif; no new shim or branch.",
+  "evidence": [
+    {
+      "path": "build/t483-s13-cmdpif-boundary/before.json",
+      "sha256": "a810ade15456309c61c8dd8a8af0e25b7550ac370a89c4d806797c5af0b25859"
+    },
+    {
+      "path": "build/t483-s13-cmdpif-boundary/build-process.json",
+      "sha256": "ddc5a8fec0a933b2d09572f233e03fd1e809c91f671f7fbda6c41e9bada1e30d"
+    },
+    {
+      "path": "build/t483-s13-cmdpif-boundary/build.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-cmdpif-boundary/deliver-proof-process.json",
+      "sha256": "4038a7449a1796364bdd29ae3fd38be6a0b75ceb23a9f92cb71472ed62ec7f9d"
+    },
+    {
+      "path": "build/t483-s13-cmdpif-boundary/deliver-proof.exit",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "build/t483-s13-cmdpif-boundary/publication-final.json",
+      "sha256": "713f5b502ead43789281408446c4adf3ed2e22cc2a4f019784b4156ed29f3279"
+    },
+    {
+      "path": "build/t483-s13-cmdpif-boundary/normalized-final.json",
+      "sha256": "a619014f7c381dd87239c0626a7afb4c24a74b71e74c3f0fe5ab7c91c263e5a4"
+    },
+    {
+      "path": "build/t483-s13-cmdpif-boundary/msvc-x86-release-worker-deps.txt",
+      "sha256": "2da02a7e1acc59c76de503ba3cdec48fa27fbadc26c4b063f49ed499634224da"
+    },
+    {
+      "path": "build/t483-s13-cmdpif-boundary/msvc-x86-release-worker-command.txt",
+      "sha256": "109376e7ae9e8943e230b4833ddf6372ae94e1b3b987a9cd058439666b86b72e"
+    },
+    {
+      "path": "build/t483-s13-cmdpif-boundary/msvc-x64-release-worker-reference-x86-deps.txt",
+      "sha256": "fec0a89a6ef66ce8699ab361cb7331ec2feb17e677fbf646cd1fce273f66b4b6"
+    },
+    {
+      "path": "build/t483-s13-cmdpif-boundary/msvc-x64-release-worker-reference-x86-command.txt",
+      "sha256": "109376e7ae9e8943e230b4833ddf6372ae94e1b3b987a9cd058439666b86b72e"
+    }
+  ],
+  "remaining": "S13 active. Next DIR file is dos/dem/dem.c, with shared dem.h lifecycle declarations; no S14 admission."
+}

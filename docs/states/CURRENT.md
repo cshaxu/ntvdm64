@@ -27,13 +27,13 @@
 
 ## Current Technical Baseline
 
-S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P5 below supersedes both published copies.
+S12 P107 moved three unchanged breakpoint providers F to B. Cached x86/x64 builds, reference-x86 worker,8 A/B build graphs and22 release hashes passed. All11 images match P104 after masking only package GUID and PE/debug timestamps; repeated runtime testing was waived. That preceding package was94150155-5251-42f3-b587-9803d82bc178; S13 P8 below supersedes both published copies.
 
-S13 P7: [cmdmisc complete boundary delivery](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p7-cmdmisc-boundary.json). Pure environment projection and numeric locations belong to B; unchanged session-copy and Console title operations remain F behind explicitly installed B contracts. Original cmdmisc algorithms remain C. Six IDs eliminated:121 eliminated/447 open of618; S13 has cleared25 IDs. Shared DEM header and other files' search roots remain open.
+S13 P8: [cmdpif complete compilation boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p8-cmdpif-search-boundary.json). Original cmdpif.c remains byte-identical:0 mirror points/0 lines. Its title provider was resolved in [P7](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p7-cmdmisc-boundary.json); this delivery removes three unused D/F search directories in both product and reference graphs. Their shared IDs remain open for other files. No new ID elimination:121 eliminated/447 open of618;S13 has cleared25 IDs.
 
-Cached x86/x64 and reference-x86 builds,8 A/B graphs and targeted environment/location/COMMAND/Console/WOW checks passed. Package80eb0fde-c679-4242-aec5-5630d5173fd9 is published to both destinations with22 hashes verified. Only NTVDM differs after package/time normalization. Initial missing-header build and incorrectly configured WOW wrapper failures are retained; their corrected runs passed. WOW proves the application frontier, not normal exit or gameplay. No Full claim.
+Cached x86/x64 and reference builds,8 A/B graphs and both final cmdpif include/command closures passed. Packageece2cccb-2735-4d74-9227-5033bb53f514 is published to both destinations with22 hashes verified. All11 images equal P7 after masking only package GUID and PE/debug timestamps; raw hashes differ. Owner-authorized repeated-runtime waiver applies; no new runtime or Full pass claimed. P7 targeted COMMAND/Console/WOW/location evidence remains the behavioral baseline.
 
-Current file mirror diff remains9 points/52 lines (+46/-6),delta0/0;cumulative reduction2 points/10 lines. P7 governance and relative-link checks passed; the enclosing P commit records this delivery. S13 remains active;S14 remains unadmitted. The preceding [P6 ownership review](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-p6-cmdmisc-ownership-review.json) records alternatives and the preserved failure contract.
+This file mirror delta0/0;cumulative reduction2 points/10 lines. Next DIR file:dos/dem/dem.c and its coupled dem.h lifecycle declarations. S13 remains active;S14 remains unadmitted.
 
 ## S12 Closure Record
 

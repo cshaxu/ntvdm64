@@ -345,3 +345,5 @@ S13 P5: [Console keyboard query boundary](s13-p5-console-keyboard-boundary.json)
 S13 P6: [cmdmisc ownership review](s13-p6-cmdmisc-ownership-review.json); bounded environment, guest output and Console title groups mapped before implementation. No product change or dependency elimination; P5 remains the released baseline.
 
 S13 P7: [cmdmisc boundary delivery](s13-p7-cmdmisc-boundary.json); pure environment and numeric location move to B, session copy and Console title bodies remain F behind installed B contracts. Six IDs eliminated;121 eliminated,447 open. Cached x86/x64/reference,8 boundary graphs,dual11 publication and targeted COMMAND/Console/WOW/location checks pass. Mirror remains9 points/52 lines;delta0/0.
+
+S13 P8: [cmdpif compilation boundary](s13-p8-cmdpif-search-boundary.json); exact original source retained, three unused D/F search roots removed in product/reference graphs. Cached builds,8 boundary graphs and dual11 publication pass. All11 normalized images equal P7; repeated runtime tests waived. Shared IDs remain open:121 eliminated,447 open. Mirror0 points/0 lines;delta0/0.
