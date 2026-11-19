@@ -357,3 +357,5 @@ S13 P11: [demsrch unavailable VDM boundary](s13-p11-demsrch-vdm-boundary.json); 
 S13 P12: [DPMI service boundary](s13-p12-dpmi-services-boundary.json); four direct symbol edges replaced by B contracts, unchanged F state and C algorithms.132 eliminated,436 open. Cached builds,dual11 publication,debug/PM-entry/WOW page-domain and actual DOS4GW/DIR pass. Mirror20/292 ->19/290; reduction1 point/2 lines.
 
 S13 P13: [BIOS VM boundary](s13-p13-bios-vm-boundary.json);14 DIR units reviewed,13 retain S14 ABI/address ownership. virtual.c only changes its contract include; F VM and controlled-stop bodies retained. Three IDs eliminated:135 eliminated,433 open. Cached builds,dual11 publication,3183 VM assertions,NIDDB positive/negative controls and DOS DIR pass. Mirror9 points/27 lines unchanged; cumulative reduction3 points/12 lines.
+
+S13 CPU follow-up: [c_main dependency review](s13-ccpu-dependency-review.json) resolves all34 COMMON definitions to C, retains generated ABI IDs for S14, and identifies the coupled physical-mapping query/register/unregister boundary for the next implementation batch. No product edits or new eliminated IDs.

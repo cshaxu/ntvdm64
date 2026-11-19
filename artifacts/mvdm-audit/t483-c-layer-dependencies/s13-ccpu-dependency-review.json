@@ -1,0 +1,2791 @@
+{
+  "scope": "T483 S13 c_main.c direct dependency review",
+  "baseline": "e55fbc84f",
+  "question": "Are remaining outer references product responsibilities requiring S13 relocation?",
+  "metric": {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+    "current_sha256": "6679c57d5809cfff486fc6818198e2f12eb67f1d09612a812b7fd290c58f327e",
+    "raw": {
+      "blocks": 111,
+      "added": 187,
+      "deleted": 561
+    },
+    "filtered": {
+      "blocks": 36,
+      "added": 112,
+      "deleted": 30
+    },
+    "excluded": [
+      {
+        "original": [
+          26,
+          26
+        ],
+        "current": [
+          26,
+          27
+        ]
+      },
+      {
+        "original": [
+          156,
+          161
+        ],
+        "current": [
+          170,
+          172
+        ]
+      },
+      {
+        "original": [
+          198,
+          202
+        ],
+        "current": [
+          210,
+          212
+        ]
+      },
+      {
+        "original": [
+          209,
+          210
+        ],
+        "current": [
+          220,
+          222
+        ]
+      },
+      {
+        "original": [
+          222,
+          222
+        ],
+        "current": [
+          236,
+          237
+        ]
+      },
+      {
+        "original": [
+          227,
+          227
+        ],
+        "current": [
+          244,
+          245
+        ]
+      },
+      {
+        "original": [
+          283,
+          303
+        ],
+        "current": [
+          328,
+          330
+        ]
+      },
+      {
+        "original": [
+          331,
+          334
+        ],
+        "current": [
+          359,
+          361
+        ]
+      },
+      {
+        "original": [
+          474,
+          495
+        ],
+        "current": [
+          502,
+          504
+        ]
+      },
+      {
+        "original": [
+          513,
+          535
+        ],
+        "current": [
+          523,
+          525
+        ]
+      },
+      {
+        "original": [
+          539,
+          543
+        ],
+        "current": [
+          530,
+          532
+        ]
+      },
+      {
+        "original": [
+          593,
+          596
+        ],
+        "current": [
+          603,
+          605
+        ]
+      },
+      {
+        "original": [
+          600,
+          605
+        ],
+        "current": [
+          610,
+          612
+        ]
+      },
+      {
+        "original": [
+          631,
+          636
+        ],
+        "current": [
+          639,
+          641
+        ]
+      },
+      {
+        "original": [
+          762,
+          765
+        ],
+        "current": [
+          769,
+          771
+        ]
+      },
+      {
+        "original": [
+          772,
+          772
+        ],
+        "current": [
+          786,
+          787
+        ]
+      },
+      {
+        "original": [
+          776,
+          781
+        ],
+        "current": [
+          791,
+          793
+        ]
+      },
+      {
+        "original": [
+          794,
+          794
+        ],
+        "current": [
+          808,
+          809
+        ]
+      },
+      {
+        "original": [
+          804,
+          805
+        ],
+        "current": [
+          820,
+          822
+        ]
+      },
+      {
+        "original": [
+          1098,
+          1104
+        ],
+        "current": [
+          1118,
+          1120
+        ]
+      },
+      {
+        "original": [
+          1223,
+          1227
+        ],
+        "current": [
+          1242,
+          1244
+        ]
+      },
+      {
+        "original": [
+          1237,
+          1241
+        ],
+        "current": [
+          1257,
+          1259
+        ]
+      },
+      {
+        "original": [
+          1250,
+          1252
+        ],
+        "current": [
+          1270,
+          1272
+        ]
+      },
+      {
+        "original": [
+          1404,
+          1404
+        ],
+        "current": [
+          1425,
+          1426
+        ]
+      },
+      {
+        "original": [
+          1476,
+          1476
+        ],
+        "current": [
+          1499,
+          1500
+        ]
+      },
+      {
+        "original": [
+          1527,
+          1535
+        ],
+        "current": [
+          1553,
+          1555
+        ]
+      },
+      {
+        "original": [
+          1545,
+          1565
+        ],
+        "current": [
+          1568,
+          1570
+        ]
+      },
+      {
+        "original": [
+          1574,
+          1574
+        ],
+        "current": [
+          1581,
+          1582
+        ]
+      },
+      {
+        "original": [
+          1644,
+          1644
+        ],
+        "current": [
+          1654,
+          1655
+        ]
+      },
+      {
+        "original": [
+          1706,
+          1715
+        ],
+        "current": [
+          1720,
+          1722
+        ]
+      },
+      {
+        "original": [
+          1725,
+          1747
+        ],
+        "current": [
+          1735,
+          1737
+        ]
+      },
+      {
+        "original": [
+          1764,
+          1779
+        ],
+        "current": [
+          1757,
+          1759
+        ]
+      },
+      {
+        "original": [
+          2200,
+          2200
+        ],
+        "current": [
+          2182,
+          2183
+        ]
+      },
+      {
+        "original": [
+          2241,
+          2241
+        ],
+        "current": [
+          2225,
+          2226
+        ]
+      },
+      {
+        "original": [
+          2264,
+          2264
+        ],
+        "current": [
+          2250,
+          2251
+        ]
+      },
+      {
+        "original": [
+          2305,
+          2305
+        ],
+        "current": [
+          2293,
+          2294
+        ]
+      },
+      {
+        "original": [
+          2318,
+          2360
+        ],
+        "current": [
+          2308,
+          2310
+        ]
+      },
+      {
+        "original": [
+          2366,
+          2385
+        ],
+        "current": [
+          2317,
+          2319
+        ]
+      },
+      {
+        "original": [
+          2832,
+          2845
+        ],
+        "current": [
+          2767,
+          2769
+        ]
+      },
+      {
+        "original": [
+          3317,
+          3322
+        ],
+        "current": [
+          3243,
+          3245
+        ]
+      },
+      {
+        "original": [
+          3330,
+          3338
+        ],
+        "current": [
+          3254,
+          3256
+        ]
+      },
+      {
+        "original": [
+          3502,
+          3510
+        ],
+        "current": [
+          3422,
+          3424
+        ]
+      },
+      {
+        "original": [
+          3675,
+          3678
+        ],
+        "current": [
+          3591,
+          3593
+        ]
+      },
+      {
+        "original": [
+          3703,
+          3722
+        ],
+        "current": [
+          3620,
+          3622
+        ]
+      },
+      {
+        "original": [
+          3750,
+          3750
+        ],
+        "current": [
+          3651,
+          3652
+        ]
+      },
+      {
+        "original": [
+          3767,
+          3767
+        ],
+        "current": [
+          3670,
+          3671
+        ]
+      },
+      {
+        "original": [
+          3779,
+          3779
+        ],
+        "current": [
+          3684,
+          3685
+        ]
+      },
+      {
+        "original": [
+          3795,
+          3804
+        ],
+        "current": [
+          3702,
+          3704
+        ]
+      },
+      {
+        "original": [
+          3830,
+          3830
+        ],
+        "current": [
+          3731,
+          3732
+        ]
+      },
+      {
+        "original": [
+          3878,
+          3878
+        ],
+        "current": [
+          3781,
+          3782
+        ]
+      },
+      {
+        "original": [
+          3895,
+          3895
+        ],
+        "current": [
+          3800,
+          3801
+        ]
+      },
+      {
+        "original": [
+          3907,
+          3907
+        ],
+        "current": [
+          3814,
+          3815
+        ]
+      },
+      {
+        "original": [
+          3923,
+          3923
+        ],
+        "current": [
+          3832,
+          3833
+        ]
+      },
+      {
+        "original": [
+          3949,
+          3949
+        ],
+        "current": [
+          3860,
+          3861
+        ]
+      },
+      {
+        "original": [
+          4002,
+          4006
+        ],
+        "current": [
+          3916,
+          3918
+        ]
+      },
+      {
+        "original": [
+          4197,
+          4201
+        ],
+        "current": [
+          4115,
+          4117
+        ]
+      },
+      {
+        "original": [
+          4330,
+          4330
+        ],
+        "current": [
+          4248,
+          4249
+        ]
+      },
+      {
+        "original": [
+          4336,
+          4336
+        ],
+        "current": [
+          4258,
+          4259
+        ]
+      },
+      {
+        "original": [
+          4354,
+          4354
+        ],
+        "current": [
+          4280,
+          4281
+        ]
+      },
+      {
+        "original": [
+          4400,
+          4400
+        ],
+        "current": [
+          4327,
+          4328
+        ]
+      },
+      {
+        "original": [
+          4421,
+          4441
+        ],
+        "current": [
+          4359,
+          4361
+        ]
+      },
+      {
+        "original": [
+          4445,
+          4485
+        ],
+        "current": [
+          4366,
+          4368
+        ]
+      },
+      {
+        "original": [
+          4493,
+          4496
+        ],
+        "current": [
+          4393,
+          4395
+        ]
+      },
+      {
+        "original": [
+          4528,
+          4528
+        ],
+        "current": [
+          4430,
+          4431
+        ]
+      },
+      {
+        "original": [
+          4639,
+          4639
+        ],
+        "current": [
+          4543,
+          4544
+        ]
+      },
+      {
+        "original": [
+          4642,
+          4642
+        ],
+        "current": [
+          4547,
+          4548
+        ]
+      },
+      {
+        "original": [
+          4658,
+          4681
+        ],
+        "current": [
+          4565,
+          4567
+        ]
+      },
+      {
+        "original": [
+          4739,
+          4739
+        ],
+        "current": [
+          4631,
+          4632
+        ]
+      },
+      {
+        "original": [
+          4774,
+          4775
+        ],
+        "current": [
+          4669,
+          4671
+        ]
+      },
+      {
+        "original": [
+          4801,
+          4801
+        ],
+        "current": [
+          4703,
+          4704
+        ]
+      },
+      {
+        "original": [
+          4813,
+          4814
+        ],
+        "current": [
+          4719,
+          4721
+        ]
+      },
+      {
+        "original": [
+          4841,
+          4841
+        ],
+        "current": [
+          4755,
+          4756
+        ]
+      },
+      {
+        "original": [
+          4858,
+          4858
+        ],
+        "current": [
+          4782,
+          4783
+        ]
+      },
+      {
+        "original": [
+          4873,
+          4885
+        ],
+        "current": [
+          4799,
+          4801
+        ]
+      },
+      {
+        "original": [
+          4890,
+          4920
+        ],
+        "current": [
+          4807,
+          4809
+        ]
+      }
+    ],
+    "issues": [],
+    "rank": 1
+  },
+  "common_definitions": [
+    {
+      "symbol": "_pg_end",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 462,
+        "declaration": "GLOBAL  IU8 *pg_end;"
+      }
+    },
+    {
+      "symbol": "_CCPU_TR",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 374,
+        "declaration": "GLOBAL IU32 CCPU_TR[8];       \t/* Test Registers */"
+      }
+    },
+    {
+      "symbol": "_CCPU_DR",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 376,
+        "declaration": "GLOBAL IU32 CCPU_DR[8];       \t/* Debug Registers */"
+      }
+    },
+    {
+      "symbol": "_CCPU_CR",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 378,
+        "declaration": "GLOBAL IU32 CCPU_CR[4];       \t/* Control Registers */"
+      }
+    },
+    {
+      "symbol": "_CCPU_GR",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 380,
+        "declaration": "GLOBAL IU32 CCPU_GR[8];        /* Double Word General Registers */"
+      }
+    },
+    {
+      "symbol": "_CCPU_IP",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 411,
+        "declaration": "GLOBAL IU32 CCPU_IP;\t\t/* The Instruction Pointer */"
+      }
+    },
+    {
+      "symbol": "_CCPU_FLAGS",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 418,
+        "declaration": "GLOBAL IU32 CCPU_FLAGS[32];\t/* The flags. (EFLAGS) */"
+      }
+    },
+    {
+      "symbol": "_CCPU_CPL",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 416,
+        "declaration": "GLOBAL IU32 CCPU_CPL;\t/* Current Privilege Level */"
+      }
+    },
+    {
+      "symbol": "_CCPU_MODE",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 429,
+        "declaration": "GLOBAL IU32 CCPU_MODE[3];\t/* Current Operating Mode */"
+      }
+    },
+    {
+      "symbol": "_CCPU_SR",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 372,
+        "declaration": "GLOBAL SEGMENT_REGISTER  CCPU_SR[6];\t/* Segment Registers */"
+      }
+    },
+    {
+      "symbol": "_CCPU_SAR",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 414,
+        "declaration": "GLOBAL SYSTEM_ADDRESS_REGISTER CCPU_SAR[2];\t\t/* LDTR and TR */"
+      }
+    },
+    {
+      "symbol": "_CCPU_STAR",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 412,
+        "declaration": "GLOBAL SYSTEM_TABLE_ADDRESS_REGISTER CCPU_STAR[2];\t/* GDTR and IDTR */"
+      }
+    },
+    {
+      "symbol": "_took_relative_jump",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 253,
+        "declaration": "GLOBAL IBOOL took_relative_jump;"
+      }
+    },
+    {
+      "symbol": "_took_absolute_toc",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 255,
+        "declaration": "GLOBAL IBOOL took_absolute_toc;"
+      }
+    },
+    {
+      "symbol": "_in_C",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 316,
+        "declaration": "ISM32 in_C;"
+      }
+    },
+    {
+      "symbol": "_CCPU_M",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 608,
+        "declaration": "GLOBAL UTINY *CCPU_M;"
+      }
+    },
+    {
+      "symbol": "_m_seg",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 624,
+        "declaration": "GLOBAL INT   m_seg[3];\t\t/* Memory Operand segment reg. index. */"
+      }
+    },
+    {
+      "symbol": "_m_off",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 625,
+        "declaration": "GLOBAL ULONG m_off[3];\t\t/* Memory Operand offset. */"
+      }
+    },
+    {
+      "symbol": "_m_la",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 626,
+        "declaration": "GLOBAL ULONG m_la[3];\t\t/* Memory Operand Linear Addr. */"
+      }
+    },
+    {
+      "symbol": "_m_pa",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 627,
+        "declaration": "GLOBAL ULONG m_pa[3];\t\t/* Memory Operand Physical Addr. */"
+      }
+    },
+    {
+      "symbol": "_modRM",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 628,
+        "declaration": "GLOBAL UTINY modRM;\t\t/* The modRM byte. */"
+      }
+    },
+    {
+      "symbol": "_segment_override",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 629,
+        "declaration": "GLOBAL UTINY segment_override;\t/* Segment Prefix for current inst. */"
+      }
+    },
+    {
+      "symbol": "_p",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 630,
+        "declaration": "GLOBAL UTINY *p;\t\t/* Pntr. to Intel Opcode Stream. */"
+      }
+    },
+    {
+      "symbol": "_m_isreg",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 631,
+        "declaration": "GLOBAL BOOL m_isreg[3];\t\t/* Memory Operand Register(true)/"
+      }
+    },
+    {
+      "symbol": "_ops",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 633,
+        "declaration": "GLOBAL OPERAND ops[3];\t\t/* Inst. Operands. */"
+      }
+    },
+    {
+      "symbol": "_save_id",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 634,
+        "declaration": "GLOBAL ULONG save_id[3];\t\t/* Saved state for Inst. Operands. */"
+      }
+    },
+    {
+      "symbol": "_m_la2",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 635,
+        "declaration": "GLOBAL ULONG m_la2[3];\t\t/* Memory Operand(2) Linear Addr. */"
+      }
+    },
+    {
+      "symbol": "_m_pa2",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 636,
+        "declaration": "GLOBAL ULONG m_pa2[3];\t\t/* Memory Operand(2) Physical Addr. */"
+      }
+    },
+    {
+      "symbol": "_doing_contributory",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+        "line": 91,
+        "declaration": "GLOBAL BOOL doing_contributory;"
+      }
+    },
+    {
+      "symbol": "_doing_double_fault",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+        "line": 93,
+        "declaration": "GLOBAL BOOL doing_double_fault;"
+      }
+    },
+    {
+      "symbol": "_doing_page_fault",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+        "line": 92,
+        "declaration": "GLOBAL BOOL doing_page_fault;"
+      }
+    },
+    {
+      "symbol": "_doing_fault",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+        "line": 94,
+        "declaration": "GLOBAL BOOL doing_fault;\t/* true: FAULT, false: TRAP or ABORT */"
+      }
+    },
+    {
+      "symbol": "_EXT",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+        "line": 95,
+        "declaration": "GLOBAL ISM32 EXT;\t\t\t/* external/internal source */"
+      }
+    },
+    {
+      "symbol": "_CCPU_save_EIP",
+      "definition": {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+        "line": 96,
+        "declaration": "GLOBAL IU32 CCPU_save_EIP;\t/* IP at start of instruction */"
+      }
+    }
+  ],
+  "link_providers": [
+    {
+      "symbol": "_pg_end",
+      "providers": [
+        "0003:0025b3c0       _pg_end                    008143c0     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_TR",
+      "providers": [
+        "0003:0025b3a0       _CCPU_TR                   008143a0     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_DR",
+      "providers": [
+        "0003:0025b380       _CCPU_DR                   00814380     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_CR",
+      "providers": [
+        "0003:0025b360       _CCPU_CR                   00814360     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_GR",
+      "providers": [
+        "0003:0025b340       _CCPU_GR                   00814340     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_IP",
+      "providers": [
+        "0003:0025b320       _CCPU_IP                   00814320     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_FLAGS",
+      "providers": [
+        "0003:0025b2a0       _CCPU_FLAGS                008142a0     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_CPL",
+      "providers": [
+        "0003:0025b28c       _CCPU_CPL                  0081428c     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_MODE",
+      "providers": [
+        "0003:0025b280       _CCPU_MODE                 00814280     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_SR",
+      "providers": [
+        "0003:0025b1a0       _CCPU_SR                   008141a0     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_SAR",
+      "providers": [
+        "0003:0025b180       _CCPU_SAR                  00814180     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_STAR",
+      "providers": [
+        "0003:0025b160       _CCPU_STAR                 00814160     <common>"
+      ]
+    },
+    {
+      "symbol": "_took_relative_jump",
+      "providers": [
+        "0003:0025b158       _took_relative_jump        00814158     <common>"
+      ]
+    },
+    {
+      "symbol": "_took_absolute_toc",
+      "providers": [
+        "0003:0025b154       _took_absolute_toc         00814154     <common>"
+      ]
+    },
+    {
+      "symbol": "_in_C",
+      "providers": [
+        "0003:0025b150       _in_C                      00814150     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_M",
+      "providers": [
+        "0003:0025b14c       _CCPU_M                    0081414c     <common>"
+      ]
+    },
+    {
+      "symbol": "_m_seg",
+      "providers": [
+        "0003:0025b140       _m_seg                     00814140     <common>"
+      ]
+    },
+    {
+      "symbol": "_m_off",
+      "providers": [
+        "0003:0025b130       _m_off                     00814130     <common>"
+      ]
+    },
+    {
+      "symbol": "_m_la",
+      "providers": [
+        "0003:0025b120       _m_la                      00814120     <common>"
+      ]
+    },
+    {
+      "symbol": "_m_pa",
+      "providers": [
+        "0003:0025b110       _m_pa                      00814110     <common>"
+      ]
+    },
+    {
+      "symbol": "_modRM",
+      "providers": [
+        "0003:0025b101       _modRM                     00814101     <common>"
+      ]
+    },
+    {
+      "symbol": "_segment_override",
+      "providers": [
+        "0003:0025b100       _segment_override          00814100     <common>"
+      ]
+    },
+    {
+      "symbol": "_p",
+      "providers": [
+        "0003:0025b0fc       _p                         008140fc     <common>"
+      ]
+    },
+    {
+      "symbol": "_m_isreg",
+      "providers": [
+        "0003:0025b0f0       _m_isreg                   008140f0     <common>"
+      ]
+    },
+    {
+      "symbol": "_ops",
+      "providers": [
+        "0003:0025afa0       _ops                       00813fa0     <common>"
+      ]
+    },
+    {
+      "symbol": "_save_id",
+      "providers": [
+        "0003:0025af90       _save_id                   00813f90     <common>"
+      ]
+    },
+    {
+      "symbol": "_m_la2",
+      "providers": [
+        "0003:0025af80       _m_la2                     00813f80     <common>"
+      ]
+    },
+    {
+      "symbol": "_m_pa2",
+      "providers": [
+        "0003:0025af70       _m_pa2                     00813f70     <common>"
+      ]
+    },
+    {
+      "symbol": "___acrt_iob_func",
+      "providers": [
+        "0001:00034bd9       ___acrt_iob_func           00435bd9 f   libucrt:_file.obj"
+      ]
+    },
+    {
+      "symbol": "_fprintf",
+      "providers": [
+        "0001:00034c82       _fprintf                   00435c82 f i libucrt:assert.obj"
+      ]
+    },
+    {
+      "symbol": "_getenv",
+      "providers": [
+        "0001:00035703       _getenv                    00436703 f   libucrt:getenv.obj"
+      ]
+    },
+    {
+      "symbol": "_c_getIF",
+      "providers": [
+        "0001:00006f20       _c_getIF                   00407f20 f   original-ccpu386:c_reg.obj"
+      ]
+    },
+    {
+      "symbol": "_ccpu386InitThreadStuff",
+      "providers": [
+        "0001:00018240       _ccpu386InitThreadStuff    00419240 f   original-ccpu386:ntthread.obj"
+      ]
+    },
+    {
+      "symbol": "_ccpu386SimulatePtr",
+      "providers": [
+        "0001:00018290       _ccpu386SimulatePtr        00419290 f   original-ccpu386:ntthread.obj"
+      ]
+    },
+    {
+      "symbol": "_ccpu386Unsimulate",
+      "providers": [
+        "0001:00018420       _ccpu386Unsimulate         00419420 f   original-ccpu386:ntthread.obj"
+      ]
+    },
+    {
+      "symbol": "_ccpu386ThrdExptnPtr",
+      "providers": [
+        "0001:000183b0       _ccpu386ThrdExptnPtr       004193b0 f   original-ccpu386:ntthread.obj"
+      ]
+    },
+    {
+      "symbol": "_ccpu386GotoThrdExptnPt",
+      "providers": [
+        "0001:000181a0       _ccpu386GotoThrdExptnPt    004191a0 f   original-ccpu386:ntthread.obj"
+      ]
+    },
+    {
+      "symbol": "_ccpu386AbandonSimulate",
+      "providers": [
+        "0001:00018110       _ccpu386AbandonSimulate    00419110 f   original-ccpu386:ntthread.obj"
+      ]
+    },
+    {
+      "symbol": "_address_add",
+      "providers": [
+        "0001:00018640       _address_add               00419640 f   original-ccpu386:c_addr.obj"
+      ]
+    },
+    {
+      "symbol": "_d_mem",
+      "providers": [
+        "0001:00018660       _d_mem                     00419660 f   original-ccpu386:c_addr.obj"
+      ]
+    },
+    {
+      "symbol": "_limit_check",
+      "providers": [
+        "0001:00018d10       _limit_check               00419d10 f   original-ccpu386:c_addr.obj"
+      ]
+    },
+    {
+      "symbol": "_usr_chk_byte",
+      "providers": [
+        "0001:00017c60       _usr_chk_byte              00418c60 f   original-ccpu386:c_page.obj"
+      ]
+    },
+    {
+      "symbol": "_usr_chk_dword",
+      "providers": [
+        "0001:00017c90       _usr_chk_dword             00418c90 f   original-ccpu386:c_page.obj"
+      ]
+    },
+    {
+      "symbol": "_usr_chk_word",
+      "providers": [
+        "0001:00017cf0       _usr_chk_word              00418cf0 f   original-ccpu386:c_page.obj"
+      ]
+    },
+    {
+      "symbol": "_spr_read_word",
+      "providers": [
+        "0001:00017aa0       _spr_read_word             00418aa0 f   original-ccpu386:c_page.obj"
+      ]
+    },
+    {
+      "symbol": "_vir_read_byte",
+      "providers": [
+        "0001:00017d50       _vir_read_byte             00418d50 f   original-ccpu386:c_page.obj"
+      ]
+    },
+    {
+      "symbol": "_vir_read_dword",
+      "providers": [
+        "0001:00017e40       _vir_read_dword            00418e40 f   original-ccpu386:c_page.obj"
+      ]
+    },
+    {
+      "symbol": "_vir_read_word",
+      "providers": [
+        "0001:00017ed0       _vir_read_word             00418ed0 f   original-ccpu386:c_page.obj"
+      ]
+    },
+    {
+      "symbol": "_vir_write_byte",
+      "providers": [
+        "0001:00017f10       _vir_write_byte            00418f10 f   original-ccpu386:c_page.obj"
+      ]
+    },
+    {
+      "symbol": "_vir_write_dword",
+      "providers": [
+        "0001:00018020       _vir_write_dword           00419020 f   original-ccpu386:c_page.obj"
+      ]
+    },
+    {
+      "symbol": "_vir_write_word",
+      "providers": [
+        "0001:000180c0       _vir_write_word            004190c0 f   original-ccpu386:c_page.obj"
+      ]
+    },
+    {
+      "symbol": "_do_intrupt",
+      "providers": [
+        "0001:00018df0       _do_intrupt                00419df0 f   original-ccpu386:c_intr.obj"
+      ]
+    },
+    {
+      "symbol": "_load_pseudo_descr",
+      "providers": [
+        "0001:00016c50       _load_pseudo_descr         00417c50 f   original-ccpu386:c_seg.obj"
+      ]
+    },
+    {
+      "symbol": "_check_for_inst_exception",
+      "providers": [
+        "0001:00019430       _check_for_inst_exception  0041a430 f   original-ccpu386:c_debug.obj"
+      ]
+    },
+    {
+      "symbol": "_Int1_f",
+      "providers": [
+        "0001:000172c0       _Int1_f                    004182c0 f   original-ccpu386:c_xcptn.obj"
+      ]
+    },
+    {
+      "symbol": "_Int1_t",
+      "providers": [
+        "0001:000172e0       _Int1_t                    004182e0 f   original-ccpu386:c_xcptn.obj"
+      ]
+    },
+    {
+      "symbol": "_Int6",
+      "providers": [
+        "0001:00017320       _Int6                      00418320 f   original-ccpu386:c_xcptn.obj"
+      ]
+    },
+    {
+      "symbol": "_Int7",
+      "providers": [
+        "0001:00017340       _Int7                      00418340 f   original-ccpu386:c_xcptn.obj"
+      ]
+    },
+    {
+      "symbol": "_GP",
+      "providers": [
+        "0001:00017160       _GP                        00418160 f   original-ccpu386:c_xcptn.obj"
+      ]
+    },
+    {
+      "symbol": "_ica_intack",
+      "providers": [
+        "0001:000763e0       _ica_intack                004773e0 f   original-softpc-system:ica.obj"
+      ]
+    },
+    {
+      "symbol": "_host_timer_event",
+      "providers": [
+        "0001:00052470       _host_timer_event          00453470 f   original-softpc-host-roots:nt_timer.obj"
+      ]
+    },
+    {
+      "symbol": "_mvdm_softpc_ccpu_wait_signal",
+      "providers": [
+        "0001:001613e0       _mvdm_softpc_ccpu_wait_signal 005623e0 f   softpc-bindings:mvdm_softpc_ccpu_wait.obj"
+      ]
+    },
+    {
+      "symbol": "_mvdm_softpc_ccpu_wait_for_event",
+      "providers": [
+        "0001:001613d0       _mvdm_softpc_ccpu_wait_for_event 005623d0 f   softpc-bindings:mvdm_softpc_ccpu_wait.obj"
+      ]
+    },
+    {
+      "symbol": "_force_yoda",
+      "providers": [
+        "0001:00005f00       _force_yoda                00406f00 f   original-ccpu386:stubs.obj"
+      ]
+    },
+    {
+      "symbol": "_TakeNpxExceptionInt",
+      "providers": [
+        "0001:00023430       _TakeNpxExceptionInt       00424430 f   original-ccpu386:zfrsrvd.obj"
+      ]
+    },
+    {
+      "symbol": "_EDL_fast_bop",
+      "providers": [
+        "0001:0017d010       _EDL_fast_bop              0057e010 f   softpc-ccpu-vector-defaults:fmstubs_vector_defaults.obj"
+      ]
+    },
+    {
+      "symbol": "_AAA",
+      "providers": [
+        "0001:000234d0       _AAA                       004244d0 f   original-ccpu386:aaa.obj"
+      ]
+    },
+    {
+      "symbol": "_AAD",
+      "providers": [
+        "0001:00023560       _AAD                       00424560 f   original-ccpu386:aad.obj"
+      ]
+    },
+    {
+      "symbol": "_AAM",
+      "providers": [
+        "0001:000235d0       _AAM                       004245d0 f   original-ccpu386:aam.obj"
+      ]
+    },
+    {
+      "symbol": "_AAS",
+      "providers": [
+        "0001:00023650       _AAS                       00424650 f   original-ccpu386:aas.obj"
+      ]
+    },
+    {
+      "symbol": "_ADC",
+      "providers": [
+        "0001:000236e0       _ADC                       004246e0 f   original-ccpu386:adc.obj"
+      ]
+    },
+    {
+      "symbol": "_ADD",
+      "providers": [
+        "0001:000237a0       _ADD                       004247a0 f   original-ccpu386:add.obj"
+      ]
+    },
+    {
+      "symbol": "_AND",
+      "providers": [
+        "0001:00023850       _AND                       00424850 f   original-ccpu386:and.obj"
+      ]
+    },
+    {
+      "symbol": "_ARPL",
+      "providers": [
+        "0001:000238c0       _ARPL                      004248c0 f   original-ccpu386:arpl.obj"
+      ]
+    },
+    {
+      "symbol": "_BOUND",
+      "providers": [
+        "0001:00023900       _BOUND                     00424900 f   original-ccpu386:bound.obj"
+      ]
+    },
+    {
+      "symbol": "_BSF",
+      "providers": [
+        "0001:00023960       _BSF                       00424960 f   original-ccpu386:bsf.obj"
+      ]
+    },
+    {
+      "symbol": "_BSR",
+      "providers": [
+        "0001:00023990       _BSR                       00424990 f   original-ccpu386:bsr.obj"
+      ]
+    },
+    {
+      "symbol": "_BT",
+      "providers": [
+        "0001:000239e0       _BT                        004249e0 f   original-ccpu386:bt.obj"
+      ]
+    },
+    {
+      "symbol": "_BTC",
+      "providers": [
+        "0001:00023a10       _BTC                       00424a10 f   original-ccpu386:btc.obj"
+      ]
+    },
+    {
+      "symbol": "_BTR",
+      "providers": [
+        "0001:00023a40       _BTR                       00424a40 f   original-ccpu386:btr.obj"
+      ]
+    },
+    {
+      "symbol": "_BTS",
+      "providers": [
+        "0001:00023a70       _BTS                       00424a70 f   original-ccpu386:bts.obj"
+      ]
+    },
+    {
+      "symbol": "_CALLF",
+      "providers": [
+        "0001:00023aa0       _CALLF                     00424aa0 f   original-ccpu386:call.obj"
+      ]
+    },
+    {
+      "symbol": "_CALLN",
+      "providers": [
+        "0001:00023da0       _CALLN                     00424da0 f   original-ccpu386:call.obj"
+      ]
+    },
+    {
+      "symbol": "_CALLR",
+      "providers": [
+        "0001:00023dd0       _CALLR                     00424dd0 f   original-ccpu386:call.obj"
+      ]
+    },
+    {
+      "symbol": "_CBW",
+      "providers": [
+        "0001:00023e10       _CBW                       00424e10 f   original-ccpu386:cbw.obj"
+      ]
+    },
+    {
+      "symbol": "_CDQ",
+      "providers": [
+        "0001:00023e30       _CDQ                       00424e30 f   original-ccpu386:cdq.obj"
+      ]
+    },
+    {
+      "symbol": "_CLC",
+      "providers": [
+        "0001:00023e50       _CLC                       00424e50 f   original-ccpu386:clc.obj"
+      ]
+    },
+    {
+      "symbol": "_CLD",
+      "providers": [
+        "0001:00023e60       _CLD                       00424e60 f   original-ccpu386:cld.obj"
+      ]
+    },
+    {
+      "symbol": "_CLI",
+      "providers": [
+        "0001:00023e70       _CLI                       00424e70 f   original-ccpu386:cli.obj"
+      ]
+    },
+    {
+      "symbol": "_CLTS",
+      "providers": [
+        "0001:00023e80       _CLTS                      00424e80 f   original-ccpu386:clts.obj"
+      ]
+    },
+    {
+      "symbol": "_CMC",
+      "providers": [
+        "0001:00023e90       _CMC                       00424e90 f   original-ccpu386:cmc.obj"
+      ]
+    },
+    {
+      "symbol": "_CMP",
+      "providers": [
+        "0001:00023eb0       _CMP                       00424eb0 f   original-ccpu386:cmp.obj"
+      ]
+    },
+    {
+      "symbol": "_CWD",
+      "providers": [
+        "0001:00023f60       _CWD                       00424f60 f   original-ccpu386:cwd.obj"
+      ]
+    },
+    {
+      "symbol": "_CWDE",
+      "providers": [
+        "0001:00023f80       _CWDE                      00424f80 f   original-ccpu386:cwde.obj"
+      ]
+    },
+    {
+      "symbol": "_DAA",
+      "providers": [
+        "0001:00023fa0       _DAA                       00424fa0 f   original-ccpu386:daa.obj"
+      ]
+    },
+    {
+      "symbol": "_DAS",
+      "providers": [
+        "0001:00024020       _DAS                       00425020 f   original-ccpu386:das.obj"
+      ]
+    },
+    {
+      "symbol": "_DEC",
+      "providers": [
+        "0001:000240a0       _DEC                       004250a0 f   original-ccpu386:dec.obj"
+      ]
+    },
+    {
+      "symbol": "_DIV8",
+      "providers": [
+        "0001:00024250       _DIV8                      00425250 f   original-ccpu386:div.obj"
+      ]
+    },
+    {
+      "symbol": "_DIV16",
+      "providers": [
+        "0001:00024120       _DIV16                     00425120 f   original-ccpu386:div.obj"
+      ]
+    },
+    {
+      "symbol": "_DIV32",
+      "providers": [
+        "0001:000241b0       _DIV32                     004251b0 f   original-ccpu386:div.obj"
+      ]
+    },
+    {
+      "symbol": "_ENTER16",
+      "providers": [
+        "0001:000242d0       _ENTER16                   004252d0 f   original-ccpu386:enter.obj"
+      ]
+    },
+    {
+      "symbol": "_ENTER32",
+      "providers": [
+        "0001:000243b0       _ENTER32                   004253b0 f   original-ccpu386:enter.obj"
+      ]
+    },
+    {
+      "symbol": "_IDIV8",
+      "providers": [
+        "0001:000245e0       _IDIV8                     004255e0 f   original-ccpu386:idiv.obj"
+      ]
+    },
+    {
+      "symbol": "_IDIV16",
+      "providers": [
+        "0001:00024480       _IDIV16                    00425480 f   original-ccpu386:idiv.obj"
+      ]
+    },
+    {
+      "symbol": "_IDIV32",
+      "providers": [
+        "0001:00024530       _IDIV32                    00425530 f   original-ccpu386:idiv.obj"
+      ]
+    },
+    {
+      "symbol": "_IMUL8",
+      "providers": [
+        "0001:00024890       _IMUL8                     00425890 f   original-ccpu386:imul.obj"
+      ]
+    },
+    {
+      "symbol": "_IMUL16",
+      "providers": [
+        "0001:00024690       _IMUL16                    00425690 f   original-ccpu386:imul.obj"
+      ]
+    },
+    {
+      "symbol": "_IMUL16T",
+      "providers": [
+        "0001:00024710       _IMUL16T                   00425710 f   original-ccpu386:imul.obj"
+      ]
+    },
+    {
+      "symbol": "_IMUL32",
+      "providers": [
+        "0001:00024790       _IMUL32                    00425790 f   original-ccpu386:imul.obj"
+      ]
+    },
+    {
+      "symbol": "_IMUL32T",
+      "providers": [
+        "0001:00024810       _IMUL32T                   00425810 f   original-ccpu386:imul.obj"
+      ]
+    },
+    {
+      "symbol": "_IN8",
+      "providers": [
+        "0001:000249a0       _IN8                       004259a0 f   original-ccpu386:in.obj"
+      ]
+    },
+    {
+      "symbol": "_IN16",
+      "providers": [
+        "0001:00024910       _IN16                      00425910 f   original-ccpu386:in.obj"
+      ]
+    },
+    {
+      "symbol": "_IN32",
+      "providers": [
+        "0001:00024940       _IN32                      00425940 f   original-ccpu386:in.obj"
+      ]
+    },
+    {
+      "symbol": "_INC",
+      "providers": [
+        "0001:000249d0       _INC                       004259d0 f   original-ccpu386:inc.obj"
+      ]
+    },
+    {
+      "symbol": "_INTO",
+      "providers": [
+        "0001:00024a50       _INTO                      00425a50 f   original-ccpu386:into.obj"
+      ]
+    },
+    {
+      "symbol": "_INTx",
+      "providers": [
+        "0001:00024a90       _INTx                      00425a90 f   original-ccpu386:intx.obj"
+      ]
+    },
+    {
+      "symbol": "_IRET",
+      "providers": [
+        "0001:00024ad0       _IRET                      00425ad0 f   original-ccpu386:iret.obj"
+      ]
+    },
+    {
+      "symbol": "_JCXZ",
+      "providers": [
+        "0001:00024f60       _JCXZ                      00425f60 f   original-ccpu386:jcxz.obj"
+      ]
+    },
+    {
+      "symbol": "_JECXZ",
+      "providers": [
+        "0001:00024f70       _JECXZ                     00425f70 f   original-ccpu386:jcxz.obj"
+      ]
+    },
+    {
+      "symbol": "_JMPF",
+      "providers": [
+        "0001:00024f80       _JMPF                      00425f80 f   original-ccpu386:jmp.obj"
+      ]
+    },
+    {
+      "symbol": "_JMPN",
+      "providers": [
+        "0001:000250b0       _JMPN                      004260b0 f   original-ccpu386:jmp.obj"
+      ]
+    },
+    {
+      "symbol": "_JMPR",
+      "providers": [
+        "0001:000250f0       _JMPR                      004260f0 f   original-ccpu386:jmp.obj"
+      ]
+    },
+    {
+      "symbol": "_JB",
+      "providers": [
+        "0001:00025100       _JB                        00426100 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JBE",
+      "providers": [
+        "0001:00025110       _JBE                       00426110 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JL",
+      "providers": [
+        "0001:00025130       _JL                        00426130 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JLE",
+      "providers": [
+        "0001:00025150       _JLE                       00426150 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JNB",
+      "providers": [
+        "0001:00025170       _JNB                       00426170 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JNBE",
+      "providers": [
+        "0001:00025180       _JNBE                      00426180 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JNL",
+      "providers": [
+        "0001:000251a0       _JNL                       004261a0 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JNLE",
+      "providers": [
+        "0001:000251c0       _JNLE                      004261c0 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JNO",
+      "providers": [
+        "0001:000251e0       _JNO                       004261e0 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JNP",
+      "providers": [
+        "0001:000251f0       _JNP                       004261f0 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JNS",
+      "providers": [
+        "0001:00025200       _JNS                       00426200 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JNZ",
+      "providers": [
+        "0001:00025210       _JNZ                       00426210 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JO",
+      "providers": [
+        "0001:00025220       _JO                        00426220 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JP",
+      "providers": [
+        "0001:00025230       _JP                        00426230 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JS",
+      "providers": [
+        "0001:00025240       _JS                        00426240 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_JZ",
+      "providers": [
+        "0001:00025250       _JZ                        00426250 f   original-ccpu386:jxx.obj"
+      ]
+    },
+    {
+      "symbol": "_LAHF",
+      "providers": [
+        "0001:00025260       _LAHF                      00426260 f   original-ccpu386:lahf.obj"
+      ]
+    },
+    {
+      "symbol": "_LAR",
+      "providers": [
+        "0001:000252a0       _LAR                       004262a0 f   original-ccpu386:lar.obj"
+      ]
+    },
+    {
+      "symbol": "_LEA",
+      "providers": [
+        "0001:00025380       _LEA                       00426380 f   original-ccpu386:lea.obj"
+      ]
+    },
+    {
+      "symbol": "_LEAVE16",
+      "providers": [
+        "0001:00025390       _LEAVE16                   00426390 f   original-ccpu386:leave.obj"
+      ]
+    },
+    {
+      "symbol": "_LEAVE32",
+      "providers": [
+        "0001:000253c0       _LEAVE32                   004263c0 f   original-ccpu386:leave.obj"
+      ]
+    },
+    {
+      "symbol": "_LGDT16",
+      "providers": [
+        "0001:000253f0       _LGDT16                    004263f0 f   original-ccpu386:lgdt.obj"
+      ]
+    },
+    {
+      "symbol": "_LGDT32",
+      "providers": [
+        "0001:00025410       _LGDT32                    00426410 f   original-ccpu386:lgdt.obj"
+      ]
+    },
+    {
+      "symbol": "_LIDT16",
+      "providers": [
+        "0001:00025430       _LIDT16                    00426430 f   original-ccpu386:lidt.obj"
+      ]
+    },
+    {
+      "symbol": "_LIDT32",
+      "providers": [
+        "0001:00025450       _LIDT32                    00426450 f   original-ccpu386:lidt.obj"
+      ]
+    },
+    {
+      "symbol": "_LLDT",
+      "providers": [
+        "0001:00025470       _LLDT                      00426470 f   original-ccpu386:lldt.obj"
+      ]
+    },
+    {
+      "symbol": "_LMSW",
+      "providers": [
+        "0001:00025540       _LMSW                      00426540 f   original-ccpu386:lmsw.obj"
+      ]
+    },
+    {
+      "symbol": "_LOOP16",
+      "providers": [
+        "0001:00025560       _LOOP16                    00426560 f   original-ccpu386:loopxx.obj"
+      ]
+    },
+    {
+      "symbol": "_LOOP32",
+      "providers": [
+        "0001:00025580       _LOOP32                    00426580 f   original-ccpu386:loopxx.obj"
+      ]
+    },
+    {
+      "symbol": "_LOOPE16",
+      "providers": [
+        "0001:000255a0       _LOOPE16                   004265a0 f   original-ccpu386:loopxx.obj"
+      ]
+    },
+    {
+      "symbol": "_LOOPE32",
+      "providers": [
+        "0001:000255d0       _LOOPE32                   004265d0 f   original-ccpu386:loopxx.obj"
+      ]
+    },
+    {
+      "symbol": "_LOOPNE16",
+      "providers": [
+        "0001:00025600       _LOOPNE16                  00426600 f   original-ccpu386:loopxx.obj"
+      ]
+    },
+    {
+      "symbol": "_LOOPNE32",
+      "providers": [
+        "0001:00025630       _LOOPNE32                  00426630 f   original-ccpu386:loopxx.obj"
+      ]
+    },
+    {
+      "symbol": "_LSL",
+      "providers": [
+        "0001:00025660       _LSL                       00426660 f   original-ccpu386:lsl.obj"
+      ]
+    },
+    {
+      "symbol": "_LTR",
+      "providers": [
+        "0001:00025740       _LTR                       00426740 f   original-ccpu386:ltr.obj"
+      ]
+    },
+    {
+      "symbol": "_LDS",
+      "providers": [
+        "0001:000257c0       _LDS                       004267c0 f   original-ccpu386:lxs.obj"
+      ]
+    },
+    {
+      "symbol": "_LES",
+      "providers": [
+        "0001:000257e0       _LES                       004267e0 f   original-ccpu386:lxs.obj"
+      ]
+    },
+    {
+      "symbol": "_LFS",
+      "providers": [
+        "0001:00025800       _LFS                       00426800 f   original-ccpu386:lxs.obj"
+      ]
+    },
+    {
+      "symbol": "_LGS",
+      "providers": [
+        "0001:00025820       _LGS                       00426820 f   original-ccpu386:lxs.obj"
+      ]
+    },
+    {
+      "symbol": "_LSS",
+      "providers": [
+        "0001:00025840       _LSS                       00426840 f   original-ccpu386:lxs.obj"
+      ]
+    },
+    {
+      "symbol": "_MOV_SR",
+      "providers": [
+        "0001:00016f40       _MOV_SR                    00417f40 f   original-ccpu386:mov.obj"
+      ]
+    },
+    {
+      "symbol": "_MOV_CR",
+      "providers": [
+        "0001:00016e60       _MOV_CR                    00417e60 f   original-ccpu386:mov.obj"
+      ]
+    },
+    {
+      "symbol": "_MOV_DR",
+      "providers": [
+        "0001:00016ed0       _MOV_DR                    00417ed0 f   original-ccpu386:mov.obj"
+      ]
+    },
+    {
+      "symbol": "_MOV_TR",
+      "providers": [
+        "0001:00016f80       _MOV_TR                    00417f80 f   original-ccpu386:mov.obj"
+      ]
+    },
+    {
+      "symbol": "_MOVSX",
+      "providers": [
+        "0001:00025860       _MOVSX                     00426860 f   original-ccpu386:movsx.obj"
+      ]
+    },
+    {
+      "symbol": "_MUL8",
+      "providers": [
+        "0001:00025950       _MUL8                      00426950 f   original-ccpu386:mul.obj"
+      ]
+    },
+    {
+      "symbol": "_MUL16",
+      "providers": [
+        "0001:00025890       _MUL16                     00426890 f   original-ccpu386:mul.obj"
+      ]
+    },
+    {
+      "symbol": "_MUL32",
+      "providers": [
+        "0001:000258e0       _MUL32                     004268e0 f   original-ccpu386:mul.obj"
+      ]
+    },
+    {
+      "symbol": "_NEG",
+      "providers": [
+        "0001:000259a0       _NEG                       004269a0 f   original-ccpu386:neg.obj"
+      ]
+    },
+    {
+      "symbol": "_NOT",
+      "providers": [
+        "0001:00025a30       _NOT                       00426a30 f   original-ccpu386:not.obj"
+      ]
+    },
+    {
+      "symbol": "_OUT8",
+      "providers": [
+        "0001:00025aa0       _OUT8                      00426aa0 f   original-ccpu386:out.obj"
+      ]
+    },
+    {
+      "symbol": "_OUT16",
+      "providers": [
+        "0001:00025a40       _OUT16                     00426a40 f   original-ccpu386:out.obj"
+      ]
+    },
+    {
+      "symbol": "_OUT32",
+      "providers": [
+        "0001:00025a60       _OUT32                     00426a60 f   original-ccpu386:out.obj"
+      ]
+    },
+    {
+      "symbol": "_OR",
+      "providers": [
+        "0001:00025ac0       _OR                        00426ac0 f   original-ccpu386:or.obj"
+      ]
+    },
+    {
+      "symbol": "_POP",
+      "providers": [
+        "0001:00025b30       _POP                       00426b30 f   original-ccpu386:pop.obj"
+      ]
+    },
+    {
+      "symbol": "_POP_SR",
+      "providers": [
+        "0001:00025b50       _POP_SR                    00426b50 f   original-ccpu386:pop.obj"
+      ]
+    },
+    {
+      "symbol": "_POPA",
+      "providers": [
+        "0001:00025b80       _POPA                      00426b80 f   original-ccpu386:popa.obj"
+      ]
+    },
+    {
+      "symbol": "_POPAD",
+      "providers": [
+        "0001:00025c00       _POPAD                     00426c00 f   original-ccpu386:popa.obj"
+      ]
+    },
+    {
+      "symbol": "_POPF",
+      "providers": [
+        "0001:00025c60       _POPF                      00426c60 f   original-ccpu386:popf.obj"
+      ]
+    },
+    {
+      "symbol": "_POPFD",
+      "providers": [
+        "0001:00025c80       _POPFD                     00426c80 f   original-ccpu386:popf.obj"
+      ]
+    },
+    {
+      "symbol": "_PUSH",
+      "providers": [
+        "0001:00025d00       _PUSH                      00426d00 f   original-ccpu386:push.obj"
+      ]
+    },
+    {
+      "symbol": "_PUSH_SR",
+      "providers": [
+        "0001:00025d20       _PUSH_SR                   00426d20 f   original-ccpu386:push.obj"
+      ]
+    },
+    {
+      "symbol": "_PUSHA",
+      "providers": [
+        "0001:00025d40       _PUSHA                     00426d40 f   original-ccpu386:pusha.obj"
+      ]
+    },
+    {
+      "symbol": "_PUSHF",
+      "providers": [
+        "0001:00025db0       _PUSHF                     00426db0 f   original-ccpu386:pushf.obj"
+      ]
+    },
+    {
+      "symbol": "_RCL",
+      "providers": [
+        "0001:00025dd0       _RCL                       00426dd0 f   original-ccpu386:rcl.obj"
+      ]
+    },
+    {
+      "symbol": "_RCR",
+      "providers": [
+        "0001:00025e60       _RCR                       00426e60 f   original-ccpu386:rcr.obj"
+      ]
+    },
+    {
+      "symbol": "_RETF",
+      "providers": [
+        "0001:00025ef0       _RETF                      00426ef0 f   original-ccpu386:ret.obj"
+      ]
+    },
+    {
+      "symbol": "_RETN",
+      "providers": [
+        "0001:00026160       _RETN                      00427160 f   original-ccpu386:ret.obj"
+      ]
+    },
+    {
+      "symbol": "_ROL",
+      "providers": [
+        "0001:000261d0       _ROL                       004271d0 f   original-ccpu386:rol.obj"
+      ]
+    },
+    {
+      "symbol": "_ROR",
+      "providers": [
+        "0001:00026260       _ROR                       00427260 f   original-ccpu386:ror.obj"
+      ]
+    },
+    {
+      "symbol": "_RSRVD",
+      "providers": [
+        "0001:00005f00       _RSRVD                     00406f00 f   original-ccpu386:rsrvd.obj"
+      ]
+    },
+    {
+      "symbol": "_SAHF",
+      "providers": [
+        "0001:000262f0       _SAHF                      004272f0 f   original-ccpu386:sahf.obj"
+      ]
+    },
+    {
+      "symbol": "_SAR",
+      "providers": [
+        "0001:00026340       _SAR                       00427340 f   original-ccpu386:sar.obj"
+      ]
+    },
+    {
+      "symbol": "_SBB",
+      "providers": [
+        "0001:000263d0       _SBB                       004273d0 f   original-ccpu386:sbb.obj"
+      ]
+    },
+    {
+      "symbol": "_SETB",
+      "providers": [
+        "0001:00026480       _SETB                      00427480 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETBE",
+      "providers": [
+        "0001:00026490       _SETBE                     00427490 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETL",
+      "providers": [
+        "0001:000264c0       _SETL                      004274c0 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETLE",
+      "providers": [
+        "0001:000264e0       _SETLE                     004274e0 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETNB",
+      "providers": [
+        "0001:00026510       _SETNB                     00427510 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETNBE",
+      "providers": [
+        "0001:00026530       _SETNBE                    00427530 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETNL",
+      "providers": [
+        "0001:00026560       _SETNL                     00427560 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETNLE",
+      "providers": [
+        "0001:00026580       _SETNLE                    00427580 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETNO",
+      "providers": [
+        "0001:000265b0       _SETNO                     004275b0 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETNP",
+      "providers": [
+        "0001:000265d0       _SETNP                     004275d0 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETNS",
+      "providers": [
+        "0001:000265f0       _SETNS                     004275f0 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETNZ",
+      "providers": [
+        "0001:00026610       _SETNZ                     00427610 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETO",
+      "providers": [
+        "0001:00026630       _SETO                      00427630 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETP",
+      "providers": [
+        "0001:00026640       _SETP                      00427640 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETS",
+      "providers": [
+        "0001:00026650       _SETS                      00427650 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SETZ",
+      "providers": [
+        "0001:00026660       _SETZ                      00427660 f   original-ccpu386:setxx.obj"
+      ]
+    },
+    {
+      "symbol": "_SGDT16",
+      "providers": [
+        "0001:00026670       _SGDT16                    00427670 f   original-ccpu386:sgdt.obj"
+      ]
+    },
+    {
+      "symbol": "_SGDT32",
+      "providers": [
+        "0001:00026670       _SGDT32                    00427670 f   original-ccpu386:sgdt.obj"
+      ]
+    },
+    {
+      "symbol": "_SHL",
+      "providers": [
+        "0001:00026690       _SHL                       00427690 f   original-ccpu386:shl.obj"
+      ]
+    },
+    {
+      "symbol": "_SHLD",
+      "providers": [
+        "0001:00026750       _SHLD                      00427750 f   original-ccpu386:shld.obj"
+      ]
+    },
+    {
+      "symbol": "_SHR",
+      "providers": [
+        "0001:00026830       _SHR                       00427830 f   original-ccpu386:shr.obj"
+      ]
+    },
+    {
+      "symbol": "_SHRD",
+      "providers": [
+        "0001:000268d0       _SHRD                      004278d0 f   original-ccpu386:shrd.obj"
+      ]
+    },
+    {
+      "symbol": "_SIDT16",
+      "providers": [
+        "0001:000269b0       _SIDT16                    004279b0 f   original-ccpu386:sidt.obj"
+      ]
+    },
+    {
+      "symbol": "_SIDT32",
+      "providers": [
+        "0001:000269b0       _SIDT32                    004279b0 f   original-ccpu386:sidt.obj"
+      ]
+    },
+    {
+      "symbol": "_SLDT",
+      "providers": [
+        "0001:000269d0       _SLDT                      004279d0 f   original-ccpu386:sldt.obj"
+      ]
+    },
+    {
+      "symbol": "_SMSW",
+      "providers": [
+        "0001:000269e0       _SMSW                      004279e0 f   original-ccpu386:smsw.obj"
+      ]
+    },
+    {
+      "symbol": "_STC",
+      "providers": [
+        "0001:000269f0       _STC                       004279f0 f   original-ccpu386:stc.obj"
+      ]
+    },
+    {
+      "symbol": "_STD",
+      "providers": [
+        "0001:00026a00       _STD                       00427a00 f   original-ccpu386:std.obj"
+      ]
+    },
+    {
+      "symbol": "_STI",
+      "providers": [
+        "0001:00026a10       _STI                       00427a10 f   original-ccpu386:sti.obj"
+      ]
+    },
+    {
+      "symbol": "_STR",
+      "providers": [
+        "0001:00026a20       _STR                       00427a20 f   original-ccpu386:str.obj"
+      ]
+    },
+    {
+      "symbol": "_SUB",
+      "providers": [
+        "0001:00026a30       _SUB                       00427a30 f   original-ccpu386:sub.obj"
+      ]
+    },
+    {
+      "symbol": "_TEST",
+      "providers": [
+        "0001:00026ae0       _TEST                      00427ae0 f   original-ccpu386:test.obj"
+      ]
+    },
+    {
+      "symbol": "_VERR",
+      "providers": [
+        "0001:00026b50       _VERR                      00427b50 f   original-ccpu386:verr.obj"
+      ]
+    },
+    {
+      "symbol": "_VERW",
+      "providers": [
+        "0001:00026bf0       _VERW                      00427bf0 f   original-ccpu386:verw.obj"
+      ]
+    },
+    {
+      "symbol": "_WAIT",
+      "providers": [
+        "0001:00005f00       _WAIT                      00406f00 f   original-ccpu386:wait.obj"
+      ]
+    },
+    {
+      "symbol": "_XCHG",
+      "providers": [
+        "0001:00026c60       _XCHG                      00427c60 f   original-ccpu386:xchg.obj"
+      ]
+    },
+    {
+      "symbol": "_XLAT",
+      "providers": [
+        "0001:00007170       _XLAT                      00408170 f   original-ccpu386:xlat.obj"
+      ]
+    },
+    {
+      "symbol": "_XOR",
+      "providers": [
+        "0001:00026c80       _XOR                       00427c80 f   original-ccpu386:xor.obj"
+      ]
+    },
+    {
+      "symbol": "_ZFRSRVD",
+      "providers": [
+        "0001:00023490       _ZFRSRVD                   00424490 f   original-ccpu386:zfrsrvd.obj"
+      ]
+    },
+    {
+      "symbol": "_dispatch_q_event",
+      "providers": [
+        "0001:00076cf0       _dispatch_q_event          00477cf0 f   original-softpc-system:qevnt.obj"
+      ]
+    },
+    {
+      "symbol": "_check_I",
+      "providers": [
+        "0001:00005f00       _check_I                   00406f00 f   original-ccpu386:stubs.obj"
+      ]
+    },
+    {
+      "symbol": "_InitNpx",
+      "providers": [
+        "0001:0002d470       _InitNpx                   0042e470 f   original-ccpu386:fpu.obj"
+      ]
+    },
+    {
+      "symbol": "_host_hwint_hook",
+      "providers": [
+        "0001:00052590       _host_hwint_hook           00453590 f   original-softpc-host-roots:nt_inthk.obj"
+      ]
+    },
+    {
+      "symbol": "__except_handler4",
+      "providers": [
+        "0001:00032930       __except_handler4          00433930 f   libvcruntime:chandler4.obj"
+      ]
+    },
+    {
+      "symbol": "__seh_longjmp_unwind4@4",
+      "providers": [
+        "0001:00032d90       __seh_longjmp_unwind4@4    00433d90 f   libvcruntime:exsup4.obj"
+      ]
+    },
+    {
+      "symbol": "__setjmp3",
+      "providers": [
+        "0001:00032e40       __setjmp3                  00433e40 f   libvcruntime:setjmp3.obj"
+      ]
+    },
+    {
+      "symbol": "_BIOS",
+      "providers": [
+        "0003:00003c70       _BIOS                      005bcc70     original-softpc-bios:bios.obj"
+      ]
+    },
+    {
+      "symbol": "_nr_inst_break",
+      "providers": [
+        "0003:00119248       _nr_inst_break             006d2248     original-ccpu386:c_debug.obj"
+      ]
+    },
+    {
+      "symbol": "_debug_exception_pending",
+      "providers": [
+        "0003:00119250       _debug_exception_pending   006d2250     original-ccpu386:c_debug.obj"
+      ]
+    },
+    {
+      "symbol": "_doing_contributory",
+      "providers": [
+        "0003:0025af64       _doing_contributory        00813f64     <common>"
+      ]
+    },
+    {
+      "symbol": "_doing_double_fault",
+      "providers": [
+        "0003:0025af60       _doing_double_fault        00813f60     <common>"
+      ]
+    },
+    {
+      "symbol": "_doing_page_fault",
+      "providers": [
+        "0003:0025af5c       _doing_page_fault          00813f5c     <common>"
+      ]
+    },
+    {
+      "symbol": "_doing_fault",
+      "providers": [
+        "0003:0025af58       _doing_fault               00813f58     <common>"
+      ]
+    },
+    {
+      "symbol": "_EXT",
+      "providers": [
+        "0003:0025af54       _EXT                       00813f54     <common>"
+      ]
+    },
+    {
+      "symbol": "_CCPU_save_EIP",
+      "providers": [
+        "0003:0025af50       _CCPU_save_EIP             00813f50     <common>"
+      ]
+    },
+    {
+      "symbol": "_NpxIntrNeeded",
+      "providers": [
+        "0003:001192bc       _NpxIntrNeeded             006d22bc     original-ccpu386:zfrsrvd.obj"
+      ]
+    },
+    {
+      "symbol": "_do_condition_checks",
+      "providers": [
+        "0003:001192b8       _do_condition_checks       006d22b8     original-ccpu386:stubs.obj"
+      ]
+    },
+    {
+      "symbol": "___security_cookie",
+      "providers": [
+        "0003:00002740       ___security_cookie         005bb740     libcmt:gs_cookie.obj"
+      ]
+    }
+  ],
+  "observations": [
+    "254 object externals resolved in current x86 product map;34 COMMON definitions are CCPU C definitions, not project common component.",
+    "Current Ninja dependency log reports VALID object and only gdpvar.h/sas4gen.h as outer headers.",
+    "Wait and EDL providers are already B; force_yoda and NPX provider resolve to original C objects."
+  ],
+  "conclusion": "No additional product-owned S13 migration identified in this file. Keep original CCPU implementation. C0031/C0032 remain open for S14 generated ABI ownership.",
+  "limits": [
+    "This is dependency evidence, not a fresh CPU behavior regression run.",
+    "No source edits; #error/#line unchanged. No additional difference is approved by this dependency review."
+  ],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "tracker": {
+    "eliminated": 135,
+    "open": 433,
+    "supporting": 44,
+    "eliminated_transitive": 5,
+    "excluded": 1,
+    "total": 618
+  },
+  "evidence": [
+    {
+      "path": "build/t483-s13-ccpu-review/before.json",
+      "sha256": "2977aa14f7c51f242f15404a74ddca6a28a0b5bd0948563e1804e39e11db2a8e"
+    },
+    {
+      "path": "build/t483-s13-ccpu-review/deps.txt",
+      "sha256": "dda063c922bb0fff0731ba66d0f208ecf59835a4254022afbcbcc573d869ff46"
+    },
+    {
+      "path": "build/t483-s13-ccpu-review/symbols.txt",
+      "sha256": "b018d88558db44127aa82d6b68b930663b6631bdb184008955d2a1087b4b7d94"
+    },
+    {
+      "path": "build/t483-s13-ccpu-review/link-providers.json",
+      "sha256": "67eb33ecea50c4bc5bda4809a42b885bbfe6593ac26b279116db1b4d40351aa3"
+    }
+  ],
+  "next_files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "current_sha256": "dbf544fca4304c530b989d3f2458391e104f180c14eaf5bfbd12ea3bff0695fe",
+      "raw": {
+        "blocks": 22,
+        "added": 27,
+        "deleted": 59
+      },
+      "filtered": {
+        "blocks": 12,
+        "added": 17,
+        "deleted": 10
+      },
+      "excluded": [
+        {
+          "original": [
+            26,
+            31
+          ],
+          "current": [
+            26,
+            27
+          ]
+        },
+        {
+          "original": [
+            137,
+            137
+          ],
+          "current": [
+            136,
+            137
+          ]
+        },
+        {
+          "original": [
+            249,
+            255
+          ],
+          "current": [
+            251,
+            252
+          ]
+        },
+        {
+          "original": [
+            259,
+            282
+          ],
+          "current": [
+            257,
+            258
+          ]
+        },
+        {
+          "original": [
+            385,
+            385
+          ],
+          "current": [
+            362,
+            363
+          ]
+        },
+        {
+          "original": [
+            400,
+            400
+          ],
+          "current": [
+            380,
+            381
+          ]
+        },
+        {
+          "original": [
+            1280,
+            1283
+          ],
+          "current": [
+            1267,
+            1268
+          ]
+        },
+        {
+          "original": [
+            1314,
+            1315
+          ],
+          "current": [
+            1306,
+            1307
+          ]
+        },
+        {
+          "original": [
+            1432,
+            1433
+          ],
+          "current": [
+            1426,
+            1427
+          ]
+        },
+        {
+          "original": [
+            1944,
+            1944
+          ],
+          "current": [
+            1939,
+            1940
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tsksw.c",
+      "original_sha256": "5713c9351942c0c4dddb00d9ef337abf2974d3236e9aea169117d0a38fe0ad49",
+      "current_sha256": "a006d930863afb81bdc2d8413086e48d98e9ddd34be366435cfbecf214797b68",
+      "raw": {
+        "blocks": 5,
+        "added": 5,
+        "deleted": 9
+      },
+      "filtered": {
+        "blocks": 2,
+        "added": 2,
+        "deleted": 0
+      },
+      "excluded": [
+        {
+          "original": [
+            287,
+            288
+          ],
+          "current": [
+            289,
+            290
+          ]
+        },
+        {
+          "original": [
+            339,
+            340
+          ],
+          "current": [
+            342,
+            343
+          ]
+        },
+        {
+          "original": [
+            563,
+            567
+          ],
+          "current": [
+            570,
+            571
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 2
+    }
+  ],
+  "next_scope": {
+    "c_tsksw.c": "Current dependency log has generated gdpvar.h only as outer header; no source change.",
+    "ccpusas4.c": "C0041/C0238/C0240 physical mapping boundary must be handled together with nt_emm.c map/unmap/span and nt_mem.c setter. Session records/aliases/teardown stay F; no implementation in this review."
+  }
+}

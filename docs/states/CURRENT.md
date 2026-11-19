@@ -35,7 +35,7 @@ C0047/C0256/C0258 eliminated:135 eliminated/433 open of618; S13 cleared39 IDs. C
 
 Cached full x86/x64,reference-x86 and8 A/B graphs pass. Packagea9ed59d4-6106-40e7-8dab-85d23c0f3009 published to both destinations with22 hashes.3183 VM unit assertions,NIDDB original-object positive/negative controls and actual DOS DIR pass. Initial NIDDB fixture include failure and omitted outer exit-code check are retained; acceptance uses separate successful final NIDDB receipt. No Full or real Win3.x/Win95 desktop acceptance claimed.
 
-Next remaining DIR file:softpc.new/base/ccpu386/c_main.c. S13 active;S14 unadmitted.
+[CPU dependency follow-up](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-ccpu-dependency-review.json): c_main.c COMMON definitions resolved to C; generated ABI remains S14. Next implementation is ccpusas4.c physical-mapping boundary with coupled nt_emm.c/nt_mem.c owners. No product changes or new eliminated IDs. S13 active;S14 unadmitted.
 
 ## S12 Closure Record
 
