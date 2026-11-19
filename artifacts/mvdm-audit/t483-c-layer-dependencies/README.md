@@ -558,3 +558,8 @@ P59 [COMMAND root and lease contract](s14-command-root-and-lease-contract.json)
 closes stale C0137 using current commands and generator ownership:152 eliminated,
 416 open. Explicit resource operations replace callback ownership in the proposed
 lease split; reservation/reentry and exact C mirror cost remain unverified.
+
+P60 [migration readiness](s14-migration-readiness.md) partitions all416 open IDs
+into the existing ten chains, with explicit owner and next design gate.
+Whole-chain readiness is0/10, not79 reviewed files counted as migrated.
+No ledger elimination or product change is claimed.

@@ -1,0 +1,80 @@
+# S14 migration readiness and counts
+
+P60, baseline `85700b2a5`. This is a design/accounting delivery, not product
+migration. The [machine-readable partition](s14-migration-readiness.json)
+assigns all 416 currently open stable IDs to the existing ten chains.
+
+## Exact current population
+
+| Chain | Symbols | Headers | Include roots | Image imports | Total |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1. guest-access-leases | 3 | 1 | 0 | 0 | 4 |
+| 2. wow-machine-context | 1 | 0 | 0 | 0 | 1 |
+| 3. user-projection-generations | 10 | 3 | 0 | 0 | 13 |
+| 4. console-mechanics | 50 | 7 | 0 | 0 | 57 |
+| 5. command-capture | 2 | 3 | 0 | 0 | 5 |
+| 6. launch-csr-completion | 19 | 4 | 0 | 0 | 23 |
+| 7. thread-lifecycle | 89 | 7 | 0 | 0 | 96 |
+| 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
+| 9. native-user | 152 | 26 | 0 | 0 | 178 |
+| 10. original-helpers-build-abi | 13 | 6 | 11 | 1 | 31 |
+| Total | 345 | 59 | 11 | 1 | 416 |
+
+79 distinct provider files have complete body-read records. Header classification
+is 56/59, with three generated contracts still awaiting their final owner/ABI
+decision. All 11 remaining search roots have current-use evidence. VCDEX imports
+have C implementation evidence; that is not final binary-boundary disposition.
+
+Whole migration chains ready for implementation: **0/10** under the exact
+destination/removal/mirror-cost/validation criterion. Whole chains still needing
+design: **10/10**. This does not discard previously delivered subchains. It makes
+the missing candidate-level decisions explicit rather than treating source reading
+or broad B/C/F classification as a completed migration design.
+
+Ledger status remains 152 eliminated, 416 open, 44 supporting, five
+eliminated-transitive and one excluded diagnostic, total 618. This delivery
+implements/delivers zero new dependency removals and changes zero mirror points
+or lines. Production remains the P26 package.
+
+## What these counts do not hide
+
+The four-root inventory contains 1494 tracked files; it is not a claim that
+1494 complete bodies have been reviewed. P54 separately reconciles 190 C caller
+files. The direct-provider set is 79 files, not the whole inventory.
+
+The 416 direct IDs do not include every indirect implementation dependency. In
+particular, previously eliminated includes do not excuse the B guest-access/lease
+callbacks to C or outer lifecycle hooks. Those are attached to the same chains
+using P55/P59 and the callback-provider review, not counted as new approved
+exceptions. A provider file can participate in several chains; file totals use
+the distinct union, while each open ID has exactly one primary accounting owner.
+
+## Concrete next decisions
+
+The JSON carries the exact next design gate for each chain. Work proceeds in
+existing chain order. For chain 1, produce the actual C coordinator/B-resource
+candidate and measure mirror cost before production edits. Keep the existing
+SAS provider; do not replace it with raw host memory copying.
+
+The current acquire sequence in `src/compat/guest_memory_lease.c` selects an
+inactive slot, allocates its bounce buffer, calls read (including WRITE-only
+leases), and only then publishes epoch/address/access/active and output pointers.
+A refactor that marks the slot active before the C access changes that order.
+The proposed reserve operation must therefore preserve the unpublished state
+until the C coordinator finishes hydration; read failure clears the slot and
+publishes no outputs. This is preservation of existing sequencing, not a claim
+that arbitrary nested acquisition is already safe.
+
+The source route in `ccpusas4.c` performs range preflight followed by original
+`c_sas_loads` / `c_sas_stores`. SAS includes video/device access and BIOS
+virtualisation paths. Consequently, the design must not assume that SAS is a
+pure memory copy or use that assumption to justify earlier lease publication.
+No new reentry fault is claimed from source inspection alone. The candidate must
+compare the old and new publication/failure traces and exercise the real C path.
+
+## Verification contract
+
+Check exact open-ID set equality, uniqueness, per-kind totals, input hashes,
+provider source hashes and evidence paths. Documentation governance and link
+checks accompany delivery. These checks prove ledger consistency only. They do
+not replace candidate compilation, product tests or final dependency elimination.

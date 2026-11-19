@@ -255,3 +255,10 @@ C-command hit and needs historical reconciliation. No dependency status change.
 P59 [COMMAND root/lease contract](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-command-root-and-lease-contract.json) closes stale C0137: current ledger152 eliminated/416 open of618.
 The proposed callback-free lease ABI preserves hydration/consume/retirement;
 reservation reentry and exact C mirror cost still need evidence. No product change.
+
+S14 P60 [readiness and counts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-migration-readiness.md)
+assigns all416 open IDs exactly once to ten existing chains. Provider body
+coverage79/79 and header classification56/59 remain source-review counts.
+Whole-chain candidate readiness is0/10; exact destinations, control-flow
+separation and mirror cost remain required. No production changes or new
+eliminations;152 eliminated/416 open remains current.
