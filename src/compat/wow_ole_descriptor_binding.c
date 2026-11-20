@@ -1,6 +1,6 @@
 /* OPENNT-HOST-297: bind original OLE conversions to existing WOW owners.
  * No OLE activation, guest component or second memory owner is introduced. */
-#include "wow_ole_descriptor_private.h"
+#include "include/wow_ole_descriptor_private.h"
 BYTE g_abLeadTable[256];
 static INIT_ONCE lead_once = INIT_ONCE_STATIC_INIT;
 static BOOL CALLBACK initialize_lead_table(PINIT_ONCE once,PVOID parameter,PVOID *context)

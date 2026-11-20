@@ -167,7 +167,7 @@ foreach ($module in $dynamic.Keys) {
 }
 
 # Descriptor conversion is a selected original object, not a system DLL dependency.
-foreach ($object in @('obj/opennt-ole/thoputil.obj', 'obj/wow32-dll/wow_ole_descriptor_binding.obj')) {
+foreach ($object in @('obj/opennt-ole/thoputil.obj', 'obj/compat/wow_ole_descriptor_binding.obj')) {
     if ($link -notmatch ('(?:^|\s)' + [regex]::Escape($object) + '(?:\s|$)')) {
         throw "Formal WOW32 link omits descriptor conversion owner: $object"
     }

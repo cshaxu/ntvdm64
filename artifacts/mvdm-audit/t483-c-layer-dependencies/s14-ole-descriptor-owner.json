@@ -1,0 +1,61 @@
+{
+  "packet": "M0 T483 S14 P97",
+  "baseline": "93036ea1cfe9a83f26bddbab85288addf75f3ea8",
+  "eliminated_C_ids": [
+    "C0113",
+    "C0431",
+    "C0432",
+    "C0613"
+  ],
+  "eliminated_B_ids": [],
+  "scope": "Move the descriptor forwarding, DBCS table and private layout declarations to B under the existing WOW/DOS original-layout exception. Use the original WOW and clipboard declarations without the broad precompiled header. B object behavior is byte-identical apart from the include path.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "open": 69,
+    "eliminated": 499,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "final_product_symbols": {
+    "_wow_ole_convert_descriptor@8": "0001:00071390       _wow_ole_convert_descriptor@8 10072390 f   wow_ole_descriptor_binding.obj",
+    "_wow_ole_touch_pointer@4": "0001:000713b0       _wow_ole_touch_pointer@4   100723b0 f   wow_ole_descriptor_binding.obj",
+    "_g_abLeadTable": "0003:00005d40       _g_abLeadTable             100a4d40     <common>",
+    "_GetPModeVDMPointerAssert@4": "0001:00000890       _GetPModeVDMPointerAssert@4 10001890 f   wow32.obj",
+    "_ConvertObjDescriptor@8": "0001:00031a40       _ConvertObjDescriptor@8    10032a40 f   thoputil.obj"
+  },
+  "compiled_ownership": {
+    "objects": 1,
+    "counts": {
+      "non-mvdm": 1,
+      "mvdm-host": 1,
+      "system import": 2,
+      "compat": 1
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "afdd30f6-a7ae-4cf2-8b15-35223690d35e",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, two real Win16 OLE descriptor fixtures and final gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "b65e5758817f8ffee13bc40d697a3cc5f660649be61e35b86d6c4036afe91b4c",
+    "release-and-test.out": "9d5868bef449dc4591ab839b4c0e3b6261c90e72e8bf9cb215d6010de559d614",
+    "final-checks.out": "5493c77b9298a1b0e826f421779d94d2d3e80e95690acc4f1f8906bd104b01c6",
+    "b-compiled-candidates.json": "61118b943ea5f1fe0556c543b97aac7ea8f749604fa2de9103a39d79a4c0615c",
+    "ole-49153/result.txt": "0136eaee7676cad87fdd37622925e4d107430bbc45850d563e712ea2a886d11b",
+    "ole-49154/result.txt": "0136eaee7676cad87fdd37622925e4d107430bbc45850d563e712ea2a886d11b"
+  },
+  "prior_redirector_delivery": "s14-redirector-owner.json"
+}

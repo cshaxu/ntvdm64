@@ -2,7 +2,12 @@
 #define WOW_OLE_DESCRIPTOR_PRIVATE_H
 /* OPENNT-HOST-297: finite C declaration facade; original thop.hxx private
  * records and SDK oleidl.h OBJECTDESCRIPTOR retain their complete fields. */
-#include "precomp.h"
+#include <nt.h>
+/* Use the same software WOW declarations as the original precompiled header. */
+#undef _X86_
+#include <wow32.h>
+#include <wuclip.h>
+#include "wow_user_declarations.h"
 #include <string.h>
 typedef LONG SCODE;
 typedef LDT_ENTRY VDMLDT_ENTRY;
