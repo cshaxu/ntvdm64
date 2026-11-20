@@ -1,0 +1,66 @@
+{
+  "packet": "M0 T483 S14 P98",
+  "baseline": "0d90e69898e859da6333104ada22e6c49393469f",
+  "eliminated_C_ids": [
+    "C0077",
+    "C0082",
+    "C0333"
+  ],
+  "eliminated_B_ids": [],
+  "scope": "Move the complete clipboard epoch state and implementation from F to B under the existing WOW/DOS original-layout exception. Both relocated headers and the epoch implementation body are byte-identical. The only C call is the original stdcall W32EmptyClipboard.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "open": 66,
+    "eliminated": 502,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "final_product_symbols": {
+    "_wow_clipboard_opened@0": "0001:00071320       _wow_clipboard_opened@0    10072320 f   wow_clipboard_epoch.obj",
+    "_W32EmptyClipboard@0": "0001:0001c800       _W32EmptyClipboard@0       1001d800 f   wuclip.obj",
+    "_GetClassWOWWords@8": "0001:0004cca0       _GetClassWOWWords@8        1004dca0 f   ntstubs.obj"
+  },
+  "compiled_ownership": {
+    "objects": 1,
+    "counts": {
+      "mvdm-host": 1,
+      "system import": 4
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "ccf51151-5ff4-4a5d-a8f3-de47699dc8ef",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, clipboard epoch, class query, two isolated Win16 OLE roundtrips and final gates passed. Enclosing commit is the delivery receipt.",
+  "clipboard_transfer_limit": {
+    "desktop": "private",
+    "P97_and_P98_exit": 1,
+    "identical_guest_report_sha256": "6a0d40ae03cefbb04d86d161f11686ec3793da081b8b3f978e5f7c63b157fb0b",
+    "last_phase": 1,
+    "last_error_count": 1,
+    "detail": "The full clipboard transfer requires the shared desktop as documented by the runner. The private comparison does not validate delayed rendering."
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "f01308209ef123aa37993f0b195f9b206d8ebd87a76e345e1616db3f9570d1bd",
+    "release-and-test.out": "dc9362926a4d1dfc3a7e21ce094de373d9d14ce6794351cba2664b3ba0c88a1d",
+    "final-checks.out": "47d5b115bbae6c4fdb23acaeb4d85548776fa415e108c88d8cba10e1cffe4839",
+    "b-compiled-candidates.json": "7fb87382791d47e143f119e39e8b701e0465643d0fd814ef1861b2768257c312",
+    "ole-49153/result.txt": "0136eaee7676cad87fdd37622925e4d107430bbc45850d563e712ea2a886d11b",
+    "ole-49154/result.txt": "0136eaee7676cad87fdd37622925e4d107430bbc45850d563e712ea2a886d11b",
+    "baseline-transfer.err": "22a844a0c09c112101bcd3569f5d5e6ca70d86c56268801236ce7af0c765f863",
+    "release-and-test.err": "5b28efef0eebf2ab98df42d6329d4a99e0545efffd90edce1ee267a7bb9ab544"
+  },
+  "prior_ole_descriptor_delivery": "s14-ole-descriptor-owner.json"
+}

@@ -19,7 +19,7 @@ if root.exists() or not root.is_relative_to(repo / 'build'):
     parser.error('require a fresh build-owned directory')
 root.mkdir(parents=True)
 source = repo / 'src/mvdm-host/wow32/wuclip.c'
-adapter = repo / 'src/wow32-dll/source/wow_clipboard_epoch.c'
+adapter = repo / 'src/compat/wow_clipboard_epoch.c'
 fixture = Path(__file__).with_name('wow_clipboard_epoch_fixture.c')
 raw = source.read_text()
 def body(name):
@@ -32,12 +32,12 @@ def body(name):
     return raw[start:end]
 (root / 'selected-clipboard-open-close.inc').write_text(
     body('WU32OpenClipboard') + '\n' + body('WU32CloseClipboard') + '\n')
-(root / 'precomp.h').write_text('''#include <windows.h>
+binding = root / 'clipboard-api-binding.h'
+(binding).write_text('''#include <windows.h>
 DWORD WINAPI epoch_sequence(void);
 HWND WINAPI epoch_owner(void);
 DWORD WINAPI epoch_owner_pid(HWND, LPDWORD);
 DWORD WINAPI epoch_current_pid(void);
-void W32EmptyClipboard(void);
 #define GetClipboardSequenceNumber epoch_sequence
 #define GetClipboardOwner epoch_owner
 #define GetWindowThreadProcessId epoch_owner_pid
@@ -46,7 +46,7 @@ void W32EmptyClipboard(void);
 command = root / 'compile.cmd'
 command.write_text('@echo off\ncall "' + str(args.compiler_env.resolve()) +
     '" -arch=x86 -host_arch=x64 >nul\nif errorlevel 1 exit /b %errorlevel%\n' +
-    'cl.exe /nologo /W4 /WX /I"' + str(root) + '" "' + str(fixture) +
+    'cl.exe /nologo /W4 /WX /FI"' + str(binding) + '" /I"' + str(root) + '" "' + str(fixture) +
     '" "' + str(adapter) + '" /Fo"' + root.as_posix() + '/" /Fe"' +
     str(root/'fixture.exe') + '"\nexit /b %errorlevel%\n')
 record = {'inputs': {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest()

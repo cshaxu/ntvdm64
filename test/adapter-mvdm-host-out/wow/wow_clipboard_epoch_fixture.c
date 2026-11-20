@@ -18,7 +18,7 @@ DWORD WINAPI epoch_owner_pid(HWND window, LPDWORD pid)
 }
 DWORD WINAPI epoch_current_pid(void) { return 100; }
 void WINAPI wow_clipboard_opened(void);
-void W32EmptyClipboard(void)
+void WINAPI W32EmptyClipboard(void)
 {
     CHECK(locked);
     ++clears;

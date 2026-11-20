@@ -127,7 +127,7 @@ $providerSupportSources = @(
     (Join-Path $root 'src/compat/wow_user_private_access.c'),
     (Join-Path $root 'src/compat/wow_window_creation_binding.c'),
     (Join-Path $root 'src/compat/wow_class_words_binding.c'),
-    (Join-Path $adapterWow 'wow_clipboard_epoch.c'),
+    (Join-Path $root 'src/compat/wow_clipboard_epoch.c'),
     (Join-Path $root 'src/compat/wow_ole_descriptor_binding.c'),
     (Join-Path $root 'src/compat/wow_standard_class_bindings.c'),
     (Join-Path $adapterWow 'wow_user_registration_bridge.c'),
@@ -702,7 +702,9 @@ foreach ($source in $providerSupportSources) {
     $object = 'obj/' + $owner + '/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
     $supportObjects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath $source))
-    if ([IO.Path]::GetFileName($source) -eq 'chartran.c') {
+    if ([IO.Path]::GetFileName($source) -eq 'wow_clipboard_epoch.c') {
+        $ninja.Add('  cflags = ' + $nativeCflags)
+    } elseif ([IO.Path]::GetFileName($source) -eq 'chartran.c') {
         $ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_LARGE_STRING_LAYOUT /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/inc/user.h')) + '"')
     } elseif ($source.StartsWith((Join-Path $root 'src/lib-win32'), [StringComparison]::OrdinalIgnoreCase)) {
         $ninja.Add('  cflags = ' + $nativeCflags)

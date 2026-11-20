@@ -1,4 +1,7 @@
-#include "precomp.h"
+#include "include/wow_clipboard_epoch.h"
+
+/* Original wuclip.c owner, using the selected WOW32 stdcall ABI. */
+void WINAPI W32EmptyClipboard(void);
 
 /* OpenNT xxxOpenClipboard updates the process serial before pfnEmptyCB and
  * preserves handles owned by another Win16 task in the same process. */
