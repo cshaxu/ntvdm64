@@ -29,7 +29,7 @@
 #include <stdio.h>
 #line 31
 #include "sim32.h"
-#include "mvdm_softpc_termination.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #line 32
 #include "sas.h"
 #include "gmi.h"

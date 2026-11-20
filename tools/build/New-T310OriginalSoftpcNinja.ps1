@@ -680,7 +680,6 @@ $parallelRunner = Join-Path $build 'run-ninja-parallel.cmd'
 $includeRootPaths = @(
     'src/lib-nxvm',
     'src',
-    'src/common/base_srv',
     'src/non-mvdm/ds/netapi/xactsrv',
     # The adapter owns the modern `nt.h` type binding. Original reached NT
     # public-header subsets are retained under non-mvdm below, so source
@@ -719,8 +718,7 @@ $includeRootPaths = @(
     # x86 generated include directory.
     'src/mvdm-host/softpc.new/base/cvidc',
     'src/mvdm-host/dos/dem',
-    'src/mvdm-host/softpc.new/base/inc',
-    'src/ntvdm-exe/softpc/include'
+    'src/mvdm-host/softpc.new/base/inc'
 )
 $commandInclude = ' /I "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/command/include')) + '"'
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
@@ -774,7 +772,8 @@ $redirBaseFlags = $baseFlags.Replace($softpcRename, '')
 # Authored adapters consume the selected interfaces, not the SoftPC profile.
 $authoredCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')) + '" '
-$authoredSoftpcFlags = $authoredCommonFlags + ($softpcIncludeRoots -join ' ')
+$authoredSoftpcFlags = $authoredCommonFlags + ($softpcIncludeRoots -join ' ') +
+    ' /I "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include')) + '"'
 $ccpuFlags = $baseFlags
 # Keep the original SoftPC host's CRT spellings private to its source group.
 $hostFlags = $baseFlags + ' /Dgetenv=mvdm_host_getenv /Dfprintf=mvdm_host_fprintf /D_assert=mvdm_host_assert'
@@ -926,9 +925,7 @@ $graph.Add('build ' + $object + ': cc_ccpu ' + (NinjaPath $source))
     $object
 }
 $baseDeviceFlags = $baseFlags
-foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
-        'src/ntvdm-exe/softpc/include',
-        'src/wow32-dll/include')) {
+foreach ($unusedRoot in @('src/ntvdm-exe/command/include', 'src/wow32-dll/include')) {
     $baseDeviceFlags = $baseDeviceFlags.Replace(' /I "' +
         (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
 }
@@ -1026,9 +1023,8 @@ $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $dosRoot $name))
     $object
 }
 $demCommandFlags = $baseFlags
-foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
-    'src/ntvdm-exe/softpc/include', 'src/compat/include/generated/x86/prod',
-    'src/wow32-dll/include')) {
+foreach ($unusedRoot in @('src/ntvdm-exe/command/include',
+    'src/compat/include/generated/x86/prod', 'src/wow32-dll/include')) {
     $demCommandFlags = $demCommandFlags.Replace(' /I "' +
         (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
 }

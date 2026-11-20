@@ -6,10 +6,10 @@
 #include <basemsg.h>
 #include <basevdm.h>
 #include <vdmapi.h>
-#include <base_command.h>
-#include <base_payload.h>
-#include <base_values.h>
-#include <base_startup.h>
+#include "base_command.h"
+#include "base_payload.h"
+#include "base_values.h"
+#include "base_startup.h"
 #include <string.h>
 #include <stddef.h>
 typedef struct check_prefix {

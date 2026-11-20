@@ -19,7 +19,7 @@ $compilerCacheDirectory=if($CompilerCache){Join-Path $root 'build/.ccache'}else{
 $referenceRun16=Join-Path (Split-Path -Parent ([IO.Path]::GetFullPath($ReferenceGraph))) 'run16.exe'
 # Only the installer fixtures stage this executable. DLL-only builds have no
 # launcher dependency; Ninja diagnoses a missing input if a fixture needs it.
-$includeRoots=@('src','src/common/base_srv','src/compat/include','src/non-mvdm/public/sdk/inc')
+$includeRoots=@('src','src/compat/include','src/non-mvdm/public/sdk/inc')
 $includes=@($includeRoots|ForEach-Object {'/I "'+(NP (Join-Path $root $_))+'"'})
 $compileFlags='/nologo /c /MT /W4 /Gy /showIncludes /D_WIN32_WINNT=0x0A00'
 $flags=$compileFlags+' /I obj/basesrv '+($includes -join ' ')

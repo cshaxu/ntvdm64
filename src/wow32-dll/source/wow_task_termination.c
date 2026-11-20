@@ -1,5 +1,5 @@
 #include "precomp.h"
-#include "wow_task_termination.h"
+#include "wow32-dll/include/wow_task_termination.h"
 #include "common/base_srv/base_rpc_client.h"
 
 extern DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);

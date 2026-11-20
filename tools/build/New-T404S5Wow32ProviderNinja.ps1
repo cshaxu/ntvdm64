@@ -384,7 +384,6 @@ $environment = Join-Path $build 'msvc-x86.cmd'
 $includeRoots = @(
     'src',
     'src/compat/include',
-    'src/wow32-dll/include',
     'src/mvdm-host/wow32',
     'src/mvdm-host/inc',
     'src/mvdm-host/softpc.new/base/inc',
@@ -404,8 +403,7 @@ $force = '/FI "' + (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h') + '"'
 $cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $includes
 $nativeCflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT'
 $adapterCflags = $nativeCflags + ' ' + $force + ' ' + $includes
-$compatWowIncludes = ($includeRoots | Where-Object { $_ -notlike 'src/wow32-dll*' } | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '
-$compatWowCflags = $nativeCflags + ' ' + $compatWowIncludes
+$compatWowCflags = $nativeCflags + ' ' + $includes
 
 
 $ninja = [System.Collections.Generic.List[string]]::new()
@@ -581,9 +579,7 @@ $ninja.Add('  cflags = $cflags $control_user_flags')
 $dialogPointerObject = 'obj/wow32-dll/wow_dialog_pointer.obj'
 $objects.Add($dialogPointerObject)
 $ninja.Add('build ' + $dialogPointerObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_dialog_pointer.c')))
-# This must precede global include roots: MVDM also has a precomp.h, whose
-# declarations belong to a different translation-unit contract.
-$ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-state')) + '" $cflags $control_user_flags')
+$ninja.Add('  cflags = $cflags $control_user_flags')
 $stringServicesObject = 'obj/compat/ntuser_rtl_compat.obj'
 $objects.Add($stringServicesObject)
 $ninja.Add('build ' + $stringServicesObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/ntuser_rtl_compat.c')))

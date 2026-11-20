@@ -3,7 +3,7 @@
 #include "basesrv.h"
 #include <base_process.h>
 #include <base_dispatch.h>
-#include <base_command.h>
+#include "common/base_srv/base_command.h"
 #include <string.h>
 /* Original private declaration in srvvdm.c; used only for fixture inspection. */
 NTSTATUS GetConsoleRecordDosSesId(ULONG,PCONSOLERECORD *);

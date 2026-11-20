@@ -6,7 +6,7 @@
 #include <ntcsrmsg.h>
 #include <basemsg.h>
 #include <basevdm.h>
-#include <base_payload.h>
+#include "base_payload.h"
 #include <string.h>
 #define CHECK_FIELDS(X) \
     X(0,CmdLine,CmdLen,USHORT) X(1,AppName,AppLen,USHORT) \

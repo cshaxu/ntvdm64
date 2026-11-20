@@ -56,12 +56,12 @@ P83 [Console mouse ownership](../../artifacts/mvdm-audit/t483-c-layer-dependenci
 moved mouse adaptation into B; C -8. Five isolated DOS mouse cases passed.
 
 P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-text-owner.json) delivered C -7.
-P107 [WOW thunk scopes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-thunk-owner.json) delivered C -4.
 P108 [WOW hook and task wait](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-hook-owner.json) delivered C -2.
 P109 [Native publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-publication-owner.json) delivered B -1.
 P110 [Input terminal signals](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-input-terminal-owner.json) delivered C -1.
 P111 [CCPU thread exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-ccpu-thread-exit-owner.json) delivered C -1.
-Delivered: B 7 known calls; C 35 open (19 functions, 1 data).
+P112 [Compile roots](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-compile-root-owner.json) delivered C -3.
+Delivered: B 7 known calls; C 32 open (19 functions, 1 data).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same

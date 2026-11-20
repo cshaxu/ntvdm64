@@ -3,8 +3,8 @@
 #include <rpc.h>
 #include <stdio.h>
 #include "service.h"
-#include <base_client.h>
-#include <base_command.h>
+#include "common/base_srv/base_client.h"
+#include "common/base_srv/base_command.h"
 #include "common/base_srv/base_rpc_client.h"
 static void note(const char *stage,DWORD result,ULONG a,ULONG b,ULONG c)
 {

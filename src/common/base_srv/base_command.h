@@ -36,7 +36,7 @@ BOOL OpenNtBaseEncodeUpdateReply(const BASE_API_MSG *,uint32_t request,uint32_t 
     void *,uint32_t capacity,uint32_t *required);
 BOOL OpenNtBaseApplyUpdateReply(const void *,uint32_t bytes,uint32_t generation,
     uint32_t request,PBASE_API_MSG);
-#include <base_payload.h>
+#include "base_payload.h"
 /* Per-call native ownership. Initialize to zero; prepare reserves all reply
  * storage before source consumption. Never serialize this structure. */
 typedef struct OPENNT_BASE_GET_COMMAND {

@@ -2,7 +2,7 @@
  * base/win32/client/vdm.c BaseCheckVDM, "Copy startupinfo" block.
  * No original launch policy is replaced; CSR native-pointer transport is not
  * available across standalone processes. */
-#include <base_startup.h>
+#include "base_startup.h"
 #include <string.h>
 typedef char startup_wire_size[(sizeof(broker_vdm_startup)==40)?1:-1];
 

@@ -1,0 +1,241 @@
+{
+  "packet": "M0 T483 S14 P112",
+  "baseline": "111cc7e4f6f75bcaae34ad74730f93e48cd37b04",
+  "eliminated_C_ids": [
+    "C0135",
+    "C0141",
+    "C0146"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 536,
+    "open": 32,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "scope": "Clean up C compilation inputs without moving the four selected outer-header references or their owners. Authored components retain their own header access.",
+  "remaining_selected_header_ids": [
+    "C0004",
+    "C0043",
+    "C0119"
+  ],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "measured": {
+      "src/mvdm-host/softpc.new/host/src/sim32.c": {
+        "anchor_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+        "before": {
+          "points": 25,
+          "lines": 140
+        },
+        "after": {
+          "points": 25,
+          "lines": 140
+        },
+        "change": "Same header through explicit path; #line and #error byte identical."
+      },
+      "src/mvdm-host/wow32/wkman.c": {
+        "anchor_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+        "before": {
+          "points": 88,
+          "lines": 364
+        },
+        "after": {
+          "points": 88,
+          "lines": 364
+        },
+        "change": "Same header through explicit path; #line and #error byte identical."
+      },
+      "src/mvdm-host/wow32/wow32.c": {
+        "anchor_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+        "before": {
+          "points": 103,
+          "lines": 1006
+        },
+        "after": {
+          "points": 103,
+          "lines": 1006
+        },
+        "change": "Same header through explicit path; #line and #error byte identical."
+      }
+    }
+  },
+  "compile_proof": {
+    "selected_C_compile_commands": {
+      "msvc-x86-release/worker": 392,
+      "msvc-x86-release/wow32": 135,
+      "msvc-x64-release/worker-reference-x86": 354,
+      "msvc-x64-release/frontend": 0,
+      "msvc-x64-release/worker": 1,
+      "msvc-x64-release/monitor": 0,
+      "msvc-x64-release/launcher": 5,
+      "msvc-x64-release/service": 3,
+      "msvc-x64-release/hook": 2
+    },
+    "root_hits": [],
+    "still_used_explicit_headers": {
+      "common/base_srv": [
+        [
+          "non-mvdm/base/win32/client/vdm.c",
+          "common/base_srv/base_client.h"
+        ]
+      ],
+      "ntvdm-exe/softpc/include": [
+        [
+          "mvdm-host/softpc.new/host/src/sim32.c",
+          "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
+        ]
+      ],
+      "wow32-dll/include": [
+        [
+          "mvdm-host/wow32/wkman.c",
+          "wow32-dll/include/wow_task_termination.h"
+        ],
+        [
+          "mvdm-host/wow32/wow32.c",
+          "wow32-dll/include/wow_task_termination.h"
+        ]
+      ]
+    }
+  },
+  "published_binary_equivalence": [
+    {
+      "name": "VCDEX.DLL",
+      "changed_fields": [
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    },
+    {
+      "name": "run16.exe",
+      "changed_fields": [
+        "COFF timestamp",
+        "Debug directory timestamp 0",
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "changed_fields": [
+        "COFF timestamp",
+        "Debug directory timestamp 0",
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    },
+    {
+      "name": "ntcon.exe",
+      "changed_fields": [
+        "COFF timestamp",
+        "Debug directory timestamp 0",
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "changed_fields": [
+        "COFF timestamp",
+        "Debug directory timestamp 0",
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "changed_fields": [
+        "COFF timestamp",
+        "Debug directory timestamp 0",
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    },
+    {
+      "name": "ntmon.exe",
+      "changed_fields": [
+        "COFF timestamp",
+        "Debug directory timestamp 0",
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "changed_fields": [
+        "COFF timestamp",
+        "Debug directory timestamp 0",
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "changed_fields": [
+        "COFF timestamp",
+        "Debug directory timestamp 0",
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    },
+    {
+      "name": "nthook32.dll",
+      "changed_fields": [
+        "COFF timestamp",
+        "Debug directory timestamp 0",
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    },
+    {
+      "name": "nthook64.dll",
+      "changed_fields": [
+        "COFF timestamp",
+        "Debug directory timestamp 0",
+        "Manifest package GUID in resource directory"
+      ],
+      "published_pe_equal_except_checked_metadata": true
+    }
+  ],
+  "preliminary_input_comparison": {
+    "raw_equal": 0,
+    "equal_excluding_verified_link_timestamps": 0,
+    "differences_beyond_link_timestamps": [
+      "NTVDM.exe",
+      "VCDEX.DLL",
+      "VDMREDIR.dll",
+      "nthook32.dll",
+      "wow32.dll",
+      "ntvwm.exe",
+      "ntcon.exe",
+      "ntmon.exe",
+      "run16.exe",
+      "ntsrv.exe",
+      "nthook64.dll"
+    ]
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "f8d61946-0f5a-4919-9554-c52dee945b1c",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": "Cached full product and reference builds; real compiler input audit; dual publication; final structure and hashes. Fresh DOS/native/DOS and Win16 ShellExecute runtime tests passed.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "d8ab3738da2b035f10d1815723c4d1dd8ebf79903f0d96e17067a31aa557fa68",
+    "boundary.out": "ff003cb91e608f6ae74435b7884bc6c9d44a0afef5ba31e13222f463eee930bd",
+    "compiled-roots.json": "1a6e273a6cad2951638627bc45ed9e5567f1cca35e39c1b2813be670a7190f9a",
+    "mirror-delta.json": "8fb95de2e4a08a3f878390bcad2f5080f31893b0471c4de949a605800424fd2d",
+    "final-binary-equivalence.json": "1c0c27641b71b49c3133c8f683a2f32d263f0303edf40908f4720f3a97fed713",
+    "published-pe-metadata.json": "9a00e6dfd93a7aa4bc65edc328fffd9b95442b94a2140b1bdb7c23023cfef163",
+    "probes.out": "f9dfdc66fc6e334d263793a8a2cf3d3e6062db792c0d8f235e2d64205af4a171",
+    "final-checks.out": "33be180cd90c03e7a8ac27a233639fca3d5ad25e98186c89c5ef61f671bd294d"
+  }
+}

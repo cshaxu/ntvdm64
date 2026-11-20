@@ -20,7 +20,7 @@ $includePattern='/I (?:"[^"]+"|[^\s]+)'
 $referenceFlags=[regex]::Match($text,'(?m)^cflags = (.*)$').Groups[1].Value
 if(!$referenceFlags){throw 'Missing audited reference flags'}
 $referenceRoots=@([regex]::Matches($referenceFlags,$includePattern)|ForEach-Object {$_.Value})
-$includeRoots=@('src/lib-nxvm','src','src/common/base_srv','src/compat/include','src/non-mvdm/public/sdk/inc','src/non-mvdm/public/internal/base/inc')
+$includeRoots=@('src/lib-nxvm','src','src/compat/include','src/non-mvdm/public/sdk/inc','src/non-mvdm/public/internal/base/inc')
 if($Component -eq 'Service'){$includeRoots+='src/ntsrv-exe/opennt/include'}
 $includes=@($includeRoots|ForEach-Object {'/I "'+(NP (Join-Path $root $_))+'"'})
 $nativeCompileFlags='/nologo /c /MT /W4 /we4013 /we4311 /we4302 /Gy /showIncludes /DWINNT /D_NO_CRT_STDIO_INLINE /D_WIN32_WINNT=0x0A00'

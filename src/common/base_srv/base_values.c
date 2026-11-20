@@ -5,7 +5,7 @@
 #include <ntcsrmsg.h>
 #include <basemsg.h>
 #include <basevdm.h>
-#include <base_values.h>
+#include "base_values.h"
 #include <string.h>
 typedef char check_values_size[sizeof(broker_vdm_check_values)==36?1:-1];
 typedef char update_values_size[sizeof(broker_vdm_update_values)==16?1:-1];

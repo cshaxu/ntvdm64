@@ -5,10 +5,10 @@
 #include <base_config.h>
 #include <base_process.h>
 #include <base_dispatch.h>
-#include <base_startup.h>
-#include <base_payload.h>
-#include <base_values.h>
-#include <base_command.h>
+#include "common/base_srv/base_startup.h"
+#include "common/base_srv/base_payload.h"
+#include "common/base_srv/base_values.h"
+#include "common/base_srv/base_command.h"
 #include <base_stream.h>
 #include <base_wait.h>
 #include "ntsrv-exe/transport/vdm_receipt.h"

@@ -31,7 +31,7 @@
 #undef _X86_
 #line 30
 #include "wowfax.h"
-#include "wow_task_termination.h"
+#include "wow32-dll/include/wow_task_termination.h"
 #include "wow_idle_hook_binding.h"
 #include <compat/include/wow_registry.h>
 
