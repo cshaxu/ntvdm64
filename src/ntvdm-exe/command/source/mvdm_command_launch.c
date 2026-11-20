@@ -1,7 +1,7 @@
 #include "non-mvdm/public/sdk/inc/nt.h"
 #include "ntvdm-exe/command/include/command_launch.h"
 #include "ntvdm-exe/command/include/command_text.h"
-#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
+#include "compat/include/mvdm_command_native_child.h"
 #include <string.h>
 
 /* The selected original COMMAND environment algorithm. It builds a private,

@@ -1,9 +1,9 @@
-#include "mvdm_command_native_child.h"
+#include "include/mvdm_command_native_child.h"
 
 #include <string.h>
 
 #include "compat/include/guest_location.h"
-#include "ntvdm-exe/session/session.h"
+#include "include/host_context.h"
 
 
 #define MVDM_COMMAND_GUEST_TAIL_BYTES 124u
@@ -29,7 +29,7 @@ DWORD mvdm_command_prepare_comspec(char command[MAX_PATH], const char *tail)
 }
 
 typedef struct mvdm_command_native_child_state {
-    session *owner;
+    compat_host_context *owner;
     uint32_t owner_epoch;
     uint32_t active;
     uint32_t command_service;
@@ -46,12 +46,12 @@ typedef struct mvdm_command_native_child_state {
 
 static int state_current(mvdm_command_native_child_state **state_out)
 {
-    session *owner = session_thread_current();
+    compat_host_context *owner = compat_host_context_current();
     mvdm_command_native_child_state *state;
 
     if (state_out != NULL) *state_out = NULL;
-    if (owner == NULL || !session_valid(owner) ||
-        owner->host_context.state != SESSION_STATE_ACTIVE) return 0;
+    if (owner == NULL || !compat_host_context_valid(owner) ||
+        owner->state != COMPAT_HOST_CONTEXT_ACTIVE) return 0;
     state = (mvdm_command_native_child_state *)owner->mvdm_command_native_child;
     if (state == NULL || state->owner != owner || state->owner_epoch != owner->epoch)
         return 0;
@@ -72,12 +72,12 @@ static void state_teardown(void *context)
 
 static int state_ensure(mvdm_command_native_child_state **state_out)
 {
-    session *owner = session_thread_current();
+    compat_host_context *owner = compat_host_context_current();
     mvdm_command_native_child_state *state;
 
     if (state_out != NULL) *state_out = NULL;
-    if (owner == NULL || !session_valid(owner) ||
-        owner->host_context.state != SESSION_STATE_ACTIVE) return 0;
+    if (owner == NULL || !compat_host_context_valid(owner) ||
+        owner->state != COMPAT_HOST_CONTEXT_ACTIVE) return 0;
     state = (mvdm_command_native_child_state *)owner->mvdm_command_native_child;
     if (state != NULL) {
         if (state->owner != owner || state->owner_epoch != owner->epoch) return 0;
@@ -90,7 +90,7 @@ static int state_ensure(mvdm_command_native_child_state **state_out)
     state->owner = owner;
     state->owner_epoch = owner->epoch;
     owner->mvdm_command_native_child = state;
-    if (!session_register_teardown(owner, state_teardown, state)) {
+    if (!compat_host_context_register(owner, state_teardown, state)) {
         owner->mvdm_command_native_child = NULL;
         SecureZeroMemory(state, sizeof(*state));
         HeapFree(GetProcessHeap(), 0u, state);

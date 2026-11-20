@@ -66,7 +66,7 @@ int mvdm_command_guest_state_register_doswow(uint16_t segment, uint16_t offset)
     if (registration == NULL) return 0;
     AcquireSRWLockExclusive(&registration->lock);
     mvdm_guest_location_set_real_mode(&registration->doswow, segment, offset);
-    registration->doswow_session_epoch = owner->epoch;
+    registration->doswow_session_epoch = owner->host_context.epoch;
     registration->doswow_memory_epoch = owner->guest_memory_lease.epoch;
     ReleaseSRWLockExclusive(&registration->lock);
     return 1;
@@ -93,7 +93,7 @@ int mvdm_command_guest_state_directory_instance(uint32_t *linear_out,
     session_epoch = registration->doswow_session_epoch;
     memory_epoch = registration->doswow_memory_epoch;
     ReleaseSRWLockShared(&registration->lock);
-    if (!location.valid || session_epoch != owner->epoch ||
+    if (!location.valid || session_epoch != owner->host_context.epoch ||
         memory_epoch != owner->guest_memory_lease.epoch ||
         !ccpu_guest_memory_copy(&owner->guest_memory_lease, memory_epoch,
             ((uint32_t)location.segment << 4) + location.offset,

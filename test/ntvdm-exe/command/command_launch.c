@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ntvdm-exe/command/include/command_launch.h"
-#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
+#include "compat/include/mvdm_command_native_child.h"
 #include "common/native-hook/context.h"
 #include "common/protocol/console_io.h"
 

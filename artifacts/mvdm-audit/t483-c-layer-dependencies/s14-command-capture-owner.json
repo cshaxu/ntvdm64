@@ -1,0 +1,94 @@
+{
+  "packet": "M0 T483 S14 P85",
+  "scope": "Actual COMMAND snapshot capture/retention/cleanup implementation into B; native process creation stays F",
+  "migration": [
+    {
+      "old": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "new": "src/compat/mvdm_command_native_child.c",
+      "before_sha256": "eb4d17593dedc774ca7ef19593f0b31eb1567d9deff40a8a2b9f6944eb6b1ee8",
+      "after_sha256": "61abfc0a868a286bb79dd1dff22723086ac434176072c87310e2de951064d0fd"
+    },
+    {
+      "old": "src/ntvdm-exe/command/include/mvdm_command_native_child.h",
+      "new": "src/compat/include/mvdm_command_native_child.h",
+      "before_sha256": "2f4425c5cec386bef8ce704a733762cd72fd50a098fde873eb596acdbe577975",
+      "after_sha256": "2f4425c5cec386bef8ce704a733762cd72fd50a098fde873eb596acdbe577975"
+    }
+  ],
+  "state": "One existing activation epoch moved into compat_host_context; F advances it at the same activation point; COMMAND and redirector readers use that same field. Capture allocation and cleanup move together; no F callback added.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "status": "Cached full product build, dual publication, both capture builds and targeted verification passed. Enclosing delivery commit records the final gate.",
+  "evidence_root": "build/t483-s14-command-owner",
+  "build_attempts": [
+    {
+      "attempt": 1,
+      "result": "CMake generation failed: command capture test retained old source path",
+      "correction": "CMake source moved to compat and real host_context implementation linked; redirector fixture uses same relocated epoch"
+    },
+    {
+      "attempt": 2,
+      "result": "PASS cached full x86/x64/reference, build2.exit=0",
+      "receipt": "build/t483-s14-command-owner/build2-job.json"
+    }
+  ],
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "a72795f8-4a40-4565-b2e3-83e15061058b",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "initial_capture_link_failure": "Missing C-owned guest-location coordination. Both test graphs now use the existing extraction of C coordination with fixture address-space I/O.",
+    "initial_guest_relaunch_timeout": "Both P84 and P85 timed out on first COMMAND using inherited toolchain PATH. P85 passed the same sequence with PATH limited to the package and host System32. The test now applies this scope to its observer only.",
+    "initial_launch_test_failure": "Restricted environment raised 0xc0000008 inside fixture child. Normal desktop-capable execution passed both child exit codes and 65 assertions.",
+    "passed": {
+      "build2": 0,
+      "deliver": 0,
+      "tests3": 0,
+      "edit": 0,
+      "short-path": 0,
+      "cmake-fixture": 0,
+      "final-relaunch": 0
+    },
+    "receipts_sha256": {
+      "tests3.out": "da307c1737caed0f1ba92f1fdc2635da7197e8f4ef41ab31fab28c75b8e11888",
+      "edit.out": "b5b3afceb7236864942d5c1ab248fe0e50a51fe32ae32c2709440511b1efc0ee",
+      "short-path.out": "b06681555722d19d17a4de2c295dc43be2b8d9b76e30d72295fc777e4024980b",
+      "baseline-relaunch.txt": "02401231e1af2ea52f640a7acd74ff1acc50b5a605d59a885e253341cc8ed9a4",
+      "b-compiled-candidates.json": "974382ffd19af4df1a61e67c6e6f8dbe3930880231c5022b963a6f708efce2f0",
+      "cmake-fixture.out": "33cfbe2b404ee55b9d49c1736578952896d55811cfee9c694b0fba7401762067",
+      "final-relaunch.out": "b06681555722d19d17a4de2c295dc43be2b8d9b76e30d72295fc777e4024980b"
+    }
+  },
+  "compiled_ownership": {
+    "objects": 4,
+    "external_relocation_pairs": 52,
+    "outer_resolved": 0,
+    "not_selected": 16,
+    "missing_map": "VDMREDIR"
+  },
+  "c_direct_ledger": {
+    "eliminated": 429,
+    "open": 139,
+    "change": 0,
+    "reason": "Capture wrapper direct IDs were previously closed. This batch moves the underlying implementation."
+  },
+  "eliminated_indirect_ids": [
+    "B0001",
+    "B0002",
+    "B0003",
+    "B0004",
+    "B0005",
+    "B0006",
+    "B0007",
+    "B0008",
+    "B0031"
+  ]
+}

@@ -31,6 +31,6 @@ int main(void)
     app_session_reset(&session);
     if (teardown_calls != 1u || !app_session_valid(&session) ||
         session.state != APP_SESSION_INACTIVE ||
-        session.epoch != 0u) return 3;
+        session.host_context.epoch != 0u) return 3;
     return 0;
 }

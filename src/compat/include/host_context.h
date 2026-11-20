@@ -29,6 +29,8 @@ enum compat_host_context_state {
 typedef struct compat_host_context {
     uint32_t cleanup_count;
     uint32_t state;
+    uint32_t epoch; /* Activation generation, advanced by the composing owner. */
+    void *mvdm_command_native_child; /* Owned capture resource; registered cleanup. */
     /* Borrowed B resource; the composing owner controls its begin/end lifetime. */
     struct guest_memory_lease_context *guest_memory;
     struct mvdm_mouse_bridge *mouse; /* Borrowed until the composing owner detaches. */

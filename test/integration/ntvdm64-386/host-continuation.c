@@ -9,7 +9,7 @@
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_vm_command.h"
 #include "ntvdm-exe/session/session.h"
-#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
+#include "compat/include/mvdm_command_native_child.h"
 #include "common/protocol/console_io.h"
 #include "ntvdm-exe/frontend/vm_text.h"
 #include <windows.h>

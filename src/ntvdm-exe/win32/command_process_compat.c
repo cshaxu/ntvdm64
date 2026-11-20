@@ -1,4 +1,4 @@
-#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
+#include "compat/include/mvdm_command_native_child.h"
 #include "ntvdm-exe/command/include/command_launch.h"
 #include "lib-win32/process-launch/attributes.h"
 #include "vdmapi.h"

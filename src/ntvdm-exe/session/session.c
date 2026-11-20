@@ -45,7 +45,7 @@ int session_activate(session *instance)
 {
     if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_READY)
         return 0;
-    if (++instance->epoch == 0u) ++instance->epoch;
+    if (++instance->host_context.epoch == 0u) ++instance->host_context.epoch;
     instance->host_context.state = SESSION_STATE_ACTIVE;
     return 1;
 }

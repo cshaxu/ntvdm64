@@ -178,10 +178,10 @@ int main(void)
     if (!session_thread_bind(&s)) return 2;
 
     if (!prepare(&m, &request, ANP_READ)) return 2;
-    ++s.epoch;
+    ++s.host_context.epoch;
     check(!mvdm_redirector_async_complete(&request, 3, 0) && m.write_count == 0,
         "stale owner epoch rejected before publication");
-    --s.epoch;
+    --s.host_context.epoch;
     check(session_request_cancellation(&s, SESSION_CANCELLATION_REQUESTED) &&
         !mvdm_redirector_async_complete(&request, 3, 0) && m.write_count == 0,
         "cancelled owner rejects original completion entry");

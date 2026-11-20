@@ -16,6 +16,8 @@ $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 Assert-NoConflictingPackageBroker (Join-Path (Get-PackageBinaryRoot $PackageRoot) 'ntsrv.exe')
 $binary=Get-PackageBinaryRoot $PackageRoot
+# Keep toolchain PATH entries out of the immutable DOS startup environment.
+$start.EnvironmentVariables['PATH']=$binary+';'+(Join-Path $env:SystemRoot 'System32')
 $launcher='"'+(Join-Path $binary 'run16.exe')+'"'
 # Match the owner workflow: guest media are in System32, so bare names are
 # resolved from that cwd. Do not alter production PATH/search semantics.

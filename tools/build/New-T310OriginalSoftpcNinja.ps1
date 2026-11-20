@@ -1212,8 +1212,11 @@ $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $graph.Add('build common-worker-thread.lib: lib ' + $threadBridgeObject + ' ' + $threadStartObject)
 $adapterBaseSrvObjects = foreach ($name in $adapterBaseSrvNames) {
     $object = 'obj/adapter-basesrv/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterBaseSrvRoot $name)))
-    $graph.Add('  cflags = ' + $authoredSoftpcFlags + $commandInclude)
+    $capture = $name -eq 'mvdm_command_native_child.c'
+    $sourceRoot = if($capture){Join-Path $root 'src/compat'}else{$adapterBaseSrvRoot}
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sourceRoot $name)))
+    $flags = if($capture){$libraryFlags}else{$authoredSoftpcFlags + $commandInclude}
+    $graph.Add('  cflags = ' + $flags)
     $object
 }
 $adapterMonitorObjects = foreach ($name in $adapterMonitorNames) {
@@ -1674,7 +1677,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ntvdm-command-launch-test.exe: broker_test_link obj/tests/ntvdm_command_launch.obj obj/adapter-win32/command_process_compat.obj lib-process-launch.lib')
     $graph.Add('build obj/tests/ntvdm_command_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_capture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/compat/guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')
+    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/compat/guest_memory_lease.obj obj/compat/host_context.obj obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/compat/guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')
     $graph.Add('build obj/tests/ntvdm_command_directory.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/basesrv/t394_s4_command_scalar_state_fixture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvdm-command-directory-test.exe: broker_test_link obj/tests/ntvdm_command_directory.obj obj/adapter-basesrv/mvdm_command_guest_state.obj obj/compat/guest_location.obj session.lib')
@@ -2717,6 +2720,6 @@ sources = @('src/common/protocol/native_hook.h', 'src/nthook-dll/hook.h', 'src/n
 Write-Host "Generated T310 original SoftPC CCPU candidate graph: $build (CCPU sources: $(@($ccpuNames).Count))"
 
 if ($graph -match "build ntvdm-command-directory-test.exe:") {
-    & python (Join-Path $root "tools/build/wire-guest-memory-fixture.py") (Join-Path $build "build.ninja") --target "ntvdm-command-directory-test.exe,guest-location-test.exe"
+    & python (Join-Path $root "tools/build/wire-guest-memory-fixture.py") (Join-Path $build "build.ninja") --target "ntvdm-command-capture-test.exe,ntvdm-command-directory-test.exe,guest-location-test.exe"
     if ($LASTEXITCODE) { throw "Command fixture wiring failed" }
 }

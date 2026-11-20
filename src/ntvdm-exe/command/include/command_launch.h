@@ -2,7 +2,7 @@
 #define NTVDM_COMMAND_LAUNCH_H
 #include <windows.h>
 #include <stddef.h>
-#include "mvdm_command_native_child.h"
+#include "compat/include/mvdm_command_native_child.h"
 
 BOOL opennt_command_set_std_handle(DWORD standard_handle, HANDLE handle);
 BOOL opennt_command_create_process_a(

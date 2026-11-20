@@ -1,0 +1,447 @@
+{
+  "baseline": "37c9e30cc733e323023691146aab572fce47b38e",
+  "objective": "Eliminate (B+C)->D/E/F implementation dependencies",
+  "status": "Initial B census; not exhaustive indirect closure and not a total violation count",
+  "compiled": {
+    "objects_in_graphs": 294,
+    "distinct_sources": 125,
+    "external_relocation_pairs": 3341,
+    "resolved_outward_candidates": 0,
+    "unresolved_carriers": 0,
+    "counts": {
+      "CRT": 569,
+      "system import": 1388,
+      "not selected in final link": 543,
+      "TLS ABI absolute": 28,
+      "compat": 609,
+      "lib-win32": 2,
+      "mvdm-host": 148,
+      "non-mvdm": 54
+    },
+    "scope": [
+      "worker",
+      "wow32",
+      "vcdex",
+      "hook32",
+      "reference",
+      "frontend",
+      "service",
+      "launcher",
+      "monitor",
+      "native-worker",
+      "hook64"
+    ],
+    "missing_map": [
+      "VDMREDIR.dll; not covered by this map-based pass"
+    ],
+    "evidence_sha256": "1512d8fa34f704418df78a6133e8a352240ae3d6f8b25ced3094e42d653bfa57",
+    "limits": "Compiled object references include unselected COMDATs/objects. Symbol relocation/map evidence cannot discover indirect targets. No claim that B is clean."
+  },
+  "indirect_rows": [
+    {
+      "id": "B0001",
+      "contract": "compat_command_services",
+      "provider": "src/compat/mvdm_command_native_child.c",
+      "target": "mvdm_command_native_child_capture_guest",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "capture_guest",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "migration_status": "P85; implementation, state and cleanup in B",
+      "baseline_layer": "F"
+    },
+    {
+      "id": "B0002",
+      "contract": "compat_command_services",
+      "provider": "src/compat/mvdm_command_native_child.c",
+      "target": "mvdm_command_native_child_capture_host_command",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "capture_host_command",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "migration_status": "P85; implementation, state and cleanup in B",
+      "baseline_layer": "F"
+    },
+    {
+      "id": "B0003",
+      "contract": "compat_command_services",
+      "provider": "src/compat/mvdm_command_native_child.c",
+      "target": "mvdm_command_native_child_std_handles",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "std_handles",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "migration_status": "P85; implementation, state and cleanup in B",
+      "baseline_layer": "F"
+    },
+    {
+      "id": "B0004",
+      "contract": "compat_command_services",
+      "provider": "src/compat/mvdm_command_native_child.c",
+      "target": "mvdm_command_native_child_command",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "command",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "migration_status": "P85; implementation, state and cleanup in B",
+      "baseline_layer": "F"
+    },
+    {
+      "id": "B0005",
+      "contract": "compat_command_services",
+      "provider": "src/compat/mvdm_command_native_child.c",
+      "target": "mvdm_command_native_child_environment",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "environment",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "migration_status": "P85; implementation, state and cleanup in B",
+      "baseline_layer": "F"
+    },
+    {
+      "id": "B0006",
+      "contract": "compat_command_services",
+      "provider": "src/compat/mvdm_command_native_child.c",
+      "target": "mvdm_command_native_child_replace_command",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "replace_command",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "migration_status": "P85; implementation, state and cleanup in B",
+      "baseline_layer": "F"
+    },
+    {
+      "id": "B0007",
+      "contract": "compat_command_services",
+      "provider": "src/compat/mvdm_command_native_child.c",
+      "target": "mvdm_command_native_child_select_command_service",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "select_service",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "migration_status": "P85; implementation, state and cleanup in B",
+      "baseline_layer": "F"
+    },
+    {
+      "id": "B0008",
+      "contract": "compat_command_services",
+      "provider": "src/compat/mvdm_command_native_child.c",
+      "target": "mvdm_command_native_child_finish",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "finish",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "migration_status": "P85; implementation, state and cleanup in B",
+      "baseline_layer": "F"
+    },
+    {
+      "id": "B0009",
+      "contract": "compat_command_services",
+      "provider": "src/ntvdm-exe/win32/command_process_compat.c",
+      "target": "opennt_command_set_std_handle",
+      "layer": "F",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "set_std_handle"
+    },
+    {
+      "id": "B0010",
+      "contract": "compat_command_services",
+      "provider": "src/ntvdm-exe/win32/command_process_compat.c",
+      "target": "opennt_command_create_process_a",
+      "layer": "F",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "create_process"
+    },
+    {
+      "id": "B0011",
+      "contract": "compat_command_services",
+      "provider": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "target": "mvdm_command_guest_state_clear_doswow",
+      "layer": "F",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "clear_doswow"
+    },
+    {
+      "id": "B0012",
+      "contract": "compat_command_services",
+      "provider": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "target": "mvdm_command_guest_state_register_doswow",
+      "layer": "F",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed",
+      "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
+      "slot": "register_doswow"
+    },
+    {
+      "id": "B0013",
+      "contract": "compat_console_services",
+      "provider": "src/ntvdm-exe/win32/console_client.c",
+      "target": "input_code_page",
+      "layer": "F",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0014",
+      "contract": "compat_console_services",
+      "provider": "src/ntvdm-exe/win32/console_client.c",
+      "target": "keyboard_layout_name",
+      "layer": "F",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0015",
+      "contract": "compat_console_services",
+      "provider": "src/ntvdm-exe/win32/console_client.c",
+      "target": "get_console_title",
+      "layer": "F",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0016",
+      "contract": "compat_console_services",
+      "provider": "src/ntvdm-exe/win32/console_client.c",
+      "target": "set_console_title",
+      "layer": "F",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0017",
+      "contract": "compat_dpmi_services",
+      "provider": "src/compat/dbg_registers.c",
+      "target": "ThreadSetDebugContext",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed"
+    },
+    {
+      "id": "B0018",
+      "contract": "compat_dpmi_services",
+      "provider": "src/compat/dbg_registers.c",
+      "target": "mvdm_debugger_read_debug_registers",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed"
+    },
+    {
+      "id": "B0019",
+      "contract": "compat_dpmi_services",
+      "provider": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "target": "mvdm_softpc_wow_page_domain_leave_protected",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed"
+    },
+    {
+      "id": "B0020",
+      "contract": "compat_dpmi_services",
+      "provider": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "target": "mvdm_softpc_wow_page_domain_reenter_protected",
+      "layer": "B",
+      "kind": "installed-service-slot",
+      "status": "inner-target-confirmed"
+    },
+    {
+      "id": "B0021",
+      "contract": "compat_vm_services",
+      "provider": "src/ntvdm-exe/softpc/mvdm_vm_notification.c",
+      "target": "mvdm_vm_bridge_bop",
+      "layer": "F",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed",
+      "installation": "src/ntvdm-exe/softpc/mvdm_vm_binding.c"
+    },
+    {
+      "id": "B0022",
+      "contract": "compat_vm_services",
+      "provider": "src/ntvdm-exe/vdd/mvdm_softpc_vdd_unavailable.c",
+      "target": "ntvdm_clear_instance_data_marking",
+      "layer": "F",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed",
+      "installation": "src/ntvdm-exe/softpc/mvdm_vm_binding.c"
+    },
+    {
+      "id": "B0023",
+      "contract": "opennt_thread_lifecycle",
+      "provider": "src/common/worker-thread/bridge.c",
+      "target": "capture_owner",
+      "layer": "D",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0024",
+      "contract": "opennt_thread_lifecycle",
+      "provider": "src/common/worker-thread/bridge.c",
+      "target": "finish_owner",
+      "layer": "D",
+      "kind": "installed-service-slot",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0025",
+      "contract": "OPENNT_BASE_RESOURCE_BINDING",
+      "provider": "src/ntsrv-exe/opennt/source/base_service.c",
+      "target": "service_duplicate_resource",
+      "layer": "F",
+      "kind": "scoped-resource-operation",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0026",
+      "contract": "OPENNT_BASE_RESOURCE_BINDING",
+      "provider": "src/ntsrv-exe/opennt/source/base_service.c",
+      "target": "service_close_resource",
+      "layer": "F",
+      "kind": "scoped-resource-operation",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0027",
+      "contract": "worker_base_publication",
+      "provider": "src/ntvdm-exe/win32/console_client.c",
+      "target": "send_video_copy",
+      "layer": "F",
+      "kind": "caller-supplied-publication-operation",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0028",
+      "contract": "worker_base_publication",
+      "provider": "src/ntvdm-exe/win32/console_graphics.c",
+      "target": "capture_callback",
+      "layer": "F",
+      "kind": "caller-supplied-publication-operation",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0029",
+      "contract": "worker_base_publication",
+      "provider": "src/ntvwm-exe/presentation.c",
+      "target": "publish_copy",
+      "layer": "F",
+      "kind": "caller-supplied-publication-operation",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0030",
+      "contract": "compat_host_context cleanup",
+      "provider": "src/ntvdm-exe/win32/console_client.c",
+      "target": "console_client_end",
+      "layer": "F",
+      "kind": "registered-cleanup-target",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0031",
+      "contract": "compat_host_context cleanup",
+      "provider": "src/compat/mvdm_command_native_child.c",
+      "target": "state_teardown",
+      "layer": "B",
+      "kind": "registered-cleanup-target",
+      "status": "inner-target-confirmed",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_native_child.c",
+      "migration_status": "P85; implementation, state and cleanup in B",
+      "baseline_layer": "F"
+    },
+    {
+      "id": "B0032",
+      "contract": "compat_host_context cleanup",
+      "provider": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "target": "registration_teardown",
+      "layer": "F",
+      "kind": "registered-cleanup-target",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0033",
+      "contract": "compat_host_context cleanup",
+      "provider": "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c",
+      "target": "mvdm_softpc_profile_shadow_dispose",
+      "layer": "F",
+      "kind": "registered-cleanup-target",
+      "status": "outer-target-confirmed"
+    },
+    {
+      "id": "B0034",
+      "contract": "compat_host_context cleanup",
+      "provider": "src/compat/physical_mapping.c",
+      "target": "release_owner",
+      "layer": "B",
+      "kind": "registered-cleanup-target",
+      "status": "inner-target-confirmed"
+    },
+    {
+      "id": "B0035",
+      "contract": "compat_host_context cleanup",
+      "provider": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "target": "page_domain_dispose",
+      "layer": "B",
+      "kind": "registered-cleanup-target",
+      "status": "inner-target-confirmed"
+    }
+  ],
+  "indirect_counts": {
+    "B": 15,
+    "F": 18,
+    "D": 2
+  },
+  "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
+  "remaining": [
+    "Resolve final VDMREDIR providers without an existing map",
+    "Cover all remaining WOW callback tables and function-pointer storage, not only these seven known mechanisms",
+    "Trace thread hooks captured into A and all cleanup lifetimes",
+    "Reconcile indirect rows with existing C functional chains and choose complete implementation moves"
+  ],
+  "evidence_root": "build\\t483-s14-b-outward-census",
+  "baseline_indirect_counts": {
+    "F": 27,
+    "D": 2,
+    "B": 6
+  },
+  "baseline_source_hashes": {
+    "src/common/worker-thread/bridge.c": "de75d242e074e5fc628010e4d6cfe9e03a87ef933ab625990dcdbc2e9ae1901b",
+    "src/compat/dbg_registers.c": "3e61083b599611a8d4c76c0299191e80c9b31e7e8bdb5ce0c5644e629f9a86df",
+    "src/compat/mvdm_softpc_wow_page_domain.c": "2fe6255ca5085f3a5695024042fa6ccc85845a9167339ce980aa381643a82f7d",
+    "src/compat/physical_mapping.c": "0a238e4a6958cf884af1c593572d0a36eb7b3a206113477ce3f8b4a8d3c64cd1",
+    "src/ntsrv-exe/opennt/source/base_service.c": "72f268424fba27d2b99d55dd4f22e5381095e87e94da93ceb0078a118bf15821",
+    "src/ntvdm-exe/command/source/mvdm_command_binding.c": "b09ac158d0e500c3b8b4883adbe0696e10648bb39b3b9ab486cd985ffa3284e5",
+    "src/ntvdm-exe/command/source/mvdm_command_guest_state.c": "10f3f430c3269878095e6a8a78123fe8f5a4dd3351c6c70c5c4ec7593c173ace",
+    "src/ntvdm-exe/command/source/mvdm_command_native_child.c": "eb4d17593dedc774ca7ef19593f0b31eb1567d9deff40a8a2b9f6944eb6b1ee8",
+    "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c": "a444022e7a35e3d94354d257fb423644328c1c03a845687a60c6df5af6c5c366",
+    "src/ntvdm-exe/softpc/mvdm_vm_binding.c": "4e509436be9720a3887ad7b20707c97328dfec8a8184a50534888c0bfd54ad37",
+    "src/ntvdm-exe/softpc/mvdm_vm_notification.c": "d8b843492c84d77fb39812f8af1fc1669e36e63ed5d04012a1b9d829c7740f40",
+    "src/ntvdm-exe/vdd/mvdm_softpc_vdd_unavailable.c": "30a79d61ec86c63d75255990c31a354b7eff31487787d11bcac9e4b11840a55b",
+    "src/ntvdm-exe/win32/command_process_compat.c": "7e7fa0f7bb9da0bb17529a8f6be9ba6d723858112bcee4b3a50594c31f078ebe",
+    "src/ntvdm-exe/win32/console_client.c": "24e98d3ba31faccc0c5435691ec4b44204439c4ee53abea30bb610424744e25d",
+    "src/ntvdm-exe/win32/console_graphics.c": "b8d34e49f4d65950460ab5440061c0ea387d29bf23f220ff177208e02bbe464f",
+    "src/ntvwm-exe/presentation.c": "f95a13365d65a53a1d5fc51f6164997d2df51610f0834dbfaf204882177926b6"
+  },
+  "p85_provider_sha256": "61abfc0a868a286bb79dd1dff22723086ac434176072c87310e2de951064d0fd"
+}

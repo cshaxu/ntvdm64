@@ -68,7 +68,7 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
         return 0;
     }
     state->owner = owner;
-    state->owner_epoch = owner->epoch;
+    state->owner_epoch = owner->host_context.epoch;
     state->length = read_u16(bytes + 4u);
     buffer_value = read_u32(bytes + 6u);
     state->is_read = request_type == 0x86u || request_type == 0x90u;
@@ -127,7 +127,7 @@ int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
     if (session_thread_current() != state->owner ||
         !session_valid(state->owner) ||
         state->owner->host_context.state != SESSION_STATE_ACTIVE ||
-        state->owner->epoch != state->owner_epoch) {
+        state->owner->host_context.epoch != state->owner_epoch) {
         return 0;
     }
     /* Original ReadFile had already written the guest payload when completion

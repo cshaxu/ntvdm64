@@ -94,7 +94,6 @@ typedef struct session {
     uint32_t abi_version;
     uint32_t struct_bytes;
     uint32_t identity;
-    uint32_t epoch;
     uint32_t completion_code;
     uint32_t cancellation_reason;
     uint32_t machine_backend;
@@ -108,10 +107,6 @@ typedef struct session {
     char original_worker_source[SESSION_WORKER_SOURCE_MAX];
     compat_host_context host_context;
     session_thread_hook thread_hooks[SESSION_MAX_THREAD_HOOKS];
-    /* Private storage owned by the source-shaped COMMAND native-child
-     * adapter.  It never holds guest data or a cross-component ABI value;
-     * the adapter registers teardown and clears it before session disposal. */
-    void *mvdm_command_native_child;
     /* Numeric COMMAND registration shared by bound original host threads. */
     void *mvdm_command_guest_state;
     /* Worker-local endpoint of the authenticated run16 I/O channel. */

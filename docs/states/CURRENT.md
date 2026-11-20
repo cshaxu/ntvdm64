@@ -10,7 +10,7 @@ implementation migration. The broader C-layer cleanup remains active.
 | Field | Record |
 | --- | --- |
 | Original Owner Request | 实际公共实现及必要状态下沉B，不只是移动头文件或增加转发；不把NTVDM/NTSRV核心搬进B；按批准的S队列连续执行。 |
-| Objective | Audit the complete responsibility and implementation ownership of ntvdm-exe, mvdm-host, non-mvdm and compat, including the historical session split; establish a file/symbol/state/lifecycle migration ledger before further relocation, then implement complete chains to eliminate all C-to-D/E/F implementation dependencies. B owns independent compatibility mechanics and resources; C retains original machine/subsystem algorithms; F owns product composition and lifecycle. No forwarding disguise; the owner-approved CCPU/SAS/USER adaptation exception permits B-to-C, never B-to-D/E/F. |
+| Objective | Audit the complete responsibility and implementation ownership of ntvdm-exe, mvdm-host, non-mvdm and compat, including the historical session split; establish a file/symbol/state/lifecycle migration ledger before further relocation, then implement complete chains to eliminate all (B+C)-to-D/E/F implementation dependencies. B owns independent compatibility mechanics and resources; C retains original machine/subsystem algorithms; F owns product composition and lifecycle. No forwarding disguise; the owner-approved CCPU/SAS/USER adaptation exception permits B-to-C, never B-to-D/E/F. |
 | Files And ABI Surface | Complete ntvdm-exe, mvdm-host, non-mvdm and compat inventory; historical session split, production compile/link providers and indirect calls. Inspect external consumers/providers as needed for complete chains without unrelated product expansion. |
 | Reference Baseline | S13 P17; package92f469bf-1555-4ff0-b16d-ef2d9292934a; source/evidence in the linked closure. Direct ledger144 eliminated/424 open is not an implementation-migration count. |
 | Applicable Rules | Six-layer architecture, original-first source policy, coding/execution/documentation rules and approved implementation migration. |
@@ -23,8 +23,8 @@ implementation migration. The broader C-layer cleanup remains active.
 | Expected Markers | Actual inward implementations and state ownership, removed superseded providers/forwarding, retained original memory semantics and lifetime. |
 | Similar-Issue Sweep | All acquire/use/release, thread and cross-image consumers of each selected chain; distinguish original C provider algorithms from common compatibility mechanics. |
 | Reporting Requirements | File entry/exit, mirror points/lines and cumulative totals; direct edges, actual migration, deleted forwarding and remaining ownership counted separately. |
-| Stop Conditions | Owner standing approval covers net non-error mirror increases below5 lines and at most2 points; larger increases or materially changed semantic/ownership boundaries require prior approval. C outward dependencies must be eliminated, not retained as exceptions. |
-| Exit Criteria | Complete four-component ownership and migration ledger before further relocation; implement admitted complete chains with final-code targeted tests, coherent dual release and commit/push. Overall closure requires no C-to-D/E/F implementation dependency; unresolved dispositions are not elimination. |
+| Stop Conditions | Owner standing approval covers net non-error mirror increases below5 lines and at most2 points; larger increases or materially changed semantic/ownership boundaries require prior approval. B/C outward dependencies must be eliminated, not retained as exceptions. |
+| Exit Criteria | Complete four-component ownership and migration ledger before further relocation; implement admitted complete chains with final-code targeted tests, coherent dual release and commit/push. Overall closure requires no (B+C)-to-D/E/F implementation dependency; unresolved dispositions are not elimination. |
 
 ## Current Technical Baseline
 
@@ -59,11 +59,11 @@ cases passed; mirror delta0/0. Test cases now clean their owned desktop processe
 Eight IDs eliminated: current429/139. Console control/transport remains open.
 Enclosing commit/push is receipt; prior P76 evidence remains in P81 history.
 
-P84 [Console data preparation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-data-owner.json)
-moves snapshot publication E-to-B and text-buffer state/operations F-to-B.
-Cached full build, dual11/22 hashes, lifecycle/text/graphics and real DOS video/text
-passed. Mirror delta0/0; direct ledger429/139 unchanged pending full Console chain.
-Product callback targets remain explicit. Enclosing commit/push is receipt.
+P85 [COMMAND capture migration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-command-capture-owner.json)
+moves eight capture providers and their cleanup into B, with mirror delta0/0.
+Cached full build, dual11/22 hashes and COMMAND/redirector/relaunch tests pass.
+Owner requires all (B+C)-to-D/E/F implementation dependencies removed. C ledger
+429/139 excludes the [B census](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-b-outward-census.json).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same

@@ -1,6 +1,6 @@
 #ifndef MVDM_VM_COMMAND_H
 #define MVDM_VM_COMMAND_H
-#include "ntvdm-exe/command/include/mvdm_command_native_child.h"
+#include "compat/include/mvdm_command_native_child.h"
 
 /* Only on the CPU thread, in the actual VMM callback, before it waits.
  * Frame and base are VMM Client_Reg_Struc and CB_High_Linear addresses.
