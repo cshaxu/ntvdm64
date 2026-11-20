@@ -72,6 +72,7 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     'wow_dialog_context_bindings.c',
     'wow_dialog_creation_binding.c',
     'wow_dialog_finalization_binding.c',
+    'wow_dialog_keyboard_binding.c',
     'wow_dialog_memory.c',
     'wow_dialog_native_bindings.c',
     'wow_dialog_pointer.c',

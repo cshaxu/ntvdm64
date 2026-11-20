@@ -88,7 +88,7 @@ $units = @(
     @('creator_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_creator_lifetime_fixture.c', ''),
     @('dialog_creation_adapter', 'src/compat/wow_dialog_creation_binding.c', ''),
     @('keyboard_entry_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_entry_fixture.c', ''),
-    @('keyboard_entry_adapter', 'src/wow32-dll/source/wow_dialog_keyboard_binding.c', ''),
+    @('keyboard_entry_adapter', 'src/compat/wow_dialog_keyboard_binding.c', ''),
     @('mnemonic_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_mnemonic_lifetime_fixture.c', ''),
     @('keyboard_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_lifetime_fixture.c', ''),
     @('keyboard_unreached', 'test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_unreached.c', ''),

@@ -1,0 +1,58 @@
+{
+  "packet": "M0 T483 S14 P100",
+  "baseline": "9dcd85963e2422566287c6e02fb28919538be86c",
+  "eliminated_C_ids": [
+    "C0370",
+    "C0371"
+  ],
+  "eliminated_B_ids": [],
+  "scope": "Move both dialog keyboard entry points and their shared untouched function body to B. Explicitly include the original ABI header and reuse the existing B task, borrow and dialog-context state. Actual original ANSI/Unicode handling remains in C.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "open": 61,
+    "eliminated": 507,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "final_product_symbols": {
+    "_wow_dialog_messageA@8": "0001:000672b0       _wow_dialog_messageA@8     100682b0 f   wow_dialog_keyboard_binding.obj",
+    "_wow_dialog_messageW@8": "0001:000672d0       _wow_dialog_messageW@8     100682d0 f   wow_dialog_keyboard_binding.obj",
+    "_wow_original_IsDialogMessageA@8": "0001:00049d80       _wow_original_IsDialogMessageA@8 1004ad80 f   control-body-dlgmgr2.obj",
+    "_wow_original_IsDialogMessageW@8": "0001:00049ec0       _wow_original_IsDialogMessageW@8 1004aec0 f   control-body-dlgmgr2.obj"
+  },
+  "compiled_ownership": {
+    "objects": 1,
+    "counts": {
+      "CRT": 5,
+      "system import": 2,
+      "TLS ABI absolute": 1,
+      "compat": 7,
+      "non-mvdm": 2
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "e0a76f6b-4d4f-41ff-8d50-6bcff82a6157",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, dialog keyboard/mnemonic fixtures, real Win16 dialog and final gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "bdb8d7a3ed33b7a435b9ad48ca3b62215801f4aa3d27930d32e1a54f49d5b505",
+    "release-and-test.out": "451093acd2921b0b7f77790660541dfc1eb67e14e64a47f2f82fef20b52e6b3c",
+    "b-compiled-candidates.json": "42b410a10c8c7f86fd55d03fc8318554a10edc5aa5d9543cb5a1259ed7bd3b8e",
+    "dialog-guest/result.txt": "0cce8cd25a3f56f5006d0ac4b299ea694733ebafa68e401b03b80a3081af3292",
+    "dialog-guest/guest-report.json": "f0a92eedad2b2d521992c3e6923a26df699e8dbefef58be05e4db42a7b7a116f"
+  },
+  "prior_printer_delivery": "s14-printer-owner.json"
+}

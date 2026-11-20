@@ -3,8 +3,8 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 63,
-    "eliminated": 505,
+    "open": 61,
+    "eliminated": 507,
     "supporting-evidence": 43,
     "eliminated-transitive": 6
   },
@@ -82,19 +82,6 @@
       "symbols": [
         "CsrLockProcessByClientId",
         "CsrUnlockProcess"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_dialog_keyboard_binding.c",
-      "open_ids": [
-        "C0370",
-        "C0371"
-      ],
-      "count": 2,
-      "symbols": [
-        "wow_dialog_messageA",
-        "wow_dialog_messageW"
       ]
     },
     {
@@ -613,5 +600,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P99"
+  "updated_by": "T483 S14 P100"
 }

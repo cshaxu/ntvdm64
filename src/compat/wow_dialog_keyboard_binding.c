@@ -1,3 +1,4 @@
+#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_dialog_creation_binding.h"
 #include "wow_dialog_context_bindings.h"
 #include "wow_user_task_lifecycle.h"
