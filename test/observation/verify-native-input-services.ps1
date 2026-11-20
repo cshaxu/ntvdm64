@@ -19,9 +19,9 @@ function Owned($name,$exe,$line,$seconds){
  }finally{$p.Dispose()}
 }
 try{
- $original="$repo/src/wow32-dll/source/wow_input_membership.c"
+ $original="$repo/src/compat/wow_input_membership.c"
  $sources=@('wow_native_input_group_fixture','wow_native_input_focus_fixture','wow_input_membership_fixture')
- $inputs=@($PSCommandPath,$driver,$originalObject,$original,"$repo/src/wow32-dll/include/wow_input_group_bindings.h","$repo/src/wow32-dll/include/wow_task_order_bindings.h")
+ $inputs=@($PSCommandPath,$driver,$originalObject,$original,"$repo/src/compat/include/wow_input_group_bindings.h","$repo/src/compat/include/wow_task_order_bindings.h")
  $inputs+="$repo/test/adapter-mvdm-host-out/wow/wow_input_queue_witness.h"
  $inputs+=@($sources|ForEach-Object {"$repo/test/adapter-mvdm-host-out/wow/$_.c"})
  Get-FileHash $inputs|Export-Csv -NoTypeInformation "$root/inputs.csv"

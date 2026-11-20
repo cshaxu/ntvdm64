@@ -49,7 +49,7 @@ a new runtime paint trace or reproduce the defect independently.
   its message-bit filter and WOW thunk. [WU32DefWindowProc](../../src/mvdm-host/wow32/wumsg.c)
   converts arguments and calls native DefWindowProc. This is not evidence of
   a second independent Win3.1 default-caption painter.
-- The project [default-message table](../../src/wow32-dll/source/wow_private_user_compat.c)
+- The project [default-message table](../../src/compat/wow_private_user_compat.c)
   includes WM_NCCALCSIZE, WM_NCPAINT and WM_NCACTIVATE. Their mere inclusion
   does not prove correct runtime handling.
 - [Host-to-guest conversion](../../src/mvdm-host/wow32/wmdisp32.c) and
@@ -61,7 +61,7 @@ a new runtime paint trace or reproduce the defect independently.
   [BeginPaint/GetDC](../../src/mvdm-host/wow32/wuser.c) retain separate native
   API calls. Their runtime origin, clipping, state and resource lifetime
   remain unverified for the reported residual pixels.
-- [Window-view projection](../../src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c)
+- [Window-view projection](../../src/compat/mvdm_softpc_wow_page_domain.c)
   currently takes screen-relative window/client rectangles from GetWindowInfo.
   [Earlier evidence E54](../etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md)
   records a repaired zero-origin projection defect; that history is a lead,

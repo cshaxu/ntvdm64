@@ -64,71 +64,72 @@ if (!(Test-Path -LiteralPath $parentImportLibraryPath -PathType Leaf)) {
     throw "Parent import library does not exist: $parentImportLibraryPath"
 }
 $providerSupportSources = @(
-    (Join-Path $adapterWow 'wow_callback_frame_lease.c'),
-    (Join-Path $adapterWow 'wow_private_user_compat.c'),
-    (Join-Path $adapterWow 'wow_bitmap_bindings.c'),
-    (Join-Path $adapterWow 'wow_window_words_binding.c'),
-    (Join-Path $adapterWow 'wow_window_procedure_entry.c'),
-    (Join-Path $adapterWow 'wow_user_object_bindings.c'),
-    (Join-Path $adapterWow 'wow_user_discovery.c'),
-    (Join-Path $adapterWow 'wow_menu_client_bindings.c'),
-    (Join-Path $adapterWow 'wow_menu_native_bindings.c'),
-    (Join-Path $adapterWow 'wow_cleanup_bindings.c'),
-    (Join-Path $adapterWow 'wow_user_borrow_scope.c'),
-    (Join-Path $adapterWow 'wow_class_client_bindings.c'),
-    (Join-Path $adapterWow 'wow_task_profile_binding.c'),
+    (Join-Path $root 'src/compat/wow_user_registration_state.c'),
+    (Join-Path $root 'src/compat/wow_callback_frame_lease.c'),
+    (Join-Path $root 'src/compat/wow_private_user_compat.c'),
+    (Join-Path $root 'src/compat/wow_bitmap_bindings.c'),
+    (Join-Path $root 'src/compat/wow_window_words_binding.c'),
+    (Join-Path $root 'src/compat/wow_window_procedure_entry.c'),
+    (Join-Path $root 'src/compat/wow_user_object_bindings.c'),
+    (Join-Path $root 'src/compat/wow_user_discovery.c'),
+    (Join-Path $root 'src/compat/wow_menu_client_bindings.c'),
+    (Join-Path $root 'src/compat/wow_menu_native_bindings.c'),
+    (Join-Path $root 'src/compat/wow_cleanup_bindings.c'),
+    (Join-Path $root 'src/compat/wow_user_borrow_scope.c'),
+    (Join-Path $root 'src/compat/wow_class_client_bindings.c'),
+    (Join-Path $root 'src/compat/wow_task_profile_binding.c'),
     (Join-Path $adapterWow 'wow_task_termination.c'),
     (Join-Path $adapterWow 'wow_task_parent.c'),
     (Join-Path $adapterWow 'wow_launch_identity.c'),
-    (Join-Path $adapterWow 'wow_user_message_bridge.c'),
-    (Join-Path $adapterWow 'wow_user_task_lifecycle.c'),
+    (Join-Path $root 'src/compat/wow_user_message_bridge.c'),
+    (Join-Path $root 'src/compat/wow_user_task_lifecycle.c'),
     (Join-Path $adapterWow 'wow_task_start_notification.c'),
-    (Join-Path $adapterWow 'wow_input_group_lifetime.c'),
-    (Join-Path $adapterWow 'wow_dialog_creation_binding.c'),
+    (Join-Path $root 'src/compat/wow_input_group_lifetime.c'),
+    (Join-Path $root 'src/compat/wow_dialog_creation_binding.c'),
     (Join-Path $adapterWow 'wow_dialog_keyboard_binding.c'),
     # T447 S3 shared retained state and original-control dependency bindings.
     # These are one provider group, not optional native/recovered fallbacks.
-    (Join-Path $adapterWow 'wow_dialog_call_bindings.c'),
-    (Join-Path $adapterWow 'wow_dialog_procedure_bindings.c'),
-    (Join-Path $adapterWow 'wow_dialog_finalization_binding.c'),
-    (Join-Path $adapterWow 'wow_dialog_native_bindings.c'),
-    (Join-Path $adapterWow 'wow_dialog_state_bindings.c'),
-    (Join-Path $adapterWow 'wow_default_message_bindings.c'),
-    (Join-Path $adapterWow 'wow_default_native_bindings.c'),
-    (Join-Path $adapterWow 'wow_default_state_bindings.c'),
-    (Join-Path $adapterWow 'wow_default_window_bindings.c'),
-    (Join-Path $adapterWow 'wow_dialog_context_bindings.c'),
-    (Join-Path $adapterWow 'wow_edit_call_bindings.c'),
-    (Join-Path $adapterWow 'wow_control_brush_bindings.c'),
-    (Join-Path $adapterWow 'wow_edit_conversion_bindings.c'),
-    (Join-Path $adapterWow 'wow_control_draw_state.c'),
-    (Join-Path $adapterWow 'wow_button_resources.c'),
-    (Join-Path $adapterWow 'wow_button_lifetime.c'),
-    (Join-Path $adapterWow 'wow_edit_entry_bindings.c'),
-    (Join-Path $adapterWow 'wow_edit_lookaside_bindings.c'),
-    (Join-Path $adapterWow 'wow_edit_native_bindings.c'),
-    (Join-Path $adapterWow 'wow_list_native_bindings.c'),
-    (Join-Path $adapterWow 'wow_edit_state_bindings.c'),
-    (Join-Path $adapterWow 'wow_control_extent_bindings.c'),
-    (Join-Path $adapterWow 'wow_edit_thread_bindings.c'),
-    (Join-Path $adapterWow 'wow_window_client_access_bindings.c'),
-    (Join-Path $adapterWow 'wow_window_client_state_bindings.c'),
+    (Join-Path $root 'src/compat/wow_dialog_call_bindings.c'),
+    (Join-Path $root 'src/compat/wow_dialog_procedure_bindings.c'),
+    (Join-Path $root 'src/compat/wow_dialog_finalization_binding.c'),
+    (Join-Path $root 'src/compat/wow_dialog_native_bindings.c'),
+    (Join-Path $root 'src/compat/wow_dialog_state_bindings.c'),
+    (Join-Path $root 'src/compat/wow_default_message_bindings.c'),
+    (Join-Path $root 'src/compat/wow_default_native_bindings.c'),
+    (Join-Path $root 'src/compat/wow_default_state_bindings.c'),
+    (Join-Path $root 'src/compat/wow_default_window_bindings.c'),
+    (Join-Path $root 'src/compat/wow_dialog_context_bindings.c'),
+    (Join-Path $root 'src/compat/wow_edit_call_bindings.c'),
+    (Join-Path $root 'src/compat/wow_control_brush_bindings.c'),
+    (Join-Path $root 'src/compat/wow_edit_conversion_bindings.c'),
+    (Join-Path $root 'src/compat/wow_control_draw_state.c'),
+    (Join-Path $root 'src/compat/wow_button_resources.c'),
+    (Join-Path $root 'src/compat/wow_button_lifetime.c'),
+    (Join-Path $root 'src/compat/wow_edit_entry_bindings.c'),
+    (Join-Path $root 'src/compat/wow_edit_lookaside_bindings.c'),
+    (Join-Path $root 'src/compat/wow_edit_native_bindings.c'),
+    (Join-Path $root 'src/compat/wow_list_native_bindings.c'),
+    (Join-Path $root 'src/compat/wow_edit_state_bindings.c'),
+    (Join-Path $root 'src/compat/wow_control_extent_bindings.c'),
+    (Join-Path $root 'src/compat/wow_edit_thread_bindings.c'),
+    (Join-Path $root 'src/compat/wow_window_client_access_bindings.c'),
+    (Join-Path $root 'src/compat/wow_window_client_state_bindings.c'),
       (Join-Path $adapterWow 'wow_hook_callback.c'),
     (Join-Path $adapterWow 'wow_timer_callback.c'),
-    (Join-Path $adapterWow 'wow_idle_hook_binding.c'),
+    (Join-Path $root 'src/compat/wow_idle_hook_binding.c'),
     (Join-Path $adapterWow 'wow_shell_callback.c'),
-    (Join-Path $adapterWow 'wow_task_cleanup_entry.c'),
-    (Join-Path $adapterWow 'wow_common_dialog_callback.c'),
+    (Join-Path $root 'src/compat/wow_task_cleanup_entry.c'),
+    (Join-Path $root 'src/compat/wow_common_dialog_callback.c'),
     (Join-Path $adapterWow 'wow_common_dialog_calls.c'),
       (Join-Path $adapterWow 'wow_message_lifetime.c'),
     (Join-Path $adapterWow 'wow_user_thunk_scope.c'),
-    (Join-Path $adapterWow 'wow_user_native_extension.c'),
+    (Join-Path $root 'src/compat/wow_user_native_extension.c'),
     (Join-Path $adapterWow 'wow_user_private_access.c'),
-    (Join-Path $adapterWow 'wow_window_creation_binding.c'),
-    (Join-Path $adapterWow 'wow_class_words_binding.c'),
+    (Join-Path $root 'src/compat/wow_window_creation_binding.c'),
+    (Join-Path $root 'src/compat/wow_class_words_binding.c'),
     (Join-Path $adapterWow 'wow_clipboard_epoch.c'),
     (Join-Path $adapterWow 'wow_ole_descriptor_binding.c'),
-    (Join-Path $adapterWow 'wow_standard_class_bindings.c'),
+    (Join-Path $root 'src/compat/wow_standard_class_bindings.c'),
     (Join-Path $adapterWow 'wow_user_registration_bridge.c'),
     (Join-Path $root 'src/non-mvdm/windows/core/ntuser/rtl/chartran.c'),
     (Join-Path $root 'src/non-mvdm/windows/core/ntuser/rtl/random.c'),
@@ -404,6 +405,9 @@ $force = '/FI "' + (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h') + '"'
 $cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $includes
 $nativeCflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT'
 $adapterCflags = $nativeCflags + ' ' + $force + ' ' + $includes
+$compatWowIncludes = ($includeRoots | Where-Object { $_ -notlike 'src/wow32-dll*' } | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '
+$compatWowCflags = $nativeCflags + ' ' + $compatWowIncludes
+
 
 $ninja = [System.Collections.Generic.List[string]]::new()
 $ninja.Add('ninja_required_version = 1.10')
@@ -413,6 +417,7 @@ $ninja.Add('release_cflags = /O2')
 $ninja.Add('cflags = ' + $cflags.Replace('\', '/'))
 $ninja.Add('wow_cflags = $cflags /DWOW_ORIGINAL_THUNK_BUILD')
 $ninja.Add('adapter_cflags = ' + $adapterCflags.Replace('\', '/'))
+$ninja.Add('compat_wow_cflags = ' + $compatWowCflags.Replace('\', '/'))
 # OpenNT ntuser/client/sources.inc and rtl/client/sources.inc select UNICODE.
 # Keep the recovered USER island distinct from original WOW32's ANSI graph.
 $ninja.Add('control_user_flags = /UANSI /DUNICODE')
@@ -455,7 +460,7 @@ foreach ($source in $sources) {
         $hardErrorBinding = if ($source -eq 'wuser.c') {' /DWOWSysErrorBox=wow_user_sys_error_box'} else {''}
         $ninja.Add('  cflags = $wow_cflags' + $hardErrorBinding)
     } elseif ($source -eq 'wkgthunk.c') {
-        $ninja.Add('  cflags = $wow_cflags /DWOW_X86_GENERIC_CALL /DWK32ICallProc32=wow_original_WK32ICallProc32 /DWOWYield16=wow_original_WOWYield16 /DWOWDirectedYield16=wow_original_WOWDirectedYield16 /DWOW_NATIVE_EXTENSION_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_user_native_extension.h')) + '"')
+        $ninja.Add('  cflags = $wow_cflags /DWOW_X86_GENERIC_CALL /DWK32ICallProc32=wow_original_WK32ICallProc32 /DWOWYield16=wow_original_WOWYield16 /DWOWDirectedYield16=wow_original_WOWDirectedYield16 /DWOW_NATIVE_EXTENSION_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/include/wow_user_native_extension.h')) + '"')
     } elseif ($source -eq 'wmmedia.c') {
         $ninja.Add('  cflags = $wow_cflags /DWMM32CallProc32=wow_original_WMM32CallProc32')
     } elseif ($source -eq 'wshell.c') {
@@ -533,7 +538,7 @@ foreach ($userOwner in @('clres', 'cldib', 'rtlinit', 'ntstubs', 'clmenu', 'clgl
     }
 }
 $objects.Add('obj/wow32-dll/wow_client_dispatch.obj')
-$ninja.Add('build obj/wow32-dll/wow_client_dispatch.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_client_dispatch.c')))
+$ninja.Add('build obj/wow32-dll/wow_client_dispatch.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_client_dispatch.c')))
 $classLookupObject = 'obj/opennt-user/class.obj'
 # Original dialog initialization and shared EDIT DS callbacks use the same
 # registered WOW table as LOCAL*. Do not replace these bodies in an adapter.
@@ -545,7 +550,7 @@ $objects.Add($dialogTemplateObject)
 $ninja.Add('build ' + $dialogTemplateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/clres.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_TEMPLATE')
 $objects.Add($dialogMemoryObject)
-$ninja.Add('build ' + $dialogMemoryObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_dialog_memory.c')))
+$ninja.Add('build ' + $dialogMemoryObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_dialog_memory.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 # Original state transitions, not replacements in the binding units. The
 # kernel ntstubs subset has its registered receive facade in the source;
@@ -565,18 +570,18 @@ $objects.Add($controlBrushClientObject)
 $ninja.Add('build ' + $controlBrushClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT')
 $objects.Add($controlBrushObject)
-$ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_control_brush.c')))
+$ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_brush.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $controlStateObject = 'obj/wow32-dll/wow_control_state.obj'
 $objects.Add($controlStateObject)
-$ninja.Add('build ' + $controlStateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_control_state.c')))
+$ninja.Add('build ' + $controlStateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_state.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $objects.Add($controlFnidObject)
-$ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_control_fnid.c')))
+$ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_fnid.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $dialogPointerObject = 'obj/wow32-dll/wow_dialog_pointer.obj'
 $objects.Add($dialogPointerObject)
-$ninja.Add('build ' + $dialogPointerObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_dialog_pointer.c')))
+$ninja.Add('build ' + $dialogPointerObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_dialog_pointer.c')))
 # This must precede global include roots: MVDM also has a precomp.h, whose
 # declarations belong to a different translation-unit contract.
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-state')) + '" $cflags $control_user_flags')
@@ -612,7 +617,7 @@ $objects.Add($privateWordSetterObject)
 $ninja.Add('build ' + $privateWordSetterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/getset.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_PRIVATE_WORD_SETTER')
 $objects.Add($defaultBitsObject)
-$ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_default_window_bits.c')))
+$ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_default_window_bits.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $defaultBordersObject = 'obj/opennt-user/default-borders.obj'
 $objects.Add($defaultBordersObject)
@@ -677,7 +682,7 @@ $ninja.Add('build ' + $taskOrderObject + ': cc ' + (ConvertTo-NinjaPath (Join-Pa
 $classClientObject = 'obj/wow32-dll/wow_class_client.obj'
 $inputGroupObject = 'obj/wow32-dll/wow_input_membership.obj'
 $objects.Add($inputGroupObject)
-$ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_input_membership.c')))
+$ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_input_membership.c')))
 $taskInitObject = 'obj/opennt-user/queue.obj'
 $profileObject = 'obj/opennt-user/profile.obj'
 $objects.Add($profileObject)
@@ -688,12 +693,12 @@ $taskRegisterObject = 'obj/opennt-user/exitwin.obj'
 $objects.Add($taskRegisterObject)
 $ninja.Add('build ' + $taskRegisterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/exitwin.c')))
 $objects.Add($classClientObject)
-$ninja.Add('build ' + $classClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $adapterWow 'wow_class_client.c')))
+$ninja.Add('build ' + $classClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_class_client.c')))
 $ninja.Add('  cflags = $cflags')
 $objects.Add($classLookupObject)
 $ninja.Add('build ' + $classLookupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/class.c')))
 foreach ($source in $providerSupportSources) {
-    $owner = if ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase)) { 'wow32-dll' } else { 'adapter-win32' }
+    $owner = if ($source.StartsWith((Join-Path $root 'src/compat'), [StringComparison]::OrdinalIgnoreCase)) { 'compat' } elseif ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase)) { 'wow32-dll' } else { 'adapter-win32' }
     $object = 'obj/' + $owner + '/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
     $supportObjects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath $source))
@@ -760,6 +765,19 @@ $ninja.Add('build legacy-wow-kernel32.lib: legacy_import_lib ' + (ConvertTo-Ninj
 $ninja.Add('build legacy-wow-ntdll.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyNtdllDefinition))
 $ninja.Add('build wow32.dll | wow32.lib: wow_dll_link ' + (($objects + $supportObjects + @($systemImportAliasObject, $parentImportAliasObject, $dllEntryBridgeObject, 'obj/wow32.res', 'legacy-wow-user32.lib', 'legacy-wow-kernel32.lib', 'legacy-wow-ntdll.lib')) -join ' ') + ' | wow32-x86.def ' + (ConvertTo-NinjaPath $parentImportLibraryPath) + ' obj/tests/wow-boundary-adapter.obj obj/tests/wow-boundary-thunk.obj')
 $ninja.Add('default wow32.dll')
+
+# Named original-layout adapters live in B; keep original per-unit ABI flags.
+$compatWowNames = @('wow_common_dialog_callback.c', 'wow_bitmap_bindings.c', 'wow_button_lifetime.c', 'wow_button_resources.c', 'wow_callback_frame_lease.c', 'wow_class_client.c', 'wow_class_client_bindings.c', 'wow_class_words_binding.c', 'wow_cleanup_bindings.c', 'wow_client_dispatch.c', 'wow_control_brush.c', 'wow_control_brush_bindings.c', 'wow_control_draw_state.c', 'wow_control_extent_bindings.c', 'wow_control_fnid.c', 'wow_control_state.c', 'wow_default_message_bindings.c', 'wow_default_native_bindings.c', 'wow_default_state_bindings.c', 'wow_default_window_bindings.c', 'wow_default_window_bits.c', 'wow_dialog_call_bindings.c', 'wow_dialog_context_bindings.c', 'wow_dialog_creation_binding.c', 'wow_dialog_finalization_binding.c', 'wow_dialog_memory.c', 'wow_dialog_native_bindings.c', 'wow_dialog_pointer.c', 'wow_dialog_procedure_bindings.c', 'wow_dialog_state_bindings.c', 'wow_edit_call_bindings.c', 'wow_edit_conversion_bindings.c', 'wow_edit_entry_bindings.c', 'wow_edit_lookaside_bindings.c', 'wow_edit_native_bindings.c', 'wow_edit_state_bindings.c', 'wow_edit_thread_bindings.c', 'wow_idle_hook_binding.c', 'wow_input_group_lifetime.c', 'wow_input_membership.c', 'wow_list_native_bindings.c', 'wow_menu_client_bindings.c', 'wow_menu_native_bindings.c', 'wow_private_user_compat.c', 'wow_standard_class_bindings.c', 'wow_task_cleanup_entry.c', 'wow_task_profile_binding.c', 'wow_user_borrow_scope.c', 'wow_user_discovery.c', 'wow_user_message_bridge.c', 'wow_user_native_extension.c', 'wow_user_object_bindings.c', 'wow_user_registration_state.c', 'wow_user_task_lifecycle.c', 'wow_window_client_access_bindings.c', 'wow_window_client_state_bindings.c', 'wow_window_creation_binding.c', 'wow_window_procedure_entry.c', 'wow_window_words_binding.c')
+for ($index = 0; $index -lt $ninja.Count; ++$index) {
+    if ($ninja[$index] -notmatch '^build .*: cc .*src/compat/([^/]+\.c)$' -or
+        $Matches[1] -notin $compatWowNames) { continue }
+    $flags = '  cflags = $compat_wow_cflags'
+    if ($index + 1 -lt $ninja.Count -and $ninja[$index + 1].StartsWith('  cflags = ')) {
+        $flags = $ninja[$index + 1].Replace('$adapter_cflags', '$compat_wow_cflags').Replace('$cflags', '$compat_wow_cflags')
+        $flags = $flags -replace '/I "[^"]*/src/wow32-dll/[^"]*"\s*', ''
+        $ninja[$index + 1] = $flags
+    } else { $ninja.Insert($index + 1, $flags) }
+}
 
 [IO.File]::WriteAllLines((Join-Path $build 'build.ninja'), $ninja, [Text.UTF8Encoding]::new($false))
 Write-Host "Generated T404 S5 WOW32 $Architecture provider graph: $build (bodies=$($sources.Count); carriers=$($headers.Count + 1); jobs=$ParallelJobs)"

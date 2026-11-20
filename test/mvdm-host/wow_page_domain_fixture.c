@@ -10,7 +10,7 @@
 /* Original header assumes its /Gz compilation environment. This CCPU
  * fixture uses /Gd; spell the existing provider ABI on that declaration. */
 #define UserRegisterWowHandlers WINAPI UserRegisterWowHandlers
-#include "wow32-dll/include/wow_shared_user_abi.h"
+#include "compat/include/wow_shared_user_abi.h"
 #undef UserRegisterWowHandlers
 #endif
 
@@ -18,15 +18,15 @@
 #include "ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 #include "compat/include/physical_mapping_host.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
-#include "wow32-dll/include/wow_user_object_bindings.h"
-#include "wow32-dll/include/wow_window_dispatch_bindings.h"
-#include "wow32-dll/include/wow_menu_client_bindings.h"
-#include "wow32-dll/include/wow_menu_native_bindings.h"
+#include "compat/include/mvdm_softpc_wow_page_domain.h"
+#include "compat/include/wow_user_object_bindings.h"
+#include "compat/include/wow_window_dispatch_bindings.h"
+#include "compat/include/wow_menu_client_bindings.h"
+#include "compat/include/wow_menu_native_bindings.h"
 #include "compat/include/wow_user_runtime.h"
-#include "wow32-dll/include/wow_cleanup_bindings.h"
-#include "wow32-dll/include/wow_user_task_lifecycle.h"
-#include "wow32-dll/include/wow_user_private_access.h"
+#include "compat/include/wow_cleanup_bindings.h"
+#include "compat/include/wow_user_task_lifecycle.h"
+#include "compat/include/wow_user_private_access.h"
 #include "compat/include/wow_gdi_alias.h"
 #include "non-mvdm/public/sdk/inc/nt.h"
 
@@ -92,21 +92,21 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #define SHARED_CLOCK_LINEAR 0x7ffe0000u
 
 #ifdef WOW_WINDOW_BORROW_FIXTURE
-#include "wow32-dll/include/wow_dialog_creation_binding.h"
-#include "wow32-dll/include/wow_window_creation_binding.h"
+#include "compat/include/wow_dialog_creation_binding.h"
+#include "compat/include/wow_window_creation_binding.h"
 #include <commctrl.h>
 #pragma comment(lib, "comctl32.lib")
 #include "compat/include/wow32_provider_private.h"
-#include "wow32-dll/include/wow_window_words_binding.h"
-#include "wow32-dll/include/wow_window_procedure_entry.h"
-#include "wow32-dll/include/wow_task_order_bindings.h"
-#include "wow32-dll/include/wow_class_client_bindings.h"
-#include "wow32-dll/include/wow_standard_class_bindings.h"
-#include "wow32-dll/include/wow_user_borrow_scope.h"
-#include "wow32-dll/include/wow_window_client_state_bindings.h"
-#include "wow32-dll/include/wow_edit_entry_bindings.h"
-#include "wow32-dll/include/wow_dialog_state_bindings.h"
-#include "wow32-dll/include/wow_edit_lookaside_bindings.h"
+#include "compat/include/wow_window_words_binding.h"
+#include "compat/include/wow_window_procedure_entry.h"
+#include "compat/include/wow_task_order_bindings.h"
+#include "compat/include/wow_class_client_bindings.h"
+#include "compat/include/wow_standard_class_bindings.h"
+#include "compat/include/wow_user_borrow_scope.h"
+#include "compat/include/wow_window_client_state_bindings.h"
+#include "compat/include/wow_edit_entry_bindings.h"
+#include "compat/include/wow_dialog_state_bindings.h"
+#include "compat/include/wow_edit_lookaside_bindings.h"
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 /* Original USER client declarations inherit /Gz in the product. */
 #define DispatchClientMessage WINAPI DispatchClientMessage
@@ -117,7 +117,7 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #undef CreateMenuFromResource
 #undef DispatchClientMessage
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
-#include "wow32-dll/include/wow_user_registered_callbacks.h"
+#include "compat/include/wow_user_registered_callbacks.h"
 #undef GetWindowBorders
 extern HANDLE WINAPI W32LocalAlloc(UINT, UINT, HANDLE);
 extern HANDLE WINAPI W32LocalReAlloc(HANDLE, UINT, UINT, HANDLE, PVOID *);

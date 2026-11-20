@@ -1,0 +1,1284 @@
+{
+  "delivery": "T483 S14 P81",
+  "baseline": "9e596b6ce18a0e5a2f5836444f3458666b4217a6",
+  "status": "Final code built, dual-published and targeted-tested; enclosing commit/push is the delivery receipt.",
+  "source_review": {
+    "priority_roots": 105,
+    "direct_reachable_F_files": 44,
+    "whole_file_F_closure": 60,
+    "source_lines": 11886,
+    "method": "Actual baseline WOW32 COFF relocation reachability followed by full selected-object refs; external library/indirect targets reviewed separately, not counted as automatically valid."
+  },
+  "migration": [
+    {
+      "old": "src/wow32-dll/source/wow_bitmap_bindings.c",
+      "new": "src/compat/wow_bitmap_bindings.c",
+      "before_sha256": "fcef55ad919e28ac93f7fd5ad4cfcc76fad9450fb79fa97180a3e077ffdd1da9",
+      "after_sha256": "5930b1c6536d2d469d492f804bdae4f842b86617e828d70fc880d954e3be574e"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_button_lifetime.c",
+      "new": "src/compat/wow_button_lifetime.c",
+      "before_sha256": "3bd06583604b8d3b68fb8310758a7fd2fe4dc9d9d61167f8b0ee3b9af734866a",
+      "after_sha256": "50fbe3182a97c87dc50927649e01d2d03cfc100a442360db30972c693bcfdf32"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_button_resources.c",
+      "new": "src/compat/wow_button_resources.c",
+      "before_sha256": "476df50c67a39f7c32bc38b6af48f592e1f2c50f40ed66df3fc3d2203969d5d8",
+      "after_sha256": "9b25bd9d87b6058c326c3961076d0c274fecd778cd4493754b998d4c382fe6e1"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_callback_frame_lease.c",
+      "new": "src/compat/wow_callback_frame_lease.c",
+      "before_sha256": "3b8e59d9cbefe7394eb81353ca7643592a5c79fc7744d105ecaed937ed7b225c",
+      "after_sha256": "d0999f364275cc9da5d5d42ba75fdabb2ef8cba67ebce378afeea8348a4a7af9"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_class_client.c",
+      "new": "src/compat/wow_class_client.c",
+      "before_sha256": "0e760bd9568b912ee92d713629afd4b9ad1c94439a913db8b86b03df3db2dbb9",
+      "after_sha256": "d3cb96fbe803444aacc26cf5a9429bba76a83ff621203dce17f74f6444f1388b"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_class_client_bindings.c",
+      "new": "src/compat/wow_class_client_bindings.c",
+      "before_sha256": "f15608df7bad679754c7bcaff4b8550cedd8389a16272d8ae6c25a6f6ca3f8ee",
+      "after_sha256": "ffb083de0cb4c106605274c16a2e5cd3a804cad2109b795daf95ee6d92f419cc"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_class_words_binding.c",
+      "new": "src/compat/wow_class_words_binding.c",
+      "before_sha256": "bb1a73851b95f5493a6b56547b49e500cdcb82eb92b5552d5d5452ccaba5e10d",
+      "after_sha256": "9608c76ac0c2cc80405503863d4fd33928485fb6b46834c97c14c9a6d3d53b2d"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_cleanup_bindings.c",
+      "new": "src/compat/wow_cleanup_bindings.c",
+      "before_sha256": "6bb3dd3d5556df3364114950a48d5517324cad0477d6cafa885b266a31150640",
+      "after_sha256": "d368d96e6ef708dcc9c3fdddf81cff87a589a716c3063250d9322a0a39905519"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_client_dispatch.c",
+      "new": "src/compat/wow_client_dispatch.c",
+      "before_sha256": "9b6ff3287e0eaae8b18bad2218488b7863ede1f3dd7c7389cb34299622f63300",
+      "after_sha256": "7004557066ab4afbb26b1a69f9e598e28f3c791df4b981dbece3a2756846f666"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_control_brush.c",
+      "new": "src/compat/wow_control_brush.c",
+      "before_sha256": "4e955efa2db53cf1f65c84fdf853d5e302cc2287a0d77fcdc2d6ff25555c36c1",
+      "after_sha256": "117aee9bb27e42c6cf9633a6d6fd7775ea797ad361b65117dd91f50f3608bea2"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_control_brush_bindings.c",
+      "new": "src/compat/wow_control_brush_bindings.c",
+      "before_sha256": "9a20472b39134c3f61b0dc7965514a9922a4ae35e24f3eed5a3e8e6cfad829e4",
+      "after_sha256": "b6d56b44f7bddb34b63833e97a03be91ba916c3e0ff8f1451ac94685c578c892"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_control_draw_state.c",
+      "new": "src/compat/wow_control_draw_state.c",
+      "before_sha256": "7487e80269c9e08081e42556b1f8e758b2d7a969046663a7491b147fcadb6cc9",
+      "after_sha256": "135da3c4a2702a198efa96adf534bd995772df0445d3f00b71d9fbfa8c81f3c3"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_control_extent_bindings.c",
+      "new": "src/compat/wow_control_extent_bindings.c",
+      "before_sha256": "30279b0635bc60aaefea9b923ad6cbde3252f0e28878456cb8860b06de7ee9d6",
+      "after_sha256": "d06f9e2f65b11bd7cbe6631227b04e87511ea544fd83bb0850e05568baf696fc"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_control_fnid.c",
+      "new": "src/compat/wow_control_fnid.c",
+      "before_sha256": "3fba58040f47d8c851548fadf5764df031d21563ff24b6a20e6e909a6c71c2d9",
+      "after_sha256": "63cf5f0a5aeb1804d5bf6384065da37a7e2fc1d598f980f656dc7138f3ab19c2"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_control_state.c",
+      "new": "src/compat/wow_control_state.c",
+      "before_sha256": "0c63a06a8b05182793db23b7b6d5a1bf2cbf0d3b9578985c2c11fb75262777a6",
+      "after_sha256": "c46ff1b43886074e3169eac5e56aa2c1231bcd5c4d2c7bfd4b6e4c350066fdbc"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_default_message_bindings.c",
+      "new": "src/compat/wow_default_message_bindings.c",
+      "before_sha256": "85d2b977eae204acc9f474db4a7f9b6fa902daeffec1b4688d314e63c4b811cd",
+      "after_sha256": "de27d881216ad8a12819ea0855e85113f2bc40ff93703c3501358ffd1cc3eafb"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_default_native_bindings.c",
+      "new": "src/compat/wow_default_native_bindings.c",
+      "before_sha256": "1f7765c4e7fcd929c1209698806dadc1b5dce72155e14d4a1da3f7aed1347630",
+      "after_sha256": "f1d71dc3ad3b20b907f538d1a586de98e0d424164b85d615e33e68c067730834"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_default_state_bindings.c",
+      "new": "src/compat/wow_default_state_bindings.c",
+      "before_sha256": "1f81054f43d1d76c429e978a43e23711841e354f91feeb7f2feb56656906af58",
+      "after_sha256": "3c7f092755c32f3e0cb35e08fb160b16e1168f52cb6caca9db5957f69e6f915a"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_default_window_bindings.c",
+      "new": "src/compat/wow_default_window_bindings.c",
+      "before_sha256": "9cef1bb568121d430450db3eb67eaf0b5929e4393456287911cbbcad120b09d4",
+      "after_sha256": "7cc736223c25dc5fdaacb12956cb29412e982a4581dc230861c31d7fe9ce4ad0"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_default_window_bits.c",
+      "new": "src/compat/wow_default_window_bits.c",
+      "before_sha256": "2cd4deda860a8361855a30078f4aa4cb62770df87a61670b4d2e3f66a71e1de5",
+      "after_sha256": "283305c9eb5b330cba27ad56e17f5327aeac73761ef60bd7d5491bb3bf3f5beb"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_dialog_call_bindings.c",
+      "new": "src/compat/wow_dialog_call_bindings.c",
+      "before_sha256": "eaf6347286772fefc4ea70b857e3b1a4c5939a022c5caf3cfb94a8d4fdfa0a11",
+      "after_sha256": "1f1d2531361d023da7157e80fcd973a3fc02b0d00958ba516b19396b19672ddc"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_dialog_context_bindings.c",
+      "new": "src/compat/wow_dialog_context_bindings.c",
+      "before_sha256": "a3fb49677acfed80dcdbffc1e0bf93a557a700100a7154c2a9bf6173dc58761f",
+      "after_sha256": "79343f5d7372ddd73f3297415bc6d8045a6a61503dcef8acc0c5acf7eef51c58"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_dialog_creation_binding.c",
+      "new": "src/compat/wow_dialog_creation_binding.c",
+      "before_sha256": "b902103de7fa958afc04971abbcf9752627d40d6cf32eb9af7b557d61cbc1e49",
+      "after_sha256": "7f72df53ef35e85101814dc0367c06e86e25ff19fc49402dc5de807750829395"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_dialog_finalization_binding.c",
+      "new": "src/compat/wow_dialog_finalization_binding.c",
+      "before_sha256": "939291b35b56fac0159da1ecbcf5a2b1cb98c3fb2df1518b7e2b84400ca37c77",
+      "after_sha256": "2be7359e4d711c8ca0051f78f1b689b7bc084cdc86955d3b08fea7a96efcfb2c"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_dialog_memory.c",
+      "new": "src/compat/wow_dialog_memory.c",
+      "before_sha256": "ce0facbd87ae1b515292ddd345218d71a8bc42a6a1ceb0e0a1bb0b78ce327845",
+      "after_sha256": "a79790fd9068a4b2c4b3319ade1fe0b5851391aee4503e0fe935018ad031089c"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "new": "src/compat/wow_dialog_native_bindings.c",
+      "before_sha256": "5e6faf9cf14336e9d1ef6ba757d36cbfcdc98385059c1869c6902a3d4a0da528",
+      "after_sha256": "d813a9b54069737d64171edc19d1a4b60735ade1aa5188b6ecdddda52c5a049f"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_dialog_pointer.c",
+      "new": "src/compat/wow_dialog_pointer.c",
+      "before_sha256": "2f3351b70696edf985d1cdf6a7bbd51451cdbf3ffbffc49fd825ee588c225114",
+      "after_sha256": "4995cd6f0c3a63a7b1f2c123d07e1635bc0ac058a0b309ed321afa2ab8e663c7"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_dialog_procedure_bindings.c",
+      "new": "src/compat/wow_dialog_procedure_bindings.c",
+      "before_sha256": "b27ecd91447057f7481eb34e6a16dacd197711d04efd7c62c7685260a200b3c0",
+      "after_sha256": "658e47e23ffc1019ea6e66b40d4cd4c461a04b8503803d0a0a8142d23b14725b"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_dialog_state_bindings.c",
+      "new": "src/compat/wow_dialog_state_bindings.c",
+      "before_sha256": "978a356b113bf8edd9bb7d765e0c66ecd08e1d19a641473ad81126683c9e3b66",
+      "after_sha256": "714212a80062bb09f5ddbee0542ecab51af2ef5374e33c89d9c78be3a071f89a"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_edit_call_bindings.c",
+      "new": "src/compat/wow_edit_call_bindings.c",
+      "before_sha256": "aae75d219ad8bac84fabc897fa73664b9db89ab68a6e7a398db534ae0599bc12",
+      "after_sha256": "09575ffd7be571bebba610e73eee58ae2a1968fd42de55ba3ea077f3807edf44"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_edit_conversion_bindings.c",
+      "new": "src/compat/wow_edit_conversion_bindings.c",
+      "before_sha256": "867ace11b51104d0ca621212f3ec70bc6e250a9ed436c1d804348286337d2ec5",
+      "after_sha256": "4855f197fc3e703ae2350891373699f7a27d97ed85732e859afc6bff03e14e1e"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_edit_entry_bindings.c",
+      "new": "src/compat/wow_edit_entry_bindings.c",
+      "before_sha256": "ec80fb7d280dbf2ec62e23788baa9d5db38e3c7fc43ef6e90150445060ba9d4a",
+      "after_sha256": "7f1f2a02e9737864f4ad74447933f57d7b63c36e3e2127eaaaa4e3d9163362fc"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_edit_lookaside_bindings.c",
+      "new": "src/compat/wow_edit_lookaside_bindings.c",
+      "before_sha256": "16f5976d897712c0f98320d2fb9094bcf8bd2e90f87a935ebe78aeb17df666b5",
+      "after_sha256": "51c1d8c5b3358a77d87d7387800c01fca38df05f17370a0e15b2cd88b5bd9f85"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_edit_native_bindings.c",
+      "new": "src/compat/wow_edit_native_bindings.c",
+      "before_sha256": "c516db57b8312ca15e6497403c01fa16d221f6e8c7ae9ae20ff9723ce2011788",
+      "after_sha256": "3152f788488f1fa5144b2c32aec0d142061794ff39e71c161a8b7792efaaca2b"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_edit_state_bindings.c",
+      "new": "src/compat/wow_edit_state_bindings.c",
+      "before_sha256": "15b3f5dc6999ee0288c6927cfa92dbbe408b952d13a2638be6ca2e3350699518",
+      "after_sha256": "6e081b6dfd4685e62855216a3765c6705c4c1f8225e54f156508fbdd035ffef1"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_edit_thread_bindings.c",
+      "new": "src/compat/wow_edit_thread_bindings.c",
+      "before_sha256": "83393f9136fa26d49cd97d246bca08507c37190c469d93e29891298cf6811ee0",
+      "after_sha256": "97c0b9e219a69e5357806b3bb9df617fc16b6b1b9934b93765477b10b074b104"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_idle_hook_binding.c",
+      "new": "src/compat/wow_idle_hook_binding.c",
+      "before_sha256": "4624ed2f65388f9c87abafe11243bcd9060b91014beb5112679cfe9ce6b55753",
+      "after_sha256": "802b0898feb17e5636365232a34980a97eff4fce9ca98a4db3d0c65f313f9fcc"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_input_group_lifetime.c",
+      "new": "src/compat/wow_input_group_lifetime.c",
+      "before_sha256": "e5309240994d9be975a42d62adb591a919fa2b18544572e0be0aa11d18b36bd4",
+      "after_sha256": "c5f67d3f1ac047b157171da376e18e6e0ce4436acaab45844dfa11f560d6a359"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_input_membership.c",
+      "new": "src/compat/wow_input_membership.c",
+      "before_sha256": "fc9f4c0981afdda83c7d7872c5b4e041be7d2b36f96a5f1560728c7fcfad3bee",
+      "after_sha256": "52ae7294c0a041d2d68689940059d2f5a4d29cf16e2c36531c63582215b41849"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_list_native_bindings.c",
+      "new": "src/compat/wow_list_native_bindings.c",
+      "before_sha256": "bb505417d5847b1a66f15554165d5c1825fbdf60f0ad010cf83afb5e7e3c3e74",
+      "after_sha256": "4b2e1ad23ffba3d0948fa5517a9ae5dc208d3c2988f7f96707e6567c43e614c8"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_menu_client_bindings.c",
+      "new": "src/compat/wow_menu_client_bindings.c",
+      "before_sha256": "dfcece3ced80a7887db1393520060aad2733f4974321439b6bfff2e8100ed225",
+      "after_sha256": "93824ebad520b834b47a98b7f1e3ff0fbbd6da171bb4df624ebbd75e23dcb12e"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_menu_native_bindings.c",
+      "new": "src/compat/wow_menu_native_bindings.c",
+      "before_sha256": "f6a4e24f5f1e7d0e65dc0e459a446b930e43fae4c2224e5f446c8b7ae31e5006",
+      "after_sha256": "6a91c2a90003c707b2568f17cfd12ba82db6d6d101148d7218f14ed81e618275"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_private_user_compat.c",
+      "new": "src/compat/wow_private_user_compat.c",
+      "before_sha256": "7d6392e71fff4fee054cb2eedec29f6ff3d711d2d849c58ac9252970c6fdd40c",
+      "after_sha256": "f697dfccac7a5c6b53f0dd0afa22bd61f281520e6bd802b32c4ed30752f44484"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_standard_class_bindings.c",
+      "new": "src/compat/wow_standard_class_bindings.c",
+      "before_sha256": "095d3975e91525c28c85679c1ca423a11f7d99cc6a57359a9db66fced1ca3764",
+      "after_sha256": "28fdf6f5ace12d70fbfc69cb066cda984dd9f536a675b9013a65057daa189a8c"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_task_cleanup_entry.c",
+      "new": "src/compat/wow_task_cleanup_entry.c",
+      "before_sha256": "ef2adedf2b33f1870d28c4f189f8c0ce7524a960433fb077cfbd28bbb2fd4cf4",
+      "after_sha256": "a4ff6d0dd708571e364c319897eb86e81523ce3ff64128c78d0d34122c09f15b"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_task_profile_binding.c",
+      "new": "src/compat/wow_task_profile_binding.c",
+      "before_sha256": "773c5babcb51fb906532a06f41397da002817d60a3dc39f5f76f05b8f9069d0b",
+      "after_sha256": "545b3e13ac3af0cf5e79199d773c7e6923eba1c655d8a6eb1b2ff9306b83127d"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_user_borrow_scope.c",
+      "new": "src/compat/wow_user_borrow_scope.c",
+      "before_sha256": "73d963bc15458fd099120f36741860aee7f1666e73bc54d72085288a6d365a79",
+      "after_sha256": "89e4256f8956b5272a4dc7186da2be775314bb796cc473e68acb3a9fe0ef7fbc"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_user_discovery.c",
+      "new": "src/compat/wow_user_discovery.c",
+      "before_sha256": "e7b7b4db0b99b9264c7ecd9dc324a06bae79d3fa9335af2c0dada9ce711cbb7f",
+      "after_sha256": "0ce117bbf92979f23d439bde27ba315b81836f939f99255df95891513ebe1af2"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_user_message_bridge.c",
+      "new": "src/compat/wow_user_message_bridge.c",
+      "before_sha256": "c04fdea79dcea3539bce7f7bae00a71a37de22032635a56ef9d1b1d346b49990",
+      "after_sha256": "3473c17dd95c09ba7eca42974be0a474c7ef52108e89133ac60cff33aa187866"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_user_native_extension.c",
+      "new": "src/compat/wow_user_native_extension.c",
+      "before_sha256": "9f63ae523d1b7ade56f16bb454966b734929db93f03190bfbde6add6d8a4d4b2",
+      "after_sha256": "1138b87932dd8e2c5df17b3b22f67d01961441bd8d2abd2b1ab1dbef402e2c65"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_user_object_bindings.c",
+      "new": "src/compat/wow_user_object_bindings.c",
+      "before_sha256": "daf780f70fae8cdffff4707ba729cb50e972d04ed769d2a814829e6fd02b6fa7",
+      "after_sha256": "48df92e387b7b00aaf4dc3ffec263103397e3335977e4cd4ea3000c4375d3b40"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "new": "src/compat/wow_user_task_lifecycle.c",
+      "before_sha256": "7b5fda305afb8b56be86c5b520407a40ee3ff3722d8d8c40debd1d4f9df5eb9f",
+      "after_sha256": "18958b27d2e19cd624f70b5ef72fae240d36dd091324bd94ba70cd14b350b2bb"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_window_client_access_bindings.c",
+      "new": "src/compat/wow_window_client_access_bindings.c",
+      "before_sha256": "a59e41958744681e972d2767a549e5fc20f77e4aa5b35c5a8f3e76e84e2c0e31",
+      "after_sha256": "140eb516e8ca016fcf25f124433da51ee512b271cc65d28db87b59c41647b9db"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_window_client_state_bindings.c",
+      "new": "src/compat/wow_window_client_state_bindings.c",
+      "before_sha256": "dc9994db7cd85dae1fb9686ebfa6eb3d81918ebab5430142c7fa1415d518cbb1",
+      "after_sha256": "2169daadd9fb34c5ccf00ed7592259edf16ecb6eacd9d54620b33e10cb58993f"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_window_creation_binding.c",
+      "new": "src/compat/wow_window_creation_binding.c",
+      "before_sha256": "5b113fcca43c7bd3f0a1285f6474a2201adb5cee90973187c5d10be0780c156a",
+      "after_sha256": "8baf3ddc8a4ed3b02a683f03e6bdad3b989bf2fe8aae943b0dc42b8730cb38e2"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_window_procedure_entry.c",
+      "new": "src/compat/wow_window_procedure_entry.c",
+      "before_sha256": "573d961d6a2446b9a099cdc46db6d80a60930daa50458abe05d485203748dfae",
+      "after_sha256": "8ead682c205c6f964926c54de425dff3db433de7645a9e4f7ec9454c9a0bd574"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_window_words_binding.c",
+      "new": "src/compat/wow_window_words_binding.c",
+      "before_sha256": "675e1788bf08c89578c3ae2a3285d724069ed00d1a835250460c05cf83908ab8",
+      "after_sha256": "0292281941f3a1423f2c5f708b2146d4b7ea8adc02ee4e6c28542d8487a45dd3"
+    },
+    {
+      "old": "src/wow32-dll/include/opennt_user_multipass.h",
+      "new": "src/compat/include/opennt_user_multipass.h",
+      "before_sha256": "8fe9802fc558dc2c5e133eab1502d08a8d3022532dcf9c5ea9af62816372b02c",
+      "after_sha256": "8fe9802fc558dc2c5e133eab1502d08a8d3022532dcf9c5ea9af62816372b02c"
+    },
+    {
+      "old": "src/wow32-dll/include/opennt_usercli_multipass.h",
+      "new": "src/compat/include/opennt_usercli_multipass.h",
+      "before_sha256": "cd4f0102b8c36016acd099a825f2e7fda32944e6346da364bb900f5fc0fb23d8",
+      "after_sha256": "cd4f0102b8c36016acd099a825f2e7fda32944e6346da364bb900f5fc0fb23d8"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_bitmap_bindings.h",
+      "new": "src/compat/include/wow_bitmap_bindings.h",
+      "before_sha256": "0a7ca0b711fb6503a134304dfe976cdba385c8cd907d182239686f7d39148df4",
+      "after_sha256": "0a7ca0b711fb6503a134304dfe976cdba385c8cd907d182239686f7d39148df4"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_button_lifetime.h",
+      "new": "src/compat/include/wow_button_lifetime.h",
+      "before_sha256": "96d131fcfd0541789c11e38ae0fdce779abbdb4cdc2ace3a8aaa3982f526735f",
+      "after_sha256": "96d131fcfd0541789c11e38ae0fdce779abbdb4cdc2ace3a8aaa3982f526735f"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_button_resources.h",
+      "new": "src/compat/include/wow_button_resources.h",
+      "before_sha256": "f02788f612497118b37d8bb43de915c387337990ec4a7880de3575ce33e63321",
+      "after_sha256": "fdaee8aad5656f1d2a8de0ce083569a9003b189d46cfcce0cc7b1abf205cb112"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_callback_frame_lease.h",
+      "new": "src/compat/include/wow_callback_frame_lease.h",
+      "before_sha256": "9068eb5b7d5276a8433c1b55a057888736398708f8f31d0268d85d32ac3e1c79",
+      "after_sha256": "2c408cf1530045acebe8e971806f9dccbd5027192b068160d05b4136d7baf069"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_class_client_bindings.h",
+      "new": "src/compat/include/wow_class_client_bindings.h",
+      "before_sha256": "6c06a6c9b09aab52c48473ca54e82f2b4b5777e9015490d26538273fd08a3c1d",
+      "after_sha256": "6c06a6c9b09aab52c48473ca54e82f2b4b5777e9015490d26538273fd08a3c1d"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_class_register_bindings.h",
+      "new": "src/compat/include/wow_class_register_bindings.h",
+      "before_sha256": "f88aca85b5a89c25e9c90d88b402598e613bd1d674c15e1119949bb5834d4f84",
+      "after_sha256": "f88aca85b5a89c25e9c90d88b402598e613bd1d674c15e1119949bb5834d4f84"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_class_remove_bindings.h",
+      "new": "src/compat/include/wow_class_remove_bindings.h",
+      "before_sha256": "67822c8c4c3a1b489bfdb3ead050e8b69aa211b7e82e785e2efc49a89f99937f",
+      "after_sha256": "67822c8c4c3a1b489bfdb3ead050e8b69aa211b7e82e785e2efc49a89f99937f"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_class_words_binding.h",
+      "new": "src/compat/include/wow_class_words_binding.h",
+      "before_sha256": "f8bc46c4c1c16b684e0df96908d965a71d3db28440e09edc64399265c27456c0",
+      "after_sha256": "46a0f7749191df709a3873ea1a577dd702e5ba6db0901edb2f75e270435206a1"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_cleanup_bindings.h",
+      "new": "src/compat/include/wow_cleanup_bindings.h",
+      "before_sha256": "d940a7fdc7bba51b14c0c5c29194f2e4f6a7bfe5bc01dec8dab60e05b38a4948",
+      "after_sha256": "d940a7fdc7bba51b14c0c5c29194f2e4f6a7bfe5bc01dec8dab60e05b38a4948"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_control_brush_bindings.h",
+      "new": "src/compat/include/wow_control_brush_bindings.h",
+      "before_sha256": "8345a1fb178bbed48329d8a19bba82bf1ea5b8fa113324bea573264881466744",
+      "after_sha256": "8345a1fb178bbed48329d8a19bba82bf1ea5b8fa113324bea573264881466744"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_control_draw_state.h",
+      "new": "src/compat/include/wow_control_draw_state.h",
+      "before_sha256": "2c68c39a5febf354d13a26aea6d494cd6558859bc535820b4c9ca0ac58d5ef99",
+      "after_sha256": "2c68c39a5febf354d13a26aea6d494cd6558859bc535820b4c9ca0ac58d5ef99"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_control_extent_bindings.h",
+      "new": "src/compat/include/wow_control_extent_bindings.h",
+      "before_sha256": "0fc2bcdb8a34e02e318988247710aae9fc41e8161ac3003f4f7101640532edf7",
+      "after_sha256": "0fc2bcdb8a34e02e318988247710aae9fc41e8161ac3003f4f7101640532edf7"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_default_message_bindings.h",
+      "new": "src/compat/include/wow_default_message_bindings.h",
+      "before_sha256": "4c8f5ab54cdb291f9e66eb8bf8c2bc5bcc5fee9f9833b3824622a1f0eb0a147b",
+      "after_sha256": "c82fbec409346e9fcbda8afeb1959f17e215fbb0d6e0f1afd849969b84c02498"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_default_window_bindings.h",
+      "new": "src/compat/include/wow_default_window_bindings.h",
+      "before_sha256": "bcff55a2d847f80381f099efc1e317a3c992b53f8c202b42d821c448a402d563",
+      "after_sha256": "bcff55a2d847f80381f099efc1e317a3c992b53f8c202b42d821c448a402d563"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_dialog_api_bindings.h",
+      "new": "src/compat/include/wow_dialog_api_bindings.h",
+      "before_sha256": "76c23486ff419c90585cbeef9fdbb18b61183eb977804798f83b2e33be18eb81",
+      "after_sha256": "76c23486ff419c90585cbeef9fdbb18b61183eb977804798f83b2e33be18eb81"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_dialog_context_bindings.h",
+      "new": "src/compat/include/wow_dialog_context_bindings.h",
+      "before_sha256": "4f04dc4760418e8126e61d97c1fa3f6baa78dd76bb19cacd0e27dcd25f32c100",
+      "after_sha256": "4f04dc4760418e8126e61d97c1fa3f6baa78dd76bb19cacd0e27dcd25f32c100"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_dialog_creation_binding.h",
+      "new": "src/compat/include/wow_dialog_creation_binding.h",
+      "before_sha256": "77df72a5dbf4d974b4066aea3ab25df95dc9067d67242f5f14c0dd671f67b84a",
+      "after_sha256": "77df72a5dbf4d974b4066aea3ab25df95dc9067d67242f5f14c0dd671f67b84a"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_dialog_native_bindings.h",
+      "new": "src/compat/include/wow_dialog_native_bindings.h",
+      "before_sha256": "ca1f13dd8661a8ea7983428e91b0bb3b7f598972ec3833a790ec8cd248fef257",
+      "after_sha256": "ef10ff33f9bb7e0f546ecb51a17868972c26af8e7d47b7f9b386fc0815ff8273"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_dialog_procedure_bindings.h",
+      "new": "src/compat/include/wow_dialog_procedure_bindings.h",
+      "before_sha256": "ef65321ce45c175fa92f07bd6623836359f327063ea5fa5891a71c6d2d21927f",
+      "after_sha256": "ef65321ce45c175fa92f07bd6623836359f327063ea5fa5891a71c6d2d21927f"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_dialog_state_bindings.h",
+      "new": "src/compat/include/wow_dialog_state_bindings.h",
+      "before_sha256": "b8ebaeca1fcc57d94d3adb576eae0a55094d033beae41bb0b76d664fb7017b77",
+      "after_sha256": "14a5cf64f7672e12fa30e575f02f8fd67ac6984a75819e4d9f788f7bf5e04205"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_edit_call_bindings.h",
+      "new": "src/compat/include/wow_edit_call_bindings.h",
+      "before_sha256": "684739f82bf323af544af3250162c81e76d925e4d12472a434ab8e8c90aa69b4",
+      "after_sha256": "35fc344c4bd7463a1f737049970605b22e28bd120753c680be69c9fdb14d9319"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_edit_conversion_bindings.h",
+      "new": "src/compat/include/wow_edit_conversion_bindings.h",
+      "before_sha256": "14bfbd9f0af9507749f1c9bcdff77ffe3600849815f1051260432104f568f554",
+      "after_sha256": "14bfbd9f0af9507749f1c9bcdff77ffe3600849815f1051260432104f568f554"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_edit_drawing_bindings.h",
+      "new": "src/compat/include/wow_edit_drawing_bindings.h",
+      "before_sha256": "8b6fa430e51c5b46c0512cfb4da0000a18c9954dd321c1aaa8eeaa92e115fd5f",
+      "after_sha256": "8b6fa430e51c5b46c0512cfb4da0000a18c9954dd321c1aaa8eeaa92e115fd5f"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_edit_entry_bindings.h",
+      "new": "src/compat/include/wow_edit_entry_bindings.h",
+      "before_sha256": "c153aa62da9e4332fd476c78183ac4e49f78b89276ce9e8b37ee9731ba780f0d",
+      "after_sha256": "c153aa62da9e4332fd476c78183ac4e49f78b89276ce9e8b37ee9731ba780f0d"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_edit_lookaside_bindings.h",
+      "new": "src/compat/include/wow_edit_lookaside_bindings.h",
+      "before_sha256": "cb6245e2afd5cfe453168bb974c73343268b572e3f9dfc14c57be5a23de71baf",
+      "after_sha256": "810e85481ad0065ae727057e851e01395c5d53ba0cf4f772e70406d5b3fa8f28"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_edit_memory_bindings.h",
+      "new": "src/compat/include/wow_edit_memory_bindings.h",
+      "before_sha256": "8d4db19c0ee552ce3bc3f3cb270ad6cec80c173a3e8f6bac5efa31dcdd1c00c4",
+      "after_sha256": "8d4db19c0ee552ce3bc3f3cb270ad6cec80c173a3e8f6bac5efa31dcdd1c00c4"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_edit_menu_bindings.h",
+      "new": "src/compat/include/wow_edit_menu_bindings.h",
+      "before_sha256": "b1a14ea9515bb3e50f9ff2f58eb60148ad0b8d012368431ad3d45b6c5dc0170d",
+      "after_sha256": "b1a14ea9515bb3e50f9ff2f58eb60148ad0b8d012368431ad3d45b6c5dc0170d"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_edit_native_bindings.h",
+      "new": "src/compat/include/wow_edit_native_bindings.h",
+      "before_sha256": "ced9b3cd4e1773b88dea082933a84131edd754790564ce1a1ba5879da4186ac7",
+      "after_sha256": "977f90fec223faf253242e67b606841fc32e9f24a551306a64109f42f4b2e384"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_edit_state_bindings.h",
+      "new": "src/compat/include/wow_edit_state_bindings.h",
+      "before_sha256": "f38d5072fea91a5876854a89b1bceb34ea7b71f44af37dd9f15e5b91b25dda84",
+      "after_sha256": "36f668c18f041545ef91030c760bdf23bcbd9e2089b860148b831e2f43c3594f"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_idle_hook_binding.h",
+      "new": "src/compat/include/wow_idle_hook_binding.h",
+      "before_sha256": "3b0301d329468ff52cb2673d93854a3a32f164b4b9c6172be4f7a3cd940c8210",
+      "after_sha256": "3b0301d329468ff52cb2673d93854a3a32f164b4b9c6172be4f7a3cd940c8210"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_input_group_bindings.h",
+      "new": "src/compat/include/wow_input_group_bindings.h",
+      "before_sha256": "6e8fe391ec23741c504e739701a04bb94c15f5bb47104a97545752164326673e",
+      "after_sha256": "6e8fe391ec23741c504e739701a04bb94c15f5bb47104a97545752164326673e"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_input_group_lifetime.h",
+      "new": "src/compat/include/wow_input_group_lifetime.h",
+      "before_sha256": "570cd98210fd0edeefa1b0ad3e721073156c4050fab3334d2e4a73660ee2c226",
+      "after_sha256": "570cd98210fd0edeefa1b0ad3e721073156c4050fab3334d2e4a73660ee2c226"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_list_native_bindings.h",
+      "new": "src/compat/include/wow_list_native_bindings.h",
+      "before_sha256": "e639bf6d634bd7bdc3f4df3ef2b5bc2c76307b666f5006f17fcd83f43360a095",
+      "after_sha256": "e639bf6d634bd7bdc3f4df3ef2b5bc2c76307b666f5006f17fcd83f43360a095"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_menu_client_bindings.h",
+      "new": "src/compat/include/wow_menu_client_bindings.h",
+      "before_sha256": "3a2175e9e9ef9cbcab7dc86a219092e6a7b986f8ab399bb9d6c45f529083a97b",
+      "after_sha256": "3a2175e9e9ef9cbcab7dc86a219092e6a7b986f8ab399bb9d6c45f529083a97b"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_menu_native_bindings.h",
+      "new": "src/compat/include/wow_menu_native_bindings.h",
+      "before_sha256": "3707db93ad9c6aa53604712210acadf202126855b0e501ce644348092863df51",
+      "after_sha256": "3707db93ad9c6aa53604712210acadf202126855b0e501ce644348092863df51"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_menu_parser_bindings.h",
+      "new": "src/compat/include/wow_menu_parser_bindings.h",
+      "before_sha256": "f54a2788dd9f90c602db3b08e4b6d6357ef7b3f30b84149b0e7f0ceeae2e0a25",
+      "after_sha256": "f54a2788dd9f90c602db3b08e4b6d6357ef7b3f30b84149b0e7f0ceeae2e0a25"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_menu_resource_bindings.h",
+      "new": "src/compat/include/wow_menu_resource_bindings.h",
+      "before_sha256": "5d11c9cc839082caf93e19e3a63b9217c638117a81f86a425eacba47ad7ce297",
+      "after_sha256": "5d11c9cc839082caf93e19e3a63b9217c638117a81f86a425eacba47ad7ce297"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_native_gui_thread.h",
+      "new": "src/compat/include/wow_native_gui_thread.h",
+      "before_sha256": "1185abe4e1a832c2bfffed53620d7d1544ab0140160c7c2b8702b0110de7f4a7",
+      "after_sha256": "1185abe4e1a832c2bfffed53620d7d1544ab0140160c7c2b8702b0110de7f4a7"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_native_text_descriptor.h",
+      "new": "src/compat/include/wow_native_text_descriptor.h",
+      "before_sha256": "1a90ffcea299b42a31d0fb9c58098c8cad092f5b9f080db2e91b7e44302b5321",
+      "after_sha256": "b02dea195a4a0f35f9609929f3b21055aca12d6070d1d186b8053b8ed17d896f"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_private_user_compat.h",
+      "new": "src/compat/include/wow_private_user_compat.h",
+      "before_sha256": "4fdfaf97ee49bb8ec33f602b0c8c0c1c6370aa46c703af78bf1cb4f742123a42",
+      "after_sha256": "4fdfaf97ee49bb8ec33f602b0c8c0c1c6370aa46c703af78bf1cb4f742123a42"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_shared_user_abi.h",
+      "new": "src/compat/include/wow_shared_user_abi.h",
+      "before_sha256": "ef6349a24434eef9185118ad728e20e1334e052439847180dacc3e7e141fc39b",
+      "after_sha256": "ef6349a24434eef9185118ad728e20e1334e052439847180dacc3e7e141fc39b"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_standard_class_bindings.h",
+      "new": "src/compat/include/wow_standard_class_bindings.h",
+      "before_sha256": "af1227e81e998674db9861cba8b570151d1e9731d585fc6965c54ae3bc18881f",
+      "after_sha256": "af1227e81e998674db9861cba8b570151d1e9731d585fc6965c54ae3bc18881f"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_task_cleanup_entry.h",
+      "new": "src/compat/include/wow_task_cleanup_entry.h",
+      "before_sha256": "968bae786a85d8d6173ddc9f271ee9c940966d93b94c9180fd5e2f80a7f41b7e",
+      "after_sha256": "968bae786a85d8d6173ddc9f271ee9c940966d93b94c9180fd5e2f80a7f41b7e"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_task_init_bindings.h",
+      "new": "src/compat/include/wow_task_init_bindings.h",
+      "before_sha256": "ac7d1f8c2070ae07e82277013380955ed363569893d2169e545b99c2595c25bd",
+      "after_sha256": "ac7d1f8c2070ae07e82277013380955ed363569893d2169e545b99c2595c25bd"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_task_order_bindings.h",
+      "new": "src/compat/include/wow_task_order_bindings.h",
+      "before_sha256": "ec4b60321ef646e8b1bdd8a3ac2a5d2a6fae0ca0b221ccccf2f0266cedb2ecac",
+      "after_sha256": "ec4b60321ef646e8b1bdd8a3ac2a5d2a6fae0ca0b221ccccf2f0266cedb2ecac"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_task_profile_bindings.h",
+      "new": "src/compat/include/wow_task_profile_bindings.h",
+      "before_sha256": "702ef5ae1c07557afe8e9f162b1961453d66b1377d4bde44b5dcf80efcba1583",
+      "after_sha256": "702ef5ae1c07557afe8e9f162b1961453d66b1377d4bde44b5dcf80efcba1583"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_user_borrow_scope.h",
+      "new": "src/compat/include/wow_user_borrow_scope.h",
+      "before_sha256": "420ad63d6a5a86f0d2c44ffc8eb6063de79135c69a9592053b10dc5718222538",
+      "after_sha256": "420ad63d6a5a86f0d2c44ffc8eb6063de79135c69a9592053b10dc5718222538"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_user_capture_bindings.h",
+      "new": "src/compat/include/wow_user_capture_bindings.h",
+      "before_sha256": "843682131b8054cfbfce6a9f81df26248fd9824bd359ed9310b0cc2fe9273529",
+      "after_sha256": "843682131b8054cfbfce6a9f81df26248fd9824bd359ed9310b0cc2fe9273529"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_user_client_view_layout.h",
+      "new": "src/compat/include/wow_user_client_view_layout.h",
+      "before_sha256": "db410bac67ce2d3aac62dc7d4c1fd43a362abcb0f7a48687a7f91ca39e0e4c27",
+      "after_sha256": "047d728faf804702316bae9c34357f406fbfca5f448cbb6624de2539b46c2075"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_user_message_bridge.h",
+      "new": "src/compat/include/wow_user_message_bridge.h",
+      "before_sha256": "f59052e610aafa839613792dc1ef7aade03ac915ab03a3f678aa6eeb32829ea4",
+      "after_sha256": "f59052e610aafa839613792dc1ef7aade03ac915ab03a3f678aa6eeb32829ea4"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_user_native_call.h",
+      "new": "src/compat/include/wow_user_native_call.h",
+      "before_sha256": "849c5fa603c9cbe977af9db3dadb08a96fc2d5343497d13b8f091a5b4575b5c1",
+      "after_sha256": "849c5fa603c9cbe977af9db3dadb08a96fc2d5343497d13b8f091a5b4575b5c1"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_user_native_extension.h",
+      "new": "src/compat/include/wow_user_native_extension.h",
+      "before_sha256": "5ae3d36993ceeeb64436f9c99cff1b103d306c4aebd5fde8fed28949f41e11b2",
+      "after_sha256": "5ae3d36993ceeeb64436f9c99cff1b103d306c4aebd5fde8fed28949f41e11b2"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_user_object_bindings.h",
+      "new": "src/compat/include/wow_user_object_bindings.h",
+      "before_sha256": "5df96c8164665fbfa479b3a911d1c2634d85d9c7b05257d81c6c39c42637dc3b",
+      "after_sha256": "7a0efb7cbc15245b8e992f0d2f1208f4eff34b2ec0ebaba868499ef520a453dc"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_user_private_access.h",
+      "new": "src/compat/include/wow_user_private_access.h",
+      "before_sha256": "ccf852c9136512b36fc5a83a4b355c1f19e118ebb0bd00a736f65664205da4b8",
+      "after_sha256": "ccf852c9136512b36fc5a83a4b355c1f19e118ebb0bd00a736f65664205da4b8"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_user_registered_callbacks.h",
+      "new": "src/compat/include/wow_user_registered_callbacks.h",
+      "before_sha256": "703759802a7b73e5a484715a9f765d05e0bfe4b23cac4e9fda5e4a4330e9c425",
+      "after_sha256": "703759802a7b73e5a484715a9f765d05e0bfe4b23cac4e9fda5e4a4330e9c425"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_user_task_lifecycle.h",
+      "new": "src/compat/include/wow_user_task_lifecycle.h",
+      "before_sha256": "170c97d7fcf0e49729e78482018d78f7601b0fa7b234e5f1b31abecab165b3a1",
+      "after_sha256": "170c97d7fcf0e49729e78482018d78f7601b0fa7b234e5f1b31abecab165b3a1"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_window_client_state_bindings.h",
+      "new": "src/compat/include/wow_window_client_state_bindings.h",
+      "before_sha256": "e5189ce658990a27048c164a2c9863bab30976e94a249605c5836d9dd6595b77",
+      "after_sha256": "e5189ce658990a27048c164a2c9863bab30976e94a249605c5836d9dd6595b77"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_window_creation_binding.h",
+      "new": "src/compat/include/wow_window_creation_binding.h",
+      "before_sha256": "5430732f813482a6e077fc305628c707c981ef8a4da913a973d1674fa7a44943",
+      "after_sha256": "5430732f813482a6e077fc305628c707c981ef8a4da913a973d1674fa7a44943"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_window_dispatch_bindings.h",
+      "new": "src/compat/include/wow_window_dispatch_bindings.h",
+      "before_sha256": "948eab9363aa929e3c3afb6b28df937833ca4b87b6a27f819704c40e5a38eee6",
+      "after_sha256": "948eab9363aa929e3c3afb6b28df937833ca4b87b6a27f819704c40e5a38eee6"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_window_procedure_entry.h",
+      "new": "src/compat/include/wow_window_procedure_entry.h",
+      "before_sha256": "e92197a7b6b7e13b264d92991049459eddae29f3e5273661a3e820f66c0aebfd",
+      "after_sha256": "e92197a7b6b7e13b264d92991049459eddae29f3e5273661a3e820f66c0aebfd"
+    },
+    {
+      "old": "src/wow32-dll/include/wow_window_words_binding.h",
+      "new": "src/compat/include/wow_window_words_binding.h",
+      "before_sha256": "edb61d4ed197fb035f3849923be9a92065cfafa4e09a191a228f263cc08bce49",
+      "after_sha256": "edb61d4ed197fb035f3849923be9a92065cfafa4e09a191a228f263cc08bce49"
+    },
+    {
+      "old": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
+      "new": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "before_sha256": "03ad5e51beea96af5d4eb6b620c8d955b4224d9c2d97a041a31d8cb424d2df1d",
+      "after_sha256": "2fe6255ca5085f3a5695024042fa6ccc85845a9167339ce980aa381643a82f7d"
+    },
+    {
+      "old": "src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h",
+      "new": "src/compat/include/mvdm_softpc_wow_page_domain.h",
+      "before_sha256": "0bcb56eeca450d4eb1dadcf8319eacd5700f45bdd2960bfd30c39f628749fa56",
+      "after_sha256": "56399db4202b70517268aa0f57aa1173c73dd52b3fb5ec888af6f01a67cf861b"
+    },
+    {
+      "old": "src/common/wow/page_domain.h",
+      "new": "src/compat/include/wow_page_domain.h",
+      "before_sha256": "b2da29969635a90890de52895708863339fe78389235cd8d86fe8b4da3c9379f",
+      "after_sha256": "b2da29969635a90890de52895708863339fe78389235cd8d86fe8b4da3c9379f"
+    },
+    {
+      "old": "src/ntvdm-exe/debugger/source/dbg_registers.c",
+      "new": "src/compat/dbg_registers.c",
+      "before_sha256": "cea5590a740d2bbe2b699914e5b4d6e3e14047e84657fa11a04916f13c63c55b",
+      "after_sha256": "3e61083b599611a8d4c76c0299191e80c9b31e7e8bdb5ce0c5644e629f9a86df"
+    },
+    {
+      "old": "src/wow32-dll/source/wow_common_dialog_callback.c",
+      "new": "src/compat/wow_common_dialog_callback.c",
+      "before_sha256": "7f74375ff12e04f359a5571521c556b75131ddf86527bf1f14ddb4e6c084fe1a",
+      "after_sha256": "9e4725d67dda293daaa098fd7a3d003262e3c8d052f825ed4890a993dda61be7"
+    }
+  ],
+  "single_state": {
+    "registration": "One B callback table and lifecycle; F obtains existing lifecycle through accessor. No copy, duplicate scheduler or TLS.",
+    "page_domain": "Actual storage, epoch, projection and release implementation moves from F to B with CCPU/SAS dependencies; window/class release callbacks must resolve to migrated B owners.",
+    "debug": "Entire original-layout adapter including register/read/broadcast/bootstrap/exchange/retire state moves as one unit. SAS copy provider is already C."
+  },
+  "retained_F": [
+    "wow_user_registration_bridge.c: initialization/startup/shell registration composition",
+    "wow_task_start_notification.c: request notification",
+    "wow_launch_identity.c: separate-launch classification"
+  ],
+  "ledger": {
+    "excluded-diagnostic": 1,
+    "open": 171,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "eliminated": 397
+  },
+  "verification": {
+    "build5": 0,
+    "deliver": 0,
+    "tests4": 0,
+    "final_checks3": 0,
+    "final_checks_contract": "22 published hashes, documentation governance, relative links and git diff --check passed; documented current-status size warning only."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "d66aa061-9bc9-4698-9be9-d985ff13c94e",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "eliminated_ids": [
+    "C0015",
+    "C0045",
+    "C0072",
+    "C0078",
+    "C0079",
+    "C0081",
+    "C0087",
+    "C0095",
+    "C0105",
+    "C0108",
+    "C0109",
+    "C0116",
+    "C0117",
+    "C0118",
+    "C0121",
+    "C0122",
+    "C0123",
+    "C0124",
+    "C0125",
+    "C0129",
+    "C0246",
+    "C0247",
+    "C0249",
+    "C0322",
+    "C0323",
+    "C0324",
+    "C0325",
+    "C0326",
+    "C0327",
+    "C0330",
+    "C0331",
+    "C0332",
+    "C0334",
+    "C0335",
+    "C0336",
+    "C0344",
+    "C0345",
+    "C0346",
+    "C0347",
+    "C0348",
+    "C0350",
+    "C0351",
+    "C0352",
+    "C0353",
+    "C0354",
+    "C0355",
+    "C0356",
+    "C0357",
+    "C0358",
+    "C0359",
+    "C0360",
+    "C0361",
+    "C0362",
+    "C0363",
+    "C0364",
+    "C0365",
+    "C0366",
+    "C0367",
+    "C0368",
+    "C0369",
+    "C0372",
+    "C0373",
+    "C0374",
+    "C0378",
+    "C0380",
+    "C0381",
+    "C0383",
+    "C0384",
+    "C0385",
+    "C0386",
+    "C0387",
+    "C0388",
+    "C0389",
+    "C0390",
+    "C0391",
+    "C0392",
+    "C0400",
+    "C0403",
+    "C0404",
+    "C0405",
+    "C0406",
+    "C0407",
+    "C0408",
+    "C0409",
+    "C0410",
+    "C0411",
+    "C0412",
+    "C0413",
+    "C0414",
+    "C0415",
+    "C0416",
+    "C0417",
+    "C0418",
+    "C0419",
+    "C0420",
+    "C0421",
+    "C0422",
+    "C0433",
+    "C0457",
+    "C0465",
+    "C0466",
+    "C0467",
+    "C0468",
+    "C0469",
+    "C0470",
+    "C0471",
+    "C0472",
+    "C0473",
+    "C0474",
+    "C0475",
+    "C0476",
+    "C0477",
+    "C0478",
+    "C0479",
+    "C0480",
+    "C0481",
+    "C0482",
+    "C0483",
+    "C0484",
+    "C0485",
+    "C0486",
+    "C0487",
+    "C0488",
+    "C0498",
+    "C0499",
+    "C0501",
+    "C0502",
+    "C0504",
+    "C0505",
+    "C0506",
+    "C0507",
+    "C0508",
+    "C0509",
+    "C0510",
+    "C0511",
+    "C0512",
+    "C0513",
+    "C0514",
+    "C0515",
+    "C0516",
+    "C0517",
+    "C0518",
+    "C0519",
+    "C0520",
+    "C0521",
+    "C0522",
+    "C0523",
+    "C0524",
+    "C0525",
+    "C0526",
+    "C0527",
+    "C0529",
+    "C0532",
+    "C0533",
+    "C0534",
+    "C0536",
+    "C0537",
+    "C0538",
+    "C0539",
+    "C0540",
+    "C0542",
+    "C0543",
+    "C0544",
+    "C0545",
+    "C0546",
+    "C0548",
+    "C0549",
+    "C0550",
+    "C0551",
+    "C0553",
+    "C0554",
+    "C0555",
+    "C0556",
+    "C0557",
+    "C0558",
+    "C0559",
+    "C0560",
+    "C0561",
+    "C0562",
+    "C0563",
+    "C0564",
+    "C0565",
+    "C0566",
+    "C0568",
+    "C0569",
+    "C0570",
+    "C0571",
+    "C0572",
+    "C0573",
+    "C0574",
+    "C0575",
+    "C0576",
+    "C0577",
+    "C0578",
+    "C0579",
+    "C0580",
+    "C0581",
+    "C0582",
+    "C0583",
+    "C0585",
+    "C0586",
+    "C0590",
+    "C0591",
+    "C0592",
+    "C0593",
+    "C0594",
+    "C0595",
+    "C0596",
+    "C0597",
+    "C0598",
+    "C0599",
+    "C0614",
+    "C0615"
+  ],
+  "eliminated_kinds": {
+    "header": 20,
+    "symbol": 193
+  },
+  "mirror": {
+    "baseline": "9e596b6ce18a0e5a2f5836444f3458666b4217a6",
+    "method": "Fixed-original line-opcode comparison, including exclusions for before/after equality only; excluded text and all error/line directives unchanged. Thus non-exclusion delta is also zero. This is not a recount of the global lexical tracker.",
+    "rows": [
+      {
+        "file": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+        "before": {
+          "points": 49,
+          "lines": 182
+        },
+        "after": {
+          "points": 49,
+          "lines": 182
+        },
+        "error_line_unchanged": true,
+        "sha256": "7a3d40ec5dc38a26a6663d915aaa45d2595d8baa2bd92588d782e5f3d0f49fef"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+        "before": {
+          "points": 45,
+          "lines": 732
+        },
+        "after": {
+          "points": 45,
+          "lines": 732
+        },
+        "error_line_unchanged": true,
+        "sha256": "6cb878b9f54dc893850d6edd537a9770cd22a00a8eef3c8828876c4bac2b3fd0"
+      },
+      {
+        "file": "src/mvdm-host/wow32/wuman.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuman.c",
+        "before": {
+          "points": 10,
+          "lines": 42
+        },
+        "after": {
+          "points": 10,
+          "lines": 42
+        },
+        "error_line_unchanged": true,
+        "sha256": "d21ce649b05847b7f38099b174725da00df4648ca5d989c91e26af50bd06cfdc"
+      },
+      {
+        "file": "src/mvdm-host/wow32/wuser.c",
+        "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser.c",
+        "before": {
+          "points": 19,
+          "lines": 174
+        },
+        "after": {
+          "points": 19,
+          "lines": 174
+        },
+        "error_line_unchanged": true,
+        "sha256": "b4ba632106fa3371aab318357e98681dda4f898ef12a544346f4f7e9685a2293"
+      }
+    ],
+    "non_error_delta_points": 0,
+    "non_error_delta_lines": 0
+  },
+  "compiled_ownership": {
+    "objects": 61,
+    "relocations": 1327,
+    "resolved_outer_edges": 0,
+    "counts": {
+      "compat": 524,
+      "link runtime or unresolved carrier": 168,
+      "non-mvdm": 54,
+      "system import": 509,
+      "mvdm-host": 68,
+      "not selected in final link": 4
+    },
+    "original_registration_callbacks": [
+      {
+        "slot": "pfnLocalAlloc",
+        "symbol": "W32LocalAlloc",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfnLocalReAlloc",
+        "symbol": "W32LocalReAlloc",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfnLocalLock",
+        "symbol": "W32LocalLock",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfnLocalUnlock",
+        "symbol": "W32LocalUnlock",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfnLocalSize",
+        "symbol": "W32LocalSize",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfnLocalFree",
+        "symbol": "W32LocalFree",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfnGetExpWinVer",
+        "symbol": "W32GetExpWinVer",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfnInitDlgCb",
+        "symbol": "W32InitDlg",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfn16GlobalAlloc",
+        "symbol": "W32GlobalAlloc16",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfn16GlobalFree",
+        "symbol": "W32GlobalFree16",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfnEmptyCB",
+        "symbol": "W32EmptyClipboard",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wuclip.c",
+        "module": "wuclip.obj"
+      },
+      {
+        "slot": "pfnFindResourceEx",
+        "symbol": "W32FindResource",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wres32.c",
+        "module": "wres32.obj"
+      },
+      {
+        "slot": "pfnLoadResource",
+        "symbol": "W32LoadResource",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wres32.c",
+        "module": "wres32.obj"
+      },
+      {
+        "slot": "pfnFreeResource",
+        "symbol": "W32FreeResource",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wres32.c",
+        "module": "wres32.obj"
+      },
+      {
+        "slot": "pfnLockResource",
+        "symbol": "W32LockResource",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wres32.c",
+        "module": "wres32.obj"
+      },
+      {
+        "slot": "pfnUnlockResource",
+        "symbol": "W32UnlockResource",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wres32.c",
+        "module": "wres32.obj"
+      },
+      {
+        "slot": "pfnSizeofResource",
+        "symbol": "W32SizeofResource",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wres32.c",
+        "module": "wres32.obj"
+      },
+      {
+        "slot": "pfnWowWndProcEx",
+        "symbol": "W32Win16WndProcEx",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wmdisp32.c",
+        "module": "wmdisp32.obj"
+      },
+      {
+        "slot": "pfnWowEditNextWord",
+        "symbol": "W32EditNextWord",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wcall32.c",
+        "module": "wcall32.obj"
+      },
+      {
+        "slot": "pfnWowSetFakeDialogClass",
+        "symbol": "SetFakeDialogClass",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wumsg.c",
+        "module": "wumsg.obj"
+      },
+      {
+        "slot": "pfnWowCBStoreHandle",
+        "symbol": "WU32ICBStoreHandle",
+        "kind": "mvdm-host",
+        "source": "src/mvdm-host/wow32/wuclip.c",
+        "module": "wuclip.obj"
+      }
+    ],
+    "report_sha256": "43906e4be2c625b8a6e04dbaf1a456d08918c4399f99090472f2370cef9973a5",
+    "scope": "Final production COFF/link maps; CRT/TLS carriers and unselected references are distinct from resolved project providers. Runtime tests supplement this static evidence."
+  },
+  "test_receipts": {
+    "stdout_sha256": {
+      "tests3": "acd97ebb7d233322d0afad8f38eea85a0adf185acf02096868cfbdfe00a8ca4c",
+      "tests4": "1d85886ef4224b89e1aa3727a0cc10c01a3e345228d91f66a090ff7414d92efa"
+    },
+    "passed_markers": [
+      "WOW_FIXTURE_OK case=task-lifecycle",
+      "WOW_FIXTURE_OK case=init-notification",
+      "WOW_FIXTURE_OK case=start-notification",
+      "WOW_FIXTURE_OK case=native-nested",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK",
+      "WOW_FIXTURE_OK case=page-domain",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK",
+      "WOW_FIXTURE_OK case=window-borrow",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK",
+      "WOW_FIXTURE_OK case=class-procedure",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK",
+      "WOW_FIXTURE_OK case=menu-resource"
+    ],
+    "earlier_failures": "tests1/tests2 failed on test-only outer header dependencies; tests3 passed all eight main cases then failed on the terminal fault fixture NT type include. Test command template now declares its F dependency, scope fault source explicitly includes nt.h. tests4 reruns the terminal case and remaining integration/gates. Production B flags unchanged.",
+    "terminal_exit": 0,
+    "terminal_markers": [
+      "WOW_TERMINAL_GRAPH_BEFORE_RETIRE errors=0 root_live=1 no_mutation=1 count_copy=1",
+      "WOW_TERMINAL_SCHEDULE errors=0 first_phase=1 held=2 unheld=0 retired=1 resource_thread=1",
+      "WOW_TERMINAL_METADATA_ONLY errors=0 task_cleanup_closed=1 retired=1",
+      "WOW_TERMINAL_RETIRED_NOOP errors=0 accepted=1 cleanup_scope_closed=1",
+      "WOW_REAL_DIALOG_SCOPE errors=0 callback_reject=1 capture_exception=1 exact_production_finally=1 cache_restored=1 context_restored=1 owner_restored=1",
+      "WOW_REAL_DIALOG_ROLLBACK errors=0 cases=4 physical_free=1 publications=2 vetoes=2 no_app_callback=1",
+      "WOW_REAL_DIALOG_RESOURCE_OWNER errors=0 normal_consume=1 exit_invoke=1 conflict_rejected=1 reentrant_once=1",
+      "WOW_REAL_DIALOG_LIFECYCLE errors=0 init=3 terminal=2 nested=1 exception_local=1 callback_cache=1 pdlg_retired=1 dying_callback_denied=1"
+    ],
+    "real_guest": "WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+    "ccpu": {
+      "ccpu-high-linear-page-test": "SIM32_FLUSH_CONTRACT_OK ram=1 missing_scratch=1 paired_write=1 stale_overwrite=1 count_not_extent=1\nCCPU_REGISTER_VIEWS_AX_AL_AH_IP_EIP_CF_OK\nDOS_LOW_PAGE_ALIAS_COUNTEREXAMPLE_OK original_wrong=1 lease_correct=1\nCCPU_SAS_PROVIDER_PREFLIGHT_NO_PARTIAL_WRITE_OK\nCCPU_LEASE_RESOURCE_OWNERSHIP_OK\nCCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK\n",
+      "debug-register-binding-test": "WOW_DEBUG_CONTEXT_LIFECYCLE_OK alloc_failure=1 bootstrap_rollback=1 broadcast=1 inheritance=1 pending=1 reuse=1\nS38_DEBUG_BINDING_CHECKED_SPAN_REGISTER_ORDER_OK\n",
+      "ccpu-halt-reset-test": ""
+    }
+  },
+  "evidence_root": "build/t483-s14-user-batch"
+}

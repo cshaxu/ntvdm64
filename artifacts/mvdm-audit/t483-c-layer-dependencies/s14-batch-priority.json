@@ -3,165 +3,12 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 384,
+    "open": 171,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 184
+    "eliminated": 397
   },
   "provider_groups": [
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_user_task_lifecycle.c",
-      "open_ids": [
-        "C0506",
-        "C0507",
-        "C0508",
-        "C0509",
-        "C0510",
-        "C0511",
-        "C0512",
-        "C0513",
-        "C0514",
-        "C0515",
-        "C0516",
-        "C0517",
-        "C0518",
-        "C0519",
-        "C0520",
-        "C0521",
-        "C0522",
-        "C0523",
-        "C0524",
-        "C0525",
-        "C0526",
-        "C0527",
-        "C0529",
-        "C0532",
-        "C0533",
-        "C0534",
-        "C0536",
-        "C0537",
-        "C0538",
-        "C0539",
-        "C0540",
-        "C0542",
-        "C0543",
-        "C0544",
-        "C0545",
-        "C0546",
-        "C0548",
-        "C0549",
-        "C0550",
-        "C0551",
-        "C0553",
-        "C0554",
-        "C0555",
-        "C0556",
-        "C0557",
-        "C0558",
-        "C0559",
-        "C0560",
-        "C0561",
-        "C0562",
-        "C0563",
-        "C0564",
-        "C0565",
-        "C0566",
-        "C0568",
-        "C0569",
-        "C0570",
-        "C0571",
-        "C0572",
-        "C0573",
-        "C0574",
-        "C0575",
-        "C0576",
-        "C0577",
-        "C0578",
-        "C0579",
-        "C0580",
-        "C0581",
-        "C0582",
-        "C0583",
-        "C0585",
-        "C0586"
-      ],
-      "count": 72,
-      "symbols": [
-        "wow_native_ArrangeIconicWindows",
-        "wow_native_BeginPaint",
-        "wow_native_BringWindowToTop",
-        "wow_native_CallMsgFilterA",
-        "wow_native_CallMsgFilterW",
-        "wow_native_CallNextHookEx",
-        "wow_native_CloseWindow",
-        "wow_native_CreateCaret",
-        "wow_native_DefDlgProcA",
-        "wow_native_DefFrameProcA",
-        "wow_native_DefMDIChildProcA",
-        "wow_native_DefWindowProcA",
-        "wow_native_DeferWindowPos",
-        "wow_native_DestroyCaret",
-        "wow_native_DestroyWindow",
-        "wow_native_DispatchMessageA",
-        "wow_native_DispatchMessageW",
-        "wow_native_DragDetect",
-        "wow_native_EnableScrollBar",
-        "wow_native_EnableWindow",
-        "wow_native_EndDeferWindowPos",
-        "wow_native_EndPaint",
-        "wow_native_FlashWindow",
-        "wow_native_GetDC",
-        "wow_native_GetDCEx",
-        "wow_native_GetParent",
-        "wow_native_GetScrollPos",
-        "wow_native_GetScrollRange",
-        "wow_native_GetUpdateRect",
-        "wow_native_GetUpdateRgn",
-        "wow_native_GetWindowDC",
-        "wow_native_GetWindowTextA",
-        "wow_native_GetWindowTextLengthA",
-        "wow_native_GetWindowTextW",
-        "wow_native_HideCaret",
-        "wow_native_InvalidateRect",
-        "wow_native_MoveWindow",
-        "wow_native_OpenIcon",
-        "wow_native_RedrawWindow",
-        "wow_native_ReleaseCapture",
-        "wow_native_ScrollWindow",
-        "wow_native_ScrollWindowEx",
-        "wow_native_SendMessageA",
-        "wow_native_SendMessageTimeoutA",
-        "wow_native_SendMessageW",
-        "wow_native_SetActiveWindow",
-        "wow_native_SetCapture",
-        "wow_native_SetCaretPos",
-        "wow_native_SetCursor",
-        "wow_native_SetCursorPos",
-        "wow_native_SetDlgItemTextW",
-        "wow_native_SetFocus",
-        "wow_native_SetForegroundWindow",
-        "wow_native_SetParent",
-        "wow_native_SetScrollInfo",
-        "wow_native_SetScrollPos",
-        "wow_native_SetScrollRange",
-        "wow_native_SetWindowContextHelpId",
-        "wow_native_SetWindowPlacement",
-        "wow_native_SetWindowPos",
-        "wow_native_SetWindowTextA",
-        "wow_native_SetWindowTextW",
-        "wow_native_SetWindowWord",
-        "wow_native_ShowCaret",
-        "wow_native_ShowCursor",
-        "wow_native_ShowOwnedPopups",
-        "wow_native_ShowScrollBar",
-        "wow_native_ShowWindow",
-        "wow_native_UpdateWindow",
-        "wow_native_ValidateRect",
-        "wow_user_idle_hook_for_current",
-        "wow_user_msg_wait"
-      ]
-    },
     {
       "kind": "symbol",
       "provider": "src/ntvdm-exe/win32/console_client.c",
@@ -221,94 +68,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_menu_native_bindings.c",
-      "open_ids": [
-        "C0403",
-        "C0404",
-        "C0405",
-        "C0406",
-        "C0407",
-        "C0408",
-        "C0409",
-        "C0410",
-        "C0411",
-        "C0412",
-        "C0413",
-        "C0414",
-        "C0415",
-        "C0416",
-        "C0417",
-        "C0418",
-        "C0419",
-        "C0420",
-        "C0421",
-        "C0422"
-      ],
-      "count": 20,
-      "symbols": [
-        "wow_menu_native_AppendMenuA",
-        "wow_menu_native_ChangeMenuA",
-        "wow_menu_native_CheckMenuItem",
-        "wow_menu_native_CreateMenu",
-        "wow_menu_native_CreatePopupMenu",
-        "wow_menu_native_DeleteMenu",
-        "wow_menu_native_DestroyMenu",
-        "wow_menu_native_DrawMenuBar",
-        "wow_menu_native_EnableMenuItem",
-        "wow_menu_native_GetMenu",
-        "wow_menu_native_GetSystemMenu",
-        "wow_menu_native_HiliteMenuItem",
-        "wow_menu_native_InsertMenuA",
-        "wow_menu_native_InsertMenuItemW",
-        "wow_menu_native_ModifyMenuA",
-        "wow_menu_native_RemoveMenu",
-        "wow_menu_native_SetMenu",
-        "wow_menu_native_SetMenuItemBitmaps",
-        "wow_menu_native_TrackPopupMenu",
-        "wow_menu_native_TrackPopupMenuEx"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_user_discovery.c",
-      "open_ids": [
-        "C0466",
-        "C0467",
-        "C0468",
-        "C0469",
-        "C0470",
-        "C0471",
-        "C0472",
-        "C0473",
-        "C0474",
-        "C0475",
-        "C0476",
-        "C0477",
-        "C0478",
-        "C0479",
-        "C0480"
-      ],
-      "count": 15,
-      "symbols": [
-        "wow_native_ChildWindowFromPoint",
-        "wow_native_EnumChildWindows",
-        "wow_native_EnumPropsA",
-        "wow_native_EnumThreadWindows",
-        "wow_native_EnumWindows",
-        "wow_native_FindWindowA",
-        "wow_native_GetActiveWindow",
-        "wow_native_GetCapture",
-        "wow_native_GetFocus",
-        "wow_native_GetForegroundWindow",
-        "wow_native_GetLastActivePopup",
-        "wow_native_GetNextDlgGroupItem",
-        "wow_native_GetNextDlgTabItem",
-        "wow_native_GetWindowThreadProcessId",
-        "wow_native_WindowFromPoint"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/ntvdm-exe/win32/console_compat.c",
       "open_ids": [
         "C0290",
@@ -341,26 +100,14 @@
       "provider": "src/wow32-dll/source/wow_user_registration_bridge.c",
       "open_ids": [
         "C0497",
-        "C0498",
-        "C0499",
         "C0500",
-        "C0501",
-        "C0502",
-        "C0503",
-        "C0504",
-        "C0505"
+        "C0503"
       ],
-      "count": 9,
+      "count": 3,
       "symbols": [
         "UserRegisterWowHandlers",
-        "wow_user_call_window_procA",
-        "wow_user_get_messageA",
         "wow_user_notify_startup_noop",
-        "wow_user_peek_messageA",
-        "wow_user_peek_messageW",
-        "wow_user_register_wow_exec",
-        "wow_user_registered_callbacks",
-        "wow_user_wait_message"
+        "wow_user_register_wow_exec"
       ]
     },
     {
@@ -413,29 +160,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_edit_call_bindings.c",
-      "open_ids": [
-        "C0383",
-        "C0384",
-        "C0385",
-        "C0386",
-        "C0387",
-        "C0388",
-        "C0389"
-      ],
-      "count": 7,
-      "symbols": [
-        "wow_edit_FillWindow",
-        "wow_edit_NtUserDefSetText",
-        "wow_edit_NtUserGetControlColor",
-        "wow_edit_alter_window_style",
-        "wow_edit_client_info",
-        "wow_edit_control_extent",
-        "wow_list_reset_double_click"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/wow32-dll/source/wow_message_lifetime.c",
       "open_ids": [
         "C0423",
@@ -459,48 +183,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_dialog_finalization_binding.c",
-      "open_ids": [
-        "C0364",
-        "C0365",
-        "C0366",
-        "C0367",
-        "C0368",
-        "C0369"
-      ],
-      "count": 6,
-      "symbols": [
-        "wow_user_dlg_dir_listA",
-        "wow_user_dlg_dir_list_comboA",
-        "wow_user_dlg_dir_selectA",
-        "wow_user_dlg_dir_select_comboA",
-        "wow_user_end_dialog",
-        "wow_user_map_dialog_rect"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_user_native_extension.c",
-      "open_ids": [
-        "C0481",
-        "C0482",
-        "C0483",
-        "C0484",
-        "C0485",
-        "C0486"
-      ],
-      "count": 6,
-      "symbols": [
-        "CallBack16",
-        "WK32ICallProc32",
-        "WMM32CallProc32",
-        "wow_extension_free_library",
-        "wow_extension_get_proc_address",
-        "wow_extension_load_library_a"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/ntvdm-exe/win32/console_graphics.c",
       "open_ids": [
         "C0300",
@@ -520,44 +202,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_button_lifetime.c",
-      "open_ids": [
-        "C0323",
-        "C0324",
-        "C0325",
-        "C0326",
-        "C0327"
-      ],
-      "count": 5,
-      "symbols": [
-        "wow_button_atlas_blit",
-        "wow_button_current_resources",
-        "wow_button_free_state",
-        "wow_button_scope_enter",
-        "wow_button_scope_leave"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_window_client_state_bindings.c",
-      "open_ids": [
-        "C0593",
-        "C0594",
-        "C0595",
-        "C0596",
-        "C0597"
-      ],
-      "count": 5,
-      "symbols": [
-        "wow_window_client_context_help",
-        "wow_window_client_desktop",
-        "wow_window_client_owns_state",
-        "wow_window_client_validate_window",
-        "wow_window_client_validate_window_no_rip"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/run16-exe/main.c",
       "open_ids": [
         "C0609",
@@ -571,40 +215,6 @@
         "BaseDotExeSuffixName",
         "BaseDotPifSuffixName",
         "CsrPortHeap"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_control_draw_state.c",
-      "open_ids": [
-        "C0345",
-        "C0346",
-        "C0347",
-        "C0348"
-      ],
-      "count": 4,
-      "symbols": [
-        "wow_control_atlas_blit",
-        "wow_control_draw_current",
-        "wow_control_draw_select",
-        "wow_control_draw_state"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_dialog_call_bindings.c",
-      "open_ids": [
-        "C0359",
-        "C0360",
-        "C0361",
-        "C0362"
-      ],
-      "count": 4,
-      "symbols": [
-        "wow_dialog_set_pointer_word",
-        "wow_dialog_set_system_menu",
-        "wow_dialog_set_thread_state",
-        "wow_dialog_zap_active_and_focus"
       ]
     },
     {
@@ -686,21 +296,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c",
-      "open_ids": [
-        "C0246",
-        "C0247",
-        "C0249"
-      ],
-      "count": 3,
-      "symbols": [
-        "mvdm_softpc_wow_page_domain_activate_wow_context",
-        "mvdm_softpc_wow_page_domain_enter",
-        "mvdm_softpc_wow_page_domain_publish_cursor"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/ntvdm-exe/win32/worker_lifecycle.c",
       "open_ids": [
         "C0317",
@@ -727,73 +322,6 @@
         "mvdm_redirector_cd_name_target",
         "mvdm_redirector_copy_ansi_to_guest",
         "mvdm_redirector_copy_wide_to_guest"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_common_dialog_callback.c",
-      "open_ids": [
-        "C0334",
-        "C0335",
-        "C0336"
-      ],
-      "count": 3,
-      "symbols": [
-        "WCD32DialogProc",
-        "WCD32FindReplaceDialogProc",
-        "WCD32PrintSetupDialogProc"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_default_window_bindings.c",
-      "open_ids": [
-        "C0356",
-        "C0357",
-        "C0358"
-      ],
-      "count": 3,
-      "symbols": [
-        "wow_default_current",
-        "wow_default_window_proc",
-        "wow_edit_default_control_color"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_dialog_memory.c",
-      "open_ids": [
-        "C0372",
-        "C0373",
-        "C0374"
-      ],
-      "count": 3,
-      "symbols": [
-        "GetEditDS",
-        "ReleaseEditDS",
-        "WOWDlgInit"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_dialog_native_bindings.c",
-      "open_ids": [],
-      "count": 0,
-      "symbols": []
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_dialog_procedure_bindings.c",
-      "open_ids": [
-        "C0378",
-        "C0380",
-        "C0381"
-      ],
-      "count": 3,
-      "symbols": [
-        "wow_dialog_host_call",
-        "wow_dialog_host_initialize",
-        "wow_dialog_host_notify"
       ]
     },
     {
@@ -828,21 +356,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_window_client_access_bindings.c",
-      "open_ids": [
-        "C0590",
-        "C0591",
-        "C0592"
-      ],
-      "count": 3,
-      "symbols": [
-        "wow_window_client_send_message",
-        "wow_window_client_set_window_long",
-        "xxxSetWindowData"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/ntsrv-exe/opennt/source/base_process.c",
       "open_ids": [
         "C0166",
@@ -853,13 +366,6 @@
         "CsrLockProcessByClientId",
         "CsrUnlockProcess"
       ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c",
-      "open_ids": [],
-      "count": 0,
-      "symbols": []
     },
     {
       "kind": "symbol",
@@ -889,58 +395,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_bitmap_bindings.c",
-      "open_ids": [
-        "C0322",
-        "C0614"
-      ],
-      "count": 2,
-      "symbols": [
-        "wow_bitmap_current",
-        "wow_bitmap_lock"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_cleanup_bindings.c",
-      "open_ids": [
-        "C0331",
-        "C0332"
-      ],
-      "count": 2,
-      "symbols": [
-        "wow_cleanup_set_class_procedure",
-        "wow_cleanup_set_window_procedure"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_control_state.c",
-      "open_ids": [
-        "C0351",
-        "C0352"
-      ],
-      "count": 2,
-      "symbols": [
-        "ClearWindowState",
-        "SetWindowState"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_default_native_bindings.c",
-      "open_ids": [
-        "C0353",
-        "C0354"
-      ],
-      "count": 2,
-      "symbols": [
-        "wow_default_CsSendMessage",
-        "wow_default_find_nc_hit"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/wow32-dll/source/wow_dialog_keyboard_binding.c",
       "open_ids": [
         "C0370",
@@ -953,54 +407,13 @@
       ]
     },
     {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_edit_entry_bindings.c",
-      "open_ids": [
-        "C0391",
-        "C0392"
-      ],
-      "count": 2,
-      "symbols": [
-        "wow_control_set_timer",
-        "wow_edit_current"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_user_object_bindings.c",
-      "open_ids": [
-        "C0487",
-        "C0488"
-      ],
-      "count": 2,
-      "symbols": [
-        "wow_user_window_public_guest_handle",
-        "wow_user_window_public_handle"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_window_creation_binding.c",
-      "open_ids": [
-        "C0598",
-        "C0599"
-      ],
-      "count": 2,
-      "symbols": [
-        "wow_control_create_window_ex",
-        "wow_user_create_dialog_window_ex"
-      ]
-    },
-    {
       "kind": "image-import",
       "provider": "ntvdm.exe",
       "open_ids": [
         "C0134"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "include-root",
@@ -1009,9 +422,7 @@
         "C0135"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1020,9 +431,7 @@
         "C0002"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1031,9 +440,7 @@
         "C0003"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1042,9 +449,7 @@
         "C0004"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1053,9 +458,7 @@
         "C0005"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "symbol",
@@ -1075,9 +478,7 @@
         "C0006"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1086,20 +487,7 @@
         "C0012"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/common/wow/page_domain.h",
-      "open_ids": [
-        "C0015"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1108,9 +496,7 @@
         "C0016"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "include-root",
@@ -1119,9 +505,7 @@
         "C0136"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1130,9 +514,7 @@
         "C0020"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1141,9 +523,7 @@
         "C0022"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "symbol",
@@ -1185,9 +565,7 @@
         "C0141"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "include-root",
@@ -1196,9 +574,7 @@
         "C0142"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1207,9 +583,7 @@
         "C0030"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1218,9 +592,7 @@
         "C0031"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1229,9 +601,7 @@
         "C0032"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1240,9 +610,7 @@
         "C0033"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1251,9 +619,7 @@
         "C0043"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1262,20 +628,7 @@
         "C0044"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h",
-      "open_ids": [
-        "C0045"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "symbol",
@@ -1328,9 +681,7 @@
         "C0049"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1339,9 +690,7 @@
         "C0050"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "symbol",
@@ -1394,9 +743,7 @@
         "C0052"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1405,9 +752,7 @@
         "C0053"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1416,9 +761,7 @@
         "C0054"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1427,9 +770,7 @@
         "C0055"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1438,9 +779,7 @@
         "C0057"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "include-root",
@@ -1449,9 +788,7 @@
         "C0145"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1460,9 +797,7 @@
         "C0058"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "symbol",
@@ -1482,9 +817,7 @@
         "C0060"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "include-root",
@@ -1493,9 +826,7 @@
         "C0146"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "include-root",
@@ -1504,9 +835,7 @@
         "C0147"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1515,9 +844,7 @@
         "C0062"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "include-root",
@@ -1526,9 +853,7 @@
         "C0148"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1537,9 +862,7 @@
         "C0064"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "include-root",
@@ -1548,9 +871,7 @@
         "C0149"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1559,9 +880,7 @@
         "C0065"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "include-root",
@@ -1570,9 +889,7 @@
         "C0150"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1581,9 +898,7 @@
         "C0066"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "include-root",
@@ -1592,9 +907,7 @@
         "C0151"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1603,20 +916,7 @@
         "C0067"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_bitmap_bindings.h",
-      "open_ids": [
-        "C0072"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1625,42 +925,7 @@
         "C0077"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_class_register_bindings.h",
-      "open_ids": [
-        "C0078"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_class_remove_bindings.h",
-      "open_ids": [
-        "C0079"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_cleanup_bindings.h",
-      "open_ids": [
-        "C0081"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1669,9 +934,7 @@
         "C0082"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1680,64 +943,7 @@
         "C0083"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_default_message_bindings.h",
-      "open_ids": [
-        "C0087"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_edit_call_bindings.h",
-      "open_ids": [
-        "C0095"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_idle_hook_binding.h",
-      "open_ids": [
-        "C0105"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_menu_parser_bindings.h",
-      "open_ids": [
-        "C0108"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_menu_resource_bindings.h",
-      "open_ids": [
-        "C0109"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1746,9 +952,7 @@
         "C0110"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1757,9 +961,7 @@
         "C0112"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1768,42 +970,7 @@
         "C0113"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_task_init_bindings.h",
-      "open_ids": [
-        "C0116"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_task_order_bindings.h",
-      "open_ids": [
-        "C0117"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_task_profile_bindings.h",
-      "open_ids": [
-        "C0118"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1812,64 +979,7 @@
         "C0119"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_user_capture_bindings.h",
-      "open_ids": [
-        "C0121"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_user_client_view_layout.h",
-      "open_ids": [
-        "C0122"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_user_native_extension.h",
-      "open_ids": [
-        "C0123"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_user_object_bindings.h",
-      "open_ids": [
-        "C0124"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_user_private_access.h",
-      "open_ids": [
-        "C0125"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
+      "symbols": []
     },
     {
       "kind": "header",
@@ -1878,31 +988,7 @@
         "C0128"
       ],
       "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_window_client_state_bindings.h",
-      "open_ids": [
-        "C0129"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_class_words_binding.c",
-      "open_ids": [
-        "C0330"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_class_words_find_atom"
-      ]
+      "symbols": []
     },
     {
       "kind": "symbol",
@@ -1917,83 +1003,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_control_brush_bindings.c",
-      "open_ids": [
-        "C0344"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_control_brush"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_control_fnid.c",
-      "open_ids": [
-        "C0350"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_edit_set_window_fnid"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_default_message_bindings.c",
-      "open_ids": [
-        "C0615"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_default_message_state"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_default_state_bindings.c",
-      "open_ids": [
-        "C0355"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_default_ensure_shell_message"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_dialog_context_bindings.c",
-      "open_ids": [
-        "C0363"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_dialog_current"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_edit_conversion_bindings.c",
-      "open_ids": [
-        "C0390"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_edit_CsSendMessage"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_edit_thread_bindings.c",
-      "open_ids": [
-        "C0400"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_edit_window_thread_id"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/wow32-dll/source/wow_hook_callback.c",
       "open_ids": [
         "C0401"
@@ -2001,17 +1010,6 @@
       "count": 1,
       "symbols": [
         "WU32StdHookProc"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_private_user_compat.c",
-      "open_ids": [
-        "C0433"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_user_load_menu_indirect"
       ]
     },
     {
@@ -2038,17 +1036,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_task_cleanup_entry.c",
-      "open_ids": [
-        "C0457"
-      ],
-      "count": 1,
-      "symbols": [
-        "W32FreeTask"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/wow32-dll/source/wow_timer_callback.c",
       "open_ids": [
         "C0464"
@@ -2057,143 +1044,27 @@
       "symbols": [
         "W32TimerFunc"
       ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_user_borrow_scope.c",
-      "open_ids": [
-        "C0465"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_user_borrow_named_class"
-      ]
     }
   ],
   "priority_batches": [
     {
       "name": "WOW native call, discovery and menu execution boundary",
-      "ids": [
-        "C0403",
-        "C0404",
-        "C0405",
-        "C0406",
-        "C0407",
-        "C0408",
-        "C0409",
-        "C0410",
-        "C0411",
-        "C0412",
-        "C0413",
-        "C0414",
-        "C0415",
-        "C0416",
-        "C0417",
-        "C0418",
-        "C0419",
-        "C0420",
-        "C0421",
-        "C0422",
-        "C0466",
-        "C0467",
-        "C0468",
-        "C0469",
-        "C0470",
-        "C0471",
-        "C0472",
-        "C0473",
-        "C0474",
-        "C0475",
-        "C0476",
-        "C0477",
-        "C0478",
-        "C0479",
-        "C0480",
-        "C0506",
-        "C0507",
-        "C0508",
-        "C0509",
-        "C0510",
-        "C0511",
-        "C0512",
-        "C0513",
-        "C0514",
-        "C0515",
-        "C0516",
-        "C0517",
-        "C0518",
-        "C0519",
-        "C0520",
-        "C0521",
-        "C0522",
-        "C0523",
-        "C0524",
-        "C0525",
-        "C0526",
-        "C0527",
-        "C0529",
-        "C0532",
-        "C0533",
-        "C0534",
-        "C0536",
-        "C0537",
-        "C0538",
-        "C0539",
-        "C0540",
-        "C0542",
-        "C0543",
-        "C0544",
-        "C0545",
-        "C0546",
-        "C0548",
-        "C0549",
-        "C0550",
-        "C0551",
-        "C0553",
-        "C0554",
-        "C0555",
-        "C0556",
-        "C0557",
-        "C0558",
-        "C0559",
-        "C0560",
-        "C0561",
-        "C0562",
-        "C0563",
-        "C0564",
-        "C0565",
-        "C0566",
-        "C0568",
-        "C0569",
-        "C0570",
-        "C0571",
-        "C0572",
-        "C0573",
-        "C0574",
-        "C0575",
-        "C0576",
-        "C0577",
-        "C0578",
-        "C0579",
-        "C0580",
-        "C0581",
-        "C0582",
-        "C0583"
-      ],
-      "potential_direct_ids": 105,
+      "ids": [],
+      "potential_direct_ids": 0,
       "providers": [
         "src/wow32-dll/source/wow_user_task_lifecycle.c",
         "src/wow32-dll/source/wow_user_discovery.c",
         "src/wow32-dll/source/wow_menu_native_bindings.c"
       ],
       "evidence": "70 USER API wrappers share native-call entry/exit and handle publication;15 discovery APIs and20 menu APIs share runtime entry/exit and projected USER identity. Move the real scheduler/publication ownership, not just these wrappers. Two idle/wait APIs need a separate lifecycle disposition.",
-      "status": "105 remaining roots after P74 original property/region restoration; complete scheduler/projection ownership and mirror cost remain pending.",
+      "status": "P81 USER/page-domain batch verified; see s14-user-batch-owner.json",
       "count_rule": "Potential IDs, not eliminated IDs. Helpers, headers and callback edges are not added as speculative extra savings.",
       "ownership_evidence": "s14-wow-native-batch-ownership.json",
-      "next_gate": "Measure complete scheduler/resource/projection relocation; not a three-file copy. Runtime unbind outward callback and EXE/DLL singleton are confirmed prerequisites.",
+      "next_gate": "Continue remaining ledger chains; no remaining root in this batch.",
       "compiled_closure_evidence": "s14-native-batch-relocations.json",
       "reachable_F_objects": 44,
-      "shared_failure_provider": "P73 moves actual terminal failure/diagnostic bodies to B;109/111 baseline roots reach that provider. Root IDs remain open."
+      "shared_failure_provider": "P73 moves actual terminal failure/diagnostic bodies to B;109/111 baseline roots reach that provider. Root IDs remain open.",
+      "verified_eliminated_ids": 105
     },
     {
       "name": "Console routing and graphics mechanics",
@@ -2275,7 +1146,7 @@
       "verified_eliminated_ids": 13
     }
   ],
-  "next_action": "Continue the105-root scheduler/projection closure under existing layers; remove disproved wrappers instead of moving them. Independent B implementation migrations remain prerequisites, not closure.",
-  "not_done": "105 roots remain open. P68/P71 deliver independent resource/capture mechanisms; concrete C scheduler/projection carriers and mirror-cost measurement remain.",
-  "updated_by": "T483 S14 P80"
+  "next_action": "Prioritize remaining complete implementation chains by actual dependency removal; current open ledger has171 IDs.",
+  "not_done": "171 direct dependencies remain; this delivery is not overall C outward dependency closure.",
+  "updated_by": "T483 S14 P81"
 }

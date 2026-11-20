@@ -32,32 +32,32 @@ function NinjaValue([string]$value) { return $value.Replace('\', '/').Replace('$
 $messageFaults = '/FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/wow_default_messages_faults.h')) + '"'
 $units = @(
     @('control_fnid_fixture', 'test/wow32-dll/source/wow_control_fnid_fixture.c', ''),
-    @('control_fnid_owner', 'src/wow32-dll/source/wow_control_fnid.c', ''),
+    @('control_fnid_owner', 'src/compat/wow_control_fnid.c', ''),
     @('default_messages_fixture', 'test/adapter-mvdm-host-out/wow/wow_default_messages_fixture.c', ''),
     @('default_messages_tables', 'src/non-mvdm/windows/core/ntuser/kernel/server.c', $messageFaults),
-    @('default_messages_state', 'src/wow32-dll/source/wow_default_message_bindings.c', $messageFaults),
+    @('default_messages_state', 'src/compat/wow_default_message_bindings.c', $messageFaults),
     @('profile_fixture', 'test/adapter-mvdm-host-out/wow/wow_task_profile_fixture.c', ''),
     @('profile_existing_fixture', 'test/adapter-mvdm-host-out/wow/wow_task_profile_fixture.c', '/DWOW_PROFILE_EXISTING_KEY'),
     @('profile_owner', 'src/non-mvdm/windows/core/ntuser/kernel/profile.c', ''),
-    @('profile_binding', 'src/wow32-dll/source/wow_task_profile_binding.c', ''),
+    @('profile_binding', 'src/compat/wow_task_profile_binding.c', ''),
     @('profile_native', 'src/compat/wow_profile_native.c', ''),
     @('capture_fixture', 'test/adapter-mvdm-host-out/wow/wow_user_capture_fixture.c', ''),
     @('capture_owner', 'src/non-mvdm/windows/core/ntuser/client/rtlinit.c', '/Gy'),
     @('capture_tls', 'src/compat/opennt_support_rtl.c', '/Gy'),
     @('def_bits_fixture', 'test/adapter-mvdm-host-out/wow/wow_def_window_bits_fixture.c', ''),
-    @('def_bits_owner', 'src/wow32-dll/source/wow_default_window_bits.c', ''),
-    @('def_bits_boundary', 'src/wow32-dll/source/wow_private_user_compat.c', '/Gy'),
+    @('def_bits_owner', 'src/compat/wow_default_window_bits.c', ''),
+    @('def_bits_boundary', 'src/compat/wow_private_user_compat.c', '/Gy'),
     @('def_bits_tables', 'src/non-mvdm/windows/core/ntuser/kernel/server.c', ''),
-    @('def_bits_state', 'src/wow32-dll/source/wow_default_message_bindings.c', ''),
+    @('def_bits_state', 'src/compat/wow_default_message_bindings.c', ''),
     @('original_globals', 'src/non-mvdm/windows/core/ntuser/client/clglobal.c', ''),
     @('lookaside_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_lookaside_fixture.c', ''),
-    @('lookaside_adapter', 'src/wow32-dll/source/wow_edit_lookaside_bindings.c', ''),
+    @('lookaside_adapter', 'src/compat/wow_edit_lookaside_bindings.c', ''),
     @('conversion_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_conversion_fixture.c', ''),
-    @('conversion_adapter', 'src/wow32-dll/source/wow_edit_conversion_bindings.c', ''),
+    @('conversion_adapter', 'src/compat/wow_edit_conversion_bindings.c', ''),
     @('dialog_native_owner_probe', 'test/adapter-mvdm-host-out/wow/wow_dialog_native_owner_probe.c', ''),
-    @('dialog_procedure_adapter', 'src/wow32-dll/source/wow_dialog_procedure_bindings.c', ''),
+    @('dialog_procedure_adapter', 'src/compat/wow_dialog_procedure_bindings.c', ''),
     @('dialog_initialization_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_initialization_fixture.c', ''),
-    @('dialog_initialization_adapter', 'src/wow32-dll/source/wow_dialog_procedure_bindings.c', ('/FI"'+$root+'/test/adapter-mvdm-host-out/wow/wow_dialog_initialization_faults.h"')),
+    @('dialog_initialization_adapter', 'src/compat/wow_dialog_procedure_bindings.c', ('/FI"'+$root+'/test/adapter-mvdm-host-out/wow/wow_dialog_initialization_faults.h"')),
     @('style_notification_probe', 'test/adapter-mvdm-host-out/wow/wow_style_notification_probe.c', ''),
     @('button_focus_probe', 'test/adapter-mvdm-host-out/wow/wow_button_focus_service_probe.c', ''),
     @('string_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_string_fixture.c', ''),
@@ -66,34 +66,34 @@ $units = @(
     @('string_services', 'src/compat/ntuser_rtl_compat.c', ''),
     @('dialog_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_call_fixture.c', ''),
     @('window_access_fixture', 'test/adapter-mvdm-host-out/wow/wow_window_client_message_fixture.c', ''),
-    @('window_access_adapter', 'src/wow32-dll/source/wow_window_client_access_bindings.c', ''),
-    @('dialog_adapter', 'src/wow32-dll/source/wow_dialog_call_bindings.c', ''),
+    @('window_access_adapter', 'src/compat/wow_window_client_access_bindings.c', ''),
+    @('dialog_adapter', 'src/compat/wow_dialog_call_bindings.c', ''),
     @('edit_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_call_fixture.c', ''),
-    @('edit_adapter', 'src/wow32-dll/source/wow_edit_call_bindings.c', ''),
-    @('control_extent', 'src/wow32-dll/source/wow_control_extent_bindings.c', ''),
-    @('state_guards', 'src/wow32-dll/source/wow_control_state.c', ''),
+    @('edit_adapter', 'src/compat/wow_edit_call_bindings.c', ''),
+    @('control_extent', 'src/compat/wow_control_extent_bindings.c', ''),
+    @('state_guards', 'src/compat/wow_control_state.c', ''),
     @('color_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', '/DWOW_ORIGINAL_CONTROL_COLOR'),
     @('memory_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_memory_callbacks_fixture.c', ''),
-    @('dialog_memory', 'src/wow32-dll/source/wow_dialog_memory.c', ''),
+    @('dialog_memory', 'src/compat/wow_dialog_memory.c', ''),
     @('brush_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_brush_fixture.c', ''),
-    @('brush_adapter', 'src/wow32-dll/source/wow_control_brush_bindings.c', ''),
-    @('brush_owner', 'src/wow32-dll/source/wow_control_brush.c', ''),
+    @('brush_adapter', 'src/compat/wow_control_brush_bindings.c', ''),
+    @('brush_owner', 'src/compat/wow_control_brush.c', ''),
     @('brush_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', '/DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT'),
     @('default_fixture', 'test/adapter-mvdm-host-out/wow/wow_default_window_binding_fixture.c', ''),
-    @('default_adapter', 'src/wow32-dll/source/wow_default_window_bindings.c', ''),
+    @('default_adapter', 'src/compat/wow_default_window_bindings.c', ''),
     @('default_original_fixture', 'test/adapter-mvdm-host-out/wow/wow_default_original_fixture.c', ''),
     @('dialog_context_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_context_fixture.c', ''),
-    @('dialog_context_adapter', 'src/wow32-dll/source/wow_dialog_context_bindings.c', ''),
+    @('dialog_context_adapter', 'src/compat/wow_dialog_context_bindings.c', ''),
     @('dialog_creation_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_creation_entry_fixture.c', ''),
     @('creator_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_creator_lifetime_fixture.c', ''),
-    @('dialog_creation_adapter', 'src/wow32-dll/source/wow_dialog_creation_binding.c', ''),
+    @('dialog_creation_adapter', 'src/compat/wow_dialog_creation_binding.c', ''),
     @('keyboard_entry_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_entry_fixture.c', ''),
     @('keyboard_entry_adapter', 'src/wow32-dll/source/wow_dialog_keyboard_binding.c', ''),
     @('mnemonic_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_mnemonic_lifetime_fixture.c', ''),
     @('keyboard_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_lifetime_fixture.c', ''),
     @('keyboard_unreached', 'test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_unreached.c', ''),
     @('dialog_finalization_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_finalization_fixture.c', ''),
-    @('dialog_finalization_adapter', 'src/wow32-dll/source/wow_dialog_finalization_binding.c', ''),
+    @('dialog_finalization_adapter', 'src/compat/wow_dialog_finalization_binding.c', ''),
     @('dialog_end_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_end_original_fixture.c', ''),
     # The modal/context unit has no native execution transport. Accidental
     # selection of the unused native-dialog paths must fail, never succeed.
@@ -111,7 +111,7 @@ $units += ,@('getset_reader', 'src/non-mvdm/windows/core/ntuser/rtl/getset.c', $
 $units += ,@('getset_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', ($getsetFlags + ' /DWOW_ORIGINAL_DIALOG_GETSET'))
 $units += ,@('getset_server', 'src/non-mvdm/windows/core/ntuser/kernel/getset.c', $getsetFlags)
 $units += ,@('getset_callproc', 'src/non-mvdm/windows/core/ntuser/client/clmsg.c', ($getsetFlags + ' /DWOW_ORIGINAL_CLIENT_CPD'))
-$nativeGetsetFlags = $getsetFlags + ' /DWOW_NATIVE_DIALOG_PROCEDURE_OWNER /FI "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/wow_dialog_procedure_bindings.h')) + '"'
+$nativeGetsetFlags = $getsetFlags + ' /DWOW_NATIVE_DIALOG_PROCEDURE_OWNER /FI "' + (NinjaValue (Join-Path $root 'src/compat/include/wow_dialog_procedure_bindings.h')) + '"'
 $units += ,@('native_getset_reader', 'src/non-mvdm/windows/core/ntuser/rtl/getset.c', ($nativeGetsetFlags + ' /DWOW_ORIGINAL_PRIVATE_WORD_GETTER'))
 $units += ,@('native_getset_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', ($nativeGetsetFlags + ' /DWOW_ORIGINAL_DIALOG_GETSET'))
 $units += ,@('native_getset_server', 'src/non-mvdm/windows/core/ntuser/kernel/getset.c', $nativeGetsetFlags)
@@ -119,7 +119,7 @@ $modalLifetimeFlags = '/I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-h
 $units += ,@('modal_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_lifetime_fixture.c', '')
 $units += ,@('modal_lifetime_body', 'src/non-mvdm/windows/core/ntuser/client/dlgmgr.c', $modalLifetimeFlags)
 $units += ,@('modal_lifetime_end', 'src/non-mvdm/windows/core/ntuser/client/dlgend.c', $modalLifetimeFlags)
-$units += ,@('modal_lifetime_pointer', 'src/wow32-dll/source/wow_dialog_pointer.c', $modalLifetimeFlags)
+$units += ,@('modal_lifetime_pointer', 'src/compat/wow_dialog_pointer.c', $modalLifetimeFlags)
 $navigationFlags = '/DWOW_ORIGINAL_EDIT_CLIENT /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-client')) + '"'
 $units += ,@('navigation_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c', '')
 $units += ,@('navigation_graph', 'src/non-mvdm/windows/core/ntuser/rtl/winmgr.c', $navigationFlags)
@@ -140,22 +140,22 @@ $units += ,@('push_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_drawing_fi
 $units += ,@('push_owner', 'src/non-mvdm/windows/core/ntuser/rtl/draw.c', $pushFlags)
 $units += ,@('push_rect', 'src/compat/wow_control_rect.c', $pushFlags)
 $resourceTestFlags = '/DWOW_BUTTON_RESOURCE_TEST_LEAVES /FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/button-resources/leaves.h')) + '"'
-$units += ,@('button_resources_body', 'src/wow32-dll/source/wow_button_resources.c', $resourceTestFlags)
+$units += ,@('button_resources_body', 'src/compat/wow_button_resources.c', $resourceTestFlags)
 $units += ,@('button_resources_fixture', 'test/adapter-mvdm-host-out/wow/wow_button_resources_fixture.c', '')
 $stateDrawingFlags = '/DWOW_ORIGINAL_STATE_DRAWING /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-draw-state')) + '"'
 $units += ,@('state_drawing_body', 'src/non-mvdm/windows/core/ntuser/client/mngrayc.c', $stateDrawingFlags)
 $units += ,@('state_icon_size', 'src/compat/wow_icon_size.c', '')
 $units += ,@('dialog_slots', 'src/compat/wow_dialog_slots.c', '')
-$units += ,@('state_drawing_adapter', 'src/wow32-dll/source/wow_control_draw_state.c', '')
+$units += ,@('state_drawing_adapter', 'src/compat/wow_control_draw_state.c', '')
 $units += ,@('state_drawing_brushes', 'src/compat/wow_control_brushes.c', '')
-$units += ,@('state_drawing_atlas', 'src/wow32-dll/source/wow_button_resources.c', '')
+$units += ,@('state_drawing_atlas', 'src/compat/wow_button_resources.c', '')
 $units += ,@('state_drawing_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_draw_state_fixture.c', '')
 $units += ,@('state_drawing_text', 'src/non-mvdm/windows/core/ntuser/rtl/drawtext.c', $textFlags)
 $units += ,@('state_tab_text', 'src/non-mvdm/windows/core/ntuser/client/drawtext.c', $textFlags)
-$units += ,@('button_lifetime_adapter', 'src/wow32-dll/source/wow_button_lifetime.c', '')
+$units += ,@('button_lifetime_adapter', 'src/compat/wow_button_lifetime.c', '')
 $units += ,@('button_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_button_lifetime_fixture.c', '')
 $buttonLifetimeResourceFlags = '/FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/button-lifetime/resource-leaves.h')) + '"'
-$units += ,@('button_lifetime_resources', 'src/wow32-dll/source/wow_button_resources.c', $buttonLifetimeResourceFlags)
+$units += ,@('button_lifetime_resources', 'src/compat/wow_button_resources.c', $buttonLifetimeResourceFlags)
 $buttonBlitFlags = '/DWOW_ORIGINAL_BUTTON_BLIT_ONLY /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/button-drawing')) + '"'
 $units += ,@('button_blit_owner', 'src/non-mvdm/windows/core/ntuser/client/mngrayc.c', $buttonBlitFlags)
 $buttonDcFlags = '/DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_BUTTON_CLIENT /I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/button-lifetime')) + '"'
@@ -165,7 +165,7 @@ $units += ,@('button_dc_unreached', 'test/adapter-mvdm-host-out/wow/wow_button_d
 $geometryFlags = '/DWOW_ORIGINAL_DEFAULT_GEOMETRY /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-geometry')) + '"'
 $units += ,@('navigation_borders', 'src/non-mvdm/windows/core/ntuser/rtl/winmgr.c', $geometryFlags)
 $viewFlags = '/Gy /I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/edit-view')) + '"'
-$units += ,@('navigation_native', 'src/wow32-dll/source/wow_edit_native_bindings.c', '')
+$units += ,@('navigation_native', 'src/compat/wow_edit_native_bindings.c', '')
 $units += ,@('native_controls_fixture', 'test/compat/wow_native_controls.c', '')
 $units += ,@('native_controls', 'src/compat/wow_native_controls.c', '')
 $units += ,@('native_environment', 'src/compat/wow_native_environment.c', '')

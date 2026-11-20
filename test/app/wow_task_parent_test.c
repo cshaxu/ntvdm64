@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "wow32-dll/include/wow_task_parent.h"
-#include "wow32-dll/include/wow_callback_frame_lease.h"
+#include "compat/include/wow_callback_frame_lease.h"
 #include "mvdm-host/inc/tdb16.h"
 #include <stddef.h>
 

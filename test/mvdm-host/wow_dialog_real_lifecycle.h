@@ -1,6 +1,6 @@
 /* Included only in the real-CCPU dedicated registered-owner process. */
-#include "wow32-dll/include/wow_task_cleanup_entry.h"
-#include "wow32-dll/include/wow_dialog_context_bindings.h"
+#include "compat/include/wow_task_cleanup_entry.h"
+#include "compat/include/wow_dialog_context_bindings.h"
 extern unsigned wow_dialog_fail_publication,wow_dialog_publication_failures;
 extern unsigned wow_dialog_fail_callback,wow_dialog_callback_rejections;
 extern unsigned wow_dialog_throw_capture,wow_dialog_capture_exceptions;

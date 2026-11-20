@@ -25,7 +25,7 @@ function Mark($value,$old,$new){
  $script:replacements+=,@($old,$new);return $value.Replace($old,$new)
 }
 try{
- $source="$repo/src/wow32-dll/source/wow_user_object_bindings.c"
+ $source="$repo/src/compat/wow_user_object_bindings.c"
  $original=[IO.File]::ReadAllText($source).Replace("`r`n","`n");$body=$original
  $specs=@(
   @('refresh_graph','HWND callback_window, const HWND *payload, ULONG payload_count','callback_window, payload, payload_count',3,'payload_count',"BOOL WINAPI wow_user_window_refresh_graph"),
@@ -45,7 +45,7 @@ try{
  for($i=$script:replacements.Count-1;$i -ge 0;$i--){$pair=$script:replacements[$i];$restored=$restored.Replace($pair[1],$pair[0])}
  if($restored -cne $original){throw 'Original graph body reversal failed'}
  [IO.File]::WriteAllText("$root/graph-profile.c",('#include "'+$PSScriptRoot.Replace('\','/')+'/wow_graph_cost_instrument.h"'+"`n"+$body),[Text.UTF8Encoding]::new($false))
- $cc=@(& ninja.exe -C $provider -t commands obj/wow32-dll/wow_user_object_bindings.obj)[-1]
+ $cc=@(& ninja.exe -C $provider -t commands obj/compat/wow_user_object_bindings.obj)[-1]
  if($LASTEXITCODE){throw 'Original graph compile rule missing'}
  $link=@(& ninja.exe -C $provider -t commands wow32.dll)[-1]
  if($LASTEXITCODE -or $link -notmatch '^link '){throw 'Original provider link rule missing'}
@@ -53,7 +53,7 @@ try{
  $inputs+=@(Get-ChildItem $PSScriptRoot -File |Where-Object {$_.Name -in @('wow_graph_cost_instrument.h','wow_graph_cost_fixture.c','wow_page_cost_data.h','wow_page_cost_probe.h','wow_mine_latency_probe.c','wow_mine_gameplay_probe.c','wow_native_pc_sample.c','verify-wow-mine-latency.ps1')}).FullName
  $inputs+=@([regex]::Matches($link,'(?:^|\s)(obj/[^\s"]+\.(?:obj|res))(?=\s|$)')|ForEach-Object {Join-Path $provider $_.Groups[1].Value})
  $inputs+=@(Get-ChildItem $provider -File -Filter '*.lib').FullName
- $deps=@(& ninja.exe -C $provider -t deps obj/wow32-dll/wow_user_object_bindings.obj)
+ $deps=@(& ninja.exe -C $provider -t deps obj/compat/wow_user_object_bindings.obj)
  if($LASTEXITCODE){throw 'Original dependencies missing'}
  $deps|Set-Content "$root/original-deps.txt"
  $inputs+=@($deps|ForEach-Object {if($_ -match '^\s+([A-Za-z]:[/\\].*)$' -and (Test-Path $Matches[1])){$Matches[1]}})
@@ -62,9 +62,9 @@ try{
  foreach($image in $images){foreach($dir in @("$repo/assets/release",'O:\winnt\system32')){if((Get-FileHash "$dir/$($image.name)").Hash -ne $image.sha256){throw 'Installed manifest mismatch'};$inputs+="$dir/$($image.name)"}}
  foreach($pair in @(@('ntvdm.exe',$worker),@('WOW32.DLL',$provider))){if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (Get-FileHash "$repo/assets/release/$($pair[0])").Hash){throw 'Selected parent/provider mismatch'}}
  $inputs|Sort-Object -Unique|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
- $cc=Mark $cc '/Foobj/wow32-dll/wow_user_object_bindings.obj' ('/Fo"'+$root+'/graph-profile.obj"')
+ $cc=Mark $cc '/Foobj/compat/wow_user_object_bindings.obj' ('/Fo"'+$root+'/graph-profile.obj"')
  $cc=Mark $cc $source.Replace('\','/') ('"'+$root+'/graph-profile.c"')
- $link=Mark $link ' obj/wow32-dll/wow_user_object_bindings.obj ' (' "'+$root+'/graph-profile.obj" ')
+ $link=Mark $link ' obj/compat/wow_user_object_bindings.obj ' (' "'+$root+'/graph-profile.obj" ')
  $parents=[regex]::Matches($link,'(?<!\S)(?:"([^"]*[\\/]ntvdm\.lib)"|([^\s"]*[\\/]ntvdm\.lib))(?=\s|$)')
  if($parents.Count -ne 1){throw 'One parent import required'}
  $link=Mark $link $parents[0].Value ('"'+$worker+'/ntvdm.lib"')

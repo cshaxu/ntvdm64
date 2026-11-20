@@ -19,7 +19,7 @@ foreach($line in $raw){
 $forbidden=@('ntvdm-exe/session/session.h','compat/include/guest_memory_lease.h',
     'ntvdm-exe/softpc/include/mvdm_softpc_firmware.h',
     'ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h',
-    'ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h',
+    'compat/include/mvdm_softpc_wow_page_domain.h',
     'ntvdm-exe/wow/include/wow_gdi_alias.h',
     'ntvdm-exe/wow/include/wow_user_runtime.h',
     'ntvdm-exe/wow/include/wow_user_session_binding.h',

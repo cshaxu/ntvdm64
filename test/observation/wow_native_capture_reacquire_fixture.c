@@ -2,7 +2,7 @@
  * Only the page-domain read/commit services are doubles; not guest proof. */
 #include <windows.h>
 #include <stdio.h>
-#include "../../src/ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "../../src/compat/include/mvdm_softpc_wow_page_domain.h"
 typedef mvdm_softpc_wow_window_observation window_observation;
 typedef struct { HWND window,next,parent,child,owner; } wow_user_window_links;
 enum { NORMAL,ONCE,ALWAYS,COPY_FAIL,COMMIT_FAIL };

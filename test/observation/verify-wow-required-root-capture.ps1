@@ -5,7 +5,7 @@ param([Parameter(Mandatory)][string]$BuildRoot,
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned evidence required'}
-if(!$SourceFile){$SourceFile="$repo/src/wow32-dll/source/wow_user_object_bindings.c"}
+if(!$SourceFile){$SourceFile="$repo/src/compat/wow_user_object_bindings.c"}
 $SourceFile=(Resolve-Path $SourceFile).Path;$CompilerDriver=(Resolve-Path $CompilerDriver).Path
 if(!$SourceFile.StartsWith($repo+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Project or sealed source required'}
 $null=New-Item -ItemType Directory $root

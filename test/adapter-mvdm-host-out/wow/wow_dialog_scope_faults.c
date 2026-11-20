@@ -1,5 +1,6 @@
 /* Execute the complete production dialog scope, with only its capture leaf
  * able to raise. No uncaught native WNDPROC exception is forced through USER. */
+#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_dialog_context_bindings.h"
 unsigned wow_dialog_throw_capture,wow_dialog_capture_exceptions;
 static BOOL WINAPI capture_fault(wow_dialog_context *context,BOOL font)
@@ -12,5 +13,5 @@ static BOOL WINAPI capture_fault(wow_dialog_context *context,BOOL font)
     return result;
 }
 #define wow_dialog_capture_context capture_fault
-#include "wow32-dll/source/wow_dialog_finalization_binding.c"
+#include "compat/wow_dialog_finalization_binding.c"
 #undef wow_dialog_capture_context

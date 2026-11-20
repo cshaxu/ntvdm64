@@ -36,18 +36,18 @@ function Build([string]$name,[string]$command) {
 }
 try {
     $ninja = (Get-Command ninja.exe -ErrorAction Stop).Source
-    $objects = @('obj/wow32-dll/wow_bitmap_bindings.obj','obj/opennt-user/clres.obj',
+    $objects = @('obj/compat/wow_bitmap_bindings.obj','obj/opennt-user/clres.obj',
         'obj/opennt-user/cldib.obj','obj/adapter-win32/chartran.obj',
         'obj/compat/ntuser_rtl_compat.obj')
     Build 'objects' ('"'+$ninja+'" -C "'+$provider+'" '+($objects -join ' '))
-    $compile = & $ninja -C $provider -t commands obj/wow32-dll/wow_bitmap_bindings.obj
+    $compile = & $ninja -C $provider -t commands obj/compat/wow_bitmap_bindings.obj
     if ($LASTEXITCODE -or @($compile).Count -ne 1) { throw 'Ambiguous production compile command' }
     # The production clres object also contains WOWFindResourceExWCover,
     # whose independent loader closure is outside this bitmap fixture.
     # Reuse its existing bitmap-fixture selection rather than stub the loader.
     $resourceCompile = & $ninja -C $provider -t commands obj/opennt-user/clres.obj
     if ($LASTEXITCODE -or @($resourceCompile).Count -ne 1) { throw 'Ambiguous resource compile command' }
-    Build 'resource-owner' (($resourceCompile -replace '/Fo\S+', ('/Fo"'+$out+'/clres.obj"'))+' /DWOW_BITMAP_FIXTURE_BINDINGS /FI "'+$repo+'/src/wow32-dll/include/wow_bitmap_bindings.h"')
+    Build 'resource-owner' (($resourceCompile -replace '/Fo\S+', ('/Fo"'+$out+'/clres.obj"'))+' /DWOW_BITMAP_FIXTURE_BINDINGS /FI "'+$repo+'/src/compat/include/wow_bitmap_bindings.h"')
     & "$repo/test/observation/new-wow-bitmap-test-resource.ps1" -BuildRoot $out
     Build 'resource' ('rc.exe /nologo /i "'+$out+'" /fo "'+$out+'/fixture.res" "'+$repo+'/test/adapter-mvdm-host-out/wow/wow_bitmap_binding_fixture.rc"')
     foreach ($case in @('binding','binding_failure')) {

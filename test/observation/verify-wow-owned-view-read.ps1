@@ -5,7 +5,7 @@ param([Parameter(Mandatory)][string]$BuildRoot,
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned exact-body evidence required'}
-if(!$SourceFile){$SourceFile="$repo/src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c"}
+if(!$SourceFile){$SourceFile="$repo/src/compat/mvdm_softpc_wow_page_domain.c"}
 $SourceFile=(Resolve-Path $SourceFile).Path;$CompilerDriver=(Resolve-Path $CompilerDriver).Path
 if(!$SourceFile.StartsWith($repo+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Project or sealed source required'}
 $null=New-Item -ItemType Directory $root

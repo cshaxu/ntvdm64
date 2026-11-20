@@ -24,4 +24,4 @@ BOOL WINAPI wow_init_fixture_free(HANDLE, DWORD, PVOID);
 #define SetWindowsHookExA fixture_set_hook
 #define UnhookWindowsHookEx fixture_unhook
 #define HeapFree wow_init_fixture_free
-#include "../../../src/wow32-dll/source/wow_user_task_lifecycle.c"
+#include "../../../src/compat/wow_user_task_lifecycle.c"

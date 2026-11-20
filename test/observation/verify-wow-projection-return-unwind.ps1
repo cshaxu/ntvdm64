@@ -40,13 +40,13 @@ try{
  foreach($selected in $cases){
   $dir="$root/$selected";$null=New-Item -ItemType Directory $dir
   if($selected -eq 'ClassCopy'){
-   $source=if($SourceFile){$SourceFile}else{"$repo/src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c"}
+   $source=if($SourceFile){$SourceFile}else{"$repo/src/compat/mvdm_softpc_wow_page_domain.c"}
    $fixture="$PSScriptRoot/wow_class_copy_unwind_fixture.c";$header='class_copy_body.h'
    $text=[IO.File]::ReadAllText($source).Replace("`r`n","`n")
    $body=(Region $text 'static int __cdecl compare_class_reference(' 'int mvdm_softpc_wow_page_domain_collect_observed_classes(')+(Region $text 'static int copy_current_window_view(' 'int mvdm_softpc_wow_page_domain_copy_window_view(')
    $marker='CLASS_COPY_BODY_UNWIND errors=0 '
   }else{
-   $source=if($SourceFile){$SourceFile}else{"$repo/src/wow32-dll/source/wow_user_task_lifecycle.c"}
+   $source=if($SourceFile){$SourceFile}else{"$repo/src/compat/wow_user_task_lifecycle.c"}
    $fixture="$PSScriptRoot/wow_native_wait_publication_fixture.c";$header='native_wait_publication_body.h'
    $text=[IO.File]::ReadAllText($source).Replace("`r`n","`n")
    # The initial-view entry sits between the two publication helpers but is

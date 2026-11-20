@@ -20,7 +20,7 @@ function Body([string]$Text,[string]$Name){
  $Text.Substring($found[0].Index,$at-$found[0].Index)
 }
 try{
- $owner="$repo/src/wow32-dll/source/wow_user_object_bindings.c"
+ $owner="$repo/src/compat/wow_user_object_bindings.c"
  $captureOwner="$repo/src/compat/wow_window_capture.c"
  $captureSource=[IO.File]::ReadAllText($captureOwner)
  $source=$captureSource+"`n"+[IO.File]::ReadAllText($owner)
@@ -31,7 +31,7 @@ try{
   $oldNames=@('wow_user_window_sample_links','capture_window','put_observation','observation_edge','normalize_observation_chains','project_graph_attempt','project_graph')
   $names=@('wow_user_window_sample_links','wow_native_window_capture','wow_native_window_observation_put','wow_native_window_observation_edge','wow_native_window_normalize_chains','project_graph_attempt','project_graph')
   $current=@($names|ForEach-Object {Body $source $_}) -join "`n"
-  $old=(& git -C $repo show '4b8a7c8ae6eaaca3350d640650dd9d57201fd581:src/wow32-dll/source/wow_user_object_bindings.c') -join "`n"
+  $old=(& git -C $repo show '4b8a7c8ae6eaaca3350d640650dd9d57201fd581:src/compat/wow_user_object_bindings.c') -join "`n"
   if($LASTEXITCODE){throw 'Immutable counterfactual missing'}
   $baseline=@($oldNames|Where-Object {$_ -ne 'project_graph_attempt'}|ForEach-Object {Body $old $_}) -join "`n"
   foreach($name in $oldNames){$baseline=[regex]::Replace($baseline,('\b'+$name+'\b'),('baseline_'+$name))}

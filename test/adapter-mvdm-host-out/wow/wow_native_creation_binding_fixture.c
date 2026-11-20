@@ -8,7 +8,7 @@
 #include "wow_dialog_state_bindings.h"
 #include "wow_class_client_bindings.h"
 #include "wow_user_private_access.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "compat/include/mvdm_softpc_wow_page_domain.h"
 #include <stdio.h>
 #include <string.h>
 static unsigned errors, callbacks, nested, rejected, destroyed, vetoed;

@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "compat/include/mvdm_softpc_wow_page_domain.h"
 
 typedef mvdm_softpc_wow_window_observation window_observation;
 typedef struct native_row {

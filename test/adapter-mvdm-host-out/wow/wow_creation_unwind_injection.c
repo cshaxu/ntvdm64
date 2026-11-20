@@ -20,7 +20,7 @@ static BOOL WINAPI unwind_unhook(HHOOK);
 #define wow_window_words_release unwind_release
 #define SetWindowsHookExA unwind_hook
 #define UnhookWindowsHookEx unwind_unhook
-#include "../../../src/wow32-dll/source/wow_window_creation_binding.c"
+#include "../../../src/compat/wow_window_creation_binding.c"
 #undef CreateWindowExA
 #undef wow_window_words_terminal
 #undef wow_window_words_release

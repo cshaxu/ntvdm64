@@ -2,35 +2,22 @@
 
 Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68/P70/P72/P73/P74 updates below supersede its
 classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
-assigns all 384 currently open stable IDs to the existing ten chains.
+assigns all 171 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
 
 | Chain | Symbols | Headers | Include roots | Image imports | Total |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| 1. guest-access-leases | 0 | 0 | 0 | 0 | 0 |
-| 2. wow-machine-context | 1 | 0 | 0 | 0 | 1 |
-| 3. user-projection-generations | 10 | 3 | 0 | 0 | 13 |
-| 4. console-mechanics | 50 | 7 | 0 | 0 | 57 |
-| 5. command-capture | 2 | 3 | 0 | 0 | 5 |
-| 6. launch-csr-completion | 19 | 4 | 0 | 0 | 23 |
-| 7. thread-lifecycle | 79 | 7 | 0 | 0 | 86 |
-| 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
-| 9. native-user | 137 | 25 | 0 | 0 | 162 |
-| 10. original-helpers-build-abi | 11 | 6 | 11 | 1 | 29 |
-| Total | 315 | 57 | 11 | 1 | 384 |
 
 The historical 79-provider body-read census remains evidence; P68 removes one
 provider from the open implementation set. Recounting the remaining chain
-provider-file union gives 73 distinct paths (the historical 79 is not current). Header responsibility classification is 59/59; three generated contracts
+provider-file union gives 39 distinct paths (the historical 79 is not current). Header responsibility classification is 59/59; three generated contracts
 still await implementation of their owner/ABI disposition. All 11 remaining search roots have current-use evidence. VCDEX imports
 have C implementation evidence; that is not final binary-boundary disposition.
 
-Whole migration chains ready for implementation: **0/10** under the exact
-destination/removal/mirror-cost/validation criterion. Whole chains still needing
-design: **10/10**. This does not discard previously delivered subchains. It makes
-the missing candidate-level decisions explicit rather than treating source reading
-or broad B/C/F classification as a completed migration design.
+The original P60 zero-of-ten candidate-readiness snapshot is historical.
+Reuse completed ownership audits and implemented chains; the table above tracks
+remaining direct IDs, not a requirement to repeat the design. Zero open IDs in
+a chain does not by itself prove every cross-chain runtime obligation.
 
 The historical P65/P68 ledger snapshot was 157 eliminated, 411 open, 43 supporting, six
 eliminated-transitive and one excluded diagnostic, total 618. P65 eliminates
@@ -155,3 +142,14 @@ Six F interceptions removed; original C conversions remain. Ledger182 eliminated
 ## P80 effective-address owner
 
 Actual implementation and header moved from F to B with approved CCPU dependencies; all five function bodies and header bytes preserved. C0215/C0216 eliminated: current ledger184 eliminated/384 open. Mirror delta0 points/0 lines. Cached full build, dual11 publication and targeted CCPU/WOW/Win16 tests passed. See [P80 evidence](s14-effective-address-owner.json). Remaining whole chains stay open.
+
+## P81 USER/page-domain implementation delivery
+
+Actual providers/state migrated together under the approved B-to-C exception;
+product launch/notification remains F. [P81 evidence](s14-user-batch-owner.json)
+records213 delivered direct IDs (193 symbols/20 headers), zero mirror delta,
+final compiled owners, targeted tests and dual11 publication. Current ledger:
+397 eliminated/171 open of618; other50 entries retain their evidence categories.
+Earlier whole-chain readiness statements are historical planning snapshots,
+not a requirement to repeat completed source audits. Remaining IDs above are
+the authoritative unfinished work; overall C outward closure is not claimed.

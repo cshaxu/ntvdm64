@@ -45,7 +45,7 @@ Read-only inputs:
   a detailed load error code or confuse the two failure/completion meanings.
 - Existing [registration bridge](../../../src/wow32-dll/source/wow_user_registration_bridge.c)
   registered_init_task forwards the task identity into
-  [task lifecycle](../../../src/wow32-dll/source/wow_user_task_lifecycle.c),
+  [task lifecycle](../../../src/compat/wow_user_task_lifecycle.c),
   whose xxxInitTask call retains the original owner. The local FIRSTIDLE
   binding signals a present task idle event and otherwise clears FIRSTIDLE.
   This existing path is the first reuse candidate, not a reason to add a

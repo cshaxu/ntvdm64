@@ -1,3 +1,4 @@
+#include "compat/include/wow_user_registration_state.h"
 #include "wow_task_start_notification.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_user_registered_callbacks.h"
@@ -15,7 +16,7 @@
 #include "wow_user_private_access.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_menu_native_bindings.h"
-#include "common/wow/page_domain.h"
+#include "compat/include/wow_page_domain.h"
 
 #include <stdio.h>
 #include "nt.h"
@@ -36,115 +37,6 @@ BOOL WINAPI wow_current_separate_launch(void);
  * with a selected source-backed carrier is wired immediately; an otherwise
  * unimplemented slot fails explicitly and is labelled below.  No placeholder
  * reports successful work or invents USER policy. */
-static PFNWOWHANDLERSIN wow_input_handlers;
-static wow_user_task_lifecycle wow_lifecycle;
-
-const struct tagAPFNWOWHANDLERSIN *WINAPI wow_user_registered_callbacks(void)
-{
-    return &wow_input_handlers;
-}
-
-
-BOOL WINAPI wow_user_get_messageA(LPMSG message, HWND window, UINT first, UINT last)
-{
-    return wow_user_task_lifecycle_message(&wow_lifecycle, message, window,
-        first, last, PM_REMOVE, TRUE);
-}
-
-BOOL WINAPI wow_user_peek_messageA(LPMSG message, HWND window, UINT first,
-    UINT last, UINT flags)
-{
-    return wow_user_task_lifecycle_message(&wow_lifecycle, message, window,
-        first, last, flags, FALSE);
-}
-
-BOOL WINAPI wow_user_wait_message(void)
-{
-    return wow_user_task_lifecycle_wait_message(&wow_lifecycle);
-}
-
-BOOL WINAPI wow_user_get_messageW(LPMSG message, HWND window, UINT first, UINT last)
-{
-    return wow_user_task_lifecycle_messageW(&wow_lifecycle, message, window,
-        first, last, PM_REMOVE, TRUE);
-}
-
-BOOL WINAPI wow_user_peek_messageW(LPMSG message, HWND window, UINT first,
-    UINT last, UINT flags)
-{
-    return wow_user_task_lifecycle_messageW(&wow_lifecycle, message, window,
-        first, last, flags, FALSE);
-}
-
-static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
-    UINT message, WPARAM wp, LPARAM lp, BOOL unicode)
-{
-    wow_user_borrow_scope scope;
-    wow_task_callback_scope task_scope;
-    LRESULT result;
-    DWORD resolved;
-    /* Original clmsg.c::CallWindowProcAorW resolves CPD first, then
-     * usercli.h::CALLPROC_WOWCHECK forwards tagged WOW targets with NULL WW.
-     * Modern USER owns native/CPD translation but cannot interpret this
-     * worker's WOW target. Keep the original registered callback as owner. */
-    if (!wow_native_class_resolve_procedure((DWORD)procedure, &resolved)) return 0;
-    if (resolved != (DWORD)procedure ||
-            !((DWORD)(ULONG_PTR)procedure & WNDPROC_WOW)) {
-        wow_user_native_call call;
-        BOOL restored;
-        DWORD error = GetLastError();
-        wow_window_note_native_procedure(window, procedure, unicode);
-        if (!wow_user_native_call_begin(&call, window)) return 0;
-        SetLastError(error);
-        __try {
-            result = unicode ? CallWindowProcW(procedure, window, message, wp, lp) :
-                CallWindowProcA(procedure, window, message, wp, lp);
-            wow_user_native_call_result(&call, message, wp, lp, result);
-        } __finally {
-            error = GetLastError();
-            restored = wow_user_native_call_end(&call);
-            if (restored) SetLastError(error);
-        }
-        return restored ? result : 0;
-    }
-    if (!wow_input_handlers.pfnWowWndProcEx) {
-        SetLastError(ERROR_INVALID_STATE);
-        return 0;
-    }
-    if (!wow_task_callback_enter(&task_scope)) return 0;
-    if (!wow_user_borrow_enter(&scope)) {
-        (void)wow_task_callback_leave(&task_scope);
-        return 0;
-    }
-    __try {
-        /* CallWindowProc's tagged-WOW branch deliberately passes NULL WW;
-         * it does not traverse wow_window_dispatch_bound. Preserve that
-         * original subclass contract while publishing a menu carried by
-         * the message before the original callback converts its handle. */
-        result = 0;
-        if (wow_user_window_refresh_message(window, message, wp, lp) &&
-                wow_menu_native_refresh_message(message, wp, lp))
-            result = wow_input_handlers.pfnWowWndProcEx(window, message, wp, lp,
-                (DWORD)(ULONG_PTR)procedure, NULL);
-    } __finally {
-        wow_user_borrow_leave_required(&scope);
-        (void)wow_task_callback_leave(&task_scope);
-    }
-    return result;
-}
-
-LRESULT WINAPI wow_user_call_window_procA(WNDPROC procedure, HWND window,
-    UINT message, WPARAM wp, LPARAM lp)
-{
-    return call_previous_window_proc(procedure, window, message, wp, lp, FALSE);
-}
-
-LRESULT WINAPI wow_user_call_window_procW(WNDPROC procedure, HWND window,
-    UINT message, WPARAM wp, LPARAM lp)
-{
-    return call_previous_window_proc(procedure, window, message, wp, lp, TRUE);
-}
-
 /* The registration seam is normally silent.  An opt-in host-only witness is
  * retained because the immutable USER16 workload has no textual way to show
  * whether it reached the all-or-nothing registration call. */
@@ -234,11 +126,11 @@ static BOOL ensure_lifecycle(void)
         unsupported_void();
         return FALSE;
     }
-    if (wow_lifecycle.initialized)
-        return wow_lifecycle.runtime == binding->runtime;
-    callbacks.get_version = wow_input_handlers.pfnGetExpWinVer;
-    callbacks.callback = wow_input_handlers.pfnWowWndProcEx;
-    return wow_user_task_lifecycle_initialize(&wow_lifecycle, binding->runtime,
+    if (wow_user_registered_lifecycle()->initialized)
+        return wow_user_registered_lifecycle()->runtime == binding->runtime;
+    callbacks.get_version = wow_user_registered_callbacks()->pfnGetExpWinVer;
+    callbacks.callback = wow_user_registered_callbacks()->pfnWowWndProcEx;
+    return wow_user_task_lifecycle_initialize(wow_user_registered_lifecycle(), binding->runtime,
         &callbacks);
 }
 
@@ -254,13 +146,13 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
          * handoff.  Resume the one incomplete copied-view transaction before
          * its original launch notification retry; do not run xxxInitTask or
          * create another task carrier. */
-        if (!wow_user_task_lifecycle_publish_initial_view(&wow_lifecycle)) {
+        if (!wow_user_task_lifecycle_publish_initial_view(wow_user_registered_lifecycle())) {
             DWORD error = GetLastError();
             registration_trace("InitTaskInitialPublicationRetry", error);
             SetLastError(error);
             return FALSE;
         }
-        DWORD error = wow_user_task_lifecycle_notify_start(&wow_lifecycle,
+        DWORD error = wow_user_task_lifecycle_notify_start(wow_user_registered_lifecycle(),
             task_id, shared_id, OpenNtBaseClientWowStarted);
         registration_trace("InitTaskNotificationRetry", error);
         SetLastError(error);
@@ -268,11 +160,11 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     }
     registration_trace("InitTaskId", task_id);
     registration_trace("InitTaskSharedId", shared_id);
-    result = ensure_lifecycle() && wow_user_task_lifecycle_init(&wow_lifecycle,
+    result = ensure_lifecycle() && wow_user_task_lifecycle_init(wow_user_registered_lifecycle(),
         version, app_name, task_id, hotkey, shared_id, x, y, width, height,
         show);
     init_error=GetLastError();
-    if (result && !wow_user_task_lifecycle_publish_initial_view(&wow_lifecycle)) {
+    if (result && !wow_user_task_lifecycle_publish_initial_view(wow_user_registered_lifecycle())) {
         result = FALSE;
         init_error = GetLastError();
         registration_trace("InitTaskInitialPublication", init_error);
@@ -282,7 +174,7 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     SetLastError(init_error);
     if (result && ((shared_id && shared_id!=(DWORD)-1) ||
         (shared_id==0 && wow_current_separate_launch()))) {
-        DWORD error=wow_user_task_lifecycle_notify_start(&wow_lifecycle,
+        DWORD error=wow_user_task_lifecycle_notify_start(wow_user_registered_lifecycle(),
             task_id, shared_id, OpenNtBaseClientWowStarted);
         registration_trace("InitTaskNotification",error);
         if (error) {
@@ -336,7 +228,7 @@ static ATOM WINAPI registered_register_class(PVOID a, LPDWORD b)
 
 static BOOL WINAPI registered_hung_handlers(PFNW32ET callback, HANDLE event)
 {
-    BOOL result = ensure_lifecycle() && wow_user_task_lifecycle_register(&wow_lifecycle,
+    BOOL result = ensure_lifecycle() && wow_user_task_lifecycle_register(wow_user_registered_lifecycle(),
         callback, event);
     registration_trace("RegisterHung", result);
     return result;
@@ -355,7 +247,7 @@ static BOOL WINAPI registered_cleanup(HANDLE instance, DWORD task,
                 wow_user_task_cleanup_uninitialized(task))
             result = TRUE;
         else
-            result = wow_user_task_lifecycle_exit(&wow_lifecycle,
+            result = wow_user_task_lifecycle_exit(wow_user_registered_lifecycle(),
                 instance, task, selectors, count);
     }
     DWORD error = result ? ERROR_SUCCESS : GetLastError();
@@ -416,7 +308,7 @@ static VOID WINAPI registered_directed_yield(DWORD thread_id)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     if (!binding || !binding->thread) { unsupported_void(); return; }
-    wow_user_task_lifecycle_directed_yield(&wow_lifecycle, thread_id);
+    wow_user_task_lifecycle_directed_yield(wow_user_registered_lifecycle(), thread_id);
     registration_trace("DirectedYield", thread_id);
 }
 
@@ -425,7 +317,7 @@ static BOOL WINAPI registered_yield_task(void)
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     BOOL result;
     if (!binding || !binding->thread) { unsupported_void(); return FALSE; }
-    result = wow_user_task_lifecycle_yield(&wow_lifecycle);
+    result = wow_user_task_lifecycle_yield(wow_user_registered_lifecycle());
     registration_trace("YieldTask", result);
     return result;
 }
@@ -435,7 +327,7 @@ static BOOL WINAPI registered_wait_for_message(HANDLE event)
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     BOOL result;
     if (!binding || !binding->thread) { unsupported_void(); return FALSE; }
-    result = wow_user_task_lifecycle_wait(&wow_lifecycle, event);
+    result = wow_user_task_lifecycle_wait(wow_user_registered_lifecycle(), event);
     registration_trace("WaitForMessage", result);
     return result;
 }
@@ -468,7 +360,7 @@ DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN input,
         return 0;
     }
 
-    wow_input_handlers = *input;
+    wow_user_set_registered_callbacks(input);
     ZeroMemory(output, sizeof(*output));
     /* Pinned USER.EXE publishes WOW 0400 with WOWDBG layout (init.c).
      * The shared view uses that checked layout, including 16-byte handles. */

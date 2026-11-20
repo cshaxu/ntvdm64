@@ -27,18 +27,18 @@ function Run-Owned($name,$exe,$line,$seconds){
 }
 try{
  $inputs=@($PSCommandPath,"$provider/build.ninja","$repo/src/mvdm-host/wow32/wcall16.c",
-  "$repo/src/wow32-dll/source/wow_user_native_extension.c","$repo/src/wow32-dll/include/wow_user_native_extension.h",
+  "$repo/src/compat/wow_user_native_extension.c","$repo/src/compat/include/wow_user_native_extension.h",
   "$repo/test/adapter-mvdm-host-out/wow/wow_native_extension_boundary_fixture.c",
   "$repo/test/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c",
   "$repo/test/adapter-mvdm-host-out/wow/wow_original_callback_frame_fixture.c",
   "$repo/test/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c",
-  "$repo/src/wow32-dll/source/wow_callback_frame_lease.c",
-  "$repo/src/wow32-dll/include/wow_callback_frame_lease.h",
+  "$repo/src/compat/wow_callback_frame_lease.c",
+  "$repo/src/compat/include/wow_callback_frame_lease.h",
   "$repo/test/observation/verify-wow-original-callback-frame.ps1","$repo/src/mvdm-host/wow32/wmmedia.c")
  Get-FileHash $inputs|Export-Csv -NoTypeInformation "$root/source-sha256.csv"
  $cases=if($Phase -eq 'all'){@('extension','mm-body','rejection')}elseif($Phase -eq 'original-frame'){@()}else{@($Phase)}
  foreach($case in $cases){
-  $sources=if($case -ne 'rejection'){@('src/wow32-dll/source/wow_user_native_extension.c','test/adapter-mvdm-host-out/wow/wow_native_extension_boundary_fixture.c')}else{@('src/mvdm-host/wow32/wcall16.c','test/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c')}
+  $sources=if($case -ne 'rejection'){@('src/compat/wow_user_native_extension.c','test/adapter-mvdm-host-out/wow/wow_native_extension_boundary_fixture.c')}else{@('src/mvdm-host/wow32/wcall16.c','test/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c')}
   if($case -eq 'mm-body'){$sources+='src/mvdm-host/wow32/wmmedia.c'}
   $objects=@();$i=0
   foreach($source in $sources){

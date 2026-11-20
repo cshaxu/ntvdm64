@@ -36,7 +36,7 @@ static BOOL WINAPI input_attach(DWORD first, DWORD second, BOOL attach)
 #define HeapAlloc input_alloc
 #define HeapFree input_free
 #define AttachThreadInput input_attach
-#include "wow32-dll/source/wow_input_group_lifetime.c"
+#include "compat/wow_input_group_lifetime.c"
 #undef HeapAlloc
 #undef HeapFree
 #undef AttachThreadInput

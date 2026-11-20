@@ -110,7 +110,7 @@ if ($link -notmatch '\bobj/compat/wow-dialog-lookup\.obj\b') {
     throw 'The compat dialog lookup must be linked into the formal graph.'
 }
 if ($link -notmatch '\bobj/wow32-dll/wow_button_resources\.obj\b' -or
-    [IO.File]::ReadAllText((Join-Path $root 'src/wow32-dll/source/wow_button_resources.c')) -notmatch
+    [IO.File]::ReadAllText((Join-Path $root 'src/compat/wow_button_resources.c')) -notmatch
         '#include "compat/include/wow_button_style_table\.h"') {
     throw 'The button resource owner must compile the original static atlas table.'
 }

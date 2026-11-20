@@ -285,8 +285,7 @@ $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc
                          'mvdm_vm_notification.c',
                          'mvdm_vm_wake.c',
                          'mvdm_vm_continuation.c', 'mvdm_vm_command.c', 'mvdm_vm_application.c', 'mvdm_vm_execute.c', 'mvdm_vm_io.c', 'mvdm_vm_executor.c', 'mvdm_vm_ingress.c',
-                         'mvdm_softpc_wow_page_domain.c',
-                         'mvdm_standalone_worker.c',
+                                                  'mvdm_standalone_worker.c',
                          'ntvdm_dos_observer.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_text_video.c',
@@ -1221,11 +1220,12 @@ $adapterMonitorObjects = foreach ($name in $adapterMonitorNames) {
     $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
-$adapterDebuggerRoot = Join-Path $root 'src/ntvdm-exe/debugger/source'
+$adapterDebuggerRoot = Join-Path $root 'src/compat'
+$compatCcpuFlags = ($libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + (($softpcIncludeRootPaths | Where-Object { $_ -match '^src/(compat|mvdm-host|non-mvdm)(/|$)' } | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }) -join ' '))
 $adapterDebuggerObjects = foreach ($name in $adapterDebuggerNames) {
-    $object = 'obj/adapter-debugger/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $object = 'obj/compat/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterDebuggerRoot $name)))
-    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
+    $graph.Add('  cflags = ' + $compatCcpuFlags)
     $object
 }
 $originalDebuggerObject = 'obj/mvdm-debugger/dbg.obj'
@@ -1239,6 +1239,9 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $graph.Add('  cflags = ' + $authoredSoftpcFlags + $videoInclude)
     $object
 }
+$graph.Add('build obj/compat/mvdm_softpc_wow_page_domain.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_wow_page_domain.c')))
+$graph.Add('  cflags = ' + $compatCcpuFlags)
+$adapterSoftpcObjects += 'obj/compat/mvdm_softpc_wow_page_domain.obj'
 $graph.Add('build obj/adapter-softpc/mvdm_shadow_registry.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_shadow_registry.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_shadow_registry.obj'

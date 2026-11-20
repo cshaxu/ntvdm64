@@ -22,7 +22,7 @@ function Replace-One($text,$old,$replacement){
  return $text.Replace($old,$replacement)
 }
 try{
- $source="$repo/src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c"
+ $source="$repo/src/compat/mvdm_softpc_wow_page_domain.c"
  $inputs=@($source,$PSCommandPath,"$PSScriptRoot/../observation/wow_page_cost_instrument.h","$PSScriptRoot/../observation/wow_page_cost_data.h","$PSScriptRoot/../observation/wow_page_cost_probe.h","$PSScriptRoot/../observation/wow_mine_latency_probe.c","$PSScriptRoot/../observation/wow_mine_gameplay_probe.c","$PSScriptRoot/verify-wow-mine-latency.ps1",$Observer,$CompilerDriver,$LogonHelper,"$repo/assets/winnt.zip","$WorkerBuildRoot/build.ninja","$WorkerBuildRoot/ntvdm.exe","$WorkerBuildRoot/ntvdm.exe.map","$WorkerBuildRoot/ntvdm.lib","$ProviderBuildRoot/wow32.dll","$ProviderBuildRoot/wow32.dll.map")
  $inputs+=@(Get-ChildItem $WorkerBuildRoot -File -Filter '*.lib').FullName
  $inputs|Sort-Object -Unique|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
@@ -60,9 +60,9 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,const mvdm_soft
  # branch, loop, ownership transition or guest source is edited.
  $overlay='#include "'+($PSScriptRoot.Replace('\','/'))+'/wow_page_cost_instrument.h"'+"`r`n#define qsort page_cost_qsort`r`n"+$bodies+"`r`n"+$wrappers
  [IO.File]::WriteAllText("$root/page-domain-profile.c",$overlay,[Text.UTF8Encoding]::new($false))
- $cc=@(& ninja.exe -C $WorkerBuildRoot -t commands obj/adapter-softpc/mvdm_softpc_wow_page_domain.obj)[-1]
+ $cc=@(& ninja.exe -C $WorkerBuildRoot -t commands obj/compat/mvdm_softpc_wow_page_domain.obj)[-1]
  if($LASTEXITCODE){throw 'Cannot read actual worker compile command'}
- $cc=Replace-One $cc '/Foobj/adapter-softpc/mvdm_softpc_wow_page_domain.obj' ('/Fo"'+$root+'/page-domain-profile.obj"')
+ $cc=Replace-One $cc '/Foobj/compat/mvdm_softpc_wow_page_domain.obj' ('/Fo"'+$root+'/page-domain-profile.obj"')
  $cc=Replace-One $cc ($source.Replace('\','/')) ('"'+$root+'/page-domain-profile.c"')
  $link=@(& ninja.exe -C $WorkerBuildRoot -t commands ntvdm.exe)[-1]
  if($LASTEXITCODE -or $link -notmatch '^cmd.exe /d /s /c "(.*)"$'){throw 'Cannot read actual worker link command'}

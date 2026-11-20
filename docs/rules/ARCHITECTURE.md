@@ -43,6 +43,11 @@ The gate must check newly admitted units against A/B/C rather than skip them.
 The named `compat/mvdm_softpc_effective_address.c` admission consumes original
 CCPU descriptor/register providers; its compiler header closure is checked
 in both the production x86 worker and the x86 reference graph.
+The P81 named USER/page-domain/debug adapters use the same approved B-to-C
+exception. The gate enumerates each source and checks its real compiler
+headers and prerequisites; no whole-directory or product-header exemption.
+Request notification and separate-launch composition remain in F.
+
 Migrating only declarations, or calling an F provider behind a B ABI, does
 not remove an outward dependency.
 

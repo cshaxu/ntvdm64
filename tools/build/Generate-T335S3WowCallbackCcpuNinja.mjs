@@ -53,7 +53,7 @@ const lines = [
   `build ${local('boundary.obj')}: cc ${source('test/mvdm-host/t335_s3_callback_test_boundary.c')}`,
   `build ${local('ccpu-wait.obj')}: cc ${source('src/compat/mvdm_softpc_ccpu_wait.c')}`,
   `  cflags = /nologo /c /MT /W4 /we4013 /showIncludes /I "${source('src')}"`,
-  `build ${local('lease.obj')}: cc ${source('src/wow32-dll/source/wow_callback_frame_lease.c')}`,
+  `build ${local('lease.obj')}: cc ${source('src/compat/wow_callback_frame_lease.c')}`,
   `build ${local('wcall16.obj')}: cc ${source('src/mvdm-host/wow32/wcall16.c')}`,
   `build ${local('original-wcall16.lib')}: lib ${local('wcall16.obj')}`,
   `build ${local('original-callback-ccpu-x86.exe')}: link ${local('fixture.obj')} ${local('seams.obj')} ${local('boundary.obj')} ${local('ccpu-wait.obj')} ${local('lease.obj')} ${local('original-wcall16.lib')} ${baseFile('obj/test/ccpu_bounded_execution_fixture_seams.obj')} ${baseFile('obj/controller/at_dma.obj')} ${baseFile('obj/controller/ica.obj')} ${baseFile('obj/support/ios.obj')} ${baseFile('obj/patch/fmstubs_vector_defaults.obj')} ${baseFile('original-ccpu40.lib')} ${baseFile('original-host-lifecycle.lib')} ${baseFile('lifecycle-adapter.lib')}`,

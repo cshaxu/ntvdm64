@@ -42,7 +42,7 @@ foreach ($assignment in $assignments) {
 }
 $objects = @('obj/wow32.obj','obj/wcall32.obj','obj/wres32.obj','obj/wuclip.obj','obj/wmdisp32.obj',
     'obj/wudlg.obj','obj/wumsg.obj','obj/wuwind.obj','obj/wgfont.obj','obj/wuser.obj','obj/wdde.obj',
-    'obj/wow32-dll/wow_user_task_lifecycle.obj')
+    'obj/compat/wow_user_task_lifecycle.obj')
 $symbolSets = @{}
 $identities = foreach ($relative in $objects) {
     $path = Join-Path $BuildRoot $relative
@@ -97,7 +97,7 @@ if ($code -notmatch 'RegisterWowBaseHandlers\(W32DDEFreeGlobalMem32\)') {
 foreach ($encoding in @('A','W')) {
     $bridge = '\|\s*_wow_native_CallMsgFilter' + $encoding + '@8\s*$'
     $native = '\|\s*__imp__CallMsgFilter' + $encoding + '@8\s*$'
-    $scope = $symbolSets['obj/wow32-dll/wow_user_task_lifecycle.obj']
+    $scope = $symbolSets['obj/compat/wow_user_task_lifecycle.obj']
     if (!@($scope | Where-Object { $_ -match 'SECT\w+' -and $_ -match $bridge }).Count -or
         !@($scope | Where-Object { $_ -match 'UNDEF' -and $_ -match $native }).Count) {
         throw "CallMsgFilter$encoding must define its stdcall scope and retain its actual native encoding"

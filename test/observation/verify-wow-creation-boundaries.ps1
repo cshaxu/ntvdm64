@@ -24,7 +24,7 @@ function Invoke-CompileCommand([string]$command) {
 $commands=& $Ninja -C $provider -t commands wow32.dll
 if($LASTEXITCODE){throw 'Unable to read production compile graph'}
 if($Case -eq 'common-dialog') {
-    Invoke-CompileCommand ('"'+$Ninja+'" obj/wow32-dll/wow_task_cleanup_entry.obj obj/wow32-dll/wow_common_dialog_callback.obj')
+    Invoke-CompileCommand ('"'+$Ninja+'" obj/compat/wow_task_cleanup_entry.obj obj/compat/wow_common_dialog_callback.obj')
 }
 $source=switch($Case){'hook'{'wow_hook_callback'} 'timer'{'wow_timer_callback'} 'idle'{'wow_idle_hook_binding'} 'common-dialog'{'wow_common_dialog_callback'} default{'wow_window_creation_binding'}}
 $compile=$commands | Where-Object {$_ -match ($source+'\.c$')} | Select-Object -Last 1
@@ -33,7 +33,7 @@ $fixtureName=switch($Case){'hook'{'wow_hook_callback_fixture.c'} 'timer'{'wow_ti
 $fixture=$compile -replace ('/Fo\S+\s+\S+'+$source+'\.c$'), ('/Fo"'+$out+'\fixture.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\'+$fixtureName+'"')
 if($fixture -eq $compile){throw 'Fixture substitution failed'}
 if($Case -eq 'menu') {
-    $text=Get-Content "$repo/src/wow32-dll/source/wow_window_creation_binding.c" -Raw
+    $text=Get-Content "$repo/src/compat/wow_window_creation_binding.c" -Raw
     if(!$text.Contains('BOOL WINAPI wow_window_creation_menu(')){throw 'Missing production menu boundary'}
     # Extract the exact standalone boundary, not a prefix containing unrelated
     # static callers. No algorithm is copied or rewritten in the fixture.

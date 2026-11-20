@@ -1,7 +1,7 @@
 #include "../../common/guest_memory_fixture.h"
 #include <stdio.h>
 #include <string.h>
-#include "wow32-dll/include/wow_callback_frame_lease.h"
+#include "compat/include/wow_callback_frame_lease.h"
 
 /* Actual WOW binding and bounce-lease implementation; only descriptor lookup
  * and backing memory are stand-ins. This is not guest/provider acceptance. */

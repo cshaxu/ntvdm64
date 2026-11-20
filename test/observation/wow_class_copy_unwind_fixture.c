@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "compat/include/mvdm_softpc_wow_page_domain.h"
 #define MVDM_SOFTPC_HANDLE_ENTRY_COUNT 0x10000u
 typedef struct mvdm_softpc_wow_class_allocation {
     struct mvdm_softpc_wow_class_allocation *next;

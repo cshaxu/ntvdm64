@@ -68,7 +68,7 @@ DATA OBJECTS      : None
 #include "error.h"
 #include "config.h"
 #include "cntlbop.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "compat/include/mvdm_softpc_wow_page_domain.h"
 #line 71
 #include "host_bop.h"
 #include "demexp.h"

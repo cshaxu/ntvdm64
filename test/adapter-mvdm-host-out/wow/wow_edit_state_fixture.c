@@ -2,13 +2,13 @@
 #include "wow_dialog_state_bindings.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_user_borrow_scope.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "compat/include/mvdm_softpc_wow_page_domain.h"
 #include "non-mvdm/public/internal/windows/inc/wingdip.h"
 #include <stdio.h>
 #include <string.h>
 
 /* Supplemental original FNID and host-storage contract. Not real EDIT
- * allocation/teardown or guest acceptance. Link the OpenNT-derived wow32-dll/source/wow_control_fnid.c
+ * allocation/teardown or guest acceptance. Link the OpenNT-derived compat/wow_control_fnid.c
  * in its scoped EDIT selection, never the native NtUserSetWindowFNID. */
 static unsigned failures;
 static unsigned final_calls;

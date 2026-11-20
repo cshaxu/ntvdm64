@@ -20,12 +20,12 @@ function Owned($name,$image,$line,$seconds,$expected=0){
 }
 try{
  $fixture="$repo/test/adapter-mvdm-host-out/wow/wow_input_lifetime_fixture.c"
- $original="$repo/src/wow32-dll/source/wow_input_membership.c"
+ $original="$repo/src/compat/wow_input_membership.c"
  Get-FileHash $PSCommandPath,$driver,$originalObject,$fixture,$original,"$repo/test/adapter-mvdm-host-out/wow/wow_input_queue_witness.h",
-  "$repo/src/wow32-dll/source/wow_input_group_lifetime.c",
-  "$repo/src/wow32-dll/include/wow_input_group_lifetime.h",
-  "$repo/src/wow32-dll/include/wow_input_group_bindings.h",
-  "$repo/src/wow32-dll/include/wow_task_order_bindings.h"|Export-Csv -NoTypeInformation "$root/inputs.csv"
+  "$repo/src/compat/wow_input_group_lifetime.c",
+  "$repo/src/compat/include/wow_input_group_lifetime.h",
+  "$repo/src/compat/include/wow_input_group_bindings.h",
+  "$repo/src/compat/include/wow_task_order_bindings.h"|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Copy-Item $originalObject "$root/original-input.obj"
  foreach($spec in ,@('fixture',$fixture)){
   $line='/d /s /c ""'+$driver+'" cl.exe /nologo /c /MT /O2 /Gz /W4 /WX /I"'+$repo+'/src" /I"'+$repo+'/src/wow32-dll/include" /Fo"'+$root+'/'+$spec[0]+'.obj" "'+$spec[1]+'""'

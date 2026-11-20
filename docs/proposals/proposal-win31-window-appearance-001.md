@@ -42,10 +42,10 @@ is installed into the owning process.
 The read-only source check establishes the following static paths; it is not
 runtime appearance acceptance:
 
-- WOW's [window creation binding](../../src/wow32-dll/source/wow_window_creation_binding.c)
+- WOW's [window creation binding](../../src/compat/wow_window_creation_binding.c)
   calls host `CreateWindowExA/W`. Its scoped `WH_CBT` hook binds WOW metadata;
   it is not an appearance hook.
-- WOW's [dialog creation binding](../../src/wow32-dll/source/wow_dialog_creation_binding.c)
+- WOW's [dialog creation binding](../../src/compat/wow_dialog_creation_binding.c)
   calls host `CreateDialogIndirectParamA/W`. Dialog HWNDs must also reach the
   shared appearance installation path.
 - [Native execution](../../src/ntvwm-exe/execution.c) installs nthook before
@@ -107,7 +107,7 @@ of the active sequential stage.
 The common implementation owns caption/border/button drawing, palette, metrics,
 DPI adaptation, non-client geometry and hit testing. Installation must preserve
 the existing HWND and application client rendering. In particular, retain
-[WOW's native window procedure](../../src/wow32-dll/source/wow_window_words_binding.c),
+[WOW's native window procedure](../../src/compat/wow_window_words_binding.c),
 its guest callbacks, metadata and message conversions. Messages outside the
 proved appearance contract continue through the original window procedure;
 system commands retain their native behavior. Review subclass ordering,

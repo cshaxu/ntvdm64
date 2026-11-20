@@ -15,7 +15,7 @@ function Assert-ConsumerBoundary([string]$text,[string]$shared,[string[]]$privat
         if($text.Contains($path)){throw "Private guest-memory contract leaked: $path"}
     }
 }
-$wow=Get-Dependencies $WowBuildRoot 'obj/wow32-dll/wow_callback_frame_lease.obj'
+$wow=Get-Dependencies $WowBuildRoot 'obj/compat/wow_callback_frame_lease.obj'
 $redir=Get-Dependencies $WorkerBuildRoot 'obj/vdmredir-dll/mvdm_redirector_guest_copy.obj'
 $wowPrivate=@('src/compat/include/guest_memory_lease.h',
     'src/ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h')

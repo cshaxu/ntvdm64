@@ -20,7 +20,7 @@ try{
  if(!$ImageRoot){$ImageRoot="$repo/assets/release"}
  $ImageRoot=(Resolve-Path $ImageRoot).Path
  if($ImageRoot -ne "$repo\assets\release" -and !$ImageRoot.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Only manifest-coherent build/release image roots are admitted'}
- $source="$repo/src/wow32-dll/source/wow_window_words_binding.c"
+ $source="$repo/src/compat/wow_window_words_binding.c"
  $inputs=@($PSCommandPath,$source,$Observer,$CompilerDriver,"$ProviderBuildRoot/build.ninja","$ProviderBuildRoot/wow32.dll","$ProviderBuildRoot/wow32.dll.map","$ProviderBuildRoot/wow32-x86.def","$WorkerBuildRoot/ntvdm.exe","$WorkerBuildRoot/ntvdm.exe.map","$WorkerBuildRoot/ntvdm.lib","$repo/assets/winnt.zip","$repo/assets/release/release-manifest.json","$PSScriptRoot/../observation/verify-wow-callback-cost-probe.ps1","$PSScriptRoot/../observation/wow_callback_cost_fixture.c","$PSScriptRoot/../observation/wow_callback_cost_data.h","$PSScriptRoot/../observation/wow_callback_cost_instrument.h","$PSScriptRoot/../observation/wow_callback_cost_dispatch.h","$PSScriptRoot/../observation/wow_callback_cost_probe.h","$PSScriptRoot/../observation/wow_observer_cost.h","$PSScriptRoot/verify-wow-mine-latency.ps1","$PSScriptRoot/../observation/wow_mine_latency_probe.c","$PSScriptRoot/../observation/wow_mine_gameplay_probe.c","$PSScriptRoot/../observation/summarize-wow-callback-cost.ps1")
  $published=@(Get-Content "$repo/assets/release/release-manifest.json" -Raw|ConvertFrom-Json)
  $images=@(Get-Content "$ImageRoot/release-manifest.json" -Raw|ConvertFrom-Json)
@@ -30,10 +30,10 @@ try{
  $null=New-Item -ItemType Directory "$root/sealed-images"
  foreach($image in $images){$path="$ImageRoot/$($image.name)";if((Get-FileHash $path).Hash -ne $image.sha256){throw 'Selected image manifest mismatch'};$inputs+=$path;Copy-Item $path "$root/sealed-images/$($image.name)"}
  foreach($pair in @(@('ntvdm.exe',$WorkerBuildRoot),@('WOW32.DLL',$ProviderBuildRoot))){if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (Get-FileHash "$root/sealed-images/$($pair[0])").Hash){throw 'Image/MAP baseline mismatch'};Copy-Item "$($pair[1])/$($pair[0]).map" "$root/sealed-images/$($pair[0]).map"}
- $deps=@(& ninja.exe -C $ProviderBuildRoot -t deps obj/wow32-dll/wow_window_words_binding.obj);if($LASTEXITCODE){throw 'Cannot read original compile dependencies'}
+ $deps=@(& ninja.exe -C $ProviderBuildRoot -t deps obj/compat/wow_window_words_binding.obj);if($LASTEXITCODE){throw 'Cannot read original compile dependencies'}
  $deps|Set-Content "$root/original-deps.txt"
  $inputs+=@($deps|ForEach-Object {if($_ -match '^\s+([A-Za-z]:[/\\].*)$' -and (Test-Path $Matches[1])){$Matches[1]}})
- $cc=@(& ninja.exe -C $ProviderBuildRoot -t commands obj/wow32-dll/wow_window_words_binding.obj)[-1];if($LASTEXITCODE){throw 'Cannot read original compile rule'}
+ $cc=@(& ninja.exe -C $ProviderBuildRoot -t commands obj/compat/wow_window_words_binding.obj)[-1];if($LASTEXITCODE){throw 'Cannot read original compile rule'}
  $link=@(& ninja.exe -C $ProviderBuildRoot -t commands wow32.dll)[-1];if($LASTEXITCODE -or $link -notmatch '^link '){throw 'Cannot read original provider link rule'}
  $parentReferences=[regex]::Matches($link,'(?<!\S)(?:"([^"]*[\\/]ntvdm\.lib)"|([^\s"]*[\\/]ntvdm\.lib))(?=\s|$)')
  if($parentReferences.Count -ne 1){throw 'Expected one explicit parent import library'}
@@ -54,9 +54,9 @@ try{
  if($restored -cne $original.Replace("`r`n","`n")){throw 'Body/phase reversal failed'}
  $overlay='#include "'+$PSScriptRoot.Replace('\','/')+'/wow_callback_cost_instrument.h"'+"`r`n"+$body+"`r`n"+'#include "'+$PSScriptRoot.Replace('\','/')+'/wow_callback_cost_dispatch.h"'+"`r`n"
  [IO.File]::WriteAllText("$root/callback-profile.c",$overlay,[Text.UTF8Encoding]::new($false))
- $cc=Replace-One $cc '/Foobj/wow32-dll/wow_window_words_binding.obj' ('/Fo"'+$root+'/callback-profile.obj"')
+ $cc=Replace-One $cc '/Foobj/compat/wow_window_words_binding.obj' ('/Fo"'+$root+'/callback-profile.obj"')
  $cc=Replace-One $cc $source.Replace('\','/') ('"'+$root+'/callback-profile.c"')
- $link=Replace-One $link ' obj/wow32-dll/wow_window_words_binding.obj ' (' "'+$root+'/callback-profile.obj" ')
+ $link=Replace-One $link ' obj/compat/wow_window_words_binding.obj ' (' "'+$root+'/callback-profile.obj" ')
  $link=Replace-One $link '/map:wow32.dll.map ' ('/map:"'+$root+'/WOW32.DLL.map" ')
  $link=Replace-One $link '/out:wow32.dll ' ('/out:"'+$root+'/WOW32.DLL" /implib:"'+$root+'/WOW32.lib" ')
  @{compile=$cc;link=$link;bodyReversal=$true;sourceModified=$false}|ConvertTo-Json|Set-Content "$root/commands.json"

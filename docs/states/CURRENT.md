@@ -28,6 +28,14 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P81 [USER/page-domain batch](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-user-batch-owner.json)
+migrates125 source/header paths and shared registration state into B under the
+approved C-adapter exception. Product launch/start notification stays F.
+Cached full build, dual11/22 hashes, targeted lifecycle/CCPU/Win16 tests and
+compiled boundary checks passed. Mirror delta0 points/0 lines; package
+`d66aa061-9bc9-4698-9be9-d985ff13c94e`. Eliminated213 IDs: current397/171.
+Enclosing commit/push is the receipt; S14 and remaining chains stay active.
+
 P80 [effective-address implementation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-effective-address-owner.json)
 moves the actual provider/header F to B under the approved CCPU exception.
 Bodies/header preserved; mirror delta0/0.
@@ -44,16 +52,6 @@ session/USER/real CCPU/terminal tests, Win16 dialog8 phases and eight A/B graphs
 passed. Package `4ad1ddc2-9bd7-4af8-b282-747d801bbd79`; mirror delta0 points/0 lines.
 Three outer consumer dependencies removed; ledger182/386 unchanged until whole
 chains migrate. Final governance and enclosing commit/push are the receipt.
-
-P78 [B-to-C admission and notification boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-b-c-admission-start-owner.json)
-records the approved B adapter exception; no new C component. Product startup
-notification stays F; lifecycle acquire/complete retains existing state and
-unwind ordering. Cached full builds, dual11/22-hash publication, notification
-retry/unwind, init, native nesting, real Win16 dialog8 phases and eight A/B
-graphs passed. Package `69c09f52-2fa2-40dd-911e-afb32e1b9a7b`.
-Mirror delta0 points/0 lines; ledger182 eliminated/386 open, no new closures.
-Lifecycle relocation is pending. Final governance and enclosing commit/push
-provide the delivery receipt.
 
 
 P76 [scalar observation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-observation-owner.json)

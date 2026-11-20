@@ -38,7 +38,7 @@ try {
     # output slot.  The same project-owned translation unit also contains
     # menu and default-message helpers whose providers are intentionally
     # outside this S2 resource seam.
-    Build 'cursor-binding-compile' ('cl.exe /nologo /TC /c /MT /Gy /W4 /WX'+$include+' /Fo"'+$out+'/cursor-binding.obj" "'+$repo+'/src/wow32-dll/source/wow_private_user_compat.c"')
+    Build 'cursor-binding-compile' ('cl.exe /nologo /TC /c /MT /Gy /W4 /WX'+$include+' /Fo"'+$out+'/cursor-binding.obj" "'+$repo+'/src/compat/wow_private_user_compat.c"')
     Build 'cursor-resource-link' ('link.exe /nologo /machine:x86 /subsystem:console /opt:ref /out:"'+$out+'/cursor-resource.exe" "'+$out+'/cursor-resource.obj" "'+$out+'/cursor-binding.obj" user32.lib gdi32.lib kernel32.lib')
     foreach($mode in @('binding','public')) {
         $arguments=if($mode -eq 'public'){'public'}else{' '}

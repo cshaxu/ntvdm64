@@ -13,7 +13,7 @@
 
 
 #include "precomp.h"
-#include "common/wow/page_domain.h"
+#include "compat/include/wow_page_domain.h"
 #line 16
 #pragma hdrstop
 

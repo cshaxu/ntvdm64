@@ -28,8 +28,8 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds,
 try {
     # Compile the complete selected original file, never extract/rewrite the
     # function. /Gy permits discarding unrelated functions at this fixture link.
-    $sources=@('src/mvdm-host/wow32/wcall16.c','src/wow32-dll/source/wow_callback_frame_lease.c','test/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c')
-    if(!$ReferenceRevision){$sources+='src/wow32-dll/source/wow_user_native_extension.c'}
+    $sources=@('src/mvdm-host/wow32/wcall16.c','src/compat/wow_callback_frame_lease.c','test/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c')
+    if(!$ReferenceRevision){$sources+='src/compat/wow_user_native_extension.c'}
     $objects=@()
     foreach($source in $sources){
         $name=[IO.Path]::GetFileNameWithoutExtension($source)
@@ -61,7 +61,7 @@ try {
     if($output -notmatch 'PASS selected CallBack16' -or
         ([regex]::Matches($output,'ORIGINAL_CALLBACK_FRAME phase=')).Count -ne 4){throw 'Missing frame assertions'}
     if(([regex]::Matches((Get-Content "$root/abort.out" -Raw),'CALLBACK_ABORT_OK name=')).Count -ne 11){throw 'Missing complete abort phase/mode/terminal assertions'}
-    @($sources|ForEach-Object {"$repo/$_"}) + @("$ProviderBuildRoot/build.ninja","$repo/test/adapter-mvdm-host-out/wow/wow_original_callback_frame_fixture.c","$repo/src/wow32-dll/include/wow_callback_frame_lease.h") |
+    @($sources|ForEach-Object {"$repo/$_"}) + @("$ProviderBuildRoot/build.ninja","$repo/test/adapter-mvdm-host-out/wow/wow_original_callback_frame_fixture.c","$repo/src/compat/include/wow_callback_frame_lease.h") |
         ForEach-Object { Get-FileHash -LiteralPath $_ } | Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root/inputs.json"
     '0'|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw}

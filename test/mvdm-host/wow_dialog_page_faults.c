@@ -3,7 +3,7 @@
  * All original implementation and internal calls remain in this TU. */
 #define mvdm_softpc_wow_page_domain_publish_handle wow_dialog_real_publish_handle
 #define mvdm_softpc_wow_page_domain_callback_window wow_dialog_real_callback_window
-#include "ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c"
+#include "compat/mvdm_softpc_wow_page_domain.c"
 #undef mvdm_softpc_wow_page_domain_publish_handle
 #undef mvdm_softpc_wow_page_domain_callback_window
 unsigned wow_dialog_fail_publication;

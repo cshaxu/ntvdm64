@@ -220,29 +220,33 @@ foreach ($library in $fixtureLibraries) {
 $commands = & $ninja -C $provider -t commands wow32.dll
 $compile = $commands | Where-Object { $_ -match 'wow_user_task_lifecycle\.c$' } | Select-Object -Last 1
 if (!$compile) { throw 'Missing production compile command' }
+# The cross-component fixtures also exercise F notification/private access.
+# Add their explicit dependency only to this test command template; the
+# production B source keeps its A/B/C-only compiler header closure.
+$compile = $compile -replace '/Fo', ('/I"'+$repo+'/src/wow32-dll/include" /Fo')
 $combinedSeams = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\combined-seams.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_combined_fixture_seams.c"')
 if ($combinedSeams -eq $compile) { throw 'Combined fixture seam substitution failed' }
 Invoke-Build ($combinedSeams.Replace('/Gz', '/Gd'))
 $fixtureSupportObjects += Join-Path $out 'combined-seams.obj'
-Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_user_task_lifecycle.obj'
+Invoke-NinjaTarget $provider 'obj/compat/wow_user_task_lifecycle.obj'
 $fixtureName = if ($Case -eq 'class-client') { 'wow_class_client_fixture.c' } else { 'wow_user_task_lifecycle_fixture.c' }
 if ($Case -eq 'original-hook-cleanup') { $fixtureName = 'wow_original_hook_cleanup_fixture.c' }
 if ($Case -eq 'class-lifetime') { $fixtureName = 'wow_window_class_lifetime_fixture.c' }
 if ($Case -eq 'process-retirement') { $fixtureName = 'wow_process_retirement_fixture.c' }
 if ($Case -eq 'native-dispatch-gate') {
-    Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_window_words_binding.obj'
+    Invoke-NinjaTarget $provider 'obj/compat/wow_window_words_binding.obj'
     $fixtureName = 'wow_native_dispatch_gate_fixture.c'
 }
 if ($Case -eq 'window-procedure') {
-    Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_window_words_binding.obj obj/wow32-dll/wow_class_words_binding.obj obj/wow32-dll/wow_user_private_access.obj'
+    Invoke-NinjaTarget $provider 'obj/compat/wow_window_words_binding.obj obj/compat/wow_class_words_binding.obj obj/wow32-dll/wow_user_private_access.obj'
     $fixtureName = 'wow_window_procedure_fixture.c'
 }
 if ($Case -eq 'standard-class') {
-    Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_standard_class_bindings.obj obj/wow32-dll/wow_class_words_binding.obj'
+    Invoke-NinjaTarget $provider 'obj/compat/wow_standard_class_bindings.obj obj/compat/wow_class_words_binding.obj'
     $fixtureName = 'wow_standard_class_fixture.c'
 }
 if ($Case -eq 'class-query') {
-    Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_class_client_bindings.obj obj/wow32-dll/wow_user_private_access.obj'
+    Invoke-NinjaTarget $provider 'obj/compat/wow_class_client_bindings.obj obj/wow32-dll/wow_user_private_access.obj'
     $fixtureName = 'wow_class_query_fixture.c'
 }
 if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
@@ -284,7 +288,7 @@ if ($Case -eq 'native-nested') {
     $fixture += ' /DWOW_NATIVE_NESTED_FIXTURE /I"'+$out+'"'
     # Compile the actual current production macro, not a handwritten copy of
     # its exception/finally algorithm. Only the native throwing leaf differs.
-    $nativeOwner = Join-Path $repo 'src/wow32-dll/source/wow_user_task_lifecycle.c'
+    $nativeOwner = Join-Path $repo 'src/compat/wow_user_task_lifecycle.c'
     $nativeText = [IO.File]::ReadAllText($nativeOwner).Replace("`r`n","`n")
     $afterStart = $nativeText.IndexOf('#define WOW_NATIVE_CALL_AFTER(')
     $afterEnd = $nativeText.IndexOf('#define WOW_NATIVE_CALL_RESULT(', $afterStart)
@@ -436,7 +440,7 @@ $parentObjects = @((Join-Path $out 'parent-stub.obj'))
 if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
     $startupTd = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\startup-td.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_startup_td_fixture.c"')
     if ($startupTd -eq $compile) { throw 'Startup TD fixture substitution failed' }
-    Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_task_cleanup_entry.obj'
+    Invoke-NinjaTarget $provider 'obj/compat/wow_task_cleanup_entry.obj'
     Invoke-Build $startupTd
     $parentObjects += Join-Path $out 'startup-td.obj'
 }
@@ -479,7 +483,7 @@ foreach ($object in $objects) {
 if ($TerminalSchedule) {
     # The two test-only hooks force the competing retirement to wait for the
     # actual runtime owner. All product source and cached objects stay intact.
-    $source = [IO.File]::ReadAllText((Join-Path $repo 'src/wow32-dll/source/wow_window_words_binding.c'))
+    $source = [IO.File]::ReadAllText((Join-Path $repo 'src/compat/wow_window_words_binding.c'))
     $start = $source.IndexOf('BOOL WINAPI wow_window_words_terminal(')
     $finish = $source.IndexOf('LRESULT CALLBACK wow_window_terminal_observer(', $start)
     if ($start -lt 0 -or $finish -le $start) { throw 'Terminal source region missing' }
@@ -500,14 +504,14 @@ if ($TerminalSchedule) {
     $terminalCompile = $terminalCompile -replace '/Fo\S+\s+\S+wow_window_words_binding\.c$', ('/Fo"'+$out+'\terminal-schedule-probe.obj" "'+$instrumented+'"')
     if ($terminalCompile -notmatch 'terminal-schedule-probe\.c"$') { throw 'Terminal compile substitution failed' }
     Invoke-Build $terminalCompile
-    $original = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_window_words_binding\.obj$' })
+    $original = @($objects | Where-Object { $_ -match '[\\/]compat[\\/]wow_window_words_binding\.obj$' })
     if ($original.Count -ne 1) { throw 'Expected exactly one terminal owner' }
     $objects = @($objects | Where-Object { $_ -notin $original })
     $parentObjects += Join-Path $out 'terminal-schedule-probe.obj'
 }
 if ($CallbackGraphOverlap) {
     # Test-only synchronization at the exact graph lock boundary.
-    $graphPath = Join-Path $repo 'src/wow32-dll/source/wow_user_object_bindings.c'
+    $graphPath = Join-Path $repo 'src/compat/wow_user_object_bindings.c'
     $source = [IO.File]::ReadAllText($graphPath)
     $start = $source.IndexOf('static BOOL refresh_graph_owned(')
     $finish = $source.IndexOf('BOOL WINAPI wow_user_window_refresh_graph(', $start)
@@ -527,7 +531,7 @@ if ($CallbackGraphOverlap) {
     $graphCompile = $graphCompile -replace '/Fo\S+\s+\S+wow_user_object_bindings\.c$', ('/Fo"'+$out+'\callback-graph-probe.obj" "'+$instrumented+'"')
     if ($graphCompile -notmatch 'callback-graph-probe\.c"$') { throw 'Graph compile substitution failed' }
     Invoke-Build $graphCompile
-    $original = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_user_object_bindings\.obj$' })
+    $original = @($objects | Where-Object { $_ -match '[\\/]compat[\\/]wow_user_object_bindings\.obj$' })
     if ($original.Count -ne 1) { throw 'Expected exactly one graph owner' }
     $objects = @($objects | Where-Object { $_ -notin $original })
     $parentObjects += Join-Path $out 'callback-graph-probe.obj'
@@ -560,7 +564,7 @@ if ($RetirementLockProbe) {
         $path = (Resolve-Path -LiteralPath $RetirementProbeSource).Path
         if (!$path.StartsWith((Join-Path $repo 'build')+'\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Comparison source must be build-owned' }
         $path
-    } else { Join-Path $repo 'src/wow32-dll/source/wow_user_task_lifecycle.c' }
+    } else { Join-Path $repo 'src/compat/wow_user_task_lifecycle.c' }
     $source = [IO.File]::ReadAllText($sourcePath)
     $start = $source.IndexOf('static BOOL retire_task(')
     $finish = $source.IndexOf('BOOL WINAPI wow_user_task_lifecycle_exit(', $start)
@@ -582,7 +586,7 @@ if ($RetirementLockProbe) {
     $probeCompile = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\retirement-lock-probe.obj" "'+$instrumented+'"')
     if ($probeCompile -eq $compile) { throw 'Retirement probe compile substitution failed' }
     Invoke-Build $probeCompile
-    $original = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_user_task_lifecycle\.obj$' })
+    $original = @($objects | Where-Object { $_ -match '[\\/]compat[\\/]wow_user_task_lifecycle\.obj$' })
     if ($original.Count -ne 1) { throw 'Expected exactly one lifecycle owner' }
     $objects = @($objects | Where-Object { $_ -notin $original })
     $parentObjects += Join-Path $out 'retirement-lock-probe.obj'
@@ -627,7 +631,7 @@ if ($CreationUnwind) {
     $unwindCompile = $creationCompile -replace '/Fo\S+\s+\S+wow_window_creation_binding\.c$', ('/Fo"'+$out+'\creation-unwind.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_creation_unwind_injection.c"')
     if ($unwindCompile -eq $creationCompile) { throw 'Creation unwind substitution failed' }
     Invoke-Build $unwindCompile
-    $originalCreationObjects = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_window_creation_binding\.obj$' })
+    $originalCreationObjects = @($objects | Where-Object { $_ -match '[\\/]compat[\\/]wow_window_creation_binding\.obj$' })
     if ($originalCreationObjects.Count -ne 1) { throw 'Expected exactly one production creation owner' }
     $objects = @($objects | Where-Object { $_ -notin $originalCreationObjects })
     $parentObjects += Join-Path $out 'creation-unwind.obj'
@@ -639,7 +643,7 @@ if ($Case -in @('window-procedure','native-dispatch-gate')) {
     $scopeCompile = $compile -replace '/Fo\S+\s+', ('/Fo"'+$out+'\procedure-scope.obj" ')
     if ($scopeCompile -eq $compile) { throw 'Procedure scope substitution failed' }
     Invoke-Build ($scopeCompile + ' /Dwow_task_callback_enter=wow_fixture_real_callback_enter /Dwow_task_callback_leave=wow_fixture_real_callback_leave')
-    $scopeObjects = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_user_task_lifecycle\.obj$' })
+    $scopeObjects = @($objects | Where-Object { $_ -match '[\\/]compat[\\/]wow_user_task_lifecycle\.obj$' })
     if ($scopeObjects.Count -ne 1) { throw 'Expected exactly one lifecycle owner' }
     $objects = @($objects | Where-Object { $_ -notin $scopeObjects })
     $parentObjects += Join-Path $out 'procedure-scope.obj'
@@ -652,7 +656,7 @@ if ($InitRollback) {
     if ($queueFixture -eq $queueCompile -or $releaseFixture -eq $compile) { throw 'Init fixture substitution failed' }
     Invoke-Build $queueFixture
     Invoke-Build $releaseFixture
-    $objects = @($objects | Where-Object { $_ -notmatch '[\\/]opennt-user[\\/]queue\.obj$|[\\/]wow32-dll[\\/]wow_user_task_lifecycle\.obj$' })
+    $objects = @($objects | Where-Object { $_ -notmatch '[\\/]opennt-user[\\/]queue\.obj$|[\\/]compat[\\/]wow_user_task_lifecycle\.obj$' })
     $parentObjects += @("$out/init-allocation.obj", "$out/init-release.obj")
 }
 & $lib /nologo "/out:$out\provider.lib" @objects >> "$out\build.log" 2>&1

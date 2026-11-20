@@ -14,8 +14,8 @@ $providerGraph=Get-Content "$ProviderBuildRoot/build.ninja" -Raw
 function Flags($body){[regex]::Match($body,'(?m)^cflags = (.*)\r?$').Groups[1].Value.Trim().Replace('$:',':')}
 $flags=Flags $graph;$providerFlags=Flags $providerGraph
 if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/MT') -or !$providerFlags.Contains('/MT')){throw 'Require actual CCPU40/MT worker and WOW32 graphs'}
-$controlObject='obj/wow32-dll/wow_callback_frame_lease.obj'
-$controlSource=$repo.Replace('\','/').Replace(':','$:')+'/src/wow32-dll/source/wow_callback_frame_lease.c'
+$controlObject='obj/compat/wow_callback_frame_lease.obj'
+$controlSource=$repo.Replace('\','/').Replace(':','$:')+'/src/compat/wow_callback_frame_lease.c'
 if($providerGraph -notmatch ('(?m)^build '+[regex]::Escape($controlObject)+': cc '+[regex]::Escape($controlSource)+'\r?$') -or
    $providerGraph -notmatch ('(?m)^build wow32\.dll[^\r\n]*: wow_dll_link [^\r\n]*\b'+[regex]::Escape($controlObject)+'(?: |\r?$)')){
     throw 'WOW32 graph does not compile and link the actual callback frame owner'
@@ -27,7 +27,7 @@ if($dependencies.Count -lt 30 -or $dependencies[0] -ne 'obj/tests/cpu40_descript
 $inputs=@($PSCommandPath,"$worker/build.ninja","$ProviderBuildRoot/build.ninja",
  "$repo/test/mvdm-host/wow_callback_abort_ccpu_fixture.c",
  "$repo/test/mvdm-host/wow_callback_abort_tls_fixture.c",
- "$repo/src/wow32-dll/source/wow_callback_frame_lease.c","$repo/src/wow32-dll/include/wow_callback_frame_lease.h",
+ "$repo/src/compat/wow_callback_frame_lease.c","$repo/src/compat/include/wow_callback_frame_lease.h",
  "$repo/src/mvdm-host/softpc.new/base/ccpu386/c_main.c","$repo/src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
  "$repo/src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c")+@($dependencies[1..($dependencies.Count-1)]|ForEach-Object {"$worker/$_"})
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
@@ -57,7 +57,7 @@ try{
   @{name='fixture';source="$repo/test/mvdm-host/wow_callback_abort_ccpu_fixture.c";flags=$flags+$fixtureExtra},
   @{name='tls';source="$repo/test/mvdm-host/wow_callback_abort_tls_fixture.c";flags=$flags+$fixtureExtra},
   @{name='cpu';source=$cpuSource;flags=$flags},
-  @{name='control';source="$repo/src/wow32-dll/source/wow_callback_frame_lease.c";flags=$providerFlags})
+  @{name='control';source="$repo/src/compat/wow_callback_frame_lease.c";flags=$providerFlags})
  foreach($item in $sources){
   $line='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe '+$item.flags+' /O2 /Gy /Gw /Fo"'+$root+'/'+$item.name+'.obj" "'+$item.source+'""'
   Run-Owned $item.name cmd.exe $line

@@ -68,6 +68,6 @@ BOOL WINAPI wow_native_DestroyWindow(HWND w)
  [IO.File]::WriteAllText("$out/link.cmd","@echo off`r`ncall `"$driver`" $link`r`nexit /b %errorlevel%`r`n")
  & cmd.exe /d /c "$out/link.cmd" *> "$out/link.log"
  if($LASTEXITCODE){throw 'Diagnostic link failed'}
- Get-FileHash "$repo/src/wow32-dll/source/wow_user_task_lifecycle.c","$repo/src/wow32-dll/source/wow_user_thunk_scope.c",$header,$PSCommandPath,"$out/WOW32.DLL","$out/wow_user_task_lifecycle.c","$out/wow_user_thunk_scope.c"|Export-Csv -NoTypeInformation "$out/inputs.csv"
+ Get-FileHash "$repo/src/compat/wow_user_task_lifecycle.c","$repo/src/wow32-dll/source/wow_user_thunk_scope.c",$header,$PSCommandPath,"$out/WOW32.DLL","$out/wow_user_task_lifecycle.c","$out/wow_user_thunk_scope.c"|Export-Csv -NoTypeInformation "$out/inputs.csv"
  @{kind='diagnostic-only';publishable=$false;source='Two project-owned exact copies with failure-only observation';guestChanged=$false}|ConvertTo-Json|Set-Content "$out/result.json"
 }catch{$_|Out-String|Set-Content "$out/failure.txt";exit 1}finally{Pop-Location}

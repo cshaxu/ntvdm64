@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "compat/include/mvdm_softpc_wow_page_domain.h"
 
 /* Only the menu-cleanup case replaces storage. It tests the original task
  * selector and native destruction, not CCPU publication; the real combined

@@ -5,7 +5,7 @@
 static BOOL fail_debug_allocation;
 static LPVOID WINAPI test_debug_heap_alloc(HANDLE heap, DWORD flags, SIZE_T bytes);
 #define HeapAlloc test_debug_heap_alloc
-#include "../../src/ntvdm-exe/debugger/source/dbg_registers.c"
+#include "../../src/compat/dbg_registers.c"
 #undef HeapAlloc
 
 static LPVOID WINAPI test_debug_heap_alloc(HANDLE heap, DWORD flags, SIZE_T bytes)

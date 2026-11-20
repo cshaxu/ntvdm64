@@ -2,7 +2,7 @@
  * Record the completed native input/result without querying USER before the
  * guest's local IsWindow decision. Observe only its existing failure report. */
 #include "wow_user_object_bindings.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+#include "compat/include/mvdm_softpc_wow_page_domain.h"
 typedef struct { HWND raw, full; BOOL result; } wow_diag_destroy_record;
 #ifdef WOW_DIAG_DESTROY_STORAGE
 __declspec(thread) wow_diag_destroy_record wow_diag_destroy;

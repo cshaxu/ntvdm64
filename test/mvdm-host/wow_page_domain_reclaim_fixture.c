@@ -29,7 +29,7 @@ static LONG wow_fixture_free_memory(ULONG address)
 }
 
 #define VdmFreeVirtualMemory wow_fixture_free_memory
-#include "ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c"
+#include "compat/mvdm_softpc_wow_page_domain.c"
 #undef VdmFreeVirtualMemory
 
 /* Metadata-only index collision test: never dereference these synthetic guest
