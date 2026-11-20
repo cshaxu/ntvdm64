@@ -3,7 +3,6 @@
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/wow/include/wow_user_session_binding.h"
 
-HANDLE hWOWDll;
 static session owner;
 static wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
 static wow_user_session_binding registration;
@@ -15,16 +14,17 @@ static BOOL refuse_disposal;
 static unsigned disposal_calls;
 static HANDLE child_ready, child_release;
 
-BOOL WINAPI wow_user_task_lifecycle_dispose(PVOID context)
+static BOOL WINAPI dispose_lifecycle(struct wow_user_task_lifecycle *context)
 {
-    if (context != &task_identity) return FALSE;
+    if ((PVOID)context != &task_identity) return FALSE;
     ++disposal_calls;
     if (refuse_disposal) { SetLastError(ERROR_BUSY); return FALSE; }
     runtime.lifecycle = NULL;
+    runtime.lifecycle_ops = NULL;
     return TRUE;
 }
 
-BOOL WINAPI wow_user_task_lifecycle_unbind(wow_user_runtime_thread *binding)
+static BOOL WINAPI unbind_lifecycle(wow_user_runtime_thread *binding)
 {
     if (!binding || binding->runtime->lifecycle != &task_identity) return FALSE;
     ++retirement_calls;
@@ -63,7 +63,8 @@ int __cdecl main(void)
 {
     HANDLE thread;
     DWORD exit_code;
-    hWOWDll = GetModuleHandleW(NULL);
+    static const wow_user_runtime_lifecycle_ops no_unbind = { NULL, dispose_lifecycle };
+    static const wow_user_runtime_lifecycle_ops operations = { unbind_lifecycle, dispose_lifecycle };
     session_initialize(&owner, 42040u);
     CHECK(session_activate(&owner));
     CHECK(session_thread_bind_owned(&owner, SESSION_THREAD_BINDING_SOFTPC_ENTRY));
@@ -92,16 +93,15 @@ int __cdecl main(void)
     runtime.lifecycle = &task_identity;
     wow_user_runtime_current()->thread =
         (struct wow_task_order_thread *)&task_identity;
-    /* Missing module/entry must retain the binding; never silently unbind. */
-    hWOWDll = NULL;
+    /* Missing lifecycle/operation binding must retain the current thread. */
     CHECK(!wow_user_session_detach(&registration));
     CHECK(GetLastError() == ERROR_INVALID_STATE && retirement_calls == 0);
     CHECK(registration.registered && wow_user_runtime_current() != NULL);
-    hWOWDll = GetModuleHandleW(L"kernel32.dll");
+    runtime.lifecycle_ops = &no_unbind;
     CHECK(!wow_user_session_detach(&registration));
     CHECK(GetLastError() == ERROR_PROC_NOT_FOUND && retirement_calls == 0);
     CHECK(registration.registered && wow_user_runtime_current() != NULL);
-    hWOWDll = GetModuleHandleW(NULL);
+    runtime.lifecycle_ops = &operations;
     refuse_retirement = TRUE;
     CHECK(!wow_user_session_detach(&registration));
     CHECK(GetLastError() == ERROR_BUSY);
@@ -140,7 +140,7 @@ int __cdecl main(void)
     CHECK(session_thread_current() == &owner);
     refuse_disposal = FALSE;
     CHECK(wow_user_session_detach(&registration));
-    CHECK(disposal_calls == 2 && runtime.lifecycle == NULL);
+    CHECK(disposal_calls == 2 && runtime.lifecycle == NULL && runtime.lifecycle_ops == NULL);
     CHECK(retirement_calls == 3);
     CHECK(!registration.registered && owner.thread_hook_count == 0);
     CHECK(wow_user_runtime_current() == NULL);

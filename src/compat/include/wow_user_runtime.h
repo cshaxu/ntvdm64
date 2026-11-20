@@ -5,6 +5,13 @@
 
 struct wow_task_order_thread;
 struct wow_class_client_context;
+struct wow_user_task_lifecycle;
+struct wow_user_runtime_thread;
+
+typedef struct wow_user_runtime_lifecycle_ops {
+    BOOL (WINAPI *unbind)(struct wow_user_runtime_thread *);
+    BOOL (WINAPI *dispose)(struct wow_user_task_lifecycle *);
+} wow_user_runtime_lifecycle_ops;
 
 /* ADAPTER-WOW-049: worker-local carrier for the original USER process and
  * current-thread invariants. This is neither an NT4 PROCESSINFO/THREADINFO
@@ -19,6 +26,8 @@ typedef struct wow_user_runtime {
      * domain.  It is opaque here: the runtime neither allocates tasks nor
      * chooses scheduling policy. */
     PVOID lifecycle;
+    /* Published and retired with the lifecycle by its B implementation. */
+    const wow_user_runtime_lifecycle_ops *lifecycle_ops;
 } wow_user_runtime;
 
 typedef struct wow_user_runtime_thread {
@@ -32,7 +41,7 @@ typedef struct wow_user_runtime_thread {
     BOOL resource_cleanup_live;
 } wow_user_runtime_thread;
 
-#define WOW_USER_RUNTIME_INITIALIZER { INIT_ONCE_STATIC_INIT, SRWLOCK_INIT, 0, 0, NULL }
+#define WOW_USER_RUNTIME_INITIALIZER { INIT_ONCE_STATIC_INIT, SRWLOCK_INIT, 0, 0, NULL, NULL }
 
 BOOL WINAPI wow_user_runtime_initialize(wow_user_runtime *);
 BOOL WINAPI wow_user_runtime_bind(wow_user_runtime_thread *, wow_user_runtime *,

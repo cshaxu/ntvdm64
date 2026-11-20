@@ -664,7 +664,7 @@ if ($LASTEXITCODE) { throw 'Provider archive failed' }
 # Duplicate providers invalidate the claimed production-owner selection.
 # Fault rows above explicitly exclude replaced objects; never let link order
 # silently choose a test stub or stale owner over a recovered original body.
-Invoke-Build ('link /nologo /EXPORT:wow_user_task_lifecycle_unbind=_wow_user_task_lifecycle_unbind@4 /EXPORT:wow_user_task_lifecycle_dispose=_wow_user_task_lifecycle_dispose@4 /NODEFAULTLIB:ntvdm.lib /out:"'+$out+'\fixture.exe" /map:"'+$out+'\fixture.map" "'+$out+'\fixture.obj" '+(($parentObjects | ForEach-Object { '"'+$_+'"' }) -join ' ')+' "'+$out+'\provider.lib" '+((@($workerObjects)+@($fixtureSupportObjects)+@($fixtureLibraries) | ForEach-Object { '"'+$_+'"' }) -join ' ')+' legacy-wow-user32.lib legacy-wow-kernel32.lib legacy-wow-ntdll.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib shell32.lib advapi32.lib ntdll.lib oldnames.lib libcmt.lib libvcruntime.lib libucrt.lib')
+Invoke-Build ('link /nologo /NODEFAULTLIB:ntvdm.lib /out:"'+$out+'\fixture.exe" /map:"'+$out+'\fixture.map" "'+$out+'\fixture.obj" '+(($parentObjects | ForEach-Object { '"'+$_+'"' }) -join ' ')+' "'+$out+'\provider.lib" '+((@($workerObjects)+@($fixtureSupportObjects)+@($fixtureLibraries) | ForEach-Object { '"'+$_+'"' }) -join ' ')+' legacy-wow-user32.lib legacy-wow-kernel32.lib legacy-wow-ntdll.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib shell32.lib advapi32.lib ntdll.lib oldnames.lib libcmt.lib libvcruntime.lib libucrt.lib')
 if (!(Test-Path -LiteralPath "$out\fixture.exe" -PathType Leaf)) {
     throw "Task cleanup fixture link produced no executable: $out\fixture.exe"
 }

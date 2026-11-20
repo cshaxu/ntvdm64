@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-extern HANDLE hWOWDll;
 static unsigned errors;
 /* Explicit shared-row mock: this case tests the original conversion algorithm,
  * not CCPU memory. The page-domain fixture checks actual published rows. */
@@ -147,7 +146,6 @@ int __cdecl main(void)
     HANDLE event = CreateEventW(NULL, FALSE, FALSE, NULL), duplicate;
     DWORD flags;
     WNDCLASSEXA control = {sizeof(control)};
-    hWOWDll = GetModuleHandleW(NULL);
     verify_isolated_relationships();
     CHECK(event != NULL);
     session_initialize(&owner, 44702u);
@@ -184,7 +182,7 @@ int __cdecl main(void)
     CHECK(standard_count == 9);
     CHECK(!wow_standard_classes_prepare(&lifecycle.classes, NULL));
     CHECK(GetLastError() == ERROR_INVALID_STATE);
-    CHECK(runtime.lifecycle == &lifecycle);
+    CHECK(runtime.lifecycle == &lifecycle && runtime.lifecycle_ops);
     CHECK(wow_user_task_lifecycle_register(&lifecycle, end_task, event));
     duplicate = lifecycle.process.pwpi->pEventWowExec;
     CHECK(duplicate != event && GetHandleInformation(duplicate, &flags));

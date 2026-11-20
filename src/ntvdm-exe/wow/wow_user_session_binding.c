@@ -1,20 +1,16 @@
 #include "include/wow_user_session_binding.h"
 
 static __declspec(thread) wow_user_runtime_thread current_binding;
-extern HANDLE hWOWDll;
-
-static FARPROC lifecycle_operation(const char *name)
-{
-    if (!hWOWDll) { SetLastError(ERROR_INVALID_STATE); return NULL; }
-    return GetProcAddress(hWOWDll, name);
-}
 
 static BOOL unbind_runtime(wow_user_runtime_thread *thread)
 {
     if (thread->thread && thread->runtime->lifecycle) {
-        typedef BOOL (WINAPI *unbind_fn)(wow_user_runtime_thread *);
-        unbind_fn unbind = (unbind_fn)lifecycle_operation("wow_user_task_lifecycle_unbind");
-        return unbind ? unbind(thread) : FALSE;
+        const wow_user_runtime_lifecycle_ops *ops = thread->runtime->lifecycle_ops;
+        if (!ops || !ops->unbind) {
+            SetLastError(ops ? ERROR_PROC_NOT_FOUND : ERROR_INVALID_STATE);
+            return FALSE;
+        }
+        return ops->unbind(thread);
     }
     return wow_user_runtime_unbind(thread);
 }
@@ -94,9 +90,12 @@ BOOL WINAPI wow_user_session_detach(wow_user_session_binding *binding)
             !unbind_runtime(&current_binding))
         return FALSE;
     if (binding->runtime->lifecycle) {
-        typedef BOOL (WINAPI *dispose_fn)(PVOID);
-        dispose_fn dispose = (dispose_fn)lifecycle_operation("wow_user_task_lifecycle_dispose");
-        if (!dispose || !dispose(binding->runtime->lifecycle)) return FALSE;
+        const wow_user_runtime_lifecycle_ops *ops = binding->runtime->lifecycle_ops;
+        if (!ops || !ops->dispose) {
+            SetLastError(ops ? ERROR_PROC_NOT_FOUND : ERROR_INVALID_STATE);
+            return FALSE;
+        }
+        if (!ops->dispose(binding->runtime->lifecycle)) return FALSE;
     }
     if (!session_unregister_thread_hook(binding->session, bind_current,
             unbind_current, binding)) {

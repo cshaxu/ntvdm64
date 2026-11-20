@@ -1,0 +1,62 @@
+{
+  "packet": "M0 T483 S14 P122",
+  "baseline": "16ede26a64201fdc5b6029d554a2e20a95766370",
+  "eliminated_runtime_lookups": [
+    "wow_user_task_lifecycle_unbind",
+    "wow_user_task_lifecycle_dispose"
+  ],
+  "counting": "Both lookups were downstream of the known B0023/B0024 thread lifecycle chain. These tracked points remain open until its binding and retirement ownership are inward. There is no new B dependency on an F code body.",
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 4
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 5,
+    "image-import": 1,
+    "symbol": 12
+  },
+  "provider_lifetime": "C loads WOW32 and resolves required worker exports before W32Init. Its failure unload paths precede lifecycle registration. A successful load remains resident; the B provider publishes its immutable operations with its runtime lifecycle and clears them after quiesced disposal. The F session still owns thread binding.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "d33fba6f-e19e-44cc-89de-82c3bb47c3bc",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "scope": "Cached build plus selected object/dependency/export checks; binding and rejection/retry fixtures; real linked WOW process retirement; live shared WOW and DOS/EDIT.",
+    "runtime_output": [
+      "wow_user_session_binding_fixture.c",
+      "wow_user_runtime.c",
+      "wow_worker_state.c",
+      "wow_user_session_binding.c",
+      "session.c",
+      "host_context.c",
+      "guest_memory_lease.c",
+      "Generating Code...",
+      "WOW_USER_SESSION_BINDING errors=0 child=1 lifecycle=1",
+      "wow_user_runtime_fixture.c",
+      "wow_user_runtime.c",
+      "Generating Code...",
+      "WOW_USER_RUNTIME errors=0 peer=1 callout_reacquire=1",
+      "WOW_PROCESS_RETIREMENT errors=0 startup-rollback/cleanup-atomic/task/object/class/refusal/retry/event/native checked",
+      "WOW_FIXTURE_OK case=process-retirement",
+      "PASS shared worker 20216, two distinct tasks overlapped and retired independently, both requests exited normally",
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion"
+    ]
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "boundary.out": "7cfbb666c404bd98252566ffbf3a8c09d0e010c263ce1acd5e55043bd4da8edf",
+    "probes.out": "213b457032f0b195c44534b2a6cea737a44c3f626c9f317d66d7668feb8919da",
+    "final-checks.out": "73e35aaddc05b869a5fb95518e1165adec4f30d48e37248ad795395c4ad92727"
+  }
+}

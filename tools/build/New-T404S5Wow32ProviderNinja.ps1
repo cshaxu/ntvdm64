@@ -176,8 +176,6 @@ $x86DefinitionLines.Add('')
 $x86DefinitionLines.Add('GetCommHandle=GetCommHandle@4')
 $x86DefinitionLines.Add('GetCommShadowMSR=GetCommShadowMSR@4')
 $x86DefinitionLines.Add('W32TerminateTaskTicket')
-$x86DefinitionLines.Add('wow_user_task_lifecycle_unbind=_wow_user_task_lifecycle_unbind@4')
-$x86DefinitionLines.Add('wow_user_task_lifecycle_dispose=_wow_user_task_lifecycle_dispose@4')
 [IO.File]::WriteAllLines($x86Definition, $x86DefinitionLines,
     [Text.UTF8Encoding]::new($false))
 

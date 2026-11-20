@@ -60,7 +60,7 @@ P108 [WOW hook and task wait](../../artifacts/mvdm-audit/t483-c-layer-dependenci
 P109 [Native publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-publication-owner.json) delivered B -1.
 P110 [Input terminal signals](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-input-terminal-owner.json) delivered C -1.
 P111 [CCPU thread exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-ccpu-thread-exit-owner.json) delivered C -1.
-P121 [VDD cleanup](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vdd-clear-owner.json) delivered B -1.
+P122 [WOW retirement binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-retirement-provider.json) removed two module lookups.
 Delivered: B 6 known calls; C 18 open (12 functions, 0 data).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)

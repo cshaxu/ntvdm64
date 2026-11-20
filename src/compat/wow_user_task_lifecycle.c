@@ -375,6 +375,9 @@ static void WINAPI cleanup_release(PVOID memory)
 BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *owner,
     wow_user_runtime *runtime, const wow_user_task_lifecycle_callbacks *callbacks)
 {
+    static const wow_user_runtime_lifecycle_ops operations = {
+        wow_user_task_lifecycle_unbind, wow_user_task_lifecycle_dispose
+    };
     if (!owner || !runtime || !callbacks || owner->initialized || runtime->lifecycle) {
         SetLastError(ERROR_INVALID_STATE);
         return FALSE;
@@ -425,6 +428,7 @@ BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *owner,
         SetLastError(error);
         return FALSE;
     }
+    runtime->lifecycle_ops = &operations;
     runtime->lifecycle = owner;
     owner->initialized = TRUE;
     return TRUE;
@@ -1807,6 +1811,7 @@ BOOL WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *owner)
     if (owner->objects) HeapFree(GetProcessHeap(), 0, owner->objects);
     if (owner->runtime && owner->runtime->lifecycle == owner) {
         owner->runtime->lifecycle = NULL;
+        owner->runtime->lifecycle_ops = NULL;
     }
     ZeroMemory(owner, sizeof(*owner));
     return TRUE;
