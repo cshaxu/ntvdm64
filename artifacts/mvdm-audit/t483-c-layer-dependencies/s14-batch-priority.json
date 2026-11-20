@@ -3,41 +3,12 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 104,
+    "open": 96,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 464
+    "eliminated": 472
   },
   "provider_groups": [
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/win32/console_compat.c",
-      "open_ids": [
-        "C0290",
-        "C0291",
-        "C0292",
-        "C0293",
-        "C0294",
-        "C0295",
-        "C0296",
-        "C0297",
-        "C0298",
-        "C0299"
-      ],
-      "count": 10,
-      "symbols": [
-        "ConsoleMenuControl",
-        "GetConsoleInputWaitHandle",
-        "InvalidateConsoleDIBits",
-        "RegisterConsoleVDM",
-        "SetConsoleKeyShortcuts",
-        "SetConsolePalette",
-        "SetLastConsoleEventActive",
-        "VDMConsoleOperation",
-        "WriteConsoleInputVDMW",
-        "ntvdm_console_read_pc_input"
-      ]
-    },
     {
       "kind": "symbol",
       "provider": "src/run16-exe/main.c",
@@ -175,6 +146,19 @@
         "wow_user_dispatch_exception",
         "wow_user_invoke_thunk",
         "wow_user_sys_error_box"
+      ]
+    },
+    {
+      "kind": "symbol",
+      "provider": "src/ntvdm-exe/win32/console_compat.c",
+      "open_ids": [
+        "C0291",
+        "C0299"
+      ],
+      "count": 2,
+      "symbols": [
+        "GetConsoleInputWaitHandle",
+        "ntvdm_console_read_pc_input"
       ]
     },
     {
@@ -816,27 +800,19 @@
       "ids": [
         "C0288",
         "C0289",
-        "C0290",
         "C0291",
-        "C0292",
-        "C0293",
-        "C0294",
-        "C0295",
-        "C0296",
-        "C0297",
-        "C0298",
         "C0299"
       ],
-      "potential_direct_ids": 12,
+      "potential_direct_ids": 4,
       "providers": [
         "src/ntvdm-exe/win32/console_client.c",
         "src/ntvdm-exe/win32/console_compat.c",
         "src/ntvdm-exe/win32/console_graphics.c"
       ],
       "evidence": "24+10+5 direct APIs share routed console resources. NTCON channel, active console identity and error/lifecycle ownership must be separated; moving wrappers to B alone fails.",
-      "status": "Transport, Console operations and graphics/text mechanics delivered. Input acknowledgement and broker handoff remain open.",
+      "status": "Transport, graphics/text and the independent legacy Console services delivered. Input acknowledgement and broker handoff remain open.",
       "count_rule": "Potential IDs, not eliminated IDs. Helpers, headers and callback edges are not added as speculative extra savings.",
-      "verified_eliminated_ids": 27
+      "verified_eliminated_ids": 35
     },
     {
       "name": "WOW registry token and shared shadow-store boundary",
@@ -867,5 +843,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P90"
+  "updated_by": "T483 S14 P91"
 }

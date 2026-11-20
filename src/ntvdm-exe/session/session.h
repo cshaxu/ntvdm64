@@ -57,25 +57,6 @@ typedef struct session_binding_diagnostic {
     char original_worker_source[SESSION_WORKER_SOURCE_MAX];
 } session_binding_diagnostic;
 
-enum session_video_event_kind {
-    SESSION_VIDEO_EVENT_INVALIDATE = 1u,
-    SESSION_VIDEO_EVENT_ACTIVE = 3u
-};
-
-typedef struct session_video_event {
-    uint32_t kind;
-    uintptr_t output_handle;
-    uintptr_t palette_handle;
-    int32_t left;
-    int32_t top;
-    int32_t right;
-    int32_t bottom;
-    uint32_t flags;
-} session_video_event;
-
-typedef int (*session_video_event_fn)(void *context,
-    const session_video_event *event);
-
 typedef compat_host_cleanup_fn session_teardown_fn;
 typedef int (*session_thread_bind_fn)(void *context);
 /* A failed unbind retains the thread/session binding for cleanup and retry.
@@ -97,7 +78,6 @@ typedef struct session {
     uint32_t completion_code;
     uint32_t cancellation_reason;
     uint32_t machine_backend;
-    uint32_t video_event_active;
     uint32_t thread_hook_count;
     uint32_t termination_armed;
     volatile long binding_count;
@@ -112,8 +92,6 @@ typedef struct session {
     guest_memory_lease_context guest_memory_lease;
     char firmware_root[SESSION_FIRMWARE_ROOT_BYTES];
     char mvdm_system_root[SESSION_FIRMWARE_ROOT_BYTES];
-    session_video_event_fn video_event_sink;
-    void *video_event_context;
 } session;
 
 #ifdef __cplusplus
@@ -133,11 +111,6 @@ int session_unregister_thread_hook(session *instance, session_thread_bind_fn bin
     session_thread_unbind_fn unbind, void *context);
 int session_request_cancellation(session *instance, uint32_t reason);
 void session_complete(session *instance, uint32_t completion_code);
-int session_set_video_event_sink(session *instance, session_video_event_fn sink,
-    void *context);
-int session_notify_video_event(session *instance,
-    const session_video_event *event);
-uint32_t session_video_event_active(const session *instance);
 int session_dispose(session *instance);
 /* Same dispose operation with an optional fixed-width failure explanation.
  * `reason_out` is written before any teardown and is `NONE` on success. */

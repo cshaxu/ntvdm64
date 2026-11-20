@@ -3,17 +3,6 @@
 #include "conapi.h"
 #include "ntvdm-exe/session/session.h"
 
-static session_video_event observed_event;
-static uint32_t observed_count;
-
-static int observe_video_event(void *context, const session_video_event *event)
-{
-    (void)context;
-    observed_event = *event;
-    ++observed_count;
-    return 1;
-}
-
 int main(void)
 {
     session owner;
@@ -41,8 +30,7 @@ int main(void)
     }
 
     session_initialize(&owner, 3885u);
-    if (!session_set_video_event_sink(&owner, observe_video_event, NULL) ||
-        !session_activate(&owner) || !session_thread_bind(&owner)) return 3;
+    if (!session_activate(&owner) || !session_thread_bind(&owner)) return 3;
     ZeroMemory(supplied, sizeof(supplied));
     supplied[0].EventType = KEY_EVENT;
     supplied[0].Event.KeyEvent.bKeyDown = TRUE;
@@ -57,8 +45,7 @@ int main(void)
     if (read != 2u || delivered[0].EventType != KEY_EVENT ||
         delivered[0].Event.KeyEvent.wVirtualKeyCode != VK_RETURN ||
         delivered[1].EventType != KEY_EVENT ||
-        delivered[1].Event.KeyEvent.wVirtualKeyCode != 'A' ||
-        observed_count != 0u) return 5;
+        delivered[1].Event.KeyEvent.wVirtualKeyCode != 'A') return 5;
     if (!session_thread_unbind(&owner) || !session_dispose(&owner)) return 6;
     CloseHandle(input);
     if (allocated_console) FreeConsole();

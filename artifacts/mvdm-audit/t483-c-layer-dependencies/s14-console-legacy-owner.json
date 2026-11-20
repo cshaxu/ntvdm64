@@ -1,0 +1,53 @@
+{
+  "packet": "M0 T483 S14 P91",
+  "baseline": "c40ef6d0303c2fd12f99494809052414016a5ee7",
+  "status": "Cached full build, dual publication, product and fixture tests and final gates passed. Enclosing commit is the delivery receipt.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "scope": "B owns registration, invalidation and fallback, palette, menu/shortcut refusal, coordinate operations and returned-key marshalling. Original C still owns receipt history. No production caller installed the deleted video callback, and its active bit had no production reader. Bound/unbound production last errors and paint results are preserved.",
+  "evidence_root": "build/t483-s14-console-legacy-owner",
+  "eliminated_C_ids": [
+    "C0290",
+    "C0292",
+    "C0293",
+    "C0294",
+    "C0295",
+    "C0296",
+    "C0297",
+    "C0298"
+  ],
+  "eliminated_B_ids": [],
+  "compiled_ownership": {
+    "objects": 4,
+    "external_relocation_pairs": 104,
+    "outward": 0,
+    "counts": {
+      "CRT": 17,
+      "compat": 28,
+      "system import": 14,
+      "mvdm-host": 2,
+      "not selected in final link": 43
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "7c1c39c0-ab92-495b-af7b-7665ab29f79a",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "40681fef1d65ca463a86307da855dd6fb139d88da18415a0d39e8c1536da4e4c",
+    "release-and-test.out": "1522bbd1f81cbc9b1cba1a771ad42df0977cf340347cb16d01b8a5de2f11b514",
+    "final-checks.out": "b0e4034f60b1fb07391980deaf2e66d5dd4084e1cc4dd75560dcf7b259df808a",
+    "input-batch/run.log": "fe563edecffb9f6577ca5da86824f301b0ddf1c729adcdf44f45ba38d7c53108",
+    "b-compiled-candidates.json": "fa8c615c60067131afcdb46f28d59a84261e312c4fd37cb326a1a9dab944c5f3",
+    "console-routing.txt.console.txt": "d8736979605d767333a465be1085e8090a493ecf6c466953505504643c1c1e0d"
+  }
+}

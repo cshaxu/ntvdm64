@@ -19,8 +19,6 @@ DWORD OpenNtBaseClientWaitFrontend(HANDLE *pipe,HANDLE *process,DWORD *generatio
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
 { *capability=NULL;return ERROR_NOT_SUPPORTED; }
 
-static session_video_event observed_event;
-static uint32_t observed_count;
 
 /* Match the original non-MONITOR nt_cga.c TEXT_INCVAL, not host width.
  * The source-contract verifier checks this against the selected painter. */
@@ -99,13 +97,6 @@ static int verify_text_plane(session *owner, HANDLE output)
     return 0;
 }
 
-static int observe_video_event(void *context, const session_video_event *event)
-{
-    (void)context;
-    observed_event = *event;
-    ++observed_count;
-    return 1;
-}
 
 int main(void)
 {
@@ -133,7 +124,6 @@ int main(void)
     INPUT_RECORD alt_up = { 0 };
     INPUT_RECORD key = { 0 };
     uint32_t text_columns, text_rows, text_capacity;
-    uint32_t events_before_active;
     int text_check;
 
     /* Own the Console used for queue injection and buffer resizing; never
@@ -253,13 +243,9 @@ int main(void)
     if (InvalidateConsoleDIBits(INVALID_HANDLE_VALUE, &rect) ||
         GetLastError() != ERROR_INVALID_HANDLE) return 5;
     session_initialize(&instance, 31027u);
-    if (!session_set_video_event_sink(&instance, observe_video_event, NULL) ||
-        !session_activate(&instance) || !session_thread_bind(&instance)) return 6;
-    if (!InvalidateConsoleDIBits(INVALID_HANDLE_VALUE, &rect) ||
-        observed_count != 1u ||
-        observed_event.kind != SESSION_VIDEO_EVENT_INVALIDATE ||
-        observed_event.left != 1 || observed_event.top != 2 ||
-        observed_event.right != 3 || observed_event.bottom != 4) return 7;
+    if (!session_activate(&instance) || !session_thread_bind(&instance)) return 6;
+    if (InvalidateConsoleDIBits(INVALID_HANDLE_VALUE, &rect) ||
+        GetLastError() != ERROR_CALL_NOT_IMPLEMENTED) return 7;
     /* The original nt_text path fills the RegisterConsoleVDM text plane,
      * then invalidates a character rectangle.  The public Console adapter
      * must make that exact copied plane visible without a guest-memory read. */
@@ -295,17 +281,15 @@ int main(void)
             (COORD){ 0, 0 }, &text_read)) return 17;
     if (text_read != 2u) return 21;
     if (memcmp(text_result, "OK", 2u) != 0) return 22;
-    if (observed_count != 2u) return 23;
     text_check = verify_text_plane(&instance, text_output);
     if (text_check != 0) return text_check;
     (void)RegisterConsoleVDM(CONSOLE_UNREGISTER_VDM, NULL, NULL, NULL, 0u,
         &text_state_length, &text_state, NULL, 0u, text_size, &text_buffer);
     (void)SetStdHandle(STD_OUTPUT_HANDLE, saved_output);
     CloseHandle(text_output);
-    events_before_active = observed_count;
+    SetLastError(ERROR_SUCCESS);
     SetLastConsoleEventActive();
-    if (observed_count != events_before_active + 1u || observed_event.kind != SESSION_VIDEO_EVENT_ACTIVE ||
-        session_video_event_active(&instance) != 1u) return 10;
+    if (GetLastError() != ERROR_CALL_NOT_IMPLEMENTED) return 10;
     if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 13;
 
     puts("PASS: console compatibility input and video contracts");

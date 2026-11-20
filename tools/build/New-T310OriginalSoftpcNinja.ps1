@@ -2204,7 +2204,7 @@ $graph.Add('build environment-projection-fixture.exe: rtl_fixture_link ' + $envi
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
 $graph.Add('build obj/compat/console_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_services.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
-foreach ($name in @('console_graphics','console_bitmap','v7_pointer','console_text')) {
+foreach ($name in @('console_graphics','console_bitmap','v7_pointer','console_text','console_legacy')) {
     $object = 'obj/compat/' + $name + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root ('src/compat/' + $name + '.c'))))
     $graph.Add('  cflags = ' + $libraryFlags)

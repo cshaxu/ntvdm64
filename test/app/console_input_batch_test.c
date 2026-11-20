@@ -52,6 +52,7 @@ static BOOL batch_prepend(HANDLE h,PINPUT_RECORD records,DWORD count,LPDWORD wri
 #define ntvdm_console_prepend_keys batch_prepend
 #define mvdm_softpc_mouse_capacity batch_mouse_capacity
 #include "../../src/ntvdm-exe/win32/console_compat.c"
+#include "../../src/compat/console_legacy.c"
 DWORD batch_mouse_capacity(mvdm_mouse_bridge *state)
 { (void)state;return mouse_capacity; }
 /* No frontend is bound by this controlled-queue fixture. */
@@ -67,6 +68,43 @@ DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE frontend,HANDLE *capability)
 { (void)frontend;*capability=NULL;return ERROR_NOT_SUPPORTED; }
 BOOL CntrlHandler(ULONG type) { (void)type;return FALSE; }
 #define CHECK(x) do { if(!(x)) { printf("FAIL line=%d error=%lu\n",__LINE__,GetLastError());return 1; } } while(0)
+static int verify_registration(void)
+{
+    compat_host_context context = {0};
+    SMALL_RECT rect = {0, 0, 1, 0};
+    COORD extent = {2, 1};
+    PVOID state = NULL, buffer = NULL, original;
+    DWORD bytes = 99;
+
+    CHECK(!InvalidateConsoleDIBits(INVALID_HANDLE_VALUE, &rect));
+    CHECK(GetLastError() == ERROR_INVALID_HANDLE);
+    CHECK(compat_host_context_bind(&context));
+    CHECK(!RegisterConsoleVDM(CONSOLE_REGISTER_VDM, NULL, NULL, NULL, 0,
+        &bytes, &state, NULL, 0, extent, &buffer));
+    CHECK(GetLastError() == ERROR_INVALID_HANDLE);
+
+    context.state = COMPAT_HOST_CONTEXT_ACTIVE;
+    CHECK(RegisterConsoleVDM(CONSOLE_REGISTER_VDM, NULL, NULL, NULL, 0,
+        &bytes, &state, NULL, 0, extent, &buffer));
+    CHECK(bytes == 0 && state == NULL && buffer != NULL);
+    original = buffer;
+    ((BYTE *)buffer)[0] = 'K';
+    CHECK(RegisterConsoleVDM(CONSOLE_UNREGISTER_VDM, NULL, NULL, NULL, 0,
+        &bytes, &state, NULL, 0, extent, &buffer));
+    CHECK(RegisterConsoleVDM(CONSOLE_REGISTER_VDM, NULL, NULL, NULL, 0,
+        &bytes, &state, NULL, 0, extent, &buffer));
+    CHECK(buffer == original && ((BYTE *)buffer)[0] == 'K');
+
+    CHECK(!InvalidateConsoleDIBits(INVALID_HANDLE_VALUE, &rect));
+    CHECK(GetLastError() == ERROR_CALL_NOT_IMPLEMENTED);
+    SetLastError(ERROR_SUCCESS);
+    SetLastConsoleEventActive();
+    CHECK(GetLastError() == ERROR_CALL_NOT_IMPLEMENTED);
+    CHECK(compat_host_context_unbind(&context));
+    compat_host_context_dispose(&context);
+    puts("PASS registration, unregister backing lifetime and invalidation fallback");
+    return 0;
+}
 static void reset(DWORD count)
 {
     ZeroMemory(queue,sizeof(queue));queued=count;position=reads=peeks=0;
@@ -254,5 +292,5 @@ int main(void)
     CHECK(ntvdm_console_read_pc_input(input,out,NTVDM_PC_INPUT_RECORDS,&got,CONSOLE_READ_NOWAIT));
     CHECK(got==1 && sent_live_count==2 && sent_live[0]==3001 && sent_live[1]==3003);
     printf("BATCH-RECEIPT identical keys remain distinct through normalization and original history PASS\n");
-    return 0;
+    return verify_registration();
 }

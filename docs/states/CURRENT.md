@@ -59,9 +59,9 @@ cases passed; mirror delta0/0. Test cases now clean their owned desktop processe
 Eight IDs eliminated: current429/139. Console control/transport remains open.
 Enclosing commit/push is receipt; prior P76 evidence remains in P81 history.
 
-P89 [Console graphics](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-graphics-owner.json) delivered B -1/C -7.
 P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-text-owner.json) delivered C -7.
-Delivered: B 11 known calls; C 104 open (51 functions, 11 data).
+P91 [Console compatibility](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-legacy-owner.json) delivered C -8.
+Delivered: B 11 known calls; C 96 open (43 functions, 11 data).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same
