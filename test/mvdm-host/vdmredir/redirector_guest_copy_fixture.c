@@ -3,8 +3,8 @@
 #include <wchar.h>
 
 #include "ntvdm-exe/session/session.h"
-#include "common/guest-memory/access.h"
-#include "common/guest-memory/address.h"
+#include "compat/include/guest_memory_access.h"
+#include "compat/include/guest_memory_address.h"
 #include "mvdm_redirector_guest_copy.h"
 
 typedef struct fixture_memory { unsigned char bytes[0x200]; } fixture_memory;

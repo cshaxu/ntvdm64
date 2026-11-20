@@ -1,0 +1,106 @@
+{
+  "packet": "M0 T483 S14 P96",
+  "baseline": "3c5cf56b446b349ae14ade44a75a68d07ea56326",
+  "eliminated_C_ids": [
+    "C0058",
+    "C0145",
+    "C0600",
+    "C0601",
+    "C0602"
+  ],
+  "eliminated_B_ids": [],
+  "scope": "Move the Redirector copy, conversion and packed-target implementations and declarations from F to B. Copy bodies and guest address/memory semantics remain byte-identical; DLL import selection now belongs to the product build edge.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "open": 73,
+    "eliminated": 495,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "provider_imports": {
+    "mvdm_softpc_effective_address": {
+      "ordinal": 145,
+      "provider": "0001:0012d7f0       _mvdm_softpc_effective_address 0052e7f0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+    },
+    "mvdm_softpc_guest_memory_acquire": {
+      "ordinal": 148,
+      "provider": "0001:0012f050       _mvdm_softpc_guest_memory_acquire 00530050 f   original-ccpu386:ccpusas4.obj"
+    },
+    "mvdm_softpc_guest_memory_release": {
+      "ordinal": 149,
+      "provider": "0001:0012f5a0       _mvdm_softpc_guest_memory_release 005305a0 f   original-ccpu386:ccpusas4.obj"
+    }
+  },
+  "ntvdm_pe_import_ordinals": [
+    45,
+    46,
+    59,
+    75,
+    84,
+    92,
+    93,
+    95,
+    96,
+    97,
+    101,
+    102,
+    104,
+    105,
+    106,
+    107,
+    108,
+    116,
+    124,
+    128,
+    137,
+    140,
+    141,
+    145,
+    148,
+    149,
+    217,
+    218,
+    219,
+    223,
+    224,
+    225,
+    226,
+    228,
+    229,
+    233,
+    236,
+    238,
+    239,
+    246,
+    257,
+    260
+  ],
+  "open_image_dependency": "C0134",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "86ebf75d-4af7-4ca8-9888-91ce14679691",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, bounded-copy and real original-provider tests, DOS VGA and final gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "a6a52dfd1c214789f44ae6338f00f0353d8e1b9fe513ea3a144948545075e381",
+    "release-and-test.out": "ab8a082489174144f13ba574f19c53c0290490677240fe03710d9536226e8605",
+    "final-checks.out": "6d53498fe8b3977aa081ba627edafca00093a9da202877b697570f8d99d60eb5",
+    "guest-copy-symbols.txt": "342c96328b0fe770e25afdcbe8b3c5426757833d7d1e9e20b8d7f881b9c1fbbf",
+    "vdmredir-imports.txt": "a95bbc00cfc7177c099e4084e2e73b3e4336484e0e5b401dca8ad246f11499fd",
+    "baseline-vdmredir-imports.txt": "a94eabf32ab55fe08039aae43b4abf16b8ec19552f69130082f19a58bae131cd",
+    "oem-capacity/result.txt": "01440e466e2110b6a315548c4037933361834f2f2150783d6cbd0449f60ac8f2",
+    "original-providers/result.txt": "c627c7c577f52f793e192972383e1480834d7c44a5745ada02d39c65e0c5116e"
+  },
+  "prior_classifier_delivery": "s14-classifier-owner.json"
+}

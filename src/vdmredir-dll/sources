@@ -3,10 +3,8 @@
 # Original OpenNT VDMREDIR bodies, resources, exports and historical target
 # metadata remain canonical under src/mvdm-host/vdmredir/.  These standalone
 # bindings are not OpenNT replacements: they declare only the finite DLL
-# entry and bounded guest-copy seams selected by T421 S1.
+# entry selected by T421 S1. The guest-copy implementation belongs to compat.
 
 TARGET=VDMREDIR.DLL
 
-SOURCES= \
-    mvdm_redirector_guest_copy.c \
-    mvdm_redirector_dll_entry.c
+SOURCES=mvdm_redirector_dll_entry.c

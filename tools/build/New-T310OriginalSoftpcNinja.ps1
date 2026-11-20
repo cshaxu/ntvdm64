@@ -724,7 +724,6 @@ $includeRootPaths = @(
     'src/ntvdm-exe/softpc/include'
 )
 $commandInclude = ' /I "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/command/include')) + '"'
-$redirInclude = ' /I "' + (NinjaPath (Join-Path $root 'src/vdmredir-dll/include')) + '"'
 $includeRoots = $includeRootPaths | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $softpcIncludeRootPaths = [System.Collections.Generic.List[string]]::new()
 foreach ($path in $includeRootPaths) {
@@ -929,7 +928,7 @@ $graph.Add('build ' + $object + ': cc_ccpu ' + (NinjaPath $source))
 }
 $baseDeviceFlags = $baseFlags
 foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
-        'src/ntvdm-exe/softpc/include', 'src/vdmredir-dll/include',
+        'src/ntvdm-exe/softpc/include',
         'src/wow32-dll/include')) {
     $baseDeviceFlags = $baseDeviceFlags.Replace(' /I "' +
         (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
@@ -1030,7 +1029,7 @@ $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $dosRoot $name))
 $demCommandFlags = $baseFlags
 foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
     'src/ntvdm-exe/softpc/include', 'src/compat/include/generated/x86/prod',
-    'src/vdmredir-dll/include', 'src/wow32-dll/include')) {
+    'src/wow32-dll/include')) {
     $demCommandFlags = $demCommandFlags.Replace(' /I "' +
         (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
 }
@@ -1061,7 +1060,6 @@ $redirObjects = foreach ($name in $redirNames) {
     # entries use the historical cdecl CreateThread callback contract; this
     # translation-unit-local forced facade is the finite modern ABI boundary.
     $redirFlags = $redirBaseFlags + ' /DWIN_32 /DVDMREDIR_DLL /FI "' + $redirThreadCompat + '"'
-    if ($name -eq 'vrnetapi.c') { $redirFlags += $redirInclude }
     $graph.Add('  cflags = ' + $redirFlags)
     $object
 }
@@ -1313,12 +1311,15 @@ $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_keyboard_history.obj'
 $graph.Add('build obj/adapter-softpc/mvdm_softpc_event_thread.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_event_thread.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_softpc_event_thread.obj'
-$adapterRedirObjects = foreach ($name in $adapterRedirNames) {
+$adapterRedirObjects = @(foreach ($name in $adapterRedirNames) {
     $object = 'obj/vdmredir-dll/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $redirDllBindingRoot $name)))
-    $graph.Add('  cflags = ' + $redirBaseFlags + $redirInclude)
+    $graph.Add('  cflags = ' + $redirBaseFlags)
     $object
-}
+})
+$graph.Add('build obj/compat/mvdm_redirector_guest_copy.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_redirector_guest_copy.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /DCOMMON_GUEST_MEMORY_IMPORTS')
+$adapterRedirObjects += 'obj/compat/mvdm_redirector_guest_copy.obj'
 $graph.Add('build obj/compat/remote_browser.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/remote_browser.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterRedirObjects += 'obj/compat/remote_browser.obj'

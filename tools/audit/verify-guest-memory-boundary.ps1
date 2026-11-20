@@ -16,16 +16,16 @@ function Assert-ConsumerBoundary([string]$text,[string]$shared,[string[]]$privat
     }
 }
 $wow=Get-Dependencies $WowBuildRoot 'obj/compat/wow_callback_frame_lease.obj'
-$redir=Get-Dependencies $WorkerBuildRoot 'obj/vdmredir-dll/mvdm_redirector_guest_copy.obj'
+$redir=Get-Dependencies $WorkerBuildRoot 'obj/compat/mvdm_redirector_guest_copy.obj'
 $wowPrivate=@('src/compat/include/guest_memory_lease.h',
     'src/ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h')
 $redirPrivate=@('src/ntvdm-exe/redir/include/mvdm_redirector_worker_copy.h',
     'src/common/guest-memory/redirector.h')
-Assert-ConsumerBoundary $wow 'src/common/guest-memory/access.h' $wowPrivate
-Assert-ConsumerBoundary $redir 'src/common/guest-memory/access.h' $redirPrivate
-foreach($case in @(@($wow,'src/common/guest-memory/access.h',$wowPrivate[0]),
-                    @($redir,'src/common/guest-memory/access.h',$redirPrivate[0]),
-                    @($redir,'src/common/guest-memory/access.h',$redirPrivate[1]))) {
+Assert-ConsumerBoundary $wow 'src/compat/include/guest_memory_access.h' $wowPrivate
+Assert-ConsumerBoundary $redir 'src/compat/include/guest_memory_access.h' $redirPrivate
+foreach($case in @(@($wow,'src/compat/include/guest_memory_access.h',$wowPrivate[0]),
+                    @($redir,'src/compat/include/guest_memory_access.h',$redirPrivate[0]),
+                    @($redir,'src/compat/include/guest_memory_access.h',$redirPrivate[1]))) {
     $rejected=$false
     try { Assert-ConsumerBoundary ($case[0]+"`n"+$case[2]) $case[1] @($case[2]) } catch { $rejected=$true }
     if(!$rejected){throw "Private-header negative control accepted: $($case[2])"}

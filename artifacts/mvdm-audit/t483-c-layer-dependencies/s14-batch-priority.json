@@ -3,8 +3,8 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 78,
-    "eliminated": 490,
+    "open": 73,
+    "eliminated": 495,
     "supporting-evidence": 43,
     "eliminated-transitive": 6
   },
@@ -54,21 +54,6 @@
         "NtvdmActivateLifecycle",
         "ntvdm_worker_lifecycle_authorize_exit",
         "ntvdm_worker_lifecycle_input_terminal"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/vdmredir-dll/source/mvdm_redirector_guest_copy.c",
-      "open_ids": [
-        "C0600",
-        "C0601",
-        "C0602"
-      ],
-      "count": 3,
-      "symbols": [
-        "mvdm_redirector_cd_name_target",
-        "mvdm_redirector_copy_ansi_to_guest",
-        "mvdm_redirector_copy_wide_to_guest"
       ]
     },
     {
@@ -401,24 +386,6 @@
       "symbols": []
     },
     {
-      "kind": "include-root",
-      "provider": "src/vdmredir-dll/include",
-      "open_ids": [
-        "C0145"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/vdmredir-dll/include/mvdm_redirector_guest_copy.h",
-      "open_ids": [
-        "C0058"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
       "kind": "symbol",
       "provider": "src/worker-base/connection.c",
       "open_ids": [
@@ -714,5 +681,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P95"
+  "updated_by": "T483 S14 P96"
 }

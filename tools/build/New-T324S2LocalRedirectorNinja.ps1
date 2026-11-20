@@ -26,7 +26,7 @@ $environment = Join-Path $BuildRoot ("msvc-{0}.cmd" -f $Architecture)
   'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T324_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 $includeRoots = @(
-    'src', 'src/vdmredir-dll/include', 'src/mvdm-host/inc', 'src/mvdm-host/vdmredir',
+    'src', 'src/mvdm-host/inc', 'src/mvdm-host/vdmredir',
     'src/mvdm-host/dos/command', 'src/non-mvdm/ds/netapi/netlib',
     'src/mvdm-host/softpc.new/base/inc', 'src/mvdm-host/softpc.new/host/inc',
     'src/ntvdm-exe/softpc/include',

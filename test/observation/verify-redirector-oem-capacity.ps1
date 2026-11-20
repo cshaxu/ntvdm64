@@ -13,7 +13,7 @@ $wrapper = Join-Path $out 'compiler.cmd'
 @('@echo off', ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'),
     'if errorlevel 1 exit /b %errorlevel%', '%*') |
     Set-Content -LiteralPath $wrapper -Encoding ASCII
-$sources = @('src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/vdmredir-dll/source/mvdm_redirector_guest_copy.c',
+$sources = @('src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/compat/mvdm_redirector_guest_copy.c',
     'src/compat/guest_location.c', 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/compat/guest_memory_lease.c',
     'test/mvdm-host/vdmredir/redirector_oem_capacity_test.c')
@@ -29,7 +29,7 @@ $inputs = $sources | ForEach-Object { Join-Path $root $_ }
 $objects = $sources | ForEach-Object {
     Join-Path $out ([IO.Path]::GetFileNameWithoutExtension($_) + '.obj')
 }
-& $wrapper cl /nologo /TC /c /MT /W4 /DNTVDM /DCPU_40_STYLE /DCCPU /DWIN_32 /DVDMREDIR_DLL /DMVDM_GUEST_MEMORY_FIXTURE "/I$root/src" "/I$root/src/vdmredir-dll/include" "/I$root/src/ntvdm-exe/softpc/include" "/FI$root/test/mvdm-host/vdmredir/redirector_oem_fixture_binding.h" "/Fo$out/" @inputs 2>&1 |
+& $wrapper cl /nologo /TC /c /MT /W4 /DNTVDM /DCPU_40_STYLE /DCCPU /DWIN_32 /DVDMREDIR_DLL "/I$root/src" "/I$root/src/compat/include" "/I$root/src/ntvdm-exe/softpc/include" "/FI$root/test/mvdm-host/vdmredir/redirector_oem_fixture_binding.h" "/Fo$out/" @inputs 2>&1 |
     Tee-Object -FilePath (Join-Path $out 'build.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Compile failed.' }
 if ($OriginalProviders) {

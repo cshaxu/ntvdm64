@@ -1,5 +1,5 @@
-#ifndef COMMON_GUEST_MEMORY_ADDRESS_H
-#define COMMON_GUEST_MEMORY_ADDRESS_H
+#ifndef COMPAT_GUEST_MEMORY_ADDRESS_H
+#define COMPAT_GUEST_MEMORY_ADDRESS_H
 #include <stdint.h>
 
 /* Resolve a guest selector and offset using the worker's current CPU state. */

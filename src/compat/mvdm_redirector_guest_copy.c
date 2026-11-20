@@ -1,16 +1,13 @@
-#include "mvdm_redirector_guest_copy.h"
+#include "include/mvdm_redirector_guest_copy.h"
 
 #include <windows.h>
 #include <lmerr.h>
 #include <string.h>
 
-#ifndef MVDM_GUEST_MEMORY_FIXTURE
-#define COMMON_GUEST_MEMORY_IMPORTS
-#endif
-#include "common/guest-memory/access.h"
-#include "common/guest-memory/address.h"
+#include "include/guest_memory_access.h"
+#include "include/guest_memory_address.h"
 
-/* The worker owns the address space; Redir owns this bounded copy workflow.
+/* The machine owns the address space; this adapter owns the bounded copy.
  * Preserve the worker adapter's 4 KiB commit and partial-failure boundaries. */
 static int transfer_guest(uint16_t segment, uint16_t offset, uint8_t *bytes,
     uint32_t byte_count, int write)
