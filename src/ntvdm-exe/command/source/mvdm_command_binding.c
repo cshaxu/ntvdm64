@@ -13,7 +13,6 @@ BOOL ntvdm_command_initialize(void)
         mvdm_command_native_child_replace_command,
         mvdm_command_native_child_select_command_service,
         mvdm_command_native_child_finish,
-        opennt_command_set_std_handle,
         opennt_command_create_process_a,
         mvdm_command_guest_state_clear_doswow,
         mvdm_command_guest_state_register_doswow

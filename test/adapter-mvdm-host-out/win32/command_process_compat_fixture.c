@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "ntvdm-exe/command/include/command_launch.h"
+#include "compat/include/command_services.h"
 
 int main(int argc, char **argv)
 {

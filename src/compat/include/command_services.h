@@ -12,7 +12,7 @@ enum {
 
 /* Installed once before COMMAND runs. The product owns capture, borrowed
  * strings, release and native launch policy. This boundary owns no request,
- * session, guest mapping or standard-handle state. All signatures preserve
+ * session or guest mapping state. All signatures preserve
  * the existing COMMAND binding; strings remain borrowed until finish. */
 typedef struct compat_command_services {
     int (*capture_guest)(uint16_t, uint16_t, uint16_t, uint16_t, uint16_t, uint16_t);
@@ -23,7 +23,6 @@ typedef struct compat_command_services {
     int (*replace_command)(const char *);
     int (*select_service)(unsigned int);
     void (*finish)(void);
-    BOOL (*set_std_handle)(DWORD, HANDLE);
     BOOL (*create_process)(LPCSTR, LPSTR, LPSECURITY_ATTRIBUTES,
         LPSECURITY_ATTRIBUTES, BOOL, DWORD, LPVOID, LPCSTR,
         LPSTARTUPINFOA, LPPROCESS_INFORMATION);
@@ -33,5 +32,10 @@ typedef struct compat_command_services {
 
 BOOL compat_command_install(const compat_command_services *services);
 const compat_command_services *compat_command_current_services(void);
+
+/* Borrowed per-thread stream snapshot for the original SetStdHandle sequence. */
+BOOL __cdecl opennt_command_set_std_handle(DWORD standard_handle, HANDLE handle);
+LPSTARTUPINFOA __cdecl opennt_command_child_startup(LPSTARTUPINFOA startup,
+    LPSTARTUPINFOA child);
 
 #endif

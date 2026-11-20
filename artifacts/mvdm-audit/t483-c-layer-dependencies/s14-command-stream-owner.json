@@ -1,0 +1,68 @@
+{
+  "packet": "M0 T483 S14 P101",
+  "baseline": "af6ea206cbbba3b2c376da082667de1adde341e4",
+  "eliminated_B_ids": [
+    "B0009"
+  ],
+  "eliminated_C_ids": [],
+  "scope": "Own the existing COMMAND per-thread snapshot, setter and child STARTUPINFO projection together in B. C SetStdHandle resolves directly to B. F retains child creation and all launch/transport policy.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "open": 61,
+    "eliminated": 507,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "B_known_outward": {
+    "D": 2,
+    "E": 0,
+    "F": 7
+  },
+  "final_product_symbols": {
+    "worker": {
+      "_opennt_command_set_std_handle": "0001:00185060       _opennt_command_set_std_handle 00586060 f   worker-command-bindings:command_services.obj",
+      "_opennt_command_child_startup": "0001:00184f90       _opennt_command_child_startup 00585f90 f   worker-command-bindings:command_services.obj",
+      "_opennt_command_create_process_a": "0001:001288d0       _opennt_command_create_process_a 005298d0 f   softpc-win32-bindings:command_process_compat.obj"
+    },
+    "worker-reference-x86": {
+      "_opennt_command_set_std_handle": "0001:00185060       _opennt_command_set_std_handle 00586060 f   worker-command-bindings:command_services.obj",
+      "_opennt_command_child_startup": "0001:00184f90       _opennt_command_child_startup 00585f90 f   worker-command-bindings:command_services.obj",
+      "_opennt_command_create_process_a": "0001:001288d0       _opennt_command_create_process_a 005298d0 f   softpc-win32-bindings:command_process_compat.obj"
+    }
+  },
+  "compiled_ownership": {
+    "objects": 4,
+    "counts": {
+      "system import": 9,
+      "TLS ABI absolute": 3,
+      "CRT": 3,
+      "not selected in final link": 5
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "095ecee6-76cf-4d98-b843-6f81896c4d40",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, COMMAND capture/launch fixtures, real COMMAND-to-native EDIT return, DOS MEM and final gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "009e9da4afaca88cafefe3db38aac2655d78cd1c471d3c0ab270554d85a25089",
+    "release-and-test.out": "6c0c2dc1dbe86683535566e6f4dab63f1417390a5e0b79756fdde6ea68c41823",
+    "b-compiled-candidates.json": "39d71548c687807c29349dcebe227c221ca146d16554817eb9457ef111c5db23",
+    "commands/results.json": "61bdbec3a4b79fd4dd06e320be26fb065ad6e3d4dbe94d0d620645bccaa4436d",
+    "edit-return.txt": "da501fb364ffb045fda08f3b586d34576d17665b7748bb530e68195a3f94a141",
+    "cmdexec-symbols.txt": "a3bf8dd965e52a34020396c5c721221c11c1822961204d0aabe245ec2bbdea7b"
+  },
+  "prior_dialog_keyboard_delivery": "s14-dialog-keyboard-owner.json"
+}

@@ -38,7 +38,8 @@ rule run
 
 build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/win32/command_process_compat_fixture.c
 build obj/command_process_compat.obj: cc `$root/src/ntvdm-exe/win32/command_process_compat.c
-build command_process_compat_fixture.exe: link obj/fixture.obj obj/command_process_compat.obj
+build obj/command_services.obj: cc `$root/src/compat/command_services.c
+build command_process_compat_fixture.exe: link obj/fixture.obj obj/command_process_compat.obj obj/command_services.obj
 build test: run command_process_compat_fixture.exe
 default command_process_compat_fixture.exe
 "@

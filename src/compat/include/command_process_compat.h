@@ -12,7 +12,7 @@
 #include "command_services.h"
 
 #undef SetStdHandle
-#define SetStdHandle compat_command_current_services()->set_std_handle
+#define SetStdHandle opennt_command_set_std_handle
 #undef CreateProcess
 #define CreateProcess compat_command_current_services()->create_process
 

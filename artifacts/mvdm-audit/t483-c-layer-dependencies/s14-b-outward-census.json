@@ -157,9 +157,11 @@
       "target": "opennt_command_set_std_handle",
       "layer": "F",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed",
+      "status": "eliminated",
       "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
-      "slot": "set_std_handle"
+      "slot": "set_std_handle",
+      "current_provider": "src/compat/command_services.c",
+      "migration_status": "P101 removes the installed set_std_handle slot; original COMMAND calls B directly. The same worker-local stream snapshot is consumed by the outward launch owner."
     },
     {
       "id": "B0010",
@@ -435,7 +437,7 @@
   ],
   "indirect_counts": {
     "B": 21,
-    "F": 8,
+    "F": 7,
     "D": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
@@ -482,5 +484,9 @@
   ],
   "p89_inward_targets": [
     "B0028"
-  ]
+  ],
+  "p101_removed_slots": [
+    "B0009"
+  ],
+  "p101_evidence": "s14-command-stream-owner.json"
 }

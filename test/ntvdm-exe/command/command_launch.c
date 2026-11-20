@@ -6,6 +6,7 @@
 #include "compat/include/mvdm_command_native_child.h"
 #include "common/native-hook/context.h"
 #include "compat/include/console_io.h"
+#include "compat/include/command_services.h"
 
 static unsigned checks;
 #define CHECK(x) do { ++checks; if(!(x)){fprintf(stderr,"line %u: %s error=%lu\n",__LINE__,#x,GetLastError());exit(1);} } while(0)
@@ -82,6 +83,19 @@ int main(int argc,char **argv)
             !strcmp(mask,"6") ? 73 : 97;
     }
     if(argc>1 && !strcmp(argv[1],"--child"))return child(argc,argv);
+    {
+        STARTUPINFOA startup = {sizeof(startup)}, child_startup;
+        HANDLE original = GetStdHandle(STD_OUTPUT_HANDLE);
+        CHECK(opennt_command_child_startup(&startup, &child_startup) == &startup);
+        CHECK(!opennt_command_set_std_handle(0, NULL) &&
+            GetLastError() == ERROR_INVALID_PARAMETER);
+        CHECK(opennt_command_set_std_handle(STD_OUTPUT_HANDLE, INVALID_HANDLE_VALUE));
+        CHECK(opennt_command_child_startup(&startup, &child_startup) == &child_startup);
+        CHECK(startup.dwFlags == 0 && child_startup.dwFlags == STARTF_USESTDHANDLES &&
+            child_startup.hStdOutput == INVALID_HANDLE_VALUE &&
+            GetStdHandle(STD_OUTPUT_HANDLE) == original);
+        CHECK(opennt_command_set_std_handle(STD_OUTPUT_HANDLE, original));
+    }
     {
         STARTUPINFOA startup={sizeof(startup)};
         PROCESS_INFORMATION process={0};

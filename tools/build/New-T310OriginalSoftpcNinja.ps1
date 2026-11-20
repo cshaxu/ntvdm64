@@ -1682,7 +1682,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build lib-process-launch.lib: lib obj/lib-win32/process-launch/attributes.obj obj/lib-win32/process-launch/process.obj obj/lib-win32/process-launch/command_line.obj')
     $graph.Add('build obj/tests/ntvdm_command_launch.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_launch.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvdm-command-launch-test.exe: broker_test_link obj/tests/ntvdm_command_launch.obj obj/adapter-win32/command_process_compat.obj lib-process-launch.lib')
+    $graph.Add('build ntvdm-command-launch-test.exe: broker_test_link obj/tests/ntvdm_command_launch.obj obj/adapter-win32/command_process_compat.obj obj/compat/command_services.obj lib-process-launch.lib')
     $graph.Add('build obj/tests/ntvdm_command_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_capture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/compat/guest_memory_lease.obj obj/compat/host_context.obj obj/tests/ntvdm_command_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/compat/guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')

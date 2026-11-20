@@ -76,13 +76,7 @@ int mvdm_command_guest_state_register_doswow(uint16_t segment, uint16_t offset)
     directory_offset = offset;
     return 1;
 }
-/* This capture fixture must never launch a host child. The real F composition
- * is installed; its two launch endpoints fail loudly if capture reaches them. */
-BOOL opennt_command_set_std_handle(DWORD standard, HANDLE handle)
-{
-    (void)standard; (void)handle;
-    ExitProcess(98);
-}
+/* The real F composition is installed, but capture must never start a child. */
 BOOL opennt_command_create_process_a(LPCSTR app, LPSTR command,
     LPSECURITY_ATTRIBUTES pa, LPSECURITY_ATTRIBUTES ta, BOOL inherit, DWORD flags,
     LPVOID environment, LPCSTR directory, LPSTARTUPINFOA startup,
