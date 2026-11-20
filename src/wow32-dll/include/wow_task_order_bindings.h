@@ -10,8 +10,7 @@
 #include "wow_user_client_view_layout.h"
 #endif
 
-/* Shared terminal outcome when an acquired execution scope cannot unwind. */
-__declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *, DWORD);
+#include "compat/include/wow_user_failure.h"
 
 /* ADAPTER-WOW-039: finite view of original TDB/WOWPROCESSINFO/PROCESSINFO
  * fields used by the recovered scheduler/registration owners, not private

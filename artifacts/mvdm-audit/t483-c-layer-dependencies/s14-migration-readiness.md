@@ -1,8 +1,8 @@
 # S14 migration readiness and counts
 
-Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68/P70/P72 updates below supersede its
+Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68/P70/P72/P73 updates below supersede its
 classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
-assigns all 395 currently open stable IDs to the existing ten chains.
+assigns all 392 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
 
@@ -16,15 +16,14 @@ assigns all 395 currently open stable IDs to the existing ten chains.
 | 6. launch-csr-completion | 19 | 4 | 0 | 0 | 23 |
 | 7. thread-lifecycle | 85 | 7 | 0 | 0 | 92 |
 | 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
-| 9. native-user | 140 | 25 | 0 | 0 | 165 |
+| 9. native-user | 137 | 25 | 0 | 0 | 162 |
 | 10. original-helpers-build-abi | 13 | 6 | 11 | 1 | 31 |
-| Total | 326 | 57 | 11 | 1 | 395 |
+| Total | 323 | 57 | 11 | 1 | 392 |
 
 The historical 79-provider body-read census remains evidence; P68 removes one
 provider from the open implementation set. Recounting the remaining chain
-provider-file union gives 75 distinct paths (the historical 79 is not current). Header classification
-is 56/59, with three generated contracts still awaiting their final owner/ABI
-decision. All 11 remaining search roots have current-use evidence. VCDEX imports
+provider-file union gives 74 distinct paths (the historical 79 is not current). Header responsibility classification is 59/59; three generated contracts
+still await implementation of their owner/ABI disposition. All 11 remaining search roots have current-use evidence. VCDEX imports
 have C implementation evidence; that is not final binary-boundary disposition.
 
 Whole migration chains ready for implementation: **0/10** under the exact
@@ -33,7 +32,7 @@ design: **10/10**. This does not discard previously delivered subchains. It make
 the missing candidate-level decisions explicit rather than treating source reading
 or broad B/C/F classification as a completed migration design.
 
-Ledger status is 157 eliminated, 411 open, 43 supporting, six
+The historical P65/P68 ledger snapshot was 157 eliminated, 411 open, 43 supporting, six
 eliminated-transitive and one excluded diagnostic, total 618. P65 eliminates
 C0456 with +1 non-error mirror point/+2 lines; P68 moves the shared runtime body/header into B with zero mirror delta; current package is
 `360c2b7f-3879-4f20-9a36-55e8395fd196`. Direct-ID closure is not whole-chain
@@ -45,7 +44,7 @@ The four-root inventory contains 1494 tracked files; it is not a claim that
 1494 complete bodies have been reviewed. P54 separately reconciles 190 C caller
 files. The direct-provider set is 79 files, not the whole inventory.
 
-The 411 direct IDs do not include every indirect implementation dependency. In
+The open direct IDs do not include every indirect implementation dependency. In
 particular, previously eliminated includes do not excuse the B guest-access/lease
 callbacks to C or outer lifecycle hooks. Those are attached to the same chains
 using P55/P59 and the callback-provider review, not counted as new approved
@@ -54,8 +53,8 @@ the distinct union, while each open ID has exactly one primary accounting owner.
 
 ## Concrete next decisions
 
-The JSON carries the exact next design gate for each chain. Work proceeds in
-existing chain order. For chain 1, produce the actual C coordinator/B-resource
+The JSON carries the exact next design gate for each chain. Current execution prioritizes the largest complete dependency batches. The
+following chain1 candidate description is historical and superseded by P62/P65. For chain 1, produce the actual C coordinator/B-resource
 candidate and measure mirror cost before production edits. Keep the existing
 SAS provider; do not replace it with raw host memory copying.
 
@@ -136,3 +135,15 @@ the existing commit mutex. See [evidence](s14-registry-binding-owner.json).
 and C0541 without a replacement B provider, callback or mirror edit. Original C
 queries bind directly to modern USER. Remaining priority-batch roots:111. The
 current ledger is173 eliminated/395 open; full-chain ownership remains incomplete.
+
+## P73 native dialog and failure ownership
+
+[Delivered implementation evidence](s14-native-dialog-owner.json) moves actual
+installed USER export resolution, modal query/cursor and terminal diagnostic
+bodies into B. C0375/C0376/C0377 are eliminated; total176 eliminated/392 open.
+Ten bodies retain identity after one private trace-helper rename. No mirror
+points or lines added. The existing original descriptor and HWND conversion
+remain at their caller, pending the separate C coordination migration.
+The failure provider is reached by109 of111 priority roots; moving it is a
+shared prerequisite, not elimination of those111 roots. Cached full build,
+dual11 publication and targeted lifecycle/real Win16 dialog tests pass.

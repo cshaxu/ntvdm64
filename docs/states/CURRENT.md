@@ -28,6 +28,17 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P73 [native dialog/failure implementation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-dialog-owner.json)
+moves actual installed USER bindings and terminal diagnostics from F to B.
+Ten bodies retain identity after one private trace-helper rename; original
+string/handle conversion remains at its caller. Mirror delta0/0; no new B-to-C
+callback. C0375/C0376/C0377 eliminated; ledger176 eliminated/392 open. The
+shared failure provider is reached by109 of111 priority roots, which remain
+open for scheduler/projection ownership. Cached full builds, dual11 publication
+and targeted lifecycle/real Win16 dialog tests pass. Package7a2b73cc-96f3-45a3-aa39-6c4c837f7280.
+Final document gates and enclosing P73 commit/push provide the delivery receipt.
+S14 remains active.
+
 P72 [native query restoration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-query-owner.json)
 eliminates C0530/C0531/C0541 by restoring original public USER queries, not moving
 wrappers. Current product objects use the native imports; short-HWND positive
@@ -35,7 +46,7 @@ and dead-window/unsupported-thread-query controls pass95 assertions. Mirror
 change0/0; twelve autonomous source lines deleted; no new B provider or callback.
 Cached full x86/x64/reference builds, dual11 publication/22 hashes, retirement,
 nested/terminal lifecycle,8-phase Win16 dialog and compiled A/B/WOW gates pass.
-Packagefe0c4696-c6dd-41e7-be18-a226dd78047f. Ledger:173 eliminated/395 open;
+Packagefe0c4696-c6dd-41e7-be18-a226dd78047f. P72 ledger:173 eliminated/395 open;
 remaining priority roots111. Final document checks and enclosing P72 commit/push
 supply the delivery receipt. S14 remains active.
 

@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 395,
+    "open": 392,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 173
+    "eliminated": 176
   },
   "provider_groups": [
     {
@@ -789,17 +789,9 @@
     {
       "kind": "symbol",
       "provider": "src/wow32-dll/source/wow_dialog_native_bindings.c",
-      "open_ids": [
-        "C0375",
-        "C0376",
-        "C0377"
-      ],
-      "count": 3,
-      "symbols": [
-        "wow_dialog_current_foreground",
-        "wow_dialog_cursor_position",
-        "wow_dialog_window_foreground"
-      ]
+      "open_ids": [],
+      "count": 0,
+      "symbols": []
     },
     {
       "kind": "symbol",
@@ -2224,7 +2216,8 @@
       "ownership_evidence": "s14-wow-native-batch-ownership.json",
       "next_gate": "Measure complete scheduler/resource/projection relocation; not a three-file copy. Runtime unbind outward callback and EXE/DLL singleton are confirmed prerequisites.",
       "compiled_closure_evidence": "s14-native-batch-relocations.json",
-      "reachable_F_objects": 44
+      "reachable_F_objects": 44,
+      "shared_failure_provider": "P73 moves actual terminal failure/diagnostic bodies to B;109/111 baseline roots reach that provider. Root IDs remain open."
     },
     {
       "name": "Console routing and graphics mechanics",
@@ -2308,5 +2301,5 @@
   ],
   "next_action": "Continue the111-root scheduler/projection closure under existing layers; remove disproved wrappers instead of moving them. Independent B implementation migrations remain prerequisites, not closure.",
   "not_done": "111 roots remain open. P68/P71 deliver independent resource/capture mechanisms; concrete C scheduler/projection carriers and mirror-cost measurement remain.",
-  "updated_by": "T483 S14 P72"
+  "updated_by": "T483 S14 P73"
 }

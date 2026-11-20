@@ -1,0 +1,337 @@
+{
+  "baseline": "079f931ebb695464852aebd65405f0ec070f7d57",
+  "status": "P73 built,dual-published,targeted-tested; enclosing reviewed commit supplies delivery receipt",
+  "decision": "Move independent installed USER service resolution,modal predicates,cursor sampling and terminal diagnostic implementation/state into existing B compat. Retain original LARGE_STRING capture and owned HWND conversion at current caller pending separate C placement.",
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "body_identity": [
+    {
+      "symbol": "resolve_native",
+      "body_identical": true,
+      "source": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "source_lines": [
+        34,
+        67
+      ],
+      "destination": "src/compat/wow_native_dialog.c"
+    },
+    {
+      "symbol": "wow_dialog_native_ready",
+      "body_identical": true,
+      "source": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "source_lines": [
+        69,
+        76
+      ],
+      "destination": "src/compat/wow_native_dialog.c"
+    },
+    {
+      "symbol": "wow_dialog_native_zap_active_and_focus",
+      "body_identical": true,
+      "source": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "source_lines": [
+        78,
+        87
+      ],
+      "destination": "src/compat/wow_native_dialog.c"
+    },
+    {
+      "symbol": "wow_dialog_current_foreground",
+      "body_identical": true,
+      "source": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "source_lines": [
+        89,
+        95
+      ],
+      "destination": "src/compat/wow_native_dialog.c"
+    },
+    {
+      "symbol": "wow_dialog_cursor_position",
+      "body_identical": true,
+      "source": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "source_lines": [
+        97,
+        107
+      ],
+      "destination": "src/compat/wow_native_dialog.c"
+    },
+    {
+      "symbol": "wow_dialog_window_foreground",
+      "body_identical": true,
+      "source": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "source_lines": [
+        109,
+        115
+      ],
+      "destination": "src/compat/wow_native_dialog.c"
+    },
+    {
+      "symbol": "wow_dialog_native_set_thread_state",
+      "body_identical": true,
+      "source": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "source_lines": [
+        117,
+        122
+      ],
+      "destination": "src/compat/wow_native_dialog.c"
+    },
+    {
+      "symbol": "wow_dialog_native_set_system_menu",
+      "body_identical": true,
+      "source": "src/wow32-dll/source/wow_dialog_native_bindings.c",
+      "source_lines": [
+        124,
+        128
+      ],
+      "destination": "src/compat/wow_native_dialog.c"
+    },
+    {
+      "symbol": "wow_user_retirement_trace",
+      "body_identical_after_trace_helper_rename": true,
+      "source": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "source_lines": [
+        107,
+        125
+      ],
+      "destination": "src/compat/wow_user_failure.c"
+    },
+    {
+      "symbol": "wow_user_native_call_failed",
+      "body_identical_after_trace_helper_rename": true,
+      "source": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "source_lines": [
+        1201,
+        1211
+      ],
+      "destination": "src/compat/wow_user_failure.c"
+    }
+  ],
+  "preserved_contracts": [
+    "same six installed named exports,all-or-nothing INIT_ONCE publication",
+    "same failure exception code,noncontinuable flag,error parameter and trace formatting",
+    "same foreground service operation numbers10/7",
+    "same original-to-native title capture and full-parent lookup before native create",
+    "same native17-slot create call and LOWORD(version)",
+    "no B callbacks to C/D/E/F; no copied original WND/TDB types"
+  ],
+  "new_native_entry": "wow_native_create_dialog_window requires successful wow_dialog_native_ready; accepts installed native descriptor and full handle, no original identity lookup",
+  "remaining": "392 direct ledger IDs open,including all111 priority roots; original-layout conversion and scheduling ownership are not declared solved.",
+  "source_hashes": {
+    "src/compat/wow_native_dialog.c": "6e6f4431d9a9b953908f11b0b5d28e6edb55d318f178e0e54fff28cb3db83855",
+    "src/compat/wow_user_failure.c": "9fd254a5dc0cd5052fcc1baf81d769a75da7f06353019fa817421782eaae0787",
+    "src/wow32-dll/source/wow_dialog_native_bindings.c": "5e6faf9cf14336e9d1ef6ba757d36cbfcdc98385059c1869c6902a3d4a0da528",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c": "67aa4b6c06da1f80c07116b1303e2ed81894cb618485bdc4063b7479e912badc"
+  },
+  "planned_package": "7a2b73cc-96f3-45a3-aa39-6c4c837f7280",
+  "evidence_root": "build/t483-s14-native-dialog-owner",
+  "shared_prerequisite": {
+    "baseline_closure": "build/t483-s14-query-owner/closure/closure.json",
+    "priority_roots_reaching_failure_provider": 109,
+    "priority_roots_total": 111,
+    "root_symbols": [
+      "_wow_native_GetWindowThreadProcessId@8",
+      "_wow_native_FindWindowA@8",
+      "_wow_native_ChildWindowFromPoint@12",
+      "_wow_native_WindowFromPoint@8",
+      "_wow_native_GetCapture@0",
+      "_wow_native_GetFocus@0",
+      "_wow_native_GetActiveWindow@0",
+      "_wow_native_GetForegroundWindow@0",
+      "_wow_native_GetLastActivePopup@4",
+      "_wow_native_GetNextDlgGroupItem@12",
+      "_wow_native_GetNextDlgTabItem@12",
+      "_wow_native_EnumWindows@8",
+      "_wow_native_EnumChildWindows@12",
+      "_wow_native_EnumThreadWindows@12",
+      "_wow_native_EnumPropsA@8",
+      "_wow_menu_native_GetMenu@4",
+      "_wow_menu_native_GetSystemMenu@8",
+      "_wow_menu_native_DestroyMenu@4",
+      "_wow_menu_native_AppendMenuA@16",
+      "_wow_menu_native_InsertMenuA@20",
+      "_wow_menu_native_ModifyMenuA@20",
+      "_wow_menu_native_ChangeMenuA@20",
+      "_wow_menu_native_InsertMenuItemW@16",
+      "_wow_menu_native_DeleteMenu@12",
+      "_wow_menu_native_RemoveMenu@12",
+      "_wow_menu_native_CheckMenuItem@12",
+      "_wow_menu_native_EnableMenuItem@12",
+      "_wow_menu_native_HiliteMenuItem@16",
+      "_wow_menu_native_SetMenuItemBitmaps@20",
+      "_wow_menu_native_SetMenu@8",
+      "_wow_menu_native_DrawMenuBar@4",
+      "_wow_menu_native_TrackPopupMenu@28",
+      "_wow_menu_native_TrackPopupMenuEx@24",
+      "_wow_native_CallNextHookEx@16",
+      "_wow_native_BringWindowToTop@4",
+      "_wow_native_FlashWindow@8",
+      "_wow_native_ExcludeUpdateRgn@8",
+      "_wow_native_GetPropA@8",
+      "_wow_native_SetPropA@12",
+      "_wow_native_RemovePropA@8",
+      "_wow_native_GetParent@4",
+      "_wow_native_MoveWindow@24",
+      "_wow_native_ShowWindow@8",
+      "_wow_native_EnableWindow@8",
+      "_wow_native_SetActiveWindow@4",
+      "_wow_native_SetForegroundWindow@4",
+      "_wow_native_SetWindowContextHelpId@8",
+      "_wow_native_SetCursorPos@8",
+      "_wow_native_ShowCursor@4",
+      "_wow_native_DragDetect@12",
+      "_wow_native_SetFocus@4",
+      "_wow_native_SetCapture@4",
+      "_wow_native_ReleaseCapture@0",
+      "_wow_native_DestroyWindow@4",
+      "_wow_native_SetParent@8",
+      "_wow_native_SetWindowPos@28",
+      "_wow_native_DeferWindowPos@32",
+      "_wow_native_SetWindowPlacement@8",
+      "_wow_native_SetWindowWord@12",
+      "_wow_native_EndDeferWindowPos@4",
+      "_wow_native_ArrangeIconicWindows@4",
+      "_wow_native_CloseWindow@4",
+      "_wow_native_OpenIcon@4",
+      "_wow_native_ShowOwnedPopups@8",
+      "_wow_native_ScrollWindow@20",
+      "_wow_native_ScrollWindowEx@32",
+      "_wow_native_ShowScrollBar@12",
+      "_wow_native_SetScrollRange@20",
+      "_wow_native_SetScrollPos@16",
+      "_wow_native_GetScrollPos@8",
+      "_wow_native_GetScrollRange@16",
+      "_wow_native_EnableScrollBar@12",
+      "_wow_native_GetDC@4",
+      "_wow_native_GetWindowDC@4",
+      "_wow_native_GetDCEx@12",
+      "_wow_native_BeginPaint@8",
+      "_wow_native_EndPaint@8",
+      "_wow_native_SetScrollInfo@16",
+      "_wow_native_CreateCaret@16",
+      "_wow_native_DestroyCaret@0",
+      "_wow_native_SetCaretPos@8",
+      "_wow_native_HideCaret@4",
+      "_wow_native_ShowCaret@4",
+      "_wow_native_InvalidateRect@12",
+      "_wow_native_InvalidateRgn@12",
+      "_wow_native_ValidateRect@8",
+      "_wow_native_ValidateRgn@8",
+      "_wow_native_GetUpdateRect@12",
+      "_wow_native_GetUpdateRgn@12",
+      "_wow_native_UpdateWindow@4",
+      "_wow_native_RedrawWindow@16",
+      "_wow_native_SetCursor@4",
+      "_wow_native_GetWindowTextA@12",
+      "_wow_native_GetWindowTextW@12",
+      "_wow_native_CallMsgFilterA@8",
+      "_wow_native_CallMsgFilterW@8",
+      "_wow_native_GetWindowTextLengthA@4",
+      "_wow_native_SetWindowTextA@8",
+      "_wow_native_SetWindowTextW@8",
+      "_wow_native_SetDlgItemTextW@12",
+      "_wow_native_SendMessageA@16",
+      "_wow_native_SendMessageW@16",
+      "_wow_native_SendMessageTimeoutA@28",
+      "_wow_native_DefWindowProcA@16",
+      "_wow_native_DefDlgProcA@16",
+      "_wow_native_DefMDIChildProcA@16",
+      "_wow_native_DefFrameProcA@20",
+      "_wow_native_DispatchMessageA@4",
+      "_wow_native_DispatchMessageW@4"
+    ],
+    "interpretation": "Removal of a common F implementation dependency,not elimination of the root IDs. Original task/projection coordination still requires separate relocation."
+  },
+  "source_scope": "Existing autonomous adaptation relocated from pinned product baseline; no original OpenNT source imported or guest changed. Native syscall identities and widths are existing admitted bindings,not newly inferred ABIs.",
+  "eliminated_ids": [
+    "C0375",
+    "C0376",
+    "C0377"
+  ],
+  "ledger": {
+    "excluded-diagnostic": 1,
+    "open": 392,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "eliminated": 176
+  },
+  "verification": {
+    "build_exit": 0,
+    "build_scopes": [
+      "cached x86",
+      "cached x64",
+      "reference x86",
+      "four explicit x86 release images"
+    ],
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "7a2b73cc-96f3-45a3-aa39-6c4c837f7280",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "tests_exit": 0,
+    "log": "build/t483-s14-native-dialog-owner/tests.out",
+    "cases": [
+      "process-retirement",
+      "native-nested",
+      "window-borrow TerminalSchedule",
+      "real Win16 dialog",
+      "compiled WOW shared boundary",
+      "compiled A/B eight graphs"
+    ],
+    "full_suite": "not run; targeted default approved",
+    "compiled_B_providers": {
+      "objects": [
+        "obj/compat/wow_native_dialog.obj",
+        "obj/compat/wow_user_failure.obj"
+      ],
+      "outer_resolved_targets": 0,
+      "scope": "All reached COMDATs in current111-root actual product closure; native imports are system providers. No claims about unobserved runtime traces."
+    },
+    "Win16_dialog": "WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+    "final_checks": "exit0: current compiled closure,22 published hashes,documentation governance,relative links,git diff whitespace",
+    "final_link_owners": {
+      "wow_dialog_current_foreground": "wow_native_dialog.obj",
+      "wow_dialog_cursor_position": "wow_native_dialog.obj",
+      "wow_dialog_window_foreground": "wow_native_dialog.obj"
+    },
+    "post_test_format_only": "Removed one terminal blank line from wow_user_failure.c for staged whitespace gate; all non-terminal-newline bytes identical. No code,line mapping or binding change; no repeated build/test under owner format-only authorization."
+  },
+  "processes": {
+    "build": {
+      "start": "2026-11-20T01:50:59.4599775Z",
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-native-dialog-owner/build.ps1",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "pid": 32476
+    },
+    "deliver": {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "start": "2026-11-20T01:56:25.1547091Z",
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-native-dialog-owner/deliver.ps1",
+      "pid": 21720
+    },
+    "tests": {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "pid": 31144,
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-native-dialog-owner/tests.ps1",
+      "start": "2026-11-20T01:57:07.0979167Z"
+    },
+    "final-checks": {
+      "start": "2026-11-20T02:00:09.4280247Z",
+      "pid": 31220,
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-native-dialog-owner/final-checks.ps1",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe"
+    }
+  },
+  "tested_source_sha256": {
+    "src/compat/wow_native_dialog.c": "6e6f4431d9a9b953908f11b0b5d28e6edb55d318f178e0e54fff28cb3db83855",
+    "src/compat/wow_user_failure.c": "87f094c16351cff5eb9b5edef653988812815caeb8ee664481e5f566fb740ab8",
+    "src/wow32-dll/source/wow_dialog_native_bindings.c": "5e6faf9cf14336e9d1ef6ba757d36cbfcdc98385059c1869c6902a3d4a0da528",
+    "src/wow32-dll/source/wow_user_task_lifecycle.c": "67aa4b6c06da1f80c07116b1303e2ed81894cb618485bdc4063b7479e912badc"
+  }
+}

@@ -102,28 +102,6 @@ HHOOK WINAPI wow_user_idle_hook_for_current(void)
     return result;
 }
 
-/* Observe the existing retirement edge independently of ModuleUnload and
- * launcher completion. Default-off; preserve the caller's error status. */
-static void retirement_trace(const char *stage, DWORD task, DWORD status)
-{
-    char path[MAX_PATH], line[160];
-    DWORD error = GetLastError(), size, written, path_length;
-    HANDLE file;
-    path_length = GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", path, sizeof(path));
-    if (path_length && path_length < sizeof(path)) {
-        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
-            NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-        if (file != INVALID_HANDLE_VALUE) {
-            size = (DWORD)sprintf_s(line, sizeof(line),
-                "%lu TaskRetirement tid=%lu task=%08lX stage=%s status=%lu\r\n",
-                GetCurrentProcessId(), GetCurrentThreadId(), task, stage, status);
-            if (size) (void)WriteFile(file, line, size, &written, NULL);
-            CloseHandle(file);
-        }
-    }
-    SetLastError(error);
-}
-
 /* Default-off witness for an existing terminal boundary; retain its code. */
 static void lifecycle_failure(const char *stage, DWORD code)
 {
@@ -205,7 +183,7 @@ static void WINAPI idle_hook(wow_task_order_thread *thread)
     if (!binding || binding->thread != thread || !binding->exclusive_held ||
             thread->ppi->pwpi->ptiScheduled != thread)
         lifecycle_failure("idle-hook-dispatch-owner", ERROR_INVALID_STATE);
-    retirement_trace("idle-dispatch", thread->ptdb->hTaskWow, 0);
+    wow_user_retirement_trace("idle-dispatch", thread->ptdb->hTaskWow, 0);
     wow_user_idle_hook_dispatch();
 }
 
@@ -1194,22 +1172,6 @@ BOOL WINAPI wow_user_native_call_end_wait(wow_user_native_call *call)
     return native_call_end(call, TRUE, TRUE);
 }
 
-/* A native operation may already have consumed a MSG or mutated USER. It
- * cannot be replayed, reported as an ordinary false result or followed by
- * unsafe guest execution. Fail the worker, not merely the current WOW task.
- * Use the product's existing fail-fast convention for broken ownership. */
-__declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *stage, DWORD error)
-{
-    EXCEPTION_RECORD record = {0};
-    retirement_trace(stage, 0, error);
-    record.ExceptionCode = 0xc0000420u; /* STATUS_ASSERTION_FAILURE */
-    record.ExceptionFlags = EXCEPTION_NONCONTINUABLE;
-    record.NumberParameters = 1;
-    record.ExceptionInformation[0] = error;
-    RaiseFailFastException(&record, NULL, 0);
-    __assume(0);
-}
-
 /* ADAPTER-WOW-051: candidate target-aware native call edge. Same-thread
  * calls retain their direct execution. Native transport/result is unchanged. */
 #define WOW_NATIVE_CALL_AFTER(type, name, params, args, failed, target, after) \
@@ -1614,7 +1576,7 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
     for (index = 0; index <= owner->objects->last_handle; ++index) {
         wow_cleanup_handle *entry = &owner->objects->entries[index];
         if (entry->bType == TYPE_WINDOW && entry->pOwner == &task->thread) {
-            retirement_trace("live-window", task_id, ERROR_BUSY);
+            wow_user_retirement_trace("live-window", task_id, ERROR_BUSY);
             (void)wow_user_runtime_leave(binding);
             SetLastError(ERROR_BUSY); return FALSE;
         }
@@ -1672,7 +1634,7 @@ BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *owner,
     BOOL result = FALSE;
     if (!task || (task_id && (!task->thread.ptdb ||
             task->thread.ptdb->hTaskWow != task_id))) {
-        retirement_trace("cleanup-task-identity", task_id, ERROR_INVALID_STATE);
+        wow_user_retirement_trace("cleanup-task-identity", task_id, ERROR_INVALID_STATE);
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
     /* wuser.c::ModuleUnload calls the task branch and then task==0 module
@@ -1687,7 +1649,7 @@ BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *owner,
         owner->cleanup.thread = &task->thread;
         result = wow_user_cleanup_bound(instance, task_id, selectors, count,
             &owner->cleanup);
-        if (!result) retirement_trace("cleanup-original-boundary", task_id, GetLastError());
+        if (!result) wow_user_retirement_trace("cleanup-original-boundary", task_id, GetLastError());
     } __finally {
         owner->cleanup.thread = NULL;
         (void)wow_user_runtime_leave(binding);
@@ -1807,9 +1769,9 @@ BOOL WINAPI wow_user_task_lifecycle_unbind(wow_user_runtime_thread *binding)
         task = current_task(owner);
         if (!task) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
         task_id = task->thread.ptdb->hTaskWow;
-        retirement_trace("enter", task_id, 0);
+        wow_user_retirement_trace("enter", task_id, 0);
         result = retire_task(owner, task_id, NULL, NULL, 0);
-        retirement_trace(result ? "complete" : "failed", task_id,
+        wow_user_retirement_trace(result ? "complete" : "failed", task_id,
             result ? ERROR_SUCCESS : GetLastError());
         if (!result) return FALSE;
     }
