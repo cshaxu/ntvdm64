@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <stdint.h>
 #include "common/protocol/native_launch_type.h"
+#include "compat/include/base_resource_scope.h"
 
 /* Private binding for the interval between original CheckVDM's no-worker
  * result and the worker's authenticated Connect.  IDs correlate a launcher
@@ -45,8 +46,9 @@ DWORD OpenNtBaseReservationAcceptStream(OPENNT_BASE_RESERVATIONS *,uint64_t rese
     HANDLE stream,uint32_t *receipt);
 DWORD OpenNtBaseReservationResolveStream(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
     uint32_t receipt,HANDLE *stream);
-DWORD OpenNtBaseReservationRevokeStream(OPENNT_BASE_RESERVATIONS *,uint64_t reservation,
-    uint32_t receipt);
+/* Valid only while the service dispatch lock pins the reservation. */
+OPENNT_BASE_RECEIPT_ROUTE OpenNtBaseReservationBorrowStreams(
+    OPENNT_BASE_RESERVATIONS *,uint64_t reservation);
 /* The launcher may retain only the live worker it registered under its own
  * reservation.  This is the finite replacement for the original CSR client
  * process-handle namespace; command records still contain no OS handles. */

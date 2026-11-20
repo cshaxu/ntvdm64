@@ -10,8 +10,8 @@
 #include "common/base_srv/base_payload.h"
 #include "common/base_srv/base_values.h"
 #include "common/base_srv/base_command.h"
-#include <base_stream.h>
-#include <base_wait.h>
+#include "compat/include/base_stream.h"
+#include "compat/include/base_wait.h"
 #include "compat/include/vdm_receipt.h"
 #include "ntsrv-exe/transport/vdm_delivery.h"
 #include <stdio.h>

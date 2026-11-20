@@ -326,22 +326,30 @@
     {
       "id": "B0025",
       "contract": "OPENNT_BASE_RESOURCE_BINDING",
-      "provider": "src/ntsrv-exe/opennt/source/base_service.c",
-      "target": "service_duplicate_resource",
-      "layer": "F",
+      "provider": "src/compat/base_resource_scope.c",
+      "target": "duplicate_resource",
+      "layer": "B",
       "kind": "scoped-resource-operation",
-      "status": "outer-target-confirmed",
-      "p130_shared_receipt_implementation": "s14-receipt-owner.json"
+      "status": "inner-target-confirmed",
+      "p130_shared_receipt_implementation": "s14-receipt-owner.json",
+      "baseline_provider": "src/ntsrv-exe/opennt/source/base_service.c",
+      "baseline_layer": "F",
+      "baseline_target": "service_duplicate_resource",
+      "migration_status": "P131; authenticated receipt tables supplied at entry; implementation and mutation in B"
     },
     {
       "id": "B0026",
       "contract": "OPENNT_BASE_RESOURCE_BINDING",
-      "provider": "src/ntsrv-exe/opennt/source/base_service.c",
-      "target": "service_close_resource",
-      "layer": "F",
+      "provider": "src/compat/base_resource_scope.c",
+      "target": "close_resource",
+      "layer": "B",
       "kind": "scoped-resource-operation",
-      "status": "outer-target-confirmed",
-      "p130_shared_receipt_implementation": "s14-receipt-owner.json"
+      "status": "inner-target-confirmed",
+      "p130_shared_receipt_implementation": "s14-receipt-owner.json",
+      "baseline_provider": "src/ntsrv-exe/opennt/source/base_service.c",
+      "baseline_layer": "F",
+      "baseline_target": "service_close_resource",
+      "migration_status": "P131; authenticated receipt tables supplied at entry; implementation and mutation in B"
     },
     {
       "id": "B0027",
@@ -446,8 +454,8 @@
     }
   ],
   "indirect_counts": {
-    "B": 22,
-    "F": 4,
+    "B": 24,
+    "F": 2,
     "D": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
@@ -525,5 +533,6 @@
     "eliminated": 1,
     "open": 0
   },
-  "p130_receipt_owner": "s14-receipt-owner.json"
+  "p130_receipt_owner": "s14-receipt-owner.json",
+  "p131_resource_scope_owner": "s14-resource-scope-owner.json"
 }

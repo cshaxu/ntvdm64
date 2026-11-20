@@ -1,6 +1,6 @@
 /* Translate the finite BaseSrvDup/CloseStandardHandles boundary; the original
  * ordered loop, stdout/stderr alias comparison and cleanup remain unchanged. */
-#include <base_stream.h>
+#include "include/base_stream.h"
 NTSTATUS OpenNtBaseDuplicateStream(void *context,HANDLE sourceProcess,HANDLE source,
     HANDLE targetProcess,PHANDLE target,ACCESS_MASK access,ULONG attributes,ULONG options)
 {

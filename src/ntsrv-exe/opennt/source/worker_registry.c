@@ -562,7 +562,7 @@ static DWORD service_vdm_admit(void *context,HANDLE process)
     EnterCriticalSection(&state->connection->service->lock);
     if(!state->parent) {
         HANDLE event;
-        OPENNT_BASE_SERVICE_RESOURCES resources;
+        OPENNT_BASE_RESOURCE_SCOPE resources;
         if((state->binary!=BINARY_TYPE_DOS && state->binary!=BINARY_TYPE_SEPWOW) ||
             !state->connection->task) {
             error=ERROR_INVALID_DATA;goto registered;
@@ -572,8 +572,8 @@ static DWORD service_vdm_admit(void *context,HANDLE process)
          * as the launcher's wait target. The original DOS record is untouched. */
         event=CreateEventW(NULL,TRUE,FALSE,NULL);
         if(!event){error=GetLastError();goto registered;}
-        service_resources_init(&resources,state->connection,BROKER_VDM_PARENT_WAIT);
-        error=service_wait_deliver(&resources,event,&state->receipt)==STATUS_SUCCESS ?
+        service_resources_init(&resources,state->connection,BROKER_VDM_PARENT_WAIT,FALSE);
+        error=OpenNtBaseDeliverScopedWait(&resources,event,&state->receipt)==STATUS_SUCCESS ?
             ERROR_SUCCESS : ERROR_NOT_ENOUGH_MEMORY;
         CloseHandle(event);
         if(error)goto registered;

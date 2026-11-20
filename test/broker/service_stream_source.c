@@ -1,7 +1,7 @@
 /* Fixture bridge: original BaseSrv stream loops -> formal native receipt
  * adapter -> actual product RPC receiver. No replacement stream algorithm. */
 #include "basesrv.h"
-#include <base_stream.h>
+#include "compat/include/base_stream.h"
 DWORD test_original_stream_rpc(HANDLE receiver,HANDLE stream,void *context,
     NTSTATUS (*deliver)(void *,HANDLE,uint32_t *),NTSTATUS (*revoke)(void *,uint32_t))
 {

@@ -81,7 +81,7 @@ $bindingMembers=@('command.obj','payload.obj','process.obj','startup.obj','value
 if($Component -eq 'Launcher'){$bindingMembers+=@('classifier-path.obj','config.obj')}
 if($Component -eq 'Service'){
  # Image-matched service closure, not the client classifier/capture island.
- $bindingMembers=@('service.obj','service-core.obj','worker-registry.obj','frontend-registry.obj','native-commands.obj','service-lifecycle.obj','service-management.obj','task-observation.obj','worker-spawn.obj','command.obj','values.obj','payload.obj','startup.obj','dispatch.obj','resources.obj','streams.obj','waits.obj','registry.obj','reservation.obj','request.obj','config.obj','interactive.obj','config-command.obj','native_image.obj')
+ $bindingMembers=@('service.obj','service-core.obj','worker-registry.obj','frontend-registry.obj','native-commands.obj','service-lifecycle.obj','service-management.obj','task-observation.obj','worker-spawn.obj','command.obj','values.obj','payload.obj','startup.obj','dispatch.obj','resources.obj','resource-scope.obj','streams.obj','waits.obj','registry.obj','reservation.obj','request.obj','config.obj','interactive.obj','config-command.obj','native_image.obj')
 }
 function Add-Edge([string]$target) {
  if($Component -ne 'Launcher' -and $target -eq 'opennt-base-client.lib'){return}

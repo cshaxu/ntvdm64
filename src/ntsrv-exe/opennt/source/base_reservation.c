@@ -153,18 +153,18 @@ DWORD OpenNtBaseReservationResolveStream(OPENNT_BASE_RESERVATIONS *state,uint64_
     return error;
 }
 
-DWORD OpenNtBaseReservationRevokeStream(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,
-    uint32_t receipt)
+OPENNT_BASE_RECEIPT_ROUTE OpenNtBaseReservationBorrowStreams(
+    OPENNT_BASE_RESERVATIONS *state,uint64_t reservation)
 {
+    OPENNT_BASE_RECEIPT_ROUTE route={0};
     OPENNT_BASE_RESERVATION *entry;
-    DWORD error;
-    if (!state || !reservation || !receipt) return ERROR_INVALID_PARAMETER;
-    EnterCriticalSection(&state->lock);
+    if (!state || !reservation) return route;
+    route.lock=&state->lock;
+    EnterCriticalSection(route.lock);
     entry=find(state,reservation);
-    if (!entry) error=ERROR_NOT_FOUND;
-    else error=broker_vdm_receipt_revoke(&entry->streams,entry->launcher_generation,receipt);
-    LeaveCriticalSection(&state->lock);
-    return error;
+    if (entry) route.table=&entry->streams;
+    LeaveCriticalSection(route.lock);
+    return route;
 }
 
 DWORD OpenNtBaseReservationPrepareWorker(OPENNT_BASE_RESERVATIONS *state,uint64_t reservation,

@@ -57,7 +57,8 @@ P127 [CPU start ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/
 P128 [PIC import owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-interrupt-export-owner.json) moved ordinal 84 to C; C0134 stays open with three F exports.
 P129 [WOW trace module](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-trace-module-owner.json) closed B0036, a named module lookup.
 P130 [Resource receipts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-receipt-owner.json) moved six implementations into B; the two F route callbacks stay open.
-Delivered: B 6 known calls; C 11 open (10 functions, 1 image).
+P131 [Resource scope](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-resource-scope-owner.json) closed B0025/B0026.
+Delivered: B 4 known calls; C 11 open (10 functions, 1 image).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moves the page-domain identity and cleanup into B, removing the product header

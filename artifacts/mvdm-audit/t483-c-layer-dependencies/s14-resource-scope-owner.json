@@ -1,0 +1,116 @@
+{
+  "packet": "M0 T483 S14 P131",
+  "parent": "536f5451567e999c5966ae4266b22635d8034bb5",
+  "eliminated_B": [
+    "B0025",
+    "B0026"
+  ],
+  "eliminated_C": [],
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 2
+  },
+  "outward_C_known_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 8
+  },
+  "C_named_image_imports": 1,
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "scope": "NTSRV selects authorized request and reservation stores under the original service lock. Reservation removal and connection rundown use the same service lock; the new scope replaces the previous stack binding, and each reservation mutation still uses its existing lock. The original C calls and receipt policies are preserved. Only Check and process-handle Update select a resident stream route.",
+  "retained_failures": "A selected-but-missing resident store fails even if the issuer reservation is valid. A wait local-event close does not revoke the separate remote receipt. A receipt alias in a reservation cannot close the request store's corresponding receipt.",
+  "compiled_headers": {
+    "msvc-x86-release/worker": {
+      "base_resource_scope": [
+        "compat/include/base_resource.h",
+        "compat/include/base_resource_scope.h",
+        "compat/include/base_stream.h",
+        "compat/include/base_wait.h",
+        "compat/include/receipt_roles.h",
+        "compat/include/vdm_receipt.h"
+      ],
+      "base_stream": [
+        "compat/include/base_resource.h",
+        "compat/include/base_stream.h",
+        "compat/include/receipt_roles.h",
+        "compat/include/vdm_receipt.h"
+      ],
+      "base_wait": [
+        "compat/include/base_resource.h",
+        "compat/include/base_wait.h"
+      ]
+    },
+    "msvc-x64-release/service": {
+      "base_resource_scope": [
+        "compat/include/base_resource.h",
+        "compat/include/base_resource_scope.h",
+        "compat/include/base_stream.h",
+        "compat/include/base_wait.h",
+        "compat/include/receipt_roles.h",
+        "compat/include/vdm_receipt.h"
+      ],
+      "base_stream": [
+        "compat/include/base_resource.h",
+        "compat/include/base_stream.h",
+        "compat/include/receipt_roles.h",
+        "compat/include/vdm_receipt.h"
+      ],
+      "base_wait": [
+        "compat/include/base_resource.h",
+        "compat/include/base_wait.h"
+      ]
+    }
+  },
+  "linked_scope": {
+    "OpenNtBaseInitializeResourceScope": "opennt-base-bindings:resource-scope.obj",
+    "duplicate_resource": "opennt-base-bindings:resource-scope.obj",
+    "close_resource": "opennt-base-bindings:resource-scope.obj",
+    "deliver_stream": "opennt-base-bindings:resource-scope.obj",
+    "revoke_wait": "opennt-base-bindings:resource-scope.obj",
+    "OpenNtBaseDeliverScopedWait": "opennt-base-bindings:resource-scope.obj"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "a4bb1722-e0dd-43ba-a5f5-6fb19d44a541",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "disposable_scope_probe": [
+      "PASS selected missing resident stays failed; resident and reservation receipt aliases stay isolated",
+      "PASS local event close, even cross-request wait identity and explicit remote revoke"
+    ],
+    "scope_probe_source_sha256": "d47fe645a770d828f36d96ee764702addba1507f3c73721af91e759c18d2756c",
+    "x86_reservation": "PASS: DOS/WOW/native worker reservation, authenticated claim, generation, native/VDM isolation, abandonment and release",
+    "nested_same_as_p130": {
+      "nested-console": "PASS broker I/O nested-console I386 : actual CMD/DOS input, parent return and direct exit=23",
+      "nested-window": "PASS broker I/O nested-window I386 : actual CMD/DOS input, parent return and direct exit=23"
+    },
+    "real_dos_wow_service": [
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+      "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+      "PASS shared worker 17484, two distinct tasks overlapped and retired independently, both requests exited normally",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS DOS Get replaces previous request on resident-worker reuse",
+      "PASS WOW request/worker rejects valid character frontend/context without changing original WOW Get/Exit",
+      "PASS WOW task close binds opaque management identity, delivers once, retries only on later intent and retires safely",
+      "PASS WOW startup authentication, wait-only notification and immediate-completion latch",
+      "PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected",
+      "PASS reused WOW receipt mismatch, retired task and worker reuse checked",
+      "PASS failed WOW completion has no startup acknowledgement; late report rejected",
+      "PASS closing original WOW head rejects new task without publishing a record",
+      "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+    ],
+    "initial_x64_link": "Initial link omitted the new object from the native service allowlist; corrected before the final successful build and release."
+  }
+}

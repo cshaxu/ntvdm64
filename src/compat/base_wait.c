@@ -1,6 +1,6 @@
 /* Original BaseSrvCreate/ClosePairWaitHandles keep creation and cleanup order.
  * This native TU translates only their synchronous remote resource boundary. */
-#include <base_wait.h>
+#include "include/base_wait.h"
 NTSTATUS OpenNtBaseDuplicateWait(void *context,HANDLE sourceProcess,HANDLE source,
     HANDLE targetProcess,PHANDLE target,ACCESS_MASK access,ULONG attributes,ULONG options)
 {
@@ -13,7 +13,7 @@ NTSTATUS OpenNtBaseDuplicateWait(void *context,HANDLE sourceProcess,HANDLE sourc
             return (NTSTATUS)0xc00000bbL;
         return binding->revoke(binding->context,(uint32_t)(ULONG_PTR)source);
     }
-    if (options!=DUPLICATE_SAME_ACCESS || sourceProcess!=NtCurrentProcess() || !target)
+    if (options!=DUPLICATE_SAME_ACCESS || sourceProcess!=GetCurrentProcess() || !target)
         return (NTSTATUS)0xc00000bbL;
     /* The original owner already created this event. Even a rejected target
      * must leave it identifiable to the original NtClose failure path. */

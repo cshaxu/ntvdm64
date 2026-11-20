@@ -79,8 +79,8 @@ if(ownerBuild) {
     ];
 }
 if(!ownerBuild) {
-    commands.unshift(`cl.exe ${flags} ${includes} /Fo"${build}/streams.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_stream.c"`);
-    commands.unshift(`cl.exe ${flags} ${includes} /DOPENNT_BASE_NATIVE_RESOURCES /Fo"${build}/waits.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_wait.c"`);
+    commands.unshift(`cl.exe ${flags} ${includes} /Fo"${build}/streams.obj" "${root}/src/compat/base_stream.c"`);
+    commands.unshift(`cl.exe ${flags} ${includes} /DOPENNT_BASE_NATIVE_RESOURCES /Fo"${build}/waits.obj" "${root}/src/compat/base_wait.c"`);
 }
 commands.unshift(`cl.exe ${flags} /Gy /Fo"${build}/support.obj" "${root}/src/compat/opennt_support_rtl.c"`);
 const transportBuild=ownerBuild || path.resolve('build/M0-T412/S3/product');

@@ -15,8 +15,7 @@
 #include <base_dispatch.h>
 #include <base_reservation.h>
 #include "common/base_srv/base_command.h"
-#include <base_wait.h>
-#include <base_stream.h>
+#include "compat/include/base_resource_scope.h"
 #include <base_interactive.h>
 #include <nt_event_declarations.h>
 #include <base_config.h>
@@ -308,14 +307,6 @@ typedef struct OPENNT_BASE_CONSOLE_CONTEXT {
     HANDLE capability,console;
     DWORD worker_generation; /* Origin only; not a task or lifetime owner. */
 } OPENNT_BASE_CONSOLE_CONTEXT;
-typedef struct OPENNT_BASE_SERVICE_RESOURCES {
-    OPENNT_BASE_CONNECTION *connection;
-    DWORD role;
-    HANDLE worker;
-    OPENNT_BASE_WAIT_BINDING wait;
-    OPENNT_BASE_RESOURCE_BINDING binding;
-} OPENNT_BASE_SERVICE_RESOURCES;
-
 typedef NTSTATUS (NTAPI *SERVICE_QUERY_OBJECT)(HANDLE,ULONG,PVOID,ULONG,PULONG);
 
 /* Finite internal linkage only; resource init/release transport original calls,
@@ -345,9 +336,8 @@ void service_clear_frontend(OPENNT_BASE_CONNECTION *connection);
 void service_prune_cancelled_frontends(OPENNT_BASE_SERVICE *service);
 void service_preserve_parent_results(OPENNT_BASE_SERVICE *service,
     HANDLE console,BOOL wow);
-NTSTATUS service_wait_deliver(void *context,HANDLE event,uint32_t *receipt);
-void service_resources_init(OPENNT_BASE_SERVICE_RESOURCES *scope,
-    OPENNT_BASE_CONNECTION *connection,DWORD role);
+void service_resources_init(OPENNT_BASE_RESOURCE_SCOPE *scope,
+    OPENNT_BASE_CONNECTION *connection,DWORD role,BOOL select_resident);
 void service_abandon_launch(OPENNT_BASE_CONNECTION *connection);
 void service_clear_management_labels(OPENNT_BASE_WORKER_WATCH *watch);
 void service_capture_initial_management_labels(OPENNT_BASE_WORKER_WATCH *watch);

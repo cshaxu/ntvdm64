@@ -557,7 +557,7 @@ static int detached_reservation(OPENNT_BASE_SERVICE *service,HANDLE self,ULONG b
         }
         if(binary==BINARY_TYPE_SEPWOW) {
             BASE_API_MSG get={0};STARTUPINFOA info={sizeof(info)};
-            OPENNT_BASE_SERVICE_RESOURCES resources;
+            OPENNT_BASE_RESOURCE_SCOPE resources;
             HANDLE completion=CreateEventW(NULL,TRUE,FALSE,NULL),ready=NULL,wait=NULL,streams[3]={0};
             DWORD completion_receipt=0;BOOL started=TRUE;
             char command_text[256],app_text[256],env_text[256],directory_text[256];
@@ -566,8 +566,10 @@ static int detached_reservation(OPENNT_BASE_SERVICE *service,HANDLE self,ULONG b
             CHECK(OpenNtBaseServiceWowStarted(worker_connection,child.dwProcessId,worker_generation,0)==ERROR_ACCESS_DENIED);
             /* Model only the service's startup admission receipt; exercise
              * actual typed receipt ownership and original command dispatch. */
-            service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT);
-            CHECK(service_wait_deliver(&resources,completion,&completion_receipt)==STATUS_SUCCESS);
+            EnterCriticalSection(&connection->service->lock);
+            service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT,FALSE);
+            CHECK(OpenNtBaseDeliverScopedWait(&resources,completion,&completion_receipt)==STATUS_SUCCESS);
+            LeaveCriticalSection(&connection->service->lock);
             CloseHandle(completion);connection->parent_receipt=completion_receipt;
             CHECK(!OpenNtBaseServiceWowStartup(connection,GetCurrentProcessId(),generation,
                 completion_receipt,&ready,&started) && !started);

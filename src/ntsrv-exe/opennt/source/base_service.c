@@ -3,15 +3,7 @@
  * bodies, state authority and lock/resource contracts are preserved. */
 #include <service_internal.h>
 
-static NTSTATUS service_stream_deliver_to_connection(OPENNT_BASE_CONNECTION *connection,
-    HANDLE stream,uint32_t *receipt);
-static NTSTATUS service_stream_deliver(void *context,HANDLE stream,uint32_t *receipt);
-static NTSTATUS service_worker_stream_deliver(void *context,HANDLE stream,uint32_t *receipt);
-static NTSTATUS service_wait_revoke(void *context,uint32_t receipt);
-static NTSTATUS service_duplicate_resource(void *context,HANDLE source_process,HANDLE source,
-    HANDLE target_process,PHANDLE target,ACCESS_MASK access,ULONG attributes,ULONG options);
-static NTSTATUS service_close_resource(void *context,HANDLE handle);
-static void service_resources_release(OPENNT_BASE_SERVICE_RESOURCES *scope);
+static void service_resources_release(OPENNT_BASE_RESOURCE_SCOPE *scope);
 static DWORD service_wait_resolve(OPENNT_BASE_CONNECTION *connection,DWORD generation,
     HANDLE receipt,DWORD role,HANDLE *event);
 static DWORD service_allocate_console(OPENNT_BASE_SERVICE *service,HANDLE *console);
@@ -50,152 +42,27 @@ void service_preserve_parent_results(OPENNT_BASE_SERVICE *service,
     }
 }
 
-NTSTATUS service_wait_deliver(void *context,HANDLE event,uint32_t *receipt)
+/* Check, Update, Get and rundown hold the service lock through unbind.
+ * It pins the original routes and their receipt tables across dispatch. */
+void service_resources_init(OPENNT_BASE_RESOURCE_SCOPE *scope,
+    OPENNT_BASE_CONNECTION *connection,DWORD role,BOOL select_resident)
 {
-    OPENNT_BASE_SERVICE_RESOURCES *scope=context;
-    DWORD error;
-    if (!scope || !event || !receipt) return STATUS_INVALID_PARAMETER;
-    /* Original DOS records compare hWaitForParent across one Console list.
-     * Independent connection counters must not give a nested parent the
-     * same identity as its still-active outer parent. The service lock is
-     * held by every original dispatch reaching this finite delivery seam. */
-    if (scope->connection->streams.issued < scope->connection->service->next_wait_receipt)
-        scope->connection->streams.issued=scope->connection->service->next_wait_receipt;
-    error=broker_vdm_receipt_accept(&scope->connection->streams,scope->role,event,receipt);
-    if (!error) scope->connection->service->next_wait_receipt=*receipt;
-    return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
-}
-
-static NTSTATUS service_stream_deliver_to_connection(OPENNT_BASE_CONNECTION *connection,
-    HANDLE stream,uint32_t *receipt)
-{
-    DWORD error;
-    if (!connection || !connection->reservation || !stream || !receipt)
-        return STATUS_INVALID_PARAMETER;
-    /* Update precedes worker Connect.  The reservation is the only finite
-     * owner spanning that interval; srvvdm.c retains alias comparison. */
-    error=OpenNtBaseReservationAcceptStream(connection->service->reservations,
-        connection->reservation,stream,receipt);
-    return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
-}
-
-static NTSTATUS service_stream_deliver(void *context,HANDLE stream,uint32_t *receipt)
-{
-    OPENNT_BASE_SERVICE_RESOURCES *scope=context;
-    return scope ? service_stream_deliver_to_connection(scope->connection,stream,receipt) :
-        STATUS_INVALID_PARAMETER;
-}
-
-static NTSTATUS service_worker_stream_deliver(void *context,HANDLE stream,uint32_t *receipt)
-{
-    return service_stream_deliver_to_connection((OPENNT_BASE_CONNECTION *)context,stream,receipt);
-}
-
-static NTSTATUS service_wait_revoke(void *context,uint32_t receipt)
-{
-    OPENNT_BASE_SERVICE_RESOURCES *scope=context;
-    DWORD error;
-    if (!scope) return STATUS_INVALID_PARAMETER;
-    error=broker_vdm_receipt_revoke(&scope->connection->streams,
-        scope->connection->process.SequenceNumber,receipt);
-    return error ? STATUS_INVALID_HANDLE : STATUS_SUCCESS;
-}
-
-static NTSTATUS service_duplicate_resource(void *context,HANDLE source_process,HANDLE source,
-    HANDLE target_process,PHANDLE target,ACCESS_MASK access,ULONG attributes,ULONG options)
-{
-    OPENNT_BASE_SERVICE_RESOURCES *scope=context;
-    OPENNT_BASE_STREAM_BINDING streams;
-    OPENNT_BASE_CONNECTION *worker_connection=NULL;
+    OPENNT_BASE_SERVICE *service=connection->service;
     LIST_ENTRY *entry;
-    if (!scope) return STATUS_INVALID_PARAMETER;
-    /* BaseSrvUpdateDOSEntry duplicates the newly created VDM process into
-     * BaseSrv.  In NT4 its source was a raw handle in the launcher's CSR
-     * namespace.  Here that value cannot cross RPC; use only the live worker
-     * retained from this launcher's authenticated reservation. */
-    if (source==NtCurrentProcess() && target_process==NtCurrentProcess() && target &&
-        !access && !attributes &&
-        options==DUPLICATE_SAME_ACCESS) {
-        if (scope->worker && DuplicateHandle(GetCurrentProcess(),scope->worker,
-                target_process,target,0,FALSE,DUPLICATE_SAME_ACCESS))
-            return STATUS_SUCCESS;
-        return STATUS_ACCESS_DENIED;
-    }
-    /* The retained srvvdm.c body asks to duplicate a source-shaped standard
-     * handle into its VDM process. */
-    /* A present VDM receives another launcher's command.  Retained srvvdm.c
-     * has selected the target process already; resolve that process back to
-     * its authenticated worker connection, then retain the new launcher's
-     * stream in the target worker reservation.  The launcher cannot own this
-     * delivery: it has no worker reservation and exits after its parent wait.
-     */
-    if (source && target && !access && attributes==OBJ_INHERIT &&
-        options==DUPLICATE_SAME_ACCESS && target_process) {
-        for (entry=scope->connection->service->connections.Flink;
-                entry!=&scope->connection->service->connections;entry=entry->Flink) {
-            OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(entry,
-                OPENNT_BASE_CONNECTION,service_link);
-            if (candidate->process.fVDM && candidate->reservation &&
-                candidate->console==scope->connection->console) {
-                worker_connection=candidate;
-                break;
-            }
-        }
-        if (worker_connection) {
-            ZeroMemory(&streams,sizeof(streams));
-            streams.source_process=source_process;
-            streams.target_process=target_process;
-            streams.source_receipts=&scope->connection->streams;
-            streams.source_generation=scope->connection->process.SequenceNumber;
-            streams.context=worker_connection;
-            streams.deliver=service_worker_stream_deliver;
-            return OpenNtBaseDuplicateStream(&streams,source_process,source,target_process,
-                target,access,attributes,options);
+    OpenNtBaseInitializeResourceScope(scope,connection->process.ProcessHandle,
+        &connection->streams,connection->process.SequenceNumber,role,&service->next_wait_receipt);
+    scope->reservation=OpenNtBaseReservationBorrowStreams(service->reservations,connection->reservation);
+    if (!select_resident) return;
+    for (entry=service->connections.Flink;entry!=&service->connections;entry=entry->Flink) {
+        OPENNT_BASE_CONNECTION *candidate=CONTAINING_RECORD(entry,OPENNT_BASE_CONNECTION,service_link);
+        if (candidate->process.fVDM && candidate->reservation && candidate->console==connection->console) {
+            scope->resident=OpenNtBaseReservationBorrowStreams(service->reservations,candidate->reservation);
+            break;
         }
     }
-    if (scope->connection->reservation && source && target && !access &&
-        attributes==OBJ_INHERIT && options==DUPLICATE_SAME_ACCESS) {
-        ZeroMemory(&streams,sizeof(streams));
-        streams.source_process=source_process;
-        streams.target_process=target_process;
-        streams.source_receipts=&scope->connection->streams;
-        streams.source_generation=scope->connection->process.SequenceNumber;
-        streams.context=scope;
-        streams.deliver=service_stream_deliver;
-        return OpenNtBaseDuplicateStream(&streams,source_process,source,target_process,
-            target,access,attributes,options);
-    }
-    return OpenNtBaseDuplicateWait(&scope->wait,source_process,source,target_process,
-        target,access,attributes,options);
 }
 
-static NTSTATUS service_close_resource(void *context,HANDLE handle)
-{
-    OPENNT_BASE_SERVICE_RESOURCES *scope=context;
-    if (!scope || !handle) return STATUS_INVALID_HANDLE;
-    if (handle==scope->wait.local_event) return OpenNtBaseCloseWait(&scope->wait,handle);
-    if (scope->connection->reservation &&
-        !OpenNtBaseReservationRevokeStream(scope->connection->service->reservations,
-            scope->connection->reservation,(uint32_t)(ULONG_PTR)handle)) return STATUS_SUCCESS;
-    if (broker_vdm_receipt_revoke(&scope->connection->streams,
-            scope->connection->process.SequenceNumber,(uint32_t)(ULONG_PTR)handle)==ERROR_SUCCESS)
-        return STATUS_SUCCESS;
-    return CloseHandle(handle) ? STATUS_SUCCESS : STATUS_INVALID_HANDLE;
-}
-
-void service_resources_init(OPENNT_BASE_SERVICE_RESOURCES *scope,
-    OPENNT_BASE_CONNECTION *connection,DWORD role)
-{
-    ZeroMemory(scope,sizeof(*scope));
-    scope->connection=connection; scope->role=role;
-    scope->wait.target_process=connection->process.ProcessHandle;
-    scope->wait.context=scope; scope->wait.deliver=service_wait_deliver;
-    scope->wait.revoke=service_wait_revoke;
-    scope->binding.Context=scope; scope->binding.Duplicate=service_duplicate_resource;
-    scope->binding.Close=service_close_resource;
-}
-
-static void service_resources_release(OPENNT_BASE_SERVICE_RESOURCES *scope)
+static void service_resources_release(OPENNT_BASE_RESOURCE_SCOPE *scope)
 {
     if (scope && scope->worker) CloseHandle(scope->worker);
 }
@@ -224,7 +91,7 @@ void service_abandon_launch(OPENNT_BASE_CONNECTION *connection)
         CSR_THREAD thread={0};
         PCSR_THREAD previous_thread;
         OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
-        OPENNT_BASE_SERVICE_RESOURCES resources;
+        OPENNT_BASE_RESOURCE_SCOPE resources;
         const OPENNT_BASE_RESOURCE_BINDING *previous;
         message.u.UpdateVDMEntry.ConsoleHandle=connection->wow ? (HANDLE)-1 :
             (connection->task ? NULL : connection->console);
@@ -233,7 +100,7 @@ void service_abandon_launch(OPENNT_BASE_CONNECTION *connection)
         message.u.UpdateVDMEntry.EntryIndex=UPDATE_VDM_UNDO_CREATION;
         message.u.UpdateVDMEntry.VDMCreationState=connection->registered_worker ?
             VDM_FULLY_CREATED : VDM_PARTIALLY_CREATED;
-        service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT);
+        service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT,FALSE);
         thread.Process=&connection->process;
         thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
         previous_thread=OpenNtBaseBindServerRequestThread(&thread);
@@ -420,7 +287,7 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     PCSR_THREAD previousThread;
     OPENNT_BASE_PROCESS_REGISTRY *previousRegistry;
     const OPENNT_BASE_INTERACTIVE_SCOPE *previousInteractive;
-    OPENNT_BASE_SERVICE_RESOURCES resources;
+    OPENNT_BASE_RESOURCE_SCOPE resources;
     const OPENNT_BASE_RESOURCE_BINDING *previousResources;
     uint32_t request;
     uint32_t needed=0;
@@ -508,7 +375,7 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
     }
     thread.Process=&connection->process;
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
-    service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT);
+    service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT,TRUE);
     previousThread=OpenNtBaseBindServerRequestThread(&thread);
     previousRegistry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
     previousInteractive=OpenNtBaseBindInteractiveScope(&connection->service->interactive);
@@ -587,7 +454,7 @@ DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD
     CSR_THREAD thread={0};
     PCSR_THREAD previous_thread;
     OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
-    OPENNT_BASE_SERVICE_RESOURCES resources;
+    OPENNT_BASE_RESOURCE_SCOPE resources;
     const OPENNT_BASE_RESOURCE_BINDING *previous_resources;
     uint32_t request,needed=0;
     NTSTATUS status;
@@ -611,7 +478,8 @@ DWORD OpenNtBaseServiceUpdate(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD
     else { error=ERROR_INVALID_HANDLE; goto done; }
     if (message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_PROCESS_HANDLE)
         message.u.UpdateVDMEntry.VDMProcessHandle=NtCurrentProcess();
-    service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT);
+    service_resources_init(&resources,connection,BROKER_VDM_PARENT_WAIT,
+        message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_PROCESS_HANDLE);
     if (message.u.UpdateVDMEntry.EntryIndex==UPDATE_VDM_PROCESS_HANDLE) {
         error=OpenNtBaseReservationRetainWorker(connection->service->reservations,
             connection->reservation,pid,generation,&resources.worker);
@@ -766,7 +634,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     CSR_THREAD thread={0};
     PCSR_THREAD previous_thread;
     OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
-    OPENNT_BASE_SERVICE_RESOURCES resources;
+    OPENNT_BASE_RESOURCE_SCOPE resources;
     const OPENNT_BASE_RESOURCE_BINDING *previous_resources;
     NTSTATUS status;
     DWORD error,requested_state;
@@ -790,7 +658,7 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
         if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
         message.u.GetNextVDMCommand.ConsoleHandle=connection->console;
     }
-    service_resources_init(&resources,connection,BROKER_VDM_WORKER_WAIT);
+    service_resources_init(&resources,connection,BROKER_VDM_WORKER_WAIT,FALSE);
     thread.Process=&connection->process;
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
     previous_thread=OpenNtBaseBindServerRequestThread(&thread);
