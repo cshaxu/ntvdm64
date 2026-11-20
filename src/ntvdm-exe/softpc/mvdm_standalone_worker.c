@@ -6,6 +6,7 @@
 #include "ntvdm-exe/package_layout.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "compat/include/console_io.h"
+#include "compat/include/base_capture_heap.h"
 #include "mvdm_softpc_execution.h"
 #include "compat/include/mvdm_softpc_ccpu_wait.h"
 #include "mvdm_softpc_guest_memory.h"
@@ -22,15 +23,12 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-/* Original BaseClient capture storage is private to this worker process. */
-PVOID CsrPortHeap;
 /* Original nt_reset.c switch, also respected by subsequent DOS reentry. */
 extern BOOL StreamIoSwitchOn;
 
 static session worker_session;
 static ntvdm_dos_observer worker_observer;
 static BOOL worker_character_io;
-static BOOL worker_heap;
 static BOOL worker_thread;
 static BOOL worker_memory;
 static BOOL worker_escape;
@@ -129,9 +127,7 @@ static int mvdm_standalone_worker_cleanup(int result)
     worker_base_disconnect();
     if (worker_session_initialized && !session_dispose_with_reason(&worker_session,
             &dispose_reason, ntvdm_console_client_end)) result=ERROR_BUSY;
-    if (worker_heap && !HeapDestroy(CsrPortHeap)) result=ERROR_BUSY;
-    CsrPortHeap=NULL;
-    worker_heap=FALSE;
+    if (!opennt_base_capture_heap_end()) result=ERROR_BUSY;
     worker_started=FALSE;
     worker_session_initialized=FALSE;
     return result;
@@ -153,9 +149,9 @@ static DWORD mvdm_standalone_worker_begin(void)
         error=GetLastError(); goto fail;
     }
     worker_ccpu_wait=TRUE;
-    CsrPortHeap=HeapCreate(0,0,0);
-    if (!CsrPortHeap) { error=ERROR_NOT_ENOUGH_MEMORY; goto fail; }
-    worker_heap=TRUE;
+    if (!opennt_base_capture_heap_begin()) {
+        error=ERROR_NOT_ENOUGH_MEMORY; goto fail;
+    }
     if (!app_package_layout_set_process_media_roots(&worker_session) ||
         !app_package_layout_validate_command_configuration_root(&worker_session)) {
         error=ERROR_BAD_PATHNAME; goto fail;

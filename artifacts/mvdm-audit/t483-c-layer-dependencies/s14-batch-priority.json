@@ -3,8 +3,8 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 61,
-    "eliminated": 507,
+    "eliminated": 511,
+    "open": 57,
     "supporting-evidence": 43,
     "eliminated-transitive": 6
   },
@@ -86,17 +86,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/run16-exe/main.c",
-      "open_ids": [
-        "C0612"
-      ],
-      "count": 1,
-      "symbols": [
-        "CsrPortHeap"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/ntvdm-exe/win32/console_compat.c",
       "open_ids": [
         "C0299"
@@ -137,27 +126,9 @@
     },
     {
       "kind": "header",
-      "provider": "src/common/base_srv/base_capture.h",
-      "open_ids": [
-        "C0002"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
       "provider": "src/common/base_srv/base_client.h",
       "open_ids": [
         "C0004"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/common/base_srv/base_config.h",
-      "open_ids": [
-        "C0005"
       ],
       "count": 1,
       "symbols": []
@@ -280,17 +251,6 @@
       "count": 1,
       "symbols": [
         "mvdm_softpc_terminate_current_session"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
-      "open_ids": [
-        "C0607"
-      ],
-      "count": 1,
-      "symbols": [
-        "CsrPortHeap"
       ]
     },
     {
@@ -600,5 +560,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P100"
+  "updated_by": "T483 S14 P103"
 }

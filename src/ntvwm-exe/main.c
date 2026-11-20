@@ -10,11 +10,9 @@
 #include "common/protocol/frontend_protocol.h"
 #include "next_command.h"
 #include "common/base_srv/base_rpc_client.h"
+#include "compat/include/base_capture_heap.h"
 #include "native_pc_font.h"
 #include <stdio.h>
-
-PVOID CsrPortHeap;
-
 
 typedef struct native_membership {
     HWND carrier;
@@ -405,8 +403,7 @@ static int run_gui_launcher(void)
     ntvwm_executions *requests=NULL;
     ntvwm_execution_io io={0};
     ntvwm_next_command command;
-    CsrPortHeap=HeapCreate(0,0,0);
-    if(!CsrPortHeap)return (int)GetLastError();
+    if(!opennt_base_capture_heap_begin())return (int)GetLastError();
     error=worker_base_connect();
     /* The launcher shares worker-base's management channel with a CUI
      * carrier.  It deliberately consumes neither instruction: once a target
@@ -439,7 +436,7 @@ static int run_gui_launcher(void)
     ntvwm_executions_close(requests);
     error=OpenNtBaseClientFailure(error);
     worker_base_disconnect();
-    HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;
+    (void)opennt_base_capture_heap_end();
     return (int)error;
 }
 
@@ -454,8 +451,7 @@ int wmain(int argc,WCHAR **argv)
     if(argc==2 && !wcscmp(argv[1],L"--gui-launcher"))return run_gui_launcher();
     if(argc!=2 || wcscmp(argv[1],L"--cui-worker"))return ERROR_INVALID_PARAMETER;
     InitializeCriticalSection(&io_lock);membership.lock=&io_lock;
-    CsrPortHeap=HeapCreate(0,0,0);
-    if(!CsrPortHeap)return GetLastError();
+    if(!opennt_base_capture_heap_begin())return GetLastError();
     error=worker_base_connect();
     {
         HANDLE wow_task_close=NULL;
@@ -527,7 +523,7 @@ int wmain(int argc,WCHAR **argv)
     membership_close(&membership);
     error=OpenNtBaseClientFailure(error);
     worker_base_disconnect();
-    HeapDestroy(CsrPortHeap);CsrPortHeap=NULL;
+    (void)opennt_base_capture_heap_end();
     DeleteCriticalSection(&io_lock);
     return (int)error;
 }

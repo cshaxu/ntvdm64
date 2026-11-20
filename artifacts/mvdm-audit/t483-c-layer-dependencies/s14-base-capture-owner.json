@@ -1,0 +1,77 @@
+{
+  "packet": "M0 T483 S14 P103",
+  "baseline": "15e8bcd2fdf0c10c4c4fba58e32e789600e2e61b",
+  "eliminated_C_ids": [
+    "C0002",
+    "C0005",
+    "C0607",
+    "C0612"
+  ],
+  "eliminated_B_ids": [],
+  "scope": "Move the two declaration headers byte-for-byte from D to B. Replace four F implementations of the capture heap storage/lifetime with one B implementation per linked process. F retains the timing and original error handling; original C capture/configuration algorithms remain unchanged.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 511,
+    "open": 57,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "final_product_symbols": {
+    "x86/worker/ntvdm": {
+      "CsrPortHeap": "0003:00044860       _CsrPortHeap               005fd860     common-base-srv-bindings:capture-heap.obj",
+      "opennt_base_capture_heap_begin": "0001:0010eeb0       _opennt_base_capture_heap_begin 0050feb0 f   common-base-srv-bindings:capture-heap.obj",
+      "opennt_base_capture_heap_end": "0001:0010eed0       _opennt_base_capture_heap_end 0050fed0 f   common-base-srv-bindings:capture-heap.obj"
+    },
+    "x64/worker-reference-x86/ntvdm": {
+      "CsrPortHeap": "0003:00044860       _CsrPortHeap               005fd860     common-base-srv-bindings:capture-heap.obj",
+      "opennt_base_capture_heap_begin": "0001:0010eeb0       _opennt_base_capture_heap_begin 0050feb0 f   common-base-srv-bindings:capture-heap.obj",
+      "opennt_base_capture_heap_end": "0001:0010eed0       _opennt_base_capture_heap_end 0050fed0 f   common-base-srv-bindings:capture-heap.obj"
+    },
+    "x64/launcher/run16": {
+      "CsrPortHeap": "0003:00000c78       CsrPortHeap                0000000140049c78     common-base-srv-bindings:capture-heap.obj",
+      "opennt_base_capture_heap_begin": "0001:00009690       opennt_base_capture_heap_begin 000000014000a690 f   common-base-srv-bindings:capture-heap.obj",
+      "opennt_base_capture_heap_end": "0001:000096c0       opennt_base_capture_heap_end 000000014000a6c0 f   common-base-srv-bindings:capture-heap.obj"
+    },
+    "x64/frontend/ntcon": {
+      "CsrPortHeap": "0003:00000bf8       CsrPortHeap                0000000140054bf8     common-base-srv-bindings:capture-heap.obj",
+      "opennt_base_capture_heap_begin": "0001:00018700       opennt_base_capture_heap_begin 0000000140019700 f   common-base-srv-bindings:capture-heap.obj",
+      "opennt_base_capture_heap_end": "0001:00018730       opennt_base_capture_heap_end 0000000140019730 f   common-base-srv-bindings:capture-heap.obj"
+    },
+    "x64/worker/ntvwm": {
+      "CsrPortHeap": "0003:00000bd8       CsrPortHeap                000000014004ebd8     common-base-srv-bindings:capture-heap.obj",
+      "opennt_base_capture_heap_begin": "0001:0000da10       opennt_base_capture_heap_begin 000000014000ea10 f   common-base-srv-bindings:capture-heap.obj",
+      "opennt_base_capture_heap_end": "0001:0000da40       opennt_base_capture_heap_end 000000014000ea40 f   common-base-srv-bindings:capture-heap.obj"
+    }
+  },
+  "compiled_ownership": {
+    "objects": 8,
+    "counts": {
+      "system import": 10,
+      "not selected in final link": 6
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "211f2740-f907-496c-8f19-03b805525ffe",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, x86/x64 CSR capture tests, real same-console DOS/native/DOS relaunch and final gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "1f71675aa62f5f4f31b685fc58ebd93251b58202528921700c7450cb2784731c",
+    "release-and-test.out": "eb14a1c0bb036838607743e5a51a6ca41c82792607b8a3b836e9e53a90c3805c",
+    "b-compiled-candidates.json": "6f3a74ca4af9c012fd3311a5529b6dc9cae65df0bd65881e618bb27678506421",
+    "relaunch.txt": "9c3ff1b11e718707925121547ca37b3298e7d7a5bd4ff4be9832f1d4d3033eb2"
+  },
+  "prior_console_cleanup_delivery": "s14-console-cleanup-owner.json"
+}

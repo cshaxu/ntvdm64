@@ -1448,6 +1448,7 @@ if ($Architecture -eq 'x86') {
             @('reservation', 'src/ntsrv-exe/opennt/source/base_reservation.c', $baseOwnerFlags),
             @('request', 'src/ntsrv-exe/opennt/source/base_request.c', $baseServerFlags),
             @('config', 'src/compat/base_vdm_config.c', $libraryFlags),
+            @('capture-heap', 'src/compat/base_capture_heap.c', $libraryFlags),
             @('process', 'src/compat/base_console_handle.c', $libraryFlags),
             @('interactive', 'src/ntsrv-exe/opennt/source/base_interactive.c', $baseOwnerFlags),
             @('classifier-path', 'src/compat/base_classifier_path.c', $libraryFlags))
@@ -1466,7 +1467,7 @@ if ($Architecture -eq 'x86') {
             } else { $member[2] }
             $graph.Add('  cflags = ' + $memberFlags)
             $baseOwnerManifest += [ordered]@{
-                archive = if ($group -eq 'opennt-base-bindings' -and ($member[1].StartsWith('src/common/base_srv/') -or $member[1] -eq 'src/compat/base_console_handle.c')) { 'common-base-srv-bindings.lib' } else { $group + '.lib' }
+                archive = if ($group -eq 'opennt-base-bindings' -and ($member[1].StartsWith('src/common/base_srv/') -or $member[1] -in @('src/compat/base_console_handle.c','src/compat/base_capture_heap.c'))) { 'common-base-srv-bindings.lib' } else { $group + '.lib' }
                 path = $member[1]
                 sha256 = Get-NodeSha256 (Join-Path $root $member[1])
                 object = $object
@@ -1488,7 +1489,7 @@ if ($Architecture -eq 'x86') {
             }
         }
         if ($group -eq 'opennt-base-bindings') {
-            $sharedMembers = @('obj/opennt-base-bindings/command.obj','obj/opennt-base-bindings/values.obj','obj/opennt-base-bindings/payload.obj','obj/opennt-base-bindings/startup.obj','obj/opennt-base-bindings/config.obj','obj/opennt-base-bindings/process.obj','obj/opennt-base-bindings/classifier-path.obj','obj/opennt-base-bindings/config-command.obj','obj/common/native_image.obj')
+            $sharedMembers = @('obj/opennt-base-bindings/command.obj','obj/opennt-base-bindings/values.obj','obj/opennt-base-bindings/payload.obj','obj/opennt-base-bindings/startup.obj','obj/opennt-base-bindings/config.obj','obj/opennt-base-bindings/capture-heap.obj','obj/opennt-base-bindings/process.obj','obj/opennt-base-bindings/classifier-path.obj','obj/opennt-base-bindings/config-command.obj','obj/common/native_image.obj')
             $shared = @($members | Where-Object { $_ -in $sharedMembers })
             if ($shared.Count -ne $sharedMembers.Count) { throw 'Incomplete common BaseSrv binding archive' }
             $members = @($members | Where-Object { $_ -notin $sharedMembers })
@@ -2083,7 +2084,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build ntmon.exe: monitor_link obj/monitor/main.obj obj/monitor/trace_view.obj obj/monitor/stub.obj common-base-srv-transport.lib')
     $graph.Add('build obj/tests/native_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-basesrv/native_capture_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' ' + ($includeRoots -join ' ') + ' /I "' + (NinjaPath (Join-Path $root 'src/ntsrv-exe/opennt/include')) + '"')
-    $graph.Add('build native-capture-test.exe: base_rpc_test_link obj/tests/native_capture.obj obj/opennt-base-client/capture.obj obj/run16/support.obj')
+    $graph.Add('build native-capture-test.exe: base_rpc_test_link obj/tests/native_capture.obj obj/opennt-base-client/capture.obj obj/opennt-base-bindings/capture-heap.obj obj/run16/support.obj')
     $graph.Add('build obj/tests/monitor_session.obj: cc ' + (NinjaPath (Join-Path $root 'test/observation/monitor_session_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build monitor-session-test.exe: console_test_link obj/tests/monitor_session.obj')

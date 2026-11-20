@@ -4,9 +4,8 @@
  * submission and broker receipt waits. NTSRV owns worker creation/rollback. */
 #include <nt.h>
 #include <base_classifier.h>
-#include "common/base_srv/base_capture.h"
+#include "compat/include/base_capture_heap.h"
 #include "common/base_srv/base_client.h"
-#include "common/base_srv/base_config.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "frontend_scope.h"
 #include "launch_options.h"
@@ -20,7 +19,6 @@
 #include <stdio.h>
 #include <wchar.h>
 
-PVOID CsrPortHeap;
 BOOL BaseCreateVDMEnvironment(PWCHAR environment, ANSI_STRING *ansi,
                               UNICODE_STRING *unicode);
 BOOL BaseDestroyVDMEnvironment(ANSI_STRING *ansi, UNICODE_STRING *unicode);
@@ -580,8 +578,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
                 result=GetLastError();goto done;
             }
         }
-        CsrPortHeap = HeapCreate(0, 0, 0);
-        if (!CsrPortHeap)
+        if (!opennt_base_capture_heap_begin())
         {
             result = ERROR_NOT_ENOUGH_MEMORY;
             goto done;
@@ -607,9 +604,8 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         }
         run16_frontend_scope_end(frontend_scope);frontend_scope=NULL;
         OpenNtBaseClientDisconnectCurrent();
-        if (!HeapDestroy(CsrPortHeap) && !result)
+        if (!opennt_base_capture_heap_end() && !result)
             result = ERROR_BUSY;
-        CsrPortHeap = NULL;
         goto done;
     }
     if (type != SCS_32BIT_BINARY)

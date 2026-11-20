@@ -4,12 +4,12 @@
 #include "common/protocol/frontend_protocol.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "common/base_srv/base_rpc_client.h"
+#include "compat/include/base_capture_heap.h"
 #include <shellapi.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-PVOID CsrPortHeap;
 static DWORD session_entry(HANDLE caller,HANDLE notification,HANDLE retire,HANDLE restored,
     BOOL lease,BOOL borrowed)
 {
@@ -84,8 +84,8 @@ int wmain(int argc,WCHAR **argv)
         borrowed=!wcscmp(argv[6],L"1");
         if(!frontend_session_window(argv[7],&console_window))return ERROR_INVALID_PARAMETER;
     }
-    CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return ERROR_NOT_ENOUGH_MEMORY;
+    if(!opennt_base_capture_heap_begin())return ERROR_NOT_ENOUGH_MEMORY;
     result=session_entry((HANDLE)caller,(HANDLE)notification,(HANDLE)retire,
         (HANDLE)restored,lease,borrowed);
-    HeapDestroy(CsrPortHeap);return (int)result;
+    (void)opennt_base_capture_heap_end();return (int)result;
 }

@@ -1,8 +1,8 @@
 /* Real original capture allocator and local ABI, x86 and x64. No CSR wire. */
 #include <base_capture.h>
+#include "compat/include/base_capture_heap.h"
 #include <stdio.h>
 #include <stdint.h>
-PVOID CsrPortHeap;
 static unsigned checks,failures;
 #define CHECK(x) do{++checks;if(!(x)){++failures;printf("FAIL %u %s\n",(unsigned)__LINE__,#x);}}while(0)
 int main(void)
@@ -11,8 +11,8 @@ int main(void)
     CHECK(sizeof(*((PCSR_CAPTURE_HEADER)0)->MessagePointerOffsets)==sizeof(void *));
     CHECK(sizeof(CSR_CAPTURE_HEADER)==(sizeof(void *)==8 ? 48 : 28));
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
-    CsrPortHeap=HeapCreate(0,0,0);CHECK(CsrPortHeap!=NULL);
-    if(!CsrPortHeap)return 1;
+    if(!opennt_base_capture_heap_begin())return 1;
+    CHECK(CsrPortHeap!=NULL);
     for(round=0;round<16;++round)for(count=1;count<=9;++count) {
         PCSR_CAPTURE_HEADER capture=CsrAllocateCaptureBuffer(count,0,256);
         PVOID values[9]={0};
@@ -29,7 +29,8 @@ int main(void)
         CHECK(capture->CountMessagePointers==count);
         CsrFreeCaptureBuffer(capture);
     }
-    CHECK(HeapDestroy(CsrPortHeap));
+    CHECK(opennt_base_capture_heap_end() && CsrPortHeap==NULL);
+    CHECK(opennt_base_capture_heap_end());
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && before==after);
     printf("native capture bits=%u checks=%u failures=%u; original allocation/table/cleanup\n",(unsigned)(8*sizeof(void *)),checks,failures);
     return failures?1:0;
