@@ -1,0 +1,78 @@
+{
+  "packet": "M0 T483 S14 P141",
+  "parent": "198e8a69c2a61c889ddeb2c090a4eb29b73c2d0b",
+  "eliminated_C": [
+    "C0321"
+  ],
+  "eliminated_B": [],
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 0,
+    "F": 5
+  },
+  "C_runtime_slots": {
+    "F": 1
+  },
+  "C_outward_headers": {
+    "F": 1
+  },
+  "C_named_image_imports": 1,
+  "mirror": {
+    "upstream": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "source": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "before": [
+      76,
+      270
+    ],
+    "after": [
+      76,
+      269
+    ],
+    "non_error_delta": [
+      0,
+      -1
+    ],
+    "conditional_and_line_directives_unchanged": true
+  },
+  "contract": "Native one-shot event and reply. COMMAND retains its TSR exit flag and synchronous calling-thread retirement. NTVDM uses the already-authenticated BaseClient; the single response is published after the existing scope RPC. NTSRV still orders Console teardown and retained original host cleanup. No wire or guest changes.",
+  "verification": {
+    "cached_build": [
+      "x86",
+      "x64",
+      "x86 reference"
+    ],
+    "native_fixture_cases": [
+      "registry",
+      "input-terminal",
+      "console-exit-request",
+      "natural-exit",
+      "natural-loss",
+      "natural-console",
+      "lifecycle-console",
+      "lifecycle-wow",
+      "lifecycle-loss",
+      "lifecycle-pending"
+    ],
+    "native_fixture_sha256": "4B35B0F07BB3545BF38B472B292974D2DE7984CBB14479D36067F299AAD9D4BB",
+    "guest_fixture_sha256": "31F19B6C57C98A8B59AF574B4F7DBBF2DAEF3BD2D93A7F96A05F94FA1BA0DD67",
+    "actual_guest": "PASS original DOS TSR returns to COMMAND; EXIT request retires Console group, preserves Run16 result 1067 and leaves NTSRV alive",
+    "actual_guest_inputs": "11 published components, restamped with a fresh isolated identity",
+    "actual_guest_isolated_manifest_sha256": "cd6eadab4f0ff431b59ce40ecacca080a03137db1c3b9b556d3cce0581fc094d",
+    "limitations": "The targeted run does not exercise Full or Win95. Process authorization and whole-WOW exit remain C0318/C0460."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "05e7bd56-de1a-4282-b196-64048d139da7",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

@@ -57,7 +57,15 @@ DWORD worker_base_take_wow_task_close(uint64_t *identity)
 DWORD worker_base_fail_wow_task_close(uint64_t identity)
 { (void)identity;return ERROR_NOT_FOUND; }
 HANDLE hWOWDll;
-DWORD worker_base_request_console_exit(void) { return ERROR_SUCCESS; }
+static HANDLE console_intent, console_reply;
+static volatile LONG console_requests;
+DWORD worker_base_request_console_exit(void)
+{
+    CHECK(InterlockedIncrement(&console_requests)==1);
+    CHECK(SetEvent(console_intent));
+    CHECK(WaitForSingleObject(console_reply,5000)==WAIT_OBJECT_0);
+    return ERROR_NOT_READY;
+}
 DWORD worker_base_io_release_event(HANDLE *event)
 {
     *event=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -309,6 +317,12 @@ static int variable_video_case(void)
     printf("PASS variable records: 307200B uses BEGIN+one payload; 1310720B uses BEGIN+two payload parts and one final reply\n");
     return 0;
 }
+static DWORD WINAPI request_console_group_exit(void *context)
+{
+    (void)context;
+    return mvdm_softpc_request_console_exit();
+}
+
 static DWORD WINAPI natural_exit(void *context)
 {
     (void)context;
@@ -350,6 +364,30 @@ int main(int argc,char **argv)
         ntvdm_worker_lifecycle_end();
         CHECK(!ntvdm_worker_lifecycle_input_terminal());
         puts("PASS input failure remains ordinary until authenticated service death");
+        return 0;
+    }
+    if (argc==2 && !strcmp(argv[1],"--console-exit-request")) {
+        HANDLE thread;
+        DWORD result;
+        CHECK(mvdm_softpc_request_console_exit()==ERROR_INVALID_STATE);
+        CHECK(!ntvdm_worker_lifecycle_begin(&owner,TRUE));
+        CHECK(mvdm_softpc_request_console_exit()==ERROR_INVALID_STATE);
+        console_intent=CreateEventW(NULL,TRUE,FALSE,NULL);
+        console_reply=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(console_intent && console_reply && !ntvdm_worker_lifecycle_activate());
+        thread=CreateThread(NULL,0,request_console_group_exit,NULL,0,NULL);
+        CHECK(thread && WaitForSingleObject(console_intent,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(thread,0)==WAIT_TIMEOUT);
+        CHECK(!ntvdm_worker_lifecycle_input_terminal() && !vm_frontend_closes);
+        CHECK(SetEvent(console_reply) && WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
+        CHECK(GetExitCodeThread(thread,&result) && result==ERROR_NOT_READY);
+        CHECK(mvdm_softpc_request_console_exit()==ERROR_NOT_READY && console_requests==1);
+        CloseHandle(thread);
+        ntvdm_worker_lifecycle_end();
+        CHECK(mvdm_softpc_request_console_exit()==ERROR_INVALID_STATE);
+        CloseHandle(console_intent);
+        CloseHandle(console_reply);
+        puts("PASS Console-group request is synchronous, preserves the broker result and never grants local cleanup");
         return 0;
     }
     hang_close=argc==2 && !strcmp(argv[1],"--close-hang");

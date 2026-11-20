@@ -12,6 +12,16 @@ typedef struct mvdm_softpc_terminal_events {
 extern mvdm_softpc_terminal_events mvdm_softpc_input_terminal_events;
 BOOL ntvdm_worker_lifecycle_input_terminal(void);
 
+/* Borrowed host-local handles remain valid until original execution stops.
+ * The composing worker submits the existing Console-group transaction and
+ * publishes its status before signalling completion. */
+typedef struct mvdm_softpc_console_exit {
+    HANDLE request, completion;
+    DWORD status;
+} mvdm_softpc_console_exit;
+extern mvdm_softpc_console_exit mvdm_softpc_console_exit_request;
+DWORD mvdm_softpc_request_console_exit(void);
+
 /* Preserve the original SoftPC event-worker cancellation direction, while
  * making its terminal lifetime explicit for the one-process session model.
  * The HANDLE remains a host-local worker resource; it never enters guest

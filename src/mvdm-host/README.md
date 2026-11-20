@@ -1070,7 +1070,10 @@ the worker and posting WM_CLOSE to its Console window. The admitted standalone
 architecture assigns that Console to NTSRV/NTCON, so direct reuse would bypass
 the service's close transaction. Keep cmdPushExitInConsoleBuffer's WOW exclusion,
 CNTRL_PUSHEXIT identity and calling-thread retirement, but submit Console scope
-through the existing worker-base/RPC mechanism. Move its original host_applClose
+through the existing worker-base/RPC mechanism. In T483 S14 P141 the original
+caller submits the scope through a compat-owned local event and awaits the exact
+RPC result before exiting its thread. The NTVDM worker submits the same Console
+transaction to NTSRV. Move its original host_applClose
 and ExitVDM(FALSE,0) to CntrlHandler's CNTRL_PUSHEXIT branch, followed by the
 original ExitProcess(0). This replaces that branch's obsolete DIV-147 session
 escape, not the remaining DIV-147 sites. Source-local ordering is unchanged

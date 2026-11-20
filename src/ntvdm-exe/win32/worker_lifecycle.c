@@ -15,6 +15,7 @@ static struct {
     session *owner;
     HANDLE stop,task_close,fault;
     worker_base_input_watch *watch;
+    PTP_WAIT console_exit_wait;
     volatile LONG closing;
     BOOL original_ready;
 } lifecycle;
@@ -35,6 +36,17 @@ static DWORD report_io_fault(void *context)
     /* Do not acknowledge/rearm this local fault. The watcher still receives
      * service close instructions; submission never grants local teardown. */
     return ERROR_SUCCESS;
+}
+
+static void CALLBACK request_console_exit(PTP_CALLBACK_INSTANCE instance,
+    void *context, PTP_WAIT wait, TP_WAIT_RESULT result)
+{
+    mvdm_softpc_console_exit *exit = context;
+    (void)instance;
+    (void)wait;
+    (void)result;
+    exit->status = worker_base_request_console_exit();
+    SetEvent(exit->completion);
 }
 
 static DWORD WINAPI close_console(void *context)
@@ -137,6 +149,15 @@ void ntvdm_worker_lifecycle_authorize_exit(void)
 }
 void ntvdm_worker_lifecycle_end(void)
 {
+    mvdm_softpc_console_exit *exit = &mvdm_softpc_console_exit_request;
+    if (lifecycle.console_exit_wait) {
+        SetThreadpoolWait(lifecycle.console_exit_wait, NULL, NULL);
+        WaitForThreadpoolWaitCallbacks(lifecycle.console_exit_wait, TRUE);
+        CloseThreadpoolWait(lifecycle.console_exit_wait);
+    }
+    if (exit->request) CloseHandle(exit->request);
+    if (exit->completion) CloseHandle(exit->completion);
+    ZeroMemory(exit, sizeof(*exit));
     worker_base_unwatch_service();
     if(lifecycle.stop)SetEvent(lifecycle.stop);
     worker_base_input_watch_destroy(lifecycle.watch);
@@ -176,6 +197,16 @@ DWORD ntvdm_worker_lifecycle_activate(void)
     if(!lifecycle.owner)return ERROR_SUCCESS; /* Non-standalone fixtures. */
     if(lifecycle.original_ready || !lifecycle.stop)return ERROR_INVALID_STATE;
     lifecycle.original_ready=TRUE;
+    if (mvdm_softpc_input_terminal_events.console_close) {
+        mvdm_softpc_console_exit *exit = &mvdm_softpc_console_exit_request;
+        exit->request = CreateEventW(NULL, TRUE, FALSE, NULL);
+        if (!exit->request) return GetLastError();
+        exit->completion = CreateEventW(NULL, TRUE, FALSE, NULL);
+        if (!exit->completion) return GetLastError();
+        lifecycle.console_exit_wait = CreateThreadpoolWait(request_console_exit, exit, NULL);
+        if (!lifecycle.console_exit_wait) return GetLastError();
+        SetThreadpoolWait(lifecycle.console_exit_wait, exit->request, NULL);
+    }
     lifecycle.watch=worker_base_input_watch_create(mvdm_softpc_input_terminal_events.console_close,
         mvdm_softpc_input_terminal_events.worker_close,lifecycle.task_close,lifecycle.stop,report_io_fault,console_instruction,
         worker_instruction,task_instruction,NULL,lifecycle.owner);

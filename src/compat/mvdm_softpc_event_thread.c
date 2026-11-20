@@ -6,6 +6,17 @@
 NTSYSAPI NTSTATUS NTAPI NtAlertThread(HANDLE ThreadHandle);
 
 mvdm_softpc_terminal_events mvdm_softpc_input_terminal_events;
+mvdm_softpc_console_exit mvdm_softpc_console_exit_request;
+
+DWORD mvdm_softpc_request_console_exit(void)
+{
+    const mvdm_softpc_console_exit *exit = &mvdm_softpc_console_exit_request;
+    if (!exit->request || !exit->completion) return ERROR_INVALID_STATE;
+    if (!SetEvent(exit->request) ||
+        WaitForSingleObject(exit->completion, INFINITE) != WAIT_OBJECT_0)
+        return GetLastError();
+    return exit->status;
+}
 
 BOOL ntvdm_worker_lifecycle_input_terminal(void)
 {

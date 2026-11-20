@@ -77,7 +77,6 @@
 #include "yoda.h"
 #include "nt_ega.h"
 #include "compat/include/mvdm_softpc_mouse_guest.h"
-extern DWORD worker_base_request_console_exit(void);
 #include "compat/include/mvdm_softpc_event_thread.h"
 #include "compat/include/mvdm_keyboard_history.h"
 #include "compat/include/console_input.h"
@@ -1982,7 +1981,7 @@ void cmdPushExitInConsoleBuffer (void)
     CntrlHandlerState |= CNTRL_PUSHEXIT;
 
 #line 1891
-    ExitThread(worker_base_request_console_exit());
+    ExitThread(mvdm_softpc_request_console_exit());
 #line 1903
 }
 
