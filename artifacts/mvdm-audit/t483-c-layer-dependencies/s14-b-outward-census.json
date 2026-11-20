@@ -299,8 +299,11 @@
       "target": "ntvdm_clear_instance_data_marking",
       "layer": "F",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed",
-      "installation": "src/ntvdm-exe/softpc/mvdm_vm_binding.c"
+      "status": "eliminated",
+      "installation": "src/ntvdm-exe/softpc/mvdm_vm_binding.c",
+      "current_provider": "src/compat/vm_services.c::ClearInstanceDataMarking",
+      "migration_status": "P121; removed the callback, with controlled shutdown through the existing B implementation.",
+      "evidence": "s14-vdd-clear-owner.json"
     },
     {
       "id": "B0023",
@@ -442,7 +445,7 @@
   ],
   "indirect_counts": {
     "B": 22,
-    "F": 5,
+    "F": 4,
     "D": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
@@ -501,5 +504,9 @@
   "p109_inward_targets": [
     "B0029"
   ],
-  "p109_evidence": "s14-native-publication-owner.json"
+  "p109_evidence": "s14-native-publication-owner.json",
+  "p121_removed_slots": [
+    "B0022"
+  ],
+  "p121_evidence": "s14-vdd-clear-owner.json"
 }

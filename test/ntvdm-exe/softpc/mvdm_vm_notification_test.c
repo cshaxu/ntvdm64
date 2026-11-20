@@ -11,8 +11,15 @@
 #include "compat/vm_services.c"
 #include "compat/include/vm_host.h"
 
-static unsigned clear_calls;
-void ntvdm_clear_instance_data_marking(void) { ++clear_calls; }
+static unsigned stop_calls;
+static uint32_t stop_scope, stop_code;
+int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow, uint32_t code)
+{
+    ++stop_calls;
+    stop_scope = vdm_for_wow;
+    stop_code = code;
+    return 0;
+}
 extern BOOL ntvdm_vm_services_initialize(void);
 
 static unsigned char guest_memory[256];
@@ -1202,8 +1209,10 @@ int main(void)
     CHECK(!compat_vm_install(NULL) && GetLastError() == ERROR_INVALID_PARAMETER);
     CHECK(ntvdm_vm_services_initialize());
     CHECK(ntvdm_vm_services_initialize());
+    SetLastError(ERROR_SUCCESS);
     ClearInstanceDataMarking();
-    CHECK(clear_calls == 1);
+    CHECK(stop_calls == 1 && stop_scope == 0 && stop_code == ERROR_CALL_NOT_IMPLEMENTED);
+    CHECK(GetLastError() == ERROR_CALL_NOT_IMPLEMENTED);
     CHECK(!mvdm_vm_bridge_bop(0, 0, 0, 0, 0, 1, &result));
     CHECK(result.status == 123 && result.value == 456);
     CHECK(mvdm_vm_bridge_bop(MVDM_VM_BRIDGE_SIGNATURE, 0, 0, 0, 0, 0, &result));

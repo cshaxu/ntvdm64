@@ -204,7 +204,7 @@ $fixtureLibraries = @(
     'original-mvdm-host-suballoc.lib', 'original-mvdm-host-oemuni.lib',
     'original-softpc-base-trace.lib', 'original-opennt-base-vdm.lib',
     'original-opennt-rtl-x86.lib', 'softpc-fixture-bindings.lib',
-    'vdmredir-dll-bindings.lib', 'vdd-bindings.lib', 'softpc-win32-bindings.lib',
+    'vdmredir-dll-bindings.lib', 'softpc-win32-bindings.lib',
     'monitor-bindings.lib', 'kernel-vdm-printer.lib', 'debugger-bindings.lib',
     'session.lib', 'mvdm-softpc-effective-address.lib',
     'softpc-ccpu-vector-defaults.lib', 'softpc-activity-check.lib',

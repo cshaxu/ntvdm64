@@ -134,7 +134,6 @@ $kernelVdmPrinterSource = Join-Path $adapterMonitorRoot 'mvdm_monitor_printer.c'
 $adapterRedirRoot = Join-Path $root 'src/ntvdm-exe/redir'
 $redirDllRoot = Join-Path $root 'src/vdmredir-dll'
 $redirDllBindingRoot = Join-Path $redirDllRoot 'source'
-$adapterVddRoot = Join-Path $root 'src/ntvdm-exe/vdd'
 $ccpuVectorSource = Join-Path $root 'src/compat/mvdm_ccpu_vector_defaults.c'
 $ccpuActivitySource = Join-Path $root 'src/compat/mvdm_ccpu_activity_check.c'
 $ccpuProductIncludeRoot = Join-Path $root 'src/compat/include/generated/x86/prod'
@@ -265,7 +264,6 @@ $adapterBaseSrvNames = @('mvdm_command_guest_state.c',
                           'mvdm_command_launch.c',
                           'mvdm_command_native_child.c',
                           'mvdm_command_binding.c')
-$adapterVddNames = @('mvdm_softpc_vdd_unavailable.c')
 $adapterMonitorNames = @('mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_registers.c')
 $adapterRedirWorkerNames = @('mvdm_redirector_worker_copy.c')
@@ -392,9 +390,6 @@ foreach ($name in $openntRtlX86Names) {
 }
 foreach ($name in $openntRtlNames) {
     if (!(Test-Path -LiteralPath (Join-Path $openntRtlRoot $name))) { throw "Selected original RTL source missing: $name" }
-}
-foreach ($name in $adapterVddNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $adapterVddRoot $name))) { throw "Required VDD adapter source missing: $name" }
 }
 foreach ($name in $openntNetlibNames) {
     if (!(Test-Path -LiteralPath (Join-Path $openntNetlibRoot $name))) { throw "Original OpenNT netlib source missing: $name" }
@@ -1360,12 +1355,6 @@ $openntRtlObjects = foreach ($name in $openntRtlNames) {
 $kernelVdmPrinterObject = 'obj/kernel-vdm/mvdm_monitor_printer.obj'
 $graph.Add('build ' + $kernelVdmPrinterObject + ': cc ' + (NinjaPath $kernelVdmPrinterSource))
 $graph.Add('  cflags = ' + $compatCcpuFlags)
-$adapterVddObjects = foreach ($name in $adapterVddNames) {
-    $object = 'obj/adapter-vdd/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterVddRoot $name)))
-    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
-    $object
-}
 $openntNetlibObjects = foreach ($name in $openntNetlibNames) {
     $object = 'obj/opennt-netlib/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $openntNetlibRoot $name)))
@@ -2136,7 +2125,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     # This import library is the one worker parent ABI.  Late-loaded original
     # providers import it rather than a retired second `original-softpc-process`
     # image with its own local BaseVDM queue.
-$graph.Add('build ntvdm.exe | ntvdm.lib: worker_link worker-base.lib ntvdm-vm-frontend.lib frontend-base.lib lib-pipe.lib common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj ' + ($adapterRedirWorkerObjects -join ' ') + ' ' + ($adapterWowWorkerObjects -join ' ') + ' worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib common-base-srv-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib common-base-srv-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res | generated/ntvdm-wow32-provider.def')
+$graph.Add('build ntvdm.exe | ntvdm.lib: worker_link worker-base.lib ntvdm-vm-frontend.lib frontend-base.lib lib-pipe.lib common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj ' + ($adapterRedirWorkerObjects -join ' ') + ' ' + ($adapterWowWorkerObjects -join ' ') + ' worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib common-base-srv-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib common-base-srv-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res | generated/ntvdm-wow32-provider.def')
 }
 # Test-only original keyboard-state observation; reuse the exact worker link
 # inputs, substituting the keyba object before the original archive is scanned.
@@ -2203,7 +2192,6 @@ $graph.Add('build original-softpc-host-fixture-roots.lib: lib ' + ($hostFixtureO
 $graph.Add('build softpc-bindings.lib: lib ' + ($adapterSoftpcObjects -join ' '))
 $graph.Add('build softpc-fixture-bindings.lib: lib ' + ($adapterSoftpcFixtureObjects -join ' '))
 $graph.Add('build vdmredir-dll-bindings.lib: lib ' + ($adapterRedirObjects -join ' '))
-$graph.Add('build vdd-bindings.lib: lib ' + ($adapterVddObjects -join ' '))
 $graph.Add('build original-opennt-netlib.lib: lib ' + ($openntNetlibObjects -join ' '))
 $graph.Add('build original-opennt-xactsrv.lib: lib ' + ($openntXactSrvObjects -join ' '))
 $graph.Add('build original-opennt-base-vdm.lib: lib ' + ($openntBaseVdmObjects -join ' '))
@@ -2246,7 +2234,7 @@ $graph.Add('build ' + $boundedExecutionFixtureSeamsObject + ': cc ' + (NinjaPath
 # Same original owner libraries as the product, with a fixture main only.
 $graph.Add('rule event_test_link')
 $graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out $in kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
-$fixtureHostLibraries = 'worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res'
+$fixtureHostLibraries = 'worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res'
 # The shared native-child binding now reaches Hook installation and DOS style
 # queries even in the fixture closure. Link the real selected providers.
 $fixtureHostLibraries += ' common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib common-rpc.lib lib-rpc.lib'

@@ -1,0 +1,86 @@
+{
+  "packet": "M0 T483 S14 P121",
+  "baseline": "8504233eb570e93fca81a7c40bf8d450c5502ca9",
+  "eliminated_B_ids": [
+    "B0022"
+  ],
+  "eliminated_C_ids": [],
+  "c_population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 550,
+    "open": 18,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 4
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 5,
+    "image-import": 1,
+    "symbol": 12
+  },
+  "ownership": "The original C VM exit caller keeps its ABI. Compat directly requests the established controlled stop with ERROR_CALL_NOT_IMPLEMENTED. The unrelated product VM bridge BOP is still installed by the worker.",
+  "compiled_header_closure": {
+    "msvc-x86-release/worker": [
+      "compat/include/mvdm_softpc_termination.h",
+      "compat/include/vm_services.h"
+    ],
+    "msvc-x64-release/worker-reference-x86": [
+      "compat/include/mvdm_softpc_termination.h",
+      "compat/include/vm_services.h"
+    ]
+  },
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "8ba70b31-0c29-4c54-acbc-f7a9797e4cc5",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "scope": "Cached products; compiled boundary and link ownership; notification fixture; real compat escape with original close replaced by explicit fixture counter; NIDDB original-object rollback and WOW task-lifecycle fixture; live DOS/EDIT and shared WOW lifecycle.",
+    "runtime_output": [
+      "      \"path\": \"O:\\\\repos.hobby\\\\ntvdm64\\\\test\\\\mvdm-host\\\\niddb_bridge_boundary.h\",",
+      "      \"sha256\": \"9028cc6c5a9cc8d9c594a9e1b634ae8c92a28f8717e9fa131e48d5823e02ad0a\"",
+      "    },",
+      "    {",
+      "      \"path\": \"O:\\\\repos.hobby\\\\ntvdm64\\\\src\\\\ntvdm-exe\\\\softpc\\\\include\\\\mvdm_vm_bridge.h\",",
+      "      \"sha256\": \"708db5deb811d4691373791965e0dad88b206b0c5e09607ee4714c93894cc729\"",
+      "    },",
+      "    {",
+      "      \"path\": \"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\.ninja\\\\msvc-x86-release\\\\worker\\\\obj\\\\bios\\\\virtual.obj\",",
+      "      \"sha256\": \"dba4d6e10725a305c72b78a7862aab9ce5fca7788504136986a8f476abbef1ee\"",
+      "    },",
+      "    {",
+      "      \"path\": \"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s14-vdd-clear-owner\\\\niddb\\\\virtual-intercept.obj\",",
+      "      \"sha256\": \"285100bf29fc6246694cc0ea6d97f4be34a8137cb26408457aab7bf4e2c509e5\"",
+      "    },",
+      "    {",
+      "      \"path\": \"O:\\\\repos.hobby\\\\ntvdm64\\\\build\\\\t483-s14-vdd-clear-owner\\\\niddb\\\\fixture.exe\",",
+      "      \"sha256\": \"1bf04ab336b398339916024adf2639ba61a6a7f7c4232b51f2959804ba936d5a\"",
+      "    }",
+      "  ]",
+      "}",
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+      "PASS shared worker 668, two distinct tasks overlapped and retired independently, both requests exited normally"
+    ]
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "boundary.out": "3cbb86ade49a6215ffb8dc64f8b3c1f663e7ecb5f0865efa17818683bd9619c1",
+    "probes.out": "63f6cc0481c9eca2cd9aa8a538a69e74a22f575934756d2494e3aaad7157dcf8",
+    "niddb/result.json": "563eb18d24902adcb5380552488f357e4060b439c7ce4d445e295e4d50987a0e",
+    "wow-object-lifecycle.out": "3b10b057176d2e42598f979ca5cf64eddf10c187ab1039eb723324c561655a3f",
+    "final-checks.out": "73e35aaddc05b869a5fb95518e1165adec4f30d48e37248ad795395c4ad92727"
+  }
+}

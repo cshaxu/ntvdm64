@@ -24,7 +24,7 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
 const compat_vm_services *compat_vm_current_services(void)
 {
     static const compat_vm_services services = {
-        mvdm_vm_bridge_bop, ClearInstanceDataMarking
+        mvdm_vm_bridge_bop
     };
     return &services;
 }
