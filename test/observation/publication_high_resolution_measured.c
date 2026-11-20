@@ -14,4 +14,4 @@ static HANDLE measured_create_waitable_timer(LPSECURITY_ATTRIBUTES attributes,
 }
 
 #define CreateWaitableTimerW measured_create_waitable_timer
-#include "../../src/worker-base/publication.c"
+#include "../../src/compat/publication.c"

@@ -1,5 +1,5 @@
 #include "ntvdm-exe/win32/console_graphics.h"
-#include "worker-base/publication.h"
+#include "compat/include/publication.h"
 #include "common/protocol/console_video.h"
 #include "conapi.h"
 #include <stdio.h>

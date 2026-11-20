@@ -41,7 +41,7 @@ static int verify_text_plane(session *owner, HANDLE output)
     if (!RegisterConsoleVDM(CONSOLE_REGISTER_VDM, NULL, NULL, NULL, 0u,
             &state_length, &state, NULL, 0u, size, &buffer) ||
         state_length != 0u || state != NULL || buffer == NULL ||
-        !session_presentation_text_describe(owner, &columns, &rows, &capacity) ||
+        !compat_host_text_describe(&owner->host_context, &columns, &rows, &capacity) ||
         columns != 80u || rows != 50u ||
         capacity != 80u * 50u * SOFTPC_TEXT_CELL_BYTES) return 30;
     /* Check capacity before touching the last row: the old two-byte
@@ -56,7 +56,7 @@ static int verify_text_plane(session *owner, HANDLE output)
             cell[3] = 0xadu;
         }
     }
-    if (session_presentation_text_snapshot(owner, short_copy,
+    if (compat_host_text_snapshot(&owner->host_context, short_copy,
             sizeof(short_copy), NULL, NULL, NULL)) return 31;
     if (!GetConsoleScreenBufferInfo(output, &info)) return 32;
     /* Keep the existing window within the resized test backing buffer. */
@@ -279,7 +279,7 @@ int main(void)
             &text_state_length, &text_state, NULL, 0u, text_size,
             &text_buffer) || text_state_length != 0u || text_state != NULL ||
         text_buffer == NULL) return 15;
-    if (!session_presentation_text_describe(&instance, &text_columns,
+    if (!compat_host_text_describe(&instance.host_context, &text_columns,
             &text_rows, &text_capacity) || text_columns != 2u ||
         text_rows != 1u || text_capacity != 2u * SOFTPC_TEXT_CELL_BYTES) return 24;
     ((uint8_t *)text_buffer)[0] = 'O';

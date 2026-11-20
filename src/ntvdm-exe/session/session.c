@@ -156,78 +156,6 @@ uint32_t session_video_event_active(const session *instance)
     return session_valid(instance) ? instance->video_event_active : 0u;
 }
 
-int session_presentation_text_acquire_writable(session *instance,
-    uint32_t columns, uint32_t rows, uint32_t cell_bytes, uint8_t **bytes_out)
-{
-    uint64_t required;
-    uint8_t *replacement;
-
-    if (bytes_out != NULL) *bytes_out = NULL;
-    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
-        bytes_out == NULL || columns == 0u || rows == 0u ||
-        (cell_bytes != 2u && cell_bytes != 4u)) return 0;
-    required = (uint64_t)columns * (uint64_t)rows * cell_bytes;
-    if (required == 0u || required > UINT32_MAX) return 0;
-    if (instance->presentation_text_storage != NULL &&
-        instance->presentation_text_columns == columns &&
-        instance->presentation_text_rows == rows &&
-        instance->presentation_text_bytes == required) {
-        *bytes_out = instance->presentation_text_storage;
-        return 1;
-    }
-    replacement = (uint8_t *)calloc(1u, (size_t)required);
-    if (replacement == NULL) return 0;
-    session_presentation_text_clear(instance);
-    instance->presentation_text_storage = replacement;
-    instance->presentation_text_columns = columns;
-    instance->presentation_text_rows = rows;
-    instance->presentation_text_bytes = (uint32_t)required;
-    *bytes_out = replacement;
-    return 1;
-}
-
-int session_presentation_text_snapshot(const session *instance,
-    uint8_t *destination, uint32_t destination_bytes, uint32_t *columns_out,
-    uint32_t *rows_out, uint32_t *bytes_out)
-{
-    if (columns_out != NULL) *columns_out = 0u;
-    if (rows_out != NULL) *rows_out = 0u;
-    if (bytes_out != NULL) *bytes_out = 0u;
-    if (!session_valid(instance) || destination == NULL ||
-        instance->presentation_text_storage == NULL ||
-        destination_bytes < instance->presentation_text_bytes) return 0;
-    memcpy(destination, instance->presentation_text_storage,
-        instance->presentation_text_bytes);
-    if (columns_out != NULL) *columns_out = instance->presentation_text_columns;
-    if (rows_out != NULL) *rows_out = instance->presentation_text_rows;
-    if (bytes_out != NULL) *bytes_out = instance->presentation_text_bytes;
-    return 1;
-}
-
-int session_presentation_text_describe(const session *instance,
-    uint32_t *columns_out, uint32_t *rows_out, uint32_t *bytes_out)
-{
-    if (columns_out != NULL) *columns_out = 0u;
-    if (rows_out != NULL) *rows_out = 0u;
-    if (bytes_out != NULL) *bytes_out = 0u;
-    if (!session_valid(instance) || instance->presentation_text_storage == NULL)
-        return 0;
-    if (columns_out != NULL) *columns_out = instance->presentation_text_columns;
-    if (rows_out != NULL) *rows_out = instance->presentation_text_rows;
-    if (bytes_out != NULL) *bytes_out = instance->presentation_text_bytes;
-    return 1;
-}
-
-void session_presentation_text_clear(session *instance)
-{
-    if (instance == NULL) return;
-    free(instance->presentation_text_storage);
-    instance->presentation_text_storage = NULL;
-    instance->presentation_text_columns = 0u;
-    instance->presentation_text_rows = 0u;
-    instance->presentation_text_bytes = 0u;
-}
-
 static uint32_t session_dispose_reason(const session *instance)
 {
     if (!session_valid(instance)) return SESSION_DISPOSE_REASON_INVALID;
@@ -245,7 +173,6 @@ int session_dispose_with_reason(session *instance, uint32_t *reason_out)
     if (reason_out != NULL) *reason_out = reason;
     if (reason != SESSION_DISPOSE_REASON_NONE) return 0;
     compat_host_context_dispose(&instance->host_context);
-    session_presentation_text_clear(instance);
     session_guest_memory_end(instance);
     memset(instance, 0, sizeof(*instance));
     return 1;

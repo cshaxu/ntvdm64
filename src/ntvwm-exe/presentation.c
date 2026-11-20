@@ -2,7 +2,7 @@
  * No guest context, original Console-close policy or frontend ownership here. */
 #include "presentation.h"
 #include "common/console/client.h"
-#include "worker-base/publication.h"
+#include "compat/include/publication.h"
 #include "console_state.h"
 #include "text_frame.h"
 #include <stddef.h>

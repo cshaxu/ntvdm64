@@ -1,7 +1,7 @@
 #ifndef NTVDM_CONSOLE_GRAPHICS_H
 #define NTVDM_CONSOLE_GRAPHICS_H
 #include <windows.h>
-#include "worker-base/publication.h"
+#include "compat/include/publication.h"
 typedef struct ntvdm_console_graphics ntvdm_console_graphics;
 ntvdm_console_graphics *ntvdm_console_graphics_create(void);
 void ntvdm_console_graphics_destroy(ntvdm_console_graphics *);

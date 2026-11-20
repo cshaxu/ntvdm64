@@ -4,7 +4,7 @@
 #include "worker_lifecycle.h"
 #include "console_text.h"
 #include "console_geometry.h"
-#include "worker-base/publication.h"
+#include "compat/include/publication.h"
 #include "worker-base/input_watch.h"
 #include "common/console/client.h"
 #include "common/protocol/frontend_protocol.h"

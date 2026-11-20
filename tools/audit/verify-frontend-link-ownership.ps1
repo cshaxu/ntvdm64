@@ -272,8 +272,13 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     }
     foreach($target in @('worker-base.lib','ntvdm.exe','ntvwm.exe')) {
         $actual=@(Get-FrontendSources $target 'worker-base')
-        if(@(Compare-Object @('connection.c','shutdown_close.c','publication.c','input_watch.c','task_observation.c') $actual).Count) {
+        if(@(Compare-Object @('connection.c','shutdown_close.c','input_watch.c','task_observation.c') $actual).Count) {
             throw "$target does not use the complete common worker implementation"
+        }
+    }
+    foreach($target in @('worker-base.lib','ntvdm.exe','ntvwm.exe')) {
+        if('publication.c' -notin @(Get-FrontendSources $target 'compat')) {
+            throw "$target omits the compat snapshot publisher"
         }
     }
     foreach($target in @('ntvdm.exe','ntvwm.exe','console-client-test.exe','ntvwm-presentation-test.exe')) {

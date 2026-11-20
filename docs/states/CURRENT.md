@@ -59,6 +59,12 @@ cases passed; mirror delta0/0. Test cases now clean their owned desktop processe
 Eight IDs eliminated: current429/139. Console control/transport remains open.
 Enclosing commit/push is receipt; prior P76 evidence remains in P81 history.
 
+P84 [Console data preparation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-data-owner.json)
+moves snapshot publication E-to-B and text-buffer state/operations F-to-B.
+Cached full build, dual11/22 hashes, lifecycle/text/graphics and real DOS video/text
+passed. Mirror delta0/0; direct ledger429/139 unchanged pending full Console chain.
+Product callback targets remain explicit. Enclosing commit/push is receipt.
+
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same
 B host context owns identity and cleanup. No new state or callbacks; mirror0/0.

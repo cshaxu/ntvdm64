@@ -1,4 +1,4 @@
-#include "publication.h"
+#include "include/publication.h"
 #include <string.h>
 
 typedef struct frame_copy {

@@ -48,7 +48,7 @@ BOOL NtvdmConsoleUpdateText(HPALETTE palette)
     DWORD error;
     BOOL result=FALSE;
     if (!owner || !owner->console_client) return TRUE;
-    if (!session_presentation_text_describe(owner,&columns,&rows,&bytes)) {
+    if (!compat_host_text_describe(&owner->host_context,&columns,&rows,&bytes)) {
         SetLastError(ERROR_NOT_READY);return FALSE;
     }
     if (!mvdm_softpc_text_video_copy(&video)) return TRUE;
@@ -69,7 +69,7 @@ BOOL NtvdmConsoleUpdateText(HPALETTE palette)
     payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,description.bytes);
     text=HeapAlloc(GetProcessHeap(),0,bytes);
     if (!payload || !text) { SetLastError(ERROR_NOT_ENOUGH_MEMORY);goto done; }
-    if (!session_presentation_text_snapshot(owner,text,bytes,NULL,NULL,NULL)) {
+    if (!compat_host_text_snapshot(&owner->host_context,text,bytes,NULL,NULL,NULL)) {
         SetLastError(ERROR_INVALID_DATA);goto done;
     }
     style=(console_text_style *)payload;

@@ -4,7 +4,7 @@
 #include "console_bitmap.h"
 #include "ntvdm-exe/softpc/v7_pointer.h"
 #include "console_client.h"
-#include "worker-base/publication.h"
+#include "compat/include/publication.h"
 #include "conapi.h"
 #undef CreateConsoleScreenBuffer
 #undef SetConsoleActiveScreenBuffer

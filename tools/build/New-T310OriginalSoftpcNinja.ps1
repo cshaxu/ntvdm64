@@ -1624,8 +1624,8 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/ntvwm/next_command.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvwm-exe/next_command.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/worker-base/publication.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/publication.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/worker-base/publication.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/publication.c')))
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build obj/worker-base/input_watch.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/input_watch.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker-base/task_observation.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/task_observation.c')))
@@ -2534,7 +2534,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'worker-base.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'project-owned worker connection initialization and disconnect; NTVDM and NTVWM only; common provides protocol clients'
-        sources = @('connection.c', 'connection.h', 'shutdown_close.c', 'publication.c', 'publication.h', 'input_watch.c', 'input_watch.h', 'task_observation.c', 'task_observation.h' | ForEach-Object {
+        sources = @('connection.c', 'connection.h', 'shutdown_close.c', 'input_watch.c', 'input_watch.h', 'task_observation.c', 'task_observation.h' | ForEach-Object {
             $path = 'src/worker-base/' + $_
             [ordered]@{ path = $path; sha256 = Get-NodeSha256 (Join-Path $root $path) }
         })

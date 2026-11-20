@@ -8,8 +8,8 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 }
 $wrapper=(Resolve-Path $CompilerWrapper).Path
 $null=New-Item -ItemType Directory -Path $root
-$sources=@('src/worker-base/publication.c',
- 'test/worker-base/software_video_publisher_test.c')
+$sources=@('src/compat/publication.c',
+ 'test/compat/software_video_publisher_test.c')
 $objects=@()
 foreach($source in $sources){
  $object=Join-Path $root (([IO.Path]::GetFileNameWithoutExtension($source))+'.obj')

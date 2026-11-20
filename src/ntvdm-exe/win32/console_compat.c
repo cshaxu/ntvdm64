@@ -86,7 +86,7 @@ static int present_text_invalidation(HANDLE output, const SMALL_RECT *rect)
         return 0;
     }
     if (owner == NULL || rect == NULL ||
-        !session_presentation_text_describe(owner, &columns, &rows,
+        !compat_host_text_describe(&owner->host_context, &columns, &rows,
                                             &text_bytes)) return 0;
     if (rect->Left < 0 || rect->Top < 0 || rect->Right < rect->Left ||
         rect->Bottom < rect->Top || (uint32_t)rect->Right >= columns ||
@@ -107,7 +107,7 @@ static int present_text_invalidation(HANDLE output, const SMALL_RECT *rect)
     text = (uint8_t *)malloc(text_bytes);
     cells = (CHAR_INFO *)calloc((size_t)width * (size_t)height, sizeof(*cells));
     if (text == NULL || cells == NULL ||
-        !session_presentation_text_snapshot(owner, text, text_bytes, NULL,
+        !compat_host_text_snapshot(&owner->host_context, text, text_bytes, NULL,
                                             NULL, NULL)) {
         free(cells);
         free(text);
@@ -233,7 +233,7 @@ BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
-    if (!session_presentation_text_acquire_writable(owner,
+    if (!compat_host_text_acquire_writable(&owner->host_context,
             (uint32_t)buffer_size.X, (uint32_t)buffer_size.Y,
             /* Match original nt_cga.c TEXT_INCVAL without MONITOR: CCPU40
              * uses four-byte VGA-interleaved cells even on an x86 host. */

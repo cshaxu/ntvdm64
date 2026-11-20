@@ -1,0 +1,89 @@
+{
+  "moves": [
+    {
+      "old": "src/worker-base/publication.c",
+      "new": "src/compat/publication.c",
+      "before_sha256": "927db3974bbf74b4ae2620d1dede8ab224b4ca72267ed39c54a409e417acace3",
+      "after_sha256": "0f87af52c1226381b47dab8bce4f44abe2c2b06d04ce0d9a838aa6e75cacced8"
+    },
+    {
+      "old": "src/worker-base/publication.h",
+      "new": "src/compat/include/publication.h",
+      "before_sha256": "53da47104626d0e94749fa5154005ea1a9a2cbafad1757092221508e2cc4588c",
+      "after_sha256": "53da47104626d0e94749fa5154005ea1a9a2cbafad1757092221508e2cc4588c"
+    },
+    {
+      "old": "test/worker-base/software_video_publisher_test.c",
+      "new": "test/compat/software_video_publisher_test.c",
+      "before_sha256": "1390e609b701818ad83a79049644f09191197cc3b1c2dc3e8d54ab3c11c0055f",
+      "after_sha256": "d2ba2eaffdf2c2c03191a62cbaf15f67c1605f8bbcdf971d5345fbc72402bcd7"
+    }
+  ],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "direct_ids_eliminated": 0,
+  "boundary": "Actual snapshot mechanism relocated; callbacks stay explicitly owned by caller. Console outward chain is NOT yet eliminated.",
+  "packet": "T483 S14 P84",
+  "status": "Final cached full build, dual publication and targeted tests passed; enclosing commit/push is receipt",
+  "text_buffer": {
+    "source": "src/ntvdm-exe/session/session.c",
+    "target": "src/compat/host_context.c",
+    "operations": [
+      "acquire_writable",
+      "describe",
+      "snapshot",
+      "clear"
+    ],
+    "storage": "Moved from product session into its existing embedded compat_host_context; no second allocation or TLS",
+    "lifetime": "Registered cleanups finish first, then clear the text plane, then zero context; same order as previous session disposal",
+    "validation": "Inner entrypoints validate the B context and ACTIVE state for writable acquisition; product session ABI validation remains with its product callers",
+    "callers": [
+      "src/ntvdm-exe/win32/console_compat.c",
+      "src/ntvdm-exe/win32/console_text.c"
+    ]
+  },
+  "remaining": {
+    "console_chain_open_ids": 48,
+    "all_open_ids": 139,
+    "why_not_counted": "RPC, authorization and input-monitor completion chain still outer. Publisher callbacks must be audited at final concrete targets; this migration alone is not elimination."
+  },
+  "evidence_root": "build/t483-s14-console-data-owner",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "ad4ba776-235d-48a5-9f63-8c2f701c1959",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "build": {
+      "exit": 0,
+      "stdout_sha256": "11f613ef27ec97d8531b5b891b21891082105a03d474a85c72f926656957c331"
+    },
+    "deliver": {
+      "exit": 0,
+      "stdout_sha256": "5925604e98a74544cd93f129ad182a0d0c584671cce12be718cb4de0779a319c"
+    },
+    "targeted": {
+      "exit": 0,
+      "stdout_sha256": "bee1f7f5d6b120230d16ad8e92cc2392deb6a11516970a6ab04c35e59b2431e5"
+    },
+    "guest": {
+      "exit": 0,
+      "stdout_sha256": "b4e98ddb0b9a9cb3ece28a9b27113bfc79f50277e238afc8eaf0f7a293eadd22"
+    },
+    "tests": {
+      "exit": 0,
+      "stdout_sha256": "05ddcc7629b1bd02b6ed399eb05acb3efce0b12e637ee8c50d725f6b26d3d49c"
+    }
+  },
+  "guest_results": [
+    "PASS real guest mouse video: CURSOR-VIDEO-PASS",
+    "PASS real guest mouse text: CURSOR-TEXT-PASS"
+  ]
+}

@@ -12,7 +12,7 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 }
 $wrapper=(Resolve-Path $CompilerWrapper).Path
 $null=New-Item -ItemType Directory -Path $root
-$publisher=if($HighResolutionPublisher){'test/observation/publication_high_resolution_measured.c'}else{'src/worker-base/publication.c'}
+$publisher=if($HighResolutionPublisher){'test/observation/publication_high_resolution_measured.c'}else{'src/compat/publication.c'}
 $sources=@($publisher,
     'src/compat/mvdm_softpc_mouse_input.c',
     'test/observation/measure-worker-primitives.c')

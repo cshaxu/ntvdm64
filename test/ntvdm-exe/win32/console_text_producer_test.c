@@ -23,9 +23,9 @@ static unsigned palette_refreshes;
 void mvdm_softpc_text_video_refresh_palette(void)
 { ++palette_refreshes;if(restore_palette)palette_error=ERROR_SUCCESS; }
 session *session_thread_current(void) { return bound ? &owner : NULL; }
-int session_presentation_text_describe(const session *s,uint32_t *w,uint32_t *h,uint32_t *n)
+int compat_host_text_describe(const compat_host_context *s,uint32_t *w,uint32_t *h,uint32_t *n)
 { (void)s;*w=columns;*h=rows;*n=storage_bytes;return 1; }
-int session_presentation_text_snapshot(const session *s,uint8_t *p,uint32_t capacity,uint32_t *w,uint32_t *h,uint32_t *n)
+int compat_host_text_snapshot(const compat_host_context *s,uint8_t *p,uint32_t capacity,uint32_t *w,uint32_t *h,uint32_t *n)
 { (void)s;(void)w;(void)h;(void)n;if(!snapshot_ok || capacity<storage_bytes)return 0;memcpy(p,storage,storage_bytes);return 1; }
 int mvdm_softpc_text_video_copy(mvdm_softpc_text_video *p)
 { if(!readable)return 0;*p=video;return 1; }
