@@ -387,6 +387,7 @@ static NTSTATUS exit_command(PCSR_API_MSG message,ULONG length)
 
     if (length!=sizeof(*exit_message)) goto done;
     is_wow=exit_message->ConsoleHandle==(HANDLE)-1;
+    if (is_wow) OpenNtBaseClientForgetWowTask(exit_message->iWowTask);
     {
         RPC_ASYNC_STATE async;
         error=OpenNtBaseClientFailure(0);

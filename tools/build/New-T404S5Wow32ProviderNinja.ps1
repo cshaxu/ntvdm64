@@ -268,6 +268,7 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'ExitVDM@8'; Raw = 'ExitVDM' },
     [pscustomobject]@{ Decorated = 'OpenNtBaseClientWowStarted@4'; Raw = 'OpenNtBaseClientWowStarted' },
     [pscustomobject]@{ Decorated = 'OpenNtBaseClientBindWowTask@12'; Raw = 'OpenNtBaseClientBindWowTask' },
+    [pscustomobject]@{ Decorated = 'OpenNtBaseClientFindWowTask@12'; Raw = 'OpenNtBaseClientFindWowTask' },
     [pscustomobject]@{ Decorated = 'OpenNtBaseClientRetireWowTask@8'; Raw = 'OpenNtBaseClientRetireWowTask' },
     [pscustomobject]@{ Decorated = 'OpenNtBaseClientFailWowTaskClose@8'; Raw = 'OpenNtBaseClientFailWowTaskClose' },
     [pscustomobject]@{ Decorated = 'NtvdmAuthorizeExit@4'; Raw = 'NtvdmAuthorizeExit' },

@@ -450,6 +450,7 @@ foreach ($entry in @(
     'NtCurrentPeb=_NtCurrentPeb@0', 'ExitVDM=_ExitVDM@8',
     'OpenNtBaseClientWowStarted=_OpenNtBaseClientWowStarted@4',
     'OpenNtBaseClientBindWowTask=_OpenNtBaseClientBindWowTask@12',
+    'OpenNtBaseClientFindWowTask=_OpenNtBaseClientFindWowTask@12',
     'OpenNtBaseClientRetireWowTask=_OpenNtBaseClientRetireWowTask@8',
     'OpenNtBaseClientFailWowTaskClose=_OpenNtBaseClientFailWowTaskClose@8',
     'NtvdmAuthorizeExit=_NtvdmAuthorizeExit@4',

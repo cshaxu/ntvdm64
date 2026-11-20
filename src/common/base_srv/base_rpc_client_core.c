@@ -36,6 +36,61 @@ typedef struct OPENNT_BASE_RPC_CLIENT {
 } OPENNT_BASE_RPC_CLIENT;
 
 static OPENNT_BASE_RPC_CLIENT client;
+typedef struct wow_task_binding {
+    struct wow_task_binding *next;
+    uint64_t ticket;
+    ULONG task;
+    USHORT htask;
+} wow_task_binding;
+
+static SRWLOCK wow_tasks_lock = SRWLOCK_INIT;
+static wow_task_binding *wow_tasks;
+
+static void record_wow_task(wow_task_binding *entry)
+{
+    AcquireSRWLockExclusive(&wow_tasks_lock);
+    entry->next = wow_tasks;
+    wow_tasks = entry;
+    ReleaseSRWLockExclusive(&wow_tasks_lock);
+}
+
+static void forget_wow_task(ULONG task, uint64_t ticket)
+{
+    wow_task_binding **link, *entry;
+    AcquireSRWLockExclusive(&wow_tasks_lock);
+    link = &wow_tasks;
+    while ((entry = *link) != NULL) {
+        if (ticket ? entry->ticket == ticket : (task == (ULONG)-1 || entry->task == task)) {
+            *link = entry->next;
+            HeapFree(GetProcessHeap(), 0, entry);
+        } else {
+            link = &entry->next;
+        }
+    }
+    ReleaseSRWLockExclusive(&wow_tasks_lock);
+}
+
+void OpenNtBaseClientForgetWowTask(ULONG task)
+{
+    forget_wow_task(task, 0);
+}
+
+DWORD WINAPI OpenNtBaseClientFindWowTask(uint64_t identity, USHORT *htask)
+{
+    wow_task_binding *entry;
+    if (!identity || !htask) return ERROR_INVALID_PARAMETER;
+    *htask = 0;
+    AcquireSRWLockShared(&wow_tasks_lock);
+    for (entry = wow_tasks; entry; entry = entry->next) {
+        if (entry->ticket == identity) {
+            *htask = entry->htask;
+            break;
+        }
+    }
+    ReleaseSRWLockShared(&wow_tasks_lock);
+    return *htask ? ERROR_SUCCESS : ERROR_NOT_FOUND;
+}
+
 /* Optional execution-side resource cleanup, absent in frontend consumers. */
 static PVOID volatile execution_cleanup;
 
@@ -268,6 +323,7 @@ void OpenNtBaseClientDisconnectCurrent(void)
     if (client.binding) RpcBindingFree(&client.binding);
     cleanup=(void (*)(void))InterlockedExchangePointer(&execution_cleanup,NULL);
     if (cleanup) cleanup();
+    OpenNtBaseClientForgetWowTask((ULONG)-1);
     ZeroMemory(&client,sizeof(client));
 }
 
@@ -454,20 +510,35 @@ DWORD OpenNtBaseClientWorkerControls(HANDLE *server,HANDLE *shutdown,HANDLE *con
 DWORD WINAPI OpenNtBaseClientBindWowTask(ULONG task,USHORT htask,uint64_t *identity)
 {
     RPC_ASYNC_STATE async;DWORD error;hyper value=0;
+    wow_task_binding *entry;
     /* Shared WOW supplies its original iTask; a separate WOW is authenticated
      * by its consumed one-shot reservation and deliberately supplies zero. */
     if(!identity || !htask)return ERROR_INVALID_PARAMETER;*identity=0;
     if(!client.connection || !client.binding || !client.process)return ERROR_ACCESS_DENIED;
-    error=common_rpc_begin_async(&async);if(error)return error;
-    RpcTryExcept {Client_BindWowTask(&async,client.binding,client.connection,client.process,client.generation,task,htask,&value);}
-    RpcExcept(1){error=RpcExceptionCode();} RpcEndExcept
-    error=common_rpc_end_async(&async,error,client.server,INFINITE);
-    if(!error)*identity=(uint64_t)value;return OpenNtBaseClientFailure(error);
+    entry = HeapAlloc(GetProcessHeap(), 0, sizeof(*entry));
+    if (!entry) return ERROR_NOT_ENOUGH_MEMORY;
+    error=common_rpc_begin_async(&async);
+    if (!error) {
+        RpcTryExcept {Client_BindWowTask(&async,client.binding,client.connection,client.process,client.generation,task,htask,&value);}
+        RpcExcept(1){error=RpcExceptionCode();} RpcEndExcept
+        error=OpenNtBaseClientFailure(common_rpc_end_async(&async,error,client.server,INFINITE));
+    }
+    if (error || !value) {
+        HeapFree(GetProcessHeap(), 0, entry);
+        return error ? error : ERROR_INVALID_DATA;
+    }
+    entry->ticket = (uint64_t)value;
+    entry->task = task;
+    entry->htask = htask;
+    record_wow_task(entry);
+    *identity = (uint64_t)value;
+    return ERROR_SUCCESS;
 }
 DWORD WINAPI OpenNtBaseClientRetireWowTask(uint64_t identity)
 {
     RPC_ASYNC_STATE async;DWORD error;
     if(!identity)return ERROR_INVALID_PARAMETER;
+    forget_wow_task(0, identity);
     if(!client.connection || !client.binding || !client.process)return ERROR_ACCESS_DENIED;
     error=common_rpc_begin_async(&async);if(error)return error;
     RpcTryExcept {Client_RetireWowTask(&async,client.binding,client.connection,client.process,client.generation,(hyper)identity);}

@@ -50,6 +50,7 @@ DWORD OpenNtBaseClientTakeWowTaskClose(uint64_t *identity);
 DWORD WINAPI OpenNtBaseClientFailWowTaskClose(uint64_t identity);
 DWORD WINAPI OpenNtBaseClientBindWowTask(ULONG task,USHORT htask,uint64_t *identity);
 DWORD WINAPI OpenNtBaseClientRetireWowTask(uint64_t identity);
+DWORD WINAPI OpenNtBaseClientFindWowTask(uint64_t identity, USHORT *htask);
 DWORD OpenNtBaseClientWorkerShutdownEvent(HANDLE *shutdown);
 /* Report inability to continue. NTSRV selects the authenticated participant's
  * close transaction; successful submission is not permission to exit. */

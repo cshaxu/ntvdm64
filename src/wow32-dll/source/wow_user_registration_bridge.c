@@ -1,6 +1,5 @@
 #include "compat/include/wow_user_registration_state.h"
 #include "wow32-dll/include/wow_task_start_notification.h"
-#include "wow32-dll/include/wow_task_termination.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_user_registered_callbacks.h"
 #include "wow_dialog_creation_binding.h"
@@ -14,6 +13,7 @@
 #include "compat/include/wow_page_domain.h"
 
 #include "nt.h"
+#include <stdint.h>
 
 /* Original wkman.c owns this TD identity; no TD layout is copied here. */
 extern struct _TD *gptdShell;
@@ -21,6 +21,7 @@ extern struct _TD *gptdShell;
 VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
 /* Uses ntvdm's existing authenticated BaseClient, never a DLL-private peer. */
 DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
+DWORD WINAPI OpenNtBaseClientBindWowTask(ULONG task, USHORT htask, uint64_t *identity);
 BOOL WINAPI wow_current_separate_launch(void);
 
 /* ADAPTER-WOW-056: UserRegisterWowHandlers is one original all-or-nothing
@@ -48,8 +49,10 @@ static DWORD notify_task_started(DWORD task_id, DWORD shared_id, const char *tra
     wow_user_registration_trace(trace, error);
     SetLastError(error);
     /* Both identities already belong to this committed shared WOW task. */
-    if (!error && shared_id && shared_id != (DWORD)-1)
-        (void)wow_task_termination_bind(shared_id, (USHORT)task_id);
+    if (!error && shared_id && shared_id != (DWORD)-1) {
+        uint64_t ticket;
+        (void)OpenNtBaseClientBindWowTask(shared_id, (USHORT)task_id, &ticket);
+    }
     return error;
 }
 

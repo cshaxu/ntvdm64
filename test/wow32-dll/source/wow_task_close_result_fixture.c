@@ -8,17 +8,10 @@ static HANDLE handler_started, handler_release, ticket_reopened;
 static volatile LONG handler_result, calls;
 static uint64_t reopened_ticket;
 
-DWORD WINAPI OpenNtBaseClientBindWowTask(ULONG task, USHORT htask, uint64_t *identity)
+DWORD WINAPI OpenNtBaseClientFindWowTask(uint64_t identity, USHORT *htask)
 {
-    if (htask != reused_task || (task != 1 && task != 2)) return ERROR_INVALID_PARAMETER;
-    *identity = task == 1 ? first_ticket : second_ticket;
-    return ERROR_SUCCESS;
-}
-
-DWORD WINAPI OpenNtBaseClientRetireWowTask(uint64_t identity)
-{
-    (void)identity;
-    return ERROR_SUCCESS;
+    *htask = identity == first_ticket || identity == second_ticket ? reused_task : 0;
+    return *htask ? ERROR_SUCCESS : ERROR_NOT_FOUND;
 }
 
 DWORD WINAPI OpenNtBaseClientFailWowTaskClose(uint64_t identity)
@@ -57,13 +50,12 @@ int main(void)
     ticket_reopened = CreateEventW(NULL, FALSE, FALSE, NULL);
     if (!handler_started || !handler_release || !ticket_reopened) return 1;
 
-    /* Bind the second ticket with the same guest identity while the first
-     * handler is running. The starter must reopen the first, not the newest. */
+    /* Both tickets resolve to the same guest identity. The starter must
+     * reopen only its ticket, even if another close request is waiting. */
     InterlockedExchange(&handler_result, ERROR_CANCELLED);
-    if (wow_task_termination_bind(1, reused_task) ||
+    if (W32TerminateTaskTicket(3) != ERROR_NOT_FOUND ||
         W32TerminateTaskTicket(first_ticket) ||
         WaitForSingleObject(handler_started, 5000) != WAIT_OBJECT_0 ||
-        wow_task_termination_bind(2, reused_task) ||
         W32TerminateTaskTicket(second_ticket) != ERROR_BUSY ||
         !SetEvent(handler_release) ||
         WaitForSingleObject(ticket_reopened, 5000) != WAIT_OBJECT_0 ||

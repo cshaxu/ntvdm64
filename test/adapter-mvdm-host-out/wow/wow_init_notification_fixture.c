@@ -39,9 +39,10 @@ DWORD WINAPI wow_fixture_OpenNtBaseClientWowStarted(ULONG request)
     if (retire_notification) CHECK(wow_user_task_lifecycle_unbind(binding));
     return notifications <= fail_count ? ERROR_RETRY : ERROR_SUCCESS;
 }
-DWORD WINAPI wow_fixture_task_termination_bind(ULONG task, USHORT htask)
+DWORD WINAPI wow_fixture_OpenNtBaseClientBindWowTask(ULONG task, USHORT htask, uint64_t *identity)
 {
     CHECK(task == 0x5678 && htask == 0x1234 && notifications > fail_count);
+    *identity = 1;
     ++ticket_binds;
     return ERROR_SUCCESS;
 }

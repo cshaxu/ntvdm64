@@ -1,0 +1,60 @@
+{
+  "packet": "M0 T483 S14 P139",
+  "parent": "871cf109d32148888b0148fa4b73f8b74bf8bc7d",
+  "eliminated_C": [
+    "C0463"
+  ],
+  "eliminated_B": [],
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 6
+  },
+  "C_runtime_slots": {
+    "F": 1
+  },
+  "C_outward_headers": {
+    "F": 1
+  },
+  "C_named_image_imports": 1,
+  "mirror": {
+    "upstream": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "source": "src/mvdm-host/wow32/wkman.c",
+    "source_sha256": "80d4e23199f36258630f05c2cd23abc166686d35030cf7a2c21b1ae2da999a94",
+    "before": [
+      87,
+      366
+    ],
+    "after": [
+      87,
+      365
+    ],
+    "delta": [
+      0,
+      -1
+    ]
+  },
+  "abi": "Protocol unchanged. Ordinal 276 adds the BaseClient lookup. Existing ordinals remain.",
+  "verification": {
+    "local_map": "PASS exact original task, reused HTASK, explicit ticket and whole-worker local retirement",
+    "task_close_result": "WOW_TASK_CLOSE_RESULT cancel=original-ticket reused-htask=1 serialized=1 success-reopen=0",
+    "init_notification": "WOW_INIT_NOTIFICATION errors=0 registration/retry/exhaustion/exception/retirement checked\nWOW_FIXTURE_OK case=init-notification",
+    "actual_shared_wow": "PASS shared worker 26576, two distinct tasks overlapped and retired independently, both requests exited normally",
+    "limitations": "Local map check runs the extracted production storage operations. Shared guest run demonstrates concurrent lifetime and normal exit, without a manual hung-task prompt or a Full/Win95 run."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "916596a5-43af-4ab6-9b1f-4a4c912401b9",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

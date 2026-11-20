@@ -953,13 +953,11 @@ K233/K234 retain the selected original CCPU40 `VdmAllocateVirtualMemory` /
 MVDM-HOST-DIV-449: the original `W32Thread` passes the shared `BaseSrv` task
 number and 16-bit `HTASK` to `pfnInitTask`. The product's existing startup
 acknowledgement binds the opaque management ticket after that acknowledgement
-succeeds. Retire that ticket only from the
-same original owner's `W32DestroyTask`, after original `W32FreeTask`,
-`ExitVDM` and `pfnWOWCleanup` retain their normal ordering.  The adapter holds
-only `{ticket, HTASK}` for an authenticated NTSRV close request and invokes
-the original local hung-task entry on a new local thread because that original
-entry exits its caller.  It neither owns a task scheduler nor substitutes a
-PID/request number for `HTASK`; guest sources and semantics are unchanged.
+succeeds. BaseClient associates the ticket with the original task ID and
+`HTASK` and removes it at the original `ExitVDM` call. NTSRV clears its own
+ticket in the exit transaction. The WOW32 adapter resolves an authenticated
+close request through BaseClient and invokes the original hung-task entry on
+a local thread because that entry exits its caller.
 The two user-cancel exits in `W32HungAppNotifyThread` leave the task alive and
 report `ERROR_CANCELLED` through the native thread result. The starter reopens
 the original authenticated ticket for a later request.

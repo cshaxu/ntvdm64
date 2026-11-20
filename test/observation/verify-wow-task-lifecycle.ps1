@@ -615,7 +615,7 @@ if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
     if (!$bridgeCompile) { throw 'Missing production registration bridge compile command' }
     $bridgeFixture = $bridgeCompile -replace '/Fo\S+\s+\S+wow_user_registration_bridge\.c$', ('/Fo"'+$out+'\registration-bridge-fixture.obj" "'+$repo+'\src\wow32-dll\source\wow_user_registration_bridge.c"')
     if ($bridgeFixture -eq $bridgeCompile) { throw 'Registration bridge fixture substitution failed' }
-    Invoke-Build ($bridgeFixture + ' /DOpenNtBaseClientWowStarted=wow_fixture_OpenNtBaseClientWowStarted /Dwow_task_termination_bind=wow_fixture_task_termination_bind')
+    Invoke-Build ($bridgeFixture + ' /DOpenNtBaseClientWowStarted=wow_fixture_OpenNtBaseClientWowStarted /DOpenNtBaseClientBindWowTask=wow_fixture_OpenNtBaseClientBindWowTask')
     $bridgeObjects = @($objects | Where-Object {
         $_ -match '[\\/]wow32-dll[\\/]wow_user_registration_bridge\.obj$'
     })

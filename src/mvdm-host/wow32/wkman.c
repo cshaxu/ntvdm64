@@ -32,7 +32,6 @@
 #line 30
 #include "wowfax.h"
 extern VOID WINAPI W32ExitWowProcess(DWORD exit_code);
-extern VOID WINAPI wow_task_termination_retire(USHORT htask);
 #include "wow_idle_hook_binding.h"
 #include <compat/include/wow_registry.h>
 
@@ -1708,8 +1707,6 @@ VOID W32DestroyTask( PTD ptd)
     if (!(ptd->dwFlags & TDF_TASKCLEANUPDONE)) {
         (pfnOut.pfnWOWCleanup)(HINSTRES32(ptd->hInst16), (DWORD) ptd->htask16, NULL, 0);
     }
-
-    wow_task_termination_retire(ptd->htask16);
 
     // Remove this task from the linked list of tasks
 

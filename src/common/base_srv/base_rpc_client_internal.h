@@ -9,4 +9,6 @@ common_rpc_connection OpenNtBaseClientExecutionConnection(void (*cleanup)(void))
 /* Borrowed process identity and optional server wait handle; no ownership
  * transfer and no role/instance state is stored by this accessor. */
 common_rpc_connection OpenNtBaseClientControlConnection(HANDLE *server);
+/* Release the local management binding on original WOW ExitVDM. */
+void OpenNtBaseClientForgetWowTask(ULONG task);
 #endif
