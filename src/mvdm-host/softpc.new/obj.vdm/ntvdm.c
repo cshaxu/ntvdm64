@@ -33,9 +33,9 @@ PCPUENVVAR CpuEnvVarListHead=NULL;
 #line 29
 
 
-INT host_main(INT argc, CHAR **argv);  // located in base\support\main.c
+INT host_main(INT *argc, CHAR **argv);  // located in base\support\main.c
 
-_CRTAPI1 main(int argc, CHAR ** argv)
+_CRTAPI1 mvdm_softpc_prepare(int *argc, CHAR ** argv)
 {
    int ret=-1;
 

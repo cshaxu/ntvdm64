@@ -109,7 +109,8 @@ GLOBAL int *pargc;	/* Pointer to argc		*/
 /* Does this host need to have a different entry point ? */
 
 #if defined(NTVDM) || defined(host_main)
-INT host_main IFN2(INT, argc, CHAR **, argv)
+INT host_main IFN2(INT *, argc, CHAR **, argv)
+#line 96
 #else   /* host_main */
 #line 97
 #error Unsupported excluded original configuration
@@ -151,7 +152,8 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
  *								       *
  ***********************************************************************/
 
-  pargc = &argc;
+  pargc = argc;
+#line 134
   pargv = argv;
 
 #if !defined(NTVDM) && !defined(macintosh) && !defined(VMS)
@@ -178,7 +180,7 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 151
-  host_applInit(argc,argv);	/* recommended home is host/xxxx_reset.c */
+  host_applInit(*argc,argv);	/* recommended home is host/xxxx_reset.c */
 
 #ifdef SECURE
 #line 154
@@ -314,9 +316,15 @@ INT host_main IFN2(INT, argc, CHAR **, argv)
  * Initialise VDDs, Read in the Dos ntio.sys file and arrange for the cpu
  * to start execution at it's initialisation entry point.
  */
-    InitialiseDosEmulation(argc, argv);
+    InitialiseDosEmulation(*argc, argv);
 #endif	/* NTVDM */
 
+  return 0;
+}
+
+INT softpc_run_initialized(void)
+{
+#line 309
 /*
  * simulate the Intel 8088/iAPX286 cpu
  *-------------------------------------*/

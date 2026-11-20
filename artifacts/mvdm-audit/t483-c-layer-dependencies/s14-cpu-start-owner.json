@@ -1,0 +1,176 @@
+{
+  "packet": "M0 T483 S14 P127",
+  "parent": "4f7ff9950e5fd306f83ce0b31e893cf9e7e44dbd",
+  "eliminated_C_ids": [
+    "C0317"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 557,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "open": 11
+  },
+  "outward_B_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 4
+  },
+  "outward_C_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 8
+  },
+  "remaining_C_by_kind": {
+    "image-import": 1,
+    "symbol": 10
+  },
+  "boundary": "Original timer initialization stays before the original filter. C initializes and returns success; the F production entry activates its listeners and then calls C's CPU and close sequence under the same original filter. Failure to return initialization success bypasses activation and CPU execution. The original pargc points to F entry's live argc until shutdown. No new callbacks or process lifetime authority.",
+  "mirror": {
+    "upstream_commit": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "counting": "Difference blocks and inserted plus deleted lines vs fixed OpenNT; excluded code and #error unchanged; per-file columns are [points, lines].",
+    "delta": [
+      4,
+      16
+    ],
+    "files": {
+      "base/support/main.c": {
+        "baseline_sha256": "b0d3798787fd785992e48c03eacefb1422b16198abba10b8b6eb1a4cc1655178",
+        "before": [
+          64,
+          180
+        ],
+        "after": [
+          68,
+          196
+        ],
+        "delta": [
+          4,
+          16
+        ]
+      },
+      "host/src/nt_cpu.c": {
+        "baseline_sha256": "ecbb9f7d93ce741af480b59d1c5a9a6e875d5bb974bb4f147ce742946f901f13",
+        "before": [
+          34,
+          142
+        ],
+        "after": [
+          32,
+          138
+        ],
+        "delta": [
+          -2,
+          -4
+        ]
+      },
+      "obj.vdm/ntvdm.c": {
+        "baseline_sha256": "ad5898bd47082cd788bcc6fb81d7be13bdb454ad2ce101ad9a124e82514ee9ee",
+        "before": [
+          15,
+          31
+        ],
+        "after": [
+          17,
+          35
+        ],
+        "delta": [
+          2,
+          4
+        ]
+      }
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "177f7c82-c37d-444c-aa18-accd19da725f",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "cached_builds": [
+      "x86 product targets",
+      "x64 product targets",
+      "x86 worker reference"
+    ],
+    "linked_boundary": [
+      "C nt_cpu references CPU simulation and does not reference NtvdmActivateLifecycle",
+      "F relocation order: original preparation, own activation, original CPU/close body",
+      "original filter retained for both scopes"
+    ],
+    "ccpu": [
+      "sas-init",
+      "SIM32_FLUSH_CONTRACT_OK ram=1 missing_scratch=1 paired_write=1 stale_overwrite=1 count_not_extent=1",
+      "cpu-init",
+      "CCPU_REGISTER_VIEWS_AX_AL_AH_IP_EIP_CF_OK",
+      "SOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2",
+      "seed",
+      "start",
+      "returned-start",
+      "reenter",
+      "returned-recursive",
+      "DOS_LOW_PAGE_ALIAS_COUNTEREXAMPLE_OK original_wrong=1 lease_correct=1",
+      "CCPU_SAS_PROVIDER_PREFLIGHT_NO_PARTIAL_WRITE_OK",
+      "CCPU_LEASE_RESOURCE_OWNERSHIP_OK",
+      "CCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK"
+    ],
+    "integrations": [
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+      "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+      "PASS shared worker 24436, two distinct tasks overlapped and retired independently, both requests exited normally",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS DOS Get replaces previous request on resident-worker reuse",
+      "PASS WOW request/worker rejects valid character frontend/context without changing original WOW Get/Exit",
+      "PASS WOW task close binds opaque management identity, delivers once, retries only on later intent and retires safely",
+      "PASS WOW startup authentication, wait-only notification and immediate-completion latch",
+      "PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected",
+      "PASS reused WOW receipt mismatch, retired task and worker reuse checked",
+      "PASS failed WOW completion has no startup acknowledgement; late report rejected",
+      "PASS closing original WOW head rejects new task without publishing a record",
+      "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+    ],
+    "console_close": [
+      "PASS callback",
+      "PASS hung-callback",
+      "PASS pipe-error",
+      "PASS service-default",
+      "PASS service-native-worker",
+      "PASS service-native-backend",
+      "PASS service-frontend-root",
+      "PASS service-native-command",
+      "PASS service-frontend-unclaimed-stop",
+      "PASS service-frontend-unclaimed-reconnect",
+      "PASS service-frontend-delegated",
+      "PASS service-management-late-worker-close",
+      "PASS service-frontend-wait-root-loss",
+      "PASS service-frontend-wait-request-loss",
+      "PASS service-frontend-wait",
+      "PASS service-frontend-wait-worker-loss",
+      "PASS service-frontend-rundown",
+      "PASS service-reenter-before-return",
+      "PASS service-reenter-after-return",
+      "PASS service-reenter-nested-return",
+      "PASS service-reenter-pending-command",
+      "PASS service-reenter-before-increment",
+      "PASS service-launcher-completed-rundown",
+      "PASS service-launcher-completed-uncollected",
+      "PASS service-completed-worker-loss",
+      "PASS service-completed-worker-exit",
+      "PASS service-unfinished-worker-exit",
+      "PASS service-management-terminate",
+      "PASS service-launcher-exit-survival",
+      "PASS service-launcher-disconnect-survival",
+      "PASS service-completion-rundown-race",
+      "PASS service-wow-start-late-query",
+      "PASS service-console-identity"
+    ],
+    "limitation": "Existing focused tests only. No standalone-worker activation fault was injected."
+  }
+}

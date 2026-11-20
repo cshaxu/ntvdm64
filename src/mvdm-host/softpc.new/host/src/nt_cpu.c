@@ -72,12 +72,8 @@ GLOBAL	IHPE Length_of_M_area;
 	we are running a software emulation, or if a 486 is present,
 	starts up this emulation.
 */
-extern void NtvdmActivateLifecycle(void);
-#line 72
 void	host_start_cpu()
 {
-  NtvdmActivateLifecycle();
-#line 74
   cpu_simulate ();
 }
 

@@ -61,17 +61,12 @@ P109 [Native publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s
 P110 [Input terminal signals](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-input-terminal-owner.json) delivered C -1.
 P111 [CCPU thread exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-ccpu-thread-exit-owner.json) delivered C -1.
 P126 [C header closure](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-c-header-closure.json) delivered C -2.
-Delivered: B 6 known calls; C 12 open (11 functions, 1 image).
+P127 [CPU start ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-cpu-start-owner.json) delivered C -1.
+Delivered: B 6 known calls; C 11 open (10 functions, 1 image).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
-removes its product-session header and three F function dependencies; the same
-B host context owns identity and cleanup. No new state or callbacks; mirror0/0.
-Cached full builds and dual11 publication passed, package`8ddbc9d8-11ae-433d-b4bf-38b70d7dd58d`.
-Actual imports, real CCPU page/borrow/terminal tests, real Win16 dialog8 phases
-and eight A/B product graphs passed. Closed-registration rollback and foreign
-context rejection now have fixture coverage. Ledger remains182/386: this is
-implementation preparation, not C provider relocation. Final governance and
-enclosing P75 commit/push provide the delivery receipt.
+moves the page-domain identity and cleanup into B, removing the product header
+and three F calls. Mirror delta 0/0. Build, publication and focused gates are recorded in the linked evidence.
 The [compiled publication cut](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-publication-cut-impact.json)
 prioritizes menu104/window103 reachable roots (overlapping); preserve original
 metadata/commit ownership and capture/lookup failure ordering in the next cut.

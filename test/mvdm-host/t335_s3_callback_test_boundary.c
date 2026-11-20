@@ -18,11 +18,6 @@ __declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *stage, 
     abort();
 }
 
-void NtvdmActivateLifecycle(void)
-{
-    abort(); /* host_start_cpu is outside this bounded transaction */
-}
-
 /* Original termination diagnostics reference DPMI state even when tracing
  * is disabled; this real-mode fixture does not create a DPMI address space. */
 void *Ldt;

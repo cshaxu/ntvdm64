@@ -5,8 +5,8 @@
 extern void host_start_cpu(void);
 extern void host_applClose(void);
 
-/* The bounded execution fixture starts directly at host_start_cpu(), unlike
- * the original ntvdm.c -> host_main path.  It therefore retains this original
+/* The bounded execution fixture starts directly at host_start_cpu(), outside
+ * the standalone worker's original host initialization path.  It therefore retains this original
  * close cohort after that fixture-only entry returns. */
 static void mvdm_softpc_execution_close_original_host(void)
 {

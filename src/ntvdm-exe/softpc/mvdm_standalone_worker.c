@@ -214,8 +214,25 @@ fail:
     return error;
 }
 
-/* The worker build binds only the original SoftPC entry unit to this name. */
-int __cdecl mvdm_softpc_main(int argc, char **argv);
+int __cdecl mvdm_softpc_prepare(int *argc, char **argv);
+int softpc_run_initialized(void);
+LONG VdmUnhandledExceptionFilter(PEXCEPTION_POINTERS exception);
+
+static int run_softpc(int *argc, char **argv)
+{
+    int result = mvdm_softpc_prepare(argc, argv);
+    if (result != 0)
+        return result;
+
+    result = -1;
+    __try {
+        NtvdmActivateLifecycle();
+        result = softpc_run_initialized();
+    }
+    __except (VdmUnhandledExceptionFilter(GetExceptionInformation())) {
+    }
+    return result;
+}
 
 int main(int argc, char **argv)
 {
@@ -226,7 +243,7 @@ int main(int argc, char **argv)
         return (int)error;
 
     if (setjmp(worker_session.termination_escape) == 0)
-        result = mvdm_softpc_main(argc, argv);
+        result = run_softpc(&argc, argv);
     else
         result = (int)worker_session.completion_code;
 

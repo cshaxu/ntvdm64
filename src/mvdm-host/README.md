@@ -1058,6 +1058,14 @@ Before this boundary, startup failure obtains service permission then releases
 only owned partial startup resources; it does not invoke the original Console
 handler. Activation failure after the boundary enters original TerminateVDM.
 
+T483 S14 P127 restores the original CPU start body. The original NTVDM
+entry now returns after DOS initialization, and the standalone worker starts
+its lifecycle listeners before calling the original CPU/close sequence.
+The original exception filter still covers preparation and execution, with
+timer initialization outside both scopes. The standalone entry keeps the
+argc storage valid through CPU execution and cleanup.
+
+
 MVDM-HOST-DIV-355 (T448 S3 P18): original OpenNT
 base/mvdm/softpc.new/host/src/nt_event.c routes COMMAND fTSRExit by cleaning
 the worker and posting WM_CLOSE to its Console window. The admitted standalone

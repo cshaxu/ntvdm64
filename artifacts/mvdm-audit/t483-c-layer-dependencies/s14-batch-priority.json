@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "eliminated": 556,
+    "eliminated": 557,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "open": 12
+    "open": 11
   },
   "provider_groups": [
     {
@@ -44,12 +44,10 @@
       "kind": "symbol",
       "provider": "src/ntvdm-exe/win32/worker_lifecycle.c",
       "open_ids": [
-        "C0317",
         "C0318"
       ],
-      "count": 2,
+      "count": 1,
       "symbols": [
-        "NtvdmActivateLifecycle",
         "ntvdm_worker_lifecycle_authorize_exit"
       ]
     },
@@ -163,5 +161,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P126"
+  "updated_by": "T483 S14 P127"
 }
