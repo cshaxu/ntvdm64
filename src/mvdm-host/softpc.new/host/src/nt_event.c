@@ -77,13 +77,13 @@
 #include "yoda.h"
 #include "nt_ega.h"
 #include "compat/include/mvdm_softpc_mouse_guest.h"
-#include "worker-base/connection.h"
+extern DWORD worker_base_request_console_exit(void);
 #include "compat/include/mvdm_softpc_event_thread.h"
 #include "compat/include/mvdm_keyboard_history.h"
 #include "compat/include/console_input.h"
 #include "compat/include/console_text.h"
 #include "mvdm_softpc_text_video.h"
-#include "ntvdm-exe/win32/console_client.h"
+extern BOOL ntvdm_console_set_active(BOOL active);
 extern void mouse_pointer_route_changed(int);
 extern BOOL nt_init_called;
 extern unsigned PendingKeyboardHistory(void);

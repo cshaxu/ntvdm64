@@ -50,7 +50,7 @@
 #include "nt_uis.h"
 #include "nt_com.h"
 #include "nt_reset.h"
-#include "ntvdm-exe/win32/worker_lifecycle.h"
+extern void ntvdm_worker_lifecycle_authorize_exit(void);
 #line 51
 #include "nt_event.h"
 #include "nt_fulsc.h"

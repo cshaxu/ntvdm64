@@ -1,0 +1,125 @@
+{
+  "packet": "M0 T483 S14 P124",
+  "baseline": "d7cf576bec85ff855d2f19e3690a7444073a9102",
+  "eliminated_C_header_ids": [
+    "C0052",
+    "C0057",
+    "C0060"
+  ],
+  "eliminated_C_implementation_ids": [],
+  "retained_provider_point_ids": {
+    "C0052": "C0289",
+    "C0057": "C0318",
+    "C0060": "C0321"
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 554,
+    "open": 14,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 4
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 2,
+    "image-import": 1,
+    "symbol": 11
+  },
+  "remaining_C_by_provider": {
+    "common": 2,
+    "wow32-dll": 7,
+    "ntvdm-exe": 4,
+    "worker-base": 1
+  },
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "scope": "Three existing added lines replaced in place; #error and #line untouched."
+  },
+  "compiler_closure": {
+    "msvc-x86-release/worker/nt_event": {
+      "removed_headers": [
+        "worker-base/connection.h",
+        "ntvdm-exe/win32/console_client.h"
+      ],
+      "outer_headers": []
+    },
+    "msvc-x64-release/worker-reference-x86/nt_event": {
+      "removed_headers": [
+        "worker-base/connection.h",
+        "ntvdm-exe/win32/console_client.h"
+      ],
+      "outer_headers": []
+    },
+    "msvc-x86-release/worker/nt_reset": {
+      "removed_headers": [
+        "ntvdm-exe/win32/worker_lifecycle.h"
+      ],
+      "outer_headers": []
+    },
+    "msvc-x64-release/worker-reference-x86/nt_reset": {
+      "removed_headers": [
+        "ntvdm-exe/win32/worker_lifecycle.h"
+      ],
+      "outer_headers": []
+    },
+    "text_compare": {
+      "prior_release": "d16e0f0e4436709988d155476ce59567ceadfae70b2624ae03f377d061b13f6d",
+      "candidate": "d3722d3d99d195530bff257ca0265e10864e45faf426d8476568a1f36364c869",
+      "identical": false
+    },
+    "relocation_comparison": {
+      "same_relocation_table": true,
+      "sections": {
+        ".text": {
+          "changed_bytes": 191,
+          "outside_highlow": 0,
+          "modified_highlow_slots": 145
+        },
+        ".rdata": {
+          "changed_bytes": 2,
+          "outside_highlow": 2,
+          "modified_highlow_slots": 0,
+          "debug_link_timestamp_only": true
+        },
+        ".data": {
+          "changed_bytes": 52,
+          "outside_highlow": 52,
+          "modified_highlow_slots": 0,
+          "initialized_values_identical_modulo_order": true,
+          "moved_symbol": "_event_thread_blocked_reason",
+          "old_rva": "0x1bc04c",
+          "new_rva": "0x1bc0bc",
+          "following_data_shift_bytes": -4
+        }
+      }
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "08cd4136-dfb6-4206-8d89-6b731433f715",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": [
+    "PASS real DOS and native CUI input after repeated source entry",
+    "PASS real DOS and native CUI input after repeated source entry",
+    "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion"
+  ],
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "boundary.out": "2a475a849df5670f4f259c0b82347d3493314a3e3f01147286fcccb71e8f7ea7",
+    "probes.out": "5d63ad9e386f0c6b2a516e19cd360eba31e32e66a278ee6797470aa181bcb8fd",
+    "final-checks.out": "73e35aaddc05b869a5fb95518e1165adec4f30d48e37248ad795395c4ad92727",
+    "source-handoff/result.json": "83b92798ef19cba57cc262d4d1a829dd5928586c0ffa561d2c9bbc6f27059f57",
+    "window-close/result.json": "5d6c61e97805b609ce1e28f97c756bfccd7de3a221e5214472d2154e65202f5c"
+  }
+}
