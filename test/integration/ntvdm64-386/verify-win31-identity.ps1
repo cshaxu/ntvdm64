@@ -110,6 +110,17 @@ $copy=& "$PSScriptRoot/New-Win31ProbeCopy.ps1" -DriverImage $DriverImage -Instal
 $task=$copy.Task; $source=$copy.Source; $dest=$copy.Destination; $original=$copy.Original
 try {
 $enc=[Text.Encoding]::GetEncoding(28591)
+$patch=Join-Path $dest 'PATCH'
+$config=Join-Path $patch 'CONFIG.NT'
+$autoexec=Join-Path $patch 'AUTOEXEC.NT'
+$configText=[regex]::Replace($enc.GetString([IO.File]::ReadAllBytes($config)),
+ '(?im)^[ \t]*dosonly[ \t]*(?:\r?\n|$)','')
+if($RuntimeCase -eq '386-dosonly1'){$configText+="`r`ndosonly`r`n"}
+[IO.File]::WriteAllBytes($config,$enc.GetBytes($configText))
+& "$repo/assets/release/PIF.EXE" create "$patch/WIN.PIF" --title 'Windows 3.1 386 Enhanced' `
+ --program "$dest\WIN.COM" --directory $dest --arguments /3 --config $config --autoexec $autoexec `
+ --close-on-exit --w386-max-xms 65535 --w386-flags 0x1003 --nt31-flags 1 | Out-Host
+if($LASTEXITCODE){throw 'Enhanced probe launch profile creation failed'}
 if($ExplicitVmd){
  $system="$dest/SYSTEM.INI"
  $iniText=$enc.GetString([IO.File]::ReadAllBytes($system))
@@ -349,7 +360,7 @@ try {
  if($ServiceLoss -or $WorkerCloseMonitor){$retirementOptions.ServiceLossMarkers=@("$dest\PATCH\HOLD-A.txt","$dest\PATCH\HOLD-B.txt")}
  if($WorkerCloseMonitor){$retirementOptions.WorkerCloseMonitor=$WorkerCloseMonitor;$retirementOptions.ConsoleClose=$ConsoleClose}
  if($RetireCommand){$retirementOptions.RetiredNativeCommandMarker="$dest\PATCH\NATIVE.OK"}
- & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/controller.exe" -TimeoutMs 90000 -Cases $RuntimeCase @retirementOptions
+ & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/controller.exe" -TimeoutMs 90000 -Cases $RuntimeCase @retirementOptions
  if($LASTEXITCODE){throw 'Guest matrix runner failed'}
  if($ServiceLoss -or $WorkerCloseMonitor){
   'PASS actual Win3.1 VM native chains retire after selected lifecycle action; no normal-exit claim'

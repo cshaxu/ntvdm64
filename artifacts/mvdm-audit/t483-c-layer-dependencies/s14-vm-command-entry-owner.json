@@ -1,0 +1,99 @@
+{
+  "packet": "M0 T483 S14 P115",
+  "baseline": "d9d3ebb0c20722b2257e8d7d4414a55c3ca3fd2e",
+  "eliminated_C_ids": [
+    "C0255"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 542,
+    "open": 26,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 5
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 8,
+    "image-import": 1,
+    "symbol": 17
+  },
+  "remaining_C_by_provider": {
+    "common": 3,
+    "ntvdm-exe": 10,
+    "worker-base": 2,
+    "wow32-dll": 8,
+    "ntsrv-exe": 3
+  },
+  "authority": "C retains the actual far-call and CPU semantics. B owns the registered guest target, concurrent read/reset/bind semantics and machine-entry adapter. F validates registration and owns request admission, submission, and lifecycle.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "reverse_C_provider_abi": [
+    "c_getVM",
+    "c_getIP",
+    "c_setIP",
+    "CALLF",
+    "host_ica_lock",
+    "host_ica_unlock"
+  ],
+  "test_fixture_repair": "Generate the supported single WIN.PIF for the owned copy and rearm the command tail CR before each reuse. Before rearming, both P114 and P115 failed the second 54:08 launch; the recorded AH=1/EAX=5432010B is consistent with ERROR_BAD_FORMAT from the now-unterminated DOS tail. After rearming, P114 and P115 both pass the native cases.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "5a8308e6-50af-48ca-aa70-879878e66965",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "scope": "cached x86/x64/reference builds; actual worker link ownership, VM ingress/notification unit tests, dual publication and 22 hashes, Win3.1 386 production command continuations from two DOS VMs for services 08 and 0A",
+    "runtime_output": [
+      "CHANGED=0",
+      "CHANGED=0",
+      "CHANGED=1",
+      "CHANGED=13",
+      "CHANGED=2",
+      "CHANGED=6",
+      "CHANGED=0",
+      "",
+      "386-dosonly0: started=True desktop-and-mode=True normal-exit=True pass=True",
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested",
+      "Original Windows installation bytes verified unchanged",
+      "comspec-exit.c",
+      "CHANGED=0",
+      "CHANGED=0",
+      "CHANGED=1",
+      "CHANGED=13",
+      "CHANGED=2",
+      "CHANGED=6",
+      "CHANGED=0",
+      "",
+      "386-dosonly0: started=True desktop-and-mode=True normal-exit=True pass=True",
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS production 54:0A with short-lived test COMSPEC in both DOS VMs; interactive input untested",
+      "Original Windows installation bytes verified unchanged"
+    ]
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "91f97245b68df7007cccb16d536627d3236c88388ec2e684a657cfe0f20c544e",
+    "boundary.out": "8bcbfabaad33bc841712d67a848ac890f2bd6ce9e1760c550cca480d50a574fe",
+    "baseline-fixed.out": "50fee02e66f50f34c9ef98961ea28ea450911ff25779eb365c4f3f353258570b",
+    "native-diagnostic.out": "2ec43e4829f563f3a921e3d61f098a8e35b2152af1a5f9abb8941b7a7893b931",
+    "probes.out": "f9478e6e513d98d155d7737d4e8c625ea7aee2088d01c7a061fbd76ba1d6a0ae",
+    "final-checks.out": "1bff0f933ae18e62015b3561d4fae44cde052745e22905a2be83ada69afe50e6",
+    "win31-native-fixed/runtime/vm-pair.json": "96483347197e4d0c803ebf56a09ae969e60f7cd530c81339123dbf6798c3eae3",
+    "win31-comspec-fixed/runtime/vm-pair.json": "56c94756e070d8e072f2e2ce312ce5cd674a619314c889290932338861418f93"
+  }
+}

@@ -25,7 +25,8 @@ add_test(NAME mvdm-vm-execute COMMAND mvdm-vm-execute-test)
 set_tests_properties(mvdm-vm-execute PROPERTIES TIMEOUT 30)
 
 add_executable(mvdm-vm-ingress-test mvdm_vm_ingress_test.c
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_ingress.c")
+  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_ingress.c"
+  "${CMAKE_SOURCE_DIR}/src/compat/mvdm_vm_command_entry.c")
 target_include_directories(mvdm-vm-ingress-test PRIVATE
   "${CMAKE_SOURCE_DIR}/src" "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/include")
 target_compile_options(mvdm-vm-ingress-test PRIVATE /W4 /WX)

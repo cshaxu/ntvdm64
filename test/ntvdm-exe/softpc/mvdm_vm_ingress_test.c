@@ -5,16 +5,17 @@
 #include <stdlib.h>
 
 static unsigned checks, calls, stage, destroyed, texts, captured;
-static uint32_t vm_mode, far_target[2];
+static int vm_mode;
+static unsigned long far_target[2];
 static uint16_t ip, return_ip;
 static BOOL available = TRUE, open = TRUE;
 #define CHECK(x) do { ++checks; if (!(x)) { fprintf(stderr,"FAIL %u: %s\n",__LINE__,#x); exit(1); } } while (0)
 void host_ica_lock(void) {}
 void host_ica_unlock(void) {}
-uint32_t c_getVM(void) { return vm_mode; }
+int c_getVM(void) { return vm_mode; }
 uint16_t c_getIP(void) { return ip; }
 void c_setIP(uint16_t value) { ip = value; }
-void CALLF(uint32_t target[2])
+void CALLF(unsigned long target[2])
 { ++calls; return_ip = ip; far_target[0] = target[0]; far_target[1] = target[1]; ip = (uint16_t)target[0]; }
 mvdm_vm_executor *mvdm_standalone_worker_executor(void)
 { return available ? (mvdm_vm_executor *)1 : NULL; }

@@ -197,7 +197,20 @@ push dword 0x22222222
 push dword 0x11111111
 %endif
 mov [standard_offset], sp
+mov di, test_command
+mov cx, test_command_end - test_command
+.find_tail_end:
+cmp byte [di], 13
+je .tail_ready
+inc di
+loop .find_tail_end
+jmp .fail
+.tail_ready:
+mov [test_command_cr], di
 %macro continuation_case 1-2 0
+; cmdExec consumes the CR in place. Every call supplies a fresh DOS tail.
+mov di, [test_command_cr]
+mov byte [di], 13
 %ifdef GUEST_CODEPAGE
 mov word [codepage_stage], 1
 mov ax, 0x6601
@@ -1385,6 +1398,8 @@ test_command: db 'cmd /c exit 37',13
 %else
 test_command: db 'echo X',13
 %endif
+test_command_end:
+test_command_cr: dw 0
 align 16, db 0
 %ifdef REAL_COMMAND
 test_environment: db '@VM_ENVIRONMENT@',0
