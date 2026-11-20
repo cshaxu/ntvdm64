@@ -283,7 +283,7 @@ $compatSoftpcNames = @('mvdm_softpc_text_video.c','mvdm_softpc_firmware.c')
 $compatCpuAdapterNames = @('mvdm_keyboard_reset.c','mvdm_softpc_descriptor_fields.c')
 $compatMouseNames = @('mvdm_softpc_mouse_input.c','mvdm_softpc_mouse_bridge.c','mvdm_softpc_mouse_guest.c')
 $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c',
-                         'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
+                         'mvdm_softpc_execution.c',
                          'mvdm_vm_notification.c',
                          'mvdm_vm_wake.c',
                          'mvdm_vm_continuation.c', 'mvdm_vm_command.c', 'mvdm_vm_application.c', 'mvdm_vm_execute.c', 'mvdm_vm_io.c', 'mvdm_vm_executor.c', 'mvdm_vm_ingress.c',
@@ -1267,6 +1267,9 @@ $adapterSoftpcObjects += 'obj/compat/vm_services.obj'
 $graph.Add('build obj/compat/mvdm_vm_command_entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_vm_command_entry.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/mvdm_vm_command_entry.obj'
+$graph.Add('build obj/compat/mvdm_softpc_termination.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_termination.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$adapterSoftpcObjects += 'obj/compat/mvdm_softpc_termination.obj'
 $graph.Add('build obj/compat/host_context.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/host_context.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/host_context.obj'

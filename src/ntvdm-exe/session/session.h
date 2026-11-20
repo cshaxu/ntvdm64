@@ -8,7 +8,7 @@
 #include "compat/include/host_context.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
-#define SESSION_ABI_VERSION UINT32_C(13)
+#define SESSION_ABI_VERSION UINT32_C(14)
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
 #define SESSION_FIRMWARE_ROOT_BYTES COMPAT_MVDM_SYSTEM_ROOT_BYTES
@@ -77,7 +77,6 @@ typedef struct session {
     uint32_t cancellation_reason;
     uint32_t machine_backend;
     uint32_t thread_hook_count;
-    uint32_t termination_armed;
     volatile long binding_count;
     volatile long binding_softpc_entry_count;
     volatile long binding_original_worker_count;
@@ -142,7 +141,6 @@ int session_binding_diagnostic_snapshot(const session *instance,
     session_binding_diagnostic *diagnostic_out);
 int session_arm_termination_escape(session *instance);
 void session_disarm_termination_escape(session *instance);
-int session_terminate_current(uint32_t completion_code);
 
 #ifdef __cplusplus
 }

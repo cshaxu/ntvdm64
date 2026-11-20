@@ -8,7 +8,7 @@
 #include <windows.h>
 
 #include "nt.h"
-#include "mvdm_softpc_termination.h"
+#include "compat/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/session/session.h"
 #include "wow_hard_error_dialog.h"
 

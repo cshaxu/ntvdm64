@@ -2,6 +2,7 @@
 #define COMPAT_HOST_CONTEXT_H
 
 #include <stdint.h>
+#include <setjmp.h>
 
 struct guest_memory_lease_context;
 struct mvdm_mouse_bridge;
@@ -32,6 +33,8 @@ typedef struct compat_host_context {
     uint32_t cleanup_count;
     uint32_t state;
     uint32_t epoch; /* Activation generation, advanced by the composing owner. */
+    jmp_buf *escape_stack;
+    uint32_t *escape_result;
     void *mvdm_command_native_child; /* Owned capture resource; registered cleanup. */
     void *mvdm_command_guest_state; /* Owned DOS directory registration. */
     /* Borrowed B resource; the composing owner controls its begin/end lifetime. */
@@ -53,6 +56,10 @@ compat_host_context *__cdecl compat_host_context_current(void);
 int compat_host_context_valid(const compat_host_context *context);
 int compat_host_context_bind(compat_host_context *context);
 int compat_host_context_unbind(compat_host_context *context);
+/* Borrow the initiating thread's stack and result until it disarms. */
+int compat_host_escape_arm(compat_host_context *context, jmp_buf *stack, uint32_t *result);
+void compat_host_escape_disarm(compat_host_context *context);
+int compat_host_escape_terminate_current(uint32_t result);
 int compat_host_context_register(compat_host_context *context,
     compat_host_cleanup_fn function, void *argument);
 /* Release registered resources in reverse order before the owner closes its

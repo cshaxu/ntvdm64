@@ -1,6 +1,5 @@
 #include "mvdm_softpc_execution.h"
 #include "mvdm_softpc_guest_memory.h"
-#include "mvdm_softpc_termination.h"
 
 /* Original SoftPC host spelling; its body remains in mvdm-host. */
 extern void host_start_cpu(void);

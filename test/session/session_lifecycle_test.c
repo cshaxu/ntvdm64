@@ -13,7 +13,7 @@ static DWORD WINAPI foreign_escape(void *context)
     if(!session_thread_bind(owner))return 1;
     if(session_arm_termination_escape(owner))return 2;
     session_disarm_termination_escape(owner);
-    if(!owner->termination_armed || session_terminate_current(99u))return 3;
+    if(!owner->host_context.escape_stack || compat_host_escape_terminate_current(99u))return 3;
     if(owner->host_context.state!=SESSION_STATE_ACTIVE || owner->completion_code ||
         !wow_user_worker_active())return 4;
     return session_thread_unbind(owner) ? 0 : 5;
@@ -32,21 +32,21 @@ static int check_escape_owner(void)
         if(WaitForSingleObject(thread,5000)!=WAIT_OBJECT_0 ||
             !GetExitCodeThread(thread,&result))return 12;
         CloseHandle(thread);
-        if(result || !escape_owner.termination_armed)return 13;
-        (void)session_terminate_current(37u);
+        if(result || !escape_owner.host_context.escape_stack)return 13;
+        (void)compat_host_escape_terminate_current(37u);
         return 14;
     }
     if(escape_owner.host_context.state!=SESSION_STATE_COMPLETED ||
         escape_owner.completion_code!=37u || wow_user_worker_active())return 15;
     session_disarm_termination_escape(&escape_owner);
-    if(escape_owner.termination_armed || !session_thread_unbind(&escape_owner) ||
+    if(escape_owner.host_context.escape_stack || !session_thread_unbind(&escape_owner) ||
         !session_dispose(&escape_owner))return 16;
     /* Disarming must also release the thread-local ownership for reuse. */
     session_initialize(&escape_owner,404u);
     if(!session_activate(&escape_owner) || !session_thread_bind(&escape_owner) ||
         !session_arm_termination_escape(&escape_owner))return 17;
     session_disarm_termination_escape(&escape_owner);
-    if(session_terminate_current(99u) || !session_thread_unbind(&escape_owner) ||
+    if(compat_host_escape_terminate_current(99u) || !session_thread_unbind(&escape_owner) ||
         !session_dispose(&escape_owner))return 18;
     return 0;
 }

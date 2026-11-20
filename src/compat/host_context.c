@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 static __declspec(thread) compat_host_context *current_context;
+static __declspec(thread) compat_host_context *escape_context;
 
 int compat_host_context_valid(const compat_host_context *context)
 {
@@ -26,6 +27,36 @@ int compat_host_context_unbind(compat_host_context *context)
     if (context == NULL || current_context != context) return 0;
     current_context = NULL;
     return 1;
+}
+
+int compat_host_escape_arm(compat_host_context *context, jmp_buf *stack, uint32_t *result)
+{
+    if (!compat_host_context_valid(context) || context != current_context ||
+        context->state != COMPAT_HOST_CONTEXT_ACTIVE || context->escape_stack ||
+        escape_context || !stack || !result) return 0;
+    context->escape_stack = stack;
+    context->escape_result = result;
+    escape_context = context;
+    return 1;
+}
+
+void compat_host_escape_disarm(compat_host_context *context)
+{
+    if (context == NULL || context != escape_context) return;
+    context->escape_stack = NULL;
+    context->escape_result = NULL;
+    escape_context = NULL;
+}
+
+int compat_host_escape_terminate_current(uint32_t result)
+{
+    compat_host_context *context = current_context;
+    if (!context || context != escape_context || !compat_host_context_valid(context) ||
+        context->state != COMPAT_HOST_CONTEXT_ACTIVE || !context->escape_stack)
+        return 0;
+    *context->escape_result = result;
+    context->state = COMPAT_HOST_CONTEXT_COMPLETED;
+    longjmp(*context->escape_stack, 1);
 }
 
 int compat_host_context_register(compat_host_context *context,

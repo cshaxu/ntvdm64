@@ -1,0 +1,97 @@
+{
+  "packet": "M0 T483 S14 P117",
+  "baseline": "6b0571919083f2feb59e425bde4c2795f0c26e4c",
+  "eliminated_C_ids": [
+    "C0043",
+    "C0242"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 545,
+    "open": 23,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 5
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 7,
+    "image-import": 1,
+    "symbol": 15
+  },
+  "remaining_C_by_provider": {
+    "common": 3,
+    "ntvdm-exe": 8,
+    "worker-base": 2,
+    "wow32-dll": 8,
+    "ntsrv-exe": 2
+  },
+  "authority": "B owns the borrowed stack/result lifetime and current-thread check. B calls the original C host close before escape. F owns arming, the stack frame, completion result storage and package teardown.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "measured": {
+      "file": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "mirror_anchor_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
+      "before": {
+        "points": 25,
+        "lines": 140
+      },
+      "after": {
+        "points": 25,
+        "lines": 140
+      }
+    }
+  },
+  "compile_proof": {
+    "selected_owner": "softpc-bindings:mvdm_softpc_termination.obj and session:host_context.obj",
+    "original_close": "nt_reset.obj",
+    "original_file": "sim32.c"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "5645c639-f5a9-4f8b-ba3c-e58d946e3251",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "scope": "cached x86/x64/reference product builds; compile closure and owner maps in both x86 contexts, cross-thread session lifecycle fixture and exact B objects with an instrumented original-close seam, dual publication and 22 file hashes, governance and authenticated BaseSrv reservation fixture, real shared WOW dual-task exit and DOS/Win16 regressions",
+    "runtime_output": [
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+      "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+      "PASS shared worker 22484, two distinct tasks overlapped and retired independently, both requests exited normally",
+      "detached CheckDOS task=1 reservation-error=0",
+      "detached CheckDOS task=2 reservation-error=0",
+      "detached CheckDOS task=3 reservation-error=0",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS DOS Get replaces previous request on resident-worker reuse",
+      "PASS WOW request/worker rejects valid character frontend/context without changing original WOW Get/Exit",
+      "PASS WOW task close binds opaque management identity, delivers once, retries only on later intent and retires safely",
+      "PASS WOW startup authentication, wait-only notification and immediate-completion latch",
+      "PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected",
+      "PASS reused WOW receipt mismatch, retired task and worker reuse checked",
+      "PASS failed WOW completion has no startup acknowledgement; late report rejected",
+      "PASS closing original WOW head rejects new task without publishing a record",
+      "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+    ]
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "ec228b2624acb83cae2953155cfef2e2456508ca7db5b5e6cae73b3da1b25e63",
+    "boundary.out": "a3a5a36779e35e611d44c7eb7a825c391e6b307d517a784a8e900a726620b867",
+    "mirror-delta.json": "25ee0d4061cff0f1ed103c492244a5f41585be8d11f724bd2c1b203f0e463aef",
+    "probes.out": "37e860819a5885bf09a5b585be0d187fb7489cde204548fe9ba2bca307728e32",
+    "shared-wow/result.txt": "681d7d5289f37e937dbbacb4f76a6bb40cd323e54a508f582c698187c1ad7e39",
+    "final-checks.out": "87beacaf07347619c36ec62d74913da8d8e7d47b58a9b01d78a237e2d90b702c"
+  }
+}

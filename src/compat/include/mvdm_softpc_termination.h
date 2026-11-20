@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-/* End the bound session through its original host close and app-owned escape. */
+/* Close the original machine and return to the armed host stack. */
 int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
     uint32_t completion_code);
 

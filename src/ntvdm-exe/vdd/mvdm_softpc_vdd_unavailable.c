@@ -7,7 +7,7 @@
 
 #include <windows.h>
 
-#include "mvdm_softpc_termination.h"
+#include "compat/include/mvdm_softpc_termination.h"
 #include "ntvdm-exe/session/session.h"
 
 /* DIVERGENCE(ADAPTER-SOFTPC-034): retain the original VDD cleanup entrypoint

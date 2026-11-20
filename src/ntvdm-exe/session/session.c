@@ -7,8 +7,6 @@
 
 static __declspec(thread) uint32_t thread_binding_owner;
 static __declspec(thread) int thread_finishing;
-/* A saved C stack belongs to its arming thread, not every session binding. */
-static __declspec(thread) session *thread_termination_escape;
 
 static uint32_t session_binding_count(const session *instance)
 {
@@ -36,7 +34,6 @@ int session_valid(const session *instance)
         instance->machine_backend <= SESSION_MACHINE_BACKEND_SOFTPC &&
         compat_host_context_valid(&instance->host_context) &&
         instance->thread_hook_count <= SESSION_MAX_THREAD_HOOKS &&
-        instance->termination_armed <= 1u &&
         session_binding_count(instance) <= INT32_MAX &&
         guest_memory_lease_context_valid(&instance->guest_memory_lease);
 }
@@ -126,7 +123,7 @@ static uint32_t session_dispose_reason(const session *instance)
     if (!session_valid(instance)) return SESSION_DISPOSE_REASON_INVALID;
     if (session_binding_count(instance) != 0u)
         return SESSION_DISPOSE_REASON_BINDING_COUNT;
-    if (instance->termination_armed != 0u)
+    if (instance->host_context.escape_stack != NULL)
         return SESSION_DISPOSE_REASON_TERMINATION_ARMED;
     return SESSION_DISPOSE_REASON_NONE;
 }
@@ -295,34 +292,16 @@ int session_binding_diagnostic_snapshot(const session *instance,
 
 int session_arm_termination_escape(session *instance)
 {
-    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
-        session_thread_current() != instance || instance->termination_armed != 0u ||
-        thread_termination_escape != NULL)
+    if (!session_valid(instance) || session_thread_current() != instance)
         return 0;
-    thread_termination_escape = instance;
-    instance->termination_armed = 1u;
-    return 1;
+    return compat_host_escape_arm(&instance->host_context,
+        &instance->termination_escape, &instance->completion_code);
 }
 
 void session_disarm_termination_escape(session *instance)
 {
-    if (instance != NULL && instance == thread_termination_escape &&
-        session_valid(instance)) {
-        instance->termination_armed = 0u;
-        thread_termination_escape = NULL;
-    }
-}
-
-int session_terminate_current(uint32_t completion_code)
-{
-    session *instance = session_thread_current();
-    if (instance != thread_termination_escape ||
-        !session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
-        instance->termination_armed == 0u)
-        return 0;
-    instance->completion_code = completion_code;
-    instance->host_context.state = SESSION_STATE_COMPLETED;
-    longjmp(instance->termination_escape, 1);
+    if (session_valid(instance))
+        compat_host_escape_disarm(&instance->host_context);
 }
 
 static int session_set_root(session *instance, char *destination,
