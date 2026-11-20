@@ -10,7 +10,7 @@ mvdm_softpc_exit_handoff mvdm_softpc_exit_request;
 volatile LONG mvdm_softpc_exit_owner;
 BOOL mvdm_softpc_exit_original_ready;
 
-static DWORD exchange_exit(mvdm_softpc_exit_operation operation, DWORD *reply)
+DWORD mvdm_softpc_exchange_exit(mvdm_softpc_exit_operation operation, DWORD *reply)
 {
     mvdm_softpc_exit_handoff *exit = &mvdm_softpc_exit_request;
     DWORD status;
@@ -42,7 +42,7 @@ DWORD mvdm_softpc_request_console_exit(void)
     DWORD reply, error;
     if (!mvdm_softpc_input_terminal_events.console_close || !mvdm_softpc_exit_original_ready)
         return ERROR_INVALID_STATE;
-    error = exchange_exit(MVDM_EXIT_CONSOLE_GROUP, &reply);
+    error = mvdm_softpc_exchange_exit(MVDM_EXIT_CONSOLE_GROUP, &reply);
     return error ? error : reply;
 }
 
@@ -59,7 +59,7 @@ mvdm_softpc_exit_permission mvdm_softpc_wait_for_exit(void)
     if (previous == thread) return MVDM_EXIT_WORKER_GRANTED;
     if (!previous) {
         DWORD wake;
-        (void)exchange_exit(MVDM_EXIT_PARTICIPANT, &reply);
+        (void)mvdm_softpc_exchange_exit(MVDM_EXIT_PARTICIPANT, &reply);
         wake = WaitForMultipleObjects(count, waits, FALSE, INFINITE);
         if (wake == WAIT_OBJECT_0) return MVDM_EXIT_SERVICE_LOST;
         if (wake == WAIT_OBJECT_0 + 1) return MVDM_EXIT_WORKER_GRANTED;
@@ -78,7 +78,7 @@ DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code)
     /* This entry is the whole-WOW boundary and has no Console membership. */
     if (permission == MVDM_EXIT_CONSOLE_GRANTED) ExitProcess(ERROR_INVALID_STATE);
     if (permission != MVDM_EXIT_UNMANAGED) {
-        DWORD error = exchange_exit(permission == MVDM_EXIT_SERVICE_LOST ?
+        DWORD error = mvdm_softpc_exchange_exit(permission == MVDM_EXIT_SERVICE_LOST ?
             MVDM_EXIT_STATUS_ON_LOSS : MVDM_EXIT_STATUS, &reply);
         if (error) ExitProcess(error);
         if (reply == ERROR_INVALID_HANDLE) return reply;

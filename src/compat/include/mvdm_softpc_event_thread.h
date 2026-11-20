@@ -18,7 +18,9 @@ typedef enum mvdm_softpc_exit_operation {
     MVDM_EXIT_CONSOLE_GROUP,
     MVDM_EXIT_PARTICIPANT,
     MVDM_EXIT_STATUS,
-    MVDM_EXIT_STATUS_ON_LOSS
+    MVDM_EXIT_STATUS_ON_LOSS,
+    MVDM_EXIT_CLOSE_FRONTENDS,
+    MVDM_EXIT_CONSOLE_CONTROL
 } mvdm_softpc_exit_operation;
 typedef struct mvdm_softpc_exit_handoff {
     HANDLE request, completion;
@@ -39,6 +41,7 @@ typedef enum mvdm_softpc_exit_permission {
     MVDM_EXIT_CONSOLE_GRANTED
 } mvdm_softpc_exit_permission;
 mvdm_softpc_exit_permission mvdm_softpc_wait_for_exit(void);
+DWORD mvdm_softpc_exchange_exit(mvdm_softpc_exit_operation, DWORD *reply);
 DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 
 /* Preserve the original SoftPC event-worker cancellation direction, while

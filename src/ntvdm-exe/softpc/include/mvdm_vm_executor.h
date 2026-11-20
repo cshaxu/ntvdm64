@@ -8,6 +8,7 @@ typedef struct mvdm_vm_executor mvdm_vm_executor;
  * off CPU/ICA before closing/destroying the host. Closing cancels continuations
  * and joins admitted jobs; NTSRV still owns all child/chain termination. */
 DWORD mvdm_vm_executor_create(ntvdm_vm_host *, mvdm_vm_executor **);
+mvdm_vm_rundown *mvdm_vm_executor_rundown(mvdm_vm_executor *);
 void mvdm_vm_executor_close(mvdm_vm_executor *);
 void mvdm_vm_executor_destroy(mvdm_vm_executor *);
 /* CPU admission: independently prepared launch/text transfer only on success.

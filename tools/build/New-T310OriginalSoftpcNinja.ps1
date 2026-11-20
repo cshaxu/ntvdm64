@@ -277,7 +277,7 @@ $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
-$compatSoftpcNames = @('mvdm_softpc_text_video.c','mvdm_softpc_firmware.c','mvdm_vm_notification.c','mvdm_vm_wake.c')
+$compatSoftpcNames = @('mvdm_softpc_text_video.c','mvdm_softpc_firmware.c','mvdm_vm_notification.c','mvdm_vm_wake.c','mvdm_vm_continuation.c')
 $compatCpuAdapterNames = @('mvdm_keyboard_reset.c','mvdm_softpc_descriptor_fields.c')
 $compatMouseNames = @('mvdm_softpc_mouse_input.c','mvdm_softpc_mouse_bridge.c','mvdm_softpc_mouse_guest.c')
 $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c',
@@ -1234,7 +1234,7 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $sourceRoot = if ($mouseAdapter -or $name -in $compatSoftpcNames -or $cpuAdapter) { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sourceRoot $name)) + $selectedVideoInputs)
     $videoInclude = if ($name -eq 'v7_pointer_binding.c') { ' ' + $cvidcGeneratedInclude } else { '' }
-    $unitFlags = if ($cpuAdapter -or $name -eq 'mvdm_softpc_mouse_guest.c') { $compatCcpuFlags } elseif ($mouseAdapter -or $name -in @('mvdm_softpc_firmware.c','mvdm_vm_notification.c','mvdm_vm_wake.c')) { $libraryFlags } elseif ($textAdapter) { $compatTextVideoFlags } else { $authoredSoftpcFlags + $videoInclude }
+    $unitFlags = if ($cpuAdapter -or $name -eq 'mvdm_softpc_mouse_guest.c') { $compatCcpuFlags } elseif ($mouseAdapter -or $name -in @('mvdm_softpc_firmware.c','mvdm_vm_notification.c','mvdm_vm_wake.c','mvdm_vm_continuation.c')) { $libraryFlags } elseif ($textAdapter) { $compatTextVideoFlags } else { $authoredSoftpcFlags + $videoInclude }
     $graph.Add('  cflags = ' + $unitFlags)
     $object
 }
@@ -1303,6 +1303,9 @@ $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_keyboard_history.obj'
 $graph.Add('build obj/adapter-softpc/mvdm_softpc_event_thread.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_event_thread.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_softpc_event_thread.obj'
+$graph.Add('build obj/compat/mvdm_softpc_worker_exit.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_worker_exit.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterSoftpcObjects += 'obj/compat/mvdm_softpc_worker_exit.obj'
 $adapterRedirObjects = @(foreach ($name in $adapterRedirNames) {
     $object = 'obj/vdmredir-dll/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $redirDllBindingRoot $name)))
@@ -2025,7 +2028,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/worker_lifecycle.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/worker_lifecycle.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/compat/mvdm_softpc_mouse_context.obj obj/tests/console_client.obj obj/compat/console_services.obj obj/tests/worker_lifecycle.obj obj/adapter-softpc/mvdm_softpc_event_thread.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj frontend-base.lib worker-base.lib lib-handle.lib ' + $consoleGridObject)
+    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/compat/mvdm_softpc_mouse_context.obj obj/tests/console_client.obj obj/compat/console_services.obj obj/tests/worker_lifecycle.obj obj/adapter-softpc/mvdm_softpc_event_thread.obj obj/compat/mvdm_softpc_worker_exit.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj frontend-base.lib worker-base.lib lib-handle.lib ' + $consoleGridObject)
     $graph.Add('  target_libs = ntdll.lib')
     $graph.Add('build obj/tests/softpc_text_video.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/softpc/softpc_text_video_test.c')))
     $graph.Add('build softpc-text-video-test.exe: console_test_link obj/tests/softpc_text_video.obj obj/adapter-softpc/mvdm_softpc_text_video.obj')

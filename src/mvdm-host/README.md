@@ -1039,8 +1039,10 @@ unless the service has died (ERROR_INVALID_HANDLE). Original ExitVDM and
 ExitProcess stay in their original order; no single-task retirement is
 intercepted. S14 P142 places the combined ExitVDM/ExitProcess sequence in
 wkman.c. The WOW path uses B to wait for the authenticated terminal signals
-and receive the existing worker status. DOS keeps VM quiescence on the original
-cleanup thread, which can already own the recursive ICA lock.
+and receive the existing worker status. In P143, the DOS cleanup entry is
+also owned by B. The same thread joins command producers and resets ICA-bound
+VM state before native frontend close can run on the product thread. The
+Console grace still uses the original control handler.
 ExitKernel/FatalExit copy the argument and release its guest alias
 before the blocking service call. Original OpenNT base/mvdm/wow32/wkman.c hash:
 56BE1989F2BC3ACAFFCFA6345B20E38F5E7312BADF03AF04D4565F8F4A489AC9;

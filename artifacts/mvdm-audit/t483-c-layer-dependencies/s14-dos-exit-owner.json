@@ -1,0 +1,142 @@
+{
+  "packet": "M0 T483 S14 P143",
+  "parent": "67166bdd68042b5973e76e75dbd0cea2a7b18b81",
+  "eliminated_C": [
+    "C0318"
+  ],
+  "eliminated_B": [],
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 0,
+    "F": 3
+  },
+  "C_runtime_slots": {
+    "F": 1
+  },
+  "C_outward_headers": {
+    "F": 1
+  },
+  "C_named_image_imports": 1,
+  "mirror": {
+    "non_error_delta": [
+      0,
+      0
+    ],
+    "conditional_and_line_directives_unchanged": true
+  },
+  "contract": "Original thread still owns pre-cleanup authorization and the ICA-protected reset. The existing rundown closes admission, cancels guest continuations, and waits for every producer before F closes the product frontend registry. An authenticated Console grant still selects original Console control and grace; the product event reply releases the original waiter before that handler executes. No wire change.",
+  "verification": {
+    "cached_build": [
+      "x86",
+      "x64",
+      "x86 reference"
+    ],
+    "native_cases": [
+      "registry",
+      "input-terminal",
+      "console-exit-request",
+      "natural-exit",
+      "natural-loss",
+      "natural-wow",
+      "natural-wow-loss",
+      "natural-console-ready",
+      "natural-console",
+      "lifecycle-console",
+      "lifecycle-wow",
+      "lifecycle-loss",
+      "lifecycle-pending"
+    ],
+    "host_vm_units": [
+      "mvdm-vm-notification",
+      "mvdm-vm-ingress"
+    ],
+    "win31_normal": {
+      "case": "386-dosonly0",
+      "dosonly": false,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 0,
+      "normalExit": true,
+      "serviceLoss": false,
+      "workerClose": false,
+      "consoleClose": false,
+      "exitAccepted": true,
+      "knownExitOne": false,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-dos-exit-owner\\win31-normal\\runtime\\386-dosonly0.observer.txt"
+    },
+    "win31_active_native_chains_service_loss": {
+      "beforeScopeCleanup": true,
+      "service": 14688,
+      "managedWorkerClose": false,
+      "consoleClose": false,
+      "exited": [
+        {
+          "pid": 27012,
+          "exit": 6
+        },
+        {
+          "pid": 14688,
+          "exit": -1
+        },
+        {
+          "pid": 29164,
+          "exit": 6
+        },
+        {
+          "pid": 26380,
+          "exit": 6
+        },
+        {
+          "pid": 25856,
+          "exit": 6
+        },
+        {
+          "pid": 25796,
+          "exit": 6
+        },
+        {
+          "pid": 6744,
+          "exit": 6
+        },
+        {
+          "pid": 30272,
+          "exit": 6
+        },
+        {
+          "pid": 4132,
+          "exit": -1073741510
+        },
+        {
+          "pid": 24236,
+          "exit": -1073741510
+        }
+      ]
+    },
+    "actual_dos_console_exit": "PASS original DOS TSR returns to COMMAND; EXIT request retires Console group, preserves Run16 result 1067 and leaves NTSRV alive",
+    "source_owner": [
+      "0001:00160c00       _ntvdm_worker_lifecycle_authorize_exit 00561c00 f   softpc-bindings:mvdm_softpc_worker_exit.obj",
+      " 0001:0016f380       _mvdm_vm_rundown_close     00570380 f   softpc-bindings:mvdm_vm_continuation.obj"
+    ],
+    "limitations": "Guest integration covers Win3.1 enhanced DOSONLY=0 with both drivers and isolated service loss. Full and Win95 were not run."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "1168a3a5-0edd-410d-ad9d-f3cff5a64b40",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

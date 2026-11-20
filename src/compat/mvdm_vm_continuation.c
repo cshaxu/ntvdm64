@@ -1,4 +1,4 @@
-#include "mvdm_vm_continuation.h"
+#include "include/mvdm_vm_continuation_store.h"
 #include "compat/include/mvdm_vm_notification.h"
 #include "compat/include/console_io.h"
 #include <string.h>
@@ -291,5 +291,25 @@ uint32_t mvdm_vm_continuation_finish_io(mvdm_vm_continuation *request,
     }
     host_ica_unlock();
     free_io(io);
+    return error;
+}
+
+DWORD mvdm_vm_rundown_close(mvdm_vm_rundown *rundown, BOOL reset_continuations)
+{
+    DWORD error = ERROR_SUCCESS;
+    AcquireSRWLockExclusive(&rundown->lock);
+    rundown->closing = TRUE;
+    ReleaseSRWLockExclusive(&rundown->lock);
+
+    if (reset_continuations) mvdm_vm_continuation_reset();
+
+    AcquireSRWLockExclusive(&rundown->lock);
+    while (rundown->active) {
+        if (!SleepConditionVariableSRW(&rundown->changed, &rundown->lock, INFINITE, 0)) {
+            error = GetLastError();
+            break;
+        }
+    }
+    ReleaseSRWLockExclusive(&rundown->lock);
     return error;
 }

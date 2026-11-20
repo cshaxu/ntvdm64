@@ -40,13 +40,13 @@ moved the worker-active query to B. Ordinal 269 and one NTVDM TLS were preserved
 P83 [Console mouse](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-mouse-owner.json)
 C -8; five DOS cases.
 
-P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-text-owner.json) removed seven.
-P108 [WOW hook and task wait](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-hook-owner.json) closed two.
+P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-text-owner.json).
+P108 [WOW hook and task wait](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-hook-owner.json).
 P109 [Native publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-publication-owner.json).
-P110 [Input terminal signals](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-input-terminal-owner.json) delivered C -1.
-P111 [CCPU thread exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-ccpu-thread-exit-owner.json) delivered C -1.
-P126 [C header closure](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-c-header-closure.json) closed two.
-P127 [CPU start ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-cpu-start-owner.json) delivered C -1.
+P110 [Input terminal signals](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-input-terminal-owner.json).
+P111 [CCPU thread exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-ccpu-thread-exit-owner.json).
+P126 [C header closure](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-c-header-closure.json).
+P127 [CPU start ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-cpu-start-owner.json).
 P128 [PIC import owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-interrupt-export-owner.json).
 P129 [WOW trace module](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-trace-module-owner.json).
 P130 [Resource receipts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-receipt-owner.json).
@@ -61,8 +61,9 @@ P138 [Pending WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14
 P139 [WOW local retirement](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-local-retirement-owner.json).
 P140 [Redundant WOWEXEC](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-noop-exit-owner.json).
 P141 [Console exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-exit-owner.json).
-P142 [Whole WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-exit-owner.json) closed C0460.
-Delivered: B 0 known calls; C 5 calls, 1 runtime slot, 1 header, 1 image.
+P142 [Whole WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-exit-owner.json).
+P143 [DOS exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-dos-exit-owner.json) closed C0318.
+Delivered: B 0 known calls; C 4 calls, 1 runtime slot, 1 header, 1 image.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moved page-domain identity and cleanup to B and removed three F calls.

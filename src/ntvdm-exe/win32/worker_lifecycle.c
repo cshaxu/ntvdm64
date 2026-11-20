@@ -1,6 +1,7 @@
 /* Process lifecycle is independent of the optional character frontend. */
 #include "worker_lifecycle.h"
 #include "compat/include/mvdm_softpc_event_thread.h"
+#include "compat/include/mvdm_softpc_worker_exit.h"
 #include "worker-base/connection.h"
 #include "worker-base/input_watch.h"
 #include "common/protocol/frontend_lifecycle.h"
@@ -95,44 +96,14 @@ static void service_lost(void *context)
     VdmExitCode=ERROR_INVALID_HANDLE;
     worker_base_shutdown_close(close_worker,context,INFINITE,ERROR_INVALID_HANDLE,NULL);
 }
-static void quiesce_vm_frontends(void)
-{
-    DWORD error=mvdm_standalone_worker_close_frontends();
-    /* Whole-worker exit is already authorized here. If joining local users
-     * fails, fail the process without freeing resources under live callbacks. */
-    if(error)ExitProcess(error);
-}
-void ntvdm_worker_lifecycle_authorize_exit(void)
-{
-    switch (mvdm_softpc_wait_for_exit()) {
-    case MVDM_EXIT_UNMANAGED:
-        return;
-    case MVDM_EXIT_SERVICE_LOST:
-        VdmExitCode = ERROR_INVALID_HANDLE;
-        break;
-    case MVDM_EXIT_CONSOLE_GRANTED:
-        if (mvdm_softpc_exit_original_ready) {
-            worker_base_shutdown_close(close_console,lifecycle.owner,
-                OPENNT_LIFECYCLE_GRACE_MS,CONTROL_C_EXIT,NULL);
-            return;
-        }
-        break;
-    case MVDM_EXIT_WORKER_GRANTED:
-        break;
-    }
-    /* Keep the original cleanup owner. VM quiescence also acquires ICA,
-     * which the original startup or fatal-exit path may already hold. */
-    quiesce_vm_frontends();
-}
-
 static void CALLBACK worker_exit_request(PTP_CALLBACK_INSTANCE instance,
     void *context, PTP_WAIT wait, TP_WAIT_RESULT result)
 {
     mvdm_softpc_exit_handoff *exit = context;
     DWORD status = ERROR_SUCCESS;
-    (void)instance;
+    mvdm_softpc_exit_operation operation = exit->operation;
     (void)result;
-    switch (exit->operation) {
+    switch (operation) {
     case MVDM_EXIT_CONSOLE_GROUP:
         status = worker_base_request_console_exit();
         break;
@@ -145,10 +116,20 @@ static void CALLBACK worker_exit_request(PTP_CALLBACK_INSTANCE instance,
     case MVDM_EXIT_STATUS:
         status = OpenNtBaseClientFailure(0);
         break;
+    case MVDM_EXIT_CLOSE_FRONTENDS:
+        status = mvdm_standalone_worker_close_frontends();
+        break;
+    case MVDM_EXIT_CONSOLE_CONTROL:
+        /* Release the handoff before the Console handler claims cleanup. */
+        (void)CallbackMayRunLong(instance);
+        break;
     }
     exit->status = status;
     SetThreadpoolWait(wait, exit->request, NULL);
     SetEvent(exit->completion);
+    if (operation == MVDM_EXIT_CONSOLE_CONTROL)
+        worker_base_shutdown_close(close_console,lifecycle.owner,
+            OPENNT_LIFECYCLE_GRACE_MS,CONTROL_C_EXIT,NULL);
 }
 
 void ntvdm_worker_lifecycle_end(void)
@@ -169,6 +150,7 @@ void ntvdm_worker_lifecycle_end(void)
     if(lifecycle.fault)CloseHandle(lifecycle.fault);
     /* The connection owns all three lifecycle handles. */
     ZeroMemory(&mvdm_softpc_input_terminal_events,sizeof(mvdm_softpc_input_terminal_events));
+    mvdm_softpc_exit_rundown = NULL;
     mvdm_softpc_exit_original_ready = FALSE;
     mvdm_softpc_exit_owner = 0;
     ZeroMemory(&lifecycle,sizeof(lifecycle));

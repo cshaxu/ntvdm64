@@ -5,6 +5,8 @@
 #include "ntvdm-exe/win32/console_client.h"
 #include "ntvdm-exe/win32/worker_lifecycle.h"
 #include "compat/include/mvdm_softpc_event_thread.h"
+#include "compat/include/mvdm_softpc_worker_exit.h"
+#include "compat/include/mvdm_vm_continuation_store.h"
 #include "compat/include/console_text.h"
 #include "compat/include/mvdm_softpc_mouse_bridge.h"
 #include "ntcon-exe/console_frontend.h"
@@ -50,8 +52,24 @@ static HANDLE broker_shutdown,broker_console_close,broker_wow_task_close;
 static HANDLE broker_lifetime;
 static BOOL lifecycle_wow;
 static LONG vm_frontend_closes;
+static mvdm_vm_rundown rundown;
+static DWORD cleanup_thread;
+static volatile LONG rundown_closed;
+void mvdm_vm_ingress_reset(void)
+{ CHECK(cleanup_thread == GetCurrentThreadId()); }
+DWORD mvdm_vm_rundown_close(mvdm_vm_rundown *value, BOOL active)
+{
+    CHECK(value == &rundown && active && cleanup_thread == GetCurrentThreadId());
+    InterlockedIncrement(&rundown_closed);
+    return ERROR_SUCCESS;
+}
 DWORD mvdm_standalone_worker_close_frontends(void)
-{InterlockedIncrement(&vm_frontend_closes);return ERROR_SUCCESS;}
+{
+    if (mvdm_softpc_exit_rundown)
+        CHECK(cleanup_thread != GetCurrentThreadId() && rundown_closed);
+    InterlockedIncrement(&vm_frontend_closes);
+    return ERROR_SUCCESS;
+}
 DWORD worker_base_take_wow_task_close(uint64_t *identity)
 { (void)identity;return ERROR_NOT_FOUND; }
 DWORD worker_base_fail_wow_task_close(uint64_t identity)
@@ -130,6 +148,7 @@ int session_thread_unbind(session *instance) { CHECK(bound==instance);bound=NULL
 BOOL CntrlHandler(ULONG type)
 {
     CHECK(type==CTRL_CLOSE_EVENT && bound==&owner);
+    cleanup_thread=GetCurrentThreadId();
     ntvdm_worker_lifecycle_authorize_exit();
     CHECK(vm_frontend_closes);
     puts("PASS authenticated root death dispatches original-shape close callback");
@@ -419,6 +438,7 @@ int main(int argc,char **argv)
     if(argc==2 && !strcmp(argv[1],"--natural-console-ready")) {
         HANDLE thread;
         CHECK(!ntvdm_worker_lifecycle_begin(&owner,TRUE));
+        mvdm_softpc_exit_rundown=&rundown;
         CHECK(!ntvdm_worker_lifecycle_activate());
         thread=CreateThread(NULL,0,natural_exit,NULL,0,NULL);
         CHECK(thread && WaitForSingleObject(fault_reported,5000)==WAIT_OBJECT_0);

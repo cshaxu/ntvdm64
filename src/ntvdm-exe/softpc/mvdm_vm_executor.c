@@ -16,13 +16,10 @@ typedef struct command_job {
 } command_job;
 
 struct mvdm_vm_executor {
-    SRWLOCK lock;
-    CONDITION_VARIABLE changed;
+    mvdm_vm_rundown rundown;
     ntvdm_vm_host *host;
     uint64_t payload;
     command_job *jobs;
-    ULONG active;
-    BOOL closing;
 };
 
 DWORD mvdm_vm_executor_create(ntvdm_vm_host *host, mvdm_vm_executor **output)
@@ -34,8 +31,8 @@ DWORD mvdm_vm_executor_create(ntvdm_vm_host *host, mvdm_vm_executor **output)
     if (!host) return ERROR_INVALID_PARAMETER;
     executor = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*executor));
     if (!executor) return ERROR_NOT_ENOUGH_MEMORY;
-    InitializeSRWLock(&executor->lock);
-    InitializeConditionVariable(&executor->changed);
+    InitializeSRWLock(&executor->rundown.lock);
+    InitializeConditionVariable(&executor->rundown.changed);
     executor->host = host;
     error = ntvdm_vm_payload_begin(host, &executor->payload);
     if (error) { HeapFree(GetProcessHeap(), 0, executor); return error; }
@@ -54,16 +51,16 @@ static VOID CALLBACK execute(PTP_CALLBACK_INSTANCE instance, void *context)
     /* VMM may reuse a numeric VM handle before its old native chain finishes
      * retirement. Serialize only that handle's frontend incarnation off CPU;
      * independent VMs do not wait for one another. Tokens order admissions. */
-    AcquireSRWLockExclusive(&owner->lock);
+    AcquireSRWLockExclusive(&owner->rundown.lock);
     for (;;) {
         command_job *older;
         for (older = owner->jobs; older; older = older->next)
             if (older->vm == job->vm && older->token < job->token) break;
         if (!older) break;
-        if (!SleepConditionVariableSRW(&owner->changed, &owner->lock, INFINITE, 0))
+        if (!SleepConditionVariableSRW(&owner->rundown.changed, &owner->rundown.lock, INFINITE, 0))
             ExitProcess(GetLastError());
     }
-    ReleaseSRWLockExclusive(&owner->lock);
+    ReleaseSRWLockExclusive(&owner->rundown.lock);
     status = WaitForSingleObject(mvdm_vm_continuation_invalidated(job->continuation), 0);
     completion.error = status == WAIT_TIMEOUT ? ERROR_SUCCESS :
         status == WAIT_FAILED ? GetLastError() : ERROR_OPERATION_ABORTED;
@@ -76,9 +73,9 @@ static VOID CALLBACK execute(PTP_CALLBACK_INSTANCE instance, void *context)
     completion.exit_code = exit_code;
     /* The command has ended, but retirement still owns live I/O callbacks.
      * Reject new producer events before that join; lifetime is not admission. */
-    AcquireSRWLockExclusive(&owner->lock);
+    AcquireSRWLockExclusive(&owner->rundown.lock);
     job->finishing = TRUE;
-    ReleaseSRWLockExclusive(&owner->lock);
+    ReleaseSRWLockExclusive(&owner->rundown.lock);
     if (location.incarnation) {
         error = ntvdm_vm_host_retire(owner->host, &location);
         /* Failed retirement cannot free memory under unjoined I/O callbacks.
@@ -90,22 +87,22 @@ static VOID CALLBACK execute(PTP_CALLBACK_INSTANCE instance, void *context)
         completion.error = error == ERROR_NOT_FOUND ? ERROR_OPERATION_ABORTED : error;
     /* Remove input access before destroying its provider. Close waits for the
      * job until ALL resources and the completion producer are finished. */
-    AcquireSRWLockExclusive(&owner->lock);
+    AcquireSRWLockExclusive(&owner->rundown.lock);
     for (p = &owner->jobs; *p != job; p = &(*p)->next) {}
     *p = job->next;
     mvdm_vm_io_destroy(job->io);
     job->io = NULL;
-    ReleaseSRWLockExclusive(&owner->lock);
+    ReleaseSRWLockExclusive(&owner->rundown.lock);
     ntvdm_command_launch_destroy(job->launch);
     ntvdm_vm_text_destroy(job->text);
     error = mvdm_vm_continuation_complete(job->continuation, &completion);
     if (error && error != ERROR_OPERATION_ABORTED) ExitProcess(error);
     mvdm_vm_continuation_release(job->continuation);
-    AcquireSRWLockExclusive(&owner->lock);
-    --owner->active;
+    AcquireSRWLockExclusive(&owner->rundown.lock);
+    --owner->rundown.active;
     HeapFree(GetProcessHeap(), 0, job);
-    WakeAllConditionVariable(&owner->changed);
-    ReleaseSRWLockExclusive(&owner->lock);
+    WakeAllConditionVariable(&owner->rundown.changed);
+    ReleaseSRWLockExclusive(&owner->rundown.lock);
 }
 
 DWORD mvdm_vm_executor_submit(mvdm_vm_executor *owner, uint32_t vm,
@@ -126,9 +123,9 @@ DWORD mvdm_vm_executor_submit(mvdm_vm_executor *owner, uint32_t vm,
     if (!error)
         error = mvdm_vm_io_create(text, job->continuation, "VM command", &job->io);
     if (!error) {
-        AcquireSRWLockExclusive(&owner->lock);
-        if (owner->closing) error = ERROR_OPERATION_ABORTED;
-        else if (owner->active == MAXDWORD) error = ERROR_ARITHMETIC_OVERFLOW;
+        AcquireSRWLockExclusive(&owner->rundown.lock);
+        if (owner->rundown.closing) error = ERROR_OPERATION_ABORTED;
+        else if (owner->rundown.active == MAXDWORD) error = ERROR_ARITHMETIC_OVERFLOW;
         else {
             command_job *other;
             for (other = owner->jobs; other; other = other->next)
@@ -140,10 +137,10 @@ DWORD mvdm_vm_executor_submit(mvdm_vm_executor *owner, uint32_t vm,
                 if (!TrySubmitThreadpoolCallback(execute, job, NULL)) {
                     error = GetLastError();
                     owner->jobs = job->next;
-                } else { ++owner->active; *token = job->token; }
+                } else { ++owner->rundown.active; *token = job->token; }
             }
         }
-        ReleaseSRWLockExclusive(&owner->lock);
+        ReleaseSRWLockExclusive(&owner->rundown.lock);
     }
     if (error) {
         mvdm_vm_io_destroy(job->io);
@@ -160,12 +157,12 @@ DWORD mvdm_vm_executor_key(mvdm_vm_executor *owner, uint32_t vm, uint64_t token,
     command_job *job;
     DWORD error = ERROR_NOT_FOUND;
     if (!owner || !vm || !key) return ERROR_INVALID_PARAMETER;
-    AcquireSRWLockShared(&owner->lock);
+    AcquireSRWLockShared(&owner->rundown.lock);
     for (job = owner->jobs; job && job->token != token; job = job->next) {}
-    if (owner->closing) error = ERROR_OPERATION_ABORTED;
+    if (owner->rundown.closing) error = ERROR_OPERATION_ABORTED;
     else if (job && job->vm == vm && job->io)
         error = job->finishing ? ERROR_OPERATION_ABORTED : mvdm_vm_io_key(job->io, key);
-    ReleaseSRWLockShared(&owner->lock);
+    ReleaseSRWLockShared(&owner->rundown.lock);
     return error;
 }
 
@@ -273,9 +270,9 @@ DWORD mvdm_vm_executor_bios_key_bop(mvdm_vm_executor *owner, uint32_t vm,
             if (descriptor[3] == 2 && !key.wVirtualScanCode) return ERROR_NOT_SUPPORTED;
         }
     }
-    AcquireSRWLockExclusive(&owner->lock);
+    AcquireSRWLockExclusive(&owner->rundown.lock);
     for (job = owner->jobs; job && job->token != token; job = job->next) {}
-    if (owner->closing) error = ERROR_OPERATION_ABORTED;
+    if (owner->rundown.closing) error = ERROR_OPERATION_ABORTED;
     else if (job && job->vm == vm && job->io) {
         if (job->finishing) error = ERROR_OPERATION_ABORTED;
         else if (descriptor[3] == 2) {
@@ -302,7 +299,7 @@ DWORD mvdm_vm_executor_bios_key_bop(mvdm_vm_executor *owner, uint32_t vm,
             }
         }
     }
-    ReleaseSRWLockExclusive(&owner->lock);
+    ReleaseSRWLockExclusive(&owner->rundown.lock);
     return error;
 }
 
@@ -328,12 +325,12 @@ DWORD mvdm_vm_executor_mouse_bop(mvdm_vm_executor *owner, uint32_t vm,
         (d[3] & 4 ? FROM_LEFT_2ND_BUTTON_PRESSED : 0);
     mouse.dwControlKeyState = bios_controls(d[6] & 0xffffu, d[6] >> 16, 0);
     mouse.dwEventFlags = (d[2] & 0x7e) ? 0 : MOUSE_MOVED;
-    AcquireSRWLockExclusive(&owner->lock);
+    AcquireSRWLockExclusive(&owner->rundown.lock);
     for (job = owner->jobs; job; job = job->next)
         if (job->vm == vm && job->token == token) break;
-    if (job && !job->finishing && !owner->closing)
+    if (job && !job->finishing && !owner->rundown.closing)
         error = mvdm_vm_io_mouse(job->io, &mouse);
-    ReleaseSRWLockExclusive(&owner->lock);
+    ReleaseSRWLockExclusive(&owner->rundown.lock);
     return error;
 }
 
@@ -434,18 +431,17 @@ DWORD mvdm_vm_executor_return_key_bop(uint32_t vm, uint32_t address,
     return error;
 }
 
+mvdm_vm_rundown *mvdm_vm_executor_rundown(mvdm_vm_executor *owner)
+{
+    return owner ? &owner->rundown : NULL;
+}
+
 void mvdm_vm_executor_close(mvdm_vm_executor *owner)
 {
-    if (!owner) return;
-    AcquireSRWLockExclusive(&owner->lock);
-    owner->closing = TRUE;
-    ReleaseSRWLockExclusive(&owner->lock);
-    mvdm_vm_continuation_reset();
-    AcquireSRWLockExclusive(&owner->lock);
-    while (owner->active)
-        if (!SleepConditionVariableSRW(&owner->changed, &owner->lock, INFINITE, 0))
-            ExitProcess(GetLastError());
-    ReleaseSRWLockExclusive(&owner->lock);
+    if (owner) {
+        DWORD error = mvdm_vm_rundown_close(&owner->rundown, TRUE);
+        if (error) ExitProcess(error);
+    }
 }
 
 void mvdm_vm_executor_destroy(mvdm_vm_executor *owner)

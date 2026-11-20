@@ -6,7 +6,6 @@ DWORD ntvdm_worker_lifecycle_begin(session *owner,BOOL character_io);
 DWORD ntvdm_worker_lifecycle_activate(void);
 void NtvdmActivateLifecycle(void);
 void ntvdm_worker_lifecycle_end(void);
-void ntvdm_worker_lifecycle_authorize_exit(void);
 DWORD ntvdm_worker_lifecycle_exit_result(DWORD exit_code);
 /* Caller owns the duplicate until its I/O producers have stopped. */
 DWORD ntvdm_worker_lifecycle_fault_event(HANDLE *);

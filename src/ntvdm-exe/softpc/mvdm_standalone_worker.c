@@ -1,6 +1,7 @@
 #include "mvdm_standalone_worker.h"
 #include "worker-base/connection.h"
 #include "compat/include/thread_lifecycle.h"
+#include "compat/include/mvdm_softpc_worker_exit.h"
 #include "ntvdm-exe/command/include/command_launch.h"
 
 #include "ntvdm-exe/package_layout.h"
@@ -52,10 +53,6 @@ ntvdm_vm_host *mvdm_standalone_worker_frontends(void)
 }
 DWORD mvdm_standalone_worker_close_frontends(void)
 {
-    mvdm_vm_ingress_reset();
-    /* Cancel and join command producers while their host registry still
-     * accepts authenticated retirement. Only then close frontend callbacks. */
-    mvdm_vm_executor_close(worker_vm_executor);
     return ntvdm_vm_host_close(worker_frontends);
 }
 static DWORD begin_character_io(void *owner,HANDLE stop)
@@ -179,6 +176,7 @@ static DWORD mvdm_standalone_worker_begin(void)
         if(error)goto fail;
         error=mvdm_vm_executor_create(worker_frontends,&worker_vm_executor);
         if(error)goto fail;
+        mvdm_softpc_exit_rundown=mvdm_vm_executor_rundown(worker_vm_executor);
     }
     if (!session_select_machine_backend(&worker_session,
             SESSION_MACHINE_BACKEND_SOFTPC) || !session_activate(&worker_session) ||
