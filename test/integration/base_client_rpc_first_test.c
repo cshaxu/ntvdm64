@@ -9,7 +9,7 @@ static const common_frontend_key forged_frontend={0x7fffffff,0x7fffffff};
 #include <stdio.h>
 #include <stdlib.h>
 #include <wchar.h>
-#include "ntsrv-exe/opennt/include/base_client.h"
+#include "compat/include/base_client.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "worker-base/connection.h"
 #include "ntvwm-exe/next_command.h"

@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "eliminated": 554,
-    "open": 14,
+    "eliminated": 556,
     "supporting-evidence": 43,
-    "eliminated-transitive": 6
+    "eliminated-transitive": 6,
+    "open": 12
   },
   "provider_groups": [
     {
@@ -74,15 +74,6 @@
       "symbols": []
     },
     {
-      "kind": "header",
-      "provider": "src/common/base_srv/base_client.h",
-      "open_ids": [
-        "C0004"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
       "kind": "symbol",
       "provider": "src/common/base_srv/base_rpc_client_launch.c",
       "open_ids": [
@@ -103,15 +94,6 @@
       "symbols": [
         "worker_base_request_console_exit"
       ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_task_termination.h",
-      "open_ids": [
-        "C0119"
-      ],
-      "count": 1,
-      "symbols": []
     }
   ],
   "priority_batches": [
@@ -181,5 +163,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P124"
+  "updated_by": "T483 S14 P126"
 }

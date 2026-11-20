@@ -330,7 +330,7 @@ GBTtryexit:;
 #endif
 
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
-#include "common/base_srv/base_client.h"
+#include "compat/include/base_client.h"
 #include <base_config.h>
 #line 304
 VOID

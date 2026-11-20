@@ -60,8 +60,8 @@ P108 [WOW hook and task wait](../../artifacts/mvdm-audit/t483-c-layer-dependenci
 P109 [Native publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-publication-owner.json) delivered B -1.
 P110 [Input terminal signals](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-input-terminal-owner.json) delivered C -1.
 P111 [CCPU thread exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-ccpu-thread-exit-owner.json) delivered C -1.
-P125 [WOW callback owners](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-registration-callback-owners.json) moved 11 callback targets inward.
-Delivered: B 6 known calls; C 14 open (11 functions, 0 data).
+P126 [C header closure](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-c-header-closure.json) delivered C -2.
+Delivered: B 6 known calls; C 12 open (11 functions, 1 image).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same

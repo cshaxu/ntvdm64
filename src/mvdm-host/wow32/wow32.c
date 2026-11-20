@@ -20,7 +20,7 @@
 
 #include "precomp.h"
 #include "wow_user_thunk_scope.h"
-#include "wow32-dll/include/wow_task_termination.h"
+extern VOID WINAPI W32ExitWowProcess(DWORD exit_code);
 #line 22
 #pragma hdrstop
 #include "wktbl.h"

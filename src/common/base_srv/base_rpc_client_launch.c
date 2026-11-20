@@ -4,7 +4,7 @@
 #include <windows.h>
 #include <rpc.h>
 #include "service.h"
-#include "base_client.h"
+#include "compat/include/base_client.h"
 #include "base_command.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "common/base_srv/base_rpc_client_internal.h"

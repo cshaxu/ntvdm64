@@ -3,7 +3,7 @@
  * Failure-only writes preserve success-path timing and Win32 last-error. */
 #include <nt.h>
 #include "run16-exe/frontend_scope.h"
-#include "ntsrv-exe/opennt/include/base_client.h"
+#include "compat/include/base_client.h"
 #include <stdio.h>
 static void receipt_failure(const char *stage,DWORD error,DWORD code,DWORD completed)
 {

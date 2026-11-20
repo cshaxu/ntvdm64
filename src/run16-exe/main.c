@@ -5,7 +5,7 @@
 #include <nt.h>
 #include <base_classifier.h>
 #include "compat/include/base_capture_heap.h"
-#include "common/base_srv/base_client.h"
+#include "compat/include/base_client.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "frontend_scope.h"
 #include "launch_options.h"

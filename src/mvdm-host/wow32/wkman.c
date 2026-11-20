@@ -31,7 +31,10 @@
 #undef _X86_
 #line 30
 #include "wowfax.h"
-#include "wow32-dll/include/wow_task_termination.h"
+extern VOID WINAPI W32ExitWowProcess(DWORD exit_code);
+extern DWORD WINAPI wow_task_termination_bind(ULONG task, USHORT htask);
+extern VOID WINAPI wow_task_termination_retire(USHORT htask);
+extern VOID WINAPI wow_task_termination_fail(USHORT htask);
 #include "wow_idle_hook_binding.h"
 #include <compat/include/wow_registry.h>
 

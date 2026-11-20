@@ -1,0 +1,161 @@
+{
+  "packet": "M0 T483 S14 P126",
+  "baseline": "c91fa2143035dec0d5f6f0eae7582fe1978d2c83",
+  "eliminated_C_header_ids": [
+    "C0004",
+    "C0119"
+  ],
+  "eliminated_C_implementation_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 556,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "open": 12
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 4
+  },
+  "remaining_C_by_edge_kind": {
+    "image-import": 1,
+    "symbol": 11
+  },
+  "remaining_C_by_provider": {
+    "ntvdm-exe": 4,
+    "common": 1,
+    "worker-base": 1,
+    "wow32-dll": 6
+  },
+  "mirror_delta": {
+    "points": 0,
+    "lines": 3,
+    "scope": "Three additional declarations in the existing wkman.c hunk. #error and #line unchanged."
+  },
+  "compiler_closure": {
+    "header_blob_sha256": "414bbc72688c219c867d586b2bf2db3a57466afeea1ce297b7f87371b49517fe",
+    "compiled": {
+      "x86/worker/obj/opennt-base-client/client.obj": {
+        "old_header": "common/base_srv/base_client.h",
+        "selected_header": "compat/include/base_client.h",
+        "outer_headers": []
+      },
+      "x64/worker-reference-x86/obj/opennt-base-client/client.obj": {
+        "old_header": "common/base_srv/base_client.h",
+        "selected_header": "compat/include/base_client.h",
+        "outer_headers": []
+      },
+      "x64/launcher/obj/opennt-base-client/client.obj": {
+        "old_header": "common/base_srv/base_client.h",
+        "selected_header": "compat/include/base_client.h",
+        "outer_headers": []
+      },
+      "x86/wow32/obj/wkman.obj": {
+        "old_header": "wow32-dll/include/wow_task_termination.h",
+        "selected_header": null,
+        "outer_headers": []
+      },
+      "x86/wow32/obj/wow32.obj": {
+        "old_header": "wow32-dll/include/wow_task_termination.h",
+        "selected_header": null,
+        "outer_headers": []
+      }
+    },
+    "mirror_numstat": [
+      "4\t1\tsrc/mvdm-host/wow32/wkman.c",
+      "1\t1\tsrc/mvdm-host/wow32/wow32.c",
+      "1\t1\tsrc/non-mvdm/base/win32/client/vdm.c"
+    ],
+    "upstream_diff_delta": {
+      "src/mvdm-host/wow32/wkman.c": {
+        "source": "base/mvdm/wow32/wkman.c",
+        "before_full_file": {
+          "points": 88,
+          "lines": 364
+        },
+        "after_full_file": {
+          "points": 88,
+          "lines": 367
+        },
+        "delta": {
+          "points": 0,
+          "lines": 3
+        }
+      },
+      "src/mvdm-host/wow32/wow32.c": {
+        "source": "base/mvdm/wow32/wow32.c",
+        "before_full_file": {
+          "points": 103,
+          "lines": 1006
+        },
+        "after_full_file": {
+          "points": 103,
+          "lines": 1006
+        },
+        "delta": {
+          "points": 0,
+          "lines": 0
+        }
+      },
+      "src/non-mvdm/base/win32/client/vdm.c": {
+        "source": "base/win32/client/vdm.c",
+        "before_full_file": {
+          "points": 40,
+          "lines": 615
+        },
+        "after_full_file": {
+          "points": 40,
+          "lines": 615
+        },
+        "delta": {
+          "points": 0,
+          "lines": 0
+        }
+      }
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "fc932d43-a3b4-4b44-8b50-3bd3a77fc25b",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": [
+    "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\um\\winnt.h(23374): note: see previous definition of 'REG_LEGAL_CHANGE_FILTER'",
+    "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntlpcapi.h(73): warning C4201: nonstandard extension used: nameless struct/union",
+    "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntlpcapi.h(78): warning C4201: nonstandard extension used: nameless struct/union",
+    "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrmsg.h(125): warning C4201: nonstandard extension used: nameless struct/union",
+    "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntcsrmsg.h(126): warning C4201: nonstandard extension used: nameless struct/union",
+    "O:/repos.hobby/ntvdm64/test/integration/base_client_rpc_first_test.c(41): warning C4244: '=': conversion from 'ULONG' to 'USHORT', possible loss of data",
+    "O:/repos.hobby/ntvdm64/test/integration/base_client_rpc_first_test.c(742): warning C4389: '==': signed/unsigned mismatch",
+    "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+    "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+    "PASS shared worker 14800, two distinct tasks overlapped and retired independently, both requests exited normally",
+    "detached CheckDOS task=1 reservation-error=0",
+    "detached CheckDOS task=2 reservation-error=0",
+    "detached CheckDOS task=3 reservation-error=0",
+    "PASS new-Console original process completion authorizes only the registered live worker",
+    "PASS new-Console original process completion authorizes only the registered live worker",
+    "PASS new-Console original process completion authorizes only the registered live worker",
+    "PASS DOS Get replaces previous request on resident-worker reuse",
+    "PASS WOW request/worker rejects valid character frontend/context without changing original WOW Get/Exit",
+    "PASS WOW task close binds opaque management identity, delivers once, retries only on later intent and retires safely",
+    "PASS WOW startup authentication, wait-only notification and immediate-completion latch",
+    "PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected",
+    "PASS reused WOW receipt mismatch, retired task and worker reuse checked",
+    "PASS failed WOW completion has no startup acknowledgement; late report rejected",
+    "PASS closing original WOW head rejects new task without publishing a record",
+    "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+  ],
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "boundary.out": "a4c15bfdea62724d694a4867f69bf0357a57a28681c70b0009555ae6bd3c5bbe",
+    "probes.out": "8ac9b53eaf2d9aab1fdbf0e09916e0395e5c4cd5d2e05d512fe58c03f5562514",
+    "final-checks.out": "73e35aaddc05b869a5fb95518e1165adec4f30d48e37248ad795395c4ad92727"
+  }
+}
