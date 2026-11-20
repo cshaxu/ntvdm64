@@ -155,6 +155,9 @@ Return Value:
 {
 /****************************** STF ********************************/
 #if defined(CCPU) || defined(PIG)
+    extern void __cdecl ccpu386exitthread(void);
+    opennt_prepare_thread_exit();
+#line 155
     ccpu386exitthread();
 #endif
 /****************************** STF ********************************/

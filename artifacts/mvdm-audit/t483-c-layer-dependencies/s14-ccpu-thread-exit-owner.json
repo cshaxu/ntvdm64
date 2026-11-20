@@ -1,0 +1,67 @@
+{
+  "packet": "M0 T483 S14 P111",
+  "baseline": "d4b327fdbce94b1ca8631e4354e5f44d1dd9a508",
+  "eliminated_C_ids": [
+    "C0259"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 533,
+    "open": 35,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "scope": "Remove the F wrapper and its per-file macro redirection. The C caller invokes existing B retirement, original CCPU stack release, and the existing native exit bridge in the same order.",
+  "remaining_indirect_B_ids": [
+    "B0023",
+    "B0024"
+  ],
+  "mirror_delta": {
+    "points": 1,
+    "lines": 3,
+    "source": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+    "opennt_anchor_sha256": "776330EA072CFD005EA05968DC676634385D1C9F349BD71BA1667ECD3BE68438",
+    "raw_hunks_before": 5,
+    "raw_hunks_after": 6,
+    "raw_lines_before": 9,
+    "raw_lines_after": 12
+  },
+  "compiled_call_order": {
+    "worker": [
+      " 00000001  REL32                      00000000        12  _opennt_prepare_thread_exit@0",
+      " 00000006  REL32                      00000000        1C  _ccpu386exitthread",
+      " 0000000B  REL32                      00000000        14  _opennt_exit_thread@4"
+    ],
+    "worker-reference-x86": [
+      " 00000001  REL32                      00000000        12  _opennt_prepare_thread_exit@0",
+      " 00000006  REL32                      00000000        1C  _ccpu386exitthread",
+      " 0000000B  REL32                      00000000        14  _opennt_exit_thread@4"
+    ]
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "621929f2-e956-4ec4-9890-dca8f26aa58e",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "fixture_repair": "Actual CCPU lifecycle fixture exited 3 because it never installed the thread owner. The fixture now uses the same initializer as the product. The heartbeat fixture graph uses stable object names for the selected sources.",
+  "status": "Cached full build, dual publication, real CCPU lifecycle, selected original exit body, Redirector binding, x86 and x64 heartbeat and real DOS-native-DOS return passed.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "b9f5d5c119b8cebb21ee702d77d0620f39fb375661a4a274bd86f1d65c3d8dfc",
+    "probes-initial.out": "be8d2e1e6213ddeee8823088b7645e4e476f95bb2b55ee00a0e8626dd41371ed",
+    "probes.out": "195b91b22ef8183acf78bfb8e710fac1fdf449f2ef6871b831b33a724b65238f",
+    "final-checks.out": "33be180cd90c03e7a8ac27a233639fca3d5ad25e98186c89c5ef61f671bd294d",
+    "thread-boundary/fixture.out": "732a56e2b46fffc5a894c87d78ff12f32f96aa4210f9b2cb95f8c2f87707876c",
+    "thread-boundary/softpc_thread_exit.inc": "e88e8ba388b641a4baf8737637dcc53049d62b1620ae413db06f510760946dc6",
+    "native-edit-return.txt": "b62520562e567b04e9a28903cb87d92e0513b8511ce8a938547807fd9aa75c50",
+    "worker-exit-order.txt": "7ead966572fefe2b782320f4320edeadba8600f807da6703d1be67c577e3910c",
+    "worker-reference-x86-exit-order.txt": "7ead966572fefe2b782320f4320edeadba8600f807da6703d1be67c577e3910c",
+    "heartbeat-x64.out": "12d82787aaa2a65caa516d25521c363bcff91cd8b3cb625b96eac7804abd8186"
+  }
+}

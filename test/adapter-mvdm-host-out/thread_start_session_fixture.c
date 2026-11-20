@@ -34,20 +34,22 @@ static DWORD WINAPI explicit_exit_worker(LPVOID parameter)
 
 static int reject_unbind, reject_bind;
 static LONG cpu_releases, cpu_order_errors;
-void __cdecl opennt_ccpu_exit_thread(void);
-/* Link the actual pre-CCPU adapter against this terminal witness. It checks
- * ordering only, not execution of original CPU allocation/list cleanup. */
+/* The selected original exit body calls this witness at the CPU release
+ * boundary. CPU allocation and list cleanup are exercised separately. */
 void __cdecl ccpu386exitthread(void)
 {
     if (session_thread_current() || terminal_releases != released ||
             session_thread_is_finishing()) InterlockedIncrement(&cpu_order_errors);
     InterlockedIncrement(&cpu_releases);
 }
+#define CCPU 1
+#include "softpc_thread_exit.inc"
+#undef CCPU
+
 static DWORD WINAPI cpu_exit_worker(LPVOID parameter)
 {
-    if (bound_worker(parameter)) return 1;
-    opennt_ccpu_exit_thread();
-    return session_thread_current() ? 2 : 0;
+    host_ExitThread(bound_worker(parameter));
+    return 99;
 }
 static int bind_hook(void *context) { (void)context; return !reject_bind; }
 static int unbind_hook(void *context)
@@ -156,7 +158,7 @@ int main(int argc, char **argv)
         !GetExitCodeThread(thread,&exit_code) || exit_code || cpu_order_errors ||
         cpu_releases != 1 || released != 6 || terminal_releases != 6) return 22;
     CloseHandle(thread);
-    puts("THREAD_PRE_CCPU actual_adapter=1 unbind_before_cpu=1 once=1");
+    puts("THREAD_PRE_CCPU original_exit_body=1 unbind_before_cpu=1 once=1");
     /* A refused finish must retain the binding but clear its dynamic intent;
      * the same owner can still perform an ordinary retryable detach. */
     reject_unbind = 1;

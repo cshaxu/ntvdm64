@@ -251,8 +251,7 @@ if (!(Test-Path -LiteralPath $hostEntryResourceSource)) { throw "Original SoftPC
 if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC export definition missing: $hostExportDefinition" }
 if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector resource missing: $redirResourceSource" }
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
-$adapterWin32Names = @('ccpu_thread_exit_compat.c',
-                          'console_compat.c', 'console_client.c', 'worker_lifecycle.c',
+$adapterWin32Names = @('console_compat.c', 'console_client.c', 'worker_lifecycle.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c', 'wow_hard_error_decoder.c',
                            'mvdm_base_vdm_environment.c')
@@ -1144,10 +1143,6 @@ $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $
         # Select the actual callback ABI, not host_CreateThread's public ABI.
         # ThreadStartupRoutine is cdecl; ErrorDialogBoxThread is WINAPI.
         $threadAbiFlag = if ($name -eq 'nt_error.c') { ' /DOPENNT_HOST_CREATE_THREAD_ABI' } else { '' }
-        # Preserve original CPU release, but finish WOW/session retirement
-        # before its simulation stack disappears. Never rename ntthread.c's
-        # definition or other callers by making this a global compiler flag.
-        if ($name -eq 'nt_thred.c') { $threadAbiFlag += ' /Dccpu386exitthread=opennt_ccpu_exit_thread' }
         $graph.Add('  host_cflags = ' + $hostFlags + $threadAbiFlag + ' /FI "' + $ntexapiSubset + '" /FI "' + $threadCompat + '"')
     }
     $object

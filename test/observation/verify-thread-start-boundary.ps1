@@ -22,17 +22,17 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds)
     if ($p.ExitCode) { throw "Failed: $name ($($p.ExitCode))" }
 }
 try {
+    & "$PSScriptRoot/extract-softpc-thread-exit-fixture.ps1" -RepositoryRoot $repo -OutputRoot $root
     $sources=@('src/compat/guest_memory_lease.c',
         'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
         'src/common/worker-thread/bridge.c', 'src/compat/thread_start.c',
         'src/lib-win32/thread/thread.c',
-        'src/ntvdm-exe/win32/ccpu_thread_exit_compat.c',
         'test/adapter-mvdm-host-out/thread_start_session_fixture.c')
     $objects=@()
     foreach ($source in $sources) {
         $object=[IO.Path]::GetFileNameWithoutExtension($source)+'.obj'
         $objects+=('"'+$root+'\'+$object+'"')
-        $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /c /O2 /MT /W4 /I "'+$repo+'\src" /I "'+$repo+'\src\compat\include" /Fo"'+$root+'\'+$object+'" "'+$repo+'\'+$source+'""'
+        $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /c /O2 /MT /W4 /I "'+$repo+'\src" /I "'+$repo+'\src\compat\include" /I"'+$root+'" /Fo"'+$root+'\'+$object+'" "'+$repo+'\'+$source+'""'
         Run-Owned ('compile-'+[IO.Path]::GetFileNameWithoutExtension($source)) 'cmd.exe' $argsLine 120
     }
     $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /out:"'+$root+'\fixture.exe" '+($objects -join ' ')+' /export:session_thread_current /export:session_thread_bind_owned_source /export:session_thread_finish /implib:"'+$root+'\fixture.lib" kernel32.lib"'
@@ -40,7 +40,7 @@ try {
     foreach ($source in @('src/vdmredir-dll/source/mvdm_redirector_dll_entry.c',
             'test/adapter-mvdm-host-out/thread_start_module_fixture.c')) {
         $object=[IO.Path]::GetFileNameWithoutExtension($source)+'.obj'
-        $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /c /O2 /MT /W4 /I "'+$repo+'\src" /Fo"'+$root+'\'+$object+'" "'+$repo+'\'+$source+'""'
+        $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /c /O2 /MT /W4 /I "'+$repo+'\src" /I"'+$root+'" /Fo"'+$root+'\'+$object+'" "'+$repo+'\'+$source+'""'
         Run-Owned ('compile-'+[IO.Path]::GetFileNameWithoutExtension($source)) 'cmd.exe' $argsLine 120
     }
     $moduleObjects=@('mvdm_redirector_dll_entry.obj','thread_start_module_fixture.obj',
@@ -55,7 +55,7 @@ try {
             'THREAD_TERMINAL_UNBIND normal=5 once=1 rejected_exit=c0000420',
             'THREAD_TERMINAL_INTENT terminal=5 ordinary=1 rejected_reset=1 exception_reset=1',
             'THREAD_START_ROLLBACK rejected=4 owner_count=1 no_worker_entry=1',
-            'THREAD_PRE_CCPU actual_adapter=1 unbind_before_cpu=1 once=1')) {
+            'THREAD_PRE_CCPU original_exit_body=1 unbind_before_cpu=1 once=1')) {
         if (!$output.Contains($marker)) { throw "Missing assertion: $marker" }
     }
     $sources | ForEach-Object { Get-FileHash "$repo/$_" -Algorithm SHA256 } |
