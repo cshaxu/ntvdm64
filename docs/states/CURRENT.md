@@ -28,6 +28,15 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P77 [compiled owner cycles](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-compiled-owner-cycles.json)
+checks all110 recorded object hashes against the current build: all match.
+The largest section relocation cycle spans362 sections/50 objects (27 C,
+23 F), with53 distinct C-to-F referenced symbols in13 F providers;29 target
+native lifecycle. This includes function-address/data references, not only
+calls, and is not runtime or indirect-call coverage. It rules out whole-file
+B relocation and prioritizes the coupled scheduler/projection split. No source
+or package change, no eliminations; ledger182/386 and P76 release remain.
+
 P76 [scalar observation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-observation-owner.json)
 moves three exact diagnostic bodies from F termination into existing B compat.
 Page-domain removes its F diagnostic and unused effective-address headers.
@@ -52,35 +61,14 @@ The [compiled publication cut](../../artifacts/mvdm-audit/t483-c-layer-dependenc
 prioritizes menu104/window103 reachable roots (overlapping); preserve original
 metadata/commit ownership and capture/lookup failure ordering in the next cut.
 
-P74 [property/region original-call restoration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-property-owner.json)
-removes six F interceptions without replacement wrappers. Original C conversions
-remain; mirror delta0 points/0 lines, autonomous production code minus24 lines.
-Cached full builds, dual11 publication (package`c3263b90-7f08-44c1-ac69-4291c63dc496`),
-231 native assertions, real Win16 dialog8 phases, nested/terminal lifecycle and
-compiled boundaries passed. Ledger182 eliminated/386 open; priority105 roots.
-Final document checks and enclosing P74 commit/push provide the delivery receipt.
-
-P73 [native dialog/failure implementation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-dialog-owner.json)
-moves actual installed USER bindings and terminal diagnostics from F to B.
-Ten bodies retain identity after one private trace-helper rename; original
-string/handle conversion remains at its caller. Mirror delta0/0; no new B-to-C
-callback. C0375/C0376/C0377 eliminated; ledger176 eliminated/392 open. The
-shared failure provider is reached by109 of111 priority roots, which remain
-open for scheduler/projection ownership. Cached full builds, dual11 publication
-and targeted lifecycle/real Win16 dialog tests pass. Package7a2b73cc-96f3-45a3-aa39-6c4c837f7280.
-Final document gates and enclosing P73 commit/push provide the delivery receipt.
-S14 remains active.
-
-P72 [native query restoration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-query-owner.json)
-eliminates C0530/C0531/C0541 by restoring original public USER queries, not moving
-wrappers. Current product objects use the native imports; short-HWND positive
-and dead-window/unsupported-thread-query controls pass95 assertions. Mirror
-change0/0; twelve autonomous source lines deleted; no new B provider or callback.
-Cached full x86/x64/reference builds, dual11 publication/22 hashes, retirement,
-nested/terminal lifecycle,8-phase Win16 dialog and compiled A/B/WOW gates pass.
-Packagefe0c4696-c6dd-41e7-be18-a226dd78047f. P72 ledger:173 eliminated/395 open;
-remaining priority roots111. Final document checks and enclosing P72 commit/push
-supply the delivery receipt. S14 remains active.
+Earlier P72-P74 deliveries restored nine native USER query/property/region
+calls and moved independent dialog/failure implementations into B. Mirror
+changes were zero; the current direct ledger is182 eliminated/386 open.
+Their exact packages, source contracts and passed verification remain in
+[P72](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-query-owner.json),
+[P73](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-dialog-owner.json)
+and [P74](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-property-owner.json).
+S14 remains active; these deliveries do not close the coupled USER chain.
 
 P71 [native capture extraction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-capture-owner.json)
 moves9 functions/320 body lines from F to B as a114-root prerequisite.
