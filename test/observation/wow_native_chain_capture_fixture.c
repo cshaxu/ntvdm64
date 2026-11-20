@@ -37,24 +37,24 @@ int main(void)
   rows[0].links.window=(ULONG)(ULONG_PTR)a;rows[1].links.window=(ULONG)(ULONG_PTR)b;
   rows[0].process_id=rows[1].process_id=GetCurrentProcessId();
   ZeroMemory(index_by_slot,sizeof(index_by_slot));index_by_slot[LOWORD(a)]=1;index_by_slot[LOWORD(b)]=2;
-  *observation_edge(&rows[0],edge)=(ULONG)(ULONG_PTR)first;
-  *observation_edge(&rows[1],edge)=(ULONG)(ULONG_PTR)second;
-  SetLastError(0);rejected=!normalize_observation_chains(rows,2,index_by_slot,&raced);error=GetLastError();
+  *wow_native_window_observation_edge(&rows[0],edge)=(ULONG)(ULONG_PTR)first;
+  *wow_native_window_observation_edge(&rows[1],edge)=(ULONG)(ULONG_PTR)second;
+  SetLastError(0);rejected=!wow_native_window_normalize_chains(rows,2,index_by_slot,&raced);error=GetLastError();
   if(!raced)++errors;
   first=relation(a,edge);second=relation(b,edge);
-  *observation_edge(&rows[0],edge)=(first==b)?(ULONG)(ULONG_PTR)b:0;
-  *observation_edge(&rows[1],edge)=(second==a)?(ULONG)(ULONG_PTR)a:0;
-  live=normalize_observation_chains(rows,2,index_by_slot,&raced);
+  *wow_native_window_observation_edge(&rows[0],edge)=(first==b)?(ULONG)(ULONG_PTR)b:0;
+  *wow_native_window_observation_edge(&rows[1],edge)=(second==a)?(ULONG)(ULONG_PTR)a:0;
+  live=wow_native_window_normalize_chains(rows,2,index_by_slot,&raced);
   if(raced)++errors;
   printf("edge=%u same-pid=1 valid-native-interleave=1 mixed-rejected=%u error=%lu live-accepted=%u\n",edge,rejected,error,live);
   if(!rejected || error!=ERROR_INVALID_DATA || !live)++errors;
-  *observation_edge(&rows[0],edge)=(ULONG)(ULONG_PTR)b;
-  *observation_edge(&rows[1],edge)=(ULONG)(ULONG_PTR)a;
+  *wow_native_window_observation_edge(&rows[0],edge)=(ULONG)(ULONG_PTR)b;
+  *wow_native_window_observation_edge(&rows[1],edge)=(ULONG)(ULONG_PTR)a;
   rows[0].process_id=GetCurrentProcessId()+1;raced=TRUE;
-  if(!normalize_observation_chains(rows,2,index_by_slot,&raced) || raced ||
-      *observation_edge(&rows[0],edge) || *observation_edge(&rows[1],edge)!=(ULONG)(ULONG_PTR)a)++errors;
+  if(!wow_native_window_normalize_chains(rows,2,index_by_slot,&raced) || raced ||
+      *wow_native_window_observation_edge(&rows[0],edge) || *wow_native_window_observation_edge(&rows[1],edge)!=(ULONG)(ULONG_PTR)a)++errors;
   deny_allocation=TRUE;raced=TRUE;SetLastError(0);
-  if(normalize_observation_chains(rows,2,index_by_slot,&raced) || raced || GetLastError()!=ERROR_NOT_ENOUGH_MEMORY)++errors;
+  if(wow_native_window_normalize_chains(rows,2,index_by_slot,&raced) || raced || GetLastError()!=ERROR_NOT_ENOUGH_MEMORY)++errors;
   deny_allocation=FALSE;
   if(edge==2){SetWindowLongPtrA(b,GWLP_HWNDPARENT,0);SetWindowLongPtrA(a,GWLP_HWNDPARENT,0);}
   else {SetParent(b,parent);SetParent(a,parent);}

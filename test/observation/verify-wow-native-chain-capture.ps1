@@ -21,23 +21,24 @@ function Body([string]$Text,[string]$Name){
 }
 try{
  $owner="$repo/src/wow32-dll/source/wow_user_object_bindings.c"
- $source=[IO.File]::ReadAllText($owner)
- $begin=$source.IndexOf('static ULONG *observation_edge(')
- $end=$source.IndexOf('static BOOL project_graph_attempt(',$begin)
- if($begin -lt 0 -or $end -le $begin){throw 'Exact body bounds absent'}
- [IO.File]::WriteAllText("$out/chain_exact_body.h",$source.Substring($begin,$end-$begin))
+ $captureOwner="$repo/src/compat/wow_window_capture.c"
+ $captureSource=[IO.File]::ReadAllText($captureOwner)
+ $source=$captureSource+"`n"+[IO.File]::ReadAllText($owner)
+ $chain=@('wow_native_window_observation_edge','wow_native_window_normalize_chains')
+ [IO.File]::WriteAllText("$out/chain_exact_body.h",(@($chain|ForEach-Object {Body $source $_}) -join "`n"))
  $fixture="$PSScriptRoot/wow_native_chain_capture_fixture.c"
  if($Reacquire){
-  $names=@('wow_user_window_sample_links','capture_window','put_observation','observation_edge','normalize_observation_chains','project_graph_attempt','project_graph')
+  $oldNames=@('wow_user_window_sample_links','capture_window','put_observation','observation_edge','normalize_observation_chains','project_graph_attempt','project_graph')
+  $names=@('wow_user_window_sample_links','wow_native_window_capture','wow_native_window_observation_put','wow_native_window_observation_edge','wow_native_window_normalize_chains','project_graph_attempt','project_graph')
   $current=@($names|ForEach-Object {Body $source $_}) -join "`n"
   $old=(& git -C $repo show '4b8a7c8ae6eaaca3350d640650dd9d57201fd581:src/wow32-dll/source/wow_user_object_bindings.c') -join "`n"
   if($LASTEXITCODE){throw 'Immutable counterfactual missing'}
-  $baseline=@($names|Where-Object {$_ -ne 'project_graph_attempt'}|ForEach-Object {Body $old $_}) -join "`n"
-  foreach($name in $names){$baseline=[regex]::Replace($baseline,('\b'+$name+'\b'),('baseline_'+$name))}
+  $baseline=@($oldNames|Where-Object {$_ -ne 'project_graph_attempt'}|ForEach-Object {Body $old $_}) -join "`n"
+  foreach($name in $oldNames){$baseline=[regex]::Replace($baseline,('\b'+$name+'\b'),('baseline_'+$name))}
   [IO.File]::WriteAllText("$out/capture_exact_body.h",$current+"`n"+$baseline)
   $fixture="$PSScriptRoot/wow_native_capture_reacquire_fixture.c"
  }
- & $CompilerDriver cl.exe /nologo /TC /O2 /MT /W4 /WX "/I$out" $fixture "/Fo$out/control.obj" "/Fe$out/control.exe" /link user32.lib *> "$out/build.log"
+ & $CompilerDriver cl.exe /nologo /TC /O2 /MT /W4 /WX "/I$out" "/I$repo/src" $fixture "/Fo$out/control.obj" "/Fe$out/control.exe" /link user32.lib *> "$out/build.log"
  if($LASTEXITCODE){throw 'Native counterexample build failed'}
  & "$out/control.exe" *> "$out/result.txt"
  if($LASTEXITCODE){throw 'Native counterexample failed'}
@@ -50,6 +51,6 @@ try{
   }
   if($text -notmatch 'NATIVE_CHAIN_CONTROL errors=0 production-cause-proven=0'){throw 'Missing evidence boundary'}
  }
- Get-FileHash $owner,$fixture,$PSCommandPath,$CompilerDriver,"$out/chain_exact_body.h","$out/control.exe","$out/result.txt"|Export-Csv -NoTypeInformation "$out/inputs.csv"
+ Get-FileHash $owner,$captureOwner,$fixture,$PSCommandPath,$CompilerDriver,"$out/chain_exact_body.h","$out/control.exe","$out/result.txt"|Export-Csv -NoTypeInformation "$out/inputs.csv"
  0|Set-Content "$out/exit.txt"
 }catch{$_|Out-String|Set-Content "$out/failure.txt";1|Set-Content "$out/exit.txt";throw}

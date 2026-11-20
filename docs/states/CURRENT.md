@@ -28,6 +28,17 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P71 [native capture extraction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-capture-owner.json)
+moves9 functions/320 body lines from F to B as a114-root prerequisite.
+Public USER sampling/message operands/scratch normalization have no outer callbacks;
+9 bodies are identical after4 private helper renames. Mirror delta0/0, direct-ID
+delta0; guest mapping, retirement and publication coordination still require C ownership.
+Cached x86/x64/reference builds, dual11 publication/22 hashes, native-chain controls,
+21 reacquire cases, required-root, retirement/nested/terminal and8-phase Win16 dialog
+pass, as do A/B compiled gates. Package5d88ed0b-2d52-4d41-9415-8b49f8bfa233.
+Final document gates and enclosing P71 commit/push provide the delivery receipt.
+Ledger remains170 eliminated/398 open; S14 and the114-root batch remain open.
+
 P70 [registry binding migration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-registry-binding-owner.json)
 places actual token/lock/cleanup implementation and the C-facing header in B.
 Twelve provider IDs and C0114 are verified eliminated; mirror delta0/0.
@@ -43,7 +54,7 @@ S14 and the114-root batch remain open.
 is not admitted. Keep the existing six layers: independent compatibility
 mechanisms and state belong in B, original subsystem coordination in C, and
 product policy in F. Do not introduce a new C component or additional B-to-C
-exception. Registry binding ownership is under implementation; no further
+exception. Registry binding ownership was delivered in P70; no further
 dependency is counted eliminated before verification.
 
 P68 [shared USER runtime ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p68-runtime-owner.json)

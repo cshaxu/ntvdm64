@@ -1,5 +1,7 @@
 #ifndef WOW_USER_OBJECT_BINDINGS_H
 #define WOW_USER_OBJECT_BINDINGS_H
+
+#include "compat/include/wow_window_capture.h"
 #include <windows.h>
 #include "wow32-dll/include/opennt_user_multipass.h"
 struct wow_task_order_thread;
@@ -56,13 +58,6 @@ HWND WINAPI wow_user_window_public_handle(HWND);
  * already committed original shared-window observation.  Both require exact
  * full native identity; neither may truncate or allocate a new alias. */
 HWND WINAPI wow_user_window_public_guest_handle(HWND);
-/* Call-local public-USER relationship sample. No WW, task association or
- * native ownership is created. Identities remain native until publication;
- * the desktop must be translated by the existing guest-view owner. */
-typedef struct wow_user_window_links {
-    HWND window, next, parent, child, owner;
-} wow_user_window_links;
-BOOL WINAPI wow_user_window_sample_links(HWND, wow_user_window_links *);
 /* Prepare all query nodes and publish one validated relation closure. Does
  * not acquire task ownership. Dead observed generations can be withdrawn
  * only if no unchanged published source still points to their backing;
@@ -75,10 +70,5 @@ BOOL WINAPI wow_user_window_refresh_graph(HWND);
 /* Typed callback payload identities, sampled in the same graph transaction.
  * Caller excludes insertion-order constants and non-window union members. */
 BOOL WINAPI wow_user_window_refresh_payload(HWND, const HWND *, ULONG);
-/* Native SDK message operands only; original WOW retains all conversion.
- * Caller supplies four slots. No window queries or guest allocation occur. */
-ULONG WINAPI wow_user_message_window_roots(UINT, WPARAM, LPARAM, HWND [4]);
 BOOL WINAPI wow_user_window_refresh_message(HWND, UINT, WPARAM, LPARAM);
-ULONG WINAPI wow_user_queue_window_roots(const MSG *, HWND [4]);
-ULONG WINAPI wow_user_message_return_roots(UINT, WPARAM, LPARAM, LRESULT, HWND [4]);
 #endif

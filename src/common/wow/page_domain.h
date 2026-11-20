@@ -115,25 +115,6 @@ int __cdecl mvdm_softpc_wow_page_domain_exchange_window_word(unsigned long backi
 int __cdecl mvdm_softpc_wow_page_domain_collect_observed_classes(void);
 
 
-/* Counted class query bytes are copied during this synchronous call. They
- * neither register native classes nor carry native pointers into guest state. */
-typedef struct mvdm_softpc_wow_window_descriptor {
-    unsigned short atom;
-    unsigned long class_style, window_extra, name_bytes;
-    char name[256];
-} mvdm_softpc_wow_window_descriptor;
-/* Call-local copy of the committed view. Numeric rectangles/styles retain
- * the original x86 meaning, not a modern USER pointer/layout. The caller
- * serializes two-pass sizing/copy with guest execution and owns the arrays.
- * An empty class descriptor denotes the not-yet-observed desktop root. */
-typedef struct mvdm_softpc_wow_window_observation {
-    mvdm_softpc_wow_window_links links;
-    mvdm_softpc_wow_window_descriptor descriptor;
-    long window_rect[4], client_rect[4];
-    unsigned long style, exstyle, control_id;
-    unsigned long process_id, thread_id, module;
-    unsigned long context_help_id; /* Native scalar, retained with this generation. */
-} mvdm_softpc_wow_window_observation;
 /* Read an exact retained generation, including after logical retirement.
  * Requires an outstanding borrow and the existing execution owner. Returned
  * links are historical identities, not permission to resolve reused HWNDs.

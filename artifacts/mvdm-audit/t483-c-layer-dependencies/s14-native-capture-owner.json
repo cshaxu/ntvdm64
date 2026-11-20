@@ -1,0 +1,187 @@
+{
+  "baseline": "68264a799",
+  "status": "P71 final source built, dual-published and targeted-tested; enclosing reviewed commit is delivery receipt",
+  "scope": "114-root native-call publication prerequisite; not 114 IDs eliminated",
+  "moved_body_lines": 320,
+  "functions": [
+    "wow_user_window_sample_links",
+    "position_roots",
+    "wow_user_message_window_roots",
+    "wow_user_queue_window_roots",
+    "wow_user_message_return_roots",
+    "capture_window -> wow_native_window_capture",
+    "put_observation -> wow_native_window_observation_put",
+    "observation_edge -> wow_native_window_observation_edge",
+    "normalize_observation_chains -> wow_native_window_normalize_chains"
+  ],
+  "B_ownership": "Public USER sampling, typed message operands, caller-owned transaction scratch and chain normalization. No retained graph, task selection, guest mapping or outer callbacks. Observation/descriptor value structs move from D to existing B graph header.",
+  "retained_coordination": "F project_graph_attempt retains original copy-view -> capture roots -> resolve each payload at original position -> capture closure -> normalize -> commit -> free ordering. C placement for this coordinator and original control retirement remains pending.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "direct_ledger_delta": 0,
+  "verification_required": [
+    "native-chain counterexample",
+    "21 reacquire cases with immutable baseline",
+    "process-retirement and terminal schedule",
+    "native callback payload publication",
+    "real Win16 dialog",
+    "A/B compiled boundary",
+    "cached build and dual11 release"
+  ],
+  "body_identity": [
+    {
+      "old_symbol": "wow_user_window_sample_links",
+      "new_symbol": "wow_user_window_sample_links",
+      "old_line": 43,
+      "new_line": 6,
+      "body_sha256_after_symbol_rename": "38a9f55dc4beb034f2a330eea8a2d0fcc609a1109f98d4fc412364ddfb582ec1"
+    },
+    {
+      "old_symbol": "position_roots",
+      "new_symbol": "position_roots",
+      "old_line": 251,
+      "new_line": 32,
+      "body_sha256_after_symbol_rename": "cea46e73558225b20e29aa64ec1f5b13d3a9fa3ff5e240072a374f2e4c5b7e2a"
+    },
+    {
+      "old_symbol": "wow_user_message_window_roots",
+      "new_symbol": "wow_user_message_window_roots",
+      "old_line": 270,
+      "new_line": 51,
+      "body_sha256_after_symbol_rename": "bf6c82608055e989a02bd68643a90328c6b248c209433c33a00e068be685671d"
+    },
+    {
+      "old_symbol": "wow_user_queue_window_roots",
+      "new_symbol": "wow_user_queue_window_roots",
+      "old_line": 356,
+      "new_line": 137,
+      "body_sha256_after_symbol_rename": "533082bd58592fa65eb595b4b2c1db872b79f864d5a51ca04c48643f5806bf98"
+    },
+    {
+      "old_symbol": "wow_user_message_return_roots",
+      "new_symbol": "wow_user_message_return_roots",
+      "old_line": 368,
+      "new_line": 149,
+      "body_sha256_after_symbol_rename": "d98cb0f9030d4caf73625d5ab64a3d6233efb4623290989baebde9237eef1988"
+    },
+    {
+      "old_symbol": "capture_window",
+      "new_symbol": "wow_native_window_capture",
+      "old_line": 407,
+      "new_line": 176,
+      "body_sha256_after_symbol_rename": "de5d8bfeb6b47efe70fbf0d9360eeb16b57506241eed96f590a0b304bd5f822c"
+    },
+    {
+      "old_symbol": "put_observation",
+      "new_symbol": "wow_native_window_observation_put",
+      "old_line": 461,
+      "new_line": 230,
+      "body_sha256_after_symbol_rename": "394abc8c8bf155054f6c67a01eeb7dd818b87fe7b0e2113d4e1a7ed0c88585b8"
+    },
+    {
+      "old_symbol": "observation_edge",
+      "new_symbol": "wow_native_window_observation_edge",
+      "old_line": 491,
+      "new_line": 260,
+      "body_sha256_after_symbol_rename": "772ab26144a1159f8532a0ed677f8318ac40f58934377bf93dc8d70268aef8d1"
+    },
+    {
+      "old_symbol": "normalize_observation_chains",
+      "new_symbol": "wow_native_window_normalize_chains",
+      "old_line": 503,
+      "new_line": 272,
+      "body_sha256_after_symbol_rename": "622011ce2cfa750f861055ed5a87cab72109061457717a51419b00e3b8e7dbec"
+    }
+  ],
+  "body_identity_rule": "Exact function bodies after line-ending normalization and four internal helper symbol renames; signatures promoted from static /Gz to explicit WINAPI. No algorithm or call sequence changed.",
+  "package": "5d88ed0b-2d52-4d41-9415-8b49f8bfa233",
+  "verification": {
+    "root": "build/t483-s14-native-capture-owner",
+    "build": {
+      "exit": 0,
+      "scopes": [
+        "cached x86",
+        "cached x64",
+        "reference x86",
+        "explicit four x86 release images"
+      ]
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "5d88ed0b-2d52-4d41-9415-8b49f8bfa233",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "tests": {
+      "exit": 0,
+      "native_chain": "3 native relationship witnesses; baseline limitation retained",
+      "reacquire": "21 cases; errors=0; immutable baseline retained",
+      "required_root": "errors=0; freshness/generation/atomic failure/payload/external/LastError",
+      "process_retirement": "errors=0",
+      "native_nested": "errors=0; native_direct=5",
+      "terminal": "fixture exit0; real CCPU terminal schedule, original modal lifecycle",
+      "Win16_dialog": "WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+      "WOW_boundary": "145 selected objects, 9 negative controls",
+      "AB_boundary": "8 compiled graphs, x86 WOW includes 15 A/B objects"
+    },
+    "initial_test_failure": "Reacquire fixture compilation lacked src include directory after historical header relocation; added include search path, reran all selected tests successfully. No product semantic change.",
+    "not_claimed": "No full regression or graph-cost profiling run. Historical verify-wow-graph-cost runner already expects obsolete 13-image manifest and pre-split helper locations; not a current acceptance gate.",
+    "delivery_gates": {
+      "exit": 0,
+      "checks": [
+        "22 final published hashes",
+        "documentation governance",
+        "relative links",
+        "git diff --check"
+      ],
+      "warning": "Existing CURRENT size exception remains documented; not a failed gate."
+    },
+    "post_test_format_only": "Removed one trailing blank line at EOF in new B source after staged whitespace check; function tokens and bodies unchanged. No rebuild/retest required under owner formatting-only authorization."
+  },
+  "processes": {
+    "build": {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "script": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-native-capture-owner/build.ps1",
+      "pid": 37980,
+      "start": "2026-11-19T17:12:28.2717328-08:00"
+    },
+    "deliver": {
+      "pid": 16148,
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-native-capture-owner/deliver.ps1",
+      "start": "2026-11-20T01:17:04.3039243Z"
+    },
+    "tests-final": {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "start": "2026-11-20T01:18:46.5171628Z",
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-native-capture-owner/tests.ps1",
+      "pid": 7544
+    }
+  },
+  "final_source_sha256": {
+    "src/compat/wow_window_capture.c": "50e6e9162d698eeb1e9670e7729d85a229984b54535fb614e336e9187be77c7d",
+    "src/compat/include/wow_window_capture.h": "7db785eee758713bccbb9cdfdcdc608bcbda44e646222a055c9f9507108d5104",
+    "src/compat/include/wow_window_graph.h": "e11d06cb5b263b4269a89aa1fadc6bfea9ba49e01146abe621a7d508d596639d",
+    "src/common/wow/page_domain.h": "b2da29969635a90890de52895708863339fe78389235cd8d86fe8b4da3c9379f",
+    "src/wow32-dll/source/wow_user_object_bindings.c": "daf780f70fae8cdffff4707ba729cb50e972d04ed769d2a814829e6fd02b6fa7",
+    "src/wow32-dll/include/wow_user_object_bindings.h": "5df96c8164665fbfa479b3a911d1c2634d85d9c7b05257d81c6c39c42637dc3b",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "dcb2abc3f64873ff00e44b89d1a20c65e13a17270cdaaa5d27b3112fec94220d",
+    "test/observation/verify-wow-native-chain-capture.ps1": "fcd1034c066ace670f9d555d01baa24d439c3e5ec8b28ad59a1929b935693a65",
+    "test/observation/verify-wow-required-root-capture.ps1": "5819d4fc91a215b55461efd17c36ed266937fcf1e3261a553c4fa5391604f3d5",
+    "test/observation/wow_native_chain_capture_fixture.c": "71c8467ec85b309c090fde615cfc9bd956a2c4a738a0e8d5fe22a9991fa4b9d9"
+  },
+  "ledger": {
+    "eliminated": 170,
+    "open": 398,
+    "supporting": 43,
+    "eliminated_transitive": 6,
+    "excluded": 1,
+    "total": 618
+  }
+}

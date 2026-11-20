@@ -17,11 +17,24 @@ function Owned($name,$exe,$line,$seconds){
 }
 try{
  $text=[IO.File]::ReadAllText($SourceFile).Replace("`r`n","`n")
- $start=$text.IndexOf('static BOOL put_observation(');$end=$text.IndexOf('BOOL WINAPI wow_user_window_project_graph(',$start)
+ $sources=@($SourceFile)
+ if($SourceFile -eq "$repo\src\wow32-dll\source\wow_user_object_bindings.c"){
+  $capture="$repo/src/compat/wow_window_capture.c"
+  $native=[IO.File]::ReadAllText($capture).Replace("`r`n","`n")
+  $at=$native.IndexOf('BOOL WINAPI wow_native_window_observation_put(')
+  $transaction=$text.IndexOf('static BOOL project_graph_attempt(')
+  if($at -lt 0 -or $transaction -lt 0){throw 'Current split transaction boundaries missing'}
+  $text=$native.Substring($at)+"`n"+$text.Substring($transaction)
+  # Preserve the sealed-source fixture's lower-service name; helper bodies
+  # and transaction order are extracted unchanged from the current owners.
+  $text=$text.Replace('wow_native_window_capture','capture_window')
+  $start=0;$sources+=,$capture
+ }else{$start=$text.IndexOf('static BOOL put_observation(')}
+ $end=$text.IndexOf('BOOL WINAPI wow_user_window_project_graph(',[Math]::Max(0,$start))
  if($start -lt 0 -or $end -le $start){throw 'Exact transaction body boundaries missing'}
  $header="$root/required_root_capture_body.h";$fixture="$PSScriptRoot/wow_required_root_capture_fixture.c"
  [IO.File]::WriteAllText($header,$text.Substring($start,$end-$start),[Text.UTF8Encoding]::new($false))
- Get-FileHash $SourceFile,$fixture,$header,$CompilerDriver,$PSCommandPath|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Get-FileHash ($sources+@($fixture,$header,$CompilerDriver,$PSCommandPath))|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $line='/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /O2 /MT /W4 /WX /I"'+$repo+'/src" /I"'+$root+'" "'+$fixture+'" /Fo"'+$root+'/unit.obj" /Fe"'+$root+'/unit.exe" /link user32.lib"'
  if((Owned compile $env:ComSpec $line 120)){throw 'Exact root-body fixture compile failed'}
  $bytes=[IO.File]::ReadAllBytes("$root/unit.exe");$pe=[BitConverter]::ToInt32($bytes,60)
