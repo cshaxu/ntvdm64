@@ -339,11 +339,14 @@
     {
       "id": "B0027",
       "contract": "worker_base_publication",
-      "provider": "src/ntvdm-exe/win32/console_client.c",
-      "target": "send_video_copy",
-      "layer": "F",
+      "provider": "src/compat/console_services.c",
+      "target": "compat_console_send_video_copy",
+      "layer": "B",
       "kind": "caller-supplied-publication-operation",
-      "status": "outer-target-confirmed"
+      "status": "inner-target-confirmed",
+      "baseline_provider": "src/ntvdm-exe/win32/console_client.c",
+      "baseline_layer": "F",
+      "migration_status": "P88 moves the copied-frame sender into compat."
     },
     {
       "id": "B0028",
@@ -425,8 +428,8 @@
     }
   ],
   "indirect_counts": {
-    "B": 18,
-    "F": 11,
+    "B": 19,
+    "F": 10,
     "D": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
@@ -467,5 +470,8 @@
     "B0014",
     "B0015",
     "B0016"
+  ],
+  "p88_inward_targets": [
+    "B0027"
   ]
 }

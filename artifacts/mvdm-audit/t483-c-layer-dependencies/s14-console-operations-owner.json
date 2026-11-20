@@ -1,0 +1,84 @@
+{
+  "packet": "M0 T483 S14 P88",
+  "baseline": "800b0c4bcbbd95473abc939a1139a313faf8a24a",
+  "status": "Cached full build, dual publication, product and fixture tests and final gates passed. Enclosing commit is the delivery receipt.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "scope": "Compat owns Console handle classification, state requests, output and cell transfer, key return, palette, and copied-frame send. F retains opened-handle lifetime, broker handoff, input acknowledgement, graphics capture and shutdown. One endpoint/lock/request sequence retained.",
+  "evidence_root": "build/t483-s14-console-operations-owner",
+  "selected_x86_providers": {
+    "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map": {
+      "C0264": "0001:00123160       _MvdmCreateFileA@28        00524160 f   softpc-win32-bindings:console_services.obj",
+      "C0265": "0001:00123290       _MvdmFillConsoleOutputAttribute@20 00524290 f   softpc-win32-bindings:console_services.obj",
+      "C0266": "0001:00123370       _MvdmFillConsoleOutputCharacterA@20 00524370 f   softpc-win32-bindings:console_services.obj",
+      "C0269": "0001:00123510       _MvdmGetConsoleCursorInfo@8 00524510 f   softpc-win32-bindings:console_services.obj",
+      "C0270": "0001:001235a0       _MvdmGetConsoleFontSize@8  005245a0 f   softpc-win32-bindings:console_services.obj",
+      "C0271": "0001:00123670       _MvdmGetConsoleMode@8      00524670 f   softpc-win32-bindings:console_services.obj",
+      "C0272": "0001:001237c0       _MvdmGetConsoleScreenBufferInfo@8 005247c0 f   softpc-win32-bindings:console_services.obj",
+      "C0274": "0001:001239c0       _MvdmGetCurrentConsoleFont@12 005249c0 f   softpc-win32-bindings:console_services.obj",
+      "C0276": "0001:00123b60       _MvdmGetFileType@4         00524b60 f   softpc-win32-bindings:console_services.obj",
+      "C0277": "0001:00123bd0       _MvdmReadConsoleOutputA@20 00524bd0 f   softpc-win32-bindings:console_services.obj",
+      "C0278": "0001:00123c10       _MvdmSetConsoleCursorInfo@8 00524c10 f   softpc-win32-bindings:console_services.obj",
+      "C0279": "0001:00123c90       _MvdmSetConsoleCursorPosition@8 00524c90 f   softpc-win32-bindings:console_services.obj",
+      "C0280": "0001:00123cf0       _MvdmSetConsoleMode@8      00524cf0 f   softpc-win32-bindings:console_services.obj",
+      "C0281": "0001:00123df0       _MvdmSetConsoleScreenBufferSize@8 00524df0 f   softpc-win32-bindings:console_services.obj",
+      "C0283": "0001:00123fd0       _MvdmSetConsoleWindowInfo@12 00524fd0 f   softpc-win32-bindings:console_services.obj",
+      "C0285": "0001:001240d0       _MvdmWriteConsoleA@20      005250d0 f   softpc-win32-bindings:console_services.obj",
+      "C0286": "0001:001242a0       _NtvdmConsoleTextColours   005252a0 f   softpc-win32-bindings:console_services.obj"
+    }
+  },
+  "eliminated_C_ids": [
+    "C0264",
+    "C0265",
+    "C0266",
+    "C0269",
+    "C0270",
+    "C0271",
+    "C0272",
+    "C0274",
+    "C0276",
+    "C0277",
+    "C0278",
+    "C0279",
+    "C0280",
+    "C0281",
+    "C0283",
+    "C0285",
+    "C0286"
+  ],
+  "eliminated_B_ids": [
+    "B0027"
+  ],
+  "compiled_ownership": {
+    "objects": 12,
+    "external_relocation_pairs": 332,
+    "outward": 0,
+    "counts": {
+      "CRT": 63,
+      "system import": 141,
+      "lib-win32": 5,
+      "not selected in final link": 109,
+      "compat": 14
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "8529aa2c-e3ae-4089-82c8-3f950c603bc0",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "093fad86da6bfac9c7e17b0f6dd0777d1f55bdfeb147f933e6ad093519c44119",
+    "release-and-test.out": "41f206620443e0ba115afe54c0fc5d74d3dc73252f61bf7dff435478b3fc15e7",
+    "final-checks.out": "0671dd07ca88a3b2184ecc48fc7d31ea1ed88c15c99d1352a446985a6424b28e",
+    "b-compiled-candidates.json": "1286307b34f5f2abe4767a32f0dce20a1d0d523c937a6e7e38074053b263a663",
+    "console-routing.txt.console.txt": "d8736979605d767333a465be1085e8090a493ecf6c466953505504643c1c1e0d"
+  }
+}

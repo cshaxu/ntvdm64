@@ -8,9 +8,17 @@ typedef struct compat_console_endpoint {
     ntcon_worker_client channel;
     CRITICAL_SECTION lock;
     console_io_request request;
+    HANDLE input_identity, output_identity;
+    BYTE request_tile[CONSOLE_IO_TILE_BYTES];
+    CRITICAL_SECTION palette_lock;
+    PALETTEENTRY text_palette[16];
+    BOOL text_palette_valid;
 } compat_console_endpoint;
 
-BOOL compat_console_state_operation(compat_console_endpoint *endpoint, DWORD operation,
-    const console_io_state *state, console_io_state *result);
+compat_console_endpoint *compat_console_output_endpoint(HANDLE output);
+compat_console_endpoint *compat_console_input_endpoint(HANDLE input);
+DWORD compat_console_send_video(compat_console_endpoint *endpoint, const console_video_description *description,
+    const void *pixels);
+DWORD compat_console_send_video_copy(void *endpoint, const void *copy, SIZE_T bytes);
 
 #endif

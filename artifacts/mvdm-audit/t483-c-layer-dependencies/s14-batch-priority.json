@@ -3,59 +3,12 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 135,
+    "open": 118,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 433
+    "eliminated": 450
   },
   "provider_groups": [
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/win32/console_client.c",
-      "open_ids": [
-        "C0264",
-        "C0265",
-        "C0266",
-        "C0269",
-        "C0270",
-        "C0271",
-        "C0272",
-        "C0274",
-        "C0276",
-        "C0277",
-        "C0278",
-        "C0279",
-        "C0280",
-        "C0281",
-        "C0283",
-        "C0285",
-        "C0286",
-        "C0287",
-        "C0289"
-      ],
-      "count": 19,
-      "symbols": [
-        "MvdmCreateFileA",
-        "MvdmFillConsoleOutputAttribute",
-        "MvdmFillConsoleOutputCharacterA",
-        "MvdmGetConsoleCursorInfo",
-        "MvdmGetConsoleFontSize",
-        "MvdmGetConsoleMode",
-        "MvdmGetConsoleScreenBufferInfo",
-        "MvdmGetCurrentConsoleFont",
-        "MvdmGetFileType",
-        "MvdmReadConsoleOutputA",
-        "MvdmSetConsoleCursorInfo",
-        "MvdmSetConsoleCursorPosition",
-        "MvdmSetConsoleMode",
-        "MvdmSetConsoleScreenBufferSize",
-        "MvdmSetConsoleWindowInfo",
-        "MvdmWriteConsoleA",
-        "NtvdmConsoleTextColours",
-        "ShowConsoleCursor",
-        "ntvdm_console_set_active"
-      ]
-    },
     {
       "kind": "symbol",
       "provider": "src/ntvdm-exe/win32/console_compat.c",
@@ -256,6 +209,19 @@
         "wow_user_dispatch_exception",
         "wow_user_invoke_thunk",
         "wow_user_sys_error_box"
+      ]
+    },
+    {
+      "kind": "symbol",
+      "provider": "src/ntvdm-exe/win32/console_client.c",
+      "open_ids": [
+        "C0287",
+        "C0289"
+      ],
+      "count": 2,
+      "symbols": [
+        "ShowConsoleCursor",
+        "ntvdm_console_set_active"
       ]
     },
     {
@@ -924,23 +890,6 @@
     {
       "name": "Console routing and graphics mechanics",
       "ids": [
-        "C0264",
-        "C0265",
-        "C0266",
-        "C0269",
-        "C0270",
-        "C0271",
-        "C0272",
-        "C0274",
-        "C0276",
-        "C0277",
-        "C0278",
-        "C0279",
-        "C0280",
-        "C0281",
-        "C0283",
-        "C0285",
-        "C0286",
         "C0287",
         "C0288",
         "C0289",
@@ -960,16 +909,16 @@
         "C0303",
         "C0304"
       ],
-      "potential_direct_ids": 35,
+      "potential_direct_ids": 18,
       "providers": [
         "src/ntvdm-exe/win32/console_client.c",
         "src/ntvdm-exe/win32/console_compat.c",
         "src/ntvdm-exe/win32/console_graphics.c"
       ],
       "evidence": "24+10+5 direct APIs share routed console resources. NTCON channel, active console identity and error/lifecycle ownership must be separated; moving wrappers to B alone fails.",
-      "status": "Shared transport and four pointer operations delivered in P87. Remaining handle ops, graphics and broker handoff still open.",
+      "status": "Transport, pointer and standard Console operations delivered. Graphics ownership, input acknowledgement and broker handoff still open.",
       "count_rule": "Potential IDs, not eliminated IDs. Helpers, headers and callback edges are not added as speculative extra savings.",
-      "verified_eliminated_ids": 4
+      "verified_eliminated_ids": 21
     },
     {
       "name": "WOW registry token and shared shadow-store boundary",
@@ -1000,5 +949,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P87"
+  "updated_by": "T483 S14 P88"
 }

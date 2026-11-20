@@ -59,10 +59,9 @@ cases passed; mirror delta0/0. Test cases now clean their owned desktop processe
 Eight IDs eliminated: current429/139. Console control/transport remains open.
 Enclosing commit/push is receipt; prior P76 evidence remains in P81 history.
 
-P85 [COMMAND capture](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-command-capture-owner.json) closed nine B calls.
-P86 [DOSWOW directory](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-command-directory-owner.json) closed three.
-P87 [Console transport](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-transport-owner.json) closes four B calls and four C functions.
-Delivered: B 13 known outward calls; C 135 open, including 79 function and 11 data dependencies.
+P85-P87 closed 16 B calls. [P87 Console transport](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-transport-owner.json)
+also closed four C functions. B 13 known calls; C 135 open (79 functions, 11 data).
+P88 [Console operations](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-operations-owner.json) delivered B -1/C -17. B 12 known; C 118 open (62 functions, 11 data).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same
