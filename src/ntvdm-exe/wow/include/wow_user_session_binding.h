@@ -22,6 +22,6 @@ BOOL WINAPI wow_user_session_detach(wow_user_session_binding *);
 
 /* Narrow parent-ABI query for a late-loaded WOW32 target.  It prevents the
  * DLL from importing or dereferencing the worker's session object. */
-BOOL WINAPI wow_user_worker_active(void);
+#include "compat/include/wow_worker_state.h"
 
 #endif

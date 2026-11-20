@@ -1,5 +1,6 @@
 #include "ntvdm-exe/session/session.h"
 #include <windows.h>
+#include "compat/include/wow_worker_state.h"
 
 static uint32_t teardown_order[2];
 static uint32_t teardown_count;
@@ -12,7 +13,8 @@ static DWORD WINAPI foreign_escape(void *context)
     if(session_arm_termination_escape(owner))return 2;
     session_disarm_termination_escape(owner);
     if(!owner->termination_armed || session_terminate_current(99u))return 3;
-    if(owner->state!=SESSION_STATE_ACTIVE || owner->completion_code)return 4;
+    if(owner->host_context.state!=SESSION_STATE_ACTIVE || owner->completion_code ||
+        !wow_user_worker_active())return 4;
     return session_thread_unbind(owner) ? 0 : 5;
 }
 
@@ -33,8 +35,8 @@ static int check_escape_owner(void)
         (void)session_terminate_current(37u);
         return 14;
     }
-    if(escape_owner.state!=SESSION_STATE_COMPLETED ||
-        escape_owner.completion_code!=37u)return 15;
+    if(escape_owner.host_context.state!=SESSION_STATE_COMPLETED ||
+        escape_owner.completion_code!=37u || wow_user_worker_active())return 15;
     session_disarm_termination_escape(&escape_owner);
     if(escape_owner.termination_armed || !session_thread_unbind(&escape_owner) ||
         !session_dispose(&escape_owner))return 16;
@@ -105,6 +107,27 @@ static void record_teardown(void *context)
     teardown_order[teardown_count++] = *(const uint32_t *)context;
 }
 
+static int check_inner_liveness(void)
+{
+    session owner;
+    if (wow_user_worker_active()) return 30;
+    session_initialize(&owner, 606u);
+    if (!session_activate(&owner) || !session_thread_bind(&owner) ||
+            !wow_user_worker_active()) return 31;
+    if (!session_request_cancellation(&owner, SESSION_CANCELLATION_REQUESTED) ||
+            wow_user_worker_active() ||
+            compat_host_context_register(&owner.host_context, record_teardown, NULL))
+        return 32;
+    if (!session_thread_unbind(&owner) || wow_user_worker_active() ||
+            !session_dispose(&owner)) return 33;
+    session_initialize(&owner, 707u);
+    if (!session_activate(&owner) || !session_thread_bind(&owner)) return 34;
+    session_complete(&owner, 42u);
+    if (wow_user_worker_active() || owner.completion_code != 42u ||
+            !session_thread_unbind(&owner) || !session_dispose(&owner)) return 35;
+    return 0;
+}
+
 int main(void)
 {
     session first;
@@ -147,11 +170,11 @@ int main(void)
         first.host_context.cleanup_count != 2u)
         return 3;
     session_complete(&second, 37u);
-    if (second.state != SESSION_STATE_COMPLETED || second.completion_code != 37u ||
+    if (second.host_context.state != SESSION_STATE_COMPLETED || second.completion_code != 37u ||
         session_request_cancellation(&second, SESSION_CANCELLATION_REQUESTED) != 0)
         return 4;
     if (session_request_cancellation(&first, SESSION_CANCELLATION_REQUESTED) == 0 ||
-        first.state != SESSION_STATE_CANCELLED ||
+        first.host_context.state != SESSION_STATE_CANCELLED ||
         first.cancellation_reason != SESSION_CANCELLATION_REQUESTED ||
         session_register_teardown(&first, record_teardown, (void *)&one) != 0)
         return 5;
@@ -161,6 +184,8 @@ int main(void)
         return 6;
     {
         int result = check_binding_rollback();
-        return result ? result : check_escape_owner();
+        if (result) return result;
+        result = check_escape_owner();
+        return result ? result : check_inner_liveness();
     }
 }

@@ -25,7 +25,7 @@ extern int32_t __cdecl c_setCS(uint16_t value);
 extern int32_t __cdecl c_setSS(uint16_t value);
 extern void __cdecl setSP(uint16_t value);
 extern void __cdecl setIP(uint16_t value);
-extern BOOL WINAPI wow_user_worker_active(void);
+#include "compat/include/wow_worker_state.h"
 
 void __cdecl wow_callback_control_capture(wow_callback_control *control)
 {

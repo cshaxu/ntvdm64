@@ -32,7 +32,7 @@ int session_valid(const session *instance)
     return instance != NULL && instance->magic == SESSION_MAGIC &&
         instance->abi_version == SESSION_ABI_VERSION &&
         instance->struct_bytes == sizeof(*instance) &&
-        instance->identity != 0u && instance->state <= SESSION_STATE_COMPLETED &&
+        instance->identity != 0u && instance->host_context.state <= SESSION_STATE_COMPLETED &&
         instance->machine_backend <= SESSION_MACHINE_BACKEND_SOFTPC &&
         compat_host_context_valid(&instance->host_context) &&
         instance->thread_hook_count <= SESSION_MAX_THREAD_HOOKS &&
@@ -43,17 +43,16 @@ int session_valid(const session *instance)
 
 int session_activate(session *instance)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_READY)
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_READY)
         return 0;
     if (++instance->epoch == 0u) ++instance->epoch;
-    instance->state = SESSION_STATE_ACTIVE;
-    instance->host_context.registration_open = 1;
+    instance->host_context.state = SESSION_STATE_ACTIVE;
     return 1;
 }
 
 int session_select_machine_backend(session *instance, uint32_t backend)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_READY ||
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_READY ||
         instance->machine_backend != SESSION_MACHINE_BACKEND_NONE ||
         backend != SESSION_MACHINE_BACKEND_SOFTPC) return 0;
     instance->machine_backend = backend;
@@ -69,7 +68,7 @@ uint32_t session_machine_backend(const session *instance)
 int session_register_teardown(session *instance, session_teardown_fn function,
     void *context)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE)
         return 0;
     return compat_host_context_register(&instance->host_context, function, context);
 }
@@ -78,7 +77,7 @@ int session_register_thread_hook(session *instance, session_thread_bind_fn bind,
     session_thread_unbind_fn unbind, void *context)
 {
     uint32_t index;
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
         bind == NULL || unbind == NULL) return 0;
     for (index = 0u; index < instance->thread_hook_count; ++index) {
         session_thread_hook *hook = &instance->thread_hooks[index];
@@ -115,27 +114,25 @@ int session_unregister_thread_hook(session *instance, session_thread_bind_fn bin
 
 int session_request_cancellation(session *instance, uint32_t reason)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
         reason != SESSION_CANCELLATION_REQUESTED) return 0;
     instance->cancellation_reason = reason;
-    instance->state = SESSION_STATE_CANCELLED;
-    instance->host_context.registration_open = 0;
+    instance->host_context.state = SESSION_STATE_CANCELLED;
     return 1;
 }
 
 void session_complete(session *instance, uint32_t completion_code)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE)
         return;
     instance->completion_code = completion_code;
-    instance->state = SESSION_STATE_COMPLETED;
-    instance->host_context.registration_open = 0;
+    instance->host_context.state = SESSION_STATE_COMPLETED;
 }
 
 int session_set_video_event_sink(session *instance, session_video_event_fn sink,
     void *context)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_READY)
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_READY)
         return 0;
     instance->video_event_sink = sink;
     instance->video_event_context = context;
@@ -145,7 +142,7 @@ int session_set_video_event_sink(session *instance, session_video_event_fn sink,
 int session_notify_video_event(session *instance,
     const session_video_event *event)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
         event == NULL)
         return 0;
     if (event->kind == SESSION_VIDEO_EVENT_ACTIVE)
@@ -166,7 +163,7 @@ int session_presentation_text_acquire_writable(session *instance,
     uint8_t *replacement;
 
     if (bytes_out != NULL) *bytes_out = NULL;
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
         bytes_out == NULL || columns == 0u || rows == 0u ||
         (cell_bytes != 2u && cell_bytes != 4u)) return 0;
     required = (uint64_t)columns * (uint64_t)rows * cell_bytes;
@@ -293,7 +290,7 @@ int session_thread_bind_owned_source(session *instance, uint32_t binding_owner,
 {
     uint32_t index;
     volatile long *owner_counter;
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
         session_thread_current() != NULL ||
         (owner_counter = session_binding_owner_counter(instance, binding_owner)) == NULL)
         return 0;
@@ -397,7 +394,7 @@ int session_binding_diagnostic_snapshot(const session *instance,
 
 int session_arm_termination_escape(session *instance)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
         session_thread_current() != instance || instance->termination_armed != 0u ||
         thread_termination_escape != NULL)
         return 0;
@@ -419,12 +416,11 @@ int session_terminate_current(uint32_t completion_code)
 {
     session *instance = session_thread_current();
     if (instance != thread_termination_escape ||
-        !session_valid(instance) || instance->state != SESSION_STATE_ACTIVE ||
+        !session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
         instance->termination_armed == 0u)
         return 0;
     instance->completion_code = completion_code;
-    instance->state = SESSION_STATE_COMPLETED;
-    instance->host_context.registration_open = 0;
+    instance->host_context.state = SESSION_STATE_COMPLETED;
     longjmp(instance->termination_escape, 1);
 }
 
@@ -432,7 +428,7 @@ static int session_set_root(session *instance, char *destination,
     const char *path)
 {
     size_t length;
-    if (!session_valid(instance) || instance->state != SESSION_STATE_READY ||
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_READY ||
         destination == NULL || path == NULL || path[0] == '\0') return 0;
     length = strlen(path);
     if (length >= SESSION_FIRMWARE_ROOT_BYTES) return 0;
@@ -472,7 +468,7 @@ const char *session_mvdm_system_root(const session *instance)
 
 int session_guest_memory_begin(session *instance)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE)
         return 0;
     return guest_memory_lease_begin(&instance->guest_memory_lease);
 }

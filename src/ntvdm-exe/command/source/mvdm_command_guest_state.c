@@ -60,7 +60,7 @@ int mvdm_command_guest_state_register_doswow(uint16_t segment, uint16_t offset)
     session *owner = session_thread_current();
     command_registration *registration;
     if (owner == NULL || !session_valid(owner) ||
-        owner->state != SESSION_STATE_ACTIVE || !owner->guest_memory_lease.active)
+        owner->host_context.state != SESSION_STATE_ACTIVE || !owner->guest_memory_lease.active)
         return 0;
     registration = registration_ensure(owner);
     if (registration == NULL) return 0;
@@ -84,7 +84,7 @@ int mvdm_command_guest_state_directory_instance(uint32_t *linear_out,
     if (linear_out == NULL || bytes_out == NULL) return 0;
     *linear_out = *bytes_out = 0;
     if (owner == NULL || !session_valid(owner) ||
-        owner->state != SESSION_STATE_ACTIVE || !owner->guest_memory_lease.active)
+        owner->host_context.state != SESSION_STATE_ACTIVE || !owner->guest_memory_lease.active)
         return 0;
     registration = owner->mvdm_command_guest_state;
     if (registration == NULL) return 0;

@@ -28,6 +28,15 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P79 [inner lifecycle authority](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-liveness-owner.json)
+moves the actual worker-active query and sole lifecycle state into B; removes
+F session's duplicate state and the B registration flag. Product policy stays F.
+Ordinal269 and one NTVDM TLS are preserved. Cached full build, dual11/22 hashes,
+session/USER/real CCPU/terminal tests, Win16 dialog8 phases and eight A/B graphs
+passed. Package `4ad1ddc2-9bd7-4af8-b282-747d801bbd79`; mirror delta0 points/0 lines.
+Three outer consumer dependencies removed; ledger182/386 unchanged until whole
+chains migrate. Final governance and enclosing commit/push are the receipt.
+
 P78 [B-to-C admission and notification boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-b-c-admission-start-owner.json)
 records the approved B adapter exception; no new C component. Product startup
 notification stays F; lifecycle acquire/complete retains existing state and
@@ -39,13 +48,9 @@ Lifecycle relocation is pending. Final governance and enclosing commit/push
 provide the delivery receipt.
 
 P77 [compiled owner cycles](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-compiled-owner-cycles.json)
-checked all110 recorded object hashes against the P77 build: all matched.
-The largest section relocation cycle spans362 sections/50 objects (27 C,
-23 F), with53 distinct C-to-F referenced symbols in13 F providers;29 target
-native lifecycle. This includes function-address/data references, not only
-calls, and is not runtime or indirect-call coverage. Under the then-unapproved B-to-C boundary it ruled out whole-file
-B relocation; P78 approval supersedes that placement restriction. No source
-or package change, no eliminations; ledger182/386 and P76 release remain.
+records the P77-only COFF graph/hash evidence:53 crossing symbols in13 F
+providers, largest cycle27 C/23 F objects. P78 approval supersedes its former
+B placement restriction; regenerate evidence before claiming current coverage.
 
 P76 [scalar observation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-observation-owner.json)
 moves three exact diagnostic bodies from F termination into existing B compat.

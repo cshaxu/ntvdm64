@@ -226,3 +226,19 @@ adapter for every operation.
    whole chain and run the required cached build, publication, targeted tests,
    commit and push. Body review, design readiness and delivered elimination
    remain separate states.
+
+## P79 host-context lifecycle authority
+
+The single lifecycle value now resides in B host_context. F session retains
+activation/cancellation/completion decisions, reason/result fields and the
+termination escape; it no longer stores a duplicate state. The prior B
+registration_open boolean is removed: registration and execution liveness
+read the same state. This is not a new cancellation scheduler or permission
+to move product completion into B.
+
+wow_user_worker_active keeps its existing ABI/ordinal and now reads B TLS
+and B state directly. WOW32 still imports the NTVDM-owned provider; it does
+not link a second host_context TLS. This removes the outer query provider
+from lifecycle, callback restore and message cleanup, but does not close
+those consumers' remaining C-to-outer chains. P79 delivery evidence records
+final-code verification and its limits.

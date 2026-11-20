@@ -8,7 +8,7 @@
 #include "compat/include/host_context.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
-#define SESSION_ABI_VERSION UINT32_C(12)
+#define SESSION_ABI_VERSION UINT32_C(13)
 #define SESSION_MAX_TEARDOWNS COMPAT_HOST_CLEANUP_LIMIT
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
@@ -22,10 +22,10 @@ enum session_machine_backend {
 };
 
 enum session_state {
-    SESSION_STATE_READY = 0u,
-    SESSION_STATE_ACTIVE = 1u,
-    SESSION_STATE_CANCELLED = 2u,
-    SESSION_STATE_COMPLETED = 3u
+    SESSION_STATE_READY = COMPAT_HOST_CONTEXT_READY,
+    SESSION_STATE_ACTIVE = COMPAT_HOST_CONTEXT_ACTIVE,
+    SESSION_STATE_CANCELLED = COMPAT_HOST_CONTEXT_CANCELLED,
+    SESSION_STATE_COMPLETED = COMPAT_HOST_CONTEXT_COMPLETED
 };
 
 enum session_cancellation_reason {
@@ -93,7 +93,6 @@ typedef struct session {
     uint32_t magic;
     uint32_t abi_version;
     uint32_t struct_bytes;
-    uint32_t state;
     uint32_t identity;
     uint32_t epoch;
     uint32_t completion_code;

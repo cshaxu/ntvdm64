@@ -79,7 +79,7 @@ int main(void)
     CHECK(directory_clears == 1);
     CHECK(mvdm_command_guest_state_register_doswow(0x1234, 0x5678) &&
         directory_segment == 0x1234 && directory_offset == 0x5678);
-    owner.state=SESSION_STATE_ACTIVE;owner.epoch=1;
+    owner.host_context.state=SESSION_STATE_ACTIVE;owner.epoch=1;
     memcpy(memory+100,"ordinary\r",9);memcpy(memory+400,"A=ordinary\0",12);
     memcpy(memory+800,handles,sizeof(handles));
     CHECK(mvdm_command_native_child_capture_guest(0,100,0,400,0,800));

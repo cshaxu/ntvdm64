@@ -31,7 +31,7 @@ int compat_host_context_register(compat_host_context *context,
     compat_host_cleanup_fn function, void *argument)
 {
     uint32_t index;
-    if (!compat_host_context_valid(context) || !context->registration_open || function == NULL)
+    if (!compat_host_context_valid(context) || context->state != COMPAT_HOST_CONTEXT_ACTIVE || function == NULL)
         return 0;
     for (index = 0u; index < context->cleanup_count; ++index) {
         if (context->cleanups[index].function == function &&

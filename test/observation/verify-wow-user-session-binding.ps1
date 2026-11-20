@@ -1,11 +1,12 @@
 param([string]$BuildRoot='build/M0-T422/S2/user-session-binding')
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
-$out=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
-if (!$out.StartsWith((Join-Path $repo 'build/'),[StringComparison]::OrdinalIgnoreCase)) { throw 'Build root must be under build' }
+$out=[IO.Path]::GetFullPath($BuildRoot, $repo)
+$buildPrefix=[IO.Path]::GetFullPath((Join-Path $repo 'build')) + [IO.Path]::DirectorySeparatorChar
+if (!$out.StartsWith($buildPrefix,[StringComparison]::OrdinalIgnoreCase)) { throw 'Build root must be under build' }
 New-Item -ItemType Directory -Path $out -Force | Out-Null
 $sources=@('test/adapter-mvdm-host-out/wow/wow_user_session_binding_fixture.c',
-    'src/compat/wow_user_runtime.c',
+    'src/compat/wow_user_runtime.c', 'src/compat/wow_worker_state.c',
     'src/ntvdm-exe/wow/wow_user_session_binding.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/compat/guest_memory_lease.c')

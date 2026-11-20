@@ -53,7 +53,7 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
     owner = session_thread_current();
     if (request == NULL || buffer_out == NULL || length_out == NULL ||
         owner == NULL || !session_valid(owner) ||
-        owner->state != SESSION_STATE_ACTIVE ||
+        owner->host_context.state != SESSION_STATE_ACTIVE ||
         !mvdm_guest_location_set_real_mode(&request_location, segment, offset) ||
         !mvdm_guest_location_acquire(&request_location,
             request_type == ANP_READ2 || request_type == ANP_WRITE2 ? 24u : 18u,
@@ -126,7 +126,7 @@ int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
     state = (mvdm_redirector_async_state *)request->PrivateAsyncState;
     if (session_thread_current() != state->owner ||
         !session_valid(state->owner) ||
-        state->owner->state != SESSION_STATE_ACTIVE ||
+        state->owner->host_context.state != SESSION_STATE_ACTIVE ||
         state->owner->epoch != state->owner_epoch) {
         return 0;
     }

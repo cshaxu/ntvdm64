@@ -2,7 +2,7 @@
 #include "precomp.h"
 #include "wow_message_lifetime.h"
 
-extern BOOL WINAPI wow_user_worker_active(void);
+#include "compat/include/wow_worker_state.h"
 /* Original wcall16.h aliases these names but its referenced winntwow.h
  * declarations are absent from this selected SDK facade. Exact x86 ABI. */
 extern VPVOID WINAPI WOWGlobalLockSize16(HMEM16, LPDWORD);

@@ -17,7 +17,7 @@ int session_guest_memory_acquire(session *instance, uint32_t address,
     uint32_t byte_count, uint32_t access, guest_memory_lease **lease_out,
     uint8_t **bytes_out)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE)
         return 0;
     return ccpu_guest_memory_acquire(&instance->guest_memory_lease, address,
         byte_count, access, lease_out, bytes_out);
@@ -26,7 +26,7 @@ int session_guest_memory_acquire(session *instance, uint32_t address,
 int session_guest_memory_release(session *instance, guest_memory_lease *lease,
     int commit)
 {
-    if (!session_valid(instance) || instance->state != SESSION_STATE_ACTIVE)
+    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE)
         return 0;
     return ccpu_guest_memory_release(&instance->guest_memory_lease, lease,
         commit);

@@ -5220,11 +5220,11 @@ static int run_fixture(void)
     /* The inner domain uses the existing host resource owner, not product
      * session layout. Closed registration must roll back before publication. */
     stage = "domain-registration-closed";
-    owner.host_context.registration_open = 0;
+    owner.host_context.state = COMPAT_HOST_CONTEXT_COMPLETED;
     {
         int rejected = !mvdm_softpc_wow_page_domain_enter() &&
             !mvdm_softpc_wow_page_domain_active();
-        owner.host_context.registration_open = 1;
+        owner.host_context.state = COMPAT_HOST_CONTEXT_ACTIVE;
         if (!rejected) goto done;
     }
     stage = "domain-admission";

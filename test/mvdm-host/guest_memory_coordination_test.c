@@ -102,7 +102,7 @@ int main(void)
     a.epoch = UINT32_MAX;
     CHECK(fixture_lease_memory_begin(&a, &ma, read_bytes, write_bytes) && a.epoch == 1u);
     ca.guest_memory = &a; cb.guest_memory = &b;
-    ca.registration_open = cb.registration_open = 1;
+    ca.state = cb.state = COMPAT_HOST_CONTEXT_ACTIVE;
     CHECK(compat_host_context_bind(&ca));
     for (i = 0; i < sizeof(ma.bytes); ++i) ma.bytes[i] = (uint8_t)(i * 13u);
     memcpy(reference, ma.bytes, sizeof(reference));
@@ -126,11 +126,11 @@ int main(void)
     CHECK(compat_host_context_unbind(&cb));
     CHECK(compat_host_context_bind(&ca));
     CHECK(mvdm_softpc_guest_memory_acquire(0, 1, GUEST_MEMORY_ACCESS_READ, &lease, &bytes));
-    ca.registration_open = 0;
+    ca.state = COMPAT_HOST_CONTEXT_COMPLETED;
     CHECK(!mvdm_softpc_guest_memory_release(lease, 0));
     CHECK(!mvdm_softpc_guest_memory_copy_from(0, copied, 1));
     CHECK(mvdm_softpc_guest_memory_copy_from(UINT32_MAX, NULL, 0));
-    ca.registration_open = 1;
+    ca.state = COMPAT_HOST_CONTEXT_ACTIVE;
     CHECK(mvdm_softpc_guest_memory_release(lease, 0));
     CHECK(!mvdm_softpc_guest_memory_copy_to(UINT32_MAX, copied, 1));
     CHECK(compat_host_context_unbind(&ca));

@@ -12,7 +12,7 @@
 #include "wow_menu_native_bindings.h"
 #include "wow_task_profile_bindings.h"
 #include "wow_idle_hook_binding.h"
-#include "common/wow/worker.h"
+#include "compat/include/wow_worker_state.h"
 #include "compat/include/thread_start_compat.h"
 #include "common/wow/page_domain.h"
 #include <stdio.h>

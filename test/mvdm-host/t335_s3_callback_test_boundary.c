@@ -8,7 +8,7 @@
 BOOL WINAPI wow_user_worker_active(void)
 {
     session *owner = session_thread_current();
-    return owner != NULL && owner->state == SESSION_STATE_ACTIVE;
+    return owner != NULL && owner->host_context.state == SESSION_STATE_ACTIVE;
 }
 
 __declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *stage, DWORD error)

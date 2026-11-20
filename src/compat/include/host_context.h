@@ -16,9 +16,18 @@ typedef struct compat_host_cleanup {
 /* Embedded by the product owner. The owner opens/closes resource registration
  * and invokes disposal only after its threads have detached. There is no task
  * identity, scheduling, cancellation or completion policy here. */
+enum compat_host_context_state {
+    COMPAT_HOST_CONTEXT_READY = 0,
+    COMPAT_HOST_CONTEXT_ACTIVE = 1,
+    COMPAT_HOST_CONTEXT_CANCELLED = 2,
+    COMPAT_HOST_CONTEXT_COMPLETED = 3
+};
+
+/* The composing owner chooses transitions. One state gates resource use and
+ * registration; cancellation reasons and completion results remain outside. */
 typedef struct compat_host_context {
     uint32_t cleanup_count;
-    int registration_open;
+    uint32_t state;
     /* Borrowed B resource; the composing owner controls its begin/end lifetime. */
     struct guest_memory_lease_context *guest_memory;
     compat_host_cleanup cleanups[COMPAT_HOST_CLEANUP_LIMIT];

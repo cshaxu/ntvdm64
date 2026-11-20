@@ -8,7 +8,7 @@ int mvdm_softpc_presentation_font_snapshot(session *owner, uint8_t *bytes,
     uint32_t capacity)
 {
     if (owner == NULL || !session_valid(owner) ||
-        owner->state != SESSION_STATE_ACTIVE || bytes == NULL ||
+        owner->host_context.state != SESSION_STATE_ACTIVE || bytes == NULL ||
         capacity != MVDM_SOFTPC_PRESENTATION_FONT_BYTES) return 0;
     /* DIVERGENCE(ADAPTER-SOFTPC-042): V7 VGA loads at 0xc0000 and its
      * original v7_video.c default 8x16 selection is EGA_HIFONT (0xc3990).

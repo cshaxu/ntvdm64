@@ -2059,7 +2059,7 @@ static int acquire(compat_host_context *owner, uint32_t address,
     uint32_t byte_count, uint32_t access, guest_memory_lease **lease_out,
     uint8_t **bytes_out)
 {
-    if (!compat_host_context_valid(owner) || !owner->registration_open) return 0;
+    if (!compat_host_context_valid(owner) || owner->state != COMPAT_HOST_CONTEXT_ACTIVE) return 0;
     return ccpu_guest_memory_acquire(owner->guest_memory, address, byte_count,
         access, lease_out, bytes_out);
 }
@@ -2067,7 +2067,7 @@ static int acquire(compat_host_context *owner, uint32_t address,
 static int release(compat_host_context *owner, guest_memory_lease *lease,
     int commit)
 {
-    if (!compat_host_context_valid(owner) || !owner->registration_open) return 0;
+    if (!compat_host_context_valid(owner) || owner->state != COMPAT_HOST_CONTEXT_ACTIVE) return 0;
     return ccpu_guest_memory_release(owner->guest_memory, lease, commit);
 }
 
@@ -2278,7 +2278,7 @@ int mvdm_guest_location_acquire_vm(mvdm_guest_location const *location,
         linear_base > UINT32_MAX - address) return 0;
     address += linear_base;
 
-    if (!compat_host_context_valid(instance) || !instance->registration_open) return 0;
+    if (!compat_host_context_valid(instance) || instance->state != COMPAT_HOST_CONTEXT_ACTIVE) return 0;
     return ccpu_guest_memory_acquire(instance->guest_memory, address, byte_count, access,
         &lease_out->lease, &lease_out->bytes);
 }
@@ -2290,7 +2290,7 @@ int mvdm_guest_location_release(mvdm_guest_location_lease *lease,
     int result;
 
     if (lease == NULL || instance == NULL || lease->lease == NULL) return 0;
-    result = compat_host_context_valid(instance) && instance->registration_open &&
+    result = compat_host_context_valid(instance) && instance->state == COMPAT_HOST_CONTEXT_ACTIVE &&
         ccpu_guest_memory_release(instance->guest_memory, lease->lease, commit);
     memset(lease, 0, sizeof(*lease));
     return result;

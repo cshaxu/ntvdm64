@@ -78,7 +78,7 @@ int main(void)
     for (i=0; i<5000; ++i) memory[100+i]=(unsigned char)(i*17);
     memcpy(expected, memory, sizeof(memory)); memmove(expected+200, expected+100, 5000);
     xmsMoveMemory(200, 100, 5000);
-    CHECK(!memcmp(memory, expected, sizeof(memory)) && owner.state == SESSION_STATE_ACTIVE);
+    CHECK(!memcmp(memory, expected, sizeof(memory)) && owner.host_context.state == SESSION_STATE_ACTIVE);
     session_guest_memory_end(&owner);
     CHECK(session_thread_unbind(&owner) && session_dispose(&owner));
     puts("S36_ORIGINAL_XMS_OVERLAP_MOVE_OK");

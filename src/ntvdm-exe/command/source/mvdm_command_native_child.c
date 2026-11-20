@@ -51,7 +51,7 @@ static int state_current(mvdm_command_native_child_state **state_out)
 
     if (state_out != NULL) *state_out = NULL;
     if (owner == NULL || !session_valid(owner) ||
-        owner->state != SESSION_STATE_ACTIVE) return 0;
+        owner->host_context.state != SESSION_STATE_ACTIVE) return 0;
     state = (mvdm_command_native_child_state *)owner->mvdm_command_native_child;
     if (state == NULL || state->owner != owner || state->owner_epoch != owner->epoch)
         return 0;
@@ -77,7 +77,7 @@ static int state_ensure(mvdm_command_native_child_state **state_out)
 
     if (state_out != NULL) *state_out = NULL;
     if (owner == NULL || !session_valid(owner) ||
-        owner->state != SESSION_STATE_ACTIVE) return 0;
+        owner->host_context.state != SESSION_STATE_ACTIVE) return 0;
     state = (mvdm_command_native_child_state *)owner->mvdm_command_native_child;
     if (state != NULL) {
         if (state->owner != owner || state->owner_epoch != owner->epoch) return 0;

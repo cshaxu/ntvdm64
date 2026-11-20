@@ -213,7 +213,7 @@ BOOL WINAPI RegisterConsoleVDM(DWORD flags, HANDLE start_event,
     (void)buffer_name;
     (void)buffer_name_length;
     if (owner == NULL || !session_valid(owner) ||
-        owner->state != SESSION_STATE_ACTIVE) {
+        owner->host_context.state != SESSION_STATE_ACTIVE) {
         SetLastError(ERROR_INVALID_HANDLE);
         return FALSE;
     }

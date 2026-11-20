@@ -1257,6 +1257,9 @@ $adapterSoftpcObjects += 'obj/compat/vm_services.obj'
 $graph.Add('build obj/compat/host_context.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/host_context.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/host_context.obj'
+$graph.Add('build obj/compat/wow_worker_state.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_worker_state.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$sessionObjects += 'obj/compat/wow_worker_state.obj'
 $graph.Add('build obj/compat/guest_memory_lease.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/guest_memory_lease.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/guest_memory_lease.obj'

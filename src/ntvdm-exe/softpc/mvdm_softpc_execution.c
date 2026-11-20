@@ -23,7 +23,7 @@ int mvdm_softpc_execution_run_until_return(session *owner)
     int did_memory_bind = 0;
 
     if (owner == NULL || !session_valid(owner) ||
-        owner->state != SESSION_STATE_ACTIVE ||
+        owner->host_context.state != SESSION_STATE_ACTIVE ||
         session_machine_backend(owner) != SESSION_MACHINE_BACKEND_SOFTPC)
         return 0;
 
