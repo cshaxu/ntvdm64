@@ -3,8 +3,8 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "eliminated": 539,
-    "open": 29,
+    "eliminated": 541,
+    "open": 27,
     "supporting-evidence": 43,
     "eliminated-transitive": 6
   },
@@ -126,26 +126,6 @@
       ],
       "count": 1,
       "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/ntsrv-exe/opennt/include/base_server.h",
-      "open_ids": [
-        "C0022"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/ntsrv-exe/opennt/source/base_request.c",
-      "open_ids": [
-        "C0168"
-      ],
-      "count": 1,
-      "symbols": [
-        "OpenNtBaseServerRequestThread"
-      ]
     },
     {
       "kind": "symbol",
@@ -313,5 +293,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P113"
+  "updated_by": "T483 S14 P114"
 }

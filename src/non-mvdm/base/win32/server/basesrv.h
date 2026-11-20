@@ -25,7 +25,7 @@ Revision History:
 
 #include <base.h>
 
-#include "ntsrv-exe/opennt/include/base_server.h"
+#include <ntlpcapi.h>
 #line 28
 //
 // Include server definitions for CSR
@@ -33,6 +33,8 @@ Revision History:
 
 #line 32
 #include "ntcsrsrv.h"
+#include "compat/include/base_server_native.h"
+#line 33
 
 //
 // Include message definitions for communicating between client and server

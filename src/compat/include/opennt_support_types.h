@@ -36,6 +36,7 @@ typedef ULONG CLONG;
  * declarations only; no kernel object or system-thread provider is imported. */
 typedef struct _OBJECT_TYPE *POBJECT_TYPE;
 typedef CCHAR KPROCESSOR_MODE;
+typedef struct _HARDERROR_MSG *PHARDERROR_MSG;
 
 /* Original ke.h:318-326 selected x86/x64 declaration and w32p.h:47-54.
  * Declaration-only prefix; no kernel table, ETHREAD access or provider. */

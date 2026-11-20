@@ -6,41 +6,9 @@
 #ifndef OPENNT_BASE_SERVER_BINDING_H
 #define OPENNT_BASE_SERVER_BINDING_H
 #include <nt.h>
-typedef CLIENT_ID *PCLIENT_ID;
-typedef struct _HARDERROR_MSG *PHARDERROR_MSG;
 #include <ntlpcapi.h>
 #include <ntcsrsrv.h>
-#undef CSR_SERVER_QUERYCLIENTTHREAD
-PCSR_THREAD OpenNtBaseServerRequestThread(void);
+#include "compat/include/base_server_native.h"
 NTSTATUS _UserTestTokenForInteractive(HANDLE, PLUID);
 BOOL BaseSrvDOSWorkerWaitPending(HANDLE ConsoleHandle, PBOOL ConsoleRecordExists);
-/* Trusted dispatch only: borrow a locally authenticated context until unbind.
- * This does not authenticate, register, copy, or retain a wire-supplied object. */
-PCSR_THREAD OpenNtBaseBindServerRequestThread(PCSR_THREAD);
-#define CSR_SERVER_QUERYCLIENTTHREAD() OpenNtBaseServerRequestThread()
-#ifndef STATUS_ACCESS_DENIED
-#define STATUS_ACCESS_DENIED ((NTSTATUS)0xC0000022L)
-#endif
-#include <nt_event_declarations.h>
-NTSTATUS NTAPI NtCreateEvent(PHANDLE, ACCESS_MASK, POBJECT_ATTRIBUTES, EVENT_TYPE, BOOLEAN);
-NTSTATUS NTAPI NtSetEvent(HANDLE, PLONG);
-NTSTATUS NTAPI NtResetEvent(HANDLE, PLONG);
-NTSTATUS NTAPI NtOpenProcessToken(HANDLE, ACCESS_MASK, PHANDLE);
-NTSTATUS NTAPI NtOpenThreadToken(HANDLE, ACCESS_MASK, BOOLEAN, PHANDLE);
-NTSTATUS NTAPI NtDuplicateObject(HANDLE, HANDLE, HANDLE, PHANDLE, ACCESS_MASK, ULONG, ULONG);
-NTSTATUS NTAPI NtQueryInformationToken(HANDLE, TOKEN_INFORMATION_CLASS, PVOID, ULONG, PULONG);
-NTSTATUS NTAPI LdrLoadDll(PWSTR, PULONG, PUNICODE_STRING, PHANDLE);
-NTSTATUS NTAPI LdrGetProcedureAddress(HANDLE, PANSI_STRING, ULONG, PVOID *);
-NTSTATUS NTAPI LdrUnloadDll(HANDLE);
-NTSTATUS NTAPI RtlAllocateAndInitializeSid(PSID_IDENTIFIER_AUTHORITY, UCHAR,
-    ULONG, ULONG, ULONG, ULONG, ULONG, ULONG, ULONG, ULONG, PSID *);
-BOOLEAN NTAPI RtlEqualSid(PSID, PSID);
-#define RtlEqualLuid(L1,L2) (((L1)->HighPart == (L2)->HighPart) && ((L1)->LowPart == (L2)->LowPart))
-#define KdPrint(x) DbgPrint x
-ULONG __cdecl DbgPrint(PCSTR, ...);
-#include "compat/include/base_resource.h"
-#ifndef OPENNT_BASE_NATIVE_RESOURCES
-#define NtDuplicateObject OpenNtBaseDuplicateObject
-#define NtClose OpenNtBaseClose
-#endif
 #endif

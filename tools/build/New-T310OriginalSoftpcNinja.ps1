@@ -1392,6 +1392,7 @@ if ($Architecture -eq 'x86') {
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/server')) + '"'
     $baseServerFlags = $baseOwnerFlags + ' /D_CSRSRV_ /FI "' +
         $baseBindingInclude + '/base_server.h"'
+    $baseServiceTestFlags = $baseServerFlags + ' /I "' + $baseBindingInclude + '"'
     # Project-owned Base/RPC sources consume the public adapter contracts, not
     # the SoftPC execution profile. Keep historical flags on original units.
     $baseAdapterFlags = $authoredSoftpcFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
@@ -1418,7 +1419,7 @@ if ($Architecture -eq 'x86') {
             @('classifier', 'src/non-mvdm/base/win32/client/vdm.c', ($baseOwnerFlags + ' /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER')),
             @('capture', 'src/non-mvdm/base/ntdll/csrutil.c', ($baseOwnerFlags + ' /Gz')))
         'opennt-base-server' = @(
-            @('srvvdm', 'src/non-mvdm/base/win32/server/srvvdm.c', $baseServerFlags),
+            @('srvvdm', 'src/non-mvdm/base/win32/server/srvvdm.c', ($baseOwnerFlags + ' /D_CSRSRV_')),
             @('exports', 'src/non-mvdm/windows/core/ntuser/server/exports.c', $baseOwnerFlags))
         'opennt-base-bindings' = @(
             @('service', 'src/ntsrv-exe/opennt/source/base_service.c', $baseServerFlags),
@@ -1440,7 +1441,7 @@ if ($Architecture -eq 'x86') {
             @('waits', 'src/ntsrv-exe/opennt/source/base_wait.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
             @('registry', 'src/ntsrv-exe/opennt/source/base_process.c', $baseServerFlags),
             @('reservation', 'src/ntsrv-exe/opennt/source/base_reservation.c', $baseOwnerFlags),
-            @('request', 'src/ntsrv-exe/opennt/source/base_request.c', $baseServerFlags),
+            @('request', 'src/compat/base_request.c', $libraryFlags),
             @('config', 'src/compat/base_vdm_config.c', $libraryFlags),
             @('capture-heap', 'src/compat/base_capture_heap.c', $libraryFlags),
             @('process', 'src/compat/base_console_handle.c', $libraryFlags),
@@ -1513,27 +1514,27 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build opennt-broker-owners: phony opennt-base-client.lib opennt-base-server.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib')
     $baseReservationTestObject = 'obj/tests/base_reservation_test.obj'
     $graph.Add('build ' + $baseReservationTestObject + ': cc ' + (NinjaPath $baseReservationTestSource))
-    $graph.Add('  cflags = ' + $baseOwnerFlags)
+    $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I "' + $baseBindingInclude + '"')
     $graph.Add('build basesrv-reservation-test.exe: broker_test_link ' + $baseReservationTestObject + ' opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib')
     $baseServiceReservationTestObject = 'obj/tests/base_service_reservation_test.obj'
     $graph.Add('build ' + $baseServiceReservationTestObject + ': cc ' + (NinjaPath $baseServiceReservationTestSource))
-    $graph.Add('  cflags = ' + $baseServerFlags)
+    $graph.Add('  cflags = ' + $baseServiceTestFlags)
     $graph.Add('rule basesrv_service_test_link')
     $graph.Add('  command = link.exe /nologo /out:$out $in ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
     $graph.Add('build obj/tests/base_service_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-basesrv/base_service_fixture.c')))
-    $graph.Add('  cflags = ' + $baseServerFlags)
+    $graph.Add('  cflags = ' + $baseServiceTestFlags)
     $graph.Add('build basesrv-service-reservation-test.exe: basesrv_service_test_link ' + $baseServiceReservationTestObject + ' obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('build obj/tests/native_observation_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-basesrv/native_observation_fixture.c')))
-    $graph.Add('  cflags = ' + $baseServerFlags)
+    $graph.Add('  cflags = ' + $baseServiceTestFlags)
     $graph.Add('build native-observation-fixture.exe: basesrv_service_test_link obj/tests/native_observation_fixture.obj obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('build obj/tests/dos_observation_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-basesrv/dos_observation_fixture.c')))
-    $graph.Add('  cflags = ' + $baseServerFlags)
+    $graph.Add('  cflags = ' + $baseServiceTestFlags)
     $graph.Add('build dos-observation-fixture.exe: basesrv_service_test_link obj/tests/dos_observation_fixture.obj obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('build obj/tests/basesrv_idle_policy.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-basesrv/idle_policy_test.c')))
     $graph.Add('  cflags = /nologo /c /MT /W4 /WX /showIncludes /I"' + (Join-Path $root 'src') + '"')
     $graph.Add('build basesrv-idle-policy-test.exe: basesrv_service_test_link obj/tests/basesrv_idle_policy.obj')
     $graph.Add('build obj/tests/native_service_layout.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-basesrv/native_service_layout_test.c')))
-    $graph.Add('  cflags = ' + $baseServerFlags)
+    $graph.Add('  cflags = ' + $baseServiceTestFlags)
     $graph.Add('build native-service-layout-test.exe: basesrv_service_test_link obj/tests/native_service_layout.obj')
     $graph.Add('build obj/tests/base_client_rpc_first.obj: cc ' + (NinjaPath (Join-Path $root 'test/integration/base_client_rpc_first_test.c')))
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')

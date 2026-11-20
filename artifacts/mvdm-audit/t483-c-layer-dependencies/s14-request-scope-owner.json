@@ -1,0 +1,102 @@
+{
+  "packet": "M0 T483 S14 P114",
+  "baseline": "2c6d46eec607e05259b44fc499b3cb46a98b769a",
+  "eliminated_C_ids": [
+    "C0022",
+    "C0168"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 541,
+    "open": 27,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 5
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 8,
+    "image-import": 1,
+    "symbol": 18
+  },
+  "remaining_C_by_provider": {
+    "common": 3,
+    "ntvdm-exe": 11,
+    "worker-base": 2,
+    "wow32-dll": 8,
+    "ntsrv-exe": 3
+  },
+  "authority": "C retains the original CSR layouts and BaseSrv algorithms; B owns the borrowed thread-local pointer and native resource declarations; F retains authentication, record lifetime and binding/restoration.",
+  "mirror_delta": {
+    "points": 1,
+    "lines": 2,
+    "measured": {
+      "file": "src/non-mvdm/base/win32/server/basesrv.h",
+      "baseline_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+      "before": {
+        "points": 3,
+        "lines": 5
+      },
+      "after": {
+        "points": 4,
+        "lines": 7
+      },
+      "delta": {
+        "points": 1,
+        "lines": 2
+      }
+    }
+  },
+  "compile_proof": {
+    "selected_C_compile_commands": 894,
+    "outer_search_roots": [],
+    "remaining_direct_NTSRV_headers": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "06dc6641-f8a8-43f6-93b8-0e5fffa54f31",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "scope": "cached x86/x64/reference product builds and x86 original BaseSrv archive; x86/x64 B include closure, native service symbol map, dual publication and 22 file hashes, governance and authenticated BaseSrv reservation fixture and affected guest runtime integration",
+    "runtime_output": [
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+      "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+      "PASS shared worker 25456, two distinct tasks overlapped and retired independently, both requests exited normally",
+      "detached CheckDOS task=1 reservation-error=0",
+      "detached CheckDOS task=2 reservation-error=0",
+      "detached CheckDOS task=3 reservation-error=0",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS DOS Get replaces previous request on resident-worker reuse",
+      "PASS WOW request/worker rejects valid character frontend/context without changing original WOW Get/Exit",
+      "PASS WOW task close binds opaque management identity, delivers once, retries only on later intent and retires safely",
+      "PASS WOW startup authentication, wait-only notification and immediate-completion latch",
+      "PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected",
+      "PASS reused WOW receipt mismatch, retired task and worker reuse checked",
+      "PASS failed WOW completion has no startup acknowledgement; late report rejected",
+      "PASS closing original WOW head rejects new task without publishing a record",
+      "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+    ]
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "b9f244a86cbe4d20080b634a66a05cb9b0fb9c85944ca1188c8de218cb97cda3",
+    "boundary.out": "0091a39c6a7fc61fe3337f1d7edcd634d8e0f86745ae9514a2bc9bd70df47d71",
+    "compiled-roots.json": "f5480af4edb42e8b3b06f7d11e62a0ee21b87bc28ff44f538449e08daa907528",
+    "mirror-delta.json": "e70492112a4bc20aac250696e5de2a3d93e1600da0416da22f2b2f6d53ce28a3",
+    "probes.out": "50f28d7838ec5babc7e29e0d2ccdb63e77daa793a310868b53ef780a54ca3c22",
+    "shared-wow/result.txt": "683ef10efc75b32b05740012ce72c34d27181d1aee50d5f04c9a8f367bc0824f",
+    "final-checks.out": "067e127d5fe6539202f47ec24b34bf7289fb93e7bb4f2f012742e058db50fb8e"
+  }
+}

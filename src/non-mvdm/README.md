@@ -1890,6 +1890,10 @@ header is otherwise retained and srvvdm.c remains byte-identical. This removes
 the generated empty DFS header from the selected original-owner library test.
 T483 S7 P41 drops the local selector and keeps the single declaration include.
 Native x64 service consumers need it for the original CSR declarations.
+T483 S14 P114 selects the original LPC declarations directly and applies the
+host resource and request-thread binding from compat after the original CSR
+declarations. The restored `#line` keeps subsequent BaseSrv declarations at
+their original diagnostic lines. Net mirror delta is one point and two lines.
 OPENNT-HOST-029 restores original RtlConvertLongToLuid in the selected
 `public/sdk/inc/ntrtl.h` subset, including its __inline storage shape; only
 trailing blank-line whitespace is normalized. Origin is the same pinned
