@@ -12,10 +12,14 @@ const flags=graph.match(/^cflags = (.*)$/m)[1].replaceAll('$:',':')+` /I "${root
 const rtlFlags=graph.match(/^build obj\/opennt-rtl\/error\.obj:.*\r?\n  rtl_cflags = (.*)$/m)[1].replaceAll('$:',':');
 const source=fs.readFileSync('src/non-mvdm/base/win32/client/vdm.c','utf8');
 const upstream=fs.readFileSync('O:/repos.external/OpenNT/base/win32/client/vdm.c','utf8');
+const withoutLineMarkers=text=>text.replace(/\r\n/g,'\n').replace(/^#line\b[^\n]*\n/gm,'');
 const hashes={};
-for(const [name,pattern] of [['GetBinaryTypeW',/BOOL\r?\nWINAPI\r?\nGetBinaryTypeW\([\s\S]*?\r?\n}\r?\n/],['BaseIsDosApplication',/ULONG\r?\nBaseIsDosApplication\([\s\S]*?\r?\n}\r?\n/]]) {
-    const original=upstream.match(pattern)[0].replace(/\r\n/g,'\n');
-    assert.equal(source.match(pattern)[0].replace(/\r\n/g,'\n'),original,`${name} differs from original`);
+for(const [name,pattern] of [['GetBinaryTypeW',/BOOL\nWINAPI\nGetBinaryTypeW\([\s\S]*?\n}\n/],['BaseIsDosApplication',/ULONG\nBaseIsDosApplication\([\s\S]*?\n}\n/]]) {
+    const original=withoutLineMarkers(upstream).match(pattern)[0];
+    const selected=withoutLineMarkers(source).match(pattern)[0];
+    const expected=name==='GetBinaryTypeW' ? original.replace(/^#ifdef _MIPS_\n[\s\S]*?^#else\n/m,
+        '#ifdef _MIPS_\n#error DIVERGENCE OPENNT-HOST-136: _MIPS_ branch is not selected; see mirror register.\n#else\n') : original;
+    assert.equal(selected,expected,`${name} differs from the selected original source`);
     hashes[name]=createHash('sha256').update(original).digest('hex');
 }
 assert.deepEqual(hashes,{GetBinaryTypeW:'f7fd9766ea08e676a2fd457fb3fa508384630640032ce0615f752dc8a43f9fbd',BaseIsDosApplication:'9487407a2efc02764466cedbabb4e89424fd12d87d11601cce9fa5ad477f3711'});
@@ -25,7 +29,7 @@ let commands=[
     `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/compat/opennt_support_rtl.c"`,
     `cl.exe ${flags} /we4013 /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER /Fo"${build}/client.obj" "${root}/src/non-mvdm/base/win32/client/vdm.c"`,
     `cl.exe ${flags} /we4013 /Fo"${build}/fixture.obj" "${root}/test/broker/original_classifier.c"`,
-    `cl.exe ${flags} /we4013 /Fo"${build}/path.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_classifier_path.c"`,
+    `cl.exe ${flags} /we4013 /Fo"${build}/path.obj" "${root}/src/compat/base_classifier_path.c"`,
     `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/base/ntos/rtl/error.c"`,
     'link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map client.obj fixture.obj path.obj support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib'
 ];
@@ -46,9 +50,15 @@ assert.equal(image.readUInt16LE(image.readUInt32LE(0x3c)+4),0x14c);
 const map=fs.readFileSync(path.join(build,'original-classifier.map'),'utf8');
 for(const symbol of ['_OpenNtBaseGetBinaryTypeW@8','_BaseIsDosApplication'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(ownerBuild?'opennt-base-client:classifier.obj':'client.obj')),`Wrong provider: ${symbol}`);
-for(const symbol of ['_NtCurrentPeb@0','_opennt_support_current_teb@0','_RtlProcessHeap@0'])
+for(const symbol of ['_NtCurrentPeb@0','_opennt_support_current_teb@0'])
     assert(map.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('support.obj')),`Test-owned process provider remains: ${symbol}`);
-const run=spawnSync(exe,[],{cwd:build,windowsHide:true,encoding:'utf8',timeout:10000});
+for(const name of ['Com','Pif','Exe'])
+    assert(map.split(/\r?\n/).some(line=>line.includes(`_BaseDot${name}SuffixName`)&&
+        line.includes(ownerBuild?'common-base-srv-bindings:classifier-path.obj':'path.obj')),`Wrong suffix provider: ${name}`);
+const media=['dos/v86/cmd/mem/mem.exe','dos/v86/cmd/command/COMMAND.COM',
+    'dos/v86/cmd/qbasic/edit.com','wow16/write/WRITE.EXE']
+    .map(file=>path.join(root,'src/mvdm-guest',file));
+const run=spawnSync(exe,media,{cwd:build,windowsHide:true,encoding:'utf8',timeout:10000});
 fs.writeFileSync(process.env.OPENNT_CLASSIFIER_TEST_REPORT || path.join(build,'result.json'),JSON.stringify({ownerBuild,processSupport:'selected opennt_support_rtl.c',hashes,status:run.status,stdout:run.stdout,stderr:run.stderr,error:run.error?.message},null,2));
 console.log(run.stdout,run.stderr);
 assert.equal(run.status,0,'Original classifier failed');

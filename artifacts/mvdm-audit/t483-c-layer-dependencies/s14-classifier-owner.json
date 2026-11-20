@@ -1,0 +1,77 @@
+{
+  "packet": "M0 T483 S14 P95",
+  "baseline": "83990c86248b4fd088bd77ce28a11e6fd891cc1c",
+  "eliminated_C_ids": [
+    "C0003",
+    "C0006",
+    "C0162",
+    "C0163",
+    "C0164",
+    "C0609",
+    "C0610",
+    "C0611"
+  ],
+  "eliminated_B_ids": [],
+  "scope": "B defines the three original suffix descriptors shared in source across Run16 and both NTHook images. Neither product defines its own copy. The classifier and architecture headers moved byte for byte into B. Original non-MVDM classifier policy and source remain in C.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "open": 78,
+    "eliminated": 490,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "product_symbol_providers": {
+    "msvc-x86-release/worker/nthook32.dll.map": {
+      "BaseDotComSuffixName": "0003:00000004       _BaseDotComSuffixName      10034004     common-base-srv-bindings:classifier-path.obj",
+      "BaseDotExeSuffixName": "0003:00000014       _BaseDotExeSuffixName      10034014     common-base-srv-bindings:classifier-path.obj",
+      "BaseDotPifSuffixName": "0003:0000000c       _BaseDotPifSuffixName      1003400c     common-base-srv-bindings:classifier-path.obj"
+    },
+    "msvc-x64-release/launcher/run16.exe.map": {
+      "BaseDotComSuffixName": "0003:00000038       BaseDotComSuffixName       0000000140049038     common-base-srv-bindings:classifier-path.obj",
+      "BaseDotExeSuffixName": "0003:00000058       BaseDotExeSuffixName       0000000140049058     common-base-srv-bindings:classifier-path.obj",
+      "BaseDotPifSuffixName": "0003:00000048       BaseDotPifSuffixName       0000000140049048     common-base-srv-bindings:classifier-path.obj"
+    },
+    "msvc-x64-release/hook/nthook64.dll.map": {
+      "BaseDotComSuffixName": "0003:00000218       BaseDotComSuffixName       000000018003e218     unit18.obj",
+      "BaseDotExeSuffixName": "0003:00000238       BaseDotExeSuffixName       000000018003e238     unit18.obj",
+      "BaseDotPifSuffixName": "0003:00000228       BaseDotPifSuffixName       000000018003e228     unit18.obj"
+    }
+  },
+  "header_sha256": {
+    "src/compat/include/base_classifier.h": "a92fa8c404cb33aba457a27e05bb0e0f6244d52b5354643145e8f3822693f819",
+    "src/compat/include/legacy_classifier_arch.h": "142f700874be0689e4c0ba7a38ec0359236f02449308300d0965fc4212b499f9"
+  },
+  "compiled_ownership": {
+    "objects": 9,
+    "counts": {
+      "system import": 5,
+      "not selected in final link": 4
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "f5bfcbcd-66a9-4ccd-9fe8-b874b1f6cf3c",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, targeted classifier and DOS tests and final gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "a2a3cf13f1cd3f869d18047f4af7417518c70a34339b6edfada7459b6a357bee",
+    "release-and-test.out": "ff52a62448fe121553cb327e983dcbb67db607a402a34a0c695457adf07aff2e",
+    "final-checks.out": "94f1d053a33794511e695959005f6aa81472546afdf0c5ccd86bc6cf6d2abb53",
+    "b-compiled-candidates.json": "5b2a14836e8926ad69a762b438538d9707a73149d1c733dc5eb6616a6b2729dc",
+    "original-classifier/result.json": "6fcba46b532e49c7eebe9793b3b8e835ca52f9117fff978c0c31422272da8f41"
+  },
+  "fixture_repair": "Replaced a stale RtlProcessHeap symbol assertion with checks for the reached PEB provider and the actual suffix data owners. RtlProcessHeap is a macro in the selected original header.",
+  "prior_profile_delivery": "s14-profile-owner.json"
+}

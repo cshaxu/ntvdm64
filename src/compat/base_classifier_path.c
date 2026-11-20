@@ -7,6 +7,11 @@
  * its existing full-path branch. No parser, borrowed handle or new lifetime. */
 #include "include/base_classifier_path.h"
 
+/* Original BaseInit suffix descriptors shared by both classifier consumers. */
+UNICODE_STRING BaseDotComSuffixName = {sizeof(L".com") - sizeof(WCHAR), sizeof(L".com"), L".com"};
+UNICODE_STRING BaseDotPifSuffixName = {sizeof(L".pif") - sizeof(WCHAR), sizeof(L".pif"), L".pif"};
+UNICODE_STRING BaseDotExeSuffixName = {sizeof(L".exe") - sizeof(WCHAR), sizeof(L".exe"), L".exe"};
+
 /* OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c,
  * public/sdk/inc/nturtl.h:205-208. This is the caller's original output ABI,
  * not modern RTL_RELATIVE_NAME_U (which adds a directory reference). */

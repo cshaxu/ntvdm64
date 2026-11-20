@@ -5,12 +5,12 @@ from pathlib import Path
 import re
 import subprocess
 
-SHARED = "src/common/base_srv/legacy_classifier_arch.h"
+SHARED = "src/compat/include/legacy_classifier_arch.h"
 PRIVATE = "src/nthook-dll/legacy_classifier_arch.h"
 
 
 def inspect(root: Path, inject: bool = False) -> None:
-    for graph_name in ("launcher", "hook64"):
+    for graph_name in ("launcher", "hook"):
         graph_dir = root / graph_name
         graph = (graph_dir / "build.ninja").read_text(encoding="utf-8")
         if PRIVATE in graph or graph.count(SHARED) != 1:

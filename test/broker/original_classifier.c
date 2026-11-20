@@ -1,30 +1,22 @@
-/* Execute the original classifier with the selected real process-support
- * provider. Only original BaseInit suffix initialization is fixture-owned. */
+/* Execute the original classifier with its selected process-support and suffix providers. */
 #include <nt.h>
 #include <base_classifier.h>
 #include <stdio.h>
 #include <wchar.h>
-UNICODE_STRING BaseDotComSuffixName, BaseDotPifSuffixName, BaseDotExeSuffixName;
-int main(void)
+int wmain(int argc, WCHAR **argv)
 {
-    LPCWSTR names[]={L"O:\\winnt\\MEM.EXE",L"O:\\winnt\\COMMAND.COM",
-        L"O:\\winnt\\EDIT.COM",L"O:\\winnt\\system32\\WRITE.EXE"};
     DWORD expected[]={SCS_DOS_BINARY,SCS_DOS_BINARY,SCS_DOS_BINARY,SCS_WOW_BINARY};
     WCHAR self[MAX_PATH];
     DWORD type,i,error;
     BOOL ok;
-    if(NtCurrentPeb()->ImageBaseAddress!=GetModuleHandleW(NULL)) return 14;
-    /* Original base/win32/client/baseinit.c initialization values. */
-    RtlInitUnicodeString(&BaseDotComSuffixName,L".com");
-    RtlInitUnicodeString(&BaseDotPifSuffixName,L".pif");
-    RtlInitUnicodeString(&BaseDotExeSuffixName,L".exe");
+    if(argc!=5 || NtCurrentPeb()->ImageBaseAddress!=GetModuleHandleW(NULL)) return 14;
     if(sizeof(RTL_RELATIVE_NAME)!=12 || sizeof(SECTION_IMAGE_INFORMATION)!=48) return 2;
     for(i=0;i<4;i++) {
         type=0xffffffff;
-        if(!GetBinaryTypeW(names[i],&type) || type!=expected[i]) {
-            printf("FAIL image=%ls type=%lu error=%lu\n",names[i],type,GetLastError()); return 3;
+        if(!GetBinaryTypeW(argv[i+1],&type) || type!=expected[i]) {
+            printf("FAIL image=%ls type=%lu error=%lu\n",argv[i+1],type,GetLastError()); return 3;
         }
-        printf("PASS image=%ls type=%lu\n",names[i],type);
+        printf("PASS image=%ls type=%lu\n",argv[i+1],type);
     }
     if(!GetModuleFileNameW(NULL,self,MAX_PATH)) return 4;
     if(!GetBinaryTypeW(self,&type) || type!=SCS_32BIT_BINARY) return 5;

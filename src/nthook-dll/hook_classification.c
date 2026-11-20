@@ -4,11 +4,6 @@
 #include <base_classifier.h>
 #include "nthook-dll/hook.h"
 #include "common/native_image.h"
-/* Classifier-only composition owns these original suffix descriptors; it
- * does not select run16/main.c or the service/worker implementation. */
-UNICODE_STRING BaseDotComSuffixName={8,10,L".com"};
-UNICODE_STRING BaseDotPifSuffixName={8,10,L".pif"};
-UNICODE_STRING BaseDotExeSuffixName={8,10,L".exe"};
 DWORD nthook_legacy_type_flags(PCWSTR application,DWORD flags,DWORD *type)
 {
     DWORD candidate;

@@ -3,29 +3,12 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 86,
+    "open": 78,
+    "eliminated": 490,
     "supporting-evidence": 43,
-    "eliminated-transitive": 6,
-    "eliminated": 482
+    "eliminated-transitive": 6
   },
   "provider_groups": [
-    {
-      "kind": "symbol",
-      "provider": "src/run16-exe/main.c",
-      "open_ids": [
-        "C0609",
-        "C0610",
-        "C0611",
-        "C0612"
-      ],
-      "count": 4,
-      "symbols": [
-        "BaseDotComSuffixName",
-        "BaseDotExeSuffixName",
-        "BaseDotPifSuffixName",
-        "CsrPortHeap"
-      ]
-    },
     {
       "kind": "symbol",
       "provider": "src/wow32-dll/source/wow_task_termination.c",
@@ -41,21 +24,6 @@
         "wow_task_termination_bind",
         "wow_task_termination_fail",
         "wow_task_termination_retire"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/nthook-dll/hook_classification.c",
-      "open_ids": [
-        "C0162",
-        "C0163",
-        "C0164"
-      ],
-      "count": 3,
-      "symbols": [
-        "BaseDotComSuffixName",
-        "BaseDotExeSuffixName",
-        "BaseDotPifSuffixName"
       ]
     },
     {
@@ -176,6 +144,17 @@
     },
     {
       "kind": "symbol",
+      "provider": "src/run16-exe/main.c",
+      "open_ids": [
+        "C0612"
+      ],
+      "count": 1,
+      "symbols": [
+        "CsrPortHeap"
+      ]
+    },
+    {
+      "kind": "symbol",
       "provider": "src/ntvdm-exe/win32/console_compat.c",
       "open_ids": [
         "C0299"
@@ -225,15 +204,6 @@
     },
     {
       "kind": "header",
-      "provider": "src/common/base_srv/base_classifier.h",
-      "open_ids": [
-        "C0003"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
       "provider": "src/common/base_srv/base_client.h",
       "open_ids": [
         "C0004"
@@ -260,15 +230,6 @@
       "symbols": [
         "OpenNtBaseClientCallServer"
       ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/common/base_srv/legacy_classifier_arch.h",
-      "open_ids": [
-        "C0006"
-      ],
-      "count": 1,
-      "symbols": []
     },
     {
       "kind": "header",
@@ -684,13 +645,6 @@
       "symbols": [
         "W32TimerFunc"
       ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/common/wow/paths.h",
-      "open_ids": [],
-      "count": 0,
-      "symbols": []
     }
   ],
   "priority_batches": [
@@ -760,5 +714,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P94"
+  "updated_by": "T483 S14 P95"
 }

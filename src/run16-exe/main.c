@@ -20,7 +20,6 @@
 #include <stdio.h>
 #include <wchar.h>
 
-UNICODE_STRING BaseDotComSuffixName, BaseDotPifSuffixName, BaseDotExeSuffixName;
 PVOID CsrPortHeap;
 BOOL BaseCreateVDMEnvironment(PWCHAR environment, ANSI_STRING *ansi,
                               UNICODE_STRING *unicode);
@@ -475,9 +474,6 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
         goto done;
     }
     initial_console_only=GetConsoleProcessList(&console_member,1)==1 && console_member==GetCurrentProcessId();
-    RtlInitUnicodeString(&BaseDotComSuffixName, L".com");
-    RtlInitUnicodeString(&BaseDotPifSuffixName, L".pif");
-    RtlInitUnicodeString(&BaseDotExeSuffixName, L".exe");
     if (!count || !*arguments[0])
         goto done;
     /* The former one-process product accepted a compact first option such as
