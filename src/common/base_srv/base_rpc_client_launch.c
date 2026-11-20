@@ -387,6 +387,10 @@ static NTSTATUS exit_command(PCSR_API_MSG message,ULONG length)
 
     if (length!=sizeof(*exit_message)) goto done;
     is_wow=exit_message->ConsoleHandle==(HANDLE)-1;
+    if (exit_message->ConsoleHandle == OPENNT_WOW_STARTUP_NOOP_CONSOLE) {
+        is_wow = TRUE;
+        (void)OpenNtBaseClientWowStarted(exit_message->iWowTask);
+    }
     if (is_wow) OpenNtBaseClientForgetWowTask(exit_message->iWowTask);
     {
         RPC_ASYNC_STATE async;

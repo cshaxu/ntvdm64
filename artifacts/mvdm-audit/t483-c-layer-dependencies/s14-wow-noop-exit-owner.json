@@ -1,0 +1,94 @@
+{
+  "packet": "M0 T483 S14 P140",
+  "parent": "e53c3fe46732abece004226ad416e13c5370835e",
+  "eliminated_C": [
+    "C0500"
+  ],
+  "eliminated_B": [],
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 5
+  },
+  "C_runtime_slots": {
+    "F": 1
+  },
+  "C_outward_headers": {
+    "F": 1
+  },
+  "C_named_image_imports": 1,
+  "mirror": {
+    "upstream": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "files": [
+      {
+        "source": "src/mvdm-host/wow32/wkman.c",
+        "upstream_path": "base/mvdm/wow32/wkman.c",
+        "before": [
+          87,
+          365
+        ],
+        "after": [
+          87,
+          366
+        ],
+        "delta": [
+          0,
+          1
+        ]
+      },
+      {
+        "source": "src/non-mvdm/base/win32/client/vdm.c",
+        "upstream_path": "base/win32/client/vdm.c",
+        "before": [
+          40,
+          615
+        ],
+        "after": [
+          41,
+          618
+        ],
+        "delta": [
+          1,
+          3
+        ]
+      }
+    ],
+    "non_error_delta": [
+      1,
+      4
+    ],
+    "conditional_and_line_directives_unchanged": true
+  },
+  "abi": "Existing RPC format and ordinals. The selector stays inside the original local ExitVDM call.",
+  "verification": {
+    "actual_shared_wow": "PASS shared worker 16964, two distinct tasks overlapped and retired independently, both requests exited normally",
+    "native_result": [
+      "launch0 returned_pid=28824 flags=0 command=\"O:\\tmp\\n758\\system32\\run16.exe\" --wait \"O:\\tmp\\n758\\tests\\IDLPROBE.EXE\"",
+      "registrar guest checkpoint observed",
+      "redundant WOWEXEC wait=0 exit=0 registrar-wait=258",
+      "launch1 returned_pid=24400 flags=0 command=\"O:\\tmp\\n758\\system32\\run16.exe\" --wait \"O:\\tmp\\n758\\tests\\IDLPEER.EXE\"",
+      "peer wait=0 exit=0",
+      "peer-exited registrar-still-running",
+      "registrar wait=0 exit=0",
+      "result=0 error=2"
+    ],
+    "shared_method": "Existing verify-wow-idle-workers.ps1 private desktop runner and both Win16 fixtures. An audit-only native witness launched lowercase system32/wowexec.exe following the first guest checkpoint, before the original peer.",
+    "failed_WOW_control": "PASS failed WOW completion has no startup acknowledgement; late report rejected",
+    "limitations": "The old WinMine observer did not see the first window and did not reach WOWEXEC. The integrated private desktop task runner passed. Full and Win95 were not run."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "dee15dab-6d9a-4f81-afed-bb0a8328e083",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

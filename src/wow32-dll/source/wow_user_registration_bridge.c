@@ -35,13 +35,6 @@ BOOL WINAPI wow_current_separate_launch(void);
 /* The registration seam is normally silent.  An opt-in host-only witness is
  * retained because the immutable USER16 workload has no textual way to show
  * whether it reached the all-or-nothing registration call. */
-VOID WINAPI wow_user_notify_startup_noop(ULONG task)
-{
-    DWORD error = OpenNtBaseClientWowStarted(task);
-    wow_user_registration_trace("StartupNoOpNotification", error);
-    if (error) SetLastError(error);
-}
-
 static DWORD notify_task_started(DWORD task_id, DWORD shared_id, const char *trace)
 {
     DWORD error = wow_user_task_lifecycle_notify_start(wow_user_registered_lifecycle(),

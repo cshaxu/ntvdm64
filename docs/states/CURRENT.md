@@ -38,7 +38,7 @@ P79 [inner lifecycle authority](../../artifacts/mvdm-audit/t483-c-layer-dependen
 moved the worker-active query to B. Ordinal 269 and one NTVDM TLS were preserved.
 
 P83 [Console mouse ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-mouse-owner.json)
-moved mouse adaptation into B; C -8. Five isolated DOS mouse cases passed.
+C -8. Five DOS cases passed.
 
 P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-text-owner.json) delivered C -7.
 P108 [WOW hook and task wait](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-hook-owner.json) delivered C -2.
@@ -55,11 +55,12 @@ P132 [VM IRQ owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-
 P133 [VM wake and input owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-wake-owner.json) moved the queue.
 P134 [Thread binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-thread-binding-owner.json) removed B0023/B0024 and three VDMREDIR F implementations.
 P135 [WOW close result](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-close-result-owner.json) removed C0462.
-P136 [B routes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-b-routes.json) removed B0010/B0021. C tracks both F routes.
+P136 [B routes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-b-routes.json) removed B0010/B0021.
 P137 [WOW startup ticket](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-start-ticket-owner.json) removed C0461.
-P138 [Pending WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-pending-exit-owner.json) completed NTSRV retirement.
+P138 [Pending WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-pending-exit-owner.json) retired the record.
 P139 [WOW local retirement](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-local-retirement-owner.json) removed C0463.
-Delivered: B 0 known calls; C 8 direct calls, 1 runtime slot, 1 header, 1 image.
+P140 [Redundant WOWEXEC](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-noop-exit-owner.json) removed C0500.
+Delivered: B 0 known calls; C 7 direct calls, 1 runtime slot, 1 header, 1 image.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moved page-domain identity and cleanup to B and removed three F calls.

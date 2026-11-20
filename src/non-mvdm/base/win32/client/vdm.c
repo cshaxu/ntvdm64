@@ -792,7 +792,8 @@ Return Value:
 
 
     if(IsWowCaller){
-	c->ConsoleHandle = (HANDLE)-1;
+	c->ConsoleHandle = IsWowCaller == OPENNT_WOW_STARTUP_NOOP_EXIT ?
+	    OPENNT_WOW_STARTUP_NOOP_CONSOLE : (HANDLE)-1;
 	c->iWowTask = iWowTask;
 	}
     else {

@@ -298,9 +298,8 @@ SkipWowExec:
         // commands.
         //
         if ((! fSeparateWow) && strstr(VDMInfo.AppName, "wowexec.exe")) {
-            wow_user_notify_startup_noop(VDMInfo.iTask);
 #line 330
-            ExitVDM(WOWVDM, VDMInfo.iTask);
+            ExitVDM(OPENNT_WOW_STARTUP_NOOP_EXIT, VDMInfo.iTask);
             goto SkipWowExec;
         }
 
