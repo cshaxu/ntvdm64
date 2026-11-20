@@ -13,7 +13,7 @@ DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN, APFNWOWHANDLERSOUT);
  * this original startup identity, so do not link W32Thread as a substitute. */
 struct _TD *gptdShell;
 static PFNWOWHANDLERSOUT output;
-static unsigned errors, notifications;
+static unsigned errors, notifications, ticket_binds;
 static unsigned fail_count;
 static BOOL raise_notification, retire_notification;
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, \
@@ -39,6 +39,12 @@ DWORD WINAPI wow_fixture_OpenNtBaseClientWowStarted(ULONG request)
     if (retire_notification) CHECK(wow_user_task_lifecycle_unbind(binding));
     return notifications <= fail_count ? ERROR_RETRY : ERROR_SUCCESS;
 }
+DWORD WINAPI wow_fixture_task_termination_bind(ULONG task, USHORT htask)
+{
+    CHECK(task == 0x5678 && htask == 0x1234 && notifications > fail_count);
+    ++ticket_binds;
+    return ERROR_SUCCESS;
+}
 static VOID WINAPI end_task(void) { }
 
 int __cdecl main(void)
@@ -63,12 +69,13 @@ int __cdecl main(void)
     fail_count = 2;
     CHECK(!initialize_task() && GetLastError() == ERROR_RETRY);
     committed = binding.thread;
-    CHECK(committed && notifications == 1);
+    CHECK(committed && notifications == 1 && ticket_binds == 0);
     CHECK(!initialize_task() && GetLastError() == ERROR_RETRY);
+    CHECK(ticket_binds == 0);
     CHECK(initialize_task());
     CHECK(binding.thread == committed && notifications == 3);
     CHECK(!initialize_task() && GetLastError() == ERROR_INVALID_STATE);
-    CHECK(notifications == 3);
+    CHECK(notifications == 3 && ticket_binds == 1);
     CHECK(wow_user_task_lifecycle_unbind(&binding));
 
     /* Original W32Thread owns the seven-attempt bound; verify its callback
@@ -77,7 +84,7 @@ int __cdecl main(void)
     notifications = 0; fail_count = 7;
     for (i = 0; i < 7; ++i)
         CHECK(!initialize_task() && GetLastError() == ERROR_RETRY);
-    CHECK(notifications == 7);
+    CHECK(notifications == 7 && ticket_binds == 1);
     CHECK(output.pfnWOWCleanup((HANDLE)0x1234, 0x1234, NULL, 0));
     CHECK(binding.thread != NULL); /* Committed case retains normal retirement. */
     CHECK(wow_user_task_lifecycle_unbind(&binding));
@@ -91,16 +98,18 @@ int __cdecl main(void)
     CHECK(caught && binding.thread && !binding.exclusive_held);
     raise_notification = FALSE;
     CHECK(initialize_task());
-    CHECK(notifications == 2);
+    CHECK(notifications == 2 && ticket_binds == 2);
     CHECK(wow_user_task_lifecycle_unbind(&binding));
 
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
     retire_notification = TRUE;
     CHECK(!initialize_task() && GetLastError() == ERROR_OPERATION_ABORTED);
     CHECK(!wow_user_runtime_current() && !lifecycle->threads);
+    CHECK(ticket_binds == 2);
     retire_notification = FALSE;
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
     CHECK(initialize_task());
+    CHECK(ticket_binds == 3);
     CHECK(wow_user_task_lifecycle_unbind(&binding));
     wow_user_task_lifecycle_dispose(lifecycle);
     CHECK(session_thread_unbind(&owner));

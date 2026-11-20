@@ -1,0 +1,59 @@
+{
+  "packet": "M0 T483 S14 P137",
+  "parent": "70f2ac323600401cfe0ceced9a7154e7ccc457cb",
+  "eliminated_C": [
+    "C0461"
+  ],
+  "eliminated_B": [],
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 7
+  },
+  "C_runtime_slots": {
+    "F": 1
+  },
+  "C_outward_headers": {
+    "F": 1
+  },
+  "C_named_image_imports": 1,
+  "mirror": {
+    "upstream": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "src/mvdm-host/wow32/wkman.c",
+    "baseline_sha256": "80d4e23199f36258630f05c2cd23abc166686d35030cf7a2c21b1ae2da999a94",
+    "before": [
+      88,
+      368
+    ],
+    "after": [
+      87,
+      366
+    ],
+    "delta": [
+      -1,
+      -2
+    ]
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "64231faa-9ceb-49f0-a66a-a36fcc47c73c",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "ownership": "The existing F-side startup acknowledgment owns ticket publication for shared WOW. Failed or aborted startup acknowledgment never binds a ticket. Separate WOW retains its original zero BaseSrv task ID and whole-worker management.",
+  "verification": {
+    "init": "WOW_FIXTURE_OK case=init-notification",
+    "shared": "PASS shared worker 25788, two distinct tasks overlapped and retired independently, both requests exited normally",
+    "separate": "PASS two real separate WOW workers, own idle callbacks, retirement and surviving peer idle",
+    "limitations": "Known startup and lifecycle coverage. No Full or Win95 run."
+  }
+}

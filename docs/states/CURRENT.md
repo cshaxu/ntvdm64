@@ -47,16 +47,17 @@ P110 [Input terminal signals](../../artifacts/mvdm-audit/t483-c-layer-dependenci
 P111 [CCPU thread exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-ccpu-thread-exit-owner.json) delivered C -1.
 P126 [C header closure](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-c-header-closure.json) delivered C -2.
 P127 [CPU start ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-cpu-start-owner.json) delivered C -1.
-P128 [PIC import owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-interrupt-export-owner.json) moved ordinal 84 to C; C0134 stays open with three F exports.
+P128 [PIC import owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-interrupt-export-owner.json) moved ordinal 84 to C.
 P129 [WOW trace module](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-trace-module-owner.json) closed B0036, a named module lookup.
 P130 [Resource receipts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-receipt-owner.json) moved six implementations into B; the two F route callbacks stay open.
 P131 [Resource scope](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-resource-scope-owner.json) closed B0025/B0026.
-P132 [VM IRQ owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-notification-owner.json) moved the PIC notification operations to B; B0021 stays open.
-P133 [VM wake and input owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-wake-owner.json) moved the queue to B. B0021 stays open.
+P132 [VM IRQ owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-notification-owner.json) moved PIC notification to B.
+P133 [VM wake and input owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-wake-owner.json) moved the queue to B.
 P134 [Thread binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-thread-binding-owner.json) removed B0023/B0024 and three VDMREDIR F implementations.
 P135 [WOW close result](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-close-result-owner.json) removed C0462.
 P136 [B routes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-b-routes.json) removed B0010/B0021. C tracks both F routes.
-Delivered: B 0 known calls; C 10 direct calls, 1 runtime slot, 1 header, 1 image.
+P137 [WOW startup ticket](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-start-ticket-owner.json) removed C0461.
+Delivered: B 0 known calls; C 9 direct calls, 1 runtime slot, 1 header, 1 image.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moves the page-domain identity and cleanup into B, removing the product header

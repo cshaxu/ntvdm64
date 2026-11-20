@@ -950,10 +950,10 @@ retry, cache, process handle, alternate alias table or guest pointer escape.
 K233/K234 retain the selected original CCPU40 `VdmAllocateVirtualMemory` /
 `VdmFreeVirtualMemory` pair and are not redirected through this change.
 
-MVDM-HOST-DIV-449 (T449 S3 candidate): the selected original WOW task
-lifecycle has the exact `BaseSrv` task number and 16-bit `HTASK` together only
-in `wow32/wkman.c::W32Thread`; bind the project-owned opaque management ticket
-there after original `InitTask` succeeds.  Retire that ticket only from the
+MVDM-HOST-DIV-449: the original `W32Thread` passes the shared `BaseSrv` task
+number and 16-bit `HTASK` to `pfnInitTask`. The product's existing startup
+acknowledgement binds the opaque management ticket after that acknowledgement
+succeeds. Retire that ticket only from the
 same original owner's `W32DestroyTask`, after original `W32FreeTask`,
 `ExitVDM` and `pfnWOWCleanup` retain their normal ordering.  The adapter holds
 only `{ticket, HTASK}` for an authenticated NTSRV close request and invokes

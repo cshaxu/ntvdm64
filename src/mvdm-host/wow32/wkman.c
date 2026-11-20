@@ -32,7 +32,6 @@
 #line 30
 #include "wowfax.h"
 extern VOID WINAPI W32ExitWowProcess(DWORD exit_code);
-extern DWORD WINAPI wow_task_termination_bind(ULONG task, USHORT htask);
 extern VOID WINAPI wow_task_termination_retire(USHORT htask);
 #include "wow_idle_hook_binding.h"
 #include <compat/include/wow_registry.h>
@@ -1057,9 +1056,6 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
             W32DestroyTask(&td);
             host_ExitThread(EXIT_FAILURE);
             }
-
-        if (td.VDMInfoiTaskID != (UINT)-1 && td.VDMInfoiTaskID != 0)
-            (void)wow_task_termination_bind(td.VDMInfoiTaskID,td.htask16);
 
 #line 1082
         dwLastHotkey = 0;

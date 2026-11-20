@@ -1,5 +1,6 @@
 #include "compat/include/wow_user_registration_state.h"
 #include "wow32-dll/include/wow_task_start_notification.h"
+#include "wow32-dll/include/wow_task_termination.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_user_registered_callbacks.h"
 #include "wow_dialog_creation_binding.h"
@@ -40,6 +41,18 @@ VOID WINAPI wow_user_notify_startup_noop(ULONG task)
     if (error) SetLastError(error);
 }
 
+static DWORD notify_task_started(DWORD task_id, DWORD shared_id, const char *trace)
+{
+    DWORD error = wow_user_task_lifecycle_notify_start(wow_user_registered_lifecycle(),
+        task_id, shared_id, OpenNtBaseClientWowStarted);
+    wow_user_registration_trace(trace, error);
+    SetLastError(error);
+    /* Both identities already belong to this committed shared WOW task. */
+    if (!error && shared_id && shared_id != (DWORD)-1)
+        (void)wow_task_termination_bind(shared_id, (USHORT)task_id);
+    return error;
+}
+
 static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     DWORD task_id, DWORD hotkey, DWORD shared_id, DWORD x, DWORD y,
     DWORD width, DWORD height, WORD show)
@@ -58,11 +71,7 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
             SetLastError(error);
             return FALSE;
         }
-        DWORD error = wow_user_task_lifecycle_notify_start(wow_user_registered_lifecycle(),
-            task_id, shared_id, OpenNtBaseClientWowStarted);
-        wow_user_registration_trace("InitTaskNotificationRetry", error);
-        SetLastError(error);
-        return error == ERROR_SUCCESS;
+        return notify_task_started(task_id, shared_id, "InitTaskNotificationRetry") == ERROR_SUCCESS;
     }
     wow_user_registration_trace("InitTaskId", task_id);
     wow_user_registration_trace("InitTaskSharedId", shared_id);
@@ -80,9 +89,7 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     SetLastError(init_error);
     if (result && ((shared_id && shared_id!=(DWORD)-1) ||
         (shared_id==0 && wow_current_separate_launch()))) {
-        DWORD error=wow_user_task_lifecycle_notify_start(wow_user_registered_lifecycle(),
-            task_id, shared_id, OpenNtBaseClientWowStarted);
-        wow_user_registration_trace("InitTaskNotification",error);
+        DWORD error = notify_task_started(task_id, shared_id, "InitTaskNotification");
         if (error) {
             /* Original W32Thread owns bounded retry and W32DestroyTask.
              * A retry resumes notification, not the committed InitTask. */
