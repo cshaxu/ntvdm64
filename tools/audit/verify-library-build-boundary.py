@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 GRAPHS = {
     "x86/worker": ["ntvdm.exe", "VCDEX.DLL", "VDMREDIR.dll", "nthook32.dll"],
     "x86/wow32": ["wow32.dll"],
+    "x64/worker-reference-x86": ["ntvdm.exe"],
     "x64/frontend": ["ntcon.exe"],
     "x64/service": ["ntsrv.exe"],
     "x64/launcher": ["run16.exe"],
@@ -28,10 +29,15 @@ def ninja(directory, tool, *args):
 WOW_USER_EXCEPTIONS = {"wow_dialog_lookup.c", "wow_object_ownership.c"}
 
 
-def allowed_roots(owner):
+CCPU_ADAPTERS = {"mvdm_softpc_effective_address.c"}
+
+
+def allowed_roots(owner, source=""):
     roots = {ROOT / "src" / owner}
     if owner == "compat":
         roots.update(ROOT / "src" / library for library in ("lib-nxvm", "lib-win32"))
+    if owner == "compat" and source in CCPU_ADAPTERS:
+        roots.update(ROOT / "src" / layer for layer in ("mvdm-host", "non-mvdm"))
     return roots
 
 
@@ -47,10 +53,13 @@ def verify(graph, products):
         obj, owner, source = match.group(2, 3, 4)
         if graph == "x86/wow32" and owner == "compat" and source in WOW_USER_EXCEPTIONS:
             continue
-        units[obj] = owner
-        roots = {ROOT / "src"} | allowed_roots(owner)
+        units[obj] = (owner, source)
+        roots = {ROOT / "src"} | allowed_roots(owner, source)
         for path in re.finditer(r'(?:^| )/I\s*(?:"([^"]+)"|(\S+))', line, re.I):
-            if (directory / (path[1] or path[2])).resolve() not in roots:
+            if not any((directory / (path[1] or path[2])).resolve() == r or
+                       (owner == "compat" and source in CCPU_ADAPTERS and
+                        (directory / (path[1] or path[2])).resolve().is_relative_to(r) and
+                        r != ROOT / "src") for r in roots):
                 raise ValueError(f"{graph}/{obj}: unexpected include root {path[0]}")
         if re.search(r'(?:^| )/FI', line):
             raise ValueError(f"{graph}/{obj}: forced header")
@@ -65,18 +74,19 @@ def verify(graph, products):
             if current in units and "(VALID)" in state:
                 valid.add(current)
         elif current in units:
-            header = Path(line.strip()).resolve()
-            if header.is_relative_to(ROOT) and not any(header.is_relative_to(root) for root in allowed_roots(units[current])):
+            header = (directory / line.strip()).resolve()
+            if header.is_relative_to(ROOT) and not any(header.is_relative_to(root) for root in allowed_roots(*units[current])):
                 raise ValueError(f"{graph}/{current}: reads {header}")
     if valid != set(units):
         raise ValueError(f"{graph}: missing current compiler evidence for {set(units) - valid}")
     # Collect actual explicit and implicit prerequisites without following product links.
-    for owner in set(units.values()):
-        objects = [obj for obj, component in units.items() if component == owner]
+    for roots in {frozenset(allowed_roots(*identity)) for identity in units.values()}:
+        objects = [obj for obj, identity in units.items()
+                   if frozenset(allowed_roots(*identity)) == roots]
         for line in ninja(directory, "inputs", *objects).splitlines():
             path = (directory / line.strip().strip('"')).resolve()
-            if path.is_relative_to(ROOT) and not any(path.is_relative_to(root) for root in allowed_roots(owner)):
-                raise ValueError(f"{graph}/{owner}: unexpected build prerequisite {path}")
+            if path.is_relative_to(ROOT) and not any(path.is_relative_to(root) for root in roots):
+                raise ValueError(f"{graph}: unexpected build prerequisite {path}")
     print(f"{graph}: {len(units)} A/B objects checked")
 
 

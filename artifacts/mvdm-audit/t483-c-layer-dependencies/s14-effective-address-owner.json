@@ -1,0 +1,58 @@
+{
+  "baseline": "9913855f4c82e86a79d078c106a4b47c1d217bb0",
+  "source": "src/compat/mvdm_softpc_effective_address.c",
+  "body_preserved_exactly_except_include_boundary": true,
+  "header_byte_identical": true,
+  "mirror_points_delta": 0,
+  "mirror_lines_delta": 0,
+  "target_ids": [
+    "C0215",
+    "C0216"
+  ],
+  "C_providers": [
+    "selector_outside_GDT_LDT",
+    "read_descriptor_linear",
+    "c_getMSW",
+    "c_getEFLAGS"
+  ],
+  "status": "Final code built, dual-published and targeted-tested; enclosing commit/push is delivery receipt",
+  "gate": "Named B adapter may consume actual C headers; other B sources keep existing rules. Compiler-recorded relative headers now resolve against the Ninja directory; no D/E/F exemption. Added x86-reference graph.",
+  "delivery": "T483 S14 P80",
+  "verification": {
+    "build": 0,
+    "deliver": 0,
+    "tests": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "d755a020-7b66-46cc-89e5-9693b22dc183",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "ledger": {
+    "excluded-diagnostic": 1,
+    "open": 384,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "eliminated": 184
+  },
+  "new_eliminations": 2,
+  "evidence_root": "build/t483-s14-effective-address-owner",
+  "tests": {
+    "ccpu": "SIM32_FLUSH_CONTRACT_OK ram=1 missing_scratch=1 paired_write=1 stale_overwrite=1 count_not_extent=1\nCCPU_REGISTER_VIEWS_AX_AL_AH_IP_EIP_CF_OK\nDOS_LOW_PAGE_ALIAS_COUNTEREXAMPLE_OK original_wrong=1 lease_correct=1\nCCPU_SAS_PROVIDER_PREFLIGHT_NO_PARTIAL_WRITE_OK\nCCPU_LEASE_RESOURCE_OWNERSHIP_OK\nCCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK\n",
+    "page_domain_exit": 0,
+    "window_borrow_exit": 0,
+    "dialog": "WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+    "boundary_graphs": 9,
+    "gate_negative_tests": "ordinary B cannot read C; named B adapter cannot read D/E/F headers, include roots or prerequisites"
+  },
+  "limit": "Two direct symbol violations only; no claim that the remaining USER/page-domain or other whole chains are migrated.",
+  "source_sha256": {
+    "src\\compat\\mvdm_softpc_effective_address.c": "a0903ce5c72280e23cf79aa4a71299624c027389e55b4c40cd4cbc1f9cd6cc35",
+    "src\\compat\\include\\mvdm_softpc_effective_address.h": "2d2dd25156c2ed7ac04f8455fec41c628e2a505204ac5efe9b357da66c20dc6a"
+  }
+}

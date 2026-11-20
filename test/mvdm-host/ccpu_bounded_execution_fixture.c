@@ -7,7 +7,7 @@
 
 #include "ntvdm-exe/softpc/include/mvdm_softpc_execution.h"
 #include "ntvdm-exe/softpc/include/mvdm_a20.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_effective_address.h"
+#include "compat/include/mvdm_softpc_effective_address.h"
 #include "compat/include/physical_mapping_host.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 extern int mvdm_softpc_guest_memory_range_valid(uint32_t, uint32_t, int);

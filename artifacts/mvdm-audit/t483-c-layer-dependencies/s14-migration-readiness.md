@@ -2,7 +2,7 @@
 
 Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68/P70/P72/P73/P74 updates below supersede its
 classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
-assigns all 386 currently open stable IDs to the existing ten chains.
+assigns all 384 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
 
@@ -17,12 +17,12 @@ assigns all 386 currently open stable IDs to the existing ten chains.
 | 7. thread-lifecycle | 79 | 7 | 0 | 0 | 86 |
 | 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
 | 9. native-user | 137 | 25 | 0 | 0 | 162 |
-| 10. original-helpers-build-abi | 13 | 6 | 11 | 1 | 31 |
-| Total | 317 | 57 | 11 | 1 | 386 |
+| 10. original-helpers-build-abi | 11 | 6 | 11 | 1 | 29 |
+| Total | 315 | 57 | 11 | 1 | 384 |
 
 The historical 79-provider body-read census remains evidence; P68 removes one
 provider from the open implementation set. Recounting the remaining chain
-provider-file union gives 74 distinct paths (the historical 79 is not current). Header responsibility classification is 59/59; three generated contracts
+provider-file union gives 73 distinct paths (the historical 79 is not current). Header responsibility classification is 59/59; three generated contracts
 still await implementation of their owner/ABI disposition. All 11 remaining search roots have current-use evidence. VCDEX imports
 have C implementation evidence; that is not final binary-boundary disposition.
 
@@ -151,3 +151,7 @@ dual11 publication and targeted lifecycle/real Win16 dialog tests pass.
 ## P74 original property and region calls
 
 Six F interceptions removed; original C conversions remain. Ledger182 eliminated/386 open; priority105 roots. Mirror delta0 points/0 lines; autonomous production code minus24 lines. Cached full builds, dual11 publication,231 native assertions, nested/terminal lifecycle, real Win16 dialog8 phases and compiled boundaries passed. See [P74 evidence](s14-native-property-owner.json). Whole-chain ownership remains incomplete.
+
+## P80 effective-address owner
+
+Actual implementation and header moved from F to B with approved CCPU dependencies; all five function bodies and header bytes preserved. C0215/C0216 eliminated: current ledger184 eliminated/384 open. Mirror delta0 points/0 lines. Cached full build, dual11 publication and targeted CCPU/WOW/Win16 tests passed. See [P80 evidence](s14-effective-address-owner.json). Remaining whole chains stay open.

@@ -296,8 +296,8 @@ $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc
                         'v7_pointer.c', 'v7_pointer_binding.c',
                         'mvdm_softpc_descriptor_fields.c')
 $workerPackageNames = @('package_layout.c')
-$effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
-$effectiveAddressObject = 'obj/adapter-softpc/mvdm_softpc_effective_address.obj'
+$effectiveAddressSource = Join-Path $root 'src/compat/mvdm_softpc_effective_address.c'
+$effectiveAddressObject = 'obj/compat/mvdm_softpc_effective_address.obj'
 foreach ($name in $ccpuNames) {
     if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Original CCPU source missing: $name" }
 }
@@ -2136,8 +2136,12 @@ $workerPackageObjects = foreach ($name in $workerPackageNames) {
     $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
+# Named B-to-C adapter: no outer include roots or forced product header.
+$effectiveAddressIncludes = $softpcIncludeRootPaths | Where-Object {
+    $_ -match '^src/(compat|mvdm-host|non-mvdm)(/|$)'
+} | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $graph.Add('build ' + $effectiveAddressObject + ': cc ' + (NinjaPath $effectiveAddressSource))
-$graph.Add('  cflags = ' + $authoredSoftpcFlags)
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + ($effectiveAddressIncludes -join ' '))
 $patchVectorDefaultsObject = 'obj/ccpu/fmstubs_vector_defaults.obj'
 $graph.Add('build ' + $patchVectorDefaultsObject + ': cc ' + (NinjaPath $ccpuVectorSource))
 $graph.Add('  cflags = ' + $libraryFlags)

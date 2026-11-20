@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-#include "ntvdm-exe/softpc/include/mvdm_softpc_effective_address.h"
+#include "compat/include/mvdm_softpc_effective_address.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 #include <insignia.h>
 #include <host_def.h>

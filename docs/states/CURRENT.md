@@ -28,6 +28,14 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P80 [effective-address implementation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-effective-address-owner.json)
+moves the actual provider/header F to B under the approved CCPU exception.
+Bodies/header preserved; mirror delta0/0.
+Cached full build, dual11/22 hashes, CCPU, WOW page/window, Win16 dialog and
+nine compiled boundary graphs passed. Package `d755a020-7b66-46cc-89e5-9693b22dc183`.
+C0215/C0216 eliminated: ledger184 eliminated/384 open. Enclosing commit/push
+is the receipt; other chains stay open.
+
 P79 [inner lifecycle authority](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-liveness-owner.json)
 moves the actual worker-active query and sole lifecycle state into B; removes
 F session's duplicate state and the B registration flag. Product policy stays F.
@@ -47,10 +55,6 @@ Mirror delta0 points/0 lines; ledger182 eliminated/386 open, no new closures.
 Lifecycle relocation is pending. Final governance and enclosing commit/push
 provide the delivery receipt.
 
-P77 [compiled owner cycles](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-compiled-owner-cycles.json)
-records the P77-only COFF graph/hash evidence:53 crossing symbols in13 F
-providers, largest cycle27 C/23 F objects. P78 approval supersedes its former
-B placement restriction; regenerate evidence before claiming current coverage.
 
 P76 [scalar observation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-observation-owner.json)
 moves three exact diagnostic bodies from F termination into existing B compat.

@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 386,
+    "open": 384,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 182
+    "eliminated": 184
   },
   "provider_groups": [
     {
@@ -857,15 +857,9 @@
     {
       "kind": "symbol",
       "provider": "src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c",
-      "open_ids": [
-        "C0215",
-        "C0216"
-      ],
-      "count": 2,
-      "symbols": [
-        "c_effective_addr",
-        "effective_addr"
-      ]
+      "open_ids": [],
+      "count": 0,
+      "symbols": []
     },
     {
       "kind": "symbol",
@@ -2283,5 +2277,5 @@
   ],
   "next_action": "Continue the105-root scheduler/projection closure under existing layers; remove disproved wrappers instead of moving them. Independent B implementation migrations remain prerequisites, not closure.",
   "not_done": "105 roots remain open. P68/P71 deliver independent resource/capture mechanisms; concrete C scheduler/projection carriers and mirror-cost measurement remain.",
-  "updated_by": "T483 S14 P74"
+  "updated_by": "T483 S14 P80"
 }

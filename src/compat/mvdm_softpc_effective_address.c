@@ -1,4 +1,5 @@
-#include "mvdm_softpc_effective_address.h"
+#include "non-mvdm/public/sdk/inc/nt.h"
+#include "include/mvdm_softpc_effective_address.h"
 
 /* The CCPU translation units own selector-cache and descriptor semantics.
  * This adapter retains the historical external `c_effective_addr` name while

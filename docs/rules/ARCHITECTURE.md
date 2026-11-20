@@ -40,6 +40,9 @@ providers and callback targets; this is not a component-wide exemption from
 dependency checking. B-to-D/E/F remains forbidden. Product launch/request
 notification, frontend transport policy and worker orchestration remain outer.
 The gate must check newly admitted units against A/B/C rather than skip them.
+The named `compat/mvdm_softpc_effective_address.c` admission consumes original
+CCPU descriptor/register providers; its compiler header closure is checked
+in both the production x86 worker and the x86 reference graph.
 Migrating only declarations, or calling an F provider behind a B ABI, does
 not remove an outward dependency.
 

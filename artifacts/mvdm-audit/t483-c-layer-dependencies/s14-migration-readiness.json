@@ -4,7 +4,7 @@
   "question": "Make reviewed source coverage and unfinished migration design independently countable; assign every current open ID to one accountable chain.",
   "method": "Manual assignment from the P52 ten-chain decisions, P57 header dispositions and complete provider review records; machine-checked exact partition of current open IDs. Primary chain is accounting responsibility, not proof a provider file can move whole.",
   "inputs": {
-    "points.jsonl": "b45e8b1525a5209ffd8f652c1aafd67aad69b1a60e46c31a4645792301646d2b",
+    "points.jsonl": "3913feb2567f81066909fbde22de76ad2c6261e4f852fff5feb46912d17e066d",
     "s14-open-provider-crosswalk.json": "1d92be59ff0bdde3e4d960329a67496218cc5c670f3f046240bc8c58f14ef3dd",
     "s14-header-contract-ownership.json": "a6eb21d4c5cfa34810125adc8748be86f9291608b58b5a56a4b5d2ec93b0fbde"
   },
@@ -713,7 +713,8 @@
       "execution_ownership": "C machine algorithms; B independent resource storage; F entrypoints",
       "evidence": [
         "s14-build-abi-boundary-reconciliation.json",
-        "s14-generated-header-disposition.json"
+        "s14-generated-header-disposition.json",
+        "s14-effective-address-owner.json"
       ],
       "open_ids": [
         "C0003",
@@ -741,8 +742,6 @@
         "C0193",
         "C0204",
         "C0214",
-        "C0215",
-        "C0216",
         "C0608",
         "C0609",
         "C0610",
@@ -752,7 +751,7 @@
         "header": 6,
         "image-import": 1,
         "include-root": 11,
-        "symbol": 13
+        "symbol": 11
       },
       "provider_files": [
         "src/nthook-dll/hook_classification.c",
@@ -760,7 +759,6 @@
         "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
         "src/ntvdm-exe/softpc/mvdm_keyboard_reset.c",
         "src/ntvdm-exe/softpc/mvdm_softpc_descriptor_fields.c",
-        "src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c",
         "src/ntvdm-exe/softpc/mvdm_softpc_execution.c",
         "src/run16-exe/main.c"
       ],
@@ -775,8 +773,14 @@
       ],
       "design_status": "incomplete",
       "next_design_gate": "Three generated headers classified C-private ABI with exact original-carrier proposals in P61; obtain actual x86 layout/selection and final mirror-cost evidence and policy approval. Other helper insertion, roots and VCDEX disposition still pending.",
-      "newly_implemented_ids": [],
-      "newly_delivered_ids": []
+      "newly_implemented_ids": [
+        "C0215",
+        "C0216"
+      ],
+      "newly_delivered_ids": [
+        "C0215",
+        "C0216"
+      ]
     }
   ],
   "coverage_limits": [
@@ -787,24 +791,24 @@
     "All ten chains remain design-incomplete as whole migration units; this does not undo delivered P17-P26 subchains."
   ],
   "summary": {
-    "assigned_open_ids": 386,
+    "assigned_open_ids": 384,
     "unassigned_open_ids": 0,
     "duplicate_open_ids": 0,
-    "distinct_symbol_provider_files": 74,
+    "distinct_symbol_provider_files": 73,
     "chains": 10,
     "whole_chains_design_ready": 0,
     "whole_chains_design_incomplete": 10,
-    "newly_implemented_ids": 6,
-    "newly_delivered_ids": 6,
+    "newly_implemented_ids": 2,
+    "newly_delivered_ids": 2,
     "ledger_status_counts": {
       "excluded-diagnostic": 1,
-      "open": 386,
+      "open": 384,
       "supporting-evidence": 43,
       "eliminated-transitive": 6,
-      "eliminated": 182
+      "eliminated": 184
     },
     "classified_headers": 59,
     "generated_header_migrations_pending": 3
   },
-  "updated_by": "T483 S14 P74"
+  "updated_by": "T483 S14 P80"
 }
