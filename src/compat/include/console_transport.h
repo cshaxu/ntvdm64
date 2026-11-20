@@ -1,10 +1,9 @@
 #ifndef NTCON_WORKER_CONSOLE_CLIENT_H
 #define NTCON_WORKER_CONSOLE_CLIENT_H
 #include <windows.h>
-#include "common/protocol/console_io.h"
-#include "common/protocol/console_video.h"
+#include "compat/include/console_io.h"
 
-/* Local client state, never a wire record. common owns the implementation;
+/* Local client state, never a wire record. compat owns the implementation;
  * NTVDM/NTVWM embed it, serialize calls and own all borrowed HANDLEs. No
  * renderer, Console ownership, guest state or task scheduling lives here. */
 typedef struct ntcon_worker_client {

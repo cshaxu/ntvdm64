@@ -1,7 +1,7 @@
 /* Presentation only: worker operations mutate frontend-owned logical cells.
  * No guest execution state, scrollback engine, command selection or scheduler. */
 #include "console_frontend.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include <limits.h>
 #include <string.h>
 static BOOL encode_input(const INPUT_RECORD *record,console_io_input *wire)

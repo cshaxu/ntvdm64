@@ -46,7 +46,7 @@ build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/win32/console_input_
 build obj/console_compat.obj: cc `$root/src/ntvdm-exe/win32/console_compat.c
 build obj/console_keyboard.obj: cc `$root/src/compat/console_services.c
 build obj/console_client.obj: cc `$root/src/ntvdm-exe/win32/console_client.c
-build obj/worker_client.obj: cc `$root/src/common/console/client.c
+build obj/worker_client.obj: cc `$root/src/compat/console_transport.c
 build obj/common_pipe_transfer.obj: cc `$root/src/lib-win32/pipe/pipe_transfer.c
 build obj/console_graphics.obj: cc `$root/src/ntvdm-exe/win32/console_graphics.c
 build obj/console_bitmap.obj: cc `$root/src/ntvdm-exe/win32/console_bitmap.c

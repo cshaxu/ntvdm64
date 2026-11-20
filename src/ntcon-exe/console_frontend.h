@@ -1,7 +1,7 @@
 #ifndef FRONTEND_CONSOLE_H
 #define FRONTEND_CONSOLE_H
 #include <windows.h>
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include "frontend-base/video.h"
 
 /* One explicit frontend instance. These handles never enter the wire. */

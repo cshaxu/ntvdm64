@@ -12,7 +12,7 @@ if(!$body){throw 'Startup callback not found'}
 $fixture=@'
 #include <windows.h>
 #include <stdio.h>
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 static BOOL StreamIoSwitchOn, presentation_only, window_mode;
 static DWORD begin_error, query_error;
 static int query_result=1, queries;

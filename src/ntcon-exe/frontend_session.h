@@ -2,7 +2,7 @@
 #define FRONTEND_SESSION_H
 #include <windows.h>
 #include "frontend-base/video.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 typedef struct frontend_session frontend_session;
 DWORD frontend_session_create(frontend_session **);
 /* Caller owns non-inheritable duplicates of the session's canonical handles. */

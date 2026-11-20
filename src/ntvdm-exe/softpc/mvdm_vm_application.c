@@ -1,6 +1,6 @@
 #include "mvdm_vm_continuation.h"
 #include "mvdm_softpc_guest_memory.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include "ntvdm-exe/frontend/vm_text.h"
 #include <string.h>
 

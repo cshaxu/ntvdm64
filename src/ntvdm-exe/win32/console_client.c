@@ -6,7 +6,7 @@
 #include "console_geometry.h"
 #include "compat/include/publication.h"
 #include "worker-base/input_watch.h"
-#include "common/console/client.h"
+#include "compat/include/console_endpoint.h"
 #include "common/protocol/frontend_protocol.h"
 #include "compat/include/console_grid.h"
 #include "compat/include/console_services.h"
@@ -35,14 +35,12 @@ static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
 
 typedef struct console_client {
     session *owner;
-    ntcon_worker_client channel;
+    compat_console_endpoint endpoint;
     HANDLE ready,stop,shutdown,failure_event;
     worker_base_input_watch *input_watch;
     HANDLE capability,input_identity,output_identity;
-    CRITICAL_SECTION lock;
     CRITICAL_SECTION palette_lock;
     worker_base_publication *publisher;
-    console_io_request request;
     BYTE request_tile[CONSOLE_IO_TILE_BYTES];
     ntvdm_console_graphics *graphics;
     PALETTEENTRY text_palette[16];
@@ -54,16 +52,16 @@ static console_client *output_client(HANDLE);
 static void console_input_failed(void *context,DWORD error)
 {
     console_client *client=context;
-    EnterCriticalSection(&client->lock);
-    (void)ntcon_worker_client_fail(&client->channel,error);
-    LeaveCriticalSection(&client->lock);
+    EnterCriticalSection(&client->endpoint.lock);
+    (void)ntcon_worker_client_fail(&client->endpoint.channel,error);
+    LeaveCriticalSection(&client->endpoint.lock);
 }
 static DWORD send_video(void *context,const console_video_description *description,const void *pixels)
 {
     console_client *client=context;DWORD error;
-    EnterCriticalSection(&client->lock);
-    error=ntcon_worker_video(&client->channel,description,pixels);
-    LeaveCriticalSection(&client->lock);return error;
+    EnterCriticalSection(&client->endpoint.lock);
+    error=ntcon_worker_video(&client->endpoint.channel,description,pixels);
+    LeaveCriticalSection(&client->endpoint.lock);return error;
 }
 /* Private VGA packet: the shared publisher sees only one immutable blob. */
 static DWORD send_video_copy(void *context,const void *copy,SIZE_T bytes)
@@ -192,13 +190,14 @@ static void console_client_end(void *context)
 {
     console_client *client=context;
     client->owner->host_context.mouse=NULL;
+    client->owner->host_context.console_endpoint=NULL;
     client->owner->console_client=NULL;
     OpenNtBaseClientSetCommandBinding(NULL,NULL);
     if (client->stop) SetEvent(client->stop);
     worker_base_publication_destroy(client->publisher);
     worker_base_input_watch_destroy(client->input_watch);
-    CloseHandle(client->channel.pipe);CloseHandle(client->channel.peer);
-    ntcon_worker_client_dispose(&client->channel);
+    CloseHandle(client->endpoint.channel.pipe);CloseHandle(client->endpoint.channel.peer);
+    ntcon_worker_client_dispose(&client->endpoint.channel);
     if(client->failure_event)CloseHandle(client->failure_event);
     CloseHandle(client->ready);
     if (client->capability) CloseHandle(client->capability);
@@ -206,7 +205,7 @@ static void console_client_end(void *context)
     if (client->shutdown) CloseHandle(client->shutdown);
     if (client->input_identity) CloseHandle(client->input_identity);
     if (client->output_identity) CloseHandle(client->output_identity);
-    DeleteCriticalSection(&client->lock);
+    DeleteCriticalSection(&client->endpoint.lock);
     DeleteCriticalSection(&client->palette_lock);
     ntvdm_console_graphics_destroy(client->graphics);
     HeapFree(GetProcessHeap(),0,client);
@@ -225,11 +224,11 @@ DWORD ntvdm_console_client_begin(session *owner)
     if (!owner || owner->console_client) return ERROR_INVALID_STATE;
     client=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*client));
     if (!client) return ERROR_NOT_ENOUGH_MEMORY;
-    error=worker_base_io_open(&client->channel.pipe,&client->channel.peer,&client->ready,
-        &client->channel.generation);
+    error=worker_base_io_open(&client->endpoint.channel.pipe,&client->endpoint.channel.peer,&client->ready,
+        &client->endpoint.channel.generation);
     if (error) { HeapFree(GetProcessHeap(),0,client);return error; }
     client->owner=owner;
-    InitializeCriticalSection(&client->lock);
+    InitializeCriticalSection(&client->endpoint.lock);
     InitializeCriticalSection(&client->palette_lock);
     client->graphics=ntvdm_console_graphics_create();
     if (!client->graphics) { error=GetLastError();console_client_end(client);return error; }
@@ -237,16 +236,16 @@ DWORD ntvdm_console_client_begin(session *owner)
     if (error) { console_client_end(client);return error; }
     /* The authenticated broker grants both transport and shell-out capability.
      * This worker does not resolve or retain a separate frontend relationship. */
-    error=ntcon_worker_client_init(&client->channel,client->channel.pipe,
-        client->channel.peer,NULL,client->channel.generation);
+    error=ntcon_worker_client_init(&client->endpoint.channel,client->endpoint.channel.pipe,
+        client->endpoint.channel.peer,NULL,client->endpoint.channel.generation);
     if(error){console_client_end(client);return error;}
     error=ntvdm_worker_lifecycle_fault_event(&client->failure_event);
     if(error){console_client_end(client);return error;}
-    client->channel.failure_event=client->failure_event;
+    client->endpoint.channel.failure_event=client->failure_event;
     client->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->input_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->output_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if (!client->channel.event || !client->stop ||
+    if (!client->endpoint.channel.event || !client->stop ||
         !client->input_identity || !client->output_identity) {
         error=GetLastError();console_client_end(client);return error;
     }
@@ -265,6 +264,7 @@ DWORD ntvdm_console_client_begin(session *owner)
         console_client_end(client);return error;
     }
     owner->host_context.mouse=&client->mouse;
+    owner->host_context.console_endpoint=&client->endpoint;
     owner->console_client=client;
     OpenNtBaseClientSetCommandBinding(console_command_ready,client);
     return ERROR_SUCCESS;
@@ -280,11 +280,11 @@ BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *capability,HANDLE *execut
     if (!capability || !execution) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     *capability=NULL;*execution=NULL;
     if (!client) return TRUE;
-    EnterCriticalSection(&client->lock);
+    EnterCriticalSection(&client->endpoint.lock);
     if (!client->capability) { SetLastError(ERROR_INVALID_STATE);result=FALSE; }
     else result=DuplicateHandle(GetCurrentProcess(),client->capability,
         GetCurrentProcess(),capability,SYNCHRONIZE,TRUE,0);
-    LeaveCriticalSection(&client->lock);
+    LeaveCriticalSection(&client->endpoint.lock);
     if (!result) return FALSE;
     /* A worker-created native child must receive this worker's verified
      * execution Console, never an old launcher-local handle from guest env. */
@@ -338,36 +338,36 @@ static console_client *input_client(HANDLE input)
  * request sequence, including stream chunks and geometry queries. */
 static DWORD exchange(console_client *client,console_io_reply *reply)
 {
-    return ntcon_worker_exchange(&client->channel,&client->request,reply);
+    return ntcon_worker_exchange(&client->endpoint.channel,&client->endpoint.request,reply);
 }
 
 static DWORD console_activate(console_client *client,BOOL active)
 {
     DWORD error=ERROR_SUCCESS;
-    EnterCriticalSection(&client->lock);
-    if(active && !client->channel.pipe) {
-        error=worker_base_io_open(&client->channel.pipe,&client->channel.peer,&client->ready,
-            &client->channel.generation);
-        if(!error)error=ntcon_worker_client_init(&client->channel,client->channel.pipe,
-            client->channel.peer,client->stop,client->channel.generation);
-        if(!error)client->channel.failure_event=client->failure_event;
+    EnterCriticalSection(&client->endpoint.lock);
+    if(active && !client->endpoint.channel.pipe) {
+        error=worker_base_io_open(&client->endpoint.channel.pipe,&client->endpoint.channel.peer,&client->ready,
+            &client->endpoint.channel.generation);
+        if(!error)error=ntcon_worker_client_init(&client->endpoint.channel,client->endpoint.channel.pipe,
+            client->endpoint.channel.peer,client->stop,client->endpoint.channel.generation);
+        if(!error)client->endpoint.channel.failure_event=client->failure_event;
     }
-    if(!active && client->channel.pipe) {
+    if(!active && client->endpoint.channel.pipe) {
         console_io_request barrier={0};console_io_reply reply;
-        HANDLE pipe=client->channel.pipe,peer=client->channel.peer;
+        HANDLE pipe=client->endpoint.channel.pipe,peer=client->endpoint.channel.peer;
         DWORD decision=WORKER_IO_KEEP;
         error=worker_base_io_checkpoint(WORKER_IO_CHECKPOINT_PAUSE,0,&decision);
         if(error || decision==WORKER_IO_KEEP) {
-            LeaveCriticalSection(&client->lock);return error;
+            LeaveCriticalSection(&client->endpoint.lock);return error;
         }
         barrier.operation=CONSOLE_IO_BARRIER;
-        error=ntcon_worker_call(&client->channel,&barrier,&reply);
+        error=ntcon_worker_call(&client->endpoint.channel,&barrier,&reply);
         if(!error) {
             error=worker_base_io_close(&pipe,&peer,&client->ready);
             /* A rejected release leaves the usable transport intact. Only
              * after physical closure discard its local operation state. */
             if(!pipe) {
-                ntcon_worker_client_dispose(&client->channel);
+                ntcon_worker_client_dispose(&client->endpoint.channel);
                 DWORD disabled=worker_base_input_watch_bind(client->input_watch,NULL);
                 if(!error)error=disabled;
             }
@@ -376,13 +376,13 @@ static DWORD console_activate(console_client *client,BOOL active)
     if(!error && active) {
         console_io_reply reply;
         int64_t height;
-        ZeroMemory(&client->request,sizeof(client->request));
-        client->request.operation=CONSOLE_IO_SCREEN_INFO;
-        error=ntcon_worker_call(&client->channel,&client->request,&reply);
+        ZeroMemory(&client->endpoint.request,sizeof(client->endpoint.request));
+        client->endpoint.request.operation=CONSOLE_IO_SCREEN_INFO;
+        error=ntcon_worker_call(&client->endpoint.channel,&client->endpoint.request,&reply);
         if(!error) {
             height=(int64_t)reply.state.bottom-reply.state.top+1;
             if(height<=0 || height>SHRT_MAX)error=ERROR_INVALID_DATA;
-            else error=ntcon_worker_prepare_text(&client->channel,
+            else error=ntcon_worker_prepare_text(&client->endpoint.channel,
                 (COORD){80,ntvdm_console_return_height((SHORT)height)});
         }
         /* Conversion is part of acquisition, before guest producers resume.
@@ -390,7 +390,7 @@ static DWORD console_activate(console_client *client,BOOL active)
         if(error) {
             DWORD release=console_activate(client,FALSE);
             if(!release)mvdm_softpc_mouse_reset(&client->mouse);
-            else (void)ntcon_worker_client_fail(&client->channel,release);
+            else (void)ntcon_worker_client_fail(&client->endpoint.channel,release);
         }
     }
     /* Unlike IRQ cancellation, successful DOS ownership handoff retires the
@@ -400,7 +400,7 @@ static DWORD console_activate(console_client *client,BOOL active)
      * DOS activation will receive a fresh ENTER. Never reset on failed RPC. */
     if(!error && active)error=worker_base_input_watch_bind(client->input_watch,client->ready);
     if(!error && !active)mvdm_softpc_mouse_reset(&client->mouse);
-    LeaveCriticalSection(&client->lock);
+    LeaveCriticalSection(&client->endpoint.lock);
     return error;
 }
 BOOL ntvdm_console_set_active(BOOL active)
@@ -435,37 +435,6 @@ BOOL ntvdm_console_publish_video(const console_video_description *description,
     return error==ERROR_SUCCESS;
 }
 
-static BOOL state_operation(console_client *client,DWORD operation,
-    const console_io_state *state,console_io_state *result)
-{
-    console_io_reply reply;
-    DWORD error;
-    BOOL ok;
-    EnterCriticalSection(&client->lock);
-    ZeroMemory(&client->request,offsetof(console_io_request,data));
-    client->request.operation=operation;
-    if (state) client->request.state=*state;
-    error=exchange(client,&reply);
-    ok=!error && reply.result;
-    if (!error) {
-        if (result) *result=reply.state;
-        if (!ok) error=reply.error;
-    }
-    LeaveCriticalSection(&client->lock);
-    if (!ok) SetLastError(error);
-    return ok;
-}
-
-static UINT console_code_page(BOOL input)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    console_io_state request={0},reply={0};
-    if (!client) return input ? GetConsoleCP() : GetConsoleOutputCP();
-    request.input=input;
-    return state_operation(client,CONSOLE_IO_CODE_PAGE,&request,&reply) ? reply.count : 0;
-}
-
 BOOL WINAPI MvdmGetCurrentConsoleFont(HANDLE output,BOOL maximum,PCONSOLE_FONT_INFO font)
 {
     console_client *client=output_client(output);
@@ -473,7 +442,7 @@ BOOL WINAPI MvdmGetCurrentConsoleFont(HANDLE output,BOOL maximum,PCONSOLE_FONT_I
     if (!client) return GetCurrentConsoleFont(output,maximum,font);
     if (!font) { SetLastError(ERROR_INVALID_ACCESS);return FALSE; }
     request.mode=maximum!=FALSE;
-    if (!state_operation(client,CONSOLE_IO_CURRENT_FONT,&request,&reply)) return FALSE;
+    if (!compat_console_state_operation(&client->endpoint,CONSOLE_IO_CURRENT_FONT,&request,&reply)) return FALSE;
     if (reply.x<SHRT_MIN || reply.x>SHRT_MAX || reply.y<SHRT_MIN || reply.y>SHRT_MAX) {
         SetLastError(ERROR_INVALID_DATA);return FALSE;
     }
@@ -489,16 +458,13 @@ COORD WINAPI MvdmGetConsoleFontSize(HANDLE output,DWORD index)
     COORD size={0,0};
     if (!client) return GetConsoleFontSize(output,index);
     request.count=index;
-    if (state_operation(client,CONSOLE_IO_FONT_SIZE,&request,&reply)) {
+    if (compat_console_state_operation(&client->endpoint,CONSOLE_IO_FONT_SIZE,&request,&reply)) {
         if (reply.x<SHRT_MIN || reply.x>SHRT_MAX || reply.y<SHRT_MIN || reply.y>SHRT_MAX)
             SetLastError(ERROR_INVALID_DATA);
         else { size.X=(SHORT)reply.x;size.Y=(SHORT)reply.y; }
     }
     return size;
 }
-
-static UINT WINAPI input_code_page(void) { return console_code_page(TRUE); }
-UINT WINAPI MvdmGetConsoleOutputCP(void) { return console_code_page(FALSE); }
 
 BOOL WINAPI MvdmGetConsoleDisplayMode(LPDWORD mode)
 {
@@ -507,7 +473,7 @@ BOOL WINAPI MvdmGetConsoleDisplayMode(LPDWORD mode)
     console_io_state request={0},reply={0};
     if (!client) return GetConsoleDisplayMode(mode);
     if (!mode) { SetLastError(ERROR_INVALID_ACCESS);return FALSE; }
-    if (!state_operation(client,CONSOLE_IO_GET_DISPLAY_MODE,&request,&reply)) return FALSE;
+    if (!compat_console_state_operation(&client->endpoint,CONSOLE_IO_GET_DISPLAY_MODE,&request,&reply)) return FALSE;
     *mode=reply.mode;
     return TRUE;
 }
@@ -519,150 +485,12 @@ BOOL WINAPI MvdmSetConsoleDisplayMode(HANDLE output,DWORD flags,PCOORD size)
     if (!client) return SetConsoleDisplayMode(output,flags,size);
     if (!size) { SetLastError(ERROR_INVALID_ACCESS);return FALSE; }
     request.mode=flags;
-    if (!state_operation(client,CONSOLE_IO_SET_DISPLAY_MODE,&request,&reply)) return FALSE;
+    if (!compat_console_state_operation(&client->endpoint,CONSOLE_IO_SET_DISPLAY_MODE,&request,&reply)) return FALSE;
     if (reply.x<SHRT_MIN || reply.x>SHRT_MAX || reply.y<SHRT_MIN || reply.y>SHRT_MAX) {
         SetLastError(ERROR_INVALID_DATA);return FALSE;
     }
     size->X=(SHORT)reply.x;size->Y=(SHORT)reply.y;
     return TRUE;
-}
-
-/* DIVERGENCE(ADAPTER-WIN32-034): retain the historical BOOL/name contract
- * through the actual Console owner. No thread-HKL fallback or locale cache. */
-static BOOL WINAPI keyboard_layout_name(LPSTR name)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    console_io_reply reply;
-    DWORD error;
-    if (!name) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    if (!client) {
-        typedef BOOL (WINAPI *query_layout)(LPSTR);
-        query_layout query=(query_layout)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),
-            "GetConsoleKeyboardLayoutNameA");
-        if (!query) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED);return FALSE; }
-        return query(name);
-    }
-    EnterCriticalSection(&client->lock);
-    ZeroMemory(&client->request,offsetof(console_io_request,data));
-    client->request.operation=CONSOLE_IO_KEYBOARD_LAYOUT;
-    error=exchange(client,&reply);
-    if (!error && !reply.result) error=reply.error ? reply.error : ERROR_GEN_FAILURE;
-    if (!error && (reply.bytes!=KL_NAMELENGTH ||
-        reply.data[KL_NAMELENGTH-1]!=0)) error=ERROR_INVALID_DATA;
-    if (!error) memcpy(name,reply.data,KL_NAMELENGTH);
-    LeaveCriticalSection(&client->lock);
-    SetLastError(error);
-    return error==ERROR_SUCCESS;
-}
-
-static DWORD WINAPI get_console_title(LPSTR title,DWORD capacity)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    console_io_reply reply;
-    DWORD error,result=0;
-    if (!client) return GetConsoleTitleA(title,capacity);
-    if ((!title && capacity) || capacity>CONSOLE_IO_TILE_BYTES) {
-        SetLastError(ERROR_INVALID_PARAMETER);return 0;
-    }
-    EnterCriticalSection(&client->lock);
-    ZeroMemory(&client->request,offsetof(console_io_request,data));
-    client->request.operation=CONSOLE_IO_GET_TITLE_A;
-    client->request.state.count=capacity;
-    error=exchange(client,&reply);
-    if (!error && reply.bytes>capacity) error=ERROR_INVALID_DATA;
-    if (!error) {
-        if (reply.bytes) memcpy(title,reply.data,reply.bytes);
-        result=reply.state.count;error=reply.error;
-    }
-    LeaveCriticalSection(&client->lock);
-    SetLastError(error);return error ? 0 : result;
-}
-
-static BOOL WINAPI set_console_title(LPCSTR title)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    console_io_reply reply;
-    DWORD error;
-    BOOL result=FALSE;
-    size_t length;
-    if (!client) return SetConsoleTitleA(title);
-    if (!title) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    length=strnlen_s(title,CONSOLE_IO_TILE_BYTES);
-    if (length==CONSOLE_IO_TILE_BYTES) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    EnterCriticalSection(&client->lock);
-    ZeroMemory(&client->request,offsetof(console_io_request,data));
-    client->request.operation=CONSOLE_IO_SET_TITLE_A;
-    client->request.bytes=(DWORD)length+1;
-    client->request.data=(BYTE *)title;
-    error=exchange(client,&reply);
-    if (!error) { result=reply.result!=0;error=reply.error; }
-    if(!error && result) {
-        char copied[CONSOLE_IO_TITLE_BYTES];
-        memcpy(copied,title,min(length,sizeof(copied)-1));
-        copied[min(length,sizeof(copied)-1)]=0;
-        /* The original Console title call has already succeeded. Window
-         * caption publication is supplemental and cannot change its result. */
-        (void)ntcon_worker_publish_title(&client->channel,copied);
-    }
-    LeaveCriticalSection(&client->lock);
-    SetLastError(error);return !error && result;
-}
-
-BOOL ntvdm_console_services_initialize(void)
-{
-    static const compat_console_services services = {
-        input_code_page, keyboard_layout_name, get_console_title, set_console_title
-    };
-    return compat_console_services_install(&services);
-}
-
-BOOL WINAPI MvdmGetCursorPos(LPPOINT point)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    console_io_state request={0},reply={0};
-    if (!client) return GetCursorPos(point);
-    if (!point) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    if (!state_operation(client,CONSOLE_IO_GET_POINTER,&request,&reply)) return FALSE;
-    point->x=reply.x;point->y=reply.y;return TRUE;
-}
-
-BOOL WINAPI MvdmSetCursorPos(int x,int y)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    console_io_state request={0};
-    if (!client) return SetCursorPos(x,y);
-    request.x=x;request.y=y;
-    return state_operation(client,CONSOLE_IO_SET_POINTER,&request,NULL);
-}
-
-BOOL WINAPI MvdmGetClipCursor(LPRECT rect)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    console_io_state request={0},reply={0};
-    if (!client) return GetClipCursor(rect);
-    if (!rect) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    if (!state_operation(client,CONSOLE_IO_GET_POINTER_CLIP,&request,&reply)) return FALSE;
-    rect->left=reply.left;rect->top=reply.top;
-    rect->right=reply.right;rect->bottom=reply.bottom;return TRUE;
-}
-
-BOOL WINAPI MvdmClipCursor(const RECT *rect)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    console_io_state request={0};
-    if (!client) return ClipCursor(rect);
-    if (rect) {
-        request.has_clip=1;request.left=rect->left;request.top=rect->top;
-        request.right=rect->right;request.bottom=rect->bottom;
-    }
-    return state_operation(client,CONSOLE_IO_SET_POINTER_CLIP,&request,NULL);
 }
 
 int ntvdm_console_window_query(DWORD query,LONG values[4])
@@ -672,7 +500,7 @@ int ntvdm_console_window_query(DWORD query,LONG values[4])
     console_io_state request={0},reply={0};
     if (!client) return -1;
     request.mode=query;request.x=values[0];request.y=values[1];
-    if (!state_operation(client,CONSOLE_IO_WINDOW_QUERY,&request,&reply)) return 0;
+    if (!compat_console_state_operation(&client->endpoint,CONSOLE_IO_WINDOW_QUERY,&request,&reply)) return 0;
     values[0]=reply.left;values[1]=reply.top;
     values[2]=reply.right;values[3]=reply.bottom;
     return 1;
@@ -692,25 +520,25 @@ BOOL WINAPI MvdmWriteConsoleA(HANDLE output,const VOID *buffer,DWORD length,
         return WriteConsoleA(output,buffer,length,written,reserved);
     if (written) *written=0;
     if (reserved || (!buffer && length)) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    EnterCriticalSection(&client->lock);
-    if (client->channel.failure) { error=client->channel.failure;goto done; }
+    EnterCriticalSection(&client->endpoint.lock);
+    if (client->endpoint.channel.failure) { error=client->endpoint.channel.failure;goto done; }
     do {
         chunk=length-total;
         if (chunk>CONSOLE_IO_MAX_DATA_BYTES) chunk=CONSOLE_IO_MAX_DATA_BYTES;
-        ZeroMemory(&client->request,offsetof(console_io_request,data));
-        client->request.operation=CONSOLE_IO_WRITE;
-        client->request.bytes=chunk;
-        client->request.data=(BYTE *)(cursor+total);
+        ZeroMemory(&client->endpoint.request,offsetof(console_io_request,data));
+        client->endpoint.request.operation=CONSOLE_IO_WRITE;
+        client->endpoint.request.bytes=chunk;
+        client->endpoint.request.data=(BYTE *)(cursor+total);
         error=exchange(client,&reply);
         if (!error && reply.state.count>chunk)
             error=ERROR_INVALID_DATA;
-        if (error) { (void)ntcon_worker_client_fail(&client->channel,error);break; }
+        if (error) { (void)ntcon_worker_client_fail(&client->endpoint.channel,error);break; }
         total+=reply.state.count;
         if (!reply.result) { result=FALSE;error=reply.error;break; }
         if (reply.state.count!=chunk) break;
     } while (total<length);
 done:
-    LeaveCriticalSection(&client->lock);
+    LeaveCriticalSection(&client->endpoint.lock);
     if (written) *written=total;
     if (error || !result) SetLastError(error);
     return error==ERROR_SUCCESS && result;
@@ -722,7 +550,7 @@ BOOL WINAPI MvdmGetConsoleScreenBufferInfo(HANDLE output,PCONSOLE_SCREEN_BUFFER_
     console_io_state s={0};
     if (!client) return GetConsoleScreenBufferInfo(output,info);
     if (!info) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    if (!state_operation(client,CONSOLE_IO_SCREEN_INFO,NULL,&s)) return FALSE;
+    if (!compat_console_state_operation(&client->endpoint,CONSOLE_IO_SCREEN_INFO,NULL,&s)) return FALSE;
     info->dwSize.X=(SHORT)s.width;info->dwSize.Y=(SHORT)s.height;
     info->dwCursorPosition.X=(SHORT)s.x;info->dwCursorPosition.Y=(SHORT)s.y;
     info->wAttributes=(WORD)s.attribute;
@@ -739,7 +567,7 @@ BOOL WINAPI MvdmSetConsoleCursorPosition(HANDLE output,COORD position)
     console_io_state s={0};
     if (!client) return SetConsoleCursorPosition(output,position);
     s.x=position.X;s.y=position.Y;
-    return state_operation(client,CONSOLE_IO_CURSOR_POSITION,&s,NULL);
+    return compat_console_state_operation(&client->endpoint,CONSOLE_IO_CURSOR_POSITION,&s,NULL);
 }
 
 BOOL WINAPI MvdmSetConsoleCursorInfo(HANDLE output,const CONSOLE_CURSOR_INFO *info)
@@ -749,7 +577,7 @@ BOOL WINAPI MvdmSetConsoleCursorInfo(HANDLE output,const CONSOLE_CURSOR_INFO *in
     if (!client) return SetConsoleCursorInfo(output,info);
     if (!info) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     s.cursor_size=info->dwSize;s.cursor_visible=info->bVisible!=FALSE;
-    return state_operation(client,CONSOLE_IO_CURSOR_INFO,&s,NULL);
+    return compat_console_state_operation(&client->endpoint,CONSOLE_IO_CURSOR_INFO,&s,NULL);
 }
 
 BOOL WINAPI MvdmFillConsoleOutputCharacterA(HANDLE output,CHAR character,DWORD length,
@@ -761,7 +589,7 @@ BOOL WINAPI MvdmFillConsoleOutputCharacterA(HANDLE output,CHAR character,DWORD l
     if (!client) return FillConsoleOutputCharacterA(output,character,length,position,written);
     if (!written) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     s.x=position.X;s.y=position.Y;s.character=(BYTE)character;s.count=length;
-    ok=state_operation(client,CONSOLE_IO_FILL_CHARACTER,&s,&r);
+    ok=compat_console_state_operation(&client->endpoint,CONSOLE_IO_FILL_CHARACTER,&s,&r);
     *written=r.count;return ok;
 }
 
@@ -771,7 +599,7 @@ BOOL WINAPI MvdmGetConsoleCursorInfo(HANDLE output,PCONSOLE_CURSOR_INFO info)
     console_io_state result={0};
     if (!client) return GetConsoleCursorInfo(output,info);
     if (!info) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    if (!state_operation(client,CONSOLE_IO_GET_CURSOR_INFO,NULL,&result)) return FALSE;
+    if (!compat_console_state_operation(&client->endpoint,CONSOLE_IO_GET_CURSOR_INFO,NULL,&result)) return FALSE;
     info->dwSize=result.cursor_size;info->bVisible=result.cursor_visible;
     return TRUE;
 }
@@ -784,7 +612,7 @@ BOOL WINAPI MvdmGetConsoleMode(HANDLE handle,LPDWORD mode)
     if (!client) return GetConsoleMode(handle,mode);
     if (!mode) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     request.input=ntvdm_console_handle_kind(handle) ? ntvdm_console_handle_kind(handle)==1 : !GetConsoleScreenBufferInfo(handle,&screen);
-    if (!state_operation(client,CONSOLE_IO_GET_MODE,&request,&result)) return FALSE;
+    if (!compat_console_state_operation(&client->endpoint,CONSOLE_IO_GET_MODE,&request,&result)) return FALSE;
     *mode=result.mode;return TRUE;
 }
 
@@ -795,7 +623,7 @@ BOOL WINAPI MvdmSetConsoleMode(HANDLE handle,DWORD mode)
     console_io_state request={0};
     if (!client) return SetConsoleMode(handle,mode);
     request.input=ntvdm_console_handle_kind(handle) ? ntvdm_console_handle_kind(handle)==1 : !GetConsoleScreenBufferInfo(handle,&screen);request.mode=mode;
-    return state_operation(client,CONSOLE_IO_SET_MODE,&request,NULL);
+    return compat_console_state_operation(&client->endpoint,CONSOLE_IO_SET_MODE,&request,NULL);
 }
 
 BOOL WINAPI MvdmFillConsoleOutputAttribute(HANDLE output,WORD attribute,DWORD length,
@@ -807,7 +635,7 @@ BOOL WINAPI MvdmFillConsoleOutputAttribute(HANDLE output,WORD attribute,DWORD le
     if (!client) return FillConsoleOutputAttribute(output,attribute,length,position,written);
     if (!written) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     s.x=position.X;s.y=position.Y;s.attribute=attribute;s.count=length;
-    ok=state_operation(client,CONSOLE_IO_FILL_ATTRIBUTE,&s,&r);
+    ok=compat_console_state_operation(&client->endpoint,CONSOLE_IO_FILL_ATTRIBUTE,&s,&r);
     *written=r.count;return ok;
 }
 
@@ -825,7 +653,7 @@ BOOL WINAPI MvdmScrollConsoleScreenBufferA(HANDLE output,const SMALL_RECT *rect,
     }
     s.x=position.X;s.y=position.Y;
     s.character=(BYTE)fill->Char.AsciiChar;s.attribute=fill->Attributes;
-    return state_operation(client,CONSOLE_IO_SCROLL,&s,NULL);
+    return compat_console_state_operation(&client->endpoint,CONSOLE_IO_SCROLL,&s,NULL);
 }
 
 BOOL WINAPI MvdmSetConsoleTextAttribute(HANDLE output,WORD attribute)
@@ -834,7 +662,7 @@ BOOL WINAPI MvdmSetConsoleTextAttribute(HANDLE output,WORD attribute)
     console_io_state s={0};
     if (!client) return SetConsoleTextAttribute(output,attribute);
     s.attribute=attribute;
-    return state_operation(client,CONSOLE_IO_ATTRIBUTE,&s,NULL);
+    return compat_console_state_operation(&client->endpoint,CONSOLE_IO_ATTRIBUTE,&s,NULL);
 }
 
 BOOL WINAPI MvdmSetConsoleScreenBufferSize(HANDLE output,COORD size)
@@ -843,7 +671,7 @@ BOOL WINAPI MvdmSetConsoleScreenBufferSize(HANDLE output,COORD size)
     console_io_state s={0};
     if (!client) return opennt_console_resize_grid(output,&size,FALSE,NULL);
     s.width=size.X;s.height=size.Y;
-    return state_operation(client,CONSOLE_IO_BUFFER_SIZE,&s,NULL);
+    return compat_console_state_operation(&client->endpoint,CONSOLE_IO_BUFFER_SIZE,&s,NULL);
 }
 
 BOOL WINAPI MvdmSetConsoleWindowInfo(HANDLE output,BOOL absolute,const SMALL_RECT *window)
@@ -854,7 +682,7 @@ BOOL WINAPI MvdmSetConsoleWindowInfo(HANDLE output,BOOL absolute,const SMALL_REC
     if (!window) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     s.mode=absolute!=FALSE;s.left=window->Left;s.top=window->Top;
     s.right=window->Right;s.bottom=window->Bottom;
-    return state_operation(client,CONSOLE_IO_WINDOW_RECT,&s,NULL);
+    return compat_console_state_operation(&client->endpoint,CONSOLE_IO_WINDOW_RECT,&s,NULL);
 }
 
 /* Original ntcon/client/iostubs.c clips to the caller's buffer and packs
@@ -877,12 +705,12 @@ static BOOL cells_operation(console_client *client,BOOL write,BOOL wide,CHAR_INF
     if (width<=0 || height<=0) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     operation=write ? (wide ? CONSOLE_IO_WRITE_CELLS_W : CONSOLE_IO_WRITE_CELLS_A) :
         (wide ? CONSOLE_IO_READ_CELLS_W : CONSOLE_IO_READ_CELLS_A);
-    EnterCriticalSection(&client->lock);
+    EnterCriticalSection(&client->endpoint.lock);
     /* Clip once before tiling. Modern Console can return the unchanged request
      * rectangle for a wholly off-screen tile; unioning it would invent cells
      * that the single original call never transferred. */
-    ZeroMemory(&client->request,offsetof(console_io_request,data));
-    client->request.operation=CONSOLE_IO_SCREEN_INFO;
+    ZeroMemory(&client->endpoint.request,offsetof(console_io_request,data));
+    client->endpoint.request.operation=CONSOLE_IO_SCREEN_INFO;
     error=exchange(client,&reply);
     if (error || !reply.result) {
         if (!error) error=reply.error;
@@ -894,14 +722,14 @@ static BOOL cells_operation(console_client *client,BOOL write,BOOL wide,CHAR_INF
     if (width<=start_column || height<=start_row) {
         /* Native read and write differ for a wholly off-screen rectangle.
          * Ask the real provider; there is no cell to copy or synthesize. */
-        ZeroMemory(&client->request,offsetof(console_io_request,data));
-        client->request.operation=operation;
-        client->request.state.width=client->request.state.height=1;
-        client->request.state.left=region->Left;client->request.state.right=region->Right;
-        client->request.state.top=region->Top;client->request.state.bottom=region->Bottom;
+        ZeroMemory(&client->endpoint.request,offsetof(console_io_request,data));
+        client->endpoint.request.operation=operation;
+        client->endpoint.request.state.width=client->endpoint.request.state.height=1;
+        client->endpoint.request.state.left=region->Left;client->endpoint.request.state.right=region->Right;
+        client->endpoint.request.state.top=region->Top;client->endpoint.request.state.bottom=region->Bottom;
         if (write) {
-            client->request.bytes=sizeof(CHAR_INFO);
-            client->request.data=(BYTE *)(buffer+origin.Y*(size_t)size.X+origin.X);
+            client->endpoint.request.bytes=sizeof(CHAR_INFO);
+            client->endpoint.request.data=(BYTE *)(buffer+origin.Y*(size_t)size.X+origin.X);
         }
         error=exchange(client,&reply);ok=!error && reply.result;
         if (!error) {
@@ -915,16 +743,16 @@ static BOOL cells_operation(console_client *client,BOOL write,BOOL wide,CHAR_INF
         rows=width-start_column<=(int)(CONSOLE_IO_TILE_BYTES/sizeof(CHAR_INFO)) ?
             min(height-row,(int)(CONSOLE_IO_TILE_BYTES/sizeof(CHAR_INFO))/(width-start_column)) : 1;
         for (column=start_column;column<width;column+=tile) {
-            console_io_state *s=&client->request.state;
+            console_io_state *s=&client->endpoint.request.state;
             tile=min(width-column,(int)(CONSOLE_IO_TILE_BYTES/sizeof(CHAR_INFO)));
-            ZeroMemory(&client->request,offsetof(console_io_request,data));
-            client->request.operation=operation;
+            ZeroMemory(&client->endpoint.request,offsetof(console_io_request,data));
+            client->endpoint.request.operation=operation;
             s->width=tile;s->height=rows;
             s->left=region->Left+column;s->right=s->left+tile-1;
             s->top=region->Top+row;s->bottom=s->top+rows-1;
             if (write) {
-                client->request.bytes=tile*rows*sizeof(CHAR_INFO);
-                client->request.data=client->request_tile;
+                client->endpoint.request.bytes=tile*rows*sizeof(CHAR_INFO);
+                client->endpoint.request.data=client->request_tile;
                 for (r=0;r<rows;r++) memcpy(client->request_tile+r*tile*sizeof(CHAR_INFO),
                     buffer+(origin.Y+row+r)*(size_t)size.X+origin.X+column,tile*sizeof(CHAR_INFO));
             }
@@ -935,7 +763,7 @@ static BOOL cells_operation(console_client *client,BOOL write,BOOL wide,CHAR_INF
                 (reply.state.right>=reply.state.left && reply.state.bottom>=reply.state.top &&
                  (reply.state.left<s->left || reply.state.right>s->right ||
                   reply.state.top<s->top || reply.state.bottom>s->bottom))) {
-                error=ntcon_worker_client_fail(&client->channel,ERROR_INVALID_DATA);ok=FALSE;break;
+                error=ntcon_worker_client_fail(&client->endpoint.channel,ERROR_INVALID_DATA);ok=FALSE;break;
             }
             if (reply.state.right<reply.state.left || reply.state.bottom<reply.state.top) continue;
             if (first) {
@@ -959,7 +787,7 @@ static BOOL cells_operation(console_client *client,BOOL write,BOOL wide,CHAR_INF
         }
     }
 done_cells:
-    LeaveCriticalSection(&client->lock);
+    LeaveCriticalSection(&client->endpoint.lock);
     if (ok && !first) *region=actual;
     if (!ok) SetLastError(error);
     return ok;
@@ -1011,23 +839,23 @@ static BOOL input_operation(HANDLE input,INPUT_RECORD *records,uint64_t *receipt
     if (!read || (!records && length) || live_count>CONSOLE_IO_INPUT_LIVE_CAPACITY ||
         (live_count && (!live || !receipts || peek))) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     *read=0;
-    EnterCriticalSection(&client->lock);
-    ZeroMemory(&client->request,offsetof(console_io_request,data));
-    client->request.operation=peek ? CONSOLE_IO_PEEK_INPUT : CONSOLE_IO_READ_INPUT;
-    client->request.state.count=min(length,CONSOLE_IO_INPUT_CAPACITY);
-    client->request.state.mode=receipts ? CONSOLE_IO_INPUT_RETURNABLE : 0;
-    client->request.bytes=live_count*sizeof(*live);
-    client->request.data=(BYTE *)live;
+    EnterCriticalSection(&client->endpoint.lock);
+    ZeroMemory(&client->endpoint.request,offsetof(console_io_request,data));
+    client->endpoint.request.operation=peek ? CONSOLE_IO_PEEK_INPUT : CONSOLE_IO_READ_INPUT;
+    client->endpoint.request.state.count=min(length,CONSOLE_IO_INPUT_CAPACITY);
+    client->endpoint.request.state.mode=receipts ? CONSOLE_IO_INPUT_RETURNABLE : 0;
+    client->endpoint.request.bytes=live_count*sizeof(*live);
+    client->endpoint.request.data=(BYTE *)live;
     error=exchange(client,&reply);ok=!error && reply.result;
     if (!error && !ok) error=reply.error;
-    if (ok && (reply.state.count>client->request.state.count ||
+    if (ok && (reply.state.count>client->endpoint.request.state.count ||
         reply.bytes!=reply.state.count*sizeof(console_io_input))) {
-        error=ntcon_worker_client_fail(&client->channel,ERROR_INVALID_DATA);ok=FALSE;
+        error=ntcon_worker_client_fail(&client->endpoint.channel,ERROR_INVALID_DATA);ok=FALSE;
     }
     for (i=0;ok && i<reply.state.count;i++) {
         console_io_input wire;
         memcpy(&wire,reply.data+i*sizeof(wire),sizeof(wire));
-        if (!decode_input(&wire,&records[i])) { error=ntcon_worker_client_fail(&client->channel,ERROR_INVALID_DATA);ok=FALSE; }
+        if (!decode_input(&wire,&records[i])) { error=ntcon_worker_client_fail(&client->endpoint.channel,ERROR_INVALID_DATA);ok=FALSE; }
         if(receipts)receipts[i]=(uint64_t)wire.receipt_low|((uint64_t)wire.receipt_high<<32);
     }
     if (ok) *read=reply.state.count;
@@ -1035,7 +863,7 @@ static BOOL input_operation(HANDLE input,INPUT_RECORD *records,uint64_t *receipt
         error=worker_base_input_watch_ack(client->input_watch);
         if(error)ok=FALSE;
     }
-    LeaveCriticalSection(&client->lock);
+    LeaveCriticalSection(&client->endpoint.lock);
     if (!ok) SetLastError(error);
     return ok;
 }
@@ -1072,12 +900,12 @@ BOOL ntvdm_console_prepend_keys_tagged(HANDLE input,PINPUT_RECORD records,const 
     if (!written || (!records && length) || length>CONSOLE_IO_INPUT_CAPACITY) {
         SetLastError(ERROR_INVALID_PARAMETER);return FALSE;
     }
-    EnterCriticalSection(&client->lock);
-    error=ntcon_worker_prepend_keys_tagged(&client->channel,records,receipts,length,&reply);
+    EnterCriticalSection(&client->endpoint.lock);
+    error=ntcon_worker_prepend_keys_tagged(&client->endpoint.channel,records,receipts,length,&reply);
     if (!error) {
         *written=reply.state.count;ok=reply.result;if (!ok) error=reply.error;
     }
-    LeaveCriticalSection(&client->lock);
+    LeaveCriticalSection(&client->endpoint.lock);
     if (error) SetLastError(error);
     return ok;
 }

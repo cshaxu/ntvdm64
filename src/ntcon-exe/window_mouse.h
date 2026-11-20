@@ -1,7 +1,7 @@
 #ifndef FRONTEND_WINDOW_MOUSE_H
 #define FRONTEND_WINDOW_MOUSE_H
 #include "window_input_queue.h"
-#include "common/protocol/console_mouse.h"
+#include "compat/include/console_mouse.h"
 
 typedef DWORD (*frontend_mouse_sink)(void *,const INPUT_RECORD *,DWORD);
 /* Both workers receive relative frame pixels. Guest/native position, range,

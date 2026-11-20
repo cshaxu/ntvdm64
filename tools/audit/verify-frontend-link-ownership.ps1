@@ -237,8 +237,8 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         throw 'Common native packet codec must have exactly one provider'
     }
     if(@(Compare-Object @('pipe/pipe_transfer.c','pipe/pipe_pair.c') @(Get-FrontendSources 'lib-pipe.lib' 'lib-win32')).Count) { throw 'Pipe mechanisms must have one provider' }
-    if(@(Compare-Object @('console/client.c') @(Get-FrontendSources 'common-console.lib' 'common')).Count) {
-        throw 'Common Console client must have exactly one provider'
+    if(@(Get-FrontendSources 'common-console.lib' 'common').Count -or @(Compare-Object @('console_transport.c') @(Get-FrontendSources 'common-console.lib' 'compat')).Count) {
+        throw 'Console transport must have exactly one compat provider'
     }
     if(@(Compare-Object @('process-image/image.c') @(Get-FrontendSources 'lib-process-image.lib' 'lib-win32')).Count) { throw 'Win32 process image provider missing' }
     if(@(Get-FrontendSources 'lib-process-hook.lib' 'lib-win32') -contains 'process-image/image.c') { throw 'Hook implementation must not own process image selection' }
@@ -282,7 +282,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         }
     }
     foreach($target in @('ntvdm.exe','ntvwm.exe','console-client-test.exe','ntvwm-presentation-test.exe')) {
-        if('console/client.c' -notin @(Get-FrontendSources $target 'common')) {
+        if('console_transport.c' -notin @(Get-FrontendSources $target 'compat')) {
             throw "$target omits the common frontend protocol client"
         }
     }

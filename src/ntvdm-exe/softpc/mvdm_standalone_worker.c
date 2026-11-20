@@ -5,7 +5,7 @@
 
 #include "ntvdm-exe/package_layout.h"
 #include "common/base_srv/base_rpc_client.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include "mvdm_softpc_execution.h"
 #include "compat/include/mvdm_softpc_ccpu_wait.h"
 #include "mvdm_softpc_guest_memory.h"
@@ -145,7 +145,6 @@ static DWORD mvdm_standalone_worker_begin(void)
 
     if (worker_started) return ERROR_ALREADY_EXISTS;
     if (!worker_thread_initialize() || !ntvdm_command_initialize() ||
-            !ntvdm_console_services_initialize() ||
             !ntvdm_dpmi_initialize() || !ntvdm_vm_services_initialize()) return GetLastError();
     session_initialize(&worker_session,1u);
     worker_session_initialized=TRUE;

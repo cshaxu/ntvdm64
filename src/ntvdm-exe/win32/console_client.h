@@ -2,7 +2,7 @@
 #define NTVDM_CONSOLE_CLIENT_H
 #include <windows.h>
 #include "ntvdm-exe/session/session.h"
-#include "common/protocol/console_video.h"
+#include "compat/include/console_video.h"
 #include "console_graphics.h"
 ntvdm_console_graphics *ntvdm_console_graphics_context(void);
 /* NULL description retires graphics for a text transition. Called only after
@@ -16,7 +16,6 @@ HANDLE WINAPI MvdmCreateFileW(LPCWSTR,DWORD,DWORD,LPSECURITY_ATTRIBUTES,DWORD,DW
 DWORD WINAPI MvdmGetFileType(HANDLE);
 BOOL ntvdm_console_set_active(BOOL);
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR);
-BOOL ntvdm_console_services_initialize(void);
 HANDLE ntvdm_console_input_wait_handle(void);
 BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *,HANDLE *);
 BOOL WINAPI MvdmWriteConsoleA(HANDLE,const VOID *,DWORD,LPDWORD,LPVOID);

@@ -1,5 +1,5 @@
 #include "compat/include/mvdm_softpc_mouse_input.h"
-#include "common/protocol/console_mouse.h"
+#include "compat/include/console_mouse.h"
 #include <assert.h>
 #include <limits.h>
 #include <stdio.h>

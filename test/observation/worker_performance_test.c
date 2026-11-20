@@ -1,5 +1,5 @@
 #include "worker_performance.h"
-#include "common/protocol/console_mouse.h"
+#include "compat/include/console_mouse.h"
 #include <stdio.h>
 #include <string.h>
 /* Measurement/queue unit only; real CCPU guest evidence is a separate runner. */

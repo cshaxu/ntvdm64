@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "conapi.h"
-#include "common/protocol/console_mouse.h"
+#include "compat/include/console_mouse.h"
 #include "compat/include/mvdm_keyboard_history.h"
 static mvdm_keyboard_history nt_keyboard_history;
 static INPUT_RECORD queue[1024];

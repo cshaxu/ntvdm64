@@ -1,7 +1,7 @@
 #ifndef FRONTEND_VIDEO_H
 #define FRONTEND_VIDEO_H
 #include <windows.h>
-#include "common/protocol/console_video.h"
+#include "compat/include/console_video.h"
 
 /* Access is serialized by the channel owner, including disposal. Rendering
  * must take a snapshot through that owner; raw pointers never cross IPC. */

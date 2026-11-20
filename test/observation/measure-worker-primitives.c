@@ -1,7 +1,7 @@
 #include "compat/include/publication.h"
 #include "compat/include/mvdm_softpc_mouse_input.h"
-#include "common/protocol/console_mouse.h"
-#include "common/protocol/console_video.h"
+#include "compat/include/console_mouse.h"
+#include "compat/include/console_video.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

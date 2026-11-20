@@ -207,7 +207,9 @@
       "target": "input_code_page",
       "layer": "F",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed"
+      "status": "eliminated",
+      "migration_status": "P87 removes the slot entirely; compat directly implements the operation.",
+      "current_provider": "src/compat/console_services.c"
     },
     {
       "id": "B0014",
@@ -216,7 +218,9 @@
       "target": "keyboard_layout_name",
       "layer": "F",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed"
+      "status": "eliminated",
+      "migration_status": "P87 removes the slot entirely; compat directly implements the operation.",
+      "current_provider": "src/compat/console_services.c"
     },
     {
       "id": "B0015",
@@ -225,7 +229,9 @@
       "target": "get_console_title",
       "layer": "F",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed"
+      "status": "eliminated",
+      "migration_status": "P87 removes the slot entirely; compat directly implements the operation.",
+      "current_provider": "src/compat/console_services.c"
     },
     {
       "id": "B0016",
@@ -234,7 +240,9 @@
       "target": "set_console_title",
       "layer": "F",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed"
+      "status": "eliminated",
+      "migration_status": "P87 removes the slot entirely; compat directly implements the operation.",
+      "current_provider": "src/compat/console_services.c"
     },
     {
       "id": "B0017",
@@ -418,7 +426,7 @@
   ],
   "indirect_counts": {
     "B": 18,
-    "F": 15,
+    "F": 11,
     "D": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
@@ -453,5 +461,11 @@
     "src/ntvwm-exe/presentation.c": "f95a13365d65a53a1d5fc51f6164997d2df51610f0834dbfaf204882177926b6"
   },
   "p85_provider_sha256": "61abfc0a868a286bb79dd1dff22723086ac434176072c87310e2de951064d0fd",
-  "p86_provider_sha256": "eb4d072a1d0026d361716b3a386241cc5ed08422a3f5095029f60a13ba6410e6"
+  "p86_provider_sha256": "eb4d072a1d0026d361716b3a386241cc5ed08422a3f5095029f60a13ba6410e6",
+  "p87_removed_slots": [
+    "B0013",
+    "B0014",
+    "B0015",
+    "B0016"
+  ]
 }

@@ -16,7 +16,7 @@ foreach($line in $envLines){$i=$line.IndexOf('=');if($i -gt 0){Set-Item -Path ('
 $sources=@('test/app/console_input_batch_test.c',
  'test/app/console_input_batch_stubs.c',
  'src/compat/mvdm_keyboard_history.c',
- 'src/common/console/client.c',
+ 'src/compat/console_transport.c',
  'src/lib-win32/pipe/pipe_transfer.c','src/lib-win32/handle/duplicate.c',
  'src/ntvdm-exe/win32/console_client.c','src/ntvdm-exe/win32/console_graphics.c',
  'src/ntvdm-exe/win32/console_bitmap.c','src/ntvdm-exe/softpc/v7_pointer.c','src/compat/console_grid.c',

@@ -1,5 +1,5 @@
 #include "console_wire_observed.h"
-#include "common/console/client.h"
+#include "compat/include/console_transport.h"
 /* The transport moved into common. Observe the real worker call boundary as
  * well; never substitute the shared client or alter its reply/failure. */
 static DWORD observed_worker_exchange(ntcon_worker_client *,console_io_request *,console_io_reply *);

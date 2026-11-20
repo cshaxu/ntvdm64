@@ -229,9 +229,9 @@ capture/release and native launch providers remain product-owned. Borrowed
 strings retain their existing lifetime through finish; the table does not
 introduce another snapshot, request registry or mutable command state.
 
-`ntvdm_console_services_initialize` installs the existing Console keyboard and
-title operations at worker entry. Their frontend/native selection and error
-behavior remain in `win32/console_client.c`; B retains the original symbols.
+NTVDM binds the Console endpoint to the host context after successful activation.
+Compat owns Console keyboard, title, and pointer operations. NTVDM owns the
+authenticated endpoint acquisition, handoff, and teardown.
 `mvdm_guest_location_initialize` installs the guest copy/acquire/release operations
 at the same entry. Its provider retains the session-owned lease, mapping,
 commit and failure behavior; B only declares and dispatches this contract.

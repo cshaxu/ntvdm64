@@ -27,11 +27,11 @@ They do not link worker-base. Launcher request packing belongs to run16;
 NTSRV owns worker creation and shared Console retirement/return-ack decisions,
 not this worker-side library. Original DOS/PIF policy stays at its source owner
 and hidden Console resource operations stay at the native worker boundary.
-T424 S7 moves the neutral ordered frontend protocol client into
-common/console/client.c/h, selected once in common-console.lib. Its borrowed
+The ordered frontend protocol client is implemented in
+compat/console_transport.c, selected once in common-console.lib. Its borrowed
 handles, local event, caller locks and single-attempt activation are unchanged.
 Worker-only connection adaptation remains here; protocol declarations and
-shared I/O client mechanics belong to common. No scheduler, frontend
+shared I/O client mechanics belong to compat. No scheduler, frontend
 presentation, native Console state or original DOS/WOW policy belongs here.
 
 Original OpenNT/MVDM execution, task completion, block/resume and cleanup

@@ -1,5 +1,5 @@
 #include "compat/include/publication.h"
-#include "common/protocol/console_video.h"
+#include "compat/include/console_video.h"
 #include <stdio.h>
 #include <string.h>
 

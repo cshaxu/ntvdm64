@@ -317,10 +317,10 @@ locking, epochs and live CDS resolution remain in the product provider.
 
 `console_services.c` retains the `GetConsoleKeyboardLayoutNameA`,
 `MvdmGetConsoleCP`, `MvdmGetConsoleTitleA` and `MvdmSetConsoleTitleA` symbols
-and WINAPI signatures. Its immutable operation table
-is installed by the NTVDM product before original execution. The product
-continues to own frontend selection, session state, channel locking and native
-no-frontend queries; B holds no Console state and imports no outer provider.
+and WINAPI signatures. The implementations use the current host context’s
+borrowed endpoint for routed operations and the native API when no endpoint is
+bound. Pointer operations and the shared ordered transport use the same route
+and lock. The product owns endpoint admission, handoff, and shutdown.
 
 `guest_environment.c` owns bounded ANSI environment projection and the existing
 WOW boot-block allocation contract. It uses native APIs and `system_root.c`,

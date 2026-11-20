@@ -10,7 +10,7 @@
 #include "mvdm_vm_command.h"
 #include "ntvdm-exe/session/session.h"
 #include "compat/include/mvdm_command_native_child.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include "ntvdm-exe/frontend/vm_text.h"
 #include <windows.h>
 #include <stdio.h>

@@ -1,7 +1,7 @@
 /* Same request ordering/frame protocol as ntvdm-exe/win32/console_client.c.
  * No guest context, original Console-close policy or frontend ownership here. */
 #include "presentation.h"
-#include "common/console/client.h"
+#include "compat/include/console_transport.h"
 #include "compat/include/publication.h"
 #include "console_state.h"
 #include "text_frame.h"

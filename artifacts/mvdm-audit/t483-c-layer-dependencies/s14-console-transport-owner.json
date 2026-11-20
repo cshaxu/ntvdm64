@@ -1,0 +1,81 @@
+{
+  "packet": "M0 T483 S14 P87",
+  "baseline": "3ba6e975d16eab1b7fb631058c2db17f9a0a831e",
+  "status": "Cached full build, dual publication, product and fixture tests and final gates passed. Enclosing commit is the delivery receipt.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "state": "Compat borrows its existing endpoint through the bound host context. Endpoint has the same channel, request scratch and lock. F attaches after successful activation, clears before teardown, and retains broker ownership transitions. B owns the actual protocol transport plus title/code page/layout and pointer implementations. No new service callback or channel.",
+  "evidence_root": "build/t483-s14-console-transport-owner",
+  "wire_proof": "console_io.h, console_video.h and console_mouse.h are byte-identical to the baseline; transport body differs only in its include path.",
+  "build_attempts": [
+    {
+      "result": "x86 linked; native x64 Worker failed C1083 after relocation because compat lost the source include root",
+      "fix": "Native compat recipe explicitly sets the same source include root as library builds. The compiler-dependency gate still checks actual headers."
+    },
+    {
+      "result": "Published and tested; later B build gate rejected an inherited obj/basesrv include root.",
+      "receipt": "build/t483-s14-console-transport-owner/build2-job.json"
+    },
+    {
+      "result": "PASS cached x86/x64/reference with standard library flags",
+      "receipt": "build\\t483-s14-console-transport-owner\\build3.exit"
+    }
+  ],
+  "selected_C_providers": [
+    "0001:001230e0       _MvdmClipCursor@4          005240e0 f   softpc-win32-bindings:console_services.obj",
+    "0001:00123160       _MvdmGetClipCursor@4       00524160 f   softpc-win32-bindings:console_services.obj",
+    "0001:001233b0       _MvdmGetCursorPos@4        005243b0 f   softpc-win32-bindings:console_services.obj",
+    "0001:001235c0       _MvdmSetCursorPos@8        005245c0 f   softpc-win32-bindings:console_services.obj"
+  ],
+  "gate_correction": "Initial frontend link gate expected the D source path. The updated gate requires one B transport source and rejects any D transport provider in the retained archive.",
+  "equivalence": {
+    "scope": "Raw PE inputs. Five identical. Six differ only in COFF timestamp and a matching debug-directory timestamp where present. Retained the tested 11-image publication.",
+    "receipt": "build\\t483-s14-console-transport-owner\\final-binary-equivalence.json"
+  },
+  "eliminated_C_ids": [
+    "C0263",
+    "C0267",
+    "C0275",
+    "C0284"
+  ],
+  "eliminated_B_ids": [
+    "B0013",
+    "B0014",
+    "B0015",
+    "B0016"
+  ],
+  "compiled_ownership": {
+    "objects": 12,
+    "external_relocation_pairs": 204,
+    "outward": 0,
+    "counts": {
+      "CRT": 60,
+      "system import": 92,
+      "lib-win32": 3,
+      "compat": 6,
+      "not selected in final link": 43
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "68dbc99c-17eb-4d3d-b6bd-06321a900143",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "receipts_sha256": {
+    "build2.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "2ee3263f856aa04cbb917fba30a443560876683e978c4e04d06045cefa701ab0",
+    "release-and-test.out": "a8255baf0b4de8e3383e30afbdbe8f789e26b1ce49920bbe856fca51dbaf2af7",
+    "build3.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "final-binary-equivalence.json": "6e3fa6074ec5c20cab953bd755bcbc625137a672beb73d940ed0a561af84c29f",
+    "final-checks3.out": "0671dd07ca88a3b2184ecc48fc7d31ea1ed88c15c99d1352a446985a6424b28e",
+    "b-compiled-candidates.json": "e40780a89ab0e98b9494a1ef01efe15613b4021b8423cca91d5068669c4fc509",
+    "console-routing.txt.console.txt": "d8736979605d767333a465be1085e8090a493ecf6c466953505504643c1c1e0d"
+  }
+}

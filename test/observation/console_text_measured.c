@@ -2,7 +2,7 @@
 #include "worker_performance.h"
 #include "ntvdm-exe/win32/console_text.h"
 #include "ntvdm-exe/win32/console_client.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
 static __declspec(thread) LONGLONG assembly_started;
 static BOOL measured_publish(const console_video_description *,const void *,size_t);

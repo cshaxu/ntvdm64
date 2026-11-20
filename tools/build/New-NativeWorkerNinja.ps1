@@ -143,7 +143,7 @@ function Add-Edge([string]$target) {
   if($source -match '/src/lib-nxvm/'){$flags+=' /I "'+(NP (Join-Path $root 'src/lib-nxvm'))+'"'}
  }elseif($source -match '/src/compat/'){
   $graph.Add('build '+$target+': cc '+$source)
-  $flags=$nativeCompileFlags
+  $flags=$nativeCompileFlags+' /I "'+(NP (Join-Path $root 'src'))+'"'
   if($Component -eq 'Service'){$flags+=' /we4312'}
  }else{
   $graph.Add('build '+$target+': cc '+$source+' | '+$generatedHeaders)

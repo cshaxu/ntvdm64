@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include "ntvwm-exe/console_state.h"
 #include "ntvwm-exe/text_frame.h"
 typedef struct ntvwm_presentation {

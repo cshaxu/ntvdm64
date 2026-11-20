@@ -7,7 +7,7 @@
 #include "ntvdm-exe/win32/console_text.h"
 #include "compat/include/mvdm_softpc_mouse_bridge.h"
 #include "ntcon-exe/console_frontend.h"
-#include "common/console/client.h"
+#include "compat/include/console_transport.h"
 #include "common/protocol/frontend_protocol.h"
 static BOOL native_write_cells(HANDLE output,const CHAR_INFO *buffer,COORD size,
     COORD origin,PSMALL_RECT region) { return WriteConsoleOutputW(output,buffer,size,origin,region); }
@@ -341,8 +341,6 @@ int main(int argc,char **argv)
     BOOL broken_video=argc==2 && !strcmp(argv[1],"--broken-video");
     BOOL broken_pipe=broken_video || (argc==2 && !strcmp(argv[1],"--broken-pipe"));
     BOOL variable_video=argc==2 && !strcmp(argv[1],"--variable-video");
-    CHECK(!compat_console_services_install(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
-    CHECK(ntvdm_console_services_initialize() && ntvdm_console_services_initialize());
     if(argc==2 && !strcmp(argv[1],"--input-terminal")) {
         SetLastError(ERROR_PIPE_NOT_CONNECTED);
         CHECK(!ntvdm_worker_lifecycle_input_terminal());

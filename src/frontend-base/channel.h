@@ -1,7 +1,7 @@
 #ifndef FRONTEND_BASE_CHANNEL_H
 #define FRONTEND_BASE_CHANNEL_H
 #include <windows.h>
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 
 typedef struct frontend_base_channel frontend_base_channel;
 /* Borrowed until dispatch returns. Providers that block must include these

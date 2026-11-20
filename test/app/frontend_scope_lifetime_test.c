@@ -12,7 +12,7 @@ static const common_frontend_key fixture_frontend={7,11};
 #include "ntcon-exe/console_channel.h"
 #include "ntcon-exe/session_service.h"
 #include "run16-exe/frontend_bootstrap.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include "common/protocol/frontend_lifecycle.h"
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"line %u error %lu: %s\n", \

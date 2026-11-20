@@ -27,6 +27,7 @@ enum compat_host_context_state {
 /* The composing owner chooses transitions. One state gates resource use and
  * registration; cancellation reasons and completion results remain outside. */
 typedef struct compat_host_context {
+    struct compat_console_endpoint *console_endpoint; /* Borrowed while the route is bound. */
     uint32_t cleanup_count;
     uint32_t state;
     uint32_t epoch; /* Activation generation, advanced by the composing owner. */

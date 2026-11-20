@@ -62,9 +62,9 @@ and its fixtures, not Run16 or NTCON. It materializes copied arguments and
 restricted inherited handles for CreateProcess; caller-owned admission,
 target binding, execution and lifetime decisions remain outside common.
 I/O-client instance state is declared in
-common/console/client.h, not a wire protocol header.
+compat/include/console_transport.h, not a wire protocol header.
 
-`console/client` owns the existing shared NTCON named-pipe protocol client:
+`src/compat/console_transport.c` owns the shared NTCON named-pipe protocol client:
 ordered requests/replies, frame chunks, title publication, input decoding and
 atomic key-return encoding. It retains borrowed pipe/peer/cancel handles and
 owns only its local operation event. Callers keep their locks across exchanges

@@ -3,27 +3,24 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 139,
+    "open": 135,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 429
+    "eliminated": 433
   },
   "provider_groups": [
     {
       "kind": "symbol",
       "provider": "src/ntvdm-exe/win32/console_client.c",
       "open_ids": [
-        "C0263",
         "C0264",
         "C0265",
         "C0266",
-        "C0267",
         "C0269",
         "C0270",
         "C0271",
         "C0272",
         "C0274",
-        "C0275",
         "C0276",
         "C0277",
         "C0278",
@@ -31,25 +28,21 @@
         "C0280",
         "C0281",
         "C0283",
-        "C0284",
         "C0285",
         "C0286",
         "C0287",
         "C0289"
       ],
-      "count": 23,
+      "count": 19,
       "symbols": [
-        "MvdmClipCursor",
         "MvdmCreateFileA",
         "MvdmFillConsoleOutputAttribute",
         "MvdmFillConsoleOutputCharacterA",
-        "MvdmGetClipCursor",
         "MvdmGetConsoleCursorInfo",
         "MvdmGetConsoleFontSize",
         "MvdmGetConsoleMode",
         "MvdmGetConsoleScreenBufferInfo",
         "MvdmGetCurrentConsoleFont",
-        "MvdmGetCursorPos",
         "MvdmGetFileType",
         "MvdmReadConsoleOutputA",
         "MvdmSetConsoleCursorInfo",
@@ -57,7 +50,6 @@
         "MvdmSetConsoleMode",
         "MvdmSetConsoleScreenBufferSize",
         "MvdmSetConsoleWindowInfo",
-        "MvdmSetCursorPos",
         "MvdmWriteConsoleA",
         "NtvdmConsoleTextColours",
         "ShowConsoleCursor",
@@ -932,17 +924,14 @@
     {
       "name": "Console routing and graphics mechanics",
       "ids": [
-        "C0263",
         "C0264",
         "C0265",
         "C0266",
-        "C0267",
         "C0269",
         "C0270",
         "C0271",
         "C0272",
         "C0274",
-        "C0275",
         "C0276",
         "C0277",
         "C0278",
@@ -950,7 +939,6 @@
         "C0280",
         "C0281",
         "C0283",
-        "C0284",
         "C0285",
         "C0286",
         "C0287",
@@ -972,15 +960,16 @@
         "C0303",
         "C0304"
       ],
-      "potential_direct_ids": 39,
+      "potential_direct_ids": 35,
       "providers": [
         "src/ntvdm-exe/win32/console_client.c",
         "src/ntvdm-exe/win32/console_compat.c",
         "src/ntvdm-exe/win32/console_graphics.c"
       ],
       "evidence": "24+10+5 direct APIs share routed console resources. NTCON channel, active console identity and error/lifecycle ownership must be separated; moving wrappers to B alone fails.",
-      "status": "source-supported batch candidate; full migration and mirror-cost proof pending",
-      "count_rule": "Potential IDs, not eliminated IDs. Helpers, headers and callback edges are not added as speculative extra savings."
+      "status": "Shared transport and four pointer operations delivered in P87. Remaining handle ops, graphics and broker handoff still open.",
+      "count_rule": "Potential IDs, not eliminated IDs. Helpers, headers and callback edges are not added as speculative extra savings.",
+      "verified_eliminated_ids": 4
     },
     {
       "name": "WOW registry token and shared shadow-store boundary",
@@ -1011,5 +1000,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P83"
+  "updated_by": "T483 S14 P87"
 }

@@ -5,7 +5,7 @@
 #include "ntvdm-exe/command/include/command_launch.h"
 #include "compat/include/mvdm_command_native_child.h"
 #include "common/native-hook/context.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 
 static unsigned checks;
 #define CHECK(x) do { ++checks; if(!(x)){fprintf(stderr,"line %u: %s error=%lu\n",__LINE__,#x,GetLastError());exit(1);} } while(0)

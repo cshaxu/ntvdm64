@@ -3,7 +3,7 @@
  * assembly with the admitted copied worker/frontend wire record. */
 #include "console_text.h"
 #include "console_client.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
 #include <string.h>
 

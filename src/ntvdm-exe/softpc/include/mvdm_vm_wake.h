@@ -1,7 +1,7 @@
 #ifndef MVDM_VM_WAKE_H
 #define MVDM_VM_WAKE_H
 #include <stdint.h>
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 typedef struct {
     uint32_t vm;
     uint64_t generation;

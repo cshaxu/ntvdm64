@@ -54,7 +54,7 @@ $sources | Export-Csv -NoTypeInformation -Encoding UTF8 (Join-Path $out 'source-
 # explicit current owners rather than a fabricated basename match.
 $successors = @{
     'src/ntsrv-exe/transport/console_membership.c' = 'src/ntsrv-exe/opennt/source/frontend_registry.c'
-    'src/worker-base/console_client.c' = 'src/common/console/client.c'
+    'src/worker-base/console_client.c' = 'src/compat/console_transport.c'
     'src/run16-exe/console_probe.c' = 'src/ntsrv-exe/opennt/source/frontend_registry.c'
     'src/ntkvm-exe/bootstrap_client.c' = 'src/ntsrv-exe/transport/worker_spawn.c'
     'src/ntkvm-exe/bootstrap.h' = 'src/common/protocol/frontend_protocol.h'
@@ -67,7 +67,7 @@ $successors = @{
     'src/interface/native_launch.h' = 'src/common/codec/native_launch.h'
     'src/ntcon-exe/launch.c' = 'src/ntvwm-exe/execution.c'
     'src/ntcon-exe/io.h' = 'src/ntvwm-exe/presentation.h'
-    'src/ntcon-exe/channel_io.c' = 'src/common/console/client.c'
+    'src/ntcon-exe/channel_io.c' = 'src/compat/console_transport.c'
 }
 $reconciliation = @(foreach ($row in $sources) {
     if ($row.State -eq 'same') { continue }

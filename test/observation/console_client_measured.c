@@ -1,5 +1,5 @@
 #include "worker_performance.h"
-#include "common/console/client.h"
+#include "compat/include/console_transport.h"
 #include "worker-base/connection.h"
 static DWORD measured_exchange(ntcon_worker_client *,console_io_request *,console_io_reply *);
 static DWORD measured_video(ntcon_worker_client *,const console_video_description *,const void *);

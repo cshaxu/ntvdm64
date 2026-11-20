@@ -1859,8 +1859,8 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/control_transfer.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/pipe/pipe_transfer_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build control-transfer-test.exe: console_test_link obj/tests/control_transfer.obj')
-    $graph.Add('build obj/common/console_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/console/client.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/common/console_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_transport.c')))
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build obj/lib-win32/file/native_path.obj: cc ' + (NinjaPath (Join-Path $root 'src/lib-win32/file/native_path.c')))
     $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build frontend-client.lib: lib obj/frontend/native_request_client.obj obj/frontend/bootstrap_client.obj')
@@ -2570,7 +2570,7 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'common-console.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'ordered frontend protocol client; no task, identity, rendering or retirement decisions'
-        sources = @('src/common/console/client.c', 'src/common/console/client.h' | ForEach-Object {
+        sources = @('src/compat/console_transport.c', 'src/compat/include/console_transport.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }
@@ -2663,7 +2663,7 @@ sources = @('src/common/protocol/native_hook.h', 'src/nthook-dll/hook.h', 'src/n
         buildInput = $NativeFrontend
         sourceClosure = 'ntcon-source-closure'
         disposition = 'independent authenticated visible presentation owner; no native backend, parser or helper'
-        sources = @('src/ntcon-exe/main.c', 'src/common/protocol/frontend_protocol.h', 'src/ntcon-exe/frontend_session.c', 'src/ntcon-exe/frontend_session.h', 'src/ntcon-exe/console_frontend.c', 'src/ntcon-exe/console_frontend.h', 'src/frontend-base/video.c', 'src/frontend-base/video.h', 'src/ntcon-exe/console_channel.c', 'src/ntcon-exe/console_channel.h', 'src/common/protocol/console_video.h', 'src/common/protocol/console_io.h' | ForEach-Object {
+        sources = @('src/ntcon-exe/main.c', 'src/common/protocol/frontend_protocol.h', 'src/ntcon-exe/frontend_session.c', 'src/ntcon-exe/frontend_session.h', 'src/ntcon-exe/console_frontend.c', 'src/ntcon-exe/console_frontend.h', 'src/frontend-base/video.c', 'src/frontend-base/video.h', 'src/ntcon-exe/console_channel.c', 'src/ntcon-exe/console_channel.h', 'src/compat/include/console_video.h', 'src/compat/include/console_io.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

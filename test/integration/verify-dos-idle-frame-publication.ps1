@@ -63,7 +63,7 @@ try {
             if(!$requests.Count){throw 'No authenticated worker protocol requests observed'}
             # Resolve VIDEO_BEGIN from the retained I/O25 enum; assert against source,
             # not a guessed message count or receiver paint approximation.
-            $enum=Get-Content (Join-Path $PSScriptRoot '../../src/common/protocol/console_io.h') -Raw
+            $enum=Get-Content (Join-Path $PSScriptRoot '../../src/compat/include/console_io.h') -Raw
             $names=[regex]::Matches(($enum -split 'enum console_io_operation')[1].Split('}')[0],'CONSOLE_IO_[A-Z_]+')
             $video=1
             while($names[$video-1].Value -ne 'CONSOLE_IO_VIDEO_BEGIN'){$video++}

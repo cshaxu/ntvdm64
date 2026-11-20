@@ -3,7 +3,7 @@
 #include "lib-win32/process-launch/attributes.h"
 #include "vdmapi.h"
 #include "console_client.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include "compat/include/system_root.h"
 #include "common/native-hook/installer.h"
 

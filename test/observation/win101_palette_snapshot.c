@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ntvdm-exe/session/session.h"
-#include "common/console/client.h"
+#include "compat/include/console_transport.h"
 typedef struct palette_prefix {
     session *owner;
     ntcon_worker_client channel;

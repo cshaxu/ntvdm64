@@ -1,7 +1,7 @@
 #ifndef NTVDM_VM_TEXT_H
 #define NTVDM_VM_TEXT_H
 #include <windows.h>
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 
 /* Copied VMM BIOS snapshot. Each following cell is one OEM byte/attribute
  * pair. Geometry, code page and font height come from the actual guest. */

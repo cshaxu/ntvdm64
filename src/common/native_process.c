@@ -7,7 +7,7 @@
 #include "common/native_process.h"
 #include "lib-win32/process-launch/attributes.h"
 #include "lib-win32/process-launch/process.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include <stdio.h>
 #include <string.h>
 #include <wchar.h>

@@ -1,6 +1,6 @@
 #include "mvdm_vm_continuation.h"
 #include "mvdm_vm_notification.h"
-#include "common/protocol/console_io.h"
+#include "compat/include/console_io.h"
 #include <string.h>
 
 extern void host_ica_lock(void);
