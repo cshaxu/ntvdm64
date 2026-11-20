@@ -2283,10 +2283,12 @@
         "src/wow32-dll/source/wow_menu_native_bindings.c"
       ],
       "evidence": "79 USER API wrappers share native-call entry/exit and handle publication;15 discovery APIs and20 menu APIs share runtime entry/exit and projected USER identity. Move the real scheduler/publication ownership, not just these wrappers. Two idle/wait APIs need a separate lifecycle disposition.",
-      "status": "source-supported batch candidate; full migration and mirror-cost proof pending",
+      "status": "114 candidate roots; compiled reference closure disproves a three-file relocation; complete unit cut and mirror cost pending",
       "count_rule": "Potential IDs, not eliminated IDs. Helpers, headers and callback edges are not added as speculative extra savings.",
       "ownership_evidence": "s14-wow-native-batch-ownership.json",
-      "next_gate": "Measure complete scheduler/resource/projection relocation; not a three-file copy. Runtime unbind outward callback and EXE/DLL singleton are confirmed prerequisites."
+      "next_gate": "Measure complete scheduler/resource/projection relocation; not a three-file copy. Runtime unbind outward callback and EXE/DLL singleton are confirmed prerequisites.",
+      "compiled_closure_evidence": "s14-native-batch-relocations.json",
+      "reachable_F_objects": 44
     },
     {
       "name": "Console routing and graphics mechanics",

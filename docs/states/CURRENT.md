@@ -39,6 +39,15 @@ confirms original taskman scheduling, copied USER projection and one shared
 EXE/DLL runtime as coupled prerequisites. Directly copying wrappers into B
 would preserve forbidden callbacks. Concrete C carrier/mirror-cost work remains;
 no additional dependency is counted eliminated by this review.
+The [compiled relocation census](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-batch-relocations.json)
+reaches44 F objects from the114 roots, plus54 C and9 B objects. This disproves
+a three-file-only relocation, not the batch objective. Section reachability
+is not runtime coverage or authority to relocate whole files.
+The [runtime ownership cut](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-runtime-cut.json)
+records both production unbind sites and41 test calls in13 files. Retirement
+refusal retains TLS; process-disposal refusal after successful retirement must
+retain registration without recreating TLS. B cannot retain an invoked task
+retirement callback. Registration/storage must move with its complete callers.
 
 P65 [WOW direct-pointer completion](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p65-wow-flush-owner.json)
 removes the F empty provider into the existing C macro. Owner approved

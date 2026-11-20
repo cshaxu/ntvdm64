@@ -1,0 +1,454 @@
+{
+  "baseline": "3767fb13e80218e9e5cc6bebae3b1f1bf207d90b",
+  "kind": "Source ownership cut for the shared runtime prerequisite of the 114-root batch; not an implemented migration",
+  "inputs": [
+    {
+      "path": "src/common/wow/user_runtime.h",
+      "sha256": "1454e2ea2d2632af701702967a5005630c9a6eebb9fd2cb4695d86532669b3c3"
+    },
+    {
+      "path": "src/ntvdm-exe/wow/include/wow_user_session_binding.h",
+      "sha256": "15efcb434301bea5036891cf1ade791151667dd9dc8dbe8f66650c63487949cb"
+    },
+    {
+      "path": "src/ntvdm-exe/wow/wow_user_runtime.c",
+      "sha256": "195ed8a3c08266d5783bae23364b968c40d42adc0e3c23d0895be58b4da0d1e3"
+    },
+    {
+      "path": "src/ntvdm-exe/wow/wow_user_session_binding.c",
+      "sha256": "97b35a96c4c406b703e72f46ea49a8e89bd8add8a04977e5f5336d447f1eb660"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "sha256": "8123839361bd35a953c8e4fd33a9e9377344cb79debe576083e7879b34300089"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_class_procedure_fixture.c",
+      "sha256": "6cb9a4052d8da1355d7c5c10c19cb1424313979296ffd9b8e54e91058dbb9ae7"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_class_query_fixture.c",
+      "sha256": "26bb7e97e71d34dd44b600a80d84965d23c871f2d0fdf3caf755c8f2c208c987"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c",
+      "sha256": "08cd2fd8a8e43d1733066ea20506af7b2e175eee52e1eb90d5e7354033c1b0cc"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_native_creation_binding_fixture.c",
+      "sha256": "37e3775cd25b0f60c80046451036ba86b9a29ffaf30f47155ac67812b0b6d2c0"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_original_alias_fixture.c",
+      "sha256": "a0f594bfe8fdf0abf4dc31d84db3e02016815456c5f8d97355d4be889c1d7547"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_process_retirement_fixture.c",
+      "sha256": "f5181c0f73984c6f183cf2f6b5b0dbc71c123540140291d78ed29dfa94d42a9a"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c",
+      "sha256": "c57d0180b116fdb840a3107b4e0154341bf1bf47045f219c0ed777a77c56b987"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_runtime_fixture.c",
+      "sha256": "c21ed831734f2082de30edef963902e5b989e0b44a26dd8f0802b9288aeb0847"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c",
+      "sha256": "72bb4d7007ebae0bc28ac1a28002aa5f901ba69337d2ad4fdd8c253f900f68fd"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_window_lifecycle_fixture.c",
+      "sha256": "2d8c8218a25d72e3ac4859d5398ff4fb6d0b707b6c7c008c87de78992b6c52aa"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_window_procedure_fixture.c",
+      "sha256": "c15d104a3366180b32a9534610a52ae369c1b58a57a01a757e0a158f78c838e3"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "sha256": "0ba16f2ef4d8a016df134da5627f59eabdbc827dd1bc92dae9b5296ffd3662b2"
+    },
+    {
+      "path": "test/mvdm-host/wow_terminal_schedule_witness.h",
+      "sha256": "62d88dc3cf508e6abf8e16491eaadc1bb0e9ab8f5e0375f8b21560cd5acefae0"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "afbf265b58a470f429d407c03469ade94214df3c2870569c94640ab3f73c4cf1"
+    },
+    {
+      "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+      "sha256": "6ad26454b4ba95a2fb1fc8ee92f75baf138deef237a6205967119c1a62b20128"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+      "sha256": "b735c7e189e1c4d404c3474d4e44dc7c7e5160aa251e6acfe81721a387708963"
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_registration_bridge.c",
+      "sha256": "d4576d797c3cdd354078ff0a442cbe5c6a82c9acac1deae17f230140afe82607"
+    }
+  ],
+  "reference_method": "rg -n wow_user_runtime_unbind\\( src test --glob *.c --glob *.h --glob *.ps1; source-text sites, not execution counts",
+  "counts": {
+    "production_calls": 2,
+    "test_calls": 41,
+    "test_files": 13,
+    "definitions": 1,
+    "declarations": 1
+  },
+  "references": [
+    {
+      "path": "src/common/wow/user_runtime.h",
+      "line": 44,
+      "kind": "declaration",
+      "text": "BOOL WINAPI wow_user_runtime_unbind(wow_user_runtime_thread *);"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_window_procedure_fixture.c",
+      "line": 433,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&runtime_thread));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_class_query_fixture.c",
+      "line": 126,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&runtime_thread));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_class_procedure_fixture.c",
+      "line": 148,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&runtime_thread));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_window_lifecycle_fixture.c",
+      "line": 117,
+      "kind": "test-call",
+      "text": "(void)wow_user_runtime_unbind(&binding);"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_window_lifecycle_fixture.c",
+      "line": 233,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c",
+      "line": 387,
+      "kind": "test-call",
+      "text": "CHECK(!wow_user_runtime_unbind(binding) && GetLastError() == ERROR_BUSY);"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c",
+      "line": 774,
+      "kind": "test-call",
+      "text": "if (!wow_user_runtime_unbind(binding)) ExitProcess(94);"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c",
+      "line": 847,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c",
+      "line": 1511,
+      "kind": "test-call",
+      "text": "CHECK(!wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c",
+      "line": 1525,
+      "kind": "test-call",
+      "text": "CHECK(!wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c",
+      "line": 1548,
+      "kind": "test-call",
+      "text": "CHECK(!wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c",
+      "line": 1573,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_runtime_fixture.c",
+      "line": 22,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_runtime_fixture.c",
+      "line": 41,
+      "kind": "test-call",
+      "text": "CHECK(!wow_user_runtime_unbind(&caller));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_runtime_fixture.c",
+      "line": 52,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&caller));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c",
+      "line": 36,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c",
+      "line": 101,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_task_order_fixture.c",
+      "line": 825,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_native_creation_binding_fixture.c",
+      "line": 851,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_process_retirement_fixture.c",
+      "line": 197,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(wow_user_runtime_current()));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c",
+      "line": 39,
+      "kind": "test-call",
+      "text": "if (retire_notification) CHECK(wow_user_runtime_unbind(binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c",
+      "line": 72,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c",
+      "line": 83,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c",
+      "line": 95,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c",
+      "line": 104,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_original_alias_fixture.c",
+      "line": 215,
+      "kind": "test-call",
+      "text": "CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_terminal_schedule_witness.h",
+      "line": 96,
+      "kind": "test-call",
+      "text": "t->unbound=wow_user_runtime_unbind(&b);"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 749,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 811,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 1062,
+      "kind": "test-call",
+      "text": "(void)wow_user_runtime_unbind(&runtime_binding);"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 1270,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 1721,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 1867,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 1941,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 2202,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 2691,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 3403,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 3985,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 4166,
+      "kind": "test-call",
+      "text": "if (bound) BORROW_CHECK(wow_user_runtime_unbind(&binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 4269,
+      "kind": "test-call",
+      "text": "BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));"
+    },
+    {
+      "path": "test/mvdm-host/wow_page_domain_fixture.c",
+      "line": 5051,
+      "kind": "test-call",
+      "text": "if (!wow_user_runtime_unbind(&binding)) result = FALSE;"
+    },
+    {
+      "path": "src/ntvdm-exe/wow/wow_user_session_binding.c",
+      "line": 22,
+      "kind": "production-call",
+      "text": "result = wow_user_runtime_unbind(&current_binding);"
+    },
+    {
+      "path": "src/ntvdm-exe/wow/wow_user_session_binding.c",
+      "line": 76,
+      "kind": "production-call",
+      "text": "!wow_user_runtime_unbind(&current_binding))"
+    },
+    {
+      "path": "src/ntvdm-exe/wow/wow_user_runtime.c",
+      "line": 43,
+      "kind": "definition",
+      "text": "BOOL WINAPI wow_user_runtime_unbind(wow_user_runtime_thread *binding)"
+    }
+  ],
+  "decisions": [
+    {
+      "operation": "initialize, bind, current, enter, leave, leave_for_callout, reenter_after_callout, set_context",
+      "owner": "B",
+      "reason": "Current implementation uses one TLS binding, Win32 locks and opaque identity fields; it does not select a task, call the scheduler or report a request. Preserve the sole NTVDM-exported instance for the WOW32 import; no separate DLL TLS copy."
+    },
+    {
+      "operation": "unbind validation and TLS/field clearing",
+      "owner": "B",
+      "reason": "May validate current binding and held lock. Must not invoke retire_thread. Clearing follows successful owner retirement, never precedes it."
+    },
+    {
+      "operation": "retire_current_thread and retire_task",
+      "owner": "C",
+      "reason": "Uses original ptdb hTaskWow, task execution scopes, original DestroyTask and USER ownership. Cannot be an invoked callback hidden inside B."
+    },
+    {
+      "operation": "unbind_current and wow_user_session_detach",
+      "owner": "F",
+      "reason": "Session finish state, bound-thread quiescence, session hook registration and process disposal order are product composition. Keep them out of B."
+    },
+    {
+      "operation": "retire_thread/dispose_process registration storage",
+      "owner": "outer composition, not the B runtime",
+      "reason": "Current fields are installed in WOW32 initialization and cleared during disposal. Moving only the unbind invocation leaves lifecycle policy embedded in the B carrier. The complete patch must change registration, storage, consumers and initializer together; destination ABI still requires completing the initialization-chain cut."
+    }
+  ],
+  "required_order": [
+    "Validate exact current binding and reject held lock before calling retirement.",
+    "Run original task retirement while the existing TLS binding and task identity are still valid.",
+    "On retirement refusal retain TLS, task identity, session registration and binding counters.",
+    "Only after successful retirement clear the B binding.",
+    "On process detach require producer quiescence first; dispose the process after thread retirement and before unregistering session hooks.",
+    "If process disposal fails after successful unbind, preserve registration and lifecycle for retry; do not rebind a retired task."
+  ],
+  "negative_evidence": [
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c",
+      "line": 387,
+      "contract": "An active nested native-call scope refuses retirement with ERROR_BUSY and retains the exact current binding/thread."
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_session_binding_fixture.c",
+      "line": 98,
+      "contract": "Retirement refusal preserves the session registration and current binding; session-thread unbind must propagate refusal and preserve counters."
+    },
+    {
+      "path": "test/adapter-mvdm-host-out/wow/wow_user_session_binding_fixture.c",
+      "line": 131,
+      "contract": "Process-disposal refusal occurs after successful unbind; registration remains but WOW TLS is already clear. Retry must not repeat retired task work."
+    }
+  ],
+  "test_migration": "Classify all 41 calls before changing the entrypoint: pure binding tests continue using the B primitive; lifecycle/page-domain/terminal-schedule tests retain explicit retirement plus unbind. Do not mechanically replace every call with a bare primitive or delete busy assertions.",
+  "delivery_counts": {
+    "new_eliminated": 0,
+    "eliminated_total": 156,
+    "open_total": 412,
+    "mirror_point_delta": 0,
+    "mirror_line_delta": 0
+  },
+  "next_concrete_step": "Resolve lifecycle initialization and retirement-operation storage at the composition entry, then prepare the complete runtime/scheduler/publication patch and calculate non-error mirror cost. This prerequisite is part of the 114-root batch, not a claim that moving runtime alone eliminates 114 IDs.",
+  "validation": "Source inspection only. No product mutation, compile, runtime test, or new release.",
+  "initialization_chain": {
+    "worker": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c:39 owns the sole runtime; :197 attaches it to the session before late WOW initialization",
+    "provider": "src/wow32-dll/source/wow_user_registration_bridge.c:228 ensure_lifecycle obtains that current binding and initializes one static WOW lifecycle",
+    "commit": "src/wow32-dll/source/wow_user_task_lifecycle.c:456-459 publishes lifecycle and both retirement operations only after USER preparation succeeds",
+    "constraint": "Separating registration from B must retain this lazy, successful-initialization publication point. Pre-populating operations at session attach or duplicating the runtime in WOW32 is not equivalent."
+  },
+  "research_checks": {
+    "root": "build/t483-s14-native-runtime-cut",
+    "pid": 33504,
+    "exit_code": 0,
+    "passed": [
+      "documentation governance",
+      "relative links",
+      "existing A/B build boundary"
+    ],
+    "scope": "Research record validation; existing compiled graph, not a new production build or runtime acceptance",
+    "initial_launch": "First preparation failed on default cp1252 decoding of Current; no check process started. Corrected to explicit UTF-8, prepared runner, then completed the owned run above."
+  }
+}
