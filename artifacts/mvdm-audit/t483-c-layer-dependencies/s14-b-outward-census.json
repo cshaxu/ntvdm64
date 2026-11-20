@@ -285,12 +285,13 @@
     {
       "id": "B0021",
       "contract": "compat_vm_services",
-      "provider": "src/ntvdm-exe/softpc/mvdm_vm_notification.c",
+      "provider": "src/ntvdm-exe/softpc/mvdm_vm_bridge.c",
       "target": "mvdm_vm_bridge_bop",
       "layer": "F",
       "kind": "installed-service-slot",
       "status": "outer-target-confirmed",
-      "installation": "src/ntvdm-exe/softpc/mvdm_vm_binding.c"
+      "installation": "src/ntvdm-exe/softpc/mvdm_vm_binding.c",
+      "p132_irq_provider": "s14-vm-notification-owner.json"
     },
     {
       "id": "B0022",
@@ -534,5 +535,6 @@
     "open": 0
   },
   "p130_receipt_owner": "s14-receipt-owner.json",
-  "p131_resource_scope_owner": "s14-resource-scope-owner.json"
+  "p131_resource_scope_owner": "s14-resource-scope-owner.json",
+  "p132_vm_notification_owner": "s14-vm-notification-owner.json"
 }

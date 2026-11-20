@@ -1,5 +1,5 @@
 #include "mvdm_vm_continuation.h"
-#include "mvdm_vm_notification.h"
+#include "compat/include/mvdm_vm_notification.h"
 #include "compat/include/console_io.h"
 #include <string.h>
 

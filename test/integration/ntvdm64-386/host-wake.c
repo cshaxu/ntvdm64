@@ -1,6 +1,6 @@
 #include "mvdm_vm_bridge.h"
 #include "mvdm_vm_wake.h"
-#include "mvdm_vm_notification.h"
+#include "compat/include/mvdm_vm_notification.h"
 #include <windows.h>
 
 /* Integration-only link seam. Compile the production notification object

@@ -1,0 +1,98 @@
+{
+  "packet": "M0 T483 S14 P132",
+  "parent": "a44666da0b6ee22dc6e68f158e1e6cf133c0508a",
+  "related_open_B": [
+    "B0021"
+  ],
+  "eliminated_B": [],
+  "eliminated_C": [],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 2
+  },
+  "outward_C_known_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 8
+  },
+  "C_named_image_imports": 1,
+  "verified_body_moves": [
+    "mvdm_vm_notification_open",
+    "mvdm_vm_notification_ready",
+    "mvdm_vm_notification_post",
+    "mvdm_vm_notification_snapshot",
+    "mvdm_vm_notification_acknowledge",
+    "mvdm_vm_notification_close"
+  ],
+  "physical_irq_source": "src/compat/mvdm_vm_notification.c",
+  "ownership": "B owns the single existing PIC notification state and actual IRQ operations, including EOI and cancel. Its direct C references are confined to the original ICA/VDD ABI. The original PIC and the existing locks remain C. F retains the BOP dispatch, task admission, executor, VM input and cleanup composition.",
+  "abi_header_unchanged_sha256": "f8133c22360cda027836af535bca57a4a52f1f8271918d2038d047d012a20531",
+  "linked_providers": {
+    "msvc-x86-release/worker": {
+      "mvdm_vm_notification_open": "softpc-bindings:mvdm_vm_notification.obj",
+      "mvdm_vm_notification_ready": "softpc-bindings:mvdm_vm_notification.obj",
+      "mvdm_vm_notification_post": "softpc-bindings:mvdm_vm_notification.obj",
+      "mvdm_vm_notification_snapshot": "softpc-bindings:mvdm_vm_notification.obj",
+      "mvdm_vm_notification_acknowledge": "softpc-bindings:mvdm_vm_notification.obj",
+      "mvdm_vm_notification_close": "softpc-bindings:mvdm_vm_notification.obj",
+      "VDDReserveIrqLine": "original-softpc-host-roots:nt_vdd.obj",
+      "VDDReleaseIrqLine": "original-softpc-host-roots:nt_vdd.obj",
+      "RegisterEOIHook": "original-softpc-host-roots:nt_eoi.obj",
+      "RemoveEOIHook": "original-softpc-host-roots:nt_eoi.obj",
+      "host_ica_lock": "original-softpc-host-roots:nt_eoi.obj",
+      "host_ica_unlock": "original-softpc-host-roots:nt_eoi.obj",
+      "ica_hw_interrupt": "original-softpc-system:ica.obj",
+      "ica_hw_interrupt_cancel": "original-softpc-system:ica.obj",
+      "mvdm_vm_bridge_bop": "softpc-bindings:mvdm_vm_bridge.obj"
+    },
+    "msvc-x64-release/worker-reference-x86": {
+      "mvdm_vm_notification_open": "softpc-bindings:mvdm_vm_notification.obj",
+      "mvdm_vm_notification_ready": "softpc-bindings:mvdm_vm_notification.obj",
+      "mvdm_vm_notification_post": "softpc-bindings:mvdm_vm_notification.obj",
+      "mvdm_vm_notification_snapshot": "softpc-bindings:mvdm_vm_notification.obj",
+      "mvdm_vm_notification_acknowledge": "softpc-bindings:mvdm_vm_notification.obj",
+      "mvdm_vm_notification_close": "softpc-bindings:mvdm_vm_notification.obj",
+      "VDDReserveIrqLine": "original-softpc-host-roots:nt_vdd.obj",
+      "VDDReleaseIrqLine": "original-softpc-host-roots:nt_vdd.obj",
+      "RegisterEOIHook": "original-softpc-host-roots:nt_eoi.obj",
+      "RemoveEOIHook": "original-softpc-host-roots:nt_eoi.obj",
+      "host_ica_lock": "original-softpc-host-roots:nt_eoi.obj",
+      "host_ica_unlock": "original-softpc-host-roots:nt_eoi.obj",
+      "ica_hw_interrupt": "original-softpc-system:ica.obj",
+      "ica_hw_interrupt_cancel": "original-softpc-system:ica.obj",
+      "mvdm_vm_bridge_bop": "softpc-bindings:mvdm_vm_bridge.obj"
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "3288b420-ed72-4077-8040-30ffd64988a3",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "unit": [
+      "1/4 Test #42: mvdm-vm-notification .............   Passed    0.03 sec",
+      "2/4 Test #43: mvdm-vm-execute ..................   Passed    0.17 sec",
+      "3/4 Test #44: mvdm-vm-ingress ..................   Passed    0.02 sec",
+      "4/4 Test #47: mvdm-vm-text .....................   Passed    0.08 sec",
+      "100% tests passed, 0 tests failed out of 4"
+    ],
+    "real_Win31": [
+      "386-dosonly0: started=True desktop-and-mode=True normal-exit=True pass=True",
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested",
+      "Original Windows installation bytes verified unchanged"
+    ],
+    "limitations": "Win3.1 driver-enabled DOSONLY=0 only. Guest input, 54:0A and Windows 95 were not included. No original guest or installation was changed."
+  }
+}

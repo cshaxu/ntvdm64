@@ -1,5 +1,5 @@
 #include "mvdm_vm_wake.h"
-#include "mvdm_vm_notification.h"
+#include "compat/include/mvdm_vm_notification.h"
 #include <string.h>
 
 extern void host_ica_lock(void);

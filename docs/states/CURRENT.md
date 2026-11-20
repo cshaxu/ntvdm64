@@ -58,6 +58,7 @@ P128 [PIC import owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14
 P129 [WOW trace module](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-trace-module-owner.json) closed B0036, a named module lookup.
 P130 [Resource receipts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-receipt-owner.json) moved six implementations into B; the two F route callbacks stay open.
 P131 [Resource scope](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-resource-scope-owner.json) closed B0025/B0026.
+P132 [VM IRQ owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-notification-owner.json) moved the PIC notification operations to B; B0021 stays open.
 Delivered: B 4 known calls; C 11 open (10 functions, 1 image).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
