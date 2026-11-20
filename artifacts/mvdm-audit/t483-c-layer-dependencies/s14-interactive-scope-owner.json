@@ -1,0 +1,85 @@
+{
+  "packet": "M0 T483 S14 P113",
+  "baseline": "14818e0f7c840df2a8acf877deb066079f40c944",
+  "eliminated_C_ids": [
+    "C0020",
+    "C0136",
+    "C0165"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 539,
+    "open": 29,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 5
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 9,
+    "image-import": 1,
+    "symbol": 19
+  },
+  "remaining_C_by_provider": {
+    "common": 3,
+    "ntsrv-exe": 5,
+    "ntvdm-exe": 11,
+    "worker-base": 2,
+    "wow32-dll": 8
+  },
+  "authority": "C retains the original token query; B owns portable visible-windowstation scope acquisition, binding and LUID matching; F retains authentication and admission and restores the binding after dispatch.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "measured": {
+      "src/non-mvdm/base/win32/server/basesrv.h": {
+        "anchor_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+        "before": {
+          "points": 3,
+          "lines": 5
+        },
+        "after": {
+          "points": 3,
+          "lines": 5
+        }
+      }
+    }
+  },
+  "compile_proof": {
+    "selected_C_compile_commands": 894,
+    "outer_search_roots": [],
+    "remaining_direct_NTSRV_header": "C0022"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "18a6656f-481a-4064-b53a-2409a65084af",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "scope": "cached x86/x64/reference product builds and x86 original BaseSrv archive; x86/x64 B include closure, native service symbol map, dual publication and 22 file hashes, governance and affected runtime integration",
+    "runtime_output": [
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+      "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+      "PASS shared worker 24908, two distinct tasks overlapped and retired independently, both requests exited normally"
+    ]
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "e79857f116ad5480396b26caa0dbacd38107b54762af022ef09ff15e82b83191",
+    "boundary.out": "6d483f384a46712ee40e92eb112abb86791d9c2660d57d4f806517004ca52dcd",
+    "compiled-roots.json": "9cd49bd0d2206d25190e706380516155e6c56a8c75055244983d5e57e499094c",
+    "mirror-delta.json": "4cdf27aee51f5d51a9357ba707e1d77cbe9331a57404042d0f334c927cb746f9",
+    "probes.out": "9f2b6a505d732a950571645f1d5e23549f667674eaf6bb29d998f7433c737520",
+    "shared-wow/result.txt": "8ed71d701d3d51ed67d817fafb066f1bb3d149e722b88d087f7fdfae809fa1e0",
+    "final-checks.out": "4d0d726672a18acfbb0574d4552142ec6e4b268f9d33d846edbbbed146792a13"
+  }
+}

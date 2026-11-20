@@ -21,7 +21,6 @@ $referenceFlags=[regex]::Match($text,'(?m)^cflags = (.*)$').Groups[1].Value
 if(!$referenceFlags){throw 'Missing audited reference flags'}
 $referenceRoots=@([regex]::Matches($referenceFlags,$includePattern)|ForEach-Object {$_.Value})
 $includeRoots=@('src/lib-nxvm','src','src/compat/include','src/non-mvdm/public/sdk/inc','src/non-mvdm/public/internal/base/inc')
-if($Component -eq 'Service'){$includeRoots+='src/ntsrv-exe/opennt/include'}
 $includes=@($includeRoots|ForEach-Object {'/I "'+(NP (Join-Path $root $_))+'"'})
 $nativeCompileFlags='/nologo /c /MT /W4 /we4013 /we4311 /we4302 /Gy /showIncludes /DWINNT /D_NO_CRT_STDIO_INLINE /D_WIN32_WINNT=0x0A00'
 $nativeFlags=$nativeCompileFlags+' '+($includes -join ' ')+' /I obj/basesrv'
@@ -148,6 +147,9 @@ function Add-Edge([string]$target) {
  }else{
   $graph.Add('build '+$target+': cc '+$source+' | '+$generatedHeaders)
   $flags=$nativeFlags
+  if($Component -eq 'Service' -and $source -match '/src/ntsrv-exe/'){
+   $flags+=' /I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'"'
+  }
  }
  if($target -eq 'obj/opennt-base-server/srvvdm.obj'){
   # OPENNT-HOST-068: integer-zero binding is local to this original TU.

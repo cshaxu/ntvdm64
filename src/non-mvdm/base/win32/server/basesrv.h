@@ -25,7 +25,7 @@ Revision History:
 
 #include <base.h>
 
-#include <base_server.h>
+#include "ntsrv-exe/opennt/include/base_server.h"
 #line 28
 //
 // Include server definitions for CSR

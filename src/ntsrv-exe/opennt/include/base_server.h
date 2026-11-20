@@ -12,6 +12,7 @@ typedef struct _HARDERROR_MSG *PHARDERROR_MSG;
 #include <ntcsrsrv.h>
 #undef CSR_SERVER_QUERYCLIENTTHREAD
 PCSR_THREAD OpenNtBaseServerRequestThread(void);
+NTSTATUS _UserTestTokenForInteractive(HANDLE, PLUID);
 BOOL BaseSrvDOSWorkerWaitPending(HANDLE ConsoleHandle, PBOOL ConsoleRecordExists);
 /* Trusted dispatch only: borrow a locally authenticated context until unbind.
  * This does not authenticate, register, copy, or retain a wire-supplied object. */

@@ -1387,7 +1387,7 @@ $baseOwnerManifest = @()
 $brokerTransportManifest = @()
 if ($Architecture -eq 'x86') {
     $baseBindingInclude = NinjaPath (Join-Path $root 'src/ntsrv-exe/opennt/include')
-    $baseOwnerFlags = $baseFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
+    $baseOwnerFlags = $baseFlags + ' /we4013' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/inc')) + '"' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/server')) + '"'
     $baseServerFlags = $baseOwnerFlags + ' /D_CSRSRV_ /FI "' +
@@ -1419,7 +1419,7 @@ if ($Architecture -eq 'x86') {
             @('capture', 'src/non-mvdm/base/ntdll/csrutil.c', ($baseOwnerFlags + ' /Gz')))
         'opennt-base-server' = @(
             @('srvvdm', 'src/non-mvdm/base/win32/server/srvvdm.c', $baseServerFlags),
-            @('exports', 'src/non-mvdm/windows/core/ntuser/server/exports.c', $baseServerFlags))
+            @('exports', 'src/non-mvdm/windows/core/ntuser/server/exports.c', $baseOwnerFlags))
         'opennt-base-bindings' = @(
             @('service', 'src/ntsrv-exe/opennt/source/base_service.c', $baseServerFlags),
             @('service-core', 'src/ntsrv-exe/opennt/source/service_core.c', $baseServerFlags),
@@ -1444,7 +1444,7 @@ if ($Architecture -eq 'x86') {
             @('config', 'src/compat/base_vdm_config.c', $libraryFlags),
             @('capture-heap', 'src/compat/base_capture_heap.c', $libraryFlags),
             @('process', 'src/compat/base_console_handle.c', $libraryFlags),
-            @('interactive', 'src/ntsrv-exe/opennt/source/base_interactive.c', $baseOwnerFlags),
+            @('interactive', 'src/compat/base_interactive.c', $libraryFlags),
             @('classifier-path', 'src/compat/base_classifier_path.c', $libraryFlags))
     }
     foreach ($group in @('opennt-base-client', 'opennt-base-server', 'opennt-base-bindings')) {

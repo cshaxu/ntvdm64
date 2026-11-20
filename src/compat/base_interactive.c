@@ -1,9 +1,9 @@
 /* Original NtUserTestForInteractiveUser compares the caller LUID to the
- * kernel's interactive-windowstation user. The standalone broker has an
+ * kernel's interactive-windowstation user. A modern host has an
  * explicitly scoped process logon instead; capture that trusted local scope
  * only on a visible process windowstation. Never accept a wire-provided LUID.
  * Token inspection and SYSTEM impersonation policy remain original owners. */
-#include <base_interactive.h>
+#include "compat/include/base_interactive.h"
 static __declspec(thread) const OPENNT_BASE_INTERACTIVE_SCOPE *boundScope;
 BOOL OpenNtBaseInitializeInteractiveScope(OPENNT_BASE_INTERACTIVE_SCOPE *scope)
 {
