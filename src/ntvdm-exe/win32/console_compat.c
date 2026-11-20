@@ -17,13 +17,6 @@ typedef char keyboard_live_capacity_check[(MVDM_KEY_HISTORY_CAPACITY<=CONSOLE_IO
 extern mvdm_keyboard_history nt_keyboard_history;
 
 
-HANDLE GetConsoleInputWaitHandle(VOID)
-{
-    /* The DOS frontend supplies a typed synchronize-only readiness event.
-     * No-channel callers retain the existing process Console wait handle. */
-    return ntvdm_console_input_wait_handle();
-}
-
 BOOL WINAPI ReadConsoleInputExW(HANDLE input, PINPUT_RECORD records, DWORD count,
                                 LPDWORD read, USHORT flags)
 {

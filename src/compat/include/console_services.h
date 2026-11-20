@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <stdint.h>
 
+HANDLE GetConsoleInputWaitHandle(VOID);
 UINT WINAPI MvdmGetConsoleCP(void);
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name);
 DWORD WINAPI MvdmGetConsoleTitleA(LPSTR title, DWORD capacity);

@@ -1,0 +1,49 @@
+{
+  "packet": "M0 T483 S14 P92",
+  "baseline": "7f65aa2f1e409f7eff614155b1b48e003025eeb2",
+  "scope": "Only original Console input wait-handle lookup. B reads the existing readiness event from its bound mouse resource, shared with keyboard. F still composes the route and owns input acknowledgement and broker handoff. No additional event or callback.",
+  "eliminated_C_ids": [
+    "C0291"
+  ],
+  "eliminated_B_ids": [],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "status": "Cached full build, dual publication, targeted tests and final gates passed. Enclosing commit is the delivery receipt.",
+  "providers": {
+    "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map": "0001:00122fc0       _GetConsoleInputWaitHandle 00523fc0 f   softpc-win32-bindings:console_services.obj",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/ntvdm.exe.map": "0001:00122fc0       _GetConsoleInputWaitHandle 00523fc0 f   softpc-win32-bindings:console_services.obj"
+  },
+  "compiled_ownership": {
+    "objects": 4,
+    "counts": {
+      "CRT": 23,
+      "system import": 96,
+      "not selected in final link": 103,
+      "compat": 20,
+      "lib-win32": 2
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "345a1b3a-4818-4561-b556-ff305c460c70",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "prior_console_legacy_delivery": "s14-console-legacy-owner.json",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "40681fef1d65ca463a86307da855dd6fb139d88da18415a0d39e8c1536da4e4c",
+    "release-and-test.out": "e5aab886f798a6e41c26e4dc936d8db246cbe169583e90176b8ba36cc516c151",
+    "final-checks.out": "b0e4034f60b1fb07391980deaf2e66d5dd4084e1cc4dd75560dcf7b259df808a",
+    "input-batch/run.log": "fe563edecffb9f6577ca5da86824f301b0ddf1c729adcdf44f45ba38d7c53108",
+    "b-compiled-candidates.json": "20fd54a68dc66289deea1c210f6bfbab7c74bff523e428c0866802dac8f5abdc",
+    "console-routing.txt.console.txt": "d8736979605d767333a465be1085e8090a493ecf6c466953505504643c1c1e0d"
+  }
+}

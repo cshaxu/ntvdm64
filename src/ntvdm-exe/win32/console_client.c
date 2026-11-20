@@ -159,13 +159,6 @@ BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *capability,HANDLE *execut
     return result;
 }
 
-HANDLE ntvdm_console_input_wait_handle(void)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    return client ? worker_base_input_watch_event(client->input_watch) : GetStdHandle(STD_INPUT_HANDLE);
-}
-
 /* Called with the per-session lock held; all operations share one ordered
  * request sequence, including stream chunks and geometry queries. */
 static DWORD exchange(console_client *client,console_io_reply *reply)

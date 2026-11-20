@@ -3,6 +3,7 @@
 #include "include/host_context.h"
 #include "include/console_grid.h"
 #include "include/console_graphics.h"
+#include "include/mvdm_softpc_mouse_bridge.h"
 #include "lib-win32/handle/duplicate.h"
 #include <limits.h>
 #include <string.h>
@@ -11,6 +12,15 @@ static compat_console_endpoint *current_endpoint(void)
 {
     compat_host_context *context = compat_host_context_current();
     return context ? context->console_endpoint : NULL;
+}
+
+HANDLE GetConsoleInputWaitHandle(VOID)
+{
+    compat_host_context *context = compat_host_context_current();
+
+    /* The mouse and keyboard share the readiness event for the bound route. */
+    return context && context->mouse ? context->mouse->input_ready :
+        GetStdHandle(STD_INPUT_HANDLE);
 }
 
 static BOOL state_operation(compat_console_endpoint *client,DWORD operation,

@@ -13,7 +13,6 @@ HANDLE WINAPI MvdmCreateFileW(LPCWSTR,DWORD,DWORD,LPSECURITY_ATTRIBUTES,DWORD,DW
 DWORD WINAPI MvdmGetFileType(HANDLE);
 BOOL ntvdm_console_set_active(BOOL);
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR);
-HANDLE ntvdm_console_input_wait_handle(void);
 BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *,HANDLE *);
 BOOL WINAPI MvdmWriteConsoleA(HANDLE,const VOID *,DWORD,LPDWORD,LPVOID);
 BOOL ntvdm_console_read_input_tagged(HANDLE,PINPUT_RECORD,uint64_t *,DWORD,LPDWORD,BOOL,const uint64_t *,DWORD);

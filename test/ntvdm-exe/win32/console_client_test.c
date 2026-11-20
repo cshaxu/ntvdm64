@@ -433,7 +433,7 @@ int main(int argc,char **argv)
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
     {
         mvdm_mouse_bridge *mouse=mvdm_softpc_mouse_current();
-        HANDLE input_ready=ntvdm_console_input_wait_handle();
+        HANDLE input_ready=GetConsoleInputWaitHandle();
         CHECK(mouse && dos_active && mouse->input_ready==input_ready && input_ready);
         mouse->submitted=mouse->active=TRUE;
         mouse->queue.count=1;
@@ -635,7 +635,7 @@ int main(int argc,char **argv)
         CHECK(SetConsoleCP(input_cp) && SetConsoleOutputCP(output_cp));
         bound=&owner;
     }
-    stable_wait=ntvdm_console_input_wait_handle();
+    stable_wait=GetConsoleInputWaitHandle();
     {
         CONSOLE_FONT_INFO expected,font;
         COORD size,expected_size;
