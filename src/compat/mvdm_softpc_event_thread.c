@@ -5,6 +5,20 @@
 /* Native NTDLL ABI; OpenNT public/sdk/inc/ntpsapi.h:792-797. */
 NTSYSAPI NTSTATUS NTAPI NtAlertThread(HANDLE ThreadHandle);
 
+mvdm_softpc_terminal_events mvdm_softpc_input_terminal_events;
+
+BOOL ntvdm_worker_lifecycle_input_terminal(void)
+{
+    const mvdm_softpc_terminal_events *events = &mvdm_softpc_input_terminal_events;
+    DWORD saved = GetLastError();
+    BOOL terminal =
+        ((events->server && WaitForSingleObject(events->server,0) == WAIT_OBJECT_0) ||
+         (events->worker_close && WaitForSingleObject(events->worker_close,0) == WAIT_OBJECT_0) ||
+         (events->console_close && WaitForSingleObject(events->console_close,0) == WAIT_OBJECT_0));
+    SetLastError(saved);
+    return terminal;
+}
+
 int mvdm_softpc_event_thread_alert_and_join(HANDLE event_thread, BOOL started)
 {
     HANDLE retained_thread;

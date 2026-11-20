@@ -1,5 +1,6 @@
 /* Process lifecycle is independent of the optional character frontend. */
 #include "worker_lifecycle.h"
+#include "compat/include/mvdm_softpc_event_thread.h"
 #include "worker-base/connection.h"
 #include "worker-base/input_watch.h"
 #include "common/protocol/frontend_lifecycle.h"
@@ -12,22 +13,11 @@ extern UINT VdmExitCode;
 extern HANDLE hWOWDll;
 static struct {
     session *owner;
-    HANDLE stop,console_close,worker_close,task_close,fault,server;
+    HANDLE stop,task_close,fault;
     worker_base_input_watch *watch;
     volatile LONG closing;
     BOOL original_ready;
 } lifecycle;
-
-BOOL ntvdm_worker_lifecycle_input_terminal(void)
-{
-    DWORD saved=GetLastError();
-    BOOL terminal=lifecycle.owner &&
-        ((lifecycle.server && WaitForSingleObject(lifecycle.server,0)==WAIT_OBJECT_0) ||
-         (lifecycle.worker_close && WaitForSingleObject(lifecycle.worker_close,0)==WAIT_OBJECT_0) ||
-         (lifecycle.console_close && WaitForSingleObject(lifecycle.console_close,0)==WAIT_OBJECT_0));
-    SetLastError(saved);
-    return terminal;
-}
 
 DWORD ntvdm_worker_lifecycle_fault_event(HANDLE *event)
 {
@@ -128,8 +118,8 @@ void ntvdm_worker_lifecycle_authorize_exit(void)
         return;
     }
     (void)worker_base_request_exit();
-    waits[0]=lifecycle.server;waits[1]=lifecycle.worker_close;
-    if(lifecycle.console_close)waits[count++]=lifecycle.console_close;
+    waits[0]=mvdm_softpc_input_terminal_events.server;waits[1]=mvdm_softpc_input_terminal_events.worker_close;
+    if(mvdm_softpc_input_terminal_events.console_close)waits[count++]=mvdm_softpc_input_terminal_events.console_close;
     wait=WaitForMultipleObjects(count,waits,FALSE,INFINITE);
     if(wait==WAIT_OBJECT_0) {
         VdmExitCode=ERROR_INVALID_HANDLE;
@@ -153,6 +143,7 @@ void ntvdm_worker_lifecycle_end(void)
     if(lifecycle.stop)CloseHandle(lifecycle.stop);
     if(lifecycle.fault)CloseHandle(lifecycle.fault);
     /* The connection owns all three lifecycle handles. */
+    ZeroMemory(&mvdm_softpc_input_terminal_events,sizeof(mvdm_softpc_input_terminal_events));
     ZeroMemory(&lifecycle,sizeof(lifecycle));
 }
 DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code)
@@ -164,10 +155,12 @@ DWORD ntvdm_worker_lifecycle_begin(session *owner,BOOL character_io)
 {
     DWORD error;
     if(!owner || lifecycle.owner)return ERROR_INVALID_STATE;
-    error=worker_base_controls(&lifecycle.server,&lifecycle.worker_close,&lifecycle.console_close,&lifecycle.task_close);
+    mvdm_softpc_terminal_events events;
+    error=worker_base_controls(&events.server,&events.worker_close,&events.console_close,&lifecycle.task_close);
     if(error)return error;
+    if(!character_io)events.console_close=NULL;
     lifecycle.owner=owner;
-    if(!character_io)lifecycle.console_close=NULL;
+    mvdm_softpc_input_terminal_events=events;
     lifecycle.stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     if(!lifecycle.stop)return GetLastError();
     /* WOW has no Console-close membership. No frontend is created or queried. */
@@ -183,8 +176,8 @@ DWORD ntvdm_worker_lifecycle_activate(void)
     if(!lifecycle.owner)return ERROR_SUCCESS; /* Non-standalone fixtures. */
     if(lifecycle.original_ready || !lifecycle.stop)return ERROR_INVALID_STATE;
     lifecycle.original_ready=TRUE;
-    lifecycle.watch=worker_base_input_watch_create(lifecycle.console_close,
-        lifecycle.worker_close,lifecycle.task_close,lifecycle.stop,report_io_fault,console_instruction,
+    lifecycle.watch=worker_base_input_watch_create(mvdm_softpc_input_terminal_events.console_close,
+        mvdm_softpc_input_terminal_events.worker_close,lifecycle.task_close,lifecycle.stop,report_io_fault,console_instruction,
         worker_instruction,task_instruction,NULL,lifecycle.owner);
     if(!lifecycle.watch)return GetLastError();
     if(lifecycle.fault) {

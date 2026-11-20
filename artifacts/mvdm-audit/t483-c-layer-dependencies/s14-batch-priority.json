@@ -3,8 +3,8 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "eliminated": 531,
-    "open": 37,
+    "eliminated": 532,
+    "open": 36,
     "supporting-evidence": 43,
     "eliminated-transitive": 6
   },
@@ -28,21 +28,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/ntvdm-exe/win32/worker_lifecycle.c",
-      "open_ids": [
-        "C0317",
-        "C0318",
-        "C0319"
-      ],
-      "count": 3,
-      "symbols": [
-        "NtvdmActivateLifecycle",
-        "ntvdm_worker_lifecycle_authorize_exit",
-        "ntvdm_worker_lifecycle_input_terminal"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/wow32-dll/source/wow_user_registration_bridge.c",
       "open_ids": [
         "C0497",
@@ -54,6 +39,19 @@
         "UserRegisterWowHandlers",
         "wow_user_notify_startup_noop",
         "wow_user_register_wow_exec"
+      ]
+    },
+    {
+      "kind": "symbol",
+      "provider": "src/ntvdm-exe/win32/worker_lifecycle.c",
+      "open_ids": [
+        "C0317",
+        "C0318"
+      ],
+      "count": 2,
+      "symbols": [
+        "NtvdmActivateLifecycle",
+        "ntvdm_worker_lifecycle_authorize_exit"
       ]
     },
     {
@@ -382,5 +380,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P108"
+  "updated_by": "T483 S14 P110"
 }

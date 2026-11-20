@@ -1,0 +1,88 @@
+{
+  "packet": "M0 T483 S14 P110",
+  "baseline": "d9dd9f5e2ff479463b93484462b537c38210b6f3",
+  "eliminated_C_ids": [
+    "C0319"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 532,
+    "open": 36,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "scope": "Store the single borrowed set of server, worker-close and console-close handles with the event-thread query. Original reads keep the signaling rules and LastError. NTVDM retains registration, shutdown authorization and cleanup sequencing.",
+  "remaining_C0057_consumer": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+  "mirror_delta": {
+    "points": 0,
+    "lines": -1,
+    "source": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "opennt_anchor_sha256": "7F555A87BA029627D6811C0F7B96964BB8A96AF90C60C89012975A4AC5442076",
+    "raw_hunks_before": 76,
+    "raw_hunks_after": 76
+  },
+  "final_product_symbols": {
+    "worker": "0001:0011ad10       _ntvdm_worker_lifecycle_input_terminal 0051bd10 f   softpc-bindings:mvdm_softpc_event_thread.obj",
+    "worker-reference-x86": "0001:0011ad10       _ntvdm_worker_lifecycle_input_terminal 0051bd10 f   softpc-bindings:mvdm_softpc_event_thread.obj"
+  },
+  "compiled_ownership": {
+    "objects": [
+      {
+        "graph": "worker",
+        "object": "obj/adapter-softpc/mvdm_softpc_event_thread.obj",
+        "source": "src/compat/mvdm_softpc_event_thread.c",
+        "sha256": "40a81393dabc47cfd7ab277a73a55fb27840d034011b5663dab0662236aafa35"
+      },
+      {
+        "graph": "vcdex",
+        "object": "obj/adapter-softpc/mvdm_softpc_event_thread.obj",
+        "source": "src/compat/mvdm_softpc_event_thread.c",
+        "sha256": "40a81393dabc47cfd7ab277a73a55fb27840d034011b5663dab0662236aafa35"
+      },
+      {
+        "graph": "hook32",
+        "object": "obj/adapter-softpc/mvdm_softpc_event_thread.obj",
+        "source": "src/compat/mvdm_softpc_event_thread.c",
+        "sha256": "40a81393dabc47cfd7ab277a73a55fb27840d034011b5663dab0662236aafa35"
+      },
+      {
+        "graph": "reference",
+        "object": "obj/adapter-softpc/mvdm_softpc_event_thread.obj",
+        "source": "src/compat/mvdm_softpc_event_thread.c",
+        "sha256": "a230d618d05ba083da862239677a06cb7e1cb29f4b090eb31b44347c4973b47d"
+      }
+    ],
+    "counts": {
+      "system import": 23,
+      "compat": 2,
+      "not selected in final link": 7
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "029d336d-2b2c-45e5-aaa3-6159666d1e64",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "fixture_link_repair": "A dedicated target link argument adds the existing event-thread unit SDK import library. The product image did not change during the test-graph retry.",
+  "status": "Cached full build, dual publication, nine VM frontend/lifecycle cases, real DOS-native-DOS return and structural gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "2ca9d0324e2da87e003ba777cd6b77016bafa03e0b91b7cdcd0bf60cbf705e56",
+    "probes-initial.out": "928bbca2a27c806367b2217718f3e73b2392045ff174cf7f58800a0b179a9fa9",
+    "test-graph.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "probes.out": "68b6efaa699ad2f0fca489c1c19b4b3c1b03195dd83ffed9d58855a556d9edb2",
+    "final-checks.out": "33be180cd90c03e7a8ac27a233639fca3d5ad25e98186c89c5ef61f671bd294d",
+    "b-compiled-candidates.json": "ea175ac8b688d3ee0d320b929361f70b59216a05aa8827e52a81c4ff8d98bf74",
+    "worker-nt-event.deps.txt": "3d87b46465e449ef5cca9cc8307d51e9963ce45f78bfc7f4b01d5bf17d0c7420",
+    "worker-reference-x86-nt-event.deps.txt": "18f60248c7222d0a9f24078ecea597f193eb4a9d8266612ac2c19a8d6bce1790",
+    "lifecycle/results.json": "387ca9d1ef9e50e7880ee8a6312b60c77ff14845d3f85334f0a2b7ae2d6db16f",
+    "native-edit-return.txt": "b0ca5888c15792d29f5eada0c55c80f7679f77071bddddbf6cde851411a69d14"
+  }
+}
