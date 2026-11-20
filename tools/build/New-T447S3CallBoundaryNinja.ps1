@@ -120,11 +120,11 @@ $units += ,@('modal_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialo
 $units += ,@('modal_lifetime_body', 'src/non-mvdm/windows/core/ntuser/client/dlgmgr.c', $modalLifetimeFlags)
 $units += ,@('modal_lifetime_end', 'src/non-mvdm/windows/core/ntuser/client/dlgend.c', $modalLifetimeFlags)
 $units += ,@('modal_lifetime_pointer', 'src/compat/wow_dialog_pointer.c', $modalLifetimeFlags)
-$navigationFlags = '/DWOW_ORIGINAL_EDIT_CLIENT /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-client')) + '"'
+$navigationFlags = '/DWOW_ORIGINAL_EDIT_CLIENT /I "' + (NinjaValue (Join-Path $root 'src/compat/include/control-client')) + '"'
 $units += ,@('navigation_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c', '')
 $units += ,@('navigation_graph', 'src/non-mvdm/windows/core/ntuser/rtl/winmgr.c', $navigationFlags)
 $units += ,@('navigation_help', 'src/non-mvdm/windows/core/ntuser/rtl/help.c', '')
-$textFlags = '/I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-drawing')) + '"'
+$textFlags = '/I "' + (NinjaValue (Join-Path $root 'src/compat/include/control-drawing')) + '"'
 $units += ,@('string_prefix', 'src/non-mvdm/windows/core/ntuser/rtl/drawtext.c', $textFlags)
 $textMeasureFlags = '/I "' + (NinjaValue (Join-Path $root 'src/compat/include/text-measure')) + '"'
 $units += ,@('string_extent', 'src/non-mvdm/windows/core/ntuser/rtl/text.c', $textMeasureFlags)
@@ -142,7 +142,7 @@ $units += ,@('push_rect', 'src/compat/wow_control_rect.c', $pushFlags)
 $resourceTestFlags = '/DWOW_BUTTON_RESOURCE_TEST_LEAVES /FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/button-resources/leaves.h')) + '"'
 $units += ,@('button_resources_body', 'src/compat/wow_button_resources.c', $resourceTestFlags)
 $units += ,@('button_resources_fixture', 'test/adapter-mvdm-host-out/wow/wow_button_resources_fixture.c', '')
-$stateDrawingFlags = '/DWOW_ORIGINAL_STATE_DRAWING /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-draw-state')) + '"'
+$stateDrawingFlags = '/DWOW_ORIGINAL_STATE_DRAWING /I "' + (NinjaValue (Join-Path $root 'src/compat/include/control-draw-state')) + '"'
 $units += ,@('state_drawing_body', 'src/non-mvdm/windows/core/ntuser/client/mngrayc.c', $stateDrawingFlags)
 $units += ,@('state_icon_size', 'src/compat/wow_icon_size.c', '')
 $units += ,@('dialog_slots', 'src/compat/wow_dialog_slots.c', '')
@@ -156,13 +156,13 @@ $units += ,@('button_lifetime_adapter', 'src/compat/wow_button_lifetime.c', '')
 $units += ,@('button_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_button_lifetime_fixture.c', '')
 $buttonLifetimeResourceFlags = '/FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/button-lifetime/resource-leaves.h')) + '"'
 $units += ,@('button_lifetime_resources', 'src/compat/wow_button_resources.c', $buttonLifetimeResourceFlags)
-$buttonBlitFlags = '/DWOW_ORIGINAL_BUTTON_BLIT_ONLY /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/button-drawing')) + '"'
+$buttonBlitFlags = '/DWOW_ORIGINAL_BUTTON_BLIT_ONLY /I "' + (NinjaValue (Join-Path $root 'src/compat/include/button-drawing')) + '"'
 $units += ,@('button_blit_owner', 'src/non-mvdm/windows/core/ntuser/client/mngrayc.c', $buttonBlitFlags)
 $buttonDcFlags = '/DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_BUTTON_CLIENT /I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/button-lifetime')) + '"'
 $units += ,@('button_dc_owner', 'src/non-mvdm/windows/core/ntuser/client/btnctl.c', $buttonDcFlags)
 $units += ,@('button_dc_fixture', 'test/adapter-mvdm-host-out/wow/wow_button_dc_fixture.c', '')
 $units += ,@('button_dc_unreached', 'test/adapter-mvdm-host-out/wow/wow_button_dc_unreached.c', '')
-$geometryFlags = '/DWOW_ORIGINAL_DEFAULT_GEOMETRY /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-geometry')) + '"'
+$geometryFlags = '/DWOW_ORIGINAL_DEFAULT_GEOMETRY /I "' + (NinjaValue (Join-Path $root 'src/compat/include/control-geometry')) + '"'
 $units += ,@('navigation_borders', 'src/non-mvdm/windows/core/ntuser/rtl/winmgr.c', $geometryFlags)
 $viewFlags = '/Gy /I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/edit-view')) + '"'
 $units += ,@('navigation_native', 'src/compat/wow_edit_native_bindings.c', '')
@@ -178,7 +178,7 @@ $units += ,@('view_client', 'src/non-mvdm/windows/core/ntuser/client/winmgrc.c',
 foreach ($name in @('editec','edecrare','editsl','editml','edmlonce','edmlrare','edslrare',
         'combo','combodir','comboini','lb1','lboxctl1','lboxctl2','lboxctl3','lboxmult','lboxrare','lboxvar',
         'dlgbegin','dlgend','dlgmgr','dlgmgrc','dlgmgr2','dmmnem','winmgrc','draw','btnctl')) {
-    $flags = '/DWOW_ORIGINAL_EDIT_CLIENT /I "' + (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-client')) + '"'
+    $flags = '/DWOW_ORIGINAL_EDIT_CLIENT /I "' + (NinjaValue (Join-Path $root 'src/compat/include/control-client')) + '"'
     if ($name.StartsWith('dlg') -or $name -eq 'dmmnem') { $flags += ' /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER' }
     if ($name -eq 'dlgend') { $flags += ' /DWOW_ORIGINAL_DIALOG_END' }
     if ($name -eq 'dlgmgr') { $flags += ' /DWOW_ORIGINAL_DIALOG_DEFAULT' }
@@ -190,11 +190,11 @@ $units += ,@('dialog_lookup', 'src/compat/wow_dialog_lookup.c', '/DWOW_ORIGINAL_
 $controlObjects += 'obj/dialog_lookup.obj'
 $units += ,@('original_keyboard', 'src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c',
     ('/DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_KEYBOARD /I "' +
-    (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-client')) + '"'))
+    (NinjaValue (Join-Path $root 'src/compat/include/control-client')) + '"'))
 $controlObjects += 'obj/original_keyboard.obj'
 $units += ,@('original_default', 'src/non-mvdm/windows/core/ntuser/client/clmsg.c',
     ('/DWOW_ORIGINAL_DEFAULT_WINDOW /I "' +
-    (NinjaValue (Join-Path $root 'src/wow32-dll/include/control-client')) + '"'))
+    (NinjaValue (Join-Path $root 'src/compat/include/control-client')) + '"'))
 $controlObjects += 'obj/original_default.obj'
 $units += ,@('default_view', 'src/non-mvdm/windows/core/ntuser/rtl/wow.c', ($navigationFlags + ' /Gy'))
 $units += ,@('dde_data_owner', 'src/non-mvdm/windows/core/ntuser/client/hdata.c', '')

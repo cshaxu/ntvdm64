@@ -60,8 +60,8 @@ Eight IDs eliminated: current429/139. Console control/transport remains open.
 Enclosing commit/push is receipt; prior P76 evidence remains in P81 history.
 
 P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-text-owner.json) delivered C -7.
-P103 [CSR capture](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-base-capture-owner.json) delivered C -4.
-Delivered: B 8 known calls; C 57 open (28 functions, 2 data).
+P104 [WOW control ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-control-owner.json) delivered C -11.
+Delivered: B 8 known calls; C 46 open (27 functions, 2 data).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same

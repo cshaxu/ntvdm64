@@ -1,6 +1,6 @@
 #ifndef WOW_MNEMONIC_DRAWING_TEST_H
 #define WOW_MNEMONIC_DRAWING_TEST_H
-#include "../../../../src/wow32-dll/include/control-drawing/precomp.h"
+#include "../../../../src/compat/include/control-drawing/precomp.h"
 PVOID WINAPI mnemonic_allocate(SIZE_T);
 VOID WINAPI mnemonic_free(PVOID);
 BOOL WINAPI mnemonic_text(HDC, int, int, LPCWSTR, int);

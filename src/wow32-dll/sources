@@ -26,7 +26,6 @@ SOURCES= \
     wow_task_profile_binding.c \
     wow_task_termination.c \
     wow_task_parent.c \
-    wow_public_user_facade.c \
     wow_user_borrow_scope.c \
     wow_user_message_bridge.c \
     wow_user_object_bindings.c \

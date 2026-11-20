@@ -3,8 +3,8 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "eliminated": 511,
-    "open": 57,
+    "eliminated": 522,
+    "open": 46,
     "supporting-evidence": 43,
     "eliminated-transitive": 6
   },
@@ -332,96 +332,6 @@
       "symbols": []
     },
     {
-      "kind": "include-root",
-      "provider": "src/wow32-dll/include/button-drawing",
-      "open_ids": [
-        "C0147"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/button-drawing/precomp.h",
-      "open_ids": [
-        "C0062"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "include-root",
-      "provider": "src/wow32-dll/include/control-client",
-      "open_ids": [
-        "C0148"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/control-client/precomp.h",
-      "open_ids": [
-        "C0064"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "include-root",
-      "provider": "src/wow32-dll/include/control-draw-state",
-      "open_ids": [
-        "C0149"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/control-draw-state/precomp.h",
-      "open_ids": [
-        "C0065"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "include-root",
-      "provider": "src/wow32-dll/include/control-drawing",
-      "open_ids": [
-        "C0150"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/control-drawing/precomp.h",
-      "open_ids": [
-        "C0066"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "include-root",
-      "provider": "src/wow32-dll/include/control-geometry",
-      "open_ids": [
-        "C0151"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/control-geometry/precomp.h",
-      "open_ids": [
-        "C0067"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
       "kind": "header",
       "provider": "src/wow32-dll/include/wow_native_process.h",
       "open_ids": [
@@ -457,17 +367,6 @@
       "count": 1,
       "symbols": [
         "WU32StdHookProc"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_public_user_facade.c",
-      "open_ids": [
-        "C0442"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_user_dialog_box_indirect_param"
       ]
     },
     {
@@ -560,5 +459,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P103"
+  "updated_by": "T483 S14 P104"
 }

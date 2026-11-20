@@ -98,7 +98,7 @@ static HWND create(void)
 }
 static int create_modal(void)
 {
-    return wow_user_modal_dialog_box((HINSTANCE)0x1235,
+    return wow_user_dialog_box_indirect_param((HINSTANCE)0x1235,
         (LPCDLGTEMPLATEW)&resource, (HWND)0x2468, procedure, 0x76543210,
         expected_flags);
 }

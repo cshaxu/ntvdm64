@@ -101,8 +101,6 @@ LRESULT WINAPI wow_native_SendMessageTimeoutA(HWND w, UINT message, WPARAM wp, L
 LRESULT WINAPI wow_native_DefWindowProcA(HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_native_DefWindowProcW(HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_native_DefDlgProcA(HWND, UINT, WPARAM, LPARAM);
-int WINAPI wow_user_dialog_box_indirect_param(HINSTANCE, LPCDLGTEMPLATEW,
-    HWND, DLGPROC, LPARAM, UINT);
 BOOL WINAPI wow_user_end_dialog(HWND, INT_PTR);
 LRESULT WINAPI wow_native_DefMDIChildProcA(HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_native_DefFrameProcA(HWND, HWND, UINT, WPARAM, LPARAM);

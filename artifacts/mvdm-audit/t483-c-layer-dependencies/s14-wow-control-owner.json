@@ -1,0 +1,65 @@
+{
+  "packet": "M0 T483 S14 P104",
+  "baseline": "46219d487e1ed35b9521006c5cf7cb22dcd113e4",
+  "eliminated_C_ids": [
+    "C0062",
+    "C0064",
+    "C0065",
+    "C0066",
+    "C0067",
+    "C0147",
+    "C0148",
+    "C0149",
+    "C0150",
+    "C0151",
+    "C0442"
+  ],
+  "eliminated_B_ids": [],
+  "scope": "Move the five original control preprocessor environments byte-for-byte into B next to their existing compatibility owners. Expose the existing modal dialog adapter in B directly under its existing caller-visible symbol and remove the one-call wrapper from F. Original source and flags are retained.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 522,
+    "open": 46,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "final_product_symbols": {
+    "_wow_user_dialog_box_indirect_param@24": "0001:00066ee0       _wow_user_dialog_box_indirect_param@24 10067ee0 f   wow_dialog_creation_binding.obj",
+    "_wow_original_DialogBoxIndirectParamAorW@24": "0001:0004d330       _wow_original_DialogBoxIndirectParamAorW@24 1004e330 f   dialog-template.obj"
+  },
+  "compiled_ownership": {
+    "objects": 1,
+    "counts": {
+      "CRT": 5,
+      "non-mvdm": 2,
+      "system import": 2,
+      "TLS ABI absolute": 1,
+      "compat": 10
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "060da8e5-d44d-4e2f-9f70-5e40d45a341a",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, six drawing, navigation and modal entry fixtures, real Win16 dialog and final gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "ecbcdc5e7231db2cfb6866bc6f674efc845755657f0dfd5a7cc9ea7940b53d40",
+    "release-and-test.out": "318780d151e5ff8498049577158efd5241c4e09c6ceac81a323641a605c80e56",
+    "b-compiled-candidates.json": "c2e2e8e880d699020ec2639794265445eb3fee975771e13393929e2dd7e62852",
+    "dialog-guest/result.txt": "0cce8cd25a3f56f5006d0ac4b299ea694733ebafa68e401b03b80a3081af3292",
+    "dialog-guest/guest-report.json": "f0a92eedad2b2d521992c3e6923a26df699e8dbefef58be05e4db42a7b7a116f"
+  },
+  "prior_csr_capture_delivery": "s14-base-capture-owner.json"
+}

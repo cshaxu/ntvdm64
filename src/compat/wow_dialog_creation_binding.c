@@ -104,7 +104,7 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE module,
     return result;
 }
 
-int WINAPI wow_user_modal_dialog_box(HINSTANCE module,
+int WINAPI wow_user_dialog_box_indirect_param(HINSTANCE module,
     LPCDLGTEMPLATEW dialog_template, HWND owner, DLGPROC procedure,
     LPARAM init_parameter, UINT flags)
 {

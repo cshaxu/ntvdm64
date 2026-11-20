@@ -12,7 +12,7 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE, LPDLGTEMPLATE, DWORD, HWND,
  * clres.c.  Keep its callback/borrow/context lease identical to the
  * registered modeless entry; clres.c still owns template sizing, flags and
  * the modal loop. */
-int WINAPI wow_user_modal_dialog_box(HINSTANCE, LPCDLGTEMPLATEW, HWND,
+int WINAPI wow_user_dialog_box_indirect_param(HINSTANCE, LPCDLGTEMPLATEW, HWND,
     DLGPROC, LPARAM, UINT);
 /* Original modal/modeless keyboard processing shares one scoped entry. */
 BOOL WINAPI wow_dialog_messageA(HWND, LPMSG);
