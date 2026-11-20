@@ -3,11 +3,7 @@
 #include <windows.h>
 #include "ntvdm-exe/session/session.h"
 #include "compat/include/console_video.h"
-#include "console_graphics.h"
-ntvdm_console_graphics *ntvdm_console_graphics_context(void);
-/* NULL description retires graphics for a text transition. Called only after
- * releasing the painter mutex; transport serializes the complete frame. */
-BOOL ntvdm_console_publish_video(const console_video_description *,const void *,size_t);
+#include "compat/include/console_graphics.h"
 DWORD ntvdm_console_client_begin(session *);
 /* 0 unrelated, 1 input, 2 output; local identities, never UI resources. */
 DWORD ntvdm_console_handle_kind(HANDLE);
@@ -26,6 +22,4 @@ BOOL ntvdm_console_read_input_tagged(HANDLE,PINPUT_RECORD,uint64_t *,DWORD,LPDWO
 int ntvdm_console_window_query(DWORD query,LONG values[4]);
 /* Latest original resolved text palette, owned by this worker endpoint. */
 BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16]);
-/* Guest owner toggles publication at route and final-paint boundaries. */
-BOOL ntvdm_console_video_async(BOOL);
 #endif

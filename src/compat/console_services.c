@@ -2,6 +2,7 @@
 #include "include/console_endpoint.h"
 #include "include/host_context.h"
 #include "include/console_grid.h"
+#include "include/console_graphics.h"
 #include "lib-win32/handle/duplicate.h"
 #include <limits.h>
 #include <string.h>
@@ -696,4 +697,68 @@ DWORD compat_console_send_video_copy(void *context,const void *copy,SIZE_T bytes
     if(bytes<sizeof(*description) || bytes-sizeof(*description)!=description->bytes)
         return ERROR_INVALID_DATA;
     return compat_console_send_video(context,description,description+1);
+}
+
+static DWORD offer_video(compat_console_endpoint *client,const console_video_description *description,
+    const void *pixels,BOOL *queued)
+{
+    SIZE_T bytes;BYTE *copy;DWORD error;
+    if(description->bytes>SIZE_MAX-sizeof(*description))return ERROR_ARITHMETIC_OVERFLOW;
+    bytes=sizeof(*description)+description->bytes;
+    copy=HeapAlloc(GetProcessHeap(),0,bytes);
+    if(!copy)return ERROR_NOT_ENOUGH_MEMORY;
+    memcpy(copy,description,sizeof(*description));
+    memcpy(copy+sizeof(*description),pixels,description->bytes);
+    error=worker_base_publication_offer(client->publisher,copy,bytes,queued);
+    HeapFree(GetProcessHeap(),0,copy);return error;
+}
+BOOL ntvdm_console_video_async(BOOL active)
+{
+    compat_console_endpoint *client=current_endpoint();
+    DWORD error=client ? worker_base_publication_active(client->publisher,active) : ERROR_SUCCESS;
+    SetLastError(error);return !error;
+}
+
+/* DIVERGENCE(ADAPTER-WIN32-050): local mouse visibility bookkeeping only;
+ * conhost/Terminal still owns the native pointer, not the text caret. */
+static volatile LONG mvdm_pointer_display_count;
+int WINAPI ShowConsoleCursor(HANDLE output, BOOL show)
+{
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    int count;
+    if (ntvdm_console_graphics_cursor(output,show,&count)) return count;
+    /* GetConsoleMode also accepts CONIN$, and rejects our graphics backing.
+     * Original SrvShowConsoleCursor accepts output handles, never input. */
+    if (!compat_console_output_endpoint(output) && !GetConsoleScreenBufferInfo(output, &info)) return -1;
+    return (int)(show ? InterlockedIncrement(&mvdm_pointer_display_count) :
+        InterlockedDecrement(&mvdm_pointer_display_count));
+}
+
+ntvdm_console_graphics *ntvdm_console_graphics_context(void)
+{
+    compat_console_endpoint *client=current_endpoint();
+    return client ? client->graphics : NULL;
+}
+
+BOOL ntvdm_console_publish_video(const console_video_description *description,
+    const void *pixels,size_t capacity)
+{
+    compat_console_endpoint *client=current_endpoint();
+    DWORD error=ERROR_SUCCESS;
+    if (!client) { SetLastError(ERROR_NOT_READY);return FALSE; }
+    if ((description && (!pixels || capacity<description->bytes || !description->bytes)) ||
+        (!description && (pixels || capacity))) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
+    if(description && description->kind!=CONSOLE_VIDEO_TEXT_CONFIGURATION) {
+        BOOL queued=FALSE;
+        error=offer_video(client,description,pixels,&queued);
+        if(error || queued){SetLastError(error);return !error;}
+    } else {
+        /* Format/retirement controls cannot overtake an older frame. Route
+         * owner re-enables async publication after its next software tick. */
+        error=worker_base_publication_active(client->publisher,FALSE);
+        if(error){SetLastError(error);return FALSE;}
+    }
+    error=compat_console_send_video(client,description,pixels);
+    SetLastError(error);
+    return error==ERROR_SUCCESS;
 }

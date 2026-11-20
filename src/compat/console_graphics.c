@@ -1,11 +1,9 @@
-#include "console_graphics.h"
+#include "include/console_graphics.h"
 /* DIVERGENCE(ADAPTER-WIN32-058): original ntcon bitmap/mutex service bound
  * locally, with copied presentation to run16; no Console server or KVM UI. */
-#include "console_bitmap.h"
-#include "ntvdm-exe/softpc/v7_pointer.h"
-#include "console_client.h"
-#include "compat/include/publication.h"
-#include "conapi.h"
+#include "include/console_bitmap.h"
+#include "compat/include/v7_pointer.h"
+#include "include/conapi.h"
 #undef CreateConsoleScreenBuffer
 #undef SetConsoleActiveScreenBuffer
 #undef CloseHandle

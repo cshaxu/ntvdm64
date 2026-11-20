@@ -13,6 +13,8 @@ typedef struct compat_console_endpoint {
     CRITICAL_SECTION palette_lock;
     PALETTEENTRY text_palette[16];
     BOOL text_palette_valid;
+    struct worker_base_publication *publisher;
+    struct ntvdm_console_graphics *graphics;
 } compat_console_endpoint;
 
 compat_console_endpoint *compat_console_output_endpoint(HANDLE output);

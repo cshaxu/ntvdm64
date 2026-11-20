@@ -1,0 +1,60 @@
+{
+  "packet": "M0 T483 S14 P89",
+  "baseline": "7e7f43efa6d8bf890953138a8f21848846172f76",
+  "status": "Cached full build, dual publication, product and fixture tests and final gates passed. Enclosing commit is the delivery receipt.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "scope": "One existing authored include path replaced in nt_graph.c."
+  },
+  "scope": "B now implements DIB allocation/mutex, Video7 pointer composition, deferred capture and screen-buffer operations and final publication. F retains allocation and disposal composition, broker admission and input stop/ack. Capture owner, lock and publisher lifetimes are unchanged.",
+  "evidence_root": "build/t483-s14-console-graphics-owner",
+  "mirror_proof": {
+    "file": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+    "before_sha256": "029acccddfa56c2d147603beefbaf1ef26240d9436561dc191cd89c7cfa700bc",
+    "after_sha256": "40233fd7f4cac4b135970387c6ff40ab128287e54f9ce38ab3d22ef907ad2cdd",
+    "entire_change": "authored include path replacement only, original logical lines and conditional bytes intact"
+  },
+  "eliminated_C_ids": [
+    "C0053",
+    "C0287",
+    "C0300",
+    "C0301",
+    "C0302",
+    "C0303",
+    "C0304"
+  ],
+  "eliminated_B_ids": [
+    "B0028"
+  ],
+  "compiled_ownership": {
+    "objects": 25,
+    "external_relocation_pairs": 555,
+    "outward": 0,
+    "counts": {
+      "CRT": 66,
+      "system import": 227,
+      "compat": 56,
+      "not selected in final link": 204,
+      "lib-win32": 2
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "0d6cae53-3a0d-44bf-8bf6-bd60e5209e4f",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "d31409f46e11c145b3194ea7f56544ea7e996bd26b50c8e4981fc6ea6aee54d3",
+    "release-and-test.out": "2c61dcb1f0bea633ab65ec2c3690e23ab9f85575505ed4c692fd4697d3fc0381",
+    "final-checks.out": "54076623f46843a6c16c80d92d3eb1b2e69def70807c9883d369ad40add6ac8a",
+    "b-compiled-candidates.json": "53e9c0c27e8b6b9b0fdce84310bd1cbd13bb088d1bf84744a12b669585f3c480",
+    "console-routing.txt.console.txt": "d8736979605d767333a465be1085e8090a493ecf6c466953505504643c1c1e0d"
+  }
+}

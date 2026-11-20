@@ -54,7 +54,7 @@
 #include "video.h"
 #include "ckmalloc.h"
 #include "conapi.h"
-#include "ntvdm-exe/win32/console_graphics.h"
+#include "compat/include/console_graphics.h"
 #include "ntvdm-exe/win32/console_text.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
 extern int DAC_data_bits;

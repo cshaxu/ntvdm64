@@ -48,8 +48,8 @@ build obj/console_keyboard.obj: cc `$root/src/compat/console_services.c
 build obj/console_client.obj: cc `$root/src/ntvdm-exe/win32/console_client.c
 build obj/worker_client.obj: cc `$root/src/compat/console_transport.c
 build obj/common_pipe_transfer.obj: cc `$root/src/lib-win32/pipe/pipe_transfer.c
-build obj/console_graphics.obj: cc `$root/src/ntvdm-exe/win32/console_graphics.c
-build obj/console_bitmap.obj: cc `$root/src/ntvdm-exe/win32/console_bitmap.c
+build obj/console_graphics.obj: cc `$root/src/compat/console_graphics.c
+build obj/console_bitmap.obj: cc `$root/src/compat/console_bitmap.c
 build obj/console_grid.obj: cc `$root/src/compat/console_grid.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/host_context.obj: cc `$root/src/compat/host_context.c

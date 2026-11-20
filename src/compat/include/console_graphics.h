@@ -1,7 +1,8 @@
 #ifndef NTVDM_CONSOLE_GRAPHICS_H
 #define NTVDM_CONSOLE_GRAPHICS_H
 #include <windows.h>
-#include "compat/include/publication.h"
+#include "publication.h"
+#include "console_video.h"
 typedef struct ntvdm_console_graphics ntvdm_console_graphics;
 ntvdm_console_graphics *ntvdm_console_graphics_create(void);
 void ntvdm_console_graphics_destroy(ntvdm_console_graphics *);
@@ -20,4 +21,10 @@ BOOL ntvdm_console_graphics_cursor(HANDLE,BOOL,int *);
 void ntvdm_console_graphics_v7_pointer(const BYTE *,unsigned,unsigned,BOOL);
 void ntvdm_console_graphics_begin_update(void);
 void ntvdm_console_graphics_end_update(void);
+ntvdm_console_graphics *ntvdm_console_graphics_context(void);
+/* NULL description retires graphics for a text transition. Called only after
+ * releasing the painter mutex; transport serializes the complete frame. */
+BOOL ntvdm_console_publish_video(const console_video_description *,const void *,size_t);
+/* Guest owner toggles publication at route and final-paint boundaries. */
+BOOL ntvdm_console_video_async(BOOL);
 #endif

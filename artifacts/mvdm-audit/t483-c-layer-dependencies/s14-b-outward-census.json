@@ -351,11 +351,14 @@
     {
       "id": "B0028",
       "contract": "worker_base_publication",
-      "provider": "src/ntvdm-exe/win32/console_graphics.c",
+      "provider": "src/compat/console_graphics.c",
       "target": "capture_callback",
-      "layer": "F",
+      "layer": "B",
       "kind": "caller-supplied-publication-operation",
-      "status": "outer-target-confirmed"
+      "status": "inner-target-confirmed",
+      "baseline_provider": "src/ntvdm-exe/win32/console_graphics.c",
+      "baseline_layer": "F",
+      "migration_status": "P89 moves the deferred capture callback and actual bitmap capture into compat."
     },
     {
       "id": "B0029",
@@ -428,8 +431,8 @@
     }
   ],
   "indirect_counts": {
-    "B": 19,
-    "F": 10,
+    "B": 20,
+    "F": 9,
     "D": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
@@ -473,5 +476,8 @@
   ],
   "p88_inward_targets": [
     "B0027"
+  ],
+  "p89_inward_targets": [
+    "B0028"
   ]
 }

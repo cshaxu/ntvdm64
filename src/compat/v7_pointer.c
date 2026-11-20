@@ -3,7 +3,7 @@
  * Original V7 registers select the 32x32 AND/XOR mask; this module only
  * composites it into an already reconstructed 8-bit indexed surface.
  * Surface lifetime, locking and dirty publication belong to the caller. */
-#include "v7_pointer.h"
+#include "include/v7_pointer.h"
 #include <limits.h>
 #define V7_WIDTH 32u
 #define V7_MASK_BYTES 128u

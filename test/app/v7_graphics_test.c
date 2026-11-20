@@ -3,7 +3,7 @@
 #include <string.h>
 #include "conapi.h"
 #include "ntvdm-exe/win32/console_client.h"
-#include "ntvdm-exe/win32/console_graphics.h"
+#include "compat/include/console_graphics.h"
 #undef CreateConsoleScreenBuffer
 #undef CloseHandle
 

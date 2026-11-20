@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "ntvdm-exe/softpc/v7_pointer.h"
+#include "compat/include/v7_pointer.h"
 #define CHECK(x) do { if (!(x)) { printf("FAIL line %d\n",__LINE__); return 1; } } while (0)
 
 int main(void)

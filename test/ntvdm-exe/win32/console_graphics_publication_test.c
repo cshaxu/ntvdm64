@@ -1,4 +1,4 @@
-#include "ntvdm-exe/win32/console_graphics.h"
+#include "compat/include/console_graphics.h"
 #include "compat/include/publication.h"
 #include "compat/include/console_video.h"
 #include "conapi.h"

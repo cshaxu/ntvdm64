@@ -1,4 +1,4 @@
-#include "console_bitmap.h"
+#include "include/console_bitmap.h"
 #include <limits.h>
 #include <string.h>
 

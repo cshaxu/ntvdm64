@@ -252,7 +252,7 @@ if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC ex
 if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector resource missing: $redirResourceSource" }
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('ccpu_thread_exit_compat.c',
-                          'console_compat.c', 'console_client.c', 'worker_lifecycle.c', 'console_bitmap.c', 'console_graphics.c', 'console_text.c',
+                          'console_compat.c', 'console_client.c', 'worker_lifecycle.c', 'console_text.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c', 'wow_hard_error_decoder.c',
                            'mvdm_base_vdm_environment.c')
@@ -293,7 +293,7 @@ $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc
                         'mvdm_keyboard_reset.c', 'mvdm_interrupt_export.c',
                         'mvdm_softpc_mouse_input.c', 'mvdm_softpc_mouse_bridge.c',
                         'mvdm_softpc_mouse_guest.c',
-                        'v7_pointer.c', 'v7_pointer_binding.c',
+                        'v7_pointer_binding.c',
                         'mvdm_softpc_descriptor_fields.c')
 $workerPackageNames = @('package_layout.c')
 $effectiveAddressSource = Join-Path $root 'src/compat/mvdm_softpc_effective_address.c'
@@ -1581,14 +1581,14 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build console-graphics-native-test.exe: broker_test_link obj/tests/console_graphics_native.obj')
     $graph.Add('build obj/tests/console_bitmap.obj: cc ' + (NinjaPath (Join-Path $root 'test/app/console_bitmap_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/tests/console_bitmap_provider.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/console_bitmap.c')))
+    $graph.Add('build obj/tests/console_bitmap_provider.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_bitmap.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule bitmap_test_link')
     $graph.Add('  command = link.exe /nologo /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib gdi32.lib')
     $graph.Add('build console-bitmap-test.exe: bitmap_test_link obj/tests/console_bitmap.obj obj/tests/console_bitmap_provider.obj')
-    $graph.Add('build obj/tests/console_graphics_provider.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/console_graphics.c')))
+    $graph.Add('build obj/tests/console_graphics_provider.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_graphics.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I"' + (NinjaPath (Join-Path $root 'src/compat/include')) + '"')
-    $graph.Add('build obj/tests/v7_pointer.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/v7_pointer.c')))
+    $graph.Add('build obj/tests/v7_pointer.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/v7_pointer.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/v7_pointer_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/app/v7_pointer_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -2200,6 +2200,12 @@ $graph.Add('build environment-projection-fixture.exe: rtl_fixture_link ' + $envi
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
 $graph.Add('build obj/compat/console_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_services.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+foreach ($name in @('console_graphics','console_bitmap','v7_pointer')) {
+    $object = 'obj/compat/' + $name + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root ('src/compat/' + $name + '.c'))))
+    $graph.Add('  cflags = ' + $libraryFlags)
+    $adapterWin32Objects += $object
+}
 $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join ' ') + ' obj/compat/console_services.obj')
 # Worker composition contains only reached COMMAND/BOP support.  It has no
 # local BaseVDM producer, retry loop or single-process queue.

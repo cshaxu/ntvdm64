@@ -1,7 +1,7 @@
 /* The original V7 controller owns the registers and selects the pattern.
  * Bind its existing host callbacks to the worker-owned indexed bitmap. */
 #include <windows.h>
-#include "ntvdm-exe/win32/console_graphics.h"
+#include "compat/include/console_graphics.h"
 #include "v7_selected_plane.h"
 
 /* Selected V7 ABI from egaports.h and gfx_upd.h. The original VGA device

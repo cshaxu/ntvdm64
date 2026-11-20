@@ -36,8 +36,6 @@ typedef struct console_client {
     HANDLE ready,stop,shutdown,failure_event;
     worker_base_input_watch *input_watch;
     HANDLE capability;
-    worker_base_publication *publisher;
-    ntvdm_console_graphics *graphics;
     mvdm_mouse_bridge mouse;
 } console_client;
 static DWORD console_activate(console_client *,BOOL);
@@ -48,49 +46,6 @@ static void console_input_failed(void *context,DWORD error)
     (void)ntcon_worker_client_fail(&client->endpoint.channel,error);
     LeaveCriticalSection(&client->endpoint.lock);
 }
-static DWORD offer_video(console_client *client,const console_video_description *description,
-    const void *pixels,BOOL *queued)
-{
-    SIZE_T bytes;BYTE *copy;DWORD error;
-    if(description->bytes>SIZE_MAX-sizeof(*description))return ERROR_ARITHMETIC_OVERFLOW;
-    bytes=sizeof(*description)+description->bytes;
-    copy=HeapAlloc(GetProcessHeap(),0,bytes);
-    if(!copy)return ERROR_NOT_ENOUGH_MEMORY;
-    memcpy(copy,description,sizeof(*description));
-    memcpy(copy+sizeof(*description),pixels,description->bytes);
-    error=worker_base_publication_offer(client->publisher,copy,bytes,queued);
-    HeapFree(GetProcessHeap(),0,copy);return error;
-}
-BOOL ntvdm_console_video_async(BOOL active)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    DWORD error=client ? worker_base_publication_active(client->publisher,active) : ERROR_SUCCESS;
-    SetLastError(error);return !error;
-}
-
-/* DIVERGENCE(ADAPTER-WIN32-050): local mouse visibility bookkeeping only;
- * conhost/Terminal still owns the native pointer, not the text caret. */
-static volatile LONG mvdm_pointer_display_count;
-int WINAPI ShowConsoleCursor(HANDLE output, BOOL show)
-{
-    CONSOLE_SCREEN_BUFFER_INFO info;
-    int count;
-    if (ntvdm_console_graphics_cursor(output,show,&count)) return count;
-    /* GetConsoleMode also accepts CONIN$, and rejects our graphics backing.
-     * Original SrvShowConsoleCursor accepts output handles, never input. */
-    if (!compat_console_output_endpoint(output) && !GetConsoleScreenBufferInfo(output, &info)) return -1;
-    return (int)(show ? InterlockedIncrement(&mvdm_pointer_display_count) :
-        InterlockedDecrement(&mvdm_pointer_display_count));
-}
-
-ntvdm_console_graphics *ntvdm_console_graphics_context(void)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    return client ? client->graphics : NULL;
-}
-
 static void console_client_end(void *context)
 {
     console_client *client=context;
@@ -99,7 +54,7 @@ static void console_client_end(void *context)
     client->owner->console_client=NULL;
     OpenNtBaseClientSetCommandBinding(NULL,NULL);
     if (client->stop) SetEvent(client->stop);
-    worker_base_publication_destroy(client->publisher);
+    worker_base_publication_destroy(client->endpoint.publisher);
     worker_base_input_watch_destroy(client->input_watch);
     CloseHandle(client->endpoint.channel.pipe);CloseHandle(client->endpoint.channel.peer);
     ntcon_worker_client_dispose(&client->endpoint.channel);
@@ -112,7 +67,7 @@ static void console_client_end(void *context)
     if (client->endpoint.output_identity) CloseHandle(client->endpoint.output_identity);
     DeleteCriticalSection(&client->endpoint.lock);
     DeleteCriticalSection(&client->endpoint.palette_lock);
-    ntvdm_console_graphics_destroy(client->graphics);
+    ntvdm_console_graphics_destroy(client->endpoint.graphics);
     HeapFree(GetProcessHeap(),0,client);
 }
 
@@ -135,8 +90,8 @@ DWORD ntvdm_console_client_begin(session *owner)
     client->owner=owner;
     InitializeCriticalSection(&client->endpoint.lock);
     InitializeCriticalSection(&client->endpoint.palette_lock);
-    client->graphics=ntvdm_console_graphics_create();
-    if (!client->graphics) { error=GetLastError();console_client_end(client);return error; }
+    client->endpoint.graphics=ntvdm_console_graphics_create();
+    if (!client->endpoint.graphics) { error=GetLastError();console_client_end(client);return error; }
     error=OpenNtBaseClientWorkerFrontendCapability(&client->capability);
     if (error) { console_client_end(client);return error; }
     /* The authenticated broker grants both transport and shell-out capability.
@@ -156,9 +111,9 @@ DWORD ntvdm_console_client_begin(session *owner)
     }
     error=worker_base_shutdown_event(&client->shutdown);
     if(error){console_client_end(client);return error;}
-    client->publisher=worker_base_publication_create(compat_console_send_video_copy,&client->endpoint,client->shutdown);
-    if(!client->publisher){error=GetLastError();console_client_end(client);return error;}
-    error=ntvdm_console_graphics_attach_publisher(client->graphics,client->publisher);
+    client->endpoint.publisher=worker_base_publication_create(compat_console_send_video_copy,&client->endpoint,client->shutdown);
+    if(!client->endpoint.publisher){error=GetLastError();console_client_end(client);return error;}
+    error=ntvdm_console_graphics_attach_publisher(client->endpoint.graphics,client->endpoint.publisher);
     if(error){console_client_end(client);return error;}
     client->input_watch=worker_base_input_watch_create(NULL,NULL,NULL,client->stop,
         NULL,NULL,NULL,NULL,console_input_failed,client);
@@ -286,30 +241,6 @@ BOOL ntvdm_console_set_active(BOOL active)
     console_client *client=owner ? owner->console_client : NULL;
     DWORD error=client ? console_activate(client,active) : ERROR_SUCCESS;
     SetLastError(error);return error==ERROR_SUCCESS;
-}
-
-BOOL ntvdm_console_publish_video(const console_video_description *description,
-    const void *pixels,size_t capacity)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    DWORD error=ERROR_SUCCESS;
-    if (!client) { SetLastError(ERROR_NOT_READY);return FALSE; }
-    if ((description && (!pixels || capacity<description->bytes || !description->bytes)) ||
-        (!description && (pixels || capacity))) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    if(description && description->kind!=CONSOLE_VIDEO_TEXT_CONFIGURATION) {
-        BOOL queued=FALSE;
-        error=offer_video(client,description,pixels,&queued);
-        if(error || queued){SetLastError(error);return !error;}
-    } else {
-        /* Format/retirement controls cannot overtake an older frame. Route
-         * owner re-enables async publication after its next software tick. */
-        error=worker_base_publication_active(client->publisher,FALSE);
-        if(error){SetLastError(error);return FALSE;}
-    }
-    error=compat_console_send_video(&client->endpoint,description,pixels);
-    SetLastError(error);
-    return error==ERROR_SUCCESS;
 }
 
 static BOOL input_operation(HANDLE input,INPUT_RECORD *records,uint64_t *receipts,DWORD length,LPDWORD read,BOOL peek,

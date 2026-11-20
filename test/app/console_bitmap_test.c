@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
-#include "ntvdm-exe/win32/console_bitmap.h"
+#include "compat/include/console_bitmap.h"
 #define REQUIRE(x) do { if (!(x)) { printf("FAIL line=%d error=%lu\n",__LINE__,GetLastError()); return 1; } } while (0)
 
 typedef struct lock_case { HANDLE mutex, ready, release; BOOL abandon; } lock_case;
