@@ -16,7 +16,7 @@ $null=New-Item -ItemType Directory $out
 try {
  $commands=@(& $Ninja -C $provider -t commands wow32.dll)
  if($LASTEXITCODE){throw 'Cannot inspect selected provider graph'}
- $pattern=if($ShellException){'/wow_hook_callback\.c$'}else{'/kernel/queue\.c$'}
+ $pattern=if($ShellException){'/wow_user_registration_bridge\.c$'}else{'/kernel/queue\.c$'}
  $compile=$commands|Where-Object {$_ -match $pattern}|Select-Object -Last 1
  $link=$commands|Where-Object {$_ -match '^link /nologo /machine:x86 /dll '}|Select-Object -Last 1
  if(!$compile -or !$link){throw 'Missing original queue or DLL link command'}

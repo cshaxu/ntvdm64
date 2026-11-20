@@ -1,0 +1,70 @@
+{
+  "packet": "M0 T483 S14 P108",
+  "baseline": "dabeefe035c48a34637981d76700bd64687b3cfe",
+  "eliminated_C_ids": [
+    "C0112",
+    "C0401"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 531,
+    "open": 37,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "scope": "Move the WOW hook callback scope and wkman-only task wait/cleanup declarations into B. Keep original hook stubs, table/conversion and thread-local hook state in C.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "final_product_symbols": {
+    "_WU32StdHookProc@16": "0001:0006bba0       _WU32StdHookProc@16        1006cba0 f   wow_hook_callback.obj",
+    "_WowOriginalStdHookProc@16": "0001:00027710       _WowOriginalStdHookProc@16 10028710 f   wowhooks.obj",
+    "_wow_user_msg_wait@20": "0001:00064fc0       _wow_user_msg_wait@20      10065fc0 f   wow_user_task_lifecycle.obj",
+    "_W32FreeTask@4": "0001:0006c500       _W32FreeTask@4             1006d500 f   wow_task_cleanup_entry.obj"
+  },
+  "compiled_ownership": {
+    "objects": [
+      {
+        "graph": "wow32",
+        "object": "obj/compat/wow_hook_callback.obj",
+        "source": "src/compat/wow_hook_callback.c",
+        "sha256": "d9095e437f6064781010b95e620161c81ef18c5fd79b87df1cd42488e72429fd"
+      }
+    ],
+    "counts": {
+      "CRT": 4,
+      "mvdm-host": 6,
+      "TLS ABI absolute": 1,
+      "compat": 10
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "aed60579-28c2-4eac-87a3-ffe9a0a4ad50",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "fixture_repair": "The shared common-dialog fixture first failed linking after correcting the migrated object path. Its focused W32FreeTask test now supplies an unallocated Winsock TLS slot and a failing unexpected-call control; the product Winsock path is unchanged.",
+  "status": "Cached full build, dual publication, targeted WOW fixtures, real Win16 hook integration and structural gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "b-compiled-candidates.json": "463430b1444b1bb08b47a55b6239137a2e3f04168fbc6e6149755450b122d0cb",
+    "hook-deps.txt": "88633a4f537308d66a6c954eed998ebfa9ee705cb95d4fc6734113527b2d0131",
+    "wkman-deps.txt": "7050c00ba5e948ae9bf64368d09e25c1b849416d4df78dbd264baa728f4a96c5",
+    "steps.txt": "ee8a9c7213bffe14d46468b50831b6b752d6e51ddac1f990aa6c492444512d1a",
+    "probes.out": "2c704c983d4c03c0568c3927e8cb0ab167c8a12e6f1a087cffdabcc4c8ef78fa",
+    "common-dialog/build.log": "93870e70bc19c3b591219bf64bc76c317434e1ebbeba27fdddd5c3c574a56dd8",
+    "common-dialog-final.out": "e7d655e31fd38fbb67e22674b72b4910886ee0184f85e944042d1580a72cc1f8",
+    "task-lifecycle.out": "5113ca4dcf4755721bac895190c841f57d5907bba78fcb8c0e5eacf5a1c7daad",
+    "shell-diagnostic/diagnostic-manifest.json": "96ab4e3e9ddcd3d300345623c0f1bf81e3cede517fdeccb2b06cc4b984c7f211",
+    "final-checks.out": "52f8d70fbdc4a095ec721beb728c51ecfe9cb24579acb3f9a29020692828a377",
+    "guest-hook/result.txt": "c26fd90632df5f3ecb944807e82d2c4c57f5a81fab7acbf2c597665adc8db0dd"
+  }
+}

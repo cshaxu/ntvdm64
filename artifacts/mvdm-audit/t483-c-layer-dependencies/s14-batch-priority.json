@@ -3,8 +3,8 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "eliminated": 529,
-    "open": 39,
+    "eliminated": 531,
+    "open": 37,
     "supporting-evidence": 43,
     "eliminated-transitive": 6
   },
@@ -307,32 +307,12 @@
     },
     {
       "kind": "header",
-      "provider": "src/wow32-dll/include/wow_native_process.h",
-      "open_ids": [
-        "C0112"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
       "provider": "src/wow32-dll/include/wow_task_termination.h",
       "open_ids": [
         "C0119"
       ],
       "count": 1,
       "symbols": []
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_hook_callback.c",
-      "open_ids": [
-        "C0401"
-      ],
-      "count": 1,
-      "symbols": [
-        "WU32StdHookProc"
-      ]
     }
   ],
   "priority_batches": [
@@ -402,5 +382,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P107"
+  "updated_by": "T483 S14 P108"
 }

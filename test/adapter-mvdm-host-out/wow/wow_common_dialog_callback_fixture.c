@@ -27,6 +27,15 @@ static wow_window_resource_destroy resource_owner;
 wow_user_runtime_thread *WINAPI wow_user_runtime_current(void)
 { return unbound ? NULL : &startup_binding; }
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, "FAIL line=%d\n", __LINE__); } } while (0)
+/* This fixture owns no Winsock task. Async retirement belongs to its
+ * separate product path and must not be reached through W32FreeTask here. */
+DWORD WWS32TlsSlot = TLS_OUT_OF_INDEXES;
+VOID WWS32CancelAsyncRequestsForTask(DWORD serial)
+{
+    (void)serial;
+    CHECK(FALSE);
+}
+
 /* Ordering-only boundary doubles, not HWND or original-resource models. */
 BOOL WINAPI wow_window_words_bind_resource_destroy(HWND w,wow_window_resource_destroy owner)
 {

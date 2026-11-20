@@ -3,7 +3,6 @@
 #include "wow_user_private_access.h"
 #include "wow_window_words_binding.h"
 #include "ntvdm-exe/session/session.h"
-#include "wow_native_process.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_idle_hook_binding.h"
 #include "compat/include/wow32_provider_private.h"

@@ -76,6 +76,7 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     'wow_shell_callback.c',
     'wow_timer_callback.c',
     'wow_user_thunk_scope.c',
+    'wow_hook_callback.c',
     'wow_dialog_memory.c',
     'wow_dialog_native_bindings.c',
     'wow_dialog_pointer.c',

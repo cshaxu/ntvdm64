@@ -539,7 +539,7 @@ if ($CallbackGraphOverlap) {
 if ($HookGraphOverlap) {
     # The real hook wrapper is paused after callback admission, immediately
     # before its real graph publication; original hook dispatch is retained.
-    $source = [IO.File]::ReadAllText((Join-Path $repo 'src/wow32-dll/source/wow_hook_callback.c'))
+    $source = [IO.File]::ReadAllText((Join-Path $repo 'src/compat/wow_hook_callback.c'))
     $needle = '        if (!wow_user_window_refresh_payload(creation ? (HWND)wp : NULL,'
     if (($source.Split(@($needle),[StringSplitOptions]::None)).Count -ne 2) { throw 'Hook graph boundary changed' }
     $after = '                roots, root_count)) __leave;'
@@ -552,7 +552,7 @@ if ($HookGraphOverlap) {
     $hookCompile = $hookCompile -replace '/Fo\S+\s+\S+wow_hook_callback\.c$', ('/Fo"'+$out+'\hook-graph-probe.obj" "'+$instrumented+'"')
     if ($hookCompile -notmatch 'hook-graph-probe\.c"$') { throw 'Hook compile substitution failed' }
     Invoke-Build $hookCompile
-    $original = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_hook_callback\.obj$' })
+    $original = @($objects | Where-Object { $_ -match '[\\/]compat[\\/]wow_hook_callback\.obj$' })
     if ($original.Count -ne 1) { throw 'Expected exactly one hook owner' }
     $objects = @($objects | Where-Object { $_ -notin $original })
     $parentObjects += Join-Path $out 'hook-graph-probe.obj'

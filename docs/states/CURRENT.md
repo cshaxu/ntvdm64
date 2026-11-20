@@ -59,7 +59,8 @@ P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-cons
 P105 [WOW callbacks](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-callback-owner.json) delivered C -2.
 P106 [SoftPC storage](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-softpc-xt-owner.json) delivered C -1.
 P107 [WOW thunk scopes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-thunk-owner.json) delivered C -4.
-Delivered: B 8 known calls; C 39 open (22 functions, 1 data).
+P108 [WOW hook and task wait](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-hook-owner.json) delivered C -2.
+Delivered: B 8 known calls; C 37 open (21 functions, 1 data).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same
