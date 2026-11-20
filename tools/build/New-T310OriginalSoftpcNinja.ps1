@@ -137,7 +137,7 @@ $redirDllBindingRoot = Join-Path $redirDllRoot 'source'
 $adapterVddRoot = Join-Path $root 'src/ntvdm-exe/vdd'
 $ccpuVectorSource = Join-Path $root 'src/compat/mvdm_ccpu_vector_defaults.c'
 $ccpuActivitySource = Join-Path $root 'src/compat/mvdm_ccpu_activity_check.c'
-$ccpuProductIncludeRoot = Join-Path $adapterSoftpcRoot 'include/generated/x86/prod'
+$ccpuProductIncludeRoot = Join-Path $root 'src/compat/include/generated/x86/prod'
 $ccpuManifest = Join-Path $ccpuRoot 'sources'
 $biosManifest = Join-Path $biosRoot 'sources'
 $keymouseManifest = Join-Path $keymouseRoot 'sources'
@@ -280,6 +280,7 @@ $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
+$compatCpuAdapterNames = @('mvdm_keyboard_reset.c','mvdm_softpc_descriptor_fields.c')
 $compatMouseNames = @('mvdm_softpc_mouse_input.c','mvdm_softpc_mouse_bridge.c','mvdm_softpc_mouse_guest.c')
 $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c',
                          'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
@@ -365,7 +366,7 @@ if (!(Test-Path -LiteralPath $hostCompatSource)) {
     throw "Required OpenNT host-compat source missing: $hostCompatSource"
 }
 foreach ($name in $adapterSoftpcNames) {
-    $sourceRoot = if ($name -in $compatMouseNames -or $name -eq 'mvdm_softpc_text_video.c') { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
+    $sourceRoot = if ($name -in $compatMouseNames -or $name -in $compatCpuAdapterNames -or $name -eq 'mvdm_softpc_text_video.c') { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
     if (!(Test-Path -LiteralPath (Join-Path $sourceRoot $name))) { throw "Required SoftPC adapter source missing: $name" }
 }
 foreach ($name in $adapterRedirNames) {
@@ -705,7 +706,7 @@ $includeRootPaths = @(
     # The selected x86 product generator output is absent from the source
     # union, so it remains a bounded SoftPC adapter carrier, not a new mirror
     # file under mvdm.
-    'src/ntvdm-exe/softpc/include/generated/x86/prod',
+    'src/compat/include/generated/x86/prod',
     'src/mvdm-host/xms.486',
     # DPMI's original precompiled header owns dpmidata.h beside its source
     # bodies.  Select the original directory rather than copying the carrier
@@ -995,13 +996,13 @@ $cvidcObjects = foreach ($name in $cvidcNames) {
     $graph.Add('build ' + $object + ': ' + $rule + ' ' + (NinjaPath (Join-Path $cvidcRoot $name)))
     $object
 }
-$cvidcVectorBindingSource = Join-Path $adapterSoftpcRoot 'mvdm_cvidc_vector_binding.c'
+$cvidcVectorBindingSource = Join-Path $root 'src/compat/mvdm_cvidc_vector_binding.c'
 $cvidcCpuBindingInclude = Join-Path $build 'generated/cvidc_cpu_binding.inc'
 $cvidcCpuBindingGenerator = Join-Path $root 'tools/build/GenerateCvidcCpuBinding.mjs'
 & $NodeExecutable $cvidcCpuBindingGenerator $cvidcCpuBindingInclude (Split-Path $cvidcRoot -Parent)
 if ($LASTEXITCODE -ne 0) { throw 'C-VID CPU binding generation failed.' }
 $graph.Add('build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc_cvidc_rule ' + (NinjaPath $cvidcVectorBindingSource) + ' | ' + (NinjaPath $cvidcCpuBindingInclude) + ' generated/cvidc_selected_providers.inc')
-$graph.Add('  cvidc_rule_cflags = ' + $authoredCommonFlags + ($cvidcFirstIncludeRoots -join ' ') + ' ' + $cvidcGeneratedInclude)
+$graph.Add('  cvidc_rule_cflags = /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT ' + (($cvidcFirstRootPaths | Where-Object { $_ -match '^src(?:/(?:compat|mvdm-host|non-mvdm)(?:/|$)|$)' } | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }) -join ' ') + ' ' + $cvidcGeneratedInclude)
 $cvidcObjects += 'obj/cvidc/mvdm_cvidc_vector_binding.obj'
 $cvidcAccessorSource = Join-Path $root 'src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c'
 $graph.Add('build obj/cvidc/vglob.obj: cc_cvidc_rule ' + (NinjaPath $cvidcAccessorSource))
@@ -1027,7 +1028,7 @@ $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $dosRoot $name))
 }
 $demCommandFlags = $baseFlags
 foreach ($unusedRoot in @('src/common/base_srv', 'src/ntvdm-exe/command/include',
-    'src/ntvdm-exe/softpc/include', 'src/ntvdm-exe/softpc/include/generated/x86/prod',
+    'src/ntvdm-exe/softpc/include', 'src/compat/include/generated/x86/prod',
     'src/vdmredir-dll/include', 'src/wow32-dll/include')) {
     $demCommandFlags = $demCommandFlags.Replace(' /I "' +
         (NinjaPath (Join-Path $root $unusedRoot)) + '"', '')
@@ -1243,11 +1244,12 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $object = 'obj/adapter-softpc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $selectedVideoInputs = if ($name -eq 'mvdm_softpc_text_video.c') { ' | generated/text_video_gfx.h generated/text_video_gvi.h generated/text_video_egagraph.h generated/text_video_nt_graph.h' } elseif ($name -eq 'v7_pointer_binding.c') { ' | generated/v7_selected_plane.h' } else { '' }
     $mouseAdapter = $name -in $compatMouseNames
+    $cpuAdapter = $name -in $compatCpuAdapterNames
     $textAdapter = $name -eq 'mvdm_softpc_text_video.c'
-    $sourceRoot = if ($mouseAdapter -or $textAdapter) { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
+    $sourceRoot = if ($mouseAdapter -or $textAdapter -or $cpuAdapter) { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sourceRoot $name)) + $selectedVideoInputs)
     $videoInclude = if ($name -eq 'v7_pointer_binding.c') { ' ' + $cvidcGeneratedInclude } else { '' }
-    $unitFlags = if ($name -eq 'mvdm_softpc_mouse_guest.c') { $compatCcpuFlags } elseif ($mouseAdapter) { $libraryFlags } elseif ($textAdapter) { $compatTextVideoFlags } else { $authoredSoftpcFlags + $videoInclude }
+    $unitFlags = if ($cpuAdapter -or $name -eq 'mvdm_softpc_mouse_guest.c') { $compatCcpuFlags } elseif ($mouseAdapter) { $libraryFlags } elseif ($textAdapter) { $compatTextVideoFlags } else { $authoredSoftpcFlags + $videoInclude }
     $graph.Add('  cflags = ' + $unitFlags)
     $object
 }
@@ -2708,7 +2710,7 @@ sources = @('src/common/protocol/native_hook.h', 'src/nthook-dll/hook.h', 'src/n
     }
     selectedX86GeneratedInputs = @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h' | ForEach-Object {
         [ordered]@{
-            path = 'src/ntvdm-exe/softpc/include/generated/x86/prod/' + $_
+            path = 'src/compat/include/generated/x86/prod/' + $_
             sha256 = Get-NodeSha256 (Join-Path $ccpuProductIncludeRoot $_)
         }
     })

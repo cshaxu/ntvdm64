@@ -51,7 +51,7 @@ for (const { slot, provider } of providerSlots) {
   }
 }
 
-const binder = read('src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c');
+const binder = read('src/compat/mvdm_cvidc_vector_binding.c');
 if (/static\s+IUH\s+mvdm_cvidc_jump_restart/.test(binder) ||
     !/extern\s+ULONG\s+qevJumpRestart\s*;/.test(binder)) {
   throw new Error('C-VID binder must not own a second quick-event restart value');

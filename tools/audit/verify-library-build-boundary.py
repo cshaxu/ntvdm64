@@ -41,6 +41,9 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     "wow_common_dialog_callback.c",
     'dbg_registers.c',
     'mvdm_softpc_effective_address.c',
+    'mvdm_cvidc_vector_binding.c',
+    'mvdm_keyboard_reset.c',
+    'mvdm_softpc_descriptor_fields.c',
     'mvdm_softpc_wow_page_domain.c',
     'wow_bitmap_bindings.c',
     'wow_button_lifetime.c',
@@ -118,6 +121,9 @@ def generated_inputs(directory, owner, source):
     if owner == "compat" and source == "mvdm_softpc_text_video.c":
         return {directory / "generated" / f"text_video_{name}.h"
                 for name in ("gfx", "gvi", "egagraph", "nt_graph")}
+    if owner == "compat" and source == "mvdm_cvidc_vector_binding.c":
+        return {directory / "generated" / name for name in (
+            "cvidc_cpu_binding.inc", "cvidc_selected_providers.inc")}
     return set()
 
 

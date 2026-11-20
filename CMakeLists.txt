@@ -71,7 +71,7 @@ set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/ntvdm-export-ordinals.csv"
   "${CMAKE_SOURCE_DIR}/src/non-mvdm/base/win32/client/vdm.c"
   "${CMAKE_SOURCE_DIR}/tools/build/GenerateCvidcCpuBinding.mjs"
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+  "${CMAKE_SOURCE_DIR}/src/compat/include/generated/x86/prod/sas4gen.h"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/c2cpusad.h"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/evidgen.h"

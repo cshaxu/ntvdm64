@@ -37,10 +37,10 @@ if ($Contract -eq 'vdd') {
     $negativeSize = 8
 } elseif ($Contract -eq 'umb') {
     $original = Join-Path $repo 'src/mvdm-host/softpc.new/host/src/nt_umb.c'
-    $headers = @('src/mvdm-host/softpc.new/host/inc/insignia.h','src/mvdm-host/softpc.new/host/inc/host_def.h','src/mvdm-host/softpc.new/base/inc/sas.h','src/mvdm-host/softpc.new/base/inc/umb.h','src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h') | ForEach-Object { Join-Path $repo $_ }
+    $headers = @('src/mvdm-host/softpc.new/host/inc/insignia.h','src/mvdm-host/softpc.new/host/inc/host_def.h','src/mvdm-host/softpc.new/base/inc/sas.h','src/mvdm-host/softpc.new/base/inc/umb.h','src/compat/include/generated/x86/prod/sas4gen.h') | ForEach-Object { Join-Path $repo $_ }
     $object = Join-Path $WorkerBuild 'obj/host/nt_umb.obj'
     $negativeDefine = 'MVDM_UMB_EXPECT_NODE_BYTES'
-    $extraFlags = '/DNTVDM /DSPC386 /DANSI /DCPU_40_STYLE /DCCPU /DPROD /I"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '" /I"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '" /I"' + (Join-Path $repo 'src/ntvdm-exe/softpc/include/generated/x86/prod') + '" '
+    $extraFlags = '/DNTVDM /DSPC386 /DANSI /DCPU_40_STYLE /DCCPU /DPROD /I"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '" /I"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '" /I"' + (Join-Path $repo 'src/compat/include/generated/x86/prod') + '" '
 } elseif ($Contract -eq 'qevnt') {
     $original = Join-Path $repo 'src/mvdm-host/softpc.new/base/system/qevnt.c'
     $headers = @(Join-Path $repo 'src/mvdm-host/softpc.new/host/inc/host_qev.h')

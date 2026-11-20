@@ -64,7 +64,7 @@ const writeChanged = (file, content) => {
 };
 writeChanged(output, text);
 const providersOutput = path.join(path.dirname(output), 'cvidc_selected_providers.inc');
-const sasVectorSource = fs.readFileSync(path.join(sourceRoot, '..', '..', '..', 'ntvdm-exe', 'softpc', 'include', 'generated', 'x86', 'prod', 'sas4gen.h'), 'utf8');
+const sasVectorSource = fs.readFileSync(path.join(sourceRoot, '..', '..', '..', 'compat', 'include', 'generated', 'x86', 'prod', 'sas4gen.h'), 'utf8');
 const sasVector = sasVectorSource.match(/^[\s\S]*?extern\s+struct\s+SasVector\s+Sas\s*;/)?.[0];
 if (!sasVector || /^\s*#\s*(if|ifdef|ifndef|elif)\b/m.test(sasVector)) throw new Error('Original SAS vector prefix changed');
 const providersText = '/* Original selected CPU/SAS declarations; generated, do not edit. */\n' + sasEnum + '\n' + sasVector + '\n' + cpuDeclarations.join('\n') + '\n';

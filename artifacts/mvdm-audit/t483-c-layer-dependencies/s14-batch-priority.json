@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 95,
+    "open": 87,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 473
+    "eliminated": 481
   },
   "provider_groups": [
     {
@@ -358,51 +358,6 @@
       "symbols": []
     },
     {
-      "kind": "include-root",
-      "provider": "src/ntvdm-exe/softpc/include/generated/x86/prod",
-      "open_ids": [
-        "C0142"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/ntvdm-exe/softpc/include/generated/x86/prod/PigReg_c.h",
-      "open_ids": [
-        "C0030"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
-      "open_ids": [
-        "C0031"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
-      "open_ids": [
-        "C0032"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h",
-      "open_ids": [
-        "C0033"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
       "kind": "header",
       "provider": "src/ntvdm-exe/softpc/include/mvdm_softpc_termination.h",
       "open_ids": [
@@ -410,39 +365,6 @@
       ],
       "count": 1,
       "symbols": []
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
-      "open_ids": [
-        "C0193"
-      ],
-      "count": 1,
-      "symbols": [
-        "mvdm_cvidc_bind_vectors"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/softpc/mvdm_keyboard_reset.c",
-      "open_ids": [
-        "C0204"
-      ],
-      "count": 1,
-      "symbols": [
-        "mvdm_keyboard_reset_pending_irq"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/softpc/mvdm_softpc_descriptor_fields.c",
-      "open_ids": [
-        "C0214"
-      ],
-      "count": 1,
-      "symbols": [
-        "retrieve_descr_fields"
-      ]
     },
     {
       "kind": "symbol",
@@ -840,5 +762,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P92"
+  "updated_by": "T483 S14 P93"
 }

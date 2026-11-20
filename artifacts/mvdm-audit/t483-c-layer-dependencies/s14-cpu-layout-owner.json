@@ -1,0 +1,106 @@
+{
+  "packet": "M0 T483 S14 P93",
+  "baseline": "035f54c0b7b724c74ec37e9ce4717ebc99f0d9e4",
+  "eliminated_C_ids": [
+    "C0030",
+    "C0031",
+    "C0032",
+    "C0033",
+    "C0142",
+    "C0193",
+    "C0204",
+    "C0214"
+  ],
+  "eliminated_B_ids": [],
+  "scope": "B owns the C-VID vector assembly, CPU40 descriptor projection, keyboard IRQ reset adapter, and three selected generated declaration carriers. C retains the decoder, PIC/EOI and original vector backing. The same linked objects and calling ABI remain in use.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "open": 87,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "eliminated": 481
+  },
+  "providers": {
+    "msvc-x86-release/worker": {
+      "mvdm_cvidc_bind_vectors": "0001:00044320       _mvdm_cvidc_bind_vectors   00445320 f   original-softpc-cvidc:mvdm_cvidc_vector_binding.obj",
+      "mvdm_keyboard_reset_pending_irq": "0001:0011bb30       _mvdm_keyboard_reset_pending_irq 0051cb30 f   softpc-bindings:mvdm_keyboard_reset.obj",
+      "retrieve_descr_fields": "0001:0018be50       _retrieve_descr_fields     0058ce50 f   softpc-bindings:mvdm_softpc_descriptor_fields.obj"
+    },
+    "msvc-x64-release/worker-reference-x86": {
+      "mvdm_cvidc_bind_vectors": "0001:00044320       _mvdm_cvidc_bind_vectors   00445320 f   original-softpc-cvidc:mvdm_cvidc_vector_binding.obj",
+      "mvdm_keyboard_reset_pending_irq": "0001:0011bb30       _mvdm_keyboard_reset_pending_irq 0051cb30 f   softpc-bindings:mvdm_keyboard_reset.obj",
+      "retrieve_descr_fields": "0001:0018be50       _retrieve_descr_fields     0058ce50 f   softpc-bindings:mvdm_softpc_descriptor_fields.obj"
+    }
+  },
+  "file_identity": {
+    "src/compat/include/generated/x86/prod/PigReg_c.h": {
+      "sha256": "fac49a3797900896f2c84a9c7484cb456312511482d80edf08305b5f034ec784",
+      "baseline_sha256": "fac49a3797900896f2c84a9c7484cb456312511482d80edf08305b5f034ec784",
+      "change": "byte-identical"
+    },
+    "src/compat/include/generated/x86/prod/gdpvar.h": {
+      "sha256": "7b942fbf7d32c8f4f274f5cadf8612c15a67c3235488b4476e5a00970c058bb0",
+      "baseline_sha256": "7b942fbf7d32c8f4f274f5cadf8612c15a67c3235488b4476e5a00970c058bb0",
+      "change": "byte-identical"
+    },
+    "src/compat/include/generated/x86/prod/sas4gen.h": {
+      "sha256": "7f4520389338f9d265ce4d4a3e72980356687aebc9ed836b4707d5a250519afa",
+      "baseline_sha256": "7f4520389338f9d265ce4d4a3e72980356687aebc9ed836b4707d5a250519afa",
+      "change": "byte-identical"
+    },
+    "src/compat/include/mvdm_cvidc_vector_binding.h": {
+      "sha256": "3efd20a777331338a0657a81a7ded9deac0efa9b7bcc71e55d959611d2d2ae7c",
+      "baseline_sha256": "3efd20a777331338a0657a81a7ded9deac0efa9b7bcc71e55d959611d2d2ae7c",
+      "change": "byte-identical"
+    },
+    "src/compat/mvdm_cvidc_vector_binding.c": {
+      "sha256": "227ac6f924d811319514d2a79e3f923fef6630a2c64960e582daf211cef1c2fd",
+      "baseline_sha256": "a3d6f35fef8bae86a04b49ecc2bc4ece34d103c80f31b4248d403035831c3364",
+      "change": "explicit original nt.h include replaces build force-include"
+    },
+    "src/compat/mvdm_keyboard_reset.c": {
+      "sha256": "805fae267bac53acb8667c59ebed80036eb87a2655b4896dda9a51702eb7421d",
+      "baseline_sha256": "805fae267bac53acb8667c59ebed80036eb87a2655b4896dda9a51702eb7421d",
+      "change": "byte-identical"
+    },
+    "src/compat/mvdm_softpc_descriptor_fields.c": {
+      "sha256": "683e5e835b48d7918621e6c72279807f441ad4dc0c5e7dca248f4b9621876d3d",
+      "baseline_sha256": "683e5e835b48d7918621e6c72279807f441ad4dc0c5e7dca248f4b9621876d3d",
+      "change": "byte-identical"
+    }
+  },
+  "compiled_ownership": {
+    "objects": 12,
+    "counts": {
+      "mvdm-host": 378,
+      "CRT": 8,
+      "not selected in final link": 378
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "6c404508-1294-4d68-ad96-abcca3ea37be",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, C-VID, keyboard/Console and DOS VGA tests and final gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "f5ac3d7e955b2704c3f7c6f7af1cbb42b7f6b85ab72a99b9db336f9dedb1eabc",
+    "release-and-test.out": "ff8b96535e7d7acbc85a212ca872d1bce37d27396fbbbcb6fa30347b8baa7158",
+    "final-checks.out": "773b14733a4d2ca337a52ead9317b0764da0f3867692ee81e2a61252871c0251",
+    "input-batch/run.log": "fe563edecffb9f6577ca5da86824f301b0ddf1c729adcdf44f45ba38d7c53108",
+    "b-compiled-candidates.json": "4db1ea95a3874b2bec918e5b6bc6ae6da0139e594bb8ed26b7c5059dfa517f38"
+  },
+  "fixture_link_note": "Existing C-VID fixture link uses /FORCE:MULTIPLE to retain its broker test doubles. The product link does not use this flag.",
+  "prior_input_delivery": "s14-console-input-ready-owner.json"
+}

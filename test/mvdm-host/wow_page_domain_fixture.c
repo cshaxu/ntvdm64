@@ -15,7 +15,7 @@
 #endif
 
 #include "ntvdm-exe/session/session.h"
-#include "ntvdm-exe/softpc/include/mvdm_cvidc_vector_binding.h"
+#include "compat/include/mvdm_cvidc_vector_binding.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 #include "compat/include/physical_mapping_host.h"
 #include "compat/include/mvdm_softpc_wow_page_domain.h"

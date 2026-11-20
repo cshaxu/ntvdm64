@@ -41,7 +41,7 @@ $includes = @(
     'src/non-mvdm/private/windows/inc',
     'src/non-mvdm/public/ddk/inc',
     'src/mvdm-host/inc',
-    'src/ntvdm-exe/softpc/include/generated/x86/prod',
+    'src/compat/include/generated/x86/prod',
     'src/mvdm-host/softpc.new/base/ccpu386',
     'src/mvdm-host/softpc.new/host/inc',
     'src/mvdm-host/softpc.new/base/cvidc',

@@ -5,6 +5,7 @@
  * tables; bind the video table before config and bind the complete vectors at
  * C-VID's existing setup_vga_globals assembly point.
  */
+#include "non-mvdm/public/sdk/inc/nt.h"
 #include <insignia.h>
 #include <host_def.h>
 #include "evidgen.h"
