@@ -1272,14 +1272,6 @@ WOW_NATIVE_MAPPED_CALL(BOOL, BringWindowToTop, (HWND w), (native), FALSE,
     FALSE, NULL)
 WOW_NATIVE_MAPPED_CALL(BOOL, FlashWindow, (HWND w, BOOL invert),
     (native, invert), FALSE, FALSE, NULL)
-WOW_NATIVE_MAPPED_CALL(int, ExcludeUpdateRgn, (HDC dc, HWND w),
-    (dc, native), ERROR, FALSE, NULL)
-WOW_NATIVE_MAPPED_CALL(HANDLE, GetPropA, (HWND w, LPCSTR name),
-    (native, name), NULL, FALSE, NULL)
-WOW_NATIVE_MAPPED_CALL(BOOL, SetPropA, (HWND w, LPCSTR name, HANDLE value),
-    (native, name, value), FALSE, FALSE, NULL)
-WOW_NATIVE_MAPPED_CALL(HANDLE, RemovePropA, (HWND w, LPCSTR name),
-    (native, name), NULL, FALSE, NULL)
 WOW_NATIVE_MAPPED_CALL(HWND, GetParent, (HWND w), (native), NULL, FALSE, result)
 WOW_NATIVE_MAPPED_CALL(BOOL, MoveWindow,
     (HWND w, int x, int y, int cx, int cy, BOOL paint),
@@ -1457,12 +1449,8 @@ WOW_NATIVE_MAPPED_CALL(BOOL, ShowCaret, (HWND w), (native), FALSE, TRUE,
 WOW_NATIVE_MAPPED_CALL(BOOL, InvalidateRect,
     (HWND w, const RECT *area, BOOL erase), (native, area, erase), FALSE, TRUE,
     NULL)
-WOW_NATIVE_MAPPED_CALL(BOOL, InvalidateRgn, (HWND w, HRGN region, BOOL erase),
-    (native, region, erase), FALSE, TRUE, NULL)
 WOW_NATIVE_MAPPED_CALL(BOOL, ValidateRect, (HWND w, const RECT *area),
     (native, area), FALSE, TRUE, NULL)
-WOW_NATIVE_MAPPED_CALL(BOOL, ValidateRgn, (HWND w, HRGN region),
-    (native, region), FALSE, TRUE, NULL)
 WOW_NATIVE_MAPPED_CALL(BOOL, GetUpdateRect, (HWND w, LPRECT area, BOOL erase),
     (native, area, erase), FALSE, FALSE, NULL)
 WOW_NATIVE_MAPPED_CALL(int, GetUpdateRgn, (HWND w, HRGN region, BOOL erase),

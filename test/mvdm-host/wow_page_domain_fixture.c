@@ -368,18 +368,18 @@ static void verify_native_mutation_group(ULONG delta)
                 EqualRect(&window_expected, &window_actual));
             BORROW_CHECK(GetClassNameA(short_child, name, sizeof(name)) > 0 &&
                 !strcmp(name, wc.lpszClassName));
-            BORROW_CHECK(wow_native_SetPropA(short_child, "S9-prop", value));
-            BORROW_CHECK(wow_native_GetPropA(short_child, "S9-prop") == value);
-            BORROW_CHECK(wow_native_RemovePropA(short_child, "S9-prop") == value);
-            BORROW_CHECK(!wow_native_GetPropA(short_child, "S9-prop"));
+            BORROW_CHECK(SetPropA(short_child, "S9-prop", value));
+            BORROW_CHECK(GetPropA(short_child, "S9-prop") == value);
+            BORROW_CHECK(RemovePropA(short_child, "S9-prop") == value);
+            BORROW_CHECK(!GetPropA(short_child, "S9-prop"));
             {
                 ATOM atom = GlobalAddAtomA("S9-atom-property");
                 BORROW_CHECK(atom != 0);
                 if (atom) {
                     LPCSTR key = MAKEINTATOM(atom);
-                    BORROW_CHECK(wow_native_SetPropA(short_child, key, value));
-                    BORROW_CHECK(wow_native_GetPropA(short_child, key) == value);
-                    BORROW_CHECK(wow_native_RemovePropA(short_child, key) == value);
+                    BORROW_CHECK(SetPropA(short_child, key, value));
+                    BORROW_CHECK(GetPropA(short_child, key) == value);
+                    BORROW_CHECK(RemovePropA(short_child, key) == value);
                     BORROW_CHECK(GlobalDeleteAtom(atom) == 0);
                 }
             }
@@ -388,13 +388,13 @@ static void verify_native_mutation_group(ULONG delta)
                 &window_actual));
             BORROW_CHECK(window_actual.left == 11 && window_actual.top == 22 &&
                 window_actual.right == 33 && window_actual.bottom == 44);
-            BORROW_CHECK(!wow_native_SetPropA((HWND)(ULONG_PTR)0x12345678u,
+            BORROW_CHECK(!SetPropA((HWND)(ULONG_PTR)0x12345678u,
                 "S9-invalid", value));
             (void)wow_native_FlashWindow(short_child, FALSE);
             dc = GetDC(child);
             BORROW_CHECK(dc != NULL);
             if (dc) {
-                BORROW_CHECK(wow_native_ExcludeUpdateRgn(dc, short_child) != ERROR);
+                BORROW_CHECK(ExcludeUpdateRgn(dc, short_child) != ERROR);
                 BORROW_CHECK(ReleaseDC(child, dc));
             }
         }
@@ -499,9 +499,9 @@ static void verify_native_mutation_group(ULONG delta)
             BORROW_CHECK(wow_native_InvalidateRect(short_child, NULL, FALSE));
             BORROW_CHECK(wow_native_GetUpdateRect(short_child, &update, FALSE));
             BORROW_CHECK(wow_native_GetUpdateRgn(short_child, region, FALSE) != ERROR);
-            BORROW_CHECK(wow_native_ValidateRgn(short_child, NULL));
+            BORROW_CHECK(ValidateRgn(short_child, NULL));
             BORROW_CHECK(!GetUpdateRect(child, NULL, FALSE));
-            BORROW_CHECK(wow_native_InvalidateRgn(short_child, NULL, FALSE));
+            BORROW_CHECK(InvalidateRgn(short_child, NULL, FALSE));
             BORROW_CHECK(wow_native_ValidateRect(short_child, NULL));
             BORROW_CHECK(!GetUpdateRect(child, NULL, FALSE));
             if (region) BORROW_CHECK(DeleteObject(region));

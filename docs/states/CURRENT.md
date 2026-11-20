@@ -28,6 +28,14 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P74 [property/region original-call restoration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-property-owner.json)
+removes six F interceptions without replacement wrappers. Original C conversions
+remain; mirror delta0 points/0 lines, autonomous production code minus24 lines.
+Cached full builds, dual11 publication (package`c3263b90-7f08-44c1-ac69-4291c63dc496`),
+231 native assertions, real Win16 dialog8 phases, nested/terminal lifecycle and
+compiled boundaries passed. Ledger182 eliminated/386 open; priority105 roots.
+Final document checks and enclosing P74 commit/push provide the delivery receipt.
+
 P73 [native dialog/failure implementation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-dialog-owner.json)
 moves actual installed USER bindings and terminal diagnostics from F to B.
 Ten bodies retain identity after one private trace-helper rename; original

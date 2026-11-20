@@ -40,10 +40,6 @@ BOOL WINAPI wow_native_SetCursorPos(int, int);
 int WINAPI wow_native_ShowCursor(BOOL);
 BOOL WINAPI wow_native_DragDetect(HWND, POINT);
 BOOL WINAPI wow_native_FlashWindow(HWND, BOOL);
-int WINAPI wow_native_ExcludeUpdateRgn(HDC, HWND);
-HANDLE WINAPI wow_native_GetPropA(HWND, LPCSTR);
-BOOL WINAPI wow_native_SetPropA(HWND, LPCSTR, HANDLE);
-HANDLE WINAPI wow_native_RemovePropA(HWND, LPCSTR);
 HWND WINAPI wow_native_GetParent(HWND);
 HWND WINAPI wow_native_SetFocus(HWND w);
 HWND WINAPI wow_native_SetCapture(HWND);
@@ -83,9 +79,7 @@ BOOL WINAPI wow_native_SetCaretPos(int, int);
 BOOL WINAPI wow_native_HideCaret(HWND);
 BOOL WINAPI wow_native_ShowCaret(HWND);
 BOOL WINAPI wow_native_InvalidateRect(HWND, const RECT *, BOOL);
-BOOL WINAPI wow_native_InvalidateRgn(HWND, HRGN, BOOL);
 BOOL WINAPI wow_native_ValidateRect(HWND, const RECT *);
-BOOL WINAPI wow_native_ValidateRgn(HWND, HRGN);
 BOOL WINAPI wow_native_GetUpdateRect(HWND, LPRECT, BOOL);
 int WINAPI wow_native_GetUpdateRgn(HWND, HRGN, BOOL);
 BOOL WINAPI wow_native_UpdateWindow(HWND);
@@ -182,18 +176,12 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #define BeginPaint wow_native_BeginPaint
 #define EndPaint wow_native_EndPaint
 #define InvalidateRect wow_native_InvalidateRect
-#define InvalidateRgn wow_native_InvalidateRgn
 #define ValidateRect wow_native_ValidateRect
-#define ValidateRgn wow_native_ValidateRgn
 #define GetUpdateRect wow_native_GetUpdateRect
 #define GetUpdateRgn wow_native_GetUpdateRgn
 #define DragDetect wow_native_DragDetect
 #if defined(WOW_ORIGINAL_THUNK_BUILD)
 #define FlashWindow wow_native_FlashWindow
-#define ExcludeUpdateRgn wow_native_ExcludeUpdateRgn
-#define GetPropA wow_native_GetPropA
-#define SetPropA wow_native_SetPropA
-#define RemovePropA wow_native_RemovePropA
 #define GetParent wow_native_GetParent
 #endif
 #define CreateCaret wow_native_CreateCaret

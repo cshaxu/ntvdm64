@@ -1,0 +1,139 @@
+{
+  "baseline": "d8da21c63615e3781bf30c627680ef8c27184098",
+  "status": "P74 final code built, published and targeted-tested; enclosing commit/push is delivery receipt",
+  "potential_ids": {
+    "wow_native_ExcludeUpdateRgn": "C0528",
+    "wow_native_GetPropA": "C0535",
+    "wow_native_InvalidateRgn": "C0547",
+    "wow_native_RemovePropA": "C0552",
+    "wow_native_SetPropA": "C0567",
+    "wow_native_ValidateRgn": "C0584"
+  },
+  "decision": "Remove six F macro interceptions and keep original calls to modern USER,without B wrappers or new parameter-specific route.",
+  "original_reference": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "worktree_reference_files_clean": true,
+    "files": {
+      "windows/core/ntuser/kernel/update.c": {
+        "contract": "xxxInvalidateRect39-67 and xxxValidateRect77-100 explicitly include synchronous RDW_ERASENOW for NULL; xxxInvalidateRgn110-121 and xxxValidateRgn132-139 do not. _ExcludeUpdateRgn1398 onward clips a DC using current update region.",
+        "sha256": "f8d00a6b8d4107689a0f72449eb6c0d2abca3716e869d2fee9ea580a4297706f"
+      },
+      "windows/core/ntuser/kernel/winprop.c": {
+        "contract": "InternalSetProp39 onward and InternalRemoveProp98 onward own key/value list operations,no window-procedure callout or original WOW scheduler.",
+        "sha256": "e3af931266241e60715db12997b244add3d8aec3877e271c6d54af494e159e42"
+      },
+      "windows/core/ntuser/rtl/winprop.c": {
+        "contract": "_FindProp and _GetProp preserve atom/string and opaque hData semantics.",
+        "sha256": "d4828c03cdd867a00d87ce71e3d3a9c6649b61ddf04f685bda23b54455759ace"
+      },
+      "windows/core/ntuser/client/client.c": {
+        "contract": "ExcludeUpdateRgn1181-1188 retains DC conversion/native operation; no task handoff.",
+        "sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472"
+      }
+    }
+  },
+  "production_callers": {
+    "src/mvdm-host/wow32/wuser.c": [
+      "WU32GetProp retains HWND32/key conversion/HAND16 result",
+      "WU32SetProp explicitly forbids aliasing arbitrary data value",
+      "WU32RemoveProp retains original conversion/cleanup",
+      "WU32ExcludeUpdateRgn retains HDC32/HWND32 and integer result",
+      "WU32InvalidateRgn/WU32ValidateRgn retain region/window conversion and original return handling"
+    ]
+  },
+  "publication_contract": "These operations do not change the fields of mvdm_softpc_wow_window_observation: class,styles,geometry,relations or native identity. Properties stay in USER; update regions/DC clip are not copied-view state. Removing incidental graph refresh uses existing external-observation freshness contract; synchronous local creation/destruction/callback publications remain.",
+  "retained_counterexamples": [
+    "InvalidateRect and ValidateRect remain wrapped: original NULL case synchronously sends WM_ERASEBKGND/WM_NCPAINT; no new split path.",
+    "GetUpdateRect/GetUpdateRgn remain wrapped because erase paths can dispatch.",
+    "GetWindowThreadProcessId short-HWND normalization retains P72 negative-control evidence."
+  ],
+  "diagnostic": {
+    "root": "build/t483-s14-native-property-contract",
+    "result": "Initial widened exploratory probe exit1,4 assertions incorrectly assumed InvalidateRect on destroyed HWND must returnFALSE. Native resultTRUE for all4 forms; properties and six retained-candidate operations showed matching full/short forms and no callbacks.",
+    "resolution": "Do not treat bad exploratory expectation as a production bug or passing probe. Rect APIs are excluded from restoration based on concrete original NULL callback path; committed test asserts only final six-operation contract plus original P72 query controls."
+  },
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "autonomous_product_delta": {
+    "added": 0,
+    "deleted": 24
+  },
+  "verification_required": [
+    "cached full x86/x64/reference",
+    "dual11 publication",
+    "native live/dead/full/zero/signed/FFFF,string/atom,opaque data matrix",
+    "actual wuser object native imports,removed F names absent",
+    "real nested/terminal lifecycle",
+    "real Win16 dialog",
+    "compiled A/B and WOW boundaries",
+    "documentation and publication hashes",
+    "commit/push"
+  ],
+  "planned_package": "c3263b90-7f08-44c1-ac69-4291c63dc496",
+  "evidence_root": "build/t483-s14-property-owner",
+  "verification": {
+    "build": 0,
+    "deliver": 0,
+    "tests": 0,
+    "final-checks": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "c3263b90-7f08-44c1-ac69-4291c63dc496",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "results": {
+    "native_assertions": 231,
+    "native_errors": 0,
+    "guest_dialog": "WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+    "terminal_exit": 0,
+    "ledger": {
+      "excluded-diagnostic": 1,
+      "open": 386,
+      "supporting-evidence": 43,
+      "eliminated-transitive": 6,
+      "eliminated": 182
+    },
+    "priority_roots": 105
+  },
+  "run_processes": {
+    "build": {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "start": "2026-11-20T02:09:03.6752428Z",
+      "pid": 8052,
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-property-owner/build.ps1"
+    },
+    "deliver": {
+      "start": "2026-11-20T02:13:40.1325833Z",
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-property-owner/deliver.ps1",
+      "pid": 35608,
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe"
+    },
+    "tests": {
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-property-owner/tests.ps1",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "pid": 25596,
+      "start": "2026-11-20T02:14:30.2340278Z"
+    },
+    "final-checks": {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "start": "2026-11-20T02:19:39.1438447Z",
+      "pid": 11192,
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-property-owner/final-checks.ps1"
+    }
+  },
+  "tested_source_sha256": {
+    "src\\wow32-dll\\include\\wow_user_private_access.h": "ccf852c9136512b36fc5a83a4b355c1f19e118ebb0bd00a736f65664205da4b8",
+    "src\\wow32-dll\\source\\wow_user_task_lifecycle.c": "2f9a50db781d3008634819c79bc438ebeb93ac91efa63c214531a21579f0f292",
+    "test\\mvdm-host\\wow_page_domain_fixture.c": "d561649a1cc8accc0d56413b9ca7662f50d31f8942395e47d13523fea563cd04",
+    "test\\observation\\wow_native_query_contract.c": "f5b631ed35d68db67563025df32c73a144252d040bd8db0d542114b7a3ec8c3e",
+    "test\\observation\\verify-wow-native-query-contract.ps1": "3f280e9713cb92ce5f5aaac3c8d6064c729e0c0988bd1894df20625525446263"
+  }
+}

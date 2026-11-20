@@ -1,8 +1,8 @@
 # S14 migration readiness and counts
 
-Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68/P70/P72/P73 updates below supersede its
+Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68/P70/P72/P73/P74 updates below supersede its
 classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
-assigns all 392 currently open stable IDs to the existing ten chains.
+assigns all 386 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
 
@@ -14,11 +14,11 @@ assigns all 392 currently open stable IDs to the existing ten chains.
 | 4. console-mechanics | 50 | 7 | 0 | 0 | 57 |
 | 5. command-capture | 2 | 3 | 0 | 0 | 5 |
 | 6. launch-csr-completion | 19 | 4 | 0 | 0 | 23 |
-| 7. thread-lifecycle | 85 | 7 | 0 | 0 | 92 |
+| 7. thread-lifecycle | 79 | 7 | 0 | 0 | 86 |
 | 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
 | 9. native-user | 137 | 25 | 0 | 0 | 162 |
 | 10. original-helpers-build-abi | 13 | 6 | 11 | 1 | 31 |
-| Total | 323 | 57 | 11 | 1 | 392 |
+| Total | 317 | 57 | 11 | 1 | 386 |
 
 The historical 79-provider body-read census remains evidence; P68 removes one
 provider from the open implementation set. Recounting the remaining chain
@@ -147,3 +147,7 @@ remain at their caller, pending the separate C coordination migration.
 The failure provider is reached by109 of111 priority roots; moving it is a
 shared prerequisite, not elimination of those111 roots. Cached full build,
 dual11 publication and targeted lifecycle/real Win16 dialog tests pass.
+
+## P74 original property and region calls
+
+Six F interceptions removed; original C conversions remain. Ledger182 eliminated/386 open; priority105 roots. Mirror delta0 points/0 lines; autonomous production code minus24 lines. Cached full builds, dual11 publication,231 native assertions, nested/terminal lifecycle, real Win16 dialog8 phases and compiled boundaries passed. See [P74 evidence](s14-native-property-owner.json). Whole-chain ownership remains incomplete.
