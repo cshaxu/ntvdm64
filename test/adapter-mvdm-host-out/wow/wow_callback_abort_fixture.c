@@ -9,7 +9,7 @@
 #undef host_simulate
 #undef GetPModeVDMPointerAssert
 
-#include "common/wow/user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow_user_native_call.h"
 
 /* The complete F translation unit also owns native extensions. They are

@@ -8,7 +8,7 @@
 #include "wow_user_client_view_layout.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_task_lifecycle.h"
-#include "common/wow/user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow_class_client_bindings.h"
 #include "wow_user_object_bindings.h"
 #include "wow_task_order_bindings.h"

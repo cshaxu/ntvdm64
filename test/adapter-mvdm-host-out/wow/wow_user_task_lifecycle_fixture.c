@@ -384,7 +384,7 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
         CHECK(inner.execution.previous == &outer.execution);
         CHECK(wow_user_native_call_end(&inner));
         CHECK(!wow_task_execution_ready(thread) && outer.execution.active);
-        CHECK(!wow_user_runtime_unbind(binding) && GetLastError() == ERROR_BUSY);
+        CHECK(!wow_user_task_lifecycle_unbind(binding) && GetLastError() == ERROR_BUSY);
         CHECK(wow_user_runtime_current() == binding && binding->thread == thread);
         CHECK(wow_user_native_call_end(&outer));
         CHECK(wow_task_execution_ready(thread) && !outer.execution.active);
@@ -771,7 +771,7 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
          * terminal intent; this directly bound native fixture supplies the
          * same explicit input before abandoning its callback stack. */
         binding->terminal_exit = TRUE;
-        if (!wow_user_runtime_unbind(binding)) ExitProcess(94);
+        if (!wow_user_task_lifecycle_unbind(binding)) ExitProcess(94);
         if (!session_thread_unbind(test->session_owner)) ExitProcess(94);
         test->retired_during_send = TRUE;
         ExitThread(0);
@@ -844,7 +844,7 @@ static DWORD WINAPI cross_receiver(void *parameter)
 #else
     CHECK(DestroyWindow(test->window));
 #endif
-    CHECK(wow_user_runtime_unbind(&binding));
+    CHECK(wow_user_task_lifecycle_unbind(&binding));
     CHECK(session_thread_unbind(test->session_owner));
     return 0;
 }
@@ -1508,7 +1508,7 @@ int __cdecl main(int argc,char **argv)
         /* A genuinely live owned window must not lose its THREADINFO merely
          * because native-thread retirement was requested. This is a negative
          * safety check, not acceptance of exceptional thread cleanup. */
-        CHECK(!wow_user_runtime_unbind(&binding));
+        CHECK(!wow_user_task_lifecycle_unbind(&binding));
         CHECK(GetLastError() == ERROR_BUSY);
         CHECK(IsWindow(native_window));
         CHECK(wow_user_runtime_current() == &binding);
@@ -1522,7 +1522,7 @@ int __cdecl main(int argc,char **argv)
         CHECK(GetLastError() == ERROR_INVALID_WINDOW_HANDLE);
         CHECK(lifecycle.threads == task && binding.thread == thread);
         CHECK(!binding.exclusive_held && lifecycle.cleanup.thread == NULL);
-        CHECK(!wow_user_runtime_unbind(&binding));
+        CHECK(!wow_user_task_lifecycle_unbind(&binding));
         CHECK(GetLastError() == ERROR_BUSY);
         CHECK(wow_user_runtime_current() == &binding && binding.thread == thread);
         if (lifecycle.threads == task && binding.thread == thread) {
@@ -1545,7 +1545,7 @@ int __cdecl main(int argc,char **argv)
             0x1234, NULL, 0));
         CHECK(IsMenu(selected) && IsMenu(other));
         wow_menu_fixture_retire_fail = 1;
-        CHECK(!wow_user_runtime_unbind(&binding));
+        CHECK(!wow_user_task_lifecycle_unbind(&binding));
         CHECK(lifecycle.cleanup.object_release_failed);
         CHECK(!binding.exclusive_held && binding.thread != NULL);
         CHECK(!IsMenu(selected) && IsMenu(other));
@@ -1570,7 +1570,7 @@ int __cdecl main(int argc,char **argv)
         0, NULL, 0));
     CHECK(binding.thread != NULL && binding.classes != NULL);
     CHECK(!binding.exclusive_held);
-    CHECK(wow_user_runtime_unbind(&binding));
+    CHECK(wow_user_task_lifecycle_unbind(&binding));
     CHECK(binding.thread == NULL && lifecycle.threads == NULL);
     CHECK(wow_user_idle_hook_for_current() == NULL);
 #ifdef WOW_INIT_ROLLBACK_FIXTURE

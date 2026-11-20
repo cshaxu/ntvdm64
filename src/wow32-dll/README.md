@@ -1125,12 +1125,14 @@ uses those captured facts to establish its carrier; it does not query the
 current task or invoke a delayed guest version callback. Missing provenance
 fails explicitly. Internal/template producer wiring remains pending.
 
-`ntvdm.exe` retains `wow_user_runtime.c`, `wow_user_session_binding.c`, and
-their headers in `src/ntvdm-exe/wow/`: those two files own the sole worker
-TLS/session binding.  WOW32 imports only the narrow parent ABI
-`current/enter/leave/set_context/worker_active`; it does not link or import a
-raw session API, `session.lib`, a CCPU executor, or a second worker state
-instance.
+`src/compat/wow_user_runtime.c` owns the single USER TLS binding and lock,
+compiled once into NTVDM. WOW32 imports those parent operations rather than
+linking a second copy. `ntvdm-exe/wow/wow_user_session_binding.c` owns session
+attachment and the outer retirement timing. It invokes the loaded WOW module's
+explicit lifecycle unbind/dispose entries; only successful task retirement
+releases the B binding. B stores no retirement callbacks and invokes no
+original USER or product lifecycle implementation. The remaining USER task
+and projection bodies are still outward providers pending the S14 batch.
 
 `src/compat/include/wow-vdd/nt_vdd.h` supplies the three cdecl worker
 file-handle declarations for the `/Gz` wkfileio.c translation unit only.

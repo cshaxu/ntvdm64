@@ -6,7 +6,7 @@
 #include "wow_task_init_bindings.h"
 #include "wow_cleanup_bindings.h"
 #include "wow_user_message_bridge.h"
-#include "common/wow/user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow_user_native_call.h"
 #include "wow_task_cleanup_entry.h"
 #include "wow_class_client_bindings.h"
@@ -81,5 +81,7 @@ BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *, HANDLE,
  * Refuses live ownership instead of discarding it. Native registrations are
  * borrowed and survive release of their project metadata. */
 BOOL WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *);
+/* Retire while the binding is current; release it only after success. */
+BOOL WINAPI wow_user_task_lifecycle_unbind(wow_user_runtime_thread *);
 
 #endif

@@ -1,4 +1,4 @@
-#include "common/wow/user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow_user_registered_callbacks.h"
 #include "wow_window_creation_binding.h"
 #include "wow_dialog_creation_binding.h"

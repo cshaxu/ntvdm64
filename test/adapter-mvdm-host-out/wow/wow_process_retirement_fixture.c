@@ -1,9 +1,10 @@
 #include "wow_user_task_lifecycle.h"
-#include "wow_user_session_binding.h"
+#include "ntvdm-exe/wow/include/wow_user_session_binding.h"
 #include "wow_standard_class_bindings.h"
 #include <stdio.h>
 #include <string.h>
 
+extern HANDLE hWOWDll;
 static unsigned errors;
 /* Explicit shared-row mock: this case tests the original conversion algorithm,
  * not CCPU memory. The page-domain fixture checks actual published rows. */
@@ -129,7 +130,7 @@ static void verify_startup_rollback(wow_user_task_lifecycle *lifecycle,
     CHECK(!lifecycle->process.objects);
     CHECK(!lifecycle->classes.pclsPublicList);
     CHECK(!lifecycle->classes.pclsPrivateList && !lifecycle->classes.system_classes);
-    CHECK(!runtime->lifecycle && !runtime->retire_thread && !runtime->dispose_process);
+    CHECK(!runtime->lifecycle);
 }
 
 int __cdecl main(void)
@@ -146,6 +147,7 @@ int __cdecl main(void)
     HANDLE event = CreateEventW(NULL, FALSE, FALSE, NULL), duplicate;
     DWORD flags;
     WNDCLASSEXA control = {sizeof(control)};
+    hWOWDll = GetModuleHandleW(NULL);
     verify_isolated_relationships();
     CHECK(event != NULL);
     session_initialize(&owner, 44702u);
@@ -182,7 +184,7 @@ int __cdecl main(void)
     CHECK(standard_count == 9);
     CHECK(!wow_standard_classes_prepare(&lifecycle.classes, NULL));
     CHECK(GetLastError() == ERROR_INVALID_STATE);
-    CHECK(runtime.dispose_process != NULL);
+    CHECK(runtime.lifecycle == &lifecycle);
     CHECK(wow_user_task_lifecycle_register(&lifecycle, end_task, event));
     duplicate = lifecycle.process.pwpi->pEventWowExec;
     CHECK(duplicate != event && GetHandleInformation(duplicate, &flags));
@@ -194,7 +196,7 @@ int __cdecl main(void)
     /* A live object must not disappear with the table. No native object is
      * invented here: this sentinel tests the last-owner refusal separately
      * from original task cleanup, already exercised by retirement below. */
-    CHECK(wow_user_runtime_unbind(wow_user_runtime_current()));
+    CHECK(wow_user_task_lifecycle_unbind(wow_user_runtime_current()));
     CHECK(lifecycle.threads == NULL);
     lifecycle.objects->last_handle = 2;
     lifecycle.objects->entries[2].bType = TYPE_MENU;
@@ -219,7 +221,7 @@ int __cdecl main(void)
      * must release it without unregistering USER's native controls. */
     CHECK(wow_user_session_detach(&registration));
     CHECK(!registration.registered && !lifecycle.initialized && !lifecycle.objects);
-    CHECK(!runtime.lifecycle && !runtime.retire_thread && !runtime.dispose_process);
+    CHECK(!runtime.lifecycle);
     CHECK(!GetHandleInformation(duplicate, &flags));
     CHECK(GetLastError() == ERROR_INVALID_HANDLE);
     CHECK(GetHandleInformation(event, &flags));

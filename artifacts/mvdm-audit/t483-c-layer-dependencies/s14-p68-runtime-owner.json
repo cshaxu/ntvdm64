@@ -1,0 +1,158 @@
+{
+  "delivery": "T483 S14 P68",
+  "baseline": "b65f19933ea64f876297f80d017083e89bb107b8",
+  "status": "Final-code build/publication/targeted verification passed; enclosing commit supplies delivery receipt; push checked separately",
+  "purpose": "Prerequisite for 114-root WOW native-call/discovery/menu ownership migration; not completion of that cluster",
+  "ownership": {
+    "B": "Single TLS, SRW lock, binding and opaque context storage; no retirement/disposal callbacks or C/F calls. Body src/compat/wow_user_runtime.c and header src/compat/include/wow_user_runtime.h.",
+    "F": "Session composition explicitly resolves retirement/disposal from already loaded WOW module; failure preserves ownership/registration. Existing retirement algorithms remain F pending their complete C-owned chain.",
+    "module_ABI": "WOW imports the single worker-linked B instance. Physical export image remains ntvdm.exe; no second TLS copy.",
+    "deleted": "Old common header, NTVDM forwarder and NTVDM runtime body removed."
+  },
+  "eliminated_direct": [
+    "C0618"
+  ],
+  "eliminated_transitive": [
+    "C0018"
+  ],
+  "current_counts": {
+    "excluded-diagnostic": 1,
+    "open": 411,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "eliminated": 157
+  },
+  "compiled_C_header_consumers": 39,
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0,
+    "error_line_directives": "No mirror source modified"
+  },
+  "verification": {
+    "build": "Cached full x86/x64/reference PASS",
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "360c2b7f-3879-4f20-9a36-55e8395fd196",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "normalized_images": {
+      "VCDEX.DLL": true,
+      "run16.exe": true,
+      "ntsrv.exe": true,
+      "ntcon.exe": true,
+      "ntvdm.exe": false,
+      "ntvwm.exe": true,
+      "ntmon.exe": true,
+      "WOW32.DLL": false,
+      "VDMREDIR.DLL": true,
+      "nthook32.dll": true,
+      "nthook64.dll": true
+    },
+    "targeted": [
+      "process retirement/refusal/retry",
+      "native nested calls",
+      "initialization rollback",
+      "real CCPU page domain",
+      "original callback frame/abort",
+      "real CCPU callback abort",
+      "immutable Win16 dialog: 8 phases",
+      "terminal graph/schedule/metadata/no-op and real dialog lifetime",
+      "session binding with missing module/export negatives",
+      "independent B runtime",
+      "WOW shared boundary:146 objects/9 negative controls",
+      "A/B compiled boundaries",
+      "documentation governance and relative links"
+    ],
+    "full": "Not run: owner authorized targeted small-five delivery",
+    "corrected_test_failures": "Fixture include path and export aliases corrected. Terminal fixture /Gd needed explicit stdcall for original USER GetWindowBorders and TabTextOut declarations; no production workaround. One runner launch used an absent pwsh path, then used resolved modern runtime path.",
+    "limits": "Does not prove full 114-root relocation or arbitrary module-unload races; original guest binaries unchanged."
+  },
+  "evidence_root": "build\\t483-s14-runtime-owner",
+  "evidence": {
+    "build-2-supervisor.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    "tests-2-supervisor.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    "publish-supervisor.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    "final-checks-7.exit": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    "publication-final.json": {
+      "sha256": "956d43b603870aadfcf2f88bf19739cb01224e9ad536e8739031de85a367aa9e",
+      "bytes": 218
+    },
+    "normalized-final.json": {
+      "sha256": "38062d210173f3d696a780d6744dc1f85e49b951899e2cfcd9c75bf1d3a33829",
+      "bytes": 256
+    },
+    "compiled-ownership.json": {
+      "sha256": "5063b969360a759ed96e9f1002aba307743652a4bb2b233f10ed0051533b3723",
+      "bytes": 6913
+    },
+    "build-2.out": {
+      "sha256": "346327f720675056fadfd64f16de22f6e7d53a149a1fe9c6a14b228c73c2c8bc",
+      "bytes": 80979
+    },
+    "build-2.err": {
+      "sha256": "3a1cf97d15a56535669ccb5a40687dff36e0f08006196f0cfbbbc82a70345e7a",
+      "bytes": 22
+    },
+    "tests-2.out": {
+      "sha256": "6cbc6bfb18aca4cb76b4f2a9e95625bf879b1190d431bbc2f37ce01d4b352b0e",
+      "bytes": 3200
+    },
+    "tests-2.err": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "final-checks-7.out": {
+      "sha256": "5d6926f7d6ada6f8280d1f056e97e477bd1e31b868ad76e73f6b6da58518440f",
+      "bytes": 1000
+    },
+    "final-checks-7.err": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "final-checks-7-process.json": {
+      "sha256": "b60b77f3fbf27119ae979fcc29a291b68536522f48d212440150969fce62e564",
+      "bytes": 238
+    },
+    "terminal/stderr.txt": {
+      "sha256": "2f89c9edd9b0182199b9aa1d9146e413df9cd846866cc464a7f6dd1d92871d54",
+      "bytes": 2456
+    },
+    "terminal/fixture-exit.txt": {
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "bytes": 3
+    },
+    "dialog-guest/guest-report.json": {
+      "sha256": "f0a92eedad2b2d521992c3e6923a26df699e8dbefef58be05e4db42a7b7a116f",
+      "bytes": 3047
+    },
+    "product-tests.ps1": {
+      "sha256": "0248d66c97d95b7ff0e0e7f8a393de1388aa8fc78bb866ccc409932eb02724be",
+      "bytes": 1388
+    },
+    "build.ps1": {
+      "sha256": "d5a6308cb96b567e893f5b528f799396c2cfe3d32eee8c9e895d46cd39503381",
+      "bytes": 355
+    },
+    "publish.ps1": {
+      "sha256": "297698cea4cfcbfc8a8397176eb562f830f8967611ce730973ac03696357ba01",
+      "bytes": 2855
+    }
+  }
+}

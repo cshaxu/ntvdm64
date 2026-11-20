@@ -28,6 +28,18 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P68 [shared USER runtime ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p68-runtime-owner.json)
+places the actual runtime body/header in B, removes outward retirement callbacks,
+and keeps explicit retirement/disposal composition in F. One worker TLS instance
+serves EXE/DLL consumers. C0618 and C0018 are eliminated; 39 C compilation units
+consume the B header. Non-error mirror delta: 0 points/0 lines.
+Cached full x86/x64/reference builds, dual11 publication/22 hashes, lifecycle,
+terminal schedule, CCPU/page-domain, immutable Win16 and architecture gates pass.
+Package:360c2b7f-3879-4f20-9a36-55e8395fd196. Only NTVDM/WOW32 differ materially
+from P65 after package identity/timestamp normalization. Ledger:157 eliminated,
+411 open,43 supporting,6 eliminated-transitive,1 excluded. The 114-root batch
+remains open; its scheduler and projection implementations have not moved.
+
 Owner priority update: select complete batches by actual outward-dependency
 removal count, not the previous chain order. The [batch census](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-batch-priority.json)
 identifies a114-ID WOW API/discovery/menu cluster,39 console IDs and12 registry

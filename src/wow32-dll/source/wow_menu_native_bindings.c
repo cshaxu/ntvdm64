@@ -1,6 +1,6 @@
 #include "wow_menu_native_bindings.h"
 #include "wow_menu_client_bindings.h"
-#include "common/wow/user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow_user_task_lifecycle.h"
 #include "common/wow/page_domain.h"
 

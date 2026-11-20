@@ -1,8 +1,8 @@
 # S14 migration readiness and counts
 
-Initial P60 baseline `85700b2a5`; P61/P62/P63/P65 updates below supersede its
+Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68 updates below supersede its
 classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
-assigns all 412 currently open stable IDs to the existing ten chains.
+assigns all 411 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
 
@@ -14,13 +14,15 @@ assigns all 412 currently open stable IDs to the existing ten chains.
 | 4. console-mechanics | 50 | 7 | 0 | 0 | 57 |
 | 5. command-capture | 2 | 3 | 0 | 0 | 5 |
 | 6. launch-csr-completion | 19 | 4 | 0 | 0 | 23 |
-| 7. thread-lifecycle | 89 | 7 | 0 | 0 | 96 |
+| 7. thread-lifecycle | 88 | 7 | 0 | 0 | 95 |
 | 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
 | 9. native-user | 152 | 26 | 0 | 0 | 178 |
 | 10. original-helpers-build-abi | 13 | 6 | 11 | 1 | 31 |
-| Total | 342 | 58 | 11 | 1 | 412 |
+| Total | 341 | 58 | 11 | 1 | 411 |
 
-79 distinct provider files have complete body-read records. Header classification
+The historical 79-provider body-read census remains evidence; P68 removes one
+provider from the open implementation set. Recounting the remaining chain
+provider-file union gives 76 distinct paths (the historical 79 is not current). Header classification
 is 56/59, with three generated contracts still awaiting their final owner/ABI
 decision. All 11 remaining search roots have current-use evidence. VCDEX imports
 have C implementation evidence; that is not final binary-boundary disposition.
@@ -31,10 +33,10 @@ design: **10/10**. This does not discard previously delivered subchains. It make
 the missing candidate-level decisions explicit rather than treating source reading
 or broad B/C/F classification as a completed migration design.
 
-Ledger status is 156 eliminated, 412 open, 44 supporting, five
+Ledger status is 157 eliminated, 411 open, 43 supporting, six
 eliminated-transitive and one excluded diagnostic, total 618. P65 eliminates
-C0456 with +1 non-error mirror point/+2 lines; current package is
-`d071bef3-e777-4e65-a2ee-c1563b18bc0e`. Direct-ID closure is not whole-chain
+C0456 with +1 non-error mirror point/+2 lines; P68 moves the shared runtime body/header into B with zero mirror delta; current package is
+`360c2b7f-3879-4f20-9a36-55e8395fd196`. Direct-ID closure is not whole-chain
 or indirect callback/lifecycle closure.
 
 ## What these counts do not hide
@@ -43,7 +45,7 @@ The four-root inventory contains 1494 tracked files; it is not a claim that
 1494 complete bodies have been reviewed. P54 separately reconciles 190 C caller
 files. The direct-provider set is 79 files, not the whole inventory.
 
-The 416 direct IDs do not include every indirect implementation dependency. In
+The 411 direct IDs do not include every indirect implementation dependency. In
 particular, previously eliminated includes do not excuse the B guest-access/lease
 callbacks to C or outer lifecycle hooks. Those are attached to the same chains
 using P55/P59 and the callback-provider review, not counted as new approved

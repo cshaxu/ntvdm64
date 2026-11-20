@@ -15,7 +15,7 @@
 #include "precomp.h"
 #include "wow_private_user_compat.h"
 #include "wow_menu_parser_bindings.h"
-#include "ntvdm-exe/wow/include/wow_user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 
 /* Actual original thunks and conversion bodies; only guest address lookup,
  * allocation failure and final handle observation are controlled here. */

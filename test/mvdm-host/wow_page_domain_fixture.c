@@ -4,6 +4,8 @@
 #include <windows.h>
 #include <commctrl.h>
 
+/* USER is built with /Gz; this mixed CCPU fixture keeps /Gd. */
+#define GetWindowBorders WINAPI GetWindowBorders
 #ifdef WOW_WINDOW_BORROW_FIXTURE
 /* Original header assumes its /Gz compilation environment. This CCPU
  * fixture uses /Gd; spell the existing provider ABI on that declaration. */
@@ -21,7 +23,7 @@
 #include "wow32-dll/include/wow_window_dispatch_bindings.h"
 #include "wow32-dll/include/wow_menu_client_bindings.h"
 #include "wow32-dll/include/wow_menu_native_bindings.h"
-#include "ntvdm-exe/wow/include/wow_user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow32-dll/include/wow_cleanup_bindings.h"
 #include "wow32-dll/include/wow_user_task_lifecycle.h"
 #include "wow32-dll/include/wow_user_private_access.h"
@@ -109,11 +111,14 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 /* Original USER client declarations inherit /Gz in the product. */
 #define DispatchClientMessage WINAPI DispatchClientMessage
 #define CreateMenuFromResource WINAPI CreateMenuFromResource
+#define TabTextOut WINAPI TabTextOut
 #include "non-mvdm/windows/core/ntuser/client/usercli.h"
+#undef TabTextOut
 #undef CreateMenuFromResource
 #undef DispatchClientMessage
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #include "wow32-dll/include/wow_user_registered_callbacks.h"
+#undef GetWindowBorders
 extern HANDLE WINAPI W32LocalAlloc(UINT, UINT, HANDLE);
 extern HANDLE WINAPI W32LocalReAlloc(HANDLE, UINT, UINT, HANDLE, PVOID *);
 extern LPSTR WINAPI W32LocalLock(HANDLE, HANDLE);
@@ -1718,7 +1723,7 @@ static void verify_original_modal_task(void)
         fprintf(stderr,"WOW_INITIAL_TASK_PUBLICATION_CCPU errors=%u desktop=1 task_base=1\n",
             borrow_errors-before);
         BORROW_CHECK(outputs.pfnWOWCleanup((HANDLE)0x4323,0x4323,NULL,0));
-        BORROW_CHECK(wow_user_runtime_unbind(&binding));
+        BORROW_CHECK(wow_user_task_lifecycle_unbind(&binding));
         BORROW_CHECK(wow_user_task_lifecycle_dispose(lifecycle));
         BORROW_CHECK(CloseHandle(wake));
         return;
@@ -1864,7 +1869,7 @@ static void verify_original_modal_task(void)
     }
 #endif
     BORROW_CHECK(outputs.pfnWOWCleanup((HANDLE)0x4323,0x4323,NULL,0));
-    BORROW_CHECK(wow_user_runtime_unbind(&binding));
+    BORROW_CHECK(wow_user_task_lifecycle_unbind(&binding));
     BORROW_CHECK(wow_user_task_lifecycle_dispose(lifecycle));
     BORROW_CHECK(CloseHandle(wake));
 #ifndef WOW_REAL_DIALOG_LIFECYCLE_FIXTURE

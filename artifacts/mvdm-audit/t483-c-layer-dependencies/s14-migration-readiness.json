@@ -296,7 +296,8 @@
       "planned_scope": "S16 prerequisite",
       "execution_ownership": "B existing host_context; C CPU/task state; F admission/cancellation",
       "evidence": [
-        "s14-request-lifecycle-provider-ownership.md"
+        "s14-request-lifecycle-provider-ownership.md",
+        "s14-p68-runtime-owner.json"
       ],
       "open_ids": [
         "C0043",
@@ -393,18 +394,16 @@
         "C0583",
         "C0584",
         "C0585",
-        "C0586",
-        "C0618"
+        "C0586"
       ],
       "counts": {
         "header": 7,
-        "symbol": 89
+        "symbol": 88
       },
       "provider_files": [
         "src/ntvdm-exe/softpc/mvdm_softpc_termination.c",
         "src/ntvdm-exe/win32/ccpu_thread_exit_compat.c",
         "src/ntvdm-exe/win32/worker_lifecycle.c",
-        "src/ntvdm-exe/wow/wow_user_runtime.c",
         "src/worker-base/connection.c",
         "src/wow32-dll/source/wow_task_cleanup_entry.c",
         "src/wow32-dll/source/wow_user_task_lifecycle.c"
@@ -416,8 +415,12 @@
       ],
       "design_status": "incomplete",
       "next_design_gate": "Replace outward termination/thread hooks through real caller ownership separation; preserve failed-unbind ownership and terminal unwind; no second TLS.",
-      "newly_implemented_ids": [],
-      "newly_delivered_ids": []
+      "newly_implemented_ids": [
+        "C0618"
+      ],
+      "newly_delivered_ids": [
+        "C0618"
+      ]
     },
     {
       "chain": 8,
@@ -774,31 +777,31 @@
     }
   ],
   "coverage_limits": [
-    "412 is the direct open-ID population, not all outward implementation edges. Earlier eliminated includes can still hide executable callbacks.",
+    "411 is the direct open-ID population, not all outward implementation edges. Earlier eliminated includes can still hide executable callbacks.",
     "Guest leases and access callbacks are tracked additionally by P55/P59; their B-to-C callbacks are not made lawful by absence from the direct C-to-outer ledger.",
     "The 1494-file four-root inventory is not 1494 fully reviewed files. Provider body coverage is 79/79; 190 C callers were reconciled separately in P54.",
     "Some provider files occur in multiple chains; use distinct paths, not a sum of per-chain file counts.",
     "All ten chains remain design-incomplete as whole migration units; this does not undo delivered P17-P26 subchains."
   ],
   "summary": {
-    "assigned_open_ids": 412,
+    "assigned_open_ids": 411,
     "unassigned_open_ids": 0,
     "duplicate_open_ids": 0,
-    "distinct_symbol_provider_files": 79,
+    "distinct_symbol_provider_files": 76,
     "chains": 10,
     "whole_chains_design_ready": 0,
     "whole_chains_design_incomplete": 10,
-    "newly_implemented_ids": 1,
-    "newly_delivered_ids": 1,
+    "newly_implemented_ids": 2,
+    "newly_delivered_ids": 2,
     "ledger_status_counts": {
       "excluded-diagnostic": 1,
-      "open": 412,
-      "supporting-evidence": 44,
-      "eliminated-transitive": 5,
-      "eliminated": 156
+      "open": 411,
+      "supporting-evidence": 43,
+      "eliminated-transitive": 6,
+      "eliminated": 157
     },
     "classified_headers": 59,
     "generated_header_migrations_pending": 3
   },
-  "updated_by": "T483 S14 P65"
+  "updated_by": "T483 S14 P68"
 }

@@ -176,6 +176,8 @@ $x86DefinitionLines.Add('')
 $x86DefinitionLines.Add('GetCommHandle=GetCommHandle@4')
 $x86DefinitionLines.Add('GetCommShadowMSR=GetCommShadowMSR@4')
 $x86DefinitionLines.Add('W32TerminateTaskTicket')
+$x86DefinitionLines.Add('wow_user_task_lifecycle_unbind=_wow_user_task_lifecycle_unbind@4')
+$x86DefinitionLines.Add('wow_user_task_lifecycle_dispose=_wow_user_task_lifecycle_dispose@4')
 [IO.File]::WriteAllLines($x86Definition, $x86DefinitionLines,
     [Text.UTF8Encoding]::new($false))
 
@@ -275,6 +277,7 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'host_ExitThread@4'; Raw = 'host_ExitThread' },
     [pscustomobject]@{ Decorated = 'opennt_exit_thread@4'; Raw = 'opennt_exit_thread' },
     [pscustomobject]@{ Decorated = 'wow_user_runtime_current@0'; Raw = 'wow_user_runtime_current' },
+    [pscustomobject]@{ Decorated = 'wow_user_runtime_unbind@4'; Raw = 'wow_user_runtime_unbind' },
     [pscustomobject]@{ Decorated = 'wow_user_runtime_enter@4'; Raw = 'wow_user_runtime_enter' },
     [pscustomobject]@{ Decorated = 'wow_user_runtime_leave@4'; Raw = 'wow_user_runtime_leave' },
     [pscustomobject]@{ Decorated = 'wow_user_runtime_leave_for_callout@4'; Raw = 'wow_user_runtime_leave_for_callout' },

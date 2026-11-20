@@ -1,6 +1,24 @@
 #include "include/wow_user_session_binding.h"
 
 static __declspec(thread) wow_user_runtime_thread current_binding;
+extern HANDLE hWOWDll;
+
+static FARPROC lifecycle_operation(const char *name)
+{
+    if (!hWOWDll) { SetLastError(ERROR_INVALID_STATE); return NULL; }
+    return GetProcAddress(hWOWDll, name);
+}
+
+static BOOL unbind_runtime(wow_user_runtime_thread *thread)
+{
+    if (thread->thread && thread->runtime->lifecycle) {
+        typedef BOOL (WINAPI *unbind_fn)(wow_user_runtime_thread *);
+        unbind_fn unbind = (unbind_fn)lifecycle_operation("wow_user_task_lifecycle_unbind");
+        return unbind ? unbind(thread) : FALSE;
+    }
+    return wow_user_runtime_unbind(thread);
+}
+
 
 static int bind_current(void *context)
 {
@@ -19,7 +37,7 @@ static int unbind_current(void *context)
         int result = 0;
         current_binding.terminal_exit = session_thread_is_finishing();
         __try {
-            result = wow_user_runtime_unbind(&current_binding);
+            result = unbind_runtime(&current_binding);
         } __finally {
             current_binding.terminal_exit = FALSE;
         }
@@ -73,13 +91,12 @@ BOOL WINAPI wow_user_session_detach(wow_user_session_binding *binding)
     /* Explicit detach is fallible: retain the registration when USER still
      * owns live task/window state, so the caller can complete cleanup/retry. */
     if (wow_user_runtime_current() == &current_binding &&
-            !wow_user_runtime_unbind(&current_binding))
+            !unbind_runtime(&current_binding))
         return FALSE;
-    if (binding->runtime->lifecycle &&
-            (!binding->runtime->dispose_process ||
-             !binding->runtime->dispose_process(binding->runtime->lifecycle))) {
-        if (!binding->runtime->dispose_process) SetLastError(ERROR_INVALID_STATE);
-        return FALSE;
+    if (binding->runtime->lifecycle) {
+        typedef BOOL (WINAPI *dispose_fn)(PVOID);
+        dispose_fn dispose = (dispose_fn)lifecycle_operation("wow_user_task_lifecycle_dispose");
+        if (!dispose || !dispose(binding->runtime->lifecycle)) return FALSE;
     }
     if (!session_unregister_thread_hook(binding->session, bind_current,
             unbind_current, binding)) {

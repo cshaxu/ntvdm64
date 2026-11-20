@@ -383,13 +383,6 @@ static BOOL WINAPI cleanup_destroy_class(wow_cleanup_context *context,
     return wow_class_words_destroy_native(link, (*link)->hModule, TRUE);
 }
 
-static BOOL WINAPI retire_current_thread(PVOID context);
-
-static BOOL WINAPI dispose_process(PVOID context)
-{
-    return wow_user_task_lifecycle_dispose(context);
-}
-
 static PVOID WINAPI cleanup_allocate(SIZE_T size)
 {
     return HeapAlloc(GetProcessHeap(), 0, size);
@@ -454,8 +447,6 @@ BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *owner,
         return FALSE;
     }
     runtime->lifecycle = owner;
-    runtime->retire_thread = retire_current_thread;
-    runtime->dispose_process = dispose_process;
     owner->initialized = TRUE;
     return TRUE;
 }
@@ -1806,22 +1797,29 @@ BOOL WINAPI wow_user_task_prepare_exit(void)
     return result;
 }
 
-static BOOL WINAPI retire_current_thread(PVOID context)
+BOOL WINAPI wow_user_task_lifecycle_unbind(wow_user_runtime_thread *binding)
 {
-    wow_user_task_lifecycle *owner = context;
-    wow_user_task_lifecycle_thread *task = current_task(owner);
-    wow_user_runtime_thread *binding = wow_user_runtime_current();
-    if (!task) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
-    retirement_trace("enter", task->thread.ptdb->hTaskWow, 0);
-    /* Window destruction belongs before original resource teardown, not
-     * here. Late finalization retains/refuses any surviving object owner. */
-    {
-        DWORD task_id = task->thread.ptdb->hTaskWow;
-        BOOL result = retire_task(owner, task_id, NULL, NULL, 0);
+    wow_user_task_lifecycle_thread *task;
+    wow_user_task_lifecycle *owner;
+    DWORD task_id;
+    BOOL result;
+    if (!binding || wow_user_runtime_current() != binding ||
+            binding->exclusive_held) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    owner = binding->runtime->lifecycle;
+    if (binding->thread && owner) {
+        task = current_task(owner);
+        if (!task) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
+        task_id = task->thread.ptdb->hTaskWow;
+        retirement_trace("enter", task_id, 0);
+        result = retire_task(owner, task_id, NULL, NULL, 0);
         retirement_trace(result ? "complete" : "failed", task_id,
             result ? ERROR_SUCCESS : GetLastError());
-        return result;
+        if (!result) return FALSE;
     }
+    return wow_user_runtime_unbind(binding);
 }
 
 BOOL WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *owner)
@@ -1862,8 +1860,6 @@ BOOL WINAPI wow_user_task_lifecycle_dispose(wow_user_task_lifecycle *owner)
     }
     if (owner->objects) HeapFree(GetProcessHeap(), 0, owner->objects);
     if (owner->runtime && owner->runtime->lifecycle == owner) {
-        owner->runtime->retire_thread = NULL;
-        owner->runtime->dispose_process = NULL;
         owner->runtime->lifecycle = NULL;
     }
     ZeroMemory(owner, sizeof(*owner));

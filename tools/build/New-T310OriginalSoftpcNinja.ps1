@@ -228,7 +228,7 @@ $sessionNames = @('session.c')
 # One `ntvdm.exe` owns the worker-local USER runtime.  WOW32.DLL imports its
 # current-thread operations from that parent; it must not acquire a second TLS
 # copy of the same worker domain.
-$adapterWowWorkerNames = @('wow_user_runtime.c', 'wow_user_session_binding.c')
+$adapterWowWorkerNames = @('wow_user_session_binding.c')
 # The complete original SoftPC base debug package remains a worker-local
 # provider.  The separate MVDM `dbg` product is a debugger/CSR owner package
 # and is not selected merely to satisfy these original debug edges.
@@ -494,6 +494,7 @@ foreach ($entry in @(
     # The late-loaded WOW32 provider borrows this one worker-local domain;
     # these exports are an ABI bridge only, not a second USER implementation.
     'wow_user_runtime_current=_wow_user_runtime_current@0',
+    'wow_user_runtime_unbind=_wow_user_runtime_unbind@4',
     'wow_user_runtime_enter=_wow_user_runtime_enter@4',
     'wow_user_runtime_leave=_wow_user_runtime_leave@4',
     'wow_user_runtime_leave_for_callout=_wow_user_runtime_leave_for_callout@4',
@@ -1259,6 +1260,9 @@ $sessionObjects += 'obj/compat/host_context.obj'
 $graph.Add('build obj/compat/guest_memory_lease.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/guest_memory_lease.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/guest_memory_lease.obj'
+$graph.Add('build obj/compat/wow_user_runtime.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_user_runtime.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$sessionObjects += 'obj/compat/wow_user_runtime.obj'
 $graph.Add('build obj/compat/wow_shared_clock.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_shared_clock.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/wow_shared_clock.obj'

@@ -1,5 +1,5 @@
 #include "wow_user_borrow_scope.h"
-#include "common/wow/user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_class_client_bindings.h"
 #include "wow_task_order_bindings.h"

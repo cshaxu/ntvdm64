@@ -36,7 +36,7 @@ DWORD WINAPI wow_fixture_OpenNtBaseClientWowStarted(ULONG request)
     ++notifications;
     CHECK(!initialize_task() && GetLastError() == ERROR_INVALID_STATE);
     if (raise_notification) RaiseException(0xe0447002u, 0, 0, NULL);
-    if (retire_notification) CHECK(wow_user_runtime_unbind(binding));
+    if (retire_notification) CHECK(wow_user_task_lifecycle_unbind(binding));
     return notifications <= fail_count ? ERROR_RETRY : ERROR_SUCCESS;
 }
 static VOID WINAPI end_task(void) { }
@@ -69,7 +69,7 @@ int __cdecl main(void)
     CHECK(binding.thread == committed && notifications == 3);
     CHECK(!initialize_task() && GetLastError() == ERROR_INVALID_STATE);
     CHECK(notifications == 3);
-    CHECK(wow_user_runtime_unbind(&binding));
+    CHECK(wow_user_task_lifecycle_unbind(&binding));
 
     /* Original W32Thread owns the seven-attempt bound; verify its callback
      * can be attempted seven times without reinitialization, then retired. */
@@ -80,7 +80,7 @@ int __cdecl main(void)
     CHECK(notifications == 7);
     CHECK(output.pfnWOWCleanup((HANDLE)0x1234, 0x1234, NULL, 0));
     CHECK(binding.thread != NULL); /* Committed case retains normal retirement. */
-    CHECK(wow_user_runtime_unbind(&binding));
+    CHECK(wow_user_task_lifecycle_unbind(&binding));
     CHECK(lifecycle->threads == NULL);
 
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
@@ -92,7 +92,7 @@ int __cdecl main(void)
     raise_notification = FALSE;
     CHECK(initialize_task());
     CHECK(notifications == 2);
-    CHECK(wow_user_runtime_unbind(&binding));
+    CHECK(wow_user_task_lifecycle_unbind(&binding));
 
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
     retire_notification = TRUE;
@@ -101,7 +101,7 @@ int __cdecl main(void)
     retire_notification = FALSE;
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
     CHECK(initialize_task());
-    CHECK(wow_user_runtime_unbind(&binding));
+    CHECK(wow_user_task_lifecycle_unbind(&binding));
     wow_user_task_lifecycle_dispose(lifecycle);
     CHECK(session_thread_unbind(&owner));
     CHECK(session_dispose(&owner));

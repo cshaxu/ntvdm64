@@ -2,7 +2,7 @@
 #include <dde.h>
 #include "wow_window_dispatch_bindings.h"
 #include "wow_class_lookup_bindings.h"
-#include "common/wow/user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow_task_order_bindings.h"
 #include "wow_window_words_binding.h"
 #include "common/wow/page_domain.h"

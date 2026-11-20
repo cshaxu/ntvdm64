@@ -114,7 +114,7 @@ done:
     if (atom) wow_class_words_unregister(&context->lifecycle->classes, atom,
         window_class.hInstance, NULL);
     if (wow_user_runtime_current() == &binding)
-        (void)wow_user_runtime_unbind(&binding);
+        (void)wow_user_task_lifecycle_unbind(&binding);
     (void)session_thread_unbind(context->session);
     return result;
 }
@@ -230,7 +230,7 @@ int __cdecl main(void)
 
     CHECK(wow_user_task_lifecycle_cleanup(&lifecycle, 0x1234));
     wow_user_task_lifecycle_dispose(&lifecycle);
-    CHECK(wow_user_runtime_unbind(&binding));
+    CHECK(wow_user_task_lifecycle_unbind(&binding));
     CHECK(session_thread_unbind(&owner));
     CHECK(session_dispose(&owner));
     if (wowexec) CloseHandle(wowexec);

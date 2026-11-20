@@ -19,10 +19,6 @@ typedef struct wow_user_runtime {
      * domain.  It is opaque here: the runtime neither allocates tasks nor
      * chooses scheduling policy. */
     PVOID lifecycle;
-    BOOL (WINAPI *retire_thread)(PVOID lifecycle);
-    /* Called only by the quiesced session owner after all thread retirement.
-     * Failure retains the provider and its registration for cleanup/retry. */
-    BOOL (WINAPI *dispose_process)(PVOID lifecycle);
 } wow_user_runtime;
 
 typedef struct wow_user_runtime_thread {
@@ -36,11 +32,12 @@ typedef struct wow_user_runtime_thread {
     BOOL resource_cleanup_live;
 } wow_user_runtime_thread;
 
-#define WOW_USER_RUNTIME_INITIALIZER { INIT_ONCE_STATIC_INIT, SRWLOCK_INIT, 0, 0, NULL, NULL, NULL }
+#define WOW_USER_RUNTIME_INITIALIZER { INIT_ONCE_STATIC_INIT, SRWLOCK_INIT, 0, 0, NULL }
 
 BOOL WINAPI wow_user_runtime_initialize(wow_user_runtime *);
 BOOL WINAPI wow_user_runtime_bind(wow_user_runtime_thread *, wow_user_runtime *,
     struct wow_task_order_thread *, struct wow_class_client_context *);
+/* Resource-only release. The composing owner retires its task first. */
 BOOL WINAPI wow_user_runtime_unbind(wow_user_runtime_thread *);
 wow_user_runtime_thread *WINAPI wow_user_runtime_current(void);
 BOOL WINAPI wow_user_runtime_enter(wow_user_runtime_thread *);

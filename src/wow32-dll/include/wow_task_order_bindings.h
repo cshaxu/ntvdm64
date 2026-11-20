@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <winternl.h>
 #include "wow_task_event_binding.h"
-#include "common/wow/user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 
 /* Original kernel declarations share the existing checked client layouts. */
 #if defined(WOW_ORIGINAL_TASK_ORDER) || defined(WOW_ORIGINAL_CLEANUP)

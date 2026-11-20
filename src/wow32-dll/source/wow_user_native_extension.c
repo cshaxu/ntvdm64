@@ -2,7 +2,7 @@
  * This file pairs only the existing native-stack execution boundaries. */
 #include "precomp.h"
 #include "wow_user_native_extension.h"
-#include "common/wow/user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow_user_native_call.h"
 #include "wow_callback_frame_lease.h"
 

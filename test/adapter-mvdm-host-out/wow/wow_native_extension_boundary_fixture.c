@@ -3,7 +3,7 @@
  * existing original-body/CCPU groups must separately prove their composition. */
 #include "precomp.h"
 #include "wow_user_native_extension.h"
-#include "common/wow/user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow_user_native_call.h"
 #include "wow_callback_frame_lease.h"
 #include <stdio.h>

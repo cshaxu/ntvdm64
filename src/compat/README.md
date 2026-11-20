@@ -22,6 +22,12 @@ relation type in `include/wow_window_graph.h`. It owns only structural checks
 and temporary traversal storage. Its caller retains guest publication,
 CCPU admission and transaction lifetime; no CPU/session callback enters B.
 
+WOW runtime binding and locks live in `wow_user_runtime.c` and
+`include/wow_user_runtime.h`. The carrier stores opaque owner identities,
+not task-retirement callbacks. Outer composition retires the task before
+calling resource-only unbind. NTVDM compiles the sole instance and WOW32
+imports its ABI; linking another TLS copy into WOW32 is prohibited.
+
 ## Registered divergences
 
 S10 owner consolidation: the declarations for mvdm_base_vdm_environment,

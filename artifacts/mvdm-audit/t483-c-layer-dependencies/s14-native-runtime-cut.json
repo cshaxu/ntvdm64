@@ -89,6 +89,14 @@
     {
       "path": "src/wow32-dll/source/wow_user_registration_bridge.c",
       "sha256": "d4576d797c3cdd354078ff0a442cbe5c6a82c9acac1deae17f230140afe82607"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "sha256": "8ff3d15be855aef22138c04d74e3090bf36ca1b580bb2fb385e76c44ded8a158"
+    },
+    {
+      "path": "src/ntvdm-exe/win32/worker_lifecycle.c",
+      "sha256": "c82db52b06708386f8a6ad141d5676f2c1be2d2fd6f62c56a9726a09363952b2"
     }
   ],
   "reference_method": "rg -n wow_user_runtime_unbind\\( src test --glob *.c --glob *.h --glob *.ps1; source-text sites, not execution counts",
@@ -431,7 +439,7 @@
     "mirror_point_delta": 0,
     "mirror_line_delta": 0
   },
-  "next_concrete_step": "Resolve lifecycle initialization and retirement-operation storage at the composition entry, then prepare the complete runtime/scheduler/publication patch and calculate non-error mirror cost. This prerequisite is part of the 114-root batch, not a claim that moving runtime alone eliminates 114 IDs.",
+  "next_concrete_step": "Implement the resource-only runtime and outer module-ABI retirement composition together, then move the runtime implementation/header to B with one shared compiled instance. Keep the 114 root IDs open until their original USER scheduler/projection implementations also move inward.",
   "validation": "Source inspection only. No product mutation, compile, runtime test, or new release.",
   "initialization_chain": {
     "worker": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c:39 owns the sole runtime; :197 attaches it to the session before late WOW initialization",
@@ -448,7 +456,30 @@
       "relative links",
       "existing A/B build boundary"
     ],
-    "scope": "Research record validation; existing compiled graph, not a new production build or runtime acceptance",
+    "scope": "P67 record validation only; the appended registration-resolution review has not yet rerun governance or runtime checks.",
     "initial_launch": "First preparation failed on default cp1252 decoding of Current; no check process started. Corrected to explicit UTF-8, prepared runner, then completed the owned run above."
+  },
+  "registration_resolution": {
+    "decision": "Remove both retirement operation pointers from the B runtime carrier. The outer session-unbind/detach boundary resolves explicit lifecycle operations from the already loaded WOW module; it then calls the resource-only B unbind. This is a named module ABI, not a B callback or a new lifecycle registry.",
+    "existing_module_owner": "src/mvdm-host/softpc.new/host/src/nt_bop.c:166 hWOWDll; SafeLoadLibrary at183; all mandatory exports resolved before W32Init at249.",
+    "existing_outer_precedent": "src/ntvdm-exe/win32/worker_lifecycle.c:91-94 resolves W32TerminateTaskTicket through the same hWOWDll.",
+    "failure_order": "The observed nt_bop.c FreeLibrary(hWOWDll) paths are missing mandatory exports before W32Init. USER lifecycle initialization occurs later through UserRegisterWowHandlers. Do not use hWOWDll alone as readiness proof: a published lifecycle is required, and an absent retirement export fails without clearing binding or registration.",
+    "success_lifetime": "The inspected host loading path retains the WOW module on successful initialization. Existing standalone-worker cleanup performs USER session detach before guest-memory release. Do not add an unload, retry loop, second LoadLibrary or function-pointer cache.",
+    "B": "Keep only initialization/lock/TLS/resource binding and opaque owner references. Delete retire_thread and dispose_process fields and their calls from the B interface/implementation.",
+    "F": "Keep the existing two unbind composition sites and process detach. Validate the current binding before invoking retirement, propagate failure unchanged, invoke B unbind after success, and resolve process disposal only while lifecycle remains published.",
+    "C": "USER retirement bodies must ultimately move with task/object state to original USER owners. Exposing the current F body as a module entry is only a transitional composition boundary, not elimination of the 114 C-to-F roots.",
+    "tests": "Do not add test-only retirement callbacks to B. Pure runtime fixtures use resource-only unbind; full lifecycle fixtures call the production retirement operation before unbind. Session-composition negatives continue testing retirement/disposal refusal at the outer boundary.",
+    "next_edit_scope": [
+      "src/common/wow/user_runtime.h",
+      "src/ntvdm-exe/wow/wow_user_runtime.c",
+      "src/ntvdm-exe/wow/wow_user_session_binding.c",
+      "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "src/wow32-dll/include/wow_user_task_lifecycle.h",
+      "both existing build generators",
+      "the 13 recorded test consumers and session-binding fixture"
+    ],
+    "approval": "Implemented and verified by P68; no C mirror change. Larger C scheduler/projection insertions still require measurement and approval.",
+    "limits": "Source reconstruction, not runtime unload/race verification. Final shared-instance linking, failed initialization and retry behavior require final-code tests.",
+    "delivery": "s14-p68-runtime-owner.json"
   }
 }

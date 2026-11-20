@@ -93,7 +93,7 @@ static DWORD WINAPI terminal_schedule_worker(void *context)
     t->bound=wow_user_runtime_bind(&b,t->runtime,NULL,NULL);
     if(t->bound) {
         t->retired=wow_window_words_terminal(t->window,t->words);
-        t->unbound=wow_user_runtime_unbind(&b);
+        t->unbound=wow_user_task_lifecycle_unbind(&b);
     } else {InterlockedExchange(&t->first_phase,-1);SetEvent(t->reached);}
     if (!session_thread_unbind(t->session_owner)) return 2;
     return 0;

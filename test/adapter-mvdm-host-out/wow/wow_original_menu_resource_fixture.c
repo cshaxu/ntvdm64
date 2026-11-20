@@ -13,7 +13,7 @@
 #include "wow_menu_resource_bindings.h"
 #include "wow_private_user_compat.h"
 #include "wow_menu_native_bindings.h"
-#include "ntvdm-exe/wow/include/wow_user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 #include "wow_task_init_bindings.h"
 #include <stdio.h>
 #include <string.h>

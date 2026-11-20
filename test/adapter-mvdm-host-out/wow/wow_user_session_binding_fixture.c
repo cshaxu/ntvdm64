@@ -1,8 +1,9 @@
 #include <windows.h>
 #include <stdio.h>
 #include "ntvdm-exe/session/session.h"
-#include "wow_user_session_binding.h"
+#include "ntvdm-exe/wow/include/wow_user_session_binding.h"
 
+HANDLE hWOWDll;
 static session owner;
 static wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
 static wow_user_session_binding registration;
@@ -14,26 +15,24 @@ static BOOL refuse_disposal;
 static unsigned disposal_calls;
 static HANDLE child_ready, child_release;
 
-static BOOL WINAPI dispose_fixture(PVOID context)
+BOOL WINAPI wow_user_task_lifecycle_dispose(PVOID context)
 {
     if (context != &task_identity) return FALSE;
     ++disposal_calls;
     if (refuse_disposal) { SetLastError(ERROR_BUSY); return FALSE; }
     runtime.lifecycle = NULL;
-    runtime.retire_thread = NULL;
-    runtime.dispose_process = NULL;
     return TRUE;
 }
 
-static BOOL WINAPI retire_fixture(PVOID context)
+BOOL WINAPI wow_user_task_lifecycle_unbind(wow_user_runtime_thread *binding)
 {
-    if (context != &task_identity) return FALSE;
+    if (!binding || binding->runtime->lifecycle != &task_identity) return FALSE;
     ++retirement_calls;
     if (refuse_retirement) {
         SetLastError(ERROR_BUSY);
         return FALSE;
     }
-    return TRUE;
+    return wow_user_runtime_unbind(binding);
 }
 
 #define CHECK(value) do { if (!(value)) { InterlockedIncrement(&errors); \
@@ -64,6 +63,7 @@ int __cdecl main(void)
 {
     HANDLE thread;
     DWORD exit_code;
+    hWOWDll = GetModuleHandleW(NULL);
     session_initialize(&owner, 42040u);
     CHECK(session_activate(&owner));
     CHECK(session_thread_bind_owned(&owner, SESSION_THREAD_BINDING_SOFTPC_ENTRY));
@@ -90,10 +90,18 @@ int __cdecl main(void)
     /* The production unbind callback is fallible. Explicit session detach
      * must not hide rejection, drop the hook, or make a retry impossible. */
     runtime.lifecycle = &task_identity;
-    runtime.retire_thread = retire_fixture;
-    runtime.dispose_process = dispose_fixture;
     wow_user_runtime_current()->thread =
         (struct wow_task_order_thread *)&task_identity;
+    /* Missing module/entry must retain the binding; never silently unbind. */
+    hWOWDll = NULL;
+    CHECK(!wow_user_session_detach(&registration));
+    CHECK(GetLastError() == ERROR_INVALID_STATE && retirement_calls == 0);
+    CHECK(registration.registered && wow_user_runtime_current() != NULL);
+    hWOWDll = GetModuleHandleW(L"kernel32.dll");
+    CHECK(!wow_user_session_detach(&registration));
+    CHECK(GetLastError() == ERROR_PROC_NOT_FOUND && retirement_calls == 0);
+    CHECK(registration.registered && wow_user_runtime_current() != NULL);
+    hWOWDll = GetModuleHandleW(NULL);
     refuse_retirement = TRUE;
     CHECK(!wow_user_session_detach(&registration));
     CHECK(GetLastError() == ERROR_BUSY);

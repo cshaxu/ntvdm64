@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 412,
-    "supporting-evidence": 44,
-    "eliminated-transitive": 5,
-    "eliminated": 156
+    "open": 411,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "eliminated": 157
   },
   "provider_groups": [
     {
@@ -1508,17 +1508,6 @@
       ]
     },
     {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/wow/wow_user_runtime.c",
-      "open_ids": [
-        "C0618"
-      ],
-      "count": 1,
-      "symbols": [
-        "wow_user_runtime_current"
-      ]
-    },
-    {
       "kind": "include-root",
       "provider": "src/vdmredir-dll/include",
       "open_ids": [
@@ -2369,5 +2358,6 @@
     }
   ],
   "next_action": "Review the 114-ID WOW cluster first; derive concrete inner scheduler/state and publication carriers plus mirror cost. Dependency prerequisites belong to this batch, not a competing low-count detour.",
-  "not_done": "No product mutation or runtime verification in this prioritization; machine-context fragment under build is an unapproved unused proposal."
+  "not_done": "114 roots remain open. P68 only delivers shared-runtime prerequisite; concrete C scheduler/projection carriers and mirror-cost measurement remain.",
+  "updated_by": "T483 S14 P68"
 }

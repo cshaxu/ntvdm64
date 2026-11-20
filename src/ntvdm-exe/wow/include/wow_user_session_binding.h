@@ -2,7 +2,7 @@
 #define WOW_USER_SESSION_BINDING_H
 
 #include "ntvdm-exe/session/session.h"
-#include "wow_user_runtime.h"
+#include "compat/include/wow_user_runtime.h"
 
 /* ADAPTER-WOW-049's bridge to the worker's existing per-thread session
  * lifecycle. It establishes a USER binding for the already-bound worker
