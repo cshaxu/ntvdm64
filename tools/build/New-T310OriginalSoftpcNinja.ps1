@@ -454,6 +454,7 @@ foreach ($entry in @(
     'OpenNtBaseClientRetireWowTask=_OpenNtBaseClientRetireWowTask@8',
     'OpenNtBaseClientFailWowTaskClose=_OpenNtBaseClientFailWowTaskClose@8',
     'NtvdmAuthorizeExit=_NtvdmAuthorizeExit@4',
+    'NtvdmReportWowStartup=_NtvdmReportWowStartup@12',
     'Sim32FlushVDMPointer',
     'VdmAddDescriptorMapping', 'SetWOWforceIncrAlloc',
     'GetNextVDMCommand=_GetNextVDMCommand@4',

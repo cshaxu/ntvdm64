@@ -31,7 +31,6 @@ SOURCES= \
     wow_menu_client_bindings.c \
     wow_menu_native_bindings.c \
     wow_user_private_access.c \
-    wow_user_registration_bridge.c \
     wow_user_task_lifecycle.c \
     wow_window_creation_binding.c \
     wow_window_words_binding.c

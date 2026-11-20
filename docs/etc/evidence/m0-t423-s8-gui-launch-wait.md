@@ -43,7 +43,7 @@ Read-only inputs:
   its host thread. WK32WowFailedExec calls ExitVDM for the still-pending task.
   The call has no original numeric loader-error argument. Do not fabricate
   a detailed load error code or confuse the two failure/completion meanings.
-- Existing [registration bridge](../../../src/wow32-dll/source/wow_user_registration_bridge.c)
+- Existing [registration bridge](../../../src/compat/wow_user_registration_bridge.c) (current source path)
   registered_init_task forwards the task identity into
   [task lifecycle](../../../src/compat/wow_user_task_lifecycle.c),
   whose xxxInitTask call retains the original owner. The local FIRSTIDLE

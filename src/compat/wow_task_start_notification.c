@@ -1,4 +1,4 @@
-#include "wow32-dll/include/wow_task_start_notification.h"
+#include "include/wow_task_start_notification.h"
 #include "wow_user_task_lifecycle.h"
 
 DWORD WINAPI wow_user_task_lifecycle_notify_start(wow_user_task_lifecycle *owner,

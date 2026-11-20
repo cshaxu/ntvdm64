@@ -29,15 +29,15 @@ implementation migration. The broader C-layer cleanup remains active.
 ## Current Technical Baseline
 
 P81 [USER/page-domain batch](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-user-batch-owner.json)
-migrated 125 paths and eliminated 213 IDs.
+125 paths and 213 IDs.
 
 P82 [USER tail](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-user-tail-owner.json)
-eliminated 24 additional IDs.
+24 IDs.
 
 P79 [inner lifecycle authority](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-liveness-owner.json)
-moved the worker-active query to B. Ordinal 269 and one NTVDM TLS were preserved.
+B owns the worker-active query; ordinal 269 and NTVDM TLS retained.
 
-P83 [Console mouse](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-mouse-owner.json)
+P83 [Mouse](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-mouse-owner.json)
 C -8; five DOS cases.
 
 P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-text-owner.json).
@@ -63,8 +63,9 @@ P140 [WOWEXEC](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-noop
 P141 [Console exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-exit-owner.json).
 P142 [WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-exit-owner.json).
 P143 [DOS exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-dos-exit-owner.json).
-P144 [Console activation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-activation-owner.json) .
-Delivered: B 0 known calls; C 3 calls, 1 slot, 1 header, 1 image.
+P144 [Console activation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-activation-owner.json).
+P145 [WOW registration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-registration-owner.json) .
+Delivered: B 0 known calls; C 2 calls, 1 slot, 1 header, 1 image.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moved page-domain identity and cleanup to B and removed three F calls.
@@ -185,7 +186,7 @@ DOS DIR lifecycle passes; date-rendering diagnostics also reproduce on P26
 and are separately recorded in TODO. P62 verification/publication complete;
 commit/push receipt is the enclosing delivery commit. Direct ledger152 eliminated/416 open is unchanged;
 this bounded coordinator delivery does not close S14 or all ten chains.
-Temporary status-size exception: retain indexed S14 history until chain handoff;
+Temporary size exception: retain indexed S14 history;
 this file remains below the 32 KiB hard limit.
 
 Earlier delivered baseline:
@@ -330,7 +331,7 @@ receipts remain in the [dependency tracker](../../artifacts/mvdm-audit/t483-c-la
 
 ## S13 Closure Record
 
-[Actual physical-mapping implementation migration](../etc/evidence/m0-t483-s13-implementation-closure.md).
+[Physical-mapping implementation migration](../etc/evidence/m0-t483-s13-implementation-closure.md).
 
 ## S12 Closure Record
 

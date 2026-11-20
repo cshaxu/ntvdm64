@@ -269,3 +269,4 @@ mvdm_debug_task_exchange,273
 mvdm_debug_task_retire,274
 opennt_create_cdecl_thread_named,275
 OpenNtBaseClientFindWowTask,276
+NtvdmReportWowStartup,277

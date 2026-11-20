@@ -96,7 +96,7 @@ static void service_lost(void *context)
     VdmExitCode=ERROR_INVALID_HANDLE;
     worker_base_shutdown_close(close_worker,context,INFINITE,ERROR_INVALID_HANDLE,NULL);
 }
-static void CALLBACK worker_exit_request(PTP_CALLBACK_INSTANCE instance,
+static void CALLBACK worker_control_request(PTP_CALLBACK_INSTANCE instance,
     void *context, PTP_WAIT wait, TP_WAIT_RESULT result)
 {
     mvdm_softpc_exit_handoff *exit = context;
@@ -123,6 +123,14 @@ static void CALLBACK worker_exit_request(PTP_CALLBACK_INSTANCE instance,
         /* Release the handoff before the Console handler claims cleanup. */
         (void)CallbackMayRunLong(instance);
         break;
+    case MVDM_WOW_STARTED:
+        status = OpenNtBaseClientWowStarted(exit->wow_request);
+        break;
+    case MVDM_WOW_BIND: {
+        uint64_t ticket;
+        status = OpenNtBaseClientBindWowTask(exit->wow_request, exit->wow_task, &ticket);
+        break;
+    }
     }
     exit->status = status;
     SetThreadpoolWait(wait, exit->request, NULL);
@@ -170,7 +178,7 @@ DWORD ntvdm_worker_lifecycle_begin(session *owner,BOOL character_io)
     if (!exit->request) return GetLastError();
     exit->completion = CreateEventW(NULL, FALSE, FALSE, NULL);
     if (!exit->completion) return GetLastError();
-    lifecycle.exit_wait = CreateThreadpoolWait(worker_exit_request, exit, NULL);
+    lifecycle.exit_wait = CreateThreadpoolWait(worker_control_request, exit, NULL);
     if (!lifecycle.exit_wait) return GetLastError();
     SetThreadpoolWait(lifecycle.exit_wait, exit->request, NULL);
     error=worker_base_controls(&events.server,&events.worker_close,&events.console_close,&lifecycle.task_close);

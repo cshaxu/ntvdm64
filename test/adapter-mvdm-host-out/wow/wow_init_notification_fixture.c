@@ -29,22 +29,21 @@ static BOOL initialize_task(void)
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_HIDE);
 }
-DWORD WINAPI wow_fixture_OpenNtBaseClientWowStarted(ULONG request)
+DWORD WINAPI wow_fixture_NtvdmReportWowStartup(ULONG request, USHORT task, BOOL bind)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     CHECK(request == 0x5678 && binding && !binding->exclusive_held);
+    if (bind) {
+        CHECK(task == 0x1234 && notifications > fail_count);
+        ++ticket_binds;
+        return ERROR_SUCCESS;
+    }
+    CHECK(!task);
     ++notifications;
     CHECK(!initialize_task() && GetLastError() == ERROR_INVALID_STATE);
     if (raise_notification) RaiseException(0xe0447002u, 0, 0, NULL);
     if (retire_notification) CHECK(wow_user_task_lifecycle_unbind(binding));
     return notifications <= fail_count ? ERROR_RETRY : ERROR_SUCCESS;
-}
-DWORD WINAPI wow_fixture_OpenNtBaseClientBindWowTask(ULONG task, USHORT htask, uint64_t *identity)
-{
-    CHECK(task == 0x5678 && htask == 0x1234 && notifications > fail_count);
-    *identity = 1;
-    ++ticket_binds;
-    return ERROR_SUCCESS;
 }
 static VOID WINAPI end_task(void) { }
 

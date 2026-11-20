@@ -1,5 +1,6 @@
 #include "compat/include/wow_user_registration_state.h"
-#include "wow32-dll/include/wow_task_start_notification.h"
+#include "compat/include/wow_task_start_notification.h"
+#include "compat/include/wow_startup_report.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_user_registered_callbacks.h"
 #include "wow_dialog_creation_binding.h"
@@ -8,21 +9,11 @@
 #include "wow_bitmap_bindings.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_task_lifecycle.h"
-#include "wow32-dll/include/wow_task_parent.h"
 #include "wow_user_private_access.h"
 #include "compat/include/wow_page_domain.h"
 
-#include "nt.h"
-#include <stdint.h>
-
-/* Original wkman.c owns this TD identity; no TD layout is copied here. */
-extern struct _TD *gptdShell;
-
-VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
-/* Uses ntvdm's existing authenticated BaseClient, never a DLL-private peer. */
-DWORD WINAPI OpenNtBaseClientWowStarted(ULONG task);
-DWORD WINAPI OpenNtBaseClientBindWowTask(ULONG task, USHORT htask, uint64_t *identity);
-BOOL WINAPI wow_current_separate_launch(void);
+#include "non-mvdm/public/sdk/inc/nt.h"
+#include "compat/include/wow_dde_data_bindings.h"
 
 /* ADAPTER-WOW-056: UserRegisterWowHandlers is one original all-or-nothing
  * ABI transaction.  Modern USER32 exposes its historical name but rejects
@@ -35,17 +26,20 @@ BOOL WINAPI wow_current_separate_launch(void);
 /* The registration seam is normally silent.  An opt-in host-only witness is
  * retained because the immutable USER16 workload has no textual way to show
  * whether it reached the all-or-nothing registration call. */
+static DWORD WINAPI report_start(ULONG request)
+{
+    return NtvdmReportWowStartup(request, 0, FALSE);
+}
+
 static DWORD notify_task_started(DWORD task_id, DWORD shared_id, const char *trace)
 {
     DWORD error = wow_user_task_lifecycle_notify_start(wow_user_registered_lifecycle(),
-        task_id, shared_id, OpenNtBaseClientWowStarted);
+        task_id, shared_id, report_start);
     wow_user_registration_trace(trace, error);
     SetLastError(error);
     /* Both identities already belong to this committed shared WOW task. */
-    if (!error && shared_id && shared_id != (DWORD)-1) {
-        uint64_t ticket;
-        (void)OpenNtBaseClientBindWowTask(shared_id, (USHORT)task_id, &ticket);
-    }
+    if (!error && shared_id && shared_id != (DWORD)-1)
+        (void)NtvdmReportWowStartup(shared_id, (USHORT)task_id, TRUE);
     return error;
 }
 

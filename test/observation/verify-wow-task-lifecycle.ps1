@@ -263,7 +263,7 @@ if ($Case -eq 'class-query') {
     $fixtureName = 'wow_class_query_fixture.c'
 }
 if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
-    Invoke-NinjaTarget $provider 'obj/wow32-dll/wow_user_registration_bridge.obj'
+    Invoke-NinjaTarget $provider 'obj/compat/wow_user_registration_bridge.obj'
     $fixtureName = 'wow_init_notification_fixture.c'
 }
 if ($Case -eq 'task-order') { $fixtureName = 'wow_task_order_fixture.c' }
@@ -613,11 +613,11 @@ if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
         $_ -match 'wow_user_registration_bridge\.c$'
     } | Select-Object -Last 1
     if (!$bridgeCompile) { throw 'Missing production registration bridge compile command' }
-    $bridgeFixture = $bridgeCompile -replace '/Fo\S+\s+\S+wow_user_registration_bridge\.c$', ('/Fo"'+$out+'\registration-bridge-fixture.obj" "'+$repo+'\src\wow32-dll\source\wow_user_registration_bridge.c"')
+    $bridgeFixture = $bridgeCompile -replace '/Fo\S+\s+\S+wow_user_registration_bridge\.c$', ('/Fo"'+$out+'\registration-bridge-fixture.obj" "'+$repo+'\src\compat\wow_user_registration_bridge.c"')
     if ($bridgeFixture -eq $bridgeCompile) { throw 'Registration bridge fixture substitution failed' }
-    Invoke-Build ($bridgeFixture + ' /DOpenNtBaseClientWowStarted=wow_fixture_OpenNtBaseClientWowStarted /DOpenNtBaseClientBindWowTask=wow_fixture_OpenNtBaseClientBindWowTask')
+    Invoke-Build ($bridgeFixture + ' /DNtvdmReportWowStartup=wow_fixture_NtvdmReportWowStartup')
     $bridgeObjects = @($objects | Where-Object {
-        $_ -match '[\\/]wow32-dll[\\/]wow_user_registration_bridge\.obj$'
+        $_ -match '[\\/]compat[\\/]wow_user_registration_bridge\.obj$'
     })
     if ($bridgeObjects.Count -ne 1) { throw 'Expected exactly one registration bridge owner' }
     $objects = @($objects | Where-Object { $_ -notin $bridgeObjects })

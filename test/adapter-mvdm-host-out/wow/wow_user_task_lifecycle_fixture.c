@@ -1,4 +1,4 @@
-#include "wow32-dll/include/wow_task_start_notification.h"
+#include "compat/include/wow_task_start_notification.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_private_access.h"
 #include "wow_window_words_binding.h"

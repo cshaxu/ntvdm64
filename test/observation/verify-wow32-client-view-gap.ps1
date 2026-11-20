@@ -6,7 +6,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $domain = Join-Path $root 'src\ntvdm-exe\softpc\mvdm_softpc_wow_page_domain.c'
-$bridge = Join-Path $root 'src\wow32-dll\source\wow_user_registration_bridge.c'
+$bridge = Join-Path $root 'src\compat\wow_user_registration_bridge.c'
 $objects = Join-Path $root 'src\wow32-dll\source\wow_user_object_bindings.c'
 $wuman = Join-Path $root 'src\mvdm-host\wow32\wuman.c'
 $mouse = Join-Path $root 'src\mvdm-host\softpc.new\host\src\nt_mouse.c'

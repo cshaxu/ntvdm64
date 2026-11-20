@@ -150,11 +150,15 @@ static BOOL dialog_cache_failure;
  * outside the protected guest page domain, just like the real RPC client;
  * the caller verifies readability again after pfnInitTask returns. */
 static unsigned initial_publication_notifications;
-DWORD WINAPI wow_fixture_OpenNtBaseClientWowStarted(ULONG request)
+DWORD WINAPI wow_fixture_NtvdmReportWowStartup(ULONG request, USHORT task, BOOL bind)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     BORROW_CHECK(request == 0x6a77u && binding && !binding->exclusive_held);
-    ++initial_publication_notifications;
+    if (bind) BORROW_CHECK(task != 0 && initial_publication_notifications == 1);
+    else {
+        BORROW_CHECK(!task);
+        ++initial_publication_notifications;
+    }
     return ERROR_SUCCESS;
 }
 #endif

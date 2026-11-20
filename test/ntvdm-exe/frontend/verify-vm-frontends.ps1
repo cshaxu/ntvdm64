@@ -13,6 +13,7 @@ $cases=@(
     @{Name='console-exit-request';Image='console-client-test.exe';Arguments=@('--console-exit-request');Expected=0},
     @{Name='natural-exit';Image='console-client-test.exe';Arguments=@('--natural-exit');Expected=0},
     @{Name='natural-loss';Image='console-client-test.exe';Arguments=@('--natural-loss');Expected=0},
+    @{Name='wow-start-control';Image='console-client-test.exe';Arguments=@('--wow-start-control');Expected=0},
     @{Name='natural-wow';Image='console-client-test.exe';Arguments=@('--natural-wow');Expected=0},
     @{Name='natural-wow-loss';Image='console-client-test.exe';Arguments=@('--natural-wow-loss');Expected=0},
     @{Name='natural-console-ready';Image='console-client-test.exe';Arguments=@('--natural-console-ready');Expected=73},

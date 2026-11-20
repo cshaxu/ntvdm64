@@ -4,6 +4,7 @@
  * stubbed; both I/O implementations and Console operations are real. */
 #include "ntvdm-exe/win32/console_client.h"
 #include "compat/include/console_activation.h"
+#include "compat/include/wow_startup_report.h"
 #include "ntvdm-exe/win32/worker_lifecycle.h"
 #include "compat/include/mvdm_softpc_event_thread.h"
 #include "compat/include/mvdm_softpc_worker_exit.h"
@@ -90,6 +91,24 @@ DWORD worker_base_io_release_event(HANDLE *event)
     *event=CreateEventW(NULL,TRUE,FALSE,NULL);
     return *event ? ERROR_SUCCESS : GetLastError();
 }
+static DWORD startup_caller;
+static volatile LONG starts, binds;
+DWORD WINAPI OpenNtBaseClientWowStarted(ULONG request)
+{
+    CHECK(startup_caller && startup_caller != GetCurrentThreadId());
+    CHECK(request == 0x4321 && !binds);
+    return InterlockedIncrement(&starts) == 1 ? ERROR_RETRY : ERROR_SUCCESS;
+}
+
+DWORD WINAPI OpenNtBaseClientBindWowTask(ULONG request, USHORT task, uint64_t *ticket)
+{
+    CHECK(startup_caller != GetCurrentThreadId());
+    CHECK(request == 0x4321 && task == 0x1234 && starts == 2);
+    *ticket = 1;
+    InterlockedIncrement(&binds);
+    return ERROR_SUCCESS;
+}
+
 DWORD OpenNtBaseClientFailure(DWORD error)
 { return broker_lifetime && WaitForSingleObject(broker_lifetime,0)==WAIT_OBJECT_0 ? ERROR_INVALID_HANDLE : error; }
 DWORD worker_base_controls(HANDLE *process,HANDLE *shutdown,HANDLE *console_close,HANDLE *wow_task_close)
@@ -418,6 +437,18 @@ int main(int argc,char **argv)
     }
     hang_close=argc==2 && !strcmp(argv[1],"--close-hang");
     fault_reported=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(fault_reported);
+    if(argc==2 && !strcmp(argv[1],"--wow-start-control")) {
+        CHECK(NtvdmReportWowStartup(0x4321,0,FALSE)==ERROR_INVALID_STATE);
+        lifecycle_wow=TRUE;
+        CHECK(!ntvdm_worker_lifecycle_begin(&owner,FALSE));
+        startup_caller=GetCurrentThreadId();
+        CHECK(NtvdmReportWowStartup(0x4321,0,FALSE)==ERROR_RETRY && !binds);
+        CHECK(!NtvdmReportWowStartup(0x4321,0,FALSE) && !binds);
+        CHECK(!NtvdmReportWowStartup(0x4321,0x1234,TRUE) && binds==1);
+        ntvdm_worker_lifecycle_end();
+        puts("PASS same worker control carries start/retry and explicit ticket bind");
+        return 0;
+    }
     if(argc==2 && (!strcmp(argv[1],"--natural-wow") || !strcmp(argv[1],"--natural-wow-loss"))) {
         BOOL lost=!strcmp(argv[1],"--natural-wow-loss");
         HANDLE thread;
