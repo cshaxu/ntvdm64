@@ -1,0 +1,63 @@
+{
+  "packet": "M0 T483 S14 P135",
+  "parent": "d1af9c20422341de85e615bde3b51ed2644792c3",
+  "eliminated_C": [
+    "C0462"
+  ],
+  "eliminated_B": [],
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 2
+  },
+  "outward_C_known_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 7
+  },
+  "C_named_image_imports": 1,
+  "ownership": "The caller waits for the native hung-app thread and uses its result with the caller-owned ticket. Cancel and an already absent task complete with ERROR_CANCELLED. No HTASK lookup occurs on this completion path. Bind and retirement still use the existing paths.",
+  "mirror": {
+    "upstream": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "baseline_sha256": "80d4e23199f36258630f05c2cd23abc166686d35030cf7a2c21b1ae2da999a94",
+    "path": "src/mvdm-host/wow32/wkman.c",
+    "counting": "Diff blocks and inserted plus deleted lines against fixed OpenNT. Excluded and diagnostic directives unchanged.",
+    "before": [
+      88,
+      367
+    ],
+    "after": [
+      88,
+      368
+    ],
+    "delta": [
+      0,
+      1
+    ]
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "457280b9-c2de-4c44-82e7-4f3cb3e85908",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "focused": "WOW_TASK_CLOSE_RESULT cancel=original-ticket reused-htask=1 serialized=1 success-reopen=0",
+    "retirement": [
+      "WOW_PROCESS_RETIREMENT errors=0 startup-rollback/cleanup-atomic/task/object/class/refusal/retry/event/native checked",
+      "WOW_FIXTURE_OK case=process-retirement"
+    ],
+    "shared_wow": "PASS shared worker 27872, two distinct tasks overlapped and retired independently, both requests exited normally",
+    "limitations": "The focused test links the actual WOW32 management adapter and supplies a controlled native handler. The real guest test covers overlapping tasks and ordinary exit, not both interactive cancel dialogs."
+  },
+  "receipts_sha256": {
+    "fixture.out": "0b9f5a32fb77bac72b1d2fb560f46a35e2664f3aa8d5063138451385ab0e7a5b",
+    "wkman-symbols.txt": "cba1f81352f6989d1ed7f2d6c0d76b382ae30b0326aa434b3206dc5ace6e77fe",
+    "termination-symbols.txt": "54ce06077d319c72af3a9310c7f7f5931d71db75e155a5964463bcab291daa0d",
+    "result.txt": "913fbd84aec3e24af36e1914560307c04a8d0d7244e0d4e08a61c3233d4fab73"
+  }
+}

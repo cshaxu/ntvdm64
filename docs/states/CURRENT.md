@@ -54,7 +54,8 @@ P131 [Resource scope](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-r
 P132 [VM IRQ owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-notification-owner.json) moved the PIC notification operations to B; B0021 stays open.
 P133 [VM wake and input owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-wake-owner.json) moved the queue to B. B0021 stays open.
 P134 [Thread binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-thread-binding-owner.json) removed B0023/B0024 and three VDMREDIR F implementations.
-Delivered: B 2 known calls; C 11 open (10 functions, 1 image).
+P135 [WOW close result](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-close-result-owner.json) removed C0462.
+Delivered: B 2 known calls; C 10 open (9 functions, 1 image).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moves the page-domain identity and cleanup into B, removing the product header

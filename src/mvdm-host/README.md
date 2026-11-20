@@ -960,16 +960,16 @@ only `{ticket, HTASK}` for an authenticated NTSRV close request and invokes
 the original local hung-task entry on a new local thread because that original
 entry exits its caller.  It neither owns a task scheduler nor substitutes a
 PID/request number for `HTASK`; guest sources and semantics are unchanged.
-The two original user-cancel exits in `W32HungAppNotifyThread` leave the task
-alive, so their owner-local hooks only reopen that same authenticated ticket;
-they never retry or replace original hung-task policy.
+The two user-cancel exits in `W32HungAppNotifyThread` leave the task alive and
+report `ERROR_CANCELLED` through the native thread result. The starter reopens
+the original authenticated ticket for a later request.
 The original handler has one global completion event and target-TDB slot, so
 the adapter admits only one such original termination transaction at a time;
 a concurrent request reports failure for an explicit later retry rather than
 running two source handlers against shared state.  Its serial gate ends when
 the original handler thread ends, while normal cleanup still owns ticket
-retirement; a handler that finds no task reopens its own still-published
-ticket rather than stranding it.
+retirement. A handler that finds no task also reports `ERROR_CANCELLED`;
+the starter can release only the ticket it used to launch that handler.
 Separate WOW has no surviving original task record and receives zero at this
 original hand-off, so it remains worker-close-only rather than acquiring a
 fabricated task row.  The matching host adapter is

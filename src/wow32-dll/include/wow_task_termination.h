@@ -10,7 +10,6 @@ VOID WINAPI W32ExitWowProcess(DWORD exit_code);
  * task mapping and invokes the original in-process termination entry. */
 DWORD WINAPI wow_task_termination_bind(ULONG task, USHORT htask);
 void WINAPI wow_task_termination_retire(USHORT htask);
-void WINAPI wow_task_termination_fail(USHORT htask);
 DWORD WINAPI W32TerminateTaskTicket(uint64_t ticket);
 
 #endif

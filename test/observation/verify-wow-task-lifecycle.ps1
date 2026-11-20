@@ -2,7 +2,7 @@ param(
     [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
     [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
     [string]$BuildRoot,
-    [ValidateSet('original-hook-cleanup','task-lifecycle','process-retirement','menu-cleanup','menu-resource','page-domain','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
+    [ValidateSet('original-hook-cleanup','task-lifecycle','process-retirement','menu-cleanup','menu-resource','page-domain','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation','task-close-result')] [string]$Case = 'task-lifecycle',
     [switch]$InitRollback,
     [switch]$CreationUnwind,
     [switch]$RetirementLockProbe,
@@ -153,6 +153,19 @@ function Invoke-Build([string]$command) {
 }
 function Invoke-NinjaTarget([string]$directory, [string]$target) {
     Invoke-CompilerCommand $directory ('"'+$Ninja+'" '+$target)
+}
+if ($Case -eq 'task-close-result') {
+    $object = 'obj/wow32-dll/wow_task_termination.obj'
+    Invoke-NinjaTarget $provider $object
+    $fixture = "$repo/test/wow32-dll/source/wow_task_close_result_fixture.c"
+    Invoke-CompilerCommand $out ('cl.exe /nologo /W4 /MT /I"'+$repo+'/src" /Fewow-task-close-result.exe "'+
+        $fixture+'" "'+(Join-Path $provider $object)+'" kernel32.lib')
+    $result = & "$out/wow-task-close-result.exe"
+    if ($LASTEXITCODE -or $result -notmatch '^WOW_TASK_CLOSE_RESULT .*success-reopen=0$') {
+        throw "Task close result fixture failed: $LASTEXITCODE $result"
+    }
+    $result
+    return
 }
 # T422 owns these worker-local objects. Build exactly those selected objects;
 # do not rely on a provider-only build or on an incidental aggregate archive.

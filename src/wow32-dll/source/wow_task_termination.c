@@ -37,17 +37,21 @@ static DWORD WINAPI wow_task_termination_wait_for_handler(PVOID parameter)
 {
     wow_task_termination_wait *wait=parameter;
     DWORD result=WaitForSingleObject(wait->ready,INFINITE);
+    DWORD handler_exit;
+    BOOL cancelled=FALSE;
     CloseHandle(wait->ready);
-    if(result==WAIT_OBJECT_0) {
-        if(wait->handler) {
-            WaitForSingleObject(wait->handler,INFINITE);
-            CloseHandle(wait->handler);
-        }
+    if(result==WAIT_OBJECT_0 && wait->handler) {
+        cancelled=WaitForSingleObject(wait->handler,INFINITE)==WAIT_OBJECT_0 &&
+            GetExitCodeThread(wait->handler,&handler_exit) && handler_exit==ERROR_CANCELLED;
+        CloseHandle(wait->handler);
     }
     EnterCriticalSection(&wow_task_termination_lock);
     if(wow_task_termination_active==wait->ticket)
         wow_task_termination_active=0;
     LeaveCriticalSection(&wow_task_termination_lock);
+    /* Reopen the authenticated ticket this starter used for the handler. */
+    if(cancelled)
+        (void)OpenNtBaseClientFailWowTaskClose(wait->ticket);
     HeapFree(GetProcessHeap(),0,wait);
     return 0;
 }
@@ -108,25 +112,6 @@ void WINAPI wow_task_termination_retire(USHORT htask)
         (void)OpenNtBaseClientRetireWowTask(entry->ticket);
         HeapFree(GetProcessHeap(),0,entry);
     }
-    SetLastError(error);
-}
-
-void WINAPI wow_task_termination_fail(USHORT htask)
-{
-    wow_task_termination_entry *entry;
-    uint64_t ticket=0;
-    DWORD error=GetLastError();
-    if(!htask || !wow_task_termination_ready())return;
-    EnterCriticalSection(&wow_task_termination_lock);
-    for(entry=wow_task_termination_entries;entry;entry=entry->next)
-        if(entry->htask==htask) {ticket=entry->ticket;break;}
-    if(ticket && wow_task_termination_active==ticket)
-        wow_task_termination_active=0;
-    LeaveCriticalSection(&wow_task_termination_lock);
-    /* This is only the original explicit user-cancel path.  It reopens the
-     * already authenticated management row for a later user request; it
-     * neither retries nor changes original hung-task policy. */
-    if(ticket)(void)OpenNtBaseClientFailWowTaskClose(ticket);
     SetLastError(error);
 }
 

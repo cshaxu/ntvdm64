@@ -34,7 +34,6 @@
 extern VOID WINAPI W32ExitWowProcess(DWORD exit_code);
 extern DWORD WINAPI wow_task_termination_bind(ULONG task, USHORT htask);
 extern VOID WINAPI wow_task_termination_retire(USHORT htask);
-extern VOID WINAPI wow_task_termination_fail(USHORT htask);
 #include "wow_idle_hook_binding.h"
 #include <compat/include/wow_registry.h>
 
@@ -2895,9 +2894,8 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                     );
 
             if (nMsgBoxChoice == IDCANCEL) {
-                 wow_task_termination_fail((USHORT)htaskKill);
 #line 2910
-                 ExitThread(0);
+                 ExitThread(ERROR_CANCELLED);
             }
         }
 
@@ -2964,9 +2962,8 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                  EnterCriticalSection(&gcsHungApp);
                  *pNtVDMState &= ~VDM_WOWHUNGAPP;
                  LeaveCriticalSection(&gcsHungApp);
-                 wow_task_termination_fail((USHORT)htaskKill);
 #line 2977
-                 ExitThread(0);
+                 ExitThread(ERROR_CANCELLED);
             }
 
             LOGDEBUG(LOG_ALWAYS, ("W32HungAppNotifyThread: Destroying WOW Process\n"));
@@ -2980,7 +2977,7 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
     } else { // task not found
 
         LOGDEBUG(LOG_ALWAYS,("W32HungAppNotifyThread: Task already Terminated \n"));
-        wow_task_termination_fail((USHORT)htaskKill);
+        ExitThread(ERROR_CANCELLED);
 
 #line 2992
     }
