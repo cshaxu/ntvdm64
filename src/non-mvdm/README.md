@@ -1894,6 +1894,13 @@ T483 S14 P114 selects the original LPC declarations directly and applies the
 host resource and request-thread binding from compat after the original CSR
 declarations. The restored `#line` keeps subsequent BaseSrv declarations at
 their original diagnostic lines. Net mirror delta is one point and two lines.
+
+T483 S14 P116 places the existing disabled `UserNotifyProcessCreate` cell
+with its two original consumers in `base/win32/server/srvvdm.c`. The
+declaration is verbatim from `base/win32/server/srvtask.c:23`. The
+standalone service supplies no setter, and the original guards and
+diagnostic lines are preserved. Net mirror delta is one point and two lines.
+
 OPENNT-HOST-029 restores original RtlConvertLongToLuid in the selected
 `public/sdk/inc/ntrtl.h` subset, including its __inline storage shape; only
 trailing blank-line whitespace is normalized. Origin is the same pinned

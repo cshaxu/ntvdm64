@@ -1,0 +1,101 @@
+{
+  "packet": "M0 T483 S14 P116",
+  "baseline": "0f551c2a4d31351c0c6d023bff5ee86c86aa28c3",
+  "eliminated_C_ids": [
+    "C0171"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 543,
+    "open": 25,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 5
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 8,
+    "image-import": 1,
+    "symbol": 16
+  },
+  "remaining_C_by_provider": {
+    "common": 3,
+    "ntvdm-exe": 10,
+    "worker-base": 2,
+    "wow32-dll": 8,
+    "ntsrv-exe": 2
+  },
+  "authority": "C owns the disabled original USER process-create cell. The linked image has exactly one definition; existing product configuration admits no setter. This does not add original USER initialization or change WOW/DOS request lifecycle.",
+  "mirror_delta": {
+    "points": 1,
+    "lines": 2,
+    "measured": {
+      "file": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "declaration_origin": "base/win32/server/srvtask.c:23",
+      "origin_sha256": "a5e822caf2f3e81ece577d3df6d90536fefc8dd56ef14c17ea72dc554fb71338",
+      "mirror_anchor_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+      "before": {
+        "points": 18,
+        "lines": 93
+      },
+      "after": {
+        "points": 19,
+        "lines": 95
+      },
+      "delta": {
+        "points": 1,
+        "lines": 2
+      }
+    }
+  },
+  "compile_proof": {
+    "selected_owner": "opennt-base-server:srvvdm.obj",
+    "former_owner": "ntsrv-exe/opennt/source/service_core.c"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "b41262fc-ec54-4538-82a8-a3db313495ca",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "scope": "cached x86/x64/reference product builds and x86 original BaseSrv archive; native service symbol map, dual publication and 22 file hashes, governance and authenticated BaseSrv reservation fixture, real shared WOW dual-task exit and DOS/Win16 regressions",
+    "runtime_output": [
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+      "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+      "PASS shared worker 23480, two distinct tasks overlapped and retired independently, both requests exited normally",
+      "detached CheckDOS task=1 reservation-error=0",
+      "detached CheckDOS task=2 reservation-error=0",
+      "detached CheckDOS task=3 reservation-error=0",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS DOS Get replaces previous request on resident-worker reuse",
+      "PASS WOW request/worker rejects valid character frontend/context without changing original WOW Get/Exit",
+      "PASS WOW task close binds opaque management identity, delivers once, retries only on later intent and retires safely",
+      "PASS WOW startup authentication, wait-only notification and immediate-completion latch",
+      "PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected",
+      "PASS reused WOW receipt mismatch, retired task and worker reuse checked",
+      "PASS failed WOW completion has no startup acknowledgement; late report rejected",
+      "PASS closing original WOW head rejects new task without publishing a record",
+      "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+    ]
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "ec228b2624acb83cae2953155cfef2e2456508ca7db5b5e6cae73b3da1b25e63",
+    "boundary.out": "4258f19fb23f1a0bf478e6859f3115ba03dc589bf7ac4afb65aa5506cb12f85c",
+    "mirror-delta.json": "137fa5a36287b50cc080085bb8abfb988876ad80e194471d61771473a924c59d",
+    "probes.out": "6785aea0f6ccb7c3b919d80c3de176821033a82ebd92790e43383c923f262f79",
+    "shared-wow/result.txt": "89256da79889e719e13ed7b2a2447b36671bfa07004ef72317d602e988de9f27",
+    "final-checks.out": "1bff0f933ae18e62015b3561d4fae44cde052745e22905a2be83ada69afe50e6"
+  }
+}

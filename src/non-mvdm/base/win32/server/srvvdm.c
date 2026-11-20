@@ -35,7 +35,7 @@ Revision History:
 #line 35
 LUID WowAuthId={0xFFFFFFFF,-1};
 
-
+PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
 
 
 BOOL fIsFirstVDM = TRUE;

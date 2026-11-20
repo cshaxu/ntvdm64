@@ -4,13 +4,6 @@
 #include <service_internal.h>
 #include "lib-win32/handle/duplicate.h"
 
-/* Original guarded USER notification hook remains unavailable. */
-PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate=NULL;
-
-
-
-/* Original guarded USER hook is absent in standalone CLI composition. */
-
 OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
 {
     OPENNT_BASE_SERVICE *service=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*service));
