@@ -1,4 +1,11 @@
-#include "precomp.h"
+#include "non-mvdm/public/sdk/inc/nt.h"
+#include "wow32_provider_private.h"
+
+#undef _X86_
+#include "mvdm-host/wow32/wow32.h"
+#include "mvdm-host/wow32/wmdisp32.h"
+#include "mvdm-host/wow32/wumsg.h"
+#include "mvdm-host/inc/softpc.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_thunk_scope.h"
 #include "wow_task_order_bindings.h"

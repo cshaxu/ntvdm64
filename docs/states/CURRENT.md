@@ -53,16 +53,13 @@ chains migrate. Final governance and enclosing commit/push are the receipt.
 
 
 P83 [Console mouse ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-mouse-owner.json)
-moves queue/scaling, guest adaptation and same-context lookup into B.
-Cached full build, dual11/22 hashes, native and five private-desktop DOS mouse
-cases passed; mirror delta0/0. Test cases now clean their owned desktop processes.
-Eight IDs eliminated: current429/139. Console control/transport remains open.
-Enclosing commit/push is receipt; prior P76 evidence remains in P81 history.
+moved mouse adaptation into B; C -8. Five isolated DOS mouse cases passed.
 
 P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-text-owner.json) delivered C -7.
 P105 [WOW callbacks](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-callback-owner.json) delivered C -2.
 P106 [SoftPC storage](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-softpc-xt-owner.json) delivered C -1.
-Delivered: B 8 known calls; C 43 open (25 functions, 1 data).
+P107 [WOW thunk scopes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-thunk-owner.json) delivered C -4.
+Delivered: B 8 known calls; C 39 open (22 functions, 1 data).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same

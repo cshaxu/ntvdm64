@@ -29,7 +29,7 @@ try {
     # The fixture compiles the byte-exact extracted WndProc itself. Linking
     # wmdisp32.c as well duplicates that symbol and pulls in its unrelated
     # message-conversion graph, which this bounded test does not exercise.
-    $sources=@('src/mvdm-host/wow32/wow32.c','src/wow32-dll/source/wow_user_thunk_scope.c','test/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c')
+    $sources=@('src/mvdm-host/wow32/wow32.c','src/compat/wow_user_thunk_scope.c','test/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c')
     $objects=@()
     foreach($source in $sources){
         $name=[IO.Path]::GetFileNameWithoutExtension($source)

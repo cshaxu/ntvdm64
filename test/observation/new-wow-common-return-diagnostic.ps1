@@ -13,44 +13,31 @@ $replacements=@{}
 Push-Location $provider
 try{
  foreach($name in @('wow_user_task_lifecycle','wow_user_thunk_scope')){
-  $source="$repo/src/wow32-dll/source/$name.c"
+  $source="$repo/src/compat/$name.c"
   $text=[IO.File]::ReadAllText($source)
   if($name -eq 'wow_user_task_lifecycle'){
-   $old='WOW_NATIVE_CALL(BOOL, DestroyWindow, (HWND w), (w), FALSE)'
-   if(([regex]::Matches($text,[regex]::Escape($old))).Count -ne 1){throw 'Destroy boundary changed'}
-   $new=@"
-#define WOW_DIAG_DESTROY_STORAGE
-#include "$header"
-BOOL WINAPI wow_native_DestroyWindow(HWND w)
-{
-    wow_user_native_call call;
-    BOOL result, restored;
-    DWORD error = GetLastError();
-    if (!wow_user_native_call_begin(&call, w)) return FALSE;
-    SetLastError(error);
-    __try { result = DestroyWindow(w); }
-    __finally {
-        error = GetLastError();
-        restored = wow_user_native_call_end(&call);
-        if (restored) SetLastError(error);
-    }
-    wow_diag_destroy.raw = w;
-    wow_diag_destroy.full = call.target_window;
-    wow_diag_destroy.result = result;
-    return restored ? result : FALSE;
-}
-"@
-   $text=$text.Replace($old,$new)
+   $pattern='(?m)^#define WOW_NATIVE_MAPPED_DESTROY_WINDOW[^\r\n]*(?:\r?\n[^\r\n]*\\)*\r?\n\}'
+   $matches=[regex]::Matches($text,$pattern)
+   if($matches.Count -ne 1){throw 'Destroy boundary changed'}
+   $body=$matches[0].Value
+   $old='    return restored ? result : failed; \'
+   if(([regex]::Matches($body,[regex]::Escape($old))).Count -ne 1){throw 'Destroy return changed'}
+   $trace=@(
+      '    wow_diag_destroy.raw = w; \',
+      '    wow_diag_destroy.full = native; \',
+      '    wow_diag_destroy.result = result; \',
+      $old) -join "`n"
+   $text=$text.Replace($body,"#define WOW_DIAG_DESTROY_STORAGE`n#include `"$header`"`n"+$body.Replace($old,$trace))
   }else{
    $old='ULONG WINAPI wow_user_invoke_thunk(LPFNW32 thunk, PVDMFRAME frame)'
    if(([regex]::Matches($text,[regex]::Escape($old))).Count -ne 1){throw 'Thunk boundary changed'}
-   $text=$text.Replace($old,"#define WOW_DIAG_FAILURE_REPORT`n#include `"$header`"`n"+$old)
+   $text=$text.Replace($old,"#include <wowkrn.h>`n#include `"wkfileio.h`"`n#define WOW_DIAG_FAILURE_REPORT`n#include `"$header`"`n"+$old)
    $old='    trace_thunk(frame, thunk);'
    if(([regex]::Matches($text,[regex]::Escape($old))).Count -ne 1){throw 'Thunk admission changed'}
    $text=$text.Replace($old,"    wow_diag_failure_report(thunk, frame);`n"+$old)
   }
   [IO.File]::WriteAllText("$out/$name.c",$text)
-  $object="obj/wow32-dll/$name.obj"
+  $object="obj/compat/$name.obj"
   $command=@(& $ninja -t commands $object)[-1]
   if($LASTEXITCODE){throw 'Compile command unavailable'}
   $command=$command.Replace($source.Replace('\','/'),"$out/$name.c".Replace('\','/')).Replace($object,"$out/$name.obj".Replace('\','/'))
@@ -68,6 +55,6 @@ BOOL WINAPI wow_native_DestroyWindow(HWND w)
  [IO.File]::WriteAllText("$out/link.cmd","@echo off`r`ncall `"$driver`" $link`r`nexit /b %errorlevel%`r`n")
  & cmd.exe /d /c "$out/link.cmd" *> "$out/link.log"
  if($LASTEXITCODE){throw 'Diagnostic link failed'}
- Get-FileHash "$repo/src/compat/wow_user_task_lifecycle.c","$repo/src/wow32-dll/source/wow_user_thunk_scope.c",$header,$PSCommandPath,"$out/WOW32.DLL","$out/wow_user_task_lifecycle.c","$out/wow_user_thunk_scope.c"|Export-Csv -NoTypeInformation "$out/inputs.csv"
+ Get-FileHash "$repo/src/compat/wow_user_task_lifecycle.c","$repo/src/compat/wow_user_thunk_scope.c",$header,$PSCommandPath,"$out/WOW32.DLL","$out/wow_user_task_lifecycle.c","$out/wow_user_thunk_scope.c"|Export-Csv -NoTypeInformation "$out/inputs.csv"
  @{kind='diagnostic-only';publishable=$false;source='Two project-owned exact copies with failure-only observation';guestChanged=$false}|ConvertTo-Json|Set-Content "$out/result.json"
 }catch{$_|Out-String|Set-Content "$out/failure.txt";exit 1}finally{Pop-Location}

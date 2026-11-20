@@ -1,0 +1,69 @@
+{
+  "packet": "M0 T483 S14 P107",
+  "baseline": "e374db5fe3bee41cb2c35113189fff906809cfe5",
+  "eliminated_C_ids": [
+    "C0128",
+    "C0587",
+    "C0588",
+    "C0589"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 529,
+    "open": 39,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "scope": "Move the WOW thunk scope, exception frame adaptation and modal guard to B with the same source body and declarations. Select original header declarations narrowly and preserve /Gz, the existing cdecl system-error entry, and C-owned exception policy, TLS flags and SoftPC modal service.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "final_product_symbols": {
+    "_wow_user_dispatch_exception@20": "0001:0006d340       _wow_user_dispatch_exception@20 1006e340 f   wow_user_thunk_scope.obj",
+    "_wow_user_invoke_thunk@8": "0001:0006d3f0       _wow_user_invoke_thunk@8   1006e3f0 f   wow_user_thunk_scope.obj",
+    "_wow_user_sys_error_box": "0001:0006d740       _wow_user_sys_error_box    1006e740 f   wow_user_thunk_scope.obj"
+  },
+  "compiled_ownership": {
+    "objects": [
+      {
+        "graph": "wow32",
+        "object": "obj/compat/wow_user_thunk_scope.obj",
+        "source": "src/compat/wow_user_thunk_scope.c",
+        "sha256": "60a4fec29441cbbb4953d76bd1bd45497e1261843db7a5739ce615159f215f39"
+      }
+    ],
+    "counts": {
+      "CRT": 6,
+      "mvdm-host": 4,
+      "system import": 9,
+      "TLS ABI absolute": 1,
+      "compat": 5
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "0e39002b-c17e-4e40-8491-b0543be9031f",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, targeted WOW fixtures, real Win16 ShellExecute and structural gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "b-compiled-candidates.json": "20aa10688a0a0c3876c86b495c125617237919e99fb292f140de545ab45263be",
+    "thunk-deps.txt": "af43d0a3cd85c9e764f1976d062ab53aa84ed58b1ed291fe959b0b1681d9b4b5",
+    "steps.txt": "ee8a9c7213bffe14d46468b50831b6b752d6e51ddac1f990aa6c492444512d1a",
+    "probes.out": "dab9304086c7af0cdbc7a1dc69895f2c101b0e272f1c73a70a6a65180c27c743",
+    "dispatch/fixture.out": "52ab8e47bc553c6233091f8867be6f103f1c5e6f0bf278f16e79d6be33bb2855",
+    "diagnostic/failure.txt": "3fde90eedc02e0b954e8e1af422eb0f4c3de1338befc6b9aa6d95f36823926df",
+    "diagnostic-final/result.json": "2992798ec6541e2f5d7549dfb3454584bfcc430ee67d2e77a53a3f94a9ea9b6a",
+    "final-checks.out": "4e764766420b86d4b3bb778d32a4dd93487bd591365b204522bd3b8218ae363a",
+    "guest-shell/result.txt": "a250f3009a0294d80eb0b99ddf5623c4fa931dfde11f4ef80f72fd9c355eb401"
+  }
+}

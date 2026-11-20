@@ -3,8 +3,8 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "eliminated": 525,
-    "open": 43,
+    "eliminated": 529,
+    "open": 39,
     "supporting-evidence": 43,
     "eliminated-transitive": 6
   },
@@ -54,21 +54,6 @@
         "UserRegisterWowHandlers",
         "wow_user_notify_startup_noop",
         "wow_user_register_wow_exec"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_user_thunk_scope.c",
-      "open_ids": [
-        "C0587",
-        "C0588",
-        "C0589"
-      ],
-      "count": 3,
-      "symbols": [
-        "wow_user_dispatch_exception",
-        "wow_user_invoke_thunk",
-        "wow_user_sys_error_box"
       ]
     },
     {
@@ -339,15 +324,6 @@
       "symbols": []
     },
     {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_user_thunk_scope.h",
-      "open_ids": [
-        "C0128"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
       "kind": "symbol",
       "provider": "src/wow32-dll/source/wow_hook_callback.c",
       "open_ids": [
@@ -426,5 +402,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P106"
+  "updated_by": "T483 S14 P107"
 }
