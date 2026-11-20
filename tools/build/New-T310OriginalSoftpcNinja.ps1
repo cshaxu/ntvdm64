@@ -177,7 +177,7 @@ $biosNames = Get-OriginalSources $biosManifest
 $keymouseNames = Get-OriginalSources $keymouseManifest
 $systemNames = Get-OriginalSources $systemManifest
 $disksNames = Get-OriginalSources $disksManifest
-# xt.c is retired; its consumed verbose storage belongs to the worker.
+# xt.c is retired; compat supplies its selected verbose storage.
 $supportNames = @(Get-OriginalSources $supportManifest | Where-Object { $_ -ne 'xt.c' })
 $videoNames = Get-OriginalSources $videoManifest
 # CCPU's original C-language video-memory access backend.  It complements
@@ -1305,6 +1305,9 @@ $graph.Add('build obj/compat/wow_start_glass.obj: cc ' + (NinjaPath (Join-Path $
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/compat/wow_start_glass.obj'
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj'
+$graph.Add('build obj/compat/softpc_xt_storage.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/softpc_xt_storage.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterSoftpcObjects += 'obj/compat/softpc_xt_storage.obj'
 $graph.Add('build obj/adapter-softpc/mvdm_keyboard_history.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_keyboard_history.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/adapter-softpc/mvdm_keyboard_history.obj'

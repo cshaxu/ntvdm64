@@ -61,7 +61,8 @@ Enclosing commit/push is receipt; prior P76 evidence remains in P81 history.
 
 P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-text-owner.json) delivered C -7.
 P105 [WOW callbacks](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-callback-owner.json) delivered C -2.
-Delivered: B 8 known calls; C 44 open (25 functions, 2 data).
+P106 [SoftPC storage](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-softpc-xt-owner.json) delivered C -1.
+Delivered: B 8 known calls; C 43 open (25 functions, 1 data).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same

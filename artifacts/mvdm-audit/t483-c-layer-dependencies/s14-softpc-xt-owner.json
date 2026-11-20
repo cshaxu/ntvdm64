@@ -1,0 +1,58 @@
+{
+  "packet": "M0 T483 S14 P106",
+  "baseline": "1fc0410e61e8b66a9c623433cb512cc337981127",
+  "eliminated_C_ids": [
+    "C0608"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 525,
+    "open": 43,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "scope": "Move only the sole production-consumed storage from the retired xt.c extraction out of F. The bounded-execution fixture adapter and original CPU code retain their behavior.",
+  "source_anchor": {
+    "original": "OpenNT/base/mvdm/softpc.new/base/support/xt.c:152",
+    "sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+    "symbol": "int verbose;",
+    "provider": "src/compat/softpc_xt_storage.c"
+  },
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "linkage": [
+    " 0003:0025abac       _verbose                   00813bac     <common>",
+    "",
+    "007 00000004 UNDEF  notype       External     | _verbose",
+    "obj\\compat\\softpc_xt_storage.obj",
+    " 0003:0025abac       _verbose                   00813bac     <common>",
+    "007 00000004 UNDEF  notype       External     | _verbose",
+    "obj\\compat\\softpc_xt_storage.obj",
+    "PASS verbose compat production and reference linkage",
+    ""
+  ],
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "fae805fa-c8f0-4390-9cf7-30981be32603",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "dos4gw_graphics": true,
+  "status": "Cached full build, dual publication, CCPU bounded execution, DOS4GW/NESticle and structural gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "linkage.out": "1c4e2a9ebcd599c9e1aa0bca9a22afa063a5aa4ac880b8234f9d156b5b2ff1a9",
+    "steps.txt": "5204cb0cfce0e82b17f04e084400f3cfd03446cba71dba4906cc84479ce0450f",
+    "probes.out": "4b96dc4aed2ab32b612947e2418107705f44fa88516f990a1f217287c1db78b9",
+    "final-checks.out": "ebfcdb03a09a6e6b138cd6eb4f0ae12fe58a0a81874046acd1d03e2918d92dca",
+    "dos4gw/nesticle.txt.graphics-result.json": "0bcabf59dc576aa6ddeabd4e6511f25598eb5c757178188b81bffdda4d54dcb1",
+    "dos4gw/nesticle.txt.graphics-before.png": "4b09fd91d9e641b490721a8209067afcf545c26d4fb8ba5ad4b38191833ef487"
+  }
+}
