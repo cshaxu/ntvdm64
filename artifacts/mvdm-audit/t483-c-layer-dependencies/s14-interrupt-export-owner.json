@@ -1,0 +1,466 @@
+{
+  "packet": "M0 T483 S14 P128",
+  "parent": "5075bc22195f7b32b635fea17a845ba5bcff1805",
+  "affected_C_point": "C0134",
+  "eliminated_C_ids": [],
+  "eliminated_B_ids": [],
+  "implementation_providers_removed": 1,
+  "tracked_outward_B_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 4
+  },
+  "tracked_outward_C_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 8
+  },
+  "tracked_C_image_import_boundaries": 1,
+  "verified_function_imports_inside_C0134": {
+    "VDMREDIR.dll": [
+      {
+        "ordinal": 93,
+        "export": "getAX",
+        "link_symbol": "_getAX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 124,
+        "export": "getMSW",
+        "link_symbol": "_getMSW",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 225,
+        "export": "setBH",
+        "link_symbol": "_setBH",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 148,
+        "export": "mvdm_softpc_guest_memory_acquire",
+        "link_symbol": "_mvdm_softpc_guest_memory_acquire",
+        "provider": "original-ccpu386:ccpusas4.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 104,
+        "export": "getDH",
+        "link_symbol": "_getDH",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 95,
+        "export": "getBL",
+        "link_symbol": "_getBL",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 149,
+        "export": "mvdm_softpc_guest_memory_release",
+        "link_symbol": "_mvdm_softpc_guest_memory_release",
+        "provider": "original-ccpu386:ccpusas4.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 92,
+        "export": "getAL",
+        "link_symbol": "_getAL",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 46,
+        "export": "SoftPcEoi",
+        "link_symbol": "_SoftPcEoi",
+        "provider": "original-softpc-host-roots:nt_eoi.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 59,
+        "export": "VDDInstallUserHook",
+        "link_symbol": "_VDDInstallUserHook",
+        "provider": "original-softpc-host-roots:nt_msscs.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 101,
+        "export": "getCS",
+        "link_symbol": "_getCS",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 45,
+        "export": "Sim32pGetVDMPointer",
+        "link_symbol": "_Sim32pGetVDMPointer",
+        "provider": "original-softpc-host-roots:sim32.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 141,
+        "export": "mvdm_redirector_async_release",
+        "link_symbol": "_mvdm_redirector_async_release",
+        "provider": "mvdm_redirector_async.obj",
+        "layer": "B"
+      },
+      {
+        "ordinal": 137,
+        "export": "mvdm_redirector_async_complete",
+        "link_symbol": "_mvdm_redirector_async_complete",
+        "provider": "mvdm_redirector_async.obj",
+        "layer": "B"
+      },
+      {
+        "ordinal": 140,
+        "export": "mvdm_redirector_async_prepare",
+        "link_symbol": "_mvdm_redirector_async_prepare",
+        "provider": "mvdm_redirector_async.obj",
+        "layer": "B"
+      },
+      {
+        "ordinal": 260,
+        "export": "setZF",
+        "link_symbol": "_setZF",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 238,
+        "export": "setDS",
+        "link_symbol": "_setDS",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 96,
+        "export": "getBP",
+        "link_symbol": "_getBP",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 223,
+        "export": "setAL",
+        "link_symbol": "_setAL",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 75,
+        "export": "WaitIfIdle",
+        "link_symbol": "_WaitIfIdle",
+        "provider": "original-softpc-host-roots:nt_unix.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 145,
+        "export": "mvdm_softpc_effective_address",
+        "link_symbol": "_mvdm_softpc_effective_address",
+        "provider": "mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj",
+        "layer": "B"
+      },
+      {
+        "ordinal": 218,
+        "export": "session_thread_current",
+        "link_symbol": "_session_thread_current",
+        "provider": "session:session.obj",
+        "layer": "F"
+      },
+      {
+        "ordinal": 217,
+        "export": "session_thread_bind_owned_source",
+        "link_symbol": "_session_thread_bind_owned_source",
+        "provider": "session:session.obj",
+        "layer": "F"
+      },
+      {
+        "ordinal": 106,
+        "export": "getDL",
+        "link_symbol": "_getDL",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 219,
+        "export": "session_thread_finish",
+        "link_symbol": "_session_thread_finish",
+        "provider": "session:session.obj",
+        "layer": "F"
+      },
+      {
+        "ordinal": 229,
+        "export": "setCF",
+        "link_symbol": "_setCF",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 246,
+        "export": "setES",
+        "link_symbol": "_setES",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 107,
+        "export": "getDS",
+        "link_symbol": "_getDS",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 116,
+        "export": "getES",
+        "link_symbol": "_getES",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 236,
+        "export": "setDI",
+        "link_symbol": "_setDI",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 257,
+        "export": "setSI",
+        "link_symbol": "_setSI",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 228,
+        "export": "setBX",
+        "link_symbol": "_setBX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 239,
+        "export": "setDX",
+        "link_symbol": "_setDX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 233,
+        "export": "setCX",
+        "link_symbol": "_setCX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 224,
+        "export": "setAX",
+        "link_symbol": "_setAX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 105,
+        "export": "getDI",
+        "link_symbol": "_getDI",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 128,
+        "export": "getSI",
+        "link_symbol": "_getSI",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 97,
+        "export": "getBX",
+        "link_symbol": "_getBX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 108,
+        "export": "getDX",
+        "link_symbol": "_getDX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 102,
+        "export": "getCX",
+        "link_symbol": "_getCX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 226,
+        "export": "setBL",
+        "link_symbol": "_setBL",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 84,
+        "export": "call_ica_hw_interrupt",
+        "link_symbol": "_mvdm_public_ica_interrupt@12",
+        "provider": "original-softpc-system:ica.obj",
+        "layer": "C"
+      }
+    ],
+    "VCDEX.DLL": [
+      {
+        "ordinal": 229,
+        "export": "setCF",
+        "link_symbol": "_setCF",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 233,
+        "export": "setCX",
+        "link_symbol": "_setCX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 228,
+        "export": "setBX",
+        "link_symbol": "_setBX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 224,
+        "export": "setAX",
+        "link_symbol": "_setAX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 116,
+        "export": "getES",
+        "link_symbol": "_getES",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 130,
+        "export": "getSS",
+        "link_symbol": "_getSS",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 59,
+        "export": "VDDInstallUserHook",
+        "link_symbol": "_VDDInstallUserHook",
+        "provider": "original-softpc-host-roots:nt_msscs.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 129,
+        "export": "getSP",
+        "link_symbol": "_getSP",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 108,
+        "export": "getDX",
+        "link_symbol": "_getDX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 102,
+        "export": "getCX",
+        "link_symbol": "_getCX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 97,
+        "export": "getBX",
+        "link_symbol": "_getBX",
+        "provider": "original-softpc-cvidc:accessfn.obj",
+        "layer": "C"
+      },
+      {
+        "ordinal": 35,
+        "export": "MGetVdmPointer",
+        "link_symbol": "_ExpSim32GetVDMPointer",
+        "provider": "original-softpc-host-roots:sim32.obj",
+        "layer": "C"
+      }
+    ]
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 557,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "open": 11
+  },
+  "mirror": {
+    "fixed_original": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "original_sha256": "86eaadb5ba68143842a67690eedb7aa8d9e4d5dd9db7e84ee9ec241f69b450b4",
+    "source": "src/mvdm-host/softpc.new/base/system/ica.c",
+    "before_points_lines": [
+      159,
+      1152
+    ],
+    "after_points_lines": [
+      160,
+      1154
+    ],
+    "delta_points_lines": [
+      1,
+      2
+    ],
+    "tail_lines_appended": 4,
+    "excluded_branches_and_line_directives": "unchanged"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "aa611cb0-e676-43b7-9620-92b5273517f1",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "builds": [
+      "x86 products",
+      "x64 products",
+      "x86 worker reference"
+    ],
+    "abi": [
+      "PASS build/.ninja/msvc-x86-release/worker PIC ownership and stdcall ABI",
+      "PASS build/.ninja/msvc-x64-release/worker-reference-x86 PIC ownership and stdcall ABI",
+      "PASS VDMREDIR.dll preserves 42 NTVDM import ordinals",
+      "PASS VCDEX.DLL preserves 12 NTVDM import ordinals"
+    ],
+    "real_dos_redirector": [
+      {
+        "mode": "async",
+        "exit_code": 0,
+        "elapsed_ms": 15064
+      },
+      {
+        "mode": "async-write",
+        "exit_code": 0,
+        "elapsed_ms": 15072
+      }
+    ],
+    "queue": "REDIR_ASYNC_BASELINE checks=9 failures=0 exception=c0000005",
+    "limitation": "VCDEX import compatibility was checked; no separate physical CD-ROM workload was exercised."
+  }
+}

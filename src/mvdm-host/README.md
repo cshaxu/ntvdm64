@@ -3295,6 +3295,8 @@ T478 S12 removes the now-unselected mvdm_softpc_load_library adapter and its ada
 MVDM-HOST-DIV-884: vdmredir/vrica.h makes the original public interrupt ABI explicit
 in the cdecl CPU40 redirector build. The NTVDM export retains its name/ordinal
 and forwards through a stdcall-to-cdecl adapter to original ica_hw_interrupt.
+T483 S14 P128 places the existing adapter with the PIC implementation in
+softpc.new/base/system/ica.c. The exports and original PIC behavior are unchanged.
 T478 S37 removes DIV-294 from inc/wowmmcb.h: its original declaration again
 uses WOW32's original /Gz default. This corrects the modern WINMM callback
 return-stack mismatch without changing interrupt scheduling or queue ownership.

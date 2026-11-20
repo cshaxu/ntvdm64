@@ -289,7 +289,7 @@ $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc
                          'ntvdm_dos_observer.c',
                         'mvdm_softpc_presentation_font.c',
                         'mvdm_softpc_text_video.c',
-                        'mvdm_keyboard_reset.c', 'mvdm_interrupt_export.c',
+                        'mvdm_keyboard_reset.c',
                         'mvdm_softpc_mouse_input.c', 'mvdm_softpc_mouse_bridge.c',
                         'mvdm_softpc_mouse_guest.c',
                         'v7_pointer_binding.c',

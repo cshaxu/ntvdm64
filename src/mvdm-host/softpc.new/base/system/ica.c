@@ -1570,3 +1570,7 @@ void ica1_init IFN0()
 #endif /* PROD */
 #line 2244
 
+void __stdcall mvdm_public_ica_interrupt(int adapter, int line, int count)
+{
+    ica_hw_interrupt((unsigned int)adapter, (unsigned int)line, count);
+}
