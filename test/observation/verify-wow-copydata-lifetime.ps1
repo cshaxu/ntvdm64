@@ -49,7 +49,7 @@ try{
  $bodies+=Body "$original/wmsg16.c" 'ThunkMsg16'
  $bodies+=Body "$original/wumsg.c" 'WU32PostAppMessage'
  foreach($name in @('ThunkCallWndProcHook','ThunkMsgFilterHook')){$bodies+=Body "$original/wowhooks.c" $name}
- $adapter="$repo/src/wow32-dll/source/wow_message_lifetime.c"
+ $adapter="$repo/src/compat/wow_message_lifetime.c"
  $bodies+=[regex]::Replace([IO.File]::ReadAllText($adapter),'(?m)^#include[^\r\n]*\r?\n','')
  $header="$root/copydata_exact_body.h";[IO.File]::WriteAllText($header,($bodies -join "`n`n"),[Text.UTF8Encoding]::new($false))
  # Queue tests use exact conversion intervals, not a reimplementation of the
@@ -67,7 +67,7 @@ try{
  [IO.File]::WriteAllText("$root/queue_selector_intervals.h",$queueBodies)
  $script:selections|ConvertTo-Json|Set-Content "$root/selections.json"
  $fixture="$PSScriptRoot/wow_copydata_lifetime_fixture.c"
- Get-FileHash "$original/walloc16.c","$original/wdde.c","$original/wmdisp32.c","$original/wmsg16.c","$original/wowhooks.c","$original/wumsg.c",$adapter,"$repo/src/wow32-dll/include/wow_message_lifetime.h","$repo/src/compat/include/wow_message_progress.h",$fixture,$header,"$root/queue_selector_intervals.h",$CompilerDriver,$PSCommandPath|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Get-FileHash "$original/walloc16.c","$original/wdde.c","$original/wmdisp32.c","$original/wmsg16.c","$original/wowhooks.c","$original/wumsg.c",$adapter,"$repo/src/compat/include/wow_message_lifetime.h","$repo/src/compat/include/wow_message_progress.h",$fixture,$header,"$root/queue_selector_intervals.h",$CompilerDriver,$PSCommandPath|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Owned compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4127 /wd4706 /wd4055 /wd4054 /I"'+$repo+'/src" /I"'+$root+'" /I"'+$repo+'/src/wow32-dll/include" "'+$fixture+'" /Fo"'+$root+'/unit.obj" /Fe"'+$root+'/unit.exe" /link user32.lib"') 180
  Owned body "$root/unit.exe" '' 30
  $output=Get-Content "$root/body.stdout.txt" -Raw

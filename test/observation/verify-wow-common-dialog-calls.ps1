@@ -14,7 +14,7 @@ function Owned($name,$exe,$line,$seconds){
  $job.WaitForExit();$code=$job.ExitCode;$job.Dispose();$code|Set-Content "$root/$name.exit.txt";if($code){throw "$name failed $code"}
 }
 try{
- $source="$repo/src/wow32-dll/source/wow_common_dialog_calls.c";$fixture="$PSScriptRoot/wow_common_dialog_calls_fixture.c"
+ $source="$repo/src/compat/wow_common_dialog_calls.c";$fixture="$PSScriptRoot/wow_common_dialog_calls_fixture.c"
  $body=[regex]::Replace([IO.File]::ReadAllText($source),'(?m)^#include[^\r\n]*\r?\n','')
  $header="$root/common_dialog_exact_body.h"
  [IO.File]::WriteAllText($header,$body,[Text.UTF8Encoding]::new($false))

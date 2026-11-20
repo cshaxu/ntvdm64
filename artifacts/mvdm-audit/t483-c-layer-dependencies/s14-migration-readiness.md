@@ -2,15 +2,27 @@
 
 Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68/P70/P72/P73/P74 updates below supersede its
 classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
-assigns all 171 currently open stable IDs to the existing ten chains.
+assigns all 147 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
 
 | Chain | Symbols | Headers | Include roots | Image imports | Total |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1. guest-access-leases | 0 | 0 | 0 | 0 | 0 |
+| 2. wow-machine-context | 0 | 0 | 0 | 0 | 0 |
+| 3. user-projection-generations | 0 | 0 | 0 | 0 | 0 |
+| 4. console-mechanics | 49 | 7 | 0 | 0 | 56 |
+| 5. command-capture | 2 | 3 | 0 | 0 | 5 |
+| 6. launch-csr-completion | 13 | 4 | 0 | 0 | 17 |
+| 7. thread-lifecycle | 6 | 4 | 0 | 0 | 10 |
+| 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
+| 9. native-user | 13 | 9 | 0 | 0 | 22 |
+| 10. original-helpers-build-abi | 11 | 6 | 11 | 1 | 29 |
+| Total | 100 | 35 | 11 | 1 | 147 |
 
 The historical 79-provider body-read census remains evidence; P68 removes one
 provider from the open implementation set. Recounting the remaining chain
-provider-file union gives 39 distinct paths (the historical 79 is not current). Header responsibility classification is 59/59; three generated contracts
+provider-file union gives 36 distinct paths (the historical 79 is not current). Header responsibility classification is 59/59; three generated contracts
 still await implementation of their owner/ABI disposition. All 11 remaining search roots have current-use evidence. VCDEX imports
 have C implementation evidence; that is not final binary-boundary disposition.
 
@@ -153,3 +165,9 @@ final compiled owners, targeted tests and dual11 publication. Current ledger:
 Earlier whole-chain readiness statements are historical planning snapshots,
 not a requirement to repeat completed source audits. Remaining IDs above are
 the authoritative unfinished work; overall C outward closure is not claimed.
+
+P82 [USER tail delivery](s14-user-tail-owner.json) moves three remaining
+private-slot, common-dialog and message-unwind providers plus two headers.
+24 additional IDs eliminated; current421 eliminated/147 open. Function bodies
+are unchanged apart from explicit includes; no mirror source diff. Console
+product handoff remains open with its data/control boundary recorded.

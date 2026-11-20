@@ -238,7 +238,7 @@ if ($Case -eq 'native-dispatch-gate') {
     $fixtureName = 'wow_native_dispatch_gate_fixture.c'
 }
 if ($Case -eq 'window-procedure') {
-    Invoke-NinjaTarget $provider 'obj/compat/wow_window_words_binding.obj obj/compat/wow_class_words_binding.obj obj/wow32-dll/wow_user_private_access.obj'
+    Invoke-NinjaTarget $provider 'obj/compat/wow_window_words_binding.obj obj/compat/wow_class_words_binding.obj obj/compat/wow_user_private_access.obj'
     $fixtureName = 'wow_window_procedure_fixture.c'
 }
 if ($Case -eq 'standard-class') {
@@ -246,7 +246,7 @@ if ($Case -eq 'standard-class') {
     $fixtureName = 'wow_standard_class_fixture.c'
 }
 if ($Case -eq 'class-query') {
-    Invoke-NinjaTarget $provider 'obj/compat/wow_class_client_bindings.obj obj/wow32-dll/wow_user_private_access.obj'
+    Invoke-NinjaTarget $provider 'obj/compat/wow_class_client_bindings.obj obj/compat/wow_user_private_access.obj'
     $fixtureName = 'wow_class_query_fixture.c'
 }
 if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {

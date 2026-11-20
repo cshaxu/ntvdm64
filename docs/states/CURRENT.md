@@ -36,13 +36,11 @@ compiled boundary checks passed. Mirror delta0 points/0 lines; package
 `d66aa061-9bc9-4698-9be9-d985ff13c94e`. Eliminated213 IDs: current397/171.
 Enclosing commit/push is the receipt; S14 and remaining chains stay active.
 
-P80 [effective-address implementation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-effective-address-owner.json)
-moves the actual provider/header F to B under the approved CCPU exception.
-Bodies/header preserved; mirror delta0/0.
-Cached full build, dual11/22 hashes, CCPU, WOW page/window, Win16 dialog and
-nine compiled boundary graphs passed. Package `d755a020-7b66-46cc-89e5-9693b22dc183`.
-C0215/C0216 eliminated: ledger184 eliminated/384 open. Enclosing commit/push
-is the receipt; other chains stay open.
+P82 [USER tail](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-user-tail-owner.json)
+moves three actual USER providers/two headers into B; bodies preserved except
+explicit includes. Mirror delta0/0. Cached full build, dual11/22 hashes,
+targeted/Win16 tests and dependency gates passed; enclosing commit is receipt.
+24 more IDs eliminated: current421/147. Console handoff remains open.
 
 P79 [inner lifecycle authority](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-liveness-owner.json)
 moves the actual worker-active query and sole lifecycle state into B; removes

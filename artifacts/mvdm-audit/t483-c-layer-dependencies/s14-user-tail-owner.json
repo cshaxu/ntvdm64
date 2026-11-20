@@ -1,0 +1,133 @@
+{
+  "delivery": "T483 S14 P82",
+  "baseline": "2791f41aeda4183c43c047e11c19944ecbeb6383",
+  "migration": [
+    {
+      "old": "src/wow32-dll/source/wow_user_private_access.c",
+      "new": "src/compat/wow_user_private_access.c",
+      "before_sha256": "026e0672a343de86f2aa5544c81826208ed7d5e0e93efb20c09660a70802b771",
+      "after_sha256": "c176c1112d4bee1f14547e98b7a01c9b52861f25a63c7ff6edc28d9b90148dfe",
+      "body_identical_except_explicit_includes": true
+    },
+    {
+      "old": "src/wow32-dll/source/wow_common_dialog_calls.c",
+      "new": "src/compat/wow_common_dialog_calls.c",
+      "before_sha256": "4373dd6bad1f4b3a1a517f450c327d997c5169d66ecad9f157e5c2417b52c702",
+      "after_sha256": "3254677bf06bee339dcee10196aacfc9d70e6484752d64ba50223c677cf239a3",
+      "body_identical_except_explicit_includes": true
+    },
+    {
+      "old": "src/wow32-dll/source/wow_message_lifetime.c",
+      "new": "src/compat/wow_message_lifetime.c",
+      "before_sha256": "9ce1a1ab132d33d28523765e48b4deb2088b981d04854638bc925131118b0189",
+      "after_sha256": "6e841f535fbffd1a6be93f0378b7bf41e0d4c3cb400f589655782c0c4a177b36",
+      "body_identical_except_explicit_includes": true
+    },
+    {
+      "old": "src/wow32-dll/include/wow_common_dialog_calls.h",
+      "new": "src/compat/include/wow_common_dialog_calls.h",
+      "before_sha256": "36b08b11ae21953a23ee7a8cf41984d8129d8a905816a5d38b8eb7637aa2eb40",
+      "after_sha256": "36b08b11ae21953a23ee7a8cf41984d8129d8a905816a5d38b8eb7637aa2eb40",
+      "body_identical_except_explicit_includes": true
+    },
+    {
+      "old": "src/wow32-dll/include/wow_message_lifetime.h",
+      "new": "src/compat/include/wow_message_lifetime.h",
+      "before_sha256": "26c608d6b21e797188a680dee5cf9ad9130bf79ec89449893f755094b618c3f9",
+      "after_sha256": "26c608d6b21e797188a680dee5cf9ad9130bf79ec89449893f755094b618c3f9",
+      "body_identical_except_explicit_includes": true
+    }
+  ],
+  "status": "Final code built, dual-published and targeted-tested; enclosing commit/push is receipt.",
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0,
+    "method": "No mirror source changed."
+  },
+  "authority": "Approved B-to-C original-layout adapters; product notifications remain F.",
+  "console_followup": {
+    "source": "src/ntvdm-exe/win32/console_client.c",
+    "prior_review": "s14-callback-provider-ownership.json",
+    "data_plane": "Read/write/title/layout and graphics/input resources. Native fallback must preserve current behavior.",
+    "product_plane": "console_activate -> worker_base_io_open/checkpoint/close -> BaseSrv frontend ownership. Do not move broker/task authority to B or retain outward callbacks.",
+    "sites": "nt_event.c nt_block_event_thread tail and nt_resume_event_thread entry; caller ordering includes input/timer quiescence.",
+    "status": "Still open. Whole-file inward copy would violate ownership; no elimination claimed."
+  },
+  "eliminated_ids": [
+    "C0083",
+    "C0110",
+    "C0337",
+    "C0338",
+    "C0339",
+    "C0340",
+    "C0341",
+    "C0342",
+    "C0343",
+    "C0423",
+    "C0424",
+    "C0425",
+    "C0426",
+    "C0427",
+    "C0428",
+    "C0429",
+    "C0489",
+    "C0490",
+    "C0491",
+    "C0492",
+    "C0493",
+    "C0494",
+    "C0495",
+    "C0496"
+  ],
+  "ledger": {
+    "excluded-diagnostic": 1,
+    "open": 147,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "eliminated": 421
+  },
+  "verification": {
+    "build3": 0,
+    "deliver": 0,
+    "tests2": 0,
+    "final_checks": 0,
+    "final_checks_evidence": "build/t483-s14-user-tail/final-checks.out"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "39c8d3b2-f7c0-4870-9ed1-6d41d36485d7",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "evidence_root": "O:\\repos.hobby\\ntvdm64\\build\\t483-s14-user-tail",
+  "compiled_ownership": {
+    "objects": 4,
+    "edges": 82,
+    "outer_edges": 0,
+    "counts": {
+      "link runtime or unresolved carrier": 9,
+      "system import": 19,
+      "compat": 42,
+      "mvdm-host": 12
+    },
+    "sha256": "b6f05ba7cf94bef7b9a9159b7be1596f3b654bbb4f662686da541d32bb34d56c"
+  },
+  "tests": {
+    "guest": "WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+    "receipts_sha256": "346b5278f779e3588e14c65b4e607e4b0113fd264d1b04b221472adb310f6497",
+    "cases": [
+      "class-procedure",
+      "native-indirect",
+      "copydata-lifetime",
+      "common-dialog-calls",
+      "real Win16 dialog",
+      "nine compiled A/B graphs"
+    ],
+    "resumed_receipt_sha256": "052279a2e9f376ec26c20c89da3fbac6bc706f5faf313363d2e2f0589314f164",
+    "first_attempt": "Private-slot and indirect-native cases passed; copydata fixture failed on its old bare header path. Explicit B include fixed; tests2 resumes remaining cases, production unchanged."
+  }
+}

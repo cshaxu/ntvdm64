@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 171,
+    "open": 147,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 397
+    "eliminated": 421
   },
   "provider_groups": [
     {
@@ -93,92 +93,6 @@
         "VDMConsoleOperation",
         "WriteConsoleInputVDMW",
         "ntvdm_console_read_pc_input"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_user_registration_bridge.c",
-      "open_ids": [
-        "C0497",
-        "C0500",
-        "C0503"
-      ],
-      "count": 3,
-      "symbols": [
-        "UserRegisterWowHandlers",
-        "wow_user_notify_startup_noop",
-        "wow_user_register_wow_exec"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_user_private_access.c",
-      "open_ids": [
-        "C0489",
-        "C0490",
-        "C0491",
-        "C0492",
-        "C0493",
-        "C0494",
-        "C0495",
-        "C0496"
-      ],
-      "count": 8,
-      "symbols": [
-        "wow_user_get_class_infoA",
-        "wow_user_get_class_longA",
-        "wow_user_get_procedure",
-        "wow_user_get_window_longA",
-        "wow_user_set_class_longA",
-        "wow_user_set_procedure",
-        "wow_user_set_window_longA",
-        "wow_user_unregister_classA"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_common_dialog_calls.c",
-      "open_ids": [
-        "C0337",
-        "C0338",
-        "C0339",
-        "C0340",
-        "C0341",
-        "C0342",
-        "C0343"
-      ],
-      "count": 7,
-      "symbols": [
-        "wow_native_choose_color",
-        "wow_native_choose_font",
-        "wow_native_find_text",
-        "wow_native_open_file",
-        "wow_native_print_dialog",
-        "wow_native_replace_text",
-        "wow_native_save_file"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_message_lifetime.c",
-      "open_ids": [
-        "C0423",
-        "C0424",
-        "C0425",
-        "C0426",
-        "C0427",
-        "C0428",
-        "C0429"
-      ],
-      "count": 7,
-      "symbols": [
-        "wow_message_free16",
-        "wow_message_heap32",
-        "wow_message_release32",
-        "wow_message_stack_enter",
-        "wow_message_stack_leave",
-        "wow_message_unwind16",
-        "wow_message_unwind32"
       ]
     },
     {
@@ -337,6 +251,21 @@
         "wow_ole_convert_descriptor",
         "wow_ole_touch_pointer",
         "g_abLeadTable"
+      ]
+    },
+    {
+      "kind": "symbol",
+      "provider": "src/wow32-dll/source/wow_user_registration_bridge.c",
+      "open_ids": [
+        "C0497",
+        "C0500",
+        "C0503"
+      ],
+      "count": 3,
+      "symbols": [
+        "UserRegisterWowHandlers",
+        "wow_user_notify_startup_noop",
+        "wow_user_register_wow_exec"
       ]
     },
     {
@@ -938,24 +867,6 @@
     },
     {
       "kind": "header",
-      "provider": "src/wow32-dll/include/wow_common_dialog_calls.h",
-      "open_ids": [
-        "C0083"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/wow32-dll/include/wow_message_lifetime.h",
-      "open_ids": [
-        "C0110"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
       "provider": "src/wow32-dll/include/wow_native_process.h",
       "open_ids": [
         "C0112"
@@ -1146,7 +1057,7 @@
       "verified_eliminated_ids": 13
     }
   ],
-  "next_action": "Prioritize remaining complete implementation chains by actual dependency removal; current open ledger has171 IDs.",
-  "not_done": "171 direct dependencies remain; this delivery is not overall C outward dependency closure.",
-  "updated_by": "T483 S14 P81"
+  "next_action": "Complete Console data/control ownership separation using the existing source review; 147 direct IDs remain overall.",
+  "not_done": "147 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
+  "updated_by": "T483 S14 P82"
 }

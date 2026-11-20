@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stddef.h>
-#include "wow_message_lifetime.h"
+#include "compat/include/wow_message_lifetime.h"
 /* Same effective x86 convention as original FASTCALL under /Gz. */
 #define FASTCALL __stdcall
 typedef WORD HAND16, HMEM16, HWND16;

@@ -22,7 +22,7 @@ function Run($name,$file,$arguments,$expected,$seconds){
  if(!$p.WaitForExit($seconds*1000)){$p.Kill($true);throw "$name deadline"};$p.Refresh();$row.exit=$p.ExitCode;$row.end=[DateTime]::UtcNow.ToString('o');$script:steps|ConvertTo-Json -Depth 5|Set-Content "$root/steps.json";if($p.ExitCode -ne $expected){throw "$name actual $($p.ExitCode), expected $expected"}
 }
 try{
- $paths=@('src/mvdm-host/inc/wow.h','src/mvdm-host/inc/wowusr.h','src/mvdm-host/inc/wowcmpat.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wmdisp32.h','src/mvdm-host/wow32/wparam.h','src/mvdm-host/wow32/wparam.c','src/mvdm-host/wow32/wmsg16.c','src/mvdm-host/wow32/wmsgcb.c','src/mvdm-host/wow32/wmdisp32.c','src/mvdm-host/wow32/wcntl32.c','src/mvdm-host/wow32/wuwind.c','src/wow32-dll/source/wow_message_lifetime.c','src/wow32-dll/include/wow_message_lifetime.h','src/compat/include/wow_message_progress.h','test/observation/wow_parameter_map_fixture.c','test/observation/verify-wow-parameter-map.ps1')
+ $paths=@('src/mvdm-host/inc/wow.h','src/mvdm-host/inc/wowusr.h','src/mvdm-host/inc/wowcmpat.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wmdisp32.h','src/mvdm-host/wow32/wparam.h','src/mvdm-host/wow32/wparam.c','src/mvdm-host/wow32/wmsg16.c','src/mvdm-host/wow32/wmsgcb.c','src/mvdm-host/wow32/wmdisp32.c','src/mvdm-host/wow32/wcntl32.c','src/mvdm-host/wow32/wuwind.c','src/compat/wow_message_lifetime.c','src/compat/include/wow_message_lifetime.h','src/compat/include/wow_message_progress.h','test/observation/wow_parameter_map_fixture.c','test/observation/verify-wow-parameter-map.ps1')
  $paths|ForEach-Object{Get-FileHash "$repo/$_"}|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Get-FileHash "$repo/src/compat/include/wow_control_message_abi.h"|Export-Csv -NoTypeInformation "$root/control-abi-input.csv"
  foreach($kind in @('baseline','candidate')){
@@ -53,7 +53,7 @@ try{
   $bodies+='BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex){LONG lParam=lpmpex->Parm16.WndProc.lParam;PLONG plParamNew=&lpmpex->lParam;switch(lpmpex->Parm16.WndProc.wMsg){'+"`n"+$case+"`n}return TRUE;}"
   $bodies+='VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex){switch(lpmpex->Parm16.WndProc.wMsg){'+"`n"+$release+"`n}}"
   $bodies+=Body (Read 'src/mvdm-host/wow32/wuwind.c' $old) 'WU32SetWindowText'
-  $lifetime=Read 'src/wow32-dll/source/wow_message_lifetime.c' $old
+  $lifetime=Read 'src/compat/wow_message_lifetime.c' $old
   if(!$old){foreach($name in @('wow_message_free16','release_mdi','wow_message_release32')){$bodies+=Body $lifetime $name}}
   foreach($name in @('wow_message_unwind32','wow_message_unwind16')){$bodies+=Body $lifetime $name}
   [IO.File]::WriteAllText("$dir/parameter_exact.h",($bodies -join "`n`n"))

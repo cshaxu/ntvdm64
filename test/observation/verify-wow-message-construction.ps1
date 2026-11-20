@@ -44,11 +44,11 @@ function Owned($name,$file,$arguments,$seconds,$expected){
 }
 try{
  $fixture="$PSScriptRoot/wow_message_construction_fixture.c"
- Get-FileHash "$repo/src/mvdm-host/inc/wow.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$repo/src/mvdm-host/wow32/wmdisp32.h","$repo/src/mvdm-host/wow32/wmsg16.c","$repo/src/mvdm-host/wow32/wmsgcb.c","$repo/src/compat/include/wow_control_message_abi.h","$repo/src/mvdm-host/wow32/wparam.c","$repo/src/mvdm-host/wow32/walias.h","$repo/src/wow32-dll/include/wow_message_lifetime.h","$repo/src/compat/include/wow_message_progress.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
- Get-FileHash "$repo/src/mvdm-host/wow32/wudlg.c","$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/wow32-dll/source/wow_message_lifetime.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
+ Get-FileHash "$repo/src/mvdm-host/inc/wow.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$repo/src/mvdm-host/wow32/wmdisp32.h","$repo/src/mvdm-host/wow32/wmsg16.c","$repo/src/mvdm-host/wow32/wmsgcb.c","$repo/src/compat/include/wow_control_message_abi.h","$repo/src/mvdm-host/wow32/wparam.c","$repo/src/mvdm-host/wow32/walias.h","$repo/src/compat/include/wow_message_lifetime.h","$repo/src/compat/include/wow_message_progress.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
+ Get-FileHash "$repo/src/mvdm-host/wow32/wudlg.c","$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/compat/wow_message_lifetime.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
-  $lifetime=Read-Source 'src/wow32-dll/include/wow_message_lifetime.h' ($old -and $Transaction)
+  $lifetime=Read-Source 'src/compat/include/wow_message_lifetime.h' ($old -and $Transaction)
   [IO.File]::WriteAllText("$dir/message_construction_lifetime.h",$lifetime)
   $wow=Read-Source 'src/mvdm-host/inc/wow.h' $old
   $header=Read-Source 'src/mvdm-host/wow32/wmdisp32.h' $old
@@ -118,7 +118,7 @@ try{
    foreach($name in @('ThunkCBMsg16','UnThunkCBMsg16')){$bodies+=Body $combo $name}
   }
   if(!$old -or $Transaction){
-   $adapter=Read-Source 'src/wow32-dll/source/wow_message_lifetime.c' $old
+   $adapter=Read-Source 'src/compat/wow_message_lifetime.c' $old
    $bodies+=[regex]::Replace($adapter,'(?m)^#include[^\n]*\n','')
   }
   if($Transaction -and !$old){
