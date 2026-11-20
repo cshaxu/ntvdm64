@@ -1,5 +1,5 @@
-#include "mvdm_softpc_mouse_input.h"
-#include "common/protocol/console_mouse.h"
+#include "include/mvdm_softpc_mouse_input.h"
+#include "compat/include/mvdm_mouse_record.h"
 #include <limits.h>
 
 int mvdm_mouse_input_push(mvdm_mouse_input *queue,const mvdm_mouse_input_sample *sample)

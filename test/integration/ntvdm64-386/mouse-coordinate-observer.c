@@ -1,6 +1,6 @@
 /* Diagnostic pass-through: record the real coordinate service, never alter it. */
 #define EmulateCoordinates observed_coordinates
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c"
+#include "compat/mvdm_softpc_mouse_guest.c"
 #undef EmulateCoordinates
 extern IU8 Currently_emulated_video_mode;
 extern void EmulateCoordinates(half_word, IS16, IS16, IS16 *, IS16 *);

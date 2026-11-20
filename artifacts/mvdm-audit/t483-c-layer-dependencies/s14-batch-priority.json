@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 147,
+    "open": 139,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 421
+    "eliminated": 429
   },
   "provider_groups": [
     {
@@ -35,10 +35,9 @@
         "C0285",
         "C0286",
         "C0287",
-        "C0288",
         "C0289"
       ],
-      "count": 24,
+      "count": 23,
       "symbols": [
         "MvdmClipCursor",
         "MvdmCreateFileA",
@@ -62,7 +61,6 @@
         "MvdmWriteConsoleA",
         "NtvdmConsoleTextColours",
         "ShowConsoleCursor",
-        "mvdm_softpc_mouse_current",
         "ntvdm_console_set_active"
       ]
     },
@@ -180,21 +178,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c",
-      "open_ids": [
-        "C0230",
-        "C0231",
-        "C0232"
-      ],
-      "count": 3,
-      "symbols": [
-        "mvdm_softpc_mouse_apply",
-        "mvdm_softpc_mouse_receive",
-        "mvdm_softpc_mouse_route_active"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c",
       "open_ids": [
         "C0243",
@@ -294,19 +277,6 @@
       "symbols": [
         "CsrLockProcessByClientId",
         "CsrUnlockProcess"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.c",
-      "open_ids": [
-        "C0228",
-        "C0229"
-      ],
-      "count": 2,
-      "symbols": [
-        "mvdm_softpc_mouse_cancel",
-        "mvdm_softpc_mouse_pending"
       ]
     },
     {
@@ -602,24 +572,6 @@
       "symbols": [
         "verbose"
       ]
-    },
-    {
-      "kind": "header",
-      "provider": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h",
-      "open_ids": [
-        "C0049"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h",
-      "open_ids": [
-        "C0050"
-      ],
-      "count": 1,
-      "symbols": []
     },
     {
       "kind": "symbol",
@@ -1057,7 +1009,7 @@
       "verified_eliminated_ids": 13
     }
   ],
-  "next_action": "Complete Console data/control ownership separation using the existing source review; 147 direct IDs remain overall.",
-  "not_done": "147 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P82"
+  "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
+  "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
+  "updated_by": "T483 S14 P83"
 }

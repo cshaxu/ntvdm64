@@ -1,7 +1,7 @@
 #ifndef TEST_WORKER_PERFORMANCE_H
 #define TEST_WORKER_PERFORMANCE_H
 #include <windows.h>
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_input.h"
+#include "compat/include/mvdm_softpc_mouse_input.h"
 /* Test-link only. No file I/O on measured paths; flush after ownership release.
  * One imported machine per worker, matching the selected product profile. */
 BOOL worker_performance_enabled(void);

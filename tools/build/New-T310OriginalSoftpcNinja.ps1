@@ -280,6 +280,7 @@ $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
+$compatMouseNames = @('mvdm_softpc_mouse_input.c','mvdm_softpc_mouse_bridge.c','mvdm_softpc_mouse_guest.c')
 $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c',
                          'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                          'mvdm_vm_notification.c',
@@ -364,7 +365,8 @@ if (!(Test-Path -LiteralPath $hostCompatSource)) {
     throw "Required OpenNT host-compat source missing: $hostCompatSource"
 }
 foreach ($name in $adapterSoftpcNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $adapterSoftpcRoot $name))) { throw "Required SoftPC adapter source missing: $name" }
+    $sourceRoot = if ($name -in $compatMouseNames) { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
+    if (!(Test-Path -LiteralPath (Join-Path $sourceRoot $name))) { throw "Required SoftPC adapter source missing: $name" }
 }
 foreach ($name in $adapterRedirNames) {
     if (!(Test-Path -LiteralPath (Join-Path $redirDllBindingRoot $name))) { throw "Required VDMREDIR DLL binding source missing: $name" }
@@ -1234,11 +1236,17 @@ $graph.Add('build ' + $originalDebuggerObject + ': cc_mvdm_debugger ' +
 $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $object = 'obj/adapter-softpc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $selectedVideoInputs = if ($name -eq 'mvdm_softpc_text_video.c') { ' | generated/text_video_gfx.h generated/text_video_gvi.h generated/text_video_egagraph.h generated/text_video_nt_graph.h' } elseif ($name -eq 'v7_pointer_binding.c') { ' | generated/v7_selected_plane.h' } else { '' }
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterSoftpcRoot $name)) + $selectedVideoInputs)
+    $mouseAdapter = $name -in $compatMouseNames
+    $sourceRoot = if ($mouseAdapter) { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sourceRoot $name)) + $selectedVideoInputs)
     $videoInclude = if ($name -in @('mvdm_softpc_text_video.c', 'v7_pointer_binding.c')) { ' ' + $cvidcGeneratedInclude } else { '' }
-    $graph.Add('  cflags = ' + $authoredSoftpcFlags + $videoInclude)
+    $unitFlags = if ($name -eq 'mvdm_softpc_mouse_guest.c') { $compatCcpuFlags } elseif ($mouseAdapter) { $libraryFlags } else { $authoredSoftpcFlags + $videoInclude }
+    $graph.Add('  cflags = ' + $unitFlags)
     $object
 }
+$graph.Add('build obj/compat/mvdm_softpc_mouse_context.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_mouse_context.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterSoftpcObjects += 'obj/compat/mvdm_softpc_mouse_context.obj'
 $graph.Add('build obj/compat/mvdm_softpc_wow_page_domain.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_wow_page_domain.c')))
 $graph.Add('  cflags = ' + $compatCcpuFlags)
 $adapterSoftpcObjects += 'obj/compat/mvdm_softpc_wow_page_domain.obj'
@@ -1965,7 +1973,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build ntvwm-close-events-test.exe: console_test_link obj/tests/ntvwm_close_events.obj common-console.lib')
     $graph.Add('build obj/tests/relative_mouse_bridge.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/softpc/softpc_relative_mouse_bridge_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build relative-mouse-bridge-test.exe: console_test_link obj/tests/relative_mouse_bridge.obj obj/adapter-softpc/mvdm_softpc_mouse_bridge.obj obj/adapter-softpc/mvdm_softpc_mouse_input.obj')
+    $graph.Add('build relative-mouse-bridge-test.exe: console_test_link obj/tests/relative_mouse_bridge.obj obj/compat/host_context.obj obj/compat/mvdm_softpc_mouse_context.obj obj/adapter-softpc/mvdm_softpc_mouse_bridge.obj obj/adapter-softpc/mvdm_softpc_mouse_input.obj')
     $graph.Add('build obj/tests/frontend_request_client.obj: cc ' + (NinjaPath (Join-Path $root 'test/app/frontend_request_client_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build frontend-request-client-test.exe: console_test_link obj/tests/frontend_request_client.obj frontend-client.lib obj/common/native_process.obj')
@@ -2015,7 +2023,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/worker_lifecycle.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/worker_lifecycle.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/compat/console_services.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj frontend-base.lib worker-base.lib lib-handle.lib ' + $consoleGridObject)
+    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/compat/mvdm_softpc_mouse_context.obj obj/tests/console_client.obj obj/compat/console_services.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj frontend-base.lib worker-base.lib lib-handle.lib ' + $consoleGridObject)
     $graph.Add('build obj/tests/softpc_text_video.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/softpc/softpc_text_video_test.c')))
     $graph.Add('build softpc-text-video-test.exe: console_test_link obj/tests/softpc_text_video.obj obj/adapter-softpc/mvdm_softpc_text_video.obj')
     $graph.Add('build obj/tests/console_text_producer.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/win32/console_text_producer_test.c')))

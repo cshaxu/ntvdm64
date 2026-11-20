@@ -1,7 +1,7 @@
 #ifndef MVDM_SOFTPC_MOUSE_BRIDGE_H
 #define MVDM_SOFTPC_MOUSE_BRIDGE_H
 #include <windows.h>
-#include "common/protocol/console_mouse.h"
+#include "compat/include/mvdm_mouse_record.h"
 #include "mvdm_softpc_mouse_input.h"
 
 typedef struct mvdm_mouse_bridge {
@@ -12,8 +12,8 @@ typedef struct mvdm_mouse_bridge {
     HANDLE input_ready; /* Borrowed from the owning input watch; never closed here. */
 } mvdm_mouse_bridge;
 
-/* Worker Console client owns storage; original event/CPU threads access only
- * their already-bound session. NULL means no character frontend endpoint. */
+/* B owns the input state contract; the product embeds and binds storage.
+ * Original threads use their existing host context. NULL means no endpoint. */
 mvdm_mouse_bridge *mvdm_softpc_mouse_current(void);
 
 /* Zero-initialized, worker-owned state. Producer acquires original ICA lock;

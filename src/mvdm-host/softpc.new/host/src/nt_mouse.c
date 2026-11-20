@@ -30,7 +30,7 @@
 #include "nt_event.h"
 #include <ntddvdeo.h>
 #include "nt_fulsc.h"
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
+#include "compat/include/mvdm_softpc_mouse_guest.h"
 #include "compat/include/mvdm_softpc_wow_page_domain.h"
 
 

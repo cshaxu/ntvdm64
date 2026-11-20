@@ -1,0 +1,150 @@
+{
+  "packet": "M0 T483 S14 P83",
+  "baseline": "888ac1580e876abacddd4747510896e5e30dbc16",
+  "scope": "Console mouse input implementation, binding, and original CPU adapter; no claim of complete Console-chain closure",
+  "mapping": {
+    "src/ntvdm-exe/softpc/mvdm_softpc_mouse_input.c": "src/compat/mvdm_softpc_mouse_input.c",
+    "src/ntvdm-exe/softpc/mvdm_softpc_mouse_input.h": "src/compat/include/mvdm_softpc_mouse_input.h",
+    "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.c": "src/compat/mvdm_softpc_mouse_bridge.c",
+    "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h": "src/compat/include/mvdm_softpc_mouse_bridge.h",
+    "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c": "src/compat/mvdm_softpc_mouse_guest.c",
+    "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h": "src/compat/include/mvdm_softpc_mouse_guest.h"
+  },
+  "body_review": [
+    {
+      "before": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_input.c",
+      "after": "src/compat/mvdm_softpc_mouse_input.c",
+      "body_identical_excluding_includes": true
+    },
+    {
+      "before": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.c",
+      "after": "src/compat/mvdm_softpc_mouse_bridge.c",
+      "body_identical_excluding_includes": true
+    },
+    {
+      "before": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c",
+      "after": "src/compat/mvdm_softpc_mouse_guest.c",
+      "body_identical_excluding_includes": true
+    }
+  ],
+  "candidate_ids": [
+    "C0049",
+    "C0050",
+    "C0228",
+    "C0229",
+    "C0230",
+    "C0231",
+    "C0232",
+    "C0288"
+  ],
+  "candidate_count": 8,
+  "status": "Final code built, dual-published and targeted-tested; enclosing commit/push is receipt.",
+  "ownership": {
+    "B": "existing queue/scale/guest mouse adaptation plus same-context getter and local device record",
+    "C": "original ICA lock, IRQ, coordinates, selected mouse VM, cursor algorithms",
+    "F": "embed B input object; publish binding after successful endpoint initialization, clear before teardown; keep RPC ownership handoff"
+  },
+  "no_new_tls_or_queue": true,
+  "mirror_files": [
+    "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+    "src/mvdm-host/softpc.new/host/src/nt_event.c",
+    "src/mvdm-host/softpc.new/host/src/nt_mouse.c"
+  ],
+  "mirror_review": "only one existing authored include path replaced in each file; all other bytes and #error/#line unchanged",
+  "remaining_console_boundary": {
+    "control": "nt_block_event_thread quiesces producers before deactivate; nt_resume_event_thread activates before producers resume; preserve checkpoint, barrier, physical close, release acknowledgement and rollback",
+    "data": "remaining client/text/graphics use outer pipe encoding and publication; must move actual mechanics with their state, not install an F callback",
+    "unused_callback_evidence": "rg session_set_video_event_sink src: definition/declaration only, no production registration; return semantics still to verify before removal"
+  },
+  "tests_required": [
+    "relative mouse queue/bridge plus actual B context switching",
+    "native Console transport and failure/retirement",
+    "private-desktop real DOS mouse cursor/move/retire",
+    "compiled B provider ownership and all production library boundary gates"
+  ],
+  "evidence_root": "build/t483-s14-console-owner",
+  "mirror_proof": [
+    {
+      "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "before_sha256": "a41f2eea922987cdc43ab4c5d87558a79b13eb931997909fb48fe05bd0efee0a",
+      "after_sha256": "fa83000f6064caa4359518f47fc494e8e5045d8deb136abef382aac8f890e2b4",
+      "only_existing_include_path_changed": true,
+      "error_line_bytes_unchanged": true
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "before_sha256": "4794c19843beb5a3ffbc2aa8356a03108e405c7a35969077a4b17b564a8195df",
+      "after_sha256": "7de726044599b24f6c4f90975cba1519aed1184d18a0e228786b0141431c8094",
+      "only_existing_include_path_changed": true,
+      "error_line_bytes_unchanged": true
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "before_sha256": "6cb878b9f54dc893850d6edd537a9770cd22a00a8eef3c8828876c4bac2b3fd0",
+      "after_sha256": "7a8dfb6cd7f42a70d21d1f2ab1547753c674f49b59ed724b9353f21565f182a0",
+      "only_existing_include_path_changed": true,
+      "error_line_bytes_unchanged": true
+    }
+  ],
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_changed_lines": 0,
+    "scope": "three host source files, existing authored include lines only"
+  },
+  "eliminated_ids": [
+    "C0049",
+    "C0050",
+    "C0228",
+    "C0229",
+    "C0230",
+    "C0231",
+    "C0232",
+    "C0288"
+  ],
+  "ledger": {
+    "excluded-diagnostic": 1,
+    "open": 139,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "eliminated": 429
+  },
+  "verification": {
+    "build2": 0,
+    "deliver": 0,
+    "mouse-final": 0,
+    "owners": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "366538af-b4be-40a7-8518-964b2dfed27d",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "compiled_ownership": {
+    "objects": 4,
+    "edges": 30,
+    "outer_edges": 0,
+    "counts": {
+      "CRT": 7,
+      "mvdm-host": 12,
+      "system import": 2,
+      "compat": 9
+    }
+  },
+  "tests": {
+    "native": "relative mouse bridge/context, nine Console lifecycle cases and nine compiled library boundary graphs passed",
+    "guest": "PASS real guest mouse count: CURSOR-COUNT-PASS\nPASS real guest mouse video: CURSOR-VIDEO-PASS\nPASS real guest mouse text: CURSOR-TEXT-PASS\nPASS real guest mouse move: WINDOW-MOUSE-PASS\nPASS real guest mouse retire: WINDOW-MOUSE-PASS\n",
+    "failure_and_correction": "Original harness failed text after count/video on both P82 and P83. P82 text alone passed. Each observer owns a new desktop but reused package processes; exact isolated scope cleanup now runs after each case. All five sequential cases pass. Original failed evidence retained.",
+    "receipts_sha256": {
+      "tests.out": "13915cb9ac7e1194b9d36bcaeabc04a22ac4486280cfbe3081a26a93c9b97ac0",
+      "comparison.out": "2d79d04aff961ff46fd1eb83ea9c10dfa814cc224c554e94f365f53eae773fa6",
+      "comparison.err": "e79296d43c51b668d0d5b30e63fce22b244131b60ecd7eefd8da39a443ba6e7d",
+      "mouse-final.out": "58639327746d7b2b49c1652c4d341ade39ca74a664a2eb7ceaf5c7da22f39c9d",
+      "owners.out": "bff5aabe0d416beab74c59d35c41c9bf448e3d0a8b34ab9ac74063fbe388085e"
+    }
+  }
+}

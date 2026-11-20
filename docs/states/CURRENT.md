@@ -52,16 +52,12 @@ Three outer consumer dependencies removed; ledger182/386 unchanged until whole
 chains migrate. Final governance and enclosing commit/push are the receipt.
 
 
-P76 [scalar observation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-observation-owner.json)
-moves three exact diagnostic bodies from F termination into existing B compat.
-Page-domain removes its F diagnostic and unused effective-address headers.
-Cached full builds and dual11/22-hash publication passed, package
-`4e181da7-ae1a-48b8-88ff-b89da3874142`. Reporter four-mode LastError checks,
-real CCPU page-domain lifecycle, real Win16 dialog eight phases and eight A/B
-graphs passed. Actual NTVDM link resolves the B observation object.
-Mirror delta0 points/0 lines; ledger stays182 eliminated/386 open: prerequisite
-cleanup, not completion of C provider relocation. Final governance and the
-enclosing P76 commit/push provide the delivery receipt.
+P83 [Console mouse ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-mouse-owner.json)
+moves queue/scaling, guest adaptation and same-context lookup into B.
+Cached full build, dual11/22 hashes, native and five private-desktop DOS mouse
+cases passed; mirror delta0/0. Test cases now clean their owned desktop processes.
+Eight IDs eliminated: current429/139. Console control/transport remains open.
+Enclosing commit/push is receipt; prior P76 evidence remains in P81 history.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same

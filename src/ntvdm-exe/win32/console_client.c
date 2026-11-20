@@ -12,7 +12,7 @@
 #include "compat/include/console_services.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "worker-base/connection.h"
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
+#include "compat/include/mvdm_softpc_mouse_bridge.h"
 #include <stddef.h>
 #include <limits.h>
 #include <string.h>
@@ -92,15 +92,6 @@ BOOL ntvdm_console_video_async(BOOL active)
     console_client *client=owner ? owner->console_client : NULL;
     DWORD error=client ? worker_base_publication_active(client->publisher,active) : ERROR_SUCCESS;
     SetLastError(error);return !error;
-}
-
-/* Same bound worker endpoint as copied keyboard input. Its existing teardown
- * runs after bound threads have joined, so no separate mouse lifetime exists. */
-mvdm_mouse_bridge *mvdm_softpc_mouse_current(void)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    return client ? &client->mouse : NULL;
 }
 
 /* Worker-local identities only. DuplicateHandle aliases retain their role;
@@ -200,6 +191,7 @@ BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16])
 static void console_client_end(void *context)
 {
     console_client *client=context;
+    client->owner->host_context.mouse=NULL;
     client->owner->console_client=NULL;
     OpenNtBaseClientSetCommandBinding(NULL,NULL);
     if (client->stop) SetEvent(client->stop);
@@ -272,6 +264,7 @@ DWORD ntvdm_console_client_begin(session *owner)
     if (error) {
         console_client_end(client);return error;
     }
+    owner->host_context.mouse=&client->mouse;
     owner->console_client=client;
     OpenNtBaseClientSetCommandBinding(console_command_ready,client);
     return ERROR_SUCCESS;

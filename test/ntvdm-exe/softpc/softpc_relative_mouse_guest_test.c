@@ -7,7 +7,7 @@
 #include <sas.h>
 #include <mouse_io.h>
 #include <nt_mouse.h>
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_guest.h"
+#include "compat/include/mvdm_softpc_mouse_guest.h"
 #include <assert.h>
 #include <limits.h>
 #include <stdio.h>

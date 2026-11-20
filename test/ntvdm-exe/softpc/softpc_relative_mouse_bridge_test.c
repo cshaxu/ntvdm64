@@ -1,4 +1,5 @@
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
+#include "compat/include/mvdm_softpc_mouse_bridge.h"
+#include "compat/include/host_context.h"
 #include <assert.h>
 #include <limits.h>
 #include <stdio.h>
@@ -34,8 +35,27 @@ static mvdm_mouse_input_sample take(mvdm_mouse_bridge *s,unsigned action,int dx,
 int main(void)
 {
     mvdm_mouse_bridge s={0},other={0};
+    compat_host_context first={0},second={0};
     mvdm_mouse_input_sample out;
     unsigned i;
+    /* Actual B binding, not an outer session accessor or a mock getter. */
+    assert(!mvdm_softpc_mouse_current());
+    assert(compat_host_context_bind(&first));
+    assert(!mvdm_softpc_mouse_current());
+    first.mouse=&s;
+    assert(mvdm_softpc_mouse_current()==&s);
+    assert(compat_host_context_unbind(&first));
+    second.mouse=&other;
+    assert(compat_host_context_bind(&second));
+    assert(mvdm_softpc_mouse_current()==&other);
+    second.mouse=NULL;
+    assert(!mvdm_softpc_mouse_current());
+    assert(compat_host_context_unbind(&second));
+    assert(compat_host_context_bind(&first));
+    assert(mvdm_softpc_mouse_current()==&s);
+    first.mouse=NULL;
+    assert(compat_host_context_unbind(&first));
+    assert(!mvdm_softpc_mouse_current());
     assert(!mvdm_softpc_mouse_pending(&s) && !mvdm_softpc_mouse_active(&s));
     assert(!mvdm_softpc_mouse_next(&s,&out));
     submit(&s,CONSOLE_MOUSE_MOVE,1,0,0,640,400,ERROR_INVALID_STATE);

@@ -1,3 +1,4 @@
+#include "non-mvdm/public/sdk/inc/nt.h"
 #include <windows.h>
 #include <insignia.h>
 #include <host_def.h>
@@ -6,7 +7,7 @@
 #include <nt_mouse.h>
 #include <host_rrr.h>
 #include <nt_uis.h>
-#include "mvdm_softpc_mouse_guest.h"
+#include "include/mvdm_softpc_mouse_guest.h"
 #include <limits.h>
 #include <string.h>
 

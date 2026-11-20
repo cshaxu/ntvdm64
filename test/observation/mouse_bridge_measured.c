@@ -1,5 +1,5 @@
 #include "worker_performance.h"
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
+#include "compat/include/mvdm_softpc_mouse_bridge.h"
 #include <stdio.h>
 #include <string.h>
 static int measured_push(mvdm_mouse_input *,const mvdm_mouse_input_sample *);
@@ -14,7 +14,7 @@ extern ULONG MseIntLazyCount;
 #define mvdm_mouse_input_push measured_push
 #define mvdm_mouse_input_take measured_take
 #define DoMouseInterrupt measured_interrupt
-#include "../../src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.c"
+#include "../../src/compat/mvdm_softpc_mouse_bridge.c"
 #undef mvdm_mouse_input_push
 #undef mvdm_mouse_input_take
 #undef DoMouseInterrupt

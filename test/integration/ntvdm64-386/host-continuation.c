@@ -1,5 +1,5 @@
 #include "mvdm_vm_io.h"
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
+#include "compat/include/mvdm_softpc_mouse_bridge.h"
 #include "mvdm_vm_executor.h"
 #include "mvdm_standalone_worker.h"
 #include "mvdm_vm_bridge.h"

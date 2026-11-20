@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 struct guest_memory_lease_context;
+struct mvdm_mouse_bridge;
 
 #define COMPAT_HOST_CLEANUP_LIMIT 8u
 
@@ -30,6 +31,7 @@ typedef struct compat_host_context {
     uint32_t state;
     /* Borrowed B resource; the composing owner controls its begin/end lifetime. */
     struct guest_memory_lease_context *guest_memory;
+    struct mvdm_mouse_bridge *mouse; /* Borrowed until the composing owner detaches. */
     compat_host_cleanup cleanups[COMPAT_HOST_CLEANUP_LIMIT];
 } compat_host_context;
 

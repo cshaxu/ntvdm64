@@ -12,7 +12,7 @@
 #include "ntvdm-exe/session/session.h"
 #include "console_client.h"
 #include "console_input.h"
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
+#include "compat/include/mvdm_softpc_mouse_bridge.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
 #include "compat/include/mvdm_keyboard_history.h"
 #include "common/protocol/console_io.h"

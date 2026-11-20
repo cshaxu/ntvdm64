@@ -1565,7 +1565,7 @@ MVDM-HOST-DIV-318 (retained mouse integration, T425 S8 route repair): original `
 dispatches copied Window-relative mouse records through the worker-owned
 bridge; its existing EOI/pending and cancellation boundaries include that
 queue. `nt_mouse.c` retains original absolute input as fallback and delegates
-only relative ingress conversion to `ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c`.
+only relative ingress conversion to `compat/mvdm_softpc_mouse_guest.c`.
 Original EmulateCoordinates, limits and callback masks remain owners.
 T481 S9 candidate: `mouse_io.c` stores each callback's original register
 words and condition mask on that callback's guest stack before the existing

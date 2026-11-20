@@ -4,9 +4,11 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [string]$FixtureRoot='O:\winnt\tests',
     [string]$LogRoot='O:\winnt\Logs2',
-    [Parameter(Mandatory)][string]$LogPrefix
+    [Parameter(Mandatory)][string]$LogPrefix,
+    [ValidateSet('count','video','text','move','retire')][string[]]$Only
 )
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $FixtureRoot=(Resolve-Path -LiteralPath $FixtureRoot).Path
 $LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
@@ -21,6 +23,7 @@ $cases=@(
     @{Name='move';Guest='WMS7.COM';Marker='WINDOW-MOUSE-PASS';Hook=$true},
     @{Name='retire';Guest='WMS7.COM';Marker='WINDOW-MOUSE-PASS';Hook=$true;Retire=$true}
 )
+if($Only){$cases=@($cases | Where-Object {$_.Name -in $Only})}
 $controls=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT',
     'MVDM_OBSERVER_TEXT_CURSOR','MVDM_OBSERVER_MOUSE_HOOK','MVDM_OBSERVER_MOUSE_RETIRE')
 $previous=@{}
@@ -28,6 +31,10 @@ foreach($name in $controls){$previous[$name]=[Environment]::GetEnvironmentVariab
 try {
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     foreach($case in $cases){
+        # Each observer creates a distinct private desktop. Do not reuse a
+        # broker/frontend still attached to the preceding case's desktop.
+        $scope=New-IsolatedPackageScope (Split-Path $PackageRoot -Parent)
+        try {
         foreach($name in $controls | Select-Object -Skip 1){
             Remove-Item -LiteralPath ('Env:'+$name) -ErrorAction SilentlyContinue
         }
@@ -49,6 +56,7 @@ try {
             ForEach-Object {Get-Content -LiteralPath $_.FullName -Raw}) -join "`n"
         if($texts -notmatch [regex]::Escape($case.Marker)){throw "Missing guest marker: $($case.Marker)"}
         "PASS real guest mouse $($case.Name): $($case.Marker)"
+        } finally { Stop-IsolatedPackageScope $scope }
     }
 } finally {
     foreach($name in $controls){

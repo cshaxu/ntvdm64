@@ -104,7 +104,7 @@
 #ifdef NTVDM
 #include "nt_event.h"
 #include "nt_mouse.h"
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h" /* DIVERGENCE(MVDM-HOST-DIV-318) */
+#include "compat/include/mvdm_softpc_mouse_bridge.h" /* DIVERGENCE(MVDM-HOST-DIV-318) */
 
 #line 110
 #ifdef MONITOR

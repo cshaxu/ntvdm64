@@ -5,7 +5,7 @@
 #include "ntvdm-exe/win32/console_client.h"
 #include "ntvdm-exe/win32/worker_lifecycle.h"
 #include "ntvdm-exe/win32/console_text.h"
-#include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
+#include "compat/include/mvdm_softpc_mouse_bridge.h"
 #include "ntcon-exe/console_frontend.h"
 #include "common/console/client.h"
 #include "common/protocol/frontend_protocol.h"
@@ -172,6 +172,8 @@ DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE root_capability,HANDLE *capab
 }
 
 session *__cdecl session_thread_current(void) { return bound; }
+compat_host_context *__cdecl compat_host_context_current(void)
+{ return bound ? &bound->host_context : NULL; }
 int session_register_teardown(session *instance,session_teardown_fn function,void *context)
 {
     CHECK(instance==&owner && !cleanup);

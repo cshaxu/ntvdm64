@@ -1,4 +1,4 @@
-#include "mvdm_softpc_mouse_bridge.h"
+#include "include/mvdm_softpc_mouse_bridge.h"
 #include <limits.h>
 
 /* Original declarations: nt_mouse.c, nt_eoi.h. Their scheduling and guest

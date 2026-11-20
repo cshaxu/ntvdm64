@@ -14,7 +14,7 @@ $wrapper=(Resolve-Path $CompilerWrapper).Path
 $null=New-Item -ItemType Directory -Path $root
 $publisher=if($HighResolutionPublisher){'test/observation/publication_high_resolution_measured.c'}else{'src/worker-base/publication.c'}
 $sources=@($publisher,
-    'src/ntvdm-exe/softpc/mvdm_softpc_mouse_input.c',
+    'src/compat/mvdm_softpc_mouse_input.c',
     'test/observation/measure-worker-primitives.c')
 $objects=@()
 foreach($source in $sources) {
