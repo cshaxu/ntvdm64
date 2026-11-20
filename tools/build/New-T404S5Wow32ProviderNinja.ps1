@@ -116,7 +116,6 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_timer_callback.c'),
     (Join-Path $adapterWow 'wow_idle_hook_binding.c'),
     (Join-Path $adapterWow 'wow_shell_callback.c'),
-    (Join-Path $adapterWow 'wow_registry_binding.c'),
     (Join-Path $adapterWow 'wow_task_cleanup_entry.c'),
     (Join-Path $adapterWow 'wow_common_dialog_callback.c'),
     (Join-Path $adapterWow 'wow_common_dialog_calls.c'),
@@ -276,6 +275,18 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'host_CreateThread@24'; Raw = 'host_CreateThread' },
     [pscustomobject]@{ Decorated = 'host_ExitThread@4'; Raw = 'host_ExitThread' },
     [pscustomobject]@{ Decorated = 'opennt_exit_thread@4'; Raw = 'opennt_exit_thread' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_open_key@12'; Raw = 'ntvdm_shadow_reg_open_key' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_create_key@12'; Raw = 'ntvdm_shadow_reg_create_key' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_close_key@4'; Raw = 'ntvdm_shadow_reg_close_key' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_delete_key@8'; Raw = 'ntvdm_shadow_reg_delete_key' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_set_value@20'; Raw = 'ntvdm_shadow_reg_set_value' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_set_value_ex@24'; Raw = 'ntvdm_shadow_reg_set_value_ex' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_query_value@16'; Raw = 'ntvdm_shadow_reg_query_value' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_query_value_ex@24'; Raw = 'ntvdm_shadow_reg_query_value_ex' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_enum_key@16'; Raw = 'ntvdm_shadow_reg_enum_key' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_open_key_ex@20'; Raw = 'ntvdm_shadow_reg_open_key_ex' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_query_info_key@48'; Raw = 'ntvdm_shadow_reg_query_info_key' },
+    [pscustomobject]@{ Decorated = 'ntvdm_shadow_reg_enum_value@32'; Raw = 'ntvdm_shadow_reg_enum_value' },
     [pscustomobject]@{ Decorated = 'wow_user_runtime_current@0'; Raw = 'wow_user_runtime_current' },
     [pscustomobject]@{ Decorated = 'wow_user_runtime_unbind@4'; Raw = 'wow_user_runtime_unbind' },
     [pscustomobject]@{ Decorated = 'wow_user_runtime_enter@4'; Raw = 'wow_user_runtime_enter' },
@@ -447,9 +458,9 @@ foreach ($source in $sources) {
     } elseif ($source -eq 'wmmedia.c') {
         $ninja.Add('  cflags = $wow_cflags /DWMM32CallProc32=wow_original_WMM32CallProc32')
     } elseif ($source -eq 'wshell.c') {
-        $ninja.Add('  cflags = $wow_cflags /DWOWShellExecute=wow_shell_execute /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_registry_binding.h')) + '"')
+        $ninja.Add('  cflags = $wow_cflags /DWOWShellExecute=wow_shell_execute /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/include/wow_registry_binding.h')) + '"')
     } elseif ($source -in @('wkernel.c','mapembed.c','wdde.c','wow32fax.c')) {
-        $ninja.Add('  cflags = $wow_cflags /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_registry_binding.h')) + '"')
+        $ninja.Add('  cflags = $wow_cflags /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/include/wow_registry_binding.h')) + '"')
     } else {
         $ninja.Add('  cflags = $wow_cflags')
     }
@@ -461,6 +472,9 @@ $ninja.Add('  cflags = $wow_cflags')
 $objects.Add('obj/callpr32.obj')
 $ninja.Add('build obj/callpr32.obj: generic_call_asm ' + (ConvertTo-NinjaPath (Join-Path $wow 'i386/callpr32.asm')) + ' | ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/callconv.inc')))
 $supportObjects = [System.Collections.Generic.List[string]]::new()
+$objects.Add('obj/compat/wow_registry_binding.obj')
+$ninja.Add('build obj/compat/wow_registry_binding.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_registry_binding.c')))
+$ninja.Add('  cflags = ' + $nativeCflags + ' /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src')) + '"')
 $boundaryTest = ConvertTo-NinjaPath (Join-Path $root 'test/build/wow_thunk_macro_boundary.c')
 $ninja.Add('build obj/tests/wow-boundary-adapter.obj: cc ' + $boundaryTest)
 $ninja.Add('  cflags = $adapter_cflags')

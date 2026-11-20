@@ -109,22 +109,18 @@ static BOOL shadow_path(char *path, DWORD capacity)
     return error==ERROR_SUCCESS;
 }
 
-BOOL ntvdm_shadow_registry_initialize(VOID)
+static BOOL shadow_initialize_contents(VOID)
 {
     char path[MAX_PATH];
     HANDLE handle;
     DWORD read;
 
-    if (shadow_initialized) return TRUE;
     GetEnvironmentVariableA("NTVDM_SHADOW_REGISTRY_TRACE",shadow_trace_path,
         sizeof(shadow_trace_path));
     if (!shadow_path(path,sizeof(path))) return FALSE;
     handle=CreateFileA(path,GENERIC_READ,FILE_SHARE_READ,NULL,OPEN_EXISTING,0,NULL);
     if (handle==INVALID_HANDLE_VALUE) {
         if (GetLastError()==ERROR_FILE_NOT_FOUND || GetLastError()==ERROR_PATH_NOT_FOUND) {
-            shadow_commit_mutex=CreateMutexA(NULL,FALSE,
-                "Local\\NTVDM64.Registry.Commit.1");
-            if (!shadow_commit_mutex) return FALSE;
             shadow_initialized=TRUE;
             shadow_trace("LOAD_ABSENT");
             return TRUE;
@@ -147,14 +143,38 @@ BOOL ntvdm_shadow_registry_initialize(VOID)
         free(shadow_contents); shadow_contents=NULL; shadow_size=0;
         return FALSE;
     }
-    shadow_commit_mutex=CreateMutexA(NULL,FALSE,"Local\\NTVDM64.Registry.Commit.1");
-    if (!shadow_commit_mutex) {
-        free_overlay_keys(); free(shadow_contents); shadow_contents=NULL; shadow_size=0;
-        return FALSE;
-    }
     shadow_initialized=TRUE;
     shadow_trace("LOAD_OK");
     return TRUE;
+}
+
+BOOL ntvdm_shadow_registry_initialize(VOID)
+{
+    DWORD wait,error;
+    BOOL initialized;
+
+    if (shadow_initialized) return TRUE;
+    shadow_commit_mutex=CreateMutexA(NULL,FALSE,
+        "Local\\NTVDM64.Registry.Commit.1");
+    if (!shadow_commit_mutex) return FALSE;
+    wait=WaitForSingleObject(shadow_commit_mutex,INFINITE);
+    if (wait!=WAIT_OBJECT_0 && wait!=WAIT_ABANDONED) {
+        error=GetLastError();
+        CloseHandle(shadow_commit_mutex);
+        shadow_commit_mutex=NULL;
+        SetLastError(error);
+        return FALSE;
+    }
+    /* Initial readers share the same serialization as atomic replacement. */
+    initialized=shadow_initialize_contents();
+    error=GetLastError();
+    ReleaseMutex(shadow_commit_mutex);
+    if (!initialized) {
+        CloseHandle(shadow_commit_mutex);
+        shadow_commit_mutex=NULL;
+    }
+    SetLastError(error);
+    return initialized;
 }
 
 VOID ntvdm_shadow_registry_shutdown(VOID)

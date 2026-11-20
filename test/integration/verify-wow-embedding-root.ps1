@@ -28,5 +28,5 @@ $p=Start-Process "$out/embedding-test.exe" -WorkingDirectory $out -WindowStyle H
 if(!$p.WaitForExit(10000)){$p.Kill();throw 'Owned embedding fixture timeout'}
 $code=$p.ExitCode;Get-Content "$out/run.txt"
 if(Test-Path "$out/data/NTVDM.REG"){throw 'Fixture did not retire its own file'}
-Get-FileHash $ProviderSource,src/mvdm-host/wow32/mapembed.c,"$out/embedding_exact.h","$out/embedding-test.exe"|ConvertTo-Json|Set-Content "$out/hashes.json"
+Get-FileHash $ProviderSource,src/compat/wow_registry_binding.c,src/compat/include/wow_registry_binding.h,src/mvdm-host/wow32/mapembed.c,"$out/embedding_exact.h","$out/embedding-test.exe"|ConvertTo-Json|Set-Content "$out/hashes.json"
 exit $code

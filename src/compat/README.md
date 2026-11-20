@@ -351,3 +351,9 @@ VM dispatch and controlled-stop providers; compat owns no VM or IRQ state.
 `physical_mapping_services` is an immutable capability contract installed by the
 NTVDM product before guest execution. Physical page records, EMS aliases, session
 selection and teardown remain in the product; compat owns no mapping state.
+
+`wow_registry_binding.c` and `include/wow_registry_binding.h` own the WOW
+DWORD handle conversion and its lock/token/cleanup state. The binding stays
+linked once into WOW32 and directly imports the existing B shadow-registry
+provider in NTVDM. DLL composition retains explicit-unload cleanup timing;
+this does not move worker startup or shutdown policy into compat.

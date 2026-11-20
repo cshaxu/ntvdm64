@@ -2,7 +2,7 @@
 #define WOW_REGISTRY_BINDING_H
 
 /*
- * Private provider binding for the selected original WOW Registry thunks.
+ * Shared compatibility binding for the selected original WOW Registry thunks.
  * It deliberately exposes Win32-shaped calls so wshell.c and wkernel.c keep
  * their original conversion, error and recursive-delete bodies.  Values that
  * reach guest DWORD fields are worker-local tokens, never parent heap

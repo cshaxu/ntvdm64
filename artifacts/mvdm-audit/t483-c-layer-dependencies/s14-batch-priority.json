@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 411,
+    "open": 398,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 157
+    "eliminated": 170
   },
   "provider_groups": [
     {
@@ -323,39 +323,6 @@
         "wow_native_GetNextDlgTabItem",
         "wow_native_GetWindowThreadProcessId",
         "wow_native_WindowFromPoint"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/wow32-dll/source/wow_registry_binding.c",
-      "open_ids": [
-        "C0443",
-        "C0444",
-        "C0445",
-        "C0446",
-        "C0447",
-        "C0448",
-        "C0449",
-        "C0450",
-        "C0451",
-        "C0452",
-        "C0453",
-        "C0454"
-      ],
-      "count": 12,
-      "symbols": [
-        "wow_registry_close_key",
-        "wow_registry_create_key",
-        "wow_registry_delete_key",
-        "wow_registry_enum_key",
-        "wow_registry_enum_value",
-        "wow_registry_open_key",
-        "wow_registry_open_key_ex",
-        "wow_registry_query_info_key",
-        "wow_registry_query_value",
-        "wow_registry_query_value_ex",
-        "wow_registry_set_value",
-        "wow_registry_set_value_ex"
       ]
     },
     {
@@ -1839,17 +1806,6 @@
     },
     {
       "kind": "header",
-      "provider": "src/wow32-dll/include/wow_registry_binding.h",
-      "open_ids": [
-        "C0114"
-      ],
-      "count": 1,
-      "symbols": [
-        ""
-      ]
-    },
-    {
-      "kind": "header",
       "provider": "src/wow32-dll/include/wow_task_init_bindings.h",
       "open_ids": [
         "C0116"
@@ -2348,16 +2304,18 @@
         "C0453",
         "C0454"
       ],
-      "potential_direct_ids": 12,
+      "potential_direct_ids": 0,
       "providers": [
-        "src/wow32-dll/source/wow_registry_binding.c"
+        "src/compat/wow_registry_binding.c"
       ],
-      "evidence": "12 wrappers share token table, parent lookup and one B-owned shadow registry. Resolve one shared store across EXE/DLL, without duplicating static trees or keeping F operation callbacks.",
-      "status": "source-supported batch candidate; full migration and mirror-cost proof pending",
-      "count_rule": "Potential IDs, not eliminated IDs. Helpers, headers and callback edges are not added as speculative extra savings."
+      "evidence": "s14-registry-binding-owner.json",
+      "status": "P70 verified and published; enclosing commit is delivery receipt",
+      "count_rule": "Potential IDs, not eliminated IDs. Helpers, headers and callback edges are not added as speculative extra savings.",
+      "additional_header_id": "C0114",
+      "verified_eliminated_ids": 13
     }
   ],
-  "next_action": "Review the 114-ID WOW cluster first; derive concrete inner scheduler/state and publication carriers plus mirror cost. Dependency prerequisites belong to this batch, not a competing low-count detour.",
+  "next_action": "Continue 114-root scheduler/projection closure under existing layers; independent registry batch is verified, not an alternative scope.",
   "not_done": "114 roots remain open. P68 only delivers shared-runtime prerequisite; concrete C scheduler/projection carriers and mirror-cost measurement remain.",
-  "updated_by": "T483 S14 P68"
+  "updated_by": "T483 S14 P70"
 }

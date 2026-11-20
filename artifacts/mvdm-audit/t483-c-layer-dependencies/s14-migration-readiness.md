@@ -1,8 +1,8 @@
 # S14 migration readiness and counts
 
-Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68 updates below supersede its
+Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68/P70 updates below supersede its
 classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
-assigns all 411 currently open stable IDs to the existing ten chains.
+assigns all 398 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
 
@@ -16,9 +16,9 @@ assigns all 411 currently open stable IDs to the existing ten chains.
 | 6. launch-csr-completion | 19 | 4 | 0 | 0 | 23 |
 | 7. thread-lifecycle | 88 | 7 | 0 | 0 | 95 |
 | 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
-| 9. native-user | 152 | 26 | 0 | 0 | 178 |
+| 9. native-user | 140 | 25 | 0 | 0 | 165 |
 | 10. original-helpers-build-abi | 13 | 6 | 11 | 1 | 31 |
-| Total | 341 | 58 | 11 | 1 | 411 |
+| Total | 329 | 57 | 11 | 1 | 398 |
 
 The historical 79-provider body-read census remains evidence; P68 removes one
 provider from the open implementation set. Recounting the remaining chain
@@ -124,3 +124,8 @@ original paired SIM32 scratch-video writes remain unchanged. Cached full
 builds, dual11 publication, argument/frame/abort, real CCPU/page-domain and
 immutable Win16 dialog checks pass. Chain1 now has zero open direct IDs;
 chain2 machine/context ownership remains the next implementation work.
+
+P70: registry implementation/header remove 13 direct IDs, with zero mirror
+delta. Final build, dual11 publication and targeted tests pass; enclosing P70
+commit is the delivery receipt. The registry initialization race found by testing is repaired using
+the existing commit mutex. See [evidence](s14-registry-binding-owner.json).

@@ -1,0 +1,79 @@
+{
+  "baseline": "f2ccb177e235e2dd286d9663efa9c967a68acb2b",
+  "status": "verification and publication complete; enclosing P70 commit is delivery receipt, push verified after creation",
+  "ids": [
+    "C0114",
+    "C0443",
+    "C0444",
+    "C0445",
+    "C0446",
+    "C0447",
+    "C0448",
+    "C0449",
+    "C0450",
+    "C0451",
+    "C0452",
+    "C0453",
+    "C0454"
+  ],
+  "ownership": {
+    "B": "WOW DWORD token conversion, critical section, allocation, close and shutdown; direct calls to existing B shadow registry",
+    "F": "DLL composition and explicit unload invokes cleanup at unchanged point; worker initializes/shuts down shadow store",
+    "C": "original callers and conversion algorithms unchanged"
+  },
+  "physical_instance": "Binding remains compiled exactly once into WOW32.DLL; shadow store remains compiled once into NTVDM.exe. Existing parent PE imports link B implementation to B implementation, not a product-owned callback.",
+  "changes": [
+    "Move binding body/header from F to B",
+    "Remove 12 dynamic function pointers, resolver and readiness state",
+    "Direct-link 12 existing B exports with exact stdcall import aliases",
+    "Move unit fixture to test/compat and replace dynamically exported provider mock with same-shaped directly linked mock"
+  ],
+  "failure_contract": "Absent provider is now a load/link dependency failure, not per-call ERROR_NOT_READY. Complete production package already requires these existing exports. Token errors, no-reuse, close locking and explicit DLL-unload cleanup retained.",
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "pending": [],
+  "caveats": [
+    "No same-process concurrent shadow-registry safety fix claimed",
+    "Verified direct ledger:170 eliminated /398 open; broader114-root chain remains unfinished",
+    "114-root scheduler/window batch remains open; new C component not admitted"
+  ],
+  "initial_test_failure": {
+    "case": "unchanged double-writer registry persistence fixture",
+    "observed": "SECOND_WRITER_EXIT=40, WRITER_INIT_ERROR=32",
+    "cause": "initial file reader was outside existing atomic-commit mutex and raced ReplaceFile",
+    "fix": "initialize under the same existing commit mutex; preserve error and release on failure; no retry or second state",
+    "repro": "bounded diagnostic failed; fixed source passed all 12 independent directories",
+    "evidence": "build/t483-s14-registry-binding-owner/{repro,fixed-repro}.exit"
+  },
+  "package": "aa150097-9a16-4557-aea0-d6ad74abb81c",
+  "verified": [
+    "cached full x86/x64/reference build",
+    "dual11 publication and22 hashes",
+    "WOW_REGISTRY_POPULATED_SHUTDOWN_OK",
+    "T461_S3_REGISTRY_PERSISTENCE_OK",
+    "12 independent double-writer runs",
+    "EMBEDDING_ROOT checks=31 failures=0",
+    "WOW_DIALOG_GUEST_OK phases=8",
+    "145 WOW objects and9 negative controls",
+    "A/B compiled boundary",
+    "documentation governance and relative links",
+    "final22 published hashes"
+  ],
+  "runner_corrections": [
+    "embedding runner requires repo-relative Output; absolute-path rejection occurred before test launch",
+    "moved fixture historical Markdown link corrected"
+  ],
+  "counts": {
+    "before": {
+      "eliminated": 157,
+      "open": 411
+    },
+    "after": {
+      "eliminated": 170,
+      "open": 398
+    },
+    "removed": 13
+  }
+}

@@ -28,6 +28,24 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P70 [registry binding migration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-registry-binding-owner.json)
+places actual token/lock/cleanup implementation and the C-facing header in B.
+Twelve provider IDs and C0114 are verified eliminated; mirror delta0/0.
+Final cached x86/x64/reference builds, dual11 publication/22 hashes, registry
+shutdown/persistence,31 embedding checks,8-phase Win16 dialog and A/B gates pass.
+Package:aa150097-9a16-4557-aea0-d6ad74abb81c. Initialization now shares the
+existing commit mutex after testing reproduced error32 against atomic replacement;
+12 isolated double-writer repetitions pass. Ledger:170 eliminated/398 open,
+43 supporting/6 eliminated-transitive/1 excluded. Final document gates pass; the enclosing P70 commit is the delivery receipt.
+S14 and the114-root batch remain open.
+
+[C adapter placement](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-c-adapter-placement-decision.md)
+is not admitted. Keep the existing six layers: independent compatibility
+mechanisms and state belong in B, original subsystem coordination in C, and
+product policy in F. Do not introduce a new C component or additional B-to-C
+exception. Registry binding ownership is under implementation; no further
+dependency is counted eliminated before verification.
+
 P68 [shared USER runtime ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p68-runtime-owner.json)
 places the actual runtime body/header in B, removes outward retirement callbacks,
 and keeps explicit retirement/disposal composition in F. One worker TLS instance

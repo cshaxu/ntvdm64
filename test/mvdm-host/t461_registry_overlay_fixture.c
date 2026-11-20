@@ -36,7 +36,10 @@ int main(int argc, char **argv)
         "[HKEY_CLASSES_ROOT\\Baseline]\r\n@=\"baseline\"\r\n\"Old\"=\"old\"\r\n";
 
     if (argc==3 && !strcmp(argv[1],"writer")) {
-        if (!ntvdm_shadow_registry_initialize()) return 40;
+        if (!ntvdm_shadow_registry_initialize()) {
+            fprintf(stderr,"WRITER_INIT_ERROR=%lu\n",GetLastError());
+            return 40;
+        }
         if (ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"S2",&root)!=ERROR_SUCCESS) return 41;
         if (ntvdm_shadow_reg_set_value_ex(root,argv[2],0,REG_SZ,(const BYTE *)argv[2],
             (DWORD)strlen(argv[2])+1u)!=ERROR_SUCCESS) return 42;

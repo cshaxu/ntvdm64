@@ -17,6 +17,7 @@ DWORD compat_product_path_a(LPCWSTR relative, LPSTR path, DWORD capacity)
 }
 
 #include "embedding_provider_path.h"
+#include "../../src/compat/wow_registry_binding.c"
 #include <setjmp.h>
 
 
@@ -24,16 +25,16 @@ static unsigned checks,failures,calls,updated;
 static HKEY enum_override;
 static jmp_buf budget;
 static void check(int ok,const char *name){++checks;if(!ok){++failures;printf("FAIL %s\n",name);}}
-static LONG enum_original(HKEY h,DWORD i,LPSTR n,DWORD c){if(++calls>16)longjmp(budget,1);return ntvdm_shadow_reg_enum_key(enum_override?enum_override:h,i,n,c);}
+static LONG enum_original(HKEY h,DWORD i,LPSTR n,DWORD c){if(++calls>16)longjmp(budget,1);return wow_registry_enum_key(enum_override?enum_override:h,i,n,c);}
 static VOID UpdateEmbeddingKey(LPSTR name){check(!strcmp(name,"Alpha")||!strcmp(name,"Beta"),"valid original callback key");++updated;}
 #undef RegEnumKey
 #define RegEnumKey enum_original
 #undef RegCreateKey
 #undef RegSetValue
 #undef RegCloseKey
-#define RegCreateKey ntvdm_shadow_reg_create_key
-#define RegSetValue ntvdm_shadow_reg_set_value
-#define RegCloseKey ntvdm_shadow_reg_close_key
+#define RegCreateKey wow_registry_create_key
+#define RegSetValue wow_registry_set_value
+#define RegCloseKey wow_registry_close_key
 static char szServerKey[]="protocol\\StdFileEditing\\server";
 #include "embedding_exact.h"
 static void enumeration(HKEY handle){calls=updated=0;enum_override=handle;if(!setjmp(budget)){UpdateEmbeddingAllKeys();check(calls==4&&updated==2,"original skip-too-long then end");}else check(0,"original enumeration terminates");}
@@ -46,36 +47,36 @@ int main(void){
  if(!WriteFile(f,data,(DWORD)strlen(data),&written,NULL)){CloseHandle(f);DeleteFileA(path);return 4;}CloseHandle(f);
  check(ntvdm_shadow_registry_initialize(),"initialize actual shadow provider");
  enumeration(NULL);
- check(ntvdm_shadow_reg_enum_key(HKEY_CLASSES_ROOT,0,name,2)==ERROR_MORE_DATA,"short name buffer unchanged error");
- check(ntvdm_shadow_reg_enum_key(HKEY_CLASSES_ROOT,0,name,0)==ERROR_INVALID_HANDLE,"zero name capacity rejected");
- check(ntvdm_shadow_reg_enum_key(HKEY_LOCAL_MACHINE,0,name,sizeof(name))==ERROR_INVALID_HANDLE,"no new HKLM root enumeration");
- status=ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"",&opened);check(status==ERROR_SUCCESS,"opened root control");
- if(!status){enumeration(opened);check(ntvdm_shadow_reg_close_key(opened)==ERROR_SUCCESS,"close root control");check(ntvdm_shadow_reg_enum_key(opened,0,name,sizeof(name))==ERROR_INVALID_HANDLE,"stale opened root rejected");}
+ check(wow_registry_enum_key(HKEY_CLASSES_ROOT,0,name,2)==ERROR_MORE_DATA,"short name buffer unchanged error");
+ check(wow_registry_enum_key(HKEY_CLASSES_ROOT,0,name,0)==ERROR_INVALID_HANDLE,"zero name capacity rejected");
+ check(wow_registry_enum_key(HKEY_LOCAL_MACHINE,0,name,sizeof(name))==ERROR_INVALID_HANDLE,"no new HKLM root enumeration");
+ status=wow_registry_open_key(HKEY_CLASSES_ROOT,"",&opened);check(status==ERROR_SUCCESS,"opened root control");
+ if(!status){enumeration(opened);check(wow_registry_close_key(opened)==ERROR_SUCCESS,"close root control");check(wow_registry_enum_key(opened,0,name,sizeof(name))==ERROR_INVALID_HANDLE,"stale opened root rejected");}
  UpdateClassesRootSubKey("FromEmbedding",profile);
  check(profile[17]==0&&profile[24]==0,"original parser delimiter mutation retained");
  check(shadow_keys==NULL,"original parser closes both handles");
- memset(out,0xcc,sizeof(out));size=sizeof(out);status=ntvdm_shadow_reg_query_value(HKEY_CLASSES_ROOT,"FromEmbedding",out,&size);
+ memset(out,0xcc,sizeof(out));size=sizeof(out);status=wow_registry_query_value(HKEY_CLASSES_ROOT,"FromEmbedding",out,&size);
  check(status==ERROR_SUCCESS&&size==6&&!memcmp(out,"Class",6),"original class stored with terminator");
- memset(out,0xcc,sizeof(out));size=sizeof(out);status=ntvdm_shadow_reg_query_value(HKEY_CLASSES_ROOT,"FromEmbedding\\protocol\\StdFileEditing\\server",out,&size);
+ memset(out,0xcc,sizeof(out));size=sizeof(out);status=wow_registry_query_value(HKEY_CLASSES_ROOT,"FromEmbedding\\protocol\\StdFileEditing\\server",out,&size);
  check(status==ERROR_SUCCESS&&size==7&&!memcmp(out,"Server",7),"original server stored with terminator");
- status=ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"FromEmbedding",&opened);check(status==ERROR_SUCCESS,"open legacy size control");
+ status=wow_registry_open_key(HKEY_CLASSES_ROOT,"FromEmbedding",&opened);check(status==ERROR_SUCCESS,"open legacy size control");
  if(!status){
-  check(ntvdm_shadow_reg_set_value(opened,NULL,REG_SZ,"Zero",0)==ERROR_SUCCESS,"legacy ignored size write");
-  memset(out,0xcc,sizeof(out));size=sizeof(out);status=ntvdm_shadow_reg_query_value(opened,NULL,out,&size);
+  check(wow_registry_set_value(opened,NULL,REG_SZ,"Zero",0)==ERROR_SUCCESS,"legacy ignored size write");
+  memset(out,0xcc,sizeof(out));size=sizeof(out);status=wow_registry_query_value(opened,NULL,out,&size);
   check(status==ERROR_SUCCESS&&size==5&&!memcmp(out,"Zero",5),"legacy size computed from string");
-  check(ntvdm_shadow_reg_close_key(opened)==ERROR_SUCCESS,"legacy control handle retired");
+  check(wow_registry_close_key(opened)==ERROR_SUCCESS,"legacy control handle retired");
  }
- check(ntvdm_shadow_reg_set_value(HKEY_CLASSES_ROOT,"Direct",REG_SZ,"Direct",999)==ERROR_SUCCESS,"legacy direct-root set");
- memset(out,0xcc,sizeof(out));size=sizeof(out);status=ntvdm_shadow_reg_query_value(HKEY_CLASSES_ROOT,"Direct",out,&size);
+ check(wow_registry_set_value(HKEY_CLASSES_ROOT,"Direct",REG_SZ,"Direct",999)==ERROR_SUCCESS,"legacy direct-root set");
+ memset(out,0xcc,sizeof(out));size=sizeof(out);status=wow_registry_query_value(HKEY_CLASSES_ROOT,"Direct",out,&size);
  check(status==ERROR_SUCCESS&&size==7&&!memcmp(out,"Direct",7),"legacy direct-root query");
- check(ntvdm_shadow_reg_delete_key(HKEY_CLASSES_ROOT,"Direct")==ERROR_SUCCESS,"legacy direct-root delete");
- size=sizeof(out);check(ntvdm_shadow_reg_query_value(HKEY_CLASSES_ROOT,"Direct",out,&size)==ERROR_FILE_NOT_FOUND,"deleted root child absent");
- check(ntvdm_shadow_reg_enum_key((HKEY)(ULONG_PTR)123,0,name,sizeof(name))==ERROR_INVALID_HANDLE,"foreign key rejected");
- ntvdm_shadow_registry_shutdown();check(ntvdm_shadow_reg_enum_key(HKEY_CLASSES_ROOT,0,name,sizeof(name))==ERROR_INVALID_HANDLE,"shutdown root rejected");check(ntvdm_shadow_registry_initialize(),"restart persisted provider");
- memset(out,0xcc,sizeof(out));size=sizeof(out);status=ntvdm_shadow_reg_query_value(HKEY_CLASSES_ROOT,"FromEmbedding",out,&size);
+ check(wow_registry_delete_key(HKEY_CLASSES_ROOT,"Direct")==ERROR_SUCCESS,"legacy direct-root delete");
+ size=sizeof(out);check(wow_registry_query_value(HKEY_CLASSES_ROOT,"Direct",out,&size)==ERROR_FILE_NOT_FOUND,"deleted root child absent");
+ check(wow_registry_enum_key((HKEY)(ULONG_PTR)123,0,name,sizeof(name))==ERROR_INVALID_HANDLE,"foreign key rejected");
+ wow_registry_binding_shutdown();ntvdm_shadow_registry_shutdown();check(wow_registry_enum_key(HKEY_CLASSES_ROOT,0,name,sizeof(name))==ERROR_INVALID_HANDLE,"shutdown root rejected");check(ntvdm_shadow_registry_initialize(),"restart persisted provider");
+ memset(out,0xcc,sizeof(out));size=sizeof(out);status=wow_registry_query_value(HKEY_CLASSES_ROOT,"FromEmbedding",out,&size);
  check(status==ERROR_SUCCESS&&size==5&&!memcmp(out,"Zero",5),"legacy string survives persistence");
- memset(out,0xcc,sizeof(out));size=sizeof(out);status=ntvdm_shadow_reg_query_value(HKEY_CLASSES_ROOT,"FromEmbedding\\protocol\\StdFileEditing\\server",out,&size);
+ memset(out,0xcc,sizeof(out));size=sizeof(out);status=wow_registry_query_value(HKEY_CLASSES_ROOT,"FromEmbedding\\protocol\\StdFileEditing\\server",out,&size);
  check(status==ERROR_SUCCESS&&size==7&&!memcmp(out,"Server",7),"original server survives persistence");
- ntvdm_shadow_registry_shutdown();check(DeleteFileA(path),"fixture file retired");
+ wow_registry_binding_shutdown();ntvdm_shadow_registry_shutdown();check(DeleteFileA(path),"fixture file retired");
  printf("EMBEDDING_ROOT checks=%u failures=%u\n",checks,failures);return failures?1:0;
 }
