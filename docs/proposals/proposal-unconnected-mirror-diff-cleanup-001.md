@@ -8,8 +8,10 @@ The owner approves actual inward relocation of the public host compatibility
 implementations needed by C, together with their state and cleanup. Moving a
 header or installing a B-to-F forwarding table is not completion of this goal.
 Review both remaining outward edges and previously isolated service contracts.
-Retain the six-layer architecture; B may use A and platform APIs, not C/D/E/F
-private implementations. Original simulation algorithms belong in C; product
+Retain the six-layer architecture. B may use A and platform APIs; the later
+S14 owner decision additionally admits reviewed CCPU/SAS and original USER/task
+adapters in B with explicit C dependencies. It does not permit D/E/F private
+implementations or a new C component. Original simulation algorithms belong in C; product
 request, scheduling and lifecycle decisions remain with their product owners.
 
 The approved [implementation migration plan](../etc/operations/t483-compat-implementation-migration-plan.md)

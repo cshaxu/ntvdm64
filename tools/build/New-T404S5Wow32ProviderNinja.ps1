@@ -82,6 +82,7 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_launch_identity.c'),
     (Join-Path $adapterWow 'wow_user_message_bridge.c'),
     (Join-Path $adapterWow 'wow_user_task_lifecycle.c'),
+    (Join-Path $adapterWow 'wow_task_start_notification.c'),
     (Join-Path $adapterWow 'wow_input_group_lifetime.c'),
     (Join-Path $adapterWow 'wow_dialog_creation_binding.c'),
     (Join-Path $adapterWow 'wow_dialog_keyboard_binding.c'),

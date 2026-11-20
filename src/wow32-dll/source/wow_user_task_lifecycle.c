@@ -584,14 +584,12 @@ done:
     return result;
 }
 
-DWORD WINAPI wow_user_task_lifecycle_notify_start(wow_user_task_lifecycle *owner,
-    DWORD task_id, DWORD shared_id, DWORD (WINAPI *notify)(ULONG))
+DWORD WINAPI wow_user_task_start_acquire(wow_user_task_lifecycle *owner,
+    DWORD task_id, DWORD shared_id, const void *attempt)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     wow_user_task_lifecycle_thread *task;
-    DWORD error = ERROR_OPERATION_ABORTED;
-    char attempt;
-    if (!notify || !owner || !binding || binding->runtime != owner->runtime ||
+    if (!attempt || !owner || !binding || binding->runtime != owner->runtime ||
             !wow_user_runtime_enter(binding)) return ERROR_INVALID_STATE;
     task = current_task(owner);
     if (!task || !task->thread.ptdb || task->thread.ptdb->hTaskWow != task_id ||
@@ -600,24 +598,27 @@ DWORD WINAPI wow_user_task_lifecycle_notify_start(wow_user_task_lifecycle *owner
         (void)wow_user_runtime_leave(binding);
         return ERROR_INVALID_STATE;
     }
-    /* A live call-frame token also distinguishes retirement/reallocation.
-     * Never retain/dereference the old task pointer across the RPC. */
-    task->start_attempt = &attempt;
+    /* The caller's live frame distinguishes retirement/reallocation. Never
+     * retain the task pointer across the operation outside this owner. */
+    task->start_attempt = attempt;
     (void)wow_user_runtime_leave(binding);
-    __try {
-        error = notify(shared_id);
-    } __finally {
-        binding = wow_user_runtime_current();
-        if (binding && binding->runtime == owner->runtime &&
-                wow_user_runtime_enter(binding)) {
-            task = current_task(owner);
-            if (task && task->start_attempt == &attempt) {
-                task->start_attempt = NULL;
-                if (!error) task->start_pending = FALSE;
-            } else error = ERROR_OPERATION_ABORTED;
-            (void)wow_user_runtime_leave(binding);
+    return ERROR_SUCCESS;
+}
+
+DWORD WINAPI wow_user_task_start_complete(wow_user_task_lifecycle *owner,
+    const void *attempt, DWORD error)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    wow_user_task_lifecycle_thread *task;
+    if (binding && binding->runtime == owner->runtime &&
+            wow_user_runtime_enter(binding)) {
+        task = current_task(owner);
+        if (task && task->start_attempt == attempt) {
+            task->start_attempt = NULL;
+            if (!error) task->start_pending = FALSE;
         } else error = ERROR_OPERATION_ABORTED;
-    }
+        (void)wow_user_runtime_leave(binding);
+    } else error = ERROR_OPERATION_ABORTED;
     return error;
 }
 

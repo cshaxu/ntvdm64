@@ -56,10 +56,14 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *, UINT,
  * ownership path. */
 BOOL WINAPI wow_user_task_lifecycle_publish_initial_view(
     wow_user_task_lifecycle *);
-/* Retry only the launcher notification after original InitTask committed.
- * The callback runs outside the USER lock; task/request identity must match. */
-DWORD WINAPI wow_user_task_lifecycle_notify_start(wow_user_task_lifecycle *,
-    DWORD, DWORD, DWORD (WINAPI *)(ULONG));
+/* Begin/end a caller-owned post-initialization operation. Acquire returns
+ * with the runtime unlocked. Complete must run in finally after success;
+ * it re-resolves the task and validates the live frame token. No external
+ * operation or callback executes inside this lifecycle implementation. */
+DWORD WINAPI wow_user_task_start_acquire(wow_user_task_lifecycle *,
+    DWORD, DWORD, const void *);
+DWORD WINAPI wow_user_task_start_complete(wow_user_task_lifecycle *,
+    const void *, DWORD);
 BOOL WINAPI wow_user_task_lifecycle_yield(wow_user_task_lifecycle *);
 VOID WINAPI wow_user_task_lifecycle_directed_yield(wow_user_task_lifecycle *,
     DWORD);

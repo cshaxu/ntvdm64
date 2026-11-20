@@ -1,8 +1,15 @@
 # C-owned adapter placement decision
 
-Baseline: `f2ccb177e`. Status: new-component option not admitted after owner review. Continue
-under the existing six layers, separating independent B mechanisms from C
-subsystem coordination and F product policy. S14 and its existing six-layer rules remain active.
+Baseline: `f2ccb177e`. Historical options below are superseded by the owner
+decision following P77: "批准放进B里，作为例外依赖C". Use existing compat
+for the reviewed original-dependent adapters under an explicit B-to-C
+exception. Do not create mvdm-compat. B-to-D/E/F is still forbidden; actual
+providers, state and cleanup must migrate together. Original algorithms stay
+in C and product notifications/orchestration stay F. No migration or new
+dependency elimination is claimed by this approval record.
+
+The alternatives below retain the earlier analysis and are not the current
+execution instruction.
 
 ## Concrete problem
 

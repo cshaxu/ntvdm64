@@ -17,8 +17,10 @@ Move actual reusable implementation, necessary state and cleanup to B.
 F may compose B-owned objects and decide product creation/destruction, but
 must not remain the implementation provider behind a nominal B wrapper.
 Keep original algorithms in C and explicit product policy at its product
-owner. Preserve the two existing approved B-to-C exceptions; do not expand
-them as a shortcut.
+owner. Preserve the two existing B-to-C exceptions. The later S14 owner
+approval additionally admits the reviewed CCPU/SAS and original USER/task
+adapters in B as explicit dependencies on C; it does not permit D/E/F
+providers or moving original algorithms out of their mirrors.
 
 Owner clarification: do not relocate the NTSRV/NTVDM core into B. For mapping,
 B owns records, address conversion and allocation/release; F decides worker
@@ -29,6 +31,19 @@ only the minimum binding needed by the selected public capability, not a
 generic replacement session manager or service transport. If a candidate
 requires moving that core merely to satisfy layering, redesign the boundary
 instead of widening B.
+
+## S14 owner-approved placement after P77
+
+Owner: "批准放进B里，作为例外依赖C". The existing compat component is
+now the destination for reviewed machine/subsystem-dependent adaptation.
+This supersedes the C-only carrier restriction in the earlier chain-2/3
+planning table below, not the algorithms' original ownership or verification.
+No new C component is admitted. Remove actual D/E/F implementation dependencies,
+including cleanup callbacks; keep product launch notifications and worker policy
+outside. Record concrete B sources and C providers in the migration ledger.
+The first coupled batch covers page-domain state/publication/reclamation and
+its window/class storage consumers, followed by native-call scheduling handoff.
+Do not count relocated headers or a B-to-F forwarding contract as closure.
 
 ## Baseline and accounting
 
@@ -47,8 +62,10 @@ destination, superseded forwarding, mirror point/line impact and verification.
 File presence, compile selection and live product use are separate facts.
 An old eliminated include edge is not proof that its implementation moved.
 Track public runtime module protocols separately, without using that category
-to exempt private provider calls. Retain the two approved B-to-C exceptions;
-the rejected 24-operation WOW machine callback candidate is not admitted.
+to exempt private provider calls. Retain the existing two B-to-C exceptions
+and record each adapter under the later explicit admission. The rejected
+24-operation callback facade remains rejected: move actual implementations
+and use their C providers directly, rather than install outer implementations.
 
 Reconcile the historical src/session split against current compat and
 ntvdm-exe/session bodies. Reuse the one existing host-context binding and
@@ -107,7 +124,8 @@ correctness defect or introduce a callback solely to bypass it.
    lifecycle or disguise session pointers as void pointers. C's original
    no-context signatures must retain a coherent binding and error contract.
 4. Keep real original C algorithms in C. A C-to-F helper that only calls C
-   is not a reason to add a B callback. B must not absorb private C layouts.
+   is not a reason to add a B callback. The admitted B adapters may consume canonical C layouts; do not create
+   duplicate layout definitions or move the original algorithms.
 5. Remove superseded F bodies, service-table entries, installation code and
    unused tests only after the replacement covers the same production chain.
    Product policy that cannot move is a separate explicitly tracked boundary,

@@ -1,0 +1,94 @@
+{
+  "baseline": "ac2b4fbf821224f85bfbd82c1c332f13d4d6765a",
+  "status": "P78 final code built, published and targeted tests passed; enclosing commit/push is delivery receipt",
+  "owner_approval": "批准放进B里，作为例外依赖C",
+  "placement": "Existing B compat may own reviewed CCPU/SAS/original USER/task adaptation with direct C dependencies. No new C component. B-to-D/E/F remains forbidden; original algorithms remain C and product request notification remains F.",
+  "implemented_cut": {
+    "provider": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+    "resource_operations": [
+      "wow_user_task_start_acquire",
+      "wow_user_task_start_complete"
+    ],
+    "outer_operation": "src/wow32-dll/source/wow_task_start_notification.c::wow_user_task_lifecycle_notify_start",
+    "state": "Existing launch_request/start_pending/start_attempt fields and one current_task lookup, unchanged storage and authority; no new task table.",
+    "preserved_sequence": [
+      "validate identity and no outstanding attempt under existing runtime lock",
+      "install caller frame address as attempt identity",
+      "release lock before external notification",
+      "on return or unwind re-resolve current task; never retain task pointer across external operation",
+      "clear only matching attempt, consume pending state only on success; propagate original exception"
+    ],
+    "not_claimed": "Lifecycle body is still F until coupled migration; this preparation is not a direct-ID elimination."
+  },
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "ledger": {
+    "eliminated": 182,
+    "open": 386,
+    "new_eliminations": 0
+  },
+  "tests": [
+    "existing start-notification identity/reentry/unlocked/seven retries/commit; added NULL callback and exception-unwind then retry",
+    "init-notification",
+    "native-nested",
+    "immutable Win16 dialog",
+    "eight A/B production graphs"
+  ],
+  "root": "build\\t483-s14-b-c-admission",
+  "package": "69c09f52-2fa2-40dd-911e-afb32e1b9a7b",
+  "policy_updates": [
+    "docs/rules/ARCHITECTURE.md",
+    "docs/design/CODING.md",
+    "docs/proposals/proposal-unconnected-mirror-diff-cleanup-001.md",
+    "docs/etc/operations/t483-compat-implementation-migration-plan.md",
+    "docs/states/CURRENT.md"
+  ],
+  "verification": {
+    "build": {
+      "process": {
+        "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+        "pid": 36712,
+        "script": "O:/repos.hobby/ntvdm64/build/t483-s14-b-c-admission/build.ps1",
+        "start": "2026-11-20T03:05:25.7787664Z"
+      },
+      "exit": 0
+    },
+    "deliver": {
+      "process": {
+        "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+        "pid": 22348,
+        "script": "O:/repos.hobby/ntvdm64/build/t483-s14-b-c-admission/deliver.ps1",
+        "start": "2026-11-20T03:08:41.6455225Z"
+      },
+      "exit": 0
+    },
+    "tests": {
+      "process": {
+        "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+        "pid": 19840,
+        "start": "2026-11-20T03:09:16.2648518Z",
+        "script": "O:/repos.hobby/ntvdm64/build/t483-s14-b-c-admission/tests.ps1"
+      },
+      "exit": 0
+    },
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "69c09f52-2fa2-40dd-911e-afb32e1b9a7b",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "guest_marker": "WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+    "targeted": "start-notification (including exception unwind then retry), init-notification, native-nested: errors=0; eight A/B product graphs passed"
+  },
+  "source_sha256": {
+    "src/wow32-dll/source/wow_user_task_lifecycle.c": "5c8d955abd1f9be43015c5579107ded7df7a1aa092b85fd27848407e95d55a74",
+    "src/wow32-dll/source/wow_task_start_notification.c": "1b7a99902d59839868a1e08b7b093f1d70d74128438a29a68c93db8fa6c21e7d",
+    "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c": "b75efffe9c1991f5c234c9d4815c69d8f5f6a9bbcc459607640b4795f6046519"
+  }
+}

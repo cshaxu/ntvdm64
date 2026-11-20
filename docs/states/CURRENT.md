@@ -10,7 +10,7 @@ implementation migration. The broader C-layer cleanup remains active.
 | Field | Record |
 | --- | --- |
 | Original Owner Request | 实际公共实现及必要状态下沉B，不只是移动头文件或增加转发；不把NTVDM/NTSRV核心搬进B；按批准的S队列连续执行。 |
-| Objective | Audit the complete responsibility and implementation ownership of ntvdm-exe, mvdm-host, non-mvdm and compat, including the historical session split; establish a file/symbol/state/lifecycle migration ledger before further relocation, then implement complete chains to eliminate all C-to-D/E/F implementation dependencies. B owns independent compatibility mechanics and resources; C retains original machine/subsystem algorithms; F owns product composition and lifecycle. No forwarding disguise or additional B-to-C exception. |
+| Objective | Audit the complete responsibility and implementation ownership of ntvdm-exe, mvdm-host, non-mvdm and compat, including the historical session split; establish a file/symbol/state/lifecycle migration ledger before further relocation, then implement complete chains to eliminate all C-to-D/E/F implementation dependencies. B owns independent compatibility mechanics and resources; C retains original machine/subsystem algorithms; F owns product composition and lifecycle. No forwarding disguise; the owner-approved CCPU/SAS/USER adaptation exception permits B-to-C, never B-to-D/E/F. |
 | Files And ABI Surface | Complete ntvdm-exe, mvdm-host, non-mvdm and compat inventory; historical session split, production compile/link providers and indirect calls. Inspect external consumers/providers as needed for complete chains without unrelated product expansion. |
 | Reference Baseline | S13 P17; package92f469bf-1555-4ff0-b16d-ef2d9292934a; source/evidence in the linked closure. Direct ledger144 eliminated/424 open is not an implementation-migration count. |
 | Applicable Rules | Six-layer architecture, original-first source policy, coding/execution/documentation rules and approved implementation migration. |
@@ -19,7 +19,7 @@ implementation migration. The broader C-layer cleanup remains active.
 | Candidate Proposal | [T483 parent proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
 | Identifier Mode | M0 T483 S14, Ordinary Mode. |
 | Admission And Approval | Owner approved sequential implementation migration on2026-11-19. S13 first-chain verification completed; S14 admitted at its closure delivery. S15-S19 remain planned. |
-| Non-goals | No guest modification/rebuild, whole-session/core migration, duplicate TLS/state machine, new B-to-C exception or forwarding-only completion. |
+| Non-goals | No guest modification/rebuild, whole-session/core migration, duplicate TLS/state machine, B-to-D/E/F dependency or forwarding-only completion. |
 | Expected Markers | Actual inward implementations and state ownership, removed superseded providers/forwarding, retained original memory semantics and lifetime. |
 | Similar-Issue Sweep | All acquire/use/release, thread and cross-image consumers of each selected chain; distinguish original C provider algorithms from common compatibility mechanics. |
 | Reporting Requirements | File entry/exit, mirror points/lines and cumulative totals; direct edges, actual migration, deleted forwarding and remaining ownership counted separately. |
@@ -28,13 +28,23 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P78 [B-to-C admission and notification boundary](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-b-c-admission-start-owner.json)
+records the approved B adapter exception; no new C component. Product startup
+notification stays F; lifecycle acquire/complete retains existing state and
+unwind ordering. Cached full builds, dual11/22-hash publication, notification
+retry/unwind, init, native nesting, real Win16 dialog8 phases and eight A/B
+graphs passed. Package `69c09f52-2fa2-40dd-911e-afb32e1b9a7b`.
+Mirror delta0 points/0 lines; ledger182 eliminated/386 open, no new closures.
+Lifecycle relocation is pending. Final governance and enclosing commit/push
+provide the delivery receipt.
+
 P77 [compiled owner cycles](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-compiled-owner-cycles.json)
-checks all110 recorded object hashes against the current build: all match.
+checked all110 recorded object hashes against the P77 build: all matched.
 The largest section relocation cycle spans362 sections/50 objects (27 C,
 23 F), with53 distinct C-to-F referenced symbols in13 F providers;29 target
 native lifecycle. This includes function-address/data references, not only
-calls, and is not runtime or indirect-call coverage. It rules out whole-file
-B relocation and prioritizes the coupled scheduler/projection split. No source
+calls, and is not runtime or indirect-call coverage. Under the then-unapproved B-to-C boundary it ruled out whole-file
+B relocation; P78 approval supersedes that placement restriction. No source
 or package change, no eliminations; ledger182/386 and P76 release remain.
 
 P76 [scalar observation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-observation-owner.json)
@@ -93,11 +103,12 @@ existing commit mutex after testing reproduced error32 against atomic replacemen
 S14 and the114-root batch remain open.
 
 [C adapter placement](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-c-adapter-placement-decision.md)
-is not admitted. Keep the existing six layers: independent compatibility
-mechanisms and state belong in B, original subsystem coordination in C, and
-product policy in F. Do not introduce a new C component or additional B-to-C
-exception. Registry binding ownership was delivered in P70; no further
-dependency is counted eliminated before verification.
+is superseded by the owner's S14 decision: use existing B compat for the
+reviewed CCPU/SAS and original USER/task adapters, as explicit B-to-C
+exceptions. No new C component; B-to-D/E/F remains prohibited. Actual
+implementations, state and cleanup must migrate together, with named C
+providers and callback targets. Product notifications stay F. Approval changes
+placement, not the182/386 ledger or the P76 released package.
 
 P68 [shared USER runtime ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p68-runtime-owner.json)
 places the actual runtime body/header in B, removes outward retirement callbacks,

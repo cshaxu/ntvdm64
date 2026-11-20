@@ -1,3 +1,4 @@
+#include "wow_task_start_notification.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_private_access.h"
 #include "wow_window_words_binding.h"
@@ -142,6 +143,13 @@ WOW_NATIVE_MESSAGE(native_service_fault,
 #define FIXTURE_LAUNCH_REQUEST 0x5678
 static wow_user_task_lifecycle *notification_owner;
 static unsigned notification_calls;
+static DWORD WINAPI notify_start_unwind(ULONG request)
+{
+    CHECK(request == 0x5678);
+    CHECK(!wow_user_runtime_current()->exclusive_held);
+    RaiseException(0xe4830078u, 0, 0, NULL);
+    return ERROR_SUCCESS;
+}
 static DWORD WINAPI notify_start(ULONG request)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
@@ -1353,6 +1361,20 @@ int __cdecl main(int argc,char **argv)
         unsigned retry;
         void *committed = binding.thread;
         notification_owner = &lifecycle;
+        CHECK(wow_user_task_lifecycle_notify_start(&lifecycle, 0x1234,
+            0x5678, NULL) == ERROR_INVALID_STATE);
+        {
+            BOOL caught = FALSE;
+            __try {
+                (void)wow_user_task_lifecycle_notify_start(&lifecycle, 0x1234,
+                    0x5678, notify_start_unwind);
+            } __except (GetExceptionCode() == 0xe4830078u ?
+                    EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+                caught = TRUE;
+            }
+            CHECK(caught && binding.thread == committed && !binding.exclusive_held);
+        }
+
         CHECK(wow_user_task_lifecycle_notify_start(&lifecycle, 0x1235,
             0x5678, notify_start) == ERROR_INVALID_STATE);
         CHECK(wow_user_task_lifecycle_notify_start(&lifecycle, 0x1234,
@@ -1368,7 +1390,7 @@ int __cdecl main(int argc,char **argv)
         CHECK(wow_user_task_lifecycle_notify_start(&lifecycle, 0x1234,
             0x5678, notify_start) == ERROR_INVALID_STATE);
         CHECK(notification_calls == 8 && binding.thread == committed);
-        fprintf(stderr, "WOW_START_NOTIFICATION identity/reentry/unlocked/retry/commit checked errors=%u\n", errors);
+        fprintf(stderr, "WOW_START_NOTIFICATION identity/reentry/unlocked/unwind/retry/commit checked errors=%u\n", errors);
     }
 #endif
     CHECK(wow_user_runtime_current() == &binding && binding.thread != NULL);

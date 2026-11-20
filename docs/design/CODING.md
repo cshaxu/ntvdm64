@@ -9,7 +9,10 @@ under `src/mvdm-host`. `src/non-mvdm` retains
 the selected original non-MVDM sources at their original relative paths.
 Three colliding headers retain the previously selected, registered subsets;
 the unselected full variants remain available in Git history and provenance.
-`src/compat` contains the shared project-owned historical ABI bindings.
+`src/compat` contains shared project-owned historical ABI bindings and the
+owner-admitted original-subsystem adapters. The scoped B-to-C exception in
+the architecture rules permits their actual CCPU/SAS and USER/task adaptation
+to live here; independent mechanisms remain free of C dependencies.
 Component-private adapters remain with their component. Moving these roots
 does not change their source provenance, executable ownership or ABI.
 

@@ -25,10 +25,23 @@ For A and B, the [library boundary check](../../tools/audit/verify-library-build
 verifies production compile commands, compiler-recorded headers and build
 prerequisites. Platform SDK and runtime libraries are outside this table.
 
-The x86 WOW32 build has two approved B-to-C exceptions. In compat,
+The original two x86 WOW32 B-to-C exceptions remain approved. In compat,
 `_GetDlgItem` traverses the original USER window layout and
 `gabObjectCreateFlags` supplies the original USER object ownership flags.
-The approval is limited to these two symbols and their C layout dependencies.
+Their original approval covers these two symbols and their C layout dependencies.
+
+Owner approval in T483 S14 additionally places the reviewed CCPU/SAS and
+original USER/task-context adapters in existing B compat, with an explicit
+B-to-C dependency exception. This covers actual machine access, original-layout
+projection, execution handoff and coupled resource lifetime adaptation; it
+does not move the original CPU, scheduler or control algorithms out of C.
+No new C component is introduced. Record each migrated source, actual C
+providers and callback targets; this is not a component-wide exemption from
+dependency checking. B-to-D/E/F remains forbidden. Product launch/request
+notification, frontend transport policy and worker orchestration remain outer.
+The gate must check newly admitted units against A/B/C rather than skip them.
+Migrating only declarations, or calling an F provider behind a B ABI, does
+not remove an outward dependency.
 
 Record dependencies on named product images at launch, dynamic load, PE
 import or package validation separately from source dependencies. A shared
@@ -44,7 +57,8 @@ Move reusable compatibility bodies, their necessary state and cleanup together;
 the product may compose those B-owned objects and select lifecycle timing.
 Do not move the whole product session, introduce duplicate binding/state
 machines, or conceal an outer session accessor behind an opaque callback.
-Original algorithms/private layouts remain C-owned; product request and
+Original algorithms and canonical private layouts remain C-owned; the admitted
+B adapters may consume those C layouts and algorithms directly. Product request and
 completion authority remains product-owned. Record source dependencies,
 implementation ownership and runtime protocols separately. Existing service
 tables remain transitional until their complete chains have been migrated and
@@ -57,7 +71,7 @@ introducing a parallel session or TLS registry. Keep stateless compatibility
 operations independent of that context. F composes the B context and retains
 product task identity, scheduling, cancellation/completion policy and worker
 start/stop authority. This is not permission to move the entire product
-session into B or add B-to-C provider exceptions. Audit actual callback
+session into B or extend the explicit B-to-C admission above. Audit actual callback
 targets, including memory providers and cleanup functions; source-independent
 headers and a B-owned registry alone do not prove inward implementation.
 
@@ -66,8 +80,9 @@ removing knowledge of Run16, NTSRV, NTCON and the concrete task chain, can
 the function still completely explain its behavior? Saving input, reading
 it within its lifetime and releasing it normally passes. Creating a VM
 frontend for a request, choosing Run16 or reporting task completion does not.
-Original CPU/subsystem algorithms and private C representations remain C
-responsibilities even when they know nothing about product task chains.
+Original CPU/subsystem algorithms and canonical private C representations
+remain C responsibilities; their reviewed adaptation may reside in B under
+the explicit exception above, without inventing a second algorithm or layout.
 Split mixed responsibilities; callbacks must not conceal the product knowledge.
 
 Product components select shared source from common, lib-nxvm, lib-win32, mvdm-host and
