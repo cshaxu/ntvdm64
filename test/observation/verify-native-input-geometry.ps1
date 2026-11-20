@@ -6,7 +6,7 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 $null=New-Item -ItemType Directory $root
 $source=Get-Content "$repo/src/ntvwm-exe/presentation.c" -Raw
 $begin=$source.IndexOf('DWORD ntvwm_presentation_input(')
-$end=$source.IndexOf('DWORD ntvwm_presentation_text(',$begin)
+$end=$source.IndexOf('DWORD ntvwm_presentation_capture(',$begin)
 if($begin -lt 0 -or $end -le $begin){throw 'Production input function boundary missing'}
 [IO.File]::WriteAllText("$root/native_input_geometry.inc",$source.Substring($begin,$end-$begin),[Text.Encoding]::ASCII)
 Get-FileHash "$repo/src/ntvwm-exe/presentation.c","$repo/test/ntvwm-exe/native_input_geometry_test.c" | ConvertTo-Json | Set-Content "$root/inputs.json"

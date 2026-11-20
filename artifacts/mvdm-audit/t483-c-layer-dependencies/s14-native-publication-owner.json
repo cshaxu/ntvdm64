@@ -1,0 +1,86 @@
+{
+  "packet": "M0 T483 S14 P109",
+  "baseline": "f6b143c505b6a6aa066dc2cfad2e001a1b2ff739",
+  "eliminated_B_ids": [
+    "B0029"
+  ],
+  "eliminated_C_ids": [],
+  "remaining_known_B_outward": {
+    "F": 5,
+    "D": 2
+  },
+  "C_population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 531,
+    "open": 37,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "scope": "The existing B publisher now calls B-owned native frame delivery. Compat owns the wire transaction, acknowledged cells, glyph conversion and diagnostic logging. NTVWM still owns acquisition, handoff sequencing, inactive-owner decisions and resource lifecycle timing.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "final_product_symbols": {
+    "ntvwm_publish_copy": "0001:000034f0       ntvwm_publish_copy         00000001400044f0 f   native_console_publication.obj",
+    "ntvwm_publication_set_cells": "0001:00003470       ntvwm_publication_set_cells 0000000140004470 f   native_console_publication.obj",
+    "ntvwm_presentation_exchange": "0001:00003430       ntvwm_presentation_exchange 0000000140004430 f   native_console_publication.obj",
+    "ntvwm_trace_error": "0001:00006b80       ntvwm_trace_error          0000000140007b80 f   native_console_diagnostics.obj",
+    "ntvwm_text_glyph": "0001:00004e60       ntvwm_text_glyph           0000000140005e60 f   native_console_text_frame.obj"
+  },
+  "compiled_ownership": {
+    "objects": [
+      {
+        "graph": "native-worker",
+        "object": "obj/compat/native_console_publication.obj",
+        "source": "src/compat/native_console_publication.c",
+        "sha256": "28f1554faed2b76be4900def6be96c61ae86cea6baa53298e87958a8111fd0ac"
+      },
+      {
+        "graph": "native-worker",
+        "object": "obj/compat/native_console_text_frame.obj",
+        "source": "src/compat/native_console_text_frame.c",
+        "sha256": "fb7c5b8fdc9ae48f8f62d59492f739448de1912afbc03326c71212a20b06d76d"
+      },
+      {
+        "graph": "native-worker",
+        "object": "obj/compat/native_console_diagnostics.obj",
+        "source": "src/compat/native_console_diagnostics.c",
+        "sha256": "fa4a0d109ff1f1db8e33a97a357ac52d7ce9ebaa9797d57b45841295d08e0a7d"
+      }
+    ],
+    "counts": {
+      "CRT": 16,
+      "system import": 18,
+      "compat": 5
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "89c4bdd0-d6df-40e4-8580-45e23631459b",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Final cached full build, dual publication, private desktop native worker fixtures, input geometry, real EDIT return and structural gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "2ca9d0324e2da87e003ba777cd6b77016bafa03e0b91b7cdcd0bf60cbf705e56",
+    "probes.out": "0886ec6f55a779228a5332d6a3cc0e46354aaf08bc12e010de577816f56a75a1",
+    "final-checks.out": "33be180cd90c03e7a8ac27a233639fca3d5ad25e98186c89c5ef61f671bd294d",
+    "b-compiled-candidates.json": "69d7fefc4bf00f6f5d0f705886a7e10a3c1aa7d0aec9fe6753f796581e2d6f97",
+    "callback-binding.txt": "3652a78c552b39b48fd9e4e91cfd690aadd6882a6f83b968c4f26a2d7a76bf9a",
+    "native-fixtures/result.txt": "574a1d1af636b8d39ffe94ba2e9214b3b861480905cfbf3a2883efc5784cce06",
+    "input-geometry/result.txt": "4253d2d27b323a40f73bb4296ce4aaa3ad84318a5d455fdfeffd78f48cef45e5",
+    "native-edit-return.txt": "46e26654a3578d536b8f789fcfda49a947fa2f9c19adc4a3cae6eaaa9d0a7ae1",
+    "carrier-guard/result.txt": "be71af7e83b4d2a960cfe4c47058250892b58a45ecee1ab067cdfdd518ed7e7f",
+    "final-checks-initial.out": "018bb02b5c75b4d3709a93f168d672365bc678cd10efe56304e95b7b0ea2339f",
+    "native_console_publication.deps.txt": "3e0a4a75cd88ad13ccf0558adf028afd24a3579e013e12a31b9d24937a9d75d5",
+    "native_console_text_frame.deps.txt": "9600649baa9531d2fc75b00d2c2e8167dad2f39c82d0bd5d37872e3fc7d9f7c0",
+    "native_console_diagnostics.deps.txt": "7cd9f795a391da23d965ab78b6b5156af6233da02284e6da498325c97968e424"
+  }
+}

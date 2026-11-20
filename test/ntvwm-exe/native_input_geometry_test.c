@@ -5,7 +5,7 @@
 #include <string.h>
 #include "compat/include/console_io.h"
 #include "ntvwm-exe/console_state.h"
-#include "ntvwm-exe/text_frame.h"
+#include "compat/include/native_console_text_frame.h"
 typedef struct ntvwm_presentation {
     struct {DWORD failure;} channel;
     CRITICAL_SECTION lock;
@@ -17,7 +17,7 @@ static console_io_input events[3];
 static unsigned captures,geometry,opens,closes,writes,failed;
 static DWORD read_error,write_error;
 #define CHECK(x) do {if(!(x)){++failed;printf("FAIL %d: %s\n",__LINE__,#x);}}while(0)
-static DWORD exchange(ntvwm_presentation *client,console_io_request *request,console_io_reply *reply)
+static DWORD ntvwm_presentation_exchange(ntvwm_presentation *client,console_io_request *request,console_io_reply *reply)
 {
     (void)client;CHECK(request->operation==CONSOLE_IO_READ_INPUT);
     memset(reply,0,sizeof(*reply));reply->state.count=3;

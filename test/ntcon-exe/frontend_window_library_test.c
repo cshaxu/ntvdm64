@@ -5,7 +5,7 @@
 #include "lib-nxvm/lib/kvm-window/render.h"
 #include "window_frame.h"
 
-#include "ntvwm-exe/text_frame.h"
+#include "compat/include/native_console_text_frame.h"
 #include "native_pc_font.h"
 
 /* Test-local capture input, not a second production frame contract. */

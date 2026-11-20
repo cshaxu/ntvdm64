@@ -19,7 +19,7 @@ static int emit(int index,int split)
 }
 #ifndef VT_PRODUCER_ONLY
 #include "ntvwm-exe/console_state.h"
-#include "ntvwm-exe/text_frame.h"
+#include "compat/include/native_console_text_frame.h"
 #include "ntcon-exe/frontend_session.h"
 #include "ntcon-exe/window_frame.h"
 #include "lib-nxvm/lib/kvm-window/render.h"

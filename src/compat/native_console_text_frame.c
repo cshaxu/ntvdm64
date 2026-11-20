@@ -1,4 +1,4 @@
-#include "text_frame.h"
+#include "compat/include/native_console_text_frame.h"
 #include <string.h>
 
 static LONG pointer_bound(LONGLONG value,LONG extent)

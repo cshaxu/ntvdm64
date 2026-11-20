@@ -24,7 +24,7 @@ DOS palette, nor permission to change application client behaviour.
 The read-only source inspection found that
 [NTVWM capture](../../src/ntvwm-exe/console_state.c) reads `CHAR_INFO` and
 `CONSOLE_SCREEN_BUFFER_INFOEX`, and its
-[text packer](../../src/ntvwm-exe/text_frame.c) transmits colour indices and
+[text packer](../../src/compat/native_console_text_frame.c) transmits colour indices and
 the actual palette. [Window decoding](../../src/ntcon-exe/window_frame.c)
 retains the palette. In contrast,
 [Console projection](../../src/ntcon-exe/frontend_session.c) copies cell

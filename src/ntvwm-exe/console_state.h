@@ -1,6 +1,7 @@
 #ifndef NTVWM_CONSOLE_STATE_H
 #define NTVWM_CONSOLE_STATE_H
 #include <windows.h>
+#include "compat/include/native_console_diagnostics.h"
 
 /* Backend-local lease. Only info/cursor/modes and bounded CHAR_INFO tiles cross
  * to the root presenter; the active-buffer HANDLE never crosses the wire. */
@@ -21,7 +22,6 @@ typedef struct ntvwm_console_guard ntvwm_console_guard;
 DWORD ntvwm_console_guard_start(HWND,ntvwm_console_guard **);
 void ntvwm_console_guard_stop(ntvwm_console_guard *);
 DWORD ntvwm_console_hide(HWND);
-void ntvwm_trace_error(const char *stage,DWORD operation,DWORD error);
 /* Explicit process-local buffer; no HANDLE is serialized. */
 DWORD ntvwm_capture_begin_output(ntvwm_capture *,HANDLE);
 DWORD ntvwm_capture_read(ntvwm_capture *,DWORD offset,

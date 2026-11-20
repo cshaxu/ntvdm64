@@ -7,7 +7,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <wchar.h>
-#include "ntvwm-exe/text_frame.h"
+#include "compat/include/native_console_text_frame.h"
 
 static int host(WCHAR *ready_name,WCHAR *finish_name,WCHAR *reply_name,BOOL terminal_profile)
 {

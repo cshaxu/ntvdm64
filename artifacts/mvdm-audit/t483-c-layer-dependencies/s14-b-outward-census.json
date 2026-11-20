@@ -365,11 +365,15 @@
     {
       "id": "B0029",
       "contract": "worker_base_publication",
-      "provider": "src/ntvwm-exe/presentation.c",
-      "target": "publish_copy",
-      "layer": "F",
+      "provider": "src/compat/native_console_publication.c",
+      "target": "ntvwm_publish_copy",
+      "layer": "B",
       "kind": "caller-supplied-publication-operation",
-      "status": "outer-target-confirmed"
+      "status": "inner-target-confirmed",
+      "baseline_provider": "src/ntvwm-exe/presentation.c",
+      "baseline_layer": "F",
+      "baseline_target": "publish_copy",
+      "migration_status": "P109 moves the actual native Console publication transaction, row cache ownership, glyph conversion and tracing to B."
     },
     {
       "id": "B0030",
@@ -437,8 +441,8 @@
     }
   ],
   "indirect_counts": {
-    "B": 21,
-    "F": 6,
+    "B": 22,
+    "F": 5,
     "D": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
@@ -493,5 +497,9 @@
   "p102_removed_targets": [
     "B0030"
   ],
-  "p102_evidence": "s14-console-cleanup-owner.json"
+  "p102_evidence": "s14-console-cleanup-owner.json",
+  "p109_inward_targets": [
+    "B0029"
+  ],
+  "p109_evidence": "s14-native-publication-owner.json"
 }
