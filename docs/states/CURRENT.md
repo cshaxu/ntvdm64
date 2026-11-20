@@ -28,6 +28,19 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
+removes its product-session header and three F function dependencies; the same
+B host context owns identity and cleanup. No new state or callbacks; mirror0/0.
+Cached full builds and dual11 publication passed, package`8ddbc9d8-11ae-433d-b4bf-38b70d7dd58d`.
+Actual imports, real CCPU page/borrow/terminal tests, real Win16 dialog8 phases
+and eight A/B product graphs passed. Closed-registration rollback and foreign
+context rejection now have fixture coverage. Ledger remains182/386: this is
+implementation preparation, not C provider relocation. Final governance and
+enclosing P75 commit/push provide the delivery receipt.
+The [compiled publication cut](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-publication-cut-impact.json)
+prioritizes menu104/window103 reachable roots (overlapping); preserve original
+metadata/commit ownership and capture/lookup failure ordering in the next cut.
+
 P74 [property/region original-call restoration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-property-owner.json)
 removes six F interceptions without replacement wrappers. Original C conversions
 remain; mirror delta0 points/0 lines, autonomous production code minus24 lines.

@@ -5217,6 +5217,16 @@ static int run_fixture(void)
      * copy, not overwrite them, before it activates the WOW descriptor view. */
     if (c_sas_dw_at(dosx_gdt + 0x20u) != 0x11112222u ||
         c_sas_dw_at(dosx_gdt + 0x38u) != 0x55556666u) goto done;
+    /* The inner domain uses the existing host resource owner, not product
+     * session layout. Closed registration must roll back before publication. */
+    stage = "domain-registration-closed";
+    owner.host_context.registration_open = 0;
+    {
+        int rejected = !mvdm_softpc_wow_page_domain_enter() &&
+            !mvdm_softpc_wow_page_domain_active();
+        owner.host_context.registration_open = 1;
+        if (!rejected) goto done;
+    }
     stage = "domain-admission";
     {
         int entered = mvdm_softpc_wow_page_domain_enter();
@@ -5234,6 +5244,19 @@ static int run_fixture(void)
                 (unsigned long)first_physical, (unsigned long)second_physical);
             goto done;
         }
+    }
+    stage = "domain-foreign-context";
+    {
+        compat_host_context foreign = {0};
+        int rejected;
+        if (!compat_host_context_unbind(&owner.host_context)) goto done;
+        if (!compat_host_context_bind(&foreign)) {
+            (void)compat_host_context_bind(&owner.host_context);
+            goto done;
+        }
+        rejected = !mvdm_softpc_wow_page_domain_enter();
+        (void)compat_host_context_unbind(&foreign);
+        if (!compat_host_context_bind(&owner.host_context) || !rejected) goto done;
     }
     stage = "cold-window-copy";
     {

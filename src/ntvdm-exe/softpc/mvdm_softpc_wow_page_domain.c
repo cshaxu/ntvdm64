@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <stdlib.h>
 
-#include "ntvdm-exe/session/session.h"
+#include "compat/include/host_context.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 /* Keep this non-mirror binding on the narrow, fixed-width CCPU/nt_mem ABI it
@@ -129,7 +129,7 @@ extern LONG VdmRemoveVirtualMemory(ULONG intel_address);
 #define MVDM_SOFTPC_CLS_ANSI_NAME 100u
 
 typedef struct mvdm_softpc_wow_page_domain {
-    session *owner;
+    compat_host_context *owner;
     ULONG table_allocation;
     ULONG table_bytes;
     ULONG clock_intel_address;
@@ -553,7 +553,7 @@ static int page_domain_create_wow_gdt(void)
     return 1;
 }
 
-static int page_domain_create(session *owner)
+static int page_domain_create(compat_host_context *owner)
 {
     ULONG sas_bytes = c_sas_memory_size();
     ULONG identity_tables;
@@ -618,7 +618,7 @@ static int page_domain_create(session *owner)
         goto fail;
     page_domain_report("wow-domain-view-ready");
     domain.owner = owner;
-    if (!session_register_teardown(owner, page_domain_dispose, &domain)) goto fail;
+    if (!compat_host_context_register(owner, page_domain_dispose, &domain)) goto fail;
     domain.active = 1;
     return 1;
 fail:
@@ -629,9 +629,9 @@ fail:
 
 int mvdm_softpc_wow_page_domain_enter(void)
 {
-    session *owner = session_thread_current();
+    compat_host_context *owner = compat_host_context_current();
 
-    if (owner == NULL || !session_valid(owner) || (c_getCR0() & 1u) == 0u)
+    if (owner == NULL || !compat_host_context_valid(owner) || (c_getCR0() & 1u) == 0u)
         return 0;
     if (!domain.active && !page_domain_create(owner)) return 0;
     if (domain.owner != owner) return 0;
@@ -708,7 +708,7 @@ int mvdm_softpc_wow_page_domain_set_expected_windows_version(
     /* queue.c::xxxInitTask owns the value. This narrow write only carries
      * that already-selected task value into USER16's original client TEB; it
      * neither selects a compatibility version nor introduces a task table. */
-    if (!domain.active || domain.owner != session_thread_current() ||
+    if (!domain.active || domain.owner != compat_host_context_current() ||
         !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
     c_sas_storedw(domain.guest_teb + MVDM_SOFTPC_TEB_EXPECTED_WINDOWS_VERSION,
@@ -724,7 +724,7 @@ int mvdm_softpc_wow_page_domain_publish_cursor(long x, long y)
      * performed the corresponding Console-to-guest transformation.  Do not
      * sample a host pointer here: its coordinate system is not the guest
      * virtual screen contract. */
-    if (!domain.active || domain.owner != session_thread_current() ||
+    if (!domain.active || domain.owner != compat_host_context_current() ||
         !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
     c_sas_storedw(domain.guest_server_info +
@@ -741,7 +741,7 @@ int mvdm_softpc_wow_page_domain_publish_system_color(unsigned long index,
      * gpsi->argbSystem[icol]. The public call remains the original WOW32
      * authority for success/failure; this carrier only mirrors its completed
      * worker-local result into the direct USER16 view. */
-    if (!domain.active || domain.owner != session_thread_current() ||
+    if (!domain.active || domain.owner != compat_host_context_current() ||
         index >= MVDM_SOFTPC_SERVERINFO_COLOR_COUNT ||
         !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
@@ -765,7 +765,7 @@ int mvdm_softpc_wow_page_domain_client_desktop_ready(void)
 
 static int page_domain_client_desktop(ULONG desktop_info, ULONG delta)
 {
-    if (!domain.active || domain.owner != session_thread_current() ||
+    if (!domain.active || domain.owner != compat_host_context_current() ||
         !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
     /* Original desktop.c publishes client pDeskInfo and ulClientDelta as
@@ -884,7 +884,7 @@ int mvdm_softpc_wow_page_domain_refresh_window(unsigned long window)
     WINDOWINFO info = { sizeof(info) };
 
     if (!domain.active || !index || index == 0xffffu ||
-            domain.owner != session_thread_current() ||
+            domain.owner != compat_host_context_current() ||
             !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
     guest_window = window == domain.desktop_handle ?
@@ -914,7 +914,7 @@ int mvdm_softpc_wow_page_domain_callback_window(unsigned long window,
 
 int mvdm_softpc_wow_page_domain_restore_callback(const unsigned long saved[2])
 {
-    if (!saved || !domain.active || domain.owner != session_thread_current() ||
+    if (!saved || !domain.active || domain.owner != compat_host_context_current() ||
             !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
     /* ssend.c UNLOCKPWND restores the outer borrow before its own unlock. */
@@ -1065,7 +1065,7 @@ static int page_domain_publish_handle(unsigned short index,
 
     if (!domain.active || !index || index == 0xffffu ||
             index == LOWORD(domain.desktop_handle) ||
-            !domain.client_delta || domain.owner != session_thread_current() ||
+            !domain.client_delta || domain.owner != compat_host_context_current() ||
             !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
     if (domain.guest_menus[index] != 0u) return 0;
@@ -1149,7 +1149,7 @@ int mvdm_softpc_wow_page_domain_cancel_native_adoption(ULONG window, ULONG backi
 {
     mvdm_softpc_wow_window_borrow *borrow;
     mvdm_softpc_wow_class_allocation *cls;
-    if (!domain.active || !domain.client_delta || domain.owner != session_thread_current() ||
+    if (!domain.active || !domain.client_delta || domain.owner != compat_host_context_current() ||
             !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory ||
             !backing || domain.guest_windows[LOWORD(window)] != backing ||
             c_sas_dw_at(backing + MVDM_SOFTPC_WND_HEAD_HANDLE) != window)
@@ -1172,7 +1172,7 @@ int mvdm_softpc_wow_page_domain_cancel_native_adoption(ULONG window, ULONG backi
 static int page_domain_menu_context(void)
 {
     return domain.active && domain.client_delta &&
-        domain.owner == session_thread_current() &&
+        domain.owner == compat_host_context_current() &&
         (c_getCR0() & MVDM_SOFTPC_CR0_PG) && c_getCR3() == domain.directory;
 }
 
@@ -1949,7 +1949,7 @@ int mvdm_softpc_wow_page_domain_retire_handle(unsigned short index,
     mvdm_softpc_wow_window_borrow *borrow;
     if (!domain.active || !index || index == 0xffffu ||
             index == LOWORD(domain.desktop_handle) ||
-            domain.owner != session_thread_current() ||
+            domain.owner != compat_host_context_current() ||
             !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
     guest_window = domain.guest_windows[index];
@@ -1993,7 +1993,7 @@ unsigned long mvdm_softpc_wow_page_domain_publish_named_class(unsigned short ato
     mvdm_softpc_wow_class_allocation *allocation;
 
     if (!domain.active || !atom || !domain.client_delta ||
-            domain.owner != session_thread_current() ||
+            domain.owner != compat_host_context_current() ||
             !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0u;
     if (!class_name || !HIWORD((ULONG_PTR)class_name) || !name_bytes ||
@@ -2067,7 +2067,7 @@ int mvdm_softpc_wow_page_domain_retire_class(unsigned long server)
     mvdm_softpc_wow_class_allocation *allocation;
 
     if (!domain.active || server <= domain.client_delta ||
-            domain.owner != session_thread_current() ||
+            domain.owner != compat_host_context_current() ||
             !(c_getCR0() & MVDM_SOFTPC_CR0_PG) || c_getCR3() != domain.directory)
         return 0;
     client = server - domain.client_delta;
