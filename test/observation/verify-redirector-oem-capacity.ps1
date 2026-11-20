@@ -19,7 +19,7 @@ $sources = @('src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/compat/mvdm
     'test/mvdm-host/vdmredir/redirector_oem_capacity_test.c')
 if ($OriginalProviders) {
     $sources[-1] = 'test/mvdm-host/vdmredir/redirector_netapi_provider_test.c'
-    $sources += 'src/ntvdm-exe/redir/mvdm_redirector_async.c'
+    $sources += 'src/compat/mvdm_redirector_async.c'
 }
 $coordination = Join-Path $out 'guest-memory-coordination.c'
 & python (Join-Path $root 'tools/build/extract-guest-memory-fixture.py') $coordination --core-only

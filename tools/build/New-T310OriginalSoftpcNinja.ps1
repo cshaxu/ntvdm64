@@ -268,8 +268,8 @@ $adapterBaseSrvNames = @('mvdm_command_guest_state.c',
 $adapterVddNames = @('mvdm_softpc_vdd_unavailable.c')
 $adapterMonitorNames = @('mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_registers.c')
-$adapterRedirWorkerNames = @('mvdm_redirector_worker_copy.c',
-                              'mvdm_redirector_async.c')
+$adapterRedirWorkerNames = @('mvdm_redirector_worker_copy.c')
+$compatRedirectorAsyncSource = 'src/compat/mvdm_redirector_async.c'
 # `vrnetapi.c` directly consumes this original OpenNT status-to-LAN-Manager
 # conversion algorithm.  Keep it in its separately mirrored non-MVDM owner
 # rather than duplicating a status table in Redirector or an adapter.
@@ -1326,12 +1326,15 @@ $adapterRedirObjects += 'obj/compat/remote_browser.obj'
 $graph.Add('build obj/compat/remote_rap.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/remote_rap.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterRedirObjects += 'obj/compat/remote_rap.obj'
-$adapterRedirWorkerObjects = foreach ($name in $adapterRedirWorkerNames) {
+$adapterRedirWorkerObjects = @(foreach ($name in $adapterRedirWorkerNames) {
     $object = 'obj/adapter-redir/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterRedirRoot $name)))
     $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
-}
+})
+$graph.Add('build obj/compat/mvdm_redirector_async.obj: cc ' + (NinjaPath (Join-Path $root $compatRedirectorAsyncSource)))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterRedirWorkerObjects += 'obj/compat/mvdm_redirector_async.obj'
 $adapterSoftpcFixtureObjects = @($adapterSoftpcObjects | Where-Object {
     $_ -ne 'obj/adapter-softpc/mvdm_standalone_worker.obj'
 })
@@ -2533,6 +2536,7 @@ if ($objectOutputDirectories.Count -gt 0) {
     ntvdmSoftpcSources = @($adapterSoftpcNames)
     vdmRedirDllBindingSources = @($adapterRedirNames)
     ntvdmRedirectorWorkerSources = @($adapterRedirWorkerNames)
+    compatRedirectorAsyncSource = $compatRedirectorAsyncSource
     workerPackageSources = @($workerPackageNames)
     ntvdmSessionSources = @($sessionNames)
     ntvdmWowWorkerSources = @($adapterWowWorkerNames)

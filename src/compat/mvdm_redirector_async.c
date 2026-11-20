@@ -1,15 +1,15 @@
 #define MVDM_REDIRECTOR_WORKER_EXPORTS
-#include "common/redirector/async.h"
+#include "include/mvdm_redirector_async.h"
 
 #include <stdlib.h>
 #include <string.h>
 
-#include "compat/include/guest_location.h"
-#include "ntvdm-exe/session/session.h"
+#include "include/guest_location.h"
+#include "include/host_context.h"
 #include "mvdm-host/inc/vrnmpipe.h"
 
 typedef struct mvdm_redirector_async_state {
-    session *owner;
+    compat_host_context *owner;
     uint32_t owner_epoch;
     mvdm_guest_location buffer;
     mvdm_guest_location bytes_transferred;
@@ -46,14 +46,14 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
     uint8_t const *bytes;
     uint32_t buffer_value, count_value, error_value;
 
-    session *owner;
+    compat_host_context *owner;
 
     if (buffer_out != NULL) *buffer_out = NULL;
     if (length_out != NULL) *length_out = 0u;
-    owner = session_thread_current();
+    owner = compat_host_context_current();
     if (request == NULL || buffer_out == NULL || length_out == NULL ||
-        owner == NULL || !session_valid(owner) ||
-        owner->host_context.state != SESSION_STATE_ACTIVE ||
+        !compat_host_context_valid(owner) ||
+        owner->state != COMPAT_HOST_CONTEXT_ACTIVE ||
         !mvdm_guest_location_set_real_mode(&request_location, segment, offset) ||
         !mvdm_guest_location_acquire(&request_location,
             request_type == ANP_READ2 || request_type == ANP_WRITE2 ? 24u : 18u,
@@ -68,15 +68,15 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
         return 0;
     }
     state->owner = owner;
-    state->owner_epoch = owner->host_context.epoch;
+    state->owner_epoch = owner->epoch;
     state->length = read_u16(bytes + 4u);
     buffer_value = read_u32(bytes + 6u);
-    state->is_read = request_type == 0x86u || request_type == 0x90u;
+    state->is_read = request_type == ANP_READ || request_type == ANP_READ2;
     count_value = read_u32(bytes);
     request->Buffer = buffer_value;
     error_value = read_u32(bytes + 10u);
     request->ANR = read_u32(bytes + 14u);
-    request->Type2 = request_type == 0x90u || request_type == 0x91u;
+    request->Type2 = request_type == ANP_READ2 || request_type == ANP_WRITE2;
     request->Semaphore = request->Type2 ? read_u32(bytes + 20u) : 0u;
     if (!mvdm_guest_location_release(&request_lease, 0) ||
         (state->length != 0u &&
@@ -124,10 +124,10 @@ int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
         return 0;
     }
     state = (mvdm_redirector_async_state *)request->PrivateAsyncState;
-    if (session_thread_current() != state->owner ||
-        !session_valid(state->owner) ||
-        state->owner->host_context.state != SESSION_STATE_ACTIVE ||
-        state->owner->host_context.epoch != state->owner_epoch) {
+    if (compat_host_context_current() != state->owner ||
+        !compat_host_context_valid(state->owner) ||
+        state->owner->state != COMPAT_HOST_CONTEXT_ACTIVE ||
+        state->owner->epoch != state->owner_epoch) {
         return 0;
     }
     /* Original ReadFile had already written the guest payload when completion

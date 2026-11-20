@@ -1,7 +1,7 @@
 #include "../../common/guest_memory_fixture.h"
 #include "compat/include/guest_location.h"
 #define MVDM_REDIRECTOR_WORKER_EXPORTS
-#include "common/redirector/async.h"
+#include "compat/include/mvdm_redirector_async.h"
 #include "mvdm-host/inc/vrnmpipe.h"
 #include "ntvdm-exe/session/session.h"
 #include <stdio.h>

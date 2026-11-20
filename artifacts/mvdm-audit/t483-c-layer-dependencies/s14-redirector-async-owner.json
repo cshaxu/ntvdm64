@@ -1,0 +1,533 @@
+{
+  "packet": "M0 T483 S14 P118",
+  "baseline": "fbfa3c5981836ab81a9df12e8ab14c8a587f053f",
+  "eliminated_C_ids": [
+    "C0012"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 546,
+    "open": 22,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 5
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 6,
+    "image-import": 1,
+    "symbol": 15
+  },
+  "remaining_C_by_provider": {
+    "common": 2,
+    "ntvdm-exe": 8,
+    "worker-base": 2,
+    "wow32-dll": 8,
+    "ntsrv-exe": 2
+  },
+  "authority": "B owns async staging and keeps the bound host-context identity and epoch. C keeps the original named pipe request layout, dispatch, queue, IRQ and checked guest access. The publishing worker retains DLL protocol composition.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "measured": {
+      "file": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "mirror_anchor_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "before": {
+        "points": 181,
+        "lines": 818
+      },
+      "after": {
+        "points": 181,
+        "lines": 818
+      }
+    }
+  },
+  "verification_census": {
+    "provider_point": "C0134",
+    "imports": {
+      "VDMREDIR.dll": [
+        {
+          "ordinal": 93,
+          "symbol": "getAX",
+          "link_symbol": "getAX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 124,
+          "symbol": "getMSW",
+          "link_symbol": "getMSW",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 225,
+          "symbol": "setBH",
+          "link_symbol": "setBH",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 148,
+          "symbol": "mvdm_softpc_guest_memory_acquire",
+          "link_symbol": "mvdm_softpc_guest_memory_acquire",
+          "link_owner": [
+            "original-ccpu386:ccpusas4.obj"
+          ]
+        },
+        {
+          "ordinal": 104,
+          "symbol": "getDH",
+          "link_symbol": "getDH",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 95,
+          "symbol": "getBL",
+          "link_symbol": "getBL",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 149,
+          "symbol": "mvdm_softpc_guest_memory_release",
+          "link_symbol": "mvdm_softpc_guest_memory_release",
+          "link_owner": [
+            "original-ccpu386:ccpusas4.obj"
+          ]
+        },
+        {
+          "ordinal": 92,
+          "symbol": "getAL",
+          "link_symbol": "getAL",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 46,
+          "symbol": "SoftPcEoi",
+          "link_symbol": "SoftPcEoi",
+          "link_owner": [
+            "original-softpc-host-roots:nt_eoi.obj"
+          ]
+        },
+        {
+          "ordinal": 59,
+          "symbol": "VDDInstallUserHook",
+          "link_symbol": "VDDInstallUserHook",
+          "link_owner": [
+            "original-softpc-host-roots:nt_msscs.obj"
+          ]
+        },
+        {
+          "ordinal": 101,
+          "symbol": "getCS",
+          "link_symbol": "getCS",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 45,
+          "symbol": "Sim32pGetVDMPointer",
+          "link_symbol": "Sim32pGetVDMPointer",
+          "link_owner": [
+            "original-softpc-host-roots:sim32.obj"
+          ]
+        },
+        {
+          "ordinal": 141,
+          "symbol": "mvdm_redirector_async_release",
+          "link_symbol": "mvdm_redirector_async_release",
+          "link_owner": [
+            "mvdm_redirector_async.obj"
+          ]
+        },
+        {
+          "ordinal": 137,
+          "symbol": "mvdm_redirector_async_complete",
+          "link_symbol": "mvdm_redirector_async_complete",
+          "link_owner": [
+            "mvdm_redirector_async.obj"
+          ]
+        },
+        {
+          "ordinal": 140,
+          "symbol": "mvdm_redirector_async_prepare",
+          "link_symbol": "mvdm_redirector_async_prepare",
+          "link_owner": [
+            "mvdm_redirector_async.obj"
+          ]
+        },
+        {
+          "ordinal": 260,
+          "symbol": "setZF",
+          "link_symbol": "setZF",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 238,
+          "symbol": "setDS",
+          "link_symbol": "setDS",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 96,
+          "symbol": "getBP",
+          "link_symbol": "getBP",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 223,
+          "symbol": "setAL",
+          "link_symbol": "setAL",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 75,
+          "symbol": "WaitIfIdle",
+          "link_symbol": "WaitIfIdle",
+          "link_owner": [
+            "original-softpc-host-roots:nt_unix.obj"
+          ]
+        },
+        {
+          "ordinal": 145,
+          "symbol": "mvdm_softpc_effective_address",
+          "link_symbol": "mvdm_softpc_effective_address",
+          "link_owner": [
+            "mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj"
+          ]
+        },
+        {
+          "ordinal": 218,
+          "symbol": "session_thread_current",
+          "link_symbol": "session_thread_current",
+          "link_owner": [
+            "session:session.obj"
+          ]
+        },
+        {
+          "ordinal": 217,
+          "symbol": "session_thread_bind_owned_source",
+          "link_symbol": "session_thread_bind_owned_source",
+          "link_owner": [
+            "session:session.obj"
+          ]
+        },
+        {
+          "ordinal": 106,
+          "symbol": "getDL",
+          "link_symbol": "getDL",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 219,
+          "symbol": "session_thread_finish",
+          "link_symbol": "session_thread_finish",
+          "link_owner": [
+            "session:session.obj"
+          ]
+        },
+        {
+          "ordinal": 229,
+          "symbol": "setCF",
+          "link_symbol": "setCF",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 246,
+          "symbol": "setES",
+          "link_symbol": "setES",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 107,
+          "symbol": "getDS",
+          "link_symbol": "getDS",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 116,
+          "symbol": "getES",
+          "link_symbol": "getES",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 236,
+          "symbol": "setDI",
+          "link_symbol": "setDI",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 257,
+          "symbol": "setSI",
+          "link_symbol": "setSI",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 228,
+          "symbol": "setBX",
+          "link_symbol": "setBX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 239,
+          "symbol": "setDX",
+          "link_symbol": "setDX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 233,
+          "symbol": "setCX",
+          "link_symbol": "setCX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 224,
+          "symbol": "setAX",
+          "link_symbol": "setAX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 105,
+          "symbol": "getDI",
+          "link_symbol": "getDI",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 128,
+          "symbol": "getSI",
+          "link_symbol": "getSI",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 97,
+          "symbol": "getBX",
+          "link_symbol": "getBX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 108,
+          "symbol": "getDX",
+          "link_symbol": "getDX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 102,
+          "symbol": "getCX",
+          "link_symbol": "getCX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 226,
+          "symbol": "setBL",
+          "link_symbol": "setBL",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 84,
+          "symbol": "call_ica_hw_interrupt",
+          "link_symbol": "_mvdm_public_ica_interrupt@12",
+          "link_owner": [
+            "softpc-bindings:mvdm_interrupt_export.obj"
+          ]
+        }
+      ],
+      "VCDEX.DLL": [
+        {
+          "ordinal": 229,
+          "symbol": "setCF",
+          "link_symbol": "setCF",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 233,
+          "symbol": "setCX",
+          "link_symbol": "setCX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 228,
+          "symbol": "setBX",
+          "link_symbol": "setBX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 224,
+          "symbol": "setAX",
+          "link_symbol": "setAX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 116,
+          "symbol": "getES",
+          "link_symbol": "getES",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 130,
+          "symbol": "getSS",
+          "link_symbol": "getSS",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 59,
+          "symbol": "VDDInstallUserHook",
+          "link_symbol": "VDDInstallUserHook",
+          "link_owner": [
+            "original-softpc-host-roots:nt_msscs.obj"
+          ]
+        },
+        {
+          "ordinal": 129,
+          "symbol": "getSP",
+          "link_symbol": "getSP",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 108,
+          "symbol": "getDX",
+          "link_symbol": "getDX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 102,
+          "symbol": "getCX",
+          "link_symbol": "getCX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 97,
+          "symbol": "getBX",
+          "link_symbol": "getBX",
+          "link_owner": [
+            "original-softpc-cvidc:accessfn.obj"
+          ]
+        },
+        {
+          "ordinal": 35,
+          "symbol": "MGetVdmPointer",
+          "link_symbol": "ExpSim32GetVDMPointer",
+          "link_owner": [
+            "original-softpc-host-roots:sim32.obj"
+          ]
+        }
+      ]
+    },
+    "VDMREDIR_outer_session_imports": [
+      "session_thread_current",
+      "session_thread_bind_owned_source",
+      "session_thread_finish"
+    ],
+    "known_bridge_slots": [
+      "B0023",
+      "B0024"
+    ]
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "e9709ddb-3789-4926-af01-22f06882c4e5",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "scope": "cached x86/x64/reference product builds; real C and B compiler dependencies, import/export ordinal ownership, dual publication and 22 hashes, 27 controlled async publication assertions, 18 native NetAPI/OEM assertions, 9 original queue assertions and real DOS pipe read/write",
+    "runtime_output": [
+      "launcher=22016 width=80 height=30",
+      "async connected=1 sent=1 wait=0 exit=1",
+      "",
+      "launcher=22788 width=80 height=30",
+      "async-write connected=1 received=1 wait=0 exit=1",
+      "",
+      "REDIR_ASYNC_BASELINE checks=9 failures=0 exception=c0000005"
+    ]
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "e919ab4ab808d141416421afff9d5f74ae6f83b7cfc1180ca605e72e3cf1d54e",
+    "boundary.out": "bb5d8f475d0e9b10010ab2806d7b2d28743788a5e05f75b0b5fba6a8be2504cb",
+    "mirror-delta.json": "bbdb1989708d4ab8f35d9bdf15d4724f4e7f90bba430af69f0cfb5f0f989a614",
+    "probes.out": "f97b5bb16c472a69a961f7ca2edff00d222404b548b474d3bb8e9cf7f67865a8",
+    "async-test.out": "794ef77aff1ff9a390cf98ed2cba4ca624ac5be3fa860bbcdc76a387693942b4",
+    "oem-final.out": "b62b17e990fd812ea382825209fca5da9f07f067097f96d79ac6098bb43c2379",
+    "plugin-imports.json": "cc1f18124a9e8303015f53cb152e1491ce5438316f0f0279a18097350f3b451b",
+    "guest-async-final/results.json": "3816db3bd7624f7fa07e0dfa8cb2ab0c9b3282a028f85669db98e9e2d8e00dc8",
+    "final-checks.out": "1d64448761eb0514db07622d3846b97a40eab438163c6238c2db24c5e759c3c4"
+  }
+}

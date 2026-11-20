@@ -1,8 +1,8 @@
 #ifndef MVDM_REDIRECTOR_ASYNC_H
 #define MVDM_REDIRECTOR_ASYNC_H
 
-/* Shared redirector/worker boundary. The worker retains the session-owned
- * request state; the original redirector calls it at its async boundaries. */
+/* The original redirector holds a request; compat owns its guest staging
+ * until completion or release. */
 #include <windows.h>
 
 typedef struct _DOS_ASYNC_NAMED_PIPE_INFO DOS_ASYNC_NAMED_PIPE_INFO;

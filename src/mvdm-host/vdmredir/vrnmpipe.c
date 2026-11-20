@@ -137,7 +137,7 @@ Revision History:
 #include <vrnmpipe.h>   // routine prototypes
 
 #include <stdio.h>
-#include "common/redirector/async.h"
+#include "compat/include/mvdm_redirector_async.h"
 #line 140
 
 //
