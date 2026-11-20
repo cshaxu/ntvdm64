@@ -44,7 +44,8 @@ if($Case -eq 'menu') {
     [IO.File]::WriteAllText("$out/creation-menu.inc",$headers+$text.Substring($start,$end-$start))
 }
 Invoke-CompileCommand ($fixture+' /Gy /I"'+$out+'"')
-$selected=if($Case -ne 'menu'){' "'+$provider+'\obj\wow32-dll\'+$source+'.obj"'}else{''}
+$owner=if($Case -eq 'timer'){'compat'}else{'wow32-dll'}
+$selected=if($Case -ne 'menu'){' "'+$provider+'\obj\'+$owner+'\'+$source+'.obj"'}else{''}
 if($Case -eq 'common-dialog') { $selected += ' "'+$provider+'\obj\wow32-dll\wow_task_cleanup_entry.obj"' }
 Invoke-CompileCommand ('link /nologo /OPT:REF /out:"'+$out+'\fixture.exe" "'+$out+'\fixture.obj"'+$selected+' kernel32.lib user32.lib')
 $start=[DateTime]::UtcNow

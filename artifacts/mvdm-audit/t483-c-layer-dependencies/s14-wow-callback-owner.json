@@ -1,0 +1,62 @@
+{
+  "packet": "M0 T483 S14 P105",
+  "baseline": "a6e9355343c105d06aa4285776a67ce0c754f82d",
+  "eliminated_C_ids": [
+    "C0455",
+    "C0464"
+  ],
+  "eliminated_B_ids": [],
+  "scope": "Move the timer and Shell callback implementations into B. Narrow the Shell include set to the Windows SDK and the original WOW Shell contract. Keep the original calling convention, callback bodies and Shell TLS nesting.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 524,
+    "open": 44,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "final_product_symbols": {
+    "_W32TimerFunc@16": "0001:0006c0d0       _W32TimerFunc@16           1006d0d0 f   wow_timer_callback.obj",
+    "_WowOriginalTimerFunc@16": "0001:000244e0       _WowOriginalTimerFunc@16   100254e0 f   wutmr.obj",
+    "_wow_shell_execute@28": "0001:0006c3f0       _wow_shell_execute@28      1006d3f0 f   wow_shell_callback.obj"
+  },
+  "compiled_ownership": {
+    "objects": 2,
+    "counts": {
+      "CRT": 6,
+      "mvdm-host": 1,
+      "compat": 4,
+      "system import": 3,
+      "TLS ABI absolute": 1
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "75081af6-a307-41c2-b759-7ba7a3b15236",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, timer and Shell callback fixtures, real Win16 ShellExecute and final gates passed. Enclosing commit is the delivery receipt.",
+  "shell_control": "First moved-adapter run failed in Windows.Storage.dll at the third callback return. The pre-move adapter control and a separate moved-adapter repeat passed all cases. The initial exception was not reproduced. The diagnostic ShellException provider built and linked.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "c8402c5294bc7d13b99b816efda03e36175ca3d31b88d99dd32c59302bcba722",
+    "release-and-test.out": "25a938db35a2d17ba95000114668acbb9dba6c9ff244b570788375c67ce7d72c",
+    "b-compiled-candidates.json": "35b21a8aec105a11a57998cc04107cef829c9c370414defb6d843703ff3557c4",
+    "timer/stderr.txt": "6500e8860eedd2537afae20f25d6e2f73c7f5debd560f94a287e1f5ee1a24003",
+    "shell/probe.out": "2814af096e551596a912e4843565fdcb1a14aee0d7471da4863928515a743ad9",
+    "shell-baseline-2/probe.out": "bea8fd5f4d4b6f2211dee56de255283c7280bf58dd02e14176f239b711680104",
+    "shell-retry/probe.out": "1ec148a4d9c03ea6df2ee34577170d880a9534c6138445424abf2796b1437c2b",
+    "shell-diagnostic/exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "guest-shell/result.txt": "a250f3009a0294d80eb0b99ddf5623c4fa931dfde11f4ef80f72fd9c355eb401"
+  },
+  "prior_wow_control_delivery": "s14-wow-control-owner.json"
+}

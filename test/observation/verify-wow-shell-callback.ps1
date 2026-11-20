@@ -33,7 +33,7 @@ try {
     $graph=Get-Content "$AdapterProviderBuildRoot/build.ninja" -Raw
     $flags=[regex]::Match($graph,'(?m)^cflags = (.*)\r?$').Groups[1].Value.Trim()
     if(!$flags.Contains('/DCPU_40_STYLE')){throw 'Require selected provider flags'}
-    $adapterSource="$repo/src/wow32-dll/source/wow_shell_callback.c"
+    $adapterSource="$repo/src/compat/wow_shell_callback.c"
     $adapterFixture="$repo/test/adapter-mvdm-host-out/wow/wow_shell_scope_fixture.c"
     $arguments='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe '+$flags+' /O2 /Fo"'+$root+'/adapter.obj" "'+$adapterFixture+'"'
     Run-Owned 'adapter' 'cmd.exe' $arguments 120

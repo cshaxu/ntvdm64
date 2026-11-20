@@ -1466,7 +1466,7 @@ Unverified candidate; original cleanup and normal/sibling exit tests required.
 MVDM-HOST-DIV-333 (T447 S2): rename only wow32/wutmr.c's W32TimerFunc
 definition to WowOriginalTimerFunc. All 27 original timer stubs retain their
 W32TimerFunc calls and original identities, including WM_TIMER conversion
-through TMR.dwTimerProc32. wow32-dll/wow_timer_callback.c supplies the scoped
+through TMR.dwTimerProc32. compat/wow_timer_callback.c supplies the scoped
 entry and invokes the unchanged body. The existing task/borrow owners replace
 the unavailable NT4 USER callback ownership, not timer policy or scheduling.
 See the [A2 source review](../../docs/etc/evidence/m0-t447-s2-scope-freeze.md#a2-timer-entry-selection-implementation-admission).

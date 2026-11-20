@@ -1,5 +1,9 @@
-#include "precomp.h"
-#include "wowshlp.h"
+#include <windows.h>
+#include <shellapi.h>
+
+/* Original mvdm.h uses char FAR * for this Shell ABI spelling. */
+typedef LPSTR LPSZ;
+#include "non-mvdm/public/internal/shell/inc/wowshlp.h"
 
 /* The selected NT4 wowshlp.h callback has two parameters. The modern x86
  * SHELL32 provider supplies three stdcall slots (command, show, directory).

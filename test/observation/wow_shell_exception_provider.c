@@ -1,7 +1,8 @@
 /* Diagnostic-only TU: real modern provider, real original WSHELL callback,
  * original RET_WINEXEC, and actual adapter unwind. Never a release input. */
+#include "precomp.h"
 #define wow_shell_execute diagnostic_shell_execute
-#include "../../src/wow32-dll/source/wow_shell_callback.c"
+#include "../../src/compat/wow_shell_callback.c"
 #undef wow_shell_execute
 #include <stdio.h>
 
