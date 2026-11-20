@@ -1,0 +1,191 @@
+{
+  "packet": "M0 T483 S14 P125",
+  "baseline": "2d531d1e3bbe01b936d066bfa23825c4babaf86c",
+  "eliminated_C_direct_ids": [],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 554,
+    "open": 14,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 4
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 2,
+    "image-import": 1,
+    "symbol": 11
+  },
+  "runtime_callback_slots": {
+    "before_F": 12,
+    "after_F": 1,
+    "proof": {
+      "slots_moved_or_direct": {
+        "pfnCsCreateWindowEx": {
+          "before": "registered_create_window_ex",
+          "after": "registered_create_window_ex",
+          "selected_owner": "wow_user_registration_state.obj"
+        },
+        "pfnDirectedYield": {
+          "before": "registered_directed_yield",
+          "after": "registered_directed_yield",
+          "selected_owner": "wow_user_registration_state.obj"
+        },
+        "pfnRegisterClassWOWA": {
+          "before": "registered_register_class",
+          "after": "registered_register_class",
+          "selected_owner": "wow_user_registration_state.obj"
+        },
+        "pfnRegisterUserHungAppHandlers": {
+          "before": "registered_hung_handlers",
+          "after": "registered_hung_handlers",
+          "selected_owner": "wow_user_registration_state.obj"
+        },
+        "pfnServerCreateDialog": {
+          "before": "registered_create_dialog",
+          "after": "wow_user_server_create_dialog",
+          "selected_owner": "wow_dialog_creation_binding.obj"
+        },
+        "pfnWOWCleanup": {
+          "before": "registered_cleanup",
+          "after": "registered_cleanup",
+          "selected_owner": "wow_user_registration_state.obj"
+        },
+        "pfnWOWFindWindow": {
+          "before": "registered_find_window",
+          "after": "wow_native_FindWindowA",
+          "selected_owner": "wow_user_discovery.obj"
+        },
+        "pfnWowWaitForMsgAndEvent": {
+          "before": "registered_wait_for_message",
+          "after": "registered_wait_for_message",
+          "selected_owner": "wow_user_registration_state.obj"
+        },
+        "pfnYieldTask": {
+          "before": "registered_yield_task",
+          "after": "registered_yield_task",
+          "selected_owner": "wow_user_registration_state.obj"
+        },
+        "pfnGetFullUserHandle": {
+          "before": "registered_full_handle",
+          "after": "registered_full_handle",
+          "selected_owner": "wow_user_registration_state.obj"
+        },
+        "pfnFillWindow": {
+          "before": "registered_fill_window",
+          "after": "registered_fill_window",
+          "selected_owner": "wow_user_registration_state.obj"
+        }
+      },
+      "compiled_headers": [
+        "compat/include/nt_event_declarations.h",
+        "compat/include/ntioapi.h",
+        "compat/include/opennt_support_thread.h",
+        "compat/include/opennt_support_types.h",
+        "compat/include/opennt_user_multipass.h",
+        "compat/include/wow_class_client_bindings.h",
+        "compat/include/wow_class_lookup_bindings.h",
+        "compat/include/wow_class_register_bindings.h",
+        "compat/include/wow_class_words_binding.h",
+        "compat/include/wow_cleanup_bindings.h",
+        "compat/include/wow_edit_call_bindings.h",
+        "compat/include/wow_input_group_bindings.h",
+        "compat/include/wow_input_group_lifetime.h",
+        "compat/include/wow_menu_native_bindings.h",
+        "compat/include/wow_shared_user_abi.h",
+        "compat/include/wow_task_cleanup_entry.h",
+        "compat/include/wow_task_event_binding.h",
+        "compat/include/wow_task_init_bindings.h",
+        "compat/include/wow_task_order_bindings.h",
+        "compat/include/wow_user_borrow_scope.h",
+        "compat/include/wow_user_declarations.h",
+        "compat/include/wow_user_failure.h",
+        "compat/include/wow_user_message_bridge.h",
+        "compat/include/wow_user_native_call.h",
+        "compat/include/wow_user_object_bindings.h",
+        "compat/include/wow_user_probe_bindings.h",
+        "compat/include/wow_user_registered_callbacks.h",
+        "compat/include/wow_user_registration_state.h",
+        "compat/include/wow_user_runtime.h",
+        "compat/include/wow_user_task_lifecycle.h",
+        "compat/include/wow_window_capture.h",
+        "compat/include/wow_window_dispatch_bindings.h",
+        "compat/include/wow_window_graph.h",
+        "compat/include/wow_window_procedure_entry.h",
+        "compat/include/wow_window_words_binding.h",
+        "non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "non-mvdm/public/sdk/inc/devioctl.h",
+        "non-mvdm/public/sdk/inc/nt.h",
+        "non-mvdm/public/sdk/inc/ntpsapi.h",
+        "non-mvdm/public/sdk/inc/ntregapi.h",
+        "non-mvdm/public/sdk/inc/ntrtl.h",
+        "non-mvdm/public/sdk/inc/nturtl.h",
+        "non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "selected_sources": {
+        "pfnCsCreateWindowEx": "compat/wow_user_registration_state.c",
+        "pfnDirectedYield": "compat/wow_user_registration_state.c",
+        "pfnFreeDDEData": "non-mvdm/windows/core/ntuser/client/hdata.c",
+        "pfnGetClassWOWWords": "non-mvdm/windows/core/ntuser/client/ntstubs.c",
+        "pfnInitTask": "wow32-dll/source/wow_user_registration_bridge.c",
+        "pfnRegisterClassWOWA": "compat/wow_user_registration_state.c",
+        "pfnRegisterUserHungAppHandlers": "compat/wow_user_registration_state.c",
+        "pfnServerCreateDialog": "compat/wow_dialog_creation_binding.c",
+        "pfnServerLoadCreateCursorIcon": "compat/wow_private_user_compat.c",
+        "pfnServerLoadCreateMenu": "compat/wow_private_user_compat.c",
+        "pfnWOWCleanup": "compat/wow_user_registration_state.c",
+        "pfnWOWFindWindow": "compat/wow_user_discovery.c",
+        "pfnWOWGetIdFromDirectory": "compat/wow_private_user_compat.c",
+        "pfnWOWLoadBitmapA": "compat/wow_bitmap_bindings.c",
+        "pfnWowWaitForMsgAndEvent": "compat/wow_user_registration_state.c",
+        "pfnYieldTask": "compat/wow_user_registration_state.c",
+        "pfnGetFullUserHandle": "compat/wow_user_registration_state.c",
+        "pfnGetMenuIndex": "compat/wow_private_user_compat.c",
+        "pfnWowGetDefWindowProcBits": "compat/wow_private_user_compat.c",
+        "pfnFillWindow": "compat/wow_user_registration_state.c"
+      }
+    }
+  },
+  "remaining_registered_product_callback": "pfnInitTask",
+  "ownership": "Existing B runtime/class/cleanup mechanics now own nine selected callbacks, and two same-shaped forwarders were replaced by B functions. The sole remaining product callback handles startup/retry acknowledgement. UserRegisterWowHandlers and the no-op startup report, C0497 and C0500, remain open.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "b9915329-7205-4309-824d-746de91a9a27",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": [
+    "WOW_STANDARD_CLASS_ADMISSION projected=9 calls=10 retry=1 errors=0",
+    "WOW_CONTROL_CALLOUT paints=2 texts=3 errors=0",
+    "WOW_NATIVE_EXECUTION_SCOPES errors=0 inline=1 nested=1 wait=1 unbind_rejected=1",
+    "WOW_NATIVE_QUEUE_PRECONDITION errors=0 drained=0 own_preserved=1",
+    "WOW_NATIVE_QUIT_ORDER errors=0 wide=0 sentinel=1 exit=41 bound=64",
+    "WOW_NATIVE_QUIT_ORDER errors=0 wide=1 sentinel=1 exit=42 bound=64",
+    "WOW_USER_TASK_LIFECYCLE errors=0 native_direct=5",
+    "WOW_FIXTURE_OK case=task-lifecycle",
+    "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+    "PASS shared worker 25296, two distinct tasks overlapped and retired independently, both requests exited normally"
+  ],
+  "profile_gate_repair": "The existing PMODE32 guard is still #error. Its fixture now permits the source-policy #line between #ifdef and #error. The same published package passed the repaired gate.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "final-wow-rebuild.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "registration-surface.out": "4456b58b22aa0b8dd96616456a68d82b156bce7322405538bbc6b0da2d2aa6a2",
+    "boundary.out": "c85483b5815a58446877739ca60630dc4d7237a8b60d2ddf0faecc840f46142e",
+    "probes.out": "b8fcb335d79a005ab4bf10bae74eb32ab5c1c4fc6bed1e4033dac186b488288c",
+    "final-checks.out": "73e35aaddc05b869a5fb95518e1165adec4f30d48e37248ad795395c4ad92727",
+    "output-composition.json": "d8d8edee9e8e1c660c2e8e974039392a4f802e73da3ff7c75db7dfd9bcb286e7"
+  }
+}

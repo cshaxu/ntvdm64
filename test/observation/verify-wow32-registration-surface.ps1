@@ -23,6 +23,9 @@ function Get-StructPfnFields([string]$Text, [string]$Name) {
 $headerText = Get-Content -LiteralPath $header -Raw
 $wowText = Get-Content -LiteralPath $wow32 -Raw
 $bridgeText = Get-Content -LiteralPath $bridge -Raw
+$compatState = Join-Path $root 'src/compat/wow_user_registration_state.c'
+$registrationCode = $bridgeText + [Environment]::NewLine +
+    (Get-Content -LiteralPath $compatState -Raw)
 $inputFields = @(Get-StructPfnFields $headerText 'tagAPFNWOWHANDLERSIN')
 $outputFields = @(Get-StructPfnFields $headerText 'tagAPFNWOWHANDLERSOUT')
 if ($inputFields.Count -ne 21) { throw "Expected 21 original input slots, found $($inputFields.Count)." }
@@ -36,7 +39,7 @@ $missingInput = @(Compare-Object $inputFields $inputAssignments -PassThru | Wher
 $missingOutput = @(Compare-Object $outputFields $outputAssignments -PassThru | Where-Object { $_ -in $outputFields })
 if ($missingInput.Count -ne 0) { throw "Original input slots not assigned by W32Init: $($missingInput -join ', ')" }
 if ($missingOutput.Count -ne 0) { throw "Provider output slots not assigned: $($missingOutput -join ', ')" }
-if (-not $bridgeText.Contains('wow_input_handlers = *input;')) { throw 'Provider does not retain the original input callback record.' }
+if (-not $registrationCode.Contains('wow_input_handlers = *input;')) { throw 'Provider does not retain the original input callback record.' }
 if (-not $bridgeText.Contains('output->dwBldInfo = 0x84000000u;')) { throw 'Provider does not declare the pinned USER build layout.' }
 if (-not $bridgeText.Contains('output->pfnGetFullUserHandle = registered_full_handle;')) {
     throw 'The full-handle output is not bound to the worker-local window association.'
@@ -49,7 +52,7 @@ foreach ($entry in @(
     @('registered_yield_task', 'wow_user_task_lifecycle_yield'),
     @('registered_wait_for_message', 'wow_user_task_lifecycle_wait')
 )) {
-    $body = [regex]::Match($bridgeText, '(?s)static\s+\w+\s+WINAPI\s+' +
+    $body = [regex]::Match($registrationCode, '(?s)(?:static\s+)?\w+\s+WINAPI\s+' +
         $entry[0] + '\([^)]*\)\s*\{(.*?)\n\}')
     if (!$body.Success -or !$body.Groups[1].Value.Contains($entry[1] + '(') -or
         $body.Groups[1].Value -match '\bxxx(?:DirectedYield|UserYield|SleepTask)\s*\(') {

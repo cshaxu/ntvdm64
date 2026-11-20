@@ -139,7 +139,7 @@ $sharedAbi = [ordered]@{
 $header = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm-host/wow32/wusercli.h')
 $body = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm-host/wow32/wusercli.c')
 $dispatch = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm-host/wow32/wutbl2.h')
-if ($header -notmatch '(?s)#ifdef PMODE32\s+#error Excluded unsupported PMODE32 host thunk profile\s+#else') {
+if ($header -notmatch '(?m)^#ifdef PMODE32[ \t]*\r?\n(?:#line [0-9]+[ \t]*\r?\n)?#error Excluded unsupported PMODE32 host thunk profile[ \t]*\r?\n#else[ \t]*\r?$') {
     throw 'Unsupported host PMODE32 mappings were not rejected'
 }
 $selected = [regex]::Matches($header, '(?m)^#define\s+(WU32\w+)\s+(WU32\w+)\s*$')
