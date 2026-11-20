@@ -28,6 +28,17 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P72 [native query restoration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-query-owner.json)
+eliminates C0530/C0531/C0541 by restoring original public USER queries, not moving
+wrappers. Current product objects use the native imports; short-HWND positive
+and dead-window/unsupported-thread-query controls pass95 assertions. Mirror
+change0/0; twelve autonomous source lines deleted; no new B provider or callback.
+Cached full x86/x64/reference builds, dual11 publication/22 hashes, retirement,
+nested/terminal lifecycle,8-phase Win16 dialog and compiled A/B/WOW gates pass.
+Packagefe0c4696-c6dd-41e7-be18-a226dd78047f. Ledger:173 eliminated/395 open;
+remaining priority roots111. Final document checks and enclosing P72 commit/push
+supply the delivery receipt. S14 remains active.
+
 P71 [native capture extraction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-capture-owner.json)
 moves9 functions/320 body lines from F to B as a114-root prerequisite.
 Public USER sampling/message operands/scratch normalization have no outer callbacks;
@@ -37,7 +48,7 @@ Cached x86/x64/reference builds, dual11 publication/22 hashes, native-chain cont
 21 reacquire cases, required-root, retirement/nested/terminal and8-phase Win16 dialog
 pass, as do A/B compiled gates. Package5d88ed0b-2d52-4d41-9415-8b49f8bfa233.
 Final document gates and enclosing P71 commit/push provide the delivery receipt.
-Ledger remains170 eliminated/398 open; S14 and the114-root batch remain open.
+P71 ledger was170 eliminated/398 open; P72 above supersedes these counts.
 
 P70 [registry binding migration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-registry-binding-owner.json)
 places actual token/lock/cleanup implementation and the C-facing header in B.

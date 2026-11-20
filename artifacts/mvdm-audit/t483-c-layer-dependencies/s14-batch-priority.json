@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 398,
+    "open": 395,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 170
+    "eliminated": 173
   },
   "provider_groups": [
     {
@@ -37,8 +37,6 @@
         "C0527",
         "C0528",
         "C0529",
-        "C0530",
-        "C0531",
         "C0532",
         "C0533",
         "C0534",
@@ -48,7 +46,6 @@
         "C0538",
         "C0539",
         "C0540",
-        "C0541",
         "C0542",
         "C0543",
         "C0544",
@@ -95,7 +92,7 @@
         "C0585",
         "C0586"
       ],
-      "count": 81,
+      "count": 78,
       "symbols": [
         "wow_native_ArrangeIconicWindows",
         "wow_native_BeginPaint",
@@ -121,8 +118,6 @@
         "wow_native_EndPaint",
         "wow_native_ExcludeUpdateRgn",
         "wow_native_FlashWindow",
-        "wow_native_GetClassNameA",
-        "wow_native_GetClientRect",
         "wow_native_GetDC",
         "wow_native_GetDCEx",
         "wow_native_GetParent",
@@ -132,7 +127,6 @@
         "wow_native_GetUpdateRect",
         "wow_native_GetUpdateRgn",
         "wow_native_GetWindowDC",
-        "wow_native_GetWindowRect",
         "wow_native_GetWindowTextA",
         "wow_native_GetWindowTextLengthA",
         "wow_native_GetWindowTextW",
@@ -2165,8 +2159,6 @@
         "C0527",
         "C0528",
         "C0529",
-        "C0530",
-        "C0531",
         "C0532",
         "C0533",
         "C0534",
@@ -2176,7 +2168,6 @@
         "C0538",
         "C0539",
         "C0540",
-        "C0541",
         "C0542",
         "C0543",
         "C0544",
@@ -2221,14 +2212,14 @@
         "C0583",
         "C0584"
       ],
-      "potential_direct_ids": 114,
+      "potential_direct_ids": 111,
       "providers": [
         "src/wow32-dll/source/wow_user_task_lifecycle.c",
         "src/wow32-dll/source/wow_user_discovery.c",
         "src/wow32-dll/source/wow_menu_native_bindings.c"
       ],
-      "evidence": "79 USER API wrappers share native-call entry/exit and handle publication;15 discovery APIs and20 menu APIs share runtime entry/exit and projected USER identity. Move the real scheduler/publication ownership, not just these wrappers. Two idle/wait APIs need a separate lifecycle disposition.",
-      "status": "114 candidate roots; compiled reference closure disproves a three-file relocation; complete unit cut and mirror cost pending",
+      "evidence": "76 USER API wrappers share native-call entry/exit and handle publication;15 discovery APIs and20 menu APIs share runtime entry/exit and projected USER identity. Move the real scheduler/publication ownership, not just these wrappers. Two idle/wait APIs need a separate lifecycle disposition.",
+      "status": "111 remaining roots after P72 original query restoration; complete scheduler/projection ownership and mirror cost remain pending.",
       "count_rule": "Potential IDs, not eliminated IDs. Helpers, headers and callback edges are not added as speculative extra savings.",
       "ownership_evidence": "s14-wow-native-batch-ownership.json",
       "next_gate": "Measure complete scheduler/resource/projection relocation; not a three-file copy. Runtime unbind outward callback and EXE/DLL singleton are confirmed prerequisites.",
@@ -2304,7 +2295,7 @@
         "C0453",
         "C0454"
       ],
-      "potential_direct_ids": 0,
+      "potential_direct_ids": 12,
       "providers": [
         "src/compat/wow_registry_binding.c"
       ],
@@ -2315,7 +2306,7 @@
       "verified_eliminated_ids": 13
     }
   ],
-  "next_action": "Continue 114-root scheduler/projection closure under existing layers; independent registry batch is verified, not an alternative scope.",
-  "not_done": "114 roots remain open. P68 only delivers shared-runtime prerequisite; concrete C scheduler/projection carriers and mirror-cost measurement remain.",
-  "updated_by": "T483 S14 P70"
+  "next_action": "Continue the111-root scheduler/projection closure under existing layers; remove disproved wrappers instead of moving them. Independent B implementation migrations remain prerequisites, not closure.",
+  "not_done": "111 roots remain open. P68/P71 deliver independent resource/capture mechanisms; concrete C scheduler/projection carriers and mirror-cost measurement remain.",
+  "updated_by": "T483 S14 P72"
 }

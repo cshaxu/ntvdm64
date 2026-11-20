@@ -361,12 +361,12 @@ static void verify_native_mutation_group(ULONG delta)
             HDC dc;
             BORROW_CHECK(wow_native_GetParent(short_child) == parent);
             BORROW_CHECK(GetClientRect(child, &client_expected) &&
-                wow_native_GetClientRect(short_child, &client_actual) &&
+                GetClientRect(short_child, &client_actual) &&
                 EqualRect(&client_expected, &client_actual));
             BORROW_CHECK(GetWindowRect(child, &window_expected) &&
-                wow_native_GetWindowRect(short_child, &window_actual) &&
+                GetWindowRect(short_child, &window_actual) &&
                 EqualRect(&window_expected, &window_actual));
-            BORROW_CHECK(wow_native_GetClassNameA(short_child, name, sizeof(name)) > 0 &&
+            BORROW_CHECK(GetClassNameA(short_child, name, sizeof(name)) > 0 &&
                 !strcmp(name, wc.lpszClassName));
             BORROW_CHECK(wow_native_SetPropA(short_child, "S9-prop", value));
             BORROW_CHECK(wow_native_GetPropA(short_child, "S9-prop") == value);
@@ -384,7 +384,7 @@ static void verify_native_mutation_group(ULONG delta)
                 }
             }
             SetRect(&window_actual, 11, 22, 33, 44);
-            BORROW_CHECK(!wow_native_GetWindowRect((HWND)(ULONG_PTR)0x12345678u,
+            BORROW_CHECK(!GetWindowRect((HWND)(ULONG_PTR)0x12345678u,
                 &window_actual));
             BORROW_CHECK(window_actual.left == 11 && window_actual.top == 22 &&
                 window_actual.right == 33 && window_actual.bottom == 44);

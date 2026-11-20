@@ -31,7 +31,7 @@ queue=[];starts={}
 for symbol,providers in owners.items():
  if plain(symbol) in names:
   assert len(providers)==1,(symbol,providers);starts[symbol]=providers[0];queue+=providers
-assert len(starts)==114,len(starts)
+assert {plain(symbol) for symbol in starts}==names, (names-{plain(symbol) for symbol in starts})
 seen=set();edges=[];local_edges=[];external=collections.Counter();ambiguous={}
 while queue:
  node=queue.pop()
@@ -46,7 +46,7 @@ while queue:
   elif providers:ambiguous[symbol]=providers
   else:external[symbol]+=1
 files=collections.Counter(obj for obj,sec in seen)
-result={'method':'Relocation reachability from114 exact public symbols through actual WOW32 direct link objects; section-level COMDAT traversal includes data references. Not a runtime trace or full library/indirect-call closure.','roots':starts,'objects_read':len(objects),'reachable_objects':len(files),'reachable_sections':len(seen),'reachable_object_sections':dict(sorted(files.items())),'edges':edges,'external_leaves':dict(sorted(external.items())),'ambiguous':ambiguous,'input_hashes':{p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in objects if p.relative_to(root).as_posix() in files}}
+result={'method':'Relocation reachability from the current priority-batch public symbols through actual WOW32 direct link objects; section-level COMDAT traversal includes data references. Not a runtime trace or full library/indirect-call closure.','roots':starts,'objects_read':len(objects),'reachable_objects':len(files),'reachable_sections':len(seen),'reachable_object_sections':dict(sorted(files.items())),'edges':edges,'external_leaves':dict(sorted(external.items())),'ambiguous':ambiguous,'input_hashes':{p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in objects if p.relative_to(root).as_posix() in files}}
 result['local_edges']=local_edges
 result['section_symbols']={obj:{str(sec):[name for name,s in defs.items() if s==sec] for o,sec in seen if o==obj} for obj,(defs,refs) in parsed.items() if obj in files}
 (out/'closure.json').write_text(json.dumps(result,indent=2)+'\n',newline='\n');print('roots',len(starts),'objects',len(files),'sections',len(seen),'ambiguities',len(ambiguous));print('\n'.join(f'{k}: {v}' for k,v in sorted(files.items()) if 'wow32-dll/' in k))

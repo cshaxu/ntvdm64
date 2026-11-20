@@ -1,8 +1,8 @@
 # S14 migration readiness and counts
 
-Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68/P70 updates below supersede its
+Initial P60 baseline `85700b2a5`; P61/P62/P63/P65/P68/P70/P72 updates below supersede its
 classification, implementation and package statements. The [machine-readable partition](s14-migration-readiness.json)
-assigns all 398 currently open stable IDs to the existing ten chains.
+assigns all 395 currently open stable IDs to the existing ten chains.
 
 ## Exact current population
 
@@ -14,15 +14,15 @@ assigns all 398 currently open stable IDs to the existing ten chains.
 | 4. console-mechanics | 50 | 7 | 0 | 0 | 57 |
 | 5. command-capture | 2 | 3 | 0 | 0 | 5 |
 | 6. launch-csr-completion | 19 | 4 | 0 | 0 | 23 |
-| 7. thread-lifecycle | 88 | 7 | 0 | 0 | 95 |
+| 7. thread-lifecycle | 85 | 7 | 0 | 0 | 92 |
 | 8. redirector-printer-devices | 6 | 2 | 0 | 0 | 8 |
 | 9. native-user | 140 | 25 | 0 | 0 | 165 |
 | 10. original-helpers-build-abi | 13 | 6 | 11 | 1 | 31 |
-| Total | 329 | 57 | 11 | 1 | 398 |
+| Total | 326 | 57 | 11 | 1 | 395 |
 
 The historical 79-provider body-read census remains evidence; P68 removes one
 provider from the open implementation set. Recounting the remaining chain
-provider-file union gives 76 distinct paths (the historical 79 is not current). Header classification
+provider-file union gives 75 distinct paths (the historical 79 is not current). Header classification
 is 56/59, with three generated contracts still awaiting their final owner/ABI
 decision. All 11 remaining search roots have current-use evidence. VCDEX imports
 have C implementation evidence; that is not final binary-boundary disposition.
@@ -129,3 +129,10 @@ P70: registry implementation/header remove 13 direct IDs, with zero mirror
 delta. Final build, dual11 publication and targeted tests pass; enclosing P70
 commit is the delivery receipt. The registry initialization race found by testing is repaired using
 the existing commit mutex. See [evidence](s14-registry-binding-owner.json).
+
+## P72 original query restoration
+
+[Verified query restoration](s14-native-query-owner.json) eliminates C0530, C0531
+and C0541 without a replacement B provider, callback or mirror edit. Original C
+queries bind directly to modern USER. Remaining priority-batch roots:111. The
+current ledger is173 eliminated/395 open; full-chain ownership remains incomplete.

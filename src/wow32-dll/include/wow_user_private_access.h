@@ -44,9 +44,6 @@ int WINAPI wow_native_ExcludeUpdateRgn(HDC, HWND);
 HANDLE WINAPI wow_native_GetPropA(HWND, LPCSTR);
 BOOL WINAPI wow_native_SetPropA(HWND, LPCSTR, HANDLE);
 HANDLE WINAPI wow_native_RemovePropA(HWND, LPCSTR);
-int WINAPI wow_native_GetClassNameA(HWND, LPSTR, int);
-BOOL WINAPI wow_native_GetClientRect(HWND, LPRECT);
-BOOL WINAPI wow_native_GetWindowRect(HWND, LPRECT);
 HWND WINAPI wow_native_GetParent(HWND);
 HWND WINAPI wow_native_SetFocus(HWND w);
 HWND WINAPI wow_native_SetCapture(HWND);
@@ -197,9 +194,6 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #define GetPropA wow_native_GetPropA
 #define SetPropA wow_native_SetPropA
 #define RemovePropA wow_native_RemovePropA
-#define GetClassNameA wow_native_GetClassNameA
-#define GetClientRect wow_native_GetClientRect
-#define GetWindowRect wow_native_GetWindowRect
 #define GetParent wow_native_GetParent
 #endif
 #define CreateCaret wow_native_CreateCaret

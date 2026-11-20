@@ -1318,12 +1318,6 @@ WOW_NATIVE_MAPPED_CALL(BOOL, SetPropA, (HWND w, LPCSTR name, HANDLE value),
     (native, name, value), FALSE, FALSE, NULL)
 WOW_NATIVE_MAPPED_CALL(HANDLE, RemovePropA, (HWND w, LPCSTR name),
     (native, name), NULL, FALSE, NULL)
-WOW_NATIVE_MAPPED_CALL(int, GetClassNameA, (HWND w, LPSTR name, int count),
-    (native, name, count), 0, FALSE, NULL)
-WOW_NATIVE_MAPPED_CALL(BOOL, GetClientRect, (HWND w, LPRECT rect),
-    (native, rect), FALSE, FALSE, NULL)
-WOW_NATIVE_MAPPED_CALL(BOOL, GetWindowRect, (HWND w, LPRECT rect),
-    (native, rect), FALSE, FALSE, NULL)
 WOW_NATIVE_MAPPED_CALL(HWND, GetParent, (HWND w), (native), NULL, FALSE, result)
 WOW_NATIVE_MAPPED_CALL(BOOL, MoveWindow,
     (HWND w, int x, int y, int cx, int cy, BOOL paint),
