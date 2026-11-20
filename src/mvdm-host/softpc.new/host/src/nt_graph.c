@@ -55,8 +55,8 @@
 #include "ckmalloc.h"
 #include "conapi.h"
 #include "compat/include/console_graphics.h"
-#include "ntvdm-exe/win32/console_text.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
+#include "compat/include/console_text.h"
+#include "compat/include/mvdm_softpc_text_video.h"
 extern int DAC_data_bits;
 extern void draw_v7ptr(void);
 

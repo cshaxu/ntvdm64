@@ -1,7 +1,7 @@
 /* Worker-local transport only. No native Console presentation or guest policy. */
 #include "console_client.h"
 #include "worker_lifecycle.h"
-#include "console_text.h"
+#include "compat/include/console_text.h"
 #include "console_geometry.h"
 #include "compat/include/publication.h"
 #include "worker-base/input_watch.h"

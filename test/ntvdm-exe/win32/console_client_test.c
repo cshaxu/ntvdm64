@@ -4,7 +4,7 @@
  * stubbed; both I/O implementations and Console operations are real. */
 #include "ntvdm-exe/win32/console_client.h"
 #include "ntvdm-exe/win32/worker_lifecycle.h"
-#include "ntvdm-exe/win32/console_text.h"
+#include "compat/include/console_text.h"
 #include "compat/include/mvdm_softpc_mouse_bridge.h"
 #include "ntcon-exe/console_frontend.h"
 #include "compat/include/console_transport.h"

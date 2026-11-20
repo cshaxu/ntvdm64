@@ -1,10 +1,12 @@
 /* Recovered from 286d54a3 presentation/text_producer.c: retain original
  * RegisterConsoleVDM cells and EGA metadata, replace worker UI/library frame
  * assembly with the admitted copied worker/frontend wire record. */
-#include "console_text.h"
-#include "console_client.h"
+#include "include/console_text.h"
+#include "include/console_services.h"
+#include "include/console_graphics.h"
+#include "include/host_context.h"
 #include "compat/include/console_io.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
+#include "compat/include/mvdm_softpc_text_video.h"
 #include <string.h>
 
 static BOOL read_text_palette(PALETTEENTRY colours[16])
@@ -38,7 +40,7 @@ BOOL NtvdmConsoleTextRequested(BOOL *requested)
 
 BOOL NtvdmConsoleUpdateText(HPALETTE palette)
 {
-    session *owner=session_thread_current();
+    compat_host_context *owner=compat_host_context_current();
     mvdm_softpc_text_video video;
     console_video_description description={0};
     console_text_style *style;
@@ -47,8 +49,8 @@ BOOL NtvdmConsoleUpdateText(HPALETTE palette)
     BYTE *text=NULL,*payload=NULL;
     DWORD error;
     BOOL result=FALSE;
-    if (!owner || !owner->console_client) return TRUE;
-    if (!compat_host_text_describe(&owner->host_context,&columns,&rows,&bytes)) {
+    if (!owner || !owner->console_endpoint) return TRUE;
+    if (!compat_host_text_describe(owner,&columns,&rows,&bytes)) {
         SetLastError(ERROR_NOT_READY);return FALSE;
     }
     if (!mvdm_softpc_text_video_copy(&video)) return TRUE;
@@ -69,7 +71,7 @@ BOOL NtvdmConsoleUpdateText(HPALETTE palette)
     payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,description.bytes);
     text=HeapAlloc(GetProcessHeap(),0,bytes);
     if (!payload || !text) { SetLastError(ERROR_NOT_ENOUGH_MEMORY);goto done; }
-    if (!compat_host_text_snapshot(&owner->host_context,text,bytes,NULL,NULL,NULL)) {
+    if (!compat_host_text_snapshot(owner,text,bytes,NULL,NULL,NULL)) {
         SetLastError(ERROR_INVALID_DATA);goto done;
     }
     style=(console_text_style *)payload;
@@ -102,9 +104,9 @@ BOOL NtvdmConsoleUpdateTextConfiguration(HPALETTE palette)
     console_video_description description={0};
     console_text_style style={0};
     PALETTEENTRY colours[16];
-    session *owner=session_thread_current();
+    compat_host_context *owner=compat_host_context_current();
     unsigned index;
-    if(!owner || !owner->console_client)return TRUE;
+    if(!owner || !owner->console_endpoint)return TRUE;
     /* Snapshot on the original video owner. Do not initialize a Console,
      * resize a screen, or disable STREAM_IO just to obtain its font. */
     if(!mvdm_softpc_text_video_copy(&video))return TRUE;

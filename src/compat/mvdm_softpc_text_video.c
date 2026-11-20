@@ -9,9 +9,9 @@
 #include "text_video_nt_graph.h"
 #include <nt_uis.h>
 #include <host_rrr.h>
-#include "mvdm_softpc_text_video.h"
-#include "ntvdm-exe/win32/console_text.h"
-#include "ntvdm-exe/win32/console_client.h"
+#include "include/mvdm_softpc_text_video.h"
+#include "compat/include/console_text.h"
+#include "include/console_graphics.h"
 #include <string.h>
 
 /* Original nt_graph.c::textResize dimensions used by nt_cga_text clipping.

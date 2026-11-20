@@ -41,7 +41,7 @@ Hooks 及 NTVDM/WOW 项目适配进行字符串比较、固定路径/文件名�
 | H07 | 历史 NtAlertThread 的 APC fallback 已删除；T483 S5 P211 进一步移除了本地动态转发，恢复 [原版导入声明](../../src/non-mvdm/public/sdk/inc/ntpsapi.h)，生产映射绑定 ntdll.dll。 | x86/x64 原生 alert 与退出专项、Full 已通过；不再保留 APC fallback 或缺少导出时的伪成功路径。最终交付记录纳入当前审计清单。 |
 | H08 | [wow_public_user_facade.c](../../src/wow32-dll/source/wow_public_user_facade.c) 字体跟踪搜索宿主 Windows/fonts 和默认 SearchPath，其他 guest 系统目录采用产品根。 | 取证区分宿主 GDI 字体与 guest 资源所有权。保留源定义的宿主字体合同或修复实际混用；不能机械替换 GetWindowsDirectory。验证相对/绝对/远程字体、同名冲突和 task cleanup。与后续 WOW 字体包共享唯一修复归属。 |
 | H09 | run16/Hook 的 MAX_PATH token/result 与 common 较大搜索缓冲区容量不一致。 | 明确 DOS 原始容量与 native 容量，避免 DOS 限制无依据扩散到 native。验证长度边界、截断、短名不可用、Unicode/ANSI 不可表示错误，不修改历史 guest 结构来扩大容量。 |
-| H10 | [console_text.c](../../src/ntvdm-exe/win32/console_text.c) 将发布 ERROR_NOT_READY 转成成功，以忽略 handoff 后旧 owner 画面。 | 证明允许忽略的 stale/inactive 发布与真正未就绪故障能够区分；必要时用明确状态/结果表示。验证旧画面不覆盖新 owner、真实故障不被吞掉、下次完整刷新与关闭；不能恢复 receiver 帧过滤或移除屏障。 |
+| H10 | [console_text.c](../../src/compat/console_text.c) 将发布 ERROR_NOT_READY 转成成功，以忽略 handoff 后旧 owner 画面。 | 证明允许忽略的 stale/inactive 发布与真正未就绪故障能够区分；必要时用明确状态/结果表示。验证旧画面不覆盖新 owner、真实故障不被吞掉、下次完整刷新与关闭；不能恢复 receiver 帧过滤或移除屏障。 |
 
 H08–H10 是待合同取证项。其退出条件是有复现和原始依据的修复，或
 精确的保留理由及正负测试；不能强行将合法边界改成所谓 generic。

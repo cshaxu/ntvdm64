@@ -1525,7 +1525,7 @@ This removes diagnostic work rather than substituting a CPU algorithm.
 
 MVDM-HOST-DIV-322 (T425 S8): CCPU Window presentation uses software
 FULLSCREEN without enabling X86GFX/MONITOR or hardware BIOS/regen mapping.
-The existing ntvdm-exe/softpc/mvdm_softpc_text_video.c adapter samples frontend
+The existing src/compat/mvdm_softpc_text_video.c adapter samples frontend
 policy on the original video owner and requests the original stream transition.
 nt_fulsc.c retains software VGA mode, font and CRTC initialization in both
 routes; nt_graph.c retains software backing. DIV-326 restores text flush

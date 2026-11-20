@@ -3,10 +3,10 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 111,
+    "open": 104,
     "supporting-evidence": 43,
     "eliminated-transitive": 6,
-    "eliminated": 457
+    "eliminated": 464
   },
   "provider_groups": [
     {
@@ -104,21 +104,6 @@
     },
     {
       "kind": "symbol",
-      "provider": "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c",
-      "open_ids": [
-        "C0243",
-        "C0244",
-        "C0245"
-      ],
-      "count": 3,
-      "symbols": [
-        "mvdm_softpc_text_video_flush",
-        "mvdm_softpc_text_video_pause",
-        "mvdm_softpc_text_video_sync_route"
-      ]
-    },
-    {
-      "kind": "symbol",
       "provider": "src/ntvdm-exe/win32/worker_lifecycle.c",
       "open_ids": [
         "C0317",
@@ -203,19 +188,6 @@
       "symbols": [
         "CsrLockProcessByClientId",
         "CsrUnlockProcess"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/win32/console_text.c",
-      "open_ids": [
-        "C0305",
-        "C0306"
-      ],
-      "count": 2,
-      "symbols": [
-        "NtvdmConsoleUpdateText",
-        "NtvdmConsoleUpdateTextConfiguration"
       ]
     },
     {
@@ -458,15 +430,6 @@
       "symbols": []
     },
     {
-      "kind": "header",
-      "provider": "src/ntvdm-exe/softpc/include/mvdm_softpc_text_video.h",
-      "open_ids": [
-        "C0044"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
       "kind": "symbol",
       "provider": "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
       "open_ids": [
@@ -568,15 +531,6 @@
       "provider": "src/ntvdm-exe/win32/console_input.h",
       "open_ids": [
         "C0054"
-      ],
-      "count": 1,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/ntvdm-exe/win32/console_text.h",
-      "open_ids": [
-        "C0055"
       ],
       "count": 1,
       "symbols": []
@@ -835,20 +789,6 @@
       "symbols": [
         "W32TimerFunc"
       ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/win32/console_graphics.c",
-      "open_ids": [],
-      "count": 0,
-      "symbols": []
-    },
-    {
-      "kind": "header",
-      "provider": "src/ntvdm-exe/win32/console_graphics.h",
-      "open_ids": [],
-      "count": 0,
-      "symbols": []
     }
   ],
   "priority_batches": [
@@ -894,7 +834,7 @@
         "src/ntvdm-exe/win32/console_graphics.c"
       ],
       "evidence": "24+10+5 direct APIs share routed console resources. NTCON channel, active console identity and error/lifecycle ownership must be separated; moving wrappers to B alone fails.",
-      "status": "Transport, Console operations and graphics mechanics delivered. Input acknowledgement and broker handoff remain open.",
+      "status": "Transport, Console operations and graphics/text mechanics delivered. Input acknowledgement and broker handoff remain open.",
       "count_rule": "Potential IDs, not eliminated IDs. Helpers, headers and callback edges are not added as speculative extra savings.",
       "verified_eliminated_ids": 27
     },
@@ -927,5 +867,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P89"
+  "updated_by": "T483 S14 P90"
 }

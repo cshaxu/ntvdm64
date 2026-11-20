@@ -30,6 +30,7 @@ WOW_USER_EXCEPTIONS = {"wow_dialog_lookup.c", "wow_object_ownership.c"}
 
 
 ORIGINAL_LAYOUT_ADAPTERS = {
+    "mvdm_softpc_text_video.c",
     "mvdm_command_guest_state.c",
     "mvdm_softpc_mouse_guest.c",
     "mvdm_softpc_mouse_bridge.c",
@@ -111,6 +112,15 @@ def allowed_roots(owner, source=""):
     return roots
 
 
+# These declarations are generated from the selected C video layout by
+# GenerateCvidcCpuBinding.mjs. Only this adapter can use these four outputs.
+def generated_inputs(directory, owner, source):
+    if owner == "compat" and source == "mvdm_softpc_text_video.c":
+        return {directory / "generated" / f"text_video_{name}.h"
+                for name in ("gfx", "gvi", "egagraph", "nt_graph")}
+    return set()
+
+
 def verify(graph, products):
     arch, component = graph.split("/")
     directory = ROOT / "build/.ninja" / f"msvc-{arch}-release" / component
@@ -129,7 +139,9 @@ def verify(graph, products):
             if not any((directory / (path[1] or path[2])).resolve() == r or
                        (owner == "compat" and source in ORIGINAL_LAYOUT_ADAPTERS and
                         (directory / (path[1] or path[2])).resolve().is_relative_to(r) and
-                        r != ROOT / "src") for r in roots):
+                        r != ROOT / "src") for r in roots) and not any(
+                    (directory / (path[1] or path[2])).resolve() == h.parent
+                    for h in generated_inputs(directory, owner, source)):
                 raise ValueError(f"{graph}/{obj}: unexpected include root {path[0]}")
         if re.search(r'(?:^| )/FI', line):
             raise ValueError(f"{graph}/{obj}: forced header")
@@ -145,14 +157,15 @@ def verify(graph, products):
                 valid.add(current)
         elif current in units:
             header = (directory / line.strip()).resolve()
-            if header.is_relative_to(ROOT) and not any(header.is_relative_to(root) for root in allowed_roots(*units[current])):
+            if (header.is_relative_to(ROOT) and header not in generated_inputs(directory, *units[current])
+                    and not any(header.is_relative_to(root) for root in allowed_roots(*units[current]))):
                 raise ValueError(f"{graph}/{current}: reads {header}")
     if valid != set(units):
         raise ValueError(f"{graph}: missing current compiler evidence for {set(units) - valid}")
     # Collect actual explicit and implicit prerequisites without following product links.
-    for roots in {frozenset(allowed_roots(*identity)) for identity in units.values()}:
+    for roots in {frozenset(allowed_roots(*identity) | generated_inputs(directory, *identity)) for identity in units.values()}:
         objects = [obj for obj, identity in units.items()
-                   if frozenset(allowed_roots(*identity)) == roots]
+                   if frozenset(allowed_roots(*identity) | generated_inputs(directory, *identity)) == roots]
         for line in ninja(directory, "inputs", *objects).splitlines():
             path = (directory / line.strip().strip('"')).resolve()
             if path.is_relative_to(ROOT) and not any(path.is_relative_to(root) for root in roots):

@@ -1,14 +1,14 @@
 /* Test-link only: unchanged project-owned producer, not a guest substitute. */
 #include "worker_performance.h"
-#include "ntvdm-exe/win32/console_text.h"
+#include "compat/include/console_text.h"
 #include "ntvdm-exe/win32/console_client.h"
 #include "compat/include/console_io.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
+#include "compat/include/mvdm_softpc_text_video.h"
 static __declspec(thread) LONGLONG assembly_started;
 static BOOL measured_publish(const console_video_description *,const void *,size_t);
 #define NtvdmConsoleUpdateText measured_actual_update_text
 #define ntvdm_console_publish_video measured_publish
-#include "../../src/ntvdm-exe/win32/console_text.c"
+#include "../../src/compat/console_text.c"
 #undef ntvdm_console_publish_video
 #undef NtvdmConsoleUpdateText
 static BOOL measured_publish(const console_video_description *description,const void *data,size_t bytes)

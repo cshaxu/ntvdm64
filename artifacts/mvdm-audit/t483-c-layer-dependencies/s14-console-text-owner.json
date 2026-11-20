@@ -1,0 +1,83 @@
+{
+  "packet": "M0 T483 S14 P90",
+  "baseline": "1206ae3bd2deb6aae6d8649a41999de22fdcc34c",
+  "status": "Cached full build, dual publication, product and fixture tests and final gates passed. Enclosing commit is the delivery receipt.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "scope": "Existing authored include paths in nt_event.c and nt_graph.c."
+  },
+  "scope": "B owns text demand, selected font/palette snapshot and copied frame packaging. Original C still owns VGA state, original refresh, palette and cursor math. F retains broker admission and input handoff.",
+  "evidence_root": "build/t483-s14-console-text-owner",
+  "mirror_proof": [
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "before_sha256": "40233fd7f4cac4b135970387c6ff40ab128287e54f9ce38ab3d22ef907ad2cdd",
+      "after_sha256": "2695137be7e843898ed5db3b25ad6c05aab8059fc77cb4119fe9a3bd9de8b8ce",
+      "entire_change": "authored include paths only"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "before_sha256": "7de726044599b24f6c4f90975cba1519aed1184d18a0e228786b0141431c8094",
+      "after_sha256": "dc267244a6f740e1e58df6a8e1020c354a86827fdeb155518083f4dacf0b2dea",
+      "entire_change": "authored include paths only"
+    }
+  ],
+  "compiled_layout_proof": {
+    "x86_executable_sections_identical": true,
+    "evidence": "build\\t483-s14-console-text-owner\\compiled-layout-proof.json",
+    "note": "The removed product flags do not change selected field offsets or emitted logic. Relocations and layout behavior are separate checks."
+  },
+  "indirect_providers": {
+    "publish": "src/mvdm-host/softpc.new/host/src/nt_graph.c::publish_text_update, the sole production call site",
+    "update_alg.calc_update": "Selected and installed by src/mvdm-host/softpc.new/base/video/gfx_updt.c"
+  },
+  "gate_correction": "The first governance pass exposed a proposal link to the old path. The link now points to the compat file; build and runtime inputs did not change.",
+  "original_common_symbols": {
+    "sc": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+    "PCDisplay": "src/mvdm-host/softpc.new/base/video/gvi.c",
+    "EGA_GRAPH": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+    "EGA_planes": "src/mvdm-host/softpc.new/base/video/ega_prts.c"
+  },
+  "eliminated_C_ids": [
+    "C0044",
+    "C0055",
+    "C0243",
+    "C0244",
+    "C0245",
+    "C0305",
+    "C0306"
+  ],
+  "eliminated_B_ids": [],
+  "compiled_ownership": {
+    "objects": 11,
+    "external_relocation_pairs": 205,
+    "outward": 0,
+    "counts": {
+      "mvdm-host": 28,
+      "compat": 28,
+      "system import": 40,
+      "CRT": 32,
+      "not selected in final link": 77
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "b87fd52e-d22e-4991-b42d-cd2c38c39284",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "d31409f46e11c145b3194ea7f56544ea7e996bd26b50c8e4981fc6ea6aee54d3",
+    "release-and-test.out": "6d7f3eab2d72a28e476d1473d9b3ea5d8a9ebbdf47e4197ea6d585ee65011467",
+    "final-checks2.out": "66d1bd7f9839843bf34b82d7d5b731c8c81d54c78ab6855ae7d16fe4663cdf73",
+    "compiled-layout-proof.json": "325375cd0adb1075f6d7d9456efd0c07f05bd529ef7445c32555a4233b8146ad",
+    "b-compiled-candidates.json": "cde56e3d447a7014ec60e22b2f922dde377a97c58728f18e369b21bf7a8d168f",
+    "console-routing.txt.console.txt": "d8736979605d767333a465be1085e8090a493ecf6c466953505504643c1c1e0d"
+  }
+}

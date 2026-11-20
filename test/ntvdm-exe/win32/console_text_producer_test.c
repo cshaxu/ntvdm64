@@ -1,13 +1,15 @@
 /* Production frame packer with explicit synthetic original-state boundaries.
  * The reader and actual IPC have separate tests; this is not guest proof. */
-#include "ntvdm-exe/win32/console_text.h"
-#include "ntvdm-exe/win32/console_client.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
+#include "compat/include/console_text.h"
+#include "compat/include/host_context.h"
+#include "compat/include/console_endpoint.h"
+#include "compat/include/mvdm_softpc_text_video.h"
 #include "compat/include/console_io.h"
 #include <stdio.h>
 #include <string.h>
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d error=%lu\n",__LINE__,GetLastError()); return 1; } } while(0)
-static session owner;
+static compat_host_context owner;
+static compat_console_endpoint endpoint;
 static BOOL bound=TRUE,readable=TRUE,snapshot_ok=TRUE;
 static DWORD palette_error=ERROR_SUCCESS,send_error,query_error;
 static int query_result=1;
@@ -22,7 +24,7 @@ static BOOL restore_palette;
 static unsigned palette_refreshes;
 void mvdm_softpc_text_video_refresh_palette(void)
 { ++palette_refreshes;if(restore_palette)palette_error=ERROR_SUCCESS; }
-session *session_thread_current(void) { return bound ? &owner : NULL; }
+compat_host_context *compat_host_context_current(void) { return bound ? &owner : NULL; }
 int compat_host_text_describe(const compat_host_context *s,uint32_t *w,uint32_t *h,uint32_t *n)
 { (void)s;*w=columns;*h=rows;*n=storage_bytes;return 1; }
 int compat_host_text_snapshot(const compat_host_context *s,uint8_t *p,uint32_t capacity,uint32_t *w,uint32_t *h,uint32_t *n)
@@ -44,7 +46,7 @@ int main(void)
     BOOL requested;
     unsigned i;
     console_text_style *style=(console_text_style *)sent;
-    owner.console_client=(void *)1;
+    owner.console_endpoint=&endpoint;
     video.columns=80;video.rows=43;video.font_height=14;video.attribute_font_select=1;
     video.cursor_column=79;video.cursor_row=42;video.cursor_visible=1;
     video.cursor_start=12;video.cursor_height=2;video.cursor_start1=0;video.cursor_height1=1;
@@ -90,7 +92,7 @@ int main(void)
     palette_error=ERROR_ACCESS_DENIED;
     CHECK(!NtvdmConsoleUpdateText(NULL) && GetLastError()==ERROR_ACCESS_DENIED);
     bound=FALSE;CHECK(NtvdmConsoleUpdateText(NULL));bound=TRUE;
-    owner.console_client=NULL;CHECK(NtvdmConsoleUpdateText(NULL));owner.console_client=(void *)1;
+    owner.console_endpoint=NULL;CHECK(NtvdmConsoleUpdateText(NULL));owner.console_endpoint=&endpoint;
     query_result=-1;CHECK(NtvdmConsoleTextRequested(&requested) && !requested);
     query_result=1;query_value=1;CHECK(NtvdmConsoleTextRequested(&requested) && requested);
     query_value=0;CHECK(NtvdmConsoleTextRequested(&requested) && !requested);

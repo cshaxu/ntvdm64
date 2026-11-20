@@ -252,7 +252,7 @@ if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC ex
 if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector resource missing: $redirResourceSource" }
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
 $adapterWin32Names = @('ccpu_thread_exit_compat.c',
-                          'console_compat.c', 'console_client.c', 'worker_lifecycle.c', 'console_text.c',
+                          'console_compat.c', 'console_client.c', 'worker_lifecycle.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c', 'wow_hard_error_decoder.c',
                            'mvdm_base_vdm_environment.c')
@@ -365,7 +365,7 @@ if (!(Test-Path -LiteralPath $hostCompatSource)) {
     throw "Required OpenNT host-compat source missing: $hostCompatSource"
 }
 foreach ($name in $adapterSoftpcNames) {
-    $sourceRoot = if ($name -in $compatMouseNames) { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
+    $sourceRoot = if ($name -in $compatMouseNames -or $name -eq 'mvdm_softpc_text_video.c') { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
     if (!(Test-Path -LiteralPath (Join-Path $sourceRoot $name))) { throw "Required SoftPC adapter source missing: $name" }
 }
 foreach ($name in $adapterRedirNames) {
@@ -1236,14 +1236,18 @@ $adapterDebuggerObjects = foreach ($name in $adapterDebuggerNames) {
 $originalDebuggerObject = 'obj/mvdm-debugger/dbg.obj'
 $graph.Add('build ' + $originalDebuggerObject + ': cc_mvdm_debugger ' +
     (NinjaPath (Join-Path $root 'src/mvdm-host/dbg/dbg.c')))
+$compatTextVideoFlags = $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + (
+    (@('src/compat/include','src/mvdm-host/softpc.new/base/inc','src/mvdm-host/softpc.new/host/inc','src/non-mvdm/public/sdk/inc') |
+        ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }) -join ' ') + ' ' + $cvidcGeneratedInclude
 $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $object = 'obj/adapter-softpc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $selectedVideoInputs = if ($name -eq 'mvdm_softpc_text_video.c') { ' | generated/text_video_gfx.h generated/text_video_gvi.h generated/text_video_egagraph.h generated/text_video_nt_graph.h' } elseif ($name -eq 'v7_pointer_binding.c') { ' | generated/v7_selected_plane.h' } else { '' }
     $mouseAdapter = $name -in $compatMouseNames
-    $sourceRoot = if ($mouseAdapter) { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
+    $textAdapter = $name -eq 'mvdm_softpc_text_video.c'
+    $sourceRoot = if ($mouseAdapter -or $textAdapter) { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sourceRoot $name)) + $selectedVideoInputs)
-    $videoInclude = if ($name -in @('mvdm_softpc_text_video.c', 'v7_pointer_binding.c')) { ' ' + $cvidcGeneratedInclude } else { '' }
-    $unitFlags = if ($name -eq 'mvdm_softpc_mouse_guest.c') { $compatCcpuFlags } elseif ($mouseAdapter) { $libraryFlags } else { $authoredSoftpcFlags + $videoInclude }
+    $videoInclude = if ($name -eq 'v7_pointer_binding.c') { ' ' + $cvidcGeneratedInclude } else { '' }
+    $unitFlags = if ($name -eq 'mvdm_softpc_mouse_guest.c') { $compatCcpuFlags } elseif ($mouseAdapter) { $libraryFlags } elseif ($textAdapter) { $compatTextVideoFlags } else { $authoredSoftpcFlags + $videoInclude }
     $graph.Add('  cflags = ' + $unitFlags)
     $object
 }
@@ -2031,7 +2035,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('build softpc-text-video-test.exe: console_test_link obj/tests/softpc_text_video.obj obj/adapter-softpc/mvdm_softpc_text_video.obj')
     $graph.Add('build obj/tests/console_text_producer.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/win32/console_text_producer_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/tests/console_text_provider.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/console_text.c')))
+    $graph.Add('build obj/tests/console_text_provider.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_text.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build console-text-producer-test.exe: console_test_link obj/tests/console_text_producer.obj obj/tests/console_text_provider.obj')
     # The frontend EXE is a runtime prerequisite, never a launcher link input.
@@ -2200,7 +2204,7 @@ $graph.Add('build environment-projection-fixture.exe: rtl_fixture_link ' + $envi
 $graph.Add('build mvdm-softpc-effective-address.lib: lib ' + $effectiveAddressObject)
 $graph.Add('build obj/compat/console_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_services.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
-foreach ($name in @('console_graphics','console_bitmap','v7_pointer')) {
+foreach ($name in @('console_graphics','console_bitmap','v7_pointer','console_text')) {
     $object = 'obj/compat/' + $name + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root ('src/compat/' + $name + '.c'))))
     $graph.Add('  cflags = ' + $libraryFlags)

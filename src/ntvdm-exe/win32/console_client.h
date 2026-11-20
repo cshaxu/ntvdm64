@@ -4,6 +4,7 @@
 #include "ntvdm-exe/session/session.h"
 #include "compat/include/console_video.h"
 #include "compat/include/console_graphics.h"
+#include "compat/include/console_services.h"
 DWORD ntvdm_console_client_begin(session *);
 /* 0 unrelated, 1 input, 2 output; local identities, never UI resources. */
 DWORD ntvdm_console_handle_kind(HANDLE);
@@ -18,8 +19,4 @@ BOOL WINAPI MvdmWriteConsoleA(HANDLE,const VOID *,DWORD,LPDWORD,LPVOID);
 BOOL ntvdm_console_prepend_keys(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
 BOOL ntvdm_console_prepend_keys_tagged(HANDLE,PINPUT_RECORD,const uint64_t *,DWORD,LPDWORD);
 BOOL ntvdm_console_read_input_tagged(HANDLE,PINPUT_RECORD,uint64_t *,DWORD,LPDWORD,BOOL,const uint64_t *,DWORD);
-/* -1: no frontend bound; 0: remote failure; 1: copied result available. */
-int ntvdm_console_window_query(DWORD query,LONG values[4]);
-/* Latest original resolved text palette, owned by this worker endpoint. */
-BOOL ntvdm_console_text_palette(PALETTEENTRY colours[16]);
 #endif

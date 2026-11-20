@@ -13,7 +13,7 @@
 #include "console_client.h"
 #include "console_input.h"
 #include "compat/include/mvdm_softpc_mouse_bridge.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
+#include "compat/include/mvdm_softpc_text_video.h"
 #include "compat/include/mvdm_keyboard_history.h"
 #include "compat/include/console_io.h"
 typedef char keyboard_live_capacity_check[(MVDM_KEY_HISTORY_CAPACITY<=CONSOLE_IO_INPUT_LIVE_CAPACITY) ? 1 : -1];
