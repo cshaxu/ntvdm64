@@ -1,0 +1,107 @@
+{
+  "packet": "M0 T483 S14 P142",
+  "parent": "1491dc227fc8a0a63e7b005954aac7fa3ec48b85",
+  "eliminated_C": [
+    "C0460"
+  ],
+  "eliminated_B": [],
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 0,
+    "F": 4
+  },
+  "C_runtime_slots": {
+    "F": 1
+  },
+  "C_outward_headers": {
+    "F": 1
+  },
+  "C_named_image_imports": 1,
+  "mirror": {
+    "upstream": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "files": [
+      {
+        "path": "src/mvdm-host/wow32/wkman.c",
+        "before": [
+          87,
+          366
+        ],
+        "after": [
+          87,
+          371
+        ],
+        "delta": [
+          0,
+          5
+        ]
+      },
+      {
+        "path": "src/mvdm-host/wow32/wow32.c",
+        "before": [
+          103,
+          1006
+        ],
+        "after": [
+          103,
+          1005
+        ],
+        "delta": [
+          0,
+          -1
+        ]
+      }
+    ],
+    "non_error_delta": [
+      0,
+      4
+    ],
+    "conditional_and_line_directives_unchanged": true
+  },
+  "contract": "One original-owner claim and the authenticated worker, service and Console signals. B waits for permission. F acts on the local event to send the original broker request. WOW has no character/VM frontend registry and keeps its exit sequence in C. The DOS quiescence stays inline in the exiting thread and its F reference stays open under C0318.",
+  "verification": {
+    "cached_build": [
+      "x86",
+      "x64",
+      "x86 reference"
+    ],
+    "native_cases": [
+      "registry",
+      "input-terminal",
+      "console-exit-request",
+      "natural-exit",
+      "natural-loss",
+      "natural-wow",
+      "natural-wow-loss",
+      "natural-console-ready",
+      "natural-console",
+      "lifecycle-console",
+      "lifecycle-wow",
+      "lifecycle-loss",
+      "lifecycle-pending"
+    ],
+    "separate_workers": "PASS two real separate WOW workers, own idle callbacks, retirement and surviving peer idle",
+    "actual_wow_process_exit": [
+      "worker-exited pid=4696 exit=0 peer=30280 trace_bytes=9786",
+      "worker-exited pid=30280 exit=0 final=1"
+    ],
+    "actual_dos_console_exit": "PASS original DOS TSR returns to COMMAND; EXIT request retires Console group, preserves Run16 result 1067 and leaves NTSRV alive",
+    "separate_single_task_management": "WOW_TASK_CLOSE_RESULT cancel=original-ticket reused-htask=1 serialized=1 success-reopen=0",
+    "ordinal": 14,
+    "limitations": "Fatal and hung WOW shutdown entry ordering was checked in source. The runtime cases exercise last-app exits and simulated service loss; Full and Win95 were not run."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "24f3ffee-de79-4ae4-a2f1-ff4206dbe0db",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

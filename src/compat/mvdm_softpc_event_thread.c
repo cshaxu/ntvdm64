@@ -6,16 +6,84 @@
 NTSYSAPI NTSTATUS NTAPI NtAlertThread(HANDLE ThreadHandle);
 
 mvdm_softpc_terminal_events mvdm_softpc_input_terminal_events;
-mvdm_softpc_console_exit mvdm_softpc_console_exit_request;
+mvdm_softpc_exit_handoff mvdm_softpc_exit_request;
+volatile LONG mvdm_softpc_exit_owner;
+BOOL mvdm_softpc_exit_original_ready;
+
+static DWORD exchange_exit(mvdm_softpc_exit_operation operation, DWORD *reply)
+{
+    mvdm_softpc_exit_handoff *exit = &mvdm_softpc_exit_request;
+    DWORD status;
+    if (!exit->request || !exit->completion) return ERROR_INVALID_STATE;
+    AcquireSRWLockExclusive(&exit->lock);
+    if (operation == MVDM_EXIT_CONSOLE_GROUP && exit->console_issued) {
+        *reply = exit->console_status;
+        status = ERROR_SUCCESS;
+    } else {
+        exit->operation = operation;
+        if (!SetEvent(exit->request) ||
+            WaitForSingleObject(exit->completion, INFINITE) != WAIT_OBJECT_0) {
+            status = GetLastError();
+        } else {
+            *reply = exit->status;
+            status = ERROR_SUCCESS;
+            if (operation == MVDM_EXIT_CONSOLE_GROUP) {
+                exit->console_status = *reply;
+                exit->console_issued = TRUE;
+            }
+        }
+    }
+    ReleaseSRWLockExclusive(&exit->lock);
+    return status;
+}
 
 DWORD mvdm_softpc_request_console_exit(void)
 {
-    const mvdm_softpc_console_exit *exit = &mvdm_softpc_console_exit_request;
-    if (!exit->request || !exit->completion) return ERROR_INVALID_STATE;
-    if (!SetEvent(exit->request) ||
-        WaitForSingleObject(exit->completion, INFINITE) != WAIT_OBJECT_0)
-        return GetLastError();
-    return exit->status;
+    DWORD reply, error;
+    if (!mvdm_softpc_input_terminal_events.console_close || !mvdm_softpc_exit_original_ready)
+        return ERROR_INVALID_STATE;
+    error = exchange_exit(MVDM_EXIT_CONSOLE_GROUP, &reply);
+    return error ? error : reply;
+}
+
+mvdm_softpc_exit_permission mvdm_softpc_wait_for_exit(void)
+{
+    const mvdm_softpc_terminal_events *events = &mvdm_softpc_input_terminal_events;
+    HANDLE waits[3] = {events->server, events->worker_close, events->console_close};
+    DWORD count = events->console_close ? 3 : 2;
+    LONG thread = (LONG)GetCurrentThreadId(), previous;
+    DWORD reply;
+
+    if (!events->worker_close) return MVDM_EXIT_UNMANAGED;
+    previous = InterlockedCompareExchange(&mvdm_softpc_exit_owner, thread, 0);
+    if (previous == thread) return MVDM_EXIT_WORKER_GRANTED;
+    if (!previous) {
+        DWORD wake;
+        (void)exchange_exit(MVDM_EXIT_PARTICIPANT, &reply);
+        wake = WaitForMultipleObjects(count, waits, FALSE, INFINITE);
+        if (wake == WAIT_OBJECT_0) return MVDM_EXIT_SERVICE_LOST;
+        if (wake == WAIT_OBJECT_0 + 1) return MVDM_EXIT_WORKER_GRANTED;
+        if (wake == WAIT_OBJECT_0 + 2) return MVDM_EXIT_CONSOLE_GRANTED;
+    }
+    /* Other threads and failed waits do not have permission to destroy
+     * original resources. The authorized cleanup owner ends the process. */
+    WaitForSingleObject(GetCurrentProcess(), INFINITE);
+    ExitProcess(ERROR_INVALID_STATE);
+}
+
+DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code)
+{
+    DWORD reply;
+    mvdm_softpc_exit_permission permission = mvdm_softpc_wait_for_exit();
+    /* This entry is the whole-WOW boundary and has no Console membership. */
+    if (permission == MVDM_EXIT_CONSOLE_GRANTED) ExitProcess(ERROR_INVALID_STATE);
+    if (permission != MVDM_EXIT_UNMANAGED) {
+        DWORD error = exchange_exit(permission == MVDM_EXIT_SERVICE_LOST ?
+            MVDM_EXIT_STATUS_ON_LOSS : MVDM_EXIT_STATUS, &reply);
+        if (error) ExitProcess(error);
+        if (reply == ERROR_INVALID_HANDLE) return reply;
+    }
+    return exit_code;
 }
 
 BOOL ntvdm_worker_lifecycle_input_terminal(void)

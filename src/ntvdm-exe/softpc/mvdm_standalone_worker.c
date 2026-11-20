@@ -210,7 +210,7 @@ static DWORD mvdm_standalone_worker_begin(void)
     worker_started=TRUE;
     return ERROR_SUCCESS;
 fail:
-    error=NtvdmAuthorizeExit(error);
+    error=ntvdm_worker_lifecycle_exit_result(error);
     (void)mvdm_standalone_worker_cleanup((int)error);
     return error;
 }
@@ -248,6 +248,6 @@ int main(int argc, char **argv)
     else
         result = (int)worker_session.completion_code;
 
-    result = (int)NtvdmAuthorizeExit((DWORD)result);
+    result = (int)ntvdm_worker_lifecycle_exit_result((DWORD)result);
     return mvdm_standalone_worker_cleanup(result);
 }

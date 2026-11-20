@@ -22,6 +22,8 @@ LRESULT WINAPI wow_user_call_window_procA(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_user_call_window_procW(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 VOID WINAPI wow_user_register_wow_exec(HANDLE);
 #include "wow_startup_exit.h"
+DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
+VOID WINAPI W32ExitWowProcess(DWORD exit_code);
 BOOL WINAPI wow_user_get_messageA(LPMSG, HWND, UINT, UINT);
 BOOL WINAPI wow_user_peek_messageA(LPMSG, HWND, UINT, UINT, UINT);
 BOOL WINAPI wow_user_get_messageW(LPMSG, HWND, UINT, UINT);

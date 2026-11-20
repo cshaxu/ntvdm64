@@ -30,19 +30,6 @@ DWORD WINAPI W32HungAppNotifyThread(UINT htask)
     return (DWORD)InterlockedCompareExchange(&handler_result, 0, 0);
 }
 
-void WINAPI ExitVDM(BOOL wow, ULONG task)
-{
-    (void)wow;
-    (void)task;
-    ExitProcess(ERROR_INVALID_FUNCTION);
-}
-
-DWORD WINAPI NtvdmAuthorizeExit(DWORD code)
-{
-    ExitProcess(ERROR_INVALID_FUNCTION);
-    return code;
-}
-
 int main(void)
 {
     handler_started = CreateEventW(NULL, FALSE, FALSE, NULL);

@@ -41,27 +41,28 @@ P83 [Console mouse](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-con
 C -8; five DOS cases.
 
 P90 [Console text](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-text-owner.json) removed seven.
-P108 [WOW hook and task wait](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-hook-owner.json) delivered C -2.
-P109 [Native publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-publication-owner.json) delivered B -1.
+P108 [WOW hook and task wait](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-hook-owner.json) closed two.
+P109 [Native publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-publication-owner.json).
 P110 [Input terminal signals](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-input-terminal-owner.json) delivered C -1.
 P111 [CCPU thread exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-ccpu-thread-exit-owner.json) delivered C -1.
-P126 [C header closure](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-c-header-closure.json) delivered C -2.
+P126 [C header closure](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-c-header-closure.json) closed two.
 P127 [CPU start ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-cpu-start-owner.json) delivered C -1.
 P128 [PIC import owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-interrupt-export-owner.json).
-P129 [WOW trace module](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-trace-module-owner.json) closed B0036.
+P129 [WOW trace module](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-trace-module-owner.json).
 P130 [Resource receipts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-receipt-owner.json).
-P131 [Resource scope](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-resource-scope-owner.json) removed B0025/B0026.
+P131 [Resource scope](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-resource-scope-owner.json).
 P132 [VM IRQ owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-notification-owner.json).
 P133 [VM wake and input owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-wake-owner.json).
-P134 [Thread binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-thread-binding-owner.json) removed B0023/B0024 and three VDMREDIR providers.
+P134 [Thread binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-thread-binding-owner.json).
 P135 [WOW close result](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-close-result-owner.json).
-P136 [B routes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-b-routes.json) removed B0010/B0021.
+P136 [B routes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-b-routes.json).
 P137 [WOW startup ticket](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-start-ticket-owner.json).
 P138 [Pending WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-pending-exit-owner.json).
 P139 [WOW local retirement](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-local-retirement-owner.json).
-P140 [Redundant WOWEXEC](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-noop-exit-owner.json) closed C0500.
-P141 [Console exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-exit-owner.json) removed C0321.
-Delivered: B 0 known calls; C 6 calls, 1 runtime slot, 1 header, 1 image.
+P140 [Redundant WOWEXEC](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-noop-exit-owner.json).
+P141 [Console exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-exit-owner.json).
+P142 [Whole WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-exit-owner.json) closed C0460.
+Delivered: B 0 known calls; C 5 calls, 1 runtime slot, 1 header, 1 image.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moved page-domain identity and cleanup to B and removed three F calls.

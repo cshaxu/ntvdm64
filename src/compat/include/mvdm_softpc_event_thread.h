@@ -12,15 +12,34 @@ typedef struct mvdm_softpc_terminal_events {
 extern mvdm_softpc_terminal_events mvdm_softpc_input_terminal_events;
 BOOL ntvdm_worker_lifecycle_input_terminal(void);
 
-/* Borrowed host-local handles remain valid until original execution stops.
- * The composing worker submits the existing Console-group transaction and
- * publishes its status before signalling completion. */
-typedef struct mvdm_softpc_console_exit {
+/* Existing original-host and worker shutdown meet through native signals.
+ * The worker observes the operation and owns the product-specific response. */
+typedef enum mvdm_softpc_exit_operation {
+    MVDM_EXIT_CONSOLE_GROUP,
+    MVDM_EXIT_PARTICIPANT,
+    MVDM_EXIT_STATUS,
+    MVDM_EXIT_STATUS_ON_LOSS
+} mvdm_softpc_exit_operation;
+typedef struct mvdm_softpc_exit_handoff {
     HANDLE request, completion;
+    mvdm_softpc_exit_operation operation;
     DWORD status;
-} mvdm_softpc_console_exit;
-extern mvdm_softpc_console_exit mvdm_softpc_console_exit_request;
+    SRWLOCK lock;
+    BOOL console_issued;
+    DWORD console_status;
+} mvdm_softpc_exit_handoff;
+extern mvdm_softpc_exit_handoff mvdm_softpc_exit_request;
+extern volatile LONG mvdm_softpc_exit_owner;
+extern BOOL mvdm_softpc_exit_original_ready;
 DWORD mvdm_softpc_request_console_exit(void);
+typedef enum mvdm_softpc_exit_permission {
+    MVDM_EXIT_UNMANAGED,
+    MVDM_EXIT_WORKER_GRANTED,
+    MVDM_EXIT_SERVICE_LOST,
+    MVDM_EXIT_CONSOLE_GRANTED
+} mvdm_softpc_exit_permission;
+mvdm_softpc_exit_permission mvdm_softpc_wait_for_exit(void);
+DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 
 /* Preserve the original SoftPC event-worker cancellation direction, while
  * making its terminal lifetime explicit for the one-process session model.

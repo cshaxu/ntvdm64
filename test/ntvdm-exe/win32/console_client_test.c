@@ -323,12 +323,18 @@ static DWORD WINAPI request_console_group_exit(void *context)
     return mvdm_softpc_request_console_exit();
 }
 
+static DWORD WINAPI natural_wow_exit(void *context)
+{
+    (void)context;
+    return NtvdmAuthorizeExit(131);
+}
+
 static DWORD WINAPI natural_exit(void *context)
 {
     (void)context;
     ntvdm_worker_lifecycle_authorize_exit();
     ntvdm_worker_lifecycle_authorize_exit(); /* Original terminate -> host close. */
-    return NtvdmAuthorizeExit(131);
+    return ntvdm_worker_lifecycle_exit_result(131);
 }
 int main(int argc,char **argv)
 {
@@ -392,6 +398,35 @@ int main(int argc,char **argv)
     }
     hang_close=argc==2 && !strcmp(argv[1],"--close-hang");
     fault_reported=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(fault_reported);
+    if(argc==2 && (!strcmp(argv[1],"--natural-wow") || !strcmp(argv[1],"--natural-wow-loss"))) {
+        BOOL lost=!strcmp(argv[1],"--natural-wow-loss");
+        HANDLE thread;
+        DWORD result;
+        lifecycle_wow=TRUE;
+        CHECK(!ntvdm_worker_lifecycle_begin(&owner,FALSE));
+        thread=CreateThread(NULL,0,natural_wow_exit,NULL,0,NULL);
+        CHECK(thread && WaitForSingleObject(fault_reported,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(thread,0)==WAIT_TIMEOUT && !vm_frontend_closes);
+        CHECK(SetEvent(lost ? broker_lifetime : broker_shutdown));
+        CHECK(WaitForSingleObject(thread,5000)==WAIT_OBJECT_0);
+        CHECK(GetExitCodeThread(thread,&result) && result==(lost ? ERROR_INVALID_HANDLE : 131));
+        CHECK(fault_reports==1 && !vm_frontend_closes);
+        CHECK(!lost || VdmExitCode==ERROR_INVALID_HANDLE);
+        CloseHandle(thread);ntvdm_worker_lifecycle_end();
+        puts("PASS whole-WOW authorization preserves exit status and uses no character frontend");
+        return 0;
+    }
+    if(argc==2 && !strcmp(argv[1],"--natural-console-ready")) {
+        HANDLE thread;
+        CHECK(!ntvdm_worker_lifecycle_begin(&owner,TRUE));
+        CHECK(!ntvdm_worker_lifecycle_activate());
+        thread=CreateThread(NULL,0,natural_exit,NULL,0,NULL);
+        CHECK(thread && WaitForSingleObject(fault_reported,5000)==WAIT_OBJECT_0);
+        CHECK(!vm_frontend_closes && WaitForSingleObject(thread,0)==WAIT_TIMEOUT);
+        CHECK(SetEvent(broker_console_close));
+        CHECK(WaitForSingleObject(thread,10000)==WAIT_TIMEOUT);
+        CHECK(!"Console control did not run original cleanup");
+    }
     if(argc==2 && (!strcmp(argv[1],"--natural-exit") || !strcmp(argv[1],"--natural-loss") || !strcmp(argv[1],"--natural-console"))) {
         HANDLE thread;DWORD result;
         BOOL loss=!strcmp(argv[1],"--natural-loss");

@@ -31,7 +31,12 @@
 #undef _X86_
 #line 30
 #include "wowfax.h"
-extern VOID WINAPI W32ExitWowProcess(DWORD exit_code);
+VOID WINAPI W32ExitWowProcess(DWORD exit_code)
+{
+    exit_code = NtvdmAuthorizeExit(exit_code);
+    ExitVDM(WOWVDM, ALL_TASKS);
+    ExitProcess(exit_code);
+}
 #include "wow_idle_hook_binding.h"
 #include <compat/include/wow_registry.h>
 

@@ -1037,7 +1037,11 @@ The same registration covers WOW's five whole-process exits in wkman.c and
 wow32.c: the parent NtvdmAuthorizeExit export preserves their selected exit code
 unless the service has died (ERROR_INVALID_HANDLE). Original ExitVDM and
 ExitProcess stay in their original order; no single-task retirement is
-intercepted. ExitKernel/FatalExit copy the argument and release its guest alias
+intercepted. S14 P142 places the combined ExitVDM/ExitProcess sequence in
+wkman.c. The WOW path uses B to wait for the authenticated terminal signals
+and receive the existing worker status. DOS keeps VM quiescence on the original
+cleanup thread, which can already own the recursive ICA lock.
+ExitKernel/FatalExit copy the argument and release its guest alias
 before the blocking service call. Original OpenNT base/mvdm/wow32/wkman.c hash:
 56BE1989F2BC3ACAFFCFA6345B20E38F5E7312BADF03AF04D4565F8F4A489AC9;
 wow32.c hash: 1DFE9900E6DA3BF0E2984C3DF42BDD155B177CFE7707BB24E1324037147D292A.
