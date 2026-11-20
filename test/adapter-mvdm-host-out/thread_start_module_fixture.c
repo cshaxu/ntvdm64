@@ -1,9 +1,9 @@
 #include "compat/include/thread_start_compat.h"
-#include "common/worker-thread/session.h"
+struct session;
+struct session *__cdecl session_thread_current(void);
 
-/* The real F loader entry must install this DLL's own B binding before
- * delegating. Original redirector initialization is a controlled witness;
- * this case verifies the module boundary, not named-pipe initialization. */
+/* The loader still enters original redirector initialization. The DLL uses
+ * the outer fixture's exported compatibility entry and bound host context. */
 static int attached;
 BOOLEAN VrDllInitialize(PVOID module, ULONG reason, PCONTEXT context)
 {

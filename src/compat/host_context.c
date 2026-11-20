@@ -1,9 +1,12 @@
 #include "include/host_context.h"
+#include <intrin.h>
 #include <string.h>
 #include <stdlib.h>
 
 static __declspec(thread) compat_host_context *current_context;
 static __declspec(thread) compat_host_context *escape_context;
+static __declspec(thread) uint32_t thread_owner;
+static __declspec(thread) int thread_finishing;
 
 int compat_host_context_valid(const compat_host_context *context)
 {
@@ -27,6 +30,125 @@ int compat_host_context_unbind(compat_host_context *context)
     if (context == NULL || current_context != context) return 0;
     current_context = NULL;
     return 1;
+}
+
+uint32_t compat_host_thread_count(const compat_host_context *context)
+{
+    return (uint32_t)_InterlockedCompareExchange((volatile long *)&context->threads.count, 0, 0);
+}
+
+uint32_t compat_host_thread_owner_count(const compat_host_context *context, uint32_t owner)
+{
+    if (owner > COMPAT_HOST_THREAD_ORIGINAL_WORKER) return 0;
+    return (uint32_t)_InterlockedCompareExchange(
+        (volatile long *)&context->threads.owner_count[owner], 0, 0);
+}
+
+int compat_host_thread_register(compat_host_context *context,
+    compat_host_thread_hook_fn bind, compat_host_thread_hook_fn unbind, void *argument)
+{
+    uint32_t index;
+    if (!compat_host_context_valid(context) || context->state != COMPAT_HOST_CONTEXT_ACTIVE ||
+        context->threads.hook_count > COMPAT_HOST_THREAD_HOOK_LIMIT ||
+        !bind || !unbind) return 0;
+    for (index = 0; index < context->threads.hook_count; ++index) {
+        compat_host_thread_hook *hook = &context->threads.hooks[index];
+        if (hook->bind == bind && hook->unbind == unbind && hook->context == argument)
+            return 1;
+    }
+    if (context->threads.hook_count == COMPAT_HOST_THREAD_HOOK_LIMIT) return 0;
+    context->threads.hooks[index].bind = bind;
+    context->threads.hooks[index].unbind = unbind;
+    context->threads.hooks[index].context = argument;
+    ++context->threads.hook_count;
+    return 1;
+}
+
+int compat_host_thread_unregister(compat_host_context *context,
+    compat_host_thread_hook_fn bind, compat_host_thread_hook_fn unbind, void *argument)
+{
+    uint32_t index;
+    if (!compat_host_context_valid(context) ||
+        context->threads.hook_count > COMPAT_HOST_THREAD_HOOK_LIMIT || !bind || !unbind) return 0;
+    for (index = 0; index < context->threads.hook_count; ++index) {
+        compat_host_thread_hook *hook = &context->threads.hooks[index];
+        if (hook->bind == bind && hook->unbind == unbind && hook->context == argument) {
+            uint32_t last = --context->threads.hook_count;
+            *hook = context->threads.hooks[last];
+            memset(&context->threads.hooks[last], 0, sizeof(*hook));
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static void release_thread_binding(compat_host_context *context)
+{
+    (void)compat_host_context_unbind(context);
+    _InterlockedDecrement(&context->threads.owner_count[thread_owner - 1]);
+    _InterlockedDecrement(&context->threads.count);
+    thread_owner = 0;
+}
+
+int compat_host_thread_bind(compat_host_context *context, uint32_t owner, const char *source)
+{
+    uint32_t index;
+    if (owner > COMPAT_HOST_THREAD_ORIGINAL_WORKER || !context ||
+        context->state != COMPAT_HOST_CONTEXT_ACTIVE ||
+        context->threads.hook_count > COMPAT_HOST_THREAD_HOOK_LIMIT ||
+        compat_host_thread_count(context) > INT32_MAX || !compat_host_context_bind(context))
+        return 0;
+    _InterlockedIncrement(&context->threads.count);
+    _InterlockedIncrement(&context->threads.owner_count[owner]);
+    thread_owner = owner + 1;
+    if (owner == COMPAT_HOST_THREAD_ORIGINAL_WORKER) {
+        char *name = context->threads.original_worker_source;
+        memset(name, 0, COMPAT_HOST_THREAD_SOURCE_BYTES);
+        for (index = 0; source && index + 1 < COMPAT_HOST_THREAD_SOURCE_BYTES && source[index]; ++index)
+            name[index] = source[index];
+    }
+    for (index = 0; index < context->threads.hook_count; ++index) {
+        compat_host_thread_hook *hook = &context->threads.hooks[index];
+        if (!hook->bind(hook->context)) {
+            while (index != 0) {
+                hook = &context->threads.hooks[--index];
+                if (!hook->unbind(hook->context)) return 0;
+            }
+            release_thread_binding(context);
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int compat_host_thread_unbind(compat_host_context *context)
+{
+    uint32_t index;
+    if (!context || current_context != context || !thread_owner) return 0;
+    for (index = context->threads.hook_count; index != 0; --index) {
+        compat_host_thread_hook *hook = &context->threads.hooks[index - 1];
+        if (!hook->unbind(hook->context)) return 0;
+    }
+    release_thread_binding(context);
+    return 1;
+}
+
+int compat_host_thread_finish(compat_host_context *context)
+{
+    int result = 0;
+    if (!context || current_context != context || thread_finishing) return 0;
+    thread_finishing = 1;
+    __try {
+        result = compat_host_thread_unbind(context);
+    } __finally {
+        thread_finishing = 0;
+    }
+    return result;
+}
+
+int compat_host_thread_is_finishing(void)
+{
+    return thread_finishing;
 }
 
 int compat_host_escape_arm(compat_host_context *context, jmp_buf *stack, uint32_t *result)

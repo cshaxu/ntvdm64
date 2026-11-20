@@ -7,7 +7,6 @@
  */
 
 #include <windows.h>
-#include "common/worker-thread/initialize.h"
 
 extern BOOLEAN VrDllInitialize(PVOID DllHandle, ULONG Reason, PCONTEXT Context);
 
@@ -18,6 +17,5 @@ mvdm_vdmredir_dll_entry(
     LPVOID reserved
     )
 {
-    if (reason == DLL_PROCESS_ATTACH && !worker_thread_initialize()) return FALSE;
     return VrDllInitialize(instance, reason, reserved) ? TRUE : FALSE;
 }

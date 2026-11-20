@@ -1,20 +1,20 @@
 #ifndef WOW_USER_SESSION_BINDING_H
 #define WOW_USER_SESSION_BINDING_H
 
-#include "ntvdm-exe/session/session.h"
-#include "compat/include/wow_user_runtime.h"
+#include "host_context.h"
+#include "wow_user_runtime.h"
 
 /* ADAPTER-WOW-049's bridge to the worker's existing per-thread session
  * lifecycle. It establishes a USER binding for the already-bound worker
  * thread and every subsequently created original worker thread. It neither
  * creates a session nor selects/initializes a WOW task. */
 typedef struct wow_user_session_binding {
-    session *session;
+    compat_host_context *host;
     wow_user_runtime *runtime;
     BOOL registered;
 } wow_user_session_binding;
 
-BOOL WINAPI wow_user_session_attach(wow_user_session_binding *, session *,
+BOOL WINAPI wow_user_session_attach(wow_user_session_binding *, compat_host_context *,
     wow_user_runtime *);
 /* Stop thread producers and join other bound threads first. Failed task or
  * process release retains this registration for a same-owner retry. */
@@ -22,6 +22,6 @@ BOOL WINAPI wow_user_session_detach(wow_user_session_binding *);
 
 /* Narrow parent-ABI query for a late-loaded WOW32 target.  It prevents the
  * DLL from importing or dereferencing the worker's session object. */
-#include "compat/include/wow_worker_state.h"
+#include "wow_worker_state.h"
 
 #endif

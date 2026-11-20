@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include "ntvdm-exe/session/session.h"
-#include "ntvdm-exe/wow/include/wow_user_session_binding.h"
+#include "compat/include/wow_user_session_binding.h"
 
 static session owner;
 static wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
@@ -68,7 +68,7 @@ int __cdecl main(void)
     session_initialize(&owner, 42040u);
     CHECK(session_activate(&owner));
     CHECK(session_thread_bind_owned(&owner, SESSION_THREAD_BINDING_SOFTPC_ENTRY));
-    CHECK(wow_user_session_attach(&registration, &owner, &runtime));
+    CHECK(wow_user_session_attach(&registration, &owner.host_context, &runtime));
     CHECK(wow_user_runtime_current() != NULL);
     child_ready = CreateEventW(NULL, TRUE, FALSE, NULL);
     child_release = CreateEventW(NULL, TRUE, FALSE, NULL);
@@ -79,7 +79,7 @@ int __cdecl main(void)
         CHECK(WaitForSingleObject(child_ready, 5000) == WAIT_OBJECT_0);
         CHECK(!wow_user_session_detach(&registration));
         CHECK(GetLastError() == ERROR_BUSY && registration.registered);
-        CHECK(wow_user_runtime_current() != NULL && owner.thread_hook_count == 1);
+        CHECK(wow_user_runtime_current() != NULL && owner.host_context.threads.hook_count == 1);
         CHECK(SetEvent(child_release));
         CHECK(WaitForSingleObject(thread, 5000) == WAIT_OBJECT_0);
         CHECK(GetExitCodeThread(thread, &exit_code) && exit_code == 0);
@@ -106,9 +106,9 @@ int __cdecl main(void)
     CHECK(!wow_user_session_detach(&registration));
     CHECK(GetLastError() == ERROR_BUSY);
     CHECK(retirement_calls == 1);
-    CHECK(registration.registered && registration.session == &owner &&
+    CHECK(registration.registered && registration.host == &owner.host_context &&
         registration.runtime == &runtime);
-    CHECK(owner.thread_hook_count == 1);
+    CHECK(owner.host_context.threads.hook_count == 1);
     CHECK(wow_user_runtime_current() != NULL &&
         wow_user_runtime_current()->runtime == &runtime);
     CHECK(session_thread_current() == &owner);
@@ -130,19 +130,19 @@ int __cdecl main(void)
     CHECK(session_thread_unbind(&owner));
     CHECK(retirement_calls == 3);
     CHECK(session_thread_current() == NULL && wow_user_runtime_current() == NULL);
-    CHECK(owner.binding_count == 0 && registration.registered);
+    CHECK(owner.host_context.threads.count == 0 && registration.registered);
     CHECK(session_thread_bind_owned(&owner, SESSION_THREAD_BINDING_SOFTPC_ENTRY));
     refuse_disposal = TRUE;
     CHECK(!wow_user_session_detach(&registration));
     CHECK(GetLastError() == ERROR_BUSY && disposal_calls == 1);
     CHECK(registration.registered && runtime.lifecycle == &task_identity);
-    CHECK(owner.thread_hook_count == 1 && wow_user_runtime_current() == NULL);
+    CHECK(owner.host_context.threads.hook_count == 1 && wow_user_runtime_current() == NULL);
     CHECK(session_thread_current() == &owner);
     refuse_disposal = FALSE;
     CHECK(wow_user_session_detach(&registration));
     CHECK(disposal_calls == 2 && runtime.lifecycle == NULL && runtime.lifecycle_ops == NULL);
     CHECK(retirement_calls == 3);
-    CHECK(!registration.registered && owner.thread_hook_count == 0);
+    CHECK(!registration.registered && owner.host_context.threads.hook_count == 0);
     CHECK(wow_user_runtime_current() == NULL);
     CHECK(session_thread_unbind(&owner));
     CHECK(session_dispose(&owner));

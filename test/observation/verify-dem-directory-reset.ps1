@@ -29,7 +29,7 @@ if(!$extraClosure.Success){throw 'Selected fixture additional closure absent'}
 $dependencies=@('obj/tests/ccpu_bounded_execution_fixture_seams.obj','obj/tests/ccpu_host_fixture_seams.obj')+
     $closure.Groups[1].Value.Split(' ')+$extraClosure.Groups[1].Value.Trim().Split(' ')+@('common-root.lib','common-rpc.lib', 'lib-rpc.lib',
     'lib-pipe.lib','lib-process-observation.lib','lib-file.lib','common-codec.lib','common-console.lib',
-    'common-worker-thread.lib','lib-thread.lib','lib-process-hook.lib','lib-process-image.lib',
+    'compat-worker-thread.lib','lib-thread.lib','lib-process-hook.lib','lib-process-image.lib',
     'lib-handle.lib','lib-process-launch.lib','lib-crt-compat.lib')
 # Refresh the selected fixture closure: a product-only build does not relink
 # every fixture archive, and existing files alone do not prove current inputs.

@@ -8,6 +8,8 @@ struct guest_memory_lease_context;
 struct mvdm_mouse_bridge;
 
 #define COMPAT_HOST_CLEANUP_LIMIT 8u
+#define COMPAT_HOST_THREAD_HOOK_LIMIT 8u
+#define COMPAT_HOST_THREAD_SOURCE_BYTES 64u
 #define COMPAT_MVDM_SYSTEM_ROOT_BYTES 1024u
 
 typedef void (*compat_host_cleanup_fn)(void *);
@@ -15,6 +17,27 @@ typedef struct compat_host_cleanup {
     compat_host_cleanup_fn function;
     void *context;
 } compat_host_cleanup;
+
+enum compat_host_thread_owner {
+    COMPAT_HOST_THREAD_UNSPECIFIED,
+    COMPAT_HOST_THREAD_MACHINE_ENTRY,
+    COMPAT_HOST_THREAD_ORIGINAL_WORKER
+};
+
+typedef int (*compat_host_thread_hook_fn)(void *context);
+typedef struct compat_host_thread_hook {
+    compat_host_thread_hook_fn bind;
+    compat_host_thread_hook_fn unbind;
+    void *context;
+} compat_host_thread_hook;
+
+typedef struct compat_host_thread_bindings {
+    uint32_t hook_count;
+    volatile long count;
+    volatile long owner_count[3];
+    char original_worker_source[COMPAT_HOST_THREAD_SOURCE_BYTES];
+    compat_host_thread_hook hooks[COMPAT_HOST_THREAD_HOOK_LIMIT];
+} compat_host_thread_bindings;
 
 /* Embedded by the product owner. The owner opens/closes resource registration
  * and invokes disposal only after its threads have detached. There is no task
@@ -49,6 +72,7 @@ typedef struct compat_host_context {
     uint32_t presentation_text_rows;
     uint32_t presentation_text_bytes;
     compat_host_cleanup cleanups[COMPAT_HOST_CLEANUP_LIMIT];
+    compat_host_thread_bindings threads;
     char mvdm_system_root[COMPAT_MVDM_SYSTEM_ROOT_BYTES];
 } compat_host_context;
 
@@ -56,6 +80,16 @@ compat_host_context *__cdecl compat_host_context_current(void);
 int compat_host_context_valid(const compat_host_context *context);
 int compat_host_context_bind(compat_host_context *context);
 int compat_host_context_unbind(compat_host_context *context);
+uint32_t compat_host_thread_count(const compat_host_context *context);
+uint32_t compat_host_thread_owner_count(const compat_host_context *context, uint32_t owner);
+int compat_host_thread_register(compat_host_context *context,
+    compat_host_thread_hook_fn bind, compat_host_thread_hook_fn unbind, void *argument);
+int compat_host_thread_unregister(compat_host_context *context,
+    compat_host_thread_hook_fn bind, compat_host_thread_hook_fn unbind, void *argument);
+int compat_host_thread_bind(compat_host_context *context, uint32_t owner, const char *source);
+int compat_host_thread_unbind(compat_host_context *context);
+int compat_host_thread_finish(compat_host_context *context);
+int compat_host_thread_is_finishing(void);
 /* Borrow the initiating thread's stack and result until it disarms. */
 int compat_host_escape_arm(compat_host_context *context, jmp_buf *stack, uint32_t *result);
 void compat_host_escape_disarm(compat_host_context *context);

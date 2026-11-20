@@ -1,5 +1,5 @@
 #include <windows.h>
-#include "common/worker-thread/initialize.h"
+#include "compat/include/thread_lifecycle.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -98,7 +98,7 @@ int main(int argc, char **argv)
     if (opennt_create_cdecl_thread_named(NULL, 0, bound_worker, NULL, 0, NULL,
             "uninitialized") != NULL || GetLastError() != ERROR_INVALID_STATE)
         return 91;
-    if (!worker_thread_initialize() || !worker_thread_initialize()) return 90;
+    if (!opennt_thread_initialize() || !opennt_thread_initialize()) return 90;
     puts("THREAD_LIFECYCLE uninitialized_rejected=1 repeated_install=1");
     session_initialize(&instance, 1u);
     if (!session_activate(&instance)) return 1;
@@ -191,7 +191,7 @@ int main(int argc, char **argv)
         if (!run || run(&instance) || session_thread_current() != &instance) return 94;
         if (!FreeLibrary(module) || !session_thread_unbind(&instance) ||
                 !session_dispose(&instance)) return 95;
-        puts("THREAD_MODULE actual_redirector_entry=1 separate_binding=1 same_owner=1");
+        puts("THREAD_MODULE actual_redirector_entry=1 shared_binding=1 same_owner=1");
     }
     return 0;
 }

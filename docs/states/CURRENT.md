@@ -35,14 +35,7 @@ P82 [USER tail](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-user-ta
 moved three providers and two headers into B, eliminating 24 additional IDs.
 
 P79 [inner lifecycle authority](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-liveness-owner.json)
-moves the actual worker-active query and sole lifecycle state into B; removes
-F session's duplicate state and the B registration flag. Product policy stays F.
-Ordinal269 and one NTVDM TLS are preserved. Cached full build, dual11/22 hashes,
-session/USER/real CCPU/terminal tests, Win16 dialog8 phases and eight A/B graphs
-passed. Package `4ad1ddc2-9bd7-4af8-b282-747d801bbd79`; mirror delta0 points/0 lines.
-Three outer consumer dependencies removed; ledger182/386 unchanged until whole
-chains migrate. Final governance and enclosing commit/push are the receipt.
-
+moved the worker-active query and sole lifecycle state to B. Ordinal 269 and one NTVDM TLS were preserved.
 
 P83 [Console mouse ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-mouse-owner.json)
 moved mouse adaptation into B; C -8. Five isolated DOS mouse cases passed.
@@ -60,7 +53,8 @@ P130 [Resource receipts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s1
 P131 [Resource scope](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-resource-scope-owner.json) closed B0025/B0026.
 P132 [VM IRQ owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-notification-owner.json) moved the PIC notification operations to B; B0021 stays open.
 P133 [VM wake and input owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-wake-owner.json) moved the queue to B. B0021 stays open.
-Delivered: B 4 known calls; C 11 open (10 functions, 1 image).
+P134 [Thread binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-thread-binding-owner.json) removed B0023/B0024 and three VDMREDIR F implementations.
+Delivered: B 2 known calls; C 11 open (10 functions, 1 image).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moves the page-domain identity and cleanup into B, removing the product header

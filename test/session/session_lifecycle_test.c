@@ -84,20 +84,20 @@ static int check_binding_rollback(void)
         return 20;
     second.fail_bind = 1;
     if (session_thread_bind(&owner) || session_thread_current() ||
-        compat_host_context_current() || owner.binding_count || first.unbinds != 1u)
+        compat_host_context_current() || owner.host_context.threads.count || first.unbinds != 1u)
         return 21;
     first.fail_unbind = 1;
     if (session_thread_bind(&owner) || session_thread_current() != &owner ||
         compat_host_context_current() != &owner.host_context ||
-        owner.binding_count != 1 || session_dispose(&owner)) return 22;
+        owner.host_context.threads.count != 1 || session_dispose(&owner)) return 22;
     first.fail_unbind = 0;
     if (!session_thread_unbind(&owner) || session_thread_current() ||
-        compat_host_context_current() || owner.binding_count) return 23;
+        compat_host_context_current() || owner.host_context.threads.count) return 23;
     second.fail_bind = 0;
     if (!session_thread_bind(&owner)) return 24;
     second.fail_unbind = 1;
     if (session_thread_unbind(&owner) || session_thread_current() != &owner ||
-        owner.binding_count != 1) return 25;
+        owner.host_context.threads.count != 1) return 25;
     second.fail_unbind = 0;
     if (!session_thread_unbind(&owner) || !session_dispose(&owner)) return 26;
     return 0;

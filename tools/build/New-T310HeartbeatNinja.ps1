@@ -35,7 +35,6 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 $sources = @(
     'src/compat/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
-    'src/common/worker-thread/bridge.c',
     'src/compat/mvdm_softpc_event_thread.c',
     'test/adapter-mvdm-host-out/nt_thread_alert_compat_fixture.c',
     'test/adapter-mvdm-host-out/thread_start_session_fixture.c',
@@ -63,7 +62,7 @@ foreach ($source in $sources) {
     $graph.Add('build obj/' + $name + '.obj: cc ' + (NinjaPath (Join-Path $root $source)))
 }
 $graph.Add('build nt-thread-alert-fixture.exe: link obj/nt_thread_alert_compat_fixture.obj')
-$graph.Add('build thread-start-session-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/host_context.obj obj/bridge.obj obj/thread_start_session_fixture.obj obj/thread.obj obj/thread_start.obj')
+$graph.Add('build thread-start-session-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/host_context.obj obj/thread_start_session_fixture.obj obj/thread.obj obj/thread_start.obj')
 $graph.Add('build softpc-event-thread-shutdown-fixture.exe: link obj/mvdm_softpc_event_thread.obj obj/softpc_event_thread_shutdown_fixture.obj')
 $graph.Add('build verify: run nt-thread-alert-fixture.exe')
 $graph.Add('build verify-thread-session: run thread-start-session-fixture.exe')

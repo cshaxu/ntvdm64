@@ -1127,7 +1127,7 @@ fails explicitly. Internal/template producer wiring remains pending.
 
 `src/compat/wow_user_runtime.c` owns the single USER TLS binding and lock,
 compiled once into NTVDM. WOW32 imports those parent operations rather than
-linking a second copy. `ntvdm-exe/wow/wow_user_session_binding.c` owns session
+linking a second copy. `compat/wow_user_session_binding.c` owns session
 attachment and the outer retirement timing. It invokes the loaded WOW module's
 explicit lifecycle unbind/dispose entries; only successful task retirement
 releases the B binding. B stores no retirement callbacks and invokes no

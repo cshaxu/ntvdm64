@@ -8,8 +8,7 @@
 #include "compat/include/host_context.h"
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
-#define SESSION_ABI_VERSION UINT32_C(14)
-#define SESSION_MAX_THREAD_HOOKS 8u
+#define SESSION_ABI_VERSION UINT32_C(15)
 #define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
 #define SESSION_FIRMWARE_ROOT_BYTES COMPAT_MVDM_SYSTEM_ROOT_BYTES
 
@@ -44,9 +43,13 @@ enum session_dispose_reason {
 
 /* Source-owned categories for the existing per-thread session binding.  They
  * are host-local diagnostics only, never guest/MVDM values. */
-#include "common/worker-thread/session.h"
+enum session_thread_binding_owner {
+    SESSION_THREAD_BINDING_UNSPECIFIED = COMPAT_HOST_THREAD_UNSPECIFIED,
+    SESSION_THREAD_BINDING_SOFTPC_ENTRY = COMPAT_HOST_THREAD_MACHINE_ENTRY,
+    SESSION_THREAD_BINDING_ORIGINAL_WORKER = COMPAT_HOST_THREAD_ORIGINAL_WORKER
+};
 
-#define SESSION_WORKER_SOURCE_MAX 64u
+#define SESSION_WORKER_SOURCE_MAX COMPAT_HOST_THREAD_SOURCE_BYTES
 
 typedef struct session_binding_diagnostic {
     uint32_t total;
@@ -56,16 +59,8 @@ typedef struct session_binding_diagnostic {
     char original_worker_source[SESSION_WORKER_SOURCE_MAX];
 } session_binding_diagnostic;
 
-typedef int (*session_thread_bind_fn)(void *context);
-/* A failed unbind retains the thread/session binding for cleanup and retry.
- * Hooks must accept repeated unbind after their own successful retirement. */
-typedef int (*session_thread_unbind_fn)(void *context);
-
-typedef struct session_thread_hook {
-    session_thread_bind_fn bind;
-    session_thread_unbind_fn unbind;
-    void *context;
-} session_thread_hook;
+typedef compat_host_thread_hook_fn session_thread_bind_fn;
+typedef compat_host_thread_hook_fn session_thread_unbind_fn;
 
 typedef struct session {
     jmp_buf termination_escape;
@@ -76,14 +71,7 @@ typedef struct session {
     uint32_t completion_code;
     uint32_t cancellation_reason;
     uint32_t machine_backend;
-    uint32_t thread_hook_count;
-    volatile long binding_count;
-    volatile long binding_softpc_entry_count;
-    volatile long binding_original_worker_count;
-    volatile long binding_unspecified_count;
-    char original_worker_source[SESSION_WORKER_SOURCE_MAX];
     compat_host_context host_context;
-    session_thread_hook thread_hooks[SESSION_MAX_THREAD_HOOKS];
     /* Worker-local endpoint of the authenticated run16 I/O channel. */
     void *console_client;
     guest_memory_lease_context guest_memory_lease;

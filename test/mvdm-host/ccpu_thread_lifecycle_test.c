@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <windows.h>
 
-#include "common/worker-thread/initialize.h"
+#include "compat/include/thread_lifecycle.h"
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 
@@ -53,7 +53,7 @@ int main(void)
     static const unsigned char guest_exit[] = { 0xd6, 0xfe };
 
     session_initialize(&owner, 420u);
-    if (!worker_thread_initialize() || !session_activate(&owner) ||
+    if (!opennt_thread_initialize() || !session_activate(&owner) ||
         !session_thread_bind(&owner) ||
         setup_global_data_ptr() == NULL)
         return 1;

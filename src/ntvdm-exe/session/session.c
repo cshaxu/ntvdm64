@@ -1,18 +1,8 @@
 #include "session.h"
 
-#include <intrin.h>
 #include <stdlib.h>
 #include <stddef.h>
 #include <string.h>
-
-static __declspec(thread) uint32_t thread_binding_owner;
-static __declspec(thread) int thread_finishing;
-
-static uint32_t session_binding_count(const session *instance)
-{
-    return (uint32_t)_InterlockedCompareExchange(
-        (volatile long *)&instance->binding_count, 0, 0);
-}
 
 void session_initialize(session *instance, uint32_t identity)
 {
@@ -33,8 +23,8 @@ int session_valid(const session *instance)
         instance->identity != 0u && instance->host_context.state <= SESSION_STATE_COMPLETED &&
         instance->machine_backend <= SESSION_MACHINE_BACKEND_SOFTPC &&
         compat_host_context_valid(&instance->host_context) &&
-        instance->thread_hook_count <= SESSION_MAX_THREAD_HOOKS &&
-        session_binding_count(instance) <= INT32_MAX &&
+        instance->host_context.threads.hook_count <= COMPAT_HOST_THREAD_HOOK_LIMIT &&
+        compat_host_thread_count(&instance->host_context) <= INT32_MAX &&
         guest_memory_lease_context_valid(&instance->guest_memory_lease);
 }
 
@@ -65,40 +55,15 @@ uint32_t session_machine_backend(const session *instance)
 int session_register_thread_hook(session *instance, session_thread_bind_fn bind,
     session_thread_unbind_fn unbind, void *context)
 {
-    uint32_t index;
-    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
-        bind == NULL || unbind == NULL) return 0;
-    for (index = 0u; index < instance->thread_hook_count; ++index) {
-        session_thread_hook *hook = &instance->thread_hooks[index];
-        if (hook->bind == bind && hook->unbind == unbind &&
-            hook->context == context) return 1;
-    }
-    if (instance->thread_hook_count == SESSION_MAX_THREAD_HOOKS) return 0;
-    instance->thread_hooks[instance->thread_hook_count].bind = bind;
-    instance->thread_hooks[instance->thread_hook_count].unbind = unbind;
-    instance->thread_hooks[instance->thread_hook_count].context = context;
-    ++instance->thread_hook_count;
-    return 1;
+    return session_valid(instance) &&
+        compat_host_thread_register(&instance->host_context, bind, unbind, context);
 }
 
 int session_unregister_thread_hook(session *instance, session_thread_bind_fn bind,
     session_thread_unbind_fn unbind, void *context)
 {
-    uint32_t index;
-    if (!session_valid(instance) || bind == NULL || unbind == NULL) return 0;
-    for (index = 0u; index < instance->thread_hook_count; ++index) {
-        session_thread_hook *hook = &instance->thread_hooks[index];
-        if (hook->bind == bind && hook->unbind == unbind &&
-            hook->context == context) {
-            --instance->thread_hook_count;
-            instance->thread_hooks[index] =
-                instance->thread_hooks[instance->thread_hook_count];
-            memset(&instance->thread_hooks[instance->thread_hook_count], 0,
-                sizeof(instance->thread_hooks[instance->thread_hook_count]));
-            return 1;
-        }
-    }
-    return 0;
+    return session_valid(instance) &&
+        compat_host_thread_unregister(&instance->host_context, bind, unbind, context);
 }
 
 int session_request_cancellation(session *instance, uint32_t reason)
@@ -121,7 +86,7 @@ void session_complete(session *instance, uint32_t completion_code)
 static uint32_t session_dispose_reason(const session *instance)
 {
     if (!session_valid(instance)) return SESSION_DISPOSE_REASON_INVALID;
-    if (session_binding_count(instance) != 0u)
+    if (compat_host_thread_count(&instance->host_context) != 0u)
         return SESSION_DISPOSE_REASON_BINDING_COUNT;
     if (instance->host_context.escape_stack != NULL)
         return SESSION_DISPOSE_REASON_TERMINATION_ARMED;
@@ -154,67 +119,11 @@ int session_dispose(session *instance)
     return session_dispose_with_reason(instance, NULL, NULL);
 }
 
-static volatile long *session_binding_owner_counter(session *instance,
-    uint32_t binding_owner)
-{
-    switch (binding_owner) {
-    case SESSION_THREAD_BINDING_SOFTPC_ENTRY:
-        return &instance->binding_softpc_entry_count;
-    case SESSION_THREAD_BINDING_ORIGINAL_WORKER:
-        return &instance->binding_original_worker_count;
-    case SESSION_THREAD_BINDING_UNSPECIFIED:
-        return &instance->binding_unspecified_count;
-    default:
-        return NULL;
-    }
-}
-
-static void session_record_original_worker_source(session *instance,
-    const char *source_name)
-{
-    size_t index;
-
-    memset(instance->original_worker_source, 0,
-        sizeof(instance->original_worker_source));
-    if (source_name == NULL) return;
-    for (index = 0u; index + 1u < sizeof(instance->original_worker_source) &&
-            source_name[index] != '\0'; ++index) {
-        instance->original_worker_source[index] = source_name[index];
-    }
-}
-
 int session_thread_bind_owned_source(session *instance, uint32_t binding_owner,
     const char *source_name)
 {
-    uint32_t index;
-    volatile long *owner_counter;
-    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE ||
-        session_thread_current() != NULL ||
-        (owner_counter = session_binding_owner_counter(instance, binding_owner)) == NULL)
-        return 0;
-    _InterlockedIncrement(&instance->binding_count);
-    _InterlockedIncrement(owner_counter);
-    (void)compat_host_context_bind(&instance->host_context);
-    thread_binding_owner = binding_owner;
-    if (binding_owner == SESSION_THREAD_BINDING_ORIGINAL_WORKER)
-        session_record_original_worker_source(instance, source_name);
-    for (index = 0u; index < instance->thread_hook_count; ++index) {
-        session_thread_hook *hook = &instance->thread_hooks[index];
-        if (!hook->bind(hook->context)) {
-            while (index != 0u) {
-                --index;
-                if (!instance->thread_hooks[index].unbind(
-                        instance->thread_hooks[index].context))
-                    return 0;
-            }
-            (void)compat_host_context_unbind(&instance->host_context);
-            thread_binding_owner = SESSION_THREAD_BINDING_UNSPECIFIED;
-            _InterlockedDecrement(owner_counter);
-            _InterlockedDecrement(&instance->binding_count);
-            return 0;
-        }
-    }
-    return 1;
+    return session_valid(instance) &&
+        compat_host_thread_bind(&instance->host_context, binding_owner, source_name);
 }
 
 int session_thread_bind_owned(session *instance, uint32_t binding_owner)
@@ -230,39 +139,17 @@ int session_thread_bind(session *instance)
 
 int session_thread_unbind(session *instance)
 {
-    uint32_t index;
-    volatile long *owner_counter;
-    if (instance == NULL || session_thread_current() != instance) return 0;
-    owner_counter = session_binding_owner_counter(instance, thread_binding_owner);
-    if (owner_counter == NULL) return 0;
-    for (index = instance->thread_hook_count; index != 0u; --index) {
-        session_thread_hook *hook = &instance->thread_hooks[index - 1u];
-        if (!hook->unbind(hook->context)) return 0;
-    }
-    (void)compat_host_context_unbind(&instance->host_context);
-    thread_binding_owner = SESSION_THREAD_BINDING_UNSPECIFIED;
-    _InterlockedDecrement(owner_counter);
-    _InterlockedDecrement(&instance->binding_count);
-    return 1;
+    return instance != NULL && compat_host_thread_unbind(&instance->host_context);
 }
 
 int session_thread_finish(session *instance)
 {
-    int result = 0;
-    if (instance == NULL || session_thread_current() != instance || thread_finishing)
-        return 0;
-    thread_finishing = 1;
-    __try {
-        result = session_thread_unbind(instance);
-    } __finally {
-        thread_finishing = 0;
-    }
-    return result;
+    return instance != NULL && compat_host_thread_finish(&instance->host_context);
 }
 
 int session_thread_is_finishing(void)
 {
-    return thread_finishing;
+    return compat_host_thread_is_finishing();
 }
 
 session *session_thread_current(void)
@@ -276,16 +163,14 @@ int session_binding_diagnostic_snapshot(const session *instance,
     session_binding_diagnostic *diagnostic_out)
 {
     if (!session_valid(instance) || diagnostic_out == NULL) return 0;
-    diagnostic_out->total = (uint32_t)_InterlockedCompareExchange(
-        (volatile long *)&instance->binding_count, 0, 0);
-    diagnostic_out->softpc_entry = (uint32_t)_InterlockedCompareExchange(
-        (volatile long *)&instance->binding_softpc_entry_count, 0, 0);
-    diagnostic_out->original_worker = (uint32_t)_InterlockedCompareExchange(
-        (volatile long *)&instance->binding_original_worker_count, 0, 0);
-    diagnostic_out->unspecified = (uint32_t)_InterlockedCompareExchange(
-        (volatile long *)&instance->binding_unspecified_count, 0, 0);
-    memcpy(diagnostic_out->original_worker_source,
-        instance->original_worker_source,
+    diagnostic_out->total = compat_host_thread_count(&instance->host_context);
+    diagnostic_out->softpc_entry = compat_host_thread_owner_count(&instance->host_context,
+        COMPAT_HOST_THREAD_MACHINE_ENTRY);
+    diagnostic_out->original_worker = compat_host_thread_owner_count(&instance->host_context,
+        COMPAT_HOST_THREAD_ORIGINAL_WORKER);
+    diagnostic_out->unspecified = compat_host_thread_owner_count(&instance->host_context,
+        COMPAT_HOST_THREAD_UNSPECIFIED);
+    memcpy(diagnostic_out->original_worker_source, instance->host_context.threads.original_worker_source,
         sizeof(diagnostic_out->original_worker_source));
     return 1;
 }

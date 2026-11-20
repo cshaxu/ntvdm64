@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #include "ntvdm-exe/session/session.h"
-#include "wow_user_session_binding.h"
+#include "compat/include/wow_user_session_binding.h"
 
 extern HANDLE WINAPI host_CreateThread(LPSECURITY_ATTRIBUTES, DWORD,
     LPTHREAD_START_ROUTINE, LPVOID, DWORD, LPDWORD);
@@ -60,7 +60,7 @@ int __cdecl main(void)
     CHECK(session_activate(&owner));
     CHECK(session_thread_bind_owned(&owner,
         SESSION_THREAD_BINDING_SOFTPC_ENTRY));
-    CHECK(wow_user_session_attach(&registration, &owner, &runtime));
+    CHECK(wow_user_session_attach(&registration, &owner.host_context, &runtime));
 
     thread = host_CreateThread(NULL, 0u, original_winapi_worker,
         (LPVOID)(ULONG_PTR)0x4a21u, 0u, &thread_id);

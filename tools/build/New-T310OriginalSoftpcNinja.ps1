@@ -106,7 +106,7 @@ $dpmiRoot = Join-Path $root 'src/mvdm-host/dpmi32'
 $suballocRoot = Join-Path $root 'src/mvdm-host/suballoc'
 $oemuniRoot = Join-Path $root 'src/mvdm-host/oemuni'
 $sessionRoot = Join-Path $root 'src/ntvdm-exe/session'
-$adapterWowRoot = Join-Path $root 'src/ntvdm-exe/wow'
+$adapterWowRoot = Join-Path $root 'src/compat'
 $wow32DllRoot = Join-Path $root 'src/wow32-dll'
 $baseReservationTestSource = Join-Path $root 'test/adapter-basesrv/base_reservation_test.c'
 $baseServiceReservationTestSource = Join-Path $root 'test/adapter-basesrv/base_service_reservation_test.c'
@@ -481,9 +481,9 @@ foreach ($entry in @(
     # selected parent RTL implementation.  Export the existing body; this is
     # an import-surface declaration, not a standalone replacement.
     'RtlNtStatusToDosError=_RtlNtStatusToDosError@4',
-    # VDMREDIR's original asynchronous compatibility boundary still imports
-    # these worker-thread helpers.  WOW32 no longer imports them directly;
-    # it uses its narrow wow_user_worker_active query instead.
+    # Retain the released session ordinals. VDMREDIR now imports the
+    # compatibility thread entry itself and uses the worker's single binding.
+    'opennt_create_cdecl_thread_named',
     'session_thread_current',
     'session_thread_bind_owned_source',
     'session_thread_unbind',
@@ -1084,12 +1084,6 @@ $sessionObjects = @(foreach ($name in $sessionNames) {
     $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 })
-$adapterWowWorkerObjects = foreach ($name in $adapterWowWorkerNames) {
-    $object = 'obj/adapter-wow-worker/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWowRoot $name)))
-    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
-    $object
-}
 $cpu40DescriptorDomainFixtureObject = 'obj/tests/cpu40_descriptor_domain_fixture.obj'
 $graph.Add('build ' + $cpu40DescriptorDomainFixtureObject + ': cc_dpmi ' + (NinjaPath $cpu40DescriptorDomainFixtureSource))
 $graph.Add('  dpmi_cflags = ' + $dpmiFlags + ' /DLINKED_INTO_MONITOR')
@@ -1164,6 +1158,12 @@ $graph.Add('build ' + $consoleGridObject + ': cc ' + (NinjaPath (Join-Path $root
 $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes')
 $adapterWin32Objects += $consoleGridObject
 $libraryFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+$adapterWowWorkerObjects = foreach ($name in $adapterWowWorkerNames) {
+    $object = 'obj/adapter-wow-worker/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWowRoot $name)))
+    $graph.Add('  cflags = ' + $libraryFlags)
+    $object
+}
 $graph.Add('build obj/adapter-win32/console_compat.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_compat.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterWin32Objects += 'obj/adapter-win32/console_compat.obj'
@@ -1191,13 +1191,10 @@ $graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT'
 $graph.Add('build lib-thread.lib: lib ' + $threadObject)
 $graph.Add('build obj/tests/lib_thread.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/thread/thread_test.c')))
 $graph.Add('build lib-thread-test.exe: broker_test_link obj/tests/lib_thread.obj lib-thread.lib')
-$threadBridgeObject = 'obj/common/worker-thread/bridge.obj'
-$graph.Add('build ' + $threadBridgeObject + ': cc ' + (NinjaPath (Join-Path $root 'src/common/worker-thread/bridge.c')))
-$graph.Add('  cflags = ' + $authoredSoftpcFlags)
 $threadStartObject = 'obj/compat/thread_start.obj'
 $graph.Add('build ' + $threadStartObject + ': cc ' + (NinjaPath (Join-Path $root 'src/compat/thread_start.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
-$graph.Add('build common-worker-thread.lib: lib ' + $threadBridgeObject + ' ' + $threadStartObject)
+$graph.Add('build compat-worker-thread.lib: lib ' + $threadStartObject)
 $adapterBaseSrvObjects = foreach ($name in $adapterBaseSrvNames) {
     $object = 'obj/adapter-basesrv/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $compatCommand = $name -in @('mvdm_command_native_child.c', 'mvdm_command_guest_state.c')
@@ -2347,7 +2344,7 @@ $graph.Add('  cflags = /nologo /c /MT /W3 /showIncludes /I "' + (NinjaPath (Join
 $graph.Add('build wow-user-client-view-layout-test.exe: memory_test_link obj/tests/wow_user_client_view_layout_fixture.obj')
 $graph.Add('build cvidc-vector-binding-fixture.exe: memory_test_link ' + $cvidcVectorBindingFixtureObject + ' ' + $cvidcSasFixtureObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build x87-layout-fixture.exe: rtl_fixture_link ' + $x87LayoutFixtureObject)
-$graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib vdmredir-dll-bindings.lib original-opennt-netlib.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib common-worker-thread.lib lib-thread.lib common-opennt-compat.lib')
+$graph.Add('build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link ' + (($redirObjects + @($redirResourceObject)) -join ' ') + ' ntvdm.lib vdmredir-dll-bindings.lib original-opennt-netlib.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib common-opennt-compat.lib')
 $graph.Add('build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib')
 $graph.Add('default original-softpc-candidate')
 # Select neutral archives only through explicit provider dependencies. Do not
@@ -2391,7 +2388,7 @@ if ($Architecture -eq 'x86') {
     for($i=0;$i -lt $graph.Count;$i++) {
         if($graph[$i] -match '^build .*: \S*link ' -and $graph[$i].Contains('softpc-win32-bindings.lib')) {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)
-            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-crt-compat.lib common-worker-thread.lib lib-thread.lib')}else{$graph[$i]+=' lib-crt-compat.lib common-worker-thread.lib lib-thread.lib'}
+            if($barrier -ge 0){$graph[$i]=$graph[$i].Insert($barrier,' lib-crt-compat.lib compat-worker-thread.lib lib-thread.lib')}else{$graph[$i]+=' lib-crt-compat.lib compat-worker-thread.lib lib-thread.lib'}
         }
         if($graph[$i] -match '^build .*: \S*link ' -and ($graph[$i].Contains('common-native-hook-installer.lib') -or $graph[$i].Contains('common-native-hook-context.lib'))) {
             $barrier=$graph[$i].IndexOf(' |',$graph[$i].IndexOf(':')+1)

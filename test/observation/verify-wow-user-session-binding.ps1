@@ -7,7 +7,7 @@ if (!$out.StartsWith($buildPrefix,[StringComparison]::OrdinalIgnoreCase)) { thro
 New-Item -ItemType Directory -Path $out -Force | Out-Null
 $sources=@('test/adapter-mvdm-host-out/wow/wow_user_session_binding_fixture.c',
     'src/compat/wow_user_runtime.c', 'src/compat/wow_worker_state.c',
-    'src/ntvdm-exe/wow/wow_user_session_binding.c',
+    'src/compat/wow_user_session_binding.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/compat/guest_memory_lease.c')
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'

@@ -1,5 +1,6 @@
+#include "ntvdm-exe/session/session.h"
 #include "wow_user_task_lifecycle.h"
-#include "ntvdm-exe/wow/include/wow_user_session_binding.h"
+#include "compat/include/wow_user_session_binding.h"
 #include "wow_standard_class_bindings.h"
 #include <stdio.h>
 #include <string.h>
@@ -151,7 +152,7 @@ int __cdecl main(void)
     session_initialize(&owner, 44702u);
     CHECK(session_activate(&owner));
     CHECK(session_thread_bind_owned(&owner, SESSION_THREAD_BINDING_SOFTPC_ENTRY));
-    CHECK(wow_user_session_attach(&registration, &owner, &runtime));
+    CHECK(wow_user_session_attach(&registration, &owner.host_context, &runtime));
     verify_startup_rollback(&lifecycle, &runtime, &callbacks);
     /* The same owner/runtime must remain usable after partial startup fails. */
     CHECK(wow_user_task_lifecycle_initialize(&lifecycle, &runtime, &callbacks));
@@ -224,7 +225,7 @@ int __cdecl main(void)
     CHECK(GetLastError() == ERROR_INVALID_HANDLE);
     CHECK(GetHandleInformation(event, &flags));
     CHECK(GetClassInfoExA(NULL, "BUTTON", &control));
-    CHECK(!owner.thread_hook_count && !wow_user_runtime_current());
+    CHECK(!owner.host_context.threads.hook_count && !wow_user_runtime_current());
     CHECK(session_thread_unbind(&owner));
     CHECK(session_dispose(&owner));
     CHECK(CloseHandle(event));

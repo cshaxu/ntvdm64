@@ -310,20 +310,24 @@
     {
       "id": "B0023",
       "contract": "opennt_thread_lifecycle",
-      "provider": "src/common/worker-thread/bridge.c",
       "target": "capture_owner",
-      "layer": "D",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed"
+      "status": "removed-slot",
+      "baseline_layer": "D",
+      "baseline_provider": "src/common/worker-thread/bridge.c",
+      "migration_status": "P134; the compatibility entry directly uses B-owned capture, bind and cleanup",
+      "evidence": "s14-thread-binding-owner.json"
     },
     {
       "id": "B0024",
       "contract": "opennt_thread_lifecycle",
-      "provider": "src/common/worker-thread/bridge.c",
       "target": "finish_owner",
-      "layer": "D",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed"
+      "status": "removed-slot",
+      "baseline_layer": "D",
+      "baseline_provider": "src/common/worker-thread/bridge.c",
+      "migration_status": "P134; the compatibility entry directly uses B-owned capture, bind and cleanup",
+      "evidence": "s14-thread-binding-owner.json"
     },
     {
       "id": "B0025",
@@ -457,8 +461,7 @@
   ],
   "indirect_counts": {
     "B": 24,
-    "F": 2,
-    "D": 2
+    "F": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
   "remaining": [
@@ -538,5 +541,6 @@
   "p130_receipt_owner": "s14-receipt-owner.json",
   "p131_resource_scope_owner": "s14-resource-scope-owner.json",
   "p132_vm_notification_owner": "s14-vm-notification-owner.json",
-  "p133_vm_wake_owner": "s14-vm-wake-owner.json"
+  "p133_vm_wake_owner": "s14-vm-wake-owner.json",
+  "p134_thread_binding_owner": "s14-thread-binding-owner.json"
 }

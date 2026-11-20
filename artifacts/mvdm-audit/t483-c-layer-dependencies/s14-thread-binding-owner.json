@@ -1,0 +1,235 @@
+{
+  "packet": "M0 T483 S14 P134",
+  "parent": "cf049718b57f49f76b9e903456b680e1b2cb1887",
+  "eliminated_B": [
+    "B0023",
+    "B0024"
+  ],
+  "eliminated_C": [],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 2
+  },
+  "outward_C_known_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 8
+  },
+  "C_named_image_imports": 1,
+  "C0134_removed_F_implementation_ordinals": [
+    217,
+    218,
+    219
+  ],
+  "ownership": "The existing single NTVDM host context carries binding hooks, counts and terminal intent. Compat executes bind, rollback, detach and WOW binding. F retains session admission/disposal. VDMREDIR imports ordinal 275 directly from the one B implementation; ordinal 261 stays available. Ordinals 217\u2013220 are retained for ABI compatibility.",
+  "builds": {
+    "x86": {
+      "providers": {
+        "_opennt_create_cdecl_thread_named": "compat-worker-thread:thread_start.obj",
+        "_compat_host_thread_finish": "session:host_context.obj",
+        "_wow_user_session_attach@12": "wow_user_session_binding.obj"
+      },
+      "redirector_ntvdm_ordinals": [
+        45,
+        46,
+        59,
+        75,
+        84,
+        92,
+        93,
+        95,
+        96,
+        97,
+        101,
+        102,
+        104,
+        105,
+        106,
+        107,
+        108,
+        116,
+        124,
+        128,
+        137,
+        140,
+        141,
+        145,
+        148,
+        149,
+        223,
+        224,
+        225,
+        226,
+        228,
+        229,
+        233,
+        236,
+        238,
+        239,
+        246,
+        257,
+        260,
+        275
+      ],
+      "vcdex_ntvdm_ordinals": [
+        35,
+        59,
+        97,
+        102,
+        108,
+        116,
+        129,
+        130,
+        224,
+        228,
+        229,
+        233
+      ]
+    },
+    "x64-reference": {
+      "providers": {
+        "_opennt_create_cdecl_thread_named": "compat-worker-thread:thread_start.obj",
+        "_compat_host_thread_finish": "session:host_context.obj",
+        "_wow_user_session_attach@12": "wow_user_session_binding.obj"
+      },
+      "redirector_ntvdm_ordinals": [
+        45,
+        46,
+        59,
+        75,
+        84,
+        92,
+        93,
+        95,
+        96,
+        97,
+        101,
+        102,
+        104,
+        105,
+        106,
+        107,
+        108,
+        116,
+        124,
+        128,
+        137,
+        140,
+        141,
+        145,
+        148,
+        149,
+        223,
+        224,
+        225,
+        226,
+        228,
+        229,
+        233,
+        236,
+        238,
+        239,
+        246,
+        257,
+        260,
+        275
+      ],
+      "vcdex_ntvdm_ordinals": [
+        35,
+        59,
+        97,
+        102,
+        108,
+        116,
+        129,
+        130,
+        224,
+        228,
+        229,
+        233
+      ]
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "f2d894c9-4c64-4fc7-992d-1a6fd52230be",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "thread": [
+      "THREAD_LIFECYCLE uninitialized_rejected=1 repeated_install=1",
+      "THREAD_START_ROLLBACK rejected=4 owner_count=1 no_worker_entry=1",
+      "THREAD_PRE_CCPU original_exit_body=1 unbind_before_cpu=1 once=1",
+      "THREAD_TERMINAL_UNBIND normal=5 once=1 rejected_exit=c0000420",
+      "THREAD_TERMINAL_INTENT terminal=5 ordinary=1 rejected_reset=1 exception_reset=1",
+      "THREAD_MODULE actual_redirector_entry=1 shared_binding=1 same_owner=1"
+    ],
+    "wow_binding": [
+      "WOW_USER_SESSION_BINDING errors=0 child=1 lifecycle=1",
+      "WOW_USER_RUNTIME errors=0 peer=1 callout_reacquire=1"
+    ],
+    "redirector": [
+      "PASS original request does not require Type2 extension",
+      "PASS partial read completion succeeds",
+      "PASS payload precedes error then count publication",
+      "PASS partial read preserves actual bytes and error",
+      "PASS release is idempotent and leases are closed",
+      "PASS fresh LocalAlloc request needs no private-field initialization",
+      "PASS destination failure rejects completion",
+      "PASS failure does not publish later completion words",
+      "PASS failed commit closes lease",
+      "PASS destination failure rejects completion",
+      "PASS failure does not publish later completion words",
+      "PASS failed commit closes lease",
+      "PASS destination failure rejects completion",
+      "PASS failure does not publish later completion words",
+      "PASS failed commit closes lease",
+      "PASS Type2 rejects unreadable semaphore extension",
+      "PASS oversized read publishes nothing",
+      "PASS write completion does not copy staging back",
+      "PASS zero read publishes only completion words",
+      "PASS production thread bridge binds before direct completion",
+      "PASS production thread bridge leaves parent binding unchanged",
+      "PASS unbound thread cannot publish",
+      "PASS failed completion does not bind caller",
+      "PASS stale owner epoch rejected before publication",
+      "PASS cancelled owner rejects original completion entry",
+      "PASS ended guest memory cannot publish",
+      "PASS final session cleanup succeeds",
+      "assertions=27 failures=0"
+    ],
+    "win31": [
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested"
+    ],
+    "wow_retirement": [
+      "WOW_PROCESS_RETIREMENT errors=0 startup-rollback/cleanup-atomic/task/object/class/refusal/retry/event/native checked",
+      "WOW_FIXTURE_OK case=process-retirement"
+    ],
+    "actual_shared_wow": [
+      "PASS shared worker 3844, two distinct tasks overlapped and retired independently, both requests exited normally"
+    ],
+    "limitations": "No Win95 or Full profile. The redirector async fixture covers the production boundary, separate from the live tests."
+  },
+  "receipts_sha256": {
+    "rebuild-x86.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "rebuild-x64.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "thread-verified.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "wow-verified.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "redir-verified.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "win31.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "process-retirement.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "shared-wow.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+  }
+}

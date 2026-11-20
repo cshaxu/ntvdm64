@@ -84,7 +84,7 @@ if ($OriginalProviders) {
         'original-opennt-xactsrv.lib',
         'common-root.lib','common-rpc.lib', 'lib-rpc.lib','lib-pipe.lib','lib-process-observation.lib','lib-file.lib',
         'common-codec.lib','common-console.lib','lib-handle.lib','lib-file.lib',
-        'lib-process-launch.lib','lib-process-hook.lib','lib-process-image.lib','lib-crt-compat.lib','common-worker-thread.lib','lib-thread.lib')
+        'lib-process-launch.lib','lib-process-hook.lib','lib-process-image.lib','lib-crt-compat.lib','compat-worker-thread.lib','lib-thread.lib')
     $libraries = @($redirArchive) + @($dependencies | ForEach-Object {
         $path = Join-Path (Join-Path $root $BuildCache) $_
         if (!(Test-Path $path)) { throw "Missing fixture dependency: $_" }

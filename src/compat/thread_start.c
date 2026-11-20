@@ -1,36 +1,46 @@
 #include "compat/include/thread_start_compat.h"
 #include "compat/include/thread_lifecycle.h"
+#include "compat/include/host_context.h"
+#include "lib-win32/thread/thread.h"
 #undef CreateThread
 #undef ExitThread
 
-static const opennt_thread_lifecycle *lifecycle;
+static volatile LONG initialized;
 
-BOOL opennt_thread_install_lifecycle(const opennt_thread_lifecycle *value)
+BOOL opennt_thread_initialize(void)
 {
-    const opennt_thread_lifecycle *previous;
-    if (!value || !value->capture || !value->finish) {
-        SetLastError(ERROR_INVALID_PARAMETER);
-        return FALSE;
-    }
-    previous = InterlockedCompareExchangePointer((PVOID volatile *)&lifecycle,
-        (PVOID)value, NULL);
-    if (previous && previous != value) {
-        SetLastError(ERROR_ALREADY_INITIALIZED);
-        return FALSE;
-    }
+    InterlockedExchange(&initialized, TRUE);
     return TRUE;
+}
+
+static void finish_owner(void)
+{
+    compat_host_context *owner = compat_host_context_current();
+    if (!initialized) RaiseFailFastException(NULL, NULL, 0);
+    if (owner != NULL && !compat_host_thread_finish(owner)) {
+        EXCEPTION_RECORD record = {0};
+        record.ExceptionCode = 0xc0000420;
+        record.ExceptionFlags = EXCEPTION_NONCONTINUABLE;
+        record.NumberParameters = 1;
+        record.ExceptionInformation[0] = GetLastError();
+        RaiseFailFastException(&record, NULL, 0);
+    }
 }
 
 VOID WINAPI opennt_prepare_thread_exit(VOID)
 {
-    if (!lifecycle) RaiseFailFastException(NULL, NULL, 0);
-    lifecycle->finish();
+    finish_owner();
 }
 
 VOID WINAPI opennt_exit_thread(DWORD exit_code)
 {
     opennt_prepare_thread_exit();
     ExitThread(exit_code);
+}
+
+static int enter_owner(void *owner, const char *name)
+{
+    return compat_host_thread_bind(owner, COMPAT_HOST_THREAD_ORIGINAL_WORKER, name);
 }
 
 static HANDLE create_bound(LPSECURITY_ATTRIBUTES attributes, SIZE_T stack_bytes,
@@ -44,11 +54,13 @@ static HANDLE create_bound(LPSECURITY_ATTRIBUTES attributes, SIZE_T stack_bytes,
         SetLastError(ERROR_INVALID_PARAMETER);
         return NULL;
     }
-    if (!lifecycle) {
+    if (!initialized) {
         SetLastError(ERROR_INVALID_STATE);
         return NULL;
     }
-    lifecycle->capture(&hooks);
+    hooks.owner = compat_host_context_current();
+    hooks.enter = enter_owner;
+    hooks.finish = finish_owner;
     hooks.source_name = source_name;
     return win32_thread_create(attributes, stack_bytes, entry, parameter, flags,
         thread_id, &hooks);
