@@ -28,6 +28,17 @@ implementation migration. The broader C-layer cleanup remains active.
 
 ## Current Technical Baseline
 
+P76 [scalar observation ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-observation-owner.json)
+moves three exact diagnostic bodies from F termination into existing B compat.
+Page-domain removes its F diagnostic and unused effective-address headers.
+Cached full builds and dual11/22-hash publication passed, package
+`4e181da7-ae1a-48b8-88ff-b89da3874142`. Reporter four-mode LastError checks,
+real CCPU page-domain lifecycle, real Win16 dialog eight phases and eight A/B
+graphs passed. Actual NTVDM link resolves the B observation object.
+Mirror delta0 points/0 lines; ledger stays182 eliminated/386 open: prerequisite
+cleanup, not completion of C provider relocation. Final governance and the
+enclosing P76 commit/push provide the delivery receipt.
+
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same
 B host context owns identity and cleanup. No new state or callbacks; mirror0/0.

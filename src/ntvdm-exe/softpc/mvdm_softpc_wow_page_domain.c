@@ -1,12 +1,12 @@
 #include "mvdm_softpc_wow_page_domain.h"
-#include "mvdm_softpc_effective_address.h"
+#include <stdint.h>
 #include "compat/include/wow_shared_clock.h"
 
 #include <windows.h>
 #include <stdlib.h>
 
 #include "compat/include/host_context.h"
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
+#include "compat/include/mvdm_softpc_observation.h"
 
 /* Keep this non-mirror binding on the narrow, fixed-width CCPU/nt_mem ABI it
  * consumes.  Pulling the historical macro headers into a new adapter would

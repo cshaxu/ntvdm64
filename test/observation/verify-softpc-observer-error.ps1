@@ -6,11 +6,11 @@ $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned root required'}
 $null=New-Item -ItemType Directory $root
 try {
- $source="$repo/src/ntvdm-exe/softpc/mvdm_softpc_termination.c"
+ $source="$repo/src/compat/mvdm_softpc_observation.c"
  $probe="$PSScriptRoot/softpc_observer_error_probe.c"
  Push-Location $root
  try {
-  & $CompilerDriver cl.exe /nologo /O2 /MT /Gy /W3 /FIwindows.h "/I$repo/src" "/I$repo/src/ntvdm-exe/softpc/include" "/Fo$root/" "/Fe$root/probe.exe" $probe $source /link /OPT:REF *> "$root/compile.txt"
+  & $CompilerDriver cl.exe /nologo /O2 /MT /Gy /W3 /FIwindows.h "/I$repo/src" "/Fo$root/" "/Fe$root/probe.exe" $probe $source /link /OPT:REF *> "$root/compile.txt"
   if($LASTEXITCODE){throw 'Observer error probe compile failed'}
  }finally{Pop-Location}
  @($source,$probe,"$root/probe.exe")|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"

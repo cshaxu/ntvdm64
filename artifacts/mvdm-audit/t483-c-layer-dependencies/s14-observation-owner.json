@@ -1,0 +1,87 @@
+{
+  "baseline": "4d9c4ea1ad1856dde83eb75680202bc721fbcba1",
+  "status": "P76 final code built, published and targeted tests passed; enclosing commit/push is the delivery receipt",
+  "purpose": "Remove the remaining product diagnostic dependency from the WOW page-domain provider, as a prerequisite to its inward implementation ownership. Not C direct-edge closure.",
+  "implementation": "Three scalar-only reporters move bodily from F termination to existing B compat. They use supplied values, native environment/file APIs and CRT only. Actual session termination and original host close stay F. No B callbacks, CPU access, guest reads or new state.",
+  "bodies_identical": true,
+  "body_sha256": "df847a475fa62a09266c8dc44de3c6a656d4b6a5e3a4f3cfc0821874c4666d4a",
+  "declaration_owner": "src/compat/include/mvdm_softpc_observation.h",
+  "implementation_owner": "src/compat/mvdm_softpc_observation.c",
+  "removed_header_dependency": "Page-domain also removes unused mvdm_softpc_effective_address.h; stdint.h supplies the actual scalar types.",
+  "verification_plan": [
+    "cached full build x86/x64/reference",
+    "dual11 publication",
+    "existing reporter disabled/long/missing/enabled LastError and trace assertions without F termination stubs",
+    "real CCPU page-domain and immutable Win16 dialog",
+    "actual B object/link ownership and eight A/B graphs",
+    "documentation gates, commit,push"
+  ],
+  "boundaries": {
+    "mirror_points": 0,
+    "mirror_lines": 0,
+    "new_direct_eliminations": 0,
+    "ledger_eliminated": 182,
+    "ledger_open": 386
+  },
+  "next_original_ownership_boundary": {
+    "chain": [
+      "dispose_window_borrow",
+      "release_generation_storage",
+      "wow_window_words_release",
+      "wow_class_words_release"
+    ],
+    "proof": "release_generation_storage clears both guest backing fields before release; therefore the conditional guest-release path is not taken by this callback. The remaining release nevertheless reads private WND.strName and class binding reference location. A raw C-to-F callback cannot be declared layer-clean merely because it currently deallocates host storage.",
+    "production_sources": [
+      "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c:262",
+      "src/wow32-dll/source/wow_window_words_binding.c:213",
+      "src/wow32-dll/source/wow_window_words_binding.c:875",
+      "src/wow32-dll/source/wow_class_words_binding.c:207"
+    ]
+  },
+  "evidence_root": "build/t483-s14-observation-owner",
+  "body_comparison": "Exact function block after LF normalization and trimming only surrounding whitespace; signatures and bodies unchanged.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "4e181da7-ae1a-48b8-88ff-b89da3874142",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "runs": {
+    "build": {
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "pid": 25972,
+      "start": "2026-11-20T02:39:53.7537860Z",
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-observation-owner/build.ps1"
+    },
+    "deliver": {
+      "pid": 16196,
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-observation-owner/deliver.ps1",
+      "start": "2026-11-20T02:45:03.6503097Z",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe"
+    },
+    "tests": {
+      "start": "2026-11-20T02:45:35.8461185Z",
+      "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1116-1210-0_26.1116.1210.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+      "script": "O:/repos.hobby/ntvdm64/build/t483-s14-observation-owner/tests.ps1",
+      "pid": 15000
+    }
+  },
+  "results": {
+    "observer": "4 modes x 3 LastError assertions; 3 enabled trace markers; exit 0",
+    "page_domain": "WOW_PAGE_DOMAIN_LIFECYCLE_OK; WOW_FIXTURE_OK case=page-domain; exit 0",
+    "guest_dialog": "WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1",
+    "library_boundaries": "eight product graphs pass",
+    "linked_provider": "x86 ntvdm.exe.map: _mvdm_softpc_report_dpmi_mode_state -> session:mvdm_softpc_observation.obj",
+    "mirror_delta": "0 points / 0 lines"
+  },
+  "final_source_hashes": {
+    "src/compat/mvdm_softpc_observation.c": "590c4b99d6e399174d68aba6af81fd2be5ab03dc8bd3ac14f0eb1b2bb0f9157e",
+    "src/compat/include/mvdm_softpc_observation.h": "4546d36d8bce309e30be3273dc4b78f0ba31502a9d86e8d4d6a796e8ceb439fd",
+    "src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c": "03ad5e51beea96af5d4eb6b620c8d955b4224d9c2d97a041a31d8cb424d2df1d",
+    "src/ntvdm-exe/softpc/mvdm_softpc_termination.c": "1d24b39513e7a00ab39d65a92e4de0bf2ab201eee25930776eac5624d0ec4bc9"
+  }
+}

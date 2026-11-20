@@ -3,13 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
-void host_applClose(void) { abort(); }
-int session_terminate_current(uint32_t code) { (void)code; abort(); }
-int xtrn2phy(unsigned long linear, unsigned char access, unsigned long *physical)
-{ (void)linear; (void)access; (void)physical; abort(); }
-void c_sas_loads(unsigned long source, unsigned char *destination, unsigned long count)
-{ (void)source; (void)destination; (void)count; abort(); }
+#include "compat/include/mvdm_softpc_observation.h"
 static unsigned checks;
 #define CHECK(call) do { SetLastError(10004); call; ++checks; \
     if (GetLastError() != 10004) return 1; } while (0)

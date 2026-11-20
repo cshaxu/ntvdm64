@@ -1263,6 +1263,9 @@ $sessionObjects += 'obj/compat/guest_memory_lease.obj'
 $graph.Add('build obj/compat/wow_user_runtime.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_user_runtime.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/wow_user_runtime.obj'
+$graph.Add('build obj/compat/mvdm_softpc_observation.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_observation.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$sessionObjects += 'obj/compat/mvdm_softpc_observation.obj'
 $graph.Add('build obj/compat/wow_shared_clock.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_shared_clock.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/wow_shared_clock.obj'
