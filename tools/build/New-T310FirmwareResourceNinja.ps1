@@ -40,7 +40,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 $sources = @(
     'src/compat/guest_memory_lease.c',
     'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
-    'src/ntvdm-exe/softpc/mvdm_softpc_firmware.c',
+    'src/compat/mvdm_softpc_firmware.c',
     'test/session/softpc_firmware_resource_fixture.c',
     'test/session/softpc_media_resource_fixture.c',
     'src/compat/system_root.c',
@@ -55,7 +55,7 @@ $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('cflags = /nologo /TC /c /MT /W4 /showIncludes' +
     ' /I "' + (NinjaPath (Join-Path $root 'src')) + '" /I "' +
-    (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include')) + '"')
+    (NinjaPath (Join-Path $root 'src/compat/include')) + '"')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')
 $graph.Add('  deps = msvc')
@@ -72,9 +72,9 @@ for ($index = 0; $index -lt $sources.Count; ++$index) {
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $sources[$index])))
     $objects += $object
 }
-$graph.Add('build softpc-firmware-resource-fixture.exe: link obj/8-mvdm_firmware.obj obj/3-softpc_firmware_resource_fixture.obj')
-$graph.Add('build system32/softpc-media-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-mvdm_softpc_firmware.obj obj/4-softpc_media_resource_fixture.obj obj/5-system_root.obj obj/6-guest_environment.obj')
-$graph.Add('build softpc-wow-boot-environment-fixture.exe: link obj/5-system_root.obj obj/6-guest_environment.obj obj/7-softpc_wow_boot_environment_fixture.obj')
+$graph.Add('build softpc-firmware-resource-fixture.exe: link obj/9-mvdm_firmware.obj obj/4-softpc_firmware_resource_fixture.obj')
+$graph.Add('build system32/softpc-media-resource-fixture.exe: link obj/0-guest_memory_lease.obj obj/1-session.obj obj/2-host_context.obj obj/3-mvdm_softpc_firmware.obj obj/5-softpc_media_resource_fixture.obj obj/6-system_root.obj obj/7-guest_environment.obj')
+$graph.Add('build softpc-wow-boot-environment-fixture.exe: link obj/6-system_root.obj obj/7-guest_environment.obj obj/8-softpc_wow_boot_environment_fixture.obj')
 $graph.Add('rule run_boot')
 $graph.Add('  command = $in')
 $graph.Add('build verify-boot: run_boot softpc-wow-boot-environment-fixture.exe')

@@ -7,6 +7,7 @@ struct guest_memory_lease_context;
 struct mvdm_mouse_bridge;
 
 #define COMPAT_HOST_CLEANUP_LIMIT 8u
+#define COMPAT_MVDM_SYSTEM_ROOT_BYTES 1024u
 
 typedef void (*compat_host_cleanup_fn)(void *);
 typedef struct compat_host_cleanup {
@@ -45,6 +46,7 @@ typedef struct compat_host_context {
     uint32_t presentation_text_rows;
     uint32_t presentation_text_bytes;
     compat_host_cleanup cleanups[COMPAT_HOST_CLEANUP_LIMIT];
+    char mvdm_system_root[COMPAT_MVDM_SYSTEM_ROOT_BYTES];
 } compat_host_context;
 
 compat_host_context *__cdecl compat_host_context_current(void);

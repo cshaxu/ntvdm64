@@ -1,0 +1,50 @@
+{
+  "packet": "M0 T483 S14 P94",
+  "baseline": "02f8a31faa5a6c0cdbad6c5b22b9191fef0e66de",
+  "eliminated_C_ids": [
+    "C0016"
+  ],
+  "eliminated_B_outward_ids": [
+    "B0033"
+  ],
+  "scope": "B owns media directory lookup and SYSTEM.INI shadow creation, reuse and disposal; the configured root lives in the existing bound B context. F still selects the root and disposes the owner at the existing lifecycle boundary. A single shadow slot, same current owner semantics and the existing cross-image export remain.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "existing_point": "One include target replaced in WOW32 precomp.h, original #line preserved."
+  },
+  "compiled_ownership": {
+    "objects": 4,
+    "counts": {
+      "CRT": 16,
+      "compat": 6,
+      "system import": 17,
+      "not selected in final link": 21
+    },
+    "outward": []
+  },
+  "providers": {
+    "msvc-x86-release/worker": "0001:0018edd0       _mvdm_softpc_profile_shadow_system_ini 0058fdd0 f   softpc-bindings:mvdm_softpc_firmware.obj",
+    "msvc-x64-release/worker-reference-x86": "0001:0018edd0       _mvdm_softpc_profile_shadow_system_ini 0058fdd0 f   softpc-bindings:mvdm_softpc_firmware.obj"
+  },
+  "compiled_wow_include_records": 82,
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "976b6b0c-ae35-49dd-841d-3f0b4d02856d",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, profile lifetime, Console and DOS VGA tests, and final gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "c47d0504fae988f63ca23b3f6d5bcf3ec18d576ebe1cb9cbcdc317e1fcef2336",
+    "release-and-test.out": "41f0a7ee311e0137dd690f1c7ffdfdd44e05f1718c4aeaf1e6dcd26a2081c6d6",
+    "final-checks.out": "94f1d053a33794511e695959005f6aa81472546afdf0c5ccd86bc6cf6d2abb53",
+    "b-compiled-candidates.json": "5c84ee6979dc2df6ba27d2ef75ae13a8c9aabb42f4aee7c0cbd2c08a16d97d5a"
+  },
+  "prior_cpu_delivery": "s14-cpu-layout-owner.json"
+}

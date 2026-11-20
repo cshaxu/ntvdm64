@@ -18,7 +18,7 @@ int __cdecl mvdm_softpc_system_find_file(const char *name, char *path_out,
 /* Modern profile APIs redirect every file named SYSTEM.INI through the host
  * mapping layer, even for an absolute package pathname.  Copy the selected
  * immutable system profile to a worker-local temporary name and return that
- * caller-owned path.  The session teardown deletes the copy; neither guest
+ * caller-owned path.  Host context teardown deletes the copy; neither guest
  * media nor the host profile is written. */
 int __cdecl mvdm_softpc_profile_shadow_system_ini(char *path_out,
     uint32_t path_out_bytes);

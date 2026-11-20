@@ -405,11 +405,14 @@
     {
       "id": "B0033",
       "contract": "compat_host_context cleanup",
-      "provider": "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c",
+      "provider": "src/compat/mvdm_softpc_firmware.c",
       "target": "mvdm_softpc_profile_shadow_dispose",
-      "layer": "F",
+      "layer": "B",
       "kind": "registered-cleanup-target",
-      "status": "outer-target-confirmed"
+      "status": "inner-target-confirmed",
+      "baseline_provider": "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c",
+      "baseline_layer": "F",
+      "migration_status": "P94 moves the actual profile shadow and cleanup to B and reads the root from the bound B context."
     },
     {
       "id": "B0034",
@@ -431,8 +434,8 @@
     }
   ],
   "indirect_counts": {
-    "B": 20,
-    "F": 9,
+    "B": 21,
+    "F": 8,
     "D": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",

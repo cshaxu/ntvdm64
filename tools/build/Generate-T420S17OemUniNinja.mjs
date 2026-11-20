@@ -114,7 +114,7 @@ const lines = [
   `  cflags = ${formalFlags}`,
   "build obj/pif-lease.obj: cc $root/src/compat/guest_memory_lease.c",
   `  cflags = ${formalFlags}`,
-  "build obj/pif-firmware.obj: cc $root/src/ntvdm-exe/softpc/mvdm_softpc_firmware.c",
+  "build obj/pif-firmware.obj: cc $root/src/compat/mvdm_softpc_firmware.c",
   `  cflags = ${formalFlags}`,
   "build obj/pif-system-root.obj: cc $root/src/compat/system_root.c",
   `  cflags = ${formalFlags}`,

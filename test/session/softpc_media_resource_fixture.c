@@ -14,6 +14,7 @@ int main(int argc, char **argv)
     char system_path[SESSION_FIRMWARE_ROOT_BYTES + 32u];
     char small_path[4];
     char executable_root[MAX_PATH];
+    char profile_path[MAX_PATH];
     wchar_t expected_path[SESSION_FIRMWARE_ROOT_BYTES + 32u];
     wchar_t wide_path[SESSION_FIRMWARE_ROOT_BYTES + 32u];
 
@@ -67,7 +68,19 @@ int main(int argc, char **argv)
         _stricmp(path, system_path) != 0) return 13;
     if (mvdm_softpc_system_find_file("missing.sys", path,
             (uint32_t)sizeof(path)) || path[0] != '\0') return 3;
-    if (!session_thread_unbind(&instance) || !session_dispose(&instance))
-        return 4;
+    if (!mvdm_softpc_profile_shadow_system_ini(profile_path, sizeof(profile_path)) ||
+        !_stricmp(profile_path, system_path) ||
+        GetFileAttributesA(profile_path) == INVALID_FILE_ATTRIBUTES ||
+        !mvdm_softpc_profile_shadow_system_ini(path, sizeof(path)) ||
+        strcmp(profile_path, path) != 0) return 19;
+    if (mvdm_softpc_profile_shadow_system_ini(small_path, sizeof(small_path)) ||
+        small_path[0] != '\0') return 20;
+    if (!session_thread_unbind(&instance)) return 4;
+    if (mvdm_softpc_profile_shadow_system_ini(path, sizeof(path)) || path[0] != '\0')
+        return 21;
+    if (!session_dispose(&instance) ||
+        GetFileAttributesA(profile_path) != INVALID_FILE_ATTRIBUTES ||
+        GetLastError() != ERROR_FILE_NOT_FOUND) return 22;
+    puts("PASS media roots and SYSTEM.INI shadow reuse, refusal and cleanup");
     return 0;
 }

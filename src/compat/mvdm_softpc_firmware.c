@@ -1,10 +1,9 @@
-#include "mvdm_softpc_firmware.h"
+#include "include/mvdm_softpc_firmware.h"
 
 #include <string.h>
 #include <windows.h>
 
-#include "ntvdm-exe/session/session.h"
-#include "compat/include/system_root.h"
+#include "include/host_context.h"
 
 static int mvdm_softpc_media_find_file(const char *root, const char *name,
     char *path_out, uint32_t path_out_bytes)
@@ -34,7 +33,7 @@ static int mvdm_softpc_media_find_file(const char *root, const char *name,
 }
 
 typedef struct _MVDM_SOFTPC_PROFILE_SHADOW {
-    session *owner;
+    compat_host_context *owner;
     HANDLE handle;
     char path[MAX_PATH];
 } MVDM_SOFTPC_PROFILE_SHADOW;
@@ -56,15 +55,15 @@ static void mvdm_softpc_profile_shadow_dispose(void *context)
 int mvdm_softpc_system_find_file(const char *name, char *path_out,
     uint32_t path_out_bytes)
 {
-    session *instance = session_thread_current();
-    char directory[SESSION_FIRMWARE_ROOT_BYTES + 16u];
+    compat_host_context *instance = compat_host_context_current();
+    char directory[COMPAT_MVDM_SYSTEM_ROOT_BYTES + 16u];
     if (path_out != NULL && path_out_bytes != 0u) path_out[0] = '\0';
     if (instance == NULL || name == NULL) return 0;
     /* Original setup places SYSTEM.INI at Windows root, but NTIO and the
      * default CONFIG.NT/AUTOEXEC.NT in GetSystemDirectory's system32.
      * This binding never searches CWD/PATH or falls back to a flat copy. */
     if (!_stricmp(name, "system.ini"))
-        return mvdm_softpc_media_find_file(session_mvdm_system_root(instance),
+        return mvdm_softpc_media_find_file(instance->mvdm_system_root,
             name, path_out, path_out_bytes);
     if (!NtvdmGetSystemDirectoryA(directory, sizeof(directory))) return 0;
     return mvdm_softpc_media_find_file(directory, name, path_out,
@@ -74,7 +73,7 @@ int mvdm_softpc_system_find_file(const char *name, char *path_out,
 int mvdm_softpc_profile_shadow_system_ini(char *path_out,
     uint32_t path_out_bytes)
 {
-    session *owner = session_thread_current();
+    compat_host_context *owner = compat_host_context_current();
     char source[MAX_PATH];
     char directory[MAX_PATH];
     DWORD directory_chars;
@@ -104,7 +103,7 @@ int mvdm_softpc_profile_shadow_system_ini(char *path_out,
         return 0;
     }
     profile_shadow.owner = owner;
-    if (!session_register_teardown(owner, mvdm_softpc_profile_shadow_dispose,
+    if (!compat_host_context_register(owner, mvdm_softpc_profile_shadow_dispose,
             &profile_shadow)) {
         mvdm_softpc_profile_shadow_dispose(&profile_shadow);
         return 0;
@@ -117,8 +116,8 @@ int mvdm_softpc_profile_shadow_system_ini(char *path_out,
 
 int mvdm_softpc_system_copy_root(char *path_out, uint32_t path_out_bytes)
 {
-    session *instance = session_thread_current();
-    const char *root = instance != NULL ? session_mvdm_system_root(instance) : NULL;
+    compat_host_context *instance = compat_host_context_current();
+    const char *root = instance != NULL ? instance->mvdm_system_root : NULL;
     size_t root_bytes;
 
     if (path_out != NULL && path_out_bytes != 0u) path_out[0] = '\0';
@@ -132,8 +131,8 @@ int mvdm_softpc_system_copy_root(char *path_out, uint32_t path_out_bytes)
 int mvdm_softpc_system_copy_system_directory(char *path_out,
     uint32_t path_out_bytes)
 {
-    session *instance = session_thread_current();
-    const char *root = instance != NULL ? session_mvdm_system_root(instance) : NULL;
+    compat_host_context *instance = compat_host_context_current();
+    const char *root = instance != NULL ? instance->mvdm_system_root : NULL;
     static const char child[] = "system32";
     size_t root_bytes;
     size_t separator_bytes;

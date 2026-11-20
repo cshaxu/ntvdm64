@@ -12,7 +12,7 @@
 #define SESSION_MAX_TEARDOWNS COMPAT_HOST_CLEANUP_LIMIT
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
-#define SESSION_FIRMWARE_ROOT_BYTES 1024u
+#define SESSION_FIRMWARE_ROOT_BYTES COMPAT_MVDM_SYSTEM_ROOT_BYTES
 
 /* A fixed-width composition choice.  The numeric value is session-local
  * state only: it is never copied to guest or MVDM storage. */
@@ -91,7 +91,6 @@ typedef struct session {
     void *console_client;
     guest_memory_lease_context guest_memory_lease;
     char firmware_root[SESSION_FIRMWARE_ROOT_BYTES];
-    char mvdm_system_root[SESSION_FIRMWARE_ROOT_BYTES];
 } session;
 
 #ifdef __cplusplus

@@ -22,7 +22,7 @@
 #include <nt.h>
 #include <wow32_provider_private.h>
 #include <wow_clipboard_epoch.h>
-#include <common/wow/paths.h>
+#include <compat/include/wow_paths.h>
 #include <ntpsapi_wow32.h>
 #undef _X86_
 #line 22
