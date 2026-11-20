@@ -40,6 +40,14 @@ from P65 after package identity/timestamp normalization. Ledger:157 eliminated,
 411 open,43 supporting,6 eliminated-transitive,1 excluded. The 114-root batch
 remains open; its scheduler and projection implementations have not moved.
 
+P69 [compiled return/retirement cycle](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-p69-native-cycle-ownership.json)
+reconciles the114 roots with current P68 objects. The largest static cycle spans
+37 root APIs and50 objects (23 F,27 C);362 COFF sections are not362 functions.
+Source tracing reaches original control WM_FINALDESTROY through pending-window
+retirement, consistent with pinned createw.c::xxxFreeWindow. This rejects a
+pure-B wrapper/property move; it is not a runtime recursion defect or whole-file
+migration approval. Production/mirror delta0; no further IDs eliminated.
+
 Owner priority update: select complete batches by actual outward-dependency
 removal count, not the previous chain order. The [batch census](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-batch-priority.json)
 identifies a114-ID WOW API/discovery/menu cluster,39 console IDs and12 registry

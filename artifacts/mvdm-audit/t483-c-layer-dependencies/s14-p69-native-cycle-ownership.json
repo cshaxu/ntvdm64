@@ -1,0 +1,181 @@
+{
+  "delivery": "T483 S14 P69",
+  "baseline": "04ab565c98b786eb42b6748b3b8a7e18d52b4bb7",
+  "kind": "Compiled/source dependency audit only; no production migration or acceptance claim",
+  "newly_eliminated": 0,
+  "direct_counts": {
+    "eliminated": 157,
+    "open": 411
+  },
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "reproducer": [
+    "python -X utf8 artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-batch-relocations.py --output-root build/t483-s14-native-owner-final",
+    "python -X utf8 artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-batch-cycles.py build/t483-s14-native-owner-final/closure.json build/t483-s14-native-owner-final/cycles.json"
+  ],
+  "compiled_evidence": {
+    "roots": 114,
+    "reachable_sections": 1002,
+    "reachable_objects": 107,
+    "largest_cycle_sections": 362,
+    "largest_cycle_objects": 50,
+    "largest_cycle_public_roots": 37,
+    "F_objects_in_largest_cycle": 23,
+    "root_symbols": [
+      "_wow_menu_native_DestroyMenu@4",
+      "_wow_menu_native_EnableMenuItem@12",
+      "_wow_menu_native_InsertMenuItemW@16",
+      "_wow_menu_native_TrackPopupMenuEx@24",
+      "_wow_native_BeginPaint@8",
+      "_wow_native_CreateCaret@16",
+      "_wow_native_DefWindowProcA@16",
+      "_wow_native_DestroyCaret@0",
+      "_wow_native_DestroyWindow@4",
+      "_wow_native_DragDetect@12",
+      "_wow_native_EnableWindow@8",
+      "_wow_native_EndPaint@8",
+      "_wow_native_GetActiveWindow@0",
+      "_wow_native_GetFocus@0",
+      "_wow_native_HideCaret@4",
+      "_wow_native_InvalidateRect@12",
+      "_wow_native_MoveWindow@24",
+      "_wow_native_RedrawWindow@16",
+      "_wow_native_ReleaseCapture@0",
+      "_wow_native_ScrollWindowEx@32",
+      "_wow_native_SendMessageA@16",
+      "_wow_native_SendMessageW@16",
+      "_wow_native_SetActiveWindow@4",
+      "_wow_native_SetCapture@4",
+      "_wow_native_SetCaretPos@8",
+      "_wow_native_SetCursor@4",
+      "_wow_native_SetCursorPos@8",
+      "_wow_native_SetDlgItemTextW@12",
+      "_wow_native_SetFocus@4",
+      "_wow_native_SetParent@8",
+      "_wow_native_SetScrollInfo@16",
+      "_wow_native_SetWindowPos@28",
+      "_wow_native_SetWindowTextW@8",
+      "_wow_native_ShowCaret@4",
+      "_wow_native_ShowCursor@4",
+      "_wow_native_ShowWindow@8",
+      "_wow_native_UpdateWindow@4"
+    ],
+    "object_paths": [
+      "obj/opennt-user/button-client.obj",
+      "obj/opennt-user/clmenu.obj",
+      "obj/opennt-user/control-body-combo.obj",
+      "obj/opennt-user/control-body-combodir.obj",
+      "obj/opennt-user/control-body-comboini.obj",
+      "obj/opennt-user/control-body-dlgend.obj",
+      "obj/opennt-user/control-body-dlgmgr.obj",
+      "obj/opennt-user/control-body-dlgmgr2.obj",
+      "obj/opennt-user/control-body-edecrare.obj",
+      "obj/opennt-user/control-body-editec.obj",
+      "obj/opennt-user/control-body-editml.obj",
+      "obj/opennt-user/control-body-editsl.obj",
+      "obj/opennt-user/control-body-edmlonce.obj",
+      "obj/opennt-user/control-body-edmlrare.obj",
+      "obj/opennt-user/control-body-edslrare.obj",
+      "obj/opennt-user/control-body-lb1.obj",
+      "obj/opennt-user/control-body-lboxctl1.obj",
+      "obj/opennt-user/control-body-lboxctl2.obj",
+      "obj/opennt-user/control-body-lboxctl3.obj",
+      "obj/opennt-user/control-body-lboxmult.obj",
+      "obj/opennt-user/control-body-lboxrare.obj",
+      "obj/opennt-user/control-brush-client.obj",
+      "obj/opennt-user/control-client-draw.obj",
+      "obj/opennt-user/control-color.obj",
+      "obj/opennt-user/control-text.obj",
+      "obj/opennt-user/default-client.obj",
+      "obj/opennt-user/private-word-setter.obj",
+      "obj/wow32-dll/wow_class_words_binding.obj",
+      "obj/wow32-dll/wow_control_brush.obj",
+      "obj/wow32-dll/wow_control_brush_bindings.obj",
+      "obj/wow32-dll/wow_default_native_bindings.obj",
+      "obj/wow32-dll/wow_default_window_bindings.obj",
+      "obj/wow32-dll/wow_dialog_call_bindings.obj",
+      "obj/wow32-dll/wow_dialog_finalization_binding.obj",
+      "obj/wow32-dll/wow_dialog_procedure_bindings.obj",
+      "obj/wow32-dll/wow_edit_call_bindings.obj",
+      "obj/wow32-dll/wow_edit_conversion_bindings.obj",
+      "obj/wow32-dll/wow_edit_entry_bindings.obj",
+      "obj/wow32-dll/wow_edit_state_bindings.obj",
+      "obj/wow32-dll/wow_menu_native_bindings.obj",
+      "obj/wow32-dll/wow_user_borrow_scope.obj",
+      "obj/wow32-dll/wow_user_discovery.obj",
+      "obj/wow32-dll/wow_user_object_bindings.obj",
+      "obj/wow32-dll/wow_user_registration_bridge.obj",
+      "obj/wow32-dll/wow_user_task_lifecycle.obj",
+      "obj/wow32-dll/wow_window_client_access_bindings.obj",
+      "obj/wow32-dll/wow_window_client_state_bindings.obj",
+      "obj/wow32-dll/wow_window_creation_binding.obj",
+      "obj/wow32-dll/wow_window_procedure_entry.obj",
+      "obj/wow32-dll/wow_window_words_binding.obj"
+    ],
+    "return_cleanup_path": [
+      "obj/wow32-dll/wow_user_task_lifecycle.obj#176 -> _native_call_end@12 -> obj/wow32-dll/wow_user_task_lifecycle.obj#53",
+      "obj/wow32-dll/wow_user_task_lifecycle.obj#53 -> _publish_guest_return@8 -> obj/wow32-dll/wow_user_task_lifecycle.obj#64",
+      "obj/wow32-dll/wow_user_task_lifecycle.obj#64 -> _wow_user_window_refresh_payload@12 -> obj/wow32-dll/wow_user_object_bindings.obj#53",
+      "obj/wow32-dll/wow_user_object_bindings.obj#53 -> _refresh_graph_owned@12 -> obj/wow32-dll/wow_user_object_bindings.obj#22",
+      "obj/wow32-dll/wow_user_object_bindings.obj#22 -> _refresh_graph@12 -> obj/wow32-dll/wow_user_object_bindings.obj#20",
+      "obj/wow32-dll/wow_user_object_bindings.obj#20 -> _wow_window_words_collect_retired@4 -> obj/wow32-dll/wow_window_words_binding.obj#62",
+      "obj/wow32-dll/wow_window_words_binding.obj#62 -> _wow_window_words_terminal@8 -> obj/wow32-dll/wow_window_words_binding.obj#103",
+      "obj/wow32-dll/wow_window_words_binding.obj#103 -> _wow_control_finalize_bound@4 -> obj/wow32-dll/wow_edit_entry_bindings.obj#33",
+      "obj/wow32-dll/wow_edit_entry_bindings.obj#33 -> _edit_entry@24 -> obj/wow32-dll/wow_edit_entry_bindings.obj#20",
+      "obj/wow32-dll/wow_edit_entry_bindings.obj#20 -> _wow_control_finalize_window@4 -> obj/wow32-dll/wow_edit_state_bindings.obj#3",
+      "obj/wow32-dll/wow_edit_state_bindings.obj#3 -> _ComboBoxWndProcW@16 -> obj/opennt-user/control-body-combo.obj#5",
+      "obj/opennt-user/control-body-combo.obj#5 -> _ComboBoxWndProcWorker@20 -> obj/opennt-user/control-body-combo.obj#7",
+      "obj/opennt-user/control-body-combo.obj#7 -> _xxxCBHideListBoxWindow@12 -> obj/opennt-user/control-body-combo.obj#17",
+      "obj/opennt-user/control-body-combo.obj#17 -> _wow_native_UpdateWindow@4 -> obj/wow32-dll/wow_user_task_lifecycle.obj#158"
+    ],
+    "limits": "Relocation graph includes data, function pointers and unwind sections. Section count is not function count. A static cycle proves coupling, not runtime recursion, frequency, a bug or permission to relocate whole files. External libraries/imports/dynamic targets are not closed by this graph."
+  },
+  "source_verified_edges": [
+    {
+      "source": "src/wow32-dll/source/wow_user_task_lifecycle.c",
+      "operation": "native_call_end -> publish_guest_return -> publish_call_windows",
+      "reason": "Successful native completion must restore exact execution scope and publish the guest view before returning."
+    },
+    {
+      "source": "src/wow32-dll/source/wow_user_object_bindings.c",
+      "operation": "refresh_graph:71-113 -> wow_window_words_collect_retired",
+      "reason": "Terminal records are consumed before projecting new relationships; not an independent stateless native query."
+    },
+    {
+      "source": "src/wow32-dll/source/wow_window_words_binding.c",
+      "operation": "collect_retired:1134 -> terminal:988 -> wow_control_finalize_bound",
+      "reason": "Retained binding plus original destruction flags and cleanup callback scopes; may invoke original controls."
+    },
+    {
+      "source": "src/wow32-dll/source/wow_edit_state_bindings.c",
+      "operation": "wow_control_finalize_window -> canonical Edit/Combo/List/Button WM_FINALDESTROY",
+      "reason": "Original private control resources and FNID cleanup bits require C ownership, not B pure storage."
+    }
+  ],
+  "original_evidence": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "path": "windows/core/ntuser/kernel/createw.c",
+    "blob": "fa5dc3ad85e807c08ab4f63e0c883a4d6fde1cb1",
+    "function": "xxxFreeWindow starts1817; canonical FNID WM_FINALDESTROY call1888; FNID_CLEANEDUP_BIT update1914",
+    "role": "Read-only original semantic attribution, not new source admission. Current mirror has no createw.c. Original function also has unavailable kernel dependencies; cannot import it whole merely from this evidence."
+  },
+  "decisions": [
+    "Keep the114-root batch together with its required return/retirement boundary; do not treat the root wrappers as independently movable B functions.",
+    "Resource/TLS prerequisite is delivered P68; scheduler/native execution scope and original WND/CLS/control algorithms must have C owners. F keeps product launch/reporting/admission.",
+    "Native property/refcount/storage can belong in B only after its interface no longer invokes C finalizers or reads original layout. Do not label current1536-line window_words unit as pure storage or move it whole into B.",
+    "Do not remove terminal callbacks to break this graph: original source and passing P68 terminal fixtures establish the resource cleanup obligation.",
+    "Next candidate must separately identify taskman scheduling, WND/CLS/menu projection and canonical-control teardown carriers, then measure complete non-error mirror cost before a large-increase approval. No new C carrier or runtime behavior was authorized by this research."
+  ],
+  "evidence_hashes": {
+    "closure.json": "f6845cf6907a9603974fbcfd15580efdf5bbd7adc87a430c10f2bd7866f3c5f5",
+    "cycles.json": "a645bddfe91f7f7909e8a02f540a1a64623b7c4532d8f27c92dbcdf98f894541"
+  },
+  "source_hashes": {
+    "src/wow32-dll/source/wow_user_task_lifecycle.c": "6733df505e8a70b4e0c87577b39fe2dc5dad1a66a5c4e4fadb734cbc352be440",
+    "src/wow32-dll/source/wow_user_object_bindings.c": "3f9a05c85e31fac7d9326d8bb13cdee1aacc2e90b77825e2e340a799a4ab7940",
+    "src/wow32-dll/source/wow_window_words_binding.c": "675e1788bf08c89578c3ae2a3285d724069ed00d1a835250460c05cf83908ab8",
+    "src/wow32-dll/source/wow_edit_state_bindings.c": "15b3f5dc6999ee0288c6927cfa92dbbe408b952d13a2638be6ca2e3350699518"
+  }
+}
