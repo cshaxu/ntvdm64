@@ -1,0 +1,81 @@
+{
+  "packet": "M0 T483 S14 P144",
+  "parent": "6a016a1b6199105b6dd500467a6b982852e9553f",
+  "eliminated_C": [
+    "C0289"
+  ],
+  "eliminated_B": [],
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 0,
+    "F": 2
+  },
+  "C_runtime_slots": {
+    "F": 1
+  },
+  "C_outward_headers": {
+    "F": 1
+  },
+  "C_named_image_imports": 1,
+  "mirror": {
+    "non_error_delta": [
+      0,
+      0
+    ],
+    "conditional_and_line_directives_unchanged": true
+  },
+  "contract": "Original producer pause and resume both call the same B implementation. The endpoint lock preserves barrier, release, geometry and bind order. Product lease or readiness requests use one local event exchange; NTVDM retains broker/input-watch ownership. No guest or wire changes.",
+  "verification": {
+    "cached_build": [
+      "x86",
+      "x64",
+      "x86 reference"
+    ],
+    "native_cases": [
+      "registry",
+      "input-terminal",
+      "console-exit-request",
+      "natural-exit",
+      "natural-loss",
+      "natural-wow",
+      "natural-wow-loss",
+      "natural-console-ready",
+      "natural-console",
+      "lifecycle-console",
+      "lifecycle-wow",
+      "lifecycle-loss",
+      "lifecycle-pending"
+    ],
+    "console_fixture": [
+      "successful acquire",
+      "rejected release preserves route/mouse",
+      "failed geometry conversion releases owner",
+      "broken channel is terminal only after service authority"
+    ],
+    "private_desktop_cases": {
+      "nested-console": "PASS broker I/O nested-console AMD64 : actual CMD/DOS input, parent return and direct exit=23",
+      "nested-window-retry": "PASS broker I/O nested-window AMD64 : actual CMD/DOS input, parent return and direct exit=23",
+      "command_native_edit_return": "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion"
+    },
+    "source_owner": [
+      "0001:00177680       _compat_console_activate   00578680 f   softpc-win32-bindings:console_activation.obj",
+      " 0001:001779d0       _ntvdm_console_set_active  005789d0 f   softpc-win32-bindings:console_activation.obj"
+    ],
+    "limitations": "The first Window and broken-pipe invocations had option forwarding errors. Explicit-switch reruns passed. Full and Win95 were not run."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "3e2c7758-d702-4626-a652-2e27c9695b7a",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

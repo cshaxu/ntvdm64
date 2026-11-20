@@ -2,7 +2,7 @@
 #include "console_client.h"
 #include "worker_lifecycle.h"
 #include "compat/include/console_text.h"
-#include "console_geometry.h"
+#include "compat/include/console_activation.h"
 #include "worker-base/input_watch.h"
 #include "compat/include/publication.h"
 #include "compat/include/console_endpoint.h"
@@ -17,12 +17,64 @@
 typedef struct console_client {
     session *owner;
     compat_console_endpoint endpoint;
-    HANDLE ready,stop,shutdown,failure_event;
+    compat_console_activation activation;
+    PTP_WAIT activation_wait;
+    HANDLE shutdown;
     worker_base_input_watch *input_watch;
     HANDLE capability;
     mvdm_mouse_bridge mouse;
 } console_client;
-static DWORD console_activate(console_client *,BOOL);
+static void CALLBACK service_activation(PTP_CALLBACK_INSTANCE instance,
+    void *context, PTP_WAIT wait, TP_WAIT_RESULT result)
+{
+    console_client *client = context;
+    compat_console_activation *activation = &client->activation;
+    ntcon_worker_client *channel = &client->endpoint.channel;
+    DWORD decision = WORKER_IO_KEEP;
+    DWORD status = ERROR_INVALID_FUNCTION;
+    (void)instance;
+    (void)result;
+
+    switch (activation->operation) {
+    case CONSOLE_ACTIVATION_OPEN:
+        status = worker_base_io_open(&channel->pipe, &channel->peer,
+            &activation->ready, &channel->generation);
+        break;
+    case CONSOLE_ACTIVATION_CHECK_PAUSE:
+        status = worker_base_io_checkpoint(WORKER_IO_CHECKPOINT_PAUSE, 0, &decision);
+        activation->release_pending = decision != WORKER_IO_KEEP;
+        break;
+    case CONSOLE_ACTIVATION_CLOSE:
+        status = worker_base_io_close(&activation->released_pipe,
+            &activation->released_peer, &activation->ready);
+        break;
+    case CONSOLE_ACTIVATION_BIND_INPUT:
+        status = worker_base_input_watch_bind(client->input_watch, activation->ready);
+        break;
+    case CONSOLE_ACTIVATION_UNBIND_INPUT:
+        status = worker_base_input_watch_bind(client->input_watch, NULL);
+        break;
+    }
+
+    activation->status = status;
+    SetThreadpoolWait(wait, activation->request, NULL);
+    SetEvent(activation->completed);
+}
+
+static DWORD start_activation(console_client *client)
+{
+    compat_console_activation *activation = &client->activation;
+    activation->endpoint = &client->endpoint;
+    activation->mouse = &client->mouse;
+    activation->request = CreateEventW(NULL, FALSE, FALSE, NULL);
+    if (!activation->request) return GetLastError();
+    activation->completed = CreateEventW(NULL, FALSE, FALSE, NULL);
+    if (!activation->completed) return GetLastError();
+    client->activation_wait = CreateThreadpoolWait(service_activation, client, NULL);
+    if (!client->activation_wait) return GetLastError();
+    SetThreadpoolWait(client->activation_wait, activation->request, NULL);
+    return ERROR_SUCCESS;
+}
 static void console_input_failed(void *context,DWORD error)
 {
     console_client *client=context;
@@ -36,15 +88,22 @@ static void console_client_destroy(console_client *client)
     client->owner->host_context.console_endpoint=NULL;
     client->owner->console_client=NULL;
     OpenNtBaseClientSetCommandBinding(NULL,NULL);
-    if (client->stop) SetEvent(client->stop);
+    if (client->activation_wait) {
+        SetThreadpoolWait(client->activation_wait, NULL, NULL);
+        WaitForThreadpoolWaitCallbacks(client->activation_wait, TRUE);
+        CloseThreadpoolWait(client->activation_wait);
+    }
+    if (client->activation.completed) CloseHandle(client->activation.completed);
+    if (client->activation.request) CloseHandle(client->activation.request);
+    if (client->activation.stop) SetEvent(client->activation.stop);
     worker_base_publication_destroy(client->endpoint.publisher);
     worker_base_input_watch_destroy(client->input_watch);
     CloseHandle(client->endpoint.channel.pipe);CloseHandle(client->endpoint.channel.peer);
     ntcon_worker_client_dispose(&client->endpoint.channel);
-    if(client->failure_event)CloseHandle(client->failure_event);
-    CloseHandle(client->ready);
+    if(client->activation.failure_event)CloseHandle(client->activation.failure_event);
+    CloseHandle(client->activation.ready);
     if (client->capability) CloseHandle(client->capability);
-    if (client->stop) CloseHandle(client->stop);
+    if (client->activation.stop) CloseHandle(client->activation.stop);
     if (client->shutdown) CloseHandle(client->shutdown);
     if (client->endpoint.input_identity) CloseHandle(client->endpoint.input_identity);
     if (client->endpoint.output_identity) CloseHandle(client->endpoint.output_identity);
@@ -62,7 +121,7 @@ void ntvdm_console_client_end(session *owner)
 static DWORD console_command_ready(void *context)
 {
     console_client *client=context;
-    return console_activate(client,TRUE);
+    return compat_console_activate(&client->activation, TRUE);
 }
 
 DWORD ntvdm_console_client_begin(session *owner)
@@ -73,7 +132,7 @@ DWORD ntvdm_console_client_begin(session *owner)
         return ERROR_INVALID_STATE;
     client=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*client));
     if (!client) return ERROR_NOT_ENOUGH_MEMORY;
-    error=worker_base_io_open(&client->endpoint.channel.pipe,&client->endpoint.channel.peer,&client->ready,
+    error=worker_base_io_open(&client->endpoint.channel.pipe,&client->endpoint.channel.peer,&client->activation.ready,
         &client->endpoint.channel.generation);
     if (error) { HeapFree(GetProcessHeap(),0,client);return error; }
     client->owner=owner;
@@ -88,13 +147,13 @@ DWORD ntvdm_console_client_begin(session *owner)
     error=ntcon_worker_client_init(&client->endpoint.channel,client->endpoint.channel.pipe,
         client->endpoint.channel.peer,NULL,client->endpoint.channel.generation);
     if(error){console_client_destroy(client);return error;}
-    error=ntvdm_worker_lifecycle_fault_event(&client->failure_event);
+    error=ntvdm_worker_lifecycle_fault_event(&client->activation.failure_event);
     if(error){console_client_destroy(client);return error;}
-    client->endpoint.channel.failure_event=client->failure_event;
-    client->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
+    client->endpoint.channel.failure_event=client->activation.failure_event;
+    client->activation.stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->endpoint.input_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->endpoint.output_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if (!client->endpoint.channel.event || !client->stop ||
+    if (!client->endpoint.channel.event || !client->activation.stop ||
         !client->endpoint.input_identity || !client->endpoint.output_identity) {
         error=GetLastError();console_client_destroy(client);return error;
     }
@@ -104,14 +163,16 @@ DWORD ntvdm_console_client_begin(session *owner)
     if(!client->endpoint.publisher){error=GetLastError();console_client_destroy(client);return error;}
     error=ntvdm_console_graphics_attach_publisher(client->endpoint.graphics,client->endpoint.publisher);
     if(error){console_client_destroy(client);return error;}
-    client->input_watch=worker_base_input_watch_create(NULL,NULL,NULL,client->stop,
+    client->input_watch=worker_base_input_watch_create(NULL,NULL,NULL,client->activation.stop,
         NULL,NULL,NULL,NULL,console_input_failed,client);
     client->mouse.input_ready=worker_base_input_watch_event(client->input_watch);
-    error=client->input_watch ? console_activate(client,TRUE) : GetLastError();
+    error=client->input_watch ? start_activation(client) : GetLastError();
+    if (!error) error=compat_console_activate(&client->activation, TRUE);
     if (error) {
         console_client_destroy(client);return error;
     }
     client->endpoint.input_readiness=worker_base_input_watch_readiness(client->input_watch);
+    client->endpoint.activation=&client->activation;
     owner->host_context.mouse=&client->mouse;
     owner->host_context.console_endpoint=&client->endpoint;
     owner->console_client=client;
@@ -146,74 +207,4 @@ BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *capability,HANDLE *execut
         SetLastError(error);return FALSE;
     }
     return result;
-}
-
-static DWORD console_activate(console_client *client,BOOL active)
-{
-    DWORD error=ERROR_SUCCESS;
-    EnterCriticalSection(&client->endpoint.lock);
-    if(active && !client->endpoint.channel.pipe) {
-        error=worker_base_io_open(&client->endpoint.channel.pipe,&client->endpoint.channel.peer,&client->ready,
-            &client->endpoint.channel.generation);
-        if(!error)error=ntcon_worker_client_init(&client->endpoint.channel,client->endpoint.channel.pipe,
-            client->endpoint.channel.peer,client->stop,client->endpoint.channel.generation);
-        if(!error)client->endpoint.channel.failure_event=client->failure_event;
-    }
-    if(!active && client->endpoint.channel.pipe) {
-        console_io_request barrier={0};console_io_reply reply;
-        HANDLE pipe=client->endpoint.channel.pipe,peer=client->endpoint.channel.peer;
-        DWORD decision=WORKER_IO_KEEP;
-        error=worker_base_io_checkpoint(WORKER_IO_CHECKPOINT_PAUSE,0,&decision);
-        if(error || decision==WORKER_IO_KEEP) {
-            LeaveCriticalSection(&client->endpoint.lock);return error;
-        }
-        barrier.operation=CONSOLE_IO_BARRIER;
-        error=ntcon_worker_call(&client->endpoint.channel,&barrier,&reply);
-        if(!error) {
-            error=worker_base_io_close(&pipe,&peer,&client->ready);
-            /* A rejected release leaves the usable transport intact. Only
-             * after physical closure discard its local operation state. */
-            if(!pipe) {
-                ntcon_worker_client_dispose(&client->endpoint.channel);
-                DWORD disabled=worker_base_input_watch_bind(client->input_watch,NULL);
-                if(!error)error=disabled;
-            }
-        }
-    }
-    if(!error && active) {
-        console_io_reply reply;
-        int64_t height;
-        ZeroMemory(&client->endpoint.request,sizeof(client->endpoint.request));
-        client->endpoint.request.operation=CONSOLE_IO_SCREEN_INFO;
-        error=ntcon_worker_call(&client->endpoint.channel,&client->endpoint.request,&reply);
-        if(!error) {
-            height=(int64_t)reply.state.bottom-reply.state.top+1;
-            if(height<=0 || height>SHRT_MAX)error=ERROR_INVALID_DATA;
-            else error=ntcon_worker_prepare_text(&client->endpoint.channel,
-                (COORD){80,ntvdm_console_return_height((SHORT)height)});
-        }
-        /* Conversion is part of acquisition, before guest producers resume.
-         * A failed conversion must not strand the frontend's active owner. */
-        if(error) {
-            DWORD release=console_activate(client,FALSE);
-            if(!release)mvdm_softpc_mouse_reset(&client->mouse);
-            else (void)ntcon_worker_client_fail(&client->endpoint.channel,release);
-        }
-    }
-    /* Unlike IRQ cancellation, successful DOS ownership handoff retires the
-     * frontend's DOS mouse route and discards its copied relative records.
-     * Original nt_block_event_thread has quiesced the event/timer producers
-     * before this call. Match that acknowledged retirement locally; the next
-     * DOS activation will receive a fresh ENTER. Never reset on failed RPC. */
-    if(!error && active)error=worker_base_input_watch_bind(client->input_watch,client->ready);
-    if(!error && !active)mvdm_softpc_mouse_reset(&client->mouse);
-    LeaveCriticalSection(&client->endpoint.lock);
-    return error;
-}
-BOOL ntvdm_console_set_active(BOOL active)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner ? owner->console_client : NULL;
-    DWORD error=client ? console_activate(client,active) : ERROR_SUCCESS;
-    SetLastError(error);return error==ERROR_SUCCESS;
 }

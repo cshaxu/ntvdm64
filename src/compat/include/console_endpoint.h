@@ -17,6 +17,7 @@ typedef struct compat_console_endpoint {
     struct worker_base_publication *publisher;
     struct ntvdm_console_graphics *graphics;
     compat_input_readiness *input_readiness;
+    struct compat_console_activation *activation;
 } compat_console_endpoint;
 
 compat_console_endpoint *compat_console_output_endpoint(HANDLE output);

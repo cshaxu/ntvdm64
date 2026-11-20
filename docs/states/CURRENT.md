@@ -59,11 +59,12 @@ P136 [B routes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-b
 P137 [WOW startup ticket](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-start-ticket-owner.json).
 P138 [Pending WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-pending-exit-owner.json).
 P139 [WOW local retirement](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-local-retirement-owner.json).
-P140 [Redundant WOWEXEC](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-noop-exit-owner.json).
+P140 [WOWEXEC](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-noop-exit-owner.json).
 P141 [Console exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-exit-owner.json).
-P142 [Whole WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-exit-owner.json).
-P143 [DOS exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-dos-exit-owner.json) closed C0318.
-Delivered: B 0 known calls; C 4 calls, 1 runtime slot, 1 header, 1 image.
+P142 [WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-exit-owner.json).
+P143 [DOS exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-dos-exit-owner.json).
+P144 [Console activation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-activation-owner.json) .
+Delivered: B 0 known calls; C 3 calls, 1 slot, 1 header, 1 image.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moved page-domain identity and cleanup to B and removed three F calls.

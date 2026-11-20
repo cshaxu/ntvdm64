@@ -1,7 +1,7 @@
 #ifndef CONSOLE_GEOMETRY_FIXTURE_H
 #define CONSOLE_GEOMETRY_FIXTURE_H
 #include "ntcon-exe/console_frontend.h"
-#include "ntvdm-exe/win32/console_geometry.h"
+#include "compat/include/console_geometry.h"
 /* Test-only composition of the real NTVDM selector and real frontend storage
  * primitive. Never selected as a production provider or protocol fallback. */
 static DWORD test_prepare_vga(HANDLE output,SMALL_RECT *window)

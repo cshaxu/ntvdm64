@@ -3,6 +3,7 @@
  * even through the native API. Only broker delivery and session binding are
  * stubbed; both I/O implementations and Console operations are real. */
 #include "ntvdm-exe/win32/console_client.h"
+#include "compat/include/console_activation.h"
 #include "ntvdm-exe/win32/worker_lifecycle.h"
 #include "compat/include/mvdm_softpc_event_thread.h"
 #include "compat/include/mvdm_softpc_worker_exit.h"
