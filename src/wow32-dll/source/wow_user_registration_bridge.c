@@ -279,31 +279,6 @@ static DWORD WINAPI registered_full_handle(WORD handle)
     }
 }
 
-VOID WINAPI wow_user_register_wow_exec(HANDLE window)
-{
-    VOID WINAPI RegisterWowExec(HANDLE);
-    wow_user_runtime_thread *binding = wow_user_runtime_current();
-    DWORD full;
-    if (!binding || !binding->thread || !binding->thread->ppi ||
-            !binding->thread->ppi->objects) {
-        unsupported_void(); return;
-    }
-    /* Registration requires a live owned window, unlike original message
-     * conversion's intentional fallback for a departed DDE peer. */
-    full = (DWORD)(ULONG_PTR)wow_user_window_full_handle(
-        binding->thread->ppi->objects, LOWORD(window));
-    /* WK32RegisterShellWindowHandle supplies HWND32, a sign-extended WORD.
-     * Resolve it through the existing USER handle owner before the original
-     * BaseClient sends it to BaseSrv. Never weaken broker PID validation. */
-    if (!full) return;
-    if ((DWORD)(ULONG_PTR)window != (DWORD)(LONG)(SHORT)LOWORD(window) &&
-            (DWORD)(ULONG_PTR)window != full) {
-        SetLastError(ERROR_INVALID_WINDOW_HANDLE);
-        return;
-    }
-    RegisterWowExec((HANDLE)(ULONG_PTR)full);
-}
-
 static VOID WINAPI registered_directed_yield(DWORD thread_id)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();

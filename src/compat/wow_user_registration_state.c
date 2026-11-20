@@ -9,6 +9,32 @@
 static PFNWOWHANDLERSIN wow_input_handlers;
 static wow_user_task_lifecycle wow_lifecycle;
 
+VOID WINAPI wow_user_register_wow_exec(HANDLE window)
+{
+    VOID WINAPI RegisterWowExec(HANDLE);
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    DWORD full;
+    if (!binding || !binding->thread || !binding->thread->ppi ||
+            !binding->thread->ppi->objects) {
+        SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
+        return;
+    }
+    /* Registration requires a live owned window, unlike original message
+     * conversion's intentional fallback for a departed DDE peer. */
+    full = (DWORD)(ULONG_PTR)wow_user_window_full_handle(
+        binding->thread->ppi->objects, LOWORD(window));
+    /* WK32RegisterShellWindowHandle supplies HWND32, a sign-extended WORD.
+     * Resolve it through the existing USER handle owner before the original
+     * BaseClient sends it to BaseSrv. Never weaken broker PID validation. */
+    if (!full) return;
+    if ((DWORD)(ULONG_PTR)window != (DWORD)(LONG)(SHORT)LOWORD(window) &&
+            (DWORD)(ULONG_PTR)window != full) {
+        SetLastError(ERROR_INVALID_WINDOW_HANDLE);
+        return;
+    }
+    RegisterWowExec((HANDLE)(ULONG_PTR)full);
+}
+
 const struct tagAPFNWOWHANDLERSIN *WINAPI wow_user_registered_callbacks(void)
 {
     return &wow_input_handlers;

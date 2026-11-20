@@ -1,0 +1,71 @@
+{
+  "packet": "M0 T483 S14 P123",
+  "baseline": "31336bf2f22f61b1278b37950bf9485969598173",
+  "eliminated_C_ids": [
+    "C0503"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 551,
+    "open": 17,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 4
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 5,
+    "image-import": 1,
+    "symbol": 11
+  },
+  "remaining_C_by_provider": {
+    "common": 2,
+    "ntvdm-exe": 6,
+    "worker-base": 2,
+    "wow32-dll": 7
+  },
+  "ownership": "B validates the worker-owned USER window and keeps the original failure codes, handle selection and WINAPI ABI. Original BaseClient and NTSRV retain registration and authentication authority. Existing C0156 remains open.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "f8af1e88-774b-4fed-a239-412d2ec3cd19",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": [
+    "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+    "PASS shared worker 13384, two distinct tasks overlapped and retired independently, both requests exited normally",
+    "detached CheckDOS task=1 reservation-error=0",
+    "detached CheckDOS task=2 reservation-error=0",
+    "detached CheckDOS task=3 reservation-error=0",
+    "PASS new-Console original process completion authorizes only the registered live worker",
+    "PASS new-Console original process completion authorizes only the registered live worker",
+    "PASS new-Console original process completion authorizes only the registered live worker",
+    "PASS DOS Get replaces previous request on resident-worker reuse",
+    "PASS WOW request/worker rejects valid character frontend/context without changing original WOW Get/Exit",
+    "PASS WOW task close binds opaque management identity, delivers once, retries only on later intent and retires safely",
+    "PASS WOW startup authentication, wait-only notification and immediate-completion latch",
+    "PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected",
+    "PASS reused WOW receipt mismatch, retired task and worker reuse checked",
+    "PASS failed WOW completion has no startup acknowledgement; late report rejected",
+    "PASS closing original WOW head rejects new task without publishing a record",
+    "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+  ],
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "boundary.out": "ad51a7e26e19c325c2328afabfccfd5e69a367d09a65f343d5dfe47e27e415cb",
+    "probes.out": "15f77eeaced029d6ecdd0be7978ec890593465d552c349f81bc3883a0dcde9c3",
+    "final-checks.out": "73e35aaddc05b869a5fb95518e1165adec4f30d48e37248ad795395c4ad92727"
+  }
+}

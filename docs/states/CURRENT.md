@@ -18,7 +18,7 @@ implementation migration. The broader C-layer cleanup remains active.
 | Asset Needs | Existing fixed OpenNT baseline, cached graphs and approved immutable guest fixtures. |
 | Candidate Proposal | [T483 parent proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
 | Identifier Mode | M0 T483 S14, Ordinary Mode. |
-| Admission And Approval | Owner approved sequential implementation migration on2026-11-19. S13 first-chain verification completed; S14 admitted at its closure delivery. S15-S19 remain planned. |
+| Admission And Approval | Owner approved sequential implementation migration on2026-11-19. S13 first-chain verification completed; S14 admitted at its closure delivery. Later S remain planned. |
 | Non-goals | No guest modification/rebuild, whole-session/core migration, duplicate TLS/state machine, B-to-D/E/F dependency or forwarding-only completion. |
 | Expected Markers | Actual inward implementations and state ownership, removed superseded providers/forwarding, retained original memory semantics and lifetime. |
 | Similar-Issue Sweep | All acquire/use/release, thread and cross-image consumers of each selected chain; distinguish original C provider algorithms from common compatibility mechanics. |
@@ -60,8 +60,8 @@ P108 [WOW hook and task wait](../../artifacts/mvdm-audit/t483-c-layer-dependenci
 P109 [Native publication](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-publication-owner.json) delivered B -1.
 P110 [Input terminal signals](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-input-terminal-owner.json) delivered C -1.
 P111 [CCPU thread exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-ccpu-thread-exit-owner.json) delivered C -1.
-P122 [WOW retirement binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-retirement-provider.json) removed two module lookups.
-Delivered: B 6 known calls; C 18 open (12 functions, 0 data).
+P123 [WOW registration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-exec-register-owner.json) delivered C -1.
+Delivered: B 6 known calls; C 17 open (11 functions, 0 data).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 removes its product-session header and three F function dependencies; the same
@@ -322,10 +322,10 @@ separates clock ownership from CPU and USER backing. P21 completes the
 shared host-clock extraction. USER backing remains coupled to SAS and still
 requires its own boundary resolution; the source review is not runtime proof.
 
-[Approved S13-S19 worklist](../etc/operations/t483-compat-implementation-migration-plan.md):
-S13 closed; S14 memory active; S15 input/display, S16 COMMAND/BASE separation,
-S17 devices, S18 WOW and S19 original-owner recovery/final reconciliation
-are planned. This supersedes the former S13/S14 allocation, not its evidence.
+[Approved S worklist](../etc/operations/t483-compat-implementation-migration-plan.md):
+S14 remains active for all B/C to D/E/F implementation edges. S15 covers D to
+E/F, S16 covers E to F, and S17-S19 cover the three internal reverse edges in
+order. The former functional work groups feed S14 outward cleanup.
 
 The unpublished keymouse forwarding trial was withdrawn with
 [patch/hash evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s13-keymouse-withdrawal.json).
