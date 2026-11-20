@@ -508,5 +508,19 @@
   "p121_removed_slots": [
     "B0022"
   ],
-  "p121_evidence": "s14-vdd-clear-owner.json"
+  "p121_evidence": "s14-vdd-clear-owner.json",
+  "runtime_image_rows": [
+    {
+      "id": "B0036",
+      "kind": "optional-trace-named-image-lookup",
+      "provider": "wow32-dll",
+      "source": "src/compat/wow_user_thunk_scope.c",
+      "status": "eliminated",
+      "evidence": "s14-trace-module-owner.json"
+    }
+  ],
+  "runtime_image_counts": {
+    "eliminated": 1,
+    "open": 0
+  }
 }

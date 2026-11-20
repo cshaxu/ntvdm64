@@ -1,0 +1,178 @@
+{
+  "packet": "M0 T483 S14 P129",
+  "parent": "8436585f54c17a9f600ba685f424819af7940aec",
+  "eliminated_B": [
+    "B0036"
+  ],
+  "eliminated_C": [],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 4
+  },
+  "outward_C_known_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 8
+  },
+  "C_image_contracts": 1,
+  "reason": "The optional thunk trace used a private DLL name solely as a base address reference. An address in the trace function resolves its containing image without a named product dependency or reference count change.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "958ecd77-0aef-4577-a035-e460de322c06",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "coverage": {
+    "head": "8436585f54c17a9f600ba685f424819af7940aec",
+    "objects_mapped_and_linkmap_objects_and_symbols": {
+      "ntvdm.exe": [
+        509,
+        454,
+        5757
+      ],
+      "VCDEX.DLL": [
+        3,
+        1,
+        30
+      ],
+      "VDMREDIR.dll": [
+        51,
+        45,
+        278
+      ],
+      "nthook32.dll": [
+        54,
+        25,
+        82
+      ],
+      "wow32.dll": [
+        230,
+        227,
+        2686
+      ],
+      "ntcon.exe": [
+        67,
+        37,
+        211
+      ],
+      "ntsrv.exe": [
+        62,
+        42,
+        416
+      ],
+      "ntmon.exe": [
+        15,
+        6,
+        74
+      ],
+      "run16.exe": [
+        59,
+        43,
+        179
+      ],
+      "ntvwm.exe": [
+        67,
+        41,
+        196
+      ],
+      "nthook64.dll": [
+        25,
+        25,
+        83
+      ]
+    },
+    "gaps": {
+      "ntvdm.exe": [
+        "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+        "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+      ],
+      "VDMREDIR.dll": [
+        "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+        "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+      ],
+      "nthook32.dll": [
+        "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+        "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+      ],
+      "wow32.dll": [
+        "no-valid-includes obj/callpr32.obj",
+        "unattributed-object obj/wow32-dll-entry-bridge.obj",
+        "unattributed-object obj/wow32-parent-import-abi-aliases.obj",
+        "unattributed-object obj/wow32-system-import-abi-aliases.obj"
+      ]
+    }
+  },
+  "census": {
+    "before_removed_named_lookup": {
+      "from": "compat",
+      "to": "wow32-dll",
+      "source": "src/compat/wow_user_thunk_scope.c",
+      "line_or_section": "92",
+      "target": "wow32.dll",
+      "evidence": "WOW32.DLL",
+      "product": "wow32.dll"
+    },
+    "remaining_live_relocations_by_function": {
+      "ntvdm_worker_lifecycle_authorize_exit": 2,
+      "ntvdm_console_set_active": 2,
+      "worker_base_request_console_exit": 1,
+      "wow_task_termination_retire": 1,
+      "W32ExitWowProcess": 5,
+      "wow_task_termination_fail": 1,
+      "wow_task_termination_bind": 1,
+      "wow_user_notify_startup_noop": 1,
+      "UserRegisterWowHandlers": 1,
+      "OpenNtBaseClientCallServer": 6
+    },
+    "C_named_imports_primary_scan": [
+      {
+        "from": "mvdm-host",
+        "to": "ntvdm-exe",
+        "source": "VCDEX.DLL",
+        "line_or_section": "",
+        "target": "ntvdm.exe",
+        "evidence": "PE import",
+        "product": "VCDEX.DLL"
+      }
+    ],
+    "other_name_strings": [
+      {
+        "from": "mvdm-host",
+        "to": "wow32-dll",
+        "source": "src/mvdm-host/wow32/wcntl32.c",
+        "line_or_section": "837",
+        "target": "wow32.dll",
+        "evidence": " WOW32.DLL : WM32LBDir() :: Could not allocate memory for string, ChandanC\\n",
+        "product": "wow32.dll"
+      },
+      {
+        "from": "mvdm-host",
+        "to": "wow32-dll",
+        "source": "src/mvdm-host/wow32/wow32.c",
+        "line_or_section": "245",
+        "target": "wow32.dll",
+        "evidence": "The Win16 subsystem could not load critical string resources from wow32.dll, terminating.",
+        "product": "wow32.dll"
+      }
+    ],
+    "VDMREDIR_map_identity": "Exact link command with only audit output paths and /MAP added. PE sections matched except the debug directory time stamp. Runtime product file was not replaced by the relink.",
+    "limits": "Static relocation analysis cannot determine general callback target reachability; separate B callback ledger remains required. P128 covers function providers inside the named imports of VDMREDIR and VCDEX."
+  },
+  "verification": {
+    "shared_wow": "PASS shared worker 23912, two distinct tasks overlapped and retired independently, both requests exited normally",
+    "real_dispatch_rows": 602,
+    "return_rows": 598,
+    "consistent_module_bases": 1,
+    "rows_outside_wow_executable_sections": 0,
+    "trace_sha256": "29ee3cb261f06c4fbfcaef9583b34425c0847b4d79f08b768bbdbf601a155879"
+  }
+}

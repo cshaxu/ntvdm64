@@ -89,8 +89,9 @@ static void trace_thunk(PVDMFRAME frame, LPFNW32 thunk)
         FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (file == INVALID_HANDLE_VALUE)
         return;
-    module = GetModuleHandleA("WOW32.DLL");
-    rva = module && (ULONG_PTR)thunk >= (ULONG_PTR)module ?
+    rva = GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
+              GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+              (LPCSTR)trace_thunk, &module) && (ULONG_PTR)thunk >= (ULONG_PTR)module ?
         (ULONG_PTR)thunk - (ULONG_PTR)module : 0;
     bytes = (DWORD)sprintf_s(line, sizeof(line),
         "%lu W32Dispatch call=%04X thunk=%08lX rva=%08lX task=%04X return=%08lX ax=%04X args=%u tid=%lu depth=%u\r\n",
