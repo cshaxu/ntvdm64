@@ -80,7 +80,7 @@
 #include "worker-base/connection.h"
 #include "compat/include/mvdm_softpc_event_thread.h"
 #include "compat/include/mvdm_keyboard_history.h"
-#include "ntvdm-exe/win32/console_input.h"
+#include "compat/include/console_input.h"
 #include "compat/include/console_text.h"
 #include "mvdm_softpc_text_video.h"
 #include "ntvdm-exe/win32/console_client.h"
@@ -88,7 +88,7 @@ extern void mouse_pointer_route_changed(int);
 extern BOOL nt_init_called;
 extern unsigned PendingKeyboardHistory(void);
 extern void Reset6805and8042(void);
-mvdm_keyboard_history nt_keyboard_history;
+extern mvdm_keyboard_history nt_keyboard_history;
 #line 78
 /*================================================================
 External references.

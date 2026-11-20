@@ -1,0 +1,117 @@
+{
+  "packet": "M0 T483 S14 P120",
+  "baseline": "dac4014c7c91ae8019ac27b7f284dd0c3cfdbbe7",
+  "eliminated_C_ids": [
+    "C0054",
+    "C0299"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 550,
+    "open": 18,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 5
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 5,
+    "image-import": 1,
+    "symbol": 12
+  },
+  "remaining_C_by_provider": {
+    "common": 2,
+    "ntvdm-exe": 6,
+    "worker-base": 2,
+    "wow32-dll": 8
+  },
+  "ownership": "B owns normalization, read/peek, receipt storage and Win32 readiness acknowledgement. E owns the existing wait and callback dispatch. C serializes history access and owns device input. The product owns connection, handoff and shutdown policy.",
+  "compiled_header_closure": {
+    "msvc-x86-release/console_compat.c": [
+      "compat/include/conapi.h",
+      "compat/include/console_input.h",
+      "compat/include/console_io.h",
+      "compat/include/console_mouse.h",
+      "compat/include/console_services.h",
+      "compat/include/console_title.h",
+      "compat/include/console_video.h",
+      "compat/include/mvdm_keyboard_history.h",
+      "compat/include/mvdm_mouse_record.h",
+      "compat/include/mvdm_softpc_mouse_bridge.h",
+      "compat/include/mvdm_softpc_mouse_input.h",
+      "compat/include/winconp.h"
+    ],
+    "msvc-x86-release/console_services.c": [
+      "compat/include/console_endpoint.h",
+      "compat/include/console_graphics.h",
+      "compat/include/console_grid.h",
+      "compat/include/console_input.h",
+      "compat/include/console_io.h",
+      "compat/include/console_mouse.h",
+      "compat/include/console_services.h",
+      "compat/include/console_transport.h",
+      "compat/include/console_video.h",
+      "compat/include/host_context.h",
+      "compat/include/input_readiness.h",
+      "compat/include/mvdm_mouse_record.h",
+      "compat/include/mvdm_softpc_mouse_bridge.h",
+      "compat/include/mvdm_softpc_mouse_input.h",
+      "compat/include/publication.h",
+      "lib-win32/handle/duplicate.h"
+    ],
+    "msvc-x86-release/input_readiness.c": [
+      "compat/include/input_readiness.h"
+    ],
+    "msvc-x64-release/input_readiness.c": [
+      "compat/include/input_readiness.h"
+    ]
+  },
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0,
+    "scope": "Two existing added lines in the same nt_event.c compatibility block: input include and history extern. No condition frame or line-directive edits."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "3f3b086b-f288-4119-8a42-7dd4af4510b4",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "scope": "Cached x86/x64 product and reference rebuild; native watch, input batch and nine lifecycle cases; real native EDIT and bidirectional Console/Window input handoff.",
+    "runtime_output": [
+      "ninja: Entering directory `build/.ninja/msvc-x86-release/worker'",
+      "ninja: no work to do.",
+      "PASS shared input watcher: 641 assertions; event/callback, rearm, source replacement, close priority, 50-cycle handles",
+      "BATCH-PRESSURE full queue consumes nothing; partial capacity and recovery PASS",
+      "BATCH-MOUSE 1000 records / 200 reads; order, buttons, bounds PASS",
+      "BATCH-RELATIVE 1000 records / 200 reads; signed motion, buttons, enter/leave PASS",
+      "BATCH-SCANLESS-TEXT punctuation/case/modifiers/key-up PASS",
+      "BATCH-KEY expansion/mixed-order/capacity/Alt-Enter PASS",
+      "BATCH-RECEIPT identical keys remain distinct through normalization and original history PASS",
+      "PASS registration, unregister backing lifetime and invalidation fallback",
+      "PASS 9 VM frontend registry and lifecycle cases",
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+      "PASS real DOS and native CUI input after repeated source entry"
+    ],
+    "test-isolation": "An ad hoc combined run imported the VS environment into the same PowerShell process used to launch DOS, and COMMAND did not present a prompt. The product gate already launches the compiler fixture as a child. The successful final run uses that same isolation. The native startup observer was also replaced with the correct terminal observer for CAF."
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "boundary.out": "2cb47933dba89b15361c8ce44bcaed0bcb0de8967b782b0ce1c05dd284903862",
+    "probes-verified.out": "1c1841562bc4ce16742eb89baa14aa78ae3b1d6019c00898fea333d229f817d3",
+    "batch-verified.txt": "fe563edecffb9f6577ca5da86824f301b0ddf1c729adcdf44f45ba38d7c53108",
+    "lifecycle-verified/results.json": "a3d79fa8e5123a87ad4d474edef358634ed9a701504da60245df6d8e20e8b740",
+    "final-checks.out": "73e35aaddc05b869a5fb95518e1165adec4f30d48e37248ad795395c4ad92727",
+    "source-handoff-verified/result.json": "2adbd1a81cee7f8c0b5d4773f1a7d0f379e6f39b4525dabd2aa7de824a078ae4",
+    "smoke.out": "b5b3afceb7236864942d5c1ab248fe0e50a51fe32ae32c2709440511b1efc0ee"
+  }
+}

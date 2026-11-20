@@ -1,20 +1,19 @@
 #include "input_watch.h"
 
 struct worker_base_input_watch {
-    CRITICAL_SECTION lock;
-    HANDLE console_close,worker_close,task_close,stop,local_stop,rearm,wake,source,thread;
+    compat_input_readiness readiness;
+    HANDLE console_close,worker_close,task_close,stop,local_stop,source,thread;
     worker_base_input_ready_fn ready;
     worker_base_input_shutdown_fn close_console,close_worker;
     worker_base_input_task_fn close_task;
     worker_base_input_failure_fn failed;
     void *context;
-    DWORD error;
 };
 
 static DWORD fail_watch(worker_base_input_watch *watch,DWORD error)
 {
-    EnterCriticalSection(&watch->lock);watch->error=error;
-    SetEvent(watch->wake);LeaveCriticalSection(&watch->lock);
+    EnterCriticalSection(&watch->readiness.lock);watch->readiness.error=error;
+    SetEvent(watch->readiness.wake);LeaveCriticalSection(&watch->readiness.lock);
     if(watch->failed)watch->failed(watch->context,error);
     return error;
 }
@@ -30,14 +29,14 @@ static DWORD WINAPI input_thread(void *context)
         if(watch->worker_close)waits[count++]=watch->worker_close;
         if(watch->task_close)waits[count++]=watch->task_close;
         waits[count++]=watch->stop;waits[count++]=watch->local_stop;
-        rearm_index=count;waits[count++]=watch->rearm;
-        EnterCriticalSection(&watch->lock);
+        rearm_index=count;waits[count++]=watch->readiness.rearm;
+        EnterCriticalSection(&watch->readiness.lock);
         if(!pending && watch->source) {
             if(!DuplicateHandle(GetCurrentProcess(),watch->source,GetCurrentProcess(),
                 &source,SYNCHRONIZE,FALSE,0))error=GetLastError();
             else {source_index=count;waits[count++]=source;}
         }
-        LeaveCriticalSection(&watch->lock);
+        LeaveCriticalSection(&watch->readiness.lock);
         if(error)return fail_watch(watch,error);
         result=WaitForMultipleObjects(count,waits,FALSE,INFINITE);
         if(result==WAIT_FAILED)error=GetLastError();
@@ -61,7 +60,7 @@ static DWORD WINAPI input_thread(void *context)
         if(result==WAIT_OBJECT_0+rearm_index){pending=FALSE;continue;}
         if(source_index==MAXDWORD || result!=WAIT_OBJECT_0+source_index)
             return fail_watch(watch,result==WAIT_FAILED ? error : ERROR_PIPE_NOT_CONNECTED);
-        if(!SetEvent(watch->wake))return fail_watch(watch,GetLastError());
+        if(!SetEvent(watch->readiness.wake))return fail_watch(watch,GetLastError());
         pending=TRUE;
         if(watch->ready) {
             error=watch->ready(watch->context);
@@ -78,13 +77,13 @@ worker_base_input_watch *worker_base_input_watch_create(HANDLE console_close,HAN
     if(!stop){SetLastError(ERROR_INVALID_PARAMETER);return NULL;}
     watch=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*watch));
     if(!watch){SetLastError(ERROR_NOT_ENOUGH_MEMORY);return NULL;}
-    InitializeCriticalSection(&watch->lock);
+    InitializeCriticalSection(&watch->readiness.lock);
     watch->console_close=console_close;watch->worker_close=worker_close;watch->task_close=task_close;watch->stop=stop;watch->ready=ready;
     watch->close_console=close_console;watch->close_worker=close_worker;watch->close_task=close_task;watch->failed=failed;watch->context=context;
     watch->local_stop=CreateEventW(NULL,TRUE,FALSE,NULL);
-    watch->rearm=CreateEventW(NULL,FALSE,FALSE,NULL);
-    watch->wake=CreateEventW(NULL,TRUE,FALSE,NULL);
-    if(!watch->local_stop || !watch->rearm || !watch->wake)goto failed;
+    watch->readiness.rearm=CreateEventW(NULL,FALSE,FALSE,NULL);
+    watch->readiness.wake=CreateEventW(NULL,TRUE,FALSE,NULL);
+    if(!watch->local_stop || !watch->readiness.rearm || !watch->readiness.wake)goto failed;
     watch->thread=CreateThread(NULL,0,input_thread,watch,0,NULL);
     if(!watch->thread)goto failed;
     return watch;
@@ -98,34 +97,34 @@ DWORD worker_base_input_watch_bind(worker_base_input_watch *watch,HANDLE source)
     if(!watch)return ERROR_INVALID_PARAMETER;
     if(source && !DuplicateHandle(GetCurrentProcess(),source,GetCurrentProcess(),
         &owned,SYNCHRONIZE,FALSE,0))return GetLastError();
-    EnterCriticalSection(&watch->lock);error=watch->error;
+    EnterCriticalSection(&watch->readiness.lock);error=watch->readiness.error;
     if(!error) {
         old=watch->source;watch->source=owned;owned=NULL;
-        if(!ResetEvent(watch->wake) || !SetEvent(watch->rearm))error=GetLastError();
+        if(!ResetEvent(watch->readiness.wake) || !SetEvent(watch->readiness.rearm))error=GetLastError();
     } else old=NULL;
-    LeaveCriticalSection(&watch->lock);
+    LeaveCriticalSection(&watch->readiness.lock);
     if(old)CloseHandle(old);
     if(owned)CloseHandle(owned);
     return error;
 }
+compat_input_readiness *worker_base_input_watch_readiness(worker_base_input_watch *watch)
+{
+    return watch ? &watch->readiness : NULL;
+}
 DWORD worker_base_input_watch_ack(worker_base_input_watch *watch)
 {
-    DWORD error;
-    if(!watch)return ERROR_INVALID_PARAMETER;
-    EnterCriticalSection(&watch->lock);error=watch->error;
-    if(!error && (!ResetEvent(watch->wake) || !SetEvent(watch->rearm)))error=GetLastError();
-    LeaveCriticalSection(&watch->lock);return error;
+    return compat_input_readiness_ack(worker_base_input_watch_readiness(watch));
 }
 HANDLE worker_base_input_watch_event(worker_base_input_watch *watch)
-{return watch ? watch->wake : NULL;}
+{return watch ? watch->readiness.wake : NULL;}
 void worker_base_input_watch_destroy(worker_base_input_watch *watch)
 {
     if(!watch)return;
     if(watch->local_stop)SetEvent(watch->local_stop);
     if(watch->thread){WaitForSingleObject(watch->thread,INFINITE);CloseHandle(watch->thread);}
     if(watch->source)CloseHandle(watch->source);
-    if(watch->wake)CloseHandle(watch->wake);
-    if(watch->rearm)CloseHandle(watch->rearm);
+    if(watch->readiness.wake)CloseHandle(watch->readiness.wake);
+    if(watch->readiness.rearm)CloseHandle(watch->readiness.rearm);
     if(watch->local_stop)CloseHandle(watch->local_stop);
-    DeleteCriticalSection(&watch->lock);HeapFree(GetProcessHeap(),0,watch);
+    DeleteCriticalSection(&watch->readiness.lock);HeapFree(GetProcessHeap(),0,watch);
 }

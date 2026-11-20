@@ -43,7 +43,7 @@ rule run
   description = RUN `$in
 
 build obj/fixture.obj: cc `$root/test/adapter-mvdm-host-out/win32/console_input_contract_fixture.c
-build obj/console_compat.obj: cc `$root/src/ntvdm-exe/win32/console_compat.c
+build obj/console_compat.obj: cc `$root/src/compat/console_compat.c
 build obj/console_legacy.obj: cc `$root/src/compat/console_legacy.c
 build obj/console_keyboard.obj: cc `$root/src/compat/console_services.c
 build obj/console_client.obj: cc `$root/src/ntvdm-exe/win32/console_client.c

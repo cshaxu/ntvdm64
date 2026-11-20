@@ -277,8 +277,9 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         }
     }
     foreach($target in @('worker-base.lib','ntvdm.exe','ntvwm.exe')) {
-        if('publication.c' -notin @(Get-FrontendSources $target 'compat')) {
-            throw "$target omits the compat snapshot publisher"
+        $compat = @(Get-FrontendSources $target 'compat')
+        foreach($provider in @('publication.c','input_readiness.c')) {
+            if($provider -notin $compat) { throw "$target omits compat provider $provider" }
         }
     }
     foreach($target in @('ntvdm.exe','ntvwm.exe','console-client-test.exe','ntvwm-presentation-test.exe')) {

@@ -2,6 +2,7 @@
 #define COMPAT_CONSOLE_ENDPOINT_H
 
 #include "console_transport.h"
+#include "input_readiness.h"
 
 /* A single ordered request stream and lock, shared with the product owner. */
 typedef struct compat_console_endpoint {
@@ -15,6 +16,7 @@ typedef struct compat_console_endpoint {
     BOOL text_palette_valid;
     struct worker_base_publication *publisher;
     struct ntvdm_console_graphics *graphics;
+    compat_input_readiness *input_readiness;
 } compat_console_endpoint;
 
 compat_console_endpoint *compat_console_output_endpoint(HANDLE output);

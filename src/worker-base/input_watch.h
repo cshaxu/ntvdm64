@@ -1,6 +1,6 @@
 #ifndef WORKER_BASE_INPUT_WATCH_H
 #define WORKER_BASE_INPUT_WATCH_H
-#include <windows.h>
+#include "compat/include/input_readiness.h"
 
 typedef struct worker_base_input_watch worker_base_input_watch;
 typedef DWORD (*worker_base_input_ready_fn)(void *context);
@@ -18,6 +18,8 @@ worker_base_input_watch *worker_base_input_watch_create(HANDLE console_close,HAN
     worker_base_input_failure_fn failed,void *context);
 /* Duplicate a wait-only source; NULL disables it. No owner lock is acquired. */
 DWORD worker_base_input_watch_bind(worker_base_input_watch *,HANDLE source);
+/* Borrowed until the owner joins and destroys the watcher. */
+compat_input_readiness *worker_base_input_watch_readiness(worker_base_input_watch *);
 DWORD worker_base_input_watch_ack(worker_base_input_watch *);
 HANDLE worker_base_input_watch_event(worker_base_input_watch *);
 /* Owner cancels callback transport first; never join under its callback lock. */

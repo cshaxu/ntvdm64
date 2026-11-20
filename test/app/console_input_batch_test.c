@@ -51,7 +51,7 @@ static BOOL batch_prepend(HANDLE h,PINPUT_RECORD records,DWORD count,LPDWORD wri
 #define ntvdm_console_prepend_keys_tagged batch_prepend_tagged
 #define ntvdm_console_prepend_keys batch_prepend
 #define mvdm_softpc_mouse_capacity batch_mouse_capacity
-#include "../../src/ntvdm-exe/win32/console_compat.c"
+#include "../../src/compat/console_compat.c"
 #include "../../src/compat/console_legacy.c"
 DWORD batch_mouse_capacity(mvdm_mouse_bridge *state)
 { (void)state;return mouse_capacity; }

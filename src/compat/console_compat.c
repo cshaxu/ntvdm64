@@ -7,9 +7,8 @@
  */
 #include <windows.h>
 #include <stddef.h>
-#include "conapi.h"
-#include "console_client.h"
-#include "console_input.h"
+#include "include/conapi.h"
+#include "include/console_input.h"
 #include "compat/include/mvdm_softpc_mouse_bridge.h"
 #include "compat/include/mvdm_keyboard_history.h"
 #include "compat/include/console_io.h"

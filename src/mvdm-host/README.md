@@ -1551,7 +1551,7 @@ Console input policy. [S16 evidence](../../docs/etc/evidence/m0-t423-s16-typeahe
 
 MVDM-HOST-DIV-211 (S11 candidate): the event loop again consumes batches of
 five host records. Scan-less keyboard expansion is moved unchanged into the
-worker's win32/console_compat.c boundary, with a forty-record stack result
+shared compat/console_compat.c boundary, with a forty-record stack result
 for five worst-case eight-transition keys. Original dispatch, key history,
 mouse IRQ/EOI and guest callbacks remain owners. The owner-added scheduling
 repair removes the per-batch Sleep(10) packing delay and gives the original

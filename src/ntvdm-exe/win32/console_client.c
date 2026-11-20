@@ -3,8 +3,8 @@
 #include "worker_lifecycle.h"
 #include "compat/include/console_text.h"
 #include "console_geometry.h"
-#include "compat/include/publication.h"
 #include "worker-base/input_watch.h"
+#include "compat/include/publication.h"
 #include "compat/include/console_endpoint.h"
 #include "common/protocol/frontend_protocol.h"
 #include "common/base_srv/base_rpc_client.h"
@@ -13,22 +13,6 @@
 #include <stddef.h>
 #include <limits.h>
 #include <string.h>
-
-static BOOL decode_input(const console_io_input *wire,INPUT_RECORD *record)
-{
-    if(wire->type==CONSOLE_INPUT_FRAME_MOUSE) {
-        console_frame_mouse_input frame;console_mouse_input mouse;
-        if(!ntcon_worker_decode_input(wire,record))return FALSE;
-        memcpy(&frame,&record->Event,sizeof(frame));
-        mouse.dx=frame.dx;mouse.dy=frame.dy;mouse.width=frame.width;mouse.height=frame.height;
-        mouse.buttons=frame.buttons;mouse.action=frame.action;
-        /* Adapt only at the device boundary. Original MVDM receives its old
-         * relative record and still owns guest position, scaling and IRQs. */
-        record->EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
-        memcpy(&record->Event,&mouse,sizeof(mouse));return TRUE;
-    }
-    return ntcon_worker_decode_input(wire,record);
-}
 
 typedef struct console_client {
     session *owner;
@@ -127,6 +111,7 @@ DWORD ntvdm_console_client_begin(session *owner)
     if (error) {
         console_client_destroy(client);return error;
     }
+    client->endpoint.input_readiness=worker_base_input_watch_readiness(client->input_watch);
     owner->host_context.mouse=&client->mouse;
     owner->host_context.console_endpoint=&client->endpoint;
     owner->console_client=client;
@@ -161,13 +146,6 @@ BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *capability,HANDLE *execut
         SetLastError(error);return FALSE;
     }
     return result;
-}
-
-/* Called with the per-session lock held; all operations share one ordered
- * request sequence, including stream chunks and geometry queries. */
-static DWORD exchange(console_client *client,console_io_reply *reply)
-{
-    return ntcon_worker_exchange(&client->endpoint.channel,&client->endpoint.request,reply);
 }
 
 static DWORD console_activate(console_client *client,BOOL active)
@@ -238,63 +216,4 @@ BOOL ntvdm_console_set_active(BOOL active)
     console_client *client=owner ? owner->console_client : NULL;
     DWORD error=client ? console_activate(client,active) : ERROR_SUCCESS;
     SetLastError(error);return error==ERROR_SUCCESS;
-}
-
-static BOOL input_operation(HANDLE input,INPUT_RECORD *records,uint64_t *receipts,DWORD length,LPDWORD read,BOOL peek,
-    const uint64_t *live,DWORD live_count)
-{
-    session *owner=session_thread_current();
-    console_client *client=owner && compat_console_input_endpoint(input) ? owner->console_client : NULL;
-    console_io_reply reply;
-    DWORD error,i;
-    BOOL ok;
-    if (!client) {
-        ok=peek ? PeekConsoleInputW(input,records,length,read) :
-            ReadConsoleInputW(input,records,length,read);
-        if(ok && receipts && read)for(i=0;i<*read;++i)receipts[i]=0;
-        return ok;
-    }
-    if (!read || (!records && length) || live_count>CONSOLE_IO_INPUT_LIVE_CAPACITY ||
-        (live_count && (!live || !receipts || peek))) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
-    *read=0;
-    EnterCriticalSection(&client->endpoint.lock);
-    ZeroMemory(&client->endpoint.request,offsetof(console_io_request,data));
-    client->endpoint.request.operation=peek ? CONSOLE_IO_PEEK_INPUT : CONSOLE_IO_READ_INPUT;
-    client->endpoint.request.state.count=min(length,CONSOLE_IO_INPUT_CAPACITY);
-    client->endpoint.request.state.mode=receipts ? CONSOLE_IO_INPUT_RETURNABLE : 0;
-    client->endpoint.request.bytes=live_count*sizeof(*live);
-    client->endpoint.request.data=(BYTE *)live;
-    error=exchange(client,&reply);ok=!error && reply.result;
-    if (!error && !ok) error=reply.error;
-    if (ok && (reply.state.count>client->endpoint.request.state.count ||
-        reply.bytes!=reply.state.count*sizeof(console_io_input))) {
-        error=ntcon_worker_client_fail(&client->endpoint.channel,ERROR_INVALID_DATA);ok=FALSE;
-    }
-    for (i=0;ok && i<reply.state.count;i++) {
-        console_io_input wire;
-        memcpy(&wire,reply.data+i*sizeof(wire),sizeof(wire));
-        if (!decode_input(&wire,&records[i])) { error=ntcon_worker_client_fail(&client->endpoint.channel,ERROR_INVALID_DATA);ok=FALSE; }
-        if(receipts)receipts[i]=(uint64_t)wire.receipt_low|((uint64_t)wire.receipt_high<<32);
-    }
-    if (ok) *read=reply.state.count;
-    if (ok) {
-        error=worker_base_input_watch_ack(client->input_watch);
-        if(error)ok=FALSE;
-    }
-    LeaveCriticalSection(&client->endpoint.lock);
-    if (!ok) SetLastError(error);
-    return ok;
-}
-BOOL WINAPI MvdmReadConsoleInputW(HANDLE input,PINPUT_RECORD records,DWORD length,LPDWORD read)
-{
-    return input_operation(input,records,NULL,length,read,FALSE,NULL,0);
-}
-BOOL WINAPI MvdmPeekConsoleInputW(HANDLE input,PINPUT_RECORD records,DWORD length,LPDWORD read)
-{
-    return input_operation(input,records,NULL,length,read,TRUE,NULL,0);
-}
-BOOL ntvdm_console_read_input_tagged(HANDLE input,PINPUT_RECORD records,uint64_t *receipts,
-    DWORD length,LPDWORD read,BOOL peek,const uint64_t *live,DWORD live_count)
-{
-    return input_operation(input,records,receipts,length,read,peek,live,live_count);
 }

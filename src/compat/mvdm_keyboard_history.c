@@ -1,6 +1,9 @@
 #include "include/mvdm_keyboard_history.h"
 #include <string.h>
 
+/* Original event/keyboard locking serializes this worker-local history. */
+mvdm_keyboard_history nt_keyboard_history = {0};
+
 int mvdm_keyboard_history_record_receipt(mvdm_keyboard_history *state,uint64_t receipt)
 {
     if(!state || state->issued==UINT64_MAX)return 0;

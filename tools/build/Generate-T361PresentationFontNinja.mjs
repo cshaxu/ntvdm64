@@ -27,7 +27,7 @@ const lines = [
   'build obj/presentation_font.obj: cc ' + source('src/ntvdm-exe/softpc/mvdm_softpc_presentation_font.c'),
   'build obj/fixture.obj: cc ' + source('test/adapter-mvdm-host-out/softpc/presentation_font_snapshot_fixture.c'),
   'build presentation-font-snapshot-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/presentation_font.obj obj/fixture.obj',
-  'build obj/console_compat.obj: cc ' + source('src/ntvdm-exe/win32/console_compat.c'),
+  'build obj/console_compat.obj: cc ' + source('src/compat/console_compat.c'),
   'build obj/console_toggle_fixture.obj: cc ' + source('test/adapter-mvdm-host-out/win32/console_display_toggle_fixture.c'),
   'build console-display-toggle-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/console_compat.obj obj/console_toggle_fixture.obj',
   '  libs = kernel32.lib user32.lib gdi32.lib',

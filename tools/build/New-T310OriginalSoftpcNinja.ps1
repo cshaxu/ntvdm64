@@ -251,7 +251,7 @@ if (!(Test-Path -LiteralPath $hostEntryResourceSource)) { throw "Original SoftPC
 if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC export definition missing: $hostExportDefinition" }
 if (!(Test-Path -LiteralPath $redirResourceSource)) { throw "Original Redirector resource missing: $redirResourceSource" }
 if (!(Test-Path -LiteralPath $redirExportDefinition)) { throw "Original Redirector export definition missing: $redirExportDefinition" }
-$adapterWin32Names = @('console_compat.c', 'console_client.c', 'worker_lifecycle.c',
+$adapterWin32Names = @('console_client.c', 'worker_lifecycle.c',
                            'command_process_compat.c', 'wow_private_unavailable.c',
                            'wow_hard_error_dialog.c', 'wow_hard_error_decoder.c',
                            'mvdm_base_vdm_environment.c')
@@ -1170,6 +1170,9 @@ $graph.Add('build ' + $consoleGridObject + ': cc ' + (NinjaPath (Join-Path $root
 $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes')
 $adapterWin32Objects += $consoleGridObject
 $libraryFlags = '/nologo /c /MT /W4 /we4013 /showIncludes /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
+$graph.Add('build obj/adapter-win32/console_compat.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_compat.c')))
+$graph.Add('  cflags = ' + $libraryFlags)
+$adapterWin32Objects += 'obj/adapter-win32/console_compat.obj'
 $graph.Add('build obj/adapter-wow-worker/wow_gdi_alias.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_gdi_alias.c')))
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterWowWorkerObjects = @('obj/adapter-wow-worker/wow_gdi_alias.obj') + $adapterWowWorkerObjects
@@ -1639,9 +1642,11 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build obj/worker-base/input_watch.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/input_watch.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/worker-base/input_readiness.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/input_readiness.c')))
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build obj/worker-base/task_observation.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/task_observation.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj obj/worker-base/publication.obj obj/worker-base/input_watch.obj obj/worker-base/task_observation.obj')
+    $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj obj/worker-base/publication.obj obj/worker-base/input_watch.obj obj/worker-base/input_readiness.obj obj/worker-base/task_observation.obj')
     $graph.Add('build obj/tests/worker_task_observation.obj: cc ' + (NinjaPath (Join-Path $root 'test/app/worker_task_observation_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build worker-task-observation-test.exe: broker_test_link obj/tests/worker_task_observation.obj worker-base.lib')
@@ -2555,8 +2560,8 @@ if ($objectOutputDirectories.Count -gt 0) {
         target = 'worker-base.lib'
         selected = ($Architecture -eq 'x86')
         disposition = 'project-owned worker connection initialization and disconnect; NTVDM and NTVWM only; common provides protocol clients'
-        sources = @('connection.c', 'connection.h', 'shutdown_close.c', 'input_watch.c', 'input_watch.h', 'task_observation.c', 'task_observation.h' | ForEach-Object {
-            $path = 'src/worker-base/' + $_
+        sources = @('src/worker-base/connection.c', 'src/worker-base/connection.h', 'src/worker-base/shutdown_close.c', 'src/worker-base/input_watch.c', 'src/worker-base/input_watch.h', 'src/compat/input_readiness.c', 'src/compat/include/input_readiness.h', 'src/worker-base/task_observation.c', 'src/worker-base/task_observation.h' | ForEach-Object {
+            $path = $_
             [ordered]@{ path = $path; sha256 = Get-NodeSha256 (Join-Path $root $path) }
         })
     }

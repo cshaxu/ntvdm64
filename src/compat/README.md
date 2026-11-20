@@ -321,6 +321,10 @@ and WINAPI signatures. The implementations use the current host context’s
 borrowed endpoint for routed operations and the native API when no endpoint is
 bound. Pointer operations and the shared ordered transport use the same route
 and lock. The product owns endpoint admission, handoff, and shutdown.
+The same endpoint serves input read/peek and acknowledges successful reads
+through `input_readiness.c`. `console_compat.c` normalizes bounded PC input
+batches before the original event loop consumes them. Compat owns the history
+storage. Original SoftPC serializes history access and owns device dispatch.
 
 `guest_environment.c` owns bounded ANSI environment projection and the existing
 WOW boot-block allocation contract. It uses native APIs and `system_root.c`,
