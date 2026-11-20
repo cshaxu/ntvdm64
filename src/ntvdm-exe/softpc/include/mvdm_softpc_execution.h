@@ -12,6 +12,5 @@
  * does not reinterpret nested c_cpu_unsimulate() returns as session stops. */
 int mvdm_softpc_execution_run_until_return(session *owner);
 int ntvdm_dpmi_initialize(void);
-int ntvdm_vm_services_initialize(void);
 
 #endif

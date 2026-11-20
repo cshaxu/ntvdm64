@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "niddb_bridge_boundary.h"
 #include <string.h>
 
 __declspec(dllimport) void __stdcall ExitProcess(unsigned long);

@@ -1,6 +1,7 @@
 #include "include/mvdm_softpc_termination.h"
 
 #include "include/host_context.h"
+#include <windows.h>
 
 /* Original host close is idempotent: it rejects both pre-start and repeated
  * calls. Direct standalone termination otherwise longjmps around the normal
@@ -16,4 +17,11 @@ int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow,
      * an outer application entry cannot be the cleanup owner. */
     host_applClose();
     return compat_host_escape_terminate_current(completion_code);
+}
+
+/* ADAPTER-SOFTPC-034: this profile has no VDD instance-data provider. */
+void ClearInstanceDataMarking(void)
+{
+    (void)mvdm_softpc_terminate_current_session(0u, ERROR_CALL_NOT_IMPLEMENTED);
+    SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
 }

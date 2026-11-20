@@ -40,7 +40,6 @@
 #include "bios.h"
 #include "virtual.h"
 #include "compat/include/invalid_virtual_instance.h"
-#include "compat/include/vm_host.h"
 #line 36
 #include "error.h"
 #include "debug.h"
@@ -708,19 +707,6 @@ GLOBAL void
 virtual_device_trap IFN0()
    {
    int new_vb;
-   mvdm_vm_bridge_result bridge;
-
-   /* DIVERGENCE MVDM-HOST-DIV-870: independent ring-0 guest bridge.
-    * Original NIDDB operations retain their original dispatch below. */
-   if (mvdm_vm_bridge_bop(getEAX(), getECX(), getEDX(), getESI(), getEBX(),
-           getPE() && !getVM() && getCPL() == 0, &bridge)) {
-       setEAX(bridge.status);
-       setEBX(bridge.value);
-       setEDX(bridge.serial_low);
-       setESI(bridge.serial_high);
-       setCF(bridge.status != 0);
-       return;
-   }
 
 #line 695
    switch ( getEAX() )

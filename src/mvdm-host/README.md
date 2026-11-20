@@ -3250,15 +3250,10 @@ MVDM-HOST-DIV-674: restore only the original generic-call branch in wow32/wkgthu
 
 MVDM-HOST-DIV-675: wow32/i386/callpr32.asm saves/restores EBX and adjusts its three parameter offsets by four bytes. Original dynamic stack restoration is unchanged. S2 actual-thunk, real Win16 normal/mismatch and exception-retirement tests passed; see docs/etc/evidence/m0-t478-s2-generic-thunk.md.
 
-MVDM-HOST-DIV-870: `softpc.new/base/bios/virtual.c` recognizes the separately
-signed project guest bridge at the existing BOP B1 boundary. The project-owned
-handler requires protected ring zero and routes only notification resource
-operations; all original NIDDB selectors retain their original switch. The
-original OpenNT/SoftPC driver has no project bridge or NTSRV integration; this
-small boundary avoids changing its instancing algorithm or replacing the BOP
-dispatcher. Original guest remains unchanged. Implementation and verification:
-docs/etc/evidence/m0-t479-s4-driver-load.md. Product/guest IRQ proof is pending;
-this registration is not a compatibility acceptance claim.
+T483 S14 restores the original NIDDB dispatch at the former
+MVDM-HOST-DIV-870 site. The NTVDM worker selects the addon handler using the
+existing BIOS BOP B1 slot at startup. The handler keeps the protected ring-zero
+check for addon requests and passes the original operations to `virtual.c`.
 
 MVDM-HOST-DIV-871: `softpc.new/host/src/nt_bop.c::MS_bop_4` calls the
 project bridge selector after reading the original COMMAND service. Only an

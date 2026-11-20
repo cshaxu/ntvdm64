@@ -1255,9 +1255,6 @@ $adapterSoftpcObjects += 'obj/compat/guest_location.obj'
 $graph.Add('build obj/compat/dpmi_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/dpmi_services.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/dpmi_services.obj'
-$graph.Add('build obj/compat/vm_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/vm_services.c')))
-$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
-$adapterSoftpcObjects += 'obj/compat/vm_services.obj'
 $graph.Add('build obj/compat/mvdm_vm_command_entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_vm_command_entry.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/mvdm_vm_command_entry.obj'

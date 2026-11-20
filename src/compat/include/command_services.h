@@ -23,9 +23,6 @@ typedef struct compat_command_services {
     int (*replace_command)(const char *);
     int (*select_service)(unsigned int);
     void (*finish)(void);
-    BOOL (*create_process)(LPCSTR, LPSTR, LPSECURITY_ATTRIBUTES,
-        LPSECURITY_ATTRIBUTES, BOOL, DWORD, LPVOID, LPCSTR,
-        LPSTARTUPINFOA, LPPROCESS_INFORMATION);
     void (*clear_doswow)(void);
     int (*register_doswow)(uint16_t, uint16_t);
 } compat_command_services;

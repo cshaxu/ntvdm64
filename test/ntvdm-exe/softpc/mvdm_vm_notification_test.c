@@ -8,19 +8,38 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "compat/vm_services.c"
-#include "compat/include/vm_host.h"
+#include "compat/mvdm_softpc_termination.c"
 
 static unsigned stop_calls;
-static uint32_t stop_scope, stop_code;
-int mvdm_softpc_terminate_current_session(uint32_t vdm_for_wow, uint32_t code)
+static uint32_t stop_code;
+void host_applClose(void)
 {
     ++stop_calls;
-    stop_scope = vdm_for_wow;
+}
+int compat_host_escape_terminate_current(uint32_t code)
+{
     stop_code = code;
     return 0;
 }
-extern BOOL ntvdm_vm_services_initialize(void);
+
+static unsigned original_bop_calls;
+static uint32_t eax, ecx, edx, esi, ebx, cpu_cpl;
+static int32_t cpu_pe, cpu_vm, cpu_carry;
+void virtual_device_trap(void) { ++original_bop_calls; }
+void (*BIOS[256])(void);
+uint32_t c_getEAX(void) { return eax; }
+uint32_t c_getECX(void) { return ecx; }
+uint32_t c_getEDX(void) { return edx; }
+uint32_t c_getESI(void) { return esi; }
+uint32_t c_getEBX(void) { return ebx; }
+uint32_t c_getCPL(void) { return cpu_cpl; }
+int32_t c_getPE(void) { return cpu_pe; }
+int32_t c_getVM(void) { return cpu_vm; }
+void c_setEAX(uint32_t value) { eax = value; }
+void c_setEBX(uint32_t value) { ebx = value; }
+void c_setEDX(uint32_t value) { edx = value; }
+void c_setESI(uint32_t value) { esi = value; }
+void c_setCF(int32_t value) { cpu_carry = value; }
 
 static unsigned char guest_memory[256];
 static mvdm_vm_executor *input_executor;
@@ -1206,12 +1225,34 @@ int main(void)
     HANDLE thread;
     DWORD thread_result;
     InitializeCriticalSection(&ica);
-    CHECK(!compat_vm_install(NULL) && GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(!ntvdm_vm_services_initialize() && GetLastError() == ERROR_INVALID_STATE);
+    BIOS[0xb1] = virtual_device_trap;
     CHECK(ntvdm_vm_services_initialize());
     CHECK(ntvdm_vm_services_initialize());
+    eax = 3;
+    BIOS[0xb1]();
+    CHECK(original_bop_calls == 1 && eax == 3 && !cpu_carry);
+    eax = MVDM_VM_BRIDGE_SIGNATURE;
+    BIOS[0xb1]();
+    CHECK(eax == ERROR_ACCESS_DENIED && cpu_carry && original_bop_calls == 1);
+    eax = MVDM_VM_BRIDGE_SIGNATURE;
+    cpu_pe = 1;
+    cpu_vm = 1;
+    BIOS[0xb1]();
+    CHECK(eax == ERROR_ACCESS_DENIED && original_bop_calls == 1);
+    eax = MVDM_VM_BRIDGE_SIGNATURE;
+    cpu_vm = 0;
+    cpu_cpl = 3;
+    BIOS[0xb1]();
+    CHECK(eax == ERROR_ACCESS_DENIED && original_bop_calls == 1);
+    eax = MVDM_VM_BRIDGE_SIGNATURE;
+    cpu_cpl = 0;
+    ecx = 6;
+    BIOS[0xb1]();
+    CHECK(eax == ERROR_SUCCESS && edx == 0x1234 && esi == 71 && !cpu_carry && original_bop_calls == 1);
     SetLastError(ERROR_SUCCESS);
     ClearInstanceDataMarking();
-    CHECK(stop_calls == 1 && stop_scope == 0 && stop_code == ERROR_CALL_NOT_IMPLEMENTED);
+    CHECK(stop_calls == 1 && stop_code == ERROR_CALL_NOT_IMPLEMENTED);
     CHECK(GetLastError() == ERROR_CALL_NOT_IMPLEMENTED);
     CHECK(!mvdm_vm_bridge_bop(0, 0, 0, 0, 0, 1, &result));
     CHECK(result.status == 123 && result.value == 456);

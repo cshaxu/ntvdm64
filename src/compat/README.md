@@ -304,12 +304,10 @@ selects this directory. No C include, table or implementation is introduced into
 
 `command_services.c` and `include/command_services.h` hold an immutable operation
 table installed before COMMAND execution. The source-shaped facades in
-`command_native_child.h`, `command_guest_directory.h` and
-`command_process_compat.h` preserve the selected
-call signatures. B owns no captured guest data, request/session lifecycle or
-native launch policy and imports no outer provider. The installing product
-retains those responsibilities; a missing binding fails rather than silently
-selecting another execution route.
+`command_native_child.h` and `command_guest_directory.h` preserve the
+selected call signatures. Compat owns capture and child-local stream staging.
+The NTVDM product provides the launch entry directly to COMMAND through
+`command_process_binding.h` and retains request and session lifetime.
 The DOSWOW location registration uses the same table; its session allocation,
 locking, epochs and live CDS resolution remain in the product provider.
 
@@ -348,9 +346,9 @@ DPMI caller contracts live in `include/dpmi_services.h` and `include/dpmi_host.h
 The product installs immutable function addresses before guest execution; all
 debug-thread and WOW page-domain state and teardown remain in NTVDM.
 
-VM service contracts (`vm_services.h`, `vm_host.h`) preserve original NIDDB
-callers and the independent BOP result ABI. The product installs its existing
-VM dispatch and controlled-stop providers; compat owns no VM or IRQ state.
+The NTVDM worker installs its addon handler in the existing BIOS BOP B1 slot.
+Original NIDDB dispatch stays in the mirror. Compat owns the PIC notification
+and VM wake queue, and provides the existing unsupported VDD cleanup result.
 
 `physical_mapping_services` is an immutable capability contract installed by the
 NTVDM product before guest execution. Physical page records, EMS aliases, session

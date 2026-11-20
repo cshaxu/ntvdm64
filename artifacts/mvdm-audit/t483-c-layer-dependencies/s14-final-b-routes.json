@@ -1,0 +1,167 @@
+{
+  "packet": "M0 T483 S14 P136",
+  "parent": "3ac4300c84f5922debed76e34c1ce718dfde5dbf",
+  "eliminated_B": [
+    "B0010",
+    "B0021"
+  ],
+  "eliminated_C": [],
+  "tracked_C_edges": [
+    "C0619",
+    "C0620",
+    "C0621"
+  ],
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 8
+  },
+  "C_runtime_slots": {
+    "F": 1
+  },
+  "C_outward_headers": {
+    "F": 1
+  },
+  "C_named_image_imports": 1,
+  "ownership": "COMMAND selects the actual F CreateProcess provider without a B callback. The F worker installs the addon handler in C's original BIOS vector. The original NIDDB switch receives unrelated BOPs unchanged. The two effective C-to-F routes stay open.",
+  "mirror": {
+    "upstream": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "files": {
+      "src/mvdm-host/dos/command/cmdexec.c": {
+        "before": [
+          34,
+          109
+        ],
+        "after": [
+          34,
+          109
+        ],
+        "delta": [
+          0,
+          0
+        ],
+        "baseline_sha256": "a9cd0e09eb37de78024bc0e2b69f59e1ffa9254a74b57f63c44731e9e151a101"
+      },
+      "src/mvdm-host/softpc.new/base/bios/virtual.c": {
+        "before": [
+          17,
+          44
+        ],
+        "after": [
+          16,
+          30
+        ],
+        "delta": [
+          -1,
+          -14
+        ],
+        "baseline_sha256": "9ca6704e0a1e67f2bc68268943ce5d6fb7267149e88cb448f1d3022241daa0bb"
+      }
+    },
+    "delta": [
+      -1,
+      -14
+    ]
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "10f3b977-dd2c-4392-9336-133b16104da2",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "coff": {
+    "x86": {
+      "command-cmdexec": {
+        "verified_symbols": [
+          "_opennt_command_set_std_handle",
+          "_opennt_command_create_process_a"
+        ],
+        "sha256": "13c01655965f5f064115e7b0a8895f877a7bc56ad97eef444a05c6b2e78c96e3"
+      },
+      "compat-command_services": {
+        "verified_symbols": [],
+        "sha256": "f31a3ca9cc5c55f7368a38cb9085192ba847388a0b622cfe3e57a5d1e6c6ad92"
+      },
+      "bios-virtual": {
+        "verified_symbols": [],
+        "sha256": "ebf1a34ce545de3f2f668a73b4e04211a5c0f54f9bfcf8e5963a6da0fafa3f6a"
+      },
+      "ccpu-c_main": {
+        "verified_symbols": [
+          "_BIOS"
+        ],
+        "sha256": "6df890e1a17ba7947e88456414fb05eaee637a457cfc088f79b1fa914788a5e0"
+      },
+      "adapter-softpc-mvdm_vm_binding": {
+        "verified_symbols": [
+          "_BIOS",
+          "_virtual_device_trap",
+          "_mvdm_vm_bridge_bop"
+        ],
+        "sha256": "24b6a35d32533029ceb11f7767be46ed241ab19f9440ea90ff0a7cc6e1866c17"
+      }
+    },
+    "x64-ref": {
+      "command-cmdexec": {
+        "verified_symbols": [
+          "_opennt_command_set_std_handle",
+          "_opennt_command_create_process_a"
+        ],
+        "sha256": "c46d19dd8c7abcdc461d8c226631e088b51c004a2699145725a4d21139366a3a"
+      },
+      "compat-command_services": {
+        "verified_symbols": [],
+        "sha256": "118c6e3b44eb44ce2a2f949a4d8dca97a5738b938a8de9c404a556db40b05d86"
+      },
+      "bios-virtual": {
+        "verified_symbols": [],
+        "sha256": "2eec0ef6e917679eebf53dc86cf1edde890b34d4dcd135734e80c73541cf087b"
+      },
+      "ccpu-c_main": {
+        "verified_symbols": [
+          "_BIOS"
+        ],
+        "sha256": "4a72e97c39ab2b83aabcb3b7b22dd0af469e083455a3cf4302d0bd50d373f5f4"
+      },
+      "adapter-softpc-mvdm_vm_binding": {
+        "verified_symbols": [
+          "_BIOS",
+          "_virtual_device_trap",
+          "_mvdm_vm_bridge_bop"
+        ],
+        "sha256": "34884c9c98e8df9d291f71b48bd665d860fcfb6d46c31b9e9bd30f38cfea8f93"
+      }
+    }
+  },
+  "verification": {
+    "unit": [
+      "1/6 Test #42: mvdm-vm-notification .............   Passed    0.03 sec",
+      "2/6 Test #43: mvdm-vm-execute ..................   Passed    0.17 sec",
+      "3/6 Test #44: mvdm-vm-ingress ..................   Passed    0.02 sec",
+      "4/6 Test #45: mvdm-command-capture .............   Passed    0.16 sec",
+      "5/6 Test #46: mvdm-command-guest-launch ........   Passed    0.10 sec",
+      "6/6 Test #47: mvdm-vm-text .....................   Passed    0.02 sec"
+    ],
+    "native_edit": [
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion"
+    ],
+    "win31": [
+      "386-dosonly0: started=True desktop-and-mode=True normal-exit=True pass=True",
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested",
+      "Original Windows installation bytes verified unchanged"
+    ],
+    "niddb_assertions": 10,
+    "limitations": "Focused regressions only. No Win95 or Full run."
+  }
+}

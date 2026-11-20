@@ -166,13 +166,18 @@
     {
       "id": "B0010",
       "contract": "compat_command_services",
-      "provider": "src/ntvdm-exe/win32/command_process_compat.c",
       "target": "opennt_command_create_process_a",
-      "layer": "F",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed",
+      "status": "removed-slot",
       "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
-      "slot": "create_process"
+      "slot": "create_process",
+      "baseline_layer": "F",
+      "baseline_provider": "src/ntvdm-exe/win32/command_process_compat.c",
+      "replacement_C_edges": [
+        "C0619",
+        "C0620"
+      ],
+      "evidence": "s14-final-b-routes.json"
     },
     {
       "id": "B0011",
@@ -285,14 +290,18 @@
     {
       "id": "B0021",
       "contract": "compat_vm_services",
-      "provider": "src/ntvdm-exe/softpc/mvdm_vm_bridge.c",
       "target": "mvdm_vm_bridge_bop",
-      "layer": "F",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed",
+      "status": "removed-slot",
       "installation": "src/ntvdm-exe/softpc/mvdm_vm_binding.c",
       "p132_irq_provider": "s14-vm-notification-owner.json",
-      "p133_wake_provider": "s14-vm-wake-owner.json"
+      "p133_wake_provider": "s14-vm-wake-owner.json",
+      "baseline_layer": "F",
+      "baseline_provider": "src/ntvdm-exe/softpc/mvdm_vm_bridge.c",
+      "replacement_C_edges": [
+        "C0621"
+      ],
+      "evidence": "s14-final-b-routes.json"
     },
     {
       "id": "B0022",
@@ -460,8 +469,7 @@
     }
   ],
   "indirect_counts": {
-    "B": 24,
-    "F": 2
+    "B": 24
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
   "remaining": [
@@ -542,5 +550,6 @@
   "p131_resource_scope_owner": "s14-resource-scope-owner.json",
   "p132_vm_notification_owner": "s14-vm-notification-owner.json",
   "p133_vm_wake_owner": "s14-vm-wake-owner.json",
-  "p134_thread_binding_owner": "s14-thread-binding-owner.json"
+  "p134_thread_binding_owner": "s14-thread-binding-owner.json",
+  "p136_final_b_routes": "s14-final-b-routes.json"
 }

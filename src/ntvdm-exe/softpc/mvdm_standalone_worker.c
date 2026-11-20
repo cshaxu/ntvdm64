@@ -11,6 +11,7 @@
 #include "compat/include/mvdm_softpc_ccpu_wait.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_vm_executor.h"
+#include "mvdm_vm_bridge.h"
 #include "mvdm_vm_ingress.h"
 #include "ntvdm_dos_observer.h"
 #include "ntvdm-exe/session/session.h"

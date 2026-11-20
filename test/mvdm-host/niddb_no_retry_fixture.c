@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "niddb_bridge_boundary.h"
 extern void **NIDDB_Allocate_Instance_Data(int, void (*)(void **), void (*)(void));
 extern void NIDDB_Deallocate_Instance_Data(void **);
 extern void virtual_device_trap(void);
