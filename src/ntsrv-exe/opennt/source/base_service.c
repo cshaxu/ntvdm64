@@ -796,7 +796,11 @@ DWORD OpenNtBaseServiceExit(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD g
     previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
     status=OpenNtBaseDispatchOperation((PCSR_API_MSG)&message,BROKER_VDM_EXIT,
         sizeof(message.u.ExitVDM));
-    if(connection->wow)service_capture_wow_management_labels(connection);
+    if (connection->wow) {
+        if (NT_SUCCESS(status) && NT_SUCCESS((NTSTATUS)message.ReturnValue))
+            service_retire_pending_wow_management_labels(connection, wow_task);
+        service_capture_wow_management_labels(connection);
+    }
     OpenNtBaseBindProcessRegistry(previous_registry);
     OpenNtBaseBindServerRequestThread(previous_thread);
     if (status && !message.ReturnValue) message.ReturnValue=status;

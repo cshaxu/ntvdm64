@@ -2924,6 +2924,25 @@ int main(int argc,char **argv)
     CHECK(WaitForSingleObject(parentEvent,0)==WAIT_TIMEOUT);
     if (wowStartup) CloseHandle(wowStartup);
     wowStartup=NULL;
+    {
+        ULONG first = wowTask ^ 0x40000000u, second = wowTask ^ 0x20000000u;
+        uint64_t firstTicket = 0, secondTicket = 0;
+        BOOL closeWait = FALSE;
+        CHECK(!OpenNtBaseServiceBindWowTask(wowWorker, wowChild.dwProcessId,
+            wowGeneration, first, 0x3345, &firstTicket) && firstTicket);
+        CHECK(!OpenNtBaseServiceBindWowTask(wowWorker, wowChild.dwProcessId,
+            wowGeneration, second, 0x3346, &secondTicket) && secondTicket);
+        CHECK(OpenNtBaseServiceExit(wowWorker, wowChild.dwProcessId, wowGeneration + 1,
+            TRUE, second, &closeWait) == ERROR_ACCESS_DENIED && !closeWait);
+        CHECK(!OpenNtBaseServiceExit(wowWorker, wowChild.dwProcessId, wowGeneration,
+            TRUE, first, &closeWait) && !closeWait);
+        CHECK(OpenNtBaseServiceRetireWowTask(wowWorker, wowChild.dwProcessId,
+            wowGeneration, firstTicket) == ERROR_NOT_FOUND);
+        CHECK(!OpenNtBaseServiceRetireWowTask(wowWorker, wowChild.dwProcessId,
+            wowGeneration, secondTicket));
+        CHECK(WaitForSingleObject(parentEvent, 0) == WAIT_TIMEOUT);
+        puts("PASS original ExitVDM retires matching pending WOW ticket only");
+    }
     { BOOL closeWowWait=FALSE;
       CHECK(OpenNtBaseServiceExit(wowWorker,wowChild.dwProcessId,wowGeneration,TRUE,wowTask,
           &closeWowWait)==ERROR_SUCCESS && !closeWowWait); }

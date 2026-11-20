@@ -342,6 +342,7 @@ void service_abandon_launch(OPENNT_BASE_CONNECTION *connection);
 void service_clear_management_labels(OPENNT_BASE_WORKER_WATCH *watch);
 void service_capture_initial_management_labels(OPENNT_BASE_WORKER_WATCH *watch);
 void service_capture_wow_management_labels(OPENNT_BASE_CONNECTION *);
+void service_retire_pending_wow_management_labels(OPENNT_BASE_CONNECTION *, ULONG task);
 void service_capture_checked_management_label(OPENNT_BASE_SERVICE *service,
     HANDLE console,const BASE_CHECKVDM_MSG *command);
 /* Caller holds service lock; capture only an already authenticated binding. */

@@ -1,0 +1,48 @@
+{
+  "packet": "M0 T483 S14 P138",
+  "parent": "9f979e73a4dc0cddf1c39b1f774a38477f6982e5",
+  "related_open_C": [
+    "C0463"
+  ],
+  "eliminated_C": [],
+  "eliminated_B": [],
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 7
+  },
+  "C_runtime_slots": {
+    "F": 1
+  },
+  "C_outward_headers": {
+    "F": 1
+  },
+  "C_named_image_imports": 1,
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "ownership": "The service owns pending labels matched by authenticated worker sequence and original task ID. Successful original ExitVDM now removes these labels even when no original record is attached. Existing record pruning and worker-local handler completion are unchanged.",
+  "baseline": "PASS pending ticket still requires retirement after original ExitVDM",
+  "verification": {
+    "service": "PASS original ExitVDM retires matching pending WOW ticket only",
+    "actual_shared_wow": "PASS shared worker 28892, two distinct tasks overlapped and retired independently, both requests exited normally",
+    "limitations": "Focused regression. C0463 still owns worker-local mapping retirement."
+  },
+  "service_test_sha256": "07af222401f2b54cc04094084fcc59eb351c739da2abb52565d86c04658b5b9d",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "2e5e7739-b54c-4a54-acc2-63f1fc80b3f9",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

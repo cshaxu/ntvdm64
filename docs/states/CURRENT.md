@@ -48,8 +48,8 @@ P111 [CCPU thread exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14
 P126 [C header closure](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-c-header-closure.json) delivered C -2.
 P127 [CPU start ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-cpu-start-owner.json) delivered C -1.
 P128 [PIC import owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-interrupt-export-owner.json) moved ordinal 84 to C.
-P129 [WOW trace module](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-trace-module-owner.json) closed B0036, a named module lookup.
-P130 [Resource receipts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-receipt-owner.json) moved six implementations into B; the two F route callbacks stay open.
+P129 [WOW trace module](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-trace-module-owner.json) closed B0036.
+P130 [Resource receipts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-receipt-owner.json) moved receipt storage to B.
 P131 [Resource scope](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-resource-scope-owner.json) closed B0025/B0026.
 P132 [VM IRQ owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-notification-owner.json) moved PIC notification to B.
 P133 [VM wake and input owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-wake-owner.json) moved the queue to B.
@@ -57,11 +57,11 @@ P134 [Thread binding](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-t
 P135 [WOW close result](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-close-result-owner.json) removed C0462.
 P136 [B routes](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-final-b-routes.json) removed B0010/B0021. C tracks both F routes.
 P137 [WOW startup ticket](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-start-ticket-owner.json) removed C0461.
+P138 [Pending WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-pending-exit-owner.json) completed NTSRV retirement.
 Delivered: B 0 known calls; C 9 direct calls, 1 runtime slot, 1 header, 1 image.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
-moves the page-domain identity and cleanup into B, removing the product header
-and three F calls. Mirror delta 0/0. Build, publication and focused gates are recorded in the linked evidence.
+moved page-domain identity and cleanup to B and removed three F calls.
 The [compiled publication cut](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-publication-cut-impact.json)
 prioritizes menu104/window103 reachable roots (overlapping); preserve original
 metadata/commit ownership and capture/lookup failure ordering in the next cut.

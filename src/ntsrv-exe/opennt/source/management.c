@@ -241,6 +241,26 @@ void service_capture_wow_management_labels(OPENNT_BASE_CONNECTION *connection)
     }
 }
 
+void service_retire_pending_wow_management_labels(OPENNT_BASE_CONNECTION *connection, ULONG task)
+{
+    OPENNT_BASE_WORKER_WATCH *watch = service_find_worker_watch(connection->service,
+        connection->process.SequenceNumber);
+    LIST_ENTRY *link, *next;
+    if (!watch || !watch->wow) return;
+
+    /* The caller holds service->lock after the original ExitVDM dispatch.
+     * Existing WOW records are handled by the normal label reconciliation. */
+    for (link = watch->management_labels.Flink; link != &watch->management_labels; link = next) {
+        OPENNT_BASE_MANAGEMENT_LABEL *label = CONTAINING_RECORD(link, OPENNT_BASE_MANAGEMENT_LABEL, link);
+        next = link->Flink;
+        if (!label->wow_record && label->wow_task_bound &&
+            (task == (ULONG)-1 || label->task == task)) {
+            RemoveEntryList(link);
+            HeapFree(GetProcessHeap(), 0, label);
+        }
+    }
+}
+
 static OPENNT_BASE_WORKER_WATCH *service_find_management_watch_for_console(
     OPENNT_BASE_SERVICE *service,HANDLE console)
 {
