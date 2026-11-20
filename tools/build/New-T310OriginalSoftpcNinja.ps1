@@ -1488,7 +1488,7 @@ if ($Architecture -eq 'x86') {
         $graph.Add('build ' + $group + '.lib: lib ' + ($members -join ' '))
     }
     $transportObjects = foreach ($unit in @('rpc_security', 'rpc_scope', 'vdm_receipt', 'vdm_delivery', 'vdm_payload', 'vdm_message')) {
-        $source = if ($unit -eq 'rpc_scope') { 'src/common/base_srv/scope.c' } elseif ($unit -in @('vdm_message', 'vdm_payload')) { 'src/common/base_srv/' + $unit + '.c' } else { 'src/ntsrv-exe/transport/' + $unit + '.c' }
+        $source = if ($unit -eq 'rpc_scope') { 'src/common/base_srv/scope.c' } elseif ($unit -eq 'vdm_receipt') { 'src/compat/vdm_receipt.c' } elseif ($unit -in @('vdm_message', 'vdm_payload')) { 'src/common/base_srv/' + $unit + '.c' } else { 'src/ntsrv-exe/transport/' + $unit + '.c' }
         $object = 'obj/broker-transport/' + $unit + '.obj'
         $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $source)))
         $graph.Add('  cflags = /nologo /c /MT /W4 /we4013 /showIncludes /I"' + (Join-Path $root 'src') + '"')

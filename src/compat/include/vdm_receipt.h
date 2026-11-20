@@ -5,7 +5,7 @@
 #define BROKER_VDM_RECEIPT_H
 #include <windows.h>
 #include <stdint.h>
-#include "common/base_srv/receipt_roles.h"
+#include "receipt_roles.h"
 typedef struct broker_vdm_receipt_entry broker_vdm_receipt_entry;
 typedef struct broker_vdm_receipts {
     uint32_t generation, issued;

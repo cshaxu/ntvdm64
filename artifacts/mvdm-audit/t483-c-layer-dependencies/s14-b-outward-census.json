@@ -330,7 +330,8 @@
       "target": "service_duplicate_resource",
       "layer": "F",
       "kind": "scoped-resource-operation",
-      "status": "outer-target-confirmed"
+      "status": "outer-target-confirmed",
+      "p130_shared_receipt_implementation": "s14-receipt-owner.json"
     },
     {
       "id": "B0026",
@@ -339,7 +340,8 @@
       "target": "service_close_resource",
       "layer": "F",
       "kind": "scoped-resource-operation",
-      "status": "outer-target-confirmed"
+      "status": "outer-target-confirmed",
+      "p130_shared_receipt_implementation": "s14-receipt-owner.json"
     },
     {
       "id": "B0027",
@@ -522,5 +524,6 @@
   "runtime_image_counts": {
     "eliminated": 1,
     "open": 0
-  }
+  },
+  "p130_receipt_owner": "s14-receipt-owner.json"
 }

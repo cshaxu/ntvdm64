@@ -13,7 +13,7 @@ fs.writeFileSync(environment, [
 const source = path.join(root, 'test/broker/resource_attachment.c');
 const idl = path.join(root, 'test/broker/resource_attachment.idl');
 const log = fs.openSync(path.join(build, 'build.log'), 'w');
-const securityInclude = `/I "${root}/src/broker"`;
+const securityInclude = `/I "${root}/src" /I "${root}/src/ntsrv-exe/transport"`;
 const ownerBuild=path.resolve('build/M0-T412/S3/product');
 const ownerGraph=fs.readFileSync(path.join(ownerBuild,'build.ninja'),'utf8');
 const registryFlags=ownerGraph.match(/^build obj\/opennt-base-bindings\/registry.obj:.*\r?\n  cflags = (.*)$/m)[1].replaceAll('$:',':');

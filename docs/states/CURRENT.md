@@ -29,18 +29,10 @@ implementation migration. The broader C-layer cleanup remains active.
 ## Current Technical Baseline
 
 P81 [USER/page-domain batch](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-user-batch-owner.json)
-migrates125 source/header paths and shared registration state into B under the
-approved C-adapter exception. Product launch/start notification stays F.
-Cached full build, dual11/22 hashes, targeted lifecycle/CCPU/Win16 tests and
-compiled boundary checks passed. Mirror delta0 points/0 lines; package
-`d66aa061-9bc9-4698-9be9-d985ff13c94e`. Eliminated213 IDs: current397/171.
-Enclosing commit/push is the receipt; S14 and remaining chains stay active.
+migrated 125 source/header paths into B and eliminated 213 IDs.
 
 P82 [USER tail](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-user-tail-owner.json)
-moves three actual USER providers/two headers into B; bodies preserved except
-explicit includes. Mirror delta0/0. Cached full build, dual11/22 hashes,
-targeted/Win16 tests and dependency gates passed; enclosing commit is receipt.
-24 more IDs eliminated: current421/147. Console handoff remains open.
+moved three providers and two headers into B, eliminating 24 additional IDs.
 
 P79 [inner lifecycle authority](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-liveness-owner.json)
 moves the actual worker-active query and sole lifecycle state into B; removes
@@ -64,6 +56,7 @@ P126 [C header closure](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14
 P127 [CPU start ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-cpu-start-owner.json) delivered C -1.
 P128 [PIC import owner](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-interrupt-export-owner.json) moved ordinal 84 to C; C0134 stays open with three F exports.
 P129 [WOW trace module](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-trace-module-owner.json) closed B0036, a named module lookup.
+P130 [Resource receipts](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-receipt-owner.json) moved six implementations into B; the two F route callbacks stay open.
 Delivered: B 6 known calls; C 11 open (10 functions, 1 image).
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)

@@ -20,7 +20,7 @@
 #include <base_interactive.h>
 #include <nt_event_declarations.h>
 #include <base_config.h>
-#include "ntsrv-exe/transport/vdm_receipt.h"
+#include "compat/include/vdm_receipt.h"
 #include "ntsrv-exe/transport/worker_spawn.h"
 #include "ntsrv-exe/transport/frontend_admission.h"
 #include "common/codec/native_launch.h"

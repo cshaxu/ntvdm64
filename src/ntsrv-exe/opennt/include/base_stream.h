@@ -1,7 +1,7 @@
 #ifndef OPENNT_BASE_STREAM_H
 #define OPENNT_BASE_STREAM_H
 #include "compat/include/base_resource.h"
-#include "ntsrv-exe/transport/vdm_receipt.h"
+#include "compat/include/vdm_receipt.h"
 /* Trusted synchronous scope; process handles and receipt ownership are pinned
  * by the service. These are source-shaped local carriers, never native values
  * serialized as command resources. Deliver must journal/ack before success. */

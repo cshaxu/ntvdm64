@@ -1,0 +1,103 @@
+{
+  "packet": "M0 T483 S14 P130",
+  "parent": "8bb6447ecfdbba5d5c1d0ff06b68e4b55cc0a4bc",
+  "concerns": [
+    "B0025",
+    "B0026"
+  ],
+  "eliminated_B": [],
+  "eliminated_C": [],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 4
+  },
+  "outward_C_known_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 8
+  },
+  "C_named_image_imports": 1,
+  "moved_functions": [
+    "broker_vdm_receipts_initialize",
+    "broker_vdm_receipt_accept",
+    "broker_vdm_receipt_resolve",
+    "broker_vdm_receipt_take",
+    "broker_vdm_receipt_revoke",
+    "broker_vdm_receipts_drain"
+  ],
+  "files": [
+    {
+      "from": "src/ntsrv-exe/transport/vdm_receipt.c",
+      "to": "src/compat/vdm_receipt.c",
+      "before_sha256": "6a3fa06f49dad6bdfb262e4784e2204c994443cf164060b5e761c274a2fa86ff",
+      "after_sha256": "5690ebfb0bb2022057e86765d14bbfa8b07a33f7b82c9749281170fc170d2cb3",
+      "only_include_changed": true
+    },
+    {
+      "from": "src/ntsrv-exe/transport/vdm_receipt.h",
+      "to": "src/compat/include/vdm_receipt.h",
+      "before_sha256": "d7ec957ac230ad52f2175c4640fad4a70ef34625d16166348b450b2047a3d570",
+      "after_sha256": "f2662e707edaef176ead2546f0b9425cc5bec724e7aca354dbdbdbe6e127cbf3",
+      "only_include_changed": true
+    },
+    {
+      "from": "src/common/base_srv/receipt_roles.h",
+      "to": "src/compat/include/receipt_roles.h",
+      "before_sha256": "f006e1d17c09cbcca9cc1dbc668ef57795de347734a0d36e6271e17d813cd14e",
+      "after_sha256": "f006e1d17c09cbcca9cc1dbc668ef57795de347734a0d36e6271e17d813cd14e",
+      "only_include_changed": false
+    }
+  ],
+  "compiled_includes": {
+    "msvc-x86-release/worker": [
+      "compat/include/receipt_roles.h",
+      "compat/include/vdm_receipt.h"
+    ],
+    "msvc-x64-release/service": [
+      "compat/include/receipt_roles.h",
+      "compat/include/vdm_receipt.h"
+    ]
+  },
+  "state_ownership": "F still selects, authenticates, serializes and holds the connection and reservation receipt tables. B performs the actual generation/role-aware receipt storage, resolution, ownership transfer and close operations with no F callback. Original BaseSrv wait pairing and standard stream alias comparison remain in C. B0025 and B0026 remain open because the synchronous scope still calls F to resolve the destination reservation.",
+  "next_boundary": "Use an authenticated scope that carries already selected stores and live worker handle into B. The effect on reservation lifetime and lock ordering must be proved before substituting scoped data for callbacks in the original Check/Update/Get and rundown flows.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "686bf499-e85a-4601-9856-e80e83212dca",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "dos_wow_ntsrv": [
+      "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+      "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+      "PASS shared worker 13344, two distinct tasks overlapped and retired independently, both requests exited normally",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS new-Console original process completion authorizes only the registered live worker",
+      "PASS DOS Get replaces previous request on resident-worker reuse",
+      "PASS WOW request/worker rejects valid character frontend/context without changing original WOW Get/Exit",
+      "PASS WOW task close binds opaque management identity, delivers once, retries only on later intent and retires safely",
+      "PASS WOW startup authentication, wait-only notification and immediate-completion latch",
+      "PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected",
+      "PASS reused WOW receipt mismatch, retired task and worker reuse checked",
+      "PASS failed WOW completion has no startup acknowledgement; late report rejected",
+      "PASS closing original WOW head rejects new task without publishing a record",
+      "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+    ],
+    "journal": [
+      "PASS: receipt ownership handoff preserves wait/stream identity, alias, inheritability and pipe EOF; drain does not double-close",
+      "PASS: partial acquisition rollback, unknown/retry retention, successful ownership commit and sender survival"
+    ],
+    "reservation": "PASS: DOS/WOW/native worker reservation, authenticated claim, generation, native/VDM isolation, abandonment and release",
+    "historical_drivers": "Two historical driver include paths were updated and syntax-checked; live verification used the current cached product and journal/reservation targets."
+  }
+}

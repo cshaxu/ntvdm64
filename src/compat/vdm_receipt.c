@@ -1,7 +1,7 @@
 /* Finite receiver retention below original BaseSrv duplication/release calls.
  * CSR target-local HANDLE delivery cannot cross the admitted wire boundary.
  * IDs name only this authenticated generation's standard-stream/wait receipts. */
-#include "vdm_receipt.h"
+#include "include/vdm_receipt.h"
 struct broker_vdm_receipt_entry {
     struct broker_vdm_receipt_entry *next;
     uint32_t id, role;

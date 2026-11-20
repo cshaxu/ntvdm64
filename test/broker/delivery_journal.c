@@ -1,5 +1,5 @@
 #include "vdm_delivery.h"
-#include "vdm_receipt.h"
+#include "compat/include/vdm_receipt.h"
 #include <stdio.h>
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d: %s\n",__LINE__,#x); return 1; } } while(0)
 typedef struct receiver { broker_vdm_receipts receipts; DWORD failure,calls; } receiver;

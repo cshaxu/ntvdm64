@@ -6,7 +6,7 @@
 #include <string.h>
 #include "resource_attachment.h"
 #include "rpc_security.h"
-#include "vdm_receipt.h"
+#include "compat/include/vdm_receipt.h"
 #include "common/base_srv/vdm_message.h"
 #include "common/protocol/vdm_protocol.h"
 #include "common/protocol/vdm_protocol.h"

@@ -1,7 +1,7 @@
 /* Finite worker-launch binding below original BaseSrv record ownership.
  * This has no command queue or selection logic: srvvdm.c owns those. */
 #include <base_reservation.h>
-#include "ntsrv-exe/transport/vdm_receipt.h"
+#include "compat/include/vdm_receipt.h"
 
 typedef struct OPENNT_BASE_RESERVATION {
     LIST_ENTRY link;

@@ -45,7 +45,7 @@ assert.equal(createHash('sha256').update(updateBody).digest('hex'),
     'de56cfccd08922ae57df7332cc8df70f60db186f44f177336188c2d236e9fd26','Original update body changed');
 const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "lifecycle_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%lifecycle_cwd%"\r\n%*\r\n');
-const includes=`/D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /we4013 /FI "${root}/src/adapter-opennt-host/basesrv/include/base_server.h" /I "${root}/src/adapter-opennt-host/basesrv/include" /I "${root}/src/non-mvdm/base/win32/inc" /I "${root}/src/non-mvdm/base/win32/server"`;
+const includes=`/I "${root}/src" /D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /we4013 /FI "${root}/src/adapter-opennt-host/basesrv/include/base_server.h" /I "${root}/src/adapter-opennt-host/basesrv/include" /I "${root}/src/non-mvdm/base/win32/inc" /I "${root}/src/non-mvdm/base/win32/server"`;
 let commands=[
     `cl.exe ${flags} ${includes} /Fo"${build}/command.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_command.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/values.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_values.c"`,
