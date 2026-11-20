@@ -3,7 +3,7 @@
 #include "mvdm_vm_executor.h"
 #include "mvdm_standalone_worker.h"
 #include "mvdm_vm_bridge.h"
-#include "mvdm_vm_wake.h"
+#include "compat/include/mvdm_vm_wake.h"
 #include "mvdm_vm_continuation.h"
 #include "compat/include/guest_location.h"
 #include "mvdm_softpc_guest_memory.h"

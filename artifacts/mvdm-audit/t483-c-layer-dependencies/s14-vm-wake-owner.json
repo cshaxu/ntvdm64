@@ -1,0 +1,119 @@
+{
+  "packet": "M0 T483 S14 P133",
+  "parent": "c057273941e29a42297883159ee002cc5b8c345c",
+  "related_open_B": [
+    "B0021"
+  ],
+  "eliminated_B": [],
+  "eliminated_C": [],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 2
+  },
+  "outward_C_known_calls": {
+    "D": 1,
+    "E": 1,
+    "F": 8
+  },
+  "C_named_image_imports": 1,
+  "verified_body_moves": [
+    "mvdm_vm_wake_register",
+    "mvdm_vm_wake_retire",
+    "mvdm_vm_wake_lookup",
+    "mvdm_vm_wake_publish",
+    "mvdm_vm_wake_take",
+    "mvdm_vm_wake_return_input",
+    "mvdm_vm_wake_read_input",
+    "mvdm_vm_wake_reset"
+  ],
+  "ownership": "B owns the existing wake queue and retained input. C owns the existing ICA lock. F still handles BOP dispatch and coordinates task lifecycles.",
+  "abi_header_unchanged_sha256": "e31e58bae36fea8af0930a4dcdf81fffd896a6a206c72b403699401b29c21735",
+  "builds": {
+    "msvc-x86-release/worker": {
+      "includes": [
+        "compat/include/console_io.h",
+        "compat/include/console_mouse.h",
+        "compat/include/console_video.h",
+        "compat/include/mvdm_mouse_record.h",
+        "compat/include/mvdm_vm_notification.h",
+        "compat/include/mvdm_vm_wake.h"
+      ],
+      "linked_owners": {
+        "mvdm_vm_wake_register": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_retire": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_lookup": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_publish": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_take": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_return_input": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_read_input": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_reset": "softpc-bindings:mvdm_vm_wake.obj",
+        "host_ica_lock": "original-softpc-host-roots:nt_eoi.obj",
+        "host_ica_unlock": "original-softpc-host-roots:nt_eoi.obj"
+      }
+    },
+    "msvc-x64-release/worker-reference-x86": {
+      "includes": [
+        "compat/include/console_io.h",
+        "compat/include/console_mouse.h",
+        "compat/include/console_video.h",
+        "compat/include/mvdm_mouse_record.h",
+        "compat/include/mvdm_vm_notification.h",
+        "compat/include/mvdm_vm_wake.h"
+      ],
+      "linked_owners": {
+        "mvdm_vm_wake_register": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_retire": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_lookup": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_publish": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_take": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_return_input": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_read_input": "softpc-bindings:mvdm_vm_wake.obj",
+        "mvdm_vm_wake_reset": "softpc-bindings:mvdm_vm_wake.obj",
+        "host_ica_lock": "original-softpc-host-roots:nt_eoi.obj",
+        "host_ica_unlock": "original-softpc-host-roots:nt_eoi.obj"
+      }
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "36c8ffb2-f050-4fdb-87d4-85710243a4a2",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "unit": [
+      "1/4 Test #42: mvdm-vm-notification .............   Passed    0.11 sec",
+      "2/4 Test #43: mvdm-vm-execute ..................   Passed    0.31 sec",
+      "3/4 Test #44: mvdm-vm-ingress ..................   Passed    0.08 sec",
+      "4/4 Test #47: mvdm-vm-text .....................   Passed    0.02 sec",
+      "100% tests passed, 0 tests failed out of 4"
+    ],
+    "Win31": {
+      "baseline": [
+        "386-dosonly0: started=True desktop-and-mode=True normal-exit=True pass=True",
+        "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+        "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+        "PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested",
+        "Original Windows installation bytes verified unchanged"
+      ],
+      "retry": [
+        "386-dosonly0: started=True desktop-and-mode=True normal-exit=True pass=True",
+        "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+        "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+        "PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested",
+        "Original Windows installation bytes verified unchanged"
+      ]
+    },
+    "initial_Win31_harness_error": "The nine-character temporary directory resulted in DOS being unable to execute WIN.COM. The previous and current packages both reached Windows and passed on distinct eight-character temporary directories.",
+    "limitations": "The product test covers Win3.1 enhancement mode with drivers and DOSONLY=0. VM unread-input handback was covered at the unit level. No dedicated guest INT16 handback, Win95 or full regression was run."
+  }
+}

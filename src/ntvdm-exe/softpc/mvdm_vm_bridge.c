@@ -1,6 +1,6 @@
 #include "compat/include/mvdm_vm_notification.h"
 #include "mvdm_vm_bridge.h"
-#include "mvdm_vm_wake.h"
+#include "compat/include/mvdm_vm_wake.h"
 #include "mvdm_vm_continuation.h"
 #include "mvdm_vm_ingress.h"
 #include "mvdm_vm_executor.h"

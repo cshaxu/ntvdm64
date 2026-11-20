@@ -291,7 +291,8 @@
       "kind": "installed-service-slot",
       "status": "outer-target-confirmed",
       "installation": "src/ntvdm-exe/softpc/mvdm_vm_binding.c",
-      "p132_irq_provider": "s14-vm-notification-owner.json"
+      "p132_irq_provider": "s14-vm-notification-owner.json",
+      "p133_wake_provider": "s14-vm-wake-owner.json"
     },
     {
       "id": "B0022",
@@ -536,5 +537,6 @@
   },
   "p130_receipt_owner": "s14-receipt-owner.json",
   "p131_resource_scope_owner": "s14-resource-scope-owner.json",
-  "p132_vm_notification_owner": "s14-vm-notification-owner.json"
+  "p132_vm_notification_owner": "s14-vm-notification-owner.json",
+  "p133_vm_wake_owner": "s14-vm-wake-owner.json"
 }

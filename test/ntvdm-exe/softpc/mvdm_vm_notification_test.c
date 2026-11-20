@@ -3,7 +3,7 @@
 #include "ntvdm-exe/frontend/vm_text.h"
 #include "compat/include/mvdm_vm_notification.h"
 #include "mvdm_vm_bridge.h"
-#include "mvdm_vm_wake.h"
+#include "compat/include/mvdm_vm_wake.h"
 #include "mvdm_vm_continuation.h"
 #include <stdio.h>
 #include <stdlib.h>

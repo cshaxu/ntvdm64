@@ -1,6 +1,6 @@
 #ifndef MVDM_VM_CONTINUATION_H
 #define MVDM_VM_CONTINUATION_H
-#include "mvdm_vm_wake.h"
+#include "compat/include/mvdm_vm_wake.h"
 #include <windows.h>
 
 typedef struct mvdm_vm_continuation mvdm_vm_continuation;

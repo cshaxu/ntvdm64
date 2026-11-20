@@ -1,5 +1,5 @@
 #include "mvdm_vm_bridge.h"
-#include "mvdm_vm_wake.h"
+#include "compat/include/mvdm_vm_wake.h"
 #include "compat/include/mvdm_vm_notification.h"
 #include <windows.h>
 

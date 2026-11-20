@@ -1,5 +1,5 @@
 #include "mvdm_vm_io.h"
-#include "mvdm_vm_wake.h"
+#include "compat/include/mvdm_vm_wake.h"
 #include <string.h>
 
 struct mvdm_vm_io {
