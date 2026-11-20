@@ -1,7 +1,8 @@
 /* Private local registry binding. Never serialize these records. */
 #ifndef OPENNT_BASE_PROCESS_H
 #define OPENNT_BASE_PROCESS_H
-#include <base_server.h>
+#include <windows.h>
+struct _CSR_PROCESS;
 typedef struct OPENNT_BASE_PROCESS_REGISTRY {
     CRITICAL_SECTION Lock;
     LIST_ENTRY Processes;
@@ -11,12 +12,12 @@ typedef struct OPENNT_BASE_PROCESS_REGISTRY {
 BOOL OpenNtBaseInitializeProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *);
 BOOL OpenNtBaseDestroyProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *);
 OPENNT_BASE_PROCESS_REGISTRY *OpenNtBaseBindProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *);
-/* Trusted registration only, after RPC authentication; borrows record storage
+/* Trusted registration only; borrows record storage
  * until removal, owns a same-access duplicate of process; never widens rights.
  * PID is derived, never supplied. Query and synchronize rights are required.
  * Caller must serialize registration/removal and service use as designed. */
-BOOL OpenNtBaseRegisterProcess(OPENNT_BASE_PROCESS_REGISTRY *, PCSR_PROCESS, HANDLE);
-BOOL OpenNtBaseRemoveProcess(OPENNT_BASE_PROCESS_REGISTRY *, PCSR_PROCESS);
+BOOL OpenNtBaseRegisterProcess(OPENNT_BASE_PROCESS_REGISTRY *, struct _CSR_PROCESS *, HANDLE);
+BOOL OpenNtBaseRemoveProcess(OPENNT_BASE_PROCESS_REGISTRY *, struct _CSR_PROCESS *);
 /* Snapshot only: caller provides higher-level serialization when using this
  * for product lifetime decisions.  A registered process is never inferred
  * idle from its lack of current requests. */

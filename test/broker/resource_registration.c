@@ -1,7 +1,7 @@
 /* Test bridge between native RPC and the actual private process binding.
  * No service policy and no fixture implementation of registry operations. */
 #include "basesrv.h"
-#include <base_process.h>
+#include "compat/include/base_process.h"
 #include <base_dispatch.h>
 #include "common/base_srv/base_command.h"
 #include <string.h>

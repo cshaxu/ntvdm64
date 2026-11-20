@@ -30,6 +30,7 @@ WOW_USER_EXCEPTIONS = {"wow_dialog_lookup.c", "wow_object_ownership.c"}
 
 
 ORIGINAL_LAYOUT_ADAPTERS = {
+    "base_process.c",
     "mvdm_softpc_text_video.c",
     "mvdm_command_guest_state.c",
     "mvdm_redirector_async.c",

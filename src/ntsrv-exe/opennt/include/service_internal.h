@@ -8,9 +8,10 @@
  * Service Stop requires RPC calls/rundowns and worker watches drained. */
 #ifndef NTSRV_SERVICE_INTERNAL_H
 #define NTSRV_SERVICE_INTERNAL_H
+#include <base_server.h>
 #include "basesrv.h"
 #include <base_service.h>
-#include <base_process.h>
+#include "compat/include/base_process.h"
 #include <base_dispatch.h>
 #include <base_reservation.h>
 #include "common/base_srv/base_command.h"

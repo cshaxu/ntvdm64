@@ -3,7 +3,8 @@
 #include <base_interactive.h>
 #include <base_capture.h>
 #include <base_config.h>
-#include <base_process.h>
+#include "compat/include/base_process.h"
+#include <base_server.h>
 #include <base_dispatch.h>
 #include "common/base_srv/base_startup.h"
 #include "common/base_srv/base_payload.h"

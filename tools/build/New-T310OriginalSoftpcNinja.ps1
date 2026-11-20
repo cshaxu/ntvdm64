@@ -1448,7 +1448,7 @@ if ($Architecture -eq 'x86') {
             @('resources', 'src/compat/base_resource.c', $libraryFlags),
             @('streams', 'src/ntsrv-exe/opennt/source/base_stream.c', $baseServerFlags),
             @('waits', 'src/ntsrv-exe/opennt/source/base_wait.c', ($baseServerFlags + ' /DOPENNT_BASE_NATIVE_RESOURCES')),
-            @('registry', 'src/ntsrv-exe/opennt/source/base_process.c', $baseServerFlags),
+            @('registry', 'src/compat/base_process.c', ($libraryFlags + ' /D_CSRSRV_ /I "' + (NinjaPath (Join-Path $root 'src/compat/include')) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc')) + '"')),
             @('reservation', 'src/ntsrv-exe/opennt/source/base_reservation.c', $baseOwnerFlags),
             @('request', 'src/compat/base_request.c', $libraryFlags),
             @('config', 'src/compat/base_vdm_config.c', $libraryFlags),
@@ -1462,12 +1462,7 @@ if ($Architecture -eq 'x86') {
             $object = 'obj/' + $group + '/' + $member[0] + '.obj'
             $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $member[1])))
             $memberFlags = if ($member[1].StartsWith('src/ntsrv-exe/') -or $member[1].StartsWith('src/common/base_srv/')) {
-                $flags = $member[2].Replace($baseOwnerFlags, $baseAdapterFlags)
-                # Only the local CSR provider defines these original exports.
-                if ($member[1] -ne 'src/ntsrv-exe/opennt/source/base_process.c') {
-                    $flags = $flags.Replace(' /D_CSRSRV_', '')
-                }
-                $flags
+                $member[2].Replace($baseOwnerFlags, $baseAdapterFlags).Replace(' /D_CSRSRV_', '')
             } else { $member[2] }
             $graph.Add('  cflags = ' + $memberFlags)
             $baseOwnerManifest += [ordered]@{

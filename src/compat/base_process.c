@@ -2,7 +2,10 @@
  * Retain that critical-section lifetime over explicitly registered local
  * records. Full CSR root/reference/deletion machinery is not imported.
  * Authentication, task selection and worker role assignment are not here. */
-#include <base_process.h>
+#include "compat/include/base_process.h"
+#include <nt.h>
+#include <ntlpcapi.h>
+#include <ntcsrsrv.h>
 static __declspec(thread) OPENNT_BASE_PROCESS_REGISTRY *registry;
 
 BOOL OpenNtBaseInitializeProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *state)

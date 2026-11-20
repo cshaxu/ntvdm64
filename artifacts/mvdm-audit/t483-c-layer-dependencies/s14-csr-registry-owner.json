@@ -1,0 +1,109 @@
+{
+  "packet": "M0 T483 S14 P119",
+  "baseline": "70a9e14417c705344929409fbe6ecd1a1710f16b",
+  "eliminated_C_ids": [
+    "C0166",
+    "C0167"
+  ],
+  "eliminated_B_ids": [],
+  "population": {
+    "excluded-diagnostic": 1,
+    "eliminated": 548,
+    "open": 20,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "outward_B_known_calls": {
+    "D": 2,
+    "E": 0,
+    "F": 5
+  },
+  "remaining_C_by_edge_kind": {
+    "header": 6,
+    "image-import": 1,
+    "symbol": 13
+  },
+  "remaining_C_by_provider": {
+    "common": 2,
+    "ntvdm-exe": 8,
+    "worker-base": 2,
+    "wow32-dll": 8
+  },
+  "ownership": "B owns the scoped registry, live handle duplication, generation, registry lock, pin and thread binding. C owns the original CSR_PROCESS layout and calls the same CSR ABI. F still authenticates callers, selects the registry for a request and owns request lifetime.",
+  "B_to_C_layout": {
+    "x86": [
+      "compat/include/base_process.h",
+      "compat/include/nt_event_declarations.h",
+      "compat/include/ntioapi.h",
+      "compat/include/opennt_support_thread.h",
+      "compat/include/opennt_support_types.h",
+      "compat/include/wow_user_declarations.h",
+      "non-mvdm/public/sdk/inc/devioctl.h",
+      "non-mvdm/public/sdk/inc/nt.h",
+      "non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "non-mvdm/public/sdk/inc/ntpsapi.h",
+      "non-mvdm/public/sdk/inc/ntregapi.h",
+      "non-mvdm/public/sdk/inc/ntrtl.h",
+      "non-mvdm/public/sdk/inc/nturtl.h"
+    ],
+    "x64": [
+      "compat/include/base_process.h",
+      "compat/include/nt_event_declarations.h",
+      "compat/include/ntioapi.h",
+      "compat/include/opennt_support_thread.h",
+      "compat/include/opennt_support_types.h",
+      "compat/include/wow_user_declarations.h",
+      "non-mvdm/public/sdk/inc/devioctl.h",
+      "non-mvdm/public/sdk/inc/nt.h",
+      "non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "non-mvdm/public/sdk/inc/ntpsapi.h",
+      "non-mvdm/public/sdk/inc/ntregapi.h",
+      "non-mvdm/public/sdk/inc/ntrtl.h",
+      "non-mvdm/public/sdk/inc/nturtl.h"
+    ]
+  },
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "97ee78e2-953f-4f55-8bda-764b18b93d8b",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": [
+    "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+    "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+    "PASS shared worker 22788, two distinct tasks overlapped and retired independently, both requests exited normally",
+    "detached CheckDOS task=1 reservation-error=0",
+    "detached CheckDOS task=2 reservation-error=0",
+    "detached CheckDOS task=3 reservation-error=0",
+    "PASS new-Console original process completion authorizes only the registered live worker",
+    "PASS new-Console original process completion authorizes only the registered live worker",
+    "PASS new-Console original process completion authorizes only the registered live worker",
+    "PASS DOS Get replaces previous request on resident-worker reuse",
+    "PASS WOW request/worker rejects valid character frontend/context without changing original WOW Get/Exit",
+    "PASS WOW task close binds opaque management identity, delivers once, retries only on later intent and retires safely",
+    "PASS WOW startup authentication, wait-only notification and immediate-completion latch",
+    "PASS reused WOW gets a fresh receipt/latch; stale startup identity rejected",
+    "PASS reused WOW receipt mismatch, retired task and worker reuse checked",
+    "PASS failed WOW completion has no startup acknowledgement; late report rejected",
+    "PASS closing original WOW head rejects new task without publishing a record",
+    "PASS: original Check/Update/Get/ExitVDM lifecycle completes through authenticated worker binding"
+  ],
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "boundary.out": "405d5a8b8e4c5402bb8a0fea4398f014e068252933bfa5fe8f1ed5db2104a2be",
+    "probes.out": "cfbd29e62cc2b6d34c7d3e77d16075c4049e7571be0b0d44fb88097619783e8f",
+    "final-checks.out": "606f265aa0dd1b7ca3f65ef6912ada764262bf2e10700b8df01e955d3d2fd9cf"
+  }
+}
