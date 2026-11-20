@@ -175,24 +175,30 @@
     {
       "id": "B0011",
       "contract": "compat_command_services",
-      "provider": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "provider": "src/compat/mvdm_command_guest_state.c",
       "target": "mvdm_command_guest_state_clear_doswow",
-      "layer": "F",
+      "layer": "B",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed",
+      "status": "inner-target-confirmed",
       "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
-      "slot": "clear_doswow"
+      "slot": "clear_doswow",
+      "baseline_layer": "F",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "migration_status": "P86; DOSWOW registration, lookup state and teardown in B"
     },
     {
       "id": "B0012",
       "contract": "compat_command_services",
-      "provider": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "provider": "src/compat/mvdm_command_guest_state.c",
       "target": "mvdm_command_guest_state_register_doswow",
-      "layer": "F",
+      "layer": "B",
       "kind": "installed-service-slot",
-      "status": "outer-target-confirmed",
+      "status": "inner-target-confirmed",
       "installation": "src/ntvdm-exe/command/source/mvdm_command_binding.c",
-      "slot": "register_doswow"
+      "slot": "register_doswow",
+      "baseline_layer": "F",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "migration_status": "P86; DOSWOW registration, lookup state and teardown in B"
     },
     {
       "id": "B0013",
@@ -373,11 +379,14 @@
     {
       "id": "B0032",
       "contract": "compat_host_context cleanup",
-      "provider": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "provider": "src/compat/mvdm_command_guest_state.c",
       "target": "registration_teardown",
-      "layer": "F",
+      "layer": "B",
       "kind": "registered-cleanup-target",
-      "status": "outer-target-confirmed"
+      "status": "inner-target-confirmed",
+      "baseline_layer": "F",
+      "baseline_provider": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "migration_status": "P86; DOSWOW registration, lookup state and teardown in B"
     },
     {
       "id": "B0033",
@@ -408,8 +417,8 @@
     }
   ],
   "indirect_counts": {
-    "B": 15,
-    "F": 18,
+    "B": 18,
+    "F": 15,
     "D": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
@@ -443,5 +452,6 @@
     "src/ntvdm-exe/win32/console_graphics.c": "b8d34e49f4d65950460ab5440061c0ea387d29bf23f220ff177208e02bbe464f",
     "src/ntvwm-exe/presentation.c": "f95a13365d65a53a1d5fc51f6164997d2df51610f0834dbfaf204882177926b6"
   },
-  "p85_provider_sha256": "61abfc0a868a286bb79dd1dff22723086ac434176072c87310e2de951064d0fd"
+  "p85_provider_sha256": "61abfc0a868a286bb79dd1dff22723086ac434176072c87310e2de951064d0fd",
+  "p86_provider_sha256": "eb4d072a1d0026d361716b3a386241cc5ed08422a3f5095029f60a13ba6410e6"
 }

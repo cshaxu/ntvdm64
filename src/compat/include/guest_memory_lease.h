@@ -38,4 +38,8 @@ void guest_memory_lease_discard(guest_memory_lease *lease);
 /* copy_enter holds a shared lifetime lock until copy_leave. */
 int guest_memory_lease_copy_enter(guest_memory_lease_context *context, uint32_t epoch);
 void guest_memory_lease_copy_leave(guest_memory_lease_context *context);
+
+/* CCPU owns the actual copy through the admitted SAS address space. */
+int ccpu_guest_memory_copy(guest_memory_lease_context *context, uint32_t epoch,
+    uint32_t address, uint8_t *bytes, uint32_t byte_count, int write);
 #endif

@@ -1212,10 +1212,10 @@ $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $graph.Add('build common-worker-thread.lib: lib ' + $threadBridgeObject + ' ' + $threadStartObject)
 $adapterBaseSrvObjects = foreach ($name in $adapterBaseSrvNames) {
     $object = 'obj/adapter-basesrv/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $capture = $name -eq 'mvdm_command_native_child.c'
-    $sourceRoot = if($capture){Join-Path $root 'src/compat'}else{$adapterBaseSrvRoot}
+    $compatCommand = $name -in @('mvdm_command_native_child.c', 'mvdm_command_guest_state.c')
+    $sourceRoot = if($compatCommand){Join-Path $root 'src/compat'}else{$adapterBaseSrvRoot}
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sourceRoot $name)))
-    $flags = if($capture){$libraryFlags}else{$authoredSoftpcFlags + $commandInclude}
+    $flags = if($compatCommand){$libraryFlags}else{$authoredSoftpcFlags + $commandInclude}
     $graph.Add('  cflags = ' + $flags)
     $object
 }

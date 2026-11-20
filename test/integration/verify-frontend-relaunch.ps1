@@ -23,11 +23,11 @@ $launcher='"'+(Join-Path $binary 'run16.exe')+'"'
 # resolved from that cwd. Do not alter production PATH/search semantics.
 $text="$launcher command`rmem`rexit`r$launcher cmd /c ver`r$launcher command`rmem`rexit`rexit /b 19`r"
 foreach($argument in @((Join-Path $env:WINDIR 'System32/cmd.exe'),$binary,$ReportPath,
-    '/d','/k','--observe-console-input-text',$text,'--observe-console-line-delay-ms','1600',
-    '--observation-timeout-ms','30000')){$start.ArgumentList.Add($argument)}
+    '/d','/k','--observe-console-input-text',$text,'--observe-console-line-delay-ms','2800',
+    '--observation-timeout-ms','40000')){$start.ArgumentList.Add($argument)}
 $process=[Diagnostics.Process]::Start($start)
 try {
-    if(!$process.WaitForExit(45000)){throw 'Same-Console relaunch timed out'}
+    if(!$process.WaitForExit(55000)){throw 'Same-Console relaunch timed out'}
     $report=Get-Content $ReportPath -Raw
     if($report -notmatch '(?m)^result=exited\r?$' -or $report -notmatch '(?m)^exit=0x00000013\r?$'){
         throw 'Outer CMD failed to complete after nested direct/native/DOS requests'

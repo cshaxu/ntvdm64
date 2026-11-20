@@ -1,0 +1,82 @@
+{
+  "packet": "M0 T483 S14 P86",
+  "baseline": "887a7c70ed6e9e3fac576c6564fd6d0cce03a852",
+  "status": "Cached full product build, dual publication, targeted tests and final gates passed. Enclosing commit records delivery.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "ownership": "B owns DOSWOW numeric location, paired epochs, lock and teardown. C owns DOSWOWDATA/CDS layouts and SAS copy. F composes the service and sends the directory result across the product protocol.",
+  "evidence_root": "build/t483-s14-command-directory-owner",
+  "c_open": {
+    "function_symbol_dependencies": 83,
+    "data_symbol_dependencies": 11,
+    "headers": 33,
+    "include_roots": 11,
+    "image_imports": 1,
+    "total": 139,
+    "evidence": "build/t483-s14-command-directory-owner/c-function-data.json",
+    "note": "Data includes C0171, a nullable callback variable used by C. Ledger counts provider identities, not source call sites.",
+    "data_ids": {
+      "C0162": "BaseDotComSuffixName",
+      "C0163": "BaseDotExeSuffixName",
+      "C0164": "BaseDotPifSuffixName",
+      "C0171": "UserNotifyProcessCreate",
+      "C0607": "CsrPortHeap",
+      "C0608": "verbose",
+      "C0609": "BaseDotComSuffixName",
+      "C0610": "BaseDotExeSuffixName",
+      "C0611": "BaseDotPifSuffixName",
+      "C0612": "CsrPortHeap",
+      "C0613": "g_abLeadTable"
+    },
+    "function_source_fallback_ids": [
+      "C0600",
+      "C0601",
+      "C0602"
+    ]
+  },
+  "eliminated_indirect_ids": [
+    "B0011",
+    "B0012",
+    "B0032"
+  ],
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "11526377-0f38-4078-ad34-1d6259d5d352",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "compiled_ownership": {
+    "objects": 4,
+    "external_relocation_pairs": 52,
+    "resolved_outward": 0,
+    "not_selected": 20
+  },
+  "verification": {
+    "passed": [
+      "cached x86/x64/reference",
+      "dual11/22 hashes",
+      "COMMAND capture, directory, launch, session lifecycle",
+      "redirector epoch and completion",
+      "real COMMAND/native EDIT return",
+      "same-console DOS/native/DOS relaunch",
+      "build, document and library boundary gates"
+    ],
+    "relaunch_first_attempt": "First DOS MEM and native VER succeeded. Input for the second DOS launch was truncated before return to CMD. Raising the fixture inter-line delay from 1600ms to 2800ms passed the same sequence with a fresh isolated copy.",
+    "receipts_sha256": {
+      "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "steps.txt": "ed87afa1ac811838008dee862311ab1127ffd3f32da2a4b21e060f7adc91f776",
+      "release-and-test.out": "956ae215d47ab780881998ac6a55a017669764e67bfe60705656479843333423",
+      "final-relaunch.txt.line-08.console.txt": "c784b9f32daed52d0bc7b70d108e8e910973103e83cfdd00abbfc2ce518aeef7",
+      "relaunch2.out": "b06681555722d19d17a4de2c295dc43be2b8d9b76e30d72295fc777e4024980b",
+      "final-checks.out": "6a5cd14a29605ccf16cc9063de09b3df6f0ee7ad28e637d692a23214a78920be",
+      "b-compiled-candidates.json": "5ef9c2fad7c8e97935ac877757ef93d9661670533563af5232f00b830ff2933e",
+      "c-function-data.json": "e316b0bb6c2dedcde52ace593bd0e278aca5f4c9160c0d5b305bcf1767c5455f"
+    }
+  }
+}

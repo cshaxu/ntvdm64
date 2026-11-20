@@ -1,5 +1,5 @@
 #include "ntvdm-exe/command/include/command_launch.h"
-#include "ntvdm-exe/command/include/mvdm_command_guest_directory.h"
+#include "compat/include/mvdm_command_guest_directory.h"
 #include "compat/include/command_services.h"
 
 BOOL ntvdm_command_initialize(void)

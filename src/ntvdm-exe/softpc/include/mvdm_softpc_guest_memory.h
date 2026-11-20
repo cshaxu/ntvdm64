@@ -16,8 +16,6 @@ int ccpu_guest_memory_acquire(guest_memory_lease_context *context,
     guest_memory_lease **lease_out, uint8_t **bytes_out);
 int ccpu_guest_memory_release(guest_memory_lease_context *context,
     guest_memory_lease *lease, int commit);
-int ccpu_guest_memory_copy(guest_memory_lease_context *context, uint32_t epoch,
-    uint32_t address, uint8_t *bytes, uint32_t byte_count, int write);
 
 int mvdm_softpc_guest_memory_begin(session *owner);
 void mvdm_softpc_guest_memory_end(session *owner);

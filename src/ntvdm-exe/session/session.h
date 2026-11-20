@@ -107,8 +107,6 @@ typedef struct session {
     char original_worker_source[SESSION_WORKER_SOURCE_MAX];
     compat_host_context host_context;
     session_thread_hook thread_hooks[SESSION_MAX_THREAD_HOOKS];
-    /* Numeric COMMAND registration shared by bound original host threads. */
-    void *mvdm_command_guest_state;
     /* Worker-local endpoint of the authenticated run16 I/O channel. */
     void *console_client;
     guest_memory_lease_context guest_memory_lease;
