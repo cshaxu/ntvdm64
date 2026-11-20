@@ -41,6 +41,8 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     "wow_common_dialog_callback.c",
     'dbg_registers.c',
     'mvdm_softpc_effective_address.c',
+    'mvdm_monitor_printer.c',
+    'mvdm_vdm_tib.c',
     'wow_ole_descriptor_binding.c',
     'mvdm_cvidc_vector_binding.c',
     'mvdm_keyboard_reset.c',

@@ -6,7 +6,7 @@
 #ifndef ADAPTER_MVDM_MONITOR_VINT_H
 #define ADAPTER_MVDM_MONITOR_VINT_H
 
-#include "monitor_context.h"
+#include "../../../compat/include/monitor_context.h"
 
 #define INTERRUPT_PENDING_BIT 0x0003
 #define VIRTUAL_INTERRUPT_BIT 0x0200

@@ -129,8 +129,8 @@ $frontendRoot = Join-Path $root 'src/ntcon-exe'
 $frontendWindowSources = @()
 $workerPackageRoot = Join-Path $root 'src/ntvdm-exe'
 $adapterBaseSrvRoot = Join-Path $root 'src/ntvdm-exe/command/source'
-$adapterMonitorRoot = Join-Path $root 'src/ntvdm-exe/monitor/source'
-$kernelVdmPrinterSource = Join-Path $adapterMonitorRoot 'monitor_printer.c'
+$adapterMonitorRoot = Join-Path $root 'src/compat'
+$kernelVdmPrinterSource = Join-Path $adapterMonitorRoot 'mvdm_monitor_printer.c'
 $adapterRedirRoot = Join-Path $root 'src/ntvdm-exe/redir'
 $redirDllRoot = Join-Path $root 'src/vdmredir-dll'
 $redirDllBindingRoot = Join-Path $redirDllRoot 'source'
@@ -267,7 +267,7 @@ $adapterBaseSrvNames = @('mvdm_command_guest_state.c',
                           'mvdm_command_native_child.c',
                           'mvdm_command_binding.c')
 $adapterVddNames = @('mvdm_softpc_vdd_unavailable.c')
-$adapterMonitorNames = @('../mvdm_vdm_tib.c')
+$adapterMonitorNames = @('mvdm_vdm_tib.c')
 $adapterDebuggerNames = @('dbg_registers.c')
 $adapterRedirWorkerNames = @('mvdm_redirector_worker_copy.c',
                               'mvdm_redirector_async.c')
@@ -1219,14 +1219,14 @@ $adapterBaseSrvObjects = foreach ($name in $adapterBaseSrvNames) {
     $graph.Add('  cflags = ' + $flags)
     $object
 }
+$compatCcpuFlags = ($libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + (($softpcIncludeRootPaths | Where-Object { $_ -match '^src/(compat|mvdm-host|non-mvdm)(/|$)' } | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }) -join ' '))
 $adapterMonitorObjects = foreach ($name in $adapterMonitorNames) {
     $object = 'obj/adapter-monitor/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterMonitorRoot $name)))
-    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
+    $graph.Add('  cflags = ' + $compatCcpuFlags)
     $object
 }
 $adapterDebuggerRoot = Join-Path $root 'src/compat'
-$compatCcpuFlags = ($libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + (($softpcIncludeRootPaths | Where-Object { $_ -match '^src/(compat|mvdm-host|non-mvdm)(/|$)' } | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }) -join ' '))
 $adapterDebuggerObjects = foreach ($name in $adapterDebuggerNames) {
     $object = 'obj/compat/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterDebuggerRoot $name)))
@@ -1351,9 +1351,9 @@ $openntRtlObjects = foreach ($name in $openntRtlNames) {
     }
     $object
 }
-$kernelVdmPrinterObject = 'obj/kernel-vdm/monitor_printer.obj'
+$kernelVdmPrinterObject = 'obj/kernel-vdm/mvdm_monitor_printer.obj'
 $graph.Add('build ' + $kernelVdmPrinterObject + ': cc ' + (NinjaPath $kernelVdmPrinterSource))
-$graph.Add('  cflags = ' + $authoredSoftpcFlags)
+$graph.Add('  cflags = ' + $compatCcpuFlags)
 $adapterVddObjects = foreach ($name in $adapterVddNames) {
     $object = 'obj/adapter-vdd/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterVddRoot $name)))

@@ -1,5 +1,5 @@
 /*
- * Product-owned carrier for the session-bound part of the historical monitor
+ * Compatibility carrier for the worker-local part of the historical monitor
  * context.  The OpenNT ABI records themselves remain in <vdm.h>.
  */
 #ifndef ADAPTER_MVDM_MONITOR_CONTEXT_H

@@ -9,7 +9,7 @@
  * VDM_TIB.  It neither installs a monitor nor owns CPU execution.
  */
 
-#include "../include/monitor_context.h"
+#include "include/monitor_context.h"
 
 BOOLEAN MonitorInitializePrinterInfo(
      WORD   Ports,

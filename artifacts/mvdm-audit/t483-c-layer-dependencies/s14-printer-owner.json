@@ -1,0 +1,76 @@
+{
+  "packet": "M0 T483 S14 P99",
+  "baseline": "d32d4c08affcdf8e05b800cce365051ee356aa53",
+  "eliminated_C_ids": [
+    "C0185",
+    "C0186",
+    "C0187"
+  ],
+  "eliminated_B_ids": [],
+  "scope": "Move the selected original printer bodies and original-layout TIB storage/binding together under B, with only A/B/C compiler header closure. Worker bootstrap retains binding timing; original LPT calls and original layout remain C-owned.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "open": 63,
+    "eliminated": 505,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "final_product_symbols": {
+    "msvc-x86-release": [
+      "0001:00129bc0       _NtVdmControl              0052abc0 f   monitor-bindings:vdm_control.obj",
+      "0001:00129c20       _MonitorEnablePrinterDirectAccess 0052ac20 f   kernel-vdm-printer:mvdm_monitor_printer.obj",
+      "0001:00129ca0       _MonitorInitializePrinterInfo 0052aca0 f   kernel-vdm-printer:mvdm_monitor_printer.obj",
+      "0001:00129d40       _MonitorPrinterWriteData   0052ad40 f   kernel-vdm-printer:mvdm_monitor_printer.obj",
+      "0003:0012c9a0       _VdmTib                    006e59a0     monitor-bindings:mvdm_vdm_tib.obj"
+    ],
+    "msvc-x64-release": [
+      "0001:00129bc0       _NtVdmControl              0052abc0 f   monitor-bindings:vdm_control.obj",
+      "0001:00129c20       _MonitorEnablePrinterDirectAccess 0052ac20 f   kernel-vdm-printer:mvdm_monitor_printer.obj",
+      "0001:00129ca0       _MonitorInitializePrinterInfo 0052aca0 f   kernel-vdm-printer:mvdm_monitor_printer.obj",
+      "0001:00129d40       _MonitorPrinterWriteData   0052ad40 f   kernel-vdm-printer:mvdm_monitor_printer.obj",
+      "0003:0012c9a0       _VdmTib                    006e59a0     monitor-bindings:mvdm_vdm_tib.obj"
+    ]
+  },
+  "compiled_ownership": {
+    "objects": 8,
+    "counts": {
+      "compat": 7,
+      "not selected in final link": 5
+    },
+    "outward": []
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "2fa46388-a004-4cd8-9edc-a5fbb27bd999",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, production printer and TIB tests, real DOS4GW/NESticle and final gates passed. Enclosing commit is the delivery receipt.",
+  "lpt_integration_boundary": {
+    "case": "INT17h LPT1 mapped to a test-only pipe",
+    "P98_and_P99_inherited_environment": "same observer timeout and forced-exit marker",
+    "P99_minimal_environment": "also timed out",
+    "product_object_test": "one-time initialization, VDD precedence, byte-buffer contents and close/reset passed"
+  },
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "ee8a9c7213bffe14d46468b50831b6b752d6e51ddac1f990aa6c492444512d1a",
+    "release-and-test.out": "faf5749f5fb74ced48baa232a1dba172a2665d3403c3ab40fa88ed666bfcd15c",
+    "b-compiled-candidates.json": "1201c1742af3941707c6b9ad6faca1b97ed0129fd6ca98cbfc544013409aca2a",
+    "lpt-p98-short/observer.txt": "7e1fcb40f43024b67c835f37053bb20611c99bcd9a5deb6aa73aae7635d8305e",
+    "lpt-p99-short/observer.txt": "cdf98d46cf20b1c967edb3d325608d404cae599b086f5a97369e02b2fc41a180",
+    "lpt-p99-minenv/observer.txt": "3a2379837e2edf996f5436f87a9ebc41ae1ec4b16e4547524fbe54e378ad194f",
+    "printer-obj-test.out": "dedbbb1560474013b9d91be468411f8e6e167234b5576befa19b05dbcdc223f4",
+    "dos4gw.out": "82d6cf4dfb4e95b3598f998a0c4447ecefa80ddf71abf2da83d2e31394dcdc6e",
+    "final-checks.out": "c250f81e556c0a2f1eecbc477ac9882d89ff3f6fe3e183fe2f21c81af22460f9"
+  },
+  "prior_clipboard_delivery": "s14-clipboard-owner.json"
+}

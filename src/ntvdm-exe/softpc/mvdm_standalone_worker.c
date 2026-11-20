@@ -13,7 +13,7 @@
 #include "mvdm_vm_ingress.h"
 #include "ntvdm_dos_observer.h"
 #include "ntvdm-exe/session/session.h"
-#include "ntvdm-exe/monitor/include/monitor_context.h"
+#include "compat/include/monitor_context.h"
 #include "ntvdm-exe/wow/include/wow_user_session_binding.h"
 #include "compat/include/mvdm_shadow_registry.h"
 #include "ntvdm-exe/win32/console_client.h"

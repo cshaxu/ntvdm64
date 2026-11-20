@@ -16,7 +16,7 @@ $sources = @(
     'src/compat/guest_memory_lease.c', 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
     'src/compat/opennt_support_rtl.c',
     'src/compat/vdm_control.c',
-    'src/ntvdm-exe/monitor/mvdm_vdm_tib.c')
+    'src/compat/mvdm_vdm_tib.c')
 $fixtures = @(
     'test/mvdm-host/vdm_control_test.c',
     'test/adapter-mvdm-host-out/monitor/vdm_tib_fixture.c')

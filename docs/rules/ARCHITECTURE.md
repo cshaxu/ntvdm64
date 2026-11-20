@@ -363,10 +363,9 @@ Both preserve their original relative paths and provenance.
    not become an alternate provider, and never include Bochs or CPU30.
 4. `compat` owns the unavailable `NtVdmControl` ABI; original DEM owns its
    directory-enumeration fallback. No production callback provider is installed.
-   `ntvdm/monitor` owns `VDM_TIB`,
-   V86-event and interrupt/fault binding. It binds worker-local state around
-   imported MVDM code, does not recreate kernel/CSRSS internals, and fails
-   unavailable operations deterministically.
+   `compat` owns the process-local `VDM_TIB` storage, its thread binding and
+   the selected printer operations on that layout. `ntvdm` invokes the binding
+   at worker startup. Original DPMI code retains interrupt/fault semantics.
 5. `ntvdm` owns one active imported MVDM host context per worker process:
    its local session, leases, resources, completions/events and teardown. No
    raw local pointer enters guest state or a cross-executable ABI. Multiple

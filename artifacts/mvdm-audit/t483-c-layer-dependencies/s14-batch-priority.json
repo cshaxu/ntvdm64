@@ -3,8 +3,8 @@
   "owner_direction": "Prioritize batches by number of actual outward dependencies eliminated, not former chain order or smallest mirror delta. C outward dependencies cannot remain; mirror increases remain subject to standing approval threshold.",
   "population": {
     "excluded-diagnostic": 1,
-    "open": 66,
-    "eliminated": 502,
+    "open": 63,
+    "eliminated": 505,
     "supporting-evidence": 43,
     "eliminated-transitive": 6
   },
@@ -24,21 +24,6 @@
         "wow_task_termination_bind",
         "wow_task_termination_fail",
         "wow_task_termination_retire"
-      ]
-    },
-    {
-      "kind": "symbol",
-      "provider": "src/ntvdm-exe/monitor/source/monitor_printer.c",
-      "open_ids": [
-        "C0185",
-        "C0186",
-        "C0187"
-      ],
-      "count": 3,
-      "symbols": [
-        "MonitorEnablePrinterDirectAccess",
-        "MonitorInitializePrinterInfo",
-        "MonitorPrinterWriteData"
       ]
     },
     {
@@ -628,5 +613,5 @@
   ],
   "next_action": "Complete Console data/control ownership separation using the existing source review; 139 direct IDs remain overall.",
   "not_done": "139 direct dependencies remain; Console product acquisition/release cannot be moved inward or hidden behind callbacks.",
-  "updated_by": "T483 S14 P98"
+  "updated_by": "T483 S14 P99"
 }
