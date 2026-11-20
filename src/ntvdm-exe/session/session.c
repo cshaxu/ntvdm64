@@ -65,14 +65,6 @@ uint32_t session_machine_backend(const session *instance)
     return instance->machine_backend;
 }
 
-int session_register_teardown(session *instance, session_teardown_fn function,
-    void *context)
-{
-    if (!session_valid(instance) || instance->host_context.state != SESSION_STATE_ACTIVE)
-        return 0;
-    return compat_host_context_register(&instance->host_context, function, context);
-}
-
 int session_register_thread_hook(session *instance, session_thread_bind_fn bind,
     session_thread_unbind_fn unbind, void *context)
 {
@@ -139,12 +131,21 @@ static uint32_t session_dispose_reason(const session *instance)
     return SESSION_DISPOSE_REASON_NONE;
 }
 
-int session_dispose_with_reason(session *instance, uint32_t *reason_out)
+int session_dispose_with_reason(session *instance, uint32_t *reason_out,
+    void (*close_console)(session *))
 {
     uint32_t reason = session_dispose_reason(instance);
 
+    if (reason == SESSION_DISPOSE_REASON_NONE && instance->console_client && !close_console)
+        reason = SESSION_DISPOSE_REASON_INVALID;
     if (reason_out != NULL) *reason_out = reason;
     if (reason != SESSION_DISPOSE_REASON_NONE) return 0;
+    if (instance->console_client) {
+        /* Bootstrap opens the Console before the guest registers its resources.
+         * Keep it alive for their cleanup, then stop it before freeing text. */
+        compat_host_context_release_resources(&instance->host_context);
+        close_console(instance);
+    }
     compat_host_context_dispose(&instance->host_context);
     session_guest_memory_end(instance);
     memset(instance, 0, sizeof(*instance));
@@ -153,7 +154,7 @@ int session_dispose_with_reason(session *instance, uint32_t *reason_out)
 
 int session_dispose(session *instance)
 {
-    return session_dispose_with_reason(instance, NULL);
+    return session_dispose_with_reason(instance, NULL, NULL);
 }
 
 static volatile long *session_binding_owner_counter(session *instance,

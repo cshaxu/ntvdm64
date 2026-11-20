@@ -45,13 +45,19 @@ int compat_host_context_register(compat_host_context *context,
     return 1;
 }
 
-void compat_host_context_dispose(compat_host_context *context)
+void compat_host_context_release_resources(compat_host_context *context)
 {
     uint32_t index;
     for (index = context->cleanup_count; index != 0u; --index) {
         compat_host_cleanup cleanup = context->cleanups[index - 1u];
         cleanup.function(cleanup.context);
     }
+    context->cleanup_count = 0u;
+}
+
+void compat_host_context_dispose(compat_host_context *context)
+{
+    compat_host_context_release_resources(context);
     compat_host_text_clear(context);
     memset(context, 0, sizeof(*context));
 }

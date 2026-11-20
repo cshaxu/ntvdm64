@@ -9,7 +9,6 @@
 
 #define SESSION_MAGIC UINT32_C(0x53455353)
 #define SESSION_ABI_VERSION UINT32_C(13)
-#define SESSION_MAX_TEARDOWNS COMPAT_HOST_CLEANUP_LIMIT
 #define SESSION_MAX_THREAD_HOOKS 8u
 #define SESSION_PRESENTATION_PALETTE_ENTRIES 256u
 #define SESSION_FIRMWARE_ROOT_BYTES COMPAT_MVDM_SYSTEM_ROOT_BYTES
@@ -57,7 +56,6 @@ typedef struct session_binding_diagnostic {
     char original_worker_source[SESSION_WORKER_SOURCE_MAX];
 } session_binding_diagnostic;
 
-typedef compat_host_cleanup_fn session_teardown_fn;
 typedef int (*session_thread_bind_fn)(void *context);
 /* A failed unbind retains the thread/session binding for cleanup and retry.
  * Hooks must accept repeated unbind after their own successful retirement. */
@@ -102,8 +100,6 @@ int session_valid(const session *instance);
 int session_activate(session *instance);
 int session_select_machine_backend(session *instance, uint32_t backend);
 uint32_t session_machine_backend(const session *instance);
-int session_register_teardown(session *instance, session_teardown_fn function,
-    void *context);
 int session_register_thread_hook(session *instance, session_thread_bind_fn bind,
     session_thread_unbind_fn unbind, void *context);
 int session_unregister_thread_hook(session *instance, session_thread_bind_fn bind,
@@ -111,9 +107,10 @@ int session_unregister_thread_hook(session *instance, session_thread_bind_fn bin
 int session_request_cancellation(session *instance, uint32_t reason);
 void session_complete(session *instance, uint32_t completion_code);
 int session_dispose(session *instance);
-/* Same dispose operation with an optional fixed-width failure explanation.
- * `reason_out` is written before any teardown and is `NONE` on success. */
-int session_dispose_with_reason(session *instance, uint32_t *reason_out);
+/* The worker supplies its own Console close operation when a client is
+ * attached. It is used synchronously after registered compatibility cleanup. */
+int session_dispose_with_reason(session *instance, uint32_t *reason_out,
+    void (*close_console)(session *));
 int session_set_firmware_root(session *instance, const char *path);
 const char *session_firmware_root(const session *instance);
 /* Immutable MVDM system root selected by app for imported COMMAND, DOS and

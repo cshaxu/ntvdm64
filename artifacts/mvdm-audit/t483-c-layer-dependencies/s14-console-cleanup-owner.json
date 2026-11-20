@@ -1,0 +1,78 @@
+{
+  "packet": "M0 T483 S14 P102",
+  "baseline": "48263a77749a9ab9b2c6c098ee286d8c43554112",
+  "eliminated_B_ids": [
+    "B0030"
+  ],
+  "eliminated_C_ids": [],
+  "ownership": "B releases only registered compatibility resources. F owns Console transport teardown and invokes it in the existing session disposal sequence, after B resources and before B text release. Console startup failure still destroys the partial client locally.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "population": {
+    "excluded-diagnostic": 1,
+    "open": 61,
+    "eliminated": 507,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6
+  },
+  "B_known_outward": {
+    "D": 2,
+    "E": 0,
+    "F": 6
+  },
+  "final_product_symbols": {
+    "worker": {
+      "_compat_host_context_release_resources": "0001:0012cbc0       _compat_host_context_release_resources 0052dbc0 f   session:host_context.obj",
+      "_compat_host_context_dispose": "0001:0012cb00       _compat_host_context_dispose 0052db00 f   session:host_context.obj",
+      "_session_dispose_with_reason": "0001:0012b960       _session_dispose_with_reason 0052c960 f   session:session.obj",
+      "_ntvdm_console_client_end": "0001:00127870       _ntvdm_console_client_end  00528870 f   softpc-win32-bindings:console_client.obj"
+    },
+    "worker-reference-x86": {
+      "_compat_host_context_release_resources": "0001:0012cbc0       _compat_host_context_release_resources 0052dbc0 f   session:host_context.obj",
+      "_compat_host_context_dispose": "0001:0012cb00       _compat_host_context_dispose 0052db00 f   session:host_context.obj",
+      "_session_dispose_with_reason": "0001:0012b960       _session_dispose_with_reason 0052c960 f   session:session.obj",
+      "_ntvdm_console_client_end": "0001:00127870       _ntvdm_console_client_end  00528870 f   softpc-win32-bindings:console_client.obj"
+    }
+  },
+  "compiled_ownership": {
+    "objects": 4,
+    "counts": {
+      "TLS ABI absolute": 3,
+      "CRT": 15,
+      "not selected in final link": 6
+    },
+    "outward": []
+  },
+  "remaining_registrations": [
+    "src/compat/host_context.c:31:int compat_host_context_register(compat_host_context *context,",
+    "src/compat/include/host_context.h:56:int compat_host_context_register(compat_host_context *context,",
+    "src/compat/mvdm_command_guest_state.c:37:    if (!compat_host_context_register(owner, registration_teardown, registration)) {",
+    "src/compat/mvdm_command_native_child.c:93:    if (!compat_host_context_register(owner, state_teardown, state)) {",
+    "src/compat/mvdm_softpc_firmware.c:106:    if (!compat_host_context_register(owner, mvdm_softpc_profile_shadow_dispose,",
+    "src/compat/mvdm_softpc_wow_page_domain.c:622:    if (!compat_host_context_register(owner, page_domain_dispose, &domain)) goto fail;",
+    "src/compat/physical_mapping.c:105:    if (!compat_host_context_register(owner, release_owner, owner)) {",
+    "src/compat/physical_mapping.c:169:        !compat_host_context_register(owner, release_owner, owner)) {"
+  ],
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "115bc0cf-1fa4-4c0e-9cbe-f04039098eb9",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "status": "Cached full build, dual publication, session ordering and broken-pipe fixtures, real DOS/native/DOS same-console relaunch and final gates passed. Enclosing commit is the delivery receipt.",
+  "receipts_sha256": {
+    "build.exit": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "steps.txt": "dcf71d76596ab86fe08c4d270b552a454a8e3e936f45ddbafcf3d5418536c592",
+    "release-and-test.out": "4a0c18b42ab889e76ab31501223577b58f82dca0e691ebdaa69acbf786425c29",
+    "b-compiled-candidates.json": "fc7e067b6aa0c7d5b4e1bf2ac109af8bbd5c7d76ff014bd3cefafd682fee7f87",
+    "console-routing.txt.console.txt": "d8736979605d767333a465be1085e8090a493ecf6c466953505504643c1c1e0d",
+    "relaunch.txt": "a1efaaebe2604fb786dc4407b0ccf397831ad0ee164374da005e45668a6605ec"
+  },
+  "prior_command_stream_delivery": "s14-command-stream-owner.json"
+}

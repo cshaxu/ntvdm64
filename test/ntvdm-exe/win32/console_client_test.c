@@ -81,8 +81,6 @@ DWORD worker_base_request_exit(void)
     CHECK(SetEvent(fault_reported));
     return ERROR_SUCCESS; /* Acceptance deliberately withholds an exit order. */
 }
-static session_teardown_fn cleanup;
-static void *cleanup_context;
 static frontend_console frontend;
 static BOOL dos_active;
 static DWORD bind_error;
@@ -174,11 +172,6 @@ DWORD OpenNtBaseClientAcquireConsoleContext(HANDLE root_capability,HANDLE *capab
 session *__cdecl session_thread_current(void) { return bound; }
 compat_host_context *__cdecl compat_host_context_current(void)
 { return bound ? &bound->host_context : NULL; }
-int session_register_teardown(session *instance,session_teardown_fn function,void *context)
-{
-    CHECK(instance==&owner && !cleanup);
-    cleanup=function;cleanup_context=context;return 1;
-}
 DWORD OpenNtBaseClientWaitFrontend(HANDLE *pipe,HANDLE *process,DWORD *generation,HANDLE *ready)
 {
     if(readiness)CloseHandle(readiness);
@@ -430,6 +423,7 @@ int main(int argc,char **argv)
     if(variable_video)return variable_video_case();
     CHECK(!ntvdm_worker_lifecycle_begin(&owner,TRUE));
     CHECK(!ntvdm_worker_lifecycle_activate());
+    owner.host_context.state=SESSION_STATE_ACTIVE;
     CHECK(!ntvdm_console_client_begin(&owner));bound=&owner;
     {
         mvdm_mouse_bridge *mouse=mvdm_softpc_mouse_current();
@@ -1170,7 +1164,10 @@ disconnected:
     CHECK(fault_reports==1 && WaitForSingleObject(broker_shutdown,0)==WAIT_TIMEOUT);
     puts("PASS terminal I/O failure reports once; acceptance alone does not exit worker");
     ntvdm_worker_lifecycle_end();
-    cleanup(cleanup_context);bound=NULL;
+    ntvdm_console_client_end(&owner);
+    CHECK(!owner.console_client && !owner.host_context.console_endpoint &&
+        !owner.host_context.mouse);
+    bound=NULL;
     CHECK(!owner.console_client);
     CHECK(WaitForSingleObject(server_thread,5000)==WAIT_OBJECT_0);
     CloseHandle(server_thread);CloseHandle(stop);CloseHandle(video_wait);CloseHandle(local);CloseHandle(frontend.output);CloseHandle(frontend.input);

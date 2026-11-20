@@ -46,9 +46,8 @@ static void console_input_failed(void *context,DWORD error)
     (void)ntcon_worker_client_fail(&client->endpoint.channel,error);
     LeaveCriticalSection(&client->endpoint.lock);
 }
-static void console_client_end(void *context)
+static void console_client_destroy(console_client *client)
 {
-    console_client *client=context;
     client->owner->host_context.mouse=NULL;
     client->owner->host_context.console_endpoint=NULL;
     client->owner->console_client=NULL;
@@ -71,6 +70,11 @@ static void console_client_end(void *context)
     HeapFree(GetProcessHeap(),0,client);
 }
 
+void ntvdm_console_client_end(session *owner)
+{
+    if (owner && owner->console_client) console_client_destroy(owner->console_client);
+}
+
 static DWORD console_command_ready(void *context)
 {
     console_client *client=context;
@@ -81,7 +85,8 @@ DWORD ntvdm_console_client_begin(session *owner)
 {
     console_client *client;
     DWORD error;
-    if (!owner || owner->console_client) return ERROR_INVALID_STATE;
+    if (!owner || owner->console_client || owner->host_context.state != SESSION_STATE_ACTIVE)
+        return ERROR_INVALID_STATE;
     client=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*client));
     if (!client) return ERROR_NOT_ENOUGH_MEMORY;
     error=worker_base_io_open(&client->endpoint.channel.pipe,&client->endpoint.channel.peer,&client->ready,
@@ -91,37 +96,36 @@ DWORD ntvdm_console_client_begin(session *owner)
     InitializeCriticalSection(&client->endpoint.lock);
     InitializeCriticalSection(&client->endpoint.palette_lock);
     client->endpoint.graphics=ntvdm_console_graphics_create();
-    if (!client->endpoint.graphics) { error=GetLastError();console_client_end(client);return error; }
+    if (!client->endpoint.graphics) { error=GetLastError();console_client_destroy(client);return error; }
     error=OpenNtBaseClientWorkerFrontendCapability(&client->capability);
-    if (error) { console_client_end(client);return error; }
+    if (error) { console_client_destroy(client);return error; }
     /* The authenticated broker grants both transport and shell-out capability.
      * This worker does not resolve or retain a separate frontend relationship. */
     error=ntcon_worker_client_init(&client->endpoint.channel,client->endpoint.channel.pipe,
         client->endpoint.channel.peer,NULL,client->endpoint.channel.generation);
-    if(error){console_client_end(client);return error;}
+    if(error){console_client_destroy(client);return error;}
     error=ntvdm_worker_lifecycle_fault_event(&client->failure_event);
-    if(error){console_client_end(client);return error;}
+    if(error){console_client_destroy(client);return error;}
     client->endpoint.channel.failure_event=client->failure_event;
     client->stop=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->endpoint.input_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
     client->endpoint.output_identity=CreateEventW(NULL,TRUE,FALSE,NULL);
     if (!client->endpoint.channel.event || !client->stop ||
         !client->endpoint.input_identity || !client->endpoint.output_identity) {
-        error=GetLastError();console_client_end(client);return error;
+        error=GetLastError();console_client_destroy(client);return error;
     }
     error=worker_base_shutdown_event(&client->shutdown);
-    if(error){console_client_end(client);return error;}
+    if(error){console_client_destroy(client);return error;}
     client->endpoint.publisher=worker_base_publication_create(compat_console_send_video_copy,&client->endpoint,client->shutdown);
-    if(!client->endpoint.publisher){error=GetLastError();console_client_end(client);return error;}
+    if(!client->endpoint.publisher){error=GetLastError();console_client_destroy(client);return error;}
     error=ntvdm_console_graphics_attach_publisher(client->endpoint.graphics,client->endpoint.publisher);
-    if(error){console_client_end(client);return error;}
+    if(error){console_client_destroy(client);return error;}
     client->input_watch=worker_base_input_watch_create(NULL,NULL,NULL,client->stop,
         NULL,NULL,NULL,NULL,console_input_failed,client);
     client->mouse.input_ready=worker_base_input_watch_event(client->input_watch);
     error=client->input_watch ? console_activate(client,TRUE) : GetLastError();
-    if (!error && !session_register_teardown(owner,console_client_end,client))error=ERROR_NOT_ENOUGH_MEMORY;
     if (error) {
-        console_client_end(client);return error;
+        console_client_destroy(client);return error;
     }
     owner->host_context.mouse=&client->mouse;
     owner->host_context.console_endpoint=&client->endpoint;

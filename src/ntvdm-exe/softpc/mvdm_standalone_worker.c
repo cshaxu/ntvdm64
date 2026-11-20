@@ -128,7 +128,7 @@ static int mvdm_standalone_worker_cleanup(int result)
     }
     worker_base_disconnect();
     if (worker_session_initialized && !session_dispose_with_reason(&worker_session,
-            &dispose_reason)) result=ERROR_BUSY;
+            &dispose_reason, ntvdm_console_client_end)) result=ERROR_BUSY;
     if (worker_heap && !HeapDestroy(CsrPortHeap)) result=ERROR_BUSY;
     CsrPortHeap=NULL;
     worker_heap=FALSE;

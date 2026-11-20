@@ -55,6 +55,9 @@ int compat_host_context_bind(compat_host_context *context);
 int compat_host_context_unbind(compat_host_context *context);
 int compat_host_context_register(compat_host_context *context,
     compat_host_cleanup_fn function, void *argument);
+/* Release registered resources in reverse order before the owner closes its
+ * own facilities. The context and its text storage remain valid until dispose. */
+void compat_host_context_release_resources(compat_host_context *context);
 void compat_host_context_dispose(compat_host_context *context);
 
 int compat_host_text_acquire_writable(compat_host_context *instance,

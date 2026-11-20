@@ -378,7 +378,8 @@
       "target": "console_client_end",
       "layer": "F",
       "kind": "registered-cleanup-target",
-      "status": "outer-target-confirmed"
+      "status": "eliminated",
+      "migration_status": "P102 removes the outer teardown registration from the B context. The worker invokes Console teardown during F session disposal after registered B resources, before text storage release."
     },
     {
       "id": "B0031",
@@ -437,7 +438,7 @@
   ],
   "indirect_counts": {
     "B": 21,
-    "F": 7,
+    "F": 6,
     "D": 2
   },
   "counting": "Rows are service slots or unique registered target pairs, not C-origin ledger IDs. Do not add them to C open139 until overlap is reconciled. Generic caller-owned callbacks remain explicit in this census, not automatically judged equivalent to a hidden mandatory service dependency.",
@@ -488,5 +489,9 @@
   "p101_removed_slots": [
     "B0009"
   ],
-  "p101_evidence": "s14-command-stream-owner.json"
+  "p101_evidence": "s14-command-stream-owner.json",
+  "p102_removed_targets": [
+    "B0030"
+  ],
+  "p102_evidence": "s14-console-cleanup-owner.json"
 }

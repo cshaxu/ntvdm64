@@ -4,6 +4,7 @@
 
 static uint32_t teardown_order[2];
 static uint32_t teardown_count;
+static int console_closed_in_order;
 static session escape_owner;
 
 static DWORD WINAPI foreign_escape(void *context)
@@ -102,6 +103,14 @@ static int check_binding_rollback(void)
     return 0;
 }
 
+static void record_console_teardown(session *owner)
+{
+    console_closed_in_order = teardown_count == 2u &&
+        owner->host_context.cleanup_count == 0u &&
+        owner->host_context.presentation_text_storage != NULL;
+    owner->console_client = NULL;
+}
+
 static void record_teardown(void *context)
 {
     teardown_order[teardown_count++] = *(const uint32_t *)context;
@@ -164,21 +173,26 @@ int main(void)
     if (compat_host_text_snapshot(&first.host_context, text_copy,
             (uint32_t)sizeof(text_copy), NULL, NULL, NULL) != 0)
         return 9;
-    if (session_register_teardown(&first, record_teardown, (void *)&one) == 0 ||
-        session_register_teardown(&first, record_teardown, (void *)&two) == 0 ||
-        session_register_teardown(&first, record_teardown, (void *)&one) == 0 ||
+    if (compat_host_context_register(&first.host_context, record_teardown, (void *)&one) == 0 ||
+        compat_host_context_register(&first.host_context, record_teardown, (void *)&two) == 0 ||
+        compat_host_context_register(&first.host_context, record_teardown, (void *)&one) == 0 ||
         first.host_context.cleanup_count != 2u)
         return 3;
     session_complete(&second, 37u);
     if (second.host_context.state != SESSION_STATE_COMPLETED || second.completion_code != 37u ||
         session_request_cancellation(&second, SESSION_CANCELLATION_REQUESTED) != 0)
         return 4;
+    if (!compat_host_text_acquire_writable(&first.host_context, 1u, 1u, 2u, &text_writer))
+        return 6;
     if (session_request_cancellation(&first, SESSION_CANCELLATION_REQUESTED) == 0 ||
         first.host_context.state != SESSION_STATE_CANCELLED ||
         first.cancellation_reason != SESSION_CANCELLATION_REQUESTED ||
-        session_register_teardown(&first, record_teardown, (void *)&one) != 0)
+        compat_host_context_register(&first.host_context, record_teardown, (void *)&one) != 0)
         return 5;
-    if (session_dispose(&first) == 0 || session_valid(&first) ||
+    first.console_client = &first;
+    if (session_dispose(&first) || teardown_count != 0u ||
+        !session_dispose_with_reason(&first, NULL, record_console_teardown) ||
+        !console_closed_in_order || session_valid(&first) ||
         teardown_count != 2u || teardown_order[0] != 2u || teardown_order[1] != 1u ||
         session_dispose(&second) == 0)
         return 6;

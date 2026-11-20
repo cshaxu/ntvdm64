@@ -6,6 +6,7 @@
 #include "compat/include/console_graphics.h"
 #include "compat/include/console_services.h"
 DWORD ntvdm_console_client_begin(session *);
+void ntvdm_console_client_end(session *);
 /* 0 unrelated, 1 input, 2 output; local identities, never UI resources. */
 DWORD ntvdm_console_handle_kind(HANDLE);
 HANDLE WINAPI MvdmCreateFileA(LPCSTR,DWORD,DWORD,LPSECURITY_ATTRIBUTES,DWORD,DWORD,HANDLE);
