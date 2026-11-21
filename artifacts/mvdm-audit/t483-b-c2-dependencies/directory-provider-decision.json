@@ -1,6 +1,6 @@
 {
   "packet": "M0 T483 S19",
-  "status": "candidate compiled; owner mirror-increase decision pending; production unchanged",
+  "status": "implemented and verified in P21",
   "file": "src/compat/mvdm_command_guest_state.c",
   "provider": "src/mvdm-host/dos/dem/demgset.c::dem_command_directory_instance",
   "ownership": {
@@ -38,12 +38,8 @@
       "First candidate duplicated curdir.h already included by DEM dosdef.h; removed that redundant include.",
       "Second removal assumed CRLF; assertion prevented edit. Corrected to actual LF without production changes."
     ],
-    "not_done": [
-      "Final production compile/link",
-      "Runtime directory and COMMAND tests",
-      "Publication",
-      "Commit/push"
-    ]
+    "not_done": [],
+    "production": "See p21-delivery.json; final compile, publication and targeted tests passed."
   },
   "required_tests": [
     "Existing scalar-state fixture: live far pointer, session isolation, memory epoch end/restart, registration clear.",
@@ -60,5 +56,7 @@
     "conclusion": "Keep bounded capture and rollback in B; register existing synchronous C2 acquire/release providers. No mirror algorithm edit needed. Contract selection and implementation pending.",
     "lifetime": "Acquire/read-or-edit/release completes on capture thread before asynchronous child launch; commit only command CR-to-NUL; copied request owns no lease.",
     "tests": "Current command_capture covers 161 assertions and uses production composition with fixture memory providers; update binding assertions and retain failures and zero outstanding leases."
-  }
+  },
+  "owner_approval": "2026-11-21: standing approval for necessary non-#error mirror increments of one point and fewer than 100 lines. Approval is not implementation or delivery evidence.",
+  "delivery": "p21-delivery.json"
 }

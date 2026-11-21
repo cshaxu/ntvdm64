@@ -6,8 +6,21 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument("output")
 parser.add_argument("--core-only", action="store_true")
+parser.add_argument("--directory-owner", action="store_true")
 a = parser.parse_args()
 root = Path(__file__).resolve().parents[2]
+if a.directory_owner:
+    source = root / "src/mvdm-host/dos/dem/demgset.c"
+    raw = source.read_bytes()
+    text = raw.decode("latin1").replace("\r\n", "\n")
+    marker = "int dem_command_directory_instance("
+    assert text.count(marker) == 1, "Review changed directory owner boundary"
+    output = Path(a.output).resolve()
+    assert output.is_relative_to(root / "build")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(text[text.index(marker):], encoding="utf-8", newline="\n")
+    output.with_suffix(".sha256").write_text(hashlib.sha256(raw).hexdigest() + "\n")
+    raise SystemExit(0)
 source = root / "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c"
 raw = source.read_bytes()
 text = raw.decode("latin1").replace("\r\n", "\n")

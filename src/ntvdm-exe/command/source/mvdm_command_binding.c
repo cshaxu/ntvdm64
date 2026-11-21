@@ -4,6 +4,8 @@
 #include "compat/include/command_services.h"
 
 extern BOOL cmdXformEnvironment(char *, struct _STRING *);
+extern int dem_command_directory_instance(struct guest_memory_lease_context *,
+    uint32_t, uint16_t, uint16_t, uint32_t *, uint32_t *);
 
 BOOL ntvdm_command_initialize(void)
 {
@@ -19,7 +21,8 @@ BOOL ntvdm_command_initialize(void)
         mvdm_command_guest_state_clear_doswow,
         mvdm_command_guest_state_register_doswow,
         cmdXformEnvironment,
-        mvdm_guest_location_acquire_vm, mvdm_guest_location_release
+        mvdm_guest_location_acquire_vm, mvdm_guest_location_release,
+        dem_command_directory_instance
     };
     return compat_command_install(&services);
 }

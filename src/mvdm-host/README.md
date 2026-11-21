@@ -3523,3 +3523,10 @@ production callers use these operations; original message scratch and TD state
 remain at their owner. No new algorithm, resource map or queue. Owner approved
 +1 non-error point/+123 lines. Existing source, #error and #line are unchanged.
 See `artifacts/mvdm-audit/t483-b-c2-dependencies/message-lifetime-provider-review.json`.
+
+MVDM-HOST-DIV-904: `dos/dem/demgset.c` owns DOSWOWDATA/CDS directory
+projection through the existing checked CCPU copies. B retains registration,
+epoch/lock/lifecycle and zeroed failure outputs; F installs the C2 provider in
+its existing immutable COMMAND service table. No guest write or new state.
+Non-error increment+1 point/+22 lines is covered by owner standing approval
+for one new point and fewer than100 lines (2026-11-21).

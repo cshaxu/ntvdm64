@@ -27,6 +27,7 @@
 #include "demdasd.h"
 #include "compat/include/wow_registry.h"
 #include "compat/include/command_guest_directory.h"
+#include "compat/include/guest_memory_lease.h" /* DIVERGENCE(MVDM-HOST-DIV-904): DOS directory owner. */
 #line 28
 
 #define BOOTDRIVE_PATH "Software\\Microsoft\\Windows\\CurrentVersion\\Setup"
@@ -1023,4 +1024,25 @@ VOID demGetDPBList (VOID)
     // Return the new free space pointer
     //
     setBP(usDpbOffset);
+}
+
+int dem_command_directory_instance(guest_memory_lease_context *memory,
+    uint32_t epoch, uint16_t registered_segment, uint16_t offset,
+    uint32_t *linear_out, uint32_t *bytes_out)
+{
+    DOSWOWDATA doswow;
+    uint32_t far_value, segment, linear;
+    uint8_t check[sizeof(CDS)];
+    if (!ccpu_guest_memory_copy(memory, epoch,
+            ((uint32_t)registered_segment << 4) + offset,
+            (uint8_t *)&doswow, sizeof(doswow), 0)) return 0;
+    far_value = doswow.lpCDSBuffer;
+    segment = far_value >> 16;
+    if (!segment) segment = registered_segment;
+    linear = (segment << 4) + (far_value & 0xffffu);
+    if (!ccpu_guest_memory_copy(memory, epoch,
+            linear, check, sizeof(check), 0)) return 0;
+    *linear_out = linear;
+    *bytes_out = sizeof(CDS);
+    return 1;
 }

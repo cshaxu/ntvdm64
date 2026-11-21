@@ -1705,8 +1705,13 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/ntvdm_command_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_capture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/compat/guest_memory_lease.obj obj/compat/host_context.obj obj/tests/ntvdm_command_capture.obj obj/compat/mvdm_vm_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/compat/guest_location.obj obj/compat/mvdm_vm_text.obj obj/compat/console_video_buffer.obj')
-    $graph.Add('build obj/tests/ntvdm_command_directory.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/basesrv/t394_s4_command_scalar_state_fixture.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $directoryOwner = Join-Path $build 'command-directory-owner.inc'
+    $directoryExtractor = Join-Path $root 'tools/build/extract-guest-memory-fixture.py'
+    $graph.Add('rule extract_directory_owner')
+    $graph.Add('  command = python "' + $directoryExtractor.Replace('\','/') + '" "' + $directoryOwner.Replace('\','/') + '" --directory-owner')
+    $graph.Add('build ' + (NinjaPath $directoryOwner) + ': extract_directory_owner ' + (NinjaPath (Join-Path $root 'src/mvdm-host/dos/dem/demgset.c')) + ' ' + (NinjaPath $directoryExtractor))
+    $graph.Add('build obj/tests/ntvdm_command_directory.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/basesrv/t394_s4_command_scalar_state_fixture.c')) + ' | ' + (NinjaPath $directoryOwner))
+    $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I "' + $build.Replace('\','/') + '"')
     $graph.Add('build ntvdm-command-directory-test.exe: broker_test_link obj/tests/ntvdm_command_directory.obj obj/adapter-basesrv/mvdm_command_guest_state.obj obj/compat/guest_location.obj session.lib')
     $graph.Add('build obj/tests/vdm_control.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/vdm_control_test.c')))
     $graph.Add('  cflags = ' + $baseFlags)

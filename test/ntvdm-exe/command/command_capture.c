@@ -96,6 +96,14 @@ BOOL cmdXformEnvironment(char *source, struct _STRING *output)
     return FALSE;
 }
 
+int dem_command_directory_instance(struct guest_memory_lease_context *memory,
+    uint32_t epoch, uint16_t segment, uint16_t offset, uint32_t *linear, uint32_t *bytes)
+{
+    (void)memory; (void)epoch; (void)segment; (void)offset; (void)linear; (void)bytes;
+    abort(); /* Capture never resolves the DOS-owned directory instance. */
+    return 0;
+}
+
 int main(void)
 {
     mvdm_command_capture_input input={0};
@@ -111,6 +119,7 @@ int main(void)
     CHECK(compat_command_current_services()->transform_environment == cmdXformEnvironment);
     CHECK(compat_command_current_services()->acquire_vm == mvdm_guest_location_acquire_vm);
     CHECK(compat_command_current_services()->release_location == mvdm_guest_location_release);
+    CHECK(compat_command_current_services()->directory_instance == dem_command_directory_instance);
     {
         compat_command_services incomplete = *compat_command_current_services();
         incomplete.acquire_vm = NULL;

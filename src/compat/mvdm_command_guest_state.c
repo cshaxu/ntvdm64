@@ -8,8 +8,7 @@
 
 #include "include/host_context.h"
 #include "include/guest_memory_lease.h"
-#include "mvdm-host/inc/doswow.h"
-#include "mvdm-host/inc/curdir.h"
+#include "include/command_services.h"
 
 typedef struct command_registration {
     SRWLOCK lock;
@@ -81,9 +80,7 @@ int mvdm_command_guest_state_directory_instance(uint32_t *linear_out,
     compat_host_context *owner = compat_host_context_current();
     command_registration *registration;
     mvdm_guest_location location;
-    DOSWOWDATA doswow;
-    uint32_t session_epoch, memory_epoch, far_value, segment, linear;
-    uint8_t check[sizeof(CDS)];
+    uint32_t session_epoch, memory_epoch;
     if (linear_out == NULL || bytes_out == NULL) return 0;
     *linear_out = *bytes_out = 0;
     if (owner == NULL || !compat_host_context_valid(owner) ||
@@ -98,17 +95,8 @@ int mvdm_command_guest_state_directory_instance(uint32_t *linear_out,
     memory_epoch = registration->doswow_memory_epoch;
     ReleaseSRWLockShared(&registration->lock);
     if (!location.valid || session_epoch != owner->epoch ||
-        memory_epoch != owner->guest_memory->epoch ||
-        !ccpu_guest_memory_copy(owner->guest_memory, memory_epoch,
-            ((uint32_t)location.segment << 4) + location.offset,
-            (uint8_t *)&doswow, sizeof(doswow), 0)) return 0;
-    far_value = doswow.lpCDSBuffer;
-    segment = far_value >> 16;
-    if (!segment) segment = location.segment; /* before DOS patches far segments */
-    linear = (segment << 4) + (far_value & 0xffffu);
-    if (!ccpu_guest_memory_copy(owner->guest_memory, memory_epoch,
-            linear, check, sizeof(check), 0)) return 0;
-    *linear_out = linear;
-    *bytes_out = sizeof(CDS);
-    return 1;
+        memory_epoch != owner->guest_memory->epoch) return 0;
+    return compat_command_current_services()->directory_instance(
+        owner->guest_memory, memory_epoch, location.segment, location.offset,
+        linear_out, bytes_out);
 }

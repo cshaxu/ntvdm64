@@ -16,6 +16,7 @@ enum {
  * session or guest mapping state. All signatures preserve
  * the existing COMMAND binding; strings remain borrowed until finish. */
 struct _STRING;
+struct guest_memory_lease_context;
 typedef struct compat_command_services {
     int (*capture_guest)(uint16_t, uint16_t, uint16_t, uint16_t, uint16_t, uint16_t);
     int (*capture_host_command)(const char *, uint16_t, uint16_t, uint16_t, uint16_t);
@@ -33,6 +34,9 @@ typedef struct compat_command_services {
     int (*acquire_vm)(const mvdm_guest_location *, uint32_t, uint32_t, uint32_t,
         mvdm_guest_location_lease *);
     int (*release_location)(mvdm_guest_location_lease *, int);
+    /* Original DOSWOWDATA/CDS projection; synchronous checked copy. */
+    int (*directory_instance)(struct guest_memory_lease_context *, uint32_t,
+        uint16_t, uint16_t, uint32_t *, uint32_t *);
 } compat_command_services;
 
 BOOL compat_command_install(const compat_command_services *services);

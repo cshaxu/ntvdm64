@@ -144,6 +144,14 @@ against their defect contract, not presented as performance optimizations.
 
 ## Original mirrors
 
+Owner standing approval (2026-11-21) permits a necessary mirror adaptation
+whose non-`#error` diff increment is exactly one point and fewer than 100 lines,
+without another per-item approval. Measure against the current approved
+baseline, record necessity and actual point/line changes, and preserve original
+conditional and diagnostic structure. This does not permit unsupported behavior
+changes or waive verification and delivery. Larger increments still require
+approval; do not split one logical change to evade the threshold.
+
 ### Mirror difference register migration
 
 The owner directs a single successor mirror-difference register to replace

@@ -1,0 +1,70 @@
+{
+  "packet": "M0 T483 S19 P21",
+  "baseline": "201e08eee",
+  "status": "verified delivery",
+  "id": "BC2F003",
+  "file": "src/compat/mvdm_command_guest_state.c",
+  "ownership": "B retains registration, session/memory epoch, lock and zeroed outputs. C2 owns DOSWOWDATA/CDS interpretation and the same two checked copies. F installs actual C2 address in existing immutable COMMAND table, with no forwarding body.",
+  "direct_relationships": {
+    "file_before": 1,
+    "file_after": 0,
+    "B_C2_unique": 213,
+    "B_C2_raw": 229,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 30,
+    "total": 38,
+    "remaining": 8
+  },
+  "compiled_headers": {
+    "B_C2": 60,
+    "B_C1": 611
+  },
+  "private_search_roots": {
+    "B_C2": 11,
+    "B_C1": 36
+  },
+  "mirror": {
+    "file": "src/mvdm-host/dos/dem/demgset.c",
+    "before": {
+      "points": 3,
+      "lines": 7
+    },
+    "after": {
+      "points": 4,
+      "lines": 29
+    },
+    "delta": {
+      "points": 1,
+      "lines": 22
+    },
+    "cumulative_S19": {
+      "points": 6,
+      "lines": 222
+    },
+    "approval": "Owner standing approval one non-error point and fewer than100 lines",
+    "error_line_proof": "Only include before existing #line28 and appended21lines. Original bodies and conditional structure unchanged; paired-exclusion parser zero issues. DIV904/R2727."
+  },
+  "package": "a01c44af-9518-4763-ba8f-0cbb0e5a4526",
+  "build": "Final cached full x86/x64/reference exit0; build-x86-r3 and build-x64-r3 under prior evidence root",
+  "publication": "Final11 images dual published;22 hashes verified after final rebuild",
+  "tests": [
+    "Exact production C2 directory function: valid current far pointer, two sessions, epoch end/restart, clear, null outputs, both copy failures, zero-segment fallback passed",
+    "166 independent COMMAND capture assertions passed",
+    "Final published package: real modern EDIT CtrlQ, CMD echo, DOS MEM and launcher return passed"
+  ],
+  "limitations": [
+    "Ordinary COMMAND runtime does not prove the enhanced-VM directory BOP was hit; directory semantics verified using actual extracted C2 body and existing address-space fixture",
+    "Original generated/assembly audit coverage gaps remain explicit; callbacks are allowed runtime relations, not claimed absent"
+  ],
+  "test_build": "Ninja generated include explicitly depends on demgset.c and extractor; source changes invalidate fixture. Existing extraction tool reused.",
+  "audit": "Final compiled/link-map census. B file has zero C2 calls or private headers. Raw VDMREDIR identity unchanged, previous map reused.",
+  "evidence_root": "build/t483-s19-directory-final",
+  "prior_evidence_root": "build/t483-s19-directory-delivery",
+  "failed_attempts": [
+    "Initial test runner used nonexistent worker/msvc-x86.cmd; corrected to existing wow32 compiler environment",
+    "First dependency-edit script used locale decoding for UTF8 generator and failed before modifying generator; corrected explicit UTF8, reran final builds and tests"
+  ]
+}

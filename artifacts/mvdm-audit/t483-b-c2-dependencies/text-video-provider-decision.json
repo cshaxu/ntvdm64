@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "file": "src/compat/mvdm_softpc_text_video.c",
-  "status": "candidate compiled; awaiting mirror increase approval; production unchanged",
+  "status": "owner approved; candidate compiled; production implementation pending",
   "current_direct_relationships": 10,
   "current_relocation_records": 11,
   "provider_owner": "C2 nt_graph.c owns screen state, video update, palette and copied VGA font/cursor snapshot",
@@ -27,5 +27,6 @@
     "limits": "No candidate link/runtime evidence, B wrapper and composition not implemented. Approval needed before production mirror change."
   },
   "evidence_root": "build/t483-s19-text-video-owner",
-  "followup": "After approval bind before both standalone and bounded entries, remove generated private video layout inputs from B, adapt existing state/producer fixtures, run full cached build, dual publication, targeted video/COMMAND tests, commit/push."
+  "followup": "After approval bind before both standalone and bounded entries, remove generated private video layout inputs from B, adapt existing state/producer fixtures, run full cached build, dual publication, targeted video/COMMAND tests, commit/push.",
+  "owner_approval": "2026-11-21: standing approval for necessary non-#error mirror increments of one point and fewer than 100 lines. Approval is not implementation or delivery evidence."
 }

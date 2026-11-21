@@ -2,19 +2,29 @@
 #include "compat/include/mvdm_command_guest_directory.h"
 
 #include <string.h>
+#include "compat/include/command_services.h"
+#include "mvdm-host/inc/doswow.h"
+#include "mvdm-host/inc/curdir.h"
+#include "command-directory-owner.inc"
+const compat_command_services *compat_command_current_services(void)
+{
+    static const compat_command_services services = { .directory_instance = dem_command_directory_instance };
+    return &services;
+}
 
 #include "ntvdm-exe/session/session.h"
 
 typedef struct fixture_memory {
     uint8_t bytes[0x1000];
 } fixture_memory;
+static uint32_t fail_address = 0xffffffffu;
 
 static int read_memory(void *context, uint32_t address, uint8_t *bytes,
     uint32_t byte_count)
 {
     fixture_memory *memory = (fixture_memory *)context;
 
-    if (memory == NULL || bytes == NULL || address > sizeof(memory->bytes) ||
+    if (address == fail_address || memory == NULL || bytes == NULL || address > sizeof(memory->bytes) ||
         byte_count > sizeof(memory->bytes) - address) return 0;
     memcpy(bytes, memory->bytes + address, byte_count);
     return 1;
@@ -57,6 +67,20 @@ int main(void)
 
     if (!mvdm_command_guest_state_directory_instance(&directory, &directory_bytes) ||
         directory != 0x400u || directory_bytes != 71u) return 9;
+    if (mvdm_command_guest_state_directory_instance(NULL, &directory_bytes) ||
+        mvdm_command_guest_state_directory_instance(&directory, NULL)) return 12;
+    fail_address = 0x300u;
+    directory = directory_bytes = 99;
+    if (mvdm_command_guest_state_directory_instance(&directory, &directory_bytes) ||
+        directory || directory_bytes) return 13;
+    fail_address = 0x400u;
+    if (mvdm_command_guest_state_directory_instance(&directory, &directory_bytes) ||
+        directory || directory_bytes) return 14;
+    fail_address = 0xffffffffu;
+    if (!mvdm_command_guest_state_register_doswow(0x10u, 0x200u) ||
+        !mvdm_command_guest_state_directory_instance(&directory, &directory_bytes) ||
+        directory != 0x500u || directory_bytes != 71u) return 15;
+    if (!mvdm_command_guest_state_register_doswow(0u, 0x300u)) return 16;
     /* DOS may patch the segment later; resolve the live far pointer. */
     first_memory.bytes[0x308u] = 0x20;
     first_memory.bytes[0x309u] = 0x03;

@@ -23,7 +23,7 @@ S18-S20 execution. S18 verification is complete; S19 is the only active packet.
 | Non-goals | No fresh mirror-hunk audit, addon work, original guest modification/rebuild, queued T admission or broad product redesign. |
 | Similar-Issue Sweep | Direct/transitive/forced headers, private search paths, linked and generated providers, dynamic binding and callback ownership; distinguish named-image dependencies. |
 | Reporting Requirements | Per-file findings and cumulative progress; A-F counts separately; non-error mirror point/line changes; no silent exceptions or unsupported zero claims. |
-| Stop Conditions | No artificial same-thread queue, duplicate state machine or blanket exception. Mirror increases below5 lines and at most2 points have standing approval; larger increases require approval. Preserve unrelated work. |
+| Stop Conditions | No artificial same-thread queue, duplicate state machine or blanket exception. Mirror increases below5 lines and at most2 points, or exactly1 new point and fewer than100 added diff lines, have standing approval; larger increases require approval. Preserve unrelated work. |
 | Exit Criteria | All B-to-C2 candidates have provider/lifetime dispositions; direct private implementation dependencies removed, typed callbacks verified, small-five delivered before S20 admission. |
 
 ## Current Technical Baseline
@@ -193,11 +193,8 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,29 resolved,9 remaining. P19 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
-preparation; P2 cleared COMMAND capture leases; P3 clears keyboard IRQ retirement,
-descriptor projection and effective-address consumers including their public header.
-Unique direct B-to-C2 relationships337->214; relocation records606->230.
-Compiled private C2 header rows144->62; private C2 search roots74->11.
+38 candidates,30 resolved,8 remaining. P21 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->213; relocation records606->229.
+Compiled private C2 header rows144->60; private C2 search roots74->11.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
 Owner-approved P1 mirror delta+2 points/+19 lines is registered as R2721/R2722;
@@ -210,12 +207,14 @@ record cached full builds, dual11 publication, targeted native/real-CPU/guest
 checks and actual provider/lifetime dispositions.
 [Directory candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/directory-provider-decision.json)
 (+1 point/+22 lines) and [vector candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/vector-provider-decision.json)
-(+1 point/+87 lines) compiled with product parameters and await owner approval.
-Neither is implemented or counted as a closed dependency.
+(+1 point/+87 lines) are approved under the owner standing threshold.
+Directory is verified in [P21](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p21-delivery.json):
+final cached full, dual11, directory/capture166 and real COMMAND return passed.
+Cumulative mirror increment+6points/+222lines; vector remains unimplemented.
 [Mouse owner candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/mouse-guest-provider-decision.json)
-compiled with product parameters; +1 point/+41 lines awaits approval and is not implemented.
+compiled with product parameters; +1 point/+41 lines is approved, not implemented.
 [Text-video candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/text-video-provider-decision.json)
-compiled; +1 point/+97 lines awaits approval. No production change.
+compiled; +1 point/+97 lines is approved. No production change.
 [WOW page-domain review](../../artifacts/mvdm-audit/t483-b-c2-dependencies/wow-page-domain-provider-review.json)
 identifies24 actual C2 providers; P9 implements their callbacks and preserves
 the existing reclamation failure-injection contract.
@@ -263,5 +262,5 @@ clears12 C2 relations. Existing bodies moved intact to C2; cached full, dual11,
 exact-body and real USER16 message/construction/COMMAND tests pass. Approved
 mirror delta+1 point/+123 lines; cumulative S19 +5 points/+200 lines.
 [P20 standard classes](../../artifacts/mvdm-audit/t483-b-c2-dependencies/standard-class-provider-decision.json)
-records a compiled +1point/+13line candidate; approval pending, no production
-change or closed relation. S19 active; S20 not admitted.
+records an approved compiled +1point/+13line candidate; no production change
+or closed relation. S19 active; S20 not admitted.

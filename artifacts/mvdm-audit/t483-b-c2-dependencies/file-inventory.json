@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P19 completes twenty-nine files; remaining9 include four pending mirror decisions",
+  "status": "P21 completes thirty files; eight remain; all five small mirror candidates owner approved",
   "files": [
     {
       "id": "BC2F001",
@@ -398,7 +398,7 @@
     {
       "id": "BC2F003",
       "file": "src/compat/mvdm_command_guest_state.c",
-      "status": "provider candidate compiled; mirror increase pending owner approval; not delivered",
+      "status": "completed in verified P21 delivery",
       "review": "directory-provider-decision.json",
       "evidence": [
         {
@@ -471,7 +471,8 @@
           "evidence": "mvdm-host/inc/curdir.h",
           "product": "ntvdm.exe"
         }
-      ]
+      ],
+      "delivery": "p21-delivery.json"
     },
     {
       "id": "BC2F004",
@@ -528,7 +529,7 @@
     {
       "id": "BC2F006",
       "file": "src/compat/mvdm_cvidc_vector_binding.c",
-      "status": "provider candidate compiled; mirror increase pending owner approval; not delivered",
+      "status": "owner-approved compiled candidate; production implementation pending",
       "review": "vector-provider-decision.json",
       "evidence": [
         {
@@ -3724,7 +3725,7 @@
     {
       "id": "BC2F013",
       "file": "src/compat/mvdm_softpc_mouse_guest.c",
-      "status": "C2 owner candidate compiled; mirror +1 point/+41 lines awaits approval",
+      "status": "owner-approved compiled candidate; production implementation pending",
       "review": "mouse-guest-provider-decision.json",
       "evidence": [
         {
@@ -4069,7 +4070,7 @@
     {
       "id": "BC2F015",
       "file": "src/compat/mvdm_softpc_text_video.c",
-      "status": "Candidate compiled; +1 point/+97 non-error mirror lines await approval; production unchanged",
+      "status": "owner-approved compiled candidate; production implementation pending",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8720,7 +8721,7 @@
     {
       "id": "BC2F034",
       "file": "src/compat/wow_standard_class_bindings.c",
-      "status": "ownership audit complete; exact product candidate compiles; +1 point/+13 lines approval pending; not delivered",
+      "status": "owner-approved compiled candidate; production implementation pending",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -9426,11 +9427,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 25,
-    "remaining": 13,
+    "completed": 30,
+    "remaining": 8,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 229,
+    "direct_C2_unique_after": 213,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 248
+    "direct_C2_records_after": 229
   }
 }

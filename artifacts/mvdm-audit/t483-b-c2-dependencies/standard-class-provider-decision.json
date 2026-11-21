@@ -2,7 +2,7 @@
   "packet": "M0 T483 S19 P20",
   "id": "BC2F034",
   "file": "src/compat/wow_standard_class_bindings.c",
-  "status": "source ownership audit complete; exact product candidate compiled; mirror approval pending; production unchanged",
+  "status": "owner approved; candidate compiled; production implementation pending",
   "direct_relationships": 2,
   "finding": "B duplicates private STDCLASS layout and reads/writes original C2 stdClasses, plus directly calls GetStdClassNumber. Original table is the sole name/order/atom/procedure authority; caller already holds USER class-domain lock.",
   "proposal": "B-owned immutable callbacks: existing original GetStdClassNumber supplied directly; two scalar owner projections for class name and cached atom. Keep GetClassInfoEx native checks in B. Request atom after successful native class query as before. Preserve RegisterWindowMessageA lazy cache, predefined atoms, original classifier order and public class prepare/rollback/cleanup order. Do not expose STDCLASS pointer or register another table.",
@@ -27,6 +27,7 @@
   },
   "alternatives": "Returning private table addresses or byte strides preserves forbidden layout coupling. Rebuilding names/atoms in B duplicates the original state. Original GetStdClassWndProc only returns procedure, not name/atom; classifier atom input may initialize multiple entries, so using it as an implicit getter changes side effects.",
   "verification": "Actual ninja obj/walias.obj compile command with only input/output replaced passed exit0. No product link, runtime or publication claim.",
-  "followup": "Approval required for +1 non-error point/+13 lines and owner-local projection insertion; then implement B binding, original provider composition, existing standard-class/page-domain and real guest lifecycle tests, small-five.",
-  "evidence_root": "build/t483-s19-standard-class-owner"
+  "followup": "Implement approved B binding and original provider composition; run existing standard-class/page-domain and real guest lifecycle tests, then complete small-five delivery.",
+  "evidence_root": "build/t483-s19-standard-class-owner",
+  "owner_approval": "2026-11-21: standing approval for necessary non-#error mirror increments of one point and fewer than 100 lines. Approval is not implementation or delivery evidence."
 }
