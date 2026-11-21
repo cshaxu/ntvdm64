@@ -1,78 +1,45 @@
 #include "non-mvdm/public/sdk/inc/nt.h"
 /* ADAPTER-WOW-079: original bodies retain all callback/thunk algorithms.
  * This file pairs only the existing native-stack execution boundaries. */
-#include "wow32_provider_private.h"
-/* Preserve the software-CPU profile formerly selected by WOW precomp.h. */
-#undef _X86_
-#include "mvdm-host/wow32/wow32.h"
 #include "wow_user_native_extension.h"
+#include "wow_native_extension_provider.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_user_native_call.h"
-#include "wow_callback_frame_lease.h"
 
-BOOL WINAPI wow_original_CallBack16(INT, PPARM16, VPPROC, PVPVOID);
-DWORD FASTCALL wow_original_WK32ICallProc32(PVDMFRAME);
-ULONG FASTCALL wow_original_WMM32CallProc32(PVDMFRAME);
-VOID WINAPI wow_original_WOWYield16(VOID);
-VOID WINAPI wow_original_WOWDirectedYield16(WORD);
-
-/* These exact original wow16cal entries invoke kernel memory/resource
- * services, not an application procedure. This admits no numeric range,
- * arbitrary public WOWCallback16, Hook, foreground-idle or WinExec during
- * teardown. The existing scope still requires resource_cleanup_live. */
-static BOOL kernel_resource_return(INT id)
+static const wow_native_extension_provider *provider;
+BOOL WINAPI wow_native_extension_bind(const wow_native_extension_provider *value)
 {
-    switch (id) {
-    case RET_LOCALALLOC: case RET_LOCALREALLOC: case RET_LOCALLOCK:
-    case RET_LOCALUNLOCK: case RET_LOCALSIZE: case RET_LOCALFREE:
-    case RET_GLOBALALLOCLOCK: case RET_GLOBALLOCK: case RET_GLOBALUNLOCK:
-    case RET_GLOBALUNLOCKFREE: case RET_FINDRESOURCE: case RET_LOADRESOURCE:
-    case RET_FREERESOURCE: case RET_LOCKRESOURCE: case RET_UNLOCKRESOURCE:
-    case RET_SIZEOFRESOURCE: case RET_LOCKSEGMENT: case RET_UNLOCKSEGMENT:
-    case RET_GETEXEPTR: case RET_GETEXPWINVER: case RET_GETMODULEFILENAME:
-    case RET_GETDOSPDB: case RET_GETDOSSFT: case RET_CHANGESELECTOR:
-    case RET_FORCESEGMENTFAULT: case RET_GETDIBSIZE: case RET_GETDIBFLAGS:
-    case RET_SETDIBSEL: case RET_FREEDIBSEL: case RET_SETCURSORICONFLAG:
-    case RET_WOWDDEFREEHANDLE:
-    /* wow16cal.asm delegates only to kernel directory/drive services;
-     * no application procedure or process launch is selected by these IDs. */
-    case RET_GETCURDIR: case RET_SETCURDIR:
-        return TRUE;
-    default:
-        return FALSE;
+    const wow_native_extension_provider *previous;
+    if (!value || !value->kernel_resource || !value->callback ||
+            !value->call_proc || !value->call_mm || !value->yield || !value->directed_yield) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,
+        (PVOID)value, NULL);
+    if (previous && previous != value) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
+static const wow_native_extension_provider *current_provider(void)
+{
+    if (!provider) RaiseFailFastException(NULL, NULL, 0);
+    return provider;
 }
 
-BOOL CallBack16(INT id, PPARM16 parameters, VPPROC procedure, PVPVOID output)
+BOOL WINAPI CallBack16(INT id, union _PARM16 *parameters, DWORD procedure, DWORD *output)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     wow_task_callback_scope scope;
     BOOL result;
     DWORD error;
-    PTD ptd;
-    VPVOID callerStack, callerCallbackStack;
-    DWORD callerInit;
-    wow_callback_control control = {0};
     BOOL cleanup = binding && binding->thread &&
         (binding->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP);
-    if (!(cleanup && kernel_resource_return(id) ?
+    if (!(cleanup && current_provider()->kernel_resource(id) ?
             wow_task_resource_cleanup_enter(&scope) : wow_task_callback_enter(&scope)))
         return FALSE;
     __try {
-        ptd = CURRENTPTD();
-        callerStack = ptd->vpStack;
-        callerCallbackStack = ptd->vpCBStack;
-        callerInit = ptd->dwFlags & TDF_INITCALLBACKSTACK;
-        wow_callback_control_capture(&control);
-        __try { result = wow_original_CallBack16(id, parameters, procedure, output); }
-        __finally {
-            if (AbnormalTermination() && wow_callback_control_restore(&control, callerStack)) {
-                ptd->vpStack = callerStack;
-                ptd->vpCBStack = callerCallbackStack;
-                if (!(ptd->dwFlags & TDF_IGNOREINPUT))
-                    ptd->dwFlags = (ptd->dwFlags & ~TDF_INITCALLBACKSTACK) | callerInit;
-            }
-        }
+        result = current_provider()->callback(id, parameters, procedure, output);
     }
     __finally {
         error = GetLastError();
@@ -101,10 +68,10 @@ type convention name declaration \
     } \
     return result; \
 }
-EXTENSION_CALL(DWORD, FASTCALL, WK32ICallProc32, (PVDMFRAME frame),
-    wow_original_WK32ICallProc32, (frame), 0)
-EXTENSION_CALL(ULONG, FASTCALL, WMM32CallProc32, (PVDMFRAME frame),
-    wow_original_WMM32CallProc32, (frame), 0)
+EXTENSION_CALL(DWORD, WINAPI, WK32ICallProc32, (struct _VDMFRAME *frame),
+    current_provider()->call_proc, (frame), 0)
+EXTENSION_CALL(ULONG, WINAPI, WMM32CallProc32, (struct _VDMFRAME *frame),
+    current_provider()->call_mm, (frame), 0)
 EXTENSION_CALL(HMODULE, WINAPI, wow_extension_load_library_a,
     (LPCSTR name, HANDLE file, DWORD flags), LoadLibraryExA, (name, file, flags), NULL)
 EXTENSION_CALL(BOOL, WINAPI, wow_extension_free_library, (HMODULE module),
@@ -118,7 +85,7 @@ VOID WINAPI WOWYield16(VOID)
     wow_task_callback_scope scope;
     DWORD error;
     if (!wow_task_callback_enter(&scope)) return;
-    __try { wow_original_WOWYield16(); }
+    __try { current_provider()->yield(); }
     __finally {
         error = GetLastError();
         (void)wow_task_callback_leave(&scope);
@@ -131,7 +98,7 @@ VOID WINAPI WOWDirectedYield16(WORD task)
     wow_task_callback_scope scope;
     DWORD error;
     if (!wow_task_callback_enter(&scope)) return;
-    __try { wow_original_WOWDirectedYield16(task); }
+    __try { current_provider()->directed_yield(task); }
     __finally {
         error = GetLastError();
         (void)wow_task_callback_leave(&scope);

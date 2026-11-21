@@ -704,3 +704,57 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #line 818
     return TRUE;
 }
+
+/* DIVERGENCE(MVDM-HOST-DIV-910): original callback identity and frame owner. */
+#include "wow_callback_frame_lease.h"
+/* These exact original wow16cal entries invoke kernel memory/resource
+ * services, not an application procedure. This admits no numeric range,
+ * arbitrary public WOWCallback16, Hook, foreground-idle or WinExec during
+ * teardown. The existing scope still requires resource_cleanup_live. */
+BOOL WINAPI wow_original_kernel_resource_return(INT id)
+{
+    switch (id) {
+    case RET_LOCALALLOC: case RET_LOCALREALLOC: case RET_LOCALLOCK:
+    case RET_LOCALUNLOCK: case RET_LOCALSIZE: case RET_LOCALFREE:
+    case RET_GLOBALALLOCLOCK: case RET_GLOBALLOCK: case RET_GLOBALUNLOCK:
+    case RET_GLOBALUNLOCKFREE: case RET_FINDRESOURCE: case RET_LOADRESOURCE:
+    case RET_FREERESOURCE: case RET_LOCKRESOURCE: case RET_UNLOCKRESOURCE:
+    case RET_SIZEOFRESOURCE: case RET_LOCKSEGMENT: case RET_UNLOCKSEGMENT:
+    case RET_GETEXEPTR: case RET_GETEXPWINVER: case RET_GETMODULEFILENAME:
+    case RET_GETDOSPDB: case RET_GETDOSSFT: case RET_CHANGESELECTOR:
+    case RET_FORCESEGMENTFAULT: case RET_GETDIBSIZE: case RET_GETDIBFLAGS:
+    case RET_SETDIBSEL: case RET_FREEDIBSEL: case RET_SETCURSORICONFLAG:
+    case RET_WOWDDEFREEHANDLE:
+    /* wow16cal.asm delegates only to kernel directory/drive services;
+     * no application procedure or process launch is selected by these IDs. */
+    case RET_GETCURDIR: case RET_SETCURDIR:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+BOOL WINAPI wow_original_callback_guarded(INT id, PPARM16 parameters,
+    VPPROC procedure, PVPVOID output)
+{
+    BOOL result;
+    PTD ptd;
+    VPVOID callerStack, callerCallbackStack;
+    DWORD callerInit;
+    wow_callback_control control = {0};
+    ptd = CURRENTPTD();
+    callerStack = ptd->vpStack;
+    callerCallbackStack = ptd->vpCBStack;
+    callerInit = ptd->dwFlags & TDF_INITCALLBACKSTACK;
+    wow_callback_control_capture(&control);
+    __try { result = wow_original_CallBack16(id, parameters, procedure, output); }
+    __finally {
+        if (AbnormalTermination() && wow_callback_control_restore(&control, callerStack)) {
+            ptd->vpStack = callerStack;
+            ptd->vpCBStack = callerCallbackStack;
+            if (!(ptd->dwFlags & TDF_IGNOREINPUT))
+                ptd->dwFlags = (ptd->dwFlags & ~TDF_INITCALLBACKSTACK) | callerInit;
+        }
+    }
+    return result;
+}

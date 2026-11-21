@@ -28,6 +28,7 @@ function Run-Owned($name,$exe,$line,$seconds){
 try{
  $inputs=@($PSCommandPath,"$provider/build.ninja","$repo/src/mvdm-host/wow32/wcall16.c",
   "$repo/src/compat/wow_user_native_extension.c","$repo/src/compat/include/wow_user_native_extension.h",
+  "$repo/src/compat/include/wow_native_extension_provider.h","$repo/test/mvdm-host/wow_native_extension_provider.h",
   "$repo/test/adapter-mvdm-host-out/wow/wow_native_extension_boundary_fixture.c",
   "$repo/test/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c",
   "$repo/test/adapter-mvdm-host-out/wow/wow_original_callback_frame_fixture.c",
@@ -36,6 +37,10 @@ try{
   "$repo/src/compat/include/wow_callback_frame_lease.h",
   "$repo/test/observation/verify-wow-original-callback-frame.ps1","$repo/src/mvdm-host/wow32/wmmedia.c")
  Get-FileHash $inputs|Export-Csv -NoTypeInformation "$root/source-sha256.csv"
+ $owner=Get-Content "$repo/src/mvdm-host/wow32/wcall16.c" -Raw
+ $ownerStart=$owner.IndexOf('/* DIVERGENCE(MVDM-HOST-DIV-910)')
+ if($ownerStart -lt 0){throw 'Missing original callback owner suffix'}
+ [IO.File]::WriteAllText("$root/native-extension-owner.inc",$owner.Substring($ownerStart))
  $cases=if($Phase -eq 'all'){@('extension','mm-body','rejection')}elseif($Phase -eq 'original-frame'){@()}else{@($Phase)}
  foreach($case in $cases){
   $sources=if($case -ne 'rejection'){@('src/compat/wow_user_native_extension.c','test/adapter-mvdm-host-out/wow/wow_native_extension_boundary_fixture.c')}else{@('src/mvdm-host/wow32/wcall16.c','test/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c')}
@@ -44,7 +49,7 @@ try{
   foreach($source in $sources){
    $extra=if($case -eq 'rejection'){' /DCallBack16=wow_test_reject_callback'}elseif($case -eq 'mm-body' -and $source -like '*wmmedia.c'){' /DWMM32CallProc32=wow_original_WMM32CallProc32'}elseif($case -eq 'mm-body' -and $source -like '*fixture.c'){' /DWOW_EXTENSION_ORIGINAL_MM'}else{''}
    $object="$root/$case-$i.obj";$objects+=('"'+$object+'"')
-   $line='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe '+$flags+' '+$release+' /Gy'+$extra+' /Fo"'+$object+'" "'+$repo+'/'+$source+'""'
+   $line='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe '+$flags+' '+$release+' /Gy /I"'+$root+'"'+$extra+' /Fo"'+$object+'" "'+$repo+'/'+$source+'""'
    Run-Owned "$case-compile-$i" cmd.exe $line 120;$i++
   }
   $line='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /MACHINE:X86 /OPT:REF /out:"'+$root+'/'+$case+'.exe" '+($objects -join ' ')+' kernel32.lib user32.lib legacy_stdio_definitions.lib"'

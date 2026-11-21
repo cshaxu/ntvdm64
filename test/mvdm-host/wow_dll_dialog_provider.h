@@ -65,3 +65,19 @@ BOOL WINAPI wow_task_cleanup_bind(const wow_task_cleanup_provider *p)
 VOID WINAPI WowOriginalTimerFunc(UINT i, HWND w, UINT e, DWORD t)
 { (void)i; (void)w; (void)e; (void)t; }
 BOOL WINAPI wow_timer_bind(wow_timer_callback p) { return p == WowOriginalTimerFunc; }
+
+#include "../../src/compat/include/wow_native_extension_provider.h"
+BOOL WINAPI wow_original_kernel_resource_return(INT id) { (void)id; return FALSE; }
+BOOL WINAPI wow_original_callback_guarded(INT id, union _PARM16 *p, DWORD f, DWORD *o)
+{ (void)id; (void)p; (void)f; (void)o; return FALSE; }
+DWORD WINAPI wow_original_WK32ICallProc32(struct _VDMFRAME *f) { (void)f; return 0; }
+ULONG WINAPI wow_original_WMM32CallProc32(struct _VDMFRAME *f) { (void)f; return 0; }
+VOID WINAPI wow_original_WOWYield16(void) { }
+VOID WINAPI wow_original_WOWDirectedYield16(WORD task) { (void)task; }
+BOOL WINAPI wow_native_extension_bind(const wow_native_extension_provider *p)
+{
+    return p && p->kernel_resource == wow_original_kernel_resource_return &&
+        p->callback == wow_original_callback_guarded &&
+        p->call_proc == wow_original_WK32ICallProc32 && p->call_mm == wow_original_WMM32CallProc32 &&
+        p->yield == wow_original_WOWYield16 && p->directed_yield == wow_original_WOWDirectedYield16;
+}

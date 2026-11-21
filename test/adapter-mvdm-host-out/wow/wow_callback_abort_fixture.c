@@ -11,6 +11,7 @@
 
 #include "compat/include/wow_user_runtime.h"
 #include "wow_user_native_call.h"
+#include "../../mvdm-host/wow_native_extension_provider.h"
 
 /* The complete F translation unit also owns native extensions. They are
  * outside this frame/abort fixture; reaching one is a test failure. */
@@ -179,6 +180,9 @@ wrong:
 int __cdecl main(int argc,char **argv)
 {
     int result=0;unsigned i;
+#ifndef WOW_CALLBACK_REFERENCE_ONLY
+    if (!wow_native_extension_bind(&fixture_extension_provider)) return 20;
+#endif
     const char *cases[]={"first-init","first-reserved","prep-init","prep-reserved","return-init","return-reserved",
         "live-init","live-reserved","teardown","terminal","selector"};
     if(argc!=2 || !strcmp(argv[1],"--verify"))

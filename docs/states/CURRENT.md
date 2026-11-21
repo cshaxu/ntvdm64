@@ -193,8 +193,8 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,36 resolved,2 remaining. P27 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->8; relocation records606->8.
-Compiled private C2 header rows144->22; private C2 search roots74->0.
+38 candidates,37 resolved,1 remaining. P28 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->3; relocation records606->3.
+Compiled private C2 header rows144->12; private C2 search roots74->0.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
 Owner-approved P1 mirror delta+2 points/+19 lines is registered as R2721/R2722;
@@ -210,7 +210,7 @@ Directory is verified in [P21](../../artifacts/mvdm-audit/t483-b-c2-dependencies
 final cached full, dual11, directory/capture166 and real COMMAND return passed.
 Vector is delivered in [P22](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p22-delivery.json):
 183 C2 relations cleared; C-VID/CCPU209-slot and real COMMAND checks pass.
-Cumulative mirror increment+10points/+485lines.
+Cumulative mirror increment+11points/+539lines.
 [Mouse owner candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/mouse-guest-provider-decision.json)
 is delivered in [P23](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p23-delivery.json):
 5 C2 relations cleared; extracted-body/bridge15 and actual DOS mouse/COMMAND pass.
@@ -245,14 +245,9 @@ DIR28/29/33 delivered in P13/P15/P16; other remaining rows are not closed.
 records three C2 callbacks, original attach ordering, dialog tests and dual11 delivery.
 [P15 Hook delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p15-delivery.json)
 records six C2 callbacks, preserved context, loader/Win16 tests and dual11.
-[P16 OLE delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p16-delivery.json)
-removes one B wrapper, preserving direct original C1/C2 WOW API semantics.
-Real Win16 OLE49153/49154 and COMMAND return pass; dual11 published.
-Mirror delta0 points/0 lines.
-[P17 task queries](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p17-delivery.json)
-clear two C2 relations and both private TD-layout consumers. Cached full build,
-dual11, exact queries, loader, real separate/shared WOW lifecycle and COMMAND pass.
-Approved mirror delta+1 point/+25 lines; cumulative S19 +4 points/+77 lines.
+[P16 OLE](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p16-delivery.json)
+and [P17 task queries](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p17-delivery.json)
+record verified original API/query ownership, dual11 and real guest checks.
 [P19 message lifetime](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p19-delivery.json)
 clears12 C2 relations. Existing bodies moved intact to C2; cached full, dual11,
 exact-body and real USER16 message/construction/COMMAND tests pass. Approved
@@ -269,3 +264,7 @@ Win16 lifecycle/COMMAND pass. Mirror delta0points/+25lines.
 [P27 timer](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p27-delivery.json):
 1 C2 relation cleared; mirror delta0/0. Cached full, dual11, nested/exception
 timer and loader checks, real Win16 lifecycle/COMMAND pass.
+
+[P28 native extension](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p28-delivery.json):
+5 C2 relations cleared; mirror +1point/+54lines. Cached full, dual11, original
+frame/abort/MM/refusal/loader and real guest generic-thunk/yield/COMMAND pass.

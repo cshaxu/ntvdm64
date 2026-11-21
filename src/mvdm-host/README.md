@@ -3562,3 +3562,9 @@ and existing Winsock task cancellation formerly in B. Original free-task
 provider is supplied directly; B retains prepare-before-free. No extra state
 or queue. Non-error increment0points/+25lines; original prefix unchanged.
 See P26 delivery evidence.
+
+MVDM-HOST-DIV-910: `wow32/wcall16.c` owns existing resource-ID classification
+and abnormal callback TD/control restoration moved from B. Original callback,
+thunk and yield algorithms remain unchanged; B retains execution scopes.
+Standing-approved non-error increment+1point/+54lines; original prefix exact.
+See P28 delivery evidence.

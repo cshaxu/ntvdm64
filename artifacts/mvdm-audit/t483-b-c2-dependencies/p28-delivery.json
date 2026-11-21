@@ -1,0 +1,75 @@
+{
+  "packet": "M0 T483 S19 P28",
+  "baseline": "d7193876f",
+  "status": "verified delivery",
+  "id": "BC2F037",
+  "file": "src/compat/wow_user_native_extension.c",
+  "ownership": "B owns synchronous task/native-extension scopes. C2 retains original callback/thunk/yield algorithms and now owns existing resource-ID classification and abnormal-return TD/control restoration. F binds six immutable callbacks before original DLL attach. No new queue, state machine or guest change.",
+  "direct_relationships": {
+    "file_before": 5,
+    "file_after": 0,
+    "B_C2_unique": 3,
+    "B_C2_raw": 3,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 37,
+    "total": 38,
+    "remaining": 1
+  },
+  "compiled_headers": {
+    "B_C2": 12,
+    "B_C1": 591
+  },
+  "private_search_roots": {
+    "B_C2": 0,
+    "B_C1": 25
+  },
+  "mirror": {
+    "files": [
+      {
+        "path": "src/mvdm-host/wow32/wcall16.c",
+        "before": {
+          "points": 3,
+          "lines": 9
+        },
+        "after": {
+          "points": 4,
+          "lines": 63
+        }
+      }
+    ],
+    "delta": {
+      "points": 1,
+      "lines": 54
+    },
+    "cumulative_S19": {
+      "points": 11,
+      "lines": 539
+    },
+    "error_line_proof": "Prior file is a byte-exact prefix. Existing error/line structure unchanged; appended owner code does not change original diagnostic lines. Paired mirror parser reports zero issues."
+  },
+  "source_proof": {
+    "prior_prefix_byte_exact": true,
+    "prior_sha256": "7f944cf3cc2907f2e510fcfc571f00d7b209cc40d59ac8835fb117c80d1f0f0e",
+    "current_sha256": "b411261556f286311478472b3c4e02902978d9c4b57bdc0f750abab412d1f561",
+    "abi": "Selected original FASTCALL is empty under x86 /Gz; explicit WINAPI keeps stdcall pointer/return shape."
+  },
+  "package": "32962744-2c56-430d-b93f-2889ff0016ea",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hashes checked",
+  "tests": [
+    "Production B scopes plus actual moved C2 resource/guard body: extension, original MM body, refusal and original callback-frame/abort groups passed",
+    "Selected DLL bridge BOOLEAN and controlled OS loader passed",
+    "Real original generic thunk -> public WOWCallback16/Ex -> guest -> sibling send; yields, invalid arguments and normal retirement passed",
+    "Real USER16 two-task same-worker message and native peer tests passed",
+    "COMMAND modern EDIT/CMD/MEM and launcher return passed"
+  ],
+  "limitations": [
+    "Controlled boundary fixtures supplement real guest acceptance; no new full Win3.1/Win95 matrix claimed",
+    "Remaining DIR038 and B-to-C1 obligations not closed; registered callbacks are retained runtime relationships"
+  ],
+  "failed_attempts": [],
+  "evidence_root": "build/t483-s19-native-extension-delivery"
+}

@@ -14,7 +14,7 @@ $flags=[regex]::Match($graph,'(?m)^cflags = (.*)\r?$').Groups[1].Value.Trim()
 $release=[regex]::Match($graph,'(?m)^release_cflags = (.*)\r?$').Groups[1].Value.Trim()
 # Exercise the real F wrapper and C frame body together. The immutable old
 # counterexample remains a direct original-body test.
-if($ReferenceRevision){$flags += ' /DCallBack16=wow_original_CallBack16'}
+if($ReferenceRevision){$flags += ' /DCallBack16=wow_original_CallBack16 /DWOW_CALLBACK_REFERENCE_ONLY'}
 if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/MT') -or !$release){throw 'Require selected CCPU40 provider graph'}
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds,[int]$expected=0){

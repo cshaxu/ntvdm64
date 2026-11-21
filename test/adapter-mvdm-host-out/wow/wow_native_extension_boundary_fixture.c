@@ -133,6 +133,8 @@ static DWORD WINAPI native_mm_target(DWORD first, DWORD second, DWORD third,
 }
 #endif
 
+#include "native-extension-owner.inc"
+#include "../../mvdm-host/wow_native_extension_provider.h"
 int __cdecl main(void)
 {
     PARM16 parameters;
@@ -165,6 +167,9 @@ int __cdecl main(void)
     mm->fSetCurrentDirectory=1;mm->lpProcAddress=(DWORD)(ULONG_PTR)native_mm_target;
     mm->p1=5;mm->p2=4;mm->p3=3;mm->p4=2;mm->p5=1;
 #endif
+    CHECK(!wow_native_extension_bind(NULL));
+    CHECK(wow_native_extension_bind(&fixture_extension_provider));
+    CHECK(wow_native_extension_bind(&fixture_extension_provider));
     binding.thread = &thread;thread.ptdb = &task;
     expected_frame = frame;expected_parameters = &parameters;
     expected_procedure = (VPPROC)0x12370020;expected_output = &output;
