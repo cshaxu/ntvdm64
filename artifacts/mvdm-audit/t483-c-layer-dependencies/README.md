@@ -569,3 +569,11 @@ completes responsibility classification:59/59 headers. All three generated
 headers are C private CPU/SAS ABI, not independent B resources. Exact original
 carrier proposals have raw comparison evidence; no migration is approved or
 implemented, and all416 direct IDs remain open.
+
+## P146 guest COMMAND preparation
+
+[Delivery evidence](s14-command-launch-preparation-owner.json) records the two B objects, their linked
+original environment and RTL providers, and all BOP 0xB1 operations.
+Preparing a request in B removes work from the F chain. C0621 remains open:
+operation 11 still needs F executor admission before returning its token.
+No direct edge closed. Non-error mirror delta: zero points, zero lines.

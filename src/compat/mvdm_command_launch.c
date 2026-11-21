@@ -1,8 +1,11 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
-#include "ntvdm-exe/command/include/command_launch.h"
-#include "ntvdm-exe/command/include/command_text.h"
-#include "compat/include/mvdm_command_native_child.h"
+#include "include/mvdm_command_text.h"
+#include "include/mvdm_command_launch.h"
+#include "include/mvdm_command_native_child.h"
+
 #include <string.h>
+
+/* OpenNT public/sdk/inc/ntrtl.h, native counted-string conversion ABI. */
+NTSTATUS NTAPI RtlOemStringToUnicodeString(PUNICODE_STRING, PCOEM_STRING, BOOLEAN);
 
 /* The selected original COMMAND environment algorithm. It builds a private,
  * sorted ANSI block and retains host COMSPEC rather than guest COMMAND.COM. */

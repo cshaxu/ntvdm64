@@ -1,6 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
-#include "ntvdm-exe/command/include/command_launch.h"
-#include "ntvdm-exe/command/include/command_text.h"
+#include "compat/include/mvdm_command_launch.h"
+#include "compat/include/mvdm_command_text.h"
 #include "compat/include/mvdm_command_native_child.h"
 #include <stdio.h>
 #include <stdlib.h>

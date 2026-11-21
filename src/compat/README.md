@@ -308,6 +308,11 @@ table installed before COMMAND execution. The source-shaped facades in
 selected call signatures. Compat owns capture and child-local stream staging.
 The NTVDM product provides the launch entry directly to COMMAND through
 `command_process_binding.h` and retains request and session lifetime.
+The VM COMMAND preparation copies an already captured request and its
+streams before the guest-thread scope ends. It uses the linked original
+COMMAND environment transform and original RTL status conversion. The
+worker executor owns admission and native launch. See the
+[S14 implementation receipt](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-command-launch-preparation-owner.json).
 The DOSWOW location registration uses the same table; its session allocation,
 locking, epochs and live CDS resolution remain in the product provider.
 

@@ -64,8 +64,9 @@ P141 [Console exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-con
 P142 [WOW exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-worker-exit-owner.json).
 P143 [DOS exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-dos-exit-owner.json).
 P144 [Console activation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-activation-owner.json).
-P145 [WOW registration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-registration-owner.json) .
-Delivered: B 0 known calls; C 2 calls, 1 slot, 1 header, 1 image.
+P145 [WOW registration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-registration-owner.json).
+P146 [COMMAND preparation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-command-launch-preparation-owner.json).
+B 0 outward calls; C 2 calls, 1 slot, 1 header, 1 image. C0621 stays open.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moved page-domain identity and cleanup to B and removed three F calls.
@@ -73,14 +74,8 @@ moved page-domain identity and cleanup to B and removed three F calls.
 covers overlapping menu104/window103 roots; preserve original
 metadata/commit ownership and capture/lookup failure ordering in the next cut.
 
-Earlier P72-P74 deliveries restored nine native USER query/property/region
-calls and moved independent dialog/failure implementations into B. Mirror
-changes were zero; the current direct ledger is182 eliminated/386 open.
-Their exact packages, source contracts and passed verification remain in
-[P72](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-query-owner.json),
-[P73](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-dialog-owner.json)
-and [P74](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-property-owner.json).
-S14 remains active; these deliveries do not close the coupled USER chain.
+P72-P74 native USER query, dialog and property receipts are indexed in the
+[dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
 
 P71 [native capture extraction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-capture-owner.json)
 moves9 functions/320 body lines from F to B as a114-root prerequisite.

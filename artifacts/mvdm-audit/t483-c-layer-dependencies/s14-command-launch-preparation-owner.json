@@ -1,0 +1,216 @@
+{
+  "packet": "M0 T483 S14 P146",
+  "parent": "4b9263e69605ea142a53daa788f242e6cd93f24d",
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 0,
+    "F": 1
+  },
+  "C_runtime_slots": {
+    "F": 1
+  },
+  "C_outward_headers": {
+    "F": 1
+  },
+  "C_named_image_imports": 1,
+  "eliminated_C": [],
+  "retained_C": {
+    "C0156": "D common OpenNtBaseClientCallServer, original BASE CSR translation and broker transport.",
+    "C0619": "F opennt_command_create_process_a, ordinary original COMMAND launch, distinct from saved-VM request preparation.",
+    "C0620": "F command_process_binding.h, paired with C0619.",
+    "C0621": "F BIOS slot 0xB1, detailed below.",
+    "C0134": "ntvdm.exe named PE import. Current imported implementations are B/C; image identity contract remains."
+  },
+  "mirror": {
+    "non_error_points_delta": 0,
+    "non_error_lines_delta": 0,
+    "tracked_mirror_and_original_guest_files_changed": []
+  },
+  "approved_B_to_C_link_scope": {
+    "cmdXformEnvironment": "Direct existing cdecl ABI. Only transformed text/environment from a bounded guest capture. The production cmdenv object retains host COMSPEC selection, drive pseudo-environment and the original RtlSetEnvironmentVariable sorting path.",
+    "RtlNtStatusToDosError": "Existing original RTL conversion used only to translate a failed native counted-string conversion. Keep the same provider; no C layout or header added."
+  },
+  "prepare": {
+    "ownership": "B owns the request allocation, copied strings, captured Console stream identities, duplicated handles and rollback. F owns the once-only start transition, frontend/execution capability binding, executor admission, native launch and broker lifecycle. The native launch remains on its existing execution thread.",
+    "body_comparison": "Preparation, destruction and conversion statements moved unchanged. The SDK-compatible include and OEM declaration keep the original production RTL binding.",
+    "object_external_symbols": {
+      "x86": {
+        "mvdm_command_launch": [
+          "_RtlNtStatusToDosError@4",
+          "_RtlFreeAnsiString@4",
+          "_RtlFreeUnicodeString@4",
+          "_RtlUnicodeStringToAnsiString@12",
+          "_ntvdm_command_launch_prepare",
+          "_RtlOemStringToUnicodeString@12",
+          "_cmdXformEnvironment",
+          "@__security_check_cookie@4",
+          "___security_cookie"
+        ],
+        "mvdm_command_launch_request": [
+          "__imp__CloseHandle@4",
+          "__imp__DuplicateHandle@28",
+          "__imp__GetLastError@0",
+          "__imp__HeapAlloc@12",
+          "__imp__HeapFree@12",
+          "__imp__GetProcessHeap@0",
+          "__imp__GetCurrentProcess@0",
+          "_ntvdm_console_handle_kind",
+          "_memcpy"
+        ]
+      },
+      "x64-ref": {
+        "mvdm_command_launch": [
+          "_RtlNtStatusToDosError@4",
+          "_RtlFreeAnsiString@4",
+          "_RtlFreeUnicodeString@4",
+          "_RtlUnicodeStringToAnsiString@12",
+          "_ntvdm_command_launch_prepare",
+          "_RtlOemStringToUnicodeString@12",
+          "_cmdXformEnvironment",
+          "@__security_check_cookie@4",
+          "___security_cookie"
+        ],
+        "mvdm_command_launch_request": [
+          "__imp__CloseHandle@4",
+          "__imp__DuplicateHandle@28",
+          "__imp__GetLastError@0",
+          "__imp__HeapAlloc@12",
+          "__imp__HeapFree@12",
+          "__imp__GetProcessHeap@0",
+          "__imp__GetCurrentProcess@0",
+          "_ntvdm_console_handle_kind",
+          "_memcpy"
+        ]
+      }
+    },
+    "actual_repo_headers": {
+      "x86": {
+        "mvdm_command_launch": [
+          "compat/include/command_services.h",
+          "compat/include/mvdm_command_launch.h",
+          "compat/include/mvdm_command_native_child.h",
+          "compat/include/mvdm_command_text.h"
+        ],
+        "mvdm_command_launch_request": [
+          "compat/include/command_services.h",
+          "compat/include/console_services.h",
+          "compat/include/mvdm_command_launch.h",
+          "compat/include/mvdm_command_launch_request.h",
+          "compat/include/mvdm_command_native_child.h"
+        ]
+      },
+      "x64-ref": {
+        "mvdm_command_launch": [
+          "compat/include/command_services.h",
+          "compat/include/mvdm_command_launch.h",
+          "compat/include/mvdm_command_native_child.h",
+          "compat/include/mvdm_command_text.h"
+        ],
+        "mvdm_command_launch_request": [
+          "compat/include/command_services.h",
+          "compat/include/console_services.h",
+          "compat/include/mvdm_command_launch.h",
+          "compat/include/mvdm_command_launch_request.h",
+          "compat/include/mvdm_command_native_child.h"
+        ]
+      }
+    },
+    "linked_owners": {
+      "x86": [
+        "0001:00156700       _cmdXformEnvironment       00557700 f   original-mvdm-command:cmdenv.obj",
+        "0001:0015f620       _RtlNtStatusToDosError@4   00560620 f   original-opennt-rtl-x86:error.obj",
+        "0001:0016de50       _mvdm_vm_executor_submit   0056ee50 f   softpc-bindings:mvdm_vm_executor.obj",
+        "0001:00171aa0       _mvdm_vm_command_admit     00572aa0 f   softpc-bindings:mvdm_vm_ingress.obj",
+        "0001:00175b80       _ntvdm_console_handle_kind 00576b80 f   softpc-win32-bindings:console_services.obj",
+        "0001:00178640       _ntvdm_command_launch_start 00579640 f   softpc-win32-bindings:command_process_compat.obj",
+        "0001:001892f0       _ntvdm_command_launch_destroy 0058a2f0 f   worker-command-bindings:mvdm_command_launch_request.obj",
+        "0001:00189370       _ntvdm_command_launch_prepare 0058a370 f   worker-command-bindings:mvdm_command_launch_request.obj",
+        "0001:00189970       _ntvdm_command_launch_prepare_guest 0058a970 f   worker-command-bindings:mvdm_command_launch.obj"
+      ],
+      "x64-ref": [
+        "0001:00156700       _cmdXformEnvironment       00557700 f   original-mvdm-command:cmdenv.obj",
+        "0001:0015f620       _RtlNtStatusToDosError@4   00560620 f   original-opennt-rtl-x86:error.obj",
+        "0001:0016de50       _mvdm_vm_executor_submit   0056ee50 f   softpc-bindings:mvdm_vm_executor.obj",
+        "0001:00171aa0       _mvdm_vm_command_admit     00572aa0 f   softpc-bindings:mvdm_vm_ingress.obj",
+        "0001:00175b80       _ntvdm_console_handle_kind 00576b80 f   softpc-win32-bindings:console_services.obj",
+        "0001:00178640       _ntvdm_command_launch_start 00579640 f   softpc-win32-bindings:command_process_compat.obj",
+        "0001:001892f0       _ntvdm_command_launch_destroy 0058a2f0 f   worker-command-bindings:mvdm_command_launch_request.obj",
+        "0001:00189370       _ntvdm_command_launch_prepare 0058a370 f   worker-command-bindings:mvdm_command_launch_request.obj",
+        "0001:00189970       _ntvdm_command_launch_prepare_guest 0058a970 f   worker-command-bindings:mvdm_command_launch.obj"
+      ]
+    },
+    "outer_callback_targets": []
+  },
+  "C0621": {
+    "status": "open",
+    "slot": "C c_main.c reads BIOS[0xB1]. F mvdm_vm_binding.c verifies the original slot, installs vm_device_bop, marshals CCPU registers and falls back to original virtual_device_trap for other signatures. F mvdm_vm_bridge.c handles the extension only in protected ring 0.",
+    "operations": {
+      "0-4": "B mvdm_vm_notification open/ready/post/snapshot/acknowledge. Original C ICA/VDD interrupt and EOI hooks.",
+      "5": "B command callback reset, notification close, continuation reset and wake reset; C ICA serialization.",
+      "6": "B mvdm_command_guest_state_directory_instance.",
+      "7": "B mvdm_vm_wake_register.",
+      "8": "B mvdm_vm_wake_retire and continuation retirement; C ICA serialization.",
+      "9-10": "B mvdm_vm_wake_publish and mvdm_vm_wake_take.",
+      "11": "F mvdm_vm_command_admit and mvdm_vm_command_service/snapshot bind guest capture and text, B prepares copied request, F mvdm_vm_executor_submit queues with B continuation state; EAX status and EBX:EDX low/high token returned from the current BOP.",
+      "12": "B mvdm_vm_continuation_consume.",
+      "13-14": "F mvdm_vm_application_bop, bounded guest buffer staging/return using B continuation data and C memory access.",
+      "15": "F mvdm_vm_ingress_register checks for the session executor; B installs callback under C ICA.",
+      "16-17": "F mvdm_vm_executor_key_bop and bios_key_bop validate and submit to the current executor job.",
+      "18": "F mvdm_vm_executor_return_key_bop decodes the guest descriptor, using B wake input and C BIOS key mapping and ICA.",
+      "19": "F mvdm_vm_executor_mouse_bop resolves current executor/job and delivers mouse input."
+    },
+    "admission_contract": "No success is returned before TrySubmitThreadpoolCallback succeeds. Failure abandons/releases the continuation and destroys prepared request/text. Successful queueing publishes the token synchronously; actual child start/exit remains asynchronous. Preparation extraction alone does not close this slot."
+  },
+  "verification": {
+    "cached_products": [
+      "x86",
+      "x64",
+      "x86 reference"
+    ],
+    "cmake_target_results": [
+      "1/3 Test #42: mvdm-vm-notification .............   Passed    0.04 sec",
+      "2/3 Test #44: mvdm-vm-ingress ..................   Passed    0.02 sec",
+      "3/3 Test #46: mvdm-command-guest-launch ........   Passed    0.13 sec"
+    ],
+    "native_launch_assertions": 71,
+    "native_launch_checks": "Successful concurrent launches with distinct streams, owned environment/directory, pre-start and post-start errors and failure rollback.",
+    "win31": [
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested",
+      "Original Windows installation bytes verified unchanged",
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS production 54:0A with short-lived test COMSPEC in both DOS VMs; interactive input untested",
+      "Original Windows installation bytes verified unchanged"
+    ],
+    "win31_admission_evidence": "The existing 54:08/54:0A guest probes check the real operation 11 returned token and operation 12 matching completion/exit. ProductionNative checks two real requests per guest VM; ProductionComspecImage checks one real host COMSPEC request per VM.",
+    "compiler_boundary": [
+      "x86/worker: 98 A/B objects checked",
+      "x86/wow32: 89 A/B objects checked",
+      "x64/worker-reference-x86: 94 A/B objects checked",
+      "x64/frontend: 33 A/B objects checked",
+      "x64/service: 28 A/B objects checked",
+      "x64/launcher: 24 A/B objects checked",
+      "x64/monitor: 2 A/B objects checked",
+      "x64/worker: 33 A/B objects checked",
+      "x64/hook: 13 A/B objects checked"
+    ],
+    "limitations": "Win95 and Full were outside this targeted batch. The guest preparation fixture substitutes the environment transform for failure injection; production uses the mapped original cmdenv object. The release preserves guest drivers and original guest binaries."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "ed41a219-3164-49a3-a599-89d7b15a966b",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

@@ -1,4 +1,5 @@
 #include "mvdm_vm_ingress.h"
+#include "compat/include/mvdm_command_launch.h"
 #include "compat/include/mvdm_vm_notification.h"
 #include "mvdm_vm_command.h"
 #include "mvdm_vm_executor.h"
