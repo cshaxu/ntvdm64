@@ -18,6 +18,7 @@ void host_applClose(void)
 }
 int compat_host_escape_terminate_current(uint32_t code)
 {
+    if (!stop_calls) abort(); /* Original close must precede escape, even unbound. */
     stop_code = code;
     return 0;
 }
@@ -1223,6 +1224,11 @@ int main(void)
     producer_context producer = {0};
     HANDLE thread;
     DWORD thread_result;
+    CHECK(!mvdm_softpc_termination_bind(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
+    CHECK(mvdm_softpc_termination_bind(host_applClose));
+    CHECK(mvdm_softpc_termination_bind(host_applClose));
+    CHECK(!mvdm_softpc_termination_bind(virtual_device_trap) &&
+        GetLastError()==ERROR_ALREADY_INITIALIZED);
     InitializeCriticalSection(&ica);
     CHECK(!ntvdm_vm_services_initialize() && GetLastError() == ERROR_INVALID_STATE);
     BIOS[0xb1] = virtual_device_trap;

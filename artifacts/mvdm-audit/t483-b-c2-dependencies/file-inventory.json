@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P6 completes ten files; remaining28 include two pending mirror decisions",
+  "status": "P7 completes eleven files; remaining27 include three pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -3724,7 +3724,8 @@
     {
       "id": "BC2F013",
       "file": "src/compat/mvdm_softpc_mouse_guest.c",
-      "status": "not yet audited",
+      "status": "C2 owner candidate compiled; mirror +1 point/+41 lines awaits approval",
+      "review": "mouse-guest-provider-decision.json",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -4041,7 +4042,7 @@
     {
       "id": "BC2F014",
       "file": "src/compat/mvdm_softpc_termination.c",
-      "status": "not yet audited",
+      "status": "P7 verified: immutable B-owned close callback supplied by original C2 host_applClose; bound before standalone and bounded host entry; mirror delta zero",
       "evidence": [
         {
           "kind": "linked-relocations",

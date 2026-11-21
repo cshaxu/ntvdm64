@@ -47,6 +47,11 @@ class BoundaryTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     self.check_unit(source, "src/mvdm-host/softpc.new/base/ccpu386/c_main.h")
 
+    def test_termination_callback_has_no_C_exception(self):
+        self.check_unit("mvdm_softpc_termination.c", "src/compat/include/host_context.h")
+        with self.assertRaises(ValueError):
+            self.check_unit("mvdm_softpc_termination.c", "src/mvdm-host/softpc.new/host/inc/host_def.h")
+
     def test_printer_keeps_C1_but_rejects_C2(self):
         self.check_unit("mvdm_monitor_printer.c", "src/non-mvdm/public/internal/base/inc/vdm.h",
                         include="src/non-mvdm/public/internal/base/inc")

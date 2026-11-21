@@ -1,0 +1,66 @@
+{
+  "packet": "M0 T483 S19 P7",
+  "baseline": "564cde4f6",
+  "status": "verified P7 delivery",
+  "file": "src/compat/mvdm_softpc_termination.c",
+  "counts_B_C2": {
+    "linked-relocations": {
+      "records": 563,
+      "unique": 309
+    },
+    "compiled-headers": {
+      "records": 111
+    },
+    "search-paths": {
+      "records": 29
+    }
+  },
+  "counts_B_C1": {
+    "records": 70,
+    "unique": 58
+  },
+  "progress": {
+    "total": 38,
+    "completed": 11,
+    "remaining": 27
+  },
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "cumulative_mirror_delta": {
+    "non_error_points": 2,
+    "non_error_lines": 22
+  },
+  "providers": {
+    "close": "original C2 host_applClose",
+    "composition": "F binds the actual function address before standalone or bounded host entry",
+    "lifetime": "Immutable process-lifetime function address; same binding allowed, replacement rejected. Original host global lifecycle unchanged.",
+    "order": "Original close precedes existing host escape. No queue or second state machine."
+  },
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "notification_assertions": 3193,
+    "real_ccpu_halt_reset": 0,
+    "real_command_native_edit_return": 0,
+    "boundary_negative_controls": 8,
+    "final_gates": 0,
+    "published_image_hashes": 22
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "4aba096b-a1a2-41ea-a971-f94de8420b6c",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "attempts": [
+    "Initial native fixture build lacked the MSVC include environment; retry named a nonexistent wrapper. Both failed before tests. Corrected to existing VsDevCmd path; final fixture and runtime tests passed."
+  ],
+  "pending_candidates": "Directory, vector and mouse guest owner mirror increases remain unimplemented pending explicit approval.",
+  "evidence_root": "build\\t483-s19-termination"
+}

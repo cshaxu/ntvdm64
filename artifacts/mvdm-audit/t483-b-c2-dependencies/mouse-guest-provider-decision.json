@@ -1,0 +1,39 @@
+{
+  "packet": "M0 T483 S19",
+  "file": "src/compat/mvdm_softpc_mouse_guest.c",
+  "status": "pending owner approval; production unchanged",
+  "candidate_root": "build/t483-s19-mouse-guest-owner",
+  "proposal": "Move existing sample-application body to its actual C2 caller nt_mouse.c. Keep generic input unpacking, route query and pure numeric saturation in B. Return input errors to original nt_event.c for its existing DisplayErrorTerm policy.",
+  "why": "B currently depends on original anonymous cursor/vector layouts, VM-selected geometry and button state. A callback per field would duplicate the layout contract; moving the owner-specific body is smaller and preserves original algorithms.",
+  "mirror_delta": {
+    "non_error_points": 1,
+    "non_error_lines": 41,
+    "nt_mouse_before": {
+      "points": 6,
+      "lines": 16
+    },
+    "nt_mouse_after": {
+      "points": 7,
+      "lines": 56
+    },
+    "nt_event_before": {
+      "points": 37,
+      "lines": 113
+    },
+    "nt_event_after": {
+      "points": 37,
+      "lines": 114
+    }
+  },
+  "provider_relationships_removed": 5,
+  "source_validation": "C candidates compiled with actual product flags; residual B candidate compiled using only B headers. No implicit-function diagnostic. No product link/runtime performed.",
+  "line_contract": "Existing #error and #line directives retained; added declaration precedes original #line35 and body follows EOF. nt_event added error propagation precedes existing #line421.",
+  "lifetime": "Original CPU thread holds ICA lock across application; original selected mouse instance owns cursor. Producer submission and failure remain synchronous. No queue/state ownership change.",
+  "tests_required": [
+    "bridge reset/pressure",
+    "actual coordinate fixture against moved body",
+    "diagnostic coordinate observer binding update",
+    "real DOS count/move/retire and COMMAND return",
+    "cached full build, dual11 publication, boundary gates, commit/push"
+  ]
+}
