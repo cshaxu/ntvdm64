@@ -1,0 +1,89 @@
+{
+  "packet": "M0 T483 S20 P3",
+  "baseline": "1218ca10b",
+  "status": "verified delivery",
+  "id": "BC1F002",
+  "file": "src/compat/base_process.c",
+  "ownership": "B retains registry, TLS, lock/pin, sequence and duplicate-handle lifetime. C1 provides two immutable pure projections from list entry to original record and original record to borrowed field pointers. F binds the static provider once at registry initialization. No copied record, side map, queue or second state machine.",
+  "counts": {
+    "files_completed": 2,
+    "files_total": 94,
+    "remaining": 92,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70,
+    "B_C1_compiled_headers": 555,
+    "B_C1_search_roots": 20,
+    "B_C2_unique": 0,
+    "B_C2_raw": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "file_change": {
+    "direct_calls_before": 0,
+    "direct_calls_after": 0,
+    "compiled_headers_before": 9,
+    "compiled_headers_after": 0,
+    "search_roots_before": 1,
+    "search_roots_after": 0
+  },
+  "mirror": {
+    "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+    "before": {
+      "points": 11,
+      "lines": 49
+    },
+    "after": {
+      "points": 12,
+      "lines": 64
+    },
+    "delta": {
+      "points": 1,
+      "lines": 15
+    },
+    "cumulative_S20": {
+      "points": 0,
+      "lines": 79
+    },
+    "approval": "Standing one-point fewer-than100-line approval; R2737 retained for revisit.",
+    "error_line": "15 appended CRLF lines; preceding file byte-identical to baseline, existing #error/#line unchanged; paired exclusion parser zero issues."
+  },
+  "package": "b9ad623b-9a4d-49ef-aefe-84e3b42d68d8",
+  "build": "cached full x86/x64/reference passed",
+  "publication": "11 images in both assets/release and O:/winnt/system32;22 hashes verified",
+  "tests": [
+    "140 BASE dispatch assertions with actual extracted C1 owner bodies and mocked transport: eight operations, malformed lengths, disconnect priority, duplicate/transfer waits, invalid release rollback, original query suppression, no-memory delivery, activation failure and unbind",
+    "Real published-service RPC wait contracts: reply/connect/disconnect/loss/bootstrap passed",
+    "Actual Win16 generic thunk/callback/yield, USER16 messages and normal retirement passed",
+    "COMMAND modern EDIT/CMD/MEM and launcher return passed",
+    "Registry-only selection of existing original_server_lifecycle fixture: generation, duplicate, missing, pin/removal, concurrent removal, limited rights, real exited process, sequence exhaustion passed. Same assertions remain in full fixture; no registry test implementation."
+  ],
+  "limitations": [
+    "No full Win3.1/Win95 matrix claimed.",
+    "Legacy whole lifecycle fixture failed before registry tests at stale hard-coded232-byte wire expectation(line496); not a pass. Registry assertions factored unchanged into shared functions and selected by --registry-only. Production wire unaffected; actual package RPC5 and Win16/COMMAND tests passed.",
+    "Remaining92 files include header-only consumers; direct call count unchanged58."
+  ],
+  "evidence_root": "build/t483-s20-base-process",
+  "gate": "11 boundary regression controls, nine real product graphs, 22 published hashes, frontend ownership, governance/links and diff check passed (final exit0).",
+  "failed_attempts": [
+    {
+      "name": "lifecycle",
+      "cause": "Script preparation failed before launch because Python default encoding was cp1252; explicit UTF8 fixed."
+    },
+    {
+      "name": "lifecycle2",
+      "cause": "Old fixture defined UserNotifyProcessCreate already provided by original srvvdm; changed to extern."
+    },
+    {
+      "name": "lifecycle3",
+      "cause": "Legacy full fixture stale wire size assumption; retained failure and selected unchanged registry-specific assertions for this scoped delivery."
+    }
+  ],
+  "final_inputs": {
+    "src/compat/base_process.c": "cc4fd08fd815388292a088edbc3007878bfb00e6154c72e8b828fdeb106cc9ae",
+    "src/compat/include/base_process.h": "97b59b791c7cecae665ca39317b4f209c76b32fd6cfbf326fe33edeecc6f10c4",
+    "src/non-mvdm/base/win32/server/srvvdm.c": "8fed1da7452cee38dcf264de94915fc8817af4deb2e59d22a4ec3bcbb2f76634",
+    "src/ntsrv-exe/opennt/source/service_core.c": "8ae49e166b5cbc511d30e3702544c672b15bccac2c5385cfa4184ae7b9d7400a",
+    "test/broker/original_server_lifecycle.c": "7d2f6500ab86bfced447ffdb4715899ee365845bd7bf344574a8767341bb3c82",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "1d16fa057f8f22ea62ee5c36a6f82c44b5bd22750b52a8fc1c62c6fde8bcdf1c"
+  }
+}

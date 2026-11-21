@@ -162,8 +162,8 @@ function Add-Edge([string]$target) {
   foreach($option in [regex]::Matches($binding,'/(?:O[0-9dis]|Gy|we4013)(?=\s|$)')){$flags+=' '+$option.Value}
   if(!$library){
    foreach($include in [regex]::Matches($binding,$includePattern)){
-    # Registry still consumes the original declarations; dispatch is independent.
-    if($include.Value -in $referenceRoots -and $target -notin @('obj/opennt-base-bindings/registry.obj')){continue}
+    # B registry and dispatch no longer consume original private declarations.
+    if($include.Value -in $referenceRoots){continue}
     if($flags.Contains($include.Value)){continue}
     $flags+=' '+$include.Value.Replace((NP (Split-Path $reference -Parent)),(NP $build))
    }

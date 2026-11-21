@@ -4,6 +4,7 @@
 #include <base_capture.h>
 #include <base_config.h>
 #include "compat/include/base_process.h"
+extern const OPENNT_BASE_PROCESS_PROVIDER BaseProcessProvider;
 #include <base_server.h>
 #include <base_dispatch.h>
 #include "common/base_srv/base_startup.h"
@@ -163,7 +164,7 @@ extern LUID WowAuthId;
 BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);
 BOOL BaseCheckForVDM(HANDLE, LPDWORD);
 BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, PBASE_API_MSG, PULONG, DWORD, LPSTARTUPINFOW);
-PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
+extern PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate;
 
 /* Test dispatch only; original capture routines use a real private heap. */
 PVOID CsrPortHeap;
@@ -419,6 +420,134 @@ static DWORD WINAPI enqueue_after_wait(LPVOID unused)
 
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x); return 1; } } while(0)
 
+static int registry_setup(void)
+{
+    CHECK(OpenNtBaseInitializeProcessRegistry(&processRegistry,&BaseProcessProvider));
+    CHECK(OpenNtBaseBindProcessRegistry(&processRegistry)==NULL);
+    CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
+    CHECK(caller.SequenceNumber==1);
+    {
+        HANDLE retained=NULL;
+        CHECK(!OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),2,&retained));
+        CHECK(GetLastError()==ERROR_ACCESS_DENIED && retained==NULL);
+        CHECK(OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),1,&retained));
+        CHECK(GetProcessId(retained)==GetCurrentProcessId());
+        CHECK(processRegistry.Pins==0 && CloseHandle(retained));
+    }
+    {
+        CSR_PROCESS duplicate={0};
+        PCSR_PROCESS found=(PCSR_PROCESS)1;
+        CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&duplicate,GetCurrentProcess()));
+        CHECK(GetLastError()==ERROR_ALREADY_EXISTS);
+        CHECK(!OpenNtBaseDestroyProcessRegistry(&processRegistry));
+        CHECK(GetLastError()==ERROR_BUSY);
+        CHECK(CsrLockProcessByClientId(NULL,&found)<0 && found==NULL);
+        CHECK(CsrLockProcessByClientId((HANDLE)GetCurrentProcessId(),&found)==0 && found==&caller);
+        CHECK(!OpenNtBaseRemoveProcess(&processRegistry,&caller) && GetLastError()==ERROR_BUSY);
+        CHECK(CsrUnlockProcess(found)==0);
+    }
+    return 0;
+}
+
+static int registry_finish(void)
+{
+    CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
+    CHECK(!OpenNtBaseRemoveProcess(&processRegistry,&caller) && GetLastError()==ERROR_NOT_FOUND);
+    CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&caller,NULL));
+    CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
+    CHECK(caller.SequenceNumber==2);
+    {
+        HANDLE retained=NULL,stale=NULL;
+        CHECK(!OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),1,&stale));
+        CHECK(GetLastError()==ERROR_ACCESS_DENIED && stale==NULL);
+        CHECK(OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),2,&retained));
+        CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
+        CHECK(WaitForSingleObject(retained,0)==WAIT_TIMEOUT);
+        CHECK(!OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),2,&stale));
+        CHECK(GetLastError()==ERROR_NOT_FOUND && stale==NULL);
+        CHECK(CloseHandle(retained));
+        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
+    }
+    CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
+    {
+        HANDLE limited=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
+        HANDLE unexpected=NULL;
+        PCSR_PROCESS found=NULL;
+        CHECK(limited!=NULL);
+        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,limited));
+        CHECK(CloseHandle(limited));
+        CHECK(CsrLockProcessByClientId((HANDLE)GetCurrentProcessId(),&found)==0);
+        CHECK(GetProcessId(found->ProcessHandle)==GetCurrentProcessId());
+        CHECK(WaitForSingleObject(found->ProcessHandle,0)==WAIT_TIMEOUT);
+        CHECK(!DuplicateHandle(found->ProcessHandle,GetCurrentProcess(),GetCurrentProcess(),
+            &unexpected,0,FALSE,DUPLICATE_SAME_ACCESS));
+        CHECK(GetLastError()==ERROR_ACCESS_DENIED && unexpected==NULL);
+        CHECK(CsrUnlockProcess(found)==0);
+        CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
+    }
+    {
+        registry_remove_test test={0};
+        HANDLE remover;
+        PCSR_PROCESS pinned=NULL;
+        DWORD exitCode;
+        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
+        CHECK(CsrLockProcessByClientId((HANDLE)GetCurrentProcessId(),&pinned)==0);
+        test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
+        test.finished=CreateEventW(NULL,TRUE,FALSE,NULL);
+        CHECK(test.started && test.finished);
+        remover=CreateThread(NULL,0,remove_registered_peer,&test,0,NULL);
+        CHECK(remover!=NULL);
+        CHECK(WaitForSingleObject(test.started,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(test.finished,50)==WAIT_TIMEOUT);
+        CHECK(GetProcessId(pinned->ProcessHandle)==GetCurrentProcessId());
+        CHECK(CsrUnlockProcess(pinned)==0);
+        CHECK(WaitForSingleObject(test.finished,5000)==WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(remover,5000)==WAIT_OBJECT_0);
+        CHECK(GetExitCodeThread(remover,&exitCode) && exitCode==0);
+        CHECK(test.removed && caller.ProcessHandle==NULL);
+        CHECK(CloseHandle(remover) && CloseHandle(test.started) && CloseHandle(test.finished));
+        puts("PASS: concurrent removal waits for original service lookup unlock");
+    }
+    {
+        WCHAR image[MAX_PATH], command[MAX_PATH+32];
+        STARTUPINFOW startupInfo={sizeof(startupInfo)};
+        PROCESS_INFORMATION child={0};
+        CSR_PROCESS childRecord={0};
+        PCSR_PROCESS found=NULL;
+        DWORD size=GetModuleFileNameW(NULL,image,MAX_PATH), code;
+        CHECK(size>0 && size<MAX_PATH);
+        CHECK(_snwprintf(command,MAX_PATH+32,L"\"%ls\" --registry-child",image)>0);
+        CHECK(CreateProcessW(image,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
+            NULL,NULL,&startupInfo,&child));
+        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&childRecord,child.hProcess));
+        CHECK(ResumeThread(child.hThread)!=MAXULONG);
+        CHECK(CloseHandle(child.hThread));
+        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
+        CHECK(GetExitCodeProcess(child.hProcess,&code) && code==0);
+        {
+            HANDLE unexpected=NULL;
+            CHECK(OpenNtBaseDuplicateObject(GetCurrentProcess(),GetCurrentProcess(),child.hProcess,
+                &unexpected,0,0,DUPLICATE_SAME_ACCESS)==(NTSTATUS)0xc00000bbL);
+            CHECK(unexpected==NULL);
+        }
+        CHECK(CloseHandle(child.hProcess));
+        CHECK(CsrLockProcessByClientId((HANDLE)child.dwProcessId,&found)==0 && found==&childRecord);
+        CHECK(WaitForSingleObject(found->ProcessHandle,0)==WAIT_OBJECT_0);
+        CHECK(GetProcessId(found->ProcessHandle)==child.dwProcessId);
+        CHECK(CsrUnlockProcess(found)==0);
+        CHECK(OpenNtBaseRemoveProcess(&processRegistry,&childRecord));
+        CHECK(CsrLockProcessByClientId((HANDLE)child.dwProcessId,&found)<0 && found==NULL);
+        puts("PASS: real exited process remains referenced until explicit registered cleanup");
+    }
+    processRegistry.NextSequence=MAXULONG;
+    CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
+    CHECK(GetLastError()==ERROR_ARITHMETIC_OVERFLOW);
+    CHECK(OpenNtBaseBindProcessRegistry(NULL)==&processRegistry);
+    CHECK(OpenNtBaseDestroyProcessRegistry(&processRegistry));
+    puts("PASS: registered process ownership, duplicate/missing/pinned removal, empty teardown and sequence exhaustion");
+    return 0;
+}
+
 int main(int argc, char **argv)
 {
     BASE_API_MSG m;
@@ -433,6 +562,10 @@ int main(int argc, char **argv)
     HANDLE sender;
     DWORD senderExit;
     if (argc==2 && !strcmp(argv[1],"--registry-child")) return 0;
+    if (argc==2 && !strcmp(argv[1],"--registry-only")) {
+        CHECK(registry_setup()==0);
+        return registry_finish();
+    }
     BaseSrvHeap = GetProcessHeap();
     {
         BASE_API_MSG input={0},target={0},saved;
@@ -570,30 +703,7 @@ int main(int argc, char **argv)
     /* Local fixture Console association only. A stdout HANDLE is not the
      * authenticated cross-process Console ID required by product dispatch. */
     NtCurrentPeb()->ProcessParameters->ConsoleHandle = (HANDLE)1;
-    CHECK(OpenNtBaseInitializeProcessRegistry(&processRegistry));
-    CHECK(OpenNtBaseBindProcessRegistry(&processRegistry)==NULL);
-    CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
-    CHECK(caller.SequenceNumber==1);
-    {
-        HANDLE retained=NULL;
-        CHECK(!OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),2,&retained));
-        CHECK(GetLastError()==ERROR_ACCESS_DENIED && retained==NULL);
-        CHECK(OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),1,&retained));
-        CHECK(GetProcessId(retained)==GetCurrentProcessId());
-        CHECK(processRegistry.Pins==0 && CloseHandle(retained));
-    }
-    {
-        CSR_PROCESS duplicate={0};
-        PCSR_PROCESS found=(PCSR_PROCESS)1;
-        CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&duplicate,GetCurrentProcess()));
-        CHECK(GetLastError()==ERROR_ALREADY_EXISTS);
-        CHECK(!OpenNtBaseDestroyProcessRegistry(&processRegistry));
-        CHECK(GetLastError()==ERROR_BUSY);
-        CHECK(CsrLockProcessByClientId(NULL,&found)<0 && found==NULL);
-        CHECK(CsrLockProcessByClientId((HANDLE)GetCurrentProcessId(),&found)==0 && found==&caller);
-        CHECK(!OpenNtBaseRemoveProcess(&processRegistry,&caller) && GetLastError()==ERROR_BUSY);
-        CHECK(CsrUnlockProcess(found)==0);
-    }
+    CHECK(registry_setup()==0);
     {
         broker_vdm_receipts source={0};
         stream_target_test target={0};
@@ -1220,100 +1330,7 @@ int main(int argc, char **argv)
     CHECK(OpenNtBaseBindServerRequestThread(NULL)==&thread);
     CHECK(OpenNtBaseServerRequestThread()==NULL);
     puts("PASS: request-thread isolation, nested restoration and explicit unbind");
-    CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
-    CHECK(!OpenNtBaseRemoveProcess(&processRegistry,&caller) && GetLastError()==ERROR_NOT_FOUND);
-    CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&caller,NULL));
-    CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
-    CHECK(caller.SequenceNumber==2);
-    {
-        HANDLE retained=NULL,stale=NULL;
-        CHECK(!OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),1,&stale));
-        CHECK(GetLastError()==ERROR_ACCESS_DENIED && stale==NULL);
-        CHECK(OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),2,&retained));
-        CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
-        CHECK(WaitForSingleObject(retained,0)==WAIT_TIMEOUT);
-        CHECK(!OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),2,&stale));
-        CHECK(GetLastError()==ERROR_NOT_FOUND && stale==NULL);
-        CHECK(CloseHandle(retained));
-        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
-    }
-    CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
-    {
-        HANDLE limited=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
-        HANDLE unexpected=NULL;
-        PCSR_PROCESS found=NULL;
-        CHECK(limited!=NULL);
-        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,limited));
-        CHECK(CloseHandle(limited));
-        CHECK(CsrLockProcessByClientId((HANDLE)GetCurrentProcessId(),&found)==0);
-        CHECK(GetProcessId(found->ProcessHandle)==GetCurrentProcessId());
-        CHECK(WaitForSingleObject(found->ProcessHandle,0)==WAIT_TIMEOUT);
-        CHECK(!DuplicateHandle(found->ProcessHandle,GetCurrentProcess(),GetCurrentProcess(),
-            &unexpected,0,FALSE,DUPLICATE_SAME_ACCESS));
-        CHECK(GetLastError()==ERROR_ACCESS_DENIED && unexpected==NULL);
-        CHECK(CsrUnlockProcess(found)==0);
-        CHECK(OpenNtBaseRemoveProcess(&processRegistry,&caller));
-    }
-    {
-        registry_remove_test test={0};
-        HANDLE remover;
-        PCSR_PROCESS pinned=NULL;
-        DWORD exitCode;
-        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
-        CHECK(CsrLockProcessByClientId((HANDLE)GetCurrentProcessId(),&pinned)==0);
-        test.started=CreateEventW(NULL,TRUE,FALSE,NULL);
-        test.finished=CreateEventW(NULL,TRUE,FALSE,NULL);
-        CHECK(test.started && test.finished);
-        remover=CreateThread(NULL,0,remove_registered_peer,&test,0,NULL);
-        CHECK(remover!=NULL);
-        CHECK(WaitForSingleObject(test.started,5000)==WAIT_OBJECT_0);
-        CHECK(WaitForSingleObject(test.finished,50)==WAIT_TIMEOUT);
-        CHECK(GetProcessId(pinned->ProcessHandle)==GetCurrentProcessId());
-        CHECK(CsrUnlockProcess(pinned)==0);
-        CHECK(WaitForSingleObject(test.finished,5000)==WAIT_OBJECT_0);
-        CHECK(WaitForSingleObject(remover,5000)==WAIT_OBJECT_0);
-        CHECK(GetExitCodeThread(remover,&exitCode) && exitCode==0);
-        CHECK(test.removed && caller.ProcessHandle==NULL);
-        CHECK(CloseHandle(remover) && CloseHandle(test.started) && CloseHandle(test.finished));
-        puts("PASS: concurrent removal waits for original service lookup unlock");
-    }
-    {
-        WCHAR image[MAX_PATH], command[MAX_PATH+32];
-        STARTUPINFOW startupInfo={sizeof(startupInfo)};
-        PROCESS_INFORMATION child={0};
-        CSR_PROCESS childRecord={0};
-        PCSR_PROCESS found=NULL;
-        DWORD size=GetModuleFileNameW(NULL,image,MAX_PATH), code;
-        CHECK(size>0 && size<MAX_PATH);
-        CHECK(_snwprintf(command,MAX_PATH+32,L"\"%ls\" --registry-child",image)>0);
-        CHECK(CreateProcessW(image,command,NULL,NULL,FALSE,CREATE_SUSPENDED|CREATE_NO_WINDOW,
-            NULL,NULL,&startupInfo,&child));
-        CHECK(OpenNtBaseRegisterProcess(&processRegistry,&childRecord,child.hProcess));
-        CHECK(ResumeThread(child.hThread)!=MAXULONG);
-        CHECK(CloseHandle(child.hThread));
-        CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
-        CHECK(GetExitCodeProcess(child.hProcess,&code) && code==0);
-        {
-            HANDLE unexpected=NULL;
-            CHECK(OpenNtBaseDuplicateObject(GetCurrentProcess(),GetCurrentProcess(),child.hProcess,
-                &unexpected,0,0,DUPLICATE_SAME_ACCESS)==(NTSTATUS)0xc00000bbL);
-            CHECK(unexpected==NULL);
-        }
-        CHECK(CloseHandle(child.hProcess));
-        CHECK(CsrLockProcessByClientId((HANDLE)child.dwProcessId,&found)==0 && found==&childRecord);
-        CHECK(WaitForSingleObject(found->ProcessHandle,0)==WAIT_OBJECT_0);
-        CHECK(GetProcessId(found->ProcessHandle)==child.dwProcessId);
-        CHECK(CsrUnlockProcess(found)==0);
-        CHECK(OpenNtBaseRemoveProcess(&processRegistry,&childRecord));
-        CHECK(CsrLockProcessByClientId((HANDLE)child.dwProcessId,&found)<0 && found==NULL);
-        puts("PASS: real exited process remains referenced until explicit registered cleanup");
-    }
-    processRegistry.NextSequence=MAXULONG;
-    CHECK(!OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
-    CHECK(GetLastError()==ERROR_ARITHMETIC_OVERFLOW);
-    CHECK(OpenNtBaseBindProcessRegistry(NULL)==&processRegistry);
-    CHECK(OpenNtBaseDestroyProcessRegistry(&processRegistry));
-    puts("PASS: registered process ownership, duplicate/missing/pinned removal, empty teardown and sequence exhaustion");
+    CHECK(registry_finish()==0);
     CHECK(captures==0 && HeapDestroy(CsrPortHeap));
     puts("PASS: original first-VDM, record/command/directory capacity, dispatch/completion, parent/worker events, reentry, empty-WOW, cleanup");
     return 0;

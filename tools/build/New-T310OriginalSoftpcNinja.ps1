@@ -1455,7 +1455,7 @@ if ($Architecture -eq 'x86') {
             @('resource-scope', 'src/compat/base_resource_scope.c', $libraryFlags),
             @('streams', 'src/compat/base_stream.c', $libraryFlags),
             @('waits', 'src/compat/base_wait.c', $libraryFlags),
-            @('registry', 'src/compat/base_process.c', ($libraryFlags + ' /D_CSRSRV_ /I "' + (NinjaPath (Join-Path $root 'src/compat/include')) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc')) + '"')),
+            @('registry', 'src/compat/base_process.c', $libraryFlags),
             @('reservation', 'src/ntsrv-exe/opennt/source/base_reservation.c', $baseOwnerFlags),
             @('request', 'src/compat/base_request.c', $libraryFlags),
             @('config', 'src/compat/base_vdm_config.c', $libraryFlags),
@@ -1535,6 +1535,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $baseServiceTestFlags)
     $graph.Add('rule basesrv_service_test_link')
     $graph.Add('  command = link.exe /nologo /out:$out $in ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+    $graph.Add('build obj/tests/original_server_lifecycle.obj: cc ' + (NinjaPath (Join-Path $root 'test/broker/original_server_lifecycle.c')))
+    $graph.Add('  cflags = ' + $baseServiceTestFlags)
+    $graph.Add('build original-server-lifecycle-test.exe: basesrv_service_test_link obj/tests/original_server_lifecycle.obj obj/run16/support.obj opennt-base-server.lib opennt-base-client.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib')
     $graph.Add('build obj/tests/base_service_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-basesrv/base_service_fixture.c')))
     $graph.Add('  cflags = ' + $baseServiceTestFlags)
     $graph.Add('build basesrv-service-reservation-test.exe: basesrv_service_test_link ' + $baseServiceReservationTestObject + ' obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib')

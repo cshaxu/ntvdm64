@@ -3,6 +3,7 @@
  * lock; original task owners and direct frontend/backend I/O remain separate. */
 #include <service_internal.h>
 #include "lib-win32/handle/duplicate.h"
+extern const OPENNT_BASE_PROCESS_PROVIDER BaseProcessProvider;
 
 OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
 {
@@ -33,7 +34,7 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     service->management_epoch=((uint64_t)now.dwHighDateTime<<32)|now.dwLowDateTime;
     service->management_epoch^=(uint64_t)GetCurrentProcessId()<<17;
     if (!service->management_epoch) service->management_epoch=1;
-    if (!OpenNtBaseInitializeProcessRegistry(&service->registry)) {
+    if (!OpenNtBaseInitializeProcessRegistry(&service->registry,&BaseProcessProvider)) {
         CloseHandle(service->frontend_lifetime_changed);
         DeleteCriticalSection(&service->lock); HeapFree(GetProcessHeap(),0,service); return NULL;
     }

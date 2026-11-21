@@ -2,6 +2,7 @@
  * No service policy and no fixture implementation of registry operations. */
 #include "basesrv.h"
 #include "compat/include/base_process.h"
+extern const OPENNT_BASE_PROCESS_PROVIDER BaseProcessProvider;
 #include <base_dispatch.h>
 #include "common/base_srv/base_command.h"
 #include <string.h>
@@ -12,11 +13,11 @@ static OPENNT_BASE_PROCESS_REGISTRY state;
 static CSR_PROCESS peer;
 static BOOL registered;
 static CRITICAL_SECTION dispatchLock;
-PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate=NULL;
+extern PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate;
 
 DWORD test_registration_start(void)
 {
-    if (!OpenNtBaseInitializeProcessRegistry(&state)) return GetLastError();
+    if (!OpenNtBaseInitializeProcessRegistry(&state,&BaseProcessProvider)) return GetLastError();
     InitializeCriticalSection(&dispatchLock);
     BaseSrvVDMInit();
     return 0;

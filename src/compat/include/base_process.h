@@ -3,13 +3,24 @@
 #define OPENNT_BASE_PROCESS_H
 #include <windows.h>
 struct _CSR_PROCESS;
+/* Borrowed fields of the original record, only used under its registry lock. */
+typedef struct OPENNT_BASE_PROCESS_VIEW {
+    LIST_ENTRY *link;
+    HANDLE *pid, *handle;
+    ULONG *sequence;
+} OPENNT_BASE_PROCESS_VIEW;
+typedef struct OPENNT_BASE_PROCESS_PROVIDER {
+    struct _CSR_PROCESS *(*record)(LIST_ENTRY *);
+    void (*view)(struct _CSR_PROCESS *, OPENNT_BASE_PROCESS_VIEW *);
+} OPENNT_BASE_PROCESS_PROVIDER;
 typedef struct OPENNT_BASE_PROCESS_REGISTRY {
+    const OPENNT_BASE_PROCESS_PROVIDER *Provider;
     CRITICAL_SECTION Lock;
     LIST_ENTRY Processes;
     ULONG NextSequence;
     ULONG Pins;
 } OPENNT_BASE_PROCESS_REGISTRY;
-BOOL OpenNtBaseInitializeProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *);
+BOOL OpenNtBaseInitializeProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *, const OPENNT_BASE_PROCESS_PROVIDER *);
 BOOL OpenNtBaseDestroyProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *);
 OPENNT_BASE_PROCESS_REGISTRY *OpenNtBaseBindProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *);
 /* Trusted registration only; borrows record storage

@@ -49,6 +49,15 @@ class BoundaryTest(unittest.TestCase):
             self.check_unit("base_dispatch.c", "src/compat/include/base_transport.h",
                             include="src/non-mvdm/public/sdk/inc")
 
+    def test_base_process_has_no_original_layout_exception(self):
+        self.check_unit("base_process.c", "src/compat/include/base_process.h",
+                        include="src/compat/include")
+        with self.assertRaises(ValueError):
+            self.check_unit("base_process.c", "src/non-mvdm/public/internal/base/inc/ntcsrsrv.h")
+        with self.assertRaises(ValueError):
+            self.check_unit("base_process.c", "src/compat/include/base_process.h",
+                            include="src/non-mvdm/public/sdk/inc")
+
     def test_ordinary_B_cannot_read_C(self):
         with self.assertRaises(ValueError):
             self.check_unit("host_context.c", "src/mvdm-host/softpc.new/base/inc/xt.h")

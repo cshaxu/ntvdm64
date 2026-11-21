@@ -3,16 +3,18 @@
  * records. Full CSR root/reference/deletion machinery is not imported.
  * Authentication, task selection and worker role assignment are not here. */
 #include "compat/include/base_process.h"
-#include <nt.h>
-#include <ntlpcapi.h>
-#include <ntcsrsrv.h>
+
 static __declspec(thread) OPENNT_BASE_PROCESS_REGISTRY *registry;
 
-BOOL OpenNtBaseInitializeProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *state)
+BOOL OpenNtBaseInitializeProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *state,
+    const OPENNT_BASE_PROCESS_PROVIDER *provider)
 {
-    if (!state) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    if (!state || !provider || !provider->record || !provider->view) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
     if (!InitializeCriticalSectionEx(&state->Lock,0,0)) return FALSE;
-    InitializeListHead(&state->Processes);
+    state->Provider=provider;
+    state->Processes.Flink=state->Processes.Blink=&state->Processes;
     state->NextSequence=0;
     state->Pins=0;
     return TRUE;
@@ -25,12 +27,13 @@ OPENNT_BASE_PROCESS_REGISTRY *OpenNtBaseBindProcessRegistry(OPENNT_BASE_PROCESS_
     return previous;
 }
 
-BOOL OpenNtBaseRegisterProcess(OPENNT_BASE_PROCESS_REGISTRY *state, PCSR_PROCESS process, HANDLE handle)
+BOOL OpenNtBaseRegisterProcess(OPENNT_BASE_PROCESS_REGISTRY *state, struct _CSR_PROCESS * process, HANDLE handle)
 {
     HANDLE owned=NULL;
     DWORD pid;
     LIST_ENTRY *entry;
     BOOL result=FALSE;
+    OPENNT_BASE_PROCESS_VIEW view;
     if (!state || !process) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     if (!DuplicateHandle(GetCurrentProcess(),handle,GetCurrentProcess(),&owned,
         0,FALSE,DUPLICATE_SAME_ACCESS)) return FALSE;
@@ -40,16 +43,19 @@ BOOL OpenNtBaseRegisterProcess(OPENNT_BASE_PROCESS_REGISTRY *state, PCSR_PROCESS
     }
     EnterCriticalSection(&state->Lock);
     for (entry=state->Processes.Flink;entry!=&state->Processes;entry=entry->Flink) {
-        PCSR_PROCESS current=CONTAINING_RECORD(entry,CSR_PROCESS,ListLink);
-        if (current==process || current->ClientId.UniqueProcess==(HANDLE)(ULONG_PTR)pid) {
+        struct _CSR_PROCESS *current=state->Provider->record(entry);
+        state->Provider->view(current,&view);
+        if (current==process || *view.pid==(HANDLE)(ULONG_PTR)pid) {
             SetLastError(ERROR_ALREADY_EXISTS); goto done;
         }
     }
-    if (state->NextSequence==MAXULONG) { SetLastError(ERROR_ARITHMETIC_OVERFLOW); goto done; }
-    process->ClientId.UniqueProcess=(HANDLE)(ULONG_PTR)pid;
-    process->ProcessHandle=owned;
-    process->SequenceNumber=++state->NextSequence;
-    InsertTailList(&state->Processes,&process->ListLink);
+    if (state->NextSequence==MAXDWORD) { SetLastError(ERROR_ARITHMETIC_OVERFLOW); goto done; }
+    state->Provider->view(process,&view);
+    *view.pid=(HANDLE)(ULONG_PTR)pid;
+    *view.handle=owned;
+    *view.sequence=++state->NextSequence;
+    view.link->Blink=state->Processes.Blink; view.link->Flink=&state->Processes;
+    state->Processes.Blink->Flink=view.link; state->Processes.Blink=view.link;
     result=TRUE;
 done:
     LeaveCriticalSection(&state->Lock);
@@ -57,20 +63,22 @@ done:
     return result;
 }
 
-BOOL OpenNtBaseRemoveProcess(OPENNT_BASE_PROCESS_REGISTRY *state, PCSR_PROCESS process)
+BOOL OpenNtBaseRemoveProcess(OPENNT_BASE_PROCESS_REGISTRY *state, struct _CSR_PROCESS * process)
 {
     LIST_ENTRY *entry;
     BOOL found=FALSE;
+    OPENNT_BASE_PROCESS_VIEW view;
     if (!state || !process) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     EnterCriticalSection(&state->Lock);
     if (state->Pins) {
         LeaveCriticalSection(&state->Lock); SetLastError(ERROR_BUSY); return FALSE;
     }
     for (entry=state->Processes.Flink;entry!=&state->Processes;entry=entry->Flink) {
-        if (CONTAINING_RECORD(entry,CSR_PROCESS,ListLink)==process) {
-            RemoveEntryList(entry);
-            CloseHandle(process->ProcessHandle);
-            process->ProcessHandle=NULL;
+        if (state->Provider->record(entry)==process) {
+            state->Provider->view(process,&view);
+            entry->Blink->Flink=entry->Flink; entry->Flink->Blink=entry->Blink;
+            CloseHandle(*view.handle);
+            *view.handle=NULL;
             found=TRUE;
             break;
         }
@@ -85,24 +93,26 @@ BOOL OpenNtBaseProcessRegistryIsEmpty(OPENNT_BASE_PROCESS_REGISTRY *state)
     BOOL empty;
     if (!state) return FALSE;
     EnterCriticalSection(&state->Lock);
-    empty=state->Pins==0 && IsListEmpty(&state->Processes);
+    empty=state->Pins==0 && (state->Processes.Flink==&state->Processes);
     LeaveCriticalSection(&state->Lock);
     return empty;
 }
 
-NTSTATUS NTAPI CsrLockProcessByClientId(HANDLE id, PCSR_PROCESS *out)
+LONG NTAPI CsrLockProcessByClientId(HANDLE id, struct _CSR_PROCESS * *out)
 {
     LIST_ENTRY *entry;
-    if (!out) return (NTSTATUS)0xc000000dL;
+    if (!out) return (LONG)0xc000000dL;
     *out=NULL;
-    if (!registry) return (NTSTATUS)0xc0000001L;
+    if (!registry) return (LONG)0xc0000001L;
     EnterCriticalSection(&registry->Lock);
     for (entry=registry->Processes.Flink;entry!=&registry->Processes;entry=entry->Flink) {
-        PCSR_PROCESS process=CONTAINING_RECORD(entry,CSR_PROCESS,ListLink);
-        if (process->ClientId.UniqueProcess==id) {
-            if (registry->Pins==MAXULONG) {
+        struct _CSR_PROCESS *process=registry->Provider->record(entry);
+        OPENNT_BASE_PROCESS_VIEW view;
+        registry->Provider->view(process,&view);
+        if (*view.pid==id) {
+            if (registry->Pins==MAXDWORD) {
                 LeaveCriticalSection(&registry->Lock);
-                return (NTSTATUS)0xc000009aL;
+                return (LONG)0xc000009aL;
             }
             ++registry->Pins;
             *out=process;
@@ -110,10 +120,10 @@ NTSTATUS NTAPI CsrLockProcessByClientId(HANDLE id, PCSR_PROCESS *out)
         }
     }
     LeaveCriticalSection(&registry->Lock);
-    return (NTSTATUS)0xc0000001L;
+    return (LONG)0xc0000001L;
 }
 
-NTSTATUS NTAPI CsrUnlockProcess(PCSR_PROCESS process)
+LONG NTAPI CsrUnlockProcess(struct _CSR_PROCESS * process)
 {
     (void)process;
     --registry->Pins;
@@ -125,7 +135,7 @@ BOOL OpenNtBaseDestroyProcessRegistry(OPENNT_BASE_PROCESS_REGISTRY *state)
 {
     /* Owner must stop dispatch and unbind all threads before destruction. */
     if (!state) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
-    if (!IsListEmpty(&state->Processes)) { SetLastError(ERROR_BUSY); return FALSE; }
+    if (!(state->Processes.Flink==&state->Processes)) { SetLastError(ERROR_BUSY); return FALSE; }
     DeleteCriticalSection(&state->Lock);
     return TRUE;
 }
@@ -134,17 +144,19 @@ BOOL OpenNtBaseRetainRegisteredProcess(OPENNT_BASE_PROCESS_REGISTRY *state,
     DWORD pid,ULONG generation,HANDLE *output)
 {
     OPENNT_BASE_PROCESS_REGISTRY *previous;
-    PCSR_PROCESS process=NULL;
+    struct _CSR_PROCESS * process=NULL;
     DWORD error=0;
+    OPENNT_BASE_PROCESS_VIEW view;
     if (!output) {SetLastError(ERROR_INVALID_PARAMETER);return FALSE;}
     *output=NULL;
     if (!state || !pid || !generation) {SetLastError(ERROR_INVALID_PARAMETER);return FALSE;}
     previous=OpenNtBaseBindProcessRegistry(state);
     if (CsrLockProcessByClientId((HANDLE)(ULONG_PTR)pid,&process)<0) error=ERROR_NOT_FOUND;
     else {
-        if (process->SequenceNumber!=generation) error=ERROR_ACCESS_DENIED;
-        else if (WaitForSingleObject(process->ProcessHandle,0)!=WAIT_TIMEOUT) error=ERROR_PROCESS_ABORTED;
-        else if (!DuplicateHandle(GetCurrentProcess(),process->ProcessHandle,
+        state->Provider->view(process,&view);
+        if (*view.sequence!=generation) error=ERROR_ACCESS_DENIED;
+        else if (WaitForSingleObject(*view.handle,0)!=WAIT_TIMEOUT) error=ERROR_PROCESS_ABORTED;
+        else if (!DuplicateHandle(GetCurrentProcess(),*view.handle,
             GetCurrentProcess(),output,0,FALSE,DUPLICATE_SAME_ACCESS)) error=GetLastError();
         CsrUnlockProcess(process);
     }

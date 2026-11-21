@@ -33,7 +33,6 @@ WOW_USER_EXCEPTIONS = {"wow_dialog_lookup.c", "wow_object_ownership.c"}
 C1_LAYOUT_ADAPTERS = {"mvdm_monitor_printer.c", "mvdm_vdm_tib.c"}
 
 ORIGINAL_LAYOUT_ADAPTERS = {
-    "base_process.c",
     'wow_user_private_access.c',
     'wow_common_dialog_calls.c',
 

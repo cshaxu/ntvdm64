@@ -2941,3 +2941,18 @@ IsClientSystem(
 
     return (fSystem);
 }
+
+/* DIVERGENCE(NON-MVDM-DIV-PROCESS-VIEW): original record layout provider. */
+#include "compat/include/base_process.h"
+static PCSR_PROCESS BaseProcessRecord(LIST_ENTRY *entry)
+{
+    return CONTAINING_RECORD(entry, CSR_PROCESS, ListLink);
+}
+static void BaseProcessView(PCSR_PROCESS process, OPENNT_BASE_PROCESS_VIEW *view)
+{
+    view->link=&process->ListLink;
+    view->pid=&process->ClientId.UniqueProcess;
+    view->handle=&process->ProcessHandle;
+    view->sequence=&process->SequenceNumber;
+}
+const OPENNT_BASE_PROCESS_PROVIDER BaseProcessProvider = {BaseProcessRecord, BaseProcessView};

@@ -2705,3 +2705,9 @@ synchronous callbacks. B retains dispatch and wait lifetime; no CSR layout
 is duplicated. Existing #line304 and all original bytes remain in place.
 Non-error diff20points/505lines ->19points/569lines. See T483 S20 P2
 delivery and R2736 in the active review/pending registers.
+
+NON-MVDM-DIV-PROCESS-VIEW: `base/win32/server/srvvdm.c` supplies original
+CSR_PROCESS list/field projections to the B-owned registry interface. B retains
+lock, sequence and handle lifetime. Non-error diff11points/49lines becomes
+12points/64lines (+1/+15); standing owner approval, R2737 and S20 P3 evidence.
+Original prefix and diagnostic directives remain byte-exact.
