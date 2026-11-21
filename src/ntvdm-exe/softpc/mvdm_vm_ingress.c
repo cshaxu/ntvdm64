@@ -1,23 +1,9 @@
 #include "mvdm_vm_ingress.h"
 #include "compat/include/mvdm_command_launch.h"
-#include "compat/include/mvdm_vm_notification.h"
 #include "mvdm_vm_command.h"
 #include "mvdm_vm_executor.h"
 #include "mvdm_standalone_worker.h"
 
-extern void host_ica_lock(void), host_ica_unlock(void);
-
-DWORD mvdm_vm_ingress_register(uint32_t callback)
-{
-    DWORD error;
-    uint64_t serial;
-    if (!callback || !mvdm_standalone_worker_executor()) return ERROR_NOT_READY;
-    host_ica_lock();
-    error = mvdm_vm_notification_snapshot(&serial);
-    if (!error) error = mvdm_vm_command_install_callback(callback);
-    host_ica_unlock();
-    return error;
-}
 DWORD mvdm_vm_command_admit(uint32_t vm, uint32_t descriptor, uint32_t bytes,
     uint64_t *token)
 {

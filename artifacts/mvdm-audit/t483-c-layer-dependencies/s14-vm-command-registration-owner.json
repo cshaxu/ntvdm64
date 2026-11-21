@@ -1,0 +1,117 @@
+{
+  "packet": "M0 T483 S14 P148",
+  "parent": "dbc446b987bb2b8663bed8cd4c06903454121abe",
+  "C0621": {
+    "status": "open",
+    "migrated_operation": 15,
+    "entry": "F bridge retains protected ring-0 signature dispatch and high-word validation. B registers the callback directly and uses C for ICA and the original far-call ABI.",
+    "lifetime": "The existing B rundown binding is assigned after successful character-IO executor creation, before original CPU entry. It is absent in WOW startup and is cleared after CPU execution, before executor destruction. During BOP registration it therefore witnesses the same live executor availability as the previous F accessor. The CPU callback is still reset by BOP close and original worker rundown.",
+    "state": "The existing B callback address remains the sole target. ICA still orders notification validation and installation. No executor pointer dereference or new readiness state.",
+    "F_operation_specific_providers": {
+      "11": "mvdm_vm_command_admit and mvdm_vm_executor_submit",
+      "16": "mvdm_vm_executor_key_bop",
+      "17": "mvdm_vm_executor_bios_key_bop",
+      "19": "mvdm_vm_executor_mouse_bop"
+    },
+    "F_slot_and_dispatcher": [
+      "vm_device_bop",
+      "mvdm_vm_bridge_bop"
+    ]
+  },
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 0,
+    "F": 1
+  },
+  "C_additional_records": {
+    "headers": [
+      "C0620"
+    ],
+    "runtime_slots": [
+      "C0621"
+    ],
+    "named_image_imports": [
+      "C0134"
+    ]
+  },
+  "mirror": {
+    "non_error_points_delta": 0,
+    "non_error_lines_delta": 0,
+    "guest_modified_or_recompiled": false
+  },
+  "verification": {
+    "compiler_and_link": {
+      "x86": {
+        "headers": [
+          "compat/include/mvdm_softpc_worker_exit.h",
+          "compat/include/mvdm_vm_command_entry.h",
+          "compat/include/mvdm_vm_notification.h"
+        ],
+        "external_symbols": [
+          "_mvdm_vm_notification_snapshot",
+          "_c_getVM",
+          "_c_getIP",
+          "_c_setIP",
+          "_CALLF",
+          "_host_ica_lock",
+          "_host_ica_unlock",
+          "_mvdm_softpc_exit_rundown"
+        ],
+        "linked_owners": [
+          "0001:001683c0       _mvdm_vm_ingress_register  005693c0 f   softpc-bindings:mvdm_vm_command_entry.obj",
+          "0001:0016f5a0       _mvdm_vm_notification_snapshot 005705a0 f   softpc-bindings:mvdm_vm_notification.obj",
+          "0003:0025ab5c       _mvdm_softpc_exit_rundown  00813b5c     <common>"
+        ]
+      },
+      "x64-ref": {
+        "headers": [
+          "compat/include/mvdm_softpc_worker_exit.h",
+          "compat/include/mvdm_vm_command_entry.h",
+          "compat/include/mvdm_vm_notification.h"
+        ],
+        "external_symbols": [
+          "_mvdm_vm_notification_snapshot",
+          "_c_getVM",
+          "_c_getIP",
+          "_c_setIP",
+          "_CALLF",
+          "_host_ica_lock",
+          "_host_ica_unlock",
+          "_mvdm_softpc_exit_rundown"
+        ],
+        "linked_owners": [
+          "0001:001683c0       _mvdm_vm_ingress_register  005693c0 f   softpc-bindings:mvdm_vm_command_entry.obj",
+          "0001:0016f5a0       _mvdm_vm_notification_snapshot 005705a0 f   softpc-bindings:mvdm_vm_notification.obj",
+          "0003:0025ab5c       _mvdm_softpc_exit_rundown  00813b5c     <common>"
+        ]
+      }
+    },
+    "rundown_B_common_storage_x86": "007 00000004 UNDEF  notype       External     | _mvdm_softpc_exit_rundown",
+    "production_win31": [
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested",
+      "Original Windows installation bytes verified unchanged"
+    ],
+    "targeted_fixtures": [
+      "1/2 Test #42: mvdm-vm-notification .............   Passed    0.21 sec",
+      "2/2 Test #44: mvdm-vm-ingress ..................   Passed    0.14 sec"
+    ],
+    "limitations": "The fixture checks zero callback, closed IRQ, absent executor binding, duplicate registration, FAR return and reset. Win3.1 checks live registration and successful native execution. No Full or Win95 run."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "c3ae4acd-6600-4a74-a2ed-3eda1feb1946",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

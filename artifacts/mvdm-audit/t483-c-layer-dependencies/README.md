@@ -583,3 +583,9 @@ No direct edge closed. Non-error mirror delta: zero points, zero lines.
 [Delivery evidence](s14-vm-guest-io-owner.json) closes the F provider paths for
 operations 13, 14 and 18. C0621 stays open for the F slot and dispatch,
 synchronous command admission, ingress readiness and executor input.
+
+## P148 guest COMMAND callback registration
+
+[Delivery evidence](s14-vm-command-registration-owner.json) records B taking operation 15 using the
+existing VM rundown binding. C0621 stays open for the F slot and dispatch,
+synchronous command admission, and live executor input providers.

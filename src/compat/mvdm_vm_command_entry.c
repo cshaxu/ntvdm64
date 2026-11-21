@@ -1,4 +1,6 @@
 #include "include/mvdm_vm_command_entry.h"
+#include "include/mvdm_softpc_worker_exit.h"
+#include "include/mvdm_vm_notification.h"
 
 /* CCPU cpu4gen.h / call.h and host nt_eoi.h production ABI. */
 extern int c_getVM(void);
@@ -10,11 +12,22 @@ extern void host_ica_unlock(void);
 
 static uint32_t command_callback;
 
-DWORD mvdm_vm_command_install_callback(uint32_t callback)
+DWORD mvdm_vm_ingress_register(uint32_t callback)
 {
-    if (command_callback) return ERROR_ALREADY_EXISTS;
-    command_callback = callback;
-    return ERROR_SUCCESS;
+    uint64_t serial;
+    DWORD error;
+
+    /* The worker publishes the rundown only after creating the executor,
+     * before CPU entry. It withdraws it after the CPU has stopped. */
+    if (!callback || !mvdm_softpc_exit_rundown) return ERROR_NOT_READY;
+    host_ica_lock();
+    error = mvdm_vm_notification_snapshot(&serial);
+    if (!error) {
+        if (command_callback) error = ERROR_ALREADY_EXISTS;
+        else command_callback = callback;
+    }
+    host_ica_unlock();
+    return error;
 }
 
 void mvdm_vm_ingress_reset(void)

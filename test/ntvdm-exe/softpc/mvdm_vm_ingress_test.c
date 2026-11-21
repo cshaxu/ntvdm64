@@ -1,6 +1,9 @@
 #include "mvdm_vm_ingress.h"
 #include "mvdm_vm_executor.h"
 #include "mvdm_vm_command.h"
+#include "compat/include/mvdm_softpc_worker_exit.h"
+#include "compat/include/mvdm_vm_command_entry.h"
+#include "compat/include/mvdm_vm_continuation_store.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,7 +11,9 @@ static unsigned checks, calls, stage, destroyed, texts, captured;
 static int vm_mode;
 static unsigned long far_target[2];
 static uint16_t ip, return_ip;
-static BOOL available = TRUE, open = TRUE;
+static BOOL open = TRUE;
+static mvdm_vm_rundown rundown;
+mvdm_vm_rundown *mvdm_softpc_exit_rundown = &rundown;
 #define CHECK(x) do { ++checks; if (!(x)) { fprintf(stderr,"FAIL %u: %s\n",__LINE__,#x); exit(1); } } while (0)
 void host_ica_lock(void) {}
 void host_ica_unlock(void) {}
@@ -18,7 +23,7 @@ void c_setIP(uint16_t value) { ip = value; }
 void CALLF(unsigned long target[2])
 { ++calls; return_ip = ip; far_target[0] = target[0]; far_target[1] = target[1]; ip = (uint16_t)target[0]; }
 mvdm_vm_executor *mvdm_standalone_worker_executor(void)
-{ return available ? (mvdm_vm_executor *)1 : NULL; }
+{ return (mvdm_vm_executor *)1; }
 DWORD mvdm_vm_notification_snapshot(uint64_t *serial)
 { *serial = 0; return open ? ERROR_SUCCESS : ERROR_NOT_READY; }
 DWORD mvdm_vm_command_service(uint32_t address, uint32_t bytes, uint32_t *service)
@@ -59,9 +64,9 @@ int main(void)
     CHECK(mvdm_vm_ingress_register(0) == ERROR_NOT_READY);
     open = FALSE;
     CHECK(mvdm_vm_ingress_register(0x12345678) == ERROR_NOT_READY);
-    open = TRUE; available = FALSE;
+    open = TRUE; mvdm_softpc_exit_rundown = NULL;
     CHECK(mvdm_vm_ingress_register(0x12345678) == ERROR_NOT_READY);
-    available = TRUE;
+    mvdm_softpc_exit_rundown = &rundown;
     CHECK(!mvdm_vm_ingress_register(0x12345678));
     CHECK(mvdm_vm_ingress_register(0x12345678) == ERROR_ALREADY_EXISTS);
     CHECK(!mvdm_vm_command_enter(9) && !calls && ip == 0xffff);

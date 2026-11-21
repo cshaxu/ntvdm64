@@ -4,6 +4,7 @@
 #include "compat/include/mvdm_vm_continuation_store.h"
 #include "compat/include/mvdm_vm_guest_io.h"
 #include "mvdm_vm_ingress.h"
+#include "compat/include/mvdm_vm_command_entry.h"
 #include "mvdm_vm_executor.h"
 #include "mvdm_standalone_worker.h"
 #include "compat/include/mvdm_command_guest_directory.h"

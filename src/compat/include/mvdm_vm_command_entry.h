@@ -4,8 +4,8 @@
 #include <windows.h>
 #include <stdint.h>
 
-/* The caller holds ICA while validating admission and installing the target. */
-DWORD mvdm_vm_command_install_callback(uint32_t callback);
+/* CPU-thread registration requires the active VM execution resource and IRQ. */
+DWORD mvdm_vm_ingress_register(uint32_t callback);
 void mvdm_vm_ingress_reset(void);
 
 /* A true result installs a CCPU far call in place of normal BOP dispatch. */
