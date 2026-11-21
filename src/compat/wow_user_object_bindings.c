@@ -1,5 +1,6 @@
 #include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_user_object_bindings.h"
+#include "compat/include/opennt_user_multipass.h"
 #include <dde.h>
 #include "wow_window_dispatch_bindings.h"
 #include "wow_class_lookup_bindings.h"

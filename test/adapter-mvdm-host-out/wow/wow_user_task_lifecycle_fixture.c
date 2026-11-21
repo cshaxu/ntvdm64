@@ -1,10 +1,33 @@
+#include "wow_standard_class_provider.h"
+extern BOOL __cdecl ntvdm_dpmi_initialize(void);
+extern INT WINAPI GetStdClassNumber(LPSTR);
+extern LPCSTR WINAPI wow_original_class_name(UINT);
+extern ATOM WINAPI wow_original_class_atom(UINT);
+static const wow_standard_class_provider class_provider = {
+    GetStdClassNumber, wow_original_class_name, wow_original_class_atom };
+#include "wow_cleanup_bindings.h"
+#include "wow_shared_user_abi.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
+extern const wow_cleanup_provider wow_original_cleanup_provider;
+BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
 #include "compat/include/wow_task_start_notification.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_private_access.h"
 #include "wow_window_words_binding.h"
 #include "ntvdm-exe/session/session.h"
 #include "wow_menu_client_bindings.h"
+#include "wow_task_cleanup_entry.h"
+extern BOOL WINAPI wow_original_task_cleanup_uninitialized(DWORD);
+extern VOID WINAPI wow_original_task_retire_async(void);
+extern VOID WINAPI WowOriginalFreeTask(PVOID);
+static const wow_task_cleanup_provider task_cleanup_provider = {
+    wow_original_task_cleanup_uninitialized, wow_original_task_retire_async, WowOriginalFreeTask };
 #include "wow_idle_hook_binding.h"
+extern BOOL WINAPI wow_original_idle_registered(DWORD);
+extern BOOL WINAPI wow_original_separate_launch(void);
+extern LRESULT CALLBACK WowOriginalForegroundIdleHook(int, WPARAM, LPARAM);
+static const wow_task_state_callbacks task_callbacks = {
+    wow_original_idle_registered, wow_original_separate_launch, WowOriginalForegroundIdleHook };
 #include "compat/include/wow32_provider_private.h"
 
 #include <stdio.h>
@@ -1251,6 +1274,11 @@ int __cdecl main(int argc,char **argv)
 
     verify_client_death_exception();
     CHECK(wowexec != NULL);
+    CHECK(ntvdm_dpmi_initialize());
+    CHECK(wow_standard_class_bind(&class_provider));
+    CHECK(wow_cleanup_bind(&wow_original_cleanup_provider));
+    CHECK(wow_task_state_bind(&task_callbacks));
+    CHECK(wow_task_cleanup_bind(&task_cleanup_provider));
     session_initialize(&owner, 42040u);
     CHECK(session_activate(&owner));
     CHECK(session_thread_bind_owned(&owner,

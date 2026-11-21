@@ -135,7 +135,11 @@ if ([regex]::Matches($body, [regex]::Escape('sizeof(spfnwp) / sizeof(spfnwp[0])'
     throw 'Both procedure-index bounds must use element count'
 }
 $body = $body.Replace('sizeof(spfnwp) / sizeof(spfnwp[0])', 'sizeof(spfnwp)')
-$body = $body.Replace("if (!DestroyClass(ppcls))`n                            return FALSE;", 'DestroyClass(ppcls);')
+$failedDestroy = '(?m)^([ \t]*)if \(!DestroyClass\(ppcls\)\)\n[ \t]*return FALSE;'
+if ([regex]::Matches($body, $failedDestroy).Count -ne 2) {
+    throw 'Both registered class-destruction failure sites must remain present'
+}
+$body = [regex]::Replace($body, $failedDestroy, '$1DestroyClass(ppcls);')
 if (!$body.EndsWith("    return TRUE;`n}")) { throw 'Missing successful cleanup return' }
 $body = $body.Substring(0,$body.Length-"    return TRUE;`n}".Length) + '}'
 $cleanupStart = $body.IndexOf('VOID _WOWCleanup(')

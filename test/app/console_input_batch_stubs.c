@@ -18,3 +18,9 @@ DWORD worker_base_io_open(HANDLE *pipe, HANDLE *peer, HANDLE *ready, DWORD *gene
 { (void)pipe; (void)peer; (void)ready; (void)generation; return ERROR_NOT_SUPPORTED; }
 DWORD worker_base_io_close(HANDLE *pipe, HANDLE *peer, HANDLE *ready)
 { (void)pipe; (void)peer; (void)ready; return ERROR_NOT_SUPPORTED; }
+
+/* This controlled queue never enters CCPU/ICA. Keep the production composition
+ * linkable, but fail if a future test path accidentally crosses that boundary. */
+void host_ica_lock(void) { RaiseFailFastException(NULL, NULL, 0); }
+void host_ica_unlock(void) { RaiseFailFastException(NULL, NULL, 0); }
+void DoMouseInterrupt(void) { RaiseFailFastException(NULL, NULL, 0); }

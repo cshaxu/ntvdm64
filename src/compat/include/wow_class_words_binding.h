@@ -33,7 +33,7 @@ BOOL WINAPI wow_class_words_destroy_native(wow_class_lookup_entry **,
     HINSTANCE, BOOL);
 /* Original windows/core/ntuser/inc/user.h declaration. The captured Unicode
  * descriptor is call-local; only the two client pointers survive register. */
-#include "compat/include/opennt_user_multipass.h"
+typedef struct tagCLSMENUNAME CLSMENUNAME, *PCLSMENUNAME;
 /* Caller holds its class-publication lock across all list operations.
  * Original server registration can publish hTaskWow. cWndReferenceCount tracks enrolled window
  * associations; acquire/release independently counts storage borrowers.
@@ -43,13 +43,13 @@ BOOL WINAPI wow_class_words_destroy_native(wow_class_lookup_entry **,
  * do not mix raw lookup views with owned bindings. No raw words survive release. */
 ATOM WINAPI wow_class_words_register(wow_class_lookup_context *,
     const WNDCLASSEXA *, const UNICODE_STRING *, const DWORD words[2],
-    const CLSMENUNAME *);
+    const struct tagCLSMENUNAME *);
 /* Gateway class variant: native_class already names the native entrance;
  * target preserves original CLS.lpfnWndProc and its registered WOW callback.
  * No CPD resolution or guest selector conversion takes place here. */
 ATOM WINAPI wow_class_words_register_target(wow_class_lookup_context *,
     const WNDCLASSEXA *, const UNICODE_STRING *, const DWORD words[2],
-    const CLSMENUNAME *, const wow_window_dispatch_target *);
+    const struct tagCLSMENUNAME *, const wow_window_dispatch_target *);
 /* Native USER already owns the original standard-control registrations.
  * Import only their per-process shared WC storage into the public list;
  * no RegisterClass/SetClassLong or guest publication is performed here.
@@ -81,7 +81,7 @@ void WINAPI wow_class_words_restore_procedure(wow_class_words_binding *, WNDPROC
 ATOM WINAPI wow_class_words_find_atom(wow_class_lookup_context *,
     const UNICODE_STRING *);
 BOOL WINAPI wow_class_words_unregister(wow_class_lookup_context *, ATOM,
-    HINSTANCE, PCLSMENUNAME);
+    HINSTANCE, struct tagCLSMENUNAME *);
 /* Menu pointers transfer on successful register only. Successful unregister
  * returns them for original client cleanup, never a captured stack descriptor.
  * Failure leaves ownership and the output unchanged. Registrations without

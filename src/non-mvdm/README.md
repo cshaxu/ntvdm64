@@ -2748,3 +2748,10 @@ than receiving resource formats through B. B retains native DC/lock scopes and
 uses a typed callback to original WOWLoadBitmapA. Original parser/conversion
 bodies and #line16 remain unchanged. Non-error28points/2730lines becomes
 28points/2731lines (+0points/+1line), R2745; bitmap and Win16 tests passed.
+
+S20 P11 cleanup boundary: C-only aliases move from the B header to cleanup.c
+before original #line14; B invokes the original algorithm through a synchronous
+provider. class.c imports its original USER declarations. No copied C layout.
+Non-error cleanup20points/44lines ->20points/92lines; class12points/1390lines
+->12points/1394lines. Batch0points/+52lines, R2746/R2747. Source reconstruction,
+menu cleanup, real Win16 and Full passed.

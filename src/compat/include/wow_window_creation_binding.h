@@ -27,8 +27,9 @@ HWND WINAPI wow_user_create_window_ex(DWORD, LPCTSTR, LPCTSTR, DWORD, int,
  * captured, class lookup uses the existing class owner, and explicit version
  * and creator flags are preserved through the existing enrollment scope.
  * The modern native service receives no original WOW-word pointer. */
-HWND WINAPI wow_user_create_dialog_window_ex(DWORD, PLARGE_STRING,
-    PLARGE_STRING, DWORD, int, int, int, int, HWND, HMENU, HANDLE, LPVOID,
+struct _LARGE_STRING;
+HWND WINAPI wow_user_create_dialog_window_ex(DWORD, struct _LARGE_STRING *,
+    struct _LARGE_STRING *, DWORD, int, int, int, int, HWND, HMENU, HANDLE, LPVOID,
     DWORD, LPDWORD);
 /* Only original comboini.c's two internal _CreateWindowEx calls: atom class,
  * null title/WOW words, zero or ANSI creator flags, tool/client-edge styles.

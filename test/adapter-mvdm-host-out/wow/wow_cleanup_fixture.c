@@ -1,4 +1,8 @@
 #include "wow_cleanup_bindings.h"
+#include "wow_shared_user_abi.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
+extern const wow_cleanup_provider wow_original_cleanup_provider;
+BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
 #include "wow_class_words_binding.h"
 #include "wow_window_creation_binding.h"
 #include <stdio.h>
@@ -229,6 +233,7 @@ int __cdecl main(void)
         wow_window_terminal_observer, NULL, GetCurrentThreadId());
     CHECK(terminal != NULL);
     if (!terminal) return 3;
+    CHECK(wow_cleanup_bind(&wow_original_cleanup_provider));
     verify_native_identity_binding();
     process.classes=&classes;
     process.objects=&objects;

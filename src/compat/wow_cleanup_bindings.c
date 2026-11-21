@@ -1,7 +1,19 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_cleanup_bindings.h"
 #include "wow_window_words_binding.h"
 #include "wow_window_procedure_entry.h"
+
+static const wow_cleanup_provider *cleanup_provider;
+
+BOOL WINAPI wow_cleanup_bind(const wow_cleanup_provider *provider)
+{
+    if (!provider || !provider->cleanup ||
+            (cleanup_provider && cleanup_provider != provider)) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    cleanup_provider = provider;
+    return TRUE;
+}
 
 void WINAPI wow_cleanup_set_class_procedure(wow_class_lookup_entry *entry,
     WNDPROC procedure)
@@ -48,7 +60,7 @@ static void clear_tree(wow_user_object_table *table)
 {
     ULONG i;
     for (i=0;i<=table->last_handle;++i) {
-        if (table->entries[i].bType==TYPE_WINDOW) {
+        if (table->entries[i].bType==cleanup_provider->window_type) {
             wow_cleanup_window *window=table->entries[i].phead;
             window->spwndChild=window->spwndNext=NULL;
         }
@@ -63,7 +75,7 @@ static BOOL build_tree(wow_user_object_table *table, wow_cleanup_window *root)
         wow_cleanup_handle *entry=&table->entries[i];
         wow_cleanup_window *window, *parent_view=root;
         HWND window_handle, parent;
-        if (entry->bType!=TYPE_WINDOW) continue;
+        if (entry->bType!=cleanup_provider->window_type) continue;
         window=entry->phead;
         window_handle=(HWND)(ULONG_PTR)(i|((DWORD)entry->wUniq<<16));
         if (!IsWindow(window_handle)) {
@@ -86,7 +98,7 @@ static BOOL build_tree(wow_user_object_table *table, wow_cleanup_window *root)
         parent=GetAncestor(window_handle,GA_PARENT);
         while (parent) {
             wow_cleanup_handle *candidate=&table->entries[LOWORD(parent)];
-            if (candidate->bType==TYPE_WINDOW && candidate->wUniq==HIWORD(parent)) {
+            if (candidate->bType==cleanup_provider->window_type && candidate->wUniq==HIWORD(parent)) {
                 parent_view=candidate->phead;
                 break;
             }
@@ -98,7 +110,7 @@ static BOOL build_tree(wow_user_object_table *table, wow_cleanup_window *root)
     return TRUE;
 }
 
-BOOL WINAPI wow_user_cleanup_bound(HANDLE instance, DWORD task, PNEMODULESEG selectors,
+BOOL WINAPI wow_user_cleanup_bound(HANDLE instance, DWORD task, struct _NE_MODULE_SEG UNALIGNED *selectors,
     DWORD count, wow_cleanup_context *context)
 {
     wow_cleanup_window root={0}, *previous_root;
@@ -110,6 +122,7 @@ BOOL WINAPI wow_user_cleanup_bound(HANDLE instance, DWORD task, PNEMODULESEG sel
         !context->thread->rpdesk->pDeskInfo) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
+    if (!cleanup_provider) RaiseFailFastException(NULL, NULL, 0);
     objects=context->thread->ppi->objects;
     if (!wow_window_words_collect_retired(objects)) return FALSE;
     desktop=context->thread->rpdesk->pDeskInfo;
@@ -120,7 +133,7 @@ BOOL WINAPI wow_user_cleanup_bound(HANDLE instance, DWORD task, PNEMODULESEG sel
     desktop->spwnd=&root;
     context->object_release_failed=FALSE;
     __try {
-        result=_WOWCleanup(instance,task,selectors,count,context);
+        result=cleanup_provider->cleanup(instance,task,selectors,count,context);
         if (context->object_release_failed) result=FALSE;
     } __finally {
         desktop->spwnd=previous_root;

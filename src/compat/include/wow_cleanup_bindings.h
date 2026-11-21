@@ -5,7 +5,7 @@
 #include "wow_input_group_bindings.h"
 #include "compat/include/wow_user_probe_bindings.h"
 #include "wow_user_object_bindings.h"
-#include "wow_shared_user_abi.h"
+typedef struct _NE_MODULE_SEG UNALIGNED *PNEMODULESEG;
 
 /* ADAPTER-WOW-047: borrowed, serialized original cleanup fields. These are
  * live owner views, not native NT4 layouts or enumeration snapshots. Native
@@ -40,63 +40,22 @@ typedef struct wow_cleanup_context {
     void (WINAPI *release)(PVOID);
     BOOL object_release_failed;
 } wow_cleanup_context;
-BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
+typedef BOOL (WINAPI *wow_cleanup_operation)(HANDLE, DWORD,
+    struct _NE_MODULE_SEG UNALIGNED *, DWORD, wow_cleanup_context *);
+typedef struct wow_cleanup_provider {
+    wow_cleanup_operation cleanup;
+    BYTE window_type;
+} wow_cleanup_provider;
+BOOL WINAPI wow_cleanup_bind(const wow_cleanup_provider *);
 /* Native composition of the original non-xxx cleanup operation. The USER
  * owner holds its domain serialization and native release operations must not
  * call out or pump messages. Tree links are derived only for this invocation;
  * no native parenting, z-order or ordinary USER tree policy is implemented. */
-BOOL WINAPI wow_user_cleanup_bound(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
+BOOL WINAPI wow_user_cleanup_bound(HANDLE, DWORD, struct _NE_MODULE_SEG UNALIGNED *, DWORD, wow_cleanup_context *);
 /* Original cleanup selects targets; these leaves own only their storage.
  * No application callbacks, pumping or new class behavior is introduced. */
 void WINAPI wow_cleanup_set_window_procedure(wow_cleanup_context *,
     wow_cleanup_window *, WNDPROC);
 void WINAPI wow_cleanup_set_class_procedure(wow_class_lookup_entry *, WNDPROC);
 
-#ifdef WOW_ORIGINAL_CLEANUP
-/* Original ClientDied raises a noncontinuable status exception. Use the
- * existing native RTL exception provider at this user-mode boundary. */
-NTSYSAPI VOID NTAPI RtlRaiseStatus(NTSTATUS);
-#define ExRaiseStatus RtlRaiseStatus
-#define STATUS_PORT_DISCONNECTED ((NTSTATUS)0xC0000037L)
-typedef wow_task_order_process *PPROCESSINFO;
-typedef wow_task_order_message *PSMS;
-typedef wow_task_order_entry *PTDB;
-#define WOW_USER_OBJECT_FLAGS_ONLY
-#include "non-mvdm/windows/core/ntuser/kernel/userk.h"
-#undef WOW_USER_OBJECT_FLAGS_ONLY
-typedef wow_cleanup_window *wow_cleanup_pwnd;
-#define PWND wow_cleanup_pwnd
-typedef wow_class_lookup_entry *wow_cleanup_pcls, **wow_cleanup_ppcls;
-#define PPCLS wow_cleanup_ppcls
-#define PCLS wow_cleanup_pcls
-typedef wow_cleanup_handle *wow_cleanup_phe;
-#define PHE wow_cleanup_phe
-typedef wow_cleanup_process_object *wow_cleanup_pprocobjhead;
-#define PPROCOBJHEAD wow_cleanup_pprocobjhead
-#define WNDPROC_PWND WNDPROC
-#undef gptiCurrent
-#define gptiCurrent (context->thread)
-#define W32GetCurrentProcess() (context->thread->ppi)
-#define pclsPrivateList classes->pclsPrivateList
-#define pclsPublicList classes->pclsPublicList
-#define pclsNext next
-#define GETPTI(window) ((window)->thread)
-#define gpsi (context->shared)
-#define gSharedInfo (context->handles)
-#define giheLast (context->last_handle)
-#define xxxSBWndProc (context->scroll_proc)
-#define xxxDesktopWndProc (context->desktop_proc)
-#define xxxMenuWindowProc (context->menu_proc)
-#define xxxSwitchWndProc (context->switch_proc)
-#define TestWF(window, flag) ((window)->serverSideProc)
-#define HANDLEF_DESTROY 0x01
-#define DestroyClass(link) context->destroy_class(context,link)
-#define HMDestroyUnlockedObject(handle) context->destroy_object(context,handle)
-#define ExAllocatePoolWithQuota(pool, size) context->allocate(size)
-#define ExFreePool(memory) context->release(memory)
-#define RIPMSG0(level, message) ((void)0)
-#define RIPMSG1(level, message, arg) ((void)0)
-#define try __try
-#define except __except
-#endif
 #endif

@@ -199,12 +199,12 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json):
-94 files,15 completed,79 remaining. B-to-C1:57 unique/69 relocation
-records,516 compiled header rows,0 private search-root rows. These are separate
+94 files,17 completed,77 remaining. B-to-C1:56 unique/68 relocation
+records,487 compiled header rows,0 private search-root rows. These are separate
 metrics, not additive counts. B-to-C2 direct/header/search remains0.
 DIR work remains at BC1F010/011 shared USER consumer group; three P9 text
 consumers are complete, other consumers remain open. S20 cumulative non-error
-mirror increment0points/+139lines; S19 retained increment+12points/+574lines.
+mirror increment0points/+191lines; S19 retained increment+12points/+574lines.
 
 [S20 P1 review](../../artifacts/mvdm-audit/t483-b-c1-dependencies/base-dispatch-review.json)
 is implemented by [P2](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p2-delivery.json):
@@ -213,38 +213,16 @@ entry/8 dispatches/wait ownership; C1 supplies two synchronous projections.
 Cached full, dual11,140 assertions,5 real RPC wait cases and real Win16/COMMAND
 passed. Mirror vdm.c:20points/505lines ->19points/569lines; R2736 retained.
 
-[P3 registry delivery](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p3-delivery.json):
-base_process.c C1 private headers9->0, search roots1->0. Cached full and dual11
-published; actual RPC5, Win16/COMMAND and existing registry lifecycle selection
-passed. Full legacy fixture has an unrelated stale wire-size assertion; no full
-fixture pass claimed. Eleven boundary controls, nine real product graphs, dual22
-hashes, frontend ownership and governance passed. Mirror +1point/+15lines is
-registered as R2737 under standing approval.
-
-[P4 capture header](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p4-delivery.json):
-removed B forwarding header and9 resolved C1 include rows(3targets); direct
-call counts unchanged. Cached full, dual11, capture3463 and actual Win16/COMMAND
-passed. Final11 controls/9 product graphs,22 hashes and governance passed;
-mirror0points/+5lines, R2738.
-
-[P5 classifier header](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p5-delivery.json):
-B private C1 includes2/14 resolved rows ->0. Original classifier now owns its
-basevdm.h include (+0points/+1line,R2739). Cached full, dual11 and original
-classifier fixture plus real Win16/COMMAND passed. Final11 controls/9 product
-graphs,22 hashes and governance passed.
-
-[P6 BASE client header](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p6-delivery.json):
-B private C1 headers6/18 resolved rows ->0; opaque ABI unchanged. C1 and actual
-D/F field users include original types directly. Cached full, dual11, dispatch140
-real RPC5 and Win16/COMMAND passed. Final11 controls/9 product graphs,22 hashes
-and governance passed. Mirror0points/+6lines,
-R2740. Direct B-to-C1 remains58; B-to-C2 remains0.
-
-[P7 config header](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p7-delivery.json):
-removed B nt.h dependency(6 resolved rows); original registry-size macro moved
-unchanged to C1(+0points/+1line,R2741). Cached full, dual11, x86/x64 config
-and real Win16/COMMAND passed. Final11 controls/9 product graphs,22 hashes
-and governance passed.
+P3-P7 removed registry, capture, classifier, BASE-client and config header
+coupling. Their cached full builds, dual11 publications, targeted tests and
+actual Win16/COMMAND checks are recorded in the individual delivery records:
+[P3](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p3-delivery.json),
+[P4](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p4-delivery.json),
+[P5](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p5-delivery.json),
+[P6](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p6-delivery.json),
+[P7](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p7-delivery.json).
+P3's unrelated full legacy fixture wire-size assertion remains a recorded
+limitation; no full-fixture pass was claimed. R2737-R2741 retain provenance.
 
 S20 P8 grouped delivery verifies BC1F008/009/023/024:10/94 files complete,
 84 remain. BC1F007 duplicate ntsend include is removed; its transitive USER
@@ -272,3 +250,12 @@ Direct C1 relations58->57; headers524->516; search0 and C2 zero retained.
 Cached full, dual11, bitmap nested/concurrent/failure and real Win16/COMMAND
 passed. Mirror0points/+1line (R2745).
 [Delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p10-delivery.json).
+
+P11 completes BC1F013/032: B owns opaque cleanup ABI and synchronous callback;
+original C algorithm and private declarations remain C-owned. This removes
+1direct relationship and29compiled header rows. Mirror0points/+52lines,
+R2746/R2747; S20 cumulative0points/+191lines. Cached full build, dual11,
+original source reconstruction, menu/task lifecycle, actual Win16/COMMAND
+and owner-requested Full all passed. Full fixture initialization and link/input
+omissions were repaired without weakening assertions or changing products.
+[P11 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p11-delivery.json).

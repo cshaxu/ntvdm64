@@ -15,6 +15,8 @@
 #line 16
 #pragma hdrstop
 #ifdef WOW_ORIGINAL_CLASS_REGISTRATION
+#include <winternl.h>
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #include "wow_class_register_bindings.h"
 
 #line 68
@@ -84,6 +86,8 @@ ATOM _RegisterClassEx(
     }
 }
 #elif defined(WOW_ORIGINAL_CLASS_REMOVAL)
+#include <winternl.h>
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #include "wow_class_remove_bindings.h"
 
 #line 478

@@ -1,3 +1,6 @@
+#include "wow_cleanup_bindings.h"
+#include "wow_shared_user_abi.h"
+BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
 #include "wow_standard_class_bindings.h"
 #include "wow_standard_class_provider.h"
 #include "wow_window_words_binding.h"

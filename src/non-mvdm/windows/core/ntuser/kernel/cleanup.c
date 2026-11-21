@@ -12,6 +12,54 @@
 
 #define WOW_ORIGINAL_CLEANUP
 #include "wow_cleanup_bindings.h"
+#include "compat/include/wow_shared_user_abi.h"
+/* Original ClientDied raises a noncontinuable status exception. Use the
+ * existing native RTL exception provider at this user-mode boundary. */
+NTSYSAPI VOID NTAPI RtlRaiseStatus(NTSTATUS);
+#define ExRaiseStatus RtlRaiseStatus
+#define STATUS_PORT_DISCONNECTED ((NTSTATUS)0xC0000037L)
+typedef wow_task_order_process *PPROCESSINFO;
+typedef wow_task_order_message *PSMS;
+typedef wow_task_order_entry *PTDB;
+#define WOW_USER_OBJECT_FLAGS_ONLY
+#include "non-mvdm/windows/core/ntuser/kernel/userk.h"
+#undef WOW_USER_OBJECT_FLAGS_ONLY
+typedef wow_cleanup_window *wow_cleanup_pwnd;
+#define PWND wow_cleanup_pwnd
+typedef wow_class_lookup_entry *wow_cleanup_pcls, **wow_cleanup_ppcls;
+#define PPCLS wow_cleanup_ppcls
+#define PCLS wow_cleanup_pcls
+typedef wow_cleanup_handle *wow_cleanup_phe;
+#define PHE wow_cleanup_phe
+typedef wow_cleanup_process_object *wow_cleanup_pprocobjhead;
+#define PPROCOBJHEAD wow_cleanup_pprocobjhead
+#define WNDPROC_PWND WNDPROC
+#undef gptiCurrent
+#define gptiCurrent (context->thread)
+#define W32GetCurrentProcess() (context->thread->ppi)
+#define pclsPrivateList classes->pclsPrivateList
+#define pclsPublicList classes->pclsPublicList
+#define pclsNext next
+#define GETPTI(window) ((window)->thread)
+#define gpsi (context->shared)
+#define gSharedInfo (context->handles)
+#define giheLast (context->last_handle)
+#define xxxSBWndProc (context->scroll_proc)
+#define xxxDesktopWndProc (context->desktop_proc)
+#define xxxMenuWindowProc (context->menu_proc)
+#define xxxSwitchWndProc (context->switch_proc)
+#define TestWF(window, flag) ((window)->serverSideProc)
+#define HANDLEF_DESTROY 0x01
+#define DestroyClass(link) context->destroy_class(context,link)
+#define HMDestroyUnlockedObject(handle) context->destroy_object(context,handle)
+#define ExAllocatePoolWithQuota(pool, size) context->allocate(size)
+#define ExFreePool(memory) context->release(memory)
+#define RIPMSG0(level, message) ((void)0)
+#define RIPMSG1(level, message, arg) ((void)0)
+#define try __try
+#define except __except
+BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
+const wow_cleanup_provider wow_original_cleanup_provider = { _WOWCleanup, TYPE_WINDOW };
 #line 14
 #pragma hdrstop
 

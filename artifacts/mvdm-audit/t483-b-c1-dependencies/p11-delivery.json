@@ -1,0 +1,60 @@
+{
+  "packet": "M0 T483 S20 P11",
+  "baseline": "de20b2992",
+  "status": "verified delivery",
+  "files_completed_this_batch": [
+    "BC1F013",
+    "BC1F032"
+  ],
+  "dependency_delta": {
+    "direct_unique": -1,
+    "compiled_C1_header_rows": -29
+  },
+  "provider": "B owns typed cleanup callback; F binds C constant provider before DLL initialization. Original cleanup algorithm and layouts remain C-owned. B uses opaque selectors. Existing synchronous tree construction/finally restore retained; no queue or copied C layout. Other actual layout consumers remain open.",
+  "mirror": {
+    "cleanup.c": "20points44lines->20points92lines",
+    "class.c": "12points1390lines->12points1394lines",
+    "delta": "0points/+52lines",
+    "cumulative_S20": "0points/+191lines",
+    "line_mapping": "Existing #line boundaries retained; paired error parser zero issues; original cleanup body reconstruction passed"
+  },
+  "package": "090a8372-ac04-4788-97da-87be18d92e73",
+  "build": "cached full x86/x64/reference passed",
+  "publication": "dual11;22hashes verified",
+  "tests": [
+    "cleanup source bounds passed",
+    "menu-cleanup-verified: MENU_CLEANUP errors=0; TASK_LIFECYCLE errors=0 native_direct=5",
+    "published actual Win16 native extension and COMMAND EDIT/CMD/DOS MEM passed",
+    "boundary controls,nine product graphs,22hashes passed",
+    "Owner-requested Full:20 gates passed, including actual NESticle menu and Escape hide/restore; final dual22hash and governance checks passed"
+  ],
+  "failure_resolution": [
+    "Standalone lifecycle fixture omitted actual DPMI/class/idle/task-cleanup registration performed by product DLL attach. Trace located null idle provider at RVA0x2c0e5. Bound actual providers; final uninstrumented fixture passed.",
+    "Source reconstruction check handled only one DestroyClass indentation; now asserts and handles both registered guards.",
+    "Full initial console-input-batch link omitted three CCPU/ICA symbols from F composition. Test has no CPU; explicit failfast leaves added to existing test stubs. Full rerun pending.",
+    "Full r2 passed product Console/Window cases then stopped because test-input cache omitted control executables. Rebuilt current Ninja control fixture targets into full-cache; no extra test binary published. Full r3 uses complete input cache."
+  ],
+  "evidence_root": "build/t483-s20-cleanup",
+  "full": {
+    "root": "build\\t483-s20-cleanup\\full-p11-r3",
+    "gates": 20,
+    "elapsed_ms": 396377,
+    "all_passed": true
+  },
+  "limitations": [
+    "S20 remaining77files not complete",
+    "Two historical fixture declaration updates not separately executed"
+  ],
+  "counts": {
+    "files_completed": 17,
+    "files_total": 94,
+    "remaining": 77,
+    "B_C1_unique": 56,
+    "B_C1_raw": 68,
+    "B_C1_compiled_headers": 487,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  }
+}
