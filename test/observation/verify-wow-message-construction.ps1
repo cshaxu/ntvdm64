@@ -14,7 +14,7 @@ $null=New-Item -ItemType Directory $root
 $baseline=if($Transaction){'4b8a7c8ae6eaaca3350d640650dd9d57201fd581'}else{'58fa75e55'}
 $steps=[Collections.Generic.List[object]]::new();$selections=@()
 function Read-Source($path,$old){
- if($old){$baselinePath=$path -replace '^src/mvdm-host/','src/mvdm/';$value=(& git -C $repo show "${baseline}:$baselinePath") -join "`n";if($LASTEXITCODE){throw "Baseline source $path"};return $value}
+ if($old){$baselinePath=$path -replace '^src/mvdm-host/','src/mvdm/';$baselinePath=$baselinePath -replace '^src/compat/include/wow_message_lifetime.h$','src/wow32-dll/include/wow_message_lifetime.h' -replace '^src/compat/wow_message_lifetime.c$','src/wow32-dll/source/wow_message_lifetime.c';$value=(& git -C $repo show "${baseline}:$baselinePath") -join "`n";if($LASTEXITCODE){throw "Baseline source $path"};return $value}
  [IO.File]::ReadAllText((Join-Path $repo $path)).Replace("`r`n","`n")
 }
 function Region($text,$start,$end,$label){
@@ -45,7 +45,7 @@ function Owned($name,$file,$arguments,$seconds,$expected){
 try{
  $fixture="$PSScriptRoot/wow_message_construction_fixture.c"
  Get-FileHash "$repo/src/mvdm-host/inc/wow.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$repo/src/mvdm-host/wow32/wmdisp32.h","$repo/src/mvdm-host/wow32/wmsg16.c","$repo/src/mvdm-host/wow32/wmsgcb.c","$repo/src/compat/include/wow_control_message_abi.h","$repo/src/mvdm-host/wow32/wparam.c","$repo/src/mvdm-host/wow32/walias.h","$repo/src/compat/include/wow_message_lifetime.h","$repo/src/compat/include/wow_message_progress.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
- Get-FileHash "$repo/src/mvdm-host/wow32/wudlg.c","$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/compat/wow_message_lifetime.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
+ Get-FileHash "$repo/src/mvdm-host/wow32/wudlg.c","$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/mvdm-host/wow32/wmdisp32.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
   $lifetime=Read-Source 'src/compat/include/wow_message_lifetime.h' ($old -and $Transaction)
@@ -118,7 +118,13 @@ try{
    foreach($name in @('ThunkCBMsg16','UnThunkCBMsg16')){$bodies+=Body $combo $name}
   }
   if(!$old -or $Transaction){
-   $adapter=Read-Source 'src/compat/wow_message_lifetime.c' $old
+   if($old){$adapter=Read-Source 'src/compat/wow_message_lifetime.c' $true}
+   else {
+    $adapter=Read-Source 'src/mvdm-host/wow32/wmdisp32.c' $false
+    $lifetimeStart=$adapter.IndexOf('#include "compat/include/wow_worker_state.h"')
+    if($lifetimeStart -lt 0){throw 'Missing original-owner message lifetime interval'}
+    $adapter=$adapter.Substring($lifetimeStart)
+   }
    $bodies+=[regex]::Replace($adapter,'(?m)^#include[^\n]*\n','')
   }
   if($Transaction -and !$old){

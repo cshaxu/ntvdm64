@@ -3516,3 +3516,10 @@ for original TD idle registration and separate-launch identity. B owns the callb
 contract and borrows no TD layout; original list lock, publication guard and
 LastError semantics remain unchanged. Owner approved +1 non-error point/+25
 lines; see `artifacts/mvdm-audit/t483-b-c2-dependencies/task-query-provider-decision.json`.
+
+MVDM-HOST-DIV-903: `wow32/wmdisp32.c` now owns the existing seven message
+lifetime operations and internal release helper previously in B. Only C2
+production callers use these operations; original message scratch and TD state
+remain at their owner. No new algorithm, resource map or queue. Owner approved
++1 non-error point/+123 lines. Existing source, #error and #line are unchanged.
+See `artifacts/mvdm-audit/t483-b-c2-dependencies/message-lifetime-provider-review.json`.

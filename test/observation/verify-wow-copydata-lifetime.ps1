@@ -49,8 +49,11 @@ try{
  $bodies+=Body "$original/wmsg16.c" 'ThunkMsg16'
  $bodies+=Body "$original/wumsg.c" 'WU32PostAppMessage'
  foreach($name in @('ThunkCallWndProcHook','ThunkMsgFilterHook')){$bodies+=Body "$original/wowhooks.c" $name}
- $adapter="$repo/src/compat/wow_message_lifetime.c"
- $bodies+=[regex]::Replace([IO.File]::ReadAllText($adapter),'(?m)^#include[^\r\n]*\r?\n','')
+ $adapter="$repo/src/mvdm-host/wow32/wmdisp32.c"
+ $lifetime=[IO.File]::ReadAllText($adapter)
+ $lifetimeStart=$lifetime.IndexOf('#include "compat/include/wow_worker_state.h"')
+ if($lifetimeStart -lt 0){throw 'Missing original-owner message lifetime interval'}
+ $bodies+=[regex]::Replace($lifetime.Substring($lifetimeStart),'(?m)^#include[^\r\n]*\r?\n','')
  $header="$root/copydata_exact_body.h";[IO.File]::WriteAllText($header,($bodies -join "`n`n"),[Text.UTF8Encoding]::new($false))
  # Queue tests use exact conversion intervals, not a reimplementation of the
  # full Get/Peek loop or a claim to validate its protocol failure recovery.

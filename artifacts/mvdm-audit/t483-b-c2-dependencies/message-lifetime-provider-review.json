@@ -2,7 +2,7 @@
   "packet": "M0 T483 S19",
   "file": "src/compat/wow_message_lifetime.c",
   "id": "BC2F032",
-  "status": "complete ownership recommendation; compiled whole-file candidate awaits mirror approval; production unchanged",
+  "status": "owner-approved production migration verified in P19",
   "direct_relationships": 12,
   "finding": "All production callers of seven exported operations are C2; B contains private C2 message-slot ownership, unthunker comparisons and TD stack restoration, not a generic memory manager. Header only has opaque C2 pointer declarations and shared stack snapshot.",
   "direction": "Move seven exported lifetime operations and the internal release_mdi helper to existing original message owner wmdisp32.c; remove B implementation and its build selection. All production consumers are C2. Existing B public header remains the opaque call contract; original message algorithms and TD remain C2.",
@@ -13,7 +13,7 @@
     "Stack rollback verifies live current TD identity and guest task before restoration; never dereference retired TD.",
     "Keep worker-active check supplied by B."
   ],
-  "remaining": "Owner approval for +1 point/+123 lines and owner-local insertion >3 lines, then production move, update existing exact-body fixtures, cached full build, dual11 publication, targeted message construction/COPYDATA/parameter cleanup/real guest tests, commit and push.",
+  "remaining": "No remaining B-to-C2 obligation for BC2F032; general coverage gaps remain explicit in delivery",
   "mirror": {
     "file": "src/mvdm-host/wow32/wmdisp32.c",
     "before": {
@@ -33,8 +33,9 @@
     "candidate_sha256": "91c702322edfb615a9ea26e6f7ab5bc3f4b04687987dc5562f6d5942fe042a59",
     "error_line": "Current mirror bytes unchanged prefix; one append-only block; paired excluded-body parser zero issues."
   },
-  "verification": "Candidate compiles exit0 under actual ninja obj/wmdisp32.obj product command with only input/output substituted. Initial wkman-profile exploratory compile also passed but is not the exact-command proof. No final link, runtime or publication claim.",
+  "verification": "Final cached full x86/x64/reference, dual11, COPYDATA59/filter14/queue18, construction191, parameter54, actual Win16 message/construction and COMMAND return passed",
   "tradeoff": "Adds one123-line mirror block by moving existing logic, not a new algorithm. Keeping implementation in B would require private message-layout projection and function-identity callbacks and preserve C-only ownership at the wrong layer. No independent B caller justifies that extra interface.",
   "evidence_root": "build/t483-s19-message-owner",
-  "next_delivery": "P18 evidence-only; does not close BC2F032 or change dependency counts"
+  "next_delivery": "P19 delivered implementation, supersedes P18 research-only status",
+  "delivery": "p19-delivery.json"
 }

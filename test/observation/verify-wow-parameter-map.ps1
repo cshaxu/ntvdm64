@@ -8,7 +8,7 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or
  $root.StartsWith($repo+'\build\.ccache\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh disposable evidence required'}
 $null=New-Item -ItemType Directory $root
 $baseline='18d0ec060024912e6b03aec69bdded6c9181af03';$selections=@();$steps=@()
-function Read($path,$old){if($old){$baselinePath=$path -replace '^src/mvdm-host/','src/mvdm/';$s=(& git -C $repo show "${baseline}:$baselinePath") -join "`n";if($LASTEXITCODE){throw 'Missing baseline'};return $s};[IO.File]::ReadAllText("$repo/$path").Replace("`r`n","`n")}
+function Read($path,$old){if($old){$baselinePath=$path -replace '^src/mvdm-host/','src/mvdm/';$baselinePath=$baselinePath -replace '^src/compat/include/wow_message_lifetime.h$','src/wow32-dll/include/wow_message_lifetime.h' -replace '^src/compat/wow_message_lifetime.c$','src/wow32-dll/source/wow_message_lifetime.c';$s=(& git -C $repo show "${baseline}:$baselinePath") -join "`n";if($LASTEXITCODE){throw 'Missing baseline'};return $s};[IO.File]::ReadAllText("$repo/$path").Replace("`r`n","`n")}
 function Region($s,$begin,$end,$name){$a=$s.IndexOf($begin,[StringComparison]::Ordinal);$b=if($a -ge 0){$s.IndexOf($end,$a,[StringComparison]::Ordinal)}else{-1};if($a -lt 0 -or $b -lt 0){throw "Missing $name"};$length=$b+$end.Length-$a;$script:selections+=@{name=$name;offset=$a;length=$length};$s.Substring($a,$length)}
 function Body($s,$name){
  $m=[regex]::Matches($s,'(?m)^(?:static\s+)?(?:BOOL|VOID|DWORD|PVOID|ULONG|void)\s+(?:(?:FASTCALL|WINAPI)\s+)?'+[regex]::Escape($name)+'\s*\([^;{}]*\)\s*\{')
@@ -22,7 +22,7 @@ function Run($name,$file,$arguments,$expected,$seconds){
  if(!$p.WaitForExit($seconds*1000)){$p.Kill($true);throw "$name deadline"};$p.Refresh();$row.exit=$p.ExitCode;$row.end=[DateTime]::UtcNow.ToString('o');$script:steps|ConvertTo-Json -Depth 5|Set-Content "$root/steps.json";if($p.ExitCode -ne $expected){throw "$name actual $($p.ExitCode), expected $expected"}
 }
 try{
- $paths=@('src/mvdm-host/inc/wow.h','src/mvdm-host/inc/wowusr.h','src/mvdm-host/inc/wowcmpat.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wmdisp32.h','src/mvdm-host/wow32/wparam.h','src/mvdm-host/wow32/wparam.c','src/mvdm-host/wow32/wmsg16.c','src/mvdm-host/wow32/wmsgcb.c','src/mvdm-host/wow32/wmdisp32.c','src/mvdm-host/wow32/wcntl32.c','src/mvdm-host/wow32/wuwind.c','src/compat/wow_message_lifetime.c','src/compat/include/wow_message_lifetime.h','src/compat/include/wow_message_progress.h','test/observation/wow_parameter_map_fixture.c','test/observation/verify-wow-parameter-map.ps1')
+ $paths=@('src/mvdm-host/inc/wow.h','src/mvdm-host/inc/wowusr.h','src/mvdm-host/inc/wowcmpat.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wmdisp32.h','src/mvdm-host/wow32/wparam.h','src/mvdm-host/wow32/wparam.c','src/mvdm-host/wow32/wmsg16.c','src/mvdm-host/wow32/wmsgcb.c','src/mvdm-host/wow32/wmdisp32.c','src/mvdm-host/wow32/wcntl32.c','src/mvdm-host/wow32/wuwind.c','src/compat/include/wow_message_lifetime.h','src/compat/include/wow_message_progress.h','test/observation/wow_parameter_map_fixture.c','test/observation/verify-wow-parameter-map.ps1')
  $paths|ForEach-Object{Get-FileHash "$repo/$_"}|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Get-FileHash "$repo/src/compat/include/wow_control_message_abi.h"|Export-Csv -NoTypeInformation "$root/control-abi-input.csv"
  foreach($kind in @('baseline','candidate')){
@@ -53,7 +53,7 @@ try{
   $bodies+='BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex){LONG lParam=lpmpex->Parm16.WndProc.lParam;PLONG plParamNew=&lpmpex->lParam;switch(lpmpex->Parm16.WndProc.wMsg){'+"`n"+$case+"`n}return TRUE;}"
   $bodies+='VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex){switch(lpmpex->Parm16.WndProc.wMsg){'+"`n"+$release+"`n}}"
   $bodies+=Body (Read 'src/mvdm-host/wow32/wuwind.c' $old) 'WU32SetWindowText'
-  $lifetime=Read 'src/compat/wow_message_lifetime.c' $old
+  $lifetime=if($old){Read 'src/compat/wow_message_lifetime.c' $true}else{Read 'src/mvdm-host/wow32/wmdisp32.c' $false}
   if(!$old){foreach($name in @('wow_message_free16','release_mdi','wow_message_release32')){$bodies+=Body $lifetime $name}}
   foreach($name in @('wow_message_unwind32','wow_message_unwind16')){$bodies+=Body $lifetime $name}
   [IO.File]::WriteAllText("$dir/parameter_exact.h",($bodies -join "`n`n"))

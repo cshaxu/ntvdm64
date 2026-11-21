@@ -39,7 +39,6 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     "mvdm_softpc_mouse_guest.c",
     'wow_user_private_access.c',
     'wow_common_dialog_calls.c',
-    'wow_message_lifetime.c',
 
     "wow_common_dialog_callback.c",
     'wow_ole_descriptor_binding.c',

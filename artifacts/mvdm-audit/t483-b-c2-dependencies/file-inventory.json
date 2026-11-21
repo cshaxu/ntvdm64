@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P17 completes twenty-eight files; remaining10 include four pending mirror decisions",
+  "status": "P19 completes twenty-nine files; remaining9 include four pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -8254,7 +8254,7 @@
     {
       "id": "BC2F032",
       "file": "src/compat/wow_message_lifetime.c",
-      "status": "ownership recommendation complete; exact product candidate compiles; +1 point/+123 lines approval pending; not delivered",
+      "status": "completed in verified P19 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8697,7 +8697,7 @@
           "product": "wow32.dll"
         }
       ],
-      "review": "message-lifetime-provider-review.json"
+      "review": "p19-delivery.json"
     },
     {
       "id": "BC2F033",

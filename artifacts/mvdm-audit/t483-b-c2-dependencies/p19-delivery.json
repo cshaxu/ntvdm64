@@ -1,0 +1,66 @@
+{
+  "packet": "M0 T483 S19 P19",
+  "baseline": "0930c5cb9",
+  "status": "verified delivery",
+  "file": "src/compat/wow_message_lifetime.c",
+  "id": "BC2F032",
+  "ownership": "Seven exported message lifetime operations and one internal helper move intact to existing original message owner wmdisp32.c. All production callers are C2; B no longer interprets message scratch, unthunker identity or private TD state. Existing B worker-active service remains an inward dependency.",
+  "direct_relationships": {
+    "file_before": 12,
+    "file_after": 0,
+    "B_C2_unique": 214,
+    "B_C2_raw": 230,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 29,
+    "total": 38,
+    "remaining": 9
+  },
+  "mirror": {
+    "file": "src/mvdm-host/wow32/wmdisp32.c",
+    "before": {
+      "points": 72,
+      "lines": 221
+    },
+    "after": {
+      "points": 73,
+      "lines": 344
+    },
+    "delta": {
+      "points": 1,
+      "lines": 123
+    },
+    "cumulative_S19": {
+      "points": 5,
+      "lines": 200
+    },
+    "approval": "Owner approved whole message lifetime placement +1point/+123lines",
+    "error_line_proof": "Existing original file bytes unchanged prefix. Append123lines; existing#error/#line unchanged. Paired exclusion parser zero issues. Normalized moved suffix identical to prior B source, SHA256 60b21f8c7c76d323668d544992babde2887a7f25d2d7f351f6b2106dd93ca42b; registered DIV903/R2726."
+  },
+  "package": "bd52d0ea-4242-4bf1-9a2b-1f3805e61f11",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hash checks",
+  "tests": [
+    "COPYDATA59 scenarios, filter14 and queue18 selector cases pass; exact production function bodies, not guest proof",
+    "Message construction191 scenarios plus historical failing control pass; exact-body transaction/failure cleanup",
+    "Parameter map54 scenarios plus required historical failure markers pass",
+    "Actual USER16 two-task same-worker send/nesting/reply/post/filter/quit/string-copyback, native peer both directions and normal task retirement pass",
+    "Actual MDI created3/destroyed3, textChecks3, title/parameter mutation, WinHelp called1/freed1 pass; fault injection remains exact-body only",
+    "COMMAND actual modern EDIT CtrlQ CMD echo DOS MEM and launcher return pass"
+  ],
+  "audit": "Final B compiled and linked references to C2 from removed lifetime implementation zero. Inward C2 to B worker-active check retained. Generated/assembly coverage limitations explicit; verified raw VDMREDIR identity permits existing map reuse.",
+  "evidence_root": "build/t483-s19-message",
+  "compiled_headers": {
+    "B_C2": 62,
+    "B_C1": 611
+  },
+  "private_search_roots": {
+    "B_C2": 11,
+    "B_C1": 36
+  },
+  "failed_attempts": [
+    "Transaction historical control referenced post-migration compat path absent at original commit. Verified git tree, mapped only old lifetime header/source to original wow32-dll paths; unchanged baseline and candidate assertions then passed."
+  ]
+}
