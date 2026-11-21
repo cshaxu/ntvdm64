@@ -1,5 +1,6 @@
 #include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_menu_client_bindings.h"
+#include "compat/include/opennt_user_multipass.h"
 #include "wow_cleanup_bindings.h"
 #include "compat/include/wow_page_domain.h"
 

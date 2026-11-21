@@ -1,9 +1,7 @@
 #ifndef WOW_DIALOG_NATIVE_BINDINGS_H
 #define WOW_DIALOG_NATIVE_BINDINGS_H
 #include "compat/include/wow_native_dialog.h"
-#define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
-#undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
+struct _LARGE_STRING;
 
 /* ADAPTER-WOW-062: native operation only, after the existing class owner
  * resolved/retained a native atom. Caller retains all descriptors, HWND/class
@@ -17,6 +15,6 @@ VOID WINAPI wow_dialog_zap_active_and_focus(void);
 VOID WINAPI wow_dialog_set_thread_state(DWORD, DWORD);
 BOOL WINAPI wow_dialog_set_system_menu(HWND);
 HWND WINAPI wow_dialog_native_create_window(DWORD ex_style, ATOM class_atom,
-    const LARGE_STRING *title, DWORD style, int x, int y, int width, int height,
+    const struct _LARGE_STRING *title, DWORD style, int x, int y, int width, int height,
     HWND parent, HMENU menu, HANDLE module, LPVOID parameter, DWORD version);
 #endif

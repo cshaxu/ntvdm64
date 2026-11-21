@@ -1,21 +1,12 @@
 #ifndef WOW_NATIVE_TEXT_DESCRIPTOR_H
 #define WOW_NATIVE_TEXT_DESCRIPTOR_H
-#include <windows.h>
-#include <stddef.h>
-#define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
-#undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
-
 #include "compat/include/wow_native_controls.h"
-C_ASSERT(sizeof(LARGE_STRING) == 12);
 
-static __inline void wow_native_text_capture(wow_native_text_descriptor *target,
-    const LARGE_STRING *source)
-{
-    target->length = source->Length;
-    target->maximum_length_and_ansi = source->MaximumLength |
-        (source->bAnsi ? 0x80000000u : 0);
-    target->buffer = (ULONG)(ULONG_PTR)source->Buffer;
-    target->buffer_upper = 0;
-}
+/* The original record stays C-owned; B receives only a synchronous borrow. */
+struct _LARGE_STRING;
+typedef void (WINAPI *wow_text_capture_provider)(wow_native_text_descriptor *,
+    const struct _LARGE_STRING *);
+BOOL WINAPI wow_native_text_bind(wow_text_capture_provider);
+void WINAPI wow_native_text_capture(wow_native_text_descriptor *,
+    const struct _LARGE_STRING *);
 #endif

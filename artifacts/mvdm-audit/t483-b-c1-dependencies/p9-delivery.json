@@ -1,0 +1,66 @@
+{
+  "packet": "M0 T483 S20 P9",
+  "baseline": "dfac690b8",
+  "status": "verified delivery",
+  "files_completed_this_batch": [
+    "BC1F016",
+    "BC1F054",
+    "BC1F062"
+  ],
+  "partially_processed": [
+    "BC1F010/011 shared USER headers: counted-string consumers cleared; other private layout consumers remain",
+    "Menu TYPE_* dependency moved from shared object header to actual menu consumer; not eliminated",
+    "GDI record dependency moved from native text header to actual drawing precomp consumers; not eliminated"
+  ],
+  "counts": {
+    "files_completed": 13,
+    "files_total": 94,
+    "remaining": 81,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70,
+    "B_C1_compiled_headers": 524,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "dependency_delta": {
+    "compiled_C1_header_rows": -17,
+    "direct_unique": 0
+  },
+  "runtime_provider": "B owns wow_text_capture_provider; original chartran.c reads C-owned LARGE_STRING and fills existing modern USER descriptor. F registers before W32DllInitialize; synchronous borrow only. No copied private layout, queued handoff or new object state.",
+  "mirror_delta": {
+    "points": 0,
+    "lines": 14
+  },
+  "mirror_cumulative_S20": {
+    "points": 0,
+    "lines": 138
+  },
+  "mirror": {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+    "before": "2points/3lines",
+    "after": "2points/17lines",
+    "register": "R2744",
+    "line_proof": "14-line insertion before existing #line16; paired error metric reports zero issues; original algorithm and error bodies unchanged"
+  },
+  "package": "01057e8e-ab0e-4c7d-bf69-7b40974f3b83",
+  "publication": "11 images at assets/release and O:/winnt/system32;22 hashes verified",
+  "build": "cached full x86/x64/reference passed after fixing formerly transitive includes",
+  "tests": [
+    "Original string fixture including actual C provider ANSI/Unicode/length/pointer/error preservation passed",
+    "text_measure_failure_failures=0",
+    "Real Win16 native extension and COMMAND modern EDIT/CMD/DOS MEM return passed",
+    "Final boundary controls/product graphs/22hashes/frontend ownership/document gates passed before record update"
+  ],
+  "failed_attempts": [
+    "First product build exposed menu TYPE_* and drawing POLYPATBLT transitive consumers; moved includes to actual consumers, retained as unresolved dependencies",
+    "Second build exposed second drawing precomp and dialog transitive USER dependence; corrected actual consumers; final full build passed"
+  ],
+  "evidence_root": "build/t483-s20-user-text",
+  "limitations": [
+    "Shared USER header group remains open; 58 direct relationships are not 81 remaining files",
+    "Historical standalone edit/dialog fixtures updated for new provider registration but not separately executed; actual Win16 native-extension execution passed",
+    "Static assembler/generated-alias coverage limitations remain; no expanded coverage claimed"
+  ]
+}

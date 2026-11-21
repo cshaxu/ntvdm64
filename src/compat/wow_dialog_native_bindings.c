@@ -1,15 +1,10 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_dialog_native_bindings.h"
 #include "wow_native_text_descriptor.h"
 #include <stddef.h>
 #include "wow_user_object_bindings.h"
 
-C_ASSERT(sizeof(LARGE_STRING) == 12);
-C_ASSERT(sizeof(LARGE_UNICODE_STRING) == sizeof(LARGE_STRING));
-C_ASSERT(offsetof(LARGE_STRING, Buffer) == 8);
-
 HWND WINAPI wow_dialog_native_create_window(DWORD ex_style, ATOM class_atom,
-    const LARGE_STRING *title, DWORD style, int x, int y, int width, int height,
+    const struct _LARGE_STRING *title, DWORD style, int x, int y, int width, int height,
     HWND parent, HMENU menu, HANDLE module, LPVOID parameter, DWORD version)
 {
     wow_native_text_descriptor native_title;

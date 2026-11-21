@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 10,
+    "completed": 13,
     "direct_unique": 58,
     "direct_raw": 70,
-    "compiled_header_rows": 541,
+    "compiled_header_rows": 524,
     "private_search_root_rows": 0
   },
   "files": [
@@ -1107,7 +1107,7 @@
     {
       "id": "BC1F010",
       "file": "src/compat/include/opennt_user_multipass.h",
-      "status": "not yet audited",
+      "status": "in progress: shared consumer chain; P9 clears text subgroup only",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1134,7 +1134,7 @@
     {
       "id": "BC1F011",
       "file": "src/compat/include/opennt_usercli_multipass.h",
-      "status": "not yet audited",
+      "status": "in progress: shared consumer chain; P9 clears text subgroup only",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1269,7 +1269,7 @@
     {
       "id": "BC1F016",
       "file": "src/compat/include/wow_edit_native_bindings.h",
-      "status": "not yet audited",
+      "status": "completed in verified P9 delivery",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1301,7 +1301,8 @@
           "evidence": "non-mvdm/public/internal/windows/inc/wingdip.h",
           "product": ""
         }
-      ]
+      ],
+      "delivery": "p9-delivery.json"
     },
     {
       "id": "BC1F017",
@@ -5227,7 +5228,7 @@
     {
       "id": "BC1F054",
       "file": "src/compat/wow_dialog_native_bindings.c",
-      "status": "not yet audited",
+      "status": "completed in verified P9 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -5319,7 +5320,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "delivery": "p9-delivery.json"
     },
     {
       "id": "BC1F055",
@@ -6263,7 +6265,7 @@
     {
       "id": "BC1F062",
       "file": "src/compat/wow_edit_native_bindings.c",
-      "status": "not yet audited",
+      "status": "completed in verified P9 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -6365,7 +6367,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "delivery": "p9-delivery.json"
     },
     {
       "id": "BC1F063",

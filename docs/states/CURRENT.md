@@ -199,13 +199,12 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json):
-94 files,6 completed,88 remaining. Current B-to-C1:58 unique/70 relocation
-records,555 compiled header rows,20 search-root rows. Header-only consumers
-are included; these counts are different evidence kinds, not interchangeable.
-Next file:src/compat/include/control-client/precomp.h. Preserve C1/C2 original connections
-and keep B-to-C2 direct/header/search violations at zero.
-S19 cumulative approved non-error mirror increment:+12points/+574lines;
-S20 cumulative increment:0points/+92lines. No new same-thread queues/state machines.
+94 files,13 completed,81 remaining. B-to-C1:58 unique/70 relocation
+records,524 compiled header rows,0 private search-root rows. These are separate
+metrics, not additive counts. B-to-C2 direct/header/search remains0.
+DIR work remains at BC1F010/011 shared USER consumer group; three P9 text
+consumers are complete, other consumers remain open. S20 cumulative non-error
+mirror increment0points/+138lines; S19 retained increment+12points/+574lines.
 
 [S20 P1 review](../../artifacts/mvdm-audit/t483-b-c1-dependencies/base-dispatch-review.json)
 is implemented by [P2](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p2-delivery.json):
@@ -257,3 +256,12 @@ F only assembles it. No duplicate state or queue. Mirror batch delta0points/+32l
 S20 cumulative0points/+124lines (R2742/R2743). Cached full build, dual11,
 59CCPU cases, classifier and actual Win16/COMMAND passed; final gates passed.
 [Delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p8-delivery.json).
+
+P9 text subgroup: BC1F016/054/062 complete; original LARGE_STRING stays C-owned,
+B receives an opaque pointer and synchronous typed conversion callback.
+Compiled C1 header rows541->524; direct58 remains unchanged. Menu/GDI transitive
+includes were made explicit at their actual consumers and are not counted as
+eliminated. Cached full, dual11, original string/measure and real Win16/COMMAND
+passed; final gates passed. Mirror0points/+14lines (R2744). Publication package
+01057e8e-ab0e-4c7d-bf69-7b40974f3b83. P9 is the delivery commit.
+[Delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p9-delivery.json).

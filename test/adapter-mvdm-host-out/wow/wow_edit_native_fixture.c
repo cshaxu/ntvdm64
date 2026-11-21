@@ -1,3 +1,12 @@
+#include "compat/include/wow_native_text_descriptor.h"
+#define WOW_ORIGINAL_LARGE_STRING_LAYOUT
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
+#include "non-mvdm/public/internal/windows/inc/wingdip.h"
+void WINAPI wow_original_text_capture(wow_native_text_descriptor *, const LARGE_STRING *);
+C_ASSERT(sizeof(CHWIDTHINFO) == 12);
+C_ASSERT(sizeof(POLYPATBLT) == 20);
+C_ASSERT(FIELD_OFFSET(POLYPATBLT, BrClr) == 16);
 #include "wow_edit_native_bindings.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_edit_drawing_bindings.h"
@@ -701,6 +710,7 @@ static DWORD WINAPI connect_thread_fixture(void *unused)
 
 int main(void)
 {
+    if (!wow_native_text_bind(wow_original_text_capture)) return 3;
     WNDCLASSA cls = {0};
     HWND window;
     DWORD cpd, error;

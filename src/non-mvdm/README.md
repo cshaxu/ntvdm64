@@ -2736,3 +2736,9 @@ S20 P8 classifier ownership (verified): the unchanged
 three-line x86 guest classification gate moves from the B forced header into
 vdm.c after native declarations and before original #line27. Both forced
 includes are removed. Non-error19points/577lines ->19points/580lines; R2742.
+
+S20 P9 text descriptor boundary: chartran.c owns the original LARGE_STRING
+field projection into the existing modern USER descriptor. B uses an opaque
+borrow and one typed callback, registered before DLL initialization. Original
+conversion bodies and #line16 are unchanged. Non-error2points/3lines becomes
+2points/17lines (+0points/+14lines), registered R2744; real Win16 verified.

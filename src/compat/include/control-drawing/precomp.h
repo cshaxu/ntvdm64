@@ -2,6 +2,7 @@
 #define WOW_CONTROL_DRAWING_PRECOMP_H
 #include "wow_edit_drawing_bindings.h"
 #include "wow_edit_native_bindings.h"
+#include "non-mvdm/public/internal/windows/inc/wingdip.h"
 #include "wow_edit_entry_bindings.h"
 #define COLOR_MAX WOW_EDIT_COLOR_COUNT
 #include "compat/include/opennt_user_multipass.h"

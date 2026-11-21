@@ -3,7 +3,6 @@
 
 #include "compat/include/wow_window_capture.h"
 #include <windows.h>
-#include "compat/include/opennt_user_multipass.h"
 struct wow_task_order_thread;
 struct wow_cleanup_window;
 typedef struct wow_cleanup_handle {

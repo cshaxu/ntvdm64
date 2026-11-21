@@ -1,12 +1,26 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_edit_native_bindings.h"
 #include "wow_native_text_descriptor.h"
 
-C_ASSERT(sizeof(CHWIDTHINFO) == 12);
-C_ASSERT(sizeof(POLYPATBLT) == 20);
-C_ASSERT(offsetof(POLYPATBLT, BrClr) == 16);
+static wow_text_capture_provider text_capture;
 
-BOOL WINAPI wow_edit_native_NtUserDefSetText(HWND window, const LARGE_STRING *text)
+BOOL WINAPI wow_native_text_bind(wow_text_capture_provider capture)
+{
+    if (!capture || (text_capture && text_capture != capture)) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    text_capture = capture;
+    return TRUE;
+}
+
+void WINAPI wow_native_text_capture(wow_native_text_descriptor *target,
+    const struct _LARGE_STRING *source)
+{
+    if (!text_capture) RaiseFailFastException(NULL, NULL, 0);
+    text_capture(target, source);
+}
+
+BOOL WINAPI wow_edit_native_NtUserDefSetText(HWND window, const struct _LARGE_STRING *text)
 {
     wow_native_text_descriptor native_text;
     if (!wow_edit_native_ready()) return FALSE;

@@ -3,6 +3,7 @@
 #include "wow_control_draw_state.h"
 #include "wow_edit_drawing_bindings.h"
 #include "wow_edit_native_bindings.h"
+#include "non-mvdm/public/internal/windows/inc/wingdip.h"
 #include <wchar.h>
 #include "compat/include/wow_control_resource_abi.h"
 #define ghdcGray (wow_control_draw_current->gray_dc)

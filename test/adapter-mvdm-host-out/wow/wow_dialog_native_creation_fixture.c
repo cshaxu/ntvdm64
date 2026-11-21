@@ -1,3 +1,12 @@
+#include "compat/include/wow_native_text_descriptor.h"
+#define WOW_ORIGINAL_LARGE_STRING_LAYOUT
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
+#include "non-mvdm/public/internal/windows/inc/wingdip.h"
+void WINAPI wow_original_text_capture(wow_native_text_descriptor *, const LARGE_STRING *);
+C_ASSERT(sizeof(CHWIDTHINFO) == 12);
+C_ASSERT(sizeof(POLYPATBLT) == 20);
+C_ASSERT(FIELD_OFFSET(POLYPATBLT, BrClr) == 16);
 #include "wow_dialog_native_bindings.h"
 #include "wow_native_text_descriptor.h"
 #include <stdio.h>
@@ -108,6 +117,7 @@ static void run_creation(ATOM atom, HINSTANCE module, BOOL ansi_creator,
 
 int main(void)
 {
+    if (!wow_native_text_bind(wow_original_text_capture)) return 3;
     HINSTANCE module = GetModuleHandleW(NULL);
     WNDCLASSEXW registration = {sizeof(registration)};
     ATOM atom;

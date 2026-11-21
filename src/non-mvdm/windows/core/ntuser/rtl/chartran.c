@@ -14,6 +14,20 @@
 \***************************************************************************/
 
 #include "compat/include/wow_char_conversion_abi.h"
+#include "compat/include/wow_native_text_descriptor.h"
+/* DIVERGENCE: retain original counted-string interpretation at its owner. */
+C_ASSERT(sizeof(LARGE_STRING) == 12);
+C_ASSERT(sizeof(LARGE_UNICODE_STRING) == sizeof(LARGE_STRING));
+C_ASSERT(FIELD_OFFSET(LARGE_STRING, Buffer) == 8);
+void WINAPI wow_original_text_capture(wow_native_text_descriptor *target,
+    const LARGE_STRING *source)
+{
+    target->length = source->Length;
+    target->maximum_length_and_ansi = source->MaximumLength |
+        (source->bAnsi ? 0x80000000u : 0);
+    target->buffer = (ULONG)(ULONG_PTR)source->Buffer;
+    target->buffer_upper = 0;
+}
 #line 16
 extern __declspec(dllimport) USHORT NlsAnsiCodePage;
 #line 17

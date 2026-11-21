@@ -15,8 +15,33 @@ BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
 BOOL RtlMBMessageWParamCharToWCS(DWORD, PDWORD);
 BOOL RtlWCSMessageWParamCharToMB(DWORD, PDWORD);
 USHORT WINAPI OpenNtUserThreadCodePage(VOID);
+#include "compat/include/wow_native_text_descriptor.h"
+void WINAPI wow_original_text_capture(wow_native_text_descriptor *, const LARGE_STRING *);
 static int failures;
 #define CHECK(x) do { if (!(x)) { printf("FAIL line %d: %s\n", __LINE__, #x); ++failures; } } while (0)
+static void descriptor_contract(void)
+{
+    LARGE_STRING original = {0};
+    wow_native_text_descriptor native;
+    WCHAR text[] = L"bounded";
+    unsigned ansi;
+    CHECK(!wow_native_text_bind(NULL));
+    CHECK(wow_native_text_bind(wow_original_text_capture));
+    for (ansi = 0; ansi < 2; ++ansi) {
+        original.Length = 4;
+        original.MaximumLength = 0x7fffffff;
+        original.bAnsi = ansi;
+        original.Buffer = text;
+        memset(&native, 0xa5, sizeof(native));
+        SetLastError(0x447120);
+        wow_native_text_capture(&native, &original);
+        CHECK(native.length == 4 && native.buffer == (ULONG)(ULONG_PTR)text);
+        CHECK(native.buffer_upper == 0);
+        CHECK(native.maximum_length_and_ansi == (0x7fffffffu | (ansi << 31)));
+        CHECK(GetLastError() == 0x447120 && original.Length == 4);
+    }
+    CHECK(wow_native_text_bind(wow_original_text_capture));
+}
 static void message_character_contract(void)
 {
     static const UINT messages[] = { WM_CHAR, WM_CHARTOITEM,
@@ -151,6 +176,7 @@ int main(void)
     RtlInitLargeAnsiString(&ansi, NULL, (UINT)-1);
     CHECK(!ansi.Buffer && !ansi.Length && !ansi.MaximumLength && ansi.bAnsi);
     password_transform_boundary();
+    descriptor_contract();
     message_character_contract();
     mnemonic_prefix_contract();
     mnemonic_extent_contract();
