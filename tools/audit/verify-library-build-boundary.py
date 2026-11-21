@@ -29,6 +29,9 @@ def ninja(directory, tool, *args):
 WOW_USER_EXCEPTIONS = {"wow_dialog_lookup.c", "wow_object_ownership.c"}
 
 
+# S19 removed C2 search paths; original NT ABI remains an S20 obligation.
+C1_LAYOUT_ADAPTERS = {"mvdm_monitor_printer.c"}
+
 ORIGINAL_LAYOUT_ADAPTERS = {
     "base_process.c",
     "mvdm_softpc_text_video.c",
@@ -41,7 +44,6 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     'wow_message_lifetime.c',
 
     "wow_common_dialog_callback.c",
-    'mvdm_monitor_printer.c',
     'mvdm_vdm_tib.c',
     'wow_ole_descriptor_binding.c',
     'mvdm_cvidc_vector_binding.c',
@@ -136,6 +138,8 @@ def allowed_roots(owner, source=""):
         roots.update(BASE_DISPATCH_HEADERS)
     if owner == "compat" and source in ORIGINAL_LAYOUT_ADAPTERS:
         roots.update(ROOT / "src" / layer for layer in ("mvdm-host", "non-mvdm"))
+    if owner == "compat" and source in C1_LAYOUT_ADAPTERS:
+        roots.add(ROOT / "src/non-mvdm")
     return roots
 
 
@@ -167,7 +171,7 @@ def verify(graph, products):
         roots = {ROOT / "src"} | allowed_roots(owner, source)
         for path in re.finditer(r'(?:^| )/I\s*(?:"([^"]+)"|(\S+))', line, re.I):
             if not any((directory / (path[1] or path[2])).resolve() == r or
-                       (owner == "compat" and source in ORIGINAL_LAYOUT_ADAPTERS and
+                       (owner == "compat" and source in (ORIGINAL_LAYOUT_ADAPTERS | C1_LAYOUT_ADAPTERS) and
                         (directory / (path[1] or path[2])).resolve().is_relative_to(r) and
                         r != ROOT / "src") for r in roots) and not any(
                     (directory / (path[1] or path[2])).resolve() == h.parent

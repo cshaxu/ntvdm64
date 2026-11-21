@@ -47,6 +47,15 @@ class BoundaryTest(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     self.check_unit(source, "src/mvdm-host/softpc.new/base/ccpu386/c_main.h")
 
+    def test_printer_keeps_C1_but_rejects_C2(self):
+        self.check_unit("mvdm_monitor_printer.c", "src/non-mvdm/public/internal/base/inc/vdm.h",
+                        include="src/non-mvdm/public/internal/base/inc")
+        with self.assertRaises(ValueError):
+            self.check_unit("mvdm_monitor_printer.c", "src/mvdm-host/inc/doswow.h")
+        with self.assertRaises(ValueError):
+            self.check_unit("mvdm_monitor_printer.c", "src/compat/include/monitor_context.h",
+                            include="src/mvdm-host/inc")
+
     def test_named_adapter_cannot_read_outer_layers(self):
         for layer in ("common", "frontend-base", "ntvdm-exe"):
             with self.subTest(layer=layer), self.assertRaises(ValueError):

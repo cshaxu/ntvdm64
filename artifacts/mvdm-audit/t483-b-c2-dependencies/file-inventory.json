@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P3 completes seven files; remaining31 include two pending mirror decisions",
+  "status": "P4 completes eight files; remaining30 include two pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -2754,7 +2754,8 @@
     {
       "id": "BC2F008",
       "file": "src/compat/mvdm_monitor_printer.c",
-      "status": "not yet audited",
+      "status": "C2 boundary cleared in P4; C1 ABI remains for S20",
+      "review": "p4-delivery.json",
       "evidence": [
         {
           "kind": "search-paths",

@@ -1367,7 +1367,10 @@ $openntRtlObjects = foreach ($name in $openntRtlNames) {
 }
 $kernelVdmPrinterObject = 'obj/kernel-vdm/mvdm_monitor_printer.obj'
 $graph.Add('build ' + $kernelVdmPrinterObject + ': cc ' + (NinjaPath $kernelVdmPrinterSource))
-$graph.Add('  cflags = ' + $compatCcpuFlags)
+$printerAbiIncludes = $softpcIncludeRootPaths | Where-Object {
+    $_ -match '^src/(compat|non-mvdm)(/|$)'
+} | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + ($printerAbiIncludes -join ' '))
 $openntNetlibObjects = foreach ($name in $openntNetlibNames) {
     $object = 'obj/opennt-netlib/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $openntNetlibRoot $name)))

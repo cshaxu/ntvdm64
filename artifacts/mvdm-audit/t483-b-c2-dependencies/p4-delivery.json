@@ -1,0 +1,53 @@
+{
+  "packet": "M0 T483 S19 P4",
+  "status": "verified P4 delivery",
+  "baseline": "bed781970",
+  "file": "src/compat/mvdm_monitor_printer.c",
+  "conclusion": "No C2 function/header provider was used; removed all nine C2 search roots from actual product/reference commands. C1 NT/VDM ABI remains explicitly allowed until S20. Product source is unchanged.",
+  "counts_B_C2": {
+    "linked-relocations": {
+      "records": 575,
+      "unique": 316
+    },
+    "compiled-headers": {
+      "records": 112,
+      "unique": 112
+    },
+    "search-paths": {
+      "records": 29,
+      "unique": 29
+    }
+  },
+  "progress": {
+    "total": 38,
+    "completed": 8,
+    "remaining": 30
+  },
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "c96322b8-8eef-4d2b-ad5e-b142c1e9b07b",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "boundary_negative_controls": 7,
+    "audit": 0,
+    "real_command_native_edit_return": 0,
+    "final_checks": 0,
+    "published_image_hashes": 22
+  },
+  "attempts": [
+    "First root filter accidentally omitted B compat support headers needed by original NT ABI. Preserved compat roots and removed C2 only; both complete builds then passed."
+  ],
+  "evidence_root": "build\\t483-s19-printer-boundary"
+}
