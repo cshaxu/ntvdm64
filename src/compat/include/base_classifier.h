@@ -3,8 +3,8 @@
  * No classifier policy or PE parser is implemented here. */
 #ifndef OPENNT_BASE_CLASSIFIER_H
 #define OPENNT_BASE_CLASSIFIER_H
-#include "non-mvdm/public/sdk/inc/nturtl.h"
-#include "non-mvdm/base/win32/inc/basevdm.h"
+#include <windows.h>
+#include <winternl.h>
 /* Private symbols avoid colliding with Kernel32 GetBinaryType imports. */
 #define GetBinaryTypeA OpenNtBaseGetBinaryTypeA
 #define GetBinaryTypeW OpenNtBaseGetBinaryTypeW

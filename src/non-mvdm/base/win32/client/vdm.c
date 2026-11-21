@@ -42,6 +42,7 @@ static VOID BaseSetLastNTError(NTSTATUS Status)
 
 #if defined(OPENNT_BASE_CLIENT_CLASSIFIER)
 #include <base_classifier.h>
+#include "non-mvdm/base/win32/inc/basevdm.h"
 #line 27
 BOOL
 APIENTRY

@@ -199,13 +199,13 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json):
-94 files,3 completed,91 remaining. Current B-to-C1:58 unique/70 relocation
+94 files,4 completed,90 remaining. Current B-to-C1:58 unique/70 relocation
 records,555 compiled header rows,20 search-root rows. Header-only consumers
 are included; these counts are different evidence kinds, not interchangeable.
-Next file:src/compat/include/base_classifier.h. Preserve C1/C2 original connections
+Next file:src/compat/include/base_client.h. Preserve C1/C2 original connections
 and keep B-to-C2 direct/header/search violations at zero.
 S19 cumulative approved non-error mirror increment:+12points/+574lines;
-S20 cumulative increment:0points/+84lines. No new same-thread queues/state machines.
+S20 cumulative increment:0points/+85lines. No new same-thread queues/state machines.
 
 [S20 P1 review](../../artifacts/mvdm-audit/t483-b-c1-dependencies/base-dispatch-review.json)
 is implemented by [P2](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p2-delivery.json):
@@ -227,3 +227,9 @@ removed B forwarding header and9 resolved C1 include rows(3targets); direct
 call counts unchanged. Cached full, dual11, capture3463 and actual Win16/COMMAND
 passed. Final11 controls/9 product graphs,22 hashes and governance passed;
 mirror0points/+5lines, R2738.
+
+[P5 classifier header](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p5-delivery.json):
+B private C1 includes2/14 resolved rows ->0. Original classifier now owns its
+basevdm.h include (+0points/+1line,R2739). Cached full, dual11 and original
+classifier fixture plus real Win16/COMMAND passed. Final11 controls/9 product
+graphs,22 hashes and governance passed.

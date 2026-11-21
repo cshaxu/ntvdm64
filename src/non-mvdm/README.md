@@ -2716,3 +2716,8 @@ OPENNT-HOST-031 capture include refinement (S20 P4): csrutil.c now imports
 its original NT/CSR types directly and borrows only CsrPortHeap from B. The
 B forwarding header is removed; allocation bodies and #line265 unchanged.
 Non-error8points/457lines ->8points/462lines; R2738 records the retained boundary.
+
+S20 P5 classifier boundary: vdm.c directly includes original basevdm.h in
+the classifier branch, instead of receiving it through B base_classifier.h.
+Real builds require its DOS binary-kind constants. No algorithm changes;
+#line27 retained. Non-error19points/569lines ->19points/570lines; R2739.

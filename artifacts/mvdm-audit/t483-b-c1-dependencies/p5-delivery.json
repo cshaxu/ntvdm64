@@ -1,0 +1,77 @@
+{
+  "packet": "M0 T483 S20 P5",
+  "baseline": "afc91772a",
+  "status": "verified delivery",
+  "id": "BC1F004",
+  "file": "src/compat/include/base_classifier.h",
+  "ownership": "B classifier declarations use modern Windows SDK types, not C1 headers. Original C1 classifier includes its own basevdm.h for three binary-kind constants; original algorithms unchanged. Shared SECTION_IMAGE_INFORMATION describes native NT section API; no new algorithm, callback, queue or record state.",
+  "counts": {
+    "files_completed": 4,
+    "files_total": 94,
+    "remaining": 90,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70,
+    "B_C1_compiled_headers": 555,
+    "B_C1_search_roots": 20,
+    "B_C2_unique": 0,
+    "B_C2_raw": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "file_change": {
+    "literal_header_targets_before": 2,
+    "literal_header_targets_after": 0,
+    "resolved_header_rows_before": 14,
+    "resolved_header_rows_after": 0
+  },
+  "mirror": {
+    "path": "src/non-mvdm/base/win32/client/vdm.c",
+    "before": {
+      "points": 19,
+      "lines": 569
+    },
+    "after": {
+      "points": 19,
+      "lines": 570
+    },
+    "delta": {
+      "points": 0,
+      "lines": 1
+    },
+    "cumulative_S20": {
+      "points": 0,
+      "lines": 85
+    },
+    "approval": "Standing small mirror approval; R2739 retained for revisit.",
+    "error_line": "One include in classifier branch before existing #line27. Removing it restores baseline bytes; algorithms and all existing error/line structures unchanged. Paired parser zero issues."
+  },
+  "package": "4a2f8a62-6d68-4c6d-9489-1f50cb5576d6",
+  "build": "cached full x86/x64/reference passed",
+  "publication": "dual11 release with22 verified hashes",
+  "tests": [
+    "Existing original_classifier fixture passed with current product archives: MEM/COMMAND/EDIT.COM/Win16 WRITE, absolute and relative PE, DLL rejection, suffixes and missing file. Added cached target and checked-in bounded runner.",
+    "Published package actual Win16 native extension/messages and normal retirement plus COMMAND EDIT/CMD/MEM and return passed."
+  ],
+  "limitations": [
+    "No full Win3.1/Win95 matrix claimed.",
+    "Original classifier fixture is x86; both production architecture graphs compile and link."
+  ],
+  "evidence_root": "build/t483-s20-base-classifier",
+  "gate": "11 boundary controls,9 product graphs,dual22 hashes,frontend ownership,governance/links and diff check passed(final exit0).",
+  "final_inputs": {
+    "src/compat/include/base_classifier.h": "20febdd557b45f596346ef04205a486205e834881b5fe01fc60488ed88be1f27",
+    "src/non-mvdm/base/win32/client/vdm.c": "52f64439d44ec7a6a01f4895d449fb520b93118d79b7e06ff582f9585d23d174",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "d8c5a0c314924236215b29db61bfb1335295f869ad1b714ef4e685e438e42794",
+    "test/adapter-basesrv/verify-original-classifier.ps1": "ae4d18a64bf06af35fe9002f67f23cc9048609ba8baf69580e9c988bc53743cc"
+  },
+  "failed_attempts": [
+    {
+      "name": "x86/x64",
+      "cause": "Removing transitive B headers exposed missing original BINARY_TYPE_DOS constants in C1; restored explicit original C1 include."
+    },
+    {
+      "name": "x64-fixed",
+      "cause": "Hook compile does not have short basevdm.h search root; explicit existing repository-relative C1 path fixes it without widening B paths."
+    }
+  ]
+}
