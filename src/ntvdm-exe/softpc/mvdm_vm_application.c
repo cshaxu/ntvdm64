@@ -1,6 +1,6 @@
 #include "mvdm_vm_continuation.h"
 #include "compat/include/console_io.h"
-#include "ntvdm-exe/frontend/vm_text.h"
+#include "compat/include/mvdm_vm_text.h"
 
 DWORD mvdm_vm_application_publish(mvdm_vm_continuation *request,
     const void *bytes, uint32_t size, const HANDLE cancellation[4])

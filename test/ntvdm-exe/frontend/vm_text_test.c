@@ -1,4 +1,4 @@
-#include "ntvdm-exe/frontend/vm_text.h"
+#include "compat/include/mvdm_vm_text.h"
 #include "compat/include/native_console_text_frame.h"
 #include <stdio.h>
 #include <string.h>

@@ -1,5 +1,5 @@
 #include "compat/include/native_console_text_frame.h"
-#include "frontend-base/video.h"
+#include "compat/include/console_video_buffer.h"
 #include <stdio.h>
 #include <string.h>
 

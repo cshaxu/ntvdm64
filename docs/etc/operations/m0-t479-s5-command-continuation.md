@@ -858,7 +858,7 @@ Production BOP11 admission and executor/provider composition remain open.
 
 ## Shared video receiver (runs74--78)
 
-Move NTCON's video receiver to common/frontend-base/video.c and video.h,
+Move NTCON's video receiver to common/compat/console_video_buffer.c and video.h,
 retaining every algorithm statement; comparison against HEAD after the sole
 include-path substitution passes (line endings normalized for comparison).
 The shared archive owns this implementation. NTCON retains display/commit

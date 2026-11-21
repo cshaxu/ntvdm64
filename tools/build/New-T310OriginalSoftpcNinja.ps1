@@ -1681,7 +1681,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ntvdm-command-launch-test.exe: broker_test_link obj/tests/ntvdm_command_launch.obj obj/adapter-win32/command_process_compat.obj obj/compat/command_services.obj obj/adapter-basesrv/mvdm_command_launch_request.obj lib-process-launch.lib')
     $graph.Add('build obj/tests/ntvdm_command_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_capture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/compat/guest_memory_lease.obj obj/compat/host_context.obj obj/tests/ntvdm_command_capture.obj obj/compat/mvdm_vm_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/compat/guest_location.obj obj/worker/vm_text.obj obj/frontend-base/video.obj')
+    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/compat/guest_memory_lease.obj obj/compat/host_context.obj obj/tests/ntvdm_command_capture.obj obj/compat/mvdm_vm_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/compat/guest_location.obj obj/compat/mvdm_vm_text.obj obj/compat/console_video_buffer.obj')
     $graph.Add('build obj/tests/ntvdm_command_directory.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/basesrv/t394_s4_command_scalar_state_fixture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvdm-command-directory-test.exe: broker_test_link obj/tests/ntvdm_command_directory.obj obj/adapter-basesrv/mvdm_command_guest_state.obj obj/compat/guest_location.obj session.lib')
@@ -1791,22 +1791,22 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  command = link.exe /nologo /subsystem:console /entry:wWinMainCRTStartup /opt:ref /out:$out /map:$out.map $in rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib')
     $graph.Add('build obj/frontend/console_frontend.obj: cc ' + (NinjaPath (Join-Path $frontendRoot 'console_frontend.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/frontend-base/video.obj: cc ' + (NinjaPath (Join-Path $root 'src/frontend-base/video.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/compat/console_video_buffer.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/console_video_buffer.c')))
+    $graph.Add('  cflags = ' + $libraryFlags)
     $graph.Add('build obj/frontend-base/channel.obj: cc ' + (NinjaPath (Join-Path $root 'src/frontend-base/channel.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/frontend-base/service.obj: cc ' + (NinjaPath (Join-Path $root 'src/frontend-base/service.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build frontend-base.lib: lib obj/frontend-base/channel.obj obj/frontend-base/service.obj obj/frontend-base/video.obj')
+    $graph.Add('build frontend-base.lib: lib obj/frontend-base/channel.obj obj/frontend-base/service.obj obj/compat/console_video_buffer.obj')
     $graph.Add('build obj/tests/frontend_base_video.obj: cc ' + (NinjaPath (Join-Path $root 'test/frontend-base/video_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker/vm_frontend.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/frontend/vm_frontend.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker/vm_host.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/frontend/vm_host.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build obj/worker/vm_text.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/frontend/vm_text.c')))
-    $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvdm-vm-frontend.lib: lib obj/worker/vm_frontend.obj obj/worker/vm_host.obj obj/worker/vm_text.obj')
+    $graph.Add('build obj/compat/mvdm_vm_text.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_vm_text.c')))
+    $graph.Add('  cflags = ' + $libraryFlags)
+    $graph.Add('build ntvdm-vm-frontend.lib: lib obj/worker/vm_frontend.obj obj/worker/vm_host.obj obj/compat/mvdm_vm_text.obj')
     $graph.Add('build obj/tests/vm_frontend.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/frontend/vm_frontend_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/frontend_base_channel.obj: cc ' + (NinjaPath (Join-Path $root 'test/frontend-base/channel_test.c')))
@@ -2682,7 +2682,7 @@ sources = @('src/common/protocol/native_hook.h', 'src/nthook-dll/hook.h', 'src/n
         buildInput = $NativeFrontend
         sourceClosure = 'ntcon-source-closure'
         disposition = 'independent authenticated visible presentation owner; no native backend, parser or helper'
-        sources = @('src/ntcon-exe/main.c', 'src/common/protocol/frontend_protocol.h', 'src/ntcon-exe/frontend_session.c', 'src/ntcon-exe/frontend_session.h', 'src/ntcon-exe/console_frontend.c', 'src/ntcon-exe/console_frontend.h', 'src/frontend-base/video.c', 'src/frontend-base/video.h', 'src/ntcon-exe/console_channel.c', 'src/ntcon-exe/console_channel.h', 'src/compat/include/console_video.h', 'src/compat/include/console_io.h' | ForEach-Object {
+        sources = @('src/ntcon-exe/main.c', 'src/common/protocol/frontend_protocol.h', 'src/ntcon-exe/frontend_session.c', 'src/ntcon-exe/frontend_session.h', 'src/ntcon-exe/console_frontend.c', 'src/ntcon-exe/console_frontend.h', 'src/compat/console_video_buffer.c', 'src/compat/include/console_video_buffer.h', 'src/ntcon-exe/console_channel.c', 'src/ntcon-exe/console_channel.h', 'src/compat/include/console_video.h', 'src/compat/include/console_io.h' | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }
         })
     }

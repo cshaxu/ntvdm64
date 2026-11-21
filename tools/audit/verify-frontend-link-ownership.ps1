@@ -317,8 +317,11 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if ('lib/kvm-window/win32/component.c' -notin @(Get-FrontendSources 'ntcon.exe' 'lib-nxvm')) { throw 'ntcon.exe omits shared window implementation' }
     foreach($target in @('frontend-base.lib','ntcon.exe','ntvdm.exe')) {
         $sources = @(Get-FrontendSources $target 'frontend-base')
-        if (@(Compare-Object @('channel.c','service.c','video.c') $sources).Count) {
+        if (@(Compare-Object @('channel.c','service.c') $sources).Count) {
             throw "Unexpected frontend-base source ownership in $target"
+        }
+        if ('console_video_buffer.c' -notin @(Get-FrontendSources $target 'compat')) {
+            throw "$target omits the B-owned video buffer"
         }
     }
 }

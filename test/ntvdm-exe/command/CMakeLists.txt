@@ -15,8 +15,8 @@ add_executable(mvdm-command-capture-test
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_command.c"
   "${CMAKE_SOURCE_DIR}/src/compat/guest_location.c"
   "${CMAKE_SOURCE_DIR}/src/compat/host_context.c"
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/frontend/vm_text.c"
-  "${CMAKE_SOURCE_DIR}/src/frontend-base/video.c")
+  "${CMAKE_SOURCE_DIR}/src/compat/mvdm_vm_text.c"
+  "${CMAKE_SOURCE_DIR}/src/compat/console_video_buffer.c")
 target_include_directories(mvdm-command-capture-test PRIVATE
   "${CMAKE_SOURCE_DIR}/src"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/command/include"

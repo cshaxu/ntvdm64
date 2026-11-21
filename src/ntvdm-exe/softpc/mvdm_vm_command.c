@@ -1,7 +1,7 @@
 #include "mvdm_vm_command.h"
 #include "compat/include/guest_location.h"
 #include "ntvdm-exe/session/session.h"
-#include "ntvdm-exe/frontend/vm_text.h"
+#include "compat/include/mvdm_vm_text.h"
 #include <string.h>
 
 DWORD mvdm_vm_command_snapshot(uint32_t service, uint32_t address,

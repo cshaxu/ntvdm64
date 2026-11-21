@@ -1,5 +1,29 @@
 # C0621 synchronous admission boundary
 
+## P155 text-buffer implementation
+
+The complete frontend-base/video and ntvdm-exe/frontend/vm_text units move
+into compat/console_video_buffer and compat/mvdm_vm_text, with headers under
+compat/include. Bodies, symbols, state and failure ordering are unchanged;
+only includes and build ownership change. Rendering and worker orchestration
+remain outside B. No additional callback or duplicate state machine is added.
+The two B units use libraryFlags, not nativeServiceFlags; this removes the
+unnecessary generated BaseSrv include search path caught by the boundary gate.
+
+Final cached x86/x64/reference builds pass. VM text has 247 passing assertions;
+COMMAND capture has 154; video commit/cancel/configuration/serial checks pass.
+Real COMMAND/native EDIT Ctrl+Q/DOS MEM and launcher completion pass on the published package. All nine A/B build graphs pass the compiled dependency gate. Package
+ ef831118-16ca-41ad-8118-9abfbcf29782 is published to assets/release and
+O:/winnt/system32, with all 22 image hashes checked. Build/publication evidence:
+build/t483-s14-text-buffer. No original guest or mirror file changes: non-error
+mirror delta is 0 points/0 lines.
+
+This removes the text object's E provider dependency as a C0621 prerequisite.
+It does not close C0621: F still owns snapshot acquisition and synchronous
+operation-11 admission/executor composition. C0619 and C0156 also remain open.
+B/C direct symbol counts remain 0/0; the remaining indirect implementation
+chains must not be reported as eliminated by this relocation.
+
 ## P154 capture implementation
 
 mvdm_vm_command_service and mvdm_vm_command_capture now live in
@@ -64,12 +88,11 @@ check session_valid and SESSION_STATE_ACTIVE before borrowing the session's
 lease pool. Their replacement must preserve an equivalent active-lifetime
 check through the selected inner context.
 
-The text object also contains frontend_video from E, alongside its committed
-and staged text buffers. Its create operation belongs to the capture chain,
-while begin/stage/commit/abort/dispose call E presentation code. Moving the
-whole vm_text implementation into B would therefore introduce a B-to-E
-dependency. Split the captured text data and its ownership from presentation
-before moving the command capture and admission bodies.
+The earlier directory-based classification of frontend_video as presentation
+was too broad. Complete-body inspection finds buffer validation, staging,
+commit/abort and allocation only; no window, renderer or outer callback.
+Both frontend_video and vm_text can move intact into B, avoiding a second
+text state machine. Product frontend creation and rendering remain outside B.
 
 The lifetime checks have now been compared. session_thread_current derives
 its session pointer from compat_host_context_current; both paths therefore

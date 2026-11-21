@@ -2,7 +2,7 @@
 #define FRONTEND_CONSOLE_H
 #include <windows.h>
 #include "compat/include/console_io.h"
-#include "frontend-base/video.h"
+#include "compat/include/console_video_buffer.h"
 
 /* One explicit frontend instance. These handles never enter the wire. */
 typedef struct frontend_console {

@@ -1,4 +1,4 @@
-#include "frontend-base/video.h"
+#include "compat/include/console_video_buffer.h"
 #include <limits.h>
 #include <string.h>
 

@@ -11,7 +11,7 @@
 #include "ntvdm-exe/session/session.h"
 #include "compat/include/mvdm_command_native_child.h"
 #include "compat/include/console_io.h"
-#include "ntvdm-exe/frontend/vm_text.h"
+#include "compat/include/mvdm_vm_text.h"
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>

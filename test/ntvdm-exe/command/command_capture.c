@@ -4,7 +4,7 @@
 #include "ntvdm-exe/command/include/command_launch.h"
 #include "compat/include/guest_location.h"
 #include "ntvdm-exe/softpc/include/mvdm_vm_command.h"
-#include "ntvdm-exe/frontend/vm_text.h"
+#include "compat/include/mvdm_vm_text.h"
 #include "ntvdm-exe/session/session.h"
 #include "../../common/guest_memory_fixture.h"
 

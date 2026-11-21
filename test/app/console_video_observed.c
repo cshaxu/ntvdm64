@@ -3,7 +3,7 @@
  * Never a product input. */
 #define frontend_video_data production_video_data
 #define frontend_video_text production_video_text
-#include "../../src/frontend-base/video.c"
+#include "../../src/compat/console_video_buffer.c"
 #undef frontend_video_data
 #undef frontend_video_text
 #include <stdio.h>

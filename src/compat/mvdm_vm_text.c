@@ -1,5 +1,5 @@
-#include "vm_text.h"
-#include "frontend-base/video.h"
+#include "include/mvdm_vm_text.h"
+#include "compat/include/console_video_buffer.h"
 #include <string.h>
 
 struct ntvdm_vm_text {

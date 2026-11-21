@@ -1,6 +1,6 @@
 #ifndef FRONTEND_WINDOW_FRAME_H
 #define FRONTEND_WINDOW_FRAME_H
-#include "frontend-base/video.h"
+#include "compat/include/console_video_buffer.h"
 #include "lib-nxvm/lib/kvm-window/frame_interface.h"
 
 /* Decode copied TEXT_FRAME or DIB data, independently of worker type.

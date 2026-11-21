@@ -3,7 +3,7 @@
 #include "mvdm_vm_continuation.h"
 #include "compat/include/mvdm_vm_input.h"
 #include "ntvdm-exe/frontend/vm_frontend.h"
-#include "ntvdm-exe/frontend/vm_text.h"
+#include "compat/include/mvdm_vm_text.h"
 
 typedef struct mvdm_vm_io mvdm_vm_io;
 /* Borrow model/continuation until registry retirement joins all callbacks.
