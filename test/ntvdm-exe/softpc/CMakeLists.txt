@@ -6,7 +6,7 @@ add_executable(mvdm-vm-notification-test
   "${CMAKE_SOURCE_DIR}/src/compat/mvdm_vm_wake.c"
   "${CMAKE_SOURCE_DIR}/src/compat/mvdm_vm_continuation.c"
   "${CMAKE_SOURCE_DIR}/src/compat/mvdm_vm_guest_io.c"
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_application.c"
+  "${CMAKE_SOURCE_DIR}/src/compat/mvdm_vm_application.c"
   "${CMAKE_SOURCE_DIR}/src/compat/mvdm_vm_input_bop.c"
   mvdm_vm_io_test.c
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_executor.c"

@@ -1,6 +1,6 @@
 #ifndef MVDM_VM_EXECUTE_H
 #define MVDM_VM_EXECUTE_H
-#include "mvdm_vm_continuation.h"
+#include "compat/include/mvdm_vm_application.h"
 #include "ntvdm-exe/command/include/command_launch.h"
 #include "ntvdm-exe/frontend/vm_host.h"
 

@@ -1,5 +1,5 @@
-#ifndef MVDM_VM_CONTINUATION_H
-#define MVDM_VM_CONTINUATION_H
+#ifndef COMPAT_MVDM_VM_APPLICATION_H
+#define COMPAT_MVDM_VM_APPLICATION_H
 #include "compat/include/mvdm_vm_continuation_store.h"
 
 /* Channel/executor thread only, never CCPU/ICA. Borrow up to four lifecycle

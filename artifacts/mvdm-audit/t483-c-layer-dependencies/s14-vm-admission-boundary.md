@@ -1,5 +1,36 @@
 # C0621 synchronous admission boundary
 
+## P157 application and I/O ownership
+
+The complete application publish/commit/dispatch implementation moves to
+compat/mvdm_vm_application.c with its header. The existing notification,
+continuation and text providers already belong to B. The implementation
+continues to wait for the exact guest acknowledgement, preserves cancellation
+ordering and discards an uncommitted frame on failure.
+
+VM I/O allocation, title/input-mode state, dispatch, input access and disposal
+move to compat/mvdm_vm_io.c. The F unit retains only the frontend operations
+table and parameter adaptation: it maps four borrowed cancellation handles
+and frontend reply metadata, then calls B. B contains no F callback, window
+registry, broker transport or product launch. The original BOP operations
+13/14 already use B mvdm_vm_guest_io.c; the P156 contrary statement is corrected,
+not counted as a new elimination. Operation 11/executor submission remains open.
+
+The existing notification/application/I/O fixture passes 3189 assertions on
+final code, including acknowledgements, cancellation, staged output and rundown;
+it mocks the PIC and is not a real enhanced-mode acceptance claim. Final
+cached x86/x64/reference builds pass. A same-named header initially selected
+the wrong B interface in the F unit; an explicit local include fixed it without
+broadening search roots. All nine compiled A/B dependency graphs pass.
+Package 5f0e7136-5ea2-48ee-8540-03add3d0806f is published to both locations;
+22 image hashes match. Real COMMAND/native EDIT Ctrl+Q/DOS MEM and launcher
+completion pass on that package. Evidence: build/t483-s14-application-io.
+Non-error mirror change:
+0 points/0 lines; original guest files are unchanged.
+
+B/C direct symbol counts remain 0/0. C0156, C0619 and C0621 remain open indirect
+implementation chains; these prerequisite migrations do not close them.
+
 ## P156 snapshot ownership
 
 mvdm_vm_command_snapshot now joins service/capture in compat/mvdm_vm_capture.c.
@@ -22,8 +53,8 @@ object, rejects closing/duplicate generation, links the job and must successfull
 submit the existing threadpool execution before publishing a token. The F execute
 body performs frontend registration, product launch and retirement. A generic
 callback or merely moving the wrapper would preserve the prohibited dependency.
-Other BOP operations still reaching F include application transfer 13/14; the
-complete chain must be reconciled before closure. B/C direct counts stay 0/0;
+Provider correction: operations 13/14 already resolve to B mvdm_vm_guest_io.c.
+The separate channel-side application publisher remained in F at P156. B/C direct counts stay 0/0;
 C0156/C0619/C0621 indirect implementation chains remain unresolved.
 
 ## P155 text-buffer implementation

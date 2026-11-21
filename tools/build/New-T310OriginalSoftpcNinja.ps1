@@ -284,7 +284,7 @@ $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc
                          'mvdm_softpc_execution.c',
                          'mvdm_vm_notification.c', 'mvdm_vm_bridge.c',
                          'mvdm_vm_wake.c',
-                         'mvdm_vm_continuation.c', 'mvdm_vm_guest_io.c', 'mvdm_vm_input.c', 'mvdm_vm_input_bop.c', 'mvdm_vm_application.c', 'mvdm_vm_execute.c', 'mvdm_vm_io.c', 'mvdm_vm_executor.c', 'mvdm_vm_ingress.c',
+                         'mvdm_vm_continuation.c', 'mvdm_vm_guest_io.c', 'mvdm_vm_input.c', 'mvdm_vm_input_bop.c', 'mvdm_vm_execute.c', 'mvdm_vm_io.c', 'mvdm_vm_executor.c', 'mvdm_vm_ingress.c',
                                                   'mvdm_standalone_worker.c',
                          'ntvdm_dos_observer.c',
                         'mvdm_softpc_presentation_font.c',
@@ -1260,6 +1260,12 @@ $adapterSoftpcObjects += 'obj/compat/dpmi_services.obj'
 $graph.Add('build obj/compat/mvdm_vm_command_entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_vm_command_entry.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/mvdm_vm_command_entry.obj'
+$graph.Add('build obj/compat/mvdm_vm_application.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_vm_application.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$adapterSoftpcObjects += 'obj/compat/mvdm_vm_application.obj'
+$graph.Add('build obj/compat/mvdm_vm_io.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_vm_io.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$adapterSoftpcObjects += 'obj/compat/mvdm_vm_io.obj'
 $graph.Add('build obj/compat/mvdm_vm_capture.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_vm_capture.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/mvdm_vm_capture.obj'

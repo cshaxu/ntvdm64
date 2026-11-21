@@ -4,7 +4,7 @@
 #include "compat/include/mvdm_vm_notification.h"
 #include "mvdm_vm_bridge.h"
 #include "compat/include/mvdm_vm_wake.h"
-#include "mvdm_vm_continuation.h"
+#include "compat/include/mvdm_vm_application.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
