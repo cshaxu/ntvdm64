@@ -1,0 +1,64 @@
+{
+  "packet": "M0 T483 S19 P15",
+  "baseline": "95cc67de2",
+  "status": "verified delivery",
+  "file": "src/compat/wow_hook_callback.c",
+  "id": "BC2F029",
+  "ownership": "Immutable B-owned typed table; actual C2 hook query and six-scalar capture/restore providers bound before original DLL attach. Existing C2 original dispatch supplied directly. B keeps task/borrow/enrollment ordering; no private C2 structs/includes or data relocations.",
+  "direct_relationships": {
+    "file_before": 6,
+    "file_after": 0,
+    "B_C2_unique": 229,
+    "B_C2_raw": 248,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 25,
+    "total": 38,
+    "remaining": 13
+  },
+  "mirror": {
+    "file": "src/mvdm-host/wow32/wowhooks.c",
+    "before": {
+      "points": 38,
+      "lines": 112
+    },
+    "after": {
+      "points": 39,
+      "lines": 142
+    },
+    "delta": {
+      "points": 1,
+      "lines": 30
+    },
+    "cumulative_S19": {
+      "points": 3,
+      "lines": 52
+    },
+    "approval": "User explicitly approved +1point/+30lines",
+    "error_line_proof": "Existing bytes preserved verbatim; append-only30lines. Paired exclusion parser zero issues; original diagnostics/framework unchanged."
+  },
+  "package": "df907bb9-940d-4c0a-8e8f-7a72e4a73c34",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hash checks",
+  "tests": [
+    "Exact C2 capture/restore/query bodies plus actual B callbacks: denied/normal/nested/exception,6 creation enrollments,1 acceptance,4rollbacks; errors0",
+    "Actual generated DLL entry BOOLEAN and OS loader eight rounds passed",
+    "Real Win16 CBT query/nested creation/veto/recovery/unhook passed",
+    "Real Win16 CBT left installed until task exit and normal launcher completion; no separate runtime slot-table inspection claimed",
+    "COMMAND native EDIT CtrlQ CMD echo DOS MEM and launcher return passed"
+  ],
+  "audit": "Compiled/linked C2 relationships from this B file zero. Generated entry is explicitly composition; C2 algorithms and TLS owner remain unchanged. Raw VDMREDIR hash unchanged so prior verified map reused; assembler/generated coverage gaps remain explicit.",
+  "evidence_root": "build/t483-s19-hook",
+  "compiled_headers": {
+    "B_C2": 98,
+    "B_C1": 632,
+    "this_file_C2": 0
+  },
+  "private_search_roots": {
+    "B_C2": 11,
+    "B_C1": 36,
+    "this_file_C2": 0
+  }
+}

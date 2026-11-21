@@ -2096,3 +2096,33 @@ VOID GetEventMessage16(PEVENTMSG16 pEventMsg16, LPEVENTMSG  lpEventMsg)
         lpEventMsg->paramH = FETCHWORD(pEventMsg16->paramH);
     }
 }
+
+/* DIVERGENCE(MVDM-HOST-DIV-332): typed projections keep hook state in WOW. */
+#include "wow_hook_callback.h"
+void WINAPI wow_hook_capture_context(wow_hook_context *value)
+{
+    value->code = vHookParams.nCode;
+    value->wp = vHookParams.wParam;
+    value->lp = vHookParams.lParam;
+    value->index = viCurrentHookStateDataIndex;
+    value->dde = fThunkDDEmsg;
+    value->who = fWhoCalled;
+}
+void WINAPI wow_hook_restore_context(const wow_hook_context *value)
+{
+    vHookParams.nCode = value->code;
+    vHookParams.wParam = value->wp;
+    vHookParams.lParam = value->lp;
+    viCurrentHookStateDataIndex = value->index;
+    fThunkDDEmsg = value->dde;
+    fWhoCalled = value->who;
+}
+BOOL WINAPI wow_hook_query_type(INT index, INT *type)
+{
+    HOOKSTATEDATA hook = {0};
+    if (index <= 0 || index > 255) return FALSE;
+    hook.iIndex = (BYTE)index;
+    if (!W32GetHookStateData(&hook) || !hook.InUse) return FALSE;
+    *type = hook.iHook;
+    return TRUE;
+}

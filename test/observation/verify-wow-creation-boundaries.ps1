@@ -43,6 +43,12 @@ if($Case -eq 'menu') {
     $headers="#include `"wow_window_creation_binding.h`"`n#include `"wow_menu_resource_bindings.h`"`n#include <stdio.h>`n"
     [IO.File]::WriteAllText("$out/creation-menu.inc",$headers+$text.Substring($start,$end-$start))
 }
+if($Case -eq 'hook') {
+    $ownerSource=Get-Content "$repo/src/mvdm-host/wow32/wowhooks.c" -Raw
+    $ownerStart=$ownerSource.IndexOf('void WINAPI wow_hook_capture_context(')
+    if($ownerStart -lt 0){throw 'Missing original hook-owner projections'}
+    [IO.File]::WriteAllText("$out/hook-owner.inc",$ownerSource.Substring($ownerStart))
+}
 Invoke-CompileCommand ($fixture+' /Gy /I"'+$out+'"')
 $owner=if($Case -in @('timer','hook','common-dialog')){'compat'}else{'wow32-dll'}
 $selected=if($Case -ne 'menu'){' "'+$provider+'\obj\'+$owner+'\'+$source+'.obj"'}else{''}

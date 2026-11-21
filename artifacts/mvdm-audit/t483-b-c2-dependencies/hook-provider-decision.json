@@ -2,7 +2,7 @@
   "packet": "M0 T483 S19",
   "id": "BC2F029",
   "file": "src/compat/wow_hook_callback.c",
-  "status": "owner projection compiled; mirror increase awaits approval; production unchanged",
+  "status": "owner approved; implemented and verified P15",
   "relationships": 6,
   "providers": {
     "wowhooks.c": [
@@ -47,8 +47,9 @@
   },
   "verification": {
     "compile": "Same actual wowhooks.c production command, candidate input/output only; exit0.",
-    "runtime": "Not implemented, linked or exercised in production; no completion credit."
+    "runtime": "Real Win16 CBT nested/veto/recovery/unhook and task-exit cases passed; exact C2 projection bodies verified by hook unit fixture."
   },
   "evidence_root": "build/t483-s19-hook-owner",
-  "pending": "Owner approval requested for +1 point/+30 lines and owner-local adapter bodies exceeding3 lines. After approval remove four private C2 includes from B, bind callbacks and expand existing hook creation/unwind witness; then cached full build, dual11 publication, targeted runtime, commit/push."
+  "pending": "None for this file; delivery in p15-delivery.json",
+  "owner_approval": "User approved +1 point/+30 lines,2026-11-21"
 }

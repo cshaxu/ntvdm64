@@ -1489,12 +1489,17 @@ This candidate requires grouped provider/guest validation before delivery.
 
 MVDM-HOST-DIV-332 (T447 S2): rename only wow32/wowhooks.c's central
 WU32StdHookProc definition to WowOriginalStdHookProc. All 32 original stubs
-retain their original target name, now supplied by wow32-dll's
+retain their original target name, now supplied by compat's
 wow_hook_callback.c. The wrapper enters the existing task callback and USER
 borrow scopes before the original body reads CURRENTPTD, converts messages or
 allocates guest stack, and pairs their release through finally. Hook identity,
 chain policy, parameter conversion and dispatch remain original. No global
 preprocessor rename, copied original body, guest change or new scheduler.
+S19 binds that original body through B-owned callbacks before DLL attach.
+Three approved owner projections capture/restore existing scalar Hook/TLS
+context and query the original Hook type; B no longer reads private C2 layouts.
+The nested cleanup ordering is unchanged. Non-error mirror delta +1 point/+30
+lines is owner-approved; [provider evidence](../../artifacts/mvdm-audit/t483-b-c2-dependencies/hook-provider-decision.json).
 
 MVDM-HOST-DIV-331 (T445 S7): owner explicitly approves the reviewed inline
 `dos/command/cmdmisc.c::GetWowKernelCmdLine` capacity/retry repair. Before copying

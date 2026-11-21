@@ -1,11 +1,5 @@
 #include "non-mvdm/public/sdk/inc/nt.h"
-#include "wow32_provider_private.h"
-
-#undef _X86_
-#include "mvdm-host/wow32/wow32.h"
-#include "mvdm-host/wow32/wmdisp32.h"
-#include "mvdm-host/wow32/wumsg.h"
-#include "mvdm-host/wow32/wowhooks.h"
+#include "wow_hook_callback.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_object_bindings.h"
@@ -16,21 +10,36 @@
 /* Original wowhooks.c owns hook identity, conversion, guest-stack allocation
  * and dispatch. Protect that whole interval, not just its final CallBack16.
  * All 32 unchanged native hook stubs still call WU32StdHookProc. */
-LONG WINAPI WowOriginalStdHookProc(INT, LONG, LONG, INT);
-extern __declspec(thread) HOOKPARAMS vHookParams;
-extern __declspec(thread) INT viCurrentHookStateDataIndex;
+static const wow_hook_callbacks *callbacks;
+
+BOOL WINAPI wow_hook_bind(const wow_hook_callbacks *provider)
+{
+    const wow_hook_callbacks *previous;
+    if (!provider || !provider->capture || !provider->restore ||
+            !provider->type || !provider->invoke) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&callbacks,
+        (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED);
+        return FALSE;
+    }
+    return TRUE;
+}
 
 /* wowhooks.c owns conversion. These are only the native HWND operands that
  * its selected hook converter exposes to the guest. Do not interpret hook
  * codes without their original table type, nor numeric keyboard/journal
  * parameters as windows. Message payloads require their separate converter
  * boundary; collecting the MSG/CWP receiver does not replace that boundary. */
-static ULONG hook_window_roots(const HOOKSTATEDATA *hook, INT code,
+static ULONG hook_window_roots(BOOL active, INT hook_type, INT code,
     LONG wp, LONG lp, HWND roots[7])
 {
     ULONG count = 0;
-    if (!hook->InUse || code < 0) return 0;
-    switch (hook->iHook) {
+    if (!active || code < 0) return 0;
+    switch (hook_type) {
     case WH_CBT:
         switch (code) {
         case HCBT_MOVESIZE:
@@ -98,24 +107,24 @@ LONG WINAPI WU32StdHookProc(INT code, LONG wp, LONG lp, INT index)
     LONG result = 0;
     BOOL borrowed = FALSE;
     BOOL creation = FALSE, completed = FALSE, task_left = FALSE;
-    HOOKSTATEDATA hook = {0};
+    BOOL active = FALSE;
+    INT hook_type = 0;
     HWND roots[7];
     ULONG root_count;
     wow_window_creation_enrollment enrollment = {0};
     wow_user_runtime_thread *runtime;
     /* ADAPTER-WOW-095: original DefHookProc context is per nested entry. */
-    HOOKPARAMS saved_hook = vHookParams;
-    INT saved_index = viCurrentHookStateDataIndex;
-    BOOL saved_dde = fThunkDDEmsg, saved_who = fWhoCalled;
+    wow_hook_context saved;
+    callbacks->capture(&saved);
     if (!wow_task_callback_enter(&task)) return 0;
     __try {
         /* Read identity through the original table owner, not the numerical
          * hook code alone (codes overlap between different hook types).
          * A newer guest hook can run before our native creation observer. */
         if (index > 0 && index <= 255) {
-            hook.iIndex = (BYTE)index;
-            creation = W32GetHookStateData(&hook) && hook.InUse &&
-                hook.iHook == WH_CBT && code == HCBT_CREATEWND && lp;
+            active = callbacks->type(index, &hook_type);
+            creation = active && hook_type == WH_CBT &&
+                code == HCBT_CREATEWND && lp;
         }
         if (creation) result = 1; /* Incomplete setup vetoes creation. */
         if (!wow_user_borrow_enter(&borrow)) __leave;
@@ -124,22 +133,22 @@ LONG WINAPI WU32StdHookProc(INT code, LONG wp, LONG lp, INT index)
         if (creation && !wow_window_creation_enroll_internal(
                 runtime ? runtime->thread : NULL, (HWND)wp,
                 ((CBT_CREATEWNDA *)lp)->lpcs, &enrollment)) __leave;
-        root_count = hook_window_roots(&hook, code, wp, lp, roots);
+        root_count = hook_window_roots(active, hook_type, code, wp, lp, roots);
         if (!wow_user_window_refresh_payload(creation ? (HWND)wp : NULL,
                 roots, root_count)) __leave;
-        if (hook.InUse && code >= 0 && lp) {
-            if (hook.iHook == WH_CALLWNDPROC) {
+        if (active && code >= 0 && lp) {
+            if (hook_type == WH_CALLWNDPROC) {
                 const CWPSTRUCT *message = (const CWPSTRUCT *)lp;
                 if (!wow_menu_native_refresh_message(message->message,
                         message->wParam, message->lParam)) __leave;
-            } else if (hook.iHook == WH_GETMESSAGE || hook.iHook == WH_MSGFILTER ||
-                    hook.iHook == WH_SYSMSGFILTER) {
+            } else if (hook_type == WH_GETMESSAGE || hook_type == WH_MSGFILTER ||
+                    hook_type == WH_SYSMSGFILTER) {
                 const MSG *message = (const MSG *)lp;
                 if (!wow_menu_native_refresh_message(message->message,
                         message->wParam, message->lParam)) __leave;
             }
         }
-        result = WowOriginalStdHookProc(code, wp, lp, index);
+        result = callbacks->invoke(code, wp, lp, index);
         completed = TRUE;
     } __finally {
         __try {
@@ -154,10 +163,7 @@ LONG WINAPI WU32StdHookProc(INT code, LONG wp, LONG lp, INT index)
                 else completed = accepted;
             }
         } __finally {
-            vHookParams = saved_hook;
-            viCurrentHookStateDataIndex = saved_index;
-            fThunkDDEmsg = saved_dde;
-            fWhoCalled = saved_who;
+            callbacks->restore(&saved);
             wow_window_creation_finish(&enrollment, completed && result == 0);
             /* Final window/class references still retire before alias
              * collection, including a failed task-scope return. */

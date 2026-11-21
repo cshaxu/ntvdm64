@@ -193,11 +193,11 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,24 resolved,14 remaining. P13 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
+38 candidates,25 resolved,13 remaining. P15 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
 preparation; P2 cleared COMMAND capture leases; P3 clears keyboard IRQ retirement,
 descriptor projection and effective-address consumers including their public header.
-Unique direct B-to-C2 relationships337->235; relocation records606->254.
-Compiled private C2 header rows144->111; private C2 search roots74->11.
+Unique direct B-to-C2 relationships337->229; relocation records606->248.
+Compiled private C2 header rows144->98; private C2 search roots74->11.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
 Owner-approved P1 mirror delta+2 points/+19 lines is registered as R2721/R2722;
@@ -257,7 +257,9 @@ clears three direct C2 calls through immutable same-image callbacks bound before
 original DLL attach. Nested/resource guards, actual loader, real Win16 common
 and ordinary dialogs, and COMMAND return pass. Dual11 package
 42cfa459-5dba-46cc-aaf8-2be639ec98ce; mirror delta0 points/0 lines.
-[Hook owner candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/hook-provider-decision.json)
-compiles with actual product parameters; +1 point/+30 non-error mirror lines
-awaits approval. Its six direct relationships remain open; production unchanged.
+[P15 Hook delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p15-delivery.json)
+clears six direct C2 relations and this file's private C2 headers. Actual C2
+scalar projections, B nested/exception guards, real Win16 CBT Hook, DLL loader
+and COMMAND return pass. Dual11 package df907bb9-940d-4c0a-8e8f-7a72e4a73c34.
+Owner-approved mirror delta+1 point/+30 lines; cumulative S19 +3 points/+52 lines.
 S19 remains active; S20 not admitted.

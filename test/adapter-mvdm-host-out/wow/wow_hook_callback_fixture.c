@@ -4,6 +4,7 @@
 #include "wow_window_creation_binding.h"
 #include "wow_user_runtime.h"
 #include <stdio.h>
+#include "wow_hook_callback.h"
 
 LONG WINAPI WU32StdHookProc(INT, LONG, LONG, INT);
 static unsigned errors, task_depth, borrow_depth, original_calls;
@@ -125,11 +126,28 @@ LONG WINAPI WowOriginalStdHookProc(INT code, LONG wp, LONG lp, INT index)
     }
     return code + wp + lp + index;
 }
+/* Exact C2 projection bodies extracted by the fixture runner. */
+#include "hook-owner.inc"
+static const wow_hook_callbacks providers = {
+    wow_hook_capture_context, wow_hook_restore_context, wow_hook_query_type,
+    WowOriginalStdHookProc
+};
 int __cdecl main(void)
 {
     BOOL caught = FALSE;
     CREATESTRUCTA request = {0};
     CBT_CREATEWNDA creation = {&request, NULL};
+    static const wow_hook_callbacks invalid = {0};
+    static const wow_hook_callbacks replacement = {
+        wow_hook_capture_context, wow_hook_restore_context, wow_hook_query_type,
+        WowOriginalStdHookProc
+    };
+    INT kind = 123;
+    CHECK(!wow_hook_bind(NULL)); CHECK(!wow_hook_bind(&invalid));
+    CHECK(wow_hook_bind(&providers)); CHECK(wow_hook_bind(&providers));
+    CHECK(!wow_hook_bind(&replacement));
+    CHECK(!wow_hook_query_type(0, &kind) && kind == 123);
+    CHECK(!wow_hook_query_type(256, &kind) && kind == 123);
     deny_task = TRUE;
     CHECK(!WU32StdHookProc(1, 2, 3, 1) && !original_calls && !task_depth);
     deny_task = FALSE; deny_borrow = TRUE;
