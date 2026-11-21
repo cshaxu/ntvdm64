@@ -2742,3 +2742,9 @@ field projection into the existing modern USER descriptor. B uses an opaque
 borrow and one typed callback, registered before DLL initialization. Original
 conversion bodies and #line16 are unchanged. Non-error2points/3lines becomes
 2points/17lines (+0points/+14lines), registered R2744; real Win16 verified.
+
+S20 P10 bitmap boundary: clres.c explicitly includes original newres.h rather
+than receiving resource formats through B. B retains native DC/lock scopes and
+uses a typed callback to original WOWLoadBitmapA. Original parser/conversion
+bodies and #line16 remain unchanged. Non-error28points/2730lines becomes
+28points/2731lines (+0points/+1line), R2745; bitmap and Win16 tests passed.

@@ -2,7 +2,6 @@
 #define WOW_BITMAP_BINDINGS_H
 #include <windows.h>
 #include "compat/include/wow_bitmap_native.h"
-#include "non-mvdm/public/internal/windows/inc/newres.h"
 
 /* Finite USER client environment for the original bitmap owners.
  * No resource parser, palette algorithm or guest pointer policy lives here. */
@@ -48,7 +47,9 @@ int SmartStretchDIBits(HDC, int, int, int, int, int, int, int, int,
     LPVOID, LPBITMAPINFO, UINT, DWORD);
 HBITMAP ConvertDIBBitmap(UPBITMAPINFOHEADER, DWORD, DWORD, UINT,
     LPBITMAPINFOHEADER *, LPSTR *);
-HBITMAP WOWLoadBitmapA(HINSTANCE, LPCSTR, LPBYTE, DWORD);
+typedef HBITMAP (WINAPI *wow_bitmap_load_provider)(HINSTANCE, LPCSTR, LPBYTE, DWORD);
+/* Bound before DLL initialization; borrowed provider remains loaded until teardown. */
+BOOL WINAPI wow_bitmap_bind_provider(wow_bitmap_load_provider);
 /* Same output-slot ABI; owns only the native conversion environment. */
 HBITMAP WINAPI wow_bitmap_load(HINSTANCE, LPCSTR, LPBYTE, DWORD);
 #endif

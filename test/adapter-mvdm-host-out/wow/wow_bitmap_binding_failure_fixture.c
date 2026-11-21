@@ -1,8 +1,9 @@
 #include "wow_bitmap_bindings.h"
+HBITMAP WINAPI WOWLoadBitmapA(HINSTANCE, LPCSTR, LPBYTE, DWORD);
 #include <stdio.h>
 static unsigned fail_at, locks, screen_acquired, screen_released;
 static unsigned conversions, conversion_errors;
-HBITMAP WOWLoadBitmapA(HINSTANCE module, LPCSTR name, LPBYTE bytes, DWORD count)
+HBITMAP WINAPI WOWLoadBitmapA(HINSTANCE module, LPCSTR name, LPBYTE bytes, DWORD count)
 {
     (void)module; (void)name; (void)count;
     ++conversions;
@@ -44,6 +45,9 @@ int __cdecl main(void)
 {
     wow_bitmap_context outer, failed;
     unsigned i;
+    CHECK(!wow_bitmap_bind_provider(NULL));
+    CHECK(wow_bitmap_bind_provider(WOWLoadBitmapA));
+    CHECK(wow_bitmap_bind_provider(WOWLoadBitmapA));
     fail_at = 1;
     CHECK(!wow_bitmap_bindings_enter(&failed) && !wow_bitmap_current);
     fail_at = 0;

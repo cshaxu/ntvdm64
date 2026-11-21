@@ -1,4 +1,5 @@
 #include "wow_bitmap_bindings.h"
+HBITMAP WINAPI WOWLoadBitmapA(HINSTANCE, LPCSTR, LPBYTE, DWORD);
 #include <stdio.h>
 #define CHECK(x) do { if (!(x)) { printf("FAIL line %d\n", __LINE__); return 1; } } while (0)
 static DWORD WINAPI parallel_convert(void *start)
@@ -37,6 +38,9 @@ int __cdecl main(void)
     resource.header.biWidth = 2; resource.header.biHeight = 1;
     resource.header.biPlanes = 1; resource.header.biBitCount = 1;
     resource.colors[1] = 0xffffff; resource.bits = 0x80;
+    CHECK(!wow_bitmap_bind_provider(NULL));
+    CHECK(wow_bitmap_bind_provider(WOWLoadBitmapA));
+    CHECK(wow_bitmap_bind_provider(WOWLoadBitmapA));
     CHECK(!wow_bitmap_bindings_enter(NULL));
     before = GetGuiResources(GetCurrentProcess(), GR_GDIOBJECTS);
     for (i = 0; i < 30; ++i) {

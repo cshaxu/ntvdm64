@@ -1,0 +1,57 @@
+{
+  "packet": "M0 T483 S20 P10",
+  "baseline": "cbc14beca",
+  "status": "verified delivery",
+  "files_completed_this_batch": [
+    "BC1F012",
+    "BC1F025"
+  ],
+  "counts": {
+    "files_completed": 15,
+    "files_total": 94,
+    "remaining": 79,
+    "B_C1_unique": 57,
+    "B_C1_raw": 69,
+    "B_C1_compiled_headers": 516,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "dependency_delta": {
+    "direct_unique": -1,
+    "compiled_C1_header_rows": -8
+  },
+  "provider": "B owns wow_bitmap_load_provider; F registers original C1 WOWLoadBitmapA before W32DllInitialize. B no longer imports C1 headers or directly links C1 symbols. Original parsing/conversion remains in clres/cldib.",
+  "lifetime": "Same DLL immutable provider; binding before any conversion; same lock/TLS context, nested parent restoration, synchronous exception finally release, terminal shutdown after calls. No copied layout, queue or second state machine.",
+  "mirror": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+    "before": "28points/2730lines",
+    "after": "28points/2731lines",
+    "register": "R2745",
+    "change": "Move original newres.h include from B interface to actual C resource parser before original #line16; one line; all original bodies and #error unchanged"
+  },
+  "mirror_delta": {
+    "points": 0,
+    "lines": 1
+  },
+  "mirror_cumulative_S20": {
+    "points": 0,
+    "lines": 139
+  },
+  "package": "acd18055-2e12-4b14-a090-def676b57391",
+  "publication": "11 images assets/release and O:/winnt/system32;22hashes verified",
+  "build": "cached full x86/x64/reference passed",
+  "tests": [
+    "WOW_BITMAP_BINDING_OK nested=30 parallel=4x50 named=2 missing=2 gdi-before=0 gdi-after=0",
+    "WOW_BITMAP_BINDING_FAILURE_OK locks=2 screen=10/10; actual exception/failure unwinding",
+    "Actual published Win16 native extension and COMMAND modern EDIT/CMD/DOS MEM return passed",
+    "Boundary negative controls, nine product graphs, frontend link ownership,22hashes and governance gates"
+  ],
+  "evidence_root": "build/t483-s20-bitmap",
+  "limitations": [
+    "BC1F010/011 USER multipass group still open; consumer files processed sequentially from BC1F012",
+    "Historical standalone thunk integration fixture updated for binding but not separately executed",
+    "Unchanged assembler/generated alias coverage gaps retained; no full dynamic relationship census claimed"
+  ]
+}

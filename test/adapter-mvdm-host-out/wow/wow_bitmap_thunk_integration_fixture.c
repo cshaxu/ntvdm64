@@ -1,5 +1,6 @@
 #include "../../common/guest_memory_fixture.h"
 #include "wow_bitmap_bindings.h"
+HBITMAP WINAPI WOWLoadBitmapA(HINSTANCE, LPCSTR, LPBYTE, DWORD);
 #include "wow_callback_frame_lease.h"
 #include <stdio.h>
 #include <string.h>
@@ -71,6 +72,9 @@ int __cdecl main(void)
     HDC dc;
     unsigned i;
     DWORD before = GetGuiResources(GetCurrentProcess(), GR_GDIOBJECTS);
+    CHECK(!wow_bitmap_bind_provider(NULL));
+    CHECK(wow_bitmap_bind_provider(WOWLoadBitmapA));
+    CHECK(wow_bitmap_bind_provider(WOWLoadBitmapA));
     header->biSize = sizeof(*header);
     header->biWidth = 128; header->biHeight = 255;
     header->biPlanes = 1; header->biBitCount = 24;

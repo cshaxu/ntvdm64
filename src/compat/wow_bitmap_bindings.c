@@ -1,4 +1,3 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_bitmap_bindings.h"
 
 /* ADAPTER-WOW-025: original USER shared scaling scratch remains serialized;
@@ -7,6 +6,17 @@ __declspec(thread) wow_bitmap_context *wow_bitmap_current;
 CRITICAL_SECTION wow_bitmap_lock;
 static INIT_ONCE lock_once = INIT_ONCE_STATIC_INIT;
 static LONG lock_initialized;
+static wow_bitmap_load_provider load_bitmap;
+
+BOOL WINAPI wow_bitmap_bind_provider(wow_bitmap_load_provider provider)
+{
+    if (!provider || (load_bitmap && load_bitmap != provider)) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    load_bitmap = provider;
+    return TRUE;
+}
 
 static BOOL CALLBACK initialize_lock(PINIT_ONCE once, PVOID parameter, PVOID *result)
 {
@@ -51,10 +61,11 @@ HBITMAP WINAPI wow_bitmap_load(HINSTANCE module, LPCSTR name,
 {
     wow_bitmap_context context;
     HBITMAP result;
-    if (!resource) return WOWLoadBitmapA(module, name, NULL, resource_size);
+    if (!load_bitmap) RaiseFailFastException(NULL, NULL, 0);
+    if (!resource) return load_bitmap(module, name, NULL, resource_size);
     if (!wow_bitmap_bindings_enter(&context)) return NULL;
     __try {
-        result = WOWLoadBitmapA(module, name, resource, resource_size);
+        result = load_bitmap(module, name, resource, resource_size);
     } __finally {
         wow_bitmap_bindings_leave(&context);
     }

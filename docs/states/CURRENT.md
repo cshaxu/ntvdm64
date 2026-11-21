@@ -199,12 +199,12 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json):
-94 files,13 completed,81 remaining. B-to-C1:58 unique/70 relocation
-records,524 compiled header rows,0 private search-root rows. These are separate
+94 files,15 completed,79 remaining. B-to-C1:57 unique/69 relocation
+records,516 compiled header rows,0 private search-root rows. These are separate
 metrics, not additive counts. B-to-C2 direct/header/search remains0.
 DIR work remains at BC1F010/011 shared USER consumer group; three P9 text
 consumers are complete, other consumers remain open. S20 cumulative non-error
-mirror increment0points/+138lines; S19 retained increment+12points/+574lines.
+mirror increment0points/+139lines; S19 retained increment+12points/+574lines.
 
 [S20 P1 review](../../artifacts/mvdm-audit/t483-b-c1-dependencies/base-dispatch-review.json)
 is implemented by [P2](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p2-delivery.json):
@@ -265,3 +265,10 @@ eliminated. Cached full, dual11, original string/measure and real Win16/COMMAND
 passed; final gates passed. Mirror0points/+14lines (R2744). Publication package
 01057e8e-ab0e-4c7d-bf69-7b40974f3b83. P9 is the delivery commit.
 [Delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p9-delivery.json).
+
+P10 completes BC1F012/025 bitmap header/implementation. Original conversion
+remains C-owned; B uses one immutable synchronous callback registered by F.
+Direct C1 relations58->57; headers524->516; search0 and C2 zero retained.
+Cached full, dual11, bitmap nested/concurrent/failure and real Win16/COMMAND
+passed. Mirror0points/+1line (R2745).
+[Delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p10-delivery.json).
