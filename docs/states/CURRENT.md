@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T483 S16** (Ordinary Mode). Owner approved S15 closure and S16
-admission on 2026-11-20. Only S16 is active.
+**Active: M0 T483 S17** (Ordinary Mode). Owner authorized S16 closure and
+next-S admission on 2026-11-20. Only S17 is active.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Original Owner Request | 收口S15，准入下一个S，审计清理E层的对外依赖和同层组件之间的依赖。先按dir顺序列清单，逐文件说明怎么处理，老规矩小五件套。 |
-| Identifier Mode | M0 T483 S16, Ordinary Mode. |
-| Admission And Approval | Owner-approved successor to S15, 2026-11-20. |
-| Objective | Audit and remove unapproved E-to-F and frontend-base/worker-base cross-component dependencies. Trace actual callback targets, calling threads and lifetime; preserve reviewed inner-owned callback composition. |
-| Reference Baseline | S15 P4 7b2c0437a; production f7ede72b0; package80616b98-933d-4375-bdb8-f742686d4ae6. [D closure](../../artifacts/mvdm-audit/t483-d-layer-dependencies/final-closure.json). |
-| Files And ABI Surface | src/frontend-base and src/worker-base, actual production callers, compile/link inputs, callbacks, tests and component documentation. |
+| Original Owner Request | 完事了如果满足本S条件就可以收口本S，可以准入下一个S。继续逐层依赖审计，下一层为F。 |
+| Identifier Mode | M0 T483 S17, Ordinary Mode. |
+| Admission And Approval | Owner-authorized successor after verified S16 closure, 2026-11-20. |
+| Objective | Audit and remove unapproved dependencies between distinct F product components; trace private source/header/link dependencies and actual runtime providers. Distinguish valid DLL imports and explicit protocol/callback composition. |
+| Reference Baseline | S16 P2 2f6221b21; packagee6fc4605-1c7c-4e0a-b274-1c13ab6a74ce. [S16 closure](../etc/evidence/m0-t483-s16-closure.md). |
+| Files And ABI Surface | F: ntcon-exe, nthook-dll, ntmon-exe, ntsrv-exe, ntvdm-exe, ntvwm-exe, run16-exe, vdmredir-dll, wow32-dll. Production compile/link inputs, callers and callback/import providers. |
 | Candidate Proposal | [T483 parent](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
-| Applicable Rules | Six-layer architecture, source policy, coding and execution rules. E may consume A/B/C/D; distinct E components remain independent. |
+| Applicable Rules | Six-layer architecture. F may consume inner layers; distinct F components must not privately implement each other. Reviewed DLL/interface imports and callback composition are not violations by themselves. |
 | Verification | Per changed complete chain: cached full x86/x64/reference build, dual11 publication/hash verification, affected targeted tests, governance, commit and push. No Full unless newly required by scope/evidence. |
-| Expected Markers | DIR-ordered complete file list with actual dependencies, provider ownership, disposition and verification. Count static violations separately from approved runtime callbacks. |
+| Expected Markers | DIR-ordered file ledger before modification, full caller/provider conclusions, counts separating violations from runtime peer evidence. |
 | Asset Needs | Existing immutable guest fixtures and cached toolchains; no new asset import. |
-| Non-goals | No original guest modification/rebuild; no unrelated A/B/C/D cleanup; no product-core migration or new queue/state machine. |
+| Non-goals | No addon work, original guest modification/rebuild, unrelated inner-layer reopening, broad feature repair or added queue/state machine. |
 | Similar-Issue Sweep | Explicit/forced/transitive includes, search paths, live relocations, generated RPC, runtime binding and lifecycle ownership across supported product graphs. |
-| Reporting Requirements | Each file entry/exit: affected layer/component, migration or local change, remaining verified violations versus candidates, file/total progress, non-error mirror points and lines. |
+| Reporting Requirements | Per-file entry/exit: actual peer, disposition, candidate/confirmed/resolved counts, cumulative progress and non-error mirror delta. |
 | Stop Conditions | No queue for same-thread decoupling, second state machine or hidden outer implementation forwarding. Mirror increases below5 lines and at most2 points have standing approval; larger increases need prior approval. Preserve unrelated work. |
-| Exit Criteria | All E files reviewed in DIR order; no unapproved outer or same-layer implementation dependency; changed full chains delivered by small-five; runtime peers explicitly recorded. |
+| Exit Criteria | All F dependency candidates resolved with actual provider evidence; no unapproved same-layer implementation dependency; changed complete chains delivered by small-five. |
 
 ## Current Technical Baseline
 
@@ -76,8 +76,13 @@ No algorithm/ABI or guest changes; non-error mirror delta0 points/0 lines.
 Cached full x86/x64/reference and dual11 publication passed. Six focused
 fixtures passed, including input641, shutdown37 and VM frontend233 assertions;
 real COMMAND modern EDIT/CtrlQ, CMD echo, DOS MEM and launcher return passed.
-Package e6fc4605-1c7c-4e0a-b274-1c13ab6a74ce. S16 ready for owner acceptance;
-no successor admitted. Necessary cross-thread handoffs remain documented.
+Package e6fc4605-1c7c-4e0a-b274-1c13ab6a74ce. S16 closure criteria verified and owner-authorized closure recorded;
+S17 admitted. Necessary cross-thread handoffs remain documented.
+
+## S17 Progress
+
+Admission only. Build the DIR-ordered F dependency inventory before product
+changes. S17 implementation and verification have not yet started.
 
 ## Recent Governance
 
@@ -143,3 +148,7 @@ Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-
 ## S15 Closure Record
 
 Owner-closed on2026-11-20. [Final ownership and delivery evidence](../etc/evidence/m0-t483-s15-closure.md).
+
+## S16 Closure Record
+
+Owner-authorized closure after verification. [S16 closure evidence](../etc/evidence/m0-t483-s16-closure.md).

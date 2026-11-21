@@ -1413,3 +1413,5 @@ and dual publication, with the remaining implementation migration assigned
 to the sequential successor packets.
 
 [T483 S15 closure](evidence/m0-t483-s15-closure.md) anchors S16 admission.
+
+[T483 S16 closure](evidence/m0-t483-s16-closure.md) anchors S17 admission.
