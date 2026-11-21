@@ -1220,7 +1220,7 @@ $adapterDebuggerRoot = Join-Path $root 'src/compat'
 $adapterDebuggerObjects = foreach ($name in $adapterDebuggerNames) {
     $object = 'obj/compat/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterDebuggerRoot $name)))
-    $graph.Add('  cflags = ' + $compatCcpuFlags)
+    $graph.Add('  cflags = ' + ($libraryFlags + ' /TC'))
     $object
 }
 $originalDebuggerObject = 'obj/mvdm-debugger/dbg.obj'
@@ -1260,6 +1260,9 @@ $adapterSoftpcObjects += 'obj/compat/guest_location.obj'
 $graph.Add('build obj/compat/dpmi_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/dpmi_services.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/dpmi_services.obj'
+$graph.Add('build obj/compat/mvdm_cpu_access.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_cpu_access.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$adapterSoftpcObjects += 'obj/compat/mvdm_cpu_access.obj'
 $graph.Add('build obj/compat/mvdm_vm_command_entry.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_vm_command_entry.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/mvdm_vm_command_entry.obj'
@@ -2287,7 +2290,7 @@ $graph.Add('  command = link.exe /nologo /machine:x86 /opt:ref /out:$out $in leg
 $graph.Add('build obj/tests/ccpu_debug_match_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/ccpu_debug_match_test.c')))
 $graph.Add('build ccpu-debug-match-test.exe: debug_unit_link obj/tests/ccpu_debug_match_test.obj obj/ccpu/c_debug.obj')
 $graph.Add('build obj/tests/debug_register_binding_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/debug_register_binding_test.c')))
-$graph.Add('build debug-register-binding-test.exe: debug_unit_link obj/tests/debug_register_binding_test.obj obj/compat/dpmi_services.obj')
+$graph.Add('build debug-register-binding-test.exe: debug_unit_link obj/tests/debug_register_binding_test.obj obj/compat/dpmi_services.obj obj/compat/mvdm_cpu_access.obj')
 $graph.Add('build obj/tests/debugger_event_transport_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/debugger_event_transport_test.c')))
 $graph.Add('build debugger-event-transport-test.exe: event_test_link obj/tests/debugger_event_transport_test.obj')
 $graph.Add('build obj/tests/debugger_module_event_test.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/debugger_module_event_test.c')))

@@ -1,0 +1,5401 @@
+{
+  "packet": "M0 T483 S19 P1",
+  "baseline": "9094627fe",
+  "status": "verified P1 delivery",
+  "progress": {
+    "total": 38,
+    "completed": 2,
+    "remaining": 36,
+    "direct_C2_unique_before": 337,
+    "direct_C2_unique_after": 325,
+    "direct_C2_records_before": 606,
+    "direct_C2_records_after": 594
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "3dfa2e06-17a3-4a94-af84-8dd0f8b2f400",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "mirror_delta": {
+    "points": 2,
+    "lines": 19,
+    "approval": "explicit owner approval; R2721/R2722"
+  },
+  "callbacks": {
+    "cpu": "11 immutable B-owned slots; all target CCPU/SAS C2 providers; installed before guest execution by ntvdm_dpmi_initialize",
+    "command": "existing COMMAND table gains cmdXformEnvironment pointer; original C2 allocation/sort/COMSPEC behavior retained"
+  },
+  "lifetime": "same-process static tables; first installation atomic and identical reinstallation allowed; no teardown before process exit; guest/task state remains with previous owners",
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "debug_native_and_real_CPU": 0,
+    "command_capture": "161 assertions",
+    "command_guest_composition": "43 assertions; current CMake compat-command-tests output",
+    "guest_debug": "real scalar/RMW/string/stack/code watchpoints and removal; two normal debug-handle exits",
+    "real_command": "modern EDIT/Ctrl+Q/CMD echo/DOS MEM/launcher exit",
+    "gate_negative_controls": "5 tests passed",
+    "final_gates": "22 release hashes; documentation governance/links; 9 production boundary graphs; frontend ownership; diff whitespace passed"
+  },
+  "attempts": [
+    "Old ccpu_host_fixture_seams headers used retired F paths; updated to B.",
+    "CPU-only test bypassed product startup; explicit production ntvdm_dpmi_initialize restored its required provider binding.",
+    "Strict unmodified watchpoint probe fails stage4 on both S18 and P1. This is previously attributed original DOSX 0B02 predicate inversion, documented in m0-t420-s38-dpmi32-capability-review.md. It is not a passing status-query result and original guest is unchanged. Delivery/removal variant tested separately.",
+    "Initial new-runner one-element define was split as characters by PowerShell; corrected to typed string array.",
+    "COMMAND unit initially used historical output directory; final evidence uses freshly built compat-command-tests binary."
+  ],
+  "remaining_direct_C2": [
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_command_guest_state.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_ccpu_guest_memory_copy",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_command_native_child.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_guest_location_acquire_vm",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_command_native_child.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_guest_location_release",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "evidence": "_qevJumpRestart",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "15",
+      "target": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "evidence": "_qevJumpRestart",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setAF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setDF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setIF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setIOPL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setNT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setOF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setPF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setSF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setTF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setZF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_c_getEFLAGS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_c_setEFLAGS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "evidence": "_c_cpu_EOA_hook",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "evidence": "_c_cpu_calc_q_ev_inst_for_time",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "evidence": "_c_cpu_init",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "evidence": "_c_cpu_interrupt",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "evidence": "_c_cpu_q_ev_get_count",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "evidence": "_c_cpu_q_ev_set_count",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "evidence": "_c_cpu_simulate",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "evidence": "_c_cpu_terminate",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getAF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getAH",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getAL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getAX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getBH",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getBL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getBP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getBX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCH",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR2",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getDF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getDH",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getDI",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getDL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getDS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getDX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getEAX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getEBP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getEBX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getECX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getEDI",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getEDX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getEIP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getEM",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getES",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getESI",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getESP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getFS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getGDT_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getGDT_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getGS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getIDT_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getIDT_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getIF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getIOPL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getIP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getLDT_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getLDT_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getLDT_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getMP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getMSW",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getNT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getOF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getPE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getPF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getPG",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getRF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getSF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getSI",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getSP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getSS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getSTATUS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getTF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getTR_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getTR_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getTR_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getTR_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getTS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getVM",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getZF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setAF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setAH",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setAL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setAX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setBH",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setBL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setBP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setBX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCH",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCR2",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setDF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setDH",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setDI",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setDL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setDS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setDX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setEAX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setEBP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setEBX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setECX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setEDI",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setEDX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setEIP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setEM",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setES",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setESI",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setESP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setFS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setGS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setIF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setIOPL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setIP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setLDT_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setMP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setMSW",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setNT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setOF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setPE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setPF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setPG",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setRF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setSF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setSI",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setSP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setSS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setTF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setTR_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setTS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setVM",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setZF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "evidence": "_PurgeLostIretHookLine",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "evidence": "_getAddProfileDataAddr",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "evidence": "_setAddProfileDataPtr",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "evidence": "_setEOIEnableAddr",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "evidence": "_setMaxProfileDataAddr",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCPL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCS_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCS_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCS_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCS_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getDS_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getDS_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getDS_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getDS_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getES_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getES_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getES_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getES_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getFS_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getFS_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getFS_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getFS_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getGS_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getGS_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getGS_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getGS_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getSS_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getSS_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getSS_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getSS_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCPL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCS_BASE_LIMIT_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCS_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setDS_BASE_LIMIT_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setDS_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setES_BASE_LIMIT_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setES_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setFS_BASE_LIMIT_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setFS_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setGDT_BASE_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setGS_BASE_LIMIT_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setGS_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setIDT_BASE_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setLDT_BASE_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setSS_BASE_LIMIT_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setSS_SELECTOR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setTR_BASE_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setTR_BASE_LIMIT_AR",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_overwrite_memory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_cvidc_vector_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/cvidc/vglfunc.c",
+      "evidence": "_C_Video",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_keyboard_reset.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "evidence": "_ica_hw_interrupt_cancel",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_keyboard_reset.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_DelayHwInterrupt",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_redirector_async.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_guest_location_acquire",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_redirector_async.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_guest_location_copy_to_guest",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_redirector_async.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_guest_location_release",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_redirector_async.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_guest_location_acquire",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_redirector_async.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_guest_location_release",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_descriptor_fields.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_read_descriptor_linear",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_c_getEFLAGS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_read_descriptor_linear",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_selector_outside_GDT_LDT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getMSW",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_c_getEFLAGS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_read_descriptor_linear",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_selector_outside_GDT_LDT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getMSW",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_c_getEFLAGS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_read_descriptor_linear",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_selector_outside_GDT_LDT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getMSW",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_read_descriptor_linear",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_effective_address.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "evidence": "_selector_outside_GDT_LDT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_bridge.c",
+      "line_or_section": "21",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_bridge.c",
+      "line_or_section": "21",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_bridge.c",
+      "line_or_section": "21",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "evidence": "_DoMouseInterrupt",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_bridge.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_bridge.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_guest.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "evidence": "_mouse_pointer_route_changed",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_guest.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "evidence": "_DisplayErrorTerm",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_guest.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "evidence": "_EmulateCoordinates",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_guest.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "evidence": "_DisplayErrorTerm",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_guest.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_mouse_guest.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_termination.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "evidence": "_host_applClose",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_termination.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "evidence": "_host_applClose",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "11",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "evidence": "_set_the_vlt",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/softpc.new/base/video/video.c",
+      "evidence": "_disable_stream_io",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "evidence": "_nt_cursor_size_changed",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "evidence": "_nt_mark_screen_refresh",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "evidence": "_now_height",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "evidence": "_now_width",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "evidence": "_update_alg",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "evidence": "_DisplayErrorTerm",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "evidence": "_ConsoleInitialised",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "evidence": "_ConsoleNoUpdates",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_text_video.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "evidence": "_DisplayErrorTerm",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "100",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "100",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "100",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "100",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "100",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setGDT_BASE_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "102",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "102",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "102",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "104",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "104",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "104",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "104",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "106",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "106",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "108",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "108",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "108",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmFreeVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "11",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "11",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "112",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "112",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "112",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "114",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "114",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "116",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "116",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "116",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmFreeVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "118",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "118",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "118",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmFreeVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "120",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "120",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "120",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "120",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "124",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "124",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "124",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "126",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "126",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "128",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "128",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "130",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "130",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "130",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "132",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "138",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "138",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "138",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "140",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmFreeVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "142",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "142",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "144",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "144",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getGDT_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getGDT_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_fills",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_memory_size",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_stores",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_twenty_bit_wrapping_enabled",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmAddVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "146",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmAllocateVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "150",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "150",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storew",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "156",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmFreeVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "156",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmRemoveVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "158",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "158",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "160",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "160",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "162",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "164",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "164",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "166",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_fills",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "166",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmAllocateVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "168",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "168",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "168",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_fills",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "168",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "168",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmAllocateVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "168",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmFreeVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "170",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "170",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "170",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "170",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "172",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "172",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "174",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "174",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "176",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "176",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "182",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCPL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "182",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getVM",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "182",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "evidence": "_xtrn2phy",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "182",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetPhyAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "182",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "184",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "186",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "186",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "19",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "19",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "196",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "196",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "20",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "20",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "20",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "200",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmFreeVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "204",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "204",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "22",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "22",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "26",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "26",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "26",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setGDT_BASE_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "30",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "30",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "32",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "32",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "32",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "34",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "34",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "36",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "38",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "38",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "40",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "40",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "40",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "44",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "46",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "46",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "46",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "46",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "48",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "48",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "48",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "48",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "50",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "50",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "50",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmFreeVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "56",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "56",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "56",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "56",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setGDT_BASE_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "58",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "58",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "58",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "58",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "60",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "60",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "60",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "60",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "70",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "70",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "70",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "70",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "72",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "72",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "72",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getGDT_BASE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "72",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "72",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setGDT_BASE_LIMIT",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "74",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "74",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "74",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "74",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "76",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_GetLinAdd",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "76",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_loads",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "76",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmFreeVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "78",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "78",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "78",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "82",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "84",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "84",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "84",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "84",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "86",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "86",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "86",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_fills",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "86",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "86",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_stores",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "86",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storew",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "86",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmAllocateVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "86",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "evidence": "_VdmFreeVirtualMemory",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "88",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "88",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "88",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_storedw",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "92",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "92",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "94",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "94",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "96",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "96",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "96",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_c_sas_dw_at",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "98",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR0",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_softpc_wow_page_domain.c",
+      "line_or_section": "98",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCR3",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "evidence": "_BIOS",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "evidence": "_virtual_device_trap",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "evidence": "_virtual_device_trap",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getCPL",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getEAX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getEBX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getECX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getEDX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getESI",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getPE",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getVM",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setCF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setEAX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setEBX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setEDX",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setESI",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_bridge.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_bridge.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_capture.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_acquire",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_capture.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_release",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_capture.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_guest_location_acquire_vm",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_capture.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_guest_location_release",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_capture.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_acquire",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_capture.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_release",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_capture.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_acquire",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_capture.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_release",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_command_entry.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getIP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_command_entry.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_getVM",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_command_entry.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "evidence": "_c_setIP",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_command_entry.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "evidence": "_CALLF",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_command_entry.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_command_entry.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_command_entry.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_command_entry.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_command_entry.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_command_entry.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "11",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "11",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "15",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "15",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "19",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "19",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "21",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "21",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "27",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "27",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "29",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "29",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "31",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "31",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "33",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "33",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "35",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "35",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "37",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_continuation.c",
+      "line_or_section": "37",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_guest_io.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_copy_from",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_guest_io.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_copy_to",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_guest_io.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_copy_from",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_guest_io.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_guest_io.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_guest_io.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_keycd.c",
+      "evidence": "_BiosKeyToInputRecord",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_input_bop.c",
+      "line_or_section": "11",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_copy_from",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_input_bop.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_copy_from",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_input_bop.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "evidence": "_mvdm_softpc_guest_memory_copy_from",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_input_bop.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_keycd.c",
+      "evidence": "_BiosKeyToInputRecord",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "11",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "11",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "15",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "15",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "17",
+      "target": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "evidence": "_ica_hw_interrupt",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "evidence": "_ica_hw_interrupt_cancel",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_RemoveEOIHook",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "evidence": "_VDDReleaseIrqLine",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_RegisterEOIHook",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "evidence": "_VDDReleaseIrqLine",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "evidence": "_VDDReserveIrqLine",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_notification.c",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "10",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "10",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "12",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "12",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "14",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "14",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "16",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "16",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "18",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "18",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "20",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "20",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "6",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "6",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_lock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/mvdm_vm_wake.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "evidence": "_host_ica_unlock",
+      "product": "ntvdm.exe"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_clipboard_epoch.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wuclip.c",
+      "evidence": "_W32EmptyClipboard@0",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_common_dialog_callback.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wcommdlg.c",
+      "evidence": "_WowOriginalDialogProc@16",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_common_dialog_callback.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/wow32/wcommdlg.c",
+      "evidence": "_WowOriginalFindReplaceDialogProc@16",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_common_dialog_callback.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/wow32/wcommdlg.c",
+      "evidence": "_WowOriginalPrintSetupDialogProc@16",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_hook_callback.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wmdisp32.c",
+      "evidence": "_fThunkDDEmsg",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_hook_callback.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wowhooks.c",
+      "evidence": "_W32GetHookStateData@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_hook_callback.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wowhooks.c",
+      "evidence": "_WowOriginalStdHookProc@16",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_hook_callback.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wowhooks.c",
+      "evidence": "_vHookParams",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_hook_callback.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wowhooks.c",
+      "evidence": "_viCurrentHookStateDataIndex",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_hook_callback.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wumsg.c",
+      "evidence": "_fWhoCalled",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_idle_hook_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/wow32/wkman.c",
+      "evidence": "_WowOriginalForegroundIdleHook@12",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_idle_hook_binding.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/wow32/wkman.c",
+      "evidence": "_gptdTaskHead",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_idle_hook_binding.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/wkman.c",
+      "evidence": "_gptdTaskHead",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/wow32/wmsg16.c",
+      "evidence": "_UnThunkWMMsg16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "13",
+      "target": "src/mvdm-host/wow32/wmsgcb.c",
+      "evidence": "_UnThunkCBMsg16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "15",
+      "target": "src/mvdm-host/wow32/wcntl32.c",
+      "evidence": "_WM32CBDir@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "15",
+      "target": "src/mvdm-host/wow32/wmdisp32.c",
+      "evidence": "_WM32CopyData@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "15",
+      "target": "src/mvdm-host/wow32/wmdisp32.c",
+      "evidence": "_WM32SetText@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/walloc16.c",
+      "evidence": "_free16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "4",
+      "target": "src/mvdm-host/wow32/walloc16.c",
+      "evidence": "_free16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/walloc16.c",
+      "evidence": "_free16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/wcall16.c",
+      "evidence": "_WOWGlobalLockSize16@8",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/wcall16.c",
+      "evidence": "_WOWGlobalUnlockFree16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/wmdisp32.c",
+      "evidence": "_WM32Create@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/wmdisp32.c",
+      "evidence": "_WM32MDICreate@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/wmdisp32.c",
+      "evidence": "_WM32SizeClipBoard@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_message_lifetime.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/wmdisp32.c",
+      "evidence": "_WM32WinHelp@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_ole_descriptor_binding.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/wow32/wow32.c",
+      "evidence": "_WOWGetVDMPointer@12",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_standard_class_bindings.c",
+      "line_or_section": "10",
+      "target": "src/mvdm-host/wow32/walias.c",
+      "evidence": "_stdClasses",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_standard_class_bindings.c",
+      "line_or_section": "6",
+      "target": "src/mvdm-host/wow32/walias.c",
+      "evidence": "_GetStdClassNumber@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_standard_class_bindings.c",
+      "line_or_section": "6",
+      "target": "src/mvdm-host/wow32/walias.c",
+      "evidence": "_stdClasses",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_standard_class_bindings.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/walias.c",
+      "evidence": "_stdClasses",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_task_cleanup_entry.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wkman.c",
+      "evidence": "_WowOriginalFreeTask@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_task_cleanup_entry.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/wow32/wkman.c",
+      "evidence": "_gptdTaskHead",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_task_cleanup_entry.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/wow32/wsdata.c",
+      "evidence": "_WWS32CancelAsyncRequestsForTask@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_task_cleanup_entry.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/wow32/wsext.c",
+      "evidence": "_WWS32TlsSlot",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_timer_callback.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wutmr.c",
+      "evidence": "_WowOriginalTimerFunc@16",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_user_native_extension.c",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wcall16.c",
+      "evidence": "_wow_original_CallBack16@16",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_user_native_extension.c",
+      "line_or_section": "4",
+      "target": "src/mvdm-host/wow32/wkgthunk.c",
+      "evidence": "_wow_original_WK32ICallProc32@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_user_native_extension.c",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/wow32/wmmedia.c",
+      "evidence": "_wow_original_WMM32CallProc32@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_user_native_extension.c",
+      "line_or_section": "6",
+      "target": "src/mvdm-host/wow32/wkgthunk.c",
+      "evidence": "_wow_original_WOWDirectedYield16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_user_native_extension.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/wow32/wkgthunk.c",
+      "evidence": "_wow_original_WOWYield16@0",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_user_thunk_scope.c",
+      "line_or_section": "7",
+      "target": "src/mvdm-host/wow32/wow32.c",
+      "evidence": "_W32Exception@8",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_user_thunk_scope.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/wmdisp32.c",
+      "evidence": "_fThunkDDEmsg",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "compat",
+      "to": "mvdm-host",
+      "source": "src/compat/wow_user_thunk_scope.c",
+      "line_or_section": "8",
+      "target": "src/mvdm-host/wow32/wumsg.c",
+      "evidence": "_fWhoCalled",
+      "product": "wow32.dll"
+    }
+  ],
+  "evidence_root": "build\\t483-s19-b-c2"
+}

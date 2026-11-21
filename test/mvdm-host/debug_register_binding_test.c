@@ -1,7 +1,15 @@
 /* Boundary unit evidence, not guest/CPU or descriptor-decoder acceptance.
  * Compile the actual binding; mock only descriptor/memory/register endpoints. */
 #include <stdio.h>
+#include <stdlib.h>
 #include <windows.h>
+#include <insignia.h>
+#include <host_def.h>
+#include <xt.h>
+#include <c_main.h>
+#include <c_bsic.h>
+#include <c_tlb.h>
+extern void MOV_DR(ULONG, ULONG);
 static BOOL fail_debug_allocation;
 static LPVOID WINAPI test_debug_heap_alloc(HANDLE heap, DWORD flags, SIZE_T bytes);
 #define HeapAlloc test_debug_heap_alloc
@@ -34,6 +42,13 @@ void ccpu_restore_debug_context(const IU32 *registers, BOOL pending)
     CCPU_DR[6] = registers[4];
     CCPU_DR[7] = registers[5];
     debug_exception_pending = pending;
+}
+void ccpu_capture_debug_context(ULONG *registers, BOOL *pending)
+{
+    unsigned i;
+    for (i = 0; i != 4; ++i) registers[i] = CCPU_DR[i];
+    registers[4] = CCPU_DR[6]; registers[5] = CCPU_DR[7];
+    *pending = debug_exception_pending;
 }
 static IU32 table_address = 0x100, memory_size = 0x200000;
 static int paging, mapping_ok = 1, decodes;
@@ -73,6 +88,13 @@ VOID read_descriptor_linear(IU32 address, CPU_DESCR *descriptor)
     ++decodes;
     *descriptor = supplied;
 }
+void ccpu_read_descriptor_fields(ULONG address, ULONG *base, ULONG *limit,
+    USHORT *access)
+{
+    CPU_DESCR descriptor;
+    read_descriptor_linear(address, &descriptor);
+    *base = descriptor.base; *limit = descriptor.limit; *access = descriptor.AR;
+}
 int mvdm_softpc_guest_memory_copy_from(uint32_t address, uint8_t *bytes,
     uint32_t count)
 {
@@ -110,10 +132,15 @@ int main(void)
     ULONG output[6], input[6] = {10,11,12,13,16,17};
     ULONG i;
     compat_dpmi_services other = {0};
+    mvdm_cpu_access other_cpu = {0};
+    CHECK(!mvdm_cpu_access_install(NULL) && GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(!mvdm_cpu_access_install(&other_cpu) && GetLastError() == ERROR_INVALID_PARAMETER);
     CHECK(!compat_dpmi_install(NULL) && GetLastError() == ERROR_INVALID_PARAMETER);
     CHECK(!compat_dpmi_install(&other) && GetLastError() == ERROR_INVALID_PARAMETER);
     CHECK(ntvdm_dpmi_initialize());
     CHECK(ntvdm_dpmi_initialize());
+    other_cpu = *mvdm_cpu_access_current();
+    CHECK(!mvdm_cpu_access_install(&other_cpu) && GetLastError() == ERROR_ALREADY_INITIALIZED);
     other = *compat_dpmi_current_services();
     CHECK(!compat_dpmi_install(&other) && GetLastError() == ERROR_ALREADY_INITIALIZED);
     CHECK(!mvdm_softpc_wow_page_domain_reenter_protected());

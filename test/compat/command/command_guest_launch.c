@@ -1,5 +1,6 @@
 #include "compat/include/mvdm_command_launch.h"
 #include "compat/include/mvdm_command_text.h"
+#include "compat/include/command_services.h"
 #include "compat/include/mvdm_command_native_child.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,6 +29,13 @@ BOOL cmdXformEnvironment(PCHAR source, PANSI_STRING output)
     CHECK(NT_SUCCESS(RtlUnicodeStringToAnsiString(output,&unicode,TRUE)));
     if (bad_transform) memset(output->Buffer,'X',output->Length);
     return TRUE;
+}
+
+const compat_command_services *compat_command_current_services(void)
+{
+    static compat_command_services services;
+    services.transform_environment = cmdXformEnvironment;
+    return &services;
 }
 
 DWORD ntvdm_command_launch_prepare(unsigned int service, const char *command,

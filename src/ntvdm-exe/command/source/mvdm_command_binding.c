@@ -3,6 +3,8 @@
 #include "compat/include/mvdm_command_native_child.h"
 #include "compat/include/command_services.h"
 
+extern BOOL cmdXformEnvironment(char *, struct _STRING *);
+
 BOOL ntvdm_command_initialize(void)
 {
     static const compat_command_services services = {
@@ -15,7 +17,8 @@ BOOL ntvdm_command_initialize(void)
         mvdm_command_native_child_select_command_service,
         mvdm_command_native_child_finish,
         mvdm_command_guest_state_clear_doswow,
-        mvdm_command_guest_state_register_doswow
+        mvdm_command_guest_state_register_doswow,
+        cmdXformEnvironment
     };
     return compat_command_install(&services);
 }

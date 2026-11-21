@@ -1,0 +1,30 @@
+{
+  "packet": "M0 T483 S19",
+  "approval": "Owner approved 2 points/19 lines on 2026-11-20",
+  "status": "implemented and verified in S19 P1",
+  "mirror_delta": {
+    "points": 2,
+    "lines": 19
+  },
+  "files": [
+    {
+      "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "symbol": "ccpu_capture_debug_context",
+      "points": 1,
+      "lines": 9,
+      "reason": "C owns its debug register array and pending state; B captures six scalar register values synchronously."
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "symbol": "ccpu_read_descriptor_fields",
+      "points": 1,
+      "lines": 10,
+      "reason": "C calls original descriptor decoder and returns scalar fields; B no longer consumes private CPU_DESCR layout."
+    }
+  ],
+  "constraints": "Append-only outside excluded branches; original bytes, condition frameworks and original line mappings unchanged. No guest changes. Remaining C callbacks use existing original functions.",
+  "review_ids": [
+    "T483-R2721",
+    "T483-R2722"
+  ]
+}

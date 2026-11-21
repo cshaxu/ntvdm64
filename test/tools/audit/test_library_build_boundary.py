@@ -34,6 +34,11 @@ class BoundaryTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.check_unit("host_context.c", "src/mvdm-host/softpc.new/base/inc/xt.h")
 
+    def test_debug_callback_consumer_has_no_C_exception(self):
+        self.check_unit("dbg_registers.c", "src/compat/include/mvdm_cpu_access.h")
+        with self.assertRaises(ValueError):
+            self.check_unit("dbg_registers.c", "src/mvdm-host/softpc.new/base/ccpu386/c_main.h")
+
     def test_named_adapter_cannot_read_outer_layers(self):
         for layer in ("common", "frontend-base", "ntvdm-exe"):
             with self.subTest(layer=layer), self.assertRaises(ValueError):

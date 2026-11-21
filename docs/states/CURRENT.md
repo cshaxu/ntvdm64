@@ -192,7 +192,16 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 
 ## S19 Progress
 
-Admitted after S18 verification. Initial refreshed evidence has606 B-to-C2
-live relocation records and144 compiled-header records; these are observations,
-not unique violations or completed audits. Group by DIR-ordered source and
-actual provider before implementation. C1/C2 original connections remain intact.
+[DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
+38 candidates,2 implemented and verified,36 remaining. P1 clears dbg_registers.c
+and mvdm_command_launch.c using B-owned typed callbacks with C2 providers.
+Unique direct caller/symbol/provider relationships337->325; relocation
+records606->594, private compiled headers144->135, C2 search roots74->65.
+C1/C2 retains its five original WOW APIs (seven relocation rows).
+Owner-approved CCPU mirror delta+2 points/+19 lines is registered as R2721/R2722.
+Cached full build, dual11 publication and focused native/real-guest checks
+passed; [P1 evidence](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p1-delivery.json).
+Original DOSX status-query inversion reproduced on the S18 control and P1;
+status-query semantics are not claimed passed. No original guest changed.
+P1 final governance passed; this delivery records the verified batch.
+S19 remains active; S20 not admitted.

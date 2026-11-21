@@ -375,3 +375,13 @@ IFN1(
    if ( GET_CPL() == 0 )
       SET_IOPL((flags >> 12) & 3);
    }
+
+GLOBAL VOID ccpu_read_descriptor_fields
+IFN4(IU32, address, IU32 *, base, IU32 *, limit, IU16 *, access)
+{
+   CPU_DESCR descriptor;
+   read_descriptor_linear(address, &descriptor);
+   *base = descriptor.base;
+   *limit = descriptor.limit;
+   *access = descriptor.AR;
+}

@@ -4,6 +4,7 @@
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 #include "compat/include/mvdm_softpc_ccpu_wait.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_execution.h"
 
 /* Formal original CCPU/SAS providers, not replacement decode/reset bodies. */
 extern void *setup_global_data_ptr(void);
@@ -264,6 +265,7 @@ int main(void)
         0xb8,0xad,0xde,0xd6,0xfe};
     unsigned char reset_vector[] = {0xb8,0xef,0xbe,0xd6,0xfe};
     SetUnhandledExceptionFilter(report_exception);
+    if (!ntvdm_dpmi_initialize()) return 13;
     report("ntvdm-exe/session/gdp\n");
     session_initialize(&owner, 412);
     if (!session_activate(&owner) || !session_thread_bind(&owner) ||

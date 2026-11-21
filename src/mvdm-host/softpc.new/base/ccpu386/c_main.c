@@ -4828,3 +4828,12 @@ LOCAL VOID
       {
 	   /* Do nothing */
       }
+
+GLOBAL VOID ccpu_capture_debug_context IFN2(IU32 *, registers, BOOL *, pending)
+{
+   IU32 index;
+   for (index = 0; index != 4; ++index) registers[index] = CCPU_DR[index];
+   registers[4] = CCPU_DR[6];
+   registers[5] = CCPU_DR[7];
+   *pending = debug_exception_pending;
+}

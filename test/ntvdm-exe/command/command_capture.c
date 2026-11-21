@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "ntvdm-exe/command/include/command_launch.h"
 #include "compat/include/guest_location.h"
@@ -79,6 +80,13 @@ int mvdm_command_guest_state_register_doswow(uint16_t segment, uint16_t offset)
 #include "compat/include/command_native_child.h"
 #include "compat/include/command_guest_directory.h"
 
+BOOL cmdXformEnvironment(char *source, struct _STRING *output)
+{
+    (void)source; (void)output;
+    abort(); /* Capture must not convert the environment. */
+    return FALSE;
+}
+
 int main(void)
 {
     mvdm_command_capture_input input={0};
@@ -91,6 +99,7 @@ int main(void)
     const char *ordinary_command,*ordinary_environment;
     CHECK(!compat_command_install(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
     CHECK(ntvdm_command_initialize() && ntvdm_command_initialize());
+    CHECK(compat_command_current_services()->transform_environment == cmdXformEnvironment);
     mvdm_command_guest_state_clear_doswow();
     CHECK(directory_clears == 1);
     CHECK(mvdm_command_guest_state_register_doswow(0x1234, 0x5678) &&

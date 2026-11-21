@@ -6,30 +6,10 @@
  * decoding and guest-memory access stay bounded by the sole CCPU40 worker.
  */
 
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
 #include <stdint.h>
-
-#include "compat/include/mvdm_softpc_effective_address.h"
-#include "compat/include/guest_memory_access.h"
-#include <insignia.h>
-#include <host_def.h>
-#include <xt.h>
-#include <c_main.h>
-#include <c_addr.h>
-#include <c_bsic.h>
-#include <c_tlb.h>
-
-extern uint16_t c_getSS(void);
-extern uint16_t c_getSP(void);
-extern void MOV_DR(ULONG index, ULONG value);
-extern IBOOL c_getPG(void);
-extern IBOOL c_getVM(void);
-extern IUH c_getCPL(void);
-extern IU32 c_sas_memory_size(void);
-extern IU32 CCPU_DR[8];
-extern BOOL debug_exception_pending;
-extern void ccpu_restore_debug_context(const IU32 *registers, BOOL pending);
-extern void ccpu_apply_debug_context(const IU32 *registers);
+#include "include/mvdm_cpu_access.h"
+#include "include/guest_memory_access.h"
 
 /* Original x86 monitor thread contexts are per thread; its DPMI debug
  * service broadcasts to every registered thread and supplies the initial
@@ -38,14 +18,14 @@ extern void ccpu_apply_debug_context(const IU32 *registers);
 typedef struct debug_task_context {
     struct debug_task_context *next;
     DWORD thread_id;
-    IU32 registers[6];
+    ULONG registers[6];
     BOOL pending;
     BOOL bootstrap;
 } debug_task_context;
 
 static SRWLOCK debug_context_lock = SRWLOCK_INIT;
 static debug_task_context *debug_tasks;
-static IU32 initial_debug_registers[6];
+static ULONG initial_debug_registers[6];
 static BOOL initial_debug_active;
 static BOOL bootstrap_debug_registered;
 
@@ -59,11 +39,7 @@ static debug_task_context *debug_task_find(DWORD thread_id)
 
 static void debug_context_capture(debug_task_context *task)
 {
-    ULONG index;
-    for (index = 0; index != 4; ++index) task->registers[index] = CCPU_DR[index];
-    task->registers[4] = CCPU_DR[6];
-    task->registers[5] = CCPU_DR[7];
-    task->pending = debug_exception_pending;
+    mvdm_cpu_access_current()->capture_debug(task->registers, &task->pending);
 }
 
 BOOL __cdecl mvdm_debug_task_register(DWORD thread_id)
@@ -109,7 +85,7 @@ BOOL __cdecl mvdm_debug_task_exchange(DWORD previous, DWORD next)
     }
     if (previous != next) {
         if (old_task) debug_context_capture(old_task);
-        if (new_task) ccpu_restore_debug_context(new_task->registers, new_task->pending);
+        if (new_task) mvdm_cpu_access_current()->restore_debug(new_task->registers, new_task->pending);
     }
     ReleaseSRWLockExclusive(&debug_context_lock);
     SetLastError(saved);
@@ -135,14 +111,14 @@ void __cdecl mvdm_debug_task_retire(DWORD thread_id, BOOL rollback)
     SetLastError(saved);
 }
 
-static BOOL debug_readable_span(IU32 address, IU32 count, IUM8 access)
+static BOOL debug_readable_span(ULONG address, ULONG count, unsigned char access)
 {
-    IU32 i, physical, size = c_sas_memory_size();
+    ULONG i, physical, size = mvdm_cpu_access_current()->memory_size();
 
     if (!count || address > UINT32_MAX - (count - 1)) return FALSE;
     for (i = 0; i < count; ++i) {
         physical = address + i;
-        if (c_getPG() && !xtrn2phy(address + i, access, &physical)) return FALSE;
+        if (mvdm_cpu_access_current()->paging() && !mvdm_cpu_access_current()->translate(address + i, access, &physical)) return FALSE;
         if (physical >= size) return FALSE;
     }
     return TRUE;
@@ -151,25 +127,27 @@ static BOOL debug_readable_span(IU32 address, IU32 count, IUM8 access)
 BOOL mvdm_debugger_read_debug_registers(USHORT selector, USHORT offset,
     PULONG registers)
 {
-    IU32 descriptor_address, last = (IU32)offset + 23;
-    CPU_DESCR descriptor;
-    IUM8 access;
+    ULONG descriptor_address, last = (ULONG)offset + 23;
+    ULONG base, limit;
+    USHORT rights;
+    unsigned char access;
 
     if (registers == NULL || (selector & 0xfffc) == 0 ||
-        selector_outside_GDT_LDT(selector, &descriptor_address) ||
+        mvdm_cpu_access_current()->selector_outside(selector, &descriptor_address) ||
         !debug_readable_span(descriptor_address, 8, 0)) return FALSE;
-    read_descriptor_linear(descriptor_address, &descriptor);
-    if ((descriptor.AR & 0x90) != 0x90 ||
-        ((descriptor.AR & 8) && !(descriptor.AR & 2))) return FALSE;
-    if ((descriptor.AR & 0x0c) == 4) {
-        if (offset <= descriptor.limit ||
-            last > ((descriptor.AR & 0x4000) ? UINT32_MAX : 0xffff)) return FALSE;
-    } else if (last > descriptor.limit) return FALSE;
-    if (descriptor.base > UINT32_MAX - last) return FALSE;
-    access = c_getCPL() != 3 ? PG_U : 0;
-    if (c_getVM()) access |= 4;
-    if (!debug_readable_span(descriptor.base + offset, 24, access)) return FALSE;
-    return mvdm_softpc_guest_memory_copy_from(descriptor.base + offset,
+    mvdm_cpu_access_current()->descriptor_fields(descriptor_address,
+        &base, &limit, &rights);
+    if ((rights & 0x90) != 0x90 ||
+        ((rights & 8) && !(rights & 2))) return FALSE;
+    if ((rights & 0x0c) == 4) {
+        if (offset <= limit ||
+            last > ((rights & 0x4000) ? UINT32_MAX : 0xffff)) return FALSE;
+    } else if (last > limit) return FALSE;
+    if (base > UINT32_MAX - last) return FALSE;
+    access = mvdm_cpu_access_current()->privilege() != 3 ? MVDM_CPU_ACCESS_USER : 0;
+    if (mvdm_cpu_access_current()->virtual_mode()) access |= MVDM_CPU_ACCESS_V86;
+    if (!debug_readable_span(base + offset, 24, access)) return FALSE;
+    return mvdm_cpu_access_current()->read_memory(base + offset,
         (uint8_t *)registers, 6 * sizeof(*registers));
 }
 
@@ -183,7 +161,7 @@ BOOL ThreadSetDebugContext(PULONG registers)
     initial_debug_active = (registers[5] & 0x0f) != 0;
     for (task = debug_tasks; task; task = task->next)
         CopyMemory(task->registers, registers, sizeof(task->registers));
-    ccpu_apply_debug_context(registers);
+    mvdm_cpu_access_current()->apply_debug(registers);
     ReleaseSRWLockExclusive(&debug_context_lock);
     return TRUE;
 }

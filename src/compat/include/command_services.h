@@ -14,6 +14,7 @@ enum {
  * strings, release and native launch policy. This boundary owns no request,
  * session or guest mapping state. All signatures preserve
  * the existing COMMAND binding; strings remain borrowed until finish. */
+struct _STRING;
 typedef struct compat_command_services {
     int (*capture_guest)(uint16_t, uint16_t, uint16_t, uint16_t, uint16_t, uint16_t);
     int (*capture_host_command)(const char *, uint16_t, uint16_t, uint16_t, uint16_t);
@@ -25,6 +26,8 @@ typedef struct compat_command_services {
     void (*finish)(void);
     void (*clear_doswow)(void);
     int (*register_doswow)(uint16_t, uint16_t);
+    /* Original COMMAND provider; synchronous, output released by RTL. */
+    BOOL (*transform_environment)(char *, struct _STRING *);
 } compat_command_services;
 
 BOOL compat_command_install(const compat_command_services *services);

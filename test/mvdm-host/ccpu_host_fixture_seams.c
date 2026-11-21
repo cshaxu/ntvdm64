@@ -10,8 +10,8 @@
 #include <vdmapi.h>
 #include "common/base_srv/base_rpc_client.h"
 #include "ntvdm-exe/softpc/include/mvdm_standalone_worker.h"
-#include "ntvdm-exe/softpc/include/mvdm_vm_bridge.h"
-#include "ntvdm-exe/softpc/include/mvdm_vm_ingress.h"
+#include "compat/include/mvdm_vm_bridge.h"
+#include "compat/include/mvdm_vm_ingress.h"
 
 /* CPU-only fixtures cannot reach a broker or frontend. Keep new adapter
  * imports fail-closed, just like ExitVDM below; do not connect real products. */

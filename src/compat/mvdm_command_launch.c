@@ -1,6 +1,7 @@
 #include "include/mvdm_command_text.h"
 #include "include/mvdm_command_launch.h"
 #include "include/mvdm_command_native_child.h"
+#include "include/command_services.h"
 
 #include <string.h>
 
@@ -9,7 +10,7 @@ NTSTATUS NTAPI RtlOemStringToUnicodeString(PUNICODE_STRING, PCOEM_STRING, BOOLEA
 
 /* The selected original COMMAND environment algorithm. It builds a private,
  * sorted ANSI block and retains host COMSPEC rather than guest COMMAND.COM. */
-extern BOOL cmdXformEnvironment(PCHAR, PANSI_STRING);
+/* The existing immutable COMMAND service table carries its C provider. */
 
 static DWORD ansi_copy(const char *source, ANSI_STRING *output)
 {
@@ -43,7 +44,8 @@ DWORD ntvdm_command_prepare_text(const char *command, const char *environment,
     if (!command) return ERROR_INVALID_PARAMETER;
     error = ansi_copy(command, command_out);
     if (!error && environment &&
-        !cmdXformEnvironment((PCHAR)environment, environment_out))
+        !compat_command_current_services()->transform_environment(
+            (PCHAR)environment, environment_out))
         error = ERROR_NOT_ENOUGH_MEMORY;
     if (error) {
         RtlFreeAnsiString(environment_out);
