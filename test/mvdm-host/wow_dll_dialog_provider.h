@@ -40,3 +40,13 @@ BOOL WINAPI wow_task_state_bind(const wow_task_state_callbacks *p)
         p->separate_launch == wow_original_separate_launch &&
         p->idle == WowOriginalForegroundIdleHook;
 }
+
+#include "../../src/compat/include/wow_standard_class_provider.h"
+INT WINAPI GetStdClassNumber(LPSTR name) { (void)name; return 0; }
+LPCSTR WINAPI wow_original_class_name(UINT index) { (void)index; return NULL; }
+ATOM WINAPI wow_original_class_atom(UINT index) { (void)index; return 0; }
+BOOL WINAPI wow_standard_class_bind(const wow_standard_class_provider *p)
+{
+    return p && p->classify == GetStdClassNumber &&
+        p->name == wow_original_class_name && p->atom == wow_original_class_atom;
+}

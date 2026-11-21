@@ -6,23 +6,23 @@
 #include "compat/include/opennt_user_multipass.h"
 #include <stddef.h>
 
-/* Exact private STDCLASS data ABI from original wow32/walias.c. The object
- * and classifier below are linked from that original translation unit,
- * not a duplicate name/ordinal/procedure table. Selected provider is x86. */
-typedef struct _stdclass {
-    LPSTR lpszClassName;
-    ATOM aClassAtom;
-    WNDPROC lpfnWndProc;
-    INT iOrdinal;
-    DWORD vpfnWndProc;
-} wow_original_standard_class;
-extern wow_original_standard_class stdClasses[];
-INT WINAPI GetStdClassNumber(LPSTR);
-C_ASSERT(sizeof(wow_original_standard_class) == 20);
-C_ASSERT(offsetof(wow_original_standard_class, aClassAtom) == 4);
-C_ASSERT(offsetof(wow_original_standard_class, lpfnWndProc) == 8);
-C_ASSERT(offsetof(wow_original_standard_class, iOrdinal) == 12);
-C_ASSERT(offsetof(wow_original_standard_class, vpfnWndProc) == 16);
+#include "wow_standard_class_provider.h"
+
+static const wow_standard_class_provider *provider;
+
+BOOL WINAPI wow_standard_class_bind(const wow_standard_class_provider *value)
+{
+    const wow_standard_class_provider *previous;
+    if (!value || !value->classify || !value->name || !value->atom) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,
+        (PVOID)value, NULL);
+    if (previous && previous != value) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
 
 /* WALIAS.H WOWCLASS order -> clinit.c / init.c registration FNIDs.
  * No class names/procedures or separate classification policy here. */
@@ -50,13 +50,13 @@ BOOL WINAPI wow_standard_classes_bind_cleanup(wow_cleanup_context *context)
     wow_cleanup_shared shared = {0};
     PROC restore = (PROC)wow_class_call_original_native;
     unsigned i;
-    if (!context || !context->shared) {
+    if (!context || !context->shared || !provider) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     for (i = 2; i < ARRAYSIZE(fnids); ++i) {
         wow_standard_class_view view;
         if (!process_control(fnids[i])) continue;
-        if (!wow_standard_class_describe(stdClasses[i].lpszClassName, &view))
+        if (!wow_standard_class_describe(provider->name(i), &view))
             return FALSE;
         shared.atomSysClass[cleanup_indices[i]] = view.atom;
     }
@@ -81,25 +81,26 @@ BOOL WINAPI wow_standard_class_describe(LPCSTR name,
 {
     wow_standard_class_view result = {0};
     WNDCLASSEXA by_atom = {sizeof(by_atom)};
-    wow_original_standard_class *entry;
+    LPCSTR class_name;
+    ATOM atom;
     INT index;
     if (!name || !output) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
-    index = GetStdClassNumber((LPSTR)name);
+    if (!provider) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
+    index = provider->classify((LPSTR)name);
     if (index <= 1 || (UINT)index >= ARRAYSIZE(fnids)) {
         SetLastError(ERROR_CLASS_DOES_NOT_EXIST); return FALSE;
     }
-    entry = &stdClasses[index];
+    class_name = provider->name((UINT)index);
     result.native.cbSize = sizeof(result.native);
-    if (!GetClassInfoExA(NULL, entry->lpszClassName, &result.native))
+    if (!GetClassInfoExA(NULL, class_name, &result.native))
         return FALSE;
     /* Same producer/cache as GetStdClassNumber's integer path. Predefined
      * #327xx atoms are already in the original table. No Base atom table. */
-    if (!entry->aClassAtom)
-        entry->aClassAtom = (ATOM)RegisterWindowMessageA(entry->lpszClassName);
-    if (!entry->aClassAtom) return FALSE;
-    if (!GetClassInfoExA(NULL, MAKEINTATOM(entry->aClassAtom), &by_atom))
+    atom = provider->atom((UINT)index);
+    if (!atom) return FALSE;
+    if (!GetClassInfoExA(NULL, MAKEINTATOM(atom), &by_atom))
         return FALSE;
     if (result.native.lpfnWndProc != by_atom.lpfnWndProc ||
             result.native.hInstance != by_atom.hInstance ||
@@ -108,7 +109,7 @@ BOOL WINAPI wow_standard_class_describe(LPCSTR name,
             result.native.cbWndExtra != by_atom.cbWndExtra) {
         SetLastError(ERROR_INVALID_DATA); return FALSE;
     }
-    result.atom = entry->aClassAtom;
+    result.atom = atom;
     result.fnid = fnids[index];
     *output = result;
     return TRUE;
@@ -138,7 +139,7 @@ BOOL WINAPI wow_standard_classes_prepare(wow_class_lookup_context *classes,
 {
     unsigned i;
     DWORD error;
-    if (!classes || !classes->client_module || classes->pclsPrivateList ||
+    if (!provider || !classes || !classes->client_module || classes->pclsPrivateList ||
             classes->pclsPublicList || classes->system_classes) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
@@ -149,9 +150,9 @@ BOOL WINAPI wow_standard_classes_prepare(wow_class_lookup_context *classes,
         /* These four are original LW_RegisterWindows desktop/menu/switch/
          * icon-title classes, not this process-control registration group. */
         if (!process_control(fnids[i])) continue;
-        if (!wow_standard_class_describe(stdClasses[i].lpszClassName, &view))
+        if (!wow_standard_class_describe(provider->name(i), &view))
             goto fail;
-        if (!RtlCaptureAnsiString(&name, stdClasses[i].lpszClassName, TRUE))
+        if (!RtlCaptureAnsiString(&name, provider->name(i), TRUE))
             goto fail;
         imported = wow_class_words_import_native(classes, &view.native,
             name.pstr, view.atom, view.fnid, callback);

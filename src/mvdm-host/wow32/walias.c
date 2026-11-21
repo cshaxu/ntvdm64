@@ -560,3 +560,16 @@ HANDLE hConvert16to32(int h16)
 
     return((HANDLE)h32);
 }
+
+/* DIVERGENCE(MVDM-HOST-DIV-908): scalar projections of the original class table. */
+LPCSTR WINAPI wow_original_class_name(UINT index)
+{
+    return index < NUMEL(stdClasses) ? stdClasses[index].lpszClassName : NULL;
+}
+ATOM WINAPI wow_original_class_atom(UINT index)
+{
+    if (index < WOWCLASS_BUTTON || index >= NUMEL(stdClasses)) return 0;
+    if (!stdClasses[index].aClassAtom)
+        stdClasses[index].aClassAtom = (ATOM)RegisterWindowMessageA(stdClasses[index].lpszClassName);
+    return stdClasses[index].aClassAtom;
+}

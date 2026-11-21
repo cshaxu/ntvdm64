@@ -1,0 +1,80 @@
+{
+  "packet": "M0 T483 S19 P25",
+  "baseline": "69035c468",
+  "status": "verified delivery",
+  "id": "BC2F034",
+  "file": "src/compat/wow_standard_class_bindings.c",
+  "ownership": "C2 walias retains sole standard class table and original classifier. B uses immutable synchronous classify/name/atom callbacks. F binds before original DLL attach. Existing USER class-domain lock and lazy atom update after successful native class query unchanged.",
+  "direct_relationships": {
+    "file_before": 2,
+    "file_after": 0,
+    "B_C2_unique": 13,
+    "B_C2_raw": 13,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 34,
+    "total": 38,
+    "remaining": 4
+  },
+  "compiled_headers": {
+    "B_C2": 36,
+    "B_C1": 599
+  },
+  "private_search_roots": {
+    "B_C2": 0,
+    "B_C1": 25
+  },
+  "mirror": {
+    "files": [
+      {
+        "file": "src/mvdm-host/wow32/walias.c",
+        "before": {
+          "points": 0,
+          "lines": 0
+        },
+        "after": {
+          "points": 1,
+          "lines": 13
+        },
+        "delta": {
+          "points": 1,
+          "lines": 13
+        }
+      }
+    ],
+    "delta": {
+      "points": 1,
+      "lines": 13
+    },
+    "cumulative_S19": {
+      "points": 10,
+      "lines": 460
+    },
+    "approval": "Owner standing approval +1point and fewer than100lines",
+    "error_line_proof": "Original prefix byte-exact; appended scalar projections; paired parser zero issues. DIV908/R2732."
+  },
+  "source_proof": {
+    "previous_prefix_byte_exact": true,
+    "previous_prefix_sha256": "15ea7ed69f6acd6d2c10196339b6eec4b4a1d2898879dbff7be1eb73d4cda544"
+  },
+  "package": "e886d8da-5efb-4bb5-86c5-d33ef45dbe79",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hashes checked",
+  "tests": [
+    "Actual original standard class table: nine class identities, cache/query, cleanup/retirement and real CCPU storage passed",
+    "Selected DLL entry bridge BOOLEAN and controlled OS loader eight rounds passed; not real guest acceptance alone",
+    "Real USER16 messages, structured payloads, thread view and construction passed on final package",
+    "Real COMMAND modern EDIT CtrlQ, CMD echo, DOS MEM and launcher completion passed"
+  ],
+  "limitations": [
+    "No new Win3.1/Win95 matrix acceptance claimed",
+    "Generated/assembly audit gaps remain explicit; runtime callbacks are retained, not claimed absent"
+  ],
+  "failed_attempts": [
+    "DLL entry verifier rejected absolute evidence-root spelling before execution; relative build-owned path corrected and both bridge and OS loader tests passed",
+    "Prior VDMREDIR published identity differs; fresh current link-map generated instead of claiming raw hash identity"
+  ],
+  "evidence_root": "build/t483-s19-standard-class-delivery"
+}

@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P24 completes thirty-three files; five remain",
+  "status": "P25 completes thirty-four files; four remain",
   "files": [
     {
       "id": "BC2F001",
@@ -8724,7 +8724,7 @@
     {
       "id": "BC2F034",
       "file": "src/compat/wow_standard_class_bindings.c",
-      "status": "owner-approved compiled candidate; production implementation pending",
+      "status": "completed in verified P25 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8767,7 +8767,8 @@
           "product": "wow32.dll"
         }
       ],
-      "review": "standard-class-provider-decision.json"
+      "review": "standard-class-provider-decision.json",
+      "delivery": "p25-delivery.json"
     },
     {
       "id": "BC2F035",
@@ -9430,11 +9431,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 33,
-    "remaining": 5,
+    "completed": 34,
+    "remaining": 4,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 15,
+    "direct_C2_unique_after": 13,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 17
+    "direct_C2_records_after": 13
   }
 }

@@ -1,4 +1,5 @@
 #include "wow_standard_class_bindings.h"
+#include "wow_standard_class_provider.h"
 #include "wow_window_words_binding.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_dialog_state_bindings.h"
@@ -245,6 +246,11 @@ int __cdecl main(void)
     if (!terminal) return 1;
     memset(&unchanged, 0x5a, sizeof(unchanged));
     named = unchanged;
+    CHECK(!wow_standard_class_bind(NULL));
+    {
+        const wow_standard_class_provider invalid = {0};
+        CHECK(!wow_standard_class_bind(&invalid));
+    }
     CHECK(!wow_standard_class_describe("Not a standard class", &named));
     CHECK(!memcmp(&named, &unchanged, sizeof(named)));
     CHECK(!wow_standard_class_describe(NULL, &named));

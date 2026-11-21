@@ -3550,3 +3550,9 @@ text-video state operations formerly in B. Immutable synchronous callbacks
 return copied snapshots; original state and update ordering stay in C2.
 Owner-approved non-error increment+1point/+97lines; original prefix bytes
 and #error/#line unchanged. See P24 delivery evidence.
+
+MVDM-HOST-DIV-908: `wow32/walias.c` exposes class name and lazy atom
+scalar projections beside the original classifier/table. B no longer copies
+STDCLASS layout; existing USER lock and initialization ordering retained.
+Approved non-error increment+1point/+13lines; original prefix unchanged.
+See P25 delivery evidence.

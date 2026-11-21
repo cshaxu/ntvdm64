@@ -11,6 +11,12 @@
  * fixture uses /Gd; spell the existing provider ABI on that declaration. */
 #define UserRegisterWowHandlers WINAPI UserRegisterWowHandlers
 #include "compat/include/wow_shared_user_abi.h"
+#include "compat/include/wow_standard_class_provider.h"
+extern INT WINAPI GetStdClassNumber(LPSTR);
+extern LPCSTR WINAPI wow_original_class_name(UINT);
+extern ATOM WINAPI wow_original_class_atom(UINT);
+static const wow_standard_class_provider class_provider = {
+    GetStdClassNumber, wow_original_class_name, wow_original_class_atom };
 #undef UserRegisterWowHandlers
 #endif
 
@@ -6285,6 +6291,9 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 
 int main(int argc, char **argv)
 {
+#ifdef WOW_WINDOW_BORROW_FIXTURE
+    if (!wow_standard_class_bind(&class_provider)) return 13;
+#endif
     if (argc == 5 && !strcmp(argv[1], "--terminal-log")) {
         FILE *output;
         /* Test-only log protocol: retain CreateProcess(FALSE), original

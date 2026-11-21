@@ -193,7 +193,7 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,33 resolved,5 remaining. P24 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->15; relocation records606->17.
+38 candidates,34 resolved,4 remaining. P25 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->13; relocation records606->13.
 Compiled private C2 header rows144->36; private C2 search roots74->0.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
@@ -210,7 +210,7 @@ Directory is verified in [P21](../../artifacts/mvdm-audit/t483-b-c2-dependencies
 final cached full, dual11, directory/capture166 and real COMMAND return passed.
 Vector is delivered in [P22](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p22-delivery.json):
 183 C2 relations cleared; C-VID/CCPU209-slot and real COMMAND checks pass.
-Cumulative mirror increment+9points/+447lines.
+Cumulative mirror increment+10points/+460lines.
 [Mouse owner candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/mouse-guest-provider-decision.json)
 is delivered in [P23](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p23-delivery.json):
 5 C2 relations cleared; extracted-body/bridge15 and actual DOS mouse/COMMAND pass.
@@ -264,5 +264,6 @@ clears12 C2 relations. Existing bodies moved intact to C2; cached full, dual11,
 exact-body and real USER16 message/construction/COMMAND tests pass. Approved
 mirror delta+1 point/+123 lines; cumulative S19 +5 points/+200 lines.
 [P20 standard classes](../../artifacts/mvdm-audit/t483-b-c2-dependencies/standard-class-provider-decision.json)
-records an approved compiled +1point/+13line candidate; no production change
-or closed relation. S19 active; S20 not admitted.
+delivered in [P25](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p25-delivery.json):
+2 C2 relations cleared; +1point/+13lines. Cached full, dual11, class/loader
+and real USER16/COMMAND pass. S19 active; S20 not admitted.
