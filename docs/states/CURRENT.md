@@ -66,6 +66,7 @@ P143 [DOS exit](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-dos-exi
 P144 [Console activation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-console-activation-owner.json).
 P145 [WOW registration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-wow-registration-owner.json).
 P146 [COMMAND preparation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-command-launch-preparation-owner.json).
+P147 [Guest VM I/O](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-guest-io-owner.json).
 B 0 outward calls; C 2 calls, 1 slot, 1 header, 1 image. C0621 stays open.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)

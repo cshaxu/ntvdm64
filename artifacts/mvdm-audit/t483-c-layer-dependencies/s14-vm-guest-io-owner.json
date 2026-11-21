@@ -1,0 +1,181 @@
+{
+  "packet": "M0 T483 S14 P147",
+  "parent": "11ad87751cd41193c13e9b2438326d436fb930ee",
+  "C0621": {
+    "status": "open",
+    "migrated_operations": [
+      13,
+      14,
+      18
+    ],
+    "operation_13_14": "Bounded descriptor copies through existing C SAS, continuation data and acknowledgment owned by B.",
+    "operation_18": "Generation and OEM validation, conversion and record consumption owned by B. Original C ICA and BIOS key map remain the providers.",
+    "F_operation_specific_providers": {
+      "11": "mvdm_vm_command_admit and mvdm_vm_executor_submit",
+      "15": "mvdm_vm_ingress_register, current executor availability",
+      "16": "mvdm_vm_executor_key_bop",
+      "17": "mvdm_vm_executor_bios_key_bop",
+      "19": "mvdm_vm_executor_mouse_bop"
+    },
+    "F_slot_and_dispatcher": [
+      "vm_device_bop",
+      "mvdm_vm_bridge_bop"
+    ],
+    "semantics": "Existing status/ABI and synchronous executor admission retained. Both BOP implementation bodies and the key conversion helpers are byte-equivalent after removing the old location of C function declarations."
+  },
+  "B_outward_direct": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "C_outward_direct": {
+    "D": 1,
+    "E": 0,
+    "F": 1
+  },
+  "C_remaining_separate": {
+    "headers": [
+      "C0620"
+    ],
+    "runtime_slots": [
+      "C0621"
+    ],
+    "named_image_imports": [
+      "C0134"
+    ]
+  },
+  "mirror": {
+    "non_error_points_delta": 0,
+    "non_error_lines_delta": 0,
+    "original_guest_modified_or_recompiled": false
+  },
+  "verification": {
+    "products": [
+      "cached x86",
+      "cached native x64",
+      "cached x86 reference"
+    ],
+    "fixtures": [
+      "1/2 Test #42: mvdm-vm-notification .............   Passed    0.23 sec",
+      "2/2 Test #44: mvdm-vm-ingress ..................   Passed    0.13 sec"
+    ],
+    "production": [
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested",
+      "Original Windows installation bytes verified unchanged"
+    ],
+    "diagnostic": [
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS nested MEM output actually returned to both guest VMs before EXIT",
+      "PASS real native 54:08 AH=0/AH=1 and 54:0A in both DOS VMs; 0A input is provider stimulus, full guest I/O untested",
+      "Original Windows installation bytes verified unchanged",
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS real native unread-input sequence returned through guest BIOS peek/read in both VMs and both command rounds",
+      "PASS real native 54:08 AH=0/AH=1 and 54:0A in both DOS VMs; 0A input is provider stimulus, full guest I/O untested",
+      "Original Windows installation bytes verified unchanged"
+    ],
+    "diagnostic_link": "Existing host-continuation fixture against P147 worker libraries. The production bridge and migrated I/O implementations are used for the moved operations; fixture markers and stimulus stay in the test image.",
+    "test_boundary": "Initial raw production runs of the marked fixtures ended in access violations, reproduced on P146 control for nested MEM. These invocations require a separate host-continuation image. Final marked tests use the diagnostic image; ordinary production native launch uses the release image. Full and Win95 were not selected.",
+    "object_proof": {
+      "x86": {
+        "repository_headers": [
+          "compat/include/console_io.h",
+          "compat/include/console_mouse.h",
+          "compat/include/console_video.h",
+          "compat/include/guest_memory_access.h",
+          "compat/include/guest_memory_types.h",
+          "compat/include/mvdm_mouse_record.h",
+          "compat/include/mvdm_vm_continuation_store.h",
+          "compat/include/mvdm_vm_guest_io.h",
+          "compat/include/mvdm_vm_wake.h"
+        ],
+        "external_symbols": [
+          "__imp__GetLastError@0",
+          "__imp__HeapAlloc@12",
+          "__imp__HeapFree@12",
+          "__imp__GetProcessHeap@0",
+          "__imp__WideCharToMultiByte@32",
+          "__imp__IsValidCodePage@4",
+          "_mvdm_softpc_guest_memory_copy_from",
+          "_mvdm_softpc_guest_memory_copy_to",
+          "_mvdm_vm_wake_read_input",
+          "_mvdm_vm_continuation_read_io",
+          "_mvdm_vm_continuation_ack_io",
+          "_BiosKeyToInputRecord",
+          "_host_ica_lock",
+          "_host_ica_unlock",
+          "@__security_check_cookie@4",
+          "___security_cookie"
+        ],
+        "linked_owners": [
+          "0001:00005230       _mvdm_softpc_guest_memory_copy_from 00406230 f   original-ccpu386:ccpusas4.obj",
+          "0001:000053d0       _mvdm_softpc_guest_memory_copy_to 004063d0 f   original-ccpu386:ccpusas4.obj",
+          "0001:00059a30       _host_ica_lock             0045aa30 f   original-softpc-host-roots:nt_eoi.obj",
+          "0001:00059a40       _host_ica_unlock           0045aa40 f   original-softpc-host-roots:nt_eoi.obj",
+          "0001:0005d730       _BiosKeyToInputRecord      0045e730 f   original-softpc-host-roots:nt_keycd.obj",
+          "0001:0016e6e0       _mvdm_vm_continuation_ack_io 0056f6e0 f   softpc-bindings:mvdm_vm_continuation.obj",
+          "0001:0016ed10       _mvdm_vm_continuation_read_io 0056fd10 f   softpc-bindings:mvdm_vm_continuation.obj",
+          "0001:001707b0       _mvdm_vm_wake_read_input   005717b0 f   softpc-bindings:mvdm_vm_wake.obj",
+          "0001:001713f0       _mvdm_vm_application_bop   005723f0 f   softpc-bindings:mvdm_vm_guest_io.obj",
+          "0001:00171580       _mvdm_vm_executor_return_key_bop 00572580 f   softpc-bindings:mvdm_vm_guest_io.obj"
+        ]
+      },
+      "x64-ref": {
+        "repository_headers": [
+          "compat/include/console_io.h",
+          "compat/include/console_mouse.h",
+          "compat/include/console_video.h",
+          "compat/include/guest_memory_access.h",
+          "compat/include/guest_memory_types.h",
+          "compat/include/mvdm_mouse_record.h",
+          "compat/include/mvdm_vm_continuation_store.h",
+          "compat/include/mvdm_vm_guest_io.h",
+          "compat/include/mvdm_vm_wake.h"
+        ],
+        "external_symbols": [
+          "__imp__GetLastError@0",
+          "__imp__HeapAlloc@12",
+          "__imp__HeapFree@12",
+          "__imp__GetProcessHeap@0",
+          "__imp__WideCharToMultiByte@32",
+          "__imp__IsValidCodePage@4",
+          "_mvdm_softpc_guest_memory_copy_from",
+          "_mvdm_softpc_guest_memory_copy_to",
+          "_mvdm_vm_wake_read_input",
+          "_mvdm_vm_continuation_read_io",
+          "_mvdm_vm_continuation_ack_io",
+          "_BiosKeyToInputRecord",
+          "_host_ica_lock",
+          "_host_ica_unlock",
+          "@__security_check_cookie@4",
+          "___security_cookie"
+        ],
+        "linked_owners": [
+          "0001:00005230       _mvdm_softpc_guest_memory_copy_from 00406230 f   original-ccpu386:ccpusas4.obj",
+          "0001:000053d0       _mvdm_softpc_guest_memory_copy_to 004063d0 f   original-ccpu386:ccpusas4.obj",
+          "0001:00059a30       _host_ica_lock             0045aa30 f   original-softpc-host-roots:nt_eoi.obj",
+          "0001:00059a40       _host_ica_unlock           0045aa40 f   original-softpc-host-roots:nt_eoi.obj",
+          "0001:0005d730       _BiosKeyToInputRecord      0045e730 f   original-softpc-host-roots:nt_keycd.obj",
+          "0001:0016e6e0       _mvdm_vm_continuation_ack_io 0056f6e0 f   softpc-bindings:mvdm_vm_continuation.obj",
+          "0001:0016ed10       _mvdm_vm_continuation_read_io 0056fd10 f   softpc-bindings:mvdm_vm_continuation.obj",
+          "0001:001707b0       _mvdm_vm_wake_read_input   005717b0 f   softpc-bindings:mvdm_vm_wake.obj",
+          "0001:001713f0       _mvdm_vm_application_bop   005723f0 f   softpc-bindings:mvdm_vm_guest_io.obj",
+          "0001:00171580       _mvdm_vm_executor_return_key_bop 00572580 f   softpc-bindings:mvdm_vm_guest_io.obj"
+        ]
+      }
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "a1cbf7a7-0eaf-436b-a478-549541aac543",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

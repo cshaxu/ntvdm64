@@ -1,8 +1,6 @@
 #include "mvdm_vm_continuation.h"
-#include "mvdm_softpc_guest_memory.h"
 #include "compat/include/console_io.h"
 #include "ntvdm-exe/frontend/vm_text.h"
-#include <string.h>
 
 DWORD mvdm_vm_application_publish(mvdm_vm_continuation *request,
     const void *bytes, uint32_t size, const HANDLE cancellation[4])
@@ -29,37 +27,6 @@ DWORD mvdm_vm_application_publish(mvdm_vm_continuation *request,
         status == WAIT_FAILED ? GetLastError() : ERROR_OPERATION_ABORTED;
     return mvdm_vm_continuation_finish_io(request, ticket, error);
 }
-
-/* Existing BOP transport; copy a bounded descriptor, never retain VMM memory.
- * token[2], ticket[2], buffer address, capacity/extent, guest status. */
-DWORD mvdm_vm_application_bop(uint32_t operation, uint32_t vm,
-    uint32_t address, uint32_t extent)
-{
-    uint32_t descriptor[7], size;
-    uint64_t token, ticket;
-    DWORD error;
-    void *bytes = NULL;
-    if (extent != sizeof(descriptor) || !mvdm_softpc_guest_memory_copy_from(
-        address, (uint8_t *)descriptor, sizeof(descriptor))) return ERROR_INVALID_ADDRESS;
-    memcpy(&token, descriptor, 8); memcpy(&ticket, descriptor + 2, 8);
-    if (operation == 14)
-        return mvdm_vm_continuation_ack_io(token, vm, ticket, descriptor[6]);
-    if (descriptor[5] > CONSOLE_IO_MAX_DATA_BYTES) return ERROR_INVALID_DATA;
-    if (descriptor[4] && descriptor[5]) {
-        bytes = HeapAlloc(GetProcessHeap(), 0, descriptor[5]);
-        if (!bytes) return ERROR_NOT_ENOUGH_MEMORY;
-    }
-    error = mvdm_vm_continuation_read_io(token, vm, &ticket, bytes,
-        bytes ? descriptor[5] : 0, &size);
-    if (!error && !mvdm_softpc_guest_memory_copy_to(descriptor[4], bytes, size))
-        error = ERROR_INVALID_ADDRESS;
-    if (bytes) HeapFree(GetProcessHeap(), 0, bytes);
-    memcpy(descriptor + 2, &ticket, 8); descriptor[5] = size;
-    if (!mvdm_softpc_guest_memory_copy_to(address, (uint8_t *)descriptor,
-        sizeof(descriptor))) error = ERROR_INVALID_ADDRESS;
-    return error;
-}
-
 
 DWORD mvdm_vm_application_commit(mvdm_vm_continuation *request,
     ntvdm_vm_text *text, const HANDLE cancellation[4])

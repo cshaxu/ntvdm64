@@ -577,3 +577,9 @@ original environment and RTL providers, and all BOP 0xB1 operations.
 Preparing a request in B removes work from the F chain. C0621 remains open:
 operation 11 still needs F executor admission before returning its token.
 No direct edge closed. Non-error mirror delta: zero points, zero lines.
+
+## P147 guest VM I/O
+
+[Delivery evidence](s14-vm-guest-io-owner.json) closes the F provider paths for
+operations 13, 14 and 18. C0621 stays open for the F slot and dispatch,
+synchronous command admission, ingress readiness and executor input.

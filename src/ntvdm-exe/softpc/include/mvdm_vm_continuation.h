@@ -2,10 +2,6 @@
 #define MVDM_VM_CONTINUATION_H
 #include "compat/include/mvdm_vm_continuation_store.h"
 
-/* CPU-side bounded descriptor transport, reached only after bridge signature
- * and ring checks. Uses the same continuation owner as native publication. */
-DWORD mvdm_vm_application_bop(uint32_t operation, uint32_t vm,
-    uint32_t descriptor_address, uint32_t descriptor_extent);
 /* Channel/executor thread only, never CCPU/ICA. Borrow up to four lifecycle
  * handles (channel stop, worker, VM retirement, broker); NULL entries omitted.
  * The executor reference remains owned by the caller throughout. A guest ack
