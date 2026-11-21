@@ -1417,3 +1417,5 @@ to the sequential successor packets.
 [T483 S16 closure](evidence/m0-t483-s16-closure.md) anchors S17 admission.
 
 - [T483 S17 closure](evidence/m0-t483-s17-closure.md).
+
+- [T483 S18 closure](evidence/m0-t483-s18-closure.md).

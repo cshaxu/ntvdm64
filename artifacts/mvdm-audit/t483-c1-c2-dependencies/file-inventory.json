@@ -1,12 +1,12 @@
 {
   "baseline": "d111e6cc3",
   "packet": "M0 T483 S18",
-  "status": "initial census; not completed audit",
+  "status": "29/29 complete; S18 P3 verified delivery",
   "files": [
     {
       "id": "C1F001",
       "file": "src/non-mvdm/base/ntdll/csrutil.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -188,12 +188,28 @@
           "evidence": "/I",
           "product": "ntvdm.exe"
         }
-      ]
+      ],
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F002",
       "file": "src/non-mvdm/base/win32/client/vdm.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -375,12 +391,28 @@
           "evidence": "/I",
           "product": "ntvdm.exe"
         }
-      ]
+      ],
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F003",
       "file": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -562,12 +594,92 @@
           "evidence": "_WOWGetVDMPointer@12",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Retain original public WOW32 DLL APIs (wownt32.h and olethk32/daytona/sources). Remove private wow32/wuclip header closure; touch uses public WOWGetVDMPointer reaching identical protected-mode helper. No new OLE callback table.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [
+          {
+            "from": "non-mvdm",
+            "to": "mvdm-host",
+            "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+            "line_or_section": "3",
+            "target": "src/mvdm-host/wow32/wcall16.c",
+            "evidence": "_WOWGlobalLock16@4",
+            "product": "wow32.dll"
+          },
+          {
+            "from": "non-mvdm",
+            "to": "mvdm-host",
+            "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+            "line_or_section": "3",
+            "target": "src/mvdm-host/wow32/wcall16.c",
+            "evidence": "_WOWGlobalUnlock16@4",
+            "product": "wow32.dll"
+          },
+          {
+            "from": "non-mvdm",
+            "to": "mvdm-host",
+            "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+            "line_or_section": "5",
+            "target": "src/mvdm-host/wow32/wcall16.c",
+            "evidence": "_WOWGlobalAllocLock16@12",
+            "product": "wow32.dll"
+          },
+          {
+            "from": "non-mvdm",
+            "to": "mvdm-host",
+            "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+            "line_or_section": "5",
+            "target": "src/mvdm-host/wow32/wcall16.c",
+            "evidence": "_WOWGlobalUnlock16@4",
+            "product": "wow32.dll"
+          },
+          {
+            "from": "non-mvdm",
+            "to": "mvdm-host",
+            "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+            "line_or_section": "5",
+            "target": "src/mvdm-host/wow32/wcall16.c",
+            "evidence": "_WOWGlobalUnlockFree16@4",
+            "product": "wow32.dll"
+          },
+          {
+            "from": "non-mvdm",
+            "to": "mvdm-host",
+            "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+            "line_or_section": "5",
+            "target": "src/mvdm-host/wow32/wow32.c",
+            "evidence": "_WOWGetVDMPointer@12",
+            "product": "wow32.dll"
+          },
+          {
+            "from": "non-mvdm",
+            "to": "mvdm-host",
+            "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+            "line_or_section": "9",
+            "target": "src/mvdm-host/wow32/wow32.c",
+            "evidence": "_WOWGetVDMPointer@12",
+            "product": "wow32.dll"
+          }
+        ],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F004",
       "file": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -659,12 +771,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F005",
       "file": "src/non-mvdm/ds/netapi/netlib/copystr.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -756,12 +884,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F006",
       "file": "src/non-mvdm/ds/netapi/netlib/initoem.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -853,12 +997,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F007",
       "file": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -950,12 +1110,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F008",
       "file": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -1047,12 +1223,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F009",
       "file": "src/non-mvdm/ds/netapi/netlib/packstr.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -1144,12 +1336,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F010",
       "file": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -1241,12 +1449,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F011",
       "file": "src/non-mvdm/ds/netapi/netlib/time.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -1338,12 +1562,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F012",
       "file": "src/non-mvdm/ds/netapi/netlib/timezone.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -1435,12 +1675,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F013",
       "file": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -1532,12 +1788,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F014",
       "file": "src/non-mvdm/ds/netapi/rap/ascii.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -1629,12 +1901,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F015",
       "file": "src/non-mvdm/ds/netapi/rap/auxdata.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -1726,12 +2014,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F016",
       "file": "src/non-mvdm/ds/netapi/rap/convert.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -1823,12 +2127,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F017",
       "file": "src/non-mvdm/ds/netapi/rap/examine.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -1920,12 +2240,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F018",
       "file": "src/non-mvdm/ds/netapi/rap/parmnum.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -2017,12 +2353,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F019",
       "file": "src/non-mvdm/ds/netapi/rap/pointer.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -2114,12 +2466,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F020",
       "file": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -2211,12 +2579,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F021",
       "file": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -2308,12 +2692,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F022",
       "file": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -2405,12 +2805,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F023",
       "file": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -2502,12 +2918,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F024",
       "file": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -2599,12 +3031,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F025",
       "file": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -2696,12 +3144,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F026",
       "file": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -2793,12 +3257,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F027",
       "file": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "search-paths",
@@ -2890,12 +3370,28 @@
           "evidence": "/I",
           "product": "VDMREDIR.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Only unused inherited C2 include roots; no selected C2 compiler header or linked provider in initial census. Restrict original C1 source compile roots, preserve macros/source/ABI.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F028",
       "file": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -2927,12 +3423,28 @@
           "evidence": "_W32UnlockResource@8",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Restore existing UserRegisterWowHandlers resource slots instead of direct W32 symbol macros. Native defaults before registration; same process table lifetime, original argument order and cleanup.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "C1F029",
       "file": "src/non-mvdm/windows/core/ntuser/client/clres.c",
-      "status": "pending",
+      "status": "complete; verified in S18 P3",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -2944,7 +3456,95 @@
           "evidence": "_W32FindResource@16",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      },
+      "conclusion": "Restore existing UserRegisterWowHandlers resource slots instead of direct W32 symbol macros. Native defaults before registration; same process table lifetime, original argument order and cleanup.",
+      "final_evidence": {
+        "compiled-headers": [],
+        "search-paths": [],
+        "linked-relocations": [],
+        "literal-includes": [],
+        "resolved-includes": []
+      },
+      "non_error_mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
     }
-  ]
+  ],
+  "owner_revision": "C1/C2 original direct/DLL/callback connections approved; restore original, not zero dependency counter.",
+  "final_c1_c2": {
+    "compiled-headers": [],
+    "search-paths": [],
+    "linked-relocations": [
+      {
+        "from": "non-mvdm",
+        "to": "mvdm-host",
+        "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+        "line_or_section": "3",
+        "target": "src/mvdm-host/wow32/wcall16.c",
+        "evidence": "_WOWGlobalLock16@4",
+        "product": "wow32.dll"
+      },
+      {
+        "from": "non-mvdm",
+        "to": "mvdm-host",
+        "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+        "line_or_section": "3",
+        "target": "src/mvdm-host/wow32/wcall16.c",
+        "evidence": "_WOWGlobalUnlock16@4",
+        "product": "wow32.dll"
+      },
+      {
+        "from": "non-mvdm",
+        "to": "mvdm-host",
+        "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+        "line_or_section": "5",
+        "target": "src/mvdm-host/wow32/wcall16.c",
+        "evidence": "_WOWGlobalAllocLock16@12",
+        "product": "wow32.dll"
+      },
+      {
+        "from": "non-mvdm",
+        "to": "mvdm-host",
+        "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+        "line_or_section": "5",
+        "target": "src/mvdm-host/wow32/wcall16.c",
+        "evidence": "_WOWGlobalUnlock16@4",
+        "product": "wow32.dll"
+      },
+      {
+        "from": "non-mvdm",
+        "to": "mvdm-host",
+        "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+        "line_or_section": "5",
+        "target": "src/mvdm-host/wow32/wcall16.c",
+        "evidence": "_WOWGlobalUnlockFree16@4",
+        "product": "wow32.dll"
+      },
+      {
+        "from": "non-mvdm",
+        "to": "mvdm-host",
+        "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+        "line_or_section": "5",
+        "target": "src/mvdm-host/wow32/wow32.c",
+        "evidence": "_WOWGetVDMPointer@12",
+        "product": "wow32.dll"
+      },
+      {
+        "from": "non-mvdm",
+        "to": "mvdm-host",
+        "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+        "line_or_section": "9",
+        "target": "src/mvdm-host/wow32/wow32.c",
+        "evidence": "_WOWGetVDMPointer@12",
+        "product": "wow32.dll"
+      }
+    ],
+    "literal-includes": [],
+    "resolved-includes": []
+  }
 }

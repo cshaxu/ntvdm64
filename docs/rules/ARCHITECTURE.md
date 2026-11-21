@@ -7,7 +7,9 @@ to outermost. A component may depend on components in any strictly inner
 layer, subject to their ownership restrictions. An inner component must never
 depend on an outer component. Distinct components in the same layer must
 remain independent. C is ordered as C1 `non-mvdm` inside C2 `mvdm-host`;
-C2 may depend on C1, never the reverse.
+C1/C2 connections must use the original OpenNT architecture: original direct
+calls, public DLL APIs and registration callbacks are approved exceptions.
+Restore non-original connections instead of inventing new decoupling tables.
 
 | Layer | Components |
 | --- | --- |
@@ -27,10 +29,16 @@ verifies production compile commands, compiler-recorded headers and build
 prerequisites. Platform SDK and runtime libraries are outside this table.
 
 Owner revision on 2026-11-20 (S18-S20) requires eliminating all three
-reverse implementation boundaries: C1-to-C2, B-to-C2 and B-to-C1. The
+boundaries: restore original C1/C2 connections, and decouple B-to-C2 and
+B-to-C1 through B-owned callback contracts provided by the respective mirror.
+The
 following earlier B-to-C approvals describe transitional existing code only;
 they are cleanup obligations, not final exceptions or permission to add more.
-Reviewed inner-owned callbacks and cross-image ABI rules below still apply.
+Owner clarification: original public DLL API calls are not candidates for
+conversion to callbacks merely to make a dependency counter zero. Record
+the API and provider evidence separately. No new callback table is admitted
+for the original OLE-to-WOW API chain. Reviewed inner-owned callbacks and
+cross-image ABI rules below still apply.
 
 The original two x86 WOW32 B-to-C exceptions were previously approved. In compat,
 `_GetDlgItem` traverses the original USER window layout and

@@ -12,8 +12,10 @@ the unselected full variants remain available in Git history and provenance.
 `src/compat` contains shared project-owned historical ABI bindings and the
 owner-admitted original-subsystem adapters. The earlier B-to-C exceptions are transitional S19/S20 cleanup obligations.
 The target order is B compat, C1 non-mvdm, C2 mvdm-host: compat retains
-independent mechanisms; private original-layout and machine implementations
-return to their respective mirror owners under measured diff approval.
+independent mechanisms and owns typed callback contracts for required C1/C2
+providers. Original layouts and algorithms remain with their original owners.
+C1/C2 connections retain the original OpenNT direct calls, public DLL APIs
+and registration callbacks; they do not acquire replacement callback tables.
 Component-private adapters remain with their component. Moving these roots
 does not change their source provenance, executable ownership or ABI.
 

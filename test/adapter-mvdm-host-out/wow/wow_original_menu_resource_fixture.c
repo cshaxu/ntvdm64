@@ -11,6 +11,7 @@
 #define wow_user_load_menuW menu_resource_LoadMenuW
 #endif
 #include "wow_menu_resource_bindings.h"
+#include "wow_user_registration_state.h"
 #include "wow_private_user_compat.h"
 #include "wow_menu_native_bindings.h"
 #include "compat/include/wow_user_runtime.h"
@@ -206,6 +207,13 @@ int __cdecl wow_original_menu_resource_fixture(void)
     char *ordinary[] = {"resource-menu", NULL};
     char *ownerdraw[] = {"resource-menu", "--owner-draw", NULL};
     int result;
+    PFNWOWHANDLERSIN saved = *wow_user_registered_callbacks();
+    PFNWOWHANDLERSIN input = saved;
+    input.pfnFindResourceEx = W32FindResource;
+    input.pfnLoadResource = W32LoadResource;
+    input.pfnLockResource = W32LockResource;
+    input.pfnUnlockResource = W32UnlockResource;
+    wow_user_set_registered_callbacks(&input);
     errors = step = fail_at = 0;
     owner_probe = string_name = FALSE;
     callbacks_active = TRUE;
@@ -215,6 +223,7 @@ int __cdecl wow_original_menu_resource_fixture(void)
         string_name = FALSE;
         if (wow_original_menu_resource_main(2, ownerdraw)) result = 1;
     } __finally {
+        wow_user_set_registered_callbacks(&saved);
         callbacks_active = FALSE;
     }
     return result;

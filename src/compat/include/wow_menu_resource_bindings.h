@@ -3,26 +3,51 @@
 #include <windows.h>
 #include "wow_menu_parser_bindings.h"
 
-/* ADAPTER-WOW-036: resource callbacks selected by original WOW registration.
- * W32 owners retain native/guest discrimination, conversion and lifetime. */
-HANDLE APIENTRY W32FindResource(HANDLE, LPCSTR, LPCSTR, WORD);
-HANDLE APIENTRY W32LoadResource(HANDLE, HANDLE);
-LPSTR APIENTRY W32LockResource(HANDLE, HANDLE);
-BOOL APIENTRY W32UnlockResource(HANDLE, HANDLE);
+#include "wow_shared_user_abi.h"
+#include "wow_user_registered_callbacks.h"
+
+/* Use the one original WOW registration. Before registration these are
+ * ordinary native resources, as in USER's initial resource call table. */
+static __inline HANDLE wow_user_find_resource(HANDLE module, LPCSTR type,
+    LPCSTR name, WORD language)
+{
+    const PFNWOWHANDLERSIN *calls = wow_user_registered_callbacks();
+    return calls->pfnFindResourceEx ?
+        calls->pfnFindResourceEx(module, type, name, language) :
+        FindResourceExA(module, type, name, language);
+}
+static __inline HANDLE wow_user_load_resource(HANDLE module, HANDLE resource)
+{
+    const PFNWOWHANDLERSIN *calls = wow_user_registered_callbacks();
+    return calls->pfnLoadResource ? calls->pfnLoadResource(module, resource) :
+        LoadResource(module, resource);
+}
+static __inline LPSTR wow_user_lock_resource(HANDLE resource, HANDLE module)
+{
+    const PFNWOWHANDLERSIN *calls = wow_user_registered_callbacks();
+    return calls->pfnLockResource ? calls->pfnLockResource(resource, module) :
+        (LPSTR)LockResource(resource);
+}
+static __inline BOOL wow_user_unlock_resource(HANDLE resource, HANDLE module)
+{
+    const PFNWOWHANDLERSIN *calls = wow_user_registered_callbacks();
+    return calls->pfnUnlockResource ? calls->pfnUnlockResource(resource, module) :
+        UnlockResource(resource);
+}
 HANDLE WINAPI WOWFindResourceExWCover(HANDLE, LPCWSTR, LPCWSTR, WORD);
 int WCSToMBEx(WORD, LPCWSTR, int, LPSTR *, int, BOOL);
 HMENU WINAPI wow_user_load_menuA(HINSTANCE, LPCSTR);
 HMENU WINAPI wow_user_load_menuW(HINSTANCE, LPCWSTR);
 
 #define FINDRESOURCEEXA(module, name, type, language) \
-    W32FindResource(module, type, name, language)
+    wow_user_find_resource(module, type, name, language)
 #ifdef WOW_ORIGINAL_MENU_CLIENT
 #define LoadMenuA wow_user_load_menuA
 #define LoadMenuW wow_user_load_menuW
-#define FINDRESOURCEA(module, name, type) W32FindResource(module, type, name, 0)
+#define FINDRESOURCEA(module, name, type) wow_user_find_resource(module, type, name, 0)
 #define FINDRESOURCEW(module, name, type) WOWFindResourceExWCover(module, (LPCWSTR)(type), name, 0)
-#define LOADRESOURCE W32LoadResource
-#define LOCKRESOURCE W32LockResource
-#define UNLOCKRESOURCE W32UnlockResource
+#define LOADRESOURCE wow_user_load_resource
+#define LOCKRESOURCE wow_user_lock_resource
+#define UNLOCKRESOURCE wow_user_unlock_resource
 #endif
 #endif

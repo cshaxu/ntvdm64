@@ -103,15 +103,16 @@ implementation and replaced by the next previously planned ownership task.
 
 | S | Bounded scope | Completion evidence |
 | --- | --- | --- |
-| S18, active | Remove non-mvdm C1 dependencies on mvdm-host C2. Restore original USER resource registration; review original OLE memory boundary. | Refresh historical 5 USER and5 OLE references. Trace actual providers and lifecycle, remove private reverse dependencies, validate native/WOW paths. |
-| S19, planned | Remove compat B dependencies on mvdm-host C2. | Refresh historical296 direct references; return machine-specific implementation to its actual owner and reuse original contracts without hidden forwarding. |
-| S20, planned | Remove compat B dependencies on non-mvdm C1. | Refresh historical55 direct references; return private USER/CSR/layout implementation to its owner, retaining independent B mechanisms. |
+| S18, complete | Restore original connections between non-mvdm C1 and mvdm-host C2. Restore original USER resource registration; retain original OLE public WOW DLL APIs. | Refresh historical references. Trace actual providers and lifecycle; register proven original direct/DLL/callback connections as exceptions, remove unsupported deviations and validate native/WOW paths. |
+| S19, active | Remove compat B dependencies on mvdm-host C2. | Refresh historical296 direct references; use B-owned typed callback interfaces with C2 implementations, preserving actual provider and lifetime evidence. |
+| S20, planned | Remove compat B dependencies on non-mvdm C1. | Refresh historical55 direct references; use B-owned typed callback interfaces with C1 implementations, retaining independent B mechanisms. |
 
-Only S18 is active. Owner authorizes continuous sequential execution and
+Only S19 is active. Owner authorizes continuous sequential execution and
 small-five delivery for each S: cached full build, dual publication, targeted
 tests, commit and push. Admit the next S only after its predecessor closes.
 Historical counts are planning baselines, not current unresolved totals.
-The strict order is A, B, C1, C2, D, E, F; no same-layer mirror exception remains.
+The order is A, B, C1, C2, D, E, F. Owner clarification admits original
+C1/C2 connections as exceptions; only B-to-C1/C2 uses new callback decoupling.
 Track headers, build inputs, direct symbols, runtime callbacks and named-image
 ABI separately. Preserve original guest and mirror logical lines/error arms.
 Large mirror increases require approval; fewer than5 lines and at most2

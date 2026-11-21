@@ -763,6 +763,9 @@ $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE 
     '/FI "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h')) + '" ' +
     $softpcRename
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
+# C1 original services do not consume C2 machine-private headers.
+$c1IncludeRoots = @($softpcIncludeRootPaths | Where-Object { $_ -notmatch '^src/mvdm-host(/|$)' } | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' })
+$c1Flags = $baseCommonFlags + ($c1IncludeRoots -join ' ')
 # VDMREDIR does not use SoftPC's private `terminate` symbol. Keep the
 # namespace shim only on the SoftPC compilation units that actually need it.
 $redirBaseFlags = $baseFlags.Replace($softpcRename, '')
@@ -779,7 +782,7 @@ $hostFlags = $baseFlags + ' /Dgetenv=mvdm_host_getenv /Dfprintf=mvdm_host_fprint
 # `USE_INFO_1` contract, whereas its native Unicode counterpart does.  Select
 # the historical native-TCHAR build profile only for this finite translator
 # package; VDMREDIR's DOS/RAP input remains OEM/16-bit exactly as before.
-$xactSrvFlags = $baseFlags + ' /DUNICODE /D_UNICODE'
+$xactSrvFlags = $c1Flags + ' /DUNICODE /D_UNICODE'
 # The selected original x86 OpenNT composition is not the generic CCPU40
 # profile above.  `softpc.new/obj.vdm/cdefine.inc` selects MONITOR, C_VID and
 # X86GFX together on 386.  CPU40 is nevertheless a distinct executor profile:
@@ -1372,7 +1375,9 @@ $openntNetlibObjects = foreach ($name in $openntNetlibNames) {
         # directly reached allocation algorithms without importing the wider
         # historical RPC/MIDL NetAPI product shell solely for that dead edge.
         # The removed NetapipBufferAllocate wrapper only forwards to this API.
-        $graph.Add('  cflags = ' + $baseFlags + ' /Gy /DNetapipBufferAllocate=NetApiBufferAllocate')
+        $graph.Add('  cflags = ' + $c1Flags + ' /Gy /DNetapipBufferAllocate=NetApiBufferAllocate')
+    } else {
+        $graph.Add('  cflags = ' + $c1Flags)
     }
     $object
 }
@@ -1386,6 +1391,7 @@ $openntXactSrvObjects = foreach ($name in $openntXactSrvNames) {
 $openntBaseVdmObjects = foreach ($name in $openntBaseVdmNames) {
     $object = 'obj/opennt-base-vdm/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $openntBaseVdmRoot $name)))
+    $graph.Add('  cflags = ' + $c1Flags)
     $object
 }
 # T412 owner archives are explicit targets until the three-process links replace
@@ -1395,7 +1401,7 @@ $baseOwnerManifest = @()
 $brokerTransportManifest = @()
 if ($Architecture -eq 'x86') {
     $baseBindingInclude = NinjaPath (Join-Path $root 'src/ntsrv-exe/opennt/include')
-    $baseOwnerFlags = $baseFlags + ' /we4013' +
+    $baseOwnerFlags = $c1Flags + ' /we4013' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/inc')) + '"' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/server')) + '"'
     $baseServerFlags = $baseOwnerFlags + ' /D_CSRSRV_ /FI "' +

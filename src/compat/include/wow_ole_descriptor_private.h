@@ -3,11 +3,16 @@
 /* OPENNT-HOST-297: finite C declaration facade; original thop.hxx private
  * records and SDK oleidl.h OBJECTDESCRIPTOR retain their complete fields. */
 #include <nt.h>
-/* Use the same software WOW declarations as the original precompiled header. */
-#undef _X86_
-#include <wow32.h>
-#include <wuclip.h>
-#include "wow_user_declarations.h"
+#include <windows.h>
+/* OLE uses the public WOW32 ABI, not WOW32 private implementation headers.
+ * Pointer/handle widths match OpenNT wow.h; API declarations below match
+ * public/sdk/inc/wownt32.h. Conversion directions match thoputil.cxx. */
+typedef WORD HMEM16;
+typedef DWORD VPVOID;
+typedef DWORD VPSTR;
+#define CFOLE_UNICODE_TO_ANSI 0
+#define CFOLE_ANSI_TO_UNICODE 1
+LPVOID WINAPI WOWGetVDMPointer(DWORD, DWORD, BOOL);
 #include <string.h>
 typedef LONG SCODE;
 typedef LDT_ENTRY VDMLDT_ENTRY;

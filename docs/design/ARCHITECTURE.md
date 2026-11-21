@@ -1415,7 +1415,10 @@ MVDM package. Unsupported historical operations remain explicit failures.
 
 The owner-approved S18-S20 target orders A libraries, B compat, C1 non-mvdm,
 C2 mvdm-host, D common, E frontend-base/worker-base, and F products.
-C2 may consume C1; C1 must not consume C2. B must consume neither mirror.
+C1/C2 use original OpenNT connections, including original direct calls, DLL
+APIs and registration callbacks as reviewed exceptions. B uses its own
+callback contracts implemented and assembled by C1/C2, not private mirror
+header or symbol dependencies.
 Historical B-to-C admissions are migration obligations. Reuse original
 inner-owned registration contracts where appropriate; do not hide a required
 outer implementation behind a callback or create a parallel state machine.

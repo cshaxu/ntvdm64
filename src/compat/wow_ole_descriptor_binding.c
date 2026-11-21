@@ -13,8 +13,9 @@ static BOOL CALLBACK initialize_lead_table(PINIT_ONCE once,PVOID parameter,PVOID
 }
 void WINAPI wow_ole_touch_pointer(VPVOID vp)
 {
-    /* The existing original helper owns RET_FORCESEGMENTFAULT and mapping. */
-    (void)GetPModeVDMPointerAssert(vp);
+    /* Public protected-mode translation reaches the same original segment
+     * fault and mapping owner; no private WOW header or symbol is needed. */
+    (void)WOWGetVDMPointer(vp, 1, TRUE);
 }
 HGLOBAL WINAPI wow_ole_convert_descriptor(HANDLE memory,UINT direction)
 {

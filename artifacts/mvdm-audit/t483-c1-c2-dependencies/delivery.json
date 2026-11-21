@@ -1,0 +1,130 @@
+{
+  "packet": "M0 T483 S18 P3",
+  "baseline": "e0bc807bf",
+  "files": {
+    "audited": 29,
+    "total": 29
+  },
+  "private_headers": {
+    "before": 11,
+    "after": 0
+  },
+  "private_search_roots": {
+    "before": 252,
+    "after": 0
+  },
+  "original_api_links": [
+    {
+      "from": "non-mvdm",
+      "to": "mvdm-host",
+      "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wcall16.c",
+      "evidence": "_WOWGlobalLock16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "non-mvdm",
+      "to": "mvdm-host",
+      "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+      "line_or_section": "3",
+      "target": "src/mvdm-host/wow32/wcall16.c",
+      "evidence": "_WOWGlobalUnlock16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "non-mvdm",
+      "to": "mvdm-host",
+      "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/wow32/wcall16.c",
+      "evidence": "_WOWGlobalAllocLock16@12",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "non-mvdm",
+      "to": "mvdm-host",
+      "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/wow32/wcall16.c",
+      "evidence": "_WOWGlobalUnlock16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "non-mvdm",
+      "to": "mvdm-host",
+      "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/wow32/wcall16.c",
+      "evidence": "_WOWGlobalUnlockFree16@4",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "non-mvdm",
+      "to": "mvdm-host",
+      "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+      "line_or_section": "5",
+      "target": "src/mvdm-host/wow32/wow32.c",
+      "evidence": "_WOWGetVDMPointer@12",
+      "product": "wow32.dll"
+    },
+    {
+      "from": "non-mvdm",
+      "to": "mvdm-host",
+      "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+      "line_or_section": "9",
+      "target": "src/mvdm-host/wow32/wow32.c",
+      "evidence": "_WOWGetVDMPointer@12",
+      "product": "wow32.dll"
+    }
+  ],
+  "unique_original_apis": 5,
+  "mirror_non_error_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "9aab55f9-15db-4ce1-83ff-32c0c385a661",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "original_source_proof": [
+    {
+      "path": "com/ole32/olethunk/olethk32/daytona/sources",
+      "sha256": "dbfeba55304e6893f6635702ff0859addf2eb80739e85a08e66002018536de6e"
+    },
+    {
+      "path": "public/sdk/inc/wownt32.h",
+      "sha256": "7b3077a7da4144abd73494311d85f34d46ecd483d2e14afd6619693891143cb7"
+    },
+    {
+      "path": "windows/core/ntuser/client/usercli.h",
+      "sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba"
+    },
+    {
+      "path": "windows/core/ntuser/client/clinit.c",
+      "sha256": "83c7e304b38501c9afd1251c2cf671f1bc0e799560af10b225cedee891e3e8a2"
+    }
+  ],
+  "evidence_root": "build\\t483-s18-c1-c2",
+  "status": "verified S18 P3 delivery",
+  "limitations": [
+    "Original OLE16 touch callback is not present in selected guest closure. Existing host touch adapter now uses public WOWGetVDMPointer, resolving to the same protected-mode segment/mapping provider; no claim of rebuilding original OLE16.",
+    "Static API references are seven relocation records, not seven distinct APIs; four resource callbacks remain real runtime dependencies through the original USER registration.",
+    "B-to-C dependencies remain S19/S20 obligations; S18 does not claim B is clean."
+  ],
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_and_x86_reference": 0,
+    "resource_fixture": "16 resource cases,7 parser cases,64 invalid repeats; registered callbacks, nested call, rollback and cleanup passed",
+    "real_ole_final_package": "PASS actual product OLE forward/reverse payload conversion, invalid input/direction, guest input and output ownership",
+    "real_sol_final_package": "PASS SOL Options command, modal dialog, close and parent recovery",
+    "command_final_package": "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+    "final_checks": "22 image hashes, frontend ownership, documentation governance/links, 9 A/B graphs and diff whitespace passed"
+  }
+}

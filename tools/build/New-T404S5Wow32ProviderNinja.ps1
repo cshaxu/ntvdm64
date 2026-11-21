@@ -468,8 +468,9 @@ foreach ($source in $sources) {
 }
 # OPENNT-HOST-297: selected original conversion is C, despite upstream suffix.
 $objects.Add('obj/opennt-ole/thoputil.obj')
+$oleIncludes = ($includeRoots | Where-Object { $_ -notmatch '^src/mvdm-host(/|$)' } | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '
 $ninja.Add('build obj/opennt-ole/thoputil.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx')))
-$ninja.Add('  cflags = $wow_cflags')
+$ninja.Add('  cflags = ' + $cflags.Replace($includes, $oleIncludes))
 $objects.Add('obj/callpr32.obj')
 $ninja.Add('build obj/callpr32.obj: generic_call_asm ' + (ConvertTo-NinjaPath (Join-Path $wow 'i386/callpr32.asm')) + ' | ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/callconv.inc')))
 $supportObjects = [System.Collections.Generic.List[string]]::new()

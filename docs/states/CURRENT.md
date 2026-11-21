@@ -2,19 +2,19 @@
 
 ## Current Work
 
-**Active: M0 T483 S18** (Ordinary Mode). Owner accepted S17 and authorized
-next-S admission on 2026-11-20. Only S18 is active.
+**Active: M0 T483 S19** (Ordinary Mode). Owner authorized sequential
+S18-S20 execution. S18 verification is complete; S19 is the only active packet.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
 | Original Owner Request | 清理 compat→non-mvdm、compat→mvdm-host、non-mvdm→mvdm-host；C拆为C1 non-mvdm、C2 mvdm-host，连续执行S18、S19、S20。 |
-| Identifier Mode | M0 T483 S18, Ordinary Mode. |
+| Identifier Mode | M0 T483 S19, Ordinary Mode. |
 | Admission And Approval | Owner accepted S17 and authorized successor admission, 2026-11-20. |
-| Objective | Remove reverse dependencies from C1 non-mvdm to C2 mvdm-host; trace original USER registration and OLE memory ownership. |
-| Reference Baseline | S17 P2 eaa229156; package733c98ae-ab34-4dad-afd4-380e0f43f0b5. [S17 closure](../etc/evidence/m0-t483-s17-closure.md). |
-| Files And ABI Surface | DIR-ordered non-mvdm callers and actual mvdm-host providers, associated compat bindings, original registration ABI and current product graphs. |
+| Objective | Remove B-to-C2 private coupling through B-owned typed callbacks supplied by C2; preserve original algorithms, state ownership and synchronous lifetime. |
+| Reference Baseline | S18 P3 verified package9aab55f9-15db-4ce1-83ff-32c0c385a661. [S18 closure](../etc/evidence/m0-t483-s18-closure.md). |
+| Files And ABI Surface | DIR-ordered compat callers and actual mvdm-host providers; callback signatures, binding and teardown, original layouts and current product graphs. |
 | Candidate Proposal | [T483 parent](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
 | Applicable Rules | Ordered A/B/C1/C2/D/E/F architecture; historical B-to-C exceptions are S19/S20 cleanup obligations; reviewed inner-owned callbacks and cross-image ABI rules. |
 | Verification | Exercise consolidated checks against current graphs and negative controls. Any production/build changes receive cached full build, dual11 publication, targeted tests, commit and push; evidence-only changes use governance/link checks without redundant product builds. |
@@ -24,7 +24,7 @@ next-S admission on 2026-11-20. Only S18 is active.
 | Similar-Issue Sweep | Direct/transitive/forced headers, private search paths, linked and generated providers, dynamic binding and callback ownership; distinguish named-image dependencies. |
 | Reporting Requirements | Per-file findings and cumulative progress; A-F counts separately; non-error mirror point/line changes; no silent exceptions or unsupported zero claims. |
 | Stop Conditions | No artificial same-thread queue, duplicate state machine or blanket exception. Mirror increases below5 lines and at most2 points have standing approval; larger increases require approval. Preserve unrelated work. |
-| Exit Criteria | C1-to-C2 private header/build/implementation dependencies eliminated; actual callback providers and native/WOW resource semantics verified; small-five delivered before S19 admission. |
+| Exit Criteria | All B-to-C2 candidates have provider/lifetime dispositions; direct private implementation dependencies removed, typed callbacks verified, small-five delivered before S20 admission. |
 
 ## Current Technical Baseline
 
@@ -101,7 +101,17 @@ S19 handles B-to-C2 and S20 B-to-C1. [Sequential worklist](../etc/operations/t48
 Initial current census:29 candidate source files,11 linked relocation rows
 (9 unique caller/symbol/provider relationships),11 compiled-header records,
 and252 private search-root records. [DIR inventory](../../artifacts/mvdm-audit/t483-c1-c2-dependencies/file-inventory.json).
-These are candidates, not completed audit counts. No production changes yet.
+Owner clarification supersedes zero-edge target: original C1/C2 connections
+are approved exceptions; OLE callback candidate withdrawn without implementation.
+Only B-to-C1/C2 uses new callback interfaces in S19/S20. All29 files now
+have final dispositions: private headers11->0, private search roots252->0.
+Seven live relocation records represent five retained original WOW APIs.
+Original USER resource callbacks are restored; no new table or queue.
+Non-error mirror delta0 points/0 lines. Cached full x86/x64/reference and
+dual11 publication passed, package9aab55f9-15db-4ce1-83ff-32c0c385a661.
+Resource, actual Win16 OLE, SOL menu/dialog and COMMAND-return tests passed.
+[Delivery record](../../artifacts/mvdm-audit/t483-c1-c2-dependencies/delivery.json).
+Final governance checks passed. S18 P3 delivery includes this closure and S19 admission.
 
 ## Recent Governance
 
@@ -175,3 +185,14 @@ Owner-authorized closure after verification. [S16 closure evidence](../etc/evide
 ## S17 Closure Record
 
 Owner accepted; [S17 closure and delivery](../etc/evidence/m0-t483-s17-closure.md).
+
+## S18 Closure Record
+
+Owner-authorized sequential closure; [S18 verification and publication](../etc/evidence/m0-t483-s18-closure.md).
+
+## S19 Progress
+
+Admitted after S18 verification. Initial refreshed evidence has606 B-to-C2
+live relocation records and144 compiled-header records; these are observations,
+not unique violations or completed audits. Group by DIR-ordered source and
+actual provider before implementation. C1/C2 original connections remain intact.
