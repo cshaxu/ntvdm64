@@ -70,7 +70,7 @@ P147 [Guest VM I/O](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-
 P148 [VM registration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-command-registration-owner.json).
 P149 [VM input](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-input-owner.json).
 P150 [Original COMMAND](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-original-command-owner.json).
-[P153 BASE](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-base-dispatch.md): B/C direct 0/0; D transport and F C0619/C0621 remain.
+[P154 capture](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-admission-boundary.md): B/C direct 0/0; C0156/C0619/C0621 open.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moved page-domain identity and cleanup to B and removed three F calls.

@@ -1,5 +1,28 @@
 # C0621 synchronous admission boundary
 
+## P154 capture implementation
+
+mvdm_vm_command_service and mvdm_vm_command_capture now live in
+compat/mvdm_vm_capture.c. Their symbols and input/output shapes are retained.
+They use the existing inner guest-memory acquire/release functions and
+guest-location API. The 101-line capture unit has no session, frontend or
+executor dependency. The F snapshot operation still creates the presentation
+object and calls the moved capture function.
+
+The existing capture fixture passes 154 assertions using the shared memory
+provider. A former F-only release-failure substitute is replaced by a read
+failure at that provider for service decoding. A standalone release-failure
+assertion for the moved service function is not claimed by this result.
+
+Cached x86, x64 and reference products built successfully. The dependency
+gate passed after reference compilation completed. Package
+8ccc064a-121b-4ccb-bcd6-1202f717ebef is published at both release locations.
+Evidence is in build/t483-s14-vm-capture. This is partial migration within
+C0621, which remains open. No C mirror or original guest source changed.
+Final publication hashes and governance checks passed. The published package
+also passed real COMMAND/native EDIT/DOS return. Enhanced-mode runtime
+acceptance of the remaining admission chain is still outstanding.
+
 The current BOP dispatcher calls mvdm_vm_command_admit in
 src/ntvdm-exe/softpc/mvdm_vm_ingress.c for operation 11. The preparation
 function already belongs to B. Remaining F dependencies precede and follow it.
@@ -47,3 +70,15 @@ while begin/stage/commit/abort/dispose call E presentation code. Moving the
 whole vm_text implementation into B would therefore introduce a B-to-E
 dependency. Split the captured text data and its ownership from presentation
 before moving the command capture and admission bodies.
+
+The lifetime checks have now been compared. session_thread_current derives
+its session pointer from compat_host_context_current; both paths therefore
+select the same thread-local context. session_initialize assigns
+host_context.guest_memory to that session's guest_memory_lease. C's acquire
+and release check compat_host_context_valid and COMPAT_HOST_CONTEXT_ACTIVE
+before using that pool. F additionally checks session magic, ABI version,
+size, identity, backend and thread-hook bookkeeping in session_valid.
+The migration can retain the guest-memory lifetime checks through the C
+entry points, while the product remains responsible for its surrounding
+session invariant. This is the specific distinction to verify at the
+capture test and worker bind/unbind boundary.

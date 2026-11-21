@@ -274,9 +274,9 @@ int main(void)
             vm_memory[65535] = 9;
             CHECK(mvdm_vm_command_service(1600, 20, &service) == ERROR_INVALID_FUNCTION && no_active_leases());
             CHECK(mvdm_vm_command_service(1600, 19, &service) == ERROR_INVALID_DATA && no_active_leases());
-            fail_release = 1;
+            fail_acquire = 1;
             CHECK(mvdm_vm_command_service(1600, 20, &service) == ERROR_INVALID_ADDRESS && no_active_leases());
-            fail_release = 0;
+            fail_acquire = 0;
         }
         vm_memory[105] = '\r';
         CHECK(!mvdm_vm_command_snapshot(8, 1600, sizeof(descriptor), &b, &text));
