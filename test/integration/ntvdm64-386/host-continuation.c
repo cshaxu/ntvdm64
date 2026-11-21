@@ -336,10 +336,10 @@ static DWORD interactive_input(mvdm_vm_executor *executor, uint32_t vm, uint64_t
         }
         key.wVirtualScanCode = (WORD)MapVirtualKeyW(key.wVirtualKeyCode, MAPVK_VK_TO_VSC);
         key.uChar.UnicodeChar = (WCHAR)line[i];
-        error = mvdm_vm_executor_key(executor, vm, token, &key);
+        error = mvdm_vm_input_send_key(mvdm_vm_executor_rundown(executor), vm, token, &key);
         if (error) return error;
         key.bKeyDown = FALSE;
-        error = mvdm_vm_executor_key(executor, vm, token, &key);
+        error = mvdm_vm_input_send_key(mvdm_vm_executor_rundown(executor), vm, token, &key);
         if (error) return error;
     }
     return ERROR_SUCCESS;

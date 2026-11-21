@@ -10,4 +10,6 @@ static BOOL reset_ready(HANDLE ready)
     return ResetEvent(ready);
 }
 #define ResetEvent reset_ready
+#include "compat/mvdm_vm_input.c"
+#undef ResetEvent
 #include "ntvdm-exe/softpc/mvdm_vm_io.c"

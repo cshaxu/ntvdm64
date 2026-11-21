@@ -55,9 +55,11 @@ uint32_t mvdm_vm_continuation_ack_io(uint64_t token, uint32_t vm,
 uint32_t mvdm_vm_continuation_finish_io(mvdm_vm_continuation *,
     uint64_t ticket, uint32_t cancellation_error);
 /* This state is also the executor's job-list lock and wake condition. */
+struct mvdm_vm_input_job;
 typedef struct mvdm_vm_rundown {
     SRWLOCK lock;
     CONDITION_VARIABLE changed;
+    struct mvdm_vm_input_job *jobs;
     ULONG active;
     BOOL closing;
 } mvdm_vm_rundown;

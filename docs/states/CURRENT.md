@@ -68,6 +68,7 @@ P145 [WOW registration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14
 P146 [COMMAND preparation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-command-launch-preparation-owner.json).
 P147 [Guest VM I/O](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-guest-io-owner.json).
 P148 [VM registration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-command-registration-owner.json).
+P149 [VM input](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-input-owner.json).
 B 0 outward calls; C 2 calls, 1 slot, 1 header, 1 image. C0621 stays open.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)

@@ -5,8 +5,8 @@
 #include "compat/include/mvdm_vm_guest_io.h"
 #include "mvdm_vm_ingress.h"
 #include "compat/include/mvdm_vm_command_entry.h"
-#include "mvdm_vm_executor.h"
-#include "mvdm_standalone_worker.h"
+#include "compat/include/mvdm_vm_input.h"
+#include "compat/include/mvdm_softpc_worker_exit.h"
 #include "compat/include/mvdm_command_guest_directory.h"
 
 extern void host_ica_lock(void);
@@ -69,15 +69,15 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
         result->status = high ? ERROR_INVALID_PARAMETER : mvdm_vm_ingress_register(low);
         break;
     case 16:
-        result->status = mvdm_vm_executor_key_bop(mvdm_standalone_worker_executor(),
+        result->status = mvdm_vm_input_key_bop(mvdm_softpc_exit_rundown,
             vm, low, high);
         break;
     case 17:
-        result->status = mvdm_vm_executor_bios_key_bop(mvdm_standalone_worker_executor(),
+        result->status = mvdm_vm_input_bios_key_bop(mvdm_softpc_exit_rundown,
             vm, low, high);
         break;
     case 19:
-        result->status = mvdm_vm_executor_mouse_bop(mvdm_standalone_worker_executor(),
+        result->status = mvdm_vm_input_mouse_bop(mvdm_softpc_exit_rundown,
             vm, low, high);
         break;
     case 18:

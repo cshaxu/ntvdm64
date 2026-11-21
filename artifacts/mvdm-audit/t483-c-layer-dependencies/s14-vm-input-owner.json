@@ -1,0 +1,208 @@
+{
+  "packet": "M0 T483 S14 P149",
+  "parent": "f5013609ae120161730700546f4792031ce744c3",
+  "C0621": {
+    "status": "open",
+    "migrated_operations": [
+      16,
+      17,
+      19
+    ],
+    "B_ownership": "Direct guest descriptor decode via original C guest copy and BIOS keyboard map, token/VM lookup, make/release pairing, FIFO, readiness, read/peek, prepend and unread handback.",
+    "lifetime": "B uses the existing rundown binding published by F before CPU entry. The previous executor list is now kept in that rundown state. One embedded input node per admitted F job replaces the old list node and holds the same token, VM, generation and finishing state. F still links/unlinks that node under the same lock, rejects producers before joining frontend callbacks and returns unread records before releasing the queue.",
+    "F_operation_specific_providers": {
+      "11": "mvdm_vm_command_admit and mvdm_vm_executor_submit"
+    },
+    "F_slot_and_dispatcher": [
+      "vm_device_bop",
+      "mvdm_vm_bridge_bop"
+    ],
+    "synchronous_operation_11": "F still queues the actual executor command before publishing the token to the current BOP."
+  },
+  "outward_B_known_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 0,
+    "F": 1
+  },
+  "C_additional_records": {
+    "headers": [
+      "C0620"
+    ],
+    "runtime_slots": [
+      "C0621"
+    ],
+    "named_image_imports": [
+      "C0134"
+    ]
+  },
+  "mirror": {
+    "non_error_points_delta": 0,
+    "non_error_lines_delta": 0,
+    "guest_modified_or_recompiled": false
+  },
+  "verification": {
+    "products": [
+      "cached x86",
+      "cached x64",
+      "cached x86 reference"
+    ],
+    "compiler_and_link": {
+      "x86": {
+        "mvdm_vm_input": {
+          "repo_headers": [
+            "compat/include/console_io.h",
+            "compat/include/console_mouse.h",
+            "compat/include/console_video.h",
+            "compat/include/mvdm_mouse_record.h",
+            "compat/include/mvdm_vm_continuation_store.h",
+            "compat/include/mvdm_vm_input.h",
+            "compat/include/mvdm_vm_wake.h"
+          ],
+          "external_symbols": [
+            "_mvdm_vm_wake_return_input",
+            "__imp__GetLastError@0",
+            "__imp__HeapAlloc@12",
+            "__imp__HeapFree@12",
+            "__imp__GetProcessHeap@0",
+            "__imp__InitializeSRWLock@4",
+            "__imp__ReleaseSRWLockExclusive@4",
+            "__imp__ReleaseSRWLockShared@4",
+            "__imp__AcquireSRWLockExclusive@4",
+            "__imp__AcquireSRWLockShared@4",
+            "__imp__SetEvent@4",
+            "__imp__ResetEvent@4",
+            "__imp__WaitForSingleObject@8",
+            "__imp__CreateEventW@16",
+            "_mvdm_vm_continuation_invalidated"
+          ]
+        },
+        "mvdm_vm_input_bop": {
+          "repo_headers": [
+            "compat/include/console_io.h",
+            "compat/include/console_mouse.h",
+            "compat/include/console_video.h",
+            "compat/include/guest_memory_access.h",
+            "compat/include/guest_memory_types.h",
+            "compat/include/mvdm_mouse_record.h",
+            "compat/include/mvdm_vm_continuation_store.h",
+            "compat/include/mvdm_vm_input.h",
+            "compat/include/mvdm_vm_wake.h"
+          ],
+          "external_symbols": [
+            "__imp__ReleaseSRWLockExclusive@4",
+            "__imp__ReleaseSRWLockShared@4",
+            "__imp__AcquireSRWLockExclusive@4",
+            "__imp__AcquireSRWLockShared@4",
+            "_mvdm_vm_input_key",
+            "_mvdm_vm_input_keys",
+            "_mvdm_vm_input_mouse",
+            "_mvdm_softpc_guest_memory_copy_from",
+            "_BiosKeyToInputRecord",
+            "@__security_check_cookie@4",
+            "___security_cookie"
+          ]
+        },
+        "ownership": [
+          "0001:0016f460       _mvdm_vm_input_read        00570460 f   softpc-bindings:mvdm_vm_input.obj",
+          "0001:0016f5d0       _mvdm_vm_input_return      005705d0 f   softpc-bindings:mvdm_vm_input.obj",
+          "0001:001715a0       _mvdm_vm_input_bios_key_bop 005725a0 f   softpc-bindings:mvdm_vm_input_bop.obj",
+          "0001:00171920       _mvdm_vm_input_key_bop     00572920 f   softpc-bindings:mvdm_vm_input_bop.obj",
+          "0001:00171ae0       _mvdm_vm_input_mouse_bop   00572ae0 f   softpc-bindings:mvdm_vm_input_bop.obj"
+        ]
+      },
+      "x64-ref": {
+        "mvdm_vm_input": {
+          "repo_headers": [
+            "compat/include/console_io.h",
+            "compat/include/console_mouse.h",
+            "compat/include/console_video.h",
+            "compat/include/mvdm_mouse_record.h",
+            "compat/include/mvdm_vm_continuation_store.h",
+            "compat/include/mvdm_vm_input.h",
+            "compat/include/mvdm_vm_wake.h"
+          ],
+          "external_symbols": [
+            "_mvdm_vm_wake_return_input",
+            "__imp__GetLastError@0",
+            "__imp__HeapAlloc@12",
+            "__imp__HeapFree@12",
+            "__imp__GetProcessHeap@0",
+            "__imp__InitializeSRWLock@4",
+            "__imp__ReleaseSRWLockExclusive@4",
+            "__imp__ReleaseSRWLockShared@4",
+            "__imp__AcquireSRWLockExclusive@4",
+            "__imp__AcquireSRWLockShared@4",
+            "__imp__SetEvent@4",
+            "__imp__ResetEvent@4",
+            "__imp__WaitForSingleObject@8",
+            "__imp__CreateEventW@16",
+            "_mvdm_vm_continuation_invalidated"
+          ]
+        },
+        "mvdm_vm_input_bop": {
+          "repo_headers": [
+            "compat/include/console_io.h",
+            "compat/include/console_mouse.h",
+            "compat/include/console_video.h",
+            "compat/include/guest_memory_access.h",
+            "compat/include/guest_memory_types.h",
+            "compat/include/mvdm_mouse_record.h",
+            "compat/include/mvdm_vm_continuation_store.h",
+            "compat/include/mvdm_vm_input.h",
+            "compat/include/mvdm_vm_wake.h"
+          ],
+          "external_symbols": [
+            "__imp__ReleaseSRWLockExclusive@4",
+            "__imp__ReleaseSRWLockShared@4",
+            "__imp__AcquireSRWLockExclusive@4",
+            "__imp__AcquireSRWLockShared@4",
+            "_mvdm_vm_input_key",
+            "_mvdm_vm_input_keys",
+            "_mvdm_vm_input_mouse",
+            "_mvdm_softpc_guest_memory_copy_from",
+            "_BiosKeyToInputRecord",
+            "@__security_check_cookie@4",
+            "___security_cookie"
+          ]
+        },
+        "ownership": [
+          "0001:0016f460       _mvdm_vm_input_read        00570460 f   softpc-bindings:mvdm_vm_input.obj",
+          "0001:0016f5d0       _mvdm_vm_input_return      005705d0 f   softpc-bindings:mvdm_vm_input.obj",
+          "0001:001715a0       _mvdm_vm_input_bios_key_bop 005725a0 f   softpc-bindings:mvdm_vm_input_bop.obj",
+          "0001:00171920       _mvdm_vm_input_key_bop     00572920 f   softpc-bindings:mvdm_vm_input_bop.obj",
+          "0001:00171ae0       _mvdm_vm_input_mouse_bop   00572ae0 f   softpc-bindings:mvdm_vm_input_bop.obj"
+        ]
+      }
+    },
+    "production_win31": [
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS production native 54:08 AH=0/AH=1 in both DOS VMs; guest input and 54:0A untested",
+      "Original Windows installation bytes verified unchanged"
+    ],
+    "diagnostic_win31": [
+      "PASS 1 selected Windows 3.1 mode/DOSONLY combinations",
+      "PASS two concurrent DOS VMs, distinct identity/generation, negative API and 320 callback identity/stack/register/flags checks",
+      "PASS real native unread-input sequence returned through guest BIOS peek/read in both VMs and both command rounds",
+      "PASS real native 54:08 AH=0/AH=1 and 54:0A in both DOS VMs; 0A input is provider stimulus, full guest I/O untested",
+      "Original Windows installation bytes verified unchanged"
+    ],
+    "fixture_coverage": "Existing notification fixture covers token and VM isolation, queue full, read/peek/prepend, readiness failure, key pairing, mouse records, and retirement. Existing ingress fixture covers synchronous token and failure rollback.",
+    "limitations": "Win3.1 diagnostic integration uses input stimulus and verifies unread BIOS delivery across two VMs and rounds. Real physical mouse interaction, Win95 and Full are outside this delivery."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "4c11f508-6216-446d-9360-d96b54dbaf88",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}
