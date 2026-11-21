@@ -2721,3 +2721,8 @@ S20 P5 classifier boundary: vdm.c directly includes original basevdm.h in
 the classifier branch, instead of receiving it through B base_classifier.h.
 Real builds require its DOS binary-kind constants. No algorithm changes;
 #line27 retained. Non-error19points/569lines ->19points/570lines; R2739.
+
+S20 P6 BASE client boundary: the command branch in vdm.c directly includes
+its six original type headers; B base_client.h now uses opaque CSR/BASE
+pointers. Original algorithm, ABI and #line304 remain unchanged. Non-error
+19points/570lines ->19points/576lines; retained ownership registered R2740.

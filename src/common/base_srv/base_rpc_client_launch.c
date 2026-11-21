@@ -4,6 +4,13 @@
 #include <windows.h>
 #include <rpc.h>
 #include "service.h"
+#include <nt.h>
+#include <ntlpcapi.h>
+#include <ntcsrmsg.h>
+#include <winss.h>
+#include "non-mvdm/base/win32/inc/basemsg.h"
+#include "non-mvdm/base/win32/inc/basevdm.h"
+#include <vdmapi.h>
 #include "compat/include/base_client.h"
 #include "compat/include/base_transport.h"
 #include "base_command.h"

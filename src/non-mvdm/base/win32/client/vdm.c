@@ -331,6 +331,12 @@ GBTtryexit:;
 #endif
 
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
+#include <ntlpcapi.h>
+#include <ntcsrmsg.h>
+#include <winss.h>
+#include "non-mvdm/base/win32/inc/basemsg.h"
+#include "non-mvdm/base/win32/inc/basevdm.h"
+#include <vdmapi.h>
 #include "compat/include/base_client.h"
 #include <base_config.h>
 /* DIVERGENCE(NON-MVDM-DIV-BASE-REQUEST): expose original request layout to B. */

@@ -3,6 +3,13 @@
 #include <rpc.h>
 #include <stdio.h>
 #include "service.h"
+#include <nt.h>
+#include <ntlpcapi.h>
+#include <ntcsrmsg.h>
+#include <winss.h>
+#include "non-mvdm/base/win32/inc/basemsg.h"
+#include "non-mvdm/base/win32/inc/basevdm.h"
+#include <vdmapi.h>
 #include "compat/include/base_client.h"
 #include "common/base_srv/base_command.h"
 #include "common/base_srv/base_rpc_client.h"

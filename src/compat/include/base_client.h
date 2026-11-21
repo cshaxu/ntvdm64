@@ -4,12 +4,11 @@
  */
 #ifndef OPENNT_BASE_CLIENT_BINDING_H
 #define OPENNT_BASE_CLIENT_BINDING_H
-#include <ntlpcapi.h>
-#include <ntcsrmsg.h>
-#include <winss.h>
-#include "non-mvdm/base/win32/inc/basemsg.h"
-#include "non-mvdm/base/win32/inc/basevdm.h"
-#include <vdmapi.h>
+#include <windows.h>
+#include <winternl.h>
+struct _CSR_API_MSG;
+struct _CSR_CAPTURE_HEADER;
+struct _BASE_API_MSG;
 #include <nt_event_declarations.h>
 #include "wow_startup_exit.h"
 #include "base_transport.h"
@@ -23,12 +22,12 @@ BOOL BaseCheckForVDM(HANDLE, LPDWORD);
  * exports CsrClientCallServer; it must never silently satisfy this dependency.
  * Original callers, parameters and NTAPI convention remain unchanged. */
 #define CsrClientCallServer NtvdmBaseClientCallServer
-NTSTATUS NTAPI CsrClientCallServer(PCSR_API_MSG, PCSR_CAPTURE_HEADER, CSR_API_NUMBER, ULONG);
-PCSR_CAPTURE_HEADER NTAPI CsrAllocateCaptureBuffer(ULONG, ULONG, ULONG);
-VOID NTAPI CsrFreeCaptureBuffer(PCSR_CAPTURE_HEADER);
-ULONG NTAPI CsrAllocateMessagePointer(PCSR_CAPTURE_HEADER, ULONG, PVOID *);
+NTSTATUS NTAPI CsrClientCallServer(struct _CSR_API_MSG *, struct _CSR_CAPTURE_HEADER *, ULONG, ULONG);
+struct _CSR_CAPTURE_HEADER * NTAPI CsrAllocateCaptureBuffer(ULONG, ULONG, ULONG);
+VOID NTAPI CsrFreeCaptureBuffer(struct _CSR_CAPTURE_HEADER *);
+ULONG NTAPI CsrAllocateMessagePointer(struct _CSR_CAPTURE_HEADER *, ULONG, PVOID *);
 BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);
-BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, PBASE_API_MSG, PULONG, DWORD, LPSTARTUPINFOW);
+BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, struct _BASE_API_MSG *, PULONG, DWORD, LPSTARTUPINFOW);
 /* Original process shape is the finite support carrier, never the host PEB. */
 #define PPEB POPENNT_SUPPORT_PEB
 #ifndef STARTF_HASSHELLDATA

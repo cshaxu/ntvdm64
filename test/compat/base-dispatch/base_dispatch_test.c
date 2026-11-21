@@ -2,6 +2,12 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ntlpcapi.h>
+#include <ntcsrmsg.h>
+#include <winss.h>
+#include "non-mvdm/base/win32/inc/basemsg.h"
+#include "non-mvdm/base/win32/inc/basevdm.h"
+#include <vdmapi.h>
 #include "compat/include/base_client.h"
 #include "compat/include/base_transport.h"
 #include "base-request-owner.inc"

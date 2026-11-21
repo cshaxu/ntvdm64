@@ -9,6 +9,13 @@ static const common_frontend_key forged_frontend={0x7fffffff,0x7fffffff};
 #include <stdio.h>
 #include <stdlib.h>
 #include <wchar.h>
+#include <nt.h>
+#include <ntlpcapi.h>
+#include <ntcsrmsg.h>
+#include <winss.h>
+#include "non-mvdm/base/win32/inc/basemsg.h"
+#include "non-mvdm/base/win32/inc/basevdm.h"
+#include <vdmapi.h>
 #include "compat/include/base_client.h"
 #include "common/base_srv/base_rpc_client.h"
 #include "worker-base/connection.h"

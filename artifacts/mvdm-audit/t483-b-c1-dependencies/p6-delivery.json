@@ -1,0 +1,79 @@
+{
+  "packet": "M0 T483 S20 P6",
+  "baseline": "9415bc864",
+  "status": "verified delivery",
+  "id": "BC1F005",
+  "file": "src/compat/include/base_client.h",
+  "ownership": "B declares only opaque CSR/BASE pointers with unchanged ABI. Six original includes belong at the C1 algorithm and actual D/F message-field users. Original algorithms, request dispatcher, transport binding, wait/exit ownership and synchronous calls unchanged; no layout copy or new callback/state machine.",
+  "counts": {
+    "files_completed": 5,
+    "files_total": 94,
+    "remaining": 89,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70,
+    "B_C1_compiled_headers": 555,
+    "B_C1_search_roots": 20,
+    "B_C2_unique": 0,
+    "B_C2_raw": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "file_change": {
+    "C1_header_targets_before": 6,
+    "C1_header_targets_after": 0,
+    "literal_header_rows_before": 2,
+    "literal_header_rows_after": 0,
+    "resolved_header_rows_before": 18,
+    "resolved_header_rows_after": 0
+  },
+  "mirror": {
+    "path": "src/non-mvdm/base/win32/client/vdm.c",
+    "before": {
+      "points": 19,
+      "lines": 570
+    },
+    "after": {
+      "points": 19,
+      "lines": 576
+    },
+    "delta": {
+      "points": 0,
+      "lines": 6
+    },
+    "cumulative_S20": {
+      "points": 0,
+      "lines": 91
+    },
+    "approval": "Standing small mirror addition approval; no new diff point, six moved includes; R2740 retained.",
+    "error_line": "Six includes in existing command branch before owner projections and original #line304. Removing those includes restores baseline bytes exactly; no original algorithm/error/line change; paired parser zero issues."
+  },
+  "package": "a1b94716-c4fa-476d-8929-a99a89ea5933",
+  "build": "cached full x86/x64/reference passed",
+  "publication": "dual11 release with22 verified hashes",
+  "tests": [
+    "140 BASE dispatch assertions with actual C1 projections passed",
+    "Real published RPC reply/connect/disconnect/loss/bootstrap passed",
+    "Published Win16 native-extension/message/retirement and COMMAND modern EDIT/CMD/MEM return passed."
+  ],
+  "limitations": [
+    "No full Win3.1/Win95 matrix claimed.",
+    "Mocked transport dispatch assertions supplement real package RPC and guest tests."
+  ],
+  "evidence_root": "build/t483-s20-base-client",
+  "gate": "11 boundary controls,9 product graphs,22 published hashes,frontend ownership,governance/links and diff check passed(final exit0).",
+  "final_inputs": {
+    "src/compat/include/base_client.h": "f5a04f69c92c52254504734b328aa7707b9875bc2559454a89dca722b42c8327",
+    "src/non-mvdm/base/win32/client/vdm.c": "d1cb266e32b639bb21e42eaf8fcf447827c0f5340c4a77df5882724f3b48e7ab",
+    "src/common/base_srv/base_rpc_client_launch.c": "1caaba618d485f663e4c10d5516bbe3c44ee492da12a49c2225e5e7e036ca368",
+    "src/run16-exe/main.c": "de4db34cbb4063bfd73233695d55c0b4ded4e075080240c201ced92b7326ac88",
+    "test/compat/base-dispatch/base_dispatch_test.c": "045c14dccd940d1edec6652ef370fc17ec1b6e40573bdf7b21542f91ae3bb7cd",
+    "test/integration/base_client_rpc_first_test.c": "0609b3ccb2e2a49482bfaf287afd58dfa0c3c8bf70f9c4bcd6f6823631de1125",
+    "test/observation/ntvdm_command_client_diagnostic.c": "d3331e61209d1e1c864cdb5c41ff11b1a2f8e578b58b52cc3337e051bcb02c5e"
+  },
+  "failed_attempts": [
+    {
+      "name": "x86/x64",
+      "cause": "D RPC client and Run16 previously obtained original message layouts transitively through B; moved explicit original includes to these actual field users and equivalent fixtures. Final x86-explicit/x64-explicit passed."
+    }
+  ]
+}
