@@ -17,7 +17,7 @@ DWORD WINAPI epoch_owner_pid(HWND window, LPDWORD pid)
     return 1;
 }
 DWORD WINAPI epoch_current_pid(void) { return 100; }
-void WINAPI wow_clipboard_opened(void);
+#include "../../../src/compat/include/wow_clipboard_epoch.h"
 void WINAPI W32EmptyClipboard(void)
 {
     CHECK(locked);
@@ -25,7 +25,7 @@ void WINAPI W32EmptyClipboard(void)
     if (reenter) {
         reenter = FALSE;
         ++sequence;
-        wow_clipboard_opened();
+        wow_clipboard_opened(W32EmptyClipboard);
     }
 }
 static BOOL WINAPI fixture_open(HWND hwnd)

@@ -73,6 +73,29 @@ static BOOL clipboard_resolve(clipboard_api *api)
         api->open_window && api->window_process;
 }
 
+/* The shared-desktop witness competes with desktop Clipboard listeners.
+ * Wait only for an identified foreign opener, never hide a product lock or
+ * an access denial without an owner. The deadline remains a test failure. */
+static BOOL clipboard_open_peer(const clipboard_api *api)
+{
+    ULONGLONG deadline=GetTickCount64()+1000;
+    for (;;) {
+        DWORD error, pid=0;
+        HWND owner;
+        if (api->open(NULL)) return TRUE;
+        error=GetLastError();
+        owner=api->open_window();
+        api->window_process(owner,&pid);
+        if (error!=ERROR_ACCESS_DENIED || !pid ||
+                pid==GetCurrentProcessId() || GetTickCount64()>=deadline) {
+            SetLastError(error);
+            return FALSE;
+        }
+        clipboard_trace("foreign-open-wait",pid,error);
+        Sleep(10);
+    }
+}
+
 static BOOL clipboard_text_is(const char *expected)
 {
     clipboard_api api;
@@ -82,7 +105,7 @@ static BOOL clipboard_text_is(const char *expected)
     if (!clipboard_resolve(&api)) {
         clipboard_trace("resolve",0,GetLastError()); return FALSE;
     }
-    if (!api.open(NULL)) {
+    if (!clipboard_open_peer(&api)) {
         DWORD error=GetLastError();
         HWND owner=api.open_window();
         DWORD pid=0;
@@ -114,7 +137,7 @@ static BOOL clipboard_set_text(const char *value)
     HGLOBAL data;
     char *text;
     BOOL result=FALSE;
-    if (!clipboard_resolve(&api) || !api.open(NULL)) return FALSE;
+    if (!clipboard_resolve(&api) || !clipboard_open_peer(&api)) return FALSE;
     if (!api.empty()) goto done;
     data=GlobalAlloc(GMEM_MOVEABLE,length);
     if (!data) goto done;
@@ -133,7 +156,7 @@ done:
 static BOOL clipboard_dib_is(const BYTE *expected)
 {
     clipboard_api api; HANDLE data; const BYTE *bytes; BOOL match=FALSE;
-    if (!clipboard_resolve(&api) || !api.open(NULL)) return FALSE;
+    if (!clipboard_resolve(&api) || !clipboard_open_peer(&api)) return FALSE;
     data=api.get(CLIPBOARD_FORMAT);
     if (data && (bytes=(const BYTE *)GlobalLock(data))!=NULL) {
         SIZE_T size=GlobalSize(data);
@@ -153,7 +176,7 @@ static BOOL clipboard_dib_is(const BYTE *expected)
 static BOOL clipboard_set_dib(const BYTE *value)
 {
     clipboard_api api; HGLOBAL data; BYTE *bytes; BOOL result=FALSE;
-    if (!clipboard_resolve(&api) || !api.open(NULL)) return FALSE;
+    if (!clipboard_resolve(&api) || !clipboard_open_peer(&api)) return FALSE;
     if (!api.empty()) goto done;
     data=GlobalAlloc(GMEM_MOVEABLE,sizeof(dib_guest)); if (!data) goto done;
     bytes=(BYTE *)GlobalLock(data); if (!bytes) {GlobalFree(data);goto done;}

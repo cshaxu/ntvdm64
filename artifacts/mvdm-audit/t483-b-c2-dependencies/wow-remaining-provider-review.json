@@ -1,0 +1,297 @@
+{
+  "packet": "M0 T483 S19",
+  "head": "622eb101f",
+  "scope": "DIR items28-38 following pending clipboard item27; independent read-only review while native Clipboard access is unavailable",
+  "files": [
+    {
+      "id": "BC2F028",
+      "file": "src/compat/wow_common_dialog_callback.c",
+      "sha256": "9e4725d67dda293daaa098fd7a3d003262e3c8d052f825ed4890a993dda61be7",
+      "linked_C2_unique": 3,
+      "providers": [
+        {
+          "source": "src/mvdm-host/wow32/wcommdlg.c",
+          "symbol": "_WowOriginalDialogProc@16"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wcommdlg.c",
+          "symbol": "_WowOriginalFindReplaceDialogProc@16"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wcommdlg.c",
+          "symbol": "_WowOriginalPrintSetupDialogProc@16"
+        }
+      ],
+      "classification": "original-call callbacks",
+      "next_action": "Bind the three original common-dialog bodies before original WOW DLL attach; preserve B task/borrow scope and FindReplace resource-owner callback identity.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    },
+    {
+      "id": "BC2F029",
+      "file": "src/compat/wow_hook_callback.c",
+      "sha256": "c4436057d167d454eee458eef56c65fc2aabb25e47b8353df727daa9afb2873d",
+      "linked_C2_unique": 6,
+      "providers": [
+        {
+          "source": "src/mvdm-host/wow32/wmdisp32.c",
+          "symbol": "_fThunkDDEmsg"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wowhooks.c",
+          "symbol": "_W32GetHookStateData@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wowhooks.c",
+          "symbol": "_WowOriginalStdHookProc@16"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wowhooks.c",
+          "symbol": "_vHookParams"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wowhooks.c",
+          "symbol": "_viCurrentHookStateDataIndex"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wumsg.c",
+          "symbol": "_fWhoCalled"
+        }
+      ],
+      "classification": "original calls plus private nested context",
+      "next_action": "Bind original hook dispatch; C2 must own hook-table projection and capture/restore of original HOOKPARAMS, current index and message-mode fields. Do not export a duplicated private structure or move TLS state into B. Keep B HWND enrollment/borrow unwinding.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    },
+    {
+      "id": "BC2F030",
+      "file": "src/compat/wow_idle_hook_binding.c",
+      "sha256": "802b0898feb17e5636365232a34980a97eff4fce9ca98a4db3d0c65f313f9fcc",
+      "linked_C2_unique": 2,
+      "providers": [
+        {
+          "source": "src/mvdm-host/wow32/wkman.c",
+          "symbol": "_WowOriginalForegroundIdleHook@12"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wkman.c",
+          "symbol": "_gptdTaskHead"
+        }
+      ],
+      "classification": "original call plus private task-list query",
+      "next_action": "Bind original foreground-idle body. Move the TD-list query to its C2 owner or use an existing exact provider if found; preserve gcsWOW locking, preinitialization refusal, and LastError. Keep native CallNextHookEx ordering.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    },
+    {
+      "id": "BC2F031",
+      "file": "src/compat/wow_launch_identity.c",
+      "sha256": "819ad18f21d49ca8dafb6440724882237f96e6d33f5a6374c32d534545160d8a",
+      "linked_C2_unique": 0,
+      "providers": [],
+      "classification": "private layout despite zero live relocations",
+      "next_action": "No live C2 relocation is evidence only: CURRENTPTD and TD field accesses still depend on C2 layout. Provide a narrow separate-launch query in the original TD owner; do not treat zero link symbols as resolved.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    },
+    {
+      "id": "BC2F032",
+      "file": "src/compat/wow_message_lifetime.c",
+      "sha256": "6e841f535fbffd1a6be93f0378b7bf41e0d4c3cb400f589655782c0c4a177b36",
+      "linked_C2_unique": 12,
+      "providers": [
+        {
+          "source": "src/mvdm-host/wow32/walloc16.c",
+          "symbol": "_free16@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wcall16.c",
+          "symbol": "_WOWGlobalLockSize16@8"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wcall16.c",
+          "symbol": "_WOWGlobalUnlockFree16@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wcntl32.c",
+          "symbol": "_WM32CBDir@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wmdisp32.c",
+          "symbol": "_WM32CopyData@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wmdisp32.c",
+          "symbol": "_WM32Create@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wmdisp32.c",
+          "symbol": "_WM32MDICreate@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wmdisp32.c",
+          "symbol": "_WM32SetText@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wmdisp32.c",
+          "symbol": "_WM32SizeClipBoard@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wmdisp32.c",
+          "symbol": "_WM32WinHelp@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wmsg16.c",
+          "symbol": "_UnThunkWMMsg16@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wmsgcb.c",
+          "symbol": "_UnThunkCBMsg16@4"
+        }
+      ],
+      "classification": "private message-layout and release semantics",
+      "next_action": "Do not bind only the twelve function addresses while B retains LPWM32MSGPARAMEX. Audit moving layout-dependent extraction/slot-clearing to original message owners, keeping existing allocators and converter identity. Preserve nested finally order, WM_COPYDATA exclusion and per-converter ownership.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    },
+    {
+      "id": "BC2F033",
+      "file": "src/compat/wow_ole_descriptor_binding.c",
+      "sha256": "7bf6537d0fd78d1081e20430baeaea469cf52dc05bdd264a2778b3c5e942239b",
+      "linked_C2_unique": 1,
+      "providers": [
+        {
+          "source": "src/mvdm-host/wow32/wow32.c",
+          "symbol": "_WOWGetVDMPointer@12"
+        }
+      ],
+      "classification": "existing public translation operation",
+      "next_action": "B wow_ole_touch_pointer currently names a C2 function in the same linked image; distinguish this from an actual DLL import. Bind the existing protected pointer operation or remove the B forwarding function in favor of the approved original C1/C2 OLE route if full consumers permit. C1 ConvertObjDescriptor remains for S20.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    },
+    {
+      "id": "BC2F034",
+      "file": "src/compat/wow_standard_class_bindings.c",
+      "sha256": "28fdf6f5ace12d70fbfc69cb066cda984dd9f536a675b9013a65057daa189a8c",
+      "linked_C2_unique": 2,
+      "providers": [
+        {
+          "source": "src/mvdm-host/wow32/walias.c",
+          "symbol": "_GetStdClassNumber@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/walias.c",
+          "symbol": "_stdClasses"
+        }
+      ],
+      "classification": "private standard-class table projection",
+      "next_action": "Remove B duplicate STDCLASS layout and direct stdClasses storage access. Original walias owner should provide a bounded class view/classifier; preserve canonical names/procedures and current FNID mappings rather than duplicating the table.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    },
+    {
+      "id": "BC2F035",
+      "file": "src/compat/wow_task_cleanup_entry.c",
+      "sha256": "a4ff6d0dd708571e364c319897eb86e81523ce3ff64128c78d0d34122c09f15b",
+      "linked_C2_unique": 4,
+      "providers": [
+        {
+          "source": "src/mvdm-host/wow32/wkman.c",
+          "symbol": "_WowOriginalFreeTask@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wkman.c",
+          "symbol": "_gptdTaskHead"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wsdata.c",
+          "symbol": "_WWS32CancelAsyncRequestsForTask@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wsext.c",
+          "symbol": "_WWS32TlsSlot"
+        }
+      ],
+      "classification": "private task identity and original cancellation",
+      "next_action": "C2 owns TD identity and Winsock TLS serial. Provide exact uninitialized-task query and original async retirement operation; bind original FreeTask, keeping B prepare-exit before original free and preserving callback/resource order.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    },
+    {
+      "id": "BC2F036",
+      "file": "src/compat/wow_timer_callback.c",
+      "sha256": "173ba3ab5e0299c6cf7b8400f0b48790055b4ef664bd7b2d3ba6233c304f12d9",
+      "linked_C2_unique": 1,
+      "providers": [
+        {
+          "source": "src/mvdm-host/wow32/wutmr.c",
+          "symbol": "_WowOriginalTimerFunc@16"
+        }
+      ],
+      "classification": "original-call callback",
+      "next_action": "Bind original timer body. B retains task/borrow scope; original timer slot identity, cancellation and queued callback semantics remain unchanged.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    },
+    {
+      "id": "BC2F037",
+      "file": "src/compat/wow_user_native_extension.c",
+      "sha256": "1138b87932dd8e2c5df17b3b22f67d01961441bd8d2abd2b1ab1dbef402e2c65",
+      "linked_C2_unique": 5,
+      "providers": [
+        {
+          "source": "src/mvdm-host/wow32/wcall16.c",
+          "symbol": "_wow_original_CallBack16@16"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wkgthunk.c",
+          "symbol": "_wow_original_WK32ICallProc32@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wkgthunk.c",
+          "symbol": "_wow_original_WOWDirectedYield16@4"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wkgthunk.c",
+          "symbol": "_wow_original_WOWYield16@0"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wmmedia.c",
+          "symbol": "_wow_original_WMM32CallProc32@4"
+        }
+      ],
+      "classification": "original calls plus callback frame restoration",
+      "next_action": "Five original entry pointers can be bound, but B also reads TD fields and RET_* classifications. Audit narrow original-owner capture/restore and resource-return classification without copying CPU/task layout. Preserve abnormal-unwind restoration and clean-up-only admission.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    },
+    {
+      "id": "BC2F038",
+      "file": "src/compat/wow_user_thunk_scope.c",
+      "sha256": "96304e3b9aa2fe69cfc51f50761f9b3314b9f62487f53f40be9bb4d0a34a02e0",
+      "linked_C2_unique": 3,
+      "providers": [
+        {
+          "source": "src/mvdm-host/wow32/wmdisp32.c",
+          "symbol": "_fThunkDDEmsg"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wow32.c",
+          "symbol": "_W32Exception@8"
+        },
+        {
+          "source": "src/mvdm-host/wow32/wumsg.c",
+          "symbol": "_fWhoCalled"
+        }
+      ],
+      "classification": "exception provider plus private thunk context",
+      "next_action": "Bind original error policy where ABI already permits; move TD vpStack projection and original mode-field snapshot/restore to their C2 owner. Preserve filter-before-unwind semantics and actual API frame identity. Do not merely hide PTD behind void pointer.",
+      "status": "provider/structure review; not implemented, not counted delivered",
+      "mirror_delta": "not proposed until exact implementation and original comparison; large increases require approval"
+    }
+  ],
+  "direct_C2_relationships": 39,
+  "constraint": "Respect original C1/C2 connection exception. B may depend only on its own typed callbacks; provider remains C. No duplicate private structs, no F algorithm trampoline, no added queue.",
+  "remaining_coverage": "Header/declaration closure and detailed migration cost still require implementation-level verification; source summaries are not completion or runtime proof."
+}

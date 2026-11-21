@@ -919,10 +919,10 @@ ownership.
 MVDM-HOST-DIV-452 (T460 S2): original NT4 USER invoked the registered
 `pfnEmptyCB` whenever a native writer invalidated WOW's original 16-bit
 Clipboard cache. Modern USER rejects that private registration ABI. The small
-`wow32-dll` adapter therefore records only the public Clipboard sequence after
-the original `WU32CloseClipboard` releases the lock; before a cached guest
-handle is reused, a changed sequence enters the original
-`W32EmptyClipboard` retirement owner. No Clipboard bytes, handles, format
+`compat` adapter checks the public Clipboard sequence after a successful
+`WU32OpenClipboard`, while its lock is held. A changed external-owner sequence
+invokes the original `W32EmptyClipboard` retirement function passed by the
+C2 caller as a synchronous callback. The adapter retains no callback pointer. No Clipboard bytes, handles, format
 registry, listener window or second cache are introduced. The same five-phase
 witness proves an external native replacement retires the old guest cache and
 performs the original native-to-guest conversion.

@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P11 completes twenty-two files; remaining16 include four pending mirror decisions",
+  "status": "P12 completes twenty-three files; remaining15 include four pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -7633,7 +7633,7 @@
     {
       "id": "BC2F027",
       "file": "src/compat/wow_clipboard_epoch.c",
-      "status": "not yet audited",
+      "status": "completed in verified P12 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7645,7 +7645,8 @@
           "evidence": "_W32EmptyClipboard@0",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "delivery": "p12-clipboard-review.json"
     },
     {
       "id": "BC2F028",
@@ -9417,11 +9418,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 22,
-    "remaining": 16,
+    "completed": 23,
+    "remaining": 15,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 239,
+    "direct_C2_unique_after": 238,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 258
+    "direct_C2_records_after": 257
   }
 }

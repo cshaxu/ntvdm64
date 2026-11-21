@@ -1,0 +1,59 @@
+{
+  "packet": "M0 T483 S19 P12",
+  "baseline": "622eb101f",
+  "status": "verified P12 delivery",
+  "file": "src/compat/wow_clipboard_epoch.c",
+  "direct_relationships": {
+    "delivered_B_C2": 238,
+    "candidate_B_C2": 238,
+    "file_before": 1,
+    "file_after": 0,
+    "B_C1": 58
+  },
+  "ownership": "C2 passes W32EmptyClipboard on each successful open; B calls synchronously after sequence publication when external owner changed. C2 retains Win16 cache/handle ownership. Callback never retained; no new global state, queue or registration.",
+  "mirror_proof": {
+    "file": "src/mvdm-host/wow32/wuclip.c",
+    "original_sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+    "before_sha256": "f5c9ec8bda84a0547b8ae03cc0be046170dbd692b85e05086d935f60744a8a47",
+    "after_sha256": "67ddc1c23d468d50e9074f752fbf35827a895e4e672960c7161f5ff037ec7631",
+    "all_original_relative_diff_spans_identical": true,
+    "non_error_points_delta": 0,
+    "non_error_lines_delta": 0,
+    "error_line_directives_and_all_other_bytes": "unchanged",
+    "reason": "only replaces argument list in preexisting adaptation line; no new lines or conditional structure"
+  },
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "epoch_assertions": 56,
+    "epoch_failures": 0,
+    "real_transfer": "PASS shared desktop, 18 checkpoints, guest/native transfer, rejection, delayed rendering and owner-destroy callback",
+    "native_control": "After RDP reconnect OpenClipboard succeeds. Foreign lock contention separately identified as RadeonSoftware PID19876.",
+    "full_runtime_acceptance": true,
+    "governance_boundary_and_release_hash_gates": 0,
+    "previous_attempts": [
+      "Initial native control OpenClipboard error5 before callback; retained.",
+      "Private desktop retry fails at native peer open; private desktop cannot validate public clipboard.",
+      "Shared runs fail at phases2/5 while RadeonSoftware PID19876 holds the clipboard.",
+      "Bounded native peer wait exposed a guest-open contention at phase4; not accepted as passed."
+    ],
+    "passing_evidence": [
+      "build/t483-s19-clipboard/transfer-rdp-final/result.txt",
+      "build/t483-s19-clipboard/transfer-p11-control/result.txt",
+      "build/t483-s19-clipboard/epoch/receipt.json"
+    ],
+    "test_harness": "Native peer waits at most1000ms only for identified foreign clipboard opener; same-process/no-owner denial fails immediately. No product retry or guest binary change. All original 18 checkpoints retained."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "c7fd0439-7cd5-4f6f-99d8-96d20f80fcc7",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "pending": "S19 continues; remaining WOW provider and approved mirror decision work is not closed by P12.",
+  "evidence_root": "build\\t483-s19-clipboard"
+}

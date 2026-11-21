@@ -193,10 +193,10 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,22 resolved,16 remaining. P11 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
+38 candidates,23 resolved,15 remaining. P12 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
 preparation; P2 cleared COMMAND capture leases; P3 clears keyboard IRQ retirement,
 descriptor projection and effective-address consumers including their public header.
-Unique direct B-to-C2 relationships337->239; relocation records606->258.
+Unique direct B-to-C2 relationships337->238; relocation records606->257.
 Compiled private C2 header rows144->111; private C2 search roots74->11.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
@@ -250,4 +250,14 @@ continuation/I/O/input/notification/wake files. Original ICA, SAS, keycode and
 CPU bodies remain providers. Notification3194, ingress73, capture165, actual
 CCPU BOP and COMMAND return pass. Eight algorithm comparisons match after
 reversing callback binding; no mirror or guest change.
+[P12 clipboard delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p12-clipboard-review.json)
+uses a caller-supplied synchronous retirement callback. Cached full build,
+dual11 publication and epoch56 assertions pass. Real Win16 transfer passes
+all18 checkpoints on the shared desktop; P11 control also passes. Earlier
+access-denial and foreign RadeonSoftware lock failures remain in evidence.
+The native test peer waits only for a bounded identified foreign lock; no
+product retry or guest modification. B-to-C2 is238. Mirror delta0 points/0 lines.
+[Remaining WOW provider review](../../artifacts/mvdm-audit/t483-b-c2-dependencies/wow-remaining-provider-review.json)
+records DIR28-38:39 direct C2 relationships plus private-layout obligations.
+This is source/provider evidence only, with no additional completed files.
 S19 remains active; S20 not admitted.

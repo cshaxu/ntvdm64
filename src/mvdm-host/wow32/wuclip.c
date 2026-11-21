@@ -657,7 +657,7 @@ ULONG FASTCALL WU32OpenClipboard(PVDMFRAME pFrame)
         ul = FALSE;
     else
         ul = GETBOOL16(OpenClipboard(hwnd));
-    if (ul) wow_clipboard_opened();
+    if (ul) wow_clipboard_opened(W32EmptyClipboard);
 
 #line 639
     FREEARGPTR(parg16);

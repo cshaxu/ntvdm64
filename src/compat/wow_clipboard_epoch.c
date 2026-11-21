@@ -1,13 +1,10 @@
 #include "include/wow_clipboard_epoch.h"
 
-/* Original wuclip.c owner, using the selected WOW32 stdcall ABI. */
-void WINAPI W32EmptyClipboard(void);
-
 /* OpenNT xxxOpenClipboard updates the process serial before pfnEmptyCB and
  * preserves handles owned by another Win16 task in the same process. */
 static volatile LONG wow_clipboard_epoch;
 
-void WINAPI wow_clipboard_opened(void)
+void WINAPI wow_clipboard_opened(wow_clipboard_retire retire)
 {
     DWORD sequence = GetClipboardSequenceNumber();
     DWORD owner = 0;
@@ -15,5 +12,5 @@ void WINAPI wow_clipboard_opened(void)
         return;
     GetWindowThreadProcessId(GetClipboardOwner(), &owner);
     if (owner != GetCurrentProcessId())
-        W32EmptyClipboard();
+        retire();
 }

@@ -1,0 +1,29 @@
+{
+  "file": "src/compat/wow_common_dialog_callback.c",
+  "id": "BC2F028",
+  "status": "source/provider review only; no production changes or verified closure",
+  "direct_relationships": 3,
+  "providers": [
+    {
+      "source": "src/mvdm-host/wow32/wcommdlg.c",
+      "symbol": "WowOriginalDialogProc"
+    },
+    {
+      "source": "src/mvdm-host/wow32/wcommdlg.c",
+      "symbol": "WowOriginalPrintSetupDialogProc"
+    },
+    {
+      "source": "src/mvdm-host/wow32/wcommdlg.c",
+      "symbol": "WowOriginalFindReplaceDialogProc"
+    }
+  ],
+  "current_chain": "C2 supplies WCD32 callbacks to native common dialogs; B brackets original C2 dialog callback with task/borrow/resource-destroy scopes. B directly names three C2 implementations.",
+  "recommended_boundary": "B owns a typed immutable three-function dialog callback binding. WOW32 image composition supplies addresses before W32DllInitialize on process attach; no forwarding bodies. Keep original scopes and WM_DESTROY resource ownership. No C source change required.",
+  "lifetime": "B and the three C2 callbacks are linked into the same WOW32 DLL. Binding must precede original attach initialization, remain unchanged throughout nested callbacks and resource-only teardown, and not outlive DLL code. Existing native resource destroy callback remains WCD32FindReplaceDialogProc, not the raw C2 body.",
+  "implementation_cautions": [
+    "Do not bypass B resource/task/borrow scope by registering raw C2 callbacks with native dialogs.",
+    "Do not bind in first callback or add TLS/current-task selector.",
+    "Do not use NTVDM CPU provider table for WOW32 module-local callback composition."
+  ],
+  "remaining_evidence": "Implement after pending P12 runtime gate is resolved; verify real modal dialog/resource cleanup and exact pointer/lifetime binding. C1 ABI/header dependencies remain S20."
+}
