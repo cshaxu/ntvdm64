@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P4 completes eight files; remaining30 include two pending mirror decisions",
+  "status": "P5 completes nine files; remaining29 include two pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -2852,7 +2852,8 @@
     {
       "id": "BC2F009",
       "file": "src/compat/mvdm_redirector_async.c",
-      "status": "not yet audited",
+      "status": "C2 private request and memory coupling cleared in P5",
+      "review": "p5-delivery.json",
       "evidence": [
         {
           "kind": "linked-relocations",

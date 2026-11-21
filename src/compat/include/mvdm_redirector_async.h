@@ -5,8 +5,6 @@
  * until completion or release. */
 #include <windows.h>
 
-typedef struct _DOS_ASYNC_NAMED_PIPE_INFO DOS_ASYNC_NAMED_PIPE_INFO;
-typedef DOS_ASYNC_NAMED_PIPE_INFO *PDOS_ASYNC_NAMED_PIPE_INFO;
 
 #ifdef MVDM_REDIRECTOR_WORKER_EXPORTS
 #define MVDM_REDIRECTOR_WORKER_API __declspec(dllexport)
@@ -14,11 +12,12 @@ typedef DOS_ASYNC_NAMED_PIPE_INFO *PDOS_ASYNC_NAMED_PIPE_INFO;
 #define MVDM_REDIRECTOR_WORKER_API __declspec(dllimport)
 #endif
 
-MVDM_REDIRECTOR_WORKER_API int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
-    WORD segment, WORD offset, DWORD request_type, LPBYTE *buffer_out,
+MVDM_REDIRECTOR_WORKER_API int mvdm_redirector_async_prepare(void **state_out,
+    DWORD *guest_buffer_out, DWORD *anr_out, BOOL *type2_out, DWORD *semaphore_out,
+    WORD segment, WORD offset, int is_read, int type2, LPBYTE *buffer_out,
     WORD *length_out);
-MVDM_REDIRECTOR_WORKER_API int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
+MVDM_REDIRECTOR_WORKER_API int mvdm_redirector_async_complete(void *opaque_state,
     DWORD byte_count, DWORD error_code);
-MVDM_REDIRECTOR_WORKER_API void mvdm_redirector_async_release(PDOS_ASYNC_NAMED_PIPE_INFO request);
+MVDM_REDIRECTOR_WORKER_API void mvdm_redirector_async_release(void **state);
 
 #endif

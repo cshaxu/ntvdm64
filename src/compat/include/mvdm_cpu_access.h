@@ -2,6 +2,7 @@
 #define COMPAT_MVDM_CPU_ACCESS_H
 #include <windows.h>
 #include <stdint.h>
+#include "guest_location.h"
 
 /* Immutable CCPU operations, installed before guest execution. The provider
  * owns CPU state and mappings; B retains only process-lifetime function pointers.
@@ -24,6 +25,10 @@ typedef struct mvdm_cpu_access {
     ULONG (__cdecl *flags)(void);
     BOOL (__cdecl *delay_interrupt)(int, int, ULONG);
     void (__cdecl *cancel_interrupt)(ULONG, ULONG);
+    int (*acquire_location)(const mvdm_guest_location *, uint32_t, uint32_t,
+        mvdm_guest_location_lease *);
+    int (*release_location)(mvdm_guest_location_lease *, int);
+    int (*copy_to_guest)(const mvdm_guest_location *, const uint8_t *, uint32_t);
 } mvdm_cpu_access;
 BOOL mvdm_cpu_access_install(const mvdm_cpu_access *provider);
 const mvdm_cpu_access *mvdm_cpu_access_current(void);

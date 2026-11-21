@@ -36,7 +36,6 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     "base_process.c",
     "mvdm_softpc_text_video.c",
     "mvdm_command_guest_state.c",
-    "mvdm_redirector_async.c",
     "mvdm_softpc_mouse_guest.c",
     "mvdm_softpc_mouse_bridge.c",
     'wow_user_private_access.c',

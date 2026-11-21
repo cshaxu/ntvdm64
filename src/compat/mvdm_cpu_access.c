@@ -11,7 +11,9 @@ BOOL mvdm_cpu_access_install(const mvdm_cpu_access *provider)
         !provider->selector_outside || !provider->descriptor_fields ||
         !provider->translate || !provider->read_memory ||
         !provider->machine_status || !provider->flags ||
-        !provider->delay_interrupt || !provider->cancel_interrupt) {
+        !provider->delay_interrupt || !provider->cancel_interrupt ||
+        !provider->acquire_location || !provider->release_location ||
+        !provider->copy_to_guest) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }

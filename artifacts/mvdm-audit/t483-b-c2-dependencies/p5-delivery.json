@@ -1,0 +1,76 @@
+{
+  "packet": "M0 T483 S19 P5",
+  "status": "verified P5 delivery",
+  "baseline": "67f1ff732",
+  "file": "src/compat/mvdm_redirector_async.c",
+  "counts_B_C2": {
+    "linked-relocations": {
+      "records": 570,
+      "unique": 313
+    },
+    "compiled-headers": {
+      "records": 111,
+      "unique": 111
+    },
+    "search-paths": {
+      "records": 29,
+      "unique": 29
+    }
+  },
+  "progress": {
+    "total": 38,
+    "completed": 9,
+    "remaining": 29
+  },
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 3,
+    "before": {
+      "blocks": 9,
+      "added": 17,
+      "deleted": 23
+    },
+    "after": {
+      "blocks": 9,
+      "added": 20,
+      "deleted": 23
+    },
+    "approval": "Standing authorization: fewer than five lines and at most two points."
+  },
+  "boundary": {
+    "request": "C2 retains DOS_ASYNC_NAMED_PIPE_INFO; B receives typed scalar output addresses only for synchronous preparation. No request-layout copy.",
+    "memory": "Three immutable CPU-access slots bind existing C2 location functions before session execution; F composes addresses, no forwarding bodies.",
+    "lifetime": "B staging state remains owner+epoch checked. Output field writes remain before request-lease release. State is assigned only on successful preparation; failure frees staging. C2 retains async queue and ANR dispatch. Completion publishes payload then error then count; release frees and nulls caller state.",
+    "no_new_queue_or_state_machine": true
+  },
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "native_async_assertions": 27,
+    "real_guest_async_read_write": 0,
+    "original_queue_assertions": 9,
+    "queue_limitation": "The ninth-case baseline deliberately proves the existing allocation-failure/empty-dequeue access violation; not a fix or a new runtime crash.",
+    "line_mapping": "All existing #error/#line directives byte-identical. Three added parameter lines are inside existing adapted block before its original #line 1523 reset.",
+    "cpu_and_command": 0,
+    "real_dpmi_delivery": 0,
+    "real_ccpu_page_boundary": 0,
+    "final_gates": 0,
+    "boundary_negative_controls": 7,
+    "contract_fixture": 0,
+    "published_image_hashes": 22
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "3eae21ce-b90d-4d96-b0b7-2042638139d2",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "evidence_root": "build\\t483-s19-redirector-boundary",
+  "attempts": [
+    "Contract fixture first link failed because its differently spelled original header was not replaced with the shared test callback binding. Corrected the test include and reran; exit0. No production change."
+  ]
+}

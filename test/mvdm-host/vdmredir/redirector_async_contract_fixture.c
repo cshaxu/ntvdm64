@@ -2,8 +2,9 @@
 #include <string.h>
 
 #include "ntvdm-exe/session/session.h"
-#include "vrnmpipe.h"
+#define MVDM_REDIRECTOR_WORKER_EXPORTS
 #include "compat/include/mvdm_redirector_async.h"
+#include "redirector_async_fixture.h"
 
 typedef struct fixture_memory {
     uint8_t bytes[0x20000];
@@ -79,31 +80,31 @@ int main(void)
     memory.bytes[0x140u] = 0xa1u;
     memory.bytes[0x141u] = 0xb2u;
     memory.bytes[0x142u] = 0xc3u;
-    if (!mvdm_redirector_async_prepare(&request, 0u, 0x100u, 0x91u,
+    if (!fixture_redirector_prepare(&request, 0u, 0x100u, 0x91u,
         &buffer, &length) || length != 3u || buffer == NULL ||
         memcmp(buffer, memory.bytes + 0x140u, 3u) != 0) return 2;
     memset(memory.bytes + 0x140u, 0, 3u);
-    if (!mvdm_redirector_async_complete(&request, 2u, 5u) ||
+    if (!mvdm_redirector_async_complete(request.PrivateAsyncState, 2u, 5u) ||
         read_u16(memory.bytes + 0x180u) != 2u ||
         read_u16(memory.bytes + 0x182u) != 5u) return 3;
-    mvdm_redirector_async_release(&request);
+    mvdm_redirector_async_release(&request.PrivateAsyncState);
 
     initialize_request(&memory, 0x100u, 0x140u, 0x180u, 0x182u, 3u);
-    if (!mvdm_redirector_async_prepare(&request, 0u, 0x100u, 0x86u,
+    if (!fixture_redirector_prepare(&request, 0u, 0x100u, 0x86u,
         &buffer, &length) || length != 3u || buffer == NULL) return 4;
     buffer[0] = 0xd1u;
     buffer[1] = 0xe2u;
     buffer[2] = 0xf3u;
-    if (!mvdm_redirector_async_complete(&request, 3u, 0u) ||
+    if (!mvdm_redirector_async_complete(request.PrivateAsyncState, 3u, 0u) ||
         memcmp(memory.bytes + 0x140u, buffer, 3u) != 0) return 5;
-    mvdm_redirector_async_release(&request);
+    mvdm_redirector_async_release(&request.PrivateAsyncState);
 
     initialize_request(&memory, 0x100u, 0x140u, 0x180u, 0x182u, 1u);
-    if (!mvdm_redirector_async_prepare(&request, 0u, 0x100u, 0x86u,
+    if (!fixture_redirector_prepare(&request, 0u, 0x100u, 0x86u,
         &buffer, &length)) return 7;
     session_guest_memory_end(&instance);
-    if (mvdm_redirector_async_complete(&request, 1u, 0u)) return 8;
-    mvdm_redirector_async_release(&request);
+    if (mvdm_redirector_async_complete(request.PrivateAsyncState, 1u, 0u)) return 8;
+    mvdm_redirector_async_release(&request.PrivateAsyncState);
 
     if (!session_thread_unbind(&instance) || !session_dispose(&instance)) return 9;
     return 0;

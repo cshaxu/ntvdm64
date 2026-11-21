@@ -139,6 +139,15 @@ void ica_hw_interrupt_cancel(ULONG adapter, ULONG line)
 #include "../../src/compat/mvdm_keyboard_reset.c"
 #include "../../src/compat/mvdm_softpc_descriptor_fields.c"
 #include "../../src/compat/mvdm_softpc_effective_address.c"
+/* These lease operations are not exercised by the debug-only fake CPU. */
+int mvdm_guest_location_acquire(const mvdm_guest_location *p, uint32_t n,
+    uint32_t access, mvdm_guest_location_lease *lease)
+{ (void)p; (void)n; (void)access; (void)lease; return 0; }
+int mvdm_guest_location_release(mvdm_guest_location_lease *lease, int commit)
+{ (void)lease; (void)commit; return 0; }
+int mvdm_guest_location_copy_to_guest(const mvdm_guest_location *p,
+    const uint8_t *bytes, uint32_t n)
+{ (void)p; (void)bytes; (void)n; return 0; }
 #include "../../src/ntvdm-exe/softpc/mvdm_dpmi_binding.c"
 #include "compat/include/dpmi_host.h"
 

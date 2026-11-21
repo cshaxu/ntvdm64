@@ -1426,8 +1426,11 @@ Return Value:
 
     pAsyncInfo->Completed = FALSE;
     pAsyncInfo->Handle = Handle;
-    if (!mvdm_redirector_async_prepare(pAsyncInfo, getDS(), getSI(), Type,
-            &buffer, &length)) {
+    if (!mvdm_redirector_async_prepare(&pAsyncInfo->PrivateAsyncState,
+            &pAsyncInfo->Buffer, &pAsyncInfo->ANR, &pAsyncInfo->Type2,
+            &pAsyncInfo->Semaphore, getDS(), getSI(),
+            Type == ANP_READ || Type == ANP_READ2,
+            Type == ANP_READ2 || Type == ANP_WRITE2, &buffer, &length)) {
         CloseHandle(hEvent);
         LocalFree(pAsyncInfo);
         SET_ERROR(ERROR_INVALID_ADDRESS);
@@ -1504,7 +1507,7 @@ Return Value:
 
         VrpDequeueAsyncRequest(pAsyncInfo);
         CloseHandle(hEvent);
-        mvdm_redirector_async_release(pAsyncInfo);
+        mvdm_redirector_async_release(&pAsyncInfo->PrivateAsyncState);
 #line 1602
         LocalFree(pAsyncInfo);
         SET_ERROR((WORD)error);
@@ -1608,7 +1611,7 @@ Return Value:
 
         VrpDequeueAsyncRequest(pAsyncInfo);
         CloseHandle(pAsyncInfo->Overlapped.hEvent);
-        mvdm_redirector_async_release(pAsyncInfo);
+        mvdm_redirector_async_release(&pAsyncInfo->PrivateAsyncState);
 #line 1706
         LocalFree(pAsyncInfo);
 
@@ -1966,7 +1969,7 @@ Return Value:
     // update the VDM variables
     //
 
-    ok = mvdm_redirector_async_complete(pAsyncInfo, bytesTransferred, error);
+    ok = mvdm_redirector_async_complete(pAsyncInfo->PrivateAsyncState, bytesTransferred, error);
 
 #line 2095
 #if DBG
@@ -1995,7 +1998,7 @@ Return Value:
 #line 2128
 
         CloseHandle(pAsyncInfo->Overlapped.hEvent);
-        mvdm_redirector_async_release(pAsyncInfo);
+        mvdm_redirector_async_release(&pAsyncInfo->PrivateAsyncState);
 #line 2130
         LocalFree(pAsyncInfo);
     } else {

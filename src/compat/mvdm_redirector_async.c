@@ -6,7 +6,7 @@
 
 #include "include/guest_location.h"
 #include "include/host_context.h"
-#include "mvdm-host/inc/vrnmpipe.h"
+#include "include/mvdm_cpu_access.h"
 
 typedef struct mvdm_redirector_async_state {
     compat_host_context *owner;
@@ -35,8 +35,9 @@ static int location_from_value(mvdm_guest_location *location, uint32_t value)
     return value != 0u && mvdm_guest_location_from_far_value(location, value);
 }
 
-int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
-    WORD segment, WORD offset, DWORD request_type, LPBYTE *buffer_out,
+int mvdm_redirector_async_prepare(void **state_out,
+    DWORD *guest_buffer_out, DWORD *anr_out, BOOL *type2_out, DWORD *semaphore_out,
+    WORD segment, WORD offset, int is_read, int type2, LPBYTE *buffer_out,
     WORD *length_out)
 {
     mvdm_guest_location request_location;
@@ -51,12 +52,14 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
     if (buffer_out != NULL) *buffer_out = NULL;
     if (length_out != NULL) *length_out = 0u;
     owner = compat_host_context_current();
-    if (request == NULL || buffer_out == NULL || length_out == NULL ||
+    if (state_out == NULL || guest_buffer_out == NULL || anr_out == NULL ||
+        type2_out == NULL || semaphore_out == NULL ||
+        buffer_out == NULL || length_out == NULL ||
         !compat_host_context_valid(owner) ||
         owner->state != COMPAT_HOST_CONTEXT_ACTIVE ||
         !mvdm_guest_location_set_real_mode(&request_location, segment, offset) ||
-        !mvdm_guest_location_acquire(&request_location,
-            request_type == ANP_READ2 || request_type == ANP_WRITE2 ? 24u : 18u,
+        !mvdm_cpu_access_current()->acquire_location(&request_location,
+            type2 ? 24u : 18u,
             GUEST_MEMORY_ACCESS_READ, &request_lease)) {
         return 0;
     }
@@ -64,21 +67,21 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
     bytes = request_lease.bytes;
     state = (mvdm_redirector_async_state *)calloc(1u, sizeof(*state));
     if (state == NULL) {
-        (void)mvdm_guest_location_release(&request_lease, 0);
+        (void)mvdm_cpu_access_current()->release_location(&request_lease, 0);
         return 0;
     }
     state->owner = owner;
     state->owner_epoch = owner->epoch;
     state->length = read_u16(bytes + 4u);
     buffer_value = read_u32(bytes + 6u);
-    state->is_read = request_type == ANP_READ || request_type == ANP_READ2;
+    state->is_read = is_read;
     count_value = read_u32(bytes);
-    request->Buffer = buffer_value;
+    *guest_buffer_out = buffer_value;
     error_value = read_u32(bytes + 10u);
-    request->ANR = read_u32(bytes + 14u);
-    request->Type2 = request_type == ANP_READ2 || request_type == ANP_WRITE2;
-    request->Semaphore = request->Type2 ? read_u32(bytes + 20u) : 0u;
-    if (!mvdm_guest_location_release(&request_lease, 0) ||
+    *anr_out = read_u32(bytes + 14u);
+    *type2_out = type2;
+    *semaphore_out = type2 ? read_u32(bytes + 20u) : 0u;
+    if (!mvdm_cpu_access_current()->release_location(&request_lease, 0) ||
         (state->length != 0u &&
             !location_from_value(&state->buffer, buffer_value)) ||
         !location_from_value(&state->bytes_transferred, count_value) ||
@@ -93,37 +96,37 @@ int mvdm_redirector_async_prepare(PDOS_ASYNC_NAMED_PIPE_INFO request,
             return 0;
         }
         if (!state->is_read) {
-            if (!mvdm_guest_location_acquire(&state->buffer, state->length,
+            if (!mvdm_cpu_access_current()->acquire_location(&state->buffer, state->length,
                 GUEST_MEMORY_ACCESS_READ, &buffer_lease)) {
                 free(state->staging);
                 free(state);
                 return 0;
             }
             memcpy(state->staging, buffer_lease.bytes, state->length);
-            if (!mvdm_guest_location_release(&buffer_lease, 0)) {
+            if (!mvdm_cpu_access_current()->release_location(&buffer_lease, 0)) {
                 free(state->staging);
                 free(state);
                 return 0;
             }
         }
     }
-    request->PrivateAsyncState = state;
+    *state_out = state;
     *buffer_out = state->staging;
     *length_out = state->length;
     return 1;
 }
 
-int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
+int mvdm_redirector_async_complete(void *opaque_state,
     DWORD byte_count, DWORD error_code)
 {
     mvdm_redirector_async_state *state;
     mvdm_guest_location_lease lease;
     uint8_t words[2];
 
-    if (request == NULL || request->PrivateAsyncState == NULL) {
+    if (opaque_state == NULL) {
         return 0;
     }
-    state = (mvdm_redirector_async_state *)request->PrivateAsyncState;
+    state = (mvdm_redirector_async_state *)opaque_state;
     if (compat_host_context_current() != state->owner ||
         !compat_host_context_valid(state->owner) ||
         state->owner->state != COMPAT_HOST_CONTEXT_ACTIVE ||
@@ -135,18 +138,18 @@ int mvdm_redirector_async_complete(PDOS_ASYNC_NAMED_PIPE_INFO request,
      * commit must not make the request appear completed. This is not an atomic
      * multi-destination transaction; retain original error-before-count order. */
     if (state->is_read && byte_count != 0u) {
-        if (byte_count > state->length || !mvdm_guest_location_acquire(
+        if (byte_count > state->length || !mvdm_cpu_access_current()->acquire_location(
             &state->buffer, byte_count, GUEST_MEMORY_ACCESS_WRITE, &lease)) goto failed;
         memcpy(lease.bytes, state->staging, byte_count);
-        if (!mvdm_guest_location_release(&lease, 1)) goto failed;
+        if (!mvdm_cpu_access_current()->release_location(&lease, 1)) goto failed;
     }
     words[0] = (uint8_t)error_code;
     words[1] = (uint8_t)(error_code >> 8);
-    if (!mvdm_guest_location_copy_to_guest(&state->error_code, words, 2u))
+    if (!mvdm_cpu_access_current()->copy_to_guest(&state->error_code, words, 2u))
         goto failed;
     words[0] = (uint8_t)byte_count;
     words[1] = (uint8_t)(byte_count >> 8);
-    if (!mvdm_guest_location_copy_to_guest(&state->bytes_transferred, words, 2u))
+    if (!mvdm_cpu_access_current()->copy_to_guest(&state->bytes_transferred, words, 2u))
         goto failed;
     return 1;
 
@@ -154,12 +157,12 @@ failed:
     return 0;
 }
 
-void mvdm_redirector_async_release(PDOS_ASYNC_NAMED_PIPE_INFO request)
+void mvdm_redirector_async_release(void **opaque_state)
 {
     mvdm_redirector_async_state *state;
-    if (request == NULL || request->PrivateAsyncState == NULL) return;
-    state = (mvdm_redirector_async_state *)request->PrivateAsyncState;
+    if (opaque_state == NULL || *opaque_state == NULL) return;
+    state = (mvdm_redirector_async_state *)*opaque_state;
     free(state->staging);
     free(state);
-    request->PrivateAsyncState = NULL;
+    *opaque_state = NULL;
 }

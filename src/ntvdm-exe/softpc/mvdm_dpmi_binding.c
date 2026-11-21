@@ -28,7 +28,9 @@ BOOL ntvdm_dpmi_initialize(void)
         ccpu_apply_debug_context, c_sas_memory_size, c_getPG, c_getVM,
         c_getCPL, selector_outside_GDT_LDT, ccpu_read_descriptor_fields, xtrn2phy,
         mvdm_softpc_guest_memory_copy_from, c_getMSW, c_getEFLAGS,
-        host_DelayHwInterrupt, ica_hw_interrupt_cancel
+        host_DelayHwInterrupt, ica_hw_interrupt_cancel,
+        mvdm_guest_location_acquire, mvdm_guest_location_release,
+        mvdm_guest_location_copy_to_guest
     };
     static const compat_dpmi_services services = {
         ThreadSetDebugContext, mvdm_debugger_read_debug_registers,

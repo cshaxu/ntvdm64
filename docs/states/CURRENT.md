@@ -193,11 +193,11 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,8 resolved,30 remaining. P4 build, publication, targeted runtime and final gates passed. P1 cleared debug/COMMAND
+38 candidates,9 resolved,29 remaining. P5 cached build, dual publication, targeted runtime and final gates passed. P1 cleared debug/COMMAND
 preparation; P2 cleared COMMAND capture leases; P3 clears keyboard IRQ retirement,
 descriptor projection and effective-address consumers including their public header.
-Unique direct B-to-C2 relationships337->316; relocation records606->575.
-Compiled private C2 header rows144->112; private C2 search roots74->29.
+Unique direct B-to-C2 relationships337->313; relocation records606->570.
+Compiled private C2 header rows144->111; private C2 search roots74->29.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
 Owner-approved P1 mirror delta+2 points/+19 lines is registered as R2721/R2722;
@@ -214,6 +214,10 @@ checks and actual provider/lifetime dispositions.
 Neither is implemented or counted as a closed dependency.
 [P4](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p4-delivery.json) removes
 the printer unit's unused C2 search roots; its C1 ABI stays an S20 obligation.
+[P5](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p5-delivery.json) keeps
+C2 pipe requests private and binds three existing CCPU memory operations through
+B callbacks. Native async27, real guest async read/write, CCPU, DPMI delivery
+and COMMAND return passed; mirror delta0 points/+3 lines under standing approval.
 Original DOSX status-query inversion reproduced on the S18 control and P1;
 status-query semantics are not claimed passed. No original guest changed.
 S19 remains active; S20 not admitted.

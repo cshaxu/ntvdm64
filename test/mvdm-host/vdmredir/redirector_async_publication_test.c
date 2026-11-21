@@ -2,7 +2,7 @@
 #include "compat/include/guest_location.h"
 #define MVDM_REDIRECTOR_WORKER_EXPORTS
 #include "compat/include/mvdm_redirector_async.h"
-#include "mvdm-host/inc/vrnmpipe.h"
+#include "redirector_async_fixture.h"
 #include "ntvdm-exe/session/session.h"
 #include <stdio.h>
 #include <string.h>
@@ -65,7 +65,7 @@ static int prepare(memory_fixture *m, DOS_ASYNC_NAMED_PIPE_INFO *request,
     m->bytes[0x104] = 3;
     put32(m->bytes + 0x106, 0x140);
     put32(m->bytes + 0x10a, 0x182);
-    if (!mvdm_redirector_async_prepare(request, 0, 0x100, kind,
+    if (!fixture_redirector_prepare(request, 0, 0x100, kind,
         &staging, &length) || length != 3 || staging == NULL) return 0;
     memcpy(staging, "xyz", 3);
     return 1;
@@ -73,7 +73,7 @@ static int prepare(memory_fixture *m, DOS_ASYNC_NAMED_PIPE_INFO *request,
 static DWORD __cdecl complete_on_bound_thread(LPVOID opaque)
 {
     return session_thread_current() != NULL &&
-        mvdm_redirector_async_complete(opaque, 3, 0) ? 0u : 1u;
+        mvdm_redirector_async_complete(((PDOS_ASYNC_NAMED_PIPE_INFO)opaque)->PrivateAsyncState, 3, 0) ? 0u : 1u;
 }
 static int no_live_leases(session const *s)
 {
@@ -96,7 +96,7 @@ int main(void)
 
     if (!prepare(&m, &request, ANP_READ)) return 2;
     check(m.request_limit == 18u, "original request does not require Type2 extension");
-    check(mvdm_redirector_async_complete(&request, 3, ERROR_MORE_DATA),
+    check(mvdm_redirector_async_complete(request.PrivateAsyncState, 3, ERROR_MORE_DATA),
         "partial read completion succeeds");
     check(m.write_count == 3 && m.writes[0] == 0x140 &&
         m.writes[1] == 0x182 && m.writes[2] == 0x180,
@@ -104,8 +104,8 @@ int main(void)
     check(!memcmp(m.bytes + 0x140, "xyz", 3) && m.bytes[0x180] == 3 &&
         m.bytes[0x182] == (uint8_t)ERROR_MORE_DATA,
         "partial read preserves actual bytes and error");
-    mvdm_redirector_async_release(&request);
-    mvdm_redirector_async_release(&request);
+    mvdm_redirector_async_release(&request.PrivateAsyncState);
+    mvdm_redirector_async_release(&request.PrivateAsyncState);
     check(request.PrivateAsyncState == NULL && no_live_leases(&s),
         "release is idempotent and leases are closed");
 
@@ -113,48 +113,48 @@ int main(void)
         LPBYTE staging;
         WORD length;
         request.PrivateAsyncState = (void *)1;
-        check(mvdm_redirector_async_prepare(&request, 0, 0x100, ANP_READ,
+        check(fixture_redirector_prepare(&request, 0, 0x100, ANP_READ,
             &staging, &length) && request.PrivateAsyncState != (void *)1,
             "fresh LocalAlloc request needs no private-field initialization");
-        mvdm_redirector_async_release(&request);
+        mvdm_redirector_async_release(&request.PrivateAsyncState);
     }
 
     for (i = 0; i < 3; ++i) {
         if (!prepare(&m, &request, ANP_READ2)) return 2;
         m.fail_address = destinations[i];
-        check(!mvdm_redirector_async_complete(&request, 3, 5),
+        check(!mvdm_redirector_async_complete(request.PrivateAsyncState, 3, 5),
             "destination failure rejects completion");
         check(m.write_count == i + 1 &&
             m.bytes[0x180] == 0xa5 &&
             (i != 0 || m.bytes[0x182] == 0xa5),
             "failure does not publish later completion words");
         check(no_live_leases(&s), "failed commit closes lease");
-        mvdm_redirector_async_release(&request);
+        mvdm_redirector_async_release(&request.PrivateAsyncState);
     }
     {
         LPBYTE staging;
         WORD length;
         m.request_limit = 18u;
-        check(!mvdm_redirector_async_prepare(&request, 0, 0x100, ANP_READ2,
+        check(!fixture_redirector_prepare(&request, 0, 0x100, ANP_READ2,
             &staging, &length) && request.PrivateAsyncState == NULL,
             "Type2 rejects unreadable semaphore extension");
     }
     if (!prepare(&m, &request, ANP_READ)) return 2;
-    check(!mvdm_redirector_async_complete(&request, 4, 0) && m.write_count == 0,
+    check(!mvdm_redirector_async_complete(request.PrivateAsyncState, 4, 0) && m.write_count == 0,
         "oversized read publishes nothing");
-    mvdm_redirector_async_release(&request);
+    mvdm_redirector_async_release(&request.PrivateAsyncState);
 
     if (!prepare(&m, &request, ANP_WRITE2)) return 2;
-    check(mvdm_redirector_async_complete(&request, 2, 5) &&
+    check(mvdm_redirector_async_complete(request.PrivateAsyncState, 2, 5) &&
         m.write_count == 2 && m.writes[0] == 0x182 && m.writes[1] == 0x180 &&
         m.bytes[0x140] == 0xa5, "write completion does not copy staging back");
-    mvdm_redirector_async_release(&request);
+    mvdm_redirector_async_release(&request.PrivateAsyncState);
 
     if (!prepare(&m, &request, ANP_READ)) return 2;
-    check(mvdm_redirector_async_complete(&request, 0, 0) &&
+    check(mvdm_redirector_async_complete(request.PrivateAsyncState, 0, 0) &&
         m.write_count == 2 && m.bytes[0x140] == 0xa5,
         "zero read publishes only completion words");
-    mvdm_redirector_async_release(&request);
+    mvdm_redirector_async_release(&request.PrivateAsyncState);
 
     if (!prepare(&m, &request, ANP_READ)) return 2;
     {
@@ -171,24 +171,24 @@ int main(void)
     }
     m.write_count = 0;
     if (!session_thread_unbind(&s)) return 2;
-    check(!mvdm_redirector_async_complete(&request, 3, 0) && m.write_count == 0,
+    check(!mvdm_redirector_async_complete(request.PrivateAsyncState, 3, 0) && m.write_count == 0,
         "unbound thread cannot publish");
     check(session_thread_current() == NULL, "failed completion does not bind caller");
-    mvdm_redirector_async_release(&request);
+    mvdm_redirector_async_release(&request.PrivateAsyncState);
     if (!session_thread_bind(&s)) return 2;
 
     if (!prepare(&m, &request, ANP_READ)) return 2;
     ++s.host_context.epoch;
-    check(!mvdm_redirector_async_complete(&request, 3, 0) && m.write_count == 0,
+    check(!mvdm_redirector_async_complete(request.PrivateAsyncState, 3, 0) && m.write_count == 0,
         "stale owner epoch rejected before publication");
     --s.host_context.epoch;
     check(session_request_cancellation(&s, SESSION_CANCELLATION_REQUESTED) &&
-        !mvdm_redirector_async_complete(&request, 3, 0) && m.write_count == 0,
+        !mvdm_redirector_async_complete(request.PrivateAsyncState, 3, 0) && m.write_count == 0,
         "cancelled owner rejects original completion entry");
     session_guest_memory_end(&s);
-    check(!mvdm_redirector_async_complete(&request, 3, 0) && m.write_count == 0,
+    check(!mvdm_redirector_async_complete(request.PrivateAsyncState, 3, 0) && m.write_count == 0,
         "ended guest memory cannot publish");
-    mvdm_redirector_async_release(&request);
+    mvdm_redirector_async_release(&request.PrivateAsyncState);
     check(no_live_leases(&s) && session_thread_unbind(&s) && session_dispose(&s),
         "final session cleanup succeeds");
     printf("assertions=%u failures=%u\n", assertions, failures);
