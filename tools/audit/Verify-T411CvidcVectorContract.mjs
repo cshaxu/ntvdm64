@@ -24,7 +24,7 @@ const privateSlots = listFromMetadata(metadata, 'CpuPrivateVectorNames');
 const generator = requireText(root, 'tools/build/GenerateCvidcCpuBinding.mjs',
   /CalcQuickEventInstTime:\s*'c_cpu_calc_q_ev_inst_for_time'/);
 const binder = requireText(root,
-  'src/compat/mvdm_cvidc_vector_binding.c',
+  'src/mvdm-host/softpc.new/base/cvidc/ev_glue.c',
   /Cpu\.Sas\s*=\s*&Sas[\s\S]*Sas\.Sas_overwrite_memory\s*=\s*c_sas_overwrite_memory[\s\S]*Cpu\.Video\s*=\s*\(IHP\)&Video/);
 const qevnt = requireText(root,
   'src/mvdm-host/softpc.new/base/system/qevnt.c',
@@ -73,12 +73,13 @@ if (!/(^|\n)IHP\s+Gdp\s*;/.test(evGlue) ||
     !/\bGdp\s*=\s*\(IHP\)host_malloc\(64 \* 1024\);/.test(evGlue)) {
   throw new Error('GDP must retain the original C declarations and C-VID allocation');
 }
+// Same-TU binding may be inlined; the original setup owner must remain linked.
 if (mapPath !== null) {
   const map = fs.readFileSync(mapPath, 'utf8');
   if (!/^.*_Gdp\s+\S+\s+(?:original-softpc-cvidc:ev_glue\.obj|<common>)\s*$/m.test(map) ||
-      !/^.*_mvdm_cvidc_bind_vectors\s+\S+\s+f\s+original-softpc-cvidc:mvdm_cvidc_vector_binding\.obj\s*$/m.test(map) ||
+      !/^.*_setup_vga_globals\s+\S+\s+f\s+original-softpc-cvidc:ev_glue\.obj\s*$/m.test(map) ||
       !/^.*_c_effective_addr\s+\S+\s+f\s+mvdm-softpc-effective-address:mvdm_softpc_effective_address\.obj\s*$/m.test(map)) {
-    throw new Error('final map is missing a selected GDP, vector binder or effective-address provider');
+    throw new Error('final map is missing a selected GDP, original vector setup owner or effective-address provider');
   }
 }
 

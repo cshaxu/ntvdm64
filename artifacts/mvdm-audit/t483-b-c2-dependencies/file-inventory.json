@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P21 completes thirty files; eight remain; all five small mirror candidates owner approved",
+  "status": "P22 completes thirty-one files; seven remain; small mirror candidates owner approved",
   "files": [
     {
       "id": "BC2F001",
@@ -529,7 +529,7 @@
     {
       "id": "BC2F006",
       "file": "src/compat/mvdm_cvidc_vector_binding.c",
-      "status": "owner-approved compiled candidate; production implementation pending",
+      "status": "completed in verified P22 delivery; B implementation removed",
       "review": "vector-provider-decision.json",
       "evidence": [
         {
@@ -2602,7 +2602,8 @@
           "evidence": "insignia.h",
           "product": "ntvdm.exe"
         }
-      ]
+      ],
+      "delivery": "p22-delivery.json"
     },
     {
       "id": "BC2F007",
@@ -9427,11 +9428,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 30,
-    "remaining": 8,
+    "completed": 31,
+    "remaining": 7,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 213,
+    "direct_C2_unique_after": 30,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 229
+    "direct_C2_records_after": 34
   }
 }

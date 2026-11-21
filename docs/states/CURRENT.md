@@ -193,24 +193,24 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,30 resolved,8 remaining. P21 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->213; relocation records606->229.
-Compiled private C2 header rows144->60; private C2 search roots74->11.
+38 candidates,31 resolved,7 remaining. P22 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->30; relocation records606->34.
+Compiled private C2 header rows144->52; private C2 search roots74->11.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
 Owner-approved P1 mirror delta+2 points/+19 lines is registered as R2721/R2722;
-P2/P3/P4 mirror delta0 points/0 lines. Original C2 algorithms remain providers of
-B-owned synchronous callbacks, installed before session/device initialization.
+P2/P3/P4 mirror delta0 points/0 lines. Original C2 providers remain bound before session/device initialization.
 [P1](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p1-delivery.json),
 [P2](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p2-delivery.json) and
 [P3](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p3-delivery.json)
-record cached full builds, dual11 publication, targeted native/real-CPU/guest
-checks and actual provider/lifetime dispositions.
+record verified provider/lifetime and delivery evidence.
 [Directory candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/directory-provider-decision.json)
 (+1 point/+22 lines) and [vector candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/vector-provider-decision.json)
 (+1 point/+87 lines) are approved under the owner standing threshold.
 Directory is verified in [P21](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p21-delivery.json):
 final cached full, dual11, directory/capture166 and real COMMAND return passed.
-Cumulative mirror increment+6points/+222lines; vector remains unimplemented.
+Vector is delivered in [P22](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p22-delivery.json):
+183 C2 relations cleared; C-VID/CCPU209-slot and real COMMAND checks pass.
+Cumulative mirror increment+7points/+309lines.
 [Mouse owner candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/mouse-guest-provider-decision.json)
 compiled with product parameters; +1 point/+41 lines is approved, not implemented.
 [Text-video candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/text-video-provider-decision.json)

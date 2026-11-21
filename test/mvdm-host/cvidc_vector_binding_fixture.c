@@ -222,7 +222,7 @@ static int check_chain2_rules(IU8 *planes)
     for (parity = 0; parity < 2; ++parity)
     for (slot = 0; slot < 2; ++slot) {
         EVID_READ_POINTERS reader = mode ? read_mode1_evid[1] : read_mode0_evid[1];
-        rule_mode=mode; rule_parity=parity; rule_slot=slot; rule_flag=flag;
+        rule_mode=mode; rule_parity=parity; rule_slot=slot; rule_flag=0;
         offset = slot ? 0x107u - parity : 0x100u + parity;
         for (i = 0; i < 4; ++i) {
             IU32 address = slot ? offset - i : offset + i;

@@ -828,3 +828,90 @@ setup_global_data_ptr IFN0()
 }
 #endif	/* CCPU */
 #endif	/* C_VID */
+
+#include "cpu4.h" /* DIVERGENCE(MVDM-HOST-DIV-905): original vector owner. */
+#include "cvidc_selected_providers.inc"
+extern struct VideoVector C_Video;
+extern struct VideoVector Video;
+extern struct SasVector Sas;
+IMPORT void c_sas_overwrite_memory IPT2(PHY_ADDR, addr, PHY_ADDR, length);
+
+/* The selected original sources retain the C-VID access shims but omit their
+ * generated CCPU timing provider. qevnt.c owns the original restart state;
+ * retaining that owner prevents the vector binder from becoming a second
+ * quick-event state manager. */
+extern ULONG qevJumpRestart;
+
+IUH mvdm_cvidc_get_jump_calibration(void)
+{
+    /* The recovered CCPU fallback has no instruction-jump calibration
+     * counter.  qevnt.c treats zero as the original no-recalibration path;
+     * do not conflate that with its independently configurable restart. */
+    return 0;
+}
+
+IUH mvdm_cvidc_get_jump_restart(void)
+{
+    return (IUH)qevJumpRestart;
+}
+
+void mvdm_cvidc_set_jump_restart(IUH value)
+{
+    qevJumpRestart = (ULONG)value;
+}
+
+static struct CpuPrivateVector CvidCpuPrivate;
+
+/* Original host/src/nt_cpu.c::setSTATUS (A3CPU): restore host-supplied FLAGS
+ * without guest POPF privilege filtering. That translation unit's A3CPU
+ * runtime is not the selected CCPU40 backend; bind its finite flag operation
+ * to the existing original CCPU setters, not a new instruction provider. */
+static void mvdm_cvidc_set_status(IU16 flags)
+{
+    c_setNT((flags >> 14) & 1);
+    c_setIOPL((flags >> 12) & 3);
+    c_setOF((flags >> 11) & 1);
+    c_setDF((flags >> 10) & 1);
+    c_setIF((flags >> 9) & 1);
+    c_setTF((flags >> 8) & 1);
+    c_setSF((flags >> 7) & 1);
+    c_setZF((flags >> 6) & 1);
+    c_setAF((flags >> 4) & 1);
+    c_setPF((flags >> 2) & 1);
+    c_setCF(flags & 1);
+}
+
+static void mvdm_cvidc_bind_cpu_private(void)
+{
+#include "cvidc_cpu_binding.inc"
+#define MVDM_BIND_PRIVATE(field, provider) CvidCpuPrivate.field = provider;
+    MVDM_CVIDC_CPU_PRIVATE_SLOTS(MVDM_BIND_PRIVATE)
+#undef MVDM_BIND_PRIVATE
+}
+
+static void mvdm_cvidc_bind_cpu_public(void)
+{
+#include "cvidc_cpu_binding.inc"
+#define MVDM_BIND_PUBLIC(field, provider) Cpu.field = provider;
+    MVDM_CVIDC_CPU_PUBLIC_SLOTS(MVDM_BIND_PUBLIC)
+#undef MVDM_BIND_PUBLIC
+}
+
+void mvdm_cvidc_bind_vectors(void)
+{
+    mvdm_cvidc_bind_cpu_private();
+    Cpu.Private = &CvidCpuPrivate;
+    Cpu.Sas = &Sas;
+    /* DIVERGENCE(MVDM-HOST-DIV-189): the generated source carrier leaves
+     * this reached slot null although the selected CPU40 source supplies the
+     * exact same-shaped no-cache-invalidation provider. */
+    Sas.Sas_overwrite_memory = c_sas_overwrite_memory;
+    mvdm_cvidc_bind_cpu_public();
+    mvdm_cvidc_bind_video_vector();
+    Cpu.Video = (IHP)&Video;
+}
+
+void mvdm_cvidc_bind_video_vector(void)
+{
+    Video = C_Video;
+}

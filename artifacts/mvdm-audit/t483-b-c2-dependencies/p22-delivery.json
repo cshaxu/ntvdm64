@@ -1,0 +1,75 @@
+{
+  "packet": "M0 T483 S19 P22",
+  "baseline": "3b6c12028",
+  "status": "verified delivery",
+  "id": "BC2F006",
+  "file": "src/compat/mvdm_cvidc_vector_binding.c",
+  "ownership": "Existing vector composition and quick-event projections move intact to original C2 ev_glue.c setup owner. Remove B implementation and its build entry. Original tables, slots and initialization order unchanged; no new callback table or state.",
+  "direct_relationships": {
+    "file_before": 183,
+    "file_after": 0,
+    "B_C2_unique": 30,
+    "B_C2_raw": 34,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 31,
+    "total": 38,
+    "remaining": 7
+  },
+  "compiled_headers": {
+    "B_C2": 52,
+    "B_C1": 605
+  },
+  "private_search_roots": {
+    "B_C2": 11,
+    "B_C1": 36
+  },
+  "mirror": {
+    "file": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+    "before": {
+      "points": 3,
+      "lines": 22
+    },
+    "after": {
+      "points": 4,
+      "lines": 109
+    },
+    "delta": {
+      "points": 1,
+      "lines": 87
+    },
+    "cumulative_S19": {
+      "points": 7,
+      "lines": 309
+    },
+    "approval": "Owner standing approval one point and fewer than100 non-error lines",
+    "error_line_proof": "Original file bytes unchanged prefix. Appended87lines; paired#error mask has zero issues; all existing#line unchanged. DIV905/R2728."
+  },
+  "source_proof": {
+    "original_prefix_identical": true,
+    "bodies_identical": true,
+    "normalized_body_sha256": "bc369cd7256cadd2feb6ae9ab9b6221fc39b877fbec2e743fd4cf11691d779ff",
+    "original_provider_generator_identical": true
+  },
+  "package": "35236611-a380-4999-aef4-92869e89fa3e",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hashes verified",
+  "tests": [
+    "Actual C-VID setup:38pairs x4values,81slots,exact read/write/mark selection,256write states,256bytes and253unaligned words/dwords,CHAIN2 and actual CCPU SAS moves/fills,negative control and concurrent scratch preservation passed",
+    "Actual CCPU descriptor-domain fixture exit0",
+    "Selected209slots:180 original providers,4 existing adapter providers,25 deliberate nulls; original GDP/setup owner/quick-event and effective-address map checks pass",
+    "Final published package: real modern EDIT CtrlQ,CMD echo,DOS MEM and launcher completion passed"
+  ],
+  "test_adjustments": [
+    "Vector binding can inline at its original setup owner after same-TU move; map check now validates linked setup_vga_globals in ev_glue.obj rather than demanding an out-of-line binder",
+    "Old slot-disposition tool read fixed T420 generated snapshot and expected SetSTATUS null; now reads current map-adjacent generated file and validates the SetSTATUS provider already present before this batch",
+    "Initialized diagnostics-only rule_flag to zero for string reader loop; removed uninitialized read in existing fixture"
+  ],
+  "limitations": [
+    "Native fixtures use existing declared host seams; actual guest proof is the COMMAND/EDIT/MEM return test, not full Win3.1/Win95 matrix",
+    "Generated and assembly attribution gaps remain explicit in coverage.json; remaining callbacks are not claimed absent"
+  ],
+  "evidence_root": "build/t483-s19-vector-delivery"
+}

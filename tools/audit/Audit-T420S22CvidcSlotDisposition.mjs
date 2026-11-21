@@ -8,12 +8,13 @@ if (!mapArgument) {
 
 const root = path.resolve(rootArgument);
 const read = (relative) => fs.readFileSync(path.join(root, relative), 'utf8');
-const binding = read('build/M0-T420/S21/formal-x86-004/generated/cvidc_cpu_binding.inc');
+const binding = fs.readFileSync(path.join(path.dirname(path.resolve(root, mapArgument)), 'generated/cvidc_cpu_binding.inc'), 'utf8');
 const map = fs.readFileSync(path.resolve(root, mapArgument), 'utf8');
 const adapterProviders = new Set([
   'mvdm_cvidc_get_jump_calibration',
   'mvdm_cvidc_get_jump_restart',
   'mvdm_cvidc_set_jump_restart',
+  'mvdm_cvidc_set_status',
 ]);
 
 const slots = [...binding.matchAll(/^\s*X\(([A-Za-z0-9_]+),\s*([A-Za-z0-9_]+|0)\)\s*\\?$/gm)]
@@ -25,7 +26,7 @@ if (slots.length !== 209) {
 const nullSlots = slots.filter(({ provider }) => provider === '0').map(({ slot }) => slot);
 const expectedNull = new Set([
   'ClearHwInt', 'InitIOS', 'DefineInb', 'DefineInw', 'DefineInd',
-  'DefineOutb', 'DefineOutw', 'DefineOutd', 'SetSTATUS', 'SetAC', 'GetAC',
+  'DefineOutb', 'DefineOutw', 'DefineOutd', 'SetAC', 'GetAC',
   'GetET', 'GetNE', 'GetWP', 'GetSadInfoTable', 'GetCpuState',
   'SetCpuState', 'InitNanoCpu', 'PrepareBlocksToCompile', 'SetRegConstraint',
   'GrowRecPool', 'BpiCompileBPI', 'TrashIntelRegisters',
@@ -51,7 +52,7 @@ for (const { slot, provider } of providerSlots) {
   }
 }
 
-const binder = read('src/compat/mvdm_cvidc_vector_binding.c');
+const binder = read('src/mvdm-host/softpc.new/base/cvidc/ev_glue.c');
 if (/static\s+IUH\s+mvdm_cvidc_jump_restart/.test(binder) ||
     !/extern\s+ULONG\s+qevJumpRestart\s*;/.test(binder)) {
   throw new Error('C-VID binder must not own a second quick-event restart value');

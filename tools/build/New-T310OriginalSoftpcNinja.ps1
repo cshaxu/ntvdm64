@@ -986,20 +986,17 @@ $videoObjects = foreach ($name in $videoNames) {
     }
     $object
 }
-$cvidcObjects = foreach ($name in $cvidcNames) {
-    $object = 'obj/cvidc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $rule = if ($name -eq 'accessfn.c') { 'cc_cvidc_access' } else { 'cc_cvidc_rule' }
-    $graph.Add('build ' + $object + ': ' + $rule + ' ' + (NinjaPath (Join-Path $cvidcRoot $name)))
-    $object
-}
-$cvidcVectorBindingSource = Join-Path $root 'src/compat/mvdm_cvidc_vector_binding.c'
 $cvidcCpuBindingInclude = Join-Path $build 'generated/cvidc_cpu_binding.inc'
 $cvidcCpuBindingGenerator = Join-Path $root 'tools/build/GenerateCvidcCpuBinding.mjs'
 & $NodeExecutable $cvidcCpuBindingGenerator $cvidcCpuBindingInclude (Split-Path $cvidcRoot -Parent)
 if ($LASTEXITCODE -ne 0) { throw 'C-VID CPU binding generation failed.' }
-$graph.Add('build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc_cvidc_rule ' + (NinjaPath $cvidcVectorBindingSource) + ' | ' + (NinjaPath $cvidcCpuBindingInclude) + ' generated/cvidc_selected_providers.inc')
-$graph.Add('  cvidc_rule_cflags = /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT ' + (($cvidcFirstRootPaths | Where-Object { $_ -match '^src(?:/(?:compat|mvdm-host|non-mvdm)(?:/|$)|$)' } | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }) -join ' ') + ' ' + $cvidcGeneratedInclude)
-$cvidcObjects += 'obj/cvidc/mvdm_cvidc_vector_binding.obj'
+$cvidcObjects = foreach ($name in $cvidcNames) {
+    $object = 'obj/cvidc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
+    $rule = if ($name -eq 'accessfn.c') { 'cc_cvidc_access' } else { 'cc_cvidc_rule' }
+    $inputs = if ($name -eq 'ev_glue.c') { ' | ' + (NinjaPath $cvidcCpuBindingInclude) + ' generated/cvidc_selected_providers.inc' } else { '' }
+    $graph.Add('build ' + $object + ': ' + $rule + ' ' + (NinjaPath (Join-Path $cvidcRoot $name)) + $inputs)
+    $object
+}
 $cvidcAccessorSource = Join-Path $root 'src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c'
 $graph.Add('build obj/cvidc/vglob.obj: cc_cvidc_rule ' + (NinjaPath $cvidcAccessorSource))
 $cvidcObjects += 'obj/cvidc/vglob.obj'

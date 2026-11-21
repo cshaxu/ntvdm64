@@ -35,14 +35,12 @@ C1_LAYOUT_ADAPTERS = {"mvdm_monitor_printer.c", "mvdm_vdm_tib.c"}
 ORIGINAL_LAYOUT_ADAPTERS = {
     "base_process.c",
     "mvdm_softpc_text_video.c",
-    "mvdm_command_guest_state.c",
     "mvdm_softpc_mouse_guest.c",
     'wow_user_private_access.c',
     'wow_common_dialog_calls.c',
 
     "wow_common_dialog_callback.c",
     'wow_ole_descriptor_binding.c',
-    'mvdm_cvidc_vector_binding.c',
     'wow_bitmap_bindings.c',
     'wow_button_lifetime.c',
     'wow_button_resources.c',
@@ -137,15 +135,11 @@ def allowed_roots(owner, source=""):
     return roots
 
 
-# These declarations are generated from the selected C video layout by
-# GenerateCvidcCpuBinding.mjs. Only this adapter can use these four outputs.
+# Only the remaining text-video adapter can use these private layout outputs.
 def generated_inputs(directory, owner, source):
     if owner == "compat" and source == "mvdm_softpc_text_video.c":
         return {directory / "generated" / f"text_video_{name}.h"
                 for name in ("gfx", "gvi", "egagraph", "nt_graph")}
-    if owner == "compat" and source == "mvdm_cvidc_vector_binding.c":
-        return {directory / "generated" / name for name in (
-            "cvidc_cpu_binding.inc", "cvidc_selected_providers.inc")}
     return set()
 
 
