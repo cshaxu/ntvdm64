@@ -4,7 +4,7 @@
 #include <string.h>
 static int measured_push(mvdm_mouse_input *,const mvdm_mouse_input_sample *);
 static int measured_take(mvdm_mouse_input *,mvdm_mouse_input_sample *);
-static void measured_interrupt(void);
+void measured_mouse_interrupt(void);
 static void measured_snapshot(DWORD);
 static DWORD measured_interrupts;
 /* Defined by the original NT mouse owner.  The bridge already holds its ICA
@@ -13,11 +13,9 @@ static DWORD measured_interrupts;
 extern ULONG MseIntLazyCount;
 #define mvdm_mouse_input_push measured_push
 #define mvdm_mouse_input_take measured_take
-#define DoMouseInterrupt measured_interrupt
 #include "../../src/compat/mvdm_softpc_mouse_bridge.c"
 #undef mvdm_mouse_input_push
 #undef mvdm_mouse_input_take
-#undef DoMouseInterrupt
 extern void DoMouseInterrupt(void);
 /* Both call sites already hold the original ICA lock. Do not add an input
  * scheduler or replace the actual production queue/IRQ implementation. */
@@ -36,7 +34,7 @@ static int measured_take(mvdm_mouse_input *queue,mvdm_mouse_input_sample *sample
     before=queue->count;head=queue->head;result=mvdm_mouse_input_take(queue,sample);
     worker_performance_take(queue,head,before,result,worker_performance_clock());return result;
 }
-static void measured_interrupt(void)
+void measured_mouse_interrupt(void)
 {
     LONGLONG start;
     if(!worker_performance_enabled()) {

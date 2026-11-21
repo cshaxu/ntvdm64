@@ -13,6 +13,10 @@
 #include "compat/include/mvdm_vm_continuation_store.h"
 #include "compat/include/console_text.h"
 #include "compat/include/mvdm_softpc_mouse_bridge.h"
+/* This transport fixture does not execute the guest ICA/IRQ provider. */
+void host_ica_lock(void) {}
+void host_ica_unlock(void) {}
+void DoMouseInterrupt(void) {}
 #include "ntcon-exe/console_frontend.h"
 #include "compat/include/console_transport.h"
 #include "common/protocol/frontend_protocol.h"
@@ -607,6 +611,9 @@ int main(int argc,char **argv)
     {
         mvdm_mouse_bridge *mouse=mvdm_softpc_mouse_current();
         HANDLE input_ready=GetConsoleInputWaitHandle();
+        const mvdm_mouse_services *services=mouse ? mouse->services : NULL;
+        CHECK(services && services->lock==host_ica_lock &&
+            services->unlock==host_ica_unlock && services->interrupt==DoMouseInterrupt);
         CHECK(mouse && dos_active && mouse->input_ready==input_ready && input_ready);
         mouse->submitted=mouse->active=TRUE;
         mouse->queue.count=1;
@@ -616,6 +623,7 @@ int main(int argc,char **argv)
         bind_error=ERROR_SUCCESS;
         CHECK(ntvdm_console_set_active(FALSE) && !dos_active);
         CHECK(!mouse->submitted && !mouse->active && !mouse->queue.count && mouse->input_ready==input_ready);
+        CHECK(mouse->services==services);
         {
             console_text_style style={0};
             console_video_description description={0};

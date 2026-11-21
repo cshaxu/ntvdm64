@@ -1,0 +1,69 @@
+{
+  "packet": "M0 T483 S19 P6",
+  "baseline": "d25a0807a",
+  "status": "verified P6 delivery",
+  "file": "src/compat/mvdm_softpc_mouse_bridge.c",
+  "counts_B_C2": {
+    "linked-relocations": {
+      "records": 565,
+      "unique": 310
+    },
+    "compiled-headers": {
+      "records": 111,
+      "unique": 111
+    },
+    "search-paths": {
+      "records": 29,
+      "unique": 29
+    }
+  },
+  "progress": {
+    "total": 38,
+    "completed": 10,
+    "remaining": 28
+  },
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "providers": {
+    "lock": "C2 host_ica_lock",
+    "unlock": "C2 host_ica_unlock",
+    "interrupt": "C2 DoMouseInterrupt",
+    "composition": "F console_client.c binds static immutable function addresses to existing mouse bridge before activation; no forwarding algorithm.",
+    "lifetime": "Bridge owned by console_client; callback code lives for worker process. Existing quiesced reset preserves services and borrowed input event. Destroy detaches host context and joins activation/input-watch users before freeing client.",
+    "queue": "Existing producer/CPU-consumer queue remains; needed across real threads. No new queue, registry or state machine."
+  },
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "relative_bridge": 0,
+    "frontend_lifecycle_cases": 15,
+    "default_console_activation_reset": 0,
+    "real_guest_mouse": [
+      "count",
+      "move",
+      "retire"
+    ],
+    "real_command_native_edit_return": 0,
+    "performance_diagnostic_units": "Both changed observer translation units compiled with actual product flags; measurement callback now bound at F composition. No performance result claimed.",
+    "scope": "Targeted ownership/queue/input-route verification. No new Win3.1/Win95 matrix or text-cursor rendering acceptance claimed.",
+    "final_gates": 0,
+    "boundary_negative_controls": 7,
+    "published_image_hashes": 22
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "06f3dde6-39d6-4661-811f-e7ccd65d49dc",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "attempts": [
+    "First test wrapper used forward slashes in a relative cmd batch path and failed before starting any fixture. Reused established backslash wrapper; tests passed."
+  ],
+  "evidence_root": "build\\t483-s19-mouse-bridge"
+}

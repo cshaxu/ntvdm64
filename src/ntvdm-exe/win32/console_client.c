@@ -14,6 +14,14 @@
 #include <limits.h>
 #include <string.h>
 
+/* Composition only: C retains the ICA lock and original mouse interrupt. */
+extern void host_ica_lock(void);
+extern void host_ica_unlock(void);
+extern void DoMouseInterrupt(void);
+static const mvdm_mouse_services mouse_services = {
+    host_ica_lock, host_ica_unlock, DoMouseInterrupt
+};
+
 typedef struct console_client {
     session *owner;
     compat_console_endpoint endpoint;
@@ -130,6 +138,7 @@ DWORD ntvdm_console_client_begin(session *owner)
         &client->endpoint.channel.generation);
     if (error) { HeapFree(GetProcessHeap(),0,client);return error; }
     client->owner=owner;
+    client->mouse.services=&mouse_services;
     InitializeCriticalSection(&client->endpoint.lock);
     InitializeCriticalSection(&client->endpoint.palette_lock);
     client->endpoint.graphics=ntvdm_console_graphics_create();

@@ -35,9 +35,13 @@ static mvdm_mouse_input_sample take(mvdm_mouse_bridge *s,unsigned action,int dx,
 int main(void)
 {
     mvdm_mouse_bridge s={0},other={0};
+    static const mvdm_mouse_services services={host_ica_lock,host_ica_unlock,DoMouseInterrupt};
     compat_host_context first={0},second={0};
     mvdm_mouse_input_sample out;
     unsigned i;
+    s.services=other.services=&services;
+    mvdm_softpc_mouse_reset(&s);
+    assert(s.services==&services);
     /* Actual B binding, not an outer session accessor or a mock getter. */
     assert(!mvdm_softpc_mouse_current());
     assert(compat_host_context_bind(&first));

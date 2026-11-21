@@ -1,23 +1,17 @@
 #include "include/mvdm_softpc_mouse_bridge.h"
 #include <limits.h>
 
-/* Original declarations: nt_mouse.c, nt_eoi.h. Their scheduling and guest
- * virtual extent remain authoritative; this file only binds relative input. */
-extern void host_ica_lock(void);
-extern void host_ica_unlock(void);
-extern void DoMouseInterrupt(void);
-
 DWORD mvdm_softpc_mouse_capacity(mvdm_mouse_bridge *state)
 {
     DWORD capacity=MVDM_MOUSE_INPUT_CAPACITY;
     if(state) {
-        host_ica_lock();
+        state->services->lock();
         capacity-=state->queue.count;
         /* Input watch has already latched readiness until the next read ack.
          * Clear it under the same ICA lock as dequeue, so a freed slot cannot
          * race this reset. Original nt_event_loop still waits for suspend/APC. */
         if(!capacity && state->input_ready)ResetEvent(state->input_ready);
-        host_ica_unlock();
+        state->services->unlock();
     }
     return capacity;
 }
@@ -26,7 +20,7 @@ DWORD mvdm_softpc_mouse_submit(mvdm_mouse_bridge *state,const console_mouse_inpu
 {
     mvdm_mouse_input_sample sample={0};DWORD error=ERROR_SUCCESS;
     if(!state || !console_mouse_input_valid(input))return ERROR_INVALID_DATA;
-    host_ica_lock();
+    state->services->lock();
     if((input->action==CONSOLE_MOUSE_ENTER && state->submitted) ||
         (input->action!=CONSOLE_MOUSE_ENTER && !state->submitted)) { error=ERROR_INVALID_STATE;goto done; }
     sample.buttons=input->buttons;sample.action=input->action;
@@ -35,9 +29,9 @@ DWORD mvdm_softpc_mouse_submit(mvdm_mouse_bridge *state,const console_mouse_inpu
     if(!mvdm_mouse_input_push(&state->queue,&sample)) { error=ERROR_BUFFER_OVERFLOW;goto done; }
     /* Commit producer state only after the sample has a durable queue slot. */
     state->submitted=input->action!=CONSOLE_MOUSE_LEAVE;
-    DoMouseInterrupt();
+    state->services->interrupt();
 done:
-    host_ica_unlock();return error;
+    state->services->unlock();return error;
 }
 /* CPU owner calls after selecting the original mouse instance. Scale each
  * queued sample once, then retain the existing short-counter fragmentation.

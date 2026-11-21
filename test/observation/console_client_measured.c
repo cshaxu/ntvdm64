@@ -11,7 +11,10 @@ static void measured_enter_critical(CRITICAL_SECTION *);
 #define ntcon_worker_call measured_call
 #define worker_base_io_close measured_close
 #define EnterCriticalSection measured_enter_critical
+/* Bind the existing IRQ observer at the production composition point. */
+#define DoMouseInterrupt measured_mouse_interrupt
 #include "../../src/ntvdm-exe/win32/console_client.c"
+#undef DoMouseInterrupt
 #undef EnterCriticalSection
 #undef ntcon_worker_exchange
 #undef ntcon_worker_video

@@ -4,7 +4,16 @@
 #include "compat/include/mvdm_mouse_record.h"
 #include "mvdm_softpc_mouse_input.h"
 
+/* Borrowed immutable functions; provider code outlives the bridge and its
+ * producer/consumer threads. Bound before input activation, never replaced. */
+typedef struct mvdm_mouse_services {
+    void (*lock)(void);
+    void (*unlock)(void);
+    void (*interrupt)(void);
+} mvdm_mouse_services;
+
 typedef struct mvdm_mouse_bridge {
+    const mvdm_mouse_services *services;
     mvdm_mouse_input queue;
     BOOL submitted,active;
     uint16_t width,height,virtual_width,virtual_height;
@@ -16,7 +25,8 @@ typedef struct mvdm_mouse_bridge {
  * Original threads use their existing host context. NULL means no endpoint. */
 mvdm_mouse_bridge *mvdm_softpc_mouse_current(void);
 
-/* Zero-initialized, worker-owned state. Producer acquires original ICA lock;
+/* Zero-initialized, worker-owned state with services bound before use.
+ * Producer acquires original ICA lock;
  * consumer/EOI calls already hold it. No new task or interrupt scheduler. */
 DWORD mvdm_softpc_mouse_submit(mvdm_mouse_bridge *,const console_mouse_input *);
 /* Single event producer reserves at most this many raw input records before
@@ -38,7 +48,9 @@ static __inline void mvdm_softpc_mouse_reset(mvdm_mouse_bridge *state)
 {
     if(state) {
         HANDLE ready=state->input_ready;
+        const mvdm_mouse_services *services=state->services;
         ZeroMemory(state,sizeof(*state));state->input_ready=ready;
+        state->services=services;
     }
 }
 #endif

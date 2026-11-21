@@ -37,7 +37,6 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     "mvdm_softpc_text_video.c",
     "mvdm_command_guest_state.c",
     "mvdm_softpc_mouse_guest.c",
-    "mvdm_softpc_mouse_bridge.c",
     'wow_user_private_access.c',
     'wow_common_dialog_calls.c',
     'wow_message_lifetime.c',

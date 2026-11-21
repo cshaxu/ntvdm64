@@ -57,6 +57,8 @@ int main(void)
 {
     MOUSE_CURSOR_STATUS cursor={0};MOUSE_VECTOR counter={0};
     int x=100,y=50;BOOL unchanged=FALSE;
+    static const mvdm_mouse_services services={host_ica_lock,host_ica_unlock,DoMouseInterrupt};
+    bridge.services=&services;
     current_video_mode=3;
     virtual_screen.bottom_right.x=640;virtual_screen.bottom_right.y=200;
     cursor.position.x=100;cursor.position.y=50;
