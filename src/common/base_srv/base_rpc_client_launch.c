@@ -294,44 +294,16 @@ static NTSTATUS get_command(PCSR_API_MSG message,ULONG length)
     }
     if (applied) {
         base->u.GetNextVDMCommand.WaitObjectForVDM=wait_event;
-        if (pipe_count || file_count) {
-            HANDLE streams[3]={NULL,NULL,NULL};
-            ULONG stream_mask=pipe_mask|file_mask;
-            ULONG pipe_index=0,file_index=0,index;
-            if ((pipe_mask&file_mask) || (pipe_mask&~7u) || (file_mask&~7u) ||
-                (!!base->u.GetNextVDMCommand.StdIn != !!(stream_mask&1u)) ||
-                (!!base->u.GetNextVDMCommand.StdOut != !!(stream_mask&2u)) ||
-                (!!base->u.GetNextVDMCommand.StdErr != !!(stream_mask&4u))) {
-                applied=FALSE;
-            } else {
-                for (index=0;index<3;++index) {
-                    if (pipe_mask&(1u<<index)) streams[index]=pipe_handles[pipe_index++];
-                    else if (file_mask&(1u<<index)) streams[index]=file_handles[file_index++];
-                }
-                if (pipe_index!=pipe_count || file_index!=file_count) { applied=FALSE; goto done; }
-                for (index=0;index<3;++index) if (streams[index] &&
-                    !SetHandleInformation(streams[index],HANDLE_FLAG_INHERIT,HANDLE_FLAG_INHERIT)) {
-                    error=GetLastError(); applied=FALSE; break;
-                }
-                if (!applied) goto done;
-                base->u.GetNextVDMCommand.StdIn=streams[0];
-                base->u.GetNextVDMCommand.StdOut=streams[1];
-                base->u.GetNextVDMCommand.StdErr=streams[2];
-                for (index=0;index<pipe_count;++index) pipe_handles[index]=NULL;
-                for (index=0;index<file_count;++index) file_handles[index]=NULL;
-            }
-        } else {
-            /* A declared standard stream is carried only as a typed RPC
-             * attachment.  The scalar reply contains presence bits, never a
-             * usable HANDLE value, so reject a truncated/malformed reply. */
-            if (base->u.GetNextVDMCommand.StdIn ||
-                base->u.GetNextVDMCommand.StdOut ||
-                base->u.GetNextVDMCommand.StdErr) {
-                applied=FALSE;
-            } else {
-                base->u.GetNextVDMCommand.StdIn=NULL;
-                base->u.GetNextVDMCommand.StdOut=NULL;
-                base->u.GetNextVDMCommand.StdErr=NULL;
+        {
+            PBASE_GET_NEXT_VDM_COMMAND_MSG command = &base->u.GetNextVDMCommand;
+            HANDLE streams[3] = {command->StdIn, command->StdOut, command->StdErr};
+            error = OpenNtBaseAdoptStandardHandles(streams, pipe_mask, pipe_count,
+                pipe_handles, file_mask, file_count, file_handles);
+            applied = error == ERROR_SUCCESS;
+            if (applied) {
+                command->StdIn = streams[0];
+                command->StdOut = streams[1];
+                command->StdErr = streams[2];
             }
         }
         if (applied && wait_event) {
