@@ -20,7 +20,12 @@ Revision History:
 --*/
 
 /* DIVERGENCE(OPENNT-HOST-031): local capture heap; private CSR transport excluded. */
-#include <base_capture.h>
+#include <nt.h>
+#include <ntlpcapi.h>
+#include <ntcsrmsg.h>
+#include "compat/include/base_capture_heap.h"
+#define MAKE_CSRPORT_TAG(tag) 0
+#define CAPTURE_TAG 0
 #line 265
 
 PCSR_CAPTURE_HEADER

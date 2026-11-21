@@ -1,5 +1,11 @@
 /* Real original capture allocator and local ABI, x86 and x64. No CSR wire. */
-#include <base_capture.h>
+#include <nt.h>
+#include <ntlpcapi.h>
+#pragma push_macro("NTSYSAPI")
+#undef NTSYSAPI
+#define NTSYSAPI
+#include <ntcsrdll.h>
+#pragma pop_macro("NTSYSAPI")
 #include "compat/include/base_capture_heap.h"
 #include <stdio.h>
 #include <stdint.h>

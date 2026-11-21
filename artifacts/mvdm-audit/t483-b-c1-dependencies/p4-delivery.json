@@ -1,0 +1,69 @@
+{
+  "packet": "M0 T483 S20 P4",
+  "baseline": "868787caf",
+  "status": "verified delivery",
+  "id": "BC1F003",
+  "file": "src/compat/include/base_capture.h",
+  "ownership": "Removed B forwarding header. Original C1 allocator includes its own original types. B exposes only its locally owned capture heap. Original allocator bodies, calling conventions and diagnostic lines unchanged. Tests consume original ntcsrdll declarations with local-link NTSYSAPI decoration; no copied prototypes or callbacks.",
+  "counts": {
+    "files_completed": 3,
+    "files_total": 94,
+    "remaining": 91,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70,
+    "B_C1_compiled_headers": 555,
+    "B_C1_search_roots": 20,
+    "B_C2_unique": 0,
+    "B_C2_raw": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "file_change": {
+    "resolved_header_targets_before": 3,
+    "resolved_header_targets_after": 0,
+    "resolved_header_rows_before": 9,
+    "resolved_header_rows_after": 0
+  },
+  "mirror": {
+    "path": "src/non-mvdm/base/ntdll/csrutil.c",
+    "before": {
+      "points": 8,
+      "lines": 457
+    },
+    "after": {
+      "points": 8,
+      "lines": 462
+    },
+    "delta": {
+      "points": 0,
+      "lines": 5
+    },
+    "cumulative_S20": {
+      "points": 0,
+      "lines": 84
+    },
+    "approval": "Standing small mirror adaptation approval; no new point,5 lines replacing B forwarding include with C1-owned includes and tag definitions. R2738 retained.",
+    "error_line": "Only include block before original #line265 changed; original algorithm bytes and all existing diagnostic directives unchanged; paired parser zero issues."
+  },
+  "package": "4566dc06-d1fa-45f7-91dc-b379cb782e4e",
+  "build": "cached full x86/x64/reference passed",
+  "publication": "dual11 release with22 verified hashes",
+  "tests": [
+    "3463 actual x86 native capture assertions passed: allocation, pointer table/alignment, free, heap lifetime and handle balance",
+    "Original registry lifecycle selection passed",
+    "Published package actual Win16 native extension/callback/messages and normal retirement passed",
+    "Published package COMMAND modern EDIT/CMD/MEM and return passed"
+  ],
+  "limitations": [
+    "No full Win3.1/Win95 matrix claimed.",
+    "Whole legacy lifecycle fixture remains non-pass as recorded by P3; only its selected registry checks executed here."
+  ],
+  "evidence_root": "build/t483-s20-base-capture",
+  "gate": "11 boundary controls,9 product graphs,dual22 hashes,frontend ownership,governance/links and diff check passed(final exit0).",
+  "final_inputs": {
+    "src/compat/include/base_capture_heap.h": "0575e0f55493b6e11718fe99dce79406349f538271d2db53f197d75c4af51e8d",
+    "src/non-mvdm/base/ntdll/csrutil.c": "2d93a87783078a96d7e6dac4e6c75b080ad4fd4ab4cae572b72e1727c033979a",
+    "test/adapter-basesrv/native_capture_test.c": "4e3b24c37ebf7f1dcd5f955e9ffdc76fa4ad993cbceafaf87f04077bebbe52b1",
+    "test/broker/original_server_lifecycle.c": "cc5247d625cc591ba2b7d579e73ee624fcca5ce2ea97a89e52dfa08420c4fd12"
+  }
+}

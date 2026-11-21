@@ -2711,3 +2711,8 @@ CSR_PROCESS list/field projections to the B-owned registry interface. B retains
 lock, sequence and handle lifetime. Non-error diff11points/49lines becomes
 12points/64lines (+1/+15); standing owner approval, R2737 and S20 P3 evidence.
 Original prefix and diagnostic directives remain byte-exact.
+
+OPENNT-HOST-031 capture include refinement (S20 P4): csrutil.c now imports
+its original NT/CSR types directly and borrows only CsrPortHeap from B. The
+B forwarding header is removed; allocation bodies and #line265 unchanged.
+Non-error8points/457lines ->8points/462lines; R2738 records the retained boundary.

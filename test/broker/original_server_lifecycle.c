@@ -1,9 +1,16 @@
 /* Test host mechanics only. All VDM record policy is linked from srvvdm.c. */
 #include "basesrv.h"
 #include <base_interactive.h>
-#include <base_capture.h>
+#include <nt.h>
+#include <ntlpcapi.h>
+#pragma push_macro("NTSYSAPI")
+#undef NTSYSAPI
+#define NTSYSAPI
+#include <ntcsrdll.h>
+#pragma pop_macro("NTSYSAPI")
 #include <base_config.h>
 #include "compat/include/base_process.h"
+#include "compat/include/base_capture_heap.h"
 extern const OPENNT_BASE_PROCESS_PROVIDER BaseProcessProvider;
 #include <base_server.h>
 #include <base_dispatch.h>
