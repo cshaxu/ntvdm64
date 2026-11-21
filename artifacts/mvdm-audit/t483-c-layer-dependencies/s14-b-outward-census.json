@@ -551,5 +551,14 @@
   "p132_vm_notification_owner": "s14-vm-notification-owner.json",
   "p133_vm_wake_owner": "s14-vm-wake-owner.json",
   "p134_thread_binding_owner": "s14-thread-binding-owner.json",
-  "p136_final_b_routes": "s14-final-b-routes.json"
+  "p136_final_b_routes": "s14-final-b-routes.json",
+  "final_review": {
+    "evidence": "s14-final-dependency-closure.json",
+    "unapproved_outward": 0,
+    "approved_runtime_callbacks": {
+      "D": 9,
+      "F": 2
+    },
+    "note": "Historical compiled and indirect rows retain baseline provenance; approved callbacks are tracked explicitly by C0156/C0619/C0621."
+  }
 }

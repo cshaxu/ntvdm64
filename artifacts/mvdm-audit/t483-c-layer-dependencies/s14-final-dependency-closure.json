@@ -1,0 +1,188 @@
+{
+  "packet": "M0 T483 S14 P162",
+  "production_commit": "494e95ca2a1d405e1786af9a52ebd48e83865640",
+  "scope": "Current B/C direct source and product-compiled dependencies plus final stable-ID and callback reconciliation",
+  "counts": {
+    "binary-imports": 1,
+    "compiled-headers": 0,
+    "generated-rpc-relocations": 0,
+    "linked-relocations": 0,
+    "literal-includes": 0,
+    "resolved-includes": 0,
+    "runtime-image-names": 2,
+    "search-paths": 0
+  },
+  "remaining_observations": {
+    "binary-imports": [
+      {
+        "from": "mvdm-host",
+        "to": "ntvdm-exe",
+        "source": "VCDEX.DLL",
+        "line_or_section": "",
+        "target": "ntvdm.exe",
+        "evidence": "PE import",
+        "product": "VCDEX.DLL"
+      }
+    ],
+    "runtime-image-names": [
+      {
+        "from": "mvdm-host",
+        "to": "wow32-dll",
+        "source": "src/mvdm-host/wow32/wcntl32.c",
+        "line_or_section": "837",
+        "target": "wow32.dll",
+        "evidence": " WOW32.DLL : WM32LBDir() :: Could not allocate memory for string, ChandanC\\n",
+        "product": "wow32.dll"
+      },
+      {
+        "from": "mvdm-host",
+        "to": "wow32-dll",
+        "source": "src/mvdm-host/wow32/wow32.c",
+        "line_or_section": "244",
+        "target": "wow32.dll",
+        "evidence": "The Win16 subsystem could not load critical string resources from wow32.dll, terminating.",
+        "product": "wow32.dll"
+      }
+    ]
+  },
+  "stable_id_counts": {
+    "excluded-diagnostic": 1,
+    "eliminated": 567,
+    "supporting-evidence": 43,
+    "eliminated-transitive": 6,
+    "approved-image-import": 1,
+    "approved-callback": 3
+  },
+  "stable_ids": 621,
+  "unapproved_outward_dependencies": {
+    "B": 0,
+    "C": 0
+  },
+  "approved_runtime_callbacks": {
+    "B_to_D": 9,
+    "B_to_F": 2,
+    "C_to_outer": 0
+  },
+  "coverage": {
+    "head": "494e95ca2a1d405e1786af9a52ebd48e83865640",
+    "objects_mapped_and_linkmap_objects_and_symbols": {
+      "msvc-x86-release/worker/ntvdm.exe": [
+        517,
+        460,
+        5771
+      ],
+      "msvc-x86-release/worker/VCDEX.DLL": [
+        3,
+        1,
+        30
+      ],
+      "msvc-x86-release/worker/VDMREDIR.dll": [
+        48,
+        42,
+        274
+      ],
+      "msvc-x86-release/worker/nthook32.dll": [
+        54,
+        25,
+        82
+      ],
+      "msvc-x86-release/wow32/wow32.dll": [
+        230,
+        227,
+        2681
+      ],
+      "msvc-x64-release/frontend/ntcon.exe": [
+        67,
+        37,
+        211
+      ],
+      "msvc-x64-release/service/ntsrv.exe": [
+        63,
+        43,
+        417
+      ],
+      "msvc-x64-release/monitor/ntmon.exe": [
+        15,
+        6,
+        74
+      ],
+      "msvc-x64-release/launcher/run16.exe": [
+        60,
+        44,
+        185
+      ],
+      "msvc-x64-release/worker/ntvwm.exe": [
+        67,
+        41,
+        196
+      ],
+      "msvc-x64-release/hook/nthook64.dll": [
+        25,
+        25,
+        83
+      ],
+      "msvc-x64-release/worker-reference-x86/ntvdm.exe": [
+        517,
+        460,
+        5771
+      ],
+      "msvc-x64-release/worker-reference-x86/VCDEX.DLL": [
+        3,
+        1,
+        30
+      ],
+      "msvc-x64-release/worker-reference-x86/nthook32.dll": [
+        54,
+        25,
+        82
+      ]
+    },
+    "gaps": {
+      "ntvdm.exe": [
+        "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+        "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+      ],
+      "VDMREDIR.dll": [
+        "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+        "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+      ],
+      "nthook32.dll": [
+        "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+        "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+      ],
+      "wow32.dll": [
+        "no-valid-includes obj/callpr32.obj",
+        "unattributed-object obj/wow32-dll-entry-bridge.obj",
+        "unattributed-object obj/wow32-parent-import-abi-aliases.obj",
+        "unattributed-object obj/wow32-system-import-abi-aliases.obj"
+      ]
+    }
+  },
+  "gap_dispositions": {
+    "no-valid-includes largeint/movemem": "Original assembly has no INCLUDE directives; mapped source and COFF symbols included in final census.",
+    "no-valid-includes callpr32": "Only callconv.inc, original C SDK header; explicit Ninja dependency verified.",
+    "generated WOW objects": "Parent/system aliases have only linker alternatename pragmas; named image imports permitted. Entry bridge is F composition calling C W32DllInitialize and B shutdown functions. No B/C outward implementation body.",
+    "VDMREDIR missing map": "Resolved by isolated relink using exact final product inputs with /map; 48 attributed objects,42 live objects,274 symbols. Published image untouched."
+  },
+  "callback_evidence": [
+    "s14-base-dispatch.md",
+    "s14-vm-admission-boundary.md",
+    "s14-callback-closure.md"
+  ],
+  "verification": "P161 final-code builds, dual11 publication, targeted unit and real guest tests, nine compiler boundary graphs and governance passed. This follow-up changes only evidence/status; no redundant rebuild/test or republication.",
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "raw_evidence": "build\\t483-s14-final-dependency-census",
+  "raw_sha256": {
+    "binary-imports.tsv": "68b0ea7f6d9232b9d6a0a007fdf639d6e12ac24f771a4a3f475b7693fdd09902",
+    "compiled-headers.tsv": "deb68cc7012fd1e0c642ce64ba91133bfd99ecc9454c45fbf8113be22129de2b",
+    "generated-rpc-relocations.tsv": "7d674f3568888935c64bb6fe02fd02e4dc4443097eaf5b85808770d02cc537a9",
+    "linked-relocations.tsv": "583b798dbc9a47998546b4912e5f219fd3f0924acdcc1d8c7b944cf0cd200e62",
+    "literal-includes.tsv": "841f374d29251381c0fc43a1498cfbf1140ad28da3d62d63606527e7da3955e7",
+    "resolved-includes.tsv": "43104dc3a25a7b4413a57deb23d254ca124e0d12afd88e60cc13b58d0a4e59e7",
+    "runtime-image-names.tsv": "f88668433926753953635827eec1305acd39bfbab8f08fe312de1577cb93566d",
+    "search-paths.tsv": "ec8a48927e9b01c0e84a8947e90bb14aed55c57eea807f63b17a44800b92c4d4"
+  }
+}
