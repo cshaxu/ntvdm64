@@ -22,6 +22,7 @@ extern void (*BIOS[])(void);
 #include "ntvdm_dos_observer.h"
 #include "ntvdm-exe/session/session.h"
 #include "compat/include/monitor_context.h"
+extern const mvdm_monitor_provider mvdm_original_monitor_provider;
 #include "compat/include/wow_user_session_binding.h"
 #include "compat/include/mvdm_shadow_registry.h"
 #include "ntvdm-exe/win32/console_client.h"
@@ -150,7 +151,8 @@ static DWORD mvdm_standalone_worker_begin(void)
     BOOL character_io=TRUE;
 
     if (worker_started) return ERROR_ALREADY_EXISTS;
-    if (!mvdm_softpc_text_video_bind(&mvdm_original_text_video_provider) ||
+    if (!mvdm_monitor_bind_provider(&mvdm_original_monitor_provider) ||
+            !mvdm_softpc_text_video_bind(&mvdm_original_text_video_provider) ||
             !mvdm_softpc_termination_bind(host_applClose) ||
             !opennt_thread_initialize() || !ntvdm_command_initialize() ||
             !ntvdm_dpmi_initialize() || !ntvdm_vm_services_initialize(&BIOS[MVDM_VM_DEVICE_BOP])) return GetLastError();

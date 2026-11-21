@@ -1,29 +1,47 @@
 #include "include/monitor_context.h"
+#include "include/opennt_support_thread.h"
 
-/* Source-shaped storage from the original user-mode monitor: one NTVDM
- * worker has one process-global VDM TIB.  It deliberately does not expose
- * an NT kernel VDM object, a CCPU executor or a cross-session broker. */
-/* A real definition, not a tentative COMMON symbol: the link must select
- * this complete original-layout storage, never an unrelated scalar stub. */
-VDM_TIB VdmTib = {0};
 ULONG mvdm_monitor_ntvdm_state;
+/* Installed before worker/NTIO entry and immutable for the process lifetime. */
+static const mvdm_monitor_provider *monitor;
+
+BOOL mvdm_monitor_bind_provider(const mvdm_monitor_provider *provider)
+{
+    if (!provider || !provider->tib || !provider->printer_view ||
+            !provider->printer_close || (monitor && monitor != provider)) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    monitor = provider;
+    return TRUE;
+}
+
+BOOL mvdm_monitor_get_printer(mvdm_monitor_printer_view *view)
+{
+    if (!monitor) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    monitor->printer_view(view);
+    return TRUE;
+}
+
+void mvdm_monitor_close_printer(WORD adapter)
+{
+    monitor->printer_close(adapter);
+}
 
 int mvdm_monitor_bind_current_thread(void)
 {
     POPENNT_SUPPORT_TEB teb = opennt_support_current_teb();
-    if (teb == NULL) return 0;
-    /* The original monitor initialized the three printer modes before the
-     * source-derived registration carrier first observes this worker TIB.
-     * This preserves only that scalar initial state; no kernel monitor state
-     * or V86 execution context is introduced. */
-    if (VdmTib.PrinterInfo.prt_Status == NULL &&
-        VdmTib.PrinterInfo.prt_Mode[0] == 0 &&
-        VdmTib.PrinterInfo.prt_Mode[1] == 0 &&
-        VdmTib.PrinterInfo.prt_Mode[2] == 0) {
-        VdmTib.PrinterInfo.prt_Mode[0] = PRT_MODE_NO_SIMULATION;
-        VdmTib.PrinterInfo.prt_Mode[1] = PRT_MODE_NO_SIMULATION;
-        VdmTib.PrinterInfo.prt_Mode[2] = PRT_MODE_NO_SIMULATION;
+    mvdm_monitor_printer_view view;
+    if (!teb || !mvdm_monitor_get_printer(&view)) return 0;
+    if (*view.status == NULL && view.modes[0] == 0 &&
+            view.modes[1] == 0 && view.modes[2] == 0) {
+        view.modes[0] = view.no_simulation;
+        view.modes[1] = view.no_simulation;
+        view.modes[2] = view.no_simulation;
     }
-    teb->Vdm = &VdmTib;
+    teb->Vdm = monitor->tib;
     return 1;
 }

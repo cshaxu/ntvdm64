@@ -176,7 +176,6 @@ function Add-Edge([string]$target) {
   $flags+=' /DNTOS_KERNEL_RUNTIME /FI "'+(NP (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h'))+'"'
  }
  if($target -eq 'obj/tests/rtl_x86_fixture.obj'){$flags+=' /DOPENNT_ENVIRONMENT_ONLY'}
- if($target -eq 'obj/opennt-base-client/classifier.obj'){$flags+=' /FI "'+(NP (Join-Path $root 'src/compat/include/legacy_classifier_arch.h'))+'"'}
  if($target -eq 'obj/run16/rpc_client_launch.obj'){
   # This existing client imports historical local Base message declarations.
   # Keep its source-facing ABI header, without injecting it into UI/worker TUs.

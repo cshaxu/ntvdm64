@@ -793,10 +793,79 @@ static int dpmi_irq_boundary(void)
     report(line);return ok;
 }
 
+#include "compat/include/monitor_context.h"
+#include "compat/include/opennt_support_thread.h"
+#ifndef _X86_
+#define _X86_
+#endif
+#include <vdm.h>
+extern VDM_TIB VdmTib;
+extern const mvdm_monitor_provider mvdm_original_monitor_provider;
+extern BOOL ntvdm_dpmi_initialize(void);
+extern BOOLEAN MonitorInitializePrinterInfo(WORD, PWORD, PUCHAR, PUCHAR, PUCHAR, PUCHAR);
+extern BOOLEAN MonitorEnablePrinterDirectAccess(WORD, HANDLE, BOOLEAN);
+extern BOOLEAN MonitorPrinterWriteData(WORD, BYTE);
+static DWORD WINAPI monitor_second_thread(void *unused)
+{
+    (void)unused;
+    return !mvdm_monitor_bind_current_thread() ||
+        opennt_support_current_teb()->Vdm != &VdmTib ||
+        VdmTib.PrinterInfo.prt_Mode[2] != PRT_MODE_VDD_CONNECTED;
+}
+static int monitor_tib_contract(void)
+{
+    WORD ports[3] = {0x378, 0x278, 0x3bc};
+    BYTE state[3] = {0}, control[3] = {0}, status[3] = {0}, host[3] = {0};
+    HANDLE handle = (HANDLE)(ULONG_PTR)0x1234, thread;
+    DWORD result;
+    mvdm_monitor_printer_view view;
+    POPENNT_SUPPORT_TEB teb = opennt_support_current_teb();
+    if (!teb || teb->Vdm || mvdm_monitor_get_printer(&view) ||
+            mvdm_monitor_bind_provider(NULL)) return 0;
+    if (!mvdm_monitor_bind_provider(&mvdm_original_monitor_provider) ||
+            !mvdm_monitor_bind_current_thread() || teb->Vdm != &VdmTib) return 0;
+    VdmTib.DpmiInfo.LockCount = 7;
+    if (VdmTib.PrinterInfo.prt_Mode[0] != PRT_MODE_NO_SIMULATION) return 0;
+    VdmTib.PrinterInfo.prt_Mode[2] = PRT_MODE_VDD_CONNECTED;
+    if (!MonitorInitializePrinterInfo(3, ports, state, control, status, host) ||
+            MonitorInitializePrinterInfo(3, ports, state, control, status, host) ||
+            VdmTib.PrinterInfo.prt_Status != status ||
+            VdmTib.PrinterInfo.prt_State != state ||
+            VdmTib.PrinterInfo.prt_Control != control ||
+            VdmTib.PrinterInfo.prt_HostState != host ||
+            VdmTib.PrinterInfo.prt_PortAddr[1] != ports[1] ||
+            VdmTib.PrinterInfo.prt_Mode[0] != PRT_MODE_SIMULATE_STATUS_PORT ||
+            MonitorEnablePrinterDirectAccess(2, handle, TRUE)) return 0;
+    if (!MonitorEnablePrinterDirectAccess(0, handle, TRUE) ||
+            !MonitorPrinterWriteData(0, 0x5a) ||
+            VdmTib.PrinterInfo.prt_Buffer[0][0] != 0x5a ||
+            VdmTib.PrinterInfo.prt_BytesInBuffer[0] != 1 ||
+            MonitorEnablePrinterDirectAccess(0, NULL, FALSE) ||
+            !MonitorEnablePrinterDirectAccess(0, handle, FALSE) ||
+            VdmTib.PrinterInfo.prt_Handle[0] ||
+            VdmTib.PrinterInfo.prt_BytesInBuffer[0] ||
+            VdmTib.PrinterInfo.prt_Mode[0] != PRT_MODE_SIMULATE_STATUS_PORT) return 0;
+    thread = CreateThread(NULL, 0, monitor_second_thread, NULL, 0, NULL);
+    if (!thread) return 0;
+    result = WaitForSingleObject(thread, 5000);
+    if (result != WAIT_OBJECT_0 || !GetExitCodeThread(thread, &result)) {
+        CloseHandle(thread); return 0;
+    }
+    CloseHandle(thread);
+    if (result || VdmTib.DpmiInfo.LockCount != 7 ||
+            !mvdm_monitor_bind_provider(&mvdm_original_monitor_provider)) return 0;
+    report("PASS: original TIB storage, printer registration, mode ownership, buffer and thread binding\n");
+    return 1;
+}
+
 int main(int argc, char **argv) {
     session owner;
     int ok;
     test_case=argc>1 ? atoi(argv[1]) : -1;
+    if (test_case==184) return monitor_tib_contract() ? 0 : 1;
+    if (!ntvdm_dpmi_initialize() ||
+            !mvdm_monitor_bind_provider(&mvdm_original_monitor_provider) ||
+            !mvdm_monitor_bind_current_thread()) return 6;
     session_initialize(&owner, 412);
     if (!session_activate(&owner) || !session_thread_bind(&owner) || !setup_global_data_ptr()) return 2;
     if (!mvdm_softpc_ccpu_wait_begin()) return 3;

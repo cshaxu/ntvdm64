@@ -81,17 +81,16 @@ class BoundaryTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.check_unit("mvdm_softpc_termination.c", "src/mvdm-host/softpc.new/host/inc/host_def.h")
 
-    def test_monitor_carriers_keep_C1_but_reject_C2(self):
-        self.check_unit("mvdm_vdm_tib.c", "src/non-mvdm/public/internal/base/inc/vdm.h")
-        with self.assertRaises(ValueError):
-            self.check_unit("mvdm_vdm_tib.c", "src/mvdm-host/inc/doswow.h")
-        self.check_unit("mvdm_monitor_printer.c", "src/non-mvdm/public/internal/base/inc/vdm.h",
-                        include="src/non-mvdm/public/internal/base/inc")
-        with self.assertRaises(ValueError):
-            self.check_unit("mvdm_monitor_printer.c", "src/mvdm-host/inc/doswow.h")
-        with self.assertRaises(ValueError):
-            self.check_unit("mvdm_monitor_printer.c", "src/compat/include/monitor_context.h",
-                            include="src/mvdm-host/inc")
+    def test_monitor_carriers_reject_all_C_private_dependencies(self):
+        for source in ("mvdm_vdm_tib.c", "mvdm_monitor_printer.c"):
+            self.check_unit(source, "src/compat/include/monitor_context.h")
+            for header in ("src/non-mvdm/public/internal/base/inc/vdm.h",
+                           "src/mvdm-host/inc/doswow.h"):
+                with self.subTest(source=source, header=header), self.assertRaises(ValueError):
+                    self.check_unit(source, header)
+            for root in ("src/non-mvdm/public/internal/base/inc", "src/mvdm-host/inc"):
+                with self.subTest(source=source, root=root), self.assertRaises(ValueError):
+                    self.check_unit(source, "src/compat/include/monitor_context.h", include=root)
 
     def test_named_adapter_cannot_read_outer_layers(self):
         for layer in ("common", "frontend-base", "ntvdm-exe"):

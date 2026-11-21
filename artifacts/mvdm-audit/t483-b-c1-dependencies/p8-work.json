@@ -1,0 +1,74 @@
+{
+  "packet": "M0 T483 S20",
+  "baseline": "f708b3e157dc44e8133729b20193d090ecf4933a",
+  "status": "Superseded by verified p8-delivery.json; BC1F007 transitive group remains open",
+  "delivered_files": 10,
+  "total_files": 94,
+  "files": [
+    {
+      "id": "BC1F007",
+      "path": "src/compat/include/control-client/precomp.h",
+      "change": "Remove redundant ntsend.h include; original C1 ntstubs.c already includes it after precomp. No intervening macro consumer found in compat/include or original usercli.h.",
+      "remaining": "Transitive USER private layout includes; must resolve with shared layout/provider group before file closure.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "BC1F008",
+      "path": "src/compat/include/legacy_classifier_arch.h",
+      "change": "Remove B forced-include facade; preserve three-line architecture selection inside existing C1 classifier branch after native declarations and before original #line 27. Remove both build forced includes.",
+      "verification": "Pending batch build and classifier cases; no delivery claimed.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 3,
+        "before": "19/577",
+        "after": "19/580",
+        "register": "T483-R2742"
+      }
+    },
+    {
+      "id": "BC1F009",
+      "path": "src/compat/include/monitor_context.h",
+      "status": "production source chain implemented; cached build started; tests/publication pending",
+      "confirmed_consumers": [
+        "src/compat/mvdm_vdm_tib.c",
+        "src/compat/mvdm_monitor_printer.c",
+        "src/ntvdm-exe/softpc/mvdm_standalone_worker.c",
+        "src/ntvdm-exe/monitor/include/vint.h"
+      ],
+      "confirmed_ownership": "VDM_TIB process-global original C1 layout currently allocated in B; printer operations write its subrecord; B support TEB stores opaque pointer. Worker binds before CPU execution.",
+      "required_preservation": [
+        "One original full-size VdmTib definition and export; not scalar stub",
+        "Printer registration pointer lifetime and one-time mode defaults",
+        "Existing thread binding and NtVdmControl unavailable result",
+        "No independent printer-state copy or second TIB"
+      ],
+      "next_action": "Locate original provider composition and use C-owned storage/projection with B-owned callback; keep no private C layout in B. Audit registration before printer initialization and thread bind.",
+      "additional_evidence": {
+        "production_initialization": "mvdm_standalone_worker_begin binds original TIB at line210 before guest-memory begin and CPU execution; new provider must be assembled before this and before NTIO printer registration.",
+        "printer_entry": "C2 nt_lpt.c host_lpt_init calls MonitorInitializePrinterInfo with persistent host-printer arrays.",
+        "link_contract": "New-T310OriginalSoftpcNinja.ps1 invokes Verify-VdmTibStorage.mjs with exact current B object owner; ownership change must update link verifier and full-storage fixture together.",
+        "test_consumers": [
+          "test/adapter-mvdm-host-out/monitor/vdm_tib_fixture.c",
+          "test/tools/audit/test_library_build_boundary.py",
+          "tools/build/New-T308MonitorControlNinja.ps1"
+        ],
+        "candidate_boundary": "C owns original VDM_TIB storage and primitive field projections. B retains scalar ntvdm state and thread binding/printer behavior via one B-owned typed provider. Do not copy VDM_TIB layout into B or add another printer state."
+      },
+      "implementation": "C2 dpmiint owns original VdmTib and constant provider. B interface projects fields without layout; F binds before other startup. B private roots removed and gate exceptions revoked.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 29,
+        "register": "T483-R2743"
+      },
+      "tests": "existing CCPU case184: real provider storage, binding, printer register/modes/buffer and second thread; replaces old stand-alone TIB fixture"
+    }
+  ],
+  "line_and_byte_proof": "Removing sole three-line gate recovers baseline vdm.c bytes exactly; no other mirror edits.",
+  "batch_mirror_delta": {
+    "points": 0,
+    "lines": 32
+  }
+}

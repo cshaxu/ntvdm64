@@ -12,14 +12,10 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $build = Join-Path $root ("build/M0-T308/S1/{0}" -f $Architecture)
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 if (!(Test-Path $vs) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'Missing MSVC Build Tools or Ninja.' }
-$sources = @(
-    'src/compat/guest_memory_lease.c', 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
-    'src/compat/opennt_support_rtl.c',
-    'src/compat/vdm_control.c',
-    'src/compat/mvdm_vdm_tib.c')
-$fixtures = @(
-    'test/mvdm-host/vdm_control_test.c',
-    'test/adapter-mvdm-host-out/monitor/vdm_tib_fixture.c')
+# TIB/thread/printer coverage now uses the real C provider in
+# ccpu-monitor-boundary-test.exe case184 (verify-ccpu-monitor-boundary.ps1).
+$sources = @('src/compat/vdm_control.c')
+$fixtures = @('test/mvdm-host/vdm_control_test.c')
 foreach ($path in $sources + $fixtures) { if (!(Test-Path (Join-Path $root $path)) -or $path -match '(^|/)src\.old(/|$)') { throw "Invalid T308 input: $path" } }
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj'), (Join-Path $build 'bin') | Out-Null
 $envFile = Join-Path $build 'msvc-mt.cmd'

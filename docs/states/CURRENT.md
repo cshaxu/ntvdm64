@@ -246,3 +246,14 @@ removed B nt.h dependency(6 resolved rows); original registry-size macro moved
 unchanged to C1(+0points/+1line,R2741). Cached full, dual11, x86/x64 config
 and real Win16/COMMAND passed. Final11 controls/9 product graphs,22 hashes
 and governance passed.
+
+S20 P8 grouped delivery verifies BC1F008/009/023/024:10/94 files complete,
+84 remain. BC1F007 duplicate ntsend include is removed; its transitive USER
+layout group remains open and next DIR work continues at BC1F010/011.
+B-to-C1 remains58 unique/70raw relocations; compiled header rows555->541,
+private search rows20->0. B-to-C2 direct/header/search remains0. The explicit
+B-owned monitor callback has C2-owned TIB storage and two synchronous operations;
+F only assembles it. No duplicate state or queue. Mirror batch delta0points/+32lines,
+S20 cumulative0points/+124lines (R2742/R2743). Cached full build, dual11,
+59CCPU cases, classifier and actual Win16/COMMAND passed; final gates passed.
+[Delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p8-delivery.json).

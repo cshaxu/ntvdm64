@@ -47,6 +47,35 @@ extern int c_getVM(void);
 extern VOID IN8(PULONG, ULONG), IN16(PULONG, ULONG), IN32(PULONG, ULONG);
 extern VOID OUT8(ULONG, ULONG), OUT16(ULONG, ULONG), OUT32(ULONG, ULONG);
 extern void ccpu386CompleteInstruction(void);
+#include "compat/include/monitor_context.h"
+/* DIVERGENCE: original TIB storage/projections remain with its DPMI owner. */
+VDM_TIB VdmTib = {0};
+static void monitor_printer_view(mvdm_monitor_printer_view *view)
+{
+    VDM_PRINTER_INFO *p = &VdmTib.PrinterInfo;
+    view->state = &p->prt_State;
+    view->control = &p->prt_Control;
+    view->status = &p->prt_Status;
+    view->host_state = &p->prt_HostState;
+    view->ports = p->prt_PortAddr;
+    view->counts = p->prt_BytesInBuffer;
+    view->handles = p->prt_Handle;
+    view->modes = p->prt_Mode;
+    view->buffers = &p->prt_Buffer[0][0];
+    view->count = VDM_NUMBER_OF_LPT;
+    view->stride = PRT_DATA_BUFFER_SIZE;
+    view->no_simulation = PRT_MODE_NO_SIMULATION;
+    view->simulate = PRT_MODE_SIMULATE_STATUS_PORT;
+    view->direct = PRT_MODE_DIRECT_IO;
+    view->vdd = PRT_MODE_VDD_CONNECTED;
+}
+static void monitor_printer_close(WORD adapter)
+{
+    NtVdmControl(VdmPrinterDirectIoClose, &adapter);
+}
+const mvdm_monitor_provider mvdm_original_monitor_provider = {
+    &VdmTib, monitor_printer_view, monitor_printer_close
+};
 #line 43
 
 

@@ -68,7 +68,7 @@ foreach($source in $sources) {
         $graph.Add($edge+' | obj/basesrv/service.h')
     }
     if($source -eq 'src/non-mvdm/base/win32/client/vdm.c') {
-        $graph.Add('  cflags = $cflags /DOPENNT_BASE_CLIENT_CLASSIFIER /FI"'+(NP (Join-Path $root 'src/compat/include/legacy_classifier_arch.h'))+'"')
+        $graph.Add('  cflags = $cflags /DOPENNT_BASE_CLIENT_CLASSIFIER')
     }
     if($source -eq 'src/non-mvdm/base/ntos/rtl/error.c') {
         $graph.Add('  cflags = $cflags /DNTOS_KERNEL_RUNTIME /FI "'+(NP (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h'))+'"')

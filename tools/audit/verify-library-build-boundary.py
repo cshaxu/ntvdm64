@@ -30,7 +30,7 @@ WOW_USER_EXCEPTIONS = {"wow_dialog_lookup.c", "wow_object_ownership.c"}
 
 
 # S19 removed C2 search paths; original NT ABI remains an S20 obligation.
-C1_LAYOUT_ADAPTERS = {"mvdm_monitor_printer.c", "mvdm_vdm_tib.c"}
+C1_LAYOUT_ADAPTERS = set()
 
 ORIGINAL_LAYOUT_ADAPTERS = {
     'wow_user_private_access.c',

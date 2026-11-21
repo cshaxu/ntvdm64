@@ -3574,3 +3574,9 @@ frame switch and original TLS mode/frame-field projections. B keeps synchronous
 borrow scopes and trace output; original W32Exception policy is unchanged.
 Standing-approved non-error increment+1point/+35lines; prior prefix exact.
 See P29 delivery evidence.
+
+S20 P8 monitor ownership (verified): dpmi32/dpmiint.c owns the
+sole original VdmTib and typed synchronous printer projections. B keeps
+thread binding and printer behavior without C private headers. F installs
+the provider before entry. Non-error30points/180lines ->30points/209lines;
+R2743. No DPMI algorithm, guest or diagnostic mapping is changed.

@@ -1210,8 +1210,7 @@ $compatCcpuFlags = ($libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + (($
 $adapterMonitorObjects = foreach ($name in $adapterMonitorNames) {
     $object = 'obj/adapter-monitor/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterMonitorRoot $name)))
-    $monitorAbiIncludes = $softpcIncludeRootPaths | Where-Object { $_ -match '^src/(compat|non-mvdm)(/|$)' } | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
-    $graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + ($monitorAbiIncludes -join ' '))
+    $graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT')
     $object
 }
 $adapterDebuggerRoot = Join-Path $root 'src/compat'
@@ -1361,10 +1360,7 @@ $openntRtlObjects = foreach ($name in $openntRtlNames) {
 }
 $kernelVdmPrinterObject = 'obj/kernel-vdm/mvdm_monitor_printer.obj'
 $graph.Add('build ' + $kernelVdmPrinterObject + ': cc ' + (NinjaPath $kernelVdmPrinterSource))
-$printerAbiIncludes = $softpcIncludeRootPaths | Where-Object {
-    $_ -match '^src/(compat|non-mvdm)(/|$)'
-} | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
-$graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + ($printerAbiIncludes -join ' '))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT')
 $openntNetlibObjects = foreach ($name in $openntNetlibNames) {
     $object = 'obj/opennt-netlib/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $openntNetlibRoot $name)))
@@ -2169,7 +2165,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/commo
     # MSVC leaves an unchanged import library's timestamp intact. Without
     # restat that implicit output makes the whole link dirty on every build.
     $graph.Add('  restat = 1')
-    $graph.Add('  command = cmd.exe /d /s /c "link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map /def:generated/ntvdm-wow32-provider.def $in rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib && "' + (NinjaPath $NodeExecutable) + '" "' + (NinjaPath (Join-Path $root 'tools/audit/Verify-VdmTibStorage.mjs')) + '" $out.map obj/adapter-monitor/mvdm_vdm_tib.obj"')
+    $graph.Add('  command = cmd.exe /d /s /c "link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map /def:generated/ntvdm-wow32-provider.def $in rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib && "' + (NinjaPath $NodeExecutable) + '" "' + (NinjaPath (Join-Path $root 'tools/audit/Verify-VdmTibStorage.mjs')) + '" $out.map obj/dpmi/dpmiint.obj"')
     # CCPU40 and DPMI discover the original nt_inthk providers only after their
     # archives have been scanned. Retain the normal source-order occurrence,
     # then rescan this one original host archive at the tail for those hooks.

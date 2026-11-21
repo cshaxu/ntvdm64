@@ -2731,3 +2731,8 @@ S20 P7 config boundary: FULL_INFO_BUFFER_SIZE, from original client/vdm.h:114,
 is unchanged and owned beside vdm.c config includes instead of B. Its sole
 consumer remains GetVDMConfigValue. Non-error19points/576lines ->19points/577lines;
 R2741 retains this one-line placement; original diagnostics/algorithms unchanged.
+
+S20 P8 classifier ownership (verified): the unchanged
+three-line x86 guest classification gate moves from the B forced header into
+vdm.c after native declarations and before original #line27. Both forced
+includes are removed. Non-error19points/577lines ->19points/580lines; R2742.

@@ -1,0 +1,100 @@
+{
+  "packet": "M0 T483 S20 P8",
+  "baseline": "f708b3e15",
+  "status": "verified delivery",
+  "files_completed_this_batch": [
+    "BC1F008",
+    "BC1F009",
+    "BC1F023",
+    "BC1F024"
+  ],
+  "partially_processed": [
+    "BC1F007: duplicate ntsend include gone; remaining private USER layout belongs to next shared-header/provider group"
+  ],
+  "counts": {
+    "files_completed": 10,
+    "files_total": 94,
+    "remaining": 84,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70,
+    "B_C1_compiled_headers": 541,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_raw": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "dependency_delta": {
+    "compiled_C1_header_rows": -14,
+    "C1_private_search_root_rows": -20,
+    "direct_unique": 0
+  },
+  "runtime_provider": "B owns immutable mvdm_monitor_provider contract; C2 dpmiint owns VdmTib and two synchronous callbacks (printer projection and original close service). F composes before worker/NTIO execution. This is an explicit approved callback relationship, not absence of runtime dependence.",
+  "lifetime": "One process-owned original TIB. Per-call projections borrow its existing fields; no copy, queue or alternate printer state. B writes only existing opaque TEB binding. Link owner is dpmiint.obj with4208bytes and no overlapping symbol.",
+  "mirror": [
+    {
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "before": "19points/577lines",
+      "after": "19points/580lines",
+      "register": "R2742"
+    },
+    {
+      "file": "src/mvdm-host/dpmi32/dpmiint.c",
+      "before": "30points/180lines",
+      "after": "30points/209lines",
+      "register": "R2743"
+    }
+  ],
+  "mirror_delta": {
+    "points": 0,
+    "lines": 32
+  },
+  "mirror_cumulative_S20": {
+    "points": 0,
+    "lines": 124
+  },
+  "line_proof": "Both insertions precede existing original #line anchors; removing insertion reproduces baseline mirror bytes. Paired error parser reports zero issues.",
+  "package": "f21f435d-4229-4472-83f9-ac0f11188c42",
+  "publication": "11images at assets/release and O:/winnt/system32;22hashes verified",
+  "build": "cached full x86/x64 plus worker reference passed",
+  "tests": [
+    "59existing/extended CCPU monitor boundary cases including real C provider case184 passed",
+    "Original classifier guest media, PE relative/absolute, DLL rejection, suffix and failure cases passed",
+    "Published package real Win16 native-extension/messages/retirement passed",
+    "Published package COMMAND EDIT/CMD/MEM return passed",
+    "11boundary negative tests,9actual graphs,frontend ownership,governance/links and22publication hashes passed"
+  ],
+  "failed_attempts": [
+    {
+      "attempt": "unit",
+      "failure": "case113 fail-fast because old fixture did not install production DPMI CPU callbacks",
+      "resolution": "Fixture now invokes existing ntvdm_dpmi_initialize plus monitor binding before CPU cases. Entire same list rerun successfully as unit-bound. No product workaround."
+    }
+  ],
+  "coverage_limitations": [
+    "Historical assembler/generated alias attribution gap sets match P7 exactly; no claim of broader coverage.",
+    "No full Win3.1/Win95 matrix claimed.",
+    "B still has58 direct C1 dependencies; remaining private USER headers not closed."
+  ],
+  "evidence_root": "build/t483-s20-header-batch",
+  "final_inputs": {
+    "src/compat/include/control-client/precomp.h": "5ff86da28ea2a0d6663ebb028f9ef78ec42f71a450a86a858c82783bfb6ea117",
+    "src/compat/include/monitor_context.h": "0a0634d74dd468facecffd0dc03a7a9eb0487d42f0e1fda18f5677ea266a4c80",
+    "src/compat/mvdm_monitor_printer.c": "b1f2f50943de5e8e71521e075f2bade1538c6bd6191c171f58a70cfac805af8f",
+    "src/compat/mvdm_vdm_tib.c": "123accc5c9a36422f01a88d8ee19ecb9781279e126d72b9fd00e3c261fb02960",
+    "src/mvdm-host/README.md": "346a561bdeb4cfa735c2dec01155bbfe0c1f2ccb9e8e387a1d81acc1f84373aa",
+    "src/mvdm-host/dpmi32/dpmiint.c": "cf140f24692fdf269bf0c449a15fcd8e7634b81d7b21963b7728964ef0ea48eb",
+    "src/non-mvdm/README.md": "fb5a14d5bd12cb7d09748131fb9e166f326b2e3870f687e57d9af99caa1fbb73",
+    "src/non-mvdm/base/win32/client/vdm.c": "4adf0c53ac34f5acad7246f3a6d07e6b9c1e98df0f1ad617e32110db684a7c8a",
+    "src/ntvdm-exe/softpc/mvdm_standalone_worker.c": "e67121456f010725bdfce0f122c954e25000c027a4ed62eda969b2a485203e86",
+    "test/mvdm-host/ccpu_monitor_boundary_fixture.c": "e5d74a416c371a6e0ab39f2e6c32360cdf6af622ad4b4b5e3cfa9a8c443c327a",
+    "test/observation/verify-ccpu-monitor-boundary.ps1": "0c2ae8f6aac103a91cc5ea1a31e7760f0b2d8f2bc63a4fbcbeeea9bfa7354e97",
+    "test/tools/audit/test_library_build_boundary.py": "f89b1dd380bbf10c5a73e15c82ff73ae44c8e461f56da8ab815601781adafac8",
+    "tools/audit/Verify-VdmTibStorage.mjs": "3f173c3b4eb3f98c547094be77f86fc5f21e3336c87c2f81e8113307868f014e",
+    "tools/audit/verify-library-build-boundary.py": "59aa961868537c48f36e41e6cacaa8a3cfb7cfd7552e82be287e4417bb33b2ee",
+    "tools/build/New-NativeHook64Ninja.ps1": "f070e5fc0a4e8e4875dce93b2bc75cc871275fef12edc589c4a6d7784579f1e4",
+    "tools/build/New-NativeWorkerNinja.ps1": "fe1ff009a28cae634e6039844e615ed9c89cebf2ec77887529b59d028678c5bc",
+    "tools/build/New-T308MonitorControlNinja.ps1": "956bd91b8cac1e24b7bc2d9954b364f83357d277274f408970b7c30e07d01f7d",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "752b53643e865acb57942f8268f14a236bb9339491d3ec7ff0a8cb95a81f913d"
+  }
+}

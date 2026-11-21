@@ -10,6 +10,7 @@
  */
 
 #include "include/monitor_context.h"
+#define ASSERT(Expression) ((void)0)
 
 BOOLEAN MonitorInitializePrinterInfo(
      WORD   Ports,
@@ -20,33 +21,35 @@ BOOLEAN MonitorInitializePrinterInfo(
      PUCHAR HostState)
 {
     int     i;
+    mvdm_monitor_printer_view view;
+    if (!mvdm_monitor_get_printer(&view)) return FALSE;
 
     ASSERT (Ports == 3);
     ASSERT (Status != NULL);
 
     // only do this if the structure has not been initialized -- meaning
     // the pointers can be set once.
-    if (NULL == VdmTib.PrinterInfo.prt_Status) {
+    if (NULL == (*view.status)) {
 
-	VdmTib.PrinterInfo.prt_PortAddr[0] = PortTable[0];
-	VdmTib.PrinterInfo.prt_PortAddr[1] = PortTable[1];
-	VdmTib.PrinterInfo.prt_PortAddr[2] = PortTable[2];
+	view.ports[0] = PortTable[0];
+	view.ports[1] = PortTable[1];
+	view.ports[2] = PortTable[2];
 
-	VdmTib.PrinterInfo.prt_Handle[0] =
-	VdmTib.PrinterInfo.prt_Handle[1] =
-	VdmTib.PrinterInfo.prt_Handle[2] = NULL;
+	view.handles[0] =
+	view.handles[1] =
+	view.handles[2] = NULL;
 
 
 	// primarily for dongle
-	VdmTib.PrinterInfo.prt_BytesInBuffer[0] =
-	VdmTib.PrinterInfo.prt_BytesInBuffer[1] =
-	VdmTib.PrinterInfo.prt_BytesInBuffer[2] = 0;
+	view.counts[0] =
+	view.counts[1] =
+	view.counts[2] = 0;
 
 	// primarily for simulating printer status read in kernel
-	VdmTib.PrinterInfo.prt_State = State;
-	VdmTib.PrinterInfo.prt_Control = Control;
-	VdmTib.PrinterInfo.prt_Status = Status;
-	VdmTib.PrinterInfo.prt_HostState = HostState;
+	(*view.state) = State;
+	(*view.control) = Control;
+	(*view.status) = Status;
+	(*view.host_state) = HostState;
 
 
 	// deal with mode carefully. VDD may have hooked printer ports
@@ -54,8 +57,8 @@ BOOLEAN MonitorInitializePrinterInfo(
 	// safely initialize it to our default, otherwise, just leave
 	// it alone.
 	for (i = 0; i < 3; i++) {
-	    if (PRT_MODE_NO_SIMULATION == VdmTib.PrinterInfo.prt_Mode[i])
-		VdmTib.PrinterInfo.prt_Mode[i] = PRT_MODE_SIMULATE_STATUS_PORT;
+	    if (view.no_simulation == view.modes[i])
+		view.modes[i] = view.simulate;
 	}
 
 	return TRUE;
@@ -66,13 +69,15 @@ BOOLEAN MonitorInitializePrinterInfo(
 
 BOOLEAN MonitorEnablePrinterDirectAccess(WORD adapter, HANDLE handle, BOOLEAN Enable)
 {
-    ASSERT(VDM_NUMBER_OF_LPT > adapter);
+    mvdm_monitor_printer_view view;
+    if (!mvdm_monitor_get_printer(&view)) return FALSE;
+    ASSERT(view.count > adapter);
     if (Enable) {
 	// if the adapter has been allocated by a third party VDD,
 	// can't do direct io.
-	if (PRT_MODE_VDD_CONNECTED != VdmTib.PrinterInfo.prt_Mode[adapter]) {
-	    VdmTib.PrinterInfo.prt_Mode[adapter] = PRT_MODE_DIRECT_IO;
-	    VdmTib.PrinterInfo.prt_Handle[adapter] = handle;
+	if (view.vdd != view.modes[adapter]) {
+	    view.modes[adapter] = view.direct;
+	    view.handles[adapter] = handle;
 	    // NtVdmControl(VdmPrinterDirectIoOpen, &adapter);
 	    return TRUE;
 	}
@@ -81,11 +86,11 @@ BOOLEAN MonitorEnablePrinterDirectAccess(WORD adapter, HANDLE handle, BOOLEAN En
     }
     else {
 	// disabling direct i/o. reset it back to status port simulation
-	if (VdmTib.PrinterInfo.prt_Handle[adapter] == handle) {
-	    NtVdmControl(VdmPrinterDirectIoClose, &adapter);
-	    VdmTib.PrinterInfo.prt_Mode[adapter] = PRT_MODE_SIMULATE_STATUS_PORT;
-	    VdmTib.PrinterInfo.prt_Handle[adapter] = NULL;
-	    VdmTib.PrinterInfo.prt_BytesInBuffer[adapter] = 0;
+	if (view.handles[adapter] == handle) {
+	    mvdm_monitor_close_printer(adapter);
+	    view.modes[adapter] = view.simulate;
+	    view.handles[adapter] = NULL;
+	    view.counts[adapter] = 0;
 	    return TRUE;
 	}
 	else
@@ -97,10 +102,12 @@ BOOLEAN MonitorPrinterWriteData(WORD Adapter, BYTE Value)
 {
     USHORT BytesInBuffer;
 
-    ASSERT(VDM_NUMBER_OF_LPT > Adapter);
-    BytesInBuffer = VdmTib.PrinterInfo.prt_BytesInBuffer[Adapter];
-    VdmTib.PrinterInfo.prt_Buffer[Adapter][BytesInBuffer] = Value;
-    VdmTib.PrinterInfo.prt_BytesInBuffer[Adapter]++;
+    mvdm_monitor_printer_view view;
+    if (!mvdm_monitor_get_printer(&view)) return FALSE;
+    ASSERT(view.count > Adapter);
+    BytesInBuffer = view.counts[Adapter];
+    view.buffers[Adapter * view.stride + BytesInBuffer] = Value;
+    view.counts[Adapter]++;
 
     return TRUE;
 }

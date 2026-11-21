@@ -72,9 +72,6 @@ BOOL WINAPI _DefSetText(HWND, LPCWSTR, BOOL);
  * control storage and must not authorize dereferencing original PED/PDLG. */
 #define TestWindowProcess wow_window_client_owns_state
 #endif
-#ifdef WOW_ORIGINAL_DIALOG_GETSET
-#include "non-mvdm/windows/core/ntuser/inc/ntsend.h"
-#endif
 #ifdef WOW_ORIGINAL_PRIVATE_WORD_SETTER
 /* The selected original server body can access only our retained local
  * behavior state. Resource snapshots and foreign/system windows are not
