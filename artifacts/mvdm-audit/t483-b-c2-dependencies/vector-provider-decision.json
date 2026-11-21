@@ -1,0 +1,31 @@
+{
+  "packet": "M0 T483 S19",
+  "status": "mirror increment pending owner approval; production unchanged",
+  "file": "src/compat/mvdm_cvidc_vector_binding.c",
+  "provider_candidate": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+  "unique_relationships": 183,
+  "relocation_records": 195,
+  "mirror_before": {
+    "blocks": 3,
+    "added": 22,
+    "deleted": 0
+  },
+  "mirror_candidate": {
+    "blocks": 4,
+    "added": 109,
+    "deleted": 0
+  },
+  "mirror_delta_points": 1,
+  "mirror_delta_lines": 87,
+  "candidate_compile_exit": 0,
+  "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
+  "candidate_sha256": "1313831ebbd5e8438420c3c6de5e05d911fccda9f46855d3298e73f1c479a2f2",
+  "design": "Move existing layout-coupled vector composition and quick-event endpoints into the existing C2 setup owner; retain original tables, providers and early video/full setup call order. Remove B implementation rather than recreate its vectors in a second callback table.",
+  "remaining_verification": [
+    "Owner approval",
+    "Production build/link and retired-B object checks",
+    "Existing vector binding and CPU/video/guest startup tests",
+    "Dual publication and gates"
+  ],
+  "evidence_root": "build/t483-s19-vector-owner"
+}

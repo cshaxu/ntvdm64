@@ -27,7 +27,7 @@ class BoundaryTest(unittest.TestCase):
             boundary.verify("x86/worker", ["ntvdm.exe"])
 
     def test_named_adapter_can_read_C(self):
-        self.check_unit("mvdm_softpc_effective_address.c",
+        self.check_unit("mvdm_softpc_wow_page_domain.c",
                         "src/mvdm-host/softpc.new/base/ccpu386/c_addr.h")
 
     def test_ordinary_B_cannot_read_C(self):
@@ -38,6 +38,14 @@ class BoundaryTest(unittest.TestCase):
         self.check_unit("dbg_registers.c", "src/compat/include/mvdm_cpu_access.h")
         with self.assertRaises(ValueError):
             self.check_unit("dbg_registers.c", "src/mvdm-host/softpc.new/base/ccpu386/c_main.h")
+
+    def test_cpu_callback_consumers_have_no_C_exception(self):
+        for source in ("mvdm_keyboard_reset.c", "mvdm_softpc_descriptor_fields.c",
+                       "mvdm_softpc_effective_address.c"):
+            with self.subTest(source=source):
+                self.check_unit(source, "src/compat/include/mvdm_cpu_access.h")
+                with self.assertRaises(ValueError):
+                    self.check_unit(source, "src/mvdm-host/softpc.new/base/ccpu386/c_main.h")
 
     def test_named_adapter_cannot_read_outer_layers(self):
         for layer in ("common", "frontend-base", "ntvdm-exe"):

@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P2 completes three files; remaining35 include one pending mirror decision",
+  "status": "P3 completes seven files; remaining31 include two pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -380,7 +380,8 @@
     {
       "id": "BC2F002",
       "file": "src/compat/include/mvdm_softpc_effective_address.h",
-      "status": "not yet audited",
+      "status": "completed in verified P3 delivery",
+      "review": "p3-delivery.json",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -527,7 +528,8 @@
     {
       "id": "BC2F006",
       "file": "src/compat/mvdm_cvidc_vector_binding.c",
-      "status": "not yet audited",
+      "status": "provider candidate compiled; mirror increase pending owner approval; not delivered",
+      "review": "vector-provider-decision.json",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -2604,7 +2606,8 @@
     {
       "id": "BC2F007",
       "file": "src/compat/mvdm_keyboard_reset.c",
-      "status": "not yet audited",
+      "status": "completed in verified P3 delivery",
+      "review": "p3-delivery.json",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -2935,7 +2938,8 @@
     {
       "id": "BC2F010",
       "file": "src/compat/mvdm_softpc_descriptor_fields.c",
-      "status": "not yet audited",
+      "status": "completed in verified P3 delivery",
+      "review": "p3-delivery.json",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -3162,7 +3166,8 @@
     {
       "id": "BC2F011",
       "file": "src/compat/mvdm_softpc_effective_address.c",
-      "status": "not yet audited",
+      "status": "completed in verified P3 delivery",
+      "review": "p3-delivery.json",
       "evidence": [
         {
           "kind": "linked-relocations",

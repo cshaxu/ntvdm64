@@ -677,6 +677,7 @@ done:
 int main(void)
 {
     session physical_owner;
+    if (!ntvdm_dpmi_initialize()) return 1;
     /* The program uses ordinary original CCPU decode and SAS RAM access
      * before its `D6 FE` exit.  `c_main.c` advances IP before calling
      * c_cpu_unsimulate(), which returns through the original CCPU TLS

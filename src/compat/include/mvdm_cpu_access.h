@@ -20,6 +20,10 @@ typedef struct mvdm_cpu_access {
     void (__cdecl *descriptor_fields)(ULONG, ULONG *, ULONG *, USHORT *);
     int (__cdecl *translate)(ULONG, unsigned char, ULONG *);
     int (__cdecl *read_memory)(uint32_t, uint8_t *, uint32_t);
+    USHORT (__cdecl *machine_status)(void);
+    ULONG (__cdecl *flags)(void);
+    BOOL (__cdecl *delay_interrupt)(int, int, ULONG);
+    void (__cdecl *cancel_interrupt)(ULONG, ULONG);
 } mvdm_cpu_access;
 BOOL mvdm_cpu_access_install(const mvdm_cpu_access *provider);
 const mvdm_cpu_access *mvdm_cpu_access_current(void);

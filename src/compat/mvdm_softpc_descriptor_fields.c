@@ -7,11 +7,7 @@
  * in the exact older SoftPC output layout.
  */
 
-#include <insignia.h>
-#include <host_def.h>
-#include <xt.h>
-#include <c_main.h>
-#include <c_bsic.h>
+#include "include/mvdm_cpu_access.h"
 
 /* DIVERGENCE(ADAPTER-SOFTPC-032): no selected OpenNT C body defines the
  * historical four-output helper.  CPU40's original read_descriptor_linear
@@ -19,13 +15,15 @@
  * behavior.  Preserve the original helper name, argument order and narrow
  * output stores; no host pointer, monitor descriptor table or reconstructed
  * CPU30 state is introduced. */
-VOID retrieve_descr_fields(half_word *AR, sys_addr *base, word *limit,
-    sys_addr descr_addr)
+VOID retrieve_descr_fields(BYTE *AR, ULONG *base, USHORT *limit,
+    ULONG descr_addr)
 {
-    CPU_DESCR descriptor;
+    ULONG decoded_base, decoded_limit;
+    USHORT access;
 
-    read_descriptor_linear((IU32)descr_addr, &descriptor);
-    *AR = (half_word)descriptor.AR;
-    *base = (sys_addr)descriptor.base;
-    *limit = (word)descriptor.limit;
+    mvdm_cpu_access_current()->descriptor_fields(descr_addr, &decoded_base,
+        &decoded_limit, &access);
+    *AR = (BYTE)access;
+    *base = decoded_base;
+    *limit = (USHORT)decoded_limit;
 }

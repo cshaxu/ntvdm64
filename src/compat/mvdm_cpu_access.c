@@ -9,7 +9,9 @@ BOOL mvdm_cpu_access_install(const mvdm_cpu_access *provider)
         !provider->apply_debug || !provider->memory_size || !provider->paging ||
         !provider->virtual_mode || !provider->privilege ||
         !provider->selector_outside || !provider->descriptor_fields ||
-        !provider->translate || !provider->read_memory) {
+        !provider->translate || !provider->read_memory ||
+        !provider->machine_status || !provider->flags ||
+        !provider->delay_interrupt || !provider->cancel_interrupt) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }

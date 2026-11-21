@@ -1,7 +1,7 @@
 #ifndef MVDM_SOFTPC_EFFECTIVE_ADDRESS_H
 #define MVDM_SOFTPC_EFFECTIVE_ADDRESS_H
 
-#include <insignia.h>
+#include <windows.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -9,21 +9,17 @@ extern "C" {
 
 /* Historical CCPU external form.  Both parameters and the result are guest
  * numeric values; this API never returns a native pointer. */
-IMPORT IU32 c_effective_addr IPT2(IU16, selector, IU32, offset);
+extern ULONG c_effective_addr(USHORT selector, ULONG offset);
 
-/* Checked form for host consumers that must distinguish a valid linear
- * address zero from an invalid protected-mode selector. */
-/* Explicit worker ABI for the /Gz WOW32 DLL consumer. */
-IMPORT int __cdecl mvdm_softpc_effective_address IPT3(IU16, selector, IU32, offset,
-                                              IU32 *, address_out);
-
-/* Current descriptor view for monitor consumers; no host pointer is exposed. */
-IMPORT int __cdecl mvdm_softpc_protected_segment IPT4(IU16, selector, IU32 *, base,
-                                              IU32 *, limit, IU32 *, access);
-
-/* SIM32's explicit protected address contract is independent of CPU PE/VM. */
-IMPORT int __cdecl mvdm_softpc_protected_address IPT3(IU16, selector, IU32, offset,
-                                              IU32 *, address_out);
+/* Checked form distinguishes valid address zero from an invalid selector.
+ * Explicit cdecl preserves the /Gz WOW32 consumer ABI. */
+extern int __cdecl mvdm_softpc_effective_address(USHORT selector, ULONG offset,
+    ULONG *address_out);
+extern int __cdecl mvdm_softpc_protected_segment(USHORT selector, ULONG *base,
+    ULONG *limit, ULONG *access);
+/* SIM32's protected address contract is independent of CPU PE/VM. */
+extern int __cdecl mvdm_softpc_protected_address(USHORT selector, ULONG offset,
+    ULONG *address_out);
 
 #ifdef __cplusplus
 }

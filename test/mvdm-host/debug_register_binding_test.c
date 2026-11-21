@@ -63,8 +63,6 @@ IBOOL xtrn2phy(LIN_ADDR address, IUM8 access, PHY_ADDR *physical)
 BOOL mvdm_debugger_is_debugged(void) { abort(); return FALSE; }
 void mvdm_debugger_set_toolhelp(DWORD hook, BOOL mode)
 { (void)hook; (void)mode; abort(); }
-int mvdm_softpc_effective_address(IU16 selector, IU32 offset, IU32 *result)
-{ (void)selector; (void)offset; (void)result; abort(); return 0; }
 int mvdm_softpc_guest_memory_acquire(uint32_t address, uint32_t count,
     uint32_t access, guest_memory_lease **lease, uint8_t **bytes)
 { (void)address; (void)count; (void)access; (void)lease; (void)bytes; abort(); return 0; }
@@ -123,6 +121,24 @@ int mvdm_softpc_wow_page_domain_reenter_protected(void)
     ++mode_calls;
     return mode_phase;
 }
+static USHORT supplied_msw;
+static ULONG supplied_flags;
+static int irq_sequence;
+USHORT c_getMSW(void) { return supplied_msw; }
+ULONG c_getEFLAGS(void) { return supplied_flags; }
+BOOL host_DelayHwInterrupt(int irq, int count, ULONG delay)
+{
+    irq_sequence = (irq == 1 && count == 0 && delay == 0xffffffff &&
+        irq_sequence == 0) ? 1 : -1;
+    return TRUE;
+}
+void ica_hw_interrupt_cancel(ULONG adapter, ULONG line)
+{
+    irq_sequence = (adapter == 0 && line == 1 && irq_sequence == 1) ? 2 : -1;
+}
+#include "../../src/compat/mvdm_keyboard_reset.c"
+#include "../../src/compat/mvdm_softpc_descriptor_fields.c"
+#include "../../src/compat/mvdm_softpc_effective_address.c"
 #include "../../src/ntvdm-exe/softpc/mvdm_dpmi_binding.c"
 #include "compat/include/dpmi_host.h"
 
@@ -139,6 +155,32 @@ int main(void)
     CHECK(!compat_dpmi_install(&other) && GetLastError() == ERROR_INVALID_PARAMETER);
     CHECK(ntvdm_dpmi_initialize());
     CHECK(ntvdm_dpmi_initialize());
+    mvdm_keyboard_reset_pending_irq(0);
+    CHECK(irq_sequence == 0);
+    mvdm_keyboard_reset_pending_irq(1);
+    CHECK(irq_sequence == 2);
+    {
+        ULONG base, limit, access, address;
+        BYTE narrow_access;
+        USHORT narrow_limit;
+        supplied.base = 0x12345000; supplied.limit = 0x23456; supplied.AR = 0x1f2;
+        retrieve_descr_fields(&narrow_access, &base, &narrow_limit, 0x80);
+        CHECK(base == supplied.base && narrow_access == 0xf2 && narrow_limit == 0x3456);
+        CHECK(mvdm_softpc_protected_segment(8, &base, &limit, &access));
+        CHECK(base == supplied.base && limit == supplied.limit && access == supplied.AR);
+        CHECK(!mvdm_softpc_protected_segment(8, NULL, &limit, &access));
+        supplied_msw = 0; supplied_flags = 0;
+        CHECK(mvdm_softpc_effective_address(0x1234, 0x20, &address) && address == 0x12360);
+        supplied_msw = 1; supplied_flags = 0x20000;
+        CHECK(mvdm_softpc_effective_address(0x1234, 0x20, &address) && address == 0x12360);
+        supplied_flags = 0;
+        CHECK(mvdm_softpc_effective_address(8, 0x20, &address) && address == supplied.base + 0x20);
+        outside = 1;
+        CHECK(!mvdm_softpc_effective_address(8, 0x20, &address));
+        outside = 0;
+        supplied_msw = 0;
+        copies = decodes = 0;
+    }
     other_cpu = *mvdm_cpu_access_current();
     CHECK(!mvdm_cpu_access_install(&other_cpu) && GetLastError() == ERROR_ALREADY_INITIALIZED);
     other = *compat_dpmi_current_services();

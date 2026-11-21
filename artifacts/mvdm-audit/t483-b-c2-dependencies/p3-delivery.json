@@ -1,0 +1,97 @@
+{
+  "packet": "M0 T483 S19 P3",
+  "status": "verified P3 delivery",
+  "baseline": "8509e461c",
+  "files": [
+    "src/compat/include/mvdm_softpc_effective_address.h",
+    "src/compat/mvdm_keyboard_reset.c",
+    "src/compat/mvdm_softpc_descriptor_fields.c",
+    "src/compat/mvdm_softpc_effective_address.c"
+  ],
+  "progress": {
+    "total": 38,
+    "completed": 7,
+    "remaining": 31
+  },
+  "counts": {
+    "linked-relocations": {
+      "B_C2": {
+        "records": 575,
+        "unique": 316
+      },
+      "B_C1": {
+        "records": 70,
+        "unique": 58
+      },
+      "C1_C2": {
+        "records": 7,
+        "unique": 5
+      }
+    },
+    "compiled-headers": {
+      "B_C2": {
+        "records": 112,
+        "unique": 112
+      },
+      "B_C1": {
+        "records": 639,
+        "unique": 626
+      },
+      "C1_C2": {
+        "records": 0,
+        "unique": 0
+      }
+    },
+    "search-paths": {
+      "B_C2": {
+        "records": 38,
+        "unique": 38
+      },
+      "B_C1": {
+        "records": 46,
+        "unique": 44
+      },
+      "C1_C2": {
+        "records": 0,
+        "unique": 0
+      }
+    }
+  },
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "unique_B_C2_removed": 7,
+  "S19_unique_B_C2_removed": 21,
+  "ownership": [
+    "B retains synchronous address projection, narrow output stores and keyboard reset order.",
+    "Existing B-owned CPU table adds original C2 MSW/EFLAGS and delayed/PIC interrupt functions; existing descriptor/selector providers reused.",
+    "No original function/algorithm/layout copied. F installs original addresses before session and device initialization. Process-lifetime immutable binding survives cleanup.",
+    "Preserved IU32/sys_addr=unsigned long, IU16/word=unsigned short, IU8/half_word=unsigned char using matching Windows types; explicit existing cdecl interfaces retained."
+  ],
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "b5a75248-2223-499c-a1c2-add5309d0097",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "tests": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "boundary_gate_negative_controls": 6,
+    "native": "actual B consumers via production installer: IRQ ordering/no-op, descriptor narrowing, real/V86/protected address modes and invalid selector; existing debug lifecycle retained",
+    "real_CPU": "halt/reset/debug boundary and high-linear-page, SAS mapping/preflight/lease lifetime",
+    "real_guest": "DPMI delivery/removal groups, two normal debug-handle exits; COMMAND/native EDIT/CtrlQ/CMD echo/MEM/launcher completion",
+    "not_claimed": "Immutable DOSX debug status-query semantics; no original guest rebuilt.",
+    "final_gates": "PASS 22 release hashes, frontend ownership, docs governance/links, 9 production boundary graphs and git diff --check"
+  },
+  "attempts": [
+    "First native test build retained an old effective-address stub alongside newly included real implementation; removed that duplicate stub, kept assertions.",
+    "CPU-only bounded fixture now invokes actual product provider installer before session/SAS setup; removed redundant declaration."
+  ],
+  "evidence_root": "build\\t483-s19-cpu-access"
+}
