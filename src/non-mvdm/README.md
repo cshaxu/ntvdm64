@@ -2726,3 +2726,8 @@ S20 P6 BASE client boundary: the command branch in vdm.c directly includes
 its six original type headers; B base_client.h now uses opaque CSR/BASE
 pointers. Original algorithm, ABI and #line304 remain unchanged. Non-error
 19points/570lines ->19points/576lines; retained ownership registered R2740.
+
+S20 P7 config boundary: FULL_INFO_BUFFER_SIZE, from original client/vdm.h:114,
+is unchanged and owned beside vdm.c config includes instead of B. Its sole
+consumer remains GetVDMConfigValue. Non-error19points/576lines ->19points/577lines;
+R2741 retains this one-line placement; original diagnostics/algorithms unchanged.

@@ -339,6 +339,7 @@ GBTtryexit:;
 #include <vdmapi.h>
 #include "compat/include/base_client.h"
 #include <base_config.h>
+#define FULL_INFO_BUFFER_SIZE (sizeof(KEY_VALUE_FULL_INFORMATION) + MAX_VDM_CFG_LINE)
 /* DIVERGENCE(NON-MVDM-DIV-BASE-REQUEST): expose original request layout to B. */
 #include "compat/include/base_transport.h"
 void BaseDecodeVdmRequest(void *message, ULONG number, ULONG length, ntvdm_base_request *r)

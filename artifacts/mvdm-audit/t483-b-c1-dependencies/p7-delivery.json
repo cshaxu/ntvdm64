@@ -1,0 +1,68 @@
+{
+  "packet": "M0 T483 S20 P7",
+  "baseline": "f62b84ee9",
+  "status": "verified delivery",
+  "id": "BC1F006",
+  "file": "src/compat/include/base_config.h",
+  "ownership": "B config declarations use Windows SDK types. Original FULL_INFO_BUFFER_SIZE macro (OpenNT base/win32/client/vdm.h:114) moved unchanged to C1 vdm.c, its sole consumer GetVDMConfigValue. No buffer-size, original algorithm, binding, TLS or ownership behavior changes.",
+  "counts": {
+    "files_completed": 6,
+    "files_total": 94,
+    "remaining": 88,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70,
+    "B_C1_compiled_headers": 555,
+    "B_C1_search_roots": 20,
+    "B_C2_unique": 0,
+    "B_C2_raw": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "file_change": {
+    "C1_header_targets_before": 1,
+    "C1_header_targets_after": 0,
+    "resolved_header_rows_before": 6,
+    "resolved_header_rows_after": 0
+  },
+  "mirror": {
+    "path": "src/non-mvdm/base/win32/client/vdm.c",
+    "before": {
+      "points": 19,
+      "lines": 576
+    },
+    "after": {
+      "points": 19,
+      "lines": 577
+    },
+    "delta": {
+      "points": 0,
+      "lines": 1
+    },
+    "cumulative_S20": {
+      "points": 0,
+      "lines": 92
+    },
+    "approval": "Standing small mirror approval; R2741 retained.",
+    "error_line": "One unchanged original-sized macro beside config include before existing #line304. Inverse removal reproduces baseline bytes; existing error/line directives unchanged; paired parser zero issues."
+  },
+  "package": "f8205c7e-7bda-40cd-9760-2c32c61ff99f",
+  "build": "cached full x86/x64/reference passed",
+  "publication": "dual11 release with22 verified hashes",
+  "tests": [
+    "Existing x86 and x64 BASE_VDM_CONFIG product-object tests passed: path spaces, invalid input, insufficient buffer unchanged, nested binding, isolated thread, unbind; object/input hashes verified",
+    "Published actual Win16 native extension/messages/retirement and COMMAND EDIT/CMD/MEM return passed"
+  ],
+  "limitations": [
+    "No full Win3.1/Win95 matrix claimed.",
+    "Registry query helper is retained; its buffer-size expression is byte-identical, not a new runtime algorithm."
+  ],
+  "evidence_root": "build/t483-s20-base-config",
+  "gate": "11 boundary controls,9 product graphs,22 published hashes,frontend ownership,governance/links and diff check passed(final exit0).",
+  "final_inputs": {
+    "src/compat/include/base_config.h": "d0a283c8582c5da4f9d35eafeabe03151dbda15ef28aa820218945b0d5112941",
+    "src/non-mvdm/base/win32/client/vdm.c": "59ef8ac0d28044163e1750f9d0d7db368b7c5f3f800d63dcbf602ccbd73a602e",
+    "test/observation/verify-base-vdm-config.ps1": "78c70323cbe92da5a073d3d2bef83e62ce10f86ea372d37aebb884c10c61e128",
+    "test/compat/base_vdm_config.c": "e1b7911e98e297306d5ac8c145d4fd853430c1880b55412846a4460b18d6df2b"
+  },
+  "failed_attempts": []
+}
