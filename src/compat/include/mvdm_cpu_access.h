@@ -51,6 +51,19 @@ typedef struct mvdm_cpu_access {
     LONG (__cdecl *free_virtual_memory)(ULONG address);
     LONG (__cdecl *add_virtual_memory)(ULONG host_address, ULONG bytes, ULONG *intel_address);
     LONG (__cdecl *remove_virtual_memory)(ULONG address);
+    /* Register frame used by the synchronous BOP adapter. */
+    ULONG (__cdecl *eax)(void);
+    ULONG (__cdecl *ecx)(void);
+    ULONG (__cdecl *edx)(void);
+    ULONG (__cdecl *esi)(void);
+    ULONG (__cdecl *ebx)(void);
+    int (__cdecl *protected_mode)(void);
+    void (__cdecl *set_eax)(ULONG value);
+    void (__cdecl *set_ebx)(ULONG value);
+    void (__cdecl *set_edx)(ULONG value);
+    void (__cdecl *set_esi)(ULONG value);
+    void (__cdecl *set_carry)(int value);
+    void (__cdecl *unhandled_bop)(void);
 } mvdm_cpu_access;
 BOOL mvdm_cpu_access_install(const mvdm_cpu_access *provider);
 const mvdm_cpu_access *mvdm_cpu_access_current(void);

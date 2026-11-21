@@ -189,6 +189,31 @@ LONG VdmAddVirtualMemory(ULONG host_address, ULONG bytes, ULONG *intel_address)
 { (void)host_address; (void)bytes; (void)intel_address; abort(); return 0; }
 LONG VdmRemoveVirtualMemory(ULONG address)
 { (void)address; abort(); return 0; }
+/* BOP register operations are outside this debug-only fake CPU. */
+ULONG c_getEAX(void)
+{ abort(); return 0; }
+ULONG c_getECX(void)
+{ abort(); return 0; }
+ULONG c_getEDX(void)
+{ abort(); return 0; }
+ULONG c_getESI(void)
+{ abort(); return 0; }
+ULONG c_getEBX(void)
+{ abort(); return 0; }
+int c_getPE(void)
+{ abort(); return 0; }
+void c_setEAX(ULONG value)
+{ (void)value; abort(); }
+void c_setEBX(ULONG value)
+{ (void)value; abort(); }
+void c_setEDX(ULONG value)
+{ (void)value; abort(); }
+void c_setESI(ULONG value)
+{ (void)value; abort(); }
+void c_setCF(int value)
+{ (void)value; abort(); }
+void virtual_device_trap(void)
+{ abort(); }
 #include "../../src/ntvdm-exe/softpc/mvdm_dpmi_binding.c"
 #include "compat/include/dpmi_host.h"
 

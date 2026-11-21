@@ -1,0 +1,64 @@
+{
+  "packet": "M0 T483 S19 P10",
+  "baseline": "61314bc1b",
+  "status": "verified P10 delivery",
+  "files": [
+    "src/compat/mvdm_vdm_tib.c",
+    "src/compat/mvdm_vm_binding.c"
+  ],
+  "progress": {
+    "total": 38,
+    "completed": 14,
+    "remaining": 24
+  },
+  "counts_B_C2": {
+    "unique": 270,
+    "relocation_records": 349,
+    "compiled_header_records": 111,
+    "private_search_roots": 11
+  },
+  "counts_B_C1": {
+    "unique": 58,
+    "relocation_records": 70,
+    "compiled_header_records": 633,
+    "private_search_roots": 36
+  },
+  "removed_this_batch": {
+    "direct_relationships": 15,
+    "relocation_records": 16,
+    "private_C2_search_roots": 9
+  },
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "cumulative_mirror_delta": {
+    "non_error_points": 2,
+    "non_error_lines": 22
+  },
+  "implementation": "TIB source unchanged; remove unused C2 search roots. VM BOP uses twelve additional actual C provider addresses in existing immutable CPU table, reuses VM/CPL/FLAGS fields. F passes the BIOS slot only for synchronous startup installation. B stores no slot pointer, calls no outer algorithm and preserves synchronous return.",
+  "lifetime": "CPU provider table installed before BOP binding and remains immutable for worker lifetime. BIOS collision and null slot rejected. Repeated installation idempotent. No queue or alternate state machine.",
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "notification_assertions": 3194,
+    "debug_context": 0,
+    "real_ccpu_bop": "actual original CPU executes independent test bytes through BIOS B1 and production B bridge; real mode denied, protected unknown-op status returned synchronously in EAX/EBX/EDX/ESI/CF, ECX retained",
+    "real_command": "PASS modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+    "final_gates": 0,
+    "boundary_negative_controls": 8,
+    "actual_bridge_link_provider": "softpc-fixture-bindings:mvdm_vm_bridge.obj"
+  },
+  "test_correction": "Removed whole mvdm_vm_bridge_bop failclosed fixture substitute; actual B bridge now linked with existing B text/video objects. Broker leaves remain failclosed. Existing fixture /force:multiple warnings remain for command-entry and CRT seams; no bridge override remains.",
+  "publication": {
+    "package": "05717276-800d-47ef-8535-20a349316778",
+    "images": 11,
+    "destinations": [
+      "assets/release",
+      "O:/winnt/system32"
+    ],
+    "verified_hashes": 22
+  },
+  "evidence_root": "build/t483-s19-vm-binding",
+  "scope": "Targeted ownership/regression delivery; no new full Windows matrix claim; no original guest changed."
+}

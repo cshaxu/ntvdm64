@@ -3,6 +3,7 @@
 #include "compat/include/mvdm_vm_text.h"
 #include "compat/include/mvdm_vm_notification.h"
 #include "compat/include/mvdm_vm_bridge.h"
+#include "compat/include/mvdm_cpu_access.h"
 #include "compat/include/mvdm_vm_wake.h"
 #include "compat/include/mvdm_vm_application.h"
 #include <stdio.h>
@@ -28,19 +29,40 @@ static uint32_t eax, ecx, edx, esi, ebx, cpu_cpl;
 static int32_t cpu_pe, cpu_vm, cpu_carry;
 void virtual_device_trap(void) { ++original_bop_calls; }
 void (*BIOS[256])(void);
-uint32_t c_getEAX(void) { return eax; }
-uint32_t c_getECX(void) { return ecx; }
-uint32_t c_getEDX(void) { return edx; }
-uint32_t c_getESI(void) { return esi; }
-uint32_t c_getEBX(void) { return ebx; }
+ULONG c_getEAX(void) { return eax; }
+ULONG c_getECX(void) { return ecx; }
+ULONG c_getEDX(void) { return edx; }
+ULONG c_getESI(void) { return esi; }
+ULONG c_getEBX(void) { return ebx; }
 uint32_t c_getCPL(void) { return cpu_cpl; }
 int32_t c_getPE(void) { return cpu_pe; }
 int32_t c_getVM(void) { return cpu_vm; }
-void c_setEAX(uint32_t value) { eax = value; }
-void c_setEBX(uint32_t value) { ebx = value; }
-void c_setEDX(uint32_t value) { edx = value; }
-void c_setESI(uint32_t value) { esi = value; }
+void c_setEAX(ULONG value) { eax = value; }
+void c_setEBX(ULONG value) { ebx = value; }
+void c_setEDX(ULONG value) { edx = value; }
+void c_setESI(ULONG value) { esi = value; }
 void c_setCF(int32_t value) { cpu_carry = value; }
+
+/* This fixture exercises the actual BOP adapter with controlled CPU endpoints. */
+const mvdm_cpu_access *mvdm_cpu_access_current(void)
+{
+    static mvdm_cpu_access provider;
+    provider.eax = c_getEAX;
+    provider.ecx = c_getECX;
+    provider.edx = c_getEDX;
+    provider.esi = c_getESI;
+    provider.ebx = c_getEBX;
+    provider.protected_mode = c_getPE;
+    provider.set_eax = c_setEAX;
+    provider.set_ebx = c_setEBX;
+    provider.set_edx = c_setEDX;
+    provider.set_esi = c_setESI;
+    provider.set_carry = c_setCF;
+    provider.unhandled_bop = virtual_device_trap;
+    provider.virtual_mode = c_getVM;
+    provider.privilege = c_getCPL;
+    return &provider;
+}
 
 static unsigned char guest_memory[256];
 mvdm_vm_rundown *mvdm_softpc_exit_rundown;
@@ -1230,10 +1252,11 @@ int main(void)
     CHECK(!mvdm_softpc_termination_bind(virtual_device_trap) &&
         GetLastError()==ERROR_ALREADY_INITIALIZED);
     InitializeCriticalSection(&ica);
-    CHECK(!ntvdm_vm_services_initialize() && GetLastError() == ERROR_INVALID_STATE);
+    CHECK(!ntvdm_vm_services_initialize(&BIOS[MVDM_VM_DEVICE_BOP]) && GetLastError() == ERROR_INVALID_STATE);
+    CHECK(!ntvdm_vm_services_initialize(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
     BIOS[0xb1] = virtual_device_trap;
-    CHECK(ntvdm_vm_services_initialize());
-    CHECK(ntvdm_vm_services_initialize());
+    CHECK(ntvdm_vm_services_initialize(&BIOS[MVDM_VM_DEVICE_BOP]));
+    CHECK(ntvdm_vm_services_initialize(&BIOS[MVDM_VM_DEVICE_BOP]));
     eax = 3;
     BIOS[0xb1]();
     CHECK(original_bop_calls == 1 && eax == 3 && !cpu_carry);

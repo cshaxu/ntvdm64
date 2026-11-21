@@ -44,7 +44,7 @@ class BoundaryTest(unittest.TestCase):
 
     def test_cpu_callback_consumers_have_no_C_exception(self):
         for source in ("mvdm_keyboard_reset.c", "mvdm_softpc_descriptor_fields.c",
-                       "mvdm_softpc_effective_address.c", "mvdm_redirector_async.c", "mvdm_softpc_mouse_bridge.c"):
+                       "mvdm_softpc_effective_address.c", "mvdm_redirector_async.c", "mvdm_softpc_mouse_bridge.c", "mvdm_vm_binding.c"):
             with self.subTest(source=source):
                 self.check_unit(source, "src/compat/include/mvdm_cpu_access.h")
                 with self.assertRaises(ValueError):
@@ -55,7 +55,10 @@ class BoundaryTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.check_unit("mvdm_softpc_termination.c", "src/mvdm-host/softpc.new/host/inc/host_def.h")
 
-    def test_printer_keeps_C1_but_rejects_C2(self):
+    def test_monitor_carriers_keep_C1_but_reject_C2(self):
+        self.check_unit("mvdm_vdm_tib.c", "src/non-mvdm/public/internal/base/inc/vdm.h")
+        with self.assertRaises(ValueError):
+            self.check_unit("mvdm_vdm_tib.c", "src/mvdm-host/inc/doswow.h")
         self.check_unit("mvdm_monitor_printer.c", "src/non-mvdm/public/internal/base/inc/vdm.h",
                         include="src/non-mvdm/public/internal/base/inc")
         with self.assertRaises(ValueError):

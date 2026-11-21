@@ -33,7 +33,19 @@ BOOL mvdm_cpu_access_install(const mvdm_cpu_access *provider)
         !provider->allocate_virtual_memory ||
         !provider->free_virtual_memory ||
         !provider->add_virtual_memory ||
-        !provider->remove_virtual_memory) {
+        !provider->remove_virtual_memory ||
+        !provider->eax ||
+        !provider->ecx ||
+        !provider->edx ||
+        !provider->esi ||
+        !provider->ebx ||
+        !provider->protected_mode ||
+        !provider->set_eax ||
+        !provider->set_ebx ||
+        !provider->set_edx ||
+        !provider->set_esi ||
+        !provider->set_carry ||
+        !provider->unhandled_bop) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }

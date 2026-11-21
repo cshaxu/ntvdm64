@@ -1213,7 +1213,8 @@ $compatCcpuFlags = ($libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + (($
 $adapterMonitorObjects = foreach ($name in $adapterMonitorNames) {
     $object = 'obj/adapter-monitor/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterMonitorRoot $name)))
-    $graph.Add('  cflags = ' + $compatCcpuFlags)
+    $monitorAbiIncludes = $softpcIncludeRootPaths | Where-Object { $_ -match '^src/(compat|non-mvdm)(/|$)' } | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+    $graph.Add('  cflags = ' + $libraryFlags + ' /TC /D_NO_CRT_STDIO_INLINE /DWINNT ' + ($monitorAbiIncludes -join ' '))
     $object
 }
 $adapterDebuggerRoot = Join-Path $root 'src/compat'
@@ -2272,7 +2273,7 @@ $graph.Add('  command = link.exe /nologo /force:multiple /map:$out.map /out:$out
 $fixtureHostLibraries = 'worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res'
 # The shared native-child binding now reaches Hook installation and DOS style
 # queries even in the fixture closure. Link the real selected providers.
-$fixtureHostLibraries += ' common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib common-rpc.lib lib-rpc.lib'
+$fixtureHostLibraries += ' obj/compat/mvdm_vm_text.obj obj/compat/console_video_buffer.obj common-native-hook-installer.lib common-native-hook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib common-rpc.lib lib-rpc.lib'
 $graph.Add('build obj/tests/ccpu_monitor_boundary_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'test/mvdm-host/ccpu_monitor_boundary_fixture.c')))
 # Bind the real protected exception hook ahead of the shared fixture seams.
 $graph.Add('build ccpu-monitor-boundary-test.exe: event_test_link obj/tests/ccpu_monitor_boundary_fixture.obj obj/host/nt_inthk.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)

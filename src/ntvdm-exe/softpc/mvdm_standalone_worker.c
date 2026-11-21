@@ -4,6 +4,7 @@
 #include "compat/include/mvdm_softpc_worker_exit.h"
 #include "compat/include/mvdm_softpc_termination.h"
 extern void host_applClose(void);
+extern void (*BIOS[])(void);
 #include "ntvdm-exe/command/include/command_launch.h"
 
 #include "ntvdm-exe/package_layout.h"
@@ -149,7 +150,7 @@ static DWORD mvdm_standalone_worker_begin(void)
     if (worker_started) return ERROR_ALREADY_EXISTS;
     if (!mvdm_softpc_termination_bind(host_applClose) ||
             !opennt_thread_initialize() || !ntvdm_command_initialize() ||
-            !ntvdm_dpmi_initialize() || !ntvdm_vm_services_initialize()) return GetLastError();
+            !ntvdm_dpmi_initialize() || !ntvdm_vm_services_initialize(&BIOS[MVDM_VM_DEVICE_BOP])) return GetLastError();
     session_initialize(&worker_session,1u);
     worker_session_initialized=TRUE;
     mvdm_softpc_v7_pointer_attach();

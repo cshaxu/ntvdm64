@@ -25,14 +25,9 @@ DWORD mvdm_standalone_worker_close_frontends(void) { return unexpected_broker();
 /* PIC/CPU fixtures do not load the independent VMM frontend driver. */
 int mvdm_vm_command_enter(uint32_t service)
 { (void)service; return (int)unexpected_broker(); }
-int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
-    uint32_t low, uint32_t high, uint32_t vm, int ring0,
-    mvdm_vm_bridge_result *result)
-{
-    (void)signature; (void)operation; (void)low; (void)high;
-    (void)vm; (void)ring0; (void)result;
-    return (int)unexpected_broker();
-}
+/* BOP decoding/dispatch now uses the production bridge. CPU-only cases can
+ * verify side-effect-free protocol responses; broker/frontend leaves below
+ * still reject any unexpected product orchestration. */
 DWORD OpenNtBaseClientConnectCurrent(void) { return unexpected_broker(); }
 DWORD NtvdmBaseConnectExecution(DWORD milliseconds) { (void)milliseconds; return unexpected_broker(); }
 DWORD OpenNtBaseClientWatchBroker(void (*lost)(void *),void *context)

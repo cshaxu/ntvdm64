@@ -8,7 +8,10 @@ typedef struct {
     uint32_t status, value, serial_low, serial_high;
 } mvdm_vm_bridge_result;
 
-BOOL ntvdm_vm_services_initialize(void);
+enum { MVDM_VM_DEVICE_BOP = 0xb1 };
+/* Startup-only borrowed slot; B retains no pointer into the original vector.
+ * Caller selects the product extension slot before guest execution. */
+BOOL ntvdm_vm_services_initialize(void (**slot)(void));
 
 /* BOP B1 extension; unrelated original NIDDB operations are not handled. */
 int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,

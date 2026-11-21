@@ -4,6 +4,8 @@
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 #include "compat/include/mvdm_softpc_ccpu_wait.h"
+#include "compat/include/mvdm_cpu_access.h"
+#include "compat/include/mvdm_vm_bridge.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_execution.h"
 
 /* Formal original CCPU/SAS providers, not replacement decode/reset bodies. */
@@ -252,6 +254,40 @@ static LONG WINAPI report_exception(EXCEPTION_POINTERS *e)
     return EXCEPTION_EXECUTE_HANDLER;
 }
 
+/* Execute an authored BOP instruction through the actual BIOS vector and
+ * original CCPU. Unknown operation is side-effect-free; verify both privilege
+ * rejection and protected-mode result registers before the next instruction. */
+extern void (*BIOS[])(void);
+static int real_vm_bop(int protected_mode)
+{
+    unsigned char gdt[] = {
+        0,0,0,0,0,0,0,0,
+        0xff,0xff,0,0,0x0f,0x9b,0,0,
+        0xff,0xff,0,0,0,0x93,0,0};
+    unsigned char program[] = {
+        0x66,0xb8,0x56,0x4d,0x54,0x4e, /* signature */
+        0x66,0xb9,0xff,0,0,0,          /* unsupported operation */
+        0x66,0xba,0x11,0x22,0x33,0x44,
+        0x66,0xbe,0x55,0x66,0x77,0x88,
+        0x66,0xbb,0x99,0xaa,0xbb,0xcc,
+        0xc4,0xc4,0xb1,0xd6,0xfe};
+    const mvdm_cpu_access *cpu = mvdm_cpu_access_current();
+    c_cpu_init();
+    if (!ntvdm_vm_services_initialize(&BIOS[MVDM_VM_DEVICE_BOP])) return 0;
+    CopyMemory(c_GetPhyAdd(0xf1000), program, sizeof(program));
+    if (protected_mode) {
+        CopyMemory(c_GetPhyAdd(0x1000), gdt, sizeof(gdt));
+        c_setGDT_BASE_LIMIT(0x1000, sizeof(gdt)-1);
+        c_setPE(1);
+        c_setCS(8); c_setSS(0x10); c_setDS(0x10); c_setSP(0x800);
+    }
+    c_setIP(0x1000);
+    c_cpu_simulate();
+    return cpu->eax() == (protected_mode ? ERROR_INVALID_FUNCTION : ERROR_ACCESS_DENIED) &&
+        cpu->ebx() == 0xffff && cpu->edx() == 0 && cpu->esi() == 0 &&
+        cpu->ecx() == 0xff && (cpu->flags() & 1u);
+}
+
 int main(void)
 {
     session owner;
@@ -315,6 +351,8 @@ int main(void)
     report("S38_CCPU_TSS_TBIT_SINGLE_DELIVERY_OK\n");
     if (!stale_pic_notification()) return 11;
     report("T430_CCPU_STALE_PIC_SENTINEL_OK\n");
+    if (!real_vm_bop(0) || !real_vm_bop(1)) return 14;
+    report("CCPU_VM_BOP_CALLBACK_REGISTERS_OK real_denied=1 protected=1 synchronous=1\n");
     mvdm_softpc_ccpu_wait_end();
     return 0;
 }

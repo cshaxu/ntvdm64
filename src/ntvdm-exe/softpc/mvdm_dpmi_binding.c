@@ -42,6 +42,19 @@ extern LONG __cdecl VdmFreeVirtualMemory(ULONG address);
 extern LONG __cdecl VdmAddVirtualMemory(ULONG host_address, ULONG bytes, ULONG *intel_address);
 extern LONG __cdecl VdmRemoveVirtualMemory(ULONG address);
 
+extern ULONG __cdecl c_getEAX(void);
+extern ULONG __cdecl c_getECX(void);
+extern ULONG __cdecl c_getEDX(void);
+extern ULONG __cdecl c_getESI(void);
+extern ULONG __cdecl c_getEBX(void);
+extern int __cdecl c_getPE(void);
+extern void __cdecl c_setEAX(ULONG value);
+extern void __cdecl c_setEBX(ULONG value);
+extern void __cdecl c_setEDX(ULONG value);
+extern void __cdecl c_setESI(ULONG value);
+extern void __cdecl c_setCF(int value);
+extern void __cdecl virtual_device_trap(void);
+
 BOOL ntvdm_dpmi_initialize(void)
 {
     static const mvdm_cpu_access cpu = {
@@ -58,7 +71,11 @@ BOOL ntvdm_dpmi_initialize(void)
         c_getCR0, c_getCR3, c_setCR0,
         c_setCR3, c_getGDT_BASE, c_getGDT_LIMIT,
         c_setGDT_BASE_LIMIT, VdmAllocateVirtualMemory, VdmFreeVirtualMemory,
-        VdmAddVirtualMemory, VdmRemoveVirtualMemory
+        VdmAddVirtualMemory, VdmRemoveVirtualMemory,
+        c_getEAX, c_getECX, c_getEDX,
+        c_getESI, c_getEBX, c_getPE,
+        c_setEAX, c_setEBX, c_setEDX,
+        c_setESI, c_setCF, virtual_device_trap
     };
     static const compat_dpmi_services services = {
         ThreadSetDebugContext, mvdm_debugger_read_debug_registers,

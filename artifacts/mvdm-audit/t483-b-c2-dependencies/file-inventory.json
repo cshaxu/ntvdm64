@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P9 completes twelve files; remaining26 include four pending mirror decisions",
+  "status": "P10 completes fourteen files; remaining24 include four pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -6403,7 +6403,7 @@
     {
       "id": "BC2F017",
       "file": "src/compat/mvdm_vdm_tib.c",
-      "status": "not yet audited",
+      "status": "P10 verified: remove nine unused C2 search roots; original C1 TIB ABI remains for S20; source unchanged",
       "evidence": [
         {
           "kind": "search-paths",
@@ -6500,7 +6500,7 @@
     {
       "id": "BC2F018",
       "file": "src/compat/mvdm_vm_binding.c",
-      "status": "not yet audited",
+      "status": "P10 verified: fifteen C2 relationships replaced by existing immutable CPU callbacks and startup-only borrowed BIOS slot; real CCPU BOP synchronous result registers verified; mirror delta zero",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -9417,11 +9417,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 2,
-    "remaining": 36,
+    "completed": 14,
+    "remaining": 24,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 325,
+    "direct_C2_unique_after": 270,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 594
+    "direct_C2_records_after": 349
   }
 }
