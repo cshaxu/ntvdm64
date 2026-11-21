@@ -1,5 +1,76 @@
 # C0621 synchronous admission boundary
 
+## P158 synchronous admission design (not implemented)
+
+The remaining C0621 edge is not a missing declaration. F's executor submit
+allocates a job, creates the B continuation and B I/O, checks closing/count/
+duplicate generation under the existing rundown lock, inserts its input node,
+then calls TrySubmitThreadpoolCallback with the F execute body. Only after
+successful submission does it increment active and expose the token. Failure
+unlinks the node, abandons/releases the continuation and leaves launch/text
+owned by the caller. Moving this body with that callback does not close C0621.
+
+Recommended replacement: a B-owned ready-job queue sharing the existing
+rundown/job identity, with a pre-established F consumer. B synchronously owns
+all allocation, continuation/I/O, duplicate/closing checks and ready publication.
+F takes admitted objects and owns frontend registration, launch and retirement.
+B stores no F function pointer or F host/payload pointer. An event wakes the
+consumer; there is no polling, new guest ABI or parallel lifecycle registry.
+The existing input-job list and rundown remain authoritative, not a second
+active list with competing completion. A pending marker/index only distinguishes
+unclaimed jobs within that authority.
+
+This changes the admission primitive: success means a ready consumer's queue
+accepted a fully owned request, rather than a new TrySubmitThreadpoolCallback
+having succeeded. Startup must create/arm the consumer before exposing B
+admission. Consumer setup failure prevents startup; allocation/closing/duplicate/
+queue-publication failure before admission returns an error and no token.
+Product execution errors after admission continue to be completion errors.
+There must be no post-return allocation required merely to schedule an accepted
+job. A shared threadpool wait can consume ready work, but its rearming and
+parallel callback guarantees require verification before implementation.
+
+The F consumer must allow independent VMs to run concurrently; a serial drain
+that blocks on the first child's exit is invalid. Same-VM older-generation
+ordering and exact-token input lookup remain unchanged. Shutdown first rejects
+new admission, invalidates continuations, then drains both pending and claimed
+jobs. It must not cancel the wait callback before pending jobs can be retired.
+Join callbacks before freeing the queue, host or I/O. Preserve the current
+no-ICA/executor-lock inversion; do not introduce a CPU-thread wait for F.
+
+Named production evidence: mvdm_vm_executor.c::submit/execute/create/destroy;
+mvdm_standalone_worker.c publishes rundown before CPU entry and destroys the
+executor before the frontend registry; compat/mvdm_softpc_worker_exit.c closes
+that same rundown. Existing executor tests cover independent VMs, duplicate
+generation, token input, closing rejection, retained failed inputs and retirement
+join. New tests must additionally cover no consumer, pending shutdown, publication
+failure rollback, concurrent rearming and no job lost between drain and rearm.
+Final proof still requires real guest operation-11 status/token plus two live
+VM requests, not only the mock-heavy notification fixture.
+
+Native mechanism evidence: build/t483-s14-admission-design/wait_rearm.c,
+compiled MSVC x86 /W4 /WX /MT, passed 32 rounds. Each round keeps the first
+callback blocked, rearms the same wait, proves a second callback starts,
+then disarms and joins both before closing handles. This supports concurrent
+consumption without per-job TrySubmitThreadpoolCallback, but does not prove
+queue lock/order/cancellation correctness. The production design must avoid
+rearming after close and preserve readiness while pending jobs exist.
+
+Microsoft API contracts: [SetThreadpoolWait](https://learn.microsoft.com/en-us/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-setthreadpoolwait)
+requires re-registration for subsequent signals; disarming does not cancel
+already queued callbacks. [WaitForThreadpoolWaitCallbacks](https://learn.microsoft.com/en-us/windows/win32/api/threadpoolapiset/nf-threadpoolapiset-waitforthreadpoolwaitcallbacks)
+joins outstanding callbacks and optionally cancels unstarted ones. Do not use
+cancellation to discard accepted jobs during drain. The native probe is a
+mechanism experiment only, not guest acceptance or a delivered scheduler.
+
+Decision required before replacing production scheduling: approve this bounded
+queue/consumer contract as an inward-owned admission mechanism, with F retaining
+product execution. This is not approval for an outer implementation callback,
+asynchronous later admission, or moving Run16/NTSRV policy into B. No production
+or guest change is included in P158. Existing P157 package remains current.
+C0156's nine D transport callbacks and C0619's native product launch are separate
+open chains; this proposal cannot close them or imply a completed architecture.
+
 ## P157 application and I/O ownership
 
 The complete application publish/commit/dispatch implementation moves to
