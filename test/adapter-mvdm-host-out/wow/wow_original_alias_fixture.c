@@ -1,6 +1,7 @@
 #include "precomp.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_thunk_scope.h"
+#include "../../mvdm-host/wow_thunk_provider.h"
 #include "wow_user_runtime.h"
 #include "wow_class_client_bindings.h"
 #include "wow_creation_owner_fixture.h"
@@ -176,6 +177,7 @@ int __cdecl main(void)
     module = (HINSTANCE)0x23451234;
     cls.hInstance = module; cls.lpfnWndProc = procedure;
     cls.cbClsExtra = 16; /* Eight app bytes and original WOW's two DWORDs. */
+    if (!wow_thunk_bind(&thunk_provider)) return 13;
     cls.lpszClassName = "S40_ORIGINAL_ALIAS";
     RtlInitUnicodeString(&name, L"S40_ORIGINAL_ALIAS");
     atom = wow_class_words_register_target(&context, &cls, &name, wc, NULL, &class_target);

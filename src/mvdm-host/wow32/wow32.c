@@ -1725,3 +1725,38 @@ PVOID WOWStartupFailed(VOID)
 #line 2376
 #endif  // DEBUG_OR_WOWPROFILE
 #line 2377
+
+/* DIVERGENCE(MVDM-HOST-DIV-911): original thunk state and frame projections. */
+#include "wow_thunk_provider.h"
+VOID WINAPI wow_original_thunk_capture(wow_thunk_mode *mode)
+{
+    mode->who_called = fWhoCalled; mode->thunk_dde = fThunkDDEmsg;
+}
+VOID WINAPI wow_original_thunk_restore(const wow_thunk_mode *mode)
+{
+    fWhoCalled = mode->who_called; fThunkDDEmsg = mode->thunk_dde;
+}
+VOID WINAPI wow_original_thunk_frame(PVDMFRAME frame, wow_thunk_frame *view)
+{
+    view->call = frame->wCallID; view->task = frame->wTDB;
+    view->ax = frame->wAX; view->args = frame->cbArgs; view->return_ip = frame->vpCSIP;
+}
+/* ADAPTER-WOW-099: filters run before unwind. Let the original policy write
+ * its kill signal on the API frame that its handler will actually resume,
+ * without prematurely replacing the still-live callback's frame identity. */
+INT WINAPI wow_original_dispatch_exception(DWORD code, PEXCEPTION_POINTERS info,
+    PTD task, VPVOID entry, BOOL established)
+{
+    VPVOID pending;
+    INT disposition;
+    if (!established) return W32Exception(code, info);
+    pending = task->vpStack;
+    __try {
+        task->vpStack = entry;
+        disposition = W32Exception(code, info);
+    } __finally {
+        task->vpStack = pending;
+    }
+    return disposition;
+}
+

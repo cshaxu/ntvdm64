@@ -3568,3 +3568,9 @@ and abnormal callback TD/control restoration moved from B. Original callback,
 thunk and yield algorithms remain unchanged; B retains execution scopes.
 Standing-approved non-error increment+1point/+54lines; original prefix exact.
 See P28 delivery evidence.
+
+MVDM-HOST-DIV-911: `wow32/wow32.c` owns the existing temporary exception
+frame switch and original TLS mode/frame-field projections. B keeps synchronous
+borrow scopes and trace output; original W32Exception policy is unchanged.
+Standing-approved non-error increment+1point/+35lines; prior prefix exact.
+See P29 delivery evidence.

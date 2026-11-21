@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P28 completes thirty-seven files; one remains",
+  "status": "P29 completes all thirty-eight files",
   "files": [
     {
       "id": "BC2F001",
@@ -9197,7 +9197,7 @@
     {
       "id": "BC2F038",
       "file": "src/compat/wow_user_thunk_scope.c",
-      "status": "not yet audited",
+      "status": "completed in verified P29 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -9429,16 +9429,17 @@
           "evidence": "mvdm-host/inc/softpc.h",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "delivery": "p29-delivery.json"
     }
   ],
   "progress": {
     "total": 38,
-    "completed": 37,
-    "remaining": 1,
+    "completed": 38,
+    "remaining": 0,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 3,
+    "direct_C2_unique_after": 0,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 3
+    "direct_C2_records_after": 0
   }
 }

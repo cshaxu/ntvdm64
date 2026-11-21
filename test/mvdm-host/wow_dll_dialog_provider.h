@@ -81,3 +81,14 @@ BOOL WINAPI wow_native_extension_bind(const wow_native_extension_provider *p)
         p->call_proc == wow_original_WK32ICallProc32 && p->call_mm == wow_original_WMM32CallProc32 &&
         p->yield == wow_original_WOWYield16 && p->directed_yield == wow_original_WOWDirectedYield16;
 }
+
+#include "../../src/compat/include/wow_thunk_provider.h"
+INT WINAPI wow_original_dispatch_exception(DWORD c, PEXCEPTION_POINTERS p, struct _TD *t, DWORD e, BOOL b)
+{ (void)c;(void)p;(void)t;(void)e;(void)b;return 0; }
+VOID WINAPI wow_original_thunk_capture(wow_thunk_mode *p) { (void)p; }
+VOID WINAPI wow_original_thunk_restore(const wow_thunk_mode *p) { (void)p; }
+VOID WINAPI wow_original_thunk_frame(struct _VDMFRAME *p, wow_thunk_frame *v) { (void)p;(void)v; }
+BOOL WINAPI wow_thunk_bind(const wow_thunk_provider *p)
+{ return p && p->exception == wow_original_dispatch_exception &&
+    p->capture == wow_original_thunk_capture && p->restore == wow_original_thunk_restore &&
+    p->frame == wow_original_thunk_frame; }

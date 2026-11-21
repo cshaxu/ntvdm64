@@ -1,17 +1,29 @@
 #include "non-mvdm/public/sdk/inc/nt.h"
-#include "wow32_provider_private.h"
-
-#undef _X86_
-#include "mvdm-host/wow32/wow32.h"
-#include "mvdm-host/wow32/wmdisp32.h"
-#include "mvdm-host/wow32/wumsg.h"
-#include "mvdm-host/inc/softpc.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_thunk_scope.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_native_call.h"
 
 #include <stdio.h>
+
+static const wow_thunk_provider *provider;
+BOOL WINAPI wow_thunk_bind(const wow_thunk_provider *value)
+{
+    const wow_thunk_provider *previous;
+    if (!value || !value->exception || !value->capture || !value->restore || !value->frame) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider, (PVOID)value, NULL);
+    if (previous && previous != value) { SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE; }
+    return TRUE;
+}
+static const wow_thunk_provider *current_provider(void)
+{
+    if (!provider) RaiseFailFastException(NULL, NULL, 0);
+    return provider;
+}
+/* Existing named-image service ABI; not a private provider layout. */
+ULONG __cdecl WOWSysErrorBox(LPSTR, LPSTR, USHORT, USHORT, USHORT);
 
 /* ADAPTER-WOW-100: the native modal service may synchronously activate a
  * different WOW task even during first-pass exception handling. Existing
@@ -36,23 +48,10 @@ ULONG __cdecl wow_user_sys_error_box(LPSTR title, LPSTR message,
     return response;
 }
 
-/* ADAPTER-WOW-099: filters run before unwind. Let the original policy write
- * its kill signal on the API frame that its handler will actually resume,
- * without prematurely replacing the still-live callback's frame identity. */
 INT WINAPI wow_user_dispatch_exception(DWORD code, PEXCEPTION_POINTERS info,
-    PTD task, VPVOID entry, BOOL established)
+    struct _TD *task, DWORD entry, BOOL established)
 {
-    VPVOID pending;
-    INT disposition;
-    if (!established) return W32Exception(code, info);
-    pending = task->vpStack;
-    __try {
-        task->vpStack = entry;
-        disposition = W32Exception(code, info);
-    } __finally {
-        task->vpStack = pending;
-    }
-    return disposition;
+    return current_provider()->exception(code, info, task, entry, established);
 }
 
 /* Both sides of a traced thunk must use the same bounded admission state.
@@ -64,7 +63,7 @@ static LONG trace_count;
 static __declspec(thread) unsigned char trace_admitted[WOW_TRACE_STACK_MAXIMUM];
 static __declspec(thread) unsigned char trace_depth;
 
-static void trace_thunk(PVDMFRAME frame, LPFNW32 thunk)
+static void trace_thunk(struct _VDMFRAME *frame, wow_thunk_procedure thunk)
 {
     char path[MAX_PATH];
     char line[192];
@@ -75,6 +74,7 @@ static void trace_thunk(PVDMFRAME frame, LPFNW32 thunk)
     ULONG_PTR rva;
 
     unsigned char slot;
+    wow_thunk_frame view;
 
     if (trace_depth == WOW_TRACE_STACK_MAXIMUM)
         return;
@@ -93,18 +93,19 @@ static void trace_thunk(PVDMFRAME frame, LPFNW32 thunk)
               GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
               (LPCSTR)trace_thunk, &module) && (ULONG_PTR)thunk >= (ULONG_PTR)module ?
         (ULONG_PTR)thunk - (ULONG_PTR)module : 0;
+    current_provider()->frame(frame, &view);
     bytes = (DWORD)sprintf_s(line, sizeof(line),
         "%lu W32Dispatch call=%04X thunk=%08lX rva=%08lX task=%04X return=%08lX ax=%04X args=%u tid=%lu depth=%u\r\n",
-        (unsigned long)GetCurrentProcessId(), frame->wCallID,
-        (unsigned long)(ULONG_PTR)thunk, (unsigned long)rva, frame->wTDB,
-        (unsigned long)frame->vpCSIP, frame->wAX, (unsigned)frame->cbArgs,
+        (unsigned long)GetCurrentProcessId(), view.call,
+        (unsigned long)(ULONG_PTR)thunk, (unsigned long)rva, view.task,
+        (unsigned long)view.return_ip, view.ax, (unsigned)view.args,
         (unsigned long)GetCurrentThreadId(), (unsigned)trace_depth);
     if (bytes)
         (void)WriteFile(file, line, bytes, &written, NULL);
     CloseHandle(file);
 }
 
-static void trace_return(PVDMFRAME frame, ULONG result)
+static void trace_return(struct _VDMFRAME *frame, ULONG result)
 {
     char path[MAX_PATH];
     char line[112];
@@ -113,6 +114,7 @@ static void trace_return(PVDMFRAME frame, ULONG result)
     DWORD written;
 
     unsigned char admitted;
+    wow_thunk_frame view;
 
     if (trace_depth == 0)
         return;
@@ -125,10 +127,11 @@ static void trace_return(PVDMFRAME frame, ULONG result)
         FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (file == INVALID_HANDLE_VALUE)
         return;
+    current_provider()->frame(frame, &view);
     bytes = (DWORD)sprintf_s(line, sizeof(line),
         "%lu W32Return call=%04X result=%08lX task=%04X tid=%lu depth=%u\r\n",
-        (unsigned long)GetCurrentProcessId(), frame->wCallID,
-        (unsigned long)result, frame->wTDB,
+        (unsigned long)GetCurrentProcessId(), view.call,
+        (unsigned long)result, view.task,
         (unsigned long)GetCurrentThreadId(), (unsigned)trace_depth + 1);
     if (bytes)
         (void)WriteFile(file, line, bytes, &written, NULL);
@@ -138,12 +141,13 @@ static void trace_return(PVDMFRAME frame, ULONG result)
 /* ADAPTER-WOW-032: retain private USER aliases only for the original thunk
  * invocation. Do not catch/translate exceptions or alter frame/result state;
  * original W32Dispatch/W32TryCall remain the exception-policy owners. */
-ULONG WINAPI wow_user_invoke_thunk(LPFNW32 thunk, PVDMFRAME frame)
+ULONG WINAPI wow_user_invoke_thunk(wow_thunk_procedure thunk, struct _VDMFRAME *frame)
 {
     wow_user_borrow_scope scope;
     ULONG result;
     DWORD trace_error = GetLastError();
-    BOOL saved_who_called = fWhoCalled, saved_thunk_dde = fThunkDDEmsg;
+    wow_thunk_mode mode;
+    current_provider()->capture(&mode);
     trace_thunk(frame, thunk);
     SetLastError(trace_error);
     if (!wow_user_borrow_enter(&scope))
@@ -152,8 +156,7 @@ ULONG WINAPI wow_user_invoke_thunk(LPFNW32 thunk, PVDMFRAME frame)
         result = (*thunk)(frame);
     } __finally {
         /* ADAPTER-WOW-095: nested original thunks cannot overwrite outer mode. */
-        fWhoCalled = saved_who_called;
-        fThunkDDEmsg = saved_thunk_dde;
+        current_provider()->restore(&mode);
         wow_user_borrow_leave_required(&scope);
     }
     trace_error = GetLastError();

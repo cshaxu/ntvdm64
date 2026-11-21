@@ -15,6 +15,7 @@
 #include "compat/include/wow_task_cleanup_entry.h"
 #include "compat/include/wow_timer_callback.h"
 #include "wow_native_extension_provider.h"
+#include "wow_thunk_provider.h"
 extern VOID WINAPI WowOriginalTimerFunc(UINT, HWND, UINT, DWORD);
 #ifndef WOW_INITIAL_PUBLICATION_FIXTURE
 extern BOOL WINAPI wow_original_task_cleanup_uninitialized(DWORD);
@@ -6306,7 +6307,8 @@ int main(int argc, char **argv)
 #ifdef WOW_WINDOW_BORROW_FIXTURE
     if (!wow_standard_class_bind(&class_provider) ||
             !wow_timer_bind(WowOriginalTimerFunc) ||
-            !wow_native_extension_bind(&fixture_extension_provider)) return 13;
+            !wow_native_extension_bind(&fixture_extension_provider) ||
+            !wow_thunk_bind(&thunk_provider)) return 13;
 #ifndef WOW_INITIAL_PUBLICATION_FIXTURE
     if (!wow_task_cleanup_bind(&cleanup_provider)) return 13;
 #else

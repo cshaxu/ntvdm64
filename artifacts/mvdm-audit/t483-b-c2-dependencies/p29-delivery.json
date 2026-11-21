@@ -1,0 +1,76 @@
+{
+  "packet": "M0 T483 S19 P29",
+  "baseline": "802fc9c86",
+  "status": "verified delivery",
+  "id": "BC2F038",
+  "file": "src/compat/wow_user_thunk_scope.c",
+  "ownership": "B keeps synchronous borrow/native scopes and tracing. C2 supplies the unchanged exception-frame switch and original TLS capture/restore plus scalar frame projection. F binds four callbacks before original DLL attach. Original W32Exception remains policy owner.",
+  "direct_relationships": {
+    "file_before": 3,
+    "file_after": 0,
+    "B_C2_unique": 0,
+    "B_C2_raw": 0,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 38,
+    "total": 38,
+    "remaining": 0
+  },
+  "compiled_headers": {
+    "B_C2": 0,
+    "B_C1": 590
+  },
+  "private_search_roots": {
+    "B_C2": 0,
+    "B_C1": 25
+  },
+  "mirror": {
+    "files": [
+      {
+        "path": "src/mvdm-host/wow32/wow32.c",
+        "before": {
+          "points": 13,
+          "lines": 35
+        },
+        "after": {
+          "points": 14,
+          "lines": 70
+        }
+      }
+    ],
+    "delta": {
+      "points": 1,
+      "lines": 35
+    },
+    "cumulative_S19": {
+      "points": 12,
+      "lines": 574
+    },
+    "error_line_proof": "Previous source prefix byte-exact; original error and line structure unchanged; paired parser zero issues."
+  },
+  "source_proof": {
+    "prior_prefix_byte_exact": true,
+    "prior_sha256": "3e30331c78a50c65bcbb25e24fc0d90845d388c2879cc6d400badd47cab44daa",
+    "current_sha256": "f846d368773cc986e81b52f0a82c5674d5d074fb965305d6b1b095d6d1399286",
+    "abi": "Opaque TD/VDMFRAME preserve selected x86 /Gz function ABI; snapshot retains DWORD wCallID without truncation."
+  },
+  "package": "defd1dcf-12b6-4637-b606-fa7b8dbb49d5",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hashes checked",
+  "tests": [
+    "Selected original W32Dispatch/W32Exception: eight exception phases, first-chance debugger search, five modal error scope cases passed",
+    "Linked original TLS owners: nested calls, both mode values and exceptional returns; last-error preservation; null/idempotent/replacement binding; full-width frame snapshot passed",
+    "DLL bridge and controlled loader passed",
+    "Real generic thunk, WOWCallback16/Ex, yields, USER16 messages and normal task retirement passed",
+    "COMMAND modern EDIT/CMD/MEM and launcher return passed"
+  ],
+  "limitations": [
+    "No new full Win3.1/Win95 matrix claimed",
+    "B-to-C1 S20 remains; callbacks are legitimate explicit runtime relationships, not absent calls",
+    "Assembly lacks compiler include records; generated entry/alias objects inspected separately, not attributed as B source"
+  ],
+  "failed_attempts": [],
+  "evidence_root": "build/t483-s19-thunk-scope-delivery"
+}

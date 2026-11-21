@@ -101,7 +101,7 @@ try {
         $output -notmatch 'DISPATCH_SEARCH debugger-first-chance=1 child-exit=0' -or
         ([regex]::Matches($output,'DISPATCH_EXCEPTION phase=')).Count -ne 8 -or
         ([regex]::Matches($output,'HARD_ERROR_SCOPE mode=')).Count -ne 5){throw 'Missing boundary assertions'}
-    @($sources|ForEach-Object {"$repo/$_"}) + @("$repo/src/mvdm-host/wow32/wmdisp32.c","$root/original-wndproc.inc","$ProviderBuildRoot/build.ninja") |
+    @($sources|ForEach-Object {"$repo/$_"}) + @("$repo/src/compat/include/wow_thunk_provider.h","$repo/test/mvdm-host/wow_thunk_provider.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$root/original-wndproc.inc","$ProviderBuildRoot/build.ninja") |
         ForEach-Object { Get-FileHash -LiteralPath $_ } | Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root/inputs.json"
     '0'|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw}

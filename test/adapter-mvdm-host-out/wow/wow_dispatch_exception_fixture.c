@@ -3,6 +3,7 @@
  * The Shell Close/Ignore guest tests provide the complementary runtime proof. */
 #include "precomp.h"
 #include "wow_user_thunk_scope.h"
+#include "../../mvdm-host/wow_thunk_provider.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_native_call.h"
 #include "wow_message_lifetime.h"
@@ -217,6 +218,7 @@ int __cdecl main(int argc,char **argv)
     BOOL debuggee=argc==2 && !strcmp(argv[1],"--search-debuggee");
     unsigned only=argc==2 && !strcmp(argv[1],"--abort-ignore") ? 5u :
         argc==2 && !strcmp(argv[1],"--abort-close") ? 6u : 0u;
+    if (!wow_thunk_bind(&thunk_provider)) return 13;
     teb.WOW32Reserved=&task;
     teb.ClientId.UniqueThread=(HANDLE)1;
     peb.FastPebLock=&peb_lock;

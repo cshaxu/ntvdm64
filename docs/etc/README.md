@@ -1419,3 +1419,5 @@ to the sequential successor packets.
 - [T483 S17 closure](evidence/m0-t483-s17-closure.md).
 
 - [T483 S18 closure](evidence/m0-t483-s18-closure.md).
+
+- [T483 S19 closure](evidence/m0-t483-s19-closure.md).

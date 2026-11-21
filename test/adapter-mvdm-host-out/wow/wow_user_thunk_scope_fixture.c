@@ -1,6 +1,7 @@
 #include "precomp.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_thunk_scope.h"
+#include "../../mvdm-host/wow_thunk_provider.h"
 
 static unsigned errors, calls;
 static HWND window;
@@ -76,6 +77,17 @@ int __cdecl main(void)
 {
     VDMFRAME frame = {0};
     BOOL caught = FALSE;
+    wow_thunk_frame view;
+    wow_thunk_provider other = thunk_provider;
+    CHECK(!wow_thunk_bind(NULL) && GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(wow_thunk_bind(&thunk_provider) && wow_thunk_bind(&thunk_provider));
+    CHECK(!wow_thunk_bind(&other) && GetLastError() == ERROR_ALREADY_INITIALIZED);
+    frame.wCallID = 0xf1234567; frame.wTDB = 0xabc7;
+    frame.wAX = 0xdef0; frame.cbArgs = 0x1234; frame.vpCSIP = 0xa123b456;
+    thunk_provider.frame(&frame, &view);
+    CHECK(view.call == frame.wCallID && view.task == frame.wTDB &&
+        view.ax == frame.wAX && view.args == frame.cbArgs && view.return_ip == frame.vpCSIP);
+
     frame.wAX = 0x2468;
     CHECK(SetEnvironmentVariableA("MVDM_WOW_DISPATCH_TRACE_PATH", NULL));
     SetLastError(0x1234);
