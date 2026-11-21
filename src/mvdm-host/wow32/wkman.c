@@ -4893,3 +4893,28 @@ ULONG FASTCALL WK32WowReserveHtask(PVDMFRAME pFrame)
 
     return ul;
 }
+
+/* DIVERGENCE(MVDM-HOST-DIV-902): original TD queries for B callbacks. */
+BOOL WINAPI wow_original_idle_registered(DWORD native_thread_id)
+{
+    PTD task;
+    BOOL registered = FALSE;
+    DWORD error = GetLastError();
+    if (!gptdTaskHead) return FALSE;
+    EnterCriticalSection(&gcsWOW);
+    for (task = gptdTaskHead; task; task = task->ptdNext) {
+        if ((!native_thread_id || task->dwThreadID == native_thread_id) &&
+                task->hThread && task->hIdleHook) {
+            registered = TRUE;
+            break;
+        }
+    }
+    LeaveCriticalSection(&gcsWOW);
+    SetLastError(error);
+    return registered;
+}
+BOOL WINAPI wow_original_separate_launch(void)
+{
+    PTD task = CURRENTPTD();
+    return fSeparateWow && task && task->VDMInfoiTaskID != (INT)-1;
+}

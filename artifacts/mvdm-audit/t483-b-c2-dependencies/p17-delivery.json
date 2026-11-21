@@ -1,0 +1,75 @@
+{
+  "packet": "M0 T483 S19 P17",
+  "baseline": "4475befd3",
+  "status": "verified delivery",
+  "file": [
+    "src/compat/wow_idle_hook_binding.c",
+    "src/compat/wow_launch_identity.c"
+  ],
+  "id": [
+    "BC2F030",
+    "BC2F031"
+  ],
+  "ownership": "Original wkman.c owns TD list, lock, publication and separate-launch queries. Immutable B-owned three-slot table bound in generated WOW DLL entry before original attach. B dispatch retains scope order; original idle function supplied directly. Separate-launch forwarding consolidated into existing B binding; redundant B file removed.",
+  "direct_relationships": {
+    "file_before": 2,
+    "file_after": 0,
+    "B_C2_unique": 226,
+    "B_C2_raw": 244,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 28,
+    "total": 38,
+    "remaining": 10
+  },
+  "mirror": {
+    "file": "src/mvdm-host/wow32/wkman.c",
+    "before": {
+      "points": 17,
+      "lines": 42
+    },
+    "after": {
+      "points": 18,
+      "lines": 67
+    },
+    "delta": {
+      "points": 1,
+      "lines": 25
+    },
+    "cumulative_S19": {
+      "points": 4,
+      "lines": 77
+    },
+    "approval": "Owner approved task-query candidate +1 point/+25 lines",
+    "error_line_proof": "Existing mirror bytes retained; append-only25lines. Paired exclusion parser zero issues; existing #error/#line unchanged. DIVERGENCE902 registered as R2725."
+  },
+  "package": "b8550a89-544d-428c-8f1f-68c82f75fe58",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hash checks",
+  "tests": [
+    "Exact C2 query bodies: uninitialized list, published thread guard, matching/foreign thread, shared registration, separate-launch task missing/invalid/valid/shared; B bind invalid/repeated/replacement, nested/exception/denial/retirement all pass",
+    "Idle native-chain switching deliberately not run in LogicOnly; unchanged CallNextHookEx forwarding not claimed retested",
+    "Actual generated entry BOOLEAN and controlled Windows OS loader eight rounds passed",
+    "Real two separate WOW workers: own idle callbacks, actual process retirement and surviving-peer idle passed",
+    "Real shared WOW worker: two distinct overlapping tasks retire independently and both requests exit normally; LifecycleOnly excludes historical cross-task message-identity assertion",
+    "COMMAND native EDIT CtrlQ CMD echo DOS MEM and launcher return passed"
+  ],
+  "audit": "Final linked and compiled evidence removes both C2 relations and both B files private TD layouts. Same-image providers preserve C2 algorithm/state ownership. Raw VDMREDIR verified unchanged before map reuse; generated/assembler coverage limits remain explicit.",
+  "evidence_root": "build/t483-s19-task-query",
+  "compiled_headers": {
+    "B_C2": 78,
+    "B_C1": 618
+  },
+  "private_search_roots": {
+    "B_C2": 11,
+    "B_C1": 36
+  },
+  "failed_attempts": [
+    "x86 first build: deleted wow_launch_identity.c remained in support source list; fixed list and final cached build passed",
+    "idle fixture first linked stale wow32-dll object; changed to actual compat product object; final idle assertions pass",
+    "DLL test invocation absolute root rejected before execution; repository-relative rerun passes",
+    "Audit initially included tracked deleted file; filter actual existing source then rescan passed"
+  ]
+}

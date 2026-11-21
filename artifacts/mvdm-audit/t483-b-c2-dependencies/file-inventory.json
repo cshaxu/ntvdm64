@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P16 completes twenty-six files; remaining12; task-query mirror candidate approved, not delivered",
+  "status": "P17 completes twenty-eight files; remaining10 include four pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -7968,7 +7968,7 @@
     {
       "id": "BC2F030",
       "file": "src/compat/wow_idle_hook_binding.c",
-      "status": "owner approved +1 point/+25 lines task-query candidate; implementation and delivery pending",
+      "status": "completed in verified P17 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8121,12 +8121,12 @@
           "product": "wow32.dll"
         }
       ],
-      "review": "task-query-provider-decision.json"
+      "review": "p17-delivery.json"
     },
     {
       "id": "BC2F031",
       "file": "src/compat/wow_launch_identity.c",
-      "status": "owner approved +1 point/+25 lines task-query candidate; implementation and delivery pending",
+      "status": "completed in verified P17 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8249,7 +8249,7 @@
           "product": "wow32.dll"
         }
       ],
-      "review": "task-query-provider-decision.json"
+      "review": "p17-delivery.json"
     },
     {
       "id": "BC2F032",

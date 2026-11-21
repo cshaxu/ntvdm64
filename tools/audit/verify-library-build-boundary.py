@@ -103,7 +103,6 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     'wow_user_registration_state.c',
     'wow_user_registration_bridge.c',
     'wow_task_start_notification.c',
-    'wow_launch_identity.c',
     'wow_user_task_lifecycle.c',
     'wow_window_client_access_bindings.c',
     'wow_window_client_state_bindings.c',

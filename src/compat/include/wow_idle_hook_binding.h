@@ -3,6 +3,14 @@
 
 #include <windows.h>
 
+/* Same-image immutable provider, bound before original WOW DLL attach. */
+typedef struct wow_task_state_callbacks {
+    BOOL (WINAPI *idle_registered)(DWORD);
+    BOOL (WINAPI *separate_launch)(void);
+    LRESULT (CALLBACK *idle)(int, WPARAM, LPARAM);
+} wow_task_state_callbacks;
+BOOL WINAPI wow_task_state_bind(const wow_task_state_callbacks *provider);
+
 /* Borrow this task's original TD registration state; no second Hook registry.
  * The caller supplies the lifecycle carrier's stable native thread identity,
  * not a host hook handle or a guest task ID. */

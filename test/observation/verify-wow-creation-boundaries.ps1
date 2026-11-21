@@ -30,7 +30,12 @@ $source=switch($Case){'hook'{'wow_hook_callback'} 'timer'{'wow_timer_callback'} 
 $compile=$commands | Where-Object {$_ -match ($source+'\.c$')} | Select-Object -Last 1
 if(!$compile){throw 'Missing production compile rule'}
 $fixtureName=switch($Case){'hook'{'wow_hook_callback_fixture.c'} 'timer'{'wow_timer_callback_fixture.c'} 'idle'{'wow_idle_hook_fixture.c'} 'common-dialog'{'wow_common_dialog_callback_fixture.c'} default{'wow_creation_menu_fixture.c'}}
-$fixture=$compile -replace ('/Fo\S+\s+\S+'+$source+'\.c$'), ('/Fo"'+$out+'\fixture.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\'+$fixtureName+'"')
+if($Case -eq 'idle') {
+    $compile=$commands | Where-Object {$_ -match 'wkman\.c$'} | Select-Object -Last 1
+    if(!$compile){throw 'Missing original task owner compile rule'}
+}
+$fixtureSource=if($Case -eq 'idle'){'wkman'}else{$source}
+$fixture=$compile -replace ('/Fo\S+\s+\S+'+$fixtureSource+'\.c$'), ('/Fo"'+$out+'\fixture.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\'+$fixtureName+'"')
 if($fixture -eq $compile){throw 'Fixture substitution failed'}
 if($Case -eq 'menu') {
     $text=Get-Content "$repo/src/compat/wow_window_creation_binding.c" -Raw
@@ -49,8 +54,14 @@ if($Case -eq 'hook') {
     if($ownerStart -lt 0){throw 'Missing original hook-owner projections'}
     [IO.File]::WriteAllText("$out/hook-owner.inc",$ownerSource.Substring($ownerStart))
 }
+if($Case -eq 'idle') {
+    $ownerSource=Get-Content "$repo/src/mvdm-host/wow32/wkman.c" -Raw
+    $ownerStart=$ownerSource.IndexOf('BOOL WINAPI wow_original_idle_registered(')
+    if($ownerStart -lt 0){throw 'Missing original task-owner projections'}
+    [IO.File]::WriteAllText("$out/task-owner.inc",$ownerSource.Substring($ownerStart))
+}
 Invoke-CompileCommand ($fixture+' /Gy /I"'+$out+'"')
-$owner=if($Case -in @('timer','hook','common-dialog')){'compat'}else{'wow32-dll'}
+$owner=if($Case -in @('timer','hook','common-dialog','idle')){'compat'}else{'wow32-dll'}
 $selected=if($Case -ne 'menu'){' "'+$provider+'\obj\'+$owner+'\'+$source+'.obj"'}else{''}
 if($Case -eq 'common-dialog') { $selected += ' "'+$provider+'\obj\compat\wow_task_cleanup_entry.obj"' }
 Invoke-CompileCommand ('link /nologo /OPT:REF /out:"'+$out+'\fixture.exe" "'+$out+'\fixture.obj"'+$selected+' kernel32.lib user32.lib')

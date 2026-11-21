@@ -193,11 +193,11 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,26 resolved,12 remaining. P16 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
+38 candidates,28 resolved,10 remaining. P17 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
 preparation; P2 cleared COMMAND capture leases; P3 clears keyboard IRQ retirement,
 descriptor projection and effective-address consumers including their public header.
-Unique direct B-to-C2 relationships337->228; relocation records606->247.
-Compiled private C2 header rows144->98; private C2 search roots74->11.
+Unique direct B-to-C2 relationships337->226; relocation records606->244.
+Compiled private C2 header rows144->78; private C2 search roots74->11.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
 Owner-approved P1 mirror delta+2 points/+19 lines is registered as R2721/R2722;
@@ -261,7 +261,9 @@ Owner-approved mirror delta+1 point/+30 lines; cumulative S19 +3 points/+52 line
 removes one B wrapper, preserving direct original C1/C2 WOW API semantics.
 Real Win16 OLE49153/49154 and COMMAND return pass; dual11 published.
 Mirror delta0 points/0 lines.
-[Task queries](../../artifacts/mvdm-audit/t483-b-c2-dependencies/task-query-provider-decision.json)
-are owner-approved +1 point/+25 lines, not yet delivered.
+[P17 task queries](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p17-delivery.json)
+clear two C2 relations and both private TD-layout consumers. Cached full build,
+dual11, exact queries, loader, real separate/shared WOW lifecycle and COMMAND pass.
+Approved mirror delta+1 point/+25 lines; cumulative S19 +4 points/+77 lines.
 [Message lifetime](../../artifacts/mvdm-audit/t483-b-c2-dependencies/message-lifetime-provider-review.json)
 remains ownership research, not completion. S19 active; S20 not admitted.

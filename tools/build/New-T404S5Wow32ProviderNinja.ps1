@@ -80,7 +80,6 @@ $providerSupportSources = @(
     (Join-Path $root 'src/compat/wow_task_profile_binding.c'),
     (Join-Path $adapterWow 'wow_task_termination.c'),
     (Join-Path $adapterWow 'wow_task_parent.c'),
-    (Join-Path $root 'src/compat/wow_launch_identity.c'),
     (Join-Path $root 'src/compat/wow_user_message_bridge.c'),
     (Join-Path $root 'src/compat/wow_user_task_lifecycle.c'),
     (Join-Path $root 'src/compat/wow_task_start_notification.c'),
@@ -355,6 +354,12 @@ $dllEntryBridgeLines = @(
     '/* Generated build-only CRT-to-original DLLENTRY bridge. */',
     '#include "wow_common_dialog_callback.h"',
     '#include "wow_hook_callback.h"',
+    '#include "wow_idle_hook_binding.h"',
+    'BOOL WINAPI wow_original_idle_registered(DWORD);',
+    'BOOL WINAPI wow_original_separate_launch(void);',
+    'LRESULT CALLBACK WowOriginalForegroundIdleHook(int, WPARAM, LPARAM);',
+    'static const wow_task_state_callbacks task_callbacks = {',
+    '    wow_original_idle_registered, wow_original_separate_launch, WowOriginalForegroundIdleHook };',
     'void WINAPI wow_hook_capture_context(wow_hook_context *);',
     'void WINAPI wow_hook_restore_context(const wow_hook_context *);',
     'BOOL WINAPI wow_hook_query_type(INT, INT *);',
@@ -374,6 +379,7 @@ $dllEntryBridgeLines = @(
     '    int result;',
     '    if (reason == 1 && !wow_common_dialog_bind(&dialog_callbacks)) return 0;',
     '    if (reason == 1 && !wow_hook_bind(&hook_callbacks)) return 0;',
+    '    if (reason == 1 && !wow_task_state_bind(&task_callbacks)) return 0;',
     '    result = W32DllInitialize(instance, reason, reserved);',
     '    if (reason == 0 && reserved == 0) { wow_registry_binding_shutdown(); wow_bitmap_bindings_shutdown(); }',
     '    return result;',
@@ -779,7 +785,7 @@ $ninja.Add('build wow32.dll | wow32.lib: wow_dll_link ' + (($objects + $supportO
 $ninja.Add('default wow32.dll')
 
 # Named original-layout adapters live in B; keep original per-unit ABI flags.
-$compatWowNames = @('wow_hook_callback.c', 'wow_user_thunk_scope.c', 'wow_timer_callback.c', 'wow_shell_callback.c', 'wow_ole_descriptor_binding.c', 'wow_user_private_access.c', 'wow_common_dialog_calls.c', 'wow_message_lifetime.c', 'wow_common_dialog_callback.c', 'wow_bitmap_bindings.c', 'wow_button_lifetime.c', 'wow_button_resources.c', 'wow_callback_frame_lease.c', 'wow_class_client.c', 'wow_class_client_bindings.c', 'wow_class_words_binding.c', 'wow_cleanup_bindings.c', 'wow_client_dispatch.c', 'wow_control_brush.c', 'wow_control_brush_bindings.c', 'wow_control_draw_state.c', 'wow_control_extent_bindings.c', 'wow_control_fnid.c', 'wow_control_state.c', 'wow_default_message_bindings.c', 'wow_default_native_bindings.c', 'wow_default_state_bindings.c', 'wow_default_window_bindings.c', 'wow_default_window_bits.c', 'wow_dialog_call_bindings.c', 'wow_dialog_context_bindings.c', 'wow_dialog_creation_binding.c', 'wow_dialog_keyboard_binding.c', 'wow_dialog_finalization_binding.c', 'wow_dialog_memory.c', 'wow_dialog_native_bindings.c', 'wow_dialog_pointer.c', 'wow_dialog_procedure_bindings.c', 'wow_dialog_state_bindings.c', 'wow_edit_call_bindings.c', 'wow_edit_conversion_bindings.c', 'wow_edit_entry_bindings.c', 'wow_edit_lookaside_bindings.c', 'wow_edit_native_bindings.c', 'wow_edit_state_bindings.c', 'wow_edit_thread_bindings.c', 'wow_idle_hook_binding.c', 'wow_input_group_lifetime.c', 'wow_input_membership.c', 'wow_list_native_bindings.c', 'wow_menu_client_bindings.c', 'wow_menu_native_bindings.c', 'wow_private_user_compat.c', 'wow_standard_class_bindings.c', 'wow_task_cleanup_entry.c', 'wow_task_profile_binding.c', 'wow_user_borrow_scope.c', 'wow_user_discovery.c', 'wow_user_message_bridge.c', 'wow_user_native_extension.c', 'wow_user_object_bindings.c', 'wow_user_registration_state.c', 'wow_user_registration_bridge.c', 'wow_task_start_notification.c', 'wow_launch_identity.c', 'wow_user_task_lifecycle.c', 'wow_window_client_access_bindings.c', 'wow_window_client_state_bindings.c', 'wow_window_creation_binding.c', 'wow_window_procedure_entry.c', 'wow_window_words_binding.c')
+$compatWowNames = @('wow_hook_callback.c', 'wow_user_thunk_scope.c', 'wow_timer_callback.c', 'wow_shell_callback.c', 'wow_ole_descriptor_binding.c', 'wow_user_private_access.c', 'wow_common_dialog_calls.c', 'wow_message_lifetime.c', 'wow_common_dialog_callback.c', 'wow_bitmap_bindings.c', 'wow_button_lifetime.c', 'wow_button_resources.c', 'wow_callback_frame_lease.c', 'wow_class_client.c', 'wow_class_client_bindings.c', 'wow_class_words_binding.c', 'wow_cleanup_bindings.c', 'wow_client_dispatch.c', 'wow_control_brush.c', 'wow_control_brush_bindings.c', 'wow_control_draw_state.c', 'wow_control_extent_bindings.c', 'wow_control_fnid.c', 'wow_control_state.c', 'wow_default_message_bindings.c', 'wow_default_native_bindings.c', 'wow_default_state_bindings.c', 'wow_default_window_bindings.c', 'wow_default_window_bits.c', 'wow_dialog_call_bindings.c', 'wow_dialog_context_bindings.c', 'wow_dialog_creation_binding.c', 'wow_dialog_keyboard_binding.c', 'wow_dialog_finalization_binding.c', 'wow_dialog_memory.c', 'wow_dialog_native_bindings.c', 'wow_dialog_pointer.c', 'wow_dialog_procedure_bindings.c', 'wow_dialog_state_bindings.c', 'wow_edit_call_bindings.c', 'wow_edit_conversion_bindings.c', 'wow_edit_entry_bindings.c', 'wow_edit_lookaside_bindings.c', 'wow_edit_native_bindings.c', 'wow_edit_state_bindings.c', 'wow_edit_thread_bindings.c', 'wow_idle_hook_binding.c', 'wow_input_group_lifetime.c', 'wow_input_membership.c', 'wow_list_native_bindings.c', 'wow_menu_client_bindings.c', 'wow_menu_native_bindings.c', 'wow_private_user_compat.c', 'wow_standard_class_bindings.c', 'wow_task_cleanup_entry.c', 'wow_task_profile_binding.c', 'wow_user_borrow_scope.c', 'wow_user_discovery.c', 'wow_user_message_bridge.c', 'wow_user_native_extension.c', 'wow_user_object_bindings.c', 'wow_user_registration_state.c', 'wow_user_registration_bridge.c', 'wow_task_start_notification.c', 'wow_user_task_lifecycle.c', 'wow_window_client_access_bindings.c', 'wow_window_client_state_bindings.c', 'wow_window_creation_binding.c', 'wow_window_procedure_entry.c', 'wow_window_words_binding.c')
 for ($index = 0; $index -lt $ninja.Count; ++$index) {
     if ($ninja[$index] -notmatch '^build .*: cc .*src/compat/([^/]+\.c)$' -or
         $Matches[1] -notin $compatWowNames) { continue }

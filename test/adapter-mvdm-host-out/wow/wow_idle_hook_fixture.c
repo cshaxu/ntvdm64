@@ -1,5 +1,6 @@
 #include "precomp.h"
 #include "wow_idle_hook_binding.h"
+#include "wow_startup_report.h"
 #include "wow_user_runtime.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_borrow_scope.h"
@@ -26,6 +27,11 @@ HHOOK WINAPI wow_native_SetWindowsHookExA(int id, HOOKPROC proc,
 
 PTD gptdTaskHead;
 CRITICAL_SECTION gcsWOW;
+BOOL fSeparateWow;
+static PTD fixture_task;
+#undef CURRENTPTD
+#define CURRENTPTD() fixture_task
+#include "task-owner.inc"
 static wow_user_runtime_thread runtime;
 static wow_task_order_thread thread;
 static wow_task_order_entry entry;
@@ -160,6 +166,28 @@ int __cdecl main(int argc, char **argv)
     TD first = {0}, second = {0};
     BOOL caught = FALSE;
     BOOL logic_only = argc == 2 && !strcmp(argv[1], "--logic-only");
+    static const wow_task_state_callbacks provider = {
+        wow_original_idle_registered, wow_original_separate_launch,
+        WowOriginalForegroundIdleHook
+    };
+    wow_task_state_callbacks other = provider;
+    CHECK(!wow_task_state_bind(NULL));
+    CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(wow_task_state_bind(&provider));
+    CHECK(wow_task_state_bind(&provider));
+    CHECK(!wow_task_state_bind(&other));
+    CHECK(GetLastError() == ERROR_ALREADY_INITIALIZED);
+    CHECK(!wow_current_separate_launch());
+    fSeparateWow = TRUE;
+    CHECK(!wow_current_separate_launch());
+    fixture_task = &first;
+    first.VDMInfoiTaskID = (INT)-1;
+    CHECK(!wow_current_separate_launch());
+    first.VDMInfoiTaskID = 7;
+    CHECK(wow_current_separate_launch());
+    fSeparateWow = FALSE;
+    CHECK(!wow_current_separate_launch());
+    fixture_task = NULL;
     InitializeCriticalSection(&gcsWOW);
     runtime.thread = &thread;
     thread.ptdb = &entry;

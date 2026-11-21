@@ -1,9 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
-#include "wow32_provider_private.h"
-/* Preserve the software-CPU profile formerly selected by WOW precomp.h. */
-#undef _X86_
-#include "mvdm-host/wow32/wow32.h"
 #include "wow_idle_hook_binding.h"
+#include "wow_startup_report.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_borrow_scope.h"
@@ -13,40 +9,33 @@
  * state from the unowned observer continuation. */
 #undef CallNextHookEx
 
-extern PTD gptdTaskHead;
-extern CRITICAL_SECTION gcsWOW;
-LRESULT CALLBACK WowOriginalForegroundIdleHook(int, WPARAM, LPARAM);
+static const wow_task_state_callbacks *callbacks;
+
+BOOL WINAPI wow_task_state_bind(const wow_task_state_callbacks *provider)
+{
+    const wow_task_state_callbacks *previous;
+    if (!provider || !provider->idle_registered || !provider->separate_launch ||
+            !provider->idle) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&callbacks,
+        (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED);
+        return FALSE;
+    }
+    return TRUE;
+}
 
 BOOL WINAPI wow_user_idle_hook_registered(DWORD native_thread_id)
 {
-    PTD task;
-    BOOL registered = FALSE;
-    DWORD error = GetLastError();
-    /* Before original WOW initialization there is no TD list or initialized
-     * list lock. No registration can exist in that state. Recheck under the
-     * lock before ever dereferencing a nonempty borrowed head. */
-    if (!gptdTaskHead) return FALSE;
-    /* wkman.c owns both the list and hIdleHook. Hold its existing lock only
-     * while borrowing list nodes, never across native or guest callbacks. */
-    EnterCriticalSection(&gcsWOW);
-    for (task = gptdTaskHead; task; task = task->ptdNext) {
-        /* W32Thread links its TD before initializing hIdleHook. hThread is
-         * NULL before linkage and published only after successful InitTask. */
-        /* The original INT 2F:1689 vector is worker-shared: registration by
-         * one live WOW task enables taskman's idle notification while any
-         * task in that worker is scheduled.  A nonzero thread asks for the
-         * observer owned by that exact task; zero asks only whether the
-         * original shared intent exists.  The callback itself still runs in
-         * the currently scheduled task's scope. */
-        if ((!native_thread_id || task->dwThreadID == native_thread_id) &&
-                task->hThread && task->hIdleHook) {
-            registered = TRUE;
-            break;
-        }
-    }
-    LeaveCriticalSection(&gcsWOW);
-    SetLastError(error);
-    return registered;
+    return callbacks->idle_registered(native_thread_id);
+}
+
+BOOL WINAPI wow_current_separate_launch(void)
+{
+    return callbacks->separate_launch();
 }
 
 static LRESULT dispatch_idle(int code, WPARAM wp, LPARAM lp)
@@ -66,7 +55,7 @@ static LRESULT dispatch_idle(int code, WPARAM wp, LPARAM lp)
     __try {
         if (!wow_user_borrow_enter(&borrow)) __leave;
         borrowed = TRUE;
-        result = WowOriginalForegroundIdleHook(code, wp, lp);
+        result = callbacks->idle(code, wp, lp);
     } __finally {
         __try {
             if (borrowed) wow_user_borrow_leave_required(&borrow);

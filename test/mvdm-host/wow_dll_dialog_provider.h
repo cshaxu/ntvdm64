@@ -28,3 +28,15 @@ BOOL WINAPI wow_hook_bind(const wow_hook_callbacks *p)
         p->restore == wow_hook_restore_context && p->type == wow_hook_query_type &&
         p->invoke == WowOriginalStdHookProc;
 }
+
+#include "../../src/compat/include/wow_idle_hook_binding.h"
+BOOL WINAPI wow_original_idle_registered(DWORD id) { (void)id; return FALSE; }
+BOOL WINAPI wow_original_separate_launch(void) { return FALSE; }
+LRESULT CALLBACK WowOriginalForegroundIdleHook(int c, WPARAM w, LPARAM l)
+{ (void)c; (void)w; (void)l; return 0; }
+BOOL WINAPI wow_task_state_bind(const wow_task_state_callbacks *p)
+{
+    return p && p->idle_registered == wow_original_idle_registered &&
+        p->separate_launch == wow_original_separate_launch &&
+        p->idle == WowOriginalForegroundIdleHook;
+}
