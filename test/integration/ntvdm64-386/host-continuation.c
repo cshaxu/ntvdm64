@@ -7,7 +7,7 @@
 #include "mvdm_vm_continuation.h"
 #include "compat/include/guest_location.h"
 #include "mvdm_softpc_guest_memory.h"
-#include "mvdm_vm_command.h"
+#include "compat/include/mvdm_vm_capture.h"
 #include "ntvdm-exe/session/session.h"
 #include "compat/include/mvdm_command_native_child.h"
 #include "compat/include/console_io.h"

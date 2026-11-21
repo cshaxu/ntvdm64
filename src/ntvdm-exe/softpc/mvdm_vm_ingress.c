@@ -1,6 +1,6 @@
 #include "mvdm_vm_ingress.h"
 #include "compat/include/mvdm_command_launch.h"
-#include "mvdm_vm_command.h"
+#include "compat/include/mvdm_vm_capture.h"
 #include "mvdm_vm_executor.h"
 #include "mvdm_standalone_worker.h"
 

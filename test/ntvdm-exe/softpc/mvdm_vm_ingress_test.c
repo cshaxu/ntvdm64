@@ -1,6 +1,6 @@
 #include "mvdm_vm_ingress.h"
 #include "mvdm_vm_executor.h"
-#include "mvdm_vm_command.h"
+#include "compat/include/mvdm_vm_capture.h"
 #include "compat/include/mvdm_softpc_worker_exit.h"
 #include "compat/include/mvdm_vm_command_entry.h"
 #include "compat/include/mvdm_vm_continuation_store.h"

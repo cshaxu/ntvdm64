@@ -9,4 +9,10 @@ DWORD mvdm_vm_command_capture(uint32_t service, uint32_t frame_address,
 /* Read the original service preceding the restored IP in this VM's mapping. */
 DWORD mvdm_vm_command_service(uint32_t descriptor_address, uint32_t descriptor_bytes,
     uint32_t *service);
+/* Copy the addon callback's five-word descriptor, validate/copy its screen,
+ * then capture COMMAND arguments. Both results are independently owned and
+ * contain no retained guest memory. On failure both outputs are NULL. */
+struct ntvdm_vm_text;
+DWORD mvdm_vm_command_snapshot(uint32_t service, uint32_t descriptor_address,
+    uint32_t descriptor_bytes, mvdm_command_capture **, struct ntvdm_vm_text **);
 #endif

@@ -1,5 +1,31 @@
 # C0621 synchronous admission boundary
 
+## P156 snapshot ownership
+
+mvdm_vm_command_snapshot now joins service/capture in compat/mvdm_vm_capture.c.
+Its descriptor/screen validation, copy ordering, capture failure cleanup and
+output contract are retained. The existing C guest-memory provider replaces
+F session wrappers, using the same active bound context and lease pool described
+below. The F snapshot source and header are removed, not retained as forwarding.
+No mirror or original guest file changes (non-error delta 0 points/0 lines).
+
+Capture tests pass 160 assertions, including no-bound-context and read-failure
+rejection with NULL outputs and no outstanding lease. The existing ingress
+fixture passes 64 selection/ownership assertions; its CPU/broker are mocked,
+so it is not evidence of real enhanced-mode token delivery. The reference graph
+initially retained a deleted F source; explicit CMake regeneration corrected it.
+The final cached products and runtime package evidence live in
+build/t483-s14-vm-snapshot. Package c5276fb8-2e13-429a-b529-eb6ec8f21f83 is published to both locations (22 verified hashes); real COMMAND/native EDIT Ctrl+Q/DOS MEM and launcher completion pass.
+
+C0621 remains open at mvdm_vm_executor_submit: it allocates a continuation/I/O
+object, rejects closing/duplicate generation, links the job and must successfully
+submit the existing threadpool execution before publishing a token. The F execute
+body performs frontend registration, product launch and retirement. A generic
+callback or merely moving the wrapper would preserve the prohibited dependency.
+Other BOP operations still reaching F include application transfer 13/14; the
+complete chain must be reconciled before closure. B/C direct counts stay 0/0;
+C0156/C0619/C0621 indirect implementation chains remain unresolved.
+
 ## P155 text-buffer implementation
 
 The complete frontend-base/video and ntvdm-exe/frontend/vm_text units move

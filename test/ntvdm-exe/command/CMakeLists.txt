@@ -12,7 +12,6 @@ add_executable(mvdm-command-capture-test
   "${CMAKE_SOURCE_DIR}/src/compat/command_services.c"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/command/source/mvdm_command_binding.c"
   "${CMAKE_SOURCE_DIR}/src/compat/mvdm_command_native_child.c"
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/softpc/mvdm_vm_command.c"
   "${CMAKE_SOURCE_DIR}/src/compat/guest_location.c"
   "${CMAKE_SOURCE_DIR}/src/compat/host_context.c"
   "${CMAKE_SOURCE_DIR}/src/compat/mvdm_vm_text.c"

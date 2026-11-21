@@ -3,7 +3,7 @@
 #include <string.h>
 #include "ntvdm-exe/command/include/command_launch.h"
 #include "compat/include/guest_location.h"
-#include "ntvdm-exe/softpc/include/mvdm_vm_command.h"
+#include "compat/include/mvdm_vm_capture.h"
 #include "compat/include/mvdm_vm_text.h"
 #include "ntvdm-exe/session/session.h"
 #include "../../common/guest_memory_fixture.h"
@@ -279,6 +279,15 @@ int main(void)
             fail_acquire = 0;
         }
         vm_memory[105] = '\r';
+        /* Snapshot must borrow the active inner context, never an F session. */
+        CHECK(compat_host_context_unbind(&owner.host_context));
+        CHECK(mvdm_vm_command_snapshot(8, 1600, sizeof(descriptor), &b, &text) == ERROR_INVALID_ADDRESS);
+        CHECK(!b && !text && no_active_leases());
+        CHECK(compat_host_context_bind(&owner.host_context));
+        fail_acquire = 1;
+        CHECK(mvdm_vm_command_snapshot(8, 1600, sizeof(descriptor), &b, &text) == ERROR_INVALID_ADDRESS);
+        CHECK(!b && !text && no_active_leases());
+        fail_acquire = 0;
         CHECK(!mvdm_vm_command_snapshot(8, 1600, sizeof(descriptor), &b, &text));
         CHECK(b && text && no_active_leases());
         memset(memory + 2000, 0xff, sizeof(screen));

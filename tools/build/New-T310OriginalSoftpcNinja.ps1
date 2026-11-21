@@ -284,7 +284,7 @@ $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc
                          'mvdm_softpc_execution.c',
                          'mvdm_vm_notification.c', 'mvdm_vm_bridge.c',
                          'mvdm_vm_wake.c',
-                         'mvdm_vm_continuation.c', 'mvdm_vm_guest_io.c', 'mvdm_vm_input.c', 'mvdm_vm_input_bop.c', 'mvdm_vm_command.c', 'mvdm_vm_application.c', 'mvdm_vm_execute.c', 'mvdm_vm_io.c', 'mvdm_vm_executor.c', 'mvdm_vm_ingress.c',
+                         'mvdm_vm_continuation.c', 'mvdm_vm_guest_io.c', 'mvdm_vm_input.c', 'mvdm_vm_input_bop.c', 'mvdm_vm_application.c', 'mvdm_vm_execute.c', 'mvdm_vm_io.c', 'mvdm_vm_executor.c', 'mvdm_vm_ingress.c',
                                                   'mvdm_standalone_worker.c',
                          'ntvdm_dos_observer.c',
                         'mvdm_softpc_presentation_font.c',
@@ -1681,7 +1681,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build ntvdm-command-launch-test.exe: broker_test_link obj/tests/ntvdm_command_launch.obj obj/adapter-win32/command_process_compat.obj obj/compat/command_services.obj obj/adapter-basesrv/mvdm_command_launch_request.obj lib-process-launch.lib')
     $graph.Add('build obj/tests/ntvdm_command_capture.obj: cc ' + (NinjaPath (Join-Path $root 'test/ntvdm-exe/command/command_capture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/compat/guest_memory_lease.obj obj/compat/host_context.obj obj/tests/ntvdm_command_capture.obj obj/compat/mvdm_vm_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/adapter-softpc/mvdm_vm_command.obj obj/compat/guest_location.obj obj/compat/mvdm_vm_text.obj obj/compat/console_video_buffer.obj')
+    $graph.Add('build ntvdm-command-capture-test.exe: broker_test_link obj/compat/guest_memory_lease.obj obj/compat/host_context.obj obj/tests/ntvdm_command_capture.obj obj/compat/mvdm_vm_capture.obj obj/adapter-basesrv/mvdm_command_native_child.obj obj/adapter-basesrv/mvdm_command_binding.obj obj/compat/command_services.obj obj/compat/guest_location.obj obj/compat/mvdm_vm_text.obj obj/compat/console_video_buffer.obj')
     $graph.Add('build obj/tests/ntvdm_command_directory.obj: cc ' + (NinjaPath (Join-Path $root 'test/adapter-mvdm-host-out/basesrv/t394_s4_command_scalar_state_fixture.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvdm-command-directory-test.exe: broker_test_link obj/tests/ntvdm_command_directory.obj obj/adapter-basesrv/mvdm_command_guest_state.obj obj/compat/guest_location.obj session.lib')

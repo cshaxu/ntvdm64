@@ -1,5 +1,6 @@
 #include "include/mvdm_vm_capture.h"
 #include "include/guest_location.h"
+#include "include/mvdm_vm_text.h"
 #include "include/guest_memory_access.h"
 #include <string.h>
 
@@ -24,14 +25,14 @@ DWORD mvdm_vm_command_service(uint32_t address, uint32_t extent, uint32_t *servi
     if (!service) return ERROR_INVALID_PARAMETER;
     *service = 0;
     if (extent != sizeof(descriptor)) return ERROR_INVALID_DATA;
-    if (!mvdm_softpc_guest_memory_acquire( address, extent,
+    if (!mvdm_softpc_guest_memory_acquire(address, extent,
         GUEST_MEMORY_ACCESS_READ, &lease, &bytes)) return ERROR_INVALID_ADDRESS;
     memcpy(descriptor, bytes, sizeof(descriptor));
-    if (!mvdm_softpc_guest_memory_release( lease, 0)) return ERROR_INVALID_ADDRESS;
-    if (!mvdm_softpc_guest_memory_acquire( descriptor[0], sizeof(frame),
+    if (!mvdm_softpc_guest_memory_release(lease, 0)) return ERROR_INVALID_ADDRESS;
+    if (!mvdm_softpc_guest_memory_acquire(descriptor[0], sizeof(frame),
         GUEST_MEMORY_ACCESS_READ, &lease, &bytes)) return ERROR_INVALID_ADDRESS;
     memcpy(&frame, bytes, sizeof(frame));
-    if (!mvdm_softpc_guest_memory_release( lease, 0)) return ERROR_INVALID_ADDRESS;
+    if (!mvdm_softpc_guest_memory_release(lease, 0)) return ERROR_INVALID_ADDRESS;
     mvdm_guest_location_set_real_mode(&location, (uint16_t)frame.cs,
         (uint16_t)(frame.eip - 1));
     if (!mvdm_guest_location_acquire_vm(&location, descriptor[1], 1,
@@ -55,11 +56,11 @@ DWORD mvdm_vm_command_capture(uint32_t service, uint32_t frame_address,
     if (!output) return ERROR_INVALID_PARAMETER;
     *output = NULL;
     if (service != 8 && service != 10) return ERROR_INVALID_FUNCTION;
-    if (!mvdm_softpc_guest_memory_acquire( frame_address,
+    if (!mvdm_softpc_guest_memory_acquire(frame_address,
         sizeof(frame), GUEST_MEMORY_ACCESS_READ, &lease, &bytes))
         return ERROR_INVALID_ADDRESS;
     memcpy(&frame, bytes, sizeof(frame));
-    if (!mvdm_softpc_guest_memory_release( lease, 0))
+    if (!mvdm_softpc_guest_memory_release(lease, 0))
         return ERROR_INVALID_ADDRESS;
     input.command_segment = (uint16_t)frame.ds;
     input.command_offset = (uint16_t)frame.esi;
@@ -72,7 +73,7 @@ DWORD mvdm_vm_command_capture(uint32_t service, uint32_t frame_address,
         directory_address, 64, GUEST_MEMORY_ACCESS_READ, &lease, &bytes))
         return ERROR_INVALID_ADDRESS;
     memcpy(directory + 3, bytes, 64);
-    if (!mvdm_softpc_guest_memory_release( lease, 0)) return ERROR_INVALID_ADDRESS;
+    if (!mvdm_softpc_guest_memory_release(lease, 0)) return ERROR_INVALID_ADDRESS;
     if (!memchr(directory + 3, 0, 64)) return ERROR_BAD_PATHNAME;
     directory[0] = (char)('A' + input.default_drive);
     directory[1] = ':'; directory[2] = '\\';
@@ -100,4 +101,38 @@ DWORD mvdm_vm_command_capture(uint32_t service, uint32_t frame_address,
         }
     }
     return ERROR_SUCCESS;
+}
+
+DWORD mvdm_vm_command_snapshot(uint32_t service, uint32_t address,
+    uint32_t extent, mvdm_command_capture **capture, ntvdm_vm_text **text)
+{
+    uint32_t descriptor[5];
+    guest_memory_lease *lease;
+    uint8_t *bytes;
+    DWORD error;
+    if (capture) *capture = NULL;
+    if (text) *text = NULL;
+    if (!capture || !text) return ERROR_INVALID_PARAMETER;
+    if (service != 8 && service != 10) return ERROR_INVALID_FUNCTION;
+    if (extent != sizeof(descriptor)) return ERROR_INVALID_DATA;
+    if (!mvdm_softpc_guest_memory_acquire(address, extent,
+            GUEST_MEMORY_ACCESS_READ, &lease, &bytes)) return ERROR_INVALID_ADDRESS;
+    memcpy(descriptor, bytes, sizeof(descriptor));
+    if (!mvdm_softpc_guest_memory_release(lease, 0)) return ERROR_INVALID_ADDRESS;
+    /* Validate the extent before leasing or allocating the guest-owned frame. */
+    if (descriptor[4] < sizeof(ntvdm_vm_text_header) ||
+        descriptor[4] > sizeof(ntvdm_vm_text_header) + 255u * 256u * 2u)
+        return ERROR_INVALID_DATA;
+    if (!mvdm_softpc_guest_memory_acquire(descriptor[3], descriptor[4],
+            GUEST_MEMORY_ACCESS_READ, &lease, &bytes)) return ERROR_INVALID_ADDRESS;
+    error = ntvdm_vm_text_create(bytes, descriptor[4], text);
+    if (!mvdm_softpc_guest_memory_release(lease, 0)) error = ERROR_INVALID_ADDRESS;
+    if (!error)
+        error = mvdm_vm_command_capture(service, descriptor[0], descriptor[1],
+            descriptor[2], capture);
+    if (error) {
+        ntvdm_vm_text_destroy(*text);
+        *text = NULL;
+    }
+    return error;
 }
