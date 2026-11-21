@@ -1,9 +1,8 @@
+#include "include/mvdm_cpu_access.h"
 #include "include/mvdm_vm_wake.h"
 #include "include/mvdm_vm_notification.h"
 #include <string.h>
 
-extern void host_ica_lock(void);
-extern void host_ica_unlock(void);
 typedef struct vm_entry {
     struct vm_entry *next;
     mvdm_vm_wake_identity identity;
@@ -34,13 +33,13 @@ uint32_t mvdm_vm_wake_register(uint32_t vm, uint64_t generation)
     if (!entry) return ERROR_NOT_ENOUGH_MEMORY;
     entry->identity.vm = vm;
     entry->identity.generation = generation;
-    host_ica_lock();
+    mvdm_cpu_access_current()->ica_lock();
     error = mvdm_vm_notification_snapshot(&serial);
     if (!error) {
         if (*find_vm(vm)) error = ERROR_ALREADY_EXISTS;
         else { entry->next = vms; vms = entry; entry = NULL; }
     }
-    host_ica_unlock();
+    mvdm_cpu_access_current()->ica_unlock();
     if (entry) HeapFree(GetProcessHeap(), 0, entry);
     return error;
 }
@@ -50,7 +49,7 @@ uint32_t mvdm_vm_wake_retire(uint32_t vm, uint64_t generation)
     vm_entry **found, *entry = NULL;
     wake_entry **p;
     DWORD error = ERROR_NOT_FOUND;
-    host_ica_lock();
+    mvdm_cpu_access_current()->ica_lock();
     found = find_vm(vm);
     if (*found && (*found)->identity.generation == generation) {
         entry = *found;
@@ -65,7 +64,7 @@ uint32_t mvdm_vm_wake_retire(uint32_t vm, uint64_t generation)
         }
         tail = p;
     }
-    host_ica_unlock();
+    mvdm_cpu_access_current()->ica_unlock();
     if (entry) {
         if (entry->input) HeapFree(GetProcessHeap(), 0, entry->input);
         HeapFree(GetProcessHeap(), 0, entry);
@@ -78,10 +77,10 @@ uint32_t mvdm_vm_wake_lookup(uint32_t vm, mvdm_vm_wake_identity *identity)
     vm_entry *entry;
     if (!identity) return ERROR_INVALID_PARAMETER;
     ZeroMemory(identity, sizeof(*identity));
-    host_ica_lock();
+    mvdm_cpu_access_current()->ica_lock();
     entry = *find_vm(vm);
     if (entry) *identity = entry->identity;
-    host_ica_unlock();
+    mvdm_cpu_access_current()->ica_unlock();
     return entry ? ERROR_SUCCESS : ERROR_NOT_FOUND;
 }
 
@@ -96,7 +95,7 @@ uint32_t mvdm_vm_wake_publish(uint32_t vm, uint64_t generation, uint64_t *serial
     if (!wake) return ERROR_NOT_ENOUGH_MEMORY;
     wake->identity.vm = vm;
     wake->identity.generation = generation;
-    host_ica_lock();
+    mvdm_cpu_access_current()->ica_lock();
     found = find_vm(vm);
     if (*found && (*found)->identity.generation == generation) {
         /* Posting only raises a CCPU interrupt flag; guest code cannot run
@@ -104,7 +103,7 @@ uint32_t mvdm_vm_wake_publish(uint32_t vm, uint64_t generation, uint64_t *serial
         error = mvdm_vm_notification_post(serial);
         if (!error) { *tail = wake; tail = &wake->next; wake = NULL; }
     }
-    host_ica_unlock();
+    mvdm_cpu_access_current()->ica_unlock();
     if (wake) HeapFree(GetProcessHeap(), 0, wake);
     return error;
 }
@@ -114,14 +113,14 @@ uint32_t mvdm_vm_wake_take(mvdm_vm_wake_identity *identity)
     wake_entry *wake;
     if (!identity) return ERROR_INVALID_PARAMETER;
     ZeroMemory(identity, sizeof(*identity));
-    host_ica_lock();
+    mvdm_cpu_access_current()->ica_lock();
     wake = first;
     if (wake) {
         first = wake->next;
         if (!first) tail = &first;
         *identity = wake->identity;
     }
-    host_ica_unlock();
+    mvdm_cpu_access_current()->ica_unlock();
     if (!wake) return ERROR_NO_MORE_ITEMS;
     HeapFree(GetProcessHeap(), 0, wake);
     return ERROR_SUCCESS;
@@ -134,7 +133,7 @@ uint32_t mvdm_vm_wake_return_input(uint32_t vm, uint64_t generation,
     console_io_input *copy;
     DWORD error = ERROR_NOT_FOUND;
     if (!vm || !generation || (count && !keys)) return ERROR_INVALID_PARAMETER;
-    host_ica_lock();
+    mvdm_cpu_access_current()->ica_lock();
     entry = *find_vm(vm);
     if (entry && entry->identity.generation == generation) {
         error = ERROR_SUCCESS;
@@ -157,7 +156,7 @@ uint32_t mvdm_vm_wake_return_input(uint32_t vm, uint64_t generation,
             }
         }
     }
-    host_ica_unlock();
+    mvdm_cpu_access_current()->ica_unlock();
     return error;
 }
 
@@ -170,7 +169,7 @@ uint32_t mvdm_vm_wake_read_input(uint32_t vm, uint64_t generation,
     *count = 0;
     if (!vm || !generation || !keys || !capacity || (consume != 0 && consume != 1))
         return ERROR_INVALID_PARAMETER;
-    host_ica_lock();
+    mvdm_cpu_access_current()->ica_lock();
     entry = *find_vm(vm);
     if (entry && entry->identity.generation == generation) {
         error = ERROR_SUCCESS;
@@ -188,13 +187,13 @@ uint32_t mvdm_vm_wake_read_input(uint32_t vm, uint64_t generation,
             }
         }
     }
-    host_ica_unlock();
+    mvdm_cpu_access_current()->ica_unlock();
     return error;
 }
 
 void mvdm_vm_wake_reset(void)
 {
-    host_ica_lock();
+    mvdm_cpu_access_current()->ica_lock();
     while (first) {
         wake_entry *next = first->next;
         HeapFree(GetProcessHeap(), 0, first);
@@ -207,5 +206,5 @@ void mvdm_vm_wake_reset(void)
         HeapFree(GetProcessHeap(), 0, vms);
         vms = next;
     }
-    host_ica_unlock();
+    mvdm_cpu_access_current()->ica_unlock();
 }

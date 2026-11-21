@@ -64,6 +64,22 @@ typedef struct mvdm_cpu_access {
     void (__cdecl *set_esi)(ULONG value);
     void (__cdecl *set_carry)(int value);
     void (__cdecl *unhandled_bop)(void);
+    /* Original ICA serialization, keyboard mapping and synchronous VM access. */
+    void (__cdecl *ica_lock)(void);
+    void (__cdecl *ica_unlock)(void);
+    WORD (__cdecl *reserve_irq)(HANDLE, WORD);
+    BOOL (__cdecl *release_irq)(HANDLE, WORD);
+    BOOL (__cdecl *register_eoi)(int, void (*)(int, int));
+    BOOL (__cdecl *remove_eoi)(int, void (*)(int, int));
+    void (__cdecl *raise_interrupt)(ULONG, ULONG, LONG);
+    BOOL (__cdecl *bios_key)(PKEY_EVENT_RECORD);
+    USHORT (__cdecl *ip)(void);
+    void (__cdecl *set_ip)(USHORT);
+    void (__cdecl *call_far)(unsigned long [2]);
+    int (__cdecl *acquire_memory)(uint32_t, uint32_t, uint32_t, guest_memory_lease **, uint8_t **);
+    int (__cdecl *release_memory)(guest_memory_lease *, int);
+    int (__cdecl *copy_memory_from)(uint32_t, uint8_t *, uint32_t);
+    int (__cdecl *copy_memory_to)(uint32_t, const uint8_t *, uint32_t);
 } mvdm_cpu_access;
 BOOL mvdm_cpu_access_install(const mvdm_cpu_access *provider);
 const mvdm_cpu_access *mvdm_cpu_access_current(void);

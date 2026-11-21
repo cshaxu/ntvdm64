@@ -1,3 +1,4 @@
+#include "compat/include/mvdm_cpu_access.h"
 #include "compat/include/mvdm_vm_ingress.h"
 #include "mvdm_vm_executor.h"
 #include "compat/include/mvdm_vm_capture.h"
@@ -57,6 +58,18 @@ static DWORD submit(void *executor, uint32_t vm,
 void ntvdm_command_launch_destroy(ntvdm_command_launch *launch) { if (launch) ++destroyed; }
 void ntvdm_vm_text_destroy(ntvdm_vm_text *text) { if (text) ++texts; }
 void mvdm_command_capture_destroy(mvdm_command_capture *capture) { if (capture) ++captured; }
+const mvdm_cpu_access *mvdm_cpu_access_current(void)
+{
+    static mvdm_cpu_access provider;
+    provider.ica_lock = host_ica_lock;
+    provider.ica_unlock = host_ica_unlock;
+    provider.virtual_mode = c_getVM;
+    provider.ip = c_getIP;
+    provider.set_ip = c_setIP;
+    provider.call_far = CALLF;
+    return &provider;
+}
+
 int main(void)
 {
     uint64_t token;

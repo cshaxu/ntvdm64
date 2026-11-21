@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P10 completes fourteen files; remaining24 include four pending mirror decisions",
+  "status": "P11 completes twenty-two files; remaining16 include four pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -6667,7 +6667,7 @@
     {
       "id": "BC2F019",
       "file": "src/compat/mvdm_vm_bridge.c",
-      "status": "not yet audited",
+      "status": "P11 verified: ICA lock/unlock remain the original recursive provider; close and retirement lock scopes unchanged.",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -6694,7 +6694,7 @@
     {
       "id": "BC2F020",
       "file": "src/compat/mvdm_vm_capture.c",
-      "status": "not yet audited",
+      "status": "P11 verified: Reuse COMMAND acquire_vm/release_location callbacks; bind ordinary SAS lease operations through CPU table. All borrows released synchronously.",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -6781,7 +6781,7 @@
     {
       "id": "BC2F021",
       "file": "src/compat/mvdm_vm_command_entry.c",
-      "status": "not yet audited",
+      "status": "P11 verified: Original VM/IP/CALLF providers invoked through immutable CPU table; FAR return frame and IP increment remain original.",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -6888,7 +6888,7 @@
     {
       "id": "BC2F022",
       "file": "src/compat/mvdm_vm_continuation.c",
-      "status": "not yet audited",
+      "status": "P11 verified: Only ICA lock calls changed; continuation references, events, completion and retirement order unchanged.",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7135,7 +7135,7 @@
     {
       "id": "BC2F023",
       "file": "src/compat/mvdm_vm_guest_io.c",
-      "status": "not yet audited",
+      "status": "P11 verified: Original BIOS key conversion, ICA and SAS copied reads/writes bound; return-key consumption and failure behavior unchanged.",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7202,7 +7202,7 @@
     {
       "id": "BC2F024",
       "file": "src/compat/mvdm_vm_input_bop.c",
-      "status": "not yet audited",
+      "status": "P11 verified: Original BIOS key conversion and SAS copied reads bound; input validation and owner rundown unchanged.",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7249,7 +7249,7 @@
     {
       "id": "BC2F025",
       "file": "src/compat/mvdm_vm_notification.c",
-      "status": "not yet audited",
+      "status": "P11 verified: Original VDD IRQ allocation/release and ICA EOI/assert/cancel providers bound. Same hook identity and close/reset ordering.",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7466,7 +7466,7 @@
     {
       "id": "BC2F026",
       "file": "src/compat/mvdm_vm_wake.c",
-      "status": "not yet audited",
+      "status": "P11 verified: Original ICA lock bound; existing necessary cross-thread producer/consumer wake handoff unchanged.",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -9417,11 +9417,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 14,
-    "remaining": 24,
+    "completed": 22,
+    "remaining": 16,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 270,
+    "direct_C2_unique_after": 239,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 349
+    "direct_C2_records_after": 258
   }
 }

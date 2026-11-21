@@ -1,3 +1,4 @@
+#include "include/mvdm_cpu_access.h"
 #include "compat/include/mvdm_vm_notification.h"
 #include "include/mvdm_vm_bridge.h"
 #include "compat/include/mvdm_vm_wake.h"
@@ -9,8 +10,6 @@
 #include "compat/include/mvdm_softpc_worker_exit.h"
 #include "compat/include/mvdm_command_guest_directory.h"
 
-extern void host_ica_lock(void);
-extern void host_ica_unlock(void);
 
 int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
     uint32_t low, uint32_t high, uint32_t vm, int protected_ring0,
@@ -32,13 +31,13 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
     case 4: result->status = mvdm_vm_notification_acknowledge(serial); break;
     case 5:
         mvdm_vm_ingress_reset();
-        host_ica_lock();
+        mvdm_cpu_access_current()->ica_lock();
         result->status = mvdm_vm_notification_close();
         if (!result->status) {
             mvdm_vm_continuation_reset();
             mvdm_vm_wake_reset();
         }
-        host_ica_unlock();
+        mvdm_cpu_access_current()->ica_unlock();
         break;
     case 6:
         result->status = mvdm_command_guest_state_directory_instance(
@@ -46,10 +45,10 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
         return 1;
     case 7: result->status = mvdm_vm_wake_register(vm, serial); break;
     case 8:
-        host_ica_lock();
+        mvdm_cpu_access_current()->ica_lock();
         result->status = mvdm_vm_wake_retire(vm, serial);
         if (!result->status) mvdm_vm_continuation_retire(vm, serial);
-        host_ica_unlock();
+        mvdm_cpu_access_current()->ica_unlock();
         break;
     case 9: result->status = mvdm_vm_wake_publish(vm, serial, &serial); break;
     case 10:

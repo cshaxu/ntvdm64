@@ -55,6 +55,18 @@ extern void __cdecl c_setESI(ULONG value);
 extern void __cdecl c_setCF(int value);
 extern void __cdecl virtual_device_trap(void);
 
+extern void __cdecl host_ica_lock(void);
+extern void __cdecl host_ica_unlock(void);
+extern WORD __cdecl VDDReserveIrqLine(HANDLE, WORD);
+extern BOOL __cdecl VDDReleaseIrqLine(HANDLE, WORD);
+extern BOOL __cdecl RegisterEOIHook(int, void (*)(int, int));
+extern BOOL __cdecl RemoveEOIHook(int, void (*)(int, int));
+extern void __cdecl ica_hw_interrupt(ULONG, ULONG, LONG);
+extern BOOL __cdecl BiosKeyToInputRecord(PKEY_EVENT_RECORD);
+extern USHORT __cdecl c_getIP(void);
+extern void __cdecl c_setIP(USHORT);
+extern void __cdecl CALLF(unsigned long [2]);
+
 BOOL ntvdm_dpmi_initialize(void)
 {
     static const mvdm_cpu_access cpu = {
@@ -75,7 +87,8 @@ BOOL ntvdm_dpmi_initialize(void)
         c_getEAX, c_getECX, c_getEDX,
         c_getESI, c_getEBX, c_getPE,
         c_setEAX, c_setEBX, c_setEDX,
-        c_setESI, c_setCF, virtual_device_trap
+        c_setESI, c_setCF, virtual_device_trap,
+        host_ica_lock, host_ica_unlock, VDDReserveIrqLine, VDDReleaseIrqLine, RegisterEOIHook, RemoveEOIHook, ica_hw_interrupt, BiosKeyToInputRecord, c_getIP, c_setIP, CALLF, mvdm_softpc_guest_memory_acquire, mvdm_softpc_guest_memory_release, mvdm_softpc_guest_memory_copy_from, mvdm_softpc_guest_memory_copy_to
     };
     static const compat_dpmi_services services = {
         ThreadSetDebugContext, mvdm_debugger_read_debug_registers,

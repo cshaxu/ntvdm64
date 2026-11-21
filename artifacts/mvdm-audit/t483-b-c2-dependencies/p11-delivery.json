@@ -1,0 +1,339 @@
+{
+  "packet": "M0 T483 S19 P11",
+  "baseline": "f377957e1",
+  "status": "verified P11 delivery",
+  "files": [
+    {
+      "id": "BC2F019",
+      "file": "src/compat/mvdm_vm_bridge.c",
+      "direct_before": 2,
+      "direct_after": 0,
+      "disposition": "ICA lock/unlock remain the original recursive provider; close and retirement lock scopes unchanged.",
+      "providers": [
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_lock"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_unlock"
+        }
+      ],
+      "mirror_delta": {
+        "non_error_points": 0,
+        "non_error_lines": 0
+      }
+    },
+    {
+      "id": "BC2F020",
+      "file": "src/compat/mvdm_vm_capture.c",
+      "direct_before": 4,
+      "direct_after": 0,
+      "disposition": "Reuse COMMAND acquire_vm/release_location callbacks; bind ordinary SAS lease operations through CPU table. All borrows released synchronously.",
+      "providers": [
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "symbol": "_mvdm_guest_location_acquire_vm"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "symbol": "_mvdm_guest_location_release"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "symbol": "_mvdm_softpc_guest_memory_acquire"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "symbol": "_mvdm_softpc_guest_memory_release"
+        }
+      ],
+      "mirror_delta": {
+        "non_error_points": 0,
+        "non_error_lines": 0
+      }
+    },
+    {
+      "id": "BC2F021",
+      "file": "src/compat/mvdm_vm_command_entry.c",
+      "direct_before": 6,
+      "direct_after": 0,
+      "disposition": "Original VM/IP/CALLF providers invoked through immutable CPU table; FAR return frame and IP increment remain original.",
+      "providers": [
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+          "symbol": "_c_getIP"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+          "symbol": "_c_getVM"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+          "symbol": "_c_setIP"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+          "symbol": "_CALLF"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_lock"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_unlock"
+        }
+      ],
+      "mirror_delta": {
+        "non_error_points": 0,
+        "non_error_lines": 0
+      }
+    },
+    {
+      "id": "BC2F022",
+      "file": "src/compat/mvdm_vm_continuation.c",
+      "direct_before": 2,
+      "direct_after": 0,
+      "disposition": "Only ICA lock calls changed; continuation references, events, completion and retirement order unchanged.",
+      "providers": [
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_lock"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_unlock"
+        }
+      ],
+      "mirror_delta": {
+        "non_error_points": 0,
+        "non_error_lines": 0
+      }
+    },
+    {
+      "id": "BC2F023",
+      "file": "src/compat/mvdm_vm_guest_io.c",
+      "direct_before": 5,
+      "direct_after": 0,
+      "disposition": "Original BIOS key conversion, ICA and SAS copied reads/writes bound; return-key consumption and failure behavior unchanged.",
+      "providers": [
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "symbol": "_mvdm_softpc_guest_memory_copy_from"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "symbol": "_mvdm_softpc_guest_memory_copy_to"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_lock"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_unlock"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_keycd.c",
+          "symbol": "_BiosKeyToInputRecord"
+        }
+      ],
+      "mirror_delta": {
+        "non_error_points": 0,
+        "non_error_lines": 0
+      }
+    },
+    {
+      "id": "BC2F024",
+      "file": "src/compat/mvdm_vm_input_bop.c",
+      "direct_before": 2,
+      "direct_after": 0,
+      "disposition": "Original BIOS key conversion and SAS copied reads bound; input validation and owner rundown unchanged.",
+      "providers": [
+        {
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "symbol": "_mvdm_softpc_guest_memory_copy_from"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_keycd.c",
+          "symbol": "_BiosKeyToInputRecord"
+        }
+      ],
+      "mirror_delta": {
+        "non_error_points": 0,
+        "non_error_lines": 0
+      }
+    },
+    {
+      "id": "BC2F025",
+      "file": "src/compat/mvdm_vm_notification.c",
+      "direct_before": 8,
+      "direct_after": 0,
+      "disposition": "Original VDD IRQ allocation/release and ICA EOI/assert/cancel providers bound. Same hook identity and close/reset ordering.",
+      "providers": [
+        {
+          "source": "src/mvdm-host/softpc.new/base/system/ica.c",
+          "symbol": "_ica_hw_interrupt"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/base/system/ica.c",
+          "symbol": "_ica_hw_interrupt_cancel"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_RegisterEOIHook"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_RemoveEOIHook"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_lock"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_unlock"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+          "symbol": "_VDDReleaseIrqLine"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+          "symbol": "_VDDReserveIrqLine"
+        }
+      ],
+      "mirror_delta": {
+        "non_error_points": 0,
+        "non_error_lines": 0
+      }
+    },
+    {
+      "id": "BC2F026",
+      "file": "src/compat/mvdm_vm_wake.c",
+      "direct_before": 2,
+      "direct_after": 0,
+      "disposition": "Original ICA lock bound; existing necessary cross-thread producer/consumer wake handoff unchanged.",
+      "providers": [
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_lock"
+        },
+        {
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "symbol": "_host_ica_unlock"
+        }
+      ],
+      "mirror_delta": {
+        "non_error_points": 0,
+        "non_error_lines": 0
+      }
+    }
+  ],
+  "progress": {
+    "total": 38,
+    "completed": 22,
+    "remaining": 16
+  },
+  "counts_B_C2": {
+    "unique": 239,
+    "relocation_records": 258,
+    "compiled_headers": 111,
+    "search_roots": 11
+  },
+  "counts_B_C1": {
+    "unique": 58,
+    "relocation_records": 70,
+    "compiled_headers": 633,
+    "search_roots": 36
+  },
+  "removed_this_batch": {
+    "unique": 31,
+    "relocation_records": 91
+  },
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "cumulative_mirror_delta": {
+    "non_error_points": 2,
+    "non_error_lines": 22
+  },
+  "implementation": "Append fifteen actual C function addresses to existing immutable CPU table; reuse its virtual_mode/cancel_interrupt and COMMAND VM-lease callbacks. F assembles addresses only. No new state machine, queue, C body or guest modification.",
+  "lifetime": "Binding before worker entry, immutable for process lifetime. ICA retains original recursive lock, including producer/EOI paths. CPU execution and SAS leases retain original owner/context. Stop/join producers before notification close and provider lifetime end.",
+  "semantic_proof": [
+    {
+      "file": "src/compat/mvdm_vm_bridge.c",
+      "algorithm_equal_after_reversing_callback_binding": true
+    },
+    {
+      "file": "src/compat/mvdm_vm_capture.c",
+      "algorithm_equal_after_reversing_callback_binding": true
+    },
+    {
+      "file": "src/compat/mvdm_vm_command_entry.c",
+      "algorithm_equal_after_reversing_callback_binding": true
+    },
+    {
+      "file": "src/compat/mvdm_vm_continuation.c",
+      "algorithm_equal_after_reversing_callback_binding": true
+    },
+    {
+      "file": "src/compat/mvdm_vm_guest_io.c",
+      "algorithm_equal_after_reversing_callback_binding": true
+    },
+    {
+      "file": "src/compat/mvdm_vm_input_bop.c",
+      "algorithm_equal_after_reversing_callback_binding": true
+    },
+    {
+      "file": "src/compat/mvdm_vm_notification.c",
+      "algorithm_equal_after_reversing_callback_binding": true
+    },
+    {
+      "file": "src/compat/mvdm_vm_wake.c",
+      "algorithm_equal_after_reversing_callback_binding": true
+    }
+  ],
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "notification_unit_assertions": 3194,
+    "ingress_unit_assertions": 73,
+    "capture_unit_assertions": 165,
+    "debug_and_real_ccpu_bop": 0,
+    "real_command": "modern EDIT screen, CtrlQ, CMD echo, DOS MEM and launcher completion passed",
+    "final_gates": 0,
+    "negative_boundary_test_methods": 8
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "8cd04361-1981-4c5f-b8cf-05586b869980",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "link_map_identity": {
+    "raw_build_sha256": "0b43bdffc1d25b10f7b88e2056ea3d5c268b2bc39a2cc21a41ec1d7e95c69e6a",
+    "mapped_link_sha256": "ed88a48bf3feb65b1fb9df01670f882d7ddf6280f427e12198bef38f409c0ae4",
+    "raw_and_mapped_different_bytes": 4,
+    "outside_PE_timestamp_fields": 0,
+    "published_identical_sections": [
+      ".text",
+      ".data",
+      ".reloc"
+    ],
+    "publication_changes": "release staging stamps resources; raw hashes are not identical"
+  },
+  "attempts": [
+    "First notification fixture run failed with access violation because its controlled CPU table omitted existing cancel_interrupt. Bound that fake endpoint; production table was already complete. Rerun passed.",
+    "Initial map comparison against staged DLL included release resource stamping. Fresh link map was verified against raw product: only four timestamp bytes differ. Published code/data/relocations are identical."
+  ],
+  "coverage_limits": "Native notification tests do not claim physical PIC or Win3.1/Win95 matrix acceptance. Existing assembler/generated alias attribution gaps remain recorded in coverage.json; VDMREDIR map gap resolved.",
+  "evidence_root": "build\\t483-s19-vm-providers"
+}

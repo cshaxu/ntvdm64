@@ -1,3 +1,4 @@
+#include "include/mvdm_cpu_access.h"
 #include "include/mvdm_vm_input.h"
 #include "include/guest_memory_access.h"
 
@@ -24,7 +25,7 @@ DWORD mvdm_vm_input_key_bop(mvdm_vm_rundown *owner, uint32_t vm,
     uint64_t token;
     if (!owner) return ERROR_NOT_READY;
     if (extent != sizeof(descriptor)) return ERROR_INVALID_PARAMETER;
-    if (!mvdm_softpc_guest_memory_copy_from(address, (uint8_t *)descriptor,
+    if (!mvdm_cpu_access_current()->copy_memory_from(address, (uint8_t *)descriptor,
         sizeof(descriptor))) return ERROR_INVALID_ADDRESS;
     if (descriptor[2] > 1 || !descriptor[3] || descriptor[3] > UINT16_MAX ||
         descriptor[4] > UINT16_MAX || descriptor[5] > UINT16_MAX ||
@@ -41,7 +42,6 @@ DWORD mvdm_vm_input_key_bop(mvdm_vm_rundown *owner, uint32_t vm,
 
 /* Original BIOS character conversion; physical identity and current BIOS
  * modifier state come from the same guest VM, not the host foreground state. */
-extern BOOL BiosKeyToInputRecord(PKEY_EVENT_RECORD);
 static WORD bios_modifier(uint32_t physical)
 {
     switch (physical) {
@@ -97,7 +97,7 @@ DWORD mvdm_vm_input_bios_key_bop(mvdm_vm_rundown *owner, uint32_t vm,
     DWORD error = ERROR_NOT_FOUND;
     if (!owner) return ERROR_NOT_READY;
     if (extent != sizeof(descriptor)) return ERROR_INVALID_PARAMETER;
-    if (!mvdm_softpc_guest_memory_copy_from(address, (uint8_t *)descriptor,
+    if (!mvdm_cpu_access_current()->copy_memory_from(address, (uint8_t *)descriptor,
         sizeof(descriptor))) return ERROR_INVALID_ADDRESS;
     physical = descriptor[2];
     if (physical > 255 || descriptor[3] > 2 ||
@@ -114,7 +114,7 @@ DWORD mvdm_vm_input_bios_key_bop(mvdm_vm_rundown *owner, uint32_t vm,
         } else {
             key.wVirtualScanCode = (WORD)(descriptor[4] >> 8);
             key.uChar.AsciiChar = (CHAR)(descriptor[4] & 255);
-            if (!BiosKeyToInputRecord(&key)) return ERROR_NO_UNICODE_TRANSLATION;
+            if (!mvdm_cpu_access_current()->bios_key(&key)) return ERROR_NO_UNICODE_TRANSLATION;
             /* The original unmappable-character branch reconstructs a full
              * Alt/numpad sequence. Do not label a plain pair equivalent. */
             if (descriptor[3] == 2 && !key.wVirtualScanCode) return ERROR_NOT_SUPPORTED;
@@ -163,7 +163,7 @@ DWORD mvdm_vm_input_mouse_bop(mvdm_vm_rundown *owner, uint32_t vm,
     DWORD error = ERROR_NOT_FOUND;
     if (!owner) return ERROR_NOT_READY;
     if (extent != sizeof(d)) return ERROR_INVALID_PARAMETER;
-    if (!mvdm_softpc_guest_memory_copy_from(address, (uint8_t *)d, sizeof(d)))
+    if (!mvdm_cpu_access_current()->copy_memory_from(address, (uint8_t *)d, sizeof(d)))
         return ERROR_INVALID_ADDRESS;
     if (!d[2] || d[2] > 127 || d[3] > 7 || d[4] > INT16_MAX ||
         d[5] > INT16_MAX || d[6] > 0xffffffu) return ERROR_INVALID_DATA;

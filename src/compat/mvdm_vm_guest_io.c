@@ -1,3 +1,4 @@
+#include "include/mvdm_cpu_access.h"
 #include "include/mvdm_vm_guest_io.h"
 #include "include/console_io.h"
 #include "include/guest_memory_access.h"
@@ -7,9 +8,6 @@
 #include <string.h>
 
 /* Original SoftPC keyboard mapping and recursive ICA lock. */
-extern BOOL BiosKeyToInputRecord(PKEY_EVENT_RECORD);
-extern void host_ica_lock(void);
-extern void host_ica_unlock(void);
 
 /* Existing BOP transport; copy a bounded descriptor, never retain VMM memory.
  * token[2], ticket[2], buffer address, capacity/extent, guest status. */
@@ -20,7 +18,7 @@ DWORD mvdm_vm_application_bop(uint32_t operation, uint32_t vm,
     uint64_t token, ticket;
     DWORD error;
     void *bytes = NULL;
-    if (extent != sizeof(descriptor) || !mvdm_softpc_guest_memory_copy_from(
+    if (extent != sizeof(descriptor) || !mvdm_cpu_access_current()->copy_memory_from(
         address, (uint8_t *)descriptor, sizeof(descriptor))) return ERROR_INVALID_ADDRESS;
     memcpy(&token, descriptor, 8); memcpy(&ticket, descriptor + 2, 8);
     if (operation == 14)
@@ -32,11 +30,11 @@ DWORD mvdm_vm_application_bop(uint32_t operation, uint32_t vm,
     }
     error = mvdm_vm_continuation_read_io(token, vm, &ticket, bytes,
         bytes ? descriptor[5] : 0, &size);
-    if (!error && !mvdm_softpc_guest_memory_copy_to(descriptor[4], bytes, size))
+    if (!error && !mvdm_cpu_access_current()->copy_memory_to(descriptor[4], bytes, size))
         error = ERROR_INVALID_ADDRESS;
     if (bytes) HeapFree(GetProcessHeap(), 0, bytes);
     memcpy(descriptor + 2, &ticket, 8); descriptor[5] = size;
-    if (!mvdm_softpc_guest_memory_copy_to(address, (uint8_t *)descriptor,
+    if (!mvdm_cpu_access_current()->copy_memory_to(address, (uint8_t *)descriptor,
         sizeof(descriptor))) error = ERROR_INVALID_ADDRESS;
     return error;
 }
@@ -92,7 +90,7 @@ static DWORD returned_bios_word(const console_io_input *input, UINT codepage, WO
     for (scan = 1; scan <= 0xa6; ++scan) {
         KEY_EVENT_RECORD decoded = {0};
         decoded.wVirtualScanCode = (WORD)scan;
-        if (BiosKeyToInputRecord(&decoded) && decoded.wVirtualScanCode == input->scan &&
+        if (mvdm_cpu_access_current()->bios_key(&decoded) && decoded.wVirtualScanCode == input->scan &&
             bios_key_modifiers(decoded.dwControlKeyState) == bios_key_modifiers(input->control)) {
             *word = (WORD)(scan << 8);
             if ((input->control & ENHANCED_KEY) && !bios_key_modifiers(input->control))
@@ -112,11 +110,11 @@ DWORD mvdm_vm_executor_return_key_bop(uint32_t vm, uint32_t address,
     DWORD error;
     *word = *repeat = 0;
     if (extent != sizeof(descriptor)) return ERROR_INVALID_PARAMETER;
-    if (!mvdm_softpc_guest_memory_copy_from(address, (uint8_t *)descriptor, sizeof(descriptor)))
+    if (!mvdm_cpu_access_current()->copy_memory_from(address, (uint8_t *)descriptor, sizeof(descriptor)))
         return ERROR_INVALID_ADDRESS;
     generation = ((uint64_t)descriptor[1] << 32) | descriptor[0];
     if (!descriptor[2] || !IsValidCodePage(descriptor[2])) return ERROR_INVALID_PARAMETER;
-    host_ica_lock();
+    mvdm_cpu_access_current()->ica_lock();
     for (;;) {
         error = mvdm_vm_wake_read_input(vm, generation, &input, 1, &count, 0);
         if (error) break;
@@ -132,6 +130,6 @@ DWORD mvdm_vm_executor_return_key_bop(uint32_t vm, uint32_t address,
         *repeat = input.repeat;
         break;
     }
-    host_ica_unlock();
+    mvdm_cpu_access_current()->ica_unlock();
     return error;
 }

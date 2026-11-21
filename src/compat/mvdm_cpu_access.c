@@ -45,7 +45,22 @@ BOOL mvdm_cpu_access_install(const mvdm_cpu_access *provider)
         !provider->set_edx ||
         !provider->set_esi ||
         !provider->set_carry ||
-        !provider->unhandled_bop) {
+        !provider->unhandled_bop ||
+        !provider->ica_lock ||
+        !provider->ica_unlock ||
+        !provider->reserve_irq ||
+        !provider->release_irq ||
+        !provider->register_eoi ||
+        !provider->remove_eoi ||
+        !provider->raise_interrupt ||
+        !provider->bios_key ||
+        !provider->ip ||
+        !provider->set_ip ||
+        !provider->call_far ||
+        !provider->acquire_memory ||
+        !provider->release_memory ||
+        !provider->copy_memory_from ||
+        !provider->copy_memory_to) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }

@@ -43,6 +43,19 @@ void c_setEDX(ULONG value) { edx = value; }
 void c_setESI(ULONG value) { esi = value; }
 void c_setCF(int32_t value) { cpu_carry = value; }
 
+extern void host_ica_lock(void);
+extern void host_ica_unlock(void);
+extern WORD VDDReserveIrqLine(HANDLE, WORD);
+extern BOOL VDDReleaseIrqLine(HANDLE, WORD);
+extern BOOL RegisterEOIHook(int, void (*)(int, int));
+extern BOOL RemoveEOIHook(int, void (*)(int, int));
+extern void ica_hw_interrupt(ULONG, ULONG, LONG);
+extern BOOL BiosKeyToInputRecord(PKEY_EVENT_RECORD);
+extern int mvdm_softpc_guest_memory_copy_from(uint32_t, uint8_t *, uint32_t);
+extern int mvdm_softpc_guest_memory_copy_to(uint32_t, const uint8_t *, uint32_t);
+
+extern void ica_hw_interrupt_cancel(ULONG, ULONG);
+
 /* This fixture exercises the actual BOP adapter with controlled CPU endpoints. */
 const mvdm_cpu_access *mvdm_cpu_access_current(void)
 {
@@ -61,6 +74,17 @@ const mvdm_cpu_access *mvdm_cpu_access_current(void)
     provider.unhandled_bop = virtual_device_trap;
     provider.virtual_mode = c_getVM;
     provider.privilege = c_getCPL;
+    provider.ica_lock = host_ica_lock;
+    provider.ica_unlock = host_ica_unlock;
+    provider.reserve_irq = VDDReserveIrqLine;
+    provider.release_irq = VDDReleaseIrqLine;
+    provider.register_eoi = RegisterEOIHook;
+    provider.remove_eoi = RemoveEOIHook;
+    provider.raise_interrupt = ica_hw_interrupt;
+    provider.cancel_interrupt = ica_hw_interrupt_cancel;
+    provider.bios_key = BiosKeyToInputRecord;
+    provider.copy_memory_from = mvdm_softpc_guest_memory_copy_from;
+    provider.copy_memory_to = mvdm_softpc_guest_memory_copy_to;
     return &provider;
 }
 

@@ -1,3 +1,4 @@
+#include "compat/include/mvdm_cpu_access.h"
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,6 +9,14 @@
 #include "compat/include/mvdm_vm_text.h"
 #include "ntvdm-exe/session/session.h"
 #include "../../common/guest_memory_fixture.h"
+
+const mvdm_cpu_access *mvdm_cpu_access_current(void)
+{
+    static mvdm_cpu_access provider;
+    provider.acquire_memory = mvdm_softpc_guest_memory_acquire;
+    provider.release_memory = mvdm_softpc_guest_memory_release;
+    return &provider;
+}
 
 static BYTE memory[65536];
 static BYTE vm_memory[65536];

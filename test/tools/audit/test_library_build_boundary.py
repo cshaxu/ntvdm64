@@ -44,7 +44,8 @@ class BoundaryTest(unittest.TestCase):
 
     def test_cpu_callback_consumers_have_no_C_exception(self):
         for source in ("mvdm_keyboard_reset.c", "mvdm_softpc_descriptor_fields.c",
-                       "mvdm_softpc_effective_address.c", "mvdm_redirector_async.c", "mvdm_softpc_mouse_bridge.c", "mvdm_vm_binding.c"):
+                       "mvdm_softpc_effective_address.c", "mvdm_redirector_async.c", "mvdm_softpc_mouse_bridge.c", "mvdm_vm_binding.c",
+                       "mvdm_vm_bridge.c", "mvdm_vm_capture.c", "mvdm_vm_command_entry.c", "mvdm_vm_continuation.c", "mvdm_vm_guest_io.c", "mvdm_vm_input_bop.c", "mvdm_vm_notification.c", "mvdm_vm_wake.c"):
             with self.subTest(source=source):
                 self.check_unit(source, "src/compat/include/mvdm_cpu_access.h")
                 with self.assertRaises(ValueError):

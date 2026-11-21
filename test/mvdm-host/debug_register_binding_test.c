@@ -375,3 +375,18 @@ int main(void)
     puts("S38_DEBUG_BINDING_CHECKED_SPAN_REGISTER_ORDER_OK");
     return 0;
 }
+
+/* VM callbacks are outside this bounded debug unit's behavior. */
+void host_ica_lock(void) { abort(); }
+void host_ica_unlock(void) { abort(); }
+WORD VDDReserveIrqLine(HANDLE owner, WORD irq) { (void)owner; (void)irq; abort(); return 0; }
+BOOL VDDReleaseIrqLine(HANDLE owner, WORD irq) { (void)owner; (void)irq; abort(); return FALSE; }
+BOOL RegisterEOIHook(int irq, void (*hook)(int,int)) { (void)irq; (void)hook; abort(); return FALSE; }
+BOOL RemoveEOIHook(int irq, void (*hook)(int,int)) { (void)irq; (void)hook; abort(); return FALSE; }
+void ica_hw_interrupt(ULONG adapter, ULONG line, LONG count) { (void)adapter; (void)line; (void)count; abort(); }
+BOOL BiosKeyToInputRecord(PKEY_EVENT_RECORD key) { (void)key; abort(); return FALSE; }
+USHORT c_getIP(void) { abort(); return 0; }
+void c_setIP(USHORT ip) { (void)ip; abort(); }
+void CALLF(unsigned long target[2]) { (void)target; abort(); }
+int mvdm_softpc_guest_memory_copy_to(uint32_t address, const uint8_t *bytes, uint32_t count)
+{ (void)address; (void)bytes; (void)count; abort(); return 0; }

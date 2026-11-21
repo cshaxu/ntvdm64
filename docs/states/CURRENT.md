@@ -193,10 +193,10 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,14 resolved,24 remaining. P10 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
+38 candidates,22 resolved,16 remaining. P11 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
 preparation; P2 cleared COMMAND capture leases; P3 clears keyboard IRQ retirement,
 descriptor projection and effective-address consumers including their public header.
-Unique direct B-to-C2 relationships337->270; relocation records606->349.
+Unique direct B-to-C2 relationships337->239; relocation records606->258.
 Compiled private C2 header rows144->111; private C2 search roots74->11.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
@@ -244,4 +244,10 @@ nine unused TIB C2 search roots and fifteen VM BOP direct relationships.
 Existing CCPU callbacks supply registers; F lends the BIOS slot only during
 startup. Real CCPU BOP rejection/result registers, notification3194 assertions
 and actual COMMAND/EDIT/CMD/MEM return passed. Mirror delta0 points/0 lines.
+[P11](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p11-delivery.json) clears
+31 direct relationships across the eight DIR-ordered VM bridge/capture/entry/
+continuation/I/O/input/notification/wake files. Original ICA, SAS, keycode and
+CPU bodies remain providers. Notification3194, ingress73, capture165, actual
+CCPU BOP and COMMAND return pass. Eight algorithm comparisons match after
+reversing callback binding; no mirror or guest change.
 S19 remains active; S20 not admitted.
