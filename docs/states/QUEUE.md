@@ -25,6 +25,7 @@ active-packet transition does not change any candidate's proposed scope.
 | 8 | Guest Windows / host bidirectional launch routing research — investigate redirecting guest double-click launches to the host and routing MS-DOS VM host-command requests back to guest Windows, with explicit execution-location choices. | [Proposal](../proposals/proposal-win31-bidirectional-launch-routing-001.md) |
 | 9 | Host-rendered Win32 applications inside guest Windows — investigate host execution/rendering with guest Win3.1 window presentation and input forwarding, without Win32s or original guest modifications. | [Proposal](../proposals/proposal-win31-host-window-presentation-001.md) |
 | 10 | Win3.1 interactive performance root-cause recovery — repair the failed active-interaction measurement path, attribute actual input/IRQ/CCPU/VGA/presentation cost, then change only a proved project-owned bottleneck while retaining independently correct optimizations. | [Proposal](../proposals/proposal-win31-interactive-performance-root-cause-001.md) |
+| 11 | Redundant queue and state-machine audit and repair - remove artificial same-thread handoffs, use inward ownership or typed callbacks, and consolidate duplicate scheduling/lifecycle state while preserving required concurrency. | [Proposal](../proposals/proposal-redundant-queue-state-machine-cleanup-001.md) |
 
 The external system launch loader candidate was removed from the queue.
 Its proposal remains as historical planning material; it is not pending.

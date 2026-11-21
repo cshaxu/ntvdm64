@@ -149,6 +149,29 @@ handoff instead of adding a second queue, scheduler or lifecycle authority.
 For VM command admission, retain the existing threadpool submission and its
 success/failure contract. The proposed P158 ready-queue replacement is rejected.
 
+## Queue and state-machine admission
+
+These requirements apply to new design and maintenance, not only to a cleanup
+pass. Same-thread logical decoupling must use inward code placement or an
+inner-owned synchronous callback. Do not substitute queues, event pumps,
+polling or extra threads merely to avoid a source-layer dependency.
+
+Before adding or retaining a handoff queue, identify the actual producer and
+consumer threads/processes, the required buffering/ordering/lifetime, and why
+the existing scheduler or transport cannot own it. A real cross-thread/process
+boundary is necessary but does not justify a duplicate queue. Preserve required
+thread affinity and reentry behavior; do not replace asynchronous work with a
+blocking callback when that would deadlock or stall guest execution.
+
+Each responsibility has one authoritative state machine and resource owner.
+Additional state must represent a distinct required fact or a documented derived
+view with explicit invalidation; it must not compete for admission, cancellation,
+completion or cleanup. Prefer direct error propagation and existing terminal
+handling over speculative retry/fallback states. A retained queue or state
+machine requires concrete behavioral evidence, not a component name or presumed
+future need. Review registration, ownership transfer, ordering, failure, reentry
+and shutdown in the complete producer/consumer chain before accepting a change.
+
 ## Original behavior and modern host responsibility — T447
 
 This owner-approved rule applies retrospectively to all T447 implementations,
