@@ -2,7 +2,6 @@
 #define WOW_EDIT_MEMORY_BINDINGS_H
 #include "wow_user_client_view_layout.h"
 #include "wow_user_registered_callbacks.h"
-#include "non-mvdm/windows/core/ntuser/client/globals.h"
 
 /* ADAPTER-WOW-056: original globals.h's callback variables select the one
  * existing registered table. Original W32 callbacks retain native/guest

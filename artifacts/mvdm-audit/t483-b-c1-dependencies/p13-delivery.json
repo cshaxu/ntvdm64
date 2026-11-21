@@ -1,0 +1,42 @@
+{
+  "packet": "M0 T483 S20 P13",
+  "baseline": "b8378b44c",
+  "files_completed": [
+    "BC1F015"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 20,
+    "remaining": 74,
+    "B_C1_unique": 55,
+    "B_C1_raw": 67,
+    "B_C1_compiled_headers": 482,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "dependency_delta": "B C1 compiled header rows 487->482; direct unchanged; no B compiled unit reaches globals.h",
+  "implementation": "Original edit macros and global declarations remain in C1 globals.h. C1 original layout owner selects this header for original edit profile; WOW_DIALOG_LOOKUP_ONLY excludes the B lookup unit which needs no edit globals. Existing callback table and allocation behavior remain unchanged. No macro body copied.",
+  "mirror": {
+    "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+    "before": "45points/110lines",
+    "after": "45points/113lines",
+    "delta": "0points/+3lines",
+    "cumulative_S20": "2points/+202lines",
+    "registration": "R2750",
+    "line_mapping": "existing #line2640 retained; excluded-branch parser zero issues"
+  },
+  "package": "a0965409-b8f0-4ff2-8837-5905c72643ed",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images to assets/release and O:/winnt/system32, 22 hashes verified",
+  "tests": [
+    "control-evidence-r2 all passed including original edit memory macros and dialog/window group",
+    "actual Win16 native extension and COMMAND EDIT/CMD/MEM passed"
+  ],
+  "evidence": "build/t483-s20-edit-memory",
+  "limitations": [
+    "B-to-C1 original layout and other headers remain separately tracked",
+    "No full suite on this P"
+  ]
+}

@@ -2760,3 +2760,7 @@ S20 P12: original clmsg.c and usercli.h explicitly own the RTL header import;
 B window adapter uses synchronous typed original procedure callback. B lookup
 still reaches userrtl.h and remains tracked. Non-error clmsg27points/979lines
 ->28points/982lines; usercli44points/110lines ->45points/115lines. R2748/R2749.
+
+S20 P13: original edit layout imports its own globals.h macros; the lookup-only
+unit does not consume them. B edit-memory header no longer imports this C header.
+Non-error user.h45points/110lines ->45points/113lines (+0points/+3lines), R2750.

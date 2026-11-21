@@ -583,7 +583,7 @@ foreach ($controlBody in @('editec','edecrare','editsl','editml','edmlonce',
 }
 $objects.Add('obj/compat/wow-dialog-lookup.obj')
 $ninja.Add('build obj/compat/wow-dialog-lookup.obj: cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_dialog_lookup.c')))
-$ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT')
+$ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_DIALOG_LOOKUP_ONLY')
 foreach ($viewBody in @('winmgr','wow')) {
     $viewObject = 'obj/opennt-user/control-view-' + $viewBody + '.obj'
     $objects.Add($viewObject)

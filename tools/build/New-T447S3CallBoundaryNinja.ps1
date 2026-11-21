@@ -73,7 +73,7 @@ $units = @(
     @('control_extent', 'src/compat/wow_control_extent_bindings.c', ''),
     @('state_guards', 'src/compat/wow_control_state.c', ''),
     @('color_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', '/DWOW_ORIGINAL_CONTROL_COLOR'),
-    @('memory_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_memory_callbacks_fixture.c', ''),
+    @('memory_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_memory_callbacks_fixture.c', '/DWOW_ORIGINAL_EDIT_CLIENT'),
     @('dialog_memory', 'src/compat/wow_dialog_memory.c', ''),
     @('brush_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_brush_fixture.c', ''),
     @('brush_adapter', 'src/compat/wow_control_brush_bindings.c', ''),
@@ -186,7 +186,7 @@ foreach ($name in @('editec','edecrare','editsl','editml','edmlonce','edmlrare',
     $units += ,@(('original_' + $name), ('src/non-mvdm/windows/core/ntuser/client/' + $name + '.c'), $flags)
     $controlObjects += 'obj/original_' + $name + '.obj'
 }
-$units += ,@('dialog_lookup', 'src/compat/wow_dialog_lookup.c', '/DWOW_ORIGINAL_EDIT_CLIENT')
+$units += ,@('dialog_lookup', 'src/compat/wow_dialog_lookup.c', '/DWOW_ORIGINAL_EDIT_CLIENT /DWOW_DIALOG_LOOKUP_ONLY')
 $controlObjects += 'obj/dialog_lookup.obj'
 $units += ,@('original_keyboard', 'src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c',
     ('/DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_KEYBOARD /I "' +

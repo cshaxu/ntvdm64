@@ -2652,5 +2652,8 @@ void KernelBP(void);
 #if defined(WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT) && !defined(OPENNT_CONTROL_EXTENT_BUTTON_LAYOUT_H)
 #define OPENNT_CONTROL_EXTENT_BUTTON_LAYOUT_H
 #endif
+#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && defined(WOW_ORIGINAL_EDIT_CLIENT) && !defined(WOW_DIALOG_LOOKUP_ONLY)
+#include "non-mvdm/windows/core/ntuser/client/globals.h"
+#endif
 #line 2640
 #endif // _USER_
