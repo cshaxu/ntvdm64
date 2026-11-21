@@ -1,0 +1,99 @@
+{
+  "packet": "M0 T483 S16 P2",
+  "baseline": "446b1b3b1",
+  "files": {
+    "total": 13,
+    "audited": 13,
+    "pending": 0,
+    "implementation_units": 6,
+    "headers": 5,
+    "readmes": 2
+  },
+  "result": {
+    "unapproved_E_to_F": 0,
+    "cross_E_component_dependencies": 0,
+    "static_evidence_rows": {
+      "binary-imports": 0,
+      "compiled-headers": 0,
+      "generated-rpc-relocations": 0,
+      "linked-relocations": 0,
+      "literal-includes": 0,
+      "resolved-includes": 0,
+      "runtime-image-names": 0,
+      "search-paths": 0
+    }
+  },
+  "changes": [
+    "frontend-base README: correct B video receiver ownership and stale future-RPC description",
+    "worker-base README: correct B publisher ownership, explain real observation thread boundary",
+    "task_observation.h: correct finite-drain comment to existing facts-completed/publisher-exit contract"
+  ],
+  "production_behavior_changed": false,
+  "mirror_non_error_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "allowed_runtime_composition": "Inner-owned typed callbacks still invoke NTCON/NTVDM/NTVWM product operations; do not report zero runtime peers. Exact functions, threads and release order are in each file row. No new queue/callback/state machine added.",
+  "retained_cross_thread_work": [
+    "Frontend pipe-serving thread and service event pump",
+    "Worker input watcher and D broker-death watcher",
+    "Guest producer -> blocking RPC observation consumer",
+    "Finite Console close grace helper; INFINITE close remains inline"
+  ],
+  "compiled_coverage": {
+    "src/frontend-base/channel.c": [
+      "msvc-x64-release/frontend/ntcon.exe",
+      "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+      "msvc-x86-release/worker/ntvdm.exe"
+    ],
+    "src/frontend-base/service.c": [
+      "msvc-x64-release/frontend/ntcon.exe",
+      "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+      "msvc-x86-release/worker/ntvdm.exe"
+    ],
+    "src/worker-base/connection.c": [
+      "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+      "msvc-x64-release/worker/ntvwm.exe",
+      "msvc-x86-release/worker/ntvdm.exe"
+    ],
+    "src/worker-base/input_watch.c": [
+      "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+      "msvc-x64-release/worker/ntvwm.exe",
+      "msvc-x86-release/worker/ntvdm.exe"
+    ],
+    "src/worker-base/shutdown_close.c": [
+      "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+      "msvc-x64-release/worker/ntvwm.exe",
+      "msvc-x86-release/worker/ntvdm.exe"
+    ],
+    "src/worker-base/task_observation.c": [
+      "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+      "msvc-x64-release/worker/ntvwm.exe",
+      "msvc-x86-release/worker/ntvdm.exe"
+    ]
+  },
+  "coverage_note": "Archive compile membership is not proof every member is live in every listed product. Live COFF-to-map census separately found no E outer/same-layer symbol rows. Manual provider audit includes function pointers and F teardown.",
+  "package": "e6fc4605-1c7c-4e0a-b274-1c13ab6a74ce",
+  "verification": {
+    "cached_full_x86": 0,
+    "cached_full_x64_reference": 0,
+    "publication": {
+      "images": 11,
+      "destinations": [
+        "O:\\repos.hobby\\ntvdm64/assets/release",
+        "O:/winnt/system32"
+      ],
+      "package": "e6fc4605-1c7c-4e0a-b274-1c13ab6a74ce",
+      "hashVerified": true,
+      "stopped": 0
+    },
+    "directed": "PASS frontend-base channel isolation framing cancellation rollback and reply ordering\n\nPASS frontend-base service isolation release ordering fault authority and retained failed join\n\nPASS shared input watcher: 641 assertions; event/callback, rearm, source replacement, close priority, 50-cycle handles\n\nPASS copied ordered outbox, explicit overflow, off-producer publication and cancellation/join\n\nhandle-count before=111 after=111\nPASS worker shutdown: 37 assertions, 0 failures\n\nPASS 233 registry/active-I/O assertions; actual RPC remains an integration gate",
+    "real_COMMAND": "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion"
+  },
+  "evidence_root": "build/t483-s16-e-delivery",
+  "limitations": [
+    "This layering audit does not claim exhaustive product fault/reentry coverage.",
+    "Native fixtures verify real adapter code but mock remote authority; real COMMAND test separately covers product transport and return.",
+    "Existing DOS observer PSP/instance semantics are outside this dependency task and are not declared fixed."
+  ]
+}

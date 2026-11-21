@@ -65,10 +65,19 @@ resolved in the final audit. S15 owner acceptance and closure recorded on2026-11
 ## S16 Progress
 
 [DIR-ordered E inventory](../../artifacts/mvdm-audit/t483-e-layer-dependencies/file-inventory.json):
-13 files total (6 C implementations,5 headers,2 README files). Initial scan
-finds no direct outer/same-layer include or linked-symbol rows in the current
-product census; callback/provider review remains pending. No production edit
-or S16 build/publication/test is claimed yet.
+13/13 files audited,0 pending (6 C implementations,5 headers,2 README files).
+[Final delivery](../../artifacts/mvdm-audit/t483-e-layer-dependencies/delivery.json)
+records actual callback providers, execution threads and join-before-release.
+No unapproved E-to-F or frontend-base/worker-base dependency remains. Typed
+product callbacks remain explicit; no claim of absent runtime peers is made.
+
+P2 corrects2 outdated component descriptions and1 drain-contract comment.
+No algorithm/ABI or guest changes; non-error mirror delta0 points/0 lines.
+Cached full x86/x64/reference and dual11 publication passed. Six focused
+fixtures passed, including input641, shutdown37 and VM frontend233 assertions;
+real COMMAND modern EDIT/CtrlQ, CMD echo, DOS MEM and launcher return passed.
+Package e6fc4605-1c7c-4e0a-b274-1c13ab6a74ce. S16 ready for owner acceptance;
+no successor admitted. Necessary cross-thread handoffs remain documented.
 
 ## Recent Governance
 

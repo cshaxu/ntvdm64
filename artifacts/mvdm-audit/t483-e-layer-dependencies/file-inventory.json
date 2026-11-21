@@ -7,144 +7,193 @@
       "id": "EF001",
       "file": "src/frontend-base/channel.c",
       "lines": 167,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Trace NTCON and NTVDM channel adapters. Preserve framing/pipe/thread mechanism in E; move only proven misplaced behavior, keep product presentation in F.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "retain",
+      "evidence": "NTCON console_channel.c: bind_channel/attach_channel/set_generation/active/dispatch/pending_input/finish; NTVDM vm_frontend.c: prepare/attach/generation/active/dispatch/input_pending/finish. Startup first3 on caller; rest on channel thread. Stop signals/cancels/drains and joins before adapter disposal.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF002",
       "file": "src/frontend-base/channel.h",
       "lines": 34,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Verify seven typed callbacks, cancel handles and borrowed lifetime; no private F or worker-base types.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "retain",
+      "evidence": "Seven typed inner-owned callbacks. No F or worker-base types; worker handle consumed on all start outcomes; input_ready/context borrowed until join.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF003",
       "file": "src/frontend-base/README.md",
       "lines": 41,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Reconcile component documentation with actual ownership. Remove stale moved-file claims, not historical behavior evidence.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "documentation-fixed",
+      "evidence": "Correct video buffer owner to compat/console_video_buffer.c and remove obsolete S2 future-tense claim. No behavior change.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF004",
       "file": "src/frontend-base/service.c",
       "lines": 174,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Trace two service adapters and channel operations; verify instance state and stop/join, no worker-base call hidden in callback.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "retain",
+      "evidence": "NTCON session_service.c and NTVDM vm_frontend.c provide retirement, prepare, request, channel_start/stop/thread, disconnected, fault. Pump calls inline; channel_stop also runs on caller after pump join. F adapters own presentation/RPC identity; E owns service/channel coordination. No worker-base target.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF005",
       "file": "src/frontend-base/service.h",
       "lines": 23,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Verify eight callback signatures and explicit lifetime; no cross-E private ABI.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "retain",
+      "evidence": "Eight typed callbacks; event/context borrowed until successful stop. Service then channel join; failed join retains state.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF006",
       "file": "src/worker-base/connection.c",
       "lines": 77,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Confirm wrappers resolve only to D; record broker-death callback forwarding and registration targets.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "retain",
+      "evidence": "All concrete calls resolve to D common. Watch registration forwards E caller callback to D broker watcher; F subscribers and normal join-before-free documented in S15.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF007",
       "file": "src/worker-base/connection.h",
       "lines": 51,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Trace inline character-start callback and close callback, actual providers/threads; keep neutral signatures.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "retain",
+      "evidence": "Character-start inline callback: NTVDM mvdm_standalone_worker.c::begin_character_io; NTVWM execution.c owner->io.begin -> main.c::begin_io. Caller context borrowed only synchronously. Shutdown callback reviewed with EF011.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF008",
       "file": "src/worker-base/input_watch.c",
       "lines": 130,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Trace readiness/shutdown/task/failure callbacks and real watcher thread. Remove no necessary cross-thread handoff.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "retain",
+      "evidence": "Watcher callbacks: NTVDM worker_lifecycle.c report_io_fault/console_instruction/worker_instruction/task_instruction; console_client.c console_input_failed; NTVWM main.c consume_input/input_failure. Run on watcher thread; stop/unbind/cancel outside callback locks precedes destroy join. No frontend-base dependency.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF009",
       "file": "src/worker-base/input_watch.h",
       "lines": 27,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Verify callback/state ownership, B readiness exposure and destroy/join lifetime.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "retain",
+      "evidence": "B compat/input_readiness is the sole exposed mechanism type; callback/context borrowed through destroy/join. Does not select DOS/native policy.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF010",
       "file": "src/worker-base/README.md",
       "lines": 40,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Reconcile component documentation with actual ownership. Remove stale moved-file claims, not historical behavior evidence.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "documentation-fixed",
+      "evidence": "Correct publisher owner to compat/publication.c and document real cross-thread task-observation contract.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF011",
       "file": "src/worker-base/shutdown_close.c",
       "lines": 25,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Trace close providers and finite/infinite grace branches; preserve actual thread requirement and process-exit ownership.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "retain",
+      "evidence": "F NTVDM close_console/close_worker and NTVWM ntvwm_release_console_carrier. INFINITE calls inline. Finite original Console grace spawns bounded close helper and ultimately terminates carrier; context remains process-owned through termination. Do not replace required timeout enforcement with blocking inline call.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF012",
       "file": "src/worker-base/task_observation.c",
       "lines": 94,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Trace publish/cancel providers, real producer/consumer threads and quiesce/drain/join. Queue must be justified by actual cross-thread RPC.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "retain",
+      "evidence": "F ntvdm_dos_observer.c::created/terminated produce on guest owner thread; publish -> D OpenNtBaseClientObserveDosEvent on E pump. cancel sets actual RPC stop event. Unregister producer -> drain -> cancel/join before state release. Bounded queue required for distinct cross-thread facts; not same-thread indirection.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     },
     {
       "id": "EF013",
       "file": "src/worker-base/task_observation.h",
       "lines": 32,
-      "status": "pending-provider-review",
+      "status": "audited",
       "plan": "Verify protocol type comes from D, bounded fact storage and cancellation contract; no frontend-base ABI.",
       "mirror_delta": {
         "points": 0,
         "lines": 0
-      }
+      },
+      "action": "comment-fixed",
+      "evidence": "Correct obsolete finite-drain wording to actual accepted-facts or publisher-exit wait. D protocol data only; same declarations and semantics.",
+      "verification": "Cached full x86/x64/reference, dual11 publication, six directed fixtures, real COMMAND return, final dependency census; delivery.json"
     }
-  ]
+  ],
+  "summary": {
+    "audited": 13,
+    "total": 13,
+    "code_behavior_changes": 0,
+    "documentation_files_corrected": 2,
+    "header_comment_corrected": 1,
+    "confirmed_unapproved_outer_dependencies": 0,
+    "confirmed_same_layer_dependencies": 0,
+    "verification": "passed; no production algorithm or ABI changed"
+  }
 }

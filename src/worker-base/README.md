@@ -12,15 +12,16 @@ The S21 audit records this shared boundary and the owner-local mechanisms that
 must not be merged: [worker-base audit](../../docs/etc/evidence/m0-t423-s21-worker-base-audit.md).
 The service still owns authentication; the worker owns its heap/backend state.
 
-T429 S6 publication.c/h owns the shared copied-state publisher: an opaque
-complete snapshot, one replaceable pending copy, dirty-event wakeup, one-shot
-maximum50Hz cap, quiesced final commit/drain, sticky failure and stop/join.
-It does not compare or suppress completed frames: source workers own the
-decision that a display event exists. Both production workers link it. NTVDM owns
-VGA extraction; NTVWM owns hidden Console acquisition and the atomic Unicode
-grid/geometry/cursor/text commit. No shared callback reads mutable guest state.
-Owners must not hold their transport lock across drain/join; they cancel
-callback transport before destruction. No original mirror algorithm moves.
+Copied-state publication now belongs to `src/compat/publication.c`
+and its B-owned interface. Worker-base does not own that implementation.
+NTVDM owns VGA extraction; NTVWM owns hidden Console acquisition. The two
+products compose the B publisher directly, without a frontend-base dependency.
+
+Task observation remains here because distinct ordered facts cross from the
+guest execution thread to a potentially blocking RPC publication thread.
+The product unregisters its producer before drain/stop; cancellation releases
+the outstanding RPC wait, and join precedes context destruction. This queue
+is not a same-thread decoupling mechanism.
 
 run16, NTSRV, NTCON and NTMON retain their own common two-kind handling paths.
 They do not link worker-base. Launcher request packing belongs to run16;

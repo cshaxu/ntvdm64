@@ -31,11 +31,13 @@ Return preparation freezes request admission until final service retirement.
 Stop joins service first, then channel; failed joins retain borrowed state.
 
 NTCON retains native presentation creation/destruction and its BaseSrv control
-binding. Its service wrapper has no duplicate request/pipe-fault pump. Future
-NTVDM callers can supply VM-specific adapters directly, without worker-base
-including or linking frontend-base. Actual multi-instance RPC addressing is S2,
-not inferred from the two-instance unit fixture.
+binding. Its service wrapper has no duplicate request/pipe-fault pump.
+NTVDM supplies VM-specific adapters directly, without worker-base including
+or linking frontend-base. Multi-instance RPC addressing is owned by common
+and the product adapters;
+the two-instance unit fixture alone does not establish real RPC acceptance.
 
-The video receiver owns frame validation, chunk assembly and staged/committed
-serials. It has no window or Console dependency. Adapters retain presentation
-and acknowledgement policy; accepting a frame is not proof of guest display.
+Frame validation, chunk assembly and staged/committed serials belong to
+`src/compat/console_video_buffer.c`, not frontend-base. Adapters retain
+presentation and acknowledgement policy; accepting a frame is not proof
+of guest display.
