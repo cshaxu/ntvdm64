@@ -18,7 +18,8 @@ BOOL ntvdm_command_initialize(void)
         mvdm_command_native_child_finish,
         mvdm_command_guest_state_clear_doswow,
         mvdm_command_guest_state_register_doswow,
-        cmdXformEnvironment
+        cmdXformEnvironment,
+        mvdm_guest_location_acquire_vm, mvdm_guest_location_release
     };
     return compat_command_install(&services);
 }

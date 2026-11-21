@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P1 completes two files; remaining36 require audit and implementation",
+  "status": "P2 completes three files; remaining35 include one pending mirror decision",
   "files": [
     {
       "id": "BC2F001",
@@ -397,7 +397,8 @@
     {
       "id": "BC2F003",
       "file": "src/compat/mvdm_command_guest_state.c",
-      "status": "not yet audited",
+      "status": "provider candidate compiled; mirror increase pending owner approval; not delivered",
+      "review": "directory-provider-decision.json",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -498,7 +499,8 @@
     {
       "id": "BC2F005",
       "file": "src/compat/mvdm_command_native_child.c",
-      "status": "not yet audited",
+      "status": "completed in verified P2 delivery",
+      "review": "p2-delivery.json",
       "evidence": [
         {
           "kind": "linked-relocations",

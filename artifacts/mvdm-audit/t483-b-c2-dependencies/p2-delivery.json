@@ -1,0 +1,59 @@
+{
+  "packet": "M0 T483 S19 P2",
+  "status": "verified P2 delivery",
+  "baseline": "4c87ac73e",
+  "file": "src/compat/mvdm_command_native_child.c",
+  "progress": {
+    "total": 38,
+    "completed": 3,
+    "remaining": 35
+  },
+  "dependencies": {
+    "B_C2": {
+      "records": 592,
+      "unique": 323
+    },
+    "B_C1": {
+      "records": 70,
+      "unique": 58
+    },
+    "C1_C2": {
+      "records": 7,
+      "unique": 5
+    }
+  },
+  "delta": {
+    "unique_B_C2_removed": 2,
+    "raw_B_C2_removed": 2,
+    "S19_unique_B_C2_removed": 14,
+    "non_error_mirror_points": 0,
+    "non_error_mirror_lines": 0
+  },
+  "providers": [
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c::mvdm_guest_location_acquire_vm",
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c::mvdm_guest_location_release"
+  ],
+  "ownership": "Existing B-owned COMMAND table holds two synchronous C2 function addresses. F only composes addresses. Snapshot, failure rollback, CR-to-NUL commit and lease release remain unchanged. No lease crosses child-thread launch. No second registry or queue.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "8ad22ae6-7083-45d0-8c24-aaf1110e1c44",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "capture_assertions": 165,
+    "request_preparation_assertions": 43,
+    "real_guest_COMMAND": "PASS modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+    "linked_audit": 0,
+    "VDMREDIR_map": "Reused unchanged S19 P1 VDMREDIR mapping; neither its sources nor its link input definitions changed. Current objects inspected by audit.",
+    "final_gates": "PASS 22 publication hashes, frontend ownership, documentation governance/links, 9 production boundary graphs, git diff --check"
+  },
+  "pending_directory": "directory-provider-decision.json: candidate +1 point/+22 lines, production unchanged, not counted as delivered",
+  "evidence_root": "build\\t483-s19-command-lease"
+}

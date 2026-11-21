@@ -193,15 +193,21 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,2 implemented and verified,36 remaining. P1 clears dbg_registers.c
-and mvdm_command_launch.c using B-owned typed callbacks with C2 providers.
-Unique direct caller/symbol/provider relationships337->325; relocation
-records606->594, private compiled headers144->135, C2 search roots74->65.
-C1/C2 retains its five original WOW APIs (seven relocation rows).
-Owner-approved CCPU mirror delta+2 points/+19 lines is registered as R2721/R2722.
-Cached full build, dual11 publication and focused native/real-guest checks
-passed; [P1 evidence](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p1-delivery.json).
+38 candidates,3 implemented and verified,35 remaining. P1 cleared dbg_registers.c
+and mvdm_command_launch.c; P2 clears mvdm_command_native_child.c using the existing
+B-owned COMMAND table with the original synchronous C2 lease providers.
+Unique direct B-to-C2 relationships337->323; relocation records606->592.
+B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
+WOW APIs (seven relocation rows), not callback-conversion candidates.
+Owner-approved P1 CCPU mirror delta+2 points/+19 lines is registered as R2721/R2722;
+P2 mirror delta0 points/0 lines. Cached full build, dual11 publication,165 capture
+assertions,43 preparation assertions and real COMMAND/EDIT/DOS return passed.
+[P1 evidence](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p1-delivery.json)
+and [P2 evidence](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p2-delivery.json)
+retain actual providers, lifetime and verification scope.
+[Directory provider candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/directory-provider-decision.json)
+compiled with product parameters; +1 point/+22 lines awaits owner approval.
+It is not a production change or a closed dependency.
 Original DOSX status-query inversion reproduced on the S18 control and P1;
 status-query semantics are not claimed passed. No original guest changed.
-P1 final governance passed; this delivery records the verified batch.
 S19 remains active; S20 not admitted.

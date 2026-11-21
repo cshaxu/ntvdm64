@@ -1,4 +1,5 @@
 #include "include/mvdm_command_native_child.h"
+#include "include/command_services.h"
 
 #include <string.h>
 
@@ -111,7 +112,7 @@ static DWORD copy_guest_command(const mvdm_guest_location *location, uint32_t ba
     if (location == NULL || bytes_out == NULL) return ERROR_INVALID_ADDRESS;
     probe = *location;
     for (index = 0u; index < MVDM_COMMAND_GUEST_TAIL_BYTES; ++index) {
-        if (!mvdm_guest_location_acquire_vm(&probe, base, 1u,
+        if (!compat_command_current_services()->acquire_vm(&probe, base, 1u,
                 GUEST_MEMORY_ACCESS_WRITE, &lease)) return ERROR_INVALID_ADDRESS;
         destination[index] = (char)lease.bytes[0];
         if (lease.bytes[0] == 0x0du) {
@@ -119,12 +120,12 @@ static DWORD copy_guest_command(const mvdm_guest_location *location, uint32_t ba
              * starts cmdExec32.  Preserve that observable guest write while
              * keeping the copied worker input self-contained. */
             lease.bytes[0] = 0u;
-            if (!mvdm_guest_location_release(&lease, 1)) return ERROR_INVALID_ADDRESS;
+            if (!compat_command_current_services()->release_location(&lease, 1)) return ERROR_INVALID_ADDRESS;
             destination[index] = '\0';
             *bytes_out = index + 1u;
             return ERROR_SUCCESS;
         }
-        if (!mvdm_guest_location_release(&lease, 0)) return ERROR_INVALID_ADDRESS;
+        if (!compat_command_current_services()->release_location(&lease, 0)) return ERROR_INVALID_ADDRESS;
         if (probe.offset == UINT16_MAX) return ERROR_INVALID_ADDRESS;
         ++probe.offset;
     }
@@ -143,10 +144,10 @@ static int copy_guest_environment(const mvdm_guest_location *location, uint32_t 
     if (location == NULL || bytes_out == NULL) return 0;
     probe = *location;
     for (index = 0u; index < MVDM_COMMAND_NATIVE_CHILD_ENVIRONMENT_BYTES; ++index) {
-        if (!mvdm_guest_location_acquire_vm(&probe, base, 1u,
+        if (!compat_command_current_services()->acquire_vm(&probe, base, 1u,
                 GUEST_MEMORY_ACCESS_READ, &lease)) return 0;
         destination[index] = (char)lease.bytes[0];
-        if (!mvdm_guest_location_release(&lease, 0)) return 0;
+        if (!compat_command_current_services()->release_location(&lease, 0)) return 0;
         if (destination[index] == '\0') {
             if (++zero_run == 2u) {
                 *bytes_out = index + 1u;
@@ -168,7 +169,7 @@ static int copy_standard_handles(const mvdm_guest_location *location, uint32_t b
     uint32_t index;
 
     if (location == NULL || handles_out == NULL ||
-        !mvdm_guest_location_acquire_vm(location, base,
+        !compat_command_current_services()->acquire_vm(location, base,
             MVDM_COMMAND_NATIVE_CHILD_STANDARD_BYTES,
             GUEST_MEMORY_ACCESS_READ, &lease)) return 0;
     for (index = 0u; index < 3u; ++index) {
@@ -178,7 +179,7 @@ static int copy_standard_handles(const mvdm_guest_location *location, uint32_t b
             ((uint32_t)lease.bytes[offset + 2u] << 16u) |
             ((uint32_t)lease.bytes[offset + 3u] << 24u));
     }
-    return mvdm_guest_location_release(&lease, 0);
+    return compat_command_current_services()->release_location(&lease, 0);
 }
 
 static int capture_locations(mvdm_command_native_child_state *state,

@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <windows.h>
+#include "guest_location.h"
 
 enum {
     MVDM_COMMAND_SERVICE_NONE = 0,
@@ -28,6 +29,10 @@ typedef struct compat_command_services {
     int (*register_doswow)(uint16_t, uint16_t);
     /* Original COMMAND provider; synchronous, output released by RTL. */
     BOOL (*transform_environment)(char *, struct _STRING *);
+    /* Capture borrows CCPU memory synchronously; no lease escapes the call. */
+    int (*acquire_vm)(const mvdm_guest_location *, uint32_t, uint32_t, uint32_t,
+        mvdm_guest_location_lease *);
+    int (*release_location)(mvdm_guest_location_lease *, int);
 } compat_command_services;
 
 BOOL compat_command_install(const compat_command_services *services);

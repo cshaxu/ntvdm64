@@ -1,0 +1,64 @@
+{
+  "packet": "M0 T483 S19",
+  "status": "candidate compiled; owner mirror-increase decision pending; production unchanged",
+  "file": "src/compat/mvdm_command_guest_state.c",
+  "provider": "src/mvdm-host/dos/dem/demgset.c::dem_command_directory_instance",
+  "ownership": {
+    "B": "Registration location, host-context lifecycle, SRW lock, session and memory epoch validation, zeroed outputs.",
+    "C2": "Original DOSWOWDATA/CDS layout, two existing ccpu_guest_memory_copy calls, far-pointer segment fallback and validated directory extent.",
+    "F": "Composition installs C2 address into existing immutable compat_command_services; no forwarding body."
+  },
+  "semantics": [
+    "No new queue, guest writes, layout copy or asynchronous work.",
+    "DOSWOWDATA copied first, current CDS range probed second; both failures return zero.",
+    "Zero far segment falls back to the registered segment as before.",
+    "B snapshots registration under shared lock; existing memory-copy owner validates epoch and holds its copy lifetime lock."
+  ],
+  "mirror": {
+    "before": {
+      "blocks": 3,
+      "added": 6,
+      "deleted": 1
+    },
+    "candidate": {
+      "blocks": 4,
+      "added": 28,
+      "deleted": 1
+    },
+    "delta_points": 1,
+    "delta_lines": 22,
+    "conditional_issues": [],
+    "original_sha256": "19c5999308a479cc9c0fcb30d23e8301d9a835408417aa965b85523dfb8a1653",
+    "production_sha256": "e428f480b4d134b29e2a76d3d712cf390d21b666c2b3e7c25dd964bb79cc3f6a",
+    "candidate_sha256": "eb5dc17180e4d01b7156c52203e111e78c27f49e7476fd4d4025694723d69b91"
+  },
+  "validation": {
+    "candidate_compile": "Real worker Ninja demgset.obj command, source/output redirected under build/t483-s19-directory; compile-v3.exit=0.",
+    "attempts": [
+      "First candidate duplicated curdir.h already included by DEM dosdef.h; removed that redundant include.",
+      "Second removal assumed CRLF; assertion prevented edit. Corrected to actual LF without production changes."
+    ],
+    "not_done": [
+      "Final production compile/link",
+      "Runtime directory and COMMAND tests",
+      "Publication",
+      "Commit/push"
+    ]
+  },
+  "required_tests": [
+    "Existing scalar-state fixture: live far pointer, session isolation, memory epoch end/restart, registration clear.",
+    "Extend/check first and second copy failure, zero segment fallback, null outputs.",
+    "Real guest COMMAND directory capture/admission and native child return."
+  ],
+  "next_file": {
+    "file": "src/compat/mvdm_command_native_child.c",
+    "direct_C2_symbols": [
+      "mvdm_guest_location_acquire_vm",
+      "mvdm_guest_location_release"
+    ],
+    "provider": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+    "conclusion": "Keep bounded capture and rollback in B; register existing synchronous C2 acquire/release providers. No mirror algorithm edit needed. Contract selection and implementation pending.",
+    "lifetime": "Acquire/read-or-edit/release completes on capture thread before asynchronous child launch; commit only command CR-to-NUL; copied request owns no lease.",
+    "tests": "Current command_capture covers 161 assertions and uses production composition with fixture memory providers; update binding assertions and retain failures and zero outstanding leases."
+  }
+}

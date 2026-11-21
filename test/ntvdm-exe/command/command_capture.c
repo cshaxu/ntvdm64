@@ -100,6 +100,16 @@ int main(void)
     CHECK(!compat_command_install(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
     CHECK(ntvdm_command_initialize() && ntvdm_command_initialize());
     CHECK(compat_command_current_services()->transform_environment == cmdXformEnvironment);
+    CHECK(compat_command_current_services()->acquire_vm == mvdm_guest_location_acquire_vm);
+    CHECK(compat_command_current_services()->release_location == mvdm_guest_location_release);
+    {
+        compat_command_services incomplete = *compat_command_current_services();
+        incomplete.acquire_vm = NULL;
+        CHECK(!compat_command_install(&incomplete) && GetLastError() == ERROR_INVALID_PARAMETER);
+        incomplete = *compat_command_current_services();
+        incomplete.release_location = NULL;
+        CHECK(!compat_command_install(&incomplete) && GetLastError() == ERROR_INVALID_PARAMETER);
+    }
     mvdm_command_guest_state_clear_doswow();
     CHECK(directory_clears == 1);
     CHECK(mvdm_command_guest_state_register_doswow(0x1234, 0x5678) &&
