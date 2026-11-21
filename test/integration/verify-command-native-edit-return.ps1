@@ -56,7 +56,8 @@ try {
        $report -notmatch 'exit=0x00000001' -or
        $report -notmatch 'scripted-console-input=delivered' -or
        $editor -notmatch 'File  Edit  View  Help' -or
-       $editor -notmatch 'Untitled-1.txt' -or
+       # Verify the editor's status bar, not an optional tab-title layout.
+       $editor -notmatch '\[CRLF\].*\[UTF-8\].*1:1' -or
        $text -notmatch '(?m)^\[\d+\] S40-NATIVE-RETURN-OK\r?$' -or
        $text -notmatch 'bytes total conventional memory'){
         throw "COMMAND -> native EDIT -> CMD -> DOS did not pass: $ReportPath"

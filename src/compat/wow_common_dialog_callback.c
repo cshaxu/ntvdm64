@@ -4,12 +4,28 @@
 #include "wow_user_object_bindings.h"
 #include "wow_window_words_binding.h"
 
-typedef UINT (WINAPI *common_dialog_callback)(HWND, UINT, WPARAM, LPARAM);
-UINT WINAPI WowOriginalDialogProc(HWND, UINT, WPARAM, LPARAM);
-UINT WINAPI WowOriginalPrintSetupDialogProc(HWND, UINT, WPARAM, LPARAM);
-UINT WINAPI WowOriginalFindReplaceDialogProc(HWND, UINT, WPARAM, LPARAM);
+#include "wow_common_dialog_callback.h"
 
-static UINT invoke_dialog(common_dialog_callback original, HWND window,
+static const wow_common_dialog_callbacks *callbacks;
+
+BOOL WINAPI wow_common_dialog_bind(const wow_common_dialog_callbacks *provider)
+{
+    const wow_common_dialog_callbacks *previous;
+    if (!provider || !provider->dialog || !provider->print_setup ||
+            !provider->find_replace) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&callbacks,
+        (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static UINT invoke_dialog(wow_common_dialog_proc original, HWND window,
     UINT message, WPARAM wp, LPARAM lp, BOOL resource_cleanup,
     wow_window_resource_destroy resource_owner)
 {
@@ -57,12 +73,12 @@ static UINT invoke_dialog(common_dialog_callback original, HWND window,
 
 UINT WINAPI WCD32DialogProc(HWND window, UINT message, WPARAM wp, LPARAM lp)
 {
-    return invoke_dialog(WowOriginalDialogProc, window, message, wp, lp, FALSE,NULL);
+    return invoke_dialog(callbacks->dialog, window, message, wp, lp, FALSE,NULL);
 }
 
 UINT WINAPI WCD32PrintSetupDialogProc(HWND window, UINT message, WPARAM wp, LPARAM lp)
 {
-    return invoke_dialog(WowOriginalPrintSetupDialogProc, window, message, wp, lp, FALSE,NULL);
+    return invoke_dialog(callbacks->print_setup, window, message, wp, lp, FALSE,NULL);
 }
 
 UINT WINAPI WCD32FindReplaceDialogProc(HWND window, UINT message, WPARAM wp, LPARAM lp)
@@ -70,6 +86,6 @@ UINT WINAPI WCD32FindReplaceDialogProc(HWND window, UINT message, WPARAM wp, LPA
     /* Original WM_DESTROY does not invoke the app hook. It owns resource and
      * host-context release and must run before guest GlobalFreeAll, not
      * merely before the later host W32FreeTask resource-record teardown. */
-    return invoke_dialog(WowOriginalFindReplaceDialogProc, window, message,
+    return invoke_dialog(callbacks->find_replace, window, message,
         wp, lp, message == WM_DESTROY,WCD32FindReplaceDialogProc);
 }

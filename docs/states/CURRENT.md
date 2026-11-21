@@ -120,59 +120,59 @@ status and its governance evidence are preserved in the S14 history above.
 
 ## S1 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S2 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S3 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S4 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S5 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S6 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S7 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S8 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S9 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S10 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S11 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S12 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S13 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S14 Closure Record
 
-Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+Closed; [evidence](../etc/evidence/m0-t483-s14-closure.md).
 
 ## S15 Closure Record
 
@@ -193,10 +193,10 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,23 resolved,15 remaining. P12 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
+38 candidates,24 resolved,14 remaining. P13 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
 preparation; P2 cleared COMMAND capture leases; P3 clears keyboard IRQ retirement,
 descriptor projection and effective-address consumers including their public header.
-Unique direct B-to-C2 relationships337->238; relocation records606->257.
+Unique direct B-to-C2 relationships337->235; relocation records606->254.
 Compiled private C2 header rows144->111; private C2 search roots74->11.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
@@ -219,20 +219,12 @@ compiled; +1 point/+97 lines awaits approval. No production change.
 [WOW page-domain review](../../artifacts/mvdm-audit/t483-b-c2-dependencies/wow-page-domain-provider-review.json)
 identifies24 actual C2 providers; P9 implements their callbacks and preserves
 the existing reclamation failure-injection contract.
-[P4](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p4-delivery.json) removes
-the printer unit's unused C2 search roots; its C1 ABI stays an S20 obligation.
-[P5](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p5-delivery.json) keeps
-C2 pipe requests private and binds three existing CCPU memory operations through
-B callbacks. Native async27, real guest async read/write, CCPU, DPMI delivery
-and COMMAND return passed; mirror delta0 points/+3 lines under standing approval.
-[P6](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p6-delivery.json) binds
-mouse ICA/IRQ callbacks per bridge before activation; reset preserves binding.
-Queue, 15 lifecycle cases, default Console reset, three real DOS mouse cases
-and COMMAND return passed. Mirror delta0 points/0 lines.
-[P7](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p7-delivery.json) binds
-the original host close callback before host entry; replacement is rejected.
-Notification3193 assertions, real CCPU halt/reset and COMMAND return passed.
-Mirror delta0 points/0 lines; cumulative S19 +2 points/+22 lines.
+[P4](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p4-delivery.json),
+[P5](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p5-delivery.json),
+[P6](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p6-delivery.json), and
+[P7](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p7-delivery.json)
+record verified printer, async pipe, mouse and termination boundaries.
+Cumulative S19 mirror delta+2 points/+22 lines; no original guest changes.
 [P9](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p9-delivery.json) clears
 24 page-domain C2 relations through the existing CPU callback table, with no
 mirror change. Real CCPU page-domain/reclaim, exact owned reads, actual Win16
@@ -259,5 +251,10 @@ The native test peer waits only for a bounded identified foreign lock; no
 product retry or guest modification. B-to-C2 is238. Mirror delta0 points/0 lines.
 [Remaining WOW provider review](../../artifacts/mvdm-audit/t483-b-c2-dependencies/wow-remaining-provider-review.json)
 records DIR28-38:39 direct C2 relationships plus private-layout obligations.
-This is source/provider evidence only, with no additional completed files.
+DIR28 is now delivered in P13; DIR29-38 remain source/provider evidence only.
+[P13 dialog delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p13-delivery.json)
+clears three direct C2 calls through immutable same-image callbacks bound before
+original DLL attach. Nested/resource guards, actual loader, real Win16 common
+and ordinary dialogs, and COMMAND return pass. Dual11 package
+42cfa459-5dba-46cc-aaf8-2be639ec98ce; mirror delta0 points/0 lines.
 S19 remains active; S20 not admitted.

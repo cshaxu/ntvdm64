@@ -3,6 +3,7 @@ param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$BuildRoot,
+    [switch]$CommonDialog,
     [string]$Nasm='nasm.exe'
 )
 # Assemble only the independently authored probe.  The immutable guest image
@@ -23,11 +24,13 @@ foreach($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_WOW
 try {
     $package=(Resolve-Path -LiteralPath $PackageRoot).Path
     $observer=(Resolve-Path -LiteralPath $Observer).Path
-    $source=Join-Path $PSScriptRoot '../observation/win16_dialog_probe.asm'
+    $probeName=if($CommonDialog){'CDLPROBE'}else{'DLGPROBE'}
+    $sourceName=if($CommonDialog){'win16_common_dialog_probe.asm'}else{'win16_dialog_probe.asm'}
+    $source=Join-Path $PSScriptRoot ('../observation/'+$sourceName)
     $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
-    & $assembler -f bin -o "$root\DLGPROBE.EXE" -l "$root\probe.lst" $source *> "$root\assemble.txt"
+    & $assembler -f bin -o "$root\$probeName.EXE" -l "$root\probe.lst" -d COMMON_DIALOG_ROUNDS=2 $source *> "$root\assemble.txt"
     if($LASTEXITCODE){throw 'Independent dialog probe assembly failed'}
-    Get-FileHash $source,"$root\DLGPROBE.EXE",$observer,
+    Get-FileHash $source,"$root\$probeName.EXE",$observer,
         "$package\product-system32-manifest.json" |
         Export-Csv -NoTypeInformation "$root\inputs.csv"
 
@@ -36,7 +39,7 @@ try {
     # Older valid package snapshots predate the test-input directory.  The
     # probe is an owned disposable test input, never a guest replacement.
     $null=New-Item -ItemType Directory -Force -Path "$runtime\tests"
-    Copy-Item "$root\DLGPROBE.EXE" "$runtime\tests\DLGPROBE.EXE"
+    Copy-Item "$root\$probeName.EXE" "$runtime\tests\$probeName.EXE"
     $env:TEMP=$runtime;$env:TMP=$runtime
     $env:PATH="$runtime\system32;"+$env:SystemRoot+'\System32'
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
@@ -45,7 +48,7 @@ try {
     $start=[Diagnostics.ProcessStartInfo]::new($observer)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
     foreach($argument in @("$runtime\system32\run16.exe","$runtime\tests",
-            "$root\observer.txt",'--wait',"$runtime\tests\DLGPROBE.EXE",
+            "$root\observer.txt",'--wait',"$runtime\tests\$probeName.EXE",
             '--observation-timeout-ms','30000')){$start.ArgumentList.Add($argument)}
     $process=[Diagnostics.Process]::Start($start);$null=$process.Handle
     @{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');
@@ -58,10 +61,36 @@ try {
     if($report -notmatch 'result=exited' -or $report -notmatch 'exit=0x00000000'){
         throw 'Dialog guest/launcher did not complete normally'
     }
-    $guest="$runtime\tests\DLGPROBE.BIN"
+    $guest="$runtime\tests\$probeName.BIN"
     if(!(Test-Path -LiteralPath $guest)){throw 'Dialog probe did not emit its report'}
     Copy-Item $guest "$root\guest-report.bin"
     $bytes=[IO.File]::ReadAllBytes("$root\guest-report.bin")
+    if($CommonDialog){
+        if($bytes.Length -ne 120){throw 'Unexpected common-dialog report size'}
+        $names=@('phase','errors','created','closed','hooks','leaving','task',
+            'dialog','destroyResult','isWindow')
+        $records=@()
+        for($offset=0;$offset -lt $bytes.Length;$offset+=24){
+            if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne 'CDL2'){
+                throw 'Bad common-dialog report signature'
+            }
+            $row=[ordered]@{}
+            for($i=0;$i -lt $names.Count;$i++){
+                $row[$names[$i]]=[BitConverter]::ToUInt16($bytes,$offset+4+2*$i)
+            }
+            $records+=[pscustomobject]$row
+        }
+        $records|ConvertTo-Json|Set-Content "$root\guest-report.json"
+        $last=$records[-1]
+        if(($records.phase -join ',') -ne '0,1,1,1,2' -or
+            @($records|Where-Object errors -ne 0).Count -or
+            $last.created -ne 3 -or $last.closed -ne 2 -or $last.hooks -ne 3 -or
+            $last.leaving -ne 1 -or !$last.task -or !$last.destroyResult -or
+            $last.isWindow -ne 0 -or
+            @($records|Where-Object task -ne $last.task).Count){
+            throw 'Common-dialog creation/destroy/resource-exit contract incomplete'
+        }
+    } else {
     if($bytes.Length -ne 336){throw 'Unexpected dialog report size'}
     $names=@('phase','errors','initialized','terminated','text','shared','local',
         'modal','failed','killed','leaving','task','ds1','ds2','deferred',
@@ -91,6 +120,7 @@ try {
             @($records|Where-Object task -ne $last.task).Count){
         throw 'Original dialog/control/cancel/EDIT/task contract incomplete'
     }
+    }
     $trace=Get-Content "$root\lifetime.txt" -Raw
     $task8='{0:X8}' -f [int]$last.task
     if([regex]::Matches($trace,'(?m)^\d+ TaskRetirement .*task='+$task8+
@@ -102,7 +132,7 @@ try {
             throw "Input changed: $($input.Path)"
         }
     }
-    'WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1'|
+    $(if($CommonDialog){'WOW_COMMON_DIALOG_GUEST_OK created=3 destroyed=2 hooks=3 task_exit=1'}else{'WOW_DIALOG_GUEST_OK phases=8 init=6 modal=2 rollback=1 keyboard=2 retirement=1'})|
         Set-Content "$root\result.txt"
 } catch {
     $_|Out-String|Set-Content "$root\failure.txt"

@@ -1,7 +1,7 @@
 {
   "file": "src/compat/wow_common_dialog_callback.c",
   "id": "BC2F028",
-  "status": "source/provider review only; no production changes or verified closure",
+  "status": "implemented and verified in P13",
   "direct_relationships": 3,
   "providers": [
     {
@@ -25,5 +25,5 @@
     "Do not bind in first callback or add TLS/current-task selector.",
     "Do not use NTVDM CPU provider table for WOW32 module-local callback composition."
   ],
-  "remaining_evidence": "Implement after pending P12 runtime gate is resolved; verify real modal dialog/resource cleanup and exact pointer/lifetime binding. C1 ABI/header dependencies remain S20."
+  "remaining_evidence": "No remaining file-local C2 direct relationship; C1 declaration/header ownership remains S20."
 }

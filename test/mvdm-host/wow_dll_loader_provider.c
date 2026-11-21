@@ -1,11 +1,13 @@
 /* Controlled provider linked to the real bridge for a Windows loader test. */
 #include <windows.h>
+#include "wow_dll_dialog_provider.h"
 
 static HANDLE bitmap_event, registry_event;
 
 static unsigned char __stdcall provider_result(unsigned long reason)
 {
     char value[2];
+    if (reason == DLL_PROCESS_ATTACH && dialog_bindings != 1) return FALSE;
     return reason != DLL_PROCESS_ATTACH ||
         (GetEnvironmentVariableA("WOW_BRIDGE_TEST_ATTACH", value, sizeof(value)) == 1 && value[0] == '1');
 }

@@ -5,6 +5,7 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_window_words_binding.h"
 #include <stdio.h>
+#include "wow_common_dialog_callback.h"
 
 UINT WINAPI WCD32DialogProc(HWND, UINT, WPARAM, LPARAM);
 UINT WINAPI WCD32PrintSetupDialogProc(HWND, UINT, WPARAM, LPARAM);
@@ -136,8 +137,24 @@ __declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *where, 
     RaiseException(0xe0447034, 0, 0, NULL);
     ExitProcess(99);
 }
+static const wow_common_dialog_callbacks providers = {
+    WowOriginalDialogProc, WowOriginalPrintSetupDialogProc,
+    WowOriginalFindReplaceDialogProc
+};
+
 int __cdecl main(void)
 {
+    static const wow_common_dialog_callbacks invalid = {0};
+    static const wow_common_dialog_callbacks replacement = {
+        WowOriginalDialogProc, WowOriginalPrintSetupDialogProc,
+        WowOriginalFindReplaceDialogProc
+    };
+    CHECK(!wow_common_dialog_bind(NULL));
+    CHECK(!wow_common_dialog_bind(&invalid));
+    CHECK(wow_common_dialog_bind(&providers));
+    CHECK(wow_common_dialog_bind(&providers));
+    CHECK(!wow_common_dialog_bind(&replacement));
+    CHECK(GetLastError() == ERROR_ALREADY_INITIALIZED);
     BOOL caught = FALSE;
     unsigned failure;
     {

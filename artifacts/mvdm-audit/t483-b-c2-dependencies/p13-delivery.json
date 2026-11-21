@@ -1,0 +1,48 @@
+{
+  "packet": "M0 T483 S19 P13",
+  "baseline": "1eb1a6d0c",
+  "status": "verified delivery",
+  "file": "src/compat/wow_common_dialog_callback.c",
+  "id": "BC2F028",
+  "ownership": "B owns typed dialog callbacks; generated WOW32 composition binds actual three C2 procedures before W32DllInitialize attach. Static immutable table lives through detach. B retains nested task/borrow scopes and WCD32FindReplaceDialogProc resource-destroy ownership. No queue or algorithm movement.",
+  "dependencies": {
+    "file_C2_before": 3,
+    "file_C2_after": 0,
+    "B_C2_unique_before": 238,
+    "B_C2_unique_after": 235,
+    "B_C2_raw_after": 254,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 24,
+    "total": 38,
+    "remaining": 14
+  },
+  "mirror_non_error_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "cumulative_S19_mirror_delta": {
+    "points": 2,
+    "lines": 22
+  },
+  "package": "42cfa459-5dba-46cc-aaf8-2be639ec98ce",
+  "build": "cached full x86/x64/reference exit0",
+  "publication": "11 images assets/release and O:/winnt/system32,22 hashes checked",
+  "verification": [
+    "common-dialog nested/exception/rejection/resource retirement and immutable binding fixture passed",
+    "actual generated entry BOOLEAN and Windows loader eight rounds passed",
+    "real Win16 common-dialog probe created3 destroyed2 hooks3 task-exit1 passed",
+    "ordinary Win16 dialog eight phases passed",
+    "real COMMAND/EDIT/CMD/MEM return passed"
+  ],
+  "test_changes": "Reuse existing dialog guest runner with common-dialog mode. EDIT witness checks menu and status bar instead of optional filename tab; actual exit/input/echo/MEM assertions remain. No original guest modified.",
+  "failed_attempts": [
+    "Combined Mine sibling test failed before sibling launch at board-ready timeout; same P12 control fails identically. Does not prove gameplay acceptance. Direct same common-dialog probe used for this boundary.",
+    "COMMAND initially failed optional Untitled tab assertion while all input/return operations succeeded; buffer-only enlargement did not change viewport. Removed enlargement experiment; check actual editor status bar instead.",
+    "Ordinary dialog initial launch blocked by concurrently owned COMMAND broker; rerun after COMMAND cleanup passed."
+  ],
+  "coverage": "Live relocation audit includes cached VDMREDIR map with matching raw DLL SHA0b43bdffc1d25b10f7b88e2056ea3d5c268b2bc39a2cc21a41ec1d7e95c69e6a. Generated DLL entry classified as composition; source explicitly supplies C2 addresses. Assembler/generated attribution gaps remain listed, not zero claims.",
+  "evidence_root": "build/t483-s19-dialog"
+}

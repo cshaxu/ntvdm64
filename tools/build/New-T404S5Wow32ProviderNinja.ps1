@@ -353,12 +353,20 @@ foreach ($raw in @(
 $dllEntryBridgeSource = Join-Path $build 'wow32-dll-entry-bridge.c'
 $dllEntryBridgeLines = @(
     '/* Generated build-only CRT-to-original DLLENTRY bridge. */',
+    '#include "wow_common_dialog_callback.h"',
+    'UINT WINAPI WowOriginalDialogProc(HWND, UINT, WPARAM, LPARAM);',
+    'UINT WINAPI WowOriginalPrintSetupDialogProc(HWND, UINT, WPARAM, LPARAM);',
+    'UINT WINAPI WowOriginalFindReplaceDialogProc(HWND, UINT, WPARAM, LPARAM);',
+    'static const wow_common_dialog_callbacks dialog_callbacks = {',
+    '    WowOriginalDialogProc, WowOriginalPrintSetupDialogProc, WowOriginalFindReplaceDialogProc };',
     'extern unsigned char __stdcall W32DllInitialize(void *, unsigned long, void *);',
     'extern void __stdcall wow_bitmap_bindings_shutdown(void);',
     'extern void __stdcall wow_registry_binding_shutdown(void);',
     'int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)',
     '{',
-    '    int result = W32DllInitialize(instance, reason, reserved);',
+    '    int result;',
+    '    if (reason == 1 && !wow_common_dialog_bind(&dialog_callbacks)) return 0;',
+    '    result = W32DllInitialize(instance, reason, reserved);',
     '    if (reason == 0 && reserved == 0) { wow_registry_binding_shutdown(); wow_bitmap_bindings_shutdown(); }',
     '    return result;',
     '}'

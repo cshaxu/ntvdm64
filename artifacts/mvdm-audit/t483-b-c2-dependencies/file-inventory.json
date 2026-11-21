@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P12 completes twenty-three files; remaining15 include four pending mirror decisions",
+  "status": "P13 completes twenty-four files; remaining14 include four pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -7651,7 +7651,7 @@
     {
       "id": "BC2F028",
       "file": "src/compat/wow_common_dialog_callback.c",
-      "status": "not yet audited",
+      "status": "completed in verified P13 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7683,7 +7683,8 @@
           "evidence": "_WowOriginalPrintSetupDialogProc@16",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "delivery": "p13-delivery.json"
     },
     {
       "id": "BC2F029",
@@ -9418,11 +9419,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 23,
-    "remaining": 15,
+    "completed": 24,
+    "remaining": 14,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 238,
+    "direct_C2_unique_after": 235,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 257
+    "direct_C2_records_after": 254
   }
 }
