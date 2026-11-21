@@ -12,6 +12,7 @@
 #include <conapi.h>
 #include <nt_graph.h>
 #include <nt_uis.h>
+#include <host_rrr.h>
 #include "mvdm_softpc_text_video.h"
 #include <stdio.h>
 #include <string.h>
@@ -26,11 +27,11 @@ static byte planes[4*65536];
 SCREEN_DESCRIPTION sc;
 UPDATE_ALG update_alg;
 BOOL ConsoleInitialised,ConsoleNoUpdates;
-static BOOL requested,async_active;
+static BOOL requested_route,async_active;
 static unsigned painted,published,refreshed,shaped,stream_disabled;
 static unsigned palette_resolved;
 void set_the_vlt(void){++palette_resolved;}
-BOOL NtvdmConsoleTextRequested(BOOL *value){*value=requested;return TRUE;}
+BOOL NtvdmConsoleTextRequested(BOOL *value){*value=requested_route;return TRUE;}
 BOOL ntvdm_console_video_async(BOOL value){async_active=value;return TRUE;}
 void disable_stream_io(void){++stream_disabled;sc.ScreenState=WINDOWED;}
 void nt_mark_screen_refresh(void){++refreshed;}
@@ -41,11 +42,23 @@ static void paint(void){++painted;}
 static void publish(void){++published;}
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL line %d\n",__LINE__); return 1; } } while (0)
 
+/* Actual C2 operation bodies; only original state/storage and host calls above
+ * are substituted. No second copied-font or route algorithm. */
+#include "text-video-owner.inc"
+
 int main(void)
 {
     static const unsigned offsets[8]={0,0x4000,0x8000,0xc000,0x2000,0x6000,0xa000,0xe000};
     mvdm_softpc_text_video copy,previous;
     unsigned bank,glyph,line,height;
+    mvdm_text_video_provider different=mvdm_original_text_video_provider;
+    CHECK(!mvdm_softpc_text_video_bind(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
+    different.pause=NULL;
+    CHECK(!mvdm_softpc_text_video_bind(&different) && GetLastError()==ERROR_INVALID_PARAMETER);
+    CHECK(mvdm_softpc_text_video_bind(&mvdm_original_text_video_provider));
+    CHECK(mvdm_softpc_text_video_bind(&mvdm_original_text_video_provider));
+    different=mvdm_original_text_video_provider;
+    CHECK(!mvdm_softpc_text_video_bind(&different) && GetLastError()==ERROR_ALREADY_INITIALIZED);
     CHECK(!mvdm_softpc_text_video_copy(NULL));
     CHECK(!mvdm_softpc_text_video_copy(&copy));
     EGA_planes=planes;now_width=80;now_height=50;
@@ -89,7 +102,7 @@ int main(void)
     CHECK(palette_resolved==1);PCDisplay.mode_change_required=0;
     sc.ModeType=GRAPHICS;mvdm_softpc_text_video_refresh_palette();
     CHECK(palette_resolved==1);sc.ModeType=TEXT;
-    update_alg.calc_update=paint;requested=TRUE;
+    update_alg.calc_update=paint;requested_route=TRUE;
     CHECK(mvdm_softpc_text_video_sync_route() && async_active);
     CHECK(sc.ScreenState==FULLSCREEN && refreshed==1 && shaped==1);
     CHECK(mvdm_softpc_text_video_local());
@@ -102,11 +115,11 @@ int main(void)
     CHECK(mvdm_softpc_text_video_sync_route() && async_active);
     async_active=FALSE;mvdm_softpc_text_video_flush(publish);
     CHECK(async_active && painted==2 && published==2);
-    requested=FALSE;CHECK(mvdm_softpc_text_video_sync_route() && !async_active);
+    requested_route=FALSE;CHECK(mvdm_softpc_text_video_sync_route() && !async_active);
     CHECK(sc.ScreenState==WINDOWED && !mvdm_softpc_text_video_local());
     sc.ModeType=GRAPHICS;CHECK(mvdm_softpc_text_video_sync_route() && async_active);
     mvdm_softpc_text_video_flush(publish);CHECK(painted==2);
-    sc.ModeType=TEXT;sc.ScreenState=STREAM_IO;requested=TRUE;
+    sc.ModeType=TEXT;sc.ScreenState=STREAM_IO;requested_route=TRUE;
     CHECK(mvdm_softpc_text_video_sync_route() && stream_disabled==1 && async_active);
     puts("PASS production copy/fonts/split cursor and local flush, mode-settle, block/resume, Console/Window/graphics routes");
     return 0;

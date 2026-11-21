@@ -34,7 +34,6 @@ C1_LAYOUT_ADAPTERS = {"mvdm_monitor_printer.c", "mvdm_vdm_tib.c"}
 
 ORIGINAL_LAYOUT_ADAPTERS = {
     "base_process.c",
-    "mvdm_softpc_text_video.c",
     'wow_user_private_access.c',
     'wow_common_dialog_calls.c',
 
@@ -134,11 +133,8 @@ def allowed_roots(owner, source=""):
     return roots
 
 
-# Only the remaining text-video adapter can use these private layout outputs.
+# No A/B unit may consume generated C-private layout declarations.
 def generated_inputs(directory, owner, source):
-    if owner == "compat" and source == "mvdm_softpc_text_video.c":
-        return {directory / "generated" / f"text_video_{name}.h"
-                for name in ("gfx", "gvi", "egagraph", "nt_graph")}
     return set()
 
 

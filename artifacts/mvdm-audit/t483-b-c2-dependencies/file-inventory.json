@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P23 completes thirty-two files; six remain; small mirror candidates owner approved",
+  "status": "P24 completes thirty-three files; five remain",
   "files": [
     {
       "id": "BC2F001",
@@ -4072,7 +4072,7 @@
     {
       "id": "BC2F015",
       "file": "src/compat/mvdm_softpc_text_video.c",
-      "status": "owner-approved compiled candidate; production implementation pending",
+      "status": "completed in verified P24 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -4324,7 +4324,8 @@
           "evidence": "/I",
           "product": "ntvdm.exe"
         }
-      ]
+      ],
+      "delivery": "p24-delivery.json"
     },
     {
       "id": "BC2F016",
@@ -9429,11 +9430,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 32,
-    "remaining": 6,
+    "completed": 33,
+    "remaining": 5,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 25,
+    "direct_C2_unique_after": 15,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 28
+    "direct_C2_records_after": 17
   }
 }

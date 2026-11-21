@@ -1,0 +1,89 @@
+{
+  "packet": "M0 T483 S19 P24",
+  "baseline": "46d944b6d",
+  "status": "verified delivery",
+  "id": "BC2F015",
+  "file": "src/compat/mvdm_softpc_text_video.c",
+  "ownership": "Six existing video operations move to C2 nt_graph. B owns immutable synchronous interface and copied snapshots; F binds before standalone and bounded entries. Original state, locks and update order retained. No queue or second state machine.",
+  "direct_relationships": {
+    "file_before": 10,
+    "file_after": 0,
+    "B_C2_unique": 15,
+    "B_C2_raw": 17,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 33,
+    "total": 38,
+    "remaining": 5
+  },
+  "compiled_headers": {
+    "B_C2": 36,
+    "B_C1": 599
+  },
+  "private_search_roots": {
+    "B_C2": 0,
+    "B_C1": 25
+  },
+  "mirror": {
+    "files": [
+      {
+        "file": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+        "before": {
+          "points": 16,
+          "lines": 53
+        },
+        "after": {
+          "points": 17,
+          "lines": 150
+        },
+        "delta": {
+          "points": 1,
+          "lines": 97
+        }
+      }
+    ],
+    "delta": {
+      "points": 1,
+      "lines": 97
+    },
+    "cumulative_S19": {
+      "points": 9,
+      "lines": 447
+    },
+    "approval": "Owner standing approval +1point and fewer than100lines",
+    "error_line_proof": "Original file prefix byte-exact; appended owner bodies; paired exclusion parser zero issues. DIV907/R2731."
+  },
+  "source_proof": {
+    "original_prefix_byte_exact": true,
+    "previous_prefix_sha256": "2695137be7e843898ed5db3b25ad6c05aab8059fc77cb4119fe9a3bd9de8b8ce",
+    "six_bodies_byte_equal_after_newline_normalization": {
+      "copy": "86df9474e8c2b6e80aa4de46fa9469ce54004b277fe52be43bcb8a35b6d25840",
+      "refresh_palette": "d5cc14b00bb16ad4a3b38ce78ac7bd75f1b174a9776e0333b6d9b128598c74ee",
+      "sync_route": "45f18a4924298628e7fd8a59708ea8a3362b60c651ac9b791e3a5caa1d1ac934",
+      "local": "f9c3b7444299b967a6a9c7402b5eb651728caf36165d88b564d8139e227f6e81",
+      "flush": "53cc4a6e793f48123d53d870a3fa42b5f059dee5149a23ae544a92b264411ab7",
+      "pause": "9811fe36753e5f2557bc0aa0c16bc02fd3043bc03c34aac3914a722e69ec4dbb"
+    }
+  },
+  "package": "c1014fff-997c-4ad6-9562-100bdd1b37ef",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hashes checked",
+  "tests": [
+    "Actual C2 six bodies: immutable binding rejection/idempotence, font banks/heights, split cursor, palette, route/mode transitions, block/resume passed",
+    "Production text packer passed",
+    "Real CCPU high-linear/page/SAS contract passed",
+    "Real DOS text mouse CURSOR-TEXT-PASS",
+    "Real COMMAND modern EDIT CtrlQ, CMD echo, DOS MEM and launcher completion passed"
+  ],
+  "limitations": [
+    "No new Win3.1/Win95 matrix acceptance claimed",
+    "Generated/assembly audit gaps remain explicit; runtime callbacks are retained, not claimed absent"
+  ],
+  "failed_attempts": [
+    "Extracted actual owner fixture required host_rrr definitions; fixture identifier renamed to avoid shadow warning; final fixture passes"
+  ],
+  "evidence_root": "build/t483-s19-text-video-delivery",
+  "gates": "Final 22 publication hashes, nine product graph boundary checks, negative controls, frontend ownership, governance and relative links passed"
+}

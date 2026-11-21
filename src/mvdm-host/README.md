@@ -3544,3 +3544,9 @@ saturation. `nt_event.c` handles the returned input error synchronously using
 its existing DisplayErrorTerm policy. No new queue or state; original locking
 and CPU ownership retained. Owner-approved combined increment+1 non-error
 point/+41 lines; existing #error/#line preserved. See P23 delivery evidence.
+
+MVDM-HOST-DIV-907: `softpc.new/host/src/nt_graph.c` owns the six existing
+text-video state operations formerly in B. Immutable synchronous callbacks
+return copied snapshots; original state and update ordering stay in C2.
+Owner-approved non-error increment+1point/+97lines; original prefix bytes
+and #error/#line unchanged. See P24 delivery evidence.

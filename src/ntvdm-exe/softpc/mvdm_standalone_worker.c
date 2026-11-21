@@ -3,6 +3,8 @@
 #include "compat/include/thread_lifecycle.h"
 #include "compat/include/mvdm_softpc_worker_exit.h"
 #include "compat/include/mvdm_softpc_termination.h"
+#include "compat/include/mvdm_softpc_text_video.h"
+extern const mvdm_text_video_provider mvdm_original_text_video_provider;
 extern void host_applClose(void);
 extern void (*BIOS[])(void);
 #include "ntvdm-exe/command/include/command_launch.h"
@@ -148,7 +150,8 @@ static DWORD mvdm_standalone_worker_begin(void)
     BOOL character_io=TRUE;
 
     if (worker_started) return ERROR_ALREADY_EXISTS;
-    if (!mvdm_softpc_termination_bind(host_applClose) ||
+    if (!mvdm_softpc_text_video_bind(&mvdm_original_text_video_provider) ||
+            !mvdm_softpc_termination_bind(host_applClose) ||
             !opennt_thread_initialize() || !ntvdm_command_initialize() ||
             !ntvdm_dpmi_initialize() || !ntvdm_vm_services_initialize(&BIOS[MVDM_VM_DEVICE_BOP])) return GetLastError();
     session_initialize(&worker_session,1u);

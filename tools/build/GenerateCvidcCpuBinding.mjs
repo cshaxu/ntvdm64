@@ -69,44 +69,11 @@ const sasVector = sasVectorSource.match(/^[\s\S]*?extern\s+struct\s+SasVector\s+
 if (!sasVector || /^\s*#\s*(if|ifdef|ifndef|elif)\b/m.test(sasVector)) throw new Error('Original SAS vector prefix changed');
 const providersText = '/* Original selected CPU/SAS declarations; generated, do not edit. */\n' + sasEnum + '\n' + sasVector + '\n' + cpuDeclarations.join('\n') + '\n';
 writeChanged(providersOutput, providersText);
-// Text presentation consumes the original selected V7 declarations. Emit
-// source-derived subsets so the authored adapter needs no device profile.
-for (const [name, input] of [
-  ['gvi', path.join(sourceRoot, 'inc', 'gvi.h')],
-  ['egagraph', path.join(sourceRoot, 'inc', 'egagraph.h')],
-  ['nt_graph', path.join(sourceRoot, '..', 'host', 'inc', 'nt_graph.h')],
-]) {
-  const original = fs.readFileSync(input, 'utf8');
-  let count = 0;
-  const selected = original.replace(/^[ \t]*#ifdef[ \t]+V7VGA[ \t]*\r?\n([\s\S]*?)^[ \t]*#endif[^\r\n]*(?:\r?\n|$)/gm, (_, body) => {
-    if (/^[ \t]*#\s*(?:if|ifdef|ifndef|elif)\b/m.test(body)) throw new Error(`Nested V7 condition in ${input}`);
-    ++count;
-    return body.split(/^[ \t]*#else[^\r\n]*\r?\n/m)[0];
-  });
-  if (count !== 2) throw new Error(`Unexpected V7 condition count in ${input}: ${count}`);
-  const destination = path.join(path.dirname(output), `text_video_${name}.h`);
-  writeChanged(destination, selected);
-}
-const graphics = fs.readFileSync(path.join(sourceRoot, 'inc', 'gfx_upd.h'), 'utf8');
-const graphicsPrefix = graphics.match(/^[\s\S]*?}\s*UPDATE_ALG\s*;/)?.[0];
 const ports = fs.readFileSync(path.join(sourceRoot, 'inc', 'egaports.h'), 'utf8');
 const selectedPlane = ports.match(/#ifdef[ \t]+V7VGA[\s\S]*?^(#define[ \t]+EGA_PLANE_SIZE[ \t]+[^\r\n]+)/m)?.[1];
 if (!selectedPlane) throw new Error('Original V7 plane size changed');
 const planeOutput = path.join(path.dirname(output), 'v7_selected_plane.h');
 writeChanged(planeOutput, selectedPlane + '\n');
-const selectedPorts = [
-  /^\s*extern\s+byte\s*\*EGA_planes\s*;/gm,
-  /^\s*#define\s+FONT_BASE_ADDR\s+[^\r\n]+/gm,
-  /^\s*#define\s+FONT_MAX_HEIGHT\s+[^\r\n]+/gm,
-].map(pattern => {
-  const matches = [...ports.matchAll(pattern)];
-  if (matches.length !== 1) throw new Error('Original V7 font interface changed');
-  return matches[0][0].trim();
-});
-if (!graphicsPrefix) throw new Error('Original VGA update interface changed');
-const textGraphicsOutput = path.join(path.dirname(output), 'text_video_gfx.h');
-const textGraphics = graphicsPrefix + '\nextern UPDATE_ALG update_alg;\n' + selectedPorts.join('\n') + '\n';
-writeChanged(textGraphicsOutput, textGraphics);
 const casesOutput = path.join(path.dirname(output), 'cvidc_accessor_cases.inc');
 const casesText = '/* Test offsets extracted from original generated setters, not vglob field layout. */\n' + videoCases.join('\n') + '\n';
 writeChanged(casesOutput, casesText);

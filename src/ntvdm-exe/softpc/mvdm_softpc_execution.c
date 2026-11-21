@@ -1,6 +1,8 @@
 #include "mvdm_softpc_execution.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "compat/include/mvdm_softpc_termination.h"
+#include "compat/include/mvdm_softpc_text_video.h"
+extern const mvdm_text_video_provider mvdm_original_text_video_provider;
 
 /* Original SoftPC host spelling; its body remains in mvdm-host. */
 extern void host_start_cpu(void);
@@ -23,7 +25,8 @@ int mvdm_softpc_execution_run_until_return(session *owner)
         session_machine_backend(owner) != SESSION_MACHINE_BACKEND_SOFTPC)
         return 0;
 
-    if (!mvdm_softpc_termination_bind(host_applClose)) return 0;
+    if (!mvdm_softpc_text_video_bind(&mvdm_original_text_video_provider) ||
+            !mvdm_softpc_termination_bind(host_applClose)) return 0;
 
     if (session_thread_current() != owner) {
         if (!session_thread_bind_owned(owner,

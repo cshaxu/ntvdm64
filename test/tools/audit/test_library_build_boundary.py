@@ -33,6 +33,13 @@ class BoundaryTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 self.check_unit("mvdm_softpc_wow_page_domain.c", header)
 
+    def test_text_video_callback_has_no_private_layout_exception(self):
+        self.check_unit("mvdm_softpc_text_video.c", "src/compat/include/mvdm_softpc_text_video.h")
+        with self.assertRaises(ValueError):
+            self.check_unit("mvdm_softpc_text_video.c", "src/mvdm-host/softpc.new/host/inc/nt_graph.h")
+        with self.assertRaises(ValueError):
+            self.check_unit("mvdm_softpc_text_video.c", "build/.ninja/msvc-x86-release/worker/generated/text_video_gfx.h")
+
     def test_ordinary_B_cannot_read_C(self):
         with self.assertRaises(ValueError):
             self.check_unit("host_context.c", "src/mvdm-host/softpc.new/base/inc/xt.h")

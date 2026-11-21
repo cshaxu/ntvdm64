@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "file": "src/compat/mvdm_softpc_text_video.c",
-  "status": "owner approved; candidate compiled; production implementation pending",
+  "status": "implemented and verified in P24; commit pending",
   "current_direct_relationships": 10,
   "current_relocation_records": 11,
   "provider_owner": "C2 nt_graph.c owns screen state, video update, palette and copied VGA font/cursor snapshot",
@@ -24,9 +24,11 @@
   },
   "verification": {
     "compile": "Real current nt_graph.c product command with only candidate input/output and B header overlay; exit0. Existing warning output retained.",
-    "limits": "No candidate link/runtime evidence, B wrapper and composition not implemented. Approval needed before production mirror change."
+    "limits": "No full Win3.1/Win95 matrix claim",
+    "production": "Cached full, dual11, actual-owner tests and real DOS mouse/COMMAND passed"
   },
   "evidence_root": "build/t483-s19-text-video-owner",
-  "followup": "After approval bind before both standalone and bounded entries, remove generated private video layout inputs from B, adapt existing state/producer fixtures, run full cached build, dual publication, targeted video/COMMAND tests, commit/push.",
-  "owner_approval": "2026-11-21: standing approval for necessary non-#error mirror increments of one point and fewer than 100 lines. Approval is not implementation or delivery evidence."
+  "followup": "Commit/push verified P24; continue remaining WOW files",
+  "owner_approval": "2026-11-21: standing approval for necessary non-#error mirror increments of one point and fewer than 100 lines. Approval is not implementation or delivery evidence.",
+  "delivery": "p24-delivery.json"
 }

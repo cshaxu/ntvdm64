@@ -15,6 +15,16 @@ typedef struct mvdm_softpc_text_video {
     int cursor_visible;
 } mvdm_softpc_text_video;
 
+typedef struct mvdm_text_video_provider {
+    int (*copy)(mvdm_softpc_text_video *);
+    void (*refresh_palette)(void);
+    int (*sync_route)(void);
+    int (*local)(void);
+    void (*flush)(void (*publish)(void));
+    void (*pause)(void);
+} mvdm_text_video_provider;
+int mvdm_softpc_text_video_bind(const mvdm_text_video_provider *provider);
+
 int mvdm_softpc_text_video_copy(mvdm_softpc_text_video *copy);
 /* Original video owner; use the original VGA resolver after graphics
  * retirement instead of depending on the retired GDI palette handle. */

@@ -1,4 +1,4 @@
-"""Select the C-owned coordination for caller unit tests; no CPU equivalence claim."""
+"""Select C-owned coordination/projections for caller tests; no CPU equivalence claim."""
 import argparse
 import hashlib
 from pathlib import Path
@@ -6,15 +6,18 @@ from pathlib import Path
 parser = argparse.ArgumentParser()
 parser.add_argument("output")
 parser.add_argument("--core-only", action="store_true")
-parser.add_argument("--directory-owner", action="store_true")
+owner = parser.add_mutually_exclusive_group()
+owner.add_argument("--directory-owner", action="store_true")
+owner.add_argument("--text-video-owner", action="store_true")
 a = parser.parse_args()
 root = Path(__file__).resolve().parents[2]
-if a.directory_owner:
-    source = root / "src/mvdm-host/dos/dem/demgset.c"
+if a.directory_owner or a.text_video_owner:
+    source = root / ("src/mvdm-host/dos/dem/demgset.c" if a.directory_owner else
+                     "src/mvdm-host/softpc.new/host/src/nt_graph.c")
     raw = source.read_bytes()
     text = raw.decode("latin1").replace("\r\n", "\n")
-    marker = "int dem_command_directory_instance("
-    assert text.count(marker) == 1, "Review changed directory owner boundary"
+    marker = "int dem_command_directory_instance(" if a.directory_owner else "extern void disable_stream_io(void);"
+    assert text.count(marker) == 1, "Review changed owner projection boundary"
     output = Path(a.output).resolve()
     assert output.is_relative_to(root / "build")
     output.parent.mkdir(parents=True, exist_ok=True)
