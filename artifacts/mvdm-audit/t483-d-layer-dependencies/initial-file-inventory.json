@@ -8,7 +8,7 @@
     {
       "id": "DF001",
       "file": "src/common/base_srv/base_command.c",
-      "status": "compile-root-cleaned; final implementation/callback review pending",
+      "status": "resolved",
       "evidence_counts": {
         "search-paths": 12
       },
@@ -135,12 +135,18 @@
         }
       ],
       "search_path_disposition": "removed and verified in S15 P2",
-      "delivery_evidence": "common-flags-delivery.json"
+      "delivery_evidence": "common-flags-delivery.json",
+      "resolution": "BASE message composition calls common payload/value/startup serializers and system memory APIs; no outer implementation. P2 removes inherited F search roots.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF002",
       "file": "src/common/base_srv/base_payload.c",
-      "status": "compile-root-cleaned; final implementation/callback review pending",
+      "status": "resolved",
       "evidence_counts": {
         "search-paths": 12
       },
@@ -267,12 +273,18 @@
         }
       ],
       "search_path_disposition": "removed and verified in S15 P2",
-      "delivery_evidence": "common-flags-delivery.json"
+      "delivery_evidence": "common-flags-delivery.json",
+      "resolution": "BASE payload validation/capture/release uses D codec and process heap; no product callback. P2 removes inherited F roots.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF003",
       "file": "src/common/base_srv/base_rpc_client_core.c",
-      "status": "compile-root-cleaned; final implementation/callback review pending",
+      "status": "resolved",
       "evidence_counts": {
         "search-paths": 8
       },
@@ -359,12 +371,18 @@
         }
       ],
       "search_path_disposition": "removed and verified in S15 P2",
-      "delivery_evidence": "common-flags-delivery.json"
+      "delivery_evidence": "common-flags-delivery.json",
+      "resolution": "Connection/async RPC and broker process wait belong to D. Execution cleanup points to D reset_launch. Service-death notification has two reviewed F subscribers; registration and join/lifetime contract recorded separately. RPC memory now D-owned.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF004",
       "file": "src/common/base_srv/base_rpc_client_launch.c",
-      "status": "compile-root-cleaned; final implementation/callback review pending",
+      "status": "resolved",
       "evidence_counts": {
         "search-paths": 4
       },
@@ -411,12 +429,18 @@
         }
       ],
       "search_path_disposition": "removed and verified in S15 P2",
-      "delivery_evidence": "common-flags-delivery.json"
+      "delivery_evidence": "common-flags-delivery.json",
+      "resolution": "Request/receipt transport uses A/B/C/D. reset_launch is local D. Console activation provider is B compat_console_activate, registered by F composition; no F body used for launch preparation.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF005",
       "file": "src/common/base_srv/base_startup.c",
-      "status": "compile-root-cleaned; final implementation/callback review pending",
+      "status": "resolved",
       "evidence_counts": {
         "search-paths": 12
       },
@@ -543,12 +567,18 @@
         }
       ],
       "search_path_disposition": "removed and verified in S15 P2",
-      "delivery_evidence": "common-flags-delivery.json"
+      "delivery_evidence": "common-flags-delivery.json",
+      "resolution": "Startup field conversion uses Win32 declarations and memset only. P2 removes inherited F roots.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF006",
       "file": "src/common/base_srv/base_values.c",
-      "status": "compile-root-cleaned; final implementation/callback review pending",
+      "status": "resolved",
       "evidence_counts": {
         "search-paths": 12
       },
@@ -675,12 +705,18 @@
         }
       ],
       "search_path_disposition": "removed and verified in S15 P2",
-      "delivery_evidence": "common-flags-delivery.json"
+      "delivery_evidence": "common-flags-delivery.json",
+      "resolution": "BASE scalar wire conversion uses C declarations, D schema and memory copy; no outer provider. P2 removes inherited F roots.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF007",
       "file": "src/common/base_srv/frontend_client.c",
-      "status": "compile-root-cleaned; final implementation/callback review pending",
+      "status": "resolved",
       "evidence_counts": {
         "search-paths": 8
       },
@@ -767,12 +803,18 @@
         }
       ],
       "search_path_disposition": "removed and verified in S15 P2",
-      "delivery_evidence": "common-flags-delivery.json"
+      "delivery_evidence": "common-flags-delivery.json",
+      "resolution": "Frontend protocol facade borrows D connection and invokes D generated RPC client stubs. Frontend presentation and remote service implementation are not linked into this source.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF008",
       "file": "src/common/base_srv/scope.c",
-      "status": "pending-review",
+      "status": "resolved",
       "evidence_counts": {
         "runtime-image-names": 80
       },
@@ -1577,12 +1619,18 @@
           "evidence": "WOW32.DLL",
           "product": "run16.exe"
         }
-      ]
+      ],
+      "resolution": "Package component names identify resources. LoadLibraryExW DATAFILE|IMAGE_RESOURCE plus FindResource/SizeofResource/LockResource/memcmp/FreeLibrary executes no sibling product code.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF009",
       "file": "src/common/native-hook/context.c",
-      "status": "pending-review",
+      "status": "resolved",
       "evidence_counts": {
         "runtime-image-names": 15
       },
@@ -1737,12 +1785,18 @@
           "evidence": "%lsrun16.exe",
           "product": "run16.exe"
         }
-      ]
+      ],
+      "resolution": "Packet consumers are local consume_packet/consume_direct -> D nthook_context_parse. A staging/payload mechanisms call these synchronously. Sibling launcher/hook names are explicit runtime paths, not private source imports.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF010",
       "file": "src/common/native_image.c",
-      "status": "compile-root-cleaned; final implementation/callback review pending",
+      "status": "resolved",
       "evidence_counts": {
         "search-paths": 12
       },
@@ -1869,12 +1923,18 @@
         }
       ],
       "search_path_disposition": "removed and verified in S15 P2",
-      "delivery_evidence": "common-flags-delivery.json"
+      "delivery_evidence": "common-flags-delivery.json",
+      "resolution": "Native executable classification uses NtCreateSection/NtQuerySection and QueryFullProcessImageNameW through existing C declarations/system imports. No private F implementation.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF011",
       "file": "src/common/protocol/service.idl",
-      "status": "pending-review",
+      "status": "resolved",
       "evidence_counts": {
         "generated-rpc-relocations": 72
       },
@@ -2599,12 +2659,18 @@
           "evidence": "VDM_CONNECTION_rundown",
           "product": "ntsrv.exe"
         }
-      ]
+      ],
+      "resolution": "Shared service.idl defines the wire contract. All 64 residual generated relocations are NTSRV server handlers/context rundown in main.c, linked only in service server composition. RpcServerRegisterIf3/UnregisterIf own dispatch lifetime. Not ordinary D client implementation calling private F.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     },
     {
       "id": "DF012",
       "file": "src/common/rpc/management.c",
-      "status": "resolved-rpc-allocation-owner",
+      "status": "resolved",
       "evidence_counts": {
         "linked-relocations": 2
       },
@@ -2630,7 +2696,12 @@
           "product": "ntmon.exe"
         }
       ],
-      "resolution": "rpc-memory-delivery.json: production MIDL allocation/free now owned by common; two live outer relocations removed."
+      "resolution": "MIDL_user_free provider moved from F ntmon to common/rpc/memory_crt.c; two ordinary live outer relocations eliminated. Hook allocator remains process-heap based in common/rpc/memory_heap.c.",
+      "final_evidence": "final-closure.json",
+      "mirror_non_error_delta": {
+        "points": 0,
+        "lines": 0
+      }
     }
   ]
 }

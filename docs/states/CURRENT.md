@@ -35,25 +35,27 @@ reported as absent. One necessary Console cleanup handoff remains.
 
 ## S15 Progress
 
-[Initial DIR-ordered inventory](../../artifacts/mvdm-audit/t483-d-layer-dependencies/initial-file-inventory.json):
-12 candidate files: DF012 is resolved; the other11 still require final whole-file
-closure. Build-root cleanup alone is not whole-file completion.
-[S15 P2 build-root delivery](../../artifacts/mvdm-audit/t483-d-layer-dependencies/common-flags-delivery.json)
-removes unused F include roots for eight common sources: 80 repeated product
-search-path observations -> 0. Product source/mirror delta is zero. Cached full
-builds, dual11 publication, 98 BASE assertions, 71 launch assertions and real
-COMMAND return passed. Package3fc316ce-9442-47b2-9cc7-12b772708ac3.
+[S15 final closure audit](../../artifacts/mvdm-audit/t483-d-layer-dependencies/final-closure.json):
+12/12 candidate files resolved, zero pending;27 compiled D source/IDL units
+covered. Ordinary outer live relocations, compiled headers and private search
+roots are zero. The [DIR ledger](../../artifacts/mvdm-audit/t483-d-layer-dependencies/initial-file-inventory.json)
+records each file's actual provider and disposition.
 
-DF001-DF007 compile-root candidates were inspected in directory order; shared
-flag cleanup also covers DF010 without claiming its full audit. Remaining:
-callback target/lifetime closure, DF008/DF009 named-image semantics and DF011 RPC
-composition. [S15 P3 RPC allocation delivery](../../artifacts/mvdm-audit/t483-d-layer-dependencies/rpc-memory-delivery.json)
-resolves DF012: MIDL memory providers now reside in common, preserving CRT and
-Hook process-heap selection. Live outer relocations 2 -> 0; generated RPC
-outer evidence rows 72 -> 64. This is not whole-D closure. Cached full builds,
-dual11 publication, management fixture, real monitor RPC and real COMMAND
-return passed. Package80616b98-933d-4375-bdb8-f742686d4ae6. Mirror delta0/0.
-The independent queued T candidates retain their order and scope.
+P2 removed F search roots from eight D files (80 repeated product rows).
+P3 moved MIDL allocation into D, removing2 ordinary outer relocations and8
+allocator rows from generated RPC evidence. Cached full x86/x64/reference,
+dual11 publication, management128 assertions, real monitor RPC and COMMAND
+return passed; delivered commit f7ede72b0, package80616b98-933d-4375-bdb8-f742686d4ae6.
+P4 completes ownership evidence with no product change: native service-loss
+and carrier/target/descendant cleanup also passed before test containment.
+Non-error mirror delta throughout S15:0 points,0 lines.
+
+Permitted runtime relationships remain explicit: one D-owned broker-death
+callback slot with two F subscribers;64 generated NTSRV dispatch/rundown rows;
+95 repeated named-package/path observations. None is described as absent or
+silently ignored. VDMREDIR link-map coverage and generated/assembler gaps are
+resolved in the final audit. S15 is ready for owner closure; no successor is
+admitted. The independent queued T candidates retain their order and scope.
 
 ## Recent M0 Closures
 

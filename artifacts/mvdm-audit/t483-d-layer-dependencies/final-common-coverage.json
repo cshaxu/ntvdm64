@@ -1,0 +1,254 @@
+{
+  "src/common/application_search.c": [
+    "msvc-x64-release/launcher/run16.exe"
+  ],
+  "src/common/base_srv/base_command.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/base_srv/base_payload.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/base_srv/base_rpc_client_core.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/base_srv/base_rpc_client_launch.c": [
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/base_srv/base_startup.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/base_srv/base_values.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/base_srv/frontend_client.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/base_srv/scope.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/hook/nthook64.dll",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/base_srv/vdm_message.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/base_srv/vdm_payload.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/codec/native_launch.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/native-hook/context.c": [
+    "msvc-x64-release/hook/nthook64.dll",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/native-hook/installer.c": [
+    "msvc-x64-release/hook/nthook64.dll",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/native-hook/packet.c": [
+    "msvc-x64-release/hook/nthook64.dll",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/native_image.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/hook/nthook64.dll",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/native_process.c": [
+    "msvc-x64-release/worker/ntvwm.exe"
+  ],
+  "src/common/protocol/rpc_management.idl": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/protocol/service.idl": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/hook/nthook64.dll",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/rpc/dos_observation.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/rpc/frontend_control.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/rpc/interface_query.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/rpc/management.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/hook/nthook64.dll",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/rpc/memory_crt.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/rpc/memory_heap.c": [
+    "msvc-x64-release/hook/nthook64.dll",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x86-release/worker/nthook32.dll"
+  ],
+  "src/common/rpc/native_command.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ],
+  "src/common/rpc/worker_control.c": [
+    "msvc-x64-release/frontend/ntcon.exe",
+    "msvc-x64-release/launcher/run16.exe",
+    "msvc-x64-release/monitor/ntmon.exe",
+    "msvc-x64-release/service/ntsrv.exe",
+    "msvc-x64-release/worker-reference-x86/nthook32.dll",
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe",
+    "msvc-x64-release/worker/ntvwm.exe",
+    "msvc-x86-release/worker/nthook32.dll",
+    "msvc-x86-release/worker/ntvdm.exe"
+  ]
+}

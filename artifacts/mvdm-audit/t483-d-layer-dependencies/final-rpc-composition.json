@@ -1,0 +1,578 @@
+[
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_AcquireConsoleContext",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_AttachFile",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_AttachFrontendRequest",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_AttachPipe",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_BindConsoleContext",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_BindNativeTarget",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_BindWowTask",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_Check",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_CloseFrontendInstance",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_CloseManagementNode",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_CompleteWorkerChannel",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_Connect",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_Disconnect",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_Exit",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_ExitCode",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FailWowTaskClose",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FinishNativeRequest",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_First",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FrontendCloseQuiesced",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FrontendConsoleRestored",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FrontendIoDisconnected",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FrontendJoinCandidate",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FrontendJoinDecision",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FrontendLeaseReady",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FrontendRequest",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FrontendStartupResult",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_FrontendStateChanged",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_Get",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_GetNextNativeCommand",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_NativeStartupResult",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_ObserveDosEventAsync",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_ObserveNativeCreationAsync",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_Reenter",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RegisterEmbeddedFrontend",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RegisterFrontendLease",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RegisterFrontendRoot",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RegisterNativeBackend",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RegisterWowExec",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_ReportConsoleMembers",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RequestFrontend",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RequestParticipantExit",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RetainFrontendRoot",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RetireWorkerlessFrontend",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RetireWowTask",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_RevokeStream",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_StartFrontend",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_StartNativeWorker",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_StartVdmWorker",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_SubmitNativeRequest",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_TakeFrontend",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_TakeWowTaskClose",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_TaskSnapshot",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_UnregisterFrontendInstance",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_Update",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_WaitFrontend",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_WaitFrontendConsoleRestored",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_WorkerFrontendCapability",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_WorkerIoCheckpoint",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_WorkerIoReleaseEvent",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_WorkerIoTransition",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_WorkerTaskTrace",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_WowStarted",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "Server_WowStartup",
+    "product": "ntsrv.exe"
+  },
+  {
+    "from": "common",
+    "to": "ntsrv-exe",
+    "source": "src/common/protocol/service.idl",
+    "line_or_section": "3",
+    "target": "src/ntsrv-exe/main.c",
+    "evidence": "VDM_CONNECTION_rundown",
+    "product": "ntsrv.exe"
+  }
+]

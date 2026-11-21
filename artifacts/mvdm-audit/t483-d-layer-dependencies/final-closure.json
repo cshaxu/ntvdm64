@@ -1,0 +1,60 @@
+{
+  "packet": "M0 T483 S15 P4",
+  "code_commit": "f7ede72b0",
+  "package": "80616b98-933d-4375-bdb8-f742686d4ae6",
+  "objective": "Remove unapproved D outer implementation dependencies, preserving approved protocol and callback composition.",
+  "files": {
+    "initial_candidates": 12,
+    "resolved": 12,
+    "pending": 0,
+    "compiled_D_units": 27
+  },
+  "results": {
+    "ordinary_live_D_outer_relocations": 0,
+    "D_outer_compiled_headers": 0,
+    "D_outer_search_paths": 0,
+    "literal_or_resolved_outer_includes": 0,
+    "generated_server_composition_rows": 64,
+    "named_runtime_image_rows": 95,
+    "unapproved_D_outer_dependencies": 0
+  },
+  "not_zero_runtime_peers": [
+    "One broker-death callback slot, two F implementations: NTVDM worker_lifecycle.c::service_lost and NTVWM main.c::service_lost.",
+    "64 generated RPC server-dispatch/context-rundown rows to NTSRV.",
+    "Package resource identity and launcher/hook path contracts."
+  ],
+  "callback_contract": {
+    "owner": "D OpenNtBaseClientWatchBroker/StopBrokerWatch",
+    "thread": "D broker_lifetime_watch thread waits stop or authenticated service process; calls subscriber inline on confirmed service death. No extra queue.",
+    "registration": "F composes through E worker_base_watch_service. D borrows callback/context.",
+    "normal_release": "StopBrokerWatch sets stop, joins watcher, closes wait objects then clears callback/context. Both F teardown paths call unwatch before freeing state.",
+    "terminal_path": "F owns process cleanup and terminal result; D first latches connection failure.",
+    "other_pointers": "execution_cleanup -> D reset_launch; command activation -> B compat_console_activate; worker query pointers -> D protocol wrappers/stubs; native-hook consume callbacks -> D packet parser; helper process creation -> system CreateProcessW."
+  },
+  "coverage": "Current x86 worker/WOW/Hook/redir/VCDEX plus native x64 products and reference x86 graph; includes from ninja deps, live COFF relocations matched to final linker maps, source dynamic-call scan. VDMREDIR map produced with current exact objects/archives and original link flags into analysis-only output.",
+  "coverage_gap_disposition": {
+    "largeint_movemem": "C ASM files have no INCLUDE; no D source hidden.",
+    "callpr32": "C assembler includes C callconv.inc only.",
+    "WOW_generated_bridge": "Build-only F DllMain calls C W32DllInitialize and B shutdown bindings; not D.",
+    "WOW_alias_units": "Linker alternatename pragmas only; no D implementation or callback."
+  },
+  "verification": {
+    "production": "P3 cached full x86/x64/reference; dual11 publication and 22 hashes; management128 checks; real monitor RPC and actual COMMAND return passed.",
+    "extra_service_loss": "PASS authenticated service death: Run16 returned 6; observed elapsed=142ms; no Console-restoration claim",
+    "extra_carrier_cleanup": "PASS actual native carrier exit=6 and pinned CUI target/descendant exit before test containment",
+    "no_new_product_changes": "P4 is source/ownership evidence only; final published code remains P3, no redundant build."
+  },
+  "mirror_non_error_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "evidence_roots": [
+    "build/t483-s15-rpc-memory",
+    "build/t483-s15-service-loss"
+  ],
+  "limitations": [
+    "Protocol operation functionality is not exhaustively retested by this layering audit.",
+    "The service-loss runtime case is native; NTVDM subscriber lifetime additionally checked in source and prior lifecycle delivery evidence.",
+    "Zero unapproved dependencies does not mean no RPC peers, callbacks or runtime package dependencies."
+  ]
+}
