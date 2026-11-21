@@ -367,8 +367,6 @@ complete:
     (void)RpcAsyncCompleteCall(async,&error);
     return ERROR_SUCCESS;
 }
-void *__RPC_USER midl_user_allocate(size_t bytes) { return malloc(bytes); }
-void __RPC_USER midl_user_free(void *value) { free(value); }
 void __RPC_USER VDM_CONNECTION_rundown(VDM_CONNECTION connection)
 {
     /* No tasks yet; disconnect also drains retained input stream receipts. */

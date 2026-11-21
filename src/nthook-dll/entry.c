@@ -3,11 +3,6 @@
 #include "lib-win32/process-hook/helper.h"
 #include <rpc.h>
 #include <wchar.h>
-/* RPC allocation is local and has no initialization/loader-lock activity. */
-void *__RPC_USER MIDL_user_allocate(size_t bytes)
-{return HeapAlloc(GetProcessHeap(),0,bytes);}
-void __RPC_USER MIDL_user_free(void *value)
-{if(value)HeapFree(GetProcessHeap(),0,value);}
 nthook_context nthook_process_context={0};
 void WINAPI NthookAnchor(void) {}
 void CALLBACK NthookFinishHelper(HWND window,HINSTANCE instance,LPSTR command,INT show)

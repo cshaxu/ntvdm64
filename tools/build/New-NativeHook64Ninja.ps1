@@ -40,7 +40,7 @@ $graph.Add('rule idl')
 $graph.Add('  command = midl.exe /nologo /env x64 /target NT100 /prefix client Client_ /prefix server Server_ /acf "'+(NP (Join-Path $root 'src/common/protocol/service.acf'))+'" /out obj/basesrv /h service.h /cstub service_c.c /sstub service_s.c "'+(NP (Join-Path $root 'src/common/protocol/service.idl'))+'"')
 $graph.Add('build obj/basesrv/service.h obj/basesrv/service_c.c obj/basesrv/service_s.c: idl '+(NP (Join-Path $root 'src/common/protocol/service.idl'))+' | '+(NP (Join-Path $root 'src/common/protocol/service.acf')))
 $graph.Add('build observation-stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h')
-$sources=@('src/nthook-dll/entry.c','src/common/native-hook/context.c','src/common/native-hook/packet.c',
+$sources=@('src/nthook-dll/entry.c','src/common/rpc/memory_heap.c','src/common/native-hook/context.c','src/common/native-hook/packet.c',
     'src/common/native-hook/installer.c','src/nthook-dll/create_process.c',
     'src/lib-win32/process-hook/staging.c','src/lib-win32/process-hook/helper.c','src/lib-win32/process-hook/payload.c',
     'src/lib-win32/process-hook/startup_hooks.c','src/lib-win32/process-hook/minhook/src/buffer.c',

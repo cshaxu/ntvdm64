@@ -250,7 +250,7 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if(@(Compare-Object @('rpc/local_binding.c','rpc/peer.c') @(Get-FrontendSources 'lib-rpc.lib' 'lib-win32')).Count) {
         throw 'Generic RPC binding must have exactly one provider'
     }
-    if(@(Compare-Object @('rpc/native_command.c','rpc/frontend_control.c','rpc/worker_control.c','rpc/management.c','rpc/dos_observation.c','rpc/interface_query.c') @(Get-FrontendSources 'common-rpc.lib' 'common')).Count) {
+    if(@(Compare-Object @('rpc/memory_crt.c','rpc/native_command.c','rpc/frontend_control.c','rpc/worker_control.c','rpc/management.c','rpc/dos_observation.c','rpc/interface_query.c') @(Get-FrontendSources 'common-rpc.lib' 'common')).Count) {
         throw 'Common RPC protocol clients must each have exactly one provider'
     }
     foreach($target in @('run16.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe')) {

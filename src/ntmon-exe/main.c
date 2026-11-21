@@ -34,8 +34,6 @@
 /* QBasic's bright status treatment: CaMake(coBrightWhite, coCyan), or VGA 3Fh. */
 #define MONITOR_STATUS_ATTRIBUTE (BACKGROUND_BLUE|BACKGROUND_GREEN|FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY)
 
-void *__RPC_USER MIDL_user_allocate(size_t bytes) { return malloc(bytes); }
-void __RPC_USER MIDL_user_free(void *value) { free(value); }
 
 typedef struct MONITOR_STATE {
     RPC_BINDING_HANDLE binding;

@@ -20,8 +20,6 @@
 
 #define CHECK(value) do { if (!(value)) { fprintf(stderr,"FAIL %d: %lu\n",__LINE__,(unsigned long)GetLastError()); return 1; } } while (0)
 
-void *__RPC_USER MIDL_user_allocate(size_t bytes) { return malloc(bytes); }
-void __RPC_USER MIDL_user_free(void *value) { free(value); }
 
 static const unsigned char version[APP_VERSION_BYTES]=APP_VERSION;
 /* Real async wire negative, deliberately allowing version mutation. Normal

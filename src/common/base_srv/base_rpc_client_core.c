@@ -135,10 +135,6 @@ static DWORD WINAPI broker_lifetime_watch(void *context)
     return result==WAIT_FAILED ? GetLastError() : ERROR_SUCCESS;
 }
 
-/* Generated client stubs own only their transient marshalling buffers. */
-void *__RPC_USER MIDL_user_allocate(size_t bytes) { return malloc(bytes); }
-void __RPC_USER MIDL_user_free(void *value) { free(value); }
-
 /* UNKNOWN_IF also occurs while a healthy-version endpoint drains. Query the
  * same authenticated local endpoint before calling it a version mismatch.
  * This never admits work or relaxes the subsequent Connect identity check. */

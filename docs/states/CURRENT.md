@@ -36,7 +36,8 @@ reported as absent. One necessary Console cleanup handoff remains.
 ## S15 Progress
 
 [Initial DIR-ordered inventory](../../artifacts/mvdm-audit/t483-d-layer-dependencies/initial-file-inventory.json):
-12 candidate files remain under review; whole-file completion is not yet claimed.
+12 candidate files: DF012 is resolved; the other11 still require final whole-file
+closure. Build-root cleanup alone is not whole-file completion.
 [S15 P2 build-root delivery](../../artifacts/mvdm-audit/t483-d-layer-dependencies/common-flags-delivery.json)
 removes unused F include roots for eight common sources: 80 repeated product
 search-path observations -> 0. Product source/mirror delta is zero. Cached full
@@ -45,9 +46,13 @@ COMMAND return passed. Package3fc316ce-9442-47b2-9cc7-12b772708ac3.
 
 DF001-DF007 compile-root candidates were inspected in directory order; shared
 flag cleanup also covers DF010 without claiming its full audit. Remaining:
-callback target/lifetime closure, DF008/DF009 named-image semantics, DF011 RPC
-composition and DF012's confirmed MIDL_user_free provider in F ntmon. Initial
-72 generated-RPC and95 image-name rows are evidence, not proven violations.
+callback target/lifetime closure, DF008/DF009 named-image semantics and DF011 RPC
+composition. [S15 P3 RPC allocation delivery](../../artifacts/mvdm-audit/t483-d-layer-dependencies/rpc-memory-delivery.json)
+resolves DF012: MIDL memory providers now reside in common, preserving CRT and
+Hook process-heap selection. Live outer relocations 2 -> 0; generated RPC
+outer evidence rows 72 -> 64. This is not whole-D closure. Cached full builds,
+dual11 publication, management fixture, real monitor RPC and real COMMAND
+return passed. Package80616b98-933d-4375-bdb8-f742686d4ae6. Mirror delta0/0.
 The independent queued T candidates retain their order and scope.
 
 ## Recent M0 Closures

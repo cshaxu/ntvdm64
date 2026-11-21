@@ -1,0 +1,49 @@
+{
+  "packet": "M0 T483 S15 P3",
+  "scope": "Move MIDL transient allocation ownership into common without changing allocator or buffer lifetime.",
+  "providers": {
+    "CRT": "src/common/rpc/memory_crt.c in common-rpc.lib",
+    "hook_process_heap": "src/common/rpc/memory_heap.c explicitly linked into both Hook DLLs"
+  },
+  "removed_definitions": [
+    "src/common/base_srv/base_rpc_client_core.c",
+    "src/ntmon-exe/main.c",
+    "src/ntsrv-exe/main.c",
+    "src/nthook-dll/entry.c"
+  ],
+  "actual_link_evidence": {
+    "ntmon": "common-rpc:rpc_memory_crt.obj",
+    "ntsrv": "common-rpc:rpc_memory_crt.obj",
+    "nthook32": "rpc_memory_heap.obj",
+    "nthook64": "unit1.obj = src/common/rpc/memory_heap.c"
+  },
+  "before_after": {
+    "direct_live_outer_relocations": [
+      2,
+      0
+    ],
+    "generated_rpc_outer_rows": [
+      72,
+      64
+    ],
+    "private_outer_search_roots_after": 0,
+    "compiled_outer_headers_after": 0
+  },
+  "counting": "Rows are repeated product evidence, not independent interfaces. Generated manager dispatch, indirect callbacks and missing VDMREDIR link-map coverage still require final classification; zero observed direct relocations is not whole-D closure.",
+  "mirror_non_error_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "package": "80616b98-933d-4375-bdb8-f742686d4ae6",
+  "verification": {
+    "cached_x86_exit": 0,
+    "cached_x64_reference_exit": 0,
+    "published_images_per_destination": 11,
+    "dual_hashes_verified": true,
+    "management_mock": "128 checks; 0 failures; 0 allocations outstanding; supplements real transport only",
+    "real_monitor_rpc": "PASS actual fixture exit zero and assertion output; fixture duplicate allocators removed so it links production allocator",
+    "real_COMMAND": "PASS modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion"
+  },
+  "evidence": "build/t483-s15-rpc-memory",
+  "remaining": "Finish indirect callback lifetime/provider audit, named-image semantics and generated server composition. No claim of S15 closure."
+}

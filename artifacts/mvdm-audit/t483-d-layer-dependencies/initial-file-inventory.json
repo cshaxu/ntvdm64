@@ -2604,7 +2604,7 @@
     {
       "id": "DF012",
       "file": "src/common/rpc/management.c",
-      "status": "pending-review",
+      "status": "resolved-rpc-allocation-owner",
       "evidence_counts": {
         "linked-relocations": 2
       },
@@ -2629,7 +2629,8 @@
           "evidence": "MIDL_user_free",
           "product": "ntmon.exe"
         }
-      ]
+      ],
+      "resolution": "rpc-memory-delivery.json: production MIDL allocation/free now owned by common; two live outer relocations removed."
     }
   ]
 }
