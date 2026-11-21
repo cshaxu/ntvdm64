@@ -2,8 +2,8 @@
 #define WOW_OLE_DESCRIPTOR_PRIVATE_H
 /* OPENNT-HOST-297: finite C declaration facade; original thop.hxx private
  * records and SDK oleidl.h OBJECTDESCRIPTOR retain their complete fields. */
-#include <nt.h>
 #include <windows.h>
+#include <oleidl.h>
 /* OLE uses the public WOW32 ABI, not WOW32 private implementation headers.
  * Pointer/handle widths match OpenNT wow.h; API declarations below match
  * public/sdk/inc/wownt32.h. Conversion directions match thoputil.cxx. */
@@ -52,17 +52,6 @@ typedef struct tagTHUNKINFO
     DWORD           dwMethod;
     IUnknown       *this32;
 } THUNKINFO;
-typedef struct  tagOBJECTDESCRIPTOR
-    {
-    ULONG cbSize;
-    CLSID clsid;
-    DWORD dwDrawAspect;
-    SIZEL sizel;
-    POINTL pointl;
-    DWORD dwStatus;
-    DWORD dwFullUserTypeName;
-    DWORD dwSrcOfCopy;
-    }	OBJECTDESCRIPTOR;
 extern DECLSPEC_IMPORT ULONG *ExpLdt;
 extern BYTE g_abLeadTable[256];
 VPVOID WINAPI WOWGlobalLock16(HMEM16);
@@ -78,6 +67,13 @@ HMEM16 WINAPI WOWGlobalUnlockFree16(VPVOID);
 C_ASSERT(sizeof(THUNKINFO)==56);
 C_ASSERT(FIELD_OFFSET(THUNKINFO,scResult)==28);
 C_ASSERT(sizeof(OBJECTDESCRIPTOR)==52);
+C_ASSERT(FIELD_OFFSET(OBJECTDESCRIPTOR, clsid)==4);
+C_ASSERT(FIELD_OFFSET(OBJECTDESCRIPTOR, dwDrawAspect)==20);
+C_ASSERT(FIELD_OFFSET(OBJECTDESCRIPTOR, sizel)==24);
+C_ASSERT(FIELD_OFFSET(OBJECTDESCRIPTOR, pointl)==32);
+C_ASSERT(FIELD_OFFSET(OBJECTDESCRIPTOR, dwStatus)==40);
+C_ASSERT(FIELD_OFFSET(OBJECTDESCRIPTOR, dwFullUserTypeName)==44);
+C_ASSERT(FIELD_OFFSET(OBJECTDESCRIPTOR, dwSrcOfCopy)==48);
 HGLOBAL WINAPI ConvertObjDescriptor(HANDLE,UINT);
 HGLOBAL WINAPI wow_ole_convert_descriptor(HANDLE,UINT);
 #endif

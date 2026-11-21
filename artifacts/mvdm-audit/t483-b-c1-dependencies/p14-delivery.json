@@ -1,0 +1,35 @@
+{
+  "packet": "M0 T483 S20 P14",
+  "baseline": "bd5887681",
+  "files_completed": [
+    "BC1F017"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 21,
+    "remaining": 73,
+    "B_C1_unique": 55,
+    "B_C1_raw": 67,
+    "B_C1_compiled_headers": 476,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "dependency_delta": "compiled B-C1 header rows 482->476; direct unchanged",
+  "implementation": "Remove private nt.h from B OLE facade. Use modern SDK oleidl.h OBJECTDESCRIPTOR rather than duplicate layout; compile-time size52 and all selected field-offset checks preserve x86 ABI. Original C conversion algorithm and WOW public APIs unchanged.",
+  "mirror_delta": "0points/0lines; cumulative S20 +2points/+202lines",
+  "package": "7ac7ea3a-e616-4d89-9d43-f64c5d2530ed",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images to assets/release and O:/winnt/system32; 22hash verified",
+  "tests": [
+    "actual product OLE descriptor forward/reverse, invalid input/direction and ownership, both formats49153/49154",
+    "actual COMMAND EDIT/CMD/MEM and return",
+    "11 boundary controls and product gates"
+  ],
+  "evidence": "build/t483-s20-ole-descriptor",
+  "limitations": [
+    "Remaining OLE direct original C algorithm callback/provider separately tracked",
+    "No full suite on this P"
+  ]
+}

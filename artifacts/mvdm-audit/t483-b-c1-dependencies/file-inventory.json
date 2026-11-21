@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 20,
+    "completed": 21,
     "direct_unique": 55,
     "direct_raw": 67,
-    "compiled_header_rows": 482,
+    "compiled_header_rows": 476,
     "private_search_root_rows": 0
   },
   "files": [
@@ -1311,7 +1311,7 @@
     {
       "id": "BC1F017",
       "file": "src/compat/include/wow_ole_descriptor_private.h",
-      "status": "not yet audited",
+      "status": "completed in verified P14 delivery",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1323,7 +1323,8 @@
           "evidence": "nt.h",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "delivery": "p14-delivery.json"
     },
     {
       "id": "BC1F018",

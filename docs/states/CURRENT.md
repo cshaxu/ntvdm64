@@ -199,8 +199,8 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json):
-94 files,20 completed,74 remaining. B-to-C1:55 unique/67 relocation
-records,482 compiled header rows,0 private search-root rows. These are separate
+94 files,21 completed,73 remaining. B-to-C1:55 unique/67 relocation
+records,476 compiled header rows,0 private search-root rows. These are separate
 metrics, not additive counts. B-to-C2 direct/header/search remains0.
 DIR work remains at BC1F010/011 shared USER consumer group; three P9 text
 consumers are complete, other consumers remain open. S20 cumulative non-error
@@ -271,3 +271,9 @@ selected edit layout owns its macros. B-C1 header rows487->482, direct55 remains
 Cached full, dual11, edit/dialog control group and actual Win16/COMMAND passed.
 Mirror0points/+3lines R2750; S20 cumulative+2points/+202lines.
 [P13 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p13-delivery.json).
+
+P14 completes BC1F017: SDK oleidl.h supplies OBJECTDESCRIPTOR with x86 size
+and field-offset assertions, replacing duplicated declaration and private nt.h.
+B-C1 headers482->476; direct55 unchanged. Mirror0points/0lines. Cached full,
+dual11, both actual OLE descriptor roundtrips and COMMAND return passed.
+[P14 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p14-delivery.json).
