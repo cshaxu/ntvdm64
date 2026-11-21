@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T483 S17** (Ordinary Mode). Owner authorized S16 closure and
-next-S admission on 2026-11-20. Only S17 is active.
+**Active: M0 T483 S18** (Ordinary Mode). Owner accepted S17 and authorized
+next-S admission on 2026-11-20. Only S18 is active.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Original Owner Request | 完事了如果满足本S条件就可以收口本S，可以准入下一个S。继续逐层依赖审计，下一层为F。 |
-| Identifier Mode | M0 T483 S17, Ordinary Mode. |
-| Admission And Approval | Owner-authorized successor after verified S16 closure, 2026-11-20. |
-| Objective | Audit and remove unapproved dependencies between distinct F product components; trace private source/header/link dependencies and actual runtime providers. Distinguish valid DLL imports and explicit protocol/callback composition. |
-| Reference Baseline | S16 P2 2f6221b21; packagee6fc4605-1c7c-4e0a-b274-1c13ab6a74ce. [S16 closure](../etc/evidence/m0-t483-s16-closure.md). |
-| Files And ABI Surface | F: ntcon-exe, nthook-dll, ntmon-exe, ntsrv-exe, ntvdm-exe, ntvwm-exe, run16-exe, vdmredir-dll, wow32-dll. Production compile/link inputs, callers and callback/import providers. |
+| Original Owner Request | 赞，准入下一个S任务。 |
+| Identifier Mode | M0 T483 S18, Ordinary Mode. |
+| Admission And Approval | Owner accepted S17 and authorized successor admission, 2026-11-20. |
+| Objective | Reconcile the completed A-F dependency cleanups against current product graphs and consolidate a repeatable anti-regression boundary check. |
+| Reference Baseline | S17 P2 eaa229156; package733c98ae-ab34-4dad-afd4-380e0f43f0b5. [S17 closure](../etc/evidence/m0-t483-s17-closure.md). |
+| Files And ABI Surface | Existing dependency audit tools and A-F source/build ownership records; current x86, x64 and reference product graphs. Reuse unchanged provider evidence. |
 | Candidate Proposal | [T483 parent](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
-| Applicable Rules | Six-layer architecture. F may consume inner layers; distinct F components must not privately implement each other. Reviewed DLL/interface imports and callback composition are not violations by themselves. |
-| Verification | Per changed complete chain: cached full x86/x64/reference build, dual11 publication/hash verification, affected targeted tests, governance, commit and push. No Full unless newly required by scope/evidence. |
-| Expected Markers | DIR-ordered file ledger before modification, full caller/provider conclusions, counts separating violations from runtime peer evidence. |
-| Asset Needs | Existing immutable guest fixtures and cached toolchains; no new asset import. |
-| Non-goals | No addon work, original guest modification/rebuild, unrelated inner-layer reopening, broad feature repair or added queue/state machine. |
-| Similar-Issue Sweep | Explicit/forced/transitive includes, search paths, live relocations, generated RPC, runtime binding and lifecycle ownership across supported product graphs. |
-| Reporting Requirements | Per-file entry/exit: actual peer, disposition, candidate/confirmed/resolved counts, cumulative progress and non-error mirror delta. |
-| Stop Conditions | No queue for same-thread decoupling, second state machine or hidden outer implementation forwarding. Mirror increases below5 lines and at most2 points have standing approval; larger increases need prior approval. Preserve unrelated work. |
-| Exit Criteria | All F dependency candidates resolved with actual provider evidence; no unapproved same-layer implementation dependency; changed complete chains delivered by small-five. |
+| Applicable Rules | Six-layer architecture, named B-to-C exceptions, reviewed inner-owned callbacks and cross-image ABI provider rules. |
+| Verification | Exercise consolidated checks against current graphs and negative controls. Any production/build changes receive cached full build, dual11 publication, targeted tests, commit and push; evidence-only changes use governance/link checks without redundant product builds. |
+| Expected Markers | DIR-ordered affected-file ledger, separate per-layer violation and approved runtime relationship counts, explicit coverage gaps and reproducible gate commands. |
+| Asset Needs | Existing built products, compiler header records, linker maps and source evidence; no new guest assets. |
+| Non-goals | No fresh mirror-hunk audit, addon work, original guest modification/rebuild, queued T admission or broad product redesign. |
+| Similar-Issue Sweep | Direct/transitive/forced headers, private search paths, linked and generated providers, dynamic binding and callback ownership; distinguish named-image dependencies. |
+| Reporting Requirements | Per-file findings and cumulative progress; A-F counts separately; non-error mirror point/line changes; no silent exceptions or unsupported zero claims. |
+| Stop Conditions | No artificial same-thread queue, duplicate state machine or blanket exception. Mirror increases below5 lines and at most2 points have standing approval; larger increases require approval. Preserve unrelated work. |
+| Exit Criteria | Current A-F evidence reconciled; unexplained violations resolved or explicitly owner-decided; repeatable checks reject representative illegal dependencies while retaining approved ABI/callback relationships; required delivery complete. |
 
 ## Current Technical Baseline
 
@@ -91,8 +91,13 @@ remain explicitly reviewed loading/protocol relationships.
 cached full x86/x64/reference, dual11 publication, classification424 checks,
 real bootstrap and COMMAND/EDIT/CMD/MEM return passed. No algorithm/ABI or
 guest changes; non-error mirror delta0 points/0 lines. Package
-733c98ae-ab34-4dad-afd4-380e0f43f0b5. S17 remains the sole packet pending
-owner review after P2 delivery.
+733c98ae-ab34-4dad-afd4-380e0f43f0b5. S17 P2 eaa229156 is committed and pushed; owner accepted and closed S17.
+[S17 closure](../etc/evidence/m0-t483-s17-closure.md) records verification.
+
+## S18 Progress
+
+Admission only. Reconcile existing dependency evidence and gate coverage first;
+no S18 implementation or product changes have been made.
 
 ## Recent Governance
 
@@ -162,3 +167,7 @@ Owner-closed on2026-11-20. [Final ownership and delivery evidence](../etc/eviden
 ## S16 Closure Record
 
 Owner-authorized closure after verification. [S16 closure evidence](../etc/evidence/m0-t483-s16-closure.md).
+
+## S17 Closure Record
+
+Owner accepted; [S17 closure and delivery](../etc/evidence/m0-t483-s17-closure.md).
