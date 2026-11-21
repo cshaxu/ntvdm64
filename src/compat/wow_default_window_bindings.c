@@ -6,7 +6,22 @@
 
 /* ADAPTER-WOW-063 / OPENNT-HOST-089: original client algorithm, with a
  * host stored-name lifetime boundary. No text conversion is duplicated. */
-LONG WINAPI wow_original_default_window_proc(PWND, UINT, WPARAM, LPARAM, DWORD);
+static wow_default_window_provider default_provider;
+BOOL WINAPI wow_default_window_bind(wow_default_window_provider provider)
+{
+    wow_default_window_provider previous;
+    if (!provider) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    previous = (wow_default_window_provider)InterlockedCompareExchangePointer(
+        (PVOID volatile *)&default_provider, (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED);
+        return FALSE;
+    }
+    return TRUE;
+}
 __declspec(thread) wow_default_context *wow_default_current;
 
 LONG WINAPI wow_edit_default_control_color(PWND state, UINT message,
@@ -50,7 +65,7 @@ static LONG invoke_default(wow_window_words_binding *binding, PWND state, UINT m
     LONG result = 0;
     DWORD error = GetLastError();
     if (message != WM_GETTEXT && message != WM_GETTEXTLENGTH)
-        return wow_original_default_window_proc(state, message, wp, lp, ansi);
+        return default_provider(state, message, wp, lp, ansi);
     /* The original caller's ThreadLock equivalent already retains this
      * allocation. After nested destruction the HWND property can be gone
      * (or replaced); use that exact borrow, not a new native identity. */
@@ -64,7 +79,7 @@ static LONG invoke_default(wow_window_words_binding *binding, PWND state, UINT m
         /* Original server.c classification keeps both messages in the
          * client-only switch. These branches convert/copy, never callback.
          * An invalid destination may raise: finally must still unlock. */
-        result = wow_original_default_window_proc(state, message, wp, lp, ansi);
+        result = default_provider(state, message, wp, lp, ansi);
     } __finally {
         error = GetLastError();
         wow_window_words_unlock_client_name(binding);
@@ -83,6 +98,7 @@ LONG WINAPI wow_default_window_proc(PWND state, UINT message,
     if (!state) {
         SetLastError(ERROR_INVALID_WINDOW_HANDLE); return 0;
     }
+    if (!default_provider) RaiseFailFastException(NULL, NULL, 0);
     /* Every admitted caller enters through the control/dialog graph owner.
      * Retain its exact allocation for all messages, not only name reads.
      * Do not refresh by HWND here: after nested destruction that handle may

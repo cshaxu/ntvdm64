@@ -9,6 +9,9 @@
 \***************************************************************************/
 
 #include "precomp.h"
+#undef FindNCHit
+#include "non-mvdm/windows/core/ntuser/rtl/userrtl.h"
+#define FindNCHit wow_default_find_nc_hit
 #pragma hdrstop
 
 

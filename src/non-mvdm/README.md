@@ -2755,3 +2755,8 @@ provider. class.c imports its original USER declarations. No copied C layout.
 Non-error cleanup20points/44lines ->20points/92lines; class12points/1390lines
 ->12points/1394lines. Batch0points/+52lines, R2746/R2747. Source reconstruction,
 menu cleanup, real Win16 and Full passed.
+
+S20 P12: original clmsg.c and usercli.h explicitly own the RTL header import;
+B window adapter uses synchronous typed original procedure callback. B lookup
+still reaches userrtl.h and remains tracked. Non-error clmsg27points/979lines
+->28points/982lines; usercli44points/110lines ->45points/115lines. R2748/R2749.

@@ -16,7 +16,7 @@ extern __declspec(thread) wow_default_context *wow_default_current;
 BOOL WINAPI wow_default_capture_context(wow_default_context *, UINT);
 BOOL WINAPI wow_default_ensure_shell_message(HWND);
 int WINAPI GetWindowBorders(LONG, DWORD, BOOL, BOOL);
-struct tagWND;
+#include "wow_default_window_provider.h"
 /* Ordinary host nonclient policy boundary. */
 int WINAPI wow_default_find_nc_hit(struct tagWND *, LONG);
 /* Caller prepares the relationship graph through the control/dialog entry
@@ -56,7 +56,6 @@ LONG WINAPI wow_default_CsSendMessage(HWND, UINT, WPARAM, LPARAM,
 #define DefWindowProcWorker wow_default_window_proc
 #endif
 #if defined(WOW_ORIGINAL_DEFAULT_WINDOW) || defined(WOW_ORIGINAL_EDIT_CLIENT) || defined(WOW_ORIGINAL_DIALOG_CLIENT)
-#include "non-mvdm/windows/core/ntuser/rtl/userrtl.h"
 #define FindNCHit wow_default_find_nc_hit
 #endif
 #ifdef WOW_ORIGINAL_DIALOG_CLIENT

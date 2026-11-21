@@ -199,12 +199,12 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json):
-94 files,17 completed,77 remaining. B-to-C1:56 unique/68 relocation
+94 files,19 completed,75 remaining. B-to-C1:55 unique/67 relocation
 records,487 compiled header rows,0 private search-root rows. These are separate
 metrics, not additive counts. B-to-C2 direct/header/search remains0.
 DIR work remains at BC1F010/011 shared USER consumer group; three P9 text
 consumers are complete, other consumers remain open. S20 cumulative non-error
-mirror increment0points/+191lines; S19 retained increment+12points/+574lines.
+mirror increment2points/+199lines; S19 retained increment+12points/+574lines.
 
 [S20 P1 review](../../artifacts/mvdm-audit/t483-b-c1-dependencies/base-dispatch-review.json)
 is implemented by [P2](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p2-delivery.json):
@@ -259,3 +259,9 @@ original source reconstruction, menu/task lifecycle, actual Win16/COMMAND
 and owner-requested Full all passed. Full fixture initialization and link/input
 omissions were repaired without weakening assertions or changing products.
 [P11 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p11-delivery.json).
+
+P12 completes BC1F014/045: one direct relation removed via B-owned synchronous
+callback to original C window procedure. Header rows remain487: BC1F052 still
+reaches original userrtl and remains open. Mirror+2points/+8lines, R2748/2749;
+cumulative+2points/+199lines. Cached full, dual11, control group and actual
+Win16/COMMAND passed; [P12 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p12-delivery.json).

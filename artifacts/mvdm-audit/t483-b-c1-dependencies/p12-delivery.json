@@ -1,0 +1,47 @@
+{
+  "packet": "M0 T483 S20 P12",
+  "baseline": "f8e913484",
+  "files_completed": [
+    "BC1F014",
+    "BC1F045"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 19,
+    "remaining": 75,
+    "B_C1_unique": 55,
+    "B_C1_raw": 67,
+    "B_C1_compiled_headers": 487,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "one unique direct relation removed; compiled header rows unchanged",
+  "provider": "B-owned typed synchronous default-window callback; F binds actual C1 clmsg procedure before W32DllInitialize; C owns original implementation. Original name lock, TLS restoration and borrowed window lifetime retained.",
+  "header": "B default-window header no longer directly imports userrtl.h. Original C1 clmsg/usercli owners include it; B wow_dialog_lookup still reaches it via C usercli, tracked separately as BC1F052. No claim of complete header elimination.",
+  "mirror": {
+    "clmsg.c": "27points/979lines ->28points/982lines",
+    "usercli.h": "44points/110lines ->45points/115lines",
+    "delta": "2points/8lines",
+    "cumulative_S20": "2points/199lines",
+    "registrations": [
+      "R2748",
+      "R2749"
+    ],
+    "line_mapping": "paired excluded-branch parser zero issues; preserved original #line boundaries"
+  },
+  "package": "d960ed2e-38ea-4cf2-8d85-5a17e604ab24",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images to assets/release and O:/winnt/system32, 22 hashes verified",
+  "tests": [
+    "actual Win16 native extension and COMMAND EDIT/CMD/MEM passed",
+    "control-final all passed, original and callback default-window cases, 22 dialog exit cases and navigation",
+    "fixture owner linkage and genuine WND self-address corrected; original rebase retained"
+  ],
+  "evidence": "build/t483-s20-default-window-r2/control-evidence-final",
+  "limitations": [
+    "BC1F052 retains original-layout and userrtl dependency; not counted as eliminated",
+    "Not full suite; owner required Full on prior P11 only"
+  ]
+}

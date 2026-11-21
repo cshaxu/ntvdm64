@@ -1,3 +1,4 @@
+#include "non-mvdm/public/internal/windows/inc/wingdip.h"
 #include "wow_control_draw_state.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_edit_native_bindings.h"

@@ -63,6 +63,8 @@ static void reset(BOOL owned, BOOL was_active, BOOL disabled)
     child = CreateWindowExW(0, L"STATIC", L"child", WS_CHILD,
         0, 0, 1, 1, dialog.wnd.head.h, NULL, GetModuleHandleW(NULL), NULL);
     CHECK(dialog.wnd.head.h && child);
+    dialog.wnd.head.pSelf = (PBYTE)&dialog.wnd;
+    owner.head.pSelf = (PBYTE)&owner;
     ZeroMemory(&data, sizeof(data));
     ClrWF(&dialog.wnd, WFDESTROYED);
     dialog.wnd.fnid = FNID_DIALOG;

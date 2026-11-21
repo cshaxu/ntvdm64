@@ -92,11 +92,22 @@ LONG WINAPI wow_original_default_window_proc(PWND window, UINT message,
     return 123;
 }
 
+static LONG WINAPI other_default_provider(struct tagWND *window, UINT message,
+    WPARAM wp, LPARAM lp, DWORD ansi)
+{
+    (void)window; (void)message; (void)wp; (void)lp; (void)ansi;
+    return 0;
+}
 int main(void)
 {
     UINT messages[] = {WM_GETTEXT, WM_GETTEXTLENGTH, WM_HELP, WM_CTLCOLORSTATIC};
     UINT i;
     BOOL caught = FALSE;
+    CHECK(!wow_default_window_bind(NULL));
+    CHECK(wow_default_window_bind(wow_original_default_window_proc));
+    CHECK(wow_default_window_bind(wow_original_default_window_proc));
+    CHECK(!wow_default_window_bind(other_default_provider));
+    CHECK(GetLastError() == ERROR_ALREADY_INITIALIZED);
     state.head.h = (HWND)(ULONG_PTR)0x1234;
     for (i = 0; i < ARRAYSIZE(messages); ++i) {
         SetLastError(456);

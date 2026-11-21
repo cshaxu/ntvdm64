@@ -71,6 +71,7 @@ static void verify_dialog_controls(void)
     unsigned i;
     for (i = 0; i < ARRAYSIZE(nodes); ++i) {
         ZeroMemory(nodes[i], sizeof(*nodes[i]));
+        nodes[i]->head.pSelf = (PBYTE)nodes[i];
         nodes[i]->head.h = (HWND)(ULONG_PTR)(i + 1);
     }
     root.spwndParent = &desktop;
@@ -116,6 +117,7 @@ static void verify_dialog_groups(void)
     PWND nodes[] = {&first, &container, &nested, &last};
     unsigned i;
     ZeroMemory(&root, sizeof(root));
+    root.head.pSelf = (PBYTE)&root;
     root.spwndParent = &desktop;
     root.spwndChild = &first;
     for (i = 0; i < ARRAYSIZE(nodes); ++i) {
@@ -173,6 +175,8 @@ int __cdecl main(void)
     /* Actual original traversal over a retained, consistent synthetic graph.
      * No HWND validator double or host navigation API decides the result.
      * This does not prove production graph publication/lifetime. */
+    desktop.head.pSelf = (PBYTE)&desktop;
+    root.head.pSelf = (PBYTE)&root;
     desktop.fnid = FNID_DESKTOP;
     root.spwndParent = &desktop;
     root.ExStyle = WS_EX_CONTROLPARENT;

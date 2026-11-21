@@ -14,6 +14,11 @@
 
 #ifndef _USERCLI_
 #define _USERCLI_
+#if defined(WOW_ORIGINAL_EDIT_CLIENT) || defined(WOW_ORIGINAL_DIALOG_CLIENT)
+#undef FindNCHit
+#include "non-mvdm/windows/core/ntuser/rtl/userrtl.h"
+#define FindNCHit wow_default_find_nc_hit
+#endif
 
 #if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
 #line 18
