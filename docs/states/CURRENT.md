@@ -230,17 +230,10 @@ mirror change. Real CCPU page-domain/reclaim, exact owned reads, actual Win16
 SOL modal menu and COMMAND return passed; SDK declarations replace nt.h.
 Original DOSX status-query inversion reproduced on the S18 control and P1;
 status-query semantics are not claimed passed. No original guest changed.
-[P10](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p10-delivery.json) removes
-nine unused TIB C2 search roots and fifteen VM BOP direct relationships.
-Existing CCPU callbacks supply registers; F lends the BIOS slot only during
-startup. Real CCPU BOP rejection/result registers, notification3194 assertions
-and actual COMMAND/EDIT/CMD/MEM return passed. Mirror delta0 points/0 lines.
-[P11](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p11-delivery.json) clears
-31 direct relationships across the eight DIR-ordered VM bridge/capture/entry/
-continuation/I/O/input/notification/wake files. Original ICA, SAS, keycode and
-CPU bodies remain providers. Notification3194, ingress73, capture165, actual
-CCPU BOP and COMMAND return pass. Eight algorithm comparisons match after
-reversing callback binding; no mirror or guest change.
+[P10](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p10-delivery.json) and
+[P11](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p11-delivery.json)
+delivered VM BOP and bridge/capture/I/O ownership with native/real-CCPU and
+COMMAND checks; original algorithms retained, mirror delta0 points/0 lines.
 [P12 clipboard delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p12-clipboard-review.json):
 synchronous retirement callback; cached build, dual11, epoch56 and real Win16
 18 checkpoints passed. Earlier desktop/foreign-lock failures retained in evidence.
@@ -269,4 +262,6 @@ Approved mirror delta+1 point/+25 lines; cumulative S19 +4 points/+77 lines.
 clears12 C2 relations. Existing bodies moved intact to C2; cached full, dual11,
 exact-body and real USER16 message/construction/COMMAND tests pass. Approved
 mirror delta+1 point/+123 lines; cumulative S19 +5 points/+200 lines.
-S19 active; S20 not admitted.
+[P20 standard classes](../../artifacts/mvdm-audit/t483-b-c2-dependencies/standard-class-provider-decision.json)
+records a compiled +1point/+13line candidate; approval pending, no production
+change or closed relation. S19 active; S20 not admitted.

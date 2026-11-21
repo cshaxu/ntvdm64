@@ -8720,7 +8720,7 @@
     {
       "id": "BC2F034",
       "file": "src/compat/wow_standard_class_bindings.c",
-      "status": "not yet audited",
+      "status": "ownership audit complete; exact product candidate compiles; +1 point/+13 lines approval pending; not delivered",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8762,7 +8762,8 @@
           "evidence": "_stdClasses",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "review": "standard-class-provider-decision.json"
     },
     {
       "id": "BC2F035",
