@@ -1236,7 +1236,7 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $sourceRoot = if ($mouseAdapter -or $name -in $compatSoftpcNames -or $cpuAdapter) { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sourceRoot $name)) + $selectedVideoInputs)
     $videoInclude = if ($name -eq 'v7_pointer_binding.c') { ' ' + $cvidcGeneratedInclude } else { '' }
-    $unitFlags = if ($cpuAdapter) { $libraryFlags + ' /TC' } elseif ($name -eq 'mvdm_softpc_mouse_guest.c') { $compatCcpuFlags } elseif ($mouseAdapter -or $name -in @('mvdm_vm_binding.c','mvdm_vm_bridge.c','mvdm_vm_ingress.c','mvdm_softpc_firmware.c','mvdm_vm_notification.c','mvdm_vm_wake.c','mvdm_vm_continuation.c','mvdm_vm_guest_io.c','mvdm_vm_input.c','mvdm_vm_input_bop.c')) { $libraryFlags } elseif ($textAdapter) { $compatTextVideoFlags } else { $authoredSoftpcFlags + $videoInclude }
+    $unitFlags = if ($cpuAdapter) { $libraryFlags + ' /TC' } elseif ($mouseAdapter -or $name -in @('mvdm_vm_binding.c','mvdm_vm_bridge.c','mvdm_vm_ingress.c','mvdm_softpc_firmware.c','mvdm_vm_notification.c','mvdm_vm_wake.c','mvdm_vm_continuation.c','mvdm_vm_guest_io.c','mvdm_vm_input.c','mvdm_vm_input_bop.c')) { $libraryFlags } elseif ($textAdapter) { $compatTextVideoFlags } else { $authoredSoftpcFlags + $videoInclude }
     $graph.Add('  cflags = ' + $unitFlags)
     $object
 }

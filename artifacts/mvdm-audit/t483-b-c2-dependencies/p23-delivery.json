@@ -1,0 +1,96 @@
+{
+  "packet": "M0 T483 S19 P23",
+  "baseline": "2ecd65646",
+  "status": "verified delivery",
+  "id": "BC2F013",
+  "file": "src/compat/mvdm_softpc_mouse_guest.c",
+  "ownership": "Original nt_mouse owns selected mouse geometry, cursor and button state. Existing apply body moved intact except naming the B numeric helper. B retains input unpacking, numeric saturation and route query through existing lock services. nt_event synchronously handles receive errors using existing DisplayErrorTerm. No new queue/state.",
+  "direct_relationships": {
+    "file_before": 5,
+    "file_after": 0,
+    "B_C2_unique": 25,
+    "B_C2_raw": 28,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 32,
+    "total": 38,
+    "remaining": 6
+  },
+  "compiled_headers": {
+    "B_C2": 43,
+    "B_C1": 599
+  },
+  "private_search_roots": {
+    "B_C2": 2,
+    "B_C1": 26
+  },
+  "mirror": {
+    "files": [
+      {
+        "file": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+        "before": {
+          "points": 6,
+          "lines": 16
+        },
+        "after": {
+          "points": 7,
+          "lines": 56
+        },
+        "delta": {
+          "points": 1,
+          "lines": 40
+        }
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+        "before": {
+          "points": 37,
+          "lines": 113
+        },
+        "after": {
+          "points": 37,
+          "lines": 114
+        },
+        "delta": {
+          "points": 0,
+          "lines": 1
+        }
+      }
+    ],
+    "delta": {
+      "points": 1,
+      "lines": 41
+    },
+    "cumulative_S19": {
+      "points": 8,
+      "lines": 350
+    },
+    "approval": "Owner standing approval for single logical change +1point and fewer than100lines",
+    "error_line_proof": "Added declarations precede existing #line35; moved body appended. nt_event error propagation precedes existing #line421. Paired exclusion parser zero issues. DIV906/R2729/R2730."
+  },
+  "source_proof": {
+    "apply_body_identical_except_numeric_helper_name": true,
+    "normalized_body_sha256": "a7264ffd89cf795868440ee40664be22fbdc668f72608b9c25137e090658fbb4"
+  },
+  "package": "0d2d35f2-1603-4a00-8ed5-2f5a49b7d9df",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hashes checked",
+  "tests": [
+    "Actual moved C2 apply and unchanged coordinate bodies plus B bridge: copied ingress, invalid input error return, reset/position, idle buttons, overflow, release/reentry; mocked guest memory and IRQ; passed; final guest mode built with /WX and no warnings (native-strict.exit=0)",
+    "Bridge pressure/reset/cancellation and15 frontend lifecycle cases passed",
+    "Real DOS mouse count/move/retire passed on final published package",
+    "Real modern EDIT CtrlQ,CMD echo,DOS MEM and launcher completion passed",
+    "Diagnostic observer compiles with actual nt_mouse product flags; generated host owner source intercepts coordinate calls while retaining original function body, replaces nt_mouse.obj rather than relying on an overridable now-inline apply symbol"
+  ],
+  "limitations": [
+    "No new Win3.1/Win95 matrix or cursor rendering acceptance claimed",
+    "Diagnostic observer compiled only; no diagnostic runtime result claimed",
+    "Generated/assembly audit coverage gaps remain explicit; approved runtime callbacks not counted as absent"
+  ],
+  "failed_attempts": [
+    "New extracted-body guest fixture first missed selected V7VGA macro, then host_rrr error-code header; corrected to existing product context, no production semantic change"
+  ],
+  "evidence_root": "build/t483-s19-mouse-guest-delivery"
+}

@@ -451,7 +451,8 @@ DWORD nt_event_loop(void)
            switch(InputRecord[loop].EventType) {
 
               case CONSOLE_INPUT_RELATIVE_MOUSE:
-                  mvdm_softpc_mouse_receive(&InputRecord[loop]);
+                  if ((status=mvdm_softpc_mouse_receive(&InputRecord[loop])) != ERROR_SUCCESS)
+                      DisplayErrorTerm(EHS_FUNC_FAILED,status,__FILE__,__LINE__);
                   break;
 
 #line 421

@@ -7,6 +7,8 @@
 #include <sas.h>
 #include <mouse_io.h>
 #include <nt_mouse.h>
+#include <nt_uis.h>
+#include <host_rrr.h>
 #include "compat/include/mvdm_softpc_mouse_guest.h"
 #include <assert.h>
 #include <limits.h>
@@ -51,7 +53,7 @@ static void receive(unsigned action,int dx,int dy,unsigned buttons)
     if(action==CONSOLE_MOUSE_LEAVE)input.width=input.height=0;
     record.EventType=CONSOLE_INPUT_RELATIVE_MOUSE;
     memcpy(&record.Event,&input,sizeof(input));
-    mvdm_softpc_mouse_receive(&record);
+    assert(mvdm_softpc_mouse_receive(&record)==ERROR_SUCCESS);
 }
 int main(void)
 {
@@ -59,6 +61,8 @@ int main(void)
     int x=100,y=50;BOOL unchanged=FALSE;
     static const mvdm_mouse_services services={host_ica_lock,host_ica_unlock,DoMouseInterrupt};
     bridge.services=&services;
+    { INPUT_RECORD invalid={0};
+      assert(mvdm_softpc_mouse_receive(&invalid)==ERROR_INVALID_DATA); }
     current_video_mode=3;
     virtual_screen.bottom_right.x=640;virtual_screen.bottom_right.y=200;
     cursor.position.x=100;cursor.position.y=50;

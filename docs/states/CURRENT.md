@@ -193,8 +193,8 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,31 resolved,7 remaining. P22 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->30; relocation records606->34.
-Compiled private C2 header rows144->52; private C2 search roots74->11.
+38 candidates,32 resolved,6 remaining. P23 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->25; relocation records606->28.
+Compiled private C2 header rows144->43; private C2 search roots74->2.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
 Owner-approved P1 mirror delta+2 points/+19 lines is registered as R2721/R2722;
@@ -210,15 +210,16 @@ Directory is verified in [P21](../../artifacts/mvdm-audit/t483-b-c2-dependencies
 final cached full, dual11, directory/capture166 and real COMMAND return passed.
 Vector is delivered in [P22](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p22-delivery.json):
 183 C2 relations cleared; C-VID/CCPU209-slot and real COMMAND checks pass.
-Cumulative mirror increment+7points/+309lines.
+Cumulative mirror increment+8points/+350lines.
 [Mouse owner candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/mouse-guest-provider-decision.json)
-compiled with product parameters; +1 point/+41 lines is approved, not implemented.
+is delivered in [P23](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p23-delivery.json):
+5 C2 relations cleared; extracted-body/bridge15 and actual DOS mouse/COMMAND pass.
 [Text-video candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/text-video-provider-decision.json)
 compiled; +1 point/+97 lines is approved. No production change.
 [WOW page-domain review](../../artifacts/mvdm-audit/t483-b-c2-dependencies/wow-page-domain-provider-review.json)
 identifies24 actual C2 providers; P9 implements their callbacks and preserves
 the existing reclamation failure-injection contract.
-P4-P7 delivered printer, pipe, mouse and termination boundaries:
+P4-P7 deliveries:
 [P4](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p4-delivery.json),
 [P5](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p5-delivery.json),
 [P6](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p6-delivery.json),
@@ -227,8 +228,8 @@ P4-P7 delivered printer, pipe, mouse and termination boundaries:
 24 page-domain C2 relations through the existing CPU callback table, with no
 mirror change. Real CCPU page-domain/reclaim, exact owned reads, actual Win16
 SOL modal menu and COMMAND return passed; SDK declarations replace nt.h.
-Original DOSX status-query inversion reproduced on the S18 control and P1;
-status-query semantics are not claimed passed. No original guest changed.
+Original DOSX status-query inversion reproduced on S18/P1; not claimed passed.
+No original guest changed.
 [P10](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p10-delivery.json) and
 [P11](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p11-delivery.json)
 delivered VM BOP and bridge/capture/I/O ownership with native/real-CCPU and

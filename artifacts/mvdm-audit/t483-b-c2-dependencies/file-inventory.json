@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P22 completes thirty-one files; seven remain; small mirror candidates owner approved",
+  "status": "P23 completes thirty-two files; six remain; small mirror candidates owner approved",
   "files": [
     {
       "id": "BC2F001",
@@ -3726,7 +3726,7 @@
     {
       "id": "BC2F013",
       "file": "src/compat/mvdm_softpc_mouse_guest.c",
-      "status": "owner-approved compiled candidate; production implementation pending",
+      "status": "completed in verified P23 delivery",
       "review": "mouse-guest-provider-decision.json",
       "evidence": [
         {
@@ -4039,7 +4039,8 @@
           "evidence": "/I",
           "product": "ntvdm.exe"
         }
-      ]
+      ],
+      "delivery": "p23-delivery.json"
     },
     {
       "id": "BC2F014",
@@ -9428,11 +9429,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 31,
-    "remaining": 7,
+    "completed": 32,
+    "remaining": 6,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 30,
+    "direct_C2_unique_after": 25,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 34
+    "direct_C2_records_after": 28
   }
 }

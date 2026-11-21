@@ -35,7 +35,6 @@ C1_LAYOUT_ADAPTERS = {"mvdm_monitor_printer.c", "mvdm_vdm_tib.c"}
 ORIGINAL_LAYOUT_ADAPTERS = {
     "base_process.c",
     "mvdm_softpc_text_video.c",
-    "mvdm_softpc_mouse_guest.c",
     'wow_user_private_access.c',
     'wow_common_dialog_calls.c',
 

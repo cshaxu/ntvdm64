@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "file": "src/compat/mvdm_softpc_mouse_guest.c",
-  "status": "owner approved; candidate compiled; production implementation pending",
+  "status": "implemented and verified in P23",
   "candidate_root": "build/t483-s19-mouse-guest-owner",
   "proposal": "Move existing sample-application body to its actual C2 caller nt_mouse.c. Keep generic input unpacking, route query and pure numeric saturation in B. Return input errors to original nt_event.c for its existing DisplayErrorTerm policy.",
   "why": "B currently depends on original anonymous cursor/vector layouts, VM-selected geometry and button state. A callback per field would duplicate the layout contract; moving the owner-specific body is smaller and preserves original algorithms.",
@@ -36,5 +36,6 @@
     "real DOS count/move/retire and COMMAND return",
     "cached full build, dual11 publication, boundary gates, commit/push"
   ],
-  "owner_approval": "2026-11-21: standing approval for necessary non-#error mirror increments of one point and fewer than 100 lines. Approval is not implementation or delivery evidence."
+  "owner_approval": "2026-11-21: standing approval for necessary non-#error mirror increments of one point and fewer than 100 lines. Approval is not implementation or delivery evidence.",
+  "delivery": "p23-delivery.json"
 }

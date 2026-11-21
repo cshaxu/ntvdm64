@@ -31,6 +31,9 @@
 #include <ntddvdeo.h>
 #include "nt_fulsc.h"
 #include "compat/include/mvdm_softpc_mouse_guest.h"
+extern void mouse_pointer_route_changed(int); /* DIVERGENCE(MVDM-HOST-DIV-906): mouse state owner. */
+BOOL mvdm_softpc_mouse_apply(MOUSE_CURSOR_STATUS *,MOUSE_VECTOR *,int *,int *,BOOL *,
+    BOOL,BOOL *,IS16 *,IS16 *);
 #include "compat/include/mvdm_softpc_wow_page_domain.h"
 
 
@@ -2045,4 +2048,41 @@ VOID MouseEoiHook(int IrqLine, int CallCount)
     else {
        bMseEoiPending = FALSE;
        }
+}
+
+BOOL mvdm_softpc_mouse_apply(MOUSE_CURSOR_STATUS *cursor,MOUSE_VECTOR *counter,
+    int *old_x,int *old_y,BOOL *unchanged,BOOL resetting,BOOL *position_set,
+    IS16 *new_x,IS16 *new_y)
+{
+    mvdm_mouse_bridge *state=mvdm_softpc_mouse_current();
+    mvdm_mouse_input_sample input;
+    half_word mode=(half_word)current_video_mode;
+    DWORD error=mvdm_softpc_mouse_prepare(state,virtual_screen.bottom_right.x,
+        virtual_screen.bottom_right.y);
+    if(error)DisplayErrorTerm(EHS_FUNC_FAILED,error,__FILE__,__LINE__);
+    if(!mvdm_softpc_mouse_next(state,&input))return FALSE;
+    /* These original reset calculations must use the selected instance too. */
+    VirtualX=virtual_screen.bottom_right.x;VirtualY=virtual_screen.bottom_right.y;
+    if(input.action==CONSOLE_MOUSE_ENTER && !resetting && !*position_set) {
+        /* The base INT33 owner may have changed position since the last IRQ.
+         * Its current guest position, not the host IRQ cache, seeds the route. */
+        *new_x=cursor->position.x;*new_y=cursor->position.y;*position_set=TRUE;
+    }
+    /* Synchronize reset/guest-set-position before consuming real movement. */
+    EmulateCoordinates(mode,0,0,&cursor->position.x,&cursor->position.y);
+    EmulateCoordinates(mode,mvdm_mouse_coordinate_delta(cursor->position.x,input.dx),
+        mvdm_mouse_coordinate_delta(cursor->position.y,input.dy),&cursor->position.x,&cursor->position.y);
+    counter->x=(IS16)input.dx;counter->y=(IS16)input.dy;
+    *unchanged=*old_x==cursor->position.x && *old_y==cursor->position.y;
+    *old_x=cursor->position.x;*old_y=cursor->position.y;
+    os_pointer_data.button_l=(SHORT)(input.buttons&1);
+    os_pointer_data.button_r=(SHORT)((input.buttons>>1)&1);
+    if(input.action==CONSOLE_MOUSE_LEAVE) {
+        mvdm_softpc_mouse_leave(state);
+    }
+    /* Consume the route edge on the original CPU owner, after committing
+     * guest position and route state. Do not invent POSITION callback bits. */
+    if(input.action==CONSOLE_MOUSE_ENTER || input.action==CONSOLE_MOUSE_LEAVE)
+        mouse_pointer_route_changed(input.action==CONSOLE_MOUSE_ENTER);
+    return TRUE;
 }

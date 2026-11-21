@@ -3537,3 +3537,10 @@ Original vector tables, providers and initialization sequence remain unchanged;
 function bodies move intact, with no callback table or new state. This removes
 183 direct B-to-C2 relations. Owner standing approval covers +1 non-error point
 and +87 lines. Existing source bytes, #error and #line are preserved.
+
+MVDM-HOST-DIV-906: `softpc.new/host/src/nt_mouse.c` owns the existing selected
+mouse state application formerly in B. B retains generic ingress and numeric
+saturation. `nt_event.c` handles the returned input error synchronously using
+its existing DisplayErrorTerm policy. No new queue or state; original locking
+and CPU ownership retained. Owner-approved combined increment+1 non-error
+point/+41 lines; existing #error/#line preserved. See P23 delivery evidence.
