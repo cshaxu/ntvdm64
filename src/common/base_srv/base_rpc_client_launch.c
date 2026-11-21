@@ -15,8 +15,8 @@
 
 static struct {
     uint64_t observation_direct; /* Captured on actual Get delivery, not a selector. */
-    DWORD (*command_ready)(void *);
-    void *command_context;
+    opennt_base_console_activate activate;
+    struct compat_console_activation *activation;
 } launch;
 static LONG request_id;
 static HANDLE parent_event_handle;
@@ -44,10 +44,11 @@ uint64_t OpenNtBaseClientObservationDirect(void)
     return launch.observation_direct;
 }
 
-void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
+void OpenNtBaseClientSetCommandBinding(opennt_base_console_activate activate,
+    struct compat_console_activation *activation)
 {
     (void)OpenNtBaseClientExecutionConnection(reset_launch);
-    launch.command_ready=ready;launch.command_context=context;
+    launch.activate=activate;launch.activation=activation;
 }
 
 static BOOL receipt_seen(const ULONG receipts[3],ULONG limit,ULONG receipt)
@@ -337,10 +338,10 @@ done:
         ) {
         launch.observation_direct=observation_direct;
     }
-    if (message->ReturnValue==STATUS_SUCCESS && launch.command_ready &&
+    if (message->ReturnValue==STATUS_SUCCESS && launch.activate &&
         !base->u.GetNextVDMCommand.WaitObjectForVDM && base->u.GetNextVDMCommand.CmdLen &&
         !(base->u.GetNextVDMCommand.VDMState & ASKING_FOR_ENVIRONMENT)) {
-        error=launch.command_ready(launch.command_context);
+        error=launch.activate(launch.activation, TRUE);
         if (error) {
             SetLastError(error);message->ReturnValue=(ULONG)STATUS_UNSUCCESSFUL;
             return STATUS_UNSUCCESSFUL;

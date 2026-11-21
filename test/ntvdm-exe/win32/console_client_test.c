@@ -2,6 +2,7 @@
  * desktop observer's normal Console: CREATE_NO_WINDOW rejects buffer shrink
  * even through the native API. Only broker delivery and session binding are
  * stubbed; both I/O implementations and Console operations are real. */
+#include "common/base_srv/base_rpc_client.h"
 #include "ntvdm-exe/win32/console_client.h"
 #include "compat/include/console_activation.h"
 #include "compat/include/command_process.h"
@@ -203,7 +204,8 @@ DWORD worker_base_console_close_event(HANDLE *event)
     return broker_console_close && DuplicateHandle(GetCurrentProcess(),broker_console_close,
         GetCurrentProcess(),event,SYNCHRONIZE,FALSE,0) ? ERROR_SUCCESS : GetLastError();
 }
-void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
+void OpenNtBaseClientSetCommandBinding(opennt_base_console_activate ready,
+    struct compat_console_activation *context)
 { (void)ready;(void)context; }
 DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
 {

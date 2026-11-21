@@ -51,12 +51,13 @@ static BOOL traced_apply(const void *data,uint32_t bytes,uint32_t generation,
 #undef Client_Get
 #undef OpenNtBaseApplyGetCommand
 #undef OpenNtBaseClientSetCommandBinding
-static DWORD (*saved_ready)(void *);
-static DWORD traced_ready(void *context)
+static opennt_base_console_activate saved_ready;
+static DWORD traced_ready(struct compat_console_activation *context, BOOL active)
 {
-    DWORD result=saved_ready(context);note("command-ready",result,0,0,0);return result;
+    DWORD result=saved_ready(context,active);note("command-ready",result,0,0,0);return result;
 }
-void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
+void OpenNtBaseClientSetCommandBinding(opennt_base_console_activate ready,
+    struct compat_console_activation *context)
 {
     saved_ready=ready;diagnostic_actual_binding(ready ? traced_ready : NULL,context);
 }

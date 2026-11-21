@@ -54,7 +54,8 @@ DWORD OpenNtBaseClientWorkerIoCheckpoint(DWORD reason, DWORD request,
 DWORD OpenNtBaseClientWaitFrontend(HANDLE *pipe, HANDLE *frontend,
     DWORD *generation, HANDLE *ready)
 { (void)pipe; (void)frontend; (void)generation; (void)ready; return unexpected_broker(); }
-void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *), void *context)
+void OpenNtBaseClientSetCommandBinding(opennt_base_console_activate ready,
+    struct compat_console_activation *context)
 { (void)ready; (void)context; (void)unexpected_broker(); }
 
 VOID APIENTRY ExitVDM(BOOL is_wow, ULONG wow_task)

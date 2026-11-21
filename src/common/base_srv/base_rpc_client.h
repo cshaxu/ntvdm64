@@ -77,8 +77,11 @@ DWORD OpenNtBaseClientRequestFrontend(HANDLE capability);
 
 DWORD OpenNtBaseClientTakeFrontend(HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready);
 DWORD OpenNtBaseClientWaitFrontend(HANDLE *pipe,HANDLE *frontend,DWORD *frontend_generation,HANDLE *ready);
-/* Worker-owned I/O binding, invoked only before delivery of a real command. */
-void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context);
+/* Optional console activation before delivery of a real command. */
+struct compat_console_activation;
+typedef DWORD (*opennt_base_console_activate)(struct compat_console_activation *, BOOL);
+void OpenNtBaseClientSetCommandBinding(opennt_base_console_activate activate,
+    struct compat_console_activation *activation);
 void OpenNtBaseClientDisconnectCurrent(void);
 
 

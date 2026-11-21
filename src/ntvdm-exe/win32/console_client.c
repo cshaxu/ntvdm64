@@ -118,12 +118,6 @@ void ntvdm_console_client_end(session *owner)
     if (owner && owner->console_client) console_client_destroy(owner->console_client);
 }
 
-static DWORD console_command_ready(void *context)
-{
-    console_client *client=context;
-    return compat_console_activate(&client->activation, TRUE);
-}
-
 DWORD ntvdm_console_client_begin(session *owner)
 {
     console_client *client;
@@ -176,7 +170,7 @@ DWORD ntvdm_console_client_begin(session *owner)
     owner->host_context.mouse=&client->mouse;
     owner->host_context.console_endpoint=&client->endpoint;
     owner->console_client=client;
-    OpenNtBaseClientSetCommandBinding(console_command_ready,client);
+    OpenNtBaseClientSetCommandBinding(compat_console_activate, &client->activation);
     return ERROR_SUCCESS;
 }
 

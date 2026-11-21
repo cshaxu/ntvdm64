@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
+#include "common/base_srv/base_rpc_client.h"
 #include "conapi.h"
 #include "compat/include/console_mouse.h"
 #include "compat/include/mvdm_keyboard_history.h"
@@ -56,7 +57,8 @@ static BOOL batch_prepend(HANDLE h,PINPUT_RECORD records,DWORD count,LPDWORD wri
 DWORD batch_mouse_capacity(mvdm_mouse_bridge *state)
 { (void)state;return mouse_capacity; }
 /* No frontend is bound by this controlled-queue fixture. */
-void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
+void OpenNtBaseClientSetCommandBinding(opennt_base_console_activate ready,
+    struct compat_console_activation *context)
 { (void)ready;(void)context; }
 DWORD OpenNtBaseClientTakeFrontend(HANDLE *p,HANDLE *s,DWORD *g,HANDLE *r)
 { (void)p;(void)s;(void)g;(void)r;return ERROR_NOT_SUPPORTED; }

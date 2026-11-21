@@ -2,6 +2,7 @@
 #include <string.h>
 #include <windows.h>
 
+#include "common/base_srv/base_rpc_client.h"
 #include "conapi.h"
 #include "ntvdm-exe/session/session.h"
 
@@ -10,7 +11,8 @@ HANDLE GetConsoleInputWaitHandle(VOID);
 /* This fixture deliberately selects no frontend. Link the real Console
  * client so its existing no-channel native path, not a test substitute,
  * supplies the historical operations. Remote ownership has its own fixture. */
-void OpenNtBaseClientSetCommandBinding(DWORD (*ready)(void *),void *context)
+void OpenNtBaseClientSetCommandBinding(opennt_base_console_activate ready,
+    struct compat_console_activation *context)
 { (void)ready;(void)context; }
 DWORD OpenNtBaseClientTakeFrontend(HANDLE *pipe,HANDLE *process,DWORD *generation,HANDLE *ready)
 { (void)pipe;(void)process;(void)generation;(void)ready;return ERROR_NOT_SUPPORTED; }
