@@ -29,7 +29,7 @@ try{
  $header="$root/owned_view_read_body.h";$fixture="$PSScriptRoot/wow_owned_view_read_fixture.c"
  [IO.File]::WriteAllText($header,($bodies -join "`n`n"),[Text.UTF8Encoding]::new($false))
  Get-FileHash $SourceFile,$fixture,$header,$CompilerDriver,$PSCommandPath|Export-Csv -NoTypeInformation "$root/inputs.csv"
- $line='/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /O2 /MT /W4 /WX /I"'+$root+'" "'+$fixture+'" /Fo"'+$root+'/unit.obj" /Fe"'+$root+'/unit.exe" /link user32.lib"'
+ $line='/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /O2 /MT /W4 /WX /I"'+$repo+'/src" /I"'+$root+'" "'+$fixture+'" /Fo"'+$root+'/unit.obj" /Fe"'+$root+'/unit.exe" /link user32.lib"'
  Owned compile $env:ComSpec $line 120
  $bytes=[IO.File]::ReadAllBytes("$root/unit.exe");$pe=[BitConverter]::ToInt32($bytes,60)
  if([BitConverter]::ToUInt16($bytes,$pe+4) -ne 0x14c){throw 'MSVC Win32/x86 required'}

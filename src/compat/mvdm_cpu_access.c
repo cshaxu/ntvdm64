@@ -13,7 +13,27 @@ BOOL mvdm_cpu_access_install(const mvdm_cpu_access *provider)
         !provider->machine_status || !provider->flags ||
         !provider->delay_interrupt || !provider->cancel_interrupt ||
         !provider->acquire_location || !provider->release_location ||
-        !provider->copy_to_guest) {
+        !provider->copy_to_guest ||
+        !provider->read_dword ||
+        !provider->twenty_bit_wrapping ||
+        !provider->fill_bytes ||
+        !provider->store_dword ||
+        !provider->store_word ||
+        !provider->load_bytes ||
+        !provider->store_bytes ||
+        !provider->linear_pointer ||
+        !provider->physical_pointer ||
+        !provider->cr0 ||
+        !provider->cr3 ||
+        !provider->set_cr0 ||
+        !provider->set_cr3 ||
+        !provider->gdt_base ||
+        !provider->gdt_limit ||
+        !provider->set_gdt ||
+        !provider->allocate_virtual_memory ||
+        !provider->free_virtual_memory ||
+        !provider->add_virtual_memory ||
+        !provider->remove_virtual_memory) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }

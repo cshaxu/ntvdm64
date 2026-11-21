@@ -148,6 +148,47 @@ int mvdm_guest_location_release(mvdm_guest_location_lease *lease, int commit)
 int mvdm_guest_location_copy_to_guest(const mvdm_guest_location *p,
     const uint8_t *bytes, uint32_t n)
 { (void)p; (void)bytes; (void)n; return 0; }
+/* Page-view operations are outside this debug-only fake CPU. */
+ULONG c_sas_dw_at(ULONG address)
+{ (void)address; abort(); return 0; }
+int c_sas_twenty_bit_wrapping_enabled(void)
+{ abort(); return 0; }
+void c_sas_fills(ULONG address, BYTE value, ULONG count)
+{ (void)address; (void)value; (void)count; abort(); }
+void c_sas_storedw(ULONG address, ULONG value)
+{ (void)address; (void)value; abort(); }
+void c_sas_storew(ULONG address, USHORT value)
+{ (void)address; (void)value; abort(); }
+void c_sas_loads(ULONG address, BYTE *bytes, ULONG count)
+{ (void)address; (void)bytes; (void)count; abort(); }
+void c_sas_stores(ULONG address, BYTE *bytes, ULONG count)
+{ (void)address; (void)bytes; (void)count; abort(); }
+BYTE * c_GetLinAdd(ULONG address)
+{ (void)address; abort(); return 0; }
+BYTE * c_GetPhyAdd(ULONG address)
+{ (void)address; abort(); return 0; }
+ULONG c_getCR0(void)
+{ abort(); return 0; }
+ULONG c_getCR3(void)
+{ abort(); return 0; }
+void c_setCR0(ULONG value)
+{ (void)value; abort(); }
+void c_setCR3(ULONG value)
+{ (void)value; abort(); }
+ULONG c_getGDT_BASE(void)
+{ abort(); return 0; }
+USHORT c_getGDT_LIMIT(void)
+{ abort(); return 0; }
+void c_setGDT_BASE_LIMIT(ULONG base, USHORT limit)
+{ (void)base; (void)limit; abort(); }
+LONG VdmAllocateVirtualMemory(ULONG *address, ULONG bytes, BOOL commit)
+{ (void)address; (void)bytes; (void)commit; abort(); return 0; }
+LONG VdmFreeVirtualMemory(ULONG address)
+{ (void)address; abort(); return 0; }
+LONG VdmAddVirtualMemory(ULONG host_address, ULONG bytes, ULONG *intel_address)
+{ (void)host_address; (void)bytes; (void)intel_address; abort(); return 0; }
+LONG VdmRemoveVirtualMemory(ULONG address)
+{ (void)address; abort(); return 0; }
 #include "../../src/ntvdm-exe/softpc/mvdm_dpmi_binding.c"
 #include "compat/include/dpmi_host.h"
 

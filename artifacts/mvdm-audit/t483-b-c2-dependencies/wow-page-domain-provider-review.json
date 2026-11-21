@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "file": "src/compat/mvdm_softpc_wow_page_domain.c",
-  "status": "provider and lifetime audit complete; callback implementation next; not delivered",
+  "status": "Implemented and targeted-tested in P9; see p9-delivery.json",
   "direct_relationships": 24,
   "relocation_records": 198,
   "providers": [
@@ -115,5 +115,6 @@
     "Adapt function-extraction checks to callback access rather than restoring private C names.",
     "Run actual CCPU page-domain, window reclaim and real Win16 acceptance after final code."
   ],
-  "limits": "No claim that this file is already decoupled; B-C1 nt.h and USER ABI remain S20 scope."
+  "limits": "This file no longer consumes C1 nt.h: NTSTATUS uses the SDK declaration. Global B-C1 cleanup remains S20.",
+  "delivery": "p9-delivery.json"
 }

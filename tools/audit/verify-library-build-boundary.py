@@ -45,7 +45,6 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     'mvdm_vdm_tib.c',
     'wow_ole_descriptor_binding.c',
     'mvdm_cvidc_vector_binding.c',
-    'mvdm_softpc_wow_page_domain.c',
     'wow_bitmap_bindings.c',
     'wow_button_lifetime.c',
     'wow_button_resources.c',

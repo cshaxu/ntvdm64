@@ -30,6 +30,8 @@
 #include "compat/include/wow_gdi_alias.h"
 #include "non-mvdm/public/sdk/inc/nt.h"
 
+extern BOOL ntvdm_dpmi_initialize(void);
+
 extern BOOL WINAPI StoreDC(WORD, WORD, WORD);
 extern BOOL WINAPI CacheReleasedDC(WORD, WORD, WORD);
 extern BOOL WINAPI ReleaseCachedDCs(WORD, WORD, WORD, HWND, UINT);
@@ -5156,6 +5158,8 @@ static int run_fixture(void)
 
     /* A worker domain is never a process-global fallback: without a bound
      * session or protected mode, admission must leave no published view. */
+    stage = "provider-binding";
+    if (!ntvdm_dpmi_initialize()) goto done;
     stage = "unbound-rejection";
     {
         ULONG count = 0x4479u;

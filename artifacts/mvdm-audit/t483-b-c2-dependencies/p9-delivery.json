@@ -1,0 +1,186 @@
+{
+  "packet": "M0 T483 S19 P9",
+  "baseline": "843c0925c",
+  "status": "verified P9 delivery",
+  "file": "src/compat/mvdm_softpc_wow_page_domain.c",
+  "progress": {
+    "total": 38,
+    "completed": 12,
+    "remaining": 26
+  },
+  "counts_B_C2": {
+    "linked-relocations": {
+      "records": 365,
+      "unique": 285
+    },
+    "compiled-headers": {
+      "records": 111
+    },
+    "search-paths": {
+      "records": 20
+    }
+  },
+  "counts_B_C1": {
+    "linked-relocations": {
+      "records": 70,
+      "unique": 58
+    },
+    "compiled-headers": {
+      "records": 633
+    },
+    "search-paths": {
+      "records": 36
+    }
+  },
+  "removed_this_file": {
+    "direct_relationships": 24,
+    "relocation_records": 198,
+    "C2_search_roots": 9,
+    "C1_compiled_headers": 6
+  },
+  "mirror_delta": {
+    "non_error_points": 0,
+    "non_error_lines": 0
+  },
+  "cumulative_mirror_delta": {
+    "non_error_points": 2,
+    "non_error_lines": 22
+  },
+  "providers": [
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getCPL"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getCR0"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getCR3"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getGDT_BASE"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getGDT_LIMIT"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getVM"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_setCR0"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_setCR3"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_setGDT_BASE_LIMIT"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "symbol": "_xtrn2phy"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_GetLinAdd"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_GetPhyAdd"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_dw_at"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_fills"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_loads"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_memory_size"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_storedw"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_stores"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_storew"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_twenty_bit_wrapping_enabled"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "symbol": "_VdmAddVirtualMemory"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "symbol": "_VdmAllocateVirtualMemory"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "symbol": "_VdmFreeVirtualMemory"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "symbol": "_VdmRemoveVirtualMemory"
+    }
+  ],
+  "implementation": "Reuse four existing CPU operations, append twenty actual C providers to the same immutable B table. F composes addresses; no forwarding algorithm. Replace nt.h with SDK winternl.h for NTSTATUS. Remove unused LDT declarations and C2 search paths.",
+  "lifetime": "Existing page-domain allocation/borrow bookkeeping stays in B. Original register, SAS and nt_mem algorithms stay C2. Bind before entry and retain provider through registered host-context teardown. Synchronous raw views stay on original owner thread. No new queue/state machine.",
+  "semantic_proof": {
+    "algorithm_comparison": "Exact equality after reversing callback call spelling and uint32_t-to-ULONG physical output type alignment; removed original extern declarations and replaced nt.h with SDK NTSTATUS declarations.",
+    "direct_B_C2": {
+      "unique": 285,
+      "records": 365
+    },
+    "mirror_files_changed": []
+  },
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "debug_binding_and_real_ccpu": 0,
+    "page_domain_real_ccpu": 0,
+    "window_reclaim_real_ccpu": 0,
+    "owned_read": "generation, retirement, metadata, fallback and LastError passed; scalar0 mapped644",
+    "real_win16_sol": "PASS SOL Options modal route and launcher completion",
+    "real_command": "PASS modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+    "final_gates": 0,
+    "boundary_negative_controls": 8,
+    "published_image_hashes": 22
+  },
+  "failure_injection": "window-reclaim now overrides only free_virtual_memory in the test provider view. Rejection, retained backing, retry and teardown are asserted; production provider remains immutable.",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "0a6b0693-3cc4-49f9-bfa3-f46d8838489e",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "attempts": [
+    "First full build failed because removal of private search paths exposed nt.h support-header dependency. Actual use was only NTSTATUS; switched to SDK declaration, reran both complete builds successfully before publication."
+  ],
+  "scope": "Targeted S19 provider/ownership delivery, not a new full Win3.1/Win95 matrix claim.",
+  "evidence_root": "build\\t483-s19-wow-page-domain"
+}

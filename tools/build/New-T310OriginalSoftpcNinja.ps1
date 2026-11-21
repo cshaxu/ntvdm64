@@ -1246,7 +1246,7 @@ $graph.Add('build obj/compat/mvdm_softpc_mouse_context.obj: cc ' + (NinjaPath (J
 $graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/compat/mvdm_softpc_mouse_context.obj'
 $graph.Add('build obj/compat/mvdm_softpc_wow_page_domain.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_wow_page_domain.c')))
-$graph.Add('  cflags = ' + $compatCcpuFlags)
+$graph.Add('  cflags = ' + $libraryFlags)
 $adapterSoftpcObjects += 'obj/compat/mvdm_softpc_wow_page_domain.obj'
 $graph.Add('build obj/adapter-softpc/mvdm_shadow_registry.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_shadow_registry.c')))
 $graph.Add('  cflags = ' + $libraryFlags)

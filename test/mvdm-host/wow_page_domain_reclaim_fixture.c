@@ -3,6 +3,7 @@
  * Successful frees still execute original nt_mem; no production fault hook. */
 #include <windows.h>
 #include <stdio.h>
+#include "compat/include/mvdm_cpu_access.h"
 
 extern LONG VdmFreeVirtualMemory(ULONG address);
 static ULONG failed_address;
@@ -28,9 +29,16 @@ static LONG wow_fixture_free_memory(ULONG address)
     return VdmFreeVirtualMemory(address);
 }
 
-#define VdmFreeVirtualMemory wow_fixture_free_memory
+static const mvdm_cpu_access *wow_fixture_cpu_current(void)
+{
+    static mvdm_cpu_access provider;
+    provider = *mvdm_cpu_access_current();
+    provider.free_virtual_memory = wow_fixture_free_memory;
+    return &provider;
+}
+#define mvdm_cpu_access_current wow_fixture_cpu_current
 #include "compat/mvdm_softpc_wow_page_domain.c"
-#undef VdmFreeVirtualMemory
+#undef mvdm_cpu_access_current
 
 /* Metadata-only index collision test: never dereference these synthetic guest
  * addresses. Real backing retirement/free failures are exercised separately. */

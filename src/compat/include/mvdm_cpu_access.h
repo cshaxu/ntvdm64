@@ -6,7 +6,8 @@
 
 /* Immutable CCPU operations, installed before guest execution. The provider
  * owns CPU state and mappings; B retains only process-lifetime function pointers.
- * Guest addresses and descriptor outputs are numeric, never borrowed objects. */
+ * Raw memory views are synchronous borrows on the CPU owner; they never
+ * cross threads or outlive the existing mapping/host-context lifetime. */
 enum { MVDM_CPU_ACCESS_USER = 0x2, MVDM_CPU_ACCESS_V86 = 0x4 };
 
 typedef struct mvdm_cpu_access {
@@ -29,6 +30,27 @@ typedef struct mvdm_cpu_access {
         mvdm_guest_location_lease *);
     int (*release_location)(mvdm_guest_location_lease *, int);
     int (*copy_to_guest)(const mvdm_guest_location *, const uint8_t *, uint32_t);
+    /* Original SAS, register and allocation operations used by WOW page views. */
+    ULONG (__cdecl *read_dword)(ULONG address);
+    int (__cdecl *twenty_bit_wrapping)(void);
+    void (__cdecl *fill_bytes)(ULONG address, BYTE value, ULONG count);
+    void (__cdecl *store_dword)(ULONG address, ULONG value);
+    void (__cdecl *store_word)(ULONG address, USHORT value);
+    void (__cdecl *load_bytes)(ULONG address, BYTE *bytes, ULONG count);
+    void (__cdecl *store_bytes)(ULONG address, BYTE *bytes, ULONG count);
+    BYTE * (__cdecl *linear_pointer)(ULONG address);
+    BYTE * (__cdecl *physical_pointer)(ULONG address);
+    ULONG (__cdecl *cr0)(void);
+    ULONG (__cdecl *cr3)(void);
+    void (__cdecl *set_cr0)(ULONG value);
+    void (__cdecl *set_cr3)(ULONG value);
+    ULONG (__cdecl *gdt_base)(void);
+    USHORT (__cdecl *gdt_limit)(void);
+    void (__cdecl *set_gdt)(ULONG base, USHORT limit);
+    LONG (__cdecl *allocate_virtual_memory)(ULONG *address, ULONG bytes, BOOL commit);
+    LONG (__cdecl *free_virtual_memory)(ULONG address);
+    LONG (__cdecl *add_virtual_memory)(ULONG host_address, ULONG bytes, ULONG *intel_address);
+    LONG (__cdecl *remove_virtual_memory)(ULONG address);
 } mvdm_cpu_access;
 BOOL mvdm_cpu_access_install(const mvdm_cpu_access *provider);
 const mvdm_cpu_access *mvdm_cpu_access_current(void);

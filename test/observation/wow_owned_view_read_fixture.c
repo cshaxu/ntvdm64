@@ -43,7 +43,7 @@ ULONG c_sas_dw_at(ULONG address)
     CopyMemory(&value, checked_address(address, sizeof(value)), sizeof(value));
     return value;
 }
-static void c_sas_loads(ULONG address, void *output, ULONG bytes)
+static void c_sas_loads(ULONG address, BYTE *output, ULONG bytes)
 {
     ++fallback_reads;
     CopyMemory(output, checked_address(address, bytes), bytes);
@@ -53,7 +53,18 @@ static void store(ULONG address, ULONG value)
 {
     CopyMemory(checked_address(address, sizeof(value)), &value, sizeof(value));
 }
+#include "compat/include/mvdm_cpu_access.h"
+static const mvdm_cpu_access *mvdm_cpu_access_current_fixture(void)
+{
+    static mvdm_cpu_access provider;
+    provider.linear_pointer = c_GetLinAdd;
+    provider.read_dword = c_sas_dw_at;
+    provider.load_bytes = c_sas_loads;
+    return &provider;
+}
+#define mvdm_cpu_access_current mvdm_cpu_access_current_fixture
 #include "owned_view_read_body.h"
+#undef mvdm_cpu_access_current
 
 int main(int argc, char **argv)
 {

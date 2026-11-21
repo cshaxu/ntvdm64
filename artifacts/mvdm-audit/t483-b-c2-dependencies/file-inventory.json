@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P7 completes eleven files; remaining27 include four pending mirror decisions",
+  "status": "P9 completes twelve files; remaining26 include four pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -4326,7 +4326,7 @@
     {
       "id": "BC2F016",
       "file": "src/compat/mvdm_softpc_wow_page_domain.c",
-      "status": "24 C2 providers and lifecycle audited; reuse and extend CPU callbacks next; production unchanged",
+      "status": "P9 verified: 24 actual C2 providers bound through immutable B CPU table; original algorithms and allocation rollback preserved; private C headers removed; mirror delta zero",
       "evidence": [
         {
           "kind": "linked-relocations",

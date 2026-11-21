@@ -26,9 +26,12 @@ class BoundaryTest(unittest.TestCase):
         with patch.object(boundary, "ninja", side_effect=lambda _, tool, *args: outputs[tool].replace(chr(92), "/")):
             boundary.verify("x86/worker", ["ntvdm.exe"])
 
-    def test_named_adapter_can_read_C(self):
-        self.check_unit("mvdm_softpc_wow_page_domain.c",
-                        "src/mvdm-host/softpc.new/base/ccpu386/c_addr.h")
+    def test_page_domain_has_no_C_exception(self):
+        self.check_unit("mvdm_softpc_wow_page_domain.c", "src/compat/include/mvdm_cpu_access.h")
+        for header in ("src/non-mvdm/public/sdk/inc/nt.h",
+                       "src/mvdm-host/softpc.new/base/ccpu386/c_addr.h"):
+            with self.assertRaises(ValueError):
+                self.check_unit("mvdm_softpc_wow_page_domain.c", header)
 
     def test_ordinary_B_cannot_read_C(self):
         with self.assertRaises(ValueError):
