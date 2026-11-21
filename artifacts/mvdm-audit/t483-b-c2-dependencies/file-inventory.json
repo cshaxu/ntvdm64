@@ -7689,7 +7689,7 @@
     {
       "id": "BC2F029",
       "file": "src/compat/wow_hook_callback.c",
-      "status": "not yet audited",
+      "status": "owner projection compiled; mirror +1 point/+30 lines awaits approval",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7961,7 +7961,8 @@
           "evidence": "mvdm-host/wow32/wowhooks.h",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "review": "hook-provider-decision.json"
     },
     {
       "id": "BC2F030",

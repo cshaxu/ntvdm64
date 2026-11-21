@@ -257,4 +257,7 @@ clears three direct C2 calls through immutable same-image callbacks bound before
 original DLL attach. Nested/resource guards, actual loader, real Win16 common
 and ordinary dialogs, and COMMAND return pass. Dual11 package
 42cfa459-5dba-46cc-aaf8-2be639ec98ce; mirror delta0 points/0 lines.
+[Hook owner candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/hook-provider-decision.json)
+compiles with actual product parameters; +1 point/+30 non-error mirror lines
+awaits approval. Its six direct relationships remain open; production unchanged.
 S19 remains active; S20 not admitted.

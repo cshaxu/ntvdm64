@@ -1,0 +1,54 @@
+{
+  "packet": "M0 T483 S19",
+  "id": "BC2F029",
+  "file": "src/compat/wow_hook_callback.c",
+  "status": "owner projection compiled; mirror increase awaits approval; production unchanged",
+  "relationships": 6,
+  "providers": {
+    "wowhooks.c": [
+      "W32GetHookStateData",
+      "WowOriginalStdHookProc",
+      "vHookParams",
+      "viCurrentHookStateDataIndex"
+    ],
+    "wmdisp32.c": [
+      "fThunkDDEmsg"
+    ],
+    "wumsg.c": [
+      "fWhoCalled"
+    ]
+  },
+  "problem": "B interprets C2 HOOKSTATEDATA and accesses nested TLS directly; callback conversion must remove private layout as well as linked symbols.",
+  "solution": "Original wowhooks.c supplies capture/restore of six existing scalar fields and a bounded original hook-type query. Existing original dispatch is the fourth callback. B owns typed callback signatures and stack snapshot; generated same-image composition supplies addresses before DLL initialization.",
+  "ordering": [
+    "Capture before wow_task_callback_enter exactly as current code. No capture side effect.",
+    "Query index after task scope enters, before borrow and enrollment; missing/inactive hook remains inactive.",
+    "Restore original state in existing nested finally before creation_finish and borrowed resource retirement.",
+    "Keep all 32 native hook stubs and original algorithm; no additional TLS or state machine."
+  ],
+  "mirror": {
+    "file": "src/mvdm-host/wow32/wowhooks.c",
+    "before": {
+      "blocks": 38,
+      "added": 91,
+      "deleted": 21
+    },
+    "candidate": {
+      "blocks": 39,
+      "added": 121,
+      "deleted": 21
+    },
+    "non_error_delta": {
+      "points": 1,
+      "lines": 30
+    },
+    "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+    "error_line_policy": "Exact current bytes preserved; append-only owner projections. Paired exclusion parser zero issues. No following original source line is moved."
+  },
+  "verification": {
+    "compile": "Same actual wowhooks.c production command, candidate input/output only; exit0.",
+    "runtime": "Not implemented, linked or exercised in production; no completion credit."
+  },
+  "evidence_root": "build/t483-s19-hook-owner",
+  "pending": "Owner approval requested for +1 point/+30 lines and owner-local adapter bodies exceeding3 lines. After approval remove four private C2 includes from B, bind callbacks and expand existing hook creation/unwind witness; then cached full build, dual11 publication, targeted runtime, commit/push."
+}
