@@ -81,8 +81,18 @@ S17 admitted. Necessary cross-thread handoffs remain documented.
 
 ## S17 Progress
 
-Admission only. Build the DIR-ordered F dependency inventory before product
-changes. S17 implementation and verification have not yet started.
+[F file inventory](../../artifacts/mvdm-audit/t483-f-layer-dependencies/file-inventory.json):
+14/14 audited,0 pending. P2 removes16 private search-root records across13
+files. Final sibling private includes/search roots and ordinary live
+relocations are0. Two DLL ABI imports and6 named process-image observations
+remain explicitly reviewed loading/protocol relationships.
+
+[Delivery](../../artifacts/mvdm-audit/t483-f-layer-dependencies/delivery.json):
+cached full x86/x64/reference, dual11 publication, classification424 checks,
+real bootstrap and COMMAND/EDIT/CMD/MEM return passed. No algorithm/ABI or
+guest changes; non-error mirror delta0 points/0 lines. Package
+733c98ae-ab34-4dad-afd4-380e0f43f0b5. S17 remains the sole packet pending
+owner review after P2 delivery.
 
 ## Recent Governance
 

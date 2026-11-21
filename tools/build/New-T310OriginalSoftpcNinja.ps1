@@ -1406,8 +1406,7 @@ if ($Architecture -eq 'x86') {
     $commonBaseFlags = $authoredCommonFlags + ($softpcIncludeRoots -join ' ') + ' /we4013' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/inc')) + '"' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/server')) + '"'
-    $baseAdapterFlags = $commonBaseFlags + ' /I "' + $baseBindingInclude + '"' +
-        ' /I "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include')) + '"'
+    $baseAdapterFlags = $commonBaseFlags + ' /I "' + $baseBindingInclude + '"'
     # Select the original configuration closure without importing client RPC
     # dispatch or CSR capture into the service. The function bodies are copied
     # verbatim from the tracked mirror; the generated carrier is build-only.
@@ -1623,7 +1622,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  command = link.exe /nologo /subsystem:windows /entry:mainCRTStartup /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib')
     $graph.Add('build native-lifetime-pair-target.exe: native_pair_gui_link obj/tests/native_lifetime_pair.obj')
     $graph.Add('build obj/run16/entry.obj: cc ' + (NinjaPath (Join-Path $run16Root 'main.c')))
-    $graph.Add('  cflags = ' + $baseAdapterFlags)
+    $graph.Add('  cflags = ' + $commonBaseFlags)
     $graph.Add('build obj/common/application_search.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/application_search.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/application_search.obj: cc ' + (NinjaPath (Join-Path $root 'test/common/application_search_test.c')))
@@ -1916,7 +1915,7 @@ if ($Architecture -eq 'x86') {
         $graph.Add('build ntvwm.exe: native_worker_import')
     }
     $graph.Add('build obj/run16/image_classification.obj: cc ' + (NinjaPath (Join-Path $run16Root 'image_classification.c')))
-    $graph.Add('  cflags = ' + $baseAdapterFlags)
+    $graph.Add('  cflags = ' + $commonBaseFlags)
     $graph.Add('build obj/common/native_image.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native_image.c')))
     $graph.Add('  cflags = ' + $commonBaseFlags)
     # One worker; actual child machine selects the reviewed matching Hook installer.
@@ -1940,7 +1939,7 @@ if ($Architecture -eq 'x86') {
         $graph.Add('  cflags = ' + $hookCFlags)
     }
     $graph.Add('build obj/nthook32/classification.obj: cc ' + (NinjaPath (Join-Path $root 'src/nthook-dll/hook_classification.c')))
-    $graph.Add('  cflags = ' + $baseAdapterFlags + ' /Gy')
+    $graph.Add('  cflags = ' + $commonBaseFlags + ' /Gy')
     $graph.Add('build lib-process-hook.lib: lib ' + ($hookObjects -join ' '))
     $graph.Add('build obj/tests/win32_process_hook.obj: cc ' + (NinjaPath (Join-Path $root 'test/lib-win32/process-hook/payload_test.c')))
     $graph.Add('  cflags = ' + $hookCFlags)

@@ -1,0 +1,120 @@
+{
+  "packet": "M0 T483 S17 P2",
+  "baseline": "877c8f757",
+  "files": {
+    "audited": 14,
+    "total": 14,
+    "pending": 0,
+    "search_root_affected": 13
+  },
+  "removed_private_search_path_rows": 16,
+  "final_same_F_evidence": {
+    "binary-imports": [
+      {
+        "from": "vdmredir-dll",
+        "to": "ntvdm-exe",
+        "source": "VDMREDIR.dll",
+        "line_or_section": "",
+        "target": "ntvdm.exe",
+        "evidence": "PE import",
+        "product": "VDMREDIR.dll"
+      },
+      {
+        "from": "wow32-dll",
+        "to": "ntvdm-exe",
+        "source": "wow32.dll",
+        "line_or_section": "",
+        "target": "ntvdm.exe",
+        "evidence": "PE import",
+        "product": "wow32.dll"
+      }
+    ],
+    "compiled-headers": [],
+    "generated-rpc-relocations": [],
+    "linked-relocations": [],
+    "literal-includes": [],
+    "resolved-includes": [],
+    "runtime-image-names": [
+      {
+        "from": "ntsrv-exe",
+        "to": "ntcon-exe",
+        "source": "src/ntsrv-exe/opennt/source/frontend_registry.c",
+        "line_or_section": "680",
+        "target": "ntcon.exe",
+        "evidence": "system32\\\\ntcon.exe",
+        "product": "ntsrv.exe"
+      },
+      {
+        "from": "ntsrv-exe",
+        "to": "ntvdm-exe",
+        "source": "src/ntsrv-exe/opennt/source/worker_registry.c",
+        "line_or_section": "645",
+        "target": "ntvdm.exe",
+        "evidence": "system32\\\\ntvdm.exe",
+        "product": "ntsrv.exe"
+      },
+      {
+        "from": "ntsrv-exe",
+        "to": "ntvdm-exe",
+        "source": "src/ntsrv-exe/opennt/source/worker_registry.c",
+        "line_or_section": "646",
+        "target": "ntvdm.exe",
+        "evidence": "system32\\\\ntvdm.exe",
+        "product": "ntsrv.exe"
+      },
+      {
+        "from": "ntsrv-exe",
+        "to": "ntvwm-exe",
+        "source": "src/ntsrv-exe/opennt/source/worker_registry.c",
+        "line_or_section": "714",
+        "target": "ntvwm.exe",
+        "evidence": "system32\\\\ntvwm.exe",
+        "product": "ntsrv.exe"
+      },
+      {
+        "from": "ntvdm-exe",
+        "to": "run16-exe",
+        "source": "src/ntvdm-exe/win32/command_process_compat.c",
+        "line_or_section": "194",
+        "target": "run16.exe",
+        "evidence": "system32\\\\run16.exe",
+        "product": "ntvdm.exe"
+      },
+      {
+        "from": "run16-exe",
+        "to": "ntsrv-exe",
+        "source": "src/run16-exe/main.c",
+        "line_or_section": "126",
+        "target": "ntsrv.exe",
+        "evidence": "system32\\\\ntsrv.exe",
+        "product": "run16.exe"
+      }
+    ],
+    "search-paths": []
+  },
+  "mirror_non_error_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "package": "733c98ae-ab34-4dad-afd4-380e0f43f0b5",
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "publication_images": 11,
+    "publication_destinations": [
+      "assets/release",
+      "O:/winnt/system32"
+    ],
+    "native_classification": "424 checks; failures=0; handle-delta=0",
+    "bootstrap": "PASS actual fixture exit zero and assertion output",
+    "command": "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion"
+  },
+  "attempts": [
+    "Initial x86 classifier invocation used redirected System32 paths: 69 failures, not accepted. Formal native x64 invocation passed unchanged assertions.",
+    "Initial bootstrap rejected existing broker/status=0. After checking no live NTSRV, fresh idle run passed.",
+    "Analysis map first shell invocation used slash path rejected by cmd; corrected backslash invocation linked successfully."
+  ],
+  "coverage": "Ninja includes/search roots, COFF live relocations and linker maps, source runtime names, PE imports. Fresh analysis-only VDMREDIR map linked exact current objects and flags. Existing assembler/generated source gaps reviewed in S15 closure remain unchanged; generated alias objects express parent ABI, not sibling implementation.",
+  "allowed_composition": "Two parent-image DLL ABI imports and six named process-image observations retained explicitly. Provider and lifecycle disposition in file inventory. No new callback, queue, state machine or shared interface.",
+  "evidence_root": "build\\t483-s17-f-delivery"
+}

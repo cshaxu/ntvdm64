@@ -1,0 +1,417 @@
+{
+  "packet": "M0 T483 S17",
+  "baseline": "877c8f757",
+  "files": [
+    {
+      "id": "FF001",
+      "file": "src/nthook-dll/hook_classification.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "nthook-dll",
+          "to": "ntsrv-exe",
+          "source": "src/nthook-dll/hook_classification.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "nthook-dll",
+          "to": "ntvdm-exe",
+          "source": "src/nthook-dll/hook_classification.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        }
+      ],
+      "conclusion": "Uses B OpenNtBaseGetBinaryTypeW and D common_native_process_image. Remove both sibling private roots; no provider move.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF002",
+      "file": "src/ntsrv-exe/opennt/source/base_dispatch.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/base_dispatch.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        }
+      ],
+      "conclusion": "NTSRV own BASE dispatch and inner bindings. Remove NTVDM root.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF003",
+      "file": "src/ntsrv-exe/opennt/source/base_reservation.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/base_reservation.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        }
+      ],
+      "conclusion": "NTSRV reservation owner with B receipt mechanisms. Remove NTVDM root.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF004",
+      "file": "src/ntsrv-exe/opennt/source/base_service.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/base_service.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        }
+      ],
+      "conclusion": "NTSRV own service/connection state. Remove NTVDM root.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF005",
+      "file": "src/ntsrv-exe/opennt/source/frontend_registry.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "runtime-image-names",
+          "from": "ntsrv-exe",
+          "to": "ntcon-exe",
+          "source": "src/ntsrv-exe/opennt/source/frontend_registry.c",
+          "line_or_section": "680",
+          "target": "ntcon.exe",
+          "evidence": "system32\\\\ntcon.exe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/frontend_registry.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        }
+      ],
+      "conclusion": "NTSRV launches NTCON as separate process via A process API. Admit suspended process, resume only after admission, wait startup result, close temporary handles; terminate/reap own failed startup. Keep named peer, remove NTVDM root.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF006",
+      "file": "src/ntsrv-exe/opennt/source/lifecycle.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/lifecycle.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        }
+      ],
+      "conclusion": "NTSRV lifecycle decisions and D protocol contracts. Remove NTVDM root.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF007",
+      "file": "src/ntsrv-exe/opennt/source/management.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/management.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        }
+      ],
+      "conclusion": "NTSRV management record/request authority; no sibling implementation provider. Remove NTVDM root.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF008",
+      "file": "src/ntsrv-exe/opennt/source/native_commands.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/native_commands.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        }
+      ],
+      "conclusion": "NTSRV native requests use D image/packet interfaces. Remove NTVDM root.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF009",
+      "file": "src/ntsrv-exe/opennt/source/service_core.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/service_core.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        }
+      ],
+      "conclusion": "NTSRV own core state and A handle mechanics. Remove NTVDM root.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF010",
+      "file": "src/ntsrv-exe/opennt/source/task_observation.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/task_observation.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        }
+      ],
+      "conclusion": "NTSRV observation records use D image and A process observation. Remove NTVDM root.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF011",
+      "file": "src/ntsrv-exe/opennt/source/worker_registry.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "runtime-image-names",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/worker_registry.c",
+          "line_or_section": "645",
+          "target": "ntvdm.exe",
+          "evidence": "system32\\\\ntvdm.exe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/worker_registry.c",
+          "line_or_section": "646",
+          "target": "ntvdm.exe",
+          "evidence": "system32\\\\ntvdm.exe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "ntsrv-exe",
+          "to": "ntvwm-exe",
+          "source": "src/ntsrv-exe/opennt/source/worker_registry.c",
+          "line_or_section": "714",
+          "target": "ntvwm.exe",
+          "evidence": "system32\\\\ntvwm.exe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "ntsrv-exe",
+          "to": "ntvdm-exe",
+          "source": "src/ntsrv-exe/opennt/source/worker_registry.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        }
+      ],
+      "conclusion": "NTSRV selects NTVDM/NTVWM process paths using B package API. Own admission callbacks, reservation rollback and process exit observation. Keep runtime peers; remove NTVDM root.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF012",
+      "file": "src/ntvdm-exe/win32/command_process_compat.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "runtime-image-names",
+          "from": "ntvdm-exe",
+          "to": "run16-exe",
+          "source": "src/ntvdm-exe/win32/command_process_compat.c",
+          "line_or_section": "194",
+          "target": "run16.exe",
+          "evidence": "system32\\\\run16.exe",
+          "product": "ntvdm.exe"
+        }
+      ],
+      "conclusion": "NTVDM command owner launches Run16 via B package path/A process handling; explicit child capabilities and handles, no Run16 private code. Preserve product orchestration; no commonization needed.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF013",
+      "file": "src/run16-exe/image_classification.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "run16-exe",
+          "to": "ntsrv-exe",
+          "source": "src/run16-exe/image_classification.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "run16-exe",
+          "to": "ntvdm-exe",
+          "source": "src/run16-exe/image_classification.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        }
+      ],
+      "conclusion": "Already delegates generic image queries to D common_native_image and B launch classification. Remove both sibling roots; do not duplicate these shared providers.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "FF014",
+      "file": "src/run16-exe/main.c",
+      "status": "audited; final build and directed delivery verified",
+      "evidence": [
+        {
+          "kind": "runtime-image-names",
+          "from": "run16-exe",
+          "to": "ntsrv-exe",
+          "source": "src/run16-exe/main.c",
+          "line_or_section": "126",
+          "target": "ntsrv.exe",
+          "evidence": "system32\\\\ntsrv.exe",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "run16-exe",
+          "to": "ntsrv-exe",
+          "source": "src/run16-exe/main.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "run16-exe",
+          "to": "ntvdm-exe",
+          "source": "src/run16-exe/main.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        }
+      ],
+      "conclusion": "Run16 bootstrap starts NTSRV once, uses D authenticated transport before task submission, observes startup child death and closes temporary process/thread handles at done. Keep runtime peer; remove both sibling roots.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ],
+  "binary_relationships": [
+    {
+      "kind": "binary-imports",
+      "from": "vdmredir-dll",
+      "to": "ntvdm-exe",
+      "source": "VDMREDIR.dll",
+      "line_or_section": "",
+      "target": "ntvdm.exe",
+      "evidence": "PE import",
+      "product": "VDMREDIR.dll"
+    },
+    {
+      "kind": "binary-imports",
+      "from": "wow32-dll",
+      "to": "ntvdm-exe",
+      "source": "wow32.dll",
+      "line_or_section": "",
+      "target": "ntvdm.exe",
+      "evidence": "PE import",
+      "product": "wow32.dll"
+    }
+  ],
+  "shared_code_disposition": "No cross-product private implementation call found in this candidate set. Common mechanisms already reside in A/B/D; product admission/presentation/execution policy stays F. Unused sibling search roots deleted, no forwarding ABI introduced."
+}
