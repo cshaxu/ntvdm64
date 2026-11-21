@@ -1,0 +1,150 @@
+{
+  "packet": "M0 T483 S16",
+  "order": "component path then filename, case-insensitive DIR name order; includes README and headers",
+  "baseline": "7b2c0437a",
+  "files": [
+    {
+      "id": "EF001",
+      "file": "src/frontend-base/channel.c",
+      "lines": 167,
+      "status": "pending-provider-review",
+      "plan": "Trace NTCON and NTVDM channel adapters. Preserve framing/pipe/thread mechanism in E; move only proven misplaced behavior, keep product presentation in F.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF002",
+      "file": "src/frontend-base/channel.h",
+      "lines": 34,
+      "status": "pending-provider-review",
+      "plan": "Verify seven typed callbacks, cancel handles and borrowed lifetime; no private F or worker-base types.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF003",
+      "file": "src/frontend-base/README.md",
+      "lines": 41,
+      "status": "pending-provider-review",
+      "plan": "Reconcile component documentation with actual ownership. Remove stale moved-file claims, not historical behavior evidence.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF004",
+      "file": "src/frontend-base/service.c",
+      "lines": 174,
+      "status": "pending-provider-review",
+      "plan": "Trace two service adapters and channel operations; verify instance state and stop/join, no worker-base call hidden in callback.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF005",
+      "file": "src/frontend-base/service.h",
+      "lines": 23,
+      "status": "pending-provider-review",
+      "plan": "Verify eight callback signatures and explicit lifetime; no cross-E private ABI.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF006",
+      "file": "src/worker-base/connection.c",
+      "lines": 77,
+      "status": "pending-provider-review",
+      "plan": "Confirm wrappers resolve only to D; record broker-death callback forwarding and registration targets.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF007",
+      "file": "src/worker-base/connection.h",
+      "lines": 51,
+      "status": "pending-provider-review",
+      "plan": "Trace inline character-start callback and close callback, actual providers/threads; keep neutral signatures.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF008",
+      "file": "src/worker-base/input_watch.c",
+      "lines": 130,
+      "status": "pending-provider-review",
+      "plan": "Trace readiness/shutdown/task/failure callbacks and real watcher thread. Remove no necessary cross-thread handoff.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF009",
+      "file": "src/worker-base/input_watch.h",
+      "lines": 27,
+      "status": "pending-provider-review",
+      "plan": "Verify callback/state ownership, B readiness exposure and destroy/join lifetime.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF010",
+      "file": "src/worker-base/README.md",
+      "lines": 40,
+      "status": "pending-provider-review",
+      "plan": "Reconcile component documentation with actual ownership. Remove stale moved-file claims, not historical behavior evidence.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF011",
+      "file": "src/worker-base/shutdown_close.c",
+      "lines": 25,
+      "status": "pending-provider-review",
+      "plan": "Trace close providers and finite/infinite grace branches; preserve actual thread requirement and process-exit ownership.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF012",
+      "file": "src/worker-base/task_observation.c",
+      "lines": 94,
+      "status": "pending-provider-review",
+      "plan": "Trace publish/cancel providers, real producer/consumer threads and quiesce/drain/join. Queue must be justified by actual cross-thread RPC.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "id": "EF013",
+      "file": "src/worker-base/task_observation.h",
+      "lines": 32,
+      "status": "pending-provider-review",
+      "plan": "Verify protocol type comes from D, bounded fact storage and cancellation contract; no frontend-base ABI.",
+      "mirror_delta": {
+        "points": 0,
+        "lines": 0
+      }
+    }
+  ]
+}

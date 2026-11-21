@@ -2,29 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T483 S15** (Ordinary Mode). Owner approved S14 closure and S15
-admission on 2026-11-20. Only S15 is active.
+**Active: M0 T483 S16** (Ordinary Mode). Owner approved S15 closure and S16
+admission on 2026-11-20. Only S16 is active.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Original Owner Request | 批准收口本S，然后准入下一个S任务清理D的对外依赖关系。 |
-| Identifier Mode | M0 T483 S15, Ordinary Mode. |
-| Admission And Approval | Owner-approved successor to S14, 2026-11-20. |
-| Objective | Remove unapproved direct D common dependencies on E/F, including actual implementation and callback targets; keep approved inner-owned callbacks and named DLL imports explicit. |
-| Reference Baseline | S14 P163 d56fe27fc; package83074208-c3f3-486f-9d50-3742dd984e77. [S14 closure](../etc/evidence/m0-t483-s14-closure.md). |
-| Files And ABI Surface | src/common, its production build/include/link inputs, callers and E/F providers; generated RPC and runtime composition. Inspect full ownership chains before moving code. |
+| Original Owner Request | 收口S15，准入下一个S，审计清理E层的对外依赖和同层组件之间的依赖。先按dir顺序列清单，逐文件说明怎么处理，老规矩小五件套。 |
+| Identifier Mode | M0 T483 S16, Ordinary Mode. |
+| Admission And Approval | Owner-approved successor to S15, 2026-11-20. |
+| Objective | Audit and remove unapproved E-to-F and frontend-base/worker-base cross-component dependencies. Trace actual callback targets, calling threads and lifetime; preserve reviewed inner-owned callback composition. |
+| Reference Baseline | S15 P4 7b2c0437a; production f7ede72b0; package80616b98-933d-4375-bdb8-f742686d4ae6. [D closure](../../artifacts/mvdm-audit/t483-d-layer-dependencies/final-closure.json). |
+| Files And ABI Surface | src/frontend-base and src/worker-base, actual production callers, compile/link inputs, callbacks, tests and component documentation. |
 | Candidate Proposal | [T483 parent](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
-| Applicable Rules | Six-layer architecture; original-first source policy; execution, coding and documentation rules. D may consume A/B/C. |
+| Applicable Rules | Six-layer architecture, source policy, coding and execution rules. E may consume A/B/C/D; distinct E components remain independent. |
 | Verification | Per changed complete chain: cached full x86/x64/reference build, dual11 publication/hash verification, affected targeted tests, governance, commit and push. No Full unless newly required by scope/evidence. |
-| Expected Markers | DIR-ordered file ledger with exact dependencies, real providers, disposition, source evidence and final-code validation; removed obsolete paths. |
+| Expected Markers | DIR-ordered complete file list with actual dependencies, provider ownership, disposition and verification. Count static violations separately from approved runtime callbacks. |
 | Asset Needs | Existing immutable guest fixtures and cached toolchains; no new asset import. |
-| Non-goals | No original guest modification/rebuild, unrelated A/B/C reopening, whole product-core relocation or queued repository-wide audit. |
+| Non-goals | No original guest modification/rebuild; no unrelated A/B/C/D cleanup; no product-core migration or new queue/state machine. |
 | Similar-Issue Sweep | Explicit/forced/transitive includes, search paths, live relocations, generated RPC, runtime binding and lifecycle ownership across supported product graphs. |
 | Reporting Requirements | Each file entry/exit: affected layer/component, migration or local change, remaining verified violations versus candidates, file/total progress, non-error mirror points and lines. |
 | Stop Conditions | No queue for same-thread decoupling, second state machine or hidden outer implementation forwarding. Mirror increases below5 lines and at most2 points have standing approval; larger increases need prior approval. Preserve unrelated work. |
-| Exit Criteria | All D candidates resolved with complete caller/provider evidence; no unapproved D-to-E/F dependency; affected final product verification and small-five delivery complete. |
+| Exit Criteria | All E files reviewed in DIR order; no unapproved outer or same-layer implementation dependency; changed full chains delivered by small-five; runtime peers explicitly recorded. |
 
 ## Current Technical Baseline
 
@@ -54,14 +54,21 @@ Permitted runtime relationships remain explicit: one D-owned broker-death
 callback slot with two F subscribers;64 generated NTSRV dispatch/rundown rows;
 95 repeated named-package/path observations. None is described as absent or
 silently ignored. VDMREDIR link-map coverage and generated/assembler gaps are
-resolved in the final audit. S15 is ready for owner closure; no successor is
-admitted. The independent queued T candidates retain their order and scope.
+resolved in the final audit. S15 owner acceptance and closure recorded on2026-11-20; S16 is admitted. The independent queued T candidates retain their order and scope.
 
 ## Recent M0 Closures
 
 - [T483 S14 closure and inherited earlier closure index](../etc/evidence/m0-t483-s14-closure.md).
 - [T482 closure](../history/m0-t482-closure.md).
 - [T481 closure](../history/m0-t481-closure.md).
+
+## S16 Progress
+
+[DIR-ordered E inventory](../../artifacts/mvdm-audit/t483-e-layer-dependencies/file-inventory.json):
+13 files total (6 C implementations,5 headers,2 README files). Initial scan
+finds no direct outer/same-layer include or linked-symbol rows in the current
+product census; callback/provider review remains pending. No production edit
+or S16 build/publication/test is claimed yet.
 
 ## Recent Governance
 
@@ -123,3 +130,7 @@ Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-
 ## S14 Closure Record
 
 Owner-closed; [preserved closure and delivery evidence](../etc/evidence/m0-t483-s14-closure.md).
+
+## S15 Closure Record
+
+Owner-closed on2026-11-20. [Final ownership and delivery evidence](../etc/evidence/m0-t483-s15-closure.md).

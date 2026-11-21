@@ -1411,3 +1411,5 @@ revised S13-S19 sequence, superseding the old residual allocation.
 records the actual physical-mapping descent, binding/lifetime verification
 and dual publication, with the remaining implementation migration assigned
 to the sequential successor packets.
+
+[T483 S15 closure](evidence/m0-t483-s15-closure.md) anchors S16 admission.
