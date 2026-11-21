@@ -8,7 +8,7 @@
     {
       "id": "DF001",
       "file": "src/common/base_srv/base_command.c",
-      "status": "pending-review",
+      "status": "compile-root-cleaned; final implementation/callback review pending",
       "evidence_counts": {
         "search-paths": 12
       },
@@ -133,12 +133,14 @@
           "evidence": "/I",
           "product": "run16.exe"
         }
-      ]
+      ],
+      "search_path_disposition": "removed and verified in S15 P2",
+      "delivery_evidence": "common-flags-delivery.json"
     },
     {
       "id": "DF002",
       "file": "src/common/base_srv/base_payload.c",
-      "status": "pending-review",
+      "status": "compile-root-cleaned; final implementation/callback review pending",
       "evidence_counts": {
         "search-paths": 12
       },
@@ -263,12 +265,14 @@
           "evidence": "/I",
           "product": "run16.exe"
         }
-      ]
+      ],
+      "search_path_disposition": "removed and verified in S15 P2",
+      "delivery_evidence": "common-flags-delivery.json"
     },
     {
       "id": "DF003",
       "file": "src/common/base_srv/base_rpc_client_core.c",
-      "status": "pending-review",
+      "status": "compile-root-cleaned; final implementation/callback review pending",
       "evidence_counts": {
         "search-paths": 8
       },
@@ -353,12 +357,14 @@
           "evidence": "/I",
           "product": "run16.exe"
         }
-      ]
+      ],
+      "search_path_disposition": "removed and verified in S15 P2",
+      "delivery_evidence": "common-flags-delivery.json"
     },
     {
       "id": "DF004",
       "file": "src/common/base_srv/base_rpc_client_launch.c",
-      "status": "pending-review",
+      "status": "compile-root-cleaned; final implementation/callback review pending",
       "evidence_counts": {
         "search-paths": 4
       },
@@ -403,12 +409,14 @@
           "evidence": "/I",
           "product": "run16.exe"
         }
-      ]
+      ],
+      "search_path_disposition": "removed and verified in S15 P2",
+      "delivery_evidence": "common-flags-delivery.json"
     },
     {
       "id": "DF005",
       "file": "src/common/base_srv/base_startup.c",
-      "status": "pending-review",
+      "status": "compile-root-cleaned; final implementation/callback review pending",
       "evidence_counts": {
         "search-paths": 12
       },
@@ -533,12 +541,14 @@
           "evidence": "/I",
           "product": "run16.exe"
         }
-      ]
+      ],
+      "search_path_disposition": "removed and verified in S15 P2",
+      "delivery_evidence": "common-flags-delivery.json"
     },
     {
       "id": "DF006",
       "file": "src/common/base_srv/base_values.c",
-      "status": "pending-review",
+      "status": "compile-root-cleaned; final implementation/callback review pending",
       "evidence_counts": {
         "search-paths": 12
       },
@@ -663,12 +673,14 @@
           "evidence": "/I",
           "product": "run16.exe"
         }
-      ]
+      ],
+      "search_path_disposition": "removed and verified in S15 P2",
+      "delivery_evidence": "common-flags-delivery.json"
     },
     {
       "id": "DF007",
       "file": "src/common/base_srv/frontend_client.c",
-      "status": "pending-review",
+      "status": "compile-root-cleaned; final implementation/callback review pending",
       "evidence_counts": {
         "search-paths": 8
       },
@@ -753,7 +765,9 @@
           "evidence": "/I",
           "product": "run16.exe"
         }
-      ]
+      ],
+      "search_path_disposition": "removed and verified in S15 P2",
+      "delivery_evidence": "common-flags-delivery.json"
     },
     {
       "id": "DF008",
@@ -1728,7 +1742,7 @@
     {
       "id": "DF010",
       "file": "src/common/native_image.c",
-      "status": "pending-review",
+      "status": "compile-root-cleaned; final implementation/callback review pending",
       "evidence_counts": {
         "search-paths": 12
       },
@@ -1853,7 +1867,9 @@
           "evidence": "/I",
           "product": "run16.exe"
         }
-      ]
+      ],
+      "search_path_disposition": "removed and verified in S15 P2",
+      "delivery_evidence": "common-flags-delivery.json"
     },
     {
       "id": "DF011",

@@ -1403,9 +1403,11 @@ if ($Architecture -eq 'x86') {
     $baseServiceTestFlags = $baseServerFlags + ' /I "' + $baseBindingInclude + '"'
     # Project-owned Base/RPC sources consume the public adapter contracts, not
     # the SoftPC execution profile. Keep historical flags on original units.
-    $baseAdapterFlags = $authoredSoftpcFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
+    $commonBaseFlags = $authoredCommonFlags + ($softpcIncludeRoots -join ' ') + ' /we4013' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/inc')) + '"' +
         ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/server')) + '"'
+    $baseAdapterFlags = $commonBaseFlags + ' /I "' + $baseBindingInclude + '"' +
+        ' /I "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include')) + '"'
     # Select the original configuration closure without importing client RPC
     # dispatch or CSR capture into the service. The function bodies are copied
     # verbatim from the tracked mirror; the generated carrier is build-only.
@@ -1464,6 +1466,9 @@ if ($Architecture -eq 'x86') {
             $memberFlags = if ($member[1].StartsWith('src/ntsrv-exe/') -or $member[1].StartsWith('src/common/base_srv/')) {
                 $member[2].Replace($baseOwnerFlags, $baseAdapterFlags).Replace(' /D_CSRSRV_', '')
             } else { $member[2] }
+            if ($member[1].StartsWith('src/common/')) {
+                $memberFlags = $memberFlags.Replace($baseAdapterFlags, $commonBaseFlags)
+            }
             $graph.Add('  cflags = ' + $memberFlags)
             $baseOwnerManifest += [ordered]@{
                 archive = if ($group -eq 'opennt-base-bindings' -and ($member[1].StartsWith('src/common/base_srv/') -or $member[1] -in @('src/compat/base_console_handle.c','src/compat/base_capture_heap.c'))) { 'common-base-srv-bindings.lib' } else { $group + '.lib' }
@@ -1781,11 +1786,11 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/opennt_support_rtl.c')))
     $graph.Add('  cflags = ' + $rtlFlags + ' /Gy')
     $graph.Add('build obj/run16/rpc_client_core.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/base_srv/base_rpc_client_core.c')) + ' | obj/basesrv/service.h')
-    $graph.Add('  cflags = ' + $baseAdapterFlags + ' /I obj/basesrv')
+    $graph.Add('  cflags = ' + $commonBaseFlags + ' /I obj/basesrv')
     $graph.Add('build obj/run16/rpc_client_launch.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/base_srv/base_rpc_client_launch.c')) + ' | obj/basesrv/service.h')
-    $graph.Add('  cflags = ' + $baseAdapterFlags + ' /I obj/basesrv')
+    $graph.Add('  cflags = ' + $commonBaseFlags + ' /I obj/basesrv')
     $graph.Add('build obj/common/frontend_rpc_client.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/base_srv/frontend_client.c')) + ' | obj/basesrv/service.h')
-    $graph.Add('  cflags = ' + $baseAdapterFlags + ' /I obj/basesrv')
+    $graph.Add('  cflags = ' + $commonBaseFlags + ' /I obj/basesrv')
     $graph.Add('build base-rpc-client-core.lib: lib obj/run16/rpc_client_core.obj obj/common/frontend_rpc_client.obj')
     $graph.Add('build obj/compat/base_dispatch.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/base_dispatch.c')))
     $graph.Add('  cflags = ' + $libraryFlags + ' /I "' + (NinjaPath (Join-Path $root 'src/compat/include')) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc')) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/internal/base/inc')) + '"')
@@ -1909,7 +1914,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/run16/image_classification.obj: cc ' + (NinjaPath (Join-Path $run16Root 'image_classification.c')))
     $graph.Add('  cflags = ' + $baseAdapterFlags)
     $graph.Add('build obj/common/native_image.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native_image.c')))
-    $graph.Add('  cflags = ' + $baseAdapterFlags)
+    $graph.Add('  cflags = ' + $commonBaseFlags)
     # One worker; actual child machine selects the reviewed matching Hook installer.
     $hookLibraryFlags = '/nologo /TC /c /MT /O2 /Gy /W4 /we4013 /showIncludes /std:c11 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     $hookCFlags = $hookLibraryFlags + ' /I obj/basesrv'

@@ -36,18 +36,19 @@ reported as absent. One necessary Console cleanup handoff remains.
 ## S15 Progress
 
 [Initial DIR-ordered inventory](../../artifacts/mvdm-audit/t483-d-layer-dependencies/initial-file-inventory.json):
-12 candidate files, 0 fully reviewed, 12 pending. Reuses final product census;
-no D production source changed in P163. Evidence includes 2 live relocation
-rows, 72 generated-RPC rows, 80 search-path rows and 95 image-name rows.
-Rows repeat across products and are not violation counts. Search paths and
-strings alone do not establish implementation dependency. Indirect callback
-coverage must be checked before declaring the inventory complete.
+12 candidate files remain under review; whole-file completion is not yet claimed.
+[S15 P2 build-root delivery](../../artifacts/mvdm-audit/t483-d-layer-dependencies/common-flags-delivery.json)
+removes unused F include roots for eight common sources: 80 repeated product
+search-path observations -> 0. Product source/mirror delta is zero. Cached full
+builds, dual11 publication, 98 BASE assertions, 71 launch assertions and real
+COMMAND return passed. Package3fc316ce-9442-47b2-9cc7-12b772708ac3.
 
-S15 P1 admits the task and preserves S14 history; no production modification,
-rebuild, republication or runtime test is needed for this documentation-only
-transition. Next: review DF001 src/common/base_srv/base_command.c and its build
-inputs, then continue in directory order. The independent queued T candidates
-retain their order and scope.
+DF001-DF007 compile-root candidates were inspected in directory order; shared
+flag cleanup also covers DF010 without claiming its full audit. Remaining:
+callback target/lifetime closure, DF008/DF009 named-image semantics, DF011 RPC
+composition and DF012's confirmed MIDL_user_free provider in F ntmon. Initial
+72 generated-RPC and95 image-name rows are evidence, not proven violations.
+The independent queued T candidates retain their order and scope.
 
 ## Recent M0 Closures
 

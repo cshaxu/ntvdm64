@@ -1,0 +1,34 @@
+{
+  "packet": "M0 T483 S15 P2",
+  "question": "Do common-owned Base/RPC units need F private include roots?",
+  "answer": "No. Separate commonBaseFlags preserves all prior A/B/C and generated RPC inputs, removes the two F roots. All real product configurations compile and link.",
+  "affected_files": [
+    "src/common/base_srv/base_command.c",
+    "src/common/base_srv/base_payload.c",
+    "src/common/base_srv/base_rpc_client_core.c",
+    "src/common/base_srv/base_rpc_client_launch.c",
+    "src/common/base_srv/base_startup.c",
+    "src/common/base_srv/base_values.c",
+    "src/common/base_srv/frontend_client.c",
+    "src/common/native_image.c"
+  ],
+  "before_search_path_observations": 80,
+  "after_search_path_observations": 0,
+  "counting": "80 is repeated compiled evidence across products, not 80 independent runtime violations. Eight files share this build flag correction. No whole-file callback completion is inferred.",
+  "source_delta": "Only tools/build/New-T310OriginalSoftpcNinja.ps1 changed; no production C body, header, ABI, original guest or mirror changed.",
+  "mirror_non_error_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "package": "3fc316ce-9442-47b2-9cc7-12b772708ac3",
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_reference": 0,
+    "dual_published_images": 22,
+    "base_route_assertions": 98,
+    "request_assertions": 71,
+    "actual_COMMAND": "modern EDIT screen/CtrlQ, CMD echo, DOS MEM, launcher completion passed"
+  },
+  "remaining": "D management MIDL allocator resolves to F ntmon; generated RPC ownership, named image dependencies and complete indirect callbacks remain to classify in DIR order.",
+  "evidence": "build/t483-s15-common-flags"
+}
