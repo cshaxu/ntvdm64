@@ -2,10 +2,10 @@
   "packet": "M0 T483 S19",
   "file": "src/compat/wow_message_lifetime.c",
   "id": "BC2F032",
-  "status": "source ownership review; implementation and mirror cost unresolved",
+  "status": "complete ownership recommendation; compiled whole-file candidate awaits mirror approval; production unchanged",
   "direct_relationships": 12,
   "finding": "All production callers of seven exported operations are C2; B contains private C2 message-slot ownership, unthunker comparisons and TD stack restoration, not a generic memory manager. Header only has opaque C2 pointer declarations and shared stack snapshot.",
-  "direction": "Evaluate moving existing implementation to original message owner rather than wrapping twelve algorithm calls and retaining copied layouts in B. No independent B/D/E/F implementation caller found by named-symbol search; static inline finish32 executes at C2 call sites.",
+  "direction": "Move seven exported lifetime operations and the internal release_mdi helper to existing original message owner wmdisp32.c; remove B implementation and its build selection. All production consumers are C2. Existing B public header remains the opaque call contract; original message algorithms and TD remain C2.",
   "preserve": [
     "Consume captured allocation keys before release.",
     "Retain nested finally ordering and original WM_COPYDATA ownership.",
@@ -13,5 +13,28 @@
     "Stack rollback verifies live current TD identity and guest task before restoration; never dereference retired TD.",
     "Keep worker-active check supplied by B."
   ],
-  "remaining": "Measure original-owner placement and compile; request material mirror increment before production change. Existing evidence does not count file complete."
+  "remaining": "Owner approval for +1 point/+123 lines and owner-local insertion >3 lines, then production move, update existing exact-body fixtures, cached full build, dual11 publication, targeted message construction/COPYDATA/parameter cleanup/real guest tests, commit and push.",
+  "mirror": {
+    "file": "src/mvdm-host/wow32/wmdisp32.c",
+    "before": {
+      "points": 72,
+      "lines": 221
+    },
+    "candidate": {
+      "points": 73,
+      "lines": 344
+    },
+    "delta": {
+      "points": 1,
+      "lines": 123
+    },
+    "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+    "current_sha256": "456124e440cdd6665b222fc76996eac9c3847ad94d68bf362cbd45a3a68abb34",
+    "candidate_sha256": "91c702322edfb615a9ea26e6f7ab5bc3f4b04687987dc5562f6d5942fe042a59",
+    "error_line": "Current mirror bytes unchanged prefix; one append-only block; paired excluded-body parser zero issues."
+  },
+  "verification": "Candidate compiles exit0 under actual ninja obj/wmdisp32.obj product command with only input/output substituted. Initial wkman-profile exploratory compile also passed but is not the exact-command proof. No final link, runtime or publication claim.",
+  "tradeoff": "Adds one123-line mirror block by moving existing logic, not a new algorithm. Keeping implementation in B would require private message-layout projection and function-identity callbacks and preserve C-only ownership at the wrong layer. No independent B caller justifies that extra interface.",
+  "evidence_root": "build/t483-s19-message-owner",
+  "next_delivery": "P18 evidence-only; does not close BC2F032 or change dependency counts"
 }

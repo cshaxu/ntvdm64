@@ -8254,7 +8254,7 @@
     {
       "id": "BC2F032",
       "file": "src/compat/wow_message_lifetime.c",
-      "status": "source ownership reviewed; placement and mirror cost pending",
+      "status": "ownership recommendation complete; exact product candidate compiles; +1 point/+123 lines approval pending; not delivered",
       "evidence": [
         {
           "kind": "linked-relocations",

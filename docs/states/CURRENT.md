@@ -266,4 +266,6 @@ clear two C2 relations and both private TD-layout consumers. Cached full build,
 dual11, exact queries, loader, real separate/shared WOW lifecycle and COMMAND pass.
 Approved mirror delta+1 point/+25 lines; cumulative S19 +4 points/+77 lines.
 [Message lifetime](../../artifacts/mvdm-audit/t483-b-c2-dependencies/message-lifetime-provider-review.json)
-remains ownership research, not completion. S19 active; S20 not admitted.
+P18 recommends C2 ownership: exact product candidate compiles, +1 point/+123
+lines awaits approval; production unchanged,12 relations not closed. S19 active;
+S20 not admitted.
