@@ -3556,3 +3556,9 @@ scalar projections beside the original classifier/table. B no longer copies
 STDCLASS layout; existing USER lock and initialization ordering retained.
 Approved non-error increment+1point/+13lines; original prefix unchanged.
 See P25 delivery evidence.
+
+MVDM-HOST-DIV-909: `wow32/wkman.c` owns current unadmitted TD matching
+and existing Winsock task cancellation formerly in B. Original free-task
+provider is supplied directly; B retains prepare-before-free. No extra state
+or queue. Non-error increment0points/+25lines; original prefix unchanged.
+See P26 delivery evidence.

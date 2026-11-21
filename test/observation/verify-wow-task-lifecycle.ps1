@@ -454,7 +454,12 @@ if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
     $startupTd = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\startup-td.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_startup_td_fixture.c"')
     if ($startupTd -eq $compile) { throw 'Startup TD fixture substitution failed' }
     Invoke-NinjaTarget $provider 'obj/compat/wow_task_cleanup_entry.obj'
-    Invoke-Build $startupTd
+    $ownerSource=Get-Content "$repo/src/mvdm-host/wow32/wkman.c" -Raw
+    $ownerStart=$ownerSource.IndexOf('BOOL WINAPI wow_original_task_cleanup_uninitialized(')
+    $ownerEnd=$ownerSource.IndexOf('VOID WINAPI wow_original_task_retire_async(', $ownerStart)
+    if($ownerStart -lt 0 -or $ownerEnd -le $ownerStart){throw 'Missing original startup predicate'}
+    [IO.File]::WriteAllText("$out/startup-owner.inc",$ownerSource.Substring($ownerStart,$ownerEnd-$ownerStart))
+    Invoke-Build ($startupTd + ' /I"'+$out+'"')
     $parentObjects += Join-Path $out 'startup-td.obj'
 }
 $lib = Invoke-CompilerCommand $provider 'where lib.exe' -Capture

@@ -1,38 +1,33 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
-#include "wow32_provider_private.h"
-/* Preserve the software-CPU profile formerly selected by WOW precomp.h. */
-#undef _X86_
-#include "mvdm-host/wow32/wow32.h"
-#include "mvdm-host/wow32/winsockp.h"
 #include "wow_task_cleanup_entry.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_task_order_bindings.h"
 
-extern PTD gptdTaskHead;
-extern CRITICAL_SECTION gcsWOW;
-
+static const wow_task_cleanup_provider *provider;
+BOOL WINAPI wow_task_cleanup_bind(const wow_task_cleanup_provider *value)
+{
+    const wow_task_cleanup_provider *previous;
+    if (!value || !value->uninitialized || !value->retire_async || !value->free_task) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,
+        (PVOID)value, NULL);
+    if (previous && previous != value) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
+static const wow_task_cleanup_provider *current_provider(void)
+{
+    if (!provider) RaiseFailFastException(NULL, NULL, 0);
+    return provider;
+}
 BOOL WINAPI wow_user_task_cleanup_uninitialized(DWORD task_id)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
-    PTD task, current = CURRENTPTD();
-    BOOL matches = FALSE;
-    DWORD error = GetLastError();
-    /* W32Thread publishes hThread only after InitTask succeeds. A failed
-     * attempt has no USER carrier, but its original live TD still identifies
-     * the terminal W32DestroyTask call. Never accept a foreign/stale TEB. */
+    /* The original owner verifies the still-linked, unadmitted current TD. */
     if (!task_id || task_id > 0xffff || !binding || !binding->runtime ||
-            binding->thread || binding->classes || !gptdTaskHead) return FALSE;
-    EnterCriticalSection(&gcsWOW);
-    for (task = gptdTaskHead; task; task = task->ptdNext) {
-        if (task == current) {
-            matches = task->htask16 == task_id && !task->hThread &&
-                task->dwThreadID == GetCurrentThreadId();
-            break;
-        }
-    }
-    LeaveCriticalSection(&gcsWOW);
-    SetLastError(error);
-    return matches;
+            binding->thread || binding->classes) return FALSE;
+    return current_provider()->uninitialized(task_id);
 }
 
 /* The cleanup call retains its opaque pointer ABI and original /Gz convention;
@@ -40,19 +35,17 @@ BOOL WINAPI wow_user_task_cleanup_uninitialized(DWORD task_id)
  * Normal task windows are already retired by SG_EXIT's pfnWOWCleanup,
  * before guest GlobalFreeAll. This is the fallback for original remote-task
  * and incomplete-startup exits which do not necessarily send that signal. */
-VOID WowOriginalFreeTask(PVOID);
 
 /* Retire async guest-buffer users before the guest frees task segments.
  * The original late cleanup still owns per-thread data and socket release. */
 VOID WINAPI wow_user_task_retire_async(void)
 {
-    if (WWS32IsThreadInitialized)
-        WWS32CancelAsyncRequestsForTask(WWS32ThreadSerialNumber);
+    current_provider()->retire_async();
 }
 
 VOID W32FreeTask(PVOID task)
 {
     if (!wow_user_task_prepare_exit())
         wow_user_native_call_failed("prepare-task-resource-exit", GetLastError());
-    WowOriginalFreeTask(task);
+    current_provider()->free_task(task);
 }

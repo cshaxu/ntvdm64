@@ -4918,3 +4918,28 @@ BOOL WINAPI wow_original_separate_launch(void)
     PTD task = CURRENTPTD();
     return fSeparateWow && task && task->VDMInfoiTaskID != (INT)-1;
 }
+
+/* DIVERGENCE(MVDM-HOST-DIV-909): original task cleanup predicates. */
+BOOL WINAPI wow_original_task_cleanup_uninitialized(DWORD task_id)
+{
+    PTD task, current = CURRENTPTD();
+    BOOL matches = FALSE;
+    DWORD error = GetLastError();
+    if (!gptdTaskHead) return FALSE;
+    EnterCriticalSection(&gcsWOW);
+    for (task = gptdTaskHead; task; task = task->ptdNext) {
+        if (task == current) {
+            matches = task->htask16 == task_id && !task->hThread &&
+                task->dwThreadID == GetCurrentThreadId();
+            break;
+        }
+    }
+    LeaveCriticalSection(&gcsWOW);
+    SetLastError(error);
+    return matches;
+}
+VOID WINAPI wow_original_task_retire_async(void)
+{
+    if (WWS32IsThreadInitialized)
+        WWS32CancelAsyncRequestsForTask(WWS32ThreadSerialNumber);
+}

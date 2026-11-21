@@ -58,7 +58,15 @@ if($Case -eq 'idle') {
     $ownerSource=Get-Content "$repo/src/mvdm-host/wow32/wkman.c" -Raw
     $ownerStart=$ownerSource.IndexOf('BOOL WINAPI wow_original_idle_registered(')
     if($ownerStart -lt 0){throw 'Missing original task-owner projections'}
-    [IO.File]::WriteAllText("$out/task-owner.inc",$ownerSource.Substring($ownerStart))
+    $ownerEnd=$ownerSource.IndexOf('/* DIVERGENCE(MVDM-HOST-DIV-909)', $ownerStart)
+    if($ownerEnd -lt 0){throw 'Missing task cleanup owner boundary'}
+    [IO.File]::WriteAllText("$out/task-owner.inc",$ownerSource.Substring($ownerStart,$ownerEnd-$ownerStart))
+}
+if($Case -eq 'common-dialog') {
+    $ownerSource=Get-Content "$repo/src/mvdm-host/wow32/wkman.c" -Raw
+    $ownerStart=$ownerSource.IndexOf('BOOL WINAPI wow_original_task_cleanup_uninitialized(')
+    if($ownerStart -lt 0){throw 'Missing original task cleanup projections'}
+    [IO.File]::WriteAllText("$out/task-cleanup-owner.inc",$ownerSource.Substring($ownerStart))
 }
 Invoke-CompileCommand ($fixture+' /Gy /I"'+$out+'"')
 $owner=if($Case -in @('timer','hook','common-dialog','idle')){'compat'}else{'wow32-dll'}

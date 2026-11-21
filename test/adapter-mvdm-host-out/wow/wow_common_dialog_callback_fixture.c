@@ -28,13 +28,13 @@ static wow_window_resource_destroy resource_owner;
 wow_user_runtime_thread *WINAPI wow_user_runtime_current(void)
 { return unbound ? NULL : &startup_binding; }
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, "FAIL line=%d\n", __LINE__); } } while (0)
-/* This fixture owns no Winsock task. Async retirement belongs to its
- * separate product path and must not be reached through W32FreeTask here. */
+/* Controlled original TLS layout; cancellation must only run for an initialized task. */
+static unsigned async_calls;
 DWORD WWS32TlsSlot = TLS_OUT_OF_INDEXES;
 VOID WWS32CancelAsyncRequestsForTask(DWORD serial)
 {
-    (void)serial;
-    CHECK(FALSE);
+    CHECK(serial == 0x447338);
+    ++async_calls;
 }
 
 /* Ordering-only boundary doubles, not HWND or original-resource models. */
@@ -137,6 +137,11 @@ __declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *where, 
     RaiseException(0xe0447034, 0, 0, NULL);
     ExitProcess(99);
 }
+#include "task-cleanup-owner.inc"
+static const wow_task_cleanup_provider cleanup_provider = {
+    wow_original_task_cleanup_uninitialized, wow_original_task_retire_async,
+    WowOriginalFreeTask
+};
 static const wow_common_dialog_callbacks providers = {
     WowOriginalDialogProc, WowOriginalPrintSetupDialogProc,
     WowOriginalFindReplaceDialogProc
@@ -149,6 +154,20 @@ int __cdecl main(void)
         WowOriginalDialogProc, WowOriginalPrintSetupDialogProc,
         WowOriginalFindReplaceDialogProc
     };
+    CHECK(!wow_task_cleanup_bind(NULL));
+    CHECK(wow_task_cleanup_bind(&cleanup_provider));
+    CHECK(wow_task_cleanup_bind(&cleanup_provider));
+    {
+        WINSOCK_THREAD_DATA data = {0};
+        wow_user_task_retire_async(); CHECK(async_calls == 0);
+        WWS32TlsSlot = TlsAlloc(); CHECK(WWS32TlsSlot != TLS_OUT_OF_INDEXES);
+        data.ThreadSerialNumber = 0x447338;
+        CHECK(TlsSetValue(WWS32TlsSlot, &data));
+        wow_user_task_retire_async(); CHECK(async_calls == 1);
+        CHECK(TlsSetValue(WWS32TlsSlot, NULL));
+        wow_user_task_retire_async(); CHECK(async_calls == 1);
+        CHECK(TlsFree(WWS32TlsSlot)); WWS32TlsSlot = TLS_OUT_OF_INDEXES;
+    }
     CHECK(!wow_common_dialog_bind(NULL));
     CHECK(!wow_common_dialog_bind(&invalid));
     CHECK(wow_common_dialog_bind(&providers));

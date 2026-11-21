@@ -50,3 +50,13 @@ BOOL WINAPI wow_standard_class_bind(const wow_standard_class_provider *p)
     return p && p->classify == GetStdClassNumber &&
         p->name == wow_original_class_name && p->atom == wow_original_class_atom;
 }
+
+#include "../../src/compat/include/wow_task_cleanup_entry.h"
+BOOL WINAPI wow_original_task_cleanup_uninitialized(DWORD id) { (void)id; return FALSE; }
+VOID WINAPI wow_original_task_retire_async(void) { }
+VOID WINAPI WowOriginalFreeTask(PVOID task) { (void)task; }
+BOOL WINAPI wow_task_cleanup_bind(const wow_task_cleanup_provider *p)
+{
+    return p && p->uninitialized == wow_original_task_cleanup_uninitialized &&
+        p->retire_async == wow_original_task_retire_async && p->free_task == WowOriginalFreeTask;
+}

@@ -5,6 +5,14 @@
 #undef UserRegisterWowHandlers
 #include "ntvdm-exe/session/session.h"
 #include <stdio.h>
+#include "wow_standard_class_provider.h"
+extern INT WINAPI GetStdClassNumber(LPSTR);
+extern LPCSTR WINAPI wow_original_class_name(UINT);
+extern ATOM WINAPI wow_original_class_atom(UINT);
+extern void WINAPI wow_fixture_startup_bind(void);
+extern BOOL __cdecl ntvdm_dpmi_initialize(void);
+static const wow_standard_class_provider class_provider = {
+    GetStdClassNumber, wow_original_class_name, wow_original_class_atom };
 
 /* Actual registration and lifecycle code; only guest publication and the
  * broker RPC are seams. This fixture does not claim to execute guest code. */
@@ -58,6 +66,9 @@ int __cdecl main(void)
     void *committed;
     unsigned i;
     BOOL caught = FALSE;
+    CHECK(ntvdm_dpmi_initialize());
+    CHECK(wow_standard_class_bind(&class_provider));
+    wow_fixture_startup_bind();
     session_initialize(&owner, 44702);
     CHECK(session_activate(&owner));
     CHECK(session_thread_bind_owned(&owner, SESSION_THREAD_BINDING_ORIGINAL_WORKER));

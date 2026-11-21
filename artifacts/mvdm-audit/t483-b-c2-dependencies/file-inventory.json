@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P25 completes thirty-four files; four remain",
+  "status": "P26 completes thirty-five files; three remain",
   "files": [
     {
       "id": "BC2F001",
@@ -8773,7 +8773,7 @@
     {
       "id": "BC2F035",
       "file": "src/compat/wow_task_cleanup_entry.c",
-      "status": "not yet audited",
+      "status": "completed in verified P26 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8995,7 +8995,8 @@
           "evidence": "mvdm-host/wow32/winsockp.h",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "delivery": "p26-delivery.json"
     },
     {
       "id": "BC2F036",
@@ -9431,11 +9432,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 34,
-    "remaining": 4,
+    "completed": 35,
+    "remaining": 3,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 13,
+    "direct_C2_unique_after": 9,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 13
+    "direct_C2_records_after": 9
   }
 }

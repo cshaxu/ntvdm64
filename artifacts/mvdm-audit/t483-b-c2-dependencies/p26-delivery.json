@@ -1,0 +1,81 @@
+{
+  "packet": "M0 T483 S19 P26",
+  "baseline": "df6d408ec",
+  "status": "verified delivery",
+  "id": "BC2F035",
+  "file": "src/compat/wow_task_cleanup_entry.c",
+  "ownership": "B retains runtime preconditions and prepare-before-final-free policy. C2 owns TD list matching and Winsock TLS cancellation; original WowOriginalFreeTask supplied directly. F binds immutable callbacks before original DLL attach. Synchronous execution and lock/error/cleanup order retained.",
+  "direct_relationships": {
+    "file_before": 4,
+    "file_after": 0,
+    "B_C2_unique": 9,
+    "B_C2_raw": 9,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 35,
+    "total": 38,
+    "remaining": 3
+  },
+  "compiled_headers": {
+    "B_C2": 22,
+    "B_C1": 592
+  },
+  "private_search_roots": {
+    "B_C2": 0,
+    "B_C1": 25
+  },
+  "mirror": {
+    "files": [
+      {
+        "file": "src/mvdm-host/wow32/wkman.c",
+        "before": {
+          "points": 18,
+          "lines": 67
+        },
+        "after": {
+          "points": 18,
+          "lines": 92
+        },
+        "delta": {
+          "points": 0,
+          "lines": 25
+        }
+      }
+    ],
+    "delta": {
+      "points": 0,
+      "lines": 25
+    },
+    "cumulative_S19": {
+      "points": 10,
+      "lines": 485
+    },
+    "approval": "Within owner standing small-increment ceiling: no added point,25lines",
+    "error_line_proof": "Previous prefix byte-exact; appended existing task predicates; paired parser zero issues. DIV909/R2733."
+  },
+  "source_proof": {
+    "previous_prefix_byte_exact": true,
+    "previous_prefix_sha256": "f6bd3f34ef54cc203346e72b80cb1d40dd5a5013fe975c571cd11749e8be972e"
+  },
+  "package": "f2089ede-461c-4ab8-b7b5-0439d86ad9b4",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hashes checked",
+  "tests": [
+    "Exact C2 predicate with controlled original TD: current/foreign/committed/retired checks passed; B runtime preconditions retained",
+    "Original Winsock TLS cancellation absent/present/cleared cases passed; prepare-before-free and rejected free passed",
+    "Initialization registration/retry/exhaustion/exception/retirement passed with actual production provider assembly",
+    "Selected DLL bridge BOOLEAN and controlled OS loader passed",
+    "Real separate and shared Win16 worker lifecycle passed; COMMAND modern EDIT/CMD/MEM/launcher passed"
+  ],
+  "limitations": [
+    "No new Win3.1/Win95 matrix acceptance claimed",
+    "Generated/assembly audit gaps remain explicit; runtime callbacks are retained, not claimed absent"
+  ],
+  "failed_attempts": [
+    "Extracted predicate conflicted with linked C2 symbol in startup fixture; test-local alias retains exact body",
+    "Initialization fixture omitted standard-class and CPU provider setup from earlier batches; source registration added. Captured debug stack identified mvdm_debug_task_register to unbound mvdm_cpu_access_current; final unchanged assertions passed"
+  ],
+  "evidence_root": "build/t483-s19-task-cleanup-delivery"
+}

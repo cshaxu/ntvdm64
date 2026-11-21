@@ -12,6 +12,15 @@
 #define UserRegisterWowHandlers WINAPI UserRegisterWowHandlers
 #include "compat/include/wow_shared_user_abi.h"
 #include "compat/include/wow_standard_class_provider.h"
+#include "compat/include/wow_task_cleanup_entry.h"
+#ifndef WOW_INITIAL_PUBLICATION_FIXTURE
+extern BOOL WINAPI wow_original_task_cleanup_uninitialized(DWORD);
+extern VOID WINAPI wow_original_task_retire_async(void);
+extern VOID WINAPI WowOriginalFreeTask(PVOID);
+static const wow_task_cleanup_provider cleanup_provider = {
+    wow_original_task_cleanup_uninitialized, wow_original_task_retire_async,
+    WowOriginalFreeTask };
+#endif
 extern INT WINAPI GetStdClassNumber(LPSTR);
 extern LPCSTR WINAPI wow_original_class_name(UINT);
 extern ATOM WINAPI wow_original_class_atom(UINT);
@@ -6293,6 +6302,11 @@ int main(int argc, char **argv)
 {
 #ifdef WOW_WINDOW_BORROW_FIXTURE
     if (!wow_standard_class_bind(&class_provider)) return 13;
+#ifndef WOW_INITIAL_PUBLICATION_FIXTURE
+    if (!wow_task_cleanup_bind(&cleanup_provider)) return 13;
+#else
+    { extern void WINAPI wow_fixture_startup_bind(void); wow_fixture_startup_bind(); }
+#endif
 #endif
     if (argc == 5 && !strcmp(argv[1], "--terminal-log")) {
         FILE *output;
