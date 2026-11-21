@@ -24,8 +24,9 @@ DWORD nthook_context_paths(nthook_context *context)
 { ZeroMemory(context,sizeof(*context));return 0; }
 DWORD nthook_install(HANDLE child,const nthook_context *context,DWORD mode)
 { (void)child;(void)context;(void)mode;return install_error; }
-BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *a,HANDLE *b)
-{ InterlockedIncrement(&ambient_reads);*a=*b=NULL;SetLastError(ERROR_INVALID_STATE);return FALSE; }
+struct session;
+BOOL ntvdm_console_inherit_launch_capabilities(struct session *owner,HANDLE *a,HANDLE *b)
+{ (void)owner;InterlockedIncrement(&ambient_reads);*a=*b=NULL;SetLastError(ERROR_INVALID_STATE);return FALSE; }
 DWORD ntvdm_console_handle_kind(HANDLE stream)
 { return stream==endpoint ? 2 : 0; }
 unsigned int mvdm_command_native_child_command_service(const char **tail)

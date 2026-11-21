@@ -23,7 +23,7 @@
     opennt_create_void_cdecl_thread_named((attributes), (stack_bytes), \
         (OPENNT_VOID_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), \
         (flags), (thread_id), #start_routine)
-#include "ntvdm-exe/command/include/command_process_binding.h"
+#include "compat/include/command_process_binding.h"
 #include "compat/include/mvdm_shadow_registry.h"
 #line 18
 

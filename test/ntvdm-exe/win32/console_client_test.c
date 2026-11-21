@@ -4,6 +4,7 @@
  * stubbed; both I/O implementations and Console operations are real. */
 #include "ntvdm-exe/win32/console_client.h"
 #include "compat/include/console_activation.h"
+#include "compat/include/command_process.h"
 #include "compat/include/wow_startup_report.h"
 #include "ntvdm-exe/win32/worker_lifecycle.h"
 #include "compat/include/mvdm_softpc_event_thread.h"
@@ -46,6 +47,18 @@ static BOOL native_set_display(HANDLE h,DWORD flags,COORD *size)
 #include <string.h>
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"FAIL %d error=%lu\n",__LINE__,GetLastError()); ExitProcess(1); } } while (0)
 static session owner;
+static HANDLE command_entered, command_release;
+
+void ntvdm_command_start_original(session *target, compat_command_child_request *request)
+{
+    request->error = (target == &owner && request->host == &owner.host_context) ?
+        ERROR_SUCCESS : ERROR_INVALID_STATE;
+    if (command_entered && request->flags == CREATE_SUSPENDED) {
+        CHECK(SetEvent(command_entered));
+        CHECK(WaitForSingleObject(command_release, 5000) == WAIT_OBJECT_0);
+    }
+    request->created = !request->error;
+}
 static __declspec(thread) session *bound;
 static HANDLE delivery,peer,stop,readiness,frontend_process,video_wait;
 static HANDLE server_thread;
@@ -437,6 +450,36 @@ int main(int argc,char **argv)
     }
     hang_close=argc==2 && !strcmp(argv[1],"--close-hang");
     fault_reported=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(fault_reported);
+    if (argc == 2 && !strcmp(argv[1], "--command-start-control")) {
+        compat_command_child_request first = {0}, second = {0};
+        first.host = second.host = &owner.host_context;
+        first.flags = CREATE_SUSPENDED;
+        first.completed = CreateEventW(NULL, FALSE, FALSE, NULL);
+        second.completed = CreateEventW(NULL, FALSE, FALSE, NULL);
+        command_entered = CreateEventW(NULL, FALSE, FALSE, NULL);
+        command_release = CreateEventW(NULL, FALSE, FALSE, NULL);
+        CHECK(first.completed && second.completed && command_entered && command_release);
+        CHECK(mvdm_softpc_post_command_child(&first) == ERROR_INVALID_STATE);
+        lifecycle_wow = TRUE;
+        CHECK(!ntvdm_worker_lifecycle_begin(&owner, FALSE));
+        CHECK(!mvdm_softpc_post_command_child(&first));
+        CHECK(WaitForSingleObject(command_entered, 5000) == WAIT_OBJECT_0);
+        CHECK(!mvdm_softpc_post_command_child(&second));
+        CHECK(WaitForSingleObject(second.completed, 5000) == WAIT_OBJECT_0);
+        CHECK(second.created && !second.error);
+        CHECK(WaitForSingleObject(first.completed, 0) == WAIT_TIMEOUT);
+        CHECK(SetEvent(command_release));
+        CHECK(WaitForSingleObject(first.completed, 5000) == WAIT_OBJECT_0);
+        CHECK(first.created && !first.error);
+        ntvdm_worker_lifecycle_end();
+        CloseHandle(command_release);
+        CloseHandle(command_entered);
+        CloseHandle(second.completed);
+        CloseHandle(first.completed);
+        CloseHandle(fault_reported);
+        puts("PASS independent COMMAND completions; second launch completes while first is blocked");
+        return 0;
+    }
     if(argc==2 && !strcmp(argv[1],"--wow-start-control")) {
         CHECK(NtvdmReportWowStartup(0x4321,0,FALSE)==ERROR_INVALID_STATE);
         lifecycle_wow=TRUE;
@@ -616,7 +659,7 @@ int main(int argc,char **argv)
     {
         HANDLE root_capability=NULL,execution=NULL;
         DWORD handle_flags,before,after;
-        CHECK(ntvdm_console_inherit_launch_capabilities(&root_capability,&execution));
+        CHECK(ntvdm_console_inherit_launch_capabilities(&owner,&root_capability,&execution));
         CHECK(root_capability && execution);
         CHECK(GetHandleInformation(root_capability,&handle_flags) && (handle_flags&HANDLE_FLAG_INHERIT));
         CHECK(GetHandleInformation(execution,&handle_flags) && (handle_flags&HANDLE_FLAG_INHERIT));
@@ -625,7 +668,7 @@ int main(int argc,char **argv)
         CloseHandle(root_capability);CloseHandle(execution);
         CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
         execution_error=ERROR_PIPE_NOT_CONNECTED;
-        CHECK(!ntvdm_console_inherit_launch_capabilities(&root_capability,&execution));
+        CHECK(!ntvdm_console_inherit_launch_capabilities(&owner,&root_capability,&execution));
         CHECK(GetLastError()==execution_error && !root_capability && !execution);
         execution_error=0;
         CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && before==after);

@@ -1,5 +1,7 @@
 /* Process lifecycle is independent of the optional character frontend. */
 #include "worker_lifecycle.h"
+#include "compat/include/command_process.h"
+#include "ntvdm-exe/command/include/command_launch.h"
 #include "compat/include/mvdm_softpc_event_thread.h"
 #include "compat/include/mvdm_softpc_worker_exit.h"
 #include "worker-base/connection.h"
@@ -101,6 +103,7 @@ static void CALLBACK worker_control_request(PTP_CALLBACK_INSTANCE instance,
 {
     mvdm_softpc_exit_handoff *exit = context;
     DWORD status = ERROR_SUCCESS;
+    compat_command_child_request *child = NULL;
     mvdm_softpc_exit_operation operation = exit->operation;
     (void)result;
     switch (operation) {
@@ -131,10 +134,20 @@ static void CALLBACK worker_control_request(PTP_CALLBACK_INSTANCE instance,
         status = OpenNtBaseClientBindWowTask(exit->wow_request, exit->wow_task, &ticket);
         break;
     }
+    case MVDM_COMMAND_CHILD:
+        child = exit->command_child;
+        (void)CallbackMayRunLong(instance);
+        break;
     }
     exit->status = status;
     SetThreadpoolWait(wait, exit->request, NULL);
     SetEvent(exit->completion);
+    if (child) {
+        /* The shared slot is free. The submitter keeps this record live
+         * until its own completion event is signaled. */
+        ntvdm_command_start_original(lifecycle.owner, child);
+        SetEvent(child->completed);
+    }
     if (operation == MVDM_EXIT_CONSOLE_CONTROL)
         worker_base_shutdown_close(close_console,lifecycle.owner,
             OPENNT_LIFECYCLE_GRACE_MS,CONTROL_C_EXIT,NULL);

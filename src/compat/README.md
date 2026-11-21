@@ -306,8 +306,10 @@ selects this directory. No C include, table or implementation is introduced into
 table installed before COMMAND execution. The source-shaped facades in
 `command_native_child.h` and `command_guest_directory.h` preserve the
 selected call signatures. Compat owns capture and child-local stream staging.
-The NTVDM product provides the launch entry directly to COMMAND through
-`command_process_binding.h` and retains request and session lifetime.
+The compat launch entry captures the effective handles and COMMAND service on
+the original thread. Worker control accepts the request before creating the
+child, and the request carries its own completion event. NTVDM retains native
+launch policy and session lifetime.
 The VM COMMAND preparation copies an already captured request and its
 streams before the guest-thread scope ends. It uses the linked original
 COMMAND environment transform and original RTL status conversion. The

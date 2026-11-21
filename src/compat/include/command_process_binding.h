@@ -1,5 +1,5 @@
-#ifndef NTVDM_COMMAND_PROCESS_BINDING_H
-#define NTVDM_COMMAND_PROCESS_BINDING_H
+#ifndef COMPAT_COMMAND_PROCESS_BINDING_H
+#define COMPAT_COMMAND_PROCESS_BINDING_H
 
 #include <windows.h>
 
@@ -10,7 +10,7 @@
  * call sequence while making its endpoints child-local STARTUPINFO state.
  */
 #include "compat/include/command_services.h"
-#include "command_launch.h"
+#include "command_process.h"
 
 #undef SetStdHandle
 #define SetStdHandle opennt_command_set_std_handle

@@ -180,9 +180,8 @@ DWORD ntvdm_console_client_begin(session *owner)
     return ERROR_SUCCESS;
 }
 
-BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *capability,HANDLE *execution)
+BOOL ntvdm_console_inherit_launch_capabilities(session *owner,HANDLE *capability,HANDLE *execution)
 {
-    session *owner=session_thread_current();
     console_client *client=owner ? owner->console_client : NULL;
     BOOL result=TRUE;
     HANDLE retained=NULL;

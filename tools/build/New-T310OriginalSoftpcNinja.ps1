@@ -2216,10 +2216,12 @@ $graph.Add('build softpc-win32-bindings.lib: lib ' + ($adapterWin32Objects -join
 # local BaseVDM producer, retry loop or single-process queue.
 $graph.Add('build obj/compat/command_services.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/command_services.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$graph.Add('build obj/compat/command_process.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/command_process.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $graph.Add('build obj/compat/vdm_control.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/vdm_control.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterMonitorObjects = @($adapterMonitorObjects) + 'obj/compat/vdm_control.obj'
-$graph.Add('build worker-command-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' ') + ' obj/compat/command_services.obj')
+$graph.Add('build worker-command-bindings.lib: lib ' + ($adapterBaseSrvObjects -join ' ') + ' obj/compat/command_services.obj obj/compat/command_process.obj')
 $graph.Add('build monitor-bindings.lib: lib ' + ($adapterMonitorObjects -join ' '))
 $graph.Add('build kernel-vdm-printer.lib: lib ' + $kernelVdmPrinterObject)
 $graph.Add('build debugger-bindings.lib: lib ' + ((@($adapterDebuggerObjects) + @($originalDebuggerObject)) -join ' '))

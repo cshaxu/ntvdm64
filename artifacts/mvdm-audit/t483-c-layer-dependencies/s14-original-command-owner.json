@@ -1,0 +1,200 @@
+{
+  "packet": "M0 T483 S14 P150",
+  "parent": "d60e730ae3a66239de7607a2a0c5224c8db0e79d",
+  "direct_removed": [
+    "C0619",
+    "C0620"
+  ],
+  "C0619_remaining": "The typed host-local worker request requires the F consumer for real product launch. This is a runtime service relationship; full implementation independence is not claimed.",
+  "C0156_remaining": "OpenNtBaseClientCallServer still links directly to D. It dispatches original BASE VDM cases through the authenticated broker connection and shares the connection failure and cleanup contract with D. The original CSR ABI and the broker protocol/state require an actual ownership split.",
+  "C0134": "Named cross-image import recorded separately. B/C actual providers and existing export composition unchanged; not an implementation violation under the cross-image ABI rule.",
+  "outward_B_known_direct_calls": {
+    "D": 0,
+    "E": 0,
+    "F": 0
+  },
+  "outward_C_direct_calls": {
+    "D": 1,
+    "E": 0,
+    "F": 0
+  },
+  "C_runtime": [
+    "C0619 worker request",
+    "C0621 BIOS slot"
+  ],
+  "C_outward_headers": [],
+  "mirror": {
+    "upstream": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "files": {
+      "src/mvdm-host/dos/command/cmdexec.c": {
+        "before": [
+          34,
+          109
+        ],
+        "after": [
+          34,
+          109
+        ],
+        "delta": [
+          0,
+          0
+        ],
+        "baseline_sha256": "a9cd0e09eb37de78024bc0e2b69f59e1ffa9254a74b57f63c44731e9e151a101"
+      }
+    },
+    "delta": [
+      0,
+      0
+    ]
+  },
+  "source_contract": "Actual B capture and effective stream identity run on the original COMMAND thread. A per-request event owns completion while the caller retains its inputs. F acknowledges the shared handoff before performing launch; independent starts can overlap. Existing product selection, inheritance and process state remain F-owned.",
+  "verification": {
+    "products": [
+      "cached x86",
+      "cached x64",
+      "cached x86 reference"
+    ],
+    "compiled_bindings": {
+      "x86": {
+        "bound_providers": [
+          "0001:00161900       _mvdm_softpc_post_command_child 00562900 f   softpc-bindings:mvdm_softpc_event_thread.obj",
+          "0001:001795d0       _ntvdm_command_start_original 0057a5d0 f   softpc-win32-bindings:command_process_compat.obj",
+          "0001:001894c0       _opennt_command_create_process_a 0058a4c0 f   worker-command-bindings:command_process.obj"
+        ],
+        "B_objects": {
+          "command_process": {
+            "repo_headers": [
+              "compat/include/command_process.h",
+              "compat/include/command_services.h",
+              "compat/include/console_services.h",
+              "compat/include/host_context.h",
+              "compat/include/mvdm_command_native_child.h"
+            ],
+            "external_symbols": [
+              "__imp__GetStdHandle@4",
+              "__imp__CloseHandle@4",
+              "__imp__SetLastError@4",
+              "__imp__RaiseFailFastException@12",
+              "__imp__WaitForSingleObject@8",
+              "__imp__CreateEventW@16",
+              "_mvdm_softpc_post_command_child",
+              "_opennt_command_child_startup",
+              "_ntvdm_console_handle_kind",
+              "_compat_host_context_current",
+              "_mvdm_command_native_child_command_service",
+              "@__security_check_cookie@4",
+              "_memset",
+              "___security_cookie"
+            ]
+          },
+          "mvdm_softpc_event_thread": {
+            "repo_headers": [
+              "compat/include/command_process.h",
+              "compat/include/mvdm_softpc_event_thread.h",
+              "compat/include/wow_startup_report.h"
+            ],
+            "external_symbols": [
+              "_mvdm_softpc_input_terminal_events",
+              "_mvdm_softpc_exit_request",
+              "_mvdm_softpc_exit_owner",
+              "_mvdm_softpc_exit_original_ready",
+              "__imp__CloseHandle@4",
+              "__imp__DuplicateHandle@28",
+              "__imp__GetLastError@0",
+              "__imp__SetLastError@4",
+              "__imp__RaiseFailFastException@12",
+              "__imp__ReleaseSRWLockExclusive@4",
+              "__imp__AcquireSRWLockExclusive@4",
+              "__imp__SetEvent@4",
+              "__imp__WaitForSingleObject@8",
+              "__imp__WaitForMultipleObjects@16",
+              "__imp__GetCurrentProcess@0",
+              "__imp__ExitProcess@4",
+              "__imp__GetCurrentThreadId@0",
+              "__imp__NtAlertThread@4",
+              "@__security_check_cookie@4",
+              "___security_cookie"
+            ]
+          }
+        }
+      },
+      "x64-ref": {
+        "bound_providers": [
+          "0001:00161900       _mvdm_softpc_post_command_child 00562900 f   softpc-bindings:mvdm_softpc_event_thread.obj",
+          "0001:001795d0       _ntvdm_command_start_original 0057a5d0 f   softpc-win32-bindings:command_process_compat.obj",
+          "0001:001894c0       _opennt_command_create_process_a 0058a4c0 f   worker-command-bindings:command_process.obj"
+        ],
+        "B_objects": {
+          "command_process": {
+            "repo_headers": [
+              "compat/include/command_process.h",
+              "compat/include/command_services.h",
+              "compat/include/console_services.h",
+              "compat/include/host_context.h",
+              "compat/include/mvdm_command_native_child.h"
+            ],
+            "external_symbols": [
+              "__imp__GetStdHandle@4",
+              "__imp__CloseHandle@4",
+              "__imp__SetLastError@4",
+              "__imp__RaiseFailFastException@12",
+              "__imp__WaitForSingleObject@8",
+              "__imp__CreateEventW@16",
+              "_mvdm_softpc_post_command_child",
+              "_opennt_command_child_startup",
+              "_ntvdm_console_handle_kind",
+              "_compat_host_context_current",
+              "_mvdm_command_native_child_command_service",
+              "@__security_check_cookie@4",
+              "_memset",
+              "___security_cookie"
+            ]
+          },
+          "mvdm_softpc_event_thread": {
+            "repo_headers": [
+              "compat/include/command_process.h",
+              "compat/include/mvdm_softpc_event_thread.h",
+              "compat/include/wow_startup_report.h"
+            ],
+            "external_symbols": [
+              "_mvdm_softpc_input_terminal_events",
+              "_mvdm_softpc_exit_request",
+              "_mvdm_softpc_exit_owner",
+              "_mvdm_softpc_exit_original_ready",
+              "__imp__CloseHandle@4",
+              "__imp__DuplicateHandle@28",
+              "__imp__GetLastError@0",
+              "__imp__SetLastError@4",
+              "__imp__RaiseFailFastException@12",
+              "__imp__ReleaseSRWLockExclusive@4",
+              "__imp__AcquireSRWLockExclusive@4",
+              "__imp__SetEvent@4",
+              "__imp__WaitForSingleObject@8",
+              "__imp__WaitForMultipleObjects@16",
+              "__imp__GetCurrentProcess@0",
+              "__imp__ExitProcess@4",
+              "__imp__GetCurrentThreadId@0",
+              "__imp__NtAlertThread@4",
+              "@__security_check_cookie@4",
+              "___security_cookie"
+            ]
+          }
+        }
+      }
+    },
+    "worker_lifecycle_cases": 15,
+    "command_launch_assertions": 71,
+    "command_native_edit": "PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion",
+    "limitations": "Focused tests only. The concurrency fixture substitutes a controlled consumer; the EDIT scenario exercises the real consumer. Full and Win95 were not run. Original guest not modified or rebuilt."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "df6027ed-cb27-46a7-9223-a393e9e678b4",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

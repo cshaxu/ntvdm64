@@ -3,18 +3,9 @@
 #include <windows.h>
 #include "compat/include/mvdm_command_launch.h"
 
-BOOL opennt_command_create_process_a(
-    LPCSTR application_name,
-    LPSTR command_line,
-    LPSECURITY_ATTRIBUTES process_attributes,
-    LPSECURITY_ATTRIBUTES thread_attributes,
-    BOOL inherit_handles,
-    DWORD creation_flags,
-    LPVOID environment,
-    LPCSTR current_directory,
-    LPSTARTUPINFOA startup_info,
-    LPPROCESS_INFORMATION process_information);
-
+struct session;
+struct compat_command_child_request;
+void ntvdm_command_start_original(struct session *, struct compat_command_child_request *);
 
 BOOL ntvdm_command_initialize(void);
 

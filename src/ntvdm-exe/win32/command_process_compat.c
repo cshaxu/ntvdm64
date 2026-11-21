@@ -1,6 +1,7 @@
 #include "compat/include/mvdm_command_native_child.h"
 #include "compat/include/mvdm_command_launch_request.h"
 #include "ntvdm-exe/command/include/command_launch.h"
+#include "compat/include/command_process.h"
 #include "lib-win32/process-launch/attributes.h"
 #include "vdmapi.h"
 #include "console_client.h"
@@ -70,7 +71,7 @@ static BOOL create_frontend_child(LPCSTR application,LPSTR command,
     LPSECURITY_ATTRIBUTES process_attributes,LPSECURITY_ATTRIBUTES thread_attributes,
     BOOL inherit,DWORD flags,LPVOID environment,LPCSTR directory,
     LPSTARTUPINFOA startup,LPPROCESS_INFORMATION process,const HANDLE *context,
-    DWORD captured_console_mask)
+    DWORD captured_console_mask,session *owner,const HANDLE streams[3],const DWORD stream_kinds[3])
 {
     static const char *names[3]={"NTVDM_FRONTEND_CAPABILITY=","NTVDM_EXECUTION_CONSOLE=",CONSOLE_COMMAND_STREAMS_ENTRY};
     static const WCHAR *wide_names[3]={L"NTVDM_FRONTEND_CAPABILITY=",L"NTVDM_EXECUTION_CONSOLE=",CONSOLE_COMMAND_STREAMS_WENTRY};
@@ -91,18 +92,18 @@ static BOOL create_frontend_child(LPCSTR application,LPSTR command,
                 &capabilities[slot],SYNCHRONIZE,TRUE,0)){
                 error=GetLastError();result=FALSE;goto done;
             }
-    }else if (!ntvdm_console_inherit_launch_capabilities(&capabilities[0],&capabilities[1])) return FALSE;
+    }else if (!ntvdm_console_inherit_launch_capabilities(owner,&capabilities[0],&capabilities[1])) return FALSE;
     if (!capabilities[0]) return create_policy_child(application,command,process_attributes,
         thread_attributes,inherit,flags,environment,directory,startup,process,NULL,NULL,FALSE);
     if (!inherit) { error=ERROR_INVALID_PARAMETER;result=FALSE;goto done; }
     for (slot=0;slot<2;++slot)
         sprintf_s(value[slot],sizeof(value[slot]),"%s%lx",names[slot],(unsigned long)(ULONG_PTR)capabilities[slot]);
     for(slot=0;slot<3;++slot) {
-        HANDLE stream=(startup->dwFlags&STARTF_USESTDHANDLES) ?
+        HANDLE stream=context ?
             (slot==0 ? startup->hStdInput : slot==1 ? startup->hStdOutput : startup->hStdError) :
-            GetStdHandle(slot==0 ? STD_INPUT_HANDLE : slot==1 ? STD_OUTPUT_HANDLE : STD_ERROR_HANDLE);
+            streams[slot];
         DWORD kind=context ? ((captured_console_mask&(1u<<slot)) ? (slot==0 ? 1u : 2u) : 0u) :
-            ntvdm_console_handle_kind(stream);
+            stream_kinds[slot];
         if(kind) {
             if(kind!=(slot==0 ? 1u : 2u)){error=ERROR_INVALID_HANDLE;result=FALSE;goto done;}
             if(!DuplicateHandle(GetCurrentProcess(),stream,GetCurrentProcess(),
@@ -178,7 +179,8 @@ static BOOL opennt_command_launch_vdm_child(
     LPCSTR current_directory,
     LPSTARTUPINFOA startup_info,
     LPPROCESS_INFORMATION process_information,unsigned int service,
-    const char *service_tail,const HANDLE *context,DWORD console_mask)
+    const char *service_tail,const HANDLE *context,DWORD console_mask,
+    session *owner,const HANDLE streams[3],const DWORD stream_kinds[3])
 {
     char launcher[MAX_PATH];
     char child_command[MAX_PATH * 2u + MAXIMUM_VDM_COMMAND_LENGTH + 16u];
@@ -206,43 +208,26 @@ static BOOL opennt_command_launch_vdm_child(
     }
     return create_frontend_child(NULL, child_command, process_attributes,
         thread_attributes, inherit_handles, creation_flags, environment,
-        current_directory, startup_info, process_information,context,console_mask);
+        current_directory, startup_info, process_information,context,console_mask,owner,streams,stream_kinds);
 }
 
-BOOL opennt_command_create_process_a(
-    LPCSTR application_name,
-    LPSTR command_line,
-    LPSECURITY_ATTRIBUTES process_attributes,
-    LPSECURITY_ATTRIBUTES thread_attributes,
-    BOOL inherit_handles,
-    DWORD creation_flags,
-    LPVOID environment,
-    LPCSTR current_directory,
-    LPSTARTUPINFOA startup_info,
-    LPPROCESS_INFORMATION process_information)
+void ntvdm_command_start_original(session *owner, compat_command_child_request *request)
 {
-    STARTUPINFOA local_startup;
-    LPSTARTUPINFOA effective_startup;
-
-    if (startup_info == NULL) {
-        SetLastError(ERROR_INVALID_PARAMETER);
-        return FALSE;
+    if (request->host && (!owner || request->host != &owner->host_context)) {
+        request->error = ERROR_INVALID_STATE;
+    } else if (!request->application && request->command && *request->command) {
+        request->created = opennt_command_launch_vdm_child(request->command,
+            request->process_attributes,request->thread_attributes,request->inherit,
+            request->flags,request->environment,request->directory,request->startup,
+            request->process,request->service,request->service_tail,NULL,0,
+            request->host ? owner : NULL,request->streams,request->stream_kinds);
+    } else {
+        request->created = create_frontend_child(request->application,request->command,
+            request->process_attributes,request->thread_attributes,request->inherit,
+            request->flags,request->environment,request->directory,request->startup,
+            request->process,NULL,0,request->host ? owner : NULL,request->streams,request->stream_kinds);
     }
-    effective_startup = opennt_command_child_startup(startup_info, &local_startup);
-    /* Original cmdCreateProcess calls CreateProcess(NULL, pCommand32).  The
-     * snapshot carries whether original cmdExec selected its COMSPEC branch. */
-    if (application_name == NULL && command_line != NULL && *command_line) {
-        const char *tail=NULL;
-        unsigned int service=mvdm_command_native_child_command_service(&tail);
-        return opennt_command_launch_vdm_child(command_line,
-            process_attributes, thread_attributes, inherit_handles,
-            creation_flags, environment, current_directory, effective_startup,
-            process_information,service,tail,NULL,0);
-    }
-    return create_frontend_child(application_name, command_line,
-        process_attributes, thread_attributes, inherit_handles,
-        creation_flags, environment, current_directory, effective_startup,
-        process_information,NULL,0);
+    if (!request->created && !request->error) request->error = GetLastError();
 }
 
 DWORD ntvdm_command_launch_start(ntvdm_command_launch *request,HANDLE frontend,
@@ -262,5 +247,5 @@ DWORD ntvdm_command_launch_start(ntvdm_command_launch *request,HANDLE frontend,
     startup.hStdError=request->streams[2];
     return opennt_command_launch_vdm_child(request->command,NULL,NULL,TRUE,flags,
         request->environment,request->directory,&startup,out,request->service,
-        request->command,context,request->console_mask) ? ERROR_SUCCESS : GetLastError();
+        request->command,context,request->console_mask,NULL,NULL,NULL) ? ERROR_SUCCESS : GetLastError();
 }

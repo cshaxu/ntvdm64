@@ -595,3 +595,9 @@ synchronous command admission, and live executor input providers.
 [Delivery evidence](s14-vm-input-owner.json) records the B keyboard and mouse provider
 for operations 16, 17 and 19. C0621 retains the F slot/dispatch and the
 F synchronous command admission provider for operation 11.
+
+## P150 original COMMAND launch boundary
+
+[Delivery evidence](s14-original-command-owner.json) closes the direct C0619 symbol and C0620 header.
+The local launch request still needs the F consumer. C0156 is the one
+remaining C direct call. C0134 remains an inward-owned ABI record.

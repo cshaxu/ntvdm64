@@ -69,16 +69,14 @@ P146 [COMMAND preparation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/
 P147 [Guest VM I/O](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-guest-io-owner.json).
 P148 [VM registration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-command-registration-owner.json).
 P149 [VM input](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-input-owner.json).
-B 0 outward calls; C 2 calls, 1 slot, 1 header, 1 image. C0621 stays open.
+P150 [Original COMMAND](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-original-command-owner.json).
+B 0 outward calls; C 1 direct call, C0156. Runtime C0619 and C0621 stay open.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moved page-domain identity and cleanup to B and removed three F calls.
 [Publication cut](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-publication-cut-impact.json)
 covers overlapping menu104/window103 roots; preserve original
 metadata/commit ownership and capture/lookup failure ordering in the next cut.
-
-P72-P74 native USER query, dialog and property receipts are indexed in the
-[dependency tracker](../../artifacts/mvdm-audit/t483-c-layer-dependencies/README.md).
 
 P71 [native capture extraction](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-native-capture-owner.json)
 moves9 functions/320 body lines from F to B as a114-root prerequisite.
