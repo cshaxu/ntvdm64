@@ -211,8 +211,9 @@ static BOOL opennt_command_launch_vdm_child(
         current_directory, startup_info, process_information,context,console_mask,owner,streams,stream_kinds);
 }
 
-void ntvdm_command_start_original(session *owner, compat_command_child_request *request)
+void ntvdm_command_start_original(void *context, compat_command_child_request *request)
 {
+    session *owner = context;
     if (request->host && (!owner || request->host != &owner->host_context)) {
         request->error = ERROR_INVALID_STATE;
     } else if (!request->application && request->command && *request->command) {

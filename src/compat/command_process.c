@@ -54,15 +54,7 @@ BOOL opennt_command_create_process_a(
     for (i = 0; i < 3; ++i)
         request.stream_kinds[i] = ntvdm_console_handle_kind(request.streams[i]);
 
-    request.completed = CreateEventW(NULL, FALSE, FALSE, NULL);
-    if (!request.completed) return FALSE;
-    error = mvdm_softpc_post_command_child(&request);
-    if (!error) {
-        if (WaitForSingleObject(request.completed, INFINITE) != WAIT_OBJECT_0)
-            RaiseFailFastException(NULL, NULL, 0);
-        error = request.error;
-    }
-    CloseHandle(request.completed);
+    error = compat_command_start_child(&request);
     SetLastError(error);
     return request.created;
 }

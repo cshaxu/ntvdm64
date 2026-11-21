@@ -1,5 +1,4 @@
 #include "include/mvdm_softpc_event_thread.h"
-#include "include/command_process.h"
 #include "include/wow_startup_report.h"
 
 #include <windows.h>
@@ -13,7 +12,7 @@ volatile LONG mvdm_softpc_exit_owner;
 BOOL mvdm_softpc_exit_original_ready;
 
 static DWORD exchange_worker_control(mvdm_softpc_exit_operation operation,
-    ULONG request, USHORT task, compat_command_child_request *child, DWORD *reply)
+    ULONG request, USHORT task, DWORD *reply)
 {
     mvdm_softpc_exit_handoff *exit = &mvdm_softpc_exit_request;
     DWORD status;
@@ -26,11 +25,9 @@ static DWORD exchange_worker_control(mvdm_softpc_exit_operation operation,
         exit->operation = operation;
         exit->wow_request = request;
         exit->wow_task = task;
-        exit->command_child = child;
         if (!SetEvent(exit->request)) {
             status = GetLastError();
         } else if (WaitForSingleObject(exit->completion, INFINITE) != WAIT_OBJECT_0) {
-            if (child) RaiseFailFastException(NULL, NULL, 0);
             status = GetLastError();
         } else {
             *reply = exit->status;
@@ -47,21 +44,14 @@ static DWORD exchange_worker_control(mvdm_softpc_exit_operation operation,
 
 DWORD mvdm_softpc_exchange_exit(mvdm_softpc_exit_operation operation, DWORD *reply)
 {
-    return exchange_worker_control(operation, 0, 0, NULL, reply);
+    return exchange_worker_control(operation, 0, 0, reply);
 }
 
 DWORD WINAPI NtvdmReportWowStartup(ULONG request, USHORT task, BOOL bind)
 {
     DWORD reply;
     DWORD error = exchange_worker_control(bind ? MVDM_WOW_BIND : MVDM_WOW_STARTED,
-        request, task, NULL, &reply);
-    return error ? error : reply;
-}
-
-DWORD mvdm_softpc_post_command_child(compat_command_child_request *child)
-{
-    DWORD reply;
-    DWORD error = exchange_worker_control(MVDM_COMMAND_CHILD, 0, 0, child, &reply);
+        request, task, &reply);
     return error ? error : reply;
 }
 

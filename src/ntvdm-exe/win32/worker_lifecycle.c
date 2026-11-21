@@ -103,7 +103,6 @@ static void CALLBACK worker_control_request(PTP_CALLBACK_INSTANCE instance,
 {
     mvdm_softpc_exit_handoff *exit = context;
     DWORD status = ERROR_SUCCESS;
-    compat_command_child_request *child = NULL;
     mvdm_softpc_exit_operation operation = exit->operation;
     (void)result;
     switch (operation) {
@@ -134,20 +133,10 @@ static void CALLBACK worker_control_request(PTP_CALLBACK_INSTANCE instance,
         status = OpenNtBaseClientBindWowTask(exit->wow_request, exit->wow_task, &ticket);
         break;
     }
-    case MVDM_COMMAND_CHILD:
-        child = exit->command_child;
-        (void)CallbackMayRunLong(instance);
-        break;
     }
     exit->status = status;
     SetThreadpoolWait(wait, exit->request, NULL);
     SetEvent(exit->completion);
-    if (child) {
-        /* The shared slot is free. The submitter keeps this record live
-         * until its own completion event is signaled. */
-        ntvdm_command_start_original(lifecycle.owner, child);
-        SetEvent(child->completed);
-    }
     if (operation == MVDM_EXIT_CONSOLE_CONTROL)
         worker_base_shutdown_close(close_console,lifecycle.owner,
             OPENNT_LIFECYCLE_GRACE_MS,CONTROL_C_EXIT,NULL);
@@ -156,6 +145,7 @@ static void CALLBACK worker_control_request(PTP_CALLBACK_INSTANCE instance,
 void ntvdm_worker_lifecycle_end(void)
 {
     mvdm_softpc_exit_handoff *exit = &mvdm_softpc_exit_request;
+    compat_command_bind_start(NULL, NULL);
     if (lifecycle.exit_wait) {
         SetThreadpoolWait(lifecycle.exit_wait, NULL, NULL);
         WaitForThreadpoolWaitCallbacks(lifecycle.exit_wait, TRUE);
@@ -206,6 +196,7 @@ DWORD ntvdm_worker_lifecycle_begin(session *owner,BOOL character_io)
         lifecycle.fault=CreateEventW(NULL,TRUE,FALSE,NULL);
         if(!lifecycle.fault)return GetLastError();
     }
+    compat_command_bind_start(ntvdm_command_start_original, owner);
     return ERROR_SUCCESS;
 }
 DWORD ntvdm_worker_lifecycle_activate(void)

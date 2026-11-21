@@ -22,10 +22,8 @@ typedef enum mvdm_softpc_exit_operation {
     MVDM_EXIT_CLOSE_FRONTENDS,
     MVDM_EXIT_CONSOLE_CONTROL,
     MVDM_WOW_STARTED,
-    MVDM_WOW_BIND,
-    MVDM_COMMAND_CHILD
+    MVDM_WOW_BIND
 } mvdm_softpc_exit_operation;
-struct compat_command_child_request;
 
 typedef struct mvdm_softpc_exit_handoff {
     HANDLE request, completion;
@@ -33,7 +31,6 @@ typedef struct mvdm_softpc_exit_handoff {
     DWORD status;
     ULONG wow_request;
     USHORT wow_task;
-    struct compat_command_child_request *command_child;
     SRWLOCK lock;
     BOOL console_issued;
     DWORD console_status;

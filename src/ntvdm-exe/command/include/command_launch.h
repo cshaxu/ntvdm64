@@ -5,7 +5,7 @@
 
 struct session;
 struct compat_command_child_request;
-void ntvdm_command_start_original(struct session *, struct compat_command_child_request *);
+void ntvdm_command_start_original(void *, struct compat_command_child_request *);
 
 BOOL ntvdm_command_initialize(void);
 

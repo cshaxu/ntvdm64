@@ -1,4 +1,5 @@
 #include "compat/include/command_services.h"
+#include "include/command_process.h"
 
 static const compat_command_services *binding;
 
@@ -82,4 +83,20 @@ LPSTARTUPINFOA __cdecl opennt_command_child_startup(LPSTARTUPINFOA startup,
     child->hStdOutput = current_handles.values[1];
     child->hStdError = current_handles.values[2];
     return child;
+}
+
+static compat_command_start start_child;
+static void *start_context;
+
+void compat_command_bind_start(compat_command_start start, void *context)
+{
+    start_child = start;
+    start_context = start ? context : NULL;
+}
+
+DWORD compat_command_start_child(compat_command_child_request *request)
+{
+    if (!start_child) return ERROR_INVALID_STATE;
+    start_child(start_context, request);
+    return request->error;
 }

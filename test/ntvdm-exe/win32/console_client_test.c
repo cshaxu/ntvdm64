@@ -50,8 +50,10 @@ static BOOL native_set_display(HANDLE h,DWORD flags,COORD *size)
 static session owner;
 static HANDLE command_entered, command_release;
 
-void ntvdm_command_start_original(session *target, compat_command_child_request *request)
+static __declspec(thread) DWORD command_caller;
+void ntvdm_command_start_original(void *target, compat_command_child_request *request)
 {
+    CHECK(command_caller == GetCurrentThreadId());
     request->error = (target == &owner && request->host == &owner.host_context) ?
         ERROR_SUCCESS : ERROR_INVALID_STATE;
     if (command_entered && request->flags == CREATE_SUSPENDED) {
@@ -59,6 +61,11 @@ void ntvdm_command_start_original(session *target, compat_command_child_request 
         CHECK(WaitForSingleObject(command_release, 5000) == WAIT_OBJECT_0);
     }
     request->created = !request->error;
+}
+static DWORD WINAPI synchronous_command(void *request)
+{
+    command_caller = GetCurrentThreadId();
+    return compat_command_start_child(request);
 }
 static __declspec(thread) session *bound;
 static HANDLE delivery,peer,stop,readiness,frontend_process,video_wait;
@@ -456,30 +463,31 @@ int main(int argc,char **argv)
         compat_command_child_request first = {0}, second = {0};
         first.host = second.host = &owner.host_context;
         first.flags = CREATE_SUSPENDED;
-        first.completed = CreateEventW(NULL, FALSE, FALSE, NULL);
-        second.completed = CreateEventW(NULL, FALSE, FALSE, NULL);
+        HANDLE first_thread;
+        DWORD result;
         command_entered = CreateEventW(NULL, FALSE, FALSE, NULL);
         command_release = CreateEventW(NULL, FALSE, FALSE, NULL);
-        CHECK(first.completed && second.completed && command_entered && command_release);
-        CHECK(mvdm_softpc_post_command_child(&first) == ERROR_INVALID_STATE);
+        CHECK(command_entered && command_release);
+        CHECK(compat_command_start_child(&first) == ERROR_INVALID_STATE);
         lifecycle_wow = TRUE;
         CHECK(!ntvdm_worker_lifecycle_begin(&owner, FALSE));
-        CHECK(!mvdm_softpc_post_command_child(&first));
-        CHECK(WaitForSingleObject(command_entered, 5000) == WAIT_OBJECT_0);
-        CHECK(!mvdm_softpc_post_command_child(&second));
-        CHECK(WaitForSingleObject(second.completed, 5000) == WAIT_OBJECT_0);
+        first_thread = CreateThread(NULL, 0, synchronous_command, &first, 0, NULL);
+        CHECK(first_thread && WaitForSingleObject(command_entered, 5000) == WAIT_OBJECT_0);
+        command_caller = GetCurrentThreadId();
+        CHECK(!compat_command_start_child(&second));
         CHECK(second.created && !second.error);
-        CHECK(WaitForSingleObject(first.completed, 0) == WAIT_TIMEOUT);
+        CHECK(WaitForSingleObject(first_thread, 0) == WAIT_TIMEOUT);
         CHECK(SetEvent(command_release));
-        CHECK(WaitForSingleObject(first.completed, 5000) == WAIT_OBJECT_0);
+        CHECK(WaitForSingleObject(first_thread, 5000) == WAIT_OBJECT_0);
+        CHECK(GetExitCodeThread(first_thread, &result) && !result);
         CHECK(first.created && !first.error);
         ntvdm_worker_lifecycle_end();
+        CHECK(compat_command_start_child(&second) == ERROR_INVALID_STATE);
+        CloseHandle(first_thread);
         CloseHandle(command_release);
         CloseHandle(command_entered);
-        CloseHandle(second.completed);
-        CloseHandle(first.completed);
         CloseHandle(fault_reported);
-        puts("PASS independent COMMAND completions; second launch completes while first is blocked");
+        puts("PASS synchronous COMMAND callbacks stay on each caller thread; concurrent caller is not serialized; unbind rejects");
         return 0;
     }
     if(argc==2 && !strcmp(argv[1],"--wow-start-control")) {
