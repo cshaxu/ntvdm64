@@ -1,4 +1,4 @@
-#include "mvdm_vm_ingress.h"
+#include "compat/include/mvdm_vm_ingress.h"
 #include "mvdm_vm_executor.h"
 #include "compat/include/mvdm_vm_capture.h"
 #include "compat/include/mvdm_softpc_worker_exit.h"
@@ -22,8 +22,8 @@ uint16_t c_getIP(void) { return ip; }
 void c_setIP(uint16_t value) { ip = value; }
 void CALLF(unsigned long target[2])
 { ++calls; return_ip = ip; far_target[0] = target[0]; far_target[1] = target[1]; ip = (uint16_t)target[0]; }
-mvdm_vm_executor *mvdm_standalone_worker_executor(void)
-{ return (mvdm_vm_executor *)1; }
+static DWORD admission_thread;
+static unsigned submissions;
 DWORD mvdm_vm_notification_snapshot(uint64_t *serial)
 { *serial = 0; return open ? ERROR_SUCCESS : ERROR_NOT_READY; }
 DWORD mvdm_vm_command_service(uint32_t address, uint32_t bytes, uint32_t *service)
@@ -44,10 +44,12 @@ DWORD ntvdm_command_launch_prepare_guest(const mvdm_command_capture_view *view,
     if (stage == 4) return ERROR_ACCESS_DENIED;
     *launch = (ntvdm_command_launch *)1; return 0;
 }
-DWORD mvdm_vm_executor_submit(mvdm_vm_executor *executor, uint32_t vm,
+static DWORD submit(void *executor, uint32_t vm,
     ntvdm_command_launch *launch, ntvdm_vm_text *text, uint64_t *token)
 {
-    CHECK(executor == (mvdm_vm_executor *)1 && vm == 7);
+    CHECK(executor == (void *)1 && vm == 7);
+    CHECK(GetCurrentThreadId() == admission_thread);
+    ++submissions;
     CHECK(launch == (ntvdm_command_launch *)1 && text == (ntvdm_vm_text *)1);
     if (stage == 5) return ERROR_OPERATION_ABORTED;
     *token = UINT64_C(0x100000002); return 0;
@@ -79,6 +81,8 @@ int main(void)
     CHECK(mvdm_vm_command_enter(10) && calls == 2 && return_ip == 18);
     mvdm_vm_ingress_reset();
     CHECK(!mvdm_vm_command_enter(8) && calls == 2 && ip == 0x5678);
+    admission_thread = GetCurrentThreadId();
+    mvdm_vm_command_bind(submit, (void *)1);
     for (stage = 0; stage < 6; ++stage) {
         destroyed = texts = captured = 0;
         token = UINT64_MAX;
@@ -90,6 +94,12 @@ int main(void)
         CHECK(texts == (stage >= 3 ? 1u : 0u));
         CHECK(destroyed == (stage == 5 ? 1u : 0u));
     }
+    CHECK(submissions == 2);
+    mvdm_vm_command_bind(NULL, NULL);
+    stage = 0; token = UINT64_MAX;
+    destroyed = texts = captured = 0;
+    CHECK(mvdm_vm_command_admit(7, 100, 20, &token) == ERROR_INVALID_PARAMETER);
+    CHECK(!token && submissions == 2 && destroyed == 1 && texts == 1 && captured == 1);
     printf("PASS %u ingress selection/ownership assertions; CCPU/broker boundaries mocked\n", checks);
     return 0;
 }

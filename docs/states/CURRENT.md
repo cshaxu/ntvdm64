@@ -10,7 +10,7 @@ implementation migration. The broader C-layer cleanup remains active.
 | Field | Record |
 | --- | --- |
 | Original Owner Request | 实际公共实现及必要状态下沉B，不只是移动头文件或增加转发；不把NTVDM/NTSRV核心搬进B；按批准的S队列连续执行。 |
-| Objective | Audit the complete responsibility and implementation ownership of ntvdm-exe, mvdm-host, non-mvdm and compat, including the historical session split; establish a file/symbol/state/lifecycle migration ledger before further relocation, then implement complete chains to eliminate all (B+C)-to-D/E/F implementation dependencies. B owns independent compatibility mechanics and resources; C retains original machine/subsystem algorithms; F owns product composition and lifecycle. No forwarding disguise; the owner-approved CCPU/SAS/USER adaptation exception permits B-to-C, never B-to-D/E/F. |
+| Objective | Audit ntvdm-exe, mvdm-host, non-mvdm and compat ownership against the migration ledger; implement complete chains to eliminate all (B+C)-to-D/E/F implementation dependencies. B owns independent compatibility mechanics and resources; C retains original machine/subsystem algorithms; F owns product composition and lifecycle. No forwarding disguise; the owner-approved CCPU/SAS/USER adaptation exception permits B-to-C, with reviewed product callbacks under the architecture rule. |
 | Files And ABI Surface | Complete ntvdm-exe, mvdm-host, non-mvdm and compat inventory; historical session split, production compile/link providers and indirect calls. Inspect external consumers/providers as needed for complete chains without unrelated product expansion. |
 | Reference Baseline | S13 P17; package92f469bf-1555-4ff0-b16d-ef2d9292934a; source/evidence in the linked closure. Direct ledger144 eliminated/424 open is not an implementation-migration count. |
 | Applicable Rules | Six-layer architecture, original-first source policy, coding/execution/documentation rules and approved implementation migration. |
@@ -19,7 +19,7 @@ implementation migration. The broader C-layer cleanup remains active.
 | Candidate Proposal | [T483 parent proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
 | Identifier Mode | M0 T483 S14, Ordinary Mode. |
 | Admission And Approval | Owner approved sequential implementation migration on2026-11-19. S13 first-chain verification completed; S14 admitted at its closure delivery. Later S remain planned. |
-| Non-goals | No guest modification/rebuild, whole-session/core migration, duplicate TLS/state machine, B-to-D/E/F dependency or forwarding-only completion. |
+| Non-goals | No guest modification/rebuild, whole-session/core migration, duplicate TLS/state machine, private outer implementation dependency or forwarding-only completion. |
 | Expected Markers | Actual inward implementations and state ownership, removed superseded providers/forwarding, retained original memory semantics and lifetime. |
 | Similar-Issue Sweep | All acquire/use/release, thread and cross-image consumers of each selected chain; distinguish original C provider algorithms from common compatibility mechanics. |
 | Reporting Requirements | File entry/exit, mirror points/lines and cumulative totals; direct edges, actual migration, deleted forwarding and remaining ownership counted separately. |
@@ -70,7 +70,7 @@ P147 [Guest VM I/O](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-
 P148 [VM registration](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-command-registration-owner.json).
 P149 [VM input](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-input-owner.json).
 P150 [Original COMMAND](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-original-command-owner.json).
-[P158 admission design](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-admission-boundary.md): B/C direct 0/0; C0156/C0619/C0621 open.
+[P159 callback implementation](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-vm-admission-boundary.md): B/C direct 0/0; C0621 resolved via approved callback; C0156/C0619 open.
 
 P75 [page-domain context ownership](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-page-context-owner.json)
 moved page-domain identity and cleanup to B and removed three F calls.

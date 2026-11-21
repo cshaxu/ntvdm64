@@ -2,7 +2,7 @@
 #include "mvdm_vm_executor.h"
 #include "compat/include/mvdm_vm_text.h"
 #include "compat/include/mvdm_vm_notification.h"
-#include "mvdm_vm_bridge.h"
+#include "compat/include/mvdm_vm_bridge.h"
 #include "compat/include/mvdm_vm_wake.h"
 #include "compat/include/mvdm_vm_application.h"
 #include <stdio.h>

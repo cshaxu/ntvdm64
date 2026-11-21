@@ -1,4 +1,4 @@
-#include "mvdm_vm_bridge.h"
+#include "compat/include/mvdm_vm_bridge.h"
 #include <windows.h>
 
 /* Test-only link seam: fail arming after both host and guest IRQ ownership

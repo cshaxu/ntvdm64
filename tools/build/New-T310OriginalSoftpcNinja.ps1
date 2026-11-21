@@ -277,7 +277,7 @@ $openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c')
 $openntRtlX86Names = @('largeint.asm', 'movemem.asm')
-$compatSoftpcNames = @('mvdm_softpc_text_video.c','mvdm_softpc_firmware.c','mvdm_vm_notification.c','mvdm_vm_wake.c','mvdm_vm_continuation.c','mvdm_vm_guest_io.c','mvdm_vm_input.c','mvdm_vm_input_bop.c')
+$compatSoftpcNames = @('mvdm_vm_binding.c','mvdm_vm_bridge.c','mvdm_vm_ingress.c','mvdm_softpc_text_video.c','mvdm_softpc_firmware.c','mvdm_vm_notification.c','mvdm_vm_wake.c','mvdm_vm_continuation.c','mvdm_vm_guest_io.c','mvdm_vm_input.c','mvdm_vm_input_bop.c')
 $compatCpuAdapterNames = @('mvdm_keyboard_reset.c','mvdm_softpc_descriptor_fields.c')
 $compatMouseNames = @('mvdm_softpc_mouse_input.c','mvdm_softpc_mouse_bridge.c','mvdm_softpc_mouse_guest.c')
 $adapterSoftpcNames = @('mvdm_vm_binding.c', 'mvdm_dpmi_binding.c', 'mvdm_softpc_firmware.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c',
@@ -1235,7 +1235,7 @@ $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $sourceRoot = if ($mouseAdapter -or $name -in $compatSoftpcNames -or $cpuAdapter) { Join-Path $root 'src/compat' } else { $adapterSoftpcRoot }
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sourceRoot $name)) + $selectedVideoInputs)
     $videoInclude = if ($name -eq 'v7_pointer_binding.c') { ' ' + $cvidcGeneratedInclude } else { '' }
-    $unitFlags = if ($cpuAdapter -or $name -eq 'mvdm_softpc_mouse_guest.c') { $compatCcpuFlags } elseif ($mouseAdapter -or $name -in @('mvdm_softpc_firmware.c','mvdm_vm_notification.c','mvdm_vm_wake.c','mvdm_vm_continuation.c','mvdm_vm_guest_io.c','mvdm_vm_input.c','mvdm_vm_input_bop.c')) { $libraryFlags } elseif ($textAdapter) { $compatTextVideoFlags } else { $authoredSoftpcFlags + $videoInclude }
+    $unitFlags = if ($cpuAdapter -or $name -eq 'mvdm_softpc_mouse_guest.c') { $compatCcpuFlags } elseif ($mouseAdapter -or $name -in @('mvdm_vm_binding.c','mvdm_vm_bridge.c','mvdm_vm_ingress.c','mvdm_softpc_firmware.c','mvdm_vm_notification.c','mvdm_vm_wake.c','mvdm_vm_continuation.c','mvdm_vm_guest_io.c','mvdm_vm_input.c','mvdm_vm_input_bop.c')) { $libraryFlags } elseif ($textAdapter) { $compatTextVideoFlags } else { $authoredSoftpcFlags + $videoInclude }
     $graph.Add('  cflags = ' + $unitFlags)
     $object
 }

@@ -12,8 +12,8 @@
 #include "compat/include/mvdm_softpc_ccpu_wait.h"
 #include "mvdm_softpc_guest_memory.h"
 #include "mvdm_vm_executor.h"
-#include "mvdm_vm_bridge.h"
-#include "mvdm_vm_ingress.h"
+#include "compat/include/mvdm_vm_bridge.h"
+#include "compat/include/mvdm_vm_ingress.h"
 #include "ntvdm_dos_observer.h"
 #include "ntvdm-exe/session/session.h"
 #include "compat/include/monitor_context.h"
@@ -41,6 +41,12 @@ static wow_user_session_binding worker_wow_binding;
 static BOOL worker_wow_attached;
 static ntvdm_vm_host *worker_frontends;
 static mvdm_vm_executor *worker_vm_executor;
+
+static DWORD submit_vm_command(void *executor, uint32_t vm,
+    ntvdm_command_launch *launch, ntvdm_vm_text *text, uint64_t *token)
+{
+    return mvdm_vm_executor_submit(executor, vm, launch, text, token);
+}
 
 mvdm_vm_executor *mvdm_standalone_worker_executor(void)
 {
@@ -83,6 +89,7 @@ static int mvdm_standalone_worker_cleanup(int result)
 
     ntvdm_dos_observer_stop(&worker_observer);
     ntvdm_worker_lifecycle_end();
+    mvdm_vm_command_bind(NULL, NULL);
     mvdm_vm_executor_destroy(worker_vm_executor);
     worker_vm_executor=NULL;
     /* Authorization already joined VM I/O before original host cleanup.
@@ -206,6 +213,7 @@ static DWORD mvdm_standalone_worker_begin(void)
     }
     worker_escape=TRUE;
     worker_started=TRUE;
+    if (worker_character_io) mvdm_vm_command_bind(submit_vm_command, worker_vm_executor);
     return ERROR_SUCCESS;
 fail:
     error=ntvdm_worker_lifecycle_exit_result(error);

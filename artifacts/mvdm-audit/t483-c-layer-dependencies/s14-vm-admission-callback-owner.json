@@ -1,0 +1,113 @@
+{
+  "packet": "M0 T483 S14 P159",
+  "parent": "d5a01b5875af965f1d6a9984bfadbdc641609615",
+  "owner_decision": "Use inner-owned synchronous callbacks for outer product operations; no new queue for same-thread decoupling.",
+  "C0621": {
+    "status": "resolved under approved callback composition",
+    "B_sources": [
+      "mvdm_vm_binding.c",
+      "mvdm_vm_bridge.c",
+      "mvdm_vm_ingress.c"
+    ],
+    "B_responsibility": "Original BIOS-slot register adaptation, operation dispatch, guest capture/snapshot, environment and stream preparation, failed submission rollback.",
+    "callback": "mvdm_vm_command_submit, registered by F submit_vm_command -> existing mvdm_vm_executor_submit",
+    "thread": "B preparation and F submission callback execute on the same CPU thread; existing execute runs on the threadpool.",
+    "F_responsibility": "Existing executor admission/list lock, continuation/I/O composition, threadpool submission, frontend registration, product execution and retirement. B owns underlying continuation/I/O/capture mechanisms; this is not a claim that F executor orchestration moved inward.",
+    "lifetime": "Bind after worker initialization before CPU run; unbind during stopped-worker cleanup before executor drain/destroy. Callback context borrows the sole existing executor.",
+    "contract": "Same TrySubmitThreadpoolCallback before token publication; failure retains prepared objects for B rollback. No new queue or scheduler."
+  },
+  "known_outward_direct_symbols": {
+    "B": 0,
+    "C": 0
+  },
+  "reviewed_runtime_callbacks_in_this_chain": {
+    "B_to_F": 1
+  },
+  "other_chains_not_closed_by_this_delivery": [
+    "C0156: nine typed D transport callbacks require final disposition under clarified policy",
+    "C0619: existing cross-thread product-request protocol requires final disposition"
+  ],
+  "mirror": {
+    "non_error_points_delta": 0,
+    "non_error_lines_delta": 0,
+    "guest_changed_or_recompiled": false
+  },
+  "verification": {
+    "cached_x86": 0,
+    "cached_x64_and_reference": 0,
+    "unit_assertions": {
+      "ingress": 73,
+      "notification": 3189,
+      "execution": 81
+    },
+    "unit_limitations": "CCPU/broker mocked in unit fixtures; execution uses real child waits.",
+    "real_guest": [
+      {
+        "name": "A",
+        "signature": 1314147670,
+        "vm": 2156105728,
+        "generation": 3,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1315110,
+        "finish": 1315165,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 11,
+        "notificationSeen": 11,
+        "notificationIrq": 15,
+        "notificationErrors": 0,
+        "continuationCount": 2,
+        "continuationErrors": 0
+      },
+      {
+        "name": "B",
+        "signature": 1314147670,
+        "vm": 2155446272,
+        "generation": 2,
+        "status": 12870,
+        "negativeStatus": 12871,
+        "negativeResult": 1,
+        "start": 1315110,
+        "finish": 1315164,
+        "callback": 4276292839,
+        "callbackCount": 160,
+        "callbackErrors": 0,
+        "waitCount": 3,
+        "waitErrors": 0,
+        "pairCount": 1,
+        "pairErrors": 0,
+        "notificationPublished": 10,
+        "notificationSeen": 11,
+        "notificationIrq": 15,
+        "notificationErrors": 0,
+        "continuationCount": 2,
+        "continuationErrors": 0
+      }
+    ],
+    "real_guest_scope": "Two actual Win3.1 DOS VMs, production native 54:08 AH0/AH1, synchronous tokens/completions; 320 callback identity/stack/register/flags checks; normal Windows exit. Guest input and 54:0A not covered by this test.",
+    "ordinary_command": "Real modern EDIT Ctrl+Q, CMD echo, DOS MEM, launcher completion passed.",
+    "boundaries": "Nine compiled A/B graphs pass; three moved object symbol lists contain only inner/platform direct providers.",
+    "source_installation": "Original O:/w31 byte identities unchanged; O:/tmp/p159w31 removed.",
+    "moved_body_identity": {
+      "mvdm_vm_binding.c": "Body identical after include-path relocation",
+      "mvdm_vm_bridge.c": "Body identical after include-path relocation"
+    }
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "c6f232df-b4f3-4fd1-81bf-bc885b2ef1c7",
+    "hashVerified": true,
+    "stopped": 0
+  }
+}

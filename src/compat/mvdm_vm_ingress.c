@@ -1,8 +1,14 @@
-#include "mvdm_vm_ingress.h"
+#include "include/mvdm_vm_ingress.h"
 #include "compat/include/mvdm_command_launch.h"
 #include "compat/include/mvdm_vm_capture.h"
-#include "mvdm_vm_executor.h"
-#include "mvdm_standalone_worker.h"
+static mvdm_vm_command_submit submit_command;
+static void *submit_context;
+
+void mvdm_vm_command_bind(mvdm_vm_command_submit submit, void *context)
+{
+    submit_command = submit;
+    submit_context = submit ? context : NULL;
+}
 
 DWORD mvdm_vm_command_admit(uint32_t vm, uint32_t descriptor, uint32_t bytes,
     uint64_t *token)
@@ -21,8 +27,8 @@ DWORD mvdm_vm_command_admit(uint32_t vm, uint32_t descriptor, uint32_t bytes,
     if (!error) error = mvdm_vm_command_snapshot(service, descriptor, bytes, &capture, &text);
     if (!error && !mvdm_command_capture_read(capture, &view)) error = ERROR_INVALID_DATA;
     if (!error) error = ntvdm_command_launch_prepare_guest(&view, defaults, &launch);
-    if (!error) error = mvdm_vm_executor_submit(mvdm_standalone_worker_executor(),
-        vm, launch, text, token);
+    if (!error) error = submit_command ? submit_command(submit_context,
+        vm, launch, text, token) : ERROR_INVALID_PARAMETER;
     if (error) {
         ntvdm_command_launch_destroy(launch);
         ntvdm_vm_text_destroy(text);

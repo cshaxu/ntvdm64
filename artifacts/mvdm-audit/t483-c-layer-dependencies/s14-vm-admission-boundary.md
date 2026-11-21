@@ -1,6 +1,38 @@
 # C0621 synchronous admission boundary
 
-## P158 synchronous admission design (not implemented)
+## P159 approved callback composition
+
+Owner rejects queues for same-thread logical decoupling and approves typed
+inner-owned callbacks for outer product actions. P158 is superseded, not
+implemented. [P159 evidence](s14-vm-admission-callback-owner.json) records the
+final ownership, real guest results, package and remaining chains.
+
+B now owns the BIOS-slot register adapter, bridge and complete guest request
+preparation. It calls its typed submit interface synchronously. F registers
+submit_vm_command with the existing executor context after initialization and
+before CPU entry; cleanup unbinds before executor drain/destruction. F retains
+executor orchestration, original threadpool submission, frontend registration,
+launch and retirement. Underlying capture, continuation, text and I/O mechanisms
+remain B-owned. No whole executor migration or runtime-peer independence is
+claimed. Failed submission leaves launch/text owned by B for existing rollback.
+Success still means threadpool submission succeeded before token publication.
+
+C0621 is resolved by this actual migration and approved callback boundary.
+B/C known direct outward symbols remain 0/0; this chain has one reviewed B-to-F
+runtime callback. C0156 (nine D callbacks) and C0619 (cross-thread product
+request protocol) are not closed by this delivery. Original mirror/guest delta
+is zero, including non-error mirror points and lines.
+
+Cached x86/x64/reference builds and all nine A/B graph gates pass. Unit fixtures
+pass 73 ingress, 3189 notification and 81 execution assertions. The published
+package passes real COMMAND/native EDIT/DOS MEM return and real Win3.1 two-VM
+production native 54:08 AH0/AH1, token/completion, 320 callback identity/stack/
+register/flags checks and normal exit. Guest input and 54:0A are not covered by
+that two-VM test. Original installation bytes are unchanged; its test copy is
+removed. Package c6f232df-b4f3-4fd1-81bf-bc885b2ef1c7 has 11 images and 22 matching
+published hashes. Commit/push receipt is the enclosing P159 commit.
+
+## P158 synchronous admission design (superseded; not implemented)
 
 The remaining C0621 edge is not a missing declaration. F's executor submit
 allocates a job, creates the B continuation and B I/O, checks closing/count/

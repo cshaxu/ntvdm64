@@ -130,6 +130,25 @@ NTVDM-provided module ABIs remain separate from source ownership. Shared
 BaseSrv client and transport mechanisms belong to common/base_srv; service
 authorization, task and lifecycle decisions remain NTSRV-owned.
 
+## Owner-approved synchronous callback composition - T483 S14
+
+Inner components may define typed callback interfaces for outer-owned product
+operations. The outer component registers its implementation; the inner body
+must own its actual preparation, validation, mechanism state and rollback,
+not forward the complete implementation back outward. Record actual callback
+targets, calling thread, borrowed-state lifetime and unregister/join ordering.
+Such reviewed dependency inversion is permitted; it is not a private outer
+header or link dependency and must not be reported as having no runtime peer.
+This clarification supersedes the earlier blanket prohibition on required
+outer implementation callbacks for this bounded composition pattern.
+
+Do not introduce queues to decouple same-thread logic. Move the implementation
+inward or use the inner-owned callback interface. Queues are only appropriate
+for a demonstrated cross-thread or cross-process handoff; reuse the existing
+handoff instead of adding a second queue, scheduler or lifecycle authority.
+For VM command admission, retain the existing threadpool submission and its
+success/failure contract. The proposed P158 ready-queue replacement is rejected.
+
 ## Original behavior and modern host responsibility — T447
 
 This owner-approved rule applies retrospectively to all T447 implementations,
