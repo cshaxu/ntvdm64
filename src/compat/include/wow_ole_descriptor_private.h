@@ -69,7 +69,6 @@ VPVOID WINAPI WOWGlobalLock16(HMEM16);
 BOOL WINAPI WOWGlobalUnlock16(HMEM16);
 VPVOID WINAPI WOWGlobalAllocLock16(WORD,DWORD,HMEM16 *);
 HMEM16 WINAPI WOWGlobalUnlockFree16(VPVOID);
-void WINAPI wow_ole_touch_pointer(VPVOID);
 #define WOWFIXVDMPTR(vp,size) WOWGetVDMPointer((vp),(size),TRUE)
 #define WOWRELVDMPTR(vp) ((void)(vp))
 #define FIXVDMPTR(vp,type) ((type *)WOWFIXVDMPTR((vp),sizeof(type)))

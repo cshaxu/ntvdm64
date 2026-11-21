@@ -11,12 +11,6 @@ static BOOL CALLBACK initialize_lead_table(PINIT_ONCE once,PVOID parameter,PVOID
     for (i=0;i<256;i++) g_abLeadTable[i]=(BYTE)IsDBCSLeadByte((BYTE)i);
     return TRUE;
 }
-void WINAPI wow_ole_touch_pointer(VPVOID vp)
-{
-    /* Public protected-mode translation reaches the same original segment
-     * fault and mapping owner; no private WOW header or symbol is needed. */
-    (void)WOWGetVDMPointer(vp, 1, TRUE);
-}
 HGLOBAL WINAPI wow_ole_convert_descriptor(HANDLE memory,UINT direction)
 {
     InitOnceExecuteOnce(&lead_once,initialize_lead_table,NULL,NULL);

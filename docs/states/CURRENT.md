@@ -193,10 +193,10 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,25 resolved,13 remaining. P15 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
+38 candidates,26 resolved,12 remaining. P16 cached build, dual publication and targeted runtime passed. P1 cleared debug/COMMAND
 preparation; P2 cleared COMMAND capture leases; P3 clears keyboard IRQ retirement,
 descriptor projection and effective-address consumers including their public header.
-Unique direct B-to-C2 relationships337->229; relocation records606->248.
+Unique direct B-to-C2 relationships337->228; relocation records606->247.
 Compiled private C2 header rows144->98; private C2 search roots74->11.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
@@ -219,12 +219,11 @@ compiled; +1 point/+97 lines awaits approval. No production change.
 [WOW page-domain review](../../artifacts/mvdm-audit/t483-b-c2-dependencies/wow-page-domain-provider-review.json)
 identifies24 actual C2 providers; P9 implements their callbacks and preserves
 the existing reclamation failure-injection contract.
+P4-P7 delivered printer, pipe, mouse and termination boundaries:
 [P4](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p4-delivery.json),
 [P5](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p5-delivery.json),
-[P6](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p6-delivery.json), and
-[P7](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p7-delivery.json)
-record verified printer, async pipe, mouse and termination boundaries.
-Cumulative S19 mirror delta+2 points/+22 lines; no original guest changes.
+[P6](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p6-delivery.json),
+[P7](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p7-delivery.json).
 [P9](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p9-delivery.json) clears
 24 page-domain C2 relations through the existing CPU callback table, with no
 mirror change. Real CCPU page-domain/reclaim, exact owned reads, actual Win16
@@ -242,16 +241,12 @@ continuation/I/O/input/notification/wake files. Original ICA, SAS, keycode and
 CPU bodies remain providers. Notification3194, ingress73, capture165, actual
 CCPU BOP and COMMAND return pass. Eight algorithm comparisons match after
 reversing callback binding; no mirror or guest change.
-[P12 clipboard delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p12-clipboard-review.json)
-uses a caller-supplied synchronous retirement callback. Cached full build,
-dual11 publication and epoch56 assertions pass. Real Win16 transfer passes
-all18 checkpoints on the shared desktop; P11 control also passes. Earlier
-access-denial and foreign RadeonSoftware lock failures remain in evidence.
-The native test peer waits only for a bounded identified foreign lock; no
-product retry or guest modification. B-to-C2 is238. Mirror delta0 points/0 lines.
+[P12 clipboard delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p12-clipboard-review.json):
+synchronous retirement callback; cached build, dual11, epoch56 and real Win16
+18 checkpoints passed. Earlier desktop/foreign-lock failures retained in evidence.
 [Remaining WOW provider review](../../artifacts/mvdm-audit/t483-b-c2-dependencies/wow-remaining-provider-review.json)
 records DIR28-38:39 direct C2 relationships plus private-layout obligations.
-DIR28 is now delivered in P13; DIR29-38 remain source/provider evidence only.
+DIR28/29/33 delivered in P13/P15/P16; other remaining rows are not closed.
 [P13 dialog delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p13-delivery.json)
 clears three direct C2 calls through immutable same-image callbacks bound before
 original DLL attach. Nested/resource guards, actual loader, real Win16 common
@@ -262,4 +257,11 @@ clears six direct C2 relations and this file's private C2 headers. Actual C2
 scalar projections, B nested/exception guards, real Win16 CBT Hook, DLL loader
 and COMMAND return pass. Dual11 package df907bb9-940d-4c0a-8e8f-7a72e4a73c34.
 Owner-approved mirror delta+1 point/+30 lines; cumulative S19 +3 points/+52 lines.
-S19 remains active; S20 not admitted.
+[P16 OLE delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p16-delivery.json)
+removes one B wrapper, preserving direct original C1/C2 WOW API semantics.
+Real Win16 OLE49153/49154 and COMMAND return pass; dual11 published.
+Mirror delta0 points/0 lines.
+[Task queries](../../artifacts/mvdm-audit/t483-b-c2-dependencies/task-query-provider-decision.json)
+are owner-approved +1 point/+25 lines, not yet delivered.
+[Message lifetime](../../artifacts/mvdm-audit/t483-b-c2-dependencies/message-lifetime-provider-review.json)
+remains ownership research, not completion. S19 active; S20 not admitted.

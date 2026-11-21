@@ -1,0 +1,17 @@
+{
+  "packet": "M0 T483 S19",
+  "file": "src/compat/wow_message_lifetime.c",
+  "id": "BC2F032",
+  "status": "source ownership review; implementation and mirror cost unresolved",
+  "direct_relationships": 12,
+  "finding": "All production callers of seven exported operations are C2; B contains private C2 message-slot ownership, unthunker comparisons and TD stack restoration, not a generic memory manager. Header only has opaque C2 pointer declarations and shared stack snapshot.",
+  "direction": "Evaluate moving existing implementation to original message owner rather than wrapping twelve algorithm calls and retaining copied layouts in B. No independent B/D/E/F implementation caller found by named-symbol search; static inline finish32 executes at C2 call sites.",
+  "preserve": [
+    "Consume captured allocation keys before release.",
+    "Retain nested finally ordering and original WM_COPYDATA ownership.",
+    "Only pure selected input unthunkers replay during incomplete conversion.",
+    "Stack rollback verifies live current TD identity and guest task before restoration; never dereference retired TD.",
+    "Keep worker-active check supplied by B."
+  ],
+  "remaining": "Measure original-owner placement and compile; request material mirror increment before production change. Existing evidence does not count file complete."
+}

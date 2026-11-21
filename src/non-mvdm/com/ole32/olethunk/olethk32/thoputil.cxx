@@ -145,7 +145,7 @@ SCODE GetPtr16Description(VPVOID vp,
         // On Win95, this will call GlobalFix on the pointer
         // to ensure that it stays in memory
         /* DIVERGENCE(OPENNT-HOST-297): same original kernel segment fault. */
-        wow_ole_touch_pointer(vp);
+        (void)WOWGetVDMPointer(vp, 1, TRUE);
 #line 663
 
 #if defined(_CHICAGO_)

@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P15 completes twenty-five files; remaining13 include four pending mirror decisions",
+  "status": "P16 completes twenty-six files; remaining12; task-query mirror candidate approved, not delivered",
   "files": [
     {
       "id": "BC2F001",
@@ -7968,7 +7968,7 @@
     {
       "id": "BC2F030",
       "file": "src/compat/wow_idle_hook_binding.c",
-      "status": "not yet audited",
+      "status": "owner approved +1 point/+25 lines task-query candidate; implementation and delivery pending",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8120,12 +8120,13 @@
           "evidence": "mvdm-host/wow32/wow32.h",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "review": "task-query-provider-decision.json"
     },
     {
       "id": "BC2F031",
       "file": "src/compat/wow_launch_identity.c",
-      "status": "not yet audited",
+      "status": "owner approved +1 point/+25 lines task-query candidate; implementation and delivery pending",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8247,12 +8248,13 @@
           "evidence": "mvdm-host/wow32/wow32.h",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "review": "task-query-provider-decision.json"
     },
     {
       "id": "BC2F032",
       "file": "src/compat/wow_message_lifetime.c",
-      "status": "not yet audited",
+      "status": "source ownership reviewed; placement and mirror cost pending",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8694,12 +8696,13 @@
           "evidence": "mvdm-host/wow32/wmsg16.h",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "review": "message-lifetime-provider-review.json"
     },
     {
       "id": "BC2F033",
       "file": "src/compat/wow_ole_descriptor_binding.c",
-      "status": "not yet audited",
+      "status": "completed in verified P16 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8711,7 +8714,8 @@
           "evidence": "_WOWGetVDMPointer@12",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "review": "p16-delivery.json"
     },
     {
       "id": "BC2F034",

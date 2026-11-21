@@ -2599,7 +2599,7 @@ Both pinned editions have identical selected bodies. The provider is compiled
 as C; no C++ language/runtime, COM activation, OLE thunk manager or guest import.
 Original descriptors, conversion, failure/cleanup and DBCS scanning remain the
 owners. The NT selector view is the already selected ExpLdt; unavailable OLE16
-TouchPointer16 delegates to the existing original WOW segment-fault helper;
+TouchPointer16 delegates directly to the existing WOWGetVDMPointer API;
 inline guest-base arithmetic delegates to the existing synchronous pointer
 mapping boundary. Only these substitutions and the finite declaration include
 are adaptations. Unsupported original Chicago/DBG branches reject with#error.

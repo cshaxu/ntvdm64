@@ -1,0 +1,58 @@
+{
+  "packet": "M0 T483 S19 P16",
+  "baseline": "3e1aff567",
+  "status": "verified delivery",
+  "file": "src/compat/wow_ole_descriptor_binding.c",
+  "id": "BC2F033",
+  "ownership": "Remove B touch-pointer forwarding wrapper. C1 calls the existing original WOWGetVDMPointer DLL API directly, with unchanged arguments. B InitOnce and C1 descriptor conversion remain S20 scope.",
+  "direct_relationships": {
+    "file_before": 1,
+    "file_after": 0,
+    "B_C2_unique": 228,
+    "B_C2_raw": 247,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70
+  },
+  "progress": {
+    "completed": 26,
+    "total": 38,
+    "remaining": 12
+  },
+  "mirror": {
+    "file": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+    "before": {
+      "points": 14,
+      "lines": 3909
+    },
+    "after": {
+      "points": 14,
+      "lines": 3909
+    },
+    "delta": {
+      "points": 0,
+      "lines": 0
+    },
+    "cumulative_S19": {
+      "points": 3,
+      "lines": 52
+    },
+    "error_line_proof": "One expression replaced without any newline or other byte changes; existing #error/#line unchanged; paired exclusion parser zero issues."
+  },
+  "package": "b41ddaf6-c902-43d7-9d26-38d940457e16",
+  "build": "Cached full x86/x64/reference exit0",
+  "publication": "11 images dual published;22 hash checks",
+  "tests": [
+    "Real Win16 OLE formats49153 and49154: roundtrip, invalid input/direction, guest input/output ownership passed",
+    "COMMAND native EDIT CtrlQ CMD echo DOS MEM and launcher return passed"
+  ],
+  "audit": "Actual linked relocation audit: this B file no longer calls C2; existing C1/C2 WOW API boundary preserved. Raw VDMREDIR identity verified before map reuse. Generated/assembly coverage limitations remain explicit.",
+  "evidence_root": "build/t483-s19-ole",
+  "compiled_headers": {
+    "B_C2": 98,
+    "B_C1": 632
+  },
+  "private_search_roots": {
+    "B_C2": 11,
+    "B_C1": 36
+  }
+}
