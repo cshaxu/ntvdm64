@@ -14,10 +14,14 @@ $null=New-Item -ItemType Directory $root
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $runtime=$null;$scope=$null;$service=$null;$process=$null
 try {
-    $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
+    $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity
     $scope=New-IsolatedPackageScope $runtime
     $image="$runtime\system32\base-client-rpc-first-test.exe"
     Copy-Item -LiteralPath $Fixture -Destination $image
+    $manifest=Get-Content -LiteralPath "$runtime/product-system32-manifest.json" -Raw | ConvertFrom-Json
+    $ids=@($manifest.PackageId | Select-Object -Unique)
+    if($ids.Count -ne 1){throw 'RPC wait fixture requires one staged package identity'}
+    & "$repo/tools/build/Set-PackageIdentity.ps1" -Image $image -PackageId $ids[0]
     $scope.Paths+=$image
     @($Fixture,$image,"$runtime\system32\ntsrv.exe")|Get-FileHash|
         Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"

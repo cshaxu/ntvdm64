@@ -40,7 +40,7 @@ static NTSTATUS get_first_command(CHAR *returnedCommand,ULONG returnedBytes)
     message.u.GetNextVDMCommand.CmdLine=returnedCommand;
     message.u.GetNextVDMCommand.CmdLen=returnedBytes;
     message.u.GetNextVDMCommand.StartupInfo=&startup;
-    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+    status=NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),
         sizeof(message.u.GetNextVDMCommand));
     if (status!=STATUS_SUCCESS || message.ReturnValue!=STATUS_SUCCESS) return status;
@@ -64,7 +64,7 @@ static NTSTATUS report_task_exit(void)
     message.u.GetNextVDMCommand.CmdLine=command;
     message.u.GetNextVDMCommand.CmdLen=sizeof(command);
     message.u.GetNextVDMCommand.StartupInfo=&startup;
-    return OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+    return NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),
         sizeof(message.u.GetNextVDMCommand));
 }
@@ -77,7 +77,7 @@ static NTSTATUS set_reenter_count(ULONG state)
     BASE_API_MSG message={0};
     message.u.SetReenterCount.ConsoleHandle=(HANDLE)(ULONG_PTR)0x1234u;
     message.u.SetReenterCount.fIncDec=state;
-    return OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+    return NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepSetReenterCount),
         sizeof(message.u.SetReenterCount));
 }
@@ -93,7 +93,7 @@ static int admitted_vdm_child(void)
     unsigned index;
     REQUIRE(GetEnvironmentVariableW(L"NTVDM_RPC_TEST_RELEASE",name,ARRAYSIZE(name)));
     released=OpenEventW(SYNCHRONIZE,FALSE,name);REQUIRE(released);
-    REQUIRE(!OpenNtBaseClientConnectCurrent());
+    REQUIRE(!NtvdmBaseConnectExecution(INFINITE));
     REQUIRE(!OpenNtBaseClientWorkerIoTransition(WORKER_IO_ACQUIRE));
     {
         HANDLE pipe=NULL,frontend=NULL,ready=NULL,capability=NULL,root=NULL;
@@ -146,7 +146,7 @@ static int admitted_vdm_child(void)
         BASE_API_MSG message={0};STARTUPINFOA startup={sizeof(startup)};
         message.u.GetNextVDMCommand.VDMState=NO_PARENT_TO_WAKE;
         message.u.GetNextVDMCommand.StartupInfo=&startup;
-        REQUIRE(OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+        REQUIRE(NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
             CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),
             sizeof(message.u.GetNextVDMCommand))==STATUS_SUCCESS);
         REQUIRE(message.u.GetNextVDMCommand.WaitObjectForVDM);
@@ -179,14 +179,29 @@ static int admitted_vdm_parent(unsigned io_fault)
     released=CreateEventW(NULL,TRUE,FALSE,name);REQUIRE(released);
     REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_RELEASE",name));
     REQUIRE(SetEnvironmentVariableW(L"NTVDM_RPC_TEST_IO_FAULT",io_fault==2 ? L"2" : io_fault ? L"1" : NULL));
-    REQUIRE(!OpenNtBaseClientConnectCurrent());
+    REQUIRE(!NtvdmBaseConnectExecution(INFINITE));
     REQUIRE(!OpenNtBaseClientStartFrontend((uint64_t)(UINT_PTR)GetConsoleWindow(),TRUE,
         &root,&capability,&restored));
+    {
+        const ULONG operations[] = {BasepCheckVDM, BasepGetNextVDMCommand,
+            BasepUpdateVDMEntry, BasepExitVDM, BasepGetVDMExitCode,
+            BasepSetReenterCount, BasepRegisterWowExec, BasepIsFirstVDM};
+        ULONG index;
+        for (index=0; index<ARRAYSIZE(operations); ++index) {
+            BASE_API_MSG invalid={0}, before;
+            memset(&invalid.u,0xa5,sizeof(invalid.u));
+            before=invalid;
+            status=NtvdmBaseClientCallServer((PCSR_API_MSG)&invalid,NULL,
+                CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,operations[index]),0);
+            REQUIRE(status==STATUS_UNSUCCESSFUL && invalid.ReturnValue==(ULONG)status);
+            REQUIRE(!memcmp(&invalid.u,&before.u,sizeof(invalid.u)));
+        }
+    }
     message.u.CheckVDM.ConsoleHandle=(HANDLE)1;
     message.u.CheckVDM.BinaryType=BINARY_TYPE_DOS;
     message.u.CheckVDM.CmdLine=command;message.u.CheckVDM.CmdLen=sizeof(command);
     message.u.CheckVDM.StartupInfo=&startup;
-    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+    status=NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM),sizeof(message.u.CheckVDM));
     REQUIRE(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS);
     environment=GetEnvironmentStringsW();REQUIRE(environment);
@@ -573,7 +588,7 @@ static DWORD first_vdm_query(void)
 {
     BASE_API_MSG message={0};
     DWORD error;
-    NTSTATUS status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+    NTSTATUS status=NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM),
         sizeof(message.u.IsFirstVDM));
     if(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS)return ERROR_SUCCESS;
@@ -585,7 +600,7 @@ static DWORD WINAPI rpc_wait_call(void *context)
 {
     rpc_wait_test *test=context;
     SetEvent(test->entered);
-    if(!strcmp(test->kind,"connect"))test->error=OpenNtBaseClientConnectCurrent();
+    if(!strcmp(test->kind,"connect"))test->error=NtvdmBaseConnectExecution(INFINITE);
     else if(!strcmp(test->kind,"disconnect")) {
         OpenNtBaseClientDisconnectCurrent();
         test->error=ERROR_SUCCESS;
@@ -621,7 +636,12 @@ static int rpc_wait_contract(const char *kind)
     DWORD error;ULONGLONG began,elapsed;int result=1;
     if(strcmp(kind,"reply") && strcmp(kind,"connect") && strcmp(kind,"disconnect") &&
         !bootstrap && !loss)return 2;
-    if(!suspend || !resume || OpenNtBaseClientConnectCurrent())goto done;
+    if(!suspend || !resume)goto done;
+    error=NtvdmBaseConnectExecution(INFINITE);
+    if(error) {
+        fprintf(stderr,"RPC wait %s: initial connect error %lu\n",kind,error);
+        goto done;
+    }
     if(OpenNtBaseClientBrokerProcess(&server))goto done;
     control=OpenProcess(PROCESS_SUSPEND_RESUME|PROCESS_TERMINATE,FALSE,GetProcessId(server));
     if(!control)goto done;
@@ -734,8 +754,8 @@ int main(int argc,char **argv)
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-root-parent")) return frontend_root_parent();
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-root-child")) return frontend_root_child(FALSE);
     if (argc==2 && !lstrcmpA(argv[1],"--frontend-root-stale")) return frontend_root_child(TRUE);
-    REQUIRE(OpenNtBaseClientConnectCurrent()==ERROR_SUCCESS);
-    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+    REQUIRE(NtvdmBaseConnectExecution(INFINITE)==ERROR_SUCCESS);
+    status=NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepIsFirstVDM),
         sizeof(message.u.IsFirstVDM));
     REQUIRE(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS);
@@ -747,7 +767,7 @@ int main(int argc,char **argv)
     message.u.CheckVDM.CmdLine=command;
     message.u.CheckVDM.CmdLen=sizeof(command);
     message.u.CheckVDM.StartupInfo=&startup;
-    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+    status=NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM),sizeof(message.u.CheckVDM));
     if (status!=STATUS_SUCCESS || message.ReturnValue!=STATUS_SUCCESS)
         fprintf(stderr,"CheckVDM status=%08lx return=%08lx last=%lu\n",
@@ -757,7 +777,7 @@ int main(int argc,char **argv)
     ZeroMemory(&message,sizeof(message));
     message.u.UpdateVDMEntry.EntryIndex=UPDATE_VDM_PROCESS_HANDLE;
     message.u.UpdateVDMEntry.BinaryType=BINARY_TYPE_DOS;
-    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+    status=NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry),
         sizeof(message.u.UpdateVDMEntry));
     /* A process-handle registration is valid only after the launcher has
@@ -798,7 +818,7 @@ int main(int argc,char **argv)
     message.u.GetNextVDMCommand.Reserved=reserved;
     message.u.GetNextVDMCommand.ReservedLen=sizeof(reserved);
     message.u.GetNextVDMCommand.StartupInfo=&startup;
-    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+    status=NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),
         sizeof(message.u.GetNextVDMCommand));
     if (status!=STATUS_SUCCESS || message.ReturnValue!=STATUS_SUCCESS)
@@ -810,7 +830,7 @@ int main(int argc,char **argv)
     ZeroMemory(&message,sizeof(message));
     message.u.GetNextVDMCommand.ExitCode=7;
     message.u.GetNextVDMCommand.StartupInfo=&startup;
-    status=OpenNtBaseClientCallServer((PCSR_API_MSG)&message,NULL,
+    status=NtvdmBaseClientCallServer((PCSR_API_MSG)&message,NULL,
         CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),
         sizeof(message.u.GetNextVDMCommand));
     REQUIRE(status==STATUS_SUCCESS && message.ReturnValue==STATUS_SUCCESS);

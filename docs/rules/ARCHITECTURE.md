@@ -62,6 +62,29 @@ protocol can connect two products without either importing the other's
 private implementation. Requiring a specific peer image still creates a
 runtime dependency even when its name never appears in a source include.
 
+### Cross-image ABI and implementation ownership
+
+A product image may publish an interface implemented by another component.
+A consumer may use that interface through a documented cross-image ABI
+when the actual provider, required state and required implementation
+callbacks are all within the source dependencies permitted to the consumer.
+This is compliant even when an outer product image publishes the interface.
+The image owns export composition. Implementation and state retain their
+source owners.
+
+Record any named-image requirement as a binary load or runtime dependency.
+Check implementation dependencies separately by following imported symbols
+and indirect calls to the actual providers. An outer-layer body, required
+private state, or required implementation callback remains an outward
+dependency even when reached through an export or function pointer.
+Changes to the ABI surface follow the existing admission rules.
+
+OpenNT's VDMREDIR and VCDEX imports from ntvdm.exe (C0134) are an example.
+The executable publishes inward-owned operations for the modules in its
+process. Keep the ABI record and the verified import-to-provider mapping.
+Reuse that evidence while the relevant ABI and provider ownership remain
+unchanged. Recheck only the bindings affected by a change.
+
 ### Shared ownership restrictions
 
 For the owner-approved T483 implementation migration, a B contract forwarding

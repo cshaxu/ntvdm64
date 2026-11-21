@@ -18,6 +18,8 @@ DWORD OpenNtBaseClientFinishNativeRequest(DWORD,DWORD *,DWORD *);
 DWORD OpenNtBaseClientConnectCurrent(void);
 /* Run16 service-startup exception: phases share the supplied remaining budget. */
 DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds);
+/* Authenticate and install BASE request transport for execution clients. */
+DWORD NtvdmBaseConnectExecution(DWORD milliseconds);
 /* Preserve ordinary failures; confirmed admitted service loss maps to the
  * original disconnected-port Win32 error. No peer observation is involved. */
 DWORD OpenNtBaseClientFailure(DWORD error);

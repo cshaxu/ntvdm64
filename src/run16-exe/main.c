@@ -136,7 +136,7 @@ static DWORD connect_broker(void)
     {
         ULONGLONG now=GetTickCount64();
         if(now>=deadline) { error=ERROR_TIMEOUT; goto done; }
-        error=OpenNtBaseClientConnectCurrentTimeout((DWORD)(deadline-now));
+        error=NtvdmBaseConnectExecution((DWORD)(deadline-now));
         if (!error) { error=ERROR_SUCCESS; goto done; }
         /* Our newly spawned server can own its endpoint before registering
          * interfaces. This is readiness only, within the same startup budget;

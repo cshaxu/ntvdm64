@@ -51,10 +51,9 @@ Do not count relocated headers or a B-to-F forwarding contract as closure.
 
 Before further production relocation, audit all tracked files in ntvdm-exe,
 mvdm-host, non-mvdm and compat and reconcile their implementation owners.
-The existing S13-S19 worklist remains a grouping of functional chains, not
-permission to skip the complete inventory or to declare unresolved outward
-implementation dependencies closed. Final closure requires eliminating
-C-to-D/E/F implementation dependencies, including forwarding through B.
+The functional chains below remain the work breakdown for eliminating
+B/C-to-D/E/F implementation dependencies in S14, including forwarding.
+They preserve the existing inventory and evidence.
 
 Keep the existing C identifiers and historical evidence. For every reviewed
 chain record callers, actual providers, state, creation/use/failure/destruction,
@@ -99,17 +98,88 @@ a new accepted baseline and its cached objects are not release evidence.
 | S | Bounded scope | Completion evidence |
 | --- | --- | --- |
 | S13, closed by P17 | Extract the minimum shared instance/thread binding needed by physical mapping; move the mapping implementation, records and cleanup into B as the first complete chain. | Production C calls B implementations; old F mapping provider and eight-operation forwarding table removed; one binding authority, correct bind rollback/unbind/dispose and instance isolation. |
-| S14, admitted after P17 | Remaining guest-memory access/lease, XMS and WOW page-domain adaptation. | Each complete acquire/use/release chain has one state owner; C algorithms retained, F owns configuration and product lifetime only; no remaining F implementation hidden behind these B contracts. |
-| S15, planned | Console compatibility, keyboard/mouse state and text/graphics adaptation. | Common operation bodies/state/cleanup move inward; frontend channels and presentation policy stay external; switching, input, cleanup and isolation validated. Classify C-owned IRQ helpers for S19 instead of wrapping them. |
-| S16, planned | COMMAND capture/environment/directories/handles and CSR/BASE boundary separation. | Common mechanics execute inward; NTSRV retains request identity, authorization, scheduling, completion and waiter ownership. Resolve D transport dependencies by explicit ownership, not another B forwarding table. |
-| S17, planned | Redirector, async device and printer compatibility. | Common guest-copy/device operations and cleanup migrate with their state; product connection and authorization policy stay external; real selected caller and provider tested. |
-| S18, planned | WOW native-object, class, message, control/resource, clipboard and callback adaptation, in complete subgroups. | Native compatibility implementations have inward ownership; original C algorithms remain C; no private C-layout dependence silently added to B; lifecycle/reentrancy and relevant real WOW witnesses pass. |
-| S19, planned | Original CPU/SAS declarations, effective-address/descriptor/vector/IRQ ownership and final reconciliation. | Original-owned code recovered at its proper C owner where justified; actual compile/link and runtime service ledgers reconciled; all remaining outward implementation dependencies have explicit unresolved or owner-approved dispositions. |
+| S14, active | Eliminate all implementation dependencies from compat, non-mvdm and mvdm-host to D/E/F. Include the outward dependencies in the former S15-S19 functional groups: Console/input/display, COMMAND/CSR/BASE, redirector/devices/printer, WOW, and CPU/SAS/descriptor/vector/IRQ ownership. | Reconcile each actual provider with the delivered implementation and evidence. Remove outward implementation dependencies, including mandatory forwarding, while preserving original behavior and product policy ownership. |
+| S15, planned | Remove D common dependencies on E and F. | Reconcile D source, compile/link and runtime provider dependencies. Keep shared mechanisms in D and compose product behavior from the appropriate outer owner. |
+| S16, planned | Remove E frontend-base and worker-base dependencies on F. | Verify both E components against selected production graphs and actual callbacks. Keep executable/DLL composition and policy in F. |
+| S17, planned | Remove direct non-mvdm dependencies on mvdm-host. Restore the original USER resource callback routing through existing WOW registration. Review the OLE Win16 memory boundary separately. | Reconcile the 5 USER direct references and test native and WOW resource paths. Resolve the 5 original OLE references by a source-proven ownership split or obtain an explicit disposition for a remaining boundary. |
+| S18, planned | Remove direct compat dependencies on mvdm-host. Reuse original callbacks for execution handoff and return CPU/SAS, device and WOW-specific operations and vector assembly to their actual mvdm-host owners. | Reconcile the 296 P121 direct symbol references and build dependencies. Preserve machine state and callback ordering. Verify the dependency has not moved to non-mvdm or farther outward. |
+| S19, planned | Remove direct compat dependencies on non-mvdm. Reuse original USER registration slots and return private USER, CSR and original layout access to its owner. Preserve independent mechanisms in compat. | Reconcile the 55 P121 direct symbol references and private header dependencies. Verify the strict compat, non-mvdm, mvdm-host order and record remaining runtime callback providers. |
 
-The former S14 original-owner allocation moves to S19. Its evidence and
-stable IDs remain intact. If an earlier group needs a C correction to complete
-its chain, record the exact prerequisite in Current; do not defer a current
-correctness defect or introduce a callback solely to bypass it.
+The owner revised the sequence on 2026-11-20. The former functional S15-S19
+allocations remain S14 work groups for their outward dependencies. Keep their
+existing evidence and recheck only outstanding work. Three-component
+internal dependencies proceed in S17-S19 after the D and E stages. S14
+remains the only admitted S. Refresh planning counts at each new admission.
+
+Count direct references separately from runtime callbacks and implementation
+ownership. Reuse existing callback contracts where applicable. Private
+implementation reached through a callback still counts as a dependency.
+Report non-error mirror points and lines before implementing each batch
+and apply the existing approval, verification and delivery rules.
+
+## S15 ownership inventory
+
+The P123 planning census found zero D-to-E references and zero outer header
+dependencies in the observed production compiler records. It found 11
+symbol references reaching F, five from handwritten D source and six from
+MIDL-generated stubs. Deduplicate by caller source, symbol and provider
+source across architectures. Refresh the census after S14, especially the
+thread binding chain shared with that task. The VDMREDIR link needs explicit
+provider evidence because the existing build has no linker map for it.
+
+| Reference | Caller | Actual implementation owner | Disposition at S15 |
+| --- | --- | --- | --- |
+| 1 | common worker-thread bridge | NTVDM session_thread_current | NTVDM owns recovery of its private session from the bound compat context. Keep common thread mechanics independent of the session layout. |
+| 2 | common worker-thread bridge | NTVDM session_thread_bind_owned_source | NTVDM owns product binding and source identity. Preserve partial-bind rollback and the existing bound-context lifetime. |
+| 3 | common worker-thread bridge | NTVDM session_thread_finish | NTVDM owns product-session exit and reentry protection. Preserve failed unbind ownership and ordered cleanup. |
+| 4 | common RPC management failure path | NTMON MIDL_user_free, CRT | Pair cleanup with the allocator that produced the result. The shared client must have an explicit allocation-domain contract. |
+| 5 | common RPC management failure path | NTHOOK MIDL_user_free, process heap | Preserve the process-heap pairing, including the hook's loader-safe allocation path. |
+| 6 | NTMON client stub | NTMON MIDL_user_allocate, CRT | Verify the generated client stub and allocator are composed together by NTMON. |
+| 7 | NTMON client stub | NTMON MIDL_user_free, CRT | Verify matching release for success and failure. |
+| 8 | NTHOOK client stub | NTHOOK MIDL_user_allocate, process heap | Verify the two hook architectures and their product-owned allocator. |
+| 9 | NTHOOK client stub | NTHOOK MIDL_user_free, process heap | Verify matching release without mixing CRT and process heaps. |
+| 10 | NTSRV server stub | NTSRV MIDL_user_allocate, CRT | Verify that server stub composition and allocation belong to NTSRV. |
+| 11 | NTSRV server stub | NTSRV MIDL_user_free, CRT | Verify matching release and server partial-result cleanup. |
+
+Generated-stub references are counted separately from violations in shared
+implementation. When the generated object and its allocator both belong to
+one F product, record the reference as product-internal. The 64 server
+dispatch and rundown bindings observed in the NTSRV stub are product
+composition and are outside the 11-reference count.
+
+| Runtime binding | Actual responsibility | Disposition at S15 |
+| --- | --- | --- |
+| common/base_srv/scope.c | Hard-coded list of ten product images checked for matching package identity. | Product composition supplies the required image list. D may read resources and validate identities against that list. Preserve rejection of incomplete and mixed packages. |
+| common/native-hook/context.c | Hard-coded Run16 and both NTHOOK image names and path resolution for NTVDM and NTVWM. | Product composition selects the images and supplies their paths. Keep generic path validation and transfer below the products. Verify both bitnesses and failure of invalid paths. |
+
+## S16 verified callback disposition
+
+The P132 review covered eight production binding sites across the four
+callback groups. It found two implementation cleanup batches. The reviewed
+service and input-watch callback contracts remain in use.
+
+1. **Task observation.** Remove the NTVDM publish and cancel forwarding
+   callbacks. The publisher only calls D's OpenNtBaseClientObserveDosEvent,
+   using the existing stop handle. The cancel provider sets the same event
+   already set by worker-base before it calls the provider. E can use the
+   existing D transport directly and own cancellation with that stop event.
+   DOS entry/exit recognition and VDD registration stay with NTVDM. Verify
+   ordering, gap reporting, cancellation of in-flight publication and join
+   before cleanup.
+2. **Frontend channel protocol.** Move shared request version, channel
+   generation, sequence and operation validation and reply identity to
+   frontend-base. NTCON and embedded NTVDM both implement this protocol state
+   today. Preserve their handling of rejected payloads and sequence
+   advancement. Test both providers for malformed frames, stale generation,
+   sequence rejection, reply identity and normal disconnect. Keep product I/O,
+   presentation and cleanup in the existing provider callbacks.
+
+**Frontend service** keeps the callbacks for product request preparation,
+presentation and retirement, while frontend-base owns the wait and channel
+lifetime. **Input watch** keeps the callbacks for product readiness handling,
+fault reporting and close actions, while worker-base owns waiting,
+prioritization, readiness and thread teardown. Neither group is a migration
+batch under this plan.
 
 ## Migration method
 
@@ -179,7 +249,7 @@ The [first-chain inventory](../../../artifacts/mvdm-audit/t483-c-layer-dependenc
 
 [S13 closure](../evidence/m0-t483-s13-implementation-closure.md) records the completed first chain and its limits. Current now admits S14; subsequent rows remain planned.
 
-## P52 consolidation: execution owners, not header destinations
+## P52 consolidation: S14 outward-dependency work groups
 
 Source basis: complete direct-provider body coverage at P51 (79 files,
 345 symbol rows), the 49-body compat ledger, historical session review and
@@ -191,14 +261,14 @@ No new callback exception or production relocation is admitted by this table.
 | --- | --- | --- |
 | 1. Guest access and leases (S14) | C owns translation/SAS effects; B owns host buffers and borrow lifetime; F selects product lifetime. | Separate lease storage from C reads/writes: C performs machine access at explicit acquire/commit boundaries, B must not call installed C access callbacks. Reconcile all direct and indirect consumers before changing the ABI. Preserve partial writes, failure and borrowed-view lifetime; never replace SAS with raw memcpy. Remove the old provider slots only after callers use the final chain. |
 | 2. WOW machine context (S14 prerequisite) | C owns CR3/CR0/GDT and guest mapping; B owns existing shared clock; F admits startup and chooses quiescent teardown. | Resolve existing original C carrier and measure mirror cost before implementation. Remove F leave/reenter providers and their B DPMI table entries when C owns the actual transition. Preserve DOSX GDT restoration, A20 precondition, failed initialization cleanup and protected/real-mode round trips. No whole-domain 24-operation B provider table. |
-| 3. USER projection and retained generations (S14/S18 dependency) | C owns original USER layout and guest graph interpretation; native USER owns native objects; independent copied-graph validator already B. | Keep one backing/borrow/retirement authority. Decide original C insertion points jointly with WOW consumers, not a 2673-line transplant into an unrelated mirror file. Preserve pinned old generations across handle reuse, logical withdrawal before physical free, class reachability and atomic graph/menu commit. Host-storage deallocation must not become arbitrary outer reentry. |
-| 4. Console mechanics (S15) | B owns independent buffers, native identity/conversion and cleanup; E/F own authenticated endpoint and presentation transitions. | Extract actual resource bodies with their state. Four Console callbacks currently installed from F remain violations until routed operation ownership is resolved. Do not substitute local Console APIs for the selected frontend. Preserve release barrier, producer join, input receipts, layout/code page and off-screen/partial transfer semantics. |
-| 5. COMMAND capture (S16) | B owns bounded copied command/environment/handles, capture epoch and borrowed views; C owns DOSWOW/CDS interpretation; F owns launch policy. | Move capture storage and implementation using the existing B context, not a session pointer accessor. C supplies machine-derived data through explicit operations; remove native-child forwarding entries after migration. Preserve single active ordinary capture and separate explicit VM-capture lifetime. Capture finish is not task completion. |
-| 6. Launch, CSR and request completion (S16) | C owns original classification and retained record algorithms; NTSRV owns request identity/authorization/completion; D/F own transport and composition. | Split product policy at its real call boundary. cmdCreateProcess's apparent CreateProcess call currently reaches Run16/frontends/capabilities; moving that wrapper into B is forbidden. Preserve suspended-child handle ownership, reentry counters, receipt generation, return-code/waiter association and rollback handoff. The exact synchronous boundary is a design obligation, not permission to add callbacks. |
-| 7. Thread and lifecycle binding (S16 prerequisite) | Existing B host_context owns binding/resource mechanics; C owns CPU-thread state; F owns thread admission/cancellation and final product completion. | Reconcile WOW bind/unbind hooks and exception exits before removing D bridge/F providers. No second TLS, no whole-session move. Failed unbind with live USER state must retain ownership; cleanup waits for users, never guesses quiescence from timeout. |
-| 8. Redirector, printer and devices (S17) | C owns segment/VDM_TIB/CPU-device semantics; B owns native device or buffer mechanics; outer code owns connection admission. | Reuse delivered SAS and lease implementations; eliminate F-to-C guest-copy detours. Preserve chunked partial-copy and OEM bounds. Resolve printer NtVdmControl close provider without restoring hardware-V86 monitor. IRQ/reset helpers belong with original C device providers, not B callback facades. |
-| 9. Native USER edges (S18) | B owns SDK-only operations with explicit inputs; C owns private WND/CLS/FNID and original callbacks; F composes product runtime. | Migrate complete object/class/message/resource subgroups; retain exact-generation references through callback reentry. Keep native object lifetime distinct from guest projection. Do not rewrite retained original controls wholesale using modern controls, or move private C layouts into B. |
-| 10. Original-owned helpers and final reconciliation (S19) | C owns descriptor/effective-address/vector/IRQ operations and original storage; product entry points stay F. | Recover at actual original carriers, minimize mirror changes and remove old F providers. Suffix descriptors, CsrPortHeap and optional hooks are separate from Run16/NTSRV main bodies. Recheck final build/link providers, forced/transitive includes, imports and residual service installations. |
+| 3. USER projection and retained generations (for outward dependencies) | C owns original USER layout and guest graph interpretation; native USER owns native objects; independent copied-graph validator already B. | Keep one backing/borrow/retirement authority. Decide original C insertion points jointly with WOW consumers, not a 2673-line transplant into an unrelated mirror file. Preserve pinned old generations across handle reuse, logical withdrawal before physical free, class reachability and atomic graph/menu commit. Host-storage deallocation must not become arbitrary outer reentry. |
+| 4. Console mechanics | B owns independent buffers, native identity/conversion and cleanup; E/F own authenticated endpoint and presentation transitions. | Extract actual resource bodies with their state. Four Console callbacks currently installed from F remain violations until routed operation ownership is resolved. Do not substitute local Console APIs for the selected frontend. Preserve release barrier, producer join, input receipts, layout/code page and off-screen/partial transfer semantics. |
+| 5. COMMAND capture | B owns bounded copied command/environment/handles, capture epoch and borrowed views; C owns DOSWOW/CDS interpretation; F owns launch policy. | Move capture storage and implementation using the existing B context, not a session pointer accessor. C supplies machine-derived data through explicit operations; remove native-child forwarding entries after migration. Preserve single active ordinary capture and separate explicit VM-capture lifetime. Capture finish is not task completion. |
+| 6. Launch, CSR and request completion | C owns original classification and retained record algorithms; NTSRV owns request identity/authorization/completion; D/F own transport and composition. | Split product policy at its real call boundary. cmdCreateProcess's apparent CreateProcess call currently reaches Run16/frontends/capabilities; moving that wrapper into B is forbidden. Preserve suspended-child handle ownership, reentry counters, receipt generation, return-code/waiter association and rollback handoff. The exact synchronous boundary is a design obligation, not permission to add callbacks. |
+| 7. Thread and lifecycle binding | Existing B host_context owns binding/resource mechanics; C owns CPU-thread state; F owns thread admission/cancellation and final product completion. | Reconcile WOW bind/unbind hooks and exception exits before removing D bridge/F providers. No second TLS, no whole-session move. Failed unbind with live USER state must retain ownership; cleanup waits for users, never guesses quiescence from timeout. |
+| 8. Redirector, printer and devices | C owns segment/VDM_TIB/CPU-device semantics; B owns native device or buffer mechanics; outer code owns connection admission. | Reuse delivered SAS and lease implementations; eliminate F-to-C guest-copy detours. Preserve chunked partial-copy and OEM bounds. Resolve printer NtVdmControl close provider without restoring hardware-V86 monitor. IRQ/reset helpers belong with original C device providers, not B callback facades. |
+| 9. Native USER edges | B owns SDK-only operations with explicit inputs; C owns private WND/CLS/FNID and original callbacks; F composes product runtime. | Migrate complete object/class/message/resource subgroups; retain exact-generation references through callback reentry. Keep native object lifetime distinct from guest projection. Do not rewrite retained original controls wholesale using modern controls, or move private C layouts into B. |
+| 10. Original-owned helpers and final reconciliation | C owns descriptor/effective-address/vector/IRQ operations and original storage; product entry points stay F. | Recover at actual original carriers, minimize mirror changes and remove old F providers. Suffix descriptors, CsrPortHeap and optional hooks are separate from Run16/NTSRV main bodies. Recheck final build/link providers, forced/transitive includes, imports and residual service installations. |
 
 An independent host resource can move to B without moving its product owner:
 F acquires admission, calls the inner operation, and chooses when to release

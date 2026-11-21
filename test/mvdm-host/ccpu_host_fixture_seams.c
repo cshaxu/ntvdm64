@@ -34,6 +34,7 @@ int mvdm_vm_bridge_bop(uint32_t signature, uint32_t operation,
     return (int)unexpected_broker();
 }
 DWORD OpenNtBaseClientConnectCurrent(void) { return unexpected_broker(); }
+DWORD NtvdmBaseConnectExecution(DWORD milliseconds) { (void)milliseconds; return unexpected_broker(); }
 DWORD OpenNtBaseClientWatchBroker(void (*lost)(void *),void *context)
 { (void)lost;(void)context;return unexpected_broker(); }
 void OpenNtBaseClientStopBrokerWatch(void) { }

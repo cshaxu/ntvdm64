@@ -35,7 +35,7 @@ static DWORD WINAPI test_wait(HANDLE handle, DWORD interval)
 static BOOL WINAPI test_exit(HANDLE handle, LPDWORD code)
 { CHECK(handle == (HANDLE)1); *code=terminal; return TRUE; }
 
-#define OpenNtBaseClientConnectCurrentTimeout test_connect
+#define NtvdmBaseConnectExecution test_connect
 #define GetTickCount64 test_clock
 #define CreateProcessW test_create
 #define CloseHandle test_close

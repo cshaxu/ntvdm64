@@ -163,7 +163,7 @@ function Add-Edge([string]$target) {
   if(!$library){
    foreach($include in [regex]::Matches($binding,$includePattern)){
     # This compat unit explicitly consumes the original CSR layout.
-    if($include.Value -in $referenceRoots -and $target -ne 'obj/opennt-base-bindings/registry.obj'){continue}
+    if($include.Value -in $referenceRoots -and $target -notin @('obj/opennt-base-bindings/registry.obj','obj/compat/base_dispatch.obj')){continue}
     if($flags.Contains($include.Value)){continue}
     $flags+=' '+$include.Value.Replace((NP (Split-Path $reference -Parent)),(NP $build))
    }

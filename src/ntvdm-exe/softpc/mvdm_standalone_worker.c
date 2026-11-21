@@ -158,7 +158,7 @@ static DWORD mvdm_standalone_worker_begin(void)
         error=GetLastError(); goto fail;
     }
     worker_shadow_registry=TRUE;
-    error=worker_base_connect();
+    error=NtvdmBaseConnectExecution(INFINITE);
     if (error!=ERROR_SUCCESS) goto fail;
     /* Classify only the original startup switch; no guest/global WOW state
      * is changed before original initialization. Retain controls first. */
