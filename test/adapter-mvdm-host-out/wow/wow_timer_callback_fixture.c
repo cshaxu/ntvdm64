@@ -1,3 +1,4 @@
+#include "wow_timer_callback.h"
 #include "wow_task_order_bindings.h"
 #include "wow_user_borrow_scope.h"
 #include <stdio.h>
@@ -48,10 +49,17 @@ VOID WowOriginalTimerFunc(UINT index, HWND window, UINT event, DWORD time)
     if (exceptional) RaiseException(0xe0447012, 0, 0, NULL);
     SetLastError(0xe0447013);
 }
+static VOID WINAPI unexpected_timer(UINT i, HWND w, UINT e, DWORD t)
+{ (void)i; (void)w; (void)e; (void)t; CHECK(FALSE); }
 int __cdecl main(void)
 {
     UINT index;
     BOOL caught = FALSE;
+    CHECK(!wow_timer_bind(NULL));
+    CHECK(wow_timer_bind(WowOriginalTimerFunc));
+    CHECK(wow_timer_bind(WowOriginalTimerFunc));
+    CHECK(!wow_timer_bind(unexpected_timer));
+    CHECK(GetLastError() == ERROR_ALREADY_INITIALIZED);
     for (index = 1; index <= 27; ++index) {
         W32TimerFunc(index, (HWND)(ULONG_PTR)0x1234, 71, 123456);
         CHECK(GetLastError() == 0xe0447013);

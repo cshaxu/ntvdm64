@@ -60,3 +60,8 @@ BOOL WINAPI wow_task_cleanup_bind(const wow_task_cleanup_provider *p)
     return p && p->uninitialized == wow_original_task_cleanup_uninitialized &&
         p->retire_async == wow_original_task_retire_async && p->free_task == WowOriginalFreeTask;
 }
+
+#include "../../src/compat/include/wow_timer_callback.h"
+VOID WINAPI WowOriginalTimerFunc(UINT i, HWND w, UINT e, DWORD t)
+{ (void)i; (void)w; (void)e; (void)t; }
+BOOL WINAPI wow_timer_bind(wow_timer_callback p) { return p == WowOriginalTimerFunc; }

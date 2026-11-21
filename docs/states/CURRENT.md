@@ -193,7 +193,7 @@ Owner-authorized sequential closure; [S18 verification and publication](../etc/e
 ## S19 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c2-dependencies/file-inventory.json):
-38 candidates,35 resolved,3 remaining. P26 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->9; relocation records606->9.
+38 candidates,36 resolved,2 remaining. P27 cached build, dual publication and targeted runtime passed. Unique direct B-to-C2 relationships337->8; relocation records606->8.
 Compiled private C2 header rows144->22; private C2 search roots74->0.
 B-to-C1 remains58 unique/70 records for S20. C1/C2 retains its five original
 WOW APIs (seven relocation rows), not callback-conversion candidates.
@@ -244,10 +244,7 @@ DIR28/29/33 delivered in P13/P15/P16; other remaining rows are not closed.
 [P13 dialog delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p13-delivery.json)
 records three C2 callbacks, original attach ordering, dialog tests and dual11 delivery.
 [P15 Hook delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p15-delivery.json)
-clears six direct C2 relations and this file's private C2 headers. Actual C2
-scalar projections, B nested/exception guards, real Win16 CBT Hook, DLL loader
-and COMMAND return pass. Dual11 package df907bb9-940d-4c0a-8e8f-7a72e4a73c34.
-Owner-approved mirror delta+1 point/+30 lines; cumulative S19 +3 points/+52 lines.
+records six C2 callbacks, preserved context, loader/Win16 tests and dual11.
 [P16 OLE delivery](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p16-delivery.json)
 removes one B wrapper, preserving direct original C1/C2 WOW API semantics.
 Real Win16 OLE49153/49154 and COMMAND return pass; dual11 published.
@@ -268,3 +265,7 @@ and real USER16/COMMAND pass. S19 active; S20 not admitted.
 [P26 task cleanup](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p26-delivery.json):
 4 C2 relations cleared; cached full, dual11, exact TD/async/init/loader and real
 Win16 lifecycle/COMMAND pass. Mirror delta0points/+25lines.
+
+[P27 timer](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p27-delivery.json):
+1 C2 relation cleared; mirror delta0/0. Cached full, dual11, nested/exception
+timer and loader checks, real Win16 lifecycle/COMMAND pass.

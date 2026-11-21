@@ -13,6 +13,8 @@
 #include "compat/include/wow_shared_user_abi.h"
 #include "compat/include/wow_standard_class_provider.h"
 #include "compat/include/wow_task_cleanup_entry.h"
+#include "compat/include/wow_timer_callback.h"
+extern VOID WINAPI WowOriginalTimerFunc(UINT, HWND, UINT, DWORD);
 #ifndef WOW_INITIAL_PUBLICATION_FIXTURE
 extern BOOL WINAPI wow_original_task_cleanup_uninitialized(DWORD);
 extern VOID WINAPI wow_original_task_retire_async(void);
@@ -6301,7 +6303,8 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 int main(int argc, char **argv)
 {
 #ifdef WOW_WINDOW_BORROW_FIXTURE
-    if (!wow_standard_class_bind(&class_provider)) return 13;
+    if (!wow_standard_class_bind(&class_provider) ||
+            !wow_timer_bind(WowOriginalTimerFunc)) return 13;
 #ifndef WOW_INITIAL_PUBLICATION_FIXTURE
     if (!wow_task_cleanup_bind(&cleanup_provider)) return 13;
 #else

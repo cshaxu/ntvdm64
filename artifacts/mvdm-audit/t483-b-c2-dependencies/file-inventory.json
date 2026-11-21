@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P26 completes thirty-five files; three remain",
+  "status": "P27 completes thirty-six files; two remain",
   "files": [
     {
       "id": "BC2F001",
@@ -9001,7 +9001,7 @@
     {
       "id": "BC2F036",
       "file": "src/compat/wow_timer_callback.c",
-      "status": "not yet audited",
+      "status": "completed in verified P27 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -9013,7 +9013,8 @@
           "evidence": "_WowOriginalTimerFunc@16",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "delivery": "p27-delivery.json"
     },
     {
       "id": "BC2F037",
@@ -9432,11 +9433,11 @@
   ],
   "progress": {
     "total": 38,
-    "completed": 35,
-    "remaining": 3,
+    "completed": 36,
+    "remaining": 2,
     "direct_C2_unique_before": 337,
-    "direct_C2_unique_after": 9,
+    "direct_C2_unique_after": 8,
     "direct_C2_records_before": 606,
-    "direct_C2_records_after": 9
+    "direct_C2_records_after": 8
   }
 }
