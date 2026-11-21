@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T483 S14 closure and preserved predecessor records](evidence/m0-t483-s14-closure.md) anchors S15 admission.
+
 [T483 S11 layer boundaries and closure](evidence/m0-t483-s11-layer-boundaries.md) records the verified baseline for S12.
 
 [T483 S10 component migration and closure](evidence/m0-t483-s10-components.md) records the verified baseline for S11.

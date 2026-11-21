@@ -1,0 +1,2619 @@
+{
+  "packet": "M0 T483 S15",
+  "production_baseline": "d56fe27fc",
+  "census_baseline": "494e95ca2",
+  "reuse": "S14 P163 changed no D sources or build graph. Initial census is a candidate list, not exhaustive callback proof or violation count.",
+  "files": 12,
+  "rows": [
+    {
+      "id": "DF001",
+      "file": "src/common/base_srv/base_command.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "search-paths": 12
+      },
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_command.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF002",
+      "file": "src/common/base_srv/base_payload.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "search-paths": 12
+      },
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_payload.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF003",
+      "file": "src/common/base_srv/base_rpc_client_core.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "search-paths": 8
+      },
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_rpc_client_core.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_rpc_client_core.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_rpc_client_core.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_rpc_client_core.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_rpc_client_core.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_rpc_client_core.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_rpc_client_core.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_rpc_client_core.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF004",
+      "file": "src/common/base_srv/base_rpc_client_launch.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "search-paths": 4
+      },
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_rpc_client_launch.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_rpc_client_launch.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_rpc_client_launch.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_rpc_client_launch.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF005",
+      "file": "src/common/base_srv/base_startup.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "search-paths": 12
+      },
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_startup.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF006",
+      "file": "src/common/base_srv/base_values.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "search-paths": 12
+      },
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/base_values.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF007",
+      "file": "src/common/base_srv/frontend_client.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "search-paths": 8
+      },
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/frontend_client.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/frontend_client.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/frontend_client.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/frontend_client.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/frontend_client.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/frontend_client.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/frontend_client.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/frontend_client.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF008",
+      "file": "src/common/base_srv/scope.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "runtime-image-names": 80
+      },
+      "evidence": [
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntcon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntcon.exe",
+          "evidence": "ntcon.exe",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntcon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntcon.exe",
+          "evidence": "ntcon.exe",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntcon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntcon.exe",
+          "evidence": "ntcon.exe",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntcon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntcon.exe",
+          "evidence": "ntcon.exe",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntcon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntcon.exe",
+          "evidence": "ntcon.exe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntcon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntcon.exe",
+          "evidence": "ntcon.exe",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntcon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntcon.exe",
+          "evidence": "ntcon.exe",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntcon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntcon.exe",
+          "evidence": "ntcon.exe",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook32.dll",
+          "evidence": "nthook32.dll",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook32.dll",
+          "evidence": "nthook32.dll",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook32.dll",
+          "evidence": "nthook32.dll",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook32.dll",
+          "evidence": "nthook32.dll",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook32.dll",
+          "evidence": "nthook32.dll",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook32.dll",
+          "evidence": "nthook32.dll",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook32.dll",
+          "evidence": "nthook32.dll",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook32.dll",
+          "evidence": "nthook32.dll",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook64.dll",
+          "evidence": "nthook64.dll",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook64.dll",
+          "evidence": "nthook64.dll",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook64.dll",
+          "evidence": "nthook64.dll",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook64.dll",
+          "evidence": "nthook64.dll",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook64.dll",
+          "evidence": "nthook64.dll",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook64.dll",
+          "evidence": "nthook64.dll",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook64.dll",
+          "evidence": "nthook64.dll",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "nthook64.dll",
+          "evidence": "nthook64.dll",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "ntmon.exe",
+          "evidence": "ntmon.exe",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "ntmon.exe",
+          "evidence": "ntmon.exe",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "ntmon.exe",
+          "evidence": "ntmon.exe",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "ntmon.exe",
+          "evidence": "ntmon.exe",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "ntmon.exe",
+          "evidence": "ntmon.exe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "ntmon.exe",
+          "evidence": "ntmon.exe",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "ntmon.exe",
+          "evidence": "ntmon.exe",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "ntmon.exe",
+          "evidence": "ntmon.exe",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntsrv.exe",
+          "evidence": "ntsrv.exe",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntsrv.exe",
+          "evidence": "ntsrv.exe",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntsrv.exe",
+          "evidence": "ntsrv.exe",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntsrv.exe",
+          "evidence": "ntsrv.exe",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntsrv.exe",
+          "evidence": "ntsrv.exe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntsrv.exe",
+          "evidence": "ntsrv.exe",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntsrv.exe",
+          "evidence": "ntsrv.exe",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntsrv.exe",
+          "evidence": "ntsrv.exe",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvdm.exe",
+          "evidence": "ntvdm.exe",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvdm.exe",
+          "evidence": "ntvdm.exe",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvdm.exe",
+          "evidence": "ntvdm.exe",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvdm.exe",
+          "evidence": "ntvdm.exe",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvdm.exe",
+          "evidence": "ntvdm.exe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvdm.exe",
+          "evidence": "ntvdm.exe",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvdm.exe",
+          "evidence": "ntvdm.exe",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvdm.exe",
+          "evidence": "ntvdm.exe",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvwm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvwm.exe",
+          "evidence": "ntvwm.exe",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvwm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvwm.exe",
+          "evidence": "ntvwm.exe",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvwm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvwm.exe",
+          "evidence": "ntvwm.exe",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvwm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvwm.exe",
+          "evidence": "ntvwm.exe",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvwm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvwm.exe",
+          "evidence": "ntvwm.exe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvwm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvwm.exe",
+          "evidence": "ntvwm.exe",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvwm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvwm.exe",
+          "evidence": "ntvwm.exe",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "ntvwm-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "ntvwm.exe",
+          "evidence": "ntvwm.exe",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "run16.exe",
+          "evidence": "run16.exe",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "run16.exe",
+          "evidence": "run16.exe",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "run16.exe",
+          "evidence": "run16.exe",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "run16.exe",
+          "evidence": "run16.exe",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "run16.exe",
+          "evidence": "run16.exe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "run16.exe",
+          "evidence": "run16.exe",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "run16.exe",
+          "evidence": "run16.exe",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "10",
+          "target": "run16.exe",
+          "evidence": "run16.exe",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "vdmredir-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "vdmredir.dll",
+          "evidence": "VDMREDIR.DLL",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "vdmredir-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "vdmredir.dll",
+          "evidence": "VDMREDIR.DLL",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "vdmredir-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "vdmredir.dll",
+          "evidence": "VDMREDIR.DLL",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "vdmredir-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "vdmredir.dll",
+          "evidence": "VDMREDIR.DLL",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "vdmredir-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "vdmredir.dll",
+          "evidence": "VDMREDIR.DLL",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "vdmredir-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "vdmredir.dll",
+          "evidence": "VDMREDIR.DLL",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "vdmredir-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "vdmredir.dll",
+          "evidence": "VDMREDIR.DLL",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "vdmredir-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "vdmredir.dll",
+          "evidence": "VDMREDIR.DLL",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "wow32-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "wow32.dll",
+          "evidence": "WOW32.DLL",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "wow32-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "wow32.dll",
+          "evidence": "WOW32.DLL",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "wow32-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "wow32.dll",
+          "evidence": "WOW32.DLL",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "wow32-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "wow32.dll",
+          "evidence": "WOW32.DLL",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "wow32-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "wow32.dll",
+          "evidence": "WOW32.DLL",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "wow32-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "wow32.dll",
+          "evidence": "WOW32.DLL",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "wow32-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "wow32.dll",
+          "evidence": "WOW32.DLL",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "wow32-dll",
+          "source": "src/common/base_srv/scope.c",
+          "line_or_section": "11",
+          "target": "wow32.dll",
+          "evidence": "WOW32.DLL",
+          "product": "run16.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF009",
+      "file": "src/common/native-hook/context.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "runtime-image-names": 15
+      },
+      "evidence": [
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "32",
+          "target": "nthook32.dll",
+          "evidence": "%lsnthook32.dll",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "32",
+          "target": "nthook32.dll",
+          "evidence": "%lsnthook32.dll",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "32",
+          "target": "nthook32.dll",
+          "evidence": "%lsnthook32.dll",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "32",
+          "target": "nthook32.dll",
+          "evidence": "%lsnthook32.dll",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "32",
+          "target": "nthook32.dll",
+          "evidence": "%lsnthook32.dll",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "33",
+          "target": "nthook64.dll",
+          "evidence": "%lsnthook64.dll",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "33",
+          "target": "nthook64.dll",
+          "evidence": "%lsnthook64.dll",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "33",
+          "target": "nthook64.dll",
+          "evidence": "%lsnthook64.dll",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "33",
+          "target": "nthook64.dll",
+          "evidence": "%lsnthook64.dll",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "33",
+          "target": "nthook64.dll",
+          "evidence": "%lsnthook64.dll",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "31",
+          "target": "run16.exe",
+          "evidence": "%lsrun16.exe",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "31",
+          "target": "run16.exe",
+          "evidence": "%lsrun16.exe",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "31",
+          "target": "run16.exe",
+          "evidence": "%lsrun16.exe",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "31",
+          "target": "run16.exe",
+          "evidence": "%lsrun16.exe",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "runtime-image-names",
+          "from": "common",
+          "to": "run16-exe",
+          "source": "src/common/native-hook/context.c",
+          "line_or_section": "31",
+          "target": "run16.exe",
+          "evidence": "%lsrun16.exe",
+          "product": "run16.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF010",
+      "file": "src/common/native_image.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "search-paths": 12
+      },
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntsrv-exe/opennt/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntcon.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "ntvwm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "common",
+          "to": "ntvdm-exe",
+          "source": "src/common/native_image.c",
+          "line_or_section": "",
+          "target": "src/ntvdm-exe/softpc/include",
+          "evidence": "/I",
+          "product": "run16.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF011",
+      "file": "src/common/protocol/service.idl",
+      "status": "pending-review",
+      "evidence_counts": {
+        "generated-rpc-relocations": 72
+      },
+      "evidence": [
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/nthook-dll/entry.c",
+          "evidence": "MIDL_user_allocate",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/nthook-dll/entry.c",
+          "evidence": "MIDL_user_free",
+          "product": "nthook64.dll"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/nthook-dll/entry.c",
+          "evidence": "_MIDL_user_allocate@4",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "nthook-dll",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/nthook-dll/entry.c",
+          "evidence": "_MIDL_user_free@4",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntmon-exe/main.c",
+          "evidence": "MIDL_user_allocate",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntmon-exe/main.c",
+          "evidence": "MIDL_user_free",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "MIDL_user_allocate",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "MIDL_user_free",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_AcquireConsoleContext",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_AttachFile",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_AttachFrontendRequest",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_AttachPipe",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_BindConsoleContext",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_BindNativeTarget",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_BindWowTask",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_Check",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_CloseFrontendInstance",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_CloseManagementNode",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_CompleteWorkerChannel",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_Connect",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_Disconnect",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_Exit",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_ExitCode",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FailWowTaskClose",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FinishNativeRequest",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_First",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FrontendCloseQuiesced",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FrontendConsoleRestored",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FrontendIoDisconnected",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FrontendJoinCandidate",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FrontendJoinDecision",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FrontendLeaseReady",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FrontendRequest",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FrontendStartupResult",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_FrontendStateChanged",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_Get",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_GetNextNativeCommand",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_NativeStartupResult",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_ObserveDosEventAsync",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_ObserveNativeCreationAsync",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_Reenter",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RegisterEmbeddedFrontend",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RegisterFrontendLease",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RegisterFrontendRoot",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RegisterNativeBackend",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RegisterWowExec",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_ReportConsoleMembers",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RequestFrontend",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RequestParticipantExit",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RetainFrontendRoot",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RetireWorkerlessFrontend",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RetireWowTask",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_RevokeStream",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_StartFrontend",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_StartNativeWorker",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_StartVdmWorker",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_SubmitNativeRequest",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_TakeFrontend",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_TakeWowTaskClose",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_TaskSnapshot",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_UnregisterFrontendInstance",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_Update",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_WaitFrontend",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_WaitFrontendConsoleRestored",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_WorkerFrontendCapability",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_WorkerIoCheckpoint",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_WorkerIoReleaseEvent",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_WorkerIoTransition",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_WorkerTaskTrace",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_WowStarted",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "Server_WowStartup",
+          "product": "ntsrv.exe"
+        },
+        {
+          "kind": "generated-rpc-relocations",
+          "from": "common",
+          "to": "ntsrv-exe",
+          "source": "src/common/protocol/service.idl",
+          "line_or_section": "3",
+          "target": "src/ntsrv-exe/main.c",
+          "evidence": "VDM_CONNECTION_rundown",
+          "product": "ntsrv.exe"
+        }
+      ]
+    },
+    {
+      "id": "DF012",
+      "file": "src/common/rpc/management.c",
+      "status": "pending-review",
+      "evidence_counts": {
+        "linked-relocations": 2
+      },
+      "evidence": [
+        {
+          "kind": "linked-relocations",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/rpc/management.c",
+          "line_or_section": "10",
+          "target": "src/ntmon-exe/main.c",
+          "evidence": "MIDL_user_free",
+          "product": "ntmon.exe"
+        },
+        {
+          "kind": "linked-relocations",
+          "from": "common",
+          "to": "ntmon-exe",
+          "source": "src/common/rpc/management.c",
+          "line_or_section": "9",
+          "target": "src/ntmon-exe/main.c",
+          "evidence": "MIDL_user_free",
+          "product": "ntmon.exe"
+        }
+      ]
+    }
+  ]
+}
