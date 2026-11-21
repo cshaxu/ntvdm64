@@ -557,8 +557,9 @@
     "unapproved_outward": 0,
     "approved_runtime_callbacks": {
       "D": 9,
-      "F": 2
+      "F": 3
     },
-    "note": "Historical compiled and indirect rows retain baseline provenance; approved callbacks are tracked explicitly by C0156/C0619/C0621."
+    "note": "Historical compiled and indirect rows retain baseline provenance; approved callbacks are tracked explicitly by C0156/C0619/C0621.",
+    "control_callback_evidence": "s14-control-callbacks.md"
   }
 }

@@ -25,17 +25,11 @@ typedef enum mvdm_softpc_exit_operation {
     MVDM_WOW_BIND
 } mvdm_softpc_exit_operation;
 
-typedef struct mvdm_softpc_exit_handoff {
-    HANDLE request, completion;
-    mvdm_softpc_exit_operation operation;
-    DWORD status;
-    ULONG wow_request;
-    USHORT wow_task;
-    SRWLOCK lock;
-    BOOL console_issued;
-    DWORD console_status;
-} mvdm_softpc_exit_handoff;
-extern mvdm_softpc_exit_handoff mvdm_softpc_exit_request;
+/* Registered before guest execution, cleared after callers stop. The borrowed
+ * context and request arguments remain on the caller thread. Only Console
+ * cleanup explicitly transfers execution to another thread. */
+typedef DWORD (*mvdm_softpc_control)(void *, mvdm_softpc_exit_operation, ULONG, USHORT);
+void mvdm_softpc_bind_control(mvdm_softpc_control, void *context);
 extern volatile LONG mvdm_softpc_exit_owner;
 extern BOOL mvdm_softpc_exit_original_ready;
 DWORD mvdm_softpc_request_console_exit(void);

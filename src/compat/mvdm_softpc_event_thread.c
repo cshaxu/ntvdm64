@@ -7,39 +7,38 @@
 NTSYSAPI NTSTATUS NTAPI NtAlertThread(HANDLE ThreadHandle);
 
 mvdm_softpc_terminal_events mvdm_softpc_input_terminal_events;
-mvdm_softpc_exit_handoff mvdm_softpc_exit_request;
+static mvdm_softpc_control control;
+static void *control_context;
+static SRWLOCK console_lock = SRWLOCK_INIT;
+static BOOL console_issued;
+static DWORD console_status;
+
+void mvdm_softpc_bind_control(mvdm_softpc_control callback, void *context)
+{
+    control = callback;
+    control_context = callback ? context : NULL;
+    console_issued = FALSE;
+    console_status = ERROR_SUCCESS;
+}
 volatile LONG mvdm_softpc_exit_owner;
 BOOL mvdm_softpc_exit_original_ready;
 
 static DWORD exchange_worker_control(mvdm_softpc_exit_operation operation,
     ULONG request, USHORT task, DWORD *reply)
 {
-    mvdm_softpc_exit_handoff *exit = &mvdm_softpc_exit_request;
-    DWORD status;
-    if (!exit->request || !exit->completion) return ERROR_INVALID_STATE;
-    AcquireSRWLockExclusive(&exit->lock);
-    if (operation == MVDM_EXIT_CONSOLE_GROUP && exit->console_issued) {
-        *reply = exit->console_status;
-        status = ERROR_SUCCESS;
-    } else {
-        exit->operation = operation;
-        exit->wow_request = request;
-        exit->wow_task = task;
-        if (!SetEvent(exit->request)) {
-            status = GetLastError();
-        } else if (WaitForSingleObject(exit->completion, INFINITE) != WAIT_OBJECT_0) {
-            status = GetLastError();
-        } else {
-            *reply = exit->status;
-            status = ERROR_SUCCESS;
-            if (operation == MVDM_EXIT_CONSOLE_GROUP) {
-                exit->console_status = *reply;
-                exit->console_issued = TRUE;
-            }
+    if (!control) return ERROR_INVALID_STATE;
+    if (operation == MVDM_EXIT_CONSOLE_GROUP) {
+        AcquireSRWLockExclusive(&console_lock);
+        if (!console_issued) {
+            console_status = control(control_context, operation, request, task);
+            console_issued = TRUE;
         }
+        *reply = console_status;
+        ReleaseSRWLockExclusive(&console_lock);
+    } else {
+        *reply = control(control_context, operation, request, task);
     }
-    ReleaseSRWLockExclusive(&exit->lock);
-    return status;
+    return ERROR_SUCCESS;
 }
 
 DWORD mvdm_softpc_exchange_exit(mvdm_softpc_exit_operation operation, DWORD *reply)

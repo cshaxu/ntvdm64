@@ -89,7 +89,7 @@ DWORD mvdm_vm_rundown_close(mvdm_vm_rundown *value, BOOL active)
 DWORD mvdm_standalone_worker_close_frontends(void)
 {
     if (mvdm_softpc_exit_rundown)
-        CHECK(cleanup_thread != GetCurrentThreadId() && rundown_closed);
+        CHECK(cleanup_thread == GetCurrentThreadId() && rundown_closed);
     InterlockedIncrement(&vm_frontend_closes);
     return ERROR_SUCCESS;
 }
@@ -116,14 +116,14 @@ static DWORD startup_caller;
 static volatile LONG starts, binds;
 DWORD WINAPI OpenNtBaseClientWowStarted(ULONG request)
 {
-    CHECK(startup_caller && startup_caller != GetCurrentThreadId());
+    CHECK(startup_caller && startup_caller == GetCurrentThreadId());
     CHECK(request == 0x4321 && !binds);
     return InterlockedIncrement(&starts) == 1 ? ERROR_RETRY : ERROR_SUCCESS;
 }
 
 DWORD WINAPI OpenNtBaseClientBindWowTask(ULONG request, USHORT task, uint64_t *ticket)
 {
-    CHECK(startup_caller != GetCurrentThreadId());
+    CHECK(startup_caller == GetCurrentThreadId());
     CHECK(request == 0x4321 && task == 0x1234 && starts == 2);
     *ticket = 1;
     InterlockedIncrement(&binds);
@@ -499,7 +499,7 @@ int main(int argc,char **argv)
         CHECK(!NtvdmReportWowStartup(0x4321,0,FALSE) && !binds);
         CHECK(!NtvdmReportWowStartup(0x4321,0x1234,TRUE) && binds==1);
         ntvdm_worker_lifecycle_end();
-        puts("PASS same worker control carries start/retry and explicit ticket bind");
+        puts("PASS same-thread WOW callbacks carry start/retry and explicit ticket bind");
         return 0;
     }
     if(argc==2 && (!strcmp(argv[1],"--natural-wow") || !strcmp(argv[1],"--natural-wow-loss"))) {

@@ -84,3 +84,10 @@ Complete cached full builds, coherent dual publication, affected targeted tests,
 documentation gates, commit and push under the delivery rules at admission.
 Every retained mechanism needs a concrete responsibility and evidence; every
 removed mechanism needs final-code verification, not just a shorter implementation.
+
+## Completed precursor
+
+T483 S14 P161/P163 removed eight artificial COMMAND/control handoffs; one
+Console cleanup handoff remains with an actual thread-transfer requirement.
+[Evidence](../../artifacts/mvdm-audit/t483-c-layer-dependencies/s14-control-callbacks.md).
+Do not reclassify these as outstanding; the wider inventory remains queued.

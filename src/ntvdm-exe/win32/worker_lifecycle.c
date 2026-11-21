@@ -17,6 +17,7 @@ extern HANDLE hWOWDll;
 static struct {
     session *owner;
     HANDLE stop,task_close,fault;
+    HANDLE console_request,console_completion;
     worker_base_input_watch *watch;
     PTP_WAIT exit_wait;
 } lifecycle;
@@ -98,62 +99,60 @@ static void service_lost(void *context)
     VdmExitCode=ERROR_INVALID_HANDLE;
     worker_base_shutdown_close(close_worker,context,INFINITE,ERROR_INVALID_HANDLE,NULL);
 }
-static void CALLBACK worker_control_request(PTP_CALLBACK_INSTANCE instance,
+static void CALLBACK console_cleanup_request(PTP_CALLBACK_INSTANCE instance,
     void *context, PTP_WAIT wait, TP_WAIT_RESULT result)
 {
-    mvdm_softpc_exit_handoff *exit = context;
-    DWORD status = ERROR_SUCCESS;
-    mvdm_softpc_exit_operation operation = exit->operation;
+    (void)wait;
     (void)result;
+    (void)CallbackMayRunLong(instance);
+    /* Acknowledge before cleanup; the original caller then parks until exit.
+     * This is the sole control operation requiring a different thread. */
+    SetEvent(lifecycle.console_completion);
+    worker_base_shutdown_close(close_console,context,
+        OPENNT_LIFECYCLE_GRACE_MS,CONTROL_C_EXIT,NULL);
+}
+
+static DWORD worker_control(void *context, mvdm_softpc_exit_operation operation,
+    ULONG request, USHORT task)
+{
+    (void)context;
     switch (operation) {
     case MVDM_EXIT_CONSOLE_GROUP:
-        status = worker_base_request_console_exit();
-        break;
+        return worker_base_request_console_exit();
     case MVDM_EXIT_PARTICIPANT:
-        status = worker_base_request_exit();
-        break;
+        return worker_base_request_exit();
     case MVDM_EXIT_STATUS_ON_LOSS:
         VdmExitCode = ERROR_INVALID_HANDLE;
         /* fall through */
     case MVDM_EXIT_STATUS:
-        status = OpenNtBaseClientFailure(0);
-        break;
+        return OpenNtBaseClientFailure(0);
     case MVDM_EXIT_CLOSE_FRONTENDS:
-        status = mvdm_standalone_worker_close_frontends();
-        break;
+        return mvdm_standalone_worker_close_frontends();
     case MVDM_EXIT_CONSOLE_CONTROL:
-        /* Release the handoff before the Console handler claims cleanup. */
-        (void)CallbackMayRunLong(instance);
-        break;
+        if (!SetEvent(lifecycle.console_request)) return GetLastError();
+        return WaitForSingleObject(lifecycle.console_completion, INFINITE) == WAIT_OBJECT_0
+            ? ERROR_SUCCESS : GetLastError();
     case MVDM_WOW_STARTED:
-        status = OpenNtBaseClientWowStarted(exit->wow_request);
-        break;
+        return OpenNtBaseClientWowStarted(request);
     case MVDM_WOW_BIND: {
         uint64_t ticket;
-        status = OpenNtBaseClientBindWowTask(exit->wow_request, exit->wow_task, &ticket);
-        break;
+        return OpenNtBaseClientBindWowTask(request, task, &ticket);
     }
     }
-    exit->status = status;
-    SetThreadpoolWait(wait, exit->request, NULL);
-    SetEvent(exit->completion);
-    if (operation == MVDM_EXIT_CONSOLE_CONTROL)
-        worker_base_shutdown_close(close_console,lifecycle.owner,
-            OPENNT_LIFECYCLE_GRACE_MS,CONTROL_C_EXIT,NULL);
+    return ERROR_INVALID_PARAMETER;
 }
 
 void ntvdm_worker_lifecycle_end(void)
 {
-    mvdm_softpc_exit_handoff *exit = &mvdm_softpc_exit_request;
     compat_command_bind_start(NULL, NULL);
+    mvdm_softpc_bind_control(NULL, NULL);
     if (lifecycle.exit_wait) {
         SetThreadpoolWait(lifecycle.exit_wait, NULL, NULL);
         WaitForThreadpoolWaitCallbacks(lifecycle.exit_wait, TRUE);
         CloseThreadpoolWait(lifecycle.exit_wait);
     }
-    if (exit->request) CloseHandle(exit->request);
-    if (exit->completion) CloseHandle(exit->completion);
-    ZeroMemory(exit, sizeof(*exit));
+    if (lifecycle.console_request) CloseHandle(lifecycle.console_request);
+    if (lifecycle.console_completion) CloseHandle(lifecycle.console_completion);
     worker_base_unwatch_service();
     if(lifecycle.stop)SetEvent(lifecycle.stop);
     worker_base_input_watch_destroy(lifecycle.watch);
@@ -175,15 +174,16 @@ DWORD ntvdm_worker_lifecycle_begin(session *owner,BOOL character_io)
 {
     DWORD error;
     mvdm_softpc_terminal_events events;
-    mvdm_softpc_exit_handoff *exit = &mvdm_softpc_exit_request;
     if(!owner || lifecycle.owner || lifecycle.exit_wait)return ERROR_INVALID_STATE;
-    exit->request = CreateEventW(NULL, FALSE, FALSE, NULL);
-    if (!exit->request) return GetLastError();
-    exit->completion = CreateEventW(NULL, FALSE, FALSE, NULL);
-    if (!exit->completion) return GetLastError();
-    lifecycle.exit_wait = CreateThreadpoolWait(worker_control_request, exit, NULL);
-    if (!lifecycle.exit_wait) return GetLastError();
-    SetThreadpoolWait(lifecycle.exit_wait, exit->request, NULL);
+    if (character_io) {
+        lifecycle.console_request = CreateEventW(NULL, FALSE, FALSE, NULL);
+        if (!lifecycle.console_request) return GetLastError();
+        lifecycle.console_completion = CreateEventW(NULL, FALSE, FALSE, NULL);
+        if (!lifecycle.console_completion) return GetLastError();
+        lifecycle.exit_wait = CreateThreadpoolWait(console_cleanup_request, owner, NULL);
+        if (!lifecycle.exit_wait) return GetLastError();
+        SetThreadpoolWait(lifecycle.exit_wait, lifecycle.console_request, NULL);
+    }
     error=worker_base_controls(&events.server,&events.worker_close,&events.console_close,&lifecycle.task_close);
     if(error)return error;
     if(!character_io)events.console_close=NULL;
@@ -197,6 +197,7 @@ DWORD ntvdm_worker_lifecycle_begin(session *owner,BOOL character_io)
         if(!lifecycle.fault)return GetLastError();
     }
     compat_command_bind_start(ntvdm_command_start_original, owner);
+    mvdm_softpc_bind_control(worker_control, owner);
     return ERROR_SUCCESS;
 }
 DWORD ntvdm_worker_lifecycle_activate(void)
