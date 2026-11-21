@@ -1,0 +1,56 @@
+{
+  "file": "src/compat/base_dispatch.c",
+  "id": "BC1F001",
+  "status": "design verified; implementation not yet delivered",
+  "actual_dependencies": {
+    "direct_C1_calls": 0,
+    "compiled_header_rows": 26,
+    "search_root_rows": 4
+  },
+  "cause": "B directly accesses BASE_API_MSG, command/output members, original API numbering and flag constants through base_client.h. Transport implementation is already registered, not a C1 call.",
+  "keep_in_B": [
+    "NtvdmBaseClientCallServer total entry",
+    "eight-operation transport selection",
+    "worker_wait duplicate/transfer/close ownership",
+    "observation_direct and console activation order",
+    "transport status precedence and disconnect handling"
+  ],
+  "C1_projection": [
+    "Decode original API number and exact size into a B semantic operation plus synchronous borrowed fields",
+    "Read post-get command state using original flag definitions and the pre-get requested value"
+  ],
+  "binding": "Extend existing immutable ntvdm_base_transport with two C1-owned projection callbacks; D existing connection setup supplies them; current unbind and joined-caller lifetime unchanged. No separate registry or queue.",
+  "ABI_constraints": [
+    "Do not copy or redefine BASE_API_MSG/CSR layouts in B",
+    "C1 original vdm.c owns layout projection inside its already selected COMMANDS region",
+    "Borrowed native request field pointers valid only during current synchronous call, never retained",
+    "Maintain signed BOOL FirstVDM and unsigned ULONG ExitCode write shapes separately",
+    "Get command CmdLen/VDMState are USHORT, not ULONG",
+    "Keep invalid-size errors: check/get/update INVALID_DATA; exit/code/reenter INVALID_PARAMETER; register/first unknown remains unsuccessful",
+    "No transport failure may be overwritten by validation or cause output/handle change"
+  ],
+  "assembly_evidence": [
+    "src/common/base_srv/base_rpc_client_launch.c::NtvdmBaseConnectExecution already owns transport installation",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1 compiles vdm.c COMMANDS in original client archive",
+    "Selected x64 launcher and x86 worker already link the C1 client owner; native worker does not compile base_dispatch"
+  ],
+  "tests_required": [
+    "existing eight BASE dispatch operations with malformed length/disconnection/unbind controls",
+    "real base-client RPC first/request lifecycle tests",
+    "command wait duplicate and release transfer",
+    "real guest COMMAND and WOW startup/exit",
+    "cached full build then dual11 publication then targeted final-code tests"
+  ],
+  "mirror": "No production edit yet. Measure projected owner insertion against fixed original before build; standing +1point/<100lines applies, larger needs approval.",
+  "packet": "M0 T483 S20 P1",
+  "baseline": "92443b379",
+  "source_hashes": {
+    "src/compat/base_dispatch.c": "222727100ec0b0d73f6520555136e0b785676414289cff364a1e5c09e1202ab0",
+    "src/compat/include/base_transport.h": "8a57af8774da937cf6d2c45a48c0592dfbb1705f964827d5d326d71ee06919dd",
+    "src/compat/include/base_client.h": "68cd4fd69fb05bf2e2b5ed946fbe76013ba28019821a3b20dcd2d2f1008a3a79",
+    "src/common/base_srv/base_rpc_client_launch.c": "54bf9d1fc680c0fefea1a4e5bdf6b28d1706ae1b5de0162c21b248f696530680",
+    "src/non-mvdm/base/win32/client/vdm.c": "a55b5d84e272ad1a61c94d2c47c716e5ce6e9ce56bda1fbb5b131ee2c9b7396e",
+    "src/non-mvdm/base/win32/inc/basemsg.h": "112b5c45c3c88504f24079a56d8951e24b4068d1b84f41d07c3c5857b32ad023",
+    "test/compat/base-dispatch/base_dispatch_test.c": "fd7cb94630ff9587444738d53bcc4a0885374b04c63f7b88e09713b08fb0d85e"
+  }
+}

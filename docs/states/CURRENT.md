@@ -206,3 +206,11 @@ First file:src/compat/base_dispatch.c. Preserve C1/C2 original connections
 and keep B-to-C2 direct/header/search violations at zero.
 S19 cumulative approved non-error mirror increment:+12points/+574lines;
 S20 increment starts at0points/0lines. No new same-thread queues/state machines.
+
+[S20 P1 first-file review](../../artifacts/mvdm-audit/t483-b-c1-dependencies/base-dispatch-review.json)
+identifies base_dispatch.c as a private ABI-layout consumer:0 direct C1 calls,
+26 header rows and4 search-root rows. B keeps the total entry,8 operations and
+wait-handle ownership; C1 should provide narrow request/command projections
+through the existing transport binding. Implementation, mirror measurement
+and final-code verification remain pending;0/94 files delivered. P1 is
+source-review evidence only: no product edit, build, runtime or release claim.
