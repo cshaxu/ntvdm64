@@ -95,27 +95,27 @@ a new accepted baseline and its cached objects are not release evidence.
 
 ## Sequential S worklist
 
+Owner revision on 2026-11-20 supersedes the earlier S17-S19 numbering.
+S13-S17 are closed: S14 removed B/C-to-D/E/F implementation dependencies;
+S15 cleaned D, S16 cleaned E, and the inserted S17 cleaned F sibling edges.
+The accidentally admitted general gate-reconciliation S18 is withdrawn before
+implementation and replaced by the next previously planned ownership task.
+
 | S | Bounded scope | Completion evidence |
 | --- | --- | --- |
-| S13, closed by P17 | Extract the minimum shared instance/thread binding needed by physical mapping; move the mapping implementation, records and cleanup into B as the first complete chain. | Production C calls B implementations; old F mapping provider and eight-operation forwarding table removed; one binding authority, correct bind rollback/unbind/dispose and instance isolation. |
-| S14, active | Eliminate all implementation dependencies from compat, non-mvdm and mvdm-host to D/E/F. Include the outward dependencies in the former S15-S19 functional groups: Console/input/display, COMMAND/CSR/BASE, redirector/devices/printer, WOW, and CPU/SAS/descriptor/vector/IRQ ownership. | Reconcile each actual provider with the delivered implementation and evidence. Remove outward implementation dependencies, including mandatory forwarding, while preserving original behavior and product policy ownership. |
-| S15, planned | Remove D common dependencies on E and F. | Reconcile D source, compile/link and runtime provider dependencies. Keep shared mechanisms in D and compose product behavior from the appropriate outer owner. |
-| S16, planned | Remove E frontend-base and worker-base dependencies on F. | Verify both E components against selected production graphs and actual callbacks. Keep executable/DLL composition and policy in F. |
-| S17, planned | Remove direct non-mvdm dependencies on mvdm-host. Restore the original USER resource callback routing through existing WOW registration. Review the OLE Win16 memory boundary separately. | Reconcile the 5 USER direct references and test native and WOW resource paths. Resolve the 5 original OLE references by a source-proven ownership split or obtain an explicit disposition for a remaining boundary. |
-| S18, planned | Remove direct compat dependencies on mvdm-host. Reuse original callbacks for execution handoff and return CPU/SAS, device and WOW-specific operations and vector assembly to their actual mvdm-host owners. | Reconcile the 296 P121 direct symbol references and build dependencies. Preserve machine state and callback ordering. Verify the dependency has not moved to non-mvdm or farther outward. |
-| S19, planned | Remove direct compat dependencies on non-mvdm. Reuse original USER registration slots and return private USER, CSR and original layout access to its owner. Preserve independent mechanisms in compat. | Reconcile the 55 P121 direct symbol references and private header dependencies. Verify the strict compat, non-mvdm, mvdm-host order and record remaining runtime callback providers. |
+| S18, active | Remove non-mvdm C1 dependencies on mvdm-host C2. Restore original USER resource registration; review original OLE memory boundary. | Refresh historical 5 USER and5 OLE references. Trace actual providers and lifecycle, remove private reverse dependencies, validate native/WOW paths. |
+| S19, planned | Remove compat B dependencies on mvdm-host C2. | Refresh historical296 direct references; return machine-specific implementation to its actual owner and reuse original contracts without hidden forwarding. |
+| S20, planned | Remove compat B dependencies on non-mvdm C1. | Refresh historical55 direct references; return private USER/CSR/layout implementation to its owner, retaining independent B mechanisms. |
 
-The owner revised the sequence on 2026-11-20. The former functional S15-S19
-allocations remain S14 work groups for their outward dependencies. Keep their
-existing evidence and recheck only outstanding work. Three-component
-internal dependencies proceed in S17-S19 after the D and E stages. S14
-remains the only admitted S. Refresh planning counts at each new admission.
-
-Count direct references separately from runtime callbacks and implementation
-ownership. Reuse existing callback contracts where applicable. Private
-implementation reached through a callback still counts as a dependency.
-Report non-error mirror points and lines before implementing each batch
-and apply the existing approval, verification and delivery rules.
+Only S18 is active. Owner authorizes continuous sequential execution and
+small-five delivery for each S: cached full build, dual publication, targeted
+tests, commit and push. Admit the next S only after its predecessor closes.
+Historical counts are planning baselines, not current unresolved totals.
+The strict order is A, B, C1, C2, D, E, F; no same-layer mirror exception remains.
+Track headers, build inputs, direct symbols, runtime callbacks and named-image
+ABI separately. Preserve original guest and mirror logical lines/error arms.
+Large mirror increases require approval; fewer than5 lines and at most2
+points have standing approval. Do not transfer equivalent complexity into shims.
 
 ## S15 ownership inventory
 

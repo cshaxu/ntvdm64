@@ -6,14 +6,15 @@ The table lists the host production components under `src/`, from innermost
 to outermost. A component may depend on components in any strictly inner
 layer, subject to their ownership restrictions. An inner component must never
 depend on an outer component. Distinct components in the same layer must
-remain independent, with one exception: `mvdm-host` and `non-mvdm` may depend
-on each other within C.
+remain independent. C is ordered as C1 `non-mvdm` inside C2 `mvdm-host`;
+C2 may depend on C1, never the reverse.
 
 | Layer | Components |
 | --- | --- |
 | A | `lib-nxvm`, `lib-win32` |
 | B | `compat` |
-| C | `mvdm-host`, `non-mvdm` |
+| C1 | `non-mvdm` |
+| C2 | `mvdm-host` |
 | D | `common` |
 | E | `frontend-base`, `worker-base` |
 | F | `ntcon-exe`, `nthook-dll`, `ntmon-exe`, `ntsrv-exe`, `ntvdm-exe`, `ntvwm-exe`, `run16-exe`, `vdmredir-dll`, `wow32-dll` |
@@ -25,7 +26,13 @@ For A and B, the [library boundary check](../../tools/audit/verify-library-build
 verifies production compile commands, compiler-recorded headers and build
 prerequisites. Platform SDK and runtime libraries are outside this table.
 
-The original two x86 WOW32 B-to-C exceptions remain approved. In compat,
+Owner revision on 2026-11-20 (S18-S20) requires eliminating all three
+reverse implementation boundaries: C1-to-C2, B-to-C2 and B-to-C1. The
+following earlier B-to-C approvals describe transitional existing code only;
+they are cleanup obligations, not final exceptions or permission to add more.
+Reviewed inner-owned callbacks and cross-image ABI rules below still apply.
+
+The original two x86 WOW32 B-to-C exceptions were previously approved. In compat,
 `_GetDlgItem` traverses the original USER window layout and
 `gabObjectCreateFlags` supplies the original USER object ownership flags.
 Their original approval covers these two symbols and their C layout dependencies.

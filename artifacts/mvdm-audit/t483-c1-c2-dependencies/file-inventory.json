@@ -1,0 +1,2950 @@
+{
+  "baseline": "d111e6cc3",
+  "packet": "M0 T483 S18",
+  "status": "initial census; not completed audit",
+  "files": [
+    {
+      "id": "C1F001",
+      "file": "src/non-mvdm/base/ntdll/csrutil.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/ntdll/csrutil.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        }
+      ]
+    },
+    {
+      "id": "C1F002",
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "nthook32.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/base/win32/client/vdm.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "ntvdm.exe"
+        }
+      ]
+    },
+    {
+      "id": "C1F003",
+      "file": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc/bop.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc/mvdm.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc/softpc.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc/wow.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc/wowcmpat.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/wow32/walias.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/wow32/wheap.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/wow32/wow32.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/wow32/wspool.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/wow32/wstruc.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "compiled-headers",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "",
+          "target": "src/mvdm-host/wow32/wuclip.h",
+          "evidence": "MSVC include closure",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "3",
+          "target": "src/mvdm-host/wow32/wcall16.c",
+          "evidence": "_WOWGlobalLock16@4",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "3",
+          "target": "src/mvdm-host/wow32/wcall16.c",
+          "evidence": "_WOWGlobalUnlock16@4",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "5",
+          "target": "src/mvdm-host/wow32/wcall16.c",
+          "evidence": "_WOWGlobalAllocLock16@12",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "5",
+          "target": "src/mvdm-host/wow32/wcall16.c",
+          "evidence": "_WOWGlobalUnlock16@4",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "5",
+          "target": "src/mvdm-host/wow32/wcall16.c",
+          "evidence": "_WOWGlobalUnlockFree16@4",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "5",
+          "target": "src/mvdm-host/wow32/wow32.c",
+          "evidence": "_WOWGetVDMPointer@12",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx",
+          "line_or_section": "9",
+          "target": "src/mvdm-host/wow32/wow32.c",
+          "evidence": "_WOWGetVDMPointer@12",
+          "product": "wow32.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F004",
+      "file": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/allocstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F005",
+      "file": "src/non-mvdm/ds/netapi/netlib/copystr.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/copystr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/copystr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/copystr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/copystr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/copystr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/copystr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/copystr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/copystr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/copystr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F006",
+      "file": "src/non-mvdm/ds/netapi/netlib/initoem.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/initoem.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/initoem.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/initoem.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/initoem.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/initoem.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/initoem.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/initoem.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/initoem.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/initoem.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F007",
+      "file": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F008",
+      "file": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F009",
+      "file": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F010",
+      "file": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/svcinfo.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F011",
+      "file": "src/non-mvdm/ds/netapi/netlib/time.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/time.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/time.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/time.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/time.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/time.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/time.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/time.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/time.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/time.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F012",
+      "file": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/timezone.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F013",
+      "file": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/netlib/xlatesvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F014",
+      "file": "src/non-mvdm/ds/netapi/rap/ascii.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/ascii.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/ascii.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/ascii.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/ascii.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/ascii.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/ascii.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/ascii.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/ascii.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/ascii.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F015",
+      "file": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F016",
+      "file": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/convert.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/convert.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/convert.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/convert.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/convert.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/convert.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/convert.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/convert.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/convert.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F017",
+      "file": "src/non-mvdm/ds/netapi/rap/examine.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/examine.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/examine.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/examine.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/examine.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/examine.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/examine.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/examine.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/examine.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/examine.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F018",
+      "file": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F019",
+      "file": "src/non-mvdm/ds/netapi/rap/pointer.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/pointer.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/pointer.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/pointer.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/pointer.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/pointer.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/pointer.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/pointer.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/pointer.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/pointer.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F020",
+      "file": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F021",
+      "file": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F022",
+      "file": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F023",
+      "file": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F024",
+      "file": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F025",
+      "file": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F026",
+      "file": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F027",
+      "file": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dos/dem",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/dpmi32",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/ccpu386",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/cvidc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/base/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/softpc.new/host/inc",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/vdmredir",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        },
+        {
+          "kind": "search-paths",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+          "line_or_section": "",
+          "target": "src/mvdm-host/xms.486",
+          "evidence": "/I",
+          "product": "VDMREDIR.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F028",
+      "file": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+          "line_or_section": "3",
+          "target": "src/mvdm-host/wow32/wres32.c",
+          "evidence": "_W32LoadResource@8",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+          "line_or_section": "3",
+          "target": "src/mvdm-host/wow32/wres32.c",
+          "evidence": "_W32LockResource@8",
+          "product": "wow32.dll"
+        },
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+          "line_or_section": "3",
+          "target": "src/mvdm-host/wow32/wres32.c",
+          "evidence": "_W32UnlockResource@8",
+          "product": "wow32.dll"
+        }
+      ]
+    },
+    {
+      "id": "C1F029",
+      "file": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "status": "pending",
+      "evidence": [
+        {
+          "kind": "linked-relocations",
+          "from": "non-mvdm",
+          "to": "mvdm-host",
+          "source": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+          "line_or_section": "39",
+          "target": "src/mvdm-host/wow32/wres32.c",
+          "evidence": "_W32FindResource@16",
+          "product": "wow32.dll"
+        }
+      ]
+    }
+  ]
+}

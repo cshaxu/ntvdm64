@@ -1410,3 +1410,12 @@ such a per-file recovery.
 The architecture does not claim NT4 kernel VDM or CSRSS/CSR internals,
 unbounded multi-session reentrancy, or automatic support for every dormant
 MVDM package. Unsupported historical operations remain explicit failures.
+
+## Ordered compatibility and mirror ownership
+
+The owner-approved S18-S20 target orders A libraries, B compat, C1 non-mvdm,
+C2 mvdm-host, D common, E frontend-base/worker-base, and F products.
+C2 may consume C1; C1 must not consume C2. B must consume neither mirror.
+Historical B-to-C admissions are migration obligations. Reuse original
+inner-owned registration contracts where appropriate; do not hide a required
+outer implementation behind a callback or create a parallel state machine.

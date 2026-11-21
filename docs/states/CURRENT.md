@@ -9,14 +9,14 @@ next-S admission on 2026-11-20. Only S18 is active.
 
 | Field | Record |
 | --- | --- |
-| Original Owner Request | 赞，准入下一个S任务。 |
+| Original Owner Request | 清理 compat→non-mvdm、compat→mvdm-host、non-mvdm→mvdm-host；C拆为C1 non-mvdm、C2 mvdm-host，连续执行S18、S19、S20。 |
 | Identifier Mode | M0 T483 S18, Ordinary Mode. |
 | Admission And Approval | Owner accepted S17 and authorized successor admission, 2026-11-20. |
-| Objective | Reconcile the completed A-F dependency cleanups against current product graphs and consolidate a repeatable anti-regression boundary check. |
+| Objective | Remove reverse dependencies from C1 non-mvdm to C2 mvdm-host; trace original USER registration and OLE memory ownership. |
 | Reference Baseline | S17 P2 eaa229156; package733c98ae-ab34-4dad-afd4-380e0f43f0b5. [S17 closure](../etc/evidence/m0-t483-s17-closure.md). |
-| Files And ABI Surface | Existing dependency audit tools and A-F source/build ownership records; current x86, x64 and reference product graphs. Reuse unchanged provider evidence. |
+| Files And ABI Surface | DIR-ordered non-mvdm callers and actual mvdm-host providers, associated compat bindings, original registration ABI and current product graphs. |
 | Candidate Proposal | [T483 parent](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md) |
-| Applicable Rules | Six-layer architecture, named B-to-C exceptions, reviewed inner-owned callbacks and cross-image ABI provider rules. |
+| Applicable Rules | Ordered A/B/C1/C2/D/E/F architecture; historical B-to-C exceptions are S19/S20 cleanup obligations; reviewed inner-owned callbacks and cross-image ABI rules. |
 | Verification | Exercise consolidated checks against current graphs and negative controls. Any production/build changes receive cached full build, dual11 publication, targeted tests, commit and push; evidence-only changes use governance/link checks without redundant product builds. |
 | Expected Markers | DIR-ordered affected-file ledger, separate per-layer violation and approved runtime relationship counts, explicit coverage gaps and reproducible gate commands. |
 | Asset Needs | Existing built products, compiler header records, linker maps and source evidence; no new guest assets. |
@@ -24,7 +24,7 @@ next-S admission on 2026-11-20. Only S18 is active.
 | Similar-Issue Sweep | Direct/transitive/forced headers, private search paths, linked and generated providers, dynamic binding and callback ownership; distinguish named-image dependencies. |
 | Reporting Requirements | Per-file findings and cumulative progress; A-F counts separately; non-error mirror point/line changes; no silent exceptions or unsupported zero claims. |
 | Stop Conditions | No artificial same-thread queue, duplicate state machine or blanket exception. Mirror increases below5 lines and at most2 points have standing approval; larger increases require approval. Preserve unrelated work. |
-| Exit Criteria | Current A-F evidence reconciled; unexplained violations resolved or explicitly owner-decided; repeatable checks reject representative illegal dependencies while retaining approved ABI/callback relationships; required delivery complete. |
+| Exit Criteria | C1-to-C2 private header/build/implementation dependencies eliminated; actual callback providers and native/WOW resource semantics verified; small-five delivered before S19 admission. |
 
 ## Current Technical Baseline
 
@@ -96,8 +96,12 @@ guest changes; non-error mirror delta0 points/0 lines. Package
 
 ## S18 Progress
 
-Admission only. Reconcile existing dependency evidence and gate coverage first;
-no S18 implementation or product changes have been made.
+Owner corrected scope before implementation: S18 handles C1-to-C2, then
+S19 handles B-to-C2 and S20 B-to-C1. [Sequential worklist](../etc/operations/t483-compat-implementation-migration-plan.md#sequential-s-worklist).
+Initial current census:29 candidate source files,11 linked relocation rows
+(9 unique caller/symbol/provider relationships),11 compiled-header records,
+and252 private search-root records. [DIR inventory](../../artifacts/mvdm-audit/t483-c1-c2-dependencies/file-inventory.json).
+These are candidates, not completed audit counts. No production changes yet.
 
 ## Recent Governance
 
