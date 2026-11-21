@@ -1,7 +1,7 @@
 {
   "packet": "M0 T483 S19",
   "baseline": "9094627fe",
-  "status": "P7 completes eleven files; remaining27 include three pending mirror decisions",
+  "status": "P7 completes eleven files; remaining27 include four pending mirror decisions",
   "files": [
     {
       "id": "BC2F001",
@@ -4069,7 +4069,7 @@
     {
       "id": "BC2F015",
       "file": "src/compat/mvdm_softpc_text_video.c",
-      "status": "not yet audited",
+      "status": "Candidate compiled; +1 point/+97 non-error mirror lines await approval; production unchanged",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -4326,7 +4326,7 @@
     {
       "id": "BC2F016",
       "file": "src/compat/mvdm_softpc_wow_page_domain.c",
-      "status": "not yet audited",
+      "status": "24 C2 providers and lifecycle audited; reuse and extend CPU callbacks next; production unchanged",
       "evidence": [
         {
           "kind": "linked-relocations",

@@ -214,6 +214,11 @@ checks and actual provider/lifetime dispositions.
 Neither is implemented or counted as a closed dependency.
 [Mouse owner candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/mouse-guest-provider-decision.json)
 compiled with product parameters; +1 point/+41 lines awaits approval and is not implemented.
+[Text-video candidate](../../artifacts/mvdm-audit/t483-b-c2-dependencies/text-video-provider-decision.json)
+compiled; +1 point/+97 lines awaits approval. No production change.
+[WOW page-domain review](../../artifacts/mvdm-audit/t483-b-c2-dependencies/wow-page-domain-provider-review.json)
+identifies24 actual C2 providers and the existing reclamation failure-injection
+contract; callback implementation is next, not counted delivered.
 [P4](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p4-delivery.json) removes
 the printer unit's unused C2 search roots; its C1 ABI stays an S20 obligation.
 [P5](../../artifacts/mvdm-audit/t483-b-c2-dependencies/p5-delivery.json) keeps

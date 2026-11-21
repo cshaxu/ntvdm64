@@ -1,0 +1,119 @@
+{
+  "packet": "M0 T483 S19",
+  "file": "src/compat/mvdm_softpc_wow_page_domain.c",
+  "status": "provider and lifetime audit complete; callback implementation next; not delivered",
+  "direct_relationships": 24,
+  "relocation_records": 198,
+  "providers": [
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getCPL"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getCR0"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getCR3"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getGDT_BASE"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getGDT_LIMIT"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_getVM"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_setCR0"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_setCR3"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "symbol": "_c_setGDT_BASE_LIMIT"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "symbol": "_xtrn2phy"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_GetLinAdd"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_GetPhyAdd"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_dw_at"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_fills"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_loads"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_memory_size"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_storedw"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_stores"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_storew"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "symbol": "_c_sas_twenty_bit_wrapping_enabled"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "symbol": "_VdmAddVirtualMemory"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "symbol": "_VdmAllocateVirtualMemory"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "symbol": "_VdmFreeVirtualMemory"
+    },
+    {
+      "source": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "symbol": "_VdmRemoveVirtualMemory"
+    }
+  ],
+  "plan": "Reuse existing immutable B-owned mvdm_cpu_access table for memory size, translation, CPL and VM. Add only remaining required CPU/SAS and original nt_mem operation slots; F supplies actual C function addresses before page-domain use. Remove unused LDT getter declarations. Preserve page-domain object, allocation graph, callback ordering and rollback algorithm. No new state owner or queue.",
+  "ownership": "B owns existing domain/client-view allocation bookkeeping. C2 owns CPU registers, SAS mappings and original nt_mem allocation. Static function addresses outlive host-context cleanup. Teardown frees mappings through same provider before zeroing domain; provider binding must not be cleared early.",
+  "mirror_delta_expected": {
+    "points": 0,
+    "lines": 0
+  },
+  "test_obligations": [
+    "Page-domain fixture uses direct session setup, so explicitly install the production binding before entry. Do not rely on standalone startup.",
+    "Existing window-reclaim fixture intercepts VdmFreeVirtualMemory by source macro. After callback migration inject the leaf at test composition; otherwise this negative test silently stops exercising failure.",
+    "Dialog fault wrapper intercepts exported B publication, so preserve that substitution.",
+    "Adapt function-extraction checks to callback access rather than restoring private C names.",
+    "Run actual CCPU page-domain, window reclaim and real Win16 acceptance after final code."
+  ],
+  "limits": "No claim that this file is already decoupled; B-C1 nt.h and USER ABI remain S20 scope."
+}

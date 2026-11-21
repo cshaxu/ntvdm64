@@ -1,0 +1,31 @@
+{
+  "packet": "M0 T483 S19",
+  "file": "src/compat/mvdm_softpc_text_video.c",
+  "status": "candidate compiled; awaiting mirror increase approval; production unchanged",
+  "current_direct_relationships": 10,
+  "current_relocation_records": 11,
+  "provider_owner": "C2 nt_graph.c owns screen state, video update, palette and copied VGA font/cursor snapshot",
+  "proposal": "Move existing six operation bodies to original nt_graph.c and expose immutable B-owned typed callbacks; F assembles addresses before host video entry. B receives copies, never VGA-plane or PCDisplay pointers. No new queue or state machine.",
+  "mirror": {
+    "file": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+    "before": {
+      "points": 16,
+      "lines": 53
+    },
+    "candidate": {
+      "points": 17,
+      "lines": 150
+    },
+    "delta": {
+      "points": 1,
+      "lines": 97
+    },
+    "error_line_policy": "Append only; original bytes and existing error/line structure preserved; paired-exclusion parser reports zero issues."
+  },
+  "verification": {
+    "compile": "Real current nt_graph.c product command with only candidate input/output and B header overlay; exit0. Existing warning output retained.",
+    "limits": "No candidate link/runtime evidence, B wrapper and composition not implemented. Approval needed before production mirror change."
+  },
+  "evidence_root": "build/t483-s19-text-video-owner",
+  "followup": "After approval bind before both standalone and bounded entries, remove generated private video layout inputs from B, adapt existing state/producer fixtures, run full cached build, dual publication, targeted video/COMMAND tests, commit/push."
+}
