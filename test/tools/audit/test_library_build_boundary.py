@@ -40,6 +40,15 @@ class BoundaryTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.check_unit("mvdm_softpc_text_video.c", "build/.ninja/msvc-x86-release/worker/generated/text_video_gfx.h")
 
+    def test_base_dispatch_has_no_original_ABI_exception(self):
+        self.check_unit("base_dispatch.c", "src/compat/include/base_transport.h",
+                        include="src/compat/include")
+        with self.assertRaises(ValueError):
+            self.check_unit("base_dispatch.c", "src/non-mvdm/base/win32/inc/basemsg.h")
+        with self.assertRaises(ValueError):
+            self.check_unit("base_dispatch.c", "src/compat/include/base_transport.h",
+                            include="src/non-mvdm/public/sdk/inc")
+
     def test_ordinary_B_cannot_read_C(self):
         with self.assertRaises(ValueError):
             self.check_unit("host_context.c", "src/mvdm-host/softpc.new/base/inc/xt.h")

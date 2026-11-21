@@ -2698,3 +2698,10 @@ ntcftxt.h remains an original mirror dependency. No other mirror changes.
 T483 S6 P25 supersedes the base/ntos/rtl/time.c subset:the unused RTL archive
 member and its local-body-only test are removed by owner approval. No compat
 replacement;historical restoration records remain provenance only.
+
+NON-MVDM-DIV-BASE-REQUEST: `base/win32/client/vdm.c` projects original
+BASE request identity, exact lengths and command flags through B-owned typed
+synchronous callbacks. B retains dispatch and wait lifetime; no CSR layout
+is duplicated. Existing #line304 and all original bytes remain in place.
+Non-error diff20points/505lines ->19points/569lines. See T483 S20 P2
+delivery and R2736 in the active review/pending registers.

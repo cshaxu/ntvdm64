@@ -1,0 +1,87 @@
+{
+  "packet": "M0 T483 S20 P2",
+  "baseline": "f2655da7f",
+  "status": "verified delivery",
+  "id": "BC1F001",
+  "file": "src/compat/base_dispatch.c",
+  "ownership": "B keeps total CSR-shaped entry, eight dispatch operations, wait-handle duplication/transfer/close, observation and activation. Existing transport now includes two synchronous C1 projection callbacks supplied by original vdm.c. D only binds the same immutable transport after authentication. No copied original layouts, new registry, queue, guest mutation or second state machine.",
+  "counts": {
+    "files_completed": 1,
+    "files_total": 94,
+    "remaining": 93,
+    "B_C1_unique": 58,
+    "B_C1_raw": 70,
+    "B_C1_compiled_headers": 564,
+    "B_C1_search_roots": 21,
+    "B_C2_unique": 0,
+    "B_C2_raw": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "file_change": {
+    "direct_calls_before": 0,
+    "direct_calls_after": 0,
+    "compiled_headers_before": 26,
+    "compiled_headers_after": 0,
+    "search_roots_before": 4,
+    "search_roots_after": 0
+  },
+  "mirror": {
+    "path": "src/non-mvdm/base/win32/client/vdm.c",
+    "before": {
+      "points": 20,
+      "lines": 505
+    },
+    "after": {
+      "points": 19,
+      "lines": 569
+    },
+    "delta": {
+      "points": -1,
+      "lines": 64
+    },
+    "cumulative_S20": {
+      "points": -1,
+      "lines": 64
+    },
+    "approval": "Owner permits reduction in point count and standing small owner additions; no new diff point. Retained insertion registered R2736 for revisit.",
+    "error_line": "Removing the inserted owner block reproduces prior bytes exactly; existing #line 304 follows the insertion and all original error/line structures remain unchanged. Paired parser zero issues.",
+    "sha256": "18b0bc61b499560b4b2df6a09f3a10979b94484c5546b68f74146bdf14ea5e5a"
+  },
+  "package": "de904654-e038-4a30-baf3-6b115d43b484",
+  "build": "cached full x86/x64/reference passed",
+  "publication": "11 images in both assets/release and O:/winnt/system32;22 hashes verified",
+  "tests": [
+    "140 BASE dispatch assertions with actual extracted C1 owner bodies and mocked transport: eight operations, malformed lengths, disconnect priority, duplicate/transfer waits, invalid release rollback, original query suppression, no-memory delivery, activation failure and unbind",
+    "Real published-service RPC wait contracts: reply/connect/disconnect/loss/bootstrap passed",
+    "Actual Win16 generic thunk/callback/yield, USER16 messages and normal retirement passed",
+    "COMMAND modern EDIT/CMD/MEM and launcher return passed"
+  ],
+  "limitations": [
+    "RPC wait contracts do not replace every possible broker operation; controlled dispatch plus actual product/guest cases cover this changed surface",
+    "Remaining93 files include header-only consumers; direct count remains58 because this file had no direct C1 calls",
+    "No full Win3.1/Win95 matrix claimed"
+  ],
+  "failed_attempts": [
+    {
+      "name": "tests",
+      "exit": 1,
+      "cause": "Supervisor named absent run-ninja.cmd; no fixture started. Corrected to selected build run-ninja-parallel.cmd; tests-runner exit0."
+    },
+    {
+      "name": "final-gate",
+      "exit": 1,
+      "cause": "Removing the combined exception also removed legitimate B own public include root. Gate now permits compat/include for B generally while C1 headers/search roots remain rejected; positive own-root control added."
+    }
+  ],
+  "evidence_root": "build/t483-s20-base-dispatch",
+  "gate": "Removed base_dispatch original-header exception; added negative header/search-root regression case. Ten gate unit checks plus nine actual product graphs, dual22 hashes, frontend ownership and documentation/link checks passed (final-gate-fixed exit0).",
+  "final_inputs": {
+    "src/compat/base_dispatch.c": "63279ded1ddc041afc8dee753d2fc6c8d6969fda48020799eb21b244d714c1ec",
+    "src/compat/include/base_transport.h": "db3df572560d12442410a0ba6c5e95fdf6e5c801f696e3096994997b40aecac8",
+    "src/common/base_srv/base_rpc_client_launch.c": "82963b9c611a4e078bede1356b31fc9b899bb21bf277ac8fa54cf326da4f8c56",
+    "src/non-mvdm/base/win32/client/vdm.c": "18b0bc61b499560b4b2df6a09f3a10979b94484c5546b68f74146bdf14ea5e5a",
+    "test/compat/base-dispatch/base_dispatch_test.c": "e16d1ee8b894b92321a9bc48abb42e35c0adc64c3b6f63fae473b4472f6e38ed",
+    "tools/audit/verify-library-build-boundary.py": "8820b1acf73adf5ef71791739a9f7c1e1ec1292e5af48f4aefcbd40cea495005"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "file": "src/compat/base_dispatch.c",
   "id": "BC1F001",
-  "status": "design verified; implementation not yet delivered",
+  "status": "implemented and verified in P2",
   "actual_dependencies": {
     "direct_C1_calls": 0,
     "compiled_header_rows": 26,
@@ -52,5 +52,6 @@
     "src/non-mvdm/base/win32/client/vdm.c": "a55b5d84e272ad1a61c94d2c47c716e5ce6e9ce56bda1fbb5b131ee2c9b7396e",
     "src/non-mvdm/base/win32/inc/basemsg.h": "112b5c45c3c88504f24079a56d8951e24b4068d1b84f41d07c3c5857b32ad023",
     "test/compat/base-dispatch/base_dispatch_test.c": "fd7cb94630ff9587444738d53bcc4a0885374b04c63f7b88e09713b08fb0d85e"
-  }
+  },
+  "delivery": "p2-delivery.json"
 }

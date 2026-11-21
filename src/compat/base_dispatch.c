@@ -1,6 +1,7 @@
-#include <nt.h>
+#define WIN32_NO_STATUS
 #include <windows.h>
-#include "include/base_client.h"
+#undef WIN32_NO_STATUS
+#include <ntstatus.h>
 #include "include/base_transport.h"
 
 static const ntvdm_base_transport *provider;
@@ -32,24 +33,21 @@ ULONGLONG ntvdm_base_observation_direct(void)
     return observation_direct;
 }
 
-static NTSTATUS get_command(const ntvdm_base_transport *transport, PBASE_GET_NEXT_VDM_COMMAND_MSG command)
+static LONG get_command(const ntvdm_base_transport *transport, ntvdm_base_request *request)
 {
-    DWORD requested = command->VDMState;
     ULONGLONG direct = 0;
     HANDLE wait = NULL;
-    NTSTATUS status = transport->get(command, &wait, &direct);
+    ntvdm_base_command_state state;
+    LONG status = transport->get(request->payload, &wait, &direct);
     if (wait) {
         /* Get can return a new duplicate of the same ConsoleRecord event. */
         if (worker_wait) CloseHandle(wait);
         else worker_wait = wait;
-        command->WaitObjectForVDM = worker_wait;
+        *request->wait = worker_wait;
     }
-    if ((status == STATUS_SUCCESS || (status == STATUS_NO_MEMORY && (command->VDMState & RETURN_ON_NO_COMMAND))) &&
-        !command->WaitObjectForVDM && (command->CmdLen || (command->VDMState & RETURN_ON_NO_COMMAND)) &&
-        !(requested & (ASKING_FOR_ENVIRONMENT | ASKING_FOR_PIF | ASKING_FOR_WOW_BINARY)))
-        observation_direct = direct;
-    if (status == STATUS_SUCCESS && activate_console && !command->WaitObjectForVDM &&
-        command->CmdLen && !(command->VDMState & ASKING_FOR_ENVIRONMENT)) {
+    transport->command_state(request, status, &state);
+    if (state.observe) observation_direct = direct;
+    if (state.activate && activate_console) {
         DWORD error = activate_console(activation, TRUE);
         if (error) {
             SetLastError(error);
@@ -59,78 +57,55 @@ static NTSTATUS get_command(const ntvdm_base_transport *transport, PBASE_GET_NEX
     return status;
 }
 
-NTSTATUS NTAPI NtvdmBaseClientCallServer(PCSR_API_MSG message,
-    PCSR_CAPTURE_HEADER capture, CSR_API_NUMBER number, ULONG length)
+/* Keep the original CSR-shaped entry without importing its private layout. */
+struct _CSR_API_MSG;
+struct _CSR_CAPTURE_HEADER;
+LONG NTAPI NtvdmBaseClientCallServer(struct _CSR_API_MSG *message,
+    struct _CSR_CAPTURE_HEADER *capture, ULONG number, ULONG length)
 {
-    PBASE_API_MSG base = (PBASE_API_MSG)message;
     const ntvdm_base_transport *transport = provider;
-    NTSTATUS status;
+    ntvdm_base_request request = {0};
+    LONG status;
     ULONG value;
-    BOOL notify_started;
-    BOOL wow;
 
     (void)capture;
-    if (!base || !transport) return STATUS_UNSUCCESSFUL;
+    if (!message || !transport) return STATUS_UNSUCCESSFUL;
     status = transport->status(ERROR_SUCCESS);
-    if (NT_SUCCESS(status)) {
+    transport->decode(message, number, (status >= 0) ? length : 0, &request);
+    if ((status >= 0)) {
         status = STATUS_UNSUCCESSFUL;
-        switch (number) {
-        case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepCheckVDM):
-            status = length == sizeof(base->u.CheckVDM)
-                ? transport->check(&base->u.CheckVDM) : transport->status(ERROR_INVALID_DATA);
-            break;
-        case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepGetNextVDMCommand):
-            status = length == sizeof(base->u.GetNextVDMCommand)
-                ? get_command(transport, &base->u.GetNextVDMCommand) : transport->status(ERROR_INVALID_DATA);
-            break;
-        case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepUpdateVDMEntry):
-            status = length == sizeof(base->u.UpdateVDMEntry)
-                ? transport->update(&base->u.UpdateVDMEntry) : transport->status(ERROR_INVALID_DATA);
-            break;
-        case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepExitVDM):
-            if (length != sizeof(base->u.ExitVDM)) {
-                status = transport->status(ERROR_INVALID_PARAMETER);
-                break;
-            }
-            notify_started = base->u.ExitVDM.ConsoleHandle == OPENNT_WOW_STARTUP_NOOP_CONSOLE;
-            wow = notify_started || base->u.ExitVDM.ConsoleHandle == (HANDLE)-1;
+        if (request.error) status = transport->status(request.error);
+        else switch (request.operation) {
+        case ntvdm_base_check:
+            status = transport->check(request.payload); break;
+        case ntvdm_base_get:
+            status = get_command(transport, &request); break;
+        case ntvdm_base_update:
+            status = transport->update(request.payload); break;
+        case ntvdm_base_exit:
             value = 0;
-            status = transport->exit_vdm(wow, notify_started, wow ? base->u.ExitVDM.iWowTask : 0, &value);
-            if (NT_SUCCESS(status)) {
+            status = transport->exit_vdm(request.wow, request.notify_started, request.value, &value);
+            if ((status >= 0)) {
                 if (value > 1 || (value && !worker_wait)) {
-                    status = transport->status(ERROR_INVALID_DATA);
-                    break;
+                    status = transport->status(ERROR_INVALID_DATA); break;
                 }
-                base->u.ExitVDM.WaitObjectForVDM = value ? worker_wait : NULL;
+                *request.wait = value ? worker_wait : NULL;
                 if (value) worker_wait = NULL;
             }
             break;
-        case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepGetVDMExitCode):
-            status = length == sizeof(base->u.GetVDMExitCode)
-                ? transport->exit_code(base->u.GetVDMExitCode.hParent, &base->u.GetVDMExitCode.ExitCode)
-                : transport->status(ERROR_INVALID_PARAMETER);
-            break;
-        case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepSetReenterCount):
-            if (length == sizeof(base->u.SetReenterCount) &&
-                (base->u.SetReenterCount.fIncDec == INCREMENT_REENTER_COUNT ||
-                 base->u.SetReenterCount.fIncDec == DECREMENT_REENTER_COUNT))
-                status = transport->reenter(base->u.SetReenterCount.fIncDec);
-            else
-                status = transport->status(ERROR_INVALID_PARAMETER);
-            break;
-        case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepRegisterWowExec):
-            if (length == sizeof(base->u.RegisterWowExec))
-                status = transport->register_wow((ULONG)(ULONG_PTR)base->u.RegisterWowExec.hwndWowExec);
-            break;
-        case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepIsFirstVDM):
-            if (length == sizeof(base->u.IsFirstVDM)) {
-                value = 0;
-                status = transport->first(&value);
-                if (NT_SUCCESS(status)) base->u.IsFirstVDM.FirstVDM = value;
-            }
+        case ntvdm_base_code:
+            status = transport->exit_code(request.parent, request.exit_code); break;
+        case ntvdm_base_reenter:
+            status = transport->reenter(request.value); break;
+        case ntvdm_base_register:
+            status = transport->register_wow(request.value); break;
+        case ntvdm_base_first:
+            value = 0;
+            status = transport->first(&value);
+            if ((status >= 0)) *request.first = value;
             break;
         }
     }
-    base->ReturnValue = status;
+    *request.status = status;
     return status;
 }

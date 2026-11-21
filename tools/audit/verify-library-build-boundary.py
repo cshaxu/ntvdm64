@@ -107,25 +107,11 @@ ORIGINAL_LAYOUT_ADAPTERS = {
 }
 
 
-BASE_DISPATCH_HEADERS = {
-    ROOT / "src/non-mvdm" / name for name in (
-        "base/win32/inc/basemsg.h", "base/win32/inc/basevdm.h",
-        "public/internal/base/inc/conroute.h", "public/internal/base/inc/vdmapi.h",
-        "public/internal/base/inc/winss.h", "public/sdk/inc/devioctl.h",
-        "public/sdk/inc/nt.h", "public/sdk/inc/ntcsrmsg.h",
-        "public/sdk/inc/ntlpcapi.h", "public/sdk/inc/ntpsapi.h",
-        "public/sdk/inc/ntregapi.h", "public/sdk/inc/ntrtl.h",
-        "public/sdk/inc/nturtl.h")
-}
-
-
 def allowed_roots(owner, source=""):
     roots = {ROOT / "src" / owner}
     if owner == "compat":
-        roots.update(ROOT / "src" / library for library in ("lib-nxvm", "lib-win32"))
-    if owner == "compat" and source == "base_dispatch.c":
         roots.add(ROOT / "src/compat/include")
-        roots.update(BASE_DISPATCH_HEADERS)
+        roots.update(ROOT / "src" / library for library in ("lib-nxvm", "lib-win32"))
     if owner == "compat" and source in ORIGINAL_LAYOUT_ADAPTERS:
         roots.update(ROOT / "src" / layer for layer in ("mvdm-host", "non-mvdm"))
     if owner == "compat" and source in C1_LAYOUT_ADAPTERS:
@@ -158,8 +144,7 @@ def verify(graph, products):
                         (directory / (path[1] or path[2])).resolve().is_relative_to(r) and
                         r != ROOT / "src") for r in roots) and not any(
                     (directory / (path[1] or path[2])).resolve() == h.parent
-                    for h in generated_inputs(directory, owner, source) |
-                    (BASE_DISPATCH_HEADERS if owner == "compat" and source == "base_dispatch.c" else set())):
+                    for h in generated_inputs(directory, owner, source)):
                 raise ValueError(f"{graph}/{obj}: unexpected include root {path[0]}")
         if re.search(r'(?:^| )/FI', line):
             raise ValueError(f"{graph}/{obj}: forced header")

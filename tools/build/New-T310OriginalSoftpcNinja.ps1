@@ -1807,9 +1807,15 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $commonBaseFlags + ' /I obj/basesrv')
     $graph.Add('build base-rpc-client-core.lib: lib obj/run16/rpc_client_core.obj obj/common/frontend_rpc_client.obj')
     $graph.Add('build obj/compat/base_dispatch.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/base_dispatch.c')))
-    $graph.Add('  cflags = ' + $libraryFlags + ' /I "' + (NinjaPath (Join-Path $root 'src/compat/include')) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc')) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/internal/base/inc')) + '"')
+    $graph.Add('  cflags = ' + $libraryFlags + ' /I "' + (NinjaPath (Join-Path $root 'src/compat/include')) + '"')
+    $baseRequestSource = [IO.File]::ReadAllText((Join-Path $root 'src/non-mvdm/base/win32/client/vdm.c'))
+    $baseRequestStart = $baseRequestSource.IndexOf('/* DIVERGENCE(NON-MVDM-DIV-BASE-REQUEST)')
+    $baseRequestEnd = $baseRequestSource.IndexOf('#line 304', $baseRequestStart)
+    if ($baseRequestStart -lt 0 -or $baseRequestEnd -le $baseRequestStart) { throw 'Missing original BASE request projection' }
+    [IO.File]::WriteAllText((Join-Path $build 'generated/base-request-owner.inc'),
+        $baseRequestSource.Substring($baseRequestStart, $baseRequestEnd - $baseRequestStart), [Text.UTF8Encoding]::new($false))
     $graph.Add('build obj/tests/base_dispatch.obj: cc ' + (NinjaPath (Join-Path $root 'test/compat/base-dispatch/base_dispatch_test.c')))
-    $graph.Add('  cflags = ' + $libraryFlags + ' /I "' + (NinjaPath (Join-Path $root 'src/compat/include')) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc')) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/internal/base/inc')) + '"')
+    $graph.Add('  cflags = ' + $libraryFlags + ' /I generated' + ' /I "' + (NinjaPath (Join-Path $root 'src/compat/include')) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc')) + '" /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/public/internal/base/inc')) + '"')
     $graph.Add('rule base_dispatch_test_link')
     $graph.Add('  command = link.exe /nologo /subsystem:console /manifest:embed /out:$out $in kernel32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
     $graph.Add('build base-dispatch-test.exe: base_dispatch_test_link obj/tests/base_dispatch.obj obj/compat/base_dispatch.obj')

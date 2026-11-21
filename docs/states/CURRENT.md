@@ -199,18 +199,17 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json):
-94 files,0 audited,94 remaining. Baseline B-to-C1:58 unique/70 relocation
-records,590 compiled header rows,25 search-root rows. Header-only consumers
+94 files,1 completed,93 remaining. Current B-to-C1:58 unique/70 relocation
+records,564 compiled header rows,21 search-root rows. Header-only consumers
 are included; these counts are different evidence kinds, not interchangeable.
-First file:src/compat/base_dispatch.c. Preserve C1/C2 original connections
+Next file:src/compat/base_process.c. Preserve C1/C2 original connections
 and keep B-to-C2 direct/header/search violations at zero.
 S19 cumulative approved non-error mirror increment:+12points/+574lines;
-S20 increment starts at0points/0lines. No new same-thread queues/state machines.
+S20 cumulative increment:-1point/+64lines. No new same-thread queues/state machines.
 
-[S20 P1 first-file review](../../artifacts/mvdm-audit/t483-b-c1-dependencies/base-dispatch-review.json)
-identifies base_dispatch.c as a private ABI-layout consumer:0 direct C1 calls,
-26 header rows and4 search-root rows. B keeps the total entry,8 operations and
-wait-handle ownership; C1 should provide narrow request/command projections
-through the existing transport binding. Implementation, mirror measurement
-and final-code verification remain pending;0/94 files delivered. P1 is
-source-review evidence only: no product edit, build, runtime or release claim.
+[S20 P1 review](../../artifacts/mvdm-audit/t483-b-c1-dependencies/base-dispatch-review.json)
+is implemented by [P2](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p2-delivery.json):
+base_dispatch.c has zero C1 compile/link/search dependencies. B keeps the
+entry/8 dispatches/wait ownership; C1 supplies two synchronous projections.
+Cached full, dual11,140 assertions,5 real RPC wait cases and real Win16/COMMAND
+passed. Mirror vdm.c:20points/505lines ->19points/569lines; R2736 retained.

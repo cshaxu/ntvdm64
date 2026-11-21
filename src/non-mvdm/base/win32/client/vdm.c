@@ -332,6 +332,70 @@ GBTtryexit:;
 #if defined(OPENNT_BASE_CLIENT_VDM_COMMANDS)
 #include "compat/include/base_client.h"
 #include <base_config.h>
+/* DIVERGENCE(NON-MVDM-DIV-BASE-REQUEST): expose original request layout to B. */
+#include "compat/include/base_transport.h"
+void BaseDecodeVdmRequest(void *message, ULONG number, ULONG length, ntvdm_base_request *r)
+{
+    PBASE_API_MSG m = message;
+    ULONG expected = 0;
+    r->status = &m->ReturnValue;
+    switch (number) {
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepCheckVDM):
+        r->operation = ntvdm_base_check; r->payload = &m->u.CheckVDM;
+        expected = sizeof(m->u.CheckVDM); r->error = ERROR_INVALID_DATA; break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepGetNextVDMCommand):
+        r->operation = ntvdm_base_get; r->payload = &m->u.GetNextVDMCommand;
+        expected = sizeof(m->u.GetNextVDMCommand); r->error = ERROR_INVALID_DATA; break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepUpdateVDMEntry):
+        r->operation = ntvdm_base_update; r->payload = &m->u.UpdateVDMEntry;
+        expected = sizeof(m->u.UpdateVDMEntry); r->error = ERROR_INVALID_DATA; break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepExitVDM):
+        r->operation = ntvdm_base_exit; expected = sizeof(m->u.ExitVDM);
+        r->error = ERROR_INVALID_PARAMETER; break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepGetVDMExitCode):
+        r->operation = ntvdm_base_code; expected = sizeof(m->u.GetVDMExitCode);
+        r->error = ERROR_INVALID_PARAMETER; break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepSetReenterCount):
+        r->operation = ntvdm_base_reenter; expected = sizeof(m->u.SetReenterCount);
+        r->error = ERROR_INVALID_PARAMETER; break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepRegisterWowExec):
+        r->operation = ntvdm_base_register; expected = sizeof(m->u.RegisterWowExec); break;
+    case CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX, BasepIsFirstVDM):
+        r->operation = ntvdm_base_first; expected = sizeof(m->u.IsFirstVDM); break;
+    }
+    if (!expected || length != expected) { r->operation = ntvdm_base_unknown; return; }
+    r->error = 0;
+    switch (r->operation) {
+    case ntvdm_base_get:
+        r->requested = m->u.GetNextVDMCommand.VDMState;
+        r->wait = &m->u.GetNextVDMCommand.WaitObjectForVDM; break;
+    case ntvdm_base_exit:
+        r->notify_started = m->u.ExitVDM.ConsoleHandle == OPENNT_WOW_STARTUP_NOOP_CONSOLE;
+        r->wow = r->notify_started || m->u.ExitVDM.ConsoleHandle == (HANDLE)-1;
+        r->value = r->wow ? m->u.ExitVDM.iWowTask : 0;
+        r->wait = &m->u.ExitVDM.WaitObjectForVDM; break;
+    case ntvdm_base_code:
+        r->parent = m->u.GetVDMExitCode.hParent; r->exit_code = &m->u.GetVDMExitCode.ExitCode; break;
+    case ntvdm_base_reenter:
+        r->value = m->u.SetReenterCount.fIncDec;
+        if (r->value != INCREMENT_REENTER_COUNT && r->value != DECREMENT_REENTER_COUNT)
+            r->error = ERROR_INVALID_PARAMETER;
+        break;
+    case ntvdm_base_register: r->value = (ULONG)(ULONG_PTR)m->u.RegisterWowExec.hwndWowExec; break;
+    case ntvdm_base_first: r->first = &m->u.IsFirstVDM.FirstVDM; break;
+    }
+}
+void BaseReadVdmCommandState(const ntvdm_base_request *r, LONG status, ntvdm_base_command_state *state)
+{
+    PBASE_GET_NEXT_VDM_COMMAND_MSG command = r->payload;
+    state->observe = (status == STATUS_SUCCESS || (status == STATUS_NO_MEMORY &&
+        (command->VDMState & RETURN_ON_NO_COMMAND))) && !command->WaitObjectForVDM &&
+        (command->CmdLen || (command->VDMState & RETURN_ON_NO_COMMAND)) &&
+        !(r->requested & (ASKING_FOR_ENVIRONMENT | ASKING_FOR_PIF | ASKING_FOR_WOW_BINARY));
+    state->activate = status == STATUS_SUCCESS && !command->WaitObjectForVDM &&
+        command->CmdLen && !(command->VDMState & ASKING_FOR_ENVIRONMENT);
+}
+
 #line 304
 VOID
 APIENTRY

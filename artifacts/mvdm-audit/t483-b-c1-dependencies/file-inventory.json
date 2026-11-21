@@ -4,17 +4,17 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 0,
+    "completed": 1,
     "direct_unique": 58,
     "direct_raw": 70,
-    "compiled_header_rows": 590,
-    "private_search_root_rows": 25
+    "compiled_header_rows": 564,
+    "private_search_root_rows": 21
   },
   "files": [
     {
       "id": "BC1F001",
       "file": "src/compat/base_dispatch.c",
-      "status": "ownership/ABI review complete; implementation and verification pending",
+      "status": "completed in verified P2 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -337,7 +337,8 @@
           "product": "run16.exe"
         }
       ],
-      "review": "base-dispatch-review.json"
+      "review": "base-dispatch-review.json",
+      "delivery": "p2-delivery.json"
     },
     {
       "id": "BC1F002",

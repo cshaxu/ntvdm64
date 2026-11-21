@@ -582,7 +582,7 @@ DWORD NtvdmBaseConnectExecution(DWORD milliseconds)
 {
     static const ntvdm_base_transport transport = {
         transport_status, check_command, get_command, update_command, exit_command,
-        exit_code_command, reenter_command, register_wow, first_vdm
+        exit_code_command, reenter_command, register_wow, first_vdm, BaseDecodeVdmRequest, BaseReadVdmCommandState
     };
     DWORD error=OpenNtBaseClientConnectCurrentTimeout(milliseconds);
     if (!error) {

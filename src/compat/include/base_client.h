@@ -12,6 +12,9 @@
 #include <vdmapi.h>
 #include <nt_event_declarations.h>
 #include "wow_startup_exit.h"
+#include "base_transport.h"
+void BaseDecodeVdmRequest(void *, ULONG, ULONG, ntvdm_base_request *);
+void BaseReadVdmCommandState(const ntvdm_base_request *, LONG, ntvdm_base_command_state *);
 #ifndef STATUS_PORT_DISCONNECTED
 #define STATUS_PORT_DISCONNECTED ((NTSTATUS)0xC0000037L)
 #endif
