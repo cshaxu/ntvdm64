@@ -1423,3 +1423,6 @@ to the sequential successor packets.
 - [T483 S19 closure](evidence/m0-t483-s19-closure.md).
 
 - [T483 S20 closure](evidence/m0-t483-s20-closure.md).
+
+[T483 final closure](../history/m0-t483-closure.md) indexes S1-S21, retained
+decisions and the [S21 identity verification](evidence/t483-closure/result.json).

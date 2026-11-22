@@ -1,0 +1,67 @@
+# Project Status
+
+## Current Work
+
+**Active: M0 T483 S21** (Ordinary Mode). Owner authorized final T483
+verification and closure on 2026-11-22. No successor T is admitted.
+
+## Active Packet
+
+| Field | Record |
+| --- | --- |
+| Identifier Mode | M0 T483 S21, Ordinary Mode, documentation-only closure. |
+| Admission And Approval | Owner: 好自行设定目标 用于检查并收口本t. |
+| Original Owner Request | Check and close T483, reusing verified final product evidence; do not admit next T. |
+| Objective | Reconcile S1-S20 evidence and residual dispositions, close T483, commit/push a clean workspace. |
+| Reference Baseline | S20 P85 9e7eb19c0; Full20/20 and dual11 published package100b16d9-992d-4e2c-8d99-66a4e891dd26. |
+| Files And ABI Surface | Status, Queue stale admission prose, proposal/plan supersession, task history and debt links; no product ABI/source changes. |
+| Applicable Rules | Execution evidence-only delivery; document authority separation; original source and guest unchanged. |
+| Verification | Verify recorded source identities, 22 publication hashes and Full receipt; S evidence/link coverage; documentation/link gates and git diff check. |
+| Expected Markers | S1-S20 closure index, explicit retained decisions/debt, verified final package identity, clean pushed closure commit. |
+| Asset Needs | Existing P85 receipts and published assets only. |
+| Non-goals | No fresh mirror audit, product repair, rebuild, retest or redeployment of unchanged products; no next T admission. |
+| Similar-Issue Sweep | Stale active/planned statements in task plans, missing closure indexes and orphaned retained findings. |
+| Reporting Requirements | State evidence reuse and known limits; distinguish reviewed/approved differences from unresolved repairs. |
+| Stop Conditions | Product identity mismatch or unsupported completion claim must be investigated; preserve unrelated changes. |
+| Exit Criteria | All admitted scopes have bounded dispositions; gates pass, closure committed/pushed and workspace clean. |
+
+## Current Technical Baseline
+
+[S20 closure](../etc/evidence/m0-t483-s20-closure.md) records P85:
+94/94 B-to-C1 files complete; [S19](../etc/evidence/m0-t483-s19-closure.md)
+retains38/38 B-to-C2 completion. Private compiled headers/search roots and
+linked implementation dependencies from B to C1/C2 are zero. S18 preserves
+original C1/C2 connections, including five WOW APIs/seven relocation rows.
+Legal synchronous callbacks and named-image imports remain explicit.
+
+P85 package100b16d9-992d-4e2c-8d99-66a4e891dd26 is published to assets/release
+and O:/winnt/system32:11 images,22 matching hashes. Cached full build,
+targeted provider/lifecycle and real guest tests, strict library boundary,
+and Full under complete Windows Userenv passed. Final delivery is recorded
+by the containing P85 commit/push. No original guest was changed or rebuilt.
+
+Non-error mirror delta: P85+4points/+244lines; S20 cumulative+15/+815;
+S19 cumulative+12/+574. Approved changes remain in the mirror decision ledger.
+
+Inherited agent environment still triggers the pre-existing guest startup
+failure on both P84 and P85; complete Userenv succeeds. The failed attempt and
+comparison remain evidence. No new environment or Shell repair is claimed.
+Full is not an assertion that every guest Windows OS matrix was rerun.
+
+[Per-file inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json),
+[final delivery](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p85-window-control-closure.json),
+[coverage and limits](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p85-evidence/coverage-disposition.json),
+and [full prior chronology](../../artifacts/mvdm-audit/t483-b-c1-dependencies/current-before-p85.txt).
+
+## Recent M0 Closures
+
+- [S18](../etc/evidence/m0-t483-s18-closure.md).
+- [S19](../etc/evidence/m0-t483-s19-closure.md).
+- [S20](../etc/evidence/m0-t483-s20-closure.md).
+- [T482](../history/m0-t482-closure.md).
+- [T481](../history/m0-t481-closure.md).
+
+## Recent Governance
+
+S20 retires transitional B-to-C private compilation exceptions; prior approvals
+and complete execution chronology remain indexed in the S20 closure.

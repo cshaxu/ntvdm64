@@ -1,5 +1,12 @@
 # T483 compatibility implementation migration plan
 
+## Final disposition — 2026-11-22
+
+[T483 is closed](../../history/m0-t483-closure.md). The admission, planned-S tables and temporary
+exceptions below are retained history, superseded by the indexed S outcomes
+and current architecture rules. They do not admit further work or approve
+all remaining mirror decisions.
+
 ## Authority and objective
 
 Owner approval on 2026-11-19 directs updating the current proposal, creating

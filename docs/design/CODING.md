@@ -10,7 +10,8 @@ the selected original non-MVDM sources at their original relative paths.
 Three colliding headers retain the previously selected, registered subsets;
 the unselected full variants remain available in Git history and provenance.
 `src/compat` contains shared project-owned historical ABI bindings and the
-owner-admitted original-subsystem adapters. The earlier B-to-C exceptions are transitional S19/S20 cleanup obligations.
+owner-admitted original-subsystem adapters. The earlier private B-to-C exceptions were removed in S19/S20; required
+C operations use the reviewed B-owned synchronous provider contracts.
 The target order is B compat, C1 non-mvdm, C2 mvdm-host: compat retains
 independent mechanisms and owns typed callback contracts for required C1/C2
 providers. Original layouts and algorithms remain with their original owners.

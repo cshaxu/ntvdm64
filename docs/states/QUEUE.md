@@ -69,9 +69,9 @@ into main; its dedicated worktree has been deleted. The
 limitations for traceability. It is not an additional queued task, and its
 historical inventory coverage does not create pending work. The candidates above retain their current scope and order.
 
-The mirror-diff audit/minimization candidate is admitted in a dedicated
-worktree and is no longer pending here. Its [proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md)
-retains the scope; the remaining candidates preserve their relative order.
+The mirror-diff audit/minimization and component ownership task is
+[closed](CURRENT.md#recent-m0-closures). Its [proposal](../proposals/proposal-unconnected-mirror-diff-cleanup-001.md)
+is historical; retained decisions remain explicit. Remaining candidates keep their order.
 
 The former windowed DOS text candidate was handled by [closed multitask task](CURRENT.md#recent-m0-closures); it is not a separate queued task.
 
@@ -79,4 +79,4 @@ The guest multitask I/O completion candidate was handled by [closed multitask ta
 
 The restart-to-MS-DOS investigation is [closed with explicit transfer](CURRENT.md#recent-m0-closures)
 to the Windows XP baseline upgrade above; it is not a separate queued package.
-The implementation-minimization review is now admitted through [Current](CURRENT.md).
+The implementation-minimization review is closed with [its closure](CURRENT.md#recent-m0-closures).

@@ -1,5 +1,12 @@
 # Mirror difference register migration
 
+## Final disposition — 2026-11-22
+
+[T483 is closed](../../history/m0-t483-closure.md). The admission, planned-S tables and temporary
+exceptions below are retained history, superseded by the indexed S outcomes
+and current architecture rules. They do not admit further work or approve
+all remaining mirror decisions.
+
 Current execution follows the owner-approved
 [remaining-diff re-audit](../../../artifacts/mvdm-audit/t483-remaining-reaudit/README.md).
 The category execution below is historical after S5 P2. The old D-register

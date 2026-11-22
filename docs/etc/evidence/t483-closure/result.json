@@ -1,0 +1,255 @@
+{
+  "packet": "M0 T483 S21 P1",
+  "kind": "documentation-only closure verification; no rebuild/retest/republication",
+  "baseline": "9e7eb19c059a3ba8e55c73c6943842416932b8d2",
+  "product_source_build_test_asset_identity": "Unchanged from verified P85; recorded modified-source hashes rechecked individually.",
+  "publication": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\VCDEX.DLL",
+      "sha256": "2a239230c40c79aeaf38f7743214c37a22ca99dc200a4db5a9519d4d57a6bc3f"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\run16.exe",
+      "sha256": "5633f12691d6c1cc9d34198fec75ce68aea0a2080af42ee87d9af5d56f8852ed"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntsrv.exe",
+      "sha256": "da12d2a43a11c6cc92cd1d676c42bfa43b43e13a3a272ad56f32083e72cfa587"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntcon.exe",
+      "sha256": "f6580a219cc332e6d03e2399e9083a7f61b42fb4c5f367dc6617b364cf47019d"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvdm.exe",
+      "sha256": "db9e37e2f41309db75746ec3c08b65489a07c65248ccaf8fda07efba604543dd"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvwm.exe",
+      "sha256": "4a3e0fc34af71d10b97b14542328ece672fff5a6f7912c223754575757f55a23"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntmon.exe",
+      "sha256": "e6df4761273edb7875767b5d8f53300773d2bc1ab098659de0b10f6b665ed066"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\WOW32.DLL",
+      "sha256": "66cf16fec12758aa7d6db4980c43acf9f895bc61f357a6c1a20e1dca84b4d34e"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\VDMREDIR.DLL",
+      "sha256": "175c6b34a6263be3455c2aae153275d7a3643770e184917cce95b6d6e3353e72"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\nthook32.dll",
+      "sha256": "ca7524f2c6b3718d2e90fea5bbad7405e546efca07e264a3b7135b46dee79441"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\nthook64.dll",
+      "sha256": "791ea39f4f647215cccec8c5bf1b85d63ceae59ab801347b508fa6b73abfdb49"
+    },
+    {
+      "path": "O:\\winnt\\system32\\VCDEX.DLL",
+      "sha256": "2a239230c40c79aeaf38f7743214c37a22ca99dc200a4db5a9519d4d57a6bc3f"
+    },
+    {
+      "path": "O:\\winnt\\system32\\run16.exe",
+      "sha256": "5633f12691d6c1cc9d34198fec75ce68aea0a2080af42ee87d9af5d56f8852ed"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntsrv.exe",
+      "sha256": "da12d2a43a11c6cc92cd1d676c42bfa43b43e13a3a272ad56f32083e72cfa587"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntcon.exe",
+      "sha256": "f6580a219cc332e6d03e2399e9083a7f61b42fb4c5f367dc6617b364cf47019d"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntvdm.exe",
+      "sha256": "db9e37e2f41309db75746ec3c08b65489a07c65248ccaf8fda07efba604543dd"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntvwm.exe",
+      "sha256": "4a3e0fc34af71d10b97b14542328ece672fff5a6f7912c223754575757f55a23"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntmon.exe",
+      "sha256": "e6df4761273edb7875767b5d8f53300773d2bc1ab098659de0b10f6b665ed066"
+    },
+    {
+      "path": "O:\\winnt\\system32\\WOW32.DLL",
+      "sha256": "66cf16fec12758aa7d6db4980c43acf9f895bc61f357a6c1a20e1dca84b4d34e"
+    },
+    {
+      "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+      "sha256": "175c6b34a6263be3455c2aae153275d7a3643770e184917cce95b6d6e3353e72"
+    },
+    {
+      "path": "O:\\winnt\\system32\\nthook32.dll",
+      "sha256": "ca7524f2c6b3718d2e90fea5bbad7405e546efca07e264a3b7135b46dee79441"
+    },
+    {
+      "path": "O:\\winnt\\system32\\nthook64.dll",
+      "sha256": "791ea39f4f647215cccec8c5bf1b85d63ceae59ab801347b508fa6b73abfdb49"
+    }
+  ],
+  "package_ids": [
+    "100b16d9-992d-4e2c-8d99-66a4e891dd26"
+  ],
+  "Full_reused": {
+    "gates": 20,
+    "passed": 20,
+    "elapsed_ms": 416910,
+    "scope": "Complete Windows Userenv; inherited agent environment limitation retained."
+  },
+  "subtask_evidence": {
+    "1": "docs/etc/evidence/m0-t483-s1-closure.md",
+    "2": "docs/etc/evidence/m0-t483-s2-closure.md",
+    "3": "docs/etc/evidence/m0-t483-s3-closure.md",
+    "4": "docs/etc/evidence/m0-t483-s4-closure.md",
+    "5": "docs/etc/evidence/m0-t483-s5-closure.md",
+    "6": "docs/etc/evidence/m0-t483-s6-closure.md",
+    "7": "docs/etc/evidence/m0-t483-s7-closure.md",
+    "8": "docs/etc/evidence/m0-t483-s8-closure.md",
+    "9": "artifacts/t483-s9-non-mirror-audit/sequential.md",
+    "10": "docs/etc/evidence/m0-t483-s10-components.md",
+    "11": "docs/etc/evidence/m0-t483-s11-layer-boundaries.md",
+    "12": "docs/etc/evidence/m0-t483-s12-closure.md",
+    "13": "docs/etc/evidence/m0-t483-s13-implementation-closure.md",
+    "14": "docs/etc/evidence/m0-t483-s14-closure.md",
+    "15": "docs/etc/evidence/m0-t483-s15-closure.md",
+    "16": "docs/etc/evidence/m0-t483-s16-closure.md",
+    "17": "docs/etc/evidence/m0-t483-s17-closure.md",
+    "18": "docs/etc/evidence/m0-t483-s18-closure.md",
+    "19": "docs/etc/evidence/m0-t483-s19-closure.md",
+    "20": "docs/etc/evidence/m0-t483-s20-closure.md"
+  },
+  "dependency_inventories": {
+    "c1": {
+      "files": 94,
+      "completed": 94,
+      "direct_unique": 0,
+      "direct_raw": 0,
+      "compiled_header_rows": 0,
+      "private_search_root_rows": 0
+    },
+    "c2": {
+      "total": 38,
+      "completed": 38,
+      "remaining": 0,
+      "direct_C2_unique_before": 337,
+      "direct_C2_unique_after": 0,
+      "direct_C2_records_before": 606,
+      "direct_C2_records_after": 0
+    }
+  },
+  "mirror_ledgers": {
+    "pending-decisions.csv": {
+      "rows": 1583,
+      "unique_ids": 1563,
+      "duplicate_ids": [
+        "T483-R2658,R2666"
+      ],
+      "sha256": "a0bbc1d2c485879c30673f35db9fc66cac500cd866e67bfcfc330c3f29e80d34",
+      "statuses": {
+        "pending-owner-decision-source-proof": 747,
+        "pending-owner-decision-source-and-deployment-proof": 2,
+        "pending-owner-decision-source-and-runtime-proof": 130,
+        "pending-owner-decision-source-abi-proof": 5,
+        "qualified-pending-owner-decision": 161,
+        "pending-owner-decision-abi-proof": 48,
+        "pending-owner-decision-source-and-native-span-proof": 1,
+        "pending-owner-decision-source-and-CCPU-mapping-proof": 1,
+        "pending-owner-decision-source-and-fixture-proof": 20,
+        "pending-owner-decision-source-qualified": 31,
+        "pending-owner-decision-source-and-test-proof": 15,
+        "pending-owner-decision-source-and-control-proof": 6,
+        "pending-owner-decision-source-and-compile-proof": 4,
+        "pending-owner-decision-source-and-generator-proof": 1,
+        "qualified-pending-owner": 134,
+        "pending-owner-decision-source-and-prior-runtime-proof": 6,
+        "pending-owner-decision-compiler-proof": 1,
+        "pending-owner-decision-actual-compiler-proof": 1,
+        "pending-owner-decision-source-and-negative-control": 3,
+        "pending-owner-decision-source-and-negative-controls": 2,
+        "pending-owner-decision-prior-runtime-proof-local-minimization": 1,
+        "pending-owner-decision-evidence-qualified": 63,
+        "pending-owner-decision-compile-proof": 5,
+        "pending-owner-decision-source-runtime-proof": 2,
+        "pending-owner-decision-qualified": 3,
+        "pending-owner-decision-source-and-compiler-proof": 22,
+        "pending-owner-decision-source-and-object-proof": 1,
+        "pending-owner-decision": 37,
+        "pending-owner-decision-compile-source-proof": 6,
+        "pending-owner-decision-compile-link-proof": 2,
+        "pending-owner-decision-source-and-build-proof": 24,
+        "pending-owner-decision-source-and-link-proof": 1,
+        "supplemental-verified-published-pending-owner": 1,
+        "minimized-pending-owner": 1,
+        "minimized-pending-owner-decision": 14,
+        "pending-owner-decision-partial-source-proof": 17,
+        "pending-owner-decision-integration-contract": 2,
+        "pending-owner-metric-tradeoff-not-retention-approval": 1,
+        "pending-owner-decision-minimized-source-proof": 1,
+        "source-qualified-pending-owner;batch-verified-published": 21,
+        "owner-approved-implemented-verified": 3,
+        "owner-approved-verified": 32,
+        "owner-approved-retain": 2,
+        "standing-approved; verified S19 P5": 1,
+        "pending-owner-decision-runtime-proof": 1
+      }
+    },
+    "review-register.csv": {
+      "rows": 2657,
+      "unique_ids": 2657,
+      "duplicate_ids": [],
+      "sha256": "919f0963591f55bcca921d34a9120fe4d691cc08f0980c7246abcb8f69c8aaf9",
+      "statuses": {
+        "completed-owner-approved-retain": 24,
+        "restored-verified-published": 876,
+        "pending-decision": 401,
+        "restored": 5,
+        "completed-restored-original": 17,
+        "pending-owner-decision-source-and-runtime-proof": 63,
+        "reviewed-evidenced-pending-owner": 25,
+        "qualified-pending-owner-decision": 305,
+        "pending-owner-decision-source-proof": 216,
+        "reviewed-pending-owner-decision": 4,
+        "completed-original-restored": 9,
+        "restored-original": 40,
+        "completed-qualified-pending-owner": 158,
+        "pending-owner-decision-qualified": 3,
+        "restored-delivered": 5,
+        "reviewed": 45,
+        "original-restored-and-verified": 1,
+        "qualified-pending-owner": 50,
+        "pending-owner-decision": 37,
+        "source-qualified-pending-owner-decision": 58,
+        "restored-confirmed-published": 86,
+        "minimized-pending-owner-decision": 103,
+        "approved-policy": 4,
+        "retain-exclusion-policy": 8,
+        "reviewed-qualified-pending-owner": 18,
+        "completed-exclusion-policy": 9,
+        "reviewed-policy-exclusion": 14,
+        "policy-exclusion-confirmed": 4,
+        "pending-owner-decision-source-and-build-proof": 20,
+        "reviewed-pending-owner": 15,
+        "owner-approved-implemented-verified": 2,
+        "owner-approved-verified": 10,
+        "owner-approved; verified in S19 P1": 2,
+        "standing-approved; verified S19 P5": 1,
+        "verified-owner-approved-retain": 2,
+        "approved-implementation-retained-for-revisit": 17
+      }
+    }
+  },
+  "count_limit": "Ledger rows are decision records, not current mirror hunks, file counts or all approved retentions. S8 census is historical; no fresh global mirror census performed.",
+  "documentation_verification": {
+    "governance": "passed",
+    "relative_links": "passed",
+    "diff_check": "passed",
+    "product_changes": false,
+    "limitations": "This is document/identity reconciliation, not a new complete mirror audit or runtime test."
+  }
+}
