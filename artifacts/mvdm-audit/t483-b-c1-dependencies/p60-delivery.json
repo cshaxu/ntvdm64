@@ -1,0 +1,35 @@
+{
+  "packet": "M0 T483 S20 P60",
+  "baseline": "3e3f95ea9",
+  "files_completed": [
+    "BC1F071"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 45,
+    "remaining": 49,
+    "B_C1_unique": 14,
+    "B_C1_raw": 21,
+    "B_C1_compiled_headers": 201,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 function direct unique/raw unchanged 14/21; compiled headers 207 to 201. BC1F071 has no remaining C1 header records or direct function links.",
+  "implementation": "Replaced private NT include with platform SDK declarations; native menu operations, B client publishing, task scope and rollback unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "c4e33298-412e-44b5-9c19-b82309a87aed",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "real CCPU menu resource and lifecycle",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-menu-native",
+  "limitations": [
+    "Data-symbol scan incomplete beyond scoped common externals",
+    "Full suite required at S20 closure"
+  ]
+}

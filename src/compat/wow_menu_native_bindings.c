@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_menu_native_bindings.h"
 #include "wow_menu_client_bindings.h"
 #include "compat/include/wow_user_runtime.h"
