@@ -1,0 +1,38 @@
+{
+  "packet": "M0 T483 S20 P56",
+  "baseline": "fbf36a8f9",
+  "files_completed": [
+    "BC1F066",
+    "BC1F067"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 42,
+    "remaining": 52,
+    "B_C1_unique": 14,
+    "B_C1_raw": 21,
+    "B_C1_compiled_headers": 225,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 function direct unique/raw unchanged 14/21; compiled headers 231 to 225. Both files have no remaining C1 header records or direct function links.",
+  "implementation": "BC1F066 already uses lifecycle-scoped C2 idle callbacks installed by WOW32; actual provider and native forwarding verified. BC1F067 replaces private NT include with SDK declarations, retaining original B input-membership implementation and native attach lifecycle.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "45bdd522-b1bc-4884-80f5-ba15697a2df8",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "idle original provider, nested and native chain fixture",
+    "input membership, native attach, allocation failure, retirement and fail-fast fixture",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "test_correction": "Input fixture initially failed to compile because its standalone command omitted src/compat/include. Added that existing production include directory and reran successfully.",
+  "evidence": "build/t483-s20-input-group and build/t483-s20-idle-hook",
+  "limitations": [
+    "Data-symbol scan incomplete beyond scoped common externals",
+    "Full suite required at S20 closure"
+  ]
+}

@@ -28,7 +28,7 @@ try{
   "$repo/src/compat/include/wow_task_order_bindings.h"|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Copy-Item $originalObject "$root/original-input.obj"
  foreach($spec in ,@('fixture',$fixture)){
-  $line='/d /s /c ""'+$driver+'" cl.exe /nologo /c /MT /O2 /Gz /W4 /WX /I"'+$repo+'/src" /I"'+$repo+'/src/wow32-dll/include" /Fo"'+$root+'/'+$spec[0]+'.obj" "'+$spec[1]+'""'
+  $line='/d /s /c ""'+$driver+'" cl.exe /nologo /c /MT /O2 /Gz /W4 /WX /I"'+$repo+'/src" /I"'+$repo+'/src/compat/include" /I"'+$repo+'/src/wow32-dll/include" /Fo"'+$root+'/'+$spec[0]+'.obj" "'+$spec[1]+'""'
   Owned ('compile-'+$spec[0]) $env:ComSpec $line 120
  }
  $line='/d /s /c ""'+$driver+'" link.exe /nologo /MACHINE:X86 /OPT:REF /OUT:"'+$root+'/fixture.exe" "'+$root+'/fixture.obj" "'+$root+'/original-input.obj" kernel32.lib user32.lib"'

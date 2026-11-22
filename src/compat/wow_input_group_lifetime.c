@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_input_group_lifetime.h"
 
 /* ADAPTER-WOW-084: original input.c computes connected membership, not modern
