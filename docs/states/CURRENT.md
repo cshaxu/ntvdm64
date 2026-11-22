@@ -273,3 +273,8 @@ C dialog/getset layouts remain in their owners. Header rows476->472; direct55
 and files21/94 remain unchanged. Cached full, dual11, dialog/control and actual
 Win16/COMMAND passed. Mirror0points/+8lines R2751; cumulative+2points/+210lines.
 [P15 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p15-delivery.json).
+
+P16 owner-requested Full: cached x86/x64/reference build and dual11 publication
+passed, package dd2efa9f-ff51-4e23-a11c-c6a5ce871ee2. Full selected gates
+passed, including actual DOS4GW/NESticle menu and Escape hide/restore.
+No source change; S20 remains active. [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p16-full-delivery.json).

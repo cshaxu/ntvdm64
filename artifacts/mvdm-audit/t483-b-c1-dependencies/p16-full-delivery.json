@@ -1,0 +1,10 @@
+{
+  "packet": "M0 T483 S20 P16",
+  "source_commit": "6cdfa2bbd",
+  "package": "dd2efa9f-ff51-4e23-a11c-c6a5ce871ee2",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images in assets/release and O:/winnt/system32; 22 hashes verified",
+  "full": "PASS Full selected gates; real NESticle menu and Escape hide/restore",
+  "evidence": "build/t483-s20-full-owner/full",
+  "scope": "no source changes; S20 remains active"
+}
