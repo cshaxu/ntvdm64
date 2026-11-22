@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 69,
+    "completed": 70,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 60,
+    "compiled_header_rows": 58,
     "private_search_root_rows": 0
   },
   "files": [
@@ -5701,7 +5701,7 @@
     {
       "id": "BC1F058",
       "file": "src/compat/wow_edit_call_bindings.c",
-      "status": "partially addressed in P49: private NT include removed; original USER layout and WOW ABI headers remain",
+      "status": "completed in verified P73 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -5814,7 +5814,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p49-delivery.json"
+      "progress_evidence": "p49-delivery.json",
+      "p73_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p73-edit-boundary-closure.json"
     },
     {
       "id": "BC1F059",

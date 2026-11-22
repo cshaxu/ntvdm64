@@ -5,6 +5,8 @@ struct tagWND;
 typedef void (WINAPI *wow_control_state_provider)(struct tagWND *, UINT);
 typedef struct wow_control_state_providers {
     wow_control_state_provider set, clear;
+    UINT private_flag;
+    void (WINAPI *change_private)(struct tagWND *, BOOL);
 } wow_control_state_providers;
 BOOL WINAPI wow_control_state_bind(const wow_control_state_providers *);
 void WINAPI wow_control_set_window_state(struct tagWND *, UINT);

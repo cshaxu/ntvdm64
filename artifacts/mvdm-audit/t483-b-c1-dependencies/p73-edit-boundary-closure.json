@@ -1,0 +1,115 @@
+{
+  "packet": "M0 T483 S20 P73",
+  "baseline": "257d2a28c99fd6bd2ae0b3482916ec0dcb4218fa",
+  "status": "verified production batch; commit/push in Git history",
+  "files_completed": [
+    "src/compat/wow_edit_call_bindings.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 70,
+    "remaining": 24,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 58,
+    "B_C1_sources": 19,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "Existing control-state binding receives original private flag and a C-owned same-object bit operation. B retains native state mutation, validation, refresh and error policy. No copied layout, new provider table, queue or state machine.",
+  "lifetime": "Static provider bound before USER initialization; new operation required at registration. Private-state path validates the existing object then invokes a no-callout C leaf. Ordinary state path and refresh ordering unchanged. Tests cover set/clear/no-op, invalid object and native failures.",
+  "mirror": {
+    "delta_points": 2,
+    "delta_lines": 0,
+    "before": {
+      "points": 11,
+      "lines": 677
+    },
+    "after": {
+      "points": 13,
+      "lines": 677
+    },
+    "physical_insertion": 6,
+    "proof": "Six-line original-layout leaf inserted before existing #line245; removing it restores exact HEAD bytes. No other mirror or guest edits. Normalized alignment is not original restoration.",
+    "approval": "Standing below5 lines and at most2 points; pending R2758"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "fdaf0751-0e3c-4eab-82bc-d9cc48337332",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "build": {
+    "started": "2026-11-22T09:46:11.9549289+00:00",
+    "pid": 22244,
+    "exit": 0,
+    "finished": "2026-11-22T09:47:44.4103049+00:00"
+  },
+  "boundary_tests": {
+    "exit": 0,
+    "started": "2026-11-22T09:49:06.0103358+00:00",
+    "pid": 5416,
+    "finished": "2026-11-22T09:49:21.8542233+00:00"
+  },
+  "targeted_cases": [
+    {
+      "exit": 0,
+      "started": "2026-11-22T09:49:21.9444343+00:00",
+      "case": "window-borrow",
+      "finished": "2026-11-22T09:49:36.1020459+00:00"
+    },
+    {
+      "exit": 0,
+      "started": "2026-11-22T09:49:36.1055838+00:00",
+      "case": "native-creation",
+      "finished": "2026-11-22T09:49:49.5276383+00:00"
+    },
+    {
+      "exit": 0,
+      "started": "2026-11-22T09:49:49.5300672+00:00",
+      "case": "class-lifetime",
+      "finished": "2026-11-22T09:50:01.4410778+00:00"
+    },
+    {
+      "exit": 0,
+      "started": "2026-11-22T09:50:01.4422748+00:00",
+      "case": "task-lifecycle",
+      "finished": "2026-11-22T09:50:13.5413659+00:00"
+    },
+    {
+      "exit": 0,
+      "started": "2026-11-22T09:50:13.5427090+00:00",
+      "case": "process-retirement",
+      "finished": "2026-11-22T09:50:25.2860310+00:00"
+    },
+    {
+      "exit": 0,
+      "started": "2026-11-22T09:50:25.2872804+00:00",
+      "case": "init-notification",
+      "finished": "2026-11-22T09:50:38.5353692+00:00"
+    }
+  ],
+  "verification": {
+    "exit": 0,
+    "started": "2026-11-22T09:49:05.8724728+00:00",
+    "pid": 5416,
+    "finished": "2026-11-22T09:51:24.2675635+00:00"
+  },
+  "source_identity": {
+    "src/compat/include/wow_control_state_provider.h": "3e936f76e682b4bea1958a1eca2436ab49851be286262405935f1391c8717ee4",
+    "src/compat/wow_edit_call_bindings.c": "133a842158b098be20fffdc3ac40fc97976f5c0d53958738a3079f1a7677a1fd",
+    "src/non-mvdm/windows/core/ntuser/kernel/getset.c": "c39120e1ce72cfa3ede010f8231758fb1b35ce0af9ad40cbfed46da14111091d",
+    "test/adapter-mvdm-host-out/wow/wow_edit_call_fixture.c": "88e2e5e98a539b021a04ec57087c639ca7505d1dd512846283a2dda0fff8cf3d",
+    "test/mvdm-host/wow_page_domain_fixture.c": "b5d641f3bc932f899187700c075758845a4ad71cf719322add8e4b5e3aa60cad",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "63da6fe9f8fd766fd8afaa41913616c3df6cd2a19495fbaf04e7878a0171a35c"
+  },
+  "evidence_root": "build\\t483-s20-p73-control-state",
+  "limitations": [
+    "24 inventory files remain; S20 not closed.",
+    "Existing data-symbol/assembly/linkmap coverage gaps and Shell diagnostic limitation retained.",
+    "Class storage candidate still requires approval."
+  ]
+}

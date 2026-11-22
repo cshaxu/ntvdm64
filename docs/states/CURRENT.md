@@ -114,14 +114,14 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P72 final compiled-product review leaves 69 of 94
+is authoritative for individual files and evidence. P73 final compiled-product review leaves 70 of 94
 files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-60 compiled-header rows across 20 sources and zero private search roots. B-to-C2 has zero
+58 compiled-header rows across 19 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
 
-S20 cumulative non-error mirror delta is +5 points/+290 lines; S19 retained
+S20 cumulative non-error mirror delta is +7 points/+290 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
 tests. The P62 package is 71882068-22ca-4a1a-8a84-20c8d7f7cb5c.
@@ -203,3 +203,9 @@ opaque pointer declarations. Remaining25 files; header rows64->60. No mirror
 or guest change. Cached full build, dual11 publication, three boundary/six
 lifecycle cases and published USER16/COMMAND passed.
 [P72 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p72-edit-boundary-closure.json).
+
+P73 completes EDIT call boundary using the existing control-state provider.
+Remaining24 files; header rows60->58. Mirror +2points/0normalized lines
+(actual insertion6lines), pending R2758. No guest change. Cached full build, dual11 publication, three boundary/six
+lifecycle cases and published USER16/COMMAND passed.
+[P73 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p73-edit-boundary-closure.json).

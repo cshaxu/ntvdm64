@@ -6,7 +6,6 @@
 #include "wow_list_native_bindings.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_window_client_state_bindings.h"
-#include "wow_user_client_view_layout.h"
 #include "wow_control_extent_bindings.h"
 #include "wow_user_borrow_scope.h"
 
@@ -15,7 +14,7 @@ static const wow_control_state_providers *state_provider;
 BOOL WINAPI wow_control_state_bind(const wow_control_state_providers *provider)
 {
     const wow_control_state_providers *previous;
-    if (!provider || !provider->set || !provider->clear) {
+    if (!provider || !provider->set || !provider->clear || !provider->change_private) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&state_provider,
@@ -54,11 +53,11 @@ BOOL WINAPI wow_control_set_fnid(HWND window, WORD fnid)
     return fnid_provider(window, fnid);
 }
 
-BOOL WINAPI wow_edit_NtUserDefSetText(HWND window, const LARGE_STRING *text)
+BOOL WINAPI wow_edit_NtUserDefSetText(HWND window, const struct _LARGE_STRING *text)
 {
     DWORD error = GetLastError();
     wow_user_native_call call;
-    PWND state = wow_window_client_validate_hwnd(window);
+    struct tagWND *state = wow_window_client_validate_hwnd(window);
     BOOL result = FALSE;
     if (!state || !wow_user_borrow_client_state(window, state)) return FALSE;
     if (!wow_user_native_call_begin(&call, window)) return FALSE;
@@ -113,12 +112,12 @@ static VOID change_window_state(HWND window, UINT flags, BOOL set)
      * original DefWindowProcWorker color selection. It is not a modern
      * USER flag: retain it in the same original WND that clmsg.c reads.
      * No native mutation or observation refresh belongs to this operation. */
-    if (flags == WFWIN40COMPAT) {
-        PWND state = wow_window_client_validate_hwnd(window);
+    if (!state_provider) RaiseFailFastException(NULL, NULL, 0);
+    if (flags == state_provider->private_flag) {
+        struct tagWND *state = wow_window_client_validate_hwnd(window);
         if (!state)
             wow_user_native_call_failed("control-private-state", GetLastError());
-        if (set) SetWF(state, WFWIN40COMPAT);
-        else ClrWF(state, WFWIN40COMPAT);
+        state_provider->change_private(state, set);
         return;
     }
     /* Original client.c owns TestWF/no-op policy. The audited native leaves

@@ -242,8 +242,10 @@ BOOL WINAPI fixture_ClientDrawState(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, 
 #pragma comment(linker, "/alternatename:_fixture_ClearWindowState@8=_ClearWindowState@8")
 #pragma comment(linker, "/alternatename:_fixture_GetControlBrush@12=_xxxGetControlBrush@12")
 #pragma comment(linker, "/alternatename:_fixture_ClientDrawState@40=_ClientDrawState@40")
+void WINAPI wow_original_change_compat_state(struct tagWND *, BOOL);
 static const wow_control_state_providers fixture_control_state_provider = {
-    fixture_SetWindowState, fixture_ClearWindowState
+    fixture_SetWindowState, fixture_ClearWindowState, WFWIN40COMPAT,
+    wow_original_change_compat_state
 };
 #define WOW_ORIGINAL_DIALOG_LAYOUT
 #include "compat/include/opennt_user_multipass.h"

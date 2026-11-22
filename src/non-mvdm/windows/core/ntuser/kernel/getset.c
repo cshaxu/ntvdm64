@@ -20,6 +20,12 @@ HWND WINAPI wow_original_window_handle(PWND window)
     return window->head.h;
 }
 
+VOID WINAPI wow_original_change_compat_state(PWND window, BOOL set)
+{
+    if (set) SetWF(window, WFWIN40COMPAT);
+    else ClrWF(window, WFWIN40COMPAT);
+}
+
 #line 245
 /***************************************************************************\
 * xxxSetWindowLong (API)

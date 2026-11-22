@@ -368,11 +368,18 @@ static BOOL WINAPI fixture_fnid(HWND window, WORD fnid)
     return TRUE;
 }
 
+static void WINAPI fixture_change_private(struct tagWND *window, BOOL set)
+{
+    if (set) SetWF(window, WFWIN40COMPAT);
+    else ClrWF(window, WFWIN40COMPAT);
+}
+
 int main(void)
 {
     unsigned old_begins, old_leaves, old_calls;
     BOOL caught = FALSE;
-    static const wow_control_state_providers provider = { SetWindowState, ClearWindowState };
+    static const wow_control_state_providers provider = { SetWindowState, ClearWindowState,
+        WFWIN40COMPAT, fixture_change_private };
     CHECK(wow_control_state_bind(&provider));
     wow_control_set_window_state(&state_window, WFWIN40COMPAT);
     wow_control_clear_window_state(&state_window, WFWIN40COMPAT);
