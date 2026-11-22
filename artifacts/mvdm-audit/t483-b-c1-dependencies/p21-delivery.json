@@ -1,0 +1,54 @@
+{
+  "packet": "M0 T483 S20 P21",
+  "baseline": "11b71c812",
+  "files_completed": [],
+  "partial_files": [
+    "BC1F026"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 24,
+    "remaining": 70,
+    "B_C1_unique": 50,
+    "B_C1_raw": 60,
+    "B_C1_compiled_headers": 449,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct 51 to 50 (three FreeLookasideEntry relocation rows removed); compiled headers 458 to 449.",
+  "implementation": "B button scope stores opaque WND and reuses exact oldest-frame lifetime; C1 original button provider reads pbutn and original FreeLookasideEntry releases unchanged. F binds both functions once before DLL initialization. No new allocator, queue or replacement state.",
+  "mirror": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+    "before": "12points/13lines",
+    "after": "13points/19lines",
+    "delta": "+1point/+6lines",
+    "cumulative_S20": "+3points/+239lines",
+    "register": "R2754",
+    "line_mapping": "#line15 restores original pragma and following lines; paired excluded-branch parser zero issues"
+  },
+  "package": "01e7dd12-e11d-4129-a353-10b6ebd63137",
+  "build": "cached x86/x64/reference passed after explicit SDK header fix",
+  "publication": "11 images assets/release and O:/winnt/system32;22 hashes verified",
+  "tests": [
+    "real CCPU standard class nine controls and cleanup",
+    "button nested lifetime, exception unwind, oldest-frame release, provider rejection",
+    "dialog mnemonic and keyboard lifecycle",
+    "init-notification and task-lifecycle",
+    "complete targeted control fixtures",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "11 architecture controls and product graphs",
+    "governance and links"
+  ],
+  "failed_attempts": [
+    "Initial x86 compilation required explicit SDK string declaration instead of removed transitive private include.",
+    "CCPU test required original /Gz release declaration in its /Gd fixture.",
+    "Control fixtures needed explicit test-only lookaside declaration and keyboard fixture provider binding; all rerun passed."
+  ],
+  "evidence": "build/t483-s20-button-lifetime",
+  "limitations": [
+    "BC1F026 remains open: button resource representation still includes original USER layout",
+    "No Full suite in P21; P16 Full passed separately"
+  ]
+}

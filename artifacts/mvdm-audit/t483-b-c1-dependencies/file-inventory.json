@@ -5,9 +5,9 @@
   "counts": {
     "files": 94,
     "completed": 24,
-    "direct_unique": 51,
-    "direct_raw": 63,
-    "compiled_header_rows": 458,
+    "direct_unique": 50,
+    "direct_raw": 60,
+    "compiled_header_rows": 449,
     "private_search_root_rows": 0
   },
   "files": [
@@ -1913,7 +1913,7 @@
     {
       "id": "BC1F026",
       "file": "src/compat/wow_button_lifetime.c",
-      "status": "not yet audited",
+      "status": "in progress: P21 removes button state and lookaside implementation edges; shared button resource layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -2065,7 +2065,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "partial_evidence": "p21-delivery.json"
     },
     {
       "id": "BC1F027",

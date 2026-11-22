@@ -12,6 +12,13 @@
 \***************************************************************************/
 
 #include "precomp.h"
+
+/* Project the original private state without exposing its layout to compat. */
+PVOID WINAPI wow_original_button_data(struct tagWND *window)
+{
+    return ((PBUTNWND)window)->pbutn;
+}
+#line 15
 #pragma hdrstop
 
 /* ButtonCalcRect codes */

@@ -1,6 +1,7 @@
 #include "wow_button_lifetime.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_user_client_view_layout.h"
+#include "wow_edit_lookaside_bindings.h"
 #include "wow_window_client_state_bindings.h"
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #include "compat/include/opennt_user_multipass.h"
@@ -141,8 +142,14 @@ static LRESULT CALLBACK resource_outer(HWND window, UINT message, WPARAM wp, LPA
     if (exceptional) RaiseException(BUTTON_EXCEPTION, 0, 0, NULL);
     return 19;
 }
+static PVOID WINAPI fixture_button_data(struct tagWND *window)
+{
+    return ((PBUTNWND)window)->pbutn;
+}
+
 int __cdecl main(void)
 {
+    if (!wow_button_bind(fixture_button_data, FreeLookasideEntry)) return 3;
     unsigned before;
     DWORD returned_error, remaining_type;
     HDC native_control;
@@ -150,6 +157,9 @@ int __cdecl main(void)
     PBUTN held_button;
     BOOL caught = FALSE;
     wow_edit_context context = {0};
+    CHECK(!wow_button_bind(NULL, FreeLookasideEntry));
+    CHECK(!wow_button_bind(fixture_button_data, NULL));
+    CHECK(wow_button_bind(fixture_button_data, FreeLookasideEntry));
     setup();
     CHECK(wow_button_invoke(first.wnd.head.h, BM_CLICK, 0, 0, outer) == 41);
     CHECK(frees == 2 && first_data.buttonState == 0xdead && GetLastError() == 0x47117);

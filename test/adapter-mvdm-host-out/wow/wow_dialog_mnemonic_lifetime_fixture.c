@@ -111,8 +111,14 @@ static void setup(UINT dialog_code)
     destroy_text = destroy_focus = throw_focus = destroy_click = retired = FALSE;
     code = dialog_code;
 }
+static PVOID WINAPI fixture_button_data(struct tagWND *window)
+{
+    return ((PBUTNWND)window)->pbutn;
+}
+
 int __cdecl main(void)
 {
+    if (!wow_button_bind(fixture_button_data, FreeLookasideEntry)) return 3;
     unsigned i;
     BOOL caught;
     WCHAR label[] = L"  Save && &Close";

@@ -153,8 +153,14 @@ static BOOL key(UINT message, WPARAM keycode)
     input.message = message; input.wParam = keycode;
     return wow_original_IsDialogMessageW(dialog.head.h, &input);
 }
+static PVOID WINAPI fixture_button_data(struct tagWND *window)
+{
+    return ((PBUTNWND)window)->pbutn;
+}
+
 int __cdecl main(void)
 {
+    if (!wow_button_bind(fixture_button_data, FreeLookasideEntry)) return 3;
     unsigned root, kind;
     BOOL caught = FALSE;
     MSG ansi = {0};

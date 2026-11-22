@@ -12,6 +12,9 @@
 #define UserRegisterWowHandlers WINAPI UserRegisterWowHandlers
 #include "compat/include/wow_shared_user_abi.h"
 #include "compat/include/wow_standard_class_provider.h"
+#include "compat/include/wow_button_lifetime.h"
+extern PVOID WINAPI wow_original_button_data(struct tagWND *);
+extern VOID WINAPI FreeLookasideEntry(PLOOKASIDE, PVOID);
 #include "compat/include/wow_task_profile_bindings.h"
 extern UINT WINAPI wow_original_task_profile(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
 #include "compat/include/wow_cleanup_bindings.h"
@@ -138,6 +141,7 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #include "compat/include/wow_window_client_state_bindings.h"
 #include "compat/include/wow_edit_entry_bindings.h"
 #include "compat/include/wow_dialog_state_bindings.h"
+#define FreeLookasideEntry WINAPI FreeLookasideEntry
 #include "compat/include/wow_edit_lookaside_bindings.h"
 #include "compat/include/wow_user_client_view_layout.h"
 #define WOW_ORIGINAL_DIALOG_LAYOUT
@@ -149,6 +153,7 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #define CreateMenuFromResource WINAPI CreateMenuFromResource
 #define TabTextOut WINAPI TabTextOut
 #include "non-mvdm/windows/core/ntuser/client/usercli.h"
+#undef FreeLookasideEntry
 #undef TabTextOut
 #undef CreateMenuFromResource
 #undef DispatchClientMessage
@@ -6321,6 +6326,7 @@ int main(int argc, char **argv)
 {
 #ifdef WOW_WINDOW_BORROW_FIXTURE
     if (!wow_profile_bind(wow_original_task_profile, FastGetProfileIntW) ||
+            !wow_button_bind(wow_original_button_data, FreeLookasideEntry) ||
             !wow_cleanup_bind(&wow_original_cleanup_provider) ||
             !wow_native_text_bind(wow_original_text_capture) ||
             !wow_default_window_bind(wow_original_default_window_proc) ||

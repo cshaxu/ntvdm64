@@ -310,3 +310,11 @@ Mirror0points/0lines; cumulative+2points/+233lines. Cached full, dual11,
 COMMAND fault/capture and real Win16/COMMAND passed; package
 1f6221da-7af1-4960-be33-42f88ec7c908.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p20-delivery.json).
+
+P21 partially addresses BC1F026: C1 projects original button state and supplies
+original lookaside release; B retains oldest-frame lifetime. B-C1 unique
+direct51->50 (three relocation rows removed), compiled headers458->449;
+files24/94 complete. Mirror+1point/+6lines R2754; cumulative+3points/+239lines.
+Cached full, dual11, button/control, CCPU, init/task and Win16/COMMAND passed;
+package 01e7dd12-e11d-4129-a353-10b6ebd63137.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p21-delivery.json).

@@ -7,6 +7,9 @@
 #include "ntvdm-exe/session/session.h"
 #include <stdio.h>
 #include "wow_standard_class_provider.h"
+#include "compat/include/wow_button_lifetime.h"
+extern PVOID WINAPI wow_original_button_data(struct tagWND *);
+extern VOID WINAPI FreeLookasideEntry(PLOOKASIDE, PVOID);
 #include "wow_task_profile_bindings.h"
 #include "wow_cleanup_bindings.h"
 extern UINT WINAPI wow_original_task_profile(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
@@ -74,6 +77,7 @@ int __cdecl main(void)
     BOOL caught = FALSE;
     CHECK(ntvdm_dpmi_initialize());
     CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
+    CHECK(wow_button_bind(wow_original_button_data, FreeLookasideEntry));
     CHECK(wow_cleanup_bind(&wow_original_cleanup_provider));
     CHECK(wow_standard_class_bind(&class_provider));
     wow_fixture_startup_bind();
