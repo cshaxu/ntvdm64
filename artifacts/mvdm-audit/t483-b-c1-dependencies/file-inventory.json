@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 72,
+    "completed": 74,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 54,
+    "compiled_header_rows": 47,
     "private_search_root_rows": 0
   },
   "files": [
@@ -4559,7 +4559,7 @@
     {
       "id": "BC1F049",
       "file": "src/compat/wow_dialog_creation_binding.c",
-      "status": "in progress: P42 removes original creation direct calls and private NT headers; original dialog layout remains",
+      "status": "completed in verified P77 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -4702,12 +4702,13 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p42-delivery.json"
+      "progress_evidence": "p42-delivery.json",
+      "p77_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p77-dialog-boundary-closure.json"
     },
     {
       "id": "BC1F050",
       "file": "src/compat/wow_dialog_finalization_binding.c",
-      "status": "partially addressed in verified P43 delivery; original dialog layout headers remain",
+      "status": "completed in verified P77 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -4900,7 +4901,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p43-delivery.json"
+      "progress_evidence": "p43-delivery.json",
+      "p77_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p77-dialog-boundary-closure.json"
     },
     {
       "id": "BC1F051",

@@ -2,11 +2,8 @@
 #include <winternl.h>
 #include "wow_dialog_state_bindings.h"
 #include "wow_dialog_finalization_provider.h"
-#include "wow_user_client_view_layout.h"
-#define WOW_ORIGINAL_DIALOG_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
-#undef WOW_ORIGINAL_DIALOG_LAYOUT
-#include "wow_edit_lookaside_bindings.h"
+#include "wow_window_access_provider.h"
+#include "wow_edit_lookaside_provider.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_private_access.h"
@@ -23,7 +20,7 @@ BOOL WINAPI wow_dialog_finalization_bind(const wow_dialog_finalization_provider 
     const wow_dialog_finalization_provider *previous;
     if (!provider || !provider->worker || !provider->end || !provider->map ||
             !provider->list || !provider->combo_list || !provider->select ||
-            !provider->combo_select) {
+            !provider->combo_select || !provider->owns || !provider->finalize) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&dialog_provider,
@@ -74,7 +71,7 @@ static LRESULT dialog_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
     wow_cleanup_window *owner;
     wow_task_callback_scope task;
     wow_user_borrow_scope borrow;
-    PWND state;
+    struct tagWND *state;
     BOOL cleanup;
     BOOL finalize = operation == dialog_finalize;
     LRESULT result = 0;
@@ -97,7 +94,7 @@ static LRESULT dialog_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
      * graph/callback publication requires that binding's full identity.
      * Keep strict full-handle rejection in the graph owner unchanged. */
     state = wow_window_words_client_state_value(words);
-    if (state) window = state->head.h;
+    if (state) window = wow_window_access_current()->window_handle(state);
     owner = wow_window_words_cleanup_value(words);
     cleanup = (runtime->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) != 0;
     if (!owner || (cleanup && (owner->thread != runtime->thread || !finalize))) {
@@ -148,31 +145,7 @@ static LRESULT dialog_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
             result = original_dialog()->worker(state, message, wp, lp, ansi);
             __leave;
         }
-        if (GETFNID(state) != FNID_DIALOG ||
-                state->cbwndExtra < DLGWINDOWEXTRA) {
-            SetLastError(ERROR_INVALID_STATE);
-            __leave;
-        }
-        if (state->fnid & FNID_CLEANEDUP_BIT) {
-            /* A completed original cleanup is idempotent. */
-            result = !TestWF(state, WFDIALOGWINDOW) && !((PDIALOG)state)->pdlg;
-        } else if (!(state->fnid & FNID_DELETED_BIT) &&
-                !TestWF(state, WFDIALOGWINDOW) && !((PDIALOG)state)->pdlg) {
-            /* VALIDATECLASSANDSIZE sets FNID before ValidateDialogPwnd
-             * allocates PDLG. Original createw.c xxxFreeWindow completes
-             * FNID_CLEANEDUP_BIT even when that allocation failed. There is
-             * no resource to release and no reason to allocate on teardown. */
-            state->fnid |= FNID_CLEANEDUP_BIT;
-            result = TRUE;
-        } else if (!(state->fnid & FNID_DELETED_BIT) &&
-                TestWF(state, WFDIALOGWINDOW) && ((PDIALOG)state)->pdlg) {
-            /* Original WM_FINALDESTROY jumps past lpfnDlg directly to
-             * DoCleanup. Do not create a PDLG just to destroy it or send
-             * this private message through an application subclass. */
-            (void)original_dialog()->worker(state, 0x0070, 0, 0, FALSE);
-            result = (state->fnid & FNID_CLEANEDUP_BIT) &&
-                !TestWF(state, WFDIALOGWINDOW) && !((PDIALOG)state)->pdlg;
-        }
+        result = original_dialog()->finalize(state, original_dialog()->worker);
         SetLastError(result ? error : ERROR_INVALID_STATE);
     } __finally {
         DWORD final_error = GetLastError();
@@ -203,7 +176,7 @@ static LRESULT dialog_api(HWND w, enum dialog_operation operation,
 {
     DWORD error = GetLastError();
     wow_window_words_binding *words = wow_window_words_acquire(w);
-    PWND state = wow_window_words_client_state_value(words);
+    struct tagWND *state = wow_window_words_client_state_value(words);
     BOOL recovered = words && wow_window_words_owns_client_state(words, state);
     LRESULT result = 0;
     wow_user_native_call call;
@@ -270,14 +243,13 @@ BOOL WINAPI wow_dialog_default_message(HWND window, UINT message, WPARAM wp,
 {
     DWORD error = GetLastError();
     wow_window_words_binding *words;
-    PWND state;
+    struct tagWND *state;
     BOOL handled;
     if (!result) return FALSE;
     words = wow_window_words_acquire(window);
     if (!words) { SetLastError(error); return FALSE; }
     state = wow_window_words_client_state_value(words);
-    handled = state && (GETFNID(state) == FNID_DIALOG ||
-        TestWF(state, WFDIALOGWINDOW));
+    handled = state && original_dialog()->owns(state);
     __try {
         SetLastError(error);
         if (handled) *result = wow_dialog_window_procA(window, message, wp, lp);
@@ -293,9 +265,8 @@ BOOL WINAPI wow_user_end_dialog(HWND window, INT_PTR result)
 {
     DWORD error = GetLastError();
     wow_window_words_binding *words = wow_window_words_acquire(window);
-    PWND state = wow_window_words_client_state_value(words);
-    BOOL recovered = state && (GETFNID(state) == FNID_DIALOG ||
-        TestWF(state, WFDIALOGWINDOW));
+    struct tagWND *state = wow_window_words_client_state_value(words);
+    BOOL recovered = state && original_dialog()->owns(state);
     BOOL ended = FALSE;
     __try {
         SetLastError(error);

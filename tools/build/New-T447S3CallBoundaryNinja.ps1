@@ -214,6 +214,30 @@ $controlObjects += 'obj/original_default.obj'
 $units += ,@('default_view', 'src/non-mvdm/windows/core/ntuser/rtl/wow.c', ($navigationFlags + ' /Gy'))
 $units += ,@('dde_data_owner', 'src/non-mvdm/windows/core/ntuser/client/hdata.c', '')
 $units += ,@('dde_data_fixture', 'test/adapter-mvdm-host-out/wow/wow_original_dde_free_fixture.c', '')
+# Compile the exact current layout operations without importing the manager's
+# unrelated native services into the scoped transport fixture. Product/guest
+# verification still uses the complete original translation unit.
+$dialogSource = Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/dlgmgr.c'
+$dialogText = [IO.File]::ReadAllText($dialogSource)
+$dialogMarker = '/* Original-layout operations; caller retains its task and window borrow. */'
+$dialogStart = $dialogText.IndexOf($dialogMarker)
+$dialogEnd = $dialogText.LastIndexOf('#endif')
+if ($dialogStart -lt 0 -or $dialogText.LastIndexOf($dialogMarker) -ne $dialogStart -or $dialogEnd -le $dialogStart) {
+    throw 'Dialog layout operation source boundary changed; review fixture selection.'
+}
+$dialogBody = $dialogText.Substring($dialogStart, $dialogEnd - $dialogStart)
+if (([regex]::Matches($dialogBody, 'BOOL WINAPI wow_original_dialog_')).Count -ne 2 -or $dialogBody.TrimEnd()[-1] -ne '}') {
+    throw 'Dialog layout operation selection is incomplete.'
+}
+$dialogLayout = Join-Path $build 'dialog-finalization-layout.c'
+$dialogPreamble = @'
+#include "wow_user_client_view_layout.h"
+#define WOW_ORIGINAL_DIALOG_LAYOUT
+#include "compat/include/opennt_user_multipass.h"
+#undef WOW_ORIGINAL_DIALOG_LAYOUT
+'@
+[IO.File]::WriteAllText($dialogLayout, $dialogPreamble + "`n" + $dialogBody, [Text.UTF8Encoding]::new($false))
+$units += ,@('dialog_finalization_layout', [IO.Path]::GetRelativePath($root, $dialogLayout), '')
 foreach ($unit in $units) {
     if (!(Test-Path -LiteralPath (Join-Path $root $unit[1]) -PathType Leaf)) {
         throw "Missing fixture input: $($unit[1])"
@@ -275,7 +299,8 @@ $lines.Add('build original-mnemonic-lifetime-boundary: phony bin/wow_dialog_mnem
 $lines.Add('build bin/wow_dialog_keyboard_lifetime_fixture.exe: link obj/keyboard_lifetime_fixture.obj obj/keyboard_unreached.obj obj/original_keyboard.obj obj/original_dlgmgr.obj obj/button_lifetime_adapter.obj obj/state_drawing_atlas.obj obj/string_conversion.obj obj/string_services.obj obj/native_environment.obj')
 $lines.Add('  libs = ntdll.lib')
 $lines.Add('build original-keyboard-lifetime-boundary: phony bin/wow_dialog_keyboard_lifetime_fixture.exe')
-$lines.Add('build bin/wow_dialog_finalization_fixture.exe: link obj/dialog_finalization_fixture.obj obj/dialog_finalization_adapter.obj')
+$lines.Add('build bin/wow_dialog_finalization_fixture.exe: link obj/dialog_finalization_fixture.obj obj/dialog_finalization_adapter.obj obj/dialog_finalization_layout.obj')
+$lines.Add('  libs = /OPT:REF')
 $lines.Add('build bin/wow_dialog_end_original_fixture.exe: link obj/dialog_end_fixture.obj obj/original_dlgend.obj')
 $lines.Add('build original-dialog-end-boundary: phony bin/wow_dialog_end_original_fixture.exe')
 $lines.Add('build bin/wow_dialog_lifetime_fixture.exe: link obj/modal_lifetime_fixture.obj obj/modal_lifetime_body.obj obj/modal_lifetime_end.obj obj/modal_lifetime_pointer.obj')

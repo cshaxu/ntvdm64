@@ -196,10 +196,13 @@ BOOL WINAPI fixture_DlgDirSelectComboBoxExA(HWND, LPSTR, int, int);
 #pragma comment(linker, "/alternatename:_fixture_DlgDirListComboBoxA@20=_wow_original_DlgDirListComboBoxA@20")
 #pragma comment(linker, "/alternatename:_fixture_DlgDirSelectExA@16=_wow_original_DlgDirSelectExA@16")
 #pragma comment(linker, "/alternatename:_fixture_DlgDirSelectComboBoxExA@16=_wow_original_DlgDirSelectComboBoxExA@16")
+BOOL WINAPI wow_original_dialog_owned(struct tagWND *);
+BOOL WINAPI wow_original_dialog_finalize(struct tagWND *, LONG (WINAPI *)(struct tagWND *, UINT, WPARAM, LPARAM, DWORD));
 static const wow_dialog_finalization_provider fixture_dialog_finalization_provider = {
     fixture_DefDlgProcWorker, fixture_EndDialog, fixture_MapDialogRect,
     fixture_DlgDirListA, fixture_DlgDirListComboBoxA,
-    fixture_DlgDirSelectExA, fixture_DlgDirSelectComboBoxExA
+    fixture_DlgDirSelectExA, fixture_DlgDirSelectComboBoxExA,
+    wow_original_dialog_owned, wow_original_dialog_finalize
 };
 #include "compat/include/wow_control_state_provider.h"
 #include "compat/include/wow_control_fnid_provider.h"

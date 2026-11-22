@@ -9,6 +9,10 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_user_private_access.h"
 #include <stdio.h>
+#include "wow_window_access_provider.h"
+BOOL WINAPI wow_original_dialog_owned(struct tagWND *);
+BOOL WINAPI wow_original_dialog_finalize(struct tagWND *, LONG (WINAPI *)(struct tagWND *, UINT, WPARAM, LPARAM, DWORD));
+
 
 /* Actual finalization boundary with explicit scope/worker doubles. This
  * does not prove original resource release, native destruction or guest
@@ -32,6 +36,7 @@ static int end_result;
 static BOOL fail_borrow, fail_worker, fail_ready;
 static BOOL native_success, native_raise;
 static BOOL fail_context;
+static BOOL validation_sets_error;
 static BOOL fail_graph;
 static unsigned graph_calls;
 static unsigned callback_publications;
@@ -42,6 +47,18 @@ __declspec(thread) wow_dialog_context *wow_dialog_current;
 #define WINDOW ((HWND)(ULONG_PTR)0x004f9234)
 #define WORDS ((wow_window_words_binding *)(ULONG_PTR)0x5678)
 #define CHECK(c) do { if (!(c)) { ++errors; printf("FAIL line=%d\n", __LINE__); } } while (0)
+
+/* Real original-layout finalization/ownership operations are linked from
+ * dlgmgr.c. Only the worker and outer scope transports are doubled. */
+static HWND WINAPI fixture_window_handle(struct tagWND *state)
+{ CHECK(state == &dialog.wnd && references); return state->head.h; }
+const wow_window_access_provider *WINAPI wow_window_access_current(void)
+{
+    static const wow_window_access_provider value = {
+        NULL, NULL, NULL, NULL, fixture_window_handle, 0
+    };
+    return &value;
+}
 
 wow_user_runtime_thread *WINAPI wow_user_runtime_current(void) { return &runtime; }
 VOID WINAPI wow_dialog_host_retire(HWND window)
@@ -95,14 +112,14 @@ static int api_entry(HWND window, void *buffer)
     if (api_raise) RaiseException(NATIVE_EXCEPTION,0,0,NULL);
     return 37;
 }
-BOOL WINAPI wow_original_MapDialogRect(HWND w, LPRECT r) { return api_entry(w,r); }
-int WINAPI wow_original_DlgDirListA(HWND w, LPSTR p, int a, int b, UINT f)
+BOOL WINAPI fixture_wow_original_MapDialogRect(HWND w, LPRECT r) { return api_entry(w,r); }
+int WINAPI fixture_wow_original_DlgDirListA(HWND w, LPSTR p, int a, int b, UINT f)
 { CHECK(a == 3 && b == 5 && f == 7); return api_entry(w,p); }
-int WINAPI wow_original_DlgDirListComboBoxA(HWND w, LPSTR p, int a, int b, UINT f)
+int WINAPI fixture_wow_original_DlgDirListComboBoxA(HWND w, LPSTR p, int a, int b, UINT f)
 { CHECK(a == 3 && b == 5 && f == 7); return api_entry(w,p); }
-BOOL WINAPI wow_original_DlgDirSelectExA(HWND w, LPSTR p, int a, int b)
+BOOL WINAPI fixture_wow_original_DlgDirSelectExA(HWND w, LPSTR p, int a, int b)
 { CHECK(a == 3 && b == 5); return api_entry(w,p); }
-BOOL WINAPI wow_original_DlgDirSelectComboBoxExA(HWND w, LPSTR p, int a, int b)
+BOOL WINAPI fixture_wow_original_DlgDirSelectComboBoxExA(HWND w, LPSTR p, int a, int b)
 { CHECK(a == 3 && b == 5); return api_entry(w,p); }
 BOOL WINAPI wow_window_client_ensure_state(HWND window)
 { CHECK(window == WINDOW && tasks && borrows); ++ensures; return TRUE; }
@@ -114,7 +131,7 @@ BOOL WINAPI wow_window_client_prepare_graph(HWND window)
     if (fail_graph) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
     return TRUE;
 }
-BOOL WINAPI wow_original_EndDialog(HWND window, int result)
+BOOL WINAPI fixture_wow_original_EndDialog(HWND window, int result)
 {
     CHECK(window == WINDOW && tasks && borrows && references);
     ++end_calls; end_result = result;
@@ -150,8 +167,10 @@ BOOL WINAPI wow_user_borrow_enter(wow_user_borrow_scope *scope)
 VOID WINAPI wow_user_borrow_leave_required(wow_user_borrow_scope *scope)
 { (void)scope; CHECK(borrows); --borrows; }
 PWND WINAPI wow_window_client_validate_hwnd(HWND window)
-{ CHECK(window == WINDOW && references && tasks && borrows); return &dialog.wnd; }
-LONG WINAPI DefDlgProcWorker(PWND state, UINT message, WPARAM wp, LPARAM lp, DWORD ansi)
+{ CHECK(window == WINDOW && references && tasks && borrows);
+  if (validation_sets_error) SetLastError(0x44750012);
+  return &dialog.wnd; }
+LONG WINAPI fixture_DefDlgProcWorker(PWND state, UINT message, WPARAM wp, LPARAM lp, DWORD ansi)
 {
     CHECK(state == &dialog.wnd);
     CHECK(references && tasks && borrows);
@@ -163,6 +182,7 @@ LONG WINAPI DefDlgProcWorker(PWND state, UINT message, WPARAM wp, LPARAM lp, DWO
         return fail_worker ? 0 : 0x1234;
     }
     CHECK(!wp && !lp && !ansi);
+    if (validation_sets_error) CHECK(GetLastError() == 0x44750012);
     if (!fail_worker) {
         dialog.pdlg = NULL;
         ClrWF(state, WFDIALOGWINDOW);
@@ -185,14 +205,14 @@ static void reset(void)
     fail_borrow = fail_worker = fail_ready = FALSE;
     native_success = native_raise = FALSE;
     api_raise = FALSE;
-    fail_context = FALSE; captures = 0;
+    fail_context = validation_sets_error = FALSE; captures = 0;
     calls = cleanup_entries = ensures = end_calls = native_begins = 0;
 }
 int main(void)
 {
     LONG result;
     BOOL caught = FALSE;
-    static const wow_dialog_finalization_provider provider = { DefDlgProcWorker, wow_original_EndDialog, wow_original_MapDialogRect, wow_original_DlgDirListA, wow_original_DlgDirListComboBoxA, wow_original_DlgDirSelectExA, wow_original_DlgDirSelectComboBoxExA };
+    static const wow_dialog_finalization_provider provider = { fixture_DefDlgProcWorker, fixture_wow_original_EndDialog, fixture_wow_original_MapDialogRect, fixture_wow_original_DlgDirListA, fixture_wow_original_DlgDirListComboBoxA, fixture_wow_original_DlgDirSelectExA, fixture_wow_original_DlgDirSelectComboBoxExA, wow_original_dialog_owned, wow_original_dialog_finalize };
     CHECK(wow_dialog_finalization_bind(&provider));
     reset(); fail_ready = TRUE;
     CHECK(!wow_dialog_window_procA(WINDOW, WM_USER, 17, 29));
@@ -323,6 +343,9 @@ int main(void)
             !references && !tasks && !borrows);
         printf("dialog-carriers failures=%u full=1 zero16=1 signed16=1 stale_full_rejected=1\n",errors);
     }
+    reset(); validation_sets_error = TRUE; SetLastError(0x44750034);
+    CHECK(wow_dialog_finalize_bound(WINDOW) && GetLastError() == 0x44750034);
+    CHECK(calls == 1 && !references && !tasks && !borrows);
     printf("dialog-finalization failures=%u\n", errors);
     return errors ? 1 : 0;
 }

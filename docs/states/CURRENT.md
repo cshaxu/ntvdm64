@@ -114,14 +114,14 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P76 final compiled-product review leaves 72 of 94
+is authoritative for individual files and evidence. P77 final compiled-product review leaves 74 of 94
 files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-54 compiled-header rows across 18 sources and zero private search roots. B-to-C2 has zero
+47 compiled-header rows across 16 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
 
-S20 cumulative non-error mirror delta is +8 points/+299 lines; S19 retained
+S20 cumulative non-error mirror delta is +8 points/+338 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
 tests. The P62 package is 71882068-22ca-4a1a-8a84-20c8d7f7cb5c.
@@ -226,3 +226,10 @@ remain54 across18 sources. Mirror +0points/+4lines, pending R2760/R2761.
 Cached full build, dual11 publication, original capture and eight lifecycle/class
 cases plus published USER16/COMMAND passed.
 [P76 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p76-capture-interface-closure.json).
+
+P77 completes dialog creation/finalization boundaries through existing providers.
+Remaining20 files; header rows54->47 across16 sources. Mirror +0points/+39lines
+at one original manager insertion, pending R2762. Full cached build, dual11
+publication, actual C finalization/creation boundaries, eight lifecycle/class
+cases and published USER16/COMMAND passed.
+[P77 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p77-dialog-boundary-closure.json).

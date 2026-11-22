@@ -1,11 +1,11 @@
 #include <windows.h>
 #include <winternl.h>
 #include "wow_dialog_creation_binding.h"
-#include "wow_edit_lookaside_bindings.h"
+#include "wow_edit_lookaside_provider.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_dialog_context_bindings.h"
-#include "compat/include/wow32_provider_private.h"
+#include "wow_dialog_flags.h"
 
 /* ADAPTER-WOW-063 supersedes ADAPTER-WOW-052's native creator approximation.
  * Original dlgbegin.c owns template parsing, PDLG, WOWDlgInit, children,

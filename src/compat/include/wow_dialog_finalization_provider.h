@@ -10,6 +10,9 @@ typedef struct wow_dialog_finalization_provider {
     int (WINAPI *combo_list)(HWND, LPSTR, int, int, UINT);
     BOOL (WINAPI *select)(HWND, LPSTR, int, int);
     BOOL (WINAPI *combo_select)(HWND, LPSTR, int, int);
+    BOOL (WINAPI *owns)(struct tagWND *);
+    BOOL (WINAPI *finalize)(struct tagWND *,
+        LONG (WINAPI *)(struct tagWND *, UINT, WPARAM, LPARAM, DWORD));
 } wow_dialog_finalization_provider;
 BOOL WINAPI wow_dialog_finalization_bind(const wow_dialog_finalization_provider *);
 #endif

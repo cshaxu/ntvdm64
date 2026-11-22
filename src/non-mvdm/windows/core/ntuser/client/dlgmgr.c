@@ -1202,4 +1202,43 @@ BOOL MapDialogRect(
 
     return TRUE;
 }
+
+/* Original-layout operations; caller retains its task and window borrow. */
+BOOL WINAPI wow_original_dialog_owned(PWND state)
+{
+    return state && (GETFNID(state) == FNID_DIALOG ||
+        TestWF(state, WFDIALOGWINDOW));
+}
+
+BOOL WINAPI wow_original_dialog_finalize(PWND state,
+    LONG (WINAPI *worker)(PWND, UINT, WPARAM, LPARAM, DWORD))
+{
+    BOOL result = FALSE;
+    if (GETFNID(state) != FNID_DIALOG ||
+            state->cbwndExtra < DLGWINDOWEXTRA) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    if (state->fnid & FNID_CLEANEDUP_BIT) {
+        /* A completed original cleanup is idempotent. */
+        result = !TestWF(state, WFDIALOGWINDOW) && !((PDIALOG)state)->pdlg;
+    } else if (!(state->fnid & FNID_DELETED_BIT) &&
+            !TestWF(state, WFDIALOGWINDOW) && !((PDIALOG)state)->pdlg) {
+        /* VALIDATECLASSANDSIZE sets FNID before ValidateDialogPwnd
+         * allocates PDLG. Original createw.c xxxFreeWindow completes
+         * FNID_CLEANEDUP_BIT even when that allocation failed. There is
+         * no resource to release and no reason to allocate on teardown. */
+        state->fnid |= FNID_CLEANEDUP_BIT;
+        result = TRUE;
+    } else if (!(state->fnid & FNID_DELETED_BIT) &&
+            TestWF(state, WFDIALOGWINDOW) && ((PDIALOG)state)->pdlg) {
+        /* Original WM_FINALDESTROY jumps past lpfnDlg directly to
+         * DoCleanup. Do not create a PDLG just to destroy it or send
+         * this private message through an application subclass. */
+        (void)worker(state, 0x0070, 0, 0, FALSE);
+        result = (state->fnid & FNID_CLEANEDUP_BIT) &&
+            !TestWF(state, WFDIALOGWINDOW) && !((PDIALOG)state)->pdlg;
+    }
+    return result;
+}
 #endif
