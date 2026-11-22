@@ -7,9 +7,9 @@
 #include "include/wow_user_borrow_scope.h"
 #include "include/wow_menu_native_bindings.h"
 #include "include/wow_edit_call_bindings.h"
+#include "wow_registration_provider.h"
 #include <stdio.h>
 
-static PFNWOWHANDLERSIN wow_input_handlers;
 static wow_user_task_lifecycle wow_lifecycle;
 
 void wow_user_registration_trace(const char *stage, DWORD result)
@@ -94,8 +94,7 @@ BOOL wow_user_ensure_registration_lifecycle(void)
     }
     if (wow_user_registered_lifecycle()->initialized)
         return wow_user_registered_lifecycle()->runtime == binding->runtime;
-    callbacks.get_version = wow_user_registered_callbacks()->pfnGetExpWinVer;
-    callbacks.callback = wow_user_registered_callbacks()->pfnWowWndProcEx;
+    wow_registration_provider_current()->capture_lifecycle(&callbacks);
     return wow_user_task_lifecycle_initialize(wow_user_registered_lifecycle(), binding->runtime,
         &callbacks);
 }
@@ -132,7 +131,7 @@ ATOM WINAPI registered_register_class(PVOID a, LPDWORD b)
     }
 }
 
-BOOL WINAPI registered_hung_handlers(PFNW32ET callback, HANDLE event)
+BOOL WINAPI registered_hung_handlers(VOID (APIENTRY *callback)(VOID), HANDLE event)
 {
     BOOL result = wow_user_ensure_registration_lifecycle() && wow_user_task_lifecycle_register(wow_user_registered_lifecycle(),
         callback, event);
@@ -248,22 +247,13 @@ VOID WINAPI wow_user_register_wow_exec(HANDLE window)
 
 const struct tagAPFNWOWHANDLERSIN *WINAPI wow_user_registered_callbacks(void)
 {
-    return &wow_input_handlers;
+    return wow_registration_provider_current()->callbacks();
 }
 
 
 BOOL WINAPI wow_user_edit_callbacks_ready(void)
 {
-    const PFNWOWHANDLERSIN *callbacks = wow_user_registered_callbacks();
-    if (!callbacks->pfnLocalAlloc || !callbacks->pfnLocalReAlloc ||
-            !callbacks->pfnLocalLock || !callbacks->pfnLocalUnlock ||
-            !callbacks->pfnLocalSize || !callbacks->pfnLocalFree ||
-            !callbacks->pfnWowEditNextWord || !callbacks->pfnEmptyCB ||
-            !callbacks->pfnGetExpWinVer) {
-        SetLastError(ERROR_INVALID_STATE);
-        return FALSE;
-    }
-    return TRUE;
+    return wow_registration_provider_current()->edit_callbacks_ready();
 }
 
 BOOL WINAPI wow_user_get_messageA(LPMSG message, HWND window, UINT first, UINT last)
@@ -310,7 +300,7 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
      * worker's WOW target. Keep the original registered callback as owner. */
     if (!wow_native_class_resolve_procedure((DWORD)procedure, &resolved)) return 0;
     if (resolved != (DWORD)procedure ||
-            !((DWORD)(ULONG_PTR)procedure & WNDPROC_WOW)) {
+            !((DWORD)(ULONG_PTR)procedure & WOW_WINDOW_PROC_TAG)) {
         wow_user_native_call call;
         BOOL restored;
         DWORD error = GetLastError();
@@ -328,7 +318,7 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
         }
         return restored ? result : 0;
     }
-    if (!wow_input_handlers.pfnWowWndProcEx) {
+    if (!wow_registration_provider_current()->window_callback()) {
         SetLastError(ERROR_INVALID_STATE);
         return 0;
     }
@@ -345,7 +335,7 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
         result = 0;
         if (wow_user_window_refresh_message(window, message, wp, lp) &&
                 wow_menu_native_refresh_message(message, wp, lp))
-            result = wow_input_handlers.pfnWowWndProcEx(window, message, wp, lp,
+            result = wow_registration_provider_current()->window_callback()(window, message, wp, lp,
                 (DWORD)(ULONG_PTR)procedure, NULL);
     } __finally {
         wow_user_borrow_leave_required(&scope);
@@ -371,7 +361,7 @@ wow_user_task_lifecycle *WINAPI wow_user_registered_lifecycle(void)
     return &wow_lifecycle;
 }
 
-void WINAPI wow_user_set_registered_callbacks(APFNWOWHANDLERSIN input)
+void WINAPI wow_user_set_registered_callbacks(struct tagAPFNWOWHANDLERSIN *input)
 {
-    wow_input_handlers = *input;
+    wow_registration_provider_current()->set_callbacks(input);
 }

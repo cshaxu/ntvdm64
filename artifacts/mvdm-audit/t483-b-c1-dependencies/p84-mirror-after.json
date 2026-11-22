@@ -1,0 +1,76 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clglobal.c",
+      "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+      "current_sha256": "8947ee564a733fc01a74d82e8342f6259f3963f4a2bff15c635eec621df505c1",
+      "raw": {
+        "blocks": 9,
+        "added": 80,
+        "deleted": 31
+      },
+      "filtered": {
+        "blocks": 4,
+        "added": 75,
+        "deleted": 20
+      },
+      "excluded": [
+        {
+          "original": [
+            25,
+            25
+          ],
+          "current": [
+            28,
+            28
+          ]
+        },
+        {
+          "original": [
+            450,
+            450
+          ],
+          "current": [
+            436,
+            436
+          ]
+        },
+        {
+          "original": [
+            475,
+            476
+          ],
+          "current": [
+            461,
+            462
+          ]
+        },
+        {
+          "original": [
+            878,
+            878
+          ],
+          "current": [
+            864,
+            864
+          ]
+        },
+        {
+          "original": [
+            1310,
+            1315
+          ],
+          "current": [
+            1296,
+            1297
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    }
+  ]
+}

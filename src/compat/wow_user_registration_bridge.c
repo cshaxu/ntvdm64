@@ -5,25 +5,22 @@
 #include "compat/include/wow_task_start_notification.h"
 #include "compat/include/wow_startup_report.h"
 #include "compat/include/wow_user_runtime.h"
-#include "wow_user_registered_callbacks.h"
-#include "wow_dialog_creation_binding.h"
-#include "wow_class_query_bindings.h"
-#include "wow_private_user_compat.h"
-#include "wow_bitmap_bindings.h"
-#include "wow_task_order_bindings.h"
-#include "wow_user_task_lifecycle.h"
-#include "wow_user_private_access.h"
 #include "compat/include/wow_page_domain.h"
 
-#include "compat/include/wow_dde_data_bindings.h"
 
 /* Immutable image-lifetime functions, bound before original DLL attach. */
 static const wow_registration_provider *provider;
+const wow_registration_provider *WINAPI wow_registration_provider_current(void)
+{
+    return provider;
+}
 
 BOOL WINAPI wow_registration_bind(const wow_registration_provider *value)
 {
     PVOID previous;
-    if (!value || !value->free_dde_data || !value->class_words) {
+    if (!value || !value->free_dde_data || !value->class_words || !value->exchange ||
+            !value->callbacks || !value->set_callbacks || !value->edit_callbacks_ready ||
+            !value->capture_lifecycle || !value->window_callback) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,
@@ -62,7 +59,7 @@ static DWORD notify_task_started(DWORD task_id, DWORD shared_id, const char *tra
     return error;
 }
 
-static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
+BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     DWORD task_id, DWORD hotkey, DWORD shared_id, DWORD x, DWORD y,
     DWORD width, DWORD height, WORD show)
 {
@@ -109,8 +106,8 @@ static BOOL WINAPI registered_init_task(UINT version, LPCSTR app_name,
     return result;
 }
 
-DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN input,
-    APFNWOWHANDLERSOUT output)
+DWORD WINAPI UserRegisterWowHandlers(struct tagAPFNWOWHANDLERSIN *input,
+    struct tagAPFNWOWHANDLERSOUT *output)
 {
     DWORD shared;
     if (!input || !output) {
@@ -130,33 +127,7 @@ DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN input,
         return 0;
     }
 
-    wow_user_set_registered_callbacks(input);
-    ZeroMemory(output, sizeof(*output));
-    /* Pinned USER.EXE publishes WOW 0400 with WOWDBG layout (init.c).
-     * The shared view uses that checked layout, including 16-byte handles. */
-    output->dwBldInfo = 0x84000000u;
-    output->pfnCsCreateWindowEx = registered_create_window_ex;
-    output->pfnDirectedYield = registered_directed_yield;
-    output->pfnFreeDDEData = provider->free_dde_data;
-    output->pfnGetClassWOWWords = provider->class_words;
-    output->pfnInitTask = registered_init_task;
-    output->pfnRegisterClassWOWA = registered_register_class;
-    output->pfnRegisterUserHungAppHandlers = registered_hung_handlers;
-    output->pfnServerCreateDialog = wow_user_server_create_dialog;
-    output->pfnServerLoadCreateCursorIcon =
-        wow_private_user_load_create_cursor_icon;
-    output->pfnServerLoadCreateMenu = wow_private_user_load_create_menu;
-    output->pfnWOWCleanup = registered_cleanup;
-    output->pfnWOWFindWindow = wow_native_FindWindowA;
-    output->pfnWOWGetIdFromDirectory = wow_private_user_get_id_from_directory;
-    output->pfnWOWLoadBitmapA = wow_bitmap_load;
-    output->pfnWowWaitForMsgAndEvent = registered_wait_for_message;
-    output->pfnYieldTask = registered_yield_task;
-    output->pfnGetFullUserHandle = registered_full_handle;
-    output->pfnGetMenuIndex = wow_private_user_get_menu_index;
-    output->pfnWowGetDefWindowProcBits =
-        wow_private_user_get_def_window_proc_bits;
-    output->pfnFillWindow = registered_fill_window;
+    provider->exchange(input, output);
     wow_user_registration_trace("UserRegisterWowHandlers", shared);
     return shared;
 }

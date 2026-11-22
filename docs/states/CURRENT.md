@@ -114,14 +114,14 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P83 final compiled-product review leaves 84 of 94
+is authoritative for individual files and evidence. P84 final compiled-product review leaves 86 of 94
 files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-13 compiled-header rows across 6 sources and zero private search roots. B-to-C2 has zero
+11 compiled-header rows across 4 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
 
-S20 cumulative non-error mirror delta is +10 points/+499 lines; S19 retained
+S20 cumulative non-error mirror delta is +11 points/+571 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
 tests. The P62 package is 71882068-22ca-4a1a-8a84-20c8d7f7cb5c.
@@ -278,3 +278,12 @@ Remaining10 files; compiled header rows14->13 across6 sources. No mirror delta.
 Cached full build, dual11 publication, four object lifecycle cases and published
 USER16/COMMAND tests passed.
 [P83 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p83-user-object-closure.json).
+
+P84 completes registration bridge/state layout ownership through the existing
+provider. The sole input table and unchanged output-slot assignments reside in
+C; B retains startup notification, task lifecycle and borrow scopes. Remaining8
+files; compiled header rows13->11 across4 sources. Non-error mirror +1point/72lines,
+pending R2768. Final cached full build, dual11 publication, registration/task/menu/
+creation and published guest tests passed. First compile exposed one old tag
+constant, corrected to the existing equivalent B constant before final build.
+[P84 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p84-registration-closure.json).

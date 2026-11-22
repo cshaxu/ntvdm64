@@ -1,0 +1,114 @@
+{
+  "packet": "M0 T483 S20 P84",
+  "baseline": "e6136a696cc938fb95ab5ebaec1ace5f3496d612",
+  "status": "verified batch; commit/push established by Git history",
+  "completed_files": [
+    "src/compat/wow_user_registration_bridge.c",
+    "src/compat/wow_user_registration_state.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 86,
+    "remaining": 8,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 11,
+    "B_C1_sources": 4,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "One original-format input table moved from B registration state to C USER globals owner. Existing registration provider carries synchronous exchange/get/set/readiness/lifecycle/window-callback operations. B retains admission checks, shared-page readiness, task lifecycle, startup notification, borrow scope and callback timing. Output assignment block retained verbatim except the local setter symbol. No new registration table, queue or state machine.",
+  "source_proof": {
+    "output_assignment_block_identity": true,
+    "retained_mirror_prefix_bytes_identical": true,
+    "original_error_and_line_structures_unchanged": true,
+    "existing_tag_constant_equivalence": true
+  },
+  "mirror": {
+    "file": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+    "before": [
+      3,
+      23
+    ],
+    "after": [
+      4,
+      95
+    ],
+    "delta_points": 1,
+    "delta_lines": 72,
+    "approval": "Standing one new point under100 lines; R2768 retained for revisit."
+  },
+  "first_build_failure": "One WNDPROC_WOW use remained after header removal; replaced with existing equivalent B WOW_WINDOW_PROC_TAG and rebuilt final code. Initial log/build-r1-result.json retained.",
+  "build": {
+    "finished": "2026-11-22T12:15:08.2677233+00:00",
+    "started": "2026-11-22T12:14:22.8846926+00:00",
+    "exit": 0,
+    "pid": 18056
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "d8b1accd-8247-4bc1-9486-3046d5e53ab7",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "started": "2026-11-22T12:15:54.3367858+00:00",
+    "exit": 0,
+    "finished": "2026-11-22T12:17:30.4641888+00:00",
+    "pid": 16468
+  },
+  "targeted_tests": [
+    {
+      "started": "2026-11-22T12:15:54.3993862+00:00",
+      "exit": 0,
+      "case": "init-notification",
+      "finished": "2026-11-22T12:16:09.1730626+00:00"
+    },
+    {
+      "started": "2026-11-22T12:16:09.1772999+00:00",
+      "exit": 0,
+      "case": "task-lifecycle",
+      "finished": "2026-11-22T12:16:20.7075570+00:00"
+    },
+    {
+      "started": "2026-11-22T12:16:20.7108051+00:00",
+      "exit": 0,
+      "case": "menu-resource",
+      "finished": "2026-11-22T12:16:35.5227404+00:00"
+    },
+    {
+      "started": "2026-11-22T12:16:35.5241035+00:00",
+      "exit": 0,
+      "case": "native-creation",
+      "finished": "2026-11-22T12:16:47.1311404+00:00"
+    }
+  ],
+  "source_identity": {
+    "src/compat/include/wow_registration_provider.h": "d764a03222d2dcc94af0b62f09408c00c59170ed86fe8eb0806a7b32058ed8a6",
+    "src/compat/include/wow_user_registration_state.h": "0b7c2b18e6d7b4823d0bcd6e26a4255d61bafca957d678015b08ce1888b490ef",
+    "src/compat/wow_user_registration_bridge.c": "037861cdf40e37de8b2d5e412b69778b3b16f927aaeda81c584f6035411ae66f",
+    "src/compat/wow_user_registration_state.c": "1c28299534fea665405857e897b9cdb41f9dc762530102a92a032b43d0ed90dc",
+    "src/non-mvdm/windows/core/ntuser/client/clglobal.c": "8947ee564a733fc01a74d82e8342f6259f3963f4a2bff15c635eec621df505c1",
+    "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c": "07d8d0c100128b86822d444050acca9d4479683a241f6f178564e3ef2c5f3d06",
+    "test/mvdm-host/wow_page_domain_fixture.c": "7ce6b3df0edb8667b5019e91003185c8902f6345e0be81797446d0d2a9641eef",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "0bc97cf62ec869196bb90437a437c58744ba23cee70ff6152877242aa8c5e106"
+  },
+  "evidence_root": "build\\t483-s20-p84-registration",
+  "limitations": [
+    "8 files remain; control-state placement approval remains pending.",
+    "Data-symbol/assembly/linkmap closure sweep remains.",
+    "No S20 closure or Full-pass claim; existing Shell diagnostic boundary remains."
+  ],
+  "actual_link_owner": {
+    "map": "build/.ninja/msvc-x86-release/wow32/wow32.dll.map",
+    "rows": [
+      "0001:0004e110       _wow_original_registered_callbacks@0 1004f110 f   clglobal.obj",
+      "0001:0004e120       _wow_original_registration_exchange@8 1004f120 f   clglobal.obj",
+      "0003:00004d90       _wow_input_handlers        100a4d90     clglobal.obj"
+    ],
+    "scope": "These registration operations and sole input table; not a full data-symbol closure claim."
+  }
+}

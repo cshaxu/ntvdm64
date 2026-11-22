@@ -1296,3 +1296,75 @@ CONST BOOLEAN gabThunkMessage[] = {
 #error
 #line 1316
 #endif
+
+#include "wow_registration_provider.h"
+#include "wow_user_registration_state.h"
+#include "wow_dialog_creation_binding.h"
+#include "wow_private_user_compat.h"
+#include "wow_bitmap_bindings.h"
+#include "wow_user_private_access.h"
+
+/* Original registration ABI storage; B owns task/lifecycle orchestration. */
+static PFNWOWHANDLERSIN wow_input_handlers;
+const struct tagAPFNWOWHANDLERSIN *WINAPI wow_original_registered_callbacks(void)
+{
+    return &wow_input_handlers;
+}
+void WINAPI wow_original_set_registered_callbacks(struct tagAPFNWOWHANDLERSIN *input)
+{
+    wow_input_handlers = *input;
+}
+void WINAPI wow_original_registration_lifecycle(wow_user_task_lifecycle_callbacks *callbacks)
+{
+    callbacks->get_version = wow_input_handlers.pfnGetExpWinVer;
+    callbacks->callback = wow_input_handlers.pfnWowWndProcEx;
+}
+wow_window_callback WINAPI wow_original_registration_window_callback(void)
+{
+    return wow_input_handlers.pfnWowWndProcEx;
+}
+BOOL WINAPI wow_original_edit_callbacks_ready(void)
+{
+    const PFNWOWHANDLERSIN *callbacks = wow_original_registered_callbacks();
+    if (!callbacks->pfnLocalAlloc || !callbacks->pfnLocalReAlloc ||
+            !callbacks->pfnLocalLock || !callbacks->pfnLocalUnlock ||
+            !callbacks->pfnLocalSize || !callbacks->pfnLocalFree ||
+            !callbacks->pfnWowEditNextWord || !callbacks->pfnEmptyCB ||
+            !callbacks->pfnGetExpWinVer) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    return TRUE;
+}
+void WINAPI wow_original_registration_exchange(struct tagAPFNWOWHANDLERSIN *input,
+    struct tagAPFNWOWHANDLERSOUT *output)
+{
+    const wow_registration_provider *provider = wow_registration_provider_current();
+    wow_original_set_registered_callbacks(input);
+    ZeroMemory(output, sizeof(*output));
+    /* Pinned USER.EXE publishes WOW 0400 with WOWDBG layout (init.c).
+     * The shared view uses that checked layout, including 16-byte handles. */
+    output->dwBldInfo = 0x84000000u;
+    output->pfnCsCreateWindowEx = registered_create_window_ex;
+    output->pfnDirectedYield = registered_directed_yield;
+    output->pfnFreeDDEData = provider->free_dde_data;
+    output->pfnGetClassWOWWords = provider->class_words;
+    output->pfnInitTask = registered_init_task;
+    output->pfnRegisterClassWOWA = registered_register_class;
+    output->pfnRegisterUserHungAppHandlers = registered_hung_handlers;
+    output->pfnServerCreateDialog = wow_user_server_create_dialog;
+    output->pfnServerLoadCreateCursorIcon =
+        wow_private_user_load_create_cursor_icon;
+    output->pfnServerLoadCreateMenu = wow_private_user_load_create_menu;
+    output->pfnWOWCleanup = registered_cleanup;
+    output->pfnWOWFindWindow = wow_native_FindWindowA;
+    output->pfnWOWGetIdFromDirectory = wow_private_user_get_id_from_directory;
+    output->pfnWOWLoadBitmapA = wow_bitmap_load;
+    output->pfnWowWaitForMsgAndEvent = registered_wait_for_message;
+    output->pfnYieldTask = registered_yield_task;
+    output->pfnGetFullUserHandle = registered_full_handle;
+    output->pfnGetMenuIndex = wow_private_user_get_menu_index;
+    output->pfnWowGetDefWindowProcBits =
+        wow_private_user_get_def_window_proc_bits;
+    output->pfnFillWindow = registered_fill_window;
+}

@@ -373,7 +373,7 @@ $dllEntryBridgeLines = @(
     '#include "wow_registration_provider.h"',
     'VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);',
     'LONG WINAPI GetClassWOWWords(HINSTANCE, LPCTSTR);',
-    'static const wow_registration_provider registration_provider = { FreeDDEData, GetClassWOWWords };',
+    'static const wow_registration_provider registration_provider = { FreeDDEData, GetClassWOWWords, wow_original_registration_exchange, wow_original_registered_callbacks, wow_original_set_registered_callbacks, wow_original_edit_callbacks_ready, wow_original_registration_lifecycle, wow_original_registration_window_callback };',
     '#include "wow_task_cleanup_entry.h"',
     '#include "wow_timer_callback.h"',
     '#include "wow_native_extension_provider.h"',

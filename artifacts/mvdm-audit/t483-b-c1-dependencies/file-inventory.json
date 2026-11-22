@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 84,
+    "completed": 86,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 13,
+    "compiled_header_rows": 11,
     "private_search_root_rows": 0
   },
   "files": [
@@ -8684,7 +8684,7 @@
     {
       "id": "BC1F086",
       "file": "src/compat/wow_user_registration_bridge.c",
-      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains",
+      "status": "completed in verified P84 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8837,12 +8837,13 @@
           "product": ""
         }
       ],
-      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json"
+      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json",
+      "p84_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p84-registration-closure.json"
     },
     {
       "id": "BC1F087",
       "file": "src/compat/wow_user_registration_state.c",
-      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
+      "status": "completed in verified P84 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8945,7 +8946,8 @@
           "product": ""
         }
       ],
-      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json",
+      "p84_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p84-registration-closure.json"
     },
     {
       "id": "BC1F088",

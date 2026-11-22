@@ -48,7 +48,7 @@ extern BOOL WINAPI wow_original_class_capture(LPCSTR, PUNICODE_STRING);
 #include "compat/include/wow_registration_provider.h"
 extern VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
 extern LONG WINAPI GetClassWOWWords(HINSTANCE, LPCTSTR);
-static const wow_registration_provider registration_provider = { FreeDDEData, GetClassWOWWords };
+static const wow_registration_provider registration_provider = { FreeDDEData, GetClassWOWWords, wow_original_registration_exchange, wow_original_registered_callbacks, wow_original_set_registered_callbacks, wow_original_edit_callbacks_ready, wow_original_registration_lifecycle, wow_original_registration_window_callback };
 static const wow_standard_class_provider class_provider = {
     GetStdClassNumber, wow_original_class_name, wow_original_class_atom, wow_original_class_capture, { 0, 0, FNID_BUTTON, FNID_COMBOBOX, FNID_EDIT, FNID_LISTBOX, FNID_MDICLIENT, FNID_SCROLLBAR, FNID_STATIC, FNID_DESKTOP, FNID_DIALOG, FNID_ICONTITLE, FNID_MENU, FNID_SWITCH, FNID_COMBOLISTBOX } };
 #undef UserRegisterWowHandlers
