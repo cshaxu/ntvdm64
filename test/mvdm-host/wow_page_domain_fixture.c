@@ -43,6 +43,11 @@ extern INT WINAPI GetStdClassNumber(LPSTR);
 extern LPCSTR WINAPI wow_original_class_name(UINT);
 extern ATOM WINAPI wow_original_class_atom(UINT);
 extern BOOL WINAPI wow_original_class_capture(LPCSTR, PUNICODE_STRING);
+#include "../adapter-mvdm-host-out/wow/wow_task_lifecycle_fixture_provider.h"
+#include "compat/include/wow_registration_provider.h"
+extern VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
+extern LONG WINAPI GetClassWOWWords(HINSTANCE, LPCTSTR);
+static const wow_registration_provider registration_provider = { FreeDDEData, GetClassWOWWords };
 static const wow_standard_class_provider class_provider = {
     GetStdClassNumber, wow_original_class_name, wow_original_class_atom, wow_original_class_capture };
 #undef UserRegisterWowHandlers
@@ -6453,6 +6458,9 @@ int main(int argc, char **argv)
             !wow_native_text_bind(wow_original_text_capture) ||
             !wow_default_window_bind(wow_original_default_window_proc) ||
             !wow_bitmap_bind_provider(WOWLoadBitmapA) ||
+            !wow_window_access_bind(&wow_fixture_window_access_provider) ||
+            !wow_task_lifecycle_bind(&wow_fixture_task_lifecycle_provider) ||
+            !wow_registration_bind(&registration_provider) ||
             !wow_standard_class_bind(&class_provider) ||
             !wow_timer_bind(WowOriginalTimerFunc) ||
             !wow_native_extension_bind(&fixture_extension_provider) ||

@@ -1,3 +1,4 @@
+#include "wow_task_environment_fixture_provider.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_class_words_binding.h"
 #include "wow_window_creation_binding.h"
@@ -144,6 +145,7 @@ int __cdecl main(void)
     DWORD procedure = 0;
 
     session_initialize(&owner, 42040u);
+    CHECK(wow_fixture_bind_task_environment());
     CHECK(session_activate(&owner));
     CHECK(session_thread_bind_owned(&owner,
         SESSION_THREAD_BINDING_ORIGINAL_WORKER));

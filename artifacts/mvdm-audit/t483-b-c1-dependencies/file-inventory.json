@@ -5,9 +5,9 @@
   "counts": {
     "files": 94,
     "completed": 45,
-    "direct_unique": 12,
-    "direct_raw": 18,
-    "compiled_header_rows": 195,
+    "direct_unique": 0,
+    "direct_raw": 0,
+    "compiled_header_rows": 164,
     "private_search_root_rows": 0
   },
   "files": [
@@ -7692,7 +7692,7 @@
     {
       "id": "BC1F076",
       "file": "src/compat/wow_standard_class_bindings.c",
-      "status": "not yet audited",
+      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7824,7 +7824,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json"
     },
     {
       "id": "BC1F077",
@@ -8642,7 +8643,7 @@
     {
       "id": "BC1F086",
       "file": "src/compat/wow_user_registration_bridge.c",
-      "status": "not yet audited",
+      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -8794,7 +8795,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json"
     },
     {
       "id": "BC1F087",
@@ -8906,7 +8908,7 @@
     {
       "id": "BC1F088",
       "file": "src/compat/wow_user_task_lifecycle.c",
-      "status": "not yet audited",
+      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -9128,7 +9130,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json"
     },
     {
       "id": "BC1F089",
@@ -9230,7 +9233,7 @@
     {
       "id": "BC1F090",
       "file": "src/compat/wow_window_client_access_bindings.c",
-      "status": "not yet audited",
+      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -9362,7 +9365,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json"
     },
     {
       "id": "BC1F091",
@@ -9504,7 +9508,7 @@
     {
       "id": "BC1F092",
       "file": "src/compat/wow_window_creation_binding.c",
-      "status": "not yet audited",
+      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -9616,7 +9620,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json"
     },
     {
       "id": "BC1F093",
@@ -9822,5 +9827,7 @@
         }
       ]
     }
-  ]
+  ],
+  "current_scan": "build/t483-s20-p64",
+  "current_scan_status": "P64 final product scan; seven lifecycle/window cases, window-access and published runtime verified"
 }

@@ -1,3 +1,4 @@
+#include "wow_task_lifecycle_fixture_provider.h"
 #include "wow_class_client_fixture_provider.h"
 /* The original declaration relies on the provider's /Gz. Annotate that one
  * declaration while this host fixture uses cdecl worker/session headers. */
@@ -21,6 +22,10 @@ extern ATOM WINAPI wow_original_class_atom(UINT);
 extern BOOL WINAPI wow_original_class_capture(LPCSTR, PUNICODE_STRING);
 extern void WINAPI wow_fixture_startup_bind(void);
 extern BOOL __cdecl ntvdm_dpmi_initialize(void);
+#include "compat/include/wow_registration_provider.h"
+extern VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
+extern LONG WINAPI GetClassWOWWords(HINSTANCE, LPCTSTR);
+static const wow_registration_provider registration_provider = { FreeDDEData, GetClassWOWWords };
 static const wow_standard_class_provider class_provider = {
     GetStdClassNumber, wow_original_class_name, wow_original_class_atom, wow_original_class_capture };
 
@@ -67,7 +72,8 @@ static VOID WINAPI end_task(void) { }
 
 int __cdecl main(void)
 {
-    if (!wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
+    if (!wow_window_access_bind(&wow_fixture_window_access_provider) ||
+            !wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
     session owner;
     wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
     wow_user_runtime_thread binding = {0};
@@ -77,10 +83,13 @@ int __cdecl main(void)
     void *committed;
     unsigned i;
     BOOL caught = FALSE;
+    CHECK(wow_window_access_bind(&wow_fixture_window_access_provider));
+    CHECK(wow_task_lifecycle_bind(&wow_fixture_task_lifecycle_provider));
     CHECK(ntvdm_dpmi_initialize());
     CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
     CHECK(wow_button_bind(wow_original_button_data, FreeLookasideEntry));
     CHECK(wow_cleanup_bind(&wow_original_cleanup_provider));
+    CHECK(wow_registration_bind(&registration_provider));
     CHECK(wow_standard_class_bind(&class_provider));
     wow_fixture_startup_bind();
     session_initialize(&owner, 44702);

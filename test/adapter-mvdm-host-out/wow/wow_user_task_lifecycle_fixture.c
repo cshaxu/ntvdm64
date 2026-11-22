@@ -1,3 +1,4 @@
+#include "wow_task_lifecycle_fixture_provider.h"
 #include "wow_class_client_fixture_provider.h"
 #include "wow_standard_class_provider.h"
 #include "compat/include/wow_button_lifetime.h"
@@ -1268,7 +1269,8 @@ static void verify_client_death_exception(void)
 }
 int __cdecl main(int argc,char **argv)
 {
-    if (!wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
+    if (!wow_window_access_bind(&wow_fixture_window_access_provider) ||
+            !wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
     session owner;
     wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
     wow_user_runtime_thread binding = {0};
@@ -1281,6 +1283,22 @@ int __cdecl main(int argc,char **argv)
     HANDLE wowexec = CreateEventW(NULL, FALSE, FALSE, NULL);
 
     verify_client_death_exception();
+    CHECK(!wow_task_lifecycle_bind(NULL));
+    CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    {
+        wow_task_lifecycle_provider invalid = wow_fixture_task_lifecycle_provider;
+        invalid.destroy = NULL;
+        CHECK(!wow_task_lifecycle_bind(&invalid));
+        CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    }
+    CHECK(wow_window_access_bind(&wow_fixture_window_access_provider));
+    CHECK(wow_task_lifecycle_bind(&wow_fixture_task_lifecycle_provider));
+    CHECK(wow_task_lifecycle_bind(&wow_fixture_task_lifecycle_provider));
+    {
+        wow_task_lifecycle_provider replacement = wow_fixture_task_lifecycle_provider;
+        CHECK(!wow_task_lifecycle_bind(&replacement));
+        CHECK(GetLastError() == ERROR_ALREADY_INITIALIZED);
+    }
     CHECK(wowexec != NULL);
     CHECK(ntvdm_dpmi_initialize());
     CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));

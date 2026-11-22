@@ -1,4 +1,6 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
+#include "wow_task_lifecycle_provider.h"
 #include "wow_user_task_lifecycle.h"
 
 #include "wow_class_words_binding.h"
@@ -22,6 +24,23 @@
 #ifndef STATUS_SUCCESS
 #define STATUS_SUCCESS ((NTSTATUS)0)
 #endif
+
+static const wow_task_lifecycle_provider *task_provider;
+
+BOOL WINAPI wow_task_lifecycle_bind(const wow_task_lifecycle_provider *value)
+{
+    PVOID previous;
+    if (!value || !value->sleep || !value->directed_yield || !value->initialize ||
+            !value->register_hung_handlers || !value->yield || !value->destroy) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&task_provider,
+        (PVOID)value, NULL);
+    if (previous && previous != value) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
 
 static void list_initialize(LIST_ENTRY *head)
 {
@@ -379,7 +398,7 @@ BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *owner,
     static const wow_user_runtime_lifecycle_ops operations = {
         wow_user_task_lifecycle_unbind, wow_user_task_lifecycle_dispose
     };
-    if (!owner || !runtime || !callbacks || owner->initialized || runtime->lifecycle) {
+    if (!task_provider || !owner || !runtime || !callbacks || owner->initialized || runtime->lifecycle) {
         SetLastError(ERROR_INVALID_STATE);
         return FALSE;
     }
@@ -447,7 +466,7 @@ BOOL WINAPI wow_user_task_lifecycle_register(wow_user_task_lifecycle *owner,
         return FALSE;
     }
     __try {
-        result = xxxRegisterUserHungAppHandlers(callback, wowexec_event,
+        result = task_provider->register_hung_handlers(callback, wowexec_event,
             &owner->process);
         if (result) owner->registered = TRUE;
     } __finally {
@@ -546,7 +565,7 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     if (!task->input_plan) goto done;
     RtlInitUnicodeString(&name, wide);
     __try {
-        status = xxxInitTask(version, &name, task_id, hotkey, shared_id, x, y,
+        status = task_provider->initialize(version, &name, task_id, hotkey, shared_id, x, y,
             width, height, show);
     } __finally {
         wow_input_group_release_plan(task->input_plan);
@@ -636,7 +655,7 @@ BOOL WINAPI wow_user_task_lifecycle_yield(wow_user_task_lifecycle *owner)
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
     __try {
-        result = xxxUserYield(&task->thread);
+        result = task_provider->yield(&task->thread);
         if (result) publish_scheduled_return(wow_user_runtime_current());
     }
     __finally { (void)wow_user_runtime_leave(wow_user_runtime_current()); }
@@ -651,7 +670,7 @@ VOID WINAPI wow_user_task_lifecycle_directed_yield(wow_user_task_lifecycle *owne
         SetLastError(ERROR_INVALID_STATE); return;
     }
     __try {
-        xxxDirectedYield(thread_id);
+        task_provider->directed_yield(thread_id);
         publish_scheduled_return(wow_user_runtime_current());
     }
     __finally { (void)wow_user_runtime_leave(wow_user_runtime_current()); }
@@ -676,7 +695,7 @@ BOOL WINAPI wow_user_task_lifecycle_wait(wow_user_task_lifecycle *owner,
         queue_status = GetQueueStatus(QS_ALLINPUT);
         task->thread.pcti->fsChangeBits = LOWORD(queue_status) |
             (HIWORD(queue_status) & QS_POSTMESSAGE);
-        result = xxxSleepTask(FALSE, wowexec_event, &task->thread);
+        result = task_provider->sleep(FALSE, wowexec_event, &task->thread);
         if (result) publish_scheduled_return(wow_user_runtime_current());
     }
     __finally { (void)wow_user_runtime_leave(wow_user_runtime_current()); }
@@ -722,7 +741,7 @@ static BOOL sleep_message_task(wow_user_task_lifecycle *owner, BOOL publish)
     }
     __try {
         wake_input_idle(&task->thread);
-        (void)xxxSleepTask(TRUE, NULL, &task->thread);
+        (void)task_provider->sleep(TRUE, NULL, &task->thread);
         if (publish) publish_scheduled_return(binding);
     } __finally { (void)wow_user_runtime_leave(binding); }
     return TRUE;
@@ -852,7 +871,7 @@ static void park_native_owner(wow_task_order_thread *receiver)
     wow_task_order_thread *thread = state ? state->CSOwningThread : NULL;
     if (!thread || state->nTaskLock) return;
     if (!wow_task_execution_ready(thread))
-        (void)xxxSleepTask(FALSE, (HANDLE)-1, thread);
+        (void)task_provider->sleep(FALSE, (HANDLE)-1, thread);
 }
 
 static BOOL callback_enter(wow_task_callback_scope *scope, BOOL resource_cleanup)
@@ -883,7 +902,7 @@ static BOOL callback_enter(wow_task_callback_scope *scope, BOOL resource_cleanup
         /* The callback has actually arrived, even when native SendMessage's
          * wait dispatched it without our queue-wait observer. Original
          * OldYield records runnable work before entering SleepTask. */
-        xxxDirectedYield((DWORD)-1);
+        task_provider->directed_yield((DWORD)-1);
         scope->resumed = TRUE;
     }
     if (thread->ppi->pwpi->CSOwningThread != thread)
@@ -918,7 +937,7 @@ BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *scope)
         wow_user_native_call_failed("restore-callback-owner", GetLastError());
     execution_pop(binding->thread, &scope->execution);
     /* Return to the suspended native wait, not to guest execution. */
-    if (scope->resumed) (void)xxxSleepTask(FALSE, (HANDLE)-1, binding->thread);
+    if (scope->resumed) (void)task_provider->sleep(FALSE, (HANDLE)-1, binding->thread);
     scope->binding = NULL;
     if (!scope->held && !wow_user_runtime_leave(binding))
         wow_user_native_call_failed("release-callback-owner", GetLastError());
@@ -981,7 +1000,7 @@ static BOOL native_call_begin(wow_user_native_call *call, HWND window,
     /* Actual native waits/modal calls are excluded persistently. Task lock
      * is not overridden; actual same-thread callbacks inherit execution. */
     if (call->execution_held && !inline_call && !sender->ppi->pwpi->nTaskLock)
-        (void)xxxSleepTask(FALSE, (HANDLE)-1, sender);
+        (void)task_provider->sleep(FALSE, (HANDLE)-1, sender);
     if (!wow_user_runtime_leave(binding))
         wow_user_native_call_failed("release-native-handoff", GetLastError());
     /* Owner lookup is bookkeeping, not the native operation. In particular
@@ -1144,7 +1163,7 @@ static BOOL native_call_end(wow_user_native_call *call, BOOL scheduler_wait,
      * private SMS relation. Reacquire only execution owned on entry. */
     call->execution.ready = TRUE;
     if (call->execution_held && sender->ppi->pwpi->CSOwningThread != sender)
-        (void)xxxDirectedYield((DWORD)-1);
+        (void)task_provider->directed_yield((DWORD)-1);
     if (call->execution_held && sender->ppi->pwpi->CSOwningThread != sender)
         wow_user_native_call_failed("native-return-execution", ERROR_INVALID_STATE);
     execution_pop(sender, &call->execution);
@@ -1601,7 +1620,7 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
         task->thread.execution = NULL;
         wow_input_group_retire(&owner->input, &task->thread);
         *link = task->next;
-        DestroyTask(&owner->process, &task->thread);
+        task_provider->destroy(&owner->process, &task->thread);
         if (binding->thread == &task->thread)
             (void)wow_user_runtime_set_context(binding, NULL, NULL);
         list_remove(&task->thread.PtiLink);

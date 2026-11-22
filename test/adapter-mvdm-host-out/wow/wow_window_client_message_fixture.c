@@ -1,6 +1,7 @@
 #include "wow_window_client_state_bindings.h"
 #include "wow_user_client_view_layout.h"
 #include "wow_user_borrow_scope.h"
+#include "wow_window_access_provider.h"
 #include <stdio.h>
 
 /* Production access binding with transport doubles: proves argument mapping,
@@ -71,10 +72,18 @@ LONG WINAPI _SetWindowLong(HWND window, int index, LONG value, BOOL ansi)
   SetLastError(ERROR_INVALID_INDEX); return 0; }
 DWORD WINAPI xxxSetWindowLong(PWND window, int index, DWORD value, BOOL ansi)
 { (void)window; (void)index; (void)value; (void)ansi; ++failures; return 0; }
+static HMENU WINAPI unexpected_menu(HINSTANCE module, LPCWSTR name)
+{ (void)module; (void)name; ++failures; return NULL; }
+static const wow_window_access_provider access_provider = {
+    xxxSetWindowLong, _GetWindowLong, _SetWindowLong, unexpected_menu
+};
 int __cdecl main(void)
 {
     unsigned i;
     LONG output;
+    CHECK(!wow_window_access_bind(NULL));
+    CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    CHECK(wow_window_access_bind(&access_provider));
     for (i = 0; i < 2; ++i) {
         expected_ansi = i != 0;
         state.head.h = (HWND)(ULONG_PTR)0x13579;

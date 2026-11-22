@@ -1,7 +1,9 @@
+#include "wow_task_environment_fixture_provider.h"
 #include "ntvdm-exe/session/session.h"
 #include "wow_user_task_lifecycle.h"
 #include "compat/include/wow_user_session_binding.h"
 #include "wow_standard_class_bindings.h"
+#include "compat/include/wow_user_client_view_layout.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -148,6 +150,7 @@ int __cdecl main(void)
     DWORD flags;
     WNDCLASSEXA control = {sizeof(control)};
     verify_isolated_relationships();
+    CHECK(wow_fixture_bind_task_environment());
     CHECK(event != NULL);
     session_initialize(&owner, 44702u);
     CHECK(session_activate(&owner));

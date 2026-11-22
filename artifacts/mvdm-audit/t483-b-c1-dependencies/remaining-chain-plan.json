@@ -1,0 +1,666 @@
+{
+  "scope": "49 outstanding files, grouped from P63 compiled records; source ownership and lifecycle review still required before closing a file",
+  "groups": {
+    "shared-header-consumer-closure": 5,
+    "original-layout-consumer": 36,
+    "shell-delivered-open-gate": 1,
+    "reconcile-no-current-compiled-edge": 3,
+    "direct-provider-chain": 4
+  },
+  "files": [
+    {
+      "id": "BC1F007",
+      "file": "src/compat/include/control-client/precomp.h",
+      "group": "shared-header-consumer-closure",
+      "prior_status": "redundant direct include removed in P8; transitive USER layout group remains open",
+      "direct_symbols": [],
+      "compiled_headers": []
+    },
+    {
+      "id": "BC1F010",
+      "file": "src/compat/include/opennt_user_multipass.h",
+      "group": "shared-header-consumer-closure",
+      "prior_status": "in progress: shared consumer chain; P9 clears text subgroup only",
+      "direct_symbols": [],
+      "compiled_headers": []
+    },
+    {
+      "id": "BC1F011",
+      "file": "src/compat/include/opennt_usercli_multipass.h",
+      "group": "shared-header-consumer-closure",
+      "prior_status": "in progress: shared consumer chain; P9 clears text subgroup only",
+      "direct_symbols": [],
+      "compiled_headers": []
+    },
+    {
+      "id": "BC1F018",
+      "file": "src/compat/include/wow_shared_user_abi.h",
+      "group": "shared-header-consumer-closure",
+      "prior_status": "in progress: P15 clears partial dialog header propagation; original WW and registration consumers remain",
+      "direct_symbols": [],
+      "compiled_headers": []
+    },
+    {
+      "id": "BC1F021",
+      "file": "src/compat/include/wow_user_capture_bindings.h",
+      "group": "shared-header-consumer-closure",
+      "prior_status": "in progress: P19 removes standard-class capture implementation dependency; shared class-client capture headers remain",
+      "direct_symbols": [],
+      "compiled_headers": []
+    },
+    {
+      "id": "BC1F026",
+      "file": "src/compat/wow_button_lifetime.c",
+      "group": "original-layout-consumer",
+      "prior_status": "in progress: P21 removes button state and lookaside implementation edges; shared button resource layout remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F027",
+      "file": "src/compat/wow_button_resources.c",
+      "group": "original-layout-consumer",
+      "prior_status": "in progress: P22 removes redundant nt.h chain; original OEM geometry layout remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F031",
+      "file": "src/compat/wow_class_words_binding.c",
+      "group": "original-layout-consumer",
+      "prior_status": "in progress: P26 removes three direct C1 calls; original CLS layout headers remain",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F038",
+      "file": "src/compat/wow_control_draw_state.c",
+      "group": "original-layout-consumer",
+      "prior_status": "in progress: P32 removes original drawing direct call; original button resource layout remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F042",
+      "file": "src/compat/wow_default_message_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "in progress: P36 removes original initializer direct call; original message-table layout remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F043",
+      "file": "src/compat/wow_default_native_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "in progress: P37 removes private nt.h; original WND and USER definitions remain",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F044",
+      "file": "src/compat/wow_default_state_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "in progress: P38 removes private nt.h; shared original message-table layout remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F045",
+      "file": "src/compat/wow_default_window_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partial: P12 removed the function dependency; the translation unit includes C1 nt.h and accesses PWND::head.h through the original USER layout",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F048",
+      "file": "src/compat/wow_dialog_context_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "in progress: P41 removes private nt.h; shared original USER layout remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F049",
+      "file": "src/compat/wow_dialog_creation_binding.c",
+      "group": "original-layout-consumer",
+      "prior_status": "in progress: P42 removes original creation direct calls and private NT headers; original dialog layout remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F050",
+      "file": "src/compat/wow_dialog_finalization_binding.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in verified P43 delivery; original dialog layout headers remain",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F051",
+      "file": "src/compat/wow_dialog_keyboard_binding.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in verified P44 delivery; transitive original USER layout remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F052",
+      "file": "src/compat/wow_dialog_lookup.c",
+      "group": "original-layout-consumer",
+      "prior_status": "audited in P45: original _GetDlgItem layout/rebase exception; incidental header closure remains under review",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h"
+      ]
+    },
+    {
+      "id": "BC1F053",
+      "file": "src/compat/wow_dialog_memory.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in P45: private NT include removed; original registration and USER layout headers remain",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F055",
+      "file": "src/compat/wow_dialog_pointer.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in P46: private NT include removed; original USER layout headers remain",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F057",
+      "file": "src/compat/wow_dialog_state_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in P48: private NT include removed; original dialog layout headers remain",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F058",
+      "file": "src/compat/wow_edit_call_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in P49: private NT include removed; original USER layout and WOW ABI headers remain",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F059",
+      "file": "src/compat/wow_edit_conversion_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in P50: original EDIT entry addresses provided by synchronous binding; original USER header remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F060",
+      "file": "src/compat/wow_edit_entry_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in P51: 11 original control entry symbols supplied via synchronous provider; original USER layout headers remain",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F063",
+      "file": "src/compat/wow_edit_state_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in P53: four original finalizers use existing control provider; original USER headers remain",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F064",
+      "file": "src/compat/wow_edit_thread_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in P54: private NT header removed; original USER layout headers remain",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F070",
+      "file": "src/compat/wow_menu_client_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in P59: private NT header removed; original USER header remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F072",
+      "file": "src/compat/wow_object_ownership.c",
+      "group": "original-layout-consumer",
+      "prior_status": "audited P61: owner-retired original ownership table remains C-layout coupled; unresolved",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "src/non-mvdm/windows/core/ntuser/kernel/userk.h"
+      ]
+    },
+    {
+      "id": "BC1F074",
+      "file": "src/compat/wow_private_user_compat.c",
+      "group": "original-layout-consumer",
+      "prior_status": "partially addressed in P62: original menu parser supplied by synchronous provider; original USER header remains",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F075",
+      "file": "src/compat/wow_shell_callback.c",
+      "group": "shell-delivered-open-gate",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": []
+    },
+    {
+      "id": "BC1F076",
+      "file": "src/compat/wow_standard_class_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F077",
+      "file": "src/compat/wow_task_profile_binding.c",
+      "group": "reconcile-no-current-compiled-edge",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": []
+    },
+    {
+      "id": "BC1F078",
+      "file": "src/compat/wow_task_start_notification.c",
+      "group": "reconcile-no-current-compiled-edge",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": []
+    },
+    {
+      "id": "BC1F079",
+      "file": "src/compat/wow_timer_callback.c",
+      "group": "reconcile-no-current-compiled-edge",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": []
+    },
+    {
+      "id": "BC1F080",
+      "file": "src/compat/wow_user_borrow_scope.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F081",
+      "file": "src/compat/wow_user_discovery.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h"
+      ]
+    },
+    {
+      "id": "BC1F082",
+      "file": "src/compat/wow_user_message_bridge.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h"
+      ]
+    },
+    {
+      "id": "BC1F083",
+      "file": "src/compat/wow_user_native_extension.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h"
+      ]
+    },
+    {
+      "id": "BC1F084",
+      "file": "src/compat/wow_user_object_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F085",
+      "file": "src/compat/wow_user_private_access.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F086",
+      "file": "src/compat/wow_user_registration_bridge.c",
+      "group": "direct-provider-chain",
+      "prior_status": "not yet audited",
+      "direct_symbols": [
+        "_FreeDDEData@12",
+        "_GetClassWOWWords@8"
+      ],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h"
+      ]
+    },
+    {
+      "id": "BC1F087",
+      "file": "src/compat/wow_user_registration_state.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F088",
+      "file": "src/compat/wow_user_task_lifecycle.c",
+      "group": "direct-provider-chain",
+      "prior_status": "not yet audited",
+      "direct_symbols": [
+        "_DestroyTask@8",
+        "_xxxDirectedYield@4",
+        "_xxxInitTask@40",
+        "_xxxRegisterUserHungAppHandlers@12",
+        "_xxxSleepTask@12",
+        "_xxxUserYield@4"
+      ],
+      "compiled_headers": [
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F089",
+      "file": "src/compat/wow_user_thunk_scope.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h"
+      ]
+    },
+    {
+      "id": "BC1F090",
+      "file": "src/compat/wow_window_client_access_bindings.c",
+      "group": "direct-provider-chain",
+      "prior_status": "not yet audited",
+      "direct_symbols": [
+        "__GetWindowLong@12",
+        "__SetWindowLong@16",
+        "_xxxSetWindowLong@16"
+      ],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F091",
+      "file": "src/compat/wow_window_client_state_bindings.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F092",
+      "file": "src/compat/wow_window_creation_binding.c",
+      "group": "direct-provider-chain",
+      "prior_status": "not yet audited",
+      "direct_symbols": [
+        "_wow_user_load_menuW@8"
+      ],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    },
+    {
+      "id": "BC1F093",
+      "file": "src/compat/wow_window_procedure_entry.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h"
+      ]
+    },
+    {
+      "id": "BC1F094",
+      "file": "src/compat/wow_window_words_binding.c",
+      "group": "original-layout-consumer",
+      "prior_status": "not yet audited",
+      "direct_symbols": [],
+      "compiled_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ]
+    }
+  ],
+  "priority": [
+    "Resolve four direct-provider files as complete registration, task lifecycle, window access and menu creation chains",
+    "Resolve original USER layout consumers in their owning chains",
+    "Remove shared header dependencies only after consumers are decoupled",
+    "Reconcile files with zero compiled edges and retain open test gates separately"
+  ],
+  "constraints": [
+    "Preserve original C1/C2 algorithms and synchronous lifecycle",
+    "No duplicate private structure definitions in B",
+    "No per-field getter proliferation",
+    "No file completion credit for partial header removal"
+  ]
+}

@@ -1,4 +1,6 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
+#include "wow_window_access_provider.h"
 #include "wow_window_client_state_bindings.h"
 #include "wow_user_client_view_layout.h"
 #include "wow_user_private_access.h"
@@ -6,7 +8,27 @@
 
 /* ADAPTER-WOW-063: common private receive edge, not a control-specific
  * storage policy. Original kernel/getset.c owns validation and old values. */
-DWORD WINAPI xxxSetWindowLong(PWND, int, DWORD, BOOL);
+static const wow_window_access_provider *provider;
+
+BOOL WINAPI wow_window_access_bind(const wow_window_access_provider *value)
+{
+    PVOID previous;
+    if (!value || !value->set_long || !value->get_long ||
+            !value->set_client_long || !value->load_menu) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,
+        (PVOID)value, NULL);
+    if (previous && previous != value) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
+
+const wow_window_access_provider *WINAPI wow_window_access_current(void)
+{
+    return provider;
+}
 
 /* ADAPTER-WOW-063: only GWL_STYLE reaches this server-data continuation
  * through the selected client contract. Original _SetWindowLong retains
@@ -63,13 +85,13 @@ LONG WINAPI wow_window_client_set_window_long(HWND window, int index, LONG value
 {
     PWND state = wow_window_client_validate_hwnd(window);
     if (!state) return 0;
-    return (LONG)xxxSetWindowLong(state, index, (DWORD)value, ansi);
+    if (!provider) { SetLastError(ERROR_INVALID_STATE); return 0; }
+    return (LONG)provider->set_long(state, index, (DWORD)value, ansi);
 }
 
 /* Public access and private storage share the retained original getset
  * owners; dialog-specific pointer publication remains in its own binding. */
-DWORD WINAPI _GetWindowLong(PWND, int, BOOL);
-LONG WINAPI _SetWindowLong(HWND, int, LONG, BOOL);
+
 
 /* Failure to retain an owned original view is not permission to read/write
  * native extra bytes instead. This query acquires only the existing window
@@ -98,8 +120,9 @@ BOOL WINAPI wow_window_client_try_get_long(HWND window, int index, BOOL ansi,
      * A zero result, including denied access, must not fall through to the
      * unrelated modern USER storage. Negative indices retain their
      * existing WND procedure/style/identity handling outside this boundary. */
+    if (!provider) { *result = 0; SetLastError(ERROR_INVALID_STATE); return TRUE; }
     SetLastError(error);
-    *result = (LONG)_GetWindowLong(state, index, ansi);
+    *result = (LONG)provider->get_long(state, index, ansi);
     return TRUE;
 }
 
@@ -115,7 +138,8 @@ BOOL WINAPI wow_window_client_try_set_long(HWND window, int index, LONG value,
      * initialized ListBox style guard; its server
      * continuation owns result/user/extra-byte writes. Never store a second
      * copy in native USER or treat original zero/error as unhandled. */
+    if (!provider) { *previous = 0; SetLastError(ERROR_INVALID_STATE); return TRUE; }
     SetLastError(error);
-    *previous = _SetWindowLong(window, index, value, ansi);
+    *previous = provider->set_client_long(window, index, value, ansi);
     return TRUE;
 }

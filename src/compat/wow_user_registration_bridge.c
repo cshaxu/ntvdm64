@@ -1,4 +1,6 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
+#include "wow_registration_provider.h"
 #include "compat/include/wow_user_registration_state.h"
 #include "compat/include/wow_task_start_notification.h"
 #include "compat/include/wow_startup_report.h"
@@ -14,6 +16,23 @@
 #include "compat/include/wow_page_domain.h"
 
 #include "compat/include/wow_dde_data_bindings.h"
+
+/* Immutable image-lifetime functions, bound before original DLL attach. */
+static const wow_registration_provider *provider;
+
+BOOL WINAPI wow_registration_bind(const wow_registration_provider *value)
+{
+    PVOID previous;
+    if (!value || !value->free_dde_data || !value->class_words) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,
+        (PVOID)value, NULL);
+    if (previous && previous != value) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
 
 /* ADAPTER-WOW-056: UserRegisterWowHandlers is one original all-or-nothing
  * ABI transaction.  Modern USER32 exposes its historical name but rejects
@@ -100,6 +119,10 @@ DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN input,
         return 0;
     }
 
+    if (!provider) {
+        SetLastError(ERROR_INVALID_STATE);
+        return 0;
+    }
     shared = (DWORD)mvdm_softpc_wow_page_domain_guest_shared_info();
     if (!shared || !mvdm_softpc_wow_page_domain_client_desktop_ready()) {
         SetLastError(ERROR_INVALID_STATE);
@@ -114,8 +137,8 @@ DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN input,
     output->dwBldInfo = 0x84000000u;
     output->pfnCsCreateWindowEx = registered_create_window_ex;
     output->pfnDirectedYield = registered_directed_yield;
-    output->pfnFreeDDEData = FreeDDEData;
-    output->pfnGetClassWOWWords = GetClassWOWWords;
+    output->pfnFreeDDEData = provider->free_dde_data;
+    output->pfnGetClassWOWWords = provider->class_words;
     output->pfnInitTask = registered_init_task;
     output->pfnRegisterClassWOWA = registered_register_class;
     output->pfnRegisterUserHungAppHandlers = registered_hung_handlers;

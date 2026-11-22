@@ -1,4 +1,6 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
+#include "wow_window_access_provider.h"
 #include "wow_window_creation_binding.h"
 #include "wow_window_procedure_entry.h"
 #include "wow_edit_entry_bindings.h"
@@ -357,7 +359,12 @@ BOOL WINAPI wow_window_creation_menu(HWND window, CREATESTRUCTA *creation,
      * WM_NCCREATE. Native registration intentionally has no menu name.
      * Reuse the original resource client/converter/parser, not USER32's
      * PE loader. The enrolled window retains the class across this callback. */
-    menu = wow_user_load_menuW(entry->hModule,
+    if (!wow_window_access_current()) {
+        state->failure = ERROR_INVALID_STATE;
+        SetLastError(state->failure);
+        return FALSE;
+    }
+    menu = wow_window_access_current()->load_menu(entry->hModule,
         entry->lpszClientUnicodeMenuName);
     if (!menu) return TRUE; /* Original creation tolerates load failure. */
     /* Original getset.c's non-child GWL_ID branch performs the same menu

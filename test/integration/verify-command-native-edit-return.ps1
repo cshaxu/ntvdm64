@@ -2,7 +2,8 @@
 param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$PackageRoot,
-    [Parameter(Mandatory)][string]$ReportPath
+    [Parameter(Mandatory)][string]$ReportPath,
+    [string]$LogonHelper
 )
 $ErrorActionPreference='Stop'
 if($env:MVDM_OBSERVER_WINDOW_INPUT){
@@ -33,11 +34,27 @@ try {
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false
     $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
+    if($LogonHelper){
+        # Same complete Userenv block used by the immutable-guest fixtures.
+        # Inherited developer environments remain a separate explicit case.
+        Add-Type -Path (Resolve-Path $LogonHelper).Path
+        $identity=[Security.Principal.WindowsIdentity]::GetCurrent()
+        try{$entries=[WowMessageLogonEnvironment]::Read($identity.Token)}
+        finally{$identity.Dispose()}
+        $start.EnvironmentVariables.Clear()
+        foreach($entry in $entries){
+            $at=$entry.IndexOf('=',1)
+            $start.EnvironmentVariables[$entry.Substring(0,$at)]=$entry.Substring($at+1)
+        }
+    }
     $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
     # This lifecycle fixture uses only this package and host System32.
     # Developer toolchain PATH growth is a separate immutable-COMMAND guest
     # boundary, not input to the EDIT return contract. Affect only the child.
     $start.EnvironmentVariables['PATH']=$binary+';'+(Join-Path $env:SystemRoot 'System32')
+    $start.EnvironmentVariables.Keys | ForEach-Object {
+        [pscustomobject]@{Name=$_;Length=$start.EnvironmentVariables[$_].Length}
+    } | Export-Csv -NoTypeInformation ($ReportPath+'.environment-shape.csv')
     $mem=Join-Path $binary 'MEM.EXE'
     $text="cmd.exe /d`r$edit`r$([char]17)`recho S40-NATIVE-RETURN-OK`rexit`r$mem`rexit`r"
     foreach($argument in @((Join-Path $binary 'run16.exe'),$stage,$ReportPath,
@@ -48,6 +65,9 @@ try {
     $process=[Diagnostics.Process]::Start($start)
     if(!$process.WaitForExit(60000)){throw 'EDIT return observer timed out'}
     $report=Get-Content -LiteralPath $ReportPath -Raw
+    if(!(Test-Path -LiteralPath ($ReportPath+'.line-02.console.txt'))){
+        throw "COMMAND never reached the EDIT input milestone: $ReportPath"
+    }
     $editor=Get-Content -LiteralPath ($ReportPath+'.line-02.console.txt') -Raw
     $snapshots=Get-ChildItem -LiteralPath (Split-Path $ReportPath) |
         Where-Object {$_.Name.StartsWith([IO.Path]::GetFileName($ReportPath)+'.line-')}

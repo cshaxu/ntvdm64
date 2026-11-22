@@ -1,0 +1,256 @@
+{
+  "status": "verified and dual-published P64 delivery; S20 remains active",
+  "scope": "four direct-provider chains: registration, task lifecycle, window access, window creation; private USER layout remains",
+  "direct_original_calls_remaining_in_lifecycle": {
+    "xxxSleepTask": 0,
+    "xxxDirectedYield": 0,
+    "xxxInitTask": 0,
+    "xxxRegisterUserHungAppHandlers": 0,
+    "xxxUserYield": 0,
+    "DestroyTask": 0
+  },
+  "typed_calls": {
+    "sleep": 5,
+    "directed_yield": 3,
+    "initialize": 1,
+    "register_hung_handlers": 1,
+    "yield": 1,
+    "destroy": 1
+  },
+  "binding": "immutable image-lifetime table, bound in generated DLL entry before original attach; rejects missing operations and replacement",
+  "ownership": "same original functions, same caller scopes, task records and destruction order",
+  "tests_added": "immutable-provider binding negative controls; existing original-function fixture wiring; retirement fixture required earlier provider setup too",
+  "mirror_changes_in_this_batch": 0,
+  "next": "continue private USER layout and remaining file audit; no S closure",
+  "completed_file_credit": 0,
+  "package": "6479f7ba-76c7-4d01-846b-e8b06d52fb9a",
+  "build_evidence": "build/t483-s20-p64/build-result.json",
+  "publication_evidence": "build/t483-s20-p64/publication-final-fixed.json",
+  "scan": {
+    "b_c1_direct_unique": 0,
+    "b_c1_direct_raw": 0,
+    "b_c1_compiled_headers": 164,
+    "b_c1_compiled_source_files": 40,
+    "b_c2_direct_raw": 0,
+    "b_c2_compiled_headers": 0,
+    "limitation": "existing map-based relocation coverage; not blanket data-symbol or runtime-independence proof"
+  },
+  "native_tests_passed": [
+    "task-lifecycle",
+    "init-notification",
+    "class-lifetime",
+    "process-retirement",
+    "window-borrow",
+    "native-creation",
+    "standard-class",
+    "window-access-boundary"
+  ],
+  "published_guest_passed": "actual USER16 two-task same-worker send/nesting/reply/post/filter/quit/string-copyback, native peer both directions, normal task retirement",
+  "command_test": {
+    "inherited_environment": "P63 baseline and P64 both failed before prompt; retained logs",
+    "complete_userenv": "both passed modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM, launcher completion",
+    "scope": "test-only optional reuse of existing logon helper; product environment unchanged",
+    "evidence": "build/t483-s20-p64/command-logon-comparison.json"
+  },
+  "file_results": [
+    {
+      "file": "src/compat/wow_standard_class_bindings.c",
+      "complete": false,
+      "remaining": "original USER private header/layout",
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "before": {
+        "headers": 7,
+        "direct_records": 0,
+        "direct_symbols": 0
+      },
+      "after": {
+        "headers": 1,
+        "direct_records": 0,
+        "direct_symbols": 0
+      }
+    },
+    {
+      "file": "src/compat/wow_user_registration_bridge.c",
+      "complete": false,
+      "remaining": "original USER private header/layout",
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "before": {
+        "headers": 7,
+        "direct_records": 2,
+        "direct_symbols": 2
+      },
+      "after": {
+        "headers": 1,
+        "direct_records": 0,
+        "direct_symbols": 0
+      }
+    },
+    {
+      "file": "src/compat/wow_user_task_lifecycle.c",
+      "complete": false,
+      "remaining": "original USER private header/layout",
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "before": {
+        "headers": 7,
+        "direct_records": 12,
+        "direct_symbols": 6
+      },
+      "after": {
+        "headers": 1,
+        "direct_records": 0,
+        "direct_symbols": 0
+      }
+    },
+    {
+      "file": "src/compat/wow_window_client_access_bindings.c",
+      "complete": false,
+      "remaining": "original USER private header/layout",
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "before": {
+        "headers": 8,
+        "direct_records": 3,
+        "direct_symbols": 3
+      },
+      "after": {
+        "headers": 2,
+        "direct_records": 0,
+        "direct_symbols": 0
+      }
+    },
+    {
+      "file": "src/compat/wow_window_creation_binding.c",
+      "complete": false,
+      "remaining": "original USER private header/layout",
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "before": {
+        "headers": 8,
+        "direct_records": 1,
+        "direct_symbols": 1
+      },
+      "after": {
+        "headers": 2,
+        "direct_records": 0,
+        "direct_symbols": 0
+      }
+    }
+  ],
+  "verification_limitation": "S20 not closed: original USER layouts, data-symbol coverage and earlier native Shell intermittent failure remain",
+  "fixture_repairs": [
+    "Use typed linker aliases for original /Gz get/set symbols in /Gd tests; do not force early private header inclusion",
+    "Initialize original CPU and existing class/profile/cleanup providers for retirement fixture",
+    "Optional complete Userenv source for COMMAND integration, retains inherited-environment mode and all acceptance assertions"
+  ],
+  "verification_commands": [
+    "pwsh -NoProfile -File test/observation/verify-wow-task-lifecycle.ps1 -ProviderBuildRoot build/.ninja/msvc-x86-release/wow32 -WorkerBuildRoot build/.ninja/msvc-x86-release/worker -BuildRoot <fresh> -Case <task-lifecycle|init-notification|class-lifetime|process-retirement|window-borrow|native-creation|standard-class>",
+    "test/integration/verify-win16-message-probe.ps1 -PackageRoot build/t483-s20-p64/candidate-final -Observer build/t483-s13-dpmi-boundary/observers/console-startup-observer.exe -CompilerDriver build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd -BuildRoot build/t483-s20-p64/native-guest -NativeExtension",
+    "test/integration/verify-command-native-edit-return.ps1 -PackageRoot build/t483-s20-p64/candidate-final -Observer build/t483-s13-dpmi-boundary/observers/console-startup-observer.exe -ReportPath <fresh> -LogonHelper build/t483-s20-p64/native-guest/logon-env.dll"
+  ],
+  "final_native_cases": [
+    {
+      "exit": 0,
+      "started": "2026-11-22T08:02:44.2591374+00:00",
+      "finished": "2026-11-22T08:02:56.3724548+00:00",
+      "case": "task-lifecycle"
+    },
+    {
+      "exit": 0,
+      "started": "2026-11-22T08:02:56.3773149+00:00",
+      "finished": "2026-11-22T08:03:08.6245197+00:00",
+      "case": "init-notification"
+    },
+    {
+      "exit": 0,
+      "started": "2026-11-22T08:03:08.6272544+00:00",
+      "finished": "2026-11-22T08:03:19.2342683+00:00",
+      "case": "class-lifetime"
+    },
+    {
+      "case": "process-retirement",
+      "exit": 0,
+      "finished": "2026-11-22T08:04:18.2004693+00:00",
+      "started": "2026-11-22T08:04:06.4175268+00:00"
+    },
+    {
+      "case": "window-borrow",
+      "exit": 0,
+      "finished": "2026-11-22T08:04:29.6206666+00:00",
+      "started": "2026-11-22T08:04:18.2053016+00:00"
+    },
+    {
+      "case": "native-creation",
+      "exit": 0,
+      "finished": "2026-11-22T08:04:41.4301594+00:00",
+      "started": "2026-11-22T08:04:29.6227688+00:00"
+    },
+    {
+      "case": "standard-class",
+      "exit": 0,
+      "finished": "2026-11-22T08:04:53.3074660+00:00",
+      "started": "2026-11-22T08:04:41.4312578+00:00"
+    }
+  ],
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "6479f7ba-76c7-4d01-846b-e8b06d52fb9a",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "build": {
+    "exit": 0,
+    "pid": 31632,
+    "finished": "2026-11-22T07:44:47.3992697+00:00",
+    "started": "2026-11-22T07:42:59.7193714+00:00"
+  },
+  "command_logon_comparison": [
+    {
+      "version": "baseline",
+      "passed": true,
+      "started": "2026-11-22T08:00:39.3769951+00:00"
+    },
+    {
+      "version": "candidate",
+      "passed": true,
+      "started": "2026-11-22T08:01:10.6985916+00:00"
+    }
+  ],
+  "governance": "library boundary, documentation governance and relative links passed; final recheck before commit",
+  "final_checks": {
+    "mirror_files_changed": 0,
+    "guest_files_changed": 0,
+    "window_access_fixture_exit": 0,
+    "source_and_release_sha256": {
+      "src/compat/wow_standard_class_bindings.c": "e75c3e757ae390d5cb89c1641578213494f95b29ab08dd572737d7befdb6151e",
+      "src/compat/wow_user_registration_bridge.c": "e75138f1d8a15dfdb262e4417f985b9fa1505ad2e88cf29e15b0bedc225765fd",
+      "src/compat/wow_user_task_lifecycle.c": "262087f46c60138bb208afab8e7c97821a2a7ba4889ddcd3b2e0a4567c649fcc",
+      "src/compat/wow_window_client_access_bindings.c": "c228ace1b0c90e9c67c663fedf8fc397e658f5c6183848a5acb51d398872c0bb",
+      "src/compat/wow_window_creation_binding.c": "1eb533fee5f79ab56edeea67e06b652c91eafa6e1a834210258981b3938c34a8",
+      "test/adapter-mvdm-host-out/wow/wow_class_client_fixture.c": "e83105fee774ab65b471ccfb24519223d0e781fd5d9f142f6526e328510271f6",
+      "test/adapter-mvdm-host-out/wow/wow_class_client_fixture_provider.h": "f013b4dace40138a6e0616e318346142737aac343667a47d2815ee54b4d3c27b",
+      "test/adapter-mvdm-host-out/wow/wow_class_query_fixture.c": "df60449f63282e44edcb57f92ad8f1f77995df1d56182501bea7a0dce2c4f811",
+      "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c": "373ad4dd2eeae2ee4626cf97a977d280ea6456dd2e591f6698724dbc5e2dc727",
+      "test/adapter-mvdm-host-out/wow/wow_process_retirement_fixture.c": "42152631a66d424675624a23bd0608f9985ed26eaf4bad9cc5e47a8d24ca0713",
+      "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c": "4009127b5ede2a400a0009c4b7c5050083ec58a37e65e7342905af7f6412c737",
+      "test/adapter-mvdm-host-out/wow/wow_user_task_window_lifecycle_fixture.c": "c97f80f7c663f06ac2221219b0b688369ef122c018426bf3a7fc4db260f11f0a",
+      "test/adapter-mvdm-host-out/wow/wow_window_class_lifetime_fixture.c": "a749052a51ba68d20f79e3dcbeab996e02d38fdd7fcdf43b2f3d35399d182ce3",
+      "test/adapter-mvdm-host-out/wow/wow_window_client_message_fixture.c": "2e270d72c639a6d811feaf571fbf610004f62a12f2e3678f797df28a5f7490fc",
+      "test/integration/verify-command-native-edit-return.ps1": "796518cd8abb60622f400f646938db9347fa1c3e06827969774c6e540a65ad3d",
+      "test/mvdm-host/wow_page_domain_fixture.c": "6f092c2ffb51ac4a959e3d61642b5d55ccf28293a5dadcf817606500f306ac66",
+      "tools/build/New-T404S5Wow32ProviderNinja.ps1": "990e972598012cd0f50dcf7f0579730a0f2cf0d78cadecbc244f5f2d8058bfe9",
+      "src/compat/include/wow_registration_provider.h": "50431f60b9139f8e35cd517d583aede5908771e870ef5e4c96d324c7a8df8997",
+      "src/compat/include/wow_task_lifecycle_provider.h": "f041f585e0f10deed4c83f51aed8be6ef8e66fb9e6e8ffe1e80756e7a07a9cb7",
+      "src/compat/include/wow_window_access_provider.h": "86e253aff2d1987c51e3f5a3947b3f267b3e7dbe0fd5d6d5fb4abc4fba77db22",
+      "test/adapter-mvdm-host-out/wow/wow_task_environment_fixture_provider.h": "1f41fc25a7118247387884096c0cb8f66ce1c5a43ae1e3511b8c975053f584ff",
+      "test/adapter-mvdm-host-out/wow/wow_task_lifecycle_fixture_provider.h": "ec583906f6a1bd1d5b6d82a5fb0abf1fe0e979a45e1c025094533f3b4e4a4880",
+      "test/adapter-mvdm-host-out/wow/wow_window_access_fixture_provider.h": "d00f758af9429dfa1646d357639a5184ca69bf49163856886900727e77d580f1"
+    }
+  }
+}

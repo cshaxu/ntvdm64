@@ -114,10 +114,10 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. Review of P62 leaves 45 of 94
+is authoritative for individual files and evidence. P64 compiled-product review leaves 45 of 94
 files complete. BC1F045 still uses the C1 NT and USER headers after P12
-removed its function dependency. B-to-C1 has 12 unique direct links (18 raw records),
-195 compiled-header rows and zero private search roots. B-to-C2 has zero
+removed its function dependency. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
+164 compiled-header rows across 40 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
@@ -146,3 +146,11 @@ and [T481](../history/m0-t481-closure.md).
 
 Detailed prior governance records are retained in the preserved status chronology.
 P63 published checkpoint e20b6e48-fb35-4fc1-bb5e-6de74d75b652 passed cached x86/x64/reference builds and published-package targeted tests. Native Shell nested exception intermittency remains unresolved; no completion increment. [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p63-checkpoint.json).
+
+P64 cached full builds and dual11 publication passed, package
+6479f7ba-76c7-4d01-846b-e8b06d52fb9a. Seven native lifecycle/window cases
+passed; published USER16 and complete-Userenv COMMAND/EDIT/CMD/MEM passed.
+Inherited developer-environment COMMAND fails on both P63 and P64; no product-fix
+claim. Final fixture verification passed; P64 records this bounded delivery.
+No completed-file credit
+or mirror change. [Batch evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json).
