@@ -1,0 +1,108 @@
+{
+  "packet": "M0 T483 S20 P72",
+  "baseline": "f9345da91c2531395d712ce031a444d22c34cf60",
+  "status": "verified production batch; commit/push in Git history",
+  "files_completed": [
+    "src/compat/wow_edit_conversion_bindings.c",
+    "src/compat/wow_edit_thread_bindings.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 69,
+    "remaining": 25,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 60,
+    "B_C1_sources": 20,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "Existing immutable EDIT conversion provider receives original FNID and CPD values at DLL composition. Thread identity uses existing original-WND handle provider on the exact borrowed object. Pointer-only LARGE_STRING API uses original tag forward declaration; no copied layout, new callback table, queue or state machine.",
+  "lifetime": "Static provider bound at DLL attach before original USER use; existing conflicting-binding rejection unchanged. Same exact-object borrow, null checks, owner checks and LastError restoration. CPD creation failure still prevents dispatch; opposite-encoding target validation unchanged.",
+  "mirror": {
+    "delta_points": 0,
+    "delta_lines": 0,
+    "proof": "No changed files under either host mirror or immutable guest."
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "a85d78c9-61ba-45fc-9dd3-045eaad4fd96",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "build": {
+    "finished": "2026-11-22T09:38:52.7301991+00:00",
+    "exit": 0,
+    "started": "2026-11-22T09:37:36.3625449+00:00",
+    "pid": 5484
+  },
+  "boundary_tests": {
+    "pid": 30888,
+    "started": "2026-11-22T09:40:09.3038260+00:00",
+    "finished": "2026-11-22T09:40:28.3587354+00:00",
+    "exit": 0
+  },
+  "targeted_cases": [
+    {
+      "case": "window-borrow",
+      "started": "2026-11-22T09:40:28.4282322+00:00",
+      "finished": "2026-11-22T09:40:42.6081378+00:00",
+      "exit": 0
+    },
+    {
+      "case": "native-creation",
+      "started": "2026-11-22T09:40:42.6114882+00:00",
+      "finished": "2026-11-22T09:40:56.8858769+00:00",
+      "exit": 0
+    },
+    {
+      "case": "class-lifetime",
+      "started": "2026-11-22T09:40:56.8885604+00:00",
+      "finished": "2026-11-22T09:41:08.7063343+00:00",
+      "exit": 0
+    },
+    {
+      "case": "task-lifecycle",
+      "started": "2026-11-22T09:41:08.7075022+00:00",
+      "finished": "2026-11-22T09:41:20.8000682+00:00",
+      "exit": 0
+    },
+    {
+      "case": "process-retirement",
+      "started": "2026-11-22T09:41:20.8014449+00:00",
+      "finished": "2026-11-22T09:41:32.3996542+00:00",
+      "exit": 0
+    },
+    {
+      "case": "init-notification",
+      "started": "2026-11-22T09:41:32.4007544+00:00",
+      "finished": "2026-11-22T09:41:45.6655031+00:00",
+      "exit": 0
+    }
+  ],
+  "verification": {
+    "pid": 30888,
+    "started": "2026-11-22T09:40:09.1610060+00:00",
+    "finished": "2026-11-22T09:42:30.1208738+00:00",
+    "exit": 0
+  },
+  "source_identity": {
+    "src/compat/include/wow_edit_call_bindings.h": "cf32c581327821d70f52158af22cbcd47852d001cd66eb883e694f6ee39d4d49",
+    "src/compat/include/wow_edit_conversion_bindings.h": "8c6d72260ea3211bba505e98f06d7a66d518b63eed80207edba2ac0937d494f5",
+    "src/compat/wow_edit_conversion_bindings.c": "3d0b53ee41e5dafc414e61004db5b312b104dbdd2d280267d285222a52135c9b",
+    "src/compat/wow_edit_thread_bindings.c": "6eeda7c99d98f18b919d37c2fc814ddc6d3339cd6473291cdac91253dc7aefba",
+    "test/adapter-mvdm-host-out/wow/wow_edit_conversion_fixture.c": "806bc867487cc8f82281d2daafd66defe533199df1fc587098b639bf13a7f350",
+    "test/mvdm-host/wow_page_domain_fixture.c": "d8dfd8c89c01dcc2a36eb605a8a75b7f33cc91632040ea6d7e1ab745509b9cd3",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "dc597ba344a29a1bfc6aa0298d6b4dc3130a0c9a5e8e10fe400426c2aabe0d9f"
+  },
+  "evidence_root": "build\\t483-s20-p72-edit-final",
+  "initial_candidate": "build/t483-s20-p72-edit-boundaries: tests passed, but thread retained one transitive original header. Final candidate removes that include and repeats build/publication/tests; initial package is not final proof.",
+  "limitations": [
+    "25 inventory files remain; S20 not closed.",
+    "Existing data-symbol/assembly/linkmap coverage gaps and Shell diagnostic limitation retained.",
+    "Class storage candidate still requires approval."
+  ]
+}

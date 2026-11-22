@@ -464,7 +464,7 @@ $dllEntryBridgeLines = @(
     '#include "compat/include/wow_edit_conversion_bindings.h"',
     'LONG WINAPI EditWndProcA(HWND, UINT, WPARAM, LONG);',
     'LONG WINAPI EditWndProcW(HWND, UINT, WPARAM, LONG);',
-    'static const wow_edit_conversion_provider edit_conversion_provider = { EditWndProcA, EditWndProcW };',
+    'static const wow_edit_conversion_provider edit_conversion_provider = { EditWndProcA, EditWndProcW, FNID_CALLWINDOWPROC, CPD_WND | CPD_ANSI_TO_UNICODE, CPD_WND | CPD_UNICODE_TO_ANSI };',
     'static const wow_control_entry_provider control_entry_provider = { EditWndProcA, EditWndProcW, ComboBoxWndProcA, ComboBoxWndProcW, ListBoxWndProcA, ListBoxWndProcW, ComboListBoxWndProcA, ComboListBoxWndProcW, ButtonWndProcA, ButtonWndProcW, xxxLBoxCaretBlinker };',
     '#include "compat/include/wow_dialog_keyboard_provider.h"',
     'BOOL WINAPI wow_original_IsDialogMessageA(HWND, LPMSG);',

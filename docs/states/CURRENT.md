@@ -114,9 +114,9 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P71 final compiled-product review leaves 67 of 94
-files complete. BC1F045 retains USER private layouts; its NT header chain is removed. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-64 compiled-header rows across 22 sources and zero private search roots. B-to-C2 has zero
+is authoritative for individual files and evidence. P72 final compiled-product review leaves 69 of 94
+files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
+60 compiled-header rows across 20 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
@@ -197,3 +197,9 @@ Mirror+1point/-1normalized line (actual insertion5lines), pending R2757.
 Cached full build, dual11 publication, three boundary/six lifecycle cases and
 published USER16/COMMAND passed after fixing a test-only missing declaration.
 [P71 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p71-window-identity-closure.json).
+
+P72 completes EDIT conversion/thread boundaries with existing providers and
+opaque pointer declarations. Remaining25 files; header rows64->60. No mirror
+or guest change. Cached full build, dual11 publication, three boundary/six
+lifecycle cases and published USER16/COMMAND passed.
+[P72 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p72-edit-boundary-closure.json).

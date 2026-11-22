@@ -4,7 +4,6 @@
 #include "wow_edit_entry_bindings.h"
 #include "wow_edit_native_bindings.h"
 #include "wow_user_private_access.h"
-#include "compat/include/opennt_user_multipass.h"
 
 static const wow_edit_conversion_provider *conversion_provider;
 BOOL WINAPI wow_edit_conversion_bind(const wow_edit_conversion_provider *provider)
@@ -32,13 +31,13 @@ LONG WINAPI wow_edit_CsSendMessage(HWND window, UINT message, WPARAM wp,
      * native entries. Refuse other server operations and arbitrary targets;
      * do not turn this private boundary into a second SendMessage engine. */
     if (!conversion_provider) RaiseFailFastException(NULL, NULL, 0);
-    if (function != FNID_CALLWINDOWPROC ||
+    if (function != conversion_provider->call_window_function ||
             procedure != (DWORD)(ULONG_PTR)(ansi ? conversion_provider->unicode : conversion_provider->ansi)) {
         SetLastError(ERROR_NOT_SUPPORTED);
         return 0;
     }
     destination = ansi ? wow_edit_window_procW : wow_edit_window_procA;
-    options = CPD_WND | (ansi ? CPD_ANSI_TO_UNICODE : CPD_UNICODE_TO_ANSI);
+    options = ansi ? conversion_provider->ansi_to_unicode_options : conversion_provider->unicode_to_ansi_options;
     token = wow_edit_native_NtUserGetCPD(window, options,
         (DWORD)(ULONG_PTR)destination);
     if (!token) return 0;

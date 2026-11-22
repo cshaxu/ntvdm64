@@ -6,6 +6,8 @@ typedef LONG (WINAPI *wow_edit_original_proc)(HWND, UINT, WPARAM, LONG);
 typedef struct wow_edit_conversion_provider {
     wow_edit_original_proc ansi;
     wow_edit_original_proc unicode;
+    /* Original service and CPD values supplied with the original entries. */
+    DWORD call_window_function, ansi_to_unicode_options, unicode_to_ansi_options;
 } wow_edit_conversion_provider;
 BOOL WINAPI wow_edit_conversion_bind(const wow_edit_conversion_provider *);
 

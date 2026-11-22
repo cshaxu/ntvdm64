@@ -185,12 +185,14 @@ extern CRITICAL_SECTION fixture_gcsLookaside;
 #pragma comment(linker, "/alternatename:_fixture_gcsLookaside=_gcsLookaside")
 #include "compat/include/wow_menu_parser_bindings.h"
 #include "compat/include/wow_edit_conversion_bindings.h"
+#include "compat/include/opennt_user_multipass.h"
 LONG WINAPI fixture_EditWndProcA(HWND, UINT, WPARAM, LONG);
 LONG WINAPI fixture_EditWndProcW(HWND, UINT, WPARAM, LONG);
 #pragma comment(linker, "/alternatename:_fixture_EditWndProcA@16=_EditWndProcA@16")
 #pragma comment(linker, "/alternatename:_fixture_EditWndProcW@16=_EditWndProcW@16")
 static const wow_edit_conversion_provider fixture_edit_conversion_provider = {
-    fixture_EditWndProcA, fixture_EditWndProcW
+    fixture_EditWndProcA, fixture_EditWndProcW, FNID_CALLWINDOWPROC,
+    CPD_WND | CPD_ANSI_TO_UNICODE, CPD_WND | CPD_UNICODE_TO_ANSI
 };
 static const wow_control_entry_provider fixture_control_entry_provider = {
     fixture_EditWndProcA, fixture_EditWndProcW, fixture_ComboBoxWndProcA,

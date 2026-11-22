@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 67,
+    "completed": 69,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 64,
+    "compiled_header_rows": 60,
     "private_search_root_rows": 0
   },
   "files": [
@@ -5819,7 +5819,7 @@
     {
       "id": "BC1F059",
       "file": "src/compat/wow_edit_conversion_bindings.c",
-      "status": "partially addressed in P50: original EDIT entry addresses provided by synchronous binding; original USER header remains",
+      "status": "completed in verified P72 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -5942,7 +5942,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p50-delivery.json"
+      "progress_evidence": "p50-delivery.json",
+      "p72_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p72-edit-boundary-closure.json"
     },
     {
       "id": "BC1F060",
@@ -6629,7 +6630,7 @@
     {
       "id": "BC1F064",
       "file": "src/compat/wow_edit_thread_bindings.c",
-      "status": "partially addressed in P54: private NT header removed; original USER layout headers remain",
+      "status": "completed in verified P72 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -6732,7 +6733,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p54-delivery.json"
+      "progress_evidence": "p54-delivery.json",
+      "p72_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p72-edit-boundary-closure.json"
     },
     {
       "id": "BC1F065",

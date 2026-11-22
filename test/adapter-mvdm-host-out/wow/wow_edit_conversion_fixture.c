@@ -1,4 +1,5 @@
 #include "wow_edit_conversion_bindings.h"
+#include "compat/include/opennt_user_multipass.h"
 #include "wow_edit_entry_bindings.h"
 #include <stdio.h>
 
@@ -52,7 +53,8 @@ LRESULT WINAPI wow_user_call_window_procW(WNDPROC p, HWND h, UINT m, WPARAM w, L
 
 int main(void)
 {
-    static const wow_edit_conversion_provider provider = { EditWndProcA, EditWndProcW };
+    static const wow_edit_conversion_provider provider = { EditWndProcA, EditWndProcW,
+        FNID_CALLWINDOWPROC, CPD_WND | CPD_ANSI_TO_UNICODE, CPD_WND | CPD_UNICODE_TO_ANSI };
     HWND h = (HWND)(ULONG_PTR)0x1234;
     unsigned direction;
     CHECK(wow_edit_conversion_bind(&provider));

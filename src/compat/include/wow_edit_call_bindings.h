@@ -3,10 +3,8 @@
 #include <windows.h>
 #include "wow_control_fnid_provider.h"
 #include "wow_control_brush_bindings.h"
-#define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
-#undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
-BOOL WINAPI wow_edit_NtUserDefSetText(HWND, const LARGE_STRING *);
+struct _LARGE_STRING;
+BOOL WINAPI wow_edit_NtUserDefSetText(HWND, const struct _LARGE_STRING *);
 /* ADAPTER-WOW-061: original EDIT caller shape; existing native boundary
  * handles CTLCOLOR reentry. HWND/HDC/HBRUSH are already native identities. */
 BOOL WINAPI wow_edit_FillWindow(HWND, HWND, HDC, HBRUSH);
