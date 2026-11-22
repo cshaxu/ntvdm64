@@ -479,7 +479,7 @@ $dllEntryBridgeLines = @(
     'int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW, HWND, DLGPROC, LPARAM, UINT);',
     'static const wow_dialog_creation_provider dialog_creation_provider = { InternalCreateDialog, wow_original_DialogBoxIndirectParamAorW };',
     '#include "compat/include/wow_default_message_bindings.h"',
-    'static const wow_default_message_provider default_message_provider = { InitMessageTables, WowGetDefWindowProcBits };',
+    'static const wow_default_message_provider default_message_provider = { InitMessageTables, wow_default_message_copy, wow_default_message_reset };',
     '#include "compat/include/wow_control_state_provider.h"',
     'void WINAPI SetWindowState(struct tagWND *, UINT);',
     'void WINAPI ClearWindowState(struct tagWND *, UINT);',

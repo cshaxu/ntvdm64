@@ -1,0 +1,166 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "current_sha256": "aae6f7a6cfdf89be9ca1f41e027d4ab536978b9e9f3eb7897ec6693d11bcd283",
+      "raw": {
+        "blocks": 28,
+        "added": 20,
+        "deleted": 1660
+      },
+      "filtered": {
+        "blocks": 19,
+        "added": 2,
+        "deleted": 1525
+      },
+      "excluded": [
+        {
+          "original": [
+            54,
+            54
+          ],
+          "current": [
+            53,
+            53
+          ]
+        },
+        {
+          "original": [
+            462,
+            462
+          ],
+          "current": [
+            462,
+            462
+          ]
+        },
+        {
+          "original": [
+            482,
+            497
+          ],
+          "current": [
+            483,
+            484
+          ]
+        },
+        {
+          "original": [
+            584,
+            595
+          ],
+          "current": [
+            572,
+            573
+          ]
+        },
+        {
+          "original": [
+            834,
+            838
+          ],
+          "current": [
+            600,
+            601
+          ]
+        },
+        {
+          "original": [
+            851,
+            876
+          ],
+          "current": [
+            605,
+            606
+          ]
+        },
+        {
+          "original": [
+            935,
+            938
+          ],
+          "current": [
+            651,
+            652
+          ]
+        },
+        {
+          "original": [
+            991,
+            991
+          ],
+          "current": [
+            656,
+            656
+          ]
+        },
+        {
+          "original": [
+            1003,
+            1018
+          ],
+          "current": [
+            662,
+            663
+          ]
+        },
+        {
+          "original": [
+            1055,
+            1055
+          ],
+          "current": [
+            699,
+            699
+          ]
+        },
+        {
+          "original": [
+            1164,
+            1208
+          ],
+          "current": [
+            718,
+            719
+          ]
+        },
+        {
+          "original": [
+            1704,
+            1704
+          ],
+          "current": [
+            734,
+            734
+          ]
+        },
+        {
+          "original": [
+            1823,
+            1823
+          ],
+          "current": [
+            738,
+            738
+          ]
+        },
+        {
+          "original": [
+            1862,
+            1862
+          ],
+          "current": [
+            742,
+            742
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    }
+  ]
+}

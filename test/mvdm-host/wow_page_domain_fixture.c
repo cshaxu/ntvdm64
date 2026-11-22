@@ -160,7 +160,7 @@ static const wow_dialog_creation_provider fixture_dialog_creation_provider = {
     fixture_InternalCreateDialog, wow_original_DialogBoxIndirectParamAorW
 };
 static const wow_default_message_provider fixture_default_message_provider = {
-    InitMessageTables, WowGetDefWindowProcBits
+    InitMessageTables, wow_default_message_copy, wow_default_message_reset
 };
 LONG WINAPI fixture_ComboBoxWndProcA(HWND, UINT, WPARAM, LPARAM);
 #pragma comment(linker, "/alternatename:_fixture_ComboBoxWndProcA@16=_ComboBoxWndProcA@16")

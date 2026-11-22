@@ -12,6 +12,21 @@
 #line 11
 #include "wow_default_message_bindings.h"
 #pragma hdrstop
+/* Original-layout owner: B supplies once-publication and calls this reset
+ * only before publication, after an initialization failure. */
+SHAREDINFO wow_default_message_state;
+VOID WINAPI wow_default_message_reset(VOID)
+{
+    UINT index;
+    if (wow_default_message_state.DefWindowMsgs.abMsgs)
+        HeapFree(GetProcessHeap(), 0, wow_default_message_state.DefWindowMsgs.abMsgs);
+    if (wow_default_message_state.DefWindowSpecMsgs.abMsgs)
+        HeapFree(GetProcessHeap(), 0, wow_default_message_state.DefWindowSpecMsgs.abMsgs);
+    for (index = 0; index < ARRAYSIZE(wow_default_message_state.awmControl); ++index)
+        if (wow_default_message_state.awmControl[index].abMsgs)
+            HeapFree(GetProcessHeap(), 0, wow_default_message_state.awmControl[index].abMsgs);
+    ZeroMemory(&wow_default_message_state, sizeof(wow_default_message_state));
+}
 #line 13
 
 /*

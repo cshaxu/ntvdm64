@@ -5,14 +5,14 @@
 /* ADAPTER-WOW-063: original bitmap algorithm; finite host allocation owner.
  * The only USER operation is message-name registration; no window operation
  * or application callback is performed during once-initialization. */
-wow_default_message_state_type wow_default_message_state;
+UINT wow_default_shell_message;
 static INIT_ONCE message_once = INIT_ONCE_STATIC_INIT;
 static const wow_default_message_provider *message_provider;
 
 BOOL WINAPI wow_default_messages_bind(const wow_default_message_provider *provider)
 {
     const wow_default_message_provider *previous;
-    if (!provider || !provider->initialize || !provider->merge) {
+    if (!provider || !provider->initialize || !provider->merge || !provider->reset) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&message_provider,
@@ -33,7 +33,6 @@ static BOOL CALLBACK initialize_messages(PINIT_ONCE once, PVOID parameter,
     PVOID *context)
 {
     BOOL complete = FALSE;
-    UINT index;
     (void)once; (void)parameter; (void)context;
     __try {
         __try {
@@ -44,19 +43,13 @@ static BOOL CALLBACK initialize_messages(PINIT_ONCE once, PVOID parameter,
              * never call SetTaskmanWindow(NULL) on the host desktop. This
              * is the last fallible operation, avoiding repeated successful
              * atom registration when an earlier allocation must retry. */
-            wow_default_message_state.uiShellMsg = RegisterWindowMessageW(L"SHELLHOOK");
-            complete = wow_default_message_state.uiShellMsg != 0;
+            wow_default_shell_message = RegisterWindowMessageW(L"SHELLHOOK");
+            complete = wow_default_shell_message != 0;
         } __finally {
             if (!complete) {
                 DWORD error = GetLastError();
-                if (wow_default_message_state.DefWindowMsgs.abMsgs)
-                    HeapFree(GetProcessHeap(), 0, wow_default_message_state.DefWindowMsgs.abMsgs);
-                if (wow_default_message_state.DefWindowSpecMsgs.abMsgs)
-                    HeapFree(GetProcessHeap(), 0, wow_default_message_state.DefWindowSpecMsgs.abMsgs);
-                for (index = 0; index < ARRAYSIZE(wow_default_message_state.awmControl); ++index)
-                    if (wow_default_message_state.awmControl[index].abMsgs)
-                        HeapFree(GetProcessHeap(), 0, wow_default_message_state.awmControl[index].abMsgs);
-                ZeroMemory(&wow_default_message_state, sizeof(wow_default_message_state));
+                message_provider->reset();
+                wow_default_shell_message = 0;
                 SetLastError(error);
             }
         }

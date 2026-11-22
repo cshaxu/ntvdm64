@@ -25,7 +25,7 @@ int main(void)
         0x003b, 0x022a, 0x022b, 0x0313 };
     const WORD absent[] = { WM_NULL, WM_CREATE, WM_DESTROY, WM_USER };
 
-    static const wow_default_message_provider provider = { InitMessageTables, WowGetDefWindowProcBits };
+    static const wow_default_message_provider provider = { InitMessageTables, wow_default_message_copy, wow_default_message_reset };
     if (!wow_default_messages_bind(&provider)) return 9;
     memset(storage, 0xa5, sizeof(storage));
     if (wow_private_user_get_def_window_proc_bits(NULL, 101) != 0) return 1;

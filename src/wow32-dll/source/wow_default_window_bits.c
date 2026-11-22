@@ -5,6 +5,7 @@
  * T483 S6 P24 owner-approved extraction: WowGetDefWindowProcBits.
  * Original function bodies and existing host bindings are preserved.
  */
+#include "compat/include/opennt_user_multipass.h"
 #include "wow_default_message_bindings.h"
 #define gSharedInfo wow_default_message_state
 #define UserAssert(exp)
@@ -64,4 +65,15 @@ WORD WowGetDefWindowProcBits(
     }
 
     return wMaxMsg;
+}
+
+/* Preserve the original merge's zero-input precondition without exporting
+ * its private table lengths to the caller. */
+WORD WINAPI wow_default_message_copy(PBYTE bits, WORD count)
+{
+    UINT maximum = max(gSharedInfo.DefWindowMsgs.maxMsgs,
+        gSharedInfo.DefWindowSpecMsgs.maxMsgs);
+    if (!bits || maximum > MAXWORD || count <= maximum / 8u) return 0;
+    ZeroMemory(bits, maximum / 8u + 1u);
+    return WowGetDefWindowProcBits(bits, count);
 }

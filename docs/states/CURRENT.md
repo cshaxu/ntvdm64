@@ -114,14 +114,14 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P66 compiled-product review leaves 53 of 94
+is authoritative for individual files and evidence. P67 compiled-product review leaves 58 of 94
 files complete. BC1F045 retains USER private layouts; its NT header chain is removed. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-77 compiled-header rows across 32 sources and zero private search roots. B-to-C2 has zero
+72 compiled-header rows across 27 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
 
-S20 cumulative non-error mirror delta is +3 points/+276 lines; S19 retained
+S20 cumulative non-error mirror delta is +4 points/+291 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
 tests. The P62 package is 71882068-22ca-4a1a-8a84-20c8d7f7cb5c.
@@ -165,3 +165,9 @@ geometry and synchronous rendering, preserving scoped B GDI cleanup. Remaining:4
 files. Mirror delta0 points/+37 lines, registered in pending decisions. Cached full
 build, dual11 publication, button/control and seven lifecycle fixtures, published
 USER16 and complete-Userenv COMMAND passed. [P66 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p66-button-resource-closure.json).
+
+P67 completes five B files by moving original message-table storage/reset to C1
+and length validation to the existing merge provider. Remaining:36 files; private
+header rows77->72. Mirror+1point/+15lines, pending R2756. Cached full build, dual11
+publication, failure/bitmap/default/resource and lifecycle fixtures, published
+USER16 and COMMAND passed. [P67 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p67-message-table-closure.json).

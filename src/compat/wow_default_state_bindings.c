@@ -12,7 +12,7 @@ BOOL WINAPI wow_default_capture_context(wow_default_context *context, UINT messa
     if (!context) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     if (!wow_default_messages_ready()) return FALSE;
     ZeroMemory(context, sizeof(*context));
-    context->server.uiShellMsg = wow_default_message_state.uiShellMsg;
+    context->server.uiShellMsg = wow_default_shell_message;
     /* rare.c SPI_GETBORDER returns gpsi->gclBorder directly. Do not derive
      * logical border units from modern padded frame pixel metrics. */
     if (message == WM_NCHITTEST &&
@@ -49,7 +49,7 @@ BOOL WINAPI wow_default_ensure_shell_message(HWND window)
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     if (!wow_default_messages_ready()) return FALSE;
-    wow_default_current->server.uiShellMsg = wow_default_message_state.uiShellMsg;
+    wow_default_current->server.uiShellMsg = wow_default_shell_message;
     SetLastError(error);
     return TRUE;
 }

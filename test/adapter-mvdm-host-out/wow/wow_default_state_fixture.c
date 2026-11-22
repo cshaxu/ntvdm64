@@ -37,7 +37,7 @@ int main(void)
     SetLastError(123);
     CHECK(wow_default_ensure_shell_message(NULL));
     CHECK(GetLastError() == 123 && context.server.uiShellMsg ==
-        wow_default_message_state.uiShellMsg);
+        wow_default_shell_message);
     wow_default_current = NULL;
     CHECK(!wow_default_capture_context(NULL, WM_HELP));
     CHECK(GetLastError() == ERROR_INVALID_PARAMETER);

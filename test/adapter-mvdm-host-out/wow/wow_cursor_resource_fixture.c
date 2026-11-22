@@ -9,7 +9,6 @@
  * observes only its cursor/icon entry point.  These deliberately inert
  * providers satisfy uncalled S3 menu/default-message COMDATs so the linker
  * does not turn the S2 cursor boundary witness into a menu test. */
-wow_default_message_state_type wow_default_message_state;
 BOOL WINAPI wow_default_messages_ready(void) { return FALSE; }
 WORD WINAPI wow_default_messages_merge(PBYTE bits, WORD byte_count)
 {

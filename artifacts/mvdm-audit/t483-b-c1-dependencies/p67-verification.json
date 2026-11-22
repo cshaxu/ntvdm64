@@ -1,0 +1,95 @@
+{
+  "build": {
+    "finished": "2026-11-22T08:48:19.5919689+00:00",
+    "exit": 0,
+    "pid": 13420,
+    "started": "2026-11-22T08:46:45.1538105+00:00"
+  },
+  "messages": {
+    "started": "2026-11-22T08:47:17.0054357+00:00",
+    "exit": 0,
+    "pid": 22460,
+    "finished": "2026-11-22T08:47:37.3626526+00:00"
+  },
+  "published_runtime": {
+    "finished": "2026-11-22T08:52:06.2006418+00:00",
+    "pid": 27408,
+    "started": "2026-11-22T08:49:50.9615773+00:00",
+    "exit": 0
+  },
+  "lifecycle_cases": [
+    {
+      "finished": "2026-11-22T08:50:04.4616214+00:00",
+      "case": "task-lifecycle",
+      "started": "2026-11-22T08:49:51.0192591+00:00",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T08:50:17.7923300+00:00",
+      "case": "init-notification",
+      "started": "2026-11-22T08:50:04.4647059+00:00",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T08:50:29.6595093+00:00",
+      "case": "class-lifetime",
+      "started": "2026-11-22T08:50:17.7945799+00:00",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T08:50:41.3896809+00:00",
+      "case": "process-retirement",
+      "started": "2026-11-22T08:50:29.6607758+00:00",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T08:50:54.1591431+00:00",
+      "case": "window-borrow",
+      "started": "2026-11-22T08:50:41.3908554+00:00",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T08:51:08.2422369+00:00",
+      "case": "native-creation",
+      "started": "2026-11-22T08:50:54.1603505+00:00",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T08:51:21.9098662+00:00",
+      "case": "standard-class",
+      "started": "2026-11-22T08:51:08.2433370+00:00",
+      "exit": 0
+    }
+  ],
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "133edc20-d1d8-450b-a771-5eec8bb34f70",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "user16": "PASS actual USER16 two-task same-worker send/nesting/reply/post/filter/quit/string-copyback, native peer both directions and normal task retirement",
+  "native_extension": "PASS actual original generic thunk -> public WOWCallback16/Ex -> guest -> sibling send; WOWYield16/DirectedYield16; invalid Ex arguments; normal task retirement",
+  "resources_exit": 0,
+  "button_dc_exit": 0,
+  "mirror_original_body_after_removing_insertion": "byte-identical to P66 including CRLF and line directives",
+  "source_hashes": {
+    "src/compat/include/wow_default_message_bindings.h": "074a88e4f2537b4d04a3cb0529538f0defdfa0b0f82f5f6dcd8434e44d75441b",
+    "src/compat/wow_default_message_bindings.c": "1107785524ef2af5116abc8981091bf34e8479fab0974e63582b24b2c5fe87b0",
+    "src/compat/wow_default_state_bindings.c": "6af33afc0422bbf0f9e7422ae4761497015be254efef1e6d5ddf42f51303450e",
+    "src/compat/wow_private_user_compat.c": "ff1a573fc8375830ee6874bc3252695cee8bbf6ca65b9dd408b665c09a919fe0",
+    "src/non-mvdm/windows/core/ntuser/kernel/server.c": "0b0145046c75ab3672a5b0b52cdca39bc3699703dc8496c08eee8fc4a9e765b1",
+    "src/wow32-dll/source/wow_default_window_bits.c": "56afc5b822c2344e1aa5e8b1ad9351bb6cf695d0eaa3bac9c2d962faf72910b1",
+    "test/adapter-mvdm-host-out/wow/wow_button_dc_unreached.c": "b4a14bc02e29ea7844c1a4bb57d2271d4c0aeba09a0604a6a64253703e0a091e",
+    "test/adapter-mvdm-host-out/wow/wow_cursor_resource_fixture.c": "bc4be92f93f0aecb1d84638cbe56cbe1ec730745d51102d73b6649160c15d18c",
+    "test/adapter-mvdm-host-out/wow/wow_def_window_bits_fixture.c": "9362d723cc9de2915277726a66360475836273403de92a76997214e62a053f21",
+    "test/adapter-mvdm-host-out/wow/wow_default_messages_fixture.c": "231b05d3f6a7eb05f880d9d8bf9fba8570316b813811ee504ca327c8ab9d58da",
+    "test/adapter-mvdm-host-out/wow/wow_default_original_fixture.c": "961ba2868d71c0a6284194d3a2f1c885958a905f35a40f57b05c6bf4c56af0d3",
+    "test/adapter-mvdm-host-out/wow/wow_default_state_fixture.c": "143a01ee9905feeea78aea8b961c38a796c7ddb8946d80274bf4b9ae6037b66b",
+    "test/mvdm-host/wow_page_domain_fixture.c": "48938679a72df342483645874266f2f601622d6e4976b8bcf6f033edd0d49d85",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "3965a0b9a7e003ca328bb706e47eda47856f9756b5fb797680887e04aa81d505"
+  }
+}

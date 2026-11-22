@@ -1,3 +1,4 @@
+#include "compat/include/opennt_user_multipass.h"
 #include "wow_default_message_bindings.h"
 #include <stdio.h>
 #include <string.h>
@@ -53,9 +54,9 @@ static WORD WINAPI unused_merge(PBYTE bits, WORD count)
 int main(void)
 {
     WNDMSG server, client, edit, list, combo, combo_list, button;
-    wow_default_message_state_type empty = {0};
+    SHAREDINFO empty = {0};
     unsigned failure;
-    static const wow_default_message_provider provider = { InitMessageTables, unused_merge };
+    static const wow_default_message_provider provider = { InitMessageTables, unused_merge, wow_default_message_reset };
     CHECK(wow_default_messages_bind(&provider));
     for (failure = 1; failure <= 12; ++failure) {
         allocation_count = 0;
@@ -78,9 +79,9 @@ int main(void)
     CHECK(wow_default_messages_ready());
     CHECK(GetLastError() == 456);
     CHECK(allocation_count == 12 && live_allocations == 12);
-    CHECK(wow_default_message_state.uiShellMsg >= 0xc000 &&
-        wow_default_message_state.uiShellMsg <= 0xffff);
-    CHECK(wow_default_message_state.uiShellMsg == RegisterWindowMessageW(L"SHELLHOOK"));
+    CHECK(wow_default_shell_message >= 0xc000 &&
+        wow_default_shell_message <= 0xffff);
+    CHECK(wow_default_shell_message == RegisterWindowMessageW(L"SHELLHOOK"));
     CHECK(member(&wow_default_message_state.awmControl[FNID_DIALOG - FNID_START], WM_INITDIALOG));
     CHECK(member(&wow_default_message_state.awmControl[FNID_SCROLLBAR - FNID_START], WM_LBUTTONDOWN));
     CHECK(member(&wow_default_message_state.awmControl[FNID_MENU - FNID_START], WM_PAINT));

@@ -15,7 +15,7 @@ __declspec(noreturn) static void unreached(const char *name)
 #define REJECT() unreached(__FUNCTION__)
 
 __declspec(thread) wow_edit_context *wow_edit_current;
-wow_default_message_state_type wow_default_message_state;
+SHAREDINFO wow_default_message_state;
 HBRUSH wow_edit_system_brushes[WOW_EDIT_COLOR_COUNT];
 WCHAR szOneChar[] = L"0";
 

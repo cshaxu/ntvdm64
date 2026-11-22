@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 53,
+    "completed": 58,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 77,
+    "compiled_header_rows": 72,
     "private_search_root_rows": 0
   },
   "files": [
@@ -3805,7 +3805,7 @@
     {
       "id": "BC1F042",
       "file": "src/compat/wow_default_message_bindings.c",
-      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
+      "status": "completed in verified P67 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -3909,7 +3909,8 @@
         }
       ],
       "progress_evidence": "p36-delivery.json",
-      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json",
+      "p67_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p67-message-table-closure.json"
     },
     {
       "id": "BC1F043",
@@ -4022,7 +4023,7 @@
     {
       "id": "BC1F044",
       "file": "src/compat/wow_default_state_bindings.c",
-      "status": "in progress: P38 removes private nt.h; shared original message-table layout remains",
+      "status": "completed in verified P67 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -4115,7 +4116,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p38-delivery.json"
+      "progress_evidence": "p38-delivery.json",
+      "p67_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p67-message-table-closure.json"
     },
     {
       "id": "BC1F045",
@@ -4445,7 +4447,7 @@
     {
       "id": "BC1F048",
       "file": "src/compat/wow_dialog_context_bindings.c",
-      "status": "in progress: P41 removes private nt.h; shared original USER layout remains",
+      "status": "completed in verified P67 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -4548,7 +4550,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p41-delivery.json"
+      "progress_evidence": "p41-delivery.json",
+      "p67_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p67-message-table-closure.json"
     },
     {
       "id": "BC1F049",
@@ -4899,7 +4902,7 @@
     {
       "id": "BC1F051",
       "file": "src/compat/wow_dialog_keyboard_binding.c",
-      "status": "partially addressed in verified P44 delivery; transitive original USER layout remains",
+      "status": "completed in verified P67 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -5022,7 +5025,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p44-delivery.json"
+      "progress_evidence": "p44-delivery.json",
+      "p67_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p67-message-table-closure.json"
     },
     {
       "id": "BC1F052",
@@ -7543,7 +7547,7 @@
     {
       "id": "BC1F074",
       "file": "src/compat/wow_private_user_compat.c",
-      "status": "partially addressed in P62: original menu parser supplied by synchronous provider; original USER header remains",
+      "status": "completed in verified P67 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7656,7 +7660,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p62-delivery.json"
+      "progress_evidence": "p62-delivery.json",
+      "p67_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p67-message-table-closure.json"
     },
     {
       "id": "BC1F075",
@@ -9845,6 +9850,6 @@
       "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     }
   ],
-  "current_scan": "build/t483-s20-p66",
-  "current_scan_status": "P66 original button resource provider and final full product scan, targeted and published runtime verified; coverage limits remain"
+  "current_scan": "build\\t483-s20-p67-message-owner",
+  "current_scan_status": "P67 shared message table owner, final product scan and targeted published runtime verified; coverage limits remain"
 }

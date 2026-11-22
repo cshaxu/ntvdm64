@@ -1,7 +1,6 @@
 #ifndef WOW_DEFAULT_MESSAGE_BINDINGS_H
 #define WOW_DEFAULT_MESSAGE_BINDINGS_H
 #include <windows.h>
-#include "compat/include/opennt_user_multipass.h"
 #include "compat/include/wow_control_message_abi.h"
 
 /* OPENNT-HOST-090: selected original winuserp.h constants absent from the
@@ -40,15 +39,13 @@
 #define WM_SYSTIMER                     0x0118
 #endif
 
-/* A process-owned facade, never a layout overlay of native SHAREDINFO. */
-typedef struct wow_default_message_state_type {
-    WNDMSG DefWindowMsgs;
-    WNDMSG DefWindowSpecMsgs;
-    /* Original control message tables retain their FNID indexing. */
-    WNDMSG awmControl[FNID_STATIC - FNID_START + 1];
-    UINT uiShellMsg;
-} wow_default_message_state_type;
-extern wow_default_message_state_type wow_default_message_state;
+/* Original table storage is opaque to B; only original-layout providers
+ * and their original consumers may dereference it. */
+struct tagSHAREDINFO;
+extern struct tagSHAREDINFO wow_default_message_state;
+extern UINT wow_default_shell_message;
+VOID WINAPI wow_default_message_reset(VOID);
+WORD WINAPI wow_default_message_copy(PBYTE, WORD);
 extern const WORD gawDefWindowMsgs[], gawDefWindowSpecMsgs[];
 extern const WORD gawEditWndProc[];
 extern const WORD gawButtonWndProc[];
@@ -61,12 +58,14 @@ typedef WORD (WINAPI *wow_default_message_merger)(PBYTE, WORD);
 typedef struct wow_default_message_provider {
     wow_default_message_initializer initialize;
     wow_default_message_merger merge;
+    wow_default_message_initializer reset;
 } wow_default_message_provider;
 BOOL WINAPI wow_default_messages_bind(const wow_default_message_provider *);
 WORD WINAPI wow_default_messages_merge(PBYTE, WORD);
 BOOL WINAPI wow_default_messages_ready(void);
 
 #ifdef WOW_ORIGINAL_MESSAGE_TABLES
+#include "compat/include/opennt_user_multipass.h"
 /* Original winuserp.h menu message values, not native syscall numbers. */
 #define MN_FIRST                        0x01E0
 #define MN_SETHMENU                     (MN_FIRST + 0)

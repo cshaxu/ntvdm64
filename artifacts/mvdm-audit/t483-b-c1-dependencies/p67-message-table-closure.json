@@ -1,0 +1,86 @@
+{
+  "packet": "M0 T483 S20 P67",
+  "baseline": "dc42e9f09a3c1788e877c781a4e7dbb6dc5f4711",
+  "status": "verified delivery",
+  "files_completed": [
+    "src/compat/wow_default_message_bindings.c",
+    "src/compat/wow_default_state_bindings.c",
+    "src/compat/wow_dialog_context_bindings.c",
+    "src/compat/wow_dialog_keyboard_binding.c",
+    "src/compat/wow_private_user_compat.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 58,
+    "remaining": 36,
+    "B_C1_direct": 0,
+    "B_C1_headers": 72,
+    "B_C1_sources": 27,
+    "B_C2_direct": 0,
+    "B_C2_headers": 0
+  },
+  "per_file": [
+    {
+      "file": "src/compat/wow_default_message_bindings.c",
+      "before_headers": 1,
+      "after_headers": 0
+    },
+    {
+      "file": "src/compat/wow_default_state_bindings.c",
+      "before_headers": 1,
+      "after_headers": 0
+    },
+    {
+      "file": "src/compat/wow_dialog_context_bindings.c",
+      "before_headers": 1,
+      "after_headers": 0
+    },
+    {
+      "file": "src/compat/wow_dialog_keyboard_binding.c",
+      "before_headers": 1,
+      "after_headers": 0
+    },
+    {
+      "file": "src/compat/wow_private_user_compat.c",
+      "before_headers": 1,
+      "after_headers": 0
+    }
+  ],
+  "ownership": "C1 server.c owns original SHAREDINFO storage and failure reset. B owns only INIT_ONCE publication and SHELLHOOK atom registration. Existing extracted original WowGetDefWindowProcBits remains in F with unchanged original body; its provider now also validates length and zeroes exactly the required span. B sees the original storage only as an opaque forward declaration, does not dereference or directly link it. No copied private layout, per-field callbacks, queue or second state machine.",
+  "lifetime": "Immutable function table binds at original DLL attach. Initialize and reset execute synchronously under the existing once gate; all twelve allocation failures and failed atom registration release every allocation before retry. Reset retains caller LastError through the existing B finally. Success publishes tables for image lifetime.",
+  "mirror": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+    "before": {
+      "blocks": 19,
+      "added": 2,
+      "deleted": 1525
+    },
+    "after": {
+      "blocks": 20,
+      "added": 17,
+      "deleted": 1525
+    },
+    "delta_points": 1,
+    "delta_lines": 15,
+    "line_issues": [],
+    "approval": "Standing approval: one new point below100 lines; residual stays in pending decisions."
+  },
+  "package": "133edc20-d1d8-450b-a771-5eec8bb34f70",
+  "verification": [
+    "cached full x86/x64/reference build",
+    "dual11 publication and22 hash matches",
+    "12 allocation failures and atom registration failure rollback/retry",
+    "actual original bitmap merge, insufficient buffer no-write, trailing-byte preservation",
+    "original default window fixture",
+    "seven lifecycle/window fixtures",
+    "published USER16 native-extension and complete-Userenv COMMAND/EDIT/CMD/MEM return",
+    "cursor/bitmap resource call fixtures"
+  ],
+  "evidence_root": "build\\t483-s20-p67-message-owner",
+  "limitations": [
+    "36 inventory files remain",
+    "retained linkmap/data/assembly coverage limits",
+    "prior Shell native nested exception intermittency remains open"
+  ],
+  "staging": "First staging attempt hit historical same-named directory protection and did not publish. Final publication uses fresh P67 root; old publication files were not counted as current evidence."
+}

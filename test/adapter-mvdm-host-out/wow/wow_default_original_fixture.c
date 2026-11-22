@@ -12,7 +12,7 @@ LONG WINAPI wow_original_default_window_proc(PWND, UINT, WPARAM, LPARAM, DWORD);
 
 /* Actual clmsg and rtl/wow bodies. Dispatch/graph inputs are explicit
  * boundary doubles; this is not native USER or guest acceptance. */
-wow_default_message_state_type wow_default_message_state;
+SHAREDINFO wow_default_message_state;
 __declspec(thread) wow_default_context *wow_default_current;
 HBRUSH wow_edit_system_brushes[WOW_EDIT_COLOR_COUNT];
 HBRUSH wow_edit_gray_brush;
