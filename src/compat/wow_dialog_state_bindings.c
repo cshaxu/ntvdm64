@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_dialog_state_bindings.h"
 #include "wow_user_client_view_layout.h"
 #define WOW_ORIGINAL_DIALOG_LAYOUT
