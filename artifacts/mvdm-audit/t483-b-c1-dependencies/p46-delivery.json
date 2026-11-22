@@ -1,0 +1,35 @@
+{
+  "packet": "M0 T483 S20 P46",
+  "baseline": "ca4e6a8e4",
+  "files_partial": [
+    "BC1F055"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 37,
+    "remaining": 57,
+    "B_C1_unique": 31,
+    "B_C1_raw": 39,
+    "B_C1_compiled_headers": 288,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 direct unique and raw unchanged at 31/39; compiled headers 294 to 288. BC1F055 retains two original USER layout and WOW ABI headers.",
+  "implementation": "Replaced private NT include in wow_dialog_pointer.c with SDK headers. The extracted original SetDialogPointer implementation and existing caller-owned lifetime remain unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "b3d74340-345c-409f-98d3-9cc15bcf2e8c",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "WOW dialog pointer lifecycle and control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-dialog-pointer",
+  "limitations": [
+    "BC1F055 retains original USER layout and WOW ABI headers",
+    "Full suite required at S20 closure"
+  ]
+}
