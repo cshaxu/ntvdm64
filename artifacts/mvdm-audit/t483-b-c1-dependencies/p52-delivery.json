@@ -1,0 +1,37 @@
+{
+  "packet": "M0 T483 S20 P52",
+  "baseline": "61555a2e8",
+  "files_completed": [
+    "BC1F061"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 39,
+    "remaining": 55,
+    "B_C1_unique": 18,
+    "B_C1_raw": 25,
+    "B_C1_compiled_headers": 249,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 function relocation unique/raw unchanged 18/25; compiled headers 258 to 249. Additionally one previously uncounted direct data reference to C1 gcsLookaside is replaced by explicit borrowed-lock binding. Other data symbols not yet exhaustively audited.",
+  "implementation": "F binds address of original C1 process-lifetime critical section; B initializes that same lock once, and the original C1 lookaside pool and allocator remain unchanged. Actual linked B object verified without direct gcsLookaside reference; stale unlinked object excluded.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "20014ad9-b943-4b9a-850e-457c1aa2a976",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "original lookaside allocation/free and invalid, repeated and conflicting lock binding fixture",
+    "WOW control boundaries",
+    "real CCPU dialog lifecycle with original lock bound",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-lookaside",
+  "limitations": [
+    "existing relocation counter did not count the original direct data reference; full data-symbol coverage remains to be audited",
+    "Full suite required at S20 closure"
+  ]
+}

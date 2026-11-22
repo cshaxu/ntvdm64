@@ -174,6 +174,9 @@ LONG WINAPI fixture_ButtonWndProcW(HWND, UINT, WPARAM, LPARAM);
 #pragma comment(linker, "/alternatename:_fixture_ButtonWndProcW@16=_ButtonWndProcW@16")
 LONG WINAPI fixture_xxxLBoxCaretBlinker(HWND, UINT, UINT, LONG);
 #pragma comment(linker, "/alternatename:_fixture_xxxLBoxCaretBlinker@16=_xxxLBoxCaretBlinker@16")
+#include "compat/include/wow_edit_lookaside_provider.h"
+extern CRITICAL_SECTION fixture_gcsLookaside;
+#pragma comment(linker, "/alternatename:_fixture_gcsLookaside=_gcsLookaside")
 #include "compat/include/wow_edit_conversion_bindings.h"
 LONG WINAPI fixture_EditWndProcA(HWND, UINT, WPARAM, LONG);
 LONG WINAPI fixture_EditWndProcW(HWND, UINT, WPARAM, LONG);
@@ -6414,7 +6417,8 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 int main(int argc, char **argv)
 {
 #ifdef WOW_WINDOW_BORROW_FIXTURE
-    if (!wow_control_entry_bind(&fixture_control_entry_provider) ||
+    if (!wow_edit_lookaside_bind(&fixture_gcsLookaside) ||
+            !wow_control_entry_bind(&fixture_control_entry_provider) ||
             !wow_edit_conversion_bind(&fixture_edit_conversion_provider) ||
             !wow_dialog_keyboard_bind(&fixture_dialog_keyboard_provider) ||
             !wow_dialog_finalization_bind(&fixture_dialog_finalization_provider) ||

@@ -1,3 +1,4 @@
+#include "wow_edit_lookaside_provider.h"
 #include "wow_edit_lookaside_bindings.h"
 #include <stdio.h>
 
@@ -23,6 +24,13 @@ int __cdecl main(void)
 {
     PVOID entries[5], base, reused;
     unsigned i, j;
+    {
+        static CRITICAL_SECTION other_lock;
+        CHECK(!wow_edit_lookaside_bind(NULL) && GetLastError() == ERROR_INVALID_PARAMETER);
+        CHECK(wow_edit_lookaside_bind(&gcsLookaside));
+        CHECK(wow_edit_lookaside_bind(&gcsLookaside));
+        CHECK(!wow_edit_lookaside_bind(&other_lock) && GetLastError() == ERROR_ALREADY_INITIALIZED);
+    }
     SetLastError(0x1234);
     CHECK(wow_edit_lookaside_ready());
     CHECK(GetLastError() == 0x1234);
