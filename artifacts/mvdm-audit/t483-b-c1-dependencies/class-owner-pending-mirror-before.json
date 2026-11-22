@@ -1,0 +1,46 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "current_sha256": "1793d53a790d95a354e37d1c25ea6ec97fadef4a19b3e354ae0e6b19c9bf2ba5",
+      "raw": {
+        "blocks": 13,
+        "added": 21,
+        "deleted": 1377
+      },
+      "filtered": {
+        "blocks": 12,
+        "added": 20,
+        "deleted": 1374
+      },
+      "excluded": [
+        {
+          "original": [
+            1071,
+            1073
+          ],
+          "current": [
+            274,
+            275
+          ]
+        },
+        {
+          "original": [
+            376,
+            376
+          ],
+          "current": [
+            280,
+            281
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    }
+  ]
+}

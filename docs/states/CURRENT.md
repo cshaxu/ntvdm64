@@ -114,7 +114,7 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P68 reconciliation against the P67 compiled-product review leaves 61 of 94
+is authoritative for individual files and evidence. P69 review against the P67 compiled-product evidence leaves 62 of 94
 files complete. BC1F045 retains USER private layouts; its NT header chain is removed. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
 72 compiled-header rows across 27 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
@@ -175,3 +175,12 @@ USER16 and COMMAND passed. [P67 evidence](../../artifacts/mvdm-audit/t483-b-c1-d
 P68 reconciles three unchanged delivered providers (profile, startup notification,
 timer) against current compiled evidence and their original delivery tests. No
 product or mirror change; remaining33 files. [P68 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p68-existing-provider-reconciliation.json).
+
+P69 closes Shell dependency ownership only: real guest Shell and outer-unwind
+controls pass; direct native catch-and-resume nesting fails in Windows.Storage
+without the project adapter. Preserve that failed diagnostic; no product repair
+or Full-pass claim. Remaining32 files. [Shell evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p69-shell-provider-review.json).
+
+Class storage candidate requires owner approval for +2 non-error points/+20lines.
+Its first build failed on PCALLPROCDATA redefinition; all candidate production
+edits were withdrawn. [Pending candidate](../../artifacts/mvdm-audit/t483-b-c1-dependencies/class-owner-pending-candidate-status.json).

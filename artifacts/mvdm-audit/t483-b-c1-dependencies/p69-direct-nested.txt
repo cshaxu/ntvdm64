@@ -1,0 +1,16 @@
+provider=C:\WINDOWS\System32\shell32.dll caller_thread=18452
+callback thread=18452 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-nested\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-nested/native-fallback.txt" result=2
+callback third=O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-nested
+callback-return bytes[-16..31]=8bceff7510ff759cff1544ccbb74ffd6508d4fe8e8240e000085c0750433f6eb148b774085f67e090fb7f681ce000007
+case=0 result=2 error=6 calls=1 foreign_thread=0
+callback thread=18452 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-nested\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-nested/native-fallback.txt" result=42
+callback third=O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-nested
+callback-return bytes[-16..31]=8bceff7510ff759cff1544ccbb74ffd6508d4fe8e8240e000085c0750433f6eb148b774085f67e090fb7f681ce000007
+case=1 result=42 error=6 calls=1 foreign_thread=0
+callback thread=18452 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-nested\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-nested/native-fallback.txt" result=43
+callback third=O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-nested
+callback-return bytes[-16..31]=8bceff7510ff759cff1544ccbb74ffd6508d4fe8e8240e000085c0750433f6eb148b774085f67e090fb7f681ce000007
+original injected exception caught by outer callback
+exception=c0000005 module=C:\WINDOWS\SYSTEM32\Windows.Storage.dll rva=0014991e access=0 address=00000016
+first-chance: 000006ba e4470003 c0000005
+FAIL provider exception calls=1 foreign_thread=0

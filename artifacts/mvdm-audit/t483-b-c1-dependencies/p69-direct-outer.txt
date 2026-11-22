@@ -1,0 +1,21 @@
+provider=C:\WINDOWS\System32\shell32.dll caller_thread=6232
+callback thread=6232 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer/native-fallback.txt" result=2
+callback third=O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer
+callback-return bytes[-16..31]=8bceff7510ff759cff1544ccbb74ffd6508d4fe8e8240e000085c0750433f6eb148b774085f67e090fb7f681ce000007
+case=0 result=2 error=6 calls=1 foreign_thread=0
+callback thread=6232 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer/native-fallback.txt" result=42
+callback third=O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer
+callback-return bytes[-16..31]=8bceff7510ff759cff1544ccbb74ffd6508d4fe8e8240e000085c0750433f6eb148b774085f67e090fb7f681ce000007
+case=1 result=42 error=6 calls=1 foreign_thread=0
+callback thread=6232 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer/native-fallback.txt" result=43
+callback third=O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer
+callback-return bytes[-16..31]=8bceff7510ff759cff1544ccbb74ffd6508d4fe8e8240e000085c0750433f6eb148b774085f67e090fb7f681ce000007
+exception=e4470003 module=C:\WINDOWS\System32\KERNELBASE.dll rva=0016d674 access=0 address=00000000
+first-chance: 000006ba e4470003
+PASS outer API exception boundary and restored callback TLS
+callback thread=6232 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer/native-fallback.txt" result=2
+callback third=O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\direct-outer
+callback-return bytes[-16..31]=8bceff7510ff759cff1544ccbb74ffd6508d4fe8e8240e000085c0750433f6eb148b774085f67e090fb7f681ce000007
+PASS provider invoked again after outer unwind
+case=2 result=2 error=6 calls=1 foreign_thread=0
+PASS modern WOWShellExecute synchronous callback and success/failure result

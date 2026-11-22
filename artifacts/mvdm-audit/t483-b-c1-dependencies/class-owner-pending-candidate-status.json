@@ -1,0 +1,13 @@
+{
+  "baseline": "fa6c14ece7ac64787a3455ae98ea578283d6eb38",
+  "status": "approval pending; unverified candidate; production restored to delivered baseline",
+  "mirror_delta": {
+    "points": 2,
+    "lines": 20,
+    "before": "12points1394lines",
+    "after": "14points1414lines"
+  },
+  "candidate_sha256": "6ac3cae0a62be7023070f1a9d7df3734e69bc969487e5eda49b110c965ace950",
+  "build": "failed: PCALLPROCDATA typedef conflicts after original CLS view inclusion; no candidate runtime or publication",
+  "next": "Resolve selected class-register PCALLPROCDATA binding without duplicating original layout; remeasure before implementation approval. Approval question estimated25lines superseded by exact20lines."
+}

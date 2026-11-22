@@ -1,0 +1,64 @@
+{
+  "packet": "M0 T483 S20 P69",
+  "kind": "dependency audit and runtime evidence; no product change",
+  "file": "src/compat/wow_shell_callback.c",
+  "sha256": "a4a67859f1fd3f31e683fb0644233d491e7bbaacfdff97ae6efd248e7f2d7084",
+  "baseline": "fa6c14ece7ac64787a3455ae98ea578283d6eb38",
+  "dependency_disposition": "No C private headers, source imports or linked implementation symbols. Windows SDK plus dynamic native shell32 WOWShellExecute. Original C2 caller supplies two-argument guest callback; B adapts modern three-argument stdcall and retains exact prior TLS in finally. Callback is borrowed synchronously; no provider retained past the invocation and no new queue or state.",
+  "runtime": [
+    {
+      "case": "adapter-nested",
+      "started": "2026-11-22T09:04:53.1681355+00:00",
+      "finished": "2026-11-22T09:05:04.2107709+00:00",
+      "exit": 0
+    },
+    {
+      "case": "direct-nested",
+      "started": "2026-11-22T09:05:04.2174980+00:00",
+      "finished": "2026-11-22T09:05:11.9316986+00:00",
+      "exit": 1
+    },
+    {
+      "case": "adapter-outer",
+      "started": "2026-11-22T09:05:11.9341204+00:00",
+      "finished": "2026-11-22T09:05:22.7487735+00:00",
+      "exit": 0
+    },
+    {
+      "case": "direct-outer",
+      "started": "2026-11-22T09:05:22.7664051+00:00",
+      "finished": "2026-11-22T09:05:29.5056119+00:00",
+      "exit": 0
+    }
+  ],
+  "guest_shell": "PASS actual guest ShellExecute success/failure, child execution and parent continuation",
+  "direct_failure": {
+    "exception": "c0000005",
+    "module": "Windows.Storage.dll",
+    "rva": "0014991e",
+    "read_address": "00000016",
+    "sequence": "Real native three-argument callback catches injected inner exception e4470003 and returns into the outer Shell invocation; subsequent native access violation. No project adapter linked in this control.",
+    "interpretation": "Failure does not require the project adapter. It is not proof of the exact Windows internal cause or universal safety of resumed nested exceptions. Preserve as an open host-provider diagnostic boundary, not a passing result."
+  },
+  "actual_source_boundary": "WS32ShellExecute and W32ShellExecuteCallBack contain no catch-and-resume of native exceptions; W32Dispatch has the outer handler. Further guest reentry arrangements are not claimed excluded by this local review.",
+  "counts": {
+    "total": 94,
+    "complete": 62,
+    "remaining": 32,
+    "B_C1_headers": 72,
+    "B_C1_sources": 27,
+    "B_C1_direct": 0,
+    "B_C2_headers": 0,
+    "B_C2_direct": 0
+  },
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "evidence_root": "build\\t483-s20-shell-current",
+  "limitations": [
+    "Existing nested native Shell diagnostic remains failed; not full regression PASS.",
+    "S20 remains open; class candidate approval pending and32 files remain.",
+    "No platform repair or suppression added."
+  ]
+}

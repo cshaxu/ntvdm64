@@ -1,0 +1,18 @@
+provider=C:\WINDOWS\System32\shell32.dll caller_thread=13872
+callback thread=13872 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-outer\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-outer/native-fallback.txt" result=2
+callback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2e70068f025e600
+case=0 result=2 error=6 calls=1 foreign_thread=0
+callback thread=13872 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-outer\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-outer/native-fallback.txt" result=42
+callback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2e70068f025e600
+case=1 result=42 error=6 calls=1 foreign_thread=0
+callback thread=13872 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-outer\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-outer/native-fallback.txt" result=43
+callback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2e70068f025e600
+exception=e4470003 module=C:\WINDOWS\System32\KERNELBASE.dll rva=0016d674 access=0 address=00000000
+first-chance: 000006ba e4470003
+PASS outer API exception boundary and restored callback TLS
+callback thread=13872 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-outer\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-outer/native-fallback.txt" result=2
+callback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe6870c2e70068f025e600
+PASS provider invoked again after outer unwind
+case=2 result=2 error=6 calls=1 foreign_thread=0
+PASS actual adapter old two-argument callback and nested invocation
+PASS modern WOWShellExecute synchronous callback and success/failure result

@@ -1,0 +1,13 @@
+provider=C:\WINDOWS\System32\shell32.dll caller_thread=22784
+callback thread=22784 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-nested\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-nested/native-fallback.txt" result=2
+callback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe68f0c230006880252f00
+case=0 result=2 error=6 calls=1 foreign_thread=0
+callback thread=22784 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-nested\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-nested/native-fallback.txt" result=42
+callback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe68f0c230006880252f00
+case=1 result=42 error=6 calls=1 foreign_thread=0
+callback thread=22784 show=0 command="O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-nested\probe.exe" --child "O:\repos.hobby\ntvdm64\build\t483-s20-shell-current\adapter-nested/native-fallback.txt" result=43
+callback-return bytes[-16..31]=08ff7424088b04888b8004000000ffd0c20c00cccccccccccccccccccccccccccc558bec6afe68f0c230006880252f00
+case=2 result=43 error=6 calls=1 foreign_thread=0
+PASS actual adapter exception propagation and inner/outer TLS restoration
+PASS actual adapter old two-argument callback and nested invocation
+PASS modern WOWShellExecute synchronous callback and success/failure result

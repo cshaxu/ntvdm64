@@ -4,7 +4,7 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 61,
+    "completed": 62,
     "direct_unique": 0,
     "direct_raw": 0,
     "compiled_header_rows": 72,
@@ -7666,7 +7666,7 @@
     {
       "id": "BC1F075",
       "file": "src/compat/wow_shell_callback.c",
-      "status": "not yet audited",
+      "status": "completed dependency audit in P69; native diagnostic limitation retained separately",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -7698,7 +7698,8 @@
           "evidence": "non-mvdm/public/internal/shell/inc/wowshlp.h",
           "product": ""
         }
-      ]
+      ],
+      "p69_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p69-shell-provider-review.json"
     },
     {
       "id": "BC1F076",
