@@ -278,3 +278,10 @@ P16 owner-requested Full: cached x86/x64/reference build and dual11 publication
 passed, package dd2efa9f-ff51-4e23-a11c-c6a5ce871ee2. Full selected gates
 passed, including actual DOS4GW/NESticle menu and Escape hide/restore.
 No source change; S20 remains active. [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p16-full-delivery.json).
+
+P17 completes BC1F019: removed redundant private nt.h; SDK declarations remain
+available via existing inner task-order header. Actual task-order and control
+fixtures, Win16/COMMAND and architecture gates passed. Cached full build and
+dual11 publication passed, package 3863aa66-5e58-4175-8cbb-7938966b4d47.
+Files22/94 complete; B-C1 compiled headers472->466, direct55 unchanged;
+non-error mirror delta0 points/0 lines. [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p17-delivery.json).

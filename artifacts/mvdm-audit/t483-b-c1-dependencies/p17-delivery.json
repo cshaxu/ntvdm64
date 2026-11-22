@@ -1,0 +1,37 @@
+{
+  "packet": "M0 T483 S20 P17",
+  "baseline": "025fe1259",
+  "files_completed": [
+    "BC1F019"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 22,
+    "remaining": 72,
+    "B_C1_unique": 55,
+    "B_C1_raw": 67,
+    "B_C1_compiled_headers": 466,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 compiled headers 472 to 466; direct unique unchanged. BC1F019 redundant direct nt.h removed. Other source files still carry independently required private headers.",
+  "implementation": "NTSTATUS and PUNICODE_STRING are provided through existing Windows SDK winternl.h already included by wow_task_order_bindings.h. No original algorithm, callback or state is copied or moved. WOW_ORIGINAL_TASK_ORDER original-view branch remains used by C1 queue.c and test fixtures.",
+  "mirror_delta": "0 points/0 lines; S20 cumulative +2 points/+210 lines",
+  "package": "3863aa66-5e58-4175-8cbb-7938966b4d47",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "actual original task-order fixture: 8 init checks, errors=0",
+    "full control-boundary focused suite",
+    "actual Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "11 boundary controls and product graph gates",
+    "governance and relative links"
+  ],
+  "evidence": "build/t483-s20-task-init",
+  "limitations": [
+    "BC1F007 and shared original USER layout group remain open",
+    "Current P17 did not run Full; P16 Full passed separately"
+  ]
+}
