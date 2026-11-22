@@ -343,3 +343,12 @@ Cached full build, dual11, class/control and real Win16/COMMAND targeted tests
 passed; Full remains required at S20 closure. Package
 f5ef3a75-1551-4baa-98b9-a93bc8b5d5c2.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p24-delivery.json).
+
+P25 completes BC1F030: B now reaches original C1 _RegisterClassEx through
+the existing synchronous class provider and no longer includes private nt.h.
+B-C1 direct unique 48->47 (raw 56->55), compiled headers 423->417; files
+27/94 complete. Non-error mirror delta 0 points/0 lines; cumulative +3 points/
++239 lines. Cached full build, dual11, class/lifecycle and real Win16/COMMAND
+targeted tests passed; Full remains required at S20 closure. Package
+02ae11a2-6061-462f-acc4-8b4b6b299978.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p25-delivery.json).

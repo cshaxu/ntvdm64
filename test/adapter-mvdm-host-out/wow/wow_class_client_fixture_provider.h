@@ -5,6 +5,6 @@ extern ATOM WINAPI wow_original_register_class(WNDCLASSA *, DWORD *);
 extern BOOL WINAPI wow_original_unregister_class(LPCSTR, HINSTANCE);
 extern BOOL WINAPI wow_original_get_class_info(HINSTANCE, LPCSTR, WNDCLASSA *);
 static const wow_class_client_provider wow_fixture_class_client_provider = {
-    wow_original_register_class, wow_original_unregister_class, wow_original_get_class_info
+    wow_original_register_class, wow_original_unregister_class, wow_original_get_class_info, _RegisterClassEx
 };
 #endif

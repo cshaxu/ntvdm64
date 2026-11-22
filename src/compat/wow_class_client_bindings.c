@@ -1,4 +1,3 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_class_client_bindings.h"
 #include "wow_window_words_binding.h"
 #include "wow_window_creation_binding.h"
@@ -11,7 +10,7 @@ BOOL WINAPI wow_class_client_bind(const wow_class_client_provider *provider)
 {
     const wow_class_client_provider *previous;
     if (!provider || !provider->register_class || !provider->unregister_class ||
-            !provider->get_class_info) {
+            !provider->get_class_info || !provider->register_class_ex) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
@@ -296,7 +295,7 @@ ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *wc, PUNICODE_STRING name,
     publication.client=current; publication.name=name; publication.menu=menu;
     context.thread=current->thread; context.register_class=publish_native;
     context.resolve_callproc=resolve_callproc; context.binding=&publication;
-    atom = _RegisterClassEx(wc,worker,menu,fnid,flags,words,&context);
+    atom = class_provider()->register_class_ex(wc,worker,menu,fnid,flags,words,&context);
     if (atom && !publish_completed_class(&publication, wc)) return 0;
     return atom;
 }

@@ -1,0 +1,35 @@
+{
+  "packet": "M0 T483 S20 P25",
+  "baseline": "28e2b73aa",
+  "files_completed": [
+    "BC1F030"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 27,
+    "remaining": 67,
+    "B_C1_unique": 47,
+    "B_C1_raw": 55,
+    "B_C1_compiled_headers": 417,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct 48 to 47; raw 56 to 55; compiled headers 423 to 417. No C1 compile header records remain for this translation unit.",
+  "implementation": "The existing C1 original _RegisterClassEx is supplied by the WOW32 owner through the existing B-owned typed synchronous class provider. Context, reentrant lifetime, failure handling, and class publication remain unchanged; no added queue, state machine, or mirror changes.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "02ae11a2-6061-462f-acc4-8b4b6b299978",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "class-client, class-query, class-lifetime, native-creation, standard-class, init-notification, task-lifecycle",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-class-register",
+  "limitations": [
+    "Full suite required at S20 closure, not P25",
+    "B-to-C callback is a documented runtime relationship, not a claim of no runtime relationship"
+  ]
+}

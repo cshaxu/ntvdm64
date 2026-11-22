@@ -20,6 +20,8 @@ typedef struct wow_class_client_provider {
     ATOM (WINAPI *register_class)(WNDCLASSA *, DWORD *);
     BOOL (WINAPI *unregister_class)(LPCSTR, HINSTANCE);
     BOOL (WINAPI *get_class_info)(HINSTANCE, LPCSTR, WNDCLASSA *);
+    ATOM (WINAPI *register_class_ex)(WNDCLASSEXA *, PROC, PCLSMENUNAME, WORD, DWORD,
+        DWORD *, wow_class_register_context *);
 } wow_class_client_provider;
 BOOL WINAPI wow_class_client_bind(const wow_class_client_provider *);
 ATOM WINAPI wow_class_client_register(wow_class_client_context *, WNDCLASSA *, DWORD *);
