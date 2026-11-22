@@ -1,0 +1,35 @@
+{
+  "packet": "M0 T483 S20 P55",
+  "baseline": "5eef5b47b",
+  "files_completed": [
+    "BC1F065"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 40,
+    "remaining": 54,
+    "B_C1_unique": 14,
+    "B_C1_raw": 21,
+    "B_C1_compiled_headers": 231,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 function direct unique/raw unchanged 14/21; compiled headers 237 to 231; BC1F065 has no C1 header rows or direct function links.",
+  "implementation": "Replaced private NT include with platform SDK declarations; existing original hook callback provider, creation veto, borrow and unwind remain unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "5ee565a0-639c-4c61-9637-9cc6f44d0bf7",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "WOW hook creation, denial, nested call and exception fixture",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-hook-callback",
+  "limitations": [
+    "Data-symbol scan incomplete beyond scoped common externals",
+    "Full suite required at S20 closure"
+  ]
+}
