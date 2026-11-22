@@ -5,9 +5,9 @@
   "counts": {
     "files": 94,
     "completed": 39,
-    "direct_unique": 18,
-    "direct_raw": 25,
-    "compiled_header_rows": 249,
+    "direct_unique": 14,
+    "direct_raw": 21,
+    "compiled_header_rows": 243,
     "private_search_root_rows": 0
   },
   "files": [
@@ -6419,7 +6419,7 @@
     {
       "id": "BC1F063",
       "file": "src/compat/wow_edit_state_bindings.c",
-      "status": "not yet audited",
+      "status": "partially addressed in P53: four original finalizers use existing control provider; original USER headers remain",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -6611,7 +6611,8 @@
           "evidence": "non-mvdm/public/internal/windows/inc/wingdip.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p53-delivery.json"
     },
     {
       "id": "BC1F064",

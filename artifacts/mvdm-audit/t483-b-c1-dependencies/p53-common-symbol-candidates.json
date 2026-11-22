@@ -1,0 +1,5 @@
+{
+  "scope": "wow32.dll direct compiled objects, COFF common externals; candidates include unproven live sections",
+  "objects": 232,
+  "candidates": []
+}

@@ -1532,10 +1532,25 @@ static BOOL selected_native_control(HWND window)
     wow_cleanup_window *view=binding?wow_window_words_cleanup_value(binding):NULL;
     PWND state=binding?wow_window_words_client_state_value(binding):NULL;
     WNDPROC actual=(WNDPROC)GetWindowLongA(window,GWL_WNDPROC);
-    WNDPROC narrow=state?wow_control_client_procedure(GETFNID(state),FALSE):NULL;
-    WNDPROC wide=state?wow_control_client_procedure(GETFNID(state),TRUE):NULL;
-    BOOL matches=view && !view->procedure_is_guest && actual &&
+    WORD fnid=state?GETFNID(state):0;
+    WCHAR classname[64] = {0};
+    WNDPROC narrow, wide;
+    BOOL matches;
+    /* The original ComboListBox procedure uses LISTBOX state and message
+     * rules (lb1.c), while retaining its distinct registered class entry. */
+    if (fnid == FNID_LISTBOX && GetClassNameW(window, classname, ARRAYSIZE(classname)) &&
+            lstrcmpiW(classname, L"ComboLBox") == 0) fnid = FNID_COMBOLISTBOX;
+    narrow=state?wow_control_client_procedure(fnid,FALSE):NULL;
+    wide=state?wow_control_client_procedure(fnid,TRUE):NULL;
+    matches=view && !view->procedure_is_guest && actual &&
         actual==view->lpfnWndProc && (!(narrow || wide) || actual==narrow || actual==wide);
+    if (!matches) {
+        WCHAR classname[64] = {0};
+        GetClassNameW(window, classname, ARRAYSIZE(classname));
+        fprintf(stderr, "CONTROL_MISMATCH hwnd=%p class=%ls fnid=%x actual=%p view=%p guest=%d narrow=%p wide=%p\n",
+            window, classname, state ? GETFNID(state) : 0, actual, view ? view->lpfnWndProc : NULL,
+            view ? view->procedure_is_guest : -1, narrow, wide);
+    }
     wow_window_words_release(binding);
     SetLastError(saved);
     return matches;

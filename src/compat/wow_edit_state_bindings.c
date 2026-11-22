@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_edit_state_bindings.h"
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #include "compat/include/opennt_usercli_multipass.h"
@@ -13,10 +14,6 @@
 C_ASSERT(sizeof(void *) == 4);
 C_ASSERT(offsetof(EDITWND, ped) == sizeof(WND));
 C_ASSERT(sizeof(EDITWND) == sizeof(WND) + sizeof(PED));
-LONG WINAPI EditWndProcW(HWND, UINT, WPARAM, LONG);
-LONG WINAPI ComboBoxWndProcW(HWND, UINT, WPARAM, LPARAM);
-LONG WINAPI ListBoxWndProcW(HWND, UINT, WPARAM, LPARAM);
-LONG WINAPI ButtonWndProcW(HWND, UINT, WPARAM, LPARAM);
 
 /* ADAPTER-WOW-074. Original comboini.c owns these CBOX fields and children;
  * modern GetComboBoxInfo queries native USER's unrelated private control.
@@ -92,6 +89,7 @@ BOOL WINAPI wow_control_finalize_window(HWND window)
     DWORD error = GetLastError();
     PWND state = wow_window_client_validate_hwnd(window);
     WORD fnid;
+    const wow_control_entry_provider *provider;
     if (!state) return FALSE;
     /* ADAPTER-WOW-059: original xxxFreeWindow's canonical control fallback,
      * for the recovered EDIT/ComboBox/ListBox collaboration group. Do not
@@ -120,10 +118,11 @@ BOOL WINAPI wow_control_finalize_window(HWND window)
     /* Original winuserp.h WM_FINALDESTROY. The enclosing finalize_bound
      * already established task/borrow and early-resource permission. Enter
      * the canonical body directly, not another application/dispatch scope. */
-    if (fnid == FNID_EDIT) (void)EditWndProcW(window, 0x0070, 0, 0);
-    else if (fnid == FNID_COMBOBOX) (void)ComboBoxWndProcW(window, 0x0070, 0, 0);
-    else if (fnid == FNID_LISTBOX) (void)ListBoxWndProcW(window, 0x0070, 0, 0);
-    else (void)wow_button_invoke(window, 0x0070, 0, 0, ButtonWndProcW);
+    provider = wow_control_original_provider();
+    if (fnid == FNID_EDIT) (void)provider->edit_w(window, 0x0070, 0, 0);
+    else if (fnid == FNID_COMBOBOX) (void)provider->combo_w(window, 0x0070, 0, 0);
+    else if (fnid == FNID_LISTBOX) (void)provider->list_w(window, 0x0070, 0, 0);
+    else (void)wow_button_invoke(window, 0x0070, 0, 0, provider->button_w);
     /* Original handler returns zero for success and rejection alike. The
      * caller's borrow keeps state alive across nested combo notification. */
     if (!(state->fnid & FNID_CLEANEDUP_BIT)) {

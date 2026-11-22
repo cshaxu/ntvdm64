@@ -1,0 +1,39 @@
+{
+  "packet": "M0 T483 S20 P53",
+  "baseline": "152048b37",
+  "files_partial": [
+    "BC1F063"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 39,
+    "remaining": 55,
+    "B_C1_unique": 14,
+    "B_C1_raw": 21,
+    "B_C1_compiled_headers": 243,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 function direct unique 18 to 14, raw 25 to 21; compiled headers 249 to 243. BC1F063 retains four original USER/ABI headers.",
+  "implementation": "Four original finalization entries obtained from the existing immutable control provider; task, borrow, identity validation and cleanup unchanged. No new provider table.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "9d09bf25-60e9-45f3-a636-e71de7cd76ec",
+  "build": "cached x86/x64/reference passed; x86 rebuilt after baseline comparison",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "WOW control boundary fixtures",
+    "real CCPU dialog lifecycle and native creation/final ownership",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM on final package",
+    "architecture and documentation checks"
+  ],
+  "test_correction": "Native creation failed twice in candidate and once in unmodified HEAD baseline: ComboLBox window had LISTBOX FNID and original ComboListBox entry. Original lb1.c uses LISTBOX rules for ComboListBox. Fixture now requires actual ComboLBox class, retained process identity and matching ComboListBox entry; final native creation passes.",
+  "data_audit": "Conservative WOW32 232 directly linked compile objects COFF common-symbol sweep found no B->C candidates; stale B object and original C definition manually demonstrate positive control. Archives, other products and non-common data remain unverified.",
+  "evidence": "build/t483-s20-edit-state",
+  "limitations": [
+    "BC1F063 retains four original header records",
+    "Data-symbol scan incomplete beyond scoped common externals",
+    "Full suite required at S20 closure"
+  ]
+}

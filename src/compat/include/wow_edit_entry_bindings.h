@@ -9,6 +9,7 @@ typedef struct wow_control_entry_provider {
     LONG (WINAPI *caret)(HWND, UINT, UINT, LONG);
 } wow_control_entry_provider;
 BOOL WINAPI wow_control_entry_bind(const wow_control_entry_provider *);
+const wow_control_entry_provider *WINAPI wow_control_original_provider(void);
 
 /* ADAPTER-WOW-058: finite EDIT and recovered list/combo system inputs.
  * An invocation owns this snapshot; it is not modern USER's SERVERINFO. */

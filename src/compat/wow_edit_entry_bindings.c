@@ -92,7 +92,7 @@ BOOL WINAPI wow_control_entry_bind(const wow_control_entry_provider *provider)
     }
     return TRUE;
 }
-static const wow_control_entry_provider *original_control(void)
+const wow_control_entry_provider *WINAPI wow_control_original_provider(void)
 {
     if (!control_provider) RaiseFailFastException(NULL, NULL, 0);
     return control_provider;
@@ -123,11 +123,11 @@ static LRESULT CALLBACK list_caret_entry(HWND, UINT, WPARAM, LPARAM);
  * resource/private-state scope must unwind before those outer owners. */
 static LRESULT CALLBACK button_bodyA(HWND window, UINT message, WPARAM wp, LPARAM lp)
 {
-    return wow_button_invoke(window, message, wp, lp, original_control()->button_a);
+    return wow_button_invoke(window, message, wp, lp, wow_control_original_provider()->button_a);
 }
 static LRESULT CALLBACK button_bodyW(HWND window, UINT message, WPARAM wp, LPARAM lp)
 {
-    return wow_button_invoke(window, message, wp, lp, original_control()->button_w);
+    return wow_button_invoke(window, message, wp, lp, wow_control_original_provider()->button_w);
 }
 
 static LRESULT edit_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
@@ -247,13 +247,13 @@ static LRESULT edit_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
 LRESULT CALLBACK wow_edit_window_procA(HWND window, UINT message,
     WPARAM wp, LPARAM lp)
 {
-    return edit_entry(window, message, wp, lp, original_control()->edit_a, FALSE);
+    return edit_entry(window, message, wp, lp, wow_control_original_provider()->edit_a, FALSE);
 }
 
 LRESULT CALLBACK wow_edit_window_procW(HWND window, UINT message,
     WPARAM wp, LPARAM lp)
 {
-    return edit_entry(window, message, wp, lp, original_control()->edit_w, FALSE);
+    return edit_entry(window, message, wp, lp, wow_control_original_provider()->edit_w, FALSE);
 }
 
 /* All three original collaboration controls require the same task, borrow,
@@ -262,12 +262,12 @@ LRESULT CALLBACK wow_edit_window_procW(HWND window, UINT message,
 #define CONTROL_ENTRY(name, original) \
     static LRESULT CALLBACK name(HWND window, UINT message, WPARAM wp, LPARAM lp) \
     { return edit_entry(window, message, wp, lp, original, FALSE); }
-CONTROL_ENTRY(combo_entryA, original_control()->combo_a)
-CONTROL_ENTRY(combo_entryW, original_control()->combo_w)
-CONTROL_ENTRY(list_entryA, original_control()->list_a)
-CONTROL_ENTRY(list_entryW, original_control()->list_w)
-CONTROL_ENTRY(combo_list_entryA, original_control()->combo_list_a)
-CONTROL_ENTRY(combo_list_entryW, original_control()->combo_list_w)
+CONTROL_ENTRY(combo_entryA, wow_control_original_provider()->combo_a)
+CONTROL_ENTRY(combo_entryW, wow_control_original_provider()->combo_w)
+CONTROL_ENTRY(list_entryA, wow_control_original_provider()->list_a)
+CONTROL_ENTRY(list_entryW, wow_control_original_provider()->list_w)
+CONTROL_ENTRY(combo_list_entryA, wow_control_original_provider()->combo_list_a)
+CONTROL_ENTRY(combo_list_entryW, wow_control_original_provider()->combo_list_w)
 CONTROL_ENTRY(button_entryA, button_bodyA)
 CONTROL_ENTRY(button_entryW, button_bodyW)
 #undef CONTROL_ENTRY
@@ -296,7 +296,7 @@ static LRESULT CALLBACK list_caret_entry(HWND window, UINT message,
     /* A queued callback must not dereference a freed original LBIV after
      * normal/final cleanup. Do not instantiate control state for a timer. */
     if (!state || state->fnid != FNID_LISTBOX) return 0;
-    return original_control()->caret(window, message, (UINT)id, (LONG)time);
+    return wow_control_original_provider()->caret(window, message, (UINT)id, (LONG)time);
 }
 
 static VOID CALLBACK list_caret_timer(HWND window, UINT message,
@@ -311,7 +311,7 @@ UINT WINAPI wow_control_set_timer(HWND window, UINT id, DWORD milliseconds,
     /* ADAPTER-WOW-070: original ListBox timing and timer IDs are untouched.
      * Its sole non-NULL callback enters the same scoped owner as its WNDPROC;
      * no timer registry, guest timer or replacement blinking algorithm. */
-    if (!window || (callback && callback != (WNDPROC)original_control()->caret)) {
+    if (!window || (callback && callback != (WNDPROC)wow_control_original_provider()->caret)) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return 0;
     }
