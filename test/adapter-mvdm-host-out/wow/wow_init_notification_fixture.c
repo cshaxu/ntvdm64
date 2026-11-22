@@ -1,3 +1,4 @@
+#include "wow_class_client_fixture_provider.h"
 /* The original declaration relies on the provider's /Gz. Annotate that one
  * declaration while this host fixture uses cdecl worker/session headers. */
 #define UserRegisterWowHandlers __stdcall UserRegisterWowHandlers
@@ -66,6 +67,7 @@ static VOID WINAPI end_task(void) { }
 
 int __cdecl main(void)
 {
+    if (!wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
     session owner;
     wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
     wow_user_runtime_thread binding = {0};

@@ -12,6 +12,7 @@
 #define UserRegisterWowHandlers WINAPI UserRegisterWowHandlers
 #include "compat/include/wow_shared_user_abi.h"
 #include "compat/include/wow_standard_class_provider.h"
+#include "../adapter-mvdm-host-out/wow/wow_class_client_fixture_provider.h"
 #include "compat/include/wow_button_lifetime.h"
 extern PVOID WINAPI wow_original_button_data(struct tagWND *);
 extern VOID WINAPI FreeLookasideEntry(PLOOKASIDE, PVOID);
@@ -6326,6 +6327,7 @@ int main(int argc, char **argv)
 {
 #ifdef WOW_WINDOW_BORROW_FIXTURE
     if (!wow_profile_bind(wow_original_task_profile, FastGetProfileIntW) ||
+            !wow_class_client_bind(&wow_fixture_class_client_provider) ||
             !wow_button_bind(wow_original_button_data, FreeLookasideEntry) ||
             !wow_cleanup_bind(&wow_original_cleanup_provider) ||
             !wow_native_text_bind(wow_original_text_capture) ||

@@ -334,3 +334,12 @@ Mirror0points/0lines; cumulative+3points/+239lines. Cached full, dual11,
 original callback frame, CCPU abort and real Win16/COMMAND passed; package
 166fe66a-4916-4c3d-b8d5-c4ab533e7a23.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p23-delivery.json).
+
+P24 completes BC1F029: moved the existing original class-client extraction to
+WOW32, with B-owned typed synchronous provider dispatch. B-C1 direct unique
+50->48 (raw 60->56), compiled headers 437->423; files 26/94 complete.
+Non-error mirror delta 0 points/0 lines; cumulative +3 points/+239 lines.
+Cached full build, dual11, class/control and real Win16/COMMAND targeted tests
+passed; Full remains required at S20 closure. Package
+f5ef3a75-1551-4baa-98b9-a93bc8b5d5c2.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p24-delivery.json).

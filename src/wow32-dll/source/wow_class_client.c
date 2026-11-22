@@ -6,7 +6,7 @@
  * Original function bodies and existing host bindings are preserved.
  */
 #define WOW_ORIGINAL_CLASS_CLIENT
-#include "wow_class_client_bindings.h"
+#include "wow32-dll/include/wow_original_class_client_bindings.h"
 #include "non-mvdm/windows/core/ntuser/inc/ntcftxt.h"
 
 

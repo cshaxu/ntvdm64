@@ -1,3 +1,4 @@
+#include "wow_class_client_fixture_provider.h"
 #include "wow_standard_class_provider.h"
 #include "compat/include/wow_button_lifetime.h"
 extern PVOID WINAPI wow_original_button_data(struct tagWND *);
@@ -1267,6 +1268,7 @@ static void verify_client_death_exception(void)
 }
 int __cdecl main(int argc,char **argv)
 {
+    if (!wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
     session owner;
     wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
     wow_user_runtime_thread binding = {0};

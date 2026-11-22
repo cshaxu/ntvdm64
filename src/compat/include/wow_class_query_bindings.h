@@ -1,6 +1,5 @@
 #ifndef WOW_CLASS_QUERY_BINDINGS_H
 #define WOW_CLASS_QUERY_BINDINGS_H
-#include "wow_user_capture_bindings.h"
 #include "wow_user_borrow_scope.h"
 
 LONG WINAPI GetClassWOWWords(HINSTANCE, LPCSTR);
@@ -10,6 +9,7 @@ LONG WINAPI GetClassWOWWords(HINSTANCE, LPCSTR);
  * Original classc.c::_GetClassData returns pcls->adwWOW for this one index;
  * map that fixed expression to the existing two-word storage. */
 #ifdef WOW_ORIGINAL_CLASS_QUERY
+#include "wow_user_capture_bindings.h"
 typedef DWORD *PCLS;
 static const struct { ULONG ulClientDelta; } wow_class_query_client = {0};
 #define GetClientInfo() (&wow_class_query_client)

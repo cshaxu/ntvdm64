@@ -1,0 +1,36 @@
+{
+  "packet": "M0 T483 S20 P24",
+  "baseline": "e2961fe15",
+  "files_completed": [
+    "BC1F029"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 26,
+    "remaining": 68,
+    "B_C1_unique": 48,
+    "B_C1_raw": 56,
+    "B_C1_compiled_headers": 423,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct 50 to 48; raw 60 to 56; compiled headers 437 to 423. Original C1 routines remain in their original owner; B uses three typed synchronous providers bound by WOW32.",
+  "implementation": "Moved pre-existing original RegisterClassWOWA extraction and original class-client expansion from compat to WOW32; B retains callback dispatch, scope and lifecycle; original RegisterClassWOWA source windows/core/ntuser/client/client.c:2183; signatures and bodies retained.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "f5ef3a75-1551-4baa-98b9-a93bc8b5d5c2",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "class-client, class-query, class-lifetime, native-creation, standard-class, init-notification, task-lifecycle",
+    "WOW control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-class-client",
+  "limitations": [
+    "Full requested only at S20 closure; not run as P24 acceptance",
+    "BC1F021 and BC1F030 remain open; B-C1 callback runtime relationships remain explicitly accounted for"
+  ]
+}

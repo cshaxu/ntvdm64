@@ -1,3 +1,4 @@
+#include "non-mvdm/public/sdk/inc/nt.h"
 #include "compat/include/wow_user_registration_state.h"
 #include "compat/include/wow_task_start_notification.h"
 #include "compat/include/wow_startup_report.h"
@@ -12,7 +13,6 @@
 #include "wow_user_private_access.h"
 #include "compat/include/wow_page_domain.h"
 
-#include "non-mvdm/public/sdk/inc/nt.h"
 #include "compat/include/wow_dde_data_bindings.h"
 
 /* ADAPTER-WOW-056: UserRegisterWowHandlers is one original all-or-nothing

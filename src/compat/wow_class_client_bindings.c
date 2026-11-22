@@ -5,9 +5,30 @@
 #include "compat/include/wow_page_domain.h"
 #include <stdio.h>
 
-ATOM WINAPI wow_original_register_class(WNDCLASSA *, DWORD *);
-BOOL WINAPI wow_original_unregister_class(LPCSTR, HINSTANCE);
-BOOL WINAPI wow_original_get_class_info(HINSTANCE, LPCSTR, WNDCLASSA *);
+static const wow_class_client_provider *class_client_provider;
+
+BOOL WINAPI wow_class_client_bind(const wow_class_client_provider *provider)
+{
+    const wow_class_client_provider *previous;
+    if (!provider || !provider->register_class || !provider->unregister_class ||
+            !provider->get_class_info) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&class_client_provider,
+        (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static const wow_class_client_provider *class_provider(void)
+{
+    if (!class_client_provider) RaiseFailFastException(NULL, NULL, 0);
+    return class_client_provider;
+}
 extern unsigned short __cdecl getCS(void);
 extern unsigned short __cdecl getIP(void);
 static __declspec(thread) wow_class_client_context *current;
@@ -33,7 +54,7 @@ static ATOM register_class(wow_class_client_context *context,
     previous = current; current = context;
     previous_guest = current_guest_registration;
     current_guest_registration = guest;
-    __try { result = wow_original_register_class(wc, words); }
+    __try { result = class_provider()->register_class(wc, words); }
     __finally {
         current_guest_registration = previous_guest;
         current = previous;
@@ -63,7 +84,7 @@ BOOL WINAPI wow_class_client_unregister(wow_class_client_context *context,
     BOOL result;
     if (!valid(context)) return FALSE;
     previous = current; current = context;
-    __try { result = wow_original_unregister_class(name, module); }
+    __try { result = class_provider()->unregister_class(name, module); }
     __finally { current = previous; }
     return result;
 }
@@ -74,7 +95,7 @@ BOOL WINAPI wow_class_client_query(wow_class_client_context *context,
     wow_class_client_context *previous = current;
     BOOL result;
     current = context;
-    __try { result = wow_original_get_class_info(module, name, output); }
+    __try { result = class_provider()->get_class_info(module, name, output); }
     __finally { current = previous; }
     return result;
 }

@@ -1,3 +1,4 @@
+#include "wow_class_client_fixture_provider.h"
 #include "wow_class_client_bindings.h"
 #include "wow_user_private_access.h"
 #include "wow_user_runtime.h"
@@ -18,6 +19,7 @@ static LRESULT CALLBACK native(HWND w, UINT m, WPARAM p, LPARAM l)
 
 int __cdecl main(void)
 {
+    if (!wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
     wow_class_lookup_context classes = {0};
     wow_task_order_thread thread = {0};
     wow_task_order_entry task = {0};
