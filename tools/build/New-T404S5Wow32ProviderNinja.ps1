@@ -351,6 +351,7 @@ foreach ($raw in @(
 $dllEntryBridgeSource = Join-Path $build 'wow32-dll-entry-bridge.c'
 $dllEntryBridgeLines = @(
     '/* Generated build-only CRT-to-original DLLENTRY bridge. */',
+    '#include "wow_user_client_view_layout.h"',
     '#include "wow_common_dialog_callback.h"',
     '#include "wow_hook_callback.h"',
     '#include "wow_idle_hook_binding.h"',
@@ -405,6 +406,7 @@ $dllEntryBridgeLines = @(
     '    wow_original_register_class, wow_original_unregister_class, wow_original_get_class_info, _RegisterClassEx, GetClassPtr, _InnerGetClassPtr, _UnregisterClass };',
     '#include "compat/include/wow_button_lifetime.h"',
     'PVOID WINAPI wow_original_button_data(struct tagWND *);',
+    'const wow_button_resource_provider *WINAPI wow_original_button_resources(void);',
     'VOID WINAPI FreeLookasideEntry(PLOOKASIDE, PVOID);',
     '#include "compat/include/wow_task_profile_bindings.h"',
     'UINT WINAPI wow_original_task_profile(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);',
@@ -512,6 +514,7 @@ $dllEntryBridgeLines = @(
     '    if (reason == 1 && !wow_window_access_bind(&window_access_provider)) return 0;',
     '    if (reason == 1 && !wow_task_lifecycle_bind(&task_lifecycle_provider)) return 0;',
     '    if (reason == 1 && !wow_class_client_bind(&class_client_provider)) return 0;',
+    '    if (reason == 1 && !wow_button_resources_bind(wow_original_button_resources())) return 0;',
     '    if (reason == 1 && !wow_button_bind(wow_original_button_data, FreeLookasideEntry)) return 0;',
     '    if (reason == 1 && !wow_native_text_bind(wow_original_text_capture)) return 0;',
     '    if (reason == 1 && !wow_profile_bind(wow_original_task_profile, FastGetProfileIntW)) return 0;',

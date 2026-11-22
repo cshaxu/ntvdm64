@@ -15,6 +15,7 @@
 #include "../adapter-mvdm-host-out/wow/wow_class_client_fixture_provider.h"
 #include "compat/include/wow_button_lifetime.h"
 extern PVOID WINAPI wow_original_button_data(struct tagWND *);
+extern const wow_button_resource_provider *WINAPI wow_original_button_resources(void);
 extern VOID WINAPI FreeLookasideEntry(PLOOKASIDE, PVOID);
 #include "compat/include/wow_task_profile_bindings.h"
 extern UINT WINAPI wow_original_task_profile(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
@@ -6453,6 +6454,7 @@ int main(int argc, char **argv)
             !wow_control_draw_bind(fixture_ClientDrawState)) return 13;
     if (!wow_profile_bind(wow_original_task_profile, FastGetProfileIntW) ||
             !wow_class_client_bind(&wow_fixture_class_client_provider) ||
+            !wow_button_resources_bind(wow_original_button_resources()) ||
             !wow_button_bind(wow_original_button_data, FreeLookasideEntry) ||
             !wow_cleanup_bind(&wow_original_cleanup_provider) ||
             !wow_native_text_bind(wow_original_text_capture) ||

@@ -1,0 +1,46 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\btnctl.c",
+      "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
+      "current_sha256": "7c385d5ce44a84090a1e9e8c68cb68d5bc8c98efd01ca1e93c54fd4a244e0113",
+      "raw": {
+        "blocks": 15,
+        "added": 57,
+        "deleted": 5
+      },
+      "filtered": {
+        "blocks": 13,
+        "added": 55,
+        "deleted": 1
+      },
+      "excluded": [
+        {
+          "original": [
+            246,
+            247
+          ],
+          "current": [
+            290,
+            291
+          ]
+        },
+        {
+          "original": [
+            296,
+            297
+          ],
+          "current": [
+            345,
+            346
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    }
+  ]
+}

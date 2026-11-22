@@ -1,3 +1,4 @@
+#include "wow_button_resource_provider.h"
 #include "wow_button_resources.h"
 #include "compat/include/wow_button_style_table.h"
 #include "button-resources/leaves.h"
@@ -198,6 +199,7 @@ static void native_images(void)
 }
 int __cdecl main(void)
 {
+    if (!wow_button_resources_bind(wow_original_button_resources())) return 3;
     metadata();
     failure_cleanup();
     native_images();

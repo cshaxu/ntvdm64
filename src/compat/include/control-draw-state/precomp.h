@@ -1,5 +1,10 @@
 #ifndef WOW_CONTROL_DRAW_STATE_PRECOMP_H
 #define WOW_CONTROL_DRAW_STATE_PRECOMP_H
+#include <windows.h>
+#include <winternl.h>
+#define WOW_ORIGINAL_BUTTON_RESOURCES
+#include "compat/include/opennt_user_multipass.h"
+#undef WOW_ORIGINAL_BUTTON_RESOURCES
 #include "wow_control_draw_state.h"
 #include "wow_edit_drawing_bindings.h"
 #include "wow_edit_native_bindings.h"

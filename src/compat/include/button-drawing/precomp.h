@@ -1,6 +1,9 @@
 #ifndef WOW_BUTTON_DRAWING_PRECOMP_H
 #define WOW_BUTTON_DRAWING_PRECOMP_H
 #include "wow_button_lifetime.h"
+#define WOW_ORIGINAL_BUTTON_RESOURCES
+#include "compat/include/opennt_user_multipass.h"
+#undef WOW_ORIGINAL_BUTTON_RESOURCES
 /* The original helper is separately composed for the Button invocation.
  * DrawState has its own atlas, even when it encloses this invocation. */
 #define oemInfo (*wow_button_current_resources())

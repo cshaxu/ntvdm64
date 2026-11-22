@@ -3,6 +3,7 @@
 #include "wow_standard_class_provider.h"
 #include "compat/include/wow_button_lifetime.h"
 extern PVOID WINAPI wow_original_button_data(struct tagWND *);
+extern const wow_button_resource_provider *WINAPI wow_original_button_resources(void);
 extern VOID WINAPI FreeLookasideEntry(PLOOKASIDE, PVOID);
 #include "wow_task_profile_bindings.h"
 extern UINT WINAPI wow_original_task_profile(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
@@ -1302,6 +1303,7 @@ int __cdecl main(int argc,char **argv)
     CHECK(wowexec != NULL);
     CHECK(ntvdm_dpmi_initialize());
     CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
+    CHECK(wow_button_resources_bind(wow_original_button_resources()));
     CHECK(wow_button_bind(wow_original_button_data, FreeLookasideEntry));
     CHECK(wow_standard_class_bind(&class_provider));
     CHECK(wow_cleanup_bind(&wow_original_cleanup_provider));

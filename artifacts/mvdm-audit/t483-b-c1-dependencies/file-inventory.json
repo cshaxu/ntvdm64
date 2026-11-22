@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 50,
+    "completed": 53,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 80,
+    "compiled_header_rows": 77,
     "private_search_root_rows": 0
   },
   "files": [
@@ -1913,7 +1913,7 @@
     {
       "id": "BC1F026",
       "file": "src/compat/wow_button_lifetime.c",
-      "status": "in progress: P21 removes button state and lookaside implementation edges; shared button resource layout remains",
+      "status": "completed in verified P66 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -2066,12 +2066,13 @@
           "product": ""
         }
       ],
-      "partial_evidence": "p21-delivery.json"
+      "partial_evidence": "p21-delivery.json",
+      "p66_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p66-button-resource-closure.json"
     },
     {
       "id": "BC1F027",
       "file": "src/compat/wow_button_resources.c",
-      "status": "in progress: P22 removes redundant nt.h chain; original OEM geometry layout remains",
+      "status": "completed in verified P66 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -2164,7 +2165,8 @@
           "product": ""
         }
       ],
-      "partial_evidence": "p22-delivery.json"
+      "partial_evidence": "p22-delivery.json",
+      "p66_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p66-button-resource-closure.json"
     },
     {
       "id": "BC1F028",
@@ -3310,7 +3312,7 @@
     {
       "id": "BC1F038",
       "file": "src/compat/wow_control_draw_state.c",
-      "status": "in progress: P32 removes original drawing direct call; original button resource layout remains",
+      "status": "completed in verified P66 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -3413,7 +3415,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p32-delivery.json"
+      "progress_evidence": "p32-delivery.json",
+      "p66_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p66-button-resource-closure.json"
     },
     {
       "id": "BC1F039",
@@ -9842,6 +9845,6 @@
       "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     }
   ],
-  "current_scan": "build/t483-s20-p65",
-  "current_scan_status": "P65 final compiled scan, seven fixture cases and published Win16/COMMAND runtime passed; data/assembly coverage limits remain"
+  "current_scan": "build/t483-s20-p66",
+  "current_scan_status": "P66 original button resource provider and final full product scan, targeted and published runtime verified; coverage limits remain"
 }

@@ -1,3 +1,4 @@
+#include "wow_button_resource_provider.h"
 #include "non-mvdm/public/internal/windows/inc/wingdip.h"
 #include "wow_control_draw_state.h"
 #include "wow_edit_entry_bindings.h"
@@ -103,6 +104,7 @@ static void check_icon_size(void)
 BOOL WINAPI ClientDrawState(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, int, int, int, int, UINT);
 int __cdecl main(void)
 {
+    if (!wow_button_resources_bind(wow_original_button_resources())) return 3;
     wow_edit_context context = {0};
     HDC screen = GetDC(NULL), dc = CreateCompatibleDC(screen);
     HBITMAP bitmap = CreateCompatibleBitmap(screen, 80, 40);

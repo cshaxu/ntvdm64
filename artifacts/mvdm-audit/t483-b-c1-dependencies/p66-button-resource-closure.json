@@ -1,0 +1,77 @@
+{
+  "packet": "M0 T483 S20 P66",
+  "status": "verified delivery",
+  "baseline": "ae578541d",
+  "files_completed": [
+    "src/compat/wow_button_lifetime.c",
+    "src/compat/wow_button_resources.c",
+    "src/compat/wow_control_draw_state.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 53,
+    "remaining": 41,
+    "B_C1_direct": 0,
+    "B_C1_headers": 77,
+    "B_C1_sources": 32,
+    "B_C2_direct": 0,
+    "B_C2_headers": 0
+  },
+  "changes": {
+    "before_headers": 80,
+    "after_headers": 77,
+    "per_file": [
+      {
+        "file": "src/compat/wow_button_lifetime.c",
+        "before_headers": 1,
+        "after_headers": 0
+      },
+      {
+        "file": "src/compat/wow_button_resources.c",
+        "before_headers": 1,
+        "after_headers": 0
+      },
+      {
+        "file": "src/compat/wow_control_draw_state.c",
+        "before_headers": 1,
+        "after_headers": 0
+      }
+    ]
+  },
+  "ownership": "Original C1 button provider constructs immutable image-lifetime OEM geometry before binding and performs synchronous original-style rendering. B holds only opaque geometry pointer, dimensions and render capability; B retains GDI allocation, exception rollback and release. Original button and DrawState read the same original geometry, with no mirrored B layout, new allocation, queue or state machine.",
+  "binding": "F calls the C provider factory at DLL process attachment before controls can run, then binds immutable B provider. Construction is before publication, not a concurrent runtime getter. Geometry is shared read-only; DC/bitmap/old selection remain per invocation.",
+  "mirror": {
+    "file": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+    "before": {
+      "blocks": 13,
+      "added": 18,
+      "deleted": 1
+    },
+    "after": {
+      "blocks": 13,
+      "added": 55,
+      "deleted": 1
+    },
+    "delta_points": 0,
+    "delta_lines": 37,
+    "line_issues": [],
+    "approval": "standing small mirror increment: existing point, less than 100 lines; residual retained for revisit"
+  },
+  "package": "fd4a8672-73e4-4bae-bfc8-45fc476648e1",
+  "verification": [
+    "cached x86/x64/reference full build",
+    "dual 11-image publication,22 hash matches",
+    "button resource geometry/pixels and18 acquisition/render failure and exception points",
+    "DrawState and nested button lifetime/DC cleanup",
+    "seven lifecycle/window fixtures",
+    "published real USER16 native-extension and complete-Userenv COMMAND EDIT/CMD/MEM return",
+    "original excluded branch and logical line pairing: zero issues"
+  ],
+  "evidence_root": "build\\t483-s20-p66",
+  "limitations": [
+    "S20 not closed;41 files remain",
+    "existing map/data/assembly coverage limitations retained",
+    "prior Shell native nested exception intermittency remains open"
+  ],
+  "test_composition": "Boundary generator compiles the exact current provider block from btnctl.c, with original source line mapping and fail-closed source markers; no copied geometry/render algorithm in tests. Full product also compiles unchanged remaining button body."
+}

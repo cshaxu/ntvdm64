@@ -18,6 +18,43 @@ PVOID WINAPI wow_original_button_data(struct tagWND *window)
 {
     return ((PBUTNWND)window)->pbutn;
 }
+
+/* Image-attach composition only: finish immutable original geometry before
+ * publishing the B resource provider; no allocation or new lifetime owner. */
+#include "compat/include/wow_button_resources.h"
+#include "compat/include/wow_button_style_table.h"
+static OEMBITMAPINFO wow_button_images[OBI_COUNT];
+static BOOL WINAPI wow_original_button_render(HDC dc)
+{
+    UINT i;
+    for (i = OBI_RADIOMASK; i < OBI_COUNT; ++i) {
+        OEMBITMAPINFO *image = &wow_button_images[i];
+        RECT rect = {image->x, image->y, image->x + image->cx, image->y + image->cy};
+        if (i >= OBI_3STATE && !(sysBmpStyles[i - OBI_RADIOMASK][1] & DFCS_CHECKED))
+            continue;
+        if (!DrawFrameControl(dc, &rect, sysBmpStyles[i - OBI_RADIOMASK][0],
+                sysBmpStyles[i - OBI_RADIOMASK][1])) return FALSE;
+    }
+    return TRUE;
+}
+const wow_button_resource_provider *WINAPI wow_original_button_resources(void)
+{
+    UINT i;
+    static const wow_button_resource_provider value = {
+        wow_button_images, 13, (OBI_COUNT - OBI_RADIOMASK) * 13, wow_original_button_render
+    };
+    for (i = OBI_RADIOMASK; i < OBI_COUNT; ++i) {
+        OEMBITMAPINFO *image = &wow_button_images[i];
+        if (i >= OBI_3STATE && !(sysBmpStyles[i - OBI_RADIOMASK][1] & DFCS_CHECKED))
+            *image = wow_button_images[i - (OBI_3STATE - OBI_CHECK)];
+        else {
+            image->x = 0;
+            image->y = (i - OBI_RADIOMASK) * 13;
+            image->cx = image->cy = 13;
+        }
+    }
+    return &value;
+}
 #line 15
 #pragma hdrstop
 

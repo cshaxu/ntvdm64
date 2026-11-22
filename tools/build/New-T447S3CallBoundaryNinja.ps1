@@ -142,6 +142,21 @@ $units += ,@('push_rect', 'src/compat/wow_control_rect.c', $pushFlags)
 $resourceTestFlags = '/DWOW_BUTTON_RESOURCE_TEST_LEAVES /FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/button-resources/leaves.h')) + '"'
 $units += ,@('button_resources_body', 'src/compat/wow_button_resources.c', $resourceTestFlags)
 $units += ,@('button_resources_fixture', 'test/adapter-mvdm-host-out/wow/wow_button_resources_fixture.c', '')
+# Compile the exact current C provider block for isolated resource failure tests.
+# No test copy of geometry/rendering algorithms and no unreachable ButtonWndProc stubs.
+$buttonSourcePath = Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/btnctl.c'
+$buttonSource = [IO.File]::ReadAllText($buttonSourcePath)
+$providerStart = $buttonSource.IndexOf('/* Image-attach composition only:')
+$providerEnd = $buttonSource.IndexOf('#line 15', $providerStart)
+if ($providerStart -lt 0 -or $providerEnd -le $providerStart) { throw 'Original button provider boundary missing' }
+$providerLine = ($buttonSource.Substring(0, $providerStart).Split("`n")).Count
+$providerSource = '#include "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/wow_button_resource_provider.h')) + '"' + "`n" +
+    '#line ' + $providerLine + ' "' + (NinjaValue $buttonSourcePath) + '"' + "`n" +
+    $buttonSource.Substring($providerStart, $providerEnd - $providerStart)
+[IO.File]::WriteAllText((Join-Path $build 'button-resource-provider.c'), $providerSource, [Text.UTF8Encoding]::new($false))
+$providerRelative = [IO.Path]::GetRelativePath($root, (Join-Path $build 'button-resource-provider.c'))
+$units += ,@('button_resource_provider', $providerRelative, '')
+$units += ,@('button_resource_provider_faults', $providerRelative, $resourceTestFlags)
 $stateDrawingFlags = '/DWOW_ORIGINAL_STATE_DRAWING /I "' + (NinjaValue (Join-Path $root 'src/compat/include/control-draw-state')) + '"'
 $units += ,@('state_drawing_body', 'src/non-mvdm/windows/core/ntuser/client/mngrayc.c', $stateDrawingFlags)
 $units += ,@('state_icon_size', 'src/compat/wow_icon_size.c', '')
@@ -278,12 +293,12 @@ $lines.Add('build bin/wow_mnemonic_drawing_fixture.exe: link obj/mnemonic_fixtur
 $lines.Add('build original-mnemonic-drawing-boundaries: phony bin/wow_mnemonic_drawing_fixture.exe')
 $lines.Add('build bin/wow_button_drawing_fixture.exe: link obj/push_fixture.obj obj/push_owner.obj obj/push_rect.obj')
 $lines.Add('build original-button-drawing-boundaries: phony bin/wow_button_drawing_fixture.exe')
-$lines.Add('build bin/wow_button_resources_fixture.exe: link obj/button_resources_fixture.obj obj/button_resources_body.obj')
+$lines.Add('build bin/wow_button_resources_fixture.exe: link obj/button_resources_fixture.obj obj/button_resources_body.obj obj/button_resource_provider_faults.obj')
 $lines.Add('build original-button-resource-boundaries: phony bin/wow_button_resources_fixture.exe')
-$lines.Add('build bin/wow_control_draw_state_fixture.exe: link obj/state_drawing_fixture.obj obj/state_drawing_adapter.obj obj/state_icon_size.obj obj/state_drawing_body.obj obj/state_drawing_brushes.obj obj/state_drawing_atlas.obj obj/state_drawing_text.obj obj/state_tab_text.obj obj/string_extent.obj obj/string_services.obj obj/string_conversion.obj')
+$lines.Add('build bin/wow_control_draw_state_fixture.exe: link obj/state_drawing_fixture.obj obj/button_resource_provider.obj obj/state_drawing_adapter.obj obj/state_icon_size.obj obj/state_drawing_body.obj obj/state_drawing_brushes.obj obj/state_drawing_atlas.obj obj/state_drawing_text.obj obj/state_tab_text.obj obj/string_extent.obj obj/string_services.obj obj/string_conversion.obj')
 $lines.Add('  libs = ntdll.lib')
 $lines.Add('build original-state-drawing-boundaries: phony bin/wow_control_draw_state_fixture.exe')
-$lines.Add('build bin/wow_button_lifetime_fixture.exe: link obj/button_lifetime_fixture.obj obj/button_lifetime_adapter.obj obj/button_blit_owner.obj obj/button_lifetime_resources.obj')
+$lines.Add('build bin/wow_button_lifetime_fixture.exe: link obj/button_lifetime_fixture.obj obj/button_resource_provider.obj obj/button_lifetime_adapter.obj obj/button_blit_owner.obj obj/button_lifetime_resources.obj')
 $lines.Add('build bin/wow_button_dc_fixture.exe: link obj/button_dc_fixture.obj obj/button_dc_owner.obj obj/button_dc_unreached.obj obj/native_environment.obj')
 $lines.Add('build original-button-lifetime-boundaries: phony bin/wow_button_lifetime_fixture.exe bin/wow_button_dc_fixture.exe')
 $lines.Add('build bin/wow_dialog_navigation_fixture.exe: link obj/navigation_fixture.obj obj/navigation_graph.obj obj/default_view.obj obj/navigation_help.obj obj/navigation_borders.obj obj/original_dlgmgrc.obj obj/original_dlgmgr2.obj obj/dialog_lookup.obj obj/original_winmgrc.obj obj/navigation_native.obj obj/native_controls.obj obj/native_environment.obj')

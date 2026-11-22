@@ -1,3 +1,4 @@
+#include "wow_button_resource_provider.h"
 #include "wow_button_lifetime.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_user_client_view_layout.h"
@@ -149,6 +150,7 @@ static PVOID WINAPI fixture_button_data(struct tagWND *window)
 
 int __cdecl main(void)
 {
+    if (!wow_button_resources_bind(wow_original_button_resources())) return 3;
     if (!wow_button_bind(fixture_button_data, FreeLookasideEntry)) return 3;
     unsigned before;
     DWORD returned_error, remaining_type;

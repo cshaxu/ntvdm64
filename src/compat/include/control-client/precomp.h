@@ -23,6 +23,13 @@
 #include "wow_button_lifetime.h"
 #endif
 
+#include <windows.h>
+#include <winternl.h>
+#pragma warning(push)
+#define WOW_ORIGINAL_BUTTON_RESOURCES
+#include "compat/include/opennt_user_multipass.h"
+#undef WOW_ORIGINAL_BUTTON_RESOURCES
+#pragma warning(pop)
 #include "wow_user_client_view_layout.h"
 #include <limits.h> /* Original client/precomp.h: ListBox signed bounds. */
 /* Original client/precomp.h includes windowsx.h. Its SelectFont/DeleteFont
