@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_list_native_bindings.h"
 
 /* Original lboxctl2.c -> _ResetDblClk has no arguments and no callback.

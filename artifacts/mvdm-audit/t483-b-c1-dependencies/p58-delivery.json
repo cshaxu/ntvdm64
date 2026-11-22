@@ -1,0 +1,37 @@
+{
+  "packet": "M0 T483 S20 P58",
+  "baseline": "259828295",
+  "files_completed": [
+    "BC1F069"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 44,
+    "remaining": 50,
+    "B_C1_unique": 14,
+    "B_C1_raw": 21,
+    "B_C1_compiled_headers": 213,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 function direct unique/raw unchanged 14/21; compiled headers 219 to 213. BC1F069 has no remaining C1 header records or direct function links.",
+  "implementation": "Replaced private NT include with platform SDK declarations; native win32u named-service lookup, once initialization, error and lifetime semantics unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "20e771ba-006e-496b-8693-cec90b531767",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "WOW list/control boundary fixtures",
+    "real CCPU native control creation and lifecycle",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-list-native",
+  "limitations": [
+    "List reset caller fixture uses a double and does not alone establish invocation of native double-click service",
+    "Data-symbol scan incomplete beyond scoped common externals",
+    "Full suite required at S20 closure"
+  ]
+}
