@@ -1429,3 +1429,6 @@ decisions and the [S21 identity verification](evidence/t483-closure/result.json)
 
 [T484 CMD-only build and release plan](operations/t484-cmd-build-release-plan.md)
 records the admitted interpreter constraint, sequential stages and acceptance.
+
+[T484 S1 build inventory](evidence/t484-s1-build-inventory.md) records the
+producer chain, DIR-ordered caller worklist, output coverage and migration design.

@@ -1,0 +1,146 @@
+{
+  "scope": "Existing cache graph inspection only; not a fresh configuration or build result.",
+  "graphs": [
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/build.ninja",
+      "sha256": "c66380e709d3474c10764e25c269eaf90b3bb42c9d6e695f52822debb99bcedf",
+      "build_edges": 1048,
+      "forbidden_command_rules": [
+        {
+          "line": 491,
+          "text": "command = \"C$:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1119-907-0_26.1119.907.0_x64__3k8sg7r9htsxt/dependencies/node/bin/node.exe\" \"O$:/repos.hobby/ntvdm64/tools/build/GenerateCvidcVectorProviderStubs.mjs\" $out \"O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/generated/cvidc_cpu_binding.inc\""
+        },
+        {
+          "line": 1078,
+          "text": "command = python \"O:/repos.hobby/ntvdm64/tools/build/extract-guest-memory-fixture.py\" \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/command-directory-owner.inc\" --directory-owner"
+        },
+        {
+          "line": 1294,
+          "text": "command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"O$:/repos.hobby/ntvdm64/tools/build/Stage-NativeWorkerImage.ps1\" -InputFile $in -OutputFile \"O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/ntcon.exe\""
+        },
+        {
+          "line": 1304,
+          "text": "command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"O$:/repos.hobby/ntvdm64/tools/build/Stage-NativeWorkerImage.ps1\" -InputFile $in -OutputFile \"O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/ntvwm.exe\""
+        },
+        {
+          "line": 1451,
+          "text": "command = python \"O:/repos.hobby/ntvdm64/tools/build/extract-guest-memory-fixture.py\" \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/text-video-owner.inc\" --text-video-owner"
+        },
+        {
+          "line": 1462,
+          "text": "command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"O$:/repos.hobby/ntvdm64/tools/build/Stage-NativeWorkerImage.ps1\" -InputFile $in -OutputFile \"O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/run16.exe\""
+        },
+        {
+          "line": 1487,
+          "text": "command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"O$:/repos.hobby/ntvdm64/tools/build/Stage-NativeWorkerImage.ps1\" -InputFile $in -OutputFile \"O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/ntsrv.exe\" -Subsystem Windows"
+        },
+        {
+          "line": 1498,
+          "text": "command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"O$:/repos.hobby/ntvdm64/tools/build/Stage-NativeWorkerImage.ps1\" -InputFile $in -OutputFile \"O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/ntmon.exe\""
+        },
+        {
+          "line": 1536,
+          "text": "command = cmd.exe /d /s /c \"link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map /def:generated/ntvdm-wow32-provider.def $in rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib && \"C$:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1119-907-0_26.1119.907.0_x64__3k8sg7r9htsxt/dependencies/node/bin/node.exe\" \"O$:/repos.hobby/ntvdm64/tools/audit/Verify-VdmTibStorage.mjs\" $out.map obj/dpmi/dpmiint.obj\""
+        },
+        {
+          "line": 1730,
+          "text": "command = python \"O:/repos.hobby/ntvdm64/tools/build/extract-guest-memory-fixture.py\" \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/guest-memory-coordination.c\""
+        }
+      ]
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/build.ninja",
+      "sha256": "9d6a445234571627a09c36429ba88921a974abaff23414c2ae0940f6e55b87db",
+      "build_edges": 236,
+      "forbidden_command_rules": []
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/frontend/build.ninja",
+      "sha256": "95a63c07d4f794391c2325a6b4e0a4d34353bfc91d48611fe1ec3bee3d113f23",
+      "build_edges": 116,
+      "forbidden_command_rules": []
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/hook/build.ninja",
+      "sha256": "4602eb30b957d42737dff9019bcb098c26cd047fffb3753469d7f4dd2b958cf6",
+      "build_edges": 34,
+      "forbidden_command_rules": [
+        {
+          "line": 11,
+          "text": "command = powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"O$:/repos.hobby/ntvdm64/tools/build/Stage-NativeWorkerImage.ps1\" -InputFile $in -OutputFile \"$out\""
+        }
+      ]
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/launcher/build.ninja",
+      "sha256": "037d6966621ad79b27dc3c1add09018611d666604f064e985fe559113fc277ab",
+      "build_edges": 97,
+      "forbidden_command_rules": []
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/monitor/build.ninja",
+      "sha256": "4b5c112e981e4f899a41e74ca554a3f1d0f70097eeffa1cb8a8cefaaadce2b7b",
+      "build_edges": 44,
+      "forbidden_command_rules": []
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/service/build.ninja",
+      "sha256": "1bad74f69fe7861bacbc7ba8fba63f84fd2dd56254bfe578c19d3c842242a65e",
+      "build_edges": 96,
+      "forbidden_command_rules": []
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/worker/build.ninja",
+      "sha256": "65937910573f6bc174fd371e7a1297e9c630092a6b4b024798b6cf150e036a41",
+      "build_edges": 101,
+      "forbidden_command_rules": []
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja",
+      "sha256": "bba4784006c1ba3d0808afab90f5a82fb01ea32876849c5195710d2dfa8fe57f",
+      "build_edges": 1048,
+      "forbidden_command_rules": [
+        {
+          "line": 491,
+          "text": "command = \"C$:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1119-907-0_26.1119.907.0_x64__3k8sg7r9htsxt/dependencies/node/bin/node.exe\" \"O$:/repos.hobby/ntvdm64/tools/build/GenerateCvidcVectorProviderStubs.mjs\" $out \"O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/worker-reference-x86/generated/cvidc_cpu_binding.inc\""
+        },
+        {
+          "line": 1078,
+          "text": "command = python \"O:/repos.hobby/ntvdm64/tools/build/extract-guest-memory-fixture.py\" \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/worker-reference-x86/command-directory-owner.inc\" --directory-owner"
+        },
+        {
+          "line": 1294,
+          "text": "command = powershell.exe -NoProfile -Command \"throw 'Select the verified AMD64 ntcon.exe with -NativeFrontend; no x86 fallback'\""
+        },
+        {
+          "line": 1304,
+          "text": "command = powershell.exe -NoProfile -Command \"throw 'Select the verified AMD64 NTVWM with -NativeWorker; no x86 worker fallback'\""
+        },
+        {
+          "line": 1451,
+          "text": "command = python \"O:/repos.hobby/ntvdm64/tools/build/extract-guest-memory-fixture.py\" \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/worker-reference-x86/text-video-owner.inc\" --text-video-owner"
+        },
+        {
+          "line": 1462,
+          "text": "command = powershell.exe -NoProfile -Command \"throw 'Select the verified AMD64 run16.exe with -NativeLauncher; no x86 fallback'\""
+        },
+        {
+          "line": 1487,
+          "text": "command = powershell.exe -NoProfile -Command \"throw 'Select the verified AMD64 ntsrv.exe with -NativeService; no x86 fallback'\""
+        },
+        {
+          "line": 1498,
+          "text": "command = powershell.exe -NoProfile -Command \"throw 'Select the verified AMD64 ntmon.exe with -NativeMonitor; no x86 fallback'\""
+        },
+        {
+          "line": 1536,
+          "text": "command = cmd.exe /d /s /c \"link.exe /nologo /subsystem:console /opt:ref /out:$out /map:$out.map /def:generated/ntvdm-wow32-provider.def $in rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib && \"C$:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1119-907-0_26.1119.907.0_x64__3k8sg7r9htsxt/dependencies/node/bin/node.exe\" \"O$:/repos.hobby/ntvdm64/tools/audit/Verify-VdmTibStorage.mjs\" $out.map obj/dpmi/dpmiint.obj\""
+        },
+        {
+          "line": 1730,
+          "text": "command = python \"O:/repos.hobby/ntvdm64/tools/build/extract-guest-memory-fixture.py\" \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/worker-reference-x86/guest-memory-coordination.c\""
+        }
+      ]
+    }
+  ]
+}

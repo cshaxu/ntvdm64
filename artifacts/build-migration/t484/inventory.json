@@ -1,0 +1,66 @@
+{
+  "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
+  "inspected_script_or_metadata_files": 817,
+  "candidate_files": 355,
+  "lexical_reference_occurrences": 1116,
+  "candidate_command_lines": 1252,
+  "addon_outputs": [
+    {
+      "file": "MOUSE101.DRV",
+      "source": "src/addon/mouse101/mouse101.asm"
+    },
+    {
+      "file": "MOUSE31.DRV",
+      "source": "src/addon/mouse31/mouse31.asm"
+    },
+    {
+      "file": "compat95.sys",
+      "source": "src/addon/compat95/compat95.asm"
+    },
+    {
+      "file": "ntvdm64.386",
+      "source": "src/addon/ntvdm64-386/ntvdm64.asm"
+    },
+    {
+      "file": "insignia.386",
+      "source": "src/addon/insignia-386/insignia.asm"
+    },
+    {
+      "file": "HASH.EXE",
+      "source": "src/addon/hash/hash.c"
+    },
+    {
+      "file": "GRP.EXE",
+      "source": "src/addon/grp/grp.c"
+    },
+    {
+      "file": "LNK.EXE",
+      "source": "src/addon/lnk/lnk.c"
+    },
+    {
+      "file": "SZDD.EXE",
+      "source": "src/addon/szdd/szdd.c"
+    },
+    {
+      "file": "patch31.exe",
+      "source": "src/addon/patch31/patch31.c"
+    },
+    {
+      "file": "path31.exe",
+      "source": "src/addon/path31/path31.c"
+    },
+    {
+      "file": "path95.exe",
+      "source": "src/addon/path95/path95.c"
+    },
+    {
+      "file": "patch95.exe",
+      "source": "src/addon/patch95/patch95.c"
+    },
+    {
+      "file": "PIF.EXE",
+      "source": "src/addon/pif/pif.c"
+    }
+  ],
+  "limits": "Lexical candidates include comments and inactive historical paths. Call-site review and generated command evidence remain required; zero literal references is not permission to delete."
+}
