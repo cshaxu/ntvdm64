@@ -370,3 +370,11 @@ passed. Full remains required at S20 closure. Package
 741da410-408d-4c0f-97a6-ff7c1a7cbe6e. BC1F031 original-layout dependency
 remains open after a reverted incomplete experiment.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p27-delivery.json).
+
+P28 completes BC1F034: removed unused private nt.h from the common-dialog
+callback owner. B-C1 direct unique remains 44, compiled headers 411->405;
+files 29/94 complete. Mirror delta 0 points/0 lines; cumulative +3 points/
++239 lines. Cached full build, dual11, common-dialog, control and real
+Win16/COMMAND targeted tests passed. Full remains required at S20 closure.
+Package 31e719bb-0c8a-4d4f-acd8-1010490fa3d6.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p28-delivery.json).

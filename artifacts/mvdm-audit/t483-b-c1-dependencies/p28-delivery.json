@@ -1,0 +1,36 @@
+{
+  "packet": "M0 T483 S20 P28",
+  "baseline": "fa17612ad",
+  "files_completed": [
+    "BC1F034"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 29,
+    "remaining": 65,
+    "B_C1_unique": 44,
+    "B_C1_raw": 52,
+    "B_C1_compiled_headers": 405,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct unchanged 44; compiled headers 411 to 405. No C1 header records for common-dialog callback.",
+  "implementation": "Removed unused private nt.h; dialog callback, scoped borrowing, original provider and cleanup behavior unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "31e719bb-0c8a-4d4f-acd8-1010490fa3d6",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "common-dialog callback association, failures, nested/exception cleanup",
+    "WOW control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-dialog-callback",
+  "limitations": [
+    "Full suite required at S20 closure",
+    "BC1F031 original-layout dependency remains open"
+  ]
+}
