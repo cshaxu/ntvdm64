@@ -1,0 +1,37 @@
+{
+  "packet": "M0 T483 S20 P45",
+  "baseline": "18a28e828",
+  "files_partial": [
+    "BC1F052",
+    "BC1F053"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 37,
+    "remaining": 57,
+    "B_C1_unique": 31,
+    "B_C1_raw": 39,
+    "B_C1_compiled_headers": 294,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 direct unique and raw unchanged at 31/39; compiled headers 300 to 294. BC1F053 retains two original-layout/registration headers.",
+  "implementation": "Replaced private NT include in wow_dialog_memory.c with SDK headers. Existing three original callback bodies and registration remain unchanged. BC1F052 uses owner-approved _GetDlgItem WND layout and original REBASEPWND; incidental headers remain to be resolved.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "4c6a86a7-e6c3-45af-a442-2448800962dc",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "WOW edit memory callback and dialog/control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-dialog-memory",
+  "limitations": [
+    "BC1F052 original WND layout and macro are approved; unrelated precompiled-header inputs remain to be resolved",
+    "BC1F053 retains original callback registration/layout headers",
+    "Full suite required at S20 closure"
+  ]
+}

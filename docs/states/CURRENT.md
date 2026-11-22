@@ -516,3 +516,12 @@ Cached full build, dual11, CCPU modal, keyboard/control and real Win16/COMMAND
 targeted tests passed. Full remains required at S20 closure. Package
 0b83f2d0-52bb-4210-94a0-8ebc1ab666bc.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p44-delivery.json).
+
+P45 audits BC1F052 and partially addresses BC1F053: the approved original
+_GetDlgItem layout/rebase remains; dialog memory private NT include was
+replaced by SDK headers. B-C1 direct unique/raw remain 31/39, compiled headers
+300->294; files 37/94 complete. Mirror delta 0 points/0 lines; cumulative
++3 points/+239 lines. Cached full build, dual11, WOW memory/control and real
+Win16/COMMAND targeted tests passed. Full remains required at S20 closure.
+Package 4c6a86a7-e6c3-45af-a442-2448800962dc.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p45-delivery.json).
