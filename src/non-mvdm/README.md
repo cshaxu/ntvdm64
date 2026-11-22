@@ -2688,7 +2688,8 @@ Recalc2 now reside in src/compat/wow_input_membership.c. Historical mirror
 records remain provenance only; no other kernel input services are admitted.
 
 T483 S6 P23 supersedes kernel/handtabl.c mirror admission. Its consumed
-object-ownership table resides in src/compat/wow_object_ownership.c;the former
+object-ownership table was extracted to compat; S20 returns it to the sole
+consumer in kernel/cleanup.c with its original symbol and values. The former
 mirror and unused unexported residual definitions are retired. Historical
 records remain provenance only,not current mirror exceptions.
 

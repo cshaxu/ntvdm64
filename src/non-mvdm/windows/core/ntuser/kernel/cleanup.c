@@ -60,6 +60,28 @@ typedef wow_cleanup_process_object *wow_cleanup_pprocobjhead;
 #define except __except
 BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
 const wow_cleanup_provider wow_original_cleanup_provider = { _WOWCleanup, TYPE_WINDOW, TYPE_MENU, TYPE_FREE };
+/* Original handtabl.c:39-59, revision
+ * 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c: selected non-IME ownership table.
+ * Keep the original symbol and values with its sole cleanup consumer. */
+CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
+    0,                                                  /* free */
+    OCF_THREADOWNED | OCF_MARKTHREAD | OCF_USEQUOTA,    /* window */
+    OCF_PROCESSOWNED,                                   /* menu */
+    OCF_PROCESSOWNED | OCF_USEQUOTA,                    /* cursor/icon */
+    OCF_THREADOWNED | OCF_USEQUOTA,                     /* hswpi (SetWindowPos Information) */
+    OCF_THREADOWNED | OCF_MARKTHREAD,                   /* hook */
+    OCF_THREADOWNED | OCF_USEQUOTA,                     /* thread info object (internal) */
+    0,                                                  /* clipboard data (internal) */
+    OCF_THREADOWNED,                                    /* CALLPROCDATA */
+    OCF_PROCESSOWNED | OCF_USEQUOTA,                    /* accel table */
+    OCF_THREADOWNED | OCF_USEQUOTA,                     /* dde access */
+    OCF_THREADOWNED | OCF_MARKTHREAD | OCF_USEQUOTA,    /* dde conversation */
+    OCF_THREADOWNED | OCF_MARKTHREAD | OCF_USEQUOTA,    /* ddex */
+    OCF_PROCESSOWNED,                                   /* zombie */
+    OCF_PROCESSOWNED,                                   /* keyboard layout */
+    OCF_PROCESSOWNED,                                   /* keyboard file */
+};
+
 #line 14
 #pragma hdrstop
 

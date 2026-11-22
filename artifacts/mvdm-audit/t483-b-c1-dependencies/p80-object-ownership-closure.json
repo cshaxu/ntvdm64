@@ -1,0 +1,125 @@
+{
+  "packet": "M0 T483 S20 P80",
+  "baseline": "fb391ba33481e41c3ccb1046a3a5f6c52d472ab1",
+  "status": "verified batch; commit and push recorded by Git history",
+  "files_completed": [
+    "src/compat/wow_object_ownership.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 81,
+    "remaining": 13,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 17,
+    "B_C1_sources": 9,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "The unchanged original non-IME gabObjectCreateFlags table resides with its sole C cleanup reader. B carrier and special build exception removed. No callback, allocation or lifecycle introduced; existing cleanup classification and release order unchanged.",
+  "original_sources": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "file": "windows/core/ntuser/kernel/handtabl.c",
+    "first": 39,
+    "last": 59,
+    "lines": 21,
+    "symbol": "gabObjectCreateFlags",
+    "selection": "Existing non-IME selection; original TYPE/OCF declarations retained."
+  },
+  "mirror": {
+    "delta_points": 0,
+    "delta_lines": 22,
+    "files": {
+      "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c": {
+        "before": [
+          20,
+          92
+        ],
+        "after": [
+          20,
+          114
+        ],
+        "points": 0,
+        "lines": 22
+      }
+    },
+    "approval": "Standing permission: one contiguous insertion below100 lines; net points0. R2766 retained for revisit.",
+    "proof": {
+      "mirror": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "base_sha256": "1f226267e5d6339556289c055e7053374e9bc5d7e345fd4517819bec286577fc",
+      "candidate_sha256": "7fd48089880f43cf4c005711598edf2ff911b577c4da1b3c5a24262ba0139fe7",
+      "original_table_identical": true,
+      "remove_one_insertion_restores_HEAD_bytes": true,
+      "error_line_framework_unchanged": true
+    },
+    "placement": "One insertion immediately before existing #line14; exact previous bytes recovered by removing it."
+  },
+  "build": {
+    "pid": 5576,
+    "finished": "2026-11-22T11:29:20.2010216+00:00",
+    "exit": 0,
+    "started": "2026-11-22T11:27:53.5689734+00:00"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "985bd4a6-a839-4076-9834-ea6b79873772",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "boundary_tests": {
+    "started": "2026-11-22T11:30:50.7155463+00:00",
+    "pid": 31508,
+    "finished": "2026-11-22T11:30:51.3010421+00:00",
+    "exit": 0
+  },
+  "targeted_cases": [
+    {
+      "started": "2026-11-22T11:30:51.3721079+00:00",
+      "finished": "2026-11-22T11:31:04.4239204+00:00",
+      "exit": 0,
+      "case": "task-lifecycle"
+    },
+    {
+      "started": "2026-11-22T11:31:04.4271844+00:00",
+      "finished": "2026-11-22T11:31:16.1729907+00:00",
+      "exit": 0,
+      "case": "process-retirement"
+    },
+    {
+      "started": "2026-11-22T11:31:16.1755811+00:00",
+      "finished": "2026-11-22T11:31:28.4296452+00:00",
+      "exit": 0,
+      "case": "menu-cleanup"
+    }
+  ],
+  "verification": {
+    "started": "2026-11-22T11:30:50.6090363+00:00",
+    "pid": 31508,
+    "finished": "2026-11-22T11:32:12.6331251+00:00",
+    "exit": 0
+  },
+  "source_identity": {
+    "src/compat/README.md": "ddf6f1c61a3ae56ac87f9f78bd1f61c143ec5a8a657d6e0e26a205424b406100",
+    "src/non-mvdm/README.md": "b51b88dc66c41c981a61695e807a4c960f8cc01d65b0ff24549f82f3e734eeac",
+    "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c": "7fd48089880f43cf4c005711598edf2ff911b577c4da1b3c5a24262ba0139fe7",
+    "src/ntvdm-exe/wow/README.md": "b235700d539b37b06596f3385ce33b009d1619b3845888ab311e2c9a514df121",
+    "test/observation/verify-wow-cleanup-bounds.ps1": "0c3856073bcad75971631834ff33602d21aeb10fe8726d873f2ab6addf19865e",
+    "test/observation/verify-wow32-s1-formal-graph.ps1": "b69a6eb8ee3d7dd85e7eb597c6555e37ee66f51dbd77735f1001a2cc4ead7f5d",
+    "tools/audit/verify-library-build-boundary.py": "55c8447fb046f803daec8035f423d439994d0451455d4ac90849a6b09fa59366",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "27e36093c8cfc90aa20024f002127d91496c353a9e8c63a52e7a2b77f5fc75ce"
+  },
+  "retired_sources": [
+    "src/compat/wow_object_ownership.c"
+  ],
+  "evidence_root": "build\\t483-s20-p80-object-ownership",
+  "limitations": [
+    "13 inventory files remain; no S20 closure or Full-pass claim.",
+    "Direct-function relocation count is not complete data-symbol/assembly/linkmap coverage; those closure obligations remain.",
+    "Existing Shell diagnostic limitation and larger class/control owner decisions remain.",
+    "Source audit proves original selected table and cleanup body identity; link map proves the unique actual data provider. Product task/menu cleanup and guest runtime are separate evidence."
+  ],
+  "table_link_owner": "0002:00002530       _gabObjectCreateFlags      10090530     cleanup.obj"
+}

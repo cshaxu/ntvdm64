@@ -222,10 +222,10 @@ revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, by owner-approved P22
 extraction. The original algorithms and existing explicit current-thread ABI
 remain; modern native queue attachment stays with the existing caller.
 
-`wow_object_ownership.c` preserves the selected non-IME object ownership table
-from OpenNT kernel/handtabl.c lines39-59,revision
-5c5b979ec08c17d3ca2eb70e8aad62d26515d01c. Owner-approved P23 extraction
-leaves original type/flag definitions and the WOW cleanup consumer unchanged.
+The original non-IME object ownership table from OpenNT kernel/handtabl.c
+lines39-59,revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, now resides
+with its sole C consumer in [cleanup.c](../non-mvdm/windows/core/ntuser/kernel/cleanup.c).
+Its original symbol, table values and type/flag definitions are unchanged.
 
 P24 extracts client/client.c into [wow_class_client.c](../wow32-dll/source/wow_class_client.c) (WOW32 binding owner), [wow_default_window_bits.c](../wow32-dll/source/wow_default_window_bits.c),
 `WOWDlgInit`/`GetEditDS`/`ReleaseEditDS` (now in [C dlgmgr.c](../non-mvdm/windows/core/ntuser/client/dlgmgr.c)), [wow_client_dispatch.c](../compat/wow_client_dispatch.c) and [wow_control_state.c](../wow32-dll/source/wow_control_state.c) (OpenNT client/client.c:2826, 2834). All eight

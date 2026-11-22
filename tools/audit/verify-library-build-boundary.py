@@ -24,9 +24,8 @@ def ninja(directory, tool, *args):
     ).replace("\\", "/")
 
 
-# This original USER unit uses mirror-owned data layouts. The exception
-# is limited to the WOW32 build of the named source, not to the component.
-WOW_USER_EXCEPTIONS = {"wow_object_ownership.c"}
+# The retired original-layout carriers no longer have B build exceptions.
+WOW_USER_EXCEPTIONS = set()
 
 
 # S19 removed C2 search paths; original NT ABI remains an S20 obligation.

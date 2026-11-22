@@ -1,0 +1,36 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\cleanup.c",
+      "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+      "current_sha256": "7fd48089880f43cf4c005711598edf2ff911b577c4da1b3c5a24262ba0139fe7",
+      "raw": {
+        "blocks": 21,
+        "added": 95,
+        "deleted": 21
+      },
+      "filtered": {
+        "blocks": 20,
+        "added": 94,
+        "deleted": 20
+      },
+      "excluded": [
+        {
+          "original": [
+            232,
+            232
+          ],
+          "current": [
+            304,
+            304
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    }
+  ]
+}

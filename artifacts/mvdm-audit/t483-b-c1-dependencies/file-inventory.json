@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 80,
+    "completed": 81,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 26,
+    "compiled_header_rows": 17,
     "private_search_root_rows": 0
   },
   "files": [
@@ -7345,7 +7345,7 @@
     {
       "id": "BC1F072",
       "file": "src/compat/wow_object_ownership.c",
-      "status": "audited P61: owner-retired original ownership table remains C-layout coupled; unresolved",
+      "status": "completed in verified P80 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -7478,7 +7478,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p61-delivery.json"
+      "progress_evidence": "p61-delivery.json",
+      "p80_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p80-object-ownership-closure.json"
     },
     {
       "id": "BC1F073",

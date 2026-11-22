@@ -17,8 +17,7 @@ $handlePath='windows/core/ntuser/kernel/handtabl.c'
 $handleSource=Read-ObjectSource $handlePath 'F0B56314A93423599F06645D17104391F19A0CA07C3944853B065D8866493F7C'
 $tablePattern='(?s)CONST BYTE gabObjectCreateFlags\[TYPE_CTYPES\] = \{.*?\n\};'
 $originalTable=[regex]::Match($handleSource,$tablePattern).Value
-$ownershipSource=[IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/compat/wow_object_ownership.c'))
-if ($ownershipSource.Contains("`r")) { throw 'Compat ownership table must use LF' }
+$ownershipSource=Read-ObjectMirror 'windows/core/ntuser/kernel/cleanup.c'
 $mirrorTable=[regex]::Match($ownershipSource,$tablePattern).Value
 # Reconstruct only the one excluded body; line directives are not source content.
 function Restore-ExcludedBody([string]$text, [string]$originalBody) {

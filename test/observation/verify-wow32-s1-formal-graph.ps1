@@ -103,8 +103,9 @@ foreach ($unit in @('wow-control-rect')) {
         throw "Missing extracted USER client unit: $unit"
     }
 }
-if ($link -notmatch '\bobj/compat/wow-object-ownership\.obj\b') {
-    throw 'The compat object ownership table must be linked into the formal graph.'
+if ($link -match '\bobj/compat/wow-object-ownership\.obj\b' -or
+    $link -notmatch '\bobj/opennt-user/cleanup\.obj\b') {
+    throw 'Original cleanup must own its object classification table.'
 }
 if ($link -match '\bobj/(?:compat/wow-dialog-lookup|wow32-dll/wow_dialog_pointer)\.obj\b' -or
     $link -notmatch '\bobj/opennt-user/control-body-dlgmgr\.obj\b') {

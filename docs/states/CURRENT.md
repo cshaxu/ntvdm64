@@ -114,14 +114,14 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P79 final compiled-product review leaves 80 of 94
+is authoritative for individual files and evidence. P80 final compiled-product review leaves 81 of 94
 files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-26 compiled-header rows across 10 sources and zero private search roots. B-to-C2 has zero
+17 compiled-header rows across 9 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
 
-S20 cumulative non-error mirror delta is +9 points/+459 lines; S19 retained
+S20 cumulative non-error mirror delta is +9 points/+481 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
 tests. The P62 package is 71882068-22ca-4a1a-8a84-20c8d7f7cb5c.
@@ -249,3 +249,10 @@ window-access provider for WW layout operations. Non-error mirror +1point/+67lin
 pending R2764/R2765. Cached full build, dual11 publication, targeted boundaries,
 borrow graph/lifecycles and published USER16/COMMAND passed.
 [P79 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p79-dialog-and-words-closure.json).
+
+P80 returns original object classification table to its sole C cleanup reader.
+Remaining13 files; compiled header rows26->17 across9 sources. No callback or
+second state; actual WOW32 map identifies cleanup.obj as the unique table owner.
+Non-error mirror +0points/+22lines, pending R2766. Cached full build, dual11
+publication, source identity/cleanup/task/menu tests and published USER16/COMMAND passed.
+[P80 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p80-object-ownership-closure.json).
