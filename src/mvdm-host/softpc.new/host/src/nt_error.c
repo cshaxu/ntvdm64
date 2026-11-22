@@ -1,3 +1,5 @@
+#include "compat/include/wow_hard_error.h"
+#line 1
 #include <nt.h>
 #include <ntrtl.h>
 #include <nturtl.h>
@@ -1111,7 +1113,7 @@ ULONG WOWpSysErrorBox(
     // SetErrorMode has been called.
     //
 
-    Status = NtRaiseHardError(
+    Status = wow_raise_hard_error(
         STATUS_VDM_HARD_ERROR | 0x10000000,
         4,
         1 << 2 | 1 << 3,

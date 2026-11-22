@@ -4,6 +4,7 @@
 #include "compat/include/mvdm_softpc_worker_exit.h"
 #include "compat/include/mvdm_softpc_termination.h"
 #include "compat/include/mvdm_softpc_text_video.h"
+#include "ntvdm-exe/win32/wow_hard_error_dialog.h"
 extern const mvdm_text_video_provider mvdm_original_text_video_provider;
 extern void host_applClose(void);
 extern void (*BIOS[])(void);
@@ -153,6 +154,7 @@ static DWORD mvdm_standalone_worker_begin(void)
     if (worker_started) return ERROR_ALREADY_EXISTS;
     if (!mvdm_monitor_bind_provider(&mvdm_original_monitor_provider) ||
             !mvdm_softpc_text_video_bind(&mvdm_original_text_video_provider) ||
+            !wow_hard_error_bind(ntvdm_present_hard_error) ||
             !mvdm_softpc_termination_bind(host_applClose) ||
             !opennt_thread_initialize() || !ntvdm_command_initialize() ||
             !ntvdm_dpmi_initialize() || !ntvdm_vm_services_initialize(&BIOS[MVDM_VM_DEVICE_BOP])) return GetLastError();

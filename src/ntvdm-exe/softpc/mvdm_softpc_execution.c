@@ -2,6 +2,7 @@
 #include "mvdm_softpc_guest_memory.h"
 #include "compat/include/mvdm_softpc_termination.h"
 #include "compat/include/mvdm_softpc_text_video.h"
+#include "ntvdm-exe/win32/wow_hard_error_dialog.h"
 extern const mvdm_text_video_provider mvdm_original_text_video_provider;
 
 /* Original SoftPC host spelling; its body remains in mvdm-host. */
@@ -26,6 +27,7 @@ int mvdm_softpc_execution_run_until_return(session *owner)
         return 0;
 
     if (!mvdm_softpc_text_video_bind(&mvdm_original_text_video_provider) ||
+            !wow_hard_error_bind(ntvdm_present_hard_error) ||
             !mvdm_softpc_termination_bind(host_applClose)) return 0;
 
     if (session_thread_current() != owner) {

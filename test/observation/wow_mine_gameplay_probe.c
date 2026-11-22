@@ -222,7 +222,8 @@ static BOOL retire_sibling(const char *desktop, const char *launcher, const char
         printf("startup-thread-exit=%lu wait=%lu code=%lu\n",startup_tid,thread_wait,startup_status);
         if (thread_wait!=WAIT_OBJECT_0 || startup_status!=EXIT_FAILURE)return FALSE;
     }
-    printf("sibling-wait=%lu exit=%lu survivor=%p worker=%lu\n",wait,status,mine,owner_pid);
+    printf("sibling-wait=%lu exit=%lu survivor=%p worker=%lu exception=%d response-posted=%d window-live=%d\n",
+        wait,status,mine,owner_pid,exception_sibling,error_selected,IsWindow(mine));
     /* Original guest ForceTaskExit uses DOS 4CFF, but WK32KillTask explicitly
      * ends the host thread with EXIT_SUCCESS. Do not equate those contracts. */
     return wait==WAIT_OBJECT_0 &&

@@ -145,3 +145,4 @@ and [T481](../history/m0-t481-closure.md).
 ## Recent Governance
 
 Detailed prior governance records are retained in the preserved status chronology.
+P63 published checkpoint e20b6e48-fb35-4fc1-bb5e-6de74d75b652 passed cached x86/x64/reference builds and published-package targeted tests. Native Shell nested exception intermittency remains unresolved; no completion increment. [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p63-checkpoint.json).

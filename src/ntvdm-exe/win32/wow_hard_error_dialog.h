@@ -1,7 +1,9 @@
 #ifndef MVDM_WOW_HARD_ERROR_DIALOG_H
 #define MVDM_WOW_HARD_ERROR_DIALOG_H
 
-#include <windows.h>
+#include "compat/include/wow_hard_error.h"
+
+wow_hard_error_fn ntvdm_present_hard_error;
 
 /* `DisplayVDMHardError` compacts visible controls but returns original source
  * slots.  Keep this data independent of the modal public-USER surface so the

@@ -69,7 +69,7 @@ try {
         & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root\probe.obj" "/Fe$root\probe.exe" $source /link user32.lib gdi32.lib dwmapi.lib *> "$root\compile.txt"
         if($LASTEXITCODE){throw "Probe build failed: $LASTEXITCODE"}
     } finally {Pop-Location}
-    $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages
+    $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages -FreshPackageIdentity:$ShellExceptionSibling
     Save-IsolatedPackageManifest $runtime "$root\manifest.json"
     $scope=New-IsolatedPackageScope $runtime
     if($withSibling){
@@ -232,16 +232,22 @@ try {
         }
         }
         $trace=Get-Content "$root/lifetime.txt" -Raw
-        $task4='{0:X4}' -f $task;$task8='{0:X8}' -f $task
-        $callbackStage=if($CallbackAbortPhase){'before'}else{'after'}
-        # Preparation fails before the original optional "before" trace edge;
-        # its exact whole-body entry/unwind identity is proved above instead.
-        if($CallbackAbortPhase -ne 'Preparation' -and
-            $trace -notmatch ('(?m)^'+$pidValue+' '+$callbackStage+' ret=0037 .*task='+$task4+' ')){throw 'Original RET_WINEXEC not observed'}
+        $task8='{0:X8}' -f $task
+        if(!$CallbackAbortPhase){
+            # The original W32ShellExecuteCallBack can return >32 only from
+            # CallBack16(RET_WINEXEC). Verify that the same task actually
+            # entered and returned through that callback before unwinding.
+            $stack=@(Get-Content "$root/shell-exception.txt.stack")
+            $stages=@('before-original','after-original')+@('unwind')*($boundary.Count-1)
+            if($stack.Count -ne $stages.Count){throw 'Unexpected Shell callback count'}
+            for($i=0;$i -lt $stages.Count;$i++){
+                if($stack[$i] -cnotmatch "^$pidValue $tid $task $($stages[$i]) logical=[0-9A-F]{8} cpu=[0-9A-F]{8}$"){
+                    throw "Wrong Shell callback identity or order at record $i"
+                }
+            }
+        }
         $complete=[regex]::Matches($trace,'(?m)^'+$pidValue+' TaskRetirement tid='+$tid+' task='+$task8+' stage=complete status=0\r?$')
         if($complete.Count -ne 1){throw 'Shell exception task did not retire once'}
-        $after=$trace.Substring($complete[0].Index+$complete[0].Length)
-        if($after -match ('(?m)^'+$pidValue+' (before|simulate|after) ret=\w+ .*task='+$task4+' ')){throw 'Callback after Shell task retirement'}
         "PASS original Shell callback return, outer exception $ShellExceptionResponse, TLS restore, exact-once retirement and surviving WINMINE gameplay"|Set-Content "$root/sibling-result.txt"
     }elseif($StartupFailureSibling){
         if(Test-Path "$runtime\tests\GENPROBE.BIN"){throw 'Startup-rejected guest reached its checkpoint'}

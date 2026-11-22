@@ -1,9 +1,8 @@
 #include <windows.h>
 #include <shellapi.h>
 
-/* Original mvdm.h uses char FAR * for this Shell ABI spelling. */
-typedef LPSTR LPSZ;
-#include "non-mvdm/public/internal/shell/inc/wowshlp.h"
+/* Two-argument callback supplied by the caller for this synchronous ABI. */
+typedef DWORD (WINAPI *wow_shell_guest_callback)(LPSTR, WORD);
 
 /* The selected NT4 wowshlp.h callback has two parameters. The modern x86
  * SHELL32 provider supplies three stdcall slots (command, show, directory).
@@ -13,7 +12,7 @@ typedef LPSTR LPSZ;
 typedef DWORD (WINAPI *modern_shell_callback)(LPSTR, WORD, LPSTR);
 typedef HINSTANCE (WINAPI *modern_shell_execute)(HWND, LPCSTR, LPCSTR,
     LPSTR, LPCSTR, INT, modern_shell_callback);
-static __declspec(thread) LPFNWOWSHELLEXECCB current_callback;
+static __declspec(thread) wow_shell_guest_callback current_callback;
 
 static DWORD WINAPI invoke_original(LPSTR command, WORD show, LPSTR directory)
 {
@@ -25,12 +24,12 @@ static DWORD WINAPI invoke_original(LPSTR command, WORD show, LPSTR directory)
 }
 
 HINSTANCE WINAPI wow_shell_execute(HWND window, LPCSTR operation, LPCSTR file,
-    LPSTR parameters, LPCSTR directory, INT show, LPFNWOWSHELLEXECCB callback)
+    LPSTR parameters, LPCSTR directory, INT show, wow_shell_guest_callback callback)
 {
     HMODULE shell = GetModuleHandleW(L"shell32.dll");
     modern_shell_execute execute = shell ?
         (modern_shell_execute)GetProcAddress(shell,"WOWShellExecute") : NULL;
-    LPFNWOWSHELLEXECCB previous;
+    wow_shell_guest_callback previous;
     HINSTANCE result;
     if (!execute) {
         SetLastError(ERROR_PROC_NOT_FOUND);

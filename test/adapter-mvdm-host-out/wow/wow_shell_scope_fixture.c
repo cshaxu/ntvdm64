@@ -3,7 +3,7 @@
  * SHELL32 provider is still real; no callback dispatch is mocked. */
 #include "../../../src/compat/wow_shell_callback.c"
 
-LPFNWOWSHELLEXECCB WINAPI ShellProbeCurrentCallback(void)
+wow_shell_guest_callback WINAPI ShellProbeCurrentCallback(void)
 {
     return current_callback;
 }

@@ -1271,6 +1271,9 @@ $adapterSoftpcObjects += 'obj/compat/mvdm_vm_capture.obj'
 $graph.Add('build obj/compat/mvdm_softpc_termination.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/mvdm_softpc_termination.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $adapterSoftpcObjects += 'obj/compat/mvdm_softpc_termination.obj'
+$graph.Add('build obj/compat/wow_hard_error.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/wow_hard_error.c')))
+$graph.Add('  cflags = ' + $libraryFlags + ' /TC')
+$adapterSoftpcObjects += 'obj/compat/wow_hard_error.obj'
 $graph.Add('build obj/compat/host_context.obj: cc ' + (NinjaPath (Join-Path $root 'src/compat/host_context.c')))
 $graph.Add('  cflags = ' + $libraryFlags + ' /TC')
 $sessionObjects += 'obj/compat/host_context.obj'

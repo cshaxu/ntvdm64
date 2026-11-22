@@ -14,8 +14,6 @@
 
 static void mvdm_wow_private_product_unavailable(void)
 {
-    session *owner = session_thread_current();
-
     (void)mvdm_softpc_terminate_current_session(0u,
         (uint32_t)ERROR_CALL_NOT_IMPLEMENTED);
     SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
@@ -26,7 +24,7 @@ static void mvdm_wow_private_product_unavailable(void)
  * NT4 hard-error ABI to CSRSS.  Public Win32 does not provide the same
  * response/broker contract.  Preserve the parameters and failure direction;
  * never invent a dialog response or terminate the hosting process. */
-NTSTATUS NtRaiseHardError(NTSTATUS error_status,
+NTSTATUS WINAPI ntvdm_present_hard_error(NTSTATUS error_status,
     ULONG number_of_parameters, ULONG unicode_string_parameter_mask,
     PULONG_PTR parameters, ULONG valid_response_options, PULONG response)
 {

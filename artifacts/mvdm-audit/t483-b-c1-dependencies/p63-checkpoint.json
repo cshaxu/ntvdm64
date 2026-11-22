@@ -1,0 +1,19 @@
+{
+  "packet": "T483 S20 P63",
+  "status": "Published; native Shell nested exception intermittency remains unresolved",
+  "package": "e20b6e48-fb35-4fc1-bb5e-6de74d75b652",
+  "build": "Cached x86/x64/reference passed",
+  "publication": "11 images, two destinations, 22 hashes matched",
+  "tests": [
+    "Win16 Shell Close and Ignore including survivor gameplay passed",
+    "Hard-error decoder passed",
+    "Published USER16 native extension passed",
+    "Published EDIT/CMD/MEM passed",
+    "Native nested exception passed this run; previous failures retained"
+  ],
+  "root_cause": "b44af42af restored imported NTAPI declaration; before/after object comparison confirms change from local symbol to ntdll import",
+  "fix": "C calls B synchronous typed interface; F registers existing presenter",
+  "mirror_delta": "nt_error.c batch HEAD +3/-1 including #line 1; #error unchanged",
+  "evidence": "build/t483-s20-shell-p63",
+  "completion": "No completed-file increment"
+}
