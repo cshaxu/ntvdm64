@@ -17,10 +17,10 @@ typedef struct wow_class_register_context {
 ATOM WINAPI _RegisterClassEx(WNDCLASSEXA *, PROC, PCLSMENUNAME, WORD, DWORD,
     DWORD *, wow_class_register_context *);
 #ifdef WOW_ORIGINAL_CLASS_REGISTRATION
-typedef wow_class_lookup_entry *PCLS;
+#define PCLS wow_class_lookup_entry *
 typedef WNDCLASSEXA *LPWNDCLASSEX;
 typedef wow_task_order_thread *PTHREADINFO;
-typedef wow_class_callproc *PCALLPROCDATA;
+#define PCALLPROCDATA wow_class_callproc *
 #define PtiCurrent() (context->thread)
 #define ISCPDTAG(proc) (HIWORD(proc) == 0xffff)
 #define HMValidateHandleNoRip(handle, type) context->resolve_callproc(context,handle)

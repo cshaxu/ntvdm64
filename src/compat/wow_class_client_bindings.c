@@ -11,7 +11,9 @@ BOOL WINAPI wow_class_client_bind(const wow_class_client_provider *provider)
     const wow_class_client_provider *previous;
     if (!provider || !provider->register_class || !provider->unregister_class ||
             !provider->get_class_info || !provider->register_class_ex || !provider->get_class_ptr ||
-            !provider->inner_get_class_ptr || !provider->unregister_class_internal) {
+            !provider->inner_get_class_ptr || !provider->unregister_class_internal ||
+            !provider->identity_bytes ||
+            !provider->initialize_identity || !provider->capture_menu) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }

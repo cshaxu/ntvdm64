@@ -1,0 +1,96 @@
+{
+  "head": "afcbd1893b69d243d032efbbece7182315bbcacd",
+  "objects_mapped_and_linkmap_objects_and_symbols": {
+    "msvc-x86-release/worker/ntvdm.exe": [
+      519,
+      465,
+      5805
+    ],
+    "msvc-x86-release/worker/VCDEX.DLL": [
+      3,
+      1,
+      30
+    ],
+    "msvc-x86-release/worker/VDMREDIR.dll": [
+      48,
+      0,
+      0
+    ],
+    "msvc-x86-release/worker/nthook32.dll": [
+      56,
+      26,
+      82
+    ],
+    "msvc-x86-release/wow32/wow32.dll": [
+      224,
+      221,
+      2758
+    ],
+    "msvc-x64-release/frontend/ntcon.exe": [
+      68,
+      38,
+      211
+    ],
+    "msvc-x64-release/service/ntsrv.exe": [
+      64,
+      44,
+      418
+    ],
+    "msvc-x64-release/monitor/ntmon.exe": [
+      16,
+      7,
+      74
+    ],
+    "msvc-x64-release/launcher/run16.exe": [
+      61,
+      45,
+      187
+    ],
+    "msvc-x64-release/worker/ntvwm.exe": [
+      68,
+      42,
+      196
+    ],
+    "msvc-x64-release/hook/nthook64.dll": [
+      26,
+      26,
+      83
+    ],
+    "msvc-x64-release/worker-reference-x86/ntvdm.exe": [
+      519,
+      465,
+      5805
+    ],
+    "msvc-x64-release/worker-reference-x86/VCDEX.DLL": [
+      3,
+      1,
+      30
+    ],
+    "msvc-x64-release/worker-reference-x86/nthook32.dll": [
+      56,
+      26,
+      82
+    ]
+  },
+  "gaps": {
+    "ntvdm.exe": [
+      "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+      "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+    ],
+    "VDMREDIR.dll": [
+      "no-link-map",
+      "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+      "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+    ],
+    "nthook32.dll": [
+      "no-valid-includes obj/opennt-rtl-x86/largeint.obj",
+      "no-valid-includes obj/opennt-rtl-x86/movemem.obj"
+    ],
+    "wow32.dll": [
+      "no-valid-includes obj/callpr32.obj",
+      "unattributed-object obj/wow32-dll-entry-bridge.obj",
+      "unattributed-object obj/wow32-parent-import-abi-aliases.obj",
+      "unattributed-object obj/wow32-system-import-abi-aliases.obj"
+    ]
+  }
+}

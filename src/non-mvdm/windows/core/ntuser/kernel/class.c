@@ -17,7 +17,27 @@
 #ifdef WOW_ORIGINAL_CLASS_REGISTRATION
 #include <winternl.h>
 #include "non-mvdm/windows/core/ntuser/inc/user.h"
-#include "wow_class_register_bindings.h"
+#include "wow_user_client_view_layout.h"
+#include "wow_class_client_bindings.h"
+
+VOID WINAPI wow_original_class_initialize_identity(struct tagCLS *identity, ATOM atom)
+{
+    identity->atomClassName = atom;
+}
+VOID WINAPI wow_original_class_capture_menu(const CLSMENUNAME *menu,
+    wow_class_lookup_entry *entry)
+{
+    entry->lpszClientAnsiMenuName = menu->pszClientAnsiMenuName;
+    entry->lpszClientUnicodeMenuName = menu->pwszClientUnicodeMenuName;
+}
+BOOL WINAPI wow_original_class_unregister_committed(LPWSTR name, HANDLE module,
+    PCLSMENUNAME menu, wow_class_remove_context *context)
+{
+    CLSMENUNAME result;
+    if (!_UnregisterClass(name, module, &result, context)) return FALSE;
+    if (menu) *menu = result;
+    return TRUE;
+}
 
 #line 68
 /***************************************************************************\

@@ -1,0 +1,16 @@
+from	to	source	line_or_section	target	evidence	product
+compat	non-mvdm	src/compat/wow_edit_state_bindings.c		src/non-mvdm/public/internal/windows/inc/wingdip.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_edit_state_bindings.c		src/non-mvdm/public/internal/windows/inc/wowuserp.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_edit_state_bindings.c		src/non-mvdm/windows/core/ntuser/client/usercli.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_edit_state_bindings.c		src/non-mvdm/windows/core/ntuser/inc/user.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_standard_class_bindings.c		src/non-mvdm/windows/core/ntuser/inc/user.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_user_object_bindings.c		src/non-mvdm/windows/core/ntuser/inc/user.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_user_registration_bridge.c		src/non-mvdm/public/internal/windows/inc/wowuserp.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_user_registration_state.c		src/non-mvdm/public/internal/windows/inc/wowuserp.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_window_client_state_bindings.c		src/non-mvdm/public/internal/windows/inc/wingdip.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_window_client_state_bindings.c		src/non-mvdm/public/internal/windows/inc/wowuserp.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_window_client_state_bindings.c		src/non-mvdm/windows/core/ntuser/inc/user.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_window_creation_binding.c		src/non-mvdm/public/internal/windows/inc/wowuserp.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_window_creation_binding.c		src/non-mvdm/windows/core/ntuser/inc/user.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_window_words_binding.c		src/non-mvdm/public/internal/windows/inc/wowuserp.h	MSVC include closure	wow32.dll
+compat	non-mvdm	src/compat/wow_window_words_binding.c		src/non-mvdm/windows/core/ntuser/inc/user.h	MSVC include closure	wow32.dll

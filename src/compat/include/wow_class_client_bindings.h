@@ -17,6 +17,12 @@ typedef struct wow_class_client_context {
     /* Optional scoped provider override. NULL uses the native class owner. */
     wow_class_callproc *(WINAPI *resolve_callproc)(HANDLE);
 } wow_class_client_context;
+/* Original-layout storage uses the existing registration allocation and
+ * borrow lifetime. No private CLS layout or menu descriptor enters B. */
+VOID WINAPI wow_original_class_initialize_identity(struct tagCLS *, ATOM);
+VOID WINAPI wow_original_class_capture_menu(const struct tagCLSMENUNAME *, wow_class_lookup_entry *);
+BOOL WINAPI wow_original_class_unregister_committed(LPWSTR, HANDLE,
+    PCLSMENUNAME, wow_class_remove_context *);
 typedef struct wow_class_client_provider {
     ATOM (WINAPI *register_class)(WNDCLASSA *, DWORD *);
     BOOL (WINAPI *unregister_class)(LPCSTR, HINSTANCE);
@@ -26,6 +32,10 @@ typedef struct wow_class_client_provider {
     wow_class_lookup_entry **(WINAPI *get_class_ptr)(ATOM, wow_class_lookup_context *, HANDLE);
     wow_class_lookup_entry **(WINAPI *inner_get_class_ptr)(ATOM, wow_class_lookup_entry **, HANDLE);
     BOOL (WINAPI *unregister_class_internal)(LPWSTR, HANDLE, PCLSMENUNAME, wow_class_remove_context *);
+    SIZE_T identity_bytes;
+    WORD dialog_fnid;
+    VOID (WINAPI *initialize_identity)(struct tagCLS *, ATOM);
+    VOID (WINAPI *capture_menu)(const struct tagCLSMENUNAME *, wow_class_lookup_entry *);
 } wow_class_client_provider;
 BOOL WINAPI wow_class_client_bind(const wow_class_client_provider *);
 const wow_class_client_provider *WINAPI wow_class_client_provider_current(void);

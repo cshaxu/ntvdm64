@@ -1,0 +1,130 @@
+{
+  "packet": "M0 T483 S20 P81",
+  "baseline": "afcbd1893b69d243d032efbbece7182315bbcacd",
+  "status": "verified batch; commit/push established by Git history",
+  "completed_file": "src/compat/wow_class_words_binding.c",
+  "counts": {
+    "files": 94,
+    "completed": 82,
+    "remaining": 12,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 15,
+    "B_C1_sources": 8,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "Existing immutable class provider supplies original CLS size/dialog FNID and C-owned identity/menu operations. B retains one zeroed allocation, reference lifetime, borrowed menu pointers, rollback, and native registration ownership. C wrapper commits menu output only after original unregister succeeds. No nested provider, queue or new registry.",
+  "mirror": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+    "before": [
+      12,
+      1394
+    ],
+    "after": [
+      13,
+      1412
+    ],
+    "delta_points": 1,
+    "delta_lines": 18,
+    "approval": "Standing one added point under100 lines. R2767 retained for revisit.",
+    "line_error_proof": "One replacement before existing #line68; all retained algorithm bytes and existing #line/#error unchanged. Candidate byte identity verified."
+  },
+  "build": {
+    "finished": "2026-11-22T11:43:57.9694860+00:00",
+    "pid": 15404,
+    "exit": 0,
+    "started": "2026-11-22T11:42:31.3467850+00:00"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "3f41e49f-12d7-4d73-900d-bb2b1d036b44",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "finished": "2026-11-22T11:49:03.9363657+00:00",
+    "pid": 19032,
+    "started": "2026-11-22T11:47:48.8666816+00:00",
+    "exit": 0
+  },
+  "lifecycle_tests": [
+    {
+      "finished": "2026-11-22T03:45:56.836834-08:00",
+      "exit": 0,
+      "case": "window-borrow",
+      "started": "2026-11-22T03:45:45.556383-08:00"
+    },
+    {
+      "finished": "2026-11-22T03:46:11.9433133-08:00",
+      "exit": 0,
+      "case": "graph-snapshot",
+      "started": "2026-11-22T03:45:56.8398705-08:00"
+    },
+    {
+      "finished": "2026-11-22T03:46:22.6574405-08:00",
+      "exit": 0,
+      "case": "native-creation",
+      "started": "2026-11-22T03:46:11.9456216-08:00"
+    },
+    {
+      "finished": "2026-11-22T03:46:32.3032467-08:00",
+      "exit": 0,
+      "case": "class-lifetime",
+      "started": "2026-11-22T03:46:22.6586531-08:00"
+    },
+    {
+      "finished": "2026-11-22T03:46:41.955334-08:00",
+      "exit": 0,
+      "case": "task-lifecycle",
+      "started": "2026-11-22T03:46:32.3042545-08:00"
+    },
+    {
+      "finished": "2026-11-22T03:46:51.369231-08:00",
+      "exit": 0,
+      "case": "process-retirement",
+      "started": "2026-11-22T03:46:41.9565-08:00"
+    },
+    {
+      "finished": "2026-11-22T11:48:01.2161981+00:00",
+      "started": "2026-11-22T11:47:48.9217884+00:00",
+      "case": "init-notification",
+      "exit": 0
+    }
+  ],
+  "class_tests": [
+    {
+      "finished": "2026-11-22T11:48:11.0761415+00:00",
+      "started": "2026-11-22T11:48:01.2653253+00:00",
+      "case": "class-client",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T11:48:21.0182712+00:00",
+      "started": "2026-11-22T11:48:11.0771997+00:00",
+      "case": "class-query",
+      "exit": 0
+    }
+  ],
+  "first_failure": "Fixture used sizeof(CLS) before including original layout. Fixed shared test-provider header include order; production package unchanged. A second init-notification fixture conflict required including the provider inside its existing stdcall declaration scope. Six passed cases were retained; remaining cases resumed. Both failed logs and result records retained.",
+  "source_identity": {
+    "src/compat/include/wow_class_client_bindings.h": "91c55a737e3949b99e3dfcb1378d27854a2d4c35f4d1aa539e634e4dee20e190",
+    "src/compat/include/wow_class_register_bindings.h": "aa48dd22ece9924e2ad302a341d11efa88c9d9181e5d9fe4f5e67f31f0668a87",
+    "src/compat/wow_class_client_bindings.c": "df5d896a2ca7190f67d70748a74d25224fccf0ccc9ceff6515e7eb41910fcdb0",
+    "src/compat/wow_class_words_binding.c": "b0ff617214b5e4e146e08a1760d2039a7782829ab46b228f09d0fef450532167",
+    "src/non-mvdm/windows/core/ntuser/kernel/class.c": "8400f7a7ffe0f2bdebb656227502d9146dbe1ab77e85d9842195263a11952063",
+    "test/adapter-mvdm-host-out/wow/wow_class_client_fixture_provider.h": "80d7f97f9d651b056ea0efbd917ad1319acbda1580bb2c5736921d0bb9972f1d",
+    "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c": "bd5d6347eee439e05088d173531c8becc307dd705d16b1777306cda243f653df",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "9cf5fdc28f5e6a14c8489bfea5b1190f0568b8bbb9340aeef7a2f5b9ab9e0f64"
+  },
+  "evidence_root": "build\\t483-s20-p81-class-storage",
+  "limitations": [
+    "12 files remain; standard-class constants are separate unfinished work.",
+    "Data-symbol/assembly/linkmap closure sweep remains; function-link scan alone is not complete coverage.",
+    "No S20 closure or Full-pass claim. Existing Shell diagnostic boundary remains.",
+    "Old class-owner-pending-candidate.patch is superseded for storage only; its nested provider and type-conflicting implementation were not adopted."
+  ]
+}

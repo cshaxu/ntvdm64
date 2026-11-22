@@ -114,14 +114,14 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P80 final compiled-product review leaves 81 of 94
+is authoritative for individual files and evidence. P81 final compiled-product review leaves 82 of 94
 files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-17 compiled-header rows across 9 sources and zero private search roots. B-to-C2 has zero
+15 compiled-header rows across 8 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
 
-S20 cumulative non-error mirror delta is +9 points/+481 lines; S19 retained
+S20 cumulative non-error mirror delta is +10 points/+499 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
 tests. The P62 package is 71882068-22ca-4a1a-8a84-20c8d7f7cb5c.
@@ -256,3 +256,11 @@ second state; actual WOW32 map identifies cleanup.obj as the unique table owner.
 Non-error mirror +0points/+22lines, pending R2766. Cached full build, dual11
 publication, source identity/cleanup/task/menu tests and published USER16/COMMAND passed.
 [P80 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p80-object-ownership-closure.json).
+
+P81 completes class-words storage ownership through the existing class provider.
+Remaining12 files; compiled header rows17->15 across8 sources. Single allocation,
+borrow lifetime and success-only unregister output remain unchanged. No nested
+provider or registry. Non-error mirror +1point/+18lines, pending R2767. Cached
+full build, dual11 publication, lifecycle/class and published guest tests passed.
+The first fixture compile failed on include order, then passed after a test-only
+correction. [P81 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p81-class-storage-closure.json).

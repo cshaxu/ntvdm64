@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 81,
+    "completed": 82,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 17,
+    "compiled_header_rows": 15,
     "private_search_root_rows": 0
   },
   "files": [
@@ -2566,7 +2566,7 @@
     {
       "id": "BC1F031",
       "file": "src/compat/wow_class_words_binding.c",
-      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
+      "status": "completed in verified P81 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -2700,7 +2700,8 @@
         }
       ],
       "progress_evidence": "p26-delivery.json",
-      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json",
+      "p81_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p81-class-storage-closure.json"
     },
     {
       "id": "BC1F032",

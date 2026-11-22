@@ -8,8 +8,6 @@
 #include "wow_standard_class_bindings.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_dialog_state_bindings.h"
-#include "wow_user_client_view_layout.h"
-#include "compat/include/opennt_user_multipass.h"
 #include "compat/include/wow_page_domain.h"
 
 #include <stdio.h>
@@ -63,7 +61,7 @@ BOOLEAN NTAPI RtlEqualUnicodeString(const UNICODE_STRING *,
  * graph, USER server or task policy is introduced. */
 struct wow_class_words_binding {
     wow_class_lookup_entry entry; /* Must remain first. */
-    CLS client_identity; /* Immutable atom-only original dialog input. */
+    struct tagCLS *client_identity; /* Immutable atom-only original dialog input. */
     /* Storage lifetime: registration plus borrowers (including window aliases).
      * Not original CLS.cWndReferenceCount; cleanup must not infer live windows
      * or task ownership from this number. */
@@ -86,12 +84,14 @@ static wow_class_words_binding *prepare(const UNICODE_STRING *name,
         SetLastError(ERROR_INVALID_PARAMETER); return NULL;
     }
     binding = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
-        sizeof(*binding) + name->Length);
+        sizeof(*binding) + wow_class_client_provider_current()->identity_bytes + name->Length);
     if (!binding) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
+    binding->client_identity = (struct tagCLS *)(binding + 1);
     binding->references = 1;
     binding->entry.adwWOW[0] = words[0];
     binding->entry.adwWOW[1] = words[1];
-    binding->name.Buffer = (WCHAR *)(binding + 1);
+    binding->name.Buffer = (WCHAR *)((BYTE *)binding->client_identity +
+        wow_class_client_provider_current()->identity_bytes);
     binding->name.Length = binding->name.MaximumLength = name->Length;
     CopyMemory(binding->name.Buffer, name->Buffer, name->Length);
     return binding;
@@ -101,7 +101,7 @@ static void publish(wow_class_lookup_entry **list,
     wow_class_words_binding *binding, ATOM atom, HANDLE module)
 {
     binding->entry.atomClassName = atom;
-    binding->client_identity.atomClassName = atom;
+    wow_class_client_provider_current()->initialize_identity(binding->client_identity, atom);
     binding->entry.hModule = module;
     /* Original class.c registration's head insertion; list selection belongs
      * to the registration owner, not the mutable CS_GLOBALCLASS style. */
@@ -132,7 +132,7 @@ wow_class_lookup_entry *WINAPI wow_class_words_entry(wow_class_words_binding *bi
 
 struct tagCLS *WINAPI wow_class_words_client_identity(wow_class_words_binding *binding)
 {
-    return binding ? &binding->client_identity : NULL;
+    return binding ? binding->client_identity : NULL;
 }
 
 BOOL WINAPI wow_class_words_publish_guest(wow_class_lookup_entry *entry,
@@ -188,7 +188,7 @@ BOOL WINAPI wow_class_words_match_native(wow_class_lookup_context *context,
         recovered = wow_control_client_procedure(entry->fnid, unicode);
         if (recovered) {
             candidate = recovered;
-        } else if (entry->fnid == FNID_DIALOG) {
+        } else if (entry->fnid == wow_class_client_provider_current()->dialog_fnid) {
             candidate = unicode ? wow_dialog_window_procW : wow_dialog_window_procA;
         } else if (unicode) {
             if (!GetClassInfoExW(NULL, MAKEINTATOM(entry->atomClassName), &native)) continue;
@@ -198,7 +198,7 @@ BOOL WINAPI wow_class_words_match_native(wow_class_lookup_context *context,
         if (found && found != entry->fnid) { found = 0; break; }
         found = entry->fnid;
         target = wow_control_client_procedure(entry->fnid, FALSE);
-        if (!target) target = entry->fnid == FNID_DIALOG ? wow_dialog_window_procA :
+        if (!target) target = entry->fnid == wow_class_client_provider_current()->dialog_fnid ? wow_dialog_window_procA :
             binding->original_native_procedure;
     }
     if (found) { *fnid = found; *canonical = target; }
@@ -262,7 +262,7 @@ BOOL WINAPI wow_class_words_import_native(wow_class_lookup_context *context,
     if (wow_control_client_procedure(fnid, FALSE)) {
         binding->entry.lpfnWndProc = wow_control_client_procedure(fnid, FALSE);
     }
-    if (fnid == FNID_DIALOG) {
+    if (fnid == wow_class_client_provider_current()->dialog_fnid) {
         binding->entry.lpfnWndProc = wow_dialog_window_procA;
     }
     /* Original clinit.c RW_RegisterControls registers CS_GLOBALCLASS;
@@ -305,7 +305,7 @@ BOOL WINAPI wow_class_words_forget_native(wow_class_lookup_context *context)
 
 ATOM WINAPI wow_class_words_register(wow_class_lookup_context *context,
     const WNDCLASSEXA *native_class, const UNICODE_STRING *name,
-    const DWORD words[2], const CLSMENUNAME *menu)
+    const DWORD words[2], const struct tagCLSMENUNAME *menu)
 {
     return wow_class_words_register_target(context, native_class, name,
         words, menu, NULL);
@@ -402,7 +402,7 @@ void WINAPI wow_class_words_restore_procedure(wow_class_words_binding *binding,
 
 ATOM WINAPI wow_class_words_register_target(wow_class_lookup_context *context,
     const WNDCLASSEXA *native_class, const UNICODE_STRING *name,
-    const DWORD words[2], const CLSMENUNAME *menu,
+    const DWORD words[2], const struct tagCLSMENUNAME *menu,
     const wow_window_dispatch_target *target)
 {
     wow_class_words_binding *binding;
@@ -442,8 +442,7 @@ ATOM WINAPI wow_class_words_register_target(wow_class_lookup_context *context,
     /* Original CLS retains the two client names, not pcmn->pusMenuName.
      * Failure frees metadata only: original RegisterClassExWOW owns cleanup. */
     if (menu) {
-        binding->entry.lpszClientAnsiMenuName = menu->pszClientAnsiMenuName;
-        binding->entry.lpszClientUnicodeMenuName = menu->pwszClientUnicodeMenuName;
+        wow_class_client_provider_current()->capture_menu(menu, &binding->entry);
         binding->has_client_menu = TRUE;
     }
     atom = RegisterClassExA(native_class);
@@ -556,14 +555,12 @@ BOOL WINAPI wow_class_words_unregister(wow_class_lookup_context *classes,
     ATOM atom, HINSTANCE module, PCLSMENUNAME menu)
 {
     wow_class_remove_context context;
-    CLSMENUNAME result;
     if (!classes) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     context.ppi=classes; context.module=module;
     context.name.Buffer=(LPWSTR)MAKEINTATOM(atom);
     context.name.Length=context.name.MaximumLength=0;
     context.menu_output_available=menu!=NULL; context.destroy=destroy_native;
     /* The server's output is not published to its client on native failure. */
-    if (!wow_class_client_provider_current()->unregister_class_internal(context.name.Buffer,module,&result,&context)) return FALSE;
-    if (menu) *menu=result;
-    return TRUE;
+    return wow_class_client_provider_current()->unregister_class_internal(
+        context.name.Buffer, module, menu, &context);
 }

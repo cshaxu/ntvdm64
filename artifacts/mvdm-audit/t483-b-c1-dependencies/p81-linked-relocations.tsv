@@ -1,0 +1,8 @@
+from	to	source	line_or_section	target	evidence	product
+non-mvdm	mvdm-host	src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx	3	src/mvdm-host/wow32/wcall16.c	_WOWGlobalLock16@4	wow32.dll
+non-mvdm	mvdm-host	src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx	3	src/mvdm-host/wow32/wcall16.c	_WOWGlobalUnlock16@4	wow32.dll
+non-mvdm	mvdm-host	src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx	5	src/mvdm-host/wow32/wcall16.c	_WOWGlobalAllocLock16@12	wow32.dll
+non-mvdm	mvdm-host	src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx	5	src/mvdm-host/wow32/wcall16.c	_WOWGlobalUnlock16@4	wow32.dll
+non-mvdm	mvdm-host	src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx	5	src/mvdm-host/wow32/wcall16.c	_WOWGlobalUnlockFree16@4	wow32.dll
+non-mvdm	mvdm-host	src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx	5	src/mvdm-host/wow32/wow32.c	_WOWGetVDMPointer@12	wow32.dll
+non-mvdm	mvdm-host	src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx	9	src/mvdm-host/wow32/wow32.c	_WOWGetVDMPointer@12	wow32.dll
