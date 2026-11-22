@@ -1,7 +1,5 @@
 #ifndef WOW_BUTTON_LIFETIME_H
 #define WOW_BUTTON_LIFETIME_H
-#include <windows.h>
-#include <winternl.h>
 #include "wow_button_resources.h"
 struct tagWND;
 typedef struct _LOOKASIDE *PLOOKASIDE;

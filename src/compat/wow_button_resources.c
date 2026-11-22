@@ -1,4 +1,3 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_button_resources.h"
 #include "compat/include/wow_button_style_table.h"
 

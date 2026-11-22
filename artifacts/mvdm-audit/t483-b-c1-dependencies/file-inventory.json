@@ -7,7 +7,7 @@
     "completed": 24,
     "direct_unique": 50,
     "direct_raw": 60,
-    "compiled_header_rows": 449,
+    "compiled_header_rows": 443,
     "private_search_root_rows": 0
   },
   "files": [
@@ -2071,7 +2071,7 @@
     {
       "id": "BC1F027",
       "file": "src/compat/wow_button_resources.c",
-      "status": "not yet audited",
+      "status": "in progress: P22 removes redundant nt.h chain; original OEM geometry layout remains",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -2163,7 +2163,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "partial_evidence": "p22-delivery.json"
     },
     {
       "id": "BC1F028",

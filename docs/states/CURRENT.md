@@ -318,3 +318,11 @@ files24/94 complete. Mirror+1point/+6lines R2754; cumulative+3points/+239lines.
 Cached full, dual11, button/control, CCPU, init/task and Win16/COMMAND passed;
 package 01e7dd12-e11d-4129-a353-10b6ebd63137.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p21-delivery.json).
+
+P22 partially addresses BC1F027: removed unused private nt.h from the B
+button resource owner and made the SDK declaration explicit. Original OEM
+geometry layout remains open. Compiled B-C1 headers449->443; direct50 and
+files24/94 complete unchanged. Mirror0points/0lines; cumulative+3points/+239lines.
+Cached full, dual11, button/control and real Win16/COMMAND passed; package
+c089c798-2ce2-447a-8682-fbc8f8304284.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p22-delivery.json).
