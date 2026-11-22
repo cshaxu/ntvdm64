@@ -3,6 +3,13 @@
 #include <windows.h>
 #include "wow_window_client_state_bindings.h"
 
+typedef struct wow_control_entry_provider {
+    WNDPROC edit_a, edit_w, combo_a, combo_w, list_a, list_w;
+    WNDPROC combo_list_a, combo_list_w, button_a, button_w;
+    LONG (WINAPI *caret)(HWND, UINT, UINT, LONG);
+} wow_control_entry_provider;
+BOOL WINAPI wow_control_entry_bind(const wow_control_entry_provider *);
+
 /* ADAPTER-WOW-058: finite EDIT and recovered list/combo system inputs.
  * An invocation owns this snapshot; it is not modern USER's SERVERINFO. */
 typedef struct wow_edit_context {

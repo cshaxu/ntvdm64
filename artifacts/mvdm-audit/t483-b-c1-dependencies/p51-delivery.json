@@ -1,0 +1,36 @@
+{
+  "packet": "M0 T483 S20 P51",
+  "baseline": "26c50dcd1",
+  "files_partial": [
+    "BC1F060"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 38,
+    "remaining": 56,
+    "B_C1_unique": 18,
+    "B_C1_raw": 25,
+    "B_C1_compiled_headers": 258,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 direct unique 29 to 18, raw 37 to 25, compiled headers 264 to 258. BC1F060 retains four original header records.",
+  "implementation": "One synchronous immutable provider supplies original EDIT, button, combo/list entry points and caret callback; scopes, original algorithms, timer identity and resource lifecycle retained. Private NT include replaced by SDK.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "beea77b9-ec3e-4a66-b95a-8cbaa716bc80",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "WOW control boundary fixtures",
+    "real CCPU dialog lifecycle with original control provider bound",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-control-entry",
+  "limitations": [
+    "BC1F060 retains original USER and other header dependencies",
+    "Full suite required at S20 closure"
+  ]
+}
