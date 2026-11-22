@@ -473,3 +473,11 @@ message retry, cursor resource and real Win16/COMMAND targeted tests passed.
 Full remains required at S20 closure. Package
 f29e9068-e618-4e9d-9e33-83967d45b45e.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p39-delivery.json).
+
+P40 completes BC1F047: dialog call bindings use narrow native-call and
+failure interfaces rather than private NT/task-lifecycle headers. B-C1
+direct unique remains 42, compiled headers 330->324; files 37/94 complete.
+Mirror delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full
+build, dual11, dialog/control and real Win16/COMMAND targeted tests passed.
+Full remains required at S20 closure. Package d41c6cb9-965e-4708-970c-02622feccfd1.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p40-delivery.json).

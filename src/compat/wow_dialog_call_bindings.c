@@ -1,7 +1,9 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_dialog_native_bindings.h"
 #include "wow_dialog_state_bindings.h"
-#include "wow_user_task_lifecycle.h"
+#include "wow_user_native_call.h"
+#include "wow_user_failure.h"
 
 VOID WINAPI wow_dialog_set_pointer_word(HWND window, UINT pointer)
 {

@@ -1,0 +1,36 @@
+{
+  "packet": "M0 T483 S20 P40",
+  "baseline": "435f0da14",
+  "files_completed": [
+    "BC1F047"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 37,
+    "remaining": 57,
+    "B_C1_unique": 42,
+    "B_C1_raw": 50,
+    "B_C1_compiled_headers": 324,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct remains 42; compiled headers 330 to 324. No C1 compiled header records for dialog call bindings.",
+  "implementation": "Replaced private NT and broad task lifecycle headers with public SDK and narrow native-call/failure interfaces; dialog operations and cleanup behavior unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "d41c6cb9-965e-4708-970c-02622feccfd1",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "dialog pointer/menu/thread/cleanup call boundary",
+    "WOW control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-dialog-call",
+  "limitations": [
+    "Full suite required at S20 closure",
+    "BC1F031, shared atlas and shared message-table layouts remain open"
+  ]
+}
