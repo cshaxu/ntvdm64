@@ -1,0 +1,39 @@
+{
+  "packet": "M0 T483 S20 P61",
+  "baseline": "a7f298f6f",
+  "files_completed": [
+    "BC1F073"
+  ],
+  "files_open": [
+    "BC1F072"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 46,
+    "remaining": 48,
+    "B_C1_unique": 13,
+    "B_C1_raw": 20,
+    "B_C1_compiled_headers": 201,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 function direct unique 14 to 13, raw 21 to 20; compiled headers unchanged 201. Original C1 conversion remains the provider; C1 uses B-owned lead table.",
+  "implementation": "WOW32 binds original C1 ConvertObjDescriptor to B synchronous provider before use. B retains original ACP lead table initialization; original conversion and existing public C1-C2 WOW APIs unchanged. BC1F072 remains open: owner-approved retired original table is consumed by C1 and uses C1 object-flag definitions.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "ca07da86-d12a-48bf-8c8f-1c688f848084",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "actual Win16 OLE descriptor forward/reverse roundtrip, invalid input/direction and ownership for clipboard formats 49153 and 49154",
+    "real COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-ole-binding-p61",
+  "limitations": [
+    "BC1F072 original object ownership table remains coupled to C1 definitions",
+    "Data-symbol scan incomplete beyond scoped common externals",
+    "Full suite required at S20 closure"
+  ]
+}
