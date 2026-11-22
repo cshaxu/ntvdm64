@@ -426,7 +426,7 @@ $dllEntryBridgeLines = @(
     'ATOM WINAPI wow_original_class_atom(UINT);',
     'BOOL WINAPI wow_original_class_capture(LPCSTR, PUNICODE_STRING);',
     'static const wow_standard_class_provider class_provider = {',
-    '    GetStdClassNumber, wow_original_class_name, wow_original_class_atom, wow_original_class_capture };',
+    '    GetStdClassNumber, wow_original_class_name, wow_original_class_atom, wow_original_class_capture, { 0, 0, FNID_BUTTON, FNID_COMBOBOX, FNID_EDIT, FNID_LISTBOX, FNID_MDICLIENT, FNID_SCROLLBAR, FNID_STATIC, FNID_DESKTOP, FNID_DIALOG, FNID_ICONTITLE, FNID_MENU, FNID_SWITCH, FNID_COMBOLISTBOX } };',
     'BOOL WINAPI wow_original_idle_registered(DWORD);',
     'BOOL WINAPI wow_original_separate_launch(void);',
     'LRESULT CALLBACK WowOriginalForegroundIdleHook(int, WPARAM, LPARAM);',

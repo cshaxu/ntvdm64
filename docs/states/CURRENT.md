@@ -114,9 +114,9 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P81 final compiled-product review leaves 82 of 94
+is authoritative for individual files and evidence. P82 final compiled-product review leaves 83 of 94
 files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-15 compiled-header rows across 8 sources and zero private search roots. B-to-C2 has zero
+14 compiled-header rows across 7 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
@@ -264,3 +264,10 @@ provider or registry. Non-error mirror +1point/+18lines, pending R2767. Cached
 full build, dual11 publication, lifecycle/class and published guest tests passed.
 The first fixture compile failed on include order, then passed after a test-only
 correction. [P81 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p81-class-storage-closure.json).
+
+P82 completes standard-class constant assembly through the existing immutable
+provider. Original15-position FNID mapping is byte-token equivalent in product
+and test assembly; no mirror or guest change. Remaining11 files; compiled
+header rows15->14 across7 sources. Cached full build, dual11 publication,
+lifecycle/class and published USER16/COMMAND tests passed.
+[P82 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p82-standard-class-closure.json).

@@ -25,7 +25,7 @@ static BOOL wow_fixture_bind_task_environment(void)
 {
     static const wow_standard_class_provider classes = {
         GetStdClassNumber, wow_original_class_name, wow_original_class_atom,
-        wow_original_class_capture };
+        wow_original_class_capture, { 0, 0, FNID_BUTTON, FNID_COMBOBOX, FNID_EDIT, FNID_LISTBOX, FNID_MDICLIENT, FNID_SCROLLBAR, FNID_STATIC, FNID_DESKTOP, FNID_DIALOG, FNID_ICONTITLE, FNID_MENU, FNID_SWITCH, FNID_COMBOLISTBOX } };
     static const wow_task_cleanup_provider cleanup = {
         wow_original_task_cleanup_uninitialized, wow_original_task_retire_async,
         WowOriginalFreeTask };

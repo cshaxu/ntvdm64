@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 82,
+    "completed": 83,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 15,
+    "compiled_header_rows": 14,
     "private_search_root_rows": 0
   },
   "files": [
@@ -7720,7 +7720,7 @@
     {
       "id": "BC1F076",
       "file": "src/compat/wow_standard_class_bindings.c",
-      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains",
+      "status": "completed in verified P82 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7853,7 +7853,8 @@
           "product": ""
         }
       ],
-      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json"
+      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json",
+      "p82_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p82-standard-class-closure.json"
     },
     {
       "id": "BC1F077",

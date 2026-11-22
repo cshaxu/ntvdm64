@@ -3,7 +3,6 @@
 #include "wow_standard_class_bindings.h"
 #include "wow_dialog_state_bindings.h"
 #include "wow_edit_entry_bindings.h"
-#include "compat/include/opennt_user_multipass.h"
 #include <stddef.h>
 
 #include "wow_standard_class_provider.h"
@@ -16,6 +15,9 @@ BOOL WINAPI wow_standard_class_bind(const wow_standard_class_provider *value)
     if (!value || !value->classify || !value->name || !value->atom || !value->capture_name) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
+    for (unsigned i = 2; i < ARRAYSIZE(value->fnids); ++i) {
+        if (!value->fnids[i]) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,
         (PVOID)value, NULL);
     if (previous && previous != value) {
@@ -23,15 +25,6 @@ BOOL WINAPI wow_standard_class_bind(const wow_standard_class_provider *value)
     }
     return TRUE;
 }
-
-/* WALIAS.H WOWCLASS order -> clinit.c / init.c registration FNIDs.
- * No class names/procedures or separate classification policy here. */
-static const WORD fnids[] = {
-    0, 0, FNID_BUTTON, FNID_COMBOBOX, FNID_EDIT, FNID_LISTBOX,
-    FNID_MDICLIENT, FNID_SCROLLBAR, FNID_STATIC, FNID_DESKTOP,
-    FNID_DIALOG, FNID_ICONTITLE, FNID_MENU, FNID_SWITCH,
-    FNID_COMBOLISTBOX
-};
 
 /* Original WALIAS.H order to cleanup.c's ICLS_* order, not a new class-name
  * or dispatch table. Edit's restore target is intentionally DefWindowProc. */
@@ -41,8 +34,8 @@ static const BYTE cleanup_indices[] = {
 
 static BOOL process_control(WORD fnid)
 {
-    return fnid != FNID_DESKTOP && fnid != FNID_MENU &&
-        fnid != FNID_SWITCH && fnid != FNID_ICONTITLE;
+    return fnid != provider->fnids[9] && fnid != provider->fnids[12] &&
+        fnid != provider->fnids[13] && fnid != provider->fnids[11];
 }
 
 BOOL WINAPI wow_standard_classes_bind_cleanup(wow_cleanup_context *context)
@@ -53,24 +46,24 @@ BOOL WINAPI wow_standard_classes_bind_cleanup(wow_cleanup_context *context)
     if (!context || !context->shared || !provider) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
-    for (i = 2; i < ARRAYSIZE(fnids); ++i) {
+    for (i = 2; i < ARRAYSIZE(provider->fnids); ++i) {
         wow_standard_class_view view;
-        if (!process_control(fnids[i])) continue;
+        if (!process_control(provider->fnids[i])) continue;
         if (!wow_standard_class_describe(provider->name(i), &view))
             return FALSE;
         shared.atomSysClass[cleanup_indices[i]] = view.atom;
     }
     shared.apfnClientA.pfnDefWindowProc = (PROC)DefWindowProcA;
     shared.apfnClientW.pfnDefWindowProc = (PROC)DefWindowProcW;
-    shared.apfnClientW.pfnButtonWndProc = (PROC)wow_control_client_procedure(FNID_BUTTON, TRUE);
+    shared.apfnClientW.pfnButtonWndProc = (PROC)wow_control_client_procedure(provider->fnids[2], TRUE);
     shared.apfnClientW.pfnStaticWndProc = restore;
-    shared.apfnClientW.pfnListBoxWndProc = (PROC)wow_control_client_procedure(FNID_LISTBOX, TRUE);
-    shared.apfnClientW.pfnComboBoxWndProc = (PROC)wow_control_client_procedure(FNID_COMBOBOX, TRUE);
+    shared.apfnClientW.pfnListBoxWndProc = (PROC)wow_control_client_procedure(provider->fnids[5], TRUE);
+    shared.apfnClientW.pfnComboBoxWndProc = (PROC)wow_control_client_procedure(provider->fnids[3], TRUE);
     /* Recovered dialog state must keep its canonical original owner after
      * a guest module unload; modern USER has no corresponding PDLG. */
     shared.apfnClientW.pfnDialogWndProc = (PROC)wow_dialog_window_procW;
     shared.apfnClientW.pfnMDIClientWndProc = restore;
-    shared.apfnClientW.pfnComboListBoxProc = (PROC)wow_control_client_procedure(FNID_COMBOLISTBOX, TRUE);
+    shared.apfnClientW.pfnComboListBoxProc = (PROC)wow_control_client_procedure(provider->fnids[14], TRUE);
     *context->shared = shared;
     context->scroll_proc = restore;
     return TRUE;
@@ -89,7 +82,7 @@ BOOL WINAPI wow_standard_class_describe(LPCSTR name,
     }
     if (!provider) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
     index = provider->classify((LPSTR)name);
-    if (index <= 1 || (UINT)index >= ARRAYSIZE(fnids)) {
+    if (index <= 1 || (UINT)index >= ARRAYSIZE(provider->fnids)) {
         SetLastError(ERROR_CLASS_DOES_NOT_EXIST); return FALSE;
     }
     class_name = provider->name((UINT)index);
@@ -110,7 +103,7 @@ BOOL WINAPI wow_standard_class_describe(LPCSTR name,
         SetLastError(ERROR_INVALID_DATA); return FALSE;
     }
     result.atom = atom;
-    result.fnid = fnids[index];
+    result.fnid = provider->fnids[index];
     *output = result;
     return TRUE;
 }
@@ -143,13 +136,13 @@ BOOL WINAPI wow_standard_classes_prepare(wow_class_lookup_context *classes,
             classes->pclsPublicList || classes->system_classes) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
-    for (i = 2; i < ARRAYSIZE(fnids); ++i) {
+    for (i = 2; i < ARRAYSIZE(provider->fnids); ++i) {
         wow_standard_class_view view;
         UNICODE_STRING name = {0};
         BOOL imported;
         /* These four are original LW_RegisterWindows desktop/menu/switch/
          * icon-title classes, not this process-control registration group. */
-        if (!process_control(fnids[i])) continue;
+        if (!process_control(provider->fnids[i])) continue;
         if (!wow_standard_class_describe(provider->name(i), &view))
             goto fail;
         if (!provider->capture_name(provider->name(i), &name))

@@ -14,7 +14,7 @@ extern LPCSTR WINAPI wow_original_class_name(UINT);
 extern ATOM WINAPI wow_original_class_atom(UINT);
 extern BOOL WINAPI wow_original_class_capture(LPCSTR, PUNICODE_STRING);
 static const wow_standard_class_provider class_provider = {
-    GetStdClassNumber, wow_original_class_name, wow_original_class_atom, wow_original_class_capture };
+    GetStdClassNumber, wow_original_class_name, wow_original_class_atom, wow_original_class_capture, { 0, 0, FNID_BUTTON, FNID_COMBOBOX, FNID_EDIT, FNID_LISTBOX, FNID_MDICLIENT, FNID_SCROLLBAR, FNID_STATIC, FNID_DESKTOP, FNID_DIALOG, FNID_ICONTITLE, FNID_MENU, FNID_SWITCH, FNID_COMBOLISTBOX } };
 #include "wow_cleanup_bindings.h"
 #include "wow_shared_user_abi.h"
 #include "non-mvdm/windows/core/ntuser/inc/user.h"

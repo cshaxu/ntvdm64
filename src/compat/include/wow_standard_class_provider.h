@@ -9,6 +9,8 @@ typedef struct wow_standard_class_provider {
     LPCSTR (WINAPI *name)(UINT);
     ATOM (WINAPI *atom)(UINT);
     BOOL (WINAPI *capture_name)(LPCSTR, PUNICODE_STRING);
+    /* Original WALIAS class order; numeric identities supplied at assembly. */
+    WORD fnids[15];
 } wow_standard_class_provider;
 BOOL WINAPI wow_standard_class_bind(const wow_standard_class_provider *);
 #endif

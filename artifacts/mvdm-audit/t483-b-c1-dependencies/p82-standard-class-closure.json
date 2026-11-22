@@ -1,0 +1,145 @@
+{
+  "packet": "M0 T483 S20 P82",
+  "baseline": "88e8431176e47ffeee1469533c501208d125a6a4",
+  "status": "verified batch; commit/push established by Git history",
+  "completed_file": "src/compat/wow_standard_class_bindings.c",
+  "counts": {
+    "files": 94,
+    "completed": 83,
+    "remaining": 11,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 14,
+    "B_C1_sources": 7,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "Existing immutable standard-class provider carries the original15-position FNID constants as image assembly data. Actual classification/name/atom/capture callbacks and their C providers are unchanged. B retains control selection, native class identity checks, cleanup indices, registration lifetime and rollback. No new callback, queue or state machine.",
+  "constant_identity": {
+    "original_B_mapping": [
+      "0",
+      "0",
+      "FNID_BUTTON",
+      "FNID_COMBOBOX",
+      "FNID_EDIT",
+      "FNID_LISTBOX",
+      "FNID_MDICLIENT",
+      "FNID_SCROLLBAR",
+      "FNID_STATIC",
+      "FNID_DESKTOP",
+      "FNID_DIALOG",
+      "FNID_ICONTITLE",
+      "FNID_MENU",
+      "FNID_SWITCH",
+      "FNID_COMBOLISTBOX"
+    ],
+    "all_product_and_test_initializers_equal": true,
+    "supplied_before_original_DLL_attach": true,
+    "provider_lifetime": "Existing immutable image-lifetime provider; binding remains one-time."
+  },
+  "mirror": {
+    "delta_points": 0,
+    "delta_lines": 0,
+    "proof": "No mirror or guest source modified."
+  },
+  "build": {
+    "finished": "2026-11-22T11:54:33.7292178+00:00",
+    "pid": 24588,
+    "started": "2026-11-22T11:53:10.3824739+00:00",
+    "exit": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "b3bc9c2c-6a0b-4b2b-84f7-285ea194e519",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "finished": "2026-11-22T11:58:15.4628020+00:00",
+    "pid": 25288,
+    "started": "2026-11-22T11:55:18.2648316+00:00",
+    "exit": 0
+  },
+  "lifecycle_tests": [
+    {
+      "finished": "2026-11-22T11:55:32.1601133+00:00",
+      "started": "2026-11-22T11:55:18.3291166+00:00",
+      "case": "window-borrow",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T11:55:50.6543892+00:00",
+      "started": "2026-11-22T11:55:32.1635831+00:00",
+      "case": "graph-snapshot",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T11:56:04.7014482+00:00",
+      "started": "2026-11-22T11:55:50.6574115+00:00",
+      "case": "native-creation",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T11:56:16.5044637+00:00",
+      "started": "2026-11-22T11:56:04.7027227+00:00",
+      "case": "class-lifetime",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T11:56:28.5368631+00:00",
+      "started": "2026-11-22T11:56:16.5058141+00:00",
+      "case": "task-lifecycle",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T11:56:40.3318839+00:00",
+      "started": "2026-11-22T11:56:28.5383107+00:00",
+      "case": "process-retirement",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T11:56:53.6995809+00:00",
+      "started": "2026-11-22T11:56:40.3333423+00:00",
+      "case": "init-notification",
+      "exit": 0
+    }
+  ],
+  "class_tests": [
+    {
+      "finished": "2026-11-22T11:57:07.1433632+00:00",
+      "started": "2026-11-22T11:56:53.7650925+00:00",
+      "case": "standard-class",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T11:57:18.8090907+00:00",
+      "started": "2026-11-22T11:57:07.1448363+00:00",
+      "case": "class-client",
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-22T11:57:30.6275971+00:00",
+      "started": "2026-11-22T11:57:18.8102300+00:00",
+      "case": "class-query",
+      "exit": 0
+    }
+  ],
+  "source_identity": {
+    "src/compat/include/wow_standard_class_provider.h": "a82a7dee2bae414efc42f44c960f0743128fdeec1bc10856995ac1fd19d2ea0d",
+    "src/compat/wow_standard_class_bindings.c": "67d032ef35bde2a957440ac925db4f97d394da54f5282e814fc25b5184a2be6a",
+    "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c": "ab963970b5a643e852ac7cc5a309808e2c4448fb610e812381e5e200a75bc0ef",
+    "test/adapter-mvdm-host-out/wow/wow_task_environment_fixture_provider.h": "f323becab0deaab0596ab01264bd86b5b1b3622127a7939f2aded11056557ec9",
+    "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c": "f51c7ed532a5acbbde4b8a9e51a8a7a7193feb9ed7f256d55a31f9d6f8954117",
+    "test/mvdm-host/wow_page_domain_fixture.c": "6ee563194a4d28820fca5fa2052c7dd7613e29952560ae50e85da5d95719f927",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "c3334085091979661970770cba28432fc19b1ccb5a991a156da47cddc33f0974"
+  },
+  "evidence_root": "build\\t483-s20-p82-standard-class",
+  "limitations": [
+    "11 files remain; control-state placement approval remains pending.",
+    "Data-symbol/assembly/linkmap closure sweep remains.",
+    "No S20 closure or Full-pass claim; existing Shell diagnostic boundary remains."
+  ]
+}
