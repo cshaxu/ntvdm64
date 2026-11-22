@@ -114,14 +114,14 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P70 final compiled-product review leaves 64 of 94
+is authoritative for individual files and evidence. P71 final compiled-product review leaves 67 of 94
 files complete. BC1F045 retains USER private layouts; its NT header chain is removed. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-70 compiled-header rows across 25 sources and zero private search roots. B-to-C2 has zero
+64 compiled-header rows across 22 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
 
-S20 cumulative non-error mirror delta is +4 points/+291 lines; S19 retained
+S20 cumulative non-error mirror delta is +5 points/+290 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
 tests. The P62 package is 71882068-22ca-4a1a-8a84-20c8d7f7cb5c.
@@ -190,3 +190,10 @@ C1 cleanup provider, without changing original type values or lifetime policy.
 Header rows72->70; remaining30 files; non-error mirror delta0points/0lines.
 Cached full build, dual11 publication, six targeted cases and published USER16
 and COMMAND passed. [P70 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p70-object-types-closure.json).
+
+P71 completes default-native/default-window/window-access boundaries through
+the existing original-window provider. Remaining27 files; header rows70->64.
+Mirror+1point/-1normalized line (actual insertion5lines), pending R2757.
+Cached full build, dual11 publication, three boundary/six lifecycle cases and
+published USER16/COMMAND passed after fixing a test-only missing declaration.
+[P71 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p71-window-identity-closure.json).

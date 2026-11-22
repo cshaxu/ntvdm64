@@ -74,8 +74,11 @@ DWORD WINAPI xxxSetWindowLong(PWND window, int index, DWORD value, BOOL ansi)
 { (void)window; (void)index; (void)value; (void)ansi; ++failures; return 0; }
 static HMENU WINAPI unexpected_menu(HINSTANCE module, LPCWSTR name)
 { (void)module; (void)name; ++failures; return NULL; }
+static HWND WINAPI fixture_window_handle(struct tagWND *window)
+{ return window->head.h; }
 static const wow_window_access_provider access_provider = {
-    xxxSetWindowLong, _GetWindowLong, _SetWindowLong, unexpected_menu
+    xxxSetWindowLong, _GetWindowLong, _SetWindowLong, unexpected_menu,
+    fixture_window_handle, FNID_DEFWINDOWPROC
 };
 int __cdecl main(void)
 {

@@ -10,6 +10,9 @@ typedef struct wow_window_access_provider {
     DWORD (WINAPI *get_long)(struct tagWND *, int, BOOL);
     LONG (WINAPI *set_client_long)(HWND, int, LONG, BOOL);
     HMENU (WINAPI *load_menu)(HINSTANCE, LPCWSTR);
+    /* Read the existing borrowed object; never resolve a new HWND owner. */
+    HWND (WINAPI *window_handle)(struct tagWND *);
+    DWORD default_function;
 } wow_window_access_provider;
 
 BOOL WINAPI wow_window_access_bind(const wow_window_access_provider *);

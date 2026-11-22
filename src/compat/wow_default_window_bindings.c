@@ -1,7 +1,7 @@
 #include <windows.h>
+#include "wow_window_access_provider.h"
 #include <winternl.h>
 #include "wow_default_window_bindings.h"
-#include "wow_user_client_view_layout.h"
 #include "wow_window_words_binding.h"
 #include "wow_user_borrow_scope.h"
 
@@ -25,12 +25,12 @@ BOOL WINAPI wow_default_window_bind(wow_default_window_provider provider)
 }
 __declspec(thread) wow_default_context *wow_default_current;
 
-LONG WINAPI wow_edit_default_control_color(PWND state, UINT message,
+LONG WINAPI wow_edit_default_control_color(struct tagWND * state, UINT message,
     WPARAM wp, LPARAM lp, DWORD ansi)
 {
     wow_window_words_binding *binding;
     wow_window_creation_facts facts;
-    PWND source;
+    struct tagWND * source;
     DWORD error = GetLastError();
     HWND recipient, control;
     if (message != WM_CTLCOLORSTATIC)
@@ -38,31 +38,31 @@ LONG WINAPI wow_edit_default_control_color(PWND state, UINT message,
     if (!state) {
         SetLastError(ERROR_INVALID_WINDOW_HANDLE); return 0;
     }
-    binding = wow_user_borrow_client_state(state->head.h, state);
+    binding = wow_user_borrow_client_state(wow_window_access_current()->window_handle(state), state);
     if (!binding) return 0;
     if (wow_window_words_creation_facts(binding, &facts)) {
         SetLastError(error);
         return wow_default_window_proc(state, message, wp, lp, ansi);
     }
     if (GetLastError() != ERROR_NOT_FOUND) return 0;
-    /* Original ECGetControlBrush passes PWND here, not the public HWND.
+    /* Original ECGetControlBrush passes struct tagWND * here, not the public HWND.
      * Retain both exact allocations and capture handles before reentry. */
-    source = (PWND)lp;
+    source = (struct tagWND *)lp;
     if (!source) {
         SetLastError(ERROR_INVALID_WINDOW_HANDLE); return 0;
     }
-    if (!wow_user_borrow_client_state(source->head.h, source)) return 0;
-    recipient = state->head.h;
-    control = source->head.h;
+    if (!wow_user_borrow_client_state(wow_window_access_current()->window_handle(source), source)) return 0;
+    recipient = wow_window_access_current()->window_handle(state);
+    control = wow_window_access_current()->window_handle(source);
     SetLastError(error);
     return wow_default_CsSendMessage(recipient, message, wp, (LPARAM)control,
-        0, FNID_DEFWINDOWPROC, ansi);
+        0, wow_window_access_current()->default_function, ansi);
 }
 
-static LONG invoke_default(wow_window_words_binding *binding, PWND state, UINT message,
+static LONG invoke_default(wow_window_words_binding *binding, struct tagWND * state, UINT message,
     WPARAM wp, LPARAM lp, DWORD ansi)
 {
-    PWND locked;
+    struct tagWND * locked;
     LONG result = 0;
     DWORD error = GetLastError();
     if (message != WM_GETTEXT && message != WM_GETTEXTLENGTH)
@@ -89,7 +89,7 @@ static LONG invoke_default(wow_window_words_binding *binding, PWND state, UINT m
     return result;
 }
 
-LONG WINAPI wow_default_window_proc(PWND state, UINT message,
+LONG WINAPI wow_default_window_proc(struct tagWND * state, UINT message,
     WPARAM wp, LPARAM lp, DWORD ansi)
 {
     DWORD error = GetLastError();
@@ -103,8 +103,8 @@ LONG WINAPI wow_default_window_proc(PWND state, UINT message,
     /* Every admitted caller enters through the control/dialog graph owner.
      * Retain its exact allocation for all messages, not only name reads.
      * Do not refresh by HWND here: after nested destruction that handle may
-     * denote a replacement, while original code still owns this PWND. */
-    binding = wow_user_borrow_client_state(state->head.h, state);
+     * denote a replacement, while original code still owns this struct tagWND *. */
+    binding = wow_user_borrow_client_state(wow_window_access_current()->window_handle(state), state);
     if (!binding) return 0;
     if (!wow_default_capture_context(&context, message)) return 0;
     wow_default_current = &context;

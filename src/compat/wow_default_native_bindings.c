@@ -1,22 +1,22 @@
 #include <windows.h>
+#include "wow_window_access_provider.h"
 #include <winternl.h>
 #include "wow_default_window_bindings.h"
 #include "wow_user_private_access.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_task_lifecycle.h"
-#include "wow_user_client_view_layout.h"
 
 /* ADAPTER-WOW-063: approved nonclient boundary. Both original FindNCHit
  * callers reach one owner; never SendMessage back into the same HWND.
  * The modern host owns nonclient geometry and hit testing. */
-int WINAPI wow_default_find_nc_hit(PWND state, LONG point)
+int WINAPI wow_default_find_nc_hit(struct tagWND * state, LONG point)
 {
     wow_user_native_call call;
     DWORD error=GetLastError();
     HWND window;
     LRESULT result=HTERROR;
     if(!state){SetLastError(ERROR_INVALID_WINDOW_HANDLE);return HTERROR;}
-    window=state->head.h;
+    window=wow_window_access_current()->window_handle(state);
     if(!wow_user_borrow_client_state(window,state))return HTERROR;
     if(!wow_user_native_call_begin(&call,window))return HTERROR;
     __try {
@@ -34,11 +34,11 @@ int WINAPI wow_default_find_nc_hit(PWND state, LONG point)
 /* ADAPTER-WOW-061: the original client's explicit server operations use
  * the existing native boundary, including execution restoration and return
  * state publication. The client's own algorithm remains original clmsg.c.
- * Never dispatch a private PWND as an HWND or reinterpret arbitrary FNIDs. */
+ * Never dispatch a private struct tagWND * as an HWND or reinterpret arbitrary FNIDs. */
 LONG WINAPI wow_default_CsSendMessage(HWND window, UINT message, WPARAM wp,
     LPARAM lp, DWORD extra, DWORD function, BOOL ansi)
 {
-    if (function != FNID_DEFWINDOWPROC || extra != 0) {
+    if (function != wow_window_access_current()->default_function || extra != 0) {
         SetLastError(ERROR_NOT_SUPPORTED);
         return 0;
     }

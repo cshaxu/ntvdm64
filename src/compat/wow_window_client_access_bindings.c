@@ -2,7 +2,6 @@
 #include <winternl.h>
 #include "wow_window_access_provider.h"
 #include "wow_window_client_state_bindings.h"
-#include "wow_user_client_view_layout.h"
 #include "wow_user_private_access.h"
 #include "wow_user_borrow_scope.h"
 
@@ -14,7 +13,7 @@ BOOL WINAPI wow_window_access_bind(const wow_window_access_provider *value)
 {
     PVOID previous;
     if (!value || !value->set_long || !value->get_long ||
-            !value->set_client_long || !value->load_menu) {
+            !value->set_client_long || !value->load_menu || !value->window_handle) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,
@@ -34,7 +33,7 @@ const wow_window_access_provider *WINAPI wow_window_access_current(void)
  * through the selected client contract. Original _SetWindowLong retains
  * its ListBox guard. Modern USER owns real mutation and notifications,
  * including the explicitly approved pre-4.0 notification difference. */
-DWORD WINAPI xxxSetWindowData(PWND state, int index, DWORD value, BOOL ansi)
+DWORD WINAPI xxxSetWindowData(struct tagWND * state, int index, DWORD value, BOOL ansi)
 {
     HWND window;
     DWORD error = GetLastError();
@@ -47,7 +46,7 @@ DWORD WINAPI xxxSetWindowData(PWND state, int index, DWORD value, BOOL ansi)
         SetLastError(ERROR_INVALID_INDEX);
         return 0;
     }
-    window = state->head.h;
+    window = wow_window_access_current()->window_handle(state);
     if (!wow_user_borrow_client_state(window, state)) return 0;
     SetLastError(error);
     /* Existing native boundary restores execution and publishes actual
@@ -56,12 +55,12 @@ DWORD WINAPI xxxSetWindowData(PWND state, int index, DWORD value, BOOL ansi)
     return (DWORD)wow_native_SetWindowLongA(window, index, (LONG)value);
 }
 
-LONG WINAPI wow_window_client_send_message(PWND state, UINT message,
+LONG WINAPI wow_window_client_send_message(struct tagWND * state, UINT message,
     WPARAM wp, LPARAM lp, BOOL ansi)
 {
     HWND window;
-    /* clmsg.c SendMessageWorker consumes PWND, but its message payload is
-     * already in the public native A/W contract. Never pass this PWND to
+    /* clmsg.c SendMessageWorker consumes struct tagWND *, but its message payload is
+     * already in the public native A/W contract. Never pass this struct tagWND * to
      * USER or recreate the NT4 private Hook/FNID fast dispatch table.
      * The existing native boundary restores WOW execution and publishes
      * required return state, including after reentrant window destruction. */
@@ -69,7 +68,7 @@ LONG WINAPI wow_window_client_send_message(PWND state, UINT message,
         SetLastError(ERROR_INVALID_WINDOW_HANDLE);
         return 0;
     }
-    window = state->head.h;
+    window = wow_window_access_current()->window_handle(state);
     /* Retain this exact allocation in the caller's existing scope before
      * native dispatch can destroy/rebind its HWND. Parent/control pointers
      * cached by original code are not themselves an extra storage borrow.
@@ -83,7 +82,7 @@ LONG WINAPI wow_window_client_send_message(PWND state, UINT message,
 LONG WINAPI wow_window_client_set_window_long(HWND window, int index, LONG value,
     BOOL ansi)
 {
-    PWND state = wow_window_client_validate_hwnd(window);
+    struct tagWND * state = wow_window_client_validate_hwnd(window);
     if (!state) return 0;
     if (!provider) { SetLastError(ERROR_INVALID_STATE); return 0; }
     return (LONG)provider->set_long(state, index, (DWORD)value, ansi);
@@ -112,7 +111,7 @@ BOOL WINAPI wow_window_client_try_get_long(HWND window, int index, BOOL ansi,
     LONG *result)
 {
     DWORD error = GetLastError();
-    PWND state;
+    struct tagWND * state;
     if (index < 0 || !result) return FALSE;
     state = wow_window_client_validate_hwnd(window);
     if (!state) return private_access_failed(window, result, error);
@@ -130,7 +129,7 @@ BOOL WINAPI wow_window_client_try_set_long(HWND window, int index, LONG value,
     BOOL ansi, LONG *previous)
 {
     DWORD error = GetLastError();
-    PWND state;
+    struct tagWND * state;
     if ((index < 0 && index != GWL_STYLE) || !previous) return FALSE;
     state = wow_window_client_validate_hwnd(window);
     if (!state) return private_access_failed(window, previous, error);

@@ -15,6 +15,11 @@
 #include "precomp.h"
 #pragma hdrstop
 
+HWND WINAPI wow_original_window_handle(PWND window)
+{
+    return window->head.h;
+}
+
 #line 245
 /***************************************************************************\
 * xxxSetWindowLong (API)

@@ -1,0 +1,154 @@
+{
+  "packet": "M0 T483 S20 P71",
+  "baseline": "b9af53cf43a33d117d55324e1e3caddb80f15123",
+  "status": "verified production batch; commit/push in Git history",
+  "files_completed": [
+    "src/compat/wow_default_native_bindings.c",
+    "src/compat/wow_default_window_bindings.c",
+    "src/compat/wow_window_client_access_bindings.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 67,
+    "remaining": 27,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 64,
+    "B_C1_sources": 22,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "per_file": [
+    {
+      "file": "src/compat/wow_default_native_bindings.c",
+      "before_compiled_outer_headers": 2,
+      "after_compiled_outer_headers": 0
+    },
+    {
+      "file": "src/compat/wow_default_window_bindings.c",
+      "before_compiled_outer_headers": 2,
+      "after_compiled_outer_headers": 0
+    },
+    {
+      "file": "src/compat/wow_window_client_access_bindings.c",
+      "before_compiled_outer_headers": 2,
+      "after_compiled_outer_headers": 0
+    }
+  ],
+  "ownership": "C1 getset.c reads the HWND from the exact retained original WND through the existing B-owned window access provider. F composition supplies the original default-window service value. B retains exact-object borrow validation, native dispatch, name-lock and TLS restore. No HWND re-resolution, copied WND layout, new callback table, queue or state machine.",
+  "lifetime": "Generated DLL attach binds the static provider before original USER initialization. Missing handle operation is rejected; competing provider rebinding is rejected as before. Read has no allocation, callout, mutation or LastError change. All previous null checks and borrow-before-native-call ordering remain.",
+  "mirror": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+    "before": {
+      "blocks": 10,
+      "added": 5,
+      "deleted": 673
+    },
+    "after": {
+      "blocks": 11,
+      "added": 7,
+      "deleted": 670
+    },
+    "delta_points": 1,
+    "delta_lines": -1,
+    "physical_inserted_lines": 5,
+    "interpretation": "Fixed SequenceMatcher metric realigns identical old lines; this is not original restoration. Actual source has one five-line helper insertion and no deletion.",
+    "byte_proof": "Removing that helper returns exact HEAD bytes including #error/#line/CRLF.",
+    "approval": "Standing approval for one new non-error point below100 lines.",
+    "pending_id": "T483-R2757"
+  },
+  "package": "1c8e5922-3705-4a4f-8bde-99dc169f8cec",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "1c8e5922-3705-4a4f-8bde-99dc169f8cec",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "build": {
+    "exit": 0,
+    "started": "2026-11-22T09:22:59.3505618+00:00",
+    "pid": 4420,
+    "finished": "2026-11-22T09:24:09.7277254+00:00"
+  },
+  "boundary_tests": {
+    "started": "2026-11-22T09:24:53.2186148+00:00",
+    "pid": 23516,
+    "finished": "2026-11-22T09:25:07.0693788+00:00",
+    "exit": 0
+  },
+  "targeted_cases": [
+    {
+      "started": "2026-11-22T09:26:30.1383527+00:00",
+      "case": "window-borrow",
+      "finished": "2026-11-22T09:26:41.5861412+00:00",
+      "exit": 0
+    },
+    {
+      "started": "2026-11-22T09:26:41.5887960+00:00",
+      "case": "native-creation",
+      "finished": "2026-11-22T09:26:53.4400139+00:00",
+      "exit": 0
+    },
+    {
+      "started": "2026-11-22T09:26:53.4422442+00:00",
+      "case": "class-lifetime",
+      "finished": "2026-11-22T09:27:03.7388668+00:00",
+      "exit": 0
+    },
+    {
+      "started": "2026-11-22T09:27:03.7399575+00:00",
+      "case": "task-lifecycle",
+      "finished": "2026-11-22T09:27:13.0573764+00:00",
+      "exit": 0
+    },
+    {
+      "started": "2026-11-22T09:27:13.0584912+00:00",
+      "case": "process-retirement",
+      "finished": "2026-11-22T09:27:22.4516280+00:00",
+      "exit": 0
+    },
+    {
+      "started": "2026-11-22T09:27:22.4530461+00:00",
+      "case": "init-notification",
+      "finished": "2026-11-22T09:27:33.0113875+00:00",
+      "exit": 0
+    }
+  ],
+  "verification": {
+    "started": "2026-11-22T09:26:30.0514648+00:00",
+    "pid": 11044,
+    "finished": "2026-11-22T09:28:14.5367919+00:00",
+    "exit": 0
+  },
+  "initial_failure": {
+    "result": {
+      "started": "2026-11-22T09:24:53.1074822+00:00",
+      "pid": 23516,
+      "finished": "2026-11-22T09:25:13.5531111+00:00",
+      "exit": 1,
+      "error": "Lifecycle fixtures failed"
+    },
+    "cause": "Shared test provider lacked original FNID_DEFWINDOWPROC declaration. Add its explicit original multipass include; production sources unchanged. Retry uses fresh evidence roots."
+  },
+  "source_identity": {
+    "src/compat/include/wow_window_access_provider.h": "20c9dd4737d6e11de61ddeb2a9a3a80a46c10be03ef66da733c2538a66ec225a",
+    "src/compat/wow_default_native_bindings.c": "3ecf23fc540e55e5dd972657b8cc69c0ab962cd50f7b4d5e86404e946948f776",
+    "src/compat/wow_default_window_bindings.c": "1e50c754779354d31a7d23b7779ae496f3b4ac841b899d3dcfaafc1b8a7b181e",
+    "src/compat/wow_window_client_access_bindings.c": "4f50d3d9d702cbeeaf98663357236543f59f78cd8f3ec81393dc6e1b6e1e7678",
+    "src/non-mvdm/windows/core/ntuser/kernel/getset.c": "af17f7fe718640382961df40fadce4135359b80f2246c599c6b2ece3a62eb5b6",
+    "test/adapter-mvdm-host-out/wow/wow_default_window_binding_fixture.c": "087d354d8e469bf3d3fb9ba450a9d4644ebb74c4c8c8a70722a9532dba2bc192",
+    "test/adapter-mvdm-host-out/wow/wow_window_access_fixture_provider.h": "e0a9fdac682c90808dcca69f4cf79bfee05122dc824273bcde5ae9921cff1f70",
+    "test/adapter-mvdm-host-out/wow/wow_window_client_message_fixture.c": "a03d30c5eff8345da80b9b7a0bac7ce3ae3b7174c630fbfb3ab3ac5e020666e0",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "a04e46c5b832210fdddbd217af1969e51e611a6f0cf51bceaa2cf1bcbd5daa43"
+  },
+  "evidence_root": "build\\t483-s20-p71-window-identity",
+  "limitations": [
+    "27 inventory files remain, S20 not closed.",
+    "Current link/data/assembly coverage limits retained.",
+    "Class registration candidate still unapproved/unapplied.",
+    "Prior native Shell nested exception diagnostic unchanged."
+  ]
+}

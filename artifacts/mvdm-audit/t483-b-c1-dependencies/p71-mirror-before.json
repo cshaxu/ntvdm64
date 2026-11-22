@@ -1,0 +1,86 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "current_sha256": "b535cd41c49c41ccc03cf5e76c95999bbe0d0473b734e8691fe8819c2c14712d",
+      "raw": {
+        "blocks": 11,
+        "added": 18,
+        "deleted": 706
+      },
+      "filtered": {
+        "blocks": 10,
+        "added": 5,
+        "deleted": 673
+      },
+      "excluded": [
+        {
+          "original": [
+            269,
+            271
+          ],
+          "current": [
+            45,
+            47
+          ]
+        },
+        {
+          "original": [
+            321,
+            321
+          ],
+          "current": [
+            105,
+            106
+          ]
+        },
+        {
+          "original": [
+            750,
+            750
+          ],
+          "current": [
+            171,
+            172
+          ]
+        },
+        {
+          "original": [
+            760,
+            768
+          ],
+          "current": [
+            178,
+            180
+          ]
+        },
+        {
+          "original": [
+            777,
+            777
+          ],
+          "current": [
+            186,
+            187
+          ]
+        },
+        {
+          "original": [
+            782,
+            792
+          ],
+          "current": [
+            193,
+            195
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    }
+  ]
+}

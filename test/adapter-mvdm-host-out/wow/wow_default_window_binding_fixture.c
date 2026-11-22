@@ -1,8 +1,18 @@
 #include "wow_default_window_bindings.h"
+#include "wow_window_access_provider.h"
 #include "wow_user_client_view_layout.h"
 #include "wow_window_words_binding.h"
 #include "wow_user_borrow_scope.h"
 #include <stdio.h>
+
+/* Boundary double: the real layout provider is exercised by lifecycle cases. */
+static HWND WINAPI fixture_window_handle(struct tagWND *window)
+{ return window->head.h; }
+static const wow_window_access_provider fixture_access = {
+    NULL, NULL, NULL, NULL, fixture_window_handle, FNID_DEFWINDOWPROC
+};
+const wow_window_access_provider *WINAPI wow_window_access_current(void)
+{ return &fixture_access; }
 
 /* Links the production wrapper with boundary doubles. It proves lock and
  * exception scope only, not original text conversion or native dispatch. */
