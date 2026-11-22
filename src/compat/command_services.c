@@ -19,7 +19,8 @@ BOOL compat_command_install(const compat_command_services *services)
             !services->replace_command || !services->select_service || !services->finish ||
             !services->clear_doswow || !services->register_doswow ||
             !services->transform_environment || !services->acquire_vm ||
-            !services->release_location || !services->directory_instance) {
+            !services->release_location || !services->directory_instance ||
+            !services->status_to_dos_error) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }

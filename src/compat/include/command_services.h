@@ -37,6 +37,8 @@ typedef struct compat_command_services {
     /* Original DOSWOWDATA/CDS projection; synchronous checked copy. */
     int (*directory_instance)(struct guest_memory_lease_context *, uint32_t,
         uint16_t, uint16_t, uint32_t *, uint32_t *);
+    /* Original RTL conversion, including its thread-status side effect. */
+    ULONG (NTAPI *status_to_dos_error)(LONG);
 } compat_command_services;
 
 BOOL compat_command_install(const compat_command_services *services);

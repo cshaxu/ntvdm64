@@ -2,6 +2,7 @@
 #include "compat/include/mvdm_command_guest_directory.h"
 #include "compat/include/mvdm_command_native_child.h"
 #include "compat/include/command_services.h"
+#include <winternl.h>
 
 extern BOOL cmdXformEnvironment(char *, struct _STRING *);
 extern int dem_command_directory_instance(struct guest_memory_lease_context *,
@@ -22,7 +23,8 @@ BOOL ntvdm_command_initialize(void)
         mvdm_command_guest_state_register_doswow,
         cmdXformEnvironment,
         mvdm_guest_location_acquire_vm, mvdm_guest_location_release,
-        dem_command_directory_instance
+        dem_command_directory_instance,
+        RtlNtStatusToDosError
     };
     return compat_command_install(&services);
 }

@@ -93,15 +93,13 @@ BOOL cmdXformEnvironment(char *source, struct _STRING *output)
 {
     (void)source; (void)output;
     abort(); /* Capture must not convert the environment. */
-    return FALSE;
 }
 
-int dem_command_directory_instance(struct guest_memory_lease_context *memory,
+int dem_command_directory_instance(struct guest_memory_lease_context *lease_context,
     uint32_t epoch, uint16_t segment, uint16_t offset, uint32_t *linear, uint32_t *bytes)
 {
-    (void)memory; (void)epoch; (void)segment; (void)offset; (void)linear; (void)bytes;
+    (void)lease_context; (void)epoch; (void)segment; (void)offset; (void)linear; (void)bytes;
     abort(); /* Capture never resolves the DOS-owned directory instance. */
-    return 0;
 }
 
 int main(void)
@@ -126,6 +124,9 @@ int main(void)
         CHECK(!compat_command_install(&incomplete) && GetLastError() == ERROR_INVALID_PARAMETER);
         incomplete = *compat_command_current_services();
         incomplete.release_location = NULL;
+        CHECK(!compat_command_install(&incomplete) && GetLastError() == ERROR_INVALID_PARAMETER);
+        incomplete = *compat_command_current_services();
+        incomplete.status_to_dos_error = NULL;
         CHECK(!compat_command_install(&incomplete) && GetLastError() == ERROR_INVALID_PARAMETER);
     }
     mvdm_command_guest_state_clear_doswow();

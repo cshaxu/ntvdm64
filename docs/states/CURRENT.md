@@ -302,3 +302,11 @@ allocation and cleanup. Direct B-C1 relations53->52, compiled header rows
 control/capture and real Win16/COMMAND passed; package
 38a14d52-2234-4c07-803b-b4faa394f273.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p19-delivery.json).
+
+P20 completes BC1F022: COMMAND uses its existing synchronous service table
+to call original C1 status conversion; its TEB side effect remains. Direct
+B-C1 relations52->51, compiled headers458 unchanged, files24/94 complete.
+Mirror0points/0lines; cumulative+2points/+233lines. Cached full, dual11,
+COMMAND fault/capture and real Win16/COMMAND passed; package
+1f6221da-7af1-4960-be33-42f88ec7c908.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p20-delivery.json).

@@ -27,7 +27,8 @@ static DWORD ansi_copy(const char *source, ANSI_STRING *output)
         status = RtlUnicodeStringToAnsiString(output, &unicode, TRUE);
         RtlFreeUnicodeString(&unicode);
     }
-    return NT_SUCCESS(status) ? ERROR_SUCCESS : RtlNtStatusToDosError(status);
+    return NT_SUCCESS(status) ? ERROR_SUCCESS :
+        compat_command_current_services()->status_to_dos_error(status);
 }
 
 /* Extracted from OpenNT base/mvdm/dos/command/cmdexec.c, cmdCreateProcess.

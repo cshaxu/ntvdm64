@@ -1,0 +1,43 @@
+{
+  "packet": "M0 T483 S20 P20",
+  "baseline": "36de0377e",
+  "files_completed": [
+    "BC1F022"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 24,
+    "remaining": 70,
+    "B_C1_unique": 51,
+    "B_C1_raw": 63,
+    "B_C1_compiled_headers": 458,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct 52 to 51; compiled headers unchanged. B mvdm_command_launch no longer directly links RtlNtStatusToDosError.",
+  "implementation": "COMMAND service table already installed before use now carries actual original C1 RtlNtStatusToDosError; F binds its address, B invokes synchronously. Preserves the original NT status mapping and thread-status side effect, without substituting an assumed-equivalent host mapping or adding a queue.",
+  "mirror_delta": "0points/0lines; cumulative S20 +2points/+233lines",
+  "package": "1f6221da-7af1-4960-be33-42f88ec7c908",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32;22 hashes verified",
+  "tests": [
+    "command guest-launch conversion fault maps ERROR_ACCESS_DENIED through injected callback and clears outputs",
+    "command capture rejects missing status callback",
+    "both COMMAND CMake tests passed after publication",
+    "real Win16 and COMMAND EDIT/CMD/MEM return",
+    "11 architecture controls and product graphs",
+    "governance and links"
+  ],
+  "fixture_repairs": [
+    "MSVC environment initialized before running CMake fixture",
+    "capture fixture local variable no longer shadows global and unreachable abort returns removed",
+    "CMake capture fixture links actual mvdm_vm_capture.c and ntdll"
+  ],
+  "evidence": "build/t483-s20-command-status",
+  "limitations": [
+    "BC1F007, BC1F010, BC1F011, BC1F018 and BC1F021 remain open",
+    "No Full suite in P20; P16 Full passed separately"
+  ]
+}

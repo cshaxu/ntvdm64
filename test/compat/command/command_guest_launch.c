@@ -8,10 +8,31 @@
 
 static unsigned checks, transforms, prepares;
 static BOOL fail_transform, bad_transform;
+static BOOL fail_oem;
+static unsigned mapped_statuses;
 static DWORD prepare_error;
 static char expected_command[32], expected_directory[32];
 static HANDLE expected_streams[3];
 #define CHECK(x) do { ++checks; if (!(x)) { fprintf(stderr,"line %u: %s\n",__LINE__,#x); exit(1); } } while (0)
+
+/* Inject only the failing conversion; successful paths still call NTDLL. */
+NTSTATUS NTAPI RtlOemStringToUnicodeString(PUNICODE_STRING output,
+    PCOEM_STRING input, BOOLEAN allocate)
+{
+    typedef NTSTATUS (NTAPI *converter)(PUNICODE_STRING, PCOEM_STRING, BOOLEAN);
+    converter real;
+    if (fail_oem) return (NTSTATUS)0xc0000022L;
+    real = (converter)GetProcAddress(GetModuleHandleW(L"ntdll.dll"),
+        "RtlOemStringToUnicodeString");
+    CHECK(real != NULL);
+    return real(output, input, allocate);
+}
+
+static ULONG NTAPI map_status(LONG status)
+{
+    ++mapped_statuses;
+    return RtlNtStatusToDosError(status);
+}
 
 /* This unit checks the composition boundary, not a replacement environment
  * algorithm. Original cmdXformEnvironment is linked by the product. RTL OEM
@@ -35,6 +56,7 @@ const compat_command_services *compat_command_current_services(void)
 {
     static compat_command_services services;
     services.transform_environment = cmdXformEnvironment;
+    services.status_to_dos_error = map_status;
     return &services;
 }
 
@@ -64,6 +86,11 @@ int main(void)
     /* This composition fixture links the native converter, not the product's
      * original OpenNT status table. Exercise that binding explicitly. */
     CHECK(RtlNtStatusToDosError((NTSTATUS)0xc0000022L)==ERROR_ACCESS_DENIED);
+    fail_oem=TRUE;
+    CHECK(ntvdm_command_prepare_text(command,NULL,&prepared_command,
+        &prepared_environment)==ERROR_ACCESS_DENIED);
+    CHECK(mapped_statuses==1 && !prepared_command.Buffer && !prepared_environment.Buffer);
+    fail_oem=FALSE;
     CHECK(OemToCharA(command,expected_command));
     CHECK(OemToCharA(directory,expected_directory));
     before=transforms;
