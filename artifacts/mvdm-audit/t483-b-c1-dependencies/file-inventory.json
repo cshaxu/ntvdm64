@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 62,
+    "completed": 64,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 72,
+    "compiled_header_rows": 70,
     "private_search_root_rows": 0
   },
   "files": [
@@ -7115,7 +7115,7 @@
     {
       "id": "BC1F070",
       "file": "src/compat/wow_menu_client_bindings.c",
-      "status": "partially addressed in P59: private NT header removed; original USER header remains",
+      "status": "completed in verified P70 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -7218,7 +7218,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p59-delivery.json"
+      "progress_evidence": "p59-delivery.json",
+      "p70_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p70-object-types-closure.json"
     },
     {
       "id": "BC1F071",
@@ -8930,7 +8931,7 @@
     {
       "id": "BC1F088",
       "file": "src/compat/wow_user_task_lifecycle.c",
-      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains",
+      "status": "completed in verified P70 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -9153,7 +9154,8 @@
           "product": ""
         }
       ],
-      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json"
+      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json",
+      "p70_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p70-object-types-closure.json"
     },
     {
       "id": "BC1F089",
@@ -9854,6 +9856,6 @@
       "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     }
   ],
-  "current_scan": "build\\t483-s20-p67-message-owner",
-  "current_scan_status": "P67 shared message table owner, final product scan and targeted published runtime verified; coverage limits remain"
+  "current_scan": "build\\t483-s20-p70-object-types",
+  "current_scan_status": "P70 original object types supplied by existing cleanup provider; final build and published targeted tests passed; coverage limits remain"
 }

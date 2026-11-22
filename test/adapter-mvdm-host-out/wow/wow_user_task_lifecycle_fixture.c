@@ -1307,6 +1307,10 @@ int __cdecl main(int argc,char **argv)
     CHECK(wow_button_bind(wow_original_button_data, FreeLookasideEntry));
     CHECK(wow_standard_class_bind(&class_provider));
     CHECK(wow_cleanup_bind(&wow_original_cleanup_provider));
+    CHECK(wow_cleanup_provider_current() == &wow_original_cleanup_provider);
+    CHECK(wow_cleanup_provider_current()->window_type == TYPE_WINDOW);
+    CHECK(wow_cleanup_provider_current()->menu_type == TYPE_MENU);
+    CHECK(wow_cleanup_provider_current()->free_type == TYPE_FREE);
     CHECK(wow_task_state_bind(&task_callbacks));
     CHECK(wow_task_cleanup_bind(&task_cleanup_provider));
     session_initialize(&owner, 42040u);

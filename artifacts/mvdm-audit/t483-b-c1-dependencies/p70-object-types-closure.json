@@ -1,0 +1,126 @@
+{
+  "packet": "M0 T483 S20 P70",
+  "baseline": "05a75e985ea0905d7bdab737e418c54a6cf0eb01",
+  "status": "verified production batch; commit and push recorded by Git history",
+  "files_completed": [
+    "src/compat/wow_menu_client_bindings.c",
+    "src/compat/wow_user_task_lifecycle.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 64,
+    "remaining": 30,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 70,
+    "B_C1_sources": 25,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "per_file": [
+    {
+      "file": "src/compat/wow_menu_client_bindings.c",
+      "before_compiled_outer_headers": 1,
+      "after_compiled_outer_headers": 0
+    },
+    {
+      "file": "src/compat/wow_user_task_lifecycle.c",
+      "before_compiled_outer_headers": 1,
+      "after_compiled_outer_headers": 0
+    }
+  ],
+  "ownership": "Existing C1 cleanup provider supplies original TYPE_WINDOW, TYPE_MENU and TYPE_FREE values. B retains native menu capture/publication/retirement and task exit. No copied constants, original layout, new callback table, queue or state machine. The earlier grouping of the menu source as original-layout use was too broad: its C header was used for these three constants only.",
+  "lifetime": "The existing static provider is bound at generated WOW32 DLL attach before original registration/task entry. Rebinding to another address remains rejected. Its table is borrowed for image lifetime and contains no task-owned pointers. Test fixtures use the same original provider before lifecycle initialization. Allocation, rollback, ownership and release order are unchanged.",
+  "mirror": {
+    "file": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+    "before": {
+      "blocks": 20,
+      "added": 72,
+      "deleted": 20
+    },
+    "after": {
+      "blocks": 20,
+      "added": 72,
+      "deleted": 20
+    },
+    "delta_points": 0,
+    "delta_lines": 0,
+    "byte_proof": "Replacing only the extended provider initializer with the previous initializer recovers exact HEAD bytes, including all #error, #line and CRLF.",
+    "pending_id": "T483-R2746"
+  },
+  "package": "999aea3d-3ea1-4734-9e3c-a4774fa81415",
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "999aea3d-3ea1-4734-9e3c-a4774fa81415",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "build": {
+    "started": "2026-11-22T09:15:10.8345057+00:00",
+    "pid": 24324,
+    "exit": 0,
+    "finished": "2026-11-22T09:15:49.6827561+00:00"
+  },
+  "targeted_cases": [
+    {
+      "case": "task-lifecycle",
+      "exit": 0,
+      "started": "2026-11-22T09:16:53.1793763+00:00",
+      "finished": "2026-11-22T09:17:04.1368948+00:00"
+    },
+    {
+      "case": "menu-cleanup",
+      "exit": 0,
+      "started": "2026-11-22T09:17:04.1395630+00:00",
+      "finished": "2026-11-22T09:17:14.1348121+00:00"
+    },
+    {
+      "case": "menu-resource",
+      "exit": 0,
+      "started": "2026-11-22T09:17:14.1370927+00:00",
+      "finished": "2026-11-22T09:17:27.3028761+00:00"
+    },
+    {
+      "case": "process-retirement",
+      "exit": 0,
+      "started": "2026-11-22T09:17:27.3040475+00:00",
+      "finished": "2026-11-22T09:17:37.5752445+00:00"
+    },
+    {
+      "case": "window-borrow",
+      "exit": 0,
+      "started": "2026-11-22T09:17:37.5764547+00:00",
+      "finished": "2026-11-22T09:17:51.2644507+00:00"
+    },
+    {
+      "case": "init-notification",
+      "exit": 0,
+      "started": "2026-11-22T09:17:51.2686326+00:00",
+      "finished": "2026-11-22T09:18:05.4527062+00:00"
+    }
+  ],
+  "verification": {
+    "exit": 0,
+    "pid": 32732,
+    "started": "2026-11-22T09:16:53.0924265+00:00",
+    "finished": "2026-11-22T09:18:49.6997484+00:00"
+  },
+  "source_identity": {
+    "src/compat/include/wow_cleanup_bindings.h": "9476fc08d7c2fc8aefb3abf15fb45757f36da84c4abe8b9ed241610189f5d791",
+    "src/compat/wow_cleanup_bindings.c": "6a05874ebfd798f5f09517493152944dfab039242dfea55c5f75db10aed4ab59",
+    "src/compat/wow_menu_client_bindings.c": "2aabddae30090cd8138d94af82b1fb777452a2d29d3863edf1fa1bcf49b31293",
+    "src/compat/wow_user_task_lifecycle.c": "ac104f989ee1eba060ee43226e795c2d25db6855921f7aace1ee12456bc6e3ee",
+    "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c": "1f226267e5d6339556289c055e7053374e9bc5d7e345fd4517819bec286577fc",
+    "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c": "24bb3a6b296fe54cb0f9eac0b896e1dd2a7b385c65eb4de7adb25624ab1f5f3e"
+  },
+  "evidence_root": "build\\t483-s20-p70-object-types",
+  "limitations": [
+    "30 inventory files remain; this is not S20 closure.",
+    "Retain current link/data/assembly coverage limits from coverage.json.",
+    "Class registration candidate remains unapproved and unapplied.",
+    "Native Shell nested exception diagnostic remains separately recorded; no fix or pass claim."
+  ]
+}

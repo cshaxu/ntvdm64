@@ -44,9 +44,11 @@ typedef BOOL (WINAPI *wow_cleanup_operation)(HANDLE, DWORD,
     struct _NE_MODULE_SEG UNALIGNED *, DWORD, wow_cleanup_context *);
 typedef struct wow_cleanup_provider {
     wow_cleanup_operation cleanup;
-    BYTE window_type;
+    BYTE window_type, menu_type, free_type;
 } wow_cleanup_provider;
 BOOL WINAPI wow_cleanup_bind(const wow_cleanup_provider *);
+/* Image-lifetime provider, bound before USER registration and task entry. */
+const wow_cleanup_provider *WINAPI wow_cleanup_provider_current(void);
 /* Native composition of the original non-xxx cleanup operation. The USER
  * owner holds its domain serialization and native release operations must not
  * call out or pump messages. Tree links are derived only for this invocation;

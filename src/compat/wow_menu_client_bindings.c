@@ -1,7 +1,6 @@
 #include <windows.h>
 #include <winternl.h>
 #include "wow_menu_client_bindings.h"
-#include "compat/include/opennt_user_multipass.h"
 #include "wow_cleanup_bindings.h"
 #include "compat/include/wow_page_domain.h"
 
@@ -22,7 +21,7 @@ HMENU WINAPI wow_menu_client_full_handle(wow_user_object_table *table, HMENU men
     wow_menu_client_object *object;
     if (!table || !index || index == 1u || index == 0xffffu) return NULL;
     entry = &table->entries[index];
-    if (entry->bType != TYPE_MENU || !(object = entry->phead)) return NULL;
+    if (entry->bType != wow_cleanup_provider_current()->menu_type || !(object = entry->phead)) return NULL;
     if (value != (ULONG)(ULONG_PTR)object->native &&
             value != (ULONG)(LONG)(SHORT)index && value != (ULONG)index)
         return NULL;
@@ -80,7 +79,7 @@ static BOOL capture_tree(menu_capture *capture, DWORD task, HMENU menu, BOOL reg
         return TRUE;
     }
     entry = &table->entries[slot];
-    if (entry->bType == TYPE_FREE) {
+    if (entry->bType == wow_cleanup_provider_current()->free_type) {
         object = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*object));
         if (!object) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
         object->hTaskWow = registering ? task : 0;
@@ -170,7 +169,7 @@ static BOOL publish_tree(wow_task_order_process *process,
         entry->phead = row->object;
         entry->pOwner = row->registering ? process : NULL;
         entry->wUniq = HIWORD(row->view.menu);
-        entry->bType = TYPE_MENU;
+        entry->bType = wow_cleanup_provider_current()->menu_type;
         if (slot > process->objects->last_handle) process->objects->last_handle = slot;
     }
     result = TRUE;
@@ -218,7 +217,7 @@ static BOOL retire_views(wow_task_order_process *process, BOOL borrowed)
             wow_cleanup_handle *entry = &table->entries[i];
             wow_menu_client_object *object;
             DWORD error;
-            if (entry->bType != TYPE_MENU ||
+            if (entry->bType != wow_cleanup_provider_current()->menu_type ||
                     (entry->pOwner && entry->pOwner != process)) continue;
             object = entry->phead;
             if (!borrowed && IsMenu(object->native)) continue;
@@ -255,8 +254,8 @@ BOOL WINAPI wow_menu_client_forget_borrowed(wow_task_order_process *process)
     for (i = 0; i <= table->last_handle; ++i) {
         wow_cleanup_handle *entry = &table->entries[i];
         wow_menu_client_object *object = entry->phead;
-        if (entry->bType == TYPE_FREE) continue;
-        if (entry->bType != TYPE_MENU || entry->pOwner || !object) {
+        if (entry->bType == wow_cleanup_provider_current()->free_type) continue;
+        if (entry->bType != wow_cleanup_provider_current()->menu_type || entry->pOwner || !object) {
             SetLastError(ERROR_BUSY); return FALSE;
         }
     }
@@ -290,7 +289,7 @@ BOOL WINAPI wow_menu_client_refresh_all(wow_task_order_process *process)
         HWND window = table->windows[i];
         WINDOWINFO info = {sizeof(info)};
         HMENU menu;
-        if (table->entries[i].bType != TYPE_WINDOW || !window) continue;
+        if (table->entries[i].bType != wow_cleanup_provider_current()->window_type || !window) continue;
         if (!GetWindowInfo(window, &info)) return FALSE;
         if ((info.dwStyle & (WS_CHILD | WS_POPUP)) == WS_CHILD) continue;
         menu = GetMenu(window);
@@ -336,7 +335,7 @@ BOOL WINAPI wow_menu_client_refresh_all(wow_task_order_process *process)
     for (i = 0; i <= table->last_handle; ++i) {
         wow_cleanup_handle *entry = &table->entries[i];
         wow_menu_client_object *object;
-        if (entry->bType != TYPE_MENU) continue;
+        if (entry->bType != wow_cleanup_provider_current()->menu_type) continue;
         object = entry->phead;
         if (IsMenu(object->native) && !publish_tree(process, 0, object->native, FALSE,
                 object->local_state) && (entry->pOwner || object->local_state)) return FALSE;
@@ -351,7 +350,7 @@ BOOL WINAPI wow_menu_client_destroy_object(wow_task_order_process *process,
     wow_cleanup_handle *entry)
 {
     wow_menu_client_object *object;
-    if (!process || !entry || entry->bType != TYPE_MENU ||
+    if (!process || !entry || entry->bType != wow_cleanup_provider_current()->menu_type ||
             entry->pOwner != process || !(object = entry->phead)) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }

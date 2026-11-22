@@ -59,7 +59,7 @@ typedef wow_cleanup_process_object *wow_cleanup_pprocobjhead;
 #define try __try
 #define except __except
 BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
-const wow_cleanup_provider wow_original_cleanup_provider = { _WOWCleanup, TYPE_WINDOW };
+const wow_cleanup_provider wow_original_cleanup_provider = { _WOWCleanup, TYPE_WINDOW, TYPE_MENU, TYPE_FREE };
 #line 14
 #pragma hdrstop
 

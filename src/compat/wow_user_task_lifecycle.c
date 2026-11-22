@@ -9,7 +9,6 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_window_creation_binding.h"
 #include "wow_dialog_state_bindings.h"
-#include "compat/include/opennt_user_multipass.h"
 #include "wow_user_object_bindings.h"
 #include "wow_native_gui_thread.h"
 #include "wow_menu_client_bindings.h"
@@ -1589,7 +1588,7 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
      * cross-task native adoption, so a new owner cannot appear in between. */
     for (index = 0; index <= owner->objects->last_handle; ++index) {
         wow_cleanup_handle *entry = &owner->objects->entries[index];
-        if (entry->bType == TYPE_WINDOW && entry->pOwner == &task->thread) {
+        if (entry->bType == wow_cleanup_provider_current()->window_type && entry->pOwner == &task->thread) {
             wow_user_retirement_trace("live-window", task_id, ERROR_BUSY);
             (void)wow_user_runtime_leave(binding);
             SetLastError(ERROR_BUSY); return FALSE;
@@ -1685,7 +1684,7 @@ static BOOL destroy_terminal_windows(wow_user_task_lifecycle *owner,
         for (index = 0; index <= owner->objects->last_handle; ++index) {
             wow_cleanup_handle *entry = &owner->objects->entries[index];
             wow_cleanup_window *view;
-            if (entry->bType != TYPE_WINDOW || entry->pOwner != &task->thread)
+            if (entry->bType != wow_cleanup_provider_current()->window_type || entry->pOwner != &task->thread)
                 continue;
             view = entry->phead; /* Existing table owns this storage. */
             if (!view || !wow_window_words_prepare_exit(
@@ -1704,7 +1703,7 @@ static BOOL destroy_terminal_windows(wow_user_task_lifecycle *owner,
         if (!wow_user_runtime_enter(binding)) return FALSE;
         __try {
             wow_cleanup_handle *entry = &owner->objects->entries[index];
-            if (entry->bType == TYPE_WINDOW && entry->pOwner == &task->thread) {
+            if (entry->bType == wow_cleanup_provider_current()->window_type && entry->pOwner == &task->thread) {
                 window = owner->objects->windows[index];
                 borrow = wow_window_words_acquire(window);
             }

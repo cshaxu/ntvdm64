@@ -4,6 +4,11 @@
 
 static const wow_cleanup_provider *cleanup_provider;
 
+const wow_cleanup_provider *WINAPI wow_cleanup_provider_current(void)
+{
+    return cleanup_provider;
+}
+
 BOOL WINAPI wow_cleanup_bind(const wow_cleanup_provider *provider)
 {
     if (!provider || !provider->cleanup ||
