@@ -7,7 +7,7 @@
     "completed": 39,
     "direct_unique": 14,
     "direct_raw": 21,
-    "compiled_header_rows": 243,
+    "compiled_header_rows": 237,
     "private_search_root_rows": 0
   },
   "files": [
@@ -6617,7 +6617,7 @@
     {
       "id": "BC1F064",
       "file": "src/compat/wow_edit_thread_bindings.c",
-      "status": "not yet audited",
+      "status": "partially addressed in P54: private NT header removed; original USER layout headers remain",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -6719,7 +6719,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p54-delivery.json"
     },
     {
       "id": "BC1F065",
