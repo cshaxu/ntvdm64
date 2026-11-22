@@ -420,3 +420,11 @@ delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full build,
 dual11, control extents and real Win16/COMMAND targeted tests passed. Full
 remains required at S20 closure. Package 2ef4b65b-c605-4daa-86ba-627c22f70a48.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p33-delivery.json).
+
+P34 completes BC1F040: the extracted original FNID body is WOW32-owned;
+C1 uses a B synchronous entry and WOW32 supplies the provider. B-C1 direct
+unique remains 43, compiled headers 367->357; files 34/94 complete. Mirror
+delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full build,
+dual11, FNID/control and real Win16/COMMAND targeted tests passed. Full
+remains required at S20 closure. Package 65dc4acd-f464-4b05-b561-b7370c7fea70.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p34-delivery.json).

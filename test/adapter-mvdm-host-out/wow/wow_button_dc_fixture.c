@@ -89,7 +89,7 @@ BOOL WINAPI IsVisible(PWND w)
     /* Match original IsVisible(NULL), not a substitute rejection. */
     return !w || !!(w->style & WS_VISIBLE);
 }
-BOOL WINAPI wow_edit_set_window_fnid(HWND w,WORD f)
+BOOL WINAPI wow_control_set_fnid(HWND w,WORD f)
 {
     CHECK(w == expected); control.wnd.fnid |= f; return TRUE;
 }

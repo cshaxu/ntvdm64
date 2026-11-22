@@ -428,12 +428,15 @@ $dllEntryBridgeLines = @(
     'extern void __stdcall wow_registry_binding_shutdown(void);',
     '#include "compat/include/wow_control_brush_bindings.h"',
     'HBRUSH WINAPI xxxGetControlBrush(struct tagWND *, HDC, UINT);',
+    '#include "compat/include/wow_control_fnid_provider.h"',
+    'BOOL WINAPI wow_edit_set_window_fnid(HWND, WORD);',
     '#include "compat/include/wow_control_extent_bindings.h"',
     '#include "compat/include/wow_control_draw_state.h"',
     'BOOL WINAPI ClientDrawState(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, int, int, int, int, UINT);',
     'int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)',
     '{',
     '    int result;',
+    '    if (reason == 1 && !wow_control_fnid_bind(wow_edit_set_window_fnid)) return 0;',
     '    if (reason == 1 && !wow_control_extent_bind(wow_control_registered_extent)) return 0;',
     '    if (reason == 1 && !wow_control_draw_bind(ClientDrawState)) return 0;',
     '    if (reason == 1 && !wow_control_brush_bind(xxxGetControlBrush)) return 0;',
@@ -667,7 +670,7 @@ $objects.Add($controlStateObject)
 $ninja.Add('build ' + $controlStateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_state.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $objects.Add($controlFnidObject)
-$ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_fnid.c')))
+$ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_control_fnid.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $dialogPointerObject = 'obj/wow32-dll/wow_dialog_pointer.obj'
 $objects.Add($dialogPointerObject)

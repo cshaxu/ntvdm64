@@ -27,7 +27,7 @@ VOID WINAPI SetWindowState(PWND w, UINT f) { REJECT(); }
 VOID WINAPI ClearWindowState(PWND w, UINT f) { REJECT(); }
 HWND WINAPI InternalCreateDialog(HANDLE h, LPDLGTEMPLATE t, DWORD c, HWND w, DLGPROC p, LONG l, UINT f) { REJECT(); }
 PWND WINAPI GetTopLevelWindow(PWND w) { REJECT(); }
-BOOL WINAPI wow_edit_set_window_fnid(HWND w, WORD f) { REJECT(); }
+BOOL WINAPI wow_control_set_fnid(HWND w, WORD f) { REJECT(); }
 BOOL WINAPI wow_dialog_messageW(HWND w, LPMSG m) { REJECT(); }
 BOOL WINAPI wow_user_peek_messageW(LPMSG m, HWND w, UINT a, UINT b, UINT f) { REJECT(); }
 BOOL WINAPI wow_user_wait_message(void) { REJECT(); }

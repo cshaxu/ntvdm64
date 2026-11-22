@@ -1,6 +1,7 @@
 #ifndef WOW_EDIT_CALL_BINDINGS_H
 #define WOW_EDIT_CALL_BINDINGS_H
 #include <windows.h>
+#include "wow_control_fnid_provider.h"
 #include "wow_control_brush_bindings.h"
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
 #include "compat/include/opennt_user_multipass.h"
@@ -123,7 +124,7 @@ C_ASSERT(SHOW_OPENWINDOW == SW_SHOWNORMAL);
 #define NtUserKillSystemTimer wow_edit_native_NtUserKillSystemTimer
 #define NtUserSetTimer wow_control_set_timer
 #define NtUserKillTimer KillTimer
-#define NtUserSetWindowFNID wow_edit_set_window_fnid
+#define NtUserSetWindowFNID wow_control_set_fnid
 #define NtUserSetWindowLong wow_window_client_set_window_long
 #define NtUserAlterWindowStyle wow_edit_alter_window_style
 /* INITCONTROLLOOKASIDE's failure path is in usercli.h, not the .c callers. */

@@ -8,6 +8,24 @@
 #include "wow_control_extent_bindings.h"
 #include "wow_user_borrow_scope.h"
 
+static wow_control_fnid_provider fnid_provider;
+
+BOOL WINAPI wow_control_fnid_bind(wow_control_fnid_provider provider)
+{
+    wow_control_fnid_provider previous;
+    if (!provider) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    previous = (wow_control_fnid_provider)InterlockedCompareExchangePointer(
+        (PVOID volatile *)&fnid_provider, (PVOID)provider, NULL);
+    if (previous && previous != provider) { SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE; }
+    return TRUE;
+}
+
+BOOL WINAPI wow_control_set_fnid(HWND window, WORD fnid)
+{
+    if (!fnid_provider) RaiseFailFastException(NULL, NULL, 0);
+    return fnid_provider(window, fnid);
+}
+
 BOOL WINAPI wow_edit_NtUserDefSetText(HWND window, const LARGE_STRING *text)
 {
     DWORD error = GetLastError();

@@ -1,0 +1,37 @@
+{
+  "packet": "M0 T483 S20 P34",
+  "baseline": "bc1c5ad07",
+  "files_completed": [
+    "BC1F040"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 34,
+    "remaining": 60,
+    "B_C1_unique": 43,
+    "B_C1_raw": 51,
+    "B_C1_compiled_headers": 357,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct remains 43; compiled headers 367 to 357. No B C1 compiled header records for relocated FNID body.",
+  "implementation": "Moved unchanged extracted wow_edit_set_window_fnid to WOW32, preserving original OpenNT windows/core/ntuser/kernel/ntstubs.c:6170-6188 and signature. C1 reaches a B synchronous entry and WOW32 provides the original implementation at initialization; no direct C1 to F link.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "65dc4acd-f464-4b05-b561-b7370c7fea70",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "original FNID invalid/first/repeated/cleanup; B provider entry",
+    "WOW control boundaries including standalone keyboard and button fixtures",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-control-fnid",
+  "limitations": [
+    "First control fixture build exposed two old stub names; control-r2 passed after updating them",
+    "Full suite required at S20 closure",
+    "BC1F031 and shared atlas layout remain open"
+  ]
+}

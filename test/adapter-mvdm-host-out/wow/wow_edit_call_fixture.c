@@ -360,10 +360,20 @@ static void check_color_calls(void)
     color_exception = FALSE;
 }
 
+static BOOL WINAPI fixture_fnid(HWND window, WORD fnid)
+{
+    if (window != (HWND)(ULONG_PTR)0x1234 || fnid != 0x123) return FALSE;
+    SetLastError(457);
+    return TRUE;
+}
+
 int main(void)
 {
     unsigned old_begins, old_leaves, old_calls;
     BOOL caught = FALSE;
+    CHECK(wow_control_fnid_bind(fixture_fnid));
+    CHECK(wow_control_set_fnid((HWND)(ULONG_PTR)0x1234, 0x123));
+    CHECK(GetLastError() == 457);
     check_reset_calls();
     SetLastError(456);
     CHECK(wow_control_extent_bind(wow_control_registered_extent));

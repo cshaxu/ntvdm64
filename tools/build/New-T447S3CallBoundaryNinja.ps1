@@ -32,7 +32,7 @@ function NinjaValue([string]$value) { return $value.Replace('\', '/').Replace('$
 $messageFaults = '/FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/wow_default_messages_faults.h')) + '"'
 $units = @(
     @('control_fnid_fixture', 'test/wow32-dll/source/wow_control_fnid_fixture.c', ''),
-    @('control_fnid_owner', 'src/compat/wow_control_fnid.c', ''),
+    @('control_fnid_owner', 'src/wow32-dll/source/wow_control_fnid.c', ''),
     @('default_messages_fixture', 'test/adapter-mvdm-host-out/wow/wow_default_messages_fixture.c', ''),
     @('default_messages_tables', 'src/non-mvdm/windows/core/ntuser/kernel/server.c', $messageFaults),
     @('default_messages_state', 'src/compat/wow_default_message_bindings.c', $messageFaults),

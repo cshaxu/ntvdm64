@@ -196,7 +196,7 @@ Frontend teardown cancels synchronous reads and drains outstanding pipe I/O.
 
 ## OpenNT-derived control FNID operation
 
-T483 S6 P19 owner-approved extraction: [wow_control_fnid.c](../compat/wow_control_fnid.c) retains
+T483 S6 P19 owner-approved extraction: [wow_control_fnid.c](../wow32-dll/source/wow_control_fnid.c) retains
 NtUserSetWindowFNID from pinned OpenNT revision
 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c,
 windows/core/ntuser/kernel/ntstubs.c:6170-6188. Original file SHA256:
