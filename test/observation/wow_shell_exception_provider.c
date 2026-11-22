@@ -1,12 +1,13 @@
 /* Diagnostic-only TU: real modern provider, real original WSHELL callback,
  * original RET_WINEXEC, and actual adapter unwind. Never a release input. */
 #include "precomp.h"
+typedef DWORD (WINAPI *diagnostic_guest_callback)(LPSTR, WORD);
 #define wow_shell_execute diagnostic_shell_execute
 #include "../../src/compat/wow_shell_callback.c"
 #undef wow_shell_execute
 #include <stdio.h>
 
-static __declspec(thread) LPFNWOWSHELLEXECCB guest_callback;
+static __declspec(thread) diagnostic_guest_callback guest_callback;
 static __declspec(thread) BOOL exception_injected;
 
 static void record_stack(const char *stage)
@@ -61,9 +62,9 @@ static DWORD WINAPI fault_after_original(LPSTR command, WORD show)
 }
 
 HINSTANCE WINAPI wow_shell_execute(HWND window,LPCSTR operation,LPCSTR file,
-    LPSTR parameters,LPCSTR directory,INT show,LPFNWOWSHELLEXECCB callback)
+    LPSTR parameters,LPCSTR directory,INT show,diagnostic_guest_callback callback)
 {
-    LPFNWOWSHELLEXECCB saved=guest_callback;
+    diagnostic_guest_callback saved=guest_callback;
     HINSTANCE result;
     guest_callback=callback;
     __try {
