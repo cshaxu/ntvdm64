@@ -114,9 +114,9 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P82 final compiled-product review leaves 83 of 94
+is authoritative for individual files and evidence. P83 final compiled-product review leaves 84 of 94
 files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-14 compiled-header rows across 7 sources and zero private search roots. B-to-C2 has zero
+13 compiled-header rows across 6 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
@@ -271,3 +271,10 @@ and test assembly; no mirror or guest change. Remaining11 files; compiled
 header rows15->14 across7 sources. Cached full build, dual11 publication,
 lifecycle/class and published USER16/COMMAND tests passed.
 [P82 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p82-standard-class-closure.json).
+
+P83 completes USER object type binding through the already bound cleanup
+provider. Original full-handle body, object graph and lifecycle are unchanged.
+Remaining10 files; compiled header rows14->13 across6 sources. No mirror delta.
+Cached full build, dual11 publication, four object lifecycle cases and published
+USER16/COMMAND tests passed.
+[P83 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p83-user-object-closure.json).

@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <winternl.h>
 #include "wow_user_object_bindings.h"
-#include "compat/include/opennt_user_multipass.h"
+#include "wow_cleanup_bindings.h"
 #include <dde.h>
 #include "wow_window_dispatch_bindings.h"
 #include "wow_class_lookup_bindings.h"
@@ -19,7 +19,9 @@ static __declspec(thread) PHE original_shared_entry;
 #define gpsi (&original_handle_limits)
 #define WowSharedHandleEntry(index) (original_shared_entry)
 #define HMIndexFromHandle(handle) ((DWORD)(WORD)(handle))
+#define TYPE_WINDOW (wow_cleanup_provider_current()->window_type)
 #include "compat/include/wow_full_user_handle.h"
+#undef TYPE_WINDOW
 #undef HMIndexFromHandle
 #undef WowSharedHandleEntry
 #undef gpsi
@@ -78,7 +80,7 @@ static BOOL refresh_graph(HWND callback_window, const HWND *payload, ULONG paylo
      * inventing an incoming parent edge just to make the window reachable. */
     for (i = 1; i <= objects->last_handle; ++i) {
         HWND window = objects->windows[i];
-        if (objects->entries[i].bType != TYPE_WINDOW || !window ||
+        if (objects->entries[i].bType != wow_cleanup_provider_current()->window_type || !window ||
                 window == desktop || window == callback_window) continue;
         roots[count++] = window;
     }
@@ -383,12 +385,12 @@ BOOL WINAPI wow_user_window_publish(wow_user_object_table *table, HWND window,
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     entry=&table->entries[index];
-    if (entry->bType!=TYPE_FREE) {
+    if (entry->bType!=wow_cleanup_provider_current()->free_type) {
         SetLastError(ERROR_ALREADY_EXISTS); return FALSE;
     }
     entry->phead=object; entry->pOwner=thread;
     entry->wUniq=HIWORD(window); entry->bFlags=0;
-    entry->bType=TYPE_WINDOW;
+    entry->bType=wow_cleanup_provider_current()->window_type;
     if (!mvdm_softpc_wow_page_domain_publish_handle(index, entry->wUniq,
             entry->bType, entry->bFlags, (unsigned long)(ULONG_PTR)window,
             object->pcls ? object->pcls->guest_server : 0u, object->adwWOW)) {
@@ -407,7 +409,7 @@ BOOL WINAPI wow_user_window_cancel_native_adoption(wow_user_object_table *table,
     wow_cleanup_handle *entry;
     if (!table || !object) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     entry = &table->entries[LOWORD(window)];
-    if (entry->bType != TYPE_WINDOW || entry->wUniq != HIWORD(window) ||
+    if (entry->bType != wow_cleanup_provider_current()->window_type || entry->wUniq != HIWORD(window) ||
             entry->phead != object || table->windows[LOWORD(window)] != window) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
@@ -426,7 +428,7 @@ BOOL WINAPI wow_user_window_retire(wow_user_object_table *table, HWND window,
     wow_cleanup_handle *entry;
     if (!table || !object) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     entry=&table->entries[LOWORD(window)];
-    if (entry->bType!=TYPE_WINDOW || entry->wUniq!=HIWORD(window) || entry->phead!=object) {
+    if (entry->bType!=wow_cleanup_provider_current()->window_type || entry->wUniq!=HIWORD(window) || entry->phead!=object) {
         SetLastError(ERROR_NOT_FOUND); return FALSE;
     }
     if (!mvdm_softpc_wow_page_domain_retire_handle(LOWORD(window), retained_backing)) {
@@ -447,7 +449,7 @@ HWND WINAPI wow_user_window_full_handle(wow_user_object_table *table,
         return NULL;
     }
     entry = &table->entries[index];
-    if (entry->bType != TYPE_WINDOW || !entry->phead ||
+    if (entry->bType != wow_cleanup_provider_current()->window_type || !entry->phead ||
             LOWORD(table->windows[index]) != index) {
         SetLastError(ERROR_NOT_FOUND);
         return NULL;
@@ -467,7 +469,7 @@ HWND WINAPI wow_user_window_guest_handle(wow_user_object_table *table,
     index = LOWORD(window);
     if (!index || index == 0xffffu) return NULL;
     entry = &table->entries[index];
-    if (entry->bType != TYPE_WINDOW || !entry->phead ||
+    if (entry->bType != wow_cleanup_provider_current()->window_type || !entry->phead ||
             table->windows[index] != window) return NULL;
     return (HWND)(ULONG_PTR)index;
 }

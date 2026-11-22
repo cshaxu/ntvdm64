@@ -1,0 +1,85 @@
+{
+  "packet": "M0 T483 S20 P83",
+  "baseline": "b61ebbfe0c392b97a6c17b1c2943dde18075c8e9",
+  "status": "verified batch; commit/push established by Git history",
+  "completed_file": "src/compat/wow_user_object_bindings.c",
+  "counts": {
+    "files": 94,
+    "completed": 84,
+    "remaining": 10,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 13,
+    "B_C1_sources": 6,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "Reuse existing cleanup provider window_type/free_type for the object table and original GetFullUserHandle inclusion. C cleanup already supplies exact original TYPE_WINDOW/TYPE_FREE; immutable provider is bound before original DLL initialization. No new provider, callback, data table, fallback or lifecycle.",
+  "source_proof": {
+    "only_header_and_constant_binding_changed": true,
+    "original_GetFullUserHandle_body_unchanged": true,
+    "actual_provider": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+    "binding_precedes_original_DLL_attach": true
+  },
+  "mirror": {
+    "delta_points": 0,
+    "delta_lines": 0,
+    "proof": "Only one B implementation changed; no mirror/guest/test modification."
+  },
+  "build": {
+    "pid": 23176,
+    "started": "2026-11-22T12:01:25.3632302+00:00",
+    "finished": "2026-11-22T12:02:48.8657629+00:00",
+    "exit": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "7ae41450-6020-4a38-bb9e-413a6d7ae8d9",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "verification": {
+    "finished": "2026-11-22T12:05:23.9124677+00:00",
+    "pid": 31820,
+    "exit": 0,
+    "started": "2026-11-22T12:03:42.2753881+00:00"
+  },
+  "targeted_tests": [
+    {
+      "finished": "2026-11-22T12:03:55.5042485+00:00",
+      "exit": 0,
+      "case": "window-borrow",
+      "started": "2026-11-22T12:03:42.3535575+00:00"
+    },
+    {
+      "finished": "2026-11-22T12:04:13.3202951+00:00",
+      "exit": 0,
+      "case": "graph-snapshot",
+      "started": "2026-11-22T12:03:55.5073310+00:00"
+    },
+    {
+      "finished": "2026-11-22T12:04:27.4969716+00:00",
+      "exit": 0,
+      "case": "native-creation",
+      "started": "2026-11-22T12:04:13.3230088+00:00"
+    },
+    {
+      "finished": "2026-11-22T12:04:39.3691875+00:00",
+      "exit": 0,
+      "case": "process-retirement",
+      "started": "2026-11-22T12:04:27.4980509+00:00"
+    }
+  ],
+  "source_identity": {
+    "src/compat/wow_user_object_bindings.c": "c91ec1d71cdefdff1f0c2607551f8d89cee46629fcaa7c707d3fc524a5816d4b"
+  },
+  "evidence_root": "build\\t483-s20-p83-user-object",
+  "limitations": [
+    "10 files remain; control-state placement approval remains pending.",
+    "Data-symbol/assembly/linkmap closure sweep remains.",
+    "No S20 closure or Full-pass claim; existing Shell diagnostic boundary remains."
+  ]
+}
