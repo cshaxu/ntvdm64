@@ -5,9 +5,9 @@
   "counts": {
     "files": 94,
     "completed": 37,
-    "direct_unique": 40,
-    "direct_raw": 48,
-    "compiled_header_rows": 312,
+    "direct_unique": 33,
+    "direct_raw": 41,
+    "compiled_header_rows": 306,
     "private_search_root_rows": 0
   },
   "files": [
@@ -4695,7 +4695,7 @@
     {
       "id": "BC1F050",
       "file": "src/compat/wow_dialog_finalization_binding.c",
-      "status": "not yet audited",
+      "status": "partially addressed in verified P43 delivery; original dialog layout headers remain",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -4887,7 +4887,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p43-delivery.json"
     },
     {
       "id": "BC1F051",

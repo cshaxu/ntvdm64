@@ -1,5 +1,7 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_dialog_state_bindings.h"
+#include "wow_dialog_finalization_provider.h"
 #include "wow_user_client_view_layout.h"
 #define WOW_ORIGINAL_DIALOG_LAYOUT
 #include "compat/include/opennt_user_multipass.h"
@@ -15,9 +17,27 @@
  * DefDlgProcWorker retains the resource policy; never duplicate its EDIT DS,
  * font, lookaside or SetDialogPointer cleanup in this host boundary.
  * Selected only with the complete original dialog group. */
-LONG WINAPI DefDlgProcWorker(PWND, UINT, WPARAM, LPARAM, DWORD);
-/* Private-precomp name binding for retained dlgend.c; not native EndDialog. */
-BOOL WINAPI wow_original_EndDialog(HWND, int);
+static const wow_dialog_finalization_provider *dialog_provider;
+BOOL WINAPI wow_dialog_finalization_bind(const wow_dialog_finalization_provider *provider)
+{
+    const wow_dialog_finalization_provider *previous;
+    if (!provider || !provider->worker || !provider->end || !provider->map ||
+            !provider->list || !provider->combo_list || !provider->select ||
+            !provider->combo_select) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&dialog_provider,
+        (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
+static const wow_dialog_finalization_provider *original_dialog(void)
+{
+    if (!dialog_provider) RaiseFailFastException(NULL, NULL, 0);
+    return dialog_provider;
+}
 
 enum dialog_operation { dialog_message, dialog_finalize, dialog_end,
     dialog_map, dialog_dir_list, dialog_dir_combo_list,
@@ -32,14 +52,14 @@ static LRESULT original_api(HWND w, enum dialog_operation operation,
     const dialog_api_args *args)
 {
     switch (operation) {
-    case dialog_map: return wow_original_MapDialogRect(w, args->buffer);
-    case dialog_dir_list: return wow_original_DlgDirListA(w, args->buffer,
+    case dialog_map: return original_dialog()->map(w, args->buffer);
+    case dialog_dir_list: return original_dialog()->list(w, args->buffer,
         args->first, args->second, args->attributes);
-    case dialog_dir_combo_list: return wow_original_DlgDirListComboBoxA(w,
+    case dialog_dir_combo_list: return original_dialog()->combo_list(w,
         args->buffer, args->first, args->second, args->attributes);
-    case dialog_dir_select: return wow_original_DlgDirSelectExA(w,
+    case dialog_dir_select: return original_dialog()->select(w,
         args->buffer, args->first, args->second);
-    case dialog_dir_combo_select: return wow_original_DlgDirSelectComboBoxExA(w,
+    case dialog_dir_combo_select: return original_dialog()->combo_select(w,
         args->buffer, args->first, args->second);
     default: SetLastError(ERROR_INVALID_PARAMETER); return 0;
     }
@@ -116,7 +136,7 @@ static LRESULT dialog_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
         }
         if (operation == dialog_end) {
             SetLastError(error);
-            result = wow_original_EndDialog(window, (int)wp);
+            result = original_dialog()->end(window, (int)wp);
             __leave;
         }
         if (!finalize) {
@@ -125,7 +145,7 @@ static LRESULT dialog_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
              * cleanup. Native/guest calls inside the worker retain their
              * existing scoped boundaries; this is not a native-call wrapper. */
             SetLastError(error);
-            result = DefDlgProcWorker(state, message, wp, lp, ansi);
+            result = original_dialog()->worker(state, message, wp, lp, ansi);
             __leave;
         }
         if (GETFNID(state) != FNID_DIALOG ||
@@ -149,7 +169,7 @@ static LRESULT dialog_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
             /* Original WM_FINALDESTROY jumps past lpfnDlg directly to
              * DoCleanup. Do not create a PDLG just to destroy it or send
              * this private message through an application subclass. */
-            (void)DefDlgProcWorker(state, 0x0070, 0, 0, FALSE);
+            (void)original_dialog()->worker(state, 0x0070, 0, 0, FALSE);
             result = (state->fnid & FNID_CLEANEDUP_BIT) &&
                 !TestWF(state, WFDIALOGWINDOW) && !((PDIALOG)state)->pdlg;
         }

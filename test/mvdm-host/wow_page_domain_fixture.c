@@ -156,6 +156,26 @@ static const wow_dialog_creation_provider fixture_dialog_creation_provider = {
 static const wow_default_message_provider fixture_default_message_provider = {
     InitMessageTables, WowGetDefWindowProcBits
 };
+#include "compat/include/wow_dialog_finalization_provider.h"
+LONG WINAPI fixture_DefDlgProcWorker(struct tagWND *, UINT, WPARAM, LPARAM, DWORD);
+BOOL WINAPI fixture_EndDialog(HWND, int);
+BOOL WINAPI fixture_MapDialogRect(HWND, LPRECT);
+int WINAPI fixture_DlgDirListA(HWND, LPSTR, int, int, UINT);
+int WINAPI fixture_DlgDirListComboBoxA(HWND, LPSTR, int, int, UINT);
+BOOL WINAPI fixture_DlgDirSelectExA(HWND, LPSTR, int, int);
+BOOL WINAPI fixture_DlgDirSelectComboBoxExA(HWND, LPSTR, int, int);
+#pragma comment(linker, "/alternatename:_fixture_DefDlgProcWorker@20=_DefDlgProcWorker@20")
+#pragma comment(linker, "/alternatename:_fixture_EndDialog@8=_wow_original_EndDialog@8")
+#pragma comment(linker, "/alternatename:_fixture_MapDialogRect@8=_wow_original_MapDialogRect@8")
+#pragma comment(linker, "/alternatename:_fixture_DlgDirListA@20=_wow_original_DlgDirListA@20")
+#pragma comment(linker, "/alternatename:_fixture_DlgDirListComboBoxA@20=_wow_original_DlgDirListComboBoxA@20")
+#pragma comment(linker, "/alternatename:_fixture_DlgDirSelectExA@16=_wow_original_DlgDirSelectExA@16")
+#pragma comment(linker, "/alternatename:_fixture_DlgDirSelectComboBoxExA@16=_wow_original_DlgDirSelectComboBoxExA@16")
+static const wow_dialog_finalization_provider fixture_dialog_finalization_provider = {
+    fixture_DefDlgProcWorker, fixture_EndDialog, fixture_MapDialogRect,
+    fixture_DlgDirListA, fixture_DlgDirListComboBoxA,
+    fixture_DlgDirSelectExA, fixture_DlgDirSelectComboBoxExA
+};
 #include "compat/include/wow_control_state_provider.h"
 #include "compat/include/wow_control_fnid_provider.h"
 #include "compat/include/wow_control_extent_bindings.h"
@@ -6354,7 +6374,8 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 int main(int argc, char **argv)
 {
 #ifdef WOW_WINDOW_BORROW_FIXTURE
-    if (!wow_dialog_creation_bind(&fixture_dialog_creation_provider) ||
+    if (!wow_dialog_finalization_bind(&fixture_dialog_finalization_provider) ||
+            !wow_dialog_creation_bind(&fixture_dialog_creation_provider) ||
             !wow_default_messages_bind(&fixture_default_message_provider) ||
             !wow_control_state_bind(&fixture_control_state_provider) ||
             !wow_control_fnid_bind(wow_edit_set_window_fnid) ||

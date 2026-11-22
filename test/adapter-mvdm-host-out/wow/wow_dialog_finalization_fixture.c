@@ -1,4 +1,5 @@
 #include "wow_dialog_state_bindings.h"
+#include "wow_dialog_finalization_provider.h"
 #include "wow_user_client_view_layout.h"
 #define WOW_ORIGINAL_DIALOG_LAYOUT
 #include "compat/include/opennt_user_multipass.h"
@@ -191,6 +192,8 @@ int main(void)
 {
     LONG result;
     BOOL caught = FALSE;
+    static const wow_dialog_finalization_provider provider = { DefDlgProcWorker, wow_original_EndDialog, wow_original_MapDialogRect, wow_original_DlgDirListA, wow_original_DlgDirListComboBoxA, wow_original_DlgDirSelectExA, wow_original_DlgDirSelectComboBoxExA };
+    CHECK(wow_dialog_finalization_bind(&provider));
     reset(); fail_ready = TRUE;
     CHECK(!wow_dialog_window_procA(WINDOW, WM_USER, 17, 29));
     CHECK(GetLastError() == ERROR_NOT_ENOUGH_MEMORY && !calls && !ensures &&
