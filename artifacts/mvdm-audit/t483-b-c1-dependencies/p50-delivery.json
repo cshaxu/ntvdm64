@@ -1,0 +1,38 @@
+{
+  "packet": "M0 T483 S20 P50",
+  "baseline": "9021ab788",
+  "files_partial": [
+    "BC1F059"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 38,
+    "remaining": 56,
+    "B_C1_unique": 29,
+    "B_C1_raw": 37,
+    "B_C1_compiled_headers": 264,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 direct unique 31 to 29, raw 39 to 37, compiled headers 270 to 264. BC1F059 retains original USER header.",
+  "implementation": "B validates original EditWndProc A/W addresses using a once-bound synchronous provider supplied by WOW32; existing native CPD token ownership and conversion bridge preserved. Removed private NT header.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "57077c17-d00c-4ec3-9cab-53e9b2d81540",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "EDIT conversion transport direction, invalid target and CPD failure fixture",
+    "WOW control boundaries",
+    "real CCPU dialog lifecycle with original EDIT provider bound",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-edit-conversion",
+  "limitations": [
+    "conversion fixture alone does not prove native CPD translation",
+    "BC1F059 retains original USER header",
+    "Full suite required at S20 closure"
+  ]
+}

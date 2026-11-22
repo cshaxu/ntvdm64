@@ -5,9 +5,9 @@
   "counts": {
     "files": 94,
     "completed": 38,
-    "direct_unique": 31,
-    "direct_raw": 39,
-    "compiled_header_rows": 270,
+    "direct_unique": 29,
+    "direct_raw": 37,
+    "compiled_header_rows": 264,
     "private_search_root_rows": 0
   },
   "files": [
@@ -5807,7 +5807,7 @@
     {
       "id": "BC1F059",
       "file": "src/compat/wow_edit_conversion_bindings.c",
-      "status": "not yet audited",
+      "status": "partially addressed in P50: original EDIT entry addresses provided by synchronous binding; original USER header remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -5929,7 +5929,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p50-delivery.json"
     },
     {
       "id": "BC1F060",

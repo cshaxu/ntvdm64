@@ -114,9 +114,9 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. As of P49, 38 of 94
-files are complete; B-to-C1 has 31 unique direct links (39 raw records),
-270 compiled-header rows and zero private search roots. B-to-C2 has zero
+is authoritative for individual files and evidence. As of P50, 38 of 94
+files are complete; B-to-C1 has 29 unique direct links (37 raw records),
+264 compiled-header rows and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
@@ -124,8 +124,8 @@ and callback-provider relationships remain subject to their recorded scope.
 S20 cumulative non-error mirror delta is +3 points/+239 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
-tests. The P49 package is 7ee3a167-0ab5-4d17-a51e-ee35f1a0a7f5.
-[P49 delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p49-delivery.json).
+tests. The P50 package is 57077c17-d00c-4ec3-9cab-53e9b2d81540.
+[P50 delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p50-delivery.json).
 
 The [preserved status chronology](../../artifacts/mvdm-audit/t483-b-c1-dependencies/current-before-p49.txt)
 and the inventory-linked P delivery records retain earlier progress and

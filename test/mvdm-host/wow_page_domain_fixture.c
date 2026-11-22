@@ -156,6 +156,14 @@ static const wow_dialog_creation_provider fixture_dialog_creation_provider = {
 static const wow_default_message_provider fixture_default_message_provider = {
     InitMessageTables, WowGetDefWindowProcBits
 };
+#include "compat/include/wow_edit_conversion_bindings.h"
+LONG WINAPI fixture_EditWndProcA(HWND, UINT, WPARAM, LONG);
+LONG WINAPI fixture_EditWndProcW(HWND, UINT, WPARAM, LONG);
+#pragma comment(linker, "/alternatename:_fixture_EditWndProcA@16=_EditWndProcA@16")
+#pragma comment(linker, "/alternatename:_fixture_EditWndProcW@16=_EditWndProcW@16")
+static const wow_edit_conversion_provider fixture_edit_conversion_provider = {
+    fixture_EditWndProcA, fixture_EditWndProcW
+};
 #include "compat/include/wow_dialog_keyboard_provider.h"
 BOOL WINAPI fixture_IsDialogMessageA(HWND, LPMSG);
 BOOL WINAPI fixture_IsDialogMessageW(HWND, LPMSG);
@@ -6382,7 +6390,8 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 int main(int argc, char **argv)
 {
 #ifdef WOW_WINDOW_BORROW_FIXTURE
-    if (!wow_dialog_keyboard_bind(&fixture_dialog_keyboard_provider) ||
+    if (!wow_edit_conversion_bind(&fixture_edit_conversion_provider) ||
+            !wow_dialog_keyboard_bind(&fixture_dialog_keyboard_provider) ||
             !wow_dialog_finalization_bind(&fixture_dialog_finalization_provider) ||
             !wow_dialog_creation_bind(&fixture_dialog_creation_provider) ||
             !wow_default_messages_bind(&fixture_default_message_provider) ||

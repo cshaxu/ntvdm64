@@ -1,12 +1,25 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_edit_conversion_bindings.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_edit_native_bindings.h"
 #include "wow_user_private_access.h"
 #include "compat/include/opennt_user_multipass.h"
 
-LONG WINAPI EditWndProcA(HWND, UINT, WPARAM, LONG);
-LONG WINAPI EditWndProcW(HWND, UINT, WPARAM, LONG);
+static const wow_edit_conversion_provider *conversion_provider;
+BOOL WINAPI wow_edit_conversion_bind(const wow_edit_conversion_provider *provider)
+{
+    const wow_edit_conversion_provider *previous;
+    if (!provider || !provider->ansi || !provider->unicode) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&conversion_provider,
+        (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
 C_ASSERT(sizeof(void *) == sizeof(DWORD));
 
 LONG WINAPI wow_edit_CsSendMessage(HWND window, UINT message, WPARAM wp,
@@ -18,8 +31,9 @@ LONG WINAPI wow_edit_CsSendMessage(HWND window, UINT message, WPARAM wp,
     /* Original EditWndProcWorker reaches only these opposite-encoding
      * native entries. Refuse other server operations and arbitrary targets;
      * do not turn this private boundary into a second SendMessage engine. */
+    if (!conversion_provider) RaiseFailFastException(NULL, NULL, 0);
     if (function != FNID_CALLWINDOWPROC ||
-            procedure != (DWORD)(ULONG_PTR)(ansi ? EditWndProcW : EditWndProcA)) {
+            procedure != (DWORD)(ULONG_PTR)(ansi ? conversion_provider->unicode : conversion_provider->ansi)) {
         SetLastError(ERROR_NOT_SUPPORTED);
         return 0;
     }

@@ -52,8 +52,10 @@ LRESULT WINAPI wow_user_call_window_procW(WNDPROC p, HWND h, UINT m, WPARAM w, L
 
 int main(void)
 {
+    static const wow_edit_conversion_provider provider = { EditWndProcA, EditWndProcW };
     HWND h = (HWND)(ULONG_PTR)0x1234;
     unsigned direction;
+    CHECK(wow_edit_conversion_bind(&provider));
     /* Link the production original table, never a fixture classification.
      * EditWndProcWorker's existing >=WM_USER guard owns the upper bound. */
     CHECK(gabThunkMessage[WM_CREATE] && gabThunkMessage[WM_SETTEXT] &&
