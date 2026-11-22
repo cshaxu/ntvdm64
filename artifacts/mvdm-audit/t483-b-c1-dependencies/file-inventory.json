@@ -7,7 +7,7 @@
     "completed": 38,
     "direct_unique": 31,
     "direct_raw": 39,
-    "compiled_header_rows": 276,
+    "compiled_header_rows": 270,
     "private_search_root_rows": 0
   },
   "files": [
@@ -5689,7 +5689,7 @@
     {
       "id": "BC1F058",
       "file": "src/compat/wow_edit_call_bindings.c",
-      "status": "not yet audited",
+      "status": "partially addressed in P49: private NT include removed; original USER layout and WOW ABI headers remain",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -5801,7 +5801,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p49-delivery.json"
     },
     {
       "id": "BC1F059",

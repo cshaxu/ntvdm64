@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_edit_call_bindings.h"
 #include "wow_control_state_provider.h"
 #include "wow_edit_native_bindings.h"
