@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 /* ADAPTER-WOW-079: original bodies retain all callback/thunk algorithms.
  * This file pairs only the existing native-stack execution boundaries. */
 #include "wow_user_native_extension.h"

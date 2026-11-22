@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_class_words_binding.h"
 #include "wow_class_client_bindings.h"
 #include "wow_class_remove_bindings.h"
@@ -50,10 +51,9 @@ BOOL WINAPI wow_native_class_resolve_procedure(DWORD procedure, DWORD *resolved)
     return TRUE;
 }
 
-#ifndef _NTRTL_
-NTSYSAPI BOOLEAN NTAPI RtlEqualUnicodeString(const UNICODE_STRING *,
+/* Keep the original link-time provider selection (product import or local RTL). */
+BOOLEAN NTAPI RtlEqualUnicodeString(const UNICODE_STRING *,
     const UNICODE_STRING *, BOOLEAN);
-#endif
 
 /* ADAPTER-WOW-030: native ownership for original CLS.adwWOW's two DWORDs.
  * Original class.c owns lookup/list selection. Public USER has no CLS WOW

@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_default_message_bindings.h"
 
 /* ADAPTER-WOW-063: original bitmap algorithm; finite host allocation owner.

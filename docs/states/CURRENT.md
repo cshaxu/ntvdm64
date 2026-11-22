@@ -114,10 +114,9 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P64 compiled-product review leaves 45 of 94
-files complete. BC1F045 still uses the C1 NT and USER headers after P12
-removed its function dependency. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-164 compiled-header rows across 40 sources and zero private search roots. B-to-C2 has zero
+is authoritative for individual files and evidence. P65 compiled-product review leaves 50 of 94
+files complete. BC1F045 retains USER private layouts; its NT header chain is removed. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
+80 compiled-header rows across 35 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
@@ -154,3 +153,9 @@ Inherited developer-environment COMMAND fails on both P63 and P64; no product-fi
 claim. Final fixture verification passed; P64 records this bounded delivery.
 No completed-file credit
 or mirror change. [Batch evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json).
+
+P65 removed the redundant NT header chain in 14 B files: 84 header rows removed,
+five files complete and 44 remain. Cached full build, dual 11-image publication and
+seven targeted fixtures plus published USER16/complete-Userenv COMMAND passed.
+The RTL fallback declaration preserves original link-time provider selection.
+No mirror or guest change. [P65 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json).

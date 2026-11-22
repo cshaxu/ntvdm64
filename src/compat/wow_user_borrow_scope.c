@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_user_borrow_scope.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_user_task_lifecycle.h"

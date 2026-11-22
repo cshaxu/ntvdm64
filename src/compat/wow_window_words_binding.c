@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_window_words_binding.h"
 #include "wow_window_creation_binding.h"
 #include "wow_window_procedure_entry.h"

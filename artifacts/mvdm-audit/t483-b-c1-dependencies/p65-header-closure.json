@@ -1,0 +1,173 @@
+{
+  "status": "verified P65 delivery; cached full build, dual publication and final targeted tests passed",
+  "files": [
+    {
+      "file": "src/compat/wow_class_words_binding.c",
+      "before_headers": 8,
+      "after_headers": 2,
+      "remaining_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_default_message_bindings.c",
+      "before_headers": 7,
+      "after_headers": 1,
+      "remaining_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_default_window_bindings.c",
+      "before_headers": 8,
+      "after_headers": 2,
+      "remaining_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_user_borrow_scope.c",
+      "before_headers": 8,
+      "after_headers": 2,
+      "remaining_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_user_discovery.c",
+      "before_headers": 6,
+      "after_headers": 0,
+      "remaining_headers": [],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_user_message_bridge.c",
+      "before_headers": 6,
+      "after_headers": 0,
+      "remaining_headers": [],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_user_native_extension.c",
+      "before_headers": 6,
+      "after_headers": 0,
+      "remaining_headers": [],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_user_object_bindings.c",
+      "before_headers": 7,
+      "after_headers": 1,
+      "remaining_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_user_private_access.c",
+      "before_headers": 8,
+      "after_headers": 2,
+      "remaining_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_user_registration_state.c",
+      "before_headers": 8,
+      "after_headers": 2,
+      "remaining_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_user_thunk_scope.c",
+      "before_headers": 6,
+      "after_headers": 0,
+      "remaining_headers": [],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_window_client_state_bindings.c",
+      "before_headers": 9,
+      "after_headers": 3,
+      "remaining_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_window_procedure_entry.c",
+      "before_headers": 6,
+      "after_headers": 0,
+      "remaining_headers": [],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    },
+    {
+      "file": "src/compat/wow_window_words_binding.c",
+      "before_headers": 8,
+      "after_headers": 2,
+      "remaining_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "mirror_delta_points": 0,
+      "mirror_delta_lines": 0,
+      "delivery": "final corrected build/publication/targeted tests passed"
+    }
+  ],
+  "compiled_header_rows_before": 164,
+  "compiled_header_rows_after": 80,
+  "source_consumers_before": 40,
+  "source_consumers_after": 35,
+  "completed_credit": 5,
+  "initial_fixture_failure": "RtlEqualUnicodeString acquired dllimport through local fallback declaration; restored original undecorated link-time provider selection; final seven fixtures passed after declaration correction",
+  "initial_runtime": "Win16 native extension and complete Userenv COMMAND return passed; final candidate must be rerun",
+  "cache_repair": "removed-runtime pwsh/node paths updated in local CMake cache; no product build script change",
+  "package": "ba815acc-90c1-4864-b587-a106b186ff6c",
+  "final_tests": {
+    "fixtures": "build/t483-s20-p65/targeted-final-corrected-results.json",
+    "runtime": "build/t483-s20-p65/native-guest-final/result.txt",
+    "command": "build/t483-s20-p65/command-final.txt",
+    "build": "build/t483-s20-p65/build-result.json",
+    "publication": "build/t483-s20-p65/publication-final-fixed.json"
+  }
+}

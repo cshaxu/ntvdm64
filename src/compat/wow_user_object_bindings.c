@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_user_object_bindings.h"
 #include "compat/include/opennt_user_multipass.h"
 #include <dde.h>

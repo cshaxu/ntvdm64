@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_user_message_bridge.h"
 #include "wow_task_order_bindings.h"
 #include "compat/include/wow_user_runtime.h"

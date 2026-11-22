@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 45,
+    "completed": 50,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 164,
+    "compiled_header_rows": 80,
     "private_search_root_rows": 0
   },
   "files": [
@@ -2563,7 +2563,7 @@
     {
       "id": "BC1F031",
       "file": "src/compat/wow_class_words_binding.c",
-      "status": "in progress: P26 removes three direct C1 calls; original CLS layout headers remain",
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -2696,7 +2696,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p26-delivery.json"
+      "progress_evidence": "p26-delivery.json",
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F032",
@@ -3801,7 +3802,7 @@
     {
       "id": "BC1F042",
       "file": "src/compat/wow_default_message_bindings.c",
-      "status": "in progress: P36 removes original initializer direct call; original message-table layout remains",
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -3904,7 +3905,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p36-delivery.json"
+      "progress_evidence": "p36-delivery.json",
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F043",
@@ -4115,7 +4117,7 @@
     {
       "id": "BC1F045",
       "file": "src/compat/wow_default_window_bindings.c",
-      "status": "partial: P12 removed the function dependency; the translation unit includes C1 nt.h and accesses PWND::head.h through the original USER layout",
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -4228,7 +4230,8 @@
           "product": ""
         }
       ],
-      "delivery": "p12-delivery.json"
+      "delivery": "p12-delivery.json",
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F046",
@@ -8031,7 +8034,7 @@
     {
       "id": "BC1F080",
       "file": "src/compat/wow_user_borrow_scope.c",
-      "status": "not yet audited",
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8133,12 +8136,13 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F081",
       "file": "src/compat/wow_user_discovery.c",
-      "status": "not yet audited",
+      "status": "completed in verified P65 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8240,12 +8244,13 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F082",
       "file": "src/compat/wow_user_message_bridge.c",
-      "status": "not yet audited",
+      "status": "completed in verified P65 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8347,12 +8352,13 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F083",
       "file": "src/compat/wow_user_native_extension.c",
-      "status": "not yet audited",
+      "status": "completed in verified P65 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8434,12 +8440,13 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F084",
       "file": "src/compat/wow_user_object_bindings.c",
-      "status": "not yet audited",
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8531,12 +8538,13 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F085",
       "file": "src/compat/wow_user_private_access.c",
-      "status": "not yet audited",
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8638,7 +8646,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F086",
@@ -8801,7 +8810,7 @@
     {
       "id": "BC1F087",
       "file": "src/compat/wow_user_registration_state.c",
-      "status": "not yet audited",
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8903,7 +8912,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F088",
@@ -9136,7 +9146,7 @@
     {
       "id": "BC1F089",
       "file": "src/compat/wow_user_thunk_scope.c",
-      "status": "not yet audited",
+      "status": "completed in verified P65 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -9228,7 +9238,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F090",
@@ -9371,7 +9382,7 @@
     {
       "id": "BC1F091",
       "file": "src/compat/wow_window_client_state_bindings.c",
-      "status": "not yet audited",
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -9503,7 +9514,8 @@
           "evidence": "non-mvdm/public/internal/windows/inc/wingdip.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F092",
@@ -9626,7 +9638,7 @@
     {
       "id": "BC1F093",
       "file": "src/compat/wow_window_procedure_entry.c",
-      "status": "not yet audited",
+      "status": "completed in verified P65 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -9718,12 +9730,13 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     },
     {
       "id": "BC1F094",
       "file": "src/compat/wow_window_words_binding.c",
-      "status": "not yet audited",
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -9825,9 +9838,10 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
     }
   ],
-  "current_scan": "build/t483-s20-p64",
-  "current_scan_status": "P64 final product scan; seven lifecycle/window cases, window-access and published runtime verified"
+  "current_scan": "build/t483-s20-p65",
+  "current_scan_status": "P65 final compiled scan, seven fixture cases and published Win16/COMMAND runtime passed; data/assembly coverage limits remain"
 }
