@@ -84,6 +84,16 @@ The extra Clipboard witness failed on P4 too and is not counted as passed;
 see the evidence for the reverted harness experiment. Two host graph
 generators remain; S2 and the overall T remain active.
 
+[S2 P6](../etc/evidence/t484-s2-native-family.md) migrates the five native host
+components and removes their PowerShell generator and x86 reference-graph
+dependency. All330 compile profiles,73 archives and41 links match the prior
+composition. Final cached11-image build and dual publication passed; package
+972c2293-4961-4c9e-b1eb-bd690b0ad3a4 has22 verified hashes. Four raw inputs
+are identical/seven timestamp-only. Native targeted checks and the correctly
+packaged private-desktop lifecycle fixtures passed. The initial incomplete
+fixture invocation is recorded, not counted as passed. One host graph
+generator remains; S2 is not closed, and S3-S5 remain outstanding.
+
 ## S1 Closure Record
 
 [S1 inventory/design](../etc/evidence/t484-s1-build-inventory.md) completes
@@ -96,7 +106,7 @@ admission; its containing commit is the delivery identity.
 [T483 closure](../history/m0-t483-closure.md) indexes all S1-S21 outcomes,
 retained mirror decisions and known boundaries. Final production revision is
 9e7eb19c0 (S20 P85), package100b16d9-992d-4e2c-8d99-66a4e891dd26.
-The current publication is T484 S2 P5, recorded above; P85 is its behavior
+The current publication is T484 S2 P6, recorded above; P85 is its behavior
 comparison baseline. P85 Full20/20 runtime evidence is reused for this
 byte-equivalent/timestamp-only build change, not reported as a new Full run.
 

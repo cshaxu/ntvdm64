@@ -35,18 +35,15 @@ if(NTVDM_ARCHITECTURE STREQUAL "x86")
   target_compile_definitions(ccpu-alu-oracle PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
-# The original source-manifest composition remains its existing owner. CMake
-# selects stable subtrees and exposes their real Ninja targets, not a second
-# handwritten inventory of MVDM or native-component sources.
-find_program(NTVDM_POWERSHELL NAMES pwsh REQUIRED)
-find_program(NTVDM_NODE NAMES node REQUIRED)
+# Stable subtrees own their source composition and native build targets.
 # Bootstrap fixed data transformers with native tools, before legacy graph
 # owners consume generated headers. The remaining graph migration is separate.
 execute_process(COMMAND cmd.exe /d /c call "${CMAKE_SOURCE_DIR}/tools/build/bootstrap.cmd"
   WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" COMMAND_ERROR_IS_FATAL ANY)
-set(_worker_tree "${CMAKE_BINARY_DIR}/worker-reference-x86")
 set(_native_args)
 if(NTVDM_ARCHITECTURE STREQUAL "x86")
+  find_program(NTVDM_POWERSHELL NAMES pwsh REQUIRED)
+  find_program(NTVDM_NODE NAMES node REQUIRED)
   set(_worker_tree "${CMAKE_BINARY_DIR}/worker")
   # The existing image importer deliberately accepts build-owned producers
   # only. Identity-preserving generated prerequisites satisfy that contract;
@@ -97,11 +94,11 @@ set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/gfx_upd.h"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/egaports.h"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/host/inc/nt_graph.h")
-ntvdm_generate(New-T310OriginalSoftpcNinja.ps1 -Architecture x86
-  -RepositoryRoot "${CMAKE_SOURCE_DIR}" -BuildRoot "${_worker_tree}"
-  -NodeExecutable "${NTVDM_NODE}"
-  -NinjaExecutable "${CMAKE_MAKE_PROGRAM}" ${_native_args})
 if(NTVDM_ARCHITECTURE STREQUAL "x86")
+  ntvdm_generate(New-T310OriginalSoftpcNinja.ps1 -Architecture x86
+    -RepositoryRoot "${CMAKE_SOURCE_DIR}" -BuildRoot "${_worker_tree}"
+    -NodeExecutable "${NTVDM_NODE}"
+    -NinjaExecutable "${CMAKE_MAKE_PROGRAM}" ${_native_args})
   add_custom_target(worker COMMAND cmd /d /c "${_worker_tree}/run-ninja-parallel.cmd" ntvdm.exe VCDEX.DLL
     BYPRODUCTS "${_worker_tree}/ntvdm.lib"
     USES_TERMINAL)
@@ -125,9 +122,12 @@ if(NTVDM_ARCHITECTURE STREQUAL "x86")
 else()
   foreach(_component Worker Frontend Monitor Launcher Service)
     string(TOLOWER "${_component}" _name)
-    ntvdm_generate(New-NativeWorkerNinja.ps1 -RepositoryRoot "${CMAKE_SOURCE_DIR}"
-      -BuildRoot "${CMAKE_BINARY_DIR}/${_name}" -Component "${_component}"
-      -ReferenceGraph "${_worker_tree}/build.ninja")
+    execute_process(COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_SOURCE_DIR}/tools/build/native-family"
+      -B "${CMAKE_BINARY_DIR}/${_name}" -G Ninja "-DCMAKE_BUILD_TYPE=Release"
+      "-DNTVDM_COMPONENT=${_name}" "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}"
+      "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}"
+      "-DNTVDM_USE_CCACHE=${NTVDM_USE_CCACHE}" "-DNTVDM_CCACHE_EXECUTABLE=${NTVDM_CCACHE_EXECUTABLE}"
+      COMMAND_ERROR_IS_FATAL ANY)
     add_custom_target(native-${_name} COMMAND cmd /d /c
       "${CMAKE_BINARY_DIR}/${_name}/run-ninja.cmd" USES_TERMINAL)
   endforeach()

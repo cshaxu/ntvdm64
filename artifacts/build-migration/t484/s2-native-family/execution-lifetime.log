@@ -1,0 +1,29 @@
+FAIL 295 result && !result->status && result->target && result->receipt
+FAIL 308 result->target && WaitForSingleObject(result->target,0)==WAIT_TIMEOUT
+FAIL 309 result->receipt && WaitForSingleObject(result->receipt,0)==WAIT_TIMEOUT
+RAW-CreateProcess-failure handles-before=71 handles-after=115 error=2
+FAIL 295 result && !result->status && result->target && result->receipt
+FAIL 308 result->target && WaitForSingleObject(result->target,0)==WAIT_TIMEOUT
+FAIL 309 result->receipt && WaitForSingleObject(result->receipt,0)==WAIT_TIMEOUT
+FAIL 385 result && !result->status && result->target && result->receipt
+FAIL 387 result->target && WaitForSingleObject(result->target,0)==WAIT_TIMEOUT
+FAIL 388 completed_direct_count==direct_before && completed_cleanup_count==cleanup_before
+GUI-failed-start handles-before=115 handles-after=117
+GUI-failed-start handles-before=117 handles-after=115
+GUI-failed-start handles-before=115 handles-after=115
+GUI-failed-start handles-before=115 handles-after=115
+GUI-failed-start handles-before=115 handles-after=115
+GUI-failed-start handles-before=115 handles-after=115
+GUI-failed-start handles-before=115 handles-after=115
+GUI-failed-start handles-before=115 handles-after=115
+FAIL 295 result && !result->status && result->target && result->receipt
+FAIL 298 completed_direct_count==before+1 && completed_exit==73
+FAIL 295 result && !result->status && result->target && result->receipt
+FAIL 298 completed_direct_count==before+1 && completed_exit==73
+FAIL 299 completed_io_error==io_error && !completed_io_flags
+FAIL 295 result && !result->status && result->target && result->receipt
+FAIL 298 completed_direct_count==before+1 && completed_exit==73
+FAIL 299 completed_io_error==io_error && !completed_io_flags
+FAIL 295 result && !result->status && result->target && result->receipt
+FAIL 298 completed_direct_count==before+1 && completed_exit==73
+NTVWM-REQUEST-LIFETIME checks=1074 failures=19 completed=51 cancelled=16 target-survival=yes remaining-handles=0

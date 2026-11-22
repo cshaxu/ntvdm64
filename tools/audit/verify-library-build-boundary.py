@@ -7,7 +7,6 @@ ROOT = Path(__file__).resolve().parents[2]
 GRAPHS = {
     "x86/worker": ["ntvdm.exe", "VCDEX.DLL", "VDMREDIR.dll", "nthook32.dll"],
     "x86/wow32": ["wow32.dll"],
-    "x64/worker-reference-x86": ["ntvdm.exe"],
     "x64/frontend": ["ntcon.exe"],
     "x64/service": ["ntsrv.exe"],
     "x64/launcher": ["run16.exe"],

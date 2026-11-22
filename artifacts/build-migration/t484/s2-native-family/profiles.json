@@ -1,0 +1,27 @@
+{
+  "worker": {
+    "compile": 75,
+    "archive": 20,
+    "link": 4
+  },
+  "frontend": {
+    "compile": 85,
+    "archive": 12,
+    "link": 17
+  },
+  "monitor": {
+    "compile": 29,
+    "archive": 6,
+    "link": 7
+  },
+  "launcher": {
+    "compile": 70,
+    "archive": 19,
+    "link": 6
+  },
+  "service": {
+    "compile": 71,
+    "archive": 16,
+    "link": 7
+  }
+}

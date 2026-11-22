@@ -1450,3 +1450,7 @@ default macro-profile check.
 
 [T484 S2 native generator batch](evidence/t484-s2-native-generators.md) records
 the first two migrations, byte-equivalence tests and host package delivery.
+
+[T484 S2 native host family](evidence/t484-s2-native-family.md) records the five
+native component graphs, exact profile/link comparison, dual publication and
+post-publication targeted checks.

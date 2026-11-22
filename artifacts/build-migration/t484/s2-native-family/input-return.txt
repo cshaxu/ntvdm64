@@ -1,0 +1,2 @@
+mode=16 calls=58
+NTVWM-PRESENTATION checks=605 failures=0 named-pipe=yes production-activation=no

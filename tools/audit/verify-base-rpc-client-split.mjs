@@ -7,11 +7,18 @@ const [frontend, launcher] = process.argv.slice(2);
 if (!frontend || !launcher) throw Error('Pass native frontend and launcher build roots');
 function sources(root, target, extra = []) {
   const graph = new Map();
+  const normalize = s => s.replaceAll('\\', '/').replaceAll('$:', ':');
   for (const line of fs.readFileSync(path.join(root, 'build.ninja'), 'utf8').split(/\r?\n/)) {
     const m = line.match(/^build (.+?): (\S+)\s*(.*)$/);
     if (!m) continue;
-    const inputs = m[3].split(/\s+\|\|?\s+/)[0].trim().split(/\s+/);
-    for (const output of m[1].split(/\s+\|\s+/)[0].split(/\s+/)) graph.set(output, inputs);
+    const parts = m[3].split(/\s+\|\|?\s+/);
+    const inputs = parts[0].trim().split(/\s+/);
+    // CMake custom commands place real file dependencies after a single |.
+    // Follow only object/archive inputs, not order-only targets or headers.
+    if (m[2] === 'CUSTOM_COMMAND' && /\s\|\s/.test(m[3]))
+      inputs.push(...parts[1].trim().split(/\s+/).filter(s => /\.(obj|lib)$/.test(s)));
+    for (const output of m[1].split(/\s+\|\s+/).flatMap(s => s.split(/\s+/)))
+      graph.set(normalize(output), inputs.map(normalize));
   }
   assert(graph.has(target), `Missing ${target}`);
   const pending = [target, ...extra], seen = new Set(), result = [];
@@ -48,7 +55,8 @@ const launcherMap = fs.readFileSync(path.join(launcher, 'run16.exe.map'), 'utf8'
 assert(/\b_?NtvdmBaseClientCallServer(?:@16)?\s+[^\r\n]*\bbase_dispatch\.obj\b/.test(launcherMap),
   'Launcher BASE entry must resolve to the compat dispatcher');
 for (const file of ['src/common/base_srv/base_rpc_client_core.c',
-  'src/common/base_srv/base_rpc_client_launch.c', 'tools/build/New-NativeWorkerNinja.ps1']) {
+  'src/common/base_srv/base_rpc_client_launch.c',
+  'tools/build/native-family/frontend.cmake', 'tools/build/native-family/launcher.cmake']) {
   assert(!fs.readFileSync(file, 'utf8').includes('OPENNT_BASE_RPC_FRONTEND_ONLY'), `Conditional remains: ${file}`);
 }
 console.log(JSON.stringify({result:'PASS', frontendSources:frontendSources.length,

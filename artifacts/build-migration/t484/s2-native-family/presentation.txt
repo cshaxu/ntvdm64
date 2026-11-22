@@ -1,0 +1,42 @@
+input case=7 accepted=3 queued=3
+input record=0 type=1 flags=0
+input record=1 type=1 flags=0
+input record=2 type=2 flags=1
+mode=7 calls=1
+input case=8 accepted=0 queued=0
+mode=8 calls=1
+input case=19 accepted=3 queued=3
+input record=0 type=2 flags=1
+input record=1 type=2 flags=0
+input record=2 type=2 flags=0
+mode=19 calls=1
+case=0 first_error=21 reply_error=21
+mode=0 calls=4
+case=1 first_error=13 reply_error=0
+mode=1 calls=1
+case=2 first_error=13 reply_error=0
+mode=2 calls=1
+case=3 first_error=13 reply_error=5
+mode=3 calls=1
+case=4 first_error=233 reply_error=0
+mode=4 calls=1
+case=5 first_error=995 reply_error=0
+mode=5 calls=0
+case=6 first_error=21 reply_error=21
+capture_window ok=1 error=0 previous=120x30 max=120x30
+mode=6 calls=98
+mode=9 calls=24
+mode=10 calls=6
+mode=11 calls=55
+mode=12 calls=4
+mode=13 calls=24
+mode=14 calls=8
+mode=15 calls=8
+mode=17 calls=1
+mode=18 calls=1
+mode=20 calls=19
+mode=21 calls=11
+mode=11 calls=64
+CP850 o-slash glyph=009b expected=009b
+mode=11 calls=64
+NTVWM-PRESENTATION checks=612 failures=0 named-pipe=yes production-activation=no

@@ -41,9 +41,12 @@ tree; it never imports cache output as a source or release input.
 
 The formal product graph requires explicit `-NativeWorker` and
 `-NativeFrontend` and `-NativeMonitor` AMD64 producer images; it cannot silently
-link x86 NTVWM, NTCON or NTMON. Declarative source closures remain available to
-`New-NativeWorkerNinja.ps1 -Component Worker|Frontend|Monitor`, which builds only the
-selected native consumer and architecture-local dependencies. Frontend has
+link x86 NTVWM, NTCON or NTMON. The five AMD64 consumers are now owned by
+`native-family/CMakeLists.txt` and their component source/link lists. They do not
+consume an x86 reference graph or invoke an interpreted graph generator. Native
+MIDL, original configuration extraction and manifest hashing remain live input
+operations. The NXVM import manifest still selects and verifies its sources.
+Frontend has
 no worker-base or original RTL body dependency; source-specific C11 settings
 and test entry points are retained. Import validates PE machine, EXE/subsystem
 and copied hashes before replacing a build-cache product slot.

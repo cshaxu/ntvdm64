@@ -1,0 +1,10 @@
+RAW-CreateProcess-failure handles-before=61 handles-after=105 error=2
+GUI-failed-start handles-before=105 handles-after=106
+GUI-failed-start handles-before=105 handles-after=105
+GUI-failed-start handles-before=105 handles-after=105
+GUI-failed-start handles-before=105 handles-after=105
+GUI-failed-start handles-before=105 handles-after=105
+GUI-failed-start handles-before=105 handles-after=105
+GUI-failed-start handles-before=105 handles-after=105
+GUI-failed-start handles-before=105 handles-after=105
+NTVWM-REQUEST-LIFETIME checks=1084 failures=0 completed=48 cancelled=16 target-survival=yes remaining-handles=0

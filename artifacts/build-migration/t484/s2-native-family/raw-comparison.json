@@ -1,0 +1,149 @@
+[
+  {
+    "image": "VCDEX.DLL",
+    "sha256": "E1BF8DEEBA622FA9795851F1EC597C567D372F4F125F77339D81503BB257C78E",
+    "previous_input_sha256": "E1BF8DEEBA622FA9795851F1EC597C567D372F4F125F77339D81503BB257C78E",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "run16.exe",
+    "sha256": "8A12EDCFAE515904BB4860D1B0186EBC0DDE9C5877257530402755F4F87E83BD",
+    "previous_input_sha256": "07AAC5ED1C4B198EFB1A64247FE27EC2857B1DCE21EB5477F5E3362AF897615B",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      248,
+      249,
+      214100,
+      214101
+    ],
+    "timestamp_fields": [
+      248,
+      214100
+    ]
+  },
+  {
+    "image": "ntsrv.exe",
+    "sha256": "818D9CFF8FC7194CCD9087078A24EFEA1D0A225FB50FA65C5C0A07EDCFD70782",
+    "previous_input_sha256": "DB76357D1319B90115801420251A00A586D6289B71A72B54B86E27C688D2737C",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      256,
+      257,
+      300548,
+      300549
+    ],
+    "timestamp_fields": [
+      256,
+      300548
+    ]
+  },
+  {
+    "image": "ntcon.exe",
+    "sha256": "0112D1460871C6BE78825C0038FF6A50303A3C50AED050E4150F8FC0462E04DA",
+    "previous_input_sha256": "DAE68ED864C4EE16B65CEDD0B1D26152905DE0CA4D36579DC0378E61745B0E26",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      264,
+      265,
+      251092,
+      251093
+    ],
+    "timestamp_fields": [
+      264,
+      251092
+    ]
+  },
+  {
+    "image": "ntvdm.exe",
+    "sha256": "137E5887BFE2F64664D5FE81DC887DA3EE0A775E76A5287AF9E2AF290D61D399",
+    "previous_input_sha256": "10417429C390C355F556CA217FB4598C31F7B665613BBF553FBC0C66FD3535DC",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      288,
+      289,
+      1719868,
+      1719869
+    ],
+    "timestamp_fields": [
+      288,
+      1791316,
+      1719868
+    ]
+  },
+  {
+    "image": "ntvwm.exe",
+    "sha256": "897035C498671618162D509313ED1D17B9C9434C0393F3CA196C20CA8AE7EDF4",
+    "previous_input_sha256": "0228A1E64E6C3D6F54F339F004FA671630DD410E773B4041DEA6C3BD42414278",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      248,
+      249,
+      227268,
+      227269
+    ],
+    "timestamp_fields": [
+      248,
+      227268
+    ]
+  },
+  {
+    "image": "ntmon.exe",
+    "sha256": "AB735597F133BAB1DAAE07113FA80CBC8382B9CE293B3BFED9A86060BCFCD0A8",
+    "previous_input_sha256": "ABD311B5BB798259556F827942D33FBC555B45FB183434BD467B806E86CDD30E",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      256,
+      257,
+      258,
+      148180,
+      148181,
+      148182
+    ],
+    "timestamp_fields": [
+      256,
+      148180
+    ]
+  },
+  {
+    "image": "WOW32.DLL",
+    "sha256": "E3389B4915904032473C2AA77F25742B7BD4E7F8AD073D92E3C05C5F5B02630F",
+    "previous_input_sha256": "E3389B4915904032473C2AA77F25742B7BD4E7F8AD073D92E3C05C5F5B02630F",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "VDMREDIR.DLL",
+    "sha256": "36177B2049F054623045A376E533A3F8D943AD8A337FAC2A797C982EC0313506",
+    "previous_input_sha256": "36177B2049F054623045A376E533A3F8D943AD8A337FAC2A797C982EC0313506",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "nthook32.dll",
+    "sha256": "071A598892D7E14077D1BFD65F0FF4F32FF6208A0BC16FD2F99CC920F6B7FFE0",
+    "previous_input_sha256": "2098EFC9CAF80DF49A505E04F44BB1D3332230809EE88BF35B623CE060F6ABE9",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      272,
+      273,
+      134228,
+      134229
+    ],
+    "timestamp_fields": [
+      272,
+      203316,
+      134228
+    ]
+  },
+  {
+    "image": "nthook64.dll",
+    "sha256": "C288681C623AE9F270F640D6890E87237263544B0DDEF5DE4AFC14F01BE7297F",
+    "previous_input_sha256": "C288681C623AE9F270F640D6890E87237263544B0DDEF5DE4AFC14F01BE7297F",
+    "classification": "raw-identical"
+  }
+]
