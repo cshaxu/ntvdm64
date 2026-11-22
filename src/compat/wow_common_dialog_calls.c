@@ -1,5 +1,4 @@
 /* ADAPTER-WOW-097: native GUI leaves, not another COMMDLG implementation. */
-#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_common_dialog_calls.h"
 #include "wow_user_native_call.h"
 

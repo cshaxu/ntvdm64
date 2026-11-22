@@ -1,0 +1,36 @@
+{
+  "packet": "M0 T483 S20 P29",
+  "baseline": "c864c6b63",
+  "files_completed": [
+    "BC1F035"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 30,
+    "remaining": 64,
+    "B_C1_unique": 44,
+    "B_C1_raw": 52,
+    "B_C1_compiled_headers": 399,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct unchanged 44; compiled headers 405 to 399. No C1 header records for common-dialog calls.",
+  "implementation": "Removed unused private nt.h; seven native dialog calls, result/error preservation and cleanup behavior unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "9d83662e-1899-4814-93a9-c758456d0e6f",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "common-dialog native call success/failure and cleanup",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-dialog-calls",
+  "limitations": [
+    "First test launch failed before compilation due to relative compiler path; calls-r2 passed with absolute path",
+    "Full suite required at S20 closure",
+    "BC1F031 original-layout dependency remains open"
+  ]
+}

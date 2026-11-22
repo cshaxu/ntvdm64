@@ -378,3 +378,11 @@ files 29/94 complete. Mirror delta 0 points/0 lines; cumulative +3 points/
 Win16/COMMAND targeted tests passed. Full remains required at S20 closure.
 Package 31e719bb-0c8a-4d4f-acd8-1010490fa3d6.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p28-delivery.json).
+
+P29 completes BC1F035: removed unused private nt.h from common-dialog calls.
+B-C1 direct unique remains 44, compiled headers 405->399; files 30/94
+complete. Mirror delta 0 points/0 lines; cumulative +3 points/+239 lines.
+Cached full build, dual11, common-dialog calls and real Win16/COMMAND
+targeted tests passed. Full remains required at S20 closure. Package
+9d83662e-1899-4814-93a9-c758456d0e6f.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p29-delivery.json).
