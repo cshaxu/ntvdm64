@@ -285,3 +285,11 @@ fixtures, Win16/COMMAND and architecture gates passed. Cached full build and
 dual11 publication passed, package 3863aa66-5e58-4175-8cbb-7938966b4d47.
 Files22/94 complete; B-C1 compiled headers472->466, direct55 unchanged;
 non-error mirror delta0 points/0 lines. [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p17-delivery.json).
+
+P18 completes BC1F020: C1 owns profile validation and original readers; B
+uses typed synchronous providers bound by F before initialization. Direct
+B-C1 relations55->53, compiled header rows466->460; files23/94 complete.
+Non-error mirror0points/+14lines R2752; cumulative+2points/+224lines.
+Cached full, dual11 and targeted task/profile/control and real Win16/COMMAND
+passed; package c3f39ae3-6ab0-4d0a-8275-add061bb9ec0.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p18-delivery.json).

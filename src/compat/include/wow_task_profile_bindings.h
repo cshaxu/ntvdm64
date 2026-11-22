@@ -3,11 +3,13 @@
 #include <windows.h>
 #include <winternl.h>
 typedef struct wow_task_order_process wow_task_order_process;
-#include <nt.h>
 #include <stddef.h>
 #include "wow_profile_native.h"
 #include <wchar.h>
-#include "non-mvdm/public/sdk/inc/ntregapi.h"
+typedef UINT (WINAPI *wow_profile_string_provider)(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
+typedef UINT (WINAPI *wow_profile_int_provider)(UINT, LPCWSTR, UINT);
+BOOL WINAPI wow_profile_bind(wow_profile_string_provider, wow_profile_int_provider);
+UINT WINAPI wow_profile_int(UINT, LPCWSTR, UINT);
 UINT WINAPI wow_task_profile(wow_task_order_process *, UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
 DWORD WINAPI FastGetProfileStringW(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
 UINT WINAPI FastGetProfileIntW(UINT, LPCWSTR, UINT);

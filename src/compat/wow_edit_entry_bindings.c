@@ -49,8 +49,8 @@ BOOL WINAPI wow_edit_capture_context(wow_edit_context *context)
      * INFINITE; do not invent a fixed blink interval or alter system policy. */
     value.dtCaretBlink = GetCaretBlinkTime();
     if (!value.dtCaretBlink) return FALSE;
-    value.wMaxLeftOverlapChars = (int)FastGetProfileIntW(5, L"LeftOverlapChars", 3);
-    value.wMaxRightOverlapChars = (int)FastGetProfileIntW(5, L"RightOverlapChars", 3);
+    value.wMaxLeftOverlapChars = (int)wow_profile_int(5, L"LeftOverlapChars", 3);
+    value.wMaxRightOverlapChars = (int)wow_profile_int(5, L"RightOverlapChars", 3);
     /* Original init.c measures SYSTEM_FONT on its bits DC through
      * GetCharDimensions. Reuse the audited GDI implementation, including
      * its average-width rounding, not tmAveCharWidth or dialog base units. */

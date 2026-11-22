@@ -1,0 +1,46 @@
+{
+  "packet": "M0 T483 S20 P18",
+  "baseline": "c0531004a",
+  "files_completed": [
+    "BC1F020"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 23,
+    "remaining": 71,
+    "B_C1_unique": 53,
+    "B_C1_raw": 65,
+    "B_C1_compiled_headers": 460,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 direct unique 55 to 53; compiled headers 466 to 460. Removed FastGetProfileStringW and FastGetProfileIntW direct relocations.",
+  "implementation": "C1 profile.c owns original registry algorithm and the moved exact task bounds/validation; B binds two synchronous functions and keeps lifecycle and edit adapters. F DLL attach supplies C1 provider addresses before W32DllInitialize. No private registry declaration is copied into B; no queue or second lifecycle.",
+  "mirror": {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+    "before": "7points/866lines",
+    "after": "7points/880lines",
+    "delta": "0points/+14lines",
+    "cumulative_S20": "+2points/+224lines",
+    "register": "R2752",
+    "line_mapping": "existing logical line anchors retained; paired excluded-branch parser zero issues"
+  },
+  "package": "c3f39ae3-6ab0-4d0a-8275-add061bb9ec0",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "original task-order fixture: init=8 errors=0",
+    "profile provider null and repeated binding, integer fallback, missing and existing registry, truncation, overflow and handle stability",
+    "full targeted control fixture group",
+    "actual Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "11 architecture boundary controls and product graph gates",
+    "documentation governance and relative links"
+  ],
+  "evidence": "build/t483-s20-profile",
+  "limitations": [
+    "BC1F007, BC1F010, BC1F011 and BC1F018 shared USER layout remain open",
+    "No Full suite in P18; previous P16 Full passed"
+  ]
+}

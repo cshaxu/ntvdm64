@@ -10,7 +10,21 @@
 \***************************************************************************/
 #define WOW_ORIGINAL_PROFILE
 #line 11
+#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_task_profile_bindings.h"
+
+/* Preserve the task adapter's checked buffer contract at the original owner. */
+UINT WINAPI wow_original_task_profile(UINT section, LPCWSTR key, LPCWSTR fallback,
+    LPWSTR output, DWORD capacity)
+{
+    if (section != 14 || !key || !output || !capacity ||
+        capacity > (MAXDWORD - sizeof(KEY_VALUE_PARTIAL_INFORMATION)) / sizeof(WCHAR) ||
+        (fallback && wcslen(fallback) >= capacity)) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return 0;
+    }
+    return FastGetProfileStringW(section, key, fallback, output, capacity);
+}
 #pragma hdrstop
 
 #line 68

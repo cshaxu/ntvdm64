@@ -1,3 +1,4 @@
+#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_task_profile_bindings.h"
 #include <stdio.h>
 
@@ -85,12 +86,19 @@ int __cdecl main(void)
     return errors!=0;
 }
 #else
+UINT WINAPI wow_original_task_profile(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
 int __cdecl main(void)
 {
     WCHAR output[80];
     DWORD before,after;unsigned i;
     HKEY key=NULL;
-    LONG status=RegOpenKeyExW(HKEY_LOCAL_MACHINE,
+    LONG status;
+    CHECK(!wow_profile_bind(NULL, FastGetProfileIntW));
+    CHECK(!wow_profile_bind(wow_original_task_profile, NULL));
+    CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
+    CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
+    CHECK(wow_profile_int(14, L"S40_PROFILE_MISSING", 123) == 123);
+    status=RegOpenKeyExW(HKEY_LOCAL_MACHINE,
         L"Software\\Microsoft\\Windows NT\\CurrentVersion\\Compatibility",
         0,KEY_READ|KEY_WOW64_64KEY,&key);
     /* Read-only native absence precondition, never delete a key to force it. */
