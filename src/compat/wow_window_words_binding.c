@@ -7,7 +7,8 @@
 #include "wow_dialog_state_bindings.h"
 #include "wow_dialog_procedure_bindings.h"
 #include "wow_edit_entry_bindings.h"
-#include "wow_user_client_view_layout.h"
+#include "wow_window_access_provider.h"
+#include "wow_cleanup_bindings.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_task_lifecycle.h"
 #include "compat/include/wow_user_runtime.h"
@@ -20,6 +21,7 @@
 #include <stdio.h>
 
 #include <limits.h>
+#include <malloc.h>
 
 /* DIVERGENCE(ADAPTER-WOW-027): original kernel WND/thread locks retain WW
  * across callbacks, even if a callback destroys the window. Public HWND does
@@ -38,7 +40,7 @@ struct wow_window_words_binding {
     DWORD native_thread_id;
     wow_window_creation_facts creation_facts;
     wow_window_creation_menu_state creation_menu;
-    WW words;
+    struct _WW *words;
     wow_class_words_binding *class_words;
     wow_cleanup_window cleanup;
     wow_user_object_table *objects;
@@ -51,7 +53,7 @@ struct wow_window_words_binding {
      * Resource-only projections must never gain this capability. */
     BOOL client_state_owned;
     SIZE_T projected_state_bytes; /* Capacity of resource-only WND before promotion. */
-    CLS projected_class; /* Controlled atom-only projection, never native CLS. */
+    struct tagCLS *projected_class; /* Controlled atom-only projection, never native CLS. */
     SRWLOCK name_lock;
 };
 static SRWLOCK publication_lock = SRWLOCK_INIT;
@@ -198,7 +200,7 @@ static BOOL own_window(HWND window)
     return GetWindowLongA(window, GWL_WNDPROC) != 0;
 }
 
-BOOL WINAPI wow_window_words_attach(HWND window, const WW *words)
+BOOL WINAPI wow_window_words_attach(HWND window, const struct _WW *words)
 {
     return wow_window_words_attach_class(window, words, NULL);
 }
@@ -206,9 +208,16 @@ BOOL WINAPI wow_window_words_attach(HWND window, const WW *words)
 wow_window_words_binding *WINAPI wow_window_words_allocate(void)
 {
     wow_window_words_binding *binding = HeapAlloc(GetProcessHeap(),
-        HEAP_ZERO_MEMORY, sizeof(*binding));
+        HEAP_ZERO_MEMORY, sizeof(*binding) +
+        wow_window_access_current()->layout()->words_bytes +
+        wow_window_access_current()->layout()->class_bytes);
     if (!binding) SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-    else binding->references = 1;
+    else {
+        binding->references = 1;
+        binding->words = (struct _WW *)(binding + 1);
+        binding->projected_class = (struct tagCLS *)((BYTE *)binding->words +
+            wow_window_access_current()->layout()->words_bytes);
+    }
     return binding;
 }
 
@@ -286,7 +295,7 @@ BOOL WINAPI wow_window_words_attach_client_state(wow_window_words_binding *bindi
     DWORD error = GetLastError();
     ULONG backing = 0;
     void *storage;
-    PWND consumed = NULL;
+    struct tagWND *consumed = NULL;
     WCHAR *old_name = NULL;
     if (!binding || !state) {
         SetLastError(ERROR_INVALID_PARAMETER);
@@ -299,19 +308,18 @@ BOOL WINAPI wow_window_words_attach_client_state(wow_window_words_binding *bindi
         error = ERROR_ALREADY_EXISTS;
     else if (binding->client_state == state)
         error = ERROR_INVALID_PARAMETER; /* Never consume the published view itself. */
-    else if (GetPropW(state->head.h, property_name) != binding)
+    else if (GetPropW(wow_window_access_current()->window_handle(state), property_name) != binding)
         error = ERROR_INVALID_WINDOW_HANDLE;
-    else if (binding->client_state && (state->cbwndExtra < 0 ||
-            sizeof(WND) + (SIZE_T)state->cbwndExtra > binding->projected_state_bytes))
+    else if (binding->client_state && (wow_window_access_current()->state_extent(state) > binding->projected_state_bytes))
         error = ERROR_INVALID_DATA;
     else {
         /* ADAPTER-WOW-069: managed windows publish their guest identity
          * before constructing client WND. Transfer a separate host reference
-         * to that exact generation before exposing the retained PWND.
+         * to that exact generation before exposing the retained window pointer.
          * Property-only native bindings have no graph publication to retain. */
         if (binding->objects) {
             backing = mvdm_softpc_wow_page_domain_borrow_window(
-                (ULONG)state->head.h);
+                (ULONG)wow_window_access_current()->window_handle(state));
             if (!backing) error = ERROR_INVALID_STATE;
             else {
                 storage = mvdm_softpc_wow_page_domain_window_host_storage(backing);
@@ -335,23 +343,18 @@ BOOL WINAPI wow_window_words_attach_client_state(wow_window_words_binding *bindi
         if (attached) {
             /* Registration's immutable identity view shares the class ref
              * already held by this binding, not native USER's CLS layout. */
-            state->pcls = wow_class_words_client_identity(binding->class_words);
             if (binding->client_state) {
-                PWND destination = binding->client_state;
-                PWND next = destination->spwndNext, parent = destination->spwndParent;
-                PWND child = destination->spwndChild, owner = destination->spwndOwner;
-                /* Promotion must keep every previously borrowed PWND valid.
-                 * Preserve graph edges until their next atomic publication;
-                 * original creation facts replace only the resource view. */
                 AcquireSRWLockExclusive(&binding->name_lock);
-                old_name = destination->strName.Buffer;
-                CopyMemory(destination, state, sizeof(WND) + (SIZE_T)state->cbwndExtra);
-                destination->head.pSelf = (PBYTE)destination;
-                destination->spwndNext = next; destination->spwndParent = parent;
-                destination->spwndChild = child; destination->spwndOwner = owner;
+                old_name = wow_window_access_current()->promote_state(
+                    binding->client_state, state,
+                    wow_class_words_client_identity(binding->class_words));
                 ReleaseSRWLockExclusive(&binding->name_lock);
-                consumed = state; /* Name ownership transferred by the copy. */
-            } else binding->client_state = state;
+                consumed = state;
+            } else {
+                (void)wow_window_access_current()->promote_state(NULL, state,
+                    wow_class_words_client_identity(binding->class_words));
+                binding->client_state = state;
+            }
             binding->client_state_owned = TRUE;
         }
     }
@@ -372,7 +375,7 @@ BOOL WINAPI wow_window_words_prepare_resource_state(wow_window_words_binding *bi
     DWORD saved = GetLastError(), error;
     ULONG backing = 0;
     mvdm_softpc_wow_window_observation view;
-    PWND candidate = NULL;
+    struct tagWND *candidate = NULL;
     SIZE_T bytes;
     BOOL result = FALSE;
     if (!binding || !desktop) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
@@ -383,27 +386,19 @@ BOOL WINAPI wow_window_words_prepare_resource_state(wow_window_words_binding *bi
         if (wow_window_words_client_state_value(binding)) {
             result = TRUE; __leave; /* Construction only, not scalar refresh. */
         }
-        if (view.descriptor.window_extra > (ULONG)(INT_MAX - sizeof(WND))) {
+        if (view.descriptor.window_extra > (ULONG)(INT_MAX - wow_window_access_current()->layout()->state_bytes)) {
             SetLastError(ERROR_INVALID_DATA); __leave;
         }
-        bytes = sizeof(WND) + max(view.descriptor.window_extra, sizeof(PVOID));
+        bytes = wow_window_access_current()->layout()->state_bytes + max(view.descriptor.window_extra, sizeof(PVOID));
         candidate = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, bytes);
         if (!candidate) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); __leave; }
-        candidate->head.h = (HWND)(ULONG_PTR)view.links.window;
-        candidate->head.pSelf = (PBYTE)candidate;
-        CopyMemory(&candidate->rcWindow, view.window_rect, sizeof(RECT));
-        CopyMemory(&candidate->rcClient, view.client_rect, sizeof(RECT));
-        candidate->style = view.style; candidate->ExStyle = view.exstyle;
-        candidate->hModule = (HANDLE)(ULONG_PTR)view.module;
-        if (TestwndChild(candidate)) candidate->spmenu = (PMENU)(ULONG_PTR)view.control_id;
-        if (candidate->head.h == desktop) candidate->fnid = FNID_DESKTOP;
         /* No guessed creator encoding/version, dialog flag, procedure or
          * control-private extent. This view permits relationship/resource
          * reads only; it never enables original private getters or setters. */
         AcquireSRWLockExclusive(&publication_lock);
         if (!binding->client_state) {
-            binding->projected_class.atomClassName = view.descriptor.atom;
-            candidate->pcls = &binding->projected_class;
+            wow_window_access_current()->initialize_resource(candidate,
+                binding->projected_class, &view, desktop);
             binding->projected_state_bytes = bytes;
             binding->client_state = candidate;
             candidate = NULL;
@@ -453,13 +448,13 @@ void WINAPI wow_window_words_unlock_client_name(wow_window_words_binding *bindin
     ReleaseSRWLockShared(&binding->name_lock);
 }
 
-BOOL WINAPI wow_window_words_attach_class(HWND window, const WW *words,
+BOOL WINAPI wow_window_words_attach_class(HWND window, const struct _WW *words,
     wow_class_words_binding *class_words)
 {
     return wow_window_words_attach_target(window, words, class_words, NULL);
 }
 
-BOOL WINAPI wow_window_words_attach_target(HWND window, const WW *words,
+BOOL WINAPI wow_window_words_attach_target(HWND window, const struct _WW *words,
     wow_class_words_binding *class_words, const wow_window_dispatch_target *target)
 {
     wow_window_words_binding *binding;
@@ -469,7 +464,7 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const WW *words,
     DWORD error, process_id = 0, thread_id;
     if (!words) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     if (target && (!target->procedure ||
-            (target->wow_encoded && (!target->callback || !(target->procedure & WNDPROC_WOW))) ||
+            (target->wow_encoded && (!target->callback || !(target->procedure & WOW_WINDOW_PROC_TAG))) ||
             target->procedure == (DWORD)wow_window_class_creation_proc)) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
@@ -494,7 +489,7 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const WW *words,
         if (observed) InterlockedIncrement(&binding->references); /* Property. */
         binding->enrolled = TRUE;
         binding->native_thread_id = thread_id;
-        binding->words = *words;
+        CopyMemory(binding->words, words, wow_window_access_current()->layout()->words_bytes);
         ZeroMemory(&binding->creation_menu, sizeof(binding->creation_menu));
         binding->creation_menu.checked = TRUE; /* Not necessarily a new HWND. */
         previous_class = binding->class_words;
@@ -504,7 +499,7 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const WW *words,
         binding->cleanup.native_window = window;
         binding->cleanup.procedure_is_guest = target && target->wow_encoded;
         binding->cleanup.pcls = wow_class_words_entry(class_words);
-        binding->cleanup.adwWOW = binding->words.adwWOW;
+        binding->cleanup.adwWOW = wow_window_access_current()->words(binding->words);
         binding->cleanup.lpfnWndProc = target ? (WNDPROC)target->procedure : NULL;
         binding->objects = NULL;
         binding->retired_guest_backing = 0u;
@@ -529,9 +524,9 @@ wow_window_words_binding *WINAPI wow_window_words_acquire(HWND window)
     return binding;
 }
 
-WW *WINAPI wow_window_words_value(wow_window_words_binding *binding)
+struct _WW *WINAPI wow_window_words_value(wow_window_words_binding *binding)
 {
-    return binding ? &binding->words : NULL;
+    return binding ? binding->words : NULL;
 }
 
 DWORD WINAPI wow_window_words_thread_id(wow_window_words_binding *binding)
@@ -574,9 +569,11 @@ static BOOL prepare_creation_menu(HWND window, UINT message, LPARAM lp,
 {
     if (message == WM_GETMINMAXINFO && !binding->creation_menu.checked) {
         CREATESTRUCTA creation = {0};
+        mvdm_softpc_wow_window_words_view view;
         /* Original createw.c associates the menu before sizing callbacks.
          * Retain the caller's explicit menu even before USER exposes it. */
-        creation.style = binding->words.dwStyle;
+        wow_window_access_current()->capture_words(binding->words, &view);
+        creation.style = view.style;
         creation.hMenu = binding->creation_menu.input_menu;
         return wow_window_creation_menu(window, &creation, binding->cleanup.pcls,
             &binding->creation_menu);
@@ -598,29 +595,11 @@ static WCHAR *commit_window_info(wow_window_words_binding *binding,
     const WINDOWINFO *info, DWORD control_id, DWORD instance,
     WCHAR *name, ULONG name_length, ULONG name_capacity)
 {
-    WCHAR *old_name = NULL;
-    BOOL child = (info->dwStyle & (WS_CHILD | WS_POPUP)) == WS_CHILD;
-    binding->words.dwStyle = info->dwStyle;
-    binding->words.dwExStyle = info->dwExStyle;
-    binding->words.hInstance = (HANDLE)(ULONG_PTR)instance;
-    if (binding->client_state) {
-        if (name) {
-            AcquireSRWLockExclusive(&binding->name_lock);
-            old_name = binding->client_state->strName.Buffer;
-            binding->client_state->strName.Buffer = name;
-            binding->client_state->strName.Length = name_length;
-            binding->client_state->strName.MaximumLength = name_capacity;
-            binding->client_state->strName.bAnsi = FALSE;
-            ReleaseSRWLockExclusive(&binding->name_lock);
-        }
-        if (child || TestwndChild(binding->client_state))
-            binding->client_state->spmenu = (PMENU)(ULONG_PTR)control_id;
-        binding->client_state->rcWindow = info->rcWindow;
-        binding->client_state->rcClient = info->rcClient;
-        binding->client_state->style = info->dwStyle;
-        binding->client_state->ExStyle = info->dwExStyle;
-        binding->client_state->hModule = binding->words.hInstance;
-    }
+    WCHAR *old_name;
+    if (binding->client_state && name) AcquireSRWLockExclusive(&binding->name_lock);
+    old_name = wow_window_access_current()->refresh_state(binding->client_state,
+        binding->words, info, control_id, instance, name, name_length, name_capacity);
+    if (binding->client_state && name) ReleaseSRWLockExclusive(&binding->name_lock);
     return old_name;
 }
 
@@ -635,7 +614,7 @@ BOOL WINAPI wow_window_words_publish_client_graph(ULONG count,
     for (i = 0; i < count; ++i) {
         if (!rows[i].binding || !rows[i].state ||
                 rows[i].binding->client_state != rows[i].state ||
-                rows[i].state->head.h != rows[i].window ||
+                wow_window_access_current()->window_handle(rows[i].state) != rows[i].window ||
                 rows[i].info.cbSize != sizeof(WINDOWINFO)) goto done;
         for (edge = 0; edge < 4; ++edge)
             if (rows[i].target[edge] != MAXDWORD &&
@@ -644,15 +623,16 @@ BOOL WINAPI wow_window_words_publish_client_graph(ULONG count,
     /* Nothing below can fail or call application code. Execution ownership
      * excludes original readers until the complete graph is installed. */
     for (i = 0; i < count; ++i) {
-        PWND state = rows[i].state;
+        struct tagWND * state = rows[i].state;
         (void)commit_window_info(rows[i].binding, &rows[i].info,
             rows[i].control_id, rows[i].module, NULL, 0, 0);
-        if (!rows[i].binding->client_state_owned)
-            rows[i].binding->projected_class.atomClassName = rows[i].class_atom;
-        state->spwndNext = rows[i].target[0] == MAXDWORD ? NULL : rows[rows[i].target[0]].state;
-        state->spwndParent = rows[i].target[1] == MAXDWORD ? NULL : rows[rows[i].target[1]].state;
-        state->spwndChild = rows[i].target[2] == MAXDWORD ? NULL : rows[rows[i].target[2]].state;
-        state->spwndOwner = rows[i].target[3] == MAXDWORD ? NULL : rows[rows[i].target[3]].state;
+        wow_window_access_current()->publish_links(state,
+            rows[i].binding->client_state_owned ? NULL : rows[i].binding->projected_class,
+            rows[i].class_atom,
+            rows[i].target[0] == MAXDWORD ? NULL : rows[rows[i].target[0]].state,
+            rows[i].target[1] == MAXDWORD ? NULL : rows[rows[i].target[1]].state,
+            rows[i].target[2] == MAXDWORD ? NULL : rows[rows[i].target[2]].state,
+            rows[i].target[3] == MAXDWORD ? NULL : rows[rows[i].target[3]].state);
     }
     result = TRUE;
 done:
@@ -745,7 +725,7 @@ BOOL WINAPI wow_window_words_project_observed(ULONG count,
 {
     typedef struct local_update {
         wow_window_words_binding *binding;
-        PWND state;
+        struct tagWND * state;
         WCHAR *name, *old_name;
         ULONG length, capacity;
     } local_update;
@@ -830,7 +810,7 @@ BOOL WINAPI wow_window_words_exchange(HWND window, unsigned index,
     wow_window_words_binding *binding;
     ULONG backing = 0, ignored;
     BOOL result = FALSE;
-    if (index >= WND_CNT_WOWDWORDS || !previous) {
+    if (index >= wow_window_access_current()->layout()->word_count || !previous) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     binding = wow_window_words_acquire(window);
@@ -843,7 +823,7 @@ BOOL WINAPI wow_window_words_exchange(HWND window, unsigned index,
         if (!backing || !mvdm_softpc_wow_page_domain_exchange_window_word(
                 backing, index, value, &ignored)) goto done;
     }
-    *previous = (DWORD)InterlockedExchange((LONG *)&binding->words.adwWOW[index], value);
+    *previous = (DWORD)InterlockedExchange((LONG *)&wow_window_access_current()->words(binding->words)[index], value);
     result = TRUE;
 done:
     /* A live published WND cannot be freed by this temporary release. */
@@ -887,8 +867,8 @@ void WINAPI wow_window_words_release(wow_window_words_binding *binding)
         wow_class_words_release(binding->class_words);
         /* Host carrier only; no guest-capable work belongs in final release. */
         if (binding->client_state) {
-            if (binding->client_state->strName.Buffer)
-                HeapFree(GetProcessHeap(), 0, binding->client_state->strName.Buffer);
+            WCHAR *name = wow_window_access_current()->state_name(binding->client_state);
+            if (name) HeapFree(GetProcessHeap(), 0, name);
             HeapFree(GetProcessHeap(), 0, binding->client_state);
         }
         HeapFree(GetProcessHeap(), 0, binding);
@@ -1019,10 +999,8 @@ BOOL WINAPI wow_window_words_terminal(HWND window, wow_window_words_binding *bin
         publication_held = TRUE;
         /* ADAPTER-WOW-063: original createw.c marks WFDESTROYED before its
          * canonical-control finalizer, preserving private-word cleanup. */
-        if (binding->enrolled && binding->client_state)
-            SetWF(binding->client_state, WFDESTROYED);
         finalize_fnid = binding->enrolled && binding->client_state ?
-            GETFNID(binding->client_state) : 0;
+            wow_window_access_current()->mark_destroyed(binding->client_state) : 0;
         ReleaseSRWLockExclusive(&publication_lock);
         publication_held = FALSE;
         if (runtime_entered) {
@@ -1033,11 +1011,11 @@ BOOL WINAPI wow_window_words_terminal(HWND window, wow_window_words_binding *bin
         /* Original finalizers retain their own nested task/borrow scopes.
          * No acquired runtime/publication lock spans these callouts. The
          * outer task scope restores the native caller even if they raise. */
-        if ((finalize_fnid == FNID_EDIT || finalize_fnid == FNID_COMBOBOX ||
-                finalize_fnid == FNID_LISTBOX || finalize_fnid == FNID_BUTTON) &&
+        if ((finalize_fnid == wow_control_original_provider()->edit_fnid || finalize_fnid == wow_control_original_provider()->combo_fnid ||
+                finalize_fnid == wow_control_original_provider()->list_fnid || finalize_fnid == wow_control_original_provider()->button_fnid) &&
                 !wow_control_finalize_bound(window))
             wow_user_native_call_failed("finalize-original-control", GetLastError());
-        if (finalize_fnid == FNID_DIALOG && !wow_dialog_finalize_bound(window))
+        if (finalize_fnid == wow_window_access_current()->layout()->dialog_fnid && !wow_dialog_finalize_bound(window))
             wow_user_native_call_failed("finalize-original-dialog", GetLastError());
         if (runtime && !runtime->exclusive_held) {
             if (!wow_user_runtime_enter(runtime)) { retired = FALSE; __leave; }
@@ -1143,7 +1121,7 @@ BOOL WINAPI wow_window_words_collect_retired(wow_user_object_table *objects)
         wow_window_words_binding *binding = NULL;
         HWND window = NULL;
         AcquireSRWLockShared(&publication_lock);
-        if (objects->entries[i].bType == TYPE_WINDOW) {
+        if (objects->entries[i].bType == wow_cleanup_provider_current()->window_type) {
             wow_cleanup_window *view = objects->entries[i].phead;
             if (view && view->storage && view->storage->terminal_pending) {
                 binding = view->storage;
@@ -1235,14 +1213,14 @@ BOOL WINAPI wow_window_words_prepare_exit(HWND window,
      * original dialog resources after native child destruction, while the
      * early task-resource scope is still available. Recovered controls retain their existing
      * resource-aware entry. Keep prepare-all before any DestroyWindow. */
-    fnid = binding->client_state ? GETFNID(binding->client_state) : 0;
+    fnid = binding->client_state ? wow_window_access_current()->state_fnid(binding->client_state) : 0;
     /* A native COMMDLG window may have no original client FNID. Its
      * explicitly registered resource owner is sufficient authority for the
      * resource-only terminal edge; never manufacture an original dialog. */
     terminal = binding->resource_destroy ? wow_dialog_host_terminal_proc :
         wow_control_client_procedure(fnid, FALSE);
     if (!terminal)
-        terminal = fnid == FNID_DIALOG ? wow_dialog_host_terminal_proc :
+        terminal = fnid == wow_window_access_current()->layout()->dialog_fnid ? wow_dialog_host_terminal_proc :
             binding->cleanup.native_cleanup ? binding->cleanup.native_cleanup : DefWindowProcA;
     /* PatchThreadWindows changes the real native WND selection too. An old
      * immutable guest entry must not remain selected after its task is dead.
@@ -1266,7 +1244,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
     ULONG saved_callback[2];
     BOOL callback_published = FALSE;
     if (!result || !procedure ||
-            ((procedure & WNDPROC_WOW) && !callback)) {
+            ((procedure & WOW_WINDOW_PROC_TAG) && !callback)) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
@@ -1275,17 +1253,17 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
     /* The untyped original dispatch helper cannot classify FFFF by guessing
      * current HWND state. Only an explicitly typed immutable guest entry may
      * carry that encoded selector; native CPDs use native USER APIs. */
-    if (!immutable_guest && HIWORD(procedure) == WNDPROC_HANDLE) {
+    if (!immutable_guest && HIWORD(procedure) == wow_window_access_current()->layout()->procedure_handle_tag) {
         wow_window_words_release(binding);
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     view.window = window;
-    view.adwWOW = binding->words.adwWOW;
+    view.adwWOW = wow_window_access_current()->words(binding->words);
     view.callback = callback;
     /* Original client.c dispatches native procedures without entering WOW.
      * Keep the window alive, but do not make a native callback wait for the
      * guest CPU or publish a guest callback window it does not consume. */
-    if (!(procedure & WNDPROC_WOW)) {
+    if (!(procedure & WOW_WINDOW_PROC_TAG)) {
         __try {
             if (!prepare_creation_menu(window, message, lp, binding)) return FALSE;
             wow_window_note_native_procedure(window, (WNDPROC)procedure, FALSE);
@@ -1317,7 +1295,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
                 SetLastError(ERROR_INVALID_WINDOW_HANDLE); return FALSE;
             }
             window = full;
-        } else if (binding->client_state) window = binding->client_state->head.h;
+        } else if (binding->client_state) window = wow_window_access_current()->window_handle(binding->client_state);
         view.window = window;
         /* Resource conversion may enter the guest. Establish the same task
          * and alias scope as the callback before loading the class menu. */
@@ -1438,13 +1416,13 @@ BOOL WINAPI wow_window_procedure_adopt_native(HWND input, DWORD procedure, DWORD
     wow_task_order_thread *owner;
     wow_window_words_binding *binding = NULL;
     wow_window_dispatch_target target = {0};
-    WW *borrowed, words;
+    struct _WW *borrowed, *words;
     HWND window;
     DWORD full, pid, tid, saved = GetLastError(), error;
     LONG old;
     WNDPROC entrance;
     BOOL held, result = FALSE;
-    if (!previous || !(procedure & WNDPROC_WOW) || !runtime || !runtime->thread ||
+    if (!previous || !(procedure & WOW_WINDOW_PROC_TAG) || !runtime || !runtime->thread ||
             !runtime->classes || !runtime->classes->callback) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
@@ -1473,13 +1451,14 @@ BOOL WINAPI wow_window_procedure_adopt_native(HWND input, DWORD procedure, DWORD
         }
         borrowed = wow_user_borrow_window(window);
         if (!borrowed) __leave;
-        words = *borrowed;
+        words = _alloca(wow_window_access_current()->layout()->words_bytes);
+        CopyMemory(words, borrowed, wow_window_access_current()->layout()->words_bytes);
         target.procedure = procedure;
         target.callback = runtime->classes->callback;
         target.wow_encoded = TRUE;
         entrance = wow_window_entry_for_guest(&target);
         if (!entrance) __leave;
-        if (!wow_window_words_attach_target(window, &words, NULL, &target)) __leave;
+        if (!wow_window_words_attach_target(window, words, NULL, &target)) __leave;
         binding = wow_window_words_acquire(window);
         if (!binding)
             wow_user_native_call_failed("retain-native-subclass", GetLastError());

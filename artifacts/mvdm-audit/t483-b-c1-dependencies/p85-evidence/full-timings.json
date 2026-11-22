@@ -1,0 +1,129 @@
+{
+  "Suite": "Full",
+  "ElapsedMs": 416910,
+  "InputPolicy": "Observed",
+  "WindowOwnedConsole": false,
+  "PreparationMs": 6247,
+  "Gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1272,
+      "CleanupMs": 409,
+      "Passed": true
+    },
+    {
+      "Gate": "startup-presentation",
+      "ElapsedMs": 11157,
+      "CleanupMs": 459,
+      "Passed": true
+    },
+    {
+      "Gate": "console-font-restore",
+      "ElapsedMs": 10708,
+      "CleanupMs": 443,
+      "Passed": true
+    },
+    {
+      "Gate": "console-input-batch",
+      "ElapsedMs": 12547,
+      "CleanupMs": 419,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 185,
+      "CleanupMs": 420,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66041,
+      "CleanupMs": 404,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 44839,
+      "CleanupMs": 377,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 44160,
+      "CleanupMs": 377,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14601,
+      "CleanupMs": 413,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10298,
+      "CleanupMs": 368,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 49678,
+      "CleanupMs": 459,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12740,
+      "CleanupMs": 411,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28363,
+      "CleanupMs": 371,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 40313,
+      "CleanupMs": 422,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 3952,
+      "CleanupMs": 421,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 8090,
+      "CleanupMs": 439,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 10605,
+      "CleanupMs": 422,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3822,
+      "CleanupMs": 412,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 7474,
+      "CleanupMs": 332,
+      "Passed": true
+    },
+    {
+      "Gate": "dos4gw-nesticle",
+      "ElapsedMs": 20075,
+      "CleanupMs": 378,
+      "Passed": true
+    }
+  ]
+}

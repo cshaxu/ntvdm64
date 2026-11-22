@@ -1,0 +1,21 @@
+{
+  "src/compat/include/wow_edit_entry_bindings.h": "be81d07c06efc9b5a786e26e9579ea10478c05a0188822809c663dacbe79d809",
+  "src/compat/include/wow_window_access_provider.h": "1e8753438abcc5943193032e27aad740ea93fe1ec6b5460bb183b35cf60f7f24",
+  "src/compat/wow_edit_entry_bindings.c": "5c159326754123fa38f6cffedab500b4a17fb2c7cb25acc13ba4400a6d6146c8",
+  "src/compat/wow_edit_state_bindings.c": "5a7ff1652dc38d5b416ce2bbf0c57a4d86038a7055b24b9945dc28b86f233169",
+  "src/compat/wow_window_client_access_bindings.c": "0b2b8bd2a93a945e30c817f15dd009520e9fcfdeab8d5bc9c0809166f2e6388d",
+  "src/compat/wow_window_client_state_bindings.c": "10cfe1107916b0ce82fb42645ddf7868b27b10862721196aa71e7de6c7343c21",
+  "src/compat/wow_window_creation_binding.c": "0a186248897006e62fe061081d0505cad186e8c9c11203d24f64ad00cbb38e7d",
+  "src/compat/wow_window_words_binding.c": "226be6f4c6644011988bd38343d93b522d986fe8d34f767ca3a68e06ff9a89bf",
+  "src/non-mvdm/windows/core/ntuser/client/comboini.c": "2dbe7b52b7b6f5a39a6624ed9d023643606aa429a637d11056ee942a26ed8cd6",
+  "src/non-mvdm/windows/core/ntuser/client/editec.c": "a433aca6f84b507da55385d53454ca492c4303d7d5f17fb77d91bfbf20224814",
+  "src/non-mvdm/windows/core/ntuser/kernel/getset.c": "64351c1f4bc506086779cf0e202696c7316666a8dcf06d2dc5acfe50b249b2ee",
+  "test/adapter-mvdm-host-out/wow/wow_control_entry_fixture_provider.h": "ad66d2344b9cb93ef7204493a832eb5ee0db9c57fffe9c217ba1a46294db994a",
+  "test/adapter-mvdm-host-out/wow/wow_window_access_fixture_provider.h": "25fa2551a6b4fc2e410e3ce21f443be47cac71ff9a0679c7d49ec019b8b58e3e",
+  "test/adapter-mvdm-host-out/wow/wow_window_client_message_fixture.c": "b94780f1ab9112fd090b1d4481a6a209f428e029c3050234a38304367b8bc75e",
+  "test/observation/verify-wow-task-lifecycle.ps1": "9fd28eb9090d71a6324aff535d604d57f7ed525607f55f9c6520f62e8f1cf369",
+  "test/tools/audit/test_library_build_boundary.py": "0361be8163b5d76a312180405cc80db47fe8c3f65fb79306c8d916bc70fcc429",
+  "tools/audit/verify-library-build-boundary.py": "3816659bfc5a96972919e9fa4ea5881bd6c4e9b207842d44afb97f01f726982c",
+  "tools/build/New-T310OriginalSoftpcNinja.ps1": "9cabbeb7b0133f4dbbf23729176342db1248e8025677a38db98c76ced95a1d7b",
+  "tools/build/New-T404S5Wow32ProviderNinja.ps1": "fa85464c505723760721b04628be4f23e18ca62adca91f97aa20d031f56ceace"
+}

@@ -1,0 +1,15 @@
+x86/worker: 112 A/B objects checked
+x86/wow32: 79 A/B objects checked
+x64/worker-reference-x86: 108 A/B objects checked
+x64/frontend: 34 A/B objects checked
+x64/service: 28 A/B objects checked
+x64/launcher: 25 A/B objects checked
+x64/monitor: 2 A/B objects checked
+x64/worker: 33 A/B objects checked
+x64/hook: 13 A/B objects checked
+literal-includes 5 [(('compat', 'non-mvdm'), 5)]
+runtime-image-names 103 [(('common', 'nthook-dll'), 26), (('common', 'run16-exe'), 13), (('common', 'wow32-dll'), 8), (('common', 'ntcon-exe'), 8)]
+binary-imports 3 [(('mvdm-host', 'ntvdm-exe'), 1), (('vdmredir-dll', 'ntvdm-exe'), 1), (('wow32-dll', 'ntvdm-exe'), 1)]
+resolved-includes 5 [(('compat', 'non-mvdm'), 5)]
+linked-relocations 7 [(('non-mvdm', 'mvdm-host'), 7)]
+generated-rpc-relocations 64 [(('common', 'ntsrv-exe'), 64)]

@@ -368,8 +368,21 @@ $dllEntryBridgeLines = @(
     'DWORD WINAPI _GetWindowLong(struct tagWND *, int, BOOL);',
     'LONG WINAPI _SetWindowLong(HWND, int, LONG, BOOL);',
     'HMENU WINAPI wow_user_load_menuW(HINSTANCE, LPCWSTR);',
+    'const wow_window_layout *WINAPI wow_original_window_layout(void);',
+    'VOID WINAPI wow_original_capture_window_words(const struct _WW *, struct mvdm_softpc_wow_window_words_view *);',
+    'VOID WINAPI wow_original_initialize_window_state(struct tagWND *, const wow_window_state_initialization *);',
+    'SIZE_T WINAPI wow_original_window_state_extent(const struct tagWND *);',
+    'WCHAR *WINAPI wow_original_promote_window_state(struct tagWND *, struct tagWND *, struct tagCLS *);',
+    'VOID WINAPI wow_original_initialize_resource_window(struct tagWND *, struct tagCLS *, const struct mvdm_softpc_wow_window_observation *, HWND);',
+    'WCHAR *WINAPI wow_original_refresh_window_state(struct tagWND *, struct _WW *, const WINDOWINFO *, DWORD, DWORD, WCHAR *, ULONG, ULONG);',
+    'VOID WINAPI wow_original_publish_window_links(struct tagWND *, struct tagCLS *, ATOM, struct tagWND *, struct tagWND *, struct tagWND *, struct tagWND *);',
+    'WCHAR *WINAPI wow_original_window_name(struct tagWND *);',
+    'WORD WINAPI wow_original_window_fnid(struct tagWND *);',
+    'WORD WINAPI wow_original_mark_window_destroyed(struct tagWND *);',
+    'BOOL WINAPI wow_original_creation_class_name(const struct _LARGE_STRING *, struct _UNICODE_STRING *);',
+    'C_ASSERT(sizeof(WW) % __alignof(CLS) == 0);',
     'static const wow_window_access_provider window_access_provider = {',
-    '    xxxSetWindowLong, _GetWindowLong, _SetWindowLong, wow_user_load_menuW, wow_original_window_handle, FNID_DEFWINDOWPROC, wow_original_window_words, wow_original_restore_window_words };',
+    '    xxxSetWindowLong, _GetWindowLong, _SetWindowLong, wow_user_load_menuW, wow_original_window_handle, FNID_DEFWINDOWPROC, wow_original_window_words, wow_original_restore_window_words, wow_original_window_layout, wow_original_capture_window_words, wow_original_initialize_window_state, wow_original_window_state_extent, wow_original_promote_window_state, wow_original_initialize_resource_window, wow_original_refresh_window_state, wow_original_publish_window_links, wow_original_window_name, wow_original_window_fnid, wow_original_mark_window_destroyed, wow_original_creation_class_name };',
     '#include "wow_registration_provider.h"',
     'VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);',
     'LONG WINAPI GetClassWOWWords(HINSTANCE, LPCTSTR);',
@@ -468,7 +481,9 @@ $dllEntryBridgeLines = @(
     'LONG WINAPI EditWndProcW(HWND, UINT, WPARAM, LONG);',
     'static const wow_edit_conversion_provider edit_conversion_provider = { EditWndProcA, EditWndProcW, FNID_CALLWINDOWPROC, CPD_WND | CPD_ANSI_TO_UNICODE, CPD_WND | CPD_UNICODE_TO_ANSI };',
     'BOOL WINAPI wow_original_list_caret_ready(struct tagWND *);',
-    'static const wow_control_entry_provider control_entry_provider = { EditWndProcA, EditWndProcW, ComboBoxWndProcA, ComboBoxWndProcW, ListBoxWndProcA, ListBoxWndProcW, ComboListBoxWndProcA, ComboListBoxWndProcW, ButtonWndProcA, ButtonWndProcW, xxxLBoxCaretBlinker, FNID_BUTTON, FNID_EDIT, FNID_COMBOBOX, FNID_LISTBOX, FNID_COMBOLISTBOX, ICLS_EDIT, ICLS_COMBOLISTBOX, wow_original_list_caret_ready };',
+    'BOOL WINAPI wow_original_combo_info(HWND, struct tagWND *, PCOMBOBOXINFO, BOOL *);',
+    'BOOL WINAPI wow_original_finalize_control(HWND);',
+    'static const wow_control_entry_provider control_entry_provider = { EditWndProcA, EditWndProcW, ComboBoxWndProcA, ComboBoxWndProcW, ListBoxWndProcA, ListBoxWndProcW, ComboListBoxWndProcA, ComboListBoxWndProcW, ButtonWndProcA, ButtonWndProcW, xxxLBoxCaretBlinker, FNID_BUTTON, FNID_EDIT, FNID_COMBOBOX, FNID_LISTBOX, FNID_COMBOLISTBOX, ICLS_EDIT, ICLS_COMBOLISTBOX, wow_original_list_caret_ready, wow_original_combo_info, wow_original_finalize_control };',
     '#include "compat/include/wow_dialog_keyboard_provider.h"',
     'BOOL WINAPI wow_original_IsDialogMessageA(HWND, LPMSG);',
     'BOOL WINAPI wow_original_IsDialogMessageW(HWND, LPMSG);',
@@ -576,7 +591,7 @@ $force = '/FI "' + (Join-Path $root 'src/non-mvdm/public/sdk/inc/nt.h') + '"'
 $cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $includes
 $nativeCflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT'
 $adapterCflags = $nativeCflags + ' ' + $force + ' ' + $includes
-$compatWowCflags = $nativeCflags + ' ' + $includes
+$compatWowCflags = $nativeCflags + ' ' + ((@('src', 'src/compat/include') | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' ')
 
 
 $ninja = [System.Collections.Generic.List[string]]::new()
@@ -922,7 +937,8 @@ $ninja.Add('build legacy-wow-ntdll.lib: legacy_import_lib ' + (ConvertTo-NinjaPa
 $ninja.Add('build wow32.dll | wow32.lib: wow_dll_link ' + (($objects + $supportObjects + @($systemImportAliasObject, $parentImportAliasObject, $dllEntryBridgeObject, 'obj/wow32.res', 'legacy-wow-user32.lib', 'legacy-wow-kernel32.lib', 'legacy-wow-ntdll.lib')) -join ' ') + ' | wow32-x86.def ' + (ConvertTo-NinjaPath $parentImportLibraryPath) + ' obj/tests/wow-boundary-adapter.obj obj/tests/wow-boundary-thunk.obj')
 $ninja.Add('default wow32.dll')
 
-# Named original-layout adapters live in B; keep original per-unit ABI flags.
+# WOW compatibility implementations use B contracts and the native SDK only.
+# C-private operations are supplied by the existing typed provider tables.
 $compatWowNames = @('wow_hook_callback.c', 'wow_user_thunk_scope.c', 'wow_timer_callback.c', 'wow_shell_callback.c', 'wow_ole_descriptor_binding.c', 'wow_user_private_access.c', 'wow_common_dialog_calls.c', 'wow_common_dialog_callback.c', 'wow_bitmap_bindings.c', 'wow_button_lifetime.c', 'wow_button_resources.c', 'wow_callback_frame_lease.c', 'wow_class_client_bindings.c', 'wow_class_words_binding.c', 'wow_cleanup_bindings.c', 'wow_client_dispatch.c', 'wow_control_brush.c', 'wow_control_brush_bindings.c', 'wow_control_draw_state.c', 'wow_control_extent_bindings.c', 'wow_control_fnid.c', 'wow_control_state.c', 'wow_default_message_bindings.c', 'wow_default_native_bindings.c', 'wow_default_state_bindings.c', 'wow_default_window_bindings.c', 'wow_default_window_bits.c', 'wow_dialog_call_bindings.c', 'wow_dialog_context_bindings.c', 'wow_dialog_creation_binding.c', 'wow_dialog_keyboard_binding.c', 'wow_dialog_finalization_binding.c', 'wow_dialog_native_bindings.c', 'wow_dialog_procedure_bindings.c', 'wow_dialog_state_bindings.c', 'wow_edit_call_bindings.c', 'wow_edit_conversion_bindings.c', 'wow_edit_entry_bindings.c', 'wow_edit_lookaside_bindings.c', 'wow_edit_native_bindings.c', 'wow_edit_state_bindings.c', 'wow_edit_thread_bindings.c', 'wow_idle_hook_binding.c', 'wow_input_group_lifetime.c', 'wow_input_membership.c', 'wow_list_native_bindings.c', 'wow_menu_client_bindings.c', 'wow_menu_native_bindings.c', 'wow_private_user_compat.c', 'wow_standard_class_bindings.c', 'wow_task_cleanup_entry.c', 'wow_task_profile_binding.c', 'wow_user_borrow_scope.c', 'wow_user_discovery.c', 'wow_user_message_bridge.c', 'wow_user_native_extension.c', 'wow_user_object_bindings.c', 'wow_user_registration_state.c', 'wow_user_registration_bridge.c', 'wow_task_start_notification.c', 'wow_user_task_lifecycle.c', 'wow_window_client_access_bindings.c', 'wow_window_client_state_bindings.c', 'wow_window_creation_binding.c', 'wow_window_procedure_entry.c', 'wow_window_words_binding.c')
 for ($index = 0; $index -lt $ninja.Count; ++$index) {
     if ($ninja[$index] -notmatch '^build .*: cc .*src/compat/([^/]+\.c)$' -or

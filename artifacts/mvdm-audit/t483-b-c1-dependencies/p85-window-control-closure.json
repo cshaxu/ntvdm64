@@ -1,0 +1,143 @@
+{
+  "packet": "M0 T483 S20 P85",
+  "baseline": "4c5fcee31dfe1baf7aa2d91baffde7aadfbf41eb",
+  "status": "verified and published; commit/push established by containing Git history",
+  "completed_files": [
+    "src/compat/include/control-client/precomp.h",
+    "src/compat/include/opennt_user_multipass.h",
+    "src/compat/include/opennt_usercli_multipass.h",
+    "src/compat/include/wow_shared_user_abi.h",
+    "src/compat/wow_edit_state_bindings.c",
+    "src/compat/wow_window_client_state_bindings.c",
+    "src/compat/wow_window_creation_binding.c",
+    "src/compat/wow_window_words_binding.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 94,
+    "remaining": 0,
+    "B_C1_private_links": 0,
+    "B_C2_private_links": 0,
+    "B_C1_compiled_headers": 0,
+    "B_C2_compiled_headers": 0,
+    "B_private_search_roots": 0,
+    "C1_C2_original_API_relocation_rows": 7
+  },
+  "ownership": "Existing B synchronous provider interfaces; C owns original WW/WND/CLS and control field operations. B retains single storage allocation, locks, refs, borrow/task scopes, rollback, publication and native fallback. No new queue/state machine/private-layout copy.",
+  "build": {
+    "finished": "2026-11-22T14:02:01.0350306+00:00",
+    "pid": 20724,
+    "started": "2026-11-22T14:01:10.7792219+00:00",
+    "exit": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "100b16d9-992d-4e2c-8d99-66a4e891dd26",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "targeted": [
+    {
+      "finished": "2026-11-22T14:04:15.5836748+00:00",
+      "case": "window-borrow",
+      "exit": 0,
+      "started": "2026-11-22T14:04:03.7296761+00:00"
+    },
+    {
+      "finished": "2026-11-22T14:04:30.2127714+00:00",
+      "case": "graph-snapshot",
+      "exit": 0,
+      "started": "2026-11-22T14:04:15.5891440+00:00"
+    },
+    {
+      "finished": "2026-11-22T14:04:41.9616996+00:00",
+      "case": "native-creation",
+      "exit": 0,
+      "started": "2026-11-22T14:04:30.2153071+00:00"
+    },
+    {
+      "finished": "2026-11-22T14:04:51.8834010+00:00",
+      "case": "process-retirement",
+      "exit": 0,
+      "started": "2026-11-22T14:04:41.9629166+00:00"
+    },
+    {
+      "finished": "2026-11-22T14:05:01.6328547+00:00",
+      "case": "task-lifecycle",
+      "exit": 0,
+      "started": "2026-11-22T14:04:51.8846006+00:00"
+    },
+    {
+      "finished": "2026-11-22T14:05:13.6596455+00:00",
+      "case": "menu-resource",
+      "exit": 0,
+      "started": "2026-11-22T14:05:01.6339756+00:00"
+    }
+  ],
+  "strict_gate": {
+    "started": "2026-11-22T14:04:27.6952284+00:00",
+    "pid": 31180,
+    "exit": 0,
+    "finished": "2026-11-22T14:04:38.8679187+00:00"
+  },
+  "source_identity": {
+    "src/compat/include/wow_edit_entry_bindings.h": "be81d07c06efc9b5a786e26e9579ea10478c05a0188822809c663dacbe79d809",
+    "src/compat/include/wow_window_access_provider.h": "1e8753438abcc5943193032e27aad740ea93fe1ec6b5460bb183b35cf60f7f24",
+    "src/compat/wow_edit_entry_bindings.c": "5c159326754123fa38f6cffedab500b4a17fb2c7cb25acc13ba4400a6d6146c8",
+    "src/compat/wow_edit_state_bindings.c": "5a7ff1652dc38d5b416ce2bbf0c57a4d86038a7055b24b9945dc28b86f233169",
+    "src/compat/wow_window_client_access_bindings.c": "0b2b8bd2a93a945e30c817f15dd009520e9fcfdeab8d5bc9c0809166f2e6388d",
+    "src/compat/wow_window_client_state_bindings.c": "10cfe1107916b0ce82fb42645ddf7868b27b10862721196aa71e7de6c7343c21",
+    "src/compat/wow_window_creation_binding.c": "0a186248897006e62fe061081d0505cad186e8c9c11203d24f64ad00cbb38e7d",
+    "src/compat/wow_window_words_binding.c": "226be6f4c6644011988bd38343d93b522d986fe8d34f767ca3a68e06ff9a89bf",
+    "src/non-mvdm/windows/core/ntuser/client/comboini.c": "2dbe7b52b7b6f5a39a6624ed9d023643606aa429a637d11056ee942a26ed8cd6",
+    "src/non-mvdm/windows/core/ntuser/client/editec.c": "a433aca6f84b507da55385d53454ca492c4303d7d5f17fb77d91bfbf20224814",
+    "src/non-mvdm/windows/core/ntuser/kernel/getset.c": "64351c1f4bc506086779cf0e202696c7316666a8dcf06d2dc5acfe50b249b2ee",
+    "test/adapter-mvdm-host-out/wow/wow_control_entry_fixture_provider.h": "ad66d2344b9cb93ef7204493a832eb5ee0db9c57fffe9c217ba1a46294db994a",
+    "test/adapter-mvdm-host-out/wow/wow_window_access_fixture_provider.h": "25fa2551a6b4fc2e410e3ce21f443be47cac71ff9a0679c7d49ec019b8b58e3e",
+    "test/adapter-mvdm-host-out/wow/wow_window_client_message_fixture.c": "b94780f1ab9112fd090b1d4481a6a209f428e029c3050234a38304367b8bc75e",
+    "test/observation/verify-wow-task-lifecycle.ps1": "9fd28eb9090d71a6324aff535d604d57f7ed525607f55f9c6520f62e8f1cf369",
+    "test/tools/audit/test_library_build_boundary.py": "0361be8163b5d76a312180405cc80db47fe8c3f65fb79306c8d916bc70fcc429",
+    "tools/audit/verify-library-build-boundary.py": "3816659bfc5a96972919e9fa4ea5881bd6c4e9b207842d44afb97f01f726982c",
+    "tools/build/New-T310OriginalSoftpcNinja.ps1": "9cabbeb7b0133f4dbbf23729176342db1248e8025677a38db98c76ced95a1d7b",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "fa85464c505723760721b04628be4f23e18ca62adca91f97aa20d031f56ceace"
+  },
+  "mirror_delta": {
+    "points": 4,
+    "lines": 244,
+    "S20_cumulative_points": 15,
+    "S20_cumulative_lines": 815,
+    "S19_cumulative_points": 12,
+    "S19_cumulative_lines": 574,
+    "pending": [
+      "T483-R2769",
+      "T483-R2770",
+      "T483-R2771"
+    ]
+  },
+  "mirror_identity": "Each changed mirror retains its entire HEAD prefix byte-identically; additions only at EOF. Existing #error/#line and original diagnostic locations unchanged. Fixed-original filtered metrics in p85-evidence/mirror-before.json and mirror-after.json.",
+  "verification": {
+    "Full": "Passed using complete Windows Userenv through existing helper; exact command and gate timings retained.",
+    "targeted_runtime": "Published USER16 and modern EDIT/CMD/MEM with launcher return passed.",
+    "negative_boundary_cases": 12,
+    "documentation": "passed",
+    "relative_links": "passed",
+    "final_source_and_dual22_hashes": "passed",
+    "Full_gate_count": 20,
+    "Full_elapsed_ms": 416910
+  },
+  "failures_preserved": [
+    "Initial lifecycle fixture compile inherited private headers from the old B build flags; fixture now derives C search roots from actual C compile command, without weakening B production gate. Final fixtures pass.",
+    "Initial Full inherited environment hits guest illegal instruction before WOW32 load. Same failure reproduced on delivered P84. P85 passes under complete Windows Userenv. This does not fix or declare supported the inherited agent environment."
+  ],
+  "coverage": "p85-evidence/coverage-disposition.json",
+  "limits": [
+    "Original named DLL imports and B-owned callbacks remain runtime relationships, not violations.",
+    "Four header carriers retain five textual C includes for C-source assembly; compiled B closure is zero.",
+    "Existing Shell nested-native diagnostic boundary unchanged; no broad guest Windows OS matrix or that repair claimed."
+  ],
+  "evidence_root": "build/t483-s20-p85-window-control"
+}

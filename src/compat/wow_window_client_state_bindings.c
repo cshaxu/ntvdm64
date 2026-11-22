@@ -1,14 +1,13 @@
 #include <windows.h>
 #include <winternl.h>
 #include "wow_window_client_state_bindings.h"
-#include "wow_user_client_view_layout.h"
+#include "wow_window_access_provider.h"
 #include "wow_user_borrow_scope.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_user_object_bindings.h"
 #include "wow_task_order_bindings.h"
 #include "wow_edit_native_bindings.h"
 #include "compat/include/wow_page_domain.h"
-#include "non-mvdm/public/internal/windows/inc/wingdip.h"
 
 /* One host WND/class-extra allocation per existing HWND binding. Original
  * controls/dialogs own their interpretation and private-state lifecycle. */
@@ -79,8 +78,9 @@ BOOL WINAPI wow_window_client_create_state(HWND window,
 {
     DWORD error = GetLastError();
     wow_window_words_binding *binding;
-    PWND state;
-    WW *words;
+    struct tagWND * state;
+    wow_window_state_initialization input;
+    const wow_window_access_provider *provider = wow_window_access_current();
     WINDOWINFO info;
     BOOL ansi_creator;
     DWORD control_id = 0;
@@ -109,9 +109,9 @@ BOOL WINAPI wow_window_client_create_state(HWND window,
      * same retained allocation; no separate extra-byte/dialog allocation.
      * The minimum extra word preserves safe pre-validation control access
      * without changing cbwndExtra checked by original control code. */
-    allocation_bytes = sizeof(WND) + (SIZE_T)class_extra_bytes;
-    if (allocation_bytes < sizeof(WND) + sizeof(PVOID))
-        allocation_bytes = sizeof(WND) + sizeof(PVOID);
+    allocation_bytes = provider->layout()->state_bytes + (SIZE_T)class_extra_bytes;
+    if (allocation_bytes < provider->layout()->state_bytes + sizeof(PVOID))
+        allocation_bytes = provider->layout()->state_bytes + sizeof(PVOID);
     state = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, allocation_bytes);
     if (!state) {
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
@@ -122,34 +122,18 @@ BOOL WINAPI wow_window_client_create_state(HWND window,
         HeapFree(GetProcessHeap(), 0, state);
         SetLastError(failure); return FALSE;
     }
-    state->strName.Buffer = name;
-    state->strName.Length = name_length;
-    state->strName.MaximumLength = name_capacity;
-    state->strName.bAnsi = FALSE;
-    words = wow_window_words_value(binding);
-    state->head.h = window;
-    state->head.pSelf = (PBYTE)state;
-    state->cbwndExtra = class_extra_bytes;
-    state->rcWindow = info.rcWindow;
-    state->rcClient = info.rcClient;
-    CopyMemory(state->adwWOW, words->adwWOW, sizeof(state->adwWOW));
-    state->style = words->dwStyle;
-    state->ExStyle = words->dwExStyle;
-    state->hModule = words->hInstance;
-    state->spmenu = (PMENU)(ULONG_PTR)(DWORD)control_id;
-    /* ADAPTER-WOW-063: shared creation-state projection from original createw.c
-     * (ANSI transfer and lines 354--371 compatibility branches). The full
-     * server creator cannot be composed; its caller provides these exact
-     * source inputs. Native creation/style policy is not implemented here. */
-    if (ansi_creator) SetWF(state, WFANSICREATOR);
-    if (compatibility_flags & GACF_RANDOM3XUI) SetWF(state, WFOLDUI);
-    state->dwExpWinVer = (DWORD)LOWORD(module_version);
-    if (Is310Compat(state->dwExpWinVer)) {
-        SetWF(state, WFWIN31COMPAT);
-        if (Is400Compat(state->dwExpWinVer))
-            SetWF(state, WFWIN40COMPAT);
-    } else if (compatibility_flags & GACF_ALWAYSSENDNCPAINT)
-        SetWF(state, WFALWAYSSENDNCPAINT);
+    input.window = window;
+    input.info = info;
+    input.class_extra_bytes = class_extra_bytes;
+    input.module_version = module_version;
+    input.compatibility_flags = compatibility_flags;
+    input.control_id = control_id;
+    input.ansi_creator = ansi_creator;
+    input.name = name;
+    input.name_length = name_length;
+    input.name_capacity = name_capacity;
+    input.words = wow_window_words_value(binding);
+    provider->initialize_state(state, &input);
     if (!wow_window_words_attach_client_state(binding, state)) {
         error = GetLastError();
         HeapFree(GetProcessHeap(), 0, name);
@@ -161,11 +145,11 @@ BOOL WINAPI wow_window_client_create_state(HWND window,
     return TRUE;
 }
 
-PWND WINAPI wow_window_client_validate_hwnd(HWND window)
+struct tagWND * WINAPI wow_window_client_validate_hwnd(HWND window)
 {
     DWORD error = GetLastError();
     wow_window_words_binding *binding = wow_user_borrow_enrolled_window(window);
-    PWND state;
+    struct tagWND * state;
     if (!binding) return NULL;
     state = wow_window_words_client_state_value(binding);
     if (!wow_window_words_owns_client_state(binding, state)) {
@@ -176,11 +160,11 @@ PWND WINAPI wow_window_client_validate_hwnd(HWND window)
     return state;
 }
 
-PWND WINAPI wow_window_client_validate_window(HWND window)
+struct tagWND * WINAPI wow_window_client_validate_window(HWND window)
 {
     DWORD saved = GetLastError(), error;
     wow_user_runtime_thread *runtime = wow_user_runtime_current();
-    PWND state = NULL;
+    struct tagWND * state = NULL;
     BOOL held;
     if (!runtime) { SetLastError(ERROR_INVALID_STATE); return NULL; }
     held = runtime->exclusive_held;
@@ -199,7 +183,7 @@ PWND WINAPI wow_window_client_validate_window(HWND window)
     return state;
 }
 
-PWND WINAPI wow_window_client_desktop(void)
+struct tagWND * WINAPI wow_window_client_desktop(void)
 {
     /* client/wow.c returns the current desktop WND. Resolve its public
      * identity through the same retained domain, not NT4 desktop memory. */
@@ -207,7 +191,7 @@ PWND WINAPI wow_window_client_desktop(void)
     return wow_window_client_validate_window(GetDesktopWindow());
 }
 
-DWORD WINAPI wow_window_client_context_help(PWND state)
+DWORD WINAPI wow_window_client_context_help(struct tagWND * state)
 {
     DWORD saved = GetLastError(), result = 0;
     wow_user_runtime_thread *runtime = wow_user_runtime_current();
@@ -221,7 +205,8 @@ DWORD WINAPI wow_window_client_context_help(PWND state)
     if (!held && !wow_user_runtime_enter(runtime))
         wow_user_native_call_failed("context-help-enter", GetLastError());
     __try {
-        binding = wow_user_borrow_client_state(state->head.h, state);
+        binding = wow_user_borrow_client_state(
+            wow_window_access_current()->window_handle(state), state);
         if (!binding || !wow_window_words_pin_generation(binding, &backing) ||
                 !backing || !mvdm_softpc_wow_page_domain_read_window_view(backing, &view))
             wow_user_native_call_failed("context-help-generation", ERROR_INVALID_STATE);
@@ -236,10 +221,10 @@ DWORD WINAPI wow_window_client_context_help(PWND state)
     return result;
 }
 
-PWND WINAPI wow_window_client_validate_window_no_rip(HWND window)
+struct tagWND * WINAPI wow_window_client_validate_window_no_rip(HWND window)
 {
     DWORD saved = GetLastError();
-    PWND state = wow_window_client_validate_window(window);
+    struct tagWND * state = wow_window_client_validate_window(window);
     /* The original NoRip omits HMValidateHandle's invalid-handle RIPERR.
      * Do not disguise a failed adapter allocation/owner invariant as that
      * ordinary invalid-handle result. Both names share the same resolver. */
@@ -263,11 +248,12 @@ BOOL WINAPI wow_window_client_refresh(HWND window)
     return TRUE;
 }
 
-BOOL WINAPI wow_window_client_owns_state(PWND state)
+BOOL WINAPI wow_window_client_owns_state(struct tagWND * state)
 {
     DWORD error = GetLastError();
     wow_window_words_binding *binding = state ?
-        wow_user_borrow_client_state(state->head.h, state) : NULL;
+        wow_user_borrow_client_state(
+            wow_window_access_current()->window_handle(state), state) : NULL;
     BOOL owned = wow_window_words_owns_client_state(binding, state);
     /* ADAPTER-WOW-063: attach_client_state accepts only an enrolled local
      * binding. An exact scoped alias therefore retains that provenance even

@@ -83,7 +83,8 @@ BOOL WINAPI wow_control_entry_bind(const wow_control_entry_provider *provider)
         !provider->combo_a || !provider->combo_w || !provider->list_a ||
         !provider->list_w || !provider->combo_list_a || !provider->combo_list_w ||
         !provider->button_a || !provider->button_w || !provider->caret ||
-        !provider->caret_ready || provider->edit_class_index >= 20 ||
+        !provider->caret_ready || !provider->combo_info || !provider->finalize ||
+        provider->edit_class_index >= 20 ||
         provider->combo_list_class_index >= 20) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }

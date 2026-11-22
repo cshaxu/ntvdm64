@@ -62,6 +62,17 @@ class BoundaryTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.check_unit("host_context.c", "src/mvdm-host/softpc.new/base/inc/xt.h")
 
+    def test_window_and_control_callbacks_have_no_layout_exception(self):
+        for source in ("wow_edit_state_bindings.c", "wow_window_client_state_bindings.c",
+                       "wow_window_creation_binding.c", "wow_window_words_binding.c"):
+            with self.subTest(source=source):
+                self.check_unit(source, "src/compat/include/wow_window_access_provider.h")
+                with self.assertRaises(ValueError):
+                    self.check_unit(source, "src/non-mvdm/windows/core/ntuser/inc/user.h")
+                with self.assertRaises(ValueError):
+                    self.check_unit(source, "src/compat/include/wow_window_access_provider.h",
+                                    include="src/non-mvdm/public/sdk/inc")
+
     def test_debug_callback_consumer_has_no_C_exception(self):
         self.check_unit("dbg_registers.c", "src/compat/include/mvdm_cpu_access.h")
         with self.assertRaises(ValueError):

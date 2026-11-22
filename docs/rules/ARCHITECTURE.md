@@ -28,45 +28,23 @@ For A and B, the [library boundary check](../../tools/audit/verify-library-build
 verifies production compile commands, compiler-recorded headers and build
 prerequisites. Platform SDK and runtime libraries are outside this table.
 
-Owner revision on 2026-11-20 (S18-S20) requires eliminating all three
-boundaries: restore original C1/C2 connections, and decouple B-to-C2 and
-B-to-C1 through B-owned callback contracts provided by the respective mirror.
-The
-following earlier B-to-C approvals describe transitional existing code only;
-they are cleanup obligations, not final exceptions or permission to add more.
-Owner clarification: original public DLL API calls are not candidates for
-conversion to callbacks merely to make a dependency counter zero. Record
-the API and provider evidence separately. No new callback table is admitted
-for the original OLE-to-WOW API chain. Reviewed inner-owned callbacks and
-cross-image ABI rules below still apply.
+Owner revision on 2026-11-20 (S18-S20) requires restoring original C1/C2
+connections and decoupling B-to-C2/C1 through B-owned typed synchronous
+callback contracts supplied by the respective mirror. Original public DLL API
+calls are not converted to callbacks merely to make a dependency counter zero.
+Record their API, actual provider and named-image requirements separately.
 
-The original two x86 WOW32 B-to-C exceptions were previously approved. In compat,
-`_GetDlgItem` traverses the original USER window layout and
-`gabObjectCreateFlags` supplies the original USER object ownership flags.
-Their original approval covers these two symbols and their C layout dependencies.
-
-Owner approval in T483 S14 additionally places the reviewed CCPU/SAS and
-original USER/task-context adapters in existing B compat, with an explicit
-B-to-C dependency exception. This covers actual machine access, original-layout
-projection, execution handoff and coupled resource lifetime adaptation; it
-does not move the original CPU, scheduler or control algorithms out of C.
-No new C component is introduced. Record each migrated source, actual C
-providers and callback targets; this is not a component-wide exemption from
-dependency checking. B-to-D/E/F remains forbidden. Product launch/request
-notification, frontend transport policy and worker orchestration remain outer.
-The gate must check newly admitted units against A/B/C rather than skip them.
-The named `compat/mvdm_softpc_effective_address.c` admission consumes original
-CCPU descriptor/register providers; its compiler header closure is checked
-in both the production x86 worker and the x86 reference graph.
-The P145 WOW registration, startup notification scope and separate-launch
-adapters consume the original USER callback ABI and TD layout under the same
-named B-to-C admission. The gate checks their real compiler inputs. Worker
-notification still belongs to the product and observes the host-local event.
-
-The P81 named USER/page-domain/debug adapters use the same approved B-to-C
-exception. The gate enumerates each source and checks its real compiler
-headers and prerequisites; no whole-directory or product-header exemption.
-Request notification and separate-launch composition remain in F.
+The historical B-to-C private-layout/direct-link exceptions (including
+_GetDlgItem, gabObjectCreateFlags, CCPU/SAS and USER adapters) were transitional
+cleanup obligations. S19/S20 remove them from production compile/link checking;
+the library gate has no original-layout exception list. B translation units
+may use only A/B headers and search roots plus platform SDK/runtime inputs.
+C-source assembly headers are classified by their actual consuming source
+unit; their residence under compat does not authorize B to consume C layouts.
+Historical ownership and approval details remain in the
+[S19](../etc/evidence/m0-t483-s19-closure.md) and
+[S20](../etc/evidence/m0-t483-s20-closure.md) evidence. Legal callback runtime
+relationships remain explicit and must not be reported as absent.
 
 Migrating only declarations, or calling an F provider behind a B ABI, does
 not remove an outward dependency.
@@ -108,8 +86,9 @@ Move reusable compatibility bodies, their necessary state and cleanup together;
 the product may compose those B-owned objects and select lifecycle timing.
 Do not move the whole product session, introduce duplicate binding/state
 machines, or conceal an outer session accessor behind an opaque callback.
-Original algorithms and canonical private layouts remain C-owned; the admitted
-B adapters may consume those C layouts and algorithms directly. Product request and
+Original algorithms and canonical private layouts remain C-owned. B adapters
+use the reviewed B-owned synchronous callback contracts, without including C
+private layouts or directly linking private C implementation. Product request and
 completion authority remains product-owned. Record source dependencies,
 implementation ownership and runtime protocols separately. Existing service
 tables remain transitional until their complete chains have been migrated and
@@ -122,7 +101,7 @@ introducing a parallel session or TLS registry. Keep stateless compatibility
 operations independent of that context. F composes the B context and retains
 product task identity, scheduling, cancellation/completion policy and worker
 start/stop authority. This is not permission to move the entire product
-session into B or extend the explicit B-to-C admission above. Audit actual callback
+session into B or restore the retired private B-to-C exceptions. Audit actual callback
 targets, including memory providers and cleanup functions; source-independent
 headers and a B-owned registry alone do not prove inward implementation.
 
@@ -132,8 +111,8 @@ the function still completely explain its behavior? Saving input, reading
 it within its lifetime and releasing it normally passes. Creating a VM
 frontend for a request, choosing Run16 or reporting task completion does not.
 Original CPU/subsystem algorithms and canonical private C representations
-remain C responsibilities; their reviewed adaptation may reside in B under
-the explicit exception above, without inventing a second algorithm or layout.
+remain C responsibilities; their reviewed adaptation may reside in B using the typed provider boundary,
+without inventing a second algorithm or layout.
 Split mixed responsibilities; callbacks must not conceal the product knowledge.
 
 Product components select shared source from common, lib-nxvm, lib-win32, mvdm-host and

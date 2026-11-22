@@ -222,3 +222,174 @@ VOID WINAPI wow_original_restore_window_words(struct _WW *words,
     words->hInstance = (HANDLE)(ULONG_PTR)view->module;
 }
 
+
+/* Original USER layout operations. The caller owns storage and all locks;
+ * these operations neither publish objects nor call application/guest code. */
+#include "compat/include/wow_window_access_provider.h"
+
+const wow_window_layout *WINAPI wow_original_window_layout(void)
+{
+    static const wow_window_layout layout = {
+        sizeof(WND), sizeof(WW), sizeof(CLS), WND_CNT_WOWDWORDS,
+        CW_FLAGS_ANSI, WS_EX_ANSICREATOR, WNDPROC_HANDLE, FNID_DIALOG
+    };
+    return &layout;
+}
+
+VOID WINAPI wow_original_capture_window_words(const struct _WW *words,
+    mvdm_softpc_wow_window_words_view *view)
+{
+    C_ASSERT(sizeof(words->adwWOW) == sizeof(view->words));
+    CopyMemory(view->words, words->adwWOW, sizeof(view->words));
+    view->style = words->dwStyle;
+    view->exstyle = words->dwExStyle;
+    view->module = (ULONG)(ULONG_PTR)words->hInstance;
+}
+
+SIZE_T WINAPI wow_original_window_state_extent(const struct tagWND *state)
+{
+    return state->cbwndExtra < 0 ? (SIZE_T)-1 :
+        sizeof(WND) + (SIZE_T)state->cbwndExtra;
+}
+
+WCHAR *WINAPI wow_original_promote_window_state(struct tagWND *destination,
+    struct tagWND *source, struct tagCLS *identity)
+{
+    WCHAR *previous = NULL;
+    source->pcls = identity;
+    if (destination) {
+        PWND next = destination->spwndNext, parent = destination->spwndParent;
+        PWND child = destination->spwndChild, owner = destination->spwndOwner;
+        previous = destination->strName.Buffer;
+        CopyMemory(destination, source, sizeof(WND) + (SIZE_T)source->cbwndExtra);
+        destination->head.pSelf = (PBYTE)destination;
+        destination->spwndNext = next; destination->spwndParent = parent;
+        destination->spwndChild = child; destination->spwndOwner = owner;
+    }
+    return previous;
+}
+
+VOID WINAPI wow_original_initialize_resource_window(struct tagWND *state,
+    struct tagCLS *identity, const mvdm_softpc_wow_window_observation *view,
+    HWND desktop)
+{
+    state->head.h = (HWND)(ULONG_PTR)view->links.window;
+    state->head.pSelf = (PBYTE)state;
+    CopyMemory(&state->rcWindow, view->window_rect, sizeof(RECT));
+    CopyMemory(&state->rcClient, view->client_rect, sizeof(RECT));
+    state->style = view->style; state->ExStyle = view->exstyle;
+    state->hModule = (HANDLE)(ULONG_PTR)view->module;
+    if (TestwndChild(state)) state->spmenu = (PMENU)(ULONG_PTR)view->control_id;
+    if (state->head.h == desktop) state->fnid = FNID_DESKTOP;
+    identity->atomClassName = view->descriptor.atom;
+    state->pcls = identity;
+}
+
+WCHAR *WINAPI wow_original_refresh_window_state(struct tagWND *state,
+    struct _WW *words, const WINDOWINFO *info, DWORD control_id, DWORD module,
+    WCHAR *name, ULONG name_length, ULONG name_capacity)
+{
+    WCHAR *previous = NULL;
+    BOOL child = (info->dwStyle & (WS_CHILD | WS_POPUP)) == WS_CHILD;
+    words->dwStyle = info->dwStyle;
+    words->dwExStyle = info->dwExStyle;
+    words->hInstance = (HANDLE)(ULONG_PTR)module;
+    if (state) {
+        if (name) {
+            previous = state->strName.Buffer;
+            state->strName.Buffer = name;
+            state->strName.Length = name_length;
+            state->strName.MaximumLength = name_capacity;
+            state->strName.bAnsi = FALSE;
+        }
+        if (child || TestwndChild(state)) state->spmenu = (PMENU)(ULONG_PTR)control_id;
+        state->rcWindow = info->rcWindow; state->rcClient = info->rcClient;
+        state->style = info->dwStyle; state->ExStyle = info->dwExStyle;
+        state->hModule = words->hInstance;
+    }
+    return previous;
+}
+
+VOID WINAPI wow_original_publish_window_links(struct tagWND *state,
+    struct tagCLS *resource_identity, ATOM atom, struct tagWND *next,
+    struct tagWND *parent, struct tagWND *child, struct tagWND *owner)
+{
+    if (resource_identity) resource_identity->atomClassName = atom;
+    state->spwndNext = next; state->spwndParent = parent;
+    state->spwndChild = child; state->spwndOwner = owner;
+}
+
+WCHAR *WINAPI wow_original_window_name(struct tagWND *state)
+{
+    return state->strName.Buffer;
+}
+
+WORD WINAPI wow_original_window_fnid(struct tagWND *state)
+{
+    return GETFNID(state);
+}
+
+WORD WINAPI wow_original_mark_window_destroyed(struct tagWND *state)
+{
+    SetWF(state, WFDESTROYED);
+    return GETFNID(state);
+}
+
+BOOL WINAPI wow_original_creation_class_name(const struct _LARGE_STRING *source,
+    UNICODE_STRING *name)
+{
+    if (!HIWORD((ULONG_PTR)source)) {
+        name->Buffer = (PWSTR)source;
+        name->Length = name->MaximumLength = 0;
+        return TRUE;
+    }
+    if (source->bAnsi || (source->Length & 1) || source->Length > 0xffffu ||
+            source->Length > source->MaximumLength || !source->Buffer) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    name->Buffer = source->Buffer;
+    name->Length = name->MaximumLength = (USHORT)source->Length;
+    return TRUE;
+}
+
+VOID WINAPI wow_original_initialize_window_state(struct tagWND *state,
+    const wow_window_state_initialization *input)
+{
+    const struct _WW *words = input->words;
+    HWND window = input->window;
+    const WINDOWINFO info = input->info;
+    int class_extra_bytes = input->class_extra_bytes;
+    DWORD module_version = input->module_version;
+    DWORD compatibility_flags = input->compatibility_flags;
+    DWORD control_id = input->control_id;
+    BOOL ansi_creator = input->ansi_creator;
+    WCHAR *name = input->name;
+    ULONG name_length = input->name_length, name_capacity = input->name_capacity;
+    state->strName.Buffer = name;
+    state->strName.Length = name_length;
+    state->strName.MaximumLength = name_capacity;
+    state->strName.bAnsi = FALSE;
+    state->head.h = window;
+    state->head.pSelf = (PBYTE)state;
+    state->cbwndExtra = class_extra_bytes;
+    state->rcWindow = info.rcWindow;
+    state->rcClient = info.rcClient;
+    CopyMemory(state->adwWOW, words->adwWOW, sizeof(state->adwWOW));
+    state->style = words->dwStyle;
+    state->ExStyle = words->dwExStyle;
+    state->hModule = words->hInstance;
+    state->spmenu = (PMENU)(ULONG_PTR)(DWORD)control_id;
+    /* ADAPTER-WOW-063: shared creation-state projection from original createw.c
+     * (ANSI transfer and lines 354--371 compatibility branches). The full
+     * server creator cannot be composed; its caller provides these exact
+     * source inputs. Native creation/style policy is not implemented here. */
+    if (ansi_creator) SetWF(state, WFANSICREATOR);
+    if (compatibility_flags & GACF_RANDOM3XUI) SetWF(state, WFOLDUI);
+    state->dwExpWinVer = (DWORD)LOWORD(module_version);
+    if (Is310Compat(state->dwExpWinVer)) {
+        SetWF(state, WFWIN31COMPAT);
+        if (Is400Compat(state->dwExpWinVer))
+            SetWF(state, WFWIN40COMPAT);
+    } else if (compatibility_flags & GACF_ALWAYSSENDNCPAINT)
+        SetWF(state, WFALWAYSSENDNCPAINT);
+}

@@ -1,0 +1,6 @@
+from	to	source	line_or_section	target	evidence	product
+compat	non-mvdm	src/compat/include/control-draw-state/precomp.h	11	src/non-mvdm/public/internal/windows/inc/wingdip.h	non-mvdm/public/internal/windows/inc/wingdip.h	""
+compat	non-mvdm	src/compat/include/control-drawing/precomp.h	5	src/non-mvdm/public/internal/windows/inc/wingdip.h	non-mvdm/public/internal/windows/inc/wingdip.h	""
+compat	non-mvdm	src/compat/include/opennt_user_multipass.h	3	src/non-mvdm/windows/core/ntuser/inc/user.h	non-mvdm/windows/core/ntuser/inc/user.h	""
+compat	non-mvdm	src/compat/include/opennt_usercli_multipass.h	3	src/non-mvdm/windows/core/ntuser/client/usercli.h	non-mvdm/windows/core/ntuser/client/usercli.h	""
+compat	non-mvdm	src/compat/include/wow_shared_user_abi.h	11	src/non-mvdm/public/internal/windows/inc/wowuserp.h	non-mvdm/public/internal/windows/inc/wowuserp.h	""

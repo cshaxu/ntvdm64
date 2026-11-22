@@ -1,18 +1,19 @@
 #include <windows.h>
 #include <winternl.h>
 #include "wow_window_access_provider.h"
+#include "wow_page_domain.h"
 #include "wow_window_creation_binding.h"
 #include "wow_window_procedure_entry.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_dialog_state_bindings.h"
-#include "wow_user_client_view_layout.h"
 #include "wow_class_client_bindings.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_private_access.h"
 #include "wow_user_borrow_scope.h"
-#include "wow_menu_resource_bindings.h"
 #include <stdio.h>
+#include <malloc.h>
+#include <string.h>
 
 /* ADAPTER-WOW-031: original createw.c binds class and WW before CBT/WNDPROC.
  * Public USER owns creation, message order and failure; a thread-local CBT
@@ -21,7 +22,7 @@
 typedef struct creation_scope {
     struct creation_scope *previous;
     const CREATESTRUCTA *request;
-    const WW *words;
+    const struct _WW *words;
     const wow_window_dispatch_target *target;
     wow_window_dispatch_target target_snapshot;
     ATOM atom;
@@ -55,8 +56,10 @@ LRESULT CALLBACK wow_window_class_creation_proc(HWND window, UINT message,
  * procedures. Enrollment must preserve all recovered control families. */
 static BOOL recovered_control_procedure(DWORD procedure)
 {
-    static const WORD controls[] = {
-        FNID_EDIT, FNID_COMBOBOX, FNID_LISTBOX, FNID_COMBOLISTBOX, FNID_BUTTON
+    const wow_control_entry_provider *provider = wow_control_original_provider();
+    const WORD controls[] = {
+        provider->edit_fnid, provider->combo_fnid, provider->list_fnid,
+        provider->combo_list_fnid, provider->button_fnid
     };
     unsigned i;
     for (i = 0; i < ARRAYSIZE(controls); ++i)
@@ -84,15 +87,16 @@ static void rollback_enrollment(HWND window, wow_window_words_binding *borrow,
  * The native class remains registered with USER. Its existing per-window
  * procedure is retained below our entrance, including opaque CallProc values. */
 static BOOL enroll_created_window(HWND window, const CREATESTRUCTA *request,
-    const WW *input, wow_class_words_binding **class_words,
+    const struct _WW *input, wow_class_words_binding **class_words,
     const wow_window_dispatch_target *selected, wow_task_order_thread *thread,
     BOOL original_creator, wow_window_words_binding **borrow, WNDPROC *previous,
     WNDPROC *installed)
 {
-    WW words = *input;
+    struct _WW *words = _alloca(wow_window_access_current()->layout()->words_bytes);
     wow_window_dispatch_target target = {0};
     BOOL native = wow_class_words_native_registration(*class_words);
     DWORD error;
+    CopyMemory(words, input, wow_window_access_current()->layout()->words_bytes);
     *borrow = NULL;
     *previous = NULL;
     *installed = NULL;
@@ -105,23 +109,28 @@ static BOOL enroll_created_window(HWND window, const CREATESTRUCTA *request,
      * version/encoding/extent and must retain their recovered procedures.
      * A guest class procedure remains guest-owned in either case. */
     if (native && (!original_creator || !recovered_control_procedure(target.procedure)) &&
-            (!target.wow_encoded && (HIWORD(target.procedure) == WNDPROC_HANDLE ||
-            !(target.procedure & WNDPROC_WOW)))) {
+            (!target.wow_encoded && (HIWORD(target.procedure) == wow_window_access_current()->layout()->procedure_handle_tag ||
+            !(target.procedure & WOW_WINDOW_PROC_TAG)))) {
         target.procedure = (DWORD)GetWindowLongA(window, GWL_WNDPROC);
         target.wow_encoded = FALSE;
         if (!target.procedure) {
             SetLastError(ERROR_INVALID_WINDOW_HANDLE); return FALSE;
         }
     }
-    words.dwStyle = request->style;
-    words.dwExStyle = request->dwExStyle;
-    words.hInstance = request->hInstance;
+    {
+        mvdm_softpc_wow_window_words_view view;
+        wow_window_access_current()->capture_words(words, &view);
+        view.style = request->style;
+        view.exstyle = request->dwExStyle;
+        view.module = (ULONG)(ULONG_PTR)request->hInstance;
+        wow_window_access_current()->restore_words(words, &view);
+    }
     if (target.procedure) {
         *installed = target.wow_encoded ? wow_window_entry_for_guest(&target) :
             (WNDPROC)target.procedure;
         if (!*installed) return FALSE;
     }
-    if (!wow_window_words_attach_target(window, &words, *class_words,
+    if (!wow_window_words_attach_target(window, words, *class_words,
             target.procedure ? &target : NULL)) return FALSE;
     *class_words = NULL; /* Attachment owns this acquired reference. */
     *borrow = wow_window_words_acquire(window);
@@ -158,7 +167,9 @@ static BOOL enroll_internal_locked(wow_task_order_thread *thread,
     wow_window_words_binding *existing = NULL, *parent = NULL;
     wow_class_words_binding *class_words = NULL;
     wow_window_dispatch_target target = {0};
-    WW words = {0};
+    struct _WW *words = memset(
+        _alloca(wow_window_access_current()->layout()->words_bytes), 0,
+        wow_window_access_current()->layout()->words_bytes);
     DWORD error = GetLastError();
     BOOL claimed = FALSE;
 
@@ -207,7 +218,7 @@ static BOOL enroll_internal_locked(wow_task_order_thread *thread,
         /* Publish the rollback identity before any step can acquire a borrow.
          * An exception during enrollment must not retire that borrow as HWND 0. */
         enrollment->window = window;
-        if (!enroll_created_window(window, request, &words, &class_words,
+        if (!enroll_created_window(window, request, words, &class_words,
                 &target, thread, FALSE, &enrollment->borrow, &enrollment->previous_native,
                 &enrollment->installed_native))
             return FALSE;
@@ -524,10 +535,10 @@ static LRESULT CALLBACK creation_hook(int code, WPARAM wp, LPARAM lp)
 }
 
 static HWND create_bound(wow_task_order_thread *thread,
-    ATOM atom, const CREATESTRUCTA *request, const WW *words,
+    ATOM atom, const CREATESTRUCTA *request, const struct _WW *words,
     const wow_window_dispatch_target *target, BOOL unicode,
     const DWORD *captured_module_version,
-    const LARGE_STRING *counted_title, BOOL native_counted_creation)
+    const struct _LARGE_STRING *counted_title, BOOL native_counted_creation)
 {
     creation_scope scope = {0};
     wow_user_native_call call;
@@ -660,14 +671,14 @@ static HWND create_bound(wow_task_order_thread *thread,
 }
 
 HWND WINAPI wow_window_create_boundA(wow_task_order_thread *context,
-    ATOM atom, const CREATESTRUCTA *request, const WW *words,
+    ATOM atom, const CREATESTRUCTA *request, const struct _WW *words,
     const wow_window_dispatch_target *target)
 {
     return create_bound(context, atom, request, words, target, FALSE, NULL, NULL, FALSE);
 }
 
 HWND WINAPI wow_window_create_boundW(wow_task_order_thread *context,
-    ATOM atom, const CREATESTRUCTW *request, const WW *words,
+    ATOM atom, const CREATESTRUCTW *request, const struct _WW *words,
     const wow_window_dispatch_target *target)
 {
     CREATESTRUCTA carrier;
@@ -690,17 +701,19 @@ HWND WINAPI wow_user_create_window_ex(DWORD ex_style, LPCTSTR class_name,
     int characters;
     ATOM atom;
     CREATESTRUCTA request = {0};
-    WW words = {0};
+    struct _WW *words = memset(
+        _alloca(wow_window_access_current()->layout()->words_bytes), 0,
+        wow_window_access_current()->layout()->words_bytes);
     HWND result;
     DWORD module_version;
 
-    /* `wuwind.c` is the sole selected caller and passes CW_FLAGS_ANSI.  Other
+    /* `wuwind.c` is the sole selected caller and passes wow_window_access_current()->layout()->ansi_creation_flag.  Other
      * historical create flags were private NtUser policy; reject them rather
      * than silently changing their meaning at the public USER32 boundary. */
     if (!binding || !binding->thread || !binding->thread->ppi ||
             !binding->thread->ppi->classes || !binding->classes ||
             !binding->classes->get_version || !class_name || !input_words ||
-            flags != CW_FLAGS_ANSI) {
+            flags != wow_window_access_current()->layout()->ansi_creation_flag) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return NULL;
     }
@@ -741,7 +754,8 @@ HWND WINAPI wow_user_create_window_ex(DWORD ex_style, LPCTSTR class_name,
     /* OpenNT's _CreateWindowEx sends precisely WND_CNT_WOWDWORDS (three
      * DWORDs) to the private server.  Do not read a whole WW from the caller;
      * the remaining native view is initialized by the creation hook. */
-    CopyMemory(words.adwWOW, input_words, sizeof(words.adwWOW));
+    CopyMemory(wow_window_access_current()->words(words), input_words,
+            wow_window_access_current()->layout()->word_count * sizeof(DWORD));
     request.dwExStyle = ex_style;
     request.lpszClass = (LPCSTR)class_name;
     request.lpszName = (LPCSTR)window_name;
@@ -754,7 +768,7 @@ HWND WINAPI wow_user_create_window_ex(DWORD ex_style, LPCTSTR class_name,
     request.hMenu = menu;
     request.hInstance = (HINSTANCE)instance;
     request.lpCreateParams = parameter;
-    result = create_bound(binding->thread, atom, &request, &words,
+    result = create_bound(binding->thread, atom, &request, words,
         NULL, FALSE, &module_version, NULL, FALSE);
     return result;
 }
@@ -771,7 +785,7 @@ HWND WINAPI wow_control_create_window_ex(DWORD ex_style, LPCTSTR class_name,
      * capture, legacy-style rewrite or MDI preparation from ntstubs.c.
      * Reject new caller shapes, rather than silently skip those policies. */
     if (!class_name || HIWORD((ULONG_PTR)class_name) || title || input_words ||
-            (flags & ~CW_FLAGS_ANSI) ||
+            (flags & ~wow_window_access_current()->layout()->ansi_creation_flag) ||
             (ex_style & ~(WS_EX_TOOLWINDOW | WS_EX_CLIENTEDGE))) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return NULL;
@@ -788,21 +802,23 @@ HWND WINAPI wow_control_create_window_ex(DWORD ex_style, LPCTSTR class_name,
      * as its WORD result; this is a creator input, not a parent snapshot. */
     version = (DWORD)(WORD)binding->classes->get_version(instance ? instance :
         GetModuleHandleW(NULL));
-    if (flags & CW_FLAGS_ANSI) ex_style |= WS_EX_ANSICREATOR;
+    if (flags & wow_window_access_current()->layout()->ansi_creation_flag) ex_style |= wow_window_access_current()->layout()->ansi_creator_style;
     return wow_user_create_dialog_window_ex(ex_style,
-        (PLARGE_STRING)class_name, NULL, style, x, y, width, height,
+        (struct _LARGE_STRING *)class_name, NULL, style, x, y, width, height,
         parent, menu, instance, parameter, version, NULL);
 }
 
 HWND WINAPI wow_user_create_dialog_window_ex(DWORD ex_style,
-    PLARGE_STRING class_name, PLARGE_STRING title, DWORD style,
+    struct _LARGE_STRING * class_name, struct _LARGE_STRING * title, DWORD style,
     int x, int y, int width, int height, HWND parent, HMENU menu,
     HANDLE instance, LPVOID parameter, DWORD version, LPDWORD input_words)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     UNICODE_STRING name = {0};
     CREATESTRUCTA request = {0};
-    WW words = {0};
+    struct _WW *words = memset(
+        _alloca(wow_window_access_current()->layout()->words_bytes), 0,
+        wow_window_access_current()->layout()->words_bytes);
     ATOM atom;
 
     if (!binding || !binding->thread || !binding->thread->ppi ||
@@ -812,22 +828,13 @@ HWND WINAPI wow_user_create_dialog_window_ex(DWORD ex_style,
     /* Original dlgbegin passes either an atom or captured Unicode class
      * text, even when it requests an ANSI creator. The class owner's native
      * atom lookup remains the one resolver; no ANSI round trip or new table. */
-    if (!HIWORD((ULONG_PTR)class_name)) {
-        name.Buffer = (PWSTR)class_name;
-    } else {
-        if (class_name->bAnsi || (class_name->Length & 1) ||
-                class_name->Length > 0xffffu ||
-                class_name->Length > class_name->MaximumLength ||
-                !class_name->Buffer) {
-            SetLastError(ERROR_INVALID_PARAMETER); return NULL;
-        }
-        name.Buffer = class_name->Buffer;
-        name.Length = name.MaximumLength = (USHORT)class_name->Length;
-    }
+    if (!wow_window_access_current()->creation_class_name(class_name, &name))
+        return NULL;
     atom = wow_class_words_find_atom(binding->thread->ppi->classes, &name);
     if (!atom) return NULL;
     if (input_words)
-        CopyMemory(words.adwWOW, input_words, sizeof(words.adwWOW));
+        CopyMemory(wow_window_access_current()->words(words), input_words,
+            wow_window_access_current()->layout()->word_count * sizeof(DWORD));
 
     /* This CREATESTRUCT is enrollment metadata, not a replacement native
      * input string. Native creation consumes the retained counted title.
@@ -840,6 +847,6 @@ HWND WINAPI wow_user_create_dialog_window_ex(DWORD ex_style,
     request.hwndParent = parent; request.hMenu = menu;
     request.hInstance = (HINSTANCE)instance;
     request.lpCreateParams = parameter;
-    return create_bound(binding->thread, atom, &request, &words, NULL,
-        (ex_style & WS_EX_ANSICREATOR) == 0, &version, title, TRUE);
+    return create_bound(binding->thread, atom, &request, words, NULL,
+        (ex_style & wow_window_access_current()->layout()->ansi_creator_style) == 0, &version, title, TRUE);
 }

@@ -1,0 +1,225 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "current_sha256": "dcc662779a3dbf2414dd8385d904c67da0e61e9a6bc94830079a596dc24744f9",
+      "raw": {
+        "blocks": 12,
+        "added": 40,
+        "deleted": 702
+      },
+      "filtered": {
+        "blocks": 14,
+        "added": 23,
+        "deleted": 665
+      },
+      "excluded": [
+        {
+          "original": [
+            269,
+            271
+          ],
+          "current": [
+            56,
+            58
+          ]
+        },
+        {
+          "original": [
+            321,
+            321
+          ],
+          "current": [
+            116,
+            117
+          ]
+        },
+        {
+          "original": [
+            750,
+            750
+          ],
+          "current": [
+            182,
+            183
+          ]
+        },
+        {
+          "original": [
+            760,
+            768
+          ],
+          "current": [
+            189,
+            191
+          ]
+        },
+        {
+          "original": [
+            777,
+            777
+          ],
+          "current": [
+            197,
+            198
+          ]
+        },
+        {
+          "original": [
+            782,
+            792
+          ],
+          "current": [
+            204,
+            206
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "current_sha256": "f81ab1a2f0429b433052e5c175b534cb629af120c0d67eeb7eaf7abd3c0d6c07",
+      "raw": {
+        "blocks": 11,
+        "added": 11,
+        "deleted": 53
+      },
+      "filtered": {
+        "blocks": 1,
+        "added": 1,
+        "deleted": 1
+      },
+      "excluded": [
+        {
+          "original": [
+            310,
+            311
+          ],
+          "current": [
+            311,
+            313
+          ]
+        },
+        {
+          "original": [
+            351,
+            354
+          ],
+          "current": [
+            355,
+            357
+          ]
+        },
+        {
+          "original": [
+            509,
+            516
+          ],
+          "current": [
+            514,
+            516
+          ]
+        },
+        {
+          "original": [
+            1685,
+            1687
+          ],
+          "current": [
+            1687,
+            1689
+          ]
+        },
+        {
+          "original": [
+            1958,
+            1959
+          ],
+          "current": [
+            1962,
+            1964
+          ]
+        },
+        {
+          "original": [
+            1966,
+            1969
+          ],
+          "current": [
+            1973,
+            1975
+          ]
+        },
+        {
+          "original": [
+            2033,
+            2040
+          ],
+          "current": [
+            2041,
+            2043
+          ]
+        },
+        {
+          "original": [
+            2331,
+            2339
+          ],
+          "current": [
+            2336,
+            2338
+          ]
+        },
+        {
+          "original": [
+            2346,
+            2354
+          ],
+          "current": [
+            2347,
+            2349
+          ]
+        },
+        {
+          "original": [
+            2359,
+            2361
+          ],
+          "current": [
+            2356,
+            2358
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\comboini.c",
+      "original_sha256": "b54a3787073f51e0578acf2aa52afec144abde1c367f30ddba8855810d5c4ec8",
+      "current_sha256": "b54a3787073f51e0578acf2aa52afec144abde1c367f30ddba8855810d5c4ec8",
+      "raw": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "filtered": {
+        "blocks": 0,
+        "added": 0,
+        "deleted": 0
+      },
+      "excluded": [],
+      "issues": [],
+      "rank": 3
+    }
+  ]
+}

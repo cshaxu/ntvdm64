@@ -10,6 +10,8 @@ typedef struct wow_control_entry_provider {
     WORD button_fnid, edit_fnid, combo_fnid, list_fnid, combo_list_fnid;
     UINT edit_class_index, combo_list_class_index;
     BOOL (WINAPI *caret_ready)(struct tagWND *);
+    BOOL (WINAPI *combo_info)(HWND, struct tagWND *, PCOMBOBOXINFO, BOOL *);
+    BOOL (WINAPI *finalize)(HWND);
 } wow_control_entry_provider;
 BOOL WINAPI wow_control_entry_bind(const wow_control_entry_provider *);
 const wow_control_entry_provider *WINAPI wow_control_original_provider(void);

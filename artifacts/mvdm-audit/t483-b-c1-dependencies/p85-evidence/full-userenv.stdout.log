@@ -1,0 +1,679 @@
+OBSERVED WINMINE.EXE (not gameplay acceptance)
+
+result=timeout
+exit=0x53504354
+sample-ms=4104
+pid=11884 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=000000000016077E class=Minesweeper visible=1 text=Minesweeper
+window-utf16=000000000016077E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072
+window-geometry=000000000016077E outer-ok=1 outer=422,216,659,255 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900014 style=34CA0000 exstyle=00000100
+window-placement=000000000016077E ok=1 iconic=1 show=2 normal=422,216,928,584
+window=0000000001D506B2 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000001D506B2 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000001D506B2 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000001D506B2 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=00000000002207CA class=WOWFaxClass visible=0 text=
+window-utf16=00000000002207CA visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=00000000002207CA outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=00000000002207CA ok=1 iconic=0 show=1 normal=0,0,136,39
+window=00000000004307BA class=IME visible=0 text=Default IME
+window-utf16=00000000004307BA visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=00000000004307BA outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=00000000004307BA ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000570658 class=IME visible=0 text=Default IME
+window-utf16=0000000000570658 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000570658 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000570658 ok=1 iconic=0 show=1 normal=0,0,0,0
+sample-ms=8058
+pid=11884 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=000000000016077E class=Minesweeper visible=1 text=Minesweeper
+window-utf16=000000000016077E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072
+window-geometry=000000000016077E outer-ok=1 outer=422,216,659,255 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900014 style=34CA0000 exstyle=00000100
+window-placement=000000000016077E ok=1 iconic=1 show=2 normal=422,216,928,584
+window=0000000001D506B2 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000001D506B2 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000001D506B2 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000001D506B2 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=00000000002207CA class=WOWFaxClass visible=0 text=
+window-utf16=00000000002207CA visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=00000000002207CA outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=00000000002207CA ok=1 iconic=0 show=1 normal=0,0,136,39
+window=00000000004307BA class=IME visible=0 text=Default IME
+window-utf16=00000000004307BA visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=00000000004307BA outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=00000000004307BA ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000570658 class=IME visible=0 text=Default IME
+window-utf16=0000000000570658 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000570658 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000570658 ok=1 iconic=0 show=1 normal=0,0,0,0
+sample-ms=12099
+pid=11884 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=000000000016077E class=Minesweeper visible=1 text=Minesweeper
+window-utf16=000000000016077E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072
+window-geometry=000000000016077E outer-ok=1 outer=422,216,659,255 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900014 style=34CA0000 exstyle=00000100
+window-placement=000000000016077E ok=1 iconic=1 show=2 normal=422,216,928,584
+window=0000000001D506B2 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000001D506B2 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000001D506B2 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000001D506B2 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=00000000002207CA class=WOWFaxClass visible=0 text=
+window-utf16=00000000002207CA visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=00000000002207CA outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=00000000002207CA ok=1 iconic=0 show=1 normal=0,0,136,39
+window=00000000004307BA class=IME visible=0 text=Default IME
+window-utf16=00000000004307BA visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=00000000004307BA outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=00000000004307BA ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000570658 class=IME visible=0 text=Default IME
+window-utf16=0000000000570658 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000570658 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000570658 ok=1 iconic=0 show=1 normal=0,0,0,0
+sample-ms=16043
+pid=11884 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=000000000016077E class=Minesweeper visible=1 text=Minesweeper
+window-utf16=000000000016077E visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072
+window-geometry=000000000016077E outer-ok=1 outer=422,216,659,255 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900014 style=34CA0000 exstyle=00000100
+window-placement=000000000016077E ok=1 iconic=1 show=2 normal=422,216,928,584
+window=0000000001D506B2 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000001D506B2 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000001D506B2 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000001D506B2 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=00000000002207CA class=WOWFaxClass visible=0 text=
+window-utf16=00000000002207CA visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=00000000002207CA outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=00000000002207CA ok=1 iconic=0 show=1 normal=0,0,136,39
+window=00000000004307BA class=IME visible=0 text=Default IME
+window-utf16=00000000004307BA visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=00000000004307BA outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=00000000004307BA ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000570658 class=IME visible=0 text=Default IME
+window-utf16=0000000000570658 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000570658 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000570658 ok=1 iconic=0 show=1 normal=0,0,0,0
+OBSERVED SOL.EXE (not gameplay acceptance)
+result=timeout
+exit=0x53504354
+sample-ms=4099
+pid=3016 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=0000000000A80792 class=Touch Tooltip Window visible=0 text=Tooltip
+window-utf16=0000000000A80792 visible=0 class=0054006F00750063006800200054006F006F006C007400690070002000570069006E0064006F0077 text=0054006F006F006C007400690070
+window-geometry=0000000000A80792 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=86000000 exstyle=082800A8
+window-placement=0000000000A80792 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000002107D6 class=DirectUIHWND visible=0 text=
+window-utf16=00000000002107D6 visible=0 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=00000000002107D6 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=00000000002107D6 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=000000000194067E class=UAC_InputIndicatorOverlayWnd visible=1 text=
+window-utf16=000000000194067E visible=1 class=005500410043005F0049006E0070007500740049006E00640069006300610074006F0072004F007600650072006C006100790057006E0064 text=
+window-geometry=000000000194067E outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000000 style=94000000 exstyle=08200008
+window-placement=000000000194067E ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000000ED0754 class=UAC Input Indicator visible=1 text=
+window-utf16=0000000000ED0754 visible=1 class=00550041004300200049006E00700075007400200049006E00640069006300610074006F0072 text=
+window-geometry=0000000000ED0754 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000006 style=96000000 exstyle=08080028
+window-placement=0000000000ED0754 ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000001EE0770 class=DirectUIHWND visible=1 text=
+window-utf16=0000000001EE0770 visible=1 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=0000000001EE0770 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=0000000001EE0770 ok=1 iconic=0 show=1 normal=0,0,50,50
+window=0000000000FE074C class=Solitaire visible=1 text=Solitaire
+window-utf16=0000000000FE074C visible=1 class=0053006F006C006900740061006900720065 text=0053006F006C006900740061006900720065
+window-geometry=0000000000FE074C outer-ok=1 outer=26,26,627,469 client-ok=1 client=0,0,585,384 dpi=96 class-brush=00000000EB101090 style=16CF0000 exstyle=00000100
+window-placement=0000000000FE074C ok=1 iconic=0 show=1 normal=26,26,627,469
+window=0000000000FF021A class=Stat visible=1 text=
+window-utf16=0000000000FF021A visible=1 class=0053007400610074 text=
+window-geometry=0000000000FF021A outer-ok=1 outer=33,444,620,462 client-ok=1 client=0,0,585,16 dpi=96 class-brush=0000000000900010 style=50800003 exstyle=00000000
+window-placement=0000000000FF021A ok=1 iconic=0 show=1 normal=-1,367,586,385
+window=0000000001D606B2 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000001D606B2 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000001D606B2 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000001D606B2 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=00000000002307CA class=WOWFaxClass visible=0 text=
+window-utf16=00000000002307CA visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=00000000002307CA outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=00000000002307CA ok=1 iconic=0 show=1 normal=0,0,136,39
+window=00000000003606FE class=CicLoaderWndClass visible=0 text=
+window-utf16=00000000003606FE visible=0 class=004300690063004C006F00610064006500720057006E00640043006C006100730073 text=
+window-geometry=00000000003606FE outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=0CC00000 exstyle=00000100
+window-placement=00000000003606FE ok=1 iconic=0 show=1 normal=0,0,136,39
+window=0000000000FA071A class=CiceroUIWndFrame visible=0 text=CiceroUIWndFrame
+window-utf16=0000000000FA071A visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00430069006300650072006F005500490057006E0064004600720061006D0065
+window-geometry=0000000000FA071A outer-ok=1 outer=200,200,400,400 client-ok=1 client=0,0,200,200 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08080088
+window-placement=0000000000FA071A ok=1 iconic=0 show=1 normal=200,200,400,400
+window=0000000001170716 class=CiceroUIWndFrame visible=0 text=TF_FloatingLangBar_WndTitle
+window-utf16=0000000001170716 visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00540046005F0046006C006F006100740069006E0067004C0061006E0067004200610072005F0057006E0064005400690074006C0065
+window-geometry=0000000001170716 outer-ok=1 outer=166,0,208,22 client-ok=1 client=0,0,42,22 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08000088
+window-placement=0000000001170716 ok=1 iconic=0 show=1 normal=166,0,208,22
+window=0000000000C80774 class=IME visible=0 text=Default IME
+window-utf16=0000000000C80774 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000C80774 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000C80774 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000580658 class=IME visible=0 text=Default IME
+window-utf16=0000000000580658 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000580658 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000580658 ok=1 iconic=0 show=1 normal=0,0,0,0
+sample-ms=8061
+pid=3016 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=0000000000A80792 class=Touch Tooltip Window visible=0 text=Tooltip
+window-utf16=0000000000A80792 visible=0 class=0054006F00750063006800200054006F006F006C007400690070002000570069006E0064006F0077 text=0054006F006F006C007400690070
+window-geometry=0000000000A80792 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=86000000 exstyle=082800A8
+window-placement=0000000000A80792 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000002107D6 class=DirectUIHWND visible=0 text=
+window-utf16=00000000002107D6 visible=0 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=00000000002107D6 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=00000000002107D6 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=000000000194067E class=UAC_InputIndicatorOverlayWnd visible=1 text=
+window-utf16=000000000194067E visible=1 class=005500410043005F0049006E0070007500740049006E00640069006300610074006F0072004F007600650072006C006100790057006E0064 text=
+window-geometry=000000000194067E outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000000 style=94000000 exstyle=08200008
+window-placement=000000000194067E ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000000ED0754 class=UAC Input Indicator visible=1 text=
+window-utf16=0000000000ED0754 visible=1 class=00550041004300200049006E00700075007400200049006E00640069006300610074006F0072 text=
+window-geometry=0000000000ED0754 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000006 style=96000000 exstyle=08080028
+window-placement=0000000000ED0754 ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000001EE0770 class=DirectUIHWND visible=1 text=
+window-utf16=0000000001EE0770 visible=1 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=0000000001EE0770 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=0000000001EE0770 ok=1 iconic=0 show=1 normal=0,0,50,50
+window=0000000000FE074C class=Solitaire visible=1 text=Solitaire
+window-utf16=0000000000FE074C visible=1 class=0053006F006C006900740061006900720065 text=0053006F006C006900740061006900720065
+window-geometry=0000000000FE074C outer-ok=1 outer=26,26,627,469 client-ok=1 client=0,0,585,384 dpi=96 class-brush=00000000EB101090 style=16CF0000 exstyle=00000100
+window-placement=0000000000FE074C ok=1 iconic=0 show=1 normal=26,26,627,469
+window=0000000000FF021A class=Stat visible=1 text=
+window-utf16=0000000000FF021A visible=1 class=0053007400610074 text=
+window-geometry=0000000000FF021A outer-ok=1 outer=33,444,620,462 client-ok=1 client=0,0,585,16 dpi=96 class-brush=0000000000900010 style=50800003 exstyle=00000000
+window-placement=0000000000FF021A ok=1 iconic=0 show=1 normal=-1,367,586,385
+window=0000000001D606B2 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000001D606B2 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000001D606B2 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000001D606B2 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=00000000002307CA class=WOWFaxClass visible=0 text=
+window-utf16=00000000002307CA visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=00000000002307CA outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=00000000002307CA ok=1 iconic=0 show=1 normal=0,0,136,39
+window=00000000003606FE class=CicLoaderWndClass visible=0 text=
+window-utf16=00000000003606FE visible=0 class=004300690063004C006F00610064006500720057006E00640043006C006100730073 text=
+window-geometry=00000000003606FE outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=0CC00000 exstyle=00000100
+window-placement=00000000003606FE ok=1 iconic=0 show=1 normal=0,0,136,39
+window=0000000000FA071A class=CiceroUIWndFrame visible=0 text=CiceroUIWndFrame
+window-utf16=0000000000FA071A visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00430069006300650072006F005500490057006E0064004600720061006D0065
+window-geometry=0000000000FA071A outer-ok=1 outer=200,200,400,400 client-ok=1 client=0,0,200,200 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08080088
+window-placement=0000000000FA071A ok=1 iconic=0 show=1 normal=200,200,400,400
+window=0000000001170716 class=CiceroUIWndFrame visible=0 text=TF_FloatingLangBar_WndTitle
+window-utf16=0000000001170716 visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00540046005F0046006C006F006100740069006E0067004C0061006E0067004200610072005F0057006E0064005400690074006C0065
+window-geometry=0000000001170716 outer-ok=1 outer=166,0,208,22 client-ok=1 client=0,0,42,22 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08000088
+window-placement=0000000001170716 ok=1 iconic=0 show=1 normal=166,0,208,22
+window=0000000000C80774 class=IME visible=0 text=Default IME
+window-utf16=0000000000C80774 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000C80774 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000C80774 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000580658 class=IME visible=0 text=Default IME
+window-utf16=0000000000580658 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000580658 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000580658 ok=1 iconic=0 show=1 normal=0,0,0,0
+sample-ms=12053
+pid=3016 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=0000000000A80792 class=Touch Tooltip Window visible=0 text=Tooltip
+window-utf16=0000000000A80792 visible=0 class=0054006F00750063006800200054006F006F006C007400690070002000570069006E0064006F0077 text=0054006F006F006C007400690070
+window-geometry=0000000000A80792 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=86000000 exstyle=082800A8
+window-placement=0000000000A80792 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000002107D6 class=DirectUIHWND visible=0 text=
+window-utf16=00000000002107D6 visible=0 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=00000000002107D6 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=00000000002107D6 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=000000000194067E class=UAC_InputIndicatorOverlayWnd visible=1 text=
+window-utf16=000000000194067E visible=1 class=005500410043005F0049006E0070007500740049006E00640069006300610074006F0072004F007600650072006C006100790057006E0064 text=
+window-geometry=000000000194067E outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000000 style=94000000 exstyle=08200008
+window-placement=000000000194067E ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000000ED0754 class=UAC Input Indicator visible=1 text=
+window-utf16=0000000000ED0754 visible=1 class=00550041004300200049006E00700075007400200049006E00640069006300610074006F0072 text=
+window-geometry=0000000000ED0754 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000006 style=96000000 exstyle=08080028
+window-placement=0000000000ED0754 ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000001EE0770 class=DirectUIHWND visible=1 text=
+window-utf16=0000000001EE0770 visible=1 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=0000000001EE0770 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=0000000001EE0770 ok=1 iconic=0 show=1 normal=0,0,50,50
+window=0000000000FE074C class=Solitaire visible=1 text=Solitaire
+window-utf16=0000000000FE074C visible=1 class=0053006F006C006900740061006900720065 text=0053006F006C006900740061006900720065
+window-geometry=0000000000FE074C outer-ok=1 outer=26,26,627,469 client-ok=1 client=0,0,585,384 dpi=96 class-brush=00000000EB101090 style=16CF0000 exstyle=00000100
+window-placement=0000000000FE074C ok=1 iconic=0 show=1 normal=26,26,627,469
+window=0000000000FF021A class=Stat visible=1 text=
+window-utf16=0000000000FF021A visible=1 class=0053007400610074 text=
+window-geometry=0000000000FF021A outer-ok=1 outer=33,444,620,462 client-ok=1 client=0,0,585,16 dpi=96 class-brush=0000000000900010 style=50800003 exstyle=00000000
+window-placement=0000000000FF021A ok=1 iconic=0 show=1 normal=-1,367,586,385
+window=0000000001D606B2 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000001D606B2 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000001D606B2 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000001D606B2 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=00000000002307CA class=WOWFaxClass visible=0 text=
+window-utf16=00000000002307CA visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=00000000002307CA outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=00000000002307CA ok=1 iconic=0 show=1 normal=0,0,136,39
+window=00000000003606FE class=CicLoaderWndClass visible=0 text=
+window-utf16=00000000003606FE visible=0 class=004300690063004C006F00610064006500720057006E00640043006C006100730073 text=
+window-geometry=00000000003606FE outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=0CC00000 exstyle=00000100
+window-placement=00000000003606FE ok=1 iconic=0 show=1 normal=0,0,136,39
+window=0000000000FA071A class=CiceroUIWndFrame visible=0 text=CiceroUIWndFrame
+window-utf16=0000000000FA071A visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00430069006300650072006F005500490057006E0064004600720061006D0065
+window-geometry=0000000000FA071A outer-ok=1 outer=200,200,400,400 client-ok=1 client=0,0,200,200 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08080088
+window-placement=0000000000FA071A ok=1 iconic=0 show=1 normal=200,200,400,400
+window=0000000001170716 class=CiceroUIWndFrame visible=0 text=TF_FloatingLangBar_WndTitle
+window-utf16=0000000001170716 visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00540046005F0046006C006F006100740069006E0067004C0061006E0067004200610072005F0057006E0064005400690074006C0065
+window-geometry=0000000001170716 outer-ok=1 outer=166,0,208,22 client-ok=1 client=0,0,42,22 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08000088
+window-placement=0000000001170716 ok=1 iconic=0 show=1 normal=166,0,208,22
+window=0000000000C80774 class=IME visible=0 text=Default IME
+window-utf16=0000000000C80774 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000C80774 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000C80774 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000580658 class=IME visible=0 text=Default IME
+window-utf16=0000000000580658 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000580658 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000580658 ok=1 iconic=0 show=1 normal=0,0,0,0
+sample-ms=16072
+pid=3016 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=0000000000A80792 class=Touch Tooltip Window visible=0 text=Tooltip
+window-utf16=0000000000A80792 visible=0 class=0054006F00750063006800200054006F006F006C007400690070002000570069006E0064006F0077 text=0054006F006F006C007400690070
+window-geometry=0000000000A80792 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=86000000 exstyle=082800A8
+window-placement=0000000000A80792 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000002107D6 class=DirectUIHWND visible=0 text=
+window-utf16=00000000002107D6 visible=0 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=00000000002107D6 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=00000000002107D6 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=000000000194067E class=UAC_InputIndicatorOverlayWnd visible=1 text=
+window-utf16=000000000194067E visible=1 class=005500410043005F0049006E0070007500740049006E00640069006300610074006F0072004F007600650072006C006100790057006E0064 text=
+window-geometry=000000000194067E outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000000 style=94000000 exstyle=08200008
+window-placement=000000000194067E ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000000ED0754 class=UAC Input Indicator visible=1 text=
+window-utf16=0000000000ED0754 visible=1 class=00550041004300200049006E00700075007400200049006E00640069006300610074006F0072 text=
+window-geometry=0000000000ED0754 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000006 style=96000000 exstyle=08080028
+window-placement=0000000000ED0754 ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000001EE0770 class=DirectUIHWND visible=1 text=
+window-utf16=0000000001EE0770 visible=1 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=0000000001EE0770 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=0000000001EE0770 ok=1 iconic=0 show=1 normal=0,0,50,50
+window=0000000000FE074C class=Solitaire visible=1 text=Solitaire
+window-utf16=0000000000FE074C visible=1 class=0053006F006C006900740061006900720065 text=0053006F006C006900740061006900720065
+window-geometry=0000000000FE074C outer-ok=1 outer=26,26,627,469 client-ok=1 client=0,0,585,384 dpi=96 class-brush=00000000EB101090 style=16CF0000 exstyle=00000100
+window-placement=0000000000FE074C ok=1 iconic=0 show=1 normal=26,26,627,469
+window=0000000000FF021A class=Stat visible=1 text=
+window-utf16=0000000000FF021A visible=1 class=0053007400610074 text=
+window-geometry=0000000000FF021A outer-ok=1 outer=33,444,620,462 client-ok=1 client=0,0,585,16 dpi=96 class-brush=0000000000900010 style=50800003 exstyle=00000000
+window-placement=0000000000FF021A ok=1 iconic=0 show=1 normal=-1,367,586,385
+window=0000000001D606B2 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000001D606B2 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000001D606B2 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000001D606B2 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=00000000002307CA class=WOWFaxClass visible=0 text=
+window-utf16=00000000002307CA visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=00000000002307CA outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=00000000002307CA ok=1 iconic=0 show=1 normal=0,0,136,39
+window=00000000003606FE class=CicLoaderWndClass visible=0 text=
+window-utf16=00000000003606FE visible=0 class=004300690063004C006F00610064006500720057006E00640043006C006100730073 text=
+window-geometry=00000000003606FE outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=0CC00000 exstyle=00000100
+window-placement=00000000003606FE ok=1 iconic=0 show=1 normal=0,0,136,39
+window=0000000000FA071A class=CiceroUIWndFrame visible=0 text=CiceroUIWndFrame
+window-utf16=0000000000FA071A visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00430069006300650072006F005500490057006E0064004600720061006D0065
+window-geometry=0000000000FA071A outer-ok=1 outer=200,200,400,400 client-ok=1 client=0,0,200,200 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08080088
+window-placement=0000000000FA071A ok=1 iconic=0 show=1 normal=200,200,400,400
+window=0000000001170716 class=CiceroUIWndFrame visible=0 text=TF_FloatingLangBar_WndTitle
+window-utf16=0000000001170716 visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00540046005F0046006C006F006100740069006E0067004C0061006E0067004200610072005F0057006E0064005400690074006C0065
+window-geometry=0000000001170716 outer-ok=1 outer=166,0,208,22 client-ok=1 client=0,0,42,22 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08000088
+window-placement=0000000001170716 ok=1 iconic=0 show=1 normal=166,0,208,22
+window=0000000000C80774 class=IME visible=0 text=Default IME
+window-utf16=0000000000C80774 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000C80774 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000C80774 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000580658 class=IME visible=0 text=Default IME
+window-utf16=0000000000580658 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000580658 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000580658 ok=1 iconic=0 show=1 normal=0,0,0,0
+OBSERVED WRITE.EXE (not gameplay acceptance)
+result=timeout
+exit=0x53504354
+sample-ms=4069
+pid=10468 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=00000000028E0696 class=Touch Tooltip Window visible=0 text=Tooltip
+window-utf16=00000000028E0696 visible=0 class=0054006F00750063006800200054006F006F006C007400690070002000570069006E0064006F0077 text=0054006F006F006C007400690070
+window-geometry=00000000028E0696 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=86000000 exstyle=082800A8
+window-placement=00000000028E0696 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000010B077A class=DirectUIHWND visible=0 text=
+window-utf16=00000000010B077A visible=0 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=00000000010B077A outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=00000000010B077A ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000015E06AC class=UAC_InputIndicatorOverlayWnd visible=1 text=
+window-utf16=00000000015E06AC visible=1 class=005500410043005F0049006E0070007500740049006E00640069006300610074006F0072004F007600650072006C006100790057006E0064 text=
+window-geometry=00000000015E06AC outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000000 style=94000000 exstyle=08200008
+window-placement=00000000015E06AC ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000001180716 class=UAC Input Indicator visible=1 text=
+window-utf16=0000000001180716 visible=1 class=00550041004300200049006E00700075007400200049006E00640069006300610074006F0072 text=
+window-geometry=0000000001180716 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000006 style=96000000 exstyle=08080028
+window-placement=0000000001180716 ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000000EE0754 class=DirectUIHWND visible=1 text=
+window-utf16=0000000000EE0754 visible=1 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=0000000000EE0754 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=0000000000EE0754 ok=1 iconic=0 show=1 normal=0,0,50,50
+window=0000000002760302 class=MSWRITE_MENU visible=1 text=Write - (Untitled)
+window-utf16=0000000002760302 visible=1 class=004D005300570052004900540045005F004D0045004E0055 text=005700720069007400650020002D002000280055006E007400690074006C006500640029
+window-geometry=0000000002760302 outer-ok=1 outer=156,156,1116,631 client-ok=1 client=0,0,944,416 dpi=96 class-brush=0000000000000006 style=14CF0000 exstyle=00000110
+window-placement=0000000002760302 ok=1 iconic=0 show=1 normal=156,156,1116,631
+window=0000000001D706B2 class=ScrollBar visible=1 text=
+window-utf16=0000000001D706B2 visible=1 class=005300630072006F006C006C004200610072 text=
+window-geometry=0000000001D706B2 outer-ok=1 outer=284,606,1092,624 client-ok=1 client=0,0,808,18 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000000
+window-placement=0000000001D706B2 ok=1 iconic=0 show=1 normal=120,399,928,417
+window=0000000000590658 class=ScrollBar visible=1 text=
+window-utf16=0000000000590658 visible=1 class=005300630072006F006C006C004200610072 text=
+window-geometry=0000000000590658 outer-ok=1 outer=1091,206,1109,607 client-ok=1 client=0,0,18,401 dpi=96 class-brush=0000000000000000 style=54000001 exstyle=00000000
+window-placement=0000000000590658 ok=1 iconic=0 show=1 normal=927,-1,945,400
+window=00000000002407CA class=MSWRITE_PAGEINFO visible=1 text=
+window-utf16=00000000002407CA visible=1 class=004D005300570052004900540045005F00500041004700450049004E0046004F text=
+window-geometry=00000000002407CA outer-ok=1 outer=164,606,284,624 client-ok=1 client=0,0,120,18 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000000
+window-placement=00000000002407CA ok=1 iconic=0 show=1 normal=0,399,120,417
+window=0000000000EA066E class=MSWRITE_DOC visible=1 text=
+window-utf16=0000000000EA066E visible=1 class=004D005300570052004900540045005F0044004F0043 text=
+window-geometry=0000000000EA066E outer-ok=1 outer=164,207,1091,606 client-ok=1 client=0,0,927,399 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000010
+window-placement=0000000000EA066E ok=1 iconic=0 show=1 normal=0,0,927,399
+window=0000000000100786 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000000100786 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000000100786 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000000100786 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=000000000186073A class=WOWFaxClass visible=0 text=
+window-utf16=000000000186073A visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=000000000186073A outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=000000000186073A ok=1 iconic=0 show=1 normal=0,0,136,39
+window=000000000252061C class=CicLoaderWndClass visible=0 text=
+window-utf16=000000000252061C visible=0 class=004300690063004C006F00610064006500720057006E00640043006C006100730073 text=
+window-geometry=000000000252061C outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=0CC00000 exstyle=00000100
+window-placement=000000000252061C ok=1 iconic=0 show=1 normal=0,0,136,39
+window=000000000195067E class=CiceroUIWndFrame visible=0 text=CiceroUIWndFrame
+window-utf16=000000000195067E visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00430069006300650072006F005500490057006E0064004600720061006D0065
+window-geometry=000000000195067E outer-ok=1 outer=200,200,400,400 client-ok=1 client=0,0,200,200 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08080088
+window-placement=000000000195067E ok=1 iconic=0 show=1 normal=200,200,400,400
+window=00000000002A065C class=CiceroUIWndFrame visible=0 text=TF_FloatingLangBar_WndTitle
+window-utf16=00000000002A065C visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00540046005F0046006C006F006100740069006E0067004C0061006E0067004200610072005F0057006E0064005400690074006C0065
+window-geometry=00000000002A065C outer-ok=1 outer=166,0,208,22 client-ok=1 client=0,0,42,22 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08000088
+window-placement=00000000002A065C ok=1 iconic=0 show=1 normal=166,0,208,22
+window=000000000045065A class=IME visible=0 text=Default IME
+window-utf16=000000000045065A visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=000000000045065A outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=000000000045065A ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000DA07B8 class=IME visible=0 text=Default IME
+window-utf16=0000000000DA07B8 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000DA07B8 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000DA07B8 ok=1 iconic=0 show=1 normal=0,0,0,0
+sample-ms=8066
+pid=10468 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=00000000028E0696 class=Touch Tooltip Window visible=0 text=Tooltip
+window-utf16=00000000028E0696 visible=0 class=0054006F00750063006800200054006F006F006C007400690070002000570069006E0064006F0077 text=0054006F006F006C007400690070
+window-geometry=00000000028E0696 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=86000000 exstyle=082800A8
+window-placement=00000000028E0696 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000010B077A class=DirectUIHWND visible=0 text=
+window-utf16=00000000010B077A visible=0 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=00000000010B077A outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=00000000010B077A ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000015E06AC class=UAC_InputIndicatorOverlayWnd visible=1 text=
+window-utf16=00000000015E06AC visible=1 class=005500410043005F0049006E0070007500740049006E00640069006300610074006F0072004F007600650072006C006100790057006E0064 text=
+window-geometry=00000000015E06AC outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000000 style=94000000 exstyle=08200008
+window-placement=00000000015E06AC ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000001180716 class=UAC Input Indicator visible=1 text=
+window-utf16=0000000001180716 visible=1 class=00550041004300200049006E00700075007400200049006E00640069006300610074006F0072 text=
+window-geometry=0000000001180716 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000006 style=96000000 exstyle=08080028
+window-placement=0000000001180716 ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000000EE0754 class=DirectUIHWND visible=1 text=
+window-utf16=0000000000EE0754 visible=1 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=0000000000EE0754 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=0000000000EE0754 ok=1 iconic=0 show=1 normal=0,0,50,50
+window=0000000002760302 class=MSWRITE_MENU visible=1 text=Write - (Untitled)
+window-utf16=0000000002760302 visible=1 class=004D005300570052004900540045005F004D0045004E0055 text=005700720069007400650020002D002000280055006E007400690074006C006500640029
+window-geometry=0000000002760302 outer-ok=1 outer=156,156,1116,631 client-ok=1 client=0,0,944,416 dpi=96 class-brush=0000000000000006 style=14CF0000 exstyle=00000110
+window-placement=0000000002760302 ok=1 iconic=0 show=1 normal=156,156,1116,631
+window=0000000001D706B2 class=ScrollBar visible=1 text=
+window-utf16=0000000001D706B2 visible=1 class=005300630072006F006C006C004200610072 text=
+window-geometry=0000000001D706B2 outer-ok=1 outer=284,606,1092,624 client-ok=1 client=0,0,808,18 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000000
+window-placement=0000000001D706B2 ok=1 iconic=0 show=1 normal=120,399,928,417
+window=0000000000590658 class=ScrollBar visible=1 text=
+window-utf16=0000000000590658 visible=1 class=005300630072006F006C006C004200610072 text=
+window-geometry=0000000000590658 outer-ok=1 outer=1091,206,1109,607 client-ok=1 client=0,0,18,401 dpi=96 class-brush=0000000000000000 style=54000001 exstyle=00000000
+window-placement=0000000000590658 ok=1 iconic=0 show=1 normal=927,-1,945,400
+window=00000000002407CA class=MSWRITE_PAGEINFO visible=1 text=
+window-utf16=00000000002407CA visible=1 class=004D005300570052004900540045005F00500041004700450049004E0046004F text=
+window-geometry=00000000002407CA outer-ok=1 outer=164,606,284,624 client-ok=1 client=0,0,120,18 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000000
+window-placement=00000000002407CA ok=1 iconic=0 show=1 normal=0,399,120,417
+window=0000000000EA066E class=MSWRITE_DOC visible=1 text=
+window-utf16=0000000000EA066E visible=1 class=004D005300570052004900540045005F0044004F0043 text=
+window-geometry=0000000000EA066E outer-ok=1 outer=164,207,1091,606 client-ok=1 client=0,0,927,399 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000010
+window-placement=0000000000EA066E ok=1 iconic=0 show=1 normal=0,0,927,399
+window=0000000000100786 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000000100786 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000000100786 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000000100786 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=000000000186073A class=WOWFaxClass visible=0 text=
+window-utf16=000000000186073A visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=000000000186073A outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=000000000186073A ok=1 iconic=0 show=1 normal=0,0,136,39
+window=000000000252061C class=CicLoaderWndClass visible=0 text=
+window-utf16=000000000252061C visible=0 class=004300690063004C006F00610064006500720057006E00640043006C006100730073 text=
+window-geometry=000000000252061C outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=0CC00000 exstyle=00000100
+window-placement=000000000252061C ok=1 iconic=0 show=1 normal=0,0,136,39
+window=000000000195067E class=CiceroUIWndFrame visible=0 text=CiceroUIWndFrame
+window-utf16=000000000195067E visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00430069006300650072006F005500490057006E0064004600720061006D0065
+window-geometry=000000000195067E outer-ok=1 outer=200,200,400,400 client-ok=1 client=0,0,200,200 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08080088
+window-placement=000000000195067E ok=1 iconic=0 show=1 normal=200,200,400,400
+window=00000000002A065C class=CiceroUIWndFrame visible=0 text=TF_FloatingLangBar_WndTitle
+window-utf16=00000000002A065C visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00540046005F0046006C006F006100740069006E0067004C0061006E0067004200610072005F0057006E0064005400690074006C0065
+window-geometry=00000000002A065C outer-ok=1 outer=166,0,208,22 client-ok=1 client=0,0,42,22 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08000088
+window-placement=00000000002A065C ok=1 iconic=0 show=1 normal=166,0,208,22
+window=000000000045065A class=IME visible=0 text=Default IME
+window-utf16=000000000045065A visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=000000000045065A outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=000000000045065A ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000DA07B8 class=IME visible=0 text=Default IME
+window-utf16=0000000000DA07B8 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000DA07B8 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000DA07B8 ok=1 iconic=0 show=1 normal=0,0,0,0
+sample-ms=12081
+pid=10468 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=00000000028E0696 class=Touch Tooltip Window visible=0 text=Tooltip
+window-utf16=00000000028E0696 visible=0 class=0054006F00750063006800200054006F006F006C007400690070002000570069006E0064006F0077 text=0054006F006F006C007400690070
+window-geometry=00000000028E0696 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=86000000 exstyle=082800A8
+window-placement=00000000028E0696 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000010B077A class=DirectUIHWND visible=0 text=
+window-utf16=00000000010B077A visible=0 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=00000000010B077A outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=00000000010B077A ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000015E06AC class=UAC_InputIndicatorOverlayWnd visible=1 text=
+window-utf16=00000000015E06AC visible=1 class=005500410043005F0049006E0070007500740049006E00640069006300610074006F0072004F007600650072006C006100790057006E0064 text=
+window-geometry=00000000015E06AC outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000000 style=94000000 exstyle=08200008
+window-placement=00000000015E06AC ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000001180716 class=UAC Input Indicator visible=1 text=
+window-utf16=0000000001180716 visible=1 class=00550041004300200049006E00700075007400200049006E00640069006300610074006F0072 text=
+window-geometry=0000000001180716 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000006 style=96000000 exstyle=08080028
+window-placement=0000000001180716 ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000000EE0754 class=DirectUIHWND visible=1 text=
+window-utf16=0000000000EE0754 visible=1 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=0000000000EE0754 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=0000000000EE0754 ok=1 iconic=0 show=1 normal=0,0,50,50
+window=0000000002760302 class=MSWRITE_MENU visible=1 text=Write - (Untitled)
+window-utf16=0000000002760302 visible=1 class=004D005300570052004900540045005F004D0045004E0055 text=005700720069007400650020002D002000280055006E007400690074006C006500640029
+window-geometry=0000000002760302 outer-ok=1 outer=156,156,1116,631 client-ok=1 client=0,0,944,416 dpi=96 class-brush=0000000000000006 style=14CF0000 exstyle=00000110
+window-placement=0000000002760302 ok=1 iconic=0 show=1 normal=156,156,1116,631
+window=0000000001D706B2 class=ScrollBar visible=1 text=
+window-utf16=0000000001D706B2 visible=1 class=005300630072006F006C006C004200610072 text=
+window-geometry=0000000001D706B2 outer-ok=1 outer=284,606,1092,624 client-ok=1 client=0,0,808,18 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000000
+window-placement=0000000001D706B2 ok=1 iconic=0 show=1 normal=120,399,928,417
+window=0000000000590658 class=ScrollBar visible=1 text=
+window-utf16=0000000000590658 visible=1 class=005300630072006F006C006C004200610072 text=
+window-geometry=0000000000590658 outer-ok=1 outer=1091,206,1109,607 client-ok=1 client=0,0,18,401 dpi=96 class-brush=0000000000000000 style=54000001 exstyle=00000000
+window-placement=0000000000590658 ok=1 iconic=0 show=1 normal=927,-1,945,400
+window=00000000002407CA class=MSWRITE_PAGEINFO visible=1 text=
+window-utf16=00000000002407CA visible=1 class=004D005300570052004900540045005F00500041004700450049004E0046004F text=
+window-geometry=00000000002407CA outer-ok=1 outer=164,606,284,624 client-ok=1 client=0,0,120,18 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000000
+window-placement=00000000002407CA ok=1 iconic=0 show=1 normal=0,399,120,417
+window=0000000000EA066E class=MSWRITE_DOC visible=1 text=
+window-utf16=0000000000EA066E visible=1 class=004D005300570052004900540045005F0044004F0043 text=
+window-geometry=0000000000EA066E outer-ok=1 outer=164,207,1091,606 client-ok=1 client=0,0,927,399 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000010
+window-placement=0000000000EA066E ok=1 iconic=0 show=1 normal=0,0,927,399
+window=0000000000100786 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000000100786 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000000100786 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000000100786 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=000000000186073A class=WOWFaxClass visible=0 text=
+window-utf16=000000000186073A visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=000000000186073A outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=000000000186073A ok=1 iconic=0 show=1 normal=0,0,136,39
+window=000000000252061C class=CicLoaderWndClass visible=0 text=
+window-utf16=000000000252061C visible=0 class=004300690063004C006F00610064006500720057006E00640043006C006100730073 text=
+window-geometry=000000000252061C outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=0CC00000 exstyle=00000100
+window-placement=000000000252061C ok=1 iconic=0 show=1 normal=0,0,136,39
+window=000000000195067E class=CiceroUIWndFrame visible=0 text=CiceroUIWndFrame
+window-utf16=000000000195067E visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00430069006300650072006F005500490057006E0064004600720061006D0065
+window-geometry=000000000195067E outer-ok=1 outer=200,200,400,400 client-ok=1 client=0,0,200,200 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08080088
+window-placement=000000000195067E ok=1 iconic=0 show=1 normal=200,200,400,400
+window=00000000002A065C class=CiceroUIWndFrame visible=0 text=TF_FloatingLangBar_WndTitle
+window-utf16=00000000002A065C visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00540046005F0046006C006F006100740069006E0067004C0061006E0067004200610072005F0057006E0064005400690074006C0065
+window-geometry=00000000002A065C outer-ok=1 outer=166,0,208,22 client-ok=1 client=0,0,42,22 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08000088
+window-placement=00000000002A065C ok=1 iconic=0 show=1 normal=166,0,208,22
+window=000000000045065A class=IME visible=0 text=Default IME
+window-utf16=000000000045065A visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=000000000045065A outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=000000000045065A ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000DA07B8 class=IME visible=0 text=Default IME
+window-utf16=0000000000DA07B8 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000DA07B8 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000DA07B8 ok=1 iconic=0 show=1 normal=0,0,0,0
+sample-ms=16057
+pid=10468 image=O:\tmp\n105\system32\ntvdm.exe alive=1
+window=00000000028E0696 class=Touch Tooltip Window visible=0 text=Tooltip
+window-utf16=00000000028E0696 visible=0 class=0054006F00750063006800200054006F006F006C007400690070002000570069006E0064006F0077 text=0054006F006F006C007400690070
+window-geometry=00000000028E0696 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=86000000 exstyle=082800A8
+window-placement=00000000028E0696 ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000010B077A class=DirectUIHWND visible=0 text=
+window-utf16=00000000010B077A visible=0 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=00000000010B077A outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=00000000010B077A ok=1 iconic=0 show=1 normal=0,0,0,0
+window=00000000015E06AC class=UAC_InputIndicatorOverlayWnd visible=1 text=
+window-utf16=00000000015E06AC visible=1 class=005500410043005F0049006E0070007500740049006E00640069006300610074006F0072004F007600650072006C006100790057006E0064 text=
+window-geometry=00000000015E06AC outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000000 style=94000000 exstyle=08200008
+window-placement=00000000015E06AC ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000001180716 class=UAC Input Indicator visible=1 text=
+window-utf16=0000000001180716 visible=1 class=00550041004300200049006E00700075007400200049006E00640069006300610074006F0072 text=
+window-geometry=0000000001180716 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000000006 style=96000000 exstyle=08080028
+window-placement=0000000001180716 ok=1 iconic=0 show=1 normal=1182,622,1232,672
+window=0000000000EE0754 class=DirectUIHWND visible=1 text=
+window-utf16=0000000000EE0754 visible=1 class=0044006900720065006300740055004900480057004E0044 text=
+window-geometry=0000000000EE0754 outer-ok=1 outer=1182,622,1232,672 client-ok=1 client=0,0,50,50 dpi=96 class-brush=0000000000900010 style=56000000 exstyle=00000000
+window-placement=0000000000EE0754 ok=1 iconic=0 show=1 normal=0,0,50,50
+window=0000000002760302 class=MSWRITE_MENU visible=1 text=Write - (Untitled)
+window-utf16=0000000002760302 visible=1 class=004D005300570052004900540045005F004D0045004E0055 text=005700720069007400650020002D002000280055006E007400690074006C006500640029
+window-geometry=0000000002760302 outer-ok=1 outer=156,156,1116,631 client-ok=1 client=0,0,944,416 dpi=96 class-brush=0000000000000006 style=14CF0000 exstyle=00000110
+window-placement=0000000002760302 ok=1 iconic=0 show=1 normal=156,156,1116,631
+window=0000000001D706B2 class=ScrollBar visible=1 text=
+window-utf16=0000000001D706B2 visible=1 class=005300630072006F006C006C004200610072 text=
+window-geometry=0000000001D706B2 outer-ok=1 outer=284,606,1092,624 client-ok=1 client=0,0,808,18 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000000
+window-placement=0000000001D706B2 ok=1 iconic=0 show=1 normal=120,399,928,417
+window=0000000000590658 class=ScrollBar visible=1 text=
+window-utf16=0000000000590658 visible=1 class=005300630072006F006C006C004200610072 text=
+window-geometry=0000000000590658 outer-ok=1 outer=1091,206,1109,607 client-ok=1 client=0,0,18,401 dpi=96 class-brush=0000000000000000 style=54000001 exstyle=00000000
+window-placement=0000000000590658 ok=1 iconic=0 show=1 normal=927,-1,945,400
+window=00000000002407CA class=MSWRITE_PAGEINFO visible=1 text=
+window-utf16=00000000002407CA visible=1 class=004D005300570052004900540045005F00500041004700450049004E0046004F text=
+window-geometry=00000000002407CA outer-ok=1 outer=164,606,284,624 client-ok=1 client=0,0,120,18 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000000
+window-placement=00000000002407CA ok=1 iconic=0 show=1 normal=0,399,120,417
+window=0000000000EA066E class=MSWRITE_DOC visible=1 text=
+window-utf16=0000000000EA066E visible=1 class=004D005300570052004900540045005F0044004F0043 text=
+window-geometry=0000000000EA066E outer-ok=1 outer=164,207,1091,606 client-ok=1 client=0,0,927,399 dpi=96 class-brush=0000000000000000 style=54000000 exstyle=00000010
+window-placement=0000000000EA066E ok=1 iconic=0 show=1 normal=0,0,927,399
+window=0000000000100786 class=WOWExecClass visible=1 text=Shared WOWExec
+window-utf16=0000000000100786 visible=1 class=0057004F005700450078006500630043006C006100730073 text=00530068006100720065006400200057004F00570045007800650063
+window-geometry=0000000000100786 outer-ok=1 outer=0,969,237,1008 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900010 style=36CF0000 exstyle=00000100
+window-placement=0000000000100786 ok=1 iconic=1 show=2 normal=30,30,670,144
+window=000000000186073A class=WOWFaxClass visible=0 text=
+window-utf16=000000000186073A visible=0 class=0057004F00570046006100780043006C006100730073 text=
+window-geometry=000000000186073A outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100
+window-placement=000000000186073A ok=1 iconic=0 show=1 normal=0,0,136,39
+window=000000000252061C class=CicLoaderWndClass visible=0 text=
+window-utf16=000000000252061C visible=0 class=004300690063004C006F00610064006500720057006E00640043006C006100730073 text=
+window-geometry=000000000252061C outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=0CC00000 exstyle=00000100
+window-placement=000000000252061C ok=1 iconic=0 show=1 normal=0,0,136,39
+window=000000000195067E class=CiceroUIWndFrame visible=0 text=CiceroUIWndFrame
+window-utf16=000000000195067E visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00430069006300650072006F005500490057006E0064004600720061006D0065
+window-geometry=000000000195067E outer-ok=1 outer=200,200,400,400 client-ok=1 client=0,0,200,200 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08080088
+window-placement=000000000195067E ok=1 iconic=0 show=1 normal=200,200,400,400
+window=00000000002A065C class=CiceroUIWndFrame visible=0 text=TF_FloatingLangBar_WndTitle
+window-utf16=00000000002A065C visible=0 class=00430069006300650072006F005500490057006E0064004600720061006D0065 text=00540046005F0046006C006F006100740069006E0067004C0061006E0067004200610072005F0057006E0064005400690074006C0065
+window-geometry=00000000002A065C outer-ok=1 outer=166,0,208,22 client-ok=1 client=0,0,42,22 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=08000088
+window-placement=00000000002A065C ok=1 iconic=0 show=1 normal=166,0,208,22
+window=000000000045065A class=IME visible=0 text=Default IME
+window-utf16=000000000045065A visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=000000000045065A outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=000000000045065A ok=1 iconic=0 show=1 normal=0,0,0,0
+window=0000000000DA07B8 class=IME visible=0 text=Default IME
+window-utf16=0000000000DA07B8 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045
+window-geometry=0000000000DA07B8 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000
+window-placement=0000000000DA07B8 ok=1 iconic=0 show=1 normal=0,0,0,0
+PASS independent retained WOW frontier winmine; not gameplay acceptance
+PASS independent retained WOW frontier sol; not gameplay acceptance
+PASS independent retained WOW frontier write; not gameplay acceptance
+PASS empty: 0
+PASS native-zero: 0
+PASS missing: 0
+PASS native-seven: 0
+PASS native-streams: 0
+PASS native-eof: 0
+PASS mem: 1
+PASS nested-empty: 1
+PASS nested-mem: 1
+PASS mem-repeat: 1
+PASS direct-mem: 0
+PASS command-c: 0
+PASS command-c-seven: 0
+PASS guest-seven: 7
+PASS command-c-mem: 0
+PASS direct-seven: 7
+PASS edit: 1
+PASS empty: 0
+PASS native-zero: 0
+PASS missing: 0
+PASS native-seven: 0
+PASS native-streams: 0
+PASS native-eof: 0
+PASS mem: 1
+PASS nested-empty: 1
+PASS nested-mem: 1
+PASS mem-repeat: 1
+PASS direct-mem: 0
+PASS command-c: 0
+PASS command-c-seven: 0
+PASS guest-seven: 7
+PASS command-c-mem: 0
+PASS direct-seven: 7
+PASS edit: 1
+PASS client actual fixture exit zero and assertion output
+PASS bootstrap actual fixture exit zero and assertion output
+PASS startup-rejections actual fixture exit zero and assertion output
+PASS native-worker-failure actual fixture exit zero and assertion output
+PASS native-completed-worker-loss actual fixture exit zero and assertion output
+PASS monitor-rpc actual fixture exit zero and assertion output
+PASS GUI startup exit=0x00000000
+PASS GUI wait exit=0x00000025
+PASS GUI gui-fresh-text exit=0x00000025
+PASS GUI carrier-residency exit=0x00000000 PASS GUI-SURVIVAL-EXIT-37
+PASS GUI management remains read-only; service fixture owns rejection proof
+PASS GUI text-gui-text exit=0x00000013 S9-GUI-TEXT-RESUMED
+PASS old-app: launcher and worker reject before task delivery, no launcher retry
+PASS wrong-protocol: launcher and worker reject before task delivery, no launcher retry
+PASS reply-app: launcher and worker reject before task delivery, no launcher retry
+PASS reply-protocol: launcher and worker reject before task delivery, no launcher retry
+PASS legacy-interface: launcher and worker reject before task delivery, no launcher retry
+launcher=4676 width=80 height=30
+s34-child-after-dir=258 final=0 entered-dos=1 dirty-prompt=0
+PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion
+PASS same outer CMD: DOS MEM/EXIT -> native VER -> DOS MEM/EXIT -> cooked CMD exit 19
+PASS 12 immediate native/DOS relaunch pairs, final output and outer CMD exit 19
+PASS 12 immediate interactive CMD exit/relaunches, final output and outer19
+PASS real close (frontend-loss=False): worker=31476 target=7552 target-exit=-1073741510
+PASS independent Console survives selected worker close, accepts new input and returns 23
+PASS ntvdm frontend loss: real worker shutdown, frontend exit and direct receipt 1067; explicit fixture cleanup
+PASS ntvwm frontend loss: real worker shutdown, frontend exit and direct receipt 1067; explicit fixture cleanup
+PASS broker I/O nested-window I386 : actual CMD/DOS input, parent return and direct exit=23
+CHANGED=1
+PASS NESticle rendered menu pixels and Escape hide/restore
+PASS DOS4GW NESticle renders its menu and responds to Escape; ROM gameplay is outside this test
+PASS Full selected gates; identical 11-file package

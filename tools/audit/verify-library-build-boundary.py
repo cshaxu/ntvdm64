@@ -24,83 +24,7 @@ def ninja(directory, tool, *args):
     ).replace("\\", "/")
 
 
-# The retired original-layout carriers no longer have B build exceptions.
-WOW_USER_EXCEPTIONS = set()
-
-
-# S19 removed C2 search paths; original NT ABI remains an S20 obligation.
-C1_LAYOUT_ADAPTERS = set()
-
-ORIGINAL_LAYOUT_ADAPTERS = {
-    'wow_user_private_access.c',
-    'wow_common_dialog_calls.c',
-
-    "wow_common_dialog_callback.c",
-    'wow_ole_descriptor_binding.c',
-    'wow_bitmap_bindings.c',
-    'wow_button_lifetime.c',
-    'wow_button_resources.c',
-    'wow_callback_frame_lease.c',
-    'wow_class_client.c',
-    'wow_class_client_bindings.c',
-    'wow_class_words_binding.c',
-    'wow_cleanup_bindings.c',
-    'wow_client_dispatch.c',
-    'wow_control_brush.c',
-    'wow_control_brush_bindings.c',
-    'wow_control_draw_state.c',
-    'wow_control_extent_bindings.c',
-    'wow_control_fnid.c',
-    'wow_control_state.c',
-    'wow_default_message_bindings.c',
-    'wow_default_native_bindings.c',
-    'wow_default_state_bindings.c',
-    'wow_default_window_bindings.c',
-    'wow_default_window_bits.c',
-    'wow_dialog_call_bindings.c',
-    'wow_dialog_context_bindings.c',
-    'wow_dialog_creation_binding.c',
-    'wow_dialog_finalization_binding.c',
-    'wow_dialog_keyboard_binding.c',
-    'wow_shell_callback.c',
-    'wow_timer_callback.c',
-    'wow_user_thunk_scope.c',
-    'wow_hook_callback.c',
-    'wow_dialog_native_bindings.c',
-    'wow_dialog_procedure_bindings.c',
-    'wow_dialog_state_bindings.c',
-    'wow_edit_call_bindings.c',
-    'wow_edit_conversion_bindings.c',
-    'wow_edit_entry_bindings.c',
-    'wow_edit_lookaside_bindings.c',
-    'wow_edit_native_bindings.c',
-    'wow_edit_state_bindings.c',
-    'wow_edit_thread_bindings.c',
-    'wow_idle_hook_binding.c',
-    'wow_input_group_lifetime.c',
-    'wow_input_membership.c',
-    'wow_list_native_bindings.c',
-    'wow_menu_client_bindings.c',
-    'wow_menu_native_bindings.c',
-    'wow_private_user_compat.c',
-    'wow_standard_class_bindings.c',
-    'wow_task_cleanup_entry.c',
-    'wow_task_profile_binding.c',
-    'wow_user_borrow_scope.c',
-    'wow_user_discovery.c',
-    'wow_user_message_bridge.c',
-    'wow_user_native_extension.c',
-    'wow_user_object_bindings.c',
-    'wow_user_registration_state.c',
-    'wow_user_registration_bridge.c',
-    'wow_task_start_notification.c',
-    'wow_user_task_lifecycle.c',
-    'wow_window_client_access_bindings.c',
-    'wow_window_client_state_bindings.c',
-    'wow_window_creation_binding.c',
-    'wow_window_procedure_entry.c',
-    'wow_window_words_binding.c',
-}
+# S19/S20: no A/B unit is exempt from the inward compile boundary.
 
 
 def allowed_roots(owner, source=""):
@@ -108,10 +32,6 @@ def allowed_roots(owner, source=""):
     if owner == "compat":
         roots.add(ROOT / "src/compat/include")
         roots.update(ROOT / "src" / library for library in ("lib-nxvm", "lib-win32"))
-    if owner == "compat" and source in ORIGINAL_LAYOUT_ADAPTERS:
-        roots.update(ROOT / "src" / layer for layer in ("mvdm-host", "non-mvdm"))
-    if owner == "compat" and source in C1_LAYOUT_ADAPTERS:
-        roots.add(ROOT / "src/non-mvdm")
     return roots
 
 
@@ -130,15 +50,10 @@ def verify(graph, products):
         if not match:
             continue
         obj, owner, source = match.group(2, 3, 4)
-        if graph == "x86/wow32" and owner == "compat" and source in WOW_USER_EXCEPTIONS:
-            continue
         units[obj] = (owner, source)
         roots = {ROOT / "src"} | allowed_roots(owner, source)
         for path in re.finditer(r'(?:^| )/I\s*(?:"([^"]+)"|(\S+))', line, re.I):
-            if not any((directory / (path[1] or path[2])).resolve() == r or
-                       (owner == "compat" and source in (ORIGINAL_LAYOUT_ADAPTERS | C1_LAYOUT_ADAPTERS) and
-                        (directory / (path[1] or path[2])).resolve().is_relative_to(r) and
-                        r != ROOT / "src") for r in roots) and not any(
+            if not any((directory / (path[1] or path[2])).resolve() == r for r in roots) and not any(
                     (directory / (path[1] or path[2])).resolve() == h.parent
                     for h in generated_inputs(directory, owner, source)):
                 raise ValueError(f"{graph}/{obj}: unexpected include root {path[0]}")

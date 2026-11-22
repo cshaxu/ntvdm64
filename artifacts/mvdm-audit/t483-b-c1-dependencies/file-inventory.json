@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 86,
+    "completed": 94,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 11,
+    "compiled_header_rows": 0,
     "private_search_root_rows": 0
   },
   "files": [
@@ -1023,7 +1023,7 @@
     {
       "id": "BC1F007",
       "file": "src/compat/include/control-client/precomp.h",
-      "status": "redundant direct include removed in P8; transitive USER layout group remains open",
+      "status": "completed in verified P85 delivery",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1046,7 +1046,8 @@
           "product": ""
         }
       ],
-      "closure_evidence": "p8-delivery.json"
+      "closure_evidence": "p85-window-control-closure.json",
+      "disposition": "C-source compile assembly header only; no B source consumes private C layout. Literal includes retained and explicitly classified."
     },
     {
       "id": "BC1F008",
@@ -1107,7 +1108,7 @@
     {
       "id": "BC1F010",
       "file": "src/compat/include/opennt_user_multipass.h",
-      "status": "in progress: shared consumer chain; P9 clears text subgroup only",
+      "status": "completed in verified P85 delivery",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1129,12 +1130,14 @@
           "evidence": "non-mvdm/windows/core/ntuser/inc/user.h",
           "product": ""
         }
-      ]
+      ],
+      "closure_evidence": "p85-window-control-closure.json",
+      "disposition": "C-source compile assembly header only; no B source consumes private C layout. Literal includes retained and explicitly classified."
     },
     {
       "id": "BC1F011",
       "file": "src/compat/include/opennt_usercli_multipass.h",
-      "status": "in progress: shared consumer chain; P9 clears text subgroup only",
+      "status": "completed in verified P85 delivery",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1156,7 +1159,9 @@
           "evidence": "non-mvdm/windows/core/ntuser/client/usercli.h",
           "product": ""
         }
-      ]
+      ],
+      "closure_evidence": "p85-window-control-closure.json",
+      "disposition": "C-source compile assembly header only; no B source consumes private C layout. Literal includes retained and explicitly classified."
     },
     {
       "id": "BC1F012",
@@ -1329,7 +1334,7 @@
     {
       "id": "BC1F018",
       "file": "src/compat/include/wow_shared_user_abi.h",
-      "status": "in progress: P15 clears partial dialog header propagation; original WW and registration consumers remain",
+      "status": "completed in verified P85 delivery",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1352,7 +1357,9 @@
           "product": ""
         }
       ],
-      "delivery_partial": "p15-delivery.json"
+      "delivery_partial": "p15-delivery.json",
+      "closure_evidence": "p85-window-control-closure.json",
+      "disposition": "C-source compile assembly header only; no B source consumes private C layout. Literal includes retained and explicitly classified."
     },
     {
       "id": "BC1F019",
@@ -6442,7 +6449,7 @@
     {
       "id": "BC1F063",
       "file": "src/compat/wow_edit_state_bindings.c",
-      "status": "partially addressed in P53: four original finalizers use existing control provider; original USER headers remain",
+      "status": "completed in verified P85 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -6635,7 +6642,9 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p53-delivery.json"
+      "progress_evidence": "p53-delivery.json",
+      "closure_evidence": "p85-window-control-closure.json",
+      "disposition": "Private C layout operations use existing B-owned synchronous providers. B lifetime/locks/rollback preserved; no private C headers or direct linked implementation."
     },
     {
       "id": "BC1F064",
@@ -9418,7 +9427,7 @@
     {
       "id": "BC1F091",
       "file": "src/compat/wow_window_client_state_bindings.c",
-      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
+      "status": "completed in verified P85 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -9551,12 +9560,14 @@
           "product": ""
         }
       ],
-      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json",
+      "closure_evidence": "p85-window-control-closure.json",
+      "disposition": "Private C layout operations use existing B-owned synchronous providers. B lifetime/locks/rollback preserved; no private C headers or direct linked implementation."
     },
     {
       "id": "BC1F092",
       "file": "src/compat/wow_window_creation_binding.c",
-      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains",
+      "status": "completed in verified P85 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -9669,7 +9680,9 @@
           "product": ""
         }
       ],
-      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json"
+      "p64_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p64-direct-provider-progress.json",
+      "closure_evidence": "p85-window-control-closure.json",
+      "disposition": "Private C layout operations use existing B-owned synchronous providers. B lifetime/locks/rollback preserved; no private C headers or direct linked implementation."
     },
     {
       "id": "BC1F093",
@@ -9772,7 +9785,7 @@
     {
       "id": "BC1F094",
       "file": "src/compat/wow_window_words_binding.c",
-      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
+      "status": "completed in verified P85 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -9875,9 +9888,11 @@
           "product": ""
         }
       ],
-      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json",
+      "closure_evidence": "p85-window-control-closure.json",
+      "disposition": "Private C layout operations use existing B-owned synchronous providers. B lifetime/locks/rollback preserved; no private C headers or direct linked implementation."
     }
   ],
-  "current_scan": "build/t483-s20-p71-window-identity",
-  "current_scan_status": "P71 original retained-window handle supplied by existing provider; final product build, targeted and published guest verification passed; coverage limits retained"
+  "current_scan": "p85-evidence/coverage-disposition.json",
+  "current_scan_status": "Final compiled-product audit plus function/data relocation and separate import/assembly dispositions; no B private C dependency."
 }

@@ -1,0 +1,4 @@
+from	to	source	line_or_section	target	evidence	product
+mvdm-host	ntvdm-exe	VCDEX.DLL		ntvdm.exe	PE import	VCDEX.DLL
+vdmredir-dll	ntvdm-exe	VDMREDIR.dll		ntvdm.exe	PE import	VDMREDIR.dll
+wow32-dll	ntvdm-exe	wow32.dll		ntvdm.exe	PE import	wow32.dll

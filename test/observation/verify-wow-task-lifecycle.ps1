@@ -233,10 +233,14 @@ foreach ($library in $fixtureLibraries) {
 $commands = & $ninja -C $provider -t commands wow32.dll
 $compile = $commands | Where-Object { $_ -match 'wow_user_task_lifecycle\.c$' } | Select-Object -Last 1
 if (!$compile) { throw 'Missing production compile command' }
-# The cross-component fixtures also exercise F notification/private access.
-# Add their explicit dependency only to this test command template; the
-# production B source keeps its A/B/C-only compiler header closure.
-$compile = $compile -replace '/Fo', ('/I"'+$repo+'/src/wow32-dll/include" /Fo')
+# These cross-component fixtures inspect original C layouts and F notification
+# interfaces. Take C's include roots from its actual product command, not from
+# B's now-independent compilation. Production B inputs remain unchanged.
+$layoutCompile = $commands | Where-Object { $_ -match '/client/clglobal\.c$' } | Select-Object -Last 1
+if (!$layoutCompile) { throw 'Missing original USER layout compile command' }
+$layoutIncludes = ([regex]::Matches($layoutCompile, '(?:^|\s)/I\s*"[^"]+"') |
+    ForEach-Object { $_.Value.Trim() }) -join ' '
+$compile = $compile -replace '/Fo', ($layoutIncludes+' /I"'+$repo+'/src/wow32-dll/include" /Fo')
 $combinedSeams = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\combined-seams.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_combined_fixture_seams.c"')
 if ($combinedSeams -eq $compile) { throw 'Combined fixture seam substitution failed' }
 Invoke-Build ($combinedSeams.Replace('/Gz', '/Gd'))

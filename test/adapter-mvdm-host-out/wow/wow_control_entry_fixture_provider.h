@@ -27,10 +27,12 @@ LONG WINAPI fixture_ButtonWndProcW(HWND, UINT, WPARAM, LPARAM);
 LONG WINAPI fixture_xxxLBoxCaretBlinker(HWND, UINT, UINT, LONG);
 #pragma comment(linker, "/alternatename:_fixture_xxxLBoxCaretBlinker@16=_xxxLBoxCaretBlinker@16")
 BOOL WINAPI wow_original_list_caret_ready(struct tagWND *);
+BOOL WINAPI wow_original_combo_info(HWND, struct tagWND *, PCOMBOBOXINFO, BOOL *);
+BOOL WINAPI wow_original_finalize_control(HWND);
 static const wow_control_entry_provider fixture_control_entry_provider = {
     fixture_EditWndProcA, fixture_EditWndProcW, fixture_ComboBoxWndProcA, fixture_ComboBoxWndProcW, fixture_ListBoxWndProcA, fixture_ListBoxWndProcW, fixture_ComboListBoxWndProcA, fixture_ComboListBoxWndProcW, fixture_ButtonWndProcA, fixture_ButtonWndProcW,
     fixture_xxxLBoxCaretBlinker, FNID_BUTTON, FNID_EDIT, FNID_COMBOBOX,
     FNID_LISTBOX, FNID_COMBOLISTBOX, ICLS_EDIT, ICLS_COMBOLISTBOX,
-    wow_original_list_caret_ready
+    wow_original_list_caret_ready, wow_original_combo_info, wow_original_finalize_control
 };
 #endif

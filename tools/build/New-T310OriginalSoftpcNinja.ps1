@@ -892,7 +892,7 @@ $graph.Add('  restat = 1')
 # locks) never runs.  The parent import library is an implicit output of the
 # original process link, so this rule cannot create a second CCPU/SoftPC
 # executor inside the DLL.
-$graph.Add('  command = link.exe /nologo /dll /entry:mvdm_vdmredir_dll_entry@12 /alternatename:_call_ica_hw_interrupt@12=call_ica_hw_interrupt /def:' + (NinjaPath $redirExportDefinition) + ' /implib:$out.lib /out:$out $in kernel32.lib advapi32.lib netapi32.lib rpcrt4.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('  command = link.exe /nologo /dll /entry:mvdm_vdmredir_dll_entry@12 /alternatename:_call_ica_hw_interrupt@12=call_ica_hw_interrupt /def:' + (NinjaPath $redirExportDefinition) + ' /implib:$out.lib /out:$out /map:$out.map $in kernel32.lib advapi32.lib netapi32.lib rpcrt4.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
 # Original standalone MSCDEX host VDD; only its source manifest supplies C units.
 $vcdexRoot = Join-Path $root 'src/mvdm-host/vdd/samples/mscdex/vdd'
 $graph.Add('rule vcdex_cc')

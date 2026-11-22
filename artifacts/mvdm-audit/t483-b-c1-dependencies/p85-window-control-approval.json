@@ -1,0 +1,27 @@
+{
+  "packet": "M0 T483 S20 P85",
+  "approval": "Owner approved both complete groups in current chat, 2026-11-22",
+  "window": {
+    "non_error_delta_points": 2,
+    "non_error_delta_lines": 165,
+    "provider": "src/non-mvdm/windows/core/ntuser/kernel/getset.c"
+  },
+  "control": {
+    "non_error_delta_points": 2,
+    "non_error_delta_lines": 79,
+    "providers": [
+      "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+      "src/non-mvdm/windows/core/ntuser/client/editec.c"
+    ]
+  },
+  "status": "verified and published; commit/push recorded by containing Git delivery",
+  "completed_file_credit": 8,
+  "candidate_preflight": {
+    "window_compiled_units": 6,
+    "window_message_fixture_exit": 0,
+    "control_compiled_units": 2,
+    "control_prototype_fix": "Replaced unused borrow header with wow_button_lifetime.h; C4013 removed without added diff lines."
+  },
+  "ownership": "Existing B providers; synchronous C-private operations. B retains allocation, reference counting, task/borrow scope and rollback. No new queue or state machine.",
+  "delivery_evidence": "p85-window-control-closure.json"
+}

@@ -1,0 +1,11 @@
+Documentation governance verification passed.
+Documentation relative-link verification passed.
+x86/worker: 112 A/B objects checked
+x86/wow32: 79 A/B objects checked
+x64/worker-reference-x86: 108 A/B objects checked
+x64/frontend: 34 A/B objects checked
+x64/service: 28 A/B objects checked
+x64/launcher: 25 A/B objects checked
+x64/monitor: 2 A/B objects checked
+x64/worker: 33 A/B objects checked
+x64/hook: 13 A/B objects checked

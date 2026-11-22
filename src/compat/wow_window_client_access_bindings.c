@@ -14,7 +14,19 @@ BOOL WINAPI wow_window_access_bind(const wow_window_access_provider *value)
     PVOID previous;
     if (!value || !value->set_long || !value->get_long ||
             !value->set_client_long || !value->load_menu || !value->window_handle ||
-            !value->words || !value->restore_words) {
+            !value->words || !value->restore_words ||
+            !value->layout ||
+            !value->capture_words ||
+            !value->initialize_state ||
+            !value->state_extent ||
+            !value->promote_state ||
+            !value->initialize_resource ||
+            !value->refresh_state ||
+            !value->publish_links ||
+            !value->state_name ||
+            !value->state_fnid ||
+            !value->mark_destroyed ||
+            !value->creation_class_name) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,

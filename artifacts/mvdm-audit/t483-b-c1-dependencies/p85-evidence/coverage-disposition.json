@@ -1,0 +1,27 @@
+{
+  "scope": "Final compiled product graphs, live function/data relocations and original named-image imports; not a claim that callbacks never call C.",
+  "B_C1_private_compiled_headers": 0,
+  "B_C2_private_compiled_headers": 0,
+  "B_C1_private_search_roots": 0,
+  "B_C2_private_search_roots": 0,
+  "B_C1_private_live_relocations": 0,
+  "B_C2_private_live_relocations": 0,
+  "retained_header_carriers": "Four remaining B-path header files are selected only by C source compilation. Five textual include rows persist there; no B translation unit includes them. The strict gate has no original-layout exemptions.",
+  "C1_C2": "Seven relocation rows, five original WOW APIs, retained under owner instruction.",
+  "named_image_imports": "VCDEX/VDMREDIR/WOW32 import NTVDM exports through explicit named-image ABI; approved DLL imports, not private linkage violations.",
+  "common_symbols": {
+    "mvdm_softpc_exit_original_ready": "src/compat/mvdm_softpc_event_thread.c",
+    "mvdm_softpc_exit_owner": "src/compat/mvdm_softpc_event_thread.c",
+    "mvdm_softpc_input_terminal_events": "src/compat/mvdm_softpc_event_thread.c",
+    "mvdm_softpc_exit_rundown": "src/compat/mvdm_softpc_worker_exit.c",
+    "wow_edit_system_brushes": "src/compat/wow_control_brushes.c",
+    "wow_edit_gray_brush": "src/compat/wow_control_brushes.c",
+    "g_abLeadTable": "src/compat/wow_ole_descriptor_binding.c",
+    "wow_default_shell_message": "src/compat/wow_default_message_bindings.c",
+    "wow_bitmap_lock": "src/compat/wow_bitmap_bindings.c"
+  },
+  "unassigned_map_symbols": "Remaining owners are named DLL imports, SDK/CRT libraries, __tls_array (absolute), __ImageBase (linker-defined) and UCRT __local_stdio_printf_options local _OptionsStorage in corecrt_stdio_config.h lines91-92/101-102.",
+  "assembly_limits": "largeint/movemem/callpr32 missing C include records belong to C. Generated entry/import-alias objects are assembly-owned product bindings. Not silently treated as parsed B sources.",
+  "VDMREDIR": "Final build now emits its map: 4 B objects,32 reachable sections,61 external references classified.",
+  "runtime_ownership": "B retains allocation/locks/reference counts/task and borrow scopes. Existing synchronous C providers operate on opaque WW/WND/CLS. One allocation and existing teardown remain; no queue or second registry."
+}

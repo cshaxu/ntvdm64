@@ -609,3 +609,32 @@ void xxxCBSetDroppedSize(PCBOX pcbox, LPRECT lprc)
     ThreadUnlock(&tlpwndList);
 
 }
+
+#include "wow_user_borrow_scope.h"
+BOOL WINAPI wow_original_combo_info(HWND window, PWND state,
+    PCOMBOBOXINFO info, BOOL *original)
+{
+    PCBOX combo;
+    COMBOBOXINFO value={sizeof(value)};
+    enum { combo_unavailable=0x1,combo_pressed=0x8,combo_invisible=0x8000 };
+    *original=GETFNID(state)==FNID_COMBOBOX;
+    if(!*original)return FALSE;
+    if((state->fnid&(FNID_CLEANEDUP_BIT|FNID_DELETED_BIT)) ||
+            !wow_user_borrow_client_state(window,state) ||
+            !(combo=((PCOMBOWND)state)->pcbox) || combo->spwnd!=state ||
+            !combo->spwndEdit || !combo->spwndList){
+        SetLastError(ERROR_INVALID_STATE);return FALSE;
+    }
+    if(!wow_user_borrow_client_state(combo->spwndEdit->head.h,combo->spwndEdit) ||
+            !wow_user_borrow_client_state(combo->spwndList->head.h,combo->spwndList)){
+        SetLastError(ERROR_INVALID_STATE);return FALSE;
+    }
+    value.rcItem=combo->editrc;value.rcButton=combo->buttonrc;
+    value.hwndCombo=window;
+    value.hwndItem=combo->spwndEdit->head.h;
+    value.hwndList=combo->spwndList->head.h;
+    if(combo->fButtonPressed)value.stateButton|=combo_pressed;
+    if(!(combo->CBoxStyle&SDROPPABLE))value.stateButton|=combo_invisible;
+    if(!IsWindowEnabled(window))value.stateButton|=combo_unavailable;
+    *info=value;return TRUE;
+}

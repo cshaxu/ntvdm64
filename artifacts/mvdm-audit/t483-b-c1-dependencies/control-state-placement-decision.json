@@ -1,6 +1,6 @@
 {
   "packet": "M0 T483 S20",
-  "status": "pending owner approval; not implemented or compiled",
+  "status": "Approved, implemented, verified and published in P85; see successor for final results.",
   "baseline": "49c4779ebf71f10ea94edfd20fb1612620c909b8",
   "file": "src/compat/wow_edit_state_bindings.c",
   "problem": "Private CBOX, EDITWND and WND state are read in B; public native USER objects are not substitutes.",
@@ -39,5 +39,8 @@
     "Candidate patch contains only proposed C operations; B routing and fixture changes still to implement after approval.",
     "No compilation, runtime, publication or completed-file credit.",
     "Retain separate class storage candidate awaiting approval."
-  ]
+  ],
+  "successor": "p85-window-control-closure.json",
+  "current_disposition": "Approved and delivered in P85; original candidate evidence retained.",
+  "original_status": "pending owner approval; not implemented or compiled"
 }
