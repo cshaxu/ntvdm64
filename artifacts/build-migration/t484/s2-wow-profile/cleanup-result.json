@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "build/t484-s2-native-generators/prior-release",
+    "Owner": "T484 S2 delivered package",
+    "Files": 24,
+    "Bytes": 10212514,
+    "InventorySha256": "4F9B8AD63E5F6C83BC6A9C7F551769E36DEE777A03B4F51A0864DE4BAE263D26",
+    "Applied": true
+  },
+  {
+    "Path": "build/t484-s2-tib/prior-release",
+    "Owner": "T484 S2 delivered package",
+    "Files": 24,
+    "Bytes": 10212514,
+    "InventorySha256": "4D6E26B75BE04FC7B32ED826445F551F2E5EB11473D8561F310D2C677B5CD40D",
+    "Applied": true
+  },
+  {
+    "Path": "build/t484-s2-hook/prior-release",
+    "Owner": "T484 S2 delivered package",
+    "Files": 24,
+    "Bytes": 10212514,
+    "InventorySha256": "A56255363B2D3EAD7C36B6757CC9FF653B5C9CA5A61E27611A884C60FB1BAA34",
+    "Applied": true
+  }
+]

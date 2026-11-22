@@ -1,0 +1,106 @@
+[
+  {
+    "image": "VCDEX.DLL",
+    "sha256": "E1BF8DEEBA622FA9795851F1EC597C567D372F4F125F77339D81503BB257C78E",
+    "previous_input_sha256": "E1BF8DEEBA622FA9795851F1EC597C567D372F4F125F77339D81503BB257C78E",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "run16.exe",
+    "sha256": "3611902070E5433093260CA391B636EF49067F1B54CBD1DFD0B32C28868C8FF8",
+    "previous_input_sha256": "3611902070E5433093260CA391B636EF49067F1B54CBD1DFD0B32C28868C8FF8",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "ntsrv.exe",
+    "sha256": "8C163703A74A3D80E35E3C672C75F0F49C5CF1F18A151D888D0041EE513A1A32",
+    "previous_input_sha256": "8C163703A74A3D80E35E3C672C75F0F49C5CF1F18A151D888D0041EE513A1A32",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "ntcon.exe",
+    "sha256": "6A056172891DBD105BFBE44408A06A9D38EA4674DC705C50EA7F286F93DA9209",
+    "previous_input_sha256": "6A056172891DBD105BFBE44408A06A9D38EA4674DC705C50EA7F286F93DA9209",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "ntvdm.exe",
+    "sha256": "4F59A7B9F7584247277417092FEA585290A0B92E492371A58C605A1B9475C7D2",
+    "previous_input_sha256": "F11E588BD3F0390947677040F2D6EE195E6DCCE84C54E967003C1A4814ABF943",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      288,
+      289,
+      1719868,
+      1719869
+    ],
+    "timestamp_fields": [
+      288,
+      1791316,
+      1719868
+    ]
+  },
+  {
+    "image": "ntvwm.exe",
+    "sha256": "FCEE58407CB339645C4D5BEEA149E2F9D766981D040235B4561C632EAC72FA26",
+    "previous_input_sha256": "FCEE58407CB339645C4D5BEEA149E2F9D766981D040235B4561C632EAC72FA26",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "ntmon.exe",
+    "sha256": "ABD311B5BB798259556F827942D33FBC555B45FB183434BD467B806E86CDD30E",
+    "previous_input_sha256": "ABD311B5BB798259556F827942D33FBC555B45FB183434BD467B806E86CDD30E",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "WOW32.DLL",
+    "sha256": "3C1246F581A0615436B96B442B4D977C049734515AFC1E7A8A40ED9872F518BC",
+    "previous_input_sha256": "5C0DC19942472ACEFC747990B2498A95AC325308807CD844F3CD7A78E7845FED",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      304,
+      305,
+      306,
+      622100,
+      622101,
+      622102
+    ],
+    "timestamp_fields": [
+      304,
+      633412,
+      622100
+    ]
+  },
+  {
+    "image": "VDMREDIR.DLL",
+    "sha256": "36177B2049F054623045A376E533A3F8D943AD8A337FAC2A797C982EC0313506",
+    "previous_input_sha256": "36177B2049F054623045A376E533A3F8D943AD8A337FAC2A797C982EC0313506",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "nthook32.dll",
+    "sha256": "C33C66543639BDB84632225425507D2B504B1F9B4F6113B27DFD26BF739A2B92",
+    "previous_input_sha256": "387F0DE17B36C4B5620985A19D45CAB87F939910D74A0D4B41235EC48743671F",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      272,
+      273,
+      134228,
+      134229
+    ],
+    "timestamp_fields": [
+      272,
+      203316,
+      134228
+    ]
+  },
+  {
+    "image": "nthook64.dll",
+    "sha256": "C288681C623AE9F270F640D6890E87237263544B0DDEF5DE4AFC14F01BE7297F",
+    "previous_input_sha256": "C288681C623AE9F270F640D6890E87237263544B0DDEF5DE4AFC14F01BE7297F",
+    "classification": "raw-identical"
+  }
+]

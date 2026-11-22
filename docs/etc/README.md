@@ -1440,5 +1440,9 @@ host build migration batch and its actual COFF/MAP checks.
 declarative host graph migration, actual published-DLL tests and the outstanding
 global WOW macro-profile finding.
 
+[T484 S2 WOW profile correction](evidence/t484-s2-wow-profile.md) resolves
+that five-unit finding with unchanged product code bytes and a complete
+default macro-profile check.
+
 [T484 S2 native generator batch](evidence/t484-s2-native-generators.md) records
 the first two migrations, byte-equivalence tests and host package delivery.

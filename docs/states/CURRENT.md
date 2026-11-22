@@ -64,9 +64,16 @@ remain, cached full build and dual publication passed. Current package:
 a56f5975-e552-4ccb-96a3-55fd0e3622d0;22 hashes verified. Post-publication
 Hook lifecycle118 assertions, machine tests and strict boundaries passed.
 Four raw images are identical/seven timestamp-only. Full macro-profile audit
-still reports five unchanged WOW units, reproduced with the prior test;
-resolve during WOW migration before S2 closure. Three host graph generators
+reported five unchanged WOW units, reproduced with the prior test;
+the following P4 resolves them. Three host graph generators
 remain. S3-S5 are not yet admitted.
+
+[S2 P4](../etc/evidence/t484-s2-wow-profile.md) applies the existing independent
+adapter compile profile to those five WOW units. Full545-command macro audit,
+cached full11-image build, dual publication and post-publication checks passed.
+Current package:2588d3a4-f526-43d0-99be-2c47727b9612. Eight raw images identical,
+three timestamp-only (including WOW32);22 published hashes verified. No product
+source, guest or mirror code change. S2 remains active.
 
 ## S1 Closure Record
 
@@ -80,7 +87,7 @@ admission; its containing commit is the delivery identity.
 [T483 closure](../history/m0-t483-closure.md) indexes all S1-S21 outcomes,
 retained mirror decisions and known boundaries. Final production revision is
 9e7eb19c0 (S20 P85), package100b16d9-992d-4e2c-8d99-66a4e891dd26.
-The current publication is T484 S2 P3, recorded above; P85 is its behavior
+The current publication is T484 S2 P4, recorded above; P85 is its behavior
 comparison baseline. P85 Full20/20 runtime evidence is reused for this
 byte-equivalent/timestamp-only build change, not reported as a new Full run.
 
