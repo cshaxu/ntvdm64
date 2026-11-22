@@ -1,0 +1,35 @@
+{
+  "packet": "M0 T483 S20 P41",
+  "baseline": "3ee8fecac",
+  "files_partial": [
+    "BC1F048"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 37,
+    "remaining": 57,
+    "B_C1_unique": 42,
+    "B_C1_raw": 50,
+    "B_C1_compiled_headers": 318,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct remains 42; compiled headers 324 to 318. Original user.h remains through shared layout.",
+  "implementation": "Replaced private NT include with public SDK declarations; task identity checks, captured context and font lifetime remain unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "cb487ab3-d0dd-42f8-b5bc-fdaa2f42ac91",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "dialog context and WOW control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-dialog-context",
+  "limitations": [
+    "BC1F048 retains shared original USER layout dependency",
+    "Full suite required at S20 closure"
+  ]
+}

@@ -481,3 +481,11 @@ Mirror delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full
 build, dual11, dialog/control and real Win16/COMMAND targeted tests passed.
 Full remains required at S20 closure. Package d41c6cb9-965e-4708-970c-02622feccfd1.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p40-delivery.json).
+
+P41 partially addresses BC1F048: replaced private NT include with public
+SDK declarations; shared original USER layout remains open. B-C1 direct
+unique remains 42, compiled headers 324->318; files 37/94 complete. Mirror
+delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full build,
+dual11, dialog context/control and real Win16/COMMAND targeted tests passed.
+Full remains required at S20 closure. Package cb487ab3-d0dd-42f8-b5bc-fdaa2f42ac91.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p41-delivery.json).

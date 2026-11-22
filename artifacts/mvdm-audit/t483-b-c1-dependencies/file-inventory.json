@@ -7,7 +7,7 @@
     "completed": 37,
     "direct_unique": 42,
     "direct_raw": 50,
-    "compiled_header_rows": 324,
+    "compiled_header_rows": 318,
     "private_search_root_rows": 0
   },
   "files": [
@@ -4439,7 +4439,7 @@
     {
       "id": "BC1F048",
       "file": "src/compat/wow_dialog_context_bindings.c",
-      "status": "not yet audited",
+      "status": "in progress: P41 removes private nt.h; shared original USER layout remains",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -4541,7 +4541,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p41-delivery.json"
     },
     {
       "id": "BC1F049",
