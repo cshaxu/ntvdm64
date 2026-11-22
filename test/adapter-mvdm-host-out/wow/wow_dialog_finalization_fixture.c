@@ -12,6 +12,7 @@
 #include "wow_window_access_provider.h"
 BOOL WINAPI wow_original_dialog_owned(struct tagWND *);
 BOOL WINAPI wow_original_dialog_finalize(struct tagWND *, LONG (WINAPI *)(struct tagWND *, UINT, WPARAM, LPARAM, DWORD));
+BOOL WINAPI wow_original_dialog_set_pointer(struct tagWND *, struct _DLG *);
 
 
 /* Actual finalization boundary with explicit scope/worker doubles. This
@@ -208,12 +209,40 @@ static void reset(void)
     fail_context = validation_sets_error = FALSE; captures = 0;
     calls = cleanup_entries = ensures = end_calls = native_begins = 0;
 }
+/* Pointer publication borrows the scope held by its original C caller. */
+static BOOL scoped_set_pointer(struct _DLG *value)
+{
+    wow_window_words_binding *words = wow_window_words_acquire(WINDOW);
+    wow_task_callback_scope task;
+    wow_user_borrow_scope borrow;
+    BOOL result;
+    CHECK(words != NULL);
+    CHECK(wow_task_callback_enter(&task));
+    CHECK(wow_user_borrow_enter(&borrow));
+    result = wow_dialog_set_pointer(WINDOW, value);
+    wow_user_borrow_leave_required(&borrow);
+    CHECK(wow_task_callback_leave(&task));
+    wow_window_words_release(words);
+    return result;
+}
 int main(void)
 {
     LONG result;
     BOOL caught = FALSE;
-    static const wow_dialog_finalization_provider provider = { fixture_DefDlgProcWorker, fixture_wow_original_EndDialog, fixture_wow_original_MapDialogRect, fixture_wow_original_DlgDirListA, fixture_wow_original_DlgDirListComboBoxA, fixture_wow_original_DlgDirSelectExA, fixture_wow_original_DlgDirSelectComboBoxExA, wow_original_dialog_owned, wow_original_dialog_finalize };
+    static const wow_dialog_finalization_provider provider = { fixture_DefDlgProcWorker, fixture_wow_original_EndDialog, fixture_wow_original_MapDialogRect, fixture_wow_original_DlgDirListA, fixture_wow_original_DlgDirListComboBoxA, fixture_wow_original_DlgDirSelectExA, fixture_wow_original_DlgDirSelectComboBoxExA, wow_original_dialog_owned, wow_original_dialog_finalize, wow_original_dialog_set_pointer };
     CHECK(wow_dialog_finalization_bind(&provider));
+    reset(); SetLastError(0x4473);
+    CHECK(scoped_set_pointer(&data));
+    CHECK(dialog.pdlg == &data && TestWF(&dialog.wnd, WFDIALOGWINDOW));
+    CHECK(GetLastError() == 0x4473);
+    CHECK(scoped_set_pointer(NULL));
+    CHECK(!dialog.pdlg && !TestWF(&dialog.wnd, WFDIALOGWINDOW));
+    CHECK((dialog.wnd.fnid & FNID_CLEANEDUP_BIT) != 0);
+    CHECK(GetLastError() == 0x4473);
+    reset(); dialog.wnd.cbwndExtra = 0;
+    CHECK(!scoped_set_pointer(NULL));
+    CHECK(GetLastError() == ERROR_INVALID_INDEX && dialog.pdlg == &data);
+
     reset(); fail_ready = TRUE;
     CHECK(!wow_dialog_window_procA(WINDOW, WM_USER, 17, 29));
     CHECK(GetLastError() == ERROR_NOT_ENOUGH_MEMORY && !calls && !ensures &&

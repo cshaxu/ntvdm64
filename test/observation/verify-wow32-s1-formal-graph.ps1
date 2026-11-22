@@ -91,7 +91,7 @@ if (@(Compare-Object $expectedUser $actualUser).Count) {
 if ($link -match '\bobj/compat/wow-(?:class-client|control-brush|control-state|dialog-memory)\.obj\b') {
     throw 'The WOW32 link still selects a former compat object.'
 }
-foreach ($unit in @('wow_class_client','wow_dialog_memory','wow_control_state','wow_control_fnid','wow_control_brush','wow_client_dispatch','wow_default_window_bits','wow_dialog_pointer','wow_input_membership')) {
+foreach ($unit in @('wow_class_client','wow_dialog_memory','wow_control_state','wow_control_fnid','wow_control_brush','wow_client_dispatch','wow_default_window_bits','wow_input_membership')) {
     $object = "obj/wow32-dll/$unit.obj"
     if (($link -split '\s+') -notcontains $object -or
         $ninja -notmatch ('(?m)^build ' + [regex]::Escape($object) + ': cc [^\r\n]*/src/wow32-dll/source/' + $unit + '\.c\s*$')) {
@@ -106,8 +106,9 @@ foreach ($unit in @('wow-control-rect')) {
 if ($link -notmatch '\bobj/compat/wow-object-ownership\.obj\b') {
     throw 'The compat object ownership table must be linked into the formal graph.'
 }
-if ($link -notmatch '\bobj/compat/wow-dialog-lookup\.obj\b') {
-    throw 'The compat dialog lookup must be linked into the formal graph.'
+if ($link -match '\bobj/(?:compat/wow-dialog-lookup|wow32-dll/wow_dialog_pointer)\.obj\b' -or
+    $link -notmatch '\bobj/opennt-user/control-body-dlgmgr\.obj\b') {
+    throw 'Dialog pointer and lookup must be supplied by the original dialog manager.'
 }
 if ($link -notmatch '\bobj/wow32-dll/wow_button_resources\.obj\b' -or
     [IO.File]::ReadAllText((Join-Path $root 'src/compat/wow_button_resources.c')) -notmatch

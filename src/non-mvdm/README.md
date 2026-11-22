@@ -2679,8 +2679,9 @@ the common and WOW copies of the restored declarations are removed.
 See [P214 evidence](../../artifacts/mvdm-audit/t483-remaining-reaudit/batch-p214-checkpoint.json).
 
 T483 S6 P21 supersedes the client/wow.c subset admission above: owner-approved
-extraction retains _GetDlgItem in src/compat/wow_dialog_lookup.c and retires
-this mirror. Historical provenance and review records remain evidence only.
+extraction retired this mirror. S20 returns the extracted _GetDlgItem body
+to the existing client/dlgmgr.c alongside SetDialogPointer; the original
+symbols and algorithms are preserved. Historical records remain provenance.
 
 T483 S6 P22 supersedes the kernel/input.c subset admission: AddAttachment and
 Recalc2 now reside in src/compat/wow_input_membership.c. Historical mirror

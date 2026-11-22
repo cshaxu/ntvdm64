@@ -1203,6 +1203,60 @@ BOOL MapDialogRect(
     return TRUE;
 }
 
+/* Copyright (c) 1985-95, Microsoft Corporation.
+ * OpenNT windows/core/ntuser/kernel/miscutil.c:24-37.
+ * Revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.
+ * Original extracted operation, now beside its retained dialog owner.
+ */
+VOID SetDialogPointer(PWND pwnd, LONG lPtr) {
+
+    ((PDIALOG)pwnd)->pdlg = (PDLG)lPtr;
+
+    if (lPtr == 0) {
+        pwnd->fnid |= FNID_CLEANEDUP_BIT;
+        ClrWF(pwnd, WFDIALOGWINDOW);
+    } else {
+        if (pwnd->fnid == 0) {
+            pwnd->fnid = FNID_DIALOG;
+        }
+        SetWF(pwnd, WFDIALOGWINDOW);
+    }
+}
+
+/* Copyright (c) 1985-92, Microsoft Corporation.
+ * OpenNT windows/core/ntuser/client/wow.c:251-265.
+ * Revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.
+ */
+PWND _GetDlgItem(
+    PWND pwnd,
+    int id)
+{
+    if (pwnd != NULL) {
+        pwnd = REBASEPWND(pwnd, spwndChild);
+        while (pwnd != NULL) {
+            if ((int)pwnd->spmenu == id)
+                break;
+            pwnd = REBASEPWND(pwnd, spwndNext);
+        }
+    }
+
+    return pwnd;
+}
+
+BOOL WINAPI wow_original_dialog_set_pointer(PWND state, PDLG dialog)
+{
+    C_ASSERT(sizeof(void *) == 4);
+    C_ASSERT(offsetof(DIALOG, resultWP) == sizeof(WND));
+    C_ASSERT(offsetof(DIALOG, pdlg) == sizeof(WND) + sizeof(LONG));
+    C_ASSERT(offsetof(DIALOG, unused) == sizeof(WND) + 2 * sizeof(LONG));
+    if (state->cbwndExtra < DLGWINDOWEXTRA) {
+        SetLastError(ERROR_INVALID_INDEX);
+        return FALSE;
+    }
+    SetDialogPointer(state, (LONG)dialog);
+    return TRUE;
+}
+
 /* Original-layout operations; caller retains its task and window borrow. */
 BOOL WINAPI wow_original_dialog_owned(PWND state)
 {

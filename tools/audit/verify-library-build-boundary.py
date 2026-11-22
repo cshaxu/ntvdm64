@@ -24,9 +24,9 @@ def ninja(directory, tool, *args):
     ).replace("\\", "/")
 
 
-# These two original USER units use mirror-owned data layouts. The exception
+# This original USER unit uses mirror-owned data layouts. The exception
 # is limited to the WOW32 build of the named source, not to the component.
-WOW_USER_EXCEPTIONS = {"wow_dialog_lookup.c", "wow_object_ownership.c"}
+WOW_USER_EXCEPTIONS = {"wow_object_ownership.c"}
 
 
 # S19 removed C2 search paths; original NT ABI remains an S20 obligation.
@@ -69,7 +69,6 @@ ORIGINAL_LAYOUT_ADAPTERS = {
     'wow_hook_callback.c',
     'wow_dialog_memory.c',
     'wow_dialog_native_bindings.c',
-    'wow_dialog_pointer.c',
     'wow_dialog_procedure_bindings.c',
     'wow_dialog_state_bindings.c',
     'wow_edit_call_bindings.c',

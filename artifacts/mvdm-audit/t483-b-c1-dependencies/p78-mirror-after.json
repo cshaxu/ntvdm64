@@ -1,0 +1,36 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr.c",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "current_sha256": "a38f9f5f3a12aca80fdda12e4b30b647093de4963719a370c6b6e735fdd43855",
+      "raw": {
+        "blocks": 18,
+        "added": 114,
+        "deleted": 213
+      },
+      "filtered": {
+        "blocks": 17,
+        "added": 113,
+        "deleted": 205
+      },
+      "excluded": [
+        {
+          "original": [
+            1057,
+            1064
+          ],
+          "current": [
+            901,
+            903
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    }
+  ]
+}

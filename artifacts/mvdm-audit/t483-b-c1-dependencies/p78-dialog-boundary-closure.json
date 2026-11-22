@@ -1,0 +1,154 @@
+{
+  "packet": "M0 T483 S20 P78",
+  "baseline": "b0eebb0f25ad9c3d37e2ccdc8541ec488598c9bb",
+  "status": "verified production batch; commit/push in Git history",
+  "files_completed": [
+    "src/compat/wow_dialog_lookup.c",
+    "src/compat/wow_dialog_pointer.c",
+    "src/compat/wow_dialog_state_bindings.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 77,
+    "remaining": 17,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 32,
+    "B_C1_sources": 13,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "C owns unchanged original _GetDlgItem and SetDialogPointer bodies. Existing dialog provider supplies extent-checked pointer publication; B retains HWND validation, borrowed scope and LastError restoration. No new table, queue or layout copy.",
+  "lifetime": "Caller retains the existing HWND and dialog borrow. Pointer publication allocates and frees nothing. The original fnid and flag updates and child traversal are byte-equivalent after newline normalization. Error on insufficient dialog extent remains INVALID_INDEX; successful publication restores entry LastError.",
+  "mirror": {
+    "delta_points": 0,
+    "delta_lines": 54,
+    "proof": "Removing the single appended operation block restores exact HEAD bytes. It is inside the existing manager selection after the final original function; existing #line anchors, original code and #error branches are unchanged.",
+    "approval": "Standing single adaptation location below100 lines; net points0, added lines54; pending R2763"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "4bd82f1b-30bb-4b4c-a3c7-45878a9e7165",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "build": {
+    "pid": 16488,
+    "started": "2026-11-22T11:03:27.6536916+00:00",
+    "finished": "2026-11-22T11:04:42.1784362+00:00",
+    "exit": 0
+  },
+  "boundary_tests": {
+    "exit": 0,
+    "pid": 33168,
+    "started": "2026-11-22T11:07:18.4228757+00:00",
+    "finished": "2026-11-22T11:07:32.1556246+00:00"
+  },
+  "targeted_cases": [
+    {
+      "exit": 0,
+      "case": "window-borrow",
+      "finished": "2026-11-22T11:07:44.1514128+00:00",
+      "started": "2026-11-22T11:07:32.2083508+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "native-creation",
+      "finished": "2026-11-22T11:07:55.8647586+00:00",
+      "started": "2026-11-22T11:07:44.1538134+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "class-lifetime",
+      "finished": "2026-11-22T11:08:05.9842261+00:00",
+      "started": "2026-11-22T11:07:55.8669871+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "task-lifecycle",
+      "finished": "2026-11-22T11:08:16.6970268+00:00",
+      "started": "2026-11-22T11:08:05.9855037+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "process-retirement",
+      "finished": "2026-11-22T11:08:27.0585426+00:00",
+      "started": "2026-11-22T11:08:16.6982213+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "init-notification",
+      "finished": "2026-11-22T11:08:38.6906997+00:00",
+      "started": "2026-11-22T11:08:27.0597503+00:00"
+    }
+  ],
+  "class_cases": [
+    {
+      "exit": 0,
+      "case": "class-client",
+      "finished": "2026-11-22T11:08:49.0418587+00:00",
+      "started": "2026-11-22T11:08:38.7140662+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "class-query",
+      "finished": "2026-11-22T11:08:59.6731481+00:00",
+      "started": "2026-11-22T11:08:49.0432047+00:00"
+    }
+  ],
+  "verification": {
+    "exit": 0,
+    "pid": 33168,
+    "started": "2026-11-22T11:07:18.3727387+00:00",
+    "finished": "2026-11-22T11:09:42.4065450+00:00"
+  },
+  "source_identity": {
+    "src/compat/README.md": "c206bd1b1fe251b00ed4b360e6fb4fbf790b24af38188380420f1f22d5dd60e2",
+    "src/compat/include/wow_dialog_finalization_provider.h": "228220c014f0c8dc4b22ace35c59105642636cbe33e84a7992097dc9f3bc8027",
+    "src/compat/wow_dialog_finalization_binding.c": "0b4a598fc5e26f55de3d40ebfc7ee28818a9f88843d857e5fe8ea000774cc409",
+    "src/compat/wow_dialog_state_bindings.c": "ca666cfcfadf3d5748382c0916a3298bbb85e553cfbb2f896c5db0971a0da9e1",
+    "src/non-mvdm/README.md": "9ef0fd266933ae541f3e104bbcded1225870bcdffafa5d803baaefee6979d06e",
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c": "a38f9f5f3a12aca80fdda12e4b30b647093de4963719a370c6b6e735fdd43855",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_finalization_fixture.c": "26891ddf6481d652845257748dbda5541d255efb56a41a4ac5cb0173e0da94af",
+    "test/mvdm-host/wow_page_domain_fixture.c": "af800538425271e82849c52e8575b8d7c0724e9d9b066a88a2f5c7ade3e8587d",
+    "test/observation/verify-wow32-s1-formal-graph.ps1": "3978073e7573338979d1a67f8855bca9631a2747465431062ce93cfece23d2a4",
+    "tools/audit/verify-library-build-boundary.py": "8b0d5e287b97fddb174ca5841cf99ceecda411873300944789f458e84cec82e2",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "8031ce60a293bbd20ec29fa89e080a16974a0975c7c9d74c070090fb3b7adf0a",
+    "tools/build/New-T447S3CallBoundaryNinja.ps1": "0ac7bfacd08a7106d6471d11111e1d1a272c12d564be40b37b17b70a7286ccc5"
+  },
+  "evidence_root": "build\\t483-s20-p78-dialog-pointer",
+  "limitations": [
+    "17 inventory files remain; no S20 closure or Full-pass claim.",
+    "Compiled header rows47->32; affected sources16->13; retired B implementations and opaque state wrapper remove the three original C include closures.",
+    "Data-symbol/assembly/linkmap coverage gaps and existing Shell diagnostic limitation retained.",
+    "Class storage and control-state larger mirror candidates still await approval."
+  ],
+  "initial_attempt": {
+    "verification": {
+      "finished": "2026-11-22T11:06:30.4865918+00:00",
+      "pid": 19652,
+      "started": "2026-11-22T11:06:11.9554920+00:00",
+      "error": "Boundary tests failed",
+      "exit": 1
+    },
+    "cause": "New pointer test invoked borrowed API without the required caller-owned window/task/borrow scope; existing fixture assertions rejected three calls.",
+    "resolution": "Test now acquires and releases the existing fixture scopes around pointer publication; assertions unchanged, no production change."
+  },
+  "retired_sources": [
+    "src/compat/wow_dialog_lookup.c",
+    "src/compat/wow_dialog_pointer.c"
+  ],
+  "byte_identity_proof": {
+    "mirror": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+    "base_sha256": "009ea2df3275fb52bf28b5599bfa7529f090cef6b3fa586237ab99e0e2cb0864",
+    "candidate_sha256": "a38f9f5f3a12aca80fdda12e4b30b647093de4963719a370c6b6e735fdd43855",
+    "original_functions_identical": true,
+    "remove_one_insertion_restores_HEAD_bytes": true,
+    "error_line_framework_unchanged": true
+  },
+  "boundary_scope": "Source-derived exact C operation bodies in a standalone translation unit; outer transports and selected worker mocked. Not the product object or guest resource acceptance. Full product object exercised by lifecycle/native-creation and actual guest cases.",
+  "boundary_generated_sha256": "ba58e60f140101852e64a5f48fa6ab84fb360aab80f6d4a738a00f49c87fabe0"
+}

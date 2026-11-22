@@ -114,14 +114,14 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P77 final compiled-product review leaves 74 of 94
+is authoritative for individual files and evidence. P78 final compiled-product review leaves 77 of 94
 files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-47 compiled-header rows across 16 sources and zero private search roots. B-to-C2 has zero
+32 compiled-header rows across 13 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
 
-S20 cumulative non-error mirror delta is +8 points/+338 lines; S19 retained
+S20 cumulative non-error mirror delta is +8 points/+392 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
 tests. The P62 package is 71882068-22ca-4a1a-8a84-20c8d7f7cb5c.
@@ -233,3 +233,11 @@ at one original manager insertion, pending R2762. Full cached build, dual11
 publication, actual C finalization/creation boundaries, eight lifecycle/class
 cases and published USER16/COMMAND passed.
 [P77 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p77-dialog-boundary-closure.json).
+
+P78 completes dialog lookup, pointer and pointer-state boundaries. Original
+_GetDlgItem and SetDialogPointer bodies now reside in the existing C manager;
+B uses the existing provider for validated pointer publication. Remaining17
+files; header rows47->32 across13 sources. Mirror +0points/+54lines at one
+insertion, pending R2763. Cached full build, dual11 publication, targeted
+boundaries/lifecycles and published USER16/COMMAND passed.
+[P78 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p78-dialog-boundary-closure.json).

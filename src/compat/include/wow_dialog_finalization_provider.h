@@ -2,6 +2,7 @@
 #define WOW_DIALOG_FINALIZATION_PROVIDER_H
 #include <windows.h>
 struct tagWND;
+struct _DLG;
 typedef struct wow_dialog_finalization_provider {
     LONG (WINAPI *worker)(struct tagWND *, UINT, WPARAM, LPARAM, DWORD);
     BOOL (WINAPI *end)(HWND, int);
@@ -13,6 +14,8 @@ typedef struct wow_dialog_finalization_provider {
     BOOL (WINAPI *owns)(struct tagWND *);
     BOOL (WINAPI *finalize)(struct tagWND *,
         LONG (WINAPI *)(struct tagWND *, UINT, WPARAM, LPARAM, DWORD));
+    BOOL (WINAPI *set_pointer)(struct tagWND *, struct _DLG *);
 } wow_dialog_finalization_provider;
 BOOL WINAPI wow_dialog_finalization_bind(const wow_dialog_finalization_provider *);
+const wow_dialog_finalization_provider *WINAPI wow_dialog_finalization_current(void);
 #endif

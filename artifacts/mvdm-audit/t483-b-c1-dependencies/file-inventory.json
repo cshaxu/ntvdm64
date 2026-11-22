@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 74,
+    "completed": 77,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 47,
+    "compiled_header_rows": 32,
     "private_search_root_rows": 0
   },
   "files": [
@@ -5036,7 +5036,7 @@
     {
       "id": "BC1F052",
       "file": "src/compat/wow_dialog_lookup.c",
-      "status": "audited in P45: original _GetDlgItem layout/rebase exception; incidental header closure remains under review",
+      "status": "completed in verified P78 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -5159,7 +5159,8 @@
           "product": "wow32.dll"
         }
       ],
-      "progress_evidence": "p45-delivery.json"
+      "progress_evidence": "p45-delivery.json",
+      "p78_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p78-dialog-boundary-closure.json"
     },
     {
       "id": "BC1F053",
@@ -5380,7 +5381,7 @@
     {
       "id": "BC1F055",
       "file": "src/compat/wow_dialog_pointer.c",
-      "status": "partially addressed in P46: private NT include removed; original USER layout headers remain",
+      "status": "completed in verified P78 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -5483,7 +5484,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p46-delivery.json"
+      "progress_evidence": "p46-delivery.json",
+      "p78_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p78-dialog-boundary-closure.json"
     },
     {
       "id": "BC1F056",
@@ -5596,7 +5598,7 @@
     {
       "id": "BC1F057",
       "file": "src/compat/wow_dialog_state_bindings.c",
-      "status": "partially addressed in P48: private NT include removed; original dialog layout headers remain",
+      "status": "completed in verified P78 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -5699,7 +5701,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p48-delivery.json"
+      "progress_evidence": "p48-delivery.json",
+      "p78_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p78-dialog-boundary-closure.json"
     },
     {
       "id": "BC1F058",

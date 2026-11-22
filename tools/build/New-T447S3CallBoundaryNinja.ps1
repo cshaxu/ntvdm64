@@ -93,6 +93,7 @@ $units = @(
     @('keyboard_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_lifetime_fixture.c', ''),
     @('keyboard_unreached', 'test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_unreached.c', ''),
     @('dialog_finalization_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_finalization_fixture.c', ''),
+    @('dialog_state_adapter', 'src/compat/wow_dialog_state_bindings.c', ''),
     @('dialog_finalization_adapter', 'src/compat/wow_dialog_finalization_binding.c', ''),
     @('dialog_end_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_end_original_fixture.c', ''),
     # The modal/context unit has no native execution transport. Accidental
@@ -119,7 +120,6 @@ $modalLifetimeFlags = '/I "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-h
 $units += ,@('modal_lifetime_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_lifetime_fixture.c', '')
 $units += ,@('modal_lifetime_body', 'src/non-mvdm/windows/core/ntuser/client/dlgmgr.c', $modalLifetimeFlags)
 $units += ,@('modal_lifetime_end', 'src/non-mvdm/windows/core/ntuser/client/dlgend.c', $modalLifetimeFlags)
-$units += ,@('modal_lifetime_pointer', 'src/compat/wow_dialog_pointer.c', ($modalLifetimeFlags + ' /DWOW_DIALOG_STATE_BINDINGS_H /DWOW_USER_CLIENT_VIEW_LAYOUT_H /FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/dialog-lifetime/precomp.h')) + '"'))
 $navigationFlags = '/DWOW_ORIGINAL_EDIT_CLIENT /I "' + (NinjaValue (Join-Path $root 'src/compat/include/control-client')) + '"'
 $units += ,@('navigation_fixture', 'test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c', '')
 $units += ,@('navigation_graph', 'src/non-mvdm/windows/core/ntuser/rtl/winmgr.c', $navigationFlags)
@@ -201,8 +201,6 @@ foreach ($name in @('editec','edecrare','editsl','editml','edmlonce','edmlrare',
     $units += ,@(('original_' + $name), ('src/non-mvdm/windows/core/ntuser/client/' + $name + '.c'), $flags)
     $controlObjects += 'obj/original_' + $name + '.obj'
 }
-$units += ,@('dialog_lookup', 'src/compat/wow_dialog_lookup.c', '/DWOW_ORIGINAL_EDIT_CLIENT /DWOW_DIALOG_LOOKUP_ONLY')
-$controlObjects += 'obj/dialog_lookup.obj'
 $units += ,@('original_keyboard', 'src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c',
     ('/DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_KEYBOARD /I "' +
     (NinjaValue (Join-Path $root 'src/compat/include/control-client')) + '"'))
@@ -236,7 +234,23 @@ $dialogPreamble = @'
 #include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_DIALOG_LAYOUT
 '@
-[IO.File]::WriteAllText($dialogLayout, $dialogPreamble + "`n" + $dialogBody, [Text.UTF8Encoding]::new($false))
+$pointerStart = $dialogText.IndexOf('VOID SetDialogPointer(')
+$lookupStart = $dialogText.IndexOf('PWND _GetDlgItem(')
+$setterStart = $dialogText.IndexOf('BOOL WINAPI wow_original_dialog_set_pointer(')
+$pointerEnd = $dialogText.IndexOf('/* Copyright (c) 1985-92', $pointerStart)
+if ($pointerStart -lt 0 -or $pointerEnd -le $pointerStart -or $lookupStart -le $pointerEnd -or $setterStart -le $lookupStart -or $dialogStart -le $setterStart) {
+    throw 'Original dialog pointer/lookup source boundaries changed.'
+}
+$pointerBody = $dialogText.Substring($pointerStart, $pointerEnd - $pointerStart)
+$lookupBody = $dialogText.Substring($lookupStart, $setterStart - $lookupStart)
+$setterBody = $dialogText.Substring($setterStart, $dialogStart - $setterStart)
+$pointerSource = Join-Path $build 'dialog-pointer-original.c'
+$lookupSource = Join-Path $build 'dialog-lookup-original.c'
+[IO.File]::WriteAllText($pointerSource, $pointerBody, [Text.UTF8Encoding]::new($false))
+[IO.File]::WriteAllText($lookupSource, '#include "control-client/precomp.h"' + "`n" + $lookupBody, [Text.UTF8Encoding]::new($false))
+[IO.File]::WriteAllText($dialogLayout, $dialogPreamble + "`n" + $pointerBody + $setterBody + $dialogBody, [Text.UTF8Encoding]::new($false))
+$units += ,@('modal_lifetime_pointer', [IO.Path]::GetRelativePath($root, $pointerSource), ($modalLifetimeFlags + ' /DWOW_DIALOG_STATE_BINDINGS_H /DWOW_USER_CLIENT_VIEW_LAYOUT_H /FI "' + (NinjaValue (Join-Path $root 'test/adapter-mvdm-host-out/wow/dialog-lifetime/precomp.h')) + '"'))
+$units += ,@('dialog_lookup', [IO.Path]::GetRelativePath($root, $lookupSource), '/DWOW_ORIGINAL_EDIT_CLIENT /DWOW_DIALOG_LOOKUP_ONLY')
 $units += ,@('dialog_finalization_layout', [IO.Path]::GetRelativePath($root, $dialogLayout), '')
 foreach ($unit in $units) {
     if (!(Test-Path -LiteralPath (Join-Path $root $unit[1]) -PathType Leaf)) {
@@ -299,7 +313,7 @@ $lines.Add('build original-mnemonic-lifetime-boundary: phony bin/wow_dialog_mnem
 $lines.Add('build bin/wow_dialog_keyboard_lifetime_fixture.exe: link obj/keyboard_lifetime_fixture.obj obj/keyboard_unreached.obj obj/original_keyboard.obj obj/original_dlgmgr.obj obj/button_lifetime_adapter.obj obj/state_drawing_atlas.obj obj/string_conversion.obj obj/string_services.obj obj/native_environment.obj')
 $lines.Add('  libs = ntdll.lib')
 $lines.Add('build original-keyboard-lifetime-boundary: phony bin/wow_dialog_keyboard_lifetime_fixture.exe')
-$lines.Add('build bin/wow_dialog_finalization_fixture.exe: link obj/dialog_finalization_fixture.obj obj/dialog_finalization_adapter.obj obj/dialog_finalization_layout.obj')
+$lines.Add('build bin/wow_dialog_finalization_fixture.exe: link obj/dialog_finalization_fixture.obj obj/dialog_finalization_adapter.obj obj/dialog_state_adapter.obj obj/dialog_finalization_layout.obj')
 $lines.Add('  libs = /OPT:REF')
 $lines.Add('build bin/wow_dialog_end_original_fixture.exe: link obj/dialog_end_fixture.obj obj/original_dlgend.obj')
 $lines.Add('build original-dialog-end-boundary: phony bin/wow_dialog_end_original_fixture.exe')

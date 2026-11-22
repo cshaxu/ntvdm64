@@ -20,7 +20,7 @@ BOOL WINAPI wow_dialog_finalization_bind(const wow_dialog_finalization_provider 
     const wow_dialog_finalization_provider *previous;
     if (!provider || !provider->worker || !provider->end || !provider->map ||
             !provider->list || !provider->combo_list || !provider->select ||
-            !provider->combo_select || !provider->owns || !provider->finalize) {
+            !provider->combo_select || !provider->owns || !provider->finalize || !provider->set_pointer) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&dialog_provider,
@@ -30,7 +30,7 @@ BOOL WINAPI wow_dialog_finalization_bind(const wow_dialog_finalization_provider 
     }
     return TRUE;
 }
-static const wow_dialog_finalization_provider *original_dialog(void)
+const wow_dialog_finalization_provider *WINAPI wow_dialog_finalization_current(void)
 {
     if (!dialog_provider) RaiseFailFastException(NULL, NULL, 0);
     return dialog_provider;
@@ -49,14 +49,14 @@ static LRESULT original_api(HWND w, enum dialog_operation operation,
     const dialog_api_args *args)
 {
     switch (operation) {
-    case dialog_map: return original_dialog()->map(w, args->buffer);
-    case dialog_dir_list: return original_dialog()->list(w, args->buffer,
+    case dialog_map: return wow_dialog_finalization_current()->map(w, args->buffer);
+    case dialog_dir_list: return wow_dialog_finalization_current()->list(w, args->buffer,
         args->first, args->second, args->attributes);
-    case dialog_dir_combo_list: return original_dialog()->combo_list(w,
+    case dialog_dir_combo_list: return wow_dialog_finalization_current()->combo_list(w,
         args->buffer, args->first, args->second, args->attributes);
-    case dialog_dir_select: return original_dialog()->select(w,
+    case dialog_dir_select: return wow_dialog_finalization_current()->select(w,
         args->buffer, args->first, args->second);
-    case dialog_dir_combo_select: return original_dialog()->combo_select(w,
+    case dialog_dir_combo_select: return wow_dialog_finalization_current()->combo_select(w,
         args->buffer, args->first, args->second);
     default: SetLastError(ERROR_INVALID_PARAMETER); return 0;
     }
@@ -133,7 +133,7 @@ static LRESULT dialog_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
         }
         if (operation == dialog_end) {
             SetLastError(error);
-            result = original_dialog()->end(window, (int)wp);
+            result = wow_dialog_finalization_current()->end(window, (int)wp);
             __leave;
         }
         if (!finalize) {
@@ -142,10 +142,10 @@ static LRESULT dialog_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
              * cleanup. Native/guest calls inside the worker retain their
              * existing scoped boundaries; this is not a native-call wrapper. */
             SetLastError(error);
-            result = original_dialog()->worker(state, message, wp, lp, ansi);
+            result = wow_dialog_finalization_current()->worker(state, message, wp, lp, ansi);
             __leave;
         }
-        result = original_dialog()->finalize(state, original_dialog()->worker);
+        result = wow_dialog_finalization_current()->finalize(state, wow_dialog_finalization_current()->worker);
         SetLastError(result ? error : ERROR_INVALID_STATE);
     } __finally {
         DWORD final_error = GetLastError();
@@ -249,7 +249,7 @@ BOOL WINAPI wow_dialog_default_message(HWND window, UINT message, WPARAM wp,
     words = wow_window_words_acquire(window);
     if (!words) { SetLastError(error); return FALSE; }
     state = wow_window_words_client_state_value(words);
-    handled = state && original_dialog()->owns(state);
+    handled = state && wow_dialog_finalization_current()->owns(state);
     __try {
         SetLastError(error);
         if (handled) *result = wow_dialog_window_procA(window, message, wp, lp);
@@ -266,7 +266,7 @@ BOOL WINAPI wow_user_end_dialog(HWND window, INT_PTR result)
     DWORD error = GetLastError();
     wow_window_words_binding *words = wow_window_words_acquire(window);
     struct tagWND *state = wow_window_words_client_state_value(words);
-    BOOL recovered = state && original_dialog()->owns(state);
+    BOOL recovered = state && wow_dialog_finalization_current()->owns(state);
     BOOL ended = FALSE;
     __try {
         SetLastError(error);

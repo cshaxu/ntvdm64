@@ -210,10 +210,12 @@ assignment, conflicting reassignment, cleanup and repeated cleanup through the
 production WOW32 operation; the boundary supplies only a controlled PWND.
 Actual WOW lifetime and Full guest tests remain separate delivery evidence.
 
-`wow_dialog_lookup.c` retains OpenNT client/wow.c::_GetDlgItem (251-265),
-revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c. Owner-approved P21
-extraction preserves the original PWND child-list algorithm and ABI. Product
-and dialog-navigation fixture link this same implementation.
+The original `_GetDlgItem` (OpenNT client/wow.c:251-265) and
+`SetDialogPointer` (kernel/miscutil.c:24-37), revision
+5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, now reside in C's existing
+[dialog manager](../non-mvdm/windows/core/ntuser/client/dlgmgr.c).
+B retains the opaque HWND boundary and uses the existing synchronous dialog
+provider; it no longer owns these private-layout implementations.
 
 [wow_input_membership.c](../compat/wow_input_membership.c) retains OpenNT kernel/input.c AddAttachment/Recalc2,
 revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, by owner-approved P22
