@@ -6,7 +6,7 @@ subsystem = console
 rule cc
   command = cl.exe $cflags $release_cflags /Fo$out $in
   deps = msvc
-  msvc_deps_prefix = Note: including file: 
+  msvc_deps_prefix = Note: including file:
 rule lib
   command = lib.exe /nologo /out:$out $in
 rule link
