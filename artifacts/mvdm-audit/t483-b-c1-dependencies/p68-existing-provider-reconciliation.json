@@ -1,0 +1,60 @@
+{
+  "packet": "M0 T483 S20 P68",
+  "kind": "evidence-only inventory reconciliation; no product changes",
+  "baseline": "fea8c42555b79c024d71dcf8274c61ac3c355b36",
+  "files": [
+    {
+      "id": "BC1F077",
+      "file": "src/compat/wow_task_profile_binding.c",
+      "sha256": "9a9abbabf88ee98df7a8dde9c167fdb36936e49842574624d7d082d2ad5fa9c1",
+      "unchanged_since": "119b798e6b0df92517b8349852cc2c8c4e4dbc39",
+      "evidence": "p18-delivery.json",
+      "compiled_private_headers": 0,
+      "direct_private_links": 0
+    },
+    {
+      "id": "BC1F078",
+      "file": "src/compat/wow_task_start_notification.c",
+      "sha256": "8d0a4eb70ccc280739b58b5ba7e94e2201583c7998d345ca0599c907902fe571",
+      "unchanged_since": "4b9263e69605ea142a53daa788f242e6cd93f24d",
+      "evidence": "p67-verification.json",
+      "compiled_private_headers": 0,
+      "direct_private_links": 0
+    },
+    {
+      "id": "BC1F079",
+      "file": "src/compat/wow_timer_callback.c",
+      "sha256": "1dcd82c0dd364c4adf9f1a4bbaed39e83d4589a424b03291e1a6038d5f6b584f",
+      "unchanged_since": "d7193876fb026ca42aad389f0d6844c69c4a53ca",
+      "evidence": "../t483-b-c2-dependencies/p27-delivery.json",
+      "compiled_private_headers": 0,
+      "direct_private_links": 0
+    }
+  ],
+  "provider_lifetimes": {
+    "BC1F077": "F process attach binds original C1 profile functions before task entry; B holds immutable function addresses. No registry algorithm/layout in B. P18 covered null/rebind, fallback, bounds and registry outcomes.",
+    "BC1F078": "Caller supplies synchronous report_start. B acquires one task-start attempt, invokes it and completes the same attempt in finally. It retains neither callback nor request beyond the call. P67 init-notification and task-lifecycle tests exercise the current implementation.",
+    "BC1F079": "F attach binds C2 WowOriginalTimerFunc. B owns nested task/borrow scopes with finally unwind only; C2 owns all original timer slots, cancellation lookup and guest call. S19 P27 targeted evidence is not a claim that every timer race has been exercised."
+  },
+  "counts": {
+    "total": 94,
+    "completed_before": 58,
+    "completed_after": 61,
+    "remaining": 33,
+    "B_C1_headers": 72,
+    "B_C1_sources": 27,
+    "B_C1_direct": 0,
+    "B_C2_headers": 0,
+    "B_C2_direct": 0
+  },
+  "mirror_delta": {
+    "points": 0,
+    "lines": 0
+  },
+  "package_unchanged": "133edc20-d1d8-450b-a771-5eec8bb34f70",
+  "limitations": [
+    "No source changes or fresh runtime claims in this reconciliation.",
+    "Remaining27 compiled sources and6 shared/source inventory obligations still require disposition.",
+    "P67 map/data/assembly coverage limits remain; typed callback relationships are retained, not absent."
+  ]
+}

@@ -114,7 +114,7 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P67 compiled-product review leaves 58 of 94
+is authoritative for individual files and evidence. P68 reconciliation against the P67 compiled-product review leaves 61 of 94
 files complete. BC1F045 retains USER private layouts; its NT header chain is removed. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
 72 compiled-header rows across 27 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
@@ -171,3 +171,7 @@ and length validation to the existing merge provider. Remaining:36 files; privat
 header rows77->72. Mirror+1point/+15lines, pending R2756. Cached full build, dual11
 publication, failure/bitmap/default/resource and lifecycle fixtures, published
 USER16 and COMMAND passed. [P67 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p67-message-table-closure.json).
+
+P68 reconciles three unchanged delivered providers (profile, startup notification,
+timer) against current compiled evidence and their original delivery tests. No
+product or mirror change; remaining33 files. [P68 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p68-existing-provider-reconciliation.json).

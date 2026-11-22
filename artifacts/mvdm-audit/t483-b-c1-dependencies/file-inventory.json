@@ -4,7 +4,7 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 58,
+    "completed": 61,
     "direct_unique": 0,
     "direct_raw": 0,
     "compiled_header_rows": 72,
@@ -7841,7 +7841,7 @@
     {
       "id": "BC1F077",
       "file": "src/compat/wow_task_profile_binding.c",
-      "status": "not yet audited",
+      "status": "completed by P68 evidence reconciliation of unchanged delivered providers",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7933,12 +7933,13 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "p68_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p68-existing-provider-reconciliation.json"
     },
     {
       "id": "BC1F078",
       "file": "src/compat/wow_task_start_notification.c",
-      "status": "not yet audited",
+      "status": "completed by P68 evidence reconciliation of unchanged delivered providers",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8020,12 +8021,13 @@
           "evidence": "MSVC include closure",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "p68_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p68-existing-provider-reconciliation.json"
     },
     {
       "id": "BC1F079",
       "file": "src/compat/wow_timer_callback.c",
-      "status": "not yet audited",
+      "status": "completed by P68 evidence reconciliation of unchanged delivered providers",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8037,7 +8039,8 @@
           "evidence": "MSVC include closure",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "p68_evidence": "artifacts\\mvdm-audit\\t483-b-c1-dependencies\\p68-existing-provider-reconciliation.json"
     },
     {
       "id": "BC1F080",

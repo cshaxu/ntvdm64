@@ -1,0 +1,412 @@
+{
+  "baseline": "fea8c42555b79c024d71dcf8274c61ac3c355b36",
+  "purpose": "Complete-operation batching; inventory remains DIR ordered. This is a source-backed next-change map, not a claim that listed remaining files are resolved.",
+  "remaining": [
+    {
+      "id": "BC1F007",
+      "file": "src/compat/include/control-client/precomp.h",
+      "group": "shared compilation headers",
+      "compiled_header_rows": 0,
+      "actual_headers": [],
+      "status": "redundant direct include removed in P8; transitive USER layout group remains open"
+    },
+    {
+      "id": "BC1F010",
+      "file": "src/compat/include/opennt_user_multipass.h",
+      "group": "shared compilation headers",
+      "compiled_header_rows": 0,
+      "actual_headers": [],
+      "status": "in progress: shared consumer chain; P9 clears text subgroup only"
+    },
+    {
+      "id": "BC1F011",
+      "file": "src/compat/include/opennt_usercli_multipass.h",
+      "group": "shared compilation headers",
+      "compiled_header_rows": 0,
+      "actual_headers": [],
+      "status": "in progress: shared consumer chain; P9 clears text subgroup only"
+    },
+    {
+      "id": "BC1F018",
+      "file": "src/compat/include/wow_shared_user_abi.h",
+      "group": "shared compilation headers",
+      "compiled_header_rows": 0,
+      "actual_headers": [],
+      "status": "in progress: P15 clears partial dialog header propagation; original WW and registration consumers remain"
+    },
+    {
+      "id": "BC1F021",
+      "file": "src/compat/include/wow_user_capture_bindings.h",
+      "group": "shared compilation headers",
+      "compiled_header_rows": 0,
+      "actual_headers": [],
+      "status": "in progress: P19 removes standard-class capture implementation dependency; shared class-client capture headers remain"
+    },
+    {
+      "id": "BC1F031",
+      "file": "src/compat/wow_class_words_binding.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F043",
+      "file": "src/compat/wow_default_native_bindings.c",
+      "group": "default window original layouts",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P37 removes private nt.h; original WND and USER definitions remain"
+    },
+    {
+      "id": "BC1F045",
+      "file": "src/compat/wow_default_window_bindings.c",
+      "group": "default window original layouts",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F049",
+      "file": "src/compat/wow_dialog_creation_binding.c",
+      "group": "dialog original layouts",
+      "compiled_header_rows": 3,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P42 removes original creation direct calls and private NT headers; original dialog layout remains"
+    },
+    {
+      "id": "BC1F050",
+      "file": "src/compat/wow_dialog_finalization_binding.c",
+      "group": "dialog original layouts",
+      "compiled_header_rows": 4,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "partially addressed in verified P43 delivery; original dialog layout headers remain"
+    },
+    {
+      "id": "BC1F052",
+      "file": "src/compat/wow_dialog_lookup.c",
+      "group": "dialog original layouts",
+      "compiled_header_rows": 11,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h"
+      ],
+      "status": "audited in P45: original _GetDlgItem layout/rebase exception; incidental header closure remains under review"
+    },
+    {
+      "id": "BC1F053",
+      "file": "src/compat/wow_dialog_memory.c",
+      "group": "dialog original layouts",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "partially addressed in P45: private NT include removed; original registration and USER layout headers remain"
+    },
+    {
+      "id": "BC1F055",
+      "file": "src/compat/wow_dialog_pointer.c",
+      "group": "dialog original layouts",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "partially addressed in P46: private NT include removed; original USER layout headers remain"
+    },
+    {
+      "id": "BC1F057",
+      "file": "src/compat/wow_dialog_state_bindings.c",
+      "group": "dialog original layouts",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "partially addressed in P48: private NT include removed; original dialog layout headers remain"
+    },
+    {
+      "id": "BC1F058",
+      "file": "src/compat/wow_edit_call_bindings.c",
+      "group": "EDIT original layouts",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "partially addressed in P49: private NT include removed; original USER layout and WOW ABI headers remain"
+    },
+    {
+      "id": "BC1F059",
+      "file": "src/compat/wow_edit_conversion_bindings.c",
+      "group": "EDIT original layouts",
+      "compiled_header_rows": 1,
+      "actual_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "partially addressed in P50: original EDIT entry addresses provided by synchronous binding; original USER header remains"
+    },
+    {
+      "id": "BC1F060",
+      "file": "src/compat/wow_edit_entry_bindings.c",
+      "group": "EDIT original layouts",
+      "compiled_header_rows": 4,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "partially addressed in P51: 11 original control entry symbols supplied via synchronous provider; original USER layout headers remain"
+    },
+    {
+      "id": "BC1F063",
+      "file": "src/compat/wow_edit_state_bindings.c",
+      "group": "EDIT original layouts",
+      "compiled_header_rows": 4,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "partially addressed in P53: four original finalizers use existing control provider; original USER headers remain"
+    },
+    {
+      "id": "BC1F064",
+      "file": "src/compat/wow_edit_thread_bindings.c",
+      "group": "EDIT original layouts",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "partially addressed in P54: private NT header removed; original USER layout headers remain"
+    },
+    {
+      "id": "BC1F070",
+      "file": "src/compat/wow_menu_client_bindings.c",
+      "group": "menu original layout",
+      "compiled_header_rows": 1,
+      "actual_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "partially addressed in P59: private NT header removed; original USER header remains"
+    },
+    {
+      "id": "BC1F072",
+      "file": "src/compat/wow_object_ownership.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 9,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "src/non-mvdm/public/sdk/inc/nt.h",
+        "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "src/non-mvdm/public/sdk/inc/ntrtl.h",
+        "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "src/non-mvdm/windows/core/ntuser/kernel/userk.h"
+      ],
+      "status": "audited P61: owner-retired original ownership table remains C-layout coupled; unresolved"
+    },
+    {
+      "id": "BC1F075",
+      "file": "src/compat/wow_shell_callback.c",
+      "group": "Shell provider/lifetime",
+      "compiled_header_rows": 0,
+      "actual_headers": [],
+      "status": "not yet audited"
+    },
+    {
+      "id": "BC1F076",
+      "file": "src/compat/wow_standard_class_bindings.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 1,
+      "actual_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F080",
+      "file": "src/compat/wow_user_borrow_scope.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F084",
+      "file": "src/compat/wow_user_object_bindings.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 1,
+      "actual_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F085",
+      "file": "src/compat/wow_user_private_access.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F086",
+      "file": "src/compat/wow_user_registration_bridge.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 1,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h"
+      ],
+      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F087",
+      "file": "src/compat/wow_user_registration_state.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F088",
+      "file": "src/compat/wow_user_task_lifecycle.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 1,
+      "actual_headers": [
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F090",
+      "file": "src/compat/wow_window_client_access_bindings.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F091",
+      "file": "src/compat/wow_window_client_state_bindings.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 3,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F092",
+      "file": "src/compat/wow_window_creation_binding.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P64 removes direct function links and NT header chain; original USER private layout remains"
+    },
+    {
+      "id": "BC1F094",
+      "file": "src/compat/wow_window_words_binding.c",
+      "group": "class/window/object ownership",
+      "compiled_header_rows": 2,
+      "actual_headers": [
+        "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "src/non-mvdm/windows/core/ntuser/inc/user.h"
+      ],
+      "status": "in progress: P65 removes NT header chain; original USER private layout remains"
+    }
+  ],
+  "class_window_findings": [
+    {
+      "file": "src/compat/wow_class_words_binding.c",
+      "operations": [
+        "prepare embeds CLS client_identity in same allocation as B refcount/name metadata",
+        "publish writes CLS.atomClassName",
+        "register_target reads original CLSMENUNAME only after retaining native registration inputs",
+        "unregister calls original provider with stack CLSMENUNAME, publishes output only on success"
+      ],
+      "constraint": "Do not move native registration/refcount/list ownership into a raw layout callback. Preserve single-allocation failure behavior and delayed menu-output publication."
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "operations": [
+        "_UnregisterClass writes menu output before calling DestroyClass; failure can occur after that write",
+        "selected register/remove/lookup cohorts use B finite class-list context rather than full original CLS"
+      ],
+      "constraint": "A direct passthrough of caller menu output would regress failure semantics. Adding full original CLS to this compilation context conflicts with its selected PCLS binding; do not fix that by copying CLS into B or casually adding another source-selection branch."
+    },
+    {
+      "file": "src/compat/wow_window_words_binding.c",
+      "operations": [
+        "retains inline WW and projected CLS beside B lifetime/ownership metadata",
+        "owns native property and exact-generation borrowed lifetime",
+        "projects original WND graph and resource state"
+      ],
+      "constraint": "Separate raw original layout projection from property/refcount/publication authority as complete operations. Do not duplicate the graph state or add a queue."
+    },
+    {
+      "file": "src/compat/wow_user_borrow_scope.c",
+      "operations": [
+        "compares WW identities as opaque pointers",
+        "projects one read_window_words_view into WW fields",
+        "updates a selected observed guest word then updates retained host WW using InterlockedExchange"
+      ],
+      "constraint": "Preserve guest write failure before local mutation and existing pin/borrow lifetime. A replacement must cover the whole projection/exchange operation."
+    }
+  ],
+  "nonchanges": [
+    "No class/window production changes made in this evidence batch.",
+    "No new callback contract approved as final merely from this inventory.",
+    "No build/test rerun required for this evidence-only update; final product remains P67."
+  ]
+}
