@@ -1,11 +1,12 @@
 #ifndef WOW_USER_CAPTURE_BINDINGS_H
 #define WOW_USER_CAPTURE_BINDINGS_H
-#include "nt.h"
+#include <windows.h>
 #include <string.h>
 
-#include "wow_edit_lookaside_bindings.h"
+struct _IN_STRING;
+struct _LARGE_IN_STRING;
 
-BOOL WINAPI RtlCaptureLargeAnsiString(PLARGE_IN_STRING, LPCSTR, UINT, BOOL);
+BOOL WINAPI RtlCaptureLargeAnsiString(struct _LARGE_IN_STRING *, LPCSTR, UINT, BOOL);
 
 /* Original ntpsapi.h constant. Reuse existing opennt_support_current_teb's
  * scratch descriptor; never read or overwrite the modern Windows TEB. */
@@ -18,7 +19,7 @@ BOOL WINAPI RtlCaptureLargeAnsiString(PLARGE_IN_STRING, LPCSTR, UINT, BOOL);
 #define RtlAllocateHeap HeapAlloc
 #define RtlFreeHeap HeapFree
 #define RIPMSG0(level, text) ((void)0)
-BOOL WINAPI RtlCaptureAnsiString(PIN_STRING, LPCSTR, BOOL);
+BOOL WINAPI RtlCaptureAnsiString(struct _IN_STRING *, LPCSTR, BOOL);
 
 /* The original body passes signed cbDst to the unsigned NTDLL byte-count
  * pointer. Preserve that x86 representation and the source body, not a cast. */

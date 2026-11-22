@@ -114,14 +114,14 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P74 final compiled-product review leaves 71 of 94
+is authoritative for individual files and evidence. P76 final compiled-product review leaves 72 of 94
 files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
 54 compiled-header rows across 18 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
 
-S20 cumulative non-error mirror delta is +8 points/+295 lines; S19 retained
+S20 cumulative non-error mirror delta is +8 points/+299 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
 tests. The P62 package is 71882068-22ca-4a1a-8a84-20c8d7f7cb5c.
@@ -217,5 +217,12 @@ lifecycle cases and published USER16/COMMAND passed.
 [P74 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p74-edit-boundary-closure.json).
 
 Control-state ownership proposal is pending owner approval: two original C
-control operations, +2 non-error points/+79lines. Production remains P74;
-no completion increment or build claim. [Decision](../../artifacts/mvdm-audit/t483-b-c1-dependencies/control-state-placement-decision.json).
+control operations, +2 non-error points/+79lines. This candidate is not in P76;
+no completion increment or build claim applies to that candidate. [Decision](../../artifacts/mvdm-audit/t483-b-c1-dependencies/control-state-placement-decision.json).
+
+P76 completes the shared capture interface: original layouts are explicit at
+C/F consumers, never copied into B. Remaining22 files; compiled-header rows
+remain54 across18 sources. Mirror +0points/+4lines, pending R2760/R2761.
+Cached full build, dual11 publication, original capture and eight lifecycle/class
+cases plus published USER16/COMMAND passed.
+[P76 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p76-capture-interface-closure.json).

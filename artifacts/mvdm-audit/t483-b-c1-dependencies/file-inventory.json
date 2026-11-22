@@ -4,7 +4,7 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 71,
+    "completed": 72,
     "direct_unique": 0,
     "direct_raw": 0,
     "compiled_header_rows": 54,
@@ -1413,7 +1413,7 @@
     {
       "id": "BC1F021",
       "file": "src/compat/include/wow_user_capture_bindings.h",
-      "status": "in progress: P19 removes standard-class capture implementation dependency; shared class-client capture headers remain",
+      "status": "completed in verified P76 delivery",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1426,7 +1426,8 @@
           "product": "wow32.dll"
         }
       ],
-      "partial_evidence": "p19-delivery.json"
+      "partial_evidence": "p19-delivery.json",
+      "p76_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p76-capture-interface-closure.json"
     },
     {
       "id": "BC1F022",

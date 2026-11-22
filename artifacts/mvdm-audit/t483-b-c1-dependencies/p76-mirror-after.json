@@ -1,0 +1,246 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "current_sha256": "1fa399d0d8ea14c6db5358b2cdb439420a057a5338221e4230c8ac59ae0f3663",
+      "raw": {
+        "blocks": 35,
+        "added": 56,
+        "deleted": 1970
+      },
+      "filtered": {
+        "blocks": 35,
+        "added": 27,
+        "deleted": 1778
+      },
+      "excluded": [
+        {
+          "original": [
+            78,
+            82
+          ],
+          "current": [
+            32,
+            34
+          ]
+        },
+        {
+          "original": [
+            359,
+            367
+          ],
+          "current": [
+            72,
+            74
+          ]
+        },
+        {
+          "original": [
+            381,
+            438
+          ],
+          "current": [
+            79,
+            81
+          ]
+        },
+        {
+          "original": [
+            501,
+            521
+          ],
+          "current": [
+            88,
+            90
+          ]
+        },
+        {
+          "original": [
+            694,
+            700
+          ],
+          "current": [
+            139,
+            141
+          ]
+        },
+        {
+          "original": [
+            718,
+            719
+          ],
+          "current": [
+            146,
+            148
+          ]
+        },
+        {
+          "original": [
+            754,
+            757
+          ],
+          "current": [
+            155,
+            157
+          ]
+        },
+        {
+          "original": [
+            761,
+            763
+          ],
+          "current": [
+            161,
+            163
+          ]
+        },
+        {
+          "original": [
+            770,
+            778
+          ],
+          "current": [
+            170,
+            172
+          ]
+        },
+        {
+          "original": [
+            785,
+            791
+          ],
+          "current": [
+            179,
+            181
+          ]
+        },
+        {
+          "original": [
+            798,
+            798
+          ],
+          "current": [
+            188,
+            189
+          ]
+        },
+        {
+          "original": [
+            954,
+            954
+          ],
+          "current": [
+            327,
+            328
+          ]
+        },
+        {
+          "original": [
+            966,
+            968
+          ],
+          "current": [
+            342,
+            344
+          ]
+        },
+        {
+          "original": [
+            1021,
+            1032
+          ],
+          "current": [
+            363,
+            365
+          ]
+        },
+        {
+          "original": [
+            1612,
+            1644
+          ],
+          "current": [
+            399,
+            401
+          ]
+        },
+        {
+          "original": [
+            2205,
+            2208
+          ],
+          "current": [
+            406,
+            408
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\rtlinit.c",
+      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+      "current_sha256": "d7b2f758bb9a40efa22d920d62cc98dad39664e574a68c2d23a040c2bfd5dac2",
+      "raw": {
+        "blocks": 6,
+        "added": 16,
+        "deleted": 10
+      },
+      "filtered": {
+        "blocks": 2,
+        "added": 12,
+        "deleted": 2
+      },
+      "excluded": [
+        {
+          "original": [
+            320,
+            320
+          ],
+          "current": [
+            333,
+            334
+          ]
+        },
+        {
+          "original": [
+            327,
+            331
+          ],
+          "current": [
+            343,
+            344
+          ]
+        },
+        {
+          "original": [
+            350,
+            350
+          ],
+          "current": [
+            365,
+            366
+          ]
+        },
+        {
+          "original": [
+            362,
+            362
+          ],
+          "current": [
+            380,
+            381
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 2
+    }
+  ]
+}

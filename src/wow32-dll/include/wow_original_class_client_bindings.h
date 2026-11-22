@@ -1,6 +1,8 @@
 #ifndef WOW_ORIGINAL_CLASS_CLIENT_BINDINGS_H
 #define WOW_ORIGINAL_CLASS_CLIENT_BINDINGS_H
 #include "compat/include/wow_class_client_bindings.h"
+#include "nt.h"
+#include "wow_edit_lookaside_bindings.h"
 #include "wow_user_capture_bindings.h"
 wow_class_client_context *WINAPI wow_class_client_current(void);
 ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *, PUNICODE_STRING,

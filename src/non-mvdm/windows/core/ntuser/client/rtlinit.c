@@ -13,6 +13,8 @@
 
 #define MOVE_TO_RTL
 
+#include "nt.h"
+#include "wow_edit_lookaside_bindings.h"
 #include "wow_user_capture_bindings.h"
 
 /* Scoped class-name adapter: original capture owns conversion and allocation. */

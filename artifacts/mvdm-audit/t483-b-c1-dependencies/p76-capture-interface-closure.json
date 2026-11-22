@@ -1,0 +1,120 @@
+{
+  "packet": "M0 T483 S20 P76",
+  "baseline": "e69a2f8f71d7f5525e7218bf7ea767dc4ec456a3",
+  "status": "verified production batch; commit/push in Git history",
+  "files_completed": [
+    "src/compat/include/wow_user_capture_bindings.h"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 72,
+    "remaining": 22,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 54,
+    "B_C1_sources": 18,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "B capture interface uses forward-declared original structure tags. Original rtlinit and ntstubs, F original class-client context and capture fixture explicitly include their existing NT and original layout prerequisites. No layout copies, callback tables or algorithm changes. Shared lookaside/header group remains open.",
+  "lifetime": "Original capture functions, existing private TLS scratch buffer, heap macros, allocation decision and failure release are unchanged. Original function ABI uses the same pointed-to struct tags.",
+  "mirror": {
+    "delta_points": 0,
+    "delta_lines": 4,
+    "proof": "Removing the two explicit includes from each C caller restores exact HEAD bytes. Existing #line anchors and #error branches unchanged.",
+    "approval": "Standing below5 lines and at most2points; pending R2760/R2761"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "d823161b-1590-4400-81ef-8e469320535d",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "build": {
+    "pid": 25376,
+    "exit": 0,
+    "started": "2026-11-22T10:25:02.5673844+00:00",
+    "finished": "2026-11-22T10:26:27.6550418+00:00"
+  },
+  "boundary_tests": {
+    "exit": 0,
+    "pid": 9200,
+    "started": "2026-11-22T10:27:32.6777346+00:00",
+    "finished": "2026-11-22T10:27:47.3349933+00:00"
+  },
+  "targeted_cases": [
+    {
+      "finished": "2026-11-22T10:28:01.6551393+00:00",
+      "exit": 0,
+      "started": "2026-11-22T10:27:47.4004381+00:00",
+      "case": "window-borrow"
+    },
+    {
+      "finished": "2026-11-22T10:28:14.7315365+00:00",
+      "exit": 0,
+      "started": "2026-11-22T10:28:01.6581812+00:00",
+      "case": "native-creation"
+    },
+    {
+      "finished": "2026-11-22T10:28:26.5210390+00:00",
+      "exit": 0,
+      "started": "2026-11-22T10:28:14.7343198+00:00",
+      "case": "class-lifetime"
+    },
+    {
+      "finished": "2026-11-22T10:28:38.5963505+00:00",
+      "exit": 0,
+      "started": "2026-11-22T10:28:26.5224029+00:00",
+      "case": "task-lifecycle"
+    },
+    {
+      "finished": "2026-11-22T10:28:50.5666217+00:00",
+      "exit": 0,
+      "started": "2026-11-22T10:28:38.5976243+00:00",
+      "case": "process-retirement"
+    },
+    {
+      "finished": "2026-11-22T10:29:03.7265248+00:00",
+      "exit": 0,
+      "started": "2026-11-22T10:28:50.5676881+00:00",
+      "case": "init-notification"
+    }
+  ],
+  "class_cases": [
+    {
+      "finished": "2026-11-22T10:29:15.2972195+00:00",
+      "exit": 0,
+      "started": "2026-11-22T10:29:03.7451768+00:00",
+      "case": "class-client"
+    },
+    {
+      "finished": "2026-11-22T10:29:27.1470039+00:00",
+      "exit": 0,
+      "started": "2026-11-22T10:29:15.2984169+00:00",
+      "case": "class-query"
+    }
+  ],
+  "verification": {
+    "exit": 0,
+    "pid": 9200,
+    "started": "2026-11-22T10:27:32.5592438+00:00",
+    "finished": "2026-11-22T10:30:12.2416934+00:00"
+  },
+  "source_identity": {
+    "src/compat/include/wow_user_capture_bindings.h": "17900df7c7cba68ce9a55e42cc2134de33de5b5def22e009c79fafa740ca8b56",
+    "src/non-mvdm/windows/core/ntuser/client/ntstubs.c": "1fa399d0d8ea14c6db5358b2cdb439420a057a5338221e4230c8ac59ae0f3663",
+    "src/non-mvdm/windows/core/ntuser/client/rtlinit.c": "d7b2f758bb9a40efa22d920d62cc98dad39664e574a68c2d23a040c2bfd5dac2",
+    "src/wow32-dll/include/wow_original_class_client_bindings.h": "31a544246edcc8275fea1fdf0f24741b152f0aba0da8f97bdbff8fc2bcf6907d",
+    "test/adapter-mvdm-host-out/wow/wow_user_capture_fixture.c": "7fa9b4b3a3bdaef067936c898b40c15eb5d730467f00f5933a0cab03fb8f3dc1"
+  },
+  "evidence_root": "build\\t483-s20-p76-capture-interface",
+  "limitations": [
+    "22 inventory files remain; no S20 closure or Full-pass claim.",
+    "54 compiled-header rows across18 sources unchanged: this delivery closes an interface header, not a source consumer.",
+    "Data-symbol/assembly/linkmap coverage gaps and existing Shell diagnostic limitation retained.",
+    "Class storage and control-state larger mirror candidates still await approval."
+  ]
+}

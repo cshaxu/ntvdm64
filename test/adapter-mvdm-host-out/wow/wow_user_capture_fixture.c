@@ -1,3 +1,5 @@
+#include "nt.h"
+#include "wow_edit_lookaside_bindings.h"
 #include "wow_user_capture_bindings.h"
 #include <stdio.h>
 #include <wchar.h>

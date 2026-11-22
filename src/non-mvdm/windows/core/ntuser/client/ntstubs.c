@@ -16,6 +16,8 @@
 #include "wow_edit_call_bindings.h"
 #else
 #define WOW_ORIGINAL_CLASS_QUERY
+#include "nt.h"
+#include "wow_edit_lookaside_bindings.h"
 #include "wow_class_query_bindings.h"
 #endif
 #line 13
