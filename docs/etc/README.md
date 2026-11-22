@@ -1426,3 +1426,6 @@ to the sequential successor packets.
 
 [T483 final closure](../history/m0-t483-closure.md) indexes S1-S21, retained
 decisions and the [S21 identity verification](evidence/t483-closure/result.json).
+
+[T484 CMD-only build and release plan](operations/t484-cmd-build-release-plan.md)
+records the admitted interpreter constraint, sequential stages and acceptance.

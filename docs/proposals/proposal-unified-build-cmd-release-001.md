@@ -5,9 +5,25 @@
 Owner request dated 2026-11-13: add a candidate at the head of Queue to
 clean up and establish `tools/build.cmd`, build all eleven product components
 and all add-on components in dependency order, and publish to `assets/release/`.
-This is an unnumbered candidate; [Queue](../states/QUEUE.md) owns its position.
-The currently active task is unchanged. This update performs no product build
-or release.
+Owner admitted this package on 2026-11-22 with CMD-only build scripting.
+[Current](../states/CURRENT.md) owns admission; the
+[execution plan](../etc/operations/t484-cmd-build-release-plan.md) owns the
+sequential stages. Admission itself performs no product build or release.
+
+## CMD-only constraint
+
+Project-owned build, source-generation, packaging and publication scripting
+must use cmd.exe batch files. Remove direct and transitive Python, PowerShell
+and JavaScript dependencies, including configure hooks and addon/test-binary
+producers. A CMD wrapper invoking an old interpreter is not compliance.
+Do not replace it with another general-purpose script interpreter.
+
+Native compilers, assemblers, linkers, resource/IDL tools and existing native
+build engines remain legitimate tools. Preserve declarative dependency metadata
+and caches; no general-purpose orchestration hidden in another tool's script
+mode. A cached graph does not prove interpreter-free clean configuration.
+Standalone test/audit runners are outside automatic language conversion, but
+cannot remain required interpreters in the final build/publication chain.
 
 ## Scope and contract
 
@@ -59,7 +75,7 @@ remains an explicit separately selected operation under the existing policy.
    eleven host outputs and every add-on against the published manifests, and run
    the applicable existing component/regression gates.
 
-These stages guide the eventual S breakdown; they do not admit active S tasks.
+The execution plan assigns sequential stages; only Current admits an active S.
 
 ## Completion criteria
 

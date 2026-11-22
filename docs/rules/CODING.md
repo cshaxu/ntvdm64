@@ -4,6 +4,17 @@ Project-owned non-mirror text uses LF in both the working tree and Git. Original
 mirrors, pinned third-party inputs, immutable evidence and media retain their
 original bytes; do not normalize their line endings.
 
+## CMD-only build scripting
+
+Owner direction on 2026-11-22 requires CMD-only project build, generation,
+packaging and publication scripts. T484 migrates existing Python, PowerShell
+and JavaScript build dependencies; do not add new ones during migration.
+CMD wrappers that still invoke those interpreters do not satisfy this rule.
+Native compiler/assembler/linker/resource/IDL and build tools remain allowed;
+do not conceal general-purpose orchestration in another script mode.
+Independent test/audit runners are outside automatic conversion, but must not
+remain required interpreters in the resulting build/publication chain.
+
 Unit tests follow the tested component and subcomponent under `test/`, e.g.
 `test/common/rpc` and `test/lib-win32/pipe`. A unit may use its target's inner
 dependencies, never reverse-depend on outer product components. Tests of actual
