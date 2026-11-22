@@ -5,8 +5,8 @@
   "counts": {
     "files": 94,
     "completed": 27,
-    "direct_unique": 47,
-    "direct_raw": 55,
+    "direct_unique": 44,
+    "direct_raw": 52,
     "compiled_header_rows": 417,
     "private_search_root_rows": 0
   },
@@ -2563,7 +2563,7 @@
     {
       "id": "BC1F031",
       "file": "src/compat/wow_class_words_binding.c",
-      "status": "not yet audited",
+      "status": "in progress: P26 removes three direct C1 calls; original CLS layout headers remain",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -2695,7 +2695,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p26-delivery.json"
     },
     {
       "id": "BC1F032",

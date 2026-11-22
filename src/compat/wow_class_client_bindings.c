@@ -10,7 +10,8 @@ BOOL WINAPI wow_class_client_bind(const wow_class_client_provider *provider)
 {
     const wow_class_client_provider *previous;
     if (!provider || !provider->register_class || !provider->unregister_class ||
-            !provider->get_class_info || !provider->register_class_ex) {
+            !provider->get_class_info || !provider->register_class_ex || !provider->get_class_ptr ||
+            !provider->inner_get_class_ptr || !provider->unregister_class_internal) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
@@ -23,7 +24,7 @@ BOOL WINAPI wow_class_client_bind(const wow_class_client_provider *provider)
     return TRUE;
 }
 
-static const wow_class_client_provider *class_provider(void)
+const wow_class_client_provider *WINAPI wow_class_client_provider_current(void)
 {
     if (!class_client_provider) RaiseFailFastException(NULL, NULL, 0);
     return class_client_provider;
@@ -53,7 +54,7 @@ static ATOM register_class(wow_class_client_context *context,
     previous = current; current = context;
     previous_guest = current_guest_registration;
     current_guest_registration = guest;
-    __try { result = class_provider()->register_class(wc, words); }
+    __try { result = wow_class_client_provider_current()->register_class(wc, words); }
     __finally {
         current_guest_registration = previous_guest;
         current = previous;
@@ -83,7 +84,7 @@ BOOL WINAPI wow_class_client_unregister(wow_class_client_context *context,
     BOOL result;
     if (!valid(context)) return FALSE;
     previous = current; current = context;
-    __try { result = class_provider()->unregister_class(name, module); }
+    __try { result = wow_class_client_provider_current()->unregister_class(name, module); }
     __finally { current = previous; }
     return result;
 }
@@ -94,7 +95,7 @@ BOOL WINAPI wow_class_client_query(wow_class_client_context *context,
     wow_class_client_context *previous = current;
     BOOL result;
     current = context;
-    __try { result = class_provider()->get_class_info(module, name, output); }
+    __try { result = wow_class_client_provider_current()->get_class_info(module, name, output); }
     __finally { current = previous; }
     return result;
 }
@@ -295,7 +296,7 @@ ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *wc, PUNICODE_STRING name,
     publication.client=current; publication.name=name; publication.menu=menu;
     context.thread=current->thread; context.register_class=publish_native;
     context.resolve_callproc=resolve_callproc; context.binding=&publication;
-    atom = class_provider()->register_class_ex(wc,worker,menu,fnid,flags,words,&context);
+    atom = wow_class_client_provider_current()->register_class_ex(wc,worker,menu,fnid,flags,words,&context);
     if (atom && !publish_completed_class(&publication, wc)) return 0;
     return atom;
 }

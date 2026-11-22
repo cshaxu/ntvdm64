@@ -1,6 +1,7 @@
 #ifndef WOW_CLASS_CLIENT_BINDINGS_H
 #define WOW_CLASS_CLIENT_BINDINGS_H
 #include "wow_class_register_bindings.h"
+#include "wow_class_remove_bindings.h"
 
 /* ADAPTER-WOW-038: caller supplies InitTask's task version and the distinct
  * original module-version callback. Do not derive one from the other: original
@@ -22,8 +23,12 @@ typedef struct wow_class_client_provider {
     BOOL (WINAPI *get_class_info)(HINSTANCE, LPCSTR, WNDCLASSA *);
     ATOM (WINAPI *register_class_ex)(WNDCLASSEXA *, PROC, PCLSMENUNAME, WORD, DWORD,
         DWORD *, wow_class_register_context *);
+    wow_class_lookup_entry **(WINAPI *get_class_ptr)(ATOM, wow_class_lookup_context *, HANDLE);
+    wow_class_lookup_entry **(WINAPI *inner_get_class_ptr)(ATOM, wow_class_lookup_entry **, HANDLE);
+    BOOL (WINAPI *unregister_class_internal)(LPWSTR, HANDLE, PCLSMENUNAME, wow_class_remove_context *);
 } wow_class_client_provider;
 BOOL WINAPI wow_class_client_bind(const wow_class_client_provider *);
+const wow_class_client_provider *WINAPI wow_class_client_provider_current(void);
 ATOM WINAPI wow_class_client_register(wow_class_client_context *, WNDCLASSA *, DWORD *);
 /* WU32RegisterClass's callback supplies an already encoded guest procedure,
  * not a native CPD candidate. Keep that origin through original registration. */

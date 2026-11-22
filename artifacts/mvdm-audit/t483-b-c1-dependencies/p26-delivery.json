@@ -1,0 +1,36 @@
+{
+  "packet": "M0 T483 S20 P26",
+  "baseline": "2303253b2",
+  "files_partial": [
+    "BC1F031"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 27,
+    "remaining": 67,
+    "B_C1_unique": 44,
+    "B_C1_raw": 52,
+    "B_C1_compiled_headers": 417,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct 47 to 44; raw 55 to 52; compiled headers unchanged.",
+  "implementation": "Original C1 GetClassPtr, _InnerGetClassPtr and _UnregisterClass are supplied via the existing synchronous class provider; class owner, native cleanup, failure propagation and lifecycle are retained. B still compiles original CLS layout and this file remains open.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "d3f202a6-ca20-4dc0-b1f7-61c4ffc54762",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "class-client, class-query, class-lifetime, native-creation, standard-class, init-notification, task-lifecycle",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-class-lookup",
+  "limitations": [
+    "BC1F031 remains open because B uses original C1 CLS layout",
+    "Full suite required at S20 closure, not P26",
+    "Provider dispatch is a runtime callback to C1, not runtime independence"
+  ]
+}

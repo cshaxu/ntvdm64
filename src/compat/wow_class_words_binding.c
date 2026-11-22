@@ -1,5 +1,6 @@
 #include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_class_words_binding.h"
+#include "wow_class_client_bindings.h"
 #include "wow_class_remove_bindings.h"
 #include "wow_window_words_binding.h"
 #include "wow_window_creation_binding.h"
@@ -111,7 +112,7 @@ static void publish(wow_class_lookup_entry **list,
 wow_class_words_binding *WINAPI wow_class_words_acquire(
     wow_class_lookup_context *context, ATOM atom, HANDLE module)
 {
-    wow_class_lookup_entry **link = GetClassPtr(atom, context, module);
+    wow_class_lookup_entry **link = wow_class_client_provider_current()->get_class_ptr(atom, context, module);
     wow_class_words_binding *binding;
     if (!link) { SetLastError(ERROR_CLASS_DOES_NOT_EXIST); return NULL; }
     binding = (wow_class_words_binding *)*link;
@@ -241,7 +242,7 @@ BOOL WINAPI wow_class_words_import_native(wow_class_lookup_context *context,
             native_class->lpfnWndProc == wow_class_call_original_native) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
-    if (_InnerGetClassPtr(atom, &context->pclsPublicList, NULL)) {
+    if (wow_class_client_provider_current()->inner_get_class_ptr(atom, &context->pclsPublicList, NULL)) {
         SetLastError(ERROR_CLASS_ALREADY_EXISTS); return FALSE;
     }
     binding = prepare(name, initial);
@@ -562,7 +563,7 @@ BOOL WINAPI wow_class_words_unregister(wow_class_lookup_context *classes,
     context.name.Length=context.name.MaximumLength=0;
     context.menu_output_available=menu!=NULL; context.destroy=destroy_native;
     /* The server's output is not published to its client on native failure. */
-    if (!_UnregisterClass(context.name.Buffer,module,&result,&context)) return FALSE;
+    if (!wow_class_client_provider_current()->unregister_class_internal(context.name.Buffer,module,&result,&context)) return FALSE;
     if (menu) *menu=result;
     return TRUE;
 }

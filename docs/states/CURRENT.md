@@ -352,3 +352,12 @@ B-C1 direct unique 48->47 (raw 56->55), compiled headers 423->417; files
 targeted tests passed; Full remains required at S20 closure. Package
 02ae11a2-6061-462f-acc4-8b4b6b299978.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p25-delivery.json).
+
+P26 partially addresses BC1F031: original C1 class lookup and unregister
+are called via the existing synchronous provider; original CLS layout remains
+open. B-C1 direct unique 47->44 (raw 55->52), compiled headers remain 417;
+files 27/94 complete. Non-error mirror delta 0 points/0 lines; cumulative
++3 points/+239 lines. Cached full build, dual11, class/lifecycle and actual
+Win16/COMMAND targeted tests passed; Full remains required at S20 closure.
+Package d3f202a6-ca20-4dc0-b1f7-61c4ffc54762.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p26-delivery.json).
