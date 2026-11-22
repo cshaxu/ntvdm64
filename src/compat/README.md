@@ -226,7 +226,7 @@ from OpenNT kernel/handtabl.c lines39-59,revision
 leaves original type/flag definitions and the WOW cleanup consumer unchanged.
 
 P24 extracts client/client.c into [wow_class_client.c](../wow32-dll/source/wow_class_client.c) (WOW32 binding owner), [wow_default_window_bits.c](../compat/wow_default_window_bits.c),
-[wow_dialog_memory.c](../compat/wow_dialog_memory.c), [wow_client_dispatch.c](../compat/wow_client_dispatch.c) and [wow_control_state.c](../compat/wow_control_state.c). All eight
+[wow_dialog_memory.c](../compat/wow_dialog_memory.c), [wow_client_dispatch.c](../compat/wow_client_dispatch.c) and [wow_control_state.c](../wow32-dll/source/wow_control_state.c) (OpenNT client/client.c:2826, 2834). All eight
 OpenNT bodies retain their bindings and ABI; RegisterClassWOWA originates at OpenNT `windows/core/ntuser/client/client.c:2183`. Original ntcftxt.h still implements
 class registration. Provenance is recorded in each unit.
 

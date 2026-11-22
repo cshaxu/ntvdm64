@@ -26,8 +26,8 @@ LONG WINAPI wow_window_client_set_window_long(HWND w, int i, LONG v, BOOL a) { R
 NTSTATUS WINAPI InitLookaside(PLOOKASIDE p, DWORD s, DWORD n) { REJECT(); }
 PVOID WINAPI AllocLookasideEntry(PLOOKASIDE p) { REJECT(); }
 PWND WINAPI _GetNextDlgGroupItem(PWND d, PWND w, BOOL p) { REJECT(); }
-VOID WINAPI SetWindowState(PWND w, UINT f) { REJECT(); }
-VOID WINAPI ClearWindowState(PWND w, UINT f) { REJECT(); }
+VOID WINAPI wow_control_set_window_state(PWND w, UINT f) { REJECT(); }
+VOID WINAPI wow_control_clear_window_state(PWND w, UINT f) { REJECT(); }
 BOOL WINAPI wow_native_DestroyWindow(HWND w) { REJECT(); }
 HDC WINAPI wow_native_BeginPaint(HWND w, LPPAINTSTRUCT p) { REJECT(); }
 BOOL WINAPI wow_native_EndPaint(HWND w, const PAINTSTRUCT *p) { REJECT(); }

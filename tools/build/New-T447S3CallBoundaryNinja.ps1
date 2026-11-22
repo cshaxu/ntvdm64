@@ -71,7 +71,7 @@ $units = @(
     @('edit_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_call_fixture.c', ''),
     @('edit_adapter', 'src/compat/wow_edit_call_bindings.c', ''),
     @('control_extent', 'src/wow32-dll/source/wow_control_extent_bindings.c', ''),
-    @('state_guards', 'src/compat/wow_control_state.c', ''),
+    @('state_guards', 'src/wow32-dll/source/wow_control_state.c', ''),
     @('color_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', '/DWOW_ORIGINAL_CONTROL_COLOR'),
     @('memory_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_memory_callbacks_fixture.c', '/DWOW_ORIGINAL_EDIT_CLIENT'),
     @('dialog_memory', 'src/compat/wow_dialog_memory.c', ''),

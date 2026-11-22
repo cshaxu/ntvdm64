@@ -1,5 +1,6 @@
 #include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_edit_call_bindings.h"
+#include "wow_control_state_provider.h"
 #include "wow_edit_native_bindings.h"
 #include "wow_list_native_bindings.h"
 #include "wow_user_task_lifecycle.h"
@@ -7,6 +8,32 @@
 #include "wow_user_client_view_layout.h"
 #include "wow_control_extent_bindings.h"
 #include "wow_user_borrow_scope.h"
+
+static const wow_control_state_providers *state_provider;
+
+BOOL WINAPI wow_control_state_bind(const wow_control_state_providers *provider)
+{
+    const wow_control_state_providers *previous;
+    if (!provider || !provider->set || !provider->clear) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&state_provider,
+        (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
+void WINAPI wow_control_set_window_state(struct tagWND *window, UINT flags)
+{
+    if (!state_provider) RaiseFailFastException(NULL, NULL, 0);
+    state_provider->set(window, flags);
+}
+void WINAPI wow_control_clear_window_state(struct tagWND *window, UINT flags)
+{
+    if (!state_provider) RaiseFailFastException(NULL, NULL, 0);
+    state_provider->clear(window, flags);
+}
 
 static wow_control_fnid_provider fnid_provider;
 

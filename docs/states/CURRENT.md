@@ -428,3 +428,12 @@ delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full build,
 dual11, FNID/control and real Win16/COMMAND targeted tests passed. Full
 remains required at S20 closure. Package 65dc4acd-f464-4b05-b561-b7370c7fea70.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p34-delivery.json).
+
+P35 completes BC1F041: original state functions are WOW32-owned and C1
+uses B synchronous entries with an atomically bound provider table. B-C1
+direct unique remains 43, compiled headers 357->349; files 35/94 complete.
+Mirror delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full
+build, dual11, control state and real Win16/COMMAND targeted tests passed.
+Full remains required at S20 closure. Package
+3851c765-4a80-4e77-a6c6-1f5e8645dd05.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p35-delivery.json).

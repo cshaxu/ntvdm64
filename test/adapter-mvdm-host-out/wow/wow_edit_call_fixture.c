@@ -1,5 +1,6 @@
 #include "wow_edit_call_bindings.h"
 #include "wow_control_extent_bindings.h"
+#include "wow_control_state_provider.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_client_view_layout.h"
 #include "wow_user_borrow_scope.h"
@@ -371,6 +372,10 @@ int main(void)
 {
     unsigned old_begins, old_leaves, old_calls;
     BOOL caught = FALSE;
+    static const wow_control_state_providers provider = { SetWindowState, ClearWindowState };
+    CHECK(wow_control_state_bind(&provider));
+    wow_control_set_window_state(&state_window, WFWIN40COMPAT);
+    wow_control_clear_window_state(&state_window, WFWIN40COMPAT);
     CHECK(wow_control_fnid_bind(fixture_fnid));
     CHECK(wow_control_set_fnid((HWND)(ULONG_PTR)0x1234, 0x123));
     CHECK(GetLastError() == 457);

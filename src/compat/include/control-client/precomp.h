@@ -253,5 +253,8 @@ PWND xxxGotoNextMnem(PWND, PWND, WCHAR);
 #define gpsi (&wow_dialog_current->server)
 #define oemInfo (wow_dialog_current->screen)
 #endif
+#include "wow_control_state_provider.h"
+#define SetWindowState wow_control_set_window_state
+#define ClearWindowState wow_control_clear_window_state
 #endif /* !WOW_ORIGINAL_DEFAULT_WINDOW */
 #endif
