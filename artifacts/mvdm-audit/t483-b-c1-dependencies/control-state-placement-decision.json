@@ -1,0 +1,43 @@
+{
+  "packet": "M0 T483 S20",
+  "status": "pending owner approval; not implemented or compiled",
+  "baseline": "49c4779ebf71f10ea94edfd20fb1612620c909b8",
+  "file": "src/compat/wow_edit_state_bindings.c",
+  "problem": "Private CBOX, EDITWND and WND state are read in B; public native USER objects are not substitutes.",
+  "recommendation": "Keep B task/thread/borrow/rollback owner; extend existing control entry provider with synchronous combo_info and finalize operations at original C control owners. No new provider table, queue, layout copy or object lifetime.",
+  "proposed_C_owners": {
+    "src/non-mvdm/windows/core/ntuser/client/comboini.c": {
+      "operation": "Validate retained original combo, retain exact child objects, project COMBOBOXINFO; original mismatch still falls back to native only after B unwind.",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 1,
+      "after_lines": 29
+    },
+    "src/non-mvdm/windows/core/ntuser/client/editec.c": {
+      "operation": "Existing control finalization including state guards, graph preparation, canonical original handlers and cleaned-state postcondition; enclosing B scope unchanged.",
+      "before_points": 1,
+      "before_lines": 2,
+      "after_points": 2,
+      "after_lines": 52
+    }
+  },
+  "mirror_delta": {
+    "non_error_points": 2,
+    "non_error_lines": 79
+  },
+  "line_policy": "Append after all retained original code; original diagnostic positions and #error structures unchanged.",
+  "evidence": "build/t483-s20-control-state-placement/{before,after}.json",
+  "candidate": "control-state-placement-candidate.patch",
+  "verification_required": [
+    "Actual C control compile closure and macro/calling-convention checks",
+    "Same object child-borrow checks before native IsWindowEnabled",
+    "Empty/cleaned/deleted/invalid control and failed/nested finalizer cases",
+    "Existing native-creation combo projection and actual USER16/COMMAND acceptance",
+    "Final compiled-header and linked-provider audit"
+  ],
+  "limitations": [
+    "Candidate patch contains only proposed C operations; B routing and fixture changes still to implement after approval.",
+    "No compilation, runtime, publication or completed-file credit.",
+    "Retain separate class storage candidate awaiting approval."
+  ]
+}

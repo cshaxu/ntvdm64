@@ -215,3 +215,7 @@ Remaining23 files; header rows58->54. Mirror +1point/+5lines, pending R2759.
 No guest change. Cached full build, dual11 publication, three boundary/eight
 lifecycle cases and published USER16/COMMAND passed.
 [P74 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p74-edit-boundary-closure.json).
+
+Control-state ownership proposal is pending owner approval: two original C
+control operations, +2 non-error points/+79lines. Production remains P74;
+no completion increment or build claim. [Decision](../../artifacts/mvdm-audit/t483-b-c1-dependencies/control-state-placement-decision.json).
