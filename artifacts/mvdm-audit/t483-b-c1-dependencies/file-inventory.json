@@ -7,7 +7,7 @@
     "completed": 35,
     "direct_unique": 42,
     "direct_raw": 50,
-    "compiled_header_rows": 343,
+    "compiled_header_rows": 337,
     "private_search_root_rows": 0
   },
   "files": [
@@ -4017,7 +4017,7 @@
     {
       "id": "BC1F044",
       "file": "src/compat/wow_default_state_bindings.c",
-      "status": "not yet audited",
+      "status": "in progress: P38 removes private nt.h; shared original message-table layout remains",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -4109,7 +4109,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p38-delivery.json"
     },
     {
       "id": "BC1F045",

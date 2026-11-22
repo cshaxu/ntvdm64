@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_default_window_bindings.h"
 
 /* ADAPTER-WOW-063: inputs to original compatibility/color decisions, not a

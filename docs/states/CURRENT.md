@@ -455,3 +455,12 @@ dual11, default-window/control and real Win16/COMMAND targeted tests passed.
 Full remains required at S20 closure. Package
 2610464a-5778-4f83-8d3b-3477f6a1608f.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p37-delivery.json).
+
+P38 partially addresses BC1F044: replaced private NT include with SDK
+declarations; shared original message-table layout remains open. B-C1 direct
+unique remains 42, compiled headers 343->337; files 35/94 complete. Mirror
+delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full build,
+dual11, default-window/control and real Win16/COMMAND targeted tests passed.
+Full remains required at S20 closure. Package
+ccd22afd-180b-4f08-9196-04709dc3b1b0.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p38-delivery.json).
