@@ -1,0 +1,35 @@
+{
+  "packet": "M0 T483 S20 P37",
+  "baseline": "c5da8e016",
+  "files_partial": [
+    "BC1F043"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 35,
+    "remaining": 59,
+    "B_C1_unique": 42,
+    "B_C1_raw": 50,
+    "B_C1_compiled_headers": 343,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct remains 42; compiled headers 349 to 343. Two original headers remain for WND and USER definitions.",
+  "implementation": "Replaced unused private NT include with public SDK declarations; default-window behavior and borrow lifecycle unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "2610464a-5778-4f83-8d3b-3477f6a1608f",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "default-window and WOW control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-default-native",
+  "limitations": [
+    "BC1F043 retains original WND and USER definition dependencies",
+    "Full suite required at S20 closure"
+  ]
+}
