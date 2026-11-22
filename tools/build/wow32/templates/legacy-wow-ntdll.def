@@ -1,0 +1,33 @@
+LIBRARY NTDLL.DLL
+EXPORTS
+    CsrIdentifyAlertableThread
+    NtClose
+    NtOpenThread
+    NtQueryInformationProcess
+    NtQueryInformationThread
+    NtQueryValueKey
+    NtQueryPerformanceCounter
+    NtQuerySystemInformation
+    NtWaitForSingleObject
+    RtlAdjustPrivilege
+    RtlCharToInteger
+    RtlDeleteCriticalSection
+    RtlEnterCriticalSection
+    RtlEqualUnicodeString
+    RtlFreeAnsiString
+    RtlImageNtHeader
+    RtlInitUnicodeString
+    RtlInitializeCriticalSection
+    RtlLeaveCriticalSection
+    RtlMultiByteToUnicodeN
+    RtlUnicodeStringToAnsiString
+    RtlUnicodeToMultiByteSize
+    RtlIsNameLegalDOS8Dot3
+    RtlRunEncodeUnicodeString
+    RtlRunDecodeUnicodeString
+    NlsAnsiCodePage DATA
+    RtlUnicodeToMultiByteN
+    RtlUnicodeStringToInteger
+    RtlIntegerToUnicodeString
+    RtlRaiseStatus
+    DbgBreakPoint

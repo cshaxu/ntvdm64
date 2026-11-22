@@ -1440,6 +1440,10 @@ host build migration batch and its actual COFF/MAP checks.
 declarative host graph migration, actual published-DLL tests and the outstanding
 global WOW macro-profile finding.
 
+[T484 S2 WOW native CMake](evidence/t484-s2-wow-cmake.md) records the migrated
+source graph, byte comparison, dual publication, actual Win16 message test
+and independent failed Clipboard observation.
+
 [T484 S2 WOW profile correction](evidence/t484-s2-wow-profile.md) resolves
 that five-unit finding with unchanged product code bytes and a complete
 default macro-profile check.

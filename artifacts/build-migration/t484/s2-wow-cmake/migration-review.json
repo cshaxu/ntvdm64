@@ -1,0 +1,53 @@
+{
+  "clipboard": {
+    "prior_P4_shared": "timeout",
+    "conclusion": "not passed; independent baseline failure remains for final acceptance",
+    "experiment": "optional user-environment argument reverted",
+    "shared": "timeout",
+    "product_patch": "none",
+    "normal_user_environment_prior_P4": "phase1 failure; 84-byte report",
+    "initial": "timeout"
+  },
+  "comparison": {
+    "timestamp_bytes": 4,
+    "diagnostic_path_separator_bytes": 23,
+    "compile_units": 228,
+    "bytes": 708608,
+    "differing_bytes": 27
+  },
+  "priorGeneratorSha256": "1cae4febe89fdb990551f00ccac417a351233f9ff2935542eb495551a13c47c4",
+  "carriers": [
+    {
+      "file": "legacy-wow-user32.def",
+      "priorSha256": "62a79a84a00878451c695da74037d83434208b8e8827150a875abe8a4a2f0117",
+      "normalizedSha256": "43c36fcfde9821ce0f8cac4e1a6688d667d208c264416ec8e782c697d1039848"
+    },
+    {
+      "file": "legacy-wow-kernel32.def",
+      "priorSha256": "6e0e323b1751b381fc2927e2ee582a99c5750b314d1306bd526e4f9ba5fe9d29",
+      "normalizedSha256": "86d3ee88fb8c387c7ad000fd3f103ccbe9b0018de3f311ff03f5dfa896cac0ea"
+    },
+    {
+      "file": "legacy-wow-ntdll.def",
+      "priorSha256": "cb13e57c3b3a320d7a214472378860b560126a6c775876d7a2be856239b63a72",
+      "normalizedSha256": "a15433077664e4ffe04751655a23ed3a4352f815cad6b250c0ffc7d21f9f460a"
+    },
+    {
+      "file": "wow32-system-import-abi-aliases.c",
+      "priorSha256": "878b0427ebb0660bcd72db7acc7c2c75fc322f97412e1b3ba7eb24c16ca5cfde",
+      "normalizedSha256": "0bf0476afca6822a61f59a37bc156a690f01b7fbfe935a0cd8f8fff48c1ed073"
+    },
+    {
+      "file": "wow32-parent-import-abi-aliases.c",
+      "priorSha256": "ecdbfda2c3e32211f189a4dabba9aa262b8b6a0f803ed9c2674790a377aa455b",
+      "normalizedSha256": "19f8ffe4da18c437acda50139f693fd1a422144eaf3a8908776221fead4ccaf6"
+    },
+    {
+      "file": "wow32-dll-entry-bridge.c",
+      "priorSha256": "8592244a7ef3981c6d7458ff780398eff419631e8426378147f76793e5781d65",
+      "normalizedSha256": "e0d7c4cf74002423cde59857d5d22fc49ea621c18a3c827849bb68c2c5f13b95"
+    }
+  ],
+  "originalUnits": 72,
+  "explicitUnits": 159
+}

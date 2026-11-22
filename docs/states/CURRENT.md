@@ -75,6 +75,15 @@ Current package:2588d3a4-f526-43d0-99be-2c47727b9612. Eight raw images identical
 three timestamp-only (including WOW32);22 published hashes verified. No product
 source, guest or mirror code change. S2 remains active.
 
+[S2 P5](../etc/evidence/t484-s2-wow-cmake.md) migrates WOW32 to native CMake
+and removes its PowerShell generator. All228 C profiles remain equivalent;
+cached11-image build, dual publication and actual Win16 message construction
+passed. Current package:903798b5-7b13-4d59-b6c2-1e23e6c5babc. Four raw inputs
+identical, six timestamp-only; WOW32 also changes23 diagnostic path separators.
+The extra Clipboard witness failed on P4 too and is not counted as passed;
+see the evidence for the reverted harness experiment. Two host graph
+generators remain; S2 and the overall T remain active.
+
 ## S1 Closure Record
 
 [S1 inventory/design](../etc/evidence/t484-s1-build-inventory.md) completes
@@ -87,7 +96,7 @@ admission; its containing commit is the delivery identity.
 [T483 closure](../history/m0-t483-closure.md) indexes all S1-S21 outcomes,
 retained mirror decisions and known boundaries. Final production revision is
 9e7eb19c0 (S20 P85), package100b16d9-992d-4e2c-8d99-66a4e891dd26.
-The current publication is T484 S2 P4, recorded above; P85 is its behavior
+The current publication is T484 S2 P5, recorded above; P85 is its behavior
 comparison baseline. P85 Full20/20 runtime evidence is reused for this
 byte-equivalent/timestamp-only build change, not reported as a new Full run.
 

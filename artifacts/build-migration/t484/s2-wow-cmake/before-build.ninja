@@ -1,0 +1,475 @@
+ninja_required_version = 1.10
+root = O$:/repos.hobby/ntvdm64
+environment = O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd
+release_cflags = /O2
+cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc/nt.h" /I "O:/repos.hobby/ntvdm64/src" /I "O:/repos.hobby/ntvdm64/src/compat/include" /I "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32" /I "O:/repos.hobby/ntvdm64/src/mvdm-host/inc" /I "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc" /I "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc"
+wow_cflags = $cflags /DWOW_ORIGINAL_THUNK_BUILD
+adapter_cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /FI "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc/nt.h" /I "O:/repos.hobby/ntvdm64/src" /I "O:/repos.hobby/ntvdm64/src/compat/include" /I "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32" /I "O:/repos.hobby/ntvdm64/src/mvdm-host/inc" /I "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc" /I "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc" /I "O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc"
+compat_wow_cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /I "O:/repos.hobby/ntvdm64/src" /I "O:/repos.hobby/ntvdm64/src/compat/include"
+control_user_flags = /UANSI /DUNICODE
+rule cc
+  command = cl.exe $cflags $release_cflags /Fo$out $in
+  deps = msvc
+  description = CC $in
+rule generic_call_asm
+  command = ml /nologo /c /DDBG=0 /I "O$:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc" /Fo$out $in
+rule rc
+  command = rc /nologo /fo$out $in
+  description = RC $in
+rule legacy_import_lib
+  command = lib /nologo /machine:x86 /def:$in /out:$out
+  description = IMPORTLIB $out
+rule wow_dll_link
+  command = link /nologo /machine:x86 /dll /map:$out.map /def:O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def /out:$out $in O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/ntvdm.lib kernel32.lib user32.lib gdi32.lib advapi32.lib shell32.lib comdlg32.lib version.lib winmm.lib wsock32.lib oldnames.lib
+  description = LINK $out
+  restat = 1
+build obj/mapembed.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/mapembed.c
+  cflags = $wow_cflags /FI "O$:/repos.hobby/ntvdm64/src/compat/include/wow_registry_binding.h"
+build obj/wow32.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c
+  cflags = $wow_cflags /DWOWSysErrorBox=wow_user_sys_error_box
+build obj/wowtbl.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wowtbl.c
+  cflags = $wow_cflags
+build obj/walias.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/walias.c
+  cflags = $wow_cflags
+build obj/wstruc.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wstruc.c
+  cflags = $cflags
+build obj/wcall16.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcall16.c
+  cflags = $wow_cflags
+build obj/wcall32.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcall32.c
+  cflags = $wow_cflags
+build obj/wcntl32.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcntl32.c
+  cflags = $wow_cflags
+build obj/wdde.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdde.c
+  cflags = $wow_cflags /FI "O$:/repos.hobby/ntvdm64/src/compat/include/wow_registry_binding.h"
+build obj/wres16.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres16.c
+  cflags = $wow_cflags
+build obj/wres32.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres32.c
+  cflags = $wow_cflags
+build obj/wmsg16.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsg16.c
+  cflags = $wow_cflags
+build obj/wmdisp32.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmdisp32.c
+  cflags = $wow_cflags
+build obj/wmsgbm.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgbm.c
+  cflags = $wow_cflags
+build obj/wmsgcb.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgcb.c
+  cflags = $wow_cflags
+build obj/wmsgem.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgem.c
+  cflags = $wow_cflags
+build obj/wmsglb.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsglb.c
+  cflags = $wow_cflags
+build obj/wmsgsbm.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgsbm.c
+  cflags = $wow_cflags
+build obj/wmtbl32.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmtbl32.c
+  cflags = $wow_cflags
+build obj/wgdi31.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgdi31.c
+  cflags = $wow_cflags
+build obj/wgman.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgman.c
+  cflags = $wow_cflags
+build obj/wgdi.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgdi.c
+  cflags = $wow_cflags
+build obj/wgfont.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgfont.c
+  cflags = $wow_cflags
+build obj/wgmeta.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgmeta.c
+  cflags = $wow_cflags
+build obj/wgpal.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgpal.c
+  cflags = $wow_cflags
+build obj/wgprnset.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgprnset.c
+  cflags = $wow_cflags
+build obj/wgtext.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgtext.c
+  cflags = $wow_cflags
+build obj/wkbman.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkbman.c
+  cflags = $wow_cflags
+build obj/wkmem.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkmem.c
+  cflags = $wow_cflags
+build obj/wkgthunk.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkgthunk.c
+  cflags = $wow_cflags /DWOW_X86_GENERIC_CALL /DWK32ICallProc32=wow_original_WK32ICallProc32 /DWOWYield16=wow_original_WOWYield16 /DWOWDirectedYield16=wow_original_WOWDirectedYield16 /DWOW_NATIVE_EXTENSION_BINDING /FI "O$:/repos.hobby/ntvdm64/src/compat/include/wow_user_native_extension.h"
+build obj/wkman.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkman.c
+  cflags = $wow_cflags /FI "O$:/repos.hobby/ntvdm64/src/compat/include/wow_native_process.h"
+build obj/wkfileio.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkfileio.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/wow-vdd" $wow_cflags
+build obj/wkernel.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkernel.c
+  cflags = $wow_cflags /FI "O$:/repos.hobby/ntvdm64/src/compat/include/wow_registry_binding.h"
+build obj/wow32fax.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32fax.c
+  cflags = $wow_cflags /FI "O$:/repos.hobby/ntvdm64/src/compat/include/wow_registry_binding.h"
+build obj/wsman.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsman.c
+  cflags = $wow_cflags
+build obj/wshell.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wshell.c
+  cflags = $wow_cflags /DWOWShellExecute=wow_shell_execute /FI "O$:/repos.hobby/ntvdm64/src/compat/include/wow_registry_binding.h"
+build obj/wuser31.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuser31.c
+  cflags = $wow_cflags
+build obj/wuman.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuman.c
+  cflags = $wow_cflags
+build obj/wucaret.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucaret.c
+  cflags = $wow_cflags
+build obj/wuclass.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuclass.c
+  cflags = $wow_cflags
+build obj/wuclip.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuclip.c
+  cflags = $wow_cflags
+build obj/wucomm.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucomm.c
+  cflags = $wow_cflags
+build obj/wucursor.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucursor.c
+  cflags = $wow_cflags
+build obj/wudlg.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wudlg.c
+  cflags = $wow_cflags /DWOWSysErrorBox=wow_user_sys_error_box
+build obj/wuhook.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuhook.c
+  cflags = $wow_cflags
+build obj/wulang.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wulang.c
+  cflags = $wow_cflags
+build obj/wumenu.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wumenu.c
+  cflags = $wow_cflags
+build obj/wumsg.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wumsg.c
+  cflags = $wow_cflags
+build obj/wuser.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuser.c
+  cflags = $wow_cflags /DWOWSysErrorBox=wow_user_sys_error_box
+build obj/wutext.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wutext.c
+  cflags = $wow_cflags
+build obj/wutmr.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wutmr.c
+  cflags = $wow_cflags
+build obj/wuwind.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuwind.c
+  cflags = $wow_cflags
+build obj/wowhooks.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wowhooks.c
+  cflags = $wow_cflags
+build obj/wdos.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdos.c
+  cflags = $wow_cflags
+build obj/wreldc.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wreldc.c
+  cflags = $wow_cflags
+build obj/wcuricon.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcuricon.c
+  cflags = $wow_cflags
+build obj/wsubcls.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsubcls.c
+  cflags = $wow_cflags
+build obj/wmmedia.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia.c
+  cflags = $wow_cflags /DWMM32CallProc32=wow_original_WMM32CallProc32
+build obj/wmmalias.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmalias.c
+  cflags = $wow_cflags
+build obj/walloc16.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/walloc16.c
+  cflags = $wow_cflags
+build obj/waccel.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/waccel.c
+  cflags = $wow_cflags
+build obj/wsdata.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsdata.c
+  cflags = $wow_cflags
+build obj/wsext.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsext.c
+  cflags = $wow_cflags
+build obj/wsraw.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsraw.c
+  cflags = $wow_cflags
+build obj/wthman.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wthman.c
+  cflags = $wow_cflags
+build obj/wcommdlg.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcommdlg.c
+  cflags = $wow_cflags /DWOW_COMMON_DIALOG_BINDING /FI "O$:/repos.hobby/ntvdm64/src/compat/include/wow_common_dialog_calls.h"
+build obj/wheap.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wheap.c
+  cflags = $wow_cflags
+build obj/wspool.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wspool.c
+  cflags = $wow_cflags
+build obj/wusercli.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wusercli.c
+  cflags = $wow_cflags
+build obj/wdib.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdib.c
+  cflags = $wow_cflags
+build obj/wole2.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wole2.c
+  cflags = $wow_cflags
+build obj/wparam.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wparam.c
+  cflags = $wow_cflags
+build obj/opennt-ole/thoputil.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/com/ole32/olethunk/olethk32/thoputil.cxx
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc\nt.h" /I "O:\repos.hobby\ntvdm64\src" /I "O:\repos.hobby\ntvdm64\src\compat\include" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\base\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\windows\core\ntuser\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\windows\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\shell\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\private\windows\inc"
+build obj/callpr32.obj: generic_call_asm O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/i386/callpr32.asm | O$:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc/callconv.inc
+build obj/compat/wow_window_capture.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_window_capture.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /I "O$:/repos.hobby/ntvdm64/src"
+build obj/compat/wow_registry_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_registry_binding.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /I "O$:/repos.hobby/ntvdm64/src"
+build obj/tests/wow-boundary-adapter.obj: cc O$:/repos.hobby/ntvdm64/test/build/wow_thunk_macro_boundary.c
+  cflags = $adapter_cflags
+build obj/tests/wow-boundary-thunk.obj: cc O$:/repos.hobby/ntvdm64/test/build/wow_thunk_macro_boundary.c
+  cflags = $wow_cflags
+build wow-macro-boundary-test: phony obj/tests/wow-boundary-adapter.obj obj/tests/wow-boundary-thunk.obj
+build obj/opennt-user/control-body-editec.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/editec.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-edecrare.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/edecrare.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-editsl.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/editsl.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-editml.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/editml.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-edmlonce.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/edmlonce.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-edmlrare.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/edmlrare.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-edslrare.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/edslrare.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-combo.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/combo.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-combodir.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/combodir.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-comboini.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/comboini.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-lb1.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lb1.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-lboxctl1.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxctl1.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-lboxctl2.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxctl2.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-lboxctl3.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxctl3.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-lboxmult.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxmult.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-lboxrare.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxrare.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-lboxvar.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/lboxvar.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-body-dlgbegin.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dlgbegin.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER
+build obj/opennt-user/control-body-dlgend.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dlgend.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_END
+build obj/opennt-user/control-body-dlgmgr.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dlgmgr.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_DEFAULT
+build obj/opennt-user/control-body-dlgmgrc.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER
+build obj/opennt-user/control-body-dlgmgr2.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_KEYBOARD
+build obj/opennt-user/control-body-dmmnem.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/dmmnem.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER
+build obj/opennt-user/control-body-winmgrc.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/winmgrc.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-view-winmgr.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/winmgr.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-view-wow.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/wow.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/hdata.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/hdata.c
+build obj/opennt-user/clres.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clres.c
+build obj/opennt-user/cldib.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/cldib.c
+build obj/opennt-user/rtlinit.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/rtlinit.c
+build obj/opennt-user/ntstubs.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c
+build obj/opennt-user/clmenu.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clmenu.c
+build obj/opennt-user/clglobal.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clglobal.c
+  cflags = $cflags $control_user_flags
+build obj/wow32-dll/wow_client_dispatch.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_client_dispatch.c
+  cflags = $compat_wow_cflags
+build obj/opennt-user/dialog-template.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clres.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_TEMPLATE
+build obj/opennt-user/control-text.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_CONTROL_TEXT
+build obj/opennt-user/control-color.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c
+  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_COLOR
+build obj/opennt-user/control-brush-client.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c
+  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT
+build obj/wow32-dll/wow_control_brush.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_control_brush.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /FI "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc\nt.h" /I "O:\repos.hobby\ntvdm64\src" /I "O:\repos.hobby\ntvdm64\src\compat\include" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\wow32" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\inc" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\softpc.new\base\inc" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\softpc.new\host\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\base\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\windows\core\ntuser\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\windows\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\shell\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\private\windows\inc" $control_user_flags
+build obj/wow32-dll/wow_control_state.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_control_state.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /FI "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc\nt.h" /I "O:\repos.hobby\ntvdm64\src" /I "O:\repos.hobby\ntvdm64\src\compat\include" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\wow32" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\inc" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\softpc.new\base\inc" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\softpc.new\host\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\base\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\windows\core\ntuser\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\windows\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\shell\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\private\windows\inc" $control_user_flags
+build obj/wow32-dll/wow_control_fnid.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_control_fnid.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /FI "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc\nt.h" /I "O:\repos.hobby\ntvdm64\src" /I "O:\repos.hobby\ntvdm64\src\compat\include" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\wow32" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\inc" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\softpc.new\base\inc" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\softpc.new\host\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\base\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\windows\core\ntuser\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\windows\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\shell\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\private\windows\inc" $control_user_flags
+build obj/compat/ntuser_rtl_compat.obj: cc O$:/repos.hobby/ntvdm64/src/compat/ntuser_rtl_compat.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow-control-rect.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_control_rect.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /DUNICODE
+build obj/opennt-user/default-client.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/clmsg.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_DEFAULT_WINDOW
+build obj/opennt-user/private-word-reader.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/getset.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_PRIVATE_WORD_GETTER
+build obj/opennt-user/private-word-client.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/ntstubs.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_GETSET
+build obj/opennt-user/private-word-setter.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/getset.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_PRIVATE_WORD_SETTER
+build obj/wow32-dll/wow_default_window_bits.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_default_window_bits.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /FI "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc\nt.h" /I "O:\repos.hobby\ntvdm64\src" /I "O:\repos.hobby\ntvdm64\src\compat\include" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\wow32" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\inc" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\softpc.new\base\inc" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\softpc.new\host\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\base\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\windows\core\ntuser\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\windows\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\shell\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\private\windows\inc" $control_user_flags
+build obj/opennt-user/default-borders.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/winmgr.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-geometry" $cflags $control_user_flags /DWOW_ORIGINAL_DEFAULT_GEOMETRY
+build obj/opennt-user/default-messages.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/server.c
+  cflags = $cflags $control_user_flags
+build obj/opennt-user/control-draw.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/draw.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-drawing" $cflags $control_user_flags
+build obj/opennt-user/control-text-client.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/drawtext.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-drawing" $cflags $control_user_flags
+build obj/opennt-user/control-text-rtl.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/drawtext.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-drawing" $cflags $control_user_flags
+build obj/opennt-user/control-text-extent.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/text.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/text-measure" $cflags $control_user_flags
+build obj/opennt-user/control-client-draw.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/draw.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT
+build obj/opennt-user/control-client-mngrayc.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/mngrayc.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-draw-state" $cflags $control_user_flags /DWOW_ORIGINAL_STATE_DRAWING
+build obj/opennt-user/button-client.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/btnctl.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/control-client" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_BUTTON_CLIENT
+build obj/opennt-user/button-blit.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/mngrayc.c
+  cflags = /I "O$:/repos.hobby/ntvdm64/src/compat/include/button-drawing" $cflags $control_user_flags /DWOW_ORIGINAL_BUTTON_BLIT_ONLY
+build obj/opennt-user/cleanup.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/cleanup.c
+build obj/opennt-user/probe.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/base/ntos/ex/probe.c
+build obj/opennt-user/class-remove.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/class.c
+  cflags = $cflags /DWOW_ORIGINAL_CLASS_REMOVAL
+build obj/opennt-user/class-register.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/class.c
+  cflags = $cflags /DWOW_ORIGINAL_CLASS_REGISTRATION
+build obj/opennt-user/taskman.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/taskman.c
+build obj/wow32-dll/wow_input_membership.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_input_membership.c
+  cflags = $compat_wow_cflags
+build obj/opennt-user/profile.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/profile.c
+build obj/opennt-user/queue.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/queue.c
+build obj/opennt-user/exitwin.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/exitwin.c
+build obj/wow32-dll/wow_class_client.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_class_client.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /FI "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc\nt.h" /I "O:\repos.hobby\ntvdm64\src" /I "O:\repos.hobby\ntvdm64\src\compat\include" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\wow32" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\inc" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\softpc.new\base\inc" /I "O:\repos.hobby\ntvdm64\src\mvdm-host\softpc.new\host\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\sdk\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\base\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\windows\core\ntuser\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\windows\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\public\internal\shell\inc" /I "O:\repos.hobby\ntvdm64\src\non-mvdm\private\windows\inc"
+build obj/opennt-user/class.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/kernel/class.c
+build obj/compat/wow_user_registration_state.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_registration_state.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_callback_frame_lease.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_callback_frame_lease.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_private_user_compat.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_private_user_compat.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_bitmap_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_bitmap_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_window_words_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_window_words_binding.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_window_procedure_entry.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_window_procedure_entry.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_user_object_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_object_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_user_discovery.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_discovery.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_menu_client_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_menu_client_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_menu_native_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_menu_native_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_cleanup_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_cleanup_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_user_borrow_scope.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_borrow_scope.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_class_client_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_class_client_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_task_profile_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_task_profile_binding.c
+  cflags = $compat_wow_cflags
+build obj/wow32-dll/wow_task_termination.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_task_termination.c
+  cflags = $adapter_cflags
+build obj/wow32-dll/wow_task_parent.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_task_parent.c
+  cflags = $adapter_cflags
+build obj/compat/wow_user_message_bridge.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_message_bridge.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_user_task_lifecycle.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_task_lifecycle.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_task_start_notification.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_task_start_notification.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_input_group_lifetime.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_input_group_lifetime.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_dialog_creation_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_dialog_creation_binding.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_dialog_keyboard_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_dialog_keyboard_binding.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_dialog_call_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_dialog_call_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_dialog_procedure_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_dialog_procedure_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_dialog_finalization_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_dialog_finalization_binding.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_dialog_native_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_dialog_native_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_dialog_state_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_dialog_state_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_default_message_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_default_message_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_default_native_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_default_native_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_default_state_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_default_state_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_default_window_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_default_window_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_dialog_context_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_dialog_context_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_edit_call_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_edit_call_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_control_brush_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_control_brush_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_edit_conversion_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_edit_conversion_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_control_draw_state.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_control_draw_state.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_button_resources.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_button_resources.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_button_lifetime.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_button_lifetime.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_edit_entry_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_edit_entry_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_edit_lookaside_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_edit_lookaside_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_edit_native_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_edit_native_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_list_native_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_list_native_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_edit_state_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_edit_state_bindings.c
+  cflags = $compat_wow_cflags
+build obj/wow32-dll/wow_control_extent_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_control_extent_bindings.c
+  cflags = $adapter_cflags
+build obj/compat/wow_edit_thread_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_edit_thread_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_window_client_access_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_window_client_access_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_window_client_state_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_window_client_state_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_hook_callback.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_hook_callback.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_timer_callback.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_timer_callback.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_idle_hook_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_idle_hook_binding.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_shell_callback.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_shell_callback.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_task_cleanup_entry.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_task_cleanup_entry.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_common_dialog_callback.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_common_dialog_callback.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_common_dialog_calls.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_common_dialog_calls.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_user_thunk_scope.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_thunk_scope.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_user_native_extension.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_native_extension.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_user_private_access.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_private_access.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_window_creation_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_window_creation_binding.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_class_words_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_class_words_binding.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_clipboard_epoch.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_clipboard_epoch.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_ole_descriptor_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_ole_descriptor_binding.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_standard_class_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_standard_class_bindings.c
+  cflags = $compat_wow_cflags
+build obj/compat/wow_user_registration_bridge.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_registration_bridge.c
+  cflags = $compat_wow_cflags
+build obj/adapter-win32/chartran.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/chartran.c
+  cflags = $cflags /DWOW_ORIGINAL_LARGE_STRING_LAYOUT /FI "O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/inc/user.h"
+build obj/adapter-win32/random.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/random.c
+build obj/adapter-win32/help.obj: cc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/rtl/help.c
+build obj/adapter-win32/crt_compat.obj: cc O$:/repos.hobby/ntvdm64/src/lib-win32/crt-compat/crt_compat.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_start_glass.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_start_glass.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_hook_native_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_hook_native_binding.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_fonts.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_fonts.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_control_brushes.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_control_brushes.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_icon_size.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_icon_size.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_dialog_slots.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_dialog_slots.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_user_failure.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_user_failure.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_native_dialog.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_native_dialog.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_native_controls.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_native_controls.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_profile_native.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_profile_native.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_task_event_binding.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_task_event_binding.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/compat/wow_native_environment.obj: cc O$:/repos.hobby/ntvdm64/src/compat/wow_native_environment.c
+  cflags = /nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT
+build obj/wow32-system-import-abi-aliases.obj: cc O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-system-import-abi-aliases.c
+  cflags = $adapter_cflags
+build obj/wow32-parent-import-abi-aliases.obj: cc O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-parent-import-abi-aliases.c
+  cflags = $adapter_cflags
+build obj/wow32-dll-entry-bridge.obj: cc O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-dll-entry-bridge.c
+  cflags = $adapter_cflags
+build obj/wow32.res: rc O$:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.rc
+build obj/opennt-user/edit-menu.res: rc O$:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/res.rc
+build legacy-wow-user32.lib: legacy_import_lib O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/legacy-wow-user32.def
+build legacy-wow-kernel32.lib: legacy_import_lib O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/legacy-wow-kernel32.def
+build legacy-wow-ntdll.lib: legacy_import_lib O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/legacy-wow-ntdll.def
+build wow32.dll | wow32.lib: wow_dll_link obj/mapembed.obj obj/wow32.obj obj/wowtbl.obj obj/walias.obj obj/wstruc.obj obj/wcall16.obj obj/wcall32.obj obj/wcntl32.obj obj/wdde.obj obj/wres16.obj obj/wres32.obj obj/wmsg16.obj obj/wmdisp32.obj obj/wmsgbm.obj obj/wmsgcb.obj obj/wmsgem.obj obj/wmsglb.obj obj/wmsgsbm.obj obj/wmtbl32.obj obj/wgdi31.obj obj/wgman.obj obj/wgdi.obj obj/wgfont.obj obj/wgmeta.obj obj/wgpal.obj obj/wgprnset.obj obj/wgtext.obj obj/wkbman.obj obj/wkmem.obj obj/wkgthunk.obj obj/wkman.obj obj/wkfileio.obj obj/wkernel.obj obj/wow32fax.obj obj/wsman.obj obj/wshell.obj obj/wuser31.obj obj/wuman.obj obj/wucaret.obj obj/wuclass.obj obj/wuclip.obj obj/wucomm.obj obj/wucursor.obj obj/wudlg.obj obj/wuhook.obj obj/wulang.obj obj/wumenu.obj obj/wumsg.obj obj/wuser.obj obj/wutext.obj obj/wutmr.obj obj/wuwind.obj obj/wowhooks.obj obj/wdos.obj obj/wreldc.obj obj/wcuricon.obj obj/wsubcls.obj obj/wmmedia.obj obj/wmmalias.obj obj/walloc16.obj obj/waccel.obj obj/wsdata.obj obj/wsext.obj obj/wsraw.obj obj/wthman.obj obj/wcommdlg.obj obj/wheap.obj obj/wspool.obj obj/wusercli.obj obj/wdib.obj obj/wole2.obj obj/wparam.obj obj/opennt-ole/thoputil.obj obj/callpr32.obj obj/compat/wow_window_capture.obj obj/compat/wow_registry_binding.obj obj/opennt-user/control-body-editec.obj obj/opennt-user/control-body-edecrare.obj obj/opennt-user/control-body-editsl.obj obj/opennt-user/control-body-editml.obj obj/opennt-user/control-body-edmlonce.obj obj/opennt-user/control-body-edmlrare.obj obj/opennt-user/control-body-edslrare.obj obj/opennt-user/control-body-combo.obj obj/opennt-user/control-body-combodir.obj obj/opennt-user/control-body-comboini.obj obj/opennt-user/control-body-lb1.obj obj/opennt-user/control-body-lboxctl1.obj obj/opennt-user/control-body-lboxctl2.obj obj/opennt-user/control-body-lboxctl3.obj obj/opennt-user/control-body-lboxmult.obj obj/opennt-user/control-body-lboxrare.obj obj/opennt-user/control-body-lboxvar.obj obj/opennt-user/control-body-dlgbegin.obj obj/opennt-user/control-body-dlgend.obj obj/opennt-user/control-body-dlgmgr.obj obj/opennt-user/control-body-dlgmgrc.obj obj/opennt-user/control-body-dlgmgr2.obj obj/opennt-user/control-body-dmmnem.obj obj/opennt-user/control-body-winmgrc.obj obj/opennt-user/control-view-winmgr.obj obj/opennt-user/control-view-wow.obj obj/opennt-user/hdata.obj obj/opennt-user/clres.obj obj/opennt-user/cldib.obj obj/opennt-user/rtlinit.obj obj/opennt-user/ntstubs.obj obj/opennt-user/clmenu.obj obj/opennt-user/clglobal.obj obj/wow32-dll/wow_client_dispatch.obj obj/opennt-user/dialog-template.obj obj/opennt-user/control-text.obj obj/opennt-user/control-color.obj obj/opennt-user/control-brush-client.obj obj/wow32-dll/wow_control_brush.obj obj/wow32-dll/wow_control_state.obj obj/wow32-dll/wow_control_fnid.obj obj/compat/ntuser_rtl_compat.obj obj/compat/wow-control-rect.obj obj/opennt-user/default-client.obj obj/opennt-user/private-word-reader.obj obj/opennt-user/private-word-client.obj obj/opennt-user/private-word-setter.obj obj/wow32-dll/wow_default_window_bits.obj obj/opennt-user/default-borders.obj obj/opennt-user/default-messages.obj obj/opennt-user/control-draw.obj obj/opennt-user/control-text-client.obj obj/opennt-user/control-text-rtl.obj obj/opennt-user/control-text-extent.obj obj/opennt-user/control-client-draw.obj obj/opennt-user/control-client-mngrayc.obj obj/opennt-user/button-client.obj obj/opennt-user/button-blit.obj obj/opennt-user/cleanup.obj obj/opennt-user/probe.obj obj/opennt-user/class-remove.obj obj/opennt-user/class-register.obj obj/opennt-user/taskman.obj obj/wow32-dll/wow_input_membership.obj obj/opennt-user/profile.obj obj/opennt-user/queue.obj obj/opennt-user/exitwin.obj obj/wow32-dll/wow_class_client.obj obj/opennt-user/class.obj obj/opennt-user/edit-menu.res obj/compat/wow_user_registration_state.obj obj/compat/wow_callback_frame_lease.obj obj/compat/wow_private_user_compat.obj obj/compat/wow_bitmap_bindings.obj obj/compat/wow_window_words_binding.obj obj/compat/wow_window_procedure_entry.obj obj/compat/wow_user_object_bindings.obj obj/compat/wow_user_discovery.obj obj/compat/wow_menu_client_bindings.obj obj/compat/wow_menu_native_bindings.obj obj/compat/wow_cleanup_bindings.obj obj/compat/wow_user_borrow_scope.obj obj/compat/wow_class_client_bindings.obj obj/compat/wow_task_profile_binding.obj obj/wow32-dll/wow_task_termination.obj obj/wow32-dll/wow_task_parent.obj obj/compat/wow_user_message_bridge.obj obj/compat/wow_user_task_lifecycle.obj obj/compat/wow_task_start_notification.obj obj/compat/wow_input_group_lifetime.obj obj/compat/wow_dialog_creation_binding.obj obj/compat/wow_dialog_keyboard_binding.obj obj/compat/wow_dialog_call_bindings.obj obj/compat/wow_dialog_procedure_bindings.obj obj/compat/wow_dialog_finalization_binding.obj obj/compat/wow_dialog_native_bindings.obj obj/compat/wow_dialog_state_bindings.obj obj/compat/wow_default_message_bindings.obj obj/compat/wow_default_native_bindings.obj obj/compat/wow_default_state_bindings.obj obj/compat/wow_default_window_bindings.obj obj/compat/wow_dialog_context_bindings.obj obj/compat/wow_edit_call_bindings.obj obj/compat/wow_control_brush_bindings.obj obj/compat/wow_edit_conversion_bindings.obj obj/compat/wow_control_draw_state.obj obj/compat/wow_button_resources.obj obj/compat/wow_button_lifetime.obj obj/compat/wow_edit_entry_bindings.obj obj/compat/wow_edit_lookaside_bindings.obj obj/compat/wow_edit_native_bindings.obj obj/compat/wow_list_native_bindings.obj obj/compat/wow_edit_state_bindings.obj obj/wow32-dll/wow_control_extent_bindings.obj obj/compat/wow_edit_thread_bindings.obj obj/compat/wow_window_client_access_bindings.obj obj/compat/wow_window_client_state_bindings.obj obj/compat/wow_hook_callback.obj obj/compat/wow_timer_callback.obj obj/compat/wow_idle_hook_binding.obj obj/compat/wow_shell_callback.obj obj/compat/wow_task_cleanup_entry.obj obj/compat/wow_common_dialog_callback.obj obj/compat/wow_common_dialog_calls.obj obj/compat/wow_user_thunk_scope.obj obj/compat/wow_user_native_extension.obj obj/compat/wow_user_private_access.obj obj/compat/wow_window_creation_binding.obj obj/compat/wow_class_words_binding.obj obj/compat/wow_clipboard_epoch.obj obj/compat/wow_ole_descriptor_binding.obj obj/compat/wow_standard_class_bindings.obj obj/compat/wow_user_registration_bridge.obj obj/adapter-win32/chartran.obj obj/adapter-win32/random.obj obj/adapter-win32/help.obj obj/adapter-win32/crt_compat.obj obj/compat/wow_start_glass.obj obj/compat/wow_hook_native_binding.obj obj/compat/wow_fonts.obj obj/compat/wow_control_brushes.obj obj/compat/wow_icon_size.obj obj/compat/wow_dialog_slots.obj obj/compat/wow_user_failure.obj obj/compat/wow_native_dialog.obj obj/compat/wow_native_controls.obj obj/compat/wow_profile_native.obj obj/compat/wow_task_event_binding.obj obj/compat/wow_native_environment.obj obj/wow32-system-import-abi-aliases.obj obj/wow32-parent-import-abi-aliases.obj obj/wow32-dll-entry-bridge.obj obj/wow32.res legacy-wow-user32.lib legacy-wow-kernel32.lib legacy-wow-ntdll.lib | wow32-x86.def O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/ntvdm.lib obj/tests/wow-boundary-adapter.obj obj/tests/wow-boundary-thunk.obj
+default wow32.dll

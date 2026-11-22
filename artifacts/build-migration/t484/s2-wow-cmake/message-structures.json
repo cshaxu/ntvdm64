@@ -1,0 +1,25 @@
+{
+  "nestedMinmaxStackCopyback": true,
+  "originalGuestChanged": false,
+  "converterIdentity": "Package/source manifests, not inferred by this probe",
+  "nestedCopydataFarIdentity": [
+    1,
+    1
+  ],
+  "limits": "Named synchronous paths only; not physical memory movement, all procedure branches, allocation-failure retirement or all M4",
+  "guestCallbacks": [
+    4,
+    4
+  ],
+  "nativeChecks": 6,
+  "families": [
+    "MINMAXINFO",
+    "WINDOWPOS",
+    "COPYDATA"
+  ],
+  "directions": [
+    "Win16-to-Win16",
+    "Win16-to-native",
+    "native-to-Win16"
+  ]
+}

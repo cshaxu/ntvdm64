@@ -105,16 +105,16 @@ if(NTVDM_ARCHITECTURE STREQUAL "x86")
   add_custom_target(worker COMMAND cmd /d /c "${_worker_tree}/run-ninja-parallel.cmd" ntvdm.exe VCDEX.DLL
     BYPRODUCTS "${_worker_tree}/ntvdm.lib"
     USES_TERMINAL)
-  # Its generator reads the actual parent's import library; configure only
+  # WOW32 consumes the actual parent's import library; configure only
   # after that producer has run, never borrow an older library to configure.
   add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/wow32/build.ninja"
-    COMMAND "${NTVDM_POWERSHELL}" -NoProfile -ExecutionPolicy Bypass -File
-      "${CMAKE_SOURCE_DIR}/tools/build/New-T404S5Wow32ProviderNinja.ps1"
-      -Architecture x86 -RepositoryRoot "${CMAKE_SOURCE_DIR}"
-      -BuildRoot "${CMAKE_BINARY_DIR}/wow32"
-      -ParentImportLibrary "${_worker_tree}/ntvdm.lib" ${_cache_args}
+    COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_SOURCE_DIR}/tools/build/wow32"
+      -B "${CMAKE_BINARY_DIR}/wow32" -G Ninja "-DCMAKE_BUILD_TYPE=Release"
+      "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}" "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}"
+      "-DNTVDM_PARENT_IMPORT_LIBRARY=${_worker_tree}/ntvdm.lib"
+      "-DNTVDM_USE_CCACHE=${NTVDM_USE_CCACHE}" "-DNTVDM_CCACHE_EXECUTABLE=${NTVDM_CCACHE_EXECUTABLE}"
     DEPENDS "${_worker_tree}/ntvdm.lib"
-      "${CMAKE_SOURCE_DIR}/tools/build/New-T404S5Wow32ProviderNinja.ps1"
+      "${CMAKE_SOURCE_DIR}/tools/build/wow32/CMakeLists.txt"
       "${CMAKE_SOURCE_DIR}/src/mvdm-host/wow32/sources"
       "${CMAKE_SOURCE_DIR}/src/mvdm-host/wow32/wow32.def"
     VERBATIM)
