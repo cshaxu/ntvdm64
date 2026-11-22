@@ -7,6 +7,7 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_window_creation_binding.h"
 #include "wow_dialog_state_bindings.h"
+#include "compat/include/opennt_user_multipass.h"
 #include "wow_user_object_bindings.h"
 #include "wow_native_gui_thread.h"
 #include "wow_menu_client_bindings.h"

@@ -3,6 +3,7 @@
 #include "wow_window_procedure_entry.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_dialog_state_bindings.h"
+#include "wow_user_client_view_layout.h"
 #include "wow_class_client_bindings.h"
 #include "compat/include/wow_user_runtime.h"
 #include "wow_user_task_lifecycle.h"

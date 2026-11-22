@@ -1,5 +1,9 @@
 #include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_dialog_state_bindings.h"
+#include "wow_user_client_view_layout.h"
+#define WOW_ORIGINAL_DIALOG_LAYOUT
+#include "compat/include/opennt_user_multipass.h"
+#undef WOW_ORIGINAL_DIALOG_LAYOUT
 #include <stddef.h>
 
 /* Original miscutil.c:24-37, now in compat, built with the provider's original x86 /Gz ABI. */

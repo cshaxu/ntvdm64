@@ -13,7 +13,7 @@ static unsigned queue_calls;
 static HWND expected_target;
 static unsigned menu_calls;
 static BOOL reject_ready;
-static PDLG retained_dialog;
+static struct _DLG * retained_dialog;
 static unsigned pointer_calls;
 #define TEST_EXCEPTION ((DWORD)0xe0424473)
 #define CHECK(c) do { if (!(c)) { ++failures; printf("FAIL %d\n", __LINE__); } } while (0)
@@ -42,7 +42,7 @@ BOOL WINAPI wow_dialog_native_ready(void)
     if (reject_ready) { SetLastError(706); return FALSE; }
     return TRUE;
 }
-BOOL WINAPI wow_dialog_set_pointer(HWND window, PDLG dialog)
+BOOL WINAPI wow_dialog_set_pointer(HWND window, struct _DLG * dialog)
 {
     CHECK(window == expected_target && depth == 0);
     ++pointer_calls;
@@ -98,7 +98,7 @@ int main(void)
     expected_target = (HWND)(ULONG_PTR)0x1234;
     SetLastError(456);
     wow_dialog_set_pointer_word(expected_target, 0x4560);
-    CHECK(retained_dialog == (PDLG)(ULONG_PTR)0x4560 && GetLastError() == 456);
+    CHECK(retained_dialog == (struct _DLG *)(ULONG_PTR)0x4560 && GetLastError() == 456);
     wow_dialog_set_pointer_word(expected_target, 0);
     CHECK(retained_dialog == NULL && pointer_calls == 2);
     reject_service = TRUE;

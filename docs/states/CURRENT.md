@@ -200,11 +200,11 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 
 [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json):
 94 files,21 completed,73 remaining. B-to-C1:55 unique/67 relocation
-records,476 compiled header rows,0 private search-root rows. These are separate
+records,472 compiled header rows,0 private search-root rows. These are separate
 metrics, not additive counts. B-to-C2 direct/header/search remains0.
 DIR work remains at BC1F010/011 shared USER consumer group; three P9 text
 consumers are complete, other consumers remain open. S20 cumulative non-error
-mirror increment2points/+202lines; S19 retained increment+12points/+574lines.
+mirror increment2points/+210lines; S19 retained increment+12points/+574lines.
 
 [S20 P1 review](../../artifacts/mvdm-audit/t483-b-c1-dependencies/base-dispatch-review.json)
 is implemented by [P2](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p2-delivery.json):
@@ -235,21 +235,11 @@ S20 cumulative0points/+124lines (R2742/R2743). Cached full build, dual11,
 59CCPU cases, classifier and actual Win16/COMMAND passed; final gates passed.
 [Delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p8-delivery.json).
 
-P9 text subgroup: BC1F016/054/062 complete; original LARGE_STRING stays C-owned,
-B receives an opaque pointer and synchronous typed conversion callback.
-Compiled C1 header rows541->524; direct58 remains unchanged. Menu/GDI transitive
-includes were made explicit at their actual consumers and are not counted as
-eliminated. Cached full, dual11, original string/measure and real Win16/COMMAND
-passed; final gates passed. Mirror0points/+14lines (R2744). Publication package
-01057e8e-ab0e-4c7d-bf69-7b40974f3b83. P9 is the delivery commit.
-[Delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p9-delivery.json).
-
-P10 completes BC1F012/025 bitmap header/implementation. Original conversion
-remains C-owned; B uses one immutable synchronous callback registered by F.
-Direct C1 relations58->57; headers524->516; search0 and C2 zero retained.
-Cached full, dual11, bitmap nested/concurrent/failure and real Win16/COMMAND
-passed. Mirror0points/+1line (R2745).
-[Delivery evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p10-delivery.json).
+P9/P10 text and bitmap boundaries: original LARGE_STRING and bitmap conversion
+remain C-owned; B uses opaque pointer and synchronous callbacks. The verified
+[procedures](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p9-delivery.json)
+and [bitmap delivery](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p10-delivery.json)
+retain their build, test and publication evidence (R2744/R2745).
 
 P11 completes BC1F013/032: B owns opaque cleanup ABI and synchronous callback;
 original C algorithm and private declarations remain C-owned. This removes
@@ -277,3 +267,9 @@ and field-offset assertions, replacing duplicated declaration and private nt.h.
 B-C1 headers482->476; direct55 unchanged. Mirror0points/0lines. Cached full,
 dual11, both actual OLE descriptor roundtrips and COMMAND return passed.
 [P14 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p14-delivery.json).
+
+P15 clears part of BC1F018: B dialog-state interface passes opaque DLG; actual
+C dialog/getset layouts remain in their owners. Header rows476->472; direct55
+and files21/94 remain unchanged. Cached full, dual11, dialog/control and actual
+Win16/COMMAND passed. Mirror0points/+8lines R2751; cumulative+2points/+210lines.
+[P15 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p15-delivery.json).

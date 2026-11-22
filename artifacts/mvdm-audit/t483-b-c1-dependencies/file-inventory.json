@@ -7,7 +7,7 @@
     "completed": 21,
     "direct_unique": 55,
     "direct_raw": 67,
-    "compiled_header_rows": 476,
+    "compiled_header_rows": 472,
     "private_search_root_rows": 0
   },
   "files": [
@@ -1329,7 +1329,7 @@
     {
       "id": "BC1F018",
       "file": "src/compat/include/wow_shared_user_abi.h",
-      "status": "not yet audited",
+      "status": "in progress: P15 clears partial dialog header propagation; original WW and registration consumers remain",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1351,7 +1351,8 @@
           "evidence": "non-mvdm/public/internal/windows/inc/wowuserp.h",
           "product": ""
         }
-      ]
+      ],
+      "delivery_partial": "p15-delivery.json"
     },
     {
       "id": "BC1F019",

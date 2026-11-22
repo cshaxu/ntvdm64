@@ -2764,3 +2764,7 @@ still reaches userrtl.h and remains tracked. Non-error clmsg27points/979lines
 S20 P13: original edit layout imports its own globals.h macros; the lookup-only
 unit does not consume them. B edit-memory header no longer imports this C header.
 Non-error user.h45points/110lines ->45points/113lines (+0points/+3lines), R2750.
+
+S20 P15: original C dialog and getset clients select original DIALOG layout
+after WND exists; B dialog-state interface only passes opaque DLG pointers.
+Non-error usercli45points/115lines ->45points/123lines (+0points/+8lines), R2751.

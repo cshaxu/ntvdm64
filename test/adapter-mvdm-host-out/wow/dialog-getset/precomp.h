@@ -1,6 +1,10 @@
 #ifndef WOW_DIALOG_GETSET_FIXTURE_PRECOMP_H
 #define WOW_DIALOG_GETSET_FIXTURE_PRECOMP_H
 #include "wow_dialog_state_bindings.h"
+#include "wow_user_client_view_layout.h"
+#define WOW_ORIGINAL_DIALOG_LAYOUT
+#include "compat/include/opennt_user_multipass.h"
+#undef WOW_ORIGINAL_DIALOG_LAYOUT
 #include "wow_edit_state_bindings.h"
 #define WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
 #define WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY

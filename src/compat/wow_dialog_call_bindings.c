@@ -5,7 +5,7 @@
 
 VOID WINAPI wow_dialog_set_pointer_word(HWND window, UINT pointer)
 {
-    if (!wow_dialog_set_pointer(window, (PDLG)(ULONG_PTR)pointer))
+    if (!wow_dialog_set_pointer(window, (struct _DLG *)(ULONG_PTR)pointer))
         wow_user_native_call_failed("dialog-pointer-state", GetLastError());
 }
 

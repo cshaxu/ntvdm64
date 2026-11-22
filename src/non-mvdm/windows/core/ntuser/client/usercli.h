@@ -14,6 +14,14 @@
 
 #ifndef _USERCLI_
 #define _USERCLI_
+#if (defined(WOW_ORIGINAL_DIALOG_CLIENT) || defined(WOW_ORIGINAL_PRIVATE_WORD_GETTER) || defined(WOW_ORIGINAL_PRIVATE_WORD_SETTER)) && defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
+#pragma push_macro("_USER_")
+#undef _USER_
+#define WOW_ORIGINAL_DIALOG_LAYOUT
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#undef WOW_ORIGINAL_DIALOG_LAYOUT
+#pragma pop_macro("_USER_")
+#endif
 #if defined(WOW_ORIGINAL_EDIT_CLIENT) || defined(WOW_ORIGINAL_DIALOG_CLIENT)
 #undef FindNCHit
 #include "non-mvdm/windows/core/ntuser/rtl/userrtl.h"

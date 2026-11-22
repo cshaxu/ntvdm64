@@ -1,15 +1,12 @@
 #ifndef WOW_DIALOG_STATE_BINDINGS_H
 #define WOW_DIALOG_STATE_BINDINGS_H
 #include "wow_window_client_state_bindings.h"
-#include "wow_user_client_view_layout.h"
-#define WOW_ORIGINAL_DIALOG_LAYOUT
-#include "compat/include/opennt_user_multipass.h"
-#undef WOW_ORIGINAL_DIALOG_LAYOUT
+struct _DLG;
 
 /* Caller retains the existing HWND/task borrow. This only publishes the
  * original caller-owned PDLG; it does not allocate or free dialog resources.
  * Clearing during original final destruction precedes identity withdrawal. */
-BOOL WINAPI wow_dialog_set_pointer(HWND, PDLG);
+BOOL WINAPI wow_dialog_set_pointer(HWND, struct _DLG *);
 /* Original VOID service boundary: rejected storage cannot be ignored. */
 VOID WINAPI wow_dialog_set_pointer_word(HWND, UINT);
 /* Canonical original final destruction, under the existing task/borrow
