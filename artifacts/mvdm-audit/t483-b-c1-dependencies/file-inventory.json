@@ -5,9 +5,9 @@
   "counts": {
     "files": 94,
     "completed": 46,
-    "direct_unique": 13,
-    "direct_raw": 20,
-    "compiled_header_rows": 201,
+    "direct_unique": 12,
+    "direct_raw": 18,
+    "compiled_header_rows": 195,
     "private_search_root_rows": 0
   },
   "files": [
@@ -7537,7 +7537,7 @@
     {
       "id": "BC1F074",
       "file": "src/compat/wow_private_user_compat.c",
-      "status": "not yet audited",
+      "status": "partially addressed in P62: original menu parser supplied by synchronous provider; original USER header remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -7649,7 +7649,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p62-delivery.json"
     },
     {
       "id": "BC1F075",

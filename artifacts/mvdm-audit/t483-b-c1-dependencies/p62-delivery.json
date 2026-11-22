@@ -1,0 +1,37 @@
+{
+  "packet": "M0 T483 S20 P62",
+  "baseline": "870646317",
+  "files_partial": [
+    "BC1F074"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 46,
+    "remaining": 48,
+    "B_C1_unique": 12,
+    "B_C1_raw": 18,
+    "B_C1_compiled_headers": 195,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 function direct unique 13 to 12, raw 20 to 18; compiled headers 201 to 195. BC1F074 retains original USER header.",
+  "implementation": "WOW32 binds original C1 CreateMenuFromResource to B synchronous provider; original parser, task context, ownership and failure release remain. Private NT include replaced with SDK declarations.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "71882068-22ca-4a1a-8a84-20c8d7f7cb5c",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "real CCPU original menu resource: 16 resource cases, 7 parser cases, 64 invalid repeats, owner draw and cleanup",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "test_correction": "Initial menu fixture link lacked the new WINAPI provider declaration; explicitly included the production header and reran successfully.",
+  "evidence": "build/t483-s20-menu-parser-p62",
+  "limitations": [
+    "BC1F074 retains original USER header",
+    "Data-symbol scan incomplete beyond scoped common externals",
+    "Full suite required at S20 closure"
+  ]
+}

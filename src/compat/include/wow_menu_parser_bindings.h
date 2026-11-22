@@ -5,6 +5,8 @@
 
 /* Original menu parsing uses the bound task CLIENTINFO, not the native TEB. */
 HMENU WINAPI CreateMenuFromResource(LPBYTE);
+typedef HMENU (WINAPI *wow_menu_parser_provider)(LPBYTE);
+BOOL WINAPI wow_menu_parser_bind(wow_menu_parser_provider);
 HMENU WINAPI wow_user_load_menu_indirect(const MENUTEMPLATEW *);
 
 #ifdef WOW_ORIGINAL_MENU_CLIENT

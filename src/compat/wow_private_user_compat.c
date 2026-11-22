@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_private_user_compat.h"
 #include "wow_menu_parser_bindings.h"
 #include "wow_default_message_bindings.h"
@@ -84,12 +85,24 @@ DWORD WINAPI wow_private_user_get_menu_index(HMENU menu, HMENU submenu)
     return (DWORD)-1;
 }
 
+static wow_menu_parser_provider menu_parser;
+BOOL WINAPI wow_menu_parser_bind(wow_menu_parser_provider provider)
+{
+    wow_menu_parser_provider previous;
+    if (!provider) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    previous = (wow_menu_parser_provider)InterlockedCompareExchangePointer(
+        (PVOID volatile *)&menu_parser, (PVOID)provider, NULL);
+    if (previous && previous != provider) { SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE; }
+    return TRUE;
+}
+
 HMENU WINAPI wow_user_load_menu_indirect(const MENUTEMPLATEW *menu_template)
 {
     /* Original Win16 consumers call after ConvertMenu16; the retained parser
      * reads the current task CLIENTINFO to interpret owner-draw data. */
     if (!menu_template) return NULL;
-    return CreateMenuFromResource((LPBYTE)menu_template);
+    if (!menu_parser) RaiseFailFastException(NULL, NULL, 0);
+    return menu_parser((LPBYTE)menu_template);
 }
 
 HMENU WINAPI wow_private_user_load_create_menu(HANDLE module, LPTSTR name,
