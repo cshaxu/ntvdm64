@@ -18,6 +18,7 @@ SOURCES= \
     wow_control_brush.c \
     wow_control_fnid.c \
     wow_control_state.c \
+    wow_default_window_bits.c \
     wow_control_extent_bindings.c \
     wow_class_client_bindings.c \
     wow_class_words_binding.c \

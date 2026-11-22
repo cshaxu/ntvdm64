@@ -1,0 +1,38 @@
+{
+  "packet": "M0 T483 S20 P39",
+  "baseline": "d2d7573c2",
+  "files_completed": [
+    "BC1F046"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 36,
+    "remaining": 58,
+    "B_C1_unique": 42,
+    "B_C1_raw": 50,
+    "B_C1_compiled_headers": 330,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct remains 42; compiled headers 337 to 330. Original bit merge is outside B and reached through the existing synchronous message provider.",
+  "implementation": "Moved original WowGetDefWindowProcBits unchanged to WOW32; OpenNT windows/core/ntuser/client/client.c:2203, same symbol and signature. B retains span validation, zeroing and message initialization/retry.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "f29e9068-e618-4e9d-9e33-83967d45b45e",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "original bitmap merge, boundaries and message-table failure/retry",
+    "cursor resource binding and public modes after fixing stale test include paths",
+    "WOW control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-window-bits",
+  "limitations": [
+    "Initial cursor resource fixture used stale include paths and stricter warnings for original NT headers; resource-r5 passed after aligning paths and product warning policy",
+    "Full suite required at S20 closure",
+    "Shared original message-table layout remains open"
+  ]
+}

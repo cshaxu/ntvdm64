@@ -18,7 +18,7 @@ WORD WINAPI wow_private_user_get_def_window_proc_bits(PBYTE bits,
         wow_default_message_state.DefWindowSpecMsgs.maxMsgs);
     if (maximum > MAXWORD || byte_count <= maximum / 8u) return 0;
     memset(bits, 0, maximum / 8u + 1u);
-    return WowGetDefWindowProcBits(bits, byte_count);
+    return wow_default_messages_merge(bits, byte_count);
 }
 
 int WINAPI wow_private_user_get_id_from_directory(PBYTE resource_bits,

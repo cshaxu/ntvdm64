@@ -6,16 +6,26 @@
  * or application callback is performed during once-initialization. */
 wow_default_message_state_type wow_default_message_state;
 static INIT_ONCE message_once = INIT_ONCE_STATIC_INIT;
-static wow_default_message_initializer message_initializer;
+static const wow_default_message_provider *message_provider;
 
-BOOL WINAPI wow_default_messages_bind(wow_default_message_initializer provider)
+BOOL WINAPI wow_default_messages_bind(const wow_default_message_provider *provider)
 {
-    wow_default_message_initializer previous;
-    if (!provider) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
-    previous = (wow_default_message_initializer)InterlockedCompareExchangePointer(
-        (PVOID volatile *)&message_initializer, (PVOID)provider, NULL);
-    if (previous && previous != provider) { SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE; }
+    const wow_default_message_provider *previous;
+    if (!provider || !provider->initialize || !provider->merge) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&message_provider,
+        (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
     return TRUE;
+}
+
+WORD WINAPI wow_default_messages_merge(PBYTE bits, WORD count)
+{
+    if (!message_provider) RaiseFailFastException(NULL, NULL, 0);
+    return message_provider->merge(bits, count);
 }
 
 static BOOL CALLBACK initialize_messages(PINIT_ONCE once, PVOID parameter,
@@ -26,8 +36,8 @@ static BOOL CALLBACK initialize_messages(PINIT_ONCE once, PVOID parameter,
     (void)once; (void)parameter; (void)context;
     __try {
         __try {
-            if (!message_initializer) RaiseFailFastException(NULL, NULL, 0);
-            message_initializer();
+            if (!message_provider) RaiseFailFastException(NULL, NULL, 0);
+            message_provider->initialize();
             /* Original server.c initializes uiShellMsg with the USER atom
              * "SHELLHOOK". RegisterWindowMessage uses that same namespace;
              * never call SetTaskmanWindow(NULL) on the host desktop. This

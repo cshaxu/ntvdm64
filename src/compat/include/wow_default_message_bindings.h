@@ -57,7 +57,13 @@ VOID WINAPI InitMessageTables(VOID);
 VOID WINAPI InitWindowMsgTable(PBYTE *, PUINT, const WORD *);
 WORD WINAPI WowGetDefWindowProcBits(PBYTE, WORD);
 typedef VOID (WINAPI *wow_default_message_initializer)(VOID);
-BOOL WINAPI wow_default_messages_bind(wow_default_message_initializer);
+typedef WORD (WINAPI *wow_default_message_merger)(PBYTE, WORD);
+typedef struct wow_default_message_provider {
+    wow_default_message_initializer initialize;
+    wow_default_message_merger merge;
+} wow_default_message_provider;
+BOOL WINAPI wow_default_messages_bind(const wow_default_message_provider *);
+WORD WINAPI wow_default_messages_merge(PBYTE, WORD);
 BOOL WINAPI wow_default_messages_ready(void);
 
 #ifdef WOW_ORIGINAL_MESSAGE_TABLES

@@ -32,13 +32,14 @@ try {
     Build 'bitmap-link' ('link.exe /nologo /machine:x86 /subsystem:console /out:"'+$out+'/bitmap.exe" "'+$out+'/bitmap.obj"')
     Invoke-Owned 'bitmap-run' "$out/bitmap.exe" ' ' 30
     if(!(Select-String -LiteralPath "$out/bitmap-run.stdout.log" -SimpleMatch 'WOW_BITMAP_CALL_ORDER errors=0 output=2')){throw 'Bitmap caller marker missing'}
-    $include=' /I"'+$repo+'/src" /I"'+$repo+'/src/wow32-dll/include"'
+    $include=' /I"'+$repo+'/src" /I"'+$repo+'/src/compat/include" /I"'+$repo+'/src/non-mvdm/public/sdk/inc" /I"'+$repo+'/src/wow32-dll/include"'
     Build 'cursor-resource-compile' ('cl.exe /nologo /TC /c /MT /W4 /WX'+$include+' /Fo"'+$out+'/cursor-resource.obj" "'+$repo+'/test/adapter-mvdm-host-out/wow/wow_cursor_resource_fixture.c"')
     # Function-level COMDATs keep this witness limited to the cursor/icon
     # output slot.  The same project-owned translation unit also contains
     # menu and default-message helpers whose providers are intentionally
     # outside this S2 resource seam.
-    Build 'cursor-binding-compile' ('cl.exe /nologo /TC /c /MT /Gy /W4 /WX'+$include+' /Fo"'+$out+'/cursor-binding.obj" "'+$repo+'/src/compat/wow_private_user_compat.c"')
+    # Match product policy for the original NT/SDK header combination; fixture code remains /WX.
+    Build 'cursor-binding-compile' ('cl.exe /nologo /TC /c /MT /Gy /W4'+$include+' /Fo"'+$out+'/cursor-binding.obj" "'+$repo+'/src/compat/wow_private_user_compat.c"')
     Build 'cursor-resource-link' ('link.exe /nologo /machine:x86 /subsystem:console /opt:ref /out:"'+$out+'/cursor-resource.exe" "'+$out+'/cursor-resource.obj" "'+$out+'/cursor-binding.obj" user32.lib gdi32.lib kernel32.lib')
     foreach($mode in @('binding','public')) {
         $arguments=if($mode -eq 'public'){'public'}else{' '}

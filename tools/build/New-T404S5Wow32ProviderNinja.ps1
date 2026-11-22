@@ -429,6 +429,7 @@ $dllEntryBridgeLines = @(
     '#include "compat/include/wow_control_brush_bindings.h"',
     'HBRUSH WINAPI xxxGetControlBrush(struct tagWND *, HDC, UINT);',
     '#include "compat/include/wow_default_message_bindings.h"',
+    'static const wow_default_message_provider default_message_provider = { InitMessageTables, WowGetDefWindowProcBits };',
     '#include "compat/include/wow_control_state_provider.h"',
     'void WINAPI SetWindowState(struct tagWND *, UINT);',
     'void WINAPI ClearWindowState(struct tagWND *, UINT);',
@@ -441,7 +442,7 @@ $dllEntryBridgeLines = @(
     'int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)',
     '{',
     '    int result;',
-    '    if (reason == 1 && !wow_default_messages_bind(InitMessageTables)) return 0;',
+    '    if (reason == 1 && !wow_default_messages_bind(&default_message_provider)) return 0;',
     '    if (reason == 1 && !wow_control_state_bind(&control_state_provider)) return 0;',
     '    if (reason == 1 && !wow_control_fnid_bind(wow_edit_set_window_fnid)) return 0;',
     '    if (reason == 1 && !wow_control_extent_bind(wow_control_registered_extent)) return 0;',
@@ -715,7 +716,7 @@ $objects.Add($privateWordSetterObject)
 $ninja.Add('build ' + $privateWordSetterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/getset.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_PRIVATE_WORD_SETTER')
 $objects.Add($defaultBitsObject)
-$ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_default_window_bits.c')))
+$ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_default_window_bits.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $defaultBordersObject = 'obj/opennt-user/default-borders.obj'
 $objects.Add($defaultBordersObject)

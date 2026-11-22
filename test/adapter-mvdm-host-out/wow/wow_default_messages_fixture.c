@@ -47,12 +47,16 @@ static BOOL member(const WNDMSG *table, UINT message)
         (table->abMsgs[message / 8] & (1u << (message & 7))) != 0;
 }
 
+static WORD WINAPI unused_merge(PBYTE bits, WORD count)
+{ (void)bits; (void)count; return 0; }
+
 int main(void)
 {
     WNDMSG server, client, edit, list, combo, combo_list, button;
     wow_default_message_state_type empty = {0};
     unsigned failure;
-    CHECK(wow_default_messages_bind(InitMessageTables));
+    static const wow_default_message_provider provider = { InitMessageTables, unused_merge };
+    CHECK(wow_default_messages_bind(&provider));
     for (failure = 1; failure <= 12; ++failure) {
         allocation_count = 0;
         fail_allocation = failure;

@@ -464,3 +464,12 @@ dual11, default-window/control and real Win16/COMMAND targeted tests passed.
 Full remains required at S20 closure. Package
 ccd22afd-180b-4f08-9196-04709dc3b1b0.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p38-delivery.json).
+
+P39 completes BC1F046: original WOW bitmap merge is WOW32-owned and B
+uses the existing synchronous message provider. B-C1 direct unique remains
+42, compiled headers 337->330; files 36/94 complete. Mirror delta 0 points/
+0 lines; cumulative +3 points/+239 lines. Cached full build, dual11, bitmap,
+message retry, cursor resource and real Win16/COMMAND targeted tests passed.
+Full remains required at S20 closure. Package
+f29e9068-e618-4e9d-9e33-83967d45b45e.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p39-delivery.json).

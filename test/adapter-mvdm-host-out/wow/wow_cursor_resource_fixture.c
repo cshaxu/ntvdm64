@@ -1,4 +1,5 @@
 #include <windows.h>
+#include <winternl.h>
 #include <stdio.h>
 #include <string.h>
 #include "wow_private_user_compat.h"
@@ -10,7 +11,7 @@
  * does not turn the S2 cursor boundary witness into a menu test. */
 wow_default_message_state_type wow_default_message_state;
 BOOL WINAPI wow_default_messages_ready(void) { return FALSE; }
-WORD WINAPI WowGetDefWindowProcBits(PBYTE bits, WORD byte_count)
+WORD WINAPI wow_default_messages_merge(PBYTE bits, WORD byte_count)
 {
     (void)bits;
     (void)byte_count;

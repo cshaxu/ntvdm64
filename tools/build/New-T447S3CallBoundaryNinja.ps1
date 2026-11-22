@@ -45,7 +45,7 @@ $units = @(
     @('capture_owner', 'src/non-mvdm/windows/core/ntuser/client/rtlinit.c', '/Gy'),
     @('capture_tls', 'src/compat/opennt_support_rtl.c', '/Gy'),
     @('def_bits_fixture', 'test/adapter-mvdm-host-out/wow/wow_def_window_bits_fixture.c', ''),
-    @('def_bits_owner', 'src/compat/wow_default_window_bits.c', ''),
+    @('def_bits_owner', 'src/wow32-dll/source/wow_default_window_bits.c', ''),
     @('def_bits_boundary', 'src/compat/wow_private_user_compat.c', '/Gy'),
     @('def_bits_tables', 'src/non-mvdm/windows/core/ntuser/kernel/server.c', ''),
     @('def_bits_state', 'src/compat/wow_default_message_bindings.c', ''),
