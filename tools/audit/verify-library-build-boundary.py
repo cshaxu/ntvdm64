@@ -46,18 +46,22 @@ def verify(graph, products):
     commands = ninja(directory, "commands", *products)
     units = {}
     for line in commands.splitlines():
-        match = re.search(r' /Fo("?)([^"]+?\.obj)\1\s+"?[^"]*/src/(lib-(?:nxvm|win32)|compat)/([^"]+\.c)"?$', line, re.I)
+        match = re.search(r'\s+"?[^" ]*/src/(lib-(?:nxvm|win32)|compat)/([^" ]+\.c)"?$', line, re.I)
         if not match:
             continue
-        obj, owner, source = match.group(2, 3, 4)
+        output = re.search(r'(?:^|\s)[/-]Fo(?:"([^"]+)"|(\S+))', line, re.I)
+        if not output:
+            raise ValueError(f"{graph}: compiler output missing: {line}")
+        obj = output[1] or output[2]
+        owner, source = match.group(1, 2)
         units[obj] = (owner, source)
         roots = {ROOT / "src"} | allowed_roots(owner, source)
-        for path in re.finditer(r'(?:^| )/I\s*(?:"([^"]+)"|(\S+))', line, re.I):
+        for path in re.finditer(r'(?:^| )[/-]I\s*(?:"([^"]+)"|(\S+))', line, re.I):
             if not any((directory / (path[1] or path[2])).resolve() == r for r in roots) and not any(
                     (directory / (path[1] or path[2])).resolve() == h.parent
                     for h in generated_inputs(directory, owner, source)):
                 raise ValueError(f"{graph}/{obj}: unexpected include root {path[0]}")
-        if re.search(r'(?:^| )/FI', line):
+        if re.search(r'(?:^| )[/-]FI', line):
             raise ValueError(f"{graph}/{obj}: forced header")
     if not units:
         raise ValueError(f"{graph}: no A objects found")
@@ -81,6 +85,10 @@ def verify(graph, products):
         objects = [obj for obj, identity in units.items()
                    if frozenset(allowed_roots(*identity) | generated_inputs(directory, *identity)) == roots]
         for line in ninja(directory, "inputs", *objects).splitlines():
+            # CMake's empty object-order phony node names its working directory.
+            # It is not a source/header; all actual file prerequisites remain checked.
+            if line.strip() == ".":
+                continue
             path = (directory / line.strip().strip('"')).resolve()
             if path.is_relative_to(ROOT) and not any(path.is_relative_to(root) for root in roots):
                 raise ValueError(f"{graph}: unexpected build prerequisite {path}")

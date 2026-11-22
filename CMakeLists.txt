@@ -131,7 +131,14 @@ else()
     add_custom_target(native-${_name} COMMAND cmd /d /c
       "${CMAKE_BINARY_DIR}/${_name}/run-ninja.cmd" USES_TERMINAL)
   endforeach()
-  ntvdm_generate(New-NativeHook64Ninja.ps1 -RepositoryRoot "${CMAKE_SOURCE_DIR}"
-    -BuildRoot "${CMAKE_BINARY_DIR}/hook" -ReferenceGraph "${_worker_tree}/build.ninja")
+  set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+    "${CMAKE_SOURCE_DIR}/tools/build/hook/CMakeLists.txt"
+    "${CMAKE_SOURCE_DIR}/tools/build/hook/run-ninja.cmd.in")
+  execute_process(COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_SOURCE_DIR}/tools/build/hook"
+    -B "${CMAKE_BINARY_DIR}/hook" -G Ninja "-DCMAKE_BUILD_TYPE=Release"
+    "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}" "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}"
+    "-DNTVDM_USE_CCACHE=${NTVDM_USE_CCACHE}" "-DNTVDM_CCACHE_EXECUTABLE=${NTVDM_CCACHE_EXECUTABLE}"
+    "-DNTVDM_LAUNCHER_FILE=${CMAKE_BINARY_DIR}/launcher/run16.exe"
+    COMMAND_ERROR_IS_FATAL ANY)
   add_custom_target(hook64 COMMAND cmd /d /c "${CMAKE_BINARY_DIR}/hook/run-ninja.cmd" USES_TERMINAL)
 endif()

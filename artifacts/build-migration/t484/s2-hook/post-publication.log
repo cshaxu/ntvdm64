@@ -1,0 +1,26 @@
+x86/worker: 112 A/B objects checked
+x86/wow32: 79 A/B objects checked
+x64/worker-reference-x86: 108 A/B objects checked
+x64/frontend: 34 A/B objects checked
+x64/service: 28 A/B objects checked
+x64/launcher: 25 A/B objects checked
+x64/monitor: 2 A/B objects checked
+x64/worker: 33 A/B objects checked
+x64/hook: 13 A/B objects checked
+PASS: 24 authored/generated product commands without SoftPC profile flags
+PASS process image machine: self, invalid handle, query access, denied access, x86 and x64 suspended targets
+case=context install=0 exit=0
+case=separate-context install=0 exit=0
+case=grandchild install=87 exit=4294967295
+case=nested install=0 exit=0
+case=legacy-request install=0 exit=0
+case=ansi install=0 exit=0
+case=cmd install=0 exit=0
+case=attributes install=0 exit=0
+case=cui-to-gui install=0 exit=0
+case=nested install=0 exit=0
+case=gui-to-cui install=0 exit=0
+case=gui install=0 exit=0
+case=grandchild install=6 exit=4294967295
+case=grandchild install=2 exit=4294967295
+NTHOOK-INSTALL-PASS assertions=118

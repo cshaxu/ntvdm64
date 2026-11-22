@@ -58,6 +58,16 @@ checks passed. Five raw inputs are identical and six differ only by PE
 timestamps. Mirror code delta is zero. S2 remains active; graph generators,
 addon/test producers and publishing scripts are still migration work.
 
+[S2 P3](../etc/evidence/t484-s2-hook-cmake.md): Hook64 now uses native CMake
+targets; its old PowerShell generator is removed. All25 production sources
+remain, cached full build and dual publication passed. Current package:
+a56f5975-e552-4ccb-96a3-55fd0e3622d0;22 hashes verified. Post-publication
+Hook lifecycle118 assertions, machine tests and strict boundaries passed.
+Four raw images are identical/seven timestamp-only. Full macro-profile audit
+still reports five unchanged WOW units, reproduced with the prior test;
+resolve during WOW migration before S2 closure. Three host graph generators
+remain. S3-S5 are not yet admitted.
+
 ## S1 Closure Record
 
 [S1 inventory/design](../etc/evidence/t484-s1-build-inventory.md) completes
@@ -70,7 +80,7 @@ admission; its containing commit is the delivery identity.
 [T483 closure](../history/m0-t483-closure.md) indexes all S1-S21 outcomes,
 retained mirror decisions and known boundaries. Final production revision is
 9e7eb19c0 (S20 P85), package100b16d9-992d-4e2c-8d99-66a4e891dd26.
-The current publication is T484 S2 P1, recorded above; P85 is its behavior
+The current publication is T484 S2 P3, recorded above; P85 is its behavior
 comparison baseline. P85 Full20/20 runtime evidence is reused for this
 byte-equivalent/timestamp-only build change, not reported as a new Full run.
 

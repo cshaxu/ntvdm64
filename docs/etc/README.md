@@ -1436,5 +1436,9 @@ producer chain, DIR-ordered caller worklist, output coverage and migration desig
 [T484 S2 native TIB check](evidence/t484-s2-native-tib.md) records the second
 host build migration batch and its actual COFF/MAP checks.
 
+[T484 S2 native Hook graph](evidence/t484-s2-hook-cmake.md) records the first
+declarative host graph migration, actual published-DLL tests and the outstanding
+global WOW macro-profile finding.
+
 [T484 S2 native generator batch](evidence/t484-s2-native-generators.md) records
 the first two migrations, byte-equivalence tests and host package delivery.

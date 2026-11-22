@@ -15,6 +15,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--candidate-root', type=Path,
                         help='combined worker/native build root')
+    parser.add_argument('--component', choices=('worker', 'wow32', 'frontend', 'monitor', 'launcher', 'service', 'hook'),
+                        help='check one changed component; default checks all')
     args = parser.parse_args()
     checked = 0
     failures = []
@@ -26,6 +28,8 @@ def main():
                  ("monitor", "ntmon.exe"), ("launcher", "run16.exe"),
                  ("service", "ntsrv.exe"), ("hook", "nthook64.dll"))]
     for architecture, tree, target in targets:
+        if args.component and tree != args.component:
+            continue
         if args.candidate_root:
             candidate_tree = ("worker-x86" if architecture == "msvc-x86-release" and tree == "worker"
                               else "worker-native" if architecture == "msvc-x64-release" and tree == "worker"
@@ -55,7 +59,7 @@ def main():
             if original:
                 continue
             checked += 1
-            defined = set(re.findall(r"(?:^|\s)/D([A-Za-z_][A-Za-z_0-9]*)", command))
+            defined = set(re.findall(r"(?:^|\s)[/-]D([A-Za-z_][A-Za-z_0-9]*)", command))
             leaked = sorted(defined & FLAGS)
             if "WIN32" in defined:
                 leaked.append("WIN32")

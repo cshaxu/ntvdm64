@@ -27,6 +27,13 @@ It checks actual x86 COFF storage, linked ownership, overlap and startup
 binding. Malformed input is a failure. It does not generate product code or
 launch processes; both production and instrumented links use the same check.
 
+The AMD64 Hook graph is now owned by `hook/CMakeLists.txt`, not a PowerShell
+graph generator or a parsed x86 reference graph. Its original25 source entries
+retain their order, individual include boundaries and selected MSVC options.
+MIDL, DLL exports and the existing installer/image-machine fixtures are native
+targets in the same stable `msvc-x64-release/hook` tree. The fixture launcher
+comes from the actual native launcher producer, never published assets.
+
 `New-T310OriginalSoftpcNinja.ps1` creates the selected immutable Win32/x86
 CCPU40 formal graph in a stable CMake-validated Ninja subtree. It rejects retired
 machine inputs and may refresh only graph metadata in an existing

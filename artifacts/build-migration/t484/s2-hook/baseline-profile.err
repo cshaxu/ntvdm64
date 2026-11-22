@@ -1,0 +1,6 @@
+SoftPC profile leaked into authored code:
+msvc-x86-release/wow32: o:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_control_brush.c: ANSI, CCPU, CPU_40_STYLE, C_VID, NEW_CPU, NTVDM, PROD, SIM32, SPC386, V7VGA, WIN32
+msvc-x86-release/wow32: o:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_control_state.c: ANSI, CCPU, CPU_40_STYLE, C_VID, NEW_CPU, NTVDM, PROD, SIM32, SPC386, V7VGA, WIN32
+msvc-x86-release/wow32: o:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_control_fnid.c: ANSI, CCPU, CPU_40_STYLE, C_VID, NEW_CPU, NTVDM, PROD, SIM32, SPC386, V7VGA, WIN32
+msvc-x86-release/wow32: o:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_default_window_bits.c: ANSI, CCPU, CPU_40_STYLE, C_VID, NEW_CPU, NTVDM, PROD, SIM32, SPC386, V7VGA, WIN32
+msvc-x86-release/wow32: o:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_class_client.c: ANSI, CCPU, CPU_40_STYLE, C_VID, NEW_CPU, NTVDM, PROD, SIM32, SPC386, V7VGA, WIN32

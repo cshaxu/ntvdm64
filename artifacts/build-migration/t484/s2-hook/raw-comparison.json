@@ -1,0 +1,150 @@
+[
+  {
+    "image": "VCDEX.DLL",
+    "sha256": "E1BF8DEEBA622FA9795851F1EC597C567D372F4F125F77339D81503BB257C78E",
+    "previous_input_sha256": "E1BF8DEEBA622FA9795851F1EC597C567D372F4F125F77339D81503BB257C78E",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "run16.exe",
+    "sha256": "3611902070E5433093260CA391B636EF49067F1B54CBD1DFD0B32C28868C8FF8",
+    "previous_input_sha256": "24CD336E749CD7BE13B32074998FC2A467486F733F00C903CDCC9592676F5D36",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      248,
+      249,
+      214100,
+      214101
+    ],
+    "timestamp_fields": [
+      248,
+      214100
+    ]
+  },
+  {
+    "image": "ntsrv.exe",
+    "sha256": "8C163703A74A3D80E35E3C672C75F0F49C5CF1F18A151D888D0041EE513A1A32",
+    "previous_input_sha256": "B6A3D39C04688F6EFBF900F9BBCD9301A27A440ED985B54E44F867DA321A8661",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      256,
+      257,
+      300548,
+      300549
+    ],
+    "timestamp_fields": [
+      256,
+      300548
+    ]
+  },
+  {
+    "image": "ntcon.exe",
+    "sha256": "6A056172891DBD105BFBE44408A06A9D38EA4674DC705C50EA7F286F93DA9209",
+    "previous_input_sha256": "E6DCAB660417D3955553EB0B785E407C58FA763BBAA7242EDAAF742CF4257C01",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      264,
+      265,
+      251092,
+      251093
+    ],
+    "timestamp_fields": [
+      264,
+      251092
+    ]
+  },
+  {
+    "image": "ntvdm.exe",
+    "sha256": "F11E588BD3F0390947677040F2D6EE195E6DCCE84C54E967003C1A4814ABF943",
+    "previous_input_sha256": "000BDB6732288F96CF558D45DCB6F0626E24B3D81EBB0B4F2660018C1684C185",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      288,
+      289,
+      1719868,
+      1719869
+    ],
+    "timestamp_fields": [
+      288,
+      1791316,
+      1719868
+    ]
+  },
+  {
+    "image": "ntvwm.exe",
+    "sha256": "FCEE58407CB339645C4D5BEEA149E2F9D766981D040235B4561C632EAC72FA26",
+    "previous_input_sha256": "28E5974D29E4C74324158B3A0E8650EB8BF1F3CDCE4F7D569142767D7F4B8CB8",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      248,
+      249,
+      227268,
+      227269
+    ],
+    "timestamp_fields": [
+      248,
+      227268
+    ]
+  },
+  {
+    "image": "ntmon.exe",
+    "sha256": "ABD311B5BB798259556F827942D33FBC555B45FB183434BD467B806E86CDD30E",
+    "previous_input_sha256": "ABD311B5BB798259556F827942D33FBC555B45FB183434BD467B806E86CDD30E",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "WOW32.DLL",
+    "sha256": "5C0DC19942472ACEFC747990B2498A95AC325308807CD844F3CD7A78E7845FED",
+    "previous_input_sha256": "5C0DC19942472ACEFC747990B2498A95AC325308807CD844F3CD7A78E7845FED",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "VDMREDIR.DLL",
+    "sha256": "36177B2049F054623045A376E533A3F8D943AD8A337FAC2A797C982EC0313506",
+    "previous_input_sha256": "36177B2049F054623045A376E533A3F8D943AD8A337FAC2A797C982EC0313506",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "nthook32.dll",
+    "sha256": "387F0DE17B36C4B5620985A19D45CAB87F939910D74A0D4B41235EC48743671F",
+    "previous_input_sha256": "B584BA13C18664B11694AE62B597E9E70095225C31EEBB493DFAD26EA3AE5D39",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      272,
+      273,
+      134228,
+      134229
+    ],
+    "timestamp_fields": [
+      272,
+      203316,
+      134228
+    ]
+  },
+  {
+    "image": "nthook64.dll",
+    "sha256": "C288681C623AE9F270F640D6890E87237263544B0DDEF5DE4AFC14F01BE7297F",
+    "previous_input_sha256": "BF2FFDBB94EB4D8506A0F6DDB58053B51518D48A57B0E67D693FE9CE5E4BEE3C",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      272,
+      273,
+      274,
+      167860,
+      167861,
+      167862
+    ],
+    "timestamp_fields": [
+      272,
+      243204,
+      167860
+    ]
+  }
+]

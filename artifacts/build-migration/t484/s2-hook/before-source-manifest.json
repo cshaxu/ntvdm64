@@ -1,0 +1,132 @@
+{
+  "scope": "Hook DLL only; no worker",
+  "sources": [
+    {
+      "sha256": "5C1D5F66E55B3E5E9F7E85311508FBFD72EAA1C53450145F22969A2CE7B5E59B",
+      "object": "unit0.obj",
+      "path": "src/nthook-dll/entry.c"
+    },
+    {
+      "sha256": "EDCEA0CED39726362CEC9C8FBFC0AA548B1A15CCE95A4ABE22021FF81A0BD1B2",
+      "object": "unit1.obj",
+      "path": "src/common/rpc/memory_heap.c"
+    },
+    {
+      "sha256": "04018D7F3777636CE983C26AC4F1BAEF427A7C570165EACA69DFEAFFD8BFBBC2",
+      "object": "unit2.obj",
+      "path": "src/common/native-hook/context.c"
+    },
+    {
+      "sha256": "6B1567C3686284F15DA1941CE05F6EC4E92D0AE4A7D43F3095BD7F59C9A912AC",
+      "object": "unit3.obj",
+      "path": "src/common/native-hook/packet.c"
+    },
+    {
+      "sha256": "9CD0E65FCC8A53BF8BA02D8278DE21EA2AF7F64C6852CB5BE9F4CD662460CD13",
+      "object": "unit4.obj",
+      "path": "src/common/native-hook/installer.c"
+    },
+    {
+      "sha256": "BF528F7873CE4DF642D4540CFB963FDB6A480D2121E24266FFDE72F8FAB008C0",
+      "object": "unit5.obj",
+      "path": "src/nthook-dll/create_process.c"
+    },
+    {
+      "sha256": "5BB5C83FAD1ABEDC5E9D96573E16D47306654B856EBA1B54CBCC3717AE198DCD",
+      "object": "unit6.obj",
+      "path": "src/lib-win32/process-hook/staging.c"
+    },
+    {
+      "sha256": "7CED9AF82C88A4BD9E48B3FDD9D7B25735C2BD8DC12EC6A7BEA609FD253ED02A",
+      "object": "unit7.obj",
+      "path": "src/lib-win32/process-hook/helper.c"
+    },
+    {
+      "sha256": "37360C011349E3E6AED1B276FDFC45F30E579D3E8BBD75460EB2260B541CADE4",
+      "object": "unit8.obj",
+      "path": "src/lib-win32/process-hook/payload.c"
+    },
+    {
+      "sha256": "BC1B0CAFDF1D2C932EA729BD2588B6570D2E3291D65ABA7245794A75C93EF999",
+      "object": "unit9.obj",
+      "path": "src/lib-win32/process-hook/startup_hooks.c"
+    },
+    {
+      "sha256": "53228DE3F2A14A390F6D97538D702C20A4388EEA42E53B5B999532BAB018287B",
+      "object": "unit10.obj",
+      "path": "src/lib-win32/process-hook/minhook/src/buffer.c"
+    },
+    {
+      "sha256": "F13A169F803FF5A8E45C58CE668B4377A9878C0FC4452369B8A1325065186B2B",
+      "object": "unit11.obj",
+      "path": "src/lib-win32/process-hook/minhook/src/trampoline.c"
+    },
+    {
+      "sha256": "824EAFA315322E6DA105A7CE4EC1FC0E0ADEEE0106D32152FBB0B59E709BD15C",
+      "object": "unit12.obj",
+      "path": "src/lib-win32/process-hook/minhook/src/hde/hde64.c"
+    },
+    {
+      "sha256": "41552C4428D79636C2417355EC0CFAF57B87CE3BC20BC1E13F9B7D2F88031D1A",
+      "object": "unit13.obj",
+      "path": "src/common/native_image.c"
+    },
+    {
+      "sha256": "C9BB55054465AABA97259BC778FEEF444943022796231CA0B46FA10C0011B210",
+      "object": "unit14.obj",
+      "path": "src/lib-win32/process-image/image.c"
+    },
+    {
+      "sha256": "7036B95282FFA11D76305094C8EFC076CF0A6A864EA3FD508C993E3CE3090596",
+      "object": "unit15.obj",
+      "path": "src/lib-win32/handle/duplicate.c"
+    },
+    {
+      "sha256": "69F6CC49DA69919409B098A832CCBD9454457F44B35E238773B02AF97C727DCC",
+      "object": "unit16.obj",
+      "path": "src/lib-win32/file/identity.c"
+    },
+    {
+      "sha256": "C0C9DFD71FDAE6E0ECE52EA34BDDCF255F939808167D49EB575D0786165C766E",
+      "object": "unit17.obj",
+      "path": "src/nthook-dll/hook_classification.c"
+    },
+    {
+      "sha256": "4ADF0C53AC34F5ACAD7246F3A6D07E6B9C1E98DF0F1AD617E32110DB684A7C8A",
+      "object": "unit18.obj",
+      "path": "src/non-mvdm/base/win32/client/vdm.c"
+    },
+    {
+      "sha256": "6594A2C7A588577DA170127B5ECF12CAB7E8B15FCA062BF8A9C037EBAA062BBE",
+      "object": "unit19.obj",
+      "path": "src/compat/base_classifier_path.c"
+    },
+    {
+      "sha256": "12E153F8F1858498CE8B2A1E734829D877A853BA7BFD98255E5F653B4381FC68",
+      "object": "unit20.obj",
+      "path": "src/compat/opennt_support_rtl.c"
+    },
+    {
+      "sha256": "77FAA5A534F8E5D97FF13D152B80B210DF9CC6BBF0E0D4AB0644367DAEC175C5",
+      "object": "unit21.obj",
+      "path": "src/non-mvdm/base/ntos/rtl/error.c"
+    },
+    {
+      "sha256": "EE039C510392B4EF6E35DE0AA801248F67C6F51E75EE6B8626422CE591121858",
+      "object": "unit22.obj",
+      "path": "src/lib-win32/rpc/local_binding.c"
+    },
+    {
+      "sha256": "A5367FFE0C2AA74AB43F558BFC7A70CAE63E6B808110AE7E3113AA5C8ECE602C",
+      "object": "unit23.obj",
+      "path": "src/common/rpc/management.c"
+    },
+    {
+      "sha256": "01C44335C276FBB2F5D207549D250105666CCCE5D38455C6FBFA340C8DB66685",
+      "object": "unit24.obj",
+      "path": "src/common/base_srv/scope.c"
+    }
+  ],
+  "architecture": "AMD64",
+  "compilerCache": null
+}

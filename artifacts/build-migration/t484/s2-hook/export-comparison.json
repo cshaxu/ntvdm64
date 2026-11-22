@@ -1,0 +1,17 @@
+{
+  "equal": true,
+  "contract": {
+    "machine": 34404,
+    "exports": [
+      [
+        "NthookAnchor",
+        2
+      ],
+      [
+        "NthookContextFlags",
+        3
+      ]
+    ],
+    "function_count": 3
+  }
+}
