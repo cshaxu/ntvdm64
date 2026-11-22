@@ -1,4 +1,3 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
 /* Copyright (c) 1985-1995, Microsoft Corporation.
  * Derived from OpenNT windows/core/ntuser/client/client.c, revision
  * 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.

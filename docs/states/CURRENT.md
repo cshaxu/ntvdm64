@@ -361,3 +361,12 @@ files 27/94 complete. Non-error mirror delta 0 points/0 lines; cumulative
 Win16/COMMAND targeted tests passed; Full remains required at S20 closure.
 Package d3f202a6-ca20-4dc0-b1f7-61c4ffc54762.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p26-delivery.json).
+
+P27 completes BC1F033: removed unused private nt.h from client dispatch.
+B-C1 direct unique remains 44, compiled headers 417->411; files 28/94
+complete. Mirror delta 0 points/0 lines; cumulative +3 points/+239 lines.
+Cached full build, dual11, dispatch and real Win16/COMMAND targeted tests
+passed. Full remains required at S20 closure. Package
+741da410-408d-4c0f-97a6-ff7c1a7cbe6e. BC1F031 original-layout dependency
+remains open after a reverted incomplete experiment.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p27-delivery.json).

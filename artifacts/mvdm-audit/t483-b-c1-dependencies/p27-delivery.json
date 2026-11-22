@@ -1,0 +1,35 @@
+{
+  "packet": "M0 T483 S20 P27",
+  "baseline": "55523ee83",
+  "files_completed": [
+    "BC1F033"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 28,
+    "remaining": 66,
+    "B_C1_unique": 44,
+    "B_C1_raw": 52,
+    "B_C1_compiled_headers": 411,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct unchanged 44; compiled headers 417 to 411, no C1 header records for client dispatch.",
+  "implementation": "Removed unused nt.h include from original-extracted dispatch; selected body and behavior unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "741da410-408d-4c0f-97a6-ff7c1a7cbe6e",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "native dispatch gate: native, guest, callproc",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-client-dispatch",
+  "limitations": [
+    "Full suite required at S20 closure",
+    "BC1F031 remains open: a reverted class identity projection experiment did not eliminate the CLSMENUNAME and FNID_DIALOG original-header needs; build/t483-s20-class-identity-build.log"
+  ]
+}
