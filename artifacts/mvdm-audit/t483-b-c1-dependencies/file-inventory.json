@@ -4,7 +4,7 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 46,
+    "completed": 45,
     "direct_unique": 12,
     "direct_raw": 18,
     "compiled_header_rows": 195,
@@ -4115,7 +4115,7 @@
     {
       "id": "BC1F045",
       "file": "src/compat/wow_default_window_bindings.c",
-      "status": "completed in verified P12 delivery",
+      "status": "partial: P12 removed the function dependency; the translation unit includes C1 nt.h and accesses PWND::head.h through the original USER layout",
       "evidence": [
         {
           "kind": "linked-relocations",

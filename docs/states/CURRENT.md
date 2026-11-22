@@ -114,8 +114,9 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. As of P62, 46 of 94
-files are complete; B-to-C1 has 12 unique direct links (18 raw records),
+is authoritative for individual files and evidence. Review of P62 leaves 45 of 94
+files complete. BC1F045 still uses the C1 NT and USER headers after P12
+removed its function dependency. B-to-C1 has 12 unique direct links (18 raw records),
 195 compiled-header rows and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
