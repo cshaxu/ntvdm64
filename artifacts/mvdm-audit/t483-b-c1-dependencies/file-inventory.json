@@ -5,8 +5,8 @@
   "counts": {
     "files": 94,
     "completed": 35,
-    "direct_unique": 43,
-    "direct_raw": 51,
+    "direct_unique": 42,
+    "direct_raw": 50,
     "compiled_header_rows": 349,
     "private_search_root_rows": 0
   },
@@ -3801,7 +3801,7 @@
     {
       "id": "BC1F042",
       "file": "src/compat/wow_default_message_bindings.c",
-      "status": "not yet audited",
+      "status": "in progress: P36 removes original initializer direct call; original message-table layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -3903,7 +3903,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p36-delivery.json"
     },
     {
       "id": "BC1F043",

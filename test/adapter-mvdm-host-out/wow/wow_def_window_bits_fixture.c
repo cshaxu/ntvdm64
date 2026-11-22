@@ -1,4 +1,5 @@
 #include "wow_private_user_compat.h"
+#include "wow_default_message_bindings.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -24,6 +25,7 @@ int main(void)
         0x003b, 0x022a, 0x022b, 0x0313 };
     const WORD absent[] = { WM_NULL, WM_CREATE, WM_DESTROY, WM_USER };
 
+    if (!wow_default_messages_bind(InitMessageTables)) return 9;
     memset(storage, 0xa5, sizeof(storage));
     if (wow_private_user_get_def_window_proc_bits(NULL, 101) != 0) return 1;
     if (wow_private_user_get_def_window_proc_bits(bits, WM_PRINT / 8) != 0) return 2;

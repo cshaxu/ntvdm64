@@ -56,6 +56,8 @@ extern const WORD gawListboxWndProc[], gawComboWndProc[];
 VOID WINAPI InitMessageTables(VOID);
 VOID WINAPI InitWindowMsgTable(PBYTE *, PUINT, const WORD *);
 WORD WINAPI WowGetDefWindowProcBits(PBYTE, WORD);
+typedef VOID (WINAPI *wow_default_message_initializer)(VOID);
+BOOL WINAPI wow_default_messages_bind(wow_default_message_initializer);
 BOOL WINAPI wow_default_messages_ready(void);
 
 #ifdef WOW_ORIGINAL_MESSAGE_TABLES

@@ -6,6 +6,17 @@
  * or application callback is performed during once-initialization. */
 wow_default_message_state_type wow_default_message_state;
 static INIT_ONCE message_once = INIT_ONCE_STATIC_INIT;
+static wow_default_message_initializer message_initializer;
+
+BOOL WINAPI wow_default_messages_bind(wow_default_message_initializer provider)
+{
+    wow_default_message_initializer previous;
+    if (!provider) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    previous = (wow_default_message_initializer)InterlockedCompareExchangePointer(
+        (PVOID volatile *)&message_initializer, (PVOID)provider, NULL);
+    if (previous && previous != provider) { SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE; }
+    return TRUE;
+}
 
 static BOOL CALLBACK initialize_messages(PINIT_ONCE once, PVOID parameter,
     PVOID *context)
@@ -15,7 +26,8 @@ static BOOL CALLBACK initialize_messages(PINIT_ONCE once, PVOID parameter,
     (void)once; (void)parameter; (void)context;
     __try {
         __try {
-            InitMessageTables();
+            if (!message_initializer) RaiseFailFastException(NULL, NULL, 0);
+            message_initializer();
             /* Original server.c initializes uiShellMsg with the USER atom
              * "SHELLHOOK". RegisterWindowMessage uses that same namespace;
              * never call SetTaskmanWindow(NULL) on the host desktop. This

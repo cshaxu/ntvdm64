@@ -437,3 +437,12 @@ build, dual11, control state and real Win16/COMMAND targeted tests passed.
 Full remains required at S20 closure. Package
 3851c765-4a80-4e77-a6c6-1f5e8645dd05.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p35-delivery.json).
+
+P36 partially addresses BC1F042: original message-table initialization now
+uses a synchronous provider; the shared original layout remains open. B-C1
+direct unique 43->42 (raw 51->50), compiled headers remain 349; files 35/94
+complete. Mirror delta 0 points/0 lines; cumulative +3 points/+239 lines.
+Cached full build, dual11, allocation-failure/retry and real Win16/COMMAND
+targeted tests passed. Full remains required at S20 closure. Package
+f74f61d4-6e1c-416f-b67f-e66c4ad648e3.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p36-delivery.json).

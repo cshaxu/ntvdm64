@@ -1,0 +1,36 @@
+{
+  "packet": "M0 T483 S20 P36",
+  "baseline": "4d450a0c8",
+  "files_partial": [
+    "BC1F042"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 35,
+    "remaining": 59,
+    "B_C1_unique": 42,
+    "B_C1_raw": 50,
+    "B_C1_compiled_headers": 349,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct 43 to 42, raw 51 to 50; compiled headers remain 349. Original message-table layout remains open.",
+  "implementation": "Original C1 InitMessageTables is supplied through a synchronous provider bound before use. Existing INIT_ONCE, exception handling, partial cleanup, retry, and USER message registration remain unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "f74f61d4-6e1c-416f-b67f-e66c4ad648e3",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "message table allocation failures, cleanup, retry and original bitmap output",
+    "WOW control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-message-tables",
+  "limitations": [
+    "BC1F042 retains original message-table layout dependency",
+    "Full suite required at S20 closure"
+  ]
+}

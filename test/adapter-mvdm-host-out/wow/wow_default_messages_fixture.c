@@ -52,6 +52,7 @@ int main(void)
     WNDMSG server, client, edit, list, combo, combo_list, button;
     wow_default_message_state_type empty = {0};
     unsigned failure;
+    CHECK(wow_default_messages_bind(InitMessageTables));
     for (failure = 1; failure <= 12; ++failure) {
         allocation_count = 0;
         fail_allocation = failure;
