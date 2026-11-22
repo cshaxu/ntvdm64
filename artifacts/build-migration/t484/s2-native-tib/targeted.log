@@ -1,0 +1,10 @@
+{"public_slots":154,"private_slots":55,"quick_event_slot":"c_cpu_calc_q_ev_inst_for_time","ccpu_effective_address":"direct-c_effective_addr","original_startup_binding_order":true,"setup_bind":true,"quick_event_restart_owner":"system/qevnt.c::qevJumpRestart","gdp_initializer":"cvidc/ev_glue.c","gdp_map_verified":true,"unsupported_clear_hw_int":"null"}
+x86/worker: 112 A/B objects checked
+x86/wow32: 79 A/B objects checked
+x64/worker-reference-x86: 108 A/B objects checked
+x64/frontend: 34 A/B objects checked
+x64/service: 28 A/B objects checked
+x64/launcher: 25 A/B objects checked
+x64/monitor: 2 A/B objects checked
+x64/worker: 33 A/B objects checked
+x64/hook: 13 A/B objects checked

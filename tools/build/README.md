@@ -22,6 +22,11 @@ nor interprets build recipes. Their unchanged outputs retain their timestamps.
 They are build tools, not additional released product components. Remaining
 PowerShell/Node/Python build edges have not yet been removed by this first step.
 
+`ntvdm-tib product.map dpmiint.obj` replaces the interpreted post-link check.
+It checks actual x86 COFF storage, linked ownership, overlap and startup
+binding. Malformed input is a failure. It does not generate product code or
+launch processes; both production and instrumented links use the same check.
+
 `New-T310OriginalSoftpcNinja.ps1` creates the selected immutable Win32/x86
 CCPU40 formal graph in a stable CMake-validated Ninja subtree. It rejects retired
 machine inputs and may refresh only graph metadata in an existing

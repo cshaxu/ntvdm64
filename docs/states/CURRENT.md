@@ -50,6 +50,14 @@ contract and9-graph strict boundary checks passed. Documentation, links and
 diff checks passed. The containing S2 P1 commit is this batch's delivery
 identity. Root CMake still requires interpreters; S2 is not closed.
 
+[S2 P2](../etc/evidence/t484-s2-native-tib.md) removes the JavaScript post-link
+TIB check. Ten actual-product/rejection cases and cached full compilation
+passed. Both publication locations carry package
+d4f65024-538c-4365-a9df-2240cd637f0b;22 hashes and post-publication targeted
+checks passed. Five raw inputs are identical and six differ only by PE
+timestamps. Mirror code delta is zero. S2 remains active; graph generators,
+addon/test producers and publishing scripts are still migration work.
+
 ## S1 Closure Record
 
 [S1 inventory/design](../etc/evidence/t484-s1-build-inventory.md) completes

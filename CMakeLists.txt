@@ -77,6 +77,7 @@ set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${CMAKE_SOURCE_DIR}/src/non-mvdm/base/win32/client/vdm.c"
   "${CMAKE_SOURCE_DIR}/tools/build/native/cvidc.cpp"
   "${CMAKE_SOURCE_DIR}/tools/build/native/font.c"
+  "${CMAKE_SOURCE_DIR}/tools/build/native/tib.cpp"
   "${CMAKE_SOURCE_DIR}/tools/build/native/CMakeLists.txt"
   "${CMAKE_SOURCE_DIR}/tools/build/bootstrap.cmd"
   "${CMAKE_SOURCE_DIR}/src/mvdm-guest/softpc.new/roms/v7vga.rom"

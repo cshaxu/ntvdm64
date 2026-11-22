@@ -68,7 +68,7 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,const mvdm_soft
  if($LASTEXITCODE -or $link -notmatch '^cmd.exe /d /s /c "(.*)"$'){throw 'Cannot read actual worker link command'}
  $link=$Matches[1]
  $directInputs=@([regex]::Matches($link,'(?:^|\s)(obj/[^\s"]+\.(?:obj|res))(?=\s|$)')|ForEach-Object {Join-Path $WorkerBuildRoot $_.Groups[1].Value})
- $directInputs+=@("$WorkerBuildRoot/generated/ntvdm-wow32-provider.def","$WorkerBuildRoot/obj/adapter-monitor/mvdm_vdm_tib.obj","$repo/tools/audit/Verify-VdmTibStorage.mjs")
+ $directInputs+=@("$WorkerBuildRoot/generated/ntvdm-wow32-provider.def","$WorkerBuildRoot/obj/dpmi/dpmiint.obj","$repo/build/.ninja/build-tools/ntvdm-tib.exe")
  $directInputs|Sort-Object -Unique|Get-FileHash|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"
  $link=Replace-One $link 'link.exe ' ('link.exe "'+$root+'/page-domain-profile.obj" /implib:"'+$root+'/ntvdm.lib" ')
  $link=Replace-One $link '/out:ntvdm.exe ' ('/out:"'+$root+'/ntvdm.exe" ')

@@ -1,0 +1,57 @@
+{
+  "cases": [
+    {
+      "expectedSuccess": true,
+      "name": "actual-product",
+      "exit": 0
+    },
+    {
+      "expectedSuccess": false,
+      "name": "wrong-owner",
+      "exit": 1
+    },
+    {
+      "expectedSuccess": false,
+      "name": "missing-startup-binding",
+      "exit": 1
+    },
+    {
+      "expectedSuccess": false,
+      "name": "overlapping-symbol",
+      "exit": 1
+    },
+    {
+      "expectedSuccess": false,
+      "name": "truncated-0",
+      "exit": 1
+    },
+    {
+      "expectedSuccess": false,
+      "name": "truncated-19",
+      "exit": 1
+    },
+    {
+      "expectedSuccess": false,
+      "name": "truncated-100",
+      "exit": 1
+    },
+    {
+      "expectedSuccess": false,
+      "name": "wrong-machine",
+      "exit": 1
+    },
+    {
+      "expectedSuccess": false,
+      "name": "common-definition",
+      "exit": 1
+    },
+    {
+      "expectedSuccess": false,
+      "name": "short-storage",
+      "exit": 1
+    }
+  ],
+  "map": "43E464B84C4230D2C7C631101B1B14327754258CD4F9BACC8F450DFB0EA26A09",
+  "checker": "8B4172D44E447E12918741577169B3AF73DD7C5E0BCC6E1AF40CF0AF065D148A",
+  "object": "5FC19C60296E0065F820C944FE686CAA13E59407EC83B1E4FBC35FD507D698F0"
+}

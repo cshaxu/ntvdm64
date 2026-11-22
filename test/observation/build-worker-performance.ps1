@@ -63,7 +63,7 @@ $output=Join-Path $root 'ntvdm-performance-observer.exe'
 $map=$output+'.map'
 & $environmentPath link.exe /nologo /subsystem:console /opt:ref "/out:$output" "/map:$map" "/def:$cachePath/generated/ntvdm-wow32-provider.def" @objects @linkInputs rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib
 if($LASTEXITCODE){throw 'Measurement link failed'}
-& 'C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' "$repo/tools/audit/Verify-VdmTibStorage.mjs" $map "$cachePath/obj/adapter-monitor/mvdm_vdm_tib.obj"
+& "$repo/build/.ninja/build-tools/ntvdm-tib.exe" $map "$cachePath/obj/dpmi/dpmiint.obj"
 if($LASTEXITCODE){throw 'VDM_TIB identity failed'}
 $frontendInputs=@();$frontendOutput=$null
 if(!$WorkerOnly) {
