@@ -1,6 +1,7 @@
 #ifndef WOW_EDIT_CALL_BINDINGS_H
 #define WOW_EDIT_CALL_BINDINGS_H
 #include <windows.h>
+#include "wow_control_brush_bindings.h"
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
 #include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
@@ -9,7 +10,6 @@ BOOL WINAPI wow_edit_NtUserDefSetText(HWND, const LARGE_STRING *);
  * handles CTLCOLOR reentry. HWND/HDC/HBRUSH are already native identities. */
 BOOL WINAPI wow_edit_FillWindow(HWND, HWND, HDC, HBRUSH);
 /* Native GetControlColor service edge; original client policy precedes it. */
-HBRUSH WINAPI wow_edit_NtUserGetControlColor(HWND, HWND, HDC, UINT);
 HBRUSH WINAPI GetControlColor(HWND, HWND, HDC, UINT);
 HBRUSH WINAPI GetControlBrush(HWND, HDC, UINT);
 #if defined(WOW_ORIGINAL_CONTROL_COLOR) || defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)

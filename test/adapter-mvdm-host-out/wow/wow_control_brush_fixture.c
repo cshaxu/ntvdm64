@@ -1,3 +1,5 @@
+#include "wow_user_client_view_layout.h"
+#include "wow_user_borrow_scope.h"
 #include "wow_control_brush_bindings.h"
 #include "wow_edit_call_bindings.h"
 #include "wow_user_task_lifecycle.h"

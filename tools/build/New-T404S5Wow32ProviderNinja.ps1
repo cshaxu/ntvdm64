@@ -427,7 +427,7 @@ $dllEntryBridgeLines = @(
     'extern void __stdcall wow_bitmap_bindings_shutdown(void);',
     'extern void __stdcall wow_registry_binding_shutdown(void);',
     '#include "compat/include/wow_control_brush_bindings.h"',
-    'HBRUSH WINAPI xxxGetControlBrush(PWND, HDC, UINT);',
+    'HBRUSH WINAPI xxxGetControlBrush(struct tagWND *, HDC, UINT);',
     'int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)',
     '{',
     '    int result;',

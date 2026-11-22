@@ -395,3 +395,11 @@ BC1F037 remains open. Mirror delta 0 points/0 lines; cumulative +3 points/
 targeted tests passed. Full remains required at S20 closure. Package
 aa18ab7b-8a72-48b9-85a2-2d6b693de5fd.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p30-delivery.json).
+
+P31 completes BC1F037: WOW32 reads original WND fields; B uses HWND and
+opaque WND pointers with the existing borrow/cleanup scope. B-C1 direct
+unique remains 44, compiled headers 391->383; files 32/94 complete. Mirror
+delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full build,
+dual11, brush/control and real Win16/COMMAND targeted tests passed. Full
+remains required at S20 closure. Package 46959985-4704-4f7f-9c9f-38f3b840bae3.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p31-delivery.json).

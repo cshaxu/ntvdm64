@@ -1,8 +1,9 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_control_brush_bindings.h"
 #include "wow_window_client_state_bindings.h"
-#include "wow_edit_call_bindings.h"
-#include "wow_user_task_lifecycle.h"
+#include "wow_user_borrow_scope.h"
+#include "wow_user_native_call.h"
 
 static wow_control_brush_provider brush_provider;
 
@@ -16,19 +17,17 @@ BOOL WINAPI wow_control_brush_bind(wow_control_brush_provider provider)
     return TRUE;
 }
 
-VOID WINAPI wow_control_brush_retain(PWND state)
+VOID WINAPI wow_control_brush_retain(HWND window, struct tagWND *state)
 {
-    if (!state || !wow_user_borrow_client_state(state->head.h, state))
+    if (!state || !wow_user_borrow_client_state(window, state))
         wow_user_native_call_failed("control-brush-retain", ERROR_INVALID_STATE);
 }
 
-HBRUSH WINAPI wow_control_brush_color(PWND recipient, PWND control,
+HBRUSH WINAPI wow_control_brush_color(HWND receiver, HWND source,
     HDC dc, UINT message)
 {
     /* Both exact allocations are retained before the potentially reentrant
      * color service. Read handles before entering native USER, never after. */
-    HWND receiver = recipient->head.h;
-    HWND source = control->head.h;
     return wow_edit_NtUserGetControlColor(receiver, source, dc, message);
 }
 
@@ -36,13 +35,13 @@ HBRUSH WINAPI wow_control_brush(HWND window, HDC dc, UINT message)
 {
     DWORD error = GetLastError();
     HBRUSH result = NULL;
-    PWND state;
+    struct tagWND *state;
     wow_user_borrow_scope scope;
     if (!wow_user_borrow_enter(&scope)) return NULL;
     __try {
         state = wow_window_client_validate_hwnd(window);
         if (state) {
-            wow_control_brush_retain(state);
+            wow_control_brush_retain(window, state);
             SetLastError(error);
             if (!brush_provider) RaiseFailFastException(NULL, NULL, 0);
             result = brush_provider(state, dc, message);
