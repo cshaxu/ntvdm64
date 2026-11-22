@@ -5,9 +5,9 @@
   "counts": {
     "files": 94,
     "completed": 37,
-    "direct_unique": 33,
-    "direct_raw": 41,
-    "compiled_header_rows": 306,
+    "direct_unique": 31,
+    "direct_raw": 39,
+    "compiled_header_rows": 300,
     "private_search_root_rows": 0
   },
   "files": [
@@ -4893,7 +4893,7 @@
     {
       "id": "BC1F051",
       "file": "src/compat/wow_dialog_keyboard_binding.c",
-      "status": "not yet audited",
+      "status": "partially addressed in verified P44 delivery; transitive original USER layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -5015,7 +5015,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p44-delivery.json"
     },
     {
       "id": "BC1F052",

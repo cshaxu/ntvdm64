@@ -1,3 +1,4 @@
+#include "wow_dialog_keyboard_provider.h"
 #include "wow_dialog_creation_binding.h"
 #include "wow_dialog_context_bindings.h"
 #include "wow_user_task_lifecycle.h"
@@ -55,10 +56,12 @@ BOOL WINAPI wow_original_IsDialogMessageA(HWND w, LPMSG m) { return original(w, 
 BOOL WINAPI wow_original_IsDialogMessageW(HWND w, LPMSG m) { return original(w, m, FALSE); }
 int main(void)
 {
+    static const wow_dialog_keyboard_provider provider = { wow_original_IsDialogMessageA, wow_original_IsDialogMessageW };
     MSG message = {0};
     HWND window = (HWND)(ULONG_PTR)19;
     unsigned before;
     BOOL caught = FALSE;
+    CHECK(wow_dialog_keyboard_bind(&provider));
     message.message = WM_CHAR;
     wow_dialog_current = &outer;
     nested = TRUE;

@@ -507,3 +507,12 @@ files 37/94 complete. Mirror delta 0 points/0 lines; cumulative +3 points/
 dialog/control and real Win16/COMMAND targeted tests passed. Full remains
 required at S20 closure. Package d121d6be-d1f2-44a4-8461-b151e291662f.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p43-delivery.json).
+
+P44 partially addresses BC1F051: original IsDialogMessage A/W use a
+synchronous provider; transitive original USER layout remains open. B-C1
+direct unique 33->31 (raw 41->39), compiled headers 306->300; files 37/94
+complete. Mirror delta 0 points/0 lines; cumulative +3 points/+239 lines.
+Cached full build, dual11, CCPU modal, keyboard/control and real Win16/COMMAND
+targeted tests passed. Full remains required at S20 closure. Package
+0b83f2d0-52bb-4210-94a0-8ebc1ab666bc.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p44-delivery.json).

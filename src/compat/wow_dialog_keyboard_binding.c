@@ -1,11 +1,25 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
+#include "wow_dialog_keyboard_provider.h"
 #include "wow_dialog_creation_binding.h"
 #include "wow_dialog_context_bindings.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_borrow_scope.h"
 
-BOOL WINAPI wow_original_IsDialogMessageA(HWND, LPMSG);
-BOOL WINAPI wow_original_IsDialogMessageW(HWND, LPMSG);
+static const wow_dialog_keyboard_provider *keyboard_provider;
+BOOL WINAPI wow_dialog_keyboard_bind(const wow_dialog_keyboard_provider *provider)
+{
+    const wow_dialog_keyboard_provider *previous;
+    if (!provider || !provider->ansi || !provider->unicode) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&keyboard_provider,
+        (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
 
 /* OPENNT-HOST-119: original manager owns all keyboard behavior. This is
  * the common modeless/modal execution and retained-view boundary only. */
@@ -28,8 +42,9 @@ static BOOL dialog_message(HWND window, LPMSG message, BOOL ansi)
         if (!wow_dialog_capture_context(&context, FALSE)) __leave;
         wow_dialog_current = &context;
         SetLastError(error);
-        result = ansi ? wow_original_IsDialogMessageA(window, message) :
-            wow_original_IsDialogMessageW(window, message);
+        if (!keyboard_provider) RaiseFailFastException(NULL, NULL, 0);
+        result = ansi ? keyboard_provider->ansi(window, message) :
+            keyboard_provider->unicode(window, message);
     } __finally {
         error = GetLastError();
         wow_dialog_current = previous;
