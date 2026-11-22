@@ -38,12 +38,25 @@ VOID WINAPI wow_list_reset_double_click(void)
         wow_user_native_call_failed("list-reset-double-click", GetLastError());
 }
 
+static wow_control_extent_provider extent_provider;
+
+BOOL WINAPI wow_control_extent_bind(wow_control_extent_provider provider)
+{
+    wow_control_extent_provider previous;
+    if (!provider) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    previous = (wow_control_extent_provider)InterlockedCompareExchangePointer(
+        (PVOID volatile *)&extent_provider, (PVOID)provider, NULL);
+    if (previous && previous != provider) { SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE; }
+    return TRUE;
+}
+
 DWORD WINAPI wow_edit_control_extent(WORD fnid)
 {
     DWORD extent;
     /* Original EDIT passes the literal FNID_EDIT. Retain the registered
      * size rather than deriving it from the current window or PED layout. */
-    if (!wow_control_registered_extent(fnid, &extent))
+    if (!extent_provider) RaiseFailFastException(NULL, NULL, 0);
+    if (!extent_provider(fnid, &extent))
         wow_user_native_call_failed("edit-control-extent", ERROR_INVALID_STATE);
     return extent;
 }

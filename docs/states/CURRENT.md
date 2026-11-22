@@ -412,3 +412,11 @@ files 32/94 complete. Mirror delta 0 points/0 lines; cumulative +3 points/
 targeted tests passed. Full remains required at S20 closure. Package
 8fa9c6b7-9381-4c06-a20a-ed179130a7e2.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p32-delivery.json).
+
+P33 completes BC1F039: original control-layout size calculation is now
+WOW32-owned and supplied to B through a synchronous provider. B-C1 direct
+unique remains 43, compiled headers 377->367; files 33/94 complete. Mirror
+delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full build,
+dual11, control extents and real Win16/COMMAND targeted tests passed. Full
+remains required at S20 closure. Package 2ef4b65b-c605-4daa-86ba-627c22f70a48.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p33-delivery.json).

@@ -1,4 +1,5 @@
 #include "wow_edit_call_bindings.h"
+#include "wow_control_extent_bindings.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_client_view_layout.h"
 #include "wow_user_borrow_scope.h"
@@ -365,6 +366,7 @@ int main(void)
     BOOL caught = FALSE;
     check_reset_calls();
     SetLastError(456);
+    CHECK(wow_control_extent_bind(wow_control_registered_extent));
     CHECK(wow_edit_control_extent(FNID_EDIT) == sizeof(WND) + 6);
     CHECK(GetLastError() == 456);
     CHECK(wow_edit_control_extent(FNID_EDIT | FNID_CLEANEDUP_BIT) == sizeof(WND) + 6);
