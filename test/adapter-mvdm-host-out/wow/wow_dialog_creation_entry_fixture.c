@@ -105,6 +105,8 @@ static int create_modal(void)
 int main(void)
 {
     unsigned before, ansi;
+    static const wow_dialog_creation_provider provider = { InternalCreateDialog, wow_original_DialogBoxIndirectParamAorW };
+    CHECK(wow_dialog_creation_bind(&provider));
     runtime.thread = &thread; thread.ppi = &process; process.objects = &objects;
     /* An inner entry must restore the caller's context on success, ordinary
      * failure and SEH unwind, without releasing the caller's font. */

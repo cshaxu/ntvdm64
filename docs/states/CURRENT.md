@@ -489,3 +489,12 @@ delta 0 points/0 lines; cumulative +3 points/+239 lines. Cached full build,
 dual11, dialog context/control and real Win16/COMMAND targeted tests passed.
 Full remains required at S20 closure. Package cb487ab3-d0dd-42f8-b5bc-fdaa2f42ac91.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p41-delivery.json).
+
+P42 partially addresses BC1F049: original dialog creation and modal entry are
+supplied through one synchronous provider; original dialog layout remains open.
+B-C1 direct unique 42->40 (raw 50->48), compiled headers 318->312; files
+37/94 complete. Mirror delta 0 points/0 lines; cumulative +3 points/+239 lines.
+Cached full build, dual11, actual CCPU modal/native lifecycle, dialog/control
+and real Win16/COMMAND targeted tests passed. Full remains required at S20
+closure. Package 5109f90f-bbb6-433e-a682-3bec7ffb8176.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p42-delivery.json).

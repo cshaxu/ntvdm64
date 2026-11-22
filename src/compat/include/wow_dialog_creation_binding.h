@@ -3,6 +3,12 @@
 
 #include <windows.h>
 
+typedef struct wow_dialog_creation_provider {
+    HWND (WINAPI *create)(HANDLE, LPDLGTEMPLATE, DWORD, HWND, DLGPROC, LONG, UINT);
+    int (WINAPI *modal)(HINSTANCE, LPCDLGTEMPLATEW, HWND, DLGPROC, LPARAM, UINT);
+} wow_dialog_creation_provider;
+BOOL WINAPI wow_dialog_creation_bind(const wow_dialog_creation_provider *);
+
 /* ADAPTER-WOW-063: scoped entry to original InternalCreateDialog. Native
  * HWND creation uses the common explicit enrollment owner; no separate
  * dialog property, hook, parser or callback scheduler is retained. */

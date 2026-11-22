@@ -145,6 +145,34 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #define FreeLookasideEntry WINAPI FreeLookasideEntry
 #include "compat/include/wow_edit_lookaside_bindings.h"
 #include "compat/include/wow_user_client_view_layout.h"
+#include "compat/include/wow_default_message_bindings.h"
+/* Fixture is /Gd; bind the actual product /Gz symbols without changing their ABI. */
+HWND WINAPI fixture_InternalCreateDialog(HANDLE, LPDLGTEMPLATE, DWORD, HWND, DLGPROC, LONG, UINT);
+int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW, HWND, DLGPROC, LPARAM, DWORD);
+#pragma comment(linker, "/alternatename:_fixture_InternalCreateDialog@28=_InternalCreateDialog@28")
+static const wow_dialog_creation_provider fixture_dialog_creation_provider = {
+    fixture_InternalCreateDialog, wow_original_DialogBoxIndirectParamAorW
+};
+static const wow_default_message_provider fixture_default_message_provider = {
+    InitMessageTables, WowGetDefWindowProcBits
+};
+#include "compat/include/wow_control_state_provider.h"
+#include "compat/include/wow_control_fnid_provider.h"
+#include "compat/include/wow_control_extent_bindings.h"
+#include "compat/include/wow_control_brush_bindings.h"
+#include "compat/include/wow_control_draw_state.h"
+BOOL WINAPI wow_edit_set_window_fnid(HWND, WORD);
+void WINAPI fixture_SetWindowState(struct tagWND *, UINT);
+void WINAPI fixture_ClearWindowState(struct tagWND *, UINT);
+HBRUSH WINAPI fixture_GetControlBrush(struct tagWND *, HDC, UINT);
+BOOL WINAPI fixture_ClientDrawState(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, int, int, int, int, UINT);
+#pragma comment(linker, "/alternatename:_fixture_SetWindowState@8=_SetWindowState@8")
+#pragma comment(linker, "/alternatename:_fixture_ClearWindowState@8=_ClearWindowState@8")
+#pragma comment(linker, "/alternatename:_fixture_GetControlBrush@12=_xxxGetControlBrush@12")
+#pragma comment(linker, "/alternatename:_fixture_ClientDrawState@40=_ClientDrawState@40")
+static const wow_control_state_providers fixture_control_state_provider = {
+    fixture_SetWindowState, fixture_ClearWindowState
+};
 #define WOW_ORIGINAL_DIALOG_LAYOUT
 #include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_DIALOG_LAYOUT
@@ -6326,6 +6354,13 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 int main(int argc, char **argv)
 {
 #ifdef WOW_WINDOW_BORROW_FIXTURE
+    if (!wow_dialog_creation_bind(&fixture_dialog_creation_provider) ||
+            !wow_default_messages_bind(&fixture_default_message_provider) ||
+            !wow_control_state_bind(&fixture_control_state_provider) ||
+            !wow_control_fnid_bind(wow_edit_set_window_fnid) ||
+            !wow_control_extent_bind(wow_control_registered_extent) ||
+            !wow_control_brush_bind(fixture_GetControlBrush) ||
+            !wow_control_draw_bind(fixture_ClientDrawState)) return 13;
     if (!wow_profile_bind(wow_original_task_profile, FastGetProfileIntW) ||
             !wow_class_client_bind(&wow_fixture_class_client_provider) ||
             !wow_button_bind(wow_original_button_data, FreeLookasideEntry) ||

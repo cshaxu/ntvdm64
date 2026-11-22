@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_dialog_creation_binding.h"
 #include "wow_edit_lookaside_bindings.h"
 #include "wow_user_task_lifecycle.h"
@@ -11,10 +12,21 @@
  * initialization, revalidation and rollback. Its private native creation
  * calls use the existing explicit HWND enrollment boundary.
  * Select only with the complete dialog/EDIT dependency group. */
-HWND WINAPI InternalCreateDialog(HANDLE, LPDLGTEMPLATE, DWORD, HWND,
-    DLGPROC, LONG, UINT);
-int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW,
-    HWND, DLGPROC, LPARAM, UINT);
+static const wow_dialog_creation_provider *dialog_creation_provider;
+
+BOOL WINAPI wow_dialog_creation_bind(const wow_dialog_creation_provider *provider)
+{
+    const wow_dialog_creation_provider *previous;
+    if (!provider || !provider->create || !provider->modal) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    previous = InterlockedCompareExchangePointer((PVOID volatile *)&dialog_creation_provider,
+        (PVOID)provider, NULL);
+    if (previous && previous != provider) {
+        SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE;
+    }
+    return TRUE;
+}
 
 typedef struct wow_dialog_call_scope {
     wow_task_callback_scope task;
@@ -96,7 +108,8 @@ HWND WINAPI wow_user_server_create_dialog(HANDLE module,
     if (!wow_dialog_call_scope_enter(&scope)) return NULL;
     __try {
         SetLastError(error);
-        result = InternalCreateDialog(module, dialog_template, bytes, owner,
+        if (!dialog_creation_provider) RaiseFailFastException(NULL, NULL, 0);
+        result = dialog_creation_provider->create(module, dialog_template, bytes, owner,
             procedure, init_parameter, flags);
     } __finally {
         wow_dialog_call_scope_leave(&scope);
@@ -116,7 +129,8 @@ int WINAPI wow_user_dialog_box_indirect_param(HINSTANCE module,
     if (!wow_dialog_call_scope_enter(&scope)) return -1;
     __try {
         SetLastError(error);
-        result = wow_original_DialogBoxIndirectParamAorW(module,
+        if (!dialog_creation_provider) RaiseFailFastException(NULL, NULL, 0);
+        result = dialog_creation_provider->modal(module,
             dialog_template, owner, procedure, init_parameter, flags);
     } __finally {
         wow_dialog_call_scope_leave(&scope);

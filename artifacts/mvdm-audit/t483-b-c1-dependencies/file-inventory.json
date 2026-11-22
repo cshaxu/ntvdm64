@@ -5,9 +5,9 @@
   "counts": {
     "files": 94,
     "completed": 37,
-    "direct_unique": 42,
-    "direct_raw": 50,
-    "compiled_header_rows": 318,
+    "direct_unique": 40,
+    "direct_raw": 48,
+    "compiled_header_rows": 312,
     "private_search_root_rows": 0
   },
   "files": [
@@ -4547,7 +4547,7 @@
     {
       "id": "BC1F049",
       "file": "src/compat/wow_dialog_creation_binding.c",
-      "status": "not yet audited",
+      "status": "in progress: P42 removes original creation direct calls and private NT headers; original dialog layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -4689,7 +4689,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p42-delivery.json"
     },
     {
       "id": "BC1F050",
