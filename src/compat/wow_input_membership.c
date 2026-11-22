@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 /* Copyright (c) 1985-91, Microsoft Corporation.
  * Derived from OpenNT windows/core/ntuser/kernel/input.c, AddAttachment and
  * Recalc2, revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.
