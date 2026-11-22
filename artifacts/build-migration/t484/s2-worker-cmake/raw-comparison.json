@@ -1,0 +1,317 @@
+[
+  {
+    "image": "VCDEX.DLL",
+    "sha256": "9F6070764ECD16AC24857BEC9B40539E2465AC89C7A236D403B74D396D88930F",
+    "previous_input_sha256": "E1BF8DEEBA622FA9795851F1EC597C567D372F4F125F77339D81503BB257C78E",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      240,
+      241,
+      242,
+      5964,
+      5965,
+      5966
+    ],
+    "timestamp_fields": [
+      240,
+      6020,
+      5964
+    ]
+  },
+  {
+    "image": "run16.exe",
+    "sha256": "A59AEAA33FD8B2B42150D63B96024C6B4761F98F46D71F4C09073731B6C35031",
+    "previous_input_sha256": "8A12EDCFAE515904BB4860D1B0186EBC0DDE9C5877257530402755F4F87E83BD",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      248,
+      249,
+      214100,
+      214101
+    ],
+    "timestamp_fields": [
+      248,
+      214100
+    ]
+  },
+  {
+    "image": "ntsrv.exe",
+    "sha256": "DB3DF7B9F6F92522A53FCB6033AD76D1A548517EA7762E00D29208F21044F761",
+    "previous_input_sha256": "818D9CFF8FC7194CCD9087078A24EFEA1D0A225FB50FA65C5C0A07EDCFD70782",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      256,
+      257,
+      300548,
+      300549
+    ],
+    "timestamp_fields": [
+      256,
+      300548
+    ]
+  },
+  {
+    "image": "ntcon.exe",
+    "sha256": "A764D839D92C1A29F3E53098C89B35AD691F8E4DF83D3ACDB09E7BF1FEA9A946",
+    "previous_input_sha256": "0112D1460871C6BE78825C0038FF6A50303A3C50AED050E4150F8FC0462E04DA",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      264,
+      265,
+      251092,
+      251093
+    ],
+    "timestamp_fields": [
+      264,
+      251092
+    ]
+  },
+  {
+    "image": "ntvdm.exe",
+    "sha256": "7BAAB1E8830798F7F44BD258C6EB7F602E8A2960D6089BC05D08136AB1D23268",
+    "previous_input_sha256": "137E5887BFE2F64664D5FE81DC887DA3EE0A775E76A5287AF9E2AF290D61D399",
+    "classification": "pe-timestamps-and-diagnostic-path-separators",
+    "differing_bytes": 84,
+    "offsets": [
+      288,
+      289,
+      1653938,
+      1653950,
+      1653958,
+      1653962,
+      1653972,
+      1653983,
+      1653988,
+      1653996,
+      1705602,
+      1705614,
+      1705622,
+      1705626,
+      1705636,
+      1705647,
+      1705652,
+      1705656,
+      1705674,
+      1705686,
+      1705694,
+      1705698,
+      1705708,
+      1705719,
+      1705724,
+      1705728,
+      1706442,
+      1706454,
+      1706462,
+      1706466,
+      1706476,
+      1706487,
+      1706492,
+      1706496,
+      1706514,
+      1706526,
+      1706534,
+      1706538,
+      1706548,
+      1706559,
+      1706564,
+      1706568,
+      1706642,
+      1706654,
+      1706662,
+      1706666,
+      1706676,
+      1706687,
+      1706692,
+      1706696,
+      1706810,
+      1706822,
+      1706830,
+      1706834,
+      1706844,
+      1706855,
+      1706860,
+      1706864,
+      1706882,
+      1706894,
+      1706902,
+      1706906,
+      1706916,
+      1706927,
+      1706932,
+      1706936,
+      1706970,
+      1706982,
+      1706990,
+      1706994,
+      1707004,
+      1707015,
+      1707020,
+      1707024,
+      1707858,
+      1707870,
+      1707878,
+      1707882,
+      1707892,
+      1707903
+    ],
+    "timestamp_fields": [
+      288,
+      1791316,
+      1719868
+    ],
+    "path_changes": [
+      {
+        "offset": 1653936,
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+        "changed_bytes": 8
+      },
+      {
+        "offset": 1705600,
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_timer.c",
+        "changed_bytes": 8
+      },
+      {
+        "offset": 1705672,
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_event.c",
+        "changed_bytes": 8
+      },
+      {
+        "offset": 1706440,
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_com.c",
+        "changed_bytes": 8
+      },
+      {
+        "offset": 1706512,
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+        "changed_bytes": 8
+      },
+      {
+        "offset": 1706640,
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_graph.c",
+        "changed_bytes": 8
+      },
+      {
+        "offset": 1706808,
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+        "changed_bytes": 8
+      },
+      {
+        "offset": 1706880,
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+        "changed_bytes": 8
+      },
+      {
+        "offset": 1706968,
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+        "changed_bytes": 8
+      },
+      {
+        "offset": 1707856,
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_det.c",
+        "changed_bytes": 8
+      }
+    ],
+    "diagnostic_path_bytes": 80
+  },
+  {
+    "image": "ntvwm.exe",
+    "sha256": "42F7B8C8B4329750AA6CFF531AF1A81382583C88E19912792B95E02979BF38D6",
+    "previous_input_sha256": "897035C498671618162D509313ED1D17B9C9434C0393F3CA196C20CA8AE7EDF4",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      248,
+      249,
+      227268,
+      227269
+    ],
+    "timestamp_fields": [
+      248,
+      227268
+    ]
+  },
+  {
+    "image": "ntmon.exe",
+    "sha256": "E18D050B5BE8257D9461CCAD3260AAC10759EE77750B99909C88933FA1F44012",
+    "previous_input_sha256": "AB735597F133BAB1DAAE07113FA80CBC8382B9CE293B3BFED9A86060BCFCD0A8",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      256,
+      257,
+      148180,
+      148181
+    ],
+    "timestamp_fields": [
+      256,
+      148180
+    ]
+  },
+  {
+    "image": "WOW32.DLL",
+    "sha256": "EB1143FABA9148E9A9CE2C59172968A7F2C6BD807E454198ED896E0E78E9901C",
+    "previous_input_sha256": "E3389B4915904032473C2AA77F25742B7BD4E7F8AD073D92E3C05C5F5B02630F",
+    "classification": "raw-baseline-not-retained",
+    "published_comparison": "wow32-published-comparison.json"
+  },
+  {
+    "image": "VDMREDIR.DLL",
+    "sha256": "C6157E1E97B7849AD66152BA03E3C72FC03B760166759C3F3A92EBE904D6C42F",
+    "previous_input_sha256": "36177B2049F054623045A376E533A3F8D943AD8A337FAC2A797C982EC0313506",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      288,
+      289,
+      290,
+      124244,
+      124245,
+      124246
+    ],
+    "timestamp_fields": [
+      288,
+      192772,
+      124244
+    ]
+  },
+  {
+    "image": "nthook32.dll",
+    "sha256": "28C39F64D15FEF6D6D7EE170329AD606F95008A23007E1318AC4C05B7A9865D4",
+    "previous_input_sha256": "071A598892D7E14077D1BFD65F0FF4F32FF6208A0BC16FD2F99CC920F6B7FFE0",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      272,
+      273,
+      134228,
+      134229
+    ],
+    "timestamp_fields": [
+      272,
+      203316,
+      134228
+    ]
+  },
+  {
+    "image": "nthook64.dll",
+    "sha256": "3ABDD8D2C02CED6121F587ABA34AD5635FA935F2FDC61278B5485D03FAF59EEA",
+    "previous_input_sha256": "C288681C623AE9F270F640D6890E87237263544B0DDEF5DE4AFC14F01BE7297F",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 4,
+    "offsets": [
+      272,
+      273,
+      167860,
+      167861
+    ],
+    "timestamp_fields": [
+      272,
+      243204,
+      167860
+    ]
+  }
+]

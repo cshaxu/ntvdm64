@@ -2,30 +2,30 @@
 
 ## Current Work
 
-**Active: M0 T484 S2** (Ordinary Mode). Owner requested continuous execution
-through T484 closure. S1 inventory/design is complete as bounded research;
-implementation and fresh build acceptance remain outstanding.
+**Active: M0 T484 S3** (Ordinary Mode). Owner requested continuous execution
+through T484 closure. S2 host migration is complete; S3 addon/test producers
+are now admitted. Final interpreter-free clean acceptance remains S5.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T484 S2, Ordinary Mode. |
+| Identifier Mode | M0 T484 S3, Ordinary Mode. |
 | Admission And Approval | Owner: 准入新t任务！要求构建脚步去除python powershell javascript 仅使用cmd. |
 | Original Owner Request | Admit unified build/release; CMD-only build scripts, removing Python, PowerShell and JavaScript dependencies. |
-| Objective | Replace host configuration, source generation and compile/link orchestration with CMD and native declarative build tools; preserve all eleven image closures and caches. |
+| Objective | Migrate all14 authored addon producers and test-binary production callers to CMD/native declarative targets; retire the old worker generator and interpreted producer chains while preserving actual source/flag/ABI closures. |
 | Candidate Proposal | [Unified build/release](../proposals/proposal-unified-build-cmd-release-001.md) |
 | Reference Baseline | T483 closure e74afba09; product P85 9e7eb19c0, package100b16d9-992d-4e2c-8d99-66a4e891dd26. |
-| Files And ABI Surface | Build entrypoints, CMake/Ninja generators, generated sources, addon/test compilation and publication tools; no product ABI changes at admission. |
+| Files And ABI Surface | Addon/test build entrypoints, native CMake/ASM/RC generation and consumer references; no original guest or product ABI change. |
 | Applicable Rules | CMD-only project build scripting, existing layers, source-owner inventories and caches, immutable original guest, truthful failures. |
-| Verification | Source/flag/export inventory comparison, real x86/x64 compilation, targeted regression, coherent dual publication, documentation/link/diff gates; final interpreter-free clean acceptance remains S5. |
+| Verification | Reconcile14 addon outputs and live test producers; actual compilation and targeted tests, coherent dual publication for changed products, docs/link/diff gates. Full clean/interpreter-free acceptance remains S5. |
 | Expected Markers | Canonical declarative source groups, CMD entry, generated source identity, native toolchain and cache identity, no forbidden interpreter in the migrated host path. |
 | Asset Needs | Existing source/toolchains and approved assets only. |
 | Non-goals | No runtime redesign, mirror audit, original guest rebuild or wholesale standalone test/audit language conversion. |
 | Similar-Issue Sweep | Nested interpreters, configure hooks, generated commands, post-link steps, manifest/hash tools, addon/test producers and clean bootstrap. |
 | Reporting Requirements | Separate admission, inventory, implementation and delivery; count remaining forbidden-interpreter build edges and output coverage. |
 | Stop Conditions | No forbidden interpreter behind CMD or another script mode; no parallel build graph or stale output as clean-build proof. |
-| Exit Criteria | Eleven host images built through the migrated host path, preserved source/ABI boundaries, applicable tests and coherent published/committed/pushed delivery; no cached-only clean-build claim. |
+| Exit Criteria | All14 authored addons and current test-binary production paths use native/CMD producers; retired callers repaired, required tests/publication/commit/push complete; standalone assertion languages may remain. |
 
 ## Current Progress
 
@@ -37,8 +37,8 @@ for. S2 P1 migrates two native data generators; the remaining candidate
 dispositions are not marked complete.
 
 The [execution plan](../etc/operations/t484-cmd-build-release-plan.md) defines
-the whole task. S2 now owns implementation; addon/test producer migration and
-release consolidation remain sequential S3/S4 obligations. Existing release
+the whole task. S2 host migration is complete; S3 now owns addon/test producer migration.
+Release consolidation remains S4. Existing release
 images and previous-task staging directories must not become bootstrap inputs.
 
 [S2 P1](../etc/evidence/t484-s2-native-generators.md): removed the interpreted
@@ -94,6 +94,25 @@ packaged private-desktop lifecycle fixtures passed. The initial incomplete
 fixture invocation is recorded, not counted as passed. One host graph
 generator remains; S2 is not closed, and S3-S5 remain outstanding.
 
+[S2 P7 worker migration](../etc/evidence/t484-s2-worker-cmake.md) completes the
+host chain:791 compiler profiles,67 archives,153 links and274 export lines
+are reconciled, with one explicit fixture-link correction. Initial and final
+cached full builds passed; package d8983d2b-3fe1-4d18-8ea9-64613c84346c is
+published to both locations with22 hashes checked. COMMAND launch/capture,
+C-VID and8 DPMI/CCPU cases passed. Two configurations preserve generated
+input bytes/timestamps and cause no rebuild. No product implementation,
+mirror or original guest changed. Detailed raw/package comparisons and the
+two corrected fixture failures are recorded separately in the evidence.
+
+## S2 Closure Record
+
+[S2 closure](../etc/evidence/t484-s2-worker-cmake.md) completes native host composition and the CMD build entry. Its containing
+P7 commit is the delivery identity. S3 is admitted under the owner's standing
+continuous T484 authorization: migrate14 authored addons and test-binary
+producers, repair all old generator consumers and retire superseded scripts.
+No standalone test/audit language conversion or original guest rebuild is
+admitted. S4 publication migration and S5 full clean acceptance remain open.
+
 ## S1 Closure Record
 
 [S1 inventory/design](../etc/evidence/t484-s1-build-inventory.md) completes
@@ -106,7 +125,7 @@ admission; its containing commit is the delivery identity.
 [T483 closure](../history/m0-t483-closure.md) indexes all S1-S21 outcomes,
 retained mirror decisions and known boundaries. Final production revision is
 9e7eb19c0 (S20 P85), package100b16d9-992d-4e2c-8d99-66a4e891dd26.
-The current publication is T484 S2 P6, recorded above; P85 is its behavior
+The current publication is T484 S2 P7, recorded above; P85 is its behavior
 comparison baseline. P85 Full20/20 runtime evidence is reused for this
 byte-equivalent/timestamp-only build change, not reported as a new Full run.
 
@@ -128,7 +147,7 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S1 P2 records inventory/design and admits S2 under the owner's full-task
-authorization. Documentation, relative-link and diff checks passed. The containing
+T484 S2 P7 records host migration closure and admits S3 under the owner's
+full-task authorization. Documentation, relative-link and diff checks passed. The containing
 commit is its delivery identity; this does not claim a new product build, test
 or publication. Queue order is unchanged.

@@ -1,0 +1,43 @@
+# These compatibility output locations consume actual AMD64 build producers,
+# never assets/release or an installed package. The top-level build orders
+# native production before configuring the x86 consumer.
+foreach(pair IN ITEMS worker/ntvwm frontend/ntcon monitor/ntmon launcher/run16 service/ntsrv)
+  string(REPLACE "/" ";" parts "${pair}")
+  list(GET parts 0 component)
+  list(GET parts 1 image)
+  set(source "${NTVDM_REPO}/build/.ninja/msvc-x64-release/${component}/${image}.exe")
+  if(NOT EXISTS "${source}")
+    message(FATAL_ERROR "Build the native ${component} producer first")
+  endif()
+  file(SIZE "${source}" size)
+  if(size LESS 64)
+    message(FATAL_ERROR "Truncated native producer: ${source}")
+  endif()
+  file(READ "${source}" offset_hex OFFSET 60 LIMIT 4 HEX)
+  string(REGEX REPLACE "(..)(..)(..)(..)" "\\4\\3\\2\\1" offset_hex "${offset_hex}")
+  math(EXPR offset "0x${offset_hex}")
+  math(EXPR required "${offset}+94")
+  if(required GREATER size)
+    message(FATAL_ERROR "Invalid native PE offset: ${source}")
+  endif()
+  file(READ "${source}" header OFFSET ${offset} LIMIT 94 HEX)
+  string(SUBSTRING "${header}" 0 12 signature)
+  string(SUBSTRING "${header}" 44 4 characteristics)
+  string(REGEX REPLACE "(..)(..)" "\\2\\1" characteristics "${characteristics}")
+  math(EXPR is_dll "0x${characteristics} & 0x2000")
+  string(SUBSTRING "${header}" 184 4 subsystem)
+  set(expected 0300)
+  if(component STREQUAL "service")
+    set(expected 0200)
+  endif()
+  if(NOT signature STREQUAL "504500006486" OR is_dll OR NOT subsystem STREQUAL expected)
+    message(FATAL_ERROR "Expected AMD64 EXE with selected subsystem: ${source}")
+  endif()
+  set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${source}")
+  add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/${image}.exe"
+    COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${source}" "${image}.exe"
+    COMMAND "${CMAKE_COMMAND}" -E compare_files "${source}" "${image}.exe"
+    COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${source}.map" "${image}.exe.map"
+    DEPENDS "${source}" "${source}.map" VERBATIM)
+  add_custom_target(import_${image} DEPENDS "${CMAKE_BINARY_DIR}/${image}.exe")
+endforeach()

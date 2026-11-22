@@ -1,7 +1,6 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)][string]$BuildRoot,
-    [Parameter(Mandatory)][string]$NodeExecutable,
     [Parameter(Mandatory)][string]$NinjaExecutable
 )
 $ErrorActionPreference='Stop'
@@ -17,9 +16,8 @@ $before=@($files | ForEach-Object {
     [pscustomobject]@{Path=$path;Hash=(Get-FileHash $path).Hash;Ticks=(Get-Item $path).LastWriteTimeUtc.Ticks}
 })
 for($iteration=0;$iteration -lt 2;$iteration++){
-    & (Join-Path $repo 'tools/build/New-T310OriginalSoftpcNinja.ps1') -Architecture x86 `
-        -RepositoryRoot $repo -BuildRoot $BuildRoot -NodeExecutable $NodeExecutable -NinjaExecutable $NinjaExecutable
-    if(!$?){throw 'Graph generation failed'}
+    & (Join-Path $BuildRoot 'msvc-x86.cmd') cmake -S (Join-Path $repo 'tools/build/worker') -B $BuildRoot
+    if($LASTEXITCODE){throw 'Graph configuration failed'}
     foreach($entry in $before){
         if((Get-FileHash $entry.Path).Hash -ne $entry.Hash -or
             (Get-Item $entry.Path).LastWriteTimeUtc.Ticks -ne $entry.Ticks){

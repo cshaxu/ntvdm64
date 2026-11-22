@@ -1,0 +1,7 @@
+{
+  "exit": 1,
+  "error": "Fixture failed: ntvdm-command-launch-test.exe- exit=1",
+  "pid": 28992,
+  "finished": "2026-11-22T18:23:08.1611264+00:00",
+  "started": "2026-11-22T18:22:46.4391859+00:00"
+}

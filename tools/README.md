@@ -35,7 +35,8 @@ or recompilation of original Microsoft guests; apply the
 | probe | Reusable diagnostic or read-only inspection entrypoints. |
 
 Do not classify a script as obsolete merely from a T-number in its name:
-CMake still invokes New-T310OriginalSoftpcNinja.ps1. Current call chains,
+Some test tools still inspect New-T310OriginalSoftpcNinja.ps1 while their
+producer migration is pending; the product CMake path no longer calls it. Current call chains,
 declared manual entrypoints and evidence dependencies determine retention.
 
 The retained historical/, import/, observation/ and research/ directories,

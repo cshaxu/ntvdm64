@@ -1,0 +1,1 @@
+PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, CHAIN2 physical addresses/read strings/CCPU SAS moves and fills/subsequent activation, unknown read/mark selectors, negative control, concurrent scratch preservation

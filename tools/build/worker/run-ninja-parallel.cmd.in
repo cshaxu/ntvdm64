@@ -1,0 +1,7 @@
+@echo off
+setlocal EnableExtensions DisableDelayedExpansion
+call "@NTVDM_VSDEVCMD@" -arch=x86 -host_arch=x64 >nul
+if errorlevel 1 exit /b %errorlevel%
+if not defined MVDM_BUILD_JOBS set MVDM_BUILD_JOBS=8
+"@CMAKE_MAKE_PROGRAM@" -C "@CMAKE_BINARY_DIR@" -j %MVDM_BUILD_JOBS% %*
+exit /b %errorlevel%

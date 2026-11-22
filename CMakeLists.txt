@@ -40,34 +40,6 @@ endif()
 # owners consume generated headers. The remaining graph migration is separate.
 execute_process(COMMAND cmd.exe /d /c call "${CMAKE_SOURCE_DIR}/tools/build/bootstrap.cmd"
   WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" COMMAND_ERROR_IS_FATAL ANY)
-set(_native_args)
-if(NTVDM_ARCHITECTURE STREQUAL "x86")
-  find_program(NTVDM_POWERSHELL NAMES pwsh REQUIRED)
-  find_program(NTVDM_NODE NAMES node REQUIRED)
-  set(_worker_tree "${CMAKE_BINARY_DIR}/worker")
-  # The existing image importer deliberately accepts build-owned producers
-  # only. Identity-preserving generated prerequisites satisfy that contract;
-  # never relax it or read/copy an installed Windows directory.
-  foreach(_pair Worker/ntvwm Frontend/ntcon Monitor/ntmon Launcher/run16 Service/ntsrv)
-    string(REPLACE "/" ";" _parts "${_pair}")
-    list(GET _parts 0 _option)
-    list(GET _parts 1 _image)
-    configure_file("assets/release/${_image}.exe" "native-inputs/${_image}.exe" COPYONLY)
-    list(APPEND _native_args "-Native${_option}" "${CMAKE_BINARY_DIR}/native-inputs/${_image}.exe")
-  endforeach()
-endif()
-set(_cache_args)
-if(NTVDM_USE_CCACHE)
-  list(APPEND _cache_args -CompilerCache "${NTVDM_CCACHE_EXECUTABLE}")
-endif()
-function(ntvdm_generate script)
-  set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
-    "${CMAKE_SOURCE_DIR}/tools/build/${script}"
-    "${CMAKE_SOURCE_DIR}/tools/build/Initialize-NinjaTree.ps1")
-  execute_process(COMMAND "${NTVDM_POWERSHELL}" -NoProfile -ExecutionPolicy Bypass
-    -File "${CMAKE_SOURCE_DIR}/tools/build/${script}" ${ARGN} ${_cache_args}
-    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" COMMAND_ERROR_IS_FATAL ANY)
-endfunction()
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/obj.vdm/ntvdm.src"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/ntvdm-export-ordinals.csv"
@@ -95,11 +67,15 @@ set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/egaports.h"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/host/inc/nt_graph.h")
 if(NTVDM_ARCHITECTURE STREQUAL "x86")
-  ntvdm_generate(New-T310OriginalSoftpcNinja.ps1 -Architecture x86
-    -RepositoryRoot "${CMAKE_SOURCE_DIR}" -BuildRoot "${_worker_tree}"
-    -NodeExecutable "${NTVDM_NODE}"
-    -NinjaExecutable "${CMAKE_MAKE_PROGRAM}" ${_native_args})
-  add_custom_target(worker COMMAND cmd /d /c "${_worker_tree}/run-ninja-parallel.cmd" ntvdm.exe VCDEX.DLL
+  set(_worker_tree "${CMAKE_BINARY_DIR}/worker")
+  execute_process(COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_SOURCE_DIR}/tools/build/worker"
+    -B "${_worker_tree}" -G Ninja "-DCMAKE_BUILD_TYPE=Release"
+    "-DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}" "-DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}"
+    "-DNTVDM_USE_CCACHE=${NTVDM_USE_CCACHE}" "-DNTVDM_CCACHE_EXECUTABLE=${NTVDM_CCACHE_EXECUTABLE}"
+    COMMAND_ERROR_IS_FATAL ANY)
+  add_custom_target(worker COMMAND cmd /d /c "${_worker_tree}/run-ninja-parallel.cmd"
+    ntvdm.exe VCDEX.DLL VDMREDIR.dll nthook32.dll
+    ntvwm.exe ntcon.exe ntmon.exe run16.exe ntsrv.exe
     BYPRODUCTS "${_worker_tree}/ntvdm.lib"
     USES_TERMINAL)
   # WOW32 consumes the actual parent's import library; configure only

@@ -14,8 +14,8 @@ The workspace was clean at admission; this delivery changes documents only.
 | Stage | Scope | Completion witness |
 | --- | --- | --- |
 | S1 (research complete) | DIR-ordered build/generation/publication inventory, actual callers/outputs, architectures, toolchain bootstrap and migration design. | [Inventory/design](../evidence/t484-s1-build-inventory.md);355 migration candidates are not355 proved live calls. |
-| S2 (active) | CMD entry and host configuration/build/code-generation chain. | All eleven host images; preserved ABI/source selections/cache invalidation; no hidden forbidden interpreter. |
-| S3 | Authored addon producers and dependent test-binary compilation; shared setup consolidation. | Every addon output accounted for; no original guest rebuild or test binary in release. |
+| S2 (complete) | CMD entry and host configuration/build/code-generation chain. | All eleven host images; preserved ABI/source selections/cache invalidation; no hidden forbidden interpreter. |
+| S3 (active) | Authored addon producers and dependent test-binary compilation; shared setup consolidation. | Every addon output accounted for; no original guest rebuild or test binary in release. |
 | S4 | CMD staging, manifests, hashes and publication; retire migrated wrappers and repair callers. | Complete host/addon sets, nonzero failures and no mixed package reported successful. |
 | S5 | Clean/cached end-to-end validation and closure. | Clean bootstrap, no-op/changed-input rebuilds, outside-repo invocation, prerequisite/component/publication failure cases, relevant regression, verified publication and pushed delivery. |
 

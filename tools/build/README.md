@@ -34,14 +34,19 @@ MIDL, DLL exports and the existing installer/image-machine fixtures are native
 targets in the same stable `msvc-x64-release/hook` tree. The fixture launcher
 comes from the actual native launcher producer, never published assets.
 
-`New-T310OriginalSoftpcNinja.ps1` creates the selected immutable Win32/x86
-CCPU40 formal graph in a stable CMake-validated Ninja subtree. It rejects retired
-machine inputs and may refresh only graph metadata in an existing
-tree; it never imports cache output as a source or release input.
+`tools/build.cmd` configures and builds all eleven host images with native
+CMake/Ninja, building AMD64 producers before their x86 consumers. It works
+from any current directory and accepts optional `x64` or `x86` selection;
+x86 requires the current native producers. `worker/CMakeLists.txt` owns the
+CCPU40 worker, VCDEX, VDMREDIR, Hook32 and existing worker fixtures. Original
+source lists, selected flags, export ordinals and source hashes remain live
+inputs. No released package is used to bootstrap host compilation.
 
-The formal product graph requires explicit `-NativeWorker` and
-`-NativeFrontend` and `-NativeMonitor` AMD64 producer images; it cannot silently
-link x86 NTVWM, NTCON or NTMON. The five AMD64 consumers are now owned by
+The old T310 generator remains temporarily for test-producer callers awaiting
+S3 migration; it is no longer called by the product configure/build entry.
+Publication is still the separate S4 migration obligation.
+
+The five AMD64 consumers are now owned by
 `native-family/CMakeLists.txt` and their component source/link lists. They do not
 consume an x86 reference graph or invoke an interpreted graph generator. Native
 MIDL, original configuration extraction and manifest hashing remain live input

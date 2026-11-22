@@ -1,0 +1,6 @@
+raw CreateProcess startup handles before=90 after=96
+raw CreatePipe startup handles before=96 after=97
+request 0 child exit=65
+request 1 child exit=66
+handles before=101 after=99 expected=99
+PASS 71 per-request launch assertions

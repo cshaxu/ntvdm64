@@ -1,0 +1,7 @@
+include("${CMAKE_CURRENT_LIST_DIR}/../NxvmImports.cmake")
+set(nxvm_objects)
+foreach(path IN LISTS nxvm_sources)
+  string(REGEX REPLACE "[.]c$" ".obj" object "obj/frontend/window/${path}")
+  worker_unit("${object}" "${NTVDM_REPO}/src/${path}" "${profile_47}")
+  list(APPEND nxvm_objects "${object}")
+endforeach()

@@ -42,7 +42,12 @@ static int child(int argc,char **argv)
     BOOL present;
     if(argc!=4)return 91;
     forbidden=(HANDLE)(ULONG_PTR)_strtoui64(argv[3],NULL,16);
-    present=GetHandleInformation(forbidden,&flags);
+    /* The negative inheritance probe may raise STATUS_INVALID_HANDLE on
+     * Windows with strict handle checks. That is evidence of absence;
+     * every other exception remains a real test failure. */
+    __try { present=GetHandleInformation(forbidden,&flags); }
+    __except(GetExceptionCode()==0xc0000008u ?
+        EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { present=FALSE; }
     if(!compare || !GetEnvironmentVariableA("FOREIGN_EVENT",value,sizeof(value)))return 92;
     reference=OpenEventA(SYNCHRONIZE,FALSE,value);
     if(!reference)return 92;
