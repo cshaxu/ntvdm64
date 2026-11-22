@@ -1,0 +1,53 @@
+{
+  "packet": "M0 T483 S20 P19",
+  "baseline": "119b798e6",
+  "files_completed": [],
+  "partial_files": [
+    "BC1F021"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 23,
+    "remaining": 71,
+    "B_C1_unique": 52,
+    "B_C1_raw": 64,
+    "B_C1_compiled_headers": 458,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct 53 to 52; compiled header records 460 to 458. Standard-class RtlCaptureAnsiString direct relocation removed.",
+  "implementation": "B standard-class reuses the image-lifetime standard-class provider with C1 original capture callback, accepts SDK UNICODE_STRING and frees the forced process-heap allocation after import. C1 original RtlCaptureAnsiString owns the exact conversion and allocation. F composes the provider before DLL initialization; no duplicate private IN_STRING definition, queue or new lifetime.",
+  "mirror": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+    "before": "2points/3lines",
+    "after": "2points/12lines",
+    "delta": "0points/+9lines",
+    "cumulative_S20": "+2points/+233lines",
+    "register": "R2753",
+    "line_mapping": "existing #line17 follows inserted provider; paired error parser zero issues"
+  },
+  "package": "38a14d52-2234-4c07-803b-b4faa394f273",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32;22 hashes verified",
+  "tests": [
+    "standard-class real CCPU nine native classes and cleanup",
+    "init-notification registration, retry, exhaustion, exception, retirement",
+    "task-lifecycle nine projected classes and retry",
+    "full control focused fixtures including real original capture",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "11 architecture tests and product graphs",
+    "governance and links"
+  ],
+  "failed_attempts": [
+    "Standard-class fixture initially lacked explicit original USER view and DIALOG declarations; corrected test source.",
+    "Combined fixtures initially lacked product profile, cleanup, text, bitmap and default-window provider binding; restored actual providers and reran.",
+    "Init-notification fixture also needed explicit WOW ABI and real profile/cleanup binding; corrected and reran."
+  ],
+  "evidence": "build/t483-s20-class-capture",
+  "limitations": [
+    "BC1F021 not closed: shared capture header still used by class-client and original query paths",
+    "No full suite in P19; P16 Full passed separately"
+  ]
+}

@@ -1,18 +1,24 @@
 /* The original declaration relies on the provider's /Gz. Annotate that one
  * declaration while this host fixture uses cdecl worker/session headers. */
 #define UserRegisterWowHandlers __stdcall UserRegisterWowHandlers
+#include "wow_shared_user_abi.h"
 #include "wow_user_task_lifecycle.h"
 #undef UserRegisterWowHandlers
 #include "ntvdm-exe/session/session.h"
 #include <stdio.h>
 #include "wow_standard_class_provider.h"
+#include "wow_task_profile_bindings.h"
+#include "wow_cleanup_bindings.h"
+extern UINT WINAPI wow_original_task_profile(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
+extern const wow_cleanup_provider wow_original_cleanup_provider;
 extern INT WINAPI GetStdClassNumber(LPSTR);
 extern LPCSTR WINAPI wow_original_class_name(UINT);
 extern ATOM WINAPI wow_original_class_atom(UINT);
+extern BOOL WINAPI wow_original_class_capture(LPCSTR, PUNICODE_STRING);
 extern void WINAPI wow_fixture_startup_bind(void);
 extern BOOL __cdecl ntvdm_dpmi_initialize(void);
 static const wow_standard_class_provider class_provider = {
-    GetStdClassNumber, wow_original_class_name, wow_original_class_atom };
+    GetStdClassNumber, wow_original_class_name, wow_original_class_atom, wow_original_class_capture };
 
 /* Actual registration and lifecycle code; only guest publication and the
  * broker RPC are seams. This fixture does not claim to execute guest code. */
@@ -67,6 +73,8 @@ int __cdecl main(void)
     unsigned i;
     BOOL caught = FALSE;
     CHECK(ntvdm_dpmi_initialize());
+    CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
+    CHECK(wow_cleanup_bind(&wow_original_cleanup_provider));
     CHECK(wow_standard_class_bind(&class_provider));
     wow_fixture_startup_bind();
     session_initialize(&owner, 44702);

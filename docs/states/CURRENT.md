@@ -293,3 +293,12 @@ Non-error mirror0points/+14lines R2752; cumulative+2points/+224lines.
 Cached full, dual11 and targeted task/profile/control and real Win16/COMMAND
 passed; package c3f39ae3-6ab0-4d0a-8275-add061bb9ec0.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p18-delivery.json).
+
+P19 partially addresses BC1F021: standard-class ANSI capture now uses the
+C1 original capture through the existing synchronous class provider, retaining
+allocation and cleanup. Direct B-C1 relations53->52, compiled header rows
+460->458; files23/94 complete. Mirror0points/+9lines R2753; cumulative
++2points/+233lines. Cached full, dual11, CCPU standard-class, init/task,
+control/capture and real Win16/COMMAND passed; package
+38a14d52-2234-4c07-803b-b4faa394f273.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p19-delivery.json).

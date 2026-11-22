@@ -12,6 +12,16 @@
 #define UserRegisterWowHandlers WINAPI UserRegisterWowHandlers
 #include "compat/include/wow_shared_user_abi.h"
 #include "compat/include/wow_standard_class_provider.h"
+#include "compat/include/wow_task_profile_bindings.h"
+extern UINT WINAPI wow_original_task_profile(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
+#include "compat/include/wow_cleanup_bindings.h"
+extern const wow_cleanup_provider wow_original_cleanup_provider;
+#include "compat/include/wow_native_text_descriptor.h"
+#include "compat/include/wow_default_window_provider.h"
+extern void WINAPI wow_original_text_capture(wow_native_text_descriptor *, const struct _LARGE_STRING *);
+extern LONG WINAPI wow_original_default_window_proc(struct tagWND *, UINT, WPARAM, LPARAM, DWORD);
+extern HBITMAP WINAPI WOWLoadBitmapA(HINSTANCE, LPCSTR, LPBYTE, DWORD);
+extern BOOL WINAPI wow_bitmap_bind_provider(HBITMAP (WINAPI *)(HINSTANCE, LPCSTR, LPBYTE, DWORD));
 #include "compat/include/wow_task_cleanup_entry.h"
 #include "compat/include/wow_timer_callback.h"
 #include "wow_native_extension_provider.h"
@@ -28,8 +38,9 @@ static const wow_task_cleanup_provider cleanup_provider = {
 extern INT WINAPI GetStdClassNumber(LPSTR);
 extern LPCSTR WINAPI wow_original_class_name(UINT);
 extern ATOM WINAPI wow_original_class_atom(UINT);
+extern BOOL WINAPI wow_original_class_capture(LPCSTR, PUNICODE_STRING);
 static const wow_standard_class_provider class_provider = {
-    GetStdClassNumber, wow_original_class_name, wow_original_class_atom };
+    GetStdClassNumber, wow_original_class_name, wow_original_class_atom, wow_original_class_capture };
 #undef UserRegisterWowHandlers
 #endif
 
@@ -128,6 +139,10 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #include "compat/include/wow_edit_entry_bindings.h"
 #include "compat/include/wow_dialog_state_bindings.h"
 #include "compat/include/wow_edit_lookaside_bindings.h"
+#include "compat/include/wow_user_client_view_layout.h"
+#define WOW_ORIGINAL_DIALOG_LAYOUT
+#include "compat/include/opennt_user_multipass.h"
+#undef WOW_ORIGINAL_DIALOG_LAYOUT
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 /* Original USER client declarations inherit /Gz in the product. */
 #define DispatchClientMessage WINAPI DispatchClientMessage
@@ -6305,7 +6320,12 @@ static DWORD WINAPI run_graph_desktop(void *desktop)
 int main(int argc, char **argv)
 {
 #ifdef WOW_WINDOW_BORROW_FIXTURE
-    if (!wow_standard_class_bind(&class_provider) ||
+    if (!wow_profile_bind(wow_original_task_profile, FastGetProfileIntW) ||
+            !wow_cleanup_bind(&wow_original_cleanup_provider) ||
+            !wow_native_text_bind(wow_original_text_capture) ||
+            !wow_default_window_bind(wow_original_default_window_proc) ||
+            !wow_bitmap_bind_provider(WOWLoadBitmapA) ||
+            !wow_standard_class_bind(&class_provider) ||
             !wow_timer_bind(WowOriginalTimerFunc) ||
             !wow_native_extension_bind(&fixture_extension_provider) ||
             !wow_thunk_bind(&thunk_provider)) return 13;

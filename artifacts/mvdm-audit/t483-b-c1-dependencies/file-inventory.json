@@ -5,9 +5,9 @@
   "counts": {
     "files": 94,
     "completed": 23,
-    "direct_unique": 53,
-    "direct_raw": 65,
-    "compiled_header_rows": 460,
+    "direct_unique": 52,
+    "direct_raw": 64,
+    "compiled_header_rows": 458,
     "private_search_root_rows": 0
   },
   "files": [
@@ -1413,7 +1413,7 @@
     {
       "id": "BC1F021",
       "file": "src/compat/include/wow_user_capture_bindings.h",
-      "status": "not yet audited",
+      "status": "in progress: P19 removes standard-class capture implementation dependency; shared class-client capture headers remain",
       "evidence": [
         {
           "kind": "resolved-includes",
@@ -1425,7 +1425,8 @@
           "evidence": "nt.h",
           "product": "wow32.dll"
         }
-      ]
+      ],
+      "partial_evidence": "p19-delivery.json"
     },
     {
       "id": "BC1F022",

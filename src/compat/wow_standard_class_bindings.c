@@ -1,6 +1,5 @@
 #include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_standard_class_bindings.h"
-#include "wow_user_capture_bindings.h"
 #include "wow_dialog_state_bindings.h"
 #include "wow_edit_entry_bindings.h"
 #include "compat/include/opennt_user_multipass.h"
@@ -13,7 +12,7 @@ static const wow_standard_class_provider *provider;
 BOOL WINAPI wow_standard_class_bind(const wow_standard_class_provider *value)
 {
     const wow_standard_class_provider *previous;
-    if (!value || !value->classify || !value->name || !value->atom) {
+    if (!value || !value->classify || !value->name || !value->atom || !value->capture_name) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,
@@ -145,20 +144,20 @@ BOOL WINAPI wow_standard_classes_prepare(wow_class_lookup_context *classes,
     }
     for (i = 2; i < ARRAYSIZE(fnids); ++i) {
         wow_standard_class_view view;
-        IN_STRING name = {0};
+        UNICODE_STRING name = {0};
         BOOL imported;
         /* These four are original LW_RegisterWindows desktop/menu/switch/
          * icon-title classes, not this process-control registration group. */
         if (!process_control(fnids[i])) continue;
         if (!wow_standard_class_describe(provider->name(i), &view))
             goto fail;
-        if (!RtlCaptureAnsiString(&name, provider->name(i), TRUE))
+        if (!provider->capture_name(provider->name(i), &name))
             goto fail;
         imported = wow_class_words_import_native(classes, &view.native,
-            name.pstr, view.atom, view.fnid, callback);
+            &name, view.atom, view.fnid, callback);
         error = GetLastError();
-        if (name.fAllocated)
-            RtlFreeHeap(RtlProcessHeap(), 0, name.strCapture.Buffer);
+        if (name.Buffer)
+            HeapFree(GetProcessHeap(), 0, name.Buffer);
         SetLastError(error);
         if (!imported) goto fail;
     }
