@@ -100,6 +100,7 @@ static void check_icon_size(void)
     DestroyIcon(icon);
 }
 
+BOOL WINAPI ClientDrawState(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, int, int, int, int, UINT);
 int __cdecl main(void)
 {
     wow_edit_context context = {0};
@@ -111,6 +112,7 @@ int __cdecl main(void)
     unsigned i;
     BOOL caught;
     BITMAP info;
+    CHECK(wow_control_draw_bind(ClientDrawState));
     CHECK(screen && dc && bitmap && previous && previous != HGDI_ERROR);
     ReleaseDC(NULL, screen);
     context.screen.BitCount = 32;

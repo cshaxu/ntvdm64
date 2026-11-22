@@ -5,9 +5,9 @@
   "counts": {
     "files": 94,
     "completed": 32,
-    "direct_unique": 44,
-    "direct_raw": 52,
-    "compiled_header_rows": 383,
+    "direct_unique": 43,
+    "direct_raw": 51,
+    "compiled_header_rows": 377,
     "private_search_root_rows": 0
   },
   "files": [
@@ -3309,7 +3309,7 @@
     {
       "id": "BC1F038",
       "file": "src/compat/wow_control_draw_state.c",
-      "status": "not yet audited",
+      "status": "in progress: P32 removes original drawing direct call; original button resource layout remains",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -3411,7 +3411,8 @@
           "evidence": "non-mvdm/public/sdk/inc/nt.h",
           "product": ""
         }
-      ]
+      ],
+      "progress_evidence": "p32-delivery.json"
     },
     {
       "id": "BC1F039",

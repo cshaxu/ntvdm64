@@ -1,0 +1,36 @@
+{
+  "packet": "M0 T483 S20 P32",
+  "baseline": "a403f6544",
+  "files_partial": [
+    "BC1F038"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 32,
+    "remaining": 62,
+    "B_C1_unique": 43,
+    "B_C1_raw": 51,
+    "B_C1_compiled_headers": 377,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct 44 to 43; raw 52 to 51; compiled headers 383 to 377. A user.h record remains from original button resource layout.",
+  "implementation": "Original C1 ClientDrawState is bound by WOW32 into B-owned synchronous provider; original drawing, nested context restoration and exception cleanup remain unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "8fa9c6b7-9381-4c06-a20a-ed179130a7e2",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "original draw state effects, nested callback and exception cleanup",
+    "WOW control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-draw-state",
+  "limitations": [
+    "BC1F038 remains open due to original button atlas layout, shared with BC1F027",
+    "Full suite required at S20 closure"
+  ]
+}

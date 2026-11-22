@@ -14,6 +14,9 @@ typedef struct wow_control_draw_context {
     wow_button_resources atlas;
 } wow_control_draw_context;
 extern __declspec(thread) wow_control_draw_context *wow_control_draw_current;
+typedef BOOL (WINAPI *wow_control_draw_provider)(HDC, HBRUSH, DRAWSTATEPROC,
+    LPARAM, WPARAM, int, int, int, int, UINT);
+BOOL WINAPI wow_control_draw_bind(wow_control_draw_provider);
 BOOL WINAPI wow_control_draw_state(HDC, HBRUSH, DRAWSTATEPROC,
     LPARAM, WPARAM, int, int, int, int, UINT);
 #include "compat/include/wow_icon_size.h"

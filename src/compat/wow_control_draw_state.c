@@ -1,11 +1,19 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_control_draw_state.h"
 #include "wow_edit_drawing_bindings.h"
 #include "wow_edit_entry_bindings.h"
 
 __declspec(thread) wow_control_draw_context *wow_control_draw_current;
-BOOL WINAPI ClientDrawState(HDC, HBRUSH, DRAWSTATEPROC,
-    LPARAM, WPARAM, int, int, int, int, UINT);
+static wow_control_draw_provider draw_provider;
+
+BOOL WINAPI wow_control_draw_bind(wow_control_draw_provider provider)
+{
+    wow_control_draw_provider previous;
+    if (!provider) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    previous = (wow_control_draw_provider)InterlockedCompareExchangePointer(
+        (PVOID volatile *)&draw_provider, (PVOID)provider, NULL);
+    if (previous && previous != provider) { SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE; }
+    return TRUE;
+}
 
 static void release_context(wow_control_draw_context *context)
 {
@@ -78,7 +86,8 @@ BOOL WINAPI wow_control_draw_state(HDC dc, HBRUSH brush, DRAWSTATEPROC callback,
         if (!create_context(&context)) return FALSE;
         wow_control_draw_current = &context;
         SetLastError(error);
-        result = ClientDrawState(dc, brush, callback, data, count,
+        if (!draw_provider) RaiseFailFastException(NULL, NULL, 0);
+        result = draw_provider(dc, brush, callback, data, count,
             x, y, width, height, flags);
         completed = TRUE;
     } __finally {
