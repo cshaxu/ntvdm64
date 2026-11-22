@@ -1,0 +1,36 @@
+{
+  "packet": "M0 T483 S20 P59",
+  "baseline": "349bef401",
+  "files_partial": [
+    "BC1F070"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 44,
+    "remaining": 50,
+    "B_C1_unique": 14,
+    "B_C1_raw": 21,
+    "B_C1_compiled_headers": 207,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 function direct unique/raw unchanged 14/21; compiled headers 213 to 207. BC1F070 retains one original USER header.",
+  "implementation": "Replaced private NT include with SDK declarations and four MAXULONG uses with equal 32-bit MAXDWORD. Menu capture, ownership, publication and rollback unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "26676542-b7d0-4ac4-8d1f-44ccfd525f20",
+  "build": "cached x86/x64/reference passed on final source; initial x86 attempt failed missing MAXULONG and was corrected before final build",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "real CCPU menu resource and lifecycle",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-menu-client",
+  "limitations": [
+    "BC1F070 retains original USER header",
+    "Data-symbol scan incomplete beyond scoped common externals",
+    "Full suite required at S20 closure"
+  ]
+}

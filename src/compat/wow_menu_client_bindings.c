@@ -1,4 +1,5 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
+#include <windows.h>
+#include <winternl.h>
 #include "wow_menu_client_bindings.h"
 #include "compat/include/opennt_user_multipass.h"
 #include "wow_cleanup_bindings.h"
@@ -46,7 +47,7 @@ static BOOL reserve_capture(void **buffer, ULONG *capacity, ULONG needed, SIZE_T
     ULONG next;
     void *grown;
     if (needed <= *capacity) return TRUE;
-    next = *capacity && *capacity <= MAXULONG / 2u ? *capacity * 2u : needed;
+    next = *capacity && *capacity <= MAXDWORD / 2u ? *capacity * 2u : needed;
     if (next < needed) next = needed;
     if (next > (SIZE_T)-1 / size) { SetLastError(ERROR_ARITHMETIC_OVERFLOW); return FALSE; }
     grown = *buffer ? HeapReAlloc(GetProcessHeap(), 0, *buffer, next * size) :
@@ -73,7 +74,7 @@ static BOOL capture_tree(menu_capture *capture, DWORD task, HMENU menu, BOOL reg
     }
     at = capture->index[slot];
     if (at) {
-        if (at == MAXULONG || capture->rows[at - 1u].view.menu != value || registering) {
+        if (at == MAXDWORD || capture->rows[at - 1u].view.menu != value || registering) {
             SetLastError(ERROR_INVALID_DATA); return FALSE;
         }
         return TRUE;
@@ -94,7 +95,7 @@ static BOOL capture_tree(menu_capture *capture, DWORD task, HMENU menu, BOOL reg
         object = entry->phead;
     }
     local_state = local_state || object->local_state;
-    capture->index[slot] = MAXULONG; /* Cycle guard; no persistent owner mutation. */
+    capture->index[slot] = MAXDWORD; /* Cycle guard; no persistent owner mutation. */
     count = GetMenuItemCount(menu);
     if (count < 0) goto done;
     if ((SIZE_T)count > (SIZE_T)-1 / sizeof(*items)) {
@@ -112,7 +113,7 @@ static BOOL capture_tree(menu_capture *capture, DWORD task, HMENU menu, BOOL reg
         items[i].type = info.fType; items[i].state = info.fState;
         items[i].id = info.wID; items[i].submenu = (ULONG)(ULONG_PTR)info.hSubMenu;
     }
-    if ((ULONG)count > MAXULONG - capture->item_count) {
+    if ((ULONG)count > MAXDWORD - capture->item_count) {
         SetLastError(ERROR_ARITHMETIC_OVERFLOW); goto done;
     }
     if (!reserve_capture((void **)&capture->rows, &capture->capacity,
