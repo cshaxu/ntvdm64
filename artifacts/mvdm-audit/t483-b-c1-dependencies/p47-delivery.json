@@ -1,0 +1,34 @@
+{
+  "packet": "M0 T483 S20 P47",
+  "baseline": "04d5a4c76",
+  "files_completed": [
+    "BC1F056"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 38,
+    "remaining": 56,
+    "B_C1_unique": 31,
+    "B_C1_raw": 39,
+    "B_C1_compiled_headers": 282,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 direct unique/raw unchanged 31/39; compiled headers 288 to 282, BC1F056 has zero remaining C1 compile headers.",
+  "implementation": "Replace private NT include with platform SDK declarations in dialog procedure bindings. Existing B lifecycle and public USER calls, unwind and termination paths unchanged.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "50c513fc-5cb1-4cf6-b6a2-6a85c4d90aa0",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "WOW dialog procedure initialization, native ownership and lifecycle fixtures",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-dialog-procedure",
+  "limitations": [
+    "Full suite required at S20 closure"
+  ]
+}

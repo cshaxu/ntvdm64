@@ -534,3 +534,11 @@ build, dual11, dialog lifecycle/control and real Win16/COMMAND targeted tests
 passed. Full remains required at S20 closure. Package
 b3d74340-345c-409f-98d3-9cc15bcf2e8c.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p46-delivery.json).
+
+P47 completes BC1F056: dialog procedure uses SDK declarations; its six C1
+header records are removed. B-C1 direct unique/raw remain 31/39, compiled
+headers 288->282; files 38/94 complete. Mirror delta 0 points/0 lines;
+cumulative +3 points/+239 lines. Cached full build, dual11, dialog procedure/
+control and real Win16/COMMAND targeted tests passed. Full remains required
+at S20 closure. Package 50c513fc-5cb1-4cf6-b6a2-6a85c4d90aa0.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p47-delivery.json).
