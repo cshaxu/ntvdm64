@@ -426,9 +426,12 @@ $dllEntryBridgeLines = @(
     'extern unsigned char __stdcall W32DllInitialize(void *, unsigned long, void *);',
     'extern void __stdcall wow_bitmap_bindings_shutdown(void);',
     'extern void __stdcall wow_registry_binding_shutdown(void);',
+    '#include "compat/include/wow_control_brush_bindings.h"',
+    'HBRUSH WINAPI xxxGetControlBrush(PWND, HDC, UINT);',
     'int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)',
     '{',
     '    int result;',
+    '    if (reason == 1 && !wow_control_brush_bind(xxxGetControlBrush)) return 0;',
     '    if (reason == 1 && !wow_common_dialog_bind(&dialog_callbacks)) return 0;',
     '    if (reason == 1 && !wow_hook_bind(&hook_callbacks)) return 0;',
     '    if (reason == 1 && !wow_task_state_bind(&task_callbacks)) return 0;',
@@ -652,7 +655,7 @@ $objects.Add($controlBrushClientObject)
 $ninja.Add('build ' + $controlBrushClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT')
 $objects.Add($controlBrushObject)
-$ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/compat/wow_control_brush.c')))
+$ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/source/wow_control_brush.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $controlStateObject = 'obj/wow32-dll/wow_control_state.obj'
 $objects.Add($controlStateObject)

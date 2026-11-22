@@ -3,6 +3,8 @@
 #include "wow_user_client_view_layout.h"
 #include "wow_user_borrow_scope.h"
 
+typedef HBRUSH (WINAPI *wow_control_brush_provider)(PWND, HDC, UINT);
+BOOL WINAPI wow_control_brush_bind(wow_control_brush_provider);
 HBRUSH WINAPI wow_control_brush(HWND, HDC, UINT);
 VOID WINAPI wow_control_brush_retain(PWND);
 HBRUSH WINAPI wow_control_brush_color(PWND, PWND, HDC, UINT);

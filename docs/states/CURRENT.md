@@ -386,3 +386,12 @@ Cached full build, dual11, common-dialog calls and real Win16/COMMAND
 targeted tests passed. Full remains required at S20 closure. Package
 9d83662e-1899-4814-93a9-c758456d0e6f.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p29-delivery.json).
+
+P30 completes BC1F036: relocated the original brush body to WOW32 and
+uses a synchronous provider while preserving the B borrow scope. B-C1
+direct unique remains 44, compiled headers 399->391; files 31/94 complete.
+BC1F037 remains open. Mirror delta 0 points/0 lines; cumulative +3 points/
++239 lines. Cached full build, dual11, brush/control and real Win16/COMMAND
+targeted tests passed. Full remains required at S20 closure. Package
+aa18ab7b-8a72-48b9-85a2-2d6b693de5fd.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p30-delivery.json).

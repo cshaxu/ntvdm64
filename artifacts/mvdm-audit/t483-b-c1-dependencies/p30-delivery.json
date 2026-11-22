@@ -1,0 +1,36 @@
+{
+  "packet": "M0 T483 S20 P30",
+  "baseline": "640195920",
+  "files_completed": [
+    "BC1F036"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 31,
+    "remaining": 63,
+    "B_C1_unique": 44,
+    "B_C1_raw": 52,
+    "B_C1_compiled_headers": 391,
+    "B_C1_search_roots": 0,
+    "B_C2_unique": 0,
+    "B_C2_compiled_headers": 0,
+    "B_C2_search_roots": 0
+  },
+  "delta": "B C1 unique direct remains 44; compiled headers 399 to 391. No B C1 compiled header record for the relocated original function.",
+  "implementation": "Relocated unchanged extracted xxxGetControlBrush to WOW32, preserving original OpenNT windows/core/ntuser/kernel/random.c:208-232 and its signature. B uses an immutable synchronous provider bound at WOW32 initialization; the caller retains its existing borrow scope and exception cleanup.",
+  "mirror_delta": "0 points / 0 lines; cumulative S20 +3 points / +239 lines",
+  "package": "aa18ab7b-8a72-48b9-85a2-2d6b693de5fd",
+  "build": "cached x86/x64/reference passed",
+  "publication": "11 images assets/release and O:/winnt/system32; 22 hashes verified",
+  "tests": [
+    "control brush original parent/owner selection, borrow and exception handling",
+    "WOW control boundaries",
+    "real Win16 native extension and COMMAND EDIT/CMD/MEM",
+    "architecture and documentation checks"
+  ],
+  "evidence": "build/t483-s20-control-brush",
+  "limitations": [
+    "BC1F037 retains original WND layout and remains open",
+    "Full suite required at S20 closure"
+  ]
+}

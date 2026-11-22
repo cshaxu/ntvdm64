@@ -5,6 +5,7 @@
 
 /* Actual original client/server bodies and adapter, with explicit lifetime
  * and color-service doubles. Not a real HWND/guest lifetime acceptance. */
+HBRUSH WINAPI xxxGetControlBrush(PWND, HDC, UINT);
 static WND control, parent, owner;
 static HWND expected;
 static unsigned failures, depth, calls, retains, leaves;
@@ -69,6 +70,7 @@ int __cdecl main(void)
 {
     unsigned before;
     BOOL caught;
+    if (!wow_control_brush_bind(xxxGetControlBrush)) return 3;
     control.head.h = (HWND)(ULONG_PTR)1;
     parent.head.h = (HWND)(ULONG_PTR)2;
     owner.head.h = (HWND)(ULONG_PTR)3;

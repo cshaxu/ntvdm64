@@ -77,7 +77,7 @@ $units = @(
     @('dialog_memory', 'src/compat/wow_dialog_memory.c', ''),
     @('brush_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_brush_fixture.c', ''),
     @('brush_adapter', 'src/compat/wow_control_brush_bindings.c', ''),
-    @('brush_owner', 'src/compat/wow_control_brush.c', ''),
+    @('brush_owner', 'src/wow32-dll/source/wow_control_brush.c', ''),
     @('brush_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', '/DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT'),
     @('default_fixture', 'test/adapter-mvdm-host-out/wow/wow_default_window_binding_fixture.c', ''),
     @('default_adapter', 'src/compat/wow_default_window_bindings.c', ''),

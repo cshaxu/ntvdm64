@@ -4,7 +4,17 @@
 #include "wow_edit_call_bindings.h"
 #include "wow_user_task_lifecycle.h"
 
-HBRUSH WINAPI xxxGetControlBrush(PWND, HDC, UINT);
+static wow_control_brush_provider brush_provider;
+
+BOOL WINAPI wow_control_brush_bind(wow_control_brush_provider provider)
+{
+    wow_control_brush_provider previous;
+    if (!provider) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    previous = (wow_control_brush_provider)InterlockedCompareExchangePointer(
+        (PVOID volatile *)&brush_provider, (PVOID)provider, NULL);
+    if (previous && previous != provider) { SetLastError(ERROR_ALREADY_INITIALIZED); return FALSE; }
+    return TRUE;
+}
 
 VOID WINAPI wow_control_brush_retain(PWND state)
 {
@@ -34,7 +44,8 @@ HBRUSH WINAPI wow_control_brush(HWND window, HDC dc, UINT message)
         if (state) {
             wow_control_brush_retain(state);
             SetLastError(error);
-            result = xxxGetControlBrush(state, dc, message);
+            if (!brush_provider) RaiseFailFastException(NULL, NULL, 0);
+            result = brush_provider(state, dc, message);
         }
     } __finally {
         wow_user_borrow_leave_required(&scope);
