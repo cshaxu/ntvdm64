@@ -326,3 +326,11 @@ files24/94 complete unchanged. Mirror0points/0lines; cumulative+3points/+239line
 Cached full, dual11, button/control and real Win16/COMMAND passed; package
 c089c798-2ce2-447a-8682-fbc8f8304284.
 [Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p22-delivery.json).
+
+P23 completes BC1F028: removed unused private nt.h from the callback-frame
+lease owner; original cross-image CPU and memory ABI remains explicit. B-C1
+compiled headers443->437, direct50 unchanged; files25/94 complete.
+Mirror0points/0lines; cumulative+3points/+239lines. Cached full, dual11,
+original callback frame, CCPU abort and real Win16/COMMAND passed; package
+166fe66a-4916-4c3d-b8d5-c4ab533e7a23.
+[Evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p23-delivery.json).

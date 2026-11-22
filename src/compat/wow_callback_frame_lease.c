@@ -1,4 +1,3 @@
-#include "non-mvdm/public/sdk/inc/nt.h"
 #include "wow_callback_frame_lease.h"
 
 #include <windows.h>
