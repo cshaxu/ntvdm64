@@ -207,3 +207,18 @@ SetData:
 #endif // DEBUG
 #line 794
 
+#include "compat/include/wow_page_domain.h"
+DWORD *WINAPI wow_original_window_words(struct _WW *words)
+{
+    return words->adwWOW;
+}
+VOID WINAPI wow_original_restore_window_words(struct _WW *words,
+    const mvdm_softpc_wow_window_words_view *view)
+{
+    C_ASSERT(sizeof(words->adwWOW) == sizeof(view->words));
+    CopyMemory(words->adwWOW, view->words, sizeof(view->words));
+    words->dwStyle = view->style;
+    words->dwExStyle = view->exstyle;
+    words->hInstance = (HANDLE)(ULONG_PTR)view->module;
+}
+

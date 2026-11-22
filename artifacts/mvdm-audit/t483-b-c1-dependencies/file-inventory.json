@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 77,
+    "completed": 80,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 32,
+    "compiled_header_rows": 26,
     "private_search_root_rows": 0
   },
   "files": [
@@ -5165,7 +5165,7 @@
     {
       "id": "BC1F053",
       "file": "src/compat/wow_dialog_memory.c",
-      "status": "partially addressed in P45: private NT include removed; original registration and USER layout headers remain",
+      "status": "completed in verified P79 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -5278,7 +5278,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p45-delivery.json"
+      "progress_evidence": "p45-delivery.json",
+      "p79_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p79-dialog-and-words-closure.json"
     },
     {
       "id": "BC1F054",
@@ -8059,7 +8060,7 @@
     {
       "id": "BC1F080",
       "file": "src/compat/wow_user_borrow_scope.c",
-      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
+      "status": "completed in verified P79 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8162,7 +8163,8 @@
           "product": ""
         }
       ],
-      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json",
+      "p79_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p79-dialog-and-words-closure.json"
     },
     {
       "id": "BC1F081",
@@ -8569,7 +8571,7 @@
     {
       "id": "BC1F085",
       "file": "src/compat/wow_user_private_access.c",
-      "status": "in progress: P65 removes NT header chain; original USER private layout remains",
+      "status": "completed in verified P79 delivery",
       "evidence": [
         {
           "kind": "compiled-headers",
@@ -8672,7 +8674,8 @@
           "product": ""
         }
       ],
-      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json"
+      "p65_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p65-header-closure.json",
+      "p79_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p79-dialog-and-words-closure.json"
     },
     {
       "id": "BC1F086",

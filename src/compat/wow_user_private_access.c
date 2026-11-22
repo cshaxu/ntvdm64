@@ -5,7 +5,7 @@
 #include "compat/include/wow_user_runtime.h"
 #include "wow_class_client_bindings.h"
 #include "wow_dialog_state_bindings.h"
-#include "wow_user_client_view_layout.h"
+#include "wow_window_access_provider.h"
 #include "wow_window_procedure_entry.h"
 #include "compat/include/wow32_provider_private.h"
 
@@ -97,7 +97,7 @@ DWORD WINAPI wow_user_set_procedure(HWND window, BOOL class_procedure,
  * these same two WC words rather than independently copied adapter state. */
 LONG WINAPI wow_user_get_window_longA(HWND window, int index)
 {
-    PWW words;
+    struct _WW *words;
     LONG client_result;
     if (wow_window_client_try_get_long(window, index, TRUE, &client_result))
         return client_result;
@@ -111,7 +111,7 @@ LONG WINAPI wow_user_get_window_longA(HWND window, int index)
     words = wow_user_borrow_window(window);
     if (!words) return 0;
     if (index == GWL_WOWWORDS) return (LONG)words;
-    return (LONG)words->adwWOW[GWL_WOWDWORD1 - index];
+    return (LONG)wow_window_access_current()->words(words)[GWL_WOWDWORD1 - index];
 }
 
 LONG WINAPI wow_user_set_window_longA(HWND window, int index, LONG value)

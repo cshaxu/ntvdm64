@@ -76,9 +76,14 @@ static HMENU WINAPI unexpected_menu(HINSTANCE module, LPCWSTR name)
 { (void)module; (void)name; ++failures; return NULL; }
 static HWND WINAPI fixture_window_handle(struct tagWND *window)
 { return window->head.h; }
+static DWORD *WINAPI unexpected_words(struct _WW *words)
+{ (void)words; ++failures; return NULL; }
+static VOID WINAPI unexpected_restore_words(struct _WW *words,
+    const struct mvdm_softpc_wow_window_words_view *view)
+{ (void)words; (void)view; ++failures; }
 static const wow_window_access_provider access_provider = {
     xxxSetWindowLong, _GetWindowLong, _SetWindowLong, unexpected_menu,
-    fixture_window_handle, FNID_DEFWINDOWPROC
+    fixture_window_handle, FNID_DEFWINDOWPROC, unexpected_words, unexpected_restore_words
 };
 int __cdecl main(void)
 {

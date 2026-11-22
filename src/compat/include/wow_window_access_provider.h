@@ -2,6 +2,8 @@
 #define WOW_WINDOW_ACCESS_PROVIDER_H
 #include <windows.h>
 struct tagWND;
+struct _WW;
+struct mvdm_softpc_wow_window_words_view;
 
 /* Original object operations, borrowed synchronously in the caller's existing
  * window scope. No private layout or additional object registry is exposed. */
@@ -13,6 +15,10 @@ typedef struct wow_window_access_provider {
     /* Read the existing borrowed object; never resolve a new HWND owner. */
     HWND (WINAPI *window_handle)(struct tagWND *);
     DWORD default_function;
+    /* Same retained WW allocation; no new owner or guest address. */
+    DWORD *(WINAPI *words)(struct _WW *);
+    VOID (WINAPI *restore_words)(struct _WW *,
+        const struct mvdm_softpc_wow_window_words_view *);
 } wow_window_access_provider;
 
 BOOL WINAPI wow_window_access_bind(const wow_window_access_provider *);

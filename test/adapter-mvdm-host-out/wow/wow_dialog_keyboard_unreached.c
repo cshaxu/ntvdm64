@@ -22,7 +22,6 @@ const wow_task_client_info *WINAPI wow_edit_client_info(void) { REJECT(); }
 DWORD WINAPI wow_edit_control_extent(WORD f) { REJECT(); }
 LONG WINAPI wow_window_client_set_window_long(HWND w, int i, LONG v, BOOL a) { REJECT(); }
 const struct tagAPFNWOWHANDLERSIN *WINAPI wow_user_registered_callbacks(void) { REJECT(); }
-VOID WINAPI ReleaseEditDS(HANDLE h) { REJECT(); }
 VOID WINAPI wow_control_set_window_state(PWND w, UINT f) { REJECT(); }
 VOID WINAPI wow_control_clear_window_state(PWND w, UINT f) { REJECT(); }
 HWND WINAPI InternalCreateDialog(HANDLE h, LPDLGTEMPLATE t, DWORD c, HWND w, DLGPROC p, LONG l, UINT f) { REJECT(); }

@@ -91,7 +91,7 @@ if (@(Compare-Object $expectedUser $actualUser).Count) {
 if ($link -match '\bobj/compat/wow-(?:class-client|control-brush|control-state|dialog-memory)\.obj\b') {
     throw 'The WOW32 link still selects a former compat object.'
 }
-foreach ($unit in @('wow_class_client','wow_dialog_memory','wow_control_state','wow_control_fnid','wow_control_brush','wow_client_dispatch','wow_default_window_bits','wow_input_membership')) {
+foreach ($unit in @('wow_class_client','wow_control_state','wow_control_fnid','wow_control_brush','wow_client_dispatch','wow_default_window_bits','wow_input_membership')) {
     $object = "obj/wow32-dll/$unit.obj"
     if (($link -split '\s+') -notcontains $object -or
         $ninja -notmatch ('(?m)^build ' + [regex]::Escape($object) + ': cc [^\r\n]*/src/wow32-dll/source/' + $unit + '\.c\s*$')) {

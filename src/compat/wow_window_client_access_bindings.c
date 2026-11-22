@@ -13,7 +13,8 @@ BOOL WINAPI wow_window_access_bind(const wow_window_access_provider *value)
 {
     PVOID previous;
     if (!value || !value->set_long || !value->get_long ||
-            !value->set_client_long || !value->load_menu || !value->window_handle) {
+            !value->set_client_long || !value->load_menu || !value->window_handle ||
+            !value->words || !value->restore_words) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&provider,

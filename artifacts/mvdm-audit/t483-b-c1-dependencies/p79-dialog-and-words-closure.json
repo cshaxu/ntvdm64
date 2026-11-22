@@ -1,0 +1,202 @@
+{
+  "packet": "M0 T483 S20 P79",
+  "baseline": "c5d521da6732a22288523e56882a812eb9e6ec54",
+  "status": "verified batch; commit and push recorded by Git history",
+  "files_completed": [
+    "src/compat/wow_dialog_memory.c",
+    "src/compat/wow_user_borrow_scope.c",
+    "src/compat/wow_user_private_access.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 80,
+    "remaining": 14,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 26,
+    "B_C1_sources": 10,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "Move unchanged original WOWDlgInit/GetEditDS/ReleaseEditDS bodies from B carrier into existing C dialog manager. Existing window-access provider supplies retained WW array address and copies committed words/style/exstyle/module into the same allocation. B retains window validation, execution/borrow scope, generation pins, atomic exchange, rollback and reclamation. No new registry, allocation, queue or lifecycle.",
+  "callback_lifetime": "Immutable image-lifetime provider bound before USER use. WW and WND are opaque in B; returned DWORD array remains valid only in its existing retained borrow. No callback retains the input view or re-enters guest. Atomic exchange remains at its existing B execution point after successful backing update.",
+  "original_sources": {
+    "revision": "5c5b979ec08c17d3ca2eb70e8aad62d26515d01c",
+    "file": "windows/core/ntuser/client/client.c",
+    "WOWDlgInit": {
+      "first": 2326,
+      "last": 2333,
+      "lines": 8
+    },
+    "GetEditDS": {
+      "first": 2345,
+      "last": 2350,
+      "lines": 6
+    },
+    "ReleaseEditDS": {
+      "first": 2362,
+      "last": 2368,
+      "lines": 7
+    },
+    "shape": "Original names, arguments, return types and callback invocations retained; product /Gz convention unchanged."
+  },
+  "mirror": {
+    "delta_points": 1,
+    "delta_lines": 67,
+    "files": {
+      "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c": {
+        "before": [
+          17,
+          318
+        ],
+        "after": [
+          17,
+          374
+        ],
+        "points": 0,
+        "lines": 56
+      },
+      "src/non-mvdm/windows/core/ntuser/kernel/getset.c": {
+        "before": [
+          13,
+          677
+        ],
+        "after": [
+          14,
+          688
+        ],
+        "points": 1,
+        "lines": 11
+      }
+    },
+    "approval": "Standing permission: one added non-error point and fewer than100 diff lines. R2764/R2765 retained for revisit.",
+    "proof": [
+      {
+        "mirror": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "base_sha256": "a38f9f5f3a12aca80fdda12e4b30b647093de4963719a370c6b6e735fdd43855",
+        "candidate_sha256": "98ee28fb136323c472897c4d37c10dfa7bae163ab2a4ba6d63aeac52c4bdc898",
+        "remove_one_insertion_restores_HEAD_bytes": true,
+        "error_line_framework_unchanged": true
+      },
+      {
+        "mirror": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+        "base_sha256": "c39120e1ce72cfa3ede010f8231758fb1b35ce0af9ad40cbfed46da14111091d",
+        "candidate_sha256": "dcc662779a3dbf2414dd8385d904c67da0e61e9a6bc94830079a596dc24744f9",
+        "remove_one_insertion_restores_HEAD_bytes": true,
+        "error_line_framework_unchanged": true
+      }
+    ],
+    "placement": "Initial getset insertion caused two extra blocks; moving complete helpers after original source yields one added block. Final placement was rebuilt before publication."
+  },
+  "build": {
+    "started": "2026-11-22T11:19:07.3182335+00:00",
+    "finished": "2026-11-22T11:19:48.4469551+00:00",
+    "pid": 23612,
+    "exit": 0
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "bbf7bcda-7861-41ca-854c-1630f87d21c0",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "boundary_tests": {
+    "finished": "2026-11-22T11:21:04.8104276+00:00",
+    "started": "2026-11-22T11:20:48.2783876+00:00",
+    "pid": 30020,
+    "exit": 0
+  },
+  "targeted_cases": [
+    {
+      "case": "window-borrow",
+      "exit": 0,
+      "finished": "2026-11-22T11:21:16.6533557+00:00",
+      "started": "2026-11-22T11:21:04.9085120+00:00"
+    },
+    {
+      "case": "graph-snapshot",
+      "exit": 0,
+      "finished": "2026-11-22T11:21:32.4442812+00:00",
+      "started": "2026-11-22T11:21:16.6557663+00:00"
+    },
+    {
+      "case": "native-creation",
+      "exit": 0,
+      "finished": "2026-11-22T11:21:44.2316266+00:00",
+      "started": "2026-11-22T11:21:32.4463899+00:00"
+    },
+    {
+      "case": "class-lifetime",
+      "exit": 0,
+      "finished": "2026-11-22T11:21:54.3862550+00:00",
+      "started": "2026-11-22T11:21:44.2331823+00:00"
+    },
+    {
+      "case": "task-lifecycle",
+      "exit": 0,
+      "finished": "2026-11-22T11:22:05.2646313+00:00",
+      "started": "2026-11-22T11:21:54.3875327+00:00"
+    },
+    {
+      "case": "process-retirement",
+      "exit": 0,
+      "finished": "2026-11-22T11:22:15.5085170+00:00",
+      "started": "2026-11-22T11:22:05.2660231+00:00"
+    },
+    {
+      "case": "init-notification",
+      "exit": 0,
+      "finished": "2026-11-22T11:22:27.1779692+00:00",
+      "started": "2026-11-22T11:22:15.5096616+00:00"
+    }
+  ],
+  "class_cases": [
+    {
+      "case": "class-client",
+      "exit": 0,
+      "finished": "2026-11-22T11:22:37.4765424+00:00",
+      "started": "2026-11-22T11:22:27.2148580+00:00"
+    },
+    {
+      "case": "class-query",
+      "exit": 0,
+      "finished": "2026-11-22T11:22:48.0076272+00:00",
+      "started": "2026-11-22T11:22:37.4777667+00:00"
+    }
+  ],
+  "verification": {
+    "finished": "2026-11-22T11:23:30.7960422+00:00",
+    "started": "2026-11-22T11:20:48.1216564+00:00",
+    "pid": 30020,
+    "exit": 0
+  },
+  "source_identity": {
+    "src/compat/README.md": "a13ccc240b7d4f04157beb09f6e5e7824d0f5280f108bae2b9cd2e49ece3ab54",
+    "src/compat/include/wow_window_access_provider.h": "046029fb411968bef0e66bba06836a75aab1e73078dc04eee1c6d698336a3aca",
+    "src/compat/wow_user_borrow_scope.c": "4d0a35bea0d90221cd75e5d8fa3a19f204904ee533ca6998faf32b14be2e32fd",
+    "src/compat/wow_user_private_access.c": "3b6f3346d5f299a769bdd2e099c4c04bfacddffe470bf5978634aeee0f35190e",
+    "src/compat/wow_window_client_access_bindings.c": "d880fa0d7492ba1788dff495c3a6f05a100406a7b90b3a6e4bf2717153506a7a",
+    "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c": "98ee28fb136323c472897c4d37c10dfa7bae163ab2a4ba6d63aeac52c4bdc898",
+    "src/non-mvdm/windows/core/ntuser/kernel/getset.c": "dcc662779a3dbf2414dd8385d904c67da0e61e9a6bc94830079a596dc24744f9",
+    "test/adapter-mvdm-host-out/wow/wow_dialog_keyboard_unreached.c": "bf1eef1fed81277f7cb2f11d25af102cba52816665016b2bb1c35d6cdb8f4e3a",
+    "test/adapter-mvdm-host-out/wow/wow_window_access_fixture_provider.h": "b143ecfe5794fdb311356f716f40b2c42e2389b309fda626a6733e6f94f0bfb9",
+    "test/adapter-mvdm-host-out/wow/wow_window_client_message_fixture.c": "2415b1b0414112983ec0e3e58c8f8258f53966cdc63f2c19ec21af4a481b3c32",
+    "test/observation/verify-wow32-s1-formal-graph.ps1": "07c5ec0e052591bd8349a2e383a87f90bda4608f02fc862da079eb24e10b6f6f",
+    "tools/audit/verify-library-build-boundary.py": "dbafb19c528c8dacdf89c9d8b3bfb0a7039cfa36d7bc1705d740c6f350aacb0c",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "5d31bc71a192ba6c047d0b54bc901e2e359f61847742bd739c026210e06bc641",
+    "tools/build/New-T447S3CallBoundaryNinja.ps1": "8812ef6cbb4778b33786f0e268cf449e50b17d4086f318c8ba77d42de80e8a60"
+  },
+  "retired_sources": [
+    "src/compat/wow_dialog_memory.c"
+  ],
+  "evidence_root": "build\\t483-s20-p79-dialog-and-words",
+  "limitations": [
+    "14 inventory files remain; no S20 closure or Full-pass claim.",
+    "Direct-function relocation count is not complete data-symbol/assembly/linkmap coverage; those closure obligations remain.",
+    "Existing Shell diagnostic limitation and larger class/control owner decisions remain.",
+    "Supplemental memory fixture compiles exact selected C body in a generated translation unit. Actual product unit is exercised separately by lifecycle and guest cases."
+  ]
+}

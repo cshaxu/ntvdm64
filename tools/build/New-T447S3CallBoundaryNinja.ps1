@@ -74,7 +74,6 @@ $units = @(
     @('state_guards', 'src/wow32-dll/source/wow_control_state.c', ''),
     @('color_client', 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c', '/DWOW_ORIGINAL_CONTROL_COLOR'),
     @('memory_fixture', 'test/adapter-mvdm-host-out/wow/wow_edit_memory_callbacks_fixture.c', '/DWOW_ORIGINAL_EDIT_CLIENT'),
-    @('dialog_memory', 'src/compat/wow_dialog_memory.c', ''),
     @('brush_fixture', 'test/adapter-mvdm-host-out/wow/wow_control_brush_fixture.c', ''),
     @('brush_adapter', 'src/compat/wow_control_brush_bindings.c', ''),
     @('brush_owner', 'src/wow32-dll/source/wow_control_brush.c', ''),
@@ -227,6 +226,12 @@ $dialogBody = $dialogText.Substring($dialogStart, $dialogEnd - $dialogStart)
 if (([regex]::Matches($dialogBody, 'BOOL WINAPI wow_original_dialog_')).Count -ne 2 -or $dialogBody.TrimEnd()[-1] -ne '}') {
     throw 'Dialog layout operation selection is incomplete.'
 }
+$memoryStart = $dialogText.IndexOf('/* Original client/client.c: WOWDlgInit, GetEditDS and ReleaseEditDS;')
+$memoryEnd = $dialogText.IndexOf('/* Copyright (c) 1985-95, Microsoft Corporation.', $memoryStart)
+if ($memoryStart -lt 0 -or $memoryEnd -le $memoryStart) { throw 'Dialog memory source boundary changed.' }
+$memorySource = Join-Path $build 'dialog-memory-original.c'
+[IO.File]::WriteAllText($memorySource, '#include "wow_edit_memory_bindings.h"' + "`n" + $dialogText.Substring($memoryStart, $memoryEnd - $memoryStart), [Text.UTF8Encoding]::new($false))
+$units += ,@('dialog_memory', [IO.Path]::GetRelativePath($root, $memorySource), '')
 $dialogLayout = Join-Path $build 'dialog-finalization-layout.c'
 $dialogPreamble = @'
 #include "wow_user_client_view_layout.h"

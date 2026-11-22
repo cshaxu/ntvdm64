@@ -5,7 +5,7 @@
 #include "wow_user_task_lifecycle.h"
 #include "wow_class_client_bindings.h"
 #include "wow_task_order_bindings.h"
-#include "wow_user_client_view_layout.h"
+#include "wow_window_access_provider.h"
 #include "compat/include/wow_page_domain.h"
 
 #include <stdio.h>
@@ -240,7 +240,7 @@ wow_window_words_binding *WINAPI wow_user_borrow_client_state(HWND window,
     }
     /* Retained state can outlive native destruction, so validate its stored
      * identity, not the current HWND property (which may denote a successor). */
-    if (state->head.h != window) {
+    if (wow_window_access_current()->window_handle(state) != window) {
         SetLastError(ERROR_INVALID_WINDOW_HANDLE); return NULL;
     }
     for (scope = current_scope; scope; scope = scope->previous)
@@ -268,7 +268,7 @@ wow_window_words_binding *WINAPI wow_user_borrow_observed_binding(HWND window)
 {
     wow_user_borrow_scope *scope;
     wow_user_borrow *borrow;
-    WW *words;
+    struct _WW *words;
     /* Resolve the current generation first. A matching HWND in an outer
      * scope can denote an already retired allocation after handle reuse. */
     if (!current_scope || !(words = wow_user_borrow_window(window))) return NULL;
@@ -383,7 +383,7 @@ struct _WW *WINAPI wow_user_borrow_window(HWND window)
     wow_window_words_binding *binding = borrow_window(window);
     mvdm_softpc_wow_window_words_view view;
     ULONG full, backing;
-    WW *words;
+    struct _WW *words;
     if (binding) {
         if (!wow_window_words_refresh(window, binding)) return NULL;
         return wow_window_words_value(binding);
@@ -401,10 +401,7 @@ struct _WW *WINAPI wow_user_borrow_window(HWND window)
     words = wow_window_words_value(binding);
     if (!mvdm_softpc_wow_page_domain_read_window_words_view(backing,
             &view)) return NULL;
-    CopyMemory(words->adwWOW, view.words, sizeof(view.words));
-    words->dwStyle = view.style;
-    words->dwExStyle = view.exstyle;
-    words->hInstance = (HANDLE)(ULONG_PTR)view.module;
+    wow_window_access_current()->restore_words(words, &view);
     return words;
 }
 
@@ -595,10 +592,10 @@ BOOL WINAPI wow_user_borrow_client_graph(wow_window_words_binding *root, HWND de
 BOOL WINAPI wow_user_borrow_window_exchange(HWND window, unsigned index,
     DWORD value, DWORD *previous)
 {
-    WW *words;
+    struct _WW *words;
     wow_user_borrow_scope *scope;
     wow_user_borrow *borrow;
-    if (index >= WND_CNT_WOWDWORDS || !previous) {
+    if (index >= ARRAYSIZE(((mvdm_softpc_wow_window_words_view *)0)->words) || !previous) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     if (!(words = wow_user_borrow_window(window))) return FALSE;
@@ -611,7 +608,7 @@ BOOL WINAPI wow_user_borrow_window_exchange(HWND window, unsigned index,
                 if (!mvdm_softpc_wow_page_domain_exchange_window_word(
                         sample->backing, index, value, &ignored)) return FALSE;
                 *previous = (DWORD)InterlockedExchange(
-                    (LONG *)&words->adwWOW[index], value);
+                    (LONG *)&wow_window_access_current()->words(words)[index], value);
                 return TRUE;
             }
     return wow_window_words_exchange(window, index, value, previous);

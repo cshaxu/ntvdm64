@@ -114,14 +114,14 @@ is the closure delivery. Typed runtime callbacks remain explicit.
 ## S20 Progress
 
 The [DIR inventory](../../artifacts/mvdm-audit/t483-b-c1-dependencies/file-inventory.json)
-is authoritative for individual files and evidence. P78 final compiled-product review leaves 77 of 94
+is authoritative for individual files and evidence. P79 final compiled-product review leaves 80 of 94
 files complete. B-to-C1 has zero direct function links (previously 12 unique/18 raw),
-32 compiled-header rows across 13 sources and zero private search roots. B-to-C2 has zero
+26 compiled-header rows across 10 sources and zero private search roots. B-to-C2 has zero
 direct links, compiled-header rows and private search roots under the current
 scan. These measures are distinct and must not be summed. Original-layout
 and callback-provider relationships remain subject to their recorded scope.
 
-S20 cumulative non-error mirror delta is +8 points/+392 lines; S19 retained
+S20 cumulative non-error mirror delta is +9 points/+459 lines; S19 retained
 delta is +12 points/+574 lines. Full regression is required at S20 closure;
 individual P deliveries use cached full build, dual publication and targeted
 tests. The P62 package is 71882068-22ca-4a1a-8a84-20c8d7f7cb5c.
@@ -241,3 +241,11 @@ files; header rows47->32 across13 sources. Mirror +0points/+54lines at one
 insertion, pending R2763. Cached full build, dual11 publication, targeted
 boundaries/lifecycles and published USER16/COMMAND passed.
 [P78 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p78-dialog-boundary-closure.json).
+
+P79 completes dialog memory and the borrow/private-access WW layout group.
+Remaining14 files; compiled header rows32->26 across10 sources. Original dialog
+callbacks now reside in C; B retains its scope and calls the existing C
+window-access provider for WW layout operations. Non-error mirror +1point/+67lines,
+pending R2764/R2765. Cached full build, dual11 publication, targeted boundaries,
+borrow graph/lifecycles and published USER16/COMMAND passed.
+[P79 evidence](../../artifacts/mvdm-audit/t483-b-c1-dependencies/p79-dialog-and-words-closure.json).

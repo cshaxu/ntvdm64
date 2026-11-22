@@ -1,0 +1,116 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr.c",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "current_sha256": "98ee28fb136323c472897c4d37c10dfa7bae163ab2a4ba6d63aeac52c4bdc898",
+      "raw": {
+        "blocks": 18,
+        "added": 170,
+        "deleted": 213
+      },
+      "filtered": {
+        "blocks": 17,
+        "added": 169,
+        "deleted": 205
+      },
+      "excluded": [
+        {
+          "original": [
+            1057,
+            1064
+          ],
+          "current": [
+            901,
+            903
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "current_sha256": "dcc662779a3dbf2414dd8385d904c67da0e61e9a6bc94830079a596dc24744f9",
+      "raw": {
+        "blocks": 12,
+        "added": 40,
+        "deleted": 702
+      },
+      "filtered": {
+        "blocks": 14,
+        "added": 23,
+        "deleted": 665
+      },
+      "excluded": [
+        {
+          "original": [
+            269,
+            271
+          ],
+          "current": [
+            56,
+            58
+          ]
+        },
+        {
+          "original": [
+            321,
+            321
+          ],
+          "current": [
+            116,
+            117
+          ]
+        },
+        {
+          "original": [
+            750,
+            750
+          ],
+          "current": [
+            182,
+            183
+          ]
+        },
+        {
+          "original": [
+            760,
+            768
+          ],
+          "current": [
+            189,
+            191
+          ]
+        },
+        {
+          "original": [
+            777,
+            777
+          ],
+          "current": [
+            197,
+            198
+          ]
+        },
+        {
+          "original": [
+            782,
+            792
+          ],
+          "current": [
+            204,
+            206
+          ]
+        }
+      ],
+      "issues": [],
+      "rank": 2
+    }
+  ]
+}
