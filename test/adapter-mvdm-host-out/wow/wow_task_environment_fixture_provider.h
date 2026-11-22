@@ -2,6 +2,7 @@
 #define WOW_TASK_ENVIRONMENT_FIXTURE_PROVIDER_H
 #include "wow_task_lifecycle_fixture_provider.h"
 #include "wow_class_client_fixture_provider.h"
+#include "wow_control_entry_fixture_provider.h"
 #include "compat/include/wow_standard_class_provider.h"
 #include "compat/include/wow_task_profile_bindings.h"
 #include "compat/include/wow_cleanup_bindings.h"
@@ -32,6 +33,7 @@ static BOOL wow_fixture_bind_task_environment(void)
         wow_original_idle_registered, wow_original_separate_launch,
         WowOriginalForegroundIdleHook };
     return ntvdm_dpmi_initialize() &&
+        wow_control_entry_bind(&fixture_control_entry_provider) &&
         wow_task_lifecycle_bind(&wow_fixture_task_lifecycle_provider) &&
         wow_window_access_bind(&wow_fixture_window_access_provider) &&
         wow_class_client_bind(&wow_fixture_class_client_provider) &&

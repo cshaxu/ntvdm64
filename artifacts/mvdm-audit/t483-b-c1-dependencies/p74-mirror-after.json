@@ -1,0 +1,25 @@
+{
+  "scope": "Live tracked host C/H plus existing audited build/include/def text mirrors;no guest/binary/resources/deleted files",
+  "metric": "Same normalized zero-context block metric;mask only paired whole error-only branch bodies in both sides before comparison;keep framework,non-error alternatives and all other differences. Ignore#line for block count,validate separately.",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lb1.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lb1.c",
+      "original_sha256": "73dd9dffbf8c7184cc51771e34a4ace046ec476de4a5b9db3ee50fcd08c7c1a7",
+      "current_sha256": "723c371c74835086390781222244dd7e75cf08500ab5da644212c91e6006322a",
+      "raw": {
+        "blocks": 1,
+        "added": 5,
+        "deleted": 0
+      },
+      "filtered": {
+        "blocks": 1,
+        "added": 5,
+        "deleted": 0
+      },
+      "excluded": [],
+      "issues": [],
+      "rank": 1
+    }
+  ]
+}

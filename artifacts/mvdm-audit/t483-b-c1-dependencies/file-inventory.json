@@ -4,10 +4,10 @@
   "evidence_root": "build/t483-s19-thunk-scope-delivery",
   "counts": {
     "files": 94,
-    "completed": 70,
+    "completed": 71,
     "direct_unique": 0,
     "direct_raw": 0,
-    "compiled_header_rows": 58,
+    "compiled_header_rows": 54,
     "private_search_root_rows": 0
   },
   "files": [
@@ -5949,7 +5949,7 @@
     {
       "id": "BC1F060",
       "file": "src/compat/wow_edit_entry_bindings.c",
-      "status": "partially addressed in P51: 11 original control entry symbols supplied via synchronous provider; original USER layout headers remain",
+      "status": "completed in verified P74 delivery",
       "evidence": [
         {
           "kind": "linked-relocations",
@@ -6202,7 +6202,8 @@
           "product": ""
         }
       ],
-      "progress_evidence": "p51-delivery.json"
+      "progress_evidence": "p51-delivery.json",
+      "p74_evidence": "artifacts/mvdm-audit/t483-b-c1-dependencies/p74-edit-boundary-closure.json"
     },
     {
       "id": "BC1F061",

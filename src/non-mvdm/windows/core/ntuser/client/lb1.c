@@ -13,6 +13,12 @@
 #include "precomp.h"
 #pragma hdrstop
 
+BOOL WINAPI wow_original_list_caret_ready(PWND window)
+{
+    return window->fnid == FNID_LISTBOX;
+}
+
+#line 16
 LOOKASIDE ListboxLookaside;
 
 

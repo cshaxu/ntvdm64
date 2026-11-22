@@ -1,3 +1,4 @@
+#include "wow_control_entry_fixture_provider.h"
 #include "wow_task_lifecycle_fixture_provider.h"
 #include "wow_class_client_fixture_provider.h"
 #include "wow_standard_class_provider.h"
@@ -1270,7 +1271,8 @@ static void verify_client_death_exception(void)
 }
 int __cdecl main(int argc,char **argv)
 {
-    if (!wow_window_access_bind(&wow_fixture_window_access_provider) ||
+    if (!wow_control_entry_bind(&fixture_control_entry_provider) ||
+            !wow_window_access_bind(&wow_fixture_window_access_provider) ||
             !wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
     session owner;
     wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;

@@ -1,3 +1,4 @@
+#include "wow_control_entry_fixture_provider.h"
 #include "wow_class_client_fixture_provider.h"
 #include "wow_class_client_bindings.h"
 #include <stdio.h>
@@ -112,7 +113,8 @@ static void procedure_encoding(void)
 
 int __cdecl main(void)
 {
-    if (!wow_window_access_bind(&wow_fixture_window_access_provider) ||
+    if (!wow_control_entry_bind(&fixture_control_entry_provider) ||
+            !wow_window_access_bind(&wow_fixture_window_access_provider) ||
             !wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
     wow_class_lookup_context classes = {0};
     wow_task_order_thread thread={0};

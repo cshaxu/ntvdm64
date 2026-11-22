@@ -7,6 +7,9 @@ typedef struct wow_control_entry_provider {
     WNDPROC edit_a, edit_w, combo_a, combo_w, list_a, list_w;
     WNDPROC combo_list_a, combo_list_w, button_a, button_w;
     LONG (WINAPI *caret)(HWND, UINT, UINT, LONG);
+    WORD button_fnid, edit_fnid, combo_fnid, list_fnid, combo_list_fnid;
+    UINT edit_class_index, combo_list_class_index;
+    BOOL (WINAPI *caret_ready)(struct tagWND *);
 } wow_control_entry_provider;
 BOOL WINAPI wow_control_entry_bind(const wow_control_entry_provider *);
 const wow_control_entry_provider *WINAPI wow_control_original_provider(void);

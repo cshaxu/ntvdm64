@@ -252,6 +252,20 @@ const struct tagAPFNWOWHANDLERSIN *WINAPI wow_user_registered_callbacks(void)
 }
 
 
+BOOL WINAPI wow_user_edit_callbacks_ready(void)
+{
+    const PFNWOWHANDLERSIN *callbacks = wow_user_registered_callbacks();
+    if (!callbacks->pfnLocalAlloc || !callbacks->pfnLocalReAlloc ||
+            !callbacks->pfnLocalLock || !callbacks->pfnLocalUnlock ||
+            !callbacks->pfnLocalSize || !callbacks->pfnLocalFree ||
+            !callbacks->pfnWowEditNextWord || !callbacks->pfnEmptyCB ||
+            !callbacks->pfnGetExpWinVer) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    return TRUE;
+}
+
 BOOL WINAPI wow_user_get_messageA(LPMSG message, HWND window, UINT first, UINT last)
 {
     return wow_user_task_lifecycle_message(&wow_lifecycle, message, window,

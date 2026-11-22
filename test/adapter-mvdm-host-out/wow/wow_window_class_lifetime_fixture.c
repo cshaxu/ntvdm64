@@ -1,3 +1,4 @@
+#include "wow_control_entry_fixture_provider.h"
 #include "wow_window_words_binding.h"
 #include "wow_class_client_fixture_provider.h"
 #include "wow_user_borrow_scope.h"
@@ -78,7 +79,8 @@ int __cdecl main(void)
     CLSMENUNAME failed_menu={(LPSTR)1,(LPWSTR)2,(PUNICODE_STRING)3};
     DWORD *old_edit, *rejected_edit;
     wow_window_words_binding *unpublished;
-    if (!wow_window_access_bind(&wow_fixture_window_access_provider) ||
+    if (!wow_control_entry_bind(&fixture_control_entry_provider) ||
+            !wow_window_access_bind(&wow_fixture_window_access_provider) ||
             !wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
     old_edit = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(WND));
     rejected_edit = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(WND));

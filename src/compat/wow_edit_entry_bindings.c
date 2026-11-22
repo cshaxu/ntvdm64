@@ -1,10 +1,10 @@
 #include <windows.h>
 #include <winternl.h>
 #include "wow_edit_entry_bindings.h"
-#include "wow_user_client_view_layout.h"
+#include "wow_window_access_provider.h"
 #include "wow_edit_native_bindings.h"
 #include "wow_edit_drawing_bindings.h"
-#include "wow_edit_lookaside_bindings.h"
+#include "wow_edit_lookaside_provider.h"
 #include "wow_user_registered_callbacks.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_borrow_scope.h"
@@ -82,7 +82,9 @@ BOOL WINAPI wow_control_entry_bind(const wow_control_entry_provider *provider)
     if (!provider || !provider->edit_a || !provider->edit_w ||
         !provider->combo_a || !provider->combo_w || !provider->list_a ||
         !provider->list_w || !provider->combo_list_a || !provider->combo_list_w ||
-        !provider->button_a || !provider->button_w || !provider->caret) {
+        !provider->button_a || !provider->button_w || !provider->caret ||
+        !provider->caret_ready || provider->edit_class_index >= 20 ||
+        provider->combo_list_class_index >= 20) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&control_provider,
@@ -103,20 +105,6 @@ C_ASSERT(sizeof(LPARAM) == sizeof(LONG));
  * application message or a substitute for WM_NCDESTROY. */
 #define WOW_EDIT_WM_FINALDESTROY 0x0070
 
-static BOOL memory_callbacks_ready(void)
-{
-    const PFNWOWHANDLERSIN *callbacks = wow_user_registered_callbacks();
-    if (!callbacks->pfnLocalAlloc || !callbacks->pfnLocalReAlloc ||
-            !callbacks->pfnLocalLock || !callbacks->pfnLocalUnlock ||
-            !callbacks->pfnLocalSize || !callbacks->pfnLocalFree ||
-            !callbacks->pfnWowEditNextWord || !callbacks->pfnEmptyCB ||
-            !callbacks->pfnGetExpWinVer) {
-        SetLastError(ERROR_INVALID_STATE);
-        return FALSE;
-    }
-    return TRUE;
-}
-
 static LRESULT CALLBACK list_caret_entry(HWND, UINT, WPARAM, LPARAM);
 
 /* Called only inside edit_entry's exact-WND/task/borrow scope. The inner
@@ -136,7 +124,7 @@ static LRESULT edit_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
     DWORD entry_error = GetLastError();
     wow_user_runtime_thread *runtime = wow_user_runtime_current();
     wow_window_words_binding *words;
-    PWND state;
+    struct tagWND *state;
     wow_cleanup_window *owner;
     wow_task_callback_scope task_scope;
     wow_user_borrow_scope borrow_scope;
@@ -154,7 +142,7 @@ static LRESULT edit_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
         SetLastError(ERROR_INVALID_STATE);
         return 0;
     }
-    if (!memory_callbacks_ready() || !wow_edit_native_ready() ||
+    if (!wow_user_edit_callbacks_ready() || !wow_edit_native_ready() ||
             !wow_edit_lookaside_ready() || !wow_edit_drawing_ready() ||
             !wow_default_messages_ready()) return 0;
     /* Final destruction reads no system metrics. Never make release of an
@@ -178,8 +166,8 @@ static LRESULT edit_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
          * class names, HWND inference or a second registration table. */
         CopyMemory(context.atomSysClass, lifecycle->cleanup_shared.atomSysClass,
             sizeof(context.atomSysClass));
-        if (!context.atomSysClass[ICLS_EDIT] ||
-                !context.atomSysClass[ICLS_COMBOLISTBOX]) {
+        if (!context.atomSysClass[control_provider->edit_class_index] ||
+                !context.atomSysClass[control_provider->combo_list_class_index]) {
             SetLastError(ERROR_INVALID_STATE);
             return 0;
         }
@@ -190,7 +178,7 @@ static LRESULT edit_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
      * short carrier. Retain native validation, then publish the binding's
      * full WND identity to the strict graph/callback owners. */
     state = wow_window_words_client_state_value(words);
-    if (state) window = state->head.h;
+    if (state) window = wow_window_access_current()->window_handle(state);
     owner = wow_window_words_cleanup_value(words);
     cleanup = (runtime->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) != 0;
     if (!owner || (cleanup && (owner->thread != runtime->thread ||
@@ -274,14 +262,13 @@ CONTROL_ENTRY(button_entryW, button_bodyW)
 
 WNDPROC WINAPI wow_control_client_procedure(WORD fnid, BOOL unicode)
 {
-    switch (fnid) {
-    case FNID_BUTTON: return unicode ? button_entryW : button_entryA;
-    case FNID_EDIT: return unicode ? wow_edit_window_procW : wow_edit_window_procA;
-    case FNID_COMBOBOX: return unicode ? combo_entryW : combo_entryA;
-    case FNID_LISTBOX: return unicode ? list_entryW : list_entryA;
-    case FNID_COMBOLISTBOX: return unicode ? combo_list_entryW : combo_list_entryA;
-    default: return NULL;
-    }
+    const wow_control_entry_provider *provider = wow_control_original_provider();
+    if (fnid == provider->button_fnid) return unicode ? button_entryW : button_entryA;
+    if (fnid == provider->edit_fnid) return unicode ? wow_edit_window_procW : wow_edit_window_procA;
+    if (fnid == provider->combo_fnid) return unicode ? combo_entryW : combo_entryA;
+    if (fnid == provider->list_fnid) return unicode ? list_entryW : list_entryA;
+    if (fnid == provider->combo_list_fnid) return unicode ? combo_list_entryW : combo_list_entryA;
+    return NULL;
 }
 
 BOOL WINAPI wow_control_finalize_bound(HWND window)
@@ -292,10 +279,10 @@ BOOL WINAPI wow_control_finalize_bound(HWND window)
 static LRESULT CALLBACK list_caret_entry(HWND window, UINT message,
     WPARAM id, LPARAM time)
 {
-    PWND state = wow_window_client_validate_hwnd(window);
+    struct tagWND *state = wow_window_client_validate_hwnd(window);
     /* A queued callback must not dereference a freed original LBIV after
      * normal/final cleanup. Do not instantiate control state for a timer. */
-    if (!state || state->fnid != FNID_LISTBOX) return 0;
+    if (!state || !wow_control_original_provider()->caret_ready(state)) return 0;
     return wow_control_original_provider()->caret(window, message, (UINT)id, (LONG)time);
 }
 

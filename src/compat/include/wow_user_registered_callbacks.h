@@ -7,4 +7,5 @@ struct tagAPFNWOWHANDLERSIN;
  * Original consumers must run after registration and in their existing WOW
  * execution scope. The view is process-local and must not enter guest state. */
 const struct tagAPFNWOWHANDLERSIN *WINAPI wow_user_registered_callbacks(void);
+BOOL WINAPI wow_user_edit_callbacks_ready(void);
 #endif

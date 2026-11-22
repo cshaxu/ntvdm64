@@ -1,0 +1,167 @@
+{
+  "packet": "M0 T483 S20 P74",
+  "baseline": "d094d4ee111fb25c269fe75d0c01173de6aeb341",
+  "status": "verified production batch; commit/push in Git history",
+  "files_completed": [
+    "src/compat/wow_edit_entry_bindings.c"
+  ],
+  "counts": {
+    "files": 94,
+    "completed": 71,
+    "remaining": 23,
+    "B_C1_direct_function_links": 0,
+    "B_C1_compiled_headers": 54,
+    "B_C1_sources": 18,
+    "B_C2_direct_function_links": 0,
+    "B_C2_compiled_headers": 0
+  },
+  "ownership": "Existing entry provider supplies original control IDs, class indices and C ListBox predicate. Existing registration owner owns its unchanged memory-callback readiness check. B entry retains all task/borrow/TLS scopes and uses existing C window-handle provider. No new table, object, queue or state machine.",
+  "lifetime": "Static provider bound before class registration; original class indices bounded to existing atom snapshot. C predicate reads retained WND.fnid exactly as before: cleaned/deleted ListBox cannot receive caret callback. Existing validation and scope order unchanged.",
+  "mirror": {
+    "delta_points": 1,
+    "delta_lines": 5,
+    "before": {
+      "points": 0,
+      "lines": 0
+    },
+    "after": {
+      "points": 1,
+      "lines": 5
+    },
+    "physical_insertion": 6,
+    "proof": "Five-line original ListBox type predicate plus #line16. Removing the insertion restores exact HEAD bytes; downstream original diagnostic lines preserved. No guest change.",
+    "approval": "Standing one point below100 lines; pending R2759"
+  },
+  "publication": {
+    "images": 11,
+    "destinations": [
+      "O:\\repos.hobby\\ntvdm64/assets/release",
+      "O:/winnt/system32"
+    ],
+    "package": "7d7a9ce8-dcc4-4df7-8505-c8aa8157be1e",
+    "hashVerified": true,
+    "stopped": 0
+  },
+  "build": {
+    "exit": 0,
+    "pid": 11104,
+    "finished": "2026-11-22T10:03:28.8630890+00:00",
+    "started": "2026-11-22T10:02:21.6828324+00:00"
+  },
+  "boundary_tests": {
+    "exit": 0,
+    "pid": 24824,
+    "started": "2026-11-22T10:09:34.5544121+00:00",
+    "finished": "2026-11-22T10:09:38.7172994+00:00"
+  },
+  "targeted_cases": [
+    {
+      "exit": 0,
+      "case": "window-borrow",
+      "started": "2026-11-22T10:09:38.8142461+00:00",
+      "finished": "2026-11-22T10:09:49.6604273+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "native-creation",
+      "started": "2026-11-22T10:09:49.6633324+00:00",
+      "finished": "2026-11-22T10:10:01.1978436+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "class-lifetime",
+      "started": "2026-11-22T10:10:01.2001157+00:00",
+      "finished": "2026-11-22T10:10:10.5408674+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "task-lifecycle",
+      "started": "2026-11-22T10:10:10.5418505+00:00",
+      "finished": "2026-11-22T10:10:20.3030368+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "process-retirement",
+      "started": "2026-11-22T10:10:20.3041315+00:00",
+      "finished": "2026-11-22T10:10:29.6767115+00:00"
+    },
+    {
+      "exit": 0,
+      "case": "init-notification",
+      "started": "2026-11-22T10:10:29.6777921+00:00",
+      "finished": "2026-11-22T10:10:40.4012064+00:00"
+    }
+  ],
+  "verification": {
+    "exit": 0,
+    "pid": 24824,
+    "started": "2026-11-22T10:09:34.5095720+00:00",
+    "finished": "2026-11-22T10:11:21.8148162+00:00"
+  },
+  "additional_class_cases": [
+    {
+      "case": "class-client",
+      "finished": "2026-11-22T10:11:59.5375316+00:00",
+      "started": "2026-11-22T10:11:46.2303931+00:00",
+      "exit": 0
+    },
+    {
+      "case": "class-query",
+      "finished": "2026-11-22T10:12:12.0769779+00:00",
+      "started": "2026-11-22T10:11:59.5442548+00:00",
+      "exit": 0
+    }
+  ],
+  "source_identity": {
+    "src/compat/include/wow_edit_entry_bindings.h": "bb160fe9ef2547829c5185236054ff0a5bfbd8db4cd1971bc717b79be099c68d",
+    "src/compat/include/wow_user_registered_callbacks.h": "dddba110a0fdd3797b08ddb11dc2b6c6d1ff3f93af5bee944631492f12aabfac",
+    "src/compat/wow_edit_entry_bindings.c": "a1b0f74744bc83accdc8cdd6afb740eb8336e5a90e2d00c7411d8113ad1b40b6",
+    "src/compat/wow_user_registration_state.c": "8de48e44ee350dcdeec5a4593cab6e7840fc88e10694308ee8e65070253623b2",
+    "src/non-mvdm/windows/core/ntuser/client/lb1.c": "723c371c74835086390781222244dd7e75cf08500ab5da644212c91e6006322a",
+    "test/adapter-mvdm-host-out/wow/wow_class_client_fixture.c": "3e3c8c98c87b47a73f296101cd98ad5507a782bd7d4ae1b206237be236f137bf",
+    "test/adapter-mvdm-host-out/wow/wow_class_query_fixture.c": "57718fecf7ed948fe18e50b801b9e2bd77d40418ada29b26029aacf824d416cb",
+    "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c": "3471f46c14dd8c9c2c67c3c6bbb032829fd4f96442a39977fb23fc52fb6cd1fb",
+    "test/adapter-mvdm-host-out/wow/wow_task_environment_fixture_provider.h": "bd91d7f73185955eec511642626a24723b9316c826f6924eedb4e5f01ef88549",
+    "test/adapter-mvdm-host-out/wow/wow_user_task_lifecycle_fixture.c": "d21a863392476c9e88ac3c61440fbd550ce356e25ab32a7155362bedf812782e",
+    "test/adapter-mvdm-host-out/wow/wow_window_class_lifetime_fixture.c": "30deb18244402b0e6d0d130cc8d2a182371438b7a1f87845047135fec4ff7db3",
+    "test/mvdm-host/wow_page_domain_fixture.c": "bab4267bc1135ab8f6fde5157294a186e55a147f2e3fd47f2a88e6d439b73473",
+    "tools/build/New-T404S5Wow32ProviderNinja.ps1": "218cc06da4f59be9381f3a58bf4c61235d5fcf0fc3d62e8a4e011c43b89bae5d",
+    "test/adapter-mvdm-host-out/wow/wow_control_entry_fixture_provider.h": "9a4b3ffa6a1b613f5c8432f8e827ad5bd40fe2fecd3693812e0bea1c5c0bf9cd"
+  },
+  "evidence_root": "build\\t483-s20-p74-entry-final",
+  "initial_failure": {
+    "result": {
+      "pid": 22400,
+      "exit": 1,
+      "finished": "2026-11-22T10:00:31.9879767+00:00",
+      "error": "Lifecycle fixtures failed",
+      "started": "2026-11-22T09:59:27.5943752+00:00"
+    },
+    "cause": "Task lifecycle fixture lacked product-equivalent control-entry binding. Shared actual-provider fixture header now binds it before tests. Initial source also retained incidental lookaside layout include; final code uses existing opaque provider header. Final build/publication/test repeated."
+  },
+  "fixture_compile_retry": {
+    "result": {
+      "finished": "2026-11-22T10:05:55.5175523+00:00",
+      "exit": 1,
+      "error": "Lifecycle fixtures failed",
+      "started": "2026-11-22T10:05:13.0360785+00:00",
+      "pid": 4408
+    },
+    "cause": "New shared test provider header lacked PUNICODE_STRING prerequisite; added SDK winternl.h. Production code/package unchanged; rerun all targeted cases with fresh evidence roots."
+  },
+  "fixture_binding_retry": {
+    "result": {
+      "exit": 1,
+      "finished": "2026-11-22T10:07:55.5000853+00:00",
+      "pid": 10648,
+      "started": "2026-11-22T10:06:49.5890350+00:00",
+      "error": "Lifecycle fixtures failed"
+    },
+    "cause": "Process-retirement common setup also omitted control entry binding; audited all class/task fixture entry points and shared task environment, then supplied same real provider. Production package unchanged."
+  },
+  "limitations": [
+    "23 inventory files remain; S20 not closed.",
+    "Existing data-symbol/assembly/linkmap coverage gaps and Shell diagnostic limitation retained.",
+    "Class storage candidate still requires approval."
+  ]
+}
