@@ -3,6 +3,8 @@
 # Asset and archive checkout behavior remains unchanged; specific pinned inputs below are byte-preserved.
 assets/** !text !eol
 artifacts/** !text !eol
+# Authored CMD migration ledgers/scripts use LF; raw run evidence stays explicit.
+artifacts/build-migration/** text eol=lf
 
 # Imported historical and third-party trees are preserved byte-for-byte.
 # Their upstream whitespace is not a project-authored formatting violation.

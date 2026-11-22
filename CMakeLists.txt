@@ -40,6 +40,10 @@ endif()
 # handwritten inventory of MVDM or native-component sources.
 find_program(NTVDM_POWERSHELL NAMES pwsh REQUIRED)
 find_program(NTVDM_NODE NAMES node REQUIRED)
+# Bootstrap fixed data transformers with native tools, before legacy graph
+# owners consume generated headers. The remaining graph migration is separate.
+execute_process(COMMAND cmd.exe /d /c call "${CMAKE_SOURCE_DIR}/tools/build/bootstrap.cmd"
+  WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" COMMAND_ERROR_IS_FATAL ANY)
 set(_worker_tree "${CMAKE_BINARY_DIR}/worker-reference-x86")
 set(_native_args)
 if(NTVDM_ARCHITECTURE STREQUAL "x86")
@@ -71,7 +75,11 @@ set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/obj.vdm/ntvdm.src"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/ntvdm-export-ordinals.csv"
   "${CMAKE_SOURCE_DIR}/src/non-mvdm/base/win32/client/vdm.c"
-  "${CMAKE_SOURCE_DIR}/tools/build/GenerateCvidcCpuBinding.mjs"
+  "${CMAKE_SOURCE_DIR}/tools/build/native/cvidc.cpp"
+  "${CMAKE_SOURCE_DIR}/tools/build/native/font.c"
+  "${CMAKE_SOURCE_DIR}/tools/build/native/CMakeLists.txt"
+  "${CMAKE_SOURCE_DIR}/tools/build/bootstrap.cmd"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-guest/softpc.new/roms/v7vga.rom"
   "${CMAKE_SOURCE_DIR}/src/compat/include/generated/x86/prod/sas4gen.h"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/c2cpusad.h"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h"

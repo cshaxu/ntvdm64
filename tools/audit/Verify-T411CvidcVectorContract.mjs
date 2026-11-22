@@ -21,8 +21,8 @@ const metadata = requireText(root,
   'src/mvdm-host/softpc.new/base/cvidc/c2cpusad.h', /CpuVectorNames/);
 const publicSlots = listFromMetadata(metadata, 'CpuVectorNames');
 const privateSlots = listFromMetadata(metadata, 'CpuPrivateVectorNames');
-const generator = requireText(root, 'tools/build/GenerateCvidcCpuBinding.mjs',
-  /CalcQuickEventInstTime:\s*'c_cpu_calc_q_ev_inst_for_time'/);
+const generator = requireText(root, 'tools/build/native/cvidc.cpp',
+  /"CalcQuickEventInstTime"\s*,\s*"c_cpu_calc_q_ev_inst_for_time"/);
 const binder = requireText(root,
   'src/mvdm-host/softpc.new/base/cvidc/ev_glue.c',
   /Cpu\.Sas\s*=\s*&Sas[\s\S]*Sas\.Sas_overwrite_memory\s*=\s*c_sas_overwrite_memory[\s\S]*Cpu\.Video\s*=\s*\(IHP\)&Video/);
@@ -57,9 +57,9 @@ if (publicSlots.length !== 154 || privateSlots.length !== 55) {
   throw new Error(`unexpected original metadata count: public=${publicSlots.length}, private=${privateSlots.length}`);
 }
 if (!publicSlots.includes('CalcQuickEventInstTime') ||
-    !generator.includes('ClearHwInt: \'0\'') ||
-    !generator.includes("GetCpuState: '0'") ||
-    !generator.includes("SetCpuState: '0'")) {
+    !generator.includes('"ClearHwInt","0"') ||
+    !generator.includes('"GetCpuState","0"') ||
+    !generator.includes('"SetCpuState","0"')) {
   throw new Error('selected C-VID provider/null-slot disposition drifted');
 }
 if (!binder.includes('mvdm_cvidc_bind_video_vector();') ||

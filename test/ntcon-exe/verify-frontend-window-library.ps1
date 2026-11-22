@@ -23,7 +23,8 @@ foreach ($row in $manifest.files) {
     if ($row.compile) { $sources += $file }
 }
 New-Item -ItemType Directory -Force -Path $output | Out-Null
-& (Join-Path $repo 'tools/build/Generate-FrontendFont.ps1') -OutputFile (Join-Path $output 'native_pc_font.h')
+& (Join-Path $repo 'build/.ninja/build-tools/ntvdm-font.exe') (Join-Path $repo 'src/mvdm-guest/softpc.new/roms/v7vga.rom') (Join-Path $output 'native_pc_font.h')
+if ($LASTEXITCODE) { throw 'Native frontend font generation failed; run tools/build/bootstrap.cmd first' }
 $objects = @()
 $sources += Join-Path $owner 'window_frame.c'
 $sources += Join-Path $owner 'window_controller.c'

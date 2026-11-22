@@ -10,6 +10,18 @@ owns exact-target disposal and final residual inspection.
 Root-level compiler/linker products are prohibited and deliberately are not
 hidden by `.gitignore`. Do not keep a reusable task-specific configure tree.
 
+T484 is migrating the remaining interpreted build owners. `bootstrap.cmd`
+builds the fixed native data transformers in `build/.ninja/build-tools` using
+MSVC and native CMake/Ninja. The root CMake configuration calls it before
+graph generation; direct legacy generator callers must run it first.
+`NTVDM_VSDEVCMD` may select the Visual Studio environment script explicitly.
+The font transformer verifies the pinned ROM and emits the existing two
+bitmap arrays. The C-VID transformer reads the original slot/declaration and
+offset metadata and preserves its count checks. Neither launches processes
+nor interprets build recipes. Their unchanged outputs retain their timestamps.
+They are build tools, not additional released product components. Remaining
+PowerShell/Node/Python build edges have not yet been removed by this first step.
+
 `New-T310OriginalSoftpcNinja.ps1` creates the selected immutable Win32/x86
 CCPU40 formal graph in a stable CMake-validated Ninja subtree. It rejects retired
 machine inputs and may refresh only graph metadata in an existing

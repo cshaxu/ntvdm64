@@ -1,0 +1,15 @@
+{
+  "generatorSha256": "628618F46AACCF02DC6B251D9D814C7C31CACDCA37B0E4201B5C5C08334BA309",
+  "outputs": {
+    "cvidc_cpu_binding.inc": "F6F480D0BFF8A1CAB2C495506C831E69BF17276D82775F4037F435578C7D5E7E",
+    "cvidc_selected_providers.inc": "E088FA7905FC642FFA2B2726A5D2301C2869335D7E3149FBBFDF42B52E836B67",
+    "cvidc_accessor_cases.inc": "F69B1244CD763084239D4775C76A6D5414009DDAC7B1AD2C02BF926616CF3A49",
+    "v7_selected_plane.h": "4B29B95AE0C805B0383A73F42306E60CBE16177B7F3D46A67BDC48B50BC0F856"
+  },
+  "checks": [
+    "four-exact-production-projections",
+    "four-unchanged-mtimes",
+    "changed-metadata-rejected",
+    "four-prior-outputs-preserved"
+  ]
+}

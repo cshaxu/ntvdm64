@@ -987,8 +987,8 @@ $videoObjects = foreach ($name in $videoNames) {
     $object
 }
 $cvidcCpuBindingInclude = Join-Path $build 'generated/cvidc_cpu_binding.inc'
-$cvidcCpuBindingGenerator = Join-Path $root 'tools/build/GenerateCvidcCpuBinding.mjs'
-& $NodeExecutable $cvidcCpuBindingGenerator $cvidcCpuBindingInclude (Split-Path $cvidcRoot -Parent)
+$cvidcCpuBindingGenerator = Join-Path $root 'build/.ninja/build-tools/ntvdm-cvidc.exe'
+& $cvidcCpuBindingGenerator $cvidcCpuBindingInclude (Split-Path $cvidcRoot -Parent)
 if ($LASTEXITCODE -ne 0) { throw 'C-VID CPU binding generation failed.' }
 $cvidcObjects = foreach ($name in $cvidcNames) {
     $object = 'obj/cvidc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
@@ -1565,7 +1565,9 @@ if ($Architecture -eq 'x86') {
     # no dependency on the sibling repository at build or runtime.
     $windowManifest = Get-Content (Join-Path $frontendRoot 'nxvm-import.json') -Raw | ConvertFrom-Json
     $fontBuild = Join-Path $build 'frontend-font'
-    & (Join-Path $root 'tools/build/Generate-FrontendFont.ps1') -OutputFile (Join-Path $fontBuild 'native_pc_font.h')
+    New-Item -ItemType Directory -Force -Path $fontBuild | Out-Null
+    & (Join-Path $root 'build/.ninja/build-tools/ntvdm-font.exe') (Join-Path $root 'src/mvdm-guest/softpc.new/roms/v7vga.rom') (Join-Path $fontBuild 'native_pc_font.h')
+    if ($LASTEXITCODE) { throw 'Native frontend font generation failed' }
     if ((Get-NodeSha256 (Join-Path $root 'src/lib-nxvm/LICENSE.nxvm')) -ne $windowManifest.licenseSha256) {
         throw 'Frontend nxvm license hash mismatch'
     }
@@ -2756,8 +2758,8 @@ sources = @('src/common/protocol/native_hook.h', 'src/nthook-dll/hook.h', 'src/n
             offset = 0x2230
             bytes = 3584
             disposition = 'immutable bitmap-only data; no firmware execution or guest modification'
-            generator = 'tools/build/Generate-FrontendFont.ps1'
-            generatorSha256 = Get-NodeSha256 (Join-Path $root 'tools/build/Generate-FrontendFont.ps1')
+            generator = 'tools/build/native/font.c'
+            generatorSha256 = Get-NodeSha256 (Join-Path $root 'tools/build/native/font.c')
         }
         sources = @($frontendWindowSources | ForEach-Object {
             [ordered]@{ path = $_; sha256 = Get-NodeSha256 (Join-Path $root $_) }

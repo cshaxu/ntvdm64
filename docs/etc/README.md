@@ -1432,3 +1432,6 @@ records the admitted interpreter constraint, sequential stages and acceptance.
 
 [T484 S1 build inventory](evidence/t484-s1-build-inventory.md) records the
 producer chain, DIR-ordered caller worklist, output coverage and migration design.
+
+[T484 S2 native generator batch](evidence/t484-s2-native-generators.md) records
+the first two migrations, byte-equivalence tests and host package delivery.

@@ -1,0 +1,148 @@
+[
+  {
+    "image": "VCDEX.DLL",
+    "sha256": "E1BF8DEEBA622FA9795851F1EC597C567D372F4F125F77339D81503BB257C78E",
+    "previous_input_sha256": "E1BF8DEEBA622FA9795851F1EC597C567D372F4F125F77339D81503BB257C78E",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "run16.exe",
+    "sha256": "2ABB850DC3289A06F7AFE4A3FE9F3E74894239208E944E8649435D05C21FFBD1",
+    "previous_input_sha256": "F85D35EB38F343782844EFB9311D6F4A6FC5E23F8A4BED56D4AD176EE5DCC91E",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      248,
+      249,
+      250,
+      214100,
+      214101,
+      214102
+    ],
+    "timestamp_fields": [
+      248,
+      214100
+    ]
+  },
+  {
+    "image": "ntsrv.exe",
+    "sha256": "CEF462080E509A62ED2FDE92F9C72693AEE44D6061DAB0A1AA2987F4A2C5B5D8",
+    "previous_input_sha256": "15565454528E42AE1D753EA51E806CC6474EF838473688348D63DA0AA8DA4504",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      256,
+      257,
+      258,
+      300548,
+      300549,
+      300550
+    ],
+    "timestamp_fields": [
+      256,
+      300548
+    ]
+  },
+  {
+    "image": "ntcon.exe",
+    "sha256": "8BAF3D35057272370A67AA3577F997FE47BB3ADA26828400F5CF060BE187D284",
+    "previous_input_sha256": "8085528B2348544D36C2CD190185146E6CB7F3B2016C1036C7BBBCD797879F79",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      264,
+      265,
+      266,
+      251092,
+      251093,
+      251094
+    ],
+    "timestamp_fields": [
+      264,
+      251092
+    ]
+  },
+  {
+    "image": "ntvdm.exe",
+    "sha256": "23F39CD368D15AEBE367583F5E580247DF64FCCB088C3FD232CC9E8774886AF6",
+    "previous_input_sha256": "7B382C28A4ADE323D02AA4658A539F321A5CF7F0A71EE0A53C2E692FBCC781A3",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      288,
+      289,
+      290,
+      1719868,
+      1719869,
+      1719870
+    ],
+    "timestamp_fields": [
+      288,
+      1791316,
+      1719868
+    ]
+  },
+  {
+    "image": "ntvwm.exe",
+    "sha256": "A37579549E70CAF0352E8B20427E609FB181F4CDA42CB11CADF0DA7B8F1E31B1",
+    "previous_input_sha256": "A3936B86160892BD8C0C372519170323AFF2D184B2BB3D77DDF686D8132949D6",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      248,
+      249,
+      250,
+      227268,
+      227269,
+      227270
+    ],
+    "timestamp_fields": [
+      248,
+      227268
+    ]
+  },
+  {
+    "image": "ntmon.exe",
+    "sha256": "ABD311B5BB798259556F827942D33FBC555B45FB183434BD467B806E86CDD30E",
+    "previous_input_sha256": "ABD311B5BB798259556F827942D33FBC555B45FB183434BD467B806E86CDD30E",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "WOW32.DLL",
+    "sha256": "5C0DC19942472ACEFC747990B2498A95AC325308807CD844F3CD7A78E7845FED",
+    "previous_input_sha256": "5C0DC19942472ACEFC747990B2498A95AC325308807CD844F3CD7A78E7845FED",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "VDMREDIR.DLL",
+    "sha256": "36177B2049F054623045A376E533A3F8D943AD8A337FAC2A797C982EC0313506",
+    "previous_input_sha256": "36177B2049F054623045A376E533A3F8D943AD8A337FAC2A797C982EC0313506",
+    "classification": "raw-identical"
+  },
+  {
+    "image": "nthook32.dll",
+    "sha256": "18A66305608F8FB08BC0E570997145F846515579ACC58CAD86FABD5E34F4144F",
+    "previous_input_sha256": "095BDD7A370FD35AF171CFB52E1AD34F02A2B285C756DDEB0450ABC65872EA31",
+    "classification": "pe-link-timestamps-only",
+    "differing_bytes": 6,
+    "offsets": [
+      272,
+      273,
+      274,
+      134228,
+      134229,
+      134230
+    ],
+    "timestamp_fields": [
+      272,
+      203316,
+      134228
+    ]
+  },
+  {
+    "image": "nthook64.dll",
+    "sha256": "BF2FFDBB94EB4D8506A0F6DDB58053B51518D48A57B0E67D693FE9CE5E4BEE3C",
+    "previous_input_sha256": "BF2FFDBB94EB4D8506A0F6DDB58053B51518D48A57B0E67D693FE9CE5E4BEE3C",
+    "classification": "raw-identical"
+  }
+]

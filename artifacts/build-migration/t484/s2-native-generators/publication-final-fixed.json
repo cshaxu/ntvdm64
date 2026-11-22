@@ -1,0 +1,10 @@
+{
+  "images": 11,
+  "destinations": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:/winnt/system32"
+  ],
+  "package": "9459f9ca-4f2f-4643-bac7-e4c2b92149bb",
+  "hashVerified": true,
+  "stopped": 0
+}

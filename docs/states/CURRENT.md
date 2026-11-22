@@ -33,12 +33,22 @@ S1 [inventory/design](../etc/evidence/t484-s1-build-inventory.md) records817
 script/metadata inputs,355 ordered migration candidates,1116 literal references
 and9 existing graphs containing21 interpreter command rules. Candidate counts
 are not proved live dependencies. All11 host and14 addon outputs are accounted
-for; no producer has yet migrated. Product code/assets remain unchanged.
+for. S2 P1 migrates two native data generators; the remaining candidate
+dispositions are not marked complete.
 
 The [execution plan](../etc/operations/t484-cmd-build-release-plan.md) defines
 the whole task. S2 now owns implementation; addon/test producer migration and
 release consolidation remain sequential S3/S4 obligations. Existing release
 images and previous-task staging directories must not become bootstrap inputs.
+
+[S2 P1](../etc/evidence/t484-s2-native-generators.md): removed the interpreted
+font/C-VID generators; all5 generated files are byte-identical to production.
+Final cached full build passed. Eleven images published to both destinations,
+22 hashes verified; package9459f9ca-4f2f-4643-bac7-e4c2b92149bb. Raw input
+comparison:5 identical,6 PE-timestamp-only. Generator tests, linked C-VID
+contract and9-graph strict boundary checks passed. Documentation, links and
+diff checks passed. The containing S2 P1 commit is this batch's delivery
+identity. Root CMake still requires interpreters; S2 is not closed.
 
 ## S1 Closure Record
 
@@ -52,9 +62,9 @@ admission; its containing commit is the delivery identity.
 [T483 closure](../history/m0-t483-closure.md) indexes all S1-S21 outcomes,
 retained mirror decisions and known boundaries. Final production revision is
 9e7eb19c0 (S20 P85), package100b16d9-992d-4e2c-8d99-66a4e891dd26.
-All11 images remain published to assets/release and O:/winnt/system32;
-S21 rechecked all22 hashes and unchanged product inputs. P85 cached full build,
-targeted tests and Full20/20 evidence are reused, not rerun.
+The current publication is T484 S2 P1, recorded above; P85 is its behavior
+comparison baseline. P85 Full20/20 runtime evidence is reused for this
+byte-equivalent/timestamp-only build change, not reported as a new Full run.
 
 S19 completed38/38 B-to-C2 files; S20 completed94/94 B-to-C1 files.
 Private compiled headers/search roots and linked implementation dependencies

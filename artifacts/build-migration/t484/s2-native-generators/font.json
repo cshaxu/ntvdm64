@@ -1,0 +1,14 @@
+{
+  "cases": [
+    "exact-production-font-header",
+    "unchanged-output-preserves-mtime",
+    "wrong-rom-preserves-output",
+    "truncated-rom-preserves-output",
+    "output-error-propagates",
+    "immutable-rom-and-no-temporary-residue"
+  ],
+  "count": 6,
+  "generatorSha256": "B4074144C0545D1D1C7ACB6E74F700C1D2A865940557F52B05617B4A847189A7",
+  "romSha256": "970F105CD9E42EE56F07AAE695BAC89786D3455AB9D4C1EA9A1D1643B1E8F6F0",
+  "headerSha256": "B295271C7D37D9D409B77FB9E01D429FBA8091F428AD7746A6A5073963790D83"
+}

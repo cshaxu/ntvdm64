@@ -49,7 +49,8 @@ if($edges.ContainsKey('ntsrv-source-closure')){$edges['ntsrv.exe']=$edges['ntsrv
 $null=New-Item -ItemType Directory -Path (Join-Path $build 'obj/basesrv') -Force
 if($Component -in @('Worker','Frontend')){
  $null=New-Item -ItemType Directory -Path (Join-Path $build 'frontend-font') -Force
- & (Join-Path $root 'tools/build/Generate-FrontendFont.ps1') -OutputFile (Join-Path $build 'frontend-font/native_pc_font.h')
+ & (Join-Path $root 'build/.ninja/build-tools/ntvdm-font.exe') (Join-Path $root 'src/mvdm-guest/softpc.new/roms/v7vga.rom') (Join-Path $build 'frontend-font/native_pc_font.h')
+ if ($LASTEXITCODE) { throw 'Native frontend font generation failed' }
 }
 $graph=[Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
