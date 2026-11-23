@@ -1,34 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "3938f5b3a3b48f60722511021a20e5d9e1ea7ea6",
+  "head": "de28250a03a6de8d3d4a9248d2e79d314c92dc83",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/build-wow-host-attach-failure.ps1",
+    " M test/observation/build-wow-message-transaction-provider.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/wow32/CMakeLists.txt",
-    " M tools/build/wow32/callback-abort.cmake",
-    "?? artifacts/build-migration/t484/s3-host-attach/",
-    "?? docs/etc/evidence/t484-s3-host-attach.md",
-    "?? test/observation/wow_attach_failure_marker.inc",
-    "?? test/observation/wow_unload_marker.inc",
-    "?? tools/build/wow32/diagnostic-provider.cmake",
-    "?? tools/build/wow32/host-attach-failure.cmake"
+    "?? artifacts/build-migration/t484/s3-message-transaction/",
+    "?? docs/etc/evidence/t484-s3-message-transaction.md",
+    "?? tools/build/wow32/message-transaction.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 81,
-    "unchanged": 156,
+    "changed": 82,
+    "unchanged": 155,
     "removed": 118
   },
   "disposition_counts": {
     "migrated-delivered": 27,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 118,
-    "pending-producer-migration": 50,
+    "pending-producer-migration": 51,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 155,
+    "requires-disposition-reconciliation": 154,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 190,
@@ -1813,8 +1809,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "ece976d3d9564f3179424808353fa606c45ed12a3b2956fef7c679f5a60e576d",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "de28250a03a6de8d3d4a9248d2e79d314c92dc83"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-host-attach.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-host-attach.md",
@@ -1826,12 +1826,16 @@
       "id": "B0101",
       "file": "test/observation/build-wow-message-transaction-provider.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "57db4831605c1a95d3b5a738d57f794c68ebbc5f856553021eb17588a9da0d52",
+      "state": "changed",
+      "current_sha256": "fb16e705d59b984cea5805b46b7aedd0a3258a754e875b647e5ad7b30d8a231f",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "evidence": "docs/etc/evidence/t484-s3-message-transaction.md",
+        "reason": "Current producer migrated; sealed P21Control still uses interpreted historical recipe and remains pending"
+      }
     },
     {
       "id": "B0102",
@@ -5104,6 +5108,12 @@
     }
   ],
   "commits": {
+    "de28250a03a6de8d3d4a9248d2e79d314c92dc83": {
+      "subject": "T484 S3 P73 migrate WOW host attach failure diagnostics",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-host-attach.md"
+      ]
+    },
     "3938f5b3a3b48f60722511021a20e5d9e1ea7ea6": {
       "subject": "T484 S3 P72 migrate WOW callback abort diagnostic producer",
       "evidence": [
@@ -6661,44 +6671,52 @@
       "file": "test/observation/build-wow-message-transaction-provider.ps1",
       "hits": [
         {
-          "line": 4,
+          "line": 11,
           "text": "# Diagnostic whole-TU replacement, never a copied Ninja/CMake tree. Build the"
         },
         {
-          "line": 10,
+          "line": 17,
           "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
         },
         {
-          "line": 15,
+          "line": 22,
           "text": "$commands=@(& ninja.exe -C $provider -t commands wow32.dll)"
         },
         {
-          "line": 18,
+          "line": 25,
           "text": "$link=$commands|Where-Object {$_ -match '^link /nologo /machine:x86 /dll '}|Select-Object -Last 1"
         },
         {
-          "line": 19,
+          "line": 26,
           "text": "if(!$compile -or !$link){throw 'Actual message TU/link closure missing'}"
         },
         {
-          "line": 27,
+          "line": 34,
           "text": "$diagnosticLink=$link.Replace('obj/wmdisp32.obj',('\"'+$root+'/message.obj\"')).Replace('/map:wow32.dll.map',('/map:\"'+$root+'/WOW32.map\"')).Replace('/out:wow32.dll',('/out:\"'+$root+'/WOW32.DLL\" /implib:\"'+$root+'/WOW32.lib\"'))"
         },
         {
-          "line": 28,
+          "line": 35,
           "text": "if($diagnosticLink -eq $link -or $diagnosticLink.Contains('obj/wmdisp32.obj') -or $compile -notmatch 'wow_message_transaction_provider'){throw 'Diagnostic selection did not replace only its actual TU'}"
         },
         {
-          "line": 31,
+          "line": 38,
           "text": "foreach($step in @(@('compile',$compile),@('link',$diagnosticLink))){"
         },
         {
-          "line": 40,
+          "line": 47,
           "text": "$objects=@([regex]::Matches($link,'(?<!\\S)obj/[^\\s\"]+\\.(obj|res)')|ForEach-Object {Join-Path $provider $_.Value}|Select-Object -Unique)"
         },
         {
-          "line": 41,
+          "line": 48,
           "text": "@($PSCommandPath,$source,\"$root/message_original_owner.c\",\"$provider/build.ninja\")+$objects|Get-FileHash|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
+        },
+        {
+          "line": 59,
+          "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
+        },
+        {
+          "line": 77,
+          "text": "@($PSCommandPath,\"$PSScriptRoot/wow_message_transaction_provider.c\",\"$root/message_original_owner.c\",\"$provider/build.ninja\")+$objects|Get-FileHash|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
         }
       ]
     },

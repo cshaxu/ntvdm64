@@ -419,5 +419,10 @@
     "evidence": "docs/etc/evidence/t484-s3-host-attach.md",
     "status": "migrated-delivered",
     "reason": "Two native diagnostic projections match old runner; real product profile/order reused through shared one-object provider; export/cache/full-build checks pass"
+  },
+  "test/observation/build-wow-message-transaction-provider.ps1": {
+    "status": "pending-producer-migration",
+    "evidence": "docs/etc/evidence/t484-s3-message-transaction.md",
+    "reason": "Current producer migrated; sealed P21Control still uses interpreted historical recipe and remains pending"
   }
 }

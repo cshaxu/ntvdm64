@@ -98,7 +98,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P73 host attach producers](../etc/evidence/t484-s3-host-attach.md) | Two native failure modes preserve old source projection; shared229-object provider, exports/cache/frame/full-build checks pass; B0100 complete. |
 
-Implementation batches through P73 passed their cached full host build. P73 checks11 raw host inputs
+| [P74 message transaction](../etc/evidence/t484-s3-message-transaction.md) | Current diagnostic producer migrated; sealed P21Control remains pending, so B0101 is not complete. |
+
+Implementation batches through P74 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
