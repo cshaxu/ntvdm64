@@ -1655,3 +1655,5 @@ post-publication targeted checks.
 - [T484 S3 Console trace/control producers](evidence/t484-s3-con-trace.md).
 
 - [T484 S3 BASE contract producers](evidence/t484-s3-base-contracts.md).
+
+- [T484 S3 video and CCPU runner migration](evidence/t484-s3-video-tick.md).

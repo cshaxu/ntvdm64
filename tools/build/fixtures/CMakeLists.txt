@@ -360,3 +360,5 @@ endforeach()
 include(measurements.cmake)
 
 include(base-contracts.cmake)
+
+include(blocked-video.cmake)

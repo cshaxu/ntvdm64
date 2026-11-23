@@ -161,6 +161,7 @@ for %%I in (window-render worker-primitives worker-primitives-high-resolution) d
 if "%TARGET%"=="ccpu-header-selection" if "%~1"=="x86" set "SELECTED=1"
 if "%TARGET%"=="win101-control-fixtures" if "%~1"=="x86" set "SELECTED=1"
 for %%I in (base-classifier-path base-resource base-vdm-config) do if "%TARGET%"=="%%I" set "SELECTED=1"
+if "%TARGET%"=="blocked-video-tick" set "SELECTED=1"
 if not defined SELECTED exit /b 2
 if "%TARGET%"=="xms-mapped" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="xms-startup" if not "%~1"=="x86" exit /b 2

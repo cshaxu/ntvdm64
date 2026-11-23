@@ -490,5 +490,20 @@
     "status": "migrated-delivered",
     "reason": "P83 native CMD targets retain actual selected product objects and original caller flags; x86/x64 runtime assertions and input identity checks pass.",
     "evidence": "docs/etc/evidence/t484-s3-base-contracts.md"
+  },
+  "test/observation/verify-blocked-video-tick.ps1": {
+    "status": "migrated-delivered",
+    "reason": "P84 moves function projection/compilation to native CMD target; exact normalized bodies, x86/x64 runtime and cache verified; removes unnecessary staging helper.",
+    "evidence": "docs/etc/evidence/t484-s3-video-tick.md"
+  },
+  "test/observation/verify-ccpu-bit-fault.py": {
+    "status": "retained-native-delegate",
+    "reason": "P84 audited all subprocesses: native fixture/oracle execution only, no producer or staging. Existing native targets built; 13 fault and118 matrix assertions plus native oracle pass.",
+    "evidence": "docs/etc/evidence/t484-s3-video-tick.md"
+  },
+  "test/observation/verify-ccpu-bit-matrix.py": {
+    "status": "retained-native-delegate",
+    "reason": "P84 audited all subprocesses: native fixture/oracle execution only, no producer or staging. Existing native targets built; 13 fault and118 matrix assertions plus native oracle pass.",
+    "evidence": "docs/etc/evidence/t484-s3-video-tick.md"
   }
 }

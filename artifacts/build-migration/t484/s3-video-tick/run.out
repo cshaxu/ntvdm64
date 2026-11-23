@@ -1,0 +1,4 @@
+PASS original flush: graphics repaint, initialization/update/mode gates, windowed and text routes
+PASS blocked video tick: no transport, retained dirt/cursor/mode/stream state, resume, shell-count independence, final paint and real error propagation
+PASS original flush: graphics repaint, initialization/update/mode gates, windowed and text routes
+PASS blocked video tick: no transport, retained dirt/cursor/mode/stream state, resume, shell-count independence, final paint and real error propagation

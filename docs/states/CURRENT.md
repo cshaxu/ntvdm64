@@ -36,41 +36,7 @@ interpreter-free end-to-end acceptance have not completed.
 
 | S3 delivery | Actual result |
 | --- | --- |
-| [P1-P35](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
-| [P36 CPU/EMS probes](../etc/evidence/t484-s3-cpu-guest.md) | Shared native production for four runners;23 COM byte comparisons pass; shared runtime/staging dependencies remain open. |
-| [P37 Win31 editor](../etc/evidence/t484-s3-win31-editor.md) | Native controller composition;20 byte-identical variants,12 rejection controls and stable cache; transitive runtime/staging still pending. |
-| [P38 VM identity](../etc/evidence/t484-s3-vm-identity.md) | Two callers share four native assembly kinds;25 byte-identical variants and cache/failure controls; per-installation field filling remains pending. |
-| [P39 Win95 editor](../etc/evidence/t484-s3-win95-editor.md) | Shared native composition;48 Win95 byte comparisons,20 Win31 comparisons and12 rejections pass; binary fields/staging remain open. |
-| [P40 native guest output](../etc/evidence/t484-s3-native-guest-output.md) | Native x86 producer;137728-byte images differ only in two timestamp bytes; cache and parser pass, staging remains open. |
-| [P41 PIC/BIOS producers](../etc/evidence/t484-s3-pic-bios.md) | Native PIC guest and slave BIOS producers;24 PIC assertions,79 BIOS checks and221-byte guest identity pass. |
-| [P42 keyboard producers](../etc/evidence/t484-s3-keyboard-shadow.md) | Three native helpers;four original-reader outcomes, PIF output and argument rejection pass; historical integration staging remains pending. |
-| [P43 serial producer](../etc/evidence/t484-s3-serial-probe.md) | Native parameterized assembly;five masks byte-identical, cache and six rejection cases pass; runtime staging remains open. |
-| [P44 Win16 probes](../etc/evidence/t484-s3-win16-probes.md) | Two runners share nine byte-identical native DDEML/timer variants; no-op cache passes; shared staging/helper chain remains open. |
-| [P45 fixed Win16 probes](../etc/evidence/t484-s3-win16-fixed.md) | Four runners share native assembly/listings;all four outputs match and prior nine variants remain unchanged; staging is pending. |
-| [P46 discovery pair](../etc/evidence/t484-s3-discovery.md) | Guest/listing identical;native peer differs only in two timestamps;local producers migrated, shared staging remains open. |
-| [P47 message probes](../etc/evidence/t484-s3-message-probes.md) | Native feature composition;26 guest binaries/listings identical,13 timestamp-only peers, cache and6 rejection checks pass; helper/staging pending. |
-| [P48 print probe](../etc/evidence/t484-s3-print-probe.md) | Native dynamic output-directory composition;three byte-identical path cases, cache and2 rejection checks pass; staging pending. |
-| [P49 shell/hook probes](../etc/evidence/t484-s3-shell-probes.md) | All42 guest variants byte-identical;caret/OLE native peers timestamp-only;cache and rejection checks pass, helper/staging pending. |
-| [P50 callback diagnostic](../etc/evidence/t484-s3-callback-cost.md) | Native229-object WOW diagnostic with one reversible replacement;recorder/parser controls and cache pass;downstream measurement/staging pending. |
-| [P51 Clipboard/DC/dialog](../etc/evidence/t484-s3-clipboard-probes.md) | Three runners migrated;9 identical guest/listing pairs,3 timestamp-only native outputs,cache and retirement rejection pass;staging pending. |
-
-| [P52 edit contracts](../etc/evidence/t484-s3-edit-contracts.md) | Native targets link current production wmsgem;24 tabstop and6 wordbreak cases pass;no interpreted producer remains in B0057. |
-
-| [P53 native message groups](../etc/evidence/t484-s3-message-groups.md) | CMD owns external/cross/pending build selection;both architectures verified;runtime manifest/staging remains open. |
-
-| [P54 file cache](../etc/evidence/t484-s3-file-cache.md) | Native object conversion/link;577 cache checks pass;B0059 producer migrated. |
-
-| [P55 graph diagnostic](../etc/evidence/t484-s3-graph-cost.md) | Native reversible projection;229 members,one replacement;counter controls and BuildOnly pass;downstream staging/measurement pending. |
-
-| [P56 idle witnesses](../etc/evidence/t484-s3-idle.md) | Native hosts and four guest variants;four BuildOnly combinations pass;shared runtime staging remains pending. |
-
-| [P57 mine witnesses](../etc/evidence/t484-s3-mine.md) | Native gameplay/exception peers and39 byte-identical guest variants;shared runtime staging remains pending. |
-
-| [P58 latency witnesses](../etc/evidence/t484-s3-latency.md) | Native latency/sampler profiles and current-token environment reader;graph runner unified;runtime staging remains pending. |
-
-| [P59 dialog/observer witnesses](../etc/evidence/t484-s3-ui.md) | Three timestamp-only native witnesses;counter and argument controls pass;shared staging remains pending. |
-
-| [P60 page diagnostic](../etc/evidence/t484-s3-page.md) | Native reversible projection and single-member archive substitution;counter controls and BuildOnly pass;runtime staging remains pending. |
+| [P1-P60](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
 
 | [P61 obsolete style aggregator](../etc/evidence/t484-s3-style-retirement.md) | Retires orphaned T450 style-mode matrix; ordinary guest probes retained; no build inputs changed. |
 
@@ -118,7 +84,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P83 BASE contract producers](../etc/evidence/t484-s3-base-contracts.md) | Three native targets link actual x86/x64 product objects;all six runtime cases pass; B0112-B0114 complete. |
 
-Implementation batches through P83 passed their cached full host build. P73 checks11 raw host inputs
+| [P84 video/CCPU runners](../etc/evidence/t484-s3-video-tick.md) | Native video projection passes both architectures;131 CCPU cases and native oracle pass; B0115-B0117 complete. |
+
+Implementation batches through P84 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

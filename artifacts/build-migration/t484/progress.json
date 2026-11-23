@@ -1,32 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "2f2a1c10605bc7c0566c870cd931261a8e63f353",
+  "head": "975b1e49775ef3dde9f542aa56bdbd20aea306da",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
+    " M docs/etc/evidence/t484-s3-early-deliveries.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-base-classifier-path.ps1",
-    " M test/observation/verify-base-resource.ps1",
-    " M test/observation/verify-base-vdm-config.ps1",
+    " M test/observation/verify-blocked-video-tick.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-base-contracts/",
-    "?? docs/etc/evidence/t484-s3-base-contracts.md",
-    "?? tools/build/fixtures/base-contracts.cmake"
+    "?? artifacts/build-migration/t484/s3-video-tick/",
+    "?? docs/etc/evidence/t484-s3-video-tick.md",
+    "?? tools/build/fixtures/blocked-video.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 94,
-    "unchanged": 142,
+    "changed": 95,
+    "unchanged": 141,
     "removed": 119
   },
   "disposition_counts": {
-    "migrated-delivered": 37,
+    "migrated-delivered": 38,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 119,
     "pending-producer-migration": 53,
-    "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 141,
+    "retained-native-delegate": 4,
+    "requires-disposition-reconciliation": 138,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 185,
@@ -2042,8 +2041,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "9482a7946d85f2d2e2b10a674d7dd6acf5f4ec57e88a55574980a7b75f5d5281",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "975b1e49775ef3dde9f542aa56bdbd20aea306da"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-base-contracts.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -2057,8 +2060,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "07329dc99bb64b71e24f4a319e8604b62cf1dfa5c02e85c42dba2fecc420fe4e",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "975b1e49775ef3dde9f542aa56bdbd20aea306da"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-base-contracts.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -2072,8 +2079,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "666a5c4c0e58311675248abe8f2ac1d79aa585652f777a68bdbb7a2cdb2b6692",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "975b1e49775ef3dde9f542aa56bdbd20aea306da"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-base-contracts.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -2085,12 +2096,16 @@
       "id": "B0115",
       "file": "test/observation/verify-blocked-video-tick.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "2b8171c0b901ed14ed45913e1b82d8cc1a0557a619af1d5cc8396ad02e496c5c",
+      "state": "changed",
+      "current_sha256": "903d538906fc1f2bfe0611d843dcacc5757de1ed75e1a67f8733c03b7eb8fc53",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "P84 moves function projection/compilation to native CMD target; exact normalized bodies, x86/x64 runtime and cache verified; removes unnecessary staging helper.",
+        "evidence": "docs/etc/evidence/t484-s3-video-tick.md"
+      }
     },
     {
       "id": "B0116",
@@ -2100,8 +2115,12 @@
       "current_sha256": "a809f5de151961d73d2bb9afb47c1d84eb06b9499b4a65eb37a7e97f34a7af07",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "status": "retained-native-delegate",
+        "reason": "P84 audited all subprocesses: native fixture/oracle execution only, no producer or staging. Existing native targets built; 13 fault and118 matrix assertions plus native oracle pass.",
+        "evidence": "docs/etc/evidence/t484-s3-video-tick.md"
+      }
     },
     {
       "id": "B0117",
@@ -2111,8 +2130,12 @@
       "current_sha256": "055564dc61c454088b8dfc61cb0c435064c90e5909676dce13279f978c65e4fa",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "status": "retained-native-delegate",
+        "reason": "P84 audited all subprocesses: native fixture/oracle execution only, no producer or staging. Existing native targets built; 13 fault and118 matrix assertions plus native oracle pass.",
+        "evidence": "docs/etc/evidence/t484-s3-video-tick.md"
+      }
     },
     {
       "id": "B0118",
@@ -5209,6 +5232,12 @@
     }
   ],
   "commits": {
+    "975b1e49775ef3dde9f542aa56bdbd20aea306da": {
+      "subject": "T484 S3 P83 migrate BASE contract producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-base-contracts.md"
+      ]
+    },
     "2f2a1c10605bc7c0566c870cd931261a8e63f353": {
       "subject": "T484 S3 P82 migrate Console and control fixture producers",
       "evidence": [
@@ -6976,8 +7005,8 @@
       "file": "test/observation/verify-blocked-video-tick.ps1",
       "hits": [
         {
-          "line": 25,
-          "text": "& $wrapper cl.exe /nologo /MT /O2 /W4 /WX /TC \"/I$root\" \"/Fo$root/test.obj\" \"/Fe$root/test.exe\" \"$repo/test/ntvdm-exe/softpc/blocked_video_tick_test.c\" *> \"$root/build.log\""
+          "line": 13,
+          "text": "$native=Join-Path $repo \"build/.ninja/fixtures-$Architecture\""
         }
       ]
     },
