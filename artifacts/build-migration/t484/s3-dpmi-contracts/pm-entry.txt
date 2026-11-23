@@ -1,0 +1,1 @@
+PM_ENTRY_CONTRACT cases=65538 failed=0 (mock-boundary, not CPU execution)

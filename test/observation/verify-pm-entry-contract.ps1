@@ -1,20 +1,16 @@
 param([string]$BuildRoot = 'build/M0-T422/S2/pm-entry-contract')
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
-$out=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
-if (!$out.StartsWith((Join-Path $repo 'build/'),[StringComparison]::OrdinalIgnoreCase)) { throw 'Build root must be under build' }
-New-Item -ItemType Directory -Path $out -Force | Out-Null
+$out=[IO.Path]::GetFullPath($BuildRoot, $repo)
+if (!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path -LiteralPath $out)) {
+    throw 'Fresh build-owned evidence root required'
+}
+New-Item -ItemType Directory -Path $out | Out-Null
 $source=Join-Path $repo 'src/mvdm-host/dpmi32/i386/dpmi386.c'
-$text=[IO.File]::ReadAllText($source)
-$body=[regex]::Match($text,'(?ms)^VOID\r?\nswitch_to_protected_mode\(.*?^\}')
-if (!$body.Success) { throw 'Production PM entry body not found' }
-# Generated test input is the complete current production function, not a
-# copied sanitization expression. CPU/descriptor dependencies are test doubles.
-[IO.File]::WriteAllText((Join-Path $out 'pm_entry_body.inc'),$body.Value)
 $fixture=Join-Path $repo 'test/mvdm-host/dpmi/pm_entry_contract_fixture.c'
-$vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-& cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x86 >nul && cl /nologo /W4 /MT /TC /I"'+$out+'" /Fo"'+$out+'\fixture.obj" /Fe"'+$out+'\fixture.exe" "'+$fixture+'"')
-if ($LASTEXITCODE) { throw 'PM entry fixture build failed' }
-& (Join-Path $out 'fixture.exe')
+& "$repo/tools/build-fixtures.cmd" x86 pm-entry-contract *> "$out/build.log"
+if ($LASTEXITCODE) { throw 'Native PM entry fixture build failed' }
+$exe=Join-Path $repo 'build/.ninja/msvc-x86-release/worker/pm-entry-contract.exe'
+& $exe | Tee-Object -FilePath "$out/result.txt"
 if ($LASTEXITCODE) { throw 'PM entry contract failed' }
-Get-FileHash $source,$fixture,(Join-Path $out 'fixture.exe') | Format-List
+Get-FileHash $source,$fixture,$exe | Format-List

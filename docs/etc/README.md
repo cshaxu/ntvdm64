@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 DPMI contracts](evidence/t484-s3-dpmi-contracts.md) migrates three
+port, interrupt and protected-mode test producers with retained assertions.
+
 [T484 S3 CPU contracts](evidence/t484-s3-cpu-contracts.md) replaces four
 inline compiler runners, retaining positive and negative ABI/behavior checks.
 

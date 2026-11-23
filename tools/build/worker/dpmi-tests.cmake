@@ -1,0 +1,49 @@
+get_target_property(port_profile unit_obj_tests_ccpu_bit_fault_fixture_obj COMPILE_FLAGS)
+worker_unit("obj/tests/ccpu-port-privilege.obj"
+  "${NTVDM_REPO}/test/mvdm-host/ccpu_port_privilege_fixture.c" "${port_profile}")
+get_target_property(port_inputs image_ccpu_bit_fault_test_exe WORKER_LINK_INPUTS)
+list(FIND port_inputs "obj/tests/ccpu_bit_fault_fixture.obj" position)
+if(position LESS 0)
+  message(FATAL_ERROR "Missing CCPU reference fixture input")
+endif()
+list(REMOVE_AT port_inputs ${position})
+list(INSERT port_inputs ${position} "obj/tests/ccpu-port-privilege.obj")
+get_property(prefix GLOBAL PROPERTY image_ccpu_bit_fault_test_exe_prefix)
+get_property(suffix GLOBAL PROPERTY image_ccpu_bit_fault_test_exe_suffix)
+worker_link("ccpu-port-privilege.exe" "${prefix}" "${suffix}" INPUTS ${port_inputs})
+worker_group(ccpu-port-privilege "ccpu-port-privilege.exe")
+
+get_target_property(dpmi_profile unit_obj_dpmi_dpmiint_obj COMPILE_FLAGS)
+worker_unit("obj/tests/dpmi-swint-owner.obj"
+  "${NTVDM_REPO}/src/mvdm-host/dpmi32/dpmiint.c" "${dpmi_profile} /Gy")
+worker_unit("obj/tests/dpmi-swint-fixture.obj"
+  "${NTVDM_REPO}/test/mvdm-host/dpmi_swint_selected_fixture.c" "/nologo /W3 /MT /Gy")
+worker_link("dpmi-swint-selected.exe" "/nologo /opt:ref /out:$out /map:$out.map"
+  "kernel32.lib user32.lib" INPUTS "obj/tests/dpmi-swint-fixture.obj" "obj/tests/dpmi-swint-owner.obj")
+worker_group(dpmi-swint-selected "dpmi-swint-selected.exe")
+
+set(source "${NTVDM_REPO}/src/mvdm-host/dpmi32/i386/dpmi386.c")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${source}")
+file(READ "${source}" text)
+string(REPLACE "\r\n" "\n" text "${text}")
+set(start "VOID\nswitch_to_protected_mode(")
+string(FIND "${text}" "${start}" begin)
+string(FIND "${text}" "${start}" last REVERSE)
+if(begin LESS 0 OR NOT begin EQUAL last)
+  message(FATAL_ERROR "Missing or ambiguous protected-mode entry function")
+endif()
+string(SUBSTRING "${text}" ${begin} -1 tail)
+string(FIND "${tail}" "\n}" end)
+if(end LESS 0)
+  message(FATAL_ERROR "Missing protected-mode entry function end")
+endif()
+math(EXPR length "${end}+2")
+string(SUBSTRING "${tail}" 0 ${length} body)
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/pm_entry_body.inc" CONTENT "${body}" @ONLY)
+worker_unit("obj/tests/pm-entry-contract.obj"
+  "${NTVDM_REPO}/test/mvdm-host/dpmi/pm_entry_contract_fixture.c"
+  "/nologo /W4 /MT /TC /I\"${CMAKE_BINARY_DIR}\"" "pm_entry_body.inc")
+worker_link("pm-entry-contract.exe" "/nologo /out:$out" "kernel32.lib"
+  INPUTS "obj/tests/pm-entry-contract.obj")
+worker_group(pm-entry-contract "pm-entry-contract.exe")
+worker_group(dpmi-contracts "ccpu-port-privilege.exe" "dpmi-swint-selected.exe" "pm-entry-contract.exe")

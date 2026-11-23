@@ -1,0 +1,5 @@
+DPMI_PM_FAULT_REJECT depth=0 flags=3302 ss=27 sp=200 count=0
+DPMI_PM_FAULT_REJECT depth=1 flags=3302 ss=17 sp=21 count=1
+DPMI_PM_FAULT_REJECT depth=0 flags=23302 ss=27 sp=200 count=0
+DPMI_PM_FAULT_REJECT depth=1 flags=23302 ss=17 sp=21 count=1
+DPMI_PM_FAULT_FAILURE_ROLLBACK_OK absent=1 first=1 nested=1

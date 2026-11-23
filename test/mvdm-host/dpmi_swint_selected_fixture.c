@@ -37,6 +37,10 @@ ULONG DosxIntHandlerIret,DosxIntHandlerIretd,Cpu40LdtShadowAddress,DosxIret,Dosx
 #define UNREACHED_TYPED(result, name, parameters) \
     result name parameters { fprintf(stderr,"unexpected %s\n",#name); abort(); }
 #define UNREACHED(name) UNREACHED_TYPED(void, name, (void))
+/* The original TIB provider also owns printer callbacks. This fixture never
+ * opens a printer or calls the kernel VDM service. Keep that boundary fatal. */
+enum _VdmServiceClass;
+UNREACHED_TYPED(LONG, NtVdmControl, (enum _VdmServiceClass service, PVOID data))
 UNREACHED(getESI) UNREACHED(getEDI) UNREACHED(setECX) UNREACHED(setEDX)
 UNREACHED(setEBP) UNREACHED(setESI) UNREACHED(setEDI)
 UNREACHED(DpmiAllocateVirtualMemory) UNREACHED(RcErrorDialogBox) UNREACHED(TerminateVDM)
