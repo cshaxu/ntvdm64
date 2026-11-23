@@ -13,7 +13,8 @@ guest_probe(win16 MMTPROB-load.EXE win16_multimedia_timer_probe.asm -DLOAD_ONLY)
 guest_probe(win16 MMTPROB-no-timer.EXE win16_multimedia_timer_probe.asm -DNO_TIMER)
 get_property(outputs GLOBAL PROPERTY guest_win16)
 foreach(pair IN ITEMS "PDCANCEL|win16_printdlg_cancel_probe" "PDGPROBE|win16_printdlg_default_probe"
-    "RAWPROBE|win16_raw_spool_probe" "THPROBE|win16_toolhelp_probe")
+    "RAWPROBE|win16_raw_spool_probe" "THPROBE|win16_toolhelp_probe"
+    "DISCOVER|win16_discovery_probe")
   string(REPLACE "|" ";" parts "${pair}")
   list(GET parts 0 name)
   list(GET parts 1 stem)
@@ -25,3 +26,8 @@ foreach(pair IN ITEMS "PDCANCEL|win16_printdlg_cancel_probe" "PDGPROBE|win16_pri
   list(APPEND outputs "${output}.EXE" "${output}.lst")
 endforeach()
 add_custom_target(win16-probes DEPENDS ${outputs})
+fixture(wow-discovery-peer CL test/observation/wow_discovery_peer.c)
+set_property(TARGET wow-discovery-peer_objects PROPERTY COMPILE_OPTIONS /nologo /O2 /W4 /WX)
+target_compile_definitions(wow-discovery-peer_objects PRIVATE _CRT_SECURE_NO_WARNINGS)
+set_property(TARGET wow-discovery-peer_objects PROPERTY FIXTURE_LIBRARIES user32.lib)
+add_custom_target(win16-discovery DEPENDS win16-probes wow-discovery-peer)

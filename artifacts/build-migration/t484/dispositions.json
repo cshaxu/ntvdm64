@@ -212,7 +212,8 @@
   },
   "test/integration/verify-win16-discovery.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Invokes NASM and CL for Win16 probe and native peer"
+    "reason": "Native discovery guest and host-peer production verified; shared package staging production remains pending",
+    "evidence": "docs/etc/evidence/t484-s3-discovery.md"
   },
   "test/integration/verify-win16-message-probe.ps1": {
     "status": "pending-producer-migration",

@@ -92,7 +92,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P45 fixed Win16 probes](../etc/evidence/t484-s3-win16-fixed.md) | Four runners share native assembly/listings;all four outputs match and prior nine variants remain unchanged; staging is pending. |
 
-Each batch passed its cached full host build. P45 checks11 raw host inputs
+| [P46 discovery pair](../etc/evidence/t484-s3-discovery.md) | Guest/listing identical;native peer differs only in two timestamps;local producers migrated, shared staging remains open. |
+
+Each batch passed its cached full host build. P46 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

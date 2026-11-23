@@ -1,23 +1,21 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "cde4bc13ce1f390f73ed22f074cc2d1607cc5521",
+  "head": "0bc98a10332d70a4d664b416de44a639009e61be",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-win16-printdlg-cancel.ps1",
-    " M test/integration/verify-win16-printdlg-default.ps1",
-    " M test/integration/verify-win16-raw-spool-profile.ps1",
-    " M test/integration/verify-win16-toolhelp-probe.ps1",
+    " M test/integration/Invoke-Win16ProbeBuild.ps1",
+    " M test/integration/verify-win16-discovery.ps1",
+    " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/win16-probes.cmake",
-    "?? artifacts/build-migration/t484/s3-win16-fixed/",
-    "?? docs/etc/evidence/t484-s3-win16-fixed.md",
-    "?? test/integration/Invoke-Win16ProbeBuild.ps1"
+    "?? artifacts/build-migration/t484/s3-discovery/",
+    "?? docs/etc/evidence/t484-s3-discovery.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 50,
-    "unchanged": 192,
+    "changed": 51,
+    "unchanged": 191,
     "removed": 113
   },
   "disposition_counts": {
@@ -28,7 +26,7 @@
     "retained-native-delegate": 2,
     "requires-disposition-reconciliation": 182
   },
-  "existing_interpreted_candidates_with_command_hits": 203,
+  "existing_interpreted_candidates_with_command_hits": 202,
   "files": [
     {
       "id": "B0001",
@@ -776,14 +774,15 @@
       "id": "B0044",
       "file": "test/integration/verify-win16-discovery.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "072c5bf6da2ba09da8bb601d4b5d6c965dc056a98829fa83f6462b334fbf00c3",
+      "state": "changed",
+      "current_sha256": "261a501497fe75eb358938865f9ee650944edbcc0a0b0dc389ad504eabf8eb46",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM and CL for Win16 probe and native peer"
+        "reason": "Native discovery guest and host-peer production verified; shared package staging production remains pending",
+        "evidence": "docs/etc/evidence/t484-s3-discovery.md"
       }
     },
     {
@@ -839,8 +838,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "35b2dac4e6d082fca0908bb6800edd3fd2029642220a22549ea8098a9f20e159",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0bc98a10332d70a4d664b416de44a639009e61be"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win16-fixed.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -854,8 +857,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "da34d88bf7a8cb24498ac14b53a5f764553d1638ce46baf5a9cf05b4195d7bc5",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0bc98a10332d70a4d664b416de44a639009e61be"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win16-fixed.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -869,8 +876,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "d831f8d22b39cbcffee58866df7b0be95147b121ba9f6f891698bd629974f942",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0bc98a10332d70a4d664b416de44a639009e61be"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win16-fixed.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -898,8 +909,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "e7295e4ac8c5780b8df0acf743ea0481f30bcb85db9ec1f50e6b122e3a21f990",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0bc98a10332d70a4d664b416de44a639009e61be"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win16-fixed.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -4811,6 +4826,12 @@
     }
   ],
   "commits": {
+    "0bc98a10332d70a4d664b416de44a639009e61be": {
+      "subject": "T484 S3 P45 share fixed Win16 probe producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win16-fixed.md"
+      ]
+    },
     "cde4bc13ce1f390f73ed22f074cc2d1607cc5521": {
       "subject": "T484 S3 P44 share native DDEML and timer probe production",
       "evidence": [
@@ -5645,24 +5666,6 @@
         {
           "line": 40,
           "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/guest-probes/win16/$variant.EXE\" \"$root/$probe.EXE\""
-        }
-      ]
-    },
-    {
-      "id": "B0044",
-      "file": "test/integration/verify-win16-discovery.ps1",
-      "hits": [
-        {
-          "line": 6,
-          "text": "[Parameter(Mandatory)][string]$Nasm"
-        },
-        {
-          "line": 18,
-          "text": "& $Nasm -f bin -o \"$root/DISCOVER.EXE\" -l \"$root/probe.lst\" \"$PSScriptRoot/../observation/win16_discovery_probe.asm\" *> \"$root/assemble.txt\""
-        },
-        {
-          "line": 22,
-          "text": "& $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS \"/Fo$root/peer.obj\" \"/Fe$root/peer.exe\" \"$PSScriptRoot/../observation/wow_discovery_peer.c\" /link user32.lib *> \"$root/compile.txt\""
         }
       ]
     },

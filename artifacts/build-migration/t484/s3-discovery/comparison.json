@@ -1,0 +1,12 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-discovery\\baseline.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-discovery\\peer.exe",
+    "oldBytes": 118784,
+    "newBytes": 118784,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "29babf063c1f795de5ad20bcbb16155c53aed9e958d05291c53926824460a914",
+    "newSha256": "1427558e8899a8af02b2405fdb943bd2b7c73e1ae52ca0c11094f2430899a4c5"
+  }
+]

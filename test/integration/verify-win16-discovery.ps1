@@ -1,9 +1,7 @@
 param(
  [Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
- [Parameter(Mandatory)][string]$CompilerDriver,
- [Parameter(Mandatory)][string]$BuildRoot,
- [Parameter(Mandatory)][string]$Nasm
+ [Parameter(Mandatory)][string]$BuildRoot
 )
 # Run only from an owned hidden background supervisor.
 $ErrorActionPreference='Stop'
@@ -15,13 +13,8 @@ $null=New-Item -ItemType Directory $root
 $runtime=$null;$scope=$null;$process=$null;$peer=$null
 $saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
- & $Nasm -f bin -o "$root/DISCOVER.EXE" -l "$root/probe.lst" "$PSScriptRoot/../observation/win16_discovery_probe.asm" *> "$root/assemble.txt"
- if($LASTEXITCODE){throw 'Independent guest probe assembly failed'}
- Push-Location $root
- try {
-  & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root/peer.obj" "/Fe$root/peer.exe" "$PSScriptRoot/../observation/wow_discovery_peer.c" /link user32.lib *> "$root/compile.txt"
-  if($LASTEXITCODE){throw 'Native peer build failed'}
- }finally{Pop-Location}
+ . "$PSScriptRoot/Invoke-Win16ProbeBuild.ps1"
+ Invoke-Win16ProbeBuild -OutputRoot $root -Name DISCOVER
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
  $scope=New-IsolatedPackageScope $runtime
  $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force

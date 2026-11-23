@@ -1,0 +1,12 @@
+{
+  "publishedHashes": 22,
+  "pid": 576,
+  "rawHostImages": 11,
+  "finished": "2026-11-23T19:04:01.2126110+00:00",
+  "exit": 0,
+  "parsed": [
+    "Invoke-Win16ProbeBuild",
+    "verify-win16-discovery"
+  ],
+  "started": "2026-11-23T19:03:40.0914314+00:00"
+}
