@@ -1,0 +1,7 @@
+{"byte-identical": 5, "PE-timestamps-only": 9}
+PASS selected AMD64 add-on utilities published; other utility/driver entries retained
+PASS PIF create/show/update and HASH single-file output
+CHANGED=1
+PASS PIF structured root update
+PASS SZDD exact expansion, literal-block boundaries, empty input and failure preservation
+{"passed": true, "checks": ["CP936 create, metadata and no-overwrite", "variable-length relocation preserves metadata", "local-base and path-suffix combination", "malformed header and offset rejection without writes", "unknown extra block is read-only", "lossy encoding rejected"], "originalLinks": 0}

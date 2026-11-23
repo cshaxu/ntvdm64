@@ -1,0 +1,59 @@
+-- Configuring done (0.3s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/build-tools
+ninja: no work to do.
+-- Configuring done (1.5s)
+-- Generating done (0.3s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/worker
+-- Configuring done (1.7s)
+-- Generating done (0.3s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/frontend
+-- Configuring done (0.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/monitor
+-- Configuring done (0.5s)
+-- Generating done (0.2s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/launcher
+-- Configuring done (0.7s)
+-- Generating done (0.3s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/service
+-- Configuring done (0.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/hook
+-- Configuring done (12.9s)
+-- Generating done (0.3s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release
+[0/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/worker/run-ninja.cmd"
+ninja: Entering directory `O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/worker'
+ninja: no work to do.
+[1/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/frontend/run-ninja.cmd"
+ninja: Entering directory `O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/frontend'
+ninja: no work to do.
+[2/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/monitor/run-ninja.cmd"
+ninja: Entering directory `O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/monitor'
+ninja: no work to do.
+[3/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/launcher/run-ninja.cmd"
+ninja: Entering directory `O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/launcher'
+ninja: no work to do.
+[4/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/service/run-ninja.cmd"
+ninja: Entering directory `O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/service'
+ninja: no work to do.
+[5/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/hook/run-ninja.cmd"
+ninja: Entering directory `O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/hook'
+ninja: no work to do.
+-- Configuring done (0.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/build-tools
+ninja: no work to do.
+-- Configuring done (14.2s)
+-- Generating done (9.6s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker
+-- Configuring done (29.6s)
+-- Generating done (0.4s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release
+[0/3] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/run-ninja-parallel.cmd ntvdm.exe VCDEX.DLL VDMREDIR.dll nthook32.dll ntvwm.exe ntcon.exe ntmon.exe run16.exe ntsrv.exe"
+ninja: Entering directory `O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker'
+ninja: no work to do.
+[1/2] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe -C O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32 wow32.dll"
+ninja: Entering directory `O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32'
+ninja: no work to do.

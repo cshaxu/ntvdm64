@@ -1,0 +1,29 @@
+-- Configuring done (0.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/addon
+[1/5] Generating mouse31/build.sha256, mouse31/build.inputs.json
+FAILED: [code=1] mouse31/build.sha256 mouse31/build.inputs.json O:/repos.hobby/ntvdm64/build/.ninja/addon/mouse31/build.sha256 O:/repos.hobby/ntvdm64/build/.ninja/addon/mouse31/build.inputs.json
+C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\addon && cmd.exe /d /c O:/repos.hobby/ntvdm64/tools/build/Write-AddonReceipt.cmd O:/repos.hobby/ntvdm64/build/.ninja/addon/hash/hash.exe O:/repos.hobby/ntvdm64/build/.ninja/addon/mouse31/MOUSE31.DRV O:/repos.hobby/ntvdm64/build/.ninja/addon/mouse31/build O:/repos.hobby/ntvdm64/build/.ninja/addon/mouse31/source-inputs.json"
+The system cannot find the file specified.
+The system cannot find the path specified.
+[2/5] Generating mouse101/build.sha256, mouse101/build.inputs.json
+FAILED: [code=1] mouse101/build.sha256 mouse101/build.inputs.json O:/repos.hobby/ntvdm64/build/.ninja/addon/mouse101/build.sha256 O:/repos.hobby/ntvdm64/build/.ninja/addon/mouse101/build.inputs.json
+C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\addon && cmd.exe /d /c O:/repos.hobby/ntvdm64/tools/build/Write-AddonReceipt.cmd O:/repos.hobby/ntvdm64/build/.ninja/addon/hash/hash.exe O:/repos.hobby/ntvdm64/build/.ninja/addon/mouse101/MOUSE101.DRV O:/repos.hobby/ntvdm64/build/.ninja/addon/mouse101/build O:/repos.hobby/ntvdm64/build/.ninja/addon/mouse101/source-inputs.json"
+The system cannot find the file specified.
+The system cannot find the path specified.
+[3/5] Generating insignia/build.sha256, insignia/build.inputs.json
+FAILED: [code=1] insignia/build.sha256 insignia/build.inputs.json O:/repos.hobby/ntvdm64/build/.ninja/addon/insignia/build.sha256 O:/repos.hobby/ntvdm64/build/.ninja/addon/insignia/build.inputs.json
+C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\addon && cmd.exe /d /c O:/repos.hobby/ntvdm64/tools/build/Write-AddonReceipt.cmd O:/repos.hobby/ntvdm64/build/.ninja/addon/hash/hash.exe O:/repos.hobby/ntvdm64/build/.ninja/addon/insignia/insignia.386 O:/repos.hobby/ntvdm64/build/.ninja/addon/insignia/build O:/repos.hobby/ntvdm64/build/.ninja/addon/insignia/source-inputs.json"
+The system cannot find the file specified.
+The system cannot find the path specified.
+[4/5] Generating compat95/build.sha256, compat95/build.inputs.json
+FAILED: [code=1] compat95/build.sha256 compat95/build.inputs.json O:/repos.hobby/ntvdm64/build/.ninja/addon/compat95/build.sha256 O:/repos.hobby/ntvdm64/build/.ninja/addon/compat95/build.inputs.json
+C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\addon && cmd.exe /d /c O:/repos.hobby/ntvdm64/tools/build/Write-AddonReceipt.cmd O:/repos.hobby/ntvdm64/build/.ninja/addon/hash/hash.exe O:/repos.hobby/ntvdm64/build/.ninja/addon/compat95/compat95.sys O:/repos.hobby/ntvdm64/build/.ninja/addon/compat95/build O:/repos.hobby/ntvdm64/build/.ninja/addon/compat95/source-inputs.json"
+The system cannot find the file specified.
+The system cannot find the path specified.
+[5/5] Generating ntvdm64/build.sha256, ntvdm64/build.inputs.json
+FAILED: [code=1] ntvdm64/build.sha256 ntvdm64/build.inputs.json O:/repos.hobby/ntvdm64/build/.ninja/addon/ntvdm64/build.sha256 O:/repos.hobby/ntvdm64/build/.ninja/addon/ntvdm64/build.inputs.json
+C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\addon && cmd.exe /d /c O:/repos.hobby/ntvdm64/tools/build/Write-AddonReceipt.cmd O:/repos.hobby/ntvdm64/build/.ninja/addon/hash/hash.exe O:/repos.hobby/ntvdm64/build/.ninja/addon/ntvdm64/ntvdm64.386 O:/repos.hobby/ntvdm64/build/.ninja/addon/ntvdm64/build O:/repos.hobby/ntvdm64/build/.ninja/addon/ntvdm64/source-inputs.json"
+The system cannot find the file specified.
+The system cannot find the path specified.
+ninja: build stopped: subcommand failed.

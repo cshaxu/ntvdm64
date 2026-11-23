@@ -44,8 +44,8 @@ VMM ABI evidence, read-only (not build dependencies):
 - The same tree's dev/emm386/lhvxd/loadhi.asm demonstrates the C-call
   _AddInstanceItem descriptor/reserved-zero argument order.
 
-No original guest is rebuilt or patched. Build with build.ps1 in an owned
-background runner and a fresh repository build directory, using the pinned
+No original guest is rebuilt or patched. Build with `tools\build-addon.cmd insignia` in an owned
+background runner and the stable repository build cache, using the installed
 NASM/Open Watcom tools. Compilation does not establish runtime correctness.
 Real Win3.1 identity0->1->0, USER callbacks, child retirement, restart and
 normal exit pass, including CLS/VER/DIR with NTVDM64.386. VMM allocation

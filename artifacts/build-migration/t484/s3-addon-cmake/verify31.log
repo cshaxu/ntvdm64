@@ -1,0 +1,26 @@
+-- Configuring done (0.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/addon
+ninja: no work to do.
+-- Configuring done (0.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/addon
+[1/14] Generating mouse31-M31TEST.COM/M31TEST.COM
+[2/14] Generating mouse31-M31REENT.COM/M31REENT.COM
+[3/14] Generating mouse31-M31PM.COM/M31PM.COM
+[4/14] Generating mouse31-M31REAL.COM/M31REAL.COM
+[5/14] Generating mouse31-M31CTX.COM/M31CTX.COM
+[6/14] Generating mouse31-M31WIN.EXE/M31WIN.EXE
+[7/14] Generating mouse31-M31SWAP.EXE/M31SWAP.EXE
+[8/14] Generating mouse31-M31ALOC.EXE/M31ALOC.EXE
+[9/14] Generating mouse31-M31VM.EXE/M31VM.EXE
+[10/14] Generating mouse31-M31VMCTL.EXE/M31VMCTL.EXE
+[11/14] Generating mouse31-M31CHLD.COM/M31CHLD.COM
+[12/14] Generating mouse31-M31VXD.COM/M31VXD.COM
+[13/14] Generating mouse31-M31OWNR.EXE/M31OWNR.EXE
+[14/14] Generating mouse31-M31CTRL.EXE/M31CTRL.EXE
+PASS guest assembly and fixed/resident Win3.1 NE ABI; callback/provider/Windows tests remain required
+-- Configuring done (0.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/addon
+[1/1] Generating compat95-control/compat95.sys

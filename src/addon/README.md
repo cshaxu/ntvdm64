@@ -7,12 +7,14 @@ Microsoft guest sources, installed systems and media are not build targets.
 
 | Component | Sources and output | Build entry |
 | --- | --- | --- |
-| compat95 | compat95.asm plus bootlogo.inc/root.inc → compat95.sys | compat95/build.ps1 |
+| compat95 | compat95.asm plus bootlogo.inc/root.inc → compat95.sys | tools/build-addon.cmd compat95 |
+| insignia-386 | insignia.asm → insignia.386 | tools/build-addon.cmd insignia |
+| ntvdm64-386 | ntvdm64.asm → ntvdm64.386 | tools/build-addon.cmd ntvdm64 |
 | grp | grp.c → GRP.EXE | grp/BUILD.CMD |
 | hash | hash.c → HASH.EXE | hash/BUILD.CMD |
 | lnk | lnk.c → LNK.EXE | lnk/BUILD.CMD |
-| mouse101 | mouse101.asm → MOUSE101.DRV | test/observation/build-win101-mouse-driver.ps1 |
-| mouse31 | mouse31.asm → MOUSE31.DRV | test/observation/build-win31-mouse-driver.ps1 |
+| mouse101 | mouse101.asm → MOUSE101.DRV | tools/build-addon.cmd mouse101 |
+| mouse31 | mouse31.asm → MOUSE31.DRV | tools/build-addon.cmd mouse31 |
 | patch31 | patch31.c → patch31.exe | patch31/BUILD.CMD |
 | patch95 | patch95.c → patch95.exe | patch95/BUILD.CMD |
 | path95 | path95.c → path95.exe | path95/BUILD.CMD |
@@ -22,19 +24,29 @@ Microsoft guest sources, installed systems and media are not build targets.
 
 The nine native tools are AMD64 standalone programs. The two mouse drivers
 are independent Windows NE add-ons; compat95 is an independent real-mode DOS
-driver. They are not linked into the ten host components. Driver source and
+driver. They are not linked into the eleven host components. Driver source and
 output identity alone does not establish guest runtime acceptance.
 
 common/file-helpers.h is a shared source header for patch95 and path95, not
 another executable or runtime library. Neither component depends on the
 other's private directory or binary.
 
-Each native BUILD.CMD entry accepts one output path.
-Create their output directories under build/ first. They select the existing
-MSVC Build Tools and keep intermediate objects in an output directory.
-Mouse-driver producers additionally assemble their independently authored
-test harnesses and validate NE structure. This does not rebuild a Microsoft
-guest. compat95/build.ps1 emits a separate source/output manifest.
+The canonical producer is `tools/build-addon.cmd [component]`; omit the
+component to build all14 outputs. It uses MSVC AMD64, NASM and Open Watcom
+WLINK through native CMake/Ninja targets in `build/.ninja/addon`. WLINK is
+resolved from PATH or `build/.tools/openwatcom/binnt64`; the linker DLL and
+configuration beside it are tracked inputs. No tools are downloaded.
+
+The nine native `BUILD.CMD output-exe` entries delegate to this producer and
+copy the selected result; objects stay in the stable cache. Driver outputs
+carry `build.sha256` and `build.inputs.json`, binding output identity to source
+and tool hashes. The configure-time `source-inputs.json` is not a build receipt.
+The `compat95-control` target builds the no-logo control separately.
+
+`mouse101-tests` and `mouse31-tests` build16 independently authored probe
+programs, separately from release targets. Existing observation runners invoke
+these targets and check NE structure; their assertion languages are not build
+dependencies. No original Microsoft guest is rebuilt.
 
 Publish through tools/build/Stage-AddonUtilityRelease.ps1,
 Stage-MouseDriverRelease.ps1 and Stage-Compat95Release.ps1. The canonical

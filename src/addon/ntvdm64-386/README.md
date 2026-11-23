@@ -65,8 +65,8 @@ alone. IRQ reservation/ownership and rollback have the separate proofs below.
 
 ## Build and provenance
 
-Run `build.ps1 -OutputRoot <fresh-repo-build-directory> -Wlink <wlink.exe>`
-through the repository's owned background runner. It records source, tool and
+Run `tools\build-addon.cmd ntvdm64`
+through the repository's owned background runner. Its stable cache receipts record source, tool and
 output hashes. It neither downloads tools nor edits or installs guest files.
 
 Code is independently authored. VMM service numbers, client-frame offsets,

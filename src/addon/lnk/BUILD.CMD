@@ -1,11 +1,13 @@
 @echo off
-setlocal EnableExtensions
-if "%~1"=="" exit /b 64
-call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64 >nul || exit /b 1
-for %%I in ("%~f1") do set "OUT=%%~fI"
-for %%I in ("%~f1") do set "OUTDIR=%%~dpI"
-pushd "%OUTDIR%" || exit /b 1
-cl.exe /nologo /TC /std:c11 /W4 /WX /MT /Fe"%OUT%" "%~dp0lnk.c" /link /MACHINE:X64
-set "RESULT=%errorlevel%"
-popd
-exit /b %RESULT%
+setlocal EnableExtensions DisableDelayedExpansion
+if "%~1"=="" goto usage
+if not "%~2"=="" goto usage
+for %%I in ("%~dp0..\..\..") do set "NTVDM_ROOT=%%~fI"
+for %%I in ("%~f1") do set "OUTPUT=%%~fI"
+call "%NTVDM_ROOT%\tools\build-addon.cmd" lnk
+if errorlevel 1 exit /b %errorlevel%
+copy /b /y "%NTVDM_ROOT%\build\.ninja\addon\lnk\lnk.exe" "%OUTPUT%" >nul
+exit /b %errorlevel%
+:usage
+echo Usage: BUILD.CMD output-exe
+exit /b 64

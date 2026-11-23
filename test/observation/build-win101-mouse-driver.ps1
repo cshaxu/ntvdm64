@@ -7,13 +7,11 @@ if (!$build.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordinal
 New-Item -ItemType Directory -Path $build | Out-Null
 $source=Join-Path $repo 'src/addon/mouse101/mouse101.asm'
 $assembler=(Get-Command nasm.exe -ErrorAction Stop).Source
-& $assembler -f bin $source -o "$build/MOUSE101.DRV" -l "$build/mouse101.lst"
-if ($LASTEXITCODE) { throw 'Mouse driver assembly failed' }
-$include=(Split-Path $source).Replace('\','/')+'/'
-& $assembler -f bin "-I$include" "$PSScriptRoot/win101_mouse_driver_guest.asm" -o "$build/M101TEST.COM" -l "$build/guest-test.lst"
-if ($LASTEXITCODE) { throw 'Guest driver harness assembly failed' }
-& $assembler -f bin "-I$include" "$PSScriptRoot/win101_mouse_driver_real.asm" -o "$build/M101REAL.COM" -l "$build/real-test.lst"
-if ($LASTEXITCODE) { throw 'Real-provider guest harness assembly failed' }
+& cmd.exe /d /c "`"$repo/tools/build-addon.cmd`" mouse101-tests"
+if($LASTEXITCODE){throw 'Native mouse test build failed'}
+Copy-Item "$repo/build/.ninja/addon/mouse101/MOUSE101.DRV" "$build/MOUSE101.DRV"
+Copy-Item "$repo/build/.ninja/addon/mouse101-M101TEST.COM/M101TEST.COM" "$build/M101TEST.COM"
+Copy-Item "$repo/build/.ninja/addon/mouse101-M101REAL.COM/M101REAL.COM" "$build/M101REAL.COM"
 $audit=(& "$PSScriptRoot/audit-win101-mouse-contract.ps1" -Driver "$build/MOUSE101.DRV" -Snapshot '') | ConvertFrom-Json
 if ($audit.entries.Count -ne 3 -or $audit.automaticDataSegment -ne 2) { throw 'Unexpected guest driver ABI' }
 for ($index=0;$index -lt 3;$index++) {

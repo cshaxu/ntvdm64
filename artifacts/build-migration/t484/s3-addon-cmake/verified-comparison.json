@@ -1,0 +1,209 @@
+[
+  {
+    "file": "compat95.sys",
+    "bytes": 5235,
+    "changedBytes": 0,
+    "kind": "byte-identical",
+    "beforeSha256": "49f9219405e08a4dbb35f69ae7836a27a6ff2477f272ccf29d3dd42ceac5dabc",
+    "afterSha256": "49f9219405e08a4dbb35f69ae7836a27a6ff2477f272ccf29d3dd42ceac5dabc",
+    "offsets": []
+  },
+  {
+    "file": "GRP.EXE",
+    "bytes": 155648,
+    "changedBytes": 8,
+    "kind": "PE-timestamps-only",
+    "beforeSha256": "470d7d6f68d6e8bf55195a1a744d4fa4723983354af5cddf0e646c7c804da92f",
+    "afterSha256": "59afc539c18dd295248c6ef4686be626bcd4373ba9a47eb068704e6ab03be3f2",
+    "offsets": [
+      256,
+      257,
+      258,
+      259,
+      135828,
+      135829,
+      135830,
+      135831
+    ]
+  },
+  {
+    "file": "HASH.EXE",
+    "bytes": 136192,
+    "changedBytes": 8,
+    "kind": "PE-timestamps-only",
+    "beforeSha256": "b1298fd6a5e6ce98f66c2c84d920d127ffac8d33ce463458febfd87ecd02c486",
+    "afterSha256": "138781c69ee89355778c50e10b9937d1494d9dabb3b7f0dbede47558f940dae6",
+    "offsets": [
+      248,
+      249,
+      250,
+      251,
+      117172,
+      117173,
+      117174,
+      117175
+    ]
+  },
+  {
+    "file": "insignia.386",
+    "bytes": 4714,
+    "changedBytes": 0,
+    "kind": "byte-identical",
+    "beforeSha256": "bb964d70fc5ffbe65466e597d0180c614b75fa7a604523cf5f8bc60cb3c3613b",
+    "afterSha256": "bb964d70fc5ffbe65466e597d0180c614b75fa7a604523cf5f8bc60cb3c3613b",
+    "offsets": []
+  },
+  {
+    "file": "LNK.EXE",
+    "bytes": 154624,
+    "changedBytes": 8,
+    "kind": "PE-timestamps-only",
+    "beforeSha256": "d79e03c00dcdb6050aa68109fe09d7af89998a9b57b6ff6e6d991dcda281f5fa",
+    "afterSha256": "76d2c4f438eea451722df64d61ddb3f19302dfab94f36c0018a00b6b8f79c643",
+    "offsets": [
+      264,
+      265,
+      266,
+      267,
+      134052,
+      134053,
+      134054,
+      134055
+    ]
+  },
+  {
+    "file": "MOUSE101.DRV",
+    "bytes": 624,
+    "changedBytes": 0,
+    "kind": "byte-identical",
+    "beforeSha256": "dc01039b0fc2b7e9244f31a42a4aaa9ed10613291557b4b6e2695ece1ba5666e",
+    "afterSha256": "dc01039b0fc2b7e9244f31a42a4aaa9ed10613291557b4b6e2695ece1ba5666e",
+    "offsets": []
+  },
+  {
+    "file": "MOUSE31.DRV",
+    "bytes": 1304,
+    "changedBytes": 0,
+    "kind": "byte-identical",
+    "beforeSha256": "5fa167b71fb12b69aee78e9ff8ab46bb82d4a9fed00aafde94fad87592ce9d07",
+    "afterSha256": "5fa167b71fb12b69aee78e9ff8ab46bb82d4a9fed00aafde94fad87592ce9d07",
+    "offsets": []
+  },
+  {
+    "file": "ntvdm64.386",
+    "bytes": 9323,
+    "changedBytes": 0,
+    "kind": "byte-identical",
+    "beforeSha256": "a2d689bad411b09af02b8d8bb0dcef7f0217bfa23bd1e4a3203758249d8665bb",
+    "afterSha256": "a2d689bad411b09af02b8d8bb0dcef7f0217bfa23bd1e4a3203758249d8665bb",
+    "offsets": []
+  },
+  {
+    "file": "patch31.exe",
+    "bytes": 152576,
+    "changedBytes": 8,
+    "kind": "PE-timestamps-only",
+    "beforeSha256": "53a04abdc5758b8dd471f36c1da15418c698355ccc433a9782dcbca6d8103d09",
+    "afterSha256": "5f668f98e187811126b1a63141f1a4a220a3573249231d60384c20fe415db046",
+    "offsets": [
+      248,
+      249,
+      250,
+      251,
+      131860,
+      131861,
+      131862,
+      131863
+    ]
+  },
+  {
+    "file": "patch95.exe",
+    "bytes": 178688,
+    "changedBytes": 8,
+    "kind": "PE-timestamps-only",
+    "beforeSha256": "61be537f3669736e67e51c3d9046a8b600933e37cd5b7173a17afe74dd683914",
+    "afterSha256": "af2561b2b5482cabc3b44f793fbdc0fe21f1ee9219b025f93911d3749397697e",
+    "offsets": [
+      248,
+      249,
+      250,
+      251,
+      156420,
+      156421,
+      156422,
+      156423
+    ]
+  },
+  {
+    "file": "path31.exe",
+    "bytes": 154112,
+    "changedBytes": 8,
+    "kind": "PE-timestamps-only",
+    "beforeSha256": "b06655cead36b855b8a9902248a4c00a257e1c7a485fa165c013a505f03d7557",
+    "afterSha256": "4ee908499834d5a3bcf63267b85abfc66d486dd3e6edc1e603b681ccf9e2d2a9",
+    "offsets": [
+      256,
+      257,
+      258,
+      259,
+      134276,
+      134277,
+      134278,
+      134279
+    ]
+  },
+  {
+    "file": "path95.exe",
+    "bytes": 151040,
+    "changedBytes": 8,
+    "kind": "PE-timestamps-only",
+    "beforeSha256": "28c4e068b36c12415a2fdbbc53d9d99ebcf8bc3927ab921d16957f2b207c92da",
+    "afterSha256": "349a97e525b5c64ece938a3586a7b4af33631ee3bc59403ef73fb0e3d5d71ef6",
+    "offsets": [
+      264,
+      265,
+      266,
+      267,
+      131972,
+      131973,
+      131974,
+      131975
+    ]
+  },
+  {
+    "file": "PIF.EXE",
+    "bytes": 150528,
+    "changedBytes": 8,
+    "kind": "PE-timestamps-only",
+    "beforeSha256": "366bbe4066446edb680efb093f1036e16007437c3ac9adb87c8f5bdeb9e26670",
+    "afterSha256": "b87b87165235c05cf6da99bdc20a2413bbc2be516e939069420a5b4cb30d4edb",
+    "offsets": [
+      264,
+      265,
+      266,
+      267,
+      128884,
+      128885,
+      128886,
+      128887
+    ]
+  },
+  {
+    "file": "SZDD.EXE",
+    "bytes": 137216,
+    "changedBytes": 8,
+    "kind": "PE-timestamps-only",
+    "beforeSha256": "885761530ec6ba8cdbc6cbb0af87f03f09029dfc04a65c4b2f51603de05a614e",
+    "afterSha256": "935387eae2dc2a3c4b055cc2b3a6dc3a1cdfa8bc2cc6bf96454cf2c0eed9ef9d",
+    "offsets": [
+      256,
+      257,
+      258,
+      259,
+      118660,
+      118661,
+      118662,
+      118663
+    ]
+  }
+]

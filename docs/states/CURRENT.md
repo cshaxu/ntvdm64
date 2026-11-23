@@ -29,6 +29,15 @@ are now admitted. Final interpreter-free clean acceptance remains S5.
 
 ## Current Progress
 
+[S3 P1 addon migration](../etc/evidence/t484-s3-addon-cmake.md) builds all14
+authored addons through CMD/native CMake and16 opt-in mouse probes. Three old
+PowerShell producers are removed; nine utility wrappers share the producer.
+Five drivers are byte-identical; nine tools differ only in verified PE
+timestamps. Cached full host build passed; all11 raw inputs and22 published
+host hashes remain unchanged. Nine tools are published, all14 addon hashes
+verified, ABI/utility/cache/failure checks passed. S3 remains active: other
+test producers and retired worker-generator consumers are not yet complete.
+
 S1 [inventory/design](../etc/evidence/t484-s1-build-inventory.md) records817
 script/metadata inputs,355 ordered migration candidates,1116 literal references
 and9 existing graphs containing21 interpreter command rules. Candidate counts
@@ -147,7 +156,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S2 P7 records host migration closure and admits S3 under the owner's
-full-task authorization. Documentation, relative-link and diff checks passed. The containing
-commit is its delivery identity; this does not claim a new product build, test
-or publication. Queue order is unchanged.
+T484 S3 P1 records native addon migration and its bounded delivery under the
+owner's full-task authorization. The containing commit is its delivery
+identity. S3 is not closed; queue order is unchanged.

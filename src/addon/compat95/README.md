@@ -18,20 +18,20 @@ Requires NASM with 386 real-mode instruction support (verified producer:
 NASM 3.01). No MASM, Microsoft DDK, original kernel build or external source
 generator is needed. From the repository root:
 
-```powershell
-& src/addon/compat95/build.ps1 -OutputRoot "$PWD/build/t460-s3/win95comp-logo-owner/example"
+```cmd
+tools\build-addon.cmd compat95
 ```
 
 Launch builds/tests in an owned background process under the repository's
-execution rules. The script requires a fresh output below `build/`, writes
-`compat95.sys`, its listing and `build.json` with binary/source identities.
+execution rules. The canonical target uses `build/.ninja/addon/compat95`, writes
+`compat95.sys`, its listing, `build.sha256` and `build.inputs.json` receipts.
 The equivalent assembler command, from this source directory, is:
 
 ```text
 nasm -f bin -I ./ compat95.asm -o <build-output>/compat95.sys -l <build-output>/compat95.lst
 ```
 
-`-CompatibilityOnly` defines `COMPAT95_NO_LOGO=1`. It reproduces the previously
+`tools\build-addon.cmd compat95-control` defines `COMPAT95_NO_LOGO=1`. It reproduces the previously
 installed 2435-byte binary exactly: SHA-256
 `EDA2454FD4A356D42FA2D6ABB432E0E3F4B944B436E4B823CC045C981E7C1156`.
 This provides an independent byte-level control for the source migration.

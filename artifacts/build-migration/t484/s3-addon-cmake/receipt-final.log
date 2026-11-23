@@ -1,0 +1,8 @@
+-- Configuring done (1.3s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/addon
+[1/5] Generating compat95/build.sha256, compat95/build.inputs.json
+[2/5] Generating ntvdm64/build.sha256, ntvdm64/build.inputs.json
+[3/5] Generating mouse31/build.sha256, mouse31/build.inputs.json
+[4/5] Generating mouse101/build.sha256, mouse101/build.inputs.json
+[5/5] Generating insignia/build.sha256, insignia/build.inputs.json

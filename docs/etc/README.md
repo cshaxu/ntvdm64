@@ -2,6 +2,9 @@
 
 [T484 S2 worker migration](evidence/t484-s2-worker-cmake.md) records the current native host build migration and its verification state.
 
+[T484 S3 addon migration](evidence/t484-s3-addon-cmake.md) records all14 native
+addon producers,16 optional mouse probes, receipts and bounded batch delivery.
+
 [T483 S14 closure and preserved predecessor records](evidence/m0-t483-s14-closure.md) anchors S15 admission.
 
 [T483 S11 layer boundaries and closure](evidence/m0-t483-s11-layer-boundaries.md) records the verified baseline for S12.

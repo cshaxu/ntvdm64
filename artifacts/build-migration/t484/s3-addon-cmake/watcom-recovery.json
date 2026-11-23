@@ -1,0 +1,17 @@
+[
+  {
+    "source": "O:/repos.hobby/winmsdos/build/local/toolchain/binnt64/wlink.exe",
+    "sha256": "2F6BE799C84E0534C656B3C535D6EF210C44E5A8E34C026FD3540A5AFA7EFFBC",
+    "file": "wlink.exe"
+  },
+  {
+    "source": "O:/repos.hobby/winmsdos/build/local/toolchain/binnt64/wlinkd.dll",
+    "sha256": "7D74D90CD3F900A4A9B6908E6F86C1120A2094045954CC78A22DCCB44417C74F",
+    "file": "wlinkd.dll"
+  },
+  {
+    "source": "O:/repos.hobby/winmsdos/build/local/toolchain/binnt64/wlink.lnk",
+    "sha256": "FE28A836D6CC404BD49CFF467903189031D54D34BCA8D56FDB3AD6F4BEA0B91B",
+    "file": "wlink.lnk"
+  }
+]

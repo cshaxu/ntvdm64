@@ -1,0 +1,15 @@
+{
+  "finished": "2026-11-23T12:18:01.6140311+00:00",
+  "started": "2026-11-23T12:17:50.6582450+00:00",
+  "pid": 27040,
+  "checks": [
+    "outside-cwd wrapper with spaced output",
+    "unknown target rejected",
+    "failed receipt rejected",
+    "compat95 source/hash checked and unverified publication rejected",
+    "no-op bytes and mtimes stable",
+    "five driver receipts match",
+    "addon graph contains no forbidden interpreter"
+  ],
+  "exit": 0
+}

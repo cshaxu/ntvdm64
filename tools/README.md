@@ -27,6 +27,10 @@ or recompilation of original Microsoft guests; apply the
 
 ## Engineering tools
 
+`build.cmd` builds the11 host images. `build-addon.cmd [component]` builds
+all14 authored addons or one selected target; see the addon source index for
+the separate test targets. Both use stable native CMake/Ninja caches.
+
 | Directory | Responsibility |
 | --- | --- |
 | build | Actual configure/build/package/publication owners. |

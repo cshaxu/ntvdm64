@@ -1,0 +1,186 @@
+cmake_minimum_required(VERSION 3.25)
+set(NTVDM_BINARY_DIR "${CMAKE_BINARY_DIR}")
+include("${CMAKE_CURRENT_LIST_DIR}/../BuildTree.cmake")
+set(CMAKE_TRY_COMPILE_CONFIGURATION Release)
+project(ntvdm_addons LANGUAGES C)
+if(NOT MSVC OR NOT CMAKE_SIZEOF_VOID_P EQUAL 8)
+  message(FATAL_ERROR "Addon utilities require MSVC AMD64")
+endif()
+set(CMAKE_C_FLAGS "" CACHE STRING "Explicit addon profile" FORCE)
+set(CMAKE_C_FLAGS_RELEASE "" CACHE STRING "Explicit addon profile" FORCE)
+set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded)
+set(CMAKE_C_COMPILER_LAUNCHER "${NTVDM_COMPILER_LAUNCHER}")
+find_program(NTVDM_NASM NAMES nasm.exe REQUIRED)
+find_program(NTVDM_WLINK NAMES wlink.exe
+  HINTS "${NTVDM_REPO}/build/.tools/openwatcom/binnt64" REQUIRED)
+get_filename_component(wlink_directory "${NTVDM_WLINK}" DIRECTORY)
+set(wlink_dependencies "${NTVDM_WLINK}")
+foreach(filename IN ITEMS wlinkd.dll wlink.lnk)
+  if(EXISTS "${wlink_directory}/${filename}")
+    list(APPEND wlink_dependencies "${wlink_directory}/${filename}")
+  endif()
+endforeach()
+
+function(addon_source path)
+  file(SHA256 "${path}" hash)
+  set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${path}")
+  file(RELATIVE_PATH relative "${NTVDM_REPO}" "${path}")
+  set_property(GLOBAL APPEND PROPERTY addon_sources
+    "{\"path\":\"${relative}\",\"sha256\":\"${hash}\"}")
+endfunction()
+
+foreach(id IN ITEMS grp hash lnk patch31 patch95 path31 path95 pif szdd)
+  set(source "${NTVDM_REPO}/src/addon/${id}/${id}.c")
+  addon_source("${source}")
+  add_library(${id}_object OBJECT "${source}")
+  target_compile_options(${id}_object PRIVATE /TC /std:c11 /W4 /WX)
+  if(id STREQUAL "pif")
+    target_compile_definitions(${id}_object PRIVATE WINNT)
+    target_include_directories(${id}_object PRIVATE
+      "${NTVDM_REPO}/src/non-mvdm/public/internal/windows/inc")
+  endif()
+  set(libraries)
+  if(id MATCHES "^(hash|patch31|patch95)$")
+    set(libraries bcrypt.lib)
+  endif()
+  set(directory "${CMAKE_BINARY_DIR}/${id}")
+  file(MAKE_DIRECTORY "${directory}")
+  # Keep the original CL-driven link defaults, without CMake's extra system
+  # libraries or Release optimization flags. Header dependencies remain native.
+  add_custom_command(OUTPUT "${directory}/${id}.exe"
+    COMMAND "${CMAKE_C_COMPILER}" /nologo /MT "/Fe${directory}/${id}.exe"
+      "$<TARGET_OBJECTS:${id}_object>" /link /MACHINE:X64 ${libraries}
+    DEPENDS ${id}_object "$<TARGET_OBJECTS:${id}_object>"
+    WORKING_DIRECTORY "${directory}" VERBATIM)
+  add_custom_target(${id} ALL DEPENDS "${directory}/${id}.exe")
+endforeach()
+
+function(addon_binary id filename source)
+  set(directory "${CMAKE_BINARY_DIR}/${id}")
+  file(MAKE_DIRECTORY "${directory}")
+  addon_source("${source}")
+  add_custom_command(OUTPUT "${directory}/${filename}"
+    COMMAND "${NTVDM_NASM}" -f bin ${ARGN} "${source}"
+      -o "${directory}/${filename}" -l "${directory}/${id}.lst"
+    DEPENDS "${source}" "${NTVDM_NASM}" ${addon_dependencies}
+    BYPRODUCTS "${directory}/${id}.lst" VERBATIM)
+  add_custom_target(${id} ALL DEPENDS "${directory}/${filename}")
+endfunction()
+
+set(compat95 "${NTVDM_REPO}/src/addon/compat95")
+set(addon_dependencies "${compat95}/bootlogo.inc" "${compat95}/root.inc")
+foreach(source IN LISTS addon_dependencies)
+  addon_source("${source}")
+endforeach()
+addon_binary(compat95 compat95.sys "${compat95}/compat95.asm" -I "${compat95}/")
+addon_binary(compat95-control compat95.sys "${compat95}/compat95.asm"
+  -I "${compat95}/" -DCOMPAT95_NO_LOGO=1)
+set_property(TARGET compat95-control PROPERTY EXCLUDE_FROM_ALL TRUE)
+set(addon_dependencies)
+addon_binary(mouse101 MOUSE101.DRV "${NTVDM_REPO}/src/addon/mouse101/mouse101.asm")
+addon_binary(mouse31 MOUSE31.DRV "${NTVDM_REPO}/src/addon/mouse31/mouse31.asm")
+
+foreach(id IN ITEMS insignia ntvdm64)
+  set(source "${NTVDM_REPO}/src/addon/${id}-386/${id}.asm")
+  set(directory "${CMAKE_BINARY_DIR}/${id}")
+  file(MAKE_DIRECTORY "${directory}")
+  addon_source("${source}")
+  file(CONFIGURE OUTPUT "${directory}/${id}.lnk" CONTENT
+    "format windows vxd static\noption quiet\noption map=${id}.map\nname ${id}.386\nfile ${id}.obj\nsegment _LTEXT shared resident\nsegment _LDATA shared resident\nexport ${id}_ddb.1\n" @ONLY)
+  add_custom_command(OUTPUT "${directory}/${id}.obj"
+    COMMAND "${NTVDM_NASM}" -f obj "${source}" -o "${id}.obj" -l "${id}.lst"
+    DEPENDS "${source}" "${NTVDM_NASM}" BYPRODUCTS "${directory}/${id}.lst"
+    WORKING_DIRECTORY "${directory}" VERBATIM)
+  add_custom_command(OUTPUT "${directory}/${id}.386"
+    COMMAND "${NTVDM_WLINK}" "@${id}.lnk"
+    DEPENDS "${directory}/${id}.obj" "${directory}/${id}.lnk" ${wlink_dependencies}
+    BYPRODUCTS "${directory}/${id}.map" WORKING_DIRECTORY "${directory}" VERBATIM)
+  add_custom_target(${id} ALL DEPENDS "${directory}/${id}.386")
+endforeach()
+
+# Bind driver publication to the sources and tools actually built. HASH is
+# the existing native utility; no interpreted post-build metadata producer.
+function(driver_receipt id filename)
+  set(rows)
+  foreach(source IN LISTS ARGN)
+    file(SHA256 "${NTVDM_REPO}/${source}" hash)
+    list(APPEND rows "{\"path\":\"${source}\",\"sha256\":\"${hash}\"}")
+  endforeach()
+  list(JOIN rows "," rows)
+  set(tool_rows)
+  set(driver_tools "${NTVDM_NASM}")
+  if(id MATCHES "^(insignia|ntvdm64)$")
+    list(APPEND driver_tools ${wlink_dependencies})
+  endif()
+  foreach(tool IN LISTS driver_tools)
+    file(SHA256 "${tool}" hash)
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${tool}")
+    file(TO_CMAKE_PATH "${tool}" tool_path)
+    list(APPEND tool_rows "{\"path\":\"${tool_path}\",\"sha256\":\"${hash}\"}")
+  endforeach()
+  list(JOIN tool_rows "," tool_rows)
+  set(directory "${CMAKE_BINARY_DIR}/${id}")
+  file(CONFIGURE OUTPUT "${directory}/source-inputs.json" CONTENT
+    "{\"schema\":1,\"target\":\"${id}\",\"file\":\"${filename}\",\"sources\":[${rows}],\"tools\":[${tool_rows}]}\n" @ONLY)
+  add_custom_command(OUTPUT "${directory}/build.sha256" "${directory}/build.inputs.json"
+    COMMAND cmd.exe /d /c "${NTVDM_REPO}/tools/build/Write-AddonReceipt.cmd"
+      "${CMAKE_BINARY_DIR}/hash/hash.exe" "${directory}/${filename}"
+      "${directory}/build" "${directory}/source-inputs.json"
+    DEPENDS "${directory}/${filename}" "${directory}/source-inputs.json"
+      hash "${CMAKE_BINARY_DIR}/hash/hash.exe"
+      "${NTVDM_REPO}/tools/build/Write-AddonReceipt.cmd" VERBATIM)
+  add_custom_target(${id}_receipt DEPENDS
+    "${directory}/build.sha256" "${directory}/build.inputs.json")
+  add_dependencies(${id} ${id}_receipt)
+endfunction()
+foreach(id IN ITEMS compat95 compat95-control)
+  driver_receipt(${id} compat95.sys src/addon/compat95/compat95.asm
+    src/addon/compat95/bootlogo.inc src/addon/compat95/root.inc)
+endforeach()
+driver_receipt(mouse101 MOUSE101.DRV src/addon/mouse101/mouse101.asm)
+driver_receipt(mouse31 MOUSE31.DRV src/addon/mouse31/mouse31.asm)
+driver_receipt(insignia insignia.386 src/addon/insignia-386/insignia.asm)
+driver_receipt(ntvdm64 ntvdm64.386 src/addon/ntvdm64-386/ntvdm64.asm)
+
+# Authored observation programs are separate, opt-in test targets. They are
+# never release inputs and do not rebuild any original guest component.
+function(mouse_probe family filename source)
+  set(id "${family}-${filename}")
+  addon_binary("${id}" "${filename}"
+    "${NTVDM_REPO}/test/observation/${source}"
+    -I "${NTVDM_REPO}/src/addon/${family}/" ${ARGN})
+  set_property(TARGET "${id}" PROPERTY EXCLUDE_FROM_ALL TRUE)
+  set_property(GLOBAL APPEND PROPERTY "${family}_tests" "${id}")
+endfunction()
+set(addon_dependencies "${NTVDM_REPO}/src/addon/mouse101/mouse101.asm")
+mouse_probe(mouse101 M101TEST.COM win101_mouse_driver_guest.asm)
+mouse_probe(mouse101 M101REAL.COM win101_mouse_driver_real.asm)
+set(addon_dependencies "${NTVDM_REPO}/src/addon/mouse31/mouse31.asm")
+mouse_probe(mouse31 M31TEST.COM win31_mouse_driver_guest.asm)
+mouse_probe(mouse31 M31REENT.COM win31_mouse_driver_guest.asm -DMOUSE31_TEST_REENTRY)
+mouse_probe(mouse31 M31PM.COM win31_mouse_driver_guest.asm -DMOUSE31_TEST_PRIOR_PM)
+mouse_probe(mouse31 M31REAL.COM win31_mouse_driver_real.asm)
+mouse_probe(mouse31 M31CTX.COM win31_mouse_callback_context.asm)
+set(addon_dependencies)
+mouse_probe(mouse31 M31WIN.EXE win31_mouse_windows_probe.asm)
+mouse_probe(mouse31 M31SWAP.EXE win31_mouse_swap_probe.asm)
+mouse_probe(mouse31 M31ALOC.EXE win31_mouse_dosalloc_probe.asm)
+mouse_probe(mouse31 M31VM.EXE win31_mouse_dosalloc_probe.asm -DMOUSE31_VM_CHILD)
+mouse_probe(mouse31 M31VMCTL.EXE win31_mouse_dosalloc_probe.asm
+  -DMOUSE31_VM_CHILD -DMOUSE31_VM_LAUNCH_CONTROL)
+mouse_probe(mouse31 M31CHLD.COM win31_mouse_vm_child.asm)
+mouse_probe(mouse31 M31VXD.COM win31_vxd_trace_probe.asm)
+mouse_probe(mouse31 M31OWNR.EXE win31_mouse_prior_owner_probe.asm)
+mouse_probe(mouse31 M31CTRL.EXE win31_mouse_prior_owner_probe.asm -DMOUSE31_OWNER_CONTROL)
+foreach(family IN ITEMS mouse101 mouse31)
+  get_property(targets GLOBAL PROPERTY "${family}_tests")
+  add_custom_target(${family}-tests DEPENDS ${family} ${targets})
+endforeach()
+
+get_property(sources GLOBAL PROPERTY addon_sources)
+list(REMOVE_DUPLICATES sources)
+list(JOIN sources ",\n" sources)
+file(SHA256 "${NTVDM_NASM}" nasm_hash)
+file(SHA256 "${NTVDM_WLINK}" wlink_hash)
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/source-manifest.json" CONTENT
+  "{\"sources\":[\n${sources}\n],\"nasmSha256\":\"${nasm_hash}\",\"wlinkSha256\":\"${wlink_hash}\"}\n" @ONLY)
