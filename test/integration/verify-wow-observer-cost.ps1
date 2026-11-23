@@ -40,19 +40,18 @@ $native=$null;$probe=$null;$gate=$null
 try{
  $sources=@($PSCommandPath,"$PSScriptRoot/../observation/wow_observer_cost.h","$PSScriptRoot/../observation/wow_observer_cost_fixture.c","$PSScriptRoot/../observation/wow_mine_native_cost_control.c","$PSScriptRoot/../observation/wow_mine_latency_probe.c","$PSScriptRoot/../observation/wow_mine_gameplay_probe.c","$PSScriptRoot/verify-wow-mine-latency.ps1","$PSScriptRoot/../observation/isolated_package_cleanup.ps1",$Observer,$CompilerDriver,"$repo/assets/winnt.zip","$repo/assets/release/release-manifest.json","$WorkerBuildRoot/ntvdm.exe","$WorkerBuildRoot/ntvdm.exe.map","$ProviderBuildRoot/wow32.dll","$ProviderBuildRoot/wow32.dll.map")
  $images=@(Get-Content "$repo/assets/release/release-manifest.json" -Raw|ConvertFrom-Json)
- if($images.Count -ne 13){throw 'Coherent13 required'}
+ if(!$images.Count -or @($images.name|Sort-Object -Unique).Count -ne $images.Count){throw 'Coherent current manifest required'}
  foreach($image in $images){$path="$repo/assets/release/$($image.name)";if((Get-FileHash $path).Hash -ne $image.sha256){throw 'Release manifest mismatch'};$sources+=$path}
  $sources|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $null=New-Item -ItemType Directory "$root/sealed-images"
  foreach($image in $images){Copy-Item "$repo/assets/release/$($image.name)" "$root/sealed-images/$($image.name)"}
  foreach($pair in @(@('ntvdm.exe',$WorkerBuildRoot),@('WOW32.DLL',$ProviderBuildRoot))){
-  if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (Get-FileHash "$root/sealed-images/$($pair[0])").Hash){throw 'MAP/build image does not match delivered runtime'}
+  if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (@($images|Where-Object name -eq $pair[0])[0].InputSha256)){throw 'MAP/build image does not match release input'}
   Copy-Item "$($pair[1])/$($pair[0]).map" "$root/sealed-images/$($pair[0]).map"
  }
- @{runtimeHead=(& git -C $repo rev-parse HEAD);source='Exact delivered thirteen images; diagnostic instrumentation is observer-only';productionChanged=$false;guestChanged=$false;pollingMilliseconds=20;limits='Posted input, native capture and actual sleep wall time; native reference is not a matching VM workload or physical mouse latency. Leaf times may wait on painter/compositor, are not pure overhead and cannot be subtracted into guest CPU time.'}|ConvertTo-Json|Set-Content "$root/contract.json"
- foreach($spec in @(@('unit','wow_observer_cost_fixture.c','kernel32.lib'),@('native','wow_mine_native_cost_control.c','user32.lib gdi32.lib'))){
-  Owned ('compile-'+$spec[0]) $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /MT /O2 /W4 /D_CRT_SECURE_NO_WARNINGS /Fo"'+$root+'/'+$spec[0]+'.obj" /Fe"'+$root+'/'+$spec[0]+'.exe" "'+$PSScriptRoot+'/'+$spec[1]+'" /link '+$spec[2]+'"') 120
- }
+ @{runtimeHead=(& git -C $repo rev-parse HEAD);source='Exact delivered manifest images; diagnostic instrumentation is observer-only';productionChanged=$false;guestChanged=$false;pollingMilliseconds=20;limits='Posted input, native capture and actual sleep wall time; native reference is not a matching VM workload or physical mouse latency. Leaf times may wait on painter/compositor, are not pure overhead and cannot be subtracted into guest CPU time.'}|ConvertTo-Json|Set-Content "$root/contract.json"
+ Owned compile $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-observer-probes"') 120
+ foreach($kind in 'unit','native'){Copy-Item "$repo/build/.ninja/fixtures-x86/wow-observer-cost-$kind.exe" "$root/$kind.exe"}
  Owned unit "$root/unit.exe" '--control' 15
  if((Get-Content "$root/unit.stdout.txt" -Raw) -notmatch 'OBSERVER_COST_UNIT errors=0 native_calls=5 exact_args=1 success_failure=1 exact_errors=1 qpc=1 reset=1'){throw 'Incomplete transparent leaf/API/error controls'}
  Expand-Archive "$repo/assets/winnt.zip" "$root/media";$package="$root/media/WINNT"

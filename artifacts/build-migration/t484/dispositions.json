@@ -319,5 +319,15 @@
     "evidence": "docs/etc/evidence/t484-s3-latency.md",
     "status": "pending-producer-migration",
     "reason": "P58 native latency/sampler/environment producers; physical runtime staging remains"
+  },
+  "test/integration/verify-wow-multi-dialog.ps1": {
+    "reason": "P59 local producer migrated; shared runtime/package staging remains",
+    "evidence": "docs/etc/evidence/t484-s3-ui.md",
+    "status": "pending-producer-migration"
+  },
+  "test/integration/verify-wow-observer-cost.ps1": {
+    "reason": "P59 local producer migrated; shared runtime/package staging remains",
+    "evidence": "docs/etc/evidence/t484-s3-ui.md",
+    "status": "pending-producer-migration"
   }
 }

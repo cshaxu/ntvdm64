@@ -68,7 +68,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P58 latency witnesses](../etc/evidence/t484-s3-latency.md) | Native latency/sampler profiles and current-token environment reader;graph runner unified;runtime staging remains pending. |
 
-Each batch passed its cached full host build. P58 checks11 raw host inputs
+| [P59 dialog/observer witnesses](../etc/evidence/t484-s3-ui.md) | Three timestamp-only native witnesses;counter and argument controls pass;shared staging remains pending. |
+
+Each batch passed its cached full host build. P59 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

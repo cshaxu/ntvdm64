@@ -59,6 +59,7 @@ set_property(TARGET logon-environment_objects PROPERTY FIXTURE_LIBRARIES userenv
 include(wow-idle.cmake)
 include(wow-mine.cmake)
 include(wow-latency.cmake)
+include(wow-ui-probes.cmake)
 set(observer_targets)
 foreach(pair IN ITEMS "console-startup-observer|console_startup_observer"
     "wow-exception-observer|wow_exception_observer"

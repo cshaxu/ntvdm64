@@ -1,0 +1,32 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-ui\\baseline\\dialog.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-multi-dialog.exe",
+    "oldBytes": 131584,
+    "newBytes": 131584,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "a6ddf9d84e24706f6d3ba22ce56cceb78cbda6a3b275dc28defce0c51543de7d",
+    "newSha256": "fb6051151466f08bf8c99fcf34f03390292b8d73f202f7a4160f254ff7e5f749"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-ui\\baseline\\unit.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-observer-cost-unit.exe",
+    "oldBytes": 113152,
+    "newBytes": 113152,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "6d388c0538a9cdd66268ac7f5f32cfa92426a2e486bc165ab2326afd10bc4598",
+    "newSha256": "0502e15b9816269d307edd14cefb0cd15b6668d2c98c03a29d4c93f2df767411"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-ui\\baseline\\native.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-observer-cost-native.exe",
+    "oldBytes": 114688,
+    "newBytes": 114688,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "c6016e36d782f8010631da9e88cf7d407b4e7a92abe5c3e800a1d4730a87dbef",
+    "newSha256": "0a36af2444d113017961356f0a6408913aaef20544f55fe74a9c88fb743d64c6"
+  }
+]

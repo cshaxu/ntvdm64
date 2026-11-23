@@ -1,34 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "432bb60a01ee9424cddda8c95f2c9c17c06834bf",
+  "head": "09fa58c230bf56721d4f9fe19367a3e893cf0ef2",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-graph-cost.ps1",
-    " M test/integration/verify-wow-mine-latency.ps1",
+    " M test/integration/verify-wow-multi-dialog.ps1",
+    " M test/integration/verify-wow-observer-cost.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    " M tools/build/wow32/graph-cost.cmake",
-    "?? artifacts/build-migration/t484/s3-latency/",
-    "?? docs/etc/evidence/t484-s3-latency.md",
-    "?? test/observation/logon_environment.c",
-    "?? tools/build/fixtures/graph-probe.cmake",
-    "?? tools/build/fixtures/wow-latency.cmake"
+    "?? artifacts/build-migration/t484/s3-ui/",
+    "?? docs/etc/evidence/t484-s3-ui.md",
+    "?? tools/build/fixtures/wow-ui-probes.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 67,
-    "unchanged": 175,
+    "changed": 69,
+    "unchanged": 173,
     "removed": 113
   },
   "disposition_counts": {
     "migrated-delivered": 16,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
-    "pending-producer-migration": 48,
+    "pending-producer-migration": 50,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 174
+    "requires-disposition-reconciliation": 172
   },
   "existing_interpreted_candidates_with_command_hits": 202,
   "files": [
@@ -1089,11 +1086,13 @@
       "state": "changed",
       "current_sha256": "54230bcabd618c212ff756b48d430d6f5e50bcc1d597fd99dba01c2f308055c1",
       "revisions": [
+        "09fa58c230bf56721d4f9fe19367a3e893cf0ef2",
         "f966783dba7a5993b57d9a4dcf30eb8f5c9c6621"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-early-deliveries.md",
-        "docs/etc/evidence/t484-s3-graph-cost.md"
+        "docs/etc/evidence/t484-s3-graph-cost.md",
+        "docs/etc/evidence/t484-s3-latency.md"
       ],
       "completion": "pending-producer-migration",
       "decision": {
@@ -1145,9 +1144,13 @@
       "file": "test/integration/verify-wow-mine-latency.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "ece2f998999f5ca5b0eac8353c920cafc7ac3349fc8d1be9d273d3c1b348483e",
-      "revisions": [],
-      "evidence": [],
+      "current_sha256": "16f02131db9ed023205e7138e8cd0838d9e9d0d79d94dddeddd119db453d63a5",
+      "revisions": [
+        "09fa58c230bf56721d4f9fe19367a3e893cf0ef2"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-latency.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-latency.md",
@@ -1159,23 +1162,31 @@
       "id": "B0064",
       "file": "test/integration/verify-wow-multi-dialog.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "84d3daf1dca85b3944b18b79adeed64ffb11e55980d915f6e4f06db3f81ae709",
+      "state": "changed",
+      "current_sha256": "770eeb0a5aeebe8759ca9bc9c1d152bfb3a4b4c74a4ba7284f68344a20e6ae62",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "reason": "P59 local producer migrated; shared runtime/package staging remains",
+        "evidence": "docs/etc/evidence/t484-s3-ui.md",
+        "status": "pending-producer-migration"
+      }
     },
     {
       "id": "B0065",
       "file": "test/integration/verify-wow-observer-cost.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "79455ae95e8f6c3ecda1411690c39e4b317629fca8cb9168ea1cbba736e6c760",
+      "state": "changed",
+      "current_sha256": "0a758b010fe67a350204436ec5fef6aa5d185cb0164164980f35c1d2f0fd7ce5",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "reason": "P59 local producer migrated; shared runtime/package staging remains",
+        "evidence": "docs/etc/evidence/t484-s3-ui.md",
+        "status": "pending-producer-migration"
+      }
     },
     {
       "id": "B0066",
@@ -4934,6 +4945,12 @@
     }
   ],
   "commits": {
+    "09fa58c230bf56721d4f9fe19367a3e893cf0ef2": {
+      "subject": "T484 S3 P58 migrate latency and environment producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-latency.md"
+      ]
+    },
     "432bb60a01ee9424cddda8c95f2c9c17c06834bf": {
       "subject": "T484 S3 P57 migrate mine integration producers",
       "evidence": [
@@ -6131,12 +6148,16 @@
       "file": "test/integration/verify-wow-mine-latency.ps1",
       "hits": [
         {
-          "line": 65,
+          "line": 69,
+          "text": "$environmentExe=\"$repo/build/.ninja/fixtures-$environmentArch/logon-environment.exe\""
+        },
+        {
+          "line": 70,
           "text": "$cache=\"$repo/build/.ninja/fixtures-x86\""
         },
         {
-          "line": 74,
-          "text": "Get-FileHash \"$root/latency.exe\",\"$root/sample.exe\",\"$cache/logon-environment.exe\",\"$PSScriptRoot/../observation/logon_environment.c\",\"$repo/tools/build/fixtures/wow-latency.cmake\",\"$repo/tools/build/fixtures/graph-probe.cmake\"|Export-Csv -NoTypeInformation -Append \"$root/inputs.csv\""
+          "line": 79,
+          "text": "Get-FileHash \"$root/latency.exe\",\"$root/sample.exe\",$environmentExe,\"$PSScriptRoot/../observation/logon_environment.c\",\"$repo/tools/build/fixtures/wow-latency.cmake\",\"$repo/tools/build/fixtures/graph-probe.cmake\"|Export-Csv -NoTypeInformation -Append \"$root/inputs.csv\""
         }
       ]
     },
@@ -6145,8 +6166,8 @@
       "file": "test/integration/verify-wow-multi-dialog.ps1",
       "hits": [
         {
-          "line": 39,
-          "text": "& $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS \"/Fo$root\\probe.obj\" \"/Fe$root\\probe.exe\" $source /link user32.lib psapi.lib dbghelp.lib *> \"$root\\compile.txt\""
+          "line": 45,
+          "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/wow-multi-dialog.exe\" \"$root/probe.exe\""
         }
       ]
     },
@@ -6168,7 +6189,7 @@
         },
         {
           "line": 54,
-          "text": "Owned ('compile-'+$spec[0]) $env:ComSpec ('/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /MT /O2 /W4 /D_CRT_SECURE_NO_WARNINGS /Fo\"'+$root+'/'+$spec[0]+'.obj\" /Fe\"'+$root+'/'+$spec[0]+'.exe\" \"'+$PSScriptRoot+'/'+$spec[1]+'\" /link '+$spec[2]+'\"') 120"
+          "text": "foreach($kind in 'unit','native'){Copy-Item \"$repo/build/.ninja/fixtures-x86/wow-observer-cost-$kind.exe\" \"$root/$kind.exe\"}"
         }
       ]
     },

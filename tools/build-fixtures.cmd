@@ -39,6 +39,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+for %%I in (wow-multi-dialog wow-observer-probes) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (wow-multi-dialog wow-observer-probes) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="logon-environment" set "SELECTED=1"
 if "%TARGET%"=="wow-latency-probes" set "SELECTED=1"
 if "%TARGET%"=="wow-latency-probes" if not "%~1"=="x86" exit /b 2

@@ -14,7 +14,6 @@ param(
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
 )
 $ErrorActionPreference='Stop'
-$CompilerDriver=(Resolve-Path -LiteralPath $CompilerDriver).Path
 $Guest=(Resolve-Path -LiteralPath $Guest).Path
 if ($Mode -eq 'calc-arithmetic' -and
         (Get-FileHash -LiteralPath $Guest -Algorithm SHA256).Hash -ne '09B5E717589598B9DF943A690A78B5F5F0A586468CF08BEB8CED58623C49BCC7') {
@@ -34,11 +33,16 @@ $source="$PSScriptRoot/../observation/wow_multi_dialog_probe.c"
 $process=$null;$runtime=$null;$scope=$null
 $saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_SOL_OPTIONS_PROBE','MVDM_WOW_SOL_OPTIONS_NO_DEBUG','MVDM_WOW_WINDOW_TRACE_PATH','MVDM_WOW_DIALOG_PROCEDURE_TRACE_PATH','MVDM_WOW_DIALOG_CREATE_TRACE_PATH','MVDM_WOW_CALLPROC_TRACE_PATH')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
-    Push-Location $root
+    $command='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-multi-dialog"'
+    $producer=Start-Process $env:ComSpec -ArgumentList $command -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/compile.txt" -RedirectStandardError "$root/compile.stderr.txt"
     try {
-        & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root\probe.obj" "/Fe$root\probe.exe" $source /link user32.lib psapi.lib dbghelp.lib *> "$root\compile.txt"
-        if($LASTEXITCODE){throw "Probe build failed: $LASTEXITCODE"}
-    } finally {Pop-Location}
+        $null=$producer.Handle
+        @{pid=$producer.Id;start=$producer.StartTime.ToUniversalTime().ToString('o');command=$command;deadlineSeconds=120}|ConvertTo-Json|Set-Content "$root/producer.json"
+        if(!$producer.WaitForExit(120000)){$producer.Kill($true);$producer.WaitForExit();throw 'Dialog producer deadline'}
+        $producer.WaitForExit();$producer.ExitCode|Set-Content "$root/producer.exit.txt"
+        if($producer.ExitCode){throw 'Dialog producer failed'}
+    } finally {$producer.Dispose()}
+    Copy-Item "$repo/build/.ninja/fixtures-x86/wow-multi-dialog.exe" "$root/probe.exe"
     $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages
     Save-IsolatedPackageManifest $runtime "$root\manifest.json"
     # Original WOW redirects the Windows-root progman.exe to the native
