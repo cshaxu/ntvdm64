@@ -1,0 +1,6 @@
+{
+  "pid": 1068,
+  "start": "2026-11-23T21:19:23.6082490Z",
+  "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1119-907-0_26.1119.907.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+  "command": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-command-redirection\\nls.ps1\""
+}

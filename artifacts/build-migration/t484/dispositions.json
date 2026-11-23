@@ -360,5 +360,15 @@
     "evidence": "docs/etc/evidence/t484-s3-crt.md",
     "status": "migrated-delivered",
     "reason": "P64 native standalone/actual WOW32 CRT object builds; formatting, header isolation and missing/duplicate provider controls pass"
+  },
+  "test/mvdm-host/dos/command/verify-cmdredir.ps1": {
+    "status": "migrated-delivered",
+    "reason": "P65 CMD/native producer and actual bounded contract checks; no guest staging dependency",
+    "evidence": "docs/etc/evidence/t484-s3-command-nls.md"
+  },
+  "test/mvdm-host/verify-wow-thunk-nls.ps1": {
+    "status": "migrated-delivered",
+    "reason": "P65 CMD/native producer and actual bounded contract checks; no guest staging dependency",
+    "evidence": "docs/etc/evidence/t484-s3-command-nls.md"
   }
 }

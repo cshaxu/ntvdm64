@@ -1617,3 +1617,5 @@ post-publication targeted checks.
 - [T484 S3 Win31 matrix producers](evidence/t484-s3-win31-matrix.md).
 
 - [T484 S3 CRT verification producer](evidence/t484-s3-crt.md).
+
+- [T484 S3 COMMAND/ThunkNLS producers](evidence/t484-s3-command-nls.md).

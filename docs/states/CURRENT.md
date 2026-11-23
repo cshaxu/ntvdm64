@@ -80,7 +80,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P64 CRT producer](../etc/evidence/t484-s3-crt.md) | Native standalone/production object checks, negative links and cache pass; B0072 producer chain complete. |
 
-Implementation batches through P64 passed their cached full host build. P64 checks11 raw host inputs
+| [P65 COMMAND/ThunkNLS](../etc/evidence/t484-s3-command-nls.md) | Actual pipe/exit, six NLS controls and cache pass; B0073/B0074 producer chains complete. |
+
+Implementation batches through P65 passed their cached full host build. P65 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

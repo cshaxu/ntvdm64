@@ -1,0 +1,37 @@
+#include <windows.h>
+#include <stdio.h>
+static LONG query_status;
+static DWORD query_type,query_value,calls;
+static LCID locale;
+static LONG query(HKEY key,LPCSTR name,LPDWORD reserved,LPDWORD type,LPBYTE value,LPDWORD size)
+{
+    (void)key; (void)name; (void)reserved; ++calls;
+    if (*size != sizeof(DWORD)) return ERROR_INVALID_DATA;
+    if (query_status) return query_status;
+    *type=query_type; *(DWORD *)value=query_value; *size=sizeof(DWORD);
+    return ERROR_SUCCESS;
+}
+#define RegQueryValueEx query
+#define GetSystemDefaultLCID() locale
+static DWORD initialize(void)
+{
+    DWORD cb,dwType,fThunkStrRtns=99;
+    HKEY WowKey=NULL;
+@BODY@
+    return fThunkStrRtns;
+}
+int main(void)
+{
+    DWORD i;
+    static const struct { LONG status; DWORD type,value; LCID lcid; DWORD expected; } cases[]={
+        {0,REG_DWORD,0,0x411,0}, {0,REG_DWORD,1,0x409,1},
+        {ERROR_FILE_NOT_FOUND,0,0,0x409,0}, {ERROR_FILE_NOT_FOUND,0,0,0x411,1},
+        {0,REG_SZ,1,0x409,0}, {ERROR_ACCESS_DENIED,0,0,0x411,1}
+    };
+    for(i=0;i<sizeof(cases)/sizeof(cases[0]);++i) {
+        query_status=cases[i].status; query_type=cases[i].type;
+        query_value=cases[i].value; locale=cases[i].lcid; calls=0;
+        if(initialize()!=cases[i].expected || calls!=1) return (int)i+1;
+    }
+    puts("PASS WOW ThunkNLS: six original-source controls"); return 0;
+}
