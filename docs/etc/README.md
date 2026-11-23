@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 host boundaries](evidence/t484-s3-host-boundaries.md) records direct
+product-object heartbeat/ICA tests and removal of two historical generators.
+
 [T484 S3 thread fixtures](evidence/t484-s3-thread-fixtures.md) records native
 thread/module production and dual-architecture lifecycle verification.
 

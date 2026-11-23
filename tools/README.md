@@ -27,6 +27,10 @@ or recompilation of original Microsoft guests; apply the
 
 ## Engineering tools
 
+`build-fixtures.cmd x86 host-thread-boundaries` links the current original
+heartbeat/ICA objects. `verify-host-thread-boundaries.ps1` runs their suspend,
+resume and lock-exclusion checks; no separate historical CPU graph.
+
 `build-fixtures.cmd x86|x64 thread-lifecycle` produces thread alert/join,
 session lifecycle and the shared-binding DLL fixtures. The existing
 `verify-thread-start-boundary.ps1` delegates compilation to this CMD entry;

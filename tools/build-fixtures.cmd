@@ -14,6 +14,8 @@ if "%TARGET%"=="package-resources" set "SELECTED=1"
 if "%TARGET%"=="presentation-font" set "SELECTED=1"
 if "%TARGET%"=="thread-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="console-contracts" set "SELECTED=1"
+if "%TARGET%"=="host-thread-boundaries" set "SELECTED=1"
+if "%TARGET%"=="host-thread-boundaries" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="console-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="observation-tools" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" set "SELECTED=1"
@@ -42,6 +44,7 @@ if "%TARGET%"=="oem-tests" goto worker
 if "%TARGET%"=="command-initialization" goto worker
 if "%TARGET%"=="dem-declarations" goto worker
 if "%TARGET%"=="console-contracts" goto worker
+if "%TARGET%"=="host-thread-boundaries" goto worker
 if "%TARGET%"=="command-redirection" goto worker
 for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" goto worker
 cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON

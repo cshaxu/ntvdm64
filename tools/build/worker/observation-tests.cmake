@@ -82,3 +82,15 @@ foreach(pair IN ITEMS "console-display-toggle|console_display_toggle_fixture"
 endforeach()
 add_custom_target(console-contracts DEPENDS "${CMAKE_BINARY_DIR}/console-display-toggle.exe"
   "${CMAKE_BINARY_DIR}/console-input-contract.exe")
+foreach(pair IN ITEMS "softpc-delay-heartbeat|softpc_delay_heartbeat_fixture|nt_timer"
+    "softpc-ica-lock|softpc_ica_lock_fixture|nt_eoi")
+  string(REPLACE "|" ";" parts "${pair}")
+  list(GET parts 0 name)
+  list(GET parts 1 source)
+  list(GET parts 2 original)
+  worker_unit("obj/tests/${source}.obj" "${NTVDM_REPO}/test/mvdm-host/${source}.c" "${profile_1}")
+  worker_link("${name}.exe" "/nologo /OPT:REF /out:$out /map:$out.map"
+    "kernel32.lib ntdll.lib" INPUTS "obj/tests/${source}.obj" "obj/host/${original}.obj")
+endforeach()
+add_custom_target(host-thread-boundaries DEPENDS "${CMAKE_BINARY_DIR}/softpc-delay-heartbeat.exe"
+  "${CMAKE_BINARY_DIR}/softpc-ica-lock.exe")

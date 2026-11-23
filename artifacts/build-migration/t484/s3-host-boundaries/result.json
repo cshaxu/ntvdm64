@@ -1,0 +1,17 @@
+{
+  "exit": 0,
+  "cases": [
+    {
+      "name": "softpc-delay-heartbeat",
+      "pid": 32752,
+      "exit": 0,
+      "sha256": "E8EFC6B7318CE4B10EDE08F7B0948B1534798230CD034894C0FA666FD1CF0D43"
+    },
+    {
+      "name": "softpc-ica-lock",
+      "pid": 33484,
+      "exit": 0,
+      "sha256": "C5FFD322222AE6B0C32BCCB1C2700DD520808107D294E4EA8218864C4541A7EE"
+    }
+  ]
+}
