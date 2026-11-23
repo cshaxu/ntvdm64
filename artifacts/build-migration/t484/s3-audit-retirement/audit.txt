@@ -1,0 +1,49 @@
+Selected worker C units: 387
+Lexical Console occurrences: 130
+Files with occurrences: 16
+Distinct spellings: 44
+cmdInitConsole: 3
+cmdPushExitInConsoleBuffer: 2
+copyConsoleToRegen: 6
+CreateConsoleScreenBuffer: 1
+FillConsoleOutputAttribute: 2
+FillConsoleOutputCharacter: 2
+GetConsoleCP: 1
+GetConsoleCursorInfo: 2
+GetConsoleFontSize: 1
+GetConsoleInputWaitHandle: 1
+GetConsoleKeyboardLayoutName: 1
+GetConsoleMode: 4
+GetConsoleScreenBufferInfo: 10
+GetConsoleTitle: 1
+GetConsoleTitleA: 1
+GetCurrentConsoleFont: 1
+HasConsoleClientRectChanged: 3
+InvalidateConsoleDIBits: 28
+NtvdmConsoleTextColours: 1
+NtvdmConsoleTextRequested: 1
+NtvdmConsoleUpdateText: 2
+NtvdmConsoleUpdateTextConfiguration: 1
+OpenNtBaseClientAcquireConsoleContext: 2
+ReadConsoleOutput: 1
+RegisterConsoleVDM: 3
+ResetConsoleState: 2
+ScrollConsoleScreenBuffer: 2
+SetConsoleActiveScreenBuffer: 3
+SetConsoleCtrlHandler: 1
+SetConsoleCursorInfo: 3
+SetConsoleCursorPosition: 2
+SetConsoleKeyShortcuts: 3
+SetConsoleMode: 6
+SetConsolePalette: 1
+SetConsoleScreenBufferSize: 2
+SetConsoleTitle: 3
+SetConsoleTitleA: 1
+SetConsoleWindowInfo: 2
+SetLastConsoleEventActive: 1
+SetupConsoleMode: 3
+ShowConsoleCursor: 5
+VDMConsoleOperation: 5
+WriteConsoleA: 1
+WriteConsoleInputVDMW: 3
+AUDIT ONLY: declarations/definitions and inactive branches may occur; no reachability or runtime pass inferred.

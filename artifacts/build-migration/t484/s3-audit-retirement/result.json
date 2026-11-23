@@ -1,0 +1,9 @@
+{
+  "diagnosticProjection": "deny and slow match production except specified observation boundary",
+  "runtime": "not executed",
+  "exit": 0,
+  "pid": 2780,
+  "start": "2026-11-23T21:42:38.7640162Z",
+  "finished": "2026-11-23T21:42:53.5573973Z",
+  "selectedUnits": 387
+}

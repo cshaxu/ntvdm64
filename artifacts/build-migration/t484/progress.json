@@ -1,31 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "32d630ec30e11269bbc55faee0e8675fa43a61e2",
+  "head": "37ddcbedcdb794558e21d1fde95c6e6208ed2792",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/ntcon-exe/verify-frontend-window-library.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/worker/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-frontend-library/",
-    "?? docs/etc/evidence/t484-s3-frontend-library.md"
+    " M test/observation/audit-dos-console-build-surface.ps1",
+    "D  test/observation/build-observation-fault-services.mjs",
+    "?? artifacts/build-migration/t484/s3-audit-retirement/",
+    "?? docs/etc/evidence/t484-s3-audit-retirement.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 77,
-    "unchanged": 164,
-    "removed": 114
+    "changed": 78,
+    "unchanged": 162,
+    "removed": 115
   },
   "disposition_counts": {
     "migrated-delivered": 21,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 114,
+    "retired-with-delivery-evidence": 115,
     "pending-producer-migration": 53,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 163
+    "requires-disposition-reconciliation": 161,
+    "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 197,
+  "existing_interpreted_candidates_with_command_hits": 196,
   "files": [
     {
       "id": "B0001",
@@ -1395,10 +1395,12 @@
       "state": "changed",
       "current_sha256": "f98d50d95b0f475101b00a0604d91a768145d9b18f53f666a62b28b28a866abf",
       "revisions": [
+        "37ddcbedcdb794558e21d1fde95c6e6208ed2792",
         "e6b5ccfa88ea03734f0e8c6b10bf6f731812f314"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s2-native-generators.md"
+        "docs/etc/evidence/t484-s2-native-generators.md",
+        "docs/etc/evidence/t484-s3-frontend-library.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -1411,12 +1413,16 @@
       "id": "B0077",
       "file": "test/observation/audit-dos-console-build-surface.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "ec3f2759bf9aca0abbe62afabfc768ba24df34ca6a3af5d21329a2bbe8a3db3c",
+      "state": "changed",
+      "current_sha256": "4efa30e37a95d2513e8bc3a6644fd06af7797cec7283dd9759671428d0b453ee",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "evidence": "docs/etc/evidence/t484-s3-audit-retirement.md",
+        "reason": "Read-only graph/source/Dumpbin inspection; not a build dependency; native CMake graph parsing verified"
+      }
     },
     {
       "id": "B0078",
@@ -1542,12 +1548,16 @@
       "id": "B0086",
       "file": "test/observation/build-observation-fault-services.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "58c1f15fc4c0629b32beaf960ba3f213a50f4f7474ddd9c10f0bd913ce77a166",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "evidence": "docs/etc/evidence/t484-s3-audit-retirement.md",
+        "reason": "No active callers; P32 native service diagnostics provide both variants with actual product profile/link; verified again"
+      }
     },
     {
       "id": "B0087",
@@ -5027,6 +5037,12 @@
     }
   ],
   "commits": {
+    "37ddcbedcdb794558e21d1fde95c6e6208ed2792": {
+      "subject": "T484 S3 P67 migrate frontend library test producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-frontend-library.md"
+      ]
+    },
     "32d630ec30e11269bbc55faee0e8675fa43a61e2": {
       "subject": "T484 S3 P66 migrate media owner comparison producer",
       "evidence": [
@@ -6421,37 +6437,7 @@
       "hits": [
         {
           "line": 4,
-          "text": "[string]$NinjaGraph = 'build/M0-T423/S1/restart-formal-x86/build.ninja',"
-        }
-      ]
-    },
-    {
-      "id": "B0086",
-      "file": "test/observation/build-observation-fault-services.mjs",
-      "hits": [
-        {
-          "line": 2,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 3,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 4,
-          "text": "import assert from 'node:assert/strict';"
-        },
-        {
-          "line": 5,
-          "text": "import {spawnSync} from 'node:child_process';"
-        },
-        {
-          "line": 23,
-          "text": "run(`cl.exe /nologo /c /MT /W4 /we4013 /I \"${service}/obj/basesrv\" /I \"${root}/src\" /I \"${root}/src/non-mvdm/public/internal/base/inc\" ${name}.c /Fo${name}.obj`);"
-        },
-        {
-          "line": 24,
-          "text": "run(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj \"${service}/obj/basesrv/stub.obj\" \"${service}/obj/run16/support.obj\" \"${service}/opennt-base-server.lib\" \"${service}/opennt-base-bindings.lib\" \"${service}/common-base-srv-bindings.lib\" \"${service}/broker-transport.lib\" \"${service}/common-base-srv-transport.lib\" \"${service}/original-opennt-rtl-native.lib\" \"${service}/common-root.lib\" \"${service}/common-rpc.lib\" \"${service}/lib-rpc.lib\" \"${service}/lib-process-launch.lib\" \"${service}/lib-handle.lib\" \"${service}/lib-pipe.lib\" \"${service}/lib-process-observation.lib\" \"${service}/lib-file.lib\" \"${service}/common-codec.lib\" \"${service}/common-console.lib\" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);"
+          "text": "[string]$NinjaGraph = 'build/.ninja/msvc-x86-release/worker/build.ninja',"
         }
       ]
     },

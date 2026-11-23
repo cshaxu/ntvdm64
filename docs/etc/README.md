@@ -1623,3 +1623,5 @@ post-publication targeted checks.
 - [T484 S3 media-owner producer](evidence/t484-s3-media.md).
 
 - [T484 S3 frontend library producer](evidence/t484-s3-frontend-library.md)
+
+- [T484 S3 audit reconciliation and retirement](evidence/t484-s3-audit-retirement.md)

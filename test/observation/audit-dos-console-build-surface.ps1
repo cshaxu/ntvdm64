@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$RepositoryRoot = (Split-Path -Parent (Split-Path -Parent $PSScriptRoot)),
-    [string]$NinjaGraph = 'build/M0-T423/S1/restart-formal-x86/build.ninja',
+    [string]$NinjaGraph = 'build/.ninja/msvc-x86-release/worker/build.ninja',
     [switch]$Callsites,
     [string]$Dumpbin = '',
     [switch]$VerifyFrontendBoundary
@@ -14,7 +14,7 @@ $graph = if ([IO.Path]::IsPathRooted($NinjaGraph)) { $NinjaGraph } else { Join-P
 $sources = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
 $objects = [Collections.Generic.List[object]]::new()
 foreach ($line in Get-Content -LiteralPath $graph) {
-    if ($line -match '^build (?<object>.+): cc(?:_[a-z0-9_]+)? (?<file>.+?\.[cC])(?:\s+\|.*)?$') {
+    if ($line -match '^build (?<object>.+): (?:cc(?:_[a-z0-9_]+)?|C_COMPILER__[A-Za-z0-9_]+) (?<file>.+?\.[cC])(?:\s+\|.*)?$') {
         $object = $Matches.object.Replace('$:', ':').Replace('$ ', ' ')
         $path = $Matches.file.Replace('$:', ':').Replace('$ ', ' ')
         if (-not [IO.Path]::IsPathRooted($path)) { $path = Join-Path (Split-Path $graph) $path }

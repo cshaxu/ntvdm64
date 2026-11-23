@@ -86,6 +86,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P67 frontend library](../etc/evidence/t484-s3-frontend-library.md) | Native window/keyboard assertions, imported identities, cache and published hashes pass; B0076 complete. |
 
+| [P68 audit/retirement](../etc/evidence/t484-s3-audit-retirement.md) | B0077 retained as read-only audit with native graph support; B0086 duplicate JS producer removed; native diagnostics and hashes verified. |
+
 Implementation batches through P67 passed their cached full host build. P67 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

@@ -1,0 +1,5 @@
+{
+  "command": "-NoProfile -ExecutionPolicy Bypass -File \"O:/repos.hobby/ntvdm64/build/t484-s3-audit-retirement/verify.ps1\"",
+  "start": "2026-11-23T21:42:38.1258085Z",
+  "pid": 2780
+}

@@ -376,5 +376,15 @@
     "status": "migrated-delivered",
     "reason": "P66 native current/original projections and compilation; current success and original line42 failure verified",
     "evidence": "docs/etc/evidence/t484-s3-media.md"
+  },
+  "test/observation/audit-dos-console-build-surface.ps1": {
+    "status": "retained-standalone-audit",
+    "evidence": "docs/etc/evidence/t484-s3-audit-retirement.md",
+    "reason": "Read-only graph/source/Dumpbin inspection; not a build dependency; native CMake graph parsing verified"
+  },
+  "test/observation/build-observation-fault-services.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "evidence": "docs/etc/evidence/t484-s3-audit-retirement.md",
+    "reason": "No active callers; P32 native service diagnostics provide both variants with actual product profile/link; verified again"
   }
 }
