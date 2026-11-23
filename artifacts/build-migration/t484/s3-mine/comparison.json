@@ -1,0 +1,22 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-mine\\baseline\\probe.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-mine-host.exe",
+    "oldBytes": 155648,
+    "newBytes": 155648,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "49adef9ce5672c7f392f918bca615e2a2c160db91ef52eca82408e32d5f4ba2b",
+    "newSha256": "1f88b5bd0d916f0e92d3828dd9df6cd0c8fc8b291d977d5e6f0259ae7e7f9897"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-mine\\baseline\\GENHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\mine\\GENHOST.DLL",
+    "oldBytes": 81408,
+    "newBytes": 81408,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "275bb21a17c203f14645c3fefd0aafae052318b699841168c618e4e6dff02dfb",
+    "newSha256": "dc67c28aa3708fcaf05c04ec0d339ddc805bcbbabd46495c33e52f7f7f37d30c"
+  }
+]

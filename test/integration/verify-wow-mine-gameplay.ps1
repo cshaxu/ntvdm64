@@ -22,7 +22,6 @@ param(
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
 )
 $ErrorActionPreference='Stop'
-$CompilerDriver=(Resolve-Path -LiteralPath $CompilerDriver).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 if(([int]$RetiringSibling.IsPresent+[int]$CbtSibling.IsPresent+[int]$ExceptionSibling.IsPresent+[int]$StartupFailureSibling.IsPresent+[int]$ShellExceptionSibling.IsPresent) -gt 1){throw 'Select one sibling contract'}
 $withSibling=$RetiringSibling -or $CbtSibling -or $ExceptionSibling -or $StartupFailureSibling -or $ShellExceptionSibling
@@ -64,11 +63,19 @@ $saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP
     'MVDM_WOW_REGISTRATION_TRACE_PATH','MVDM_TEST_STARTUP_IDENTITY',
     'MVDM_TEST_SHELL_EXCEPTION','MVDM_TEST_CALLBACK_ABORT')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
-    Push-Location $root
+    $target=if(!$withSibling -or $PrebuiltStartupProbe){'wow-mine-host'}else{'wow-mine-probes'}
+    $command='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 '+$target+'"'
+    $producer=Start-Process $env:ComSpec -ArgumentList $command -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/compile.txt" -RedirectStandardError "$root/compile.stderr.txt"
     try {
-        & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root\probe.obj" "/Fe$root\probe.exe" $source /link user32.lib gdi32.lib dwmapi.lib *> "$root\compile.txt"
-        if($LASTEXITCODE){throw "Probe build failed: $LASTEXITCODE"}
-    } finally {Pop-Location}
+        $null=$producer.Handle
+        @{pid=$producer.Id;start=$producer.StartTime.ToUniversalTime().ToString('o');command=$command;deadlineSeconds=300}|ConvertTo-Json|Set-Content "$root/producer.json"
+        if(!$producer.WaitForExit(300000)){$producer.Kill($true);$producer.WaitForExit();throw 'Mine producer deadline'}
+        $producer.WaitForExit();$producer.ExitCode|Set-Content "$root/producer.exit.txt"
+        if($producer.ExitCode){throw 'Mine producer failed'}
+    } finally {$producer.Dispose()}
+    $cache="$repo/build/.ninja/fixtures-x86"
+    $probes="$cache/guest-probes/mine"
+    Copy-Item "$cache/wow-mine-host.exe" "$root/probe.exe"
     $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages -FreshPackageIdentity:$ShellExceptionSibling
     Save-IsolatedPackageManifest $runtime "$root\manifest.json"
     $scope=New-IsolatedPackageScope $runtime
@@ -77,11 +84,12 @@ try {
         $siblingSource=if($ExceptionSibling -or $StartupFailureSibling){"$PSScriptRoot/../observation/win16_generic_probe.asm"}else{"$PSScriptRoot/../observation/win16_common_dialog_probe.asm"}
         if($CbtSibling){$siblingName='CBTPROB';$siblingSource="$PSScriptRoot/../observation/win16_hook_probe.asm"}
         if($ShellExceptionSibling){$siblingName='SHLPROBE';$siblingSource="$PSScriptRoot/../observation/win16_shell_probe.asm"}
-        $assemblyArgs=@('-f','bin','-o',"$root\$siblingName.EXE",'-l',"$root\sibling.lst")
-        if($RetiringSibling){$assemblyArgs+=('-DCOMMON_DIALOG_ROUNDS='+$CommonDialogRounds)}
-        if($ExceptionSibling){$assemblyArgs+='-DFAULT'}
-        if($ShellExceptionSibling -and $ShellExceptionResponse -eq 'Ignore'){$assemblyArgs+='-DIGNORE_EXCEPTION'}
-        if($CallbackAbortPhase){$assemblyArgs+='-DCALLBACK_ABORT'}
+        $variant=if($RetiringSibling){"dialog-$CommonDialogRounds"}elseif($ExceptionSibling){'fault'}else{'generic'}
+        if($ShellExceptionSibling){
+            $variant='shell'
+            if($ShellExceptionResponse -eq 'Ignore'){$variant+='-ignore'}
+            if($CallbackAbortPhase){$variant+='-abort'}
+        }
         if($PrebuiltStartupProbe){
             $prebuilt=(Resolve-Path -LiteralPath $PrebuiltStartupProbe).Path
             if((Get-FileHash -LiteralPath $prebuilt -Algorithm SHA256).Hash -ne $PrebuiltStartupProbeSha256){
@@ -89,22 +97,20 @@ try {
             }
             Copy-Item -LiteralPath $prebuilt -Destination "$root\$siblingName.EXE"
         } else {
-            & $Nasm @assemblyArgs $siblingSource *> "$root\assemble.txt"
-            if($LASTEXITCODE){throw 'Independent sibling NE assembly failed'}
+            Copy-Item "$probes/$variant.exe" "$root/$siblingName.EXE"
+            Copy-Item "$probes/$variant.lst" "$root/sibling.lst"
         }
         $null=New-Item -ItemType Directory "$runtime\tests" -Force
         Copy-Item "$root\$siblingName.EXE" "$runtime\tests\$siblingName.EXE"
         if($ShellExceptionSibling){
-            & $Nasm -f bin -DCHILD -o "$root/SHLCHILD.EXE" $siblingSource *> "$root/child-assemble.txt"
-            if($LASTEXITCODE){throw 'Shell child assembly failed'}
+            Copy-Item "$probes/child.exe" "$root/SHLCHILD.EXE"
             Copy-Item "$root/SHLCHILD.EXE" "$runtime/tests/SHLCHILD.EXE"
             $env:MVDM_TEST_SHELL_EXCEPTION="$root/shell-exception.txt"
             if($CallbackAbortPhase){$env:MVDM_TEST_CALLBACK_ABORT=$CallbackAbortPhase}
         }
         if($ExceptionSibling){
             $nativeSource="$PSScriptRoot/../observation/wow_generic_callback_probe.c"
-            & $CompilerDriver cl.exe /nologo /LD /MT /O2 /DTEST_GUEST_EXCEPTION "/Fo$root\generic.obj" $nativeSource /link "/OUT:$root\GENHOST.DLL" "/IMPLIB:$root\GENHOST.lib" /EXPORT:RunGenericProbe=_RunGenericProbe@12 /EXPORT:ResolveGenericSegment=_ResolveGenericSegment@4 *> "$root\native-build.txt"
-            if($LASTEXITCODE){throw 'Exception witness DLL build failed'}
+            Copy-Item "$probes/GENHOST.DLL" "$root/GENHOST.DLL"
             Copy-Item "$root\GENHOST.DLL" "$runtime\tests\GENHOST.DLL"
             @($nativeSource,"$root\GENHOST.DLL")|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root\native-inputs.json"
         }

@@ -309,5 +309,10 @@
     "evidence": "docs/etc/evidence/t484-s3-idle.md",
     "status": "pending-producer-migration",
     "reason": "P56 local CL/NASM producers migrated; physical runtime/package staging remains pending"
+  },
+  "test/integration/verify-wow-mine-gameplay.ps1": {
+    "status": "pending-producer-migration",
+    "evidence": "docs/etc/evidence/t484-s3-mine.md",
+    "reason": "P57 local native/guest producers migrated; physical runtime and package identity staging remain"
   }
 }

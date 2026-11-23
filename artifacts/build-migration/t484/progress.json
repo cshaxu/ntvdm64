@@ -1,30 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f966783dba7a5993b57d9a4dcf30eb8f5c9c6621",
+  "head": "2c930d09bf348cf70d084415f681a0b3a8b7b2d4",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-idle-workers.ps1",
+    " M test/integration/verify-wow-mine-gameplay.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-idle/",
-    "?? docs/etc/evidence/t484-s3-idle.md",
-    "?? tools/build/fixtures/wow-idle.cmake"
+    "?? artifacts/build-migration/t484/s3-mine/",
+    "?? docs/etc/evidence/t484-s3-mine.md",
+    "?? tools/build/fixtures/wow-mine.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 65,
-    "unchanged": 177,
+    "changed": 66,
+    "unchanged": 176,
     "removed": 113
   },
   "disposition_counts": {
     "migrated-delivered": 16,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
-    "pending-producer-migration": 46,
+    "pending-producer-migration": 47,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 176
+    "requires-disposition-reconciliation": 175
   },
   "existing_interpreted_candidates_with_command_hits": 202,
   "files": [
@@ -1104,8 +1104,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "5fb692ec349c4bcf0673f7e99a9fae118d7c4008ea282994c77135eb645e0d75",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "2c930d09bf348cf70d084415f681a0b3a8b7b2d4"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-idle.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-idle.md",
@@ -1117,12 +1121,16 @@
       "id": "B0062",
       "file": "test/integration/verify-wow-mine-gameplay.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "20244a431db71a25b1c15b685f9017bd03377a0b47f24b79ba28db31cfb4f090",
+      "state": "changed",
+      "current_sha256": "c36683f3e71cb3d6e5faaea8735425e040b41a61abab9552203c12f55d734b79",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "evidence": "docs/etc/evidence/t484-s3-mine.md",
+        "reason": "P57 local native/guest producers migrated; physical runtime and package identity staging remain"
+      }
     },
     {
       "id": "B0063",
@@ -4914,6 +4922,12 @@
     }
   ],
   "commits": {
+    "2c930d09bf348cf70d084415f681a0b3a8b7b2d4": {
+      "subject": "T484 S3 P56 migrate idle witness producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-idle.md"
+      ]
+    },
     "f966783dba7a5993b57d9a4dcf30eb8f5c9c6621": {
       "subject": "T484 S3 P55 migrate graph diagnostic producer",
       "evidence": [
@@ -6089,20 +6103,8 @@
           "text": "[string]$Nasm='nasm.exe',"
         },
         {
-          "line": 69,
-          "text": "& $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS \"/Fo$root\\probe.obj\" \"/Fe$root\\probe.exe\" $source /link user32.lib gdi32.lib dwmapi.lib *> \"$root\\compile.txt\""
-        },
-        {
-          "line": 92,
-          "text": "& $Nasm @assemblyArgs $siblingSource *> \"$root\\assemble.txt\""
-        },
-        {
-          "line": 98,
-          "text": "& $Nasm -f bin -DCHILD -o \"$root/SHLCHILD.EXE\" $siblingSource *> \"$root/child-assemble.txt\""
-        },
-        {
-          "line": 106,
-          "text": "& $CompilerDriver cl.exe /nologo /LD /MT /O2 /DTEST_GUEST_EXCEPTION \"/Fo$root\\generic.obj\" $nativeSource /link \"/OUT:$root\\GENHOST.DLL\" \"/IMPLIB:$root\\GENHOST.lib\" /EXPORT:RunGenericProbe=_RunGenericProbe@12 /EXPORT:ResolveGenericSegment=_ResolveGenericSegment@4 *> \"$root\\native-build.txt\""
+          "line": 75,
+          "text": "$cache=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
     },
