@@ -29,6 +29,11 @@ are now admitted. Final interpreter-free clean acceptance remains S5.
 
 ## Current Progress
 
+[S3 P4](../etc/evidence/t484-s3-caller-fixtures.md) replaces six manual
+generators with five native groups, passing nine executable instances and
+seven original compile-only units. Cached full build and11 raw/22 published
+hashes pass. Four additional Python-helper consumers remain; S3 stays active.
+
 [S3 P3](../etc/evidence/t484-s3-memory-fixtures.md) migrates two more test
 producers and passes seven x86/x64 executable instances. Shared projection
 bytes and repeated-build image hashes/mtimes are stable; cached full build
@@ -166,6 +171,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P3 records memory fixture migration and its bounded delivery under the
+T484 S3 P4 records caller fixture migration and its bounded delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

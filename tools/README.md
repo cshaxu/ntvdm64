@@ -30,9 +30,13 @@ or recompilation of original Microsoft guests; apply the
 `build.cmd` builds the11 host images. `build-addon.cmd [component]` builds
 all14 authored addons or one selected target; see the addon source index for
 the separate test targets. Both use stable native CMake/Ninja caches.
-`build-fixtures.cmd x86|x64 guest-memory|redirector-async` builds the migrated
-standalone fixture groups; it does not imply that every test producer has
-already migrated. Existing test runners execute and validate those binaries.
+`build-fixtures.cmd x86|x64 <group>` builds the migrated standalone groups:
+guest-memory, redirector-async, guest-location, wow-task-frame,
+wow-callback-frame, redirector-contract, and xms-mapped (x86 only).
+The redirector-contract x86 target also compiles seven original integration
+units. T280 and T282 shared one fixture and now share guest-location.
+This does not imply that every test producer has already migrated.
+Existing test runners execute and validate those binaries.
 
 | Directory | Responsibility |
 | --- | --- |

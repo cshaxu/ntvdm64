@@ -4,7 +4,10 @@ if not "%~3"=="" exit /b 2
 if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
-if not "%TARGET%"=="guest-memory" if not "%TARGET%"=="redirector-async" exit /b 2
+set "SELECTED="
+for %%I in (guest-memory redirector-async guest-location wow-task-frame wow-callback-frame xms-mapped redirector-contract) do if "%TARGET%"=="%%I" set "SELECTED=1"
+if not defined SELECTED exit /b 2
+if "%TARGET%"=="xms-mapped" if not "%~1"=="x86" exit /b 2
 for %%I in ("%~dp0..") do set "NTVDM_ROOT=%%~fI"
 if not defined NTVDM_VSDEVCMD set "NTVDM_VSDEVCMD=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat"
 call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul

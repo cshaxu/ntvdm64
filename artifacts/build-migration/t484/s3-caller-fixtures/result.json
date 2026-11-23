@@ -1,0 +1,62 @@
+{
+  "pid": 8284,
+  "cases": [
+    {
+      "target": "guest-location",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "CBDF1A02F450DA86B2A5F28F2BE24EB0B4F1B2DE6D7DAFC84BBB83C4A609202E"
+    },
+    {
+      "target": "wow-task-frame",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "72CBAF59AE86ACBC8C94BB4510AD77FBA9F970C2AAF072DD22C23E507C3BC06F"
+    },
+    {
+      "target": "xms-mapped",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "F960A989F66C95F270AD81252D3456CD1F1343C1C944697AAB77332FAE0A7466"
+    },
+    {
+      "target": "redirector-contract",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "45A6D7CB2D2239B5CF1AD527E4BE3BC6EC1FFDA70630AEBC50932E58240EDB25"
+    },
+    {
+      "target": "wow-callback-frame",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "3290AEC3F7E3AC721AFB9B41CCF0C4A9C5863A165F816DCEFB7E3DD5ED9EC43A"
+    },
+    {
+      "target": "guest-location",
+      "architecture": "x64",
+      "exit": 0,
+      "sha256": "51D796EE5C537E96C6D762622BFD0C7F60E1E6A20552E53DBB3A66546A7D1F79"
+    },
+    {
+      "target": "wow-task-frame",
+      "architecture": "x64",
+      "exit": 0,
+      "sha256": "260A949B1EF130AE8A911AD438739EF618863B2427DB6AD444CC1F385E2D69EB"
+    },
+    {
+      "target": "redirector-contract",
+      "architecture": "x64",
+      "exit": 0,
+      "sha256": "FCF5E6782D216C21B0C9FD2C1956F0EEEEB56FB0D2A829494117E4DB32AF042E"
+    },
+    {
+      "target": "wow-callback-frame",
+      "architecture": "x64",
+      "exit": 0,
+      "sha256": "DE67B12935B57B1C88A64A873F4D2159505E0501052DCA880482FD1C3465C306"
+    }
+  ],
+  "finished": "2026-11-23T12:54:55.0692289+00:00",
+  "exit": 0,
+  "started": "2026-11-23T12:54:06.6028288+00:00"
+}

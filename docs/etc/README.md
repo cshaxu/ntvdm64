@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 caller fixtures](evidence/t484-s3-caller-fixtures.md) records six
+retired generators, nine executed instances and retained compilation coverage.
+
 [T484 S2 worker migration](evidence/t484-s2-worker-cmake.md) records the current native host build migration and its verification state.
 
 [T484 S3 addon migration](evidence/t484-s3-addon-cmake.md) records all14 native
