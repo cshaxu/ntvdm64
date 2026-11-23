@@ -94,3 +94,29 @@ foreach(pair IN ITEMS "softpc-delay-heartbeat|softpc_delay_heartbeat_fixture|nt_
 endforeach()
 add_custom_target(host-thread-boundaries DEPENDS "${CMAKE_BINARY_DIR}/softpc-delay-heartbeat.exe"
   "${CMAKE_BINARY_DIR}/softpc-ica-lock.exe")
+set(callback_profile "/I\"${NTVDM_REPO}/src/mvdm-host/wow32\" ${profile_1} /I\"${NTVDM_REPO}/src/wow32-dll/include\" /DWOW_ORIGINAL_THUNK_BUILD /Gy")
+set(callback_objects)
+foreach(source IN ITEMS t335_s3_original_callback_ccpu_fixture t335_s3_wcall16_unreachable_seams t335_s3_callback_test_boundary)
+  set(extra)
+  if(source STREQUAL "t335_s3_wcall16_unreachable_seams")
+    set(extra /Gz)
+  endif()
+  worker_unit("obj/tests/callback/${source}.obj" "${NTVDM_REPO}/test/mvdm-host/${source}.c" "${callback_profile} ${extra}")
+  list(APPEND callback_objects "obj/tests/callback/${source}.obj")
+endforeach()
+worker_unit("obj/tests/callback/wcall16.obj" "${NTVDM_REPO}/src/mvdm-host/wow32/wcall16.c" "${callback_profile} /Gz")
+list(APPEND callback_objects "obj/tests/callback/wcall16.obj")
+worker_unit("obj/tests/callback/lease.obj" "${NTVDM_REPO}/src/compat/wow_callback_frame_lease.c" "${callback_profile}")
+list(APPEND callback_objects "obj/tests/callback/lease.obj")
+set(callback_providers ${host_fixture})
+set(callback_aliases)
+foreach(symbol IN ITEMS getCS getIP getSS getSP getAX getBX getBP getSI getDI setSP setIP setSS)
+  string(APPEND callback_aliases " /alternatename:_${symbol}=_c_${symbol}")
+endforeach()
+# The shared CCPU fixture already selects bounded seams before host archives.
+# Preserve that fixture link policy; it is not a production link profile.
+worker_link("original-callback-ccpu.exe" "/nologo /OPT:REF /force:multiple /alternatename:_CallBack16@16=_wow_original_CallBack16@16 ${callback_aliases} /out:$out /map:$out.map"
+  "kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib shell32.lib"
+  INPUTS ${callback_objects} ${callback_providers})
+add_custom_target(ccpu-callback DEPENDS "${CMAKE_BINARY_DIR}/original-callback-ccpu.exe"
+  "${CMAKE_BINARY_DIR}/ccpu-high-linear-page-test.exe")

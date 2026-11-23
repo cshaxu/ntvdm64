@@ -22,6 +22,10 @@
 #include "c_main.h"
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_execution.h"
+#include "compat/include/mvdm_cvidc_vector_binding.h"
+
+extern BOOL WINAPI wow_original_CallBack16(INT, PPARM16, VPPROC, PVPVOID);
 
 extern void sas_init(PHY_ADDR size);
 extern void sas_term(void);
@@ -56,7 +60,7 @@ static const IU16 callback_program_ip = UINT16_C(0x8000);
 static void callback_bop(void)
 {
     callback_bop_entered = 1;
-    callback_result = CallBack16(RET_TASKSTARTED, NULL, 0u,
+    callback_result = wow_original_CallBack16(RET_TASKSTARTED, NULL, 0u,
         &callback_return);
 
     /* The controlled outer guest program has no next instruction.  Use the
@@ -97,13 +101,14 @@ int main(void)
     caller.wTDB = UINT16_C(0x0042);
     caller.wLocalBP = UINT16_C(0x519a);
 
-    sas_init(UINT32_C(0x00200000));
-    c_cpu_init();
-
+    if (!ntvdm_dpmi_initialize()) return 1;
     session_initialize(&owner, 335u);
     if (!session_select_machine_backend(&owner, SESSION_MACHINE_BACKEND_SOFTPC) ||
-        !session_activate(&owner) || !session_thread_bind(&owner) ||
-        !mvdm_softpc_guest_memory_begin(&owner)) {
+        !session_activate(&owner) || !session_thread_bind(&owner)) return 1;
+    sas_init(UINT32_C(0x00200000));
+    mvdm_cvidc_bind_vectors();
+    c_cpu_init();
+    if (!mvdm_softpc_guest_memory_begin(&owner)) {
         fputs("unable to bind source-shaped callback session\n", stderr);
         sas_term();
         return 1;

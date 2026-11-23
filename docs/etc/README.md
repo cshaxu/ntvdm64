@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 CCPU callback](evidence/t484-s3-ccpu-callback.md) records native
+callback producers and current test initialization.
+
 [T484 S3 host boundaries](evidence/t484-s3-host-boundaries.md) records direct
 product-object heartbeat/ICA tests and removal of two historical generators.
 

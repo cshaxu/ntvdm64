@@ -56,8 +56,9 @@ interpreter-free end-to-end acceptance have not completed.
 | [P18 Console fixtures](../etc/evidence/t484-s3-console-fixtures.md) | Three producers replaced; font x86/x64 and two private-desktop Console cases pass; expired fixture assumptions corrected. |
 | [P19 thread fixtures](../etc/evidence/t484-s3-thread-fixtures.md) | Generator and extractor replaced; native thread/module outputs, alert/join and six lifecycle marker groups pass on x86/x64. |
 | [P20 host boundaries](../etc/evidence/t484-s3-host-boundaries.md) | Two generators replaced; actual x86 product heartbeat/ICA objects pass unchanged suspend/resume and mutual-exclusion assertions. |
+| [P21 CCPU callback](../etc/evidence/t484-s3-ccpu-callback.md) | Two generators replaced; bounded CCPU and original callback assertions pass with current initialization. |
 
-Each batch passed its cached full host build. P20 checks11 raw host inputs
+Each batch passed its cached full host build. P21 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
@@ -107,6 +108,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P20 records host boundary migration and its bounded delivery under the
+T484 S3 P21 records CCPU callback migration and its bounded delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

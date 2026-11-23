@@ -55,6 +55,7 @@ function(fixture name link_mode)
 endfunction()
 set(observer_targets)
 foreach(pair IN ITEMS "console-startup-observer|console_startup_observer"
+    "wow-exception-observer|wow_exception_observer"
     "input-milestone-test|input_milestone_test" "worker-window-snapshot|worker_window_snapshot"
     "run16-direct-command-observer|run16_direct_command_observer"
     "terminal-observer|console_terminal_observer")
