@@ -1594,3 +1594,5 @@ post-publication targeted checks.
 - [T484 S3 edit contracts](evidence/t484-s3-edit-contracts.md).
 
 - [T484 S3 native message groups](evidence/t484-s3-message-groups.md).
+
+- [T484 S3 file cache producer](evidence/t484-s3-file-cache.md).

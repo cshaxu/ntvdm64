@@ -1,0 +1,11 @@
+{
+  "started": "2026-11-23T19:57:13.7165816+00:00",
+  "rawHostImages": 11,
+  "pid": 17660,
+  "parsed": [
+    "verify-wow-file-cache"
+  ],
+  "exit": 0,
+  "publishedHashes": 22,
+  "finished": "2026-11-23T19:57:36.8804233+00:00"
+}

@@ -92,7 +92,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P53 native message groups](../etc/evidence/t484-s3-message-groups.md) | CMD owns external/cross/pending build selection;both architectures verified;runtime manifest/staging remains open. |
 
-Each batch passed its cached full host build. P53 checks11 raw host inputs
+| [P54 file cache](../etc/evidence/t484-s3-file-cache.md) | Native object conversion/link;577 cache checks pass;B0059 producer migrated. |
+
+Each batch passed its cached full host build. P54 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

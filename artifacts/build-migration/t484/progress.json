@@ -1,29 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "0ac543493102b15744aa2987149ee846dcf8ad94",
+  "head": "abf51648b9e86a9ac09915335363210685ae9797",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/wow-message-probes.cmake",
-    " M test/integration/verify-wow-external-native.ps1",
+    " M test/integration/verify-wow-file-cache.ps1",
     " M tools/build-fixtures.cmd",
-    "?? artifacts/build-migration/t484/s3-message-groups/",
-    "?? docs/etc/evidence/t484-s3-message-groups.md"
+    " M tools/build/wow32/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-file-cache/",
+    "?? docs/etc/evidence/t484-s3-file-cache.md",
+    "?? tools/build/wow32/file-cache-test.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 62,
-    "unchanged": 180,
+    "changed": 63,
+    "unchanged": 179,
     "removed": 113
   },
   "disposition_counts": {
-    "migrated-delivered": 15,
+    "migrated-delivered": 16,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
     "pending-producer-migration": 44,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 179
+    "requires-disposition-reconciliation": 178
   },
   "existing_interpreted_candidates_with_command_hits": 202,
   "files": [
@@ -405,8 +406,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "38f004f851ada55e8750991a4783b08fdba4a7a39350dad85095954dd3d3bb5c",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "abf51648b9e86a9ac09915335363210685ae9797"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-message-groups.md"
+      ],
       "completion": "retained-native-declarative",
       "decision": {
         "status": "retained-native-declarative",
@@ -1041,8 +1046,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "90bed54cbd3fcfeaec58f27e0f3b33a4df88bd87028129a200dab74036766fb9",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "abf51648b9e86a9ac09915335363210685ae9797"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-message-groups.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -1054,12 +1063,16 @@
       "id": "B0059",
       "file": "test/integration/verify-wow-file-cache.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "9e90a968c1b16c1d02324be1991a9240e849ea0e56f30f777458bdacf9788d56",
+      "state": "changed",
+      "current_sha256": "efbfea48913400446a6ca49ee537e9e7d9cbc8e68e603fb2cd8cabb6f933300c",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Native object import substitution and fixture link select actual production wkfileio;577 original checks pass",
+        "evidence": "docs/etc/evidence/t484-s3-file-cache.md"
+      }
     },
     {
       "id": "B0060",
@@ -4884,6 +4897,12 @@
     }
   ],
   "commits": {
+    "abf51648b9e86a9ac09915335363210685ae9797": {
+      "subject": "T484 S3 P53 move native message groups to CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-message-groups.md"
+      ]
+    },
     "0ac543493102b15744aa2987149ee846dcf8ad94": {
       "subject": "T484 S3 P52 migrate edit contract producer",
       "evidence": [
@@ -5986,12 +6005,8 @@
       "file": "test/integration/verify-wow-file-cache.ps1",
       "hits": [
         {
-          "line": 1,
-          "text": "param([string]$Object='build/.ninja/msvc-x86-release/wow32/obj/wkfileio.obj',[string]$Output='build/t478-s16/current')"
-        },
-        {
-          "line": 10,
-          "text": "if($LASTEXITCODE){throw 'Fixture link failed'}"
+          "line": 19,
+          "text": "$native=\"$repo/build/.ninja/msvc-x86-release/wow32\""
         }
       ]
     },

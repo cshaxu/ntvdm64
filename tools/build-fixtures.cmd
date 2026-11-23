@@ -39,6 +39,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="wow-file-cache" set "SELECTED=1"
+if "%TARGET%"=="wow-file-cache" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="wow-edit-contracts" set "SELECTED=1"
 if "%TARGET%"=="wow-edit-contracts" if not "%~1"=="x86" exit /b 2
@@ -139,6 +141,7 @@ if "%TARGET%"=="pic-bios-contracts" goto worker
 if "%TARGET%"=="command-keyboard-shadow" goto worker
 if "%TARGET%"=="native-input-contracts" goto inputtests
 if "%TARGET%"=="wow-edit-contracts" goto inputtests
+if "%TARGET%"=="wow-file-cache" goto inputtests
 if "%TARGET%"=="command-initialization" goto worker
 if "%TARGET%"=="command-launch" goto worker
 if "%TARGET%"=="worker-diagnostics" goto worker

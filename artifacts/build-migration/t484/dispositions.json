@@ -294,5 +294,10 @@
     "status": "pending-producer-migration",
     "reason": "Native message groups replace generated CMD;runtime coherent13 manifest,media staging and shared message helper chain remain",
     "evidence": "docs/etc/evidence/t484-s3-message-groups.md"
+  },
+  "test/integration/verify-wow-file-cache.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Native object import substitution and fixture link select actual production wkfileio;577 original checks pass",
+    "evidence": "docs/etc/evidence/t484-s3-file-cache.md"
   }
 }
