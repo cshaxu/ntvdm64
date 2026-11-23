@@ -37,7 +37,8 @@ function(fixture name link_mode)
   # Preserve each runner's original CL-driven or explicit LINK library policy.
   if(link_mode STREQUAL "CL")
     set(link "${CMAKE_C_COMPILER}" /nologo /MT "/Fe${name}.exe")
-    set(tail /link /OPT:REF "/MAP:${name}.exe.map")
+    set(tail /link /OPT:REF "/MAP:${name}.exe.map"
+      "$<TARGET_PROPERTY:${name}_objects,FIXTURE_LIBRARIES>")
   else()
     set(link "${CMAKE_LINKER}" /nologo /OPT:REF "/OUT:${name}.exe" "/MAP:${name}.exe.map")
     set(tail kernel32.lib)
@@ -52,6 +53,27 @@ function(fixture name link_mode)
     COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(${name} DEPENDS "${CMAKE_BINARY_DIR}/${name}.exe")
 endfunction()
+if(NTVDM_ARCH STREQUAL "x86")
+  foreach(pair IN ITEMS "S34N|command_native_child_fixture.c"
+      "S34E|command_stream_echo_fixture.c"
+      "command-stream-observer|command_stream_observer.c"
+      "keymouse-capability-observer|keymouse_capability_observer.c")
+    string(REPLACE "|" ";" parts "${pair}")
+    list(GET parts 0 name)
+    list(GET parts 1 source)
+    fixture(${name} CL "test/observation/${source}")
+    set_property(TARGET ${name}_objects PROPERTY COMPILE_OPTIONS /nologo /TC /W4)
+    set_property(TARGET ${name}_objects PROPERTY FIXTURE_LIBRARIES kernel32.lib)
+    if(NOT name STREQUAL "keymouse-capability-observer")
+      target_compile_options(${name}_objects PRIVATE /WX /O2)
+    endif()
+    if(name STREQUAL "S34E" OR name STREQUAL "keymouse-capability-observer")
+      set_property(TARGET ${name}_objects APPEND PROPERTY FIXTURE_LIBRARIES user32.lib)
+    endif()
+  endforeach()
+  add_custom_target(command-tools DEPENDS S34N S34E command-stream-observer)
+  add_dependencies(guest-keymouse keymouse-capability-observer)
+endif()
 set(memory_sources src/compat/guest_memory_lease.c
   src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c src/ntvdm-exe/session/session.c
   src/compat/host_context.c "${CMAKE_BINARY_DIR}/guest-memory-coordination.c"

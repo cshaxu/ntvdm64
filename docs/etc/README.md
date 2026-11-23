@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 native observers](evidence/t484-s3-native-observers.md) records four
+timestamp-only test helpers, behavior checks and their CMD replacements.
+
 [T484 S3 guest probes](evidence/t484-s3-guest-probes.md) records37 byte-identical
 authored probe outputs and retirement of their interpreted producers.
 

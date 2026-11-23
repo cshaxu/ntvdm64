@@ -42,8 +42,9 @@ interpreter-free end-to-end acceptance have not completed.
 | [P4 caller fixtures](../etc/evidence/t484-s3-caller-fixtures.md) | Six generators replaced;9 executable instances and7 original compile-only units. |
 | [P5 helper retirement](../etc/evidence/t484-s3-helper-retirement.md) | Four remaining helper consumers migrated;3 JS and2 Python helpers removed;5 cases,4 compile instances and COMMAND167 assertions. |
 | [P6 guest probes](../etc/evidence/t484-s3-guest-probes.md) | Eleven probe producers replaced,37 byte-identical outputs; one obsolete frontend-library producer removed. |
+| [P7 native observers](../etc/evidence/t484-s3-native-observers.md) | Four producers replaced;4 PE timestamp-only outputs, identical DOS probe, native stream/ConPTY and6 memory checks. |
 
-Each batch passed its cached full host build. P6 checks11 raw host inputs
+Each batch passed its cached full host build. P7 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
@@ -93,6 +94,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P6 records native probe production and its bounded delivery under the
+T484 S3 P7 records native observer production and its bounded delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

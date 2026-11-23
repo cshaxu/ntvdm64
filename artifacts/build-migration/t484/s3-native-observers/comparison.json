@@ -1,0 +1,30 @@
+[
+  {
+    "file": "S34E.EXE",
+    "changedBytes": 2,
+    "kind": "timestamp-only",
+    "beforeSha256": "aee42f53d5d872d61beafd82fa226b105f7b44279901340f0a966bb50a9c774e",
+    "afterSha256": "bb44527441ab55a42db526f439710bd7951a381a3f9f521461dd79ddf66bd1ae"
+  },
+  {
+    "file": "keymouse-capability-observer.exe",
+    "changedBytes": 2,
+    "kind": "timestamp-only",
+    "beforeSha256": "31a7928bb298f9bdd238f157e185835c626b27209b07e5f2d4d3e82f95bdad19",
+    "afterSha256": "f50d10285c5b563a889c62ccad7832317085d8ea434ea485d52a0f73f687cf21"
+  },
+  {
+    "file": "S34N.EXE",
+    "changedBytes": 2,
+    "kind": "timestamp-only",
+    "beforeSha256": "95214958da1c3ccba740f1028eaa834ebcc5f8126f72ce524af792651f5748b0",
+    "afterSha256": "8ca3e41a2422ba03212621da588bb4b65d152f064fe62df333d31ea18702515b"
+  },
+  {
+    "file": "command-stream-observer.exe",
+    "changedBytes": 2,
+    "kind": "timestamp-only",
+    "beforeSha256": "71d95776eddd8eb4d6b1893f525925ef2c032f9c9d3e1ae1c7491950cddb1634",
+    "afterSha256": "41da84ece018623ed5bf552d717b664fb58c2d85cdc419ad6c4d12af72bae26a"
+  }
+]

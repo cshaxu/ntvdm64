@@ -1,0 +1,23 @@
+{
+  "exit": 0,
+  "keymouseComIdentical": true,
+  "pid": 7440,
+  "cases": [
+    {
+      "stdout": true,
+      "conptyControlOutput": true,
+      "argumentRejection": true,
+      "echo": true,
+      "childExit": true,
+      "kind": "baseline"
+    },
+    {
+      "stdout": true,
+      "conptyControlOutput": true,
+      "argumentRejection": true,
+      "echo": true,
+      "childExit": true,
+      "kind": "native"
+    }
+  ]
+}
