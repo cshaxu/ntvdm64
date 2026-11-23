@@ -1,21 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "aaf160c20b2e4b65fc7df3eaf893734c7e630354",
+  "head": "29b0690b3c85813887eff1580f32c74b983cf98d",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-s45-keyboard-shadow.ps1",
+    " M test/integration/verify-s45-vcd-serial-discovery.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/worker/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-keyboard-shadow/",
-    "?? docs/etc/evidence/t484-s3-keyboard-shadow.md",
-    "?? tools/build/worker/keyboard-tests.cmake"
+    " M tools/build/fixtures/cpu-guest-probes.cmake",
+    "?? artifacts/build-migration/t484/s3-serial-probe/",
+    "?? docs/etc/evidence/t484-s3-serial-probe.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 43,
-    "unchanged": 199,
+    "changed": 44,
+    "unchanged": 198,
     "removed": 113
   },
   "disposition_counts": {
@@ -705,8 +704,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "4dc123429d78d90e867245aa448d17b538939e8eed6df2199f2d77581e0275ce",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "29b0690b3c85813887eff1580f32c74b983cf98d"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-keyboard-shadow.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -718,14 +721,15 @@
       "id": "B0041",
       "file": "test/integration/verify-s45-vcd-serial-discovery.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "c5ef659ed92b682b56cff573363d2c69a0d95ca4c2daa720da45ba4ce74c6445",
+      "state": "changed",
+      "current_sha256": "c854c55e5fbdf2bca85729a676707f80d9c1ab374ce32c474489ae8403a0fe77",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM with EXPECT_PORT_MASK; also Add-Type runtime helper"
+        "reason": "Native CMD serial probe assembly verified for five masks; historical runtime staging/cleanup and runtime helper remain pending",
+        "evidence": "docs/etc/evidence/t484-s3-serial-probe.md"
       }
     },
     {
@@ -4786,6 +4790,12 @@
     }
   ],
   "commits": {
+    "29b0690b3c85813887eff1580f32c74b983cf98d": {
+      "subject": "T484 S3 P42 migrate COMMAND keyboard fixture producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-keyboard-shadow.md"
+      ]
+    },
     "aaf160c20b2e4b65fc7df3eaf893734c7e630354": {
       "subject": "T484 S3 P41 migrate PIC and BIOS probe producers",
       "evidence": [
@@ -5586,20 +5596,8 @@
       "file": "test/integration/verify-s45-vcd-serial-discovery.ps1",
       "hits": [
         {
-          "line": 5,
-          "text": "[string]$Nasm = 'C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe'"
-        },
-        {
-          "line": 20,
-          "text": "if (!(Test-Path -LiteralPath $Nasm)) { throw \"NASM not found: $Nasm\" }"
-        },
-        {
-          "line": 61,
-          "text": "& $Nasm @nasmArguments"
-        },
-        {
-          "line": 62,
-          "text": "if ($LASTEXITCODE -ne 0) { throw 'NASM could not build the S45 VCD probe.' }"
+          "line": 68,
+          "text": "Copy-Item (Join-Path $repository 'build/.ninja/fixtures-x86/guest-probes/serial-discovery/S45VCD.COM') $probe"
         }
       ]
     },

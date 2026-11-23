@@ -198,7 +198,8 @@
   },
   "test/integration/verify-s45-vcd-serial-discovery.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Invokes NASM with EXPECT_PORT_MASK; also Add-Type runtime helper"
+    "reason": "Native CMD serial probe assembly verified for five masks; historical runtime staging/cleanup and runtime helper remain pending",
+    "evidence": "docs/etc/evidence/t484-s3-serial-probe.md"
   },
   "test/integration/verify-s7-rpc-fixtures.ps1": {
     "status": "pending-producer-migration",

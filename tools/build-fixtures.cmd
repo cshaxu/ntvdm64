@@ -1,6 +1,17 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
-if not "%~3"=="" exit /b 2
+if not "%~4"=="" exit /b 2
+if not "%~2"=="serial-discovery" if not "%~3"=="" exit /b 2
+set "SERIAL_OPTION="
+if not "%~2"=="serial-discovery" goto arguments
+if "%~3"=="" exit /b 2
+for /f "delims=0123456789" %%I in ("%~3") do exit /b 2
+set "SERIAL_MASK=%~3"
+if not "%SERIAL_MASK:~3%"=="" exit /b 2
+if not "%SERIAL_MASK%"=="0" if "%SERIAL_MASK:~0,1%"=="0" exit /b 2
+if %SERIAL_MASK% GTR 511 exit /b 2
+set "SERIAL_OPTION=-DNTVDM_SERIAL_MASK=%SERIAL_MASK%"
+:arguments
 if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
@@ -25,6 +36,8 @@ if "%TARGET%"=="cpu-guest-probes" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="pic-bios-contracts" set "SELECTED=1"
 if "%TARGET%"=="command-keyboard-shadow" set "SELECTED=1"
 if "%TARGET%"=="command-keyboard-shadow" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="serial-discovery" set "SELECTED=1"
+if "%TARGET%"=="serial-discovery" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="pic-bios-contracts" if not "%~1"=="x86" exit /b 2
 for %%I in (host-cpu-endian host-cpu-endian-default host-cpu-endian-reject) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="console-api-probes" if not "%~1"=="x64" exit /b 2
@@ -98,7 +111,7 @@ if "%TARGET%"=="ccpu-callback" goto worker
 if "%TARGET%"=="wow-controls" goto controls
 if "%TARGET%"=="command-redirection" goto worker
 for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" goto worker
-cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON
+cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON %SERIAL_OPTION%
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" --target %TARGET%
 exit /b %errorlevel%

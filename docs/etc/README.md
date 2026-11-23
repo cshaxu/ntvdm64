@@ -1572,3 +1572,5 @@ post-publication targeted checks.
 [T484 S3 PIC/BIOS producers](evidence/t484-s3-pic-bios.md) records native producer migration and unchanged PIC/BIOS assertions.
 
 [T484 S3 keyboard producers](evidence/t484-s3-keyboard-shadow.md) records native helpers, corrected fixture linkage and remaining runtime-layout migration.
+
+[T484 S3 serial producer](evidence/t484-s3-serial-probe.md) records native mask-dependent assembly, equivalence and parameter/cache checks.

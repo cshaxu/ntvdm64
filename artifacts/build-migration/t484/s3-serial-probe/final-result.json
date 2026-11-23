@@ -1,0 +1,11 @@
+{
+  "finished": "2026-11-23T18:48:08.3646520+00:00",
+  "pid": 22728,
+  "publishedHashes": 22,
+  "exit": 0,
+  "rawHostImages": 11,
+  "started": "2026-11-23T18:47:46.5392919+00:00",
+  "parsed": [
+    "verify-s45-vcd-serial-discovery"
+  ]
+}

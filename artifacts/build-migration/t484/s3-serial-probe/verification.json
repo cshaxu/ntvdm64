@@ -1,0 +1,33 @@
+{
+  "cases": [
+    {
+      "sha256": "35CC28F016120FA5060EA4479958C43CB5D84BAFA69D960F1606990322EDA768",
+      "bytes": 4200,
+      "mask": 0
+    },
+    {
+      "sha256": "16494E6E293BC9325A143DC50CC03621E1E6002CE472FD50A6596783DD296EBA",
+      "bytes": 4200,
+      "mask": 1
+    },
+    {
+      "sha256": "0FA69ED82EB5A859C90F17EB42AC01D4993637CEC599C9168F4DAF8993F0F0E6",
+      "bytes": 4200,
+      "mask": 255
+    },
+    {
+      "sha256": "87B191F772D26C727C49DE941B6007ED5D30E45F93FB63894DCBD50B5750355D",
+      "bytes": 4200,
+      "mask": 256
+    },
+    {
+      "sha256": "F89D6293979AFA6D2B82B9C1AA05BFB80A10C912BB7CD4FADE9640D34AF652FD",
+      "bytes": 4200,
+      "mask": 511
+    }
+  ],
+  "pid": 11688,
+  "exit": 0,
+  "finished": "2026-11-23T18:45:58.3278707+00:00",
+  "started": "2026-11-23T18:45:30.1958283+00:00"
+}

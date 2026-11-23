@@ -1,8 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)] [string]$BuildRoot,
-    [string]$RuntimeRoot = 'O:\winnt',
-    [string]$Nasm = 'C:\Users\neko\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\nasm.exe'
+    [string]$RuntimeRoot = 'O:\winnt'
 )
 
 Set-StrictMode -Version Latest
@@ -10,14 +9,13 @@ $ErrorActionPreference = 'Stop'
 
 $build = (Resolve-Path -LiteralPath $BuildRoot).Path
 $runtime = (Resolve-Path -LiteralPath $RuntimeRoot).Path
-$source = Join-Path $PSScriptRoot '../observation/dpmi_vcd_serial_ports.asm'
+$repository = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $probe = Join-Path $build 'S45VCD.COM'
 $trace = Join-Path $runtime 'logs\s45-vcd-serial-discovery.log'
 $paths = @('run16.exe', 'ntsrv.exe', 'ntvdm.exe') | ForEach-Object {
     Join-Path $runtime $_
 }
 
-if (!(Test-Path -LiteralPath $Nasm)) { throw "NASM not found: $Nasm" }
 if (@(Get-Process ntvdm,basesrv,run16 -ErrorAction SilentlyContinue).Count) {
     throw 'S45 VCD test requires no existing run16/basesrv/ntvdm session.'
 }
@@ -57,9 +55,17 @@ public static class S45QueryDosDevice {
 }
 $mask = [S45QueryDosDevice]::GetSerialMask()
 
-$nasmArguments = @('-f', 'bin', ('-DEXPECT_PORT_MASK=' + $mask), $source, '-o', $probe)
-& $Nasm @nasmArguments
-if ($LASTEXITCODE -ne 0) { throw 'NASM could not build the S45 VCD probe.' }
+$producer=Start-Process -FilePath $env:ComSpec -ArgumentList ('/d /s /c ""'+(Join-Path $repository 'tools/build-fixtures.cmd')+'" x86 serial-discovery '+$mask+'"') -WorkingDirectory $repository -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $build 'serial-build.log') -RedirectStandardError (Join-Path $build 'serial-build.stderr.log')
+try {
+    "pid=$($producer.Id) started=$($producer.StartTime.ToUniversalTime().ToString('o')) mask=$mask" | Set-Content (Join-Path $build 'serial-producer.txt')
+    if(!$producer.WaitForExit(300000)){
+        $producer.Kill($true);$producer.WaitForExit()
+        throw 'Serial producer timed out'
+    }
+    "exit=$($producer.ExitCode)" | Add-Content (Join-Path $build 'serial-producer.txt')
+    if($producer.ExitCode){throw 'Serial producer failed'}
+} finally {$producer.Dispose()}
+Copy-Item (Join-Path $repository 'build/.ninja/fixtures-x86/guest-probes/serial-discovery/S45VCD.COM') $probe
 New-Item -ItemType Directory -Force -Path (Join-Path $runtime 'tests'),(Join-Path $runtime 'logs') | Out-Null
 foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe','ntmon.exe')) {
     Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force
