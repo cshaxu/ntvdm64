@@ -1607,3 +1607,5 @@ post-publication targeted checks.
 - [T484 S3 latency/environment producers](evidence/t484-s3-latency.md).
 
 - [T484 S3 dialog/observer producers](evidence/t484-s3-ui.md).
+
+- [T484 S3 page-domain diagnostic](evidence/t484-s3-page.md).

@@ -58,8 +58,9 @@
     "status": "pending-producer-migration"
   },
   "test/integration/verify-wow-page-cost.ps1": {
-    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-    "status": "pending-producer-migration"
+    "status": "pending-producer-migration",
+    "evidence": "docs/etc/evidence/t484-s3-page.md",
+    "reason": "P60 native page diagnostic producer and real BuildOnly entry pass; archive/package staging and EMS helper remain"
   },
   "test/observation/build-win101-mouse-driver.ps1": {
     "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",

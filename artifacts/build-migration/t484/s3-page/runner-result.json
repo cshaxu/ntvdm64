@@ -1,0 +1,11 @@
+{
+  "pid": 29052,
+  "runner": {
+    "rva": 1850336,
+    "guestRuntimeExecuted": false,
+    "nativeBuildPassed": true
+  },
+  "exit": 0,
+  "start": "2026-11-23T20:50:17.8322977+00:00",
+  "end": "2026-11-23T20:50:25.6915975+00:00"
+}

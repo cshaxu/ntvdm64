@@ -1,17 +1,17 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "09fa58c230bf56721d4f9fe19367a3e893cf0ef2",
+  "head": "965416bb9508a70c2166d48a78b53c770dfbfbc9",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-multi-dialog.ps1",
-    " M test/integration/verify-wow-observer-cost.ps1",
+    " M test/integration/verify-wow-page-cost.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-ui/",
-    "?? docs/etc/evidence/t484-s3-ui.md",
-    "?? tools/build/fixtures/wow-ui-probes.cmake"
+    " M tools/build/fixtures/wow-ui-probes.cmake",
+    " M tools/build/worker/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-page/",
+    "?? docs/etc/evidence/t484-s3-page.md",
+    "?? tools/build/worker/page-cost.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -1164,8 +1164,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "770eeb0a5aeebe8759ca9bc9c1d152bfb3a4b4c74a4ba7284f68344a20e6ae62",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "965416bb9508a70c2166d48a78b53c770dfbfbc9"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-ui.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "reason": "P59 local producer migrated; shared runtime/package staging remains",
@@ -1179,8 +1183,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "0a758b010fe67a350204436ec5fef6aa5d185cb0164164980f35c1d2f0fd7ce5",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "965416bb9508a70c2166d48a78b53c770dfbfbc9"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-ui.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "reason": "P59 local producer migrated; shared runtime/package staging remains",
@@ -1193,7 +1201,7 @@
       "file": "test/integration/verify-wow-page-cost.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "f8d4c82e4bc06da74662e517ccf73d2ea3d18119cdf6865d7a8eb2b70dcac665",
+      "current_sha256": "26b1c169aa6cfde2a92c9b93aa1bc44c223547e56b924c2cc5e38241eb9c22c8",
       "revisions": [
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13",
         "161b9dc27ab6ee0713a777f349ddb25669d72766"
@@ -1204,8 +1212,9 @@
       ],
       "completion": "pending-producer-migration",
       "decision": {
-        "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-        "status": "pending-producer-migration"
+        "status": "pending-producer-migration",
+        "evidence": "docs/etc/evidence/t484-s3-page.md",
+        "reason": "P60 native page diagnostic producer and real BuildOnly entry pass; archive/package staging and EMS helper remain"
       }
     },
     {
@@ -4945,6 +4954,12 @@
     }
   ],
   "commits": {
+    "965416bb9508a70c2166d48a78b53c770dfbfbc9": {
+      "subject": "T484 S3 P59 migrate dialog and observer producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-ui.md"
+      ]
+    },
     "09fa58c230bf56721d4f9fe19367a3e893cf0ef2": {
       "subject": "T484 S3 P58 migrate latency and environment producers",
       "evidence": [
@@ -6210,52 +6225,12 @@
           "text": "[string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),"
         },
         {
-          "line": 26,
+          "line": 23,
           "text": "$inputs=@($source,$PSCommandPath,\"$PSScriptRoot/../observation/wow_page_cost_instrument.h\",\"$PSScriptRoot/../observation/wow_page_cost_data.h\",\"$PSScriptRoot/../observation/wow_page_cost_probe.h\",\"$PSScriptRoot/../observation/wow_mine_latency_probe.c\",\"$PSScriptRoot/../observation/wow_mine_gameplay_probe.c\",\"$PSScriptRoot/verify-wow-mine-latency.ps1\",$Observer,$CompilerDriver,$LogonHelper,\"$repo/assets/winnt.zip\",\"$WorkerBuildRoot/build.ninja\",\"$WorkerBuildRoot/ntvdm.exe\",\"$WorkerBuildRoot/ntvdm.exe.map\",\"$WorkerBuildRoot/ntvdm.lib\",\"$ProviderBuildRoot/wow32.dll\",\"$ProviderBuildRoot/wow32.dll.map\")"
         },
         {
-          "line": 63,
-          "text": "$cc=@(& ninja.exe -C $WorkerBuildRoot -t commands obj/compat/mvdm_softpc_wow_page_domain.obj)[-1]"
-        },
-        {
-          "line": 67,
-          "text": "$link=@(& ninja.exe -C $WorkerBuildRoot -t commands ntvdm.exe)[-1]"
-        },
-        {
-          "line": 68,
-          "text": "if($LASTEXITCODE -or $link -notmatch '^cmd.exe /d /s /c \"(.*)\"$'){throw 'Cannot read actual worker link command'}"
-        },
-        {
-          "line": 69,
-          "text": "$link=$Matches[1]"
-        },
-        {
-          "line": 70,
-          "text": "$directInputs=@([regex]::Matches($link,'(?:^|\\s)(obj/[^\\s\"]+\\.(?:obj|res))(?=\\s|$)')|ForEach-Object {Join-Path $WorkerBuildRoot $_.Groups[1].Value})"
-        },
-        {
-          "line": 71,
-          "text": "$directInputs+=@(\"$WorkerBuildRoot/generated/ntvdm-wow32-provider.def\",\"$WorkerBuildRoot/obj/dpmi/dpmiint.obj\",\"$repo/build/.ninja/build-tools/ntvdm-tib.exe\")"
-        },
-        {
-          "line": 73,
-          "text": "$link=Replace-One $link 'link.exe ' ('link.exe \"'+$root+'/page-domain-profile.obj\" /implib:\"'+$root+'/ntvdm.lib\" ')"
-        },
-        {
-          "line": 74,
-          "text": "$link=Replace-One $link '/out:ntvdm.exe ' ('/out:\"'+$root+'/ntvdm.exe\" ')"
-        },
-        {
-          "line": 75,
-          "text": "if([regex]::Matches($link,'ntvdm\\.exe\\.map').Count -ne 2){throw 'Expected link MAP plus VdmTib audit MAP'}"
-        },
-        {
-          "line": 76,
-          "text": "$link=$link.Replace('ntvdm.exe.map',($root+'/ntvdm.exe.map'))"
-        },
-        {
-          "line": 79,
-          "text": "Owned link $env:ComSpec ('/d /s /c \"call \"'+$vs+'\" -arch=x86 -host_arch=x64 >nul && '+$link+'\"') 180 $WorkerBuildRoot"
+          "line": 36,
+          "text": "$directInputs+=@(\"$WorkerBuildRoot/generated/ntvdm-wow32-provider.def\",\"$WorkerBuildRoot/obj/dpmi/dpmiint.obj\",\"$repo/build/.ninja/build-tools/ntvdm-tib.exe\",\"$repo/tools/build/worker/page-cost.cmake\")"
         }
       ]
     },

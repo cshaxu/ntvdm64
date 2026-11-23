@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
+if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
 if "%~2"=="win16-ole-peer" goto ole_arguments
 if "%~2"=="win16-print" goto print_arguments
@@ -39,6 +39,10 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="wow-page-cost-unit" set "SELECTED=1"
+if "%TARGET%"=="wow-page-cost-unit" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="wow-page-cost" set "SELECTED=1"
+if "%TARGET%"=="wow-page-cost" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-multi-dialog wow-observer-probes) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (wow-multi-dialog wow-observer-probes) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="logon-environment" set "SELECTED=1"
@@ -155,6 +159,8 @@ if "%TARGET%"=="wow-file-cache" goto inputtests
 if "%TARGET%"=="command-initialization" goto worker
 if "%TARGET%"=="command-launch" goto worker
 if "%TARGET%"=="worker-diagnostics" goto worker
+if "%TARGET%"=="wow-page-cost" if not "%~3"=="" goto page_existing
+if "%TARGET%"=="wow-page-cost" goto worker
 if "%TARGET%"=="native-diagnostics" goto nativediagnostics
 if "%TARGET%"=="frame-codepage" if "%~1"=="x86" goto worker
 if "%TARGET%"=="frame-codepage" goto nativediagnostics
@@ -179,6 +185,10 @@ set "result=%errorlevel%"
 popd
 if not "%result%"=="0" exit /b %result%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\worker" --target %TARGET%
+exit /b %errorlevel%
+:page_existing
+if not exist "%~3\CMakeCache.txt" exit /b 2
+cmake --build "%~3" --target wow-page-cost
 exit /b %errorlevel%
 :controls
 cmake -S "%NTVDM_ROOT%\tools\build\wow-controls" -B "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\call-boundaries-native" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_USE_CCACHE=ON

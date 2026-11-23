@@ -1,0 +1,12 @@
+{
+  "exit": 0,
+  "rawHostImages": 11,
+  "publishedHashes": 22,
+  "started": "2026-11-23T20:52:26.4914429+00:00",
+  "parsed": [
+    "verify-wow-page-cost"
+  ],
+  "pid": 14788,
+  "finished": "2026-11-23T20:52:54.2135759+00:00",
+  "nativeCacheStable": true
+}
