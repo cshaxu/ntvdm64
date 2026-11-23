@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param([Parameter(Mandatory=$true)][string]$OutputRoot,
-    [switch]$OriginalProviders, [string]$BuildCache='build/M0-T427/S2/r001')
+    [switch]$OriginalProviders, [string]$BuildCache='build/.ninja/msvc-x86-release/worker')
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $out = [IO.Path]::GetFullPath((Join-Path $root $OutputRoot))
@@ -8,100 +8,26 @@ if (!$out.StartsWith(([IO.Path]::GetFullPath((Join-Path $root 'build')) + '\'),
     [StringComparison]::OrdinalIgnoreCase)) { throw 'Output must stay in build/.' }
 if (Test-Path -LiteralPath $out) { throw 'Use fresh evidence directory.' }
 New-Item -ItemType Directory -Path $out | Out-Null
-$vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$wrapper = Join-Path $out 'compiler.cmd'
-@('@echo off', ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'),
-    'if errorlevel 1 exit /b %errorlevel%', '%*') |
-    Set-Content -LiteralPath $wrapper -Encoding ASCII
-$sources = @('src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/compat/mvdm_redirector_guest_copy.c',
-    'src/compat/guest_location.c', 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
-    'src/compat/guest_memory_lease.c',
-    'test/mvdm-host/vdmredir/redirector_oem_capacity_test.c')
-if ($OriginalProviders) {
-    $sources[-1] = 'test/mvdm-host/vdmredir/redirector_netapi_provider_test.c'
-    $sources += 'src/compat/mvdm_redirector_async.c'
-}
-$coordination = Join-Path $out 'guest-memory-coordination.c'
-& python (Join-Path $root 'tools/build/extract-guest-memory-fixture.py') $coordination --core-only
-if ($LASTEXITCODE) { throw 'Guest memory coordination extraction failed' }
-$sources += [IO.Path]::GetRelativePath($root, $coordination)
-$inputs = $sources | ForEach-Object { Join-Path $root $_ }
-$objects = $sources | ForEach-Object {
-    Join-Path $out ([IO.Path]::GetFileNameWithoutExtension($_) + '.obj')
-}
-& $wrapper cl /nologo /TC /c /MT /W4 /DNTVDM /DCPU_40_STYLE /DCCPU /DWIN_32 /DVDMREDIR_DLL "/I$root/src" "/I$root/src/compat/include" "/I$root/src/ntvdm-exe/softpc/include" "/FI$root/test/mvdm-host/vdmredir/redirector_oem_fixture_binding.h" "/Fo$out/" @inputs 2>&1 |
-    Tee-Object -FilePath (Join-Path $out 'build.txt')
-if ($LASTEXITCODE -ne 0) { throw 'Compile failed.' }
-if ($OriginalProviders) {
-    $graph = Get-Content -LiteralPath (Join-Path $root "$BuildCache/build.ninja") -Raw
-    $match = [regex]::Match($graph,
-        '(?m)^build obj/redir/vrnetapi.obj:.*\r?\n\s+cflags = (.+)$')
-    if (!$match.Success) { throw 'Missing actual production VrNetApi compile contract.' }
-    $flags = $match.Groups[1].Value.Replace('$:', ':')
-    if ($flags -notmatch '/DCPU_40_STYLE\b' -or $flags -match '/DCPU_30_STYLE\b') {
-        throw 'Wrong selected CPU profile.'
-    }
-    $object = Join-Path $out 'vrnetapi.obj'
-    $response = Join-Path $out 'original-provider.rsp'
-    ($flags + ' /Gy /FI"' + $root + '/test/mvdm-host/vdmredir/redirector_netapi_fixture_binding.h" /Fo"' + $object + '" "' + $root + '/src/mvdm-host/vdmredir/vrnetapi.c"') |
-        Set-Content -LiteralPath $response -Encoding ASCII
-    & $wrapper cl "@$response" 2>&1 |
-        Tee-Object -FilePath (Join-Path $out 'build.txt') -Append
-    if ($LASTEXITCODE -ne 0) { throw 'Original provider compile failed.' }
-    $objects += $object
-    # Original completion body resolves to the in-process production adapter,
-    # rather than importing an executable. No completion algorithm is copied.
-    $pipeObject = Join-Path $out 'vrnmpipe.obj'
-    $response = Join-Path $out 'original-pipe-dependency.rsp'
-    ($flags + ' /DMVDM_REDIRECTOR_WORKER_EXPORTS /Gy /Fo"' + $pipeObject + '" "' + $root + '/src/mvdm-host/vdmredir/vrnmpipe.c"') |
-        Set-Content -LiteralPath $response -Encoding ASCII
-    & $wrapper cl "@$response" 2>&1 |
-        Tee-Object -FilePath (Join-Path $out 'build.txt') -Append
-    if ($LASTEXITCODE -ne 0) { throw 'Original pipe dependency compile failed.' }
-    $objects += $pipeObject
-}
-$exe = Join-Path $out 'redirector-oem-capacity-test.exe'
-$libraries = @()
-$extraFlags = @()
-if ($OriginalProviders) {
-    $generator = Get-Content (Join-Path $root 'tools/build/New-T310OriginalSoftpcNinja.ps1') -Raw
-    $fixture = [regex]::Match($generator, '(?m)^\$fixtureHostLibraries = ''([^'']+)''')
-    if (!$fixture.Success) { throw 'Missing selected fixture closure.' }
-    $extraFixture = [regex]::Match($generator, "(?m)^\`$fixtureHostLibraries \+= '([^']+)'\r?$")
-    if (!$extraFixture.Success) { throw 'Missing extended fixture closure.' }
-    # The product now links redirector objects directly. Package that same
-    # closure for this fixture; the two freshly compiled provider objects win.
-    $redirObjects = [regex]::Matches($graph, '(?m)^build (obj/redir/[^: ]+\.obj): cc ') |
-        ForEach-Object { Join-Path (Join-Path $root $BuildCache) $_.Groups[1].Value }
-    if (!$redirObjects.Count) { throw 'Missing production redirector object closure.' }
-    $redirArchive = Join-Path $out 'original-redir-fixture.lib'
-    & $wrapper lib /nologo "/OUT:$redirArchive" @redirObjects
-    if ($LASTEXITCODE) { throw 'Redirector fixture archive failed.' }
-    $dependencies = @('obj/tests/ccpu_bounded_execution_fixture_seams.obj',
-        'obj/tests/ccpu_host_fixture_seams.obj') + $fixture.Groups[1].Value.Split(' ') +
-        $extraFixture.Groups[1].Value.Trim().Split(' ') +
-        @('original-opennt-netlib.lib',
-        'original-opennt-xactsrv.lib',
-        'common-root.lib','common-rpc.lib', 'lib-rpc.lib','lib-pipe.lib','lib-process-observation.lib','lib-file.lib',
-        'common-codec.lib','common-console.lib','lib-handle.lib','lib-file.lib',
-        'lib-process-launch.lib','lib-process-hook.lib','lib-process-image.lib','lib-crt-compat.lib','compat-worker-thread.lib','lib-thread.lib')
-    $libraries = @($redirArchive) + @($dependencies | ForEach-Object {
-        $path = Join-Path (Join-Path $root $BuildCache) $_
-        if (!(Test-Path $path)) { throw "Missing fixture dependency: $_" }
-        $path
-    })
-    # Same alias as the production ntvdm export definition; fixture overrides
-    # keep their existing controlled host/register seams, never unresolved forcing.
-    $extraFlags = @('/force:multiple','/alternatename:_call_ica_hw_interrupt@12=_mvdm_public_ica_interrupt@12')
-}
-$linkResponse = Join-Path $out 'link.rsp'
-$linkArgs = @('/nologo','/OPT:REF') + $extraFlags + @("/OUT:$exe","/MAP:$exe.map") +
-    $objects + $libraries + @('kernel32.lib','ntdll.lib','netapi32.lib','user32.lib',
-    'gdi32.lib','advapi32.lib','rpcrt4.lib','shell32.lib','legacy_stdio_definitions.lib')
-$linkArgs | ForEach-Object { '"' + $_ + '"' } | Set-Content $linkResponse -Encoding ASCII
-& $wrapper link "@$linkResponse" 2>&1 |
-    Tee-Object -FilePath (Join-Path $out 'build.txt') -Append
-if ($LASTEXITCODE -ne 0) { throw 'Link failed.' }
+$cache=Join-Path $root $BuildCache
+$wrapper=Join-Path $cache 'msvc-x86.cmd'
+if(!(Test-Path $wrapper)){throw 'Configure the canonical worker build first'}
+& $wrapper cmake -S "$root/tools/build/worker" -B $cache 2>&1 |
+    Tee-Object (Join-Path $out 'build.txt')
+if($LASTEXITCODE){throw 'Worker configure failed'}
+$target=if($OriginalProviders){'image_redirector_netapi_provider_test_exe'}else{'image_redirector_oem_capacity_test_exe'}
+$image=if($OriginalProviders){'redirector-netapi-provider-test.exe'}else{'redirector-oem-capacity-test.exe'}
+& $wrapper cmake --build $cache --target $target 2>&1 |
+    Tee-Object (Join-Path $out 'build.txt') -Append
+if($LASTEXITCODE){throw 'Redirector fixture build failed'}
+$exe=Join-Path $out $image
+Copy-Item (Join-Path $cache $image) $exe
+Copy-Item (Join-Path $cache "$image.map") "$exe.map"
+$selected=(Get-Content (Join-Path $cache 'source-manifest.json') -Raw|ConvertFrom-Json).sources
+$inputs=@($selected|Where-Object {
+    $_.object -like 'obj/tests/redirector/*' -and
+    $(if($OriginalProviders){$_.object -notlike '*/capacity.obj'}
+      else{$_.object -notmatch '/(providers|async|vrnetapi|vrnmpipe)\.obj$'})
+}|ForEach-Object path)
 if ($OriginalProviders) {
     $map = Get-Content -LiteralPath "$exe.map" -Raw
     foreach ($symbol in @('VrGetUserName','VrGetCDNames','VrGetComputerName')) {

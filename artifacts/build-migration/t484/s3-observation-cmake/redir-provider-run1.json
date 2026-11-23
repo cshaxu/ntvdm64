@@ -1,0 +1,51 @@
+{
+  "exit_code": 0,
+  "original_providers": true,
+  "executable_sha256": "DBAB4D7B4CAA3B150CB897C4602C639672B20E8294935D1998A9868986732851",
+  "source_hashes": [
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+      "sha256": "AE6483ECF1411CE02AABC41AE8B554F75B1F55F7F4FEDD3D8F872E084738E667"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/compat/mvdm_redirector_guest_copy.c",
+      "sha256": "A68B7735A07B6F7D899AEF8F3731BBC788C5970962F5CAC9C9CAD9ED9BBE7B1A"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/compat/guest_location.c",
+      "sha256": "CC26E195D3E25E128DB407E6BAAD7D0D4BB943DDF71B80912ACE80DFBE5808D7"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/session/session.c",
+      "sha256": "46860D834E2BD5691974EE4DEB4FEADADE05B3906143133361A0B5FE82298E29"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/compat/host_context.c",
+      "sha256": "C2B4E5292C5908A956B4BADA786424827DE12A8C435D377C75D07D7CDFA015DE"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/compat/guest_memory_lease.c",
+      "sha256": "0FA8FB0649198677FEDA3FCA0A156158F4FD28FFF7CEC9B26F41DFAF660D4EB5"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/guest-memory-coordination-core.c",
+      "sha256": "11A90850DD027589965AF4DC6E042994CCE6054341149EB7A3FA45792834A155"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/test/mvdm-host/vdmredir/redirector_netapi_provider_test.c",
+      "sha256": "F6F656201A61CADC56FCA8E52CEDDC041DFFA426D3B5E207E23BA29962ABCF8B"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/compat/mvdm_redirector_async.c",
+      "sha256": "34B1696C2C31E1621F14BD54B02A953E85E82B725D43B8F25D65F52AB92A15CD"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnetapi.c",
+      "sha256": "481EF3FA15499D2B9B607099CE71B4A3E581CA66E2BCFE558A868AA30F00095D"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnmpipe.c",
+      "sha256": "C7EBB43FC67C49E3070763D298275E1A4DE4C79AA7C87B32D26CE4695A3FF5D8"
+    }
+  ]
+}

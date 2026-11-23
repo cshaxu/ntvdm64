@@ -1,0 +1,15 @@
+PASS real DBCS character needs two bytes plus NUL
+PASS DBCS byte capacity rejects without writing
+PASS exact DBCS capacity includes NUL and keeps sentinel
+PASS ASCII capacity includes NUL
+PASS ASCII exact capacity
+PASS zero capacity rejects even NUL
+PASS empty string fits one byte
+PASS caller-selected original unchecked capacity retained
+PASS out-of-memory-span copy fails
+PASS null source fails
+PASS large copy commits in two bounded chunks
+PASS second chunk failure retains first commit and rejects completion
+PASS dead guest memory fails
+PASS session cleanup
+assertions=14 failures=0

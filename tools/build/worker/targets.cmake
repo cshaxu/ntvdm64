@@ -90,6 +90,7 @@ function(worker_link output before after)
     ${check} DEPENDS ${dependencies} BYPRODUCTS ${byproducts} VERBATIM)
   string(MAKE_C_IDENTIFIER "image_${output}" target)
   add_custom_target(${target} DEPENDS "${CMAKE_BINARY_DIR}/${output}")
+  set_property(TARGET ${target} PROPERTY WORKER_LINK_INPUTS "${link_INPUTS}")
 endfunction()
 
 function(worker_group name)

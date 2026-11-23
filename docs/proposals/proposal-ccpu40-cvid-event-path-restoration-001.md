@@ -40,7 +40,7 @@ evidence here, not authority to substitute a new timing provider.
    vector calls or external access wrappers. Original `ccpu386/c_main.c`
    supplies heartbeat set/get and time-to-count support. A full vector table
    is therefore not automatically necessary for every CCPU caller.
-2. Current `tools/build/New-T310OriginalSoftpcNinja.ps1` removes CCPU and PROD
+2. Current `tools/build/worker/source-groups.cmake` removes CCPU and PROD
    specifically from accessfn.c to expose non-CCPU vector wrappers to external
    consumers. Current GenerateCvidcCpuBinding.mjs supplies provider choices,
    including duplicate object keys whose later null entries override earlier

@@ -7,44 +7,18 @@ $out=[IO.Path]::GetFullPath((Join-Path $repo $OutputRoot))
 if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or
     (Test-Path $out)){throw 'Require a fresh build evidence directory'}
 New-Item -ItemType Directory $out | Out-Null
-$wrapper=Join-Path $out 'compiler.cmd'
-@('@echo off','call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul',
-    'if errorlevel 1 exit /b %errorlevel%','%*') | Set-Content $wrapper -Encoding ASCII
-$graph=Get-Content (Join-Path $repo "$BuildCache/build.ninja") -Raw
-$match=[regex]::Match($graph,'(?m)^build obj/dem/demsrch.obj:.*\r?\n\s+cflags = (.+)$')
-if(!$match.Success){throw 'Actual production DEM compile contract absent'}
-$flags=$match.Groups[1].Value.Replace('$:',':')
-if($flags -notmatch '/DCPU_40_STYLE\b' -or $flags -match '/DCPU_30_STYLE\b'){throw 'Wrong CPU profile'}
-$source=Join-Path $repo 'test/mvdm-host/dem_directory_reset_test.c'
-$object=Join-Path $out 'dem_directory_reset_test.obj'
-$rsp=Join-Path $out 'compile.rsp'
-($flags+' /Gy /Fo"'+$object+'" "'+$source+'"') | Set-Content $rsp -Encoding ASCII
-& $wrapper cl "@$rsp" 2>&1 | Tee-Object (Join-Path $out 'build.txt')
-if($LASTEXITCODE){throw 'Compile failed'}
-$generator=Get-Content (Join-Path $repo 'tools/build/New-T310OriginalSoftpcNinja.ps1') -Raw
-$closure=[regex]::Match($generator,'(?m)^\$fixtureHostLibraries = ''([^'']+)''')
-if(!$closure.Success){throw 'Selected fixture closure absent'}
-$extraClosure=[regex]::Match($generator,"(?m)^\`$fixtureHostLibraries \+= '([^']+)'\r?$")
-if(!$extraClosure.Success){throw 'Selected fixture additional closure absent'}
-$dependencies=@('obj/tests/ccpu_bounded_execution_fixture_seams.obj','obj/tests/ccpu_host_fixture_seams.obj')+
-    $closure.Groups[1].Value.Split(' ')+$extraClosure.Groups[1].Value.Trim().Split(' ')+@('common-root.lib','common-rpc.lib', 'lib-rpc.lib',
-    'lib-pipe.lib','lib-process-observation.lib','lib-file.lib','common-codec.lib','common-console.lib',
-    'compat-worker-thread.lib','lib-thread.lib','lib-process-hook.lib','lib-process-image.lib',
-    'lib-handle.lib','lib-process-launch.lib','lib-crt-compat.lib')
-# Refresh the selected fixture closure: a product-only build does not relink
-# every fixture archive, and existing files alone do not prove current inputs.
-& $wrapper ninja -C (Join-Path $repo $BuildCache) @dependencies 2>&1 |
+$cache=Join-Path $repo $BuildCache
+$wrapper=Join-Path $cache 'msvc-x86.cmd'
+if(!(Test-Path $wrapper)){throw 'Configure the canonical worker build first'}
+& $wrapper cmake -S "$repo/tools/build/worker" -B $cache 2>&1 |
+    Tee-Object (Join-Path $out 'build.txt')
+if($LASTEXITCODE){throw 'Worker configure failed'}
+& $wrapper cmake --build $cache --target image_dem_directory_reset_test_exe 2>&1 |
     Tee-Object (Join-Path $out 'build.txt') -Append
-if($LASTEXITCODE){throw 'Fixture dependency build failed'}
-$libraries=$dependencies | ForEach-Object {
-    $p=Join-Path (Join-Path $repo $BuildCache) $_
-    if(!(Test-Path $p)){throw "Missing cache input $_"}; $p
-}
+if($LASTEXITCODE){throw 'DEM fixture build failed'}
 $exe=Join-Path $out 'dem-directory-reset-test.exe'
-# Existing host-fixture seam overrides, not forced unresolved symbols.
-& $wrapper link /nologo /OPT:REF /force:multiple /alternatename:_call_ica_hw_interrupt@12=_mvdm_public_ica_interrupt@12 "/OUT:$exe" "/MAP:$exe.map" $object @libraries kernel32.lib ntdll.lib user32.lib gdi32.lib advapi32.lib rpcrt4.lib shell32.lib legacy_stdio_definitions.lib 2>&1 |
-    Tee-Object (Join-Path $out 'build.txt') -Append
-if($LASTEXITCODE){throw 'Link failed'}
+Copy-Item (Join-Path $cache 'dem-directory-reset-test.exe') $exe
+Copy-Item (Join-Path $cache 'dem-directory-reset-test.exe.map') "$exe.map"
 $map=Get-Content "$exe.map" -Raw
 foreach($symbol in @('FileFindOpen','FileFindReset','FileFindNext','FillFCBSrchBuf')){
     if($map -notmatch "(?m)^.*_$symbol\s+.*\bdem_directory_reset_test\.obj\s*$"){

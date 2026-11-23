@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
-    [string]$RepositoryRoot = ''
+    [string]$RepositoryRoot = '',
+    [string]$BuildCache = 'build/.ninja/msvc-x86-release/worker'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -10,12 +11,17 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $demFile = Join-Path $root 'src/mvdm-host/dos/dem/demfile.c'
 $wowFile = Join-Path $root 'src/mvdm-host/wow32/wkfileio.c'
-$graphFile = Join-Path $root 'tools/build/New-T310OriginalSoftpcNinja.ps1'
+$graphFile = Join-Path $root "$BuildCache/source-manifest.json"
 $dem = Get-Content -LiteralPath $demFile -Raw
 $demData = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-host/dos/dem/demdata.c') -Raw
 $demSetup = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-host/dos/dem/demgset.c') -Raw
 $wow = Get-Content -LiteralPath $wowFile -Raw
 $graph = Get-Content -LiteralPath $graphFile -Raw
+$selected = $graph | ConvertFrom-Json
+if ($selected.architecture -ne 'x86' -or
+    !@($selected.sources | Where-Object object -eq 'obj/dem/demfile.obj').Count) {
+    throw 'Current configured worker DEM source inventory is missing.'
+}
 
 foreach ($name in @('GetFreeSftEntry', 'VDDAllocateDosHandle',
     'VDDAssociateNtHandle', 'VDDReleaseDosHandle', 'VDDRetrieveNtHandle')) {

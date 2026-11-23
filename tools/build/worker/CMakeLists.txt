@@ -39,6 +39,7 @@ include(profiles.cmake)
 include(nxvm.cmake)
 include(source-groups.cmake)
 include(units.cmake)
+include(observation-tests.cmake)
 get_property(manifest GLOBAL PROPERTY worker_manifest)
 list(JOIN manifest ",\n" manifest)
 file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/source-manifest.json"

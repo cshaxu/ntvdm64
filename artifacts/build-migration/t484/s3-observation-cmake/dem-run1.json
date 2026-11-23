@@ -1,0 +1,7 @@
+{
+  "exit_code": 0,
+  "elapsed_ms": 289,
+  "original_sha256": "50CA789A57F5CBF5412A9109B1B5F4BAEDD6819D8B5EFE4CF2A5B531310B2C28",
+  "executable_sha256": "FEB10E768C967619C1D8F8BFC50A931FF6FF28B6ACD739433AAD9A214FE7EBFA",
+  "scope": "Actual original DEM functions and real NT directory calls; provider fixture, not guest INT21 proof"
+}

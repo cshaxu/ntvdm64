@@ -1,0 +1,267 @@
+T409 original VDD lifecycle source boundary passed.
+PASS source contract: original CPU40 slow-I/O selection and original dispatch slots; runtime coverage belongs to integration tests.
+ntvdm.src
+-- Configuring done (17.3s)
+-- Generating done (7.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker
+[1/5] Building C object CMakeFiles\unit_obj_tests_ccpu_bounded_execution_fixture_seams_obj.dir\O_\repos.hobby\ntvdm64\test\mvdm-host\ccpu_bounded_execution_fixture_seams.c.obj
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(44): warning C4005: 'PROCESS_ALL_ACCESS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(12215): note: see previous definition of 'PROCESS_ALL_ACCESS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(48): warning C4005: 'MAXIMUM_PROCESSORS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(660): note: see previous definition of 'MAXIMUM_PROCESSORS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(72): warning C4005: 'THREAD_ALL_ACCESS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(12237): note: see previous definition of 'THREAD_ALL_ACCESS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(88): warning C4005: 'JOB_OBJECT_ALL_ACCESS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(12257): note: see previous definition of 'JOB_OBJECT_ALL_ACCESS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(603): warning C4005: 'THREAD_BASE_PRIORITY_MIN': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(12349): note: see previous definition of 'THREAD_BASE_PRIORITY_MIN'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(604): warning C4005: 'THREAD_BASE_PRIORITY_IDLE': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(12350): note: see previous definition of 'THREAD_BASE_PRIORITY_IDLE'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(651): warning C4201: nonstandard extension used: nameless struct/union
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(1226): warning C4005: 'JOB_OBJECT_EXTENDED_LIMIT_VALID_FLAGS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(13250): note: see previous definition of 'JOB_OBJECT_EXTENDED_LIMIT_VALID_FLAGS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(1244): warning C4005: 'JOB_OBJECT_UILIMIT_ALL': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(13280): note: see previous definition of 'JOB_OBJECT_UILIMIT_ALL'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(1246): warning C4005: 'JOB_OBJECT_UI_VALID_FLAGS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(13282): note: see previous definition of 'JOB_OBJECT_UI_VALID_FLAGS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(87): warning C4005: 'ASSERT': macro redefinition
+O:/repos.hobby/ntvdm64/src/compat/include\opennt_support_types.h(239): note: see previous definition of 'ASSERT'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(1100): warning C4273: 'RtlCaptureStackBackTrace': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(20744): note: see previous definition of 'RtlCaptureStackBackTrace'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(3040): warning C4273: 'RtlPcToFileHeader': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(21288): note: see previous definition of 'RtlPcToFileHeader'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(3245): warning C4028: formal parameter 1 different from declaration
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(3245): warning C4028: formal parameter 2 different from declaration
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(3245): warning C4273: 'RtlCompareMemory': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(21306): note: see previous definition of 'RtlCompareMemory'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(6271): warning C4273: 'VerSetConditionMask': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(21975): note: see previous definition of 'VerSetConditionMask'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\nturtl.h(722): warning C4201: nonstandard extension used: nameless struct/union
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\nturtl.h(884): warning C4201: nonstandard extension used: nameless struct/union
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\nturtl.h(958): warning C4028: formal parameter 1 different from declaration
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntregapi.h(94): warning C4005: 'REG_LEGAL_OPTION': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(23306): note: see previous definition of 'REG_LEGAL_OPTION'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntregapi.h(128): warning C4005: 'REG_LEGAL_CHANGE_FILTER': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(23374): note: see previous definition of 'REG_LEGAL_CHANGE_FILTER'
+O:\repos.hobby\ntvdm64\test\mvdm-host\ccpu_bounded_execution_fixture_seams.c(37) : warning C4702: unreachable code
+[2/5] Building C object CMakeFiles\unit_obj_tests_dem_directory_reset_test_obj.dir\O_\repos.hobby\ntvdm64\test\mvdm-host\dem_directory_reset_test.c.obj
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(44): warning C4005: 'PROCESS_ALL_ACCESS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(12215): note: see previous definition of 'PROCESS_ALL_ACCESS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(48): warning C4005: 'MAXIMUM_PROCESSORS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(660): note: see previous definition of 'MAXIMUM_PROCESSORS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(72): warning C4005: 'THREAD_ALL_ACCESS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(12237): note: see previous definition of 'THREAD_ALL_ACCESS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(88): warning C4005: 'JOB_OBJECT_ALL_ACCESS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(12257): note: see previous definition of 'JOB_OBJECT_ALL_ACCESS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(603): warning C4005: 'THREAD_BASE_PRIORITY_MIN': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(12349): note: see previous definition of 'THREAD_BASE_PRIORITY_MIN'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(604): warning C4005: 'THREAD_BASE_PRIORITY_IDLE': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(12350): note: see previous definition of 'THREAD_BASE_PRIORITY_IDLE'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(651): warning C4201: nonstandard extension used: nameless struct/union
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(1226): warning C4005: 'JOB_OBJECT_EXTENDED_LIMIT_VALID_FLAGS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(13250): note: see previous definition of 'JOB_OBJECT_EXTENDED_LIMIT_VALID_FLAGS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(1244): warning C4005: 'JOB_OBJECT_UILIMIT_ALL': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(13280): note: see previous definition of 'JOB_OBJECT_UILIMIT_ALL'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntpsapi.h(1246): warning C4005: 'JOB_OBJECT_UI_VALID_FLAGS': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(13282): note: see previous definition of 'JOB_OBJECT_UI_VALID_FLAGS'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(87): warning C4005: 'ASSERT': macro redefinition
+O:/repos.hobby/ntvdm64/src/compat/include\opennt_support_types.h(239): note: see previous definition of 'ASSERT'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(1100): warning C4273: 'RtlCaptureStackBackTrace': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(20744): note: see previous definition of 'RtlCaptureStackBackTrace'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(3040): warning C4273: 'RtlPcToFileHeader': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(21288): note: see previous definition of 'RtlPcToFileHeader'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(3245): warning C4028: formal parameter 1 different from declaration
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(3245): warning C4028: formal parameter 2 different from declaration
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(3245): warning C4273: 'RtlCompareMemory': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(21306): note: see previous definition of 'RtlCompareMemory'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntrtl.h(6271): warning C4273: 'VerSetConditionMask': inconsistent dll linkage
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(21975): note: see previous definition of 'VerSetConditionMask'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\nturtl.h(722): warning C4201: nonstandard extension used: nameless struct/union
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\nturtl.h(884): warning C4201: nonstandard extension used: nameless struct/union
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\nturtl.h(958): warning C4028: formal parameter 1 different from declaration
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntregapi.h(94): warning C4005: 'REG_LEGAL_OPTION': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(23306): note: see previous definition of 'REG_LEGAL_OPTION'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\ntregapi.h(128): warning C4005: 'REG_LEGAL_CHANGE_FILTER': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h(23374): note: see previous definition of 'REG_LEGAL_CHANGE_FILTER'
+O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\vdm.h(428): warning C4201: nonstandard extension used: nameless struct/union
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(715): warning C4101: 'BufferSize': unreferenced local variable
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1186): warning C4101: 'Status': unreferenced local variable
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1588): warning C4101: 'Status': unreferenced local variable
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1772): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1778): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1798): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1779): warning C4996: '_strupr': This function or variable may be unsafe. Consider using _strupr_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1827): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1830): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1831): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1867): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1872): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1892): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(1873): warning C4996: '_strupr': This function or variable may be unsafe. Consider using _strupr_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2024): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2040): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2075): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2076): warning C4996: '_strnset': This function or variable may be unsafe. Consider using _strnset_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2079): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2080): warning C4996: '_strnset': This function or variable may be unsafe. Consider using _strnset_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2084): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2086): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2111): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2112): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2165): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2288): warning C4459: declaration of 'NextFFindId' hides global declaration
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(69): note: see declaration of 'NextFFindId'
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2327): warning C4100: 'pwcFile': unreferenced formal parameter
+O:/repos.hobby/ntvdm64/src\mvdm-host/dos/dem/demsrch.c(2334): warning C4101: 'Len': unreferenced local variable
+O:\repos.hobby\ntvdm64\test\mvdm-host\dem_directory_reset_test.c(29): warning C4996: '_snwprintf': This function or variable may be unsafe. Consider using _snwprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+O:\repos.hobby\ntvdm64\test\mvdm-host\dem_directory_reset_test.c(14) : warning C4702: unreachable code
+[3/5] Generating obj/tests/ccpu_bounded_execution_fixture_seams.obj
+[4/5] Generating obj/tests/dem_directory_reset_test.obj
+[5/5] Generating dem-directory-reset-test.exe
+ccpu_host_fixture_seams.obj : warning LNK4006: _mvdm_host_getenv already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+ccpu_host_fixture_seams.obj : warning LNK4006: _mvdm_standalone_worker_close_frontends already defined in dem_directory_reset_test.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_error.obj) : warning LNK4006: _host_error already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_reset.obj) : warning LNK4006: _host_applClose already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_reset.obj) : warning LNK4006: _host_terminate already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_timer.obj) : warning LNK4006: _host_timer_event already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_eoi.obj) : warning LNK4006: _WOWIdle already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_eoi.obj) : warning LNK4006: _host_EOI_hook already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_eoi.obj) : warning LNK4006: _host_ica_lock already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_eoi.obj) : warning LNK4006: _host_ica_unlock already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-system.lib(qevnt.obj) : warning LNK4006: _dispatch_q_event already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-system.lib(rom.obj) : warning LNK4006: _copyROM already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-system.lib(rom.obj) : warning LNK4006: _rom_init already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-cvidc.lib(accessfn.obj) : warning LNK4006: _sas_overwrite_memory already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-dos.lib(emm_mngr.obj) : warning LNK4006: _LIM_b_write already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-dos.lib(emm_mngr.obj) : warning LNK4006: _LIM_w_write already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+softpc-fixture-bindings.lib(mvdm_vm_command_entry.obj) : warning LNK4006: _mvdm_vm_command_enter already defined in ccpu_host_fixture_seams.obj; second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: __swprintf already defined in lib-crt-compat.lib(crt_compat.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _printf already defined in original-softpc-host-fixture-roots.lib(fprt.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _sprintf already defined in lib-crt-compat.lib(crt_compat.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _sscanf already defined in lib-crt-compat.lib(crt_compat.obj); second definition ignored
+original-softpc-host-fixture-roots.lib(nt_inthk.obj) : warning LNK4006: _host_exint_hook already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_inthk.obj) : warning LNK4006: _host_hwint_hook already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_inthk.obj) : warning LNK4006: _host_swint_hook already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+dem-directory-reset-test.exe : warning LNK4088: image being generated due to /FORCE option; image may not run
+PASS unbound real monitor fast path unavailable
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS real reopen
+RESET mutation=0 status=00000000 index=0
+PASS reset finds anchor or surviving hint
+PASS continuation returns different file
+PASS enumeration ends with original status
+PASS no original handle/buffer leak
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS rename unrelated file
+PASS create later file
+PASS real reopen
+RESET mutation=1 status=00000000 index=0
+PASS reset finds anchor or surviving hint
+PASS continuation returns different file
+PASS enumeration ends with original status
+PASS no original handle/buffer leak
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS delete remembered file
+PASS real reopen
+RESET mutation=2 status=00000000 index=0
+PASS reset finds anchor or surviving hint
+PASS continuation returns different file
+PASS deleted anchor returns saved hint unconsumed
+PASS enumeration ends with original status
+PASS no original handle/buffer leak
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS delete remembered file
+PASS delete successor hint
+PASS real reopen
+RESET mutation=3 status=80000006 index=0
+PASS missing or mismatched hint ends without guessed successor
+PASS no original handle/buffer leak
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS delete remembered file
+PASS real reopen
+RESET mutation=4 status=80000006 index=0
+PASS missing or mismatched hint ends without guessed successor
+PASS no original handle/buffer leak
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS delete remembered file
+PASS real reopen
+RESET mutation=5 status=80000006 index=0
+PASS missing or mismatched hint ends without guessed successor
+PASS no original handle/buffer leak
+PASS undersized buffer original failure
+PASS open failure releases resources
+PASS empty buffer preserves final status
+PASS owned directory cleanup
+assertions=115 failures=0

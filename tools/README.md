@@ -39,8 +39,8 @@ the separate test targets. Both use stable native CMake/Ninja caches.
 | probe | Reusable diagnostic or read-only inspection entrypoints. |
 
 Do not classify a script as obsolete merely from a T-number in its name:
-Some test tools still inspect New-T310OriginalSoftpcNinja.ps1 while their
-producer migration is pending; the product CMake path no longer calls it. Current call chains,
+The former New-T310OriginalSoftpcNinja.ps1 was retired after its five remaining
+test consumers were migrated or removed as obsolete. Current call chains,
 declared manual entrypoints and evidence dependencies determine retention.
 
 The retained historical/, import/, observation/ and research/ directories,

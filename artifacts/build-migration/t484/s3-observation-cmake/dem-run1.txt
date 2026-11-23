@@ -1,0 +1,122 @@
+PASS unbound real monitor fast path unavailable
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS real reopen
+RESET mutation=0 status=00000000 index=0
+PASS reset finds anchor or surviving hint
+PASS continuation returns different file
+PASS enumeration ends with original status
+PASS no original handle/buffer leak
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS rename unrelated file
+PASS create later file
+PASS real reopen
+RESET mutation=1 status=00000000 index=0
+PASS reset finds anchor or surviving hint
+PASS continuation returns different file
+PASS enumeration ends with original status
+PASS no original handle/buffer leak
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS delete remembered file
+PASS real reopen
+RESET mutation=2 status=00000000 index=0
+PASS reset finds anchor or surviving hint
+PASS continuation returns different file
+PASS deleted anchor returns saved hint unconsumed
+PASS enumeration ends with original status
+PASS no original handle/buffer leak
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS delete remembered file
+PASS delete successor hint
+PASS real reopen
+RESET mutation=3 status=80000006 index=0
+PASS missing or mismatched hint ends without guessed successor
+PASS no original handle/buffer leak
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS delete remembered file
+PASS real reopen
+RESET mutation=4 status=80000006 index=0
+PASS missing or mismatched hint ends without guessed successor
+PASS no original handle/buffer leak
+PASS create AAA
+PASS create BBB
+PASS create CCC
+PASS real directory open
+PASS real first matching file
+PASS first is owned 8.3 TST file
+PASS original FCB formatter
+PASS remaining buffered entries before reclamation
+PASS reclamation saves bounded successor
+PASS repeated reclamation preserves successor hint
+PASS reclamation preserves errors and reopens normal end
+PASS close releases actual handle
+PASS close releases original buffer ownership
+PASS delete remembered file
+PASS real reopen
+RESET mutation=5 status=80000006 index=0
+PASS missing or mismatched hint ends without guessed successor
+PASS no original handle/buffer leak
+PASS undersized buffer original failure
+PASS open failure releases resources
+PASS empty buffer preserves final status
+PASS owned directory cleanup
+assertions=115 failures=0

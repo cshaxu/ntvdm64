@@ -1,0 +1,39 @@
+{
+  "exit_code": 0,
+  "original_providers": false,
+  "executable_sha256": "4EE0DEC69A1862F5729B06A7A22FB34E443BDF5F6B3003348CE182248E3A2983",
+  "source_hashes": [
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+      "sha256": "AE6483ECF1411CE02AABC41AE8B554F75B1F55F7F4FEDD3D8F872E084738E667"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/compat/mvdm_redirector_guest_copy.c",
+      "sha256": "A68B7735A07B6F7D899AEF8F3731BBC788C5970962F5CAC9C9CAD9ED9BBE7B1A"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/compat/guest_location.c",
+      "sha256": "CC26E195D3E25E128DB407E6BAAD7D0D4BB943DDF71B80912ACE80DFBE5808D7"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/session/session.c",
+      "sha256": "46860D834E2BD5691974EE4DEB4FEADADE05B3906143133361A0B5FE82298E29"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/compat/host_context.c",
+      "sha256": "C2B4E5292C5908A956B4BADA786424827DE12A8C435D377C75D07D7CDFA015DE"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/src/compat/guest_memory_lease.c",
+      "sha256": "0FA8FB0649198677FEDA3FCA0A156158F4FD28FFF7CEC9B26F41DFAF660D4EB5"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/guest-memory-coordination-core.c",
+      "sha256": "11A90850DD027589965AF4DC6E042994CCE6054341149EB7A3FA45792834A155"
+    },
+    {
+      "path": "O:/repos.hobby/ntvdm64/test/mvdm-host/vdmredir/redirector_oem_capacity_test.c",
+      "sha256": "4A328414EDBC483ED22F344DC95E0ED5122B9AA3FAECF5BA51C212BF620D5A8D"
+    }
+  ]
+}

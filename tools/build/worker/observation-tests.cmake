@@ -1,0 +1,48 @@
+# Reuse the configured CCPU fixture providers; tests select no historical graph.
+get_target_property(host_fixture image_ccpu_bios_access_test_exe WORKER_LINK_INPUTS)
+list(REMOVE_ITEM host_fixture "obj/tests/ccpu_bios_access_test.obj")
+worker_unit("obj/tests/dem_directory_reset_test.obj"
+  "${NTVDM_REPO}/test/mvdm-host/dem_directory_reset_test.c" "${profile_8} /Gy")
+worker_link("dem-directory-reset-test.exe"
+  "/nologo /OPT:REF /force:multiple /alternatename:_call_ica_hw_interrupt@12=_mvdm_public_ica_interrupt@12 /out:$out /map:$out.map"
+  "kernel32.lib ntdll.lib user32.lib gdi32.lib advapi32.lib rpcrt4.lib shell32.lib legacy_stdio_definitions.lib"
+  INPUTS "obj/tests/dem_directory_reset_test.obj" ${host_fixture})
+
+set(redirector_profile "/nologo /TC /c /MT /W4 /DNTVDM /DCPU_40_STYLE /DCCPU /DWIN_32 /DVDMREDIR_DLL /I\"${NTVDM_REPO}/src\" /I\"${NTVDM_REPO}/src/compat/include\" /I\"${NTVDM_REPO}/src/ntvdm-exe/softpc/include\" /FI\"${NTVDM_REPO}/test/mvdm-host/vdmredir/redirector_oem_fixture_binding.h\"")
+set(redirector_fixture)
+foreach(source IN ITEMS
+    src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c
+    src/compat/mvdm_redirector_guest_copy.c src/compat/guest_location.c
+    src/ntvdm-exe/session/session.c src/compat/host_context.c
+    src/compat/guest_memory_lease.c)
+  get_filename_component(stem "${source}" NAME_WE)
+  set(object "obj/tests/redirector/${stem}.obj")
+  worker_unit("${object}" "${NTVDM_REPO}/${source}" "${redirector_profile}")
+  list(APPEND redirector_fixture "${object}")
+endforeach()
+worker_unit("obj/tests/redirector/coordination.obj"
+  "${CMAKE_BINARY_DIR}/guest-memory-coordination-core.c" "${redirector_profile}")
+list(APPEND redirector_fixture "obj/tests/redirector/coordination.obj")
+worker_unit("obj/tests/redirector/capacity.obj"
+  "${NTVDM_REPO}/test/mvdm-host/vdmredir/redirector_oem_capacity_test.c" "${redirector_profile}")
+set(redirector_system "kernel32.lib ntdll.lib netapi32.lib user32.lib gdi32.lib advapi32.lib rpcrt4.lib shell32.lib legacy_stdio_definitions.lib")
+worker_link("redirector-oem-capacity-test.exe" "/nologo /OPT:REF /out:$out /map:$out.map"
+  "${redirector_system}" INPUTS ${redirector_fixture} "obj/tests/redirector/capacity.obj")
+worker_unit("obj/tests/redirector/providers.obj"
+  "${NTVDM_REPO}/test/mvdm-host/vdmredir/redirector_netapi_provider_test.c" "${redirector_profile}")
+worker_unit("obj/tests/redirector/async.obj"
+  "${NTVDM_REPO}/src/compat/mvdm_redirector_async.c" "${redirector_profile}")
+worker_unit("obj/tests/redirector/vrnetapi.obj"
+  "${NTVDM_REPO}/src/mvdm-host/vdmredir/vrnetapi.c"
+  "${profile_10} /Gy /FI\"${NTVDM_REPO}/test/mvdm-host/vdmredir/redirector_netapi_fixture_binding.h\"")
+worker_unit("obj/tests/redirector/vrnmpipe.obj"
+  "${NTVDM_REPO}/src/mvdm-host/vdmredir/vrnmpipe.c"
+  "${profile_10} /Gy /DMVDM_REDIRECTOR_WORKER_EXPORTS")
+worker_archive("original-redir-observation.lib" ${redir_objects})
+worker_link("redirector-netapi-provider-test.exe"
+  "/nologo /OPT:REF /force:multiple /alternatename:_call_ica_hw_interrupt@12=_mvdm_public_ica_interrupt@12 /out:$out /map:$out.map"
+  "${redirector_system}" INPUTS ${redirector_fixture}
+  "obj/tests/redirector/providers.obj" "obj/tests/redirector/async.obj"
+  "obj/tests/redirector/vrnetapi.obj" "obj/tests/redirector/vrnmpipe.obj"
+  "original-redir-observation.lib" ${host_fixture}
+  "original-opennt-netlib.lib" "original-opennt-xactsrv.lib")

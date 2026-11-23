@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
-    [string]$RepositoryRoot = ''
+    [string]$RepositoryRoot = '',
+    [string]$BuildCache = 'build/.ninja/msvc-x86-release/worker'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -11,7 +12,12 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $dispatch = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-host/dos/dem/demdisp.c') -Raw
 $header = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-host/dos/dem/dem.h') -Raw
 $guestRead = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-guest/dos/v86/doskrnl/dos/handle.asm') -Raw
-$graph = Get-Content -LiteralPath (Join-Path $root 'tools/build/New-T310OriginalSoftpcNinja.ps1') -Raw
+$graph = Get-Content -LiteralPath (Join-Path $root "$BuildCache/source-manifest.json") -Raw
+$selected = $graph | ConvertFrom-Json
+if ($selected.architecture -ne 'x86' -or
+    !@($selected.sources | Where-Object object -eq 'obj/dem/demdisp.obj').Count) {
+    throw 'Current configured worker DEM source inventory is missing.'
+}
 
 $startup = Get-Content -LiteralPath (Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_msscs.c') -Raw
 if ($dispatch -notmatch 'demNotYetImplemented,\s*//SVC_DEMFASTREAD' -or

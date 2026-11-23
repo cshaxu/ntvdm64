@@ -93,5 +93,7 @@ endforeach()
 string(APPEND preamble "#include <stddef.h>\n#include <string.h>\nint fixture_guest_read(void *, uint32_t, uint8_t *, uint32_t);\nint fixture_guest_write(void *, uint32_t, const uint8_t *, uint32_t);\n#define mvdm_softpc_guest_memory_read fixture_guest_read\n#define mvdm_softpc_guest_memory_write fixture_guest_write\n")
 worker_projection(guest-memory-coordination.c "${base}/ccpu386/ccpusas4.c"
   "int ccpu_guest_memory_acquire(" "#line 1960" "${preamble}" TRUE)
+worker_projection(guest-memory-coordination-core.c "${base}/ccpu386/ccpusas4.c"
+  "int ccpu_guest_memory_acquire(" "#define MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK" "${preamble}" TRUE)
 worker_projection(generated/base-request-owner.inc "${NTVDM_REPO}/src/non-mvdm/base/win32/client/vdm.c"
   "/* DIVERGENCE(NON-MVDM-DIV-BASE-REQUEST)" "#line 304" "" FALSE)

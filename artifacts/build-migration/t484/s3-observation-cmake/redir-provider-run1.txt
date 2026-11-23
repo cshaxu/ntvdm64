@@ -1,0 +1,19 @@
+PASS actual computer name copied and success flags set
+PASS failed computer name copy preserves error and guest destination
+PASS actual VrGetUserName DBCS bound and free-once
+PASS actual VrGetUserName DBCS exact capacity
+PASS actual original character gate retained
+PASS zero capacity rejects copy and frees exactly once
+PASS empty username still needs terminating byte
+PASS empty username fits one-byte capacity
+PASS actual BX0 unchecked copy and registers retained
+PASS actual invalid destination reports failure and frees
+PASS actual NetAPI failure does not free absent allocation
+PASS actual CDNames copies and unchanged status ABI
+PASS actual CDNames lease failure still frees, no invented error ABI
+PASS actual CD null far target skipped
+PASS actual CD overlapping strings use original order
+PASS actual CD destination alias preserves sequential far-field read
+PASS actual CD DBCS output includes terminating byte
+PASS session cleanup
+assertions=18 failures=0

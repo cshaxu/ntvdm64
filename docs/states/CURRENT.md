@@ -29,6 +29,11 @@ are now admitted. Final interpreter-free clean acceptance remains S5.
 
 ## Current Progress
 
+[S3 P2](../etc/evidence/t484-s3-observation-cmake.md) resolves all five remaining
+executable consumers of the old worker generator and removes it. Two static
+boundaries and DEM/redirector115/14/18 assertions pass through native targets;
+final cached full build passes. Other S3 test producers remain pending.
+
 [S3 P1 addon migration](../etc/evidence/t484-s3-addon-cmake.md) builds all14
 authored addons through CMD/native CMake and16 opt-in mouse probes. Three old
 PowerShell producers are removed; nine utility wrappers share the producer.
@@ -156,6 +161,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P1 records native addon migration and its bounded delivery under the
+T484 S3 P2 records observation producer migration and its bounded delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.
