@@ -1,0 +1,12 @@
+{
+  "pid": 19676,
+  "rawHostImages": 11,
+  "coveredSourceObjects": 34,
+  "output": [
+    "PASS: original COMMAND initialization composition"
+  ],
+  "unsupportedArchitectureExit": 2,
+  "sha256": "F1B962AB7FC3738D304E8CB44884016E221F8D0C405CD292416E7E435F3A6C23",
+  "publishedHashes": 22,
+  "exit": 0
+}

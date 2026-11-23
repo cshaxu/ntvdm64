@@ -1,0 +1,206 @@
+[
+  {
+    "sourceSha256": "9d0a773fcc8d7765b0fe3fe3750b5c9a29a596362f78a221161318fd83cc0262",
+    "object": "obj/command/cmd.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmd.c",
+    "objectSha256": "5CDD4AB63CAC4460DCC4AB88BA3F95AC506E8729B28D2DBB497006C26D2353A7"
+  },
+  {
+    "sourceSha256": "937c134e46b5c714b9106d85fd0250b88fca5958e69a1e60fdeab558d4f4f8d2",
+    "object": "obj/command/cmddata.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmddata.c",
+    "objectSha256": "5E5DAE093BBC04E6575B5F7F08A3F69CE6052698A23AA8D2D34EC205F18E0591"
+  },
+  {
+    "sourceSha256": "91e321e7d4bf19527ef7a0371d1c6137ec056f37c2da85bc8f59d009b12c0a94",
+    "object": "obj/command/cmddisp.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmddisp.c",
+    "objectSha256": "D851B9BADC6C3F6AE37AED76BD1D3048548BC1325C0A3C6EB1C419CB8AAE1D11"
+  },
+  {
+    "sourceSha256": "62151722b08aac0f3ba8c8a38e98472cb8e9455423e17713486d7d5c699df657",
+    "object": "obj/command/cmdexec.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdexec.c",
+    "objectSha256": "CA30604544BC1D9054A38B8CEE5D96E079395DA126A245A2F70BFBA7BC137ABF"
+  },
+  {
+    "sourceSha256": "3fb4616667b2b73f00ed56d5944a786be741f5db511e6f0d5f6a751593a418c9",
+    "object": "obj/command/cmdexit.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdexit.c",
+    "objectSha256": "B12BA6F634E8BDFCD6FA82C8965D623D50D9492F8283B811F601354570D5CBD3"
+  },
+  {
+    "sourceSha256": "cdeb4f58009cd3f95f5cae10ec6f6eb5e5dfbef26fae168c2757aff99a68614f",
+    "object": "obj/command/cmdmisc.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdmisc.c",
+    "objectSha256": "46D45771D99822FF1BE2A1FF4CF02408F05394A6C3D677D1ABC82F38DB1C9E3F"
+  },
+  {
+    "sourceSha256": "6d3aac795c1c6275695e0b4b72dcbdbf7206456f27e07a11bc28bf5ce3438a9b",
+    "object": "obj/command/cmdpif.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdpif.c",
+    "objectSha256": "D67707474F4B912A75572DDE7DCC4CF84CA75A515FD4186B76A8134B9AAB6986"
+  },
+  {
+    "sourceSha256": "a403f15ba9ec33af85ab38aaa7c4fea301016c4bb09a1ccbd3adee71a07dcc49",
+    "object": "obj/command/cmdredir.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdredir.c",
+    "objectSha256": "3ABFB78D399D15B3AC6E0CAEA9E4C96947E5A9159194F1DA260C1A4215063869"
+  },
+  {
+    "sourceSha256": "b5cd0b2ac265adb831a50ca265d55b906d2d9cf4b17d2a134d86cea0fb730f89",
+    "object": "obj/command/cmdconf.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdconf.c",
+    "objectSha256": "1F984CA7AF1EF35734D92F1AC5E231F6D0A3B4A8E88A2FA724B7A3BA59C730C2"
+  },
+  {
+    "sourceSha256": "a410fd2b9b71d765ec2807b6e91485d9aba080e7c7a0c5183448a5fa62685804",
+    "object": "obj/command/cmdkeyb.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdkeyb.c",
+    "objectSha256": "ECE4A9BFB533401BCB5D1DE0553B6BF61C400A19154E5F6BB0077E58031AE4C1"
+  },
+  {
+    "sourceSha256": "70983be18d1ee9f37950755f11845a46e284bcc4051a8ce983500fe0cdbd7bc3",
+    "object": "obj/command/cmdenv.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/command/cmdenv.c",
+    "objectSha256": "D056B969B92C6ABA625F02AFDBE84B0EC3214E6D324568EEAE7F363F61F798CD"
+  },
+  {
+    "sourceSha256": "652884f8227bf1c5dc3f3bfeb91c4353a131b5c77638d655b41544356be9862b",
+    "object": "obj/dem/dem.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/dem.c",
+    "objectSha256": "DC2AB352CD1D3C1FC97DD9FE14974CA6E7E7976417D19C2723E4777016F2EA42"
+  },
+  {
+    "sourceSha256": "3245d8d20e080e77b657a780ee752ee3578cbbea1199e9c378c7003921a9e22f",
+    "object": "obj/dem/demdata.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdata.c",
+    "objectSha256": "BC337EE140651F362C8CD153E0D11A77143158949380D2D9386F18FA145DF259"
+  },
+  {
+    "sourceSha256": "adcb4b21a626d5d7429e65d3fea69b19196b70a450d7dd379abbf52e5965e0ac",
+    "object": "obj/dem/demmsg.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demmsg.c",
+    "objectSha256": "194445F67475B4F88FE3D024D595995E7EFB56C98042063397E7F8287DAAAAFA"
+  },
+  {
+    "sourceSha256": "dea773aec3be59a16ed8d9e3cc0febb07b4ddcb0ff174431bbc3fe6def85e3fd",
+    "object": "obj/dem/demdisp.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdisp.c",
+    "objectSha256": "483CF9DC16F9AA3D4FBCD037484A9A7A2AB75019CE6F4B4EBFC93C2B648F754A"
+  },
+  {
+    "sourceSha256": "81e1557a4e8b6065d17ef557df07b264b89340deb82fdb18df57f2a9fab49cf7",
+    "object": "obj/dem/demdasd.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdasd.c",
+    "objectSha256": "DB695D732C262EDCE3CD29D5157D409F6DEB03F47543D304F53F97303792E5D0"
+  },
+  {
+    "sourceSha256": "7013b557f8d89527e719484c032bcb3befe8bf6f79cbd7c97eae49c737e1b9ac",
+    "object": "obj/dem/demdir.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demdir.c",
+    "objectSha256": "0846CA48372E92A0D902200E287E62AFB2D6D280B3146729502D5AB91902B6E3"
+  },
+  {
+    "sourceSha256": "c7bc55645504700dbf85da5f04b4a90b3fc28f8e28ea0d313446cbfd2ad808e9",
+    "object": "obj/dem/demerror.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demerror.c",
+    "objectSha256": "D11F865A896CAA6003A961C935C38E5817D742C389501B82BB3ED355F2A84F1D"
+  },
+  {
+    "sourceSha256": "2705fe134a825c3fbcb11594cf1aa23e858438a43d1de0c03e010930f921c670",
+    "object": "obj/dem/demfcb.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demfcb.c",
+    "objectSha256": "1A85866FD0036BFFC47B6B74DBB87A8EE8EBEDF6B798ECC96C691771CC41F1A7"
+  },
+  {
+    "sourceSha256": "128da4b626b661731a5a230696d18bfb75ecf9a2aefa4dc635a6309001c14824",
+    "object": "obj/dem/demfile.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demfile.c",
+    "objectSha256": "574A7DBA46CEF6101F9FA7E005D39F0D12D71C2D27F75DD6AC24F4D5B1B94B4E"
+  },
+  {
+    "sourceSha256": "98ff00fd64ef409493beec4cb1ed3948cfdc94f777c63fe7ec63daeeee4a7beb",
+    "object": "obj/dem/demgset.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demgset.c",
+    "objectSha256": "17134CC41E6C038D83BE81EA21B5219B79878F90DE2DCE2326FC0A4333587DC6"
+  },
+  {
+    "sourceSha256": "ffe30feeafd8e968bbf0f9b4671824d051c0932c77bdb626de51f5490241c784",
+    "object": "obj/dem/demhndl.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demhndl.c",
+    "objectSha256": "EB1A21F4A3675DD9F2CEB250A4A222F7AC7F797BE978149395361D6A7B56D287"
+  },
+  {
+    "sourceSha256": "6c0db6e312ca2800614fb9b9068a9c39a6ffca7531e1aaab00d64f95b35c4ddd",
+    "object": "obj/dem/demioctl.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demioctl.c",
+    "objectSha256": "97C7444EACB7BBDF13EF58AD6F073DDE90B2CA009D0EC978FF3199AC8AF57B4E"
+  },
+  {
+    "sourceSha256": "f77e781014ad34f6686fc3a94019bd82c995d7830ebd29f91dc358272ed30f22",
+    "object": "obj/dem/demlabel.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demlabel.c",
+    "objectSha256": "D59E3687DE9783E14C03CA2F90FF5811BA94DBAE073AFFF46AF57C5FBFA3FE0C"
+  },
+  {
+    "sourceSha256": "7716ab3be08f3532a60e3b05b2214bf1f8cb9f66f362b5f7f555dc3cd2755a71",
+    "object": "obj/dem/demlock.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demlock.c",
+    "objectSha256": "8A3F4914DADBE81C65E1CE313F69E7366952A4D81105D8693C1F44A0512F9825"
+  },
+  {
+    "sourceSha256": "4b8e9992445025633f5aa49139c0c48705371c9d29ea207bf26e97d555b87e12",
+    "object": "obj/dem/demmisc.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demmisc.c",
+    "objectSha256": "79410437F9EE4E11A62EC1878A491B1A93EC02811D931D7CB019EC402BB36C50"
+  },
+  {
+    "sourceSha256": "50ca789a57f5cbf5412a9109b1b5f4baedd6819d8b5efe4cf2a5b531310b2c28",
+    "object": "obj/dem/demsrch.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/dos/dem/demsrch.c",
+    "objectSha256": "896264E3362E9EAE1ECD9C0B72C41EC2D4E71B5461EC5E5FC7CD8C5DD29B159D"
+  },
+  {
+    "sourceSha256": "592f4a063ad84c21890cdc15e56d4900e6669224c7c34c829c09d25dff9bed75",
+    "object": "obj/xms/xms.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xms.c",
+    "objectSha256": "1838C3A16625C8899600C0001BCDCE5B112B587CB2F230DF6944510FE41132F3"
+  },
+  {
+    "sourceSha256": "7ab0eb6d96560ccf4a7b8b5999d7f35fc301c923df2e6a7c6904dc5b74f6f929",
+    "object": "obj/xms/xmsa20.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsa20.c",
+    "objectSha256": "A55B391F0EE189B1D89DF72A89E7FF03E3A0077D07CA7BF931E60EB07466404D"
+  },
+  {
+    "sourceSha256": "0ef45fb9d0737cf0bdd50c126b8fa183f9b70c63c731533a16c2553823c5fd6e",
+    "object": "obj/xms/xmsblock.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsblock.c",
+    "objectSha256": "36CD33CF89AE2417EBA47ED97E95949E8A7199FA2B15D1F0BBA16C84FF935835"
+  },
+  {
+    "sourceSha256": "a062de312853f50f47764882f0e929a971a390ba50e08b4fff39c1aa8bdde774",
+    "object": "obj/xms/xmsdisp.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsdisp.c",
+    "objectSha256": "6A2F8A6D35194BA9E2F0BE68B49483085A0C8408C4F7C93F416092FBAAA8E4E9"
+  },
+  {
+    "sourceSha256": "10ad205d9dede714749a9746dd99b3389546b8aaf3a63dd0236386a9d4ce5245",
+    "object": "obj/xms/xmsmisc.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsmisc.c",
+    "objectSha256": "14BA1ABE7AFEB610E8FF8FBE7A3D914843682EED6A73774255673826F5341FD9"
+  },
+  {
+    "sourceSha256": "1608b70f239570f2cb5beeaeeaca63065cc9550bd6bad15b47f4160307b33ddc",
+    "object": "obj/xms/xmsumb.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsumb.c",
+    "objectSha256": "A14BFC74A7EC2316DAB525B7B5E50842FB284A1D1674E0A6F8EFBA39941D1CE1"
+  },
+  {
+    "sourceSha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+    "object": "obj/xms/xmsmemr.obj",
+    "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/xms.486/xmsmemr.c",
+    "objectSha256": "E3C7103F9BCD4750267BE6493E56F33E9D9357AC9728F190C270B148748C4FF0"
+  }
+]

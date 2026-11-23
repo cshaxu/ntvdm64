@@ -1,4 +1,11 @@
 # Reuse the configured CCPU fixture providers; tests select no historical graph.
+worker_unit("obj/tests/command_initialization_fixture.obj"
+  "${NTVDM_REPO}/test/mvdm-host/command_initialization_fixture.c"
+  "${profile_1} /I\"${NTVDM_REPO}/src/mvdm-host/dos/command\"")
+worker_link("command-initialization-fixture.exe" "/nologo /out:$out /map:$out.map"
+  "kernel32.lib" INPUTS "obj/tests/command_initialization_fixture.obj"
+  "obj/command/cmd.obj" "obj/command/cmddata.obj")
+add_custom_target(command-initialization DEPENDS "${CMAKE_BINARY_DIR}/command-initialization-fixture.exe")
 get_target_property(host_fixture image_ccpu_bios_access_test_exe WORKER_LINK_INPUTS)
 list(REMOVE_ITEM host_fixture "obj/tests/ccpu_bios_access_test.obj")
 worker_unit("obj/tests/dem_directory_reset_test.obj"

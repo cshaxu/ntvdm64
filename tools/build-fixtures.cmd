@@ -12,6 +12,8 @@ if "%TARGET%"=="system-fixtures" set "SELECTED=1"
 if "%TARGET%"=="observation-tools" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="command-initialization" set "SELECTED=1"
+if "%TARGET%"=="command-initialization" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="suballoc-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="suballoc-lifecycle" if not "%~1"=="x86" exit /b 2
 if not defined SELECTED exit /b 2
@@ -25,6 +27,7 @@ if not defined NTVDM_VSDEVCMD set "NTVDM_VSDEVCMD=C:\Program Files (x86)\Microso
 call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
 if "%TARGET%"=="oem-tests" goto worker
+if "%TARGET%"=="command-initialization" goto worker
 cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" --target %TARGET%

@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 original libraries](evidence/t484-s3-original-libraries.md) records
+34 current product objects replacing duplicate archives and the native COMMAND test.
+
 [T484 S3 observation tools](evidence/t484-s3-observer-tools.md) records native
 x86/x64 observers and their bounded runtime checks.
 
