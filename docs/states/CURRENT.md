@@ -104,7 +104,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P76 sizing diagnostic](../etc/evidence/t484-s3-sizing.md) | Two native source projections replace product-source mutation;229-object closure, cache, shared targets/frame/full-build/hash checks pass; B0102 complete. |
 
-Implementation batches through P76 passed their cached full host build. P73 checks11 raw host inputs
+| [P77 startup diagnostics](../etc/evidence/t484-s3-startup.md) | Two native modes; explicit internal Shell witness profile,229-object/cache/frame/full-build/hash checks pass; B0103 complete. |
+
+Implementation batches through P77 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

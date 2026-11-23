@@ -1,31 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "3f9660eb008754a0f7fd60a6fdf52e1bf631dac5",
+  "head": "15ecfb36919125a0b1f57f8f8060f3c5817ecdb6",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/build-wow-sizing-diagnostic.ps1",
+    " M test/observation/build-wow-startup-failure-provider.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/wow32/CMakeLists.txt",
-    " M tools/build/wow32/diagnostic-provider.cmake",
-    "?? artifacts/build-migration/t484/s3-sizing/",
-    "?? docs/etc/evidence/t484-s3-sizing.md",
-    "?? tools/build/wow32/window-sizing.cmake"
+    "?? artifacts/build-migration/t484/s3-startup/",
+    "?? docs/etc/evidence/t484-s3-startup.md",
+    "?? tools/build/wow32/startup-failure.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 83,
-    "unchanged": 154,
+    "changed": 84,
+    "unchanged": 153,
     "removed": 118
   },
   "disposition_counts": {
-    "migrated-delivered": 28,
+    "migrated-delivered": 29,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 118,
     "pending-producer-migration": 51,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 153,
+    "requires-disposition-reconciliation": 152,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 190,
@@ -1850,8 +1849,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "49b7ec4c248793675ef3e2db0430534b58a6e772126fae21e6c206a8ea73d679",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "15ecfb36919125a0b1f57f8f8060f3c5817ecdb6"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-sizing.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -1863,12 +1866,16 @@
       "id": "B0103",
       "file": "test/observation/build-wow-startup-failure-provider.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "b456bc5cf3d68f7ec4a7e8467a7af8f840e76b9c46bc308b38471899b35842b3",
+      "state": "changed",
+      "current_sha256": "72397289364e672944dd2a25fa538b5d803cc9eee26c63cd15b104e28ef6bdce",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-startup.md",
+        "reason": "Both failure modes use native diagnostic targets; explicit Shell witness header profile; cached full build and focused verification pass",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0104",
@@ -5119,6 +5126,12 @@
     }
   ],
   "commits": {
+    "15ecfb36919125a0b1f57f8f8060f3c5817ecdb6": {
+      "subject": "T484 S3 P76 build sizing diagnostics without product source mutation",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-sizing.md"
+      ]
+    },
     "3f9660eb008754a0f7fd60a6fdf52e1bf631dac5": {
       "subject": "T484 S3 P75 migrate sealed message control recipe to CMD",
       "evidence": [
@@ -6738,40 +6751,8 @@
       "file": "test/observation/build-wow-startup-failure-provider.ps1",
       "hits": [
         {
-          "line": 5,
-          "text": "[string]$Ninja='ninja.exe',"
-        },
-        {
-          "line": 17,
-          "text": "$commands=@(& $Ninja -C $provider -t commands wow32.dll)"
-        },
-        {
-          "line": 21,
-          "text": "$link=$commands|Where-Object {$_ -match '^link /nologo /machine:x86 /dll '}|Select-Object -Last 1"
-        },
-        {
-          "line": 22,
-          "text": "if(!$compile -or !$link){throw 'Missing original queue or DLL link command'}"
-        },
-        {
-          "line": 26,
-          "text": "$linkDiagnostic=$link.Replace($originalObject,('\"'+$out+'/diagnostic.obj\"')).Replace('/map:wow32.dll.map',('/map:\"'+$out+'/WOW32.map\"')).Replace('/out:wow32.dll',('/out:\"'+$out+'/WOW32.DLL\" /implib:\"'+$out+'/WOW32.lib\"'))"
-        },
-        {
           "line": 27,
-          "text": "if($compileDiagnostic -eq $compile -or $linkDiagnostic -eq $link -or $linkDiagnostic.Contains($originalObject) -or $linkDiagnostic.Contains('/out:wow32.dll')){throw 'Diagnostic substitution failed'}"
-        },
-        {
-          "line": 29,
-          "text": "foreach($step in @(@('compile',$compileDiagnostic),@('link',$linkDiagnostic))){"
-        },
-        {
-          "line": 37,
-          "text": "$objects=@([regex]::Matches($link,'(?<!\\S)obj/[^\\s\"]+\\.(obj|res)')|ForEach-Object {Join-Path $provider $_.Value}|Select-Object -Unique)"
-        },
-        {
-          "line": 38,
-          "text": "@($source,\"$repo/src/non-mvdm/windows/core/ntuser/kernel/queue.c\",\"$repo/src/compat/wow_shell_callback.c\",\"$provider/build.ninja\",\"$provider/wow32.dll\",\"$out/WOW32.DLL\")+$objects|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content \"$out/inputs.json\""
+          "text": "@($PSCommandPath,$source,\"$provider/build.ninja\",\"$provider/WOW32.dll\",\"$out/WOW32.dll\")+$objects|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content \"$out/inputs.json\""
         }
       ]
     },

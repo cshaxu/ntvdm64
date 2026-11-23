@@ -1,0 +1,11 @@
+{
+  "cacheStable": true,
+  "guestFaultRuntime": "not executed",
+  "finished": "2026-11-23T22:40:12.1351657Z",
+  "objects": 229,
+  "frameFixture": "passed",
+  "exit": 0,
+  "replaced": 1,
+  "pid": 25568,
+  "start": "2026-11-23T22:39:37.2849909Z"
+}

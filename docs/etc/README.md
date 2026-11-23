@@ -1641,3 +1641,5 @@ post-publication targeted checks.
 - [T484 S3 historical message control producer](evidence/t484-s3-message-control.md).
 
 - [T484 S3 sizing diagnostic producer](evidence/t484-s3-sizing.md).
+
+- [T484 S3 startup diagnostic producers](evidence/t484-s3-startup.md).
