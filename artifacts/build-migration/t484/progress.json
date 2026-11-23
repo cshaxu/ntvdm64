@@ -1,16 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "a53bfc961be23aba1db359f7eb454bf59215c870",
+  "head": "32d630ec30e11269bbc55faee0e8675fa43a61e2",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/mvdm/oemuni/verify-media-owner.ps1",
+    " M test/ntcon-exe/verify-frontend-window-library.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-media/",
-    "?? docs/etc/evidence/t484-s3-media.md",
-    "?? tools/build/fixtures/media-owner.cmake"
+    " M tools/build/worker/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-frontend-library/",
+    "?? docs/etc/evidence/t484-s3-frontend-library.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -19,10 +18,10 @@
     "removed": 114
   },
   "disposition_counts": {
-    "migrated-delivered": 20,
+    "migrated-delivered": 21,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 114,
-    "pending-producer-migration": 54,
+    "pending-producer-migration": 53,
     "retained-native-delegate": 2,
     "requires-disposition-reconciliation": 163
   },
@@ -1376,8 +1375,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "82da419f5cb0efcf4bc952581c7d40e264aaa2b5543216acb525a296b5e80dee",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "32d630ec30e11269bbc55faee0e8675fa43a61e2"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-media.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -1390,17 +1393,18 @@
       "file": "test/ntcon-exe/verify-frontend-window-library.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "3102a8f4b94dd963a8e6414a87a20b6c45cf6c4adad9f05b15df602854368609",
+      "current_sha256": "f98d50d95b0f475101b00a0604d91a768145d9b18f53f666a62b28b28a866abf",
       "revisions": [
         "e6b5ccfa88ea03734f0e8c6b10bf6f731812f314"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s2-native-generators.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-        "status": "pending-producer-migration"
+        "evidence": "docs/etc/evidence/t484-s3-frontend-library.md",
+        "status": "migrated-delivered",
+        "reason": "CMD/native worker targets own font dependencies, library and keyboard fixture production; actual assertions and cache verified"
       }
     },
     {
@@ -5023,6 +5027,12 @@
     }
   ],
   "commits": {
+    "32d630ec30e11269bbc55faee0e8675fa43a61e2": {
+      "subject": "T484 S3 P66 migrate media owner comparison producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-media.md"
+      ]
+    },
     "a53bfc961be23aba1db359f7eb454bf59215c870": {
       "subject": "T484 S3 P65 migrate COMMAND and ThunkNLS verifiers",
       "evidence": [
@@ -6400,36 +6410,8 @@
       "file": "test/ntcon-exe/verify-frontend-window-library.ps1",
       "hits": [
         {
-          "line": 26,
-          "text": "& (Join-Path $repo 'build/.ninja/build-tools/ntvdm-font.exe') (Join-Path $repo 'src/mvdm-guest/softpc.new/roms/v7vga.rom') (Join-Path $output 'native_pc_font.h')"
-        },
-        {
-          "line": 38,
-          "text": "& cl.exe /nologo /c /MT /std:c11 /W4 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 \"/I$owner\" \"/I$repo/src\" \"/I$repo/src/lib-nxvm\" \"/I$output\" \"/Fo$object\" $sources[$index]"
-        },
-        {
-          "line": 43,
-          "text": "& link.exe /nologo /machine:x86 \"/out:$exe\" @objects user32.lib gdi32.lib"
-        },
-        {
-          "line": 44,
-          "text": "if ($LASTEXITCODE) { throw 'Window library link failed' }"
-        },
-        {
-          "line": 50,
-          "text": "& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 \"/I$owner\" \"/I$repo/src\" \"/I$repo/src/lib-nxvm\" \"/Fo$keyboardObject\" (Join-Path $owner 'window_keyboard.c')"
-        },
-        {
-          "line": 52,
-          "text": "& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 \"/I$owner\" \"/I$repo/src\" \"/I$repo/src/lib-nxvm\" \"/Fo$keyboardTestObject\" (Join-Path $repo 'test/ntcon-exe/frontend_window_keyboard_test.c')"
-        },
-        {
-          "line": 55,
-          "text": "& link.exe /nologo /machine:x86 \"/out:$keyboardExe\" $keyboardObject $keyboardTestObject user32.lib"
-        },
-        {
-          "line": 56,
-          "text": "if ($LASTEXITCODE) { throw 'Window keyboard fixture link failed' }"
+          "line": 33,
+          "text": "$cache=Join-Path $repo 'build/.ninja/msvc-x86-release/worker'"
         }
       ]
     },

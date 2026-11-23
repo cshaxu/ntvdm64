@@ -50,8 +50,9 @@
     "evidence": "docs/etc/evidence/t484-s3-addon-cmake.md"
   },
   "test/ntcon-exe/verify-frontend-window-library.ps1": {
-    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-    "status": "pending-producer-migration"
+    "evidence": "docs/etc/evidence/t484-s3-frontend-library.md",
+    "status": "migrated-delivered",
+    "reason": "CMD/native worker targets own font dependencies, library and keyboard fixture production; actual assertions and cache verified"
   },
   "test/observation/build-worker-performance.ps1": {
     "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",

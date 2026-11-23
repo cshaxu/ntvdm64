@@ -1,0 +1,24 @@
+PASS library Window sizing: frame-sized by default; monitor fit only when necessary
+PASS lazy typed slots, equal-size reuse, held readers across resize/type change and invalidation
+PASS native Unicode carrier: ASCII has ink within 1 cells; source unchanged
+PASS native Unicode carrier: CJK replacement has ink within 2 cells; source unchanged
+PASS native Unicode carrier: surrogate replacement has ink within 2 cells; source unchanged
+PASS native Unicode carrier: PC line glyph has ink within 1 cells; source unchanged
+PASS exact original V7VGA bitmap pixels, PC line mapping and explicit '?' fallback; wide trailing cell blank, Unicode input unchanged
+PASS shared style byte: underline is independent of foreground intensity
+PASS library dynamically allocates 1600x350 graphics independently of worker wire limits
+PASS shared matcher preserves previously delivered modifier chord as ordinary input
+PASS copied DOS text: complete-frame publication, 80x50 dual font, tall glyph text and malformed frame retention
+PASS native 160-column text; oversized protocol view rejected without font shrinking
+PASS nxvm x86 closure: 80x50/43, font banks, indexed graphics, CAF make/break, invalid lifecycle
+PASS frontend frames: partial/complete/TEXT, monochrome/top-down/padding, native viewport/scrollback/underline/cursor
+PASS DOS/native input reset: source isolation, rejected sink, idempotence and live-source reuse
+PASS recovered Window physical keys, modifier sides, text rejection, source retirement and ordered release
+PASS noncomposing dead key retains character-only prefix and one physical trailing key
+PASS Windows dead-key composition and retirement discard without injecting a space
+PASS native layout characters, key-up, supplementary Unicode; DOS records unchanged
+PASS failed sink does not commit press/release; successful retirement sends one matching break
+PASS DOS-dispatched records retain one physical make/break and native cooked typeahead characters
+PASS unified text dispatch: surrogate pair, stale source and invalid scalar rejection; worker policy remains local
+Actual Window input/return remains gated by Verify-CommandExitStatus Window17.
+PASS byte-exact imported files: 82; selected library x86 units: 18

@@ -1,0 +1,5 @@
+{
+  "start": "2026-11-23T21:36:16.1340417Z",
+  "pid": 16808,
+  "command": "-NoProfile -ExecutionPolicy Bypass -File \"O:/repos.hobby/ntvdm64/test/ntcon-exe/verify-frontend-window-library.ps1\" -BuildRoot build/t484-s3-frontend-library/run"
+}

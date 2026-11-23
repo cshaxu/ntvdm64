@@ -84,7 +84,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P66 media-owner producer](../etc/evidence/t484-s3-media.md) | Current pass/upstream expected failure, cache and optional-input clearing verified; B0075 complete. |
 
-Implementation batches through P66 passed their cached full host build. P66 checks11 raw host inputs
+| [P67 frontend library](../etc/evidence/t484-s3-frontend-library.md) | Native window/keyboard assertions, imported identities, cache and published hashes pass; B0076 complete. |
+
+Implementation batches through P67 passed their cached full host build. P67 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

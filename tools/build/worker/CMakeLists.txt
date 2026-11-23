@@ -58,3 +58,7 @@ configure_file("../wow32/msvc-x86.cmd.in" "${CMAKE_BINARY_DIR}/msvc-x86.cmd" @ON
 add_custom_target(product ALL DEPENDS "${CMAKE_BINARY_DIR}/ntvdm.exe"
   "${CMAKE_BINARY_DIR}/VCDEX.DLL" "${CMAKE_BINARY_DIR}/VDMREDIR.dll"
   "${CMAKE_BINARY_DIR}/nthook32.dll")
+
+add_custom_target(frontend-library DEPENDS
+  "${CMAKE_BINARY_DIR}/frontend-window-library-test.exe"
+  "${CMAKE_BINARY_DIR}/frontend-window-keyboard-test.exe")

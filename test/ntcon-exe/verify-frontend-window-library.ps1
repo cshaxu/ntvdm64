@@ -6,13 +6,12 @@ $buildPrefix = (Join-Path $repo 'build') + [IO.Path]::DirectorySeparatorChar
 if (!$output.StartsWith($buildPrefix, [StringComparison]::OrdinalIgnoreCase)) {
     throw 'Build output must remain below repository build/'
 }
-if ($env:VSCMD_ARG_TGT_ARCH -ne 'x86') { throw 'Run from the MSVC x86 developer environment' }
+
 $owner = Join-Path $repo 'src/ntcon-exe'
 $manifest = Get-Content (Join-Path $owner 'nxvm-import.json') -Raw | ConvertFrom-Json
 if ((Get-FileHash (Join-Path $repo 'src/lib-nxvm/LICENSE.nxvm') -Algorithm SHA256).Hash -ne $manifest.licenseSha256) {
     throw 'Imported license differs from pinned nxvm'
 }
-$sources = @()
 foreach ($row in $manifest.files) {
     if ($row.path -notmatch '^lib-nxvm/lib/(types|base|kvm-base|kvm-window)/[A-Za-z0-9_./-]+$' -or
         $row.path.Contains('..')) { throw "Invalid imported path: $($row.path)" }
@@ -20,40 +19,29 @@ foreach ($row in $manifest.files) {
     if ((Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash -ne $row.sha256) {
         throw "Imported file differs from pinned nxvm: $($row.path)"
     }
-    if ($row.compile) { $sources += $file }
 }
 New-Item -ItemType Directory -Force -Path $output | Out-Null
-& (Join-Path $repo 'build/.ninja/build-tools/ntvdm-font.exe') (Join-Path $repo 'src/mvdm-guest/softpc.new/roms/v7vga.rom') (Join-Path $output 'native_pc_font.h')
-if ($LASTEXITCODE) { throw 'Native frontend font generation failed; run tools/build/bootstrap.cmd first' }
-$objects = @()
-$sources += Join-Path $owner 'window_frame.c'
-$sources += Join-Path $owner 'window_controller.c'
-$sources += Join-Path $owner 'window_input_queue.c'
-$sources += Join-Path $owner 'window_keyboard.c'
-$sources += Join-Path $repo 'src/compat/native_console_text_frame.c'
-$sources += Join-Path $repo 'src/compat/console_video_buffer.c'
-$sources += Join-Path $repo 'test/ntcon-exe/frontend_window_library_test.c'
-for ($index = 0; $index -lt $sources.Count; ++$index) {
-    $object = Join-Path $output "$index.obj"
-    & cl.exe /nologo /c /MT /std:c11 /W4 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$repo/src/lib-nxvm" "/I$output" "/Fo$object" $sources[$index]
-    if ($LASTEXITCODE) { throw "Compilation failed: $($sources[$index])" }
-    $objects += $object
+$line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 frontend-library"'
+$p=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$output/build.stdout" -RedirectStandardError "$output/build.stderr"
+try {
+    $null=$p.Handle
+    @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');command=$line;timeoutSeconds=180}|ConvertTo-Json|Set-Content "$output/build.owner.json"
+    if(!$p.WaitForExit(180000)){$p.Kill($true);$p.WaitForExit();throw 'Frontend producer deadline'}
+    $p.WaitForExit();$p.ExitCode|Set-Content "$output/build.exit"
+    if($p.ExitCode){throw 'Frontend native build failed'}
+} finally {$p.Dispose()}
+$cache=Join-Path $repo 'build/.ninja/msvc-x86-release/worker'
+foreach($name in @('frontend-window-library-test','frontend-window-keyboard-test')) {
+    Copy-Item "$cache/$name.exe" "$output/$name.exe" -Force
+    $p=Start-Process "$output/$name.exe" -WorkingDirectory $output -WindowStyle Hidden -PassThru -RedirectStandardOutput "$output/$name.stdout" -RedirectStandardError "$output/$name.stderr"
+    try {
+        $null=$p.Handle
+        @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');image="$output/$name.exe";timeoutSeconds=30}|ConvertTo-Json|Set-Content "$output/$name.owner.json"
+        if(!$p.WaitForExit(30000)){$p.Kill();$p.WaitForExit();throw 'Frontend assertion deadline'}
+        $p.WaitForExit();$p.ExitCode|Set-Content "$output/$name.exit"
+        if($p.ExitCode){throw "$name assertions failed"}
+        Get-Content "$output/$name.stdout"
+    } finally {$p.Dispose()}
 }
-$exe = Join-Path $output 'frontend-window-library-test.exe'
-& link.exe /nologo /machine:x86 "/out:$exe" @objects user32.lib gdi32.lib
-if ($LASTEXITCODE) { throw 'Window library link failed' }
-& $exe
-if ($LASTEXITCODE) { throw 'Window library assertions failed' }
-Write-Output 'Retired ConPTY controller fixture is not built here; actual Window input/return is gated by Verify-CommandExitStatus Window17.'
-$keyboardObject = Join-Path $output 'window-keyboard.obj'
-$keyboardTestObject = Join-Path $output 'keyboard-test.obj'
-& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$repo/src/lib-nxvm" "/Fo$keyboardObject" (Join-Path $owner 'window_keyboard.c')
-if ($LASTEXITCODE) { throw 'Window keyboard compilation failed' }
-& cl.exe /nologo /c /MT /std:c11 /W4 /D_WIN32_WINNT=0x0601 "/I$owner" "/I$repo/src" "/I$repo/src/lib-nxvm" "/Fo$keyboardTestObject" (Join-Path $repo 'test/ntcon-exe/frontend_window_keyboard_test.c')
-if ($LASTEXITCODE) { throw 'Window keyboard fixture compilation failed' }
-$keyboardExe = Join-Path $output 'frontend-window-keyboard-test.exe'
-& link.exe /nologo /machine:x86 "/out:$keyboardExe" $keyboardObject $keyboardTestObject user32.lib
-if ($LASTEXITCODE) { throw 'Window keyboard fixture link failed' }
-& $keyboardExe
-if ($LASTEXITCODE) { throw 'Window keyboard assertions failed' }
+Write-Output 'Actual Window input/return remains gated by Verify-CommandExitStatus Window17.'
 Write-Output "PASS byte-exact imported files: $($manifest.files.Count); selected library x86 units: $(@($manifest.files | Where-Object compile).Count)"

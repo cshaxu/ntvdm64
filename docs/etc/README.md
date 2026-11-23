@@ -1621,3 +1621,5 @@ post-publication targeted checks.
 - [T484 S3 COMMAND/ThunkNLS producers](evidence/t484-s3-command-nls.md).
 
 - [T484 S3 media-owner producer](evidence/t484-s3-media.md).
+
+- [T484 S3 frontend library producer](evidence/t484-s3-frontend-library.md)
