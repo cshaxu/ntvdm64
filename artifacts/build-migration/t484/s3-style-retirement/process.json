@@ -1,0 +1,6 @@
+{
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-style-retirement\\verify.ps1\"",
+  "start": "2026-11-23T20:58:32.6775042Z",
+  "pid": 12832,
+  "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1119-907-0_26.1119.907.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe"
+}

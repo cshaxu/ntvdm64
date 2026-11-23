@@ -330,5 +330,10 @@
     "reason": "P59 local producer migrated; shared runtime/package staging remains",
     "evidence": "docs/etc/evidence/t484-s3-ui.md",
     "status": "pending-producer-migration"
+  },
+  "test/integration/verify-wow-s3-guest-contracts.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-style-retirement.md",
+    "status": "retired-with-delivery-evidence",
+    "reason": "P61 retires orphaned Win16 Style mode aggregator; provider and feature removed in T450 db91004e5; current ordinary guest probes retained"
   }
 }

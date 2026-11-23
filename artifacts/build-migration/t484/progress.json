@@ -1,33 +1,28 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "965416bb9508a70c2166d48a78b53c770dfbfbc9",
+  "head": "2d2598f24a601c5920dd22e531cfe0a9eb5e5cc1",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-page-cost.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/wow-ui-probes.cmake",
-    " M tools/build/worker/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-page/",
-    "?? docs/etc/evidence/t484-s3-page.md",
-    "?? tools/build/worker/page-cost.cmake"
+    " D test/integration/verify-wow-s3-guest-contracts.ps1",
+    "?? docs/etc/evidence/t484-s3-style-retirement.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 69,
-    "unchanged": 173,
-    "removed": 113
+    "unchanged": 172,
+    "removed": 114
   },
   "disposition_counts": {
     "migrated-delivered": 16,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 113,
+    "retired-with-delivery-evidence": 114,
     "pending-producer-migration": 50,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 172
+    "requires-disposition-reconciliation": 171
   },
-  "existing_interpreted_candidates_with_command_hits": 202,
+  "existing_interpreted_candidates_with_command_hits": 201,
   "files": [
     {
       "id": "B0001",
@@ -1203,12 +1198,14 @@
       "state": "changed",
       "current_sha256": "26b1c169aa6cfde2a92c9b93aa1bc44c223547e56b924c2cc5e38241eb9c22c8",
       "revisions": [
+        "2d2598f24a601c5920dd22e531cfe0a9eb5e5cc1",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13",
         "161b9dc27ab6ee0713a777f349ddb25669d72766"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s2-native-tib.md",
-        "docs/etc/evidence/t484-s3-cpu-guest.md"
+        "docs/etc/evidence/t484-s3-cpu-guest.md",
+        "docs/etc/evidence/t484-s3-page.md"
       ],
       "completion": "pending-producer-migration",
       "decision": {
@@ -1221,12 +1218,16 @@
       "id": "B0067",
       "file": "test/integration/verify-wow-s3-guest-contracts.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "e9e5c411ab1815e5fb77810ee08b0c4491134f7cf50510c005af55d6ff82a099",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-style-retirement.md",
+        "status": "retired-with-delivery-evidence",
+        "reason": "P61 retires orphaned Win16 Style mode aggregator; provider and feature removed in T450 db91004e5; current ordinary guest probes retained"
+      }
     },
     {
       "id": "B0068",
@@ -4954,6 +4955,12 @@
     }
   ],
   "commits": {
+    "2d2598f24a601c5920dd22e531cfe0a9eb5e5cc1": {
+      "subject": "T484 S3 P60 migrate page diagnostic producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-page.md"
+      ]
+    },
     "965416bb9508a70c2166d48a78b53c770dfbfbc9": {
       "subject": "T484 S3 P59 migrate dialog and observer producers",
       "evidence": [
@@ -6231,16 +6238,6 @@
         {
           "line": 36,
           "text": "$directInputs+=@(\"$WorkerBuildRoot/generated/ntvdm-wow32-provider.def\",\"$WorkerBuildRoot/obj/dpmi/dpmiint.obj\",\"$repo/build/.ninja/build-tools/ntvdm-tib.exe\",\"$repo/tools/build/worker/page-cost.cmake\")"
-        }
-      ]
-    },
-    {
-      "id": "B0067",
-      "file": "test/integration/verify-wow-s3-guest-contracts.ps1",
-      "hits": [
-        {
-          "line": 17,
-          "text": "if(!$CommonDialogIdentityHost){$CommonDialogIdentityHost=\"$repo/build/.ninja/msvc-x86-release/message-probes/CDLHOST.dll\"}"
         }
       ]
     },

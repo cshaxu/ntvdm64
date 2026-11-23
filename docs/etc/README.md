@@ -1609,3 +1609,5 @@ post-publication targeted checks.
 - [T484 S3 dialog/observer producers](evidence/t484-s3-ui.md).
 
 - [T484 S3 page-domain diagnostic](evidence/t484-s3-page.md).
+
+- [T484 S3 obsolete style aggregator](evidence/t484-s3-style-retirement.md).
