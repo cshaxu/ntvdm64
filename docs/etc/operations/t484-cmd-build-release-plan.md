@@ -49,6 +49,19 @@ unrelated historical output for a required current producer.
   actual child-command evidence and complete verified host/addon manifests.
   An old cached graph passing is insufficient.
 
+## Retention review including delivered migrations
+
+Owner clarification applies retrospectively to every already migrated test
+builder, diagnostic tool and probe as well as remaining candidates. Migration
+is not a reason to retain an obsolete tool. Review current callers and unique
+maintained behavior in DIR order; remove expired unused tools and their native
+targets/references, consolidate duplicate setup and assertions into an existing
+owner, and retain only justified current coverage. Historical receipts remain
+evidence, not active build dependencies. Lack of a suite caller alone does not
+prove a focused regression obsolete; record its current contract and provider.
+Use the existing disposition ledger for decisions and evidence, not a second
+migration inventory. Track review separately from delivered migration counts.
+
 ## Initial evidence and limits
 
 At e74afba09, tools/build.cmd does not exist. CMakeLists.txt:41-42 requires

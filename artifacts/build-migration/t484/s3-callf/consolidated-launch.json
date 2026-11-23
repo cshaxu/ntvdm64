@@ -1,0 +1,6 @@
+{
+  "started": "2026-11-23T23:43:29.9153029Z",
+  "output": "build/t484-s3-callf/consolidated",
+  "pid": 28252,
+  "script": "test/observation/verify-ccpu-callback.ps1"
+}

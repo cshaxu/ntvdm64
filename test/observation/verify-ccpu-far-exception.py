@@ -2,7 +2,6 @@
 import argparse
 import hashlib
 import json
-import os
 from pathlib import Path
 import re
 import subprocess
@@ -39,10 +38,8 @@ for symbol, obj in owners.items():
             re.escape(obj) + r"\s*$", maptext):
         raise SystemExit("link map did not establish original owner for " + symbol)
 results = []
-for name, argv in [("off", []), ("matching", ["0008"]), ("other", ["0010"]), ("valid", ["0008", "valid"])]:
-    env = os.environ.copy()
-    env["CCPU_FAR_TRACE_PATH"] = str(root / (name + ".trace.txt"))
-    run = subprocess.run([str(exe), *argv], cwd=tree, env=env, capture_output=True, text=True, errors="replace", timeout=60)
+for name, argv in [("invalid", []), ("valid", ["valid"])]:
+    run = subprocess.run([str(exe), *argv], cwd=tree, capture_output=True, text=True, errors="replace", timeout=60)
     (root / (name + ".stdout.txt")).write_text(run.stdout, encoding="utf-8")
     (root / (name + ".stderr.txt")).write_text(run.stderr, encoding="utf-8")
     if run.returncode:
@@ -50,12 +47,6 @@ for name, argv in [("off", []), ("matching", ["0008"]), ("other", ["0010"]), ("v
     expected = "vector=0 error=0 cr2=12345000 valid=1" if name == "valid" else "vector=13 error=8 cr2=12345000 valid=0"
     if expected not in run.stderr:
         raise SystemExit(name + " did not report the asserted fault result: " + run.stderr)
-    trace = root / (name + ".trace.txt")
-    if name in ("matching", "valid"):
-        if not trace.is_file() or "far-validate" not in trace.read_text(encoding="utf-8", errors="replace"):
-            raise SystemExit(name + " did not execute the matching trace witness")
-    elif trace.exists():
-        raise SystemExit(name + " unexpectedly wrote the filtered trace")
     results.append({"case": name, "exit": run.returncode, "output": run.stderr.strip()})
 digest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest().upper()
 (root / "result.json").write_text(json.dumps({"result": "pass", "scope": "selected-object fixture; guest and full product remain separate",

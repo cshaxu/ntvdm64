@@ -1,34 +1,36 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "975b1e49775ef3dde9f542aa56bdbd20aea306da",
+  "head": "d01cca67fa7b429c094a9f2482c2c1b8834dea49",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/t484-s3-early-deliveries.md",
+    " M docs/etc/operations/t484-cmd-build-release-plan.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-blocked-video-tick.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-video-tick/",
-    "?? docs/etc/evidence/t484-s3-video-tick.md",
-    "?? tools/build/fixtures/blocked-video.cmake"
+    " M test/mvdm-host/ccpu_far_exception_fixture.c",
+    " M test/observation/verify-ccpu-callback.ps1",
+    " D test/observation/verify-ccpu-callf-trace.ps1",
+    " M test/observation/verify-ccpu-far-exception.py",
+    "?? artifacts/build-migration/t484/s3-callf/",
+    "?? docs/etc/evidence/t484-s3-callf.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 95,
-    "unchanged": 141,
-    "removed": 119
+    "changed": 96,
+    "unchanged": 139,
+    "removed": 120
   },
   "disposition_counts": {
     "migrated-delivered": 38,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 119,
     "pending-producer-migration": 53,
-    "retained-native-delegate": 4,
-    "requires-disposition-reconciliation": 138,
-    "retained-standalone-audit": 1
+    "retained-native-delegate": 6,
+    "requires-disposition-reconciliation": 135,
+    "retained-standalone-audit": 1,
+    "retired": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 185,
+  "existing_interpreted_candidates_with_command_hits": 184,
   "files": [
     {
       "id": "B0001",
@@ -2098,8 +2100,13 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "903d538906fc1f2bfe0611d843dcacc5757de1ed75e1a67f8733c03b7eb8fc53",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "d01cca67fa7b429c094a9f2482c2c1b8834dea49"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-video-tick.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -2141,23 +2148,31 @@
       "id": "B0118",
       "file": "test/observation/verify-ccpu-callf-trace.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "4684fc7767cc0752e2fef5a71cbb355d97dfcdc097ed5aa5375bdbb496f82110",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired",
+      "decision": {
+        "status": "retired",
+        "evidence": "docs/etc/evidence/t484-s3-callf.md",
+        "reason": "Duplicate standalone entry removed; original CALLF owner and behavior assertions consolidated into verify-ccpu-callback.ps1, owned final run passed."
+      }
     },
     {
       "id": "B0119",
       "file": "test/observation/verify-ccpu-far-exception.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f3de62b872135b8945ce88b8bbc3839a5273e9dcc634cfa1f28602c483b12498",
+      "state": "changed",
+      "current_sha256": "be0b87777c8da237ca04da8844fcba625b78927a524017654a756dfdcdf0f502",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "status": "retained-native-delegate",
+        "evidence": "docs/etc/evidence/t484-s3-callf.md",
+        "reason": "P85 verifies native-only execution; removes stale trace contract proven removed in7717ce596; retains both behavior paths and original symbol owners."
+      }
     },
     {
       "id": "B0120",
@@ -2201,8 +2216,12 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-dpmi-contracts.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "status": "retained-native-delegate",
+        "evidence": "docs/etc/evidence/t484-s3-callf.md",
+        "reason": "P85 verifies existing CMD producer delegation and117 unchanged native privilege/memory assertions."
+      }
     },
     {
       "id": "B0123",
@@ -5232,6 +5251,13 @@
     }
   ],
   "commits": {
+    "d01cca67fa7b429c094a9f2482c2c1b8834dea49": {
+      "subject": "T484 S3 P84 migrate video tick producer and reconcile CCPU runners",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-video-tick.md"
+      ]
+    },
     "975b1e49775ef3dde9f542aa56bdbd20aea306da": {
       "subject": "T484 S3 P83 migrate BASE contract producers",
       "evidence": [
@@ -7039,37 +7065,23 @@
       ]
     },
     {
-      "id": "B0118",
-      "file": "test/observation/verify-ccpu-callf-trace.ps1",
-      "hits": [
-        {
-          "line": 7,
-          "text": "$worker=(Resolve-Path \"$repo/build/.ninja/msvc-x86-release/worker\").Path"
-        },
-        {
-          "line": 9,
-          "text": "& $driver ninja.exe -C $worker ccpu-high-linear-page-test.exe *> \"$root/build.log\""
-        }
-      ]
-    },
-    {
       "id": "B0119",
       "file": "test/observation/verify-ccpu-far-exception.py",
       "hits": [
         {
-          "line": 13,
+          "line": 12,
           "text": "parser.add_argument(\"--worker-build\", default=\"build/.ninja/msvc-x86-release/worker\")"
         },
         {
-          "line": 24,
+          "line": 23,
           "text": "raise SystemExit(\"link map did not establish selected far-transfer owner\")"
         },
         {
-          "line": 26,
+          "line": 25,
           "text": "raise SystemExit(\"link map did not establish the fixture exception hook\")"
         },
         {
-          "line": 40,
+          "line": 39,
           "text": "raise SystemExit(\"link map did not establish original owner for \" + symbol)"
         }
       ]

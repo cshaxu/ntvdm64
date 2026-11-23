@@ -505,5 +505,20 @@
     "status": "retained-native-delegate",
     "reason": "P84 audited all subprocesses: native fixture/oracle execution only, no producer or staging. Existing native targets built; 13 fault and118 matrix assertions plus native oracle pass.",
     "evidence": "docs/etc/evidence/t484-s3-video-tick.md"
+  },
+  "test/observation/verify-ccpu-callf-trace.ps1": {
+    "status": "retired",
+    "evidence": "docs/etc/evidence/t484-s3-callf.md",
+    "reason": "Duplicate standalone entry removed; original CALLF owner and behavior assertions consolidated into verify-ccpu-callback.ps1, owned final run passed."
+  },
+  "test/observation/verify-ccpu-far-exception.py": {
+    "status": "retained-native-delegate",
+    "evidence": "docs/etc/evidence/t484-s3-callf.md",
+    "reason": "P85 verifies native-only execution; removes stale trace contract proven removed in7717ce596; retains both behavior paths and original symbol owners."
+  },
+  "test/observation/verify-ccpu-port-privilege.py": {
+    "status": "retained-native-delegate",
+    "evidence": "docs/etc/evidence/t484-s3-callf.md",
+    "reason": "P85 verifies existing CMD producer delegation and117 unchanged native privilege/memory assertions."
   }
 }

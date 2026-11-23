@@ -13,7 +13,7 @@ are now admitted. Final interpreter-free clean acceptance remains S5.
 | Identifier Mode | M0 T484 S3, Ordinary Mode. |
 | Admission And Approval | Owner: 准入新t任务！要求构建脚步去除python powershell javascript 仅使用cmd. |
 | Original Owner Request | Admit unified build/release; CMD-only build scripts, removing Python, PowerShell and JavaScript dependencies. |
-| Objective | Migrate all14 authored addon producers and test-binary production callers to CMD/native declarative targets; retire the old worker generator and interpreted producer chains while preserving actual source/flag/ABI closures. |
+| Objective | Migrate all14 authored addon producers and test-binary production callers to CMD/native declarative targets; retire the old worker generator and interpreted producer chains while preserving actual source/flag/ABI closures. Reaudit already migrated test tools/probes; remove obsolete unused entries and consolidate duplicated setup/coverage instead of preserving migrations for their own sake. |
 | Candidate Proposal | [Unified build/release](../proposals/proposal-unified-build-cmd-release-001.md) |
 | Reference Baseline | T483 closure e74afba09; product P85 9e7eb19c0, package100b16d9-992d-4e2c-8d99-66a4e891dd26. |
 | Files And ABI Surface | Addon/test build entrypoints, native CMake/ASM/RC generation and consumer references; no original guest or product ABI change. |
@@ -85,6 +85,8 @@ interpreter-free end-to-end acceptance have not completed.
 | [P83 BASE contract producers](../etc/evidence/t484-s3-base-contracts.md) | Three native targets link actual x86/x64 product objects;all six runtime cases pass; B0112-B0114 complete. |
 
 | [P84 video/CCPU runners](../etc/evidence/t484-s3-video-tick.md) | Native video projection passes both architectures;131 CCPU cases and native oracle pass; B0115-B0117 complete. |
+
+| [P85 CCPU consolidation](../etc/evidence/t484-s3-callf.md) | Independent CALLF runner removed; assertions consolidated into existing callback runner. Final native/cache/publication-hash gates passed; retrospective retention review remains active. |
 
 Implementation batches through P84 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required

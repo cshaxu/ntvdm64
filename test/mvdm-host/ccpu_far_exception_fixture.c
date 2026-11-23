@@ -1,7 +1,7 @@
 /* Controlled host boundary around the selected CCPU far-destination path. */
 #include <stdio.h>
 #include <setjmp.h>
-#include <stdlib.h>
+#include <string.h>
 #include <insignia.h>
 #include <host_def.h>
 #include <xt.h>
@@ -31,17 +31,9 @@ int main(int argc, char **argv)
     IU8 count = 0;
     ISM32 type = 0;
     unsigned cr2;
-    int valid = argc > 2;
-    const char *trace_path = getenv("CCPU_FAR_TRACE_PATH");
+    int valid = argc == 2;
 
-    if (argc > 1) {
-        if (!trace_path || !*trace_path) return 2;
-        SetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", trace_path);
-        SetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", argv[1]);
-    } else {
-        SetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", NULL);
-        SetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", NULL);
-    }
+    if (argc > 2 || (valid && strcmp(argv[1], "valid"))) return 2;
     session_initialize(&owner, 1);
     if (!session_activate(&owner) || !session_thread_bind(&owner)) return 2;
     sas_init(0x200000);
