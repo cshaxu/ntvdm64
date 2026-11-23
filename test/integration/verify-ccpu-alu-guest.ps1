@@ -4,8 +4,6 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
  [Parameter(Mandatory)][string]$Oracle,
- [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),
- [string]$Nasm='nasm.exe',
  [switch]$NegativeOracle)
 # Independent COM exercises selected CPU40 arithmetic/logic instructions; no original guest is
 # modified/rebuilt, no substituted memory provider and no mapped drive.
@@ -47,13 +45,12 @@ try{
   try{$null=$file.Seek(8,[IO.SeekOrigin]::Begin);$old=$file.ReadByte();$null=$file.Seek(8,[IO.SeekOrigin]::Begin);$file.WriteByte($old -bxor 1)}finally{$file.Dispose()}
  }
  Get-ChildItem $dataRoot -File|Get-FileHash|Export-Csv -NoTypeInformation "$root/oracle-data-inputs.csv"
- $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
- $line='-f bin "'+$PSScriptRoot+'/ccpu_alu_probe.asm" -o "'+$root+'/EMSPROBE.COM"'
- $p=Start-Process $assembler -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/assemble.stdout.txt" -RedirectStandardError "$root/assemble.stderr.txt";$null=$p.Handle
- @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');image=$assembler;command=$line;timeoutSeconds=30}|ConvertTo-Json|Set-Content "$root/assemble.process.json"
- if(!$p.WaitForExit(30000)){taskkill.exe /PID $p.Id /T /F;throw 'Owned assembler deadline'}
- $p.WaitForExit();$code=$p.ExitCode;$p.Dispose();$code|Set-Content "$root/assemble.exit.txt";if($code){throw 'Independent COM assembly failed'}
- Get-FileHash (Resolve-Path $Oracle).Path,$PSCommandPath,"$PSScriptRoot/../observation/ccpu_alu_probe.asm","$root/EMSPROBE.COM",$Observer,$LogonHelper,$assembler|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ $variant='Alu'
+ OwnedTool probe-build $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 cpu-guest-probes"') 300
+ $native=Join-Path $repo 'build/.ninja/fixtures-x86'
+ Copy-Item "$native/guest-probes/cpu-integration/$variant.COM" "$root/EMSPROBE.COM"
+ $pifBuilder=Join-Path $native 'ems_pif_builder.exe'
+ Get-FileHash (Resolve-Path $Oracle).Path,$PSCommandPath,"$PSScriptRoot/../observation/ccpu_alu_probe.asm","$root/EMSPROBE.COM",$Observer,$LogonHelper,$pifBuilder|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $stage=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path;$scope=New-IsolatedPackageScope $stage
  $tests=Join-Path $stage tests;$null=New-Item -ItemType Directory $tests -Force
  # Reuse the existing test PIF producer: original no-PIF defaults deliberately
@@ -62,10 +59,8 @@ try{
  # runner requires SUBST and foreground compilation, so reuse its producer only.
  Copy-Item "$root/EMSPROBE.COM" "$tests/E30.COM"
  foreach($name in $expectedFiles){Copy-Item -LiteralPath (Join-Path $dataRoot $name) -Destination (Join-Path $tests $name)}
- $line='/d /s /c ""'+(Resolve-Path $CompilerDriver).Path+'" cl.exe /nologo /MT /W4 /I"'+$repo+'/src/non-mvdm/public/internal/windows/inc" /Fo"'+$root+'/pif.obj" /Fe"'+$root+'/pif-builder.exe" "'+$PSScriptRoot+'/ems_pif_builder.c""'
- OwnedTool pif-build $env:ComSpec $line 120
- OwnedTool pif-profile "$root/pif-builder.exe" ('"'+$tests+'" --close-on-exit') 30
- Get-FileHash "$PSScriptRoot/../observation/ems_pif_builder.c",$CompilerDriver,"$tests/E30.COM","$tests/E30.PIF","$tests/E30.NT","$tests/E30AUTO.NT"|Export-Csv -NoTypeInformation "$root/profile-inputs.csv"
+ OwnedTool pif-profile $pifBuilder ('"'+$tests+'" --close-on-exit') 30
+ Get-FileHash "$PSScriptRoot/../observation/ems_pif_builder.c",$pifBuilder,"$tests/E30.COM","$tests/E30.PIF","$tests/E30.NT","$tests/E30AUTO.NT"|Export-Csv -NoTypeInformation "$root/profile-inputs.csv"
  Get-ChildItem "$stage/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','COMMAND.COM')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
  Add-Type -Path (Resolve-Path $LogonHelper).Path
  $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()

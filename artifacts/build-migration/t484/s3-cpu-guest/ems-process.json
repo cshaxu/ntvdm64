@@ -1,0 +1,7 @@
+{
+  "started": "2026-11-23T17:52:44.9101242Z",
+  "pid": 27024,
+  "host": "modern pwsh",
+  "script": "test/integration/verify-original-ems-probe.ps1",
+  "case": "Mapping"
+}

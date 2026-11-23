@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\test\observation\isolated_package_cleanup.ps1:81
+Line |
+  81 |          throw 'Physical test staging requires a repository-build pack …
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Physical test staging requires a repository-build package

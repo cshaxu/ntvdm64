@@ -1558,3 +1558,5 @@ post-publication targeted checks.
 [T484 S3 clipboard epoch](evidence/t484-s3-clipboard-epoch.md) records native projection and x86/x64 contract results.
 
 [T484 S3 register layout](evidence/t484-s3-endian.md) records native positive/negative targets and correction of an expired assertion.
+
+[T484 S3 CPU/EMS probes](evidence/t484-s3-cpu-guest.md) records native assembly, byte equivalence and remaining shared runtime/staging obligations.

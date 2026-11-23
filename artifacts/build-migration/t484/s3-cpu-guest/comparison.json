@@ -1,0 +1,214 @@
+{
+  "pid": 13924,
+  "start": 1795456164.3080971,
+  "end": 1795456165.1803043,
+  "cases": [
+    {
+      "name": "Control",
+      "source": "ccpu_control_probe.asm",
+      "flags": [],
+      "bytes": 1591,
+      "sha256": "bd91978afebfc676db28c154c3b52d43123b33ed0f81abe15a2e8069ec62f399",
+      "identical": true
+    },
+    {
+      "name": "Control-negative",
+      "source": "ccpu_control_probe.asm",
+      "flags": [
+        "-DCPU_PROBE_NEGATIVE_ORACLE=1"
+      ],
+      "bytes": 1595,
+      "sha256": "6f05bc4a018ef27c4cbfdbd638c45da989cdfe7b19fa262e77ceae10948e576a",
+      "identical": true
+    },
+    {
+      "name": "SignFlags",
+      "source": "ccpu_sign_flag_probe.asm",
+      "flags": [],
+      "bytes": 1395,
+      "sha256": "bcae3bc2279056716a3a6bf6a7f9e091beaca3c43a2164d32b8cb7a9b8dc12e6",
+      "identical": true
+    },
+    {
+      "name": "SignFlags-negative",
+      "source": "ccpu_sign_flag_probe.asm",
+      "flags": [
+        "-DCPU_PROBE_NEGATIVE_ORACLE=1"
+      ],
+      "bytes": 1399,
+      "sha256": "f34d4e8b7a344b24f9164b36cea03a73971b4ab8ef9f3cc4ded371a40d986dc3",
+      "identical": true
+    },
+    {
+      "name": "BitMemory",
+      "source": "ccpu_bit_memory_probe.asm",
+      "flags": [],
+      "bytes": 8534,
+      "sha256": "9c05c5aa489ae844f143a14dd0cdfac3a96a128c466d6ebb339c735177e59cd9",
+      "identical": true
+    },
+    {
+      "name": "BiosDispatch",
+      "source": "bios_dispatch_probe.asm",
+      "flags": [],
+      "bytes": 1155,
+      "sha256": "f6e667abfe8fe83ee9ca31b31c66d7460d662b644c4153724000172d17cafee3",
+      "identical": true
+    },
+    {
+      "name": "BiosDispatch-negative",
+      "source": "bios_dispatch_probe.asm",
+      "flags": [
+        "-DCPU_PROBE_NEGATIVE_ORACLE=1"
+      ],
+      "bytes": 1161,
+      "sha256": "fbb9a395c3ea8be8d3fb9027b9f474eb13e05e81258ea659d9c654d12211aef8",
+      "identical": true
+    },
+    {
+      "name": "DummyInt",
+      "source": "bios_dispatch_probe.asm",
+      "flags": [
+        "-DCPU_PROBE_DUMMY_INT_ONLY=1"
+      ],
+      "bytes": 356,
+      "sha256": "eb113a665d96eef49a60f8ad8da4e018a54931f6557f4e33deaf7b62eec59b78",
+      "identical": true
+    },
+    {
+      "name": "DummyInt-negative",
+      "source": "bios_dispatch_probe.asm",
+      "flags": [
+        "-DCPU_PROBE_DUMMY_INT_ONLY=1",
+        "-DCPU_PROBE_NEGATIVE_ORACLE=1"
+      ],
+      "bytes": 362,
+      "sha256": "49714878abb8c80c40a79a26fe95d2c385de62a60f17cad965213075d9623852",
+      "identical": true
+    },
+    {
+      "name": "SystemDevices",
+      "source": "system_capability.asm",
+      "flags": [],
+      "bytes": 392,
+      "sha256": "e442cd0c21d6a92cdc2930c9875186b6460643709cbcc5383ff2631f05820205",
+      "identical": true
+    },
+    {
+      "name": "SystemDevices-negative",
+      "source": "system_capability.asm",
+      "flags": [
+        "-DCPU_PROBE_NEGATIVE_ORACLE=1"
+      ],
+      "bytes": 392,
+      "sha256": "8e7d454fd39ff5a5489bc14eef42f5d83ff4ca5486d01176e7ccd8de9eefd70d",
+      "identical": true
+    },
+    {
+      "name": "DiskReset",
+      "source": "disks_capability.asm",
+      "flags": [],
+      "bytes": 110,
+      "sha256": "77e8f1086757fd02edb67d434e05097aa9c56292b2b6d9ad2fc15d8b9e901a10",
+      "identical": true
+    },
+    {
+      "name": "DiskReset-negative",
+      "source": "disks_capability.asm",
+      "flags": [
+        "-DCPU_PROBE_NEGATIVE_ORACLE=1"
+      ],
+      "bytes": 110,
+      "sha256": "8df10902964cc1e973aab094cedaf0e885cada98d8776e1b42e31f060b00ce47",
+      "identical": true
+    },
+    {
+      "name": "VideoInvalid",
+      "source": "bios_dispatch_probe.asm",
+      "flags": [
+        "-DCPU_PROBE_VIDEO_INVALID_ONLY=1"
+      ],
+      "bytes": 708,
+      "sha256": "e655cacb8e75575e5273ad2ff2f7847f6e247d6037df1f205acfebbe1bdc549d",
+      "identical": true
+    },
+    {
+      "name": "VideoInvalid-negative",
+      "source": "bios_dispatch_probe.asm",
+      "flags": [
+        "-DCPU_PROBE_VIDEO_INVALID_ONLY=1",
+        "-DCPU_PROBE_NEGATIVE_ORACLE=1"
+      ],
+      "bytes": 714,
+      "sha256": "59ef8634944c438b98cfcd3cfb4525a3ba543a8c6735833f45014b6e6457b7d3",
+      "identical": true
+    },
+    {
+      "name": "SlaveBios",
+      "source": "slave_bios_vector_probe.asm",
+      "flags": [],
+      "bytes": 329,
+      "sha256": "123682cd272feae4bd67bb418475d1ca33efb39305ea394d55ed8303b1e0ac24",
+      "identical": true
+    },
+    {
+      "name": "RtcEntry",
+      "source": "rtc_entry_probe.asm",
+      "flags": [],
+      "bytes": 778,
+      "sha256": "416b8017f32c71977c61cbf7b1434c899747c900cd64f8474f6dcabef88be477",
+      "identical": true
+    },
+    {
+      "name": "RtcAlarm",
+      "source": "rtc_alarm_probe.asm",
+      "flags": [],
+      "bytes": 537,
+      "sha256": "a38c0ade95e33ba27742297a4138c51727db65435f17222cccfdf1a7b3cc0655",
+      "identical": true
+    },
+    {
+      "name": "Transfer",
+      "source": "ccpu_transfer_probe.asm",
+      "flags": [],
+      "bytes": 2404,
+      "sha256": "0a207a6bf8bcfb38a6d7d8067e47671458c0f15f410c77c0205528ec13c9d8e7",
+      "identical": true
+    },
+    {
+      "name": "Transfer-negative",
+      "source": "ccpu_transfer_probe.asm",
+      "flags": [
+        "-DCPU_TRANSFER_NEGATIVE=1"
+      ],
+      "bytes": 2416,
+      "sha256": "a438a911918a6e0e34338db59d9089e53c68f12d5f04835271e0d641c1606aec",
+      "identical": true
+    },
+    {
+      "name": "Alu",
+      "source": "ccpu_alu_probe.asm",
+      "flags": [],
+      "bytes": 36614,
+      "sha256": "2d65406ada04cea336de987dd3fa917058d83670549ef9f7d54c23d2e7b4ea94",
+      "identical": true
+    },
+    {
+      "name": "CallReturn",
+      "source": "ems_call_return_probe.asm",
+      "flags": [],
+      "bytes": 396,
+      "sha256": "adc8634ddf887fc5a30ae4ac4e5fd1a772671b2218863d0a79b998247e0ac4d6",
+      "identical": true
+    },
+    {
+      "name": "Mapping",
+      "source": "ems_mapping_probe.asm",
+      "flags": [],
+      "bytes": 752,
+      "sha256": "bd1916921a4cccf7c7b3c1c5d77fb609cfc89029d8f7627e34f8dbddab05cd0c",
+      "identical": true
+    }
+  ],
+  "passed": true
+}

@@ -1,31 +1,36 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "0a797506e5b5044223a4ce8cf06d76b3aa1acee3",
+  "head": "658e4de250f1780412e43100414a9f301faae4a7",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/test_host_cpu_endian.py",
+    " M test/integration/verify-ccpu-alu-guest.ps1",
+    " M test/integration/verify-ccpu-sign-flags-guest.ps1",
+    " M test/integration/verify-ccpu-transfer-guest.ps1",
+    " M test/integration/verify-original-ems-probe.ps1",
+    " M test/integration/verify-wow-page-cost.ps1",
+    " M test/integration/verify-wow-paired-latency.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-endian/",
-    "?? docs/etc/evidence/t484-s3-endian.md"
+    "?? artifacts/build-migration/t484/s3-cpu-guest/",
+    "?? docs/etc/evidence/t484-s3-cpu-guest.md",
+    "?? tools/build/fixtures/cpu-guest-probes.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 31,
-    "unchanged": 211,
+    "changed": 35,
+    "unchanged": 207,
     "removed": 113
   },
   "disposition_counts": {
-    "migrated-delivered": 11,
+    "migrated-delivered": 12,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
-    "pending-producer-migration": 20,
+    "pending-producer-migration": 43,
     "retained-native-delegate": 2,
-    "migrated-local-verified": 1,
-    "requires-disposition-reconciliation": 206
+    "requires-disposition-reconciliation": 183
   },
   "existing_interpreted_candidates_with_command_hits": 207,
   "files": [
@@ -387,11 +392,16 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "ed411e0e1b135f6de6978f99d5ce5f066a908f62c56883f2a2e9d1720769eee3",
-      "revisions": [],
-      "evidence": [],
-      "completion": "migrated-local-verified",
+      "revisions": [
+        "658e4de250f1780412e43100414a9f301faae4a7"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-endian.md"
+      ],
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "migrated-local-verified",
+        "status": "migrated-delivered",
+        "delivery": "658e4de250f1780412e43100414a9f301faae4a7",
         "reason": "CMD native targets; x86/x64 actual fixed layout and CPU30 rejection pass",
         "evidence": "docs/etc/evidence/t484-s3-endian.md"
       }
@@ -418,8 +428,11 @@
       "current_sha256": "58b75c46b651b882bf55c87f2260657f37909c22b55deec8cc4a815703f8af14",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "NASM builds generated controller.asm"
+      }
     },
     {
       "id": "B0024",
@@ -429,8 +442,11 @@
       "current_sha256": "beca2790643fa22cf52c7ea4aba964c8cbef442b5ef08d18cd5fdcd8f8f41fa9",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "NASM builds DOS identity, PSP reuse and Win16 controller with dynamic defines"
+      }
     },
     {
       "id": "B0025",
@@ -440,8 +456,11 @@
       "current_sha256": "e119e2a6caaa09eb89a894021b102280ff5af45e2f3144f95a236f4021746e04",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "NASM builds generated controller.asm"
+      }
     },
     {
       "id": "B0026",
@@ -451,8 +470,11 @@
       "current_sha256": "f85d55e9693d267a91829abab0b92a08c81c81e88798d24c40e853a61485928d",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "NASM builds DOS identity, PSP reuse and Win16 controller"
+      }
     },
     {
       "id": "B0027",
@@ -469,42 +491,45 @@
       "id": "B0028",
       "file": "test/integration/verify-ccpu-alu-guest.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "d7ba8c3adab949e6adc0cdf163ab9ef17280bb5e18a565e2f63a0d5824439260",
+      "state": "changed",
+      "current_sha256": "4b878874476d0e8d1bb263829372bbb3a17a94827603710b9dd1f0c07ba97da0",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+        "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
+        "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
       }
     },
     {
       "id": "B0029",
       "file": "test/integration/verify-ccpu-sign-flags-guest.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "c8c95db3c6e497fc290248641bfa9bb5c25e1fe95d32c0d46ecc991252df7afc",
+      "state": "changed",
+      "current_sha256": "c8de4970168c98736efcc95aaab513454910acfbc00d223242e95eb377155287",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+        "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
+        "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
       }
     },
     {
       "id": "B0030",
       "file": "test/integration/verify-ccpu-transfer-guest.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "02b1fc4254a948cc41d401df1dffc0e3f1fbff1dca9c5732f7267bce05497db3",
+      "state": "changed",
+      "current_sha256": "f5ea4a9780f4577854c0ff3a20bc4148b6a1c27d179270844097f31dde83db57",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+        "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
+        "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
       }
     },
     {
@@ -557,8 +582,11 @@
       "current_sha256": "0b9008a4798e54087604e3c1bd4b10d3e801366f07f8872e8c1159969c7c58f6",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Generates CMD that invokes CL to build CG.EXE"
+      }
     },
     {
       "id": "B0035",
@@ -606,14 +634,15 @@
       "id": "B0038",
       "file": "test/integration/verify-original-ems-probe.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "7a96c4d87f4dcd8fa94a2db4a2beb3c163be13c93b430faf40d827538d50dbf0",
+      "state": "changed",
+      "current_sha256": "c21eae90c54d650dc225eff1c79b5cf3b476d38d3cd888d64f1bbd0029c2919d",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+        "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
+        "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
       }
     },
     {
@@ -624,8 +653,11 @@
       "current_sha256": "35ae730a768e5fc814e1337f3ab5a3b16bc24bc445ab78c32c53343937550134",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM to produce PICIRQ.COM"
+      }
     },
     {
       "id": "B0040",
@@ -635,8 +667,11 @@
       "current_sha256": "d526ec87a27fd1e8dfba17eab9344fe0fecf371b7919eebcd9e529fc6402f353",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes selected MSVC compiler for fixture"
+      }
     },
     {
       "id": "B0041",
@@ -646,8 +681,11 @@
       "current_sha256": "c5ef659ed92b682b56cff573363d2c69a0d95ca4c2daa720da45ba4ce74c6445",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM with EXPECT_PORT_MASK; also Add-Type runtime helper"
+      }
     },
     {
       "id": "B0042",
@@ -657,8 +695,11 @@
       "current_sha256": "c24ef7d7417425a51e31ec4557d0dcbc24c86c64eec28739841bde35ed5aacb2",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes Set-PackageIdentity.ps1 in staging; S4 producer obligation"
+      }
     },
     {
       "id": "B0043",
@@ -668,8 +709,11 @@
       "current_sha256": "ca4f449885038466fa73a86753ad2b4a4c6bd4b5794e95f53b96888ef0401479",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM; uses shared logon helper"
+      }
     },
     {
       "id": "B0044",
@@ -679,8 +723,11 @@
       "current_sha256": "072c5bf6da2ba09da8bb601d4b5d6c965dc056a98829fa83f6462b334fbf00c3",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM and CL for Win16 probe and native peer"
+      }
     },
     {
       "id": "B0045",
@@ -690,8 +737,11 @@
       "current_sha256": "63107be274c1a7ba83b09ad0ef19a181851c40f98659b0afb34ea4e845ef16d5",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM, CL DLL link and Add-Type output assembly"
+      }
     },
     {
       "id": "B0046",
@@ -701,8 +751,11 @@
       "current_sha256": "60f3e04a37135240bb8329c7c5f65fa50210bdf746172b185498f9ecb42a6619",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM; uses shared logon helper"
+      }
     },
     {
       "id": "B0047",
@@ -712,8 +765,11 @@
       "current_sha256": "cebdc41aa48b2a80345b703bb02c66240f755cfb62dd100c7090dad83d9b64c2",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM"
+      }
     },
     {
       "id": "B0048",
@@ -723,8 +779,11 @@
       "current_sha256": "384610136b16edd25b23fd6d5f3bf20b4a4d3e5663085b14d1364ca1e963931a",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM"
+      }
     },
     {
       "id": "B0049",
@@ -734,8 +793,11 @@
       "current_sha256": "10c30a2819dccf93f90773b440acfa5dc25a0bd48c28707565cd923987626b38",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM"
+      }
     },
     {
       "id": "B0050",
@@ -745,8 +807,11 @@
       "current_sha256": "3010a965224a609956efb5ff56a3109924ceca6cfaad6bfea39eb0608e03a3ff",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM"
+      }
     },
     {
       "id": "B0051",
@@ -756,8 +821,11 @@
       "current_sha256": "783302e6a845cf5ab838848e21f9e82370b96e9c4a0d60e81e1df9b834921824",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM; uses shared logon helper"
+      }
     },
     {
       "id": "B0052",
@@ -767,8 +835,11 @@
       "current_sha256": "f44bf3ed6ac80b14bdfe3ac3da69fb3e6442bb605ec9d8d8ae4214a59fba422b",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM"
+      }
     },
     {
       "id": "B0053",
@@ -789,8 +860,11 @@
       "current_sha256": "d36675f415a74f6bace60c9725800b60a267f34e6526790f127a6764132fa9db",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM and CL for bridge DLL and retirement witness"
+      }
     },
     {
       "id": "B0055",
@@ -800,8 +874,11 @@
       "current_sha256": "a5e7fb7a95aca04b98a560f540bafcc17c3e991585fd2c20263a815ecda760c0",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM"
+      }
     },
     {
       "id": "B0056",
@@ -811,8 +888,11 @@
       "current_sha256": "2aff8aadb9a98dfd427b7125c8be3364a3d9e2614f1f3c9514b5153b7427ef24",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Invokes NASM"
+      }
     },
     {
       "id": "B0057",
@@ -822,8 +902,11 @@
       "current_sha256": "8e0e17dc559608cc65e5ad1066708cdb33fe847022b4939da4641d6f798e911a",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Generates CMD with CL/LINK for tabstop and wordbreak fixtures"
+      }
     },
     {
       "id": "B0058",
@@ -918,7 +1001,7 @@
       "file": "test/integration/verify-wow-page-cost.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "77f2f63b8bff1048cbab50a6fb93c3730f621ed39ea2cf80dec073ed99df3d2f",
+      "current_sha256": "f8d4c82e4bc06da74662e517ccf73d2ea3d18119cdf6865d7a8eb2b70dcac665",
       "revisions": [
         "161b9dc27ab6ee0713a777f349ddb25669d72766"
       ],
@@ -4652,6 +4735,12 @@
     }
   ],
   "commits": {
+    "658e4de250f1780412e43100414a9f301faae4a7": {
+      "subject": "T484 S3 P35 migrate host register layout fixture to native targets",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-endian.md"
+      ]
+    },
     "0a797506e5b5044223a4ce8cf06d76b3aa1acee3": {
       "subject": "T484 S3 P34 migrate clipboard epoch producer and classify integration callers",
       "evidence": [
@@ -5278,20 +5367,8 @@
       "file": "test/integration/verify-ccpu-alu-guest.ps1",
       "hits": [
         {
-          "line": 7,
-          "text": "[string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),"
-        },
-        {
-          "line": 8,
-          "text": "[string]$Nasm='nasm.exe',"
-        },
-        {
           "line": 50,
-          "text": "$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
-        },
-        {
-          "line": 65,
-          "text": "$line='/d /s /c \"\"'+(Resolve-Path $CompilerDriver).Path+'\" cl.exe /nologo /MT /W4 /I\"'+$repo+'/src/non-mvdm/public/internal/windows/inc\" /Fo\"'+$root+'/pif.obj\" /Fe\"'+$root+'/pif-builder.exe\" \"'+$PSScriptRoot+'/ems_pif_builder.c\"\"'"
+          "text": "$native=Join-Path $repo 'build/.ninja/fixtures-x86'"
         }
       ]
     },
@@ -5300,20 +5377,8 @@
       "file": "test/integration/verify-ccpu-sign-flags-guest.ps1",
       "hits": [
         {
-          "line": 6,
-          "text": "[string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),"
-        },
-        {
-          "line": 7,
-          "text": "[string]$Nasm='nasm.exe',"
-        },
-        {
-          "line": 33,
-          "text": "$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
-        },
-        {
-          "line": 51,
-          "text": "$line='/d /s /c \"\"'+(Resolve-Path $CompilerDriver).Path+'\" cl.exe /nologo /MT /W4 /I\"'+$repo+'/src/non-mvdm/public/internal/windows/inc\" /Fo\"'+$root+'/pif.obj\" /Fe\"'+$root+'/pif-builder.exe\" \"'+$PSScriptRoot+'/ems_pif_builder.c\"\"'"
+          "line": 34,
+          "text": "$native=Join-Path $repo 'build/.ninja/fixtures-x86'"
         }
       ]
     },
@@ -5322,20 +5387,8 @@
       "file": "test/integration/verify-ccpu-transfer-guest.ps1",
       "hits": [
         {
-          "line": 6,
-          "text": "[string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),"
-        },
-        {
-          "line": 7,
-          "text": "[string]$Nasm='nasm.exe',"
-        },
-        {
           "line": 31,
-          "text": "$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
-        },
-        {
-          "line": 46,
-          "text": "$line='/d /s /c \"\"'+(Resolve-Path $CompilerDriver).Path+'\" cl.exe /nologo /MT /W4 /I\"'+$repo+'/src/non-mvdm/public/internal/windows/inc\" /Fo\"'+$root+'/pif.obj\" /Fe\"'+$root+'/pif-builder.exe\" \"'+$PSScriptRoot+'/ems_pif_builder.c\"\"'"
+          "text": "$native=Join-Path $repo 'build/.ninja/fixtures-x86'"
         }
       ]
     },
@@ -5440,20 +5493,8 @@
       "file": "test/integration/verify-original-ems-probe.ps1",
       "hits": [
         {
-          "line": 6,
-          "text": "[string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),"
-        },
-        {
-          "line": 7,
-          "text": "[string]$Nasm='nasm.exe',"
-        },
-        {
           "line": 29,
-          "text": "$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
-        },
-        {
-          "line": 43,
-          "text": "$line='/d /s /c \"\"'+(Resolve-Path $CompilerDriver).Path+'\" cl.exe /nologo /MT /W4 /I\"'+$repo+'/src/non-mvdm/public/internal/windows/inc\" /Fo\"'+$root+'/pif.obj\" /Fe\"'+$root+'/pif-builder.exe\" \"'+$PSScriptRoot+'/../observation/ems_pif_builder.c\"\"'"
+          "text": "$native=Join-Path $repo 'build/.ninja/fixtures-x86'"
         }
       ]
     },

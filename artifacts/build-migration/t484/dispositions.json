@@ -100,7 +100,8 @@
     "status": "pending-producer-migration"
   },
   "test/build/test_host_cpu_endian.py": {
-    "status": "migrated-local-verified",
+    "status": "migrated-delivered",
+    "delivery": "658e4de250f1780412e43100414a9f301faae4a7",
     "reason": "CMD native targets; x86/x64 actual fixed layout and CPU30 rejection pass",
     "evidence": "docs/etc/evidence/t484-s3-endian.md"
   },
@@ -122,15 +123,18 @@
   },
   "test/integration/verify-ccpu-alu-guest.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+    "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
+    "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
   },
   "test/integration/verify-ccpu-sign-flags-guest.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+    "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
+    "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
   },
   "test/integration/verify-ccpu-transfer-guest.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+    "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
+    "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
   },
   "test/integration/verify-dos-identity-pair.ps1": {
     "status": "pending-producer-migration",
@@ -146,7 +150,8 @@
   },
   "test/integration/verify-original-ems-probe.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+    "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
+    "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
   },
   "test/integration/verify-native-modal-control.ps1": {
     "status": "pending-producer-migration",
@@ -155,5 +160,97 @@
   "test/integration/verify-client-rpc-wait.ps1": {
     "status": "pending-producer-migration",
     "reason": "Calls Set-PackageIdentity.ps1; S4 must migrate identity writer and this caller"
+  },
+  "test/integration/ntvdm64-386/verify-win31-editors.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "NASM builds generated controller.asm"
+  },
+  "test/integration/ntvdm64-386/verify-win31-identity.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "NASM builds DOS identity, PSP reuse and Win16 controller with dynamic defines"
+  },
+  "test/integration/ntvdm64-386/verify-win95-editors.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "NASM builds generated controller.asm"
+  },
+  "test/integration/ntvdm64-386/verify-win95-identity.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "NASM builds DOS identity, PSP reuse and Win16 controller"
+  },
+  "test/integration/verify-native-guest-output.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Generates CMD that invokes CL to build CG.EXE"
+  },
+  "test/integration/verify-pic-reset-eoi.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM to produce PICIRQ.COM"
+  },
+  "test/integration/verify-s45-keyboard-shadow.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes selected MSVC compiler for fixture"
+  },
+  "test/integration/verify-s45-vcd-serial-discovery.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM with EXPECT_PORT_MASK; also Add-Type runtime helper"
+  },
+  "test/integration/verify-s7-rpc-fixtures.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes Set-PackageIdentity.ps1 in staging; S4 producer obligation"
+  },
+  "test/integration/verify-win16-ddeml-probe.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM; uses shared logon helper"
+  },
+  "test/integration/verify-win16-discovery.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM and CL for Win16 probe and native peer"
+  },
+  "test/integration/verify-win16-message-probe.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM, CL DLL link and Add-Type output assembly"
+  },
+  "test/integration/verify-win16-multimedia-timer-probe.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM; uses shared logon helper"
+  },
+  "test/integration/verify-win16-print-probe.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM"
+  },
+  "test/integration/verify-win16-printdlg-cancel.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM"
+  },
+  "test/integration/verify-win16-printdlg-default.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM"
+  },
+  "test/integration/verify-win16-raw-spool-profile.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM"
+  },
+  "test/integration/verify-win16-shell-hook-probe.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM; uses shared logon helper"
+  },
+  "test/integration/verify-win16-toolhelp-probe.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM"
+  },
+  "test/integration/verify-wow-clipboard-transfer.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM and CL for bridge DLL and retirement witness"
+  },
+  "test/integration/verify-wow-dc-guest.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM"
+  },
+  "test/integration/verify-wow-dialog-guest.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Invokes NASM"
+  },
+  "test/integration/verify-wow-edit-tabstop.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Generates CMD with CL/LINK for tabstop and wordbreak fixtures"
   }
 }

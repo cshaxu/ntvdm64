@@ -1,0 +1,8 @@
+{
+  "started": "2026-11-23T17:54:34.2204250Z",
+  "package": "build/t484-s2-worker-cmake/candidate-final",
+  "script": "test/integration/verify-original-ems-probe.ps1",
+  "verifiedPublishedImages": 11,
+  "pid": 14064,
+  "case": "Mapping"
+}

@@ -94,7 +94,7 @@ int mvdm_softpc_wow_page_domain_project_window_graph(ULONG count,const mvdm_soft
  }
  Owned baseline $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$WorkerBuildRoot+'/ntvdm.exe.map" -WowMap "'+$ProviderBuildRoot+'/wow32.dll.map"') 300
  Copy-Item "$root/ntvdm.exe" "$package/system32/ntvdm.exe" -Force
- Owned ems $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-original-ems-probe.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -LogonHelper "'+$LogonHelper+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/ems"') 180
+ Owned ems $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-original-ems-probe.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -LogonHelper "'+$LogonHelper+'" -BuildRoot "'+$root+'/ems"') 180
  Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$root+'/ntvdm.exe.map" -WowMap "'+$ProviderBuildRoot+'/wow32.dll.map" -PageCostRva '+$rva.ToString('X8')) 300
  foreach($input in Import-Csv "$root/inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen production/diagnostic input changed'}}
  foreach($input in Import-Csv "$root/diagnostic-inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen diagnostic image changed'}}
