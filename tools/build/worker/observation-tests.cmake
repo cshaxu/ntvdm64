@@ -3,6 +3,14 @@ worker_unit("obj/tests/dem_declarations.obj"
   "${NTVDM_REPO}/test/adapter-mvdm-host-out/win32/t280_s9_dem_declaration_fixture.c"
   "${profile_8} /std:c11")
 add_custom_target(dem-declarations DEPENDS "${CMAKE_BINARY_DIR}/obj/tests/dem_declarations.obj")
+worker_unit("obj/tests/command_redirection_fixture.obj"
+  "${NTVDM_REPO}/test/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c"
+  "${profile_1} /I\"${NTVDM_REPO}/src/mvdm-host/dos/command\"")
+worker_link("command-redirection-fixture.exe" "/nologo /out:$out /map:$out.map"
+  "kernel32.lib" INPUTS "obj/tests/command_redirection_fixture.obj"
+  "obj/command/cmdredir.obj" "obj/compat/guest_memory_lease.obj"
+  "obj/ntvdm/session/session.obj" "obj/compat/host_context.obj")
+add_custom_target(command-redirection DEPENDS "${CMAKE_BINARY_DIR}/command-redirection-fixture.exe")
 worker_unit("obj/tests/command_initialization_fixture.obj"
   "${NTVDM_REPO}/test/mvdm-host/command_initialization_fixture.c"
   "${profile_1} /I\"${NTVDM_REPO}/src/mvdm-host/dos/command\"")
@@ -57,3 +65,5 @@ worker_link("redirector-netapi-provider-test.exe"
   "obj/tests/redirector/vrnetapi.obj" "obj/tests/redirector/vrnmpipe.obj"
   "original-redir-observation.lib" ${host_fixture}
   "original-opennt-netlib.lib" "original-opennt-xactsrv.lib")
+add_custom_target(redirector-providers DEPENDS "${CMAKE_BINARY_DIR}/redirector-netapi-provider-test.exe")
+add_custom_target(redirector-capacity DEPENDS "${CMAKE_BINARY_DIR}/redirector-oem-capacity-test.exe")

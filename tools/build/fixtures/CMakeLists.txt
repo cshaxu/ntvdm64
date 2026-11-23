@@ -273,6 +273,25 @@ foreach(property IN ITEMS COMPILE_OPTIONS COMPILE_DEFINITIONS INCLUDE_DIRECTORIE
 endforeach()
 add_custom_target(redirector-guest-copy DEPENDS redirector_guest_copy_test redirector_query_objects)
 
+set(redirector_lifecycle_targets)
+foreach(pair IN ITEMS "vrmisc|t290_s3_vrmisc_fixture" "vrinit|t290_s3_vrinit_failure_fixture")
+  string(REPLACE "|" ";" parts "${pair}")
+  list(GET parts 0 source)
+  list(GET parts 1 test)
+  set(name "${test}")
+  fixture(${name} LINKDEFAULT "src/mvdm-host/vdmredir/${source}.c"
+    "test/mvdm-host/vdmredir/${test}.c")
+  get_target_property(includes redirector_guest_copy_test_objects INCLUDE_DIRECTORIES)
+  set_property(TARGET ${name}_objects PROPERTY INCLUDE_DIRECTORIES "${includes}")
+  target_compile_options(${name}_objects PRIVATE /std:c11)
+  target_compile_definitions(${name}_objects PRIVATE WIN_32 VDMREDIR_DLL NTVDM)
+  if(source STREQUAL "vrinit")
+    set_property(TARGET ${name}_objects PROPERTY FIXTURE_LIBRARIES kernel32.lib)
+  endif()
+  list(APPEND redirector_lifecycle_targets ${name})
+endforeach()
+add_custom_target(redirector-lifecycle DEPENDS ${redirector_lifecycle_targets})
+
 # These historical profiles enabled /Gy only for the coordination unit.
 foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memory_test
     dem_file_lifecycle_test xms_startup_test)

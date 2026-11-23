@@ -12,6 +12,12 @@
 void VrGetUserName(void);
 void VrGetCDNames(void);
 void VrGetComputerName(void);
+void VrGetDomainName(void);
+void VrGetLogonServer(void);
+void VrNetGetDCName(void);
+void VrNetWkstaSetInfo(void);
+void VrReturnAssignMode(void);
+void VrSetAssignMode(void);
 static uint8_t memory[2048];
 static USHORT ax, bx, cx, di;
 static ULONG carry;
@@ -208,6 +214,22 @@ int main(void)
     check(memory[0x200] == 0x93 && memory[0x201] == 0xfa &&
         memory[0x202] == 0 && memory[0x203] == 0xa5 && freed == 2,
         "actual CD DBCS output includes terminating byte");
+    {
+        void (*unsupported[])(void) = {VrGetDomainName, VrGetLogonServer,
+            VrNetGetDCName, VrNetWkstaSetInfo};
+        unsigned i;
+        for (i = 0; i < sizeof(unsupported)/sizeof(unsupported[0]); ++i) {
+            ax = 0; carry = 0;
+            unsupported[i]();
+            check(ax == ERROR_NOT_SUPPORTED && carry == 1,
+                "original local unsupported API status");
+        }
+        ax = 0x2468; carry = 1;
+        VrReturnAssignMode();
+        check(ax == 0x2468 && carry == 1, "original return assign mode preserves registers");
+        VrSetAssignMode();
+        check(ax == 0x2468 && carry == 1, "original set assign mode preserves registers");
+    }
     session_guest_memory_end(&s);
     check(session_thread_unbind(&s) && session_dispose(&s), "session cleanup");
     printf("assertions=%u failures=%u\n", assertions, failures);

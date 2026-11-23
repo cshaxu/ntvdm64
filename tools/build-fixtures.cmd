@@ -9,6 +9,7 @@ for %%I in (guest-memory redirector-async guest-location wow-task-frame wow-call
 for %%I in (guest-probes guest-redir guest-video-int10 guest-video-direct guest-video-graphics guest-video-handshake guest-system guest-keymouse guest-bios guest-support guest-disks guest-comms guest-comms-medium guest-dem guest-command guest-vdd command-tools) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="memory-profiles" set "SELECTED=1"
 if "%TARGET%"=="system-fixtures" set "SELECTED=1"
+if "%TARGET%"=="redirector-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="observation-tools" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" if not "%~1"=="x86" exit /b 2
@@ -16,6 +17,10 @@ if "%TARGET%"=="command-initialization" set "SELECTED=1"
 if "%TARGET%"=="command-initialization" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="dem-declarations" set "SELECTED=1"
 if "%TARGET%"=="dem-declarations" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="command-redirection" set "SELECTED=1"
+if "%TARGET%"=="command-redirection" if not "%~1"=="x86" exit /b 2
+for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="suballoc-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="suballoc-lifecycle" if not "%~1"=="x86" exit /b 2
 if not defined SELECTED exit /b 2
@@ -31,6 +36,8 @@ if errorlevel 1 exit /b %errorlevel%
 if "%TARGET%"=="oem-tests" goto worker
 if "%TARGET%"=="command-initialization" goto worker
 if "%TARGET%"=="dem-declarations" goto worker
+if "%TARGET%"=="command-redirection" goto worker
+for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" goto worker
 cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" --target %TARGET%

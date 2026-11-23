@@ -1,0 +1,47 @@
+{
+  "exit": 0,
+  "standaloneCases": [
+    {
+      "name": "t290_s3_vrmisc_fixture",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "0C864618B603E37F66EA1E5B1B216C8CE411E4BAEAAF8B310B348240990ADF9E",
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "t290_s3_vrinit_failure_fixture",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "17D61863B5C76E1C67E413DBBC5C25A9C4FE30EC659A56BF09C684575CFC0649",
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "t290_s3_vrmisc_fixture",
+      "architecture": "x64",
+      "exit": 0,
+      "sha256": "E3D275610C4013A646F6BBE6E0F63B788BCE24C93CC9699EB1752CD634974EED",
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "t290_s3_vrinit_failure_fixture",
+      "architecture": "x64",
+      "exit": 0,
+      "sha256": "DA3CB5132DCBBCC79005AEF4872FC163D8CCA8CE220D132E44BE03D72DDE80FA",
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "command-redirection-fixture",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "A158186CA72D08C0D06E201422299D5FB3E8D565933126B73F549EA7E4C8DBDB",
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "capacityAssertions": 14,
+  "providerAssertions": 24
+}

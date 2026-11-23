@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 redirector lifecycle](evidence/t484-s3-redirector-lifecycle.md) records
+four producer migrations, retired matrix entries and the unified runtime checks.
+
 [T484 S3 ABI cleanup](evidence/t484-s3-abi-cleanup.md) records seven generator
 dispositions, native declaration coverage and current VDM control tests.
 

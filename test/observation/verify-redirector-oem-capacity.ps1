@@ -9,15 +9,13 @@ if (!$out.StartsWith(([IO.Path]::GetFullPath((Join-Path $root 'build')) + '\'),
 if (Test-Path -LiteralPath $out) { throw 'Use fresh evidence directory.' }
 New-Item -ItemType Directory -Path $out | Out-Null
 $cache=Join-Path $root $BuildCache
-$wrapper=Join-Path $cache 'msvc-x86.cmd'
-if(!(Test-Path $wrapper)){throw 'Configure the canonical worker build first'}
-& $wrapper cmake -S "$root/tools/build/worker" -B $cache 2>&1 |
-    Tee-Object (Join-Path $out 'build.txt')
-if($LASTEXITCODE){throw 'Worker configure failed'}
-$target=if($OriginalProviders){'image_redirector_netapi_provider_test_exe'}else{'image_redirector_oem_capacity_test_exe'}
+if ([IO.Path]::GetFullPath($cache) -ne [IO.Path]::GetFullPath((Join-Path $root 'build/.ninja/msvc-x86-release/worker'))) {
+    throw 'Use the canonical worker build cache.'
+}
+$target=if($OriginalProviders){'redirector-providers'}else{'redirector-capacity'}
 $image=if($OriginalProviders){'redirector-netapi-provider-test.exe'}else{'redirector-oem-capacity-test.exe'}
-& $wrapper cmake --build $cache --target $target 2>&1 |
-    Tee-Object (Join-Path $out 'build.txt') -Append
+& "$root/tools/build-fixtures.cmd" x86 $target 2>&1 |
+    Tee-Object (Join-Path $out 'build.txt')
 if($LASTEXITCODE){throw 'Redirector fixture build failed'}
 $exe=Join-Path $out $image
 Copy-Item (Join-Path $cache $image) $exe
@@ -30,7 +28,9 @@ $inputs=@($selected|Where-Object {
 }|ForEach-Object path)
 if ($OriginalProviders) {
     $map = Get-Content -LiteralPath "$exe.map" -Raw
-    foreach ($symbol in @('VrGetUserName','VrGetCDNames','VrGetComputerName')) {
+    foreach ($symbol in @('VrGetUserName','VrGetCDNames','VrGetComputerName',
+        'VrGetDomainName','VrGetLogonServer','VrNetGetDCName','VrNetWkstaSetInfo',
+        'VrReturnAssignMode','VrSetAssignMode')) {
         if ($map -notmatch "(?m)^.*_$symbol\s+.*\bvrnetapi\.obj\s*$") {
             throw "Original entrypoint not bound to this run's compiled unit: $symbol"
         }
@@ -53,7 +53,7 @@ try {
         })
     } | ConvertTo-Json -Depth 4 | Set-Content (Join-Path $out 'result.json')
     Write-Output $text
-    $count = if ($OriginalProviders) { 18 } else { 14 }
+    $count = if ($OriginalProviders) { 24 } else { 14 }
     if ($p.ExitCode -ne 0 -or $text -notmatch "assertions=$count failures=0") {
         throw 'OEM/CD assertions failed.'
     }

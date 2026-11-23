@@ -59,6 +59,10 @@ integration helper. Select the architecture matching the frontend being observed
 using the actual x86 product objects.
 `dem-declarations` compiles the six original DOS/DEM layout assertions and
 disk-space declaration against the actual x86 DEM profile; it is compile-only.
+`redirector-lifecycle` builds the DOS-process cleanup and failed-init fixtures
+on x86/x64. `command-redirection`, `redirector-capacity` and `redirector-providers`
+use the x86 worker graph. `test/observation/verify-redirector-family.ps1` runs
+these current cases; it does not claim the retired disabled-ingress matrix.
 Run the PIF caller in a short working directory; its separate
 `--expect-long-startdir` case verifies the original64-byte rejection boundary.
 
