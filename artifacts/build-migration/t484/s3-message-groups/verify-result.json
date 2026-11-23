@@ -1,0 +1,44 @@
+{
+  "exit": 0,
+  "end": "2026-11-23T19:49:04.7751873+00:00",
+  "groups": [
+    {
+      "name": "external",
+      "result": {
+        "end": "2026-11-23T19:47:42.1444748Z",
+        "crossWorkers": false,
+        "start": "2026-11-23T19:46:59.0874315Z",
+        "buildOnly": true,
+        "pendingSend": false,
+        "passed": true,
+        "cases": 0
+      }
+    },
+    {
+      "name": "cross",
+      "result": {
+        "end": "2026-11-23T19:48:23.1979511Z",
+        "crossWorkers": true,
+        "start": "2026-11-23T19:47:42.2015548Z",
+        "buildOnly": true,
+        "pendingSend": false,
+        "passed": true,
+        "cases": 0
+      }
+    },
+    {
+      "name": "pending",
+      "result": {
+        "end": "2026-11-23T19:49:04.7566729Z",
+        "crossWorkers": false,
+        "start": "2026-11-23T19:48:23.2369371Z",
+        "buildOnly": true,
+        "pendingSend": true,
+        "passed": true,
+        "cases": 0
+      }
+    }
+  ],
+  "start": "2026-11-23T19:46:58.5101069+00:00",
+  "pid": 25084
+}

@@ -39,6 +39,7 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="wow-edit-contracts" set "SELECTED=1"
 if "%TARGET%"=="wow-edit-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-clipboard-probes" set "SELECTED=1"
@@ -131,6 +132,7 @@ if "%TARGET%"=="window-contracts" call "%~dp0build\bootstrap.cmd"
 if "%TARGET%"=="window-contracts" if errorlevel 1 exit /b %errorlevel%
 call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
+for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%TARGET%"=="%%I" goto message_native
 if "%TARGET%"=="oem-tests" goto worker
 if "%TARGET%"=="wow-callback-cost" goto wowcallback
 if "%TARGET%"=="pic-bios-contracts" goto worker
@@ -199,4 +201,13 @@ if "%TARGET%"=="frame-codepage" exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x64-release\frontend" --target native-diagnostics
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x64-release\service" --target native-diagnostics
+exit /b %errorlevel%
+:message_native
+pushd "%NTVDM_ROOT%"
+if errorlevel 1 exit /b %errorlevel%
+cmake --preset msvc-%~1-release-ccache
+set "result=%errorlevel%"
+popd
+if not "%result%"=="0" exit /b %result%
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-%~1-release" --target %TARGET% --parallel 8
 exit /b %errorlevel%

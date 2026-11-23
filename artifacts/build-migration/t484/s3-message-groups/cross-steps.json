@@ -1,0 +1,36 @@
+[
+  {
+    "name": "build-x86",
+    "pid": 23104,
+    "start": "2026-11-23T19:47:42.2055102Z",
+    "file": "C:\\WINDOWS\\system32\\cmd.exe",
+    "arguments": [
+      "/d",
+      "/s",
+      "/c",
+      "\"\"O:\\repos.hobby\\ntvdm64/tools/build-fixtures.cmd\" x86 wow-message-cross\""
+    ],
+    "deadlineSeconds": 1200,
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\cross/build-x86.stdout.log",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\cross/build-x86.stderr.log",
+    "exit": 0,
+    "end": "2026-11-23T19:48:10.3652725Z"
+  },
+  {
+    "name": "build-x64",
+    "pid": 30216,
+    "start": "2026-11-23T19:48:10.3726917Z",
+    "file": "C:\\WINDOWS\\system32\\cmd.exe",
+    "arguments": [
+      "/d",
+      "/s",
+      "/c",
+      "\"\"O:\\repos.hobby\\ntvdm64/tools/build-fixtures.cmd\" x64 wow-message-cross\""
+    ],
+    "deadlineSeconds": 1200,
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\cross/build-x64.stdout.log",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\cross/build-x64.stderr.log",
+    "exit": 0,
+    "end": "2026-11-23T19:48:23.1948017Z"
+  }
+]

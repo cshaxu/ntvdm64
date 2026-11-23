@@ -13,8 +13,6 @@ if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIg
 $null=New-Item -ItemType Directory $root
 Set-Location $repo
 $pwsh=(Get-Command pwsh.exe).Source
-$cmake=(Get-Command cmake.exe).Source
-$vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $steps=[Collections.Generic.List[object]]::new()
 $started=[DateTime]::UtcNow
 function Run-Owned([string]$Name,[string]$File,[string[]]$Arguments,[int]$Seconds,[int]$ExpectedExit=0){
@@ -43,10 +41,8 @@ function Run-Owned([string]$Name,[string]$File,[string[]]$Arguments,[int]$Second
 }
 try{
  foreach($arch in @('x86','x64')){
-  $targets=if($PendingSend){if($arch -eq 'x86'){'wow_pending_native_control wow_message_pending_host wow_message_nonblock_host wow_message_host_structured'}else{'wow_pending_native_control wow_message_observer'}}elseif($CrossWorkers){if($arch -eq 'x86'){'wow_message_cross_host wow_message_host_structured'}else{'wow_cross_worker_probe wow_message_observer'}}else{if($arch -eq 'x86'){'wow_message_external_peer wow_message_external_host wow_message_host_structured'}else{'wow_message_external_peer wow_message_observer'}}
-  $command="@echo off`r`ncall `"$vs`" -arch=$arch -host_arch=x64 >nul`r`nif errorlevel 1 exit /b %errorlevel%`r`n`"$cmake`" --preset msvc-$arch-release-ccache`r`nif errorlevel 1 exit /b %errorlevel%`r`n`"$cmake`" --build --preset msvc-$arch-release-ccache --target $targets --parallel 8`r`nexit /b %errorlevel%`r`n"
-  [IO.File]::WriteAllText("$root/$arch.cmd",$command)
-  Run-Owned "build-$arch" cmd.exe @('/d','/c',"`"$root/$arch.cmd`"") 1200
+  $target=if($PendingSend){'wow-message-pending'}elseif($CrossWorkers){'wow-message-cross'}else{'wow-message-external'}
+  Run-Owned "build-$arch" $env:ComSpec @('/d','/s','/c',('""'+$repo+'/tools/build-fixtures.cmd" '+$arch+' '+$target+'"')) 1200
  }
  if($PendingSend){foreach($arch in @('x86','x64')){
   $control=Join-Path $repo "build/.ninja/msvc-$arch-release/message-probes/MSGDEATH.exe"

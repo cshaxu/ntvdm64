@@ -1,0 +1,36 @@
+[
+  {
+    "name": "build-x86",
+    "pid": 15224,
+    "start": "2026-11-23T19:46:59.1376612Z",
+    "file": "C:\\WINDOWS\\system32\\cmd.exe",
+    "arguments": [
+      "/d",
+      "/s",
+      "/c",
+      "\"\"O:\\repos.hobby\\ntvdm64/tools/build-fixtures.cmd\" x86 wow-message-external\""
+    ],
+    "deadlineSeconds": 1200,
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\external/build-x86.stdout.log",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\external/build-x86.stderr.log",
+    "exit": 0,
+    "end": "2026-11-23T19:47:28.4647134Z"
+  },
+  {
+    "name": "build-x64",
+    "pid": 17296,
+    "start": "2026-11-23T19:47:28.5166243Z",
+    "file": "C:\\WINDOWS\\system32\\cmd.exe",
+    "arguments": [
+      "/d",
+      "/s",
+      "/c",
+      "\"\"O:\\repos.hobby\\ntvdm64/tools/build-fixtures.cmd\" x64 wow-message-external\""
+    ],
+    "deadlineSeconds": 1200,
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\external/build-x64.stdout.log",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\external/build-x64.stderr.log",
+    "exit": 0,
+    "end": "2026-11-23T19:47:42.1373104Z"
+  }
+]

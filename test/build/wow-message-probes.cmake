@@ -108,3 +108,17 @@ target_compile_options(wow_message_observer PRIVATE /O2 /std:c11 /W4 /WX /wd4201
 target_link_libraries(wow_message_observer PRIVATE user32 dbghelp)
 set_target_properties(wow_message_observer PROPERTIES
   OUTPUT_NAME console-startup-observer RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/message-probes")
+
+# Whole native peer groups used by the external-message integration runner.
+if(NTVDM_ARCHITECTURE STREQUAL "x86")
+  add_custom_target(wow-message-external DEPENDS wow_message_external_peer
+    wow_message_external_host wow_message_host_structured)
+  add_custom_target(wow-message-cross DEPENDS wow_message_cross_host
+    wow_message_host_structured)
+  add_custom_target(wow-message-pending DEPENDS wow_pending_native_control
+    wow_message_pending_host wow_message_nonblock_host wow_message_host_structured)
+else()
+  add_custom_target(wow-message-external DEPENDS wow_message_external_peer wow_message_observer)
+  add_custom_target(wow-message-cross DEPENDS wow_cross_worker_probe wow_message_observer)
+  add_custom_target(wow-message-pending DEPENDS wow_pending_native_control wow_message_observer)
+endif()

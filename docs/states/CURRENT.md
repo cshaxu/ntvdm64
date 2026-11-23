@@ -90,7 +90,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P52 edit contracts](../etc/evidence/t484-s3-edit-contracts.md) | Native targets link current production wmsgem;24 tabstop and6 wordbreak cases pass;no interpreted producer remains in B0057. |
 
-Each batch passed its cached full host build. P52 checks11 raw host inputs
+| [P53 native message groups](../etc/evidence/t484-s3-message-groups.md) | CMD owns external/cross/pending build selection;both architectures verified;runtime manifest/staging remains open. |
+
+Each batch passed its cached full host build. P53 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

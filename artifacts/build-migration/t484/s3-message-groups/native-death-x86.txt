@@ -1,0 +1,2 @@
+case=same bits=32 status=1 error=0 result=447A007C destroyed=1
+case=cross bits=32 status=1 error=0 result=447A007C destroyed=1

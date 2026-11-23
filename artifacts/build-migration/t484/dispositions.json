@@ -289,5 +289,10 @@
     "status": "migrated-delivered",
     "reason": "Native target links actual production original_wmsgem;30 unchanged assertions pass;standalone runner has no producer",
     "evidence": "docs/etc/evidence/t484-s3-edit-contracts.md"
+  },
+  "test/integration/verify-wow-external-native.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Native message groups replace generated CMD;runtime coherent13 manifest,media staging and shared message helper chain remain",
+    "evidence": "docs/etc/evidence/t484-s3-message-groups.md"
   }
 }

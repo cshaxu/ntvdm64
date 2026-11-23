@@ -1,0 +1,60 @@
+[
+  {
+    "name": "build-x86",
+    "pid": 29680,
+    "start": "2026-11-23T19:48:23.2410591Z",
+    "file": "C:\\WINDOWS\\system32\\cmd.exe",
+    "arguments": [
+      "/d",
+      "/s",
+      "/c",
+      "\"\"O:\\repos.hobby\\ntvdm64/tools/build-fixtures.cmd\" x86 wow-message-pending\""
+    ],
+    "deadlineSeconds": 1200,
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\pending/build-x86.stdout.log",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\pending/build-x86.stderr.log",
+    "exit": 0,
+    "end": "2026-11-23T19:48:51.0346280Z"
+  },
+  {
+    "name": "build-x64",
+    "pid": 21332,
+    "start": "2026-11-23T19:48:51.0460683Z",
+    "file": "C:\\WINDOWS\\system32\\cmd.exe",
+    "arguments": [
+      "/d",
+      "/s",
+      "/c",
+      "\"\"O:\\repos.hobby\\ntvdm64/tools/build-fixtures.cmd\" x64 wow-message-pending\""
+    ],
+    "deadlineSeconds": 1200,
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\pending/build-x64.stdout.log",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\pending/build-x64.stderr.log",
+    "exit": 0,
+    "end": "2026-11-23T19:49:04.1467007Z"
+  },
+  {
+    "name": "native-death-x86",
+    "pid": 10364,
+    "start": "2026-11-23T19:49:04.2562166Z",
+    "file": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\message-probes\\MSGDEATH.exe",
+    "arguments": [],
+    "deadlineSeconds": 30,
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\pending/native-death-x86.stdout.log",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\pending/native-death-x86.stderr.log",
+    "exit": 0,
+    "end": "2026-11-23T19:49:04.4734848Z"
+  },
+  {
+    "name": "native-death-x64",
+    "pid": 6976,
+    "start": "2026-11-23T19:49:04.5576159Z",
+    "file": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\message-probes\\MSGDEATH.exe",
+    "arguments": [],
+    "deadlineSeconds": 30,
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\pending/native-death-x64.stdout.log",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message-groups\\pending/native-death-x64.stderr.log",
+    "exit": 0,
+    "end": "2026-11-23T19:49:04.7520318Z"
+  }
+]

@@ -1,30 +1,29 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "edafa6e51575c0fc4e40b0c20f6528b8918f71f3",
+  "head": "0ac543493102b15744aa2987149ee846dcf8ad94",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-edit-tabstop.ps1",
+    " M test/build/wow-message-probes.cmake",
+    " M test/integration/verify-wow-external-native.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-edit/",
-    "?? docs/etc/evidence/t484-s3-edit-contracts.md",
-    "?? tools/build/wow32/edit-tests.cmake"
+    "?? artifacts/build-migration/t484/s3-message-groups/",
+    "?? docs/etc/evidence/t484-s3-message-groups.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 60,
-    "unchanged": 182,
+    "changed": 62,
+    "unchanged": 180,
     "removed": 113
   },
   "disposition_counts": {
     "migrated-delivered": 15,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
-    "pending-producer-migration": 43,
+    "pending-producer-migration": 44,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 180
+    "requires-disposition-reconciliation": 179
   },
   "existing_interpreted_candidates_with_command_hits": 202,
   "files": [
@@ -404,8 +403,8 @@
       "id": "B0022",
       "file": "test/build/wow-message-probes.cmake",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "e01196d72cb723ab7e4db0b354a66839d273bfd9e389be2540564f01539e75cb",
+      "state": "changed",
+      "current_sha256": "38f004f851ada55e8750991a4783b08fdba4a7a39350dad85095954dd3d3bb5c",
       "revisions": [],
       "evidence": [],
       "completion": "retained-native-declarative",
@@ -1023,8 +1022,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "8edacb1a513639b0da821962990c07fcbabe1cdff85bda4cc0e43b7288e2700b",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0ac543493102b15744aa2987149ee846dcf8ad94"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-edit-contracts.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -1036,12 +1039,16 @@
       "id": "B0058",
       "file": "test/integration/verify-wow-external-native.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "a358cba0a55a817844d7ca6d097617e07f585a5b5cecd1d6a7232107777b32be",
+      "state": "changed",
+      "current_sha256": "90bed54cbd3fcfeaec58f27e0f3b33a4df88bd87028129a200dab74036766fb9",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Native message groups replace generated CMD;runtime coherent13 manifest,media staging and shared message helper chain remain",
+        "evidence": "docs/etc/evidence/t484-s3-message-groups.md"
+      }
     },
     {
       "id": "B0059",
@@ -4877,6 +4884,12 @@
     }
   ],
   "commits": {
+    "0ac543493102b15744aa2987149ee846dcf8ad94": {
+      "subject": "T484 S3 P52 migrate edit contract producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-edit-contracts.md"
+      ]
+    },
     "edafa6e51575c0fc4e40b0c20f6528b8918f71f3": {
       "subject": "T484 S3 P51 migrate Clipboard DC and dialog producers",
       "evidence": [
@@ -5911,67 +5924,59 @@
           "text": "$pwsh=(Get-Command pwsh.exe).Source"
         },
         {
-          "line": 16,
-          "text": "$cmake=(Get-Command cmake.exe).Source"
-        },
-        {
-          "line": 47,
-          "text": "$command=\"@echo off`r`ncall `\"$vs`\" -arch=$arch -host_arch=x64 >nul`r`nif errorlevel 1 exit /b %errorlevel%`r`n`\"$cmake`\" --preset msvc-$arch-release-ccache`r`nif errorlevel 1 exit /b %errorlevel%`r`n`\"$cmake`\" --build --preset msvc-$arch-release-ccache --target $targets --parallel 8`r`nexit /b %errorlevel%`r`n\""
-        },
-        {
-          "line": 52,
+          "line": 48,
           "text": "$control=Join-Path $repo \"build/.ninja/msvc-$arch-release/message-probes/MSGDEATH.exe\""
         },
         {
-          "line": 69,
+          "line": 65,
           "text": "# Windows PowerShell 5.1 yields one array object for a top-level JSON"
         },
         {
-          "line": 70,
+          "line": 66,
           "text": "# array, while PowerShell 7 enumerates it.  Flatten only that parser"
         },
         {
-          "line": 96,
+          "line": 92,
           "text": "$observer=Join-Path $repo 'build/.ninja/msvc-x64-release/message-probes/console-startup-observer.exe'"
         },
         {
-          "line": 97,
+          "line": 93,
           "text": "$driver=Join-Path $repo 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'"
         },
         {
-          "line": 98,
+          "line": 94,
           "text": "$localHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOSTLOCAL.dll'"
         },
         {
-          "line": 99,
+          "line": 95,
           "text": "$externalHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOST.dll'"
         },
         {
-          "line": 100,
+          "line": 96,
           "text": "$crossHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOSTCROSS.dll'"
         },
         {
-          "line": 101,
+          "line": 97,
           "text": "$coordinator=Join-Path $repo 'build/.ninja/msvc-x64-release/message-probes/MSGXHOST.exe'"
         },
         {
-          "line": 102,
+          "line": 98,
           "text": "$pendingHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOST_pending.dll'"
         },
         {
-          "line": 110,
+          "line": 106,
           "text": "elseif($kind -ne 'local'){$peer=Join-Path $repo \"build/.ninja/msvc-$kind-release/message-probes/MSGPEER.exe\";$arguments+=@('-ExternalNativePeer',\"`\"$peer`\"\")}"
         },
         {
-          "line": 111,
+          "line": 107,
           "text": "Run-Owned $name $pwsh $arguments 120"
         },
         {
-          "line": 117,
+          "line": 113,
           "text": "$badHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOST_nonblock.dll'"
         },
         {
-          "line": 119,
+          "line": 115,
           "text": "Run-Owned 'nonblock-negative' $pwsh $arguments 120 1"
         }
       ]

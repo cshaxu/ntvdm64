@@ -1592,3 +1592,5 @@ post-publication targeted checks.
 - [T484 S3 Clipboard/DC/dialog probes](evidence/t484-s3-clipboard-probes.md).
 
 - [T484 S3 edit contracts](evidence/t484-s3-edit-contracts.md).
+
+- [T484 S3 native message groups](evidence/t484-s3-message-groups.md).
