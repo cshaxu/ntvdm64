@@ -126,3 +126,8 @@ foreach(spec IN ITEMS "win101-guard|win101_install_write_guard|win101_guard_entr
 endforeach()
 get_property(images GLOBAL PROPERTY diagnostic_images)
 add_custom_target(worker-diagnostics DEPENDS ${images})
+
+add_custom_target(win101-control-fixtures DEPENDS
+  "${CMAKE_BINARY_DIR}/frontend-request-client-test.exe"
+  "${CMAKE_BINARY_DIR}/broker-frontend-bootstrap-test.exe"
+  "${CMAKE_BINARY_DIR}/native-gui-startup-probe.exe")

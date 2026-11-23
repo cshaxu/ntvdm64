@@ -1,0 +1,11 @@
+native submission scenario=0 error=0 expected=0
+native submission scenario=1 error=5 expected=5
+native submission scenario=2 error=1306 expected=1306
+native submission scenario=3 error=13 expected=13
+native submission scenario=4 error=109 expected=109
+native submission scenario=5 error=1722 expected=1722
+PASS final presentation case=6 status=0 target=37
+PASS final presentation case=7 status=29 target=37
+PASS final presentation case=8 status=109 target=37
+PASS broker failure returned with cleared result, no dead-channel read
+PASS client-only RPC submission, authority stripping, real exit 37, I/O barrier and errors; no parent-resume entry

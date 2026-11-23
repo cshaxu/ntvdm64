@@ -1,0 +1,17 @@
+[
+  {
+    "time": 639310728803034626,
+    "sha256": "8D661192B24D65C390D4C99D044EA19621E0A1A3F2196AC35BE5AF13EEAE16F6",
+    "name": "frontend-request-client-test.exe"
+  },
+  {
+    "time": 639310728803412034,
+    "sha256": "6AD08A2DA0730E08274FF22C33E80C3043595471D5C7F378AA8974C7173778E0",
+    "name": "broker-frontend-bootstrap-test.exe"
+  },
+  {
+    "time": 639310728802245774,
+    "sha256": "5E23EE22F6DCD8B42032009F7933FD35BD1A6065DD47321083DC17951C15650C",
+    "name": "native-gui-startup-probe.exe"
+  }
+]

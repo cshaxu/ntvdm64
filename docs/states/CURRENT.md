@@ -114,7 +114,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P81 DOS identity producers](../etc/evidence/t484-s3-dos-identity.md) | Native observer replacement and9 byte-identical guest fixtures; historical runtime staging remains pending. |
 
-Implementation batches through P81 passed their cached full host build. P73 checks11 raw host inputs
+| [P82 Console/control producers](../etc/evidence/t484-s3-con-trace.md) | Six identical preparation outputs;three controls cached and real client exit/error test passes; B0110 staging pending, B0111 complete. |
+
+Implementation batches through P82 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

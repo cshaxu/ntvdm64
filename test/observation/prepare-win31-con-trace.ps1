@@ -7,8 +7,10 @@ $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned output required'}
 New-Item -ItemType Directory -Path $root|Out-Null
-& (Get-Command nasm.exe).Source -f bin "$PSScriptRoot/win31_con_trace.asm" -o "$root/CONTRACE.COM" -l "$root/CONTRACE.lst"
+& "$repo/tools/build-fixtures.cmd" x86 win31-con-trace
 if($LASTEXITCODE){throw 'Independent guest probe assembly failed'}
+$native=Join-Path $repo 'build/.ninja/fixtures-x86/guest-probes/win31-con-trace'
+foreach($name in 'CONTRACE.COM','CONTRACE.lst'){Copy-Item "$native/$name" "$root/$name"}
 $tests=Join-Path $PackageRoot 'tests'
 [IO.File]::WriteAllText("$root/T436.BAT","@echo off`r`n$tests\CONTRACE.COM`r`n$WindowsRoot\WIN.COM /3`r`nif errorlevel 1 echo WIN_FAILED`r`n$tests\CONTRACE.COM /D`r`necho TRACE_END`r`n",[Text.Encoding]::ASCII)
 [IO.File]::WriteAllText("$root/T436BASE.BAT","@echo off`r`n$tests\CONTRACE.COM`r`nver`r`n$tests\CONTRACE.COM /D`r`necho TRACE_END`r`n",[Text.Encoding]::ASCII)

@@ -1651,3 +1651,5 @@ post-publication targeted checks.
 - [T484 S3 selected CCPU preprocessing](evidence/t484-s3-ccpu-headers.md).
 
 - [T484 S3 DOS identity producers](evidence/t484-s3-dos-identity.md).
+
+- [T484 S3 Console trace/control producers](evidence/t484-s3-con-trace.md).

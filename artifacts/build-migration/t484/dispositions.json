@@ -465,5 +465,15 @@
     "status": "migrated-delivered",
     "reason": "P81 replaces obsolete Ninja scraping/Python assembly composition with native diagnostic archive substitution and CMD/CMake/NASM identity fixtures; nine binary comparisons and cache checks. Integration staging remains a separate pending row.",
     "evidence": "docs/etc/evidence/t484-s3-dos-identity.md"
+  },
+  "test/observation/prepare-win31-con-trace.ps1": {
+    "reason": "P82 moves NASM to native COM/listing target; all six output files match old preparation. PIF and batch configuration still interpreted, pending S4.",
+    "status": "pending-producer-migration",
+    "evidence": "docs/etc/evidence/t484-s3-con-trace.md"
+  },
+  "test/observation/rebuild-win101-control-fixtures.ps1": {
+    "reason": "P82 delegates three existing native worker targets to CMD; public wrapper build/cache, x64 rejection and real frontend client test pass.",
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-con-trace.md"
   }
 }

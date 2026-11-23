@@ -1,36 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "b9bf7a44ff747d89c6bc244e42f45f57028aaaec",
+  "head": "b5d6368800365cf5920cb3eb09bc705dde282393",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-dos-identity-pair.ps1",
-    " M test/observation/dos-identity-probe.md",
-    " D test/observation/prepare-dos-identity-probe.py",
+    " M test/observation/prepare-win31-con-trace.ps1",
+    " M test/observation/rebuild-win101-control-fixtures.ps1",
     " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/guest-probes.cmake",
     " M tools/build/worker/diagnostic-tests.cmake",
-    "?? artifacts/build-migration/t484/s3-dos-identity/",
-    "?? docs/etc/evidence/t484-s3-dos-identity.md",
-    "?? tools/build-dos-identity.cmd",
-    "?? tools/build/dos-identity/"
+    "?? artifacts/build-migration/t484/s3-con-trace/",
+    "?? docs/etc/evidence/t484-s3-con-trace.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 89,
-    "unchanged": 147,
+    "changed": 91,
+    "unchanged": 145,
     "removed": 119
   },
   "disposition_counts": {
     "migrated-delivered": 34,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 118,
-    "pending-producer-migration": 52,
+    "retired-with-delivery-evidence": 119,
+    "pending-producer-migration": 53,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 146,
+    "requires-disposition-reconciliation": 144,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 186,
+  "existing_interpreted_candidates_with_command_hits": 185,
   "files": [
     {
       "id": "B0001",
@@ -586,8 +584,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "fcf2defbb0301709c74a55bab7a9abbc3cefef4d775fa096d63395d27b9ab601",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "b5d6368800365cf5920cb3eb09bc705dde282393"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-dos-identity.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -1982,9 +1984,13 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
-      "completion": "migrated-delivered",
+      "revisions": [
+        "b5d6368800365cf5920cb3eb09bc705dde282393"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-dos-identity.md"
+      ],
+      "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "migrated-delivered",
         "reason": "P81 replaces obsolete Ninja scraping/Python assembly composition with native diagnostic archive substitution and CMD/CMake/NASM identity fixtures; nine binary comparisons and cache checks. Integration staging remains a separate pending row.",
@@ -1995,23 +2001,31 @@
       "id": "B0110",
       "file": "test/observation/prepare-win31-con-trace.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f03ffae7fd5ff84f3f963db5776f71e650a79f47348825c6c7eee61f202b9af2",
+      "state": "changed",
+      "current_sha256": "6560d898def506c258cf3b864215f076d11d41f68e81ae25bc94cc35168e6c6f",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "reason": "P82 moves NASM to native COM/listing target; all six output files match old preparation. PIF and batch configuration still interpreted, pending S4.",
+        "status": "pending-producer-migration",
+        "evidence": "docs/etc/evidence/t484-s3-con-trace.md"
+      }
     },
     {
       "id": "B0111",
       "file": "test/observation/rebuild-win101-control-fixtures.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "db20c0ffd9a65e48366f88604bfc3fef49e4d1cee49c39a6edbe8b65d943c61e",
+      "state": "changed",
+      "current_sha256": "9ff618906bbc9326bd0b2f5dd94712d7b93fe632c7eeee695c2373e2d1bbdfa3",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "P82 delegates three existing native worker targets to CMD; public wrapper build/cache, x64 rejection and real frontend client test pass.",
+        "status": "migrated-delivered",
+        "evidence": "docs/etc/evidence/t484-s3-con-trace.md"
+      }
     },
     {
       "id": "B0112",
@@ -5174,6 +5188,12 @@
     }
   ],
   "commits": {
+    "b5d6368800365cf5920cb3eb09bc705dde282393": {
+      "subject": "T484 S3 P81 migrate DOS identity diagnostic producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-dos-identity.md"
+      ]
+    },
     "b9bf7a44ff747d89c6bc244e42f45f57028aaaec": {
       "subject": "T484 S3 P80 migrate selected CCPU preprocessing to native target",
       "evidence": [
@@ -6877,22 +6897,8 @@
       "file": "test/observation/prepare-win31-con-trace.ps1",
       "hits": [
         {
-          "line": 10,
-          "text": "& (Get-Command nasm.exe).Source -f bin \"$PSScriptRoot/win31_con_trace.asm\" -o \"$root/CONTRACE.COM\" -l \"$root/CONTRACE.lst\""
-        }
-      ]
-    },
-    {
-      "id": "B0111",
-      "file": "test/observation/rebuild-win101-control-fixtures.ps1",
-      "hits": [
-        {
-          "line": 8,
-          "text": "$ninja=(Get-Command ninja.exe -ErrorAction Stop).Source"
-        },
-        {
           "line": 12,
-          "text": "('\"'+$ninja+'\" frontend-request-client-test.exe broker-frontend-bootstrap-test.exe native-gui-startup-probe.exe'),"
+          "text": "$native=Join-Path $repo 'build/.ninja/fixtures-x86/guest-probes/win31-con-trace'"
         }
       ]
     },

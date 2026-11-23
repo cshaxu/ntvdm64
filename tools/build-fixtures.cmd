@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="wow-startup-failure" if not "%~2"=="wow-shell-exception" if not "%~2"=="wow-common-return" if not "%~2"=="ccpu-header-selection" if not "%~2"=="wow-message-transaction" if not "%~2"=="wow-attach-failure" if not "%~2"=="wow-missing-init" if not "%~2"=="wow-callback-abort" if not "%~2"=="media-owner" if not "%~2"=="command-redirection" if not "%~2"=="crt-contracts" if not "%~2"=="crt-missing" if not "%~2"=="crt-duplicate" if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
+if not "%~2"=="wow-startup-failure" if not "%~2"=="wow-shell-exception" if not "%~2"=="wow-common-return" if not "%~2"=="win101-control-fixtures" if not "%~2"=="ccpu-header-selection" if not "%~2"=="wow-message-transaction" if not "%~2"=="wow-attach-failure" if not "%~2"=="wow-missing-init" if not "%~2"=="wow-callback-abort" if not "%~2"=="media-owner" if not "%~2"=="command-redirection" if not "%~2"=="crt-contracts" if not "%~2"=="crt-missing" if not "%~2"=="crt-duplicate" if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
 set "MEDIA_OPTION=-DNTVDM_MEDIA_ORIGINAL_ROOT="
 if "%~2"=="media-owner" goto media_arguments
@@ -53,8 +53,8 @@ if "%TARGET%"=="wow-thunk-nls" set "SELECTED=1"
 if "%TARGET%"=="wow-thunk-nls" if not "%~1"=="x86" exit /b 2
 for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
-for %%I in (win31-matrix win31-dosonly) do if "%TARGET%"=="%%I" set "SELECTED=1"
-for %%I in (win31-matrix win31-dosonly) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
+for %%I in (win31-matrix win31-dosonly win31-con-trace) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (win31-matrix win31-dosonly win31-con-trace) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-page-cost-unit" set "SELECTED=1"
@@ -159,6 +159,7 @@ if "%TARGET%"=="suballoc-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="suballoc-lifecycle" if not "%~1"=="x86" exit /b 2
 for %%I in (window-render worker-primitives worker-primitives-high-resolution) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="ccpu-header-selection" if "%~1"=="x86" set "SELECTED=1"
+if "%TARGET%"=="win101-control-fixtures" if "%~1"=="x86" set "SELECTED=1"
 if not defined SELECTED exit /b 2
 if "%TARGET%"=="xms-mapped" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="xms-startup" if not "%~1"=="x86" exit /b 2
@@ -173,6 +174,7 @@ call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
 for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%TARGET%"=="%%I" goto message_native
 if "%TARGET%"=="ccpu-header-selection" goto worker_existing
+if "%TARGET%"=="win101-control-fixtures" goto worker_existing
 if "%TARGET%"=="oem-tests" goto worker
 if "%TARGET%"=="wow-callback-cost" goto wowcallback
 if "%TARGET%"=="wow-graph-cost" goto wowcallback
