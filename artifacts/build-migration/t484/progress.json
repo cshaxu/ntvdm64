@@ -1,33 +1,36 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "dbc8512be4ccf480220c33f81cfd8a095a7e6232",
+  "head": "b9bf7a44ff747d89c6bc244e42f45f57028aaaec",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/observe-ccpu-header-selection.ps1",
+    " M test/integration/verify-dos-identity-pair.ps1",
+    " M test/observation/dos-identity-probe.md",
+    " D test/observation/prepare-dos-identity-probe.py",
     " M tools/build-fixtures.cmd",
-    " M tools/build/worker/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-ccpu-headers/",
-    "?? docs/etc/evidence/t484-s3-ccpu-headers.md",
-    "?? tools/build/worker/cpu-preprocess.cmake"
+    " M tools/build/worker/diagnostic-tests.cmake",
+    "?? artifacts/build-migration/t484/s3-dos-identity/",
+    "?? docs/etc/evidence/t484-s3-dos-identity.md",
+    "?? tools/build-dos-identity.cmd",
+    "?? tools/build/dos-identity/"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 88,
-    "unchanged": 149,
-    "removed": 118
+    "changed": 89,
+    "unchanged": 147,
+    "removed": 119
   },
   "disposition_counts": {
-    "migrated-delivered": 33,
+    "migrated-delivered": 34,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 118,
     "pending-producer-migration": 52,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 147,
+    "requires-disposition-reconciliation": 146,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 187,
+  "existing_interpreted_candidates_with_command_hits": 186,
   "files": [
     {
       "id": "B0001",
@@ -581,14 +584,15 @@
       "id": "B0032",
       "file": "test/integration/verify-dos-identity-pair.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "d7a8bce4757f307dbfdfa155930fa9ff277b005d388610504b50040bc0ab0f7c",
+      "state": "changed",
+      "current_sha256": "fcf2defbb0301709c74a55bab7a9abbc3cefef4d775fa096d63395d27b9ab601",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+        "reason": "P81 migrates worker and three guest producers to CMD/native targets, repairs moved fixture/cleanup paths. Historical runtime package/observer, manifest stamping and staging still require S4; no new guest run claimed.",
+        "evidence": "docs/etc/evidence/t484-s3-dos-identity.md"
       }
     },
     {
@@ -1959,8 +1963,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "498f7b0b8fb391e4a104672a938b31dec6cd28ad2a0573ddacd1df0933c97b06",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "b9bf7a44ff747d89c6bc244e42f45f57028aaaec"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-ccpu-headers.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -1972,12 +1980,16 @@
       "id": "B0109",
       "file": "test/observation/prepare-dos-identity-probe.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "ebc1e026119d21e045b3f67ce2acc35ca9f4352ee70f84964c0472140b952fc5",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "P81 replaces obsolete Ninja scraping/Python assembly composition with native diagnostic archive substitution and CMD/CMake/NASM identity fixtures; nine binary comparisons and cache checks. Integration staging remains a separate pending row.",
+        "evidence": "docs/etc/evidence/t484-s3-dos-identity.md"
+      }
     },
     {
       "id": "B0110",
@@ -5162,6 +5174,12 @@
     }
   ],
   "commits": {
+    "b9bf7a44ff747d89c6bc244e42f45f57028aaaec": {
+      "subject": "T484 S3 P80 migrate selected CCPU preprocessing to native target",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-ccpu-headers.md"
+      ]
+    },
     "dbc8512be4ccf480220c33f81cfd8a095a7e6232": {
       "subject": "T484 S3 P79 migrate common return diagnostic producer",
       "evidence": [
@@ -6065,15 +6083,11 @@
           "text": "$pwsh=(Get-Process -Id $PID).Path"
         },
         {
-          "line": 30,
-          "text": "& nasm -f bin \"-DW31_INSTALL='$dest'\" \"-DROLE='$role'\" \"$PSScriptRoot/dos_identity_child.asm\" -o \"$dest/$role.COM\""
+          "line": 12,
+          "text": "$diagnostic=Join-Path $repo 'build/.ninja/msvc-x86-release/worker/diagnostics/dos-identity'"
         },
         {
-          "line": 41,
-          "text": "& nasm -f bin \"-DW31_INSTALL='$dest'\" \"$base/controller.asm\" -o \"$out/controller.exe\""
-        },
-        {
-          "line": 44,
+          "line": 47,
           "text": "$proc=Start-Process $pwsh -ArgumentList $args -WindowStyle Hidden -PassThru -RedirectStandardOutput \"$out/run.out\" -RedirectStandardError \"$out/run.err\""
         }
       ]
@@ -6855,36 +6869,6 @@
         {
           "line": 57,
           "text": "Get-FileHash $PSCommandPath,\"$worker/build.ninja\",$ninja|Select-Object Path,Hash|ConvertTo-Json|Set-Content \"$root/tool-inputs.json\""
-        }
-      ]
-    },
-    {
-      "id": "B0109",
-      "file": "test/observation/prepare-dos-identity-probe.py",
-      "hits": [
-        {
-          "line": 7,
-          "text": "cache = root / 'build/.ninja/msvc-x86-release/worker'"
-        },
-        {
-          "line": 8,
-          "text": "ninja = (cache/'build.ninja').read_text()"
-        },
-        {
-          "line": 9,
-          "text": "flags = re.search(r'build obj/adapter-softpc/ntvdm_dos_observer.obj:.*\\n  cflags = (.*)', ninja)[1].replace('$:', ':')"
-        },
-        {
-          "line": 10,
-          "text": "inputs = re.search(r'^build ntvdm.exe \\| ntvdm.lib: worker_link (.*?) \\|', ninja, re.M)[1]"
-        },
-        {
-          "line": 12,
-          "text": "link = f'link.exe /nologo /subsystem:console /opt:ref /out:{out}/ntvdm.exe /map:{out}/ntvdm.exe.map /implib:{out}/ntvdm.lib /def:generated/ntvdm-wow32-provider.def {out}/observer.obj {inputs} rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib'"
-        },
-        {
-          "line": 13,
-          "text": "(out/'build.cmd').write_text('@echo off\\ncall \"C:\\\\Program Files (x86)\\\\Microsoft Visual Studio\\\\2022\\\\BuildTools\\\\Common7\\\\Tools\\\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 >nul\\nif errorlevel 1 exit /b %errorlevel%\\ncd /d '+str(cache)+'\\ncl.exe '+flags+' /O2 /DDOS_IDENTITY_LOG=\\\\\"'+out.as_posix()+'/events.log\\\\\" /Fo'+out.as_posix()+'/observer.obj '+root.as_posix()+'/test/observation/dos_identity_observed.c\\nif errorlevel 1 exit /b %errorlevel%\\n'+link+'\\nexit /b %errorlevel%\\n')"
         }
       ]
     },

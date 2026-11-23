@@ -1,0 +1,17 @@
+[
+  {
+    "case": "dos0",
+    "identical": true,
+    "images": 3
+  },
+  {
+    "case": "dos1",
+    "identical": true,
+    "images": 3
+  },
+  {
+    "case": "space",
+    "identical": true,
+    "images": 3
+  }
+]

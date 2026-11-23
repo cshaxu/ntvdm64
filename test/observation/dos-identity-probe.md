@@ -9,10 +9,17 @@ claim that instrumentation has zero timing or translation-cache effect.
 
 ## Reproduction
 
-- `prepare-dos-identity-probe.py` composes a diagnostic worker from cached
-  libraries and an explicit replacement observer object, without editing the
-  shared Ninja cache or product source. Run its generated build.cmd in an owned
-  background process with the recorded x86 MSVC developer environment.
+- `tools/build-fixtures.cmd x86 dos-identity-observer` builds the diagnostic
+  worker through its native product graph, replacing only the observer archive
+  member. Its events.log resides in the worker cache's diagnostics/dos-identity
+  directory; run only one identity probe against that cache at a time.
+- `tools/build-dos-identity.cmd <fresh-repo-build-directory> <guest-install>`
+  builds controller.exe, A.COM and B.COM using native CMake/NASM targets. The
+  CMD producer accepts no existing output directory and changes no original
+  guest. Execute builds and tests as owned background runs.
+- The integration runner is `test/integration/verify-dos-identity-pair.ps1`.
+  Its native producers are migrated, but its historical staging/manifest and
+  observer paths still require S4 reconciliation before a new runtime verdict.
 - `verify-dos-identity-pair.ps1 -DosOnly 1 -Run b` and `-DosOnly 0 -Run a` use
   independent O:/tmp/i311 and i310 copies, disable both addon device entries,
   and reuse the existing private-desktop Win31 matrix runner. The independent

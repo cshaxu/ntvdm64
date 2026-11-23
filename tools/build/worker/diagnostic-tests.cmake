@@ -87,6 +87,12 @@ worker_trace(dpmi-pointer original-mvdm-dpmi32.lib obj/dpmi/int21map.obj dpmi_po
 worker_trace(dpmi-ioctl original-mvdm-dpmi32.lib obj/dpmi/int21map.obj dpmi_ioctl_boundary)
 worker_trace(dpmi-xmem-failure original-mvdm-dpmi32.lib obj/dpmi/xmem.obj dpmi_xmem_failure)
 worker_trace(command-client base-rpc-client-launch.lib obj/run16/rpc_client_launch.obj ntvdm_command_client_diagnostic)
+# Preserve the existing DOS identity witness without scraping generated Ninja.
+# The diagnostic archive replaces exactly the observer member in product order.
+worker_trace(dos-identity softpc-bindings.lib obj/adapter-softpc/ntvdm_dos_observer.obj
+  dos_identity_observed "DOS_IDENTITY_LOG=\"${CMAKE_BINARY_DIR}/diagnostics/dos-identity/events.log\"")
+add_custom_target(dos-identity-observer
+  DEPENDS "${CMAKE_BINARY_DIR}/diagnostics/dos-identity/ntvdm.exe")
 
 # Add the independently authored startup observer to the unmodified product
 # closure, using the same startup-hook sources as the retired producer.

@@ -143,7 +143,8 @@
   },
   "test/integration/verify-dos-identity-pair.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+    "reason": "P81 migrates worker and three guest producers to CMD/native targets, repairs moved fixture/cleanup paths. Historical runtime package/observer, manifest stamping and staging still require S4; no new guest run claimed.",
+    "evidence": "docs/etc/evidence/t484-s3-dos-identity.md"
   },
   "test/integration/verify-native-vt-fidelity.ps1": {
     "status": "pending-producer-migration",
@@ -459,5 +460,10 @@
     "status": "migrated-delivered",
     "evidence": "docs/etc/evidence/t484-s3-ccpu-headers.md",
     "reason": "Native selected-owner preprocessing; eight VALID dependencies, inspected native batch and unchanged product/publication checks"
+  },
+  "test/observation/prepare-dos-identity-probe.py": {
+    "status": "migrated-delivered",
+    "reason": "P81 replaces obsolete Ninja scraping/Python assembly composition with native diagnostic archive substitution and CMD/CMake/NASM identity fixtures; nine binary comparisons and cache checks. Integration staging remains a separate pending row.",
+    "evidence": "docs/etc/evidence/t484-s3-dos-identity.md"
   }
 }

@@ -112,7 +112,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P80 CCPU preprocessing](../etc/evidence/t484-s3-ccpu-headers.md) | Eight real owner profiles and VALID dependency records; native batch inspected, product/full-build/hash checks pass; B0108 complete. |
 
-Implementation batches through P80 passed their cached full host build. P73 checks11 raw host inputs
+| [P81 DOS identity producers](../etc/evidence/t484-s3-dos-identity.md) | Native observer replacement and9 byte-identical guest fixtures; historical runtime staging remains pending. |
+
+Implementation batches through P81 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

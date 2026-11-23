@@ -1,0 +1,81 @@
+@prefix@
+%macro launch 1
+push ds
+push word pif_%1-data
+push word 1
+api 1,166
+cmp ax,32
+jb fatal
+.focus_%1:
+api 1,29
+push word 0
+push word 0
+push ds
+push word title_%1-data
+api 2,50
+test ax,ax
+jz .focus_%1
+mov [window_%1-data],ax
+push ax
+api 2,44
+push word [window_%1-data]
+api 2,45
+push word [window_%1-data]
+api 2,59
+call .schedule_settle
+api 2,60
+cmp ax,[window_%1-data]
+jne .focus_%1
+mov si,keys_%1-data
+call .schedule_type
+mov bx,run_%1-data
+call .wait_file
+%endmacro
+launch A
+launch B
+mov bx,all_done-data
+call .wait_file
+%macro close 1
+push word [window_%1-data]
+push word 0x10
+push word 0
+push word 0
+push word 0
+api 2,110
+call .schedule_settle
+%endmacro
+close A
+close B
+jmp .done
+@helpers@
+.wait_file:
+push bx
+api 1,29
+pop bx
+push bx
+push ds
+push bx
+push word 0
+api 1,85
+pop bx
+cmp ax,-1
+je .wait_file
+push ax
+api 1,81
+ret
+.done:
+@tail@
+schedule_timer: dw 0
+schedule_message: times 18 db 0
+%macro child_data 2
+pif_%1: db W31_INSTALL,'\ID',%str(%1),'.PIF',0
+title_%1: db 'Identity ',%str(%1),0
+run_%1: db W31_INSTALL,'\PATCH\',%str(%1),'.RUN',0
+window_%1: dw 0
+keys_%1: dw %2,0x34be,0x2e43,0x184f,0x324d,0x1c0d,0
+%endmacro
+child_data A,0x1e41
+child_data B,0x3042
+all_done: db W31_INSTALL,'\PATCH\ALL.DONE',0
+data_end:
+image_end:
