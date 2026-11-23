@@ -9,6 +9,8 @@ for %%I in (guest-memory redirector-async guest-location wow-task-frame wow-call
 for %%I in (guest-probes guest-redir guest-video-int10 guest-video-direct guest-video-graphics guest-video-handshake guest-system guest-keymouse guest-bios guest-support guest-disks guest-comms guest-comms-medium guest-dem guest-command guest-vdd command-tools) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="memory-profiles" set "SELECTED=1"
 if "%TARGET%"=="system-fixtures" set "SELECTED=1"
+if "%TARGET%"=="oem-tests" set "SELECTED=1"
+if "%TARGET%"=="oem-tests" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="suballoc-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="suballoc-lifecycle" if not "%~1"=="x86" exit /b 2
 if not defined SELECTED exit /b 2
@@ -21,7 +23,17 @@ for %%I in ("%~dp0..") do set "NTVDM_ROOT=%%~fI"
 if not defined NTVDM_VSDEVCMD set "NTVDM_VSDEVCMD=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat"
 call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
+if "%TARGET%"=="oem-tests" goto worker
 cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" --target %TARGET%
+exit /b %errorlevel%
+:worker
+pushd "%NTVDM_ROOT%"
+if errorlevel 1 exit /b %errorlevel%
+cmake --preset msvc-x86-release-ccache
+set "result=%errorlevel%"
+popd
+if not "%result%"=="0" exit /b %result%
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\worker" --target %TARGET%
 exit /b %errorlevel%

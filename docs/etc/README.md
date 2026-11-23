@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 OEM fixtures](evidence/t484-s3-oem-fixtures.md) records17 native
+targets,18 runtime cases and source projection equivalence.
+
 [T484 S3 duplicate compilation](evidence/t484-s3-compile-duplicates.md) records
 native suballoc testing and retirement of redundant historical compile graphs.
 

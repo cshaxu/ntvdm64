@@ -1,0 +1,16 @@
+[
+  {
+    "case": "short",
+    "stdout": "S37_ORIGINAL_PIF_CALLER_OEM_PATH_ERRORS_CLEANUP_OK\r\n",
+    "pid": 12656,
+    "exit": 0,
+    "stderr": ""
+  },
+  {
+    "case": "long",
+    "stdout": "S37_ORIGINAL_PIF_LONG_STARTDIR_REJECT_OK\r\n",
+    "pid": 28648,
+    "exit": 0,
+    "stderr": ""
+  }
+]

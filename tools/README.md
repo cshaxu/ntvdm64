@@ -52,6 +52,9 @@ from overwriting another. These opt-in probes are not release inputs.
 `system-fixtures` builds NT I/O facade and VDM control tests on x86/x64,
 plus the original x86-only DOS find-layout fixture.
 `suballoc-lifecycle` builds the original x86 allocator lifecycle runtime test.
+`oem-tests` builds17 x86 OEM/COMMAND fixtures in the existing worker graph.
+Run the PIF caller in a short working directory; its separate
+`--expect-long-startdir` case verifies the original64-byte rejection boundary.
 
 `build-memory-probes.cmd ems <new-build-output> <runtime-test-root>` builds
 the three EMS/DOS probes and writes their PIF/configuration files using the

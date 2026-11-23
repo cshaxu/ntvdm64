@@ -1,0 +1,6 @@
+{
+  "initialFailure": "PIF caller long working directory; separate short/long runs passed",
+  "passingRuntimeCases": 18,
+  "fixtureTargets": 17,
+  "mirrorChanges": 0
+}

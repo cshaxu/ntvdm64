@@ -1,0 +1,32 @@
+[
+  {
+    "name": "dem-create-body.inc",
+    "normalizedBytes": 4674,
+    "sha256": "a39c51ee093cf199e2841f5d4095edf187924c9b2dfa7897ef1a4d7800bc656d",
+    "equal": true
+  },
+  {
+    "name": "dem-media-body.inc",
+    "normalizedBytes": 1411,
+    "sha256": "0ede96873ee4aa6976ee37643d4345f4e38a6e23f369cbbd89b667b541f97a98",
+    "equal": true
+  },
+  {
+    "name": "dem-media-type.inc",
+    "normalizedBytes": 232,
+    "sha256": "df4cafd0ee72ad8e16b13d9500fd764dcae57b96d2f71443a9d6852cb5a1b6e1",
+    "equal": true
+  },
+  {
+    "name": "cmd-temp-body.inc",
+    "normalizedBytes": 1925,
+    "sha256": "8c631b77d09896c46ba5eb30e7086de28025c4e21392586fe654a24fe1212a09",
+    "equal": true
+  },
+  {
+    "name": "cmd-tail-body.inc",
+    "normalizedBytes": 1306,
+    "sha256": "d3dc446eb01a3c71410da0628f245348be8429a2b0b8ce68d67e5d1208abf42e",
+    "equal": true
+  }
+]

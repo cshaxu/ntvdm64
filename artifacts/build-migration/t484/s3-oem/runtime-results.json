@@ -1,0 +1,155 @@
+[
+  {
+    "name": "oemuni-family-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "S37_OEM_ENUM_SEARCH_RENAME_DELETE_DIRECTORY_OK\r\nS37_OEM_TEMP_SYSTEM_VOLUME_COMPUTER_NEGATIVE_FONT_OK\r\n",
+    "stderr": "",
+    "pid": 24116,
+    "sha256": "A0A7673BC653B26926842F1BC991D711F19B08CB9B384E82A3151F5458633FD8"
+  },
+  {
+    "name": "oemuni-failure-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "OEMUNI_HOST_CODEPAGES OEM=437 ANSI=1252\r\nS37_OEM_FULLPATH_NONASCII_PART_SHORT_BUFFER_OK\r\nS37_OEM_EXPAND_NONASCII_OK\r\nS37_OEM_ENV_NONASCII_DELETE_MISSING_OK\r\nS37_ENV_LARGE result=3 expected=3 error=0 copied=1\r\nS37_ENV_LARGE_SHORT_EMPTY_DELETE_OK\r\n",
+    "stderr": "",
+    "pid": 21684,
+    "sha256": "B2AC59F0232F0FDA237A839E444308CEF8B7B151B80DE21E39ACB678B1D3D506"
+  },
+  {
+    "name": "oemuni-expand-failure-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "S37_EXPAND_FAILURE stage=1 result=0 error=8 borrowed_frees=0\r\nS37_EXPAND_FAILURE stage=2 result=0 error=8 borrowed_frees=0\r\nS37_EXPAND_CONVERSION_FAILURE_ZERO_AND_SAFE_CLEANUP_OK\r\nS37_ENV_FAILURE stage=1 result=0 error=8 oem_calls=0\r\nS37_ENV_FAILURE stage=2 result=0 error=8 oem_calls=1\r\nS37_ENV_CONVERSION_FAILURE_ORDER_OK\r\n",
+    "stderr": "",
+    "pid": 31564,
+    "sha256": "7C94D3CC75BE266072B5699F1CFBC0CD4B3BC72A8A0CBA98CD88353104166367"
+  },
+  {
+    "name": "oemuni-dbcs-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "S37_DBCS_FULLPATH actual_length=11 expected_length=11 part=6 expected_part=6 terminator=0\r\nS37_DBCS_FULLPATH_LENGTH_COPY_FILEPART_SHORT_EXACT_BUFFER_OK\r\nS37_DBCS_CURRENT_SEARCH_CAPACITY_OK\r\nS37_VOLUME_BOUNDARY side=0 result=0 error=234 canary=90 outstanding=0\r\nS37_VOLUME_BOUNDARY side=1 result=0 error=234 canary=90 outstanding=0\r\nS37_DBCS_VOLUME_BOTH_CAPACITIES_OPTIONAL_FAILURE_CLEANUP_OK\r\nS37_SIZE_MATRIX api=current cap=0 actual=12 expected=12 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=current cap=1 actual=12 expected=12 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=current cap=10 actual=12 expected=12 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=current cap=11 actual=12 expected=12 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=current cap=12 actual=11 expected=11 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=current cap=65536 actual=11 expected=11 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=search cap=0 actual=12 expected=12 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=search cap=1 actual=12 expected=12 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=search cap=10 actual=12 expected=12 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=search cap=11 actual=12 expected=12 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=search cap=12 actual=11 expected=11 error=0 contract=PASS\r\nS37_SIZE_MATRIX api=search cap=65536 actual=11 expected=11 error=0 contract=PASS\r\nS37_SIZE_MATRIX_ALL_12_PASS\r\nS37_QUERY_GROWTH_FAILURE_OVERSIZE_ALLOCATION_CLEANUP_OK\r\nS37_SHORTPATH_COMPUTER_CAPACITY_LENGTH_FAILURE_CLEANUP_OK\r\nS37_ENV_DBCS cap=0 actual=3 expected=3 failures=0\r\nS37_ENV_DBCS cap=1 actual=3 expected=3 failures=0\r\nS37_ENV_DBCS cap=2 actual=3 expected=3 failures=0\r\nS37_ENV_DBCS cap=3 actual=2 expected=2 failures=0\r\nS37_ENV_DBCS cap=65536 actual=2 expected=2 failures=0\r\nS37_ENV_ANSI_ONE_OEM_TWO_BYTE_CAPACITIES_OK\r\nS37_ENV_GROWTH_REMOVAL_OVERSIZE_ALLOCATION_CLEANUP_OK\r\n",
+    "stderr": "",
+    "pid": 33424,
+    "sha256": "7915605283F1F7220816F983245F89B19D287B05218D5589BD6C06BA91D96EC5"
+  },
+  {
+    "name": "oemuni-font-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "S37_FONT_ORIGINAL_OEM_CONVERSION_RESULT_FAILURE_TEB_REUSE_OK\r\n",
+    "stderr": "",
+    "pid": 22984,
+    "sha256": "3E4D3209502E1B25246EA692F85C972EDCFA3C3E097094F1AD92CEB1DF22EC31"
+  },
+  {
+    "name": "oemuni-font-retry-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "S37_DEM_FONT_RETRY scenario=1 creates=2 removes=1 posts=1 errors=0 PASS\r\nS37_DEM_FONT_RETRY scenario=2 creates=2 removes=2 posts=1 errors=0 PASS\r\nS37_DEM_FONT_RETRY scenario=3 creates=2 removes=1 posts=1 errors=1 PASS\r\nS37_DEM_FONT_RETRY scenario=4 creates=1 removes=2 posts=0 errors=1 PASS\r\nS37_DEM_FONT_RETRY scenario=5 creates=1 removes=0 posts=0 errors=1 PASS\r\n",
+    "stderr": "",
+    "pid": 9512,
+    "sha256": "14422AEE02C00034339B1EC746A4293B140A1C8C89E8024EC6902A6863047D25"
+  },
+  {
+    "name": "oemuni-media-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "S37_DEM_MEDIA_PADDING_LABEL_CANARY_FAILURE_OK\r\n",
+    "stderr": "",
+    "pid": 12848,
+    "sha256": "B1BF8EEBEC9119C6AE424EC0B33C2056D95B71C8F520B8F3255144C18A134804"
+  },
+  {
+    "name": "oem-support-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "PASS: original OEM environment/current-directory helpers\r\n",
+    "stderr": "",
+    "pid": 28640,
+    "sha256": "CF1AC638597A6CE2836E39E80C080910D271CA254BACC056A09E34E320AF3877"
+  },
+  {
+    "name": "cmd-temp-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "CMD_ORIGINAL_TEMP_PATH_INHERIT_SHARED_RW_CLEANUP_OK\r\n",
+    "stderr": "",
+    "pid": 13196,
+    "sha256": "8614A70D84EA42F37B4C8E54A108BAFE2052CE8C73532230610CA338B9F58709"
+  },
+  {
+    "name": "cmd-tail-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "CMD_ORIGINAL_TAIL_5_CASES_EMPTY_SPACES_127_GUARDS_OK\r\n",
+    "stderr": "",
+    "pid": 19940,
+    "sha256": "D527321D1BF16CF9817D5BF697464DD99524F7960CE5FF2604CF7D74A30AFBBF"
+  },
+  {
+    "name": "cmd-svc-probe",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "COMMAND_ORIGINAL_OBJECT_17_ROUTES_OK\r\n",
+    "stderr": "",
+    "pid": 5624,
+    "sha256": "81DFC91B0B539566500D9CF1DAAD3E8FA7CAD6AE75458DF17AA7E4192301DA57"
+  },
+  {
+    "name": "oemuni-config-path-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "S37_PIF_OEM_TO_ANSI_BOUNDED_PATH_OK\r\n",
+    "stderr": "",
+    "pid": 10372,
+    "sha256": "FA85777C05B80472E2F3EBE08B2081C8450A0AA9B08DC32A433BCAB56F62C5A4"
+  },
+  {
+    "name": "event-startup-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "S35_CHILD_RETURNED_0\r\n",
+    "stderr": "",
+    "pid": 31912,
+    "sha256": "65F03FD0F865EF4D6B3DDF2FC6B32FCFCC71BE7582874768354E54426503C1F8"
+  },
+  {
+    "name": "oemuni-pif-fault-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "PIF_ORIGINAL_9_IO_FAILURES_CLOSE_PARTIAL_STATE_RETRY_IGNORE_OK\r\n",
+    "stderr": "",
+    "pid": 30696,
+    "sha256": "F041502CECABE3C55A2B885A17A781D5F2F5F0B9723F961A8A2EBBFF18F08500"
+  },
+  {
+    "name": "oemuni-pif-root-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "PIF_REAL_SESSION_DEFAULT_ROOT_PRESENT_ABSENT_OK\r\n",
+    "stderr": "",
+    "pid": 12304,
+    "sha256": "1CE4BC50F9B10FBFD7635FE6FF4F9C21F3442BB9F5B0B67EBF4D0F5A93EAB594"
+  },
+  {
+    "name": "oemuni-pif-parser-fixture",
+    "timeout": false,
+    "exit": 0,
+    "stdout": "PIF_ORIGINAL_PARSER_8_ROWS_OK\r\nPIF_ORIGINAL_REPEAT_IGNORE_REPLACE_OPEN_FAILURE_OK\r\n",
+    "stderr": "",
+    "pid": 10520,
+    "sha256": "7BB274366ADA5369285AE5E788F05036A6B771BB42B139C3E6CC8D24B4E89EA2"
+  },
+  {
+    "name": "oemuni-pif-caller-fixture",
+    "timeout": false,
+    "exit": 1,
+    "stdout": "",
+    "stderr": "PIF fixture requires an OEM short directory of at most 64 bytes\r\n",
+    "pid": 16456,
+    "sha256": "F5901076EBE57EFC29455D6B757FB68F745506847F753B53B32896ACD08CC90E"
+  }
+]
