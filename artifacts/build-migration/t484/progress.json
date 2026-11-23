@@ -1,28 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "4ad5cb89e3666f04896c5983beafd1ff26ed3bbb",
+  "head": "3f9660eb008754a0f7fd60a6fdf52e1bf631dac5",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/build-wow-message-transaction-provider.ps1",
-    "?? artifacts/build-migration/t484/s3-message-control/",
-    "?? docs/etc/evidence/t484-s3-message-control.md",
-    "?? tools/build-wow-message-control.cmd"
+    " M test/observation/build-wow-sizing-diagnostic.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/wow32/CMakeLists.txt",
+    " M tools/build/wow32/diagnostic-provider.cmake",
+    "?? artifacts/build-migration/t484/s3-sizing/",
+    "?? docs/etc/evidence/t484-s3-sizing.md",
+    "?? tools/build/wow32/window-sizing.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 82,
-    "unchanged": 155,
+    "changed": 83,
+    "unchanged": 154,
     "removed": 118
   },
   "disposition_counts": {
-    "migrated-delivered": 27,
+    "migrated-delivered": 28,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 118,
     "pending-producer-migration": 51,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 154,
+    "requires-disposition-reconciliation": 153,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 190,
@@ -1827,9 +1830,11 @@
       "state": "changed",
       "current_sha256": "21244cc0a45f3d5f0dd3850c84a655378c80e72158ddb64da4e42380c0964090",
       "revisions": [
+        "3f9660eb008754a0f7fd60a6fdf52e1bf631dac5",
         "4ad5cb89e3666f04896c5983beafd1ff26ed3bbb"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-message-control.md",
         "docs/etc/evidence/t484-s3-message-transaction.md"
       ],
       "completion": "pending-producer-migration",
@@ -1843,12 +1848,16 @@
       "id": "B0102",
       "file": "test/observation/build-wow-sizing-diagnostic.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "d4b58f301099aa87595a25ed67612588e1da060cdae861dd5fa487543da94217",
+      "state": "changed",
+      "current_sha256": "49b7ec4c248793675ef3e2db0430534b58a6e772126fae21e6c206a8ea73d679",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Native two-owner diagnostic preserves exact witness projection and product source/normal DLL; full build and focused verification pass",
+        "evidence": "docs/etc/evidence/t484-s3-sizing.md"
+      }
     },
     {
       "id": "B0103",
@@ -5110,6 +5119,12 @@
     }
   ],
   "commits": {
+    "3f9660eb008754a0f7fd60a6fdf52e1bf631dac5": {
+      "subject": "T484 S3 P75 migrate sealed message control recipe to CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-message-control.md"
+      ]
+    },
     "4ad5cb89e3666f04896c5983beafd1ff26ed3bbb": {
       "subject": "T484 S3 P74 migrate current message transaction producer",
       "evidence": [
@@ -6709,12 +6724,12 @@
       "file": "test/observation/build-wow-sizing-diagnostic.ps1",
       "hits": [
         {
-          "line": 32,
-          "text": "$p=Start-Process cmake.exe -ArgumentList '--build build/.ninja/msvc-x86-release --target wow32' -WorkingDirectory $repo -WindowStyle Hidden -RedirectStandardOutput \"$root/build.log\" -RedirectStandardError \"$root/build.err\" -PassThru"
+          "line": 7,
+          "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
         },
         {
-          "line": 36,
-          "text": "Copy-Item \"$repo/build/.ninja/msvc-x86-release/wow32/wow32.dll\" \"$root/WOW32.DLL\""
+          "line": 10,
+          "text": "$provider=\"$repo/build/.ninja/msvc-x86-release/wow32\""
         }
       ]
     },

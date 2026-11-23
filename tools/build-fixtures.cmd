@@ -95,7 +95,7 @@ if "%TARGET%"=="presentation-font" set "SELECTED=1"
 if "%TARGET%"=="thread-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="keyboard-contracts" set "SELECTED=1"
 if "%TARGET%"=="win95-probes" if "%~1"=="x86" set "SELECTED=1"
-for %%I in (wow-callback-abort wow-attach-failure wow-missing-init wow-message-transaction) do if "%TARGET%"=="%%I" if "%~1"=="x86" set "SELECTED=1"
+for %%I in (wow-callback-abort wow-attach-failure wow-missing-init wow-message-transaction wow-window-sizing) do if "%TARGET%"=="%%I" if "%~1"=="x86" set "SELECTED=1"
 if "%TARGET%"=="window-contracts" set "SELECTED=1"
 if "%TARGET%"=="frontend-library" if "%~1"=="x86" set "SELECTED=1"
 if "%TARGET%"=="native-payload-probes" set "SELECTED=1"
@@ -172,7 +172,7 @@ for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%
 if "%TARGET%"=="oem-tests" goto worker
 if "%TARGET%"=="wow-callback-cost" goto wowcallback
 if "%TARGET%"=="wow-graph-cost" goto wowcallback
-for %%I in (wow-callback-abort wow-attach-failure wow-missing-init wow-message-transaction) do if "%TARGET%"=="%%I" goto wowcallback
+for %%I in (wow-callback-abort wow-attach-failure wow-missing-init wow-message-transaction wow-window-sizing) do if "%TARGET%"=="%%I" goto wowcallback
 for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" goto wowcallback
 if "%TARGET%"=="pic-bios-contracts" goto worker
 if "%TARGET%"=="command-keyboard-shadow" goto worker

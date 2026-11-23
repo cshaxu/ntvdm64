@@ -424,5 +424,10 @@
     "status": "pending-producer-migration",
     "reason": "Current and historical recipes use native producers; exact sealed P21 positive build unverified because its object closure is absent",
     "evidence": "docs/etc/evidence/t484-s3-message-control.md"
+  },
+  "test/observation/build-wow-sizing-diagnostic.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Native two-owner diagnostic preserves exact witness projection and product source/normal DLL; full build and focused verification pass",
+    "evidence": "docs/etc/evidence/t484-s3-sizing.md"
   }
 }

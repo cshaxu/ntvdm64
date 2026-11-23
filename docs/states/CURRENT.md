@@ -102,7 +102,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P75 sealed message control](../etc/evidence/t484-s3-message-control.md) | Native historical producer; current/rejection/command checks pass, exact historical object closure absent, B0101 remains pending. |
 
-Implementation batches through P75 passed their cached full host build. P73 checks11 raw host inputs
+| [P76 sizing diagnostic](../etc/evidence/t484-s3-sizing.md) | Two native source projections replace product-source mutation;229-object closure, cache, shared targets/frame/full-build/hash checks pass; B0102 complete. |
+
+Implementation batches through P76 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
