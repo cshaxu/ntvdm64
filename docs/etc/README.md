@@ -1554,3 +1554,5 @@ post-publication targeted checks.
 [T484 candidate reconciliation](evidence/t484-progress-reconciliation.md) tracks original paths, delivery evidence and outstanding disposition reviews.
 
 [T484 S3 Console API](evidence/t484-s3-console-api.md) records normal/fault native diagnostic builds and bounded checks.
+
+[T484 S3 clipboard epoch](evidence/t484-s3-clipboard-epoch.md) records native projection and x86/x64 contract results.

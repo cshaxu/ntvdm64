@@ -1,31 +1,27 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "e82c74ff1dcbfa87dcf19994a157ad009fc64233",
+  "head": "3d4bfb0318a9bd3424c8e1907993e2392f5e8a6c",
   "worktree_status": [
-    " M docs/etc/README.md",
-    " M docs/states/CURRENT.md",
-    " D test/observation/build-win31-console-api-probe.ps1",
+    " M artifacts/build-migration/t484/dispositions.json",
+    " M test/adapter-mvdm-host-out/wow/verify_clipboard_epoch.py",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/dispositions.json",
-    "?? artifacts/build-migration/t484/progress.json",
-    "?? docs/etc/evidence/t484-progress-reconciliation.md",
-    "?? tools/audit/track-build-migration.py",
-    "?? tools/build/fixtures/console-api-probes.cmake"
+    "?? tools/build/fixtures/clipboard-tests.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 29,
-    "unchanged": 213,
+    "changed": 30,
+    "unchanged": 212,
     "removed": 113
   },
   "disposition_counts": {
     "migrated-delivered": 10,
-    "retained-native-declarative": 1,
-    "retired-with-delivery-evidence": 112,
-    "pending-producer-migration": 13,
-    "retained-audit-only": 1,
-    "requires-disposition-reconciliation": 218
+    "retained-native-declarative": 2,
+    "retired-with-delivery-evidence": 113,
+    "migrated-local-verified": 1,
+    "pending-producer-migration": 21,
+    "retained-native-delegate": 2,
+    "requires-disposition-reconciliation": 206
   },
   "existing_interpreted_candidates_with_command_hits": 207,
   "files": [
@@ -277,14 +273,14 @@
       "id": "B0014",
       "file": "test/adapter-mvdm-host-out/wow/verify_clipboard_epoch.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "b03e9af3dc644254135ee2f876e5d6822154c05b6766098b872f0367553199c0",
+      "state": "changed",
+      "current_sha256": "a12481dc991c5caa136b5938d772b7a94576f28b002a38d85e29b95f800c5706",
       "revisions": [],
       "evidence": [],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-local-verified",
       "decision": {
-        "reason": "Generates source projection and compile.cmd then invokes compiler",
-        "status": "pending-producer-migration"
+        "status": "migrated-local-verified",
+        "reason": "CMD clipboard-epoch owns source projection and compilation; Python only delegates and asserts56 checks; delivery pending"
       }
     },
     {
@@ -341,10 +337,10 @@
       "evidence": [
         "docs/etc/evidence/t484-s2-hook-cmake.md"
       ],
-      "completion": "retained-audit-only",
+      "completion": "retained-native-delegate",
       "decision": {
-        "reason": "Queries ninja -t commands then checks compiler profiles; never executes extracted compiler commands",
-        "status": "retained-audit-only"
+        "status": "retained-native-delegate",
+        "reason": "Read-only ninja -t commands query; does not execute compiler output"
       }
     },
     {
@@ -397,8 +393,11 @@
       "current_sha256": "e01196d72cb723ab7e4db0b354a66839d273bfd9e389be2540564f01539e75cb",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-declarative",
+      "decision": {
+        "status": "retained-native-declarative",
+        "reason": "Native CMake object/executable/library targets, no interpreted source producer"
+      }
     },
     {
       "id": "B0023",
@@ -463,8 +462,11 @@
       "current_sha256": "d7ba8c3adab949e6adc0cdf163ab9ef17280bb5e18a565e2f63a0d5824439260",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+      }
     },
     {
       "id": "B0029",
@@ -474,8 +476,11 @@
       "current_sha256": "c8c95db3c6e497fc290248641bfa9bb5c25e1fe95d32c0d46ecc991252df7afc",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+      }
     },
     {
       "id": "B0030",
@@ -485,8 +490,11 @@
       "current_sha256": "02b1fc4254a948cc41d401df1dffc0e3f1fbff1dca9c5732f7267bce05497db3",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+      }
     },
     {
       "id": "B0031",
@@ -496,8 +504,11 @@
       "current_sha256": "27f77c2f1ddbd5b89292861ac20d5752f19ac5fa2d3264744c758515813285d3",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Calls Set-PackageIdentity.ps1; S4 must migrate identity writer and this caller"
+      }
     },
     {
       "id": "B0032",
@@ -507,8 +518,11 @@
       "current_sha256": "d7a8bce4757f307dbfdfa155930fa9ff277b005d388610504b50040bc0ab0f7c",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+      }
     },
     {
       "id": "B0033",
@@ -518,8 +532,11 @@
       "current_sha256": "3aae80beb14dfff81aae0944d047bb47886e497f28aab88978aee45b1fa4941f",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "status": "retained-native-delegate",
+        "reason": "Native Ninja target delegate then observer assertions; no ad hoc compiler command"
+      }
     },
     {
       "id": "B0034",
@@ -540,8 +557,11 @@
       "current_sha256": "7f6e957921cf51f5fd585fd6196397a0793339732a9f2a423b2a663a06ceae97",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+      }
     },
     {
       "id": "B0036",
@@ -551,8 +571,11 @@
       "current_sha256": "324f513f67d22219ba24f777bd3ab9f5776ff80019d1eb91c604003dcbee565a",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+      }
     },
     {
       "id": "B0037",
@@ -562,8 +585,11 @@
       "current_sha256": "04d8ba4f9a91c12d264186fcd29606215e7e78a3f6b8973e468549a670d05a39",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+      }
     },
     {
       "id": "B0038",
@@ -573,8 +599,11 @@
       "current_sha256": "7a96c4d87f4dcd8fa94a2db4a2beb3c163be13c93b430faf40d827538d50dbf0",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+      }
     },
     {
       "id": "B0039",
@@ -1256,9 +1285,14 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
-      "completion": "requires-disposition-reconciliation",
+      "revisions": [
+        "3d4bfb0318a9bd3424c8e1907993e2392f5e8a6c"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-progress-reconciliation.md",
+        "docs/etc/evidence/t484-s3-console-api.md"
+      ],
+      "completion": "retired-with-delivery-evidence",
       "decision": null
     },
     {
@@ -4607,6 +4641,13 @@
     }
   ],
   "commits": {
+    "3d4bfb0318a9bd3424c8e1907993e2392f5e8a6c": {
+      "subject": "T484 S3 P33 migrate Console API probes and reconcile candidate tracking",
+      "evidence": [
+        "docs/etc/evidence/t484-progress-reconciliation.md",
+        "docs/etc/evidence/t484-s3-console-api.md"
+      ]
+    },
     "e82c74ff1dcbfa87dcf19994a157ad009fc64233": {
       "subject": "T484 S3 P32 migrate Console and DOS observation producers",
       "evidence": [
@@ -4858,8 +4899,8 @@
       "file": "test/adapter-mvdm-host-out/wow/verify_clipboard_epoch.py",
       "hits": [
         {
-          "line": 49,
-          "text": "'cl.exe /nologo /W4 /WX /FI\"' + str(binding) + '\" /I\"' + str(root) + '\" \"' + str(fixture) +"
+          "line": 33,
+          "text": "result = subprocess.run([str(repo/'build/.ninja'/('fixtures-'+args.architecture)/'clipboard-epoch.exe')], cwd=repo, capture_output=True,"
         }
       ]
     },

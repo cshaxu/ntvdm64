@@ -1,0 +1,11 @@
+{
+  "inputs": {
+    "src\\mvdm-host\\wow32\\wuclip.c": "67ddc1c23d468d50e9074f752fbf35827a895e4e672960c7161f5ff037ec7631",
+    "src\\compat\\wow_clipboard_epoch.c": "19ff55dd7fdc40dd86a9e498a3bba823707b11dfa11c7547233da2a9b80f2142",
+    "test\\adapter-mvdm-host-out\\wow\\wow_clipboard_epoch_fixture.c": "e389b2ba3ae4e7ba2b28fd336223ce7cbc8adcc5c2df8e973b071b323311cd02"
+  },
+  "scope": "actual callers/adapter with controlled native boundary; not guest acceptance",
+  "compile_exit": 0,
+  "test_exit": 0,
+  "result": "clipboard-open assertions=56 failures=0 clears=6"
+}

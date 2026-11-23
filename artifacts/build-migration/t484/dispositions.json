@@ -78,12 +78,12 @@
     "status": "retained-native-declarative"
   },
   "test/build/test-authored-softpc-profile.py": {
-    "reason": "Queries ninja -t commands then checks compiler profiles; never executes extracted compiler commands",
-    "status": "retained-audit-only"
+    "status": "retained-native-delegate",
+    "reason": "Read-only ninja -t commands query; does not execute compiler output"
   },
   "test/adapter-mvdm-host-out/wow/verify_clipboard_epoch.py": {
-    "reason": "Generates source projection and compile.cmd then invokes compiler",
-    "status": "pending-producer-migration"
+    "status": "migrated-local-verified",
+    "reason": "CMD clipboard-epoch owns source projection and compilation; Python only delegates and asserts56 checks; delivery pending"
   },
   "test/broker/verify-package-fresh-stage.ps1": {
     "reason": "Calls physical runtime staging and Set-PackageIdentity.ps1; S4 caller migration required",
@@ -108,5 +108,49 @@
   "test/build/Test-BuildHygiene.ps1": {
     "reason": "Cleanup publisher and native configuration verification caller; reconcile S4/S5 execution with CMD",
     "status": "pending-producer-migration"
+  },
+  "test/build/wow-message-probes.cmake": {
+    "status": "retained-native-declarative",
+    "reason": "Native CMake object/executable/library targets, no interpreted source producer"
+  },
+  "test/integration/verify-monitor-layout.ps1": {
+    "status": "retained-native-delegate",
+    "reason": "Native Ninja target delegate then observer assertions; no ad hoc compiler command"
+  },
+  "test/integration/verify-ccpu-alu-guest.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+  },
+  "test/integration/verify-ccpu-sign-flags-guest.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+  },
+  "test/integration/verify-ccpu-transfer-guest.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+  },
+  "test/integration/verify-dos-identity-pair.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+  },
+  "test/integration/verify-native-vt-fidelity.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+  },
+  "test/integration/verify-ntvwm-carrier-game.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+  },
+  "test/integration/verify-original-ems-probe.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+  },
+  "test/integration/verify-native-modal-control.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+  },
+  "test/integration/verify-client-rpc-wait.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Calls Set-PackageIdentity.ps1; S4 must migrate identity writer and this caller"
   }
 }

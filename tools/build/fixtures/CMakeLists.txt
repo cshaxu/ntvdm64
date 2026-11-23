@@ -323,6 +323,7 @@ include(keyboard-tests.cmake)
 include(window-tests.cmake)
 include(native-probes.cmake)
 include(console-api-probes.cmake)
+include(clipboard-tests.cmake)
 
 # These historical profiles enabled /Gy only for the coordination unit.
 foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memory_test

@@ -69,8 +69,9 @@ interpreter-free end-to-end acceptance have not completed.
 | [P31 diagnostic owners](../etc/evidence/t484-s3-diagnostic-owners.md) | Five producers retired; three native and16 worker diagnostics build, exact fault projections and linked-member checks pass; no runtime acceptance claimed. |
 | [P32 Console observation](../etc/evidence/t484-s3-console-observation.md) | Three producers retired; six identical COM probes, PIF create/refusal and45046 frame assertions per architecture pass. |
 | [P33 Console API](../etc/evidence/t484-s3-console-api.md) | One producer retired;normal/fault diagnostic variants build and pass map/argument checks;original-candidate reconciliation added. |
+| [P34 clipboard epoch](../etc/evidence/t484-s3-clipboard-epoch.md) | Native projection/compilation;two identical bodies, x86/x64 each56 assertions and six clears pass. |
 
-Each batch passed its cached full host build. P33 checks11 raw host inputs
+Each batch passed its cached full host build. P34 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
@@ -125,6 +126,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P33 records Console API producer migration and its delivery under the
+T484 S3 P34 records clipboard epoch producer migration and its delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

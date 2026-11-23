@@ -11,7 +11,7 @@ import subprocess
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--build-root', required=True, type=Path)
-parser.add_argument('--compiler-env', required=True, type=Path)
+parser.add_argument('--architecture', choices=('x86', 'x64'), default='x86')
 args = parser.parse_args()
 repo = Path(__file__).resolve().parents[3]
 root = args.build_root.resolve()
@@ -21,45 +21,17 @@ root.mkdir(parents=True)
 source = repo / 'src/mvdm-host/wow32/wuclip.c'
 adapter = repo / 'src/compat/wow_clipboard_epoch.c'
 fixture = Path(__file__).with_name('wow_clipboard_epoch_fixture.c')
-raw = source.read_text()
-def body(name):
-    start = raw.index('ULONG FASTCALL ' + name + '(')
-    end = raw.index('{', start) + 1
-    depth = 1
-    while depth:
-        depth += (raw[end] == '{') - (raw[end] == '}')
-        end += 1
-    return raw[start:end]
-(root / 'selected-clipboard-open-close.inc').write_text(
-    body('WU32OpenClipboard') + '\n' + body('WU32CloseClipboard') + '\n')
-binding = root / 'clipboard-api-binding.h'
-(binding).write_text('''#include <windows.h>
-DWORD WINAPI epoch_sequence(void);
-HWND WINAPI epoch_owner(void);
-DWORD WINAPI epoch_owner_pid(HWND, LPDWORD);
-DWORD WINAPI epoch_current_pid(void);
-#define GetClipboardSequenceNumber epoch_sequence
-#define GetClipboardOwner epoch_owner
-#define GetWindowThreadProcessId epoch_owner_pid
-#define GetCurrentProcessId epoch_current_pid
-''')
-command = root / 'compile.cmd'
-command.write_text('@echo off\ncall "' + str(args.compiler_env.resolve()) +
-    '" -arch=x86 -host_arch=x64 >nul\nif errorlevel 1 exit /b %errorlevel%\n' +
-    'cl.exe /nologo /W4 /WX /FI"' + str(binding) + '" /I"' + str(root) + '" "' + str(fixture) +
-    '" "' + str(adapter) + '" /Fo"' + root.as_posix() + '/" /Fe"' +
-    str(root/'fixture.exe') + '"\nexit /b %errorlevel%\n')
 record = {'inputs': {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in (source, adapter, fixture)},
           'scope': 'actual callers/adapter with controlled native boundary; not guest acceptance'}
 try:
     with (root/'compile.log').open('w') as log:
-        result = subprocess.run(['cmd.exe','/d','/c',str(command)], cwd=repo,
-                                stdout=log, stderr=subprocess.STDOUT, timeout=60)
+        result = subprocess.run(['cmd.exe','/d','/c',str(repo/'tools/build-fixtures.cmd'), args.architecture, 'clipboard-epoch'], cwd=repo,
+                                stdout=log, stderr=subprocess.STDOUT, timeout=300, creationflags=subprocess.CREATE_NO_WINDOW)
     record['compile_exit'] = result.returncode
     result.check_returncode()
-    result = subprocess.run([str(root/'fixture.exe')], cwd=repo, capture_output=True,
-                            text=True, timeout=30)
+    result = subprocess.run([str(repo/'build/.ninja'/('fixtures-'+args.architecture)/'clipboard-epoch.exe')], cwd=repo, capture_output=True,
+                            text=True, timeout=30, creationflags=subprocess.CREATE_NO_WINDOW)
     (root/'result.txt').write_text(result.stdout + result.stderr)
     record['test_exit'] = result.returncode
     record['result'] = result.stdout.strip()
