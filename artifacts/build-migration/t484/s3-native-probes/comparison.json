@@ -1,0 +1,122 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-observation\\x86.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\native-observation-probe.exe",
+    "oldBytes": 121856,
+    "newBytes": 121856,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "22c5c278f61da931b343caabbdfdfc12f359da488b448b32392084e568fb2d8b",
+    "newSha256": "59d2fb457d598c6b45f70fb666bfd948fe35b80af039fc610a34ba331ead7d87"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-batch\\x86-cui.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\mixed-batch-cui.exe",
+    "oldBytes": 128512,
+    "newBytes": 128512,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "fec53576edd8742f0246e6311229cb28ad7b4915209b78de70e59e417553f890",
+    "newSha256": "80b90ed5e7de1aeff521421efccc957d9e18208a6d96dae08ca2a283e92b8dee"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-batch\\x86-gui.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\mixed-batch-gui.exe",
+    "oldBytes": 126976,
+    "newBytes": 126976,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "3c84e3cfc5c7efc7e06274efa1345098553f5de3e96ad1ef89906b67273f4555",
+    "newSha256": "394ea7509fd4cc41f10e457a2af143f8b3dacec7007d93236b9406ca7ec6977b"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-observation\\x64.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x64\\native-observation-probe.exe",
+    "oldBytes": 147456,
+    "newBytes": 147456,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "db37161047930ec866104ffded8dced7895ffb3e88d7d25b905a9a0e5483167a",
+    "newSha256": "7e5576689dd7093323f94bc4f76377d84c1fbcfb4f80c8d6bd7639400ea712aa"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-batch\\x64-cui.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x64\\mixed-batch-cui.exe",
+    "oldBytes": 156160,
+    "newBytes": 156160,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "7c836d8127c4e50565584d7f484315c0cbf95da020b858a6a58fac9d2164b8eb",
+    "newSha256": "624f394cc59841bc271b22f93efd83b58f74f9c06e833d629f69c42f790919f0"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-batch\\x64-gui.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x64\\mixed-batch-gui.exe",
+    "oldBytes": 153600,
+    "newBytes": 153600,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "93ff76fbb675cd8a45a4e04c9bb0c09bb4ea92ff4f4c08b10a47eacf36690159",
+    "newSha256": "88f0b088bbc93dc2151767a451d524c44862d0aa7acb940fec3d217156da14b4"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-unpaired\\unpaired-cui.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\unpaired-cui.exe",
+    "oldBytes": 132608,
+    "newBytes": 132608,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "4219f6dc4446c9b8cd131fa175cc80cdabce07b2b86c1af6cfe597f63448cdbf",
+    "newSha256": "abdc3962b62559e3497fa8ed9d23aef8d64296757bea50dfb520c7cbf039fbb2"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-unpaired\\unpaired-gui.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\unpaired-gui.exe",
+    "oldBytes": 132608,
+    "newBytes": 132608,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "369cab41685b9cc076570ee0b0ea4375048dae7534697b241002f444dba36b71",
+    "newSha256": "af8821f68a2a95c17fdf0b0dabeb18b15134f83beda70c7a3a63e1ba4947078e"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-batch\\pif-builder.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x64\\mixed-batch-pif.exe",
+    "oldBytes": 110080,
+    "newBytes": 110080,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "5a8b11fc1b50e2cb584400b7eac09c8a9083adff0b2ce98df1214190c2ed2c8d",
+    "newSha256": "4fb4e4a0de0b369fb8590b2c1b925ffcbe492ef2f4a506dc92a97904bfb69e39"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-mouse\\mouse-hook.dll",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x64\\mouse-tools\\mouse-hook.dll",
+    "oldBytes": 133120,
+    "newBytes": 133120,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "5ca1f6c2029cd4e6acebec56c0d2ed6d3db576f9736095019681e4fa3d40ebc9",
+    "newSha256": "6fd6d62a916181e1560362c9417998d3599536648a886f98db9ce779ac36bd8d"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-mouse\\probe.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x64\\mouse-tools\\probe.exe",
+    "oldBytes": 165888,
+    "newBytes": 165888,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "ba26daff385b37a06094d97ef84595a3ecaf8edc1000de1c68f557839bccaf93",
+    "newSha256": "32642e3a0b7b64368c64974289f4b2af6b7ddc538fbaa6e183ee036449e9f66c"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-probes\\old-mouse\\console-snapshot.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x64\\mouse-tools\\console-snapshot.exe",
+    "oldBytes": 156672,
+    "newBytes": 156672,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "4e792da13cdae77a39ed05b017fe5d91a791d9db5aebada5366e722fd70ad39f",
+    "newSha256": "b1f0c7398e2b267579e9dd1d11918bd62986b8b314b54f7ed952cde97a1900dc"
+  }
+]

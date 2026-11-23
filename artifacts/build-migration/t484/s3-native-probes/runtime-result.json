@@ -1,0 +1,134 @@
+{
+  "product_changed": false,
+  "result": "pass",
+  "cases": [
+    {
+      "case": "build-x86",
+      "pid": 22292,
+      "exit": 0,
+      "finished": "2026-11-23T16:53:26.3702430Z",
+      "started": "2026-11-23T16:53:21.7008225Z"
+    },
+    {
+      "case": "observation-x86",
+      "pid": 22080,
+      "exit": 2,
+      "finished": "2026-11-23T16:53:26.6533296Z",
+      "started": "2026-11-23T16:53:26.5591841Z"
+    },
+    {
+      "case": "batch-x86-cui-empty",
+      "pid": 3884,
+      "exit": 64,
+      "finished": "2026-11-23T16:53:26.8571426Z",
+      "started": "2026-11-23T16:53:26.7608302Z"
+    },
+    {
+      "case": "batch-x86-cui",
+      "pid": 26300,
+      "exit": 37,
+      "finished": "2026-11-23T16:53:26.9383969Z",
+      "started": "2026-11-23T16:53:26.8667599Z"
+    },
+    {
+      "case": "batch-x86-gui-empty",
+      "pid": 3528,
+      "exit": 64,
+      "finished": "2026-11-23T16:53:27.1562317Z",
+      "started": "2026-11-23T16:53:27.1096918Z"
+    },
+    {
+      "case": "batch-x86-gui",
+      "pid": 14816,
+      "exit": 37,
+      "finished": "2026-11-23T16:53:27.1941652Z",
+      "started": "2026-11-23T16:53:27.1657950Z"
+    },
+    {
+      "case": "build-x64",
+      "pid": 19968,
+      "exit": 0,
+      "finished": "2026-11-23T16:53:31.6269738Z",
+      "started": "2026-11-23T16:53:27.2083637Z"
+    },
+    {
+      "case": "observation-x64",
+      "pid": 18560,
+      "exit": 2,
+      "finished": "2026-11-23T16:53:31.7755664Z",
+      "started": "2026-11-23T16:53:31.7024916Z"
+    },
+    {
+      "case": "batch-x64-cui-empty",
+      "pid": 21884,
+      "exit": 64,
+      "finished": "2026-11-23T16:53:31.9049605Z",
+      "started": "2026-11-23T16:53:31.8329564Z"
+    },
+    {
+      "case": "batch-x64-cui",
+      "pid": 32580,
+      "exit": 37,
+      "finished": "2026-11-23T16:53:31.9793758Z",
+      "started": "2026-11-23T16:53:31.9127313Z"
+    },
+    {
+      "case": "batch-x64-gui-empty",
+      "pid": 14396,
+      "exit": 64,
+      "finished": "2026-11-23T16:53:32.1170153Z",
+      "started": "2026-11-23T16:53:32.0858393Z"
+    },
+    {
+      "case": "batch-x64-gui",
+      "pid": 2144,
+      "exit": 37,
+      "finished": "2026-11-23T16:53:32.1439902Z",
+      "started": "2026-11-23T16:53:32.1235932Z"
+    },
+    {
+      "case": "unpaired-cui-empty",
+      "pid": 26612,
+      "exit": 1,
+      "finished": "2026-11-23T16:53:32.2973789Z",
+      "started": "2026-11-23T16:53:32.2149955Z"
+    },
+    {
+      "case": "unpaired-gui-empty",
+      "pid": 18796,
+      "exit": 1,
+      "finished": "2026-11-23T16:53:32.4177041Z",
+      "started": "2026-11-23T16:53:32.3879775Z"
+    },
+    {
+      "case": "pif",
+      "pid": 13208,
+      "exit": 0,
+      "finished": "2026-11-23T16:53:32.5584801Z",
+      "started": "2026-11-23T16:53:32.4833954Z"
+    },
+    {
+      "case": "pif-existing",
+      "pid": 15284,
+      "exit": 65,
+      "finished": "2026-11-23T16:53:32.6263269Z",
+      "started": "2026-11-23T16:53:32.5656573Z"
+    },
+    {
+      "case": "mouse-probe-empty",
+      "pid": 18060,
+      "exit": 64,
+      "finished": "2026-11-23T16:53:32.7508519Z",
+      "started": "2026-11-23T16:53:32.6797815Z"
+    },
+    {
+      "case": "mouse-console-snapshot-empty",
+      "pid": 13036,
+      "exit": 64,
+      "finished": "2026-11-23T16:53:32.8919502Z",
+      "started": "2026-11-23T16:53:32.8082068Z"
+    }
+  ],
+  "scope": "Authored probe argument, batch exit/encoding and PIF creation contracts only; not Run16 lifecycle or guest mouse acceptance.",
+  "guest_changed": false
+}

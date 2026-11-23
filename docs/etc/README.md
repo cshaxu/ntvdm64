@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 native probes](evidence/t484-s3-native-probes.md) retires four producers,
+compares12 timestamp-only images and verifies16 bounded probe behaviors.
+
 [T484 S3 window contracts](evidence/t484-s3-window-contracts.md) consolidates
 seven producers and verifies eight window/Console cases on x86 and x64.
 

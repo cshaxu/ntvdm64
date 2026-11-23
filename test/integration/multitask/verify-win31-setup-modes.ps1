@@ -14,8 +14,14 @@ $output=[IO.Path]::GetFullPath($OutputRoot)
 if(!$output.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $output)){throw 'Fresh build-owned output required'}
 New-Item -ItemType Directory $output|Out-Null
 $savedPath=$env:PATH;$savedPause=$env:NTVDM_SETUP_TEST_NO_PAUSE
-$mouseTools=Join-Path $output 'mouse-tools'
-& "$repo/test/observation/build-win101-mouse-window-probe.ps1" -BuildRoot ([IO.Path]::GetRelativePath($repo,$mouseTools))
+$mouseTools=Join-Path $repo 'build/.ninja/fixtures-x64/mouse-tools'
+$build=Start-Process $env:ComSpec -ArgumentList ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x64 private-mouse-tools"') -WindowStyle Hidden -PassThru -RedirectStandardOutput "$output/mouse-build.log" -RedirectStandardError "$output/mouse-build.err"
+try{
+ if(!$build.WaitForExit(300000)){& taskkill.exe /PID $build.Id /T /F;throw 'Owned mouse build deadline'}
+ $build.WaitForExit()
+ @{pid=$build.Id;start=$build.StartTime;finish=$build.ExitTime;exit=$build.ExitCode}|ConvertTo-Json|Set-Content "$output/mouse-build.json"
+ if($build.ExitCode){throw 'Mouse tools build failed'}
+}finally{$build.Dispose()}
 $failures=@()
 foreach($mode in 0,1){
  $task=Join-Path $output "mode$mode"

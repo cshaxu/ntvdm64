@@ -15,6 +15,9 @@ if "%TARGET%"=="presentation-font" set "SELECTED=1"
 if "%TARGET%"=="thread-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="keyboard-contracts" set "SELECTED=1"
 if "%TARGET%"=="window-contracts" set "SELECTED=1"
+if "%TARGET%"=="native-payload-probes" set "SELECTED=1"
+if "%TARGET%"=="private-mouse-tools" set "SELECTED=1"
+if "%TARGET%"=="private-mouse-tools" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="native-input-contracts" set "SELECTED=1"
 if "%TARGET%"=="native-input-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="keyboard-contracts" if not "%~1"=="x86" exit /b 2
