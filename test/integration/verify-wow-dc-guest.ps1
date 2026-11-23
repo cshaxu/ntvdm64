@@ -21,9 +21,8 @@ try {
     $package=(Resolve-Path -LiteralPath $PackageRoot).Path
     $observer=(Resolve-Path -LiteralPath $Observer).Path
     $source=Join-Path $PSScriptRoot '../observation/win16_dc_probe.asm'
-    $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
-    & $assembler -f bin -o "$root\DCPROBE.EXE" -l "$root\probe.lst" $source *> "$root\assemble.txt"
-    if($LASTEXITCODE){throw 'Independent DC probe assembly failed'}
+    . "$PSScriptRoot/Invoke-Win16ProbeBuild.ps1"
+    Invoke-Win16ProbeBuild -OutputRoot $root -Name DCPROBE
     Get-FileHash $source,"$root\DCPROBE.EXE",$observer,"$package\system32\WOW32.DLL" |
         Export-Csv -NoTypeInformation "$root\inputs.csv"
     $runtime=New-PhysicalRuntimeStage $package

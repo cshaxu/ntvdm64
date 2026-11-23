@@ -1,0 +1,14 @@
+{
+  "started": "2026-11-23T19:35:04.5352013+00:00",
+  "publishedHashes": 22,
+  "exit": 0,
+  "pid": 18912,
+  "parsed": [
+    "Invoke-Win16ProbeBuild",
+    "verify-wow-clipboard-transfer",
+    "verify-wow-dc-guest",
+    "verify-wow-dialog-guest"
+  ],
+  "rawHostImages": 11,
+  "finished": "2026-11-23T19:35:28.0553867+00:00"
+}

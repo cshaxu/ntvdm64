@@ -1,7 +1,7 @@
 # Delegation only: CMD/native owns source selection, compilation and caching.
 function Invoke-Win16ProbeBuild {
     param([Parameter(Mandatory)][string]$OutputRoot,
-          [Parameter(Mandatory)][ValidateSet('PDCANCEL','PDGPROBE','RAWPROBE','THPROBE','DISCOVER')][string]$Name,
+          [Parameter(Mandatory)][ValidateSet('PDCANCEL','PDGPROBE','RAWPROBE','THPROBE','DISCOVER','DCPROBE','DLGPROBE','CDLPROBE')][string]$Name,
           [string]$Listing='probe.lst')
     $repository=(Resolve-Path "$PSScriptRoot/../..").Path
     $target=if($Name -eq 'DISCOVER'){'win16-discovery'}else{'win16-probes'}

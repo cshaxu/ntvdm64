@@ -102,7 +102,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P50 callback diagnostic](../etc/evidence/t484-s3-callback-cost.md) | Native229-object WOW diagnostic with one reversible replacement;recorder/parser controls and cache pass;downstream measurement/staging pending. |
 
-Each batch passed its cached full host build. P50 checks11 raw host inputs
+| [P51 Clipboard/DC/dialog](../etc/evidence/t484-s3-clipboard-probes.md) | Three runners migrated;9 identical guest/listing pairs,3 timestamp-only native outputs,cache and retirement rejection pass;staging pending. |
+
+Each batch passed its cached full host build. P51 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

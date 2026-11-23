@@ -1,0 +1,46 @@
+{
+  "argumentRejection": 64,
+  "exit": 0,
+  "cases": [
+    {
+      "hash": "594C2CF76B8ABEA05C076AE2B0461D866FEBF9ECA48174A8CF1E9DDEEAB140C2",
+      "listing": "identical",
+      "dib": 0,
+      "kind": "normal"
+    },
+    {
+      "hash": "3231B5A28290217999D5C993B1813CF20E90B14F048B241EFD4F27446B0B217C",
+      "listing": "identical",
+      "dib": 1,
+      "kind": "normal"
+    },
+    {
+      "hash": "CB64BF4406E8AF90B3BC4B0A9EC62A38D5E632A6179FFFD29F84FAA9FD7C0B47",
+      "listing": "identical",
+      "dib": 0,
+      "kind": "return"
+    },
+    {
+      "hash": "F65C6BD59184E523862B696F7B5909C65D7EC6454D2A3EFA49560F141EE05274",
+      "listing": "identical",
+      "dib": 1,
+      "kind": "return"
+    },
+    {
+      "hash": "D00EE58BEB899B85471B45217116E41D125BA930BAB25A9E753C9179C236A3E8",
+      "listing": "identical",
+      "dib": 0,
+      "kind": "exit"
+    },
+    {
+      "hash": "00CAC1EB708FD77B7AD5B94BD052E088F35323D26CF5CEDAE2BC4A5D41213F1B",
+      "listing": "identical",
+      "dib": 1,
+      "kind": "exit"
+    }
+  ],
+  "started": "2026-11-23T19:31:28.7824591+00:00",
+  "finished": "2026-11-23T19:31:55.1025554+00:00",
+  "pid": 16808,
+  "cache": "stable"
+}

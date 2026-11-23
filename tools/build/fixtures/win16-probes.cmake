@@ -14,14 +14,19 @@ guest_probe(win16 MMTPROB-no-timer.EXE win16_multimedia_timer_probe.asm -DNO_TIM
 get_property(outputs GLOBAL PROPERTY guest_win16)
 foreach(pair IN ITEMS "PDCANCEL|win16_printdlg_cancel_probe" "PDGPROBE|win16_printdlg_default_probe"
     "RAWPROBE|win16_raw_spool_probe" "THPROBE|win16_toolhelp_probe"
-    "DISCOVER|win16_discovery_probe")
+    "DISCOVER|win16_discovery_probe" "DCPROBE|win16_dc_probe"
+    "DLGPROBE|win16_dialog_probe" "CDLPROBE|win16_common_dialog_probe")
   string(REPLACE "|" ";" parts "${pair}")
   list(GET parts 0 name)
   list(GET parts 1 stem)
   set(source "${NTVDM_REPO}/test/observation/${stem}.asm")
   set(output "${CMAKE_BINARY_DIR}/guest-probes/win16/${name}")
+  set(flags)
+  if(name MATCHES "^(DLGPROBE|CDLPROBE)$")
+    list(APPEND flags -d COMMON_DIALOG_ROUNDS=2)
+  endif()
   add_custom_command(OUTPUT "${output}.EXE" "${output}.lst"
-    COMMAND "${NTVDM_NASM}" -f bin -o "${output}.EXE" -l "${output}.lst" "${source}"
+    COMMAND "${NTVDM_NASM}" -f bin -o "${output}.EXE" -l "${output}.lst" ${flags} "${source}"
     DEPENDS "${source}" "${NTVDM_NASM}" VERBATIM)
   list(APPEND outputs "${output}.EXE" "${output}.lst")
 endforeach()

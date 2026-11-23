@@ -1,23 +1,25 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "aa169c79bf9a083de4bbd86909fbd717f1c85036",
+  "head": "3d217bfeb341d52835d90c326181e66361e82659",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-callback-cost.ps1",
-    " M test/observation/verify-wow-callback-cost-probe.ps1",
+    " M test/integration/Invoke-Win16ProbeBuild.ps1",
+    " M test/integration/verify-wow-clipboard-transfer.ps1",
+    " M test/integration/verify-wow-dc-guest.ps1",
+    " M test/integration/verify-wow-dialog-guest.ps1",
     " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/CMakeLists.txt",
     " M tools/build/fixtures/win16-probes.cmake",
-    " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-callback-cost/",
-    "?? docs/etc/evidence/t484-s3-callback-cost.md",
-    "?? tools/build/wow32/callback-cost.cmake"
+    "?? artifacts/build-migration/t484/s3-clipboard/",
+    "?? docs/etc/evidence/t484-s3-clipboard-probes.md",
+    "?? tools/build/fixtures/wow-clipboard.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 56,
-    "unchanged": 186,
+    "changed": 59,
+    "unchanged": 183,
     "removed": 113
   },
   "disposition_counts": {
@@ -949,8 +951,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "c5bdc81ac4f4bbb4cdfd4db898f9230b63d23cbb6c2f20cd442da882565fda72",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "3d217bfeb341d52835d90c326181e66361e82659"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-callback-cost.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-callback-cost.md",
@@ -962,42 +968,45 @@
       "id": "B0054",
       "file": "test/integration/verify-wow-clipboard-transfer.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "d36675f415a74f6bace60c9725800b60a267f34e6526790f127a6764132fa9db",
+      "state": "changed",
+      "current_sha256": "f655cb432af10e29a400c03833e8c3429709ccfb3dd04506d1f648125a4cec50",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Invokes NASM and CL for bridge DLL and retirement witness"
+        "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
+        "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
+        "status": "pending-producer-migration"
       }
     },
     {
       "id": "B0055",
       "file": "test/integration/verify-wow-dc-guest.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "a5e7fb7a95aca04b98a560f540bafcc17c3e991585fd2c20263a815ecda760c0",
+      "state": "changed",
+      "current_sha256": "e6842c56bfd173977ca28f04187eab22ab73e00fd413bac583df7ba584ec3f25",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Invokes NASM"
+        "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
+        "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
+        "status": "pending-producer-migration"
       }
     },
     {
       "id": "B0056",
       "file": "test/integration/verify-wow-dialog-guest.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "2aff8aadb9a98dfd427b7125c8be3364a3d9e2614f1f3c9514b5153b7427ef24",
+      "state": "changed",
+      "current_sha256": "9c5aa048fa2e3b139366084914c01936ad66e2fe4c41bd0d3bacad9bf979f90a",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Invokes NASM"
+        "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
+        "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
+        "status": "pending-producer-migration"
       }
     },
     {
@@ -2340,8 +2349,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "b0eae919cf0dd931369fc4583aa00af4afcbac7efd83fc9356cf88e3888e47f9",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "3d217bfeb341d52835d90c326181e66361e82659"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-callback-cost.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-callback-cost.md",
@@ -4855,6 +4868,12 @@
     }
   ],
   "commits": {
+    "3d217bfeb341d52835d90c326181e66361e82659": {
+      "subject": "T484 S3 P50 migrate WOW callback diagnostic composition",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-callback-cost.md"
+      ]
+    },
     "aa169c79bf9a083de4bbd86909fbd717f1c85036": {
       "subject": "T484 S3 P49 migrate shell and hook probe producers",
       "evidence": [
@@ -5821,28 +5840,16 @@
           "text": "# The retained product harness runs on Windows PowerShell/.NET Framework,"
         },
         {
-          "line": 50,
+          "line": 49,
           "text": "# Windows PowerShell 5.1 wraps this top-level JSON array once whereas"
         },
         {
-          "line": 51,
+          "line": 50,
           "text": "# PowerShell 7 enumerates it. Normalize only that serializer shape, then"
         },
         {
-          "line": 93,
-          "text": "$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
-        },
-        {
-          "line": 106,
-          "text": "# CALL so that the PowerShell witness continues to the runtime phase."
-        },
-        {
-          "line": 108,
-          "text": "$nativeCommand = 'call \"{0}\" cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS {1} \"{2}\" \"{3}\" \"{4}\" /link \"{5}\" user32.lib /EXPORT:ClipboardBridge=_ClipboardBridge@12' -f `"
-        },
-        {
-          "line": 113,
-          "text": "$retirementCommand='call \"{0}\" cl.exe /nologo /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS /DCLIPBOARD_RETIREMENT_WITNESS \"{1}\" \"{2}\" \"{3}\" /link user32.lib' -f $driver,\"/Fo$root\\retirement.obj\",\"/Fe$root\\CLIPRET.EXE\",$native"
+          "line": 99,
+          "text": "$cache=\"$repo/build/.ninja/fixtures-x86/guest-probes/clipboard\""
         }
       ]
     },
@@ -5853,10 +5860,6 @@
         {
           "line": 6,
           "text": "[string]$Nasm='nasm.exe'"
-        },
-        {
-          "line": 24,
-          "text": "$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
         }
       ]
     },
@@ -5867,10 +5870,6 @@
         {
           "line": 7,
           "text": "[string]$Nasm='nasm.exe'"
-        },
-        {
-          "line": 30,
-          "text": "$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
         }
       ]
     },

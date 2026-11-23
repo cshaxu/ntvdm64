@@ -1,0 +1,32 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-clipboard\\old\\native-0\\GENHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\clipboard\\native-0\\GENHOST.DLL",
+    "oldBytes": 83456,
+    "newBytes": 83456,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "f65e6d6323f9e6b7ec5f793b0cd3289936f02bfd229aed548d2c23f76ab60c52",
+    "newSha256": "b94b73fc6cee508e2b30efc15606932c4eee13cd1c6d6195d342c8ff223bd80f"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-clipboard\\old\\native-1\\GENHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\clipboard\\native-1\\GENHOST.DLL",
+    "oldBytes": 82944,
+    "newBytes": 82944,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "056c8fb6d1cbc74ad4783634da73342c5bf14a292cbf1e4aa67b344bca9ccbf5",
+    "newSha256": "0e6a162850c9e715dade4dd76caa58267ced1163c4f40092af6b2be542564cd3"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-clipboard\\old\\CLIPRET.EXE",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\clipboard\\CLIPRET.EXE",
+    "oldBytes": 115712,
+    "newBytes": 115712,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "8953bb1dede2eeeaee7ee541cfa87c2d6280383bf4ef15ec3629ff807b4db0a1",
+    "newSha256": "44322c3551093b7ccc6eb1312f3931992adecd39459143a1ebdbe3b0117a6e19"
+  }
+]

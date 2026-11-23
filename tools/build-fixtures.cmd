@@ -39,6 +39,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="wow-clipboard-probes" set "SELECTED=1"
+if "%TARGET%"=="wow-clipboard-probes" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-callback-cost wow-callback-cost-unit) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (wow-callback-cost wow-callback-cost-unit) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (win16-shell-probes win16-ole-peer) do if "%TARGET%"=="%%I" set "SELECTED=1"

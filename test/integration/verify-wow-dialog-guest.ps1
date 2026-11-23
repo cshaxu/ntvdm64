@@ -27,9 +27,8 @@ try {
     $probeName=if($CommonDialog){'CDLPROBE'}else{'DLGPROBE'}
     $sourceName=if($CommonDialog){'win16_common_dialog_probe.asm'}else{'win16_dialog_probe.asm'}
     $source=Join-Path $PSScriptRoot ('../observation/'+$sourceName)
-    $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
-    & $assembler -f bin -o "$root\$probeName.EXE" -l "$root\probe.lst" -d COMMON_DIALOG_ROUNDS=2 $source *> "$root\assemble.txt"
-    if($LASTEXITCODE){throw 'Independent dialog probe assembly failed'}
+    . "$PSScriptRoot/Invoke-Win16ProbeBuild.ps1"
+    Invoke-Win16ProbeBuild -OutputRoot $root -Name $probeName
     Get-FileHash $source,"$root\$probeName.EXE",$observer,
         "$package\product-system32-manifest.json" |
         Export-Csv -NoTypeInformation "$root\inputs.csv"

@@ -255,18 +255,6 @@
     "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
     "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
   },
-  "test/integration/verify-wow-clipboard-transfer.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Invokes NASM and CL for bridge DLL and retirement witness"
-  },
-  "test/integration/verify-wow-dc-guest.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Invokes NASM"
-  },
-  "test/integration/verify-wow-dialog-guest.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Invokes NASM"
-  },
   "test/integration/verify-wow-edit-tabstop.ps1": {
     "status": "pending-producer-migration",
     "reason": "Generates CMD with CL/LINK for tabstop and wordbreak fixtures"
@@ -285,5 +273,20 @@
     "evidence": "docs/etc/evidence/t484-s3-callback-cost.md",
     "reason": "P50 standalone native recorder producer and original assertion runner pass",
     "status": "migrated-delivered"
+  },
+  "test/integration/verify-wow-clipboard-transfer.ps1": {
+    "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
+    "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
+    "status": "pending-producer-migration"
+  },
+  "test/integration/verify-wow-dc-guest.ps1": {
+    "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
+    "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
+    "status": "pending-producer-migration"
+  },
+  "test/integration/verify-wow-dialog-guest.ps1": {
+    "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
+    "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
+    "status": "pending-producer-migration"
   }
 }

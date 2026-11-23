@@ -1,0 +1,23 @@
+{
+  "cases": [
+    {
+      "listing": "identical",
+      "name": "DCPROBE",
+      "hash": "9B952A7EDC5BF405D9AC74A3971417B15C2F58EDFA80F9E924FA6D540F57BFA0"
+    },
+    {
+      "listing": "identical",
+      "name": "DLGPROBE",
+      "hash": "3A28BD6A25B0A810BCFAF4F2BEF65190F165CBB173A20A335782C19ABE45E02C"
+    },
+    {
+      "listing": "identical",
+      "name": "CDLPROBE",
+      "hash": "676F5A5DD2BD109771766C85B0192AA70302E9D81F292551A2D7EA1231C1C304"
+    }
+  ],
+  "pid": 21372,
+  "finished": "2026-11-23T19:32:57.5365125+00:00",
+  "exit": 0,
+  "started": "2026-11-23T19:32:41.7923335+00:00"
+}

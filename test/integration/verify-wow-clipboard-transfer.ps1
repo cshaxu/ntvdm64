@@ -2,7 +2,7 @@
 param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$Observer,
-    [Parameter(Mandatory)][string]$CompilerDriver,
+    [string]$CompilerDriver,
     [Parameter(Mandatory)][string]$BuildRoot,
     [string]$FrozenInputsRoot,
     [switch]$SharedClipboard,
@@ -45,7 +45,6 @@ foreach($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP',
 try {
     $package=(Resolve-Path -LiteralPath $PackageRoot).Path
     $observer=(Resolve-Path -LiteralPath $Observer).Path
-    $driver=(Resolve-Path -LiteralPath $CompilerDriver).Path
     $packageManifestRoot=@(Get-Content "$package/product-system32-manifest.json" -Raw | ConvertFrom-Json)
     # Windows PowerShell 5.1 wraps this top-level JSON array once whereas
     # PowerShell 7 enumerates it. Normalize only that serializer shape, then
@@ -90,34 +89,22 @@ try {
         }
         'PASS reused immutable checked Clipboard probe and native bridge' | Set-Content "$root\frozen-inputs.txt"
     } else {
-        $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
-        $assemblyArgs=@('-f','bin','-o',"$root\CLIPPRB.EXE",'-l',"$root\clipprobe.lst")
-        if($CallbackReturnOnly){$assemblyArgs+='-d';$assemblyArgs+='CALLBACK_RETURN_ONLY'}
-        if($OwnerTaskExit){$assemblyArgs+='-d';$assemblyArgs+='OWNER_TASK_EXIT'}
-        if($ClipboardDib){$assemblyArgs+='-d';$assemblyArgs+='CLIPBOARD_DIB'}
-        $assemblyArgs+=$assembly
-        & $assembler @assemblyArgs `
-            *> "$root\assemble.txt"
-        if($LASTEXITCODE){throw 'Clipboard NE probe assembly failed'}
-        Push-Location $root
+        $line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-clipboard-probes"'
+        $producer=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/build.txt" -RedirectStandardError "$root/build.stderr.txt"
         try {
-            # The repository compiler driver is a batch file and deliberately
-            # returns with ``exit /b``.  Invoke it through a child cmd.exe with
-            # CALL so that the PowerShell witness continues to the runtime phase.
-            $nativeDefine=if($ClipboardDib){'/DCLIPBOARD_DIB'}else{''}
-            $nativeCommand = 'call "{0}" cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS {1} "{2}" "{3}" "{4}" /link "{5}" user32.lib /EXPORT:ClipboardBridge=_ClipboardBridge@12' -f `
-                $driver,$nativeDefine, "/Fo$root\cliphost.obj", "/Fe$root\GENHOST.DLL", $native, "/IMPLIB:$root\GENHOST.lib"
-            & $env:ComSpec /d /c $nativeCommand *> "$root\native-build.txt"
-            if($LASTEXITCODE){throw "Clipboard native bridge build failed: $LASTEXITCODE"}
-            if($OwnerTaskExit){
-                $retirementCommand='call "{0}" cl.exe /nologo /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS /DCLIPBOARD_RETIREMENT_WITNESS "{1}" "{2}" "{3}" /link user32.lib' -f $driver,"/Fo$root\retirement.obj","/Fe$root\CLIPRET.EXE",$native
-                & $env:ComSpec /d /c $retirementCommand *> "$root\retirement-build.txt"
-                if($LASTEXITCODE){throw 'Clipboard retirement observer build failed'}
-            }
-        } finally {Pop-Location}
+            @{pid=$producer.Id;start=$producer.StartTime.ToUniversalTime().ToString('o');command=$line}|ConvertTo-Json|Set-Content "$root/producer.json"
+            if(!$producer.WaitForExit(300000)){& taskkill.exe /PID $producer.Id /T /F *> "$root/build-timeout.txt";throw 'Clipboard producer timeout'}
+            $producer.Refresh();if($producer.ExitCode){throw "Clipboard producer failed: $($producer.ExitCode)"}
+        }finally{$producer.Dispose()}
+        $cache="$repo/build/.ninja/fixtures-x86/guest-probes/clipboard"
+        $kind=if($OwnerTaskExit){'exit'}elseif($CallbackReturnOnly){'return'}else{'normal'}
+        $dib=[int][bool]$ClipboardDib
+        Copy-Item "$cache/$kind-$dib/CLIPPRB.EXE","$cache/$kind-$dib/clipprobe.lst" $root
+        Copy-Item "$cache/native-$dib/GENHOST.DLL" "$root/GENHOST.DLL"
+        if($OwnerTaskExit){Copy-Item "$cache/CLIPRET.EXE" "$root/CLIPRET.EXE"}
     }
     $fixtureInputs=@($PSCommandPath,$assembly,$native,"$root\CLIPPRB.EXE",
-        "$root\GENHOST.DLL",$observer,$driver,"$package\product-system32-manifest.json") + $packageImages
+        "$root\GENHOST.DLL",$observer,"$package\product-system32-manifest.json") + $packageImages
     if($OwnerTaskExit){$fixtureInputs+="$root\CLIPRET.EXE"}
     Get-FileHash -LiteralPath $fixtureInputs |
         Select-Object Path,Hash | Export-Csv -NoTypeInformation "$root\inputs.csv"
