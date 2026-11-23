@@ -27,6 +27,10 @@ or recompilation of original Microsoft guests; apply the
 
 ## Engineering tools
 
+`build-fixtures.cmd x86 console-contracts` uses the worker's current providers;
+`presentation-font` supports x86/x64. `test/observation/verify-console-contracts.ps1`
+runs native input/text checks on an owned private desktop and font snapshots.
+
 `build-fixtures.cmd x86|x64 package-resources` produces package-layout,
 firmware rejection, media-path and WOW initial-environment fixtures.
 `test/observation/verify-package-resources.ps1` runs both architectures with

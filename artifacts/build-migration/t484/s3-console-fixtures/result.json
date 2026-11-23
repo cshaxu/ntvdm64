@@ -1,0 +1,30 @@
+{
+  "exit": 0,
+  "cases": [
+    {
+      "name": "font-snapshot",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "AD401888C42CD00A838FC7FB0EEE602A0CABBB0B76E2A09B8875E9AA30286EF1"
+    },
+    {
+      "name": "font-snapshot",
+      "architecture": "x64",
+      "exit": 0,
+      "sha256": "BA24A4869CDBCCC184FE6DF476CDED54BBB43A47531F5993D1A13A3619F20A8D"
+    },
+    {
+      "name": "console-display-toggle",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "ACA57E7C3D907332494B16C70D1674D337DD2F6DB96C459BD0A66C0721DBEE3A"
+    },
+    {
+      "name": "console-input-contract",
+      "architecture": "x86",
+      "exit": 0,
+      "sha256": "67178F93AEDAB3B3799DA9E6F06D0F03EB37FC6683231A458184D2CD84A52820"
+    }
+  ],
+  "scope": "Native Console cells/input and font snapshot; no guest GUI acceptance"
+}

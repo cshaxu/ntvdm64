@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 Console fixtures](evidence/t484-s3-console-fixtures.md) records
+three producer replacements and four final runtime cases.
+
 [T484 S3 package resources](evidence/t484-s3-package-resources.md) records
 two producer migrations and ten dual-architecture runtime cases.
 

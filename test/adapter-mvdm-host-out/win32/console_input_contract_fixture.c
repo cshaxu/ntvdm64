@@ -1,25 +1,29 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <windows.h>
 
 #include "common/base_srv/base_rpc_client.h"
 #include "conapi.h"
 #include "ntvdm-exe/session/session.h"
+#include "compat/include/mvdm_softpc_text_video.h"
+
+/* This fixture owns a native Console surface, not a guest VGA surface.
+ * Only the route query is expected; guest painting must remain unreachable. */
+static int native_console_route(void) { return 0; }
+static int unexpected_copy(mvdm_softpc_text_video *copy) { (void)copy; abort(); return 0; }
+static int unexpected_route(void) { abort(); return 0; }
+static void unexpected_paint(void) { abort(); }
+static void unexpected_flush(void (*publish)(void)) { (void)publish; abort(); }
+static const mvdm_text_video_provider text_route = {
+    unexpected_copy, unexpected_paint, unexpected_route, native_console_route,
+    unexpected_flush, unexpected_paint
+};
 
 HANDLE GetConsoleInputWaitHandle(VOID);
 
-/* This fixture deliberately selects no frontend. Link the real Console
- * client so its existing no-channel native path, not a test substitute,
- * supplies the historical operations. Remote ownership has its own fixture. */
-void OpenNtBaseClientSetCommandBinding(opennt_base_console_activate ready,
-    struct compat_console_activation *context)
-{ (void)ready;(void)context; }
-DWORD OpenNtBaseClientTakeFrontend(HANDLE *pipe,HANDLE *process,DWORD *generation,HANDLE *ready)
-{ (void)pipe;(void)process;(void)generation;(void)ready;return ERROR_NOT_SUPPORTED; }
-DWORD OpenNtBaseClientWaitFrontend(HANDLE *pipe,HANDLE *process,DWORD *generation,HANDLE *ready)
-{ (void)pipe;(void)process;(void)generation;(void)ready;return ERROR_NOT_SUPPORTED; }
-DWORD OpenNtBaseClientWorkerFrontendCapability(HANDLE *capability)
-{ *capability=NULL;return ERROR_NOT_SUPPORTED; }
+/* No frontend is selected. The shared worker fixture owns broker seams;
+ * Console operations and services remain actual product providers. */
 
 
 /* Match the original non-MONITOR nt_cga.c TEXT_INCVAL, not host width.
@@ -72,7 +76,7 @@ static int verify_text_plane(session *owner, HANDLE output)
     }
     if (!InvalidateConsoleDIBits(output, &rect)) {
         fprintf(stderr, "text plane presentation failed: %lu\n", GetLastError());
-        return 33;
+        return 49;
     }
     if (!ReadConsoleOutputA(output, result, read_size, read_origin, &rect) ||
         rect.Left != 78 || rect.Top != 48 || rect.Right != 79 ||
@@ -80,7 +84,7 @@ static int verify_text_plane(session *owner, HANDLE output)
         fprintf(stderr, "text plane read failed: %lu rect=%d,%d,%d,%d size=%d,%d\n",
             GetLastError(), rect.Left, rect.Top, rect.Right, rect.Bottom,
             info.dwSize.X, info.dwSize.Y);
-        return 33;
+        return 50;
     }
     for (row = 0u; row < 2u; ++row) {
         for (column = 0u; column < 2u; ++column) {
@@ -127,6 +131,8 @@ int main(void)
     INPUT_RECORD key = { 0 };
     uint32_t text_columns, text_rows, text_capacity;
     int text_check;
+
+    if (!mvdm_softpc_text_video_bind(&text_route)) return 48;
 
     /* Own the Console used for queue injection and buffer resizing; never
      * consume input from an inherited user/PTY Console. */
@@ -236,7 +242,16 @@ int main(void)
         !WriteConsoleInputW(input, &key, 1u, &count) || count != 1u ||
         !ReadConsoleInputExW(input, queued, 1u, &count,
             CONSOLE_READ_NOWAIT | CONSOLE_READ_NOREMOVE) || count != 1u ||
-        queued[0].Event.KeyEvent.uChar.UnicodeChar != L'K' ||
+        queued[0].Event.KeyEvent.wVirtualKeyCode != VK_RETURN ||
+        !queued[0].Event.KeyEvent.bKeyDown ||
+        !ReadConsoleInputExW(input, queued, 1u, &count,
+            CONSOLE_READ_NOWAIT) || count != 1u ||
+        queued[0].Event.KeyEvent.wVirtualKeyCode != VK_RETURN ||
+        !queued[0].Event.KeyEvent.bKeyDown ||
+        !ReadConsoleInputExW(input, queued, 1u, &count,
+            CONSOLE_READ_NOWAIT) || count != 1u ||
+        queued[0].Event.KeyEvent.wVirtualKeyCode != VK_RETURN ||
+        queued[0].Event.KeyEvent.bKeyDown ||
         !ReadConsoleInputExW(input, queued, 1u, &count,
             CONSOLE_READ_NOWAIT) || count != 1u ||
         queued[0].Event.KeyEvent.uChar.UnicodeChar != L'K') return 20;
@@ -255,8 +270,10 @@ int main(void)
     text_output = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CONSOLE_TEXTMODE_BUFFER,
         NULL);
+    /* Keep this backing buffer inactive: the host terminal may resize its
+     * active buffer to the viewport. Readback tests the exact native cell
+     * writes without racing an unrelated presentation-window resize. */
     if (text_output == INVALID_HANDLE_VALUE ||
-        !SetConsoleActiveScreenBuffer(text_output) ||
         !SetStdHandle(STD_OUTPUT_HANDLE, text_output) ||
         !GetConsoleCursorInfo(text_output, &cursor_before) ||
         ShowConsoleCursor(text_output, FALSE) != -1 ||

@@ -67,3 +67,18 @@ worker_link("redirector-netapi-provider-test.exe"
   "original-opennt-netlib.lib" "original-opennt-xactsrv.lib")
 add_custom_target(redirector-providers DEPENDS "${CMAKE_BINARY_DIR}/redirector-netapi-provider-test.exe")
 add_custom_target(redirector-capacity DEPENDS "${CMAKE_BINARY_DIR}/redirector-oem-capacity-test.exe")
+set(console_fixture ${host_fixture})
+list(REMOVE_ITEM console_fixture "obj/tests/ccpu_bounded_execution_fixture_seams.obj")
+string(REPLACE " legacy_stdio_definitions.lib" "" console_system "${redirector_system}")
+foreach(pair IN ITEMS "console-display-toggle|console_display_toggle_fixture"
+    "console-input-contract|console_input_contract_fixture")
+  string(REPLACE "|" ";" parts "${pair}")
+  list(GET parts 0 name)
+  list(GET parts 1 source)
+  worker_unit("obj/tests/${source}.obj"
+    "${NTVDM_REPO}/test/adapter-mvdm-host-out/win32/${source}.c" "${profile_1}")
+  worker_link("${name}.exe" "/nologo /OPT:REF /out:$out /map:$out.map"
+    "${console_system}" INPUTS "obj/tests/${source}.obj" ${console_fixture})
+endforeach()
+add_custom_target(console-contracts DEPENDS "${CMAKE_BINARY_DIR}/console-display-toggle.exe"
+  "${CMAKE_BINARY_DIR}/console-input-contract.exe")

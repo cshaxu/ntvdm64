@@ -310,6 +310,14 @@ endforeach()
 add_custom_target(package-resources DEPENDS package-layout-fixture
   softpc-firmware-resource-fixture softpc-media-resource-fixture softpc-wow-boot-environment-fixture)
 
+fixture(presentation-font-snapshot-fixture LINK ${resource_session}
+  src/ntvdm-exe/softpc/mvdm_softpc_presentation_font.c
+  test/adapter-mvdm-host-out/softpc/presentation_font_snapshot_fixture.c)
+target_compile_options(presentation-font-snapshot-fixture_objects PRIVATE /WX)
+target_include_directories(presentation-font-snapshot-fixture_objects PRIVATE
+  "${NTVDM_REPO}/src/compat/include")
+add_custom_target(presentation-font DEPENDS presentation-font-snapshot-fixture)
+
 # These historical profiles enabled /Gy only for the coordination unit.
 foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memory_test
     dem_file_lifecycle_test xms_startup_test)
