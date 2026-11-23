@@ -1,0 +1,21 @@
+{
+  "argumentControls": [
+    0,
+    1,
+    2,
+    8,
+    9,
+    10,
+    12,
+    14,
+    17,
+    25
+  ],
+  "pid": 10528,
+  "environmentCharacters": 3361,
+  "end": "2026-11-23T20:32:42.3473805+00:00",
+  "start": "2026-11-23T20:32:28.8645701+00:00",
+  "exit": 0,
+  "environmentPid": 21844,
+  "environmentEntries": 45
+}

@@ -1,0 +1,14 @@
+{
+  "parsed": [
+    "verify-wow-mine-latency",
+    "verify-wow-graph-cost"
+  ],
+  "pid": 3656,
+  "graphProjectionIdentical": true,
+  "rawHostImages": 11,
+  "nativeCacheStable": true,
+  "exit": 0,
+  "finished": "2026-11-23T20:35:31.4444087+00:00",
+  "started": "2026-11-23T20:35:04.3006397+00:00",
+  "publishedHashes": 22
+}

@@ -10,7 +10,7 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [switch]$ObserverCost,
  [string]$CallbackCostRva,
  [switch]$CallbackWorkload,
- [switch]$Installed)
+ [switch]$Installed,[switch]$GraphCost)
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
@@ -35,6 +35,7 @@ function Finish-Owned($p,$name,$seconds){
 }
 $stage=$null;$scope=$null;$observerProcess=$null;$game=$null;$sampler=$null;$gate=$null
 try{
+ if($GraphCost -and !$PageCostRva){throw 'Graph diagnostic requires PageCostRva'}
  if($ObserverCost -and $PageCostRva){throw 'Separate observer and target instrumentation; do not mix diagnostic overheads'}
  if($CallbackCostRva -and ($PageCostRva -or $CallbackCostRva -notmatch '^[0-9A-Fa-f]{1,8}$' -or [Convert]::ToUInt32($CallbackCostRva,16) -eq 0)){throw 'Callback diagnostic needs one nonzero RVA and no page instrumentation'}
  if($PageCostRva -and ($PageCostRva -notmatch '^[0-9A-Fa-f]{1,8}$' -or [Convert]::ToUInt32($PageCostRva,16) -eq 0)){throw 'Diagnostic page-cost RVA must be nonzero hexadecimal'}
@@ -58,32 +59,41 @@ try{
  if($PageCostRva){Get-FileHash "$PSScriptRoot/../observation/wow_page_cost_data.h","$PSScriptRoot/../observation/wow_page_cost_probe.h"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"}
  if($ObserverCost){Get-FileHash "$PSScriptRoot/../observation/wow_observer_cost.h"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"}
  if($CallbackCostRva){Get-FileHash "$PSScriptRoot/../observation/wow_callback_cost_data.h","$PSScriptRoot/../observation/wow_callback_cost_probe.h"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"}
- foreach($spec in @(@('latency','wow_mine_latency_probe.c','user32.lib gdi32.lib dwmapi.lib'),@('sample','wow_native_pc_sample.c','user32.lib'))){
-  $costFlags=if($PageCostRva -and $spec[0] -eq 'latency'){' /DT447_PAGE_COST_PROFILE'}else{''}
-  if($ObserverCost -and $spec[0] -eq 'latency'){$costFlags+=' /DT447_OBSERVER_COST'}
-  if($CallbackCostRva -and $spec[0] -eq 'latency'){$costFlags+=' /DT447_CALLBACK_COST'}
-  if(($CallbackCostRva -or $CallbackWorkload) -and $spec[0] -eq 'latency'){$costFlags+=' /DT447_CALLBACK_WORKLOAD'}
-  $line='/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /MT /O2 /W3 /D_CRT_SECURE_NO_WARNINGS'+$costFlags+' /Fo"'+$root+'/'+$spec[0]+'.obj" /Fe"'+$root+'/'+$spec[0]+'.exe" "'+$PSScriptRoot+'/'+$spec[1]+'" /link '+$spec[2]+'"'
-  $p=Start-Owned ('compile-'+$spec[0]) $env:ComSpec $line 120
-  Finish-Owned $p ('compile-'+$spec[0]) 120
- }
- Add-Type -TypeDefinition @'
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-public static class MineLatencyEnvironment {
- [DllImport("userenv.dll",SetLastError=true)] static extern bool CreateEnvironmentBlock(out IntPtr block,IntPtr token,bool inherit);
- [DllImport("userenv.dll")] static extern bool DestroyEnvironmentBlock(IntPtr block);
- public static string[] Read(IntPtr token) {
-  IntPtr block;if(!CreateEnvironmentBlock(out block,token,false))throw new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error());
-  try {var result=new List<string>();IntPtr at=block;while(Marshal.ReadInt16(at)!=0){string value=Marshal.PtrToStringUni(at);result.Add(value);at=IntPtr.Add(at,(value.Length+1)*2);}return result.ToArray();}
-  finally{DestroyEnvironmentBlock(block);}
- }
-}
-'@
- $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
- try{$entries=[MineLatencyEnvironment]::Read($logonIdentity.Token)}
- finally{$logonIdentity.Dispose()}
+ $line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-latency-probes"'
+ $producer=Start-Owned 'compile' $env:ComSpec $line 300
+ Finish-Owned $producer 'compile' 300
+ $environmentArch=if([Environment]::Is64BitProcess){'x64'}else{'x86'}
+ $line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" '+$environmentArch+' logon-environment"'
+ $producer=Start-Owned 'compile-environment' $env:ComSpec $line 120
+ Finish-Owned $producer 'compile-environment' 120
+ $environmentExe="$repo/build/.ninja/fixtures-$environmentArch/logon-environment.exe"
+ $cache="$repo/build/.ninja/fixtures-x86"
+ $mask=0
+ if($PageCostRva){$mask+=1}
+ if($ObserverCost){$mask+=2}
+ if($CallbackCostRva){$mask+=4}
+ if($CallbackCostRva -or $CallbackWorkload){$mask+=8}
+ if($GraphCost){$mask+=16}
+ Copy-Item "$cache/wow-latency-$mask.exe" "$root/latency.exe"
+ Copy-Item "$cache/wow-native-sample.exe" "$root/sample.exe"
+ Get-FileHash "$root/latency.exe","$root/sample.exe",$environmentExe,"$PSScriptRoot/../observation/logon_environment.c","$repo/tools/build/fixtures/wow-latency.cmake","$repo/tools/build/fixtures/graph-probe.cmake"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"
+ # Capture the current-token block in memory only; never log environment values.
+ $environmentInfo=[Diagnostics.ProcessStartInfo]::new($environmentExe)
+ $environmentInfo.UseShellExecute=$false;$environmentInfo.CreateNoWindow=$true
+ $environmentInfo.RedirectStandardOutput=$true
+ $environmentInfo.StandardOutputEncoding=[Text.Encoding]::Unicode
+ $environmentProcess=[Diagnostics.Process]::Start($environmentInfo)
+ try {
+  $null=$environmentProcess.Handle
+  @{pid=$environmentProcess.Id;start=$environmentProcess.StartTime.ToUniversalTime().ToString('o');image=$environmentInfo.FileName}|ConvertTo-Json|Set-Content "$root/environment-process.json"
+  $read=$environmentProcess.StandardOutput.ReadToEndAsync()
+  if(!$environmentProcess.WaitForExit(10000)){$environmentProcess.Kill();$environmentProcess.WaitForExit();throw 'Environment reader deadline'}
+  $environmentProcess.WaitForExit()
+  if($environmentProcess.ExitCode){throw 'Current-token environment query failed'}
+  $block=$read.GetAwaiter().GetResult()
+  if(!$block.EndsWith([string][char]0+[char]0)){throw 'Invalid environment block terminator'}
+  $entries=@($block.Split([char]0)|Where-Object {$_.Length})
+ } finally {$environmentProcess.Dispose()}
  $entries|ForEach-Object {$at=$_.IndexOf('=',1);[pscustomobject]@{name=$_.Substring(0,$at);characters=$_.Length+1}}|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
  foreach($case in @('normal','normal-sampled','private')){
   $out="$root/$case";$null=New-Item -ItemType Directory $out

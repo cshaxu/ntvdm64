@@ -1,0 +1,21 @@
+{
+  "pid": 26972,
+  "end": "2026-11-23T20:36:13.5837151+00:00",
+  "exit": 0,
+  "start": "2026-11-23T20:36:06.0197175+00:00",
+  "environmentPid": 19968,
+  "argumentControls": [
+    0,
+    1,
+    2,
+    8,
+    9,
+    10,
+    12,
+    14,
+    17,
+    25
+  ],
+  "environmentCharacters": 3349,
+  "environmentEntries": 45
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\0.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-latency-0.exe",
+    "oldBytes": 130048,
+    "newBytes": 130048,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "c7e1d99d97ffe97d85a0b4ceacaacbd2d5310db96a5898889e45996e978a4c64",
+    "newSha256": "f796226452dbec9f8e25fd10d64dae201c6166b5ab32c2f1710b0ab11cf38185"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\1.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-latency-1.exe",
+    "oldBytes": 131584,
+    "newBytes": 131584,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "7ba16a617bf43d1e7ea94e836f5e062433fa246aa523685548fa2531dab741cb",
+    "newSha256": "bf24b1fac84b1c730e89fa4bd2b25f460f5e6064be34306ba2d48777b60802f0"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\2.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-latency-2.exe",
+    "oldBytes": 131584,
+    "newBytes": 131584,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "3ef2c70fa54fbce097dcf66f3c9059e39cefb5eac30f8e38a34319018b62eb0b",
+    "newSha256": "73bbe13a838aeae6d72d9e6a59ebd20fee3acb6de3fb2b1feeb9dfc8767cf54a"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\8.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-latency-8.exe",
+    "oldBytes": 130560,
+    "newBytes": 130560,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "fadec733254d1eeaceb8a19b54a78a98168dbac743b8e9c28dfd783e9872b253",
+    "newSha256": "9515cf4da522339649acf50741bcdbee0ea98d23f01b60fbc2fcac28749cd692"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\9.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-latency-9.exe",
+    "oldBytes": 132096,
+    "newBytes": 132096,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "9471a304715da02e4a2381d28152b673f74bfa2c2b138791cc085999fe0a07a6",
+    "newSha256": "f01e58abc6c5d3f426bb743a93a22026f8679b70c29458dd83d82d754ae11679"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\10.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-latency-10.exe",
+    "oldBytes": 132096,
+    "newBytes": 132096,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "8402572f8888d230e9ce67f7ce4f4939a7cd0af94bfb934f5ca31c7f2df2f31a",
+    "newSha256": "99dd772941b445c5d29a6f699d1f4b7a835e72580a6db1039c23a865cb33d75a"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\12.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-latency-12.exe",
+    "oldBytes": 132608,
+    "newBytes": 132608,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "7d7e28941c7334fb78001a03878e5291e80df5df7da5d27ab247973ce925306f",
+    "newSha256": "356cd918f154404dd71b56ed36ab02f5dd0248be12508da1935e3969207054b4"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\14.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-latency-14.exe",
+    "oldBytes": 134144,
+    "newBytes": 134144,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "e7e7ee00f3d5a70482dc9a6756d6301f4d013fbae3e1c9f81420f3135f582bc6",
+    "newSha256": "33ef6a07a7438548d93fa033e56b20d8d9ffd5da6340fb40a87d649983df174e"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\17.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-latency-17.exe",
+    "oldBytes": 131584,
+    "newBytes": 131584,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "d468dc70408ab995bd88b66c219c5c173d1c9be237fc824087465d407bedb690",
+    "newSha256": "882829eb85d89f7e1c55ffdecbcd4b3a164e4f828ce70622387900d801bfc0b3"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\25.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-latency-25.exe",
+    "oldBytes": 132096,
+    "newBytes": 132096,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "b8747c4b1b737c7161bdf6890187064e622c841e6b782267644f36c912a1bf08",
+    "newSha256": "164bea4fd7203858f41ebf93664f70b8cb58d0d73d4b193eb4a3abd4a2d5511d"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-latency\\baseline\\sample.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-native-sample.exe",
+    "oldBytes": 115200,
+    "newBytes": 115200,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "f6c9121aac33bee44ee2d756d3bd35d719256f310dd6ef1d6074c82fb98ef793",
+    "newSha256": "8234157ccce68728b9dfb4fdcf99e1ef0c9c90696b3411a0a4108a517231ee84"
+  }
+]

@@ -22,10 +22,6 @@ function Owned($name,$exe,$line,$seconds,$working=$repo){
  if(!$p.WaitForExit($seconds*1000)){taskkill.exe /PID $p.Id /T /F;throw "Owned graph diagnostic deadline $name"}
  $p.WaitForExit();$code=$p.ExitCode;$p.Dispose();$code|Set-Content "$root/$name.exit.txt";if($code){throw "$name failed $code"}
 }
-function Mark($value,$old,$new){
- if([regex]::Matches($value,[regex]::Escape($old)).Count -ne 1){throw "One source boundary required: $old"}
- return $value.Replace($old,$new)
-}
 try{
  $source="$repo/src/compat/wow_user_object_bindings.c"
  $test="$PSScriptRoot/../observation"
@@ -67,19 +63,12 @@ try{
   0|Set-Content "$root/exit.txt"
   return
  }
- # Keep the existing read-only probe ABI, changing only its observed module
- # and rejecting a counter writer-concurrency violation explicitly.
- foreach($name in @('wow_page_cost_data.h','wow_mine_latency_probe.c','wow_mine_gameplay_probe.c','wow_native_pc_sample.c')){Copy-Item "$test/$name" "$root/$name"}
- $runner=[IO.File]::ReadAllText("$PSScriptRoot/verify-wow-mine-latency.ps1")
- $runner=Mark $runner '$repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot ''../..''))' ('$repo='''+$repo+'''')
- $runner=Mark $runner '. "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"' ('. "'+$test+'/isolated_package_cleanup.ps1"')
- [IO.File]::WriteAllText("$root/latency.ps1",$runner,[Text.UTF8Encoding]::new($false))
- Get-FileHash "$root/graph-profile.c","$root/graph-profile.obj","$root/WOW32.DLL","$root/WOW32.DLL.map","$root/latency.ps1","$root/wow_page_cost_probe.h"|Export-Csv -NoTypeInformation "$root/diagnostic-inputs.csv"
+ Get-FileHash "$root/graph-profile.c","$root/graph-profile.obj","$root/WOW32.DLL","$root/WOW32.DLL.map","$root/wow_page_cost_probe.h","$PSScriptRoot/verify-wow-mine-latency.ps1"|Export-Csv -NoTypeInformation "$root/diagnostic-inputs.csv"
  Expand-Archive "$repo/assets/winnt.zip" "$root/media";$package="$root/media/WINNT"
  foreach($image in $images){Copy-Item "$repo/assets/release/$($image.name)" "$package/system32/$($image.name)" -Force}
- Owned baseline $shell ('-NoProfile -File "'+$root+'/latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$observer+'" -CompilerDriver "'+$compiler+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$worker+'/ntvdm.exe.map" -WowMap "'+$provider+'/wow32.dll.map"') 360
+ Owned baseline $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$observer+'" -CompilerDriver "'+$compiler+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$worker+'/ntvdm.exe.map" -WowMap "'+$provider+'/wow32.dll.map"') 360
  Copy-Item "$root/WOW32.DLL" "$package/system32/WOW32.DLL" -Force
- Owned measurement $shell ('-NoProfile -File "'+$root+'/latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$observer+'" -CompilerDriver "'+$compiler+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$worker+'/ntvdm.exe.map" -WowMap "'+$root+'/WOW32.DLL.map" -PageCostRva '+$rva.ToString('X8')) 360
+ Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$observer+'" -CompilerDriver "'+$compiler+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$worker+'/ntvdm.exe.map" -WowMap "'+$root+'/WOW32.DLL.map" -GraphCost -PageCostRva '+$rva.ToString('X8')) 360
  foreach($list in @('inputs.csv','diagnostic-inputs.csv')){foreach($input in Import-Csv "$root/$list"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen graph diagnostic input changed'}}}
  @{namedGroupPassed=$true;productionChanged=$false;published=$false;interpretationPending=$true}|ConvertTo-Json|Set-Content "$root/result.json"
  0|Set-Content "$root/exit.txt"

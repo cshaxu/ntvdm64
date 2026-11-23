@@ -302,8 +302,8 @@
   },
   "test/integration/verify-wow-graph-cost.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Native graph/header projection and diagnostic/unit build delivered;downstream latency producer,runner composition and staging remain",
-    "evidence": "docs/etc/evidence/t484-s3-graph-cost.md"
+    "reason": "P58 canonical native latency consumer and shared header projection; diagnostic package staging remains",
+    "evidence": "docs/etc/evidence/t484-s3-latency.md"
   },
   "test/integration/verify-wow-idle-workers.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-idle.md",
@@ -314,5 +314,10 @@
     "status": "pending-producer-migration",
     "evidence": "docs/etc/evidence/t484-s3-mine.md",
     "reason": "P57 local native/guest producers migrated; physical runtime and package identity staging remain"
+  },
+  "test/integration/verify-wow-mine-latency.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-latency.md",
+    "status": "pending-producer-migration",
+    "reason": "P58 native latency/sampler/environment producers; physical runtime staging remains"
   }
 }

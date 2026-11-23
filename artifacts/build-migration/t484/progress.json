@@ -1,30 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "2c930d09bf348cf70d084415f681a0b3a8b7b2d4",
+  "head": "432bb60a01ee9424cddda8c95f2c9c17c06834bf",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-mine-gameplay.ps1",
+    " M test/integration/verify-wow-graph-cost.ps1",
+    " M test/integration/verify-wow-mine-latency.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-mine/",
-    "?? docs/etc/evidence/t484-s3-mine.md",
-    "?? tools/build/fixtures/wow-mine.cmake"
+    " M tools/build/wow32/graph-cost.cmake",
+    "?? artifacts/build-migration/t484/s3-latency/",
+    "?? docs/etc/evidence/t484-s3-latency.md",
+    "?? test/observation/logon_environment.c",
+    "?? tools/build/fixtures/graph-probe.cmake",
+    "?? tools/build/fixtures/wow-latency.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 66,
-    "unchanged": 176,
+    "changed": 67,
+    "unchanged": 175,
     "removed": 113
   },
   "disposition_counts": {
     "migrated-delivered": 16,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
-    "pending-producer-migration": 47,
+    "pending-producer-migration": 48,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 175
+    "requires-disposition-reconciliation": 174
   },
   "existing_interpreted_candidates_with_command_hits": 202,
   "files": [
@@ -1083,7 +1087,7 @@
       "file": "test/integration/verify-wow-graph-cost.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "df4580faf36d023a4f740af2019fdc7a4497a971e045c3d966394e2101faea4e",
+      "current_sha256": "54230bcabd618c212ff756b48d430d6f5e50bcc1d597fd99dba01c2f308055c1",
       "revisions": [
         "f966783dba7a5993b57d9a4dcf30eb8f5c9c6621"
       ],
@@ -1094,8 +1098,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Native graph/header projection and diagnostic/unit build delivered;downstream latency producer,runner composition and staging remain",
-        "evidence": "docs/etc/evidence/t484-s3-graph-cost.md"
+        "reason": "P58 canonical native latency consumer and shared header projection; diagnostic package staging remains",
+        "evidence": "docs/etc/evidence/t484-s3-latency.md"
       }
     },
     {
@@ -1122,9 +1126,13 @@
       "file": "test/integration/verify-wow-mine-gameplay.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "c36683f3e71cb3d6e5faaea8735425e040b41a61abab9552203c12f55d734b79",
-      "revisions": [],
-      "evidence": [],
+      "current_sha256": "cd58129578cf5418bb1a6a9d111ece14c40160a4d9204fa628c7b02a2cfb233c",
+      "revisions": [
+        "432bb60a01ee9424cddda8c95f2c9c17c06834bf"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-mine.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -1136,12 +1144,16 @@
       "id": "B0063",
       "file": "test/integration/verify-wow-mine-latency.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "79edfa8e25b16442c7f14254d0e4262672ccc314a287c287aebc711f6fed769e",
+      "state": "changed",
+      "current_sha256": "ece2f998999f5ca5b0eac8353c920cafc7ac3349fc8d1be9d273d3c1b348483e",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-latency.md",
+        "status": "pending-producer-migration",
+        "reason": "P58 native latency/sampler/environment producers; physical runtime staging remains"
+      }
     },
     {
       "id": "B0064",
@@ -4922,6 +4934,12 @@
     }
   ],
   "commits": {
+    "432bb60a01ee9424cddda8c95f2c9c17c06834bf": {
+      "subject": "T484 S3 P57 migrate mine integration producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-mine.md"
+      ]
+    },
     "2c930d09bf348cf70d084415f681a0b3a8b7b2d4": {
       "subject": "T484 S3 P56 migrate idle witness producers",
       "evidence": [
@@ -6067,15 +6085,15 @@
           "text": "if(!$ProviderBuildRoot){$ProviderBuildRoot=\"$repo/build/.ninja/msvc-x86-release/wow32\"}"
         },
         {
-          "line": 32,
+          "line": 28,
           "text": "$inputs=@($PSCommandPath,$source,$compiler,$observer,\"$repo/assets/winnt.zip\",\"$provider/build.ninja\",\"$provider/wow32.dll\",\"$provider/wow32.dll.map\",\"$provider/wow32-x86.def\",\"$worker/ntvdm.exe\",\"$worker/ntvdm.exe.map\",\"$worker/ntvdm.lib\",\"$repo/assets/release/release-manifest.json\",\"$repo/tools/build/wow32/graph-cost.cmake\")"
         },
         {
-          "line": 48,
+          "line": 44,
           "text": "$deps=@(& ninja.exe -C $provider -t deps ([IO.Path]::GetRelativePath($provider,$object).Replace('\\','/')))"
         },
         {
-          "line": 54,
+          "line": 50,
           "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/wow-graph-cost-unit.exe\" \"$root/unit.exe\""
         }
       ]
@@ -6103,7 +6121,7 @@
           "text": "[string]$Nasm='nasm.exe',"
         },
         {
-          "line": 75,
+          "line": 76,
           "text": "$cache=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
@@ -6113,8 +6131,12 @@
       "file": "test/integration/verify-wow-mine-latency.ps1",
       "hits": [
         {
-          "line": 66,
-          "text": "$line='/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /MT /O2 /W3 /D_CRT_SECURE_NO_WARNINGS'+$costFlags+' /Fo\"'+$root+'/'+$spec[0]+'.obj\" /Fe\"'+$root+'/'+$spec[0]+'.exe\" \"'+$PSScriptRoot+'/'+$spec[1]+'\" /link '+$spec[2]+'\"'"
+          "line": 65,
+          "text": "$cache=\"$repo/build/.ninja/fixtures-x86\""
+        },
+        {
+          "line": 74,
+          "text": "Get-FileHash \"$root/latency.exe\",\"$root/sample.exe\",\"$cache/logon-environment.exe\",\"$PSScriptRoot/../observation/logon_environment.c\",\"$repo/tools/build/fixtures/wow-latency.cmake\",\"$repo/tools/build/fixtures/graph-probe.cmake\"|Export-Csv -NoTypeInformation -Append \"$root/inputs.csv\""
         }
       ]
     },

@@ -1603,3 +1603,5 @@ post-publication targeted checks.
 - [T484 S3 idle witness producers](evidence/t484-s3-idle.md).
 
 - [T484 S3 mine integration producers](evidence/t484-s3-mine.md).
+
+- [T484 S3 latency/environment producers](evidence/t484-s3-latency.md).

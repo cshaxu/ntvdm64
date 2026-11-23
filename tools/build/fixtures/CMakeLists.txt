@@ -53,8 +53,12 @@ function(fixture name link_mode)
     COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(${name} DEPENDS "${CMAKE_BINARY_DIR}/${name}.exe")
 endfunction()
+fixture(logon-environment CL test/observation/logon_environment.c)
+set_property(TARGET logon-environment_objects PROPERTY COMPILE_OPTIONS /nologo /O2 /W4 /WX)
+set_property(TARGET logon-environment_objects PROPERTY FIXTURE_LIBRARIES userenv.lib advapi32.lib)
 include(wow-idle.cmake)
 include(wow-mine.cmake)
+include(wow-latency.cmake)
 set(observer_targets)
 foreach(pair IN ITEMS "console-startup-observer|console_startup_observer"
     "wow-exception-observer|wow_exception_observer"
