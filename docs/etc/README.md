@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 window contracts](evidence/t484-s3-window-contracts.md) consolidates
+seven producers and verifies eight window/Console cases on x86 and x64.
+
 [T484 S3 native input](evidence/t484-s3-native-input.md) migrates two producers
 and verifies five private-desktop service/lifetime cases with production objects.
 

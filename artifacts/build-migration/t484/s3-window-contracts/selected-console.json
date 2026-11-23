@@ -1,0 +1,22 @@
+{
+  "product_changed": false,
+  "guest_changed": false,
+  "scope": "Native Console/window contracts and bounded production function fixtures; not guest acceptance. Pixel observations are not universal metrics.",
+  "cases": [
+    {
+      "started": "2026-11-23T16:44:55.7492740Z",
+      "pid": 25276,
+      "case": "build",
+      "exit": 0,
+      "finished": "2026-11-23T16:45:03.2953342Z"
+    },
+    {
+      "started": "2026-11-23T16:45:03.3772663Z",
+      "pid": 2704,
+      "case": "ntvwm-console-state",
+      "exit": 0,
+      "finished": "2026-11-23T16:45:03.6124784Z"
+    }
+  ],
+  "result": "pass"
+}

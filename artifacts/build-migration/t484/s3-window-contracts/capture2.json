@@ -1,0 +1,22 @@
+{
+  "result": "failed",
+  "error": "native-console-capture failed 1",
+  "guest_changed": false,
+  "product_changed": false,
+  "cases": [
+    {
+      "pid": 12300,
+      "exit": 0,
+      "finished": "2026-11-23T16:39:54.6535681Z",
+      "started": "2026-11-23T16:39:45.2482748Z",
+      "case": "build"
+    },
+    {
+      "pid": 16956,
+      "exit": 1,
+      "finished": "2026-11-23T16:39:55.0603992Z",
+      "started": "2026-11-23T16:39:54.8161183Z",
+      "case": "native-console-capture"
+    }
+  ]
+}

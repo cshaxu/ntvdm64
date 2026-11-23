@@ -1,0 +1,71 @@
+{
+  "result": "failed",
+  "cases": [
+    {
+      "pid": 24428,
+      "finished": "2026-11-23T16:39:04.3929037Z",
+      "case": "build",
+      "started": "2026-11-23T16:38:52.8765813Z",
+      "exit": 0
+    },
+    {
+      "pid": 18260,
+      "finished": "2026-11-23T16:39:04.6245716Z",
+      "case": "native-input-geometry",
+      "started": "2026-11-23T16:39:04.5369548Z",
+      "exit": 0
+    },
+    {
+      "pid": 28820,
+      "finished": "2026-11-23T16:39:05.0611114Z",
+      "case": "native-window-sizing",
+      "started": "2026-11-23T16:39:04.7205867Z",
+      "exit": 0
+    },
+    {
+      "pid": 23016,
+      "finished": "2026-11-23T16:39:08.4602467Z",
+      "case": "ntvwm-carrier-guard",
+      "started": "2026-11-23T16:39:05.1701641Z",
+      "exit": 0
+    },
+    {
+      "pid": 408,
+      "finished": "2026-11-23T16:39:08.6312846Z",
+      "case": "ntvwm-carrier-order",
+      "started": "2026-11-23T16:39:08.5478289Z",
+      "exit": 0
+    },
+    {
+      "pid": 21124,
+      "finished": "2026-11-23T16:39:09.0757585Z",
+      "case": "ntvwm-close-priority",
+      "started": "2026-11-23T16:39:08.7235284Z",
+      "exit": 0
+    },
+    {
+      "pid": 31056,
+      "finished": "2026-11-23T16:39:09.4510136Z",
+      "case": "ntvwm-console-state",
+      "started": "2026-11-23T16:39:09.2244053Z",
+      "exit": 0
+    },
+    {
+      "pid": 33652,
+      "finished": "2026-11-23T16:39:09.8729867Z",
+      "case": "ntvwm-palette-geometry",
+      "started": "2026-11-23T16:39:09.5361787Z",
+      "exit": 0
+    },
+    {
+      "pid": 9668,
+      "finished": "2026-11-23T16:39:10.2078107Z",
+      "case": "native-console-capture",
+      "started": "2026-11-23T16:39:09.9755737Z",
+      "exit": 1
+    }
+  ],
+  "guest_changed": false,
+  "error": "native-console-capture failed 1",
+  "product_changed": false
+}

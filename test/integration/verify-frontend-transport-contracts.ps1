@@ -37,9 +37,10 @@ if($Only){
     $cases=@($cases | Where-Object {$_.Name -in $Only})
 }
 if($ExpandedBackend){
-    & (Join-Path $repo 'test/observation/verify-ntvwm-console-state.ps1') `
-        -BuildRoot ((Join-Path $BuildRoot ($LogPrefix+'-ntvwm-state')).Substring($repo.Length+1)) `
-        -LogPath (Join-Path $LogRoot ($LogPrefix+'-ntvwm-state.log'))
+    & (Join-Path $repo 'test/observation/verify-window-contracts.ps1') `
+        -EvidenceRoot (Join-Path $BuildRoot ($LogPrefix+'-ntvwm-state')) `
+        -Only ntvwm-console-state
+    if($LASTEXITCODE){throw 'NTVWM Console state contract failed'}
     foreach($test in @('ntvwm-text-frame','ntvwm-presentation','frontend-text-handoff')) {
         $log=Join-Path $LogRoot ($LogPrefix+'-'+$test+'.log')
         if(Test-Path -LiteralPath $log){throw "Refusing to overwrite $log"}

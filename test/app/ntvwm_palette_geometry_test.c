@@ -3,6 +3,11 @@
 #include "ntvwm-exe/console_state.h"
 #include <stdio.h>
 #include <string.h>
+static unsigned resize_setters;
+static BOOL WINAPI observed_size(HANDLE output,COORD size)
+{ ++resize_setters;return SetConsoleScreenBufferSize(output,size); }
+static BOOL WINAPI observed_window(HANDLE output,BOOL absolute,const SMALL_RECT *window)
+{ ++resize_setters;return SetConsoleWindowInfo(output,absolute,window); }
 
 static BOOL WINAPI observed_infoex(HANDLE output,PCONSOLE_SCREEN_BUFFER_INFOEX info)
 {
@@ -12,6 +17,7 @@ static BOOL WINAPI observed_infoex(HANDLE output,PCONSOLE_SCREEN_BUFFER_INFOEX i
         memcmp(before.ColorTable,info->ColorTable,sizeof(info->ColorTable));
     BOOL result;
     DWORD error;
+    ++resize_setters;
     if(observe && (info->srWindow.Right!=before.srWindow.Right+1 ||
         info->srWindow.Bottom!=before.srWindow.Bottom+1)) {
         fputs("FAIL palette setter missing exclusive right/bottom conversion\n",stderr);
@@ -42,6 +48,12 @@ static BOOL WINAPI observed_infoex(HANDLE output,PCONSOLE_SCREEN_BUFFER_INFOEX i
 }
 
 #define SetConsoleScreenBufferInfoEx observed_infoex
+#define SetConsoleScreenBufferSize observed_size
+#define SetConsoleWindowInfo observed_window
 #include "ntvwm-exe/console_state.c"
 #undef SetConsoleScreenBufferInfoEx
+#undef SetConsoleScreenBufferSize
+#undef SetConsoleWindowInfo
+#define NO_RESIZE_BEGIN() unsigned setters_before=resize_setters
+#define NO_RESIZE_CHECK() CHECK(resize_setters==setters_before)
 #include "native_console_capture_test.c"

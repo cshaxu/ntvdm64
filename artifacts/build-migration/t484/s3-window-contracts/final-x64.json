@@ -1,0 +1,71 @@
+{
+  "result": "pass",
+  "scope": "Native Console/window contracts and bounded production function fixtures; not guest acceptance. Pixel observations are not universal metrics.",
+  "cases": [
+    {
+      "case": "build",
+      "pid": 23088,
+      "exit": 0,
+      "started": "2026-11-23T16:42:16.2603408Z",
+      "finished": "2026-11-23T16:42:25.3000031Z"
+    },
+    {
+      "case": "native-input-geometry",
+      "pid": 14072,
+      "exit": 0,
+      "started": "2026-11-23T16:42:25.3877393Z",
+      "finished": "2026-11-23T16:42:25.4509868Z"
+    },
+    {
+      "case": "native-window-sizing",
+      "pid": 5452,
+      "exit": 0,
+      "started": "2026-11-23T16:42:25.4738838Z",
+      "finished": "2026-11-23T16:42:25.7731403Z"
+    },
+    {
+      "case": "ntvwm-carrier-guard",
+      "pid": 32816,
+      "exit": 0,
+      "started": "2026-11-23T16:42:25.8204014Z",
+      "finished": "2026-11-23T16:42:29.0252612Z"
+    },
+    {
+      "case": "ntvwm-carrier-order",
+      "pid": 25016,
+      "exit": 0,
+      "started": "2026-11-23T16:42:29.0477795Z",
+      "finished": "2026-11-23T16:42:29.1199468Z"
+    },
+    {
+      "case": "ntvwm-close-priority",
+      "pid": 8688,
+      "exit": 0,
+      "started": "2026-11-23T16:42:29.1324759Z",
+      "finished": "2026-11-23T16:42:29.5009552Z"
+    },
+    {
+      "case": "ntvwm-console-state",
+      "pid": 21152,
+      "exit": 0,
+      "started": "2026-11-23T16:42:29.5126180Z",
+      "finished": "2026-11-23T16:42:29.7318456Z"
+    },
+    {
+      "case": "ntvwm-palette-geometry",
+      "pid": 28440,
+      "exit": 0,
+      "started": "2026-11-23T16:42:29.8373871Z",
+      "finished": "2026-11-23T16:42:30.1631877Z"
+    },
+    {
+      "case": "native-console-capture",
+      "pid": 24620,
+      "exit": 0,
+      "started": "2026-11-23T16:42:30.2283672Z",
+      "finished": "2026-11-23T16:42:30.5392452Z"
+    }
+  ],
+  "guest_changed": false,
+  "product_changed": false
+}

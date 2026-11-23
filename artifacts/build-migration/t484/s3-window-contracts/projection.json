@@ -1,0 +1,7 @@
+{
+  "sameNormalizedBody": true,
+  "start": "DWORD ntvwm_presentation_input(",
+  "sha256": "24F64CA080A1C590C7D8A2D3BD5DA95501DA5594003BB127128F62BACA3451C2",
+  "end": "DWORD ntvwm_presentation_capture(",
+  "source": "src/ntvwm-exe/presentation.c"
+}
