@@ -1,12 +1,11 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot)
+param([Parameter(Mandatory)][string]$BuildRoot, [ValidateSet('x86','x64')][string]$Architecture='x86')
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if (!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or
         (Test-Path $root)) { throw 'Require a fresh evidence directory under build' }
 $null=New-Item -ItemType Directory -Path $root
-$vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds) {
     $p=Start-Process $file -ArgumentList $arguments -WorkingDirectory $root -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$name.out" -RedirectStandardError "$root/$name.err"
     $null=$p.Handle
@@ -22,33 +21,22 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds)
     if ($p.ExitCode) { throw "Failed: $name ($($p.ExitCode))" }
 }
 try {
-    & "$PSScriptRoot/extract-softpc-thread-exit-fixture.ps1" -RepositoryRoot $repo -OutputRoot $root
-    $sources=@('src/compat/guest_memory_lease.c',
-        'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
-        'src/compat/thread_start.c',
-        'src/lib-win32/thread/thread.c',
-        'test/adapter-mvdm-host-out/thread_start_session_fixture.c')
-    $objects=@()
-    foreach ($source in $sources) {
-        $object=[IO.Path]::GetFileNameWithoutExtension($source)+'.obj'
-        $objects+=('"'+$root+'\'+$object+'"')
-        $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /c /O2 /MT /W4 /I "'+$repo+'\src" /I "'+$repo+'\src\compat\include" /I"'+$root+'" /Fo"'+$root+'\'+$object+'" "'+$repo+'\'+$source+'""'
-        Run-Owned ('compile-'+[IO.Path]::GetFileNameWithoutExtension($source)) 'cmd.exe' $argsLine 120
+    & "$repo/tools/build-fixtures.cmd" $Architecture thread-lifecycle *> "$root/build.log"
+    if ($LASTEXITCODE) { throw 'Thread fixture build failed' }
+    $cache="$repo/build/.ninja/fixtures-$Architecture"
+    foreach ($name in 'thread-start-session-fixture.exe','thread-module.dll',
+            'nt-thread-alert-fixture.exe','softpc-event-thread-shutdown-fixture.exe') {
+        Copy-Item "$cache/$name" "$root/$name"
     }
-    $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /out:"'+$root+'\fixture.exe" '+($objects -join ' ')+' /export:session_thread_current /export:opennt_create_cdecl_thread_named /implib:"'+$root+'\fixture.lib" kernel32.lib"'
-    Run-Owned 'link' 'cmd.exe' $argsLine 120
-    foreach ($source in @('src/vdmredir-dll/source/mvdm_redirector_dll_entry.c',
-            'test/adapter-mvdm-host-out/thread_start_module_fixture.c')) {
-        $object=[IO.Path]::GetFileNameWithoutExtension($source)+'.obj'
-        $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /c /O2 /MT /W4 /I "'+$repo+'\src" /I"'+$root+'" /Fo"'+$root+'\'+$object+'" "'+$repo+'\'+$source+'""'
-        Run-Owned ('compile-'+[IO.Path]::GetFileNameWithoutExtension($source)) 'cmd.exe' $argsLine 120
-    }
-    $moduleObjects=@('mvdm_redirector_dll_entry.obj','thread_start_module_fixture.obj',
-        'fixture.lib') |
-        ForEach-Object { '"'+$root+'\'+$_+'"' }
-    $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /dll /entry:mvdm_vdmredir_dll_entry@12 /export:thread_module_run /out:"'+$root+'\thread-module.dll" '+($moduleObjects -join ' ')+' kernel32.lib libcmt.lib libvcruntime.lib libucrt.lib"'
-    Run-Owned 'link-module' 'cmd.exe' $argsLine 120
-    Run-Owned 'fixture' "$root/fixture.exe" ('--verify "'+$root+'/thread-module.dll"') 45
+    $sources=@('src/compat/guest_memory_lease.c','src/ntvdm-exe/session/session.c',
+        'src/compat/host_context.c','src/compat/thread_start.c','src/lib-win32/thread/thread.c',
+        'test/adapter-mvdm-host-out/thread_start_session_fixture.c',
+        'src/mvdm-host/softpc.new/host/src/nt_thred.c',
+        'src/vdmredir-dll/source/mvdm_redirector_dll_entry.c',
+        'test/adapter-mvdm-host-out/thread_start_module_fixture.c')
+    Run-Owned 'fixture' "$root/thread-start-session-fixture.exe" ('--verify "'+$root+'/thread-module.dll"') 45
+    Run-Owned 'alert' "$root/nt-thread-alert-fixture.exe" ' ' 10
+    Run-Owned 'shutdown' "$root/softpc-event-thread-shutdown-fixture.exe" ' ' 10
     $output=Get-Content "$root/fixture.out" -Raw
     foreach ($marker in @('THREAD_MODULE actual_redirector_entry=1 shared_binding=1 same_owner=1',
             'THREAD_LIFECYCLE uninitialized_rejected=1 repeated_install=1',

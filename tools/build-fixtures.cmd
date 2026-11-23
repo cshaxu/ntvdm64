@@ -12,6 +12,7 @@ if "%TARGET%"=="system-fixtures" set "SELECTED=1"
 if "%TARGET%"=="redirector-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="package-resources" set "SELECTED=1"
 if "%TARGET%"=="presentation-font" set "SELECTED=1"
+if "%TARGET%"=="thread-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="console-contracts" set "SELECTED=1"
 if "%TARGET%"=="console-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="observation-tools" set "SELECTED=1"

@@ -27,6 +27,11 @@ or recompilation of original Microsoft guests; apply the
 
 ## Engineering tools
 
+`build-fixtures.cmd x86|x64 thread-lifecycle` produces thread alert/join,
+session lifecycle and the shared-binding DLL fixtures. The existing
+`verify-thread-start-boundary.ps1` delegates compilation to this CMD entry;
+`-Architecture` defaults to x86 and also supports x64.
+
 `build-fixtures.cmd x86 console-contracts` uses the worker's current providers;
 `presentation-font` supports x86/x64. `test/observation/verify-console-contracts.ps1`
 runs native input/text checks on an owned private desktop and font snapshots.

@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 thread fixtures](evidence/t484-s3-thread-fixtures.md) records native
+thread/module production and dual-architecture lifecycle verification.
+
 [T484 S3 Console fixtures](evidence/t484-s3-console-fixtures.md) records
 three producer replacements and four final runtime cases.
 

@@ -49,7 +49,7 @@ function(fixture name link_mode)
   add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/${name}.exe"
     COMMAND ${link} $<TARGET_OBJECTS:${name}_objects> ${tail}
     DEPENDS ${name}_objects $<TARGET_OBJECTS:${name}_objects>
-    BYPRODUCTS "${CMAKE_BINARY_DIR}/${name}.exe.map"
+    BYPRODUCTS "${CMAKE_BINARY_DIR}/${name}.exe.map" ${${name}_link_byproducts}
     COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(${name} DEPENDS "${CMAKE_BINARY_DIR}/${name}.exe")
 endfunction()
@@ -317,6 +317,7 @@ target_compile_options(presentation-font-snapshot-fixture_objects PRIVATE /WX)
 target_include_directories(presentation-font-snapshot-fixture_objects PRIVATE
   "${NTVDM_REPO}/src/compat/include")
 add_custom_target(presentation-font DEPENDS presentation-font-snapshot-fixture)
+include(thread-tests.cmake)
 
 # These historical profiles enabled /Gy only for the coordination unit.
 foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memory_test

@@ -1,0 +1,66 @@
+{
+  "projection": "Equal to prior selector after newline normalization",
+  "runs": [
+    {
+      "architecture": "x86",
+      "exit": 0,
+      "markers": [
+        "THREAD_LIFECYCLE uninitialized_rejected=1 repeated_install=1",
+        "THREAD_START_ROLLBACK rejected=4 owner_count=1 no_worker_entry=1",
+        "THREAD_PRE_CCPU original_exit_body=1 unbind_before_cpu=1 once=1",
+        "THREAD_TERMINAL_UNBIND normal=5 once=1 rejected_exit=c0000420",
+        "THREAD_TERMINAL_INTENT terminal=5 ordinary=1 rejected_reset=1 exception_reset=1",
+        "THREAD_MODULE actual_redirector_entry=1 shared_binding=1 same_owner=1"
+      ],
+      "binaries": [
+        {
+          "name": "thread-start-session-fixture.exe",
+          "sha256": "64AD5EA6755B65644642D52FA6ABB981BA54E26D04C0E9897FA858798539B23E"
+        },
+        {
+          "name": "thread-module.dll",
+          "sha256": "3DE9AB03451F72A791E3EDDEB0F2EE2EF6CF484B86480734EB98DF2C2C6CFA5C"
+        },
+        {
+          "name": "nt-thread-alert-fixture.exe",
+          "sha256": "5A80BCAE950A2388EA2F0F8EC48F5ADA0698ACD08F56A4CB430284065D6E2644"
+        },
+        {
+          "name": "softpc-event-thread-shutdown-fixture.exe",
+          "sha256": "7FFC71B7FC6F2F8C81883623B1C3CED3F536F324D8E7E8DA15C1879101EFD127"
+        }
+      ]
+    },
+    {
+      "architecture": "x64",
+      "exit": 0,
+      "markers": [
+        "THREAD_LIFECYCLE uninitialized_rejected=1 repeated_install=1",
+        "THREAD_START_ROLLBACK rejected=4 owner_count=1 no_worker_entry=1",
+        "THREAD_PRE_CCPU original_exit_body=1 unbind_before_cpu=1 once=1",
+        "THREAD_TERMINAL_UNBIND normal=5 once=1 rejected_exit=c0000420",
+        "THREAD_TERMINAL_INTENT terminal=5 ordinary=1 rejected_reset=1 exception_reset=1",
+        "THREAD_MODULE actual_redirector_entry=1 shared_binding=1 same_owner=1"
+      ],
+      "binaries": [
+        {
+          "name": "thread-start-session-fixture.exe",
+          "sha256": "0BD82903A4C5260322F2B1FE2A817981B325F9A6418F93B5E5ECE05A46A6AD72"
+        },
+        {
+          "name": "thread-module.dll",
+          "sha256": "5E2FD2E3C104EA95694A119B6ACEB8537B8119563702D76BEBE49CDD89C01A2A"
+        },
+        {
+          "name": "nt-thread-alert-fixture.exe",
+          "sha256": "A55F33B5E55B435071909C064946215F666CBFAA713D375410FC37CB617DBB02"
+        },
+        {
+          "name": "softpc-event-thread-shutdown-fixture.exe",
+          "sha256": "BE728A0EC6FA5AE64597874F7B2DCC56C9A0B1AE8138E4EE5AC850B3020C3544"
+        }
+      ]
+    }
+  ],
+  "exit": 0
+}
