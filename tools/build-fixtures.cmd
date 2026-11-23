@@ -38,6 +38,8 @@ if "%TARGET%"=="command-keyboard-shadow" set "SELECTED=1"
 if "%TARGET%"=="command-keyboard-shadow" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="serial-discovery" set "SELECTED=1"
 if "%TARGET%"=="serial-discovery" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="win16-probes" set "SELECTED=1"
+if "%TARGET%"=="win16-probes" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="pic-bios-contracts" if not "%~1"=="x86" exit /b 2
 for %%I in (host-cpu-endian host-cpu-endian-default host-cpu-endian-reject) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="console-api-probes" if not "%~1"=="x64" exit /b 2

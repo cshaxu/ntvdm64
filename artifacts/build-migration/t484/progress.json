@@ -1,20 +1,22 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "29b0690b3c85813887eff1580f32c74b983cf98d",
+  "head": "626a2aed8aeb9d8eaa34f8403b2bbd61714f6753",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-s45-vcd-serial-discovery.ps1",
+    " M test/integration/verify-win16-ddeml-probe.ps1",
+    " M test/integration/verify-win16-multimedia-timer-probe.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/cpu-guest-probes.cmake",
-    "?? artifacts/build-migration/t484/s3-serial-probe/",
-    "?? docs/etc/evidence/t484-s3-serial-probe.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-win16-probes/",
+    "?? docs/etc/evidence/t484-s3-win16-probes.md",
+    "?? tools/build/fixtures/win16-probes.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 44,
-    "unchanged": 198,
+    "changed": 46,
+    "unchanged": 196,
     "removed": 113
   },
   "disposition_counts": {
@@ -723,8 +725,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "c854c55e5fbdf2bca85729a676707f80d9c1ab374ce32c474489ae8403a0fe77",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "626a2aed8aeb9d8eaa34f8403b2bbd61714f6753"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-serial-probe.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -750,14 +756,15 @@
       "id": "B0043",
       "file": "test/integration/verify-win16-ddeml-probe.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "ca4f449885038466fa73a86753ad2b4a4c6bd4b5794e95f53b96888ef0401479",
+      "state": "changed",
+      "current_sha256": "8cbf6f51d2f58bf3adc49eb720f67a960871be76bed8c07324bbd7f9fb422458",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM; uses shared logon helper"
+        "reason": "Native Win16 assembly variants verified; shared logon-helper and package staging production remain pending",
+        "evidence": "docs/etc/evidence/t484-s3-win16-probes.md"
       }
     },
     {
@@ -792,14 +799,15 @@
       "id": "B0046",
       "file": "test/integration/verify-win16-multimedia-timer-probe.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "60f3e04a37135240bb8329c7c5f65fa50210bdf746172b185498f9ecb42a6619",
+      "state": "changed",
+      "current_sha256": "6e5c6b1de02458c2002b0d16002b6c017dee926fe93b23ec7fb69e78451881cf",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM; uses shared logon helper"
+        "reason": "Native Win16 assembly variants verified; shared logon-helper and package staging production remain pending",
+        "evidence": "docs/etc/evidence/t484-s3-win16-probes.md"
       }
     },
     {
@@ -4790,6 +4798,12 @@
     }
   ],
   "commits": {
+    "626a2aed8aeb9d8eaa34f8403b2bbd61714f6753": {
+      "subject": "T484 S3 P43 migrate serial probe assembly to native target",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-serial-probe.md"
+      ]
+    },
     "29b0690b3c85813887eff1580f32c74b983cf98d": {
       "subject": "T484 S3 P42 migrate COMMAND keyboard fixture producers",
       "evidence": [
@@ -5608,6 +5622,10 @@
         {
           "line": 36,
           "text": "$assembler=(Get-Command nasm.exe).Source"
+        },
+        {
+          "line": 40,
+          "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/guest-probes/win16/$variant.EXE\" \"$root/$probe.EXE\""
         }
       ]
     },
@@ -5658,6 +5676,10 @@
         {
           "line": 32,
           "text": "$probe='MMTPROB';$assembler=(Get-Command nasm.exe).Source"
+        },
+        {
+          "line": 34,
+          "text": "$cache=\"$repo/build/.ninja/fixtures-x86/guest-probes/win16\""
         }
       ]
     },

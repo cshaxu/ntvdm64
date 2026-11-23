@@ -1574,3 +1574,5 @@ post-publication targeted checks.
 [T484 S3 keyboard producers](evidence/t484-s3-keyboard-shadow.md) records native helpers, corrected fixture linkage and remaining runtime-layout migration.
 
 [T484 S3 serial producer](evidence/t484-s3-serial-probe.md) records native mask-dependent assembly, equivalence and parameter/cache checks.
+
+[T484 S3 Win16 probe production](evidence/t484-s3-win16-probes.md) records shared DDEML/timer native variants and exact assembly equivalence.

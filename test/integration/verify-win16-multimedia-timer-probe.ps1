@@ -30,9 +30,11 @@ try {
  $source="$PSScriptRoot/../observation/win16_multimedia_timer_probe.asm"
  $library="$PSScriptRoot/../observation/win16_multimedia_timer_library.asm"
  $probe='MMTPROB';$assembler=(Get-Command nasm.exe).Source
- Owned assemble-library $assembler ('-f bin "'+$library+'" -o "'+$root+'/MMTPROBE.DLL"') 30
- $defines=if($LoadOnly){'-DLOAD_ONLY '}elseif($NoTimer){'-DNO_TIMER '}else{''}
- Owned assemble $assembler ($defines+'-f bin "'+$source+'" -o "'+$root+'/'+$probe+'.EXE"') 30
+ Owned assemble $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 win16-probes"') 300
+ $cache="$repo/build/.ninja/fixtures-x86/guest-probes/win16"
+ Copy-Item "$cache/MMTPROBE.DLL" "$root/MMTPROBE.DLL"
+ $variant=if($LoadOnly){'MMTPROB-load'}elseif($NoTimer){'MMTPROB-no-timer'}else{$probe}
+ Copy-Item "$cache/$variant.EXE" "$root/$probe.EXE"
  Get-FileHash $library,"$root/MMTPROBE.DLL"|Export-Csv -NoTypeInformation "$root/library-inputs.csv"
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity
  Save-IsolatedPackageManifest $runtime "$root/manifest.json"

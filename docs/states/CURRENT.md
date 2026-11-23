@@ -88,7 +88,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P43 serial producer](../etc/evidence/t484-s3-serial-probe.md) | Native parameterized assembly;five masks byte-identical, cache and six rejection cases pass; runtime staging remains open. |
 
-Each batch passed its cached full host build. P43 checks11 raw host inputs
+| [P44 Win16 probes](../etc/evidence/t484-s3-win16-probes.md) | Two runners share nine byte-identical native DDEML/timer variants; no-op cache passes; shared staging/helper chain remains open. |
+
+Each batch passed its cached full host build. P44 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

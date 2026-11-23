@@ -34,8 +34,10 @@ try {
  if($WindowWordControl){$source="$PSScriptRoot/../observation/win16_ddeml_window_word_probe.asm"}
  $probe=if($Case -eq 'init'){'DDINIT'}else{'DDREG'}
  $assembler=(Get-Command nasm.exe).Source
- $defines=if($SelfCallbackControl){'-DSELF_CALLBACK_CONTROL '}else{''}
- Owned assemble $assembler ($defines+'-f bin "'+$source+'" -o "'+$root+'/'+$probe+'.EXE"') 30
+ Owned assemble $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 win16-probes"') 300
+ $variant=if($WindowWordControl){'DDWORD'}else{$probe}
+ if($SelfCallbackControl){$variant+='-self'}
+ Copy-Item "$repo/build/.ninja/fixtures-x86/guest-probes/win16/$variant.EXE" "$root/$probe.EXE"
  $dll=(Resolve-Path $DdemlImage).Path
  if((Get-FileHash $dll).Hash -ne $ExpectedDdemlSha256){throw 'Original DDEML input differs'}
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity

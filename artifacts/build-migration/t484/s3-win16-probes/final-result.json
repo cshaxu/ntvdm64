@@ -1,0 +1,12 @@
+{
+  "parsed": [
+    "verify-win16-ddeml-probe",
+    "verify-win16-multimedia-timer-probe"
+  ],
+  "started": "2026-11-23T18:52:27.4616944+00:00",
+  "publishedHashes": 22,
+  "pid": 27484,
+  "finished": "2026-11-23T18:52:48.7919228+00:00",
+  "rawHostImages": 11,
+  "exit": 0
+}
