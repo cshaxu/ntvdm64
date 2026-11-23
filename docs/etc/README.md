@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 WOW controls](evidence/t484-s3-wow-controls.md) records the native
+158-unit control graph and 38 passing runtime cases.
+
 [T484 S3 CCPU callback](evidence/t484-s3-ccpu-callback.md) records native
 callback producers and current test initialization.
 

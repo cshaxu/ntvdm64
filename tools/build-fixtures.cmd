@@ -16,6 +16,8 @@ if "%TARGET%"=="thread-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="console-contracts" set "SELECTED=1"
 if "%TARGET%"=="host-thread-boundaries" set "SELECTED=1"
 if "%TARGET%"=="ccpu-callback" set "SELECTED=1"
+if "%TARGET%"=="wow-controls" set "SELECTED=1"
+if "%TARGET%"=="wow-controls" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="ccpu-callback" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="host-thread-boundaries" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="console-contracts" if not "%~1"=="x86" exit /b 2
@@ -48,6 +50,7 @@ if "%TARGET%"=="dem-declarations" goto worker
 if "%TARGET%"=="console-contracts" goto worker
 if "%TARGET%"=="host-thread-boundaries" goto worker
 if "%TARGET%"=="ccpu-callback" goto worker
+if "%TARGET%"=="wow-controls" goto controls
 if "%TARGET%"=="command-redirection" goto worker
 for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" goto worker
 cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON
@@ -62,4 +65,9 @@ set "result=%errorlevel%"
 popd
 if not "%result%"=="0" exit /b %result%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\worker" --target %TARGET%
+exit /b %errorlevel%
+:controls
+cmake -S "%NTVDM_ROOT%\tools\build\wow-controls" -B "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\call-boundaries-native" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_USE_CCACHE=ON
+if errorlevel 1 exit /b %errorlevel%
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\call-boundaries-native" --target wow-controls
 exit /b %errorlevel%

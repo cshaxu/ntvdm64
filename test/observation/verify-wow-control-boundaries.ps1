@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$RepositoryRoot = (Join-Path $PSScriptRoot '../..'),
-    [string]$BuildRoot = 'build/.ninja/msvc-x86-release/call-boundaries',
+    [string]$BuildRoot = 'build/.ninja/msvc-x86-release/call-boundaries-native',
     [Parameter(Mandatory=$true)][string]$EvidenceRoot,
     [switch]$CpdWindowResearch,
     [switch]$StyleNotificationResearch,
@@ -26,10 +26,14 @@ function BuildPath([string]$path) {
     return $path
 }
 $build = BuildPath $BuildRoot
+if ($build -ne (BuildPath 'build/.ninja/msvc-x86-release/call-boundaries-native')) {
+    throw 'Use the canonical native control fixture cache.'
+}
 $logs = BuildPath $EvidenceRoot
 if (Test-Path -LiteralPath $logs) { throw 'Evidence directory must be new; do not overwrite a prior run.' }
 New-Item -ItemType Directory -Force -Path $logs | Out-Null
 $result = 1
+$caseResults = [Collections.Generic.List[object]]::new()
 function RunOwned([string]$name, [string]$exe, [string[]]$arguments, [int]$seconds) {
     $start = [DateTime]::UtcNow
     $params = @{FilePath=$exe; WorkingDirectory=$build; WindowStyle='Hidden'; PassThru=$true;
@@ -43,12 +47,19 @@ function RunOwned([string]$name, [string]$exe, [string[]]$arguments, [int]$secon
         throw "Owned $name exceeded its actual deadline"
     }
     Write-Output "$name exit=$($p.ExitCode) elapsed_seconds=$(([DateTime]::UtcNow-$start).TotalSeconds)"
+    $caseResults.Add([pscustomobject]@{name=$name;pid=$p.Id;exit=$p.ExitCode;
+        started=$start.ToString('o');sha256=(Get-FileHash -LiteralPath $exe).Hash})
     return $p.ExitCode
 }
 try {
-    & "$root/tools/build/New-T447S3CallBoundaryNinja.ps1" -RepositoryRoot $root -BuildRoot $build -VsDevCmd $VsDevCmd
+    $previousToolchain = $env:NTVDM_VSDEVCMD
+    try {
+        $env:NTVDM_VSDEVCMD = $VsDevCmd
+        & "$root/tools/build-fixtures.cmd" x86 wow-controls *> "$logs/build.log"
+        if ($LASTEXITCODE) { throw 'Native WOW control build failed; no fixtures executed.' }
+    } finally { $env:NTVDM_VSDEVCMD = $previousToolchain }
     # Include untracked staged sources: git diff alone omits new original slices.
-    $sourceRoots = @('src/wow32-dll','src/non-mvdm/windows/core/ntuser','src/compat','test/compat','test/wow32-dll/source','test/adapter-mvdm-host-out/wow','tools/build/New-T447S3CallBoundaryNinja.ps1')
+    $sourceRoots = @('src/wow32-dll','src/non-mvdm/windows/core/ntuser','src/compat','test/compat','test/wow32-dll/source','test/adapter-mvdm-host-out/wow','tools/build/wow-controls','tools/build-fixtures.cmd')
     $deletedPaths = @(& git -C $root ls-files -d -- @sourceRoots)
     if ($LASTEXITCODE) { throw 'Cannot enumerate deleted source inputs.' }
     $paths = @(& git -C $root ls-files -co --exclude-standard -- @sourceRoots) | Sort-Object -Unique
@@ -61,20 +72,7 @@ try {
         Export-Csv -NoTypeInformation -LiteralPath "$logs/source-sha256.csv"
     Get-FileHash -Algorithm SHA256 -LiteralPath "$build/build.ninja",$VsDevCmd |
         Export-Csv -NoTypeInformation -LiteralPath "$logs/build-sha256.csv"
-    $targets = @('original-control-bodies','original-getset-boundary','window-access-boundary','original-dialog-creator-lifetime','original-dialog-modal-lifetime','original-dialog-end-boundary','original-default-boundary','call-boundaries','dialog-context-boundaries','dialog-keyboard-boundary','original-mnemonic-lifetime-boundary','original-keyboard-lifetime-boundary',
-        'original-string-boundaries','original-mnemonic-drawing-boundaries','original-button-drawing-boundaries','original-button-resource-boundaries','original-state-drawing-boundaries',
-        'dialog-navigation-boundaries','original-window-view-boundaries','original-button-lifetime-boundaries')
-    $targets += 'dialog-native-owner-research', 'control-fnid-boundary'
-    $targets += 'dialog-initialization-boundary', 'original-profile-boundary'
-    $targets += 'original-control-globals', 'original-dde-data-boundary'
-    $targets += 'original-default-bits-boundary', 'original-user-capture-boundary'
-    if ($CpdWindowResearch) { $targets = @('cpd-window-research') }
-    if ($StyleNotificationResearch) { $targets = @('style-notification-research') }
-    if ($DialogNativeOwnerResearch) { $targets = @('dialog-native-owner-research') }
-    if ($ClassAddressResearch) { $targets = @('class-address-research') }
-    $buildResult = @(RunOwned 'build' (Get-Command ninja.exe).Source (@('-C',$build,'-j','4','-k','0') + $targets) 300)
-    $buildResult | Write-Output
-    $result = [int]$buildResult[-1]
+    $result = 0
     if ($result -eq 0) {
         $cases = @('wow_dialog_getset_fixture','wow_window_client_message_fixture','wow_dialog_creator_lifetime_fixture','wow_dialog_lifetime_fixture','wow_default_messages_fixture','wow_dialog_call_fixture','wow_edit_call_fixture','wow_edit_memory_callbacks_fixture',
                 'wow_control_brush_fixture','wow_default_window_binding_fixture','wow_dialog_context_fixture',
@@ -98,4 +96,6 @@ try {
     }
 } catch { Write-Output $_; $result = 1 }
 [IO.File]::WriteAllText("$logs/exit.txt", [string]$result)
+[pscustomobject]@{exit=$result;cases=@($caseResults.ToArray())} |
+    ConvertTo-Json -Depth 4 | Set-Content "$logs/result.json"
 exit $result

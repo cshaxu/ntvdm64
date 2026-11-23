@@ -1,0 +1,22 @@
+[
+  {
+    "file": "button-resource-provider.c",
+    "lfOnlyEqual": true
+  },
+  {
+    "file": "dialog-memory-original.c",
+    "lfOnlyEqual": true
+  },
+  {
+    "file": "dialog-pointer-original.c",
+    "lfOnlyEqual": true
+  },
+  {
+    "file": "dialog-lookup-original.c",
+    "lfOnlyEqual": true
+  },
+  {
+    "file": "dialog-finalization-layout.c",
+    "lfOnlyEqual": true
+  }
+]

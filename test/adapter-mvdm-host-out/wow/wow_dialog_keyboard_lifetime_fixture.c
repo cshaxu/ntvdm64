@@ -47,6 +47,7 @@ static void callback(enum fault_point point)
     if (fault != point) return;
     w = kill_dialog ? &dialog : point == SOURCE_QUERY ? &source : &target.wnd;
     SetWF(w, WFDESTROYED); w->fnid |= FNID_CLEANEDUP_BIT;
+    if (kill_dialog || w == &target.wnd) dialog.spwndChild = NULL;
     if ((kill_dialog || w == &target.wnd) && IsWindow(native_target))
         CHECK(DestroyWindow(native_target));
     if (kill_dialog) dialog_storage.pdlg = NULL;
@@ -68,8 +69,6 @@ void WINAPI FreeLookasideEntry(PLOOKASIDE pool, PVOID value)
 { (void)pool; (void)value; CHECK(FALSE); }
 BOOL _IsChild(PWND parent, PWND child)
 { return parent == &dialog && (child == &source || child == &target.wnd); }
-PWND _GetDlgItem(PWND parent, int id)
-{ CHECK(parent == &dialog); return !dead(parent) && !dead(&target.wnd) && id == IDOK ? &target.wnd : NULL; }
 PWND _GetChildControl(PWND parent, PWND child)
 { CHECK(parent == &dialog); return dead(parent) || (child && dead(child)) ? NULL : child; }
 PWND _NextControl(PWND parent, PWND child, UINT flags)
@@ -144,6 +143,7 @@ static void setup(UINT code)
     target.wnd.head.h = native_target; target.wnd.fnid = FNID_BUTTON;
     target.pbutn = &button; button.spwnd = &target.wnd;
     target.wnd.spmenu = (PMENU)(ULONG_PTR)IDOK;
+    dialog.spwndChild = &target.wnd;
     target.wnd.style = BS_AUTORADIOBUTTON;
     target_code = code; focused = clicked = styles = 0; fault = NONE; kill_dialog = raise_filter = handle_filter = FALSE;
 }

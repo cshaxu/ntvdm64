@@ -194,8 +194,10 @@ static void verify_preserved_listbox_guard(void)
     same_process = TRUE;
     selected = &window.wnd;
 }
+#include "wow_window_access_unreached.h"
 int main(void)
 {
+    if (!wow_window_access_bind(&access_provider)) return 3;
     unsigned before;
     LONG result;
     window.wnd.fnid = FNID_DIALOG;

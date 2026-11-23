@@ -68,6 +68,10 @@ the frontend's native width; its NTVDM fault diagnostics retain the x86
 context through WOW64 APIs when the observer is x64. This is test-only memory
 observation, not a production protocol or extra product/helper.
 
+`tools/build-fixtures.cmd x86 wow-controls` builds the explicit native WOW
+control graph. The observation runner retains runtime assertions and research
+selection; it delegates all binary production to that CMD entry.
+
 For serial worker compilation, set `MVDM_BUILD_JOBS=1` and call the generated
 `build/.ninja/msvc-x86-release/worker/run-ninja-parallel.cmd` with the target.
 This uses the same native dependency graph and initializes its MSVC environment.

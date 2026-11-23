@@ -1,0 +1,271 @@
+{
+  "exit": 0,
+  "cases": [
+    {
+      "name": "wow_dialog_getset_fixture",
+      "pid": 14820,
+      "exit": 0,
+      "started": "2026-11-23T15:44:44.9527203Z",
+      "sha256": "DFBEFFCF7579F4DDFA170132C6673A007664B2DB5DB957B68C6B12FC1F5E4CF6"
+    },
+    {
+      "name": "wow_window_client_message_fixture",
+      "pid": 14416,
+      "exit": 0,
+      "started": "2026-11-23T15:44:45.1144489Z",
+      "sha256": "91E1F953A1113B9D914FEB4B658BA064CA3DDAD3508A3C1B4D6AFEC1C9ED6851"
+    },
+    {
+      "name": "wow_dialog_creator_lifetime_fixture",
+      "pid": 29420,
+      "exit": 0,
+      "started": "2026-11-23T15:44:45.2028578Z",
+      "sha256": "4D4D2F2137E3867B9967DC53CA67F1B727A09B63811320080FF35E141B80705C"
+    },
+    {
+      "name": "wow_dialog_lifetime_fixture",
+      "pid": 33236,
+      "exit": 0,
+      "started": "2026-11-23T15:44:46.5583105Z",
+      "sha256": "7B942336B66C06C809D27C4EEA0990F7BE0BABE48E8525B0F8C8DB4962B66FDC"
+    },
+    {
+      "name": "wow_default_messages_fixture",
+      "pid": 27160,
+      "exit": 0,
+      "started": "2026-11-23T15:44:46.7975570Z",
+      "sha256": "4CACA244C7A5E7EF7FFE768A121918C4E1DC39284D6880452E67C2111193BC04"
+    },
+    {
+      "name": "wow_dialog_call_fixture",
+      "pid": 29236,
+      "exit": 0,
+      "started": "2026-11-23T15:44:47.0794041Z",
+      "sha256": "5B138DD596C28824CB7F7283105D0A1FA20073EEB7675F71B65CD35FFE2828E6"
+    },
+    {
+      "name": "wow_edit_call_fixture",
+      "pid": 31384,
+      "exit": 0,
+      "started": "2026-11-23T15:44:47.2937035Z",
+      "sha256": "346CDC64035942C753455883FD44F3704007E610CF1ACBD3A791CEFD34313A0A"
+    },
+    {
+      "name": "wow_edit_memory_callbacks_fixture",
+      "pid": 21732,
+      "exit": 0,
+      "started": "2026-11-23T15:44:48.0502778Z",
+      "sha256": "6CCD6B45C64CAE2025A73873DA1F04D2F3F39143BCC4A9281D5E1BF0D4DDCE6E"
+    },
+    {
+      "name": "wow_control_brush_fixture",
+      "pid": 15944,
+      "exit": 0,
+      "started": "2026-11-23T15:44:48.2942394Z",
+      "sha256": "6AF4B6ACEDE59B732A252FE1A0F5B237646807D34FC8F0659BC1B8CD3F814C1E"
+    },
+    {
+      "name": "wow_default_window_binding_fixture",
+      "pid": 16704,
+      "exit": 0,
+      "started": "2026-11-23T15:44:48.5154784Z",
+      "sha256": "F7BC93A9AEA1F96CA5818A8FC853AED6B7745C9BADAE0C99BE7B4E53BF1DB97F"
+    },
+    {
+      "name": "wow_dialog_context_fixture",
+      "pid": 10308,
+      "exit": 0,
+      "started": "2026-11-23T15:44:48.7539541Z",
+      "sha256": "C1035F1D0B68C9F315120A5ADCA324D2F6EBFB93EA44C42E7EF00F826D1096EE"
+    },
+    {
+      "name": "wow_dialog_creation_entry_fixture",
+      "pid": 17852,
+      "exit": 0,
+      "started": "2026-11-23T15:44:49.0092339Z",
+      "sha256": "68CD3BFFE070CF4FAAE93AFB33233C4F0EEEB91157B539401C739C07786EDB8A"
+    },
+    {
+      "name": "wow_dialog_finalization_fixture",
+      "pid": 17932,
+      "exit": 0,
+      "started": "2026-11-23T15:44:49.2257293Z",
+      "sha256": "2C3FF5C7AC0AD1DF7EF1086E8D75F4197EA73FFE272B987862D5145C2832DA4B"
+    },
+    {
+      "name": "wow_dialog_end_original_fixture",
+      "pid": 16348,
+      "exit": 0,
+      "started": "2026-11-23T15:44:49.4410294Z",
+      "sha256": "F9B36A596F6AE2107FF96B1ED2E05FAC3DC6376F11B453C4238D5DC16E6FA8E8"
+    },
+    {
+      "name": "wow_dialog_keyboard_entry_fixture",
+      "pid": 31232,
+      "exit": 0,
+      "started": "2026-11-23T15:44:50.4137823Z",
+      "sha256": "0C71ED5ED0E4FF12F633B064DF23D0BA95AEAA73A008D3CB4674882B80C91CF5"
+    },
+    {
+      "name": "wow_dialog_mnemonic_lifetime_fixture",
+      "pid": 17644,
+      "exit": 0,
+      "started": "2026-11-23T15:44:50.6073248Z",
+      "sha256": "FE58B50EE98D3662C0F0AF6F2B64449D2A6FDEE9E9BE1BF9F12688D57F498570"
+    },
+    {
+      "name": "wow_dialog_keyboard_lifetime_fixture",
+      "pid": 26008,
+      "exit": 0,
+      "started": "2026-11-23T15:44:50.8483940Z",
+      "sha256": "6DEAAC94FCABA36A4B7A0FB4971D319C150F447012270AF6FF6F8CD9E85F05A3"
+    },
+    {
+      "name": "wow_control_string_fixture",
+      "pid": 13036,
+      "exit": 0,
+      "started": "2026-11-23T15:44:51.0632654Z",
+      "sha256": "D58A2B89ACB7E501A7D206BC07A8332D879718799CE209563B4C1C099ED4CAA2"
+    },
+    {
+      "name": "wow_text_measure_failure_fixture",
+      "pid": 27232,
+      "exit": 0,
+      "started": "2026-11-23T15:44:51.2473261Z",
+      "sha256": "C4484040708E1B1D90882E16BFA8A57B5F737E5616159472AAF13ACACCCDDA43"
+    },
+    {
+      "name": "wow_mnemonic_drawing_fixture",
+      "pid": 17896,
+      "exit": 0,
+      "started": "2026-11-23T15:44:51.4311369Z",
+      "sha256": "43467607AA9487978EA4D639145C7452A1B71F6B3C97D26BE769CE4858CC05C9"
+    },
+    {
+      "name": "wow_default_original_fixture",
+      "pid": 30208,
+      "exit": 0,
+      "started": "2026-11-23T15:44:51.6281852Z",
+      "sha256": "712F1A7836B2ECD4CB3B9DD773153527C8BD5ED5501FCFCBEAD99A1784315AE3"
+    },
+    {
+      "name": "wow_button_drawing_fixture",
+      "pid": 10492,
+      "exit": 0,
+      "started": "2026-11-23T15:44:51.8243871Z",
+      "sha256": "D92A56B26BDA3C1AEA154C717DBE03D6B668B73808603D4E6F9BA18065F489E1"
+    },
+    {
+      "name": "wow_button_resources_fixture",
+      "pid": 11784,
+      "exit": 0,
+      "started": "2026-11-23T15:44:51.9999507Z",
+      "sha256": "FBAF0FE32B6E72E412083A9573306035FA1511E1E9EB6FD61591AE611CF967E8"
+    },
+    {
+      "name": "wow_control_draw_state_fixture",
+      "pid": 23488,
+      "exit": 0,
+      "started": "2026-11-23T15:44:52.2655023Z",
+      "sha256": "AA36A4C481FB2849A6EA0BCA23D89B01C24F120565F34E80B7DE745C49EB4E43"
+    },
+    {
+      "name": "wow_dialog_navigation_fixture",
+      "pid": 28068,
+      "exit": 0,
+      "started": "2026-11-23T15:44:52.5077851Z",
+      "sha256": "E799158ECAE6825917B41BFCA2F9CC384155D13E8EDB874990AF0D3005B9F09B"
+    },
+    {
+      "name": "wow_edit_view_fixture",
+      "pid": 23032,
+      "exit": 0,
+      "started": "2026-11-23T15:44:52.7296919Z",
+      "sha256": "C7D921FB2A4AB32615C07065979F7625CC6C80DC8DD1ECB82890912181396506"
+    },
+    {
+      "name": "wow_button_lifetime_fixture",
+      "pid": 16092,
+      "exit": 0,
+      "started": "2026-11-23T15:44:52.9364268Z",
+      "sha256": "3309512DFAF19C103687C224291A86E0DF0D7222545F8772245778B16FF7CC03"
+    },
+    {
+      "name": "wow_button_dc_fixture",
+      "pid": 24348,
+      "exit": 0,
+      "started": "2026-11-23T15:44:53.6502351Z",
+      "sha256": "F50CFD80A6061111C9C9A06937729CF51F1F199578A9ECAB4EE9C869D5805F6A"
+    },
+    {
+      "name": "wow_dialog_native_owner_probe",
+      "pid": 19556,
+      "exit": 0,
+      "started": "2026-11-23T15:44:53.8514781Z",
+      "sha256": "362FFC18047ADA9099519DE2F007B4C69C8B2EFB17D71B6D4A003CDC5B030E58"
+    },
+    {
+      "name": "wow_control_fnid_fixture",
+      "pid": 15860,
+      "exit": 0,
+      "started": "2026-11-23T15:44:54.5103344Z",
+      "sha256": "92972A89067BD7CE01A469A228456DE5346A7DA9CA06F6F34366EE54BFC6D7FD"
+    },
+    {
+      "name": "wow_dialog_initialization_fixture",
+      "pid": 13308,
+      "exit": 0,
+      "started": "2026-11-23T15:44:54.7001310Z",
+      "sha256": "59C4B473BF211C087F405438387F5B8F406DCAB6C2DF110D039E5678AEC5BEB3"
+    },
+    {
+      "name": "wow_task_profile_fixture",
+      "pid": 17576,
+      "exit": 0,
+      "started": "2026-11-23T15:44:54.9240847Z",
+      "sha256": "5A193BC190474F835F5BFACC3DE79CE543E592513939068A3CC2A59C6D1F8329"
+    },
+    {
+      "name": "wow_task_profile_existing_fixture",
+      "pid": 20624,
+      "exit": 0,
+      "started": "2026-11-23T15:44:55.1162964Z",
+      "sha256": "3831714F22EFE747BF0D62A744A57C7BBB7C7F158EAAFF2AC97BF8886F854446"
+    },
+    {
+      "name": "wow_edit_lookaside_fixture",
+      "pid": 28868,
+      "exit": 0,
+      "started": "2026-11-23T15:44:55.3277798Z",
+      "sha256": "750FFC8D61A62B24C9969DC8FCA0EB78D23422BB106902FC83F8D53896055012"
+    },
+    {
+      "name": "wow_edit_conversion_fixture",
+      "pid": 13820,
+      "exit": 0,
+      "started": "2026-11-23T15:44:55.5420970Z",
+      "sha256": "5FA7224EE089ED138C02ABA0EEF7DE7B56C3BFAF753CC844747CD7D3F1278B8B"
+    },
+    {
+      "name": "wow_def_window_bits_fixture",
+      "pid": 31840,
+      "exit": 0,
+      "started": "2026-11-23T15:44:55.7603892Z",
+      "sha256": "DC8CB51CA14027FC37E2F2AFD2A878CF4137B9DC754F32CD801D817FA45D89EB"
+    },
+    {
+      "name": "wow_original_dde_free_fixture",
+      "pid": 23912,
+      "exit": 0,
+      "started": "2026-11-23T15:44:55.9574877Z",
+      "sha256": "34CA293F95F7B8BBE186349D3D1310791A8A85ADF36D62DBC3B55E8D9000CA50"
+    },
+    {
+      "name": "wow_user_capture_fixture",
+      "pid": 4404,
+      "exit": 0,
+      "started": "2026-11-23T15:44:56.1564563Z",
+      "sha256": "7613CE17AD8BB0D4A8F996F0235EECCABAFDB4A3D0E3F9C85A841CAD5161B1AA"
+    }
+  ]
+}
