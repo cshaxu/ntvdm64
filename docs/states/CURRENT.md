@@ -94,7 +94,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P71 performance producer retirement](../etc/evidence/t484-s3-performance-retirement.md) | B0098 is missing required source at the fixed baseline and has no live caller; obsolete builder removed, measurement consumers retained. |
 
-Implementation batches through P70 passed their cached full host build. P70 checks11 raw host inputs
+| [P72 callback abort producer](../etc/evidence/t484-s3-callback-abort.md) | Native229-object diagnostic replaces only wcall16; frame fixture/cache/full build/hash checks pass; B0099 complete. |
+
+Implementation batches through P72 passed their cached full host build. P72 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

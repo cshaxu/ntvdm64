@@ -107,3 +107,5 @@ configure_file(msvc-x86.cmd.in "${CMAKE_BINARY_DIR}/msvc-x86.cmd" @ONLY)
 include(callback-cost.cmake)
 include(graph-cost.cmake)
 include(crt-tests.cmake)
+
+include(callback-abort.cmake)

@@ -1631,3 +1631,5 @@ post-publication targeted checks.
 - [T484 S3 Win95 probe producers](evidence/t484-s3-win95-probes.md)
 
 - [T484 S3 obsolete performance producer](evidence/t484-s3-performance-retirement.md)
+
+- [T484 S3 callback abort producer](evidence/t484-s3-callback-abort.md)

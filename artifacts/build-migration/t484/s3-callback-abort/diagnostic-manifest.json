@@ -1,0 +1,8 @@
+{
+  "publishable": false,
+  "target": "SHLPROBE",
+  "kind": "diagnostic-only",
+  "normalProvider": "EB1143FABA9148E9A9CE2C59172968A7F2C6BD807E454198ED896E0E78E9901C",
+  "diagnosticProvider": "3390E72DB4DF596530F242BA24642D3C3527EAA8F2D3530C5BAA435422642963",
+  "fault": "actual CallBack16 resolver Preparation/Returned"
+}

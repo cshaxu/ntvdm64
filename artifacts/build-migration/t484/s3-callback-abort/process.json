@@ -1,0 +1,5 @@
+{
+  "command": "-NoProfile -ExecutionPolicy Bypass -File \"O:/repos.hobby/ntvdm64/test/observation/build-wow-callback-abort-provider.ps1\" -ProviderBuildRoot \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32\" -BuildRoot \"O:/repos.hobby/ntvdm64/build/t484-s3-callback-abort/run\"",
+  "pid": 11040,
+  "start": "2026-11-23T21:59:23.9428961Z"
+}

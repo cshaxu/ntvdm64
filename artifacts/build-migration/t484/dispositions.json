@@ -409,5 +409,10 @@
     "reason": "Shared CMD/native CL LINK EDITBIN targets; runner only asserts PE metadata and copies evidence; three old/new comparisons and cache verified",
     "evidence": "docs/etc/evidence/t484-s3-win95-probes.md",
     "status": "migrated-delivered"
+  },
+  "test/observation/build-wow-callback-abort-provider.ps1": {
+    "reason": "Native target reuses real original_wcall16 profile and229-object product order with one replacement; frame fixture/cache/full build validated; guest fault runtime not repeated",
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-callback-abort.md"
   }
 }

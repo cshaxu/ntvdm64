@@ -1,27 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "9cefe33833fab7a3f50e64365efe4d2f664d8d5e",
+  "head": "247328be53536b5df24747a9b23a083de9e75337",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    "D  test/observation/build-worker-performance.ps1",
-    "?? artifacts/build-migration/t484/s3-performance-retirement/",
-    "?? docs/etc/evidence/t484-s3-performance-retirement.md"
+    " M test/observation/build-wow-callback-abort-provider.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/wow32/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-callback-abort/",
+    "?? docs/etc/evidence/t484-s3-callback-abort.md",
+    "?? tools/build/wow32/callback-abort.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 79,
-    "unchanged": 158,
+    "changed": 80,
+    "unchanged": 157,
     "removed": 118
   },
   "disposition_counts": {
-    "migrated-delivered": 25,
+    "migrated-delivered": 26,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 118,
     "pending-producer-migration": 50,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 157,
+    "requires-disposition-reconciliation": 156,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 191,
@@ -1767,10 +1770,12 @@
       "state": "removed",
       "current_sha256": null,
       "revisions": [
+        "247328be53536b5df24747a9b23a083de9e75337",
         "161b9dc27ab6ee0713a777f349ddb25669d72766"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s2-native-tib.md"
+        "docs/etc/evidence/t484-s2-native-tib.md",
+        "docs/etc/evidence/t484-s3-performance-retirement.md"
       ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
@@ -1783,12 +1788,16 @@
       "id": "B0099",
       "file": "test/observation/build-wow-callback-abort-provider.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "7282fd748355ba8a05b25e62983eefcb18d94038f6d058f206a60f6279580ee1",
+      "state": "changed",
+      "current_sha256": "43eaaa666fc023e8fc4bbfeedf953cf7a4c44cf77bb7aacbef6b620fa9639aef",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Native target reuses real original_wcall16 profile and229-object product order with one replacement; frame fixture/cache/full build validated; guest fault runtime not repeated",
+        "status": "migrated-delivered",
+        "evidence": "docs/etc/evidence/t484-s3-callback-abort.md"
+      }
     },
     {
       "id": "B0100",
@@ -5083,6 +5092,12 @@
     }
   ],
   "commits": {
+    "247328be53536b5df24747a9b23a083de9e75337": {
+      "subject": "T484 S3 P71 retire incomplete historical performance builder",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-performance-retirement.md"
+      ]
+    },
     "9cefe33833fab7a3f50e64365efe4d2f664d8d5e": {
       "subject": "T484 S3 P70 migrate Win95 probe producers to native targets",
       "evidence": [
@@ -6614,36 +6629,12 @@
           "text": "[Parameter(Mandatory)][string]$BuildRoot,[string]$Ninja='ninja.exe')"
         },
         {
-          "line": 10,
-          "text": "$commands=@(& $Ninja -C $provider -t commands wow32.dll)"
+          "line": 3,
+          "text": "# Ninja retained for historical callers; native CMD owns production commands."
         },
         {
-          "line": 13,
-          "text": "$link=$commands|Where-Object {$_ -match '^link /nologo /machine:x86 /dll '}|Select-Object -Last 1"
-        },
-        {
-          "line": 14,
-          "text": "if(!$compile -or !$link){throw 'Missing original callback or provider link'}"
-        },
-        {
-          "line": 17,
-          "text": "$diagnosticLink=$link.Replace('obj/wcall16.obj',('\"'+$root+'/callback.obj\"')).Replace('/map:wow32.dll.map',('/map:\"'+$root+'/WOW32.map\"')).Replace('/out:wow32.dll',('/out:\"'+$root+'/WOW32.DLL\" /implib:\"'+$root+'/WOW32.lib\"'))"
-        },
-        {
-          "line": 18,
-          "text": "if($compile -eq $diagnosticCompile -or $link -eq $diagnosticLink -or $diagnosticLink.Contains('obj/wcall16.obj') -or $diagnosticLink.Contains('/out:wow32.dll')){throw 'Diagnostic replacement failed'}"
-        },
-        {
-          "line": 22,
-          "text": "foreach($step in @(@('compile',$diagnosticCompile),@('link',$diagnosticLink))){"
-        },
-        {
-          "line": 31,
-          "text": "$objects=@([regex]::Matches($link,'(?<!\\S)obj/[^\\s\"]+\\.(obj|res)')|ForEach-Object {Join-Path $provider $_.Value}|Select-Object -Unique)"
-        },
-        {
-          "line": 32,
-          "text": "@($PSCommandPath,$source,\"$repo/src/mvdm-host/wow32/wcall16.c\",\"$provider/build.ninja\")+$objects|Get-FileHash|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
+          "line": 24,
+          "text": "@($PSCommandPath,\"$PSScriptRoot/wow_callback_abort_provider.c\",\"$repo/src/mvdm-host/wow32/wcall16.c\",\"$provider/build.ninja\")+$objects|Get-FileHash|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
         }
       ]
     },
