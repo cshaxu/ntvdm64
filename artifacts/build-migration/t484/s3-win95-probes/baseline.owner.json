@@ -1,0 +1,5 @@
+{
+  "start": "2026-11-23T21:51:00.8391362Z",
+  "pid": 19524,
+  "command": "-NoProfile -ExecutionPolicy Bypass -File \"O:/repos.hobby/ntvdm64/build/t484-s3-win95-probes/baseline.ps1\""
+}

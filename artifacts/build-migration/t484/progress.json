@@ -1,33 +1,35 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "97da712bd7ffef053253db494a66415bf064fb8b",
+  "head": "bb699ac87ae4e04bf48330fdd73cbc51d144e272",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/build-win101-mouse-driver.ps1",
-    "D  test/observation/build-win101-palette-repair.ps1",
-    "D  test/observation/build-win101-release.ps1",
-    " M test/observation/build-win31-mouse-driver.ps1",
-    "?? artifacts/build-migration/t484/s3-mouse-reconcile/",
-    "?? docs/etc/evidence/t484-s3-mouse-reconcile.md"
+    " M test/observation/build-win95-loader-probe.ps1",
+    " M test/observation/build-win95-menu-probe.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-win95-probes/",
+    "?? docs/etc/evidence/t484-s3-win95-probes.md",
+    "?? test/observation/Invoke-Win95ProbeBuild.ps1",
+    "?? tools/build/fixtures/win95-probes.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 78,
-    "unchanged": 160,
+    "changed": 80,
+    "unchanged": 158,
     "removed": 117
   },
   "disposition_counts": {
-    "migrated-delivered": 23,
+    "migrated-delivered": 25,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 117,
     "pending-producer-migration": 51,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 159,
+    "requires-disposition-reconciliation": 157,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 194,
+  "existing_interpreted_candidates_with_command_hits": 192,
   "files": [
     {
       "id": "B0001",
@@ -1606,10 +1608,12 @@
       "state": "changed",
       "current_sha256": "0603907cf05fee5039f45cbaa71071507b1184dd6f2b2bffc75da99730fa11c7",
       "revisions": [
+        "bb699ac87ae4e04bf48330fdd73cbc51d144e272",
         "34b26f76b783bf9ef495f2cce7dbb98caa3553c2"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-addon-cmake.md"
+        "docs/etc/evidence/t484-s3-addon-cmake.md",
+        "docs/etc/evidence/t484-s3-mouse-reconcile.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -1639,8 +1643,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "bb699ac87ae4e04bf48330fdd73cbc51d144e272"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-mouse-reconcile.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -1654,8 +1662,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "bb699ac87ae4e04bf48330fdd73cbc51d144e272"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-mouse-reconcile.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -1701,10 +1713,12 @@
       "state": "changed",
       "current_sha256": "4d3849dc5d87fd4b87f176bd6ba97c505759e04eb3c4a10d08743a9eff89e29a",
       "revisions": [
+        "bb699ac87ae4e04bf48330fdd73cbc51d144e272",
         "34b26f76b783bf9ef495f2cce7dbb98caa3553c2"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-addon-cmake.md"
+        "docs/etc/evidence/t484-s3-addon-cmake.md",
+        "docs/etc/evidence/t484-s3-mouse-reconcile.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -1717,23 +1731,31 @@
       "id": "B0096",
       "file": "test/observation/build-win95-loader-probe.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "4035dd6c89c5ca7c0fc876593cba5b2deef8be3922ef2650a46f04e155409aab",
+      "state": "changed",
+      "current_sha256": "3a10ed6e16592334efd6004bfc030280800d5e175e5bfd71088b576d6412234d",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Shared CMD/native CL LINK EDITBIN targets; runner only asserts PE metadata and copies evidence; three old/new comparisons and cache verified",
+        "evidence": "docs/etc/evidence/t484-s3-win95-probes.md",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0097",
       "file": "test/observation/build-win95-menu-probe.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "fdfd5138342242cc2e64f1c59ba4fe4bfdb7117ddd929d19fce3d39c2240d0cb",
+      "state": "changed",
+      "current_sha256": "8daea83242294e1936502f1489f93f8687a0846e5743452dd99ac8fcad3acf4f",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Shared CMD/native CL LINK EDITBIN targets; runner only asserts PE metadata and copies evidence; three old/new comparisons and cache verified",
+        "evidence": "docs/etc/evidence/t484-s3-win95-probes.md",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0098",
@@ -5057,6 +5079,12 @@
     }
   ],
   "commits": {
+    "bb699ac87ae4e04bf48330fdd73cbc51d144e272": {
+      "subject": "T484 S3 P69 reconcile mouse producers and retire historical cache builds",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-mouse-reconcile.md"
+      ]
+    },
     "97da712bd7ffef053253db494a66415bf064fb8b": {
       "subject": "T484 S3 P68 reconcile console audit and retire duplicate JS producer",
       "evidence": [
@@ -6564,42 +6592,6 @@
         {
           "line": 36,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31CTRL.EXE/M31CTRL.EXE\" \"$root/M31CTRL.EXE\""
-        }
-      ]
-    },
-    {
-      "id": "B0096",
-      "file": "test/observation/build-win95-loader-probe.ps1",
-      "hits": [
-        {
-          "line": 11,
-          "text": "cl.exe /nologo /c /TC /O1 /Oi /GS- /Zl /arch:IA32 /D_WIN32_WINNT=0x0400 /DWINVER=0x0400 /Fomenu.obj \"$PSScriptRoot\\win95_loader_probe.c\" || exit /b 1"
-        },
-        {
-          "line": 12,
-          "text": "link.exe /nologo /nodefaultlib /entry:entry /subsystem:windows /osversion:4.0 /machine:x86 /dynamicbase:no /nxcompat:no /safeseh:no /stack:0x100000,0x1000 /out:MENU95.EXE /map:MENU95.MAP menu.obj kernel32.lib user32.lib advapi32.lib shell32.lib ole32.lib uuid.lib"
-        },
-        {
-          "line": 18,
-          "text": "# Modern LINK no longer accepts subsystem 4.0; set only this independently"
-        }
-      ]
-    },
-    {
-      "id": "B0097",
-      "file": "test/observation/build-win95-menu-probe.ps1",
-      "hits": [
-        {
-          "line": 14,
-          "text": "cl.exe /nologo /c /TC /O1 /Oi /GS- /Zl /arch:IA32 /D_WIN32_WINNT=0x0400 /DWINVER=0x0400 /Fomenu.obj \"$source\" || exit /b 1"
-        },
-        {
-          "line": 15,
-          "text": "link.exe /nologo /nodefaultlib /entry:entry /subsystem:windows /osversion:4.0 /machine:x86 /dynamicbase:no /nxcompat:no /safeseh:no /stack:0x100000,0x1000 /out:${image}.EXE /map:${image}.MAP menu.obj kernel32.lib user32.lib advapi32.lib shell32.lib ole32.lib uuid.lib"
-        },
-        {
-          "line": 21,
-          "text": "# Modern LINK no longer accepts subsystem 4.0; set only this independently"
         }
       ]
     },

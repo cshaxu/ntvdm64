@@ -1,0 +1,6 @@
+{
+  "pid": 19524,
+  "start": "2026-11-23T21:51:01.4474660Z",
+  "exit": 1,
+  "error": "Differences beyond COFF timestamp/checksum"
+}

@@ -398,5 +398,15 @@
     "status": "retired-with-delivery-evidence",
     "reason": "Unreferenced historical T434/T435 cache-copy/rewrite producer; current native product/addon targets remain",
     "evidence": "docs/etc/evidence/t484-s3-mouse-reconcile.md"
+  },
+  "test/observation/build-win95-loader-probe.ps1": {
+    "reason": "Shared CMD/native CL LINK EDITBIN targets; runner only asserts PE metadata and copies evidence; three old/new comparisons and cache verified",
+    "evidence": "docs/etc/evidence/t484-s3-win95-probes.md",
+    "status": "migrated-delivered"
+  },
+  "test/observation/build-win95-menu-probe.ps1": {
+    "reason": "Shared CMD/native CL LINK EDITBIN targets; runner only asserts PE metadata and copies evidence; three old/new comparisons and cache verified",
+    "evidence": "docs/etc/evidence/t484-s3-win95-probes.md",
+    "status": "migrated-delivered"
   }
 }

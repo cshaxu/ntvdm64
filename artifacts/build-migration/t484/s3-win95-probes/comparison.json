@@ -1,0 +1,41 @@
+[
+  {
+    "oldHash": "75E82533487621A38F2D94AD26D2206DF8F452D6C6678FD8BF2E33235F8BE9FC",
+    "kind": "loader",
+    "newHash": "8DBF44160E1A228F7CF116098CC2915B00322F5DA1B6E9600B997A387D5E6051",
+    "unexpected": [],
+    "diff": [
+      208,
+      288,
+      289,
+      4504
+    ],
+    "bytes": 5632
+  },
+  {
+    "oldHash": "A8466300DB0B1381D3FE491F0A3FA109C6DBC37C27A568EF93FB8C657CCBD5FF",
+    "kind": "menu",
+    "newHash": "B880784E52EC2C6AAD2DACAE6486BD6858CAD0D130DBDE004B7CBB25C72BFFF2",
+    "unexpected": [],
+    "diff": [
+      216,
+      296,
+      297,
+      5380
+    ],
+    "bytes": 7168
+  },
+  {
+    "oldHash": "C76D1D3B11F3E21E1DA3F20586032AC55208DB4794F8D9F627DA70DBB3FDFA9C",
+    "kind": "dos_restart",
+    "newHash": "39CE3093A94AA173B93F8C5437374727A7A8AE534B02BD13FBCDCE86852F5721",
+    "unexpected": [],
+    "diff": [
+      200,
+      280,
+      281,
+      6584
+    ],
+    "bytes": 8192
+  }
+]
