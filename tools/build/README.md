@@ -62,8 +62,8 @@ Its layout/RPC/session fixtures use the same selected sources; actual package
 verification can select an explicit native MonitorRpc fixture so x64-client/
 x86-service behavior is exercised rather than only the old x86 test client.
 
-`Generate-ObservationNinja.mjs <repo> <build> [x86|x64]` defaults to x86 for
-existing callers. Observing private Window userdata requires an observer of
+`tools/build-fixtures.cmd <x86|x64> observation-tools` builds the native
+observers. Observing private Window userdata requires an observer of
 the frontend's native width; its NTVDM fault diagnostics retain the x86
 context through WOW64 APIs when the observer is x64. This is test-only memory
 observation, not a production protocol or extra product/helper.

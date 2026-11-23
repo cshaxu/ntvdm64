@@ -48,8 +48,9 @@ interpreter-free end-to-end acceptance have not completed.
 | [P10 system fixtures](../etc/evidence/t484-s3-system-fixtures.md) | Three producers replaced; five executable instances and27 shared-link regression assertions; obsolete register fixture retired. |
 | [P11 duplicate compilation](../etc/evidence/t484-s3-compile-duplicates.md) | Native suballoc lifecycle test passes; four redundant compile-only generators retired against13 current product objects. |
 | [P12 OEM fixtures](../etc/evidence/t484-s3-oem-fixtures.md) | Two generators replaced by17 native targets;18 runtime cases and five equivalent source projections verified. |
+| [P13 observation tools](../etc/evidence/t484-s3-observer-tools.md) | Two JS generators replaced;11 outputs, two input-milestone passes and9 argument-rejection checks. |
 
-Each batch passed its cached full host build. P12 checks11 raw host inputs
+Each batch passed its cached full host build. P13 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
@@ -99,6 +100,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P12 records native OEM fixtures and their bounded delivery under the
+T484 S3 P13 records native observation tools and their bounded delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

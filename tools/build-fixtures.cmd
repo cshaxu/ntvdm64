@@ -9,6 +9,7 @@ for %%I in (guest-memory redirector-async guest-location wow-task-frame wow-call
 for %%I in (guest-probes guest-redir guest-video-int10 guest-video-direct guest-video-graphics guest-video-handshake guest-system guest-keymouse guest-bios guest-support guest-disks guest-comms guest-comms-medium guest-dem guest-command guest-vdd command-tools) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="memory-profiles" set "SELECTED=1"
 if "%TARGET%"=="system-fixtures" set "SELECTED=1"
+if "%TARGET%"=="observation-tools" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="suballoc-lifecycle" set "SELECTED=1"

@@ -53,6 +53,33 @@ function(fixture name link_mode)
     COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(${name} DEPENDS "${CMAKE_BINARY_DIR}/${name}.exe")
 endfunction()
+set(observer_targets)
+foreach(pair IN ITEMS "console-startup-observer|console_startup_observer"
+    "input-milestone-test|input_milestone_test" "worker-window-snapshot|worker_window_snapshot"
+    "run16-direct-command-observer|run16_direct_command_observer"
+    "terminal-observer|console_terminal_observer")
+  string(REPLACE "|" ";" parts "${pair}")
+  list(GET parts 0 name)
+  list(GET parts 1 source)
+  fixture(${name} LINK "test/observation/${source}.c")
+  set_property(TARGET ${name}_objects PROPERTY COMPILE_OPTIONS
+    /nologo /TC /W4 /std:c11)
+  if(NOT name STREQUAL "terminal-observer")
+    target_compile_options(${name}_objects PRIVATE /WX /wd4201)
+  endif()
+  target_compile_definitions(${name}_objects PRIVATE _CRT_SECURE_NO_WARNINGS)
+  target_include_directories(${name}_objects PRIVATE
+    "${NTVDM_REPO}/src/ntcon-exe" "${NTVDM_REPO}/src/lib-nxvm")
+  set_property(TARGET ${name}_objects PROPERTY FIXTURE_LIBRARIES "user32.lib;dbghelp.lib")
+  list(APPEND observer_targets ${name})
+endforeach()
+if(NTVDM_ARCH STREQUAL "x86")
+  fixture(clean-console-command-integration LINK test/observation/clean_console_command_integration.c)
+  set_property(TARGET clean-console-command-integration_objects PROPERTY COMPILE_OPTIONS /nologo /TC /W4 /WX)
+  set_property(TARGET clean-console-command-integration_objects PROPERTY FIXTURE_LIBRARIES user32.lib)
+  list(APPEND observer_targets clean-console-command-integration)
+endif()
+add_custom_target(observation-tools DEPENDS ${observer_targets})
 if(NTVDM_ARCH STREQUAL "x86")
   fixture(suballoc_lifecycle_fixture LINK src/mvdm-host/suballoc/suballoc.c
     test/mvdm/suballoc/suballoc_lifecycle_fixture.c)

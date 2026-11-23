@@ -1,0 +1,96 @@
+{
+  "pid": 18936,
+  "rawHostImages": 11,
+  "publishedHashes": 22,
+  "cases": [
+    {
+      "output": "",
+      "sha256": "D96A703F8D718A36D981ED48C9EF91A7B0C9155170486A5434691E9C790E1D25",
+      "exit": 64,
+      "name": "clean-console-command-integration",
+      "expectedExit": 64,
+      "architecture": "x86"
+    },
+    {
+      "output": "",
+      "sha256": "23F3D3A5D7DC045A6ABF73560594B0021A3FCBCACCA073112E43B46F90829754",
+      "exit": 64,
+      "name": "console-startup-observer",
+      "expectedExit": 64,
+      "architecture": "x86"
+    },
+    {
+      "output": "PASS fresh echo, partial input, stale prompt, cursor/tail and Window PID negatives",
+      "sha256": "FDC5F12F9BF74A7FF2F1CE321EA85FD4F4589FE49F4C735D58D80C5F49C9D923",
+      "exit": 0,
+      "name": "input-milestone-test",
+      "expectedExit": 0,
+      "architecture": "x86"
+    },
+    {
+      "output": "",
+      "sha256": "1D5147DF0C29C8B131489A53BCA27C337BA99E9D78FB6D32229497993D6D8C8B",
+      "exit": 64,
+      "name": "run16-direct-command-observer",
+      "expectedExit": 64,
+      "architecture": "x86"
+    },
+    {
+      "output": "",
+      "sha256": "110B4BA5E96606F95397A9ED9D65CB6C0A53490537A0112F9456BD046C2BC48C",
+      "exit": 64,
+      "name": "terminal-observer",
+      "expectedExit": 64,
+      "architecture": "x86"
+    },
+    {
+      "output": "",
+      "sha256": "3532BE53922E1F394451ED9F2B77DB1EA7F76713A649C02D11836475A331C5C4",
+      "exit": 2,
+      "name": "worker-window-snapshot",
+      "expectedExit": 2,
+      "architecture": "x86"
+    },
+    {
+      "output": "",
+      "sha256": "4B3147627602F88821DC44E6342A5151F0E0EB93FA98FFC48A62A0541779A86E",
+      "exit": 64,
+      "name": "console-startup-observer",
+      "expectedExit": 64,
+      "architecture": "x64"
+    },
+    {
+      "output": "PASS fresh echo, partial input, stale prompt, cursor/tail and Window PID negatives",
+      "sha256": "DBB11DDD48D2797D03EFED633D7DED987CC56A9A7D426D0EF9562E119BA2139E",
+      "exit": 0,
+      "name": "input-milestone-test",
+      "expectedExit": 0,
+      "architecture": "x64"
+    },
+    {
+      "output": "",
+      "sha256": "800680A63187B7849A5FD1576B6A38E000D89966F077F0B0E0FA5DE0907632AD",
+      "exit": 64,
+      "name": "run16-direct-command-observer",
+      "expectedExit": 64,
+      "architecture": "x64"
+    },
+    {
+      "output": "",
+      "sha256": "0C6FAA26631D31E7AFC67531D34ED82D1CD9500C39E0706168CA5AAA268ECC1D",
+      "exit": 64,
+      "name": "terminal-observer",
+      "expectedExit": 64,
+      "architecture": "x64"
+    },
+    {
+      "output": "",
+      "sha256": "C5A190248CAB08F83046C94341E4C81882A5D6E351299F55E6C80A606600589A",
+      "exit": 2,
+      "name": "worker-window-snapshot",
+      "expectedExit": 2,
+      "architecture": "x64"
+    }
+  ],
+  "exit": 0
+}

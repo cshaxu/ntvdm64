@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 observation tools](evidence/t484-s3-observer-tools.md) records native
+x86/x64 observers and their bounded runtime checks.
+
 [T484 S3 OEM fixtures](evidence/t484-s3-oem-fixtures.md) records17 native
 targets,18 runtime cases and source projection equivalence.
 

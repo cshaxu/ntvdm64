@@ -51,6 +51,8 @@ from overwriting another. These opt-in probes are not release inputs.
 `command-tools` builds S34N.exe, S34E.exe and command-stream-observer.exe.
 `system-fixtures` builds NT I/O facade and VDM control tests on x86/x64,
 plus the original x86-only DOS find-layout fixture.
+`observation-tools` builds five observers on x86/x64 and the x86 clean-console
+integration helper. Select the architecture matching the frontend being observed.
 `suballoc-lifecycle` builds the original x86 allocator lifecycle runtime test.
 `oem-tests` builds17 x86 OEM/COMMAND fixtures in the existing worker graph.
 Run the PIF caller in a short working directory; its separate
