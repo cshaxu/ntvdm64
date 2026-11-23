@@ -1637,3 +1637,5 @@ post-publication targeted checks.
 - [T484 S3 host attach failure producers](evidence/t484-s3-host-attach.md)
 
 - [T484 S3 current message transaction producer](evidence/t484-s3-message-transaction.md)
+
+- [T484 S3 historical message control producer](evidence/t484-s3-message-control.md).

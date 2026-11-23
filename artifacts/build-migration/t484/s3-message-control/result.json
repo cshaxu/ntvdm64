@@ -1,0 +1,10 @@
+{
+  "exit": 0,
+  "historicalFullBuild": "not run: exact object closure absent",
+  "wrongProvider": "rejected",
+  "finished": "2026-11-23T22:26:31.0903366Z",
+  "currentProducer": "pass",
+  "pid": 23536,
+  "start": "2026-11-23T22:26:22.1337964Z",
+  "commandReplacement": "matches old recipe, path with space"
+}

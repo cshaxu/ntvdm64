@@ -1,16 +1,14 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "de28250a03a6de8d3d4a9248d2e79d314c92dc83",
+  "head": "4ad5cb89e3666f04896c5983beafd1ff26ed3bbb",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
     " M test/observation/build-wow-message-transaction-provider.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-message-transaction/",
-    "?? docs/etc/evidence/t484-s3-message-transaction.md",
-    "?? tools/build/wow32/message-transaction.cmake"
+    "?? artifacts/build-migration/t484/s3-message-control/",
+    "?? docs/etc/evidence/t484-s3-message-control.md",
+    "?? tools/build-wow-message-control.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -1827,14 +1825,18 @@
       "file": "test/observation/build-wow-message-transaction-provider.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "fb16e705d59b984cea5805b46b7aedd0a3258a754e875b647e5ad7b30d8a231f",
-      "revisions": [],
-      "evidence": [],
+      "current_sha256": "21244cc0a45f3d5f0dd3850c84a655378c80e72158ddb64da4e42380c0964090",
+      "revisions": [
+        "4ad5cb89e3666f04896c5983beafd1ff26ed3bbb"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-message-transaction.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "evidence": "docs/etc/evidence/t484-s3-message-transaction.md",
-        "reason": "Current producer migrated; sealed P21Control still uses interpreted historical recipe and remains pending"
+        "reason": "Current and historical recipes use native producers; exact sealed P21 positive build unverified because its object closure is absent",
+        "evidence": "docs/etc/evidence/t484-s3-message-control.md"
       }
     },
     {
@@ -5108,6 +5110,12 @@
     }
   ],
   "commits": {
+    "4ad5cb89e3666f04896c5983beafd1ff26ed3bbb": {
+      "subject": "T484 S3 P74 migrate current message transaction producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-message-transaction.md"
+      ]
+    },
     "de28250a03a6de8d3d4a9248d2e79d314c92dc83": {
       "subject": "T484 S3 P73 migrate WOW host attach failure diagnostics",
       "evidence": [
@@ -6671,51 +6679,27 @@
       "file": "test/observation/build-wow-message-transaction-provider.ps1",
       "hits": [
         {
-          "line": 11,
-          "text": "# Diagnostic whole-TU replacement, never a copied Ninja/CMake tree. Build the"
-        },
-        {
-          "line": 17,
+          "line": 9,
           "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
-        },
-        {
-          "line": 22,
-          "text": "$commands=@(& ninja.exe -C $provider -t commands wow32.dll)"
-        },
-        {
-          "line": 25,
-          "text": "$link=$commands|Where-Object {$_ -match '^link /nologo /machine:x86 /dll '}|Select-Object -Last 1"
         },
         {
           "line": 26,
-          "text": "if(!$compile -or !$link){throw 'Actual message TU/link closure missing'}"
+          "text": "$link=Get-Content \"$root/link.cmd\" -Raw"
         },
         {
-          "line": 34,
-          "text": "$diagnosticLink=$link.Replace('obj/wmdisp32.obj',('\"'+$root+'/message.obj\"')).Replace('/map:wow32.dll.map',('/map:\"'+$root+'/WOW32.map\"')).Replace('/out:wow32.dll',('/out:\"'+$root+'/WOW32.DLL\" /implib:\"'+$root+'/WOW32.lib\"'))"
-        },
-        {
-          "line": 35,
-          "text": "if($diagnosticLink -eq $link -or $diagnosticLink.Contains('obj/wmdisp32.obj') -or $compile -notmatch 'wow_message_transaction_provider'){throw 'Diagnostic selection did not replace only its actual TU'}"
-        },
-        {
-          "line": 38,
-          "text": "foreach($step in @(@('compile',$compile),@('link',$diagnosticLink))){"
-        },
-        {
-          "line": 47,
+          "line": 27,
           "text": "$objects=@([regex]::Matches($link,'(?<!\\S)obj/[^\\s\"]+\\.(obj|res)')|ForEach-Object {Join-Path $provider $_.Value}|Select-Object -Unique)"
         },
         {
-          "line": 48,
-          "text": "@($PSCommandPath,$source,\"$root/message_original_owner.c\",\"$provider/build.ninja\")+$objects|Get-FileHash|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
+          "line": 28,
+          "text": "@($PSCommandPath,\"$repo/tools/build-wow-message-control.cmd\",\"$PSScriptRoot/wow_message_transaction_provider.c\",\"$root/message_original_owner.c\",\"$provider/build.ninja\",\"$root/message.obj\")+$objects|Get-FileHash|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
         },
         {
-          "line": 59,
+          "line": 37,
           "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
         },
         {
-          "line": 77,
+          "line": 55,
           "text": "@($PSCommandPath,\"$PSScriptRoot/wow_message_transaction_provider.c\",\"$root/message_original_owner.c\",\"$provider/build.ninja\")+$objects|Get-FileHash|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
         }
       ]
