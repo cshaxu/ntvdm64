@@ -1,0 +1,10 @@
+%define MOUSE_MENU @MOUSE_MENU@
+%define DOSONLY @DOSONLY@
+%define SAVE_WITNESS @SAVE_WITNESS@
+%define FIRST_DOS @FIRST_DOS@
+%define FIRST_DOS_BEFORE_SECOND @FIRST_DOS_BEFORE_SECOND@
+%define W31_EDITOR_DEST '@EDITOR_DEST@'
+%define W31_EDITOR_ACTIONS '@editor@/editor-actions.inc'
+%define W31_EDITOR_ROUTINES '@editor@/editor-routines.inc'
+%define W31_EDITOR_DATA '@editor@/editor-data.inc'
+%define W31_EDITOR_EVENTS '@editor@/editor-events.inc'

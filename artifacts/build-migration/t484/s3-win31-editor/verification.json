@@ -1,0 +1,157 @@
+{
+  "failure": null,
+  "pid": 14400,
+  "finished": "2026-11-23T18:01:44.3689016+00:00",
+  "exit": 0,
+  "started": "2026-11-23T18:01:29.1234573+00:00",
+  "cases": [
+    {
+      "sha256": "FEF57247DB79A3631D4549097E477DAA55A5438F62A3FE36BF0E7698A3DC653D",
+      "mask": 0,
+      "identical": true
+    },
+    {
+      "sha256": "816AACA21B2591ADEA9C4F8E3AF45A99E386A3792CC2F21B35F0E63B852ED6D8",
+      "mask": 1,
+      "identical": true
+    },
+    {
+      "sha256": "28A34C3DC79B102D06E1E0C1A8290F697BB07A6992FF08063A34A47A31DF53A0",
+      "mask": 2,
+      "identical": true
+    },
+    {
+      "sha256": "2C037DF62E4D064291F411A67F423153C8711D8577675CCED2E70647B21DD522",
+      "mask": 3,
+      "identical": true
+    },
+    {
+      "sha256": "20DB42E5B01C1381B57658B5754A760D511AD064A2FA26A4D8156D0D23968462",
+      "mask": 4,
+      "identical": true
+    },
+    {
+      "sha256": "5179DF4D55F18595E48AAB3A2DDE1047F2B34BA251363AEA6BA4452A119EB52D",
+      "mask": 5,
+      "identical": true
+    },
+    {
+      "mask": 6,
+      "expectedRejection": true
+    },
+    {
+      "mask": 7,
+      "expectedRejection": true
+    },
+    {
+      "sha256": "9AAC50F74EE32D4680FB30B78CC389EFE78F034022A6F2C53CF4F5389A8CFE7F",
+      "mask": 8,
+      "identical": true
+    },
+    {
+      "sha256": "F6D70E03D893DA4FAE0F166D73E0EEEA7FE915EE3DE2512713E988934BB6542A",
+      "mask": 9,
+      "identical": true
+    },
+    {
+      "sha256": "28A34C3DC79B102D06E1E0C1A8290F697BB07A6992FF08063A34A47A31DF53A0",
+      "mask": 10,
+      "identical": true
+    },
+    {
+      "sha256": "2C037DF62E4D064291F411A67F423153C8711D8577675CCED2E70647B21DD522",
+      "mask": 11,
+      "identical": true
+    },
+    {
+      "sha256": "4ECB6CA1D83084172AF742C3F90A7597960062E9D9AC7A492E408157E0B9C7F2",
+      "mask": 12,
+      "identical": true
+    },
+    {
+      "sha256": "4F9F3971E07313DAF98A6DF3477FFA1E0B8F2653D1DEF7BC49471B67FB197F0B",
+      "mask": 13,
+      "identical": true
+    },
+    {
+      "mask": 14,
+      "expectedRejection": true
+    },
+    {
+      "mask": 15,
+      "expectedRejection": true
+    },
+    {
+      "sha256": "2CA26BF8E41EAE104A4240613B9EEDEE94FE5966391FCCB1A931BC7E8E36047D",
+      "mask": 16,
+      "identical": true
+    },
+    {
+      "sha256": "99F18B8ABDB648EAFFEE48484B6DFABA8D068EB64478A294F281750F3886FED0",
+      "mask": 17,
+      "identical": true
+    },
+    {
+      "mask": 18,
+      "expectedRejection": true
+    },
+    {
+      "mask": 19,
+      "expectedRejection": true
+    },
+    {
+      "sha256": "8C847D6E49A30A4AABA72BC22DCAF4B45863F817A0CE9047C0908E63B0E15461",
+      "mask": 20,
+      "identical": true
+    },
+    {
+      "sha256": "DC535D15465F34411E49CEA952D5F9575191709C69AAB883DDF90DC98ED9BC49",
+      "mask": 21,
+      "identical": true
+    },
+    {
+      "mask": 22,
+      "expectedRejection": true
+    },
+    {
+      "mask": 23,
+      "expectedRejection": true
+    },
+    {
+      "sha256": "8C1997CD9FA6390F7280E9FE2407B38B06075854904441E529BF7E54EA3F12B5",
+      "mask": 24,
+      "identical": true
+    },
+    {
+      "sha256": "A47C8EB65F088E5D9D867B5E61005161B230AF217346CFD0E91E611B41E72E2D",
+      "mask": 25,
+      "identical": true
+    },
+    {
+      "mask": 26,
+      "expectedRejection": true
+    },
+    {
+      "mask": 27,
+      "expectedRejection": true
+    },
+    {
+      "sha256": "0D8952CA5E2ACF51F6937BDDE1B5199044EE0903F0A958A55E925B31A4B97DB3",
+      "mask": 28,
+      "identical": true
+    },
+    {
+      "sha256": "3321F51DA1BABC073198935C66064F90B8D15416D14EDB5C5AACE968FF122BC7",
+      "mask": 29,
+      "identical": true
+    },
+    {
+      "mask": 30,
+      "expectedRejection": true
+    },
+    {
+      "mask": 31,
+      "expectedRejection": true
+    }
+  ]
+}

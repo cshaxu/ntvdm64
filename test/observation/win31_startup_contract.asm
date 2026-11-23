@@ -418,6 +418,9 @@ cmp ax,report_end-report
 jne fatal
 push word [file-data]
 api 1,81                         ; _lclose
+%ifdef W31_EDITOR_ACTIONS
+%include W31_EDITOR_ACTIONS
+%endif
 push word 0                      ; DWORD reserved
 push word 0
 push word 0                      ; UINT return code
@@ -427,6 +430,9 @@ int 0x21
 fatal:
 mov ax,0x4c01
 int 0x21
+%ifdef W31_EDITOR_ROUTINES
+%include W31_EDITOR_ROUTINES
+%endif
 code_end:
 dw calls
 %assign call_number 1
@@ -488,6 +494,9 @@ initial_point: dd 0
 current_point: dd 0
 mouse_ready: db W31_INSTALL,'\PATCH\MREADY.BIN',0
 mouse_down: db W31_INSTALL,'\PATCH\MDOWN.BIN',0
+%endif
+%ifdef W31_EDITOR_DATA
+%include W31_EDITOR_DATA
 %endif
 data_end:
 image_end:

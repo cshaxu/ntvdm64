@@ -1,0 +1,99 @@
+{
+  "cases": [
+    {
+      "identical": true,
+      "mask": 0,
+      "sha256": "FEF57247DB79A3631D4549097E477DAA55A5438F62A3FE36BF0E7698A3DC653D"
+    },
+    {
+      "identical": true,
+      "mask": 1,
+      "sha256": "816AACA21B2591ADEA9C4F8E3AF45A99E386A3792CC2F21B35F0E63B852ED6D8"
+    },
+    {
+      "identical": true,
+      "mask": 2,
+      "sha256": "28A34C3DC79B102D06E1E0C1A8290F697BB07A6992FF08063A34A47A31DF53A0"
+    },
+    {
+      "identical": true,
+      "mask": 3,
+      "sha256": "2C037DF62E4D064291F411A67F423153C8711D8577675CCED2E70647B21DD522"
+    },
+    {
+      "identical": true,
+      "mask": 4,
+      "sha256": "20DB42E5B01C1381B57658B5754A760D511AD064A2FA26A4D8156D0D23968462"
+    },
+    {
+      "identical": true,
+      "mask": 5,
+      "sha256": "5179DF4D55F18595E48AAB3A2DDE1047F2B34BA251363AEA6BA4452A119EB52D"
+    },
+    {
+      "identical": true,
+      "mask": 6,
+      "sha256": "2EF73D5F995310EA210D04972CB0666D12483BE3F798C4D2070B3BD0D75523EB"
+    },
+    {
+      "identical": true,
+      "mask": 7,
+      "sha256": "56093AB0986FF28939A346687215F617AE182A910CDE9C20FF157686928B204C"
+    },
+    {
+      "identical": true,
+      "mask": 8,
+      "sha256": "9AAC50F74EE32D4680FB30B78CC389EFE78F034022A6F2C53CF4F5389A8CFE7F"
+    },
+    {
+      "identical": true,
+      "mask": 9,
+      "sha256": "F6D70E03D893DA4FAE0F166D73E0EEEA7FE915EE3DE2512713E988934BB6542A"
+    },
+    {
+      "identical": true,
+      "mask": 10,
+      "sha256": "28A34C3DC79B102D06E1E0C1A8290F697BB07A6992FF08063A34A47A31DF53A0"
+    },
+    {
+      "identical": true,
+      "mask": 11,
+      "sha256": "2C037DF62E4D064291F411A67F423153C8711D8577675CCED2E70647B21DD522"
+    },
+    {
+      "identical": true,
+      "mask": 12,
+      "sha256": "4ECB6CA1D83084172AF742C3F90A7597960062E9D9AC7A492E408157E0B9C7F2"
+    },
+    {
+      "identical": true,
+      "mask": 13,
+      "sha256": "4F9F3971E07313DAF98A6DF3477FFA1E0B8F2653D1DEF7BC49471B67FB197F0B"
+    },
+    {
+      "identical": true,
+      "mask": 14,
+      "sha256": "2EF73D5F995310EA210D04972CB0666D12483BE3F798C4D2070B3BD0D75523EB"
+    },
+    {
+      "identical": true,
+      "mask": 15,
+      "sha256": "56093AB0986FF28939A346687215F617AE182A910CDE9C20FF157686928B204C"
+    },
+    {
+      "identical": true,
+      "mask": 16,
+      "sha256": "2CA26BF8E41EAE104A4240613B9EEDEE94FE5966391FCCB1A931BC7E8E36047D"
+    },
+    {
+      "identical": true,
+      "mask": 17,
+      "sha256": "99F18B8ABDB648EAFFEE48484B6DFABA8D068EB64478A294F281750F3886FED0"
+    }
+  ],
+  "pid": 32072,
+  "failure": "Reference assembly 18",
+  "started": "2026-11-23T18:00:43.2991762+00:00",
+  "exit": 1,
+  "finished": "2026-11-23T18:00:55.7099162+00:00"
+}

@@ -27,6 +27,13 @@ or recompilation of original Microsoft guests; apply the
 
 ## Engineering tools
 
+`build-win31-editor.cmd output destination mouse dosonly save first-dos first-before-second`
+builds the independent Win16 editor controller with five boolean switches.
+Output must be a new file below repository build/. Destination is the isolated
+Windows installation path embedded in test receipts. The stable native graph
+tracks that path, switches and all assembly includes; it does not rebuild
+original guest binaries. DOSONLY rejects save and first-before-second modes.
+
 `build-fixtures.cmd x86 host-thread-boundaries` links the current original
 heartbeat/ICA objects. `verify-host-thread-boundaries.ps1` runs their suspend,
 resume and lock-exclusion checks; no separate historical CPU graph.

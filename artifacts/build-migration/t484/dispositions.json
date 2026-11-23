@@ -163,7 +163,8 @@
   },
   "test/integration/ntvdm64-386/verify-win31-editors.ps1": {
     "status": "pending-producer-migration",
-    "reason": "NASM builds generated controller.asm"
+    "reason": "P37 replaces PowerShell assembly composition and NASM invocation with CMD/native include composition;20 valid variants byte-identical,12 invalid variants rejected. Shared runtime matrix and staging producers still require complete-chain reconciliation.",
+    "evidence": "docs/etc/evidence/t484-s3-win31-editor.md"
   },
   "test/integration/ntvdm64-386/verify-win31-identity.ps1": {
     "status": "pending-producer-migration",

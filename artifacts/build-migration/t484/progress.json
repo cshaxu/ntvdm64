@@ -1,27 +1,23 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "658e4de250f1780412e43100414a9f301faae4a7",
+  "head": "07754446a3b6e3655a23de2e49dc351a9e1e1a13",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
-    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-ccpu-alu-guest.ps1",
-    " M test/integration/verify-ccpu-sign-flags-guest.ps1",
-    " M test/integration/verify-ccpu-transfer-guest.ps1",
-    " M test/integration/verify-original-ems-probe.ps1",
-    " M test/integration/verify-wow-page-cost.ps1",
-    " M test/integration/verify-wow-paired-latency.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-cpu-guest/",
-    "?? docs/etc/evidence/t484-s3-cpu-guest.md",
-    "?? tools/build/fixtures/cpu-guest-probes.cmake"
+    " M test/integration/ntvdm64-386/verify-win31-editors.ps1",
+    " M test/observation/win31_startup_contract.asm",
+    " M tools/README.md",
+    "?? artifacts/build-migration/t484/s3-win31-editor/",
+    "?? docs/etc/evidence/t484-s3-win31-editor.md",
+    "?? test/integration/ntvdm64-386/editor-data.inc",
+    "?? tools/build-win31-editor.cmd",
+    "?? tools/build/win31-editor/"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 35,
-    "unchanged": 207,
+    "changed": 36,
+    "unchanged": 206,
     "removed": 113
   },
   "disposition_counts": {
@@ -424,14 +420,15 @@
       "id": "B0023",
       "file": "test/integration/ntvdm64-386/verify-win31-editors.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "58b75c46b651b882bf55c87f2260657f37909c22b55deec8cc4a815703f8af14",
+      "state": "changed",
+      "current_sha256": "8ce5bf31a9fecbc7ed92b09da13329c699262e41738b160ee4594e98ab4c8ccb",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "NASM builds generated controller.asm"
+        "reason": "P37 replaces PowerShell assembly composition and NASM invocation with CMD/native include composition;20 valid variants byte-identical,12 invalid variants rejected. Shared runtime matrix and staging producers still require complete-chain reconciliation.",
+        "evidence": "docs/etc/evidence/t484-s3-win31-editor.md"
       }
     },
     {
@@ -493,8 +490,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "4b878874476d0e8d1bb263829372bbb3a17a94827603710b9dd1f0c07ba97da0",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-cpu-guest.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -508,8 +509,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "c8de4970168c98736efcc95aaab513454910acfbc00d223242e95eb377155287",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-cpu-guest.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -523,8 +528,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "f5ea4a9780f4577854c0ff3a20bc4148b6a1c27d179270844097f31dde83db57",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-cpu-guest.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -636,8 +645,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "c21eae90c54d650dc225eff1c79b5cf3b476d38d3cd888d64f1bbd0029c2919d",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-cpu-guest.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -1003,10 +1016,12 @@
       "state": "changed",
       "current_sha256": "f8d4c82e4bc06da74662e517ccf73d2ea3d18119cdf6865d7a8eb2b70dcac665",
       "revisions": [
+        "07754446a3b6e3655a23de2e49dc351a9e1e1a13",
         "161b9dc27ab6ee0713a777f349ddb25669d72766"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s2-native-tib.md"
+        "docs/etc/evidence/t484-s2-native-tib.md",
+        "docs/etc/evidence/t484-s3-cpu-guest.md"
       ],
       "completion": "pending-producer-migration",
       "decision": {
@@ -4735,6 +4750,12 @@
     }
   ],
   "commits": {
+    "07754446a3b6e3655a23de2e49dc351a9e1e1a13": {
+      "subject": "T484 S3 P36 migrate shared CPU and EMS probe production",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-cpu-guest.md"
+      ]
+    },
     "658e4de250f1780412e43100414a9f301faae4a7": {
       "subject": "T484 S3 P35 migrate host register layout fixture to native targets",
       "evidence": [
@@ -5265,15 +5286,11 @@
           "text": "# Run in a background modern pwsh process with a diagnostic host package."
         },
         {
-          "line": 69,
-          "text": "& nasm -f bin \"$task/controller.asm\" -o \"$task/controller.exe\""
-        },
-        {
-          "line": 75,
+          "line": 74,
           "text": "$nasm=(Get-Command nasm.exe).Source"
         },
         {
-          "line": 77,
+          "line": 76,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]

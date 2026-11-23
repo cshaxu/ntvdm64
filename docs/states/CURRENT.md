@@ -74,7 +74,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P36 CPU/EMS probes](../etc/evidence/t484-s3-cpu-guest.md) | Shared native production for four runners;23 COM byte comparisons pass; shared runtime/staging dependencies remain open. |
 
-Each batch passed its cached full host build. P36 checks11 raw host inputs
+| [P37 Win31 editor](../etc/evidence/t484-s3-win31-editor.md) | Native controller composition;20 byte-identical variants,12 rejection controls and stable cache; transitive runtime/staging still pending. |
+
+Each batch passed its cached full host build. P37 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
@@ -129,6 +131,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P36 records shared CPU/EMS probe production and its delivery under the
+T484 S3 P37 records native Win31 editor controller production and its delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.
