@@ -1,0 +1,22 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell\\old\\CARHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\shell\\CARHOST.DLL",
+    "oldBytes": 81920,
+    "newBytes": 81920,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "3f41341f11d1fe7f91e8dbda5da9b443ca8eab4c6b0b9bf0b7786a2c339928c2",
+    "newSha256": "0e6b771ee4dd81fc612ae1e7fd15c158a25334f503af67bf2af06491818080bb"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell\\old\\OLEHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\shell\\OLEHOST.DLL",
+    "oldBytes": 81920,
+    "newBytes": 81920,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "4e80c7a39961fc9a0b528d8cef56d4cec4cd95e8754adff554d369c0216903b9",
+    "newSha256": "0761a4277d0362d20852467a3579e6b3253498ad8133e36fddcdc33e2f677d1f"
+  }
+]

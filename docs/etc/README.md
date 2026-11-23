@@ -1584,3 +1584,5 @@ post-publication targeted checks.
 - [T484 S3 message probes](evidence/t484-s3-message-probes.md).
 
 - [T484 S3 print probe](evidence/t484-s3-print-probe.md).
+
+- [T484 S3 shell probes](evidence/t484-s3-shell-probes.md).

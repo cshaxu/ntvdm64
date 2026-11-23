@@ -1,0 +1,11 @@
+{
+  "publishedHashes": 22,
+  "rawHostImages": 11,
+  "parsed": [
+    "verify-win16-shell-hook-probe"
+  ],
+  "started": "2026-11-23T19:20:35.5047306+00:00",
+  "finished": "2026-11-23T19:20:58.8043689+00:00",
+  "exit": 0,
+  "pid": 12112
+}

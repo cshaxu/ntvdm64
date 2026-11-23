@@ -1,8 +1,9 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~3"=="" exit /b 2
+if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
+if "%~2"=="win16-ole-peer" goto ole_arguments
 if "%~2"=="win16-print" goto print_arguments
 if "%~2"=="win16-message" goto message_arguments
 if "%~2"=="win16-message-guest" goto message_arguments
@@ -27,11 +28,19 @@ goto arguments
 :print_arguments
 if "%~3"=="" exit /b 2
 set SERIAL_OPTION="-DNTVDM_PRINT_OUTPUT_DIR=%~3"
+goto arguments
+:ole_arguments
+if "%~3"=="" exit /b 2
+if not exist "%~3\wow32.dll.map" exit /b 2
+if not exist "%~3\wow32.dll" exit /b 2
+set SERIAL_OPTION="-DNTVDM_OLE_PROVIDER=%~3"
 :arguments
 if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+for %%I in (win16-shell-probes win16-ole-peer) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (win16-shell-probes win16-ole-peer) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="win16-print" set "SELECTED=1"
 if "%TARGET%"=="win16-print" if not "%~1"=="x86" exit /b 2
 for %%I in (win16-message win16-message-guest) do if "%TARGET%"=="%%I" set "SELECTED=1"

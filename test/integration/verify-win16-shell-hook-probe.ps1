@@ -41,9 +41,13 @@ try {
  if($Case -eq 'word'){$source="$PSScriptRoot/../observation/win16_window_word_probe.asm"}
  $probe=if($Case -eq 'shell'){'SHLPROBE'}elseif($Case -eq 'word'){'WORDPROB'}elseif($Case -eq 'optical'){'CDPROBE'}elseif($Case -eq 'vdd'){'S44BOP'}elseif($Case -eq 'media'){'MEDPROBE'}elseif($Case -eq 'keyboard'){'KEYPROBE'}elseif($Case -eq 'caret'){'CARETPRB'}elseif($Case -eq 'clipreject'){'CLIPREJ1'}else{'CBTPROB'}
  $assembler=(Get-Command nasm.exe).Source
- $defines=if($Case -eq 'optical'){'-DOPTICAL_DRIVE='+$OpticalDrive+' '}elseif($Case -eq 'vdd'){'-DS41_ISOLATED '}elseif($LeaveHookInstalled){'-DHOOK_LEAVE_INSTALLED '}elseif($Case -eq 'clipreject'){('-DFORMAT='+$ClipboardFormat+' ')}else{''}
- if($OleRoundtrip){$defines+='-DOLE_ROUNDTRIP '}
- Owned assemble $assembler ($defines+'-f bin "'+$source+'" -o "'+$root+'/'+$probe+'.'+$extension+'"') 30
+ Owned assemble $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 win16-shell-probes"') 300
+ $cache="$repo/build/.ninja/fixtures-x86/guest-probes/shell"
+ $selected="$probe.$extension"
+ if($Case -eq 'optical'){$selected="CDPROBE-$OpticalDrive.COM"}
+ if($LeaveHookInstalled){$selected='CBTPROB-stay.EXE'}
+ if($Case -eq 'clipreject'){$selected="CLIPREJ-$ClipboardFormat"+$(if($OleRoundtrip){'-ole'}else{''})+'.EXE'}
+ Copy-Item "$cache/$selected" "$root/$probe.$extension"
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity
  Save-IsolatedPackageManifest $runtime "$root/manifest.json"
  $scope=New-IsolatedPackageScope $runtime
@@ -69,7 +73,7 @@ try {
   Get-FileHash "$tests/MMSYSTEM.DLL"|Export-Csv -NoTypeInformation "$root/guest-library.csv"
  }
  if($OleRoundtrip){
-  if(!$CompilerEnvironment -or !$ProviderBuildRoot){throw 'Require compiler environment and exact provider build root'}
+  if(!$ProviderBuildRoot){throw 'Require exact provider build root'}
   $map=(Resolve-Path "$ProviderBuildRoot/wow32.dll.map").Path
   $image=(Resolve-Path "$ProviderBuildRoot/wow32.dll").Path
   $manifest=Get-Content "$PackageRoot/product-system32-manifest.json" -Raw|ConvertFrom-Json
@@ -81,11 +85,8 @@ try {
   if(!$symbol.Success -or !$base.Success){throw 'Missing product conversion symbol/base'}
   $rva=[Convert]::ToUInt32($symbol.Groups[1].Value,16)-[Convert]::ToUInt32($base.Groups[1].Value,16)
   $nativeSource="$PSScriptRoot/../observation/wow_ole_descriptor_roundtrip.c"
-  @('@echo off',('call "'+$CompilerEnvironment+'" -arch=x86 -host_arch=x64 >nul'),
-   'if errorlevel 1 exit /b %errorlevel%',
-   ('cl /nologo /LD /MT /O2 /DOLE_PROVIDER_RVA='+$rva+' "'+$nativeSource+'" /Fo"'+$root+'/ole.obj" /link /OUT:"'+$root+'/OLEHOST.DLL" /IMPLIB:"'+$root+'/ole.lib" /EXPORT:OleRoundtrip=_OleRoundtrip@12'),
-   'exit /b %errorlevel%')|Set-Content "$root/compiler.cmd"
-  Owned native-compile cmd.exe ('/d /c "'+$root+'/compiler.cmd"') 60
+  Owned native-compile $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 win16-ole-peer "'+(Resolve-Path $ProviderBuildRoot).Path+'""') 300
+  Copy-Item "$cache/OLEHOST.DLL" "$root/OLEHOST.DLL"
   Copy-Item "$root/OLEHOST.DLL" "$runtime/system32/OLEHOST.DLL"
   Copy-Item $map "$root/provider.map"
   Get-FileHash $nativeSource,"$root/OLEHOST.DLL",$map,$image|Export-Csv -NoTypeInformation "$root/native-inputs.csv"
@@ -93,19 +94,14 @@ try {
  }
 
  if($Case -eq 'caret'){
-  if(!$CompilerEnvironment -or !(Test-Path -LiteralPath $CompilerEnvironment)){throw 'Caret observer requires VS compiler environment'}
   $nativeSource="$PSScriptRoot/../observation/wow_caret_native_observer.c"
-  @('@echo off',('call "'+$CompilerEnvironment+'" -arch=x86 -host_arch=x64 >nul'),
-   'if errorlevel 1 exit /b %errorlevel%',
-   ('cl /nologo /LD /O2 "'+$nativeSource+'" /Fo"'+$root+'/caret.obj" /link user32.lib /OUT:"'+$root+'/CARHOST.DLL" /IMPLIB:"'+$root+'/caret.lib" /EXPORT:CaretObserve=_CaretObserve@12'),
-   'exit /b %errorlevel%')|Set-Content "$root/compiler.cmd"
-  Owned native-compile cmd.exe ('/d /c "'+$root+'/compiler.cmd"') 60
+  Copy-Item "$cache/CARHOST.DLL" "$root/CARHOST.DLL"
   Copy-Item "$root/CARHOST.DLL" "$runtime/system32/CARHOST.DLL"
   Get-FileHash $nativeSource,"$root/CARHOST.DLL"|Export-Csv -NoTypeInformation "$root/native-inputs.csv"
  }
 
  if($Case -eq 'shell'){
-  Owned child-assemble $assembler ('-DCHILD -f bin "'+$source+'" -o "'+$root+'/SHLCHILD.EXE"') 30
+  Copy-Item "$cache/SHLCHILD.EXE" "$root/SHLCHILD.EXE"
   Copy-Item "$root/SHLCHILD.EXE" "$tests/SHLCHILD.EXE"
  }
  Get-FileHash $source,$PSCommandPath,$Observer,$LogonHelper,$assembler,"$root/$probe.$extension"|Export-Csv -NoTypeInformation "$root/inputs.csv"

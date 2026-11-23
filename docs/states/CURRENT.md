@@ -98,7 +98,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P48 print probe](../etc/evidence/t484-s3-print-probe.md) | Native dynamic output-directory composition;three byte-identical path cases, cache and2 rejection checks pass; staging pending. |
 
-Each batch passed its cached full host build. P48 checks11 raw host inputs
+| [P49 shell/hook probes](../etc/evidence/t484-s3-shell-probes.md) | All42 guest variants byte-identical;caret/OLE native peers timestamp-only;cache and rejection checks pass, helper/staging pending. |
+
+Each batch passed its cached full host build. P49 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

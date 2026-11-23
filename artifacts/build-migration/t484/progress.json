@@ -1,20 +1,21 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "5df3ff0953f75bbc68a509819ef6d44a6a7515bc",
+  "head": "7773022884e67c2963edcd980db1da8274cf930a",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-win16-print-probe.ps1",
+    " M test/integration/verify-win16-shell-hook-probe.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/win16-probes.cmake",
-    "?? artifacts/build-migration/t484/s3-print/",
-    "?? docs/etc/evidence/t484-s3-print-probe.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-shell/",
+    "?? docs/etc/evidence/t484-s3-shell-probes.md",
+    "?? tools/build/fixtures/win16-shell.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 53,
-    "unchanged": 189,
+    "changed": 54,
+    "unchanged": 188,
     "removed": 113
   },
   "disposition_counts": {
@@ -832,8 +833,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "b00785f610772323c9f5474f993bb0f5f701b0c12e0d2299e82ac4ea8601a32b",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "7773022884e67c2963edcd980db1da8274cf930a"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-print-probe.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -902,14 +907,15 @@
       "id": "B0051",
       "file": "test/integration/verify-win16-shell-hook-probe.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "783302e6a845cf5ab838848e21f9e82370b96e9c4a0d60e81e1df9b834921824",
+      "state": "changed",
+      "current_sha256": "dadd2af86fdcedb5154b4e6f3750a5a098d1cc3491eaf9f0b6ea825053cba920",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM; uses shared logon helper"
+        "reason": "P49 all42 guest variants and native caret/OLE providers migrated and verified; external logon-helper production/shared runtime staging remain pending",
+        "evidence": "docs/etc/evidence/t484-s3-shell-probes.md"
       }
     },
     {
@@ -4835,6 +4841,12 @@
     }
   ],
   "commits": {
+    "7773022884e67c2963edcd980db1da8274cf930a": {
+      "subject": "T484 S3 P48 migrate print probe directory composition",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-print-probe.md"
+      ]
+    },
     "5df3ff0953f75bbc68a509819ef6d44a6a7515bc": {
       "subject": "T484 S3 P47 migrate message witness composition",
       "evidence": [
@@ -5745,12 +5757,8 @@
           "text": "$assembler=(Get-Command nasm.exe).Source"
         },
         {
-          "line": 86,
-          "text": "('cl /nologo /LD /MT /O2 /DOLE_PROVIDER_RVA='+$rva+' \"'+$nativeSource+'\" /Fo\"'+$root+'/ole.obj\" /link /OUT:\"'+$root+'/OLEHOST.DLL\" /IMPLIB:\"'+$root+'/ole.lib\" /EXPORT:OleRoundtrip=_OleRoundtrip@12'),"
-        },
-        {
-          "line": 100,
-          "text": "('cl /nologo /LD /O2 \"'+$nativeSource+'\" /Fo\"'+$root+'/caret.obj\" /link user32.lib /OUT:\"'+$root+'/CARHOST.DLL\" /IMPLIB:\"'+$root+'/caret.lib\" /EXPORT:CaretObserve=_CaretObserve@12'),"
+          "line": 45,
+          "text": "$cache=\"$repo/build/.ninja/fixtures-x86/guest-probes/shell\""
         }
       ]
     },
