@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~3"=="" exit /b 2
+if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
 if "%~2"=="win16-ole-peer" goto ole_arguments
 if "%~2"=="win16-print" goto print_arguments
@@ -46,8 +46,8 @@ if "%TARGET%"=="wow-edit-contracts" set "SELECTED=1"
 if "%TARGET%"=="wow-edit-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-clipboard-probes" set "SELECTED=1"
 if "%TARGET%"=="wow-clipboard-probes" if not "%~1"=="x86" exit /b 2
-for %%I in (wow-callback-cost wow-callback-cost-unit) do if "%TARGET%"=="%%I" set "SELECTED=1"
-for %%I in (wow-callback-cost wow-callback-cost-unit) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
+for %%I in (wow-callback-cost wow-callback-cost-unit wow-graph-cost wow-graph-cost-unit) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (wow-callback-cost wow-callback-cost-unit wow-graph-cost wow-graph-cost-unit) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (win16-shell-probes win16-ole-peer) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (win16-shell-probes win16-ole-peer) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="win16-print" set "SELECTED=1"
@@ -137,6 +137,7 @@ if errorlevel 1 exit /b %errorlevel%
 for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%TARGET%"=="%%I" goto message_native
 if "%TARGET%"=="oem-tests" goto worker
 if "%TARGET%"=="wow-callback-cost" goto wowcallback
+if "%TARGET%"=="wow-graph-cost" goto wowcallback
 if "%TARGET%"=="pic-bios-contracts" goto worker
 if "%TARGET%"=="command-keyboard-shadow" goto worker
 if "%TARGET%"=="native-input-contracts" goto inputtests
@@ -179,7 +180,7 @@ exit /b %errorlevel%
 set "CALLBACK_ROOT=%~3"
 if not defined CALLBACK_ROOT set "CALLBACK_ROOT=%NTVDM_ROOT%\build\.ninja\msvc-x86-release\wow32"
 if not exist "%CALLBACK_ROOT%\CMakeCache.txt" exit /b 2
-cmake --build "%CALLBACK_ROOT%" --target wow-callback-cost
+cmake --build "%CALLBACK_ROOT%" --target %TARGET%
 exit /b %errorlevel%
 :inputtests
 pushd "%NTVDM_ROOT%"

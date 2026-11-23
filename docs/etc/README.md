@@ -1596,3 +1596,6 @@ post-publication targeted checks.
 - [T484 S3 native message groups](evidence/t484-s3-message-groups.md).
 
 - [T484 S3 file cache producer](evidence/t484-s3-file-cache.md).
+
+- [T484 S3 graph diagnostic](evidence/t484-s3-graph-cost.md).
+- [T484 S3 P1-P35 delivery index](evidence/t484-s3-early-deliveries.md).

@@ -299,5 +299,10 @@
     "status": "migrated-delivered",
     "reason": "Native object import substitution and fixture link select actual production wkfileio;577 original checks pass",
     "evidence": "docs/etc/evidence/t484-s3-file-cache.md"
+  },
+  "test/integration/verify-wow-graph-cost.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "Native graph/header projection and diagnostic/unit build delivered;downstream latency producer,runner composition and staging remain",
+    "evidence": "docs/etc/evidence/t484-s3-graph-cost.md"
   }
 }

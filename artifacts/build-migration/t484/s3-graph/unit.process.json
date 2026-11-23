@@ -1,0 +1,8 @@
+{
+  "pid": 1584,
+  "deadlineSeconds": 30,
+  "command": "",
+  "working": "O:\\repos.hobby\\ntvdm64",
+  "start": "2026-11-23T20:03:42.2631483Z",
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-graph\\native-run/unit.exe"
+}

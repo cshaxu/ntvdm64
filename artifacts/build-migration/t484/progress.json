@@ -1,30 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "abf51648b9e86a9ac09915335363210685ae9797",
+  "head": "85c404ae826f214f9ed19e75e5a5241e59717dcd",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-file-cache.ps1",
+    " M test/integration/verify-wow-graph-cost.ps1",
     " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/win16-probes.cmake",
     " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-file-cache/",
-    "?? docs/etc/evidence/t484-s3-file-cache.md",
-    "?? tools/build/wow32/file-cache-test.cmake"
+    "?? artifacts/build-migration/t484/s3-graph/",
+    "?? docs/etc/evidence/t484-s3-early-deliveries.md",
+    "?? docs/etc/evidence/t484-s3-graph-cost.md",
+    "?? tools/build/wow32/graph-cost.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 63,
-    "unchanged": 179,
+    "changed": 64,
+    "unchanged": 178,
     "removed": 113
   },
   "disposition_counts": {
     "migrated-delivered": 16,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
-    "pending-producer-migration": 44,
+    "pending-producer-migration": 45,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 178
+    "requires-disposition-reconciliation": 177
   },
   "existing_interpreted_candidates_with_command_hits": 202,
   "files": [
@@ -1065,8 +1067,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "efbfea48913400446a6ca49ee537e9e7d9cbc8e68e603fb2cd8cabb6f933300c",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "85c404ae826f214f9ed19e75e5a5241e59717dcd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-file-cache.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -1078,12 +1084,16 @@
       "id": "B0060",
       "file": "test/integration/verify-wow-graph-cost.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "7ac0e201f7c6c0edc19658d6e85fa8154bf9e010bc9a4b57583055149d5723c9",
+      "state": "changed",
+      "current_sha256": "df4580faf36d023a4f740af2019fdc7a4497a971e045c3d966394e2101faea4e",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "Native graph/header projection and diagnostic/unit build delivered;downstream latency producer,runner composition and staging remain",
+        "evidence": "docs/etc/evidence/t484-s3-graph-cost.md"
+      }
     },
     {
       "id": "B0061",
@@ -4897,6 +4907,12 @@
     }
   ],
   "commits": {
+    "85c404ae826f214f9ed19e75e5a5241e59717dcd": {
+      "subject": "T484 S3 P54 migrate file cache contract producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-file-cache.md"
+      ]
+    },
     "abf51648b9e86a9ac09915335363210685ae9797": {
       "subject": "T484 S3 P53 move native message groups to CMD",
       "evidence": [
@@ -6015,68 +6031,24 @@
       "file": "test/integration/verify-wow-graph-cost.ps1",
       "hits": [
         {
-          "line": 11,
+          "line": 12,
           "text": "if(!$WorkerBuildRoot){$WorkerBuildRoot=\"$repo/build/.ninja/msvc-x86-release/worker\"}"
         },
         {
-          "line": 12,
+          "line": 13,
           "text": "if(!$ProviderBuildRoot){$ProviderBuildRoot=\"$repo/build/.ninja/msvc-x86-release/wow32\"}"
         },
         {
+          "line": 32,
+          "text": "$inputs=@($PSCommandPath,$source,$compiler,$observer,\"$repo/assets/winnt.zip\",\"$provider/build.ninja\",\"$provider/wow32.dll\",\"$provider/wow32.dll.map\",\"$provider/wow32-x86.def\",\"$worker/ntvdm.exe\",\"$worker/ntvdm.exe.map\",\"$worker/ntvdm.lib\",\"$repo/assets/release/release-manifest.json\",\"$repo/tools/build/wow32/graph-cost.cmake\")"
+        },
+        {
           "line": 48,
-          "text": "$cc=@(& ninja.exe -C $provider -t commands obj/compat/wow_user_object_bindings.obj)[-1]"
-        },
-        {
-          "line": 50,
-          "text": "$link=@(& ninja.exe -C $provider -t commands wow32.dll)[-1]"
-        },
-        {
-          "line": 51,
-          "text": "if($LASTEXITCODE -or $link -notmatch '^link '){throw 'Original provider link rule missing'}"
-        },
-        {
-          "line": 52,
-          "text": "$inputs=@($PSCommandPath,$source,$compiler,$observer,\"$repo/assets/winnt.zip\",\"$provider/build.ninja\",\"$provider/wow32.dll\",\"$provider/wow32.dll.map\",\"$provider/wow32-x86.def\",\"$worker/ntvdm.exe\",\"$worker/ntvdm.exe.map\",\"$worker/ntvdm.lib\")"
+          "text": "$deps=@(& ninja.exe -C $provider -t deps ([IO.Path]::GetRelativePath($provider,$object).Replace('\\','/')))"
         },
         {
           "line": 54,
-          "text": "$inputs+=@([regex]::Matches($link,'(?:^|\\s)(obj/[^\\s\"]+\\.(?:obj|res))(?=\\s|$)')|ForEach-Object {Join-Path $provider $_.Groups[1].Value})"
-        },
-        {
-          "line": 56,
-          "text": "$deps=@(& ninja.exe -C $provider -t deps obj/compat/wow_user_object_bindings.obj)"
-        },
-        {
-          "line": 67,
-          "text": "$link=Mark $link ' obj/compat/wow_user_object_bindings.obj ' (' \"'+$root+'/graph-profile.obj\" ')"
-        },
-        {
-          "line": 68,
-          "text": "$parents=[regex]::Matches($link,'(?<!\\S)(?:\"([^\"]*[\\\\/]ntvdm\\.lib)\"|([^\\s\"]*[\\\\/]ntvdm\\.lib))(?=\\s|$)')"
-        },
-        {
-          "line": 70,
-          "text": "$link=Mark $link $parents[0].Value ('\"'+$worker+'/ntvdm.lib\"')"
-        },
-        {
-          "line": 71,
-          "text": "$link=Mark $link '/map:wow32.dll.map ' ('/map:\"'+$root+'/WOW32.DLL.map\" ')"
-        },
-        {
-          "line": 72,
-          "text": "$link=Mark $link '/out:wow32.dll ' ('/out:\"'+$root+'/WOW32.DLL\" /implib:\"'+$root+'/WOW32.lib\" ')"
-        },
-        {
-          "line": 73,
-          "text": "@{compile=$cc;link=$link;originalBodiesReverseExactly=$true}|ConvertTo-Json|Set-Content \"$root/commands.json\""
-        },
-        {
-          "line": 75,
-          "text": "Owned link $env:ComSpec ('/d /s /c \"call \"'+$compiler+'\" '+$link+'\"') 180 $provider"
-        },
-        {
-          "line": 76,
-          "text": "Owned unit-build $env:ComSpec ('/d /s /c \"call \"'+$compiler+'\" cl.exe /nologo /MT /O2 /W4 /WX \"'+$PSScriptRoot+'/wow_graph_cost_fixture.c\" /Fo\"'+$root+'/unit.obj\" /Fe\"'+$root+'/unit.exe\"\"') 120"
+          "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/wow-graph-cost-unit.exe\" \"$root/unit.exe\""
         }
       ]
     },

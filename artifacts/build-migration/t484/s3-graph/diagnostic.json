@@ -1,0 +1,14 @@
+{
+  "sourceReversal": true,
+  "rva": 673976,
+  "kinds": [
+    "capture",
+    "normalize",
+    "project",
+    "refresh",
+    "commit",
+    "unused"
+  ],
+  "inclusive": true,
+  "productionChanged": false
+}
