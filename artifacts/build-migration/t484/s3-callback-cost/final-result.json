@@ -1,0 +1,11 @@
+{
+  "pid": 33648,
+  "parsed": [
+    "verify-wow-callback-cost"
+  ],
+  "started": "2026-11-23T19:28:31.2354299+00:00",
+  "publishedHashes": 22,
+  "finished": "2026-11-23T19:28:52.4808009+00:00",
+  "exit": 0,
+  "rawHostImages": 11
+}

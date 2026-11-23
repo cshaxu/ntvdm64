@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~3"=="" exit /b 2
+if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
 if "%~2"=="win16-ole-peer" goto ole_arguments
 if "%~2"=="win16-print" goto print_arguments
@@ -39,6 +39,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+for %%I in (wow-callback-cost wow-callback-cost-unit) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (wow-callback-cost wow-callback-cost-unit) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (win16-shell-probes win16-ole-peer) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (win16-shell-probes win16-ole-peer) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="win16-print" set "SELECTED=1"
@@ -126,6 +128,7 @@ if "%TARGET%"=="window-contracts" if errorlevel 1 exit /b %errorlevel%
 call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
 if "%TARGET%"=="oem-tests" goto worker
+if "%TARGET%"=="wow-callback-cost" goto wowcallback
 if "%TARGET%"=="pic-bios-contracts" goto worker
 if "%TARGET%"=="command-keyboard-shadow" goto worker
 if "%TARGET%"=="native-input-contracts" goto inputtests
@@ -161,6 +164,12 @@ exit /b %errorlevel%
 cmake -S "%NTVDM_ROOT%\tools\build\wow-controls" -B "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\call-boundaries-native" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_USE_CCACHE=ON
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\call-boundaries-native" --target wow-controls
+exit /b %errorlevel%
+:wowcallback
+set "CALLBACK_ROOT=%~3"
+if not defined CALLBACK_ROOT set "CALLBACK_ROOT=%NTVDM_ROOT%\build\.ninja\msvc-x86-release\wow32"
+if not exist "%CALLBACK_ROOT%\CMakeCache.txt" exit /b 2
+cmake --build "%CALLBACK_ROOT%" --target wow-callback-cost
 exit /b %errorlevel%
 :inputtests
 pushd "%NTVDM_ROOT%"

@@ -12,9 +12,10 @@ function Owned($name,$exe,$line,$seconds){
  $p.WaitForExit();$code=$p.ExitCode;$p.Dispose();$code|Set-Content "$root/$name.exit.txt";if($code){throw "$name failed $code"}
 }
 try{
- $inputs=@($PSCommandPath,$CompilerDriver,"$PSScriptRoot/wow_callback_cost_fixture.c","$PSScriptRoot/wow_callback_cost_data.h","$PSScriptRoot/wow_callback_cost_instrument.h","$PSScriptRoot/wow_callback_cost_dispatch.h","$PSScriptRoot/wow_callback_cost_probe.h")
+ $inputs=@($PSCommandPath,"$PSScriptRoot/wow_callback_cost_fixture.c","$PSScriptRoot/wow_callback_cost_data.h","$PSScriptRoot/wow_callback_cost_instrument.h","$PSScriptRoot/wow_callback_cost_dispatch.h","$PSScriptRoot/wow_callback_cost_probe.h")
  Get-FileHash $inputs|Export-Csv -NoTypeInformation "$root/inputs.csv"
- Owned compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /MT /O2 /W4 /D_CRT_SECURE_NO_WARNINGS /Fo"'+$root+'/fixture.obj" /Fe"'+$root+'/fixture.exe" "'+$PSScriptRoot+'/wow_callback_cost_fixture.c" /link kernel32.lib"') 120
+ Owned compile $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-callback-cost-unit"') 180
+ Copy-Item "$repo/build/.ninja/fixtures-x86/wow-callback-cost-unit.exe" "$root/fixture.exe"
  Owned fixture "$root/fixture.exe" '--control' 30
  if((Get-Content "$root/fixture.stdout.txt" -Raw) -notmatch 'CALLBACK_COST_UNIT errors=0 nested=1 exact_result_error=1 rejection=1 exception=1 untracked=1 readonly=1 overflow=1 negative_states=9 negative_identities=3 handles=([0-9]+)/\1 phase_tls=1'){throw 'Incomplete callback recorder/reader controls'}
  foreach($row in Import-Csv "$root/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Frozen diagnostic unit source changed'}}

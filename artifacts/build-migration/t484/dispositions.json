@@ -275,5 +275,15 @@
     "status": "migrated-delivered",
     "reason": "Native PIC/BIOS target owns compilation and linking; Python only invokes CMD and checks provider/runtime assertions",
     "evidence": "docs/etc/evidence/t484-s3-pic-bios.md"
+  },
+  "test/integration/verify-wow-callback-cost.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-callback-cost.md",
+    "reason": "P50 native diagnostic projection and actual product composition verified; downstream measurement/helper production and staging remain pending",
+    "status": "pending-producer-migration"
+  },
+  "test/observation/verify-wow-callback-cost-probe.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-callback-cost.md",
+    "reason": "P50 standalone native recorder producer and original assertion runner pass",
+    "status": "migrated-delivered"
   }
 }

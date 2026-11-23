@@ -31,6 +31,10 @@ set_property(TARGET wow-discovery-peer_objects PROPERTY COMPILE_OPTIONS /nologo 
 target_compile_definitions(wow-discovery-peer_objects PRIVATE _CRT_SECURE_NO_WARNINGS)
 set_property(TARGET wow-discovery-peer_objects PROPERTY FIXTURE_LIBRARIES user32.lib)
 add_custom_target(win16-discovery DEPENDS win16-probes wow-discovery-peer)
+fixture(wow-callback-cost-unit CL test/observation/wow_callback_cost_fixture.c)
+set_property(TARGET wow-callback-cost-unit_objects PROPERTY COMPILE_OPTIONS /nologo /O2 /W4)
+target_compile_definitions(wow-callback-cost-unit_objects PRIVATE _CRT_SECURE_NO_WARNINGS)
+set_property(TARGET wow-callback-cost-unit_objects PROPERTY FIXTURE_LIBRARIES kernel32.lib)
 
 # The caller's fresh evidence directory is embedded by NASM, not patched later.
 set(NTVDM_PRINT_OUTPUT_DIR "" CACHE STRING "Print witness output directory")

@@ -15,7 +15,6 @@ function Owned($name,$exe,$line,$seconds,$working=$repo){
  if(!$p.WaitForExit($seconds*1000)){taskkill.exe /PID $p.Id /T /F;throw "Owned callback diagnostic deadline $name"}
  $p.WaitForExit();$code=$p.ExitCode;$p.Dispose();$code|Set-Content "$root/$name.exit.txt";if($code){throw "$name failed $code"}
 }
-function Replace-One($text,$old,$replacement){if([regex]::Matches($text,[regex]::Escape($old)).Count -ne 1){throw "Expected one mechanical boundary $old"};return $text.Replace($old,$replacement)}
 try{
  if(!$ImageRoot){$ImageRoot="$repo/assets/release"}
  $ImageRoot=(Resolve-Path $ImageRoot).Path
@@ -24,44 +23,24 @@ try{
  $inputs=@($PSCommandPath,$source,$Observer,$CompilerDriver,"$ProviderBuildRoot/build.ninja","$ProviderBuildRoot/wow32.dll","$ProviderBuildRoot/wow32.dll.map","$ProviderBuildRoot/wow32-x86.def","$WorkerBuildRoot/ntvdm.exe","$WorkerBuildRoot/ntvdm.exe.map","$WorkerBuildRoot/ntvdm.lib","$repo/assets/winnt.zip","$repo/assets/release/release-manifest.json","$PSScriptRoot/../observation/verify-wow-callback-cost-probe.ps1","$PSScriptRoot/../observation/wow_callback_cost_fixture.c","$PSScriptRoot/../observation/wow_callback_cost_data.h","$PSScriptRoot/../observation/wow_callback_cost_instrument.h","$PSScriptRoot/../observation/wow_callback_cost_dispatch.h","$PSScriptRoot/../observation/wow_callback_cost_probe.h","$PSScriptRoot/../observation/wow_observer_cost.h","$PSScriptRoot/verify-wow-mine-latency.ps1","$PSScriptRoot/../observation/wow_mine_latency_probe.c","$PSScriptRoot/../observation/wow_mine_gameplay_probe.c","$PSScriptRoot/../observation/summarize-wow-callback-cost.ps1")
  $published=@(Get-Content "$repo/assets/release/release-manifest.json" -Raw|ConvertFrom-Json)
  $images=@(Get-Content "$ImageRoot/release-manifest.json" -Raw|ConvertFrom-Json)
- if($images.Count -ne 13 -or $published.Count -ne 13 -or @(Compare-Object ($images.name|Sort-Object) ($published.name|Sort-Object)).Count){throw 'Coherent13 image identities required'}
+ if(!$published.Count -or $images.Count -ne $published.Count -or @($images.name|Sort-Object -Unique).Count -ne $images.Count -or @(Compare-Object ($images.name|Sort-Object) ($published.name|Sort-Object)).Count){throw 'Coherent current image identities required'}
  $inputs+="$ImageRoot/release-manifest.json"
  foreach($image in $published){$inputs+="$repo/assets/release/$($image.name)"}
  $null=New-Item -ItemType Directory "$root/sealed-images"
  foreach($image in $images){$path="$ImageRoot/$($image.name)";if((Get-FileHash $path).Hash -ne $image.sha256){throw 'Selected image manifest mismatch'};$inputs+=$path;Copy-Item $path "$root/sealed-images/$($image.name)"}
- foreach($pair in @(@('ntvdm.exe',$WorkerBuildRoot),@('WOW32.DLL',$ProviderBuildRoot))){if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (Get-FileHash "$root/sealed-images/$($pair[0])").Hash){throw 'Image/MAP baseline mismatch'};Copy-Item "$($pair[1])/$($pair[0]).map" "$root/sealed-images/$($pair[0]).map"}
- $deps=@(& ninja.exe -C $ProviderBuildRoot -t deps obj/compat/wow_window_words_binding.obj);if($LASTEXITCODE){throw 'Cannot read original compile dependencies'}
- $deps|Set-Content "$root/original-deps.txt"
- $inputs+=@($deps|ForEach-Object {if($_ -match '^\s+([A-Za-z]:[/\\].*)$' -and (Test-Path $Matches[1])){$Matches[1]}})
- $cc=@(& ninja.exe -C $ProviderBuildRoot -t commands obj/compat/wow_window_words_binding.obj)[-1];if($LASTEXITCODE){throw 'Cannot read original compile rule'}
- $link=@(& ninja.exe -C $ProviderBuildRoot -t commands wow32.dll)[-1];if($LASTEXITCODE -or $link -notmatch '^link '){throw 'Cannot read original provider link rule'}
- $parentReferences=[regex]::Matches($link,'(?<!\S)(?:"([^"]*[\\/]ntvdm\.lib)"|([^\s"]*[\\/]ntvdm\.lib))(?=\s|$)')
- if($parentReferences.Count -ne 1){throw 'Expected one explicit parent import library'}
- $link=Replace-One $link $parentReferences[0].Value ('"'+(Join-Path $WorkerBuildRoot 'ntvdm.lib').Replace('\','/')+'"')
- $inputs+=@([regex]::Matches($link,'(?:^|\s)(obj/[^\s"]+\.(?:obj|res))(?=\s|$)')|ForEach-Object {Join-Path $ProviderBuildRoot $_.Groups[1].Value})
- $inputs+=@(Get-ChildItem $ProviderBuildRoot -File -Filter '*.lib').FullName
+ foreach($pair in @(@('ntvdm.exe',$WorkerBuildRoot),@('WOW32.DLL',$ProviderBuildRoot))){if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (@($images|Where-Object name -eq $pair[0])[0].InputSha256)){throw 'Image/MAP baseline mismatch'};Copy-Item "$($pair[1])/$($pair[0]).map" "$root/sealed-images/$($pair[0]).map"}
+ Owned build $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-callback-cost "'+(Resolve-Path $ProviderBuildRoot).Path+'""') 300
+ $diagnostic=Join-Path $ProviderBuildRoot 'diagnostics/callback-cost'
+ Copy-Item "$diagnostic/callback-profile.c","$diagnostic/WOW32.DLL","$diagnostic/WOW32.DLL.map" $root
+ $object=(Get-Content "$diagnostic/callback-object.txt" -Raw).Trim()
+ Copy-Item $object "$root/callback-profile.obj"
+ $members=@(Get-Content "$diagnostic/objects.txt")
+ if(@($members|Where-Object {$_ -match 'obj_compat_wow_window_words_binding_obj'}).Count -or @($members|Where-Object {$_ -eq $object}).Count -ne 1){throw 'Diagnostic object substitution mismatch'}
+ $inputs+=@($members|Where-Object {$_ -ne $object})
+ $inputs+=@("$repo/tools/build/wow32/callback-cost.cmake","$repo/tools/build/wow32/CMakeLists.txt","$ProviderBuildRoot/CMakeCache.txt")
  $inputs|Sort-Object -Unique|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
- Owned unit $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-callback-cost-probe.ps1" -BuildRoot "'+$root+'/unit" -CompilerDriver "'+$CompilerDriver+'"') 180
- Owned parser $shell ('-NoProfile -File "'+$PSScriptRoot+'/summarize-wow-callback-cost.ps1" -BuildRoot "'+$root+'/parser-controls" -SelfTest') 30
- $original=[IO.File]::ReadAllText($source)
- $body=Replace-One $original 'BOOL WINAPI wow_window_dispatch_immutable(' 'static BOOL WINAPI callback_cost_body('
- $needle="        *result = DispatchClientMessage(&view, message, wp, lp, procedure);`n    } __finally {"
- $normalized=$body.Replace("`r`n","`n")
- $marked="        callback_cost_phase_enter();`n        *result = DispatchClientMessage(&view, message, wp, lp, procedure);`n        callback_cost_phase_leave();`n    } __finally {"
- $body=Replace-One $normalized $needle $marked
- $restored=Replace-One $body $marked $needle
- $restored=Replace-One $restored 'static BOOL WINAPI callback_cost_body(' 'BOOL WINAPI wow_window_dispatch_immutable('
- if($restored -cne $original.Replace("`r`n","`n")){throw 'Body/phase reversal failed'}
- $overlay='#include "'+$PSScriptRoot.Replace('\','/')+'/wow_callback_cost_instrument.h"'+"`r`n"+$body+"`r`n"+'#include "'+$PSScriptRoot.Replace('\','/')+'/wow_callback_cost_dispatch.h"'+"`r`n"
- [IO.File]::WriteAllText("$root/callback-profile.c",$overlay,[Text.UTF8Encoding]::new($false))
- $cc=Replace-One $cc '/Foobj/compat/wow_window_words_binding.obj' ('/Fo"'+$root+'/callback-profile.obj"')
- $cc=Replace-One $cc $source.Replace('\','/') ('"'+$root+'/callback-profile.c"')
- $link=Replace-One $link ' obj/compat/wow_window_words_binding.obj ' (' "'+$root+'/callback-profile.obj" ')
- $link=Replace-One $link '/map:wow32.dll.map ' ('/map:"'+$root+'/WOW32.DLL.map" ')
- $link=Replace-One $link '/out:wow32.dll ' ('/out:"'+$root+'/WOW32.DLL" /implib:"'+$root+'/WOW32.lib" ')
- @{compile=$cc;link=$link;bodyReversal=$true;sourceModified=$false}|ConvertTo-Json|Set-Content "$root/commands.json"
- Owned compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" '+$cc+'"') 180 $ProviderBuildRoot
- Owned link $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" '+$link+'"') 180 $ProviderBuildRoot
+ Owned unit $shell ('-NoProfile -File "'+$PSScriptRoot+'/../observation/verify-wow-callback-cost-probe.ps1" -BuildRoot "'+$root+'/unit"') 180
+ Owned parser $shell ('-NoProfile -File "'+$PSScriptRoot+'/../observation/summarize-wow-callback-cost.ps1" -BuildRoot "'+$root+'/parser-controls" -SelfTest') 30
  $map=Get-Content "$root/WOW32.DLL.map" -Raw
  if($map -match '\bwow_window_words_binding\.obj\b'){throw 'Original object linked alongside diagnostic copy'}
  $preferred=[Convert]::ToInt64(([regex]::Match($map,'Preferred load address is ([0-9A-Fa-f]+)')).Groups[1].Value,16)
@@ -75,7 +54,7 @@ try{
  Owned baseline $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$root+'/sealed-images/ntvdm.exe.map" -WowMap "'+$root+'/sealed-images/WOW32.DLL.map" -ObserverCost -CallbackWorkload') 360
  Copy-Item "$root/WOW32.DLL" "$package/system32/WOW32.DLL" -Force
  Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$root+'/sealed-images/ntvdm.exe.map" -WowMap "'+$root+'/WOW32.DLL.map" -ObserverCost -CallbackCostRva '+$rva.ToString('X8')) 360
- Owned summary $shell ('-NoProfile -File "'+$PSScriptRoot+'/summarize-wow-callback-cost.ps1" -BuildRoot "'+$root+'"') 60
+ Owned summary $shell ('-NoProfile -File "'+$PSScriptRoot+'/../observation/summarize-wow-callback-cost.ps1" -BuildRoot "'+$root+'"') 60
  foreach($input in Import-Csv "$root/inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen source/runtime input changed'}}
  foreach($input in Import-Csv "$root/diagnostic-inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Diagnostic output changed'}}
  foreach($image in $published){foreach($dir in @("$repo/assets/release",'O:\winnt\system32')){if((Get-FileHash "$dir/$($image.name)").Hash -ne $image.sha256){throw 'Production changed during diagnostic'}}}
