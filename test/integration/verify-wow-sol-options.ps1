@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)][string]$PackageRoot,
-    [Parameter(Mandatory)][string]$CompilerDriver,
+    [string]$CompilerDriver,
     [Parameter(Mandatory)][string]$BuildRoot,
     [string]$Observer,
     [switch]$VisibleDesktop,
@@ -14,7 +14,7 @@ param(
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
 )
 $ErrorActionPreference='Stop'
-$CompilerDriver=(Resolve-Path -LiteralPath $CompilerDriver).Path
+
 if($VisibleDesktop -and !$Observer){throw 'Visible desktop requires the console observer'}
 if(!$VisibleDesktop -and $Rounds -ne 1){throw 'Repeated Options requires a PID-bound visible-desktop probe'}
 $observationMs=[Math]::Max(60000+($Rounds-1)*15000, ($Rounds*2+1)*$DialogWaitMs)
@@ -26,15 +26,11 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){thr
 if(Test-Path $root){throw 'Use a fresh evidence directory'}
 $null=New-Item -ItemType Directory $root
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
-$source="$PSScriptRoot/../observation/wow_sol_options_probe.c"
 $process=$null;$runtime=$null;$scope=$null
 $saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_SOL_OPTIONS_PROBE','MVDM_WOW_SOL_OPTIONS_NO_DEBUG','MVDM_WOW_SOL_DIALOG_WAIT_MS','MVDM_SOL_EXTERNAL_WINDOWS','MVDM_WOW_WINDOW_TRACE_PATH','MVDM_WOW_DIALOG_PROCEDURE_TRACE_PATH','MVDM_WOW_DIALOG_CREATE_TRACE_PATH','MVDM_WOW_CALLPROC_TRACE_PATH')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
-    Push-Location $root
-    try {
-        & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root\probe.obj" "/Fe$root\probe.exe" $source /link user32.lib psapi.lib dbghelp.lib *> "$root\compile.txt"
-        if($LASTEXITCODE){throw "Probe build failed: $LASTEXITCODE"}
-    } finally {Pop-Location}
+    . "$PSScriptRoot/Invoke-WowAppProbeBuild.ps1"
+    Invoke-WowAppProbeBuild -OutputRoot $root -Name sol-options
     $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages
     Save-IsolatedPackageManifest $runtime "$root\manifest.json"
     $scope=New-IsolatedPackageScope $runtime

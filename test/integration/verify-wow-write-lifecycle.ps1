@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)][string]$PackageRoot,
-    [Parameter(Mandatory)][string]$CompilerDriver,
+    [string]$CompilerDriver,
     [Parameter(Mandatory)][string]$BuildRoot,
     [ValidateSet('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')]
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
@@ -12,7 +12,7 @@ $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){
     throw 'Use a fresh repository build evidence directory'
 }
-$CompilerDriver=(Resolve-Path -LiteralPath $CompilerDriver).Path
+
 $null=New-Item -ItemType Directory $root
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $runtime=$null;$scope=$null
@@ -23,8 +23,8 @@ foreach($name in @('TEMP','TMP','PATH',
     $saved[$name]=[Environment]::GetEnvironmentVariable($name)
 }
 try {
-    & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root\probe.obj" "/Fe$root\probe.exe" "$PSScriptRoot/../observation/wow_write_lifecycle_probe.c" /link user32.lib *> "$root\compile.txt"
-    if($LASTEXITCODE){throw "WRITE lifecycle probe build failed: $LASTEXITCODE"}
+    . "$PSScriptRoot/Invoke-WowAppProbeBuild.ps1"
+    Invoke-WowAppProbeBuild -OutputRoot $root -Name write-lifecycle
     $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages
     $scope=New-IsolatedPackageScope $runtime
     $env:TEMP=$runtime;$env:TMP=$runtime;$env:PATH="$runtime\system32;"+$env:SystemRoot+'\System32'

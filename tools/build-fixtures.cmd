@@ -39,6 +39,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-page-cost-unit" set "SELECTED=1"
 if "%TARGET%"=="wow-page-cost-unit" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-page-cost" set "SELECTED=1"

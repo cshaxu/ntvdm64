@@ -74,7 +74,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P61 obsolete style aggregator](../etc/evidence/t484-s3-style-retirement.md) | Retires orphaned T450 style-mode matrix; ordinary guest probes retained; no build inputs changed. |
 
-Implementation batches passed their cached full host build. P60 checks11 raw host inputs
+| [P62 SOL/WRITE producers](../etc/evidence/t484-s3-app-probes.md) | Three timestamp-only native witnesses; argument/architecture controls and stable cache pass; runtime staging remains pending. |
+
+Implementation batches through P62 passed their cached full host build. P62 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

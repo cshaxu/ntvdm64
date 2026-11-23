@@ -335,5 +335,20 @@
     "evidence": "docs/etc/evidence/t484-s3-style-retirement.md",
     "status": "retired-with-delivery-evidence",
     "reason": "P61 retires orphaned Win16 Style mode aggregator; provider and feature removed in T450 db91004e5; current ordinary guest probes retained"
+  },
+  "test/integration/verify-wow-sol-gameplay.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
+    "status": "pending-producer-migration",
+    "reason": "P62 local producer uses CMD/native fixture; shared physical runtime/package staging remains"
+  },
+  "test/integration/verify-wow-sol-options.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
+    "status": "pending-producer-migration",
+    "reason": "P62 local producer uses CMD/native fixture; shared physical runtime/package staging remains"
+  },
+  "test/integration/verify-wow-write-lifecycle.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
+    "status": "pending-producer-migration",
+    "reason": "P62 local producer uses CMD/native fixture; shared physical runtime/package staging remains"
   }
 }

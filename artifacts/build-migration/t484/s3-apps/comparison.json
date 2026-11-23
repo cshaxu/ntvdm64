@@ -1,0 +1,32 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-apps\\baseline\\sol-gameplay.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-sol-gameplay.exe",
+    "oldBytes": 133120,
+    "newBytes": 133120,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "830bb4e0de0c5ba3789f50fba6f7ec0c36e3e26e760d0072f1ae4ae36101bedc",
+    "newSha256": "aee7f39707fd2a09e25e4ff16b443d090e5445ccfe683a94b699d8c8e4909985"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-apps\\baseline\\sol-options.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-sol-options.exe",
+    "oldBytes": 142336,
+    "newBytes": 142336,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "1f1519ce8b8ed8ed800d9bacf68faa5eb7d104719ef02448a07445b4764d708a",
+    "newSha256": "6012cde4fcb40131c016a12ad783d96dba97f9175c395636f3e23ed6a5389334"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-apps\\baseline\\write-lifecycle.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-write-lifecycle.exe",
+    "oldBytes": 119808,
+    "newBytes": 119808,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "cd5677fce21048b51dcac59a82e990ad0c094437456572d157b1dc103fddf330",
+    "newSha256": "1e67b656a32e29b54989da00cab41e535b1df20e095d493f87b680f75080c14e"
+  }
+]

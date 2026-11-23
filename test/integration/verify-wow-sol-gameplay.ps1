@@ -2,14 +2,14 @@
 param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$Observer,
-    [Parameter(Mandatory)][string]$CompilerDriver,
+    [string]$CompilerDriver,
     [Parameter(Mandatory)][string]$BuildRoot,
     [switch]$VisibleDesktop,
     [ValidateSet('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')]
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
 )
 $ErrorActionPreference='Stop'
-$CompilerDriver=(Resolve-Path -LiteralPath $CompilerDriver).Path
+
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
@@ -17,15 +17,11 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){thr
 if(Test-Path $root){throw 'Use a fresh evidence directory'}
 $null=New-Item -ItemType Directory $root
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
-$source="$PSScriptRoot/../observation/wow_sol_gameplay_probe.c"
 $process=$null;$runtime=$null;$scope=$null
 $saved=@{};foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
-    Push-Location $root
-    try {
-        & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root\probe.obj" "/Fe$root\probe.exe" $source /link user32.lib gdi32.lib dwmapi.lib *> "$root\compile.txt"
-        if($LASTEXITCODE){throw "Probe build failed: $LASTEXITCODE"}
-    } finally {Pop-Location}
+    . "$PSScriptRoot/Invoke-WowAppProbeBuild.ps1"
+    Invoke-WowAppProbeBuild -OutputRoot $root -Name sol-gameplay
     $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages
     $scope=New-IsolatedPackageScope $runtime
     $manifest=Get-Content "$repo\assets\release\release-manifest.json" -Raw | ConvertFrom-Json
