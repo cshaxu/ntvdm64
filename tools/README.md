@@ -32,7 +32,8 @@ all14 authored addons or one selected target; see the addon source index for
 the separate test targets. Both use stable native CMake/Ninja caches.
 `build-fixtures.cmd x86|x64 <group>` builds the migrated standalone groups:
 guest-memory, redirector-async, guest-location, wow-task-frame,
-wow-callback-frame, redirector-contract, and xms-mapped (x86 only).
+wow-callback-frame, redirector-contract, dem-file-lifecycle,
+redirector-guest-copy, and xms-mapped/xms-startup (x86 only).
 The redirector-contract x86 target also compiles seven original integration
 units. T280 and T282 shared one fixture and now share guest-location.
 This does not imply that every test producer has already migrated.

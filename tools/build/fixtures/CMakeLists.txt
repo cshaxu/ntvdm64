@@ -132,8 +132,53 @@ if(NTVDM_ARCH STREQUAL "x86")
   add_custom_target(xms-mapped DEPENDS xms_mapped_memory_test)
 endif()
 
-# These three historical profiles enabled /Gy only for the coordination unit.
-foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memory_test)
+fixture(dem_file_lifecycle_test LINK
+  test/adapter-mvdm-host-out/softpc/t365_s2_dem_file_lifecycle_lease_fixture.c ${memory_sources})
+target_compile_options(dem_file_lifecycle_test_objects PRIVATE /std:c11)
+add_custom_target(dem-file-lifecycle DEPENDS dem_file_lifecycle_test)
+if(NTVDM_ARCH STREQUAL "x86")
+  fixture(xms_startup_test LINKDEFAULT test/mvdm-host/xms/xms_init_fixture.c
+    ${memory_sources} src/mvdm-host/xms.486/xms.c
+    src/mvdm-host/xms.486/xmsmemr.c src/mvdm-host/suballoc/suballoc.c)
+  target_compile_options(xms_startup_test_objects PRIVATE /std:c11
+    "/FI${NTVDM_REPO}/src/non-mvdm/public/sdk/inc/nt.h")
+  target_compile_definitions(xms_startup_test_objects PRIVATE WIN32 WINNT WIN_32 CPU_40_STYLE DEVL)
+  foreach(path IN ITEMS src/compat/include src/non-mvdm/public/sdk/inc src/mvdm-host/inc
+      src/mvdm-host/xms.486 src/mvdm-host/softpc.new/base/inc
+      src/non-mvdm/public/internal/base/inc src/non-mvdm/public/ddk/inc)
+    target_include_directories(xms_startup_test_objects PRIVATE "${NTVDM_REPO}/${path}")
+  endforeach()
+  add_custom_target(xms-startup DEPENDS xms_startup_test)
+endif()
+ntvdm_guest_memory_projection(guest-memory-core.c "#define MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK")
+fixture(redirector_guest_copy_test LINKDEFAULT
+  test/mvdm-host/vdmredir/redirector_guest_copy_fixture.c
+  src/compat/mvdm_redirector_guest_copy.c src/ntvdm-exe/session/session.c
+  src/compat/host_context.c src/compat/guest_memory_lease.c
+  src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c "${CMAKE_BINARY_DIR}/guest-memory-core.c")
+target_compile_options(redirector_guest_copy_test_objects PRIVATE /std:c11)
+target_compile_definitions(redirector_guest_copy_test_objects PRIVATE WIN_32 VDMREDIR_DLL CPU_40_STYLE)
+foreach(path IN ITEMS src/compat/include src/mvdm-host/inc src/mvdm-host/vdmredir
+    src/mvdm-host/dos/command src/mvdm-host/softpc.new/base/inc src/mvdm-host/softpc.new/host/inc
+    src/non-mvdm/ds/netapi/netlib src/non-mvdm/public/internal/base/inc
+    src/non-mvdm/public/internal/ds/inc src/non-mvdm/public/internal/net/inc
+    src/non-mvdm/ds/netapi/rpcxlate src/non-mvdm/public/sdk/inc
+    src/non-mvdm/public/ddk/inc src/non-mvdm/private/inc)
+  target_include_directories(redirector_guest_copy_test_objects PRIVATE "${NTVDM_REPO}/${path}")
+endforeach()
+add_library(redirector_query_objects OBJECT
+  "${NTVDM_REPO}/src/mvdm-host/vdmredir/vrnetapi.c"
+  "${NTVDM_REPO}/src/mvdm-host/vdmredir/vrremote.c")
+set_target_properties(redirector_query_objects PROPERTIES EXCLUDE_FROM_ALL TRUE)
+foreach(property IN ITEMS COMPILE_OPTIONS COMPILE_DEFINITIONS INCLUDE_DIRECTORIES)
+  get_target_property(profile redirector_guest_copy_test_objects ${property})
+  set_property(TARGET redirector_query_objects PROPERTY ${property} "${profile}")
+endforeach()
+add_custom_target(redirector-guest-copy DEPENDS redirector_guest_copy_test redirector_query_objects)
+
+# These historical profiles enabled /Gy only for the coordination unit.
+foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memory_test
+    dem_file_lifecycle_test xms_startup_test)
   if(TARGET ${target}_objects)
     get_target_property(profile ${target}_objects COMPILE_OPTIONS)
     list(REMOVE_ITEM profile /Gy)

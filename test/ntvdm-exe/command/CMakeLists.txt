@@ -1,10 +1,7 @@
 set(_capture_coordination "${CMAKE_CURRENT_BINARY_DIR}/guest-memory-coordination.c")
-set(_capture_extractor "${CMAKE_SOURCE_DIR}/tools/build/extract-guest-memory-fixture.py")
-add_custom_command(OUTPUT "${_capture_coordination}"
-  COMMAND python "${_capture_extractor}" "${_capture_coordination}"
-  DEPENDS "${_capture_extractor}"
-    "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c"
-  VERBATIM)
+include("${CMAKE_SOURCE_DIR}/tools/build/SourceProjection.cmake")
+file(RELATIVE_PATH _capture_relative "${CMAKE_BINARY_DIR}" "${_capture_coordination}")
+ntvdm_guest_memory_projection("${_capture_relative}" "#line 1960")
 add_executable(mvdm-command-capture-test
   command_capture.c
   "${_capture_coordination}"

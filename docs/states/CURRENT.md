@@ -29,6 +29,12 @@ are now admitted. Final interpreter-free clean acceptance remains S5.
 
 ## Current Progress
 
+[S3 P5](../etc/evidence/t484-s3-helper-retirement.md) migrates the final four
+guest-memory helper consumers and removes three JavaScript generators plus
+two Python helpers. Five executable cases, four original compile instances,
+COMMAND167 assertions, cached full build and11 raw/22 published hashes pass.
+Other test producers remain; S3 is active.
+
 [S3 P4](../etc/evidence/t484-s3-caller-fixtures.md) replaces six manual
 generators with five native groups, passing nine executable instances and
 seven original compile-only units. Cached full build and11 raw/22 published
@@ -171,6 +177,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P4 records caller fixture migration and its bounded delivery under the
+T484 S3 P5 records helper retirement and its bounded delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

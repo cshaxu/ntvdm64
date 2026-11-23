@@ -1,0 +1,36 @@
+{
+  "cases": [
+    {
+      "target": "dem-file-lifecycle",
+      "sha256": "A46BB0D4E9CA332D86ABF8E2AA0C8F5467BBE772391BA6D79759DC92A0E38158",
+      "exit": 0,
+      "architecture": "x86"
+    },
+    {
+      "target": "redirector-guest-copy",
+      "sha256": "A284CC086DDD43F71995A0622689735D1350470F7D59A2D1E6A8B23EF22067A8",
+      "exit": 0,
+      "architecture": "x86"
+    },
+    {
+      "target": "xms-startup",
+      "sha256": "47A5CE4414E66DB940A4F7DAF2C9D70250AE15AD40DACAC07B61090CBB6E9081",
+      "exit": 0,
+      "architecture": "x86"
+    },
+    {
+      "target": "dem-file-lifecycle",
+      "sha256": "6E73361B03BDD0DEC7C575239F5E871C167DC7398E973DCDFA835D4B1BAD72B5",
+      "exit": 0,
+      "architecture": "x64"
+    },
+    {
+      "target": "redirector-guest-copy",
+      "sha256": "AB8ED1381AF1FCA64E7741EEAD4F1410C04BEB9CB277592E5F65C240E3A2ADD5",
+      "exit": 0,
+      "architecture": "x64"
+    }
+  ],
+  "exit": 0,
+  "pid": 4100
+}

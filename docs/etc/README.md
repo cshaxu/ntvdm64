@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 helper retirement](evidence/t484-s3-helper-retirement.md) records the
+last guest-memory interpreter consumers and their native replacements.
+
 [T484 S3 caller fixtures](evidence/t484-s3-caller-fixtures.md) records six
 retired generators, nine executed instances and retained compilation coverage.
 
