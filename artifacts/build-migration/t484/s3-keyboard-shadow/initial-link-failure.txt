@@ -1,0 +1,8 @@
+[7/9] Generating s45-keyboard-profile-builder.exe
+[8/9] Generating s45-cmdkeyb-shadow-fixture.exe
+FAILED: [code=1120] s45-cmdkeyb-shadow-fixture.exe s45-cmdkeyb-shadow-fixture.exe.map O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/s45-cmdkeyb-shadow-fixture.exe O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/s45-cmdkeyb-shadow-fixture.exe.map 
+C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\worker && "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\bin\Hostx64\x86\link.exe" /nologo /map:s45-cmdkeyb-shadow-fixture.exe.map /out:s45-cmdkeyb-shadow-fixture.exe obj/tests/s45-cmdkeyb-shadow-fixture.obj obj/command/cmdkeyb.obj obj/adapter-softpc/mvdm_shadow_registry.obj kernel32.lib advapi32.lib user32.lib legacy_stdio_definitions.lib"
+mvdm_shadow_registry.obj : error LNK2019: unresolved external symbol _compat_product_path_a referenced in function _ntvdm_shadow_registry_initialize
+s45-cmdkeyb-shadow-fixture.exe : fatal error LNK1120: 1 unresolved externals
+[9/9] Generating s45-pif-detached-observer.exe
+ninja: build stopped: subcommand failed.

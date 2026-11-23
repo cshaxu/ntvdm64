@@ -13,11 +13,6 @@ $runtime = (Resolve-Path -LiteralPath $RuntimeRoot).Path
 $logs = Join-Path $runtime 'logs'
 $tests = Join-Path $runtime 'tests'
 $fixture = Join-Path $repository 'test\mvdm-host\fixtures\S45-KEYBOARD-NTVDM.REG'
-$pifSource = Join-Path $repository 'test\observation\s45_keyboard_profile_builder.c'
-$observerSource = Join-Path $repository 'test\observation\pif_detached_observer.c'
-$readerSource = Join-Path $repository 'test\mvdm-host\s45_cmdkeyb_shadow_fixture.c'
-$cmdkeybObject = Join-Path $build 'obj\command\cmdkeyb.obj'
-$providerObject = Join-Path $build 'obj\adapter-softpc\mvdm_shadow_registry.obj'
 $builder = Join-Path $build 's45-keyboard-profile-builder.exe'
 $observer = Join-Path $build 's45-pif-detached-observer.exe'
 $reader = Join-Path $build 's45-cmdkeyb-shadow-fixture.exe'
@@ -31,40 +26,26 @@ $pif = Join-Path $tests 'S45KEY.PIF'
 if (@(Get-Process ntvdm,basesrv,run16 -ErrorAction SilentlyContinue).Count -ne 0) {
     throw 'S45 keyboard test requires no existing run16/basesrv/ntvdm session.'
 }
-foreach ($path in @($fixture,$pifSource,$observerSource,$readerSource,$cmdkeybObject,$providerObject)) {
-    if (!(Test-Path -LiteralPath $path)) { throw "Required input is absent: $path" }
-}
-
-$vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$compiler = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\bin\HostX86\x86\cl.exe'
-$originalEnvironment = @{}
-Get-ChildItem Env: | ForEach-Object { $originalEnvironment[$_.Name] = $_.Value }
-$envLines = & cmd.exe /d /s /c ('call "' + $vs + '" -arch=x86 -host_arch=x86 >nul && set')
-foreach ($line in $envLines) {
-    $separator = $line.IndexOf('=')
-    if ($separator -gt 0) {
-        Set-Item -Path ('env:' + $line.Substring(0,$separator)) -Value $line.Substring($separator + 1)
+if (!(Test-Path -LiteralPath $fixture)) { throw "Required input is absent: $fixture" }
+# Keep the compiler environment in its own child; original COMMAND must not
+# inherit toolchain variables from construction of these test-only helpers.
+$producer=Start-Process -FilePath $env:ComSpec -ArgumentList ('/d /s /c ""'+(Join-Path $repository 'tools/build-fixtures.cmd')+'" x86 command-keyboard-shadow"') -WorkingDirectory $repository -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $build 'keyboard-build.log') -RedirectStandardError (Join-Path $build 'keyboard-build.stderr.log')
+try {
+    "pid=$($producer.Id) started=$($producer.StartTime.ToUniversalTime().ToString('o'))" | Set-Content (Join-Path $build 'keyboard-producer.txt')
+    if(!$producer.WaitForExit(300000)){
+        $producer.Kill($true);$producer.WaitForExit()
+        throw 'Keyboard producer timed out'
+    }
+    "exit=$($producer.ExitCode)" | Add-Content (Join-Path $build 'keyboard-producer.txt')
+    if($producer.ExitCode){throw 'Keyboard producer failed'}
+} finally {$producer.Dispose()}
+$cache=Join-Path $repository 'build/.ninja/msvc-x86-release/worker'
+foreach($destination in @($builder,$observer,$reader)) {
+    $source=Join-Path $cache ([IO.Path]::GetFileName($destination))
+    if(![string]::Equals($source,$destination,[StringComparison]::OrdinalIgnoreCase)) {
+        Copy-Item -LiteralPath $source -Destination $destination
     }
 }
-
-& $compiler /nologo /MT /W4 /I (Join-Path $repository 'src\non-mvdm\public\internal\windows\inc') $pifSource "/Fe:$builder"
-if ($LASTEXITCODE -ne 0) { throw 'S45 PIF builder compilation failed.' }
-& $compiler /nologo /MT /W4 $observerSource user32.lib "/Fe:$observer"
-if ($LASTEXITCODE -ne 0) { throw 'S45 Console observer compilation failed.' }
-& $compiler /nologo /MT /W4 $readerSource $cmdkeybObject $providerObject advapi32.lib user32.lib legacy_stdio_definitions.lib "/Fe:$reader"
-if ($LASTEXITCODE -ne 0) { throw 'S45 cmdkeyb fixture compilation failed.' }
-
-# The original DOS environment is inherited from the caller.  Build Tools
-# variables (notably PATH and the VSCMD family) must not become accidental
-# PIF/COMMAND test inputs, so restore the pre-build process environment before
-# launching run16.
-Get-ChildItem Env: | ForEach-Object {
-    if (!$originalEnvironment.ContainsKey($_.Name)) { Remove-Item -LiteralPath ('Env:' + $_.Name) }
-}
-foreach ($name in $originalEnvironment.Keys) {
-    Set-Item -LiteralPath ('Env:' + $name) -Value $originalEnvironment[$name]
-}
-
 New-Item -ItemType Directory -Force -Path $logs,$tests | Out-Null
 foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe','ntmon.exe')) {
     Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force

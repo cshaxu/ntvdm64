@@ -193,7 +193,8 @@
   },
   "test/integration/verify-s45-keyboard-shadow.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Invokes selected MSVC compiler for fixture"
+    "reason": "Three native CMD producers verified; old root-layout staging, hardcoded observer and cleanup require migration before whole-chain acceptance",
+    "evidence": "docs/etc/evidence/t484-s3-keyboard-shadow.md"
   },
   "test/integration/verify-s45-vcd-serial-discovery.ps1": {
     "status": "pending-producer-migration",

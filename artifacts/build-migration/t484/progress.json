@@ -1,22 +1,21 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "78e2830232fe0ebad2dfe54fc8e2f3bbc446d6c0",
+  "head": "aaf160c20b2e4b65fc7df3eaf893734c7e630354",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-pic-reset-eoi.ps1",
-    " M test/observation/verify-slave-bios-eoi.py",
+    " M test/integration/verify-s45-keyboard-shadow.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/cpu-guest-probes.cmake",
-    " M tools/build/worker/cpu-tests.cmake",
-    "?? artifacts/build-migration/t484/s3-pic-bios/",
-    "?? docs/etc/evidence/t484-s3-pic-bios.md"
+    " M tools/build/worker/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-keyboard-shadow/",
+    "?? docs/etc/evidence/t484-s3-keyboard-shadow.md",
+    "?? tools/build/worker/keyboard-tests.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 42,
-    "unchanged": 200,
+    "changed": 43,
+    "unchanged": 199,
     "removed": 113
   },
   "disposition_counts": {
@@ -687,8 +686,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "63cc900bbd4a82a07d1b35a07e0605a1d49e87010d1958ad7c162622686ad939",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "aaf160c20b2e4b65fc7df3eaf893734c7e630354"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-pic-bios.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -700,14 +703,15 @@
       "id": "B0040",
       "file": "test/integration/verify-s45-keyboard-shadow.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "d526ec87a27fd1e8dfba17eab9344fe0fecf371b7919eebcd9e529fc6402f353",
+      "state": "changed",
+      "current_sha256": "4dc123429d78d90e867245aa448d17b538939e8eed6df2199f2d77581e0275ce",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes selected MSVC compiler for fixture"
+        "reason": "Three native CMD producers verified; old root-layout staging, hardcoded observer and cleanup require migration before whole-chain acceptance",
+        "evidence": "docs/etc/evidence/t484-s3-keyboard-shadow.md"
       }
     },
     {
@@ -2145,8 +2149,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "e4a546952e623917137d1bf68082764992fa100cbba077d913109657c800d142",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "aaf160c20b2e4b65fc7df3eaf893734c7e630354"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-pic-bios.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -4778,6 +4786,12 @@
     }
   ],
   "commits": {
+    "aaf160c20b2e4b65fc7df3eaf893734c7e630354": {
+      "subject": "T484 S3 P41 migrate PIC and BIOS probe producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-pic-bios.md"
+      ]
+    },
     "78e2830232fe0ebad2dfe54fc8e2f3bbc446d6c0": {
       "subject": "T484 S3 P40 migrate native guest output probe to CMD build",
       "evidence": [
@@ -5562,8 +5576,8 @@
       "file": "test/integration/verify-s45-keyboard-shadow.ps1",
       "hits": [
         {
-          "line": 39,
-          "text": "$compiler = 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX86\\x86\\cl.exe'"
+          "line": 42,
+          "text": "$cache=Join-Path $repository 'build/.ninja/msvc-x86-release/worker'"
         }
       ]
     },

@@ -1,0 +1,21 @@
+LOAD_OK
+HOST_SNAPSHOT_OK:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybCodes
+HOST_SNAPSHOT_OK:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybCodes
+QUERY_OK
+CLOSE
+HOST_SNAPSHOT_OK:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybIDs
+HOST_SNAPSHOT_OK:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybIDs
+QUERY_ABSENT
+QUERY_ABSENT_SECTION:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybIDs
+CLOSE
+LOAD_OK
+HOST_SNAPSHOT_OK:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybCodes
+HOST_SNAPSHOT_OK:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybCodes
+QUERY_MALFORMED
+CLOSE
+LOAD_OK
+HOST_SNAPSHOT_OK:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybCodes
+HOST_SNAPSHOT_OK:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybCodes
+QUERY_ABSENT
+QUERY_ABSENT_SECTION:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybCodes
+CLOSE

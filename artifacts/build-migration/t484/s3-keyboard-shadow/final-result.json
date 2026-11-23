@@ -1,0 +1,11 @@
+{
+  "rawHostImages": 11,
+  "pid": 31856,
+  "started": "2026-11-23T18:42:27.5234098+00:00",
+  "parsed": [
+    "verify-s45-keyboard-shadow"
+  ],
+  "exit": 0,
+  "publishedHashes": 22,
+  "finished": "2026-11-23T18:42:49.4207952+00:00"
+}

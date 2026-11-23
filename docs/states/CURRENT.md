@@ -84,7 +84,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P41 PIC/BIOS producers](../etc/evidence/t484-s3-pic-bios.md) | Native PIC guest and slave BIOS producers;24 PIC assertions,79 BIOS checks and221-byte guest identity pass. |
 
-Each batch passed its cached full host build. P41 checks11 raw host inputs
+| [P42 keyboard producers](../etc/evidence/t484-s3-keyboard-shadow.md) | Three native helpers;four original-reader outcomes, PIF output and argument rejection pass; historical integration staging remains pending. |
+
+Each batch passed its cached full host build. P42 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

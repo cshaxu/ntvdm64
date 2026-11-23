@@ -1570,3 +1570,5 @@ post-publication targeted checks.
 [T484 S3 native guest output](evidence/t484-s3-native-guest-output.md) records the native probe producer, byte comparison and remaining staging review.
 
 [T484 S3 PIC/BIOS producers](evidence/t484-s3-pic-bios.md) records native producer migration and unchanged PIC/BIOS assertions.
+
+[T484 S3 keyboard producers](evidence/t484-s3-keyboard-shadow.md) records native helpers, corrected fixture linkage and remaining runtime-layout migration.
