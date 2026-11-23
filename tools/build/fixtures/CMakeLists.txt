@@ -41,9 +41,9 @@ function(fixture name link_mode)
       "$<TARGET_PROPERTY:${name}_objects,FIXTURE_LIBRARIES>")
   else()
     set(link "${CMAKE_LINKER}" /nologo /OPT:REF "/OUT:${name}.exe" "/MAP:${name}.exe.map")
-    set(tail kernel32.lib)
+    set(tail kernel32.lib "$<TARGET_PROPERTY:${name}_objects,FIXTURE_LIBRARIES>")
     if(link_mode STREQUAL "LINKDEFAULT")
-      set(tail)
+      set(tail "$<TARGET_PROPERTY:${name}_objects,FIXTURE_LIBRARIES>")
     endif()
   endif()
   add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/${name}.exe"
@@ -53,6 +53,31 @@ function(fixture name link_mode)
     COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(${name} DEPENDS "${CMAKE_BINARY_DIR}/${name}.exe")
 endfunction()
+fixture(ntioapi_facade_fixture LINK src/compat/ntioapi_facade.c
+  src/compat/dem_restart_hint.c test/compat/ntioapi_facade_test.c)
+set_property(TARGET ntioapi_facade_fixture_objects PROPERTY COMPILE_OPTIONS
+  /nologo /TC /W4 /std:c11 /we4013)
+set_property(TARGET ntioapi_facade_fixture_objects PROPERTY FIXTURE_LIBRARIES ntdll.lib)
+fixture(vdm_control_fixture LINK test/mvdm-host/vdm_control_test.c src/compat/vdm_control.c)
+set_property(TARGET vdm_control_fixture_objects PROPERTY COMPILE_OPTIONS /nologo /TC /W4)
+set_source_files_properties("${NTVDM_REPO}/test/mvdm-host/vdm_control_test.c"
+  PROPERTIES COMPILE_OPTIONS /std:c11)
+foreach(path IN ITEMS src/compat/include src/non-mvdm/public/sdk/inc
+    src/non-mvdm/public/internal/base/inc)
+  target_include_directories(vdm_control_fixture_objects PRIVATE "${NTVDM_REPO}/${path}")
+endforeach()
+add_custom_target(system-fixtures DEPENDS ntioapi_facade_fixture vdm_control_fixture)
+if(NTVDM_ARCH STREQUAL "x86")
+  fixture(dos_find_layout_fixture LINKDEFAULT test/mvdm-host/dos/dem/dos_find_layout_test.c)
+  set_property(TARGET dos_find_layout_fixture_objects PROPERTY COMPILE_OPTIONS
+    /nologo /TC /W4 /std:c11 "/FI${NTVDM_REPO}/src/non-mvdm/public/sdk/inc/nt.h")
+  foreach(path IN ITEMS src/compat/include src/mvdm-host/dos/dem src/mvdm-host/inc
+      src/non-mvdm/public/sdk/inc src/non-mvdm/public/ddk/inc
+      src/mvdm-host/softpc.new/base/inc src/mvdm-host/softpc.new/host/inc)
+    target_include_directories(dos_find_layout_fixture_objects PRIVATE "${NTVDM_REPO}/${path}")
+  endforeach()
+  add_dependencies(system-fixtures dos_find_layout_fixture)
+endif()
 if(NTVDM_ARCH STREQUAL "x86")
   foreach(pair IN ITEMS "S34N|command_native_child_fixture.c"
       "S34E|command_stream_echo_fixture.c"

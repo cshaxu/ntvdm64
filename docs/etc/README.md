@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 system fixtures](evidence/t484-s3-system-fixtures.md) records five
+native fixture instances, shared-link regression and obsolete register-test retirement.
+
 [T484 S3 retired inputs](evidence/t484-s3-retired-inputs.md) records removal
 of six ineffective historical producer/test files and native serial validation.
 

@@ -1,0 +1,36 @@
+{
+  "cases": [
+    {
+      "name": "ntioapi_facade_fixture",
+      "exit": 0,
+      "architecture": "x86",
+      "sha256": "B16CE7B237F78DBBD03C5F08C29C5C5AE04A199AB3AB450765A6326D71B621CD"
+    },
+    {
+      "name": "vdm_control_fixture",
+      "exit": 0,
+      "architecture": "x86",
+      "sha256": "1DF3990F0CB07AB3FAFAE8463AA8B289E6F3BEBEC3D2AAB8203FDCD652C024D0"
+    },
+    {
+      "name": "dos_find_layout_fixture",
+      "exit": 0,
+      "architecture": "x86",
+      "sha256": "39C894C5EF15BA944F41805DE712C934C40B97895F61090ABA00E863540A4DD9"
+    },
+    {
+      "name": "ntioapi_facade_fixture",
+      "exit": 0,
+      "architecture": "x64",
+      "sha256": "4C6E4360C7CF3D6A0470755CA84049BD7F565B37B196C812E48B5F1AF30954E8"
+    },
+    {
+      "name": "vdm_control_fixture",
+      "exit": 0,
+      "architecture": "x64",
+      "sha256": "4D5977EC2736EC409C4EF73193E620E6DB32EAE6F70632E939791A8D56107A0E"
+    }
+  ],
+  "exit": 0,
+  "pid": 15460
+}
