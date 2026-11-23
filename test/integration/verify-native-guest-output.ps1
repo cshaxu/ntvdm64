@@ -30,13 +30,20 @@ foreach($name in @('CGREADY','CGDONE')){
     if(Test-Path (Join-Path $physical "tests\$name")){throw 'Existing fixture gate'}
 }
 $null=New-Item -ItemType Directory -Path $build
-$vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$source=Join-Path $PSScriptRoot '../observation/native_guest_output_test.c'
 # Compiler environment must not leak into original COMMAND's finite startup
 # environment. Keep VsDevCmd in a separate child, not the runtime test shell.
-$compile='call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /W4 /MT "'+$source+'" /Fo"'+$build+'\\" /Fe"'+$build+'\CG.EXE" /link /incremental:no user32.lib'
-& cmd.exe /d /s /c $compile *> (Join-Path $build 'build.log')
-if($LASTEXITCODE){throw 'Fixture compile failed'}
+$producer=Start-Process -FilePath $env:ComSpec -ArgumentList ('/d /s /c ""'+(Join-Path $repo 'tools/build-fixtures.cmd')+'" x86 native-guest-output"') -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $build 'build.log') -RedirectStandardError (Join-Path $build 'build.stderr.log')
+try {
+    "pid=$($producer.Id) started=$($producer.StartTime.ToUniversalTime().ToString('o'))" | Set-Content (Join-Path $build 'producer.txt')
+    if(!$producer.WaitForExit(300000)){
+        $producer.Kill($true)
+        $producer.WaitForExit()
+        throw 'Native guest output producer timed out'
+    }
+    "exit=$($producer.ExitCode)" | Add-Content (Join-Path $build 'producer.txt')
+    if($producer.ExitCode){throw 'Fixture compile failed'}
+} finally {$producer.Dispose()}
+Copy-Item (Join-Path $repo 'build/.ninja/fixtures-x86/native-guest-output.exe') (Join-Path $build 'CG.EXE')
 Copy-Item (Join-Path $build 'CG.EXE') (Join-Path $physical 'tests\CG.EXE')
 $batch=([IO.File]::ReadAllText((Join-Path $PSScriptRoot '../observation/native_guest_output.bat')) -replace '\r?\n',"`r`n")
 $batch=$batch.Replace('@PACKAGE@',$PackageRoot.TrimEnd('\')+'\')

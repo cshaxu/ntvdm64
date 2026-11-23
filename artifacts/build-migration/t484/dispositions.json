@@ -183,7 +183,8 @@
   },
   "test/integration/verify-native-guest-output.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Generates CMD that invokes CL to build CG.EXE"
+    "reason": "Native CMD/CMake executable producer verified; runtime batch materialization and staging review remain pending",
+    "evidence": "docs/etc/evidence/t484-s3-native-guest-output.md"
   },
   "test/integration/verify-pic-reset-eoi.ps1": {
     "status": "pending-producer-migration",

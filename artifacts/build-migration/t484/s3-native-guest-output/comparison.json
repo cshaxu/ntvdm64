@@ -1,0 +1,12 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-guest-output\\CG.EXE",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\native-guest-output.exe",
+    "oldBytes": 137728,
+    "newBytes": 137728,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "16b6bd7efdf1381d226559c22af81fb37323352f326273a608f8a0c95651c629",
+    "newSha256": "1cb6bdab7c57abe53ee5f8b498e34c5e81fa6a29d366d94b9df5fc1aa2204148"
+  }
+]

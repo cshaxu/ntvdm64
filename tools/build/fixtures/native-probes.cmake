@@ -19,6 +19,11 @@ foreach(kind IN ITEMS cui gui)
   list(APPEND probes mixed-batch-${kind})
 endforeach()
 if(NTVDM_ARCH STREQUAL "x86")
+  fixture(native-guest-output CL test/observation/native_guest_output_test.c)
+  set_property(TARGET native-guest-output_objects PROPERTY COMPILE_OPTIONS /nologo /W4)
+  set_property(TARGET native-guest-output_objects PROPERTY FIXTURE_LIBRARIES
+    "/incremental:no;user32.lib")
+  list(APPEND probes native-guest-output)
   add_library(unpaired-native-object OBJECT EXCLUDE_FROM_ALL
     "${NTVDM_REPO}/test/observation/run16_unpaired_native_test.c")
   target_compile_options(unpaired-native-object PRIVATE /nologo /W4)

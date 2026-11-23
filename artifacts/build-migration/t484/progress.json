@@ -1,33 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd",
+  "head": "7e89114b14c4199b138033c3352b530105f8c7fb",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/ntvdm64-386/editor-actions.inc",
-    " M test/integration/ntvdm64-386/editor-data.inc",
-    " M test/integration/ntvdm64-386/editor-events.inc",
-    " M test/integration/ntvdm64-386/editor-routines.inc",
-    " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
-    " M test/observation/win31_startup_contract.asm",
-    " M tools/README.md",
-    " M tools/build/win31-editor/CMakeLists.txt",
-    " M tools/build/win31-editor/config.inc.in",
-    "?? artifacts/build-migration/t484/s3-win95-editor/",
-    "?? docs/etc/evidence/t484-s3-win95-editor.md",
-    "?? test/integration/ntvdm64-386/editor-blocking-actions.inc",
-    "?? test/integration/ntvdm64-386/editor-production-key.inc",
-    "?? test/integration/ntvdm64-386/editor-production-mouse.inc",
-    "?? test/integration/ntvdm64-386/editor-text-child.inc",
-    "?? test/integration/ntvdm64-386/editor-welcome.inc",
-    "?? test/integration/ntvdm64-386/editor-win95-actions.inc",
-    "?? tools/build-win95-editor.cmd"
+    " M test/integration/verify-native-guest-output.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/native-probes.cmake",
+    "?? artifacts/build-migration/t484/s3-native-guest-output/",
+    "?? docs/etc/evidence/t484-s3-native-guest-output.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 39,
-    "unchanged": 203,
+    "changed": 40,
+    "unchanged": 202,
     "removed": 113
   },
   "disposition_counts": {
@@ -470,8 +457,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "8a5759eb65225f0adc00b934e232473a478899cae8b178dd64e7a4b850865b8b",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "7e89114b14c4199b138033c3352b530105f8c7fb"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win95-editor.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -612,14 +603,15 @@
       "id": "B0034",
       "file": "test/integration/verify-native-guest-output.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "0b9008a4798e54087604e3c1bd4b10d3e801366f07f8872e8c1159969c7c58f6",
+      "state": "changed",
+      "current_sha256": "3929b2820fff05a62c79d3f653b61487cc59113be74b097293171b2286673f49",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Generates CMD that invokes CL to build CG.EXE"
+        "reason": "Native CMD/CMake executable producer verified; runtime batch materialization and staging review remain pending",
+        "evidence": "docs/etc/evidence/t484-s3-native-guest-output.md"
       }
     },
     {
@@ -4775,6 +4767,12 @@
     }
   ],
   "commits": {
+    "7e89114b14c4199b138033c3352b530105f8c7fb": {
+      "subject": "T484 S3 P39 replace Win95 controller string generation with native assembly",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win95-editor.md"
+      ]
+    },
     "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd": {
       "subject": "T484 S3 P38 unify Win31 and Win95 identity probe assembly",
       "evidence": [
@@ -5467,8 +5465,8 @@
       "file": "test/integration/verify-native-guest-output.ps1",
       "hits": [
         {
-          "line": 37,
-          "text": "$compile='call \"'+$vs+'\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /W4 /MT \"'+$source+'\" /Fo\"'+$build+'\\\\\" /Fe\"'+$build+'\\CG.EXE\" /link /incremental:no user32.lib'"
+          "line": 46,
+          "text": "Copy-Item (Join-Path $repo 'build/.ninja/fixtures-x86/native-guest-output.exe') (Join-Path $build 'CG.EXE')"
         }
       ]
     },

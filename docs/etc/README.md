@@ -1566,3 +1566,5 @@ post-publication targeted checks.
 [T484 S3 VM identity](evidence/t484-s3-vm-identity.md) records shared Win31/Win95 assembly, exact option equivalence and remaining production steps.
 
 [T484 S3 Win95 editor](evidence/t484-s3-win95-editor.md) records shared native controller branches and Win31/Win95 byte-equivalence matrices.
+
+[T484 S3 native guest output](evidence/t484-s3-native-guest-output.md) records the native probe producer, byte comparison and remaining staging review.

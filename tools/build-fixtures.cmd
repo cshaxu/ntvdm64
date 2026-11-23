@@ -16,6 +16,8 @@ if "%TARGET%"=="thread-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="keyboard-contracts" set "SELECTED=1"
 if "%TARGET%"=="window-contracts" set "SELECTED=1"
 if "%TARGET%"=="native-payload-probes" set "SELECTED=1"
+if "%TARGET%"=="native-guest-output" set "SELECTED=1"
+if "%TARGET%"=="native-guest-output" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="console-api-probes" set "SELECTED=1"
 if "%TARGET%"=="clipboard-epoch" set "SELECTED=1"
 if "%TARGET%"=="cpu-guest-probes" set "SELECTED=1"
