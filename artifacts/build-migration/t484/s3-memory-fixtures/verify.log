@@ -1,0 +1,103 @@
+-- The C compiler identification is MSVC 19.43.34809.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x86/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done (2.5s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/fixtures-x86
+[1/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\src\ntvdm-exe\softpc\mvdm_softpc_guest_memory.c.obj
+[2/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\test\session\guest_memory_lease_test.c.obj
+[3/19] Building C object CMakeFiles\guest_memory_lease_boundary_test_objects.dir\O_\repos.hobby\ntvdm64\test\compat\guest_memory_lease_boundary_test.c.obj
+[4/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\src\ntvdm-exe\session\session.c.obj
+[5/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\src\ntvdm-exe\softpc\mvdm_softpc_guest_memory.c.obj
+[6/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_location.c.obj
+[7/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\guest-memory-coordination.c.obj
+[8/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\src\ntvdm-exe\session\session.c.obj
+[9/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_location.c.obj
+[10/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\test\mvdm-host\guest_memory_coordination_test.c.obj
+[11/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\host_context.c.obj
+[12/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\guest-memory-coordination.c.obj
+[13/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\host_context.c.obj
+[14/19] Building C object CMakeFiles\guest_memory_lease_boundary_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_memory_lease.c.obj
+[15/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_memory_lease.c.obj
+[16/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_memory_lease.c.obj
+[17/19] Generating guest_memory_lease_boundary_test.exe
+[18/19] Generating guest_memory_lease_test.exe
+[19/19] Generating guest_memory_coordination_test.exe
+LEASE_RESOURCE_PASS checks=44
+LEASE_BOUNDARY_PASS checks=75
+-- The C compiler identification is MSVC 19.43.34809.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done (1.6s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/fixtures-x64
+[1/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\test\session\guest_memory_lease_test.c.obj
+[2/19] Building C object CMakeFiles\guest_memory_lease_boundary_test_objects.dir\O_\repos.hobby\ntvdm64\test\compat\guest_memory_lease_boundary_test.c.obj
+[3/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\src\ntvdm-exe\softpc\mvdm_softpc_guest_memory.c.obj
+[4/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\src\ntvdm-exe\session\session.c.obj
+[5/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_location.c.obj
+[6/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\host_context.c.obj
+[7/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\src\ntvdm-exe\softpc\mvdm_softpc_guest_memory.c.obj
+[8/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\guest-memory-coordination.c.obj
+[9/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\src\ntvdm-exe\session\session.c.obj
+[10/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\test\mvdm-host\guest_memory_coordination_test.c.obj
+[11/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_location.c.obj
+[12/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\host_context.c.obj
+[13/19] Building C object CMakeFiles\guest_memory_lease_boundary_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_memory_lease.c.obj
+[14/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\guest-memory-coordination.c.obj
+[15/19] Building C object CMakeFiles\guest_memory_lease_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_memory_lease.c.obj
+[16/19] Building C object CMakeFiles\guest_memory_coordination_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_memory_lease.c.obj
+[17/19] Generating guest_memory_lease_boundary_test.exe
+[18/19] Generating guest_memory_lease_test.exe
+[19/19] Generating guest_memory_coordination_test.exe
+LEASE_RESOURCE_PASS checks=44
+LEASE_BOUNDARY_PASS checks=75
+-- Configuring done (0.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/fixtures-x86
+[1/11] Building C object CMakeFiles\redirector_async_publication_test_objects.dir\guest-memory-coordination.c.obj
+[2/11] Building C object CMakeFiles\redirector_async_publication_test_objects.dir\O_\repos.hobby\ntvdm64\src\ntvdm-exe\session\session.c.obj
+[3/11] Building C object CMakeFiles\redirector_async_publication_test_objects.dir\O_\repos.hobby\ntvdm64\src\ntvdm-exe\softpc\mvdm_softpc_guest_memory.c.obj
+[4/11] Building C object CMakeFiles\redirector_async_publication_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\host_context.c.obj
+[5/11] Building C object CMakeFiles\redirector_async_publication_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_location.c.obj
+[6/11] Building C object CMakeFiles\redirector_async_publication_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\guest_memory_lease.c.obj
+[7/11] Building C object CMakeFiles\redirector_async_publication_test_objects.dir\O_\repos.hobby\ntvdm64\test\mvdm-host\vdmredir\redirector_async_publication_test.c.obj
+[8/11] Building C object CMakeFiles\redirector_async_publication_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\mvdm_redirector_async.c.obj
+[9/11] Building C object CMakeFiles\redirector_async_publication_test_objects.dir\O_\repos.hobby\ntvdm64\src\lib-win32\thread\thread.c.obj
+[10/11] Building C object CMakeFiles\redirector_async_publication_test_objects.dir\O_\repos.hobby\ntvdm64\src\compat\thread_start.c.obj
+[11/11] Generating redirector_async_publication_test.exe
+   Creating library redirector_async_publication_test.lib and object redirector_async_publication_test.exp
+PASS original request does not require Type2 extension
+PASS partial read completion succeeds
+PASS payload precedes error then count publication
+PASS partial read preserves actual bytes and error
+PASS release is idempotent and leases are closed
+PASS fresh LocalAlloc request needs no private-field initialization
+PASS destination failure rejects completion
+PASS failure does not publish later completion words
+PASS failed commit closes lease
+PASS destination failure rejects completion
+PASS failure does not publish later completion words
+PASS failed commit closes lease
+PASS destination failure rejects completion
+PASS failure does not publish later completion words
+PASS failed commit closes lease
+PASS Type2 rejects unreadable semaphore extension
+PASS oversized read publishes nothing
+PASS write completion does not copy staging back
+PASS zero read publishes only completion words
+PASS production thread bridge binds before direct completion
+PASS production thread bridge leaves parent binding unchanged
+PASS unbound thread cannot publish
+PASS failed completion does not bind caller
+PASS stale owner epoch rejected before publication
+PASS cancelled owner rejects original completion entry
+PASS ended guest memory cannot publish
+PASS final session cleanup succeeds
+assertions=27 failures=0

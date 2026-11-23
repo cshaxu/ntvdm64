@@ -9,33 +9,11 @@ if (!$out.StartsWith($allowed, [StringComparison]::OrdinalIgnoreCase)) {
 }
 if (Test-Path -LiteralPath $out) { throw 'Use a fresh evidence directory.' }
 New-Item -ItemType Directory -Path $out | Out-Null
-$vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$wrapper = Join-Path $out 'compiler.cmd'
-@('@echo off', ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'),
-    'if errorlevel 1 exit /b %errorlevel%', '%*') |
-    Set-Content -LiteralPath $wrapper -Encoding ASCII
-$sources = @('src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c', 'src/compat/mvdm_redirector_async.c',
-    'src/compat/thread_start.c', 'src/lib-win32/thread/thread.c',
-    'src/compat/guest_location.c',
-    'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c',
-    'src/compat/guest_memory_lease.c',
-    'test/mvdm-host/vdmredir/redirector_async_publication_test.c')
-$coordination = Join-Path $out 'guest-memory-coordination.c'
-& python (Join-Path $root 'tools/build/extract-guest-memory-fixture.py') $coordination
-if ($LASTEXITCODE) { throw 'Guest memory coordination extraction failed' }
-$sources += [IO.Path]::GetRelativePath($root, $coordination)
-$objects = @()
-foreach ($source in $sources) {
-    $object = Join-Path $out ([IO.Path]::GetFileNameWithoutExtension($source) + '.obj')
-    & $wrapper cl /nologo /TC /c /MT /W4 /Gy /DWIN_32 /DVDMREDIR_DLL /DNTVDM /DCPU_40_STYLE /DCCPU "/I$root/src" "/I$root/src/ntvdm-exe/softpc/include" "/Fo$object" (Join-Path $root $source) 2>&1 |
-        Tee-Object -FilePath (Join-Path $out 'build.txt') -Append
-    if ($LASTEXITCODE -ne 0) { throw "Compile failed: $source" }
-    $objects += $object
-}
-$exe = Join-Path $out 'redirector-async-publication-test.exe'
-& $wrapper link /nologo /OPT:REF "/OUT:$exe" "/MAP:$exe.map" @objects kernel32.lib 2>&1 |
-    Tee-Object -FilePath (Join-Path $out 'build.txt') -Append
-if ($LASTEXITCODE -ne 0) { throw 'Link failed.' }
+& cmd.exe /d /c "`"$root/tools/build-fixtures.cmd`" x86 redirector-async" 2>&1 |
+    Tee-Object (Join-Path $out 'build.txt')
+if($LASTEXITCODE){throw 'Native redirector async fixture build failed'}
+$exe=Join-Path $out 'redirector-async-publication-test.exe'
+Copy-Item (Join-Path $root 'build/.ninja/fixtures-x86/redirector_async_publication_test.exe') $exe
 $start = [Diagnostics.ProcessStartInfo]::new()
 $start.FileName = $exe
 $start.UseShellExecute = $false

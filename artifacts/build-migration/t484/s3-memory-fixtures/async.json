@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "elapsed_ms": 216,
+  "executable_sha256": "86FB3160874C6E4C38AF1497765C099925147DA900336CA24C1368C75F1E86A1",
+  "scope": "Production async adapter/location/session/lease; controlled memory, not real pipe callback"
+}

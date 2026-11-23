@@ -30,6 +30,9 @@ or recompilation of original Microsoft guests; apply the
 `build.cmd` builds the11 host images. `build-addon.cmd [component]` builds
 all14 authored addons or one selected target; see the addon source index for
 the separate test targets. Both use stable native CMake/Ninja caches.
+`build-fixtures.cmd x86|x64 guest-memory|redirector-async` builds the migrated
+standalone fixture groups; it does not imply that every test producer has
+already migrated. Existing test runners execute and validate those binaries.
 
 | Directory | Responsibility |
 | --- | --- |

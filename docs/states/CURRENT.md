@@ -29,6 +29,11 @@ are now admitted. Final interpreter-free clean acceptance remains S5.
 
 ## Current Progress
 
+[S3 P3](../etc/evidence/t484-s3-memory-fixtures.md) migrates two more test
+producers and passes seven x86/x64 executable instances. Shared projection
+bytes and repeated-build image hashes/mtimes are stable; cached full build
+passes. Six manual generators still retain the old Python projection wiring.
+
 [S3 P2](../etc/evidence/t484-s3-observation-cmake.md) resolves all five remaining
 executable consumers of the old worker generator and removes it. Two static
 boundaries and DEM/redirector115/14/18 assertions pass through native targets;
@@ -161,6 +166,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P2 records observation producer migration and its bounded delivery under the
+T484 S3 P3 records memory fixture migration and its bounded delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

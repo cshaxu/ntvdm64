@@ -1,0 +1,28 @@
+PASS original request does not require Type2 extension
+PASS partial read completion succeeds
+PASS payload precedes error then count publication
+PASS partial read preserves actual bytes and error
+PASS release is idempotent and leases are closed
+PASS fresh LocalAlloc request needs no private-field initialization
+PASS destination failure rejects completion
+PASS failure does not publish later completion words
+PASS failed commit closes lease
+PASS destination failure rejects completion
+PASS failure does not publish later completion words
+PASS failed commit closes lease
+PASS destination failure rejects completion
+PASS failure does not publish later completion words
+PASS failed commit closes lease
+PASS Type2 rejects unreadable semaphore extension
+PASS oversized read publishes nothing
+PASS write completion does not copy staging back
+PASS zero read publishes only completion words
+PASS production thread bridge binds before direct completion
+PASS production thread bridge leaves parent binding unchanged
+PASS unbound thread cannot publish
+PASS failed completion does not bind caller
+PASS stale owner epoch rejected before publication
+PASS cancelled owner rejects original completion entry
+PASS ended guest memory cannot publish
+PASS final session cleanup succeeds
+assertions=27 failures=0

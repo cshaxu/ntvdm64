@@ -8,6 +8,9 @@ addon producers,16 optional mouse probes, receipts and bounded batch delivery.
 [T484 S3 observation migration](evidence/t484-s3-observation-cmake.md) records
 the five old worker-generator consumers and115/14/18 runtime assertions.
 
+[T484 S3 memory fixtures](evidence/t484-s3-memory-fixtures.md) records the native
+x86/x64 test producer, shared projection and seven executable instances.
+
 [T483 S14 closure and preserved predecessor records](evidence/m0-t483-s14-closure.md) anchors S15 admission.
 
 [T483 S11 layer boundaries and closure](evidence/m0-t483-s11-layer-boundaries.md) records the verified baseline for S12.
