@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 native input](evidence/t484-s3-native-input.md) migrates two producers
+and verifies five private-desktop service/lifetime cases with production objects.
+
 [T484 S3 keyboard contracts](evidence/t484-s3-keyboard-contracts.md) consolidates
 three producers, records24 equivalent projections and four passing fixtures.
 

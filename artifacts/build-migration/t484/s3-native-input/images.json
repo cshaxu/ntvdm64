@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow_input_lifetime_fixture.exe",
+    "Hash": "7E1CE4F627EEFA584B93B05A838616148CE0841903D4F83AF6E46F6A4C75615A"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow_input_membership_fixture.exe",
+    "Hash": "1E29E35C5DAF135FD24CF28926B953B55CFCF952E235E982F6D8888E586B9F69"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow_native_input_focus_fixture.exe",
+    "Hash": "5589EF4E395003CF5E21DC6DCB233A864F633FF385230934B148F9FDCF13861D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow_native_input_group_fixture.exe",
+    "Hash": "771C46811031C3FAD301B10AC8969AB8A5472B5AC268CF8E35908261B096ECB4"
+  }
+]

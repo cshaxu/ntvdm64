@@ -1,0 +1,98 @@
+[
+  {
+    "run": "services",
+    "name": "build",
+    "process": {
+      "start": "2026-11-23T16:30:38.3209882Z",
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64/tools/build-fixtures.cmd\" x86 native-input-contracts\"",
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "timeoutSeconds": 300,
+      "pid": 28248
+    },
+    "exit": 2
+  },
+  {
+    "run": "services2",
+    "name": "build",
+    "process": {
+      "timeoutSeconds": 300,
+      "pid": 6976,
+      "start": "2026-11-23T16:31:31.7407735Z",
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64/tools/build-fixtures.cmd\" x86 native-input-contracts\"",
+      "image": "C:\\WINDOWS\\system32\\cmd.exe"
+    },
+    "exit": 0
+  },
+  {
+    "run": "services2",
+    "name": "wow_input_membership_fixture",
+    "process": {
+      "timeoutSeconds": 30,
+      "pid": 7136,
+      "start": "2026-11-23T16:32:01.3713903Z",
+      "command": "--verify",
+      "image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow_input_membership_fixture.exe"
+    },
+    "exit": 0
+  },
+  {
+    "run": "services2",
+    "name": "wow_native_input_focus_fixture",
+    "process": {
+      "timeoutSeconds": 30,
+      "pid": 32412,
+      "start": "2026-11-23T16:32:00.714465Z",
+      "command": "--verify",
+      "image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow_native_input_focus_fixture.exe"
+    },
+    "exit": 0
+  },
+  {
+    "run": "services2",
+    "name": "wow_native_input_group_fixture",
+    "process": {
+      "timeoutSeconds": 30,
+      "pid": 21248,
+      "start": "2026-11-23T16:32:00.4510737Z",
+      "command": "--verify",
+      "image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow_native_input_group_fixture.exe"
+    },
+    "exit": 0
+  },
+  {
+    "run": "lifetime",
+    "name": "build",
+    "process": {
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64/tools/build-fixtures.cmd\" x86 native-input-contracts\"",
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "timeoutSeconds": 300,
+      "pid": 11472,
+      "start": "2026-11-23T16:32:18.9244789Z"
+    },
+    "exit": 0
+  },
+  {
+    "run": "lifetime",
+    "name": "membership",
+    "process": {
+      "command": "--verify",
+      "image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32/wow_input_lifetime_fixture.exe",
+      "timeoutSeconds": 60,
+      "pid": 30196,
+      "start": "2026-11-23T16:32:45.0984667Z"
+    },
+    "exit": 0
+  },
+  {
+    "run": "lifetime",
+    "name": "terminal",
+    "process": {
+      "command": "--native-failure",
+      "image": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32/wow_input_lifetime_fixture.exe",
+      "timeoutSeconds": 60,
+      "pid": 3548,
+      "start": "2026-11-23T16:32:45.2662212Z"
+    },
+    "exit": 91
+  }
+]

@@ -1,0 +1,7 @@
+WOW_NATIVE_INPUT_GROUP errors=0 isolated=2 shared=1 self_reject=1 peer_exit=1 naive_join_split=1 maintained_join=1 repeated=1
+WOW_NATIVE_INPUT_FOCUS errors=0 private_desktop=1 capture=1 callbacks=0
+WOW_INPUT_MEMBERSHIP errors=0 original_fixed_point=1 pre_tdb=1 explicit_edge=1 release=1 rejoin=1
+INPUT_NATIVE_CONTROL private_caret=1 before_group=1
+WOW_INPUT_LIFETIME errors=0 original_components=1 private_native=1 allocation_failures=3 idempotent=1 external_reference=1 origin_exit=1 rejoin=1 middle_exit=1 last_exit=1 scratch_escape=0 live=0
+INPUT_NATIVE_CONTROL private_caret=1 before_group=1
+INPUT_TERMINAL stage=input-native-attach error=5 attaches=3

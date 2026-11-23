@@ -63,8 +63,9 @@ interpreter-free end-to-end acceptance have not completed.
 | [P25 CPU contracts](../etc/evidence/t484-s3-cpu-contracts.md) | Four inline producers consolidated;NEG64631410 cases, two ABI rejection controls, notification concurrency and five native prefix cases pass. |
 | [P26 DPMI contracts](../etc/evidence/t484-s3-dpmi-contracts.md) | Three producers migrated;117 port cases, selected interrupt/return contracts and65538 PM-entry cases pass. |
 | [P27 keyboard contracts](../etc/evidence/t484-s3-keyboard-contracts.md) | Three producers consolidated;24 identical projection comparisons, four fixtures pass including actual100-record return bound. |
+| [P28 native input](../etc/evidence/t484-s3-native-input.md) | Two producers migrated;four outputs reuse actual WOW membership, five native private-desktop service/lifetime cases pass. |
 
-Each batch passed its cached full host build. P27 checks11 raw host inputs
+Each batch passed its cached full host build. P28 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
@@ -114,6 +115,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P27 records keyboard contract producer migration and its delivery under the
+T484 S3 P28 records native input producer migration and its delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

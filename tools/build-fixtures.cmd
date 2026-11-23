@@ -14,6 +14,8 @@ if "%TARGET%"=="package-resources" set "SELECTED=1"
 if "%TARGET%"=="presentation-font" set "SELECTED=1"
 if "%TARGET%"=="thread-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="keyboard-contracts" set "SELECTED=1"
+if "%TARGET%"=="native-input-contracts" set "SELECTED=1"
+if "%TARGET%"=="native-input-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="keyboard-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="console-contracts" set "SELECTED=1"
 if "%TARGET%"=="host-thread-boundaries" set "SELECTED=1"
@@ -55,6 +57,7 @@ if not defined NTVDM_VSDEVCMD set "NTVDM_VSDEVCMD=C:\Program Files (x86)\Microso
 call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
 if "%TARGET%"=="oem-tests" goto worker
+if "%TARGET%"=="native-input-contracts" goto inputtests
 if "%TARGET%"=="command-initialization" goto worker
 if "%TARGET%"=="command-launch" goto worker
 if "%TARGET%"=="worker-diagnostics" goto worker
@@ -84,4 +87,15 @@ exit /b %errorlevel%
 cmake -S "%NTVDM_ROOT%\tools\build\wow-controls" -B "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\call-boundaries-native" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_USE_CCACHE=ON
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\call-boundaries-native" --target wow-controls
+exit /b %errorlevel%
+:inputtests
+pushd "%NTVDM_ROOT%"
+if errorlevel 1 exit /b %errorlevel%
+cmake --preset msvc-x86-release-ccache
+set "result=%errorlevel%"
+popd
+if not "%result%"=="0" exit /b %result%
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release" --target wow32
+if errorlevel 1 exit /b %errorlevel%
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\wow32" --target native-input-contracts
 exit /b %errorlevel%
