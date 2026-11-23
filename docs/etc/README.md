@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 memory profiles](evidence/t484-s3-memory-profiles.md) records native
+EMS/XMS configuration production and its complete parameter comparison.
+
 [T484 S3 native observers](evidence/t484-s3-native-observers.md) records four
 timestamp-only test helpers, behavior checks and their CMD replacements.
 

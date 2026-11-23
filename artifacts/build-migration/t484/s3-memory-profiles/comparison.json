@@ -1,0 +1,23 @@
+[
+  {
+    "file": "ems_pif_builder.exe",
+    "changedBytes": 2,
+    "kind": "timestamp-only",
+    "beforeSha256": "1e88ca4403afaa8156db46e8baa00d66672173f91fad307dda7e540dff8fa22e",
+    "afterSha256": "327b8a55208865de7409bb924f653042b7b36f92eb0cea9f2bdd82655eb15f1d"
+  },
+  {
+    "file": "pure_dos_pif_builder.exe",
+    "changedBytes": 2,
+    "kind": "timestamp-only",
+    "beforeSha256": "ced5315ecc69375569feefa6f39510af7f694bf317ee679a48f0d00b891435c5",
+    "afterSha256": "b0311dd80dee854a97c3e40ae4ecde2693dd38f102f9173c22ba9b5a506d09fd"
+  },
+  {
+    "file": "xms_profile_builder.exe",
+    "changedBytes": 2,
+    "kind": "timestamp-only",
+    "beforeSha256": "2605dc5c08c29dcd11e33f959cf2861245c9b58326a87e331f8dd98ace3ad004",
+    "afterSha256": "eaac3fba32e1203046f148e3aa76d2fc78cb0ef3d860e5df9191851daf5a4a5f"
+  }
+]

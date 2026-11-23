@@ -39,8 +39,9 @@ units. T280 and T282 shared one fixture and now share guest-location.
 This does not imply that every test producer has already migrated.
 Existing test runners execute and validate those binaries.
 
-`build-fixtures.cmd x86 guest-probes` builds38 independently authored DOS
-observation binaries under `build/.ninja/fixtures-x86/guest-probes/<group>`.
+`build-fixtures.cmd x86 guest-probes` builds44 independently authored DOS COM
+programs and2 authored SYS probes under
+`build/.ninja/fixtures-x86/guest-probes/<group>`.
 Individual groups are guest-redir, guest-video-int10, guest-video-direct,
 guest-video-graphics, guest-video-handshake, guest-system, guest-bios,
 guest-support, guest-disks, guest-comms, guest-comms-medium, guest-dem,
@@ -48,6 +49,18 @@ guest-command and guest-vdd. The variant directories prevent one profile
 from overwriting another. These opt-in probes are not release inputs.
 `guest-keymouse` builds KMTST.COM and its x86 console observer;
 `command-tools` builds S34N.exe, S34E.exe and command-stream-observer.exe.
+
+`build-memory-probes.cmd ems <new-build-output> <runtime-test-root>` builds
+the three EMS/DOS probes and writes their PIF/configuration files using the
+existing native generators. The runtime test directory must already exist.
+`build-memory-probes.cmd xms <new-build-output> <runtime-test-root>
+[default|default-low|reserved] [normal|fault]` selects the XMS/INT15 and
+startup-fault variants. Reserved INT15 keeps its original low-DOS behavior.
+The output directory must be new and below this repository's build directory.
+Runtime paths keep the caller's original spelling and must fit the original
+PIF64-byte path fields. These commands do not launch the tests or edit guest
+installation files. Native generator tools remain available through the
+`memory-profiles` fixture group for their additional existing test options.
 
 | Directory | Responsibility |
 | --- | --- |

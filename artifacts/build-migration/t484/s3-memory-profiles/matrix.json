@@ -1,0 +1,43 @@
+{
+  "comparisons": [
+    {
+      "equalFiles": 9,
+      "profile": "ems"
+    },
+    {
+      "equalFiles": 7,
+      "profile": "xms-0-0-0"
+    },
+    {
+      "equalFiles": 7,
+      "profile": "xms-0-0-1"
+    },
+    {
+      "equalFiles": 7,
+      "profile": "xms-0-1-0"
+    },
+    {
+      "equalFiles": 7,
+      "profile": "xms-0-1-1"
+    },
+    {
+      "equalFiles": 7,
+      "profile": "xms-1-0-0"
+    },
+    {
+      "equalFiles": 7,
+      "profile": "xms-1-0-1"
+    },
+    {
+      "equalFiles": 7,
+      "profile": "xms-1-1-0"
+    },
+    {
+      "equalFiles": 7,
+      "profile": "xms-1-1-1"
+    }
+  ],
+  "exit": 0,
+  "rejections": 3,
+  "pid": 23096
+}

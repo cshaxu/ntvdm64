@@ -7,11 +7,13 @@ if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
 for %%I in (guest-memory redirector-async guest-location wow-task-frame wow-callback-frame xms-mapped redirector-contract xms-startup dem-file-lifecycle redirector-guest-copy) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (guest-probes guest-redir guest-video-int10 guest-video-direct guest-video-graphics guest-video-handshake guest-system guest-keymouse guest-bios guest-support guest-disks guest-comms guest-comms-medium guest-dem guest-command guest-vdd command-tools) do if "%TARGET%"=="%%I" set "SELECTED=1"
+if "%TARGET%"=="memory-profiles" set "SELECTED=1"
 if not defined SELECTED exit /b 2
 if "%TARGET%"=="xms-mapped" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="xms-startup" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="command-tools" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="guest-keymouse" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="memory-profiles" if not "%~1"=="x86" exit /b 2
 for %%I in ("%~dp0..") do set "NTVDM_ROOT=%%~fI"
 if not defined NTVDM_VSDEVCMD set "NTVDM_VSDEVCMD=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat"
 call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul
