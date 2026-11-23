@@ -1,0 +1,5 @@
+{
+  "lfIdentical": false,
+  "difference": "one empty line after CPU_HW_INT_MASK; terminal newline ignored",
+  "equalIgnoringEmptyLines": true
+}

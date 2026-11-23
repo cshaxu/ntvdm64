@@ -1,0 +1,64 @@
+{
+  "product_changed": false,
+  "scope": "Native NEG64 helper and declarations; projected CPU event functions; host x86 INT-prefix reference. Not guest decoder or IRQ delivery acceptance.",
+  "result": "pass",
+  "cases": [
+    {
+      "exit": 0,
+      "pid": 5248,
+      "started": "2026-11-23T16:04:46.4940329Z",
+      "expected": 0,
+      "case": "build",
+      "finished": "2026-11-23T16:05:06.6403038Z"
+    },
+    {
+      "exit": 2,
+      "pid": 20296,
+      "started": "2026-11-23T16:05:06.8492550Z",
+      "expected": 1,
+      "case": "ccpu-neg64-negative",
+      "finished": "2026-11-23T16:05:27.1571803Z"
+    },
+    {
+      "exit": 2,
+      "pid": 21564,
+      "started": "2026-11-23T16:05:27.2130715Z",
+      "expected": 1,
+      "case": "ccpu-leaf-negative",
+      "finished": "2026-11-23T16:05:46.4760746Z"
+    },
+    {
+      "exit": 0,
+      "pid": 28536,
+      "started": "2026-11-23T16:05:47.0088344Z",
+      "expected": 0,
+      "case": "neg64",
+      "finished": "2026-11-23T16:05:47.1067804Z"
+    },
+    {
+      "exit": 1,
+      "pid": 3516,
+      "started": "2026-11-23T16:05:47.1317172Z",
+      "expected": 1,
+      "case": "wrong-oracle",
+      "finished": "2026-11-23T16:05:47.1969026Z"
+    },
+    {
+      "exit": 0,
+      "pid": 25664,
+      "started": "2026-11-23T16:05:47.5900756Z",
+      "expected": 0,
+      "case": "notification",
+      "finished": "2026-11-23T16:05:48.1230877Z"
+    },
+    {
+      "exit": 0,
+      "pid": 32072,
+      "started": "2026-11-23T16:05:48.2436594Z",
+      "expected": 0,
+      "case": "native-prefix",
+      "finished": "2026-11-23T16:05:48.3254666Z"
+    }
+  ],
+  "guest_changed": false
+}

@@ -80,6 +80,11 @@ product profiles, archive membership and link inputs. These diagnostic images
 are not release images or self-contained runtime packages. Use the established
 isolated-package staging and matching manifest before a guest diagnostic run.
 
+`tools/build-fixtures.cmd x86 cpu-contracts` builds the NEG64, leaf declaration,
+CPU-notification and native INT-prefix fixtures. The assertion entry is
+`test/observation/verify-cpu-contracts.ps1 -EvidenceRoot <fresh-build-path>`;
+it also requires the explicit negative ABI targets to fail with C4113.
+
 For serial worker compilation, set `MVDM_BUILD_JOBS=1` and call the generated
 `build/.ninja/msvc-x86-release/worker/run-ninja-parallel.cmd` with the target.
 This uses the same native dependency graph and initializes its MSVC environment.

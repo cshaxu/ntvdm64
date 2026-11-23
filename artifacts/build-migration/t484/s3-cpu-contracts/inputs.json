@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ccpu-neg64.exe",
+    "Hash": "3F0FE915045B9D08DCCA38E9995EAB5D01B6EA28170F2D1CAAD86907B9C7EBE6"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ccpu-notification.exe",
+    "Hash": "1F5E2EC04BA70C9E3952F75AFB6E3043115AA4001BE83B91D31CD2BD05BE5016"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\native-int-prefix.exe",
+    "Hash": "18E0B15C6FB9EC659694814882B8B9F9A6E65512F93254DB24B2C8C74A362AD1"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\notification_body.inc",
+    "Hash": "92BFFA27E30FE21229FA9913BAEE6A4FD8600DFB652BA7A8F8808BFDEE19C020"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tools\\build\\worker\\cpu-tests.cmake",
+    "Hash": "68A9F08F0E2014C0953FC3A89AFA956DB54FD44610D22FD19A59E0D7AF98C7B5"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\test\\observation\\verify-cpu-contracts.ps1",
+    "Hash": "EA7D8C84E298988270A634239A257D72AEA5B0C9543AD196D8452A5380B3C814"
+  }
+]

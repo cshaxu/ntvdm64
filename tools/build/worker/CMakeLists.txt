@@ -42,6 +42,7 @@ include(units.cmake)
 include(observation-tests.cmake)
 include(oem-tests.cmake)
 include(diagnostic-tests.cmake)
+include(cpu-tests.cmake)
 get_property(manifest GLOBAL PROPERTY worker_manifest)
 list(JOIN manifest ",\n" manifest)
 file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/source-manifest.json"

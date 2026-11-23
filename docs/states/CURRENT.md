@@ -60,8 +60,9 @@ interpreter-free end-to-end acceptance have not completed.
 | [P22 WOW controls](../etc/evidence/t484-s3-wow-controls.md) | One generator replaced;158 native units,46 links and38 passing default runtime cases; five identical source projections. |
 | [P23 COMMAND producer](../etc/evidence/t484-s3-command-producer.md) | Last literal Ninja generator retired into current native request coverage;74 assertions pass. |
 | [P24 worker diagnostics](../etc/evidence/t484-s3-worker-diagnostics.md) | Old diagnostic producer replaced;11 linked variants reuse actual source profiles and archive/link membership; map checks pass. |
+| [P25 CPU contracts](../etc/evidence/t484-s3-cpu-contracts.md) | Four inline producers consolidated;NEG64631410 cases, two ABI rejection controls, notification concurrency and five native prefix cases pass. |
 
-Each batch passed its cached full host build. P24 checks11 raw host inputs
+Each batch passed its cached full host build. P25 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
@@ -111,6 +112,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P24 records diagnostic producer migration and its delivery under the
+T484 S3 P25 records CPU contract producer migration and its delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

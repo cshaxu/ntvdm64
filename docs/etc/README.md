@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 CPU contracts](evidence/t484-s3-cpu-contracts.md) replaces four
+inline compiler runners, retaining positive and negative ABI/behavior checks.
+
 [T484 S3 worker diagnostics](evidence/t484-s3-worker-diagnostics.md) migrates
 11 diagnostic variants using the actual native product graph.
 
