@@ -358,3 +358,5 @@ foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memor
   endif()
 endforeach()
 include(measurements.cmake)
+
+include(base-contracts.cmake)

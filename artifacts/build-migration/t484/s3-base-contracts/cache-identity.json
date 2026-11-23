@@ -1,0 +1,38 @@
+[
+  {
+    "sha256": "68383C2270C368E06A1FB4F0D9BE122503536FA678D85A66B23691FCB26C3429",
+    "time": 639310731091050592,
+    "target": "base-classifier-path",
+    "architecture": "x86"
+  },
+  {
+    "sha256": "E34ED922957B020C7458B2527413E01AE4B9D978B8BD1D07179A5E98E39D6083",
+    "time": 639310731207478525,
+    "target": "base-resource",
+    "architecture": "x86"
+  },
+  {
+    "sha256": "7EB54A3F48ABAAAD886768F69AF93EA32C21D68E816B4D21B6F2124D178F22A3",
+    "time": 639310731330435866,
+    "target": "base-vdm-config",
+    "architecture": "x86"
+  },
+  {
+    "sha256": "B5705E4E92BCFE279780F5DE55C820E678F7231026DA2CB2BF543DD53DCCFC33",
+    "time": 639310731138801560,
+    "target": "base-classifier-path",
+    "architecture": "x64"
+  },
+  {
+    "sha256": "4FAF8FC667FE1B77C0D94829890D3520C30AB1664D212F08442A79ACD748E0E6",
+    "time": 639310731265419708,
+    "target": "base-resource",
+    "architecture": "x64"
+  },
+  {
+    "sha256": "5B41451A568EEAD55531EA4521EBD1FCE47C73FDD9D4E432326ED4F0D7EB25AA",
+    "time": 639310731388839481,
+    "target": "base-vdm-config",
+    "architecture": "x64"
+  }
+]

@@ -1,0 +1,5 @@
+"Algorithm","Hash","Path"
+"SHA256","3F8C2B3BFDA8A0C7A6B91832067BED15975A33760CECD1F62D24C31CB51A26EE","O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release\service\obj\opennt-base-bindings\config.obj"
+"SHA256","E1B7911E98E297306D5AC8C145D4FD853430C1880B55412846A4460B18D6DF2B","O:\repos.hobby\ntvdm64\test\compat\base_vdm_config.c"
+"SHA256","47C530EAFAE91857A3D3CCC004167FD134A482E5C5ECA9787F690C3427D5A3C4","O:\repos.hobby\ntvdm64\src\compat\base_vdm_config.c"
+"SHA256","BA9E3A7E794A2A2378AE017D620F1CDEC49FCA9BF2B8687B06146A25D207B3D1","O:\repos.hobby\ntvdm64\src\compat\include\base_vdm_config.h"

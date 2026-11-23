@@ -1,31 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "b5d6368800365cf5920cb3eb09bc705dde282393",
+  "head": "2f2a1c10605bc7c0566c870cd931261a8e63f353",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/prepare-win31-con-trace.ps1",
-    " M test/observation/rebuild-win101-control-fixtures.ps1",
+    " M test/observation/verify-base-classifier-path.ps1",
+    " M test/observation/verify-base-resource.ps1",
+    " M test/observation/verify-base-vdm-config.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/guest-probes.cmake",
-    " M tools/build/worker/diagnostic-tests.cmake",
-    "?? artifacts/build-migration/t484/s3-con-trace/",
-    "?? docs/etc/evidence/t484-s3-con-trace.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-base-contracts/",
+    "?? docs/etc/evidence/t484-s3-base-contracts.md",
+    "?? tools/build/fixtures/base-contracts.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 91,
-    "unchanged": 145,
+    "changed": 94,
+    "unchanged": 142,
     "removed": 119
   },
   "disposition_counts": {
-    "migrated-delivered": 34,
+    "migrated-delivered": 37,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 119,
     "pending-producer-migration": 53,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 144,
+    "requires-disposition-reconciliation": 141,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 185,
@@ -2003,8 +2004,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "6560d898def506c258cf3b864215f076d11d41f68e81ae25bc94cc35168e6c6f",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "2f2a1c10605bc7c0566c870cd931261a8e63f353"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-con-trace.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "reason": "P82 moves NASM to native COM/listing target; all six output files match old preparation. PIF and batch configuration still interpreted, pending S4.",
@@ -2018,8 +2023,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "9ff618906bbc9326bd0b2f5dd94712d7b93fe632c7eeee695c2373e2d1bbdfa3",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "2f2a1c10605bc7c0566c870cd931261a8e63f353"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-con-trace.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "P82 delegates three existing native worker targets to CMD; public wrapper build/cache, x64 rejection and real frontend client test pass.",
@@ -2031,34 +2040,46 @@
       "id": "B0112",
       "file": "test/observation/verify-base-classifier-path.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "1921b0d9884df6057679c0615c657e069e7784bbb05128d1140eb8e6fde86b91",
+      "state": "changed",
+      "current_sha256": "9482a7946d85f2d2e2b10a674d7dd6acf5f4ec57e88a55574980a7b75f5d5281",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "P83 native CMD targets retain actual selected product objects and original caller flags; x86/x64 runtime assertions and input identity checks pass.",
+        "evidence": "docs/etc/evidence/t484-s3-base-contracts.md"
+      }
     },
     {
       "id": "B0113",
       "file": "test/observation/verify-base-resource.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "a73cf0e697badd8b507a7633fae006dd577718893ee11cb5e7f3dbe0b3ca97cd",
+      "state": "changed",
+      "current_sha256": "07329dc99bb64b71e24f4a319e8604b62cf1dfa5c02e85c42dba2fecc420fe4e",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "P83 native CMD targets retain actual selected product objects and original caller flags; x86/x64 runtime assertions and input identity checks pass.",
+        "evidence": "docs/etc/evidence/t484-s3-base-contracts.md"
+      }
     },
     {
       "id": "B0114",
       "file": "test/observation/verify-base-vdm-config.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "78c70323cbe92da5a073d3d2bef83e62ce10f86ea372d37aebb884c10c61e128",
+      "state": "changed",
+      "current_sha256": "666a5c4c0e58311675248abe8f2ac1d79aa585652f777a68bdbb7a2cdb2b6692",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "P83 native CMD targets retain actual selected product objects and original caller flags; x86/x64 runtime assertions and input identity checks pass.",
+        "evidence": "docs/etc/evidence/t484-s3-base-contracts.md"
+      }
     },
     {
       "id": "B0115",
@@ -5188,6 +5209,12 @@
     }
   ],
   "commits": {
+    "2f2a1c10605bc7c0566c870cd931261a8e63f353": {
+      "subject": "T484 S3 P82 migrate Console and control fixture producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-con-trace.md"
+      ]
+    },
     "b5d6368800365cf5920cb3eb09bc705dde282393": {
       "subject": "T484 S3 P81 migrate DOS identity diagnostic producers",
       "evidence": [
@@ -6911,8 +6938,8 @@
           "text": "$object=\"$repo/build/.ninja/msvc-$arch-release/$part/obj/opennt-base-bindings/classifier-path.obj\""
         },
         {
-          "line": 12,
-          "text": "$command=\"@echo off`r`ncall `\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat`\" -arch=$arch -host_arch=x64 >nul`r`nif errorlevel 1 exit /b 1`r`ncl /nologo /W4 /WX /MT /I`\"$repo/src`\" /external:W0 /external:I`\"$repo/src/compat/include`\" /external:I`\"$repo/src/non-mvdm/public/sdk/inc`\" `\"$repo/test/compat/base_classifier_path.c`\" `\"$object`\" /Fo`\"$dir/test.obj`\" /Fe`\"$dir/test.exe`\" /link ntdll.lib`r`nexit /b %errorlevel%`r`n\""
+          "line": 13,
+          "text": "$file=if($step -eq 'compile'){$env:ComSpec}else{\"$repo/build/.ninja/fixtures-$arch/base-classifier-path.exe\"}"
         }
       ]
     },
@@ -6925,8 +6952,8 @@
           "text": "$object=\"$repo/build/.ninja/msvc-$arch-release/$part/obj/opennt-base-bindings/resources.obj\""
         },
         {
-          "line": 12,
-          "text": "$command=\"@echo off`r`ncall `\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat`\" -arch=$arch -host_arch=x64 >nul`r`nif errorlevel 1 exit /b 1`r`ncl /nologo /W4 /WX /MT /I`\"$repo/src`\" `\"$repo/test/compat/base_resource.c`\" `\"$object`\" /Fo`\"$dir/test.obj`\" /Fe`\"$dir/test.exe`\" /link ntdll.lib`r`nexit /b %errorlevel%`r`n\""
+          "line": 13,
+          "text": "$file=if($step -eq 'compile'){$env:ComSpec}else{\"$repo/build/.ninja/fixtures-$arch/base-resource.exe\"}"
         }
       ]
     },
@@ -6939,8 +6966,8 @@
           "text": "$object=\"$repo/build/.ninja/msvc-$arch-release/$part/obj/opennt-base-bindings/config.obj\""
         },
         {
-          "line": 12,
-          "text": "$command=\"@echo off`r`ncall `\"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat`\" -arch=$arch -host_arch=x64 >nul`r`nif errorlevel 1 exit /b 1`r`ncl /nologo /W4 /WX /MT /I`\"$repo/src`\" `\"$repo/test/compat/base_vdm_config.c`\" `\"$object`\" /Fo`\"$dir/test.obj`\" /Fe`\"$dir/test.exe`\" /link ntdll.lib`r`nexit /b %errorlevel%`r`n\""
+          "line": 13,
+          "text": "$file=if($step -eq 'compile'){$env:ComSpec}else{\"$repo/build/.ninja/fixtures-$arch/base-vdm-config.exe\"}"
         }
       ]
     },

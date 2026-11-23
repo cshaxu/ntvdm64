@@ -9,12 +9,10 @@ foreach($arch in @('x86','x64')) {
     $object="$repo/build/.ninja/msvc-$arch-release/$part/obj/opennt-base-bindings/classifier-path.obj"
     $dir=New-Item -ItemType Directory "$out/$arch"
     Get-FileHash $object,"$repo/test/compat/base_classifier_path.c","$repo/src/compat/base_classifier_path.c","$repo/src/compat/include/base_classifier_path.h" | Export-Csv "$dir/inputs.csv" -NoTypeInformation
-    $command="@echo off`r`ncall `"C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat`" -arch=$arch -host_arch=x64 >nul`r`nif errorlevel 1 exit /b 1`r`ncl /nologo /W4 /WX /MT /I`"$repo/src`" /external:W0 /external:I`"$repo/src/compat/include`" /external:I`"$repo/src/non-mvdm/public/sdk/inc`" `"$repo/test/compat/base_classifier_path.c`" `"$object`" /Fo`"$dir/test.obj`" /Fe`"$dir/test.exe`" /link ntdll.lib`r`nexit /b %errorlevel%`r`n"
-    [IO.File]::WriteAllText("$dir/build.cmd",$command)
     foreach($step in @('compile','run')) {
-        $file=if($step -eq 'compile'){$env:ComSpec}else{"$dir/test.exe"}
+        $file=if($step -eq 'compile'){$env:ComSpec}else{"$repo/build/.ninja/fixtures-$arch/base-classifier-path.exe"}
         $options=@{FilePath=$file;WindowStyle='Hidden';PassThru=$true;RedirectStandardOutput="$dir/$step.log";RedirectStandardError="$dir/$step.err"}
-        if($step -eq 'compile'){$options.ArgumentList=@('/d','/c',"`"$dir/build.cmd`"")}
+        if($step -eq 'compile'){$options.ArgumentList=@('/d','/c',"`"$repo/tools/build-fixtures.cmd`" $arch base-classifier-path")}
         $p=Start-Process @options;$null=$p.Handle
         $p.Id | Set-Content "$dir/$step.pid"
         if(!$p.WaitForExit(60000)){throw "Owned $arch $step timed out; PID $($p.Id)"}

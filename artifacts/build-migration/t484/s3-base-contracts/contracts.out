@@ -1,0 +1,6 @@
+CLASSIFIER_PATH failures=0 layout=12 cases=3 successes=2 rejected=1
+CLASSIFIER_PATH failures=0 layout=24 cases=3 successes=2 rejected=1
+BASE_RESOURCE errors=0 duplicates=1 closes=1
+BASE_RESOURCE errors=0 duplicates=1 closes=1
+BASE_VDM_CONFIG failures=0
+BASE_VDM_CONFIG failures=0

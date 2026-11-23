@@ -475,5 +475,20 @@
     "reason": "P82 delegates three existing native worker targets to CMD; public wrapper build/cache, x64 rejection and real frontend client test pass.",
     "status": "migrated-delivered",
     "evidence": "docs/etc/evidence/t484-s3-con-trace.md"
+  },
+  "test/observation/verify-base-classifier-path.ps1": {
+    "status": "migrated-delivered",
+    "reason": "P83 native CMD targets retain actual selected product objects and original caller flags; x86/x64 runtime assertions and input identity checks pass.",
+    "evidence": "docs/etc/evidence/t484-s3-base-contracts.md"
+  },
+  "test/observation/verify-base-resource.ps1": {
+    "status": "migrated-delivered",
+    "reason": "P83 native CMD targets retain actual selected product objects and original caller flags; x86/x64 runtime assertions and input identity checks pass.",
+    "evidence": "docs/etc/evidence/t484-s3-base-contracts.md"
+  },
+  "test/observation/verify-base-vdm-config.ps1": {
+    "status": "migrated-delivered",
+    "reason": "P83 native CMD targets retain actual selected product objects and original caller flags; x86/x64 runtime assertions and input identity checks pass.",
+    "evidence": "docs/etc/evidence/t484-s3-base-contracts.md"
   }
 }

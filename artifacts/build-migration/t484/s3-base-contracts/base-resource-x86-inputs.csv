@@ -1,0 +1,5 @@
+"Algorithm","Hash","Path"
+"SHA256","A3D03ADF88F9A372DCB11F1EDDCA9163704A4C1F7D4BD30181174038CE53374A","O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\worker\obj\opennt-base-bindings\resources.obj"
+"SHA256","1F7ADE87EDEA610D09CBB65A2DE73F1CDB644FF51D956D51A1480D34DDA3E0A3","O:\repos.hobby\ntvdm64\test\compat\base_resource.c"
+"SHA256","BA2249C41CB99E70B2C04313B5908746B0F973C1AB78EFEC33771BBE6EECE80C","O:\repos.hobby\ntvdm64\src\compat\base_resource.c"
+"SHA256","5CA369C37DFC00D97D3D0C5DFC993B6A5128B83E1FB6E56BE98B8450269FCA01","O:\repos.hobby\ntvdm64\src\compat\include\base_resource.h"

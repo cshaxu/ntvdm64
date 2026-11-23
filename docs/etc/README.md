@@ -1653,3 +1653,5 @@ post-publication targeted checks.
 - [T484 S3 DOS identity producers](evidence/t484-s3-dos-identity.md).
 
 - [T484 S3 Console trace/control producers](evidence/t484-s3-con-trace.md).
+
+- [T484 S3 BASE contract producers](evidence/t484-s3-base-contracts.md).
