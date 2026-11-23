@@ -255,10 +255,6 @@
     "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
     "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
   },
-  "test/integration/verify-wow-edit-tabstop.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Generates CMD with CL/LINK for tabstop and wordbreak fixtures"
-  },
   "test/observation/verify-slave-bios-eoi.py": {
     "status": "migrated-delivered",
     "reason": "Native PIC/BIOS target owns compilation and linking; Python only invokes CMD and checks provider/runtime assertions",
@@ -288,5 +284,10 @@
     "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
     "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
     "status": "pending-producer-migration"
+  },
+  "test/integration/verify-wow-edit-tabstop.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Native target links actual production original_wmsgem;30 unchanged assertions pass;standalone runner has no producer",
+    "evidence": "docs/etc/evidence/t484-s3-edit-contracts.md"
   }
 }

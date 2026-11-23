@@ -1,0 +1,152 @@
+[
+  {
+    "exit": 0,
+    "output": "count=0 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000",
+    "case": "tabstop-0-0-0-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=0 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678",
+    "case": "tabstop-0-0-0-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=0 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=00000000",
+    "case": "tabstop-0-0-1-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=0 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=12345678",
+    "case": "tabstop-0-0-1-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=0 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000",
+    "case": "tabstop-0-1-0-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=0 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678",
+    "case": "tabstop-0-1-0-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=0 heap=1 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=00000000",
+    "case": "tabstop-0-1-1-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=0 heap=1 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=12345678",
+    "case": "tabstop-0-1-1-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000",
+    "case": "tabstop-1-0-0-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678",
+    "case": "tabstop-1-0-0-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=1 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=00000000",
+    "case": "tabstop-1-0-1-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=1 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=12345678",
+    "case": "tabstop-1-0-1-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=1 heap=1 result=0 free=1 callbacks=0 ret=0 proc=11112222 word16=00000000",
+    "case": "tabstop-1-1-0-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=1 heap=1 result=0 free=1 callbacks=0 ret=0 proc=11112222 word16=12345678",
+    "case": "tabstop-1-1-0-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=1 heap=1 result=1 free=1 callbacks=0 ret=1 proc=11112222 word16=00000000",
+    "case": "tabstop-1-1-1-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=1 heap=1 result=1 free=1 callbacks=0 ret=1 proc=11112222 word16=12345678",
+    "case": "tabstop-1-1-1-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=-1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000",
+    "case": "tabstop--1-0-0-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=-1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678",
+    "case": "tabstop--1-0-0-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=-1 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=00000000",
+    "case": "tabstop--1-0-1-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=-1 heap=0 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=12345678",
+    "case": "tabstop--1-0-1-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=-1 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=00000000",
+    "case": "tabstop--1-1-0-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=-1 heap=1 result=0 free=0 callbacks=0 ret=0 proc=11112222 word16=12345678",
+    "case": "tabstop--1-1-0-1"
+  },
+  {
+    "exit": 0,
+    "output": "count=-1 heap=1 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=00000000",
+    "case": "tabstop--1-1-1-0"
+  },
+  {
+    "exit": 0,
+    "output": "count=-1 heap=1 result=1 free=0 callbacks=0 ret=1 proc=11112222 word16=12345678",
+    "case": "tabstop--1-1-1-1"
+  },
+  {
+    "exit": 0,
+    "output": "zero ret=00000000 word16=56789abc word32=11112222 callbacks=0 reason=0 ordinal=0",
+    "case": "wordbreak-zero"
+  },
+  {
+    "exit": 0,
+    "output": "guest-ldt ret=00040077 word16=00000000 word32=11112222 callbacks=0 reason=0 ordinal=0",
+    "case": "wordbreak-guest-ldt"
+  },
+  {
+    "exit": 0,
+    "output": "guest-high ret=80040077 word16=00000000 word32=11112222 callbacks=0 reason=0 ordinal=0",
+    "case": "wordbreak-guest-high"
+  },
+  {
+    "exit": 0,
+    "output": "native-fail ret=00123456 word16=00123456 word32=00123456 callbacks=1 reason=27 ordinal=535",
+    "case": "wordbreak-native-fail"
+  },
+  {
+    "exit": 0,
+    "output": "native-success ret=00123456 word16=12345678 word32=00123456 callbacks=1 reason=27 ordinal=535",
+    "case": "wordbreak-native-success"
+  },
+  {
+    "exit": 0,
+    "output": "native-cached ret=56789abc word16=56789abc word32=11112222 callbacks=0 reason=0 ordinal=0",
+    "case": "wordbreak-native-cached"
+  }
+]

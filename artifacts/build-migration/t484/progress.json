@@ -1,32 +1,28 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "3d217bfeb341d52835d90c326181e66361e82659",
+  "head": "edafa6e51575c0fc4e40b0c20f6528b8918f71f3",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/Invoke-Win16ProbeBuild.ps1",
-    " M test/integration/verify-wow-clipboard-transfer.ps1",
-    " M test/integration/verify-wow-dc-guest.ps1",
-    " M test/integration/verify-wow-dialog-guest.ps1",
+    " M test/integration/verify-wow-edit-tabstop.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    " M tools/build/fixtures/win16-probes.cmake",
-    "?? artifacts/build-migration/t484/s3-clipboard/",
-    "?? docs/etc/evidence/t484-s3-clipboard-probes.md",
-    "?? tools/build/fixtures/wow-clipboard.cmake"
+    " M tools/build/wow32/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-edit/",
+    "?? docs/etc/evidence/t484-s3-edit-contracts.md",
+    "?? tools/build/wow32/edit-tests.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 59,
-    "unchanged": 183,
+    "changed": 60,
+    "unchanged": 182,
     "removed": 113
   },
   "disposition_counts": {
-    "migrated-delivered": 14,
+    "migrated-delivered": 15,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
-    "pending-producer-migration": 44,
+    "pending-producer-migration": 43,
     "retained-native-delegate": 2,
     "requires-disposition-reconciliation": 180
   },
@@ -970,8 +966,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "f655cb432af10e29a400c03833e8c3429709ccfb3dd04506d1f648125a4cec50",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "edafa6e51575c0fc4e40b0c20f6528b8918f71f3"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-clipboard-probes.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
@@ -985,8 +985,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "e6842c56bfd173977ca28f04187eab22ab73e00fd413bac583df7ba584ec3f25",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "edafa6e51575c0fc4e40b0c20f6528b8918f71f3"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-clipboard-probes.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
@@ -1000,8 +1004,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "9c5aa048fa2e3b139366084914c01936ad66e2fe4c41bd0d3bacad9bf979f90a",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "edafa6e51575c0fc4e40b0c20f6528b8918f71f3"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-clipboard-probes.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
@@ -1013,14 +1021,15 @@
       "id": "B0057",
       "file": "test/integration/verify-wow-edit-tabstop.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "8e0e17dc559608cc65e5ad1066708cdb33fe847022b4939da4641d6f798e911a",
+      "state": "changed",
+      "current_sha256": "8edacb1a513639b0da821962990c07fcbabe1cdff85bda4cc0e43b7288e2700b",
       "revisions": [],
       "evidence": [],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Generates CMD with CL/LINK for tabstop and wordbreak fixtures"
+        "status": "migrated-delivered",
+        "reason": "Native target links actual production original_wmsgem;30 unchanged assertions pass;standalone runner has no producer",
+        "evidence": "docs/etc/evidence/t484-s3-edit-contracts.md"
       }
     },
     {
@@ -4868,6 +4877,12 @@
     }
   ],
   "commits": {
+    "edafa6e51575c0fc4e40b0c20f6528b8918f71f3": {
+      "subject": "T484 S3 P51 migrate Clipboard DC and dialog producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-clipboard-probes.md"
+      ]
+    },
     "3d217bfeb341d52835d90c326181e66361e82659": {
       "subject": "T484 S3 P50 migrate WOW callback diagnostic composition",
       "evidence": [
@@ -5878,32 +5893,8 @@
       "file": "test/integration/verify-wow-edit-tabstop.ps1",
       "hits": [
         {
-          "line": 1,
-          "text": "param([string]$Object='build/.ninja/msvc-x86-release/wow32/obj/wmsgem.obj',[string]$Output='build/t478-s19/current')"
-        },
-        {
-          "line": 8,
-          "text": "\"cl /nologo /TC /c /O2 /MT `\"$repo/test/integration/wow_edit_tabstop_test.c`\" /Fo:`\"$out/test.obj`\"\","
-        },
-        {
-          "line": 10,
-          "text": "\"cl /nologo /TC /c /O2 /MT `\"$repo/artifacts/mvdm-audit/host-ch-scope/tabstop-release-seams.c`\" /Fo:`\"$out/seams.obj`\"\","
-        },
-        {
-          "line": 12,
-          "text": "\"link /nologo /out:`\"$out/test.exe`\" /map:`\"$out/test.map`\" `\"$out/test.obj`\" `\"$out/seams.obj`\" `\"$obj`\" kernel32.lib user32.lib\","
-        },
-        {
-          "line": 14,
-          "text": "\"cl /nologo /TC /c /O2 /MT `\"$repo/artifacts/mvdm-audit/host-ch-scope/wordbreak-object-fixture.c`\" /Fo:`\"$out/wordbreak.obj`\"\","
-        },
-        {
-          "line": 16,
-          "text": "\"link /nologo /out:`\"$out/wordbreak.exe`\" `\"$out/wordbreak.obj`\" `\"$out/seams.obj`\" `\"$obj`\" kernel32.lib user32.lib\","
-        },
-        {
-          "line": 19,
-          "text": "if($LASTEXITCODE){throw 'Clean-link fixture build failed'}"
+          "line": 17,
+          "text": "$native=\"$repo/build/.ninja/msvc-x86-release/wow32\""
         }
       ]
     },

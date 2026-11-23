@@ -39,6 +39,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="wow-edit-contracts" set "SELECTED=1"
+if "%TARGET%"=="wow-edit-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-clipboard-probes" set "SELECTED=1"
 if "%TARGET%"=="wow-clipboard-probes" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-callback-cost wow-callback-cost-unit) do if "%TARGET%"=="%%I" set "SELECTED=1"
@@ -134,6 +136,7 @@ if "%TARGET%"=="wow-callback-cost" goto wowcallback
 if "%TARGET%"=="pic-bios-contracts" goto worker
 if "%TARGET%"=="command-keyboard-shadow" goto worker
 if "%TARGET%"=="native-input-contracts" goto inputtests
+if "%TARGET%"=="wow-edit-contracts" goto inputtests
 if "%TARGET%"=="command-initialization" goto worker
 if "%TARGET%"=="command-launch" goto worker
 if "%TARGET%"=="worker-diagnostics" goto worker
@@ -182,7 +185,7 @@ popd
 if not "%result%"=="0" exit /b %result%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release" --target wow32
 if errorlevel 1 exit /b %errorlevel%
-cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\wow32" --target native-input-contracts
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\wow32" --target %TARGET%
 exit /b %errorlevel%
 :nativediagnostics
 pushd "%NTVDM_ROOT%"

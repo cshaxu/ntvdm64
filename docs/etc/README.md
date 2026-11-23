@@ -1590,3 +1590,5 @@ post-publication targeted checks.
 - [T484 S3 callback diagnostic](evidence/t484-s3-callback-cost.md).
 
 - [T484 S3 Clipboard/DC/dialog probes](evidence/t484-s3-clipboard-probes.md).
+
+- [T484 S3 edit contracts](evidence/t484-s3-edit-contracts.md).
