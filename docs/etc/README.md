@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 retired inputs](evidence/t484-s3-retired-inputs.md) records removal
+of six ineffective historical producer/test files and native serial validation.
+
 [T484 S3 memory profiles](evidence/t484-s3-memory-profiles.md) records native
 EMS/XMS configuration production and its complete parameter comparison.
 

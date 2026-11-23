@@ -68,12 +68,11 @@ the frontend's native width; its NTVDM fault diagnostics retain the x86
 context through WOW64 APIs when the observer is x64. This is test-only memory
 observation, not a production protocol or extra product/helper.
 
-`Invoke-T310OriginalSoftpcSerial.ps1` is the bounded fallback for a host where
-Ninja itself cannot dispatch its first job. It reads the generated graph's
-declared VS/Ninja paths, expands only the requested Ninja targets with
-`ninja -t commands`, and executes that already-expanded dependency order in
-one x86 toolchain environment. It stops at the first command failure; it is
-not an alternate graph, compiler profile or source input.
+For serial worker compilation, set `MVDM_BUILD_JOBS=1` and call the generated
+`build/.ninja/msvc-x86-release/worker/run-ninja-parallel.cmd` with the target.
+This uses the same native dependency graph and initializes its MSVC environment.
+The former PowerShell command-replay fallback is retired; a Ninja dispatch
+failure remains a failed build rather than triggering a second execution path.
 
 The generated `run-ninja-parallel.cmd` is the formal execution entry point for
 that graph. It initializes the matching MSVC environment once, then invokes
