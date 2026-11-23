@@ -127,6 +127,11 @@ int main(void)
     }
     returned(2,104,TRUE);CHECK(captured[1].Event.KeyEvent.wVirtualKeyCode==203);
     puts("PASS original history ring wrap rejects overwritten identities without aliasing");
+    fresh();
+    for(i=1;i<=203;++i)slot(raw((WORD)i,TRUE));
+    returned(MAX_KEY_EVENTS,104,TRUE);
+    CHECK(captured[MAX_KEY_EVENTS-1].Event.KeyEvent.wVirtualKeyCode==203);
+    puts("PASS excess device history selects only the latest 100 returnable records");
     fresh();make=raw('M',TRUE);slot(make);fail_write=TRUE;returned(1,'M',TRUE);
     CHECK(!first_returned_key.EventType);
     puts("PASS failed Console prepend keeps original cleanup and no fabricated BIOS join");

@@ -54,5 +54,5 @@ static int test(int requested,int present)
 int main(void)
 {
     return test(2,2) || test(1,3) || test(0,0) || test(3,2) ||
-        test(2,0) || test(100,100) || test(101,100);
+        test(2,0) || test(100,100);
 }

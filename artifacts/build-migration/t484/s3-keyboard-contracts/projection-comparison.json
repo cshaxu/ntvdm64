@@ -1,0 +1,122 @@
+[
+  {
+    "source": "legacy-bios",
+    "file": "keyboard_bios_return.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-bios",
+    "file": "unused_key_return.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_add.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_clear.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_continue.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_eoi.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_immediate.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_mark.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_output.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_remove.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_replay.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_reset.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_device_translate.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_host_down.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_host_up.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_origin_pending.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-device",
+    "file": "keyboard_raise_all.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-origin",
+    "file": "keyboard_origin_calculate.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-origin",
+    "file": "keyboard_origin_get.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-origin",
+    "file": "keyboard_origin_init.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-origin",
+    "file": "keyboard_origin_pending.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-origin",
+    "file": "keyboard_origin_update.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-origin",
+    "file": "unused_key_return.inc",
+    "equal": true
+  },
+  {
+    "source": "legacy-unused",
+    "file": "unused_key_return.inc",
+    "equal": true
+  }
+]

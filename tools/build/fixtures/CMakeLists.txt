@@ -319,6 +319,7 @@ target_include_directories(presentation-font-snapshot-fixture_objects PRIVATE
   "${NTVDM_REPO}/src/compat/include")
 add_custom_target(presentation-font DEPENDS presentation-font-snapshot-fixture)
 include(thread-tests.cmake)
+include(keyboard-tests.cmake)
 
 # These historical profiles enabled /Gy only for the coordination unit.
 foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memory_test

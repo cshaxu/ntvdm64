@@ -1,0 +1,43 @@
+{
+  "cases": [
+    {
+      "case": "build",
+      "started": "2026-11-23T16:25:24.9831173Z",
+      "pid": 9840,
+      "exit": 0,
+      "finished": "2026-11-23T16:25:30.9899086Z"
+    },
+    {
+      "case": "keyboard_origin_return",
+      "started": "2026-11-23T16:25:31.1453895Z",
+      "pid": 13700,
+      "exit": 0,
+      "finished": "2026-11-23T16:25:31.2259871Z"
+    },
+    {
+      "case": "keyboard_bios_join",
+      "started": "2026-11-23T16:25:31.2634304Z",
+      "pid": 23016,
+      "exit": 0,
+      "finished": "2026-11-23T16:25:31.3434404Z"
+    },
+    {
+      "case": "keyboard_origin_device",
+      "started": "2026-11-23T16:25:31.3542063Z",
+      "pid": 27132,
+      "exit": 0,
+      "finished": "2026-11-23T16:25:31.4254414Z"
+    },
+    {
+      "case": "unused_key_return",
+      "started": "2026-11-23T16:25:31.5533123Z",
+      "pid": 25196,
+      "exit": 0,
+      "finished": "2026-11-23T16:25:31.6396099Z"
+    }
+  ],
+  "product_changed": false,
+  "scope": "Current projected keyboard/host routines and actual history carrier; bounded event/device providers, not guest input acceptance.",
+  "guest_changed": false,
+  "result": "pass"
+}

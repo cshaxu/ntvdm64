@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 keyboard contracts](evidence/t484-s3-keyboard-contracts.md) consolidates
+three producers, records24 equivalent projections and four passing fixtures.
+
 [T484 S3 DPMI contracts](evidence/t484-s3-dpmi-contracts.md) migrates three
 port, interrupt and protected-mode test producers with retained assertions.
 

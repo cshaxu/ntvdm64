@@ -1,0 +1,43 @@
+{
+  "product_changed": false,
+  "result": "failed",
+  "cases": [
+    {
+      "finished": "2026-11-23T16:21:03.0456120Z",
+      "case": "build",
+      "started": "2026-11-23T16:20:56.3299056Z",
+      "pid": 24568,
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-23T16:21:03.2946461Z",
+      "case": "keyboard_origin_return",
+      "started": "2026-11-23T16:21:03.2099357Z",
+      "pid": 15040,
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-23T16:21:03.5336486Z",
+      "case": "keyboard_bios_join",
+      "started": "2026-11-23T16:21:03.4361800Z",
+      "pid": 6548,
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-23T16:21:03.7794041Z",
+      "case": "keyboard_origin_device",
+      "started": "2026-11-23T16:21:03.6943148Z",
+      "pid": 21672,
+      "exit": 0
+    },
+    {
+      "finished": "2026-11-23T16:21:04.2587949Z",
+      "case": "unused_key_return",
+      "started": "2026-11-23T16:21:03.9382317Z",
+      "pid": 22652,
+      "exit": -1073740791
+    }
+  ],
+  "guest_changed": false,
+  "error": "unused_key_return failed -1073740791"
+}

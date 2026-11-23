@@ -13,6 +13,8 @@ if "%TARGET%"=="redirector-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="package-resources" set "SELECTED=1"
 if "%TARGET%"=="presentation-font" set "SELECTED=1"
 if "%TARGET%"=="thread-lifecycle" set "SELECTED=1"
+if "%TARGET%"=="keyboard-contracts" set "SELECTED=1"
+if "%TARGET%"=="keyboard-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="console-contracts" set "SELECTED=1"
 if "%TARGET%"=="host-thread-boundaries" set "SELECTED=1"
 if "%TARGET%"=="ccpu-callback" set "SELECTED=1"
