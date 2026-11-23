@@ -1,0 +1,67 @@
+[
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_opennt_abi_host_compat_opennt_support_rtl_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\compat\\opennt_support_rtl.c.obj: C_COMPILER__unit_obj_opennt_abi_host_compat_opennt_support_rtl_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\compat\\opennt_support_rtl.c || cmake_object_order_depends_target_unit_obj_opennt_abi_host_compat_opennt_support_rtl_obj",
+    "sha256": "E8A341A334623731583293F99ABC263717316E543CDCD5CC66417EDEECBC95A4",
+    "object": "obj/opennt-abi-host-compat/opennt_support_rtl.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_oemuni_file_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\oemuni\\file.c.obj: C_COMPILER__unit_obj_oemuni_file_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\oemuni\\file.c || cmake_object_order_depends_target_unit_obj_oemuni_file_obj",
+    "sha256": "681720463CAD58B078BDA0515C91EBBCF47422E274DA1BCC83884734B4CEA5BC",
+    "object": "obj/oemuni/file.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_oemuni_process_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\oemuni\\process.c.obj: C_COMPILER__unit_obj_oemuni_process_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\oemuni\\process.c || cmake_object_order_depends_target_unit_obj_oemuni_process_obj",
+    "sha256": "B01E77DD5C87DCD1614D6B9F298D84DB0264C9D7310D7FEF1B527DAE74AA8C98",
+    "object": "obj/oemuni/process.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_suballoc_suballoc_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\suballoc\\suballoc.c.obj: C_COMPILER__unit_obj_suballoc_suballoc_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\suballoc\\suballoc.c || cmake_object_order_depends_target_unit_obj_suballoc_suballoc_obj",
+    "sha256": "F6A2BD1425656F70003FBBD8DF407C83E780FEA89B28619E1EB382DF6F1EF78C",
+    "object": "obj/suballoc/suballoc.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_dem_demsrch_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demsrch.c.obj: C_COMPILER__unit_obj_dem_demsrch_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demsrch.c || cmake_object_order_depends_target_unit_obj_dem_demsrch_obj",
+    "sha256": "896264E3362E9EAE1ECD9C0B72C41EC2D4E71B5461EC5E5FC7CD8C5DD29B159D",
+    "object": "obj/dem/demsrch.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_dem_demerror_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demerror.c.obj: C_COMPILER__unit_obj_dem_demerror_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demerror.c || cmake_object_order_depends_target_unit_obj_dem_demerror_obj",
+    "sha256": "D11F865A896CAA6003A961C935C38E5817D742C389501B82BB3ED355F2A84F1D",
+    "object": "obj/dem/demerror.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_dem_demgset_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demgset.c.obj: C_COMPILER__unit_obj_dem_demgset_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demgset.c || cmake_object_order_depends_target_unit_obj_dem_demgset_obj",
+    "sha256": "17134CC41E6C038D83BE81EA21B5219B79878F90DE2DCE2326FC0A4333587DC6",
+    "object": "obj/dem/demgset.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_dem_demhndl_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demhndl.c.obj: C_COMPILER__unit_obj_dem_demhndl_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demhndl.c || cmake_object_order_depends_target_unit_obj_dem_demhndl_obj",
+    "sha256": "EB1A21F4A3675DD9F2CEB250A4A222F7AC7F797BE978149395361D6A7B56D287",
+    "object": "obj/dem/demhndl.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_dem_demfcb_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demfcb.c.obj: C_COMPILER__unit_obj_dem_demfcb_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demfcb.c || cmake_object_order_depends_target_unit_obj_dem_demfcb_obj",
+    "sha256": "1A85866FD0036BFFC47B6B74DBB87A8EE8EBEDF6B798ECC96C691771CC41F1A7",
+    "object": "obj/dem/demfcb.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_dem_demfile_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demfile.c.obj: C_COMPILER__unit_obj_dem_demfile_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dos\\dem\\demfile.c || cmake_object_order_depends_target_unit_obj_dem_demfile_obj",
+    "sha256": "574A7DBA46CEF6101F9FA7E005D39F0D12D71C2D27F75DD6AC24F4D5B1B94B4E",
+    "object": "obj/dem/demfile.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_host_nt_fdisk_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\src\\nt_fdisk.c.obj: C_COMPILER__unit_obj_host_nt_fdisk_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\src\\nt_fdisk.c || cmake_object_order_depends_target_unit_obj_host_nt_fdisk_obj",
+    "sha256": "FF4590BAAE0AE8432537AC132D0EAC56BA85BEA099C17AD3A0320D8765CCF490",
+    "object": "obj/host/nt_fdisk.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_host_nt_rflop_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\src\\nt_rflop.c.obj: C_COMPILER__unit_obj_host_nt_rflop_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\src\\nt_rflop.c || cmake_object_order_depends_target_unit_obj_host_nt_rflop_obj",
+    "sha256": "7D5F51FA569E8B56C739F6E889955B6C899C1B541E4EFFFE28FEC83AC31E862D",
+    "object": "obj/host/nt_rflop.obj"
+  },
+  {
+    "compileEdge": "build CMakeFiles\\unit_obj_host_nt_bop_obj.dir\\O_\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\src\\nt_bop.c.obj: C_COMPILER__unit_obj_host_nt_bop_obj_unscanned_Release O$:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\src\\nt_bop.c || cmake_object_order_depends_target_unit_obj_host_nt_bop_obj",
+    "sha256": "11B8D716155DE2A7CDB9DC4BCFC44B0EC301FB3D7186203F28E0C9CB0CBF5920",
+    "object": "obj/host/nt_bop.obj"
+  }
+]

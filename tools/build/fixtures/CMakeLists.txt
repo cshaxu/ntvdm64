@@ -53,6 +53,19 @@ function(fixture name link_mode)
     COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(${name} DEPENDS "${CMAKE_BINARY_DIR}/${name}.exe")
 endfunction()
+if(NTVDM_ARCH STREQUAL "x86")
+  fixture(suballoc_lifecycle_fixture LINK src/mvdm-host/suballoc/suballoc.c
+    test/mvdm/suballoc/suballoc_lifecycle_fixture.c)
+  set_property(TARGET suballoc_lifecycle_fixture_objects PROPERTY COMPILE_OPTIONS
+    /nologo /TC /W4 "/FI${NTVDM_REPO}/src/non-mvdm/public/sdk/inc/nt.h")
+  target_compile_definitions(suballoc_lifecycle_fixture_objects PRIVATE WIN32 WINNT)
+  foreach(path IN ITEMS src/mvdm-host/inc src/compat/include src/non-mvdm/public/sdk/inc)
+    target_include_directories(suballoc_lifecycle_fixture_objects PRIVATE "${NTVDM_REPO}/${path}")
+  endforeach()
+  set_property(TARGET suballoc_lifecycle_fixture_objects PROPERTY FIXTURE_LIBRARIES
+    "libcmt.lib;libvcruntime.lib;libucrt.lib")
+  add_custom_target(suballoc-lifecycle DEPENDS suballoc_lifecycle_fixture)
+endif()
 fixture(ntioapi_facade_fixture LINK src/compat/ntioapi_facade.c
   src/compat/dem_restart_hint.c test/compat/ntioapi_facade_test.c)
 set_property(TARGET ntioapi_facade_fixture_objects PROPERTY COMPILE_OPTIONS

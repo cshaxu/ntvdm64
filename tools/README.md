@@ -51,6 +51,7 @@ from overwriting another. These opt-in probes are not release inputs.
 `command-tools` builds S34N.exe, S34E.exe and command-stream-observer.exe.
 `system-fixtures` builds NT I/O facade and VDM control tests on x86/x64,
 plus the original x86-only DOS find-layout fixture.
+`suballoc-lifecycle` builds the original x86 allocator lifecycle runtime test.
 
 `build-memory-probes.cmd ems <new-build-output> <runtime-test-root>` builds
 the three EMS/DOS probes and writes their PIF/configuration files using the

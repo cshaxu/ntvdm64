@@ -46,8 +46,9 @@ interpreter-free end-to-end acceptance have not completed.
 | [P8 memory profiles](../etc/evidence/t484-s3-memory-profiles.md) | Two producers replaced;65 identical EMS/XMS files over9 configurations,3 timestamp-only tools and path/failure/cache checks. |
 | [P9 retired inputs](../etc/evidence/t484-s3-retired-inputs.md) | Six ineffective historical producer/test files removed; native serial and cached full build verified. |
 | [P10 system fixtures](../etc/evidence/t484-s3-system-fixtures.md) | Three producers replaced; five executable instances and27 shared-link regression assertions; obsolete register fixture retired. |
+| [P11 duplicate compilation](../etc/evidence/t484-s3-compile-duplicates.md) | Native suballoc lifecycle test passes; four redundant compile-only generators retired against13 current product objects. |
 
-Each batch passed its cached full host build. P10 checks11 raw host inputs
+Each batch passed its cached full host build. P11 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
@@ -97,6 +98,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P10 records native system fixtures and their bounded delivery under the
+T484 S3 P11 records duplicate compile cleanup and its bounded delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 duplicate compilation](evidence/t484-s3-compile-duplicates.md) records
+native suballoc testing and retirement of redundant historical compile graphs.
+
 [T484 S3 system fixtures](evidence/t484-s3-system-fixtures.md) records five
 native fixture instances, shared-link regression and obsolete register-test retirement.
 
