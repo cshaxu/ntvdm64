@@ -53,6 +53,7 @@ function(fixture name link_mode)
     COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(${name} DEPENDS "${CMAKE_BINARY_DIR}/${name}.exe")
 endfunction()
+include(wow-idle.cmake)
 set(observer_targets)
 foreach(pair IN ITEMS "console-startup-observer|console_startup_observer"
     "wow-exception-observer|wow_exception_observer"

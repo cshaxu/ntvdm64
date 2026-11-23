@@ -1,0 +1,32 @@
+{
+  "pid": 28004,
+  "start": "2026-11-23T20:11:41.8650908+00:00",
+  "end": "2026-11-23T20:12:07.2938478+00:00",
+  "cases": [
+    {
+      "sharedTasks": false,
+      "prebuiltGuests": false,
+      "nativeBuildPassed": true,
+      "guestRuntimeExecuted": false
+    },
+    {
+      "sharedTasks": false,
+      "prebuiltGuests": true,
+      "nativeBuildPassed": true,
+      "guestRuntimeExecuted": false
+    },
+    {
+      "sharedTasks": true,
+      "prebuiltGuests": false,
+      "nativeBuildPassed": true,
+      "guestRuntimeExecuted": false
+    },
+    {
+      "sharedTasks": true,
+      "prebuiltGuests": true,
+      "nativeBuildPassed": true,
+      "guestRuntimeExecuted": false
+    }
+  ],
+  "exit": 0
+}

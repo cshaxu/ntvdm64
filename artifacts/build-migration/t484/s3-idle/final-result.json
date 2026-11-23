@@ -1,0 +1,11 @@
+{
+  "started": "2026-11-23T20:18:15.1100621+00:00",
+  "parsed": [
+    "verify-wow-idle-workers"
+  ],
+  "exit": 0,
+  "pid": 26864,
+  "publishedHashes": 22,
+  "rawHostImages": 11,
+  "finished": "2026-11-23T20:18:37.9125222+00:00"
+}

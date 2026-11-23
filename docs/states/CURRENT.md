@@ -62,7 +62,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P55 graph diagnostic](../etc/evidence/t484-s3-graph-cost.md) | Native reversible projection;229 members,one replacement;counter controls and BuildOnly pass;downstream staging/measurement pending. |
 
-Each batch passed its cached full host build. P55 checks11 raw host inputs
+| [P56 idle witnesses](../etc/evidence/t484-s3-idle.md) | Native hosts and four guest variants;four BuildOnly combinations pass;shared runtime staging remains pending. |
+
+Each batch passed its cached full host build. P56 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

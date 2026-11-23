@@ -1599,3 +1599,5 @@ post-publication targeted checks.
 
 - [T484 S3 graph diagnostic](evidence/t484-s3-graph-cost.md).
 - [T484 S3 P1-P35 delivery index](evidence/t484-s3-early-deliveries.md).
+
+- [T484 S3 idle witness producers](evidence/t484-s3-idle.md).

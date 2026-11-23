@@ -1,32 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "85c404ae826f214f9ed19e75e5a5241e59717dcd",
+  "head": "f966783dba7a5993b57d9a4dcf30eb8f5c9c6621",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-graph-cost.ps1",
+    " M test/integration/verify-wow-idle-workers.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/win16-probes.cmake",
-    " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-graph/",
-    "?? docs/etc/evidence/t484-s3-early-deliveries.md",
-    "?? docs/etc/evidence/t484-s3-graph-cost.md",
-    "?? tools/build/wow32/graph-cost.cmake"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-idle/",
+    "?? docs/etc/evidence/t484-s3-idle.md",
+    "?? tools/build/fixtures/wow-idle.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 64,
-    "unchanged": 178,
+    "changed": 65,
+    "unchanged": 177,
     "removed": 113
   },
   "disposition_counts": {
     "migrated-delivered": 16,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
-    "pending-producer-migration": 45,
+    "pending-producer-migration": 46,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 177
+    "requires-disposition-reconciliation": 176
   },
   "existing_interpreted_candidates_with_command_hits": 202,
   "files": [
@@ -1086,8 +1084,13 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "df4580faf36d023a4f740af2019fdc7a4497a971e045c3d966394e2101faea4e",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f966783dba7a5993b57d9a4dcf30eb8f5c9c6621"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-graph-cost.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -1099,12 +1102,16 @@
       "id": "B0061",
       "file": "test/integration/verify-wow-idle-workers.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f7a6e683a97fb1e72c2e60a3545fa5742568e81ec0fa286a101b4ade83dd0b0c",
+      "state": "changed",
+      "current_sha256": "5fb692ec349c4bcf0673f7e99a9fae118d7c4008ea282994c77135eb645e0d75",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-idle.md",
+        "status": "pending-producer-migration",
+        "reason": "P56 local CL/NASM producers migrated; physical runtime/package staging remains pending"
+      }
     },
     {
       "id": "B0062",
@@ -4907,6 +4914,13 @@
     }
   ],
   "commits": {
+    "f966783dba7a5993b57d9a4dcf30eb8f5c9c6621": {
+      "subject": "T484 S3 P55 migrate graph diagnostic producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-graph-cost.md"
+      ]
+    },
     "85c404ae826f214f9ed19e75e5a5241e59717dcd": {
       "subject": "T484 S3 P54 migrate file cache contract producer",
       "evidence": [
@@ -6061,16 +6075,8 @@
           "text": "[string]$Nasm='nasm.exe',[switch]$SharedTasks,[switch]$LifecycleOnly,"
         },
         {
-          "line": 22,
-          "text": "& $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX \"/Fo$root/host.obj\" \"/Fe$root/IDLEHOST.EXE\" $source *> \"$root/compile.txt\""
-        },
-        {
-          "line": 35,
-          "text": "& $Nasm -f bin @firstDefines -o \"$root/IDLPROBE.EXE\" -l \"$root/first.lst\" $guestSource *> \"$root/first-assemble.txt\""
-        },
-        {
-          "line": 37,
-          "text": "& $Nasm -f bin -DPEER @peerDefines -o \"$root/IDLPEER.EXE\" -l \"$root/peer.lst\" $guestSource *> \"$root/peer-assemble.txt\""
+          "line": 33,
+          "text": "$cache=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
     },

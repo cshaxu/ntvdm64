@@ -1,0 +1,22 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-idle\\baseline\\workers.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-idle-workers.exe",
+    "oldBytes": 147968,
+    "newBytes": 147968,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "5e23719a6f7ea347a00935c7d2656b5177b862cf1a4667b697bac569de8f14e1",
+    "newSha256": "c126f5e6cc2ef862c3777e3f25f18b77a4382bb8d80dfe58907a1b8991daa746"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-idle\\baseline\\tasks.exe",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-idle-tasks.exe",
+    "oldBytes": 124928,
+    "newBytes": 124928,
+    "changedBytes": 2,
+    "kind": "timestamps-only",
+    "oldSha256": "46a9188a2f6e00bf3f63deb07d26088fbdd1209489acc7d3010405500db2e085",
+    "newSha256": "2dfb3da494c732e4725143d1ae17cd3ff0b261568c92eed975f663fc77e616e5"
+  }
+]

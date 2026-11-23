@@ -1,7 +1,8 @@
 param([Parameter(Mandatory)][string]$PackageRoot,[Parameter(Mandatory)][string]$BuildRoot,
  [Parameter(Mandatory)][string]$Observer,[Parameter(Mandatory)][string]$CompilerDriver,
  [string]$Nasm='nasm.exe',[switch]$SharedTasks,[switch]$LifecycleOnly,
- [string]$PrebuiltGuestRoot,[string]$PrebuiltProbeSha256,[string]$PrebuiltPeerSha256)
+ [string]$PrebuiltGuestRoot,[string]$PrebuiltProbeSha256,[string]$PrebuiltPeerSha256,
+ [switch]$BuildOnly)
 # Run from an owned hidden supervisor. One service/package owns both workers.
 $ErrorActionPreference='Stop'
 $LifecycleOnly = $LifecycleOnly.IsPresent
@@ -19,11 +20,20 @@ $saved=@{}
 foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_WOW_WINDOW_TRACE_PATH','MVDM_WOW_DISPATCH_TRACE_PATH')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
  $source=if($SharedTasks){"$PSScriptRoot/../observation/wow_idle_tasks_probe.c"}else{"$PSScriptRoot/../observation/wow_idle_workers_probe.c"}
- & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX "/Fo$root/host.obj" "/Fe$root/IDLEHOST.EXE" $source *> "$root/compile.txt"
- if($LASTEXITCODE){throw 'Native witness compile failed'}
+ $target=if($PrebuiltGuestRoot){'wow-idle-hosts'}else{'wow-idle-probes'}
+ $line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 '+$target+'"'
+ $producer=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/compile.txt" -RedirectStandardError "$root/compile.stderr.txt"
+ try {
+  $null=$producer.Handle
+  @{pid=$producer.Id;start=$producer.StartTime.ToUniversalTime().ToString('o');command=$line;deadlineSeconds=300}|ConvertTo-Json|Set-Content "$root/producer.json"
+  if(!$producer.WaitForExit(300000)){$producer.Kill($true);$producer.WaitForExit();throw 'Idle producer deadline'}
+  $producer.WaitForExit();$producer.ExitCode|Set-Content "$root/producer.exit.txt"
+  if($producer.ExitCode){throw 'Native idle producer failed'}
+ } finally {$producer.Dispose()}
+ $cache="$repo/build/.ninja/fixtures-x86"
+ $hostName=if($SharedTasks){'tasks'}else{'workers'}
+ Copy-Item "$cache/wow-idle-$hostName.exe" "$root/IDLEHOST.EXE"
  $guestSource="$PSScriptRoot/../observation/win16_idle_probe.asm"
- $firstDefines=@(if($SharedTasks){'-DSHARED_WITNESS';'-DTICK_LIMIT=16'})
- $peerDefines=@(if($SharedTasks){'-DSHARED_WITNESS';'-DNO_REGISTER';'-DTICK_LIMIT=4'}else{'-DTICK_LIMIT=12'})
  if($PrebuiltGuestRoot){
   $prebuilt=(Resolve-Path -LiteralPath $PrebuiltGuestRoot).Path
   foreach($item in @(@('IDLPROBE.EXE',$PrebuiltProbeSha256),@('IDLPEER.EXE',$PrebuiltPeerSha256))){
@@ -32,10 +42,15 @@ try {
    Copy-Item -LiteralPath $input -Destination "$root/$($item[0])"
   }
  } else {
-  & $Nasm -f bin @firstDefines -o "$root/IDLPROBE.EXE" -l "$root/first.lst" $guestSource *> "$root/first-assemble.txt"
-  if($LASTEXITCODE){throw 'First NE assembly failed'}
-  & $Nasm -f bin -DPEER @peerDefines -o "$root/IDLPEER.EXE" -l "$root/peer.lst" $guestSource *> "$root/peer-assemble.txt"
-  if($LASTEXITCODE){throw 'Peer NE assembly failed'}
+  $mode=if($SharedTasks){'shared'}else{'separate'}
+  foreach($name in @('IDLPROBE.EXE','IDLPEER.EXE','first.lst','peer.lst')){
+   Copy-Item "$cache/guest-probes/idle/$mode/$name" "$root/$name"
+  }
+ }
+ if($BuildOnly){
+  @{nativeBuildPassed=$true;guestRuntimeExecuted=$false;sharedTasks=[bool]$SharedTasks;prebuiltGuests=[bool]$PrebuiltGuestRoot}|ConvertTo-Json|Set-Content "$root/build-result.json"
+  0|Set-Content "$root/exit.txt"
+  return
  }
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
  $scope=New-IsolatedPackageScope $runtime
