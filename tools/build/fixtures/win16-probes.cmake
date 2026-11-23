@@ -12,4 +12,16 @@ guest_probe(win16 MMTPROB.EXE win16_multimedia_timer_probe.asm)
 guest_probe(win16 MMTPROB-load.EXE win16_multimedia_timer_probe.asm -DLOAD_ONLY)
 guest_probe(win16 MMTPROB-no-timer.EXE win16_multimedia_timer_probe.asm -DNO_TIMER)
 get_property(outputs GLOBAL PROPERTY guest_win16)
+foreach(pair IN ITEMS "PDCANCEL|win16_printdlg_cancel_probe" "PDGPROBE|win16_printdlg_default_probe"
+    "RAWPROBE|win16_raw_spool_probe" "THPROBE|win16_toolhelp_probe")
+  string(REPLACE "|" ";" parts "${pair}")
+  list(GET parts 0 name)
+  list(GET parts 1 stem)
+  set(source "${NTVDM_REPO}/test/observation/${stem}.asm")
+  set(output "${CMAKE_BINARY_DIR}/guest-probes/win16/${name}")
+  add_custom_command(OUTPUT "${output}.EXE" "${output}.lst"
+    COMMAND "${NTVDM_NASM}" -f bin -o "${output}.EXE" -l "${output}.lst" "${source}"
+    DEPENDS "${source}" "${NTVDM_NASM}" VERBATIM)
+  list(APPEND outputs "${output}.EXE" "${output}.lst")
+endforeach()
 add_custom_target(win16-probes DEPENDS ${outputs})

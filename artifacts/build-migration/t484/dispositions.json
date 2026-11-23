@@ -229,15 +229,18 @@
   },
   "test/integration/verify-win16-printdlg-cancel.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Invokes NASM"
+    "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
+    "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
   },
   "test/integration/verify-win16-printdlg-default.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Invokes NASM"
+    "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
+    "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
   },
   "test/integration/verify-win16-raw-spool-profile.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Invokes NASM"
+    "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
+    "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
   },
   "test/integration/verify-win16-shell-hook-probe.ps1": {
     "status": "pending-producer-migration",
@@ -245,7 +248,8 @@
   },
   "test/integration/verify-win16-toolhelp-probe.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Invokes NASM"
+    "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
+    "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
   },
   "test/integration/verify-wow-clipboard-transfer.ps1": {
     "status": "pending-producer-migration",

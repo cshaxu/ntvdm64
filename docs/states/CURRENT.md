@@ -90,7 +90,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P44 Win16 probes](../etc/evidence/t484-s3-win16-probes.md) | Two runners share nine byte-identical native DDEML/timer variants; no-op cache passes; shared staging/helper chain remains open. |
 
-Each batch passed its cached full host build. P44 checks11 raw host inputs
+| [P45 fixed Win16 probes](../etc/evidence/t484-s3-win16-fixed.md) | Four runners share native assembly/listings;all four outputs match and prior nine variants remain unchanged; staging is pending. |
+
+Each batch passed its cached full host build. P45 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

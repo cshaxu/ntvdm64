@@ -1,8 +1,7 @@
 param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$Observer,
-    [Parameter(Mandatory)][string]$BuildRoot,
-    [string]$Nasm = 'nasm.exe'
+    [Parameter(Mandatory)][string]$BuildRoot
 )
 # This is a negative contract witness: no host profile/printer state is changed.
 $ErrorActionPreference = 'Stop'
@@ -16,8 +15,8 @@ $runtime = $null; $scope = $null; $process = $null
 $saved = @{}; foreach ($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')) { $saved[$name] = [Environment]::GetEnvironmentVariable($name) }
 try {
     $source = Join-Path $PSScriptRoot '../observation/win16_raw_spool_probe.asm'
-    & (Get-Command $Nasm -ErrorAction Stop).Source -f bin -o "$root/RAWPROBE.EXE" -l "$root/probe.lst" $source *> "$root/assemble.txt"
-    if ($LASTEXITCODE) { throw 'Independent raw spool probe assembly failed' }
+    . "$PSScriptRoot/Invoke-Win16ProbeBuild.ps1"
+    Invoke-Win16ProbeBuild -OutputRoot $root -Name RAWPROBE
     $runtime = New-PhysicalRuntimeStage (Resolve-Path -LiteralPath $PackageRoot).Path
     $scope = New-IsolatedPackageScope $runtime
     $binary = Get-PackageBinaryRoot $runtime; $tests = Join-Path $runtime 'tests'

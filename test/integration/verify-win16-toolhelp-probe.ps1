@@ -3,7 +3,6 @@ param(
  [Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
  [Parameter(Mandatory)][string]$BuildRoot,
- [string]$Nasm='nasm.exe',
  [string]$ToolHelpImage='O:\winnt\tests\w31p\SYSTEM\TOOLHELP.DLL',
  [switch]$ExpectOriginalUnavailable
 )
@@ -19,10 +18,9 @@ $null=New-Item -ItemType Directory -Path $root
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $runtime=$null;$scope=$null;$process=$null
 try {
- $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
  $probe="$PSScriptRoot/../observation/win16_toolhelp_probe.asm"
- & $assembler -f bin -o "$root/THPROBE.EXE" -l "$root/toolhelp-probe.lst" $probe *> "$root/assemble.txt"
- if($LASTEXITCODE){throw 'Independent ToolHelp probe assembly failed'}
+ . "$PSScriptRoot/Invoke-Win16ProbeBuild.ps1"
+ Invoke-Win16ProbeBuild -OutputRoot $root -Name THPROBE -Listing toolhelp-probe.lst
  $toolhelp=(Resolve-Path -LiteralPath $ToolHelpImage).Path
  $runtime=New-PhysicalRuntimeStage (Resolve-Path -LiteralPath $PackageRoot).Path
  $scope=New-IsolatedPackageScope $runtime

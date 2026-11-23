@@ -1576,3 +1576,5 @@ post-publication targeted checks.
 [T484 S3 serial producer](evidence/t484-s3-serial-probe.md) records native mask-dependent assembly, equivalence and parameter/cache checks.
 
 [T484 S3 Win16 probe production](evidence/t484-s3-win16-probes.md) records shared DDEML/timer native variants and exact assembly equivalence.
+
+[T484 S3 fixed Win16 probes](evidence/t484-s3-win16-fixed.md) records four shared native producers, listing equivalence and previous-variant identity.

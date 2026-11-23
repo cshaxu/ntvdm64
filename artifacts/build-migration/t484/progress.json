@@ -1,22 +1,23 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "626a2aed8aeb9d8eaa34f8403b2bbd61714f6753",
+  "head": "cde4bc13ce1f390f73ed22f074cc2d1607cc5521",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-win16-ddeml-probe.ps1",
-    " M test/integration/verify-win16-multimedia-timer-probe.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-win16-probes/",
-    "?? docs/etc/evidence/t484-s3-win16-probes.md",
-    "?? tools/build/fixtures/win16-probes.cmake"
+    " M test/integration/verify-win16-printdlg-cancel.ps1",
+    " M test/integration/verify-win16-printdlg-default.ps1",
+    " M test/integration/verify-win16-raw-spool-profile.ps1",
+    " M test/integration/verify-win16-toolhelp-probe.ps1",
+    " M tools/build/fixtures/win16-probes.cmake",
+    "?? artifacts/build-migration/t484/s3-win16-fixed/",
+    "?? docs/etc/evidence/t484-s3-win16-fixed.md",
+    "?? test/integration/Invoke-Win16ProbeBuild.ps1"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 46,
-    "unchanged": 196,
+    "changed": 50,
+    "unchanged": 192,
     "removed": 113
   },
   "disposition_counts": {
@@ -27,7 +28,7 @@
     "retained-native-delegate": 2,
     "requires-disposition-reconciliation": 182
   },
-  "existing_interpreted_candidates_with_command_hits": 207,
+  "existing_interpreted_candidates_with_command_hits": 203,
   "files": [
     {
       "id": "B0001",
@@ -758,8 +759,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "8cbf6f51d2f58bf3adc49eb720f67a960871be76bed8c07324bbd7f9fb422458",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "cde4bc13ce1f390f73ed22f074cc2d1607cc5521"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win16-probes.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -801,8 +806,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "6e5c6b1de02458c2002b0d16002b6c017dee926fe93b23ec7fb69e78451881cf",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "cde4bc13ce1f390f73ed22f074cc2d1607cc5521"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win16-probes.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -828,42 +837,45 @@
       "id": "B0048",
       "file": "test/integration/verify-win16-printdlg-cancel.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "384610136b16edd25b23fd6d5f3bf20b4a4d3e5663085b14d1364ca1e963931a",
+      "state": "changed",
+      "current_sha256": "35b2dac4e6d082fca0908bb6800edd3fd2029642220a22549ea8098a9f20e159",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM"
+        "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
+        "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
       }
     },
     {
       "id": "B0049",
       "file": "test/integration/verify-win16-printdlg-default.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "10c30a2819dccf93f90773b440acfa5dc25a0bd48c28707565cd923987626b38",
+      "state": "changed",
+      "current_sha256": "da34d88bf7a8cb24498ac14b53a5f764553d1638ce46baf5a9cf05b4195d7bc5",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM"
+        "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
+        "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
       }
     },
     {
       "id": "B0050",
       "file": "test/integration/verify-win16-raw-spool-profile.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "3010a965224a609956efb5ff56a3109924ceca6cfaad6bfea39eb0608e03a3ff",
+      "state": "changed",
+      "current_sha256": "d831f8d22b39cbcffee58866df7b0be95147b121ba9f6f891698bd629974f942",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM"
+        "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
+        "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
       }
     },
     {
@@ -884,14 +896,15 @@
       "id": "B0052",
       "file": "test/integration/verify-win16-toolhelp-probe.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f44bf3ed6ac80b14bdfe3ac3da69fb3e6442bb605ec9d8d8ae4214a59fba422b",
+      "state": "changed",
+      "current_sha256": "e7295e4ac8c5780b8df0acf743ea0481f30bcb85db9ec1f50e6b122e3a21f990",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM"
+        "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
+        "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
       }
     },
     {
@@ -4798,6 +4811,12 @@
     }
   ],
   "commits": {
+    "cde4bc13ce1f390f73ed22f074cc2d1607cc5521": {
+      "subject": "T484 S3 P44 share native DDEML and timer probe production",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win16-probes.md"
+      ]
+    },
     "626a2aed8aeb9d8eaa34f8403b2bbd61714f6753": {
       "subject": "T484 S3 P43 migrate serial probe assembly to native target",
       "evidence": [
@@ -5698,48 +5717,6 @@
       ]
     },
     {
-      "id": "B0048",
-      "file": "test/integration/verify-win16-printdlg-cancel.ps1",
-      "hits": [
-        {
-          "line": 1,
-          "text": "param([Parameter(Mandatory)][string]$PackageRoot,[Parameter(Mandatory)][string]$Observer,[Parameter(Mandatory)][string]$BuildRoot,[string]$Nasm='nasm.exe')"
-        },
-        {
-          "line": 10,
-          "text": "$source=Join-Path $PSScriptRoot '../observation/win16_printdlg_cancel_probe.asm';$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
-        }
-      ]
-    },
-    {
-      "id": "B0049",
-      "file": "test/integration/verify-win16-printdlg-default.ps1",
-      "hits": [
-        {
-          "line": 1,
-          "text": "param([Parameter(Mandatory)][string]$PackageRoot,[Parameter(Mandatory)][string]$Observer,[Parameter(Mandatory)][string]$BuildRoot,[string]$Nasm='nasm.exe')"
-        },
-        {
-          "line": 10,
-          "text": "$source=Join-Path $PSScriptRoot '../observation/win16_printdlg_default_probe.asm';$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
-        }
-      ]
-    },
-    {
-      "id": "B0050",
-      "file": "test/integration/verify-win16-raw-spool-profile.ps1",
-      "hits": [
-        {
-          "line": 5,
-          "text": "[string]$Nasm = 'nasm.exe'"
-        },
-        {
-          "line": 19,
-          "text": "& (Get-Command $Nasm -ErrorAction Stop).Source -f bin -o \"$root/RAWPROBE.EXE\" -l \"$root/probe.lst\" $source *> \"$root/assemble.txt\""
-        }
-      ]
-    },
-    {
       "id": "B0051",
       "file": "test/integration/verify-win16-shell-hook-probe.ps1",
       "hits": [
@@ -5754,20 +5731,6 @@
         {
           "line": 100,
           "text": "('cl /nologo /LD /O2 \"'+$nativeSource+'\" /Fo\"'+$root+'/caret.obj\" /link user32.lib /OUT:\"'+$root+'/CARHOST.DLL\" /IMPLIB:\"'+$root+'/caret.lib\" /EXPORT:CaretObserve=_CaretObserve@12'),"
-        }
-      ]
-    },
-    {
-      "id": "B0052",
-      "file": "test/integration/verify-win16-toolhelp-probe.ps1",
-      "hits": [
-        {
-          "line": 6,
-          "text": "[string]$Nasm='nasm.exe',"
-        },
-        {
-          "line": 22,
-          "text": "$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
         }
       ]
     },

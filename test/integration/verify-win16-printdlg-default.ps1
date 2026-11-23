@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$PackageRoot,[Parameter(Mandatory)][string]$Observer,[Parameter(Mandatory)][string]$BuildRoot,[string]$Nasm='nasm.exe')
+param([Parameter(Mandatory)][string]$PackageRoot,[Parameter(Mandatory)][string]$Observer,[Parameter(Mandatory)][string]$BuildRoot)
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path -LiteralPath $root)){throw 'Require a fresh build-owned evidence root'}
@@ -7,8 +7,9 @@ $null=New-Item -ItemType Directory -Path $root
 $runtime=$null;$scope=$null;$process=$null;$saved=@{}
 foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try{
- $source=Join-Path $PSScriptRoot '../observation/win16_printdlg_default_probe.asm';$assembler=(Get-Command $Nasm -ErrorAction Stop).Source
- & $assembler -f bin -o "$root/PDGPROBE.EXE" -l "$root/probe.lst" $source *> "$root/assemble.txt";if($LASTEXITCODE){throw 'PrintDlg default probe assembly failed'}
+ $source=Join-Path $PSScriptRoot '../observation/win16_printdlg_default_probe.asm'
+ . "$PSScriptRoot/Invoke-Win16ProbeBuild.ps1"
+ Invoke-Win16ProbeBuild -OutputRoot $root -Name PDGPROBE
  $runtime=New-PhysicalRuntimeStage (Resolve-Path -LiteralPath $PackageRoot).Path;$scope=New-IsolatedPackageScope $runtime;$binary=Get-PackageBinaryRoot $runtime;$tests=Join-Path $runtime 'tests'
  $null=New-Item -ItemType Directory -Path $tests -Force
  Copy-Item "$root/PDGPROBE.EXE" "$tests/PDGPROBE.EXE"

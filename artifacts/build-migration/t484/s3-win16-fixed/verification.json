@@ -1,0 +1,28 @@
+{
+  "cases": [
+    {
+      "sha256": "23028B9EB20FB22F6FB0B5CA63E6CC624589F80E00FBD7B2EE6A4291C1B1D5B6",
+      "bytes": 615,
+      "name": "PDCANCEL"
+    },
+    {
+      "sha256": "1F82AFB1E02925942BBA5476C84AC8D810C755E74FDF6CDCEA7CF74A0B750338",
+      "bytes": 517,
+      "name": "PDGPROBE"
+    },
+    {
+      "sha256": "43E20CBE4F69986391B3186F39BA29FC157E67AE27ACA0D6FA40485ED9300C57",
+      "bytes": 462,
+      "name": "RAWPROBE"
+    },
+    {
+      "sha256": "35D7BFF773AC59AD2E55F67AC476CFF01631CF41BBBCFD504C6736D90EEA599B",
+      "bytes": 1153,
+      "name": "THPROBE"
+    }
+  ],
+  "finished": "2026-11-23T18:55:45.6614332+00:00",
+  "started": "2026-11-23T18:55:21.2943294+00:00",
+  "exit": 0,
+  "pid": 13428
+}

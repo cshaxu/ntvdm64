@@ -1,0 +1,15 @@
+{
+  "publishedHashes": 22,
+  "parsed": [
+    "verify-win16-printdlg-cancel",
+    "verify-win16-printdlg-default",
+    "verify-win16-raw-spool-profile",
+    "verify-win16-toolhelp-probe",
+    "Invoke-Win16ProbeBuild"
+  ],
+  "exit": 0,
+  "pid": 28548,
+  "rawHostImages": 11,
+  "finished": "2026-11-23T18:57:47.8000494+00:00",
+  "started": "2026-11-23T18:57:26.1940760+00:00"
+}
