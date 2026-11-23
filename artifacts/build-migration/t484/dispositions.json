@@ -355,5 +355,10 @@
     "status": "pending-producer-migration",
     "reason": "P63 native witnesses migrated; inspector Add-Type, dynamic path fields and runtime/package staging remain",
     "evidence": "docs/etc/evidence/t484-s3-win31-matrix.md"
+  },
+  "test/lib-win32/crt-compat/verify-crt-compat.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-crt.md",
+    "status": "migrated-delivered",
+    "reason": "P64 native standalone/actual WOW32 CRT object builds; formatting, header isolation and missing/duplicate provider controls pass"
   }
 }

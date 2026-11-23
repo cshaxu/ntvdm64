@@ -78,7 +78,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P63 Win31 matrix producers](../etc/evidence/t484-s3-win31-matrix.md) | Two byte-identical witnesses; override, architecture and cache checks pass; inspector, dynamic fields and staging remain pending. |
 
-Implementation batches through P63 passed their cached full host build. P63 checks11 raw host inputs
+| [P64 CRT producer](../etc/evidence/t484-s3-crt.md) | Native standalone/production object checks, negative links and cache pass; B0072 producer chain complete. |
+
+Implementation batches through P64 passed their cached full host build. P64 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

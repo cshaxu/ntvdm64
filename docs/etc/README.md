@@ -1615,3 +1615,5 @@ post-publication targeted checks.
 - [T484 S3 SOL/WRITE producers](evidence/t484-s3-app-probes.md).
 
 - [T484 S3 Win31 matrix producers](evidence/t484-s3-win31-matrix.md).
+
+- [T484 S3 CRT verification producer](evidence/t484-s3-crt.md).

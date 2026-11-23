@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
+if not "%~2"=="crt-contracts" if not "%~2"=="crt-missing" if not "%~2"=="crt-duplicate" if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
 if "%~2"=="win16-ole-peer" goto ole_arguments
 if "%~2"=="win16-print" goto print_arguments
@@ -39,6 +39,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (win31-matrix win31-dosonly) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (win31-matrix win31-dosonly) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" set "SELECTED=1"
@@ -155,6 +157,7 @@ for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%
 if "%TARGET%"=="oem-tests" goto worker
 if "%TARGET%"=="wow-callback-cost" goto wowcallback
 if "%TARGET%"=="wow-graph-cost" goto wowcallback
+for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" goto wowcallback
 if "%TARGET%"=="pic-bios-contracts" goto worker
 if "%TARGET%"=="command-keyboard-shadow" goto worker
 if "%TARGET%"=="native-input-contracts" goto inputtests

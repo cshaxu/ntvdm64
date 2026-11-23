@@ -1,0 +1,6 @@
+{
+  "pid": 7528,
+  "command": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-crt\\product-build.ps1\"",
+  "host": "C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1119-907-0_26.1119.907.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+  "start": "2026-11-23T21:13:34.8961538Z"
+}
