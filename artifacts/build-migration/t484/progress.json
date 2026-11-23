@@ -1,23 +1,33 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "c2d588bc8c1d3ab8d2c083c38e037aa7603c4f1d",
+  "head": "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/ntvdm64-386/verify-win31-identity.ps1",
-    " M test/integration/ntvdm64-386/verify-win95-identity.ps1",
+    " M test/integration/ntvdm64-386/editor-actions.inc",
+    " M test/integration/ntvdm64-386/editor-data.inc",
+    " M test/integration/ntvdm64-386/editor-events.inc",
+    " M test/integration/ntvdm64-386/editor-routines.inc",
+    " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
+    " M test/observation/win31_startup_contract.asm",
     " M tools/README.md",
-    "?? artifacts/build-migration/t484/s3-vm-identity/",
-    "?? docs/etc/evidence/t484-s3-vm-identity.md",
-    "?? test/integration/ntvdm64-386/Invoke-VmIdentityBuild.ps1",
-    "?? tools/build-vm-identity.cmd",
-    "?? tools/build/vm-identity/"
+    " M tools/build/win31-editor/CMakeLists.txt",
+    " M tools/build/win31-editor/config.inc.in",
+    "?? artifacts/build-migration/t484/s3-win95-editor/",
+    "?? docs/etc/evidence/t484-s3-win95-editor.md",
+    "?? test/integration/ntvdm64-386/editor-blocking-actions.inc",
+    "?? test/integration/ntvdm64-386/editor-production-key.inc",
+    "?? test/integration/ntvdm64-386/editor-production-mouse.inc",
+    "?? test/integration/ntvdm64-386/editor-text-child.inc",
+    "?? test/integration/ntvdm64-386/editor-welcome.inc",
+    "?? test/integration/ntvdm64-386/editor-win95-actions.inc",
+    "?? tools/build-win95-editor.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 38,
-    "unchanged": 204,
+    "changed": 39,
+    "unchanged": 203,
     "removed": 113
   },
   "disposition_counts": {
@@ -441,8 +451,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "ba079390ae0518fc1e36c3f143cc10fdc7cd801d5237a4d73eb2d2708e675a31",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-vm-identity.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -454,14 +468,15 @@
       "id": "B0025",
       "file": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "e119e2a6caaa09eb89a894021b102280ff5af45e2f3144f95a236f4021746e04",
+      "state": "changed",
+      "current_sha256": "8a5759eb65225f0adc00b934e232473a478899cae8b178dd64e7a4b850865b8b",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "NASM builds generated controller.asm"
+        "reason": "P39 replaces assembly string rewriting and direct NASM with shared CMD/native includes;48 byte-identical variants and Win31 regression pass. Per-installation binary-field filling and transitive runtime/staging production remain pending.",
+        "evidence": "docs/etc/evidence/t484-s3-win95-editor.md"
       }
     },
     {
@@ -470,8 +485,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "ff98983ba43d9679ff636ea2e8cf3e4584aa557c882a415c82a840e27c1b2a55",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-vm-identity.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -4756,6 +4775,12 @@
     }
   ],
   "commits": {
+    "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd": {
+      "subject": "T484 S3 P38 unify Win31 and Win95 identity probe assembly",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-vm-identity.md"
+      ]
+    },
     "c2d588bc8c1d3ab8d2c083c38e037aa7603c4f1d": {
       "subject": "T484 S3 P37 migrate Win31 editor controller to native assembly composition",
       "evidence": [
@@ -5326,15 +5351,11 @@
       "file": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
       "hits": [
         {
-          "line": 330,
-          "text": "& nasm -f bin \"$task/controller.asm\" -o \"$task/controller.exe\""
-        },
-        {
-          "line": 340,
+          "line": 123,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 342,
+          "line": 125,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]

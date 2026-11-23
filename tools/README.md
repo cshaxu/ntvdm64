@@ -27,6 +27,12 @@ or recompilation of original Microsoft guests; apply the
 
 ## Engineering tools
 
+`build-win95-editor.cmd output destination features [welcome-title-hex]`
+uses the same native editor-controller graph as Win31. Features are a quoted
+semicolon-separated list selected by the integration runner; the optional
+welcome title is1-63 nonzero guest ANSI bytes in hex. Generated code retains
+the existing input, geometry and blocking behaviors. Outputs stay below build/.
+
 `build-vm-identity.cmd output dos|retirement|reuse|controller [defines]`
 assembles the shared Win31/Win95 identity witnesses. Defines are a quoted,
 semicolon-separated list of the existing NASM `-DNAME=value` options. Output

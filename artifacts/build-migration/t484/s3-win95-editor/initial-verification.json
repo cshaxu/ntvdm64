@@ -1,0 +1,16 @@
+{
+  "end": "2026-11-23T18:14:45.7075856+00:00",
+  "exit": 1,
+  "pid": 4608,
+  "failure": "Native build failed 14",
+  "start": "2026-11-23T18:14:44.1780095+00:00",
+  "cases": [
+    {
+      "sha256": "895A149B58FD3F6E90F4A675397C9DED1D17ABA63BD6EF979025C0620EF6C6F1",
+      "welcome": "",
+      "identical": true,
+      "features": "",
+      "case": 0
+    }
+  ]
+}

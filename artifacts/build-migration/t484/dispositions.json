@@ -173,7 +173,8 @@
   },
   "test/integration/ntvdm64-386/verify-win95-editors.ps1": {
     "status": "pending-producer-migration",
-    "reason": "NASM builds generated controller.asm"
+    "reason": "P39 replaces assembly string rewriting and direct NASM with shared CMD/native includes;48 byte-identical variants and Win31 regression pass. Per-installation binary-field filling and transitive runtime/staging production remain pending.",
+    "evidence": "docs/etc/evidence/t484-s3-win95-editor.md"
   },
   "test/integration/ntvdm64-386/verify-win95-identity.ps1": {
     "status": "pending-producer-migration",

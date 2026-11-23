@@ -6,7 +6,11 @@ mov word [which-data],title_a-data
 call target_prompt
 call alt_file
 %if MOUSE_MENU
+%if EDITOR_GUEST_ONLY
+mov word [mouse_half_row-data],19
+%else
 mov word [mouse_half_row-data],15 ; native EDIT Exit: row 7
+%endif
 call mouse_cell
 %else
 mov si,events_esc-data
@@ -21,7 +25,11 @@ mov bx,0x1d
 call inject_key
 %endif
 mov dword [wanted_count-data],%1
+%if EDITOR_GUEST_INPUT
+call production_wait
+%else
 call wait_complete
+%endif
 mov si,events_exit-data
 call type_events
 call wait_gone
@@ -39,7 +47,11 @@ mov si,events_x-data
 call type_events
 %endif
 mov dword [wanted_count-data],%1
+%if EDITOR_GUEST_INPUT
+call production_wait
+%else
 call wait_complete
+%endif
 mov si,events_exit-data
 call type_events
 call wait_gone
@@ -89,18 +101,30 @@ mov si,events_esc-data
 call type_events
 %endif
 %if DOSONLY
+%if EDITOR_GUEST_INPUT
+call production_wait
+%else
 call wait_readers
+%endif
 mov word [which-data],title_a-data
 call target_prompt
 mov si,events_a-data
 call type_events
 mov dword [wanted_count-data],3
+%if EDITOR_GUEST_INPUT
+call production_wait
+%else
 call wait_complete
+%endif
 mov word [which-data],title_b-data
 call target_prompt
 mov si,events_b-data
 call type_events
+%if EDITOR_GUEST_INPUT
+call production_wait
+%else
 call wait_editors
+%endif
 mov si,events_esc-data
 call type_events
 call alt_file
@@ -111,7 +135,11 @@ mov si,events_x-data
 call type_events
 %endif
 mov dword [wanted_count-data],4
+%if EDITOR_GUEST_INPUT
+call production_wait
+%else
 call wait_complete
+%endif
 mov si,events_exit-data
 call type_events
 call wait_gone
@@ -121,7 +149,11 @@ mov si,events_exit-data
 call type_events
 call wait_gone
 %else
+%if EDITOR_GUEST_INPUT
+call production_wait
+%else
 call wait_readers
+%endif
 mov word [which-data],title_a-data
 call target_prompt
 mov si,events_a-data
@@ -132,12 +164,30 @@ call target_prompt
 mov si,events_b-data
 call type_events
 %endif
+%if EDITOR_GUEST_INPUT
+call production_wait
+%else
 call wait_editors
+%endif
 %if SAVE_WITNESS
 mov word [which-data],title_a-data
 call target_prompt
+%if EDITOR_GUEST_ONLY
+mov si,events_esc-data
+call type_events
+%endif
+%if EDITOR_FULLSCREEN
+mov ax,0x8000
+call mouse_input
+call target_prompt
+%endif
 mov si,events_text_a-data
 call type_events
+%if EDITOR_GUEST_ONLY
+call alt_file
+mov word [mouse_half_row-data],9
+call mouse_cell
+%else
 mov ax,0x111
 mov bx,0x1d
 call inject_key
@@ -146,15 +196,34 @@ call type_events
 mov ax,0x211
 mov bx,0x1d
 call inject_key
+%endif
 mov word [which-data],title_b-data
 call target_prompt
 mov si,events_esc-data
 call type_events
+%if EDITOR_GUEST_INPUT
+%if EDITOR_FULLSCREEN
+mov ax,0x8000
+call mouse_input
+call target_prompt
+%endif
+mov si,events_text_b-data
+call type_events
+call mouse_file
+mov word [mouse_half_row-data],9
+call mouse_cell
+%else
+%if EDITOR_FULLSCREEN
+mov ax,0x8000
+call mouse_input
+call target_prompt
+%endif
 mov si,events_text_b-data
 call type_events
 call alt_file
 mov si,events_s-data
 call type_events
+%endif
 %endif
 %if FIRST_DOS
 close_dos 1

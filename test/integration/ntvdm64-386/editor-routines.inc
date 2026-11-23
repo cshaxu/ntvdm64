@@ -1,4 +1,7 @@
 target_prompt:
+%if EDITOR_DISMISS
+call dismiss_welcome
+%endif
 api 1,29
 push word 0
 push word 0
@@ -16,6 +19,9 @@ push word [active-data]
 api 2,59
 .wait_active:
 call settle
+%if EDITOR_DISMISS
+call dismiss_welcome
+%endif
 api 2,60                        ; do not claim delivery to an inactive prompt
 cmp ax,[active-data]
 jne .wait_active
@@ -93,6 +99,9 @@ call settle
 jmp type_events
 .done:
 ret
+%if EDITOR_GUEST_INPUT
+%include W31_EDITOR_KEY
+%else
 inject_key:
 pushad
 push ds
@@ -120,6 +129,7 @@ pop es
 pop ds
 popad
 ret
+%endif
 wait_complete:
 api 1,29
 push ds
@@ -258,6 +268,9 @@ jmp mouse_cell
 mouse_exit:
 mov word [mouse_half_row-data],19 ; DOS EDIT Exit is row 9, center of the cell
 mouse_cell:
+%if EDITOR_DISMISS
+call dismiss_welcome
+%endif
 pushad
 push ds
 push es
@@ -293,9 +306,16 @@ jnc .reply_ready
 mov [vmd_query_error-data],ax
 .reply_ready:
 pop es
+%if EDITOR_CHILD_GEOMETRY
+call mouse_find_text
+push word [mouse_hwnd-data]
+push ds
+push word mouse_rect-data
+%else
 push word [active-data]
 push ds
 push word mouse_rect-data
+%endif
 api 2,33                        ; original guest GetClientRect
 push word [active-data]
 push word 0
@@ -316,9 +336,15 @@ mul word [mouse_half_row-data]
 mov bx,50
 div bx
 mov [mouse_point-data+2],ax
+%if EDITOR_CHILD_GEOMETRY
+push word [mouse_hwnd-data]
+push ds
+push word mouse_point-data
+%else
 push word [active-data]
 push ds
 push word mouse_point-data
+%endif
 api 2,28                        ; ClientToScreen
 push ds
 push word mouse_actual-data
@@ -405,6 +431,12 @@ pop es
 pop ds
 popad
 ret
+%if EDITOR_FRONTEND
+%include W31_EDITOR_FRONTEND
+%else
+%if EDITOR_GUEST_INPUT
+%include W31_EDITOR_MOUSE
+%else
 mouse_input:
 pushad
 push ds
@@ -434,3 +466,11 @@ pop es
 pop ds
 popad
 ret
+%endif
+%endif
+%if EDITOR_DISMISS
+%include W31_EDITOR_WELCOME
+%endif
+%if EDITOR_CHILD_GEOMETRY
+%include W31_EDITOR_GEOMETRY
+%endif

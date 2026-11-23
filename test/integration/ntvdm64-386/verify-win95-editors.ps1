@@ -92,243 +92,26 @@ foreach($id in 'A','B'){
 $ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
 $s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
 [IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
-$asm="%define MOUSE_MENU $([int][bool]($MouseMenu -or $GuestUserInput))`n%define DOSONLY 0`n%define SAVE_WITNESS $([int][bool]$SaveWitness)`n%define FIRST_DOS 0`n%define FIRST_DOS_BEFORE_SECOND 0`n"+(Get-Content "$repo/test/observation/win31_startup_contract.asm" -Raw)
-$actions=Get-Content "$repo/test/integration/ntvdm64-386/editor-actions.inc" -Raw
-$routines=Get-Content "$repo/test/integration/ntvdm64-386/editor-routines.inc" -Raw
-if($GuestUserInput){
- $actions=$actions.Replace('call wait_readers','call production_wait').Replace('call wait_editors','call production_wait').Replace('call wait_complete','call production_wait')
- $saveSequence="mov si,events_text_b-data`ncall type_events`ncall alt_file`nmov si,events_s-data`ncall type_events"
- if(!$actions.Contains($saveSequence)){throw 'DOS save sequence changed'}
- $actions=$actions.Replace($saveSequence,"mov si,events_text_b-data`ncall type_events`ncall mouse_file`nmov word [mouse_half_row-data],9`ncall mouse_cell")
- $inject=@'
-inject_key:
-pushad
-mov cx,ax
-and ax,0xff
-cmp ch,2
-jne .make
-or ah,0x80
-.make:
-xor si,si
-xor di,di
-api 2,289                       ; USER keybd_event in focused guest VM
-popad
-ret
-production_wait:
-push cx
-mov cx,20
-.again:
-call settle
-loop .again
-pop cx
-ret
-wait_complete:
-'@
- $routines=[regex]::Replace($routines,'(?s)inject_key:\s*.*?wait_complete:',[System.Text.RegularExpressions.MatchEvaluator]{param($m) $inject},1)
- $mouse=@'
-mouse_input:
-pushad
-mov dx,ax
-and dx,1
-mov [production_pending_button-data],dx
-xor bx,bx
-xor cx,cx
-xor ax,ax
-cmp word [mouse_delta-data],0
-jnz .move
-cmp word [mouse_delta-data+2],0
-jz .buttons
-.move:
-movzx eax,word [mouse_point-data]
-imul eax,eax,65535
-movzx edi,word [mouse_extent-data]
-dec edi
-jz fatal
-xor edx,edx
-div edi
-mov bx,ax
-movzx eax,word [mouse_point-data+2]
-imul eax,eax,65535
-movzx edi,word [mouse_extent-data+2]
-dec edi
-jz fatal
-xor edx,edx
-div edi
-mov cx,ax
-mov ax,0x8001                  ; absolute guest desktop coordinates
-mov dx,[production_pending_button-data]
-.buttons:
-cmp dx,[production_buttons-data]
-je .dispatch
-mov [production_buttons-data],dx
-test dx,dx
-jz .up
-or ax,2
-jmp .dispatch
-.up:
-or ax,4
-.dispatch:
-test ax,ax
-jz .done
-mov dx,2
-xor si,si
-xor di,di
-api 2,299                       ; guest USER mouse_event
-.done:
-popad
-ret
-'@
- $routines=[regex]::Replace($routines,'(?s)mouse_input:\s*.*\z',[System.Text.RegularExpressions.MatchEvaluator]{param($m) $mouse})
-}
-if($DosOnly){
- # The common action template exercises two working editors. For a guest-only
- # profile both are DOS EDIT; native rejection is a separate contract witness.
- $actions=$actions.Replace('mov word [mouse_half_row-data],15','mov word [mouse_half_row-data],19')
- $actions=$actions.Replace("mov si,events_text_a-data","mov si,events_esc-data`ncall type_events`nmov si,events_text_a-data")
- $saveNative="mov ax,0x111`nmov bx,0x1d`ncall inject_key`nmov si,events_s-data`ncall type_events`nmov ax,0x211`nmov bx,0x1d`ncall inject_key"
- if(!$actions.Contains($saveNative)){throw 'Native save action changed'}
- $actions=$actions.Replace($saveNative,"call alt_file`nmov word [mouse_half_row-data],9`ncall mouse_cell")
-}
-if($FullscreenTransitions){
- foreach($marker in 'mov si,events_text_a-data','mov si,events_text_b-data'){
-  $actions=$actions.Replace($marker,"mov ax,0x8000`ncall mouse_input`ncall target_prompt`n"+$marker)
- }
-}
-if($blockingEditor){
- $actions=@'
-mov word [which-data],title_a-data
-call target_prompt
-call production_wait
-call target_prompt
-mov si,events_a-data
-call type_events
-mov ax,0x2000
-call mouse_input
-call target_prompt
-mov si,events_exit-data
-call type_events
-call wait_gone
-mov word [which-data],title_b-data
-call target_prompt
-call production_wait
-call target_prompt
-mov si,events_b-data
-call type_events
-call production_wait
-call target_prompt
-mov ax,0x2001
-call mouse_input
-call target_prompt
-mov si,events_exit-data
-call type_events
-call wait_gone
-'@
- if($BlockingDosFirst){
-  $split=$actions.IndexOf('mov word [which-data],title_b-data')
-  if($split -lt 0){throw 'Missing DOS editor action block'}
-  $actions=$actions.Substring($split)+"`n"+$actions.Substring(0,$split)
- }
-}
-$asm=$asm.Replace('push word 0                      ; DWORD reserved',$actions+"`n"+'push word 0                      ; DWORD reserved')
-if($routines -notmatch '(?s)api 2,59\s+\.wait_active:\s+call settle\s+api 2,60\s+[^\r\n]*[\r\n]+cmp ax,\[active-data\]\s+jne \.wait_active'){
- throw 'Shared editor routine must wait for the selected prompt to become active'
-}
-if($DismissWelcomeTitleHex){
- $routines=$routines.Replace("target_prompt:`n","target_prompt:`ncall dismiss_welcome`n")
- $routines=$routines.Replace(".wait_active:`ncall settle`n", ".wait_active:`ncall settle`ncall dismiss_welcome`n")
- $routines=$routines.Replace("mouse_cell:`n","mouse_cell:`ncall dismiss_welcome`n")
- $routines+=@'
-
-; Close only the explicitly named guest welcome window in this test copy.
-dismiss_welcome:
-pushad
-push word 0
-push word 0
-push ds
-push word welcome_title-data
-api 2,50                         ; FindWindow by exact title
-or ax,ax
-jz .done
-push ax
-push word 0x10                  ; WM_CLOSE
-push word 0
-push word 0
-push word 0
-api 2,110                       ; PostMessage
-call settle
-.done:
-popad
-ret
-'@
-}
-if(($MouseMenu -or $GuestUserInput) -and !$Windows31){
- $rect="push word [active-data]`npush ds`npush word mouse_rect-data"
- $point="push word [active-data]`npush ds`npush word mouse_point-data"
- if(!$routines.Contains($rect) -or !$routines.Contains($point)){throw 'Mouse geometry insertion point missing'}
- $routines=$routines.Replace($rect,"call mouse_find_text`npush word [mouse_hwnd-data]`npush ds`npush word mouse_rect-data")
- $routines=$routines.Replace($point,"push word [mouse_hwnd-data]`npush ds`npush word mouse_point-data")
- $routines+=@'
-
-; Win95 puts a toolbar in the DOS window's parent client area. Locate the
-; actual text child rather than assuming the Win3.1 parent geometry.
-mouse_find_text:
-push word [active-data]
-push word 5                       ; GW_CHILD
-api 2,262
-.next:
-test ax,ax
-jz fatal
-mov [mouse_hwnd-data],ax
-push ax
-push ds
-push word mouse_class-data
-push word 64
-api 2,58                        ; GetClassName
-cmp dword [mouse_class-data],0x47797474 ; ttyG
-jne .other
-cmp word [mouse_class-data+4],0x6172   ; ra
-jne .other
-cmp word [mouse_class-data+6],0x0062   ; b and terminator
-je .found
-.other:
-push word [mouse_hwnd-data]
-push word 2                       ; GW_HWNDNEXT
-api 2,262
-jmp .next
-.found:
-ret
-'@
-}
-if($FrontendMouseProbeRoot){
- if($FrontendKeyboard){
-  $routines=[regex]::Replace($routines,'(?s)inject_key:.*?production_wait:',"inject_key:`njmp frontend_key`nproduction_wait:")
- }
- $mouseRequest=Get-Content "$PSScriptRoot/frontend-mouse-request.inc" -Raw
- # Replace only the existing mouse_input body; later geometry helpers remain.
- $routines=[regex]::Replace($routines,'(?s)mouse_input:.*?(?=\r?\n; Close only|\r?\n; Win95 puts|\z)',[System.Text.RegularExpressions.MatchEvaluator]{param($m) $mouseRequest})
- $asm=$asm.Replace('data_end:',"frontend_request: times 4 dw 0`nfrontend_ack: dw 0`nfrontend_request_name: db '$dest\PATCH\MREQ.BIN',0`nfrontend_ack_name: db '$dest\PATCH\MACK.BIN',0`ndata_end:")
-}
-$asm=$asm.Replace('code_end:',$routines+"`ncode_end:")
-$asm=$asm.Replace('data_end:',"mouse_half_row: dw 0`nmouse_rect: times 4 dw 0`nmouse_point: times 2 dw 0`nmouse_actual: times 2 dw 0`nvmd_api: dd 0`nvmd_version: dw 0`nvmd_reply: times 50 db 0`nvmd_query_error: dw 0`nmouse_scroll: times 2 dw 0`nmouse_delta: times 2 dw 0`nmouse_extent: times 2 dw 0`nmouse_receipt_name: db '$dest\PATCH\MOUSE'`nmouse_receipt_digit: db '0'`ndb '.BIN',0`ntimer_id: dw 0`ntimer_msg: times 18 db 0`ncompleted_count: dd 0`nwanted_count: dd 0`nread_count: dw 0`neditors_name: db '$dest\PATCH\EDITORS.BIN',0`nreaders_name: db '$dest\PATCH\READERS.BIN',0`ncompletion_name: db '$dest\PATCH\DONE.BIN',0`ninput_api: dd 0`nstamp: dw 0`nactive: dw 0`nwhich: dw 0`ntitle_a: db 'Prompt probe A',0`ntitle_b: db 'Prompt probe B',0`n"+(Get-Content "$repo/test/integration/ntvdm64-386/editor-events.inc" -Raw)+"`ndata_end:")
-if($DosOnly){
- $dosEvents=[regex]::Match($asm,'(?m)^events_b:.*$').Value.Replace('events_b:','events_a:').Replace('SAVE_ARG_B','SAVE_ARG_A')
- if(!$dosEvents){throw 'Missing DOS editor event sequence'}
- $asm=[regex]::Replace($asm,'(?m)^events_a:.*$',[System.Text.RegularExpressions.MatchEvaluator]{param($m) $dosEvents})
-}
-if($blockingEditor){
- # Native shell-out freezes the guest controller; DOS reentry does not.
- # Keep DOS Enter in the guest sequence and hand off after guest progress.
- $asm=$asm.Replace('SAVE_ARG_A 0x1c0d,0','SAVE_ARG_A 0')
-}
-if($GuestUserInput){$asm=$asm.Replace('data_end:',"production_buttons: dw 0`nproduction_pending_button: dw 0`ndata_end:")}
-if($MouseMenu -or $GuestUserInput){$asm=$asm.Replace('data_end:',"mouse_hwnd: dw 0`nmouse_class: times 64 db 0`ndata_end:")}
-if($DismissWelcomeTitleHex){
- $titleBytes=@(for($i=0;$i -lt $DismissWelcomeTitleHex.Length;$i+=2){'0x'+$DismissWelcomeTitleHex.Substring($i,2)}) -join ','
- $asm=$asm.Replace('data_end:',"welcome_title: db $titleBytes,0`ndata_end:")
-}
-[IO.File]::WriteAllText("$task/controller.asm",$asm,[Text.UTF8Encoding]::new($false))
-& nasm -f bin "$task/controller.asm" -o "$task/controller.exe"
-if($LASTEXITCODE){throw 'Controller assembly failed'}
+$features=@()
+if($MouseMenu){$features+='MOUSE_MENU'}
+if($SaveWitness){$features+='SAVE_WITNESS'}
+if($GuestUserInput){$features+='GUEST_INPUT'}
+if($DosOnly){$features+='GUEST_ONLY'}
+if($FullscreenTransitions){$features+='FULLSCREEN'}
+if($blockingEditor){$features+='BLOCKING'}
+if($BlockingDosFirst){$features+='DOS_FIRST'}
+if($FrontendMouseProbeRoot){$features+='FRONTEND'}
+if($FrontendKeyboard){$features+='FRONTEND_KEYS'}
+if(($MouseMenu -or $GuestUserInput) -and !$Windows31){$features+='CHILD_GEOMETRY'}
+$buildLine='/d /s /c ""'+$repo+'/tools/build-win95-editor.cmd" "'+$task+'/controller.exe" "'+$dest+'" "'+($features -join ';')+'" "'+$DismissWelcomeTitleHex+'""'
+$producer=Start-Process $env:ComSpec -ArgumentList $buildLine -WindowStyle Hidden -PassThru -RedirectStandardOutput "$task/controller-build.stdout.txt" -RedirectStandardError "$task/controller-build.stderr.txt"
+$null=$producer.Handle
+@{pid=$producer.Id;start=$producer.StartTime.ToUniversalTime().ToString('o');command=$buildLine}|ConvertTo-Json|Set-Content "$task/controller-build.process.json"
+try {
+ if(!$producer.WaitForExit(300000)){taskkill.exe /PID $producer.Id /T /F;throw 'Controller build deadline'}
+ $producer.WaitForExit();$producer.ExitCode|Set-Content "$task/controller-build.exit.txt"
+ if($producer.ExitCode){throw 'Controller build failed'}
+}finally{$producer.Dispose()}
 
 $bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
 foreach($field in @(@('@W31_BOOT_PATH@',"$dest\PATCH\BOOT.BIN"),@('@W31_READY_PATH@',"$dest\PATCH\READY.BIN"))){

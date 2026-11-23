@@ -1,3 +1,33 @@
+%ifndef EDITOR_WINDOWS95
+%define EDITOR_WINDOWS95 0
+%endif
+%ifndef EDITOR_GUEST_INPUT
+%define EDITOR_GUEST_INPUT 0
+%endif
+%ifndef EDITOR_GUEST_ONLY
+%define EDITOR_GUEST_ONLY 0
+%endif
+%ifndef EDITOR_FULLSCREEN
+%define EDITOR_FULLSCREEN 0
+%endif
+%ifndef EDITOR_BLOCKING
+%define EDITOR_BLOCKING 0
+%endif
+%ifndef EDITOR_DOS_FIRST
+%define EDITOR_DOS_FIRST 0
+%endif
+%ifndef EDITOR_FRONTEND
+%define EDITOR_FRONTEND 0
+%endif
+%ifndef EDITOR_FRONTEND_KEYS
+%define EDITOR_FRONTEND_KEYS 0
+%endif
+%ifndef EDITOR_DISMISS
+%define EDITOR_DISMISS 0
+%endif
+%ifndef EDITOR_CHILD_GEOMETRY
+%define EDITOR_CHILD_GEOMETRY 0
+%endif
 ; Independent Win16 integration witness; no host input or desktop automation.
 ; W31BOOT.BIN proves the Win16 probe started; W31READY.BIN records a live
 ; Program Manager HWND and GetWinFlags. ExitWindows requests guest shutdown.

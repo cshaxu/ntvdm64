@@ -1,0 +1,345 @@
+{
+  "exit": 0,
+  "pid": 6628,
+  "cases": [
+    {
+      "sha256": "895A149B58FD3F6E90F4A675397C9DED1D17ABA63BD6EF979025C0620EF6C6F1",
+      "identical": true,
+      "case": 0,
+      "welcome": "",
+      "features": ""
+    },
+    {
+      "sha256": "CAE132A56AE1D1F4C5397755EA168312F59311EA86108CB0F807D112B44268F6",
+      "identical": true,
+      "case": 1,
+      "welcome": "57656c636f6d65",
+      "features": ""
+    },
+    {
+      "sha256": "895A149B58FD3F6E90F4A675397C9DED1D17ABA63BD6EF979025C0620EF6C6F1",
+      "identical": true,
+      "case": 2,
+      "welcome": "",
+      "features": ""
+    },
+    {
+      "sha256": "CAE132A56AE1D1F4C5397755EA168312F59311EA86108CB0F807D112B44268F6",
+      "identical": true,
+      "case": 3,
+      "welcome": "57656c636f6d65",
+      "features": ""
+    },
+    {
+      "sha256": "431FAA09EC047773DB3A5E1CC255FABF2284388222D929D321275FDDA414C76B",
+      "identical": true,
+      "case": 4,
+      "welcome": "",
+      "features": "MOUSE_MENU;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "3361C63B51D09C45BBAF19FD5BC2D68FEAC13ED730445F00A2A4C78E3D501752",
+      "identical": true,
+      "case": 5,
+      "welcome": "57656c636f6d65",
+      "features": "MOUSE_MENU;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "F60112E571CBC07E312F84BB834AD43205512E57A015A351A540B34368E16920",
+      "identical": true,
+      "case": 6,
+      "welcome": "",
+      "features": "MOUSE_MENU"
+    },
+    {
+      "sha256": "91D4456377CCBA673BD774CB6C50769370EAC5B14E0007B39BE08570BD92E39D",
+      "identical": true,
+      "case": 7,
+      "welcome": "57656c636f6d65",
+      "features": "MOUSE_MENU"
+    },
+    {
+      "sha256": "C4A8E27B819C90BA4D14C13E08768DB7BBB142AB9B6711F41D0FC40D41AE5093",
+      "identical": true,
+      "case": 8,
+      "welcome": "",
+      "features": "SAVE_WITNESS"
+    },
+    {
+      "sha256": "413F4D479C1EDCD479D220AB1B82162573B50F5D5327EA79238F190B3F6F9CEB",
+      "identical": true,
+      "case": 9,
+      "welcome": "57656c636f6d65",
+      "features": "SAVE_WITNESS"
+    },
+    {
+      "sha256": "C4A8E27B819C90BA4D14C13E08768DB7BBB142AB9B6711F41D0FC40D41AE5093",
+      "identical": true,
+      "case": 10,
+      "welcome": "",
+      "features": "SAVE_WITNESS"
+    },
+    {
+      "sha256": "413F4D479C1EDCD479D220AB1B82162573B50F5D5327EA79238F190B3F6F9CEB",
+      "identical": true,
+      "case": 11,
+      "welcome": "57656c636f6d65",
+      "features": "SAVE_WITNESS"
+    },
+    {
+      "sha256": "51C2558A2B77B95D31A67950907FDA9C577868F346F44E2194E0BB1E9695B4DE",
+      "identical": true,
+      "case": 12,
+      "welcome": "",
+      "features": "MOUSE_MENU;SAVE_WITNESS;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "ED93D3B240415C9FAE225307847444164858C7C91E869D3F5C674D865F30DB02",
+      "identical": true,
+      "case": 13,
+      "welcome": "57656c636f6d65",
+      "features": "MOUSE_MENU;SAVE_WITNESS;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "54D63BDEE59906EAA844B3A8F3FBE8CC774587F04A517F00E2F63183F237D0E1",
+      "identical": true,
+      "case": 14,
+      "welcome": "",
+      "features": "MOUSE_MENU;SAVE_WITNESS"
+    },
+    {
+      "sha256": "109104989852C80BDA2B56CD9354F8A78EB7059CF4813B926D409E6C084CFDD0",
+      "identical": true,
+      "case": 15,
+      "welcome": "57656c636f6d65",
+      "features": "MOUSE_MENU;SAVE_WITNESS"
+    },
+    {
+      "sha256": "8313AD598389D72DAE10B09A3DD82027A0248138B1E5315B30BA429AAF809318",
+      "identical": true,
+      "case": 16,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "6C7EF5BD4E3B3EB0F6EB60383910F72A3022337118FB8F7ABEB3F0C72200169C",
+      "identical": true,
+      "case": 17,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "EDE30552924FAF956BE84E8DDBC1B2C103B46C9A5C1662F96927702E83BBFE8E",
+      "identical": true,
+      "case": 18,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS"
+    },
+    {
+      "sha256": "2EA5406CE0B323538A27BCB1910C22A48373776A0BECE30B6C75847578DF0472",
+      "identical": true,
+      "case": 19,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS"
+    },
+    {
+      "sha256": "ECE1A671ED434F8F896FB365AFF822E17C063D8D4352F48D596336398D5F3B73",
+      "identical": true,
+      "case": 20,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;GUEST_ONLY;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "DB65F5B9D154E0F463A78C6E6BFCFD542D4B56DCE7BE55CD86026BA252E1D072",
+      "identical": true,
+      "case": 21,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;GUEST_ONLY;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "A203727BAE05A604188825902486C088311511C99922BD2E859B972700CA5188",
+      "identical": true,
+      "case": 22,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;GUEST_ONLY"
+    },
+    {
+      "sha256": "8A726D61E65CE6305D6EF43CB4C81C84DF0091376EC3F97549EFEECC97163BFC",
+      "identical": true,
+      "case": 23,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;GUEST_ONLY"
+    },
+    {
+      "sha256": "B8414D6EE49E2138313CDBF74457788B7DC4E34554E87A6D4105AC419FF979F7",
+      "identical": true,
+      "case": 24,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "68EE5E1AC1F801285DBAEC89B1626D3C50C8F5E28BCEA90BE60BA6D6ED8FF5B8",
+      "identical": true,
+      "case": 25,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "6FE5989E27EC257E4DA76D11ADA77AC95A0BCC17255883774E67D39BE6DA08B4",
+      "identical": true,
+      "case": 26,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND"
+    },
+    {
+      "sha256": "6717587AB9D22B9817CA584692B6143AA92A74DED4AEF9BA4068289D2CD74573",
+      "identical": true,
+      "case": 27,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND"
+    },
+    {
+      "sha256": "7BB2D3A9FAC01FA41A96138EFAF156853C6E808A85F5D3E338BB9F4D54E9522E",
+      "identical": true,
+      "case": 28,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FRONTEND_KEYS;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "6E9263FCB6B0EE80671045B5A4B53D6AF58B9A7D8371D3E21DE62A261670461A",
+      "identical": true,
+      "case": 29,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FRONTEND_KEYS;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "130688D6EA2C837F0C511001546CB4EF8815D43BCD77276A98BB3FC286857E98",
+      "identical": true,
+      "case": 30,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FRONTEND_KEYS"
+    },
+    {
+      "sha256": "1C1B986C9655EA09FF1757AB3F219EE432C82614FE1DC93173DB01B8FC10998E",
+      "identical": true,
+      "case": 31,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FRONTEND_KEYS"
+    },
+    {
+      "sha256": "FC7378C8D24F1BB7A4850C1A3AF8F9CDF735F6F9728F99B0A9EEC88CEC6E0F72",
+      "identical": true,
+      "case": 32,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FULLSCREEN;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "CFC0594B7567E71AA75D136F8CD89ABE60A75884FE67A74C0B8A316BA36BC1D5",
+      "identical": true,
+      "case": 33,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FULLSCREEN;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "CC075D37FE7722E027DFBEF366A3F0CEB9384065383FA1B36BF48222993F8FC0",
+      "identical": true,
+      "case": 34,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FULLSCREEN"
+    },
+    {
+      "sha256": "38E5BE26F43DF63A9A1435A0CBA6ECD02B2A85FB7ECC7B046105AA2E3E62393D",
+      "identical": true,
+      "case": 35,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FULLSCREEN"
+    },
+    {
+      "sha256": "BA4D01B51BDEFD0EEF0AC55B32ED842BD2FEF412DFCA404B4637ED6BF17200B2",
+      "identical": true,
+      "case": 36,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FULLSCREEN;GUEST_ONLY;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "C611C0610BCCA0CECDBE04044B7C45C8CFF85F8E4141C1AF8BD23B2B8584F8ED",
+      "identical": true,
+      "case": 37,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FULLSCREEN;GUEST_ONLY;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "C77DCB1A7060F518896F091D3E6D8B080F371AAE6D3D0222CA1C95374D2A47BF",
+      "identical": true,
+      "case": 38,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FULLSCREEN;GUEST_ONLY"
+    },
+    {
+      "sha256": "C0EC73EB9C5F24C3927FE2C1D067C6ABD5F31A4FE64900C45392AD12FB8CF28E",
+      "identical": true,
+      "case": 39,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;FULLSCREEN;GUEST_ONLY"
+    },
+    {
+      "sha256": "FFC8616BE50403937706BC81C4A1A6DBF03B62AAE755587E3D317EDDF48C0626",
+      "identical": true,
+      "case": 40,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;BLOCKING;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "EA2C674C763CA30286ABF0169AF5285647899746DA9F8E31BE477FDFA10D457C",
+      "identical": true,
+      "case": 41,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;BLOCKING;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "4EAC1B80D7D71FE57F2F9B3666940F399E32FA2488686766A9470D71B3D1868A",
+      "identical": true,
+      "case": 42,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;BLOCKING"
+    },
+    {
+      "sha256": "B6A1293F17DC8461E67A4B11696EB7F41B35947546173E2E8E853C2F600717FB",
+      "identical": true,
+      "case": 43,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;BLOCKING"
+    },
+    {
+      "sha256": "E4EEB8DDB2EB8772CD5647EFD127C2547FD0D002296070F1DD060B8E0D490572",
+      "identical": true,
+      "case": 44,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;BLOCKING;DOS_FIRST;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "B548A3BE46EA0F1E9DADE85F71A145558D9BD96B0BADCAA043A4E2792FF10140",
+      "identical": true,
+      "case": 45,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;BLOCKING;DOS_FIRST;CHILD_GEOMETRY"
+    },
+    {
+      "sha256": "569AB6A1863BEF039E1BE3F5782CD104186D88DCB0E26E75A7FCFA1A2497039A",
+      "identical": true,
+      "case": 46,
+      "welcome": "",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;BLOCKING;DOS_FIRST"
+    },
+    {
+      "sha256": "D72B688E28CFFD00F2EA76A1030D98F5A47FEFB1019FBD5E099D866C96DE20FB",
+      "identical": true,
+      "case": 47,
+      "welcome": "57656c636f6d65",
+      "features": "GUEST_INPUT;SAVE_WITNESS;FRONTEND;BLOCKING;DOS_FIRST"
+    }
+  ],
+  "start": "2026-11-23T18:17:40.4469461+00:00",
+  "failure": null,
+  "end": "2026-11-23T18:18:10.8925638+00:00"
+}
