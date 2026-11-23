@@ -1546,3 +1546,5 @@ the first two migrations, byte-equivalence tests and host package delivery.
 [T484 S2 native host family](evidence/t484-s2-native-family.md) records the five
 native component graphs, exact profile/link comparison, dual publication and
 post-publication targeted checks.
+
+[T484 S3 diagnostic owners](evidence/t484-s3-diagnostic-owners.md) records five retired producers and native link-selection evidence.

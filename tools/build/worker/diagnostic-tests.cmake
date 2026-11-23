@@ -6,8 +6,13 @@ function(worker_trace_unit name member source)
     message(FATAL_ERROR "Missing diagnostic owner: ${member}")
   endif()
   get_target_property(flags ${original} COMPILE_FLAGS)
+  get_target_property(original_sources ${original} SOURCES)
+  get_source_file_property(dependencies "${original_sources}" OBJECT_DEPENDS)
+  if(NOT dependencies)
+    set(dependencies)
+  endif()
   set(output "diagnostics/${name}/${source}.obj")
-  worker_unit("${output}" "${NTVDM_REPO}/test/observation/${source}.c" "${flags}")
+  worker_unit("${output}" "${NTVDM_REPO}/test/observation/${source}.c" "${flags}" ${dependencies})
   string(MAKE_C_IDENTIFIER "unit_${output}" unit)
   target_compile_definitions(${unit} PRIVATE
     "S35_ENVIRONMENT_TRACE_LOG=\"${CMAKE_BINARY_DIR}/diagnostics/${name}/events.txt\""
@@ -69,5 +74,37 @@ worker_trace(pm-allocation-failure original-mvdm-dpmi32.lib obj/dpmi/dpmiint.obj
 worker_trace(dpmi-pointer original-mvdm-dpmi32.lib obj/dpmi/int21map.obj dpmi_pointer_trace)
 worker_trace(dpmi-ioctl original-mvdm-dpmi32.lib obj/dpmi/int21map.obj dpmi_ioctl_boundary)
 worker_trace(dpmi-xmem-failure original-mvdm-dpmi32.lib obj/dpmi/xmem.obj dpmi_xmem_failure)
+worker_trace(command-client base-rpc-client-launch.lib obj/run16/rpc_client_launch.obj ntvdm_command_client_diagnostic)
+
+# Add the independently authored startup observer to the unmodified product
+# closure, using the same startup-hook sources as the retired producer.
+set(startup_objects)
+foreach(source IN ITEMS startup_hooks.c minhook/src/buffer.c minhook/src/trampoline.c minhook/src/hde/hde32.c)
+  get_filename_component(stem "${source}" NAME_WE)
+  set(object "diagnostics/startup-hook/${stem}.obj")
+  worker_unit("${object}" "${NTVDM_REPO}/src/lib-win32/process-hook/${source}"
+    "${profile_59}")
+  list(APPEND startup_objects "${object}")
+endforeach()
+foreach(spec IN ITEMS "win101-guard|win101_install_write_guard|win101_guard_entry"
+    "win31-guard|win31_setup_write_guard|win101_guard_entry"
+    "win101-palette|win101_palette_trace|win101_palette_trace_entry"
+    "win31-console|win31_console_trace|win31_console_trace_entry")
+  string(REPLACE "|" ";" parts "${spec}")
+  list(GET parts 0 name)
+  list(GET parts 1 source)
+  list(GET parts 2 entry)
+  set(object "diagnostics/${name}/observer.obj")
+  worker_unit("${object}" "${NTVDM_REPO}/test/observation/${source}.c"
+    "${profile_59}")
+  get_target_property(inputs image_ntvdm_exe WORKER_LINK_INPUTS)
+  get_target_property(dependencies image_ntvdm_exe WORKER_LINK_DEPENDS)
+  get_property(prefix GLOBAL PROPERTY image_ntvdm_exe_prefix)
+  get_property(suffix GLOBAL PROPERTY image_ntvdm_exe_suffix)
+  worker_link("diagnostics/${name}/ntvdm.exe"
+    "${prefix} /include:_${entry} /implib:diagnostics/${name}/ntvdm.lib" "${suffix}"
+    INPUTS "${object}" ${startup_objects} ${inputs} DEPENDS ${dependencies})
+  set_property(GLOBAL APPEND PROPERTY diagnostic_images "${CMAKE_BINARY_DIR}/diagnostics/${name}/ntvdm.exe")
+endforeach()
 get_property(images GLOBAL PROPERTY diagnostic_images)
 add_custom_target(worker-diagnostics DEPENDS ${images})

@@ -35,6 +35,8 @@ if "%TARGET%"=="oem-tests" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="command-initialization" set "SELECTED=1"
 if "%TARGET%"=="command-launch" set "SELECTED=1"
 if "%TARGET%"=="worker-diagnostics" set "SELECTED=1"
+if "%TARGET%"=="native-diagnostics" set "SELECTED=1"
+if "%TARGET%"=="native-diagnostics" if not "%~1"=="x64" exit /b 2
 for %%I in (dpmi-contracts ccpu-port-privilege dpmi-swint-selected pm-entry-contract) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (dpmi-contracts ccpu-port-privilege dpmi-swint-selected pm-entry-contract) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (cpu-contracts ccpu-neg64 ccpu-neg64-negative ccpu-leaf ccpu-leaf-negative ccpu-notification native-int-prefix) do if "%TARGET%"=="%%I" set "SELECTED=1"
@@ -67,6 +69,7 @@ if "%TARGET%"=="native-input-contracts" goto inputtests
 if "%TARGET%"=="command-initialization" goto worker
 if "%TARGET%"=="command-launch" goto worker
 if "%TARGET%"=="worker-diagnostics" goto worker
+if "%TARGET%"=="native-diagnostics" goto nativediagnostics
 for %%I in (dpmi-contracts ccpu-port-privilege dpmi-swint-selected pm-entry-contract) do if "%TARGET%"=="%%I" goto worker
 for %%I in (cpu-contracts ccpu-neg64 ccpu-neg64-negative ccpu-leaf ccpu-leaf-negative ccpu-notification native-int-prefix) do if "%TARGET%"=="%%I" goto worker
 if "%TARGET%"=="dem-declarations" goto worker
@@ -104,4 +107,15 @@ if not "%result%"=="0" exit /b %result%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release" --target wow32
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\wow32" --target native-input-contracts
+exit /b %errorlevel%
+:nativediagnostics
+pushd "%NTVDM_ROOT%"
+if errorlevel 1 exit /b %errorlevel%
+cmake --preset msvc-x64-release-ccache
+set "result=%errorlevel%"
+popd
+if not "%result%"=="0" exit /b %result%
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x64-release\frontend" --target native-diagnostics
+if errorlevel 1 exit /b %errorlevel%
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x64-release\service" --target native-diagnostics
 exit /b %errorlevel%

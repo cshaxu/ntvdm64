@@ -3,16 +3,8 @@
 #include <rpc.h>
 #include <stdio.h>
 #include "service.h"
-#include <nt.h>
-#include <ntlpcapi.h>
-#include <ntcsrmsg.h>
-#include <winss.h>
-#include "non-mvdm/base/win32/inc/basemsg.h"
-#include "non-mvdm/base/win32/inc/basevdm.h"
-#include <vdmapi.h>
-#include "compat/include/base_client.h"
-#include "common/base_srv/base_command.h"
-#include "common/base_srv/base_rpc_client.h"
+#include <stdint.h>
+#include <string.h>
 static void note(const char *stage,DWORD result,ULONG a,ULONG b,ULONG c)
 {
     DWORD saved=GetLastError(),written;HANDLE file;char path[MAX_PATH],line[256];
@@ -34,6 +26,21 @@ static error_status_t traced_get(PRPC_ASYNC_STATE async,handle_t binding,VDM_CON
     unsigned long generation,unsigned long bytes,byte *request,
     unsigned long *wait_count,HANDLE **waits,unsigned long *pipe_mask,
     unsigned long *pipe_count,HANDLE **pipes,unsigned long *file_mask,
+    unsigned long *file_count,HANDLE **files,unsigned long *reply_bytes,byte **reply);
+struct _BASE_API_MSG;
+static BOOL traced_apply(const void *,uint32_t,uint32_t,uint32_t,struct _BASE_API_MSG *);
+#define Client_Get traced_get
+#define OpenNtBaseApplyGetCommand traced_apply
+#define OpenNtBaseClientSetCommandBinding diagnostic_actual_binding
+#include "../../src/common/base_srv/base_rpc_client_launch.c"
+#undef Client_Get
+#undef OpenNtBaseApplyGetCommand
+#undef OpenNtBaseClientSetCommandBinding
+BOOL OpenNtBaseApplyGetCommand(const void *,uint32_t,uint32_t,uint32_t,PBASE_API_MSG);
+static error_status_t traced_get(PRPC_ASYNC_STATE async,handle_t binding,VDM_CONNECTION connection,HANDLE process,
+    unsigned long generation,unsigned long bytes,byte *request,
+    unsigned long *wait_count,HANDLE **waits,unsigned long *pipe_mask,
+    unsigned long *pipe_count,HANDLE **pipes,unsigned long *file_mask,
     unsigned long *file_count,HANDLE **files,unsigned long *reply_bytes,byte **reply)
 {
     error_status_t result=Client_Get(async,binding,connection,process,generation,bytes,request,
@@ -50,14 +57,6 @@ static BOOL traced_apply(const void *data,uint32_t bytes,uint32_t generation,
         result ? message->u.GetNextVDMCommand.VDMState : 0);
     return result;
 }
-#define Client_Get traced_get
-#define OpenNtBaseApplyGetCommand traced_apply
-#define OpenNtBaseClientSetCommandBinding diagnostic_actual_binding
-#include "../../src/common/base_srv/base_rpc_client_core.c"
-#include "../../src/common/base_srv/base_rpc_client_launch.c"
-#undef Client_Get
-#undef OpenNtBaseApplyGetCommand
-#undef OpenNtBaseClientSetCommandBinding
 static opennt_base_console_activate saved_ready;
 static DWORD traced_ready(struct compat_console_activation *context, BOOL active)
 {

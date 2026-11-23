@@ -1,0 +1,21 @@
+{
+  "runtimeTested": false,
+  "faultProjections": 2,
+  "images": [
+    {
+      "sha256": "C9CD6806C2E30AF54FE079AE96D4D13BDBE9EF6EA4D1A7B9A93565FFAF1EC0DC",
+      "image": "build/.ninja/msvc-x64-release/frontend/diagnostics/console-grid/ntcon.exe",
+      "replacementSelected": true
+    },
+    {
+      "sha256": "0A1BDAC16EEB5C9B18EA707225B1543605FFD1205FD3F1B0E6605E8834D007BB",
+      "image": "build/.ninja/msvc-x64-release/service/diagnostics/observe-deny/ntsrv.exe",
+      "replacementSelected": true
+    },
+    {
+      "sha256": "3B08D25766EB954B89BFE2B588D560511919C726DFCF58BBCF08BCC6C3994A83",
+      "image": "build/.ninja/msvc-x64-release/service/diagnostics/observe-slow/ntsrv.exe",
+      "replacementSelected": true
+    }
+  ]
+}

@@ -66,6 +66,7 @@ interpreter-free end-to-end acceptance have not completed.
 | [P28 native input](../etc/evidence/t484-s3-native-input.md) | Two producers migrated;four outputs reuse actual WOW membership, five native private-desktop service/lifetime cases pass. |
 | [P29 window contracts](../etc/evidence/t484-s3-window-contracts.md) | Seven producers consolidated;eight cases pass on both x86/x64, startup-event race replaced by exact no-resize assertion. |
 | [P30 native probes](../etc/evidence/t484-s3-native-probes.md) | Four producers retired;12 timestamp-only images,16 bounded runtime cases;two Windows matrix callers use native mouse tools. |
+| [P31 diagnostic owners](../etc/evidence/t484-s3-diagnostic-owners.md) | Five producers retired; three native and16 worker diagnostics build, exact fault projections and linked-member checks pass; no runtime acceptance claimed. |
 
 Each batch passed its cached full host build. P30 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
@@ -117,6 +118,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P30 records native probe producer migration and its delivery under the
+T484 S3 P31 records diagnostic owner migration and its delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.
