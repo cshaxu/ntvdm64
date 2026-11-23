@@ -16,6 +16,9 @@ if "%TARGET%"=="thread-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="keyboard-contracts" set "SELECTED=1"
 if "%TARGET%"=="window-contracts" set "SELECTED=1"
 if "%TARGET%"=="native-payload-probes" set "SELECTED=1"
+if "%TARGET%"=="dos-observation-probes" set "SELECTED=1"
+if "%TARGET%"=="dos-observation-probes" if not "%~1"=="x64" exit /b 2
+if "%TARGET%"=="frame-codepage" set "SELECTED=1"
 if "%TARGET%"=="private-mouse-tools" set "SELECTED=1"
 if "%TARGET%"=="private-mouse-tools" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="native-input-contracts" set "SELECTED=1"
@@ -70,6 +73,8 @@ if "%TARGET%"=="command-initialization" goto worker
 if "%TARGET%"=="command-launch" goto worker
 if "%TARGET%"=="worker-diagnostics" goto worker
 if "%TARGET%"=="native-diagnostics" goto nativediagnostics
+if "%TARGET%"=="frame-codepage" if "%~1"=="x86" goto worker
+if "%TARGET%"=="frame-codepage" goto nativediagnostics
 for %%I in (dpmi-contracts ccpu-port-privilege dpmi-swint-selected pm-entry-contract) do if "%TARGET%"=="%%I" goto worker
 for %%I in (cpu-contracts ccpu-neg64 ccpu-neg64-negative ccpu-leaf ccpu-leaf-negative ccpu-notification native-int-prefix) do if "%TARGET%"=="%%I" goto worker
 if "%TARGET%"=="dem-declarations" goto worker
@@ -115,6 +120,8 @@ cmake --preset msvc-x64-release-ccache
 set "result=%errorlevel%"
 popd
 if not "%result%"=="0" exit /b %result%
+if "%TARGET%"=="frame-codepage" cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x64-release\frontend" --target frame-codepage
+if "%TARGET%"=="frame-codepage" exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x64-release\frontend" --target native-diagnostics
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x64-release\service" --target native-diagnostics

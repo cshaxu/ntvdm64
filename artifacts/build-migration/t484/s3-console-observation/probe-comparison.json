@@ -1,0 +1,32 @@
+[
+  {
+    "byteIdentical": true,
+    "name": "P.COM",
+    "sha256": "75A6B9ED8C2054440B80CD586C2643F41680EEF79EB10B87A210FF9D54AD361F"
+  },
+  {
+    "byteIdentical": true,
+    "name": "PN.COM",
+    "sha256": "56D9CB3049A8719B7CA26AF409796C2E55976FCEB3B2879684DF83F8EF649FA3"
+  },
+  {
+    "byteIdentical": true,
+    "name": "P2.COM",
+    "sha256": "C5A69581A59BD5DE6B43231B655953370B4A7E8C6E80E7144230972AE6614422"
+  },
+  {
+    "byteIdentical": true,
+    "name": "C.COM",
+    "sha256": "5A1DB9301B385C5BCA0AFB1250A930B3331C0C3F76A39B00B1985F98C8A4D8A3"
+  },
+  {
+    "byteIdentical": true,
+    "name": "F.COM",
+    "sha256": "1303360FC517439418930C5835CB652D052BD015B96395D95BBFB4C4E72D1420"
+  },
+  {
+    "byteIdentical": true,
+    "name": "TSR.COM",
+    "sha256": "73735E1719FC9B281B54F888FEA871060E5214995DA43414BBC24F768B84F687"
+  }
+]

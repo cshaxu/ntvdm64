@@ -1,0 +1,16 @@
+[
+  {
+    "exit": 0,
+    "architecture": "x86",
+    "report": "FRAME-CODEPAGE checks=45046 failures=0 production-import=yes repeated-frame=yes\r\n",
+    "pass": true,
+    "pid": 6900
+  },
+  {
+    "exit": 0,
+    "architecture": "x64",
+    "report": "FRAME-CODEPAGE checks=45046 failures=0 production-import=yes repeated-frame=yes\r\n",
+    "pass": true,
+    "pid": 2996
+  }
+]

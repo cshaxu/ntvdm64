@@ -22,6 +22,16 @@ function(family_diagnostic name image member source)
   set_property(GLOBAL APPEND PROPERTY native_diagnostics "${CMAKE_BINARY_DIR}/diagnostics/${name}/${image}")
 endfunction()
 if(NTVDM_COMPONENT STREQUAL "frontend")
+  family_unit("obj/tests/frontend_frame_codepage.obj"
+    "${NTVDM_REPO}/test/app/frontend_frame_codepage_test.c"
+    "${native_flags} /std:c11 /we4013 /I\"${NTVDM_REPO}/src/ntcon-exe\"" "obj/basesrv/service.h")
+  get_target_property(inputs image_console_frame_failure_test_exe FAMILY_LINK_INPUTS)
+  get_target_property(flags image_console_frame_failure_test_exe FAMILY_LINK_FLAGS)
+  list(REMOVE_ITEM inputs "obj/tests/console_frame_failure.obj")
+  list(PREPEND inputs "obj/tests/frontend_frame_codepage.obj")
+  list(PREPEND inputs "obj/frontend/console_frontend.obj")
+  family_image("frontend-frame-codepage-test.exe" "${flags}" ${inputs})
+  add_custom_target(frame-codepage DEPENDS "${CMAKE_BINARY_DIR}/frontend-frame-codepage-test.exe")
   family_diagnostic(console-grid ntcon.exe obj/opennt-abi-host-compat/console_grid.obj
     "${NTVDM_REPO}/test/observation/console_grid_diagnostic.c")
 elseif(NTVDM_COMPONENT STREQUAL "service")

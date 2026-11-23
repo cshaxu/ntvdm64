@@ -5,6 +5,24 @@
 #include <string.h>
 static unsigned queries,conversions;
 static BOOL fail_conversion;
+static BOOL constrain_clone;
+static HANDLE test_create_buffer(DWORD access,DWORD sharing,
+    const SECURITY_ATTRIBUTES *security,DWORD flags,LPVOID data)
+{
+    HANDLE buffer=CreateConsoleScreenBuffer(access,sharing,security,flags,data);
+    if(constrain_clone && buffer!=INVALID_HANDLE_VALUE) {
+        CONSOLE_SCREEN_BUFFER_INFO info;
+        SMALL_RECT view;
+        if(!GetConsoleScreenBufferInfo(buffer,&info))goto fail;
+        view=(SMALL_RECT){0,0,min(53,min(info.dwSize.X,info.dwMaximumWindowSize.X))-1,
+            min(14,min(info.dwSize.Y,info.dwMaximumWindowSize.Y))-1};
+        if(!SetConsoleWindowInfo(buffer,TRUE,&view))goto fail;
+    }
+    return buffer;
+fail:
+    {DWORD error=GetLastError();CloseHandle(buffer);SetLastError(error);}
+    return INVALID_HANDLE_VALUE;
+}
 static UINT counted_output_cp(void){++queries;return GetConsoleOutputCP();}
 static int checked_conversion(UINT cp,DWORD flags,LPCCH text,int bytes,
     LPWSTR output,int count)
@@ -15,7 +33,9 @@ static int checked_conversion(UINT cp,DWORD flags,LPCCH text,int bytes,
 }
 #define GetConsoleOutputCP counted_output_cp
 #define MultiByteToWideChar checked_conversion
+#define CreateConsoleScreenBuffer test_create_buffer
 #include "../../src/ntcon-exe/frontend_session.c"
+#undef CreateConsoleScreenBuffer
 #undef GetConsoleOutputCP
 #undef MultiByteToWideChar
 static unsigned checks,failures;
@@ -25,7 +45,7 @@ int wmain(int argc,WCHAR **argv)
 {
     frontend_session frontend={0};frontend_video video={0};
     HANDLE incoming=NULL;BYTE *payload=NULL;console_text_style *style;
-    UINT saved;DWORD handles_before=0,handles_after=0;BOOL allocated=FALSE;
+    uint32_t palette[16];UINT saved;DWORD handles_before=0,handles_after=0;BOOL allocated=FALSE;
     unsigned pass,index;COORD size={80,28},origin={0,0};
     CHAR_INFO cells[80*50];CONSOLE_SCREEN_BUFFER_INFO info;
     CONSOLE_CURSOR_INFO cursor;SMALL_RECT rect;
@@ -36,6 +56,7 @@ int wmain(int argc,WCHAR **argv)
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
     CHECK(frontend.logical_surface!=INVALID_HANDLE_VALUE);
     if(frontend.logical_surface==INVALID_HANDLE_VALUE)goto done;
+    CHECK(console_palette(frontend.logical_surface,palette)==0);
     payload=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*style)+80*50*3);
     CHECK(payload!=NULL);if(!payload)goto done;
     style=(console_text_style *)payload;style->font_height=16;
@@ -54,7 +75,7 @@ int wmain(int argc,WCHAR **argv)
             cell[0]=0x9b;cell[1]=0x1e;if(step==3)cell[2]=CONSOLE_TEXT_UNDERLINE;
         }
         queries=conversions=0;
-        CHECK(prepare_text_frame(&frontend,&video,&incoming)==0);
+        CHECK(prepare_text_frame(&frontend,&video,palette,&incoming)==0);
         CHECK(queries==1 && conversions==80*28 && incoming!=NULL);
         if(!incoming)break;
         rect=(SMALL_RECT){0,0,79,27};
@@ -81,7 +102,7 @@ int wmain(int argc,WCHAR **argv)
             payload[sizeof(*style)+index*2]=(BYTE)('A'+index/80%26);
             payload[sizeof(*style)+index*2+1]=0x2f;
         }
-        CHECK(prepare_text_frame(&frontend,&video,&incoming)==0);
+        CHECK(prepare_text_frame(&frontend,&video,palette,&incoming)==0);
         CHECK(incoming!=NULL);if(!incoming)break;
         CHECK(GetConsoleScreenBufferInfo(incoming,&info));
         CHECK(info.dwSize.X==80 && info.dwSize.Y==(SHORT)rows);
@@ -99,15 +120,15 @@ int wmain(int argc,WCHAR **argv)
     /* Conversion failure must release its candidate, not replace the source. */
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&handles_before));
     fail_conversion=TRUE;queries=conversions=0;
-    CHECK(prepare_text_frame(&frontend,&video,&incoming)==ERROR_NO_UNICODE_TRANSLATION);
+    CHECK(prepare_text_frame(&frontend,&video,palette,&incoming)==ERROR_NO_UNICODE_TRANSLATION);
     fail_conversion=FALSE;
     CHECK(!incoming && queries==1 && conversions==1);
     CHECK(GetConsoleScreenBufferInfo(frontend.logical_surface,&info));
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&handles_after));
     CHECK(handles_before==handles_after);
-    /* Reacquisition must not enlarge the hidden native viewport to the
-     * already-converted logical80x22 page. This catches the bug even on a
-     * large desktop where the incorrect enlargement would succeed. */
+    /* Reacquisition clones storage. Constrain the newly created clone too:
+     * a new Console buffer inherits the active buffer's viewport, not its
+     * source's viewport. Verify no enlargement of that actual input. */
     CloseHandle(frontend.logical_surface);
     frontend.logical_surface=CreateConsoleScreenBuffer(GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,CONSOLE_TEXTMODE_BUFFER,NULL);
@@ -130,6 +151,7 @@ int wmain(int argc,WCHAR **argv)
         for(index=0;index<80*22;++index){cells[index].Char.UnicodeChar=L'Z';cells[index].Attributes=0x1f;}
         rect=(SMALL_RECT){0,0,79,21};
         CHECK(WriteConsoleOutputW(frontend.logical_surface,cells,(COORD){80,22},origin,&rect));
+        constrain_clone=TRUE;
         for(pass=0;pass<2;++pass) {
             BOOL committed=FALSE;
             CHECK(prepare_logical_surface(&frontend,(COORD){80,22},&committed)==0 && committed);
@@ -142,6 +164,7 @@ int wmain(int argc,WCHAR **argv)
             CHECK(ReadConsoleOutputW(frontend.logical_surface,cells,(COORD){80,22},origin,&rect));
             for(index=0;index<80*22;++index)CHECK(cells[index].Char.UnicodeChar==L'Z' && cells[index].Attributes==0x1f);
         }
+        constrain_clone=FALSE;
     }
 done:
     if(frontend.console_output && frontend.console_output!=INVALID_HANDLE_VALUE)CloseHandle(frontend.console_output);

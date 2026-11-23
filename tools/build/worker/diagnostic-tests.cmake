@@ -1,5 +1,17 @@
 # Diagnostic images reuse the actual product graph. Only the explicitly
 # selected original translation unit is wrapped; production inputs are intact.
+worker_unit("obj/tests/frontend_frame_codepage.obj"
+  "${NTVDM_REPO}/test/app/frontend_frame_codepage_test.c"
+  "${profile_49} /std:c11 /I\"${NTVDM_REPO}/src/ntcon-exe\"" "obj/basesrv/service.h")
+get_target_property(frame_inputs image_console_frame_failure_test_exe WORKER_LINK_INPUTS)
+list(REMOVE_ITEM frame_inputs "obj/tests/console_frame_failure.obj")
+list(PREPEND frame_inputs "obj/tests/frontend_frame_codepage.obj")
+list(APPEND frame_inputs "obj/frontend/console_frontend.obj")
+get_property(frame_prefix GLOBAL PROPERTY image_console_frame_failure_test_exe_prefix)
+get_property(frame_suffix GLOBAL PROPERTY image_console_frame_failure_test_exe_suffix)
+worker_link("frontend-frame-codepage-test.exe" "${frame_prefix}" "${frame_suffix}" INPUTS ${frame_inputs})
+add_custom_target(frame-codepage DEPENDS "${CMAKE_BINARY_DIR}/frontend-frame-codepage-test.exe")
+
 function(worker_trace_unit name member source)
   string(MAKE_C_IDENTIFIER "unit_${member}" original)
   if(NOT TARGET ${original})
