@@ -1582,3 +1582,5 @@ post-publication targeted checks.
 [T484 S3 discovery pair](evidence/t484-s3-discovery.md) records the native guest/host producer pair and binary equivalence.
 
 - [T484 S3 message probes](evidence/t484-s3-message-probes.md).
+
+- [T484 S3 print probe](evidence/t484-s3-print-probe.md).

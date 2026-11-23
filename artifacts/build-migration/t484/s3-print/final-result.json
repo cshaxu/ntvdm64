@@ -1,0 +1,11 @@
+{
+  "pid": 30300,
+  "started": "2026-11-23T19:14:33.6197838+00:00",
+  "exit": 0,
+  "rawHostImages": 11,
+  "finished": "2026-11-23T19:14:55.1670688+00:00",
+  "parsed": [
+    "verify-win16-print-probe"
+  ],
+  "publishedHashes": 22
+}

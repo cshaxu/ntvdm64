@@ -1,21 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "8fd03cccb31589ad5cba971b60b3560bfcdd2548",
+  "head": "5df3ff0953f75bbc68a509819ef6d44a6a7515bc",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-win16-message-probe.ps1",
+    " M test/integration/verify-win16-print-probe.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-message/",
-    "?? docs/etc/evidence/t484-s3-message-probes.md",
-    "?? tools/build/fixtures/win16-message.cmake"
+    " M tools/build/fixtures/win16-probes.cmake",
+    "?? artifacts/build-migration/t484/s3-print/",
+    "?? docs/etc/evidence/t484-s3-print-probe.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 52,
-    "unchanged": 190,
+    "changed": 53,
+    "unchanged": 189,
     "removed": 113
   },
   "disposition_counts": {
@@ -795,8 +794,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "563ecaf0a9f27c3a522e49e68f4f5e76fbd8405afb9fdb027643079a42dcbadb",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "5df3ff0953f75bbc68a509819ef6d44a6a7515bc"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-message-probes.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -827,14 +830,15 @@
       "id": "B0047",
       "file": "test/integration/verify-win16-print-probe.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "cebdc41aa48b2a80345b703bb02c66240f755cfb62dd100c7090dad83d9b64c2",
+      "state": "changed",
+      "current_sha256": "b00785f610772323c9f5474f993bb0f5f701b0c12e0d2299e82ac4ea8601a32b",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM"
+        "reason": "P48 native dynamic output-directory assembly verified through actual runner producer block; shared runtime staging remains pending",
+        "evidence": "docs/etc/evidence/t484-s3-print-probe.md"
       }
     },
     {
@@ -4831,6 +4835,12 @@
     }
   ],
   "commits": {
+    "5df3ff0953f75bbc68a509819ef6d44a6a7515bc": {
+      "subject": "T484 S3 P47 migrate message witness composition",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-message-probes.md"
+      ]
+    },
     "8fd03cccb31589ad5cba971b60b3560bfcdd2548": {
       "subject": "T484 S3 P46 migrate discovery probe producers",
       "evidence": [
@@ -5721,8 +5731,8 @@
           "text": "[string]$Nasm = 'nasm.exe'"
         },
         {
-          "line": 23,
-          "text": "$assembler = (Get-Command $Nasm -ErrorAction Stop).Source"
+          "line": 31,
+          "text": "$cache=\"$repo/build/.ninja/fixtures-x86/guest-probes/win16\""
         }
       ]
     },

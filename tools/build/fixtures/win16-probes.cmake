@@ -31,3 +31,15 @@ set_property(TARGET wow-discovery-peer_objects PROPERTY COMPILE_OPTIONS /nologo 
 target_compile_definitions(wow-discovery-peer_objects PRIVATE _CRT_SECURE_NO_WARNINGS)
 set_property(TARGET wow-discovery-peer_objects PROPERTY FIXTURE_LIBRARIES user32.lib)
 add_custom_target(win16-discovery DEPENDS win16-probes wow-discovery-peer)
+
+# The caller's fresh evidence directory is embedded by NASM, not patched later.
+set(NTVDM_PRINT_OUTPUT_DIR "" CACHE STRING "Print witness output directory")
+if(NOT NTVDM_PRINT_OUTPUT_DIR STREQUAL "")
+  set(output "${CMAKE_BINARY_DIR}/guest-probes/win16/PRNPROBE")
+  set(source "${NTVDM_REPO}/test/observation/win16_print_probe.asm")
+  add_custom_command(OUTPUT "${output}.EXE" "${output}.lst"
+    COMMAND "${NTVDM_NASM}" "-DOUTPUT_DIR=\"${NTVDM_PRINT_OUTPUT_DIR}\""
+      -f bin -o "${output}.EXE" -l "${output}.lst" "${source}"
+    DEPENDS "${source}" "${NTVDM_NASM}" VERBATIM)
+  add_custom_target(win16-print DEPENDS "${output}.EXE" "${output}.lst")
+endif()

@@ -1,8 +1,9 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~3"=="" exit /b 2
+if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
+if "%~2"=="win16-print" goto print_arguments
 if "%~2"=="win16-message" goto message_arguments
 if "%~2"=="win16-message-guest" goto message_arguments
 if not "%~2"=="serial-discovery" goto arguments
@@ -22,11 +23,17 @@ if not "%MESSAGE_MASK:~4%"=="" exit /b 2
 if not "%MESSAGE_MASK%"=="0" if "%MESSAGE_MASK:~0,1%"=="0" exit /b 2
 if %MESSAGE_MASK% GTR 8191 exit /b 2
 set "SERIAL_OPTION=-DNTVDM_MESSAGE_MASK=%MESSAGE_MASK%"
+goto arguments
+:print_arguments
+if "%~3"=="" exit /b 2
+set SERIAL_OPTION="-DNTVDM_PRINT_OUTPUT_DIR=%~3"
 :arguments
 if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="win16-print" set "SELECTED=1"
+if "%TARGET%"=="win16-print" if not "%~1"=="x86" exit /b 2
 for %%I in (win16-message win16-message-guest) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (win16-message win16-message-guest) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (guest-memory redirector-async guest-location wow-task-frame wow-callback-frame xms-mapped redirector-contract xms-startup dem-file-lifecycle redirector-guest-copy) do if "%TARGET%"=="%%I" set "SELECTED=1"

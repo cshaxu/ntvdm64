@@ -20,10 +20,17 @@ foreach ($name in @('TEMP', 'TMP', 'PATH', 'MVDM_OBSERVER_PRIVATE_DESKTOP')) {
     $saved[$name] = [Environment]::GetEnvironmentVariable($name)
 }
 try {
-    $assembler = (Get-Command $Nasm -ErrorAction Stop).Source
     $source = Join-Path $PSScriptRoot '../observation/win16_print_probe.asm'
-    & $assembler ('-DOUTPUT_DIR="' + $root + '"') -f bin -o "$root/PRNPROBE.EXE" -l "$root/probe.lst" $source *> "$root/assemble.txt"
-    if ($LASTEXITCODE) { throw 'Independent print probe assembly failed' }
+    $line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 win16-print "'+$root+'""'
+    $producer=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/assemble.txt" -RedirectStandardError "$root/assemble.stderr.txt"
+    try {
+        @{pid=$producer.Id;start=$producer.StartTime.ToUniversalTime().ToString('o');command=$line}|ConvertTo-Json|Set-Content "$root/producer.json"
+        if(!$producer.WaitForExit(300000)){& taskkill.exe /PID $producer.Id /T /F *> "$root/build-timeout.txt";throw 'Print producer timeout'}
+        $producer.Refresh();if($producer.ExitCode){throw "Print producer failed: $($producer.ExitCode)"}
+    }finally{$producer.Dispose()}
+    $cache="$repo/build/.ninja/fixtures-x86/guest-probes/win16"
+    Copy-Item "$cache/PRNPROBE.EXE" "$root/PRNPROBE.EXE"
+    Copy-Item "$cache/PRNPROBE.lst" "$root/probe.lst"
 
     $runtime = New-PhysicalRuntimeStage (Resolve-Path -LiteralPath $PackageRoot).Path
     $scope = New-IsolatedPackageScope $runtime

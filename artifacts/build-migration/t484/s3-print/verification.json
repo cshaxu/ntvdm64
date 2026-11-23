@@ -1,0 +1,25 @@
+{
+  "finished": "2026-11-23T19:13:03.0921386+00:00",
+  "exit": 0,
+  "started": "2026-11-23T19:12:42.5795964+00:00",
+  "pid": 33224,
+  "cases": [
+    {
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-print\\plain",
+      "listing": "identical",
+      "hash": "DFFAD35AA116AA1451B4B54E4331724DDD59BA376C6702809AA2A5515CF0DAB6"
+    },
+    {
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-print\\with space",
+      "listing": "identical",
+      "hash": "515C696A80FDA5AA0A26AC37050582FAADF5C326468C327FFE2ADABEED86143B"
+    },
+    {
+      "directory": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-print\\with'apostrophe",
+      "listing": "identical",
+      "hash": "E7709BD91F055916B441216B6FA23929D4666327FD13269B05E30D09BECDD693"
+    }
+  ],
+  "cache": "stable",
+  "rejections": 2
+}
