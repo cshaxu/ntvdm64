@@ -47,6 +47,10 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="dem-directory-reset" set "SELECTED=1"
+if "%TARGET%"=="dem-directory-reset" if not "%~1"=="x86" exit /b 2
+for %%I in (console-graphics-publication console-input-batch) do if "%TARGET%"=="%%I" set "SELECTED=1"
+if "%TARGET%"=="console-input-batch" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="media-owner" set "SELECTED=1"
 if "%TARGET%"=="media-owner" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-thunk-nls" set "SELECTED=1"
@@ -202,6 +206,7 @@ for %%I in (cpu-contracts ccpu-neg64 ccpu-neg64-negative ccpu-leaf ccpu-leaf-neg
 if "%TARGET%"=="dem-declarations" goto worker
 if "%TARGET%"=="console-contracts" goto worker
 if "%TARGET%"=="host-thread-boundaries" goto worker
+if "%TARGET%"=="dem-directory-reset" goto worker
 if "%TARGET%"=="ccpu-callback" goto worker
 if "%TARGET%"=="wow-controls" goto controls
 if "%TARGET%"=="command-redirection" if not "%~3"=="" goto worker_existing

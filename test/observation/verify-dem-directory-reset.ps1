@@ -1,20 +1,13 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$OutputRoot,
-    [string]$BuildCache='build/.ninja/msvc-x86-release/worker')
+param([Parameter(Mandatory)][string]$OutputRoot)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $out=[IO.Path]::GetFullPath((Join-Path $repo $OutputRoot))
 if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or
     (Test-Path $out)){throw 'Require a fresh build evidence directory'}
 New-Item -ItemType Directory $out | Out-Null
-$cache=Join-Path $repo $BuildCache
-$wrapper=Join-Path $cache 'msvc-x86.cmd'
-if(!(Test-Path $wrapper)){throw 'Configure the canonical worker build first'}
-& $wrapper cmake -S "$repo/tools/build/worker" -B $cache 2>&1 |
-    Tee-Object (Join-Path $out 'build.txt')
-if($LASTEXITCODE){throw 'Worker configure failed'}
-& $wrapper cmake --build $cache --target image_dem_directory_reset_test_exe 2>&1 |
-    Tee-Object (Join-Path $out 'build.txt') -Append
+$cache=Join-Path $repo 'build/.ninja/msvc-x86-release/worker'
+& "$repo/tools/build-fixtures.cmd" x86 dem-directory-reset *> "$out/build.txt"
 if($LASTEXITCODE){throw 'DEM fixture build failed'}
 $exe=Join-Path $out 'dem-directory-reset-test.exe'
 Copy-Item (Join-Path $cache 'dem-directory-reset-test.exe') $exe

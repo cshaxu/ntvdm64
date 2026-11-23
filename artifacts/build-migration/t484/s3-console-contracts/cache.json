@@ -1,0 +1,22 @@
+[
+  {
+    "path": "build/.ninja/fixtures-x86/console-graphics-publication.exe",
+    "sha256": "D486D13C058A67E0122A9E627F1F59F469AE0D299327796EBEA7812186589C38",
+    "time": 639310745098174014
+  },
+  {
+    "path": "build/.ninja/fixtures-x64/console-graphics-publication.exe",
+    "sha256": "10C697CACF65681B4C59F272F6F1C3B6ACFE028226EF26C3C7FB683758662409",
+    "time": 639310745162346905
+  },
+  {
+    "path": "build/.ninja/fixtures-x86/console-input-batch.exe",
+    "sha256": "890BCD038654FB56CE3B1FF6D5F7414D298BE8569E338FE77699F9E5BE888CCE",
+    "time": 639310745245524192
+  },
+  {
+    "path": "build/.ninja/msvc-x86-release/worker/dem-directory-reset-test.exe",
+    "sha256": "FEB10E768C967619C1D8F8BFC50A931FF6FF28B6ACD739433AAD9A214FE7EBFA",
+    "time": 639310338416297028
+  }
+]

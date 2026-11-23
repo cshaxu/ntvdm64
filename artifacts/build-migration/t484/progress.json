@@ -1,34 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "d01cca67fa7b429c094a9f2482c2c1b8834dea49",
+  "head": "676e69df30aa34278a52b96234f3041af9139441",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
-    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
-    " M docs/etc/operations/t484-cmd-build-release-plan.md",
     " M docs/states/CURRENT.md",
-    " M test/mvdm-host/ccpu_far_exception_fixture.c",
-    " M test/observation/verify-ccpu-callback.ps1",
-    " D test/observation/verify-ccpu-callf-trace.ps1",
-    " M test/observation/verify-ccpu-far-exception.py",
-    "?? artifacts/build-migration/t484/s3-callf/",
-    "?? docs/etc/evidence/t484-s3-callf.md"
+    " M test/observation/verify-console-graphics-publication.ps1",
+    " M test/observation/verify-console-input-batch.ps1",
+    " M test/observation/verify-dem-directory-reset.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/CMakeLists.txt",
+    " M tools/build/worker/observation-tests.cmake",
+    "?? artifacts/build-migration/t484/s3-console-contracts/",
+    "?? docs/etc/evidence/t484-s3-console-contracts.md",
+    "?? tools/build/fixtures/console-contracts.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 96,
-    "unchanged": 139,
+    "changed": 98,
+    "unchanged": 137,
     "removed": 120
   },
   "disposition_counts": {
-    "migrated-delivered": 38,
+    "migrated-delivered": 41,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 119,
+    "retired-with-delivery-evidence": 120,
     "pending-producer-migration": 53,
     "retained-native-delegate": 6,
-    "requires-disposition-reconciliation": 135,
-    "retained-standalone-audit": 1,
-    "retired": 1
+    "requires-disposition-reconciliation": 132,
+    "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 184,
   "files": [
@@ -293,7 +293,12 @@
         "evidence": "docs/etc/evidence/t484-s3-clipboard-epoch.md",
         "commit": "0a797506e",
         "status": "migrated-delivered",
-        "reason": "P34 CMD clipboard-epoch owns production; x86/x64 56 assertions verified"
+        "reason": "P34 CMD clipboard-epoch owns production; x86/x64 56 assertions verified",
+        "retention_review": {
+          "reason": "Current original clipboard callers and epoch provider; controlled failure/reentrancy assertions supplement guest integration.",
+          "decision": "retain",
+          "evidence": "docs/etc/evidence/t484-s3-console-contracts.md"
+        }
       }
     },
     {
@@ -401,7 +406,12 @@
         "status": "migrated-delivered",
         "delivery": "658e4de250f1780412e43100414a9f301faae4a7",
         "reason": "CMD native targets; x86/x64 actual fixed layout and CPU30 rejection pass",
-        "evidence": "docs/etc/evidence/t484-s3-endian.md"
+        "evidence": "docs/etc/evidence/t484-s3-endian.md",
+        "retention_review": {
+          "reason": "Actual register byte layout and excluded CPU30 compile rejection; current focused build contract.",
+          "decision": "retain",
+          "evidence": "docs/etc/evidence/t484-s3-console-contracts.md"
+        }
       }
     },
     {
@@ -2150,9 +2160,13 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
-      "completion": "retired",
+      "revisions": [
+        "676e69df30aa34278a52b96234f3041af9139441"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-callf.md"
+      ],
+      "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired",
         "evidence": "docs/etc/evidence/t484-s3-callf.md",
@@ -2165,8 +2179,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "be0b87777c8da237ca04da8844fcba625b78927a524017654a756dfdcdf0f502",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "676e69df30aa34278a52b96234f3041af9139441"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-callf.md"
+      ],
       "completion": "retained-native-delegate",
       "decision": {
         "status": "retained-native-delegate",
@@ -2227,38 +2245,50 @@
       "id": "B0123",
       "file": "test/observation/verify-console-graphics-publication.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "e01467f576437c6e556d7bfa0739daffacd822195eaa0badb9f981489098f2c5",
+      "state": "changed",
+      "current_sha256": "208f1891231d265cc362a00e27920f08d284eeacbc197b43b4637daf1cbc6c16",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Current behavior retained; compiler orchestration replaced by shared CMD/native targets. Runtime, cache and full product build passed.",
+        "evidence": "docs/etc/evidence/t484-s3-console-contracts.md",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0124",
       "file": "test/observation/verify-console-input-batch.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "a2042f9cb78067cce36bfa824faeafcf14614c43619b3962ab42ea3f52159c4e",
+      "state": "changed",
+      "current_sha256": "046c5f86d59e764d794fc42a53ac75d81ec49ada4051cdeedddc19e771b80d53",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Current behavior retained; compiler orchestration replaced by shared CMD/native targets. Runtime, cache and full product build passed.",
+        "evidence": "docs/etc/evidence/t484-s3-console-contracts.md",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0125",
       "file": "test/observation/verify-dem-directory-reset.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "8fd7fe281e30399a28b2cab317434b1187d8915a440549d165e0143305e48218",
+      "current_sha256": "6e9ec77cef5f4bd66454b0a3fe7cffe086a4a274fb5e1c28fe63397d1560fefc",
       "revisions": [
         "6ddd46112ff732a1e6a4461e4b8a92df8608c031"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-observation-cmake.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Current behavior retained; compiler orchestration replaced by shared CMD/native targets. Runtime, cache and full product build passed.",
+        "evidence": "docs/etc/evidence/t484-s3-console-contracts.md",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0126",
@@ -5251,6 +5281,12 @@
     }
   ],
   "commits": {
+    "676e69df30aa34278a52b96234f3041af9139441": {
+      "subject": "T484 S3 P85 consolidate CCPU runners and retire expired trace assertions",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-callf.md"
+      ]
+    },
     "d01cca67fa7b429c094a9f2482c2c1b8834dea49": {
       "subject": "T484 S3 P84 migrate video tick producer and reconcile CCPU runners",
       "evidence": [
@@ -7109,16 +7145,8 @@
       "file": "test/observation/verify-console-graphics-publication.ps1",
       "hits": [
         {
-          "line": 17,
-          "text": "& $wrapper cl.exe /nologo /MT /W4 /WX /O2 /TC \"/I$repo/src\" \"/I$repo/src/compat/include\" /c (Join-Path $repo $source) \"/Fo$object\" *> (Join-Path $root ((Split-Path $object -Leaf)+'.log'))"
-        },
-        {
-          "line": 22,
-          "text": "& $wrapper link.exe /nologo \"/out:$exe\" @objects kernel32.lib gdi32.lib *> \"$root/link.log\""
-        },
-        {
-          "line": 23,
-          "text": "if($LASTEXITCODE){throw 'Link failed'}"
+          "line": 12,
+          "text": "$exe=\"$repo/build/.ninja/fixtures-$Architecture/console-graphics-publication.exe\""
         }
       ]
     },
@@ -7127,20 +7155,8 @@
       "file": "test/observation/verify-console-input-batch.ps1",
       "hits": [
         {
-          "line": 30,
-          "text": "# by basename when compiling this standalone fixture outside Ninja."
-        },
-        {
-          "line": 32,
-          "text": "& cl.exe /nologo /c /TC /MT /W4 /Gy ('/I'+(Join-Path $root 'src')) ('/I'+(Join-Path $root 'src/compat/include')) ('/Fo'+$object) $source *> (Join-Path $build ('unit-'+$objects.Count+'.log'))"
-        },
-        {
-          "line": 36,
-          "text": "$workerBase=Join-Path $root 'build/.ninja/msvc-x86-release/worker/worker-base.lib'"
-        },
-        {
-          "line": 38,
-          "text": "& link.exe /nologo ('/OUT:'+$exe) /OPT:REF @objects $workerBase user32.lib gdi32.lib *> (Join-Path $build 'build.log')"
+          "line": 15,
+          "text": "$exe=\"$root/build/.ninja/fixtures-x86/console-input-batch.exe\""
         }
       ]
     },
@@ -7149,16 +7165,8 @@
       "file": "test/observation/verify-dem-directory-reset.ps1",
       "hits": [
         {
-          "line": 3,
-          "text": "[string]$BuildCache='build/.ninja/msvc-x86-release/worker')"
-        },
-        {
-          "line": 13,
-          "text": "& $wrapper cmake -S \"$repo/tools/build/worker\" -B $cache 2>&1 |"
-        },
-        {
-          "line": 16,
-          "text": "& $wrapper cmake --build $cache --target image_dem_directory_reset_test_exe 2>&1 |"
+          "line": 9,
+          "text": "$cache=Join-Path $repo 'build/.ninja/msvc-x86-release/worker'"
         }
       ]
     },

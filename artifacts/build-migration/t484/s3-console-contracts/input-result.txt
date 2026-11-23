@@ -1,0 +1,7 @@
+BATCH-PRESSURE full queue consumes nothing; partial capacity and recovery PASS
+BATCH-MOUSE 1000 records / 200 reads; order, buttons, bounds PASS
+BATCH-RELATIVE 1000 records / 200 reads; signed motion, buttons, enter/leave PASS
+BATCH-SCANLESS-TEXT punctuation/case/modifiers/key-up PASS
+BATCH-KEY expansion/mixed-order/capacity/Alt-Enter PASS
+BATCH-RECEIPT identical keys remain distinct through normalization and original history PASS
+PASS registration, unregister backing lifetime and invalidation fallback

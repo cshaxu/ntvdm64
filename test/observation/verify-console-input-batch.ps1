@@ -10,33 +10,9 @@ if(!$log.StartsWith((Join-Path $root 'build')+'\',[StringComparison]::OrdinalIgn
    !$log.StartsWith('O:\winnt\logs\',[StringComparison]::OrdinalIgnoreCase)) {throw 'LogPath must use repository build or approved observation directory'}
 New-Item -ItemType Directory -Force (Split-Path -Parent $log) | Out-Null
 New-Item -ItemType Directory -Force $build | Out-Null
-$vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$envLines=& cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && set')
-foreach($line in $envLines){$i=$line.IndexOf('=');if($i -gt 0){Set-Item -Path ('env:'+$line.Substring(0,$i)) -Value $line.Substring($i+1)}}
-$sources=@('test/app/console_input_batch_test.c',
- 'test/app/console_input_batch_stubs.c',
- 'src/compat/mvdm_keyboard_history.c',
- 'src/compat/mvdm_softpc_mouse_context.c',
- 'src/compat/console_transport.c','src/compat/console_services.c','src/compat/console_activation.c',
- 'src/lib-win32/pipe/pipe_transfer.c','src/lib-win32/handle/duplicate.c',
- 'src/ntvdm-exe/win32/console_client.c','src/compat/console_graphics.c',
- 'src/compat/console_bitmap.c','src/compat/v7_pointer.c','src/compat/console_grid.c',
- 'src/ntvdm-exe/session/session.c', 'src/compat/host_context.c','src/compat/guest_memory_lease.c') |
- ForEach-Object {Join-Path $root $_}
-$exe=Join-Path $build 'console-input-batch.exe'
-$objects=@()
-foreach($source in $sources){
-    # Two owners legitimately have console_client.c; never overwrite objects
-    # by basename when compiling this standalone fixture outside Ninja.
-    $object=Join-Path $build ('unit-'+$objects.Count+'.obj')
-    & cl.exe /nologo /c /TC /MT /W4 /Gy ('/I'+(Join-Path $root 'src')) ('/I'+(Join-Path $root 'src/compat/include')) ('/Fo'+$object) $source *> (Join-Path $build ('unit-'+$objects.Count+'.log'))
-    if($LASTEXITCODE){throw ('Fixture compile failed: '+$source)}
-    $objects+= $object
-}
-$workerBase=Join-Path $root 'build/.ninja/msvc-x86-release/worker/worker-base.lib'
-if(!(Test-Path -LiteralPath $workerBase)){throw 'Build the cached x86 worker-base library first'}
-& link.exe /nologo ('/OUT:'+$exe) /OPT:REF @objects $workerBase user32.lib gdi32.lib *> (Join-Path $build 'build.log')
+& "$root/tools/build-fixtures.cmd" x86 console-input-batch *> "$build/build.log"
 if($LASTEXITCODE){throw 'Batch fixture build failed; see build.log'}
+$exe="$root/build/.ninja/fixtures-x86/console-input-batch.exe"
 & $exe *> $log
 if($LASTEXITCODE){throw ('Batch fixture failed; see '+$log)}
 Get-Content $log

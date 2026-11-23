@@ -1,0 +1,1 @@
+PASS graphics source: host flush publishes a valid unselected software-VGA DIB; 200 invalidations coalesce before one deferred full-frame capture/send; palette-late DIB defers without poisoning publication

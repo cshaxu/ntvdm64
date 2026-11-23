@@ -121,3 +121,5 @@ worker_link("original-callback-ccpu.exe" "/nologo /OPT:REF /force:multiple /alte
 add_custom_target(ccpu-callback DEPENDS "${CMAKE_BINARY_DIR}/original-callback-ccpu.exe"
   "${CMAKE_BINARY_DIR}/ccpu-high-linear-page-test.exe")
 add_custom_target(command-launch DEPENDS "${CMAKE_BINARY_DIR}/ntvdm-command-launch-test.exe")
+
+worker_group(dem-directory-reset "dem-directory-reset-test.exe")

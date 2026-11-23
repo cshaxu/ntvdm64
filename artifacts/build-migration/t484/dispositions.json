@@ -90,7 +90,12 @@
     "evidence": "docs/etc/evidence/t484-s3-clipboard-epoch.md",
     "commit": "0a797506e",
     "status": "migrated-delivered",
-    "reason": "P34 CMD clipboard-epoch owns production; x86/x64 56 assertions verified"
+    "reason": "P34 CMD clipboard-epoch owns production; x86/x64 56 assertions verified",
+    "retention_review": {
+      "reason": "Current original clipboard callers and epoch provider; controlled failure/reentrancy assertions supplement guest integration.",
+      "decision": "retain",
+      "evidence": "docs/etc/evidence/t484-s3-console-contracts.md"
+    }
   },
   "test/broker/verify-package-fresh-stage.ps1": {
     "reason": "Calls physical runtime staging and Set-PackageIdentity.ps1; S4 caller migration required",
@@ -108,7 +113,12 @@
     "status": "migrated-delivered",
     "delivery": "658e4de250f1780412e43100414a9f301faae4a7",
     "reason": "CMD native targets; x86/x64 actual fixed layout and CPU30 rejection pass",
-    "evidence": "docs/etc/evidence/t484-s3-endian.md"
+    "evidence": "docs/etc/evidence/t484-s3-endian.md",
+    "retention_review": {
+      "reason": "Actual register byte layout and excluded CPU30 compile rejection; current focused build contract.",
+      "decision": "retain",
+      "evidence": "docs/etc/evidence/t484-s3-console-contracts.md"
+    }
   },
   "test/build/Test-FullComponentBuild.ps1": {
     "reason": "Coordinates full component builds and generates command scripts; replace production orchestration with CMD",
@@ -520,5 +530,20 @@
     "status": "retained-native-delegate",
     "evidence": "docs/etc/evidence/t484-s3-callf.md",
     "reason": "P85 verifies existing CMD producer delegation and117 unchanged native privilege/memory assertions."
+  },
+  "test/observation/verify-console-graphics-publication.ps1": {
+    "reason": "Current behavior retained; compiler orchestration replaced by shared CMD/native targets. Runtime, cache and full product build passed.",
+    "evidence": "docs/etc/evidence/t484-s3-console-contracts.md",
+    "status": "migrated-delivered"
+  },
+  "test/observation/verify-console-input-batch.ps1": {
+    "reason": "Current behavior retained; compiler orchestration replaced by shared CMD/native targets. Runtime, cache and full product build passed.",
+    "evidence": "docs/etc/evidence/t484-s3-console-contracts.md",
+    "status": "migrated-delivered"
+  },
+  "test/observation/verify-dem-directory-reset.ps1": {
+    "reason": "Current behavior retained; compiler orchestration replaced by shared CMD/native targets. Runtime, cache and full product build passed.",
+    "evidence": "docs/etc/evidence/t484-s3-console-contracts.md",
+    "status": "migrated-delivered"
   }
 }
