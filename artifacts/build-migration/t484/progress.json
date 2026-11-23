@@ -1,33 +1,37 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "247328be53536b5df24747a9b23a083de9e75337",
+  "head": "3938f5b3a3b48f60722511021a20e5d9e1ea7ea6",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/build-wow-callback-abort-provider.ps1",
+    " M test/observation/build-wow-host-attach-failure.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-callback-abort/",
-    "?? docs/etc/evidence/t484-s3-callback-abort.md",
-    "?? tools/build/wow32/callback-abort.cmake"
+    " M tools/build/wow32/callback-abort.cmake",
+    "?? artifacts/build-migration/t484/s3-host-attach/",
+    "?? docs/etc/evidence/t484-s3-host-attach.md",
+    "?? test/observation/wow_attach_failure_marker.inc",
+    "?? test/observation/wow_unload_marker.inc",
+    "?? tools/build/wow32/diagnostic-provider.cmake",
+    "?? tools/build/wow32/host-attach-failure.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 80,
-    "unchanged": 157,
+    "changed": 81,
+    "unchanged": 156,
     "removed": 118
   },
   "disposition_counts": {
-    "migrated-delivered": 26,
+    "migrated-delivered": 27,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 118,
     "pending-producer-migration": 50,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 156,
+    "requires-disposition-reconciliation": 155,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 191,
+  "existing_interpreted_candidates_with_command_hits": 190,
   "files": [
     {
       "id": "B0001",
@@ -1790,8 +1794,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "43eaaa666fc023e8fc4bbfeedf953cf7a4c44cf77bb7aacbef6b620fa9639aef",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "3938f5b3a3b48f60722511021a20e5d9e1ea7ea6"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-callback-abort.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Native target reuses real original_wcall16 profile and229-object product order with one replacement; frame fixture/cache/full build validated; guest fault runtime not repeated",
@@ -1803,12 +1811,16 @@
       "id": "B0100",
       "file": "test/observation/build-wow-host-attach-failure.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "9f2d3aa237070341bc79b88f567548f4d7477f1cc8b6e28f63f8046b968f1880",
+      "state": "changed",
+      "current_sha256": "ece976d3d9564f3179424808353fa606c45ed12a3b2956fef7c679f5a60e576d",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-host-attach.md",
+        "status": "migrated-delivered",
+        "reason": "Two native diagnostic projections match old runner; real product profile/order reused through shared one-object provider; export/cache/full-build checks pass"
+      }
     },
     {
       "id": "B0101",
@@ -5092,6 +5104,12 @@
     }
   ],
   "commits": {
+    "3938f5b3a3b48f60722511021a20e5d9e1ea7ea6": {
+      "subject": "T484 S3 P72 migrate WOW callback abort diagnostic producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-callback-abort.md"
+      ]
+    },
     "247328be53536b5df24747a9b23a083de9e75337": {
       "subject": "T484 S3 P71 retire incomplete historical performance builder",
       "evidence": [
@@ -6635,60 +6653,6 @@
         {
           "line": 24,
           "text": "@($PSCommandPath,\"$PSScriptRoot/wow_callback_abort_provider.c\",\"$repo/src/mvdm-host/wow32/wcall16.c\",\"$provider/build.ninja\")+$objects|Get-FileHash|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
-        }
-      ]
-    },
-    {
-      "id": "B0100",
-      "file": "test/observation/build-wow-host-attach-failure.ps1",
-      "hits": [
-        {
-          "line": 10,
-          "text": "$ninja=(Get-Command ninja.exe).Source"
-        },
-        {
-          "line": 69,
-          "text": "$command=@(& $ninja -t commands $object)[-1]"
-        },
-        {
-          "line": 78,
-          "text": "$link=@(& $ninja -t commands wow32.dll)[-1]"
-        },
-        {
-          "line": 79,
-          "text": "if($LASTEXITCODE -or $link -notmatch '^link '){throw 'Actual provider link command unavailable'}"
-        },
-        {
-          "line": 80,
-          "text": "foreach($name in $replacements.Keys){$link=$link.Replace($name,$replacements[$name])}"
-        },
-        {
-          "line": 81,
-          "text": "$link=$link.Replace('/map:wow32.dll.map',\"/map:$out/diagnostic.map\").Replace('/out:wow32.dll',\"/out:$out/WOW32.DLL\")"
-        },
-        {
-          "line": 89,
-          "text": "if(!$link.Contains($defArg)){throw 'Selected export definition missing from link'}"
-        },
-        {
-          "line": 90,
-          "text": "$link=$link.Replace($defArg,\"/def:$out/diagnostic.def\")"
-        },
-        {
-          "line": 92,
-          "text": "$link+=\" /implib:$out/diagnostic.lib\""
-        },
-        {
-          "line": 93,
-          "text": "[IO.File]::WriteAllText(\"$out/link.cmd\",\"@echo off`r`ncall `\"$driver`\" $link`r`nexit /b %errorlevel%`r`n\")"
-        },
-        {
-          "line": 94,
-          "text": "& cmd.exe /d /c \"$out/link.cmd\" *> \"$out/link.log\""
-        },
-        {
-          "line": 95,
-          "text": "if($LASTEXITCODE){throw 'Diagnostic link failed'}"
         }
       ]
     },

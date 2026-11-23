@@ -108,4 +108,6 @@ include(callback-cost.cmake)
 include(graph-cost.cmake)
 include(crt-tests.cmake)
 
+include(diagnostic-provider.cmake)
 include(callback-abort.cmake)
+include(host-attach-failure.cmake)

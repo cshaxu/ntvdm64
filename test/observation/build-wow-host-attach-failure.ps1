@@ -1,98 +1,28 @@
 param([Parameter(Mandatory)][string]$BuildRoot,[Parameter(Mandatory)][string]$ProviderBuildRoot,
  [ValidateSet('AttachFailure','MissingInit')][string]$FailureMode='AttachFailure')
-# Disposable copy of the selected original WOW32 object; no production change.
-# Never change cached graphs, original sources, guest media or release files.
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $out=[IO.Path]::GetFullPath($BuildRoot);$provider=(Resolve-Path $ProviderBuildRoot).Path
 if(!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Fresh build-owned diagnostic output required'}
 $null=New-Item -ItemType Directory $out
-$ninja=(Get-Command ninja.exe).Source
-$driver="$provider/msvc-x86.cmd"
-$replacements=@{}
-Push-Location $provider
-try{
- foreach($name in @('wow32')){
-  $source="$repo/src/mvdm-host/wow32/wow32.c"
-  $text=[IO.File]::ReadAllText($source)
-  $text=$text.Replace("`r`n","`n")
-  $needle='if (!CreateSmallHeap())'
-  if(([regex]::Matches($text,[regex]::Escape($needle))).Count -ne 1){throw 'Original attach failure edge changed'}
-  $entry="BOOLEAN`nW32DllInitialize("
-  if(!$text.Contains($entry)){throw 'Original DLL initializer boundary changed'}
-  $marker=@'
-static BOOL wow_fixture_attach_failure(void)
-{
-    char path[MAX_PATH]; DWORD length, written; HANDLE file;
-    length = GetEnvironmentVariableA("MVDM_TEST_WOW_ATTACH_MARKER", path, sizeof(path));
-    if (length && length < sizeof(path)) {
-        file = CreateFileA(path, GENERIC_WRITE, FILE_SHARE_READ, NULL,
-            CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-        if (file != INVALID_HANDLE_VALUE) {
-            WriteFile(file, "attach-failure", 14, &written, NULL);
-            CloseHandle(file);
-        }
-    }
-    return TRUE;
-}
-
-'@
-  if($FailureMode -eq 'AttachFailure') {
-   $text=$text.Replace($entry,$marker+$entry)
-   $text=$text.Replace($needle,'if (wow_fixture_attach_failure())')
-  } else {
-   $marker=@'
-static void wow_fixture_unload_marker(const char *message, DWORD size)
-{
-    char path[MAX_PATH]; DWORD length, written; HANDLE file;
-    length = GetEnvironmentVariableA("MVDM_TEST_WOW_UNLOAD_MARKER", path, sizeof(path));
-    if (length && length < sizeof(path)) {
-        file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ, NULL,
-            OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-        if (file != INVALID_HANDLE_VALUE) {
-            WriteFile(file, message, size, &written, NULL);
-            CloseHandle(file);
-        }
-    }
-}
-
-'@
-   $text=$text.Replace($entry,$marker+$entry)
-   foreach($needle in @('InitializeListHead(&TimerList);','HeapDestroy (hWOWHeap);')) {
-    if(([regex]::Matches($text,[regex]::Escape($needle))).Count -ne 1){throw 'Initializer marker boundary changed'}
-   }
-   $text=$text.Replace('InitializeListHead(&TimerList);','InitializeListHead(&TimerList); wow_fixture_unload_marker("attach\n",7);')
-   $text=$text.Replace('HeapDestroy (hWOWHeap);','HeapDestroy (hWOWHeap); wow_fixture_unload_marker("detach\n",7);')
-  }
-  [IO.File]::WriteAllText("$out/$name.c",$text)
-  $object="obj/wow32.obj"
-  $command=@(& $ninja -t commands $object)[-1]
-  if($LASTEXITCODE){throw 'Compile command unavailable'}
-  $command=$command.Replace($source.Replace('\','/'),"$out/$name.c".Replace('\','/')).Replace($object,"$out/$name.obj".Replace('\','/'))
-  $script="@echo off`r`ncall `"$driver`" $command`r`nexit /b %errorlevel%`r`n"
-  [IO.File]::WriteAllText("$out/$name.cmd",$script)
-  & cmd.exe /d /c "$out/$name.cmd" *> "$out/$name.build.log"
-  if($LASTEXITCODE){throw "Diagnostic compile failed: $name"}
-  $replacements[$object]="$out/$name.obj".Replace('\','/')
- }
- $link=@(& $ninja -t commands wow32.dll)[-1]
- if($LASTEXITCODE -or $link -notmatch '^link '){throw 'Actual provider link command unavailable'}
- foreach($name in $replacements.Keys){$link=$link.Replace($name,$replacements[$name])}
- $link=$link.Replace('/map:wow32.dll.map',"/map:$out/diagnostic.map").Replace('/out:wow32.dll',"/out:$out/WOW32.DLL")
- if($FailureMode -eq 'MissingInit') {
-  $originalDef="$provider/wow32-x86.def"
-  $def=[IO.File]::ReadAllText($originalDef)
-  if(([regex]::Matches($def,'(?m)^\s*W32Init\s*$')).Count -ne 1){throw 'Missing exact init export'}
-  $def=[regex]::Replace($def,'(?m)^\s*W32Init\s*$','    W32InitS31Hidden=W32Init')
-  [IO.File]::WriteAllText("$out/diagnostic.def",$def)
-  $defArg='/def:'+$originalDef.Replace('\','/')
-  if(!$link.Contains($defArg)){throw 'Selected export definition missing from link'}
-  $link=$link.Replace($defArg,"/def:$out/diagnostic.def")
- }
- $link+=" /implib:$out/diagnostic.lib"
- [IO.File]::WriteAllText("$out/link.cmd","@echo off`r`ncall `"$driver`" $link`r`nexit /b %errorlevel%`r`n")
- & cmd.exe /d /c "$out/link.cmd" *> "$out/link.log"
- if($LASTEXITCODE){throw 'Diagnostic link failed'}
- Get-FileHash $source,$PSCommandPath,"$out/WOW32.DLL","$out/wow32.c"|Export-Csv -NoTypeInformation "$out/inputs.csv"
- @{kind='diagnostic-only';publishable=$false;source='Original selected WOW32 diagnostic copy';failureMode=$FailureMode;guestChanged=$false}|ConvertTo-Json|Set-Content "$out/result.json"
-}catch{$_|Out-String|Set-Content "$out/failure.txt";exit 1}finally{Pop-Location}
+$kind=if($FailureMode -eq 'AttachFailure'){'attach-failure'}else{'missing-init'}
+$normal=(Get-FileHash "$provider/wow32.dll").Hash
+$line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-'+$kind+' "'+$provider+'""'
+try {
+$p=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$out/build.stdout" -RedirectStandardError "$out/build.stderr"
+try {
+ $null=$p.Handle
+ @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');command=$line;timeoutSeconds=180}|ConvertTo-Json|Set-Content "$out/build.owner.json"
+ if(!$p.WaitForExit(180000)){$p.Kill($true);$p.WaitForExit();throw 'WOW attach producer deadline'}
+ $p.WaitForExit();$p.ExitCode|Set-Content "$out/build.exit"
+ if($p.ExitCode){throw 'Native WOW attach build failed'}
+} finally {$p.Dispose()}
+$cache="$provider/diagnostics/$kind"
+Copy-Item "$cache/WOW32.dll","$cache/wow32.c" $out
+Copy-Item "$cache/WOW32.map" "$out/diagnostic.map"
+Copy-Item "$cache/WOW32.lib" "$out/diagnostic.lib"
+if($FailureMode -eq 'MissingInit'){Copy-Item "$cache/diagnostic.def" $out}
+if((Get-FileHash "$provider/wow32.dll").Hash -ne $normal){throw 'Normal provider changed'}
+Get-FileHash "$repo/src/mvdm-host/wow32/wow32.c",$PSCommandPath,"$out/WOW32.DLL","$out/wow32.c"|Export-Csv -NoTypeInformation "$out/inputs.csv"
+@{kind='diagnostic-only';publishable=$false;source='Original selected WOW32 diagnostic copy';failureMode=$FailureMode;guestChanged=$false}|ConvertTo-Json|Set-Content "$out/result.json"
+}catch{$_|Out-String|Set-Content "$out/failure.txt";exit 1}

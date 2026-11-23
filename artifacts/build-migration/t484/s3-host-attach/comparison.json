@@ -1,0 +1,12 @@
+[
+  {
+    "sourceCharacters": 46093,
+    "mode": "AttachFailure",
+    "equivalent": true
+  },
+  {
+    "sourceCharacters": 46168,
+    "mode": "MissingInit",
+    "equivalent": true
+  }
+]

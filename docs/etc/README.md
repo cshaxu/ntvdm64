@@ -1633,3 +1633,5 @@ post-publication targeted checks.
 - [T484 S3 obsolete performance producer](evidence/t484-s3-performance-retirement.md)
 
 - [T484 S3 callback abort producer](evidence/t484-s3-callback-abort.md)
+
+- [T484 S3 host attach failure producers](evidence/t484-s3-host-attach.md)

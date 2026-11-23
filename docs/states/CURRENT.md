@@ -96,7 +96,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P72 callback abort producer](../etc/evidence/t484-s3-callback-abort.md) | Native229-object diagnostic replaces only wcall16; frame fixture/cache/full build/hash checks pass; B0099 complete. |
 
-Implementation batches through P72 passed their cached full host build. P72 checks11 raw host inputs
+| [P73 host attach producers](../etc/evidence/t484-s3-host-attach.md) | Two native failure modes preserve old source projection; shared229-object provider, exports/cache/frame/full-build checks pass; B0100 complete. |
+
+Implementation batches through P73 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

@@ -1,0 +1,31 @@
+{
+  "exit": 0,
+  "finished": "2026-11-23T22:09:21.7461517Z",
+  "frameFixture": "passed",
+  "pid": 21496,
+  "guestFaultRuntime": "not executed",
+  "diagnostics": [
+    {
+      "objects": 229,
+      "kind": "attach-failure",
+      "cacheStable": true,
+      "sha256": "C546710D7E230B4C095E972CE721F042461CAD30C6EDCD626E0F8C64483D26EF",
+      "replaced": 1
+    },
+    {
+      "objects": 229,
+      "kind": "missing-init",
+      "cacheStable": true,
+      "sha256": "6F18C209E0E17E6BD2CB4B4F2DEB1AA0CE9DB8AE0FDB4C85ABA5CAF006896736",
+      "replaced": 1
+    },
+    {
+      "objects": 229,
+      "kind": "callback-abort",
+      "cacheStable": true,
+      "sha256": "32FF7EFDA478799116F582111A9F89CD93F2EA42A2D9EE42A54BAE0C5EBCB0A3",
+      "replaced": 1
+    }
+  ],
+  "start": "2026-11-23T22:08:32.5119387Z"
+}

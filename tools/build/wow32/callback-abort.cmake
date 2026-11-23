@@ -1,26 +1,4 @@
-# Full original callback TU with the existing diagnostic wrapper substituted.
-set(root "${CMAKE_BINARY_DIR}/diagnostics/callback-abort")
-get_target_property(flags original_wcall16 COMPILE_FLAGS)
-add_library(callback_abort_object OBJECT EXCLUDE_FROM_ALL
-  "${NTVDM_REPO}/test/observation/wow_callback_abort_provider.c")
-set_target_properties(callback_abort_object PROPERTIES COMPILE_FLAGS "${flags}")
-set(diagnostic_objects ${objects})
-list(FIND diagnostic_objects "$<TARGET_OBJECTS:original_wcall16>" index)
-if(index LESS 0)
-  message(FATAL_ERROR "Callback abort owner missing from product link")
-endif()
-list(REMOVE_AT diagnostic_objects ${index})
-list(INSERT diagnostic_objects ${index} "$<TARGET_OBJECTS:callback_abort_object>")
-add_library(wow_callback_abort SHARED EXCLUDE_FROM_ALL ${diagnostic_objects})
-set_target_properties(wow_callback_abort PROPERTIES LINKER_LANGUAGE C PREFIX ""
-  OUTPUT_NAME WOW32 RUNTIME_OUTPUT_DIRECTORY "${root}" ARCHIVE_OUTPUT_DIRECTORY "${root}")
-add_dependencies(wow_callback_abort wow-imports)
-get_target_property(libraries wow32 LINK_LIBRARIES)
-target_link_libraries(wow_callback_abort PRIVATE ${libraries})
-target_link_options(wow_callback_abort PRIVATE "/map:${root}/WOW32.map" "/def:${CMAKE_BINARY_DIR}/wow32-x86.def")
-set_property(TARGET wow_callback_abort APPEND PROPERTY LINK_DEPENDS "${CMAKE_BINARY_DIR}/wow32-x86.def")
-file(GENERATE OUTPUT "${root}/objects.txt" CONTENT "$<JOIN:${diagnostic_objects},\n>\n")
-file(GENERATE OUTPUT "${root}/callback-object.txt" CONTENT "$<TARGET_OBJECTS:callback_abort_object>\n")
-add_custom_target(wow-callback-abort DEPENDS wow_callback_abort)
-file(GENERATE OUTPUT "${root}/product-objects.txt" CONTENT "$<JOIN:${objects},\n>\n")
-file(GENERATE OUTPUT "${root}/original-object.txt" CONTENT "$<TARGET_OBJECTS:original_wcall16>\n")
+# Existing complete callback wrapper; only its one product TU is substituted.
+wow_diagnostic_provider(callback-abort original_wcall16
+  "${NTVDM_REPO}/test/observation/wow_callback_abort_provider.c"
+  "${CMAKE_BINARY_DIR}/wow32-x86.def")
