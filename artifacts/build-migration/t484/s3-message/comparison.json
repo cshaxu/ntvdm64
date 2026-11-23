@@ -1,0 +1,132 @@
+[
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\0\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\0\\MSGHOST.DLL",
+    "oldBytes": 84992,
+    "newBytes": 84992,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "9f2f2fabd333d767630d44b067c308a58064f9588712d8fe96b626222e3e7755",
+    "newSha256": "b7db4a31391b263e495b6a1182b8e15df7d2bab9236e03ae065e88baddb28c1d"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\1\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\1\\MSGHOST.DLL",
+    "oldBytes": 84992,
+    "newBytes": 84992,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "9f2f2fabd333d767630d44b067c308a58064f9588712d8fe96b626222e3e7755",
+    "newSha256": "43c07aeed60b3a233cffc156a01df4faae0c9b90a78eb0266e82214d9a0d88ba"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\6\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\6\\MSGHOST.DLL",
+    "oldBytes": 86528,
+    "newBytes": 86528,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "ea8660d7d68134a1b6b169bb8afcdd339b8e632c9adb3d54bab2da1b15f83b1c",
+    "newSha256": "e1f2f07905a100e9c81886ebde67072510c10e6ea4fe03bce48b39e00f07a575"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\14\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\14\\MSGHOST.DLL",
+    "oldBytes": 88576,
+    "newBytes": 88576,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "550710205eb4dd999aee987619abcdbe3d4b6da0ebafcd4c7834b48539f2b5f6",
+    "newSha256": "060481331555c50c39d41eb0cf88996ff0b3d88bcf36b93b83ddcdbd1f286573"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\30\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\30\\MSGHOST.DLL",
+    "oldBytes": 88576,
+    "newBytes": 88576,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "ae8cc234916a81ac46865710bade66dd0babef9d4ad3ff9de80fbaf2c4795814",
+    "newSha256": "c5f6180aa6cca8b8614dcbbb2704548f32af846461b359e5ded69d2df47985e0"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\38\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\38\\MSGHOST.DLL",
+    "oldBytes": 112640,
+    "newBytes": 112640,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "eeb744aa82c688503a6f36e3b617b062d12ac2f4df2cb3dafbb5189aeb2fcee6",
+    "newSha256": "f59efcc2328c8d3391ef36314d3cec70394f88f3a97a75242f80bab7a15716ac"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\70\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\70\\MSGHOST.DLL",
+    "oldBytes": 86528,
+    "newBytes": 86528,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "c54e73609da08279809cff15b7da789f36ce2ee79502ed0c3d9909d2227a95f9",
+    "newSha256": "72f873afbce4befddc1b1cd8faef6ee01e608dfa2a9d29546ded6563ce88b660"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\134\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\134\\MSGHOST.DLL",
+    "oldBytes": 86528,
+    "newBytes": 86528,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "c54e73609da08279809cff15b7da789f36ce2ee79502ed0c3d9909d2227a95f9",
+    "newSha256": "6b8bbced01a2a71bf7b6bf783ce533766392977669b9db0a9b8c16bf92e5d1aa"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\262\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\262\\MSGHOST.DLL",
+    "oldBytes": 86528,
+    "newBytes": 86528,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "5ce21cd51b6b34b73112eb369f8c070da7162d4b665e8485c8ca3fc5291f9f7b",
+    "newSha256": "92f21dbb93e34ea3d54e65a1b1e87bfbcba2bc66cffe6941f1dc05dad1233a60"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\518\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\518\\MSGHOST.DLL",
+    "oldBytes": 127488,
+    "newBytes": 127488,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "94ee968145b392cc6b93d894be3023f3414be370f77d38fc326f91b54593deeb",
+    "newSha256": "d528a7d06e2303ed59b9c4b794eb6b303f36662b218b46701b7fb0b107ec1cec"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\1542\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\1542\\MSGHOST.DLL",
+    "oldBytes": 128000,
+    "newBytes": 128000,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "c0cbbb943d1d850ab42c03f74b149d58f0b8fd316a3391e08eba2cb2993be101",
+    "newSha256": "8c0c761f0d34dd2f73508b3fbce1b7fd301c603bc88b28ff6827eb9c4fe1ce42"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\2566\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\2566\\MSGHOST.DLL",
+    "oldBytes": 127488,
+    "newBytes": 127488,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "94ee968145b392cc6b93d894be3023f3414be370f77d38fc326f91b54593deeb",
+    "newSha256": "3896183455404c47ee1bc9459989c1b4ad1786f22b9f001bb7cf4cde1ad7b532"
+  },
+  {
+    "old": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-message\\old\\4358\\MSGHOST.DLL",
+    "new": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\guest-probes\\message\\4358\\MSGHOST.DLL",
+    "oldBytes": 87552,
+    "newBytes": 87552,
+    "changedBytes": 4,
+    "kind": "timestamps-only",
+    "oldSha256": "705fa7d44d7f5c9dba80ff90ce04db0d9ebd0cb1432e5273d9b6c52b216d5b53",
+    "newSha256": "eec41fbfc989a1226448645c0f4e6d13c9fa73455ed314d1069bfb7393607dbb"
+  }
+]

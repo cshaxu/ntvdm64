@@ -1,0 +1,10 @@
+{
+  "exit": 0,
+  "started": "2026-11-23T19:08:31.8798117+00:00",
+  "parser": "pass",
+  "peerComparisons": 13,
+  "cache": "stable",
+  "rejections": 6,
+  "pid": 14584,
+  "finished": "2026-11-23T19:08:46.4080417+00:00"
+}

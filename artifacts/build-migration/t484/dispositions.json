@@ -217,7 +217,8 @@
   },
   "test/integration/verify-win16-message-probe.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Invokes NASM, CL DLL link and Add-Type output assembly"
+    "reason": "P47 native guest/native-peer composition verified across13 feature groups; logon helper compilation and shared runtime staging remain pending",
+    "evidence": "docs/etc/evidence/t484-s3-message-probes.md"
   },
   "test/integration/verify-win16-multimedia-timer-probe.ps1": {
     "status": "pending-producer-migration",

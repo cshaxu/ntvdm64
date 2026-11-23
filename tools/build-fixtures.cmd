@@ -1,8 +1,10 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="serial-discovery" if not "%~3"=="" exit /b 2
+if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
+if "%~2"=="win16-message" goto message_arguments
+if "%~2"=="win16-message-guest" goto message_arguments
 if not "%~2"=="serial-discovery" goto arguments
 if "%~3"=="" exit /b 2
 for /f "delims=0123456789" %%I in ("%~3") do exit /b 2
@@ -11,11 +13,22 @@ if not "%SERIAL_MASK:~3%"=="" exit /b 2
 if not "%SERIAL_MASK%"=="0" if "%SERIAL_MASK:~0,1%"=="0" exit /b 2
 if %SERIAL_MASK% GTR 511 exit /b 2
 set "SERIAL_OPTION=-DNTVDM_SERIAL_MASK=%SERIAL_MASK%"
+goto arguments
+:message_arguments
+if "%~3"=="" exit /b 2
+for /f "delims=0123456789" %%I in ("%~3") do exit /b 2
+set "MESSAGE_MASK=%~3"
+if not "%MESSAGE_MASK:~4%"=="" exit /b 2
+if not "%MESSAGE_MASK%"=="0" if "%MESSAGE_MASK:~0,1%"=="0" exit /b 2
+if %MESSAGE_MASK% GTR 8191 exit /b 2
+set "SERIAL_OPTION=-DNTVDM_MESSAGE_MASK=%MESSAGE_MASK%"
 :arguments
 if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+for %%I in (win16-message win16-message-guest) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (win16-message win16-message-guest) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (guest-memory redirector-async guest-location wow-task-frame wow-callback-frame xms-mapped redirector-contract xms-startup dem-file-lifecycle redirector-guest-copy) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (guest-probes guest-redir guest-video-int10 guest-video-direct guest-video-graphics guest-video-handshake guest-system guest-keymouse guest-bios guest-support guest-disks guest-comms guest-comms-medium guest-dem guest-command guest-vdd command-tools) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="memory-profiles" set "SELECTED=1"

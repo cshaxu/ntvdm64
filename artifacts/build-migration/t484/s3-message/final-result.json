@@ -1,0 +1,11 @@
+{
+  "parsed": [
+    "verify-win16-message-probe"
+  ],
+  "finished": "2026-11-23T19:10:53.9544479+00:00",
+  "rawHostImages": 11,
+  "exit": 0,
+  "started": "2026-11-23T19:10:32.5508818+00:00",
+  "publishedHashes": 22,
+  "pid": 31140
+}

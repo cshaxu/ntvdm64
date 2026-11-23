@@ -94,7 +94,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P46 discovery pair](../etc/evidence/t484-s3-discovery.md) | Guest/listing identical;native peer differs only in two timestamps;local producers migrated, shared staging remains open. |
 
-Each batch passed its cached full host build. P46 checks11 raw host inputs
+| [P47 message probes](../etc/evidence/t484-s3-message-probes.md) | Native feature composition;26 guest binaries/listings identical,13 timestamp-only peers, cache and6 rejection checks pass; helper/staging pending. |
+
+Each batch passed its cached full host build. P47 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

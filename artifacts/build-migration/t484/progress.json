@@ -1,21 +1,21 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "0bc98a10332d70a4d664b416de44a639009e61be",
+  "head": "8fd03cccb31589ad5cba971b60b3560bfcdd2548",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/Invoke-Win16ProbeBuild.ps1",
-    " M test/integration/verify-win16-discovery.ps1",
+    " M test/integration/verify-win16-message-probe.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/win16-probes.cmake",
-    "?? artifacts/build-migration/t484/s3-discovery/",
-    "?? docs/etc/evidence/t484-s3-discovery.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-message/",
+    "?? docs/etc/evidence/t484-s3-message-probes.md",
+    "?? tools/build/fixtures/win16-message.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 51,
-    "unchanged": 191,
+    "changed": 52,
+    "unchanged": 190,
     "removed": 113
   },
   "disposition_counts": {
@@ -776,8 +776,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "261a501497fe75eb358938865f9ee650944edbcc0a0b0dc389ad504eabf8eb46",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "8fd03cccb31589ad5cba971b60b3560bfcdd2548"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-discovery.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -789,14 +793,15 @@
       "id": "B0045",
       "file": "test/integration/verify-win16-message-probe.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "63107be274c1a7ba83b09ad0ef19a181851c40f98659b0afb34ea4e845ef16d5",
+      "state": "changed",
+      "current_sha256": "563ecaf0a9f27c3a522e49e68f4f5e76fbd8405afb9fdb027643079a42dcbadb",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM, CL DLL link and Add-Type output assembly"
+        "reason": "P47 native guest/native-peer composition verified across13 feature groups; logon helper compilation and shared runtime staging remain pending",
+        "evidence": "docs/etc/evidence/t484-s3-message-probes.md"
       }
     },
     {
@@ -4826,6 +4831,12 @@
     }
   ],
   "commits": {
+    "8fd03cccb31589ad5cba971b60b3560bfcdd2548": {
+      "subject": "T484 S3 P46 migrate discovery probe producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-discovery.md"
+      ]
+    },
     "0bc98a10332d70a4d664b416de44a639009e61be": {
       "subject": "T484 S3 P45 share fixed Win16 probe producers",
       "evidence": [
@@ -5678,16 +5689,12 @@
           "text": "[string]$Nasm='nasm.exe',"
         },
         {
-          "line": 111,
-          "text": "$assembler=(Get-Command $Nasm -ErrorAction Stop).Source"
+          "line": 123,
+          "text": "$cache=\"$repo/build/.ninja/fixtures-x86/guest-probes/message/$mask\""
         },
         {
-          "line": 134,
+          "line": 128,
           "text": "if(!$path.StartsWith((Join-Path $repo 'build/.ninja')+'\\',[StringComparison]::OrdinalIgnoreCase)){throw 'External peer/host must come from stable Ninja fixture targets'}"
-        },
-        {
-          "line": 158,
-          "text": "& $compiler cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS @nativeDefines \"/Fo$root/peer.obj\" $native /link \"/OUT:$root/MSGHOST.DLL\" \"/IMPLIB:$root/MSGHOST.lib\" /EXPORT:MessagePeer=_MessagePeer@4 /EXPORT:MessageExtension=_MessageExtension@12 user32.lib *> \"$root/native-build.txt\""
         }
       ]
     },

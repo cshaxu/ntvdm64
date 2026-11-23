@@ -2,7 +2,7 @@
 param(
  [Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
- [Parameter(Mandatory)][string]$CompilerDriver,
+ [string]$CompilerDriver,
  [Parameter(Mandatory)][string]$BuildRoot,
  [string]$Nasm='nasm.exe',
  [ValidateSet('Package','Empty','WfwNet')][string]$NetworkDriver='Package',
@@ -77,7 +77,7 @@ $null=New-Item -ItemType Directory $root
 $runtime=$null;$scope=$null;$process=$null
 $assembly="$PSScriptRoot/../observation/win16_message_probe.asm"
 $native="$PSScriptRoot/../observation/wow_message_peer.c"
-$compiler=(Resolve-Path -LiteralPath $CompilerDriver).Path
+
 function Read-GuestReport([string]$path,[string]$name){
  $bytes=[IO.File]::ReadAllBytes($path)
  $recordBytes=if($ThreadClientView){40}else{34}
@@ -108,26 +108,20 @@ function Read-GuestReport([string]$path,[string]$name){
  return $rows
 }
 try{
- $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
- foreach($role in @('SEND','RECV')){
-  $arguments=@('-f','bin','-o',"$root/MSG$role.EXE",'-l',"$root/$role.lst")
-  if($role -eq 'RECV'){$arguments+='-DRECEIVER'}
-  if($NativeExtension){$arguments+='-DEXTENSION_WITNESS'}
-  if($ThreadClientView){$arguments+='-DTHREAD_CLIENT_VIEW'}
-  if($StructuredPayloads){$arguments+='-DM4_STRUCTURES'}
-  if($ReplyPayloadLifetime){$arguments+='-DM4_REPLY_PAYLOAD'}
-  if($TimeoutPayloadLifetime){$arguments+='-DM4_TIMEOUT_PAYLOAD'}
-  if($CopyDataProc32){$arguments+='-DM4_COPYDATA_PROC32'}
-  if($CrossWorkerCoordinator){$arguments+='-DCROSS_WORKER'}
-  if($PendingSend){$arguments+='-DPENDING_SEND'}
-  if($Construction){$arguments+='-DCONSTRUCTION'}
-  if($ClassicDde){$arguments+='-DCLASSIC_DDE'}
-  if($ClassicDdeTaskLoss){$arguments+='-DCLASSIC_DDE_TASK_LOSS'}
-  if($SyncDdeDiagnostic){$arguments+='-DSYNC_DDE_DIAGNOSTIC'}
-  if($TransactionDiagnosticManifest -and $role -eq 'SEND'){$arguments+='-DMESSAGE_TRANSACTION'}
-  & $assembler @arguments $assembly *> "$root/$role-assemble.txt"
-  if($LASTEXITCODE){throw "Independent $role assembly failed"}
- }
+ $features=@($NativeExtension,$ThreadClientView,$StructuredPayloads,$ReplyPayloadLifetime,
+  $TimeoutPayloadLifetime,$CopyDataProc32,[bool]$CrossWorkerCoordinator,$PendingSend,
+  $Construction,$ClassicDde,$ClassicDdeTaskLoss,$SyncDdeDiagnostic,[bool]$TransactionDiagnosticManifest)
+ $mask=0;for($i=0;$i -lt $features.Count;$i++){if($features[$i]){$mask=$mask -bor (1 -shl $i)}}
+ $target=if($NativeHost){'win16-message-guest'}else{'win16-message'}
+ $line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 '+$target+' '+$mask+'"'
+ $producer=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/build.txt" -RedirectStandardError "$root/build.stderr.txt"
+ try {
+  @{pid=$producer.Id;start=$producer.StartTime.ToUniversalTime().ToString('o');command=$line}|ConvertTo-Json|Set-Content "$root/producer.json"
+  if(!$producer.WaitForExit(300000)){& taskkill.exe /PID $producer.Id /T /F *> "$root/build-timeout.txt";throw 'Message producer timeout'}
+  $producer.Refresh();if($producer.ExitCode){throw "Message producer failed: $($producer.ExitCode)"}
+ }finally{$producer.Dispose()}
+ $cache="$repo/build/.ninja/fixtures-x86/guest-probes/message/$mask"
+ Copy-Item "$cache/MSGSEND.EXE","$cache/MSGRECV.EXE","$cache/SEND.lst","$cache/RECV.lst" $root
  if($NativeHost){
   foreach($image in @($ExternalNativePeer,$NativeHost,$CrossWorkerCoordinator)|Where-Object {$_}){
    $path=(Resolve-Path $image).Path
@@ -145,19 +139,7 @@ try{
   if($externalMachine -notin @(0x14c,0x8664)){throw 'Wrong external peer PE machine'}
   }
  }else{
- Push-Location $root
- try{
-  $nativeDefines=@();if($StructuredPayloads){$nativeDefines+='/DM4_STRUCTURES'}
-  if($ReplyPayloadLifetime){$nativeDefines+='/DM4_REPLY_PAYLOAD'}
-  if($TimeoutPayloadLifetime){$nativeDefines+='/DM4_TIMEOUT_PAYLOAD'}
-  if($CopyDataProc32){$nativeDefines+='/DM4_COPYDATA_PROC32'}
-  if($Construction){$nativeDefines+='/DMESSAGE_CONSTRUCTION'}
-  if($ClassicDde){$nativeDefines+='/DCLASSIC_DDE'}
-  if($ClassicDdeTaskLoss){$nativeDefines+='/DCLASSIC_DDE_TASK_LOSS'}
-  if($TransactionDiagnosticManifest){$nativeDefines+='/DMESSAGE_TRANSACTION'}
-  & $compiler cl.exe /nologo /LD /MT /O2 /W4 /WX /D_CRT_SECURE_NO_WARNINGS @nativeDefines "/Fo$root/peer.obj" $native /link "/OUT:$root/MSGHOST.DLL" "/IMPLIB:$root/MSGHOST.lib" /EXPORT:MessagePeer=_MessagePeer@4 /EXPORT:MessageExtension=_MessageExtension@12 user32.lib *> "$root/native-build.txt"
-  if($LASTEXITCODE){throw 'Native peer build failed'}
- }finally{Pop-Location}
+ Copy-Item "$cache/MSGHOST.DLL","$cache/MSGHOST.lib" $root
  }
  Get-FileHash $assembly,$native,$PSCommandPath,"$root/MSGSEND.EXE","$root/MSGRECV.EXE","$root/MSGHOST.DLL"|Export-Csv -NoTypeInformation "$root/probe-inputs.csv"
  if($ReplyPayloadLifetime){Get-FileHash "$PSScriptRoot/../observation/wow_reply_payload_lifetime.h","$PSScriptRoot/../observation/wow_reply_payload_report.ps1"|Export-Csv -NoTypeInformation "$root/reply-source-inputs.csv"}

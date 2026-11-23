@@ -1,0 +1,73 @@
+{
+  "finished": "2026-11-23T19:07:23.8919795+00:00",
+  "exit": 0,
+  "started": "2026-11-23T19:06:14.7521445+00:00",
+  "cases": [
+    {
+      "mask": 0,
+      "peer": "B7DB4A31391B263E495B6A1182B8E15DF7D2BAB9236E03AE065E88BADDB28C1D",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 1,
+      "peer": "43C07AEED60B3A233CFFC156A01DF4FAAE0C9B90A78EB0266E82214D9A0D88BA",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 6,
+      "peer": "E1F2F07905A100E9C81886EBDE67072510C10E6EA4FE03BCE48B39E00F07A575",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 14,
+      "peer": "060481331555C50C39D41EB0CF88996FF0B3D88BCF36B93B83DDCDBD1F286573",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 30,
+      "peer": "C5F6180AA6CCA8B8614DCBBB2704548F32AF846461B359E5DED69D2DF47985E0",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 38,
+      "peer": "F59EFCC2328C8D3391EF36314D3CEC70394F88F3A97A75242F80BAB7A15716AC",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 70,
+      "peer": "72F873AFBCE4BEFDDC1B1CD8FAEF6EE01E608DFA2A9D29546DED6563CE88B660",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 134,
+      "peer": "6B8BBCED01A2A71BF7B6BF783CE533766392977669B9DB0A9B8C16BF92E5D1AA",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 262,
+      "peer": "92F21DBB93E34EA3D54E65A1B1E87BFBCBA2BC66CFFE6941F1DC05DAD1233A60",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 518,
+      "peer": "D528A7D06E2303ED59B9C4B794EB6B303F36662B218B46701B7FB0B107EC1CEC",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 1542,
+      "peer": "8C0C761F0D34DD2F73508B3FBCE1B7FD301C603BC88B28FF6827EB9C4FE1CE42",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 2566,
+      "peer": "3896183455404C47EE1BC9459989C1B4AD1786F22B9F001BB7CF4CDE1AD7B532",
+      "guestAndListings": "byte-identical"
+    },
+    {
+      "mask": 4358,
+      "peer": "EEC41FBFC989A1226448645C0F4E6D13C9FA73455ED314D1069BFB7393607DBB",
+      "guestAndListings": "byte-identical"
+    }
+  ],
+  "pid": 3256
+}
