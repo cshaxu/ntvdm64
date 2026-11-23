@@ -108,7 +108,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P78 measurements](../etc/evidence/t484-s3-measurements.md) | Six native measurement cases and three public runners/cache/full-build/hash checks pass; B0105/B0106 complete, B0104 staging remains pending. |
 
-Implementation batches through P78 passed their cached full host build. P73 checks11 raw host inputs
+| [P79 common-return diagnostic](../etc/evidence/t484-s3-common-return.md) | Two native projections with owner-specific diagnostic headers; source/object/cache/frame/full-build/hash checks pass; B0107 complete. |
+
+Implementation batches through P79 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

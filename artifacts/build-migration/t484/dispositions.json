@@ -449,5 +449,10 @@
     "evidence": "docs/etc/evidence/t484-s3-measurements.md",
     "status": "pending-producer-migration",
     "reason": "Standalone cleanup retained; FreshPackageIdentity still invokes interpreted package stamping and manifest staging, to reconcile in S4"
+  },
+  "test/observation/new-wow-common-return-diagnostic.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-common-return.md",
+    "reason": "Native two-owner source projection, current thunk signature and diagnostic profile; full build and focused checks pass",
+    "status": "migrated-delivered"
   }
 }
