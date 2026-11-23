@@ -57,6 +57,8 @@ integration helper. Select the architecture matching the frontend being observed
 `oem-tests` builds17 x86 OEM/COMMAND fixtures in the existing worker graph.
 `command-initialization` checks the original COMMAND globals and CMDInit
 using the actual x86 product objects.
+`dem-declarations` compiles the six original DOS/DEM layout assertions and
+disk-space declaration against the actual x86 DEM profile; it is compile-only.
 Run the PIF caller in a short working directory; its separate
 `--expect-long-startdir` case verifies the original64-byte rejection boundary.
 

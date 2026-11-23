@@ -1,4 +1,8 @@
 # Reuse the configured CCPU fixture providers; tests select no historical graph.
+worker_unit("obj/tests/dem_declarations.obj"
+  "${NTVDM_REPO}/test/adapter-mvdm-host-out/win32/t280_s9_dem_declaration_fixture.c"
+  "${profile_8} /std:c11")
+add_custom_target(dem-declarations DEPENDS "${CMAKE_BINARY_DIR}/obj/tests/dem_declarations.obj")
 worker_unit("obj/tests/command_initialization_fixture.obj"
   "${NTVDM_REPO}/test/mvdm-host/command_initialization_fixture.c"
   "${profile_1} /I\"${NTVDM_REPO}/src/mvdm-host/dos/command\"")

@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 ABI cleanup](evidence/t484-s3-abi-cleanup.md) records seven generator
+dispositions, native declaration coverage and current VDM control tests.
+
 [T484 S3 original libraries](evidence/t484-s3-original-libraries.md) records
 34 current product objects replacing duplicate archives and the native COMMAND test.
 

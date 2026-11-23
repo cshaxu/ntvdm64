@@ -1,0 +1,27 @@
+{
+  "coveredProductObjects": 34,
+  "declarationObjectSha256": "EF0FBCB614D4A13E7E20C535BADDB7CA7DC3BBE3DF47F5B0EC6844F99F3CAE99",
+  "compileOnlyAssertions": 6,
+  "rawHostImages": 11,
+  "exit": 0,
+  "vdmControl": [
+    {
+      "sha256": "1DF3990F0CB07AB3FAFAE8463AA8B289E6F3BEBEC3D2AAB8203FDCD652C024D0",
+      "architecture": "x86",
+      "exit": 0,
+      "output": [
+        "PASS original NtVdmControl ABI, unavailable services and untouched data"
+      ]
+    },
+    {
+      "sha256": "4D5977EC2736EC409C4EF73193E620E6DB32EAE6F70632E939791A8D56107A0E",
+      "architecture": "x64",
+      "exit": 0,
+      "output": [
+        "PASS original NtVdmControl ABI, unavailable services and untouched data"
+      ]
+    }
+  ],
+  "pid": 19000,
+  "publishedHashes": 22
+}

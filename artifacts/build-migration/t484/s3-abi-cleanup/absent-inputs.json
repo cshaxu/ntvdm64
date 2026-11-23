@@ -1,0 +1,7 @@
+[
+  "src/ntvdm-exe/softpc/mvdm_sas.c",
+  "src/ntvdm-exe/softpc/include/mvdm_sas.h",
+  "test/ntvdm/monitor/t288_s2_sim32_declaration_fixture.c",
+  "src/mvdm-host/sim32/sim32.h",
+  "src/mvdm-host-overlay/dpmi32/dpmi_interrupt_registration.c"
+]
