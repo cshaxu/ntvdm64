@@ -106,7 +106,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P77 startup diagnostics](../etc/evidence/t484-s3-startup.md) | Two native modes; explicit internal Shell witness profile,229-object/cache/frame/full-build/hash checks pass; B0103 complete. |
 
-Implementation batches through P77 passed their cached full host build. P73 checks11 raw host inputs
+| [P78 measurements](../etc/evidence/t484-s3-measurements.md) | Six native measurement cases and three public runners/cache/full-build/hash checks pass; B0105/B0106 complete, B0104 staging remains pending. |
+
+Implementation batches through P78 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

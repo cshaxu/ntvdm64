@@ -357,3 +357,4 @@ foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memor
     set_property(TARGET ${target}_objects PROPERTY COMPILE_OPTIONS "${profile}")
   endif()
 endforeach()
+include(measurements.cmake)

@@ -156,6 +156,7 @@ for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" se
 for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="suballoc-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="suballoc-lifecycle" if not "%~1"=="x86" exit /b 2
+for %%I in (window-render worker-primitives worker-primitives-high-resolution) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if not defined SELECTED exit /b 2
 if "%TARGET%"=="xms-mapped" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="xms-startup" if not "%~1"=="x86" exit /b 2

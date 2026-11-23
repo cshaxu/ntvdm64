@@ -434,5 +434,20 @@
     "evidence": "docs/etc/evidence/t484-s3-startup.md",
     "reason": "Both failure modes use native diagnostic targets; explicit Shell witness header profile; cached full build and focused verification pass",
     "status": "migrated-delivered"
+  },
+  "test/observation/measure-window-render.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-measurements.md",
+    "status": "migrated-delivered",
+    "reason": "Native measurement producers; both architectures, variants, cached output and public runner checks pass"
+  },
+  "test/observation/measure-worker-primitives.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-measurements.md",
+    "status": "migrated-delivered",
+    "reason": "Native measurement producers; both architectures, variants, cached output and public runner checks pass"
+  },
+  "test/observation/isolated_package_cleanup.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-measurements.md",
+    "status": "pending-producer-migration",
+    "reason": "Standalone cleanup retained; FreshPackageIdentity still invokes interpreted package stamping and manifest staging, to reconcile in S4"
   }
 }

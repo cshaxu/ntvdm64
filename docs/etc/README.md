@@ -1643,3 +1643,5 @@ post-publication targeted checks.
 - [T484 S3 sizing diagnostic producer](evidence/t484-s3-sizing.md).
 
 - [T484 S3 startup diagnostic producers](evidence/t484-s3-startup.md).
+
+- [T484 S3 measurement producers](evidence/t484-s3-measurements.md).
