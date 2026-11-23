@@ -1,32 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "00e3092b7b0f86858bda301b5a6ea74c49a660de",
+  "head": "6872935a18667e12ba35de9223401b2a8083ef63",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-sol-gameplay.ps1",
-    " M test/integration/verify-wow-sol-options.ps1",
-    " M test/integration/verify-wow-write-lifecycle.ps1",
+    " M test/integration/win31_runtime_matrix_test.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/wow-ui-probes.cmake",
-    "?? artifacts/build-migration/t484/s3-apps/",
-    "?? docs/etc/evidence/t484-s3-app-probes.md",
-    "?? test/integration/Invoke-WowAppProbeBuild.ps1"
+    " M tools/build/fixtures/guest-probes.cmake",
+    "?? artifacts/build-migration/t484/s3-win31-matrix/",
+    "?? docs/etc/evidence/t484-s3-win31-matrix.md",
+    "?? test/integration/Invoke-Win31ProbeBuild.ps1"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 72,
-    "unchanged": 169,
+    "changed": 73,
+    "unchanged": 168,
     "removed": 114
   },
   "disposition_counts": {
     "migrated-delivered": 16,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 114,
-    "pending-producer-migration": 53,
+    "pending-producer-migration": 54,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 168
+    "requires-disposition-reconciliation": 167
   },
   "existing_interpreted_candidates_with_command_hits": 198,
   "files": [
@@ -1245,8 +1243,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "c6caddbe57aa9c04ed3795ef5f2b78a0fb4ac1ef5e8f47bae40fae3c06e8afd8",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "6872935a18667e12ba35de9223401b2a8083ef63"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-app-probes.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
@@ -1260,8 +1262,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "4a1dcedddda8d7214b9d7322ccaa56468eb9553d84ca97a3500c2bff11877375",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "6872935a18667e12ba35de9223401b2a8083ef63"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-app-probes.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
@@ -1275,8 +1281,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "4e2b3fe402a0be3510f7f461b1ab10ca2b330f92397ca29025f53bae7138f6c5",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "6872935a18667e12ba35de9223401b2a8083ef63"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-app-probes.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
@@ -1288,12 +1298,16 @@
       "id": "B0071",
       "file": "test/integration/win31_runtime_matrix_test.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "a272ff4817e0fd6f1df33b43ca5ab82a105eac9f4b15fba829f1562b957194a2",
+      "state": "changed",
+      "current_sha256": "40b903ddeb90866c279a2afdd6647da77b84404d84e31e664779319c1d6aee8d",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "status": "pending-producer-migration",
+        "reason": "P63 native witnesses migrated; inspector Add-Type, dynamic path fields and runtime/package staging remain",
+        "evidence": "docs/etc/evidence/t484-s3-win31-matrix.md"
+      }
     },
     {
       "id": "B0072",
@@ -4977,6 +4991,12 @@
     }
   ],
   "commits": {
+    "6872935a18667e12ba35de9223401b2a8083ef63": {
+      "subject": "T484 S3 P62 migrate SOL and WRITE probe producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-app-probes.md"
+      ]
+    },
     "00e3092b7b0f86858bda301b5a6ea74c49a660de": {
       "subject": "T484 S3 P61 retire obsolete style contract aggregator",
       "evidence": [
@@ -6274,19 +6294,7 @@
       "file": "test/integration/win31_runtime_matrix_test.ps1",
       "hits": [
         {
-          "line": 93,
-          "text": "$nasm = (Get-Command nasm.exe -ErrorAction Stop).Source"
-        },
-        {
-          "line": 102,
-          "text": "& $nasm -f bin -o \"$output/W31CHECK.EXE\" \"$repo/test/observation/win31_startup_contract.asm\""
-        },
-        {
-          "line": 118,
-          "text": "& $nasm -f bin -o \"$output/W31DOS.COM\" \"$repo/test/observation/win31_dosonly_contract.asm\""
-        },
-        {
-          "line": 282,
+          "line": 275,
           "text": "$closeArgs=if($ConsoleClose){@('--close-node','1',\"$($workers[0].ProcessId)\")}else{@('--terminate',\"$($workers[0].ProcessId)\")}"
         }
       ]

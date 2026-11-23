@@ -76,7 +76,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P62 SOL/WRITE producers](../etc/evidence/t484-s3-app-probes.md) | Three timestamp-only native witnesses; argument/architecture controls and stable cache pass; runtime staging remains pending. |
 
-Implementation batches through P62 passed their cached full host build. P62 checks11 raw host inputs
+| [P63 Win31 matrix producers](../etc/evidence/t484-s3-win31-matrix.md) | Two byte-identical witnesses; override, architecture and cache checks pass; inspector, dynamic fields and staging remain pending. |
+
+Implementation batches through P63 passed their cached full host build. P63 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

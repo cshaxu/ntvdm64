@@ -90,18 +90,13 @@ foreach ($case in $pifCases) {
         if (-not ($lines | Where-Object { $_ -ieq $required })) { throw "PIF does not target isolated copy: $pif ($required)" }
     }
 }
-$nasm = (Get-Command nasm.exe -ErrorAction Stop).Source
 New-Item -ItemType Directory -Path $output | Out-Null
 # The private-desktop inspector only dismisses the identified, test-owned
 # missing serial-port dialogs. Other errors remain visible to the observer.
 . "$repo/test/observation/inspect-session-windows.ps1" -ProcessIds @(0) -BuildRoot $output
-if ($WindowsProbeImage) {
-    # An extended witness must retain the boot/ready record contract below.
-    Copy-Item -LiteralPath $WindowsProbeImage -Destination "$output/W31CHECK.EXE"
-} else {
-    & $nasm -f bin -o "$output/W31CHECK.EXE" "$repo/test/observation/win31_startup_contract.asm"
-    if ($LASTEXITCODE) { throw 'Failed to assemble Win16 startup witness' }
-}
+# An extended witness must retain the boot/ready record contract below.
+. "$PSScriptRoot/Invoke-Win31ProbeBuild.ps1"
+Invoke-Win31ProbeBuild -OutputRoot $output -WindowsProbeImage $WindowsProbeImage
 $probeBytes = [IO.File]::ReadAllBytes("$output/W31CHECK.EXE")
 foreach ($field in @(@('@W31_BOOT_PATH@',$boot),@('@W31_READY_PATH@',$ready))) {
     $image = [Text.Encoding]::ASCII.GetString($probeBytes)
@@ -115,8 +110,6 @@ foreach ($field in @(@('@W31_BOOT_PATH@',$boot),@('@W31_READY_PATH@',$ready))) {
     [Array]::Copy($bytes,0,$probeBytes,$offset,$bytes.Length)
 }
 [IO.File]::WriteAllBytes("$output/W31CHECK.EXE",$probeBytes)
-& $nasm -f bin -o "$output/W31DOS.COM" "$repo/test/observation/win31_dosonly_contract.asm"
-if ($LASTEXITCODE) { throw 'Failed to assemble DOSONLY witness' }
 $dosBytes = [IO.File]::ReadAllBytes("$output/W31DOS.COM")
 $dosImage = [Text.Encoding]::ASCII.GetString($dosBytes)
 $dosOffset = $dosImage.IndexOf('@W31_DOS_PATH@',[StringComparison]::Ordinal)

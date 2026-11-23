@@ -1613,3 +1613,5 @@ post-publication targeted checks.
 - [T484 S3 obsolete style aggregator](evidence/t484-s3-style-retirement.md).
 
 - [T484 S3 SOL/WRITE producers](evidence/t484-s3-app-probes.md).
+
+- [T484 S3 Win31 matrix producers](evidence/t484-s3-win31-matrix.md).

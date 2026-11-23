@@ -1,0 +1,19 @@
+{
+  "pid": 13528,
+  "overridePreserved": true,
+  "witnesses": [
+    {
+      "name": "W31CHECK.EXE",
+      "bytes": 740,
+      "sha256": "1854BB2F280BFBECC712FE458D0C8DEDAB09FADB3C28DF2A0E5290810BD57054"
+    },
+    {
+      "name": "W31DOS.COM",
+      "bytes": 191,
+      "sha256": "169DDE851103F706C054FDF9B09D50D6287E2F732E1CD197C61BCF5FCAA3D4A3"
+    }
+  ],
+  "exit": 0,
+  "finish": "2026-11-23T21:07:17.0627008+00:00",
+  "start": "2026-11-23T21:07:06.8944251+00:00"
+}

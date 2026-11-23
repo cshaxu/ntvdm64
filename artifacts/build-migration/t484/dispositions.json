@@ -350,5 +350,10 @@
     "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
     "status": "pending-producer-migration",
     "reason": "P62 local producer uses CMD/native fixture; shared physical runtime/package staging remains"
+  },
+  "test/integration/win31_runtime_matrix_test.ps1": {
+    "status": "pending-producer-migration",
+    "reason": "P63 native witnesses migrated; inspector Add-Type, dynamic path fields and runtime/package staging remain",
+    "evidence": "docs/etc/evidence/t484-s3-win31-matrix.md"
   }
 }
