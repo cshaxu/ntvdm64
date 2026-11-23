@@ -7,8 +7,15 @@ if (!$build.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::Ordinal
 New-Item -ItemType Directory -Path $build | Out-Null
 $source=Join-Path $repo 'src/addon/mouse101/mouse101.asm'
 $assembler=(Get-Command nasm.exe -ErrorAction Stop).Source
-& cmd.exe /d /c "`"$repo/tools/build-addon.cmd`" mouse101-tests"
-if($LASTEXITCODE){throw 'Native mouse test build failed'}
+$line='/d /s /c ""'+$repo+'/tools/build-addon.cmd" mouse101-tests"'
+$p=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$build/build.stdout" -RedirectStandardError "$build/build.stderr"
+try {
+    $null=$p.Handle
+    @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');command=$line;timeoutSeconds=120}|ConvertTo-Json|Set-Content "$build/build.owner.json"
+    if(!$p.WaitForExit(120000)){$p.Kill($true);$p.WaitForExit();throw 'Mouse native build deadline'}
+    $p.WaitForExit();$p.ExitCode|Set-Content "$build/build.exit"
+    if($p.ExitCode){throw 'Native mouse test build failed'}
+} finally {$p.Dispose()}
 Copy-Item "$repo/build/.ninja/addon/mouse101/MOUSE101.DRV" "$build/MOUSE101.DRV"
 Copy-Item "$repo/build/.ninja/addon/mouse101-M101TEST.COM/M101TEST.COM" "$build/M101TEST.COM"
 Copy-Item "$repo/build/.ninja/addon/mouse101-M101REAL.COM/M101REAL.COM" "$build/M101REAL.COM"

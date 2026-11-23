@@ -64,12 +64,14 @@
     "reason": "P60 native page diagnostic producer and real BuildOnly entry pass; archive/package staging and EMS helper remain"
   },
   "test/observation/build-win101-mouse-driver.ps1": {
-    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-    "status": "pending-producer-migration"
+    "status": "migrated-delivered",
+    "reason": "CMD owns all native assembly; remaining independent ABI audit is not a producer dependency; background ownership and actual ABI/cache checks verified",
+    "evidence": "docs/etc/evidence/t484-s3-mouse-reconcile.md"
   },
   "test/observation/build-win31-mouse-driver.ps1": {
-    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-    "status": "pending-producer-migration"
+    "status": "migrated-delivered",
+    "reason": "CMD owns all native assembly; remaining independent ABI audit is not a producer dependency; background ownership and actual ABI/cache checks verified",
+    "evidence": "docs/etc/evidence/t484-s3-mouse-reconcile.md"
   },
   "tools/build/Stage-Compat95Release.ps1": {
     "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
@@ -386,5 +388,15 @@
     "status": "retired-with-delivery-evidence",
     "evidence": "docs/etc/evidence/t484-s3-audit-retirement.md",
     "reason": "No active callers; P32 native service diagnostics provide both variants with actual product profile/link; verified again"
+  },
+  "test/observation/build-win101-palette-repair.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Unreferenced historical T434/T435 cache-copy/rewrite producer; current native product/addon targets remain",
+    "evidence": "docs/etc/evidence/t484-s3-mouse-reconcile.md"
+  },
+  "test/observation/build-win101-release.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Unreferenced historical T434/T435 cache-copy/rewrite producer; current native product/addon targets remain",
+    "evidence": "docs/etc/evidence/t484-s3-mouse-reconcile.md"
   }
 }

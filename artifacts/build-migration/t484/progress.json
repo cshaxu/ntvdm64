@@ -1,31 +1,33 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "37ddcbedcdb794558e21d1fde95c6e6208ed2792",
+  "head": "97da712bd7ffef053253db494a66415bf064fb8b",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/audit-dos-console-build-surface.ps1",
-    "D  test/observation/build-observation-fault-services.mjs",
-    "?? artifacts/build-migration/t484/s3-audit-retirement/",
-    "?? docs/etc/evidence/t484-s3-audit-retirement.md"
+    " M test/observation/build-win101-mouse-driver.ps1",
+    "D  test/observation/build-win101-palette-repair.ps1",
+    "D  test/observation/build-win101-release.ps1",
+    " M test/observation/build-win31-mouse-driver.ps1",
+    "?? artifacts/build-migration/t484/s3-mouse-reconcile/",
+    "?? docs/etc/evidence/t484-s3-mouse-reconcile.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 78,
-    "unchanged": 162,
-    "removed": 115
+    "unchanged": 160,
+    "removed": 117
   },
   "disposition_counts": {
-    "migrated-delivered": 21,
+    "migrated-delivered": 23,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 115,
-    "pending-producer-migration": 53,
+    "retired-with-delivery-evidence": 117,
+    "pending-producer-migration": 51,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 161,
+    "requires-disposition-reconciliation": 159,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 196,
+  "existing_interpreted_candidates_with_command_hits": 194,
   "files": [
     {
       "id": "B0001",
@@ -1415,8 +1417,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "4efa30e37a95d2513e8bc3a6644fd06af7797cec7283dd9759671428d0b453ee",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "97da712bd7ffef053253db494a66415bf064fb8b"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-audit-retirement.md"
+      ],
       "completion": "retained-standalone-audit",
       "decision": {
         "status": "retained-standalone-audit",
@@ -1550,8 +1556,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "97da712bd7ffef053253db494a66415bf064fb8b"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-audit-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -1594,17 +1604,18 @@
       "file": "test/observation/build-win101-mouse-driver.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "6b76da0888a87b16ad0ff352cbb30f750249d3f540abfa94e975e5bad89c3cfe",
+      "current_sha256": "0603907cf05fee5039f45cbaa71071507b1184dd6f2b2bffc75da99730fa11c7",
       "revisions": [
         "34b26f76b783bf9ef495f2cce7dbb98caa3553c2"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-addon-cmake.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-        "status": "pending-producer-migration"
+        "status": "migrated-delivered",
+        "reason": "CMD owns all native assembly; remaining independent ABI audit is not a producer dependency; background ownership and actual ABI/cache checks verified",
+        "evidence": "docs/etc/evidence/t484-s3-mouse-reconcile.md"
       }
     },
     {
@@ -1626,23 +1637,31 @@
       "id": "B0091",
       "file": "test/observation/build-win101-palette-repair.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "dec3f1520421868e640f0017a4dec662640f85f50ac33f5bd91bf8408e143f05",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Unreferenced historical T434/T435 cache-copy/rewrite producer; current native product/addon targets remain",
+        "evidence": "docs/etc/evidence/t484-s3-mouse-reconcile.md"
+      }
     },
     {
       "id": "B0092",
       "file": "test/observation/build-win101-release.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "98ceaacbd3ff770a30a91b047a39bcdebafc5c6d1d0c8d428114d93ee4f6af91",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Unreferenced historical T434/T435 cache-copy/rewrite producer; current native product/addon targets remain",
+        "evidence": "docs/etc/evidence/t484-s3-mouse-reconcile.md"
+      }
     },
     {
       "id": "B0093",
@@ -1680,17 +1699,18 @@
       "file": "test/observation/build-win31-mouse-driver.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "dc9c05117d3ff089ceeccd0707d3d204e86378b1d8a2a0654b5a1a33e889dd5d",
+      "current_sha256": "4d3849dc5d87fd4b87f176bd6ba97c505759e04eb3c4a10d08743a9eff89e29a",
       "revisions": [
         "34b26f76b783bf9ef495f2cce7dbb98caa3553c2"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-addon-cmake.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-        "status": "pending-producer-migration"
+        "status": "migrated-delivered",
+        "reason": "CMD owns all native assembly; remaining independent ABI audit is not a producer dependency; background ownership and actual ABI/cache checks verified",
+        "evidence": "docs/etc/evidence/t484-s3-mouse-reconcile.md"
       }
     },
     {
@@ -5037,6 +5057,12 @@
     }
   ],
   "commits": {
+    "97da712bd7ffef053253db494a66415bf064fb8b": {
+      "subject": "T484 S3 P68 reconcile console audit and retire duplicate JS producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-audit-retirement.md"
+      ]
+    },
     "37ddcbedcdb794558e21d1fde95c6e6208ed2792": {
       "subject": "T484 S3 P67 migrate frontend library test producer",
       "evidence": [
@@ -6450,60 +6476,16 @@
           "text": "$assembler=(Get-Command nasm.exe -ErrorAction Stop).Source"
         },
         {
-          "line": 12,
+          "line": 19,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse101/MOUSE101.DRV\" \"$build/MOUSE101.DRV\""
         },
         {
-          "line": 13,
+          "line": 20,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse101-M101TEST.COM/M101TEST.COM\" \"$build/M101TEST.COM\""
         },
         {
-          "line": 14,
-          "text": "Copy-Item \"$repo/build/.ninja/addon/mouse101-M101REAL.COM/M101REAL.COM\" \"$build/M101REAL.COM\""
-        }
-      ]
-    },
-    {
-      "id": "B0091",
-      "file": "test/observation/build-win101-palette-repair.ps1",
-      "hits": [
-        {
-          "line": 13,
-          "text": "$ninja=(Get-Command ninja.exe -ErrorAction Stop).Source"
-        },
-        {
-          "line": 19,
-          "text": "$graph=(Get-Content \"$root/build.ninja\" -Raw).Replace($cache.Replace('\\','/').Replace(':','$:'),"
-        },
-        {
           "line": 21,
-          "text": "[IO.File]::WriteAllText(\"$root/build.ninja\",$graph,[Text.UTF8Encoding]::new($false))"
-        },
-        {
-          "line": 26,
-          "text": "('\"'+$ninja+'\" ntvdm.exe softpc-text-video-test.exe console-text-producer-test.exe'),"
-        }
-      ]
-    },
-    {
-      "id": "B0092",
-      "file": "test/observation/build-win101-release.ps1",
-      "hits": [
-        {
-          "line": 8,
-          "text": "$ninja=(Get-Command ninja.exe -ErrorAction Stop).Source"
-        },
-        {
-          "line": 27,
-          "text": "$graph=(Get-Content \"$destination/build.ninja\" -Raw).Replace($cache.Replace('\\','/').Replace(':','$:'),"
-        },
-        {
-          "line": 29,
-          "text": "[IO.File]::WriteAllText(\"$destination/build.ninja\",$graph,[Text.UTF8Encoding]::new($false))"
-        },
-        {
-          "line": 33,
-          "text": "('\"'+$ninja+'\" '+$set.targets+' '+$set.fixtures),'exit /b %errorlevel%')"
+          "text": "Copy-Item \"$repo/build/.ninja/addon/mouse101-M101REAL.COM/M101REAL.COM\" \"$build/M101REAL.COM\""
         }
       ]
     },
@@ -6524,63 +6506,63 @@
           "text": "$pythonPath=(Resolve-Path -LiteralPath $Python).Path"
         },
         {
-          "line": 15,
+          "line": 22,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31/MOUSE31.DRV\" \"$root/MOUSE31.DRV\""
         },
         {
-          "line": 16,
+          "line": 23,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31TEST.COM/M31TEST.COM\" \"$root/M31TEST.COM\""
         },
         {
-          "line": 17,
+          "line": 24,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31REENT.COM/M31REENT.COM\" \"$root/M31REENT.COM\""
         },
         {
-          "line": 18,
+          "line": 25,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31PM.COM/M31PM.COM\" \"$root/M31PM.COM\""
         },
         {
-          "line": 19,
+          "line": 26,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31REAL.COM/M31REAL.COM\" \"$root/M31REAL.COM\""
         },
         {
-          "line": 20,
+          "line": 27,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31CTX.COM/M31CTX.COM\" \"$root/M31CTX.COM\""
         },
         {
-          "line": 21,
+          "line": 28,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31WIN.EXE/M31WIN.EXE\" \"$root/M31WIN.EXE\""
         },
         {
-          "line": 22,
+          "line": 29,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31SWAP.EXE/M31SWAP.EXE\" \"$root/M31SWAP.EXE\""
         },
         {
-          "line": 23,
+          "line": 30,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31ALOC.EXE/M31ALOC.EXE\" \"$root/M31ALOC.EXE\""
         },
         {
-          "line": 24,
+          "line": 31,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31VM.EXE/M31VM.EXE\" \"$root/M31VM.EXE\""
         },
         {
-          "line": 25,
+          "line": 32,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31VMCTL.EXE/M31VMCTL.EXE\" \"$root/M31VMCTL.EXE\""
         },
         {
-          "line": 26,
+          "line": 33,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31CHLD.COM/M31CHLD.COM\" \"$root/M31CHLD.COM\""
         },
         {
-          "line": 27,
+          "line": 34,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31VXD.COM/M31VXD.COM\" \"$root/M31VXD.COM\""
         },
         {
-          "line": 28,
+          "line": 35,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31OWNR.EXE/M31OWNR.EXE\" \"$root/M31OWNR.EXE\""
         },
         {
-          "line": 29,
+          "line": 36,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31CTRL.EXE/M31CTRL.EXE\" \"$root/M31CTRL.EXE\""
         }
       ]

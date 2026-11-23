@@ -10,8 +10,15 @@ $source=Join-Path $repo 'src/addon/mouse31/mouse31.asm'
 $assembler=(Get-Command nasm.exe -ErrorAction Stop).Source
 $pythonPath=(Resolve-Path -LiteralPath $Python).Path
 New-Item -ItemType Directory -Path $root|Out-Null
-& cmd.exe /d /c "`"$repo/tools/build-addon.cmd`" mouse31-tests"
-if($LASTEXITCODE){throw 'Native mouse test build failed'}
+$line='/d /s /c ""'+$repo+'/tools/build-addon.cmd" mouse31-tests"'
+$p=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/build.stdout" -RedirectStandardError "$root/build.stderr"
+try {
+    $null=$p.Handle
+    @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');command=$line;timeoutSeconds=120}|ConvertTo-Json|Set-Content "$root/build.owner.json"
+    if(!$p.WaitForExit(120000)){$p.Kill($true);$p.WaitForExit();throw 'Mouse native build deadline'}
+    $p.WaitForExit();$p.ExitCode|Set-Content "$root/build.exit"
+    if($p.ExitCode){throw 'Native mouse test build failed'}
+} finally {$p.Dispose()}
 Copy-Item "$repo/build/.ninja/addon/mouse31/MOUSE31.DRV" "$root/MOUSE31.DRV"
 Copy-Item "$repo/build/.ninja/addon/mouse31-M31TEST.COM/M31TEST.COM" "$root/M31TEST.COM"
 Copy-Item "$repo/build/.ninja/addon/mouse31-M31REENT.COM/M31REENT.COM" "$root/M31REENT.COM"

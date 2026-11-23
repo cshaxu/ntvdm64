@@ -88,6 +88,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P68 audit/retirement](../etc/evidence/t484-s3-audit-retirement.md) | B0077 retained as read-only audit with native graph support; B0086 duplicate JS producer removed; native diagnostics and hashes verified. |
 
+| [P69 mouse/Win101 reconciliation](../etc/evidence/t484-s3-mouse-reconcile.md) | Both native mouse ABI/cache checks pass; obsolete cache-copy producers retired; four entries complete. |
+
 Implementation batches through P67 passed their cached full host build. P67 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
