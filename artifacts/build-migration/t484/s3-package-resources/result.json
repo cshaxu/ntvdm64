@@ -1,0 +1,81 @@
+{
+  "exit": 0,
+  "cases": [
+    {
+      "architecture": "x86",
+      "name": "package-layout-fixture",
+      "exit": 0,
+      "sha256": "FE083C6C0600D668EC9693DE686DD048C08C4441465F5D0CFD921AD1B5C221EC",
+      "output": ""
+    },
+    {
+      "architecture": "x86",
+      "name": "softpc-firmware-resource-fixture",
+      "exit": 0,
+      "sha256": "F0193C87010739D06733CB54E72F04DC53B1E59C867CE02AB6AA2E071546AC87",
+      "output": ""
+    },
+    {
+      "architecture": "x86",
+      "name": "softpc-wow-boot-environment-fixture",
+      "exit": 0,
+      "sha256": "D683A5FDF52285EB722DC02643A0B7785A5EF74313713557B1EC43FCFA3B35C6",
+      "output": "WOW-BOOT-ENVIRONMENT-PASS"
+    },
+    {
+      "architecture": "x86",
+      "name": "softpc-media-resource-fixture",
+      "exit": 0,
+      "sha256": "353FF481E89DDB0439F9A2DE1474DF6225C1175FABF75E157043698F44CAB687",
+      "output": "PASS media roots and SYSTEM.INI shadow reuse, refusal and cleanup"
+    },
+    {
+      "architecture": "x86",
+      "name": "flat-media-rejection",
+      "exit": 0
+    },
+    {
+      "architecture": "x64",
+      "name": "package-layout-fixture",
+      "exit": 0,
+      "sha256": "7EE50D2D945FBB607B6A37B081C9036EB2AED556736ACD007A0FE88B790DB12B",
+      "output": ""
+    },
+    {
+      "architecture": "x64",
+      "name": "softpc-firmware-resource-fixture",
+      "exit": 0,
+      "sha256": "72897AED7EEF4210E766673ACC5F555E41364C4244956C7015E3005C10B25CB2",
+      "output": ""
+    },
+    {
+      "architecture": "x64",
+      "name": "softpc-wow-boot-environment-fixture",
+      "exit": 0,
+      "sha256": "43507277AC4AF79A5E608D057C872B7F3DA3E4F5B79EC823691D3CC796A0D32B",
+      "output": "WOW-BOOT-ENVIRONMENT-PASS"
+    },
+    {
+      "architecture": "x64",
+      "name": "softpc-media-resource-fixture",
+      "exit": 0,
+      "sha256": "9FF2DFFD92C03615F226EA947F29200FA2C057F7F76C0E619061DF21C595CBE2",
+      "output": "PASS media roots and SYSTEM.INI shadow reuse, refusal and cleanup"
+    },
+    {
+      "architecture": "x64",
+      "name": "flat-media-rejection",
+      "exit": 0
+    }
+  ],
+  "inputs": [
+    {
+      "path": "system32/NTIO.SYS",
+      "sha256": "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937"
+    },
+    {
+      "path": "system.ini",
+      "sha256": "F20A94235712C26B0499D61E7CC080B612BBFE230DE0C65A6832494FDBB1ACAA"
+    }
+  ]
+}

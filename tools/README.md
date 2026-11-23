@@ -27,6 +27,12 @@ or recompilation of original Microsoft guests; apply the
 
 ## Engineering tools
 
+`build-fixtures.cmd x86|x64 package-resources` produces package-layout,
+firmware rejection, media-path and WOW initial-environment fixtures.
+`test/observation/verify-package-resources.ps1` runs both architectures with
+an explicit runtime input and fresh build evidence directory; media copying
+belongs to test setup, not a configure-time generator.
+
 `build.cmd` builds the11 host images. `build-addon.cmd [component]` builds
 all14 authored addons or one selected target; see the addon source index for
 the separate test targets. Both use stable native CMake/Ninja caches.

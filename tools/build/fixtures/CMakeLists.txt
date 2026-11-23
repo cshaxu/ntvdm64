@@ -292,6 +292,24 @@ foreach(pair IN ITEMS "vrmisc|t290_s3_vrmisc_fixture" "vrinit|t290_s3_vrinit_fai
 endforeach()
 add_custom_target(redirector-lifecycle DEPENDS ${redirector_lifecycle_targets})
 
+set(resource_session src/compat/guest_memory_lease.c
+  src/ntvdm-exe/session/session.c src/compat/host_context.c)
+fixture(package-layout-fixture LINK ${resource_session}
+  src/ntvdm-exe/package_layout.c src/compat/system_root.c test/app/package_layout_fixture.c)
+fixture(softpc-firmware-resource-fixture LINK src/compat/mvdm_firmware.c
+  test/session/softpc_firmware_resource_fixture.c)
+fixture(softpc-media-resource-fixture LINK ${resource_session}
+  src/compat/mvdm_softpc_firmware.c src/compat/system_root.c src/compat/guest_environment.c
+  test/session/softpc_media_resource_fixture.c)
+fixture(softpc-wow-boot-environment-fixture LINK src/compat/system_root.c
+  src/compat/guest_environment.c test/compat/softpc_wow_boot_environment_fixture.c)
+foreach(name IN ITEMS package-layout-fixture softpc-firmware-resource-fixture
+    softpc-media-resource-fixture softpc-wow-boot-environment-fixture)
+  target_include_directories(${name}_objects PRIVATE "${NTVDM_REPO}/src/compat/include")
+endforeach()
+add_custom_target(package-resources DEPENDS package-layout-fixture
+  softpc-firmware-resource-fixture softpc-media-resource-fixture softpc-wow-boot-environment-fixture)
+
 # These historical profiles enabled /Gy only for the coordination unit.
 foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memory_test
     dem_file_lifecycle_test xms_startup_test)

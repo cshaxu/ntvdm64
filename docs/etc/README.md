@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 package resources](evidence/t484-s3-package-resources.md) records
+two producer migrations and ten dual-architecture runtime cases.
+
 [T484 S3 redirector lifecycle](evidence/t484-s3-redirector-lifecycle.md) records
 four producer migrations, retired matrix entries and the unified runtime checks.
 

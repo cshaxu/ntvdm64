@@ -52,8 +52,9 @@ interpreter-free end-to-end acceptance have not completed.
 | [P14 original libraries](../etc/evidence/t484-s3-original-libraries.md) | Five duplicate generators retired against34 product objects; COMMAND initialization migrated and passed. |
 | [P15 ABI cleanup](../etc/evidence/t484-s3-abi-cleanup.md) | Seven generator dispositions; six native DEM layout assertions and x86/x64 VDM control passed; retired SAS fixture not counted as passing. |
 | [P16 redirector lifecycle](../etc/evidence/t484-s3-redirector-lifecycle.md) | Four producer migrations; five lifecycle instances,14 capacity and24 provider assertions pass; two stale matrices retired. |
+| [P17 package resources](../etc/evidence/t484-s3-package-resources.md) | Two producers migrated; four native targets on x86/x64 and ten runtime cases pass. |
 
-Each batch passed its cached full host build. P16 checks11 raw host inputs
+Each batch passed its cached full host build. P17 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
@@ -103,6 +104,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P16 records redirector producer migration and its bounded delivery under the
+T484 S3 P17 records package resource migration and its bounded delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

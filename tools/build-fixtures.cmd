@@ -10,6 +10,7 @@ for %%I in (guest-probes guest-redir guest-video-int10 guest-video-direct guest-
 if "%TARGET%"=="memory-profiles" set "SELECTED=1"
 if "%TARGET%"=="system-fixtures" set "SELECTED=1"
 if "%TARGET%"=="redirector-lifecycle" set "SELECTED=1"
+if "%TARGET%"=="package-resources" set "SELECTED=1"
 if "%TARGET%"=="observation-tools" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" if not "%~1"=="x86" exit /b 2
