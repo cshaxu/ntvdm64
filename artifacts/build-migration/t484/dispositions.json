@@ -1,0 +1,112 @@
+{
+  "CMakeLists.txt": {
+    "status": "migrated-delivered",
+    "reason": "Native root configuration, generator and source graph delivery; final clean gate S5 remains",
+    "evidence": "docs/etc/evidence/t484-s2-worker-cmake.md"
+  },
+  "src/addon/grp/BUILD.CMD": {
+    "status": "migrated-delivered",
+    "reason": "Native CMD utility producer and addon publication verified",
+    "evidence": "docs/etc/evidence/t484-s3-addon-cmake.md"
+  },
+  "src/addon/hash/BUILD.CMD": {
+    "status": "migrated-delivered",
+    "reason": "Native CMD utility producer and addon publication verified",
+    "evidence": "docs/etc/evidence/t484-s3-addon-cmake.md"
+  },
+  "src/addon/lnk/BUILD.CMD": {
+    "status": "migrated-delivered",
+    "reason": "Native CMD utility producer and addon publication verified",
+    "evidence": "docs/etc/evidence/t484-s3-addon-cmake.md"
+  },
+  "src/addon/patch31/BUILD.CMD": {
+    "status": "migrated-delivered",
+    "reason": "Native CMD utility producer and addon publication verified",
+    "evidence": "docs/etc/evidence/t484-s3-addon-cmake.md"
+  },
+  "src/addon/patch95/BUILD.CMD": {
+    "status": "migrated-delivered",
+    "reason": "Native CMD utility producer and addon publication verified",
+    "evidence": "docs/etc/evidence/t484-s3-addon-cmake.md"
+  },
+  "src/addon/path31/BUILD.CMD": {
+    "status": "migrated-delivered",
+    "reason": "Native CMD utility producer and addon publication verified",
+    "evidence": "docs/etc/evidence/t484-s3-addon-cmake.md"
+  },
+  "src/addon/path95/BUILD.CMD": {
+    "status": "migrated-delivered",
+    "reason": "Native CMD utility producer and addon publication verified",
+    "evidence": "docs/etc/evidence/t484-s3-addon-cmake.md"
+  },
+  "src/addon/pif/BUILD.CMD": {
+    "status": "migrated-delivered",
+    "reason": "Native CMD utility producer and addon publication verified",
+    "evidence": "docs/etc/evidence/t484-s3-addon-cmake.md"
+  },
+  "src/addon/szdd/BUILD.CMD": {
+    "status": "migrated-delivered",
+    "reason": "Native CMD utility producer and addon publication verified",
+    "evidence": "docs/etc/evidence/t484-s3-addon-cmake.md"
+  },
+  "test/ntcon-exe/verify-frontend-window-library.ps1": {
+    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
+    "status": "pending-producer-migration"
+  },
+  "test/observation/build-worker-performance.ps1": {
+    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
+    "status": "pending-producer-migration"
+  },
+  "test/integration/verify-wow-page-cost.ps1": {
+    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
+    "status": "pending-producer-migration"
+  },
+  "test/observation/build-win101-mouse-driver.ps1": {
+    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
+    "status": "pending-producer-migration"
+  },
+  "test/observation/build-win31-mouse-driver.ps1": {
+    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
+    "status": "pending-producer-migration"
+  },
+  "tools/build/Stage-Compat95Release.ps1": {
+    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
+    "status": "pending-producer-migration"
+  },
+  "CMakePresets.json": {
+    "reason": "Architecture and cache preset data; no interpreter command; S2 actual builds cover use",
+    "status": "retained-native-declarative"
+  },
+  "test/build/test-authored-softpc-profile.py": {
+    "reason": "Queries ninja -t commands then checks compiler profiles; never executes extracted compiler commands",
+    "status": "retained-audit-only"
+  },
+  "test/adapter-mvdm-host-out/wow/verify_clipboard_epoch.py": {
+    "reason": "Generates source projection and compile.cmd then invokes compiler",
+    "status": "pending-producer-migration"
+  },
+  "test/broker/verify-package-fresh-stage.ps1": {
+    "reason": "Calls physical runtime staging and Set-PackageIdentity.ps1; S4 caller migration required",
+    "status": "pending-producer-migration"
+  },
+  "test/broker/verify-package-identity.ps1": {
+    "reason": "Calls interpreted package identity writer; S4 caller migration required",
+    "status": "pending-producer-migration"
+  },
+  "test/broker/verify_ntsrv_idle.mjs": {
+    "reason": "Builds idle test/client via CL and links; runtime assertions may remain",
+    "status": "pending-producer-migration"
+  },
+  "test/build/test_host_cpu_endian.py": {
+    "reason": "Direct CL invocations for endian variants",
+    "status": "pending-producer-migration"
+  },
+  "test/build/Test-FullComponentBuild.ps1": {
+    "reason": "Coordinates full component builds and generates command scripts; replace production orchestration with CMD",
+    "status": "pending-producer-migration"
+  },
+  "test/build/Test-BuildHygiene.ps1": {
+    "reason": "Cleanup publisher and native configuration verification caller; reconcile S4/S5 execution with CMD",
+    "status": "pending-producer-migration"
+  }
+}

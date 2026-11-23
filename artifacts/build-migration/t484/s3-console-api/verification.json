@@ -1,0 +1,18 @@
+[
+  {
+    "probeExit": 64,
+    "imageSha256": "C88D029EAB5D0A6E5B87A17D3937A797EC526B43ACB40251627B3C2448AB9B75",
+    "pid": 16896,
+    "scope": "linked symbols and invalid argument rejection; no hook installation",
+    "variant": "normal",
+    "mapChecks": 3
+  },
+  {
+    "probeExit": 64,
+    "imageSha256": "C0F2805207FCB8D17F51E54B41A9BB709816D51D5C39BA05351A87349E7E52EE",
+    "pid": 12860,
+    "scope": "linked symbols and invalid argument rejection; no hook installation",
+    "variant": "fault",
+    "mapChecks": 3
+  }
+]

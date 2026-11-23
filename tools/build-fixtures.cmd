@@ -16,6 +16,8 @@ if "%TARGET%"=="thread-lifecycle" set "SELECTED=1"
 if "%TARGET%"=="keyboard-contracts" set "SELECTED=1"
 if "%TARGET%"=="window-contracts" set "SELECTED=1"
 if "%TARGET%"=="native-payload-probes" set "SELECTED=1"
+if "%TARGET%"=="console-api-probes" set "SELECTED=1"
+if "%TARGET%"=="console-api-probes" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="dos-observation-probes" set "SELECTED=1"
 if "%TARGET%"=="dos-observation-probes" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="frame-codepage" set "SELECTED=1"
