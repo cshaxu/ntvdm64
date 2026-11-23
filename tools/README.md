@@ -39,6 +39,14 @@ units. T280 and T282 shared one fixture and now share guest-location.
 This does not imply that every test producer has already migrated.
 Existing test runners execute and validate those binaries.
 
+`build-fixtures.cmd x86 guest-probes` builds37 independently authored DOS
+observation binaries under `build/.ninja/fixtures-x86/guest-probes/<group>`.
+Individual groups are guest-redir, guest-video-int10, guest-video-direct,
+guest-video-graphics, guest-video-handshake, guest-system, guest-bios,
+guest-support, guest-disks, guest-comms, guest-comms-medium, guest-dem,
+guest-command and guest-vdd. The variant directories prevent one profile
+from overwriting another. These opt-in probes are not release inputs.
+
 | Directory | Responsibility |
 | --- | --- |
 | build | Actual configure/build/package/publication owners. |

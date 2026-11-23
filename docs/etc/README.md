@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 guest probes](evidence/t484-s3-guest-probes.md) records37 byte-identical
+authored probe outputs and retirement of their interpreted producers.
+
 [T484 S3 helper retirement](evidence/t484-s3-helper-retirement.md) records the
 last guest-memory interpreter consumers and their native replacements.
 

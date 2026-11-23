@@ -15,6 +15,7 @@ set(CMAKE_C_FLAGS "" CACHE STRING "Explicit fixture profile" FORCE)
 set(CMAKE_C_FLAGS_RELEASE "" CACHE STRING "Explicit fixture profile" FORCE)
 set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded)
 set(CMAKE_C_COMPILER_LAUNCHER "${NTVDM_COMPILER_LAUNCHER}")
+include("${CMAKE_CURRENT_LIST_DIR}/guest-probes.cmake")
 
 ntvdm_guest_memory_projection(guest-memory-coordination.c "#line 1960")
 set_source_files_properties("${CMAKE_BINARY_DIR}/guest-memory-coordination.c"

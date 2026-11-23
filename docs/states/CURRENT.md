@@ -29,126 +29,42 @@ are now admitted. Final interpreter-free clean acceptance remains S5.
 
 ## Current Progress
 
-[S3 P5](../etc/evidence/t484-s3-helper-retirement.md) migrates the final four
-guest-memory helper consumers and removes three JavaScript generators plus
-two Python helpers. Five executable cases, four original compile instances,
-COMMAND167 assertions, cached full build and11 raw/22 published hashes pass.
-Other test producers remain; S3 is active.
+S1 inventory/design and S2 native host migration are closed. The
+[execution plan](../etc/operations/t484-cmd-build-release-plan.md) retains
+the complete task scope. S3 remains active; S4 publication and S5 clean,
+interpreter-free end-to-end acceptance have not completed.
 
-[S3 P4](../etc/evidence/t484-s3-caller-fixtures.md) replaces six manual
-generators with five native groups, passing nine executable instances and
-seven original compile-only units. Cached full build and11 raw/22 published
-hashes pass. Four additional Python-helper consumers remain; S3 stays active.
+| S3 delivery | Actual result |
+| --- | --- |
+| [P1 addons](../etc/evidence/t484-s3-addon-cmake.md) | All14 authored addon outputs;5 byte-identical drivers,9 timestamp-only tools,16 opt-in mouse probes. |
+| [P2 worker callers](../etc/evidence/t484-s3-observation-cmake.md) | Five old worker-generator consumers resolved; generator removed; DEM115/redirector14/18 assertions. |
+| [P3 memory fixtures](../etc/evidence/t484-s3-memory-fixtures.md) | Two producer callers migrated;7 executable instances, shared projection identity and cache stability. |
+| [P4 caller fixtures](../etc/evidence/t484-s3-caller-fixtures.md) | Six generators replaced;9 executable instances and7 original compile-only units. |
+| [P5 helper retirement](../etc/evidence/t484-s3-helper-retirement.md) | Four remaining helper consumers migrated;3 JS and2 Python helpers removed;5 cases,4 compile instances and COMMAND167 assertions. |
+| [P6 guest probes](../etc/evidence/t484-s3-guest-probes.md) | Eleven probe producers replaced,37 byte-identical outputs; one obsolete frontend-library producer removed. |
 
-[S3 P3](../etc/evidence/t484-s3-memory-fixtures.md) migrates two more test
-producers and passes seven x86/x64 executable instances. Shared projection
-bytes and repeated-build image hashes/mtimes are stable; cached full build
-passes. Six manual generators still retain the old Python projection wiring.
-
-[S3 P2](../etc/evidence/t484-s3-observation-cmake.md) resolves all five remaining
-executable consumers of the old worker generator and removes it. Two static
-boundaries and DEM/redirector115/14/18 assertions pass through native targets;
-final cached full build passes. Other S3 test producers remain pending.
-
-[S3 P1 addon migration](../etc/evidence/t484-s3-addon-cmake.md) builds all14
-authored addons through CMD/native CMake and16 opt-in mouse probes. Three old
-PowerShell producers are removed; nine utility wrappers share the producer.
-Five drivers are byte-identical; nine tools differ only in verified PE
-timestamps. Cached full host build passed; all11 raw inputs and22 published
-host hashes remain unchanged. Nine tools are published, all14 addon hashes
-verified, ABI/utility/cache/failure checks passed. S3 remains active: other
-test producers and retired worker-generator consumers are not yet complete.
-
-S1 [inventory/design](../etc/evidence/t484-s1-build-inventory.md) records817
-script/metadata inputs,355 ordered migration candidates,1116 literal references
-and9 existing graphs containing21 interpreter command rules. Candidate counts
-are not proved live dependencies. All11 host and14 addon outputs are accounted
-for. S2 P1 migrates two native data generators; the remaining candidate
-dispositions are not marked complete.
-
-The [execution plan](../etc/operations/t484-cmd-build-release-plan.md) defines
-the whole task. S2 host migration is complete; S3 now owns addon/test producer migration.
-Release consolidation remains S4. Existing release
-images and previous-task staging directories must not become bootstrap inputs.
-
-[S2 P1](../etc/evidence/t484-s2-native-generators.md): removed the interpreted
-font/C-VID generators; all5 generated files are byte-identical to production.
-Final cached full build passed. Eleven images published to both destinations,
-22 hashes verified; package9459f9ca-4f2f-4643-bac7-e4c2b92149bb. Raw input
-comparison:5 identical,6 PE-timestamp-only. Generator tests, linked C-VID
-contract and9-graph strict boundary checks passed. Documentation, links and
-diff checks passed. The containing S2 P1 commit is this batch's delivery
-identity. Root CMake still requires interpreters; S2 is not closed.
-
-[S2 P2](../etc/evidence/t484-s2-native-tib.md) removes the JavaScript post-link
-TIB check. Ten actual-product/rejection cases and cached full compilation
-passed. Both publication locations carry package
-d4f65024-538c-4365-a9df-2240cd637f0b;22 hashes and post-publication targeted
-checks passed. Five raw inputs are identical and six differ only by PE
-timestamps. Mirror code delta is zero. S2 remains active; graph generators,
-addon/test producers and publishing scripts are still migration work.
-
-[S2 P3](../etc/evidence/t484-s2-hook-cmake.md): Hook64 now uses native CMake
-targets; its old PowerShell generator is removed. All25 production sources
-remain, cached full build and dual publication passed. Current package:
-a56f5975-e552-4ccb-96a3-55fd0e3622d0;22 hashes verified. Post-publication
-Hook lifecycle118 assertions, machine tests and strict boundaries passed.
-Four raw images are identical/seven timestamp-only. Full macro-profile audit
-reported five unchanged WOW units, reproduced with the prior test;
-the following P4 resolves them. Three host graph generators
-remain. S3-S5 are not yet admitted.
-
-[S2 P4](../etc/evidence/t484-s2-wow-profile.md) applies the existing independent
-adapter compile profile to those five WOW units. Full545-command macro audit,
-cached full11-image build, dual publication and post-publication checks passed.
-Current package:2588d3a4-f526-43d0-99be-2c47727b9612. Eight raw images identical,
-three timestamp-only (including WOW32);22 published hashes verified. No product
-source, guest or mirror code change. S2 remains active.
-
-[S2 P5](../etc/evidence/t484-s2-wow-cmake.md) migrates WOW32 to native CMake
-and removes its PowerShell generator. All228 C profiles remain equivalent;
-cached11-image build, dual publication and actual Win16 message construction
-passed. Current package:903798b5-7b13-4d59-b6c2-1e23e6c5babc. Four raw inputs
-identical, six timestamp-only; WOW32 also changes23 diagnostic path separators.
-The extra Clipboard witness failed on P4 too and is not counted as passed;
-see the evidence for the reverted harness experiment. Two host graph
-generators remain; S2 and the overall T remain active.
-
-[S2 P6](../etc/evidence/t484-s2-native-family.md) migrates the five native host
-components and removes their PowerShell generator and x86 reference-graph
-dependency. All330 compile profiles,73 archives and41 links match the prior
-composition. Final cached11-image build and dual publication passed; package
-972c2293-4961-4c9e-b1eb-bd690b0ad3a4 has22 verified hashes. Four raw inputs
-are identical/seven timestamp-only. Native targeted checks and the correctly
-packaged private-desktop lifecycle fixtures passed. The initial incomplete
-fixture invocation is recorded, not counted as passed. One host graph
-generator remains; S2 is not closed, and S3-S5 remain outstanding.
-
-[S2 P7 worker migration](../etc/evidence/t484-s2-worker-cmake.md) completes the
-host chain:791 compiler profiles,67 archives,153 links and274 export lines
-are reconciled, with one explicit fixture-link correction. Initial and final
-cached full builds passed; package d8983d2b-3fe1-4d18-8ea9-64613c84346c is
-published to both locations with22 hashes checked. COMMAND launch/capture,
-C-VID and8 DPMI/CCPU cases passed. Two configurations preserve generated
-input bytes/timestamps and cause no rebuild. No product implementation,
-mirror or original guest changed. Detailed raw/package comparisons and the
-two corrected fixture failures are recorded separately in the evidence.
+Each batch passed its cached full host build. P6 checks11 raw host inputs
+and22 published hashes unchanged; no changed product images required
+republication. Other test producers remain pending. Static candidate counts
+are not live-edge counts or completion evidence. Detailed runs, limitations,
+source profiles and delivery identities belong to the linked evidence.
 
 ## S2 Closure Record
 
-[S2 closure](../etc/evidence/t484-s2-worker-cmake.md) completes native host composition and the CMD build entry. Its containing
-P7 commit is the delivery identity. S3 is admitted under the owner's standing
-continuous T484 authorization: migrate14 authored addons and test-binary
-producers, repair all old generator consumers and retire superseded scripts.
-No standalone test/audit language conversion or original guest rebuild is
-admitted. S4 publication migration and S5 full clean acceptance remain open.
+[S2 P7 closure](../etc/evidence/t484-s2-worker-cmake.md), commit ce4fc0f9c,
+completes the native host composition and CMD entry. All11 images are
+published to both locations under package d8983d2b-3fe1-4d18-8ea9-64613c84346c.
+The final worker reconciliation covers791 compiler profiles,67 archives,
+153 links and274 export lines. Prior S2 batches and their actual comparison
+limits are indexed in [supporting material](../etc/README.md).
+S3 was admitted under the owner's continuous T484 authorization.
 
 ## S1 Closure Record
 
-[S1 inventory/design](../etc/evidence/t484-s1-build-inventory.md) completes
-bounded research and fixes the migration worklist. No production build,
-publication or runtime pass is claimed. S1 P2 carries this evidence and S2
-admission; its containing commit is the delivery identity.
+[S1 inventory/design](../etc/evidence/t484-s1-build-inventory.md) fixes the
+ordered worklist:817 scanned inputs,355 migration candidates and1116 literal
+references. These are lexical inventory counts, not proved live dependencies.
+No production build/publication/runtime pass is attributed to S1.
 
 ## Current Technical Baseline
 
@@ -177,6 +93,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P5 records helper retirement and its bounded delivery under the
+T484 S3 P6 records native probe production and its bounded delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

@@ -1,0 +1,191 @@
+{
+  "exit": 0,
+  "comparisons": [
+    {
+      "equal": true,
+      "sha256": "1B3502BA5A7CACC557A107CAADC1125289465850B938884FBB622DBD9F6B693E",
+      "file": "bios/BIOSTST.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "86EBA64D5173C29B4749FE0F2472FC88AEF5CBF3C62FF9067DFC7CEF8EDD56C0",
+      "file": "command/G7.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "E4D66E8CEFAF249BD28449815B48A9E79A8043A0E7FF910957D4D88A11642C2F",
+      "file": "comms/C29.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "5BC3F89161C1C7542859E6C5B51E15A091F0CC0A6FD61F96667756BCA49FA67E",
+      "file": "comms-medium/C30.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "2629DC806130FA4DE7B83588497219A03DCE608A3AA54B65B1B671B6F209EE49",
+      "file": "comms-medium/C31.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "938F5C8967DA4A2F77E732A9D77A31A54B0DF893F46F9A838A8F107796394F52",
+      "file": "comms-medium/L30.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "35A6B9932B92121D9A2B9A52BBFCBE267288CE06ED4B84EF8F698B82BDB933D5",
+      "file": "dem/D33.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "77E8F1086757FD02EDB67D434E05097AA9C56292B2B6D9AD2FC15D8B9E901A10",
+      "file": "disks/D28.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "56D690B8BD179584F8CE734AD218054E4CD092A586EACE53639F0F5DF9628E60",
+      "file": "redir/VDMASGN.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "1FE427AF2239F5B544295E27DD2B0A0FC77C0D9A504810C3466E12BE5986A251",
+      "file": "redir/VDMDLC.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "11EDCDB24FDE5525E6F4E81CBF21EACC7B5733C7CE57D658C383880868EB7EF8",
+      "file": "redir/VDMMAIL.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "C6B9DC6E52230E083E8F711D65DF64257BF66546CEB5CB6FCED7A5535CE2DA49",
+      "file": "redir/VDMMSG.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "D54FA054C4D977C84008CAC59F9F39FA5DBDF3453661D9720DDB99E050E8B427",
+      "file": "redir/VDMNEI.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "E0833F3F0C4944CBAE217A5B9B5A6CC766F024CD0EAEE19F1138FAFD663A3E44",
+      "file": "redir/VDMNETA.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "400679AA66324FE44189615AAFE70B6092D55D298A50CC8493753BCDEAB06305",
+      "file": "redir/VDMNETAP.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "1B7670650C76EC079C533FCA2053F2A2179806A016E6E31696A3CD40EB21B312",
+      "file": "redir/VDMNETB.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "5A18A24184068C66991ABAA36331B072A172797C36515044375D7BA33F3A54D5",
+      "file": "redir/VDMPASW.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "335974893DBB83CB73BA1578C23F362D0FE802623E56403A497ABBA39E984794",
+      "file": "redir/VDMPASY.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "94BA2E7C7C38774FC35E2DB72EE4EA1D8D668871BA8F3D5930964605A8E11593",
+      "file": "redir/VDMPCAL.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "C848CD45537DE219CB18E78227212861D60EE8B3297789EAD18D76E3A32E076C",
+      "file": "redir/VDMPRDR.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "EEBF2B7C1EC919A379DE16DC1465B377DC5DA79B4CF26BD311226204AB9E5DD2",
+      "file": "redir/VDMPTMO.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "504FD9B2C654C3ED76E4D20A7CB3FDFE06A18FFEC98A1033A6341B164A9A59FA",
+      "file": "redir/VDMPTX.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "B0BCF154CCA4D658EDAEC477AD63425E76EA4D89B9414833274FDE01CCFFE64C",
+      "file": "redir/VDMSVC.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "1BFBAF68B0F0D66948A2679F5E1199A871F16510D4B4343C2B4E4F9A2DB0ABFC",
+      "file": "redir/VDMTRM1.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "0F741C4BE2ADDD3B39B4B32A79D70F31EA4C108C17AF45B91644E5CA91EFAB35",
+      "file": "redir/VDMTRM2.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "D788070AFCD65D1AAFAB3B411618CC975FCF778208B9292147274B2A5807D881",
+      "file": "redir/VDMUSE.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "D11DA99A98A240C85941E725C085C32A45663C3A6DE7473255A81A4895BAE8FB",
+      "file": "redir/VDMUSI.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "41CFA57048FAD3DC111A7645BADAD15B23B10942173CDB738707350A20FC6232",
+      "file": "redir/VDMUSL.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "D8F4027DC85B002AEA5ADFD0BD54648E220037C5CDDD07CECA90D8ED5F694B08",
+      "file": "redir/VDMWKSS.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "ABA536EA31122FE965BC976BE54553A3DD9A2A00D8E73D60FAE3F18250D90720",
+      "file": "redir/VDMWKSTA.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "FE37C352E4A46520191A2ACBD69F23A7840223DFA263C057E41BC83C303BEFC6",
+      "file": "support/SUPPORT.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "E442CD0C21D6A92CDC2930C9875186B6460643709CBCC5383FF2631F05820205",
+      "file": "system/SYSTST.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "803FB8F2B46A64C88CB1FC57A864517D2A37D0D8CB1063F56B447AE85021172C",
+      "file": "vdd/S44BOP.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "4D53200116FAD6B2898A7EEA36D559F59EB08BFEB256EB3F0DB42A7F3B46A3FB",
+      "file": "video-direct/VIDTST.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "EB0F9D1F7C20AFEB8CABB98B321E0560E138B986632A5F7E7E67F8666AB9301F",
+      "file": "video-graphics/VIDTST.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "801760058264BB394A16CC58E4C2A61CBC85D49E84BC0F15AA2F9EDEB818EBC0",
+      "file": "video-handshake/VIDTST.COM"
+    },
+    {
+      "equal": true,
+      "sha256": "BD02E4806E0A770E47798C230AFD9F903A9167B562F8A0949147811E2069A0F4",
+      "file": "video-int10/VIDTST.COM"
+    }
+  ],
+  "pid": 15056
+}

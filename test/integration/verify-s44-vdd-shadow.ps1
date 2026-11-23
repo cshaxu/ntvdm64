@@ -26,7 +26,7 @@ $repository = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
 $defaultShadowFixture = Join-Path $PSScriptRoot '..\mvdm-host\fixtures\S44-ENTRY-HOOK-NTVDM.REG'
 if (!$ShadowFixture) { $ShadowFixture = $defaultShadowFixture }
 $ShadowFixture = (Resolve-Path -LiteralPath $ShadowFixture).Path
-$bopBuild = Join-Path $build 's44-vdd-bop'
+$bopBuild = Join-Path $repository 'build/.ninja/fixtures-x86/guest-probes/vdd'
 $processes = @(Get-Process ntvdm,basesrv,run16 -ErrorAction SilentlyContinue)
 
 if ($processes.Count -ne 0) {
@@ -34,8 +34,7 @@ if ($processes.Count -ne 0) {
 }
 New-Item -ItemType Directory -Force -Path $testRoot | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $runtime 'logs') | Out-Null
-& powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repository 'tools\build\Build-T420S44VddGuestTest.ps1') `
-    -RepositoryRoot $repository -BuildRoot $bopBuild
+& (Join-Path $repository 'tools/build-fixtures.cmd') x86 guest-vdd
 if ($LASTEXITCODE -ne 0) { throw 'Failed to build S44BOP.COM.' }
 foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe','ntmon.exe')) {
     Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force
