@@ -60,6 +60,7 @@ param(
  [string]$DosWitnessImage
 )
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/Invoke-VmIdentityBuild.ps1"
 if($ProductionNative -or $ProductionComspecImage){
  if($Continuation -or $RealCommand -or ($ProductionNative -and $ProductionComspecImage)){throw 'Production modes select their own continuation'}
  if($ProductionComspecImage){$ProductionComspecImage=(Resolve-Path -LiteralPath $ProductionComspecImage).Path}
@@ -130,7 +131,6 @@ if($ExplicitVmd){
  }
 }
 
-$dosWitness=if($RetirementDriver){'dos-retirement.asm'}else{'dos-identity.asm'}
 $dosDefines=@()
 if($RetireCommand){$dosDefines+='-DRETIRE_COMMAND=1'}
 if($Continuation){$dosDefines=@('-DCONTINUATION=1')}
@@ -170,8 +170,7 @@ if($VideoFontLinearControl){if(!$VideoFontDirectControl){throw 'Linear control r
 if($DosWitnessImage){
  Copy-Item -LiteralPath (Resolve-Path -LiteralPath $DosWitnessImage).Path -Destination "$task/identity.com"
 } else {
- & nasm -f bin @dosDefines "$PSScriptRoot/$dosWitness" -o "$task/identity.com"
- if($LASTEXITCODE){throw 'DOS identity witness build failed'}
+ Invoke-VmIdentityBuild "$task/identity.com" $(if($RetirementDriver){'retirement'}else{'dos'}) $dosDefines
 }
 $directoryRoot="$dest\PATCH"
 if($LocalDirectoryControl){
@@ -298,16 +297,15 @@ if($InitializationFailure){$defines=@('-DINIT_FAILURE=1')}
 if($Reuse){
  $reuseDefines=@()
  if($RetireCommand){$reuseDefines+='-DRETIRE_COMMAND=1'}
- & nasm -f bin @reuseDefines "$PSScriptRoot/dos-reuse.asm" -o "$dest/PATCH/REUSE.COM"
- if($LASTEXITCODE){throw 'Reuse witness assembly failed'}
+ Invoke-VmIdentityBuild "$task/reuse.com" reuse $reuseDefines
+ Copy-Item -LiteralPath "$task/reuse.com" -Destination "$dest/PATCH/REUSE.COM"
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/REUSE.PIF" --title 'VM reuse' --program "$dest\PATCH\REUSE.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
  if($LASTEXITCODE){throw 'Reuse PIF build failed'}
  $defines=@('-DREUSE=1')
 }
 if($Keyboard){$defines+='-DKEYBOARD=1'}
 if($BlockedKeyboard){$defines+='-DBLOCKED_KEYBOARD=1'}
-& nasm -f bin @defines "$PSScriptRoot/win31-identity.asm" -o "$task/controller.exe"
-if($LASTEXITCODE){throw 'Win16 controller build failed'}
+Invoke-VmIdentityBuild "$task/controller.exe" controller $defines
 $bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
 $fields=@(@('@VM_API_PATH@',"$dest\PATCH\VMLOAD.BIN"),@('@VM_A_PATH@',"$dest\PATCH\A.BIN"),@('@VM_B_PATH@',"$dest\PATCH\B.BIN"))
 if($Reuse){$fields+=@(@('@VM_REUSE_PROGRAM@',"$dest\PATCH\REUSE.PIF"),@('@VM_REUSE_RESULT@',"$dest\PATCH\REUSE.BIN"))}

@@ -168,7 +168,8 @@
   },
   "test/integration/ntvdm64-386/verify-win31-identity.ps1": {
     "status": "pending-producer-migration",
-    "reason": "NASM builds DOS identity, PSP reuse and Win16 controller with dynamic defines"
+    "reason": "P38 delegates all four authored assembly kinds to CMD/native with25 byte-identical checks. Per-installation binary-field filling and shared runtime/staging production still require reconciliation.",
+    "evidence": "docs/etc/evidence/t484-s3-vm-identity.md"
   },
   "test/integration/ntvdm64-386/verify-win95-editors.ps1": {
     "status": "pending-producer-migration",
@@ -176,7 +177,8 @@
   },
   "test/integration/ntvdm64-386/verify-win95-identity.ps1": {
     "status": "pending-producer-migration",
-    "reason": "NASM builds DOS identity, PSP reuse and Win16 controller"
+    "reason": "P38 shares CMD/native identity, reuse and controller production with Win31. Per-installation binary-field filling and shared runtime/staging production remain pending.",
+    "evidence": "docs/etc/evidence/t484-s3-vm-identity.md"
   },
   "test/integration/verify-native-guest-output.ps1": {
     "status": "pending-producer-migration",

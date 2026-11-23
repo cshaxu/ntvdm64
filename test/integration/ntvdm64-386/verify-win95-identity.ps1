@@ -17,6 +17,7 @@ param(
  [switch]$ShutdownWitness
 )
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/Invoke-VmIdentityBuild.ps1"
 if($GuestInput -and !$ProductionComspecImage){throw 'GuestInput requires the input-reading COMSPEC witness'}
 if($ReverseInputOrder -and !$GuestInput){throw 'ReverseInputOrder requires GuestInput'}
 if($ProductionComspecImage){
@@ -64,8 +65,7 @@ if(!$InitializationFailure){
 $dosDefines=@('-DWIN95_ORDERED_PROOF=1')
 if($NativeCommand){$dosDefines+=@('-DCONTINUATION=1','-DREAL_COMMAND=1','-DPRODUCTION_NATIVE_ONLY=1')}
 if($ProductionComspecImage){$dosDefines+='-DPRODUCTION_COMSPEC_ONLY=1'}
-& nasm -f bin @dosDefines "$PSScriptRoot/dos-identity.asm" -o "$task/identity.com"
-if($LASTEXITCODE){throw 'DOS identity witness build failed'}
+Invoke-VmIdentityBuild "$task/identity.com" dos $dosDefines
 foreach($id in 'A','B'){
  $bytes=[IO.File]::ReadAllBytes("$task/identity.com")
  $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_IDENTITY_RESULT@')
@@ -115,8 +115,8 @@ else {
 $defines=@()
 if($InitializationFailure){$defines=@('-DINIT_FAILURE=1')}
 if($Reuse){
- & nasm -f bin "$PSScriptRoot/dos-reuse.asm" -o "$dest/PATCH/REUSE.COM"
- if($LASTEXITCODE){throw 'Reuse witness assembly failed'}
+ Invoke-VmIdentityBuild "$task/reuse.com" reuse
+ Copy-Item -LiteralPath "$task/reuse.com" -Destination "$dest/PATCH/REUSE.COM"
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/REUSE.PIF" --title 'VM reuse' --program "$dest\PATCH\REUSE.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
  if($LASTEXITCODE){throw 'Reuse PIF build failed'}
  & "$PSScriptRoot/Set-Win95ProbePifMemory.ps1" -Path "$dest/PATCH/REUSE.PIF"
@@ -125,8 +125,7 @@ if($Reuse){
 if($ShutdownWitness){$defines+=@('-DSHUTDOWN_WITNESS=1')}
 if($GuestInput){$defines+=@('-DPRODUCTION_GUEST_INPUT=1')}
 if($ReverseInputOrder){$defines+=@('-DREVERSE_INPUT_ORDER=1')}
-& nasm -f bin @defines "$PSScriptRoot/win31-identity.asm" -o "$task/controller.exe"
-if($LASTEXITCODE){throw 'Win16 controller build failed'}
+Invoke-VmIdentityBuild "$task/controller.exe" controller $defines
 $bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
 $fields=@(@('@VM_API_PATH@',"$dest\PATCH\VMLOAD.BIN"),@('@VM_A_PATH@',"$dest\PATCH\A.BIN"),@('@VM_B_PATH@',"$dest\PATCH\B.BIN"),@('@W31_BOOT_PATH@',"$dest\PATCH\BOOT.BIN"),@('@W31_READY_PATH@',"$dest\PATCH\READY.BIN"))
 if($Reuse){$fields+=@(@('@VM_REUSE_PROGRAM@',"$dest\PATCH\REUSE.PIF"),@('@VM_REUSE_RESULT@',"$dest\PATCH\REUSE.BIN"))}

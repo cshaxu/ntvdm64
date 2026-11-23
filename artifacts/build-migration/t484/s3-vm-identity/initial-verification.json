@@ -1,0 +1,153 @@
+{
+  "failure": "Identity probe build failed",
+  "end": "2026-11-23T18:07:23.3462034+00:00",
+  "pid": 23952,
+  "start": "2026-11-23T18:07:10.4236428+00:00",
+  "cases": [
+    {
+      "identical": true,
+      "defines": [],
+      "sha256": "666F028A2305C1EDDF10360DD29B02C535FD17E49B94A48BE7D09A349B7E3047",
+      "case": 0,
+      "kind": "dos"
+    },
+    {
+      "identical": true,
+      "defines": [],
+      "sha256": "3D8A0272091ABE1BA9291ADF63228F5D60B4145A9185C071C241198973ECCF69",
+      "case": 1,
+      "kind": "retirement"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DRETIRE_COMMAND=1"
+      ],
+      "sha256": "BBD4B1531FAA5468EF7C26AE1E47B247ADC6B09BE619FB5F078CE346B93829BE",
+      "case": 2,
+      "kind": "retirement"
+    },
+    {
+      "identical": true,
+      "defines": [],
+      "sha256": "9E31DB5B738222215CC8B98FC41C1FEF9B287330159CD85C8234B565AD63CF83",
+      "case": 3,
+      "kind": "reuse"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DRETIRE_COMMAND=1"
+      ],
+      "sha256": "647DB3F8244A0B8E45003B1302CC55AAA75FDABA362323DB693095FBA132E79F",
+      "case": 4,
+      "kind": "reuse"
+    },
+    {
+      "identical": true,
+      "defines": [],
+      "sha256": "C91B8D95272F31D7CA64DACE3D444A18EDF87B4F1396174CAC7919CE6D914FC0",
+      "case": 5,
+      "kind": "controller"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DINIT_FAILURE=1"
+      ],
+      "sha256": "FF8E69D46CC3C92453EE92126F71B9288CB60CE1ED94A57576E0AA30FB1FB354",
+      "case": 6,
+      "kind": "controller"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DREUSE=1"
+      ],
+      "sha256": "97DA8A9C90281BC31A0E31BA67AAB1271507B9A8BE8EE9B80D1E39245D6DCCB1",
+      "case": 7,
+      "kind": "controller"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DKEYBOARD=1"
+      ],
+      "sha256": "7E929C18407B0AAA14EA371B80070283FF4F8E5428D3BD72898A9F3EE7E6736F",
+      "case": 8,
+      "kind": "controller"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DKEYBOARD=1",
+        "-DBLOCKED_KEYBOARD=1"
+      ],
+      "sha256": "C06E5B9F0C16307001AE8C5A178555C69760B48EC7A5059EB88E3AB0493019EC",
+      "case": 9,
+      "kind": "controller"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DSHUTDOWN_WITNESS=1"
+      ],
+      "sha256": "8C6B8DE174C6FE38814A0C2D3460A3919F61251BA575DB0BD4908818BBD11E37",
+      "case": 10,
+      "kind": "controller"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DPRODUCTION_GUEST_INPUT=1",
+        "-DREVERSE_INPUT_ORDER=1"
+      ],
+      "sha256": "1CA62183BA655A0AF89907364366F9BFBAE9A4AFA3F36804CBD836E7BCBBCCD7",
+      "case": 11,
+      "kind": "controller"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DCONTINUATION=1"
+      ],
+      "sha256": "D518DC84E7CE906B2C11186F9B61F3B4FA544D1E8ABDD2F224D509A21170603C",
+      "case": 12,
+      "kind": "dos"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DCONTINUATION=1",
+        "-DREAL_COMMAND=1"
+      ],
+      "sha256": "5E7DD7678534047E7B7345BCF34F57F763E2219BD7B627FFDB5E3EFCBDB29342",
+      "case": 13,
+      "kind": "dos"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DCONTINUATION=1",
+        "-DREAL_COMMAND=1",
+        "-DPRODUCTION_NATIVE_ONLY=1"
+      ],
+      "sha256": "99861B0607132278AADAA2ED96151DEC1DB4E44C43D0090E19897BA297093E29",
+      "case": 14,
+      "kind": "dos"
+    },
+    {
+      "identical": true,
+      "defines": [
+        "-DCONTINUATION=1",
+        "-DREAL_COMMAND=1",
+        "-DPRODUCTION_NATIVE_ONLY=1",
+        "-DPRODUCTION_COMSPEC_ONLY=1"
+      ],
+      "sha256": "2F3B6D6156C2B09EA034DF0103FC21A13D12440612FBF42A3A00632D85C7EA37",
+      "case": 15,
+      "kind": "dos"
+    }
+  ],
+  "exit": 1
+}

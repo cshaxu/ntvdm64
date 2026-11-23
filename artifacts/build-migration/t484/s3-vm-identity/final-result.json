@@ -1,0 +1,16 @@
+{
+  "started": "2026-11-23T18:09:56.1408876+00:00",
+  "pid": 3296,
+  "rawHostImages": 11,
+  "exit": 0,
+  "parsed": [
+    "verify-ccpu-alu-guest",
+    "verify-ccpu-sign-flags-guest",
+    "verify-ccpu-transfer-guest",
+    "verify-original-ems-probe",
+    "verify-wow-page-cost",
+    "verify-wow-paired-latency"
+  ],
+  "finished": "2026-11-23T18:10:18.2459334+00:00",
+  "publishedHashes": 22
+}

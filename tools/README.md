@@ -27,6 +27,13 @@ or recompilation of original Microsoft guests; apply the
 
 ## Engineering tools
 
+`build-vm-identity.cmd output dos|retirement|reuse|controller [defines]`
+assembles the shared Win31/Win95 identity witnesses. Defines are a quoted,
+semicolon-separated list of the existing NASM `-DNAME=value` options. Output
+must be new and below repository build/. Each source kind uses a stable native
+cache and preserves its actual input options; test installation/configuration
+and runtime assertions remain with the integration runner.
+
 `build-win31-editor.cmd output destination mouse dosonly save first-dos first-before-second`
 builds the independent Win16 editor controller with five boolean switches.
 Output must be a new file below repository build/. Destination is the isolated

@@ -1,23 +1,23 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "07754446a3b6e3655a23de2e49dc351a9e1e1a13",
+  "head": "c2d588bc8c1d3ab8d2c083c38e037aa7603c4f1d",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/ntvdm64-386/verify-win31-editors.ps1",
-    " M test/observation/win31_startup_contract.asm",
+    " M test/integration/ntvdm64-386/verify-win31-identity.ps1",
+    " M test/integration/ntvdm64-386/verify-win95-identity.ps1",
     " M tools/README.md",
-    "?? artifacts/build-migration/t484/s3-win31-editor/",
-    "?? docs/etc/evidence/t484-s3-win31-editor.md",
-    "?? test/integration/ntvdm64-386/editor-data.inc",
-    "?? tools/build-win31-editor.cmd",
-    "?? tools/build/win31-editor/"
+    "?? artifacts/build-migration/t484/s3-vm-identity/",
+    "?? docs/etc/evidence/t484-s3-vm-identity.md",
+    "?? test/integration/ntvdm64-386/Invoke-VmIdentityBuild.ps1",
+    "?? tools/build-vm-identity.cmd",
+    "?? tools/build/vm-identity/"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 36,
-    "unchanged": 206,
+    "changed": 38,
+    "unchanged": 204,
     "removed": 113
   },
   "disposition_counts": {
@@ -422,8 +422,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "8ce5bf31a9fecbc7ed92b09da13329c699262e41738b160ee4594e98ab4c8ccb",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "c2d588bc8c1d3ab8d2c083c38e037aa7603c4f1d"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win31-editor.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -435,14 +439,15 @@
       "id": "B0024",
       "file": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "beca2790643fa22cf52c7ea4aba964c8cbef442b5ef08d18cd5fdcd8f8f41fa9",
+      "state": "changed",
+      "current_sha256": "ba079390ae0518fc1e36c3f143cc10fdc7cd801d5237a4d73eb2d2708e675a31",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "NASM builds DOS identity, PSP reuse and Win16 controller with dynamic defines"
+        "reason": "P38 delegates all four authored assembly kinds to CMD/native with25 byte-identical checks. Per-installation binary-field filling and shared runtime/staging production still require reconciliation.",
+        "evidence": "docs/etc/evidence/t484-s3-vm-identity.md"
       }
     },
     {
@@ -463,14 +468,15 @@
       "id": "B0026",
       "file": "test/integration/ntvdm64-386/verify-win95-identity.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f85d55e9693d267a91829abab0b92a08c81c81e88798d24c40e853a61485928d",
+      "state": "changed",
+      "current_sha256": "ff98983ba43d9679ff636ea2e8cf3e4584aa557c882a415c82a840e27c1b2a55",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "NASM builds DOS identity, PSP reuse and Win16 controller"
+        "reason": "P38 shares CMD/native identity, reuse and controller production with Win31. Per-installation binary-field filling and shared runtime/staging production remain pending.",
+        "evidence": "docs/etc/evidence/t484-s3-vm-identity.md"
       }
     },
     {
@@ -4750,6 +4756,12 @@
     }
   ],
   "commits": {
+    "c2d588bc8c1d3ab8d2c083c38e037aa7603c4f1d": {
+      "subject": "T484 S3 P37 migrate Win31 editor controller to native assembly composition",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win31-editor.md"
+      ]
+    },
     "07754446a3b6e3655a23de2e49dc351a9e1e1a13": {
       "subject": "T484 S3 P36 migrate shared CPU and EMS probe production",
       "evidence": [
@@ -5300,23 +5312,11 @@
       "file": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
       "hits": [
         {
-          "line": 173,
-          "text": "& nasm -f bin @dosDefines \"$PSScriptRoot/$dosWitness\" -o \"$task/identity.com\""
-        },
-        {
-          "line": 301,
-          "text": "& nasm -f bin @reuseDefines \"$PSScriptRoot/dos-reuse.asm\" -o \"$dest/PATCH/REUSE.COM\""
-        },
-        {
-          "line": 309,
-          "text": "& nasm -f bin @defines \"$PSScriptRoot/win31-identity.asm\" -o \"$task/controller.exe\""
-        },
-        {
-          "line": 324,
+          "line": 322,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 326,
+          "line": 324,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
@@ -5344,23 +5344,11 @@
       "file": "test/integration/ntvdm64-386/verify-win95-identity.ps1",
       "hits": [
         {
-          "line": 67,
-          "text": "& nasm -f bin @dosDefines \"$PSScriptRoot/dos-identity.asm\" -o \"$task/identity.com\""
-        },
-        {
-          "line": 118,
-          "text": "& nasm -f bin \"$PSScriptRoot/dos-reuse.asm\" -o \"$dest/PATCH/REUSE.COM\""
-        },
-        {
-          "line": 128,
-          "text": "& nasm -f bin @defines \"$PSScriptRoot/win31-identity.asm\" -o \"$task/controller.exe\""
-        },
-        {
-          "line": 154,
+          "line": 153,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 156,
+          "line": 155,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]

@@ -1562,3 +1562,5 @@ post-publication targeted checks.
 [T484 S3 CPU/EMS probes](evidence/t484-s3-cpu-guest.md) records native assembly, byte equivalence and remaining shared runtime/staging obligations.
 
 [T484 S3 Win31 editor](evidence/t484-s3-win31-editor.md) records native controller composition, variant equivalence and cache checks.
+
+[T484 S3 VM identity](evidence/t484-s3-vm-identity.md) records shared Win31/Win95 assembly, exact option equivalence and remaining production steps.
