@@ -18,6 +18,7 @@ if "%TARGET%"=="window-contracts" set "SELECTED=1"
 if "%TARGET%"=="native-payload-probes" set "SELECTED=1"
 if "%TARGET%"=="console-api-probes" set "SELECTED=1"
 if "%TARGET%"=="clipboard-epoch" set "SELECTED=1"
+for %%I in (host-cpu-endian host-cpu-endian-default host-cpu-endian-reject) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="console-api-probes" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="dos-observation-probes" set "SELECTED=1"
 if "%TARGET%"=="dos-observation-probes" if not "%~1"=="x64" exit /b 2

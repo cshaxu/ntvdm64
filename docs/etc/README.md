@@ -1556,3 +1556,5 @@ post-publication targeted checks.
 [T484 S3 Console API](evidence/t484-s3-console-api.md) records normal/fault native diagnostic builds and bounded checks.
 
 [T484 S3 clipboard epoch](evidence/t484-s3-clipboard-epoch.md) records native projection and x86/x64 contract results.
+
+[T484 S3 register layout](evidence/t484-s3-endian.md) records native positive/negative targets and correction of an expired assertion.

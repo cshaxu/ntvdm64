@@ -82,8 +82,10 @@
     "reason": "Read-only ninja -t commands query; does not execute compiler output"
   },
   "test/adapter-mvdm-host-out/wow/verify_clipboard_epoch.py": {
-    "status": "migrated-local-verified",
-    "reason": "CMD clipboard-epoch owns source projection and compilation; Python only delegates and asserts56 checks; delivery pending"
+    "evidence": "docs/etc/evidence/t484-s3-clipboard-epoch.md",
+    "commit": "0a797506e",
+    "status": "migrated-delivered",
+    "reason": "P34 CMD clipboard-epoch owns production; x86/x64 56 assertions verified"
   },
   "test/broker/verify-package-fresh-stage.ps1": {
     "reason": "Calls physical runtime staging and Set-PackageIdentity.ps1; S4 caller migration required",
@@ -98,8 +100,9 @@
     "status": "pending-producer-migration"
   },
   "test/build/test_host_cpu_endian.py": {
-    "reason": "Direct CL invocations for endian variants",
-    "status": "pending-producer-migration"
+    "status": "migrated-local-verified",
+    "reason": "CMD native targets; x86/x64 actual fixed layout and CPU30 rejection pass",
+    "evidence": "docs/etc/evidence/t484-s3-endian.md"
   },
   "test/build/Test-FullComponentBuild.ps1": {
     "reason": "Coordinates full component builds and generates command scripts; replace production orchestration with CMD",

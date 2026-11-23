@@ -1,0 +1,8 @@
+-- Configuring done (0.2s)
+-- Generating done (0.2s)
+-- Build files have been written to: O:/repos.hobby/ntvdm64/build/.ninja/fixtures-x86
+[1/2] Building C object CMakeFiles\host-cpu-endian-reject_objects.dir\O_\repos.hobby\ntvdm64\test\build\host_cpu_endian_fixture.c.obj
+FAILED: [code=2] CMakeFiles/host-cpu-endian-reject_objects.dir/O_/repos.hobby/ntvdm64/test/build/host_cpu_endian_fixture.c.obj 
+C:\Users\neko\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\cmake.exe -E env CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp CCACHE_MAXSIZE=5G C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe C:\PROGRA~2\MICROS~4\2022\BUILDT~1\VC\Tools\MSVC\1443~1.348\bin\Hostx64\x86\cl.exe  /nologo -DCPU_30_STYLE -IO:\repos.hobby\ntvdm64\src -IO:\repos.hobby\ntvdm64\src\ntvdm-exe\softpc\include -MT /nologo /TC /showIncludes /FoCMakeFiles\host-cpu-endian-reject_objects.dir\O_\repos.hobby\ntvdm64\test\build\host_cpu_endian_fixture.c.obj /FdCMakeFiles\host-cpu-endian-reject_objects.dir\ /FS -c O:\repos.hobby\ntvdm64\test\build\host_cpu_endian_fixture.c
+O:\repos.hobby\ntvdm64\test\build\../../src/mvdm-host/softpc.new/host/inc/host_cpu.h(18): fatal error C1189: #error:  Excluded original conditional branch
+ninja: build stopped: subcommand failed.

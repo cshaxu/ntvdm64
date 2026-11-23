@@ -1,26 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "3d4bfb0318a9bd3424c8e1907993e2392f5e8a6c",
+  "head": "0a797506e5b5044223a4ce8cf06d76b3aa1acee3",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
-    " M test/adapter-mvdm-host-out/wow/verify_clipboard_epoch.py",
+    " M artifacts/build-migration/t484/progress.json",
+    " M docs/etc/README.md",
+    " M docs/states/CURRENT.md",
+    " M test/build/test_host_cpu_endian.py",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? tools/build/fixtures/clipboard-tests.cmake"
+    "?? artifacts/build-migration/t484/s3-endian/",
+    "?? docs/etc/evidence/t484-s3-endian.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 30,
-    "unchanged": 212,
+    "changed": 31,
+    "unchanged": 211,
     "removed": 113
   },
   "disposition_counts": {
-    "migrated-delivered": 10,
+    "migrated-delivered": 11,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
-    "migrated-local-verified": 1,
-    "pending-producer-migration": 21,
+    "pending-producer-migration": 20,
     "retained-native-delegate": 2,
+    "migrated-local-verified": 1,
     "requires-disposition-reconciliation": 206
   },
   "existing_interpreted_candidates_with_command_hits": 207,
@@ -275,12 +279,18 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "a12481dc991c5caa136b5938d772b7a94576f28b002a38d85e29b95f800c5706",
-      "revisions": [],
-      "evidence": [],
-      "completion": "migrated-local-verified",
+      "revisions": [
+        "0a797506e5b5044223a4ce8cf06d76b3aa1acee3"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-clipboard-epoch.md"
+      ],
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "migrated-local-verified",
-        "reason": "CMD clipboard-epoch owns source projection and compilation; Python only delegates and asserts56 checks; delivery pending"
+        "evidence": "docs/etc/evidence/t484-s3-clipboard-epoch.md",
+        "commit": "0a797506e",
+        "status": "migrated-delivered",
+        "reason": "P34 CMD clipboard-epoch owns production; x86/x64 56 assertions verified"
       }
     },
     {
@@ -375,14 +385,15 @@
       "id": "B0021",
       "file": "test/build/test_host_cpu_endian.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "4e92f5b8140d9ba60510b28c23818e77b6015cf776ca4bb95c119c6e89ae10f0",
+      "state": "changed",
+      "current_sha256": "ed411e0e1b135f6de6978f99d5ce5f066a908f62c56883f2a2e9d1720769eee3",
       "revisions": [],
       "evidence": [],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-local-verified",
       "decision": {
-        "reason": "Direct CL invocations for endian variants",
-        "status": "pending-producer-migration"
+        "status": "migrated-local-verified",
+        "reason": "CMD native targets; x86/x64 actual fixed layout and CPU30 rejection pass",
+        "evidence": "docs/etc/evidence/t484-s3-endian.md"
       }
     },
     {
@@ -4641,6 +4652,12 @@
     }
   ],
   "commits": {
+    "0a797506e5b5044223a4ce8cf06d76b3aa1acee3": {
+      "subject": "T484 S3 P34 migrate clipboard epoch producer and classify integration callers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-clipboard-epoch.md"
+      ]
+    },
     "3d4bfb0318a9bd3424c8e1907993e2392f5e8a6c": {
       "subject": "T484 S3 P33 migrate Console API probes and reconcile candidate tracking",
       "evidence": [
@@ -5145,8 +5162,8 @@
       "file": "test/build/test_host_cpu_endian.py",
       "hits": [
         {
-          "line": 17,
-          "text": "base = ['cl.exe', '/nologo', '/TC', '/MT', str(source), '/Fo' + str(obj), '/Fe' + str(exe)]"
+          "line": 15,
+          "text": "exe = repo / 'build/.ninja' / ('fixtures-' + args.architecture) / 'host-cpu-endian.exe'"
         }
       ]
     },

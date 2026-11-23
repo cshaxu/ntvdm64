@@ -324,6 +324,15 @@ include(window-tests.cmake)
 include(native-probes.cmake)
 include(console-api-probes.cmake)
 include(clipboard-tests.cmake)
+fixture(host-cpu-endian CL test/build/host_cpu_endian_fixture.c)
+set_property(TARGET host-cpu-endian_objects PROPERTY COMPILE_OPTIONS /nologo /TC)
+target_compile_definitions(host-cpu-endian_objects PRIVATE LITTLEND)
+fixture(host-cpu-endian-default CL test/build/host_cpu_endian_fixture.c)
+set_property(TARGET host-cpu-endian-default_objects PROPERTY COMPILE_OPTIONS /nologo /TC)
+# Explicit rejection control, never a dependency of successful builds.
+fixture(host-cpu-endian-reject CL test/build/host_cpu_endian_fixture.c)
+set_property(TARGET host-cpu-endian-reject_objects PROPERTY COMPILE_OPTIONS /nologo /TC)
+target_compile_definitions(host-cpu-endian-reject_objects PRIVATE CPU_30_STYLE)
 
 # These historical profiles enabled /Gy only for the coordination unit.
 foreach(target IN ITEMS guest_location_test wow_task_frame_test xms_mapped_memory_test
