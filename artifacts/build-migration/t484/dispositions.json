@@ -188,7 +188,8 @@
   },
   "test/integration/verify-pic-reset-eoi.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Invokes NASM to produce PICIRQ.COM"
+    "reason": "Native PIC probe producer verified; shared runtime/staging dependencies remain open",
+    "evidence": "docs/etc/evidence/t484-s3-pic-bios.md"
   },
   "test/integration/verify-s45-keyboard-shadow.ps1": {
     "status": "pending-producer-migration",
@@ -257,5 +258,10 @@
   "test/integration/verify-wow-edit-tabstop.ps1": {
     "status": "pending-producer-migration",
     "reason": "Generates CMD with CL/LINK for tabstop and wordbreak fixtures"
+  },
+  "test/observation/verify-slave-bios-eoi.py": {
+    "status": "migrated-delivered",
+    "reason": "Native PIC/BIOS target owns compilation and linking; Python only invokes CMD and checks provider/runtime assertions",
+    "evidence": "docs/etc/evidence/t484-s3-pic-bios.md"
   }
 }

@@ -82,7 +82,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P40 native guest output](../etc/evidence/t484-s3-native-guest-output.md) | Native x86 producer;137728-byte images differ only in two timestamp bytes; cache and parser pass, staging remains open. |
 
-Each batch passed its cached full host build. P40 checks11 raw host inputs
+| [P41 PIC/BIOS producers](../etc/evidence/t484-s3-pic-bios.md) | Native PIC guest and slave BIOS producers;24 PIC assertions,79 BIOS checks and221-byte guest identity pass. |
+
+Each batch passed its cached full host build. P41 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

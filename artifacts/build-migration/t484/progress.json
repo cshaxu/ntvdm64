@@ -1,29 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "7e89114b14c4199b138033c3352b530105f8c7fb",
+  "head": "78e2830232fe0ebad2dfe54fc8e2f3bbc446d6c0",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-native-guest-output.ps1",
+    " M test/integration/verify-pic-reset-eoi.ps1",
+    " M test/observation/verify-slave-bios-eoi.py",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/native-probes.cmake",
-    "?? artifacts/build-migration/t484/s3-native-guest-output/",
-    "?? docs/etc/evidence/t484-s3-native-guest-output.md"
+    " M tools/build/fixtures/cpu-guest-probes.cmake",
+    " M tools/build/worker/cpu-tests.cmake",
+    "?? artifacts/build-migration/t484/s3-pic-bios/",
+    "?? docs/etc/evidence/t484-s3-pic-bios.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 40,
-    "unchanged": 202,
+    "changed": 42,
+    "unchanged": 200,
     "removed": 113
   },
   "disposition_counts": {
-    "migrated-delivered": 12,
+    "migrated-delivered": 13,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 113,
     "pending-producer-migration": 43,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 183
+    "requires-disposition-reconciliation": 182
   },
   "existing_interpreted_candidates_with_command_hits": 207,
   "files": [
@@ -605,8 +607,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "3929b2820fff05a62c79d3f653b61487cc59113be74b097293171b2286673f49",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "78e2830232fe0ebad2dfe54fc8e2f3bbc446d6c0"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-native-guest-output.md"
+      ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
@@ -679,14 +685,15 @@
       "id": "B0039",
       "file": "test/integration/verify-pic-reset-eoi.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "35ae730a768e5fc814e1337f3ab5a3b16bc24bc445ab78c32c53343937550134",
+      "state": "changed",
+      "current_sha256": "63cc900bbd4a82a07d1b35a07e0605a1d49e87010d1958ad7c162622686ad939",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Invokes NASM to produce PICIRQ.COM"
+        "reason": "Native PIC probe producer verified; shared runtime/staging dependencies remain open",
+        "evidence": "docs/etc/evidence/t484-s3-pic-bios.md"
       }
     },
     {
@@ -2136,12 +2143,16 @@
       "id": "B0152",
       "file": "test/observation/verify-slave-bios-eoi.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "cd79d91a596979cfde2db81f80fb1e7ba064e832bb68de8d91c7fe4502d52af6",
+      "state": "changed",
+      "current_sha256": "e4a546952e623917137d1bf68082764992fa100cbba077d913109657c800d142",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Native PIC/BIOS target owns compilation and linking; Python only invokes CMD and checks provider/runtime assertions",
+        "evidence": "docs/etc/evidence/t484-s3-pic-bios.md"
+      }
     },
     {
       "id": "B0153",
@@ -4767,6 +4778,12 @@
     }
   ],
   "commits": {
+    "78e2830232fe0ebad2dfe54fc8e2f3bbc446d6c0": {
+      "subject": "T484 S3 P40 migrate native guest output probe to CMD build",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-native-guest-output.md"
+      ]
+    },
     "7e89114b14c4199b138033c3352b530105f8c7fb": {
       "subject": "T484 S3 P39 replace Win95 controller string generation with native assembly",
       "evidence": [
@@ -5531,16 +5548,12 @@
           "text": "[string]$BuildCache = 'build/.ninja/msvc-x86-release/worker',"
         },
         {
-          "line": 7,
-          "text": "[string]$Nasm='nasm.exe'"
-        },
-        {
-          "line": 30,
+          "line": 29,
           "text": "$graph = Get-Content -LiteralPath (Join-Path $cache 'build.ninja') -Raw"
         },
         {
-          "line": 68,
-          "text": "& $Nasm -f bin $guestSource -o \"$out/PICIRQ.COM\""
+          "line": 77,
+          "text": "Copy-Item (Join-Path $root 'build/.ninja/fixtures-x86/guest-probes/cpu-integration/PICIRQ.COM') \"$out/PICIRQ.COM\""
         }
       ]
     },
@@ -7527,26 +7540,6 @@
         {
           "line": 19,
           "text": "cache=repo/'build/.ninja/msvc-x86-release/worker'"
-        },
-        {
-          "line": 21,
-          "text": "subprocess.run(['cmd.exe','/d','/c',str(cache/'run-ninja-parallel.cmd'),"
-        },
-        {
-          "line": 24,
-          "text": "graph=(cache/'build.ninja').read_text()"
-        },
-        {
-          "line": 34,
-          "text": "(out/'link.rsp').write_text('/nologo /force:multiple '+f'/map:\"{exe}.map\" /out:\"{exe}\" '+"
-        },
-        {
-          "line": 36,
-          "text": "driver=repo/'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'"
-        },
-        {
-          "line": 37,
-          "text": "for step,tool in [('compile','cl.exe'),('link','link.exe')]:"
         }
       ]
     },

@@ -18,26 +18,11 @@ if not out.is_relative_to(repo/'build') or out.exists():
 out.mkdir(parents=True)
 cache=repo/'build/.ninja/msvc-x86-release/worker'
 with (out/'dependencies.txt').open('w',encoding='utf-8') as log:
-    subprocess.run(['cmd.exe','/d','/c',str(cache/'run-ninja-parallel.cmd'),
-                    'pic-reset-eoi-test.exe'],cwd=repo,stdout=log,
-                   stderr=subprocess.STDOUT,check=True)
-graph=(cache/'build.ninja').read_text()
-flags=re.search(r'^cflags = (.*)$',graph,re.M)[1].replace('$:',':')
-release=re.search(r'^release_cflags = (.*)$',graph,re.M)[1]
-inputs=re.search(r'^build pic-reset-eoi-test.exe: memory_test_link (.*)$',graph,re.M)[1].split()
-assert inputs[0]=='obj/tests/pic_reset_eoi_test.obj'
+    subprocess.run(['cmd.exe','/d','/c',str(repo/'tools/build-fixtures.cmd'),
+                    'x86','pic-bios-contracts'],cwd=repo,stdout=log,
+                   stderr=subprocess.STDOUT,timeout=300,check=True)
 source=repo/'test/mvdm-host/slave_bios_eoi_test.c'
-obj=out/'fixture.obj'
-exe=out/'fixture.exe'
-(out/'compile.rsp').write_text(f'{flags} {release} /Fo"{obj}" "{source}"',encoding='utf-8')
-inputs=[f'"{obj}"']+[f'"{cache/i}"' for i in inputs[1:]]
-(out/'link.rsp').write_text('/nologo /force:multiple '+f'/map:"{exe}.map" /out:"{exe}" '+
-    ' '.join(inputs)+' kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib libcmt.lib libvcruntime.lib libucrt.lib',encoding='utf-8')
-driver=repo/'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'
-for step,tool in [('compile','cl.exe'),('link','link.exe')]:
-    with (out/f'{step}.txt').open('w',encoding='utf-8') as log:
-        subprocess.run([str(driver),tool,'@'+str(out/f'{step}.rsp')],cwd=repo,
-                       stdout=log,stderr=subprocess.STDOUT,timeout=120,check=True)
+exe=cache/'slave-bios-eoi-test.exe'
 mapped=Path(str(exe)+'.map').read_text()
 for name,owner in [('D11_int','original-softpc-bios:slave_bs.obj'),
                    ('ica_intack','original-softpc-system:ica.obj'),

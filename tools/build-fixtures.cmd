@@ -22,6 +22,8 @@ if "%TARGET%"=="console-api-probes" set "SELECTED=1"
 if "%TARGET%"=="clipboard-epoch" set "SELECTED=1"
 if "%TARGET%"=="cpu-guest-probes" set "SELECTED=1"
 if "%TARGET%"=="cpu-guest-probes" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="pic-bios-contracts" set "SELECTED=1"
+if "%TARGET%"=="pic-bios-contracts" if not "%~1"=="x86" exit /b 2
 for %%I in (host-cpu-endian host-cpu-endian-default host-cpu-endian-reject) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="console-api-probes" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="dos-observation-probes" set "SELECTED=1"
@@ -76,6 +78,7 @@ if "%TARGET%"=="window-contracts" if errorlevel 1 exit /b %errorlevel%
 call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
 if "%TARGET%"=="oem-tests" goto worker
+if "%TARGET%"=="pic-bios-contracts" goto worker
 if "%TARGET%"=="native-input-contracts" goto inputtests
 if "%TARGET%"=="command-initialization" goto worker
 if "%TARGET%"=="command-launch" goto worker

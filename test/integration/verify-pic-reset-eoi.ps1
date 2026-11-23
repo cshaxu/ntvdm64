@@ -3,8 +3,7 @@ param(
     [string]$BuildCache = 'build/.ninja/msvc-x86-release/worker',
     [Parameter(Mandatory = $true)][string]$OutputRoot,
     [string]$PackageRoot,
-    [string]$Observer,
-    [string]$Nasm='nasm.exe'
+    [string]$Observer
 )
 $ErrorActionPreference = 'Stop'
 if([bool]$PackageRoot -ne [bool]$Observer){throw 'Real guest check requires PackageRoot and Observer together'}
@@ -65,8 +64,17 @@ if($PackageRoot) {
     . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
     $observerPath=(Resolve-Path -LiteralPath $Observer).Path
     $guestSource=Join-Path $PSScriptRoot '../observation/pic_reset_eoi_guest.asm'
-    & $Nasm -f bin $guestSource -o "$out/PICIRQ.COM"
-    if($LASTEXITCODE){throw 'Independent PIC guest probe assembly failed'}
+    $producer=Start-Process -FilePath $env:ComSpec -ArgumentList ('/d /s /c ""'+(Join-Path $root 'tools/build-fixtures.cmd')+'" x86 cpu-guest-probes"') -WorkingDirectory $root -WindowStyle Hidden -PassThru -RedirectStandardOutput "$out/build.log" -RedirectStandardError "$out/build.stderr.log"
+    try {
+        "pid=$($producer.Id) started=$($producer.StartTime.ToUniversalTime().ToString('o'))" | Set-Content "$out/producer.txt"
+        if(!$producer.WaitForExit(300000)){
+            $producer.Kill($true);$producer.WaitForExit()
+            throw 'PIC guest producer timed out'
+        }
+        "exit=$($producer.ExitCode)" | Add-Content "$out/producer.txt"
+        if($producer.ExitCode){throw 'Independent PIC guest probe assembly failed'}
+    } finally {$producer.Dispose()}
+    Copy-Item (Join-Path $root 'build/.ninja/fixtures-x86/guest-probes/cpu-integration/PICIRQ.COM') "$out/PICIRQ.COM"
     Get-FileHash $guestSource,"$out/PICIRQ.COM",$observerPath |
         Select-Object Path,Hash | Export-Csv -NoTypeInformation "$out/guest-inputs.csv"
     $stage=New-PhysicalRuntimeStage (Resolve-Path -LiteralPath $PackageRoot).Path -TopLevelNames @('system32','system.ini')

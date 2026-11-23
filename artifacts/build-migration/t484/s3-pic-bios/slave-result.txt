@@ -1,0 +1,11 @@
+D11 irq=10 round=0 master=00 slave=00 mask=ff callbacks=1
+D11 irq=10 round=1 master=00 slave=00 mask=ff callbacks=1
+D11 irq=11 round=0 master=00 slave=00 mask=ff callbacks=1
+D11 irq=11 round=1 master=00 slave=00 mask=ff callbacks=1
+D11 irq=12 round=0 master=00 slave=00 mask=ff callbacks=1
+D11 irq=12 round=1 master=00 slave=00 mask=ff callbacks=1
+D11 irq=14 round=0 master=00 slave=00 mask=ff callbacks=1
+D11 irq=14 round=1 master=00 slave=00 mask=ff callbacks=1
+D11 irq=15 round=0 master=00 slave=00 mask=ff callbacks=1
+D11 irq=15 round=1 master=00 slave=00 mask=ff callbacks=1
+SLAVE_BIOS_EOI checks=79 failures=0

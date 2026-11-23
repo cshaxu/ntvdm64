@@ -1568,3 +1568,5 @@ post-publication targeted checks.
 [T484 S3 Win95 editor](evidence/t484-s3-win95-editor.md) records shared native controller branches and Win31/Win95 byte-equivalence matrices.
 
 [T484 S3 native guest output](evidence/t484-s3-native-guest-output.md) records the native probe producer, byte comparison and remaining staging review.
+
+[T484 S3 PIC/BIOS producers](evidence/t484-s3-pic-bios.md) records native producer migration and unchanged PIC/BIOS assertions.

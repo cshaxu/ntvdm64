@@ -1,5 +1,15 @@
 # Selected original CCPU declaration/profile checks. Negative targets are
 # explicit, expected compiler failures and are never part of product/all.
+get_target_property(pic_profile unit_obj_tests_pic_reset_eoi_test_obj COMPILE_FLAGS)
+worker_unit("obj/tests/slave_bios_eoi_test.obj"
+  "${NTVDM_REPO}/test/mvdm-host/slave_bios_eoi_test.c" "${pic_profile}")
+get_target_property(pic_inputs image_pic_reset_eoi_test_exe WORKER_LINK_INPUTS)
+list(REMOVE_ITEM pic_inputs "obj/tests/pic_reset_eoi_test.obj")
+list(PREPEND pic_inputs "obj/tests/slave_bios_eoi_test.obj")
+get_property(pic_prefix GLOBAL PROPERTY image_pic_reset_eoi_test_exe_prefix)
+get_property(pic_suffix GLOBAL PROPERTY image_pic_reset_eoi_test_exe_suffix)
+worker_link("slave-bios-eoi-test.exe" "${pic_prefix}" "${pic_suffix}" INPUTS ${pic_inputs})
+worker_group(pic-bios-contracts "pic-reset-eoi-test.exe" "slave-bios-eoi-test.exe")
 get_target_property(cpu_profile unit_obj_ccpu_c_neg64_obj COMPILE_FLAGS)
 if(NOT cpu_profile MATCHES "/DCPU_40_STYLE" OR NOT cpu_profile MATCHES "/DSPC386"
    OR NOT cpu_profile MATCHES "/DANSI" OR cpu_profile MATCHES "/G[zr]")

@@ -1,0 +1,7 @@
+{
+  "profile": "x86 /MT NTVDM CCPU40",
+  "elapsed_ms": 210,
+  "executable_sha256": "7D89C0CA817A5F2DAC28A943E9EDADD77968A18EA71A9BE64C54C008B75CF381",
+  "ica_sha256": "59FC852D57945F015EDB19304BEEBC326DA9ACF512161FBBD58A83751396A3D5",
+  "scope": "actual production PIC reset; controlled EOI callback boundary; no guest mutation"
+}

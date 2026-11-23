@@ -1,0 +1,12 @@
+{
+  "exit": 0,
+  "identities": {
+    "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\slave_bios_eoi_test.c": "9E930F00C6ABBCB67A1612F6D1F727EBD9296D4BAEE1E07F62BCB07342604192",
+    "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\bios\\slave_bs.c": "C745FABC4CB99F2E8A9E2173C49D2A8082B431D0F4B0A145BEA1FE08792C8140",
+    "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\system\\ica.c": "59FC852D57945F015EDB19304BEEBC326DA9ACF512161FBBD58A83751396A3D5",
+    "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\slave-bios-eoi-test.exe": "21ACF83ACCAC2D38C317D36431B574C8E70DF64FF6FC88F02EAA502CC6EFCD25",
+    "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\slave-bios-eoi-test.exe.map": "EB2A251AC9EA3E74FFCE82B2ACFB6BB4CC7994F1B3A00149779A46A0762BB00E",
+    "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-bios.lib": "994446E425FB3E2654933206FFE35C80E097C4614DF2FAB96CF380556C6FEC7C",
+    "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-system.lib": "3E81A542A1F15BCF370165C31C76F18F21C00E0576AE903B2C635DBCC29721D9"
+  }
+}

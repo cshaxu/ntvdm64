@@ -25,5 +25,6 @@ guest_probe(cpu-integration Transfer-negative.COM ccpu_transfer_probe.asm -DCPU_
 guest_probe(cpu-integration Alu.COM ccpu_alu_probe.asm)
 guest_probe(cpu-integration CallReturn.COM ems_call_return_probe.asm)
 guest_probe(cpu-integration Mapping.COM ems_mapping_probe.asm)
+guest_probe(cpu-integration PICIRQ.COM pic_reset_eoi_guest.asm)
 get_property(outputs GLOBAL PROPERTY guest_cpu-integration)
 add_custom_target(cpu-guest-probes DEPENDS ${outputs} ems_pif_builder)
