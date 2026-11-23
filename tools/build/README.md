@@ -72,6 +72,14 @@ observation, not a production protocol or extra product/helper.
 control graph. The observation runner retains runtime assertions and research
 selection; it delegates all binary production to that CMD entry.
 
+`tools/build-fixtures.cmd x86 worker-diagnostics` builds the former environment,
+COMMAND, thread-exit and DPMI trace variants under the worker cache's
+`diagnostics/<boundary>/`. Each image writes `events.txt` in its own directory;
+the lifecycle-only DPMI variant is named `dpmi-lifecycle`. They reuse current
+product profiles, archive membership and link inputs. These diagnostic images
+are not release images or self-contained runtime packages. Use the established
+isolated-package staging and matching manifest before a guest diagnostic run.
+
 For serial worker compilation, set `MVDM_BUILD_JOBS=1` and call the generated
 `build/.ninja/msvc-x86-release/worker/run-ninja-parallel.cmd` with the target.
 This uses the same native dependency graph and initializes its MSVC environment.

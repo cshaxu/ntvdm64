@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 worker diagnostics](evidence/t484-s3-worker-diagnostics.md) migrates
+11 diagnostic variants using the actual native product graph.
+
 [T484 S3 COMMAND producer](evidence/t484-s3-command-producer.md) consolidates
 the obsolete child graph into the current native request test.
 

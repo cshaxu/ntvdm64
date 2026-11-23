@@ -39,6 +39,8 @@ function(worker_unit output source flags)
 endfunction()
 
 function(worker_archive output)
+  string(MAKE_C_IDENTIFIER "archive_${output}" archive)
+  set_property(GLOBAL PROPERTY ${archive} "${ARGN}")
   worker_paths(dependencies ${ARGN})
   add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/${output}"
     COMMAND "${NTVDM_LIB}" /nologo "/out:${output}" ${ARGN}
@@ -60,6 +62,9 @@ endfunction()
 
 function(worker_link output before after)
   cmake_parse_arguments(PARSE_ARGV 3 link "TIB_CHECK;NO_LINK_INPUTS" "" "INPUTS;DEPENDS")
+  string(MAKE_C_IDENTIFIER "image_${output}" target)
+  set_property(GLOBAL PROPERTY ${target}_prefix "${before}")
+  set_property(GLOBAL PROPERTY ${target}_suffix "${after}")
   string(REPLACE "$out" "${output}" before "${before}")
   string(REPLACE "$out" "${output}" after "${after}")
   separate_arguments(prefix NATIVE_COMMAND "${before}")
@@ -91,6 +96,7 @@ function(worker_link output before after)
   string(MAKE_C_IDENTIFIER "image_${output}" target)
   add_custom_target(${target} DEPENDS "${CMAKE_BINARY_DIR}/${output}")
   set_property(TARGET ${target} PROPERTY WORKER_LINK_INPUTS "${link_INPUTS}")
+  set_property(TARGET ${target} PROPERTY WORKER_LINK_DEPENDS "${link_DEPENDS}")
 endfunction()
 
 function(worker_group name)

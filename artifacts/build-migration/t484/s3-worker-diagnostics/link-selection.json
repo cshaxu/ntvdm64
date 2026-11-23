@@ -1,0 +1,84 @@
+{
+  "linked_variants": 11,
+  "runtime_tested": false,
+  "results": [
+    {
+      "variant": "environment",
+      "owners": [
+        "command_environment_trace"
+      ],
+      "sha256": "dfa67767394c008d6bc156d4400bacdd5231e2142fe025fdc7f03b69aa2ea499"
+    },
+    {
+      "variant": "wow-environment",
+      "owners": [
+        "wow_initial_environment_trace"
+      ],
+      "sha256": "069793a9a0843f9a60a4440800f3bd6ac7a49179d6499671de201380af9c89c9"
+    },
+    {
+      "variant": "command-dispatch",
+      "owners": [
+        "command_dispatch_trace"
+      ],
+      "sha256": "c9892e5117a881c23ca18e315dce6d56b8ec4739510d4d922315d6249f273727"
+    },
+    {
+      "variant": "thread-exit",
+      "owners": [
+        "wow_thread_exit_trace"
+      ],
+      "sha256": "60117d86ac292b3bb8a8eb935db0c6dcb5a8bdb369f24609c638034eabafff63"
+    },
+    {
+      "variant": "exception",
+      "owners": [
+        "dpmi_exception_trace"
+      ],
+      "sha256": "697b018d465949901e8a006a5c62ff15644fd0a629354877e4c9b492ed909fc7"
+    },
+    {
+      "variant": "dpmi",
+      "owners": [
+        "dpmi_dispatch_trace"
+      ],
+      "sha256": "14bfa69c4249859b7fca6ce3cf20ae04737f30c2b0d168456183ca1981179fce"
+    },
+    {
+      "variant": "dpmi-lifecycle",
+      "owners": [
+        "dpmi_dispatch_trace"
+      ],
+      "sha256": "b51e83f8e5535c39d7f7d1185f2c404228b0336fa88f850fcb3df137c7ddd49c"
+    },
+    {
+      "variant": "pm-allocation-failure",
+      "owners": [
+        "dpmi_pm_allocation_failure"
+      ],
+      "sha256": "a7518834421fbd9833e1bf81a5d876c4af5471021bb04a0390914a8321aac9a2"
+    },
+    {
+      "variant": "dpmi-pointer",
+      "owners": [
+        "dpmi_pointer_trace"
+      ],
+      "sha256": "e66419ed85fcc9551b89ab09311d5774539135c2c1963ca276317284aed83720"
+    },
+    {
+      "variant": "dpmi-ioctl",
+      "owners": [
+        "dpmi_ioctl_boundary"
+      ],
+      "sha256": "d52746f48ee508f63a8e48cf198bfa0e33b247d34114d2329757f1bb9582258a"
+    },
+    {
+      "variant": "dpmi-xmem-failure",
+      "owners": [
+        "dpmi_xmem_failure",
+        "dpmi_dispatch_trace"
+      ],
+      "sha256": "5175c54c06658ffba2bd0defaeb03f978e418644633daf46c9c1fa5fdfb36079"
+    }
+  ]
+}

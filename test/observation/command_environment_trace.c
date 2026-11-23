@@ -4,6 +4,7 @@
 #define cmdGetInitEnvironment s35_original_GetInitEnvironment
 #include "../../src/mvdm-host/dos/command/cmdenv.c"
 #undef cmdGetInitEnvironment
+#include "guest_location.h"
 
 #ifndef S35_ENVIRONMENT_TRACE_LOG
 #define S35_ENVIRONMENT_TRACE_LOG "O:\\winnt\\logs\\s35-envtrace-r1.events.txt"
