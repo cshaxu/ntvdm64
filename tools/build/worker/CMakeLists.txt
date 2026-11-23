@@ -62,3 +62,4 @@ add_custom_target(product ALL DEPENDS "${CMAKE_BINARY_DIR}/ntvdm.exe"
 add_custom_target(frontend-library DEPENDS
   "${CMAKE_BINARY_DIR}/frontend-window-library-test.exe"
   "${CMAKE_BINARY_DIR}/frontend-window-keyboard-test.exe")
+include(cpu-preprocess.cmake)

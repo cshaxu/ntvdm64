@@ -1647,3 +1647,5 @@ post-publication targeted checks.
 - [T484 S3 measurement producers](evidence/t484-s3-measurements.md).
 
 - [T484 S3 common-return diagnostic](evidence/t484-s3-common-return.md).
+
+- [T484 S3 selected CCPU preprocessing](evidence/t484-s3-ccpu-headers.md).

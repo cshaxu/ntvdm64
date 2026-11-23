@@ -454,5 +454,10 @@
     "evidence": "docs/etc/evidence/t484-s3-common-return.md",
     "reason": "Native two-owner source projection, current thunk signature and diagnostic profile; full build and focused checks pass",
     "status": "migrated-delivered"
+  },
+  "test/observation/observe-ccpu-header-selection.ps1": {
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-ccpu-headers.md",
+    "reason": "Native selected-owner preprocessing; eight VALID dependencies, inspected native batch and unchanged product/publication checks"
   }
 }

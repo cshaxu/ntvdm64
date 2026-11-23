@@ -1,0 +1,11 @@
+{
+  "finished": "2026-11-23T23:03:14.7078751Z",
+  "start": "2026-11-23T23:02:43.8095128Z",
+  "exit": 0,
+  "pid": 13024,
+  "validDependencies": 8,
+  "nativePreprocessCommands": 8,
+  "runtime": "not exercised",
+  "productionUnchanged": true,
+  "typeChecking": "not claimed"
+}

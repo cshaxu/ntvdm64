@@ -1,30 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "e046552a7df370e26564faa2818fc11122efd999",
+  "head": "dbc8512be4ccf480220c33f81cfd8a095a7e6232",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/new-wow-common-return-diagnostic.ps1",
+    " M test/observation/observe-ccpu-header-selection.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-common-return/",
-    "?? docs/etc/evidence/t484-s3-common-return.md",
-    "?? tools/build/wow32/common-return.cmake"
+    " M tools/build/worker/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-ccpu-headers/",
+    "?? docs/etc/evidence/t484-s3-ccpu-headers.md",
+    "?? tools/build/worker/cpu-preprocess.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 87,
-    "unchanged": 150,
+    "changed": 88,
+    "unchanged": 149,
     "removed": 118
   },
   "disposition_counts": {
-    "migrated-delivered": 32,
+    "migrated-delivered": 33,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 118,
     "pending-producer-migration": 52,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 148,
+    "requires-disposition-reconciliation": 147,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 187,
@@ -1940,8 +1940,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "78785ad248e1e76d71819dc14456a2fa84f7d29b33d5399f41cfddabcc788132",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "dbc8512be4ccf480220c33f81cfd8a095a7e6232"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-common-return.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-common-return.md",
@@ -1953,12 +1957,16 @@
       "id": "B0108",
       "file": "test/observation/observe-ccpu-header-selection.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "e8de6049b35e9e2b925ba5eaed8dd56676d12dedc18b2e6702eec1ef26d322da",
+      "state": "changed",
+      "current_sha256": "498f7b0b8fb391e4a104672a938b31dec6cd28ad2a0573ddacd1df0933c97b06",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "evidence": "docs/etc/evidence/t484-s3-ccpu-headers.md",
+        "reason": "Native selected-owner preprocessing; eight VALID dependencies, inspected native batch and unchanged product/publication checks"
+      }
     },
     {
       "id": "B0109",
@@ -5154,6 +5162,12 @@
     }
   ],
   "commits": {
+    "dbc8512be4ccf480220c33f81cfd8a095a7e6232": {
+      "subject": "T484 S3 P79 migrate common return diagnostic producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-common-return.md"
+      ]
+    },
     "e046552a7df370e26564faa2818fc11122efd999": {
       "subject": "T484 S3 P78 migrate measurement producers and track isolation staging",
       "evidence": [
@@ -6816,27 +6830,31 @@
       "hits": [
         {
           "line": 3,
-          "text": "[string]$WorkerBuildRoot=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/worker'),"
+          "text": "[string]$WorkerBuildRoot=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/worker'))"
         },
         {
-          "line": 4,
-          "text": "[string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'))"
-        },
-        {
-          "line": 25,
+          "line": 23,
           "text": "$ninja=(Get-Command ninja).Source"
         },
         {
-          "line": 27,
-          "text": "RunOwned commands $ninja ('-t commands '+$targets)"
+          "line": 29,
+          "text": "RunOwned commands $ninja ('-t commands ccpu-header-selection')"
         },
         {
-          "line": 28,
-          "text": "RunOwned deps $ninja ('-t deps '+$targets)"
+          "line": 31,
+          "text": "# CMake uses a native batch file when the combined command exceeds CMD limits."
+        },
+        {
+          "line": 40,
+          "text": "$commandText -match '(?i)\\b(python|powershell|pwsh|node|cscript|wscript)(\\.exe)?\\b'){"
         },
         {
           "line": 43,
-          "text": "Get-FileHash $PSCommandPath,$driver,\"$worker/build.ninja\",$ninja|Select-Object Path,Hash|ConvertTo-Json|Set-Content \"$root/tool-inputs.json\""
+          "text": "RunOwned deps $ninja ('-t deps '+$targets)"
+        },
+        {
+          "line": 57,
+          "text": "Get-FileHash $PSCommandPath,\"$worker/build.ninja\",$ninja|Select-Object Path,Hash|ConvertTo-Json|Set-Content \"$root/tool-inputs.json\""
         }
       ]
     },

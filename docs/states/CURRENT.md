@@ -110,7 +110,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P79 common-return diagnostic](../etc/evidence/t484-s3-common-return.md) | Two native projections with owner-specific diagnostic headers; source/object/cache/frame/full-build/hash checks pass; B0107 complete. |
 
-Implementation batches through P79 passed their cached full host build. P73 checks11 raw host inputs
+| [P80 CCPU preprocessing](../etc/evidence/t484-s3-ccpu-headers.md) | Eight real owner profiles and VALID dependency records; native batch inspected, product/full-build/hash checks pass; B0108 complete. |
+
+Implementation batches through P80 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
