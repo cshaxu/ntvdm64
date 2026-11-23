@@ -76,6 +76,7 @@ static DWORD WINAPI launch(void *argument)
 int main(int argc,char **argv)
 {
     HANDLE input,readers[2],writers[2],streams[3],caps[2],threads[2],foreign;
+    HANDLE parent_streams[3];
     SECURITY_ATTRIBUTES security={sizeof(security),NULL,TRUE};
     char cwd[MAX_PATH],alternate[MAX_PATH],command[256],environment[1024],output[8],event_name[80];
     DWORD count_before,count_after,bytes,code;
@@ -89,6 +90,9 @@ int main(int argc,char **argv)
             !strcmp(mask,"6") ? 73 : 97;
     }
     if(argc>1 && !strcmp(argv[1],"--child"))return child(argc,argv);
+    parent_streams[0]=GetStdHandle(STD_INPUT_HANDLE);
+    parent_streams[1]=GetStdHandle(STD_OUTPUT_HANDLE);
+    parent_streams[2]=GetStdHandle(STD_ERROR_HANDLE);
     {
         STARTUPINFOA startup = {sizeof(startup)}, child_startup;
         HANDLE original = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -210,5 +214,8 @@ int main(int argc,char **argv)
     printf("handles before=%lu after=%lu expected=%lu\n",count_before,count_after,count_before-2);
     CHECK(count_after==count_before-2);CHECK(!ambient_reads);
     CloseHandle(input);CloseHandle(foreign);
+    CHECK(GetStdHandle(STD_INPUT_HANDLE)==parent_streams[0]);
+    CHECK(GetStdHandle(STD_OUTPUT_HANDLE)==parent_streams[1]);
+    CHECK(GetStdHandle(STD_ERROR_HANDLE)==parent_streams[2]);
     printf("PASS %u per-request launch assertions\n",checks);return 0;
 }

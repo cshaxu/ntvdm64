@@ -58,8 +58,9 @@ interpreter-free end-to-end acceptance have not completed.
 | [P20 host boundaries](../etc/evidence/t484-s3-host-boundaries.md) | Two generators replaced; actual x86 product heartbeat/ICA objects pass unchanged suspend/resume and mutual-exclusion assertions. |
 | [P21 CCPU callback](../etc/evidence/t484-s3-ccpu-callback.md) | Two generators replaced; bounded CCPU and original callback assertions pass with current initialization. |
 | [P22 WOW controls](../etc/evidence/t484-s3-wow-controls.md) | One generator replaced;158 native units,46 links and38 passing default runtime cases; five identical source projections. |
+| [P23 COMMAND producer](../etc/evidence/t484-s3-command-producer.md) | Last literal Ninja generator retired into current native request coverage;74 assertions pass. |
 
-Each batch passed its cached full host build. P22 checks11 raw host inputs
+Each batch passed its cached full host build. P23 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
@@ -109,6 +110,6 @@ The inherited environment failure and other boundaries remain in
 
 ## Recent Governance
 
-T484 S3 P22 records WOW control migration and its bounded delivery under the
+T484 S3 P23 records COMMAND producer consolidation and its delivery under the
 owner's full-task authorization. The containing commit is its delivery
 identity. S3 is not closed; queue order is unchanged.

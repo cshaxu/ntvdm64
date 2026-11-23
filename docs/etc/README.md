@@ -1,5 +1,8 @@
 # Supporting Material
 
+[T484 S3 COMMAND producer](evidence/t484-s3-command-producer.md) consolidates
+the obsolete child graph into the current native request test.
+
 [T484 S3 WOW controls](evidence/t484-s3-wow-controls.md) records the native
 158-unit control graph and 38 passing runtime cases.
 

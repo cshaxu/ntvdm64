@@ -25,6 +25,8 @@ if "%TARGET%"=="observation-tools" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="command-initialization" set "SELECTED=1"
+if "%TARGET%"=="command-launch" set "SELECTED=1"
+if "%TARGET%"=="command-launch" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="command-initialization" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="dem-declarations" set "SELECTED=1"
 if "%TARGET%"=="dem-declarations" if not "%~1"=="x86" exit /b 2
@@ -46,6 +48,7 @@ call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
 if "%TARGET%"=="oem-tests" goto worker
 if "%TARGET%"=="command-initialization" goto worker
+if "%TARGET%"=="command-launch" goto worker
 if "%TARGET%"=="dem-declarations" goto worker
 if "%TARGET%"=="console-contracts" goto worker
 if "%TARGET%"=="host-thread-boundaries" goto worker
