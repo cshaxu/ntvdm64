@@ -1,31 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "143a21b48c3e07b83cb0716c7e25e6c0d647b4bc",
+  "head": "a53bfc961be23aba1db359f7eb454bf59215c870",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/mvdm-host/dos/command/verify-cmdredir.ps1",
-    " M test/mvdm-host/verify-wow-thunk-nls.ps1",
+    " M test/mvdm/oemuni/verify-media-owner.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/wow-ui-probes.cmake",
-    "?? artifacts/build-migration/t484/s3-command-nls/",
-    "?? docs/etc/evidence/t484-s3-command-nls.md",
-    "?? test/mvdm-host/wow_thunk_nls_fixture.c.in"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-media/",
+    "?? docs/etc/evidence/t484-s3-media.md",
+    "?? tools/build/fixtures/media-owner.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 76,
-    "unchanged": 165,
+    "changed": 77,
+    "unchanged": 164,
     "removed": 114
   },
   "disposition_counts": {
-    "migrated-delivered": 19,
+    "migrated-delivered": 20,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 114,
     "pending-producer-migration": 54,
     "retained-native-delegate": 2,
-    "requires-disposition-reconciliation": 164
+    "requires-disposition-reconciliation": 163
   },
   "existing_interpreted_candidates_with_command_hits": 197,
   "files": [
@@ -1339,8 +1338,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "530e57d3771953e8e0d8b2b641e9df44b6d8664ae3084fa7612953c83b137510",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "a53bfc961be23aba1db359f7eb454bf59215c870"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-command-nls.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -1354,8 +1357,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "1db3f99bd9ce4baa80cd8c85ce96800224559158199873550ecd0a9828c9fe20",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "a53bfc961be23aba1db359f7eb454bf59215c870"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-command-nls.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -1367,12 +1374,16 @@
       "id": "B0075",
       "file": "test/mvdm/oemuni/verify-media-owner.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "7b373f1f7b5e49635c5172201bfcc854e4ec8c899703782a66a23cadb4df2c65",
+      "state": "changed",
+      "current_sha256": "82da419f5cb0efcf4bc952581c7d40e264aaa2b5543216acb525a296b5e80dee",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "P66 native current/original projections and compilation; current success and original line42 failure verified",
+        "evidence": "docs/etc/evidence/t484-s3-media.md"
+      }
     },
     {
       "id": "B0076",
@@ -5012,6 +5023,12 @@
     }
   ],
   "commits": {
+    "a53bfc961be23aba1db359f7eb454bf59215c870": {
+      "subject": "T484 S3 P65 migrate COMMAND and ThunkNLS verifiers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-command-nls.md"
+      ]
+    },
     "143a21b48c3e07b83cb0716c7e25e6c0d647b4bc": {
       "subject": "Normalize P64 captured diagnostic whitespace",
       "evidence": []
@@ -6373,12 +6390,8 @@
       "file": "test/mvdm/oemuni/verify-media-owner.ps1",
       "hits": [
         {
-          "line": 11,
-          "text": "$driver=Join-Path $repo 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'"
-        },
-        {
-          "line": 23,
-          "text": "$cmd='@call \"'+$driver+'\" cl.exe /nologo /MT /W4 /I\"'+$dir+'\" /Fo\"'+$dir+'/media.obj\" /Fe\"'+$dir+'/media.exe\" \"'+$fixture+'\"'"
+          "line": 20,
+          "text": "$cache=Join-Path $repo 'build/.ninja/fixtures-x86'"
         }
       ]
     },

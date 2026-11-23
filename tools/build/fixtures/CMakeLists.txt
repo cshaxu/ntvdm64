@@ -60,6 +60,7 @@ include(wow-idle.cmake)
 include(wow-mine.cmake)
 include(wow-latency.cmake)
 include(wow-ui-probes.cmake)
+include(media-owner.cmake)
 set(observer_targets)
 foreach(pair IN ITEMS "console-startup-observer|console_startup_observer"
     "wow-exception-observer|wow_exception_observer"

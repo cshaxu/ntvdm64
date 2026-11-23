@@ -82,7 +82,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P65 COMMAND/ThunkNLS](../etc/evidence/t484-s3-command-nls.md) | Actual pipe/exit, six NLS controls and cache pass; B0073/B0074 producer chains complete. |
 
-Implementation batches through P65 passed their cached full host build. P65 checks11 raw host inputs
+| [P66 media-owner producer](../etc/evidence/t484-s3-media.md) | Current pass/upstream expected failure, cache and optional-input clearing verified; B0075 complete. |
+
+Implementation batches through P66 passed their cached full host build. P66 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

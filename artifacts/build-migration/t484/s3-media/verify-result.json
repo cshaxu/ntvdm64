@@ -1,0 +1,30 @@
+{
+  "start": "2026-11-23T21:28:18.6378135+00:00",
+  "contract": {
+    "fixture_sha256": "4A430FB6A12A5F72F175F8763E0717675E309AEDBB0D4E60DA2BC1660A0B9FCC",
+    "cases": [
+      {
+        "exit": 0,
+        "source_sha256": "98FF00FD64EF409493BEEC4CB1ED3948CFDC94F777C63FE7EC63DAEEEE4A7BEB",
+        "type_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+        "output": "S37_DEM_MEDIA_PADDING_LABEL_CANARY_FAILURE_OK",
+        "case": "current"
+      },
+      {
+        "exit": 1,
+        "source_sha256": "19C5999308A479CC9C0FCB30D23E8301D9A835408417AA965B85523DFB8A1653",
+        "type_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+        "output": "S37_MEDIA_FAIL line=42",
+        "case": "original"
+      }
+    ],
+    "scope": "Exact source owner extraction with mocked volume-query endpoint; not a fresh DOS integration test"
+  },
+  "exit": 0,
+  "pid": 7028,
+  "projections": [
+    "current",
+    "original"
+  ],
+  "finish": "2026-11-23T21:28:24.9188178+00:00"
+}

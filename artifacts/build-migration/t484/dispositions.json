@@ -370,5 +370,10 @@
     "status": "migrated-delivered",
     "reason": "P65 CMD/native producer and actual bounded contract checks; no guest staging dependency",
     "evidence": "docs/etc/evidence/t484-s3-command-nls.md"
+  },
+  "test/mvdm/oemuni/verify-media-owner.ps1": {
+    "status": "migrated-delivered",
+    "reason": "P66 native current/original projections and compilation; current success and original line42 failure verified",
+    "evidence": "docs/etc/evidence/t484-s3-media.md"
   }
 }

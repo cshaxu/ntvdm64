@@ -1,8 +1,10 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="command-redirection" if not "%~2"=="crt-contracts" if not "%~2"=="crt-missing" if not "%~2"=="crt-duplicate" if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
+if not "%~2"=="media-owner" if not "%~2"=="command-redirection" if not "%~2"=="crt-contracts" if not "%~2"=="crt-missing" if not "%~2"=="crt-duplicate" if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
+set "MEDIA_OPTION=-DNTVDM_MEDIA_ORIGINAL_ROOT="
+if "%~2"=="media-owner" goto media_arguments
 if "%~2"=="win16-ole-peer" goto ole_arguments
 if "%~2"=="win16-print" goto print_arguments
 if "%~2"=="win16-message" goto message_arguments
@@ -29,6 +31,12 @@ goto arguments
 if "%~3"=="" exit /b 2
 set SERIAL_OPTION="-DNTVDM_PRINT_OUTPUT_DIR=%~3"
 goto arguments
+:media_arguments
+if "%~3"=="" exit /b 2
+if not exist "%~3\dos\dem\demgset.c" exit /b 2
+if not exist "%~3\dos\dem\dosdef.h" exit /b 2
+set MEDIA_OPTION="-DNTVDM_MEDIA_ORIGINAL_ROOT=%~3"
+goto arguments
 :ole_arguments
 if "%~3"=="" exit /b 2
 if not exist "%~3\wow32.dll.map" exit /b 2
@@ -39,6 +47,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="media-owner" set "SELECTED=1"
+if "%TARGET%"=="media-owner" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-thunk-nls" set "SELECTED=1"
 if "%TARGET%"=="wow-thunk-nls" if not "%~1"=="x86" exit /b 2
 for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" set "SELECTED=1"
@@ -183,7 +193,7 @@ if "%TARGET%"=="wow-controls" goto controls
 if "%TARGET%"=="command-redirection" if not "%~3"=="" goto worker_existing
 if "%TARGET%"=="command-redirection" goto worker
 for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" goto worker
-cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON %SERIAL_OPTION%
+cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON %SERIAL_OPTION% %MEDIA_OPTION%
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" --target %TARGET%
 exit /b %errorlevel%
