@@ -1629,3 +1629,5 @@ post-publication targeted checks.
 - [T484 S3 mouse runner reconciliation](evidence/t484-s3-mouse-reconcile.md)
 
 - [T484 S3 Win95 probe producers](evidence/t484-s3-win95-probes.md)
+
+- [T484 S3 obsolete performance producer](evidence/t484-s3-performance-retirement.md)

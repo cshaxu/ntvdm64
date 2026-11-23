@@ -55,8 +55,9 @@
     "reason": "CMD/native worker targets own font dependencies, library and keyboard fixture production; actual assertions and cache verified"
   },
   "test/observation/build-worker-performance.ps1": {
-    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-    "status": "pending-producer-migration"
+    "evidence": "docs/etc/evidence/t484-s3-performance-retirement.md",
+    "reason": "Required graphics wrapper absent already at fixed migration baseline; no active callers; historical graph/cache producer retired, measurement consumers retained",
+    "status": "retired-with-delivery-evidence"
   },
   "test/integration/verify-wow-page-cost.ps1": {
     "status": "pending-producer-migration",

@@ -1,35 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "bb699ac87ae4e04bf48330fdd73cbc51d144e272",
+  "head": "9cefe33833fab7a3f50e64365efe4d2f664d8d5e",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/build-win95-loader-probe.ps1",
-    " M test/observation/build-win95-menu-probe.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-win95-probes/",
-    "?? docs/etc/evidence/t484-s3-win95-probes.md",
-    "?? test/observation/Invoke-Win95ProbeBuild.ps1",
-    "?? tools/build/fixtures/win95-probes.cmake"
+    "D  test/observation/build-worker-performance.ps1",
+    "?? artifacts/build-migration/t484/s3-performance-retirement/",
+    "?? docs/etc/evidence/t484-s3-performance-retirement.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 80,
+    "changed": 79,
     "unchanged": 158,
-    "removed": 117
+    "removed": 118
   },
   "disposition_counts": {
     "migrated-delivered": 25,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 117,
-    "pending-producer-migration": 51,
+    "retired-with-delivery-evidence": 118,
+    "pending-producer-migration": 50,
     "retained-native-delegate": 2,
     "requires-disposition-reconciliation": 157,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 192,
+  "existing_interpreted_candidates_with_command_hits": 191,
   "files": [
     {
       "id": "B0001",
@@ -1733,8 +1728,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "3a10ed6e16592334efd6004bfc030280800d5e175e5bfd71088b576d6412234d",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "9cefe33833fab7a3f50e64365efe4d2f664d8d5e"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win95-probes.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Shared CMD/native CL LINK EDITBIN targets; runner only asserts PE metadata and copies evidence; three old/new comparisons and cache verified",
@@ -1748,8 +1747,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "8daea83242294e1936502f1489f93f8687a0846e5743452dd99ac8fcad3acf4f",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "9cefe33833fab7a3f50e64365efe4d2f664d8d5e"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win95-probes.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Shared CMD/native CL LINK EDITBIN targets; runner only asserts PE metadata and copies evidence; three old/new comparisons and cache verified",
@@ -1761,18 +1764,19 @@
       "id": "B0098",
       "file": "test/observation/build-worker-performance.ps1",
       "stage": "S3",
-      "state": "changed",
-      "current_sha256": "3bf452de34ecd7ca32dfec7fff58b14a95219c32fa37a1b011aa9a48b963bcd2",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [
         "161b9dc27ab6ee0713a777f349ddb25669d72766"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s2-native-tib.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "retired-with-delivery-evidence",
       "decision": {
-        "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-        "status": "pending-producer-migration"
+        "evidence": "docs/etc/evidence/t484-s3-performance-retirement.md",
+        "reason": "Required graphics wrapper absent already at fixed migration baseline; no active callers; historical graph/cache producer retired, measurement consumers retained",
+        "status": "retired-with-delivery-evidence"
       }
     },
     {
@@ -5079,6 +5083,12 @@
     }
   ],
   "commits": {
+    "9cefe33833fab7a3f50e64365efe4d2f664d8d5e": {
+      "subject": "T484 S3 P70 migrate Win95 probe producers to native targets",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win95-probes.md"
+      ]
+    },
     "bb699ac87ae4e04bf48330fdd73cbc51d144e272": {
       "subject": "T484 S3 P69 reconcile mouse producers and retire historical cache builds",
       "evidence": [
@@ -6592,56 +6602,6 @@
         {
           "line": 36,
           "text": "Copy-Item \"$repo/build/.ninja/addon/mouse31-M31CTRL.EXE/M31CTRL.EXE\" \"$root/M31CTRL.EXE\""
-        }
-      ]
-    },
-    {
-      "id": "B0098",
-      "file": "test/observation/build-worker-performance.ps1",
-      "hits": [
-        {
-          "line": 23,
-          "text": "$graph=Get-Content (Join-Path $cachePath 'build.ninja')"
-        },
-        {
-          "line": 25,
-          "text": "if($entry.Count -ne 1){throw 'Selected worker link missing/ambiguous'}"
-        },
-        {
-          "line": 57,
-          "text": "& $environmentPath cl.exe @compileArgs \"/Fo$object\" (Join-Path $PSScriptRoot ($source+'.c'))"
-        },
-        {
-          "line": 64,
-          "text": "& $environmentPath link.exe /nologo /subsystem:console /opt:ref \"/out:$output\" \"/map:$map\" \"/def:$cachePath/generated/ntvdm-wow32-provider.def\" @objects @linkInputs rpcrt4.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib"
-        },
-        {
-          "line": 65,
-          "text": "if($LASTEXITCODE){throw 'Measurement link failed'}"
-        },
-        {
-          "line": 66,
-          "text": "& \"$repo/build/.ninja/build-tools/ntvdm-tib.exe\" $map \"$cachePath/obj/dpmi/dpmiint.obj\""
-        },
-        {
-          "line": 71,
-          "text": "if($frontendEntry.Count -ne 1){throw 'Selected frontend link missing/ambiguous'}"
-        },
-        {
-          "line": 75,
-          "text": "& $environmentPath link.exe /nologo /subsystem:console /entry:wmainCRTStartup /opt:ref \"/out:$frontendOutput\" \"/map:$frontendOutput.map\" (Join-Path $root 'worker_performance.obj') (Join-Path $root 'frontend_session_measured.obj') @frontendInputs rpcrt4.lib ntdll.lib kernel32.lib shell32.lib user32.lib gdi32.lib advapi32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib"
-        },
-        {
-          "line": 76,
-          "text": "if($LASTEXITCODE){throw 'Measured frontend link failed'}"
-        },
-        {
-          "line": 79,
-          "text": "Source=(& git rev-parse HEAD);Graph=(Get-Sha256 (Join-Path $cachePath 'build.ninja'))"
-        },
-        {
-          "line": 83,
-          "text": "Profile='MSVC x86 /MT /O2 CCPU40; selected cache link; test-only producer/transport/frontend wrappers'"
         }
       ]
     },

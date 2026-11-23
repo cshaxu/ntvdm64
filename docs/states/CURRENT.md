@@ -92,6 +92,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P70 Win95 probe producers](../etc/evidence/t484-s3-win95-probes.md) | Three native PE probes match old outputs except validated timestamps/checksum; cache, full build and published hashes pass; B0096/B0097 complete. |
 
+| [P71 performance producer retirement](../etc/evidence/t484-s3-performance-retirement.md) | B0098 is missing required source at the fixed baseline and has no live caller; obsolete builder removed, measurement consumers retained. |
+
 Implementation batches through P70 passed their cached full host build. P70 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
