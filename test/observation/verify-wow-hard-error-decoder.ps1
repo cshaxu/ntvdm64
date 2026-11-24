@@ -7,7 +7,6 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
     throw 'Require a fresh build-owned evidence directory'
 }
 $null=New-Item -ItemType Directory $root
-$vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds){
     $p=Start-Process $file -ArgumentList $arguments -WorkingDirectory $root -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$name.out" -RedirectStandardError "$root/$name.err"
     @{pid=$p.Id;startedUtc=$p.StartTime.ToUniversalTime().ToString('o');command=$arguments;deadlineUtc=$p.StartTime.AddSeconds($seconds).ToUniversalTime().ToString('o')}|ConvertTo-Json|Set-Content "$root/$name.runner.json"
@@ -16,10 +15,9 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds)
     if($p.ExitCode -ne 0){throw "Failed $name actual=$($p.ExitCode)"}
 }
 try {
-    $flags='/nologo /TC /W4 /WX /MT /DWIN32 /I"'+$repo+'/src" /I"'+$repo+'/src/ntvdm-exe/win32"'
-    $sources='"'+$repo+'/src/ntvdm-exe/win32/wow_hard_error_decoder.c" "'+$repo+'/test/adapter-mvdm-host-out/wow/wow_hard_error_decoder_fixture.c"'
-    $command='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe '+$flags+' /Fe"'+$root+'/fixture.exe" '+$sources+'"'
-    Run-Owned 'compile' 'cmd.exe' $command 120
+    & "$repo/tools/build-fixtures.cmd" x86 wow-hard-error-decoder > "$root/build.log" 2>&1
+    if($LASTEXITCODE){throw 'Native hard-error build failed'}
+    Copy-Item "$repo/build/.ninja/fixtures-x86/wow-hard-error-decoder.exe" "$root/fixture.exe"
     Run-Owned 'fixture' "$root/fixture.exe" '' 30
     $output=Get-Content "$root/fixture.out" -Raw
     if($output -notmatch 'PASS source-slot/default/cancel decoder contract' -or

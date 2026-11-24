@@ -36,87 +36,7 @@ interpreter-free end-to-end acceptance have not completed.
 
 | S3 delivery | Actual result |
 | --- | --- |
-| [P1-P60](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
-
-| [P61 obsolete style aggregator](../etc/evidence/t484-s3-style-retirement.md) | Retires orphaned T450 style-mode matrix; ordinary guest probes retained; no build inputs changed. |
-
-| [P62 SOL/WRITE producers](../etc/evidence/t484-s3-app-probes.md) | Three timestamp-only native witnesses; argument/architecture controls and stable cache pass; runtime staging remains pending. |
-
-| [P63 Win31 matrix producers](../etc/evidence/t484-s3-win31-matrix.md) | Two byte-identical witnesses; override, architecture and cache checks pass; inspector, dynamic fields and staging remain pending. |
-
-| [P64 CRT producer](../etc/evidence/t484-s3-crt.md) | Native standalone/production object checks, negative links and cache pass; B0072 producer chain complete. |
-
-| [P65 COMMAND/ThunkNLS](../etc/evidence/t484-s3-command-nls.md) | Actual pipe/exit, six NLS controls and cache pass; B0073/B0074 producer chains complete. |
-
-| [P66 media-owner producer](../etc/evidence/t484-s3-media.md) | Current pass/upstream expected failure, cache and optional-input clearing verified; B0075 complete. |
-
-| [P67 frontend library](../etc/evidence/t484-s3-frontend-library.md) | Native window/keyboard assertions, imported identities, cache and published hashes pass; B0076 complete. |
-
-| [P68 audit/retirement](../etc/evidence/t484-s3-audit-retirement.md) | B0077 retained as read-only audit with native graph support; B0086 duplicate JS producer removed; native diagnostics and hashes verified. |
-
-| [P69 mouse/Win101 reconciliation](../etc/evidence/t484-s3-mouse-reconcile.md) | Both native mouse ABI/cache checks pass; obsolete cache-copy producers retired; four entries complete. |
-
-| [P70 Win95 probe producers](../etc/evidence/t484-s3-win95-probes.md) | Three native PE probes match old outputs except validated timestamps/checksum; cache, full build and published hashes pass; B0096/B0097 complete. |
-
-| [P71 performance producer retirement](../etc/evidence/t484-s3-performance-retirement.md) | B0098 is missing required source at the fixed baseline and has no live caller; obsolete builder removed, measurement consumers retained. |
-
-| [P72 callback abort producer](../etc/evidence/t484-s3-callback-abort.md) | Native229-object diagnostic replaces only wcall16; frame fixture/cache/full build/hash checks pass; B0099 complete. |
-
-| [P73 host attach producers](../etc/evidence/t484-s3-host-attach.md) | Two native failure modes preserve old source projection; shared229-object provider, exports/cache/frame/full-build checks pass; B0100 complete. |
-
-| [P74 message transaction](../etc/evidence/t484-s3-message-transaction.md) | Current diagnostic producer migrated; sealed P21Control remains pending, so B0101 is not complete. |
-
-| [P75 sealed message control](../etc/evidence/t484-s3-message-control.md) | Native historical producer; current/rejection/command checks pass, exact historical object closure absent, B0101 remains pending. |
-
-| [P76 sizing diagnostic](../etc/evidence/t484-s3-sizing.md) | Two native source projections replace product-source mutation;229-object closure, cache, shared targets/frame/full-build/hash checks pass; B0102 complete. |
-
-| [P77 startup diagnostics](../etc/evidence/t484-s3-startup.md) | Two native modes; explicit internal Shell witness profile,229-object/cache/frame/full-build/hash checks pass; B0103 complete. |
-
-| [P78 measurements](../etc/evidence/t484-s3-measurements.md) | Six native measurement cases and three public runners/cache/full-build/hash checks pass; B0105/B0106 complete, B0104 staging remains pending. |
-
-| [P79 common-return diagnostic](../etc/evidence/t484-s3-common-return.md) | Two native projections with owner-specific diagnostic headers; source/object/cache/frame/full-build/hash checks pass; B0107 complete. |
-
-| [P80 CCPU preprocessing](../etc/evidence/t484-s3-ccpu-headers.md) | Eight real owner profiles and VALID dependency records; native batch inspected, product/full-build/hash checks pass; B0108 complete. |
-
-| [P81 DOS identity producers](../etc/evidence/t484-s3-dos-identity.md) | Native observer replacement and9 byte-identical guest fixtures; historical runtime staging remains pending. |
-
-| [P82 Console/control producers](../etc/evidence/t484-s3-con-trace.md) | Six identical preparation outputs;three controls cached and real client exit/error test passes; B0110 staging pending, B0111 complete. |
-
-| [P83 BASE contract producers](../etc/evidence/t484-s3-base-contracts.md) | Three native targets link actual x86/x64 product objects;all six runtime cases pass; B0112-B0114 complete. |
-
-| [P84 video/CCPU runners](../etc/evidence/t484-s3-video-tick.md) | Native video projection passes both architectures;131 CCPU cases and native oracle pass; B0115-B0117 complete. |
-
-| [P85 CCPU consolidation](../etc/evidence/t484-s3-callf.md) | Independent CALLF runner removed; assertions consolidated into existing callback runner. Final native/cache/publication-hash gates passed; retrospective retention review remains active. |
-
-| [P86 Console/DEM producers](../etc/evidence/t484-s3-console-contracts.md) | Graphics x86/x64, Full input and DEM115 pass; cached full build and11 raw/22 publication hashes pass. Two delivered test entries reviewed for retention. |
-
-| [P87 DPMI/native reconciliation](../etc/evidence/t484-s3-dpmi-reconciliation.md) | Buffer133, DPMI modes, keyboard90 and three input services pass; cached build/publication hashes pass. Existing profile audit checked544 current commands. |
-
-| [P88 NIDDB/diagnostic cleanup](../etc/evidence/t484-s3-niddb-retirement.md) | NIDDB10, actual Edit, consolidated mapping and direct monitor pass; five duplicate/expired files removed. Cached build/publication hash checks pass. |
-
-| [P89 painter contract](../etc/evidence/t484-s3-planar.md) | Current CHAIN2 oracle corrected;182801 checks and wrong-pixel negative pass; duplicate QEVNT forwarding script retired. |
-
-| [P90 redirector producers](../etc/evidence/t484-s3-redirector.md) | Native remote-name and server-enumeration targets;4/37/14/24 checks pass; current OEM contracts retained after review. |
-
-| [P91 RTC/serial cleanup](../etc/evidence/t484-s3-rtc-serial.md) | Historical RTC investigation retired with known13-failure boundary preserved; serial12 passes via direct native target; two Python wrappers removed. |
-
-| [P92 shared object contracts](../etc/evidence/t484-s3-object-contracts.md) | Eight native contracts277067 checks, eight ABI rejection controls and NIDDB invalid identities pass; historical override paths removed. |
-
-| [P93 observer/publication cleanup](../etc/evidence/t484-s3-observer-publication.md) | Redundant publication wrapper retired; observer and previously migrated thread lifecycle contracts pass x86/x64;12 cache identities and publication hashes pass. |
-
-| [P94 Video7 producer](../etc/evidence/t484-s3-video7.md) | Real packed painter assertions pass via current native object; old compiler recipes removed; full cached build/cache/rejection/publication hashes pass. |
-
-| [P95 accelerator producers](../etc/evidence/t484-s3-accelerator.md) | Two native contracts and four function-body comparisons pass; two old extraction helpers removed; full build/cache/rejection/publication hashes pass. |
-
-| [P96 bitmap producers](../etc/evidence/t484-s3-bitmap.md) | Native binding/failure tests and corrected21/20-slot owner audit pass; fixed66-byte fixture replaces generator; full build/cache/publication hashes pass. |
-
-| [P97 actual CCPU abort](../etc/evidence/t484-s3-ccpu-abort.md) | Three actual CPU thread paths, selector/control restoration and map ownership pass; historical overrides removed; full build/cache/publication hashes pass. |
-
-| [P98 common dialog producer](../etc/evidence/t484-s3-common-dialog-native.md) | Seven/42 boundary scenarios, native two-mode reference and reviewed recorder pass; full build/cache/publication hashes pass. |
-
-| [P99 control retention](../etc/evidence/t484-s3-control-retention.md) | Unadopted scratch-window candidate removed;38 current native cases/cache identities pass; full build/publication hashes pass. |
-
-| [P100 COPYDATA producer](../etc/evidence/t484-s3-copydata-native.md) | Current59/14/18 cases and old/new projection comparison pass; historical source producer retired; full build/cache/publication hashes pass. |
+| [P1-P100](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
 
 | [P101 creation checkpoint](../etc/evidence/t484-s3-creation-native.md) | Five native bounded contracts pass; real Idle foreground chain fails before delivery. B0166 remains incomplete; no completion-count increment. |
 
@@ -124,7 +44,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P103 dispatcher producer](../etc/evidence/t484-s3-dispatch-native.md) | Eight phases/five error scopes/debugger/map gate pass; old parser/extractor retired; full cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P103 passed their cached full host build. P73 checks11 raw host inputs
+| [P104 small WOW contracts](../etc/evidence/t484-s3-small-wow.md) | Three native producers and already-native input lifetime pass; duplicate GDI probe consolidated; full build/cache/publication hashes pass. B0169 provider mismatch remains pending. |
+
+Completed implementation batches through P104 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

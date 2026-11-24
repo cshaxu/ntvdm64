@@ -48,6 +48,16 @@ int main(void)
     }
     mvdm_wow_gdi_handle_retire(alias);
 
+    {
+        HBRUSH brush = CreateSolidBrush(RGB(128,128,128));
+        BOOL valid;
+        if (!brush) return fail("native-brush-create");
+        alias = mvdm_wow_gdi_handle_from_native(brush);
+        valid = alias > COLOR_INFOBK && mvdm_wow_gdi_handle_to_native(alias) == brush;
+        mvdm_wow_gdi_handle_retire(alias);
+        if (!DeleteObject(brush) || !valid) return fail("native-brush-alias");
+    }
+
     for (i = (COLOR_INFOBK >> 2) + 1; i < 0x4000; ++i) {
         HANDLE value = (HANDLE)(ULONG_PTR)(0x30000000u + i);
         if (mvdm_wow_gdi_handle_from_native(value) != (WORD)(i << 2)) {

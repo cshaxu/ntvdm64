@@ -1695,3 +1695,5 @@ post-publication targeted checks.
 - [T484 S3 P102 DDE native producers](evidence/t484-s3-dde-native.md).
 
 - [T484 S3 P103 dispatcher native producer](evidence/t484-s3-dispatch-native.md).
+
+- [T484 S3 P104 small WOW contracts and retention](evidence/t484-s3-small-wow.md).

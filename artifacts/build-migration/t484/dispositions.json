@@ -791,5 +791,50 @@
     },
     "status": "migrated-delivered",
     "reason": "Native actual dispatcher owner and current WndProc projection; eight exception/five scope/debugger/map assertions and final build/cache/publication hashes pass"
+  },
+  "test/observation/verify-wow-gdi-alias.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
+      "decision": "retain independent contract; consolidate duplicate GDI probe",
+      "reason": "Alias lifetime, decoder mapping and hook argument/handle checks are distinct; GDI real brush added to main contract"
+    },
+    "status": "migrated-delivered",
+    "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass"
+  },
+  "test/observation/verify-wow-hard-error-decoder.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
+      "decision": "retain independent contract; consolidate duplicate GDI probe",
+      "reason": "Alias lifetime, decoder mapping and hook argument/handle checks are distinct; GDI real brush added to main contract"
+    },
+    "status": "migrated-delivered",
+    "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass"
+  },
+  "test/observation/verify-wow-hook-native-binding.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
+      "decision": "retain independent contract; consolidate duplicate GDI probe",
+      "reason": "Alias lifetime, decoder mapping and hook argument/handle checks are distinct; GDI real brush added to main contract"
+    },
+    "status": "migrated-delivered",
+    "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass"
+  },
+  "test/observation/verify-wow-input-lifetime.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
+      "decision": "retain",
+      "reason": "Independent actual native queue lifetime/rejoin/partial attach boundary"
+    },
+    "status": "retained-native-delegate",
+    "reason": "Existing CMD/native producer reviewed and rerun with actual private-desktop membership and expected terminal cleanup"
+  },
+  "test/observation/verify-wow-dll-entry-boolean.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
+    "status": "requires-disposition-reconciliation",
+    "reason": "Old test header supplies8 of33 current registration calls; reconcile actual complete BOOLEAN/loader witness, not a product failure conclusion"
   }
 }

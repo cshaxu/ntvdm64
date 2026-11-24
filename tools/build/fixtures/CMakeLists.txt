@@ -375,3 +375,5 @@ include(wow-common-dialog.cmake)
 include(wow-copydata.cmake)
 
 include(wow-dde.cmake)
+
+include(wow-boundaries.cmake)

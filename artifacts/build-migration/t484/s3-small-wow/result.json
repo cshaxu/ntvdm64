@@ -1,0 +1,109 @@
+{
+  "dll_pending": {
+    "declaredByOldProvider": 8,
+    "bridgeBindings": 33,
+    "scope": "Source inspection, not a link failure or product verdict",
+    "notProvidedByOldHeader": [
+      "wow_menu_parser_bind",
+      "wow_ole_descriptor_bind",
+      "wow_edit_lookaside_bind",
+      "wow_control_entry_bind",
+      "wow_edit_conversion_bind",
+      "wow_dialog_keyboard_bind",
+      "wow_dialog_finalization_bind",
+      "wow_dialog_creation_bind",
+      "wow_default_messages_bind",
+      "wow_control_state_bind",
+      "wow_control_fnid_bind",
+      "wow_control_extent_bind",
+      "wow_control_draw_bind",
+      "wow_control_brush_bind",
+      "wow_registration_bind",
+      "wow_window_access_bind",
+      "wow_task_lifecycle_bind",
+      "wow_class_client_bind",
+      "wow_button_resources_bind",
+      "wow_button_bind",
+      "wow_native_text_bind",
+      "wow_profile_bind",
+      "wow_bitmap_bind_provider",
+      "wow_cleanup_bind",
+      "wow_default_window_bind"
+    ],
+    "paths": [
+      "tools/build/wow32/templates/wow32-dll-entry-bridge.c",
+      "test/mvdm-host/wow_dll_dialog_provider.h"
+    ]
+  },
+  "x64_rejected": [
+    "wow-hard-error-decoder",
+    "wow-hook-native-binding"
+  ],
+  "input": [
+    "INPUT_NATIVE_CONTROL private_caret=1 before_group=1",
+    "WOW_INPUT_LIFETIME errors=0 original_components=1 private_native=1 allocation_failures=3 idempotent=1 external_reference=1 origin_exit=1 rejoin=1 middle_exit=1 last_exit=1 scratch_escape=0 live=0",
+    "INPUT_NATIVE_CONTROL private_caret=1 before_group=1",
+    "INPUT_TERMINAL stage=input-native-attach error=5 attaches=3"
+  ],
+  "decoder": [
+    "PASS sparse count=2 default=3 cancel=1",
+    "PASS later-default count=3 default=2 cancel=2",
+    "PASS invalid-omitted count=2 default=3 cancel=0",
+    "PASS implicit-first-default count=2 default=2 cancel=0",
+    "PASS source-slot/default/cancel decoder contract"
+  ],
+  "runtime": {
+    "started": "2026-11-24T03:01:36.2685699+01:00",
+    "finished": "2026-11-24T03:02:06.7028873+01:00",
+    "exit": 0,
+    "pid": 15560
+  },
+  "gdi": [
+    "WOW_GDI_ALIAS errors=0",
+    "WOW_GDI_ALIAS errors=0"
+  ],
+  "final": {
+    "pid": 25208,
+    "started": "2026-11-24T03:02:39.9492563+01:00",
+    "finished": "2026-11-24T03:04:30.3639538+01:00",
+    "exit": 0
+  },
+  "cache": [
+    {
+      "path": "build/.ninja/fixtures-x86/wow-gdi-alias.exe",
+      "target": "wow-gdi-alias",
+      "time": 639310825042495159,
+      "hash": "AA34DDB3BBD8C5F08F0650275C42B33DA41525A517BE10B74C09CAA9BDEC3252",
+      "arch": "x86"
+    },
+    {
+      "path": "build/.ninja/fixtures-x64/wow-gdi-alias.exe",
+      "target": "wow-gdi-alias",
+      "time": 639310825107689844,
+      "hash": "E90EF2CD0F9C5BE49DED6D3EB9D8D85D3B3ED702AF513DF99A17A82DE238555A",
+      "arch": "x64"
+    },
+    {
+      "path": "build/.ninja/fixtures-x86/wow-hard-error-decoder.exe",
+      "target": "wow-hard-error-decoder",
+      "time": 639310825189288257,
+      "hash": "8649B460D5F4BFDFA1A915B98EEE2A0973378319CAF696DF71C82889509987DC",
+      "arch": "x86"
+    },
+    {
+      "path": "build/.ninja/fixtures-x86/wow-hook-native-binding.exe",
+      "target": "wow-hook-native-binding",
+      "time": 639310825261843223,
+      "hash": "34F818A7C86DE81D469D86DA3D65F7F2DDBC66D493AAC69EC2D0DAC7BF63CE3A",
+      "arch": "x86"
+    }
+  ],
+  "publication": {
+    "raw_inputs": 11,
+    "unchanged": true,
+    "published_copies": 22
+  },
+  "hook": [
+    "WOW_HOOK_NATIVE_BOUNDARY errors=0 calls=24 local=17 global=1 invalid=1 null=1 mismatch=1 callback=1 dead=1 foreign=1 handles=87/87"
+  ]
+}
