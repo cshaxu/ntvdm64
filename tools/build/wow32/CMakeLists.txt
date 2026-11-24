@@ -117,3 +117,5 @@ include(startup-failure.cmake)
 include(common-return.cmake)
 
 include(bitmap-tests.cmake)
+
+include(creation-tests.cmake)

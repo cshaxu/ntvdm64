@@ -1,0 +1,73 @@
+{
+  "final": {
+    "exit": 0,
+    "pid": 22604,
+    "started": "2026-11-24T02:42:51.9152915+01:00",
+    "finished": "2026-11-24T02:43:55.8382132+01:00"
+  },
+  "cache": [
+    {
+      "hash": "46EF30355C3415F4DEA43EAF880CE20C203D73DBAE86D70B8E5E023CBA609D9B",
+      "path": "build/.ninja/msvc-x86-release/wow32/creation-hook.exe",
+      "time": 639310813142829704
+    },
+    {
+      "hash": "E780E32778AF74E9FCE4FDB19AEB741AE0009E8A23833258679D6C86E0F55AAA",
+      "path": "build/.ninja/msvc-x86-release/wow32/creation-menu.exe",
+      "time": 639310811763092661
+    },
+    {
+      "hash": "40C1CCB7B554BE28FD3711EC0D8D17AB3941A5A14AE2B271A25D5748F2AD7F45",
+      "path": "build/.ninja/msvc-x86-release/wow32/creation-timer.exe",
+      "time": 639310812416725407
+    },
+    {
+      "hash": "A109B2C61F9906B42DD741185F5E630CA48EAD2839FD57FB4801BDC41F76D393",
+      "path": "build/.ninja/msvc-x86-release/wow32/creation-idle.exe",
+      "time": 639310812471493290
+    },
+    {
+      "hash": "274C36860D9BC7EDEC1DDE4D6800CC7B4AF64F6D8C01EB940BF198B50F822F00",
+      "path": "build/.ninja/msvc-x86-release/wow32/creation-common-dialog.exe",
+      "time": 639310813281055355
+    }
+  ],
+  "native_idle_failure": {
+    "pid": 15848,
+    "finished": "2026-11-24T02:40:47.7696969+01:00",
+    "exit": 1,
+    "started": "2026-11-24T02:40:27.2250727+01:00"
+  },
+  "publication": {
+    "published_copies": 22,
+    "unchanged": true,
+    "raw_inputs": 11
+  },
+  "complete": false,
+  "remaining": "Actual WH_FOREGROUNDIDLE chain requires foreground witness redesign; logic-only does not replace it",
+  "x64_rejected": 2,
+  "bounded": {
+    "exit": 0,
+    "started": "2026-11-24T02:41:47.3382689+01:00",
+    "pid": 8236,
+    "finished": "2026-11-24T02:42:12.815722+01:00"
+  },
+  "markers": [
+    "WOW_HOOK_CREATION_GUARD errors=0 enrollment=6 accepted=1 rollback=4",
+    "WOW_HOOK_CALLBACK_SCOPE errors=0 calls=9 denied/normal/nested/exception checked",
+    "WOW_CREATION_BOUNDARY_OK case=hook",
+    "WOW_CREATION_MENU_SIZING errors=0 callbacks=6",
+    "WOW_CREATION_MENU errors=0 loads=6",
+    "WOW_CREATION_BOUNDARY_OK case=menu",
+    "WOW_TIMER_CALLBACK_GUARD errors=0 calls=30 nested=1 exception=1 denied=2",
+    "WOW_CREATION_BOUNDARY_OK case=timer",
+    "WOW_UNINITIALIZED_CLEANUP errors=0 exact_td=1 foreign_rejected=1 committed_rejected=1 retired_rejected=1",
+    "WOW_COMMDLG_RESOURCE_ASSOCIATION errors=0 bound_before_callback=1 consumed_before_release=1 failures_fatal=2",
+    "WOW_COMMDLG_RESOURCE_FAILURE errors=0 fatal_edges=3 skipped_free=0",
+    "WOW_COMMDLG_EXIT_GUARD errors=0 entries=3 resource_branch=1 nested=1 exception=1 denied=3 early_order=1 rejected_free=1",
+    "WOW_CREATION_BOUNDARY_OK case=common-dialog",
+    "WOW_IDLE_HOOK_GUARD errors=0 calls=5 nested=1 exception=1 denied=2 foreign=2 retired=1 worker_shared=1",
+    "WOW_IDLE_NATIVE_CHAIN unavailable=logic-only",
+    "WOW_CREATION_BOUNDARY_OK case=idle"
+  ]
+}

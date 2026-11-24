@@ -2,6 +2,15 @@
  * Resource lookup alone is replaced; this is not Win16 resource acceptance. */
 #include "creation-menu.inc"
 
+HMENU WINAPI wow_user_load_menuW(HINSTANCE, LPCWSTR);
+const wow_window_access_provider *WINAPI wow_window_access_current(void)
+{
+    static const wow_window_access_provider provider = {
+        NULL, NULL, NULL, wow_user_load_menuW
+    };
+    return &provider;
+}
+
 static unsigned errors, loads;
 static BOOL fail_load, reject_create;
 static BOOL creation_delivered;

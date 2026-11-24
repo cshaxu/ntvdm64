@@ -1,22 +1,22 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "a8f56d718d514d5424abf107285cb0387019b4ba",
+  "head": "b3fafb4f0ca044f3fd81e94f3e525b38004e23e4",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-copydata-lifetime.ps1",
+    " M test/adapter-mvdm-host-out/wow/wow_creation_menu_fixture.c",
+    " M test/observation/verify-wow-creation-boundaries.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/SourceProjection.cmake",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-copydata-native/",
-    "?? docs/etc/evidence/t484-s3-copydata-native.md",
-    "?? tools/build/fixtures/wow-copydata.cmake"
+    " M tools/build/wow32/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-creation-native/",
+    "?? docs/etc/evidence/t484-s3-creation-native.md",
+    "?? tools/build/wow32/creation-tests.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 112,
-    "unchanged": 116,
+    "changed": 113,
+    "unchanged": 115,
     "removed": 127
   },
   "disposition_counts": {
@@ -3079,8 +3079,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "e00a089687d33d394de7b0bb3689120ca84d8105adf426774a8b28f2c4355df8",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "b3fafb4f0ca044f3fd81e94f3e525b38004e23e4"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-copydata-native.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Native current-source projections and compilation; historical commit producer retired",
@@ -3097,12 +3101,21 @@
       "id": "B0166",
       "file": "test/observation/verify-wow-creation-boundaries.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "d910c5ffb754975c9d9ebf97dd64971479504e40fdadd24c587bba0119922bd3",
+      "state": "changed",
+      "current_sha256": "a5d234fd03cfc6dc3cc72cf1fcb129367703abe1f7883d744163bdb6357bf100",
       "revisions": [],
       "evidence": [],
       "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "decision": {
+        "status": "requires-disposition-reconciliation",
+        "retention_review": {
+          "decision": "retain distinct contracts; review foreground witness",
+          "reason": "Five distinct ownership contracts; old activation-dependent native idle witness is not covered by logic-only pass",
+          "evidence": "docs/etc/evidence/t484-s3-creation-native.md"
+        },
+        "reason": "Native five-case producer implemented; bounded assertions pass, actual foreground idle-chain validation remains unresolved",
+        "evidence": "docs/etc/evidence/t484-s3-creation-native.md"
+      }
     },
     {
       "id": "B0167",
@@ -5562,6 +5575,12 @@
     }
   ],
   "commits": {
+    "b3fafb4f0ca044f3fd81e94f3e525b38004e23e4": {
+      "subject": "T484 S3 P100 move COPYDATA producers to native current-source graph",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-copydata-native.md"
+      ]
+    },
     "a8f56d718d514d5424abf107285cb0387019b4ba": {
       "subject": "T484 S3 P99 retire unused control decoder candidate",
       "evidence": [
@@ -7792,24 +7811,8 @@
       "file": "test/observation/verify-wow-creation-boundaries.ps1",
       "hits": [
         {
-          "line": 6,
-          "text": "[string]$Ninja='ninja.exe',"
-        },
-        {
-          "line": 22,
-          "text": "if($LASTEXITCODE){throw 'Creation fixture compile/link failed; inspect build.log'}"
-        },
-        {
-          "line": 24,
-          "text": "$commands=& $Ninja -C $provider -t commands wow32.dll"
-        },
-        {
-          "line": 27,
-          "text": "Invoke-CompileCommand ('\"'+$Ninja+'\" obj/compat/wow_task_cleanup_entry.obj obj/compat/wow_common_dialog_callback.obj')"
-        },
-        {
-          "line": 75,
-          "text": "Invoke-CompileCommand ('link /nologo /OPT:REF /out:\"'+$out+'\\fixture.exe\" \"'+$out+'\\fixture.obj\"'+$selected+' kernel32.lib user32.lib')"
+          "line": 19,
+          "text": "Copy-Item \"$repo/build/.ninja/msvc-x86-release/wow32/creation-$Case.exe\" \"$out/fixture.exe\" -Force"
         }
       ]
     },

@@ -761,5 +761,15 @@
     },
     "evidence": "docs/etc/evidence/t484-s3-copydata-native.md",
     "status": "migrated-delivered"
+  },
+  "test/observation/verify-wow-creation-boundaries.ps1": {
+    "status": "requires-disposition-reconciliation",
+    "retention_review": {
+      "decision": "retain distinct contracts; review foreground witness",
+      "reason": "Five distinct ownership contracts; old activation-dependent native idle witness is not covered by logic-only pass",
+      "evidence": "docs/etc/evidence/t484-s3-creation-native.md"
+    },
+    "reason": "Native five-case producer implemented; bounded assertions pass, actual foreground idle-chain validation remains unresolved",
+    "evidence": "docs/etc/evidence/t484-s3-creation-native.md"
   }
 }

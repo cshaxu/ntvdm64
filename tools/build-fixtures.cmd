@@ -53,6 +53,8 @@ if "%TARGET%"=="wow-common-dialog" set "SELECTED=1"
 if "%TARGET%"=="wow-common-dialog" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-callback-abort-ccpu" set "SELECTED=1"
 if "%TARGET%"=="wow-callback-abort-ccpu" if not "%~1"=="x86" exit /b 2
+for %%T in (wow-creation wow-creation-hook wow-creation-menu wow-creation-timer wow-creation-idle wow-creation-common-dialog) do if "%TARGET%"=="%%T" set "SELECTED=1"
+if "%TARGET:~0,12%"=="wow-creation" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-bitmap" set "SELECTED=1"
 if "%TARGET%"=="wow-bitmap" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-accelerator" set "SELECTED=1"
@@ -210,6 +212,7 @@ for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%
 if "%TARGET%"=="ccpu-header-selection" goto worker_existing
 if "%TARGET%"=="win101-control-fixtures" goto worker_existing
 if "%TARGET%"=="oem-tests" goto worker
+if "%TARGET:~0,12%"=="wow-creation" goto wowcallback
 if "%TARGET%"=="wow-bitmap" goto wowcallback
 if "%TARGET%"=="wow-callback-cost" goto wowcallback
 if "%TARGET%"=="wow-graph-cost" goto wowcallback

@@ -1,78 +1,22 @@
 param(
-    [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
+
     [Parameter(Mandatory=$true)][string]$BuildRoot,
     [Parameter(Mandatory=$true)][ValidateSet('hook','menu','timer','idle','common-dialog')][string]$Case,
-    [switch]$LogicOnly,
-    [string]$Ninja='ninja.exe',
-    [string]$VsDevCmd='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
+    [switch]$LogicOnly
 )
 # Invoke from an owned background supervisor. These are bounded contract
 # fixtures; they do not substitute for the real CCPU and application gates.
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
-$provider=(Resolve-Path $ProviderBuildRoot).Path
+
 $out=[IO.Path]::GetFullPath($BuildRoot)
 if(!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)) {
     throw 'Creation fixture output must remain below repository build.'
 }
 New-Item -ItemType Directory -Force -Path $out | Out-Null
-$vs=(Resolve-Path $VsDevCmd).Path
-function Invoke-CompileCommand([string]$command) {
-    & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cd /d "'+$provider+'" && '+$command) >> "$out/build.log" 2>&1
-    if($LASTEXITCODE){throw 'Creation fixture compile/link failed; inspect build.log'}
-}
-$commands=& $Ninja -C $provider -t commands wow32.dll
-if($LASTEXITCODE){throw 'Unable to read production compile graph'}
-if($Case -eq 'common-dialog') {
-    Invoke-CompileCommand ('"'+$Ninja+'" obj/compat/wow_task_cleanup_entry.obj obj/compat/wow_common_dialog_callback.obj')
-}
-$source=switch($Case){'hook'{'wow_hook_callback'} 'timer'{'wow_timer_callback'} 'idle'{'wow_idle_hook_binding'} 'common-dialog'{'wow_common_dialog_callback'} default{'wow_window_creation_binding'}}
-$compile=$commands | Where-Object {$_ -match ($source+'\.c$')} | Select-Object -Last 1
-if(!$compile){throw 'Missing production compile rule'}
-$fixtureName=switch($Case){'hook'{'wow_hook_callback_fixture.c'} 'timer'{'wow_timer_callback_fixture.c'} 'idle'{'wow_idle_hook_fixture.c'} 'common-dialog'{'wow_common_dialog_callback_fixture.c'} default{'wow_creation_menu_fixture.c'}}
-if($Case -eq 'idle') {
-    $compile=$commands | Where-Object {$_ -match 'wkman\.c$'} | Select-Object -Last 1
-    if(!$compile){throw 'Missing original task owner compile rule'}
-}
-$fixtureSource=if($Case -eq 'idle'){'wkman'}else{$source}
-$fixture=$compile -replace ('/Fo\S+\s+\S+'+$fixtureSource+'\.c$'), ('/Fo"'+$out+'\fixture.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\'+$fixtureName+'"')
-if($fixture -eq $compile){throw 'Fixture substitution failed'}
-if($Case -eq 'menu') {
-    $text=Get-Content "$repo/src/compat/wow_window_creation_binding.c" -Raw
-    if(!$text.Contains('BOOL WINAPI wow_window_creation_menu(')){throw 'Missing production menu boundary'}
-    # Extract the exact standalone boundary, not a prefix containing unrelated
-    # static callers. No algorithm is copied or rewritten in the fixture.
-    $start=$text.IndexOf('BOOL WINAPI wow_window_creation_menu(')
-    $end=$text.IndexOf('static void trace_creation(', $start)
-    if($start -lt 0 -or $end -le $start){throw 'Menu boundary delimiters changed'}
-    $headers="#include `"wow_window_creation_binding.h`"`n#include `"wow_menu_resource_bindings.h`"`n#include <stdio.h>`n"
-    [IO.File]::WriteAllText("$out/creation-menu.inc",$headers+$text.Substring($start,$end-$start))
-}
-if($Case -eq 'hook') {
-    $ownerSource=Get-Content "$repo/src/mvdm-host/wow32/wowhooks.c" -Raw
-    $ownerStart=$ownerSource.IndexOf('void WINAPI wow_hook_capture_context(')
-    if($ownerStart -lt 0){throw 'Missing original hook-owner projections'}
-    [IO.File]::WriteAllText("$out/hook-owner.inc",$ownerSource.Substring($ownerStart))
-}
-if($Case -eq 'idle') {
-    $ownerSource=Get-Content "$repo/src/mvdm-host/wow32/wkman.c" -Raw
-    $ownerStart=$ownerSource.IndexOf('BOOL WINAPI wow_original_idle_registered(')
-    if($ownerStart -lt 0){throw 'Missing original task-owner projections'}
-    $ownerEnd=$ownerSource.IndexOf('/* DIVERGENCE(MVDM-HOST-DIV-909)', $ownerStart)
-    if($ownerEnd -lt 0){throw 'Missing task cleanup owner boundary'}
-    [IO.File]::WriteAllText("$out/task-owner.inc",$ownerSource.Substring($ownerStart,$ownerEnd-$ownerStart))
-}
-if($Case -eq 'common-dialog') {
-    $ownerSource=Get-Content "$repo/src/mvdm-host/wow32/wkman.c" -Raw
-    $ownerStart=$ownerSource.IndexOf('BOOL WINAPI wow_original_task_cleanup_uninitialized(')
-    if($ownerStart -lt 0){throw 'Missing original task cleanup projections'}
-    [IO.File]::WriteAllText("$out/task-cleanup-owner.inc",$ownerSource.Substring($ownerStart))
-}
-Invoke-CompileCommand ($fixture+' /Gy /I"'+$out+'"')
-$owner=if($Case -in @('timer','hook','common-dialog','idle')){'compat'}else{'wow32-dll'}
-$selected=if($Case -ne 'menu'){' "'+$provider+'\obj\'+$owner+'\'+$source+'.obj"'}else{''}
-if($Case -eq 'common-dialog') { $selected += ' "'+$provider+'\obj\compat\wow_task_cleanup_entry.obj"' }
-Invoke-CompileCommand ('link /nologo /OPT:REF /out:"'+$out+'\fixture.exe" "'+$out+'\fixture.obj"'+$selected+' kernel32.lib user32.lib')
+& "$repo/tools/build-fixtures.cmd" x86 "wow-creation-$Case" > "$out/build.log" 2>&1
+if($LASTEXITCODE){throw 'Native creation fixture build failed; inspect build.log'}
+Copy-Item "$repo/build/.ninja/msvc-x86-release/wow32/creation-$Case.exe" "$out/fixture.exe" -Force
 $start=[DateTime]::UtcNow
 $arguments=if($LogicOnly -and $Case -eq 'idle'){'--logic-only'}else{''}
 $startOptions=@{FilePath="$out/fixture.exe";WindowStyle='Hidden';PassThru=$true;RedirectStandardOutput="$out/stdout.txt";RedirectStandardError="$out/stderr.txt"}
@@ -86,7 +30,7 @@ $p.ExitCode | Set-Content "$out/fixture-exit.txt"
 $output=@(Get-Content "$out/stdout.txt";Get-Content "$out/stderr.txt")
 $output | Write-Output
 if($null -eq $p.ExitCode -or $p.ExitCode -ne 0){throw 'Creation fixture failed'}
-$marker=switch($Case){'hook'{'^WOW_HOOK_CREATION_GUARD errors=0 enrollment=6 accepted=1 rollback=4$'} 'timer'{'^WOW_TIMER_CALLBACK_GUARD errors=0 calls=30 nested=1 exception=1 denied=2$'} 'idle'{'^WOW_IDLE_HOOK_GUARD errors=0 calls=5 nested=1 exception=1 denied=2 foreign=2 retired=1 worker_shared=1$'} 'common-dialog'{'^WOW_COMMDLG_EXIT_GUARD errors=0 entries=3 resource_branch=1 nested=1 exception=1 denied=3 early_order=1 rejected_free=1$'} default{'^WOW_CREATION_MENU errors=0 loads=4$'}}
+$marker=switch($Case){'hook'{'^WOW_HOOK_CREATION_GUARD errors=0 enrollment=6 accepted=1 rollback=4$'} 'timer'{'^WOW_TIMER_CALLBACK_GUARD errors=0 calls=30 nested=1 exception=1 denied=2$'} 'idle'{'^WOW_IDLE_HOOK_GUARD errors=0 calls=5 nested=1 exception=1 denied=2 foreign=2 retired=1 worker_shared=1$'} 'common-dialog'{'^WOW_COMMDLG_EXIT_GUARD errors=0 entries=3 resource_branch=1 nested=1 exception=1 denied=3 early_order=1 rejected_free=1$'} default{'^WOW_CREATION_MENU errors=0 loads=6$'}}
 if(!($output -match $marker)){throw 'Creation fixture completion assertions missing'}
 if($LogicOnly -and $Case -ne 'idle'){throw 'LogicOnly is valid only for the idle fixture'}
 if($LogicOnly -and !($output -match '^WOW_IDLE_NATIVE_CHAIN unavailable=logic-only$')) {
