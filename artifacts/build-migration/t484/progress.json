@@ -1,14 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "64aa44b1bb4977b55b86bd8b79ee2e0b13a6ec36",
+  "head": "2ceb203efe741805341ab4970db713f31f1234e6",
   "worktree_status": [
-    " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/m0-t427-s5-system32-host-colocation.md",
+    " M docs/etc/evidence/t484-s3-early-deliveries.md",
     " M docs/states/CURRENT.md",
-    " D test/observation/original_runtime_layout_test.mjs",
-    " D tools/build/Stage-OriginalSoftpcRuntime.mjs",
-    "?? docs/etc/evidence/t484-s3-original-stage-retirement.md"
+    " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
+    " M test/integration/ntvdm64-386/verify-win95-identity.ps1",
+    "?? docs/etc/evidence/t484-s3-runtime-tool-path.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -508,7 +507,7 @@
       "file": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "d8e82d34a454d1b3e1ca35c204884a15d456426cf08d4afb5b278a3bcf6a88b0",
+      "current_sha256": "62ec29ed9adec1834a2b579a552af1f835f3c89cda6311f3dbac77559e8c6e3e",
       "revisions": [
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "dca9832679063ea8f8485fc990c18df9adc8d959",
@@ -531,7 +530,7 @@
       "file": "test/integration/ntvdm64-386/verify-win95-identity.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "7a4c334939245890b5aa6795e450e2c763ced9f698014977fdb1c736404ecb66",
+      "current_sha256": "9eda3b245ce5ffa24e9f8425be8f14ef032a49a159c9730ef36b0947ae70713a",
       "revisions": [
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
@@ -6291,8 +6290,13 @@
       "stage": "S4",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "2ceb203efe741805341ab4970db713f31f1234e6"
+      ],
+      "evidence": [
+        "docs/etc/evidence/m0-t427-s5-system32-host-colocation.md",
+        "docs/etc/evidence/t484-s3-original-stage-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -6509,6 +6513,13 @@
     }
   ],
   "commits": {
+    "2ceb203efe741805341ab4970db713f31f1234e6": {
+      "subject": "M0 T484 S3 P213: retire isolated historical runtime staging",
+      "evidence": [
+        "docs/etc/evidence/m0-t427-s5-system32-host-colocation.md",
+        "docs/etc/evidence/t484-s3-original-stage-retirement.md"
+      ]
+    },
     "64aa44b1bb4977b55b86bd8b79ee2e0b13a6ec36": {
       "subject": "M0 T484 S3 P212: retire obsolete single-image publishers",
       "evidence": [
@@ -8023,14 +8034,6 @@
         {
           "line": 117,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" --fields \"$task/controller.exe\" '@W31_BOOT_PATH@' \"$dest\\PATCH\\BOOT.BIN\" '@W31_READY_PATH@' \"$dest\\PATCH\\READY.BIN\""
-        },
-        {
-          "line": 120,
-          "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
-        },
-        {
-          "line": 122,
-          "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
     },
@@ -8045,14 +8048,6 @@
         {
           "line": 128,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
-        },
-        {
-          "line": 131,
-          "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
-        },
-        {
-          "line": 133,
-          "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
     },

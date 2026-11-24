@@ -117,9 +117,8 @@ if($LASTEXITCODE){throw 'Controller path binder build failed'}
 & "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" --fields "$task/controller.exe" '@W31_BOOT_PATH@' "$dest\PATCH\BOOT.BIN" '@W31_READY_PATH@' "$dest\PATCH\READY.BIN"
 if($LASTEXITCODE){throw 'Controller path binding failed'}
 $keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS','PSExecutionPolicyPreference')
-$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}
-$env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
+$env:PATH='C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
 $env:MVDM_COMPLETION_COUNT="$dest/PATCH/DONE.BIN"
 $env:MVDM_PROMPT_READERS="$dest/PATCH/READERS.BIN"
 $env:MVDM_SCREEN_TRACE="$task/screens.txt"

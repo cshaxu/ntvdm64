@@ -304,3 +304,71 @@ Retained completed batch records; active status remains in [Current](../../state
 | [P179 controller paths](t484-s3-controller-paths.md) | Three runners share native128-byte field binding; six real controller images byte-identical, nine failure cases pass. Remaining COM/config/staging work stays open;315/355 disposed,40 remain. |
 
 | [P180 DOS identity fields](t484-s3-identity-fields.md) | Two runners share native COM preparation; seven real templates/both roles byte-identical and18 rejection cases pass. PIF/config/staging remain;315/355 disposed,40 remain. |
+
+## P181-P213 deliveries
+
+| [P181 PIF fields](t484-s3-pif-memory.md) | Six callers use native PIF memory options; duplicate helper/inline patchers removed; full-byte equivalence and failure checks pass. Configuration/staging remain;315/355 disposed,40 remain. |
+
+| [P182 matrix profiles](t484-s3-matrix-profile.md) | Two additional callers use one CMD target; eight witnesses/two paths byte-identical, cache/path checks pass. Frozen census315/355; two supplemental caller chains still need config/staging. |
+
+| [P183 idle forwarding](t484-s3-idle-forwarding.md) | Five creation fixtures pass; real private-queue USER forwarding replaces desktop activation. Automatic foreground notification not exercised.316/355 disposed,39 remain, plus two supplemental config/staging chains. |
+
+| [P184 profile/DDE producers](t484-s3-profile-dde.md) | Two focused regression callers reuse the existing CMD target; byte identity and no-op checks pass. Fixed316/355; four supplemental chains await staging;16 of18 newly found NASM callers remain. |
+
+| [P185 Win95 guest-only](t484-s3-win95-guest.md) | Both COM profiles and path binding use native producers; byte equivalence and shared binder regression pass. Fixed316/355; five supplemental preparation chains pending;15 of18 newly found NASM callers remain. |
+
+| [P186 interrupt observer](t484-s3-interrupt-observer.md) | Retired interpreted producer; native object/image bytes match, cache and missing-linker failure pass. Fixed316/355;14 of18 newly found NASM callers remain. |
+
+| [P187 fixed-profile probes](t484-s3-fixed-probes.md) | Seven authored images share native producers, removing five NASM call sites; runtime assertions unchanged. Fixed316/355; ten supplemental preparation chains pending; nine of18 new NASM candidates remain. |
+
+| [P188 fixed DOS profiles](t484-s3-guest-profiles.md) | All13 existing profiles of five callers share CMD production; exact bytes/cache pass. Fixed316/355;15 supplemental preparation chains pending; four of18 new NASM candidates remain. |
+
+| [P189 transition producers](t484-s3-transition-probes.md) | FORCEDOS/memory profiles use CMD; inline CL and external C# replaced by existing native tools. Ten exact-image/cache checks and environment query pass. Fixed316/355;17 supplemental chains pending; two of18 new NASM candidates remain. |
+
+| [P190 remote enumeration](t484-s3-remote-probe.md) | Parameterized remote witness uses checked CMD/CMake producer; existing status semantics retained. Fixed316/355;18 supplemental preparation chains pending; one of18 new NASM candidates remains. |
+
+| [P191 generic-thunk fixtures](t484-s3-generic-native.md) | NE/native DLL producers share CMD graph; normal and cdecl real Win16 cases pass three phases and three releases. All18 new direct NASM sites handled;19 supplemental preparation chains remain. Fixed316/355. |
+
+| [P192 keyboard isolation](t484-s3-keyboard-isolation.md) | Removed obsolete private observer and installation/global-cleanup assumptions; real PIF/MEM and four reader outcomes pass. Shared staging remains S4; fixed316/355. |
+
+| [P193 native output preparation](t484-s3-native-output-isolation.md) | Removed dynamic BAT generation and flat-layout assumptions. Real simultaneous output loses a marker: strict test fails, recorded separately; no product change or runtime pass claimed. |
+
+| [P194 supplemental consolidation](t484-s3-supplemental-producers.md) | Removed migration-only NASM recipe; shared native environment reader replaces duplicate C# producer. Two of13 review candidates classified;11 remain,20 supplemental staging chains remain. |
+
+| [P195 cached tab-stop reader](t484-s3-tabstop-reader.md) | Existing read declarations use shared CMD/CMake production; read/error/cache checks pass, no new guest pass claimed.10 supplemental review candidates and21 staging chains remain. |
+
+| [P196 WOW host contracts](t484-s3-wow-host-contracts.md) | Two obsolete diagnostics retired; glyph wrapper consolidated; five font cases and public metafile pass through native targets. Cached full and11/22 hashes unchanged. Five supplemental review candidates and21 staging chains remain. |
+
+| [P197 session contracts](t484-s3-wow-session-contracts.md) | Retained rollback/independent-runtime cases use CMD; sealed reply research retired. Three supplemental compiler candidates remain; frozen316/355 and21 staging chains unchanged. |
+
+| [P198 supplemental review complete](t484-s3-final-managed-producers.md) | Obsolete Win1.01 diagnostic chain retired; OEM/fatal interop uses native CMD. All13 supplemental candidates classified;23 preparation/staging chains remain. Frozen316/355 unchanged. |
+
+| [P199 direct producer reconciliation](t484-s3-direct-producer-reconciliation.md) | Packet tests use native x86/x64 builds; obsolete T412 barrier builder retired. Broader scan adds30 candidates: one read-only audit,29 still to review. Earlier13-entry review was not global completion. |
+
+| [P200 controlled boundaries](t484-s3-controlled-boundaries.md) | Two compiler/extraction wrappers consolidated;24 clipboard and7 keyboard assertions pass.27 newly reconciled candidates remain; frozen316/355 and23 staging chains unchanged. |
+
+| [P201 redirector contracts](t484-s3-redir-contracts.md) | Three compiler recipes consolidated; DLC33/loader94 assertions pass, queue9 reproduce known failure explicitly.24 direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
+| [P202 DIB contracts](t484-s3-dib-contracts.md) | Two producers consolidated;82 cleanup and57 retirement assertions pass with exact selected bodies.22 direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
+| [P203 WOW output contracts](t484-s3-wow-output-contracts.md) | Four compiler/extraction runners consolidated;205 unchanged assertions pass. Cached full and11/22 hashes unchanged;18 direct candidates remain, frozen316/355 and23 staging chains unchanged. |
+
+| [P204 WOW provider contracts](t484-s3-wow-provider-contracts.md) | Three compiler runners consolidated;497 unchanged assertions and ten source-projection comparisons pass.15 direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
+| [P205 presentation contracts](t484-s3-presentation-contracts.md) | Two formal gates share native production; both current fixtures pass and both regression controls fail as required.13 direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
+| [P206 observer contracts](t484-s3-observer-contracts.md) | Four diagnostic regression producers use native targets; obsolete DOS relay builder retired. Eight direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
+| [P207 WOW file contracts](t484-s3-wow-file-contracts.md) | Four compiler runners consolidated; current file/DDE assertions and five source equivalence checks pass. Four direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
+| [P208 netlib contract](t484-s3-netlib-contract.md) | Real product packstr object linked through CMD/native; existing boundary assertions pass. Three direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
+| [P209 modesw guards](t484-s3-modesw-guards.md) | Native source generation/preprocessing preserves both original-line rejections and two positive controls. Two direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
+| [P210 CCPU consumers](t484-s3-ccpu-event-consumers.md) | Current consumer assertions use shared native projections; selected PROD and IRQ-hook boundaries retained. One direct candidate remains; frozen316/355 and23 staging chains unchanged. |
+
+| [P211 Run16 historical entry](t484-s3-run16-entry-retirement.md) | Retired obsolete T412 entry builder and sole child source; current classifier checks retained. All30 P199 supplemental candidates classified; frozen316/355 and23 staging chains remain. |
+
+| [P212 obsolete publishers](t484-s3-obsolete-publishers.md) | Removed two uncalled historical single-image publishers and stale normative invocation; coherent current publication remains S4. Frozen318/355 disposed,37 remain;23 supplemental preparation chains remain. |
+
+| [P213 original staging retirement](t484-s3-original-stage-retirement.md) | Removed obsolete single-worker staging and its sole self-test; current archive/package media validation retained. Frozen319/355 disposed,36 remain;23 supplemental preparation chains remain. |

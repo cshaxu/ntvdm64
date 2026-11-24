@@ -128,9 +128,8 @@ foreach($field in $fields){$binding+=@($field[0],$field[1])}
 & "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" @binding
 if($LASTEXITCODE){throw 'Controller path binding failed'}
 $keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS','PSExecutionPolicyPreference')
-$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}
-$env:PATH=(Split-Path $nasm)+';C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
+$env:PATH='C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
 if($ProductionComspecImage){$env:COMSPEC=$ProductionComspecImage}
 try {
 
