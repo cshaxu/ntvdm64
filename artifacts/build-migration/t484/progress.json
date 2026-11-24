@@ -1,16 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "4dcfd3775cd67d17ecc2a53d6c77cc2faa0ed493",
+  "head": "dca9832679063ea8f8485fc990c18df9adc8d959",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
     " M test/build/verify-win31-probe-paths.ps1",
     " M test/integration/ntvdm64-386/verify-win31-identity.ps1",
-    " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
     " M test/integration/ntvdm64-386/verify-win95-identity.ps1",
     " M test/observation/win31_probe_paths.c",
-    "?? docs/etc/evidence/t484-s3-controller-paths.md"
+    "?? docs/etc/evidence/t484-s3-identity-fields.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -483,18 +482,20 @@
       "file": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "e653dbee1f25ea151ca9bc5725ac39189128ac913922ce0d1e979fb33bdd514d",
+      "current_sha256": "5ab8e02e774af6637ee79742bf857a67690dd812eac707aa8eb45ed5d6600a35",
       "revisions": [
+        "dca9832679063ea8f8485fc990c18df9adc8d959",
         "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-controller-paths.md",
         "docs/etc/evidence/t484-s3-vm-identity.md"
       ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Native assembly and shared controller path binding verified byte-identical; remaining COM fields/config/PIF and shared runtime staging require reconciliation",
-        "evidence": "docs/etc/evidence/t484-s3-controller-paths.md"
+        "reason": "Native assembly, controller paths and COM role/command/environment preparation verified byte-identical; remaining PIF/config preparation and shared staging stay pending",
+        "evidence": "docs/etc/evidence/t484-s3-identity-fields.md"
       }
     },
     {
@@ -504,9 +505,11 @@
       "state": "changed",
       "current_sha256": "17fe0bd724af49fbefd66942bcd8b372d5cd7d4aa80939655fabddec2bc8674d",
       "revisions": [
+        "dca9832679063ea8f8485fc990c18df9adc8d959",
         "7e89114b14c4199b138033c3352b530105f8c7fb"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-controller-paths.md",
         "docs/etc/evidence/t484-s3-win95-editor.md"
       ],
       "completion": "pending-producer-migration",
@@ -521,18 +524,20 @@
       "file": "test/integration/ntvdm64-386/verify-win95-identity.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "4ddb9a019f058661daf3c5fafd375e2dddead33cc022c960a4eea98752339c87",
+      "current_sha256": "5900578a0d248fb474caf5502cc5f015ef1a2097fb31e192de427da18d696b30",
       "revisions": [
+        "dca9832679063ea8f8485fc990c18df9adc8d959",
         "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-controller-paths.md",
         "docs/etc/evidence/t484-s3-vm-identity.md"
       ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Native assembly and shared controller path binding verified byte-identical; remaining COM fields/config/PIF and shared runtime staging require reconciliation",
-        "evidence": "docs/etc/evidence/t484-s3-controller-paths.md"
+        "reason": "Native assembly, controller paths and COM role/command/environment preparation verified byte-identical; remaining PIF/config preparation and shared staging stay pending",
+        "evidence": "docs/etc/evidence/t484-s3-identity-fields.md"
       }
     },
     {
@@ -6464,6 +6469,12 @@
     }
   ],
   "commits": {
+    "dca9832679063ea8f8485fc990c18df9adc8d959": {
+      "subject": "T484 S3 P179 share native controller path binding",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-controller-paths.md"
+      ]
+    },
     "4dcfd3775cd67d17ecc2a53d6c77cc2faa0ed493": {
       "subject": "T484 S3 P178 simplify and migrate DLL BOOLEAN witness",
       "evidence": [
@@ -7739,15 +7750,19 @@
       "file": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
       "hits": [
         {
-          "line": 315,
+          "line": 224,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
         },
         {
-          "line": 318,
+          "line": 273,
+          "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
+        },
+        {
+          "line": 276,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 320,
+          "line": 278,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
@@ -7775,15 +7790,19 @@
       "file": "test/integration/ntvdm64-386/verify-win95-identity.ps1",
       "hits": [
         {
-          "line": 146,
+          "line": 81,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
         },
         {
-          "line": 149,
+          "line": 130,
+          "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
+        },
+        {
+          "line": 133,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 151,
+          "line": 135,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]

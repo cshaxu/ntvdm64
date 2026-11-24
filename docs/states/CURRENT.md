@@ -114,6 +114,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P179 controller paths](../etc/evidence/t484-s3-controller-paths.md) | Three runners share native128-byte field binding; six real controller images byte-identical, nine failure cases pass. Remaining COM/config/staging work stays open;315/355 disposed,40 remain. |
 
+| [P180 DOS identity fields](../etc/evidence/t484-s3-identity-fields.md) | Two runners share native COM preparation; seven real templates/both roles byte-identical and18 rejection cases pass. PIF/config/staging remain;315/355 disposed,40 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

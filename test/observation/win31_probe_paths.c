@@ -24,19 +24,71 @@ static int load(const char *path, image *value)
     return fclose(file) == 0;
 }
 
-static int bind_field(image *value, const char *marker, const char *path)
+static int bind_bytes(image *value, const char *marker, const void *bytes,
+                      size_t written, size_t capacity)
 {
-    size_t i, found = 0, offset = 0, length = strlen(marker), written = strlen(path);
-    if (!length || length >= 128 || written >= 128) return 0;
-    for (i = 0; path[i]; ++i)
-        if ((unsigned char)path[i] < 32 || (unsigned char)path[i] > 126) return 0;
+    size_t i, found = 0, offset = 0, length = strlen(marker);
+    if (!length || written > capacity) return 0;
     for (i = 0; i + length <= value->size; ++i) {
         if (!memcmp(value->bytes + i, marker, length)) { ++found; offset = i; }
     }
-    if (found != 1 || value->size - offset < 128) return 0;
-    memset(value->bytes + offset, 0, 128);
-    memcpy(value->bytes + offset, path, written);
+    if (found != 1 || value->size - offset < capacity) return 0;
+    memset(value->bytes + offset, 0, capacity);
+    memcpy(value->bytes + offset, bytes, written);
     return 1;
+}
+
+static int ascii_text(const char *text, int allow_cr)
+{
+    for (; *text; ++text)
+        if (((unsigned char)*text < 32 || (unsigned char)*text > 126) &&
+            !(allow_cr && *text == '\r' && !text[1])) return 0;
+    return 1;
+}
+
+static int bind_field(image *value, const char *marker, const char *path)
+{
+    return strlen(marker) < 128 && strlen(path) < 128 && ascii_text(path, 0) &&
+           bind_bytes(value, marker, path, strlen(path), 128);
+}
+
+/* Only the declared slots of dos-identity.asm and dos-retirement.asm.
+ * Environment entries arrive separately: argv cannot carry embedded NULs. */
+static int bind_identity(image *value, int argc, char **argv)
+{
+    static const struct { const char *marker; size_t capacity; } slots[] = {
+        {"@VM_IDENTITY_RESULT@", 128}, {"@VM_PAIR_READY@", 128},
+        {"@VM_A_RESULT@", 128}, {"@VM_NESTED_OUTPUT@", 128},
+        {"@VM_NATIVE_READY@", 128}, {"@VM_DIRECTORY@", 128},
+        {"@VM_NATIVE_COMMAND@", 256}, {"@VM_ORDER_COMMAND@", 256},
+        {"@VM_ROLE@", 1}
+    };
+    char environment[512] = {0};
+    size_t used = 0, i;
+    int at;
+    if (argc < 2 || argc % 2) return 0;
+    for (at = 0; at < argc; at += 2) {
+        const char *name = argv[at], *text = argv[at + 1];
+        size_t length = strlen(text);
+        if (!strcmp(name, "--env")) {
+            const char *equals = strchr(text, '=');
+            if (!equals || equals == text || !ascii_text(text, 0) ||
+                length + 2 > sizeof(environment) - used) return 0;
+            memcpy(environment + used, text, length + 1);
+            used += length + 1;
+            continue;
+        }
+        for (i = 0; i < sizeof(slots) / sizeof(slots[0]); ++i)
+            if (!strcmp(name, slots[i].marker)) break;
+        if (i == sizeof(slots) / sizeof(slots[0])) return 0;
+        if (slots[i].capacity == 1) {
+            if (length != 1 || (text[0] != 'A' && text[0] != 'B')) return 0;
+        } else if (length >= slots[i].capacity ||
+                   !ascii_text(text, !strcmp(name, "@VM_ORDER_COMMAND@"))) return 0;
+        if (!bind_bytes(value, name, text, length, slots[i].capacity)) return 0;
+    }
+    return !used || bind_bytes(value, "@VM_ENVIRONMENT@", environment,
+                               used + 1, sizeof(environment));
 }
 
 static int bind_path(image *value, const char *marker, const char *directory,
@@ -60,6 +112,11 @@ int main(int argc, char **argv)
 {
     image windows = {0}, dos = {0};
     int result = 1;
+    if (argc >= 4 && !strcmp(argv[1], "--identity")) {
+        if (!load(argv[2], &dos) || !bind_identity(&dos, argc - 4, argv + 4)) goto done;
+        if (save(argv[3], &dos)) result = 0;
+        goto done;
+    }
     if (argc >= 5 && !strcmp(argv[1], "--fields")) {
         int at;
         if ((argc - 3) % 2 || !load(argv[2], &windows)) goto done;

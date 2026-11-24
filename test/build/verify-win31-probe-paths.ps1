@@ -102,3 +102,63 @@ foreach($file in @((Get-ChildItem "$root/controller-*.exe").FullName)+@("$root/e
  Same-ExceptFields $before $after $fields
 }
 'PASS five actual identity variants and Win95 editor controller byte-equivalent'
+# COM templates use three sizes plus a one-byte role and NUL-separated environment.
+$variants=@(
+ @('dos',''),
+ @('dos','-DCONTINUATION=1;-DREAL_COMMAND=1'),
+ @('dos','-DCONTINUATION=1;-DREAL_COMMAND=1;-DNESTED_COMMAND=1'),
+ @('dos','-DCONTINUATION=1;-DREAL_COMMAND=1;-DCUSTOM_COMMAND=1'),
+ @('dos','-DWIN95_ORDERED_PROOF=1'),
+ @('dos','-DWIN95_ORDERED_PROOF=1;-DCONTINUATION=1;-DREAL_COMMAND=1;-DPRODUCTION_NATIVE_ONLY=1'),
+ @('retirement','-DRETIRE_COMMAND=1'))
+$index=0
+foreach($variant in $variants){
+ $file="$root/identity-$index.com"
+ & $env:ComSpec /d /s /c ('""'+$repo+'/tools/build-vm-identity.cmd" "'+$file+'" '+$variant[0]+' "'+$variant[1]+'""') *> "$root/identity-$index-build.log"
+ if($LASTEXITCODE){throw "COM template build failed: $index"}
+ $before=[IO.File]::ReadAllBytes($file)
+ foreach($role in 'A','B'){
+  $expected=[byte[]]$before.Clone();$output="$root/identity-$index-$role.com"
+  $binding=@('--identity',$file,$output)
+  foreach($match in [regex]::Matches($ascii.GetString($before),'@VM_[A-Z_]+@')){
+   $capacity=128;$value="$directory\FIELD.BIN"
+   switch($match.Value){
+    '@VM_ROLE@' {$capacity=1;$value=$role}
+    '@VM_NATIVE_COMMAND@' {$capacity=256;$value='C:\Windows\System32\cmd.exe /c "echo READY>O:\tmp\W31TEST\PATCH\NATIVE.OK & pause"'}
+    '@VM_ORDER_COMMAND@' {$capacity=256;$value="$directory\ORDER.EXE T479-test A"+[char]13}
+    '@VM_ENVIRONMENT@' {
+     $capacity=512
+     $entries=@("ROLE=$role",'ROUND=0',"VM_READY_DIR=$directory",'PATH=O:\winnt\system32;C:\Windows\System32;C:\Windows')
+     $value=($entries -join [char]0)+[char]0+[char]0
+     foreach($entry in $entries){$binding+=@('--env',$entry)}
+    }
+   }
+   if($match.Value -ne '@VM_ENVIRONMENT@'){$binding+=@($match.Value,$value)}
+   [Array]::Clear($expected,$match.Index,$capacity)
+   $bytes=$ascii.GetBytes($value);[Array]::Copy($bytes,0,$expected,$match.Index,$bytes.Length)
+  }
+  & $Binder @binding
+  if($LASTEXITCODE){throw "COM binding failed: $index/$role"}
+  if([Convert]::ToBase64String($expected) -cne [Convert]::ToBase64String([IO.File]::ReadAllBytes($output))){throw "COM byte equivalence failed: $index/$role"}
+ }
+ $index++
+}
+foreach($case in @('role','unknown','duplicate','path-size','command-size','environment-size','environment-entry','control-character','odd')){
+ $output="$root/rejected.com";[IO.File]::WriteAllBytes($output,[byte[]](1,2,3))
+ $binding=@('--identity',"$root/identity-6.com",$output,'@VM_IDENTITY_RESULT@',"$directory\A.BIN")
+ switch($case){
+  role {$binding+=@('@VM_ROLE@','C')}
+  unknown {$binding+=@('@VM_UNKNOWN@','X')}
+  duplicate {$binding+=@('@VM_IDENTITY_RESULT@','X')}
+  path-size {$binding+=@('@VM_PAIR_READY@',('X'*128))}
+  command-size {$binding+=@('@VM_NATIVE_COMMAND@',('X'*256))}
+  environment-size {$binding+=@('--env',('PATH='+('X'*512)))}
+  environment-entry {$binding+=@('--env','NO_EQUALS')}
+  control-character {$binding+=@('@VM_PAIR_READY@',([string][char]10))}
+  odd {$binding+='@VM_ROLE@'}
+ }
+ $beforeHash=(Get-FileHash $output).Hash
+ & $Binder @binding 2> "$root/identity-$case.stderr"
+ if(!$LASTEXITCODE -or (Get-FileHash $output).Hash -ne $beforeHash){throw "COM rejection failed: $case"}
+}
+'PASS seven real COM variants, both roles byte-equivalent; nine COM rejection cases preserve output'

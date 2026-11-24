@@ -179,51 +179,21 @@ if($LocalDirectoryControl){
  New-Item -ItemType Directory $directoryRoot|Out-Null
  [IO.File]::WriteAllText("$directoryRoot/.t479-owner",$task)
 }
+& "$repo/tools/build-fixtures.cmd" x64 win31-probe-paths *> "$task/identity-paths-build.log"
+if($LASTEXITCODE){throw 'Identity binder build failed'}
 foreach($id in 'A','B'){
  $directory="$dest\PATCH"
  # Font/application isolation control uses a shared, stable working directory.
  # The default VA/VB contract remains a separate strict directory test.
  if($Continuation -and !$DirectorySnapshotControl){$directory="$directoryRoot\V$id";New-Item -ItemType Directory -Path $directory|Out-Null}
- $bytes=[IO.File]::ReadAllBytes("$task/identity.com")
- $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_IDENTITY_RESULT@')
- if($marker -lt 0){throw 'No output marker'}
- [Array]::Clear($bytes,$marker,128)
- $path=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\$id.BIN")
- [Array]::Copy($path,0,$bytes,$marker,$path.Length)
- $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_PAIR_READY@')
- if($marker -lt 0){throw 'No pair rendezvous marker'}
- [Array]::Clear($bytes,$marker,128)
- $path=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\PAIR.KEY")
- [Array]::Copy($path,0,$bytes,$marker,$path.Length)
- $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ROLE@')
- if($marker -lt 0){throw 'No VM role marker'}
- $bytes[$marker]=[byte][char]$id
- if($NestedCommand){
-  $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_NESTED_OUTPUT@')
-  if($marker -lt 0){throw 'Missing nested output marker'}
-  $value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\$id.TXT")
-  if($value.Length -ge 128){throw 'Nested output path too long'}
-  [Array]::Clear($bytes,$marker,128)
-  [Array]::Copy($value,0,$bytes,$marker,$value.Length)
- }
+ $binding=@('--identity',"$task/identity.com","$dest/PATCH/$id.COM",
+  '@VM_IDENTITY_RESULT@',"$dest\PATCH\$id.BIN",'@VM_PAIR_READY@',"$dest\PATCH\PAIR.KEY",'@VM_ROLE@',$id)
+ if($NestedCommand){$binding+=@('@VM_NESTED_OUTPUT@',"$dest\PATCH\$id.TXT")}
  if($RetireCommand){
-  $fields=@{
-   '@VM_NATIVE_READY@'=@(128,"$dest\PATCH\NATIVE.OK")
-   '@VM_NATIVE_COMMAND@'=@(256,"C:\Windows\System32\cmd.exe /c `"echo READY>$dest\PATCH\NATIVE.OK & pause`"")
-  }
-  foreach($name in $fields.Keys){
-   $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf($name)
-   if($marker -lt 0){throw "Missing retirement marker $name"}
-   $value=[Text.Encoding]::ASCII.GetBytes($fields[$name][1])
-   $capacity=[int]$fields[$name][0]
-   if($value.Length -ge $capacity){throw 'Retirement fixture field too long'}
-   [Array]::Clear($bytes,$marker,$capacity)
-   [Array]::Copy($value,0,$bytes,$marker,$value.Length)
-  }
+  $binding+=@('@VM_NATIVE_READY@',"$dest\PATCH\NATIVE.OK",'@VM_NATIVE_COMMAND@',
+   "C:\Windows\System32\cmd.exe /c `"echo READY>$dest\PATCH\NATIVE.OK & pause`"")
  }
  if($RealCommand -or $RetireCommand){
-  $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ENVIRONMENT@')
-  if($marker -lt 0){throw 'No native command environment marker'}
   # The matrix later creates its own short physical runtime. Its path is not
   # known here; the repository package path is not necessarily DOS-addressable.
   # Give the nested DOS witness an immutable MEM copy in the short guest fixture.
@@ -237,34 +207,22 @@ foreach($id in 'A','B'){
    }
    $commandPath="$dest\PATCH;$commandPath"
   }
-  $environment=[Text.Encoding]::ASCII.GetBytes("ROLE=$id`0ROUND=0`0PATH=$commandPath`0`0")
-  if($environment.Length -gt 512){throw 'Native command fixture environment too large'}
-  [Array]::Clear($bytes,$marker,512)
-  [Array]::Copy($environment,0,$bytes,$marker,$environment.Length)
+  $binding+=@('--env',"ROLE=$id",'--env','ROUND=0','--env',"PATH=$commandPath")
  }
  if($OrderedCommandImage -or $UnreadInputImage){
-  $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ORDER_COMMAND@')
-  if($marker -lt 0){throw 'Missing ordered command marker'}
-  $value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T479-$([IO.Path]::GetFileName($dest)) $FirstCommand"+[char]13)
+  $command=("$dest\PATCH\ORDER.EXE T479-$([IO.Path]::GetFileName($dest)) $FirstCommand"+[char]13)
   if($ResizeCommand){
    $resizeMode=if($VisibleResizeRoundTrip){'visible-roundtrip'}elseif($VisibleResizeCommand){'visible-resize'}else{'resize'}
-   $value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481-$([IO.Path]::GetFileName($dest)) $FirstCommand $resizeMode $dest\PATCH\RESIZE"+[char]13)
+   $command=("$dest\PATCH\ORDER.EXE T481-$([IO.Path]::GetFileName($dest)) $FirstCommand $resizeMode $dest\PATCH\RESIZE"+[char]13)
   }
-  if($GuestCodepage){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481-$([IO.Path]::GetFileName($dest)) $FirstCommand codepage $dest\PATCH\CODEPAGE"+[char]13)}
-  if($ServiceLoss -or $WorkerCloseMonitor){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ORDER.EXE T481 $FirstCommand hold $dest\PATCH\HOLD"+[char]13)}
-  if($UnreadInputImage){$value=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\UNREAD.EXE $dest\PATCH\INPUT $UnreadInputMode --vm"+[char]13)}
-  if($value.Length -ge 256){throw 'Ordered command too long'}
-  [Array]::Clear($bytes,$marker,256)
-  [Array]::Copy($value,0,$bytes,$marker,$value.Length)
+  if($GuestCodepage){$command=("$dest\PATCH\ORDER.EXE T481-$([IO.Path]::GetFileName($dest)) $FirstCommand codepage $dest\PATCH\CODEPAGE"+[char]13)}
+  if($ServiceLoss -or $WorkerCloseMonitor){$command=("$dest\PATCH\ORDER.EXE T481 $FirstCommand hold $dest\PATCH\HOLD"+[char]13)}
+  if($UnreadInputImage){$command=("$dest\PATCH\UNREAD.EXE $dest\PATCH\INPUT $UnreadInputMode --vm"+[char]13)}
+  $binding+=@('@VM_ORDER_COMMAND@',$command)
  }
- if($Continuation){
-  $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_DIRECTORY@')
-  if($marker -lt 0){throw 'No VM directory marker'}
-  [Array]::Clear($bytes,$marker,128)
-  $path=[Text.Encoding]::ASCII.GetBytes($directory)
-  [Array]::Copy($path,0,$bytes,$marker,$path.Length)
- }
- [IO.File]::WriteAllBytes("$dest/PATCH/$id.COM",$bytes)
+ if($Continuation){$binding+=@('@VM_DIRECTORY@',$directory)}
+ & "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" @binding
+ if($LASTEXITCODE){throw 'DOS identity field binding failed'}
  $vmFlags=if($FullscreenVmControl){'0x2100a'}else{'0x21002'}
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "VM identity $id" --program "$dest\PATCH\$id.COM" --directory $directory --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags $vmFlags
  if($LASTEXITCODE){throw 'DOS VM PIF build failed'}

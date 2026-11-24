@@ -1837,3 +1837,5 @@ post-publication targeted checks.
 - [T484 S3 DLL BOOLEAN ABI witness cleanup](evidence/t484-s3-wow-entry-native.md).
 
 - [T484 S3 shared controller path binding](evidence/t484-s3-controller-paths.md).
+
+- [T484 S3 shared DOS identity fields](evidence/t484-s3-identity-fields.md).

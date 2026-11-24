@@ -66,36 +66,20 @@ $dosDefines=@('-DWIN95_ORDERED_PROOF=1')
 if($NativeCommand){$dosDefines+=@('-DCONTINUATION=1','-DREAL_COMMAND=1','-DPRODUCTION_NATIVE_ONLY=1')}
 if($ProductionComspecImage){$dosDefines+='-DPRODUCTION_COMSPEC_ONLY=1'}
 Invoke-VmIdentityBuild "$task/identity.com" dos $dosDefines
+& "$repo/tools/build-fixtures.cmd" x64 win31-probe-paths *> "$task/identity-paths-build.log"
+if($LASTEXITCODE){throw 'Identity binder build failed'}
 foreach($id in 'A','B'){
- $bytes=[IO.File]::ReadAllBytes("$task/identity.com")
- $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_IDENTITY_RESULT@')
- if($marker -lt 0){throw 'No output marker'}
- [Array]::Clear($bytes,$marker,128)
- $path=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\$id.BIN")
- [Array]::Copy($path,0,$bytes,$marker,$path.Length)
- $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_PAIR_READY@')
- if($marker -lt 0){throw 'No pair rendezvous marker'}
- [Array]::Clear($bytes,$marker,128)
- $path=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\PAIR.KEY")
- [Array]::Copy($path,0,$bytes,$marker,$path.Length)
- $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_ROLE@')
- if($marker -lt 0){throw 'No VM role marker'}
- $bytes[$marker]=[byte][char]$id
+ $binding=@('--identity',"$task/identity.com","$dest/PATCH/$id.COM",
+  '@VM_IDENTITY_RESULT@',"$dest\PATCH\$id.BIN",'@VM_PAIR_READY@',"$dest\PATCH\PAIR.KEY",
+  '@VM_ROLE@',$id,'@VM_A_RESULT@',"$dest\PATCH\A.BIN")
  if($NativeCommand){
-  $readyEnv=if($GuestInput){"VM_READY_DIR=$dest\PATCH`0"}else{''}
-  foreach($field in @(@('@VM_ENVIRONMENT@',"ROLE=$id`0ROUND=0`0${readyEnv}PATH=$PackageRoot\system32;C:\Windows\System32;C:\Windows`0`0",512),@('@VM_DIRECTORY@',"$dest\PATCH",128))){
-   $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf($field[0])
-   $value=[Text.Encoding]::ASCII.GetBytes($field[1])
-   if($marker -lt 0 -or $value.Length -ge $field[2]){throw 'Invalid native command field'}
-   [Array]::Clear($bytes,$marker,$field[2]);[Array]::Copy($value,0,$bytes,$marker,$value.Length)
-  }
+  $binding+=@('--env',"ROLE=$id",'--env','ROUND=0')
+  if($GuestInput){$binding+=@('--env',"VM_READY_DIR=$dest\PATCH")}
+  $binding+=@('--env',"PATH=$PackageRoot\system32;C:\Windows\System32;C:\Windows",
+   '@VM_DIRECTORY@',"$dest\PATCH")
  }
- $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@VM_A_RESULT@')
- if($marker -lt 0){throw 'No peer result marker'}
- [Array]::Clear($bytes,$marker,128)
- $path=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\A.BIN")
- [Array]::Copy($path,0,$bytes,$marker,$path.Length)
- [IO.File]::WriteAllBytes("$dest/PATCH/$id.COM",$bytes)
+ & "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" @binding
+ if($LASTEXITCODE){throw 'DOS identity field binding failed'}
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "VM identity $id" --program "$dest\PATCH\$id.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
  if($LASTEXITCODE){throw 'DOS VM PIF build failed'}
  & "$PSScriptRoot/Set-Win95ProbePifMemory.ps1" -Path "$dest/PATCH/$id.PIF"
