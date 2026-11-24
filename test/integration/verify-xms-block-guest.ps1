@@ -17,15 +17,14 @@ New-Item -ItemType Directory -Path $out | Out-Null
 $fault=$Case -in @('InvalidRange','InvalidDescriptor')
 & "$repo/tools/build-fixtures.cmd" x86 guest-profiles
 if($LASTEXITCODE){throw 'XMS probe build failed'}
-Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/XMS-$Case.COM" -Destination "$out/XMSCASE.COM"
+& "$repo/tools/prepare-test-inputs.cmd" $out "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/XMS-$Case.COM" XMSCASE.COM
+if($LASTEXITCODE){throw 'XMS input preparation failed'}
 $runtime=$null;$scope=$null;$process=$null;$worker=$null
 $names=@('PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_INITIAL_GEOMETRY')
 $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
-    $runtime=New-PhysicalRuntimeStage $PackageRoot
+    $runtime=New-PhysicalRuntimeStage $PackageRoot -TestFiles @("$out/XMSCASE.COM")
     $scope=New-IsolatedPackageScope $runtime
-    New-Item -ItemType Directory "$runtime/tests" -Force | Out-Null
-    Copy-Item "$out/XMSCASE.COM" "$runtime/tests/XMSCASE.COM"
     $env:PATH="$runtime/system32;"+(Join-Path $env:SystemRoot 'System32')
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_INITIAL_GEOMETRY='80,30'

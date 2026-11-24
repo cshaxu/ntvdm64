@@ -13,18 +13,17 @@ New-Item -ItemType Directory $out|Out-Null
 if($LASTEXITCODE){throw 'DPMI probe build failed'}
 $results=@()
 foreach($mode in @('low','high')) {
- $probe="$out/$mode.com"
- Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/INT21-$mode.COM" -Destination $probe
+ & "$repo/tools/prepare-test-inputs.cmd" "$out/$mode" "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/INT21-$mode.COM" D38F.COM
+ if($LASTEXITCODE){throw 'INT21 input preparation failed'}
+ $probe="$out/$mode/D38F.COM"
  foreach($route in @('direct','nested')) {
   $runtime=$null;$scope=$null;$p=$null
   $case="$out/$mode-$route"
   New-Item -ItemType Directory $case|Out-Null
   try {
-   $runtime=New-PhysicalRuntimeStage $package -FreshPackageIdentity
+   $runtime=New-PhysicalRuntimeStage $package -FreshPackageIdentity -TestFiles @($probe)
    Save-IsolatedPackageManifest $runtime "$case/manifest.json"
    $scope=New-IsolatedPackageScope $runtime
-   New-Item -ItemType Directory -Force "$runtime/tests"|Out-Null
-   Copy-Item $probe "$runtime/tests/D38F.COM"
    if(Test-Path "$runtime/tests/D38IO.TMP"){throw 'Probe file must initially be absent'}
    $start=[Diagnostics.ProcessStartInfo]::new($observer)
    $start.UseShellExecute=$false;$start.CreateNoWindow=$true

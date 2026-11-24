@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T484 S4 DPMI and XMS preparation](evidence/t484-s4-dpmi-xms-preparation.md) closes three supplemental chains with actual positive and failure-path guest checks.
+
 [T484 S4 idle and DDEML preparation](evidence/t484-s4-idle-ddeml-preparation.md) records shared CMD copying, real lifecycle/DDEML passes and prebuilt identity checks.
 
 [T484 S4 WOW diagnostic preparation](evidence/t484-s4-wow-diagnostic-preparation.md) records the shared CMD owner, real checks and retained failed attempts.

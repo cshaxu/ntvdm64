@@ -18,18 +18,12 @@ $runtime=$null;$scope=$null;$process=$null
 try {
     & "$repo/tools/build-fixtures.cmd" x86 guest-profiles
     if($LASTEXITCODE){throw 'DPMI debug probe build failed'}
-    # These are project-owned probes, not modified original guest binaries.
-    foreach($case in @(@('dpmi_watchpoint','WATCH'),@('dpmi_debug_lifetime','LIFE'))) {
-        # Original DOSX status-query inversion is an immutable guest boundary
-        # documented in m0-t420-s38-dpmi32-capability-review.md. Exercise actual
-        # delivery/removal groups here; do not claim 0B02/0B03 status acceptance.
-        Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/$($case[1]).COM" -Destination "$out/$($case[1]).COM"
-    }
-    $runtime=New-PhysicalRuntimeStage $package
+    # Original DOSX status-query inversion is an immutable guest boundary.
+    # Exercise delivery/removal; do not claim 0B02/0B03 status acceptance.
+    $cache="$repo/build/.ninja/fixtures-x86/guest-probes/profiles"
+    $runtime=New-PhysicalRuntimeStage $package -TestFiles @("$cache/WATCH.COM","$cache/LIFE.COM")
     Save-IsolatedPackageManifest $runtime "$out/manifest.json"
     $scope=New-IsolatedPackageScope $runtime
-    New-Item -ItemType Directory -Force "$runtime/tests" | Out-Null
-    Copy-Item "$out/WATCH.COM","$out/LIFE.COM" "$runtime/tests"
     $cases=@(
         @{name='WATCH';marker='S38_DEBUG_SCALAR_RMW_STRING_STACK_CODE_OK'},
         @{name='LIFE';marker='S38_DEBUG_EXIT_HANDLE='},

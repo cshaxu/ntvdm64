@@ -1,17 +1,14 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "c41ba474a2161b6cb2327f82e631e9bed5a57649",
+  "head": "def8e5946b4fbe1872fa0f26b24585a5bac40e29",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-win16-ddeml-probe.ps1",
-    " M test/integration/verify-wow-idle-workers.ps1",
-    " M tools/build/native/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s4-idle-ddeml-preparation.md",
-    "?? test/observation/verify-test-input-preparation.ps1",
-    "?? tools/build/native/prepare-test-inputs.cmd.in",
-    "?? tools/prepare-test-inputs.cmd"
+    " M test/integration/verify-dpmi-debug-context.ps1",
+    " M test/integration/verify-dpmi-int21-state.ps1",
+    " M test/integration/verify-xms-block-guest.ps1",
+    "?? docs/etc/evidence/t484-s4-dpmi-xms-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -891,6 +888,7 @@
       "state": "changed",
       "current_sha256": "dafbbc0942629a921133a3c68f32924095a8fb363053965f1fb41432cdd7b166",
       "revisions": [
+        "def8e5946b4fbe1872fa0f26b24585a5bac40e29",
         "5c06b5e0dee67f950ca15543f71fcab1d239b323",
         "67be6eea19e7f52c3b1203ce11437dfc809d4a0c",
         "cde4bc13ce1f390f73ed22f074cc2d1607cc5521"
@@ -898,7 +896,8 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-ddeml-native.md",
         "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md",
-        "docs/etc/evidence/t484-s3-win16-probes.md"
+        "docs/etc/evidence/t484-s3-win16-probes.md",
+        "docs/etc/evidence/t484-s4-idle-ddeml-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -1254,10 +1253,12 @@
       "state": "changed",
       "current_sha256": "a801d2eaa4556ad0cda0b58cb97f0cf34b972e5ea7e8842f6531a91b10376e53",
       "revisions": [
+        "def8e5946b4fbe1872fa0f26b24585a5bac40e29",
         "2c930d09bf348cf70d084415f681a0b3a8b7b2d4"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-idle.md"
+        "docs/etc/evidence/t484-s3-idle.md",
+        "docs/etc/evidence/t484-s4-idle-ddeml-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -6616,6 +6617,12 @@
     }
   ],
   "commits": {
+    "def8e5946b4fbe1872fa0f26b24585a5bac40e29": {
+      "subject": "M0 T484 S4 P14: prepare idle and DDEML test inputs through CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-idle-ddeml-preparation.md"
+      ]
+    },
     "c41ba474a2161b6cb2327f82e631e9bed5a57649": {
       "subject": "M0 T484 S4 P13: unify WOW diagnostic package preparation in CMD",
       "evidence": [
