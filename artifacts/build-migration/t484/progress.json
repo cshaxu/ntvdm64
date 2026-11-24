@@ -1,14 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
+  "head": "21d580674d15186a4f9c19954ece674221461a6d",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-original-ems-probe.ps1",
-    " M test/integration/verify-wow-page-cost.ps1",
-    " M test/integration/verify-wow-paired-latency.ps1",
-    "?? docs/etc/evidence/t484-s3-ems-environment.md"
+    " M test/integration/verify-win16-multimedia-timer-probe.ps1",
+    " M test/integration/verify-win16-shell-hook-probe.ps1",
+    "?? docs/etc/evidence/t484-s3-win16-environment.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -17,11 +16,11 @@
     "removed": 167
   },
   "disposition_counts": {
-    "migrated-delivered": 94,
+    "migrated-delivered": 96,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 167,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 44,
+    "pending-producer-migration": 42,
     "requires-disposition-reconciliation": 17,
     "retained-standalone-audit": 16
   },
@@ -714,10 +713,12 @@
       "state": "changed",
       "current_sha256": "c16c2465847334fdd2261c4699af6823102078765538df46f38f44e3686d99a2",
       "revisions": [
+        "21d580674d15186a4f9c19954ece674221461a6d",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-cpu-guest.md"
+        "docs/etc/evidence/t484-s3-cpu-guest.md",
+        "docs/etc/evidence/t484-s3-ems-environment.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -859,18 +860,18 @@
       "file": "test/integration/verify-win16-multimedia-timer-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "6e5c6b1de02458c2002b0d16002b6c017dee926fe93b23ec7fb69e78451881cf",
+      "current_sha256": "bd073c121c2c643d4a97b65beef2ff4503b66c29c45187d1333ac49cf9c89d23",
       "revisions": [
         "cde4bc13ce1f390f73ed22f074cc2d1607cc5521"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-win16-probes.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native Win16 assembly variants verified; shared logon-helper and package staging production remain pending",
-        "evidence": "docs/etc/evidence/t484-s3-win16-probes.md"
+        "status": "migrated-delivered",
+        "reason": "CMD probe/native environment producers; actual timer/cancel/no-event and CBT hook scenarios passed; external C# dependency removed",
+        "evidence": "docs/etc/evidence/t484-s3-win16-environment.md"
       }
     },
     {
@@ -954,18 +955,18 @@
       "file": "test/integration/verify-win16-shell-hook-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "dadd2af86fdcedb5154b4e6f3750a5a098d1cc3491eaf9f0b6ea825053cba920",
+      "current_sha256": "26c916d1d975e8ceadb8876610e437b62c93f8a4fbb292b88b46734f85a1c5fc",
       "revisions": [
         "aa169c79bf9a083de4bbd86909fbd717f1c85036"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-shell-probes.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "P49 all42 guest variants and native caret/OLE providers migrated and verified; external logon-helper production/shared runtime staging remain pending",
-        "evidence": "docs/etc/evidence/t484-s3-shell-probes.md"
+        "status": "migrated-delivered",
+        "reason": "CMD probe/native environment producers; actual timer/cancel/no-event and CBT hook scenarios passed; external C# dependency removed",
+        "evidence": "docs/etc/evidence/t484-s3-win16-environment.md"
       }
     },
     {
@@ -1246,6 +1247,7 @@
       "state": "changed",
       "current_sha256": "10a40cfe130e8b359a8c35593c01d753e146aa7f84f18c75c89a6b473efa3108",
       "revisions": [
+        "21d580674d15186a4f9c19954ece674221461a6d",
         "2d2598f24a601c5920dd22e531cfe0a9eb5e5cc1",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13",
         "161b9dc27ab6ee0713a777f349ddb25669d72766"
@@ -1253,6 +1255,7 @@
       "evidence": [
         "docs/etc/evidence/t484-s2-native-tib.md",
         "docs/etc/evidence/t484-s3-cpu-guest.md",
+        "docs/etc/evidence/t484-s3-ems-environment.md",
         "docs/etc/evidence/t484-s3-page.md"
       ],
       "completion": "pending-producer-migration",
@@ -6370,6 +6373,12 @@
     }
   ],
   "commits": {
+    "21d580674d15186a4f9c19954ece674221461a6d": {
+      "subject": "T484 S3 P162 remove EMS runtime CSharp environment dependency",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-ems-environment.md"
+      ]
+    },
     "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce": {
       "subject": "T484 S3 P161 share native environment reader across CPU guest tests",
       "evidence": [
@@ -7819,12 +7828,16 @@
       "file": "test/integration/verify-win16-multimedia-timer-probe.ps1",
       "hits": [
         {
-          "line": 32,
+          "line": 31,
           "text": "$probe='MMTPROB';$assembler=(Get-Command nasm.exe).Source"
         },
         {
-          "line": 34,
+          "line": 33,
           "text": "$cache=\"$repo/build/.ninja/fixtures-x86/guest-probes/win16\""
+        },
+        {
+          "line": 53,
+          "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]
     },
@@ -7847,12 +7860,16 @@
       "file": "test/integration/verify-win16-shell-hook-probe.ps1",
       "hits": [
         {
-          "line": 43,
+          "line": 42,
           "text": "$assembler=(Get-Command nasm.exe).Source"
         },
         {
-          "line": 45,
+          "line": 44,
           "text": "$cache=\"$repo/build/.ninja/fixtures-x86/guest-probes/shell\""
+        },
+        {
+          "line": 110,
+          "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]
     },
