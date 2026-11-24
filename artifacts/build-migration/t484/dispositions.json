@@ -1469,19 +1469,19 @@
     "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
   },
   "test/integration/verify-dlc-worker-event.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P201 consolidates current-source fixtures through CMD and one runner. DLC33 and loader94 checks pass; queue9 checks reproduce the documented allocation-failure AV, not a product pass. Old loader commit recompilation retired.",
+    "evidence": "docs/etc/evidence/t484-s3-redir-contracts.md"
   },
   "test/integration/verify-redir-async-queue.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P201 consolidates current-source fixtures through CMD and one runner. DLC33 and loader94 checks pass; queue9 checks reproduce the documented allocation-failure AV, not a product pass. Old loader commit recompilation retired.",
+    "evidence": "docs/etc/evidence/t484-s3-redir-contracts.md"
   },
   "test/integration/verify-redirector-loader.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P201 consolidates current-source fixtures through CMD and one runner. DLC33 and loader94 checks pass; queue9 checks reproduce the documented allocation-failure AV, not a product pass. Old loader commit recompilation retired.",
+    "evidence": "docs/etc/evidence/t484-s3-redir-contracts.md"
   },
   "test/integration/verify-wow-dib-failure-cleanup.ps1": {
     "status": "supplemental-direct-command-review",

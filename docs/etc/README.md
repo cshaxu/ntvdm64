@@ -1871,3 +1871,5 @@ post-publication targeted checks.
 [T484 S3 direct-producer reconciliation](evidence/t484-s3-direct-producer-reconciliation.md) records missed compiler candidates and packet/obsolete-barrier disposition.
 
 [T484 S3 controlled WOW boundaries](evidence/t484-s3-controlled-boundaries.md) records shared extraction/build and preserved31-case assertions.
+
+[T484 S3 redirector contracts](evidence/t484-s3-redir-contracts.md) records consolidated producers and the explicit known queue-failure boundary.

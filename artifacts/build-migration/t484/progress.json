@@ -1,16 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "e2c5334a4a1d39b4ffd0f696b43c1aaceef06852",
+  "head": "f4da4ba070a70d31e916fc5e624fae9e36dcae41",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
+    " M docs/etc/evidence/m0-t478-s12-redirector-loader.md",
     " M docs/states/CURRENT.md",
-    " D test/adapter-mvdm-host-out/wow/verify_clipboard_format_ownership.py",
-    " D test/adapter-mvdm-host-out/wow/verify_keyboard_boundaries.py",
+    " D test/integration/verify-dlc-worker-event.ps1",
+    " D test/integration/verify-redir-async-queue.ps1",
+    " D test/integration/verify-redirector-loader.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/wow-host-contracts.cmake",
-    "?? docs/etc/evidence/t484-s3-controlled-boundaries.md",
-    "?? test/adapter-mvdm-host-out/wow/verify-controlled-boundaries.ps1"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s3-redir-contracts.md",
+    "?? test/integration/verify-redir-contracts.ps1",
+    "?? tools/build/fixtures/redir-contracts.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6489,6 +6493,12 @@
     }
   ],
   "commits": {
+    "f4da4ba070a70d31e916fc5e624fae9e36dcae41": {
+      "subject": "M0 T484 S3 P200: consolidate controlled WOW boundary producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-controlled-boundaries.md"
+      ]
+    },
     "e2c5334a4a1d39b4ffd0f696b43c1aaceef06852": {
       "subject": "M0 T484 S3 P199: reconcile missed producers and migrate packet tests",
       "evidence": [

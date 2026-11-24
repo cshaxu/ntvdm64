@@ -46,7 +46,8 @@ Original vrdll process detach still owns VrUninitialize and DLC cleanup.
 
 [Loader test](../../../test/integration/redirector_loader_test.c),
 [native test DLL](../../../test/integration/redirector_loader_dll.c), and
-[runner](../../../test/integration/verify-redirector-loader.ps1).
+historical runner `test/integration/verify-redirector-loader.ps1` (retired by
+[T484 consolidation](t484-s3-redir-contracts.md); the following records its historical run).
 The runner extracts the exact DefaultVrInitialized-through-LoadVdmRedir owner
 (including MS_bop_7) from baseline/current source; selected release conditionals
 are retained. Test seams supply register storage and host API failure points.
