@@ -330,7 +330,7 @@ try {
                     }
                 }
             }else{throw 'Control gate requires the retained Terminal observer'}
-            Invoke-Gate 'modern-edit-return' {& "$repo/test/integration/verify-command-native-edit-return.ps1" -Observer $observerPath -PackageRoot $sourceRuntime -ReportPath "$log/modern-edit.txt"}
+            Invoke-Gate 'modern-edit-return' {& "$repo/test/integration/verify-command-native-edit-return.ps1" -Observer $observerPath -PackageRoot $sourceRuntime -ReportPath "$log/modern-edit.txt" -LogonEnvironment}
             Invoke-Gate 'cooked-return' {& "$repo/test/integration/verify-frontend-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/cooked-return.txt"}
             Invoke-Gate 'rapid-relaunch' {& "$repo/test/integration/verify-frontend-rapid-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/rapid.txt"}
             Invoke-Gate 'interactive-relaunch' {& "$repo/test/integration/verify-frontend-rapid-interactive.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/interactive.txt"}

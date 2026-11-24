@@ -1,13 +1,17 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "2ceb203efe741805341ab4970db713f31f1234e6",
+  "head": "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636",
   "worktree_status": [
+    " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/t484-s3-early-deliveries.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
-    " M test/integration/ntvdm64-386/verify-win95-identity.ps1",
-    "?? docs/etc/evidence/t484-s3-runtime-tool-path.md"
+    " D test/integration/ntvdm64-386/verify-title-native.ps1",
+    " M test/integration/verify-command-native-edit-return.ps1",
+    " M test/integration/verify-win16-ddeml-probe.ps1",
+    " D test/observation/optical_native_toc.ps1",
+    " D test/observation/verify-logon-token-lifetime.ps1",
+    " M tools/audit/Invoke-ProductVerification.ps1",
+    "?? docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -509,13 +513,16 @@
       "state": "changed",
       "current_sha256": "62ec29ed9adec1834a2b579a552af1f835f3c89cda6311f3dbac77559e8c6e3e",
       "revisions": [
+        "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636",
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "dca9832679063ea8f8485fc990c18df9adc8d959",
         "7e89114b14c4199b138033c3352b530105f8c7fb"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-controller-paths.md",
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
         "docs/etc/evidence/t484-s3-pif-memory.md",
+        "docs/etc/evidence/t484-s3-runtime-tool-path.md",
         "docs/etc/evidence/t484-s3-win95-editor.md"
       ],
       "completion": "pending-producer-migration",
@@ -532,6 +539,7 @@
       "state": "changed",
       "current_sha256": "9eda3b245ce5ffa24e9f8425be8f14ef032a49a159c9730ef36b0947ae70713a",
       "revisions": [
+        "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636",
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
         "dca9832679063ea8f8485fc990c18df9adc8d959",
@@ -539,8 +547,10 @@
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-controller-paths.md",
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
         "docs/etc/evidence/t484-s3-identity-fields.md",
         "docs/etc/evidence/t484-s3-pif-memory.md",
+        "docs/etc/evidence/t484-s3-runtime-tool-path.md",
         "docs/etc/evidence/t484-s3-vm-identity.md"
       ],
       "completion": "pending-producer-migration",
@@ -869,7 +879,7 @@
       "file": "test/integration/verify-win16-ddeml-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "2def78d61b6ca2b5059ab5b2b63baec4862166f7771eaa4968d71c2e91a22fd3",
+      "current_sha256": "ef3a7dc674355138446f490fc74f1645bd06a78bb77d83a7cc1308139a814406",
       "revisions": [
         "67be6eea19e7f52c3b1203ce11437dfc809d4a0c",
         "cde4bc13ce1f390f73ed22f074cc2d1607cc5521"
@@ -4067,7 +4077,7 @@
       "file": "tools/audit/Invoke-ProductVerification.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "677420ef8fc6fcdd1fa1f3cff53d0b1fe602f048ec931625865eb85dc7dc017e",
+      "current_sha256": "58b5d0d5a63cdaa94727b829599a6c71a9f661d50b1855ff692a1b29fa21fb68",
       "revisions": [
         "a9553db754706abe3567c5b60878b7445478bb1c",
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
@@ -6513,6 +6523,13 @@
     }
   ],
   "commits": {
+    "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636": {
+      "subject": "M0 T484 S3 P214: remove obsolete runtime compiler lookups",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-runtime-tool-path.md"
+      ]
+    },
     "2ceb203efe741805341ab4970db713f31f1234e6": {
       "subject": "M0 T484 S3 P213: retire isolated historical runtime staging",
       "evidence": [
@@ -8282,15 +8299,15 @@
       "file": "test/integration/verify-win16-ddeml-probe.ps1",
       "hits": [
         {
-          "line": 36,
+          "line": 35,
           "text": "$assembler=(Get-Command nasm.exe).Source"
         },
         {
-          "line": 40,
+          "line": 39,
           "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/guest-probes/win16/$variant.EXE\" \"$root/$probe.EXE\""
         },
         {
-          "line": 53,
+          "line": 52,
           "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]

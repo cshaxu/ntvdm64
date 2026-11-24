@@ -1899,3 +1899,5 @@ post-publication targeted checks.
 [T484 S3 original staging retirement](evidence/t484-s3-original-stage-retirement.md) records retirement of an isolated historical staging chain and current media verification.
 
 - [T484 S3 runtime compiler lookup cleanup](evidence/t484-s3-runtime-tool-path.md).
+
+- [T484 S3 inline compiler retirement](evidence/t484-s3-dynamic-compiler-retirement.md).

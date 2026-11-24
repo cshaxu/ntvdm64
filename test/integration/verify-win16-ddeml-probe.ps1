@@ -1,7 +1,6 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
- [string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
  [ValidateSet('init','register')][string]$Case='init',
  [Parameter(Mandatory)][string]$DdemlImage,

@@ -1,4 +1,24 @@
 {
+  "test/integration/ntvdm64-386/verify-title-native.ps1": {
+    "status": "supplemental-retired",
+    "reason": "P215 retires uncalled inline-C# title sampler; current native console_title_native_test retains title/capacity/empty/child observations. Old AB sampling is not separately asserted.",
+    "evidence": "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md"
+  },
+  "test/observation/optical_native_toc.ps1": {
+    "status": "supplemental-retired",
+    "reason": "P215 retires uncalled ad-hoc physical-drive TOC dump, not a regression assertion. Current original MSCDEX optical cases and ExpectedOpticalFrames input remain; no new optical pass claimed.",
+    "evidence": "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md"
+  },
+  "test/observation/verify-logon-token-lifetime.ps1": {
+    "status": "supplemental-retired",
+    "reason": "P215 retires historical C# WindowsIdentity/GC lifetime reproducer; current native Userenv reader owns and closes its token synchronously. Historical evidence is retained, not reinterpreted as native coverage.",
+    "evidence": "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md"
+  },
+  "test/integration/verify-command-native-edit-return.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "P215 replaces optional external C# compilation with the shared CMD-built native logon environment reader. Default inherited environment and runtime assertions remain; common staging remains S4.",
+    "evidence": "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md"
+  },
   "tools/build/Stage-OriginalSoftpcRuntime.mjs": {
     "status": "retired-with-delivery-evidence",
     "reason": "P213 removes obsolete single-worker staging with only a self-test caller; current coherent package and immutable guest manifest gate remain.",

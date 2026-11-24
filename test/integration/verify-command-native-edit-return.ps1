@@ -3,7 +3,7 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$ReportPath,
-    [string]$LogonHelper
+    [switch]$LogonEnvironment
 )
 $ErrorActionPreference='Stop'
 if($env:MVDM_OBSERVER_WINDOW_INPUT){
@@ -34,13 +34,14 @@ try {
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false
     $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
-    if($LogonHelper){
-        # Same complete Userenv block used by the immutable-guest fixtures.
+    if($LogonEnvironment){
+        # Reuse the same complete native Userenv reader as the WOW fixtures.
         # Inherited developer environments remain a separate explicit case.
-        Add-Type -Path (Resolve-Path $LogonHelper).Path
-        $identity=[Security.Principal.WindowsIdentity]::GetCurrent()
-        try{$entries=[WowMessageLogonEnvironment]::Read($identity.Token)}
-        finally{$identity.Dispose()}
+        $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+        & "$repo/tools/build-fixtures.cmd" x64 logon-environment *> ($ReportPath+'.environment-build.log')
+        if($LASTEXITCODE){throw 'Native environment reader build failed'}
+        . "$PSScriptRoot/../observation/logon-environment.ps1"
+        $entries=Read-TestLogonEnvironment "$repo/build/.ninja/fixtures-x64/logon-environment.exe" ($ReportPath+'.environment-process.json')
         $start.EnvironmentVariables.Clear()
         foreach($entry in $entries){
             $at=$entry.IndexOf('=',1)
