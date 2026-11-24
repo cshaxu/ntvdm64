@@ -125,29 +125,34 @@ try{
  $target=if($NativeHost){'win16-message-guest'}else{'win16-message'}
  Invoke-MessageProducer build x86 $target $mask
  $cache="$repo/build/.ninja/fixtures-x86/guest-probes/message/$mask"
- Copy-Item "$cache/MSGSEND.EXE","$cache/MSGRECV.EXE","$cache/SEND.lst","$cache/RECV.lst" $root
+ $copyArgs=@($root,"$cache/MSGSEND.EXE",'MSGSEND.EXE',"$cache/MSGRECV.EXE",'MSGRECV.EXE',"$cache/SEND.lst",'SEND.lst',"$cache/RECV.lst",'RECV.lst')
  if($NativeHost){
   foreach($image in @($ExternalNativePeer,$NativeHost,$CrossWorkerCoordinator)|Where-Object {$_}){
    $path=(Resolve-Path $image).Path
    if(!$path.StartsWith((Join-Path $repo 'build/.ninja')+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'External peer/host must come from stable Ninja fixture targets'}
   }
-  Copy-Item $NativeHost "$root/MSGHOST.DLL"
+  $copyArgs+=@($NativeHost,'MSGHOST.DLL')
   if($CrossWorkerCoordinator){
-   Copy-Item $CrossWorkerCoordinator "$root/MSGXHOST.EXE"
+   $copyArgs+=@($CrossWorkerCoordinator,'MSGXHOST.EXE')
    Get-FileHash $CrossWorkerCoordinator,"$PSScriptRoot/../observation/wow_cross_worker_probe.c"|Export-Csv -NoTypeInformation "$root/cross-worker-inputs.csv"
   }
   if($ExternalNativePeer){
-  Copy-Item $ExternalNativePeer "$root/MSGPEER.EXE"
-  $externalBytes=[IO.File]::ReadAllBytes("$root/MSGPEER.EXE")
+  $copyArgs+=@($ExternalNativePeer,'MSGPEER.EXE')
+  $externalBytes=[IO.File]::ReadAllBytes((Resolve-Path $ExternalNativePeer).Path)
   $externalMachine=[BitConverter]::ToUInt16($externalBytes,[BitConverter]::ToInt32($externalBytes,0x3c)+4)
   if($externalMachine -notin @(0x14c,0x8664)){throw 'Wrong external peer PE machine'}
   }
  }else{
- Copy-Item "$cache/MSGHOST.DLL","$cache/MSGHOST.lib" $root
+ $copyArgs+=@("$cache/MSGHOST.DLL",'MSGHOST.DLL',"$cache/MSGHOST.lib",'MSGHOST.lib')
  }
+ & "$repo/tools/prepare-test-inputs.cmd" @copyArgs
+ if($LASTEXITCODE){throw 'Message input preparation failed'}
  Get-FileHash $assembly,$native,$PSCommandPath,"$root/MSGSEND.EXE","$root/MSGRECV.EXE","$root/MSGHOST.DLL"|Export-Csv -NoTypeInformation "$root/probe-inputs.csv"
  if($ReplyPayloadLifetime){Get-FileHash "$PSScriptRoot/../observation/wow_reply_payload_lifetime.h","$PSScriptRoot/../observation/wow_reply_payload_report.ps1"|Export-Csv -NoTypeInformation "$root/reply-source-inputs.csv"}
- $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
+ $testInputs=@("$root/MSGSEND.EXE","$root/MSGRECV.EXE","$root/MSGHOST.DLL")
+ if($CrossWorkerCoordinator){$testInputs+="$root/MSGXHOST.EXE"}
+ if($ExternalNativePeer){$testInputs+="$root/MSGPEER.EXE"}
+ $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -TestFiles $testInputs
  $scope=New-IsolatedPackageScope $runtime
  if($NetworkDriver -ne 'Package'){
   $profile=Join-Path $runtime 'system.ini'
@@ -166,12 +171,10 @@ try{
   [IO.File]::WriteAllBytes($profile,[Text.Encoding]::Latin1.GetBytes($text))
   @{selection=$NetworkDriver;profileHash=(Get-FileHash $profile).Hash;scope='Fresh isolated runtime configuration; original guest bytes unchanged'}|ConvertTo-Json|Set-Content "$root/network-profile.json"
  }
- $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force
+ $tests=Join-Path $runtime 'tests'
  if($ExternalNativePeer){$scope.Paths+=Join-Path $tests 'MSGPEER.EXE'}
  if($CrossWorkerCoordinator){$scope.Paths+=Join-Path $tests 'MSGXHOST.EXE'}
- Copy-Item "$root/MSGSEND.EXE","$root/MSGRECV.EXE","$root/MSGHOST.DLL" $tests
- if($CrossWorkerCoordinator){Copy-Item "$root/MSGXHOST.EXE" $tests}
- if($ExternalNativePeer){Copy-Item "$root/MSGPEER.EXE" $tests;Get-FileHash "$root/MSGPEER.EXE"|Export-Csv -NoTypeInformation "$root/external-peer-input.csv"}
+ if($ExternalNativePeer){Get-FileHash "$root/MSGPEER.EXE"|Export-Csv -NoTypeInformation "$root/external-peer-input.csv"}
  Get-ChildItem "$runtime/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','KRNL386.EXE','USER.EXE','GDI.EXE')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
  @{machine='x86';cpu='original SoftPC CCPU40';guest='unchanged original package plus independent NE probes'}|ConvertTo-Json|Set-Content "$root/profile.json"
  # Complete supported logon environment, not a hand-picked variable allowlist.

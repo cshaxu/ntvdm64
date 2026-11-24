@@ -256,9 +256,9 @@
     "status": "migrated-delivered"
   },
   "test/integration/verify-win16-message-probe.ps1": {
-    "evidence": "docs/etc/evidence/t484-s3-message-environment.md",
-    "reason": "CMD message and shared native environment producers; real basic and structured/client-view groups pass; duplicated C# compilation removed",
-    "status": "migrated-delivered"
+    "evidence": "docs/etc/evidence/t484-s4-external-message-preparation.md",
+    "reason": "S4 transitive review reopens completion: native producers are delivered, but optional Empty/WfwNet profile preparation still writes system.ini in PowerShell. Real retained coverage is documented by T483 S3 batch9; do not retire it merely for lacking a suite caller. CMD input staging and three actual message groups pass in P29; the optional profile writer remains pending.",
+    "status": "pending-producer-migration"
   },
   "test/integration/verify-win16-print-probe.ps1": {
     "status": "migrated-delivered",
@@ -322,9 +322,9 @@
     "evidence": "docs/etc/evidence/t484-s3-edit-contracts.md"
   },
   "test/integration/verify-wow-external-native.ps1": {
-    "evidence": "docs/etc/evidence/t484-s3-external-current-package.md",
-    "status": "pending-producer-migration",
-    "reason": "P167 actual local/external x86/x64 groups pass with current11-image manifest; native producers complete, default archive/package assembly still awaits S4"
+    "evidence": "docs/etc/evidence/t484-s4-external-message-preparation.md",
+    "status": "migrated-delivered",
+    "reason": "CMD default release preparation; actual ordinary, cross-worker and pending-send groups pass including native destruction and expected nonblocking failure. Optional child network-profile preparation is tracked separately and remains pending."
   },
   "test/integration/verify-wow-file-cache.ps1": {
     "status": "migrated-delivered",

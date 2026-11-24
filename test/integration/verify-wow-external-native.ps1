@@ -81,14 +81,14 @@ try{
    }
    $manifestHash|Export-Csv -NoTypeInformation "$root/candidate-manifest.csv"
   }else{
-   [IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $repo 'assets/winnt.zip'),"$root/media")
+   Run-Owned prepare-package $env:ComSpec @('/d','/s','/c',('""'+$repo+'/tools/prepare-wow-diagnostic.cmd" "'+$root+'/media" "'+$repo+'/assets/release""')) 120
    $package="$root/media/WINNT"
    $manifest=Get-Content assets/release/release-manifest.json -Raw|ConvertFrom-Json
    if($manifest.Count -ne $expectedNames.Count -or @($manifest.name|Sort-Object -Unique).Count -ne $manifest.Count){throw 'Need coherent current release manifest'}
    foreach($image in $manifest){
     $source=Join-Path $repo "assets/release/$($image.name)"
     if((Get-FileHash $source).Hash -ne $image.sha256){throw 'Release identity mismatch'}
-    Copy-Item $source "$package/SYSTEM32/$($image.name)" -Force
+    if((Get-FileHash "$package/SYSTEM32/$($image.name)").Hash -ne $image.sha256){throw 'Prepared release identity mismatch'}
    }
   }
   $observer=Join-Path $repo 'build/.ninja/msvc-x64-release/message-probes/console-startup-observer.exe'

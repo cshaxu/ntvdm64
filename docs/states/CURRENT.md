@@ -29,6 +29,8 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
+S4 P29 completes default external-message package preparation and shared input copying; [evidence](../etc/evidence/t484-s4-external-message-preparation.md) records cached full build, package contracts, three real groups and unchanged dual publication. The child's optional PowerShell network-profile writer is reopened. One closure and one correction leave345/355,10 pending; supplemental5.
+
 S4 P28 completes Clipboard preparation; [evidence](../etc/evidence/t484-s4-clipboard-preparation.md) records cached full build, shared native-peer contracts, six real cases and frozen reuse after RDP recovery, with unchanged dual publication. Frozen345/355,10 pending; supplemental5.
 
 S4 P27 completes native-output staging and EDIT preparation reconciliation; [evidence](../etc/evidence/t484-s4-native-output-preparation.md) separates passed cached build/staging/EDIT from the retained historical concurrent-output failure. No product repair or all-pass claim. Frozen344/355,11 pending; supplemental6 to5.

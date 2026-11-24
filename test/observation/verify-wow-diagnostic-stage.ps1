@@ -9,8 +9,9 @@ $tool="$repo/build/.ninja/build-tools/prepare-wow-diagnostic.cmd"
 $images="$repo/assets/release"
 $worker="$repo/build/.ninja/msvc-x86-release/worker"
 $wow="$repo/build/.ninja/msvc-x86-release/wow32"
-function Invoke-Case($name,$output,$inputImages,$diagnostic,$success){
- $line='/d /s /c ""'+$tool+'" "'+$output+'" "'+$inputImages+'" "'+$worker+'" "'+$wow+'"'
+function Invoke-Case($name,$output,$inputImages,$diagnostic,$success,$releaseOnly=$false){
+ $line='/d /s /c ""'+$tool+'" "'+$output+'" "'+$inputImages+'"'
+ if(!$releaseOnly){$line+=' "'+$worker+'" "'+$wow+'"'}
  if($diagnostic){$line+=' "'+$diagnostic+'"'}
  $line+='"'
  $p=Start-Process $env:ComSpec -ArgumentList $line -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt"
@@ -25,6 +26,9 @@ Invoke-Case normal "$root/package" $images '' $true
 $manifest=@(Get-Content "$images/release-manifest.json" -Raw|ConvertFrom-Json)
 foreach($row in $manifest){if((Get-FileHash "$root/package/WINNT/system32/$($row.Name)").Hash -ne $row.Sha256){throw 'Published identity changed'}}
 foreach($pair in @(@('ntvdm.exe',$worker),@('wow32.dll',$wow))){if((Get-FileHash "$root/package/WINNT/system32/$($pair[0]).map").Hash -ne (Get-FileHash "$($pair[1])/$($pair[0]).map").Hash){throw 'MAP copy changed'}}
+Invoke-Case release-only "$root/release-only" $images '' $true $true
+foreach($row in $manifest){if((Get-FileHash "$root/release-only/WINNT/system32/$($row.Name)").Hash -ne $row.Sha256){throw 'Release-only image changed'}}
+if(Test-Path "$root/release-only/WINNT/system32/ntvdm.exe.map"){throw 'Release-only stage introduced a symbol dependency'}
 $before=Get-FileHash "$root/package/prepared.txt"
 Invoke-Case existing "$root/package" $images '' $false
 if((Get-FileHash $before.Path).Hash -ne $before.Hash){throw 'Rejected existing output changed'}

@@ -1,15 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "27b6984b84231813c7221dd841a8205032f4e309",
+  "head": "9fcf67eee0f6be324819a4ec9972b3107d2e91f5",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/Test-PackageIdentityTool.ps1",
-    " M test/integration/verify-wow-clipboard-transfer.ps1",
-    " M test/observation/isolated_package_cleanup.ps1",
-    " M tools/build/native/stage-runtime.cmd.in",
-    "?? docs/etc/evidence/t484-s4-clipboard-preparation.md"
+    " M test/integration/verify-win16-message-probe.ps1",
+    " M test/integration/verify-wow-external-native.ps1",
+    " M test/observation/verify-wow-diagnostic-stage.ps1",
+    " M tools/build/native/prepare-wow-diagnostic.cmd.in",
+    "?? docs/etc/evidence/t484-s4-external-message-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -933,7 +933,7 @@
       "file": "test/integration/verify-win16-message-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "dbfd3ad888b9b422e99578b4b141e6013894144e4461649ecdfa820a0bafd27c",
+      "current_sha256": "c53283370f0c6dcfbc799024a222f31dd73b75c4eae8925882d2800313fa2c98",
       "revisions": [
         "1b82395128bdb2a5b560db109c17e8129e5490b1",
         "5df3ff0953f75bbc68a509819ef6d44a6a7515bc"
@@ -942,11 +942,11 @@
         "docs/etc/evidence/t484-s3-message-environment.md",
         "docs/etc/evidence/t484-s3-message-probes.md"
       ],
-      "completion": "migrated-delivered",
+      "completion": "pending-producer-migration",
       "decision": {
-        "evidence": "docs/etc/evidence/t484-s3-message-environment.md",
-        "reason": "CMD message and shared native environment producers; real basic and structured/client-view groups pass; duplicated C# compilation removed",
-        "status": "migrated-delivered"
+        "evidence": "docs/etc/evidence/t484-s4-external-message-preparation.md",
+        "reason": "S4 transitive review reopens completion: native producers are delivered, but optional Empty/WfwNet profile preparation still writes system.ini in PowerShell. Real retained coverage is documented by T483 S3 batch9; do not retire it merely for lacking a suite caller. CMD input staging and three actual message groups pass in P29; the optional profile writer remains pending.",
+        "status": "pending-producer-migration"
       }
     },
     {
@@ -1116,10 +1116,12 @@
       "state": "changed",
       "current_sha256": "10c69166824c3ac570f7d821008b1e60d27c8b27f6749afe120ba0ec32c27775",
       "revisions": [
+        "9fcf67eee0f6be324819a4ec9972b3107d2e91f5",
         "edafa6e51575c0fc4e40b0c20f6528b8918f71f3"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-clipboard-probes.md"
+        "docs/etc/evidence/t484-s3-clipboard-probes.md",
+        "docs/etc/evidence/t484-s4-clipboard-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -1190,7 +1192,7 @@
       "file": "test/integration/verify-wow-external-native.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "4a4a5368e8f35751a4efe8652b071d075d1f25fc032140bae1434f2386330e3d",
+      "current_sha256": "cefdb9997506ee6af24f954019d9ecae2805719adc67bff2a65e2a358a3ceed4",
       "revisions": [
         "f1d9ffb1a2ae7bc39274153b6ae42773109650bb",
         "abf51648b9e86a9ac09915335363210685ae9797"
@@ -1199,11 +1201,11 @@
         "docs/etc/evidence/t484-s3-external-current-package.md",
         "docs/etc/evidence/t484-s3-message-groups.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "evidence": "docs/etc/evidence/t484-s3-external-current-package.md",
-        "status": "pending-producer-migration",
-        "reason": "P167 actual local/external x86/x64 groups pass with current11-image manifest; native producers complete, default archive/package assembly still awaits S4"
+        "evidence": "docs/etc/evidence/t484-s4-external-message-preparation.md",
+        "status": "migrated-delivered",
+        "reason": "CMD default release preparation; actual ordinary, cross-worker and pending-send groups pass including native destruction and expected nonblocking failure. Optional child network-profile preparation is tracked separately and remains pending."
       }
     },
     {
@@ -2054,6 +2056,7 @@
       "state": "changed",
       "current_sha256": "fe62f13ae6d98d55ae04a764d8c98fdaf74024a5ad35e34ce9e66e32d179835e",
       "revisions": [
+        "9fcf67eee0f6be324819a4ec9972b3107d2e91f5",
         "27b6984b84231813c7221dd841a8205032f4e309",
         "000da3d05a87ac283b1762cf9d9bf6a21268a2a1",
         "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a",
@@ -2065,6 +2068,7 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-identity-reader.md",
+        "docs/etc/evidence/t484-s4-clipboard-preparation.md",
         "docs/etc/evidence/t484-s4-device-inputs.md",
         "docs/etc/evidence/t484-s4-fcb-preparation.md",
         "docs/etc/evidence/t484-s4-native-output-preparation.md",
@@ -6624,6 +6628,12 @@
     }
   ],
   "commits": {
+    "9fcf67eee0f6be324819a4ec9972b3107d2e91f5": {
+      "subject": "M0 T484 S4 P28: complete Clipboard CMD preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-clipboard-preparation.md"
+      ]
+    },
     "27b6984b84231813c7221dd841a8205032f4e309": {
       "subject": "M0 T484 S4 P27: complete native output CMD preparation",
       "evidence": [
@@ -8610,7 +8620,7 @@
           "text": "if(!$path.StartsWith((Join-Path $repo 'build/.ninja')+'\\',[StringComparison]::OrdinalIgnoreCase)){throw 'External peer/host must come from stable Ninja fixture targets'}"
         },
         {
-          "line": 181,
+          "line": 184,
           "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]

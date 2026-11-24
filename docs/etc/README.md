@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T484 S4 external message preparation](evidence/t484-s4-external-message-preparation.md) records shared CMD release preparation, three real groups and reopened network-profile preparation.
+
 [T484 S4 Clipboard preparation](evidence/t484-s4-clipboard-preparation.md) records CMD native-peer staging, six real cases, frozen-input reuse and retained failed attempts.
 
 [T484 S4 native output and EDIT preparation](evidence/t484-s4-native-output-preparation.md) records CMD staging, the retained concurrent-output failure and passing EDIT return.

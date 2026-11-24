@@ -1,13 +1,18 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
-rem output, released images, worker build, WOW build, optional diagnostic image
-if "%~4"=="" exit /b 2
+rem output, released images, optional paired worker/WOW builds and diagnostic image
+if "%~2"=="" exit /b 2
 if not "%~6"=="" exit /b 2
+if not "%~3"=="" if "%~4"=="" exit /b 2
+if "%~3"=="" if not "%~4"=="" exit /b 2
+if "%~4"=="" if not "%~5"=="" exit /b 2
 set "repo=@NTVDM_STAGE_REPO@"
 set "output=%~f1"
 set "images=%~f2"
-set "worker=%~f3"
-set "wow=%~f4"
+set "worker="
+set "wow="
+if not "%~3"=="" set "worker=%~f3"
+if not "%~4"=="" set "wow=%~f4"
 set "diagnostic="
 if not "%~5"=="" set "diagnostic=%~f5"
 set "walk=%output%"
@@ -19,8 +24,8 @@ set "walk=%parent%"
 goto within
 :validate
 if exist "%output%" exit /b 2
-if not exist "%worker%\ntvdm.exe.map" exit /b 2
-if not exist "%wow%\wow32.dll.map" exit /b 2
+if defined worker if not exist "%worker%\ntvdm.exe.map" exit /b 2
+if defined wow if not exist "%wow%\wow32.dll.map" exit /b 2
 if not defined diagnostic goto prepare
 for %%I in ("%diagnostic%") do set "name=%%~nxI"
 set "known="
@@ -38,9 +43,9 @@ for /f "usebackq tokens=1-5" %%A in ("%output%\images.rows") do (
  set "uuid=%%C"
  call :check "%images%\%%A" "%%D"
  if errorlevel 1 goto fail
- if /i "%%A"=="ntvdm.exe" call :check "%worker%\%%A" "%%E"
+ if defined worker if /i "%%A"=="ntvdm.exe" call :check "%worker%\%%A" "%%E"
  if errorlevel 1 goto fail
- if /i "%%A"=="WOW32.DLL" call :check "%wow%\%%A" "%%E"
+ if defined wow if /i "%%A"=="WOW32.DLL" call :check "%wow%\%%A" "%%E"
  if errorlevel 1 goto fail
 )
 pushd "%output%" || goto fail
@@ -53,8 +58,10 @@ for /f "usebackq tokens=1" %%A in ("%output%\images.rows") do (
  copy /b /y "%images%\%%A" "%output%\WINNT\system32\%%A" >nul
  if errorlevel 1 goto fail
 )
-copy /b "%worker%\ntvdm.exe.map" "%output%\WINNT\system32\ntvdm.exe.map" >nul || goto fail
-copy /b "%wow%\wow32.dll.map" "%output%\WINNT\system32\wow32.dll.map" >nul || goto fail
+if defined worker copy /b "%worker%\ntvdm.exe.map" "%output%\WINNT\system32\ntvdm.exe.map" >nul
+if errorlevel 1 goto fail
+if defined wow copy /b "%wow%\wow32.dll.map" "%output%\WINNT\system32\wow32.dll.map" >nul
+if errorlevel 1 goto fail
 if not defined diagnostic goto done
 copy /b /y "%diagnostic%" "%output%\WINNT\system32\%name%" >nul || goto fail
 copy /b /y "%diagnostic%.map" "%output%\WINNT\system32\%name%.map" >nul || goto fail
