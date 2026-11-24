@@ -58,9 +58,9 @@ if ($Case -eq 'task-close-result') {
     $result
     return
 }
-$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime','process-retirement','init-notification','native-dispatch-gate','window-procedure','window-borrow','graph-snapshot','standard-class','class-procedure','native-creation','window-reclaim','menu-resource') -and !$CreationUnwind -and !$InitRollback -and !$RetirementLockProbe -and !$OriginalModalOnly -and !$InitialPublicationOnly
+$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime','process-retirement','init-notification','native-dispatch-gate','window-procedure','window-borrow','graph-snapshot','standard-class','class-procedure','native-creation','window-reclaim','menu-resource') -and !$RetirementLockProbe -and !$OriginalModalOnly -and !$InitialPublicationOnly
 if($nativeCase){
-    $kind=if($Case -eq 'task-lifecycle'){'task'}else{$Case}
+    $kind=if($CreationUnwind){'creation-unwind'}elseif($InitRollback){'init-rollback'}elseif($Case -eq 'task-lifecycle'){'task'}else{$Case}
     & "$repo/tools/build-fixtures.cmd" x86 "wow-lifecycle-$kind" *> "$out/build.log"
     if($LASTEXITCODE){throw 'Native lifecycle graph failed'}
     Copy-Item "$repo/build/.ninja/msvc-x86-release/wow32/lifecycle-$kind.exe" "$out/fixture.exe"
@@ -265,16 +265,14 @@ if ($InitialPublicationOnly) {
     Invoke-NinjaTarget $provider 'obj/compat/wow_user_registration_bridge.obj'
     $fixtureName = 'wow_init_notification_fixture.c'
 }
-if ($Case -eq 'native-creation') { $fixtureName = 'wow_native_creation_binding_fixture.c' }
+
 $fixturePath = Join-Path $repo ('test/adapter-mvdm-host-out/wow/' + $fixtureName)
 if ($Case -in @('window-borrow')) { $fixturePath = Join-Path $repo 'test/mvdm-host/wow_page_domain_fixture.c' }
-if ($Case -eq 'native-creation') { $fixturePath = Join-Path $repo 'test/mvdm-host/wow_page_domain_fixture.c' }
 
 $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\fixture.obj" "'+$fixturePath+'"')
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
-if ($InitRollback) { $fixture += ' /DWOW_INIT_ROLLBACK_FIXTURE' }
+
 if ($RetirementLockProbe) { $fixture += ' /DWOW_RETIREMENT_LOCK_PROBE' }
-if ($Case -eq 'native-creation') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_NATIVE_CREATION_FIXTURE' }
 
 if ($OriginalModalOnly) { $fixture += ' /DWOW_ORIGINAL_MODAL_FIXTURE' }
 if ($InitialPublicationOnly) { $fixture += ' /DWOW_INITIAL_PUBLICATION_FIXTURE' }
@@ -305,18 +303,8 @@ if ($RealDialogLifecycleOnly) {
     $parentObjects += Join-Path $out 'dialog-page-faults.obj'
 }
 
-if ($Case -eq 'native-creation') {
-    # Real CCPU session/storage setup is shared with the page-domain fixture;
-    # publication may not be replaced by a success-only parent stub.
-    $creationFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\native-creation.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_native_creation_binding_fixture.c"')
-    if ($creationFixture -eq $compile) { throw 'Native creation substitution failed' }
-    $creationFlags = ' /Dmain=wow_native_creation_fixture'
-    if ($CreationUnwind) { $creationFlags += ' /DWOW_CREATION_UNWIND_FIXTURE' }
-    Invoke-Build ($creationFixture.Replace('/Gz', '/Gd') + $creationFlags)
-    $parentObjects += Join-Path $out 'native-creation.obj'
-}
 
-if ($Case -notin @('window-borrow','native-creation')) {
+if ($Case -notin @('window-borrow')) {
 $parentStub = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\parent-stub.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_page_domain_parent_stub.c"')
 if ($parentStub -eq $compile) { throw 'Parent-stub substitution failed' }
 $parentStub += ' /DWOW_TASK_CLASS_PROJECTION_FIXTURE'
@@ -533,30 +521,7 @@ $redirObjects = @($objects | Where-Object { $_ -match '[/\\]wkfileio\.obj$' })
 if ($redirObjects.Count -ne 1) { throw 'Expected exactly one provider redirector state owner' }
 $objects = @($objects | Where-Object { $_ -notin $redirObjects })
 $objects += Join-Path $out 'provider-wkfileio.obj'
-if ($CreationUnwind) {
-    # Same production translation unit, only native-create/terminal leaves
-    # are wrapped in this separate fault row. Normal native-creation is intact.
-    $creationCompile = $commands | Where-Object { $_ -match 'wow_window_creation_binding\.c$' } | Select-Object -Last 1
-    if (!$creationCompile) { throw 'Missing production creation compile command' }
-    $unwindCompile = $creationCompile -replace '/Fo\S+\s+\S+wow_window_creation_binding\.c$', ('/Fo"'+$out+'\creation-unwind.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_creation_unwind_injection.c"')
-    if ($unwindCompile -eq $creationCompile) { throw 'Creation unwind substitution failed' }
-    Invoke-Build $unwindCompile
-    $originalCreationObjects = @($objects | Where-Object { $_ -match '[\\/]compat[\\/]wow_window_creation_binding\.obj$' })
-    if ($originalCreationObjects.Count -ne 1) { throw 'Expected exactly one production creation owner' }
-    $objects = @($objects | Where-Object { $_ -notin $originalCreationObjects })
-    $parentObjects += Join-Path $out 'creation-unwind.obj'
-}
-if ($InitRollback) {
-    $queueCompile = $commands | Where-Object { $_ -match '/kernel/queue\.c$' } | Select-Object -Last 1
-    if (!$queueCompile) { throw 'Missing original InitTask compile command' }
-    $queueFixture = $queueCompile -replace '/Fo\S+\s+\S+queue\.c$', ('/Fo"'+$out+'\init-allocation.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_init_allocation_fixture.c"')
-    $releaseFixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\init-release.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_init_release_fixture.c"')
-    if ($queueFixture -eq $queueCompile -or $releaseFixture -eq $compile) { throw 'Init fixture substitution failed' }
-    Invoke-Build $queueFixture
-    Invoke-Build $releaseFixture
-    $objects = @($objects | Where-Object { $_ -notmatch '[\\/]opennt-user[\\/]queue\.obj$|[\\/]compat[\\/]wow_user_task_lifecycle\.obj$' })
-    $parentObjects += @("$out/init-allocation.obj", "$out/init-release.obj")
-}
+
 & $lib /nologo "/out:$out\provider.lib" @objects >> "$out\build.log" 2>&1
 if ($LASTEXITCODE) { throw 'Provider archive failed' }
 # Duplicate providers invalidate the claimed production-owner selection.

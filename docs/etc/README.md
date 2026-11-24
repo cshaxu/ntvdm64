@@ -1741,3 +1741,4 @@ post-publication targeted checks.
 - [T484 S3 native dispatch and page producers](evidence/t484-s3-lifecycle-pages.md)
 - [T484 S3 creation and reclaim producers](evidence/t484-s3-lifecycle-creation.md)
 - [T484 S3 menu producer and page consolidation](evidence/t484-s3-lifecycle-menu.md)
+- [T484 S3 initialization and creation failure producers](evidence/t484-s3-lifecycle-faults.md)

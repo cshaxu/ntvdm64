@@ -970,7 +970,7 @@
   },
   "test/observation/verify-wow-task-lifecycle.ps1": {
     "status": "requires-disposition-reconciliation",
-    "reason": "Partial:28 native normal cases plus1 consolidated page-domain alias; dialog-lifecycle and fault variants retain old producer; old menu extractor retired, no file completion credit",
-    "evidence": "docs/etc/evidence/t484-s3-lifecycle-menu.md"
+    "reason": "Partial:28 native normal cases plus1 consolidated alias; InitRollback/CreationUnwind native; dialog-lifecycle and7 other fault switches retain old producer; obsolete branches retired, no file completion credit",
+    "evidence": "docs/etc/evidence/t484-s3-lifecycle-faults.md"
   }
 }
