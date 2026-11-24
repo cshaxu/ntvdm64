@@ -76,6 +76,22 @@ worker_unit("obj/tests/ccpu-notification.obj"
 worker_link("ccpu-notification.exe" "/nologo /out:$out" "kernel32.lib"
   INPUTS "obj/tests/ccpu-notification.obj")
 worker_group(ccpu-notification "ccpu-notification.exe")
+include("${CMAKE_CURRENT_LIST_DIR}/../SourceProjection.cmake")
+ntvdm_source_projection(event-halt.inc "${notification_source}"
+  "       while ( TRUE )" "\tquick_mode = FALSE;\n\n#endif\t/* PIG */" "" FALSE)
+ntvdm_source_projection(event-reset.inc "${notification_source}"
+  "   /* Action RESET first." "   /* Action Insignia" "" FALSE)
+ntvdm_source_projection(event-timer.inc "${notification_source}"
+  "   /* Action Insignia" "   /* INTEL inter instruction" "" FALSE)
+ntvdm_source_projection(event-irq.inc "${notification_source}"
+  "   if (GET_IF() && c_cpu_take_event(CPU_HW_INT_MASK))" "#else\t/* SFELLOW */\n#line 4421" "" FALSE)
+worker_unit("obj/tests/ccpu-event-consumers.obj"
+  "${NTVDM_REPO}/test/mvdm-host/ccpu_event_consumers.c"
+  "/nologo /TC /MT /W3 /DPROD /I\"${CMAKE_BINARY_DIR}\""
+  "notification_body.inc" "event-halt.inc" "event-reset.inc" "event-timer.inc" "event-irq.inc")
+worker_link("ccpu-event-consumers.exe" "/nologo /out:$out" "kernel32.lib"
+  INPUTS "obj/tests/ccpu-event-consumers.obj")
+worker_group(ccpu-event-consumers "ccpu-event-consumers.exe")
 worker_unit("obj/tests/native-int-prefix.obj"
   "${NTVDM_REPO}/test/mvdm-host/native_int_prefix_control.c" "/nologo /W3 /MT /O2")
 worker_link("native-int-prefix.exe" "/nologo /out:$out" "kernel32.lib"

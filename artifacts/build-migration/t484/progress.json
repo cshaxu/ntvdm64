@@ -1,15 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "de476911ced09096f0730f866dfeee1a6efae64f",
+  "head": "da7f25b079a0bd2c8823e7d9a2154f058c2dc6c6",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D tools/audit/verify-modesw-guards.py",
+    " D tools/audit/Verify-CcpuEventConsumption.mjs",
     " M tools/build-fixtures.cmd",
-    " M tools/build/worker/object-contracts.cmake",
-    "?? docs/etc/evidence/t484-s3-modesw-guards.md",
-    "?? test/mvdm-host/verify-modesw-guards.ps1"
+    " M tools/build/worker/cpu-tests.cmake",
+    "?? docs/etc/evidence/t484-s3-ccpu-event-consumers.md",
+    "?? test/mvdm-host/ccpu_event_consumers.c",
+    "?? test/mvdm-host/verify-ccpu-event-consumers.ps1"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6490,6 +6491,12 @@
     }
   ],
   "commits": {
+    "da7f25b079a0bd2c8823e7d9a2154f058c2dc6c6": {
+      "subject": "M0 T484 S3 P209: migrate modesw guard checks to native targets",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-modesw-guards.md"
+      ]
+    },
     "de476911ced09096f0730f866dfeee1a6efae64f": {
       "subject": "M0 T484 S3 P208: link netlib contract through native product graph",
       "evidence": [

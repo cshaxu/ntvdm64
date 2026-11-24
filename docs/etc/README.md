@@ -1889,3 +1889,5 @@ post-publication targeted checks.
 [T484 S3 netlib contract](evidence/t484-s3-netlib-contract.md) records native linking of the unchanged fixture to the selected product object.
 
 [T484 S3 modesw guards](evidence/t484-s3-modesw-guards.md) records native positive and negative preprocessing checks at original diagnostic lines.
+
+[T484 S3 CCPU consumers](evidence/t484-s3-ccpu-event-consumers.md) records native event-consumer assertions and source projection boundaries.

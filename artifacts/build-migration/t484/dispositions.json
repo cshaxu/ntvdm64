@@ -1589,9 +1589,9 @@
     "evidence": "docs/etc/evidence/t484-s3-netlib-contract.md"
   },
   "tools/audit/Verify-CcpuEventConsumption.mjs": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P210 preserves current HALT/RESET/timer/IRQ consumer assertions in native CMD targets, sharing existing atomic-helper projection; obsolete historical recompilation removed.",
+    "evidence": "docs/etc/evidence/t484-s3-ccpu-event-consumers.md"
   },
   "tools/audit/verify-modesw-guards.py": {
     "status": "supplemental-native-producer-delivered",
