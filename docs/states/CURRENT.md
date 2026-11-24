@@ -36,89 +36,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | S3 delivery | Actual result |
 | --- | --- |
-| [P1-P100](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
+| [P1-P141](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
 
-| [P101 creation checkpoint](../etc/evidence/t484-s3-creation-native.md) | Five native bounded contracts pass; real Idle foreground chain fails before delivery. B0166 remains incomplete; no completion-count increment. |
-
-| [P102 DDE producers](../etc/evidence/t484-s3-dde-native.md) | Current96/38 contracts and four projection comparisons pass; COPYDATA regression, full cached build/cache/publication hashes pass. P101 Idle boundary remains open. |
-
-| [P103 dispatcher producer](../etc/evidence/t484-s3-dispatch-native.md) | Eight phases/five error scopes/debugger/map gate pass; old parser/extractor retired; full cached build/cache/publication hashes pass. |
-
-| [P104 small WOW contracts](../etc/evidence/t484-s3-small-wow.md) | Three native producers and already-native input lifetime pass; duplicate GDI probe consolidated; full build/cache/publication hashes pass. B0169 provider mismatch remains pending. |
-
-| [P105 capture entry](../etc/evidence/t484-s3-capture-native.md) | Existing native producer routed through CMD;28 host observations, full cached build/cache/publication hashes pass; no guest acceptance claim. |
-
-| [P106 construction contracts](../etc/evidence/t484-s3-construction-native.md) | Current40/191 cases and shared projection regressions pass; historical builders/fixture branches retired; full cached build/cache/publication hashes pass. |
-
-| [P107 module alias](../etc/evidence/t484-s3-module-alias-native.md) | Actual product owner/profile and alias lifetime contract pass; duplicate manual producer removed; full cached build/cache/publication hashes pass. |
-
-| [P108 capture contracts](../etc/evidence/t484-s3-capture-contracts.md) | Three native relationship families/15 current cases pass; six historical controls retired; shared projection regressions/full cached build/cache/publication hashes pass. |
-
-| [P109 extension/frame contracts](../etc/evidence/t484-s3-extension-native.md) | Four native groups pass, including4 frame/11 abort cases; old producers retired; full cached build/cache/publication hashes pass. |
-
-| [P110 native references](../etc/evidence/t484-s3-native-references.md) | Query231 checks/nine imports and four queue modes pass; stale object paths/manual producers removed; full cached build/cache/publication hashes pass. |
-
-| [P111 owned read/page control](../etc/evidence/t484-s3-owned-read.md) | Current contracts and six-body equivalence pass; historical scalar mode and duplicate producers removed; full cached build/cache/publication hashes pass. |
-
-| [P112 parameter map](../etc/evidence/t484-s3-parameter-native.md) | Current54 cases/four projections/construction191 pass; historical producers retired; full cached build/cache/publication hashes pass. |
-
-| [P113 print provider](../etc/evidence/t484-s3-print-provider.md) | Native PDF normal/cancel contract and11 callback identities pass; manual producer removed; full cached build/cache/publication hashes pass. |
-
-| [P114 return unwind](../etc/evidence/t484-s3-return-unwind.md) | Two current cleanup contracts and projection checks pass after repairing stale fixture interface; full cached build/cache/publication hashes pass. |
-
-| [P115 ABI/registry](../etc/evidence/t484-s3-abi-registry.md) | Public ABI compile/registry lifecycle pass with current owners; obsolete profile/path builders removed; full cached build/cache/publication hashes pass. |
-
-| [P116 reply payload](../etc/evidence/t484-s3-reply-payload.md) | Three native reference cases pass with unchanged shared assertions; manual producer removed; full cached build/cache/publication hashes pass. |
-
-| [P117 required root](../etc/evidence/t484-s3-required-root.md) | Current root/three chain/15 reacquisition cases pass; shared producer replaces stale source path; full cached build/cache/publication hashes pass. |
-
-| [P118 resource contracts](../etc/evidence/t484-s3-resource-calls.md) | Four resource runs/current projections pass; redundant producer and three stand-ins removed; three migrated contracts reviewed; cached build/cache/publication hashes pass. |
-
-| [P119 reverse construction](../etc/evidence/t484-s3-reverse-construction.md) | Current21/forward40 and two projections pass; historical producer retired; full cached build/cache/publication hashes pass. |
-
-| [P120 shell/source audit](../etc/evidence/t484-s3-shell-callback.md) | Four actual Shell provider cases pass; obsolete ABI experiments/manual producer/source audit retired; cached build/cache/publication hashes pass. |
-
-| [P121 close/Winsock](../etc/evidence/t484-s3-close-winsock.md) | Actual task-close object and native loopback hook pass; cached build/cache/publication hashes pass. B0195 still partial:29 public cases and variants remain. |
-
-| [P122 shared lifecycle](../etc/evidence/t484-s3-lifecycle-native.md) | Eight additional normal cases pass via shared native graph; cached full build/cache/publication hashes pass. B0195 remains partial:9/30 normal cases native. |
-
-| [P123 lifecycle cleanup](../etc/evidence/t484-s3-lifecycle-classes.md) | Eight more contracts native; stale thunk fixture initialization repaired;17 entry regressions pass, old producer branches removed, cached full/publication hashes pass. B0195 remains partial. |
-
-| [P124 lifecycle startup](../etc/evidence/t484-s3-lifecycle-startup.md) | Retirement/startup contracts pass with explicit native variants;16 prior binaries unchanged; full cached/publication/cache checks pass. B0195 remains partial:19/30 normal entries. |
-
-| [P125 dispatch/page producers](../etc/evidence/t484-s3-lifecycle-pages.md) | Four native/actual-CCPU cases pass after stale fixture setup repair;18 prior binaries unchanged; final cached full/publication/cache checks pass. B0195 partial:23/30 normal entries. |
-
-| [P126 creation/reclaim producers](../etc/evidence/t484-s3-lifecycle-creation.md) | Four current contracts pass; nine obsolete producer branches removed;22 prior binaries unchanged; cached full/publication/cache checks pass. B0195 partial:27/30 normal entries. |
-
-| [P127 menu/consolidation](../etc/evidence/t484-s3-lifecycle-menu.md) | Menu native producer and page alias pass; obsolete extractor/branches removed; cached full/publication hashes pass. B0195:28 native+1 consolidated,1 normal and fault variants remain. |
-
-| [P128 failure producers](../etc/evidence/t484-s3-lifecycle-faults.md) | Initialization rollback/creation unwind pass on native graph; seven old build branches removed; cached full/publication hashes pass. B0195 remains partial. |
-
-| [P129 retirement lock](../etc/evidence/t484-s3-lifecycle-lock.md) | Current concurrency witness passes; historical source selector and old generation branches removed; cached full/publication hashes pass. B0195 remains partial. |
-
-| [P130 dialog producers](../etc/evidence/t484-s3-lifecycle-dialog.md) | Three standalone dialog/publication modes pass; stale include and four producer branches removed; cached full/publication hashes pass. B0195 still has three overlap modes. These are not Full gates. |
-
-| [P131 overlap producers](../etc/evidence/t484-s3-lifecycle-overlap.md) | Three standalone concurrency modes pass after fixing omitted fixture binding; manual compiler path removed; cached full/publication hashes unchanged. Final entry checks and delivery recorded in receipt. |
-
-| [P132 retired research](../etc/evidence/t484-s3-retire-feasibility.md) | Retired the system-only multimedia feasibility fixture and stale S1 graph checker; current production graph unchanged. Build/publication evidence is recorded in receipt. |
-
-| [P133 XMS boundaries](../etc/evidence/t484-s3-xms-native.md) | Native allocation/move targets replace the old Ninja parser/manual builder;135/8 assertions pass. Cached full and publication identity results are in receipt. |
-
-| [P134 USER declarations](../etc/evidence/t484-s3-user-declarations.md) | Positive/native and original overflow-negative compile checks pass;12 independent audit selftests pass without any compiler. Build/publication results in receipt. |
-
-| [P135 retired closure/accessor tools](../etc/evidence/t484-s3-retire-closure.md) | Removed obsolete graph walker and duplicate accessor generator; retained native CCPU contract and build/publication checks recorded in receipt. |
-
-| [P136 census cleanup](../etc/evidence/t484-s3-retire-census.md) | Retired three frozen/obsolete graph tools; retained one read-only header collector outside build scope. Build/publication results recorded in receipt. |
-
-| [P137 retired marker chain](../etc/evidence/t484-s3-retire-markers.md) | Removed five historical marker/preprocessor/trial-compile tools; original evidence retained. Formal build/publication checks recorded in receipt. |
-
-| [P138 BaseSrv audits](../etc/evidence/t484-s3-basesrv-audits.md) | Preserved two live graph audits, updated ownership checks to native graphs, retired obsolete trial compiler/header. |
-
-| [P139 original broker fixtures](../etc/evidence/t484-s3-broker-native.md) | Two duplicate JS builders removed; native CMD target and bounded runners preserve classifier/lifecycle coverage, repair stale capacity and installed-media assumptions. |
-
-| [P140 classifier diagnostic cleanup](../etc/evidence/t484-s3-classifier-retirement.md) | Retired historical raw-ABI probe and absent-header audit; retained actual product-object guard tests on both architectures. |
-
-| [P141 resource attachment](../etc/evidence/t484-s3-resource-native.md) | Native MIDL/compile/link and nine real RPC cases pass; stale fixture scope/layout corrected, duplicate checks removed. |
+| [P142 component audit](../etc/evidence/t484-s3-component-audit.md) | Current native static checks pass; obsolete CRT-header assertion removed. Audit-only, no product change. |
 
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required

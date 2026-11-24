@@ -1,22 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "ad308a22ba1fe7d1042d31e2853c0f17a1c66d5b",
+  "head": "9b2754eb22d60a27f45a1c69e92fd033999cdee6",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
+    " M docs/etc/evidence/t484-s3-early-deliveries.md",
     " M docs/states/CURRENT.md",
-    " M test/broker/resource_attachment.c",
-    " M tools/audit/Verify-BrokerResourceAttachment.mjs",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/worker/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-resource-native/",
-    "?? docs/etc/evidence/t484-s3-resource-native.md",
-    "?? tools/build/worker/resource-tests.cmake"
+    " M tools/audit/verify-component-minimization.ps1",
+    "?? artifacts/build-migration/t484/s3-component-audit/",
+    "?? docs/etc/evidence/t484-s3-component-audit.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 144,
-    "unchanged": 66,
+    "changed": 145,
+    "unchanged": 65,
     "removed": 145
   },
   "disposition_counts": {
@@ -25,8 +23,8 @@
     "retired-with-delivery-evidence": 145,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 52,
-    "retained-standalone-audit": 5
+    "requires-disposition-reconciliation": 51,
+    "retained-standalone-audit": 6
   },
   "existing_interpreted_candidates_with_command_hits": 159,
   "files": [
@@ -4172,8 +4170,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "8630fa25072f51d87052a9b53d42c1d92644014feee7470b04e06aa5bed7c574",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "9b2754eb22d60a27f45a1c69e92fd033999cdee6"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-resource-native.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -4204,12 +4206,16 @@
       "id": "B0221",
       "file": "tools/audit/verify-component-minimization.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "9dadbb06d59bf3912731cffbe0cf03e64bed9d35ec319deb7d86844eb28b10e3",
+      "state": "changed",
+      "current_sha256": "46efda70e31f5e55e2e93330a04eee938c615ec63ef8ab45467cff7fb898ac49",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "reason": "Current static contracts pass on native graphs/maps/imports; obsolete CRT header requirement removed; no producer",
+        "evidence": "docs/etc/evidence/t484-s3-component-audit.md",
+        "status": "retained-standalone-audit"
+      }
     },
     {
       "id": "B0222",
@@ -6064,6 +6070,12 @@
     }
   ],
   "commits": {
+    "9b2754eb22d60a27f45a1c69e92fd033999cdee6": {
+      "subject": "T484 S3 P141 move resource attachment fixture builds to native CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-resource-native.md"
+      ]
+    },
     "ad308a22ba1fe7d1042d31e2853c0f17a1c66d5b": {
       "subject": "T484 S3 P140 retire historical classifier diagnostics",
       "evidence": [
@@ -9106,7 +9118,7 @@
       "file": "tools/audit/verify-component-minimization.ps1",
       "hits": [
         {
-          "line": 5,
+          "line": 7,
           "text": "$graph=Get-Content -LiteralPath (Join-Path $BuildRoot 'build.ninja') -Raw"
         }
       ]

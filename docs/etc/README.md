@@ -1766,3 +1766,5 @@ post-publication targeted checks.
 - [T484 S3 historical classifier diagnostics retirement](evidence/t484-s3-classifier-retirement.md)
 
 - [T484 S3 native resource attachment producer](evidence/t484-s3-resource-native.md)
+
+- [T484 S3 component audit](evidence/t484-s3-component-audit.md): current native static contracts; obsolete header assertion removed.

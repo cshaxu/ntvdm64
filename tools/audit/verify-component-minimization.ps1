@@ -1,21 +1,23 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot)
+param([Parameter(Mandatory)][string]$BuildRoot,
+    [Parameter(Mandatory)][string]$NativeBuildRoot,
+    [string]$DumpbinExecutable='dumpbin.exe')
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $graph=Get-Content -LiteralPath (Join-Path $BuildRoot 'build.ninja') -Raw
-if($graph -match 'src/product-package|obj/product-package|NTCON_CONPTY_TEST_RELEASE'){
+if($graph -match 'src[/\\]product-package|obj[/\\]product-package|NTCON_CONPTY_TEST_RELEASE'){
     throw 'Retired package owner or test-only release selected in production graph'
 }
-if($graph -notmatch 'src/ntvdm-exe/package_layout.c'){
+if($graph -notmatch 'src[/\\]ntvdm-exe[/\\]package_layout.c'){
     throw 'Worker package binding missing'
 }
-foreach($name in 'mvdm_base_vdm_environment','mvdm_crt_redirect','wow_hard_error_dialog'){
+foreach($name in 'mvdm_base_vdm_environment','wow_hard_error_dialog'){
     if(!(Test-Path (Join-Path $repo "src/ntvdm-exe/win32/$name.h")) -or
         (Test-Path (Join-Path $repo "src/compat/include/$name.h"))){
         throw "Worker-private declaration not consolidated: $name"
     }
 }
-$map=Get-Content -LiteralPath (Join-Path $BuildRoot 'ntcon.exe.map') -Raw
+$map=Get-Content -LiteralPath (Join-Path $NativeBuildRoot 'frontend/ntcon.exe.map') -Raw
 foreach($symbol in 'run16_native_capture_begin','run16_native_capture_read','run16_native_capture_end',
     'run16_native_view_wait','frontend_service_launch','frontend_service_wait','ntcon_conpty_release',
     'run16_native_launch_start'){
@@ -25,11 +27,11 @@ foreach($symbol in 'run16_native_screen_apply','run16_native_cells_write','ntcon
     'run16_native_view_begin','run16_native_view_present'){
     if($map -match [regex]::Escape($symbol)){throw "Displaced frontend backend remains: $symbol"}
 }
-$nativeMap=Get-Content -LiteralPath (Join-Path $BuildRoot 'ntvwm.exe.map') -Raw
+$nativeMap=Get-Content -LiteralPath (Join-Path $NativeBuildRoot 'worker/ntvwm.exe.map') -Raw
 foreach($symbol in 'ntvwm_screen_apply','ntvwm_cells_write'){
     if($nativeMap -notmatch [regex]::Escape($symbol)){throw "Native worker provider missing: $symbol"}
 }
-$imports=& dumpbin.exe /nologo /imports (Join-Path $BuildRoot 'ntmon.exe')
+$imports=& $DumpbinExecutable /nologo /imports (Join-Path $NativeBuildRoot 'monitor/ntmon.exe')
 if($LASTEXITCODE -or ($imports -match 'USER32.dll|wsprintfW')){
     throw 'NTMon still imports presentation DLL solely for formatting'
 }

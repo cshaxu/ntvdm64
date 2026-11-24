@@ -1092,5 +1092,10 @@
     "status": "migrated-delivered",
     "reason": "Native CMD resource fixture producer, real nine-case RPC runner retains map/provider assertions; no interpreted compilation",
     "evidence": "docs/etc/evidence/t484-s3-resource-native.md"
+  },
+  "tools/audit/verify-component-minimization.ps1": {
+    "reason": "Current static contracts pass on native graphs/maps/imports; obsolete CRT header requirement removed; no producer",
+    "evidence": "docs/etc/evidence/t484-s3-component-audit.md",
+    "status": "retained-standalone-audit"
   }
 }
