@@ -1,30 +1,40 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "7f442b07eaf2e5b2c31a022417f3986838c26e96",
+  "head": "be83f43bfe0056e823a81e3e33565ea60005509f",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M tools/audit/verify-wow-shared-boundary.ps1",
-    "?? artifacts/build-migration/t484/s3-thread-wow-audits/",
-    "?? docs/etc/evidence/t484-s3-thread-wow-audits.md"
+    "D  test/integration/fixtures/Test-T95S6LinkArgumentVector.ps1",
+    "D  test/integration/fixtures/Test-T95S6LinkVectorEntrypoint.ps1",
+    "D  tools/audit/VerifyMvdmFrozenGraphSelection.py",
+    "D  tools/build/BuildCcpuExceptionProfile.cmd",
+    "D  tools/build/BuildCcpuIpProfile.cmd",
+    "D  tools/build/BuildConsoleRegression.cmd",
+    "D  tools/build/BuildConsoleResize.cmd",
+    "D  tools/build/GenerateCvidcVectorProviderStubs.mjs",
+    "D  tools/build/Initialize-NinjaTree.ps1",
+    "D  tools/build/New-T184S3V5EvidenceRoot.ps1",
+    "D  tools/build/New-T95S6LinkArgumentVector.ps1",
+    "D  tools/probe/Invoke-T95S6LinkVectorEntrypoint.ps1",
+    "?? docs/etc/evidence/t484-s3-obsolete-build-closures.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 155,
-    "unchanged": 49,
-    "removed": 151
+    "unchanged": 40,
+    "removed": 160
   },
   "disposition_counts": {
     "migrated-delivered": 87,
-    "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 151,
+    "retained-native-declarative": 3,
+    "retired-with-delivery-evidence": 160,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 32,
+    "requires-disposition-reconciliation": 22,
     "retained-standalone-audit": 16
   },
-  "existing_interpreted_candidates_with_command_hits": 150,
+  "existing_interpreted_candidates_with_command_hits": 146,
   "files": [
     {
       "id": "B0001",
@@ -4599,8 +4609,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "c3771124c997b2e0c961996479bcbd173f2b4f1962fac1385d32192adf59483e",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "be83f43bfe0056e823a81e3e33565ea60005509f"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-thread-wow-audits.md"
+      ],
       "completion": "retained-standalone-audit",
       "decision": {
         "status": "retained-standalone-audit",
@@ -4612,12 +4626,16 @@
       "id": "B0242",
       "file": "tools/audit/VerifyMvdmFrozenGraphSelection.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "fe25d3ab3354d979127ada651da17f6e1a8c7e2ae99ad022e7ab405a0bd48e33",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+      }
     },
     {
       "id": "B0243",
@@ -4908,45 +4926,61 @@
       "id": "B0262",
       "file": "tools/build/BuildCcpuExceptionProfile.cmd",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "cd436dde659aa64c92a7ffac15867157c31426b64559e092b154197128ef676d",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+      }
     },
     {
       "id": "B0263",
       "file": "tools/build/BuildCcpuIpProfile.cmd",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "a77e76575d3efa9e4c16eeb4638bcb895e71c535bac5c45fb9e782dcad1668dc",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+      }
     },
     {
       "id": "B0264",
       "file": "tools/build/BuildConsoleRegression.cmd",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "28fedcfeea934ac80068f814ddc15b24690d843ed1c97dcd123c16c7941c26eb",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+      }
     },
     {
       "id": "B0265",
       "file": "tools/build/BuildConsoleResize.cmd",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "c74d086f00ab55155ba2a8d6a79f060b3addf98ff9a0fc0b41a82ad89ccafdce",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+      }
     },
     {
       "id": "B0266",
@@ -4956,8 +4990,12 @@
       "current_sha256": "47d52375a2aa8c4e9f64c4a9e24f0dff020a190d828c8c931b1a5b2a0adba0ca",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-declarative",
+      "decision": {
+        "status": "retained-native-declarative",
+        "reason": "Current shared native cache/tree owner used directly by CMake; existing full build validates unchanged implementation",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+      }
     },
     {
       "id": "B0267",
@@ -5124,12 +5162,16 @@
       "id": "B0278",
       "file": "tools/build/GenerateCvidcVectorProviderStubs.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "94a53919e863d9e712e14447e883ee65e07d15754c68d33f9270231f7c670e5b",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+      }
     },
     {
       "id": "B0279",
@@ -5165,12 +5207,16 @@
       "id": "B0281",
       "file": "tools/build/Initialize-NinjaTree.ps1",
       "stage": "S2",
-      "state": "unchanged",
-      "current_sha256": "a59cb9af8a482501fd2c91560b92b76e33bccd6b993c75d9a2a875a6aebcf75e",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+      }
     },
     {
       "id": "B0282",
@@ -5253,12 +5299,16 @@
       "id": "B0287",
       "file": "tools/build/New-T184S3V5EvidenceRoot.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "3d36ae616ffca2a9f79e6e81befdb74ff2f03883dc48339c3566d409d2f133b8",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+      }
     },
     {
       "id": "B0288",
@@ -5990,12 +6040,16 @@
       "id": "B0336",
       "file": "tools/build/New-T95S6LinkArgumentVector.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "6b3bac407392c5f9ca327e3ff1177b8a465dd2f669a5ad5ddf9290cead90ee31",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+      }
     },
     {
       "id": "B0337",
@@ -6219,6 +6273,12 @@
     }
   ],
   "commits": {
+    "be83f43bfe0056e823a81e3e33565ea60005509f": {
+      "subject": "T484 S3 P152 reconcile thread and WOW native dependency audits",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-thread-wow-audits.md"
+      ]
+    },
     "7f442b07eaf2e5b2c31a022417f3986838c26e96": {
       "subject": "T484 S3 P151 consolidate broker protocol native fixture builds",
       "evidence": [
@@ -9502,44 +9562,6 @@
       ]
     },
     {
-      "id": "B0242",
-      "file": "tools/audit/VerifyMvdmFrozenGraphSelection.py",
-      "hits": [
-        {
-          "line": 2,
-          "text": "\"\"\"Compare frozen MVDM selection claims with current product Ninja inputs."
-        },
-        {
-          "line": 16,
-          "text": "('ntvdm', 'build/.ninja/msvc-x86-release/worker', 'ntvdm.exe'),"
-        },
-        {
-          "line": 17,
-          "text": "('wow32', 'build/.ninja/msvc-x86-release/wow32', 'wow32.dll'),"
-        },
-        {
-          "line": 18,
-          "text": "('vdmredir', 'build/.ninja/msvc-x86-release/worker', 'VDMREDIR.dll'),"
-        },
-        {
-          "line": 34,
-          "text": "graph = REPO / relative / 'build.ninja'"
-        },
-        {
-          "line": 36,
-          "text": "['ninja', '-C', str(REPO / relative), '-t', 'inputs', '-E', target],"
-        },
-        {
-          "line": 44,
-          "text": "identities.append({'target': name, 'graph': relative + '/build.ninja',"
-        },
-        {
-          "line": 57,
-          "text": "'observation': 'Frozen inventory says not-product-selected; current Ninja target closure includes source. Compilation is not linker extraction or execution.',"
-        }
-      ]
-    },
-    {
       "id": "B0267",
       "file": "tools/build/Clear-BuildOutput.ps1",
       "hits": [
@@ -9570,56 +9592,6 @@
         {
           "line": 133,
           "text": "$generated = $item.Extension.ToLowerInvariant() -in @('.obj','.o','.lib','.a','.pdb','.map','.res','.ilk','.exp','.tlog','.log','.txt','.json','.jsonl','.csv','.tsv','.xml','.html','.png','.jpg','.bmp','.etl','.dmp','.ninja','.cmd','.bat','.ps1','.mjs','.js','.py','.c','.h','.cpp','.def','.rsp','.exe','.dll','.manifest','.err','.out')"
-        }
-      ]
-    },
-    {
-      "id": "B0278",
-      "file": "tools/build/GenerateCvidcVectorProviderStubs.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "/* Test-only provider declarations for the focused C-VID binding link. */"
-        },
-        {
-          "line": 2,
-          "text": "import fs from 'node:fs';"
-        }
-      ]
-    },
-    {
-      "id": "B0281",
-      "file": "tools/build/Initialize-NinjaTree.ps1",
-      "hits": [
-        {
-          "line": 6,
-          "text": "$cmake = (Get-Command cmake.exe -ErrorAction Stop).Source"
-        },
-        {
-          "line": 12,
-          "text": "& $cmake @arguments -P \"$PSScriptRoot/BuildTree.cmake\" | Out-Host"
-        },
-        {
-          "line": 13,
-          "text": "if ($LASTEXITCODE) { throw 'Ninja tree configuration failed' }"
-        },
-        {
-          "line": 14,
-          "text": "# The CMake configuration owns validation and the complete per-command cache"
-        },
-        {
-          "line": 15,
-          "text": "# environment. Direct ninja does not depend on the runner's environment."
-        }
-      ]
-    },
-    {
-      "id": "B0336",
-      "file": "tools/build/New-T95S6LinkArgumentVector.ps1",
-      "hits": [
-        {
-          "line": 50,
-          "text": "throw \"Required link token is not present exactly once: $token\""
         }
       ]
     },

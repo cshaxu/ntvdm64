@@ -60,6 +60,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P152 thread/WOW audits](../etc/evidence/t484-s3-thread-wow-audits.md) | Current thread contract and80 WOW compiler sources/9 negative controls pass; shared parser replaces old WOW graph scan. |
 
+| [P153 obsolete build closures](../etc/evidence/t484-s3-obsolete-build-closures.md) | Nine obsolete entries and their historical-only closure removed (12 files/441 lines); shared native BuildTree retained. No product change. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

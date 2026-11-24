@@ -1192,5 +1192,55 @@
     "status": "retained-standalone-audit",
     "reason": "Read-only current ownership contract passes; WOW parser reuses native graph/compiler evidence",
     "evidence": "docs/etc/evidence/t484-s3-thread-wow-audits.md"
+  },
+  "tools/audit/VerifyMvdmFrozenGraphSelection.py": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+  },
+  "tools/build/BuildCcpuExceptionProfile.cmd": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+  },
+  "tools/build/BuildCcpuIpProfile.cmd": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+  },
+  "tools/build/BuildConsoleRegression.cmd": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+  },
+  "tools/build/BuildConsoleResize.cmd": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+  },
+  "tools/build/GenerateCvidcVectorProviderStubs.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+  },
+  "tools/build/Initialize-NinjaTree.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+  },
+  "tools/build/New-T184S3V5EvidenceRoot.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+  },
+  "tools/build/New-T95S6LinkArgumentVector.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Obsolete or superseded producer with no live callers; historical-only dependent closure retired together",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+  },
+  "tools/build/BuildTree.cmake": {
+    "status": "retained-native-declarative",
+    "reason": "Current shared native cache/tree owner used directly by CMake; existing full build validates unchanged implementation",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
   }
 }
