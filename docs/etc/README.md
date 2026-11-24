@@ -1746,3 +1746,5 @@ post-publication targeted checks.
 - [T484 S3 dialog lifecycle producers](evidence/t484-s3-lifecycle-dialog.md)
 
 - [T484 S3 lifecycle overlap producers](evidence/t484-s3-lifecycle-overlap.md)
+
+- [T484 S3 retire expired WOW research tools](evidence/t484-s3-retire-feasibility.md)

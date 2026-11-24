@@ -1,34 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "5b55faecf4455a48cc28093a7c471c3c8c0523d0",
+  "head": "31d259294fe004dacb5e12b690d5008c92ace6f5",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
+    " M docs/etc/operations/wow32-recovery-s1-checklist.md",
     " M docs/states/CURRENT.md",
-    " M test/mvdm-host/wow_terminal_schedule_witness.h",
-    " M test/observation/verify-wow-native-slot-group.ps1",
-    " M test/observation/verify-wow-task-lifecycle.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/wow32/lifecycle-tests.cmake",
-    "?? artifacts/build-migration/t484/s3-lifecycle-overlap/",
-    "?? docs/etc/evidence/t484-s3-lifecycle-overlap.md"
+    " D test/adapter-mvdm-host-out/wow/wow_multimedia_inventory_fixture.c",
+    " M test/observation/verify-wow32-dynamic-host-surface.ps1",
+    " D test/observation/verify-wow32-multimedia-feasibility.ps1",
+    " D test/observation/verify-wow32-s1-formal-graph.ps1",
+    "?? artifacts/build-migration/t484/s3-retire-feasibility/",
+    "?? docs/etc/evidence/t484-s3-retire-feasibility.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 140,
-    "unchanged": 87,
-    "removed": 128
+    "unchanged": 85,
+    "removed": 130
   },
   "disposition_counts": {
     "migrated-delivered": 81,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 128,
+    "retired-with-delivery-evidence": 130,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 76,
+    "requires-disposition-reconciliation": 74,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 176,
+  "existing_interpreted_candidates_with_command_hits": 174,
   "files": [
     {
       "id": "B0001",
@@ -3710,6 +3710,7 @@
       "state": "changed",
       "current_sha256": "ea8779af4efb042047c98adf3de82adc7ce0780bcb760b20a02686c13e955e9e",
       "revisions": [
+        "31d259294fe004dacb5e12b690d5008c92ace6f5",
         "5b55faecf4455a48cc28093a7c471c3c8c0523d0",
         "6549d0f57d0c4cd59cd3687d405e1afd295b04e6",
         "a138505debdc90e12300bc50f2093890c1efa47a",
@@ -3730,6 +3731,7 @@
         "docs/etc/evidence/t484-s3-lifecycle-lock.md",
         "docs/etc/evidence/t484-s3-lifecycle-menu.md",
         "docs/etc/evidence/t484-s3-lifecycle-native.md",
+        "docs/etc/evidence/t484-s3-lifecycle-overlap.md",
         "docs/etc/evidence/t484-s3-lifecycle-pages.md",
         "docs/etc/evidence/t484-s3-lifecycle-startup.md"
       ],
@@ -3763,23 +3765,31 @@
       "id": "B0197",
       "file": "test/observation/verify-wow32-multimedia-feasibility.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "4bcecd5b2957f79fd78bf05ced36df9180815188e6ac94a8032b6a9cb3027272",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Retired expired feasibility/old composition inventory; no current product runtime contract; historical evidence retained",
+        "evidence": "docs/etc/evidence/t484-s3-retire-feasibility.md"
+      }
     },
     {
       "id": "B0198",
       "file": "test/observation/verify-wow32-s1-formal-graph.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "b69a6eb8ee3d7dd85e7eb597c6555e37ee66f51dbd77735f1001a2cc4ead7f5d",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Retired expired feasibility/old composition inventory; no current product runtime contract; historical evidence retained",
+        "evidence": "docs/etc/evidence/t484-s3-retire-feasibility.md"
+      }
     },
     {
       "id": "B0199",
@@ -5883,6 +5893,12 @@
     }
   ],
   "commits": {
+    "31d259294fe004dacb5e12b690d5008c92ace6f5": {
+      "subject": "T484 S3 P131 finish native lifecycle producers and retire manual builder",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-lifecycle-overlap.md"
+      ]
+    },
     "5b55faecf4455a48cc28093a7c471c3c8c0523d0": {
       "subject": "T484 S3 P130 consolidate dialog lifecycle producers",
       "evidence": [
@@ -8668,154 +8684,6 @@
         {
           "line": 12,
           "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/wow-winsock-provider.exe\" \"$root/probe.exe\""
-        }
-      ]
-    },
-    {
-      "id": "B0197",
-      "file": "test/observation/verify-wow32-multimedia-feasibility.ps1",
-      "hits": [
-        {
-          "line": 43,
-          "text": "$link = Join-Path $root 'link.cmd'"
-        },
-        {
-          "line": 46,
-          "text": "('cl.exe /nologo /W4 /WX /TC /MT /O2 /c /Fo\"' + $object + '\" \"' + $fixture + '\"')) |"
-        },
-        {
-          "line": 50,
-          "text": "('link.exe /nologo /MACHINE:X86 /OUT:\"' + $exe + '\" \"' + $object + '\" winmm.lib')) |"
-        },
-        {
-          "line": 51,
-          "text": "Set-Content -LiteralPath $link -Encoding ascii"
-        },
-        {
-          "line": 53,
-          "text": "Invoke-Owned -Name link -Arguments ('/d /c ' + $link)"
-        }
-      ]
-    },
-    {
-      "id": "B0198",
-      "file": "test/observation/verify-wow32-s1-formal-graph.ps1",
-      "hits": [
-        {
-          "line": 28,
-          "text": "if ($manifest -notmatch '(?m)^\\s*wow32\\.rc\\s*$') {"
-        },
-        {
-          "line": 29,
-          "text": "throw 'The selected original WOW32 manifest omits wow32.rc.'"
-        },
-        {
-          "line": 32,
-          "text": "$ninja = [IO.File]::ReadAllText((Join-Path $build 'build.ninja'))"
-        },
-        {
-          "line": 33,
-          "text": "$link = [regex]::Match($ninja, '(?m)^build wow32\\.dll \\|.*$').Value"
-        },
-        {
-          "line": 34,
-          "text": "if (!$link) { throw 'Formal build graph has no WOW32 link edge.' }"
-        },
-        {
-          "line": 35,
-          "text": "$missing = @($sources | Where-Object { $link -notmatch ('\\bobj/' + [regex]::Escape($_) + '\\.obj\\b') })"
-        },
-        {
-          "line": 36,
-          "text": "if ($missing.Count) { throw ('Formal WOW32 link omits: ' + ($missing -join ', ')) }"
-        },
-        {
-          "line": 37,
-          "text": "if ($link -notmatch '\\bobj/wow32\\.res\\b') {"
-        },
-        {
-          "line": 38,
-          "text": "throw 'Formal WOW32 link omits the selected original wow32.rc resource.'"
-        },
-        {
-          "line": 40,
-          "text": "if ($ninja -notmatch '(?m)^\\s*command\\s*=\\s*link\\b[^\\r\\n]*/def:[^\\s]*wow32-x86\\.def\\b') {"
-        },
-        {
-          "line": 41,
-          "text": "throw 'Formal WOW32 link has no generated x86 DEF input.'"
-        },
-        {
-          "line": 86,
-          "text": "$actualUser = @([regex]::Matches($link, '\\bobj/opennt-user/([^\\s/]+)\\.obj') |"
-        },
-        {
-          "line": 91,
-          "text": "if ($link -match '\\bobj/compat/wow-(?:class-client|control-brush|control-state|dialog-memory)\\.obj\\b') {"
-        },
-        {
-          "line": 92,
-          "text": "throw 'The WOW32 link still selects a former compat object.'"
-        },
-        {
-          "line": 96,
-          "text": "if (($link -split '\\s+') -notcontains $object -or"
-        },
-        {
-          "line": 97,
-          "text": "$ninja -notmatch ('(?m)^build ' + [regex]::Escape($object) + ': cc [^\\r\\n]*/src/wow32-dll/source/' + $unit + '\\.c\\s*$')) {"
-        },
-        {
-          "line": 98,
-          "text": "throw \"Missing WOW32-owned source or link input: $unit\""
-        },
-        {
-          "line": 102,
-          "text": "if ($link -notmatch ('\\bobj/compat/' + $unit + '\\.obj\\b')) {"
-        },
-        {
-          "line": 106,
-          "text": "if ($link -match '\\bobj/compat/wow-object-ownership\\.obj\\b' -or"
-        },
-        {
-          "line": 107,
-          "text": "$link -notmatch '\\bobj/opennt-user/cleanup\\.obj\\b') {"
-        },
-        {
-          "line": 110,
-          "text": "if ($link -match '\\bobj/(?:compat/wow-dialog-lookup|wow32-dll/wow_dialog_pointer)\\.obj\\b' -or"
-        },
-        {
-          "line": 111,
-          "text": "$link -notmatch '\\bobj/opennt-user/control-body-dlgmgr\\.obj\\b') {"
-        },
-        {
-          "line": 114,
-          "text": "if ($link -notmatch '\\bobj/wow32-dll/wow_button_resources\\.obj\\b' -or"
-        },
-        {
-          "line": 124,
-          "text": "# checked below against the link edge; this count catches accidental manifest"
-        },
-        {
-          "line": 129,
-          "text": "$link -notmatch ('\\bobj/wow32-dll/' + [regex]::Escape($_) + '\\.obj\\b')"
-        },
-        {
-          "line": 131,
-          "text": "if ($missingBindings.Count) { throw ('Formal WOW32 link omits bindings: ' + ($missingBindings -join ', ')) }"
-        },
-        {
-          "line": 173,
-          "text": "if ($link -notmatch ('(?:^|\\s)' + [regex]::Escape($object) + '(?:\\s|$)')) {"
-        },
-        {
-          "line": 174,
-          "text": "throw \"Formal WOW32 link omits descriptor conversion owner: $object\""
-        },
-        {
-          "line": 199,
-          "text": "originalResource = 'wow32.rc'"
         }
       ]
     },

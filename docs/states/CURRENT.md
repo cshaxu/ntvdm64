@@ -100,7 +100,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P131 overlap producers](../etc/evidence/t484-s3-lifecycle-overlap.md) | Three standalone concurrency modes pass after fixing omitted fixture binding; manual compiler path removed; cached full/publication hashes unchanged. Final entry checks and delivery recorded in receipt. |
 
-Completed implementation batches through P131 passed their cached full host build. P73 checks11 raw host inputs
+| [P132 retired research](../etc/evidence/t484-s3-retire-feasibility.md) | Retired the system-only multimedia feasibility fixture and stale S1 graph checker; current production graph unchanged. Build/publication evidence is recorded in receipt. |
+
+Completed implementation batches through P132 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

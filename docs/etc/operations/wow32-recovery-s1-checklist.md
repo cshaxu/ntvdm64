@@ -26,8 +26,13 @@ is never a production build, runtime test or complete dependency audit.
 
 ## Audit gates
 
-`test/observation/verify-wow32-s1-formal-graph.ps1` is the reproducible
-composition inventory used by A02--A03. It pins the 77 selected original
+The historical graph verifier was retired by T484 S3 because its object paths,
+owner selections and table census no longer describe the native production
+graph. The following records describe the original audit, not a current gate.
+
+
+The historical `test/observation/verify-wow32-s1-formal-graph.ps1` was the
+composition inventory used by A02--A03. It pinned the 77 selected original
 sources, 19 imported original owner objects, 21 target-local bindings, all ten
 original thunk-table dispositions, named dynamic dependencies and the
 source-wide guest-pointer macro surface. Its pass is static evidence only; it

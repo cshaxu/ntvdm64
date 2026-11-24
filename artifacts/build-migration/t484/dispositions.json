@@ -972,5 +972,15 @@
     "status": "migrated-delivered",
     "reason": "All30 normal entries and nine fault switches resolved through native CMD targets; old manual compiler/parser removed; standalone supplemental contracts, not Full",
     "evidence": "docs/etc/evidence/t484-s3-lifecycle-overlap.md"
+  },
+  "test/observation/verify-wow32-multimedia-feasibility.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Retired expired feasibility/old composition inventory; no current product runtime contract; historical evidence retained",
+    "evidence": "docs/etc/evidence/t484-s3-retire-feasibility.md"
+  },
+  "test/observation/verify-wow32-s1-formal-graph.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Retired expired feasibility/old composition inventory; no current product runtime contract; historical evidence retained",
+    "evidence": "docs/etc/evidence/t484-s3-retire-feasibility.md"
   }
 }

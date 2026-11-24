@@ -57,6 +57,6 @@ if (@(Compare-Object $expectedMediaNames $mediaNames).Count) {
     throw 'Selected original WINMM lazy-export names changed.'
 }
 Assert-NamedExports -Name 'WINMM.DLL' -Exports (Get-DumpbinText -Dumpbin $dumpbin -Path 'C:\Windows\SysWOW64\WINMM.DLL') -Expected $mediaNames
-# Local original OLE descriptor ownership is checked by verify-wow32-s1-formal-graph.ps1.
+# This checks named system exports only; it does not verify local OLE ownership.
 
 Write-Output 'WOW32_DYNAMIC_HOST_SURFACE_OK'
