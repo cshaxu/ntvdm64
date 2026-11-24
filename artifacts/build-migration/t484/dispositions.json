@@ -706,5 +706,15 @@
       "reason": "Unique conversion/tail and per-task alias retirement coverage; shared source projection replaces two helpers",
       "decision": "retain-consolidated"
     }
+  },
+  "test/observation/verify-wow-bitmap-bindings.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-bitmap.md",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-bitmap.md",
+      "reason": "Distinct nested/parallel bitmap loading and failure cleanup; preserve ABI audit with correct owner; remove resource generator",
+      "decision": "retain-consolidated"
+    },
+    "reason": "Current WOW product profiles/objects and native RC/link; fixed authored bitmap replaces generator",
+    "status": "migrated-delivered"
   }
 }

@@ -1,0 +1,54 @@
+{
+  "bitmap": {
+    "Path": "O:\\repos.hobby\\ntvdm64\\test\\adapter-mvdm-host-out\\wow\\fixture-bitmap.bmp",
+    "Hash": "9EA7226433EC28A1CCB9299B9C7F8C3D465B7EC50BF188FEB3C4BFC80F3E6632"
+  },
+  "final": {
+    "exit": 0,
+    "pid": 17516,
+    "started": "2026-11-24T02:09:50.7338119+01:00",
+    "finished": "2026-11-24T02:10:53.8590629+01:00"
+  },
+  "cache": [
+    {
+      "time": 639310792641821446,
+      "path": "build/.ninja/msvc-x86-release/wow32/bitmap-binding.exe",
+      "hash": "97B473F031696E0D08F5329B934BE61C32EBCF9954EF00E5D83EC341FC78BCAE"
+    },
+    {
+      "time": 639310792641379554,
+      "path": "build/.ninja/msvc-x86-release/wow32/bitmap-binding_failure.exe",
+      "hash": "8D08827DE1BC980ECCCE1BBAB5C67837F45C3663C19F8A85A09DF3EC1640AFB4"
+    }
+  ],
+  "first_runtime": {
+    "finished": "2026-11-24T02:07:46.2841911+01:00",
+    "pid": 27824,
+    "started": "2026-11-24T02:07:35.7241165+01:00",
+    "exit": 1
+  },
+  "x64_rejected": 2,
+  "runtime": {
+    "started": "2026-11-24T02:08:57.1933078+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T02:09:02.7890358+01:00",
+    "pid": 32144
+  },
+  "registration": {
+    "result": "WOW32_REGISTRATION_SURFACE_OK",
+    "evidenceKind": "ABI slot assignment audit; not callback/runtime acceptance",
+    "inputSlots": 21,
+    "outputSlots": 20,
+    "explicitFailureOutputSlots": [],
+    "pinnedBuildInfo": "84000000"
+  },
+  "publication": {
+    "raw_inputs": 11,
+    "published_copies": 22,
+    "unchanged": true
+  },
+  "markers": [
+    "WOW_BITMAP_BINDING_OK nested=30 parallel=4x50 named=2 missing=2 gdi-before=0 gdi-after=0",
+    "WOW_BITMAP_BINDING_FAILURE_OK locks=2 screen=10/10"
+  ]
+}

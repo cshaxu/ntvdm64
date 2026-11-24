@@ -108,7 +108,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P95 accelerator producers](../etc/evidence/t484-s3-accelerator.md) | Two native contracts and four function-body comparisons pass; two old extraction helpers removed; full build/cache/rejection/publication hashes pass. |
 
-Implementation batches through P95 passed their cached full host build. P73 checks11 raw host inputs
+| [P96 bitmap producers](../etc/evidence/t484-s3-bitmap.md) | Native binding/failure tests and corrected21/20-slot owner audit pass; fixed66-byte fixture replaces generator; full build/cache/publication hashes pass. |
+
+Implementation batches through P96 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

@@ -47,6 +47,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="wow-bitmap" set "SELECTED=1"
+if "%TARGET%"=="wow-bitmap" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-accelerator" set "SELECTED=1"
 if "%TARGET%"=="wow-accelerator" if not "%~1"=="x86" exit /b 2
 for %%T in (softpc-observer-error software-video-publisher) do if "%TARGET%"=="%%T" set "SELECTED=1"
@@ -202,6 +204,7 @@ for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%
 if "%TARGET%"=="ccpu-header-selection" goto worker_existing
 if "%TARGET%"=="win101-control-fixtures" goto worker_existing
 if "%TARGET%"=="oem-tests" goto worker
+if "%TARGET%"=="wow-bitmap" goto wowcallback
 if "%TARGET%"=="wow-callback-cost" goto wowcallback
 if "%TARGET%"=="wow-graph-cost" goto wowcallback
 for %%I in (wow-callback-abort wow-attach-failure wow-missing-init wow-message-transaction wow-window-sizing wow-startup-failure wow-shell-exception wow-common-return) do if "%TARGET%"=="%%I" goto wowcallback

@@ -1679,3 +1679,5 @@ post-publication targeted checks.
 - [T484 S3 P94 Video7 producer](evidence/t484-s3-video7.md).
 
 - [T484 S3 P95 accelerator producers](evidence/t484-s3-accelerator.md).
+
+- [T484 S3 P96 bitmap producers](evidence/t484-s3-bitmap.md).

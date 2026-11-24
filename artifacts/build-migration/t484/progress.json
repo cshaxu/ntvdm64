@@ -1,32 +1,33 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "9125ed5e94672ee3de79d10b78407643dafbdacc",
+  "head": "95b865a995f7526aa3914f8b0a6d60eb9a502e03",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/observation/extract-wow-accelerator-alias-fixture.ps1",
-    " D test/observation/extract-wow-accelerator-fixture.ps1",
-    " M test/observation/verify-wow-accelerator-call-fixture.ps1",
+    " D test/observation/new-wow-bitmap-test-resource.ps1",
+    " M test/observation/verify-wow-bitmap-bindings.ps1",
+    " M test/observation/verify-wow32-registration-surface.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-accelerator/",
-    "?? docs/etc/evidence/t484-s3-accelerator.md",
-    "?? tools/build/fixtures/wow-accelerator.cmake"
+    " M tools/build/wow32/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-bitmap/",
+    "?? docs/etc/evidence/t484-s3-bitmap.md",
+    "?? test/adapter-mvdm-host-out/wow/fixture-bitmap.bmp",
+    "?? tools/build/wow32/bitmap-tests.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 108,
-    "unchanged": 120,
+    "changed": 109,
+    "unchanged": 119,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 51,
+    "migrated-delivered": 52,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 11,
-    "requires-disposition-reconciliation": 110,
+    "requires-disposition-reconciliation": 109,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -2932,8 +2933,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "1e6f1cfa347b1cf2d8a4e43e48a9db266eae04f0b6b00bb47f44b9dd4be949fb",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "95b865a995f7526aa3914f8b0a6d60eb9a502e03"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-accelerator.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -2950,12 +2955,21 @@
       "id": "B0160",
       "file": "test/observation/verify-wow-bitmap-bindings.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "0a5d91369e5d311137ac3317c1e771a252e4316b8e6db29c9328a4ee63399424",
+      "state": "changed",
+      "current_sha256": "1e7c367feafcfdf02bdca8e7d1d57bfc0c557de84931e4485c0e3d1faea0914a",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-bitmap.md",
+        "retention_review": {
+          "evidence": "docs/etc/evidence/t484-s3-bitmap.md",
+          "reason": "Distinct nested/parallel bitmap loading and failure cleanup; preserve ABI audit with correct owner; remove resource generator",
+          "decision": "retain-consolidated"
+        },
+        "reason": "Current WOW product profiles/objects and native RC/link; fixed authored bitmap replaces generator",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0161",
@@ -5493,6 +5507,12 @@
     }
   ],
   "commits": {
+    "95b865a995f7526aa3914f8b0a6d60eb9a502e03": {
+      "subject": "T484 S3 P95 consolidate accelerator projections in native build",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-accelerator.md"
+      ]
+    },
     "9125ed5e94672ee3de79d10b78407643dafbdacc": {
       "subject": "T484 S3 P94 use native product object for Video7 painter contract",
       "evidence": [
@@ -7625,36 +7645,8 @@
       "file": "test/observation/verify-wow-bitmap-bindings.ps1",
       "hits": [
         {
-          "line": 11,
-          "text": "# The formal CMake root now contains one Ninja subgraph per component.  Keep"
-        },
-        {
-          "line": 14,
-          "text": "if (Test-Path (Join-Path $provider 'wow32/build.ninja')) {"
-        },
-        {
-          "line": 38,
-          "text": "$ninja = (Get-Command ninja.exe -ErrorAction Stop).Source"
-        },
-        {
-          "line": 42,
-          "text": "Build 'objects' ('\"'+$ninja+'\" -C \"'+$provider+'\" '+($objects -join ' '))"
-        },
-        {
-          "line": 43,
-          "text": "$compile = & $ninja -C $provider -t commands obj/compat/wow_bitmap_bindings.obj"
-        },
-        {
-          "line": 48,
-          "text": "$resourceCompile = & $ninja -C $provider -t commands obj/opennt-user/clres.obj"
-        },
-        {
-          "line": 52,
-          "text": "Build 'resource' ('rc.exe /nologo /i \"'+$out+'\" /fo \"'+$out+'/fixture.res\" \"'+$repo+'/test/adapter-mvdm-host-out/wow/wow_bitmap_binding_fixture.rc\"')"
-        },
-        {
-          "line": 65,
-          "text": "Build \"$case-link\" ('link.exe /nologo /machine:x86 /subsystem:console /opt:ref /out:\"'+$out+'/'+$case+'.exe\" '+$linkObjects+' kernel32.lib user32.lib gdi32.lib ntdll.lib legacy_stdio_definitions.lib')"
+          "line": 26,
+          "text": "$provider=\"$repo/build/.ninja/msvc-x86-release/wow32\""
         }
       ]
     },
