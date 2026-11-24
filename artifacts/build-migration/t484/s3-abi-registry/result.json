@@ -1,0 +1,45 @@
+{
+  "publication": {
+    "republished": false,
+    "unchanged": true,
+    "rawInputs": 11,
+    "publishedCopies": 22
+  },
+  "scope": "Compile-only public ABI and production registry object lifecycle with service doubles; not guest acceptance",
+  "owners": {
+    "abiObject": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/CMakeFiles/wow_public_memory_abi_fixture.dir/./O_/repos.hobby/ntvdm64/test/adapter-mvdm-host-out/wow/wow_public_memory_abi_fixture.c.obj",
+    "registryProviderHash": "6A922C9DCFC7015B30DEDC1D248ED8D18327052A4A8136054E26D066BA0186A1",
+    "registryProvider": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/CMakeFiles/obj_compat_wow_registry_binding_obj.dir/./O_/repos.hobby/ntvdm64/src/compat/wow_registry_binding.c.obj",
+    "machine": 332
+  },
+  "initial": {
+    "started": "2026-11-24T04:14:54.8109549+01:00",
+    "finished": "2026-11-24T04:15:02.2192037+01:00",
+    "pid": 17648,
+    "exit": 1
+  },
+  "registry": {
+    "started": "2026-11-24T03:15:53.5994271Z",
+    "deadlineSeconds": 30,
+    "pid": 28148
+  },
+  "cache": [
+    {
+      "time": 639310869476320642,
+      "path": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/CMakeFiles/wow_public_memory_abi_fixture.dir/./O_/repos.hobby/ntvdm64/test/adapter-mvdm-host-out/wow/wow_public_memory_abi_fixture.c.obj",
+      "hash": "639546FA0E4FF024A6F9CC7C839D35428074B49EC8EBF5C76DBD9E97D3BF04E8"
+    },
+    {
+      "time": 639310869533066173,
+      "path": "build/.ninja/msvc-x86-release/wow32/registry-shutdown.exe",
+      "hash": "41FF710D8855903DB123FC41E0479381659ED0CCCD3532B9EF679ABA9EEEC9ED"
+    }
+  ],
+  "validation": {
+    "started": "2026-11-24T04:15:38.7992398+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T04:17:01.8784077+01:00",
+    "pid": 27792
+  },
+  "fixturesUnchanged": true
+}

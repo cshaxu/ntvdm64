@@ -906,5 +906,15 @@
     "evidence": "docs/etc/evidence/t484-s3-return-unwind.md",
     "status": "migrated-delivered",
     "reason": "Current two cleanup contracts native; obsolete fixture link interface and historical/manual producer removed"
+  },
+  "test/observation/verify-wow-public-memory-abi.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Current native owner/profile; manual command parsing/compilation and stale provider path retired",
+    "evidence": "docs/etc/evidence/t484-s3-abi-registry.md"
+  },
+  "test/observation/verify-wow-registry-shutdown.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Current native owner/profile; manual command parsing/compilation and stale provider path retired",
+    "evidence": "docs/etc/evidence/t484-s3-abi-registry.md"
   }
 }

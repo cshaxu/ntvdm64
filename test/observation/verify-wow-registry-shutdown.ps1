@@ -1,26 +1,22 @@
-param(
-    [Parameter(Mandatory)][string]$BuildRoot,
-    [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-)
-$ErrorActionPreference = 'Stop'
-$repo = (Resolve-Path "$PSScriptRoot/../..").Path
-$out = [IO.Path]::GetFullPath($BuildRoot)
-if (!$out.StartsWith($repo + '\build\', [StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)) {
-    throw 'A fresh repository build output directory is required'
-}
-New-Item -ItemType Directory $out | Out-Null
-$provider = Join-Path $repo 'build/.ninja/msvc-x86-release/wow32'
-$source = Join-Path $repo 'test/compat/wow_registry_shutdown_fixture.c'
-$include = Join-Path $repo 'src'
-$object = Join-Path $provider 'obj/compat/wow_registry_binding.obj'
-$ninja = (Get-Command ninja.exe -ErrorAction Stop).Source
-& $ninja -C $provider 'obj/compat/wow_registry_binding.obj'
-if ($LASTEXITCODE) { throw 'Could not build selected registry binding object' }
-$command = 'call "' + $VsDevCmd + '" -arch=x86 -host_arch=x64 >nul && cl /nologo /W4 /MT /I "' + $include + '" /Fo"' + $out + '\fixture.obj" "' + $source + '" /link /nologo /out:"' + $out + '\fixture.exe" "' + $object + '" kernel32.lib'
-& cmd.exe /d /s /c $command
-if ($LASTEXITCODE) { throw 'Registry fixture compile or link failed' }
-& "$out/fixture.exe" | Tee-Object -FilePath "$out/result.log"
-if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/result.log" -SimpleMatch 'WOW_REGISTRY_POPULATED_SHUTDOWN_OK')) {
-    throw 'Registry fixture failed or did not produce its success marker'
-}
-@($source, $object, "$out/fixture.exe") | Get-FileHash -Algorithm SHA256 | Export-Csv -NoTypeInformation "$out/inputs.csv"
+param([Parameter(Mandatory)][string]$BuildRoot)
+# Run through an owned hidden background supervisor.
+$ErrorActionPreference='Stop'
+$repo=(Resolve-Path "$PSScriptRoot/../..").Path
+$out=[IO.Path]::GetFullPath($BuildRoot)
+if(!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Fresh build-owned output required'}
+$null=New-Item -ItemType Directory $out
+try{
+ & "$repo/tools/build-fixtures.cmd" x86 wow-registry-shutdown *> "$out/build.log"
+ if($LASTEXITCODE){throw 'Native registry contract build failed'}
+ $native="$repo/build/.ninja/msvc-x86-release/wow32"
+ Copy-Item "$native/registry-shutdown.exe" "$out/fixture.exe"
+ $p=Start-Process "$out/fixture.exe" -WindowStyle Hidden -PassThru -RedirectStandardOutput "$out/result.log" -RedirectStandardError "$out/stderr.log"
+ $null=$p.Handle
+ @{pid=$p.Id;started=$p.StartTime.ToUniversalTime().ToString('o');deadlineSeconds=30}|ConvertTo-Json|Set-Content "$out/process.json"
+ if(!$p.WaitForExit(30000)){& taskkill.exe /PID $p.Id /T /F;throw 'Owned registry deadline'}
+ $p.WaitForExit();$p.ExitCode|Set-Content "$out/process.exit"
+ if($p.ExitCode -or (Get-Content "$out/result.log" -Raw) -notmatch 'WOW_REGISTRY_POPULATED_SHUTDOWN_OK'){throw 'Registry shutdown contract failed'}
+ $object=(Get-Content "$native/registry-shutdown-provider.txt" -Raw).Trim()
+ Get-FileHash "$repo/test/compat/wow_registry_shutdown_fixture.c",$object,"$out/fixture.exe"|Export-Csv -NoTypeInformation "$out/inputs.csv"
+ 0|Set-Content "$out/exit.txt"
+}catch{$_|Out-String|Set-Content "$out/failure.txt";1|Set-Content "$out/exit.txt";throw}
