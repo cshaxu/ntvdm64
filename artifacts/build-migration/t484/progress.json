@@ -1,16 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "5e59c8ebafe9fda492e4c4e7446f9997d50debe1",
+  "head": "9849296cd823b6560cd585e707da40652b7103ff",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/test-worker-diagnostics.py",
-    " D test/observation/dpmi_pm_allocation_failure.c",
-    " M tools/audit/Verify-T420S38DpmiFatal.ps1",
-    " M tools/build/fixtures/guest-probes.cmake",
-    " M tools/build/worker/diagnostic-tests.cmake",
-    "?? docs/etc/evidence/t484-s4-fatal-preparation.md"
+    " M test/integration/verify-memory-transition-guest.ps1",
+    "?? docs/etc/evidence/t484-s4-memory-preparation.md",
+    "?? tools/prepare-ems-test.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6621,6 +6618,12 @@
     }
   ],
   "commits": {
+    "9849296cd823b6560cd585e707da40652b7103ff": {
+      "subject": "M0 T484 S4 P23: finish fatal preparation and retire stale allocation probe",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-fatal-preparation.md"
+      ]
+    },
     "5e59c8ebafe9fda492e4c4e7446f9997d50debe1": {
       "subject": "M0 T484 S4 P22: complete OEM guest CMD preparation",
       "evidence": [

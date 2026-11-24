@@ -1366,9 +1366,9 @@
     "evidence": "docs/etc/evidence/t484-s3-transition-probes.md"
   },
   "test/integration/verify-memory-transition-guest.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "All authored COM/EXE configurations use shared CMD production; memory transition also reuses existing PIF builder and native environment reader, removing CL/C# production. Shared stage/configuration remains.",
-    "evidence": "docs/etc/evidence/t484-s3-transition-probes.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P24 uses shared CMD alias/staging for all probes and children, with a bounded CMD entry to the existing native EMS profile builder. Six real guest cases, non-stage/duplicate rejection and cleanup pass; cached full build and dual publication hashes unchanged.",
+    "evidence": "docs/etc/evidence/t484-s4-memory-preparation.md"
   },
   "test/integration/verify-redirector-remote.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P19 stages through CMD and derives expected enumeration status from existing native provider comparator; real DOS boundary and 37 server-enum checks pass.","evidence":"docs/etc/evidence/t484-s4-remote-preparation.md"},
   "test/integration/verify-wow-generic-call.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P16 uses existing CMD input preparation and physical staging; real DLC status07 and both generic-call cases pass.","evidence":"docs/etc/evidence/t484-s4-dlc-generic-preparation.md"},

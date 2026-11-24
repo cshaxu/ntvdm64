@@ -14,14 +14,6 @@ if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgn
     (Test-Path $out)){throw 'Require a fresh build run root'}
 # A fresh test-only package preserves the published inputs and sealed baseline.
 New-Item -ItemType Directory $out | Out-Null
-$runtime=New-PhysicalRuntimeStage $baseline
-@{runtime=$runtime}|ConvertTo-Json|Set-Content (Join-Path $out 'stage.json')
-$binary=Get-PackageBinaryRoot $runtime
-$names='run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL'
-$identity=@($names | ForEach-Object {
-    [pscustomobject]@{name=$_;sha256=(Get-FileHash (Join-Path $binary $_)).Hash}
-})
-$identity | ConvertTo-Json | Set-Content (Join-Path $out 'package.json')
 $definitions=@(); $target='COMMAND.COM'; $expected=@()
 switch($Case){
     'interrupt16' {$source='dpmi_interrupt_return.asm';$expected=@('S38_INT16_RETURN_OK','S38_FAULT16_RETURN_NEGATIVE_OK','S38_HARDWARE_IRQ_RETURN_OK')}
@@ -31,22 +23,27 @@ switch($Case){
     'ems-call' {$source='ems_call_return_probe.asm';$expected=@('T430_EMS_CALL_RETURN_STACK_MAP_OK');$target='E30.PIF'}
     'xms-failure' {$source='xms_capability.asm';$definitions=@('-DFORCED_RELOCATION');$expected=@('S36_XMS_FORCED_RELOCATION_DATA_RELEASE_OK')}
 }
-New-Item -ItemType Directory -Force (Join-Path $runtime 'tests') | Out-Null
-$probe=Join-Path $runtime 'tests/S6PROBE.COM'
 & "$repo/tools/build-fixtures.cmd" x86 guest-memory-transition *> (Join-Path $out 'build.txt')
 if($LASTEXITCODE){throw 'Memory transition fixture build failed'}
 $cache="$repo/build/.ninja/fixtures-x86"
 $template=if($Case -eq 'ems-call'){"$cache/guest-probes/cpu-integration/CallReturn.COM"}else{"$cache/guest-probes/memory-transition/$Case.COM"}
-Copy-Item -LiteralPath $template -Destination $probe
+& "$repo/tools/prepare-test-inputs.cmd" $out $template S6PROBE.COM
+if($LASTEXITCODE){throw 'Memory probe preparation failed'}
+$inputs=@(Join-Path $out 'S6PROBE.COM')
 if($Case -eq 'task-cleanup'){
     foreach($child in @('D36N.COM','D36L.COM')){
-        Copy-Item -LiteralPath "$cache/guest-probes/memory-transition/$child" -Destination (Join-Path $runtime "tests/$child")
+        $inputs+="$cache/guest-probes/memory-transition/$child"
     }
 }
-if($Case -eq 'ems-call'){
-    Copy-Item $probe (Join-Path $binary 'E30.COM')
-    Copy-Item -LiteralPath "$cache/ems_pif_builder.exe" -Destination (Join-Path $out 'pif-builder.exe')
-}
+$runtime=New-PhysicalRuntimeStage $baseline -TestFiles $inputs
+@{runtime=$runtime}|ConvertTo-Json|Set-Content (Join-Path $out 'stage.json')
+$binary=Get-PackageBinaryRoot $runtime
+$probe=Join-Path $runtime 'tests/S6PROBE.COM'
+$names='run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntcon.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL'
+$identity=@($names | ForEach-Object {
+    [pscustomobject]@{name=$_;sha256=(Get-FileHash (Join-Path $binary $_)).Hash}
+})
+$identity | ConvertTo-Json | Set-Content (Join-Path $out 'package.json')
 Get-FileHash (Join-Path "$PSScriptRoot/../observation" $source),$probe,$PSCommandPath,$observerPath |
     ConvertTo-Json | Set-Content (Join-Path $out 'guest-identity.json')
 if($Case -eq 'task-cleanup'){
@@ -65,8 +62,18 @@ try{
     $env:MVDM_OBSERVER_MILESTONE_INPUT='1'
     $env:MVDM_OBSERVER_SHORT_HISTORY='1'
     if($Case -eq 'ems-call'){
-        & (Join-Path $out 'pif-builder.exe') $binary --close-on-exit
+        & "$repo/tools/prepare-ems-test.cmd" $out
+        if($LASTEXITCODE -ne 2){throw 'EMS preparation accepted a non-stage directory'}
+        & "$repo/tools/prepare-ems-test.cmd" $runtime
         if($LASTEXITCODE){throw 'EMS profile generation failed'}
+        $emsFiles=@('E30.COM','E30.PIF','E30.NT','E30AUTO.NT') | ForEach-Object {Join-Path $binary $_}
+        $emsHashes=@($emsFiles | Get-FileHash)
+        & "$repo/tools/prepare-ems-test.cmd" $runtime
+        if($LASTEXITCODE -ne 2){throw 'EMS preparation overwrote an existing profile'}
+        foreach($item in $emsHashes){
+            if((Get-FileHash $item.Path).Hash -ne $item.Hash){throw 'Rejected EMS preparation changed an output'}
+        }
+        $emsHashes | ConvertTo-Json | Set-Content (Join-Path $out 'ems-preparation.json')
     }
     $report=Join-Path $out 'guest.txt'
     $start=[Diagnostics.ProcessStartInfo]::new()

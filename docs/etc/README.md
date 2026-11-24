@@ -1946,3 +1946,4 @@ post-publication targeted checks.
 
 - [T484 S4 OEM guest preparation](evidence/t484-s4-oem-preparation.md)
 - [T484 S4 DPMI fatal preparation](evidence/t484-s4-fatal-preparation.md)
+- [T484 S4 memory-transition preparation](evidence/t484-s4-memory-preparation.md)
