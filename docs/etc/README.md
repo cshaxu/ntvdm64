@@ -1835,3 +1835,5 @@ post-publication targeted checks.
 - [T484 S3 serial native oracle and isolation](evidence/t484-s3-serial-native.md).
 
 - [T484 S3 DLL BOOLEAN ABI witness cleanup](evidence/t484-s3-wow-entry-native.md).
+
+- [T484 S3 shared controller path binding](evidence/t484-s3-controller-paths.md).

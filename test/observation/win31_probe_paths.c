@@ -24,24 +24,28 @@ static int load(const char *path, image *value)
     return fclose(file) == 0;
 }
 
-static int bind_path(image *value, const char *marker, const char *directory,
-                     const char *name)
+static int bind_field(image *value, const char *marker, const char *path)
 {
-    size_t i, found = 0, offset = 0, length = strlen(marker);
-    char path[128];
-    int written = snprintf(path, sizeof(path), "%s\\%s", directory, name);
-    if (written < 0 || written >= (int)sizeof(path)) return 0;
+    size_t i, found = 0, offset = 0, length = strlen(marker), written = strlen(path);
+    if (!length || length >= 128 || written >= 128) return 0;
     for (i = 0; path[i]; ++i)
         if ((unsigned char)path[i] < 32 || (unsigned char)path[i] > 126) return 0;
     for (i = 0; i + length <= value->size; ++i) {
         if (!memcmp(value->bytes + i, marker, length)) { ++found; offset = i; }
     }
-    if (found != 1 || value->size - offset < sizeof(path)) return 0;
-    memset(value->bytes + offset, 0, sizeof(path));
-    memcpy(value->bytes + offset, path, (size_t)written);
+    if (found != 1 || value->size - offset < 128) return 0;
+    memset(value->bytes + offset, 0, 128);
+    memcpy(value->bytes + offset, path, written);
     return 1;
 }
 
+static int bind_path(image *value, const char *marker, const char *directory,
+                     const char *name)
+{
+    char path[128];
+    int written = snprintf(path, sizeof(path), "%s\\%s", directory, name);
+    return written >= 0 && written < (int)sizeof(path) && bind_field(value, marker, path);
+}
 static int save(const char *path, const image *value)
 {
     FILE *file = fopen(path, "wb");
@@ -56,6 +60,18 @@ int main(int argc, char **argv)
 {
     image windows = {0}, dos = {0};
     int result = 1;
+    if (argc >= 5 && !strcmp(argv[1], "--fields")) {
+        int at;
+        if ((argc - 3) % 2 || !load(argv[2], &windows)) goto done;
+        for (at = 3; at < argc; at += 2) {
+            /* Only named path slots in independently authored witnesses. */
+            if ((strncmp(argv[at], "@VM_", 4) && strncmp(argv[at], "@W31_", 5)) ||
+                argv[at][strlen(argv[at]) - 1] != '@' ||
+                !bind_field(&windows, argv[at], argv[at + 1])) goto done;
+        }
+        if (save(argv[2], &windows)) result = 0;
+        goto done;
+    }
     if (argc != 4) return 2;
     if (!load(argv[1], &windows) || !load(argv[2], &dos)) goto done;
     /* Validate both complete inputs before writing either test copy. */

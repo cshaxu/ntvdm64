@@ -113,12 +113,10 @@ try {
  if($producer.ExitCode){throw 'Controller build failed'}
 }finally{$producer.Dispose()}
 
-$bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
-foreach($field in @(@('@W31_BOOT_PATH@',"$dest\PATCH\BOOT.BIN"),@('@W31_READY_PATH@',"$dest\PATCH\READY.BIN"))){
- $marker=[Text.Encoding]::ASCII.GetString($bytes).IndexOf($field[0]);if($marker -lt 0){throw "Missing controller marker $($field[0])"}
- $value=[Text.Encoding]::ASCII.GetBytes($field[1]);[Array]::Clear($bytes,$marker,128);[Array]::Copy($value,0,$bytes,$marker,$value.Length)
-}
-[IO.File]::WriteAllBytes("$task/controller.exe",$bytes)
+& "$repo/tools/build-fixtures.cmd" x64 win31-probe-paths *> "$task/controller-paths-build.log"
+if($LASTEXITCODE){throw 'Controller path binder build failed'}
+& "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" --fields "$task/controller.exe" '@W31_BOOT_PATH@' "$dest\PATCH\BOOT.BIN" '@W31_READY_PATH@' "$dest\PATCH\READY.BIN"
+if($LASTEXITCODE){throw 'Controller path binding failed'}
 $keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS','PSExecutionPolicyPreference')
 $nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}

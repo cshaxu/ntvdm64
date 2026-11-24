@@ -159,18 +159,18 @@
   },
   "test/integration/ntvdm64-386/verify-win31-identity.ps1": {
     "status": "pending-producer-migration",
-    "reason": "P38 delegates all four authored assembly kinds to CMD/native with25 byte-identical checks. Per-installation binary-field filling and shared runtime/staging production still require reconciliation.",
-    "evidence": "docs/etc/evidence/t484-s3-vm-identity.md"
+    "reason": "Native assembly and shared controller path binding verified byte-identical; remaining COM fields/config/PIF and shared runtime staging require reconciliation",
+    "evidence": "docs/etc/evidence/t484-s3-controller-paths.md"
   },
   "test/integration/ntvdm64-386/verify-win95-editors.ps1": {
     "status": "pending-producer-migration",
-    "reason": "P39 replaces assembly string rewriting and direct NASM with shared CMD/native includes;48 byte-identical variants and Win31 regression pass. Per-installation binary-field filling and transitive runtime/staging production remain pending.",
-    "evidence": "docs/etc/evidence/t484-s3-win95-editor.md"
+    "reason": "Native assembly and shared controller path binding verified byte-identical; remaining COM fields/config/PIF and shared runtime staging require reconciliation",
+    "evidence": "docs/etc/evidence/t484-s3-controller-paths.md"
   },
   "test/integration/ntvdm64-386/verify-win95-identity.ps1": {
     "status": "pending-producer-migration",
-    "reason": "P38 shares CMD/native identity, reuse and controller production with Win31. Per-installation binary-field filling and shared runtime/staging production remain pending.",
-    "evidence": "docs/etc/evidence/t484-s3-vm-identity.md"
+    "reason": "Native assembly and shared controller path binding verified byte-identical; remaining COM fields/config/PIF and shared runtime staging require reconciliation",
+    "evidence": "docs/etc/evidence/t484-s3-controller-paths.md"
   },
   "test/integration/verify-native-guest-output.ps1": {
     "status": "pending-producer-migration",

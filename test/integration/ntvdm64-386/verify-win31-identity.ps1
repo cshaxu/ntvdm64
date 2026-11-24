@@ -306,18 +306,14 @@ if($Reuse){
 if($Keyboard){$defines+='-DKEYBOARD=1'}
 if($BlockedKeyboard){$defines+='-DBLOCKED_KEYBOARD=1'}
 Invoke-VmIdentityBuild "$task/controller.exe" controller $defines
-$bytes=[IO.File]::ReadAllBytes("$task/controller.exe")
 $fields=@(@('@VM_API_PATH@',"$dest\PATCH\VMLOAD.BIN"),@('@VM_A_PATH@',"$dest\PATCH\A.BIN"),@('@VM_B_PATH@',"$dest\PATCH\B.BIN"))
 if($Reuse){$fields+=@(@('@VM_REUSE_PROGRAM@',"$dest\PATCH\REUSE.PIF"),@('@VM_REUSE_RESULT@',"$dest\PATCH\REUSE.BIN"))}
-foreach($field in $fields){
- $image=[Text.Encoding]::ASCII.GetString($bytes)
- $offset=$image.IndexOf($field[0],[StringComparison]::Ordinal)
- $value=[Text.Encoding]::ASCII.GetBytes($field[1])
- if($offset -lt 0 -or $image.LastIndexOf($field[0],[StringComparison]::Ordinal) -ne $offset -or $value.Length -ge 128){throw 'Invalid controller path field'}
- [Array]::Clear($bytes,$offset,128)
- [Array]::Copy($value,0,$bytes,$offset,$value.Length)
-}
-[IO.File]::WriteAllBytes("$task/controller.exe",$bytes)
+& "$repo/tools/build-fixtures.cmd" x64 win31-probe-paths *> "$task/controller-paths-build.log"
+if($LASTEXITCODE){throw 'Controller path binder build failed'}
+$binding=@('--fields',"$task/controller.exe")
+foreach($field in $fields){$binding+=@($field[0],$field[1])}
+& "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" @binding
+if($LASTEXITCODE){throw 'Controller path binding failed'}
 $keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS','PSExecutionPolicyPreference')
 $nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}

@@ -1,18 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "9460791b1215641a65a84df9786c2dc3359498f3",
+  "head": "4dcfd3775cd67d17ecc2a53d6c77cc2faa0ed493",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    "D  test/mvdm-host/wow_dll_dialog_provider.h",
-    " M test/mvdm-host/wow_dll_entry_boolean_fixture.c",
-    " M test/mvdm-host/wow_dll_loader_provider.c",
-    " M test/observation/verify-wow-dll-entry-boolean.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-wow-entry-native.md",
-    "?? tools/build/fixtures/wow-entry-abi.cmake"
+    " M test/build/verify-win31-probe-paths.ps1",
+    " M test/integration/ntvdm64-386/verify-win31-identity.ps1",
+    " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
+    " M test/integration/ntvdm64-386/verify-win95-identity.ps1",
+    " M test/observation/win31_probe_paths.c",
+    "?? docs/etc/evidence/t484-s3-controller-paths.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -485,7 +483,7 @@
       "file": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "ba079390ae0518fc1e36c3f143cc10fdc7cd801d5237a4d73eb2d2708e675a31",
+      "current_sha256": "e653dbee1f25ea151ca9bc5725ac39189128ac913922ce0d1e979fb33bdd514d",
       "revisions": [
         "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd"
       ],
@@ -495,8 +493,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "P38 delegates all four authored assembly kinds to CMD/native with25 byte-identical checks. Per-installation binary-field filling and shared runtime/staging production still require reconciliation.",
-        "evidence": "docs/etc/evidence/t484-s3-vm-identity.md"
+        "reason": "Native assembly and shared controller path binding verified byte-identical; remaining COM fields/config/PIF and shared runtime staging require reconciliation",
+        "evidence": "docs/etc/evidence/t484-s3-controller-paths.md"
       }
     },
     {
@@ -504,7 +502,7 @@
       "file": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "8a5759eb65225f0adc00b934e232473a478899cae8b178dd64e7a4b850865b8b",
+      "current_sha256": "17fe0bd724af49fbefd66942bcd8b372d5cd7d4aa80939655fabddec2bc8674d",
       "revisions": [
         "7e89114b14c4199b138033c3352b530105f8c7fb"
       ],
@@ -514,8 +512,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "P39 replaces assembly string rewriting and direct NASM with shared CMD/native includes;48 byte-identical variants and Win31 regression pass. Per-installation binary-field filling and transitive runtime/staging production remain pending.",
-        "evidence": "docs/etc/evidence/t484-s3-win95-editor.md"
+        "reason": "Native assembly and shared controller path binding verified byte-identical; remaining COM fields/config/PIF and shared runtime staging require reconciliation",
+        "evidence": "docs/etc/evidence/t484-s3-controller-paths.md"
       }
     },
     {
@@ -523,7 +521,7 @@
       "file": "test/integration/ntvdm64-386/verify-win95-identity.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "ff98983ba43d9679ff636ea2e8cf3e4584aa557c882a415c82a840e27c1b2a55",
+      "current_sha256": "4ddb9a019f058661daf3c5fafd375e2dddead33cc022c960a4eea98752339c87",
       "revisions": [
         "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd"
       ],
@@ -533,8 +531,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "P38 shares CMD/native identity, reuse and controller production with Win31. Per-installation binary-field filling and shared runtime/staging production remain pending.",
-        "evidence": "docs/etc/evidence/t484-s3-vm-identity.md"
+        "reason": "Native assembly and shared controller path binding verified byte-identical; remaining COM fields/config/PIF and shared runtime staging require reconciliation",
+        "evidence": "docs/etc/evidence/t484-s3-controller-paths.md"
       }
     },
     {
@@ -3268,8 +3266,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "32046eb27b54d1b756923d64565cfc74197bac3a882cccb8e6ef4ced80d44032",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "4dcfd3775cd67d17ecc2a53d6c77cc2faa0ed493"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-wow-entry-native.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-wow-entry-native.md",
@@ -6462,6 +6464,12 @@
     }
   ],
   "commits": {
+    "4dcfd3775cd67d17ecc2a53d6c77cc2faa0ed493": {
+      "subject": "T484 S3 P178 simplify and migrate DLL BOOLEAN witness",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-wow-entry-native.md"
+      ]
+    },
     "9460791b1215641a65a84df9786c2dc3359498f3": {
       "subject": "T484 S3 P177 modernize serial probe production and isolation",
       "evidence": [
@@ -7731,11 +7739,15 @@
       "file": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
       "hits": [
         {
-          "line": 322,
+          "line": 315,
+          "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
+        },
+        {
+          "line": 318,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 324,
+          "line": 320,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
@@ -7745,11 +7757,15 @@
       "file": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
       "hits": [
         {
-          "line": 123,
+          "line": 118,
+          "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" --fields \"$task/controller.exe\" '@W31_BOOT_PATH@' \"$dest\\PATCH\\BOOT.BIN\" '@W31_READY_PATH@' \"$dest\\PATCH\\READY.BIN\""
+        },
+        {
+          "line": 121,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 125,
+          "line": 123,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
@@ -7759,11 +7775,15 @@
       "file": "test/integration/ntvdm64-386/verify-win95-identity.ps1",
       "hits": [
         {
-          "line": 153,
+          "line": 146,
+          "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
+        },
+        {
+          "line": 149,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 155,
+          "line": 151,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
