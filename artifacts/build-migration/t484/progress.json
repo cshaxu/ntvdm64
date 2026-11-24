@@ -1,20 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f4da4ba070a70d31e916fc5e624fae9e36dcae41",
+  "head": "3e6c023da2b83cbf9213c8e767045fbc40b6f7ad",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
-    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/m0-t478-s12-redirector-loader.md",
+    " M docs/etc/evidence/m0-t478-s20-dib-registration.md",
+    " M docs/etc/evidence/m0-t478-s21-dib-retirement.md",
     " M docs/states/CURRENT.md",
-    " D test/integration/verify-dlc-worker-event.ps1",
-    " D test/integration/verify-redir-async-queue.ps1",
-    " D test/integration/verify-redirector-loader.ps1",
+    " D test/integration/verify-wow-dib-failure-cleanup.ps1",
+    " D test/integration/verify-wow-dib-retirement.ps1",
     " M tools/build-fixtures.cmd",
+    " M tools/build/SourceProjection.cmake",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-redir-contracts.md",
-    "?? test/integration/verify-redir-contracts.ps1",
-    "?? tools/build/fixtures/redir-contracts.cmake"
+    "?? docs/etc/evidence/t484-s3-dib-contracts.md",
+    "?? test/integration/verify-wow-dib-contracts.ps1",
+    "?? tools/build/fixtures/wow-dib-contracts.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6493,6 +6493,13 @@
     }
   ],
   "commits": {
+    "3e6c023da2b83cbf9213c8e767045fbc40b6f7ad": {
+      "subject": "M0 T484 S3 P201: consolidate native redirector contract producers",
+      "evidence": [
+        "docs/etc/evidence/m0-t478-s12-redirector-loader.md",
+        "docs/etc/evidence/t484-s3-redir-contracts.md"
+      ]
+    },
     "f4da4ba070a70d31e916fc5e624fae9e36dcae41": {
       "subject": "M0 T484 S3 P200: consolidate controlled WOW boundary producers",
       "evidence": [

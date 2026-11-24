@@ -386,6 +386,7 @@ include(wow-dde.cmake)
 
 include(wow-boundaries.cmake)
 include(wow-construction.cmake)
+include(wow-dib-contracts.cmake)
 include(wow-capture.cmake)
 include(wow-owned-read.cmake)
 include(wow-parameter-map.cmake)

@@ -80,6 +80,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P201 redirector contracts](../etc/evidence/t484-s3-redir-contracts.md) | Three compiler recipes consolidated; DLC33/loader94 assertions pass, queue9 reproduce known failure explicitly.24 direct candidates remain; frozen316/355 and23 staging chains unchanged. |
 
+| [P202 DIB contracts](../etc/evidence/t484-s3-dib-contracts.md) | Two producers consolidated;82 cleanup and57 retirement assertions pass with exact selected bodies.22 direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
 The frozen355 census is not the complete remaining invocation graph. P193

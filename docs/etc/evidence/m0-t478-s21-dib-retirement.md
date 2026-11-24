@@ -32,7 +32,7 @@ Do not claim these transitions are universally safe or newly repaired.
 ## Verification
 
 [Fixture](../../../test/integration/wow_dib_retirement_test.c),
-[runner](../../../test/integration/verify-wow-dib-retirement.ps1), and
+[runner](../../../test/integration/verify-wow-dib-contracts.ps1), and
 [receipt](../../../artifacts/mvdm-audit/shard-3/dib-retirement-s21-results.json).
 The runner extracts the five complete current bodies and original DIBINFO and
 FindAndReleaseDib argument declarations, compiling x86 with MSVC /W4 /WX.

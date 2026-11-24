@@ -38,7 +38,7 @@ admitted valid-contract repair or explicit owner scope.
 ## Bounded native verification
 
 [Fixture](../../../test/integration/wow_dib_failure_cleanup_test.c) and
-[runner](../../../test/integration/verify-wow-dib-failure-cleanup.ps1) extract
+[runner](../../../test/integration/verify-wow-dib-contracts.ps1) extract
 only the actual W32HandleDibDrv finally block and compile it with MSVC. This is
 not whole-owner/guest execution. Real native DCs, temporary delete-on-close
 files, sections and selected DIB bitmaps model each acquisition prefix. Both

@@ -1873,3 +1873,5 @@ post-publication targeted checks.
 [T484 S3 controlled WOW boundaries](evidence/t484-s3-controlled-boundaries.md) records shared extraction/build and preserved31-case assertions.
 
 [T484 S3 redirector contracts](evidence/t484-s3-redir-contracts.md) records consolidated producers and the explicit known queue-failure boundary.
+
+[T484 S3 DIB contracts](evidence/t484-s3-dib-contracts.md) records139 native resource assertions and shared source projection.

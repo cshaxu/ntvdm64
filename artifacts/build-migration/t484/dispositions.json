@@ -1484,14 +1484,14 @@
     "evidence": "docs/etc/evidence/t484-s3-redir-contracts.md"
   },
   "test/integration/verify-wow-dib-failure-cleanup.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P202 consolidates current DIB cleanup/retirement through native CMD projection and one runner. Unchanged C fixtures pass82/57 real-resource assertions; independently selected function bodies match.",
+    "evidence": "docs/etc/evidence/t484-s3-dib-contracts.md"
   },
   "test/integration/verify-wow-dib-retirement.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P202 consolidates current DIB cleanup/retirement through native CMD projection and one runner. Unchanged C fixtures pass82/57 real-resource assertions; independently selected function bodies match.",
+    "evidence": "docs/etc/evidence/t484-s3-dib-contracts.md"
   },
   "test/integration/verify-wow-embedding-root.ps1": {
     "status": "supplemental-direct-command-review",
