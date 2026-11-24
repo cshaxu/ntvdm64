@@ -1,6 +1,6 @@
 /* Exercise original cmdkeyb.c's configured, absent and malformed branches
  * without changing the host keyboard layout or Registry.  The production PIF
- * test supplies the guest BOP route; this fixture supplies only its Console
+ * test verifies startup independently; this fixture supplies only its Console
  * layout input so each original reader outcome can be deterministic. */
 #define WINNT 1
 #include <windows.h>

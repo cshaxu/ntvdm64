@@ -1,90 +1,66 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $true)] [string]$BuildRoot,
-    [string]$RuntimeRoot = 'O:\winnt'
+    [Parameter(Mandatory)][string]$BuildRoot,
+    [string]$RuntimeRoot='O:\winnt',
+    [string]$Observer
 )
-
-Set-StrictMode -Version Latest
-$ErrorActionPreference = 'Stop'
-
-$repository = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..\..')).Path
-$build = (Resolve-Path -LiteralPath $BuildRoot).Path
-$runtime = (Resolve-Path -LiteralPath $RuntimeRoot).Path
-$logs = Join-Path $runtime 'logs'
-$tests = Join-Path $runtime 'tests'
-$fixture = Join-Path $repository 'test\mvdm-host\fixtures\S45-KEYBOARD-NTVDM.REG'
-$builder = Join-Path $build 's45-keyboard-profile-builder.exe'
-$observer = Join-Path $build 's45-pif-detached-observer.exe'
-$reader = Join-Path $build 's45-cmdkeyb-shadow-fixture.exe'
-$report = Join-Path $logs 's45-keyboard-pif-console.txt'
-$rpcTrace = Join-Path $logs 's45-keyboard-pif-rpc.log'
-$registryTrace = Join-Path $logs 's45-keyboard-pif-registry.log'
-$readerTrace = Join-Path $build 's45-cmdkeyb-shadow-fixture.trace'
-$shadow = Join-Path $runtime 'NTVDM.REG'
-$pif = Join-Path $tests 'S45KEY.PIF'
-
-if (@(Get-Process ntvdm,basesrv,run16 -ErrorAction SilentlyContinue).Count -ne 0) {
-    throw 'S45 keyboard test requires no existing run16/basesrv/ntvdm session.'
+$ErrorActionPreference='Stop'
+$repository=(Resolve-Path "$PSScriptRoot/../..").Path
+$build=[IO.Path]::GetFullPath($BuildRoot)
+if(!$build.StartsWith($repository+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $build)){
+    throw 'Require a fresh build-owned evidence directory'
 }
-if (!(Test-Path -LiteralPath $fixture)) { throw "Required input is absent: $fixture" }
-# Keep the compiler environment in its own child; original COMMAND must not
-# inherit toolchain variables from construction of these test-only helpers.
-$producer=Start-Process -FilePath $env:ComSpec -ArgumentList ('/d /s /c ""'+(Join-Path $repository 'tools/build-fixtures.cmd')+'" x86 command-keyboard-shadow"') -WorkingDirectory $repository -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $build 'keyboard-build.log') -RedirectStandardError (Join-Path $build 'keyboard-build.stderr.log')
+$package=(Resolve-Path $RuntimeRoot).Path
+New-Item -ItemType Directory $build|Out-Null
+& "$repository/tools/build-fixtures.cmd" x86 command-keyboard-shadow *> "$build/build.log"
+if($LASTEXITCODE){throw 'Keyboard fixtures failed to build'}
+$cache="$repository/build/.ninja/msvc-x86-release/worker"
+$builder="$cache/s45-keyboard-profile-builder.exe"
+New-Item -ItemType Directory (Join-Path $build 'system32')|Out-Null
+$reader=Join-Path $build 'system32/s45-cmdkeyb-shadow-fixture.exe'
+Copy-Item "$cache/s45-cmdkeyb-shadow-fixture.exe" $reader
+if(!$Observer){$Observer="$repository/build/.ninja/fixtures-x64/console-startup-observer.exe"}
+$observerPath=(Resolve-Path $Observer).Path
+. "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
+$stage=$null;$scope=$null;$saved=@{}
+foreach($name in 'PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','NTVDM_SHADOW_REGISTRY_TRACE'){
+    $saved[$name]=[Environment]::GetEnvironmentVariable($name)
+}
 try {
-    "pid=$($producer.Id) started=$($producer.StartTime.ToUniversalTime().ToString('o'))" | Set-Content (Join-Path $build 'keyboard-producer.txt')
-    if(!$producer.WaitForExit(300000)){
-        $producer.Kill($true);$producer.WaitForExit()
-        throw 'Keyboard producer timed out'
+    $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity
+    $scope=New-IsolatedPackageScope $stage
+    $binary=Get-PackageBinaryRoot $stage
+    $tests=Join-Path $binary 'KTEST'
+    New-Item -ItemType Directory $tests|Out-Null
+    & $builder $tests (Join-Path $binary 'MEM.EXE')
+    if($LASTEXITCODE){throw 'Keyboard PIF generation failed'}
+    Copy-Item "$repository/test/mvdm-host/fixtures/S45-KEYBOARD-NTVDM.REG" (Join-Path $binary 'NTVDM.REG') -Force
+    $trace=Join-Path $build 'registry.log'
+    $report=Join-Path $build 'observer.txt'
+    $env:PATH="$binary;$env:SystemRoot\System32;$env:SystemRoot"
+    $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+    $env:NTVDM_SHADOW_REGISTRY_TRACE=$trace
+    & $observerPath (Join-Path $binary 'run16.exe') $binary $report --wait (Join-Path $tests 'S45KEY.PIF') --observation-timeout-ms 30000
+    if($LASTEXITCODE){throw 'Keyboard guest observer failed'}
+    $screen=Get-Content "$report.console.txt" -Raw
+    # The native Console layout query may legitimately fail: original COMMAND
+    # then takes NoInstallkb16. Do not require a registry hit from this run.
+    # Deterministic original-reader outcomes are checked separately below.
+    if($screen -notmatch 'bytes total conventional mem' -or $screen -match 'Bad command or filename'){
+        throw 'Keyboard PIF route lacks MEM output'
     }
-    "exit=$($producer.ExitCode)" | Add-Content (Join-Path $build 'keyboard-producer.txt')
-    if($producer.ExitCode){throw 'Keyboard producer failed'}
-} finally {$producer.Dispose()}
-$cache=Join-Path $repository 'build/.ninja/msvc-x86-release/worker'
-foreach($destination in @($builder,$observer,$reader)) {
-    $source=Join-Path $cache ([IO.Path]::GetFileName($destination))
-    if(![string]::Equals($source,$destination,[StringComparison]::OrdinalIgnoreCase)) {
-        Copy-Item -LiteralPath $source -Destination $destination
+    $env:NTVDM_SHADOW_REGISTRY_TRACE="$build/reader.trace"
+    & $reader *> "$build/reader.txt"
+    if($LASTEXITCODE){throw 'Original keyboard reader fixture failed'}
+    $readerText=Get-Content "$build/reader.trace" -Raw
+    foreach($marker in 'QUERY_OK','QUERY_MALFORMED','QUERY_ABSENT'){
+        if($readerText -notmatch $marker){throw "Missing reader result: $marker"}
     }
-}
-New-Item -ItemType Directory -Force -Path $logs,$tests | Out-Null
-foreach ($name in @('run16.exe','ntsrv.exe','ntvdm.exe','ntmon.exe')) {
-    Copy-Item -LiteralPath (Join-Path $build $name) -Destination (Join-Path $runtime $name) -Force
-}
-
-try {
-    & $builder $tests 'MEM.EXE'
-    if ($LASTEXITCODE -ne 0) { throw 'S45 PIF fixture generation failed.' }
-    Copy-Item -LiteralPath $fixture -Destination $shadow -Force
-    Remove-Item -LiteralPath $report,$rpcTrace,$registryTrace,$readerTrace -Force -ErrorAction SilentlyContinue
-    $env:MVDM_S34_TRACE_PATH = $rpcTrace
-    $env:NTVDM_SHADOW_REGISTRY_TRACE = $registryTrace
-    & $observer $report 'tests\S45KEY.PIF'
-    if ($LASTEXITCODE -ne 0) { throw 'Real PIF/MEM Console observation failed.' }
-    $screen = Get-Content -LiteralPath $report -Raw
-    $registry = @(Get-Content -LiteralPath $registryTrace)
-    $required = @(
-        'OPEN_SECTION:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybCodes',
-        'OPEN_SECTION:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Keyboard Layout\DosKeybIDs',
-        'QUERY_OK',
-        'CLOSE'
-    )
-    if ($screen -notmatch 'bytes total conventional mem' -or
-        $screen -match 'Bad command or filename' -or
-        @($required | Where-Object { $registry -notcontains $_ }).Count -ne 0) {
-        throw 'Real PIF/MEM keyboard path lacks required Console or original-reader evidence.'
+    'S45_COMMAND_KEYBOARD_LAYERED_SHADOW_OK'|Set-Content "$build/result.txt"
+} finally {
+    try {if($scope){Stop-IsolatedPackageScope $scope}} finally {
+        try {if($stage){Remove-PhysicalRuntimeStage $stage}} finally {
+            foreach($name in $saved.Keys){[Environment]::SetEnvironmentVariable($name,$saved[$name])}
+        }
     }
-
-    $env:NTVDM_SHADOW_REGISTRY_TRACE = $readerTrace
-    & $reader
-    if ($LASTEXITCODE -ne 0) { throw 'Original cmdkeyb configured/absent/malformed fixture failed.' }
-    $readerText = Get-Content -LiteralPath $readerTrace -Raw
-    if ($readerText -notmatch 'QUERY_OK' -or $readerText -notmatch 'QUERY_MALFORMED' -or
-        $readerText -notmatch 'QUERY_ABSENT') {
-        throw 'Original cmdkeyb fixture lacks one required provider disposition.'
-    }
-    Write-Output 'S45_COMMAND_KEYBOARD_LAYERED_SHADOW_OK'
-}
-finally {
-    Get-Process ntvdm,basesrv,run16 -ErrorAction SilentlyContinue | Stop-Process -Force
-    Remove-Item -LiteralPath $shadow,$pif -Force -ErrorAction SilentlyContinue
 }

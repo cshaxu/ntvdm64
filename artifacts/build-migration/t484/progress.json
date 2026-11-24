@@ -1,14 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "eddce2c53d0a7ff99d56fe60f2115c5a4c4c5ba8",
+  "head": "f472f81a5055b389b8fd7b0b867bdb22bf3b74fc",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-generic-call.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/wow-mine.cmake",
-    "?? docs/etc/evidence/t484-s3-generic-native.md"
+    " M test/integration/verify-s45-keyboard-shadow.ps1",
+    " M test/mvdm-host/s45_cmdkeyb_shadow_fixture.c",
+    " D test/observation/pif_detached_observer.c",
+    " M tools/build/worker/keyboard-tests.cmake",
+    "?? docs/etc/evidence/t484-s3-keyboard-isolation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -805,7 +806,7 @@
       "file": "test/integration/verify-s45-keyboard-shadow.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "4dc123429d78d90e867245aa448d17b538939e8eed6df2199f2d77581e0275ce",
+      "current_sha256": "0fdd6faf10c5c9042878d1fed2a5296c4d0e7a118763c5247c77ebd4b96f53a8",
       "revisions": [
         "29b0690b3c85813887eff1580f32c74b983cf98d"
       ],
@@ -815,8 +816,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Three native CMD producers verified; old root-layout staging, hardcoded observer and cleanup require migration before whole-chain acceptance",
-        "evidence": "docs/etc/evidence/t484-s3-keyboard-shadow.md"
+        "reason": "P192 removes the obsolete detached observer, reuses scoped private-desktop observation and verifies real PIF/MEM plus four deterministic original-reader outcomes. Two CMD helpers remain; shared physical staging belongs to S4.",
+        "evidence": "docs/etc/evidence/t484-s3-keyboard-isolation.md"
       }
     },
     {
@@ -6483,6 +6484,12 @@
     }
   ],
   "commits": {
+    "f472f81a5055b389b8fd7b0b867bdb22bf3b74fc": {
+      "subject": "T484 S3 P191 migrate generic thunk native fixtures",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-generic-native.md"
+      ]
+    },
     "eddce2c53d0a7ff99d56fe60f2115c5a4c4c5ba8": {
       "subject": "T484 S3 P190 migrate parameterized remote probe build",
       "evidence": [
@@ -8065,8 +8072,12 @@
       "file": "test/integration/verify-s45-keyboard-shadow.ps1",
       "hits": [
         {
-          "line": 42,
-          "text": "$cache=Join-Path $repository 'build/.ninja/msvc-x86-release/worker'"
+          "line": 17,
+          "text": "$cache=\"$repository/build/.ninja/msvc-x86-release/worker\""
+        },
+        {
+          "line": 22,
+          "text": "if(!$Observer){$Observer=\"$repository/build/.ninja/fixtures-x64/console-startup-observer.exe\"}"
         }
       ]
     },

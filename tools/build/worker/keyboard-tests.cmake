@@ -3,7 +3,6 @@
 worker_unit("obj/tests/keyboard-system-root.obj" "${NTVDM_REPO}/src/compat/system_root.c"
   "/nologo /MT /W4 /DNtvdmGetSystemDirectoryA=keyboard_fixture_system_directory")
 foreach(pair IN ITEMS "s45-keyboard-profile-builder|test/observation/s45_keyboard_profile_builder.c"
-    "s45-pif-detached-observer|test/observation/pif_detached_observer.c"
     "s45-cmdkeyb-shadow-fixture|test/mvdm-host/s45_cmdkeyb_shadow_fixture.c")
   string(REPLACE "|" ";" parts "${pair}")
   list(GET parts 0 name)
@@ -13,8 +12,6 @@ foreach(pair IN ITEMS "s45-keyboard-profile-builder|test/observation/s45_keyboar
   set(libraries "kernel32.lib")
   if(name STREQUAL "s45-keyboard-profile-builder")
     string(APPEND flags " /I\"${NTVDM_REPO}/src/non-mvdm/public/internal/windows/inc\"")
-  elseif(name STREQUAL "s45-pif-detached-observer")
-    string(APPEND libraries " user32.lib")
   else()
     # Keep the fixture's instrumented system-directory input; registry package
     # lookup uses the real implementation, with only that overlapping name renamed.

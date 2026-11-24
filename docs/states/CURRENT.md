@@ -100,6 +100,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P191 generic-thunk fixtures](../etc/evidence/t484-s3-generic-native.md) | NE/native DLL producers share CMD graph; normal and cdecl real Win16 cases pass three phases and three releases. All18 new direct NASM sites handled;19 supplemental preparation chains remain. Fixed316/355. |
 
+| [P192 keyboard isolation](../etc/evidence/t484-s3-keyboard-isolation.md) | Removed obsolete private observer and installation/global-cleanup assumptions; real PIF/MEM and four reader outcomes pass. Shared staging remains S4; fixed316/355. |
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
 The frozen355 census is not the complete remaining invocation graph.

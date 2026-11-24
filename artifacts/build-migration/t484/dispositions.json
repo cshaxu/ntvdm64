@@ -184,8 +184,8 @@
   },
   "test/integration/verify-s45-keyboard-shadow.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Three native CMD producers verified; old root-layout staging, hardcoded observer and cleanup require migration before whole-chain acceptance",
-    "evidence": "docs/etc/evidence/t484-s3-keyboard-shadow.md"
+    "reason": "P192 removes the obsolete detached observer, reuses scoped private-desktop observation and verifies real PIF/MEM plus four deterministic original-reader outcomes. Two CMD helpers remain; shared physical staging belongs to S4.",
+    "evidence": "docs/etc/evidence/t484-s3-keyboard-isolation.md"
   },
   "test/integration/verify-s45-vcd-serial-discovery.ps1": {
     "status": "pending-producer-migration",
