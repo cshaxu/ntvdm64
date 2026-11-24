@@ -962,5 +962,15 @@
     "status": "retired-with-delivery-evidence",
     "reason": "No live caller; obsolete Ninja cc selector sees zero objects; retired README exception-list policy superseded",
     "evidence": "docs/etc/evidence/t484-s3-shell-callback.md"
+  },
+  "test/observation/verify-wow-winsock-provider.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Current loopback blocking-hook contract retained unchanged through native CMD producer",
+    "evidence": "docs/etc/evidence/t484-s3-close-winsock.md"
+  },
+  "test/observation/verify-wow-task-lifecycle.ps1": {
+    "status": "requires-disposition-reconciliation",
+    "reason": "Partial: task-close-result native production-object target passes; remaining29 public cases and fault variants retain old producer, no completion credit",
+    "evidence": "docs/etc/evidence/t484-s3-close-winsock.md"
   }
 }

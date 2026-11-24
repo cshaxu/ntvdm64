@@ -1,6 +1,6 @@
 param(
-    [Parameter(Mandatory=$true)][string]$ProviderBuildRoot,
-    [Parameter(Mandatory=$true)][string]$WorkerBuildRoot,
+    [string]$ProviderBuildRoot,
+    [string]$WorkerBuildRoot,
     [string]$BuildRoot,
     [ValidateSet('original-hook-cleanup','task-lifecycle','process-retirement','menu-cleanup','menu-resource','page-domain','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation','task-close-result')] [string]$Case = 'task-lifecycle',
     [switch]$InitRollback,
@@ -34,16 +34,32 @@ if ($OriginalModalOnly -and $Case -ne 'window-borrow') { throw 'OriginalModalOnl
 if ($InitialPublicationOnly -and $Case -ne 'window-borrow') { throw 'InitialPublicationOnly requires window-borrow' }
 if ($InitialPublicationOnly -and $OriginalModalOnly) { throw 'InitialPublicationOnly and OriginalModalOnly are exclusive' }
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
-$vs = (Resolve-Path -LiteralPath $VsDevCmd).Path
 
-$provider = (Resolve-Path -LiteralPath $ProviderBuildRoot).Path
-$worker = (Resolve-Path -LiteralPath $WorkerBuildRoot).Path
 if (!$BuildRoot) { $BuildRoot = Join-Path $repo ('build/M0-T422/S2/' + $requestedCase) }
 $out = [IO.Path]::GetFullPath($BuildRoot)
 if (!$out.StartsWith(($repo + '\build\'), [StringComparison]::OrdinalIgnoreCase)) {
     throw 'Lifecycle fixture output must be under repository build.'
 }
 New-Item -ItemType Directory -Path $out -Force | Out-Null
+if ($Case -eq 'task-close-result') {
+    & "$repo/tools/build-fixtures.cmd" x86 wow-task-close-result *> "$out/build.log"
+    if ($LASTEXITCODE) { throw 'Native task-close build failed' }
+    Copy-Item "$repo/build/.ninja/msvc-x86-release/wow32/task-close-result.exe" "$out/wow-task-close-result.exe"
+    $job=Start-Process "$out/wow-task-close-result.exe" -WindowStyle Hidden -PassThru -RedirectStandardOutput "$out/task-close.stdout.log" -RedirectStandardError "$out/task-close.stderr.log"
+    $null=$job.Handle
+    @{pid=$job.Id;start=$job.StartTime.ToUniversalTime().ToString('o');deadlineSeconds=30}|ConvertTo-Json|Set-Content "$out/task-close.process.json"
+    if(!$job.WaitForExit(30000)){$job.Kill($true);throw 'Task-close deadline'}
+    $job.WaitForExit();$code=$job.ExitCode;$job.Dispose()
+    $code|Set-Content "$out/task-close.exit"
+    $result=Get-Content "$out/task-close.stdout.log"
+    if($code -or $result -notmatch '^WOW_TASK_CLOSE_RESULT .*success-reopen=0$'){throw 'Task-close contract failed'}
+    $result
+    return
+}
+if(!$ProviderBuildRoot -or !$WorkerBuildRoot){throw 'Remaining lifecycle cases require provider and worker build roots'}
+$vs = (Resolve-Path -LiteralPath $VsDevCmd).Path
+$provider = (Resolve-Path -LiteralPath $ProviderBuildRoot).Path
+$worker = (Resolve-Path -LiteralPath $WorkerBuildRoot).Path
 # Initialize the compiler shell once. Only compiler children receive the
 # resulting environment; the verifier and acceptance children never inherit it.
 $environmentStart = [DateTimeOffset]::UtcNow
@@ -153,19 +169,6 @@ function Invoke-Build([string]$command) {
 }
 function Invoke-NinjaTarget([string]$directory, [string]$target) {
     Invoke-CompilerCommand $directory ('"'+$Ninja+'" '+$target)
-}
-if ($Case -eq 'task-close-result') {
-    $object = 'obj/wow32-dll/wow_task_termination.obj'
-    Invoke-NinjaTarget $provider $object
-    $fixture = "$repo/test/wow32-dll/source/wow_task_close_result_fixture.c"
-    Invoke-CompilerCommand $out ('cl.exe /nologo /W4 /MT /I"'+$repo+'/src" /Fewow-task-close-result.exe "'+
-        $fixture+'" "'+(Join-Path $provider $object)+'" kernel32.lib')
-    $result = & "$out/wow-task-close-result.exe"
-    if ($LASTEXITCODE -or $result -notmatch '^WOW_TASK_CLOSE_RESULT .*success-reopen=0$') {
-        throw "Task close result fixture failed: $LASTEXITCODE $result"
-    }
-    $result
-    return
 }
 # T422 owns these worker-local objects. Build exactly those selected objects;
 # do not rely on a provider-only build or on an incidental aggregate archive.

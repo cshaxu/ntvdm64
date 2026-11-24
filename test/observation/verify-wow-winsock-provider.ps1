@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$BuildRoot,[Parameter(Mandatory)][string]$CompilerDriver)
+param([Parameter(Mandatory)][string]$BuildRoot)
 # Invoke from an owned hidden supervisor. No external hosts or guest changes.
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -7,8 +7,9 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 $null=New-Item -ItemType Directory $root
 try {
  $source="$PSScriptRoot/wow_winsock_provider_probe.c"
- & $CompilerDriver cl.exe /nologo /O2 /MT /W4 /WX "/Fo$root/probe.obj" "/Fe$root/probe.exe" $source ws2_32.lib *> "$root/compile.txt"
+ & "$repo/tools/build-fixtures.cmd" x86 wow-winsock-provider *> "$root/compile.txt"
  if($LASTEXITCODE){throw 'Provider probe compile failed'}
+ Copy-Item "$repo/build/.ninja/fixtures-x86/wow-winsock-provider.exe" "$root/probe.exe"
  @($source,"$root/probe.exe","$env:SystemRoot/SysWOW64/wsock32.dll","$env:SystemRoot/SysWOW64/ws2_32.dll")|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"
  $p=Start-Process "$root/probe.exe" -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/probe.out" -RedirectStandardError "$root/probe.err"
  $null=$p.Handle

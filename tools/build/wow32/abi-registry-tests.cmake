@@ -25,3 +25,18 @@ add_custom_command(OUTPUT "${output}"
   COMMAND_EXPAND_LISTS VERBATIM)
 file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/registry-shutdown-provider.txt" CONTENT "$<TARGET_OBJECTS:obj_compat_wow_registry_binding_obj>\n")
 add_custom_target(wow-registry-shutdown DEPENDS "${output}")
+
+# Independent ticket completion contract; reuse the actual selected product object.
+add_library(wow_task_close_fixture OBJECT "${NTVDM_REPO}/test/wow32-dll/source/wow_task_close_result_fixture.c")
+set_property(TARGET wow_task_close_fixture PROPERTY EXCLUDE_FROM_ALL TRUE)
+target_compile_options(wow_task_close_fixture PRIVATE /nologo /W4)
+target_include_directories(wow_task_close_fixture PRIVATE "${NTVDM_REPO}/src")
+set(output "${CMAKE_BINARY_DIR}/task-close-result.exe")
+add_custom_command(OUTPUT "${output}"
+  COMMAND "${CMAKE_C_COMPILER}" /nologo /MT "/Fe${output}"
+    $<TARGET_OBJECTS:wow_task_close_fixture> $<TARGET_OBJECTS:obj_wow32-dll_wow_task_termination_obj>
+    /link kernel32.lib "/MAP:${output}.map"
+  DEPENDS wow_task_close_fixture obj_wow32-dll_wow_task_termination_obj
+    $<TARGET_OBJECTS:wow_task_close_fixture> $<TARGET_OBJECTS:obj_wow32-dll_wow_task_termination_obj>
+  COMMAND_EXPAND_LISTS VERBATIM)
+add_custom_target(wow-task-close-result DEPENDS "${output}")

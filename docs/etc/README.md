@@ -1729,3 +1729,5 @@ post-publication targeted checks.
 - [T484 S3 reverse construction producer](evidence/t484-s3-reverse-construction.md)
 
 - [T484 S3 shell callback and retired source audit](evidence/t484-s3-shell-callback.md)
+
+- [T484 S3 task-close and Winsock producers](evidence/t484-s3-close-winsock.md)

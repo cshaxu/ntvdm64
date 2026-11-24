@@ -1,0 +1,26 @@
+{
+  "taskClose": "WOW_TASK_CLOSE_RESULT cancel=original-ticket reused-htask=1 serialized=1 success-reopen=0",
+  "lifecycle": {
+    "fileComplete": false,
+    "completedPublicCases": 1,
+    "remainingPublicCases": 29
+  },
+  "winsock": "WINSOCK_PROVIDER result=0 stage=restore hook calls=30 foreign=0 outside_blocking=0 cancel=0 error=0",
+  "cache": {
+    "wrongArch": 2,
+    "hash": "C6874E175CF36F179148BFA8F595F63C0AEC26B4E12825A28E7E36B0C8E34DD6",
+    "mtime": "2026-11-24T03:46:37.1662229Z"
+  },
+  "validation": {
+    "finished": "2026-11-24T04:47:50.1635282+01:00",
+    "started": "2026-11-24T04:46:13.5727012+01:00",
+    "pid": 19528,
+    "exit": 0
+  },
+  "publication": {
+    "unchanged": true,
+    "republished": false,
+    "publishedCopies": 22,
+    "rawInputs": 11
+  }
+}

@@ -78,7 +78,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P120 shell/source audit](../etc/evidence/t484-s3-shell-callback.md) | Four actual Shell provider cases pass; obsolete ABI experiments/manual producer/source audit retired; cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P120 passed their cached full host build. P73 checks11 raw host inputs
+| [P121 close/Winsock](../etc/evidence/t484-s3-close-winsock.md) | Actual task-close object and native loopback hook pass; cached build/cache/publication hashes pass. B0195 still partial:29 public cases and variants remain. |
+
+Completed implementation batches through P121 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
