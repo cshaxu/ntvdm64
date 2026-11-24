@@ -1,31 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "b3fafb4f0ca044f3fd81e94f3e525b38004e23e4",
+  "head": "60a333e3c02323a4954b88452e6ab4e321dfdb16",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/adapter-mvdm-host-out/wow/wow_creation_menu_fixture.c",
-    " M test/observation/verify-wow-creation-boundaries.ps1",
+    " M test/observation/verify-wow-dde-alias.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-creation-native/",
-    "?? docs/etc/evidence/t484-s3-creation-native.md",
-    "?? tools/build/wow32/creation-tests.cmake"
+    " M tools/build/SourceProjection.cmake",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-dde-native/",
+    "?? docs/etc/evidence/t484-s3-dde-native.md",
+    "?? tools/build/fixtures/wow-dde.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 113,
-    "unchanged": 115,
+    "changed": 114,
+    "unchanged": 114,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 55,
+    "migrated-delivered": 56,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 12,
-    "requires-disposition-reconciliation": 105,
+    "requires-disposition-reconciliation": 104,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3103,8 +3103,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "a5d234fd03cfc6dc3cc72cf1fcb129367703abe1f7883d744163bdb6357bf100",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "60a333e3c02323a4954b88452e6ab4e321dfdb16"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-creation-native.md"
+      ],
       "completion": "requires-disposition-reconciliation",
       "decision": {
         "status": "requires-disposition-reconciliation",
@@ -3121,12 +3125,21 @@
       "id": "B0167",
       "file": "test/observation/verify-wow-dde-alias.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "3c69c6fda1d12c79e5d521ddc91eec4d0cfe043f7c060ccbc794e0b7f78e57fd",
+      "state": "changed",
+      "current_sha256": "0cf1cd115ff1316ff7d33e305061bbad7e706d1e3dfa44d93669dd70d1eb2f9b",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Current DDE alias96 and EXECUTE38 native targets; old historical producers retired; projection comparison, shared COPYDATA regression, full build and publication hashes pass",
+        "evidence": "docs/etc/evidence/t484-s3-dde-native.md",
+        "retention_review": {
+          "reason": "Current body ownership checks remain independent of message transport and generic unwind; historical negative proof already retained",
+          "decision": "retain current independent ownership contracts; retire historical build variants",
+          "evidence": "docs/etc/evidence/t484-s3-dde-native.md"
+        },
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0168",
@@ -5575,6 +5588,12 @@
     }
   ],
   "commits": {
+    "60a333e3c02323a4954b88452e6ab4e321dfdb16": {
+      "subject": "T484 S3 P101 migrate creation producers and record idle validation boundary",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-creation-native.md"
+      ]
+    },
     "b3fafb4f0ca044f3fd81e94f3e525b38004e23e4": {
       "subject": "T484 S3 P100 move COPYDATA producers to native current-source graph",
       "evidence": [
@@ -7821,20 +7840,8 @@
       "file": "test/observation/verify-wow-dde-alias.ps1",
       "hits": [
         {
-          "line": 9,
-          "text": "# Ninja/CMake tree or cross-task cache is created by this disposable C fixture."
-        },
-        {
-          "line": 119,
-          "text": "'DDEFindAckNode', 'W32MarkDDEHandle', 'W32UnMarkDDEHandle',"
-        },
-        {
-          "line": 139,
-          "text": "$command = \"@echo off`r`ncall `\"$driver`\" cl.exe /nologo /TC /O2 /MT /Gz /W4 /WX \" +"
-        },
-        {
-          "line": 178,
-          "text": "$command = \"@echo off`r`ncall `\"$driver`\" cl.exe /nologo /TC /O2 /MT /W4 /I`\"$directory`\" `\"$PSScriptRoot/wow_dde_execute_fixture.c`\" /Fo`\"$directory/unit.obj`\" /Fe`\"$directory/unit.exe`\"`r`nexit /b %errorlevel%`r`n\""
+          "line": 14,
+          "text": "$exe=\"$repo/build/.ninja/fixtures-x86/wow-dde-$kind.exe\""
         }
       ]
     },

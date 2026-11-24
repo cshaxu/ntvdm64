@@ -1691,3 +1691,5 @@ post-publication targeted checks.
 - [T484 S3 P100 COPYDATA producer](evidence/t484-s3-copydata-native.md).
 
 - [T484 S3 P101 creation producer checkpoint](evidence/t484-s3-creation-native.md).
+
+- [T484 S3 P102 DDE native producers](evidence/t484-s3-dde-native.md).

@@ -373,3 +373,5 @@ include(wow-accelerator.cmake)
 include(wow-common-dialog.cmake)
 
 include(wow-copydata.cmake)
+
+include(wow-dde.cmake)

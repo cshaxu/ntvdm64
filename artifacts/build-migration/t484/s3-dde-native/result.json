@@ -1,0 +1,87 @@
+{
+  "dde_markers": [
+    "DDE_ALIAS cases=96 errors=0 nodes=0 guest_proof=0 transport_proof=0",
+    "DDE_EXECUTE cases=38 errors=0 modes=7 guest_proof=0"
+  ],
+  "publication": {
+    "unchanged": true,
+    "published_copies": 22,
+    "raw_inputs": 11
+  },
+  "cache": [
+    {
+      "time": 639310816643926712,
+      "path": "build/.ninja/fixtures-x86/wow-dde-alias.exe",
+      "hash": "F50359C89E9E0A3FC0495293E0F65DE2787CBAF1083B4BB95C22C777E17654CB"
+    },
+    {
+      "time": 639310816642335926,
+      "path": "build/.ninja/fixtures-x86/wow-dde-execute.exe",
+      "hash": "5734B761B66D206DC03F7F88ED8745058EDC9993885F4C8745120C09D75E5E57"
+    },
+    {
+      "time": 639310816616720185,
+      "path": "build/.ninja/fixtures-x86/dde_alias_types.h",
+      "hash": "360F0781E5EA2429EAC05C3134E1A2EBCBED0605DC81D5681D903317C43CE1AE"
+    },
+    {
+      "time": 639310816616720185,
+      "path": "build/.ninja/fixtures-x86/dde_alias_mark_prototype.h",
+      "hash": "705241DB2B61035267B042D60AA48C3B69095E88D52A2FF5A615F26ABD40F97C"
+    },
+    {
+      "time": 639310816621712173,
+      "path": "build/.ninja/fixtures-x86/dde_alias_exact_bodies.h",
+      "hash": "465CFDCC4327CE5A6FACBC4062C97BC8CA9921B4908C7D2122BB46C40B037A00"
+    },
+    {
+      "time": 639310816621712173,
+      "path": "build/.ninja/fixtures-x86/execute_body.h",
+      "hash": "DEC95881A4C2BC7634F7791C141D5B18B97FF74A79CEE8A05A74BC4E807ED864"
+    }
+  ],
+  "runtime": {
+    "finished": "2026-11-24T02:47:44.9924451+01:00",
+    "exit": 0,
+    "started": "2026-11-24T02:47:36.3365955+01:00",
+    "pid": 33016
+  },
+  "x64_rejected": 2,
+  "copydata_markers": [
+    "FILTER_SELECTOR cases=14 entry_values=2 modes=7 errors=0 guest_proof=0",
+    "QUEUE_SELECTOR cases=18 owners=3 modes=3 errors=0 full_queue_proof=0 guest_proof=0",
+    "COPYDATA_LIFETIME errors=0 scenarios=59 directions=2 stages=4 nested=1 immutable_release=1 exception=2 thread_status=1 hook_roles=2 filter_nested_different=1 embedded_headers=2 filter_output_rollback=1 guest_proof=0"
+  ],
+  "projections": [
+    {
+      "old": "F11B5B6D75370603A155C857FBA3E750CF6F5E2AFA66E8A2348B40E1D88D4E0D",
+      "native": "360F0781E5EA2429EAC05C3134E1A2EBCBED0605DC81D5681D903317C43CE1AE",
+      "name": "dde_alias_types.h",
+      "whitespace_normalized_equal": true
+    },
+    {
+      "old": "7946AC4DC7BE618D83C35CFA1DE59724936093314F16049CF4B567F05EB31322",
+      "native": "705241DB2B61035267B042D60AA48C3B69095E88D52A2FF5A615F26ABD40F97C",
+      "name": "dde_alias_mark_prototype.h",
+      "whitespace_normalized_equal": true
+    },
+    {
+      "old": "9B995F24DF86E891D32D3116779ACFD7930ABDCA15C1D04E7B24BD2CE300D660",
+      "native": "465CFDCC4327CE5A6FACBC4062C97BC8CA9921B4908C7D2122BB46C40B037A00",
+      "name": "dde_alias_exact_bodies.h",
+      "whitespace_normalized_equal": true
+    },
+    {
+      "old": "4A6C3743E0043ADCA4E060C8FCDC7913ABED8E6E2E3D53858512075A044221C9",
+      "native": "DEC95881A4C2BC7634F7791C141D5B18B97FF74A79CEE8A05A74BC4E807ED864",
+      "name": "execute_body.h",
+      "whitespace_normalized_equal": true
+    }
+  ],
+  "final": {
+    "started": "2026-11-24T02:48:30.4858632+01:00",
+    "exit": 0,
+    "pid": 3796,
+    "finished": "2026-11-24T02:49:42.3198347+01:00"
+  }
+}

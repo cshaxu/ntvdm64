@@ -47,6 +47,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="wow-dde" set "SELECTED=1"
+if "%TARGET%"=="wow-dde" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-copydata-lifetime" set "SELECTED=1"
 if "%TARGET%"=="wow-copydata-lifetime" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-common-dialog" set "SELECTED=1"

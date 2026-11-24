@@ -1,198 +1,27 @@
 [CmdletBinding()]
-param(
-    [Parameter(Mandatory)][string]$BuildRoot,
-    [Parameter(Mandatory)][string]$CompilerDriver
-)
-# Exact original alias/free owners with native/guest service doubles. This is
-# part of the full DDE group gate, not transport, guest or publication proof.
-# Invoke under the active packet's owned hidden background supervisor. No
-# Ninja/CMake tree or cross-task cache is created by this disposable C fixture.
-$ErrorActionPreference = 'Stop'
-$repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
-$root = [IO.Path]::GetFullPath($BuildRoot).TrimEnd('\', '/')
-$build = Join-Path $repo 'build'
-if ([IO.Path]::GetDirectoryName($root) -ne $build -or
-        [IO.Path]::GetFileName($root).StartsWith('.') -or
-        (Test-Path -LiteralPath $root) -or
-        ((Get-Item -LiteralPath $build -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)) {
-    throw 'Require one fresh, direct, non-cache build child for disposable evidence'
+param([Parameter(Mandatory)][string]$BuildRoot)
+# Current exact-body ownership contracts; not guest or DDE transport proof.
+$ErrorActionPreference='Stop'
+$repo=(Resolve-Path "$PSScriptRoot/../..").Path
+$root=[IO.Path]::GetFullPath($BuildRoot)
+if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){
+    throw 'Fresh build-owned evidence directory required'
 }
-$driver = (Resolve-Path -LiteralPath $CompilerDriver).Path
-$fixture = Join-Path $PSScriptRoot 'wow_dde_alias_fixture.c'
-$baseline = (& git -C $repo rev-parse '7835ba25e^{commit}').Trim()
-if ($LASTEXITCODE) { throw 'Cannot resolve immutable pre-cohort baseline' }
-$null = New-Item -ItemType Directory -Path $root
-$steps = [Collections.Generic.List[object]]::new()
-$selections = [Collections.Generic.List[object]]::new()
-
-function Read-Input([string]$Path, [bool]$Old) {
-    if ($Old) {
-        $baselinePath = $Path -replace '^src/mvdm-host/', 'src/mvdm/'
-        $value = (& git -C $repo show "${baseline}:$baselinePath") -join "`n"
-        if ($LASTEXITCODE) { throw "Cannot read baseline $Path" }
-        return $value
-    }
-    return [IO.File]::ReadAllText((Join-Path $repo $Path)).Replace("`r`n", "`n")
-}
-
-function Select-Body([string]$Text, [string]$Name, [string]$Variant) {
-    $pattern = '(?m)^(?:static\s+)?(?:BOOL|VOID|HAND16|HANDLE|PHDDE)\s+(?:FASTCALL\s+)?' +
-        [regex]::Escape($Name) + '\s*\([^;{}]*\)\s*\{'
-    $found = [regex]::Matches($Text, $pattern)
-    if ($found.Count -ne 1) { throw "Require one complete source body: $Name" }
-    $match = $found[0]
-    $offset = $match.Index + $match.Length
-    $depth = 1
-    while ($depth -and $offset -lt $Text.Length) {
-        if ($Text[$offset] -eq '{') { ++$depth }
-        elseif ($Text[$offset] -eq '}') { --$depth }
-        ++$offset
-    }
-    if ($depth) { throw "Unbalanced source body: $Name" }
-    $length = $offset - $match.Index
-    $selections.Add([pscustomobject]@{
-        variant = $Variant; name = $Name; offset = $match.Index; length = $length
-    })
-    return $Text.Substring($match.Index, $length)
-}
-
-function Invoke-Owned([string]$Name, [string]$File, [string[]]$Arguments,
-        [int]$Seconds, [int]$Expected) {
-    $start = @{ FilePath = $File; WorkingDirectory = $root; WindowStyle = 'Hidden';
-        PassThru = $true; RedirectStandardOutput = "$root/$Name.stdout.log";
-        RedirectStandardError = "$root/$Name.stderr.log" }
-    if ($Arguments.Count) { $start.ArgumentList = $Arguments }
-    $process = Start-Process @start
-    $null = $process.Handle
-    $row = [pscustomobject]@{
-        name = $Name; pid = $process.Id; start = $process.StartTime.ToUniversalTime().ToString('o')
-        file = $File; arguments = $Arguments; deadlineSeconds = $Seconds; exit = $null
-    }
-    $steps.Add($row)
-    $steps | ConvertTo-Json -Depth 6 | Set-Content "$root/steps.json"
-    if (!$process.WaitForExit($Seconds * 1000)) {
-        & taskkill.exe /PID $process.Id /T /F
-        $process.WaitForExit()
-        throw "Owned deadline expired: $Name"
-    }
-    $process.WaitForExit()
-    $row.exit = $process.ExitCode
-    $steps | ConvertTo-Json -Depth 6 | Set-Content "$root/steps.json"
-    if ($process.ExitCode -ne $Expected) {
-        throw "$Name exit $($process.ExitCode), expected $Expected"
-    }
-}
-
-try {
-    $inputs = @('src/mvdm-host/wow32/wdde.c', 'src/mvdm-host/wow32/wdde.h', 'src/mvdm-host/wow32/wmdisp32.c', 'src/mvdm-host/wow32/wumsg.c', 'src/mvdm-host/wow32/wmsg16.c', 'test/observation/wow_dde_execute_fixture.c') |
-        ForEach-Object { Join-Path $repo $_ }
-    Get-FileHash -LiteralPath @($inputs + @($fixture, $PSCommandPath, $driver)) |
-        Export-Csv -NoTypeInformation "$root/source-inputs.csv"
-    foreach ($variant in @('baseline', 'candidate')) {
-        $old = $variant -eq 'baseline'
-        $directory = Join-Path $root $variant
-        $null = New-Item -ItemType Directory -Path $directory
-        $header = Read-Input 'src/mvdm-host/wow32/wdde.h' $old
-        $source = Read-Input 'src/mvdm-host/wow32/wdde.c' $old
-        $first = $header.IndexOf('typedef struct _HDDE {', [StringComparison]::Ordinal)
-        if ($first -lt 0) { throw 'Original DDE type start missing' }
-        $last = $header.IndexOf('} DDEINFO, *PDDEINFO;', $first, [StringComparison]::Ordinal)
-        if ($first -lt 0 -or $last -lt 0) { throw 'Original DDE type boundary missing' }
-        $types = $header.Substring($first, $last + '} DDEINFO, *PDDEINFO;'.Length - $first)
-        $flags = [regex]::Matches($header, '(?m)^#define DDE_(?!CONVERSION_)[^\n]+') |
-            ForEach-Object Value
-        if (@($flags).Count -ne 4) { throw 'Original DDE flag family changed' }
-        if (!$old) {
-            $conversionStart = $header.IndexOf('typedef struct _DDECONVERSIONPAIR', [StringComparison]::Ordinal)
-            if ($conversionStart -lt 0) { throw 'Conversion ownership types missing' }
-            $conversionEnd = $header.IndexOf('} DDECONVERSION, *PDDECONVERSION;', $conversionStart, [StringComparison]::Ordinal)
-            if ($conversionEnd -lt 0) { throw 'Conversion ownership types missing' }
-            $types += "`n#define FIXTURE_CONVERSION 1`n" + $header.Substring($conversionStart,
-                $conversionEnd + '} DDECONVERSION, *PDDECONVERSION;'.Length - $conversionStart)
-        }
-        [IO.File]::WriteAllText("$directory/dde_alias_types.h", $types + "`n" + ($flags -join "`n"))
-        $markReturn = if ($source -match '(?m)^BOOL\s+W32MarkDDEHandle\s*\(') { 'BOOL' } else { 'VOID' }
-        [IO.File]::WriteAllText("$directory/dde_alias_mark_prototype.h",
-            "static $markReturn W32MarkDDEHandle(HAND16);`n")
-        $bodies = foreach ($name in @('DDEAddhandle', 'DDEDeletehandle',
-                'DDEFindPair16', 'DDEFindPair32', 'DDEFindNode16', 'DDEFindNode32',
-                'DDEFindAckNode', 'W32MarkDDEHandle', 'W32UnMarkDDEHandle',
-                'W32DDEFreeGlobalMem32', 'W32DdeFreeHandle16')) {
-            Select-Body $source $name $variant
-        }
-        if (!$old) {
-            foreach ($name in @('DDETrackhandle', 'DDERollback32')) {
-                $bodies += Select-Body $source $name $variant
-            }
-            # Exercise the actual single-use cleanup now owned by PostMessage.
-            $post = Read-Input 'src/mvdm-host/wow32/wumsg.c' $false
-            $start = $post.IndexOf('DWORD error = GetLastError();', $post.IndexOf('ULONG FASTCALL WU32PostMessage('), [StringComparison]::Ordinal)
-            $end = $post.IndexOf("`n    }`n#line 1492", $start, [StringComparison]::Ordinal)
-            if ($start -lt 0 -or $end -le $start) { throw 'PostMessage cleanup scope missing' }
-            # The separate message-lifetime fixture exercises the generic unwind.
-            $cleanup = $post.Substring($start, $end - $start).Replace('wow_message_unwind16(&mpex);', '').Replace('mpex.', 'mpex->').Replace('&postConversion', 'conversion')
-            $selections.Add([pscustomobject]@{variant=$variant;name='WU32PostMessage cleanup';offset=$start;length=$end-$start})
-            $bodies += "static VOID W32CancelDDEPost(LPMSGPARAMEX mpex, PDDECONVERSION conversion){`n$cleanup`n}"
-        }
-        $bodies += Select-Body (Read-Input 'src/mvdm-host/wow32/wmdisp32.c' $old) 'WM32DDEAck' $variant
-        [IO.File]::WriteAllText("$directory/dde_alias_exact_bodies.h", ($bodies -join "`n`n"))
-        $command = "@echo off`r`ncall `"$driver`" cl.exe /nologo /TC /O2 /MT /Gz /W4 /WX " +
-            "/wd4127 /wd4213 /wd4305 /wd4706 /I`"$directory`" `"$fixture`" " +
-            "/Fo`"$directory/unit.obj`" /Fe`"$directory/unit.exe`"`r`nexit /b %errorlevel%`r`n"
-        [IO.File]::WriteAllText("$directory/build.cmd", $command)
-        Invoke-Owned "compile-$variant" 'cmd.exe' @('/d', '/c', "`"$directory/build.cmd`"") 180 0
-        Invoke-Owned "body-$variant" "$directory/unit.exe" @() 30 $(if ($old) { 1 } else { 0 })
-        $output = Get-Content -LiteralPath "$root/body-$variant.stdout.log" -Raw
-        $failed = @([regex]::Matches($output, '(?m)^FAIL ([^\r\n]+)\r?$'))
-        if ($old) {
-            if ($failed.Count -ne 2 -or $failed[0].Groups[1].Value -ne 'empty-delete-false' -or
-                    $failed[1].Groups[1].Value -ne 'mark-reject-unpublished') {
-                throw 'Baseline must demonstrate only the empty-list and mark-rejection defects'
-            }
-        } elseif ($failed.Count) { throw 'Candidate has an alias/free ownership failure' }
-        $result = [regex]::Match($output,
-            'DDE_ALIAS cases=(\d+) errors=(\d+) nodes=0 guest_proof=0 transport_proof=0')
-        if (!$result.Success -or [int]$result.Groups[1].Value -ne $(if ($old) { 77 } else { 96 }) -or
-                [int]$result.Groups[2].Value -ne $(if ($old) { 2 } else { 0 })) {
-            throw 'Incomplete exact-body ownership result'
-        }
-        Get-FileHash -LiteralPath "$directory/dde_alias_types.h", "$directory/dde_alias_exact_bodies.h",
-            "$directory/unit.exe" | Export-Csv -NoTypeInformation "$directory/inputs.csv"
-    }
-    # Exercise the complete forward EXECUTE case, including the original NULL
-    # result contract; alias-helper tests alone do not cover this caller.
-    foreach ($variant in @('original','candidate')) {
-        $directory = Join-Path $root "execute-$variant"
-        $null = New-Item -ItemType Directory $directory
-        $text = if ($variant -eq 'original') {
-            $value = (& git -C O:/repos.external/OpenNT show '5c5b979ec08c17d3ca2eb70e8aad62d26515d01c:base/mvdm/wow32/wmsg16.c') -join "`n"
-            if ($LASTEXITCODE) { throw 'Pinned original EXECUTE source missing' }
-            $value
-        } else { Read-Input 'src/mvdm-host/wow32/wmsg16.c' $false }
-        $start = $text.IndexOf('    case WM_DDE_EXECUTE:')
-        $end = $text.IndexOf('    case WM_COPYDATA:', $start)
-        if ($start -lt 0 -or $end -lt 0) { throw 'Forward EXECUTE case missing' }
-        $body = 'static BOOL execute(LPMSGPARAMEX lpmpex,INT fWhoCalled){WORD wParam=lpmpex->Parm16.WndProc.wParam;LONG lParam=lpmpex->Parm16.WndProc.lParam;PLONG plParamNew=&lpmpex->lParam;switch(lpmpex->Parm16.WndProc.wMsg){' + "`n" + $text.Substring($start,$end-$start) + "`n}return TRUE;}"
-        [IO.File]::WriteAllText("$directory/execute_body.h",$body)
-        Copy-Item "$root/candidate/dde_alias_types.h" "$directory/execute_types.h"
-        $command = "@echo off`r`ncall `"$driver`" cl.exe /nologo /TC /O2 /MT /W4 /I`"$directory`" `"$PSScriptRoot/wow_dde_execute_fixture.c`" /Fo`"$directory/unit.obj`" /Fe`"$directory/unit.exe`"`r`nexit /b %errorlevel%`r`n"
-        [IO.File]::WriteAllText("$directory/build.cmd",$command)
-        Invoke-Owned "execute-compile-$variant" cmd.exe @('/d','/c',"`"$directory/build.cmd`"") 180 0
-        Invoke-Owned "execute-body-$variant" "$directory/unit.exe" @() 30 $(if($variant -eq 'original'){1}else{0})
-        $result = Get-Content "$root/execute-body-$variant.stdout.log" -Raw
-        if($variant -eq 'candidate' -and $result -notmatch 'DDE_EXECUTE cases=38 errors=0 modes=7 guest_proof=0'){throw 'Incomplete forward EXECUTE controls'}
-        if($variant -eq 'original' -and ($result -notmatch 'FAIL mode=2 ' -or $result -notmatch 'FAIL mode=5 ')){throw 'Original must expose double-unlock and unregistered allocation controls'}
-    }
-    $selections | ConvertTo-Json | Set-Content "$root/selections.json"
-    foreach ($entry in Import-Csv -LiteralPath "$root/source-inputs.csv") {
-        if ((Get-FileHash -LiteralPath $entry.Path).Hash -ne $entry.Hash) {
-            throw "Source changed during group: $($entry.Path)"
-        }
-    }
-    @{ passed = $true; baseline = $baseline; baselineBodies = 12; candidateBodies = 15;
-        scope = 'Original alias/free bodies with service doubles; no guest/transport proof'
-    } | ConvertTo-Json | Set-Content "$root/result.json"
-} catch {
-    $_ | Out-String | Set-Content "$root/failure.txt"
-    exit 1
+New-Item -ItemType Directory $root|Out-Null
+& "$repo/tools/build-fixtures.cmd" x86 wow-dde > "$root/build.log" 2>&1
+if($LASTEXITCODE){throw 'Native DDE build failed'}
+foreach($kind in 'alias','execute'){
+    $exe="$repo/build/.ninja/fixtures-x86/wow-dde-$kind.exe"
+    $p=Start-Process $exe -WorkingDirectory $root -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$kind.stdout.log" -RedirectStandardError "$root/$kind.stderr.log"
+    $null=$p.Handle
+    @{pid=$p.Id;started=$p.StartTime.ToUniversalTime().ToString('o');deadlineSeconds=30;exe=$exe}|ConvertTo-Json|Set-Content "$root/$kind.process.json"
+    if(!$p.WaitForExit(30000)){& taskkill.exe /PID $p.Id /T /F;throw 'Owned DDE deadline expired'}
+    $p.WaitForExit()
+    $p.ExitCode|Set-Content "$root/$kind.exit"
+    if($p.ExitCode -ne 0){throw "DDE $kind failed"}
+    $text=Get-Content "$root/$kind.stdout.log" -Raw
+    $marker=if($kind -eq 'alias'){'DDE_ALIAS cases=96 errors=0 nodes=0 guest_proof=0 transport_proof=0'}else{'DDE_EXECUTE cases=38 errors=0 modes=7 guest_proof=0'}
+    if(!$text.Contains($marker) -or $text -match '(?m)^FAIL '){throw 'Incomplete current DDE assertions'}
+    $text|Write-Output
+    Get-FileHash $exe|ConvertTo-Json|Set-Content "$root/$kind.identity.json"
 }

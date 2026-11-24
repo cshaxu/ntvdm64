@@ -771,5 +771,15 @@
     },
     "reason": "Native five-case producer implemented; bounded assertions pass, actual foreground idle-chain validation remains unresolved",
     "evidence": "docs/etc/evidence/t484-s3-creation-native.md"
+  },
+  "test/observation/verify-wow-dde-alias.ps1": {
+    "reason": "Current DDE alias96 and EXECUTE38 native targets; old historical producers retired; projection comparison, shared COPYDATA regression, full build and publication hashes pass",
+    "evidence": "docs/etc/evidence/t484-s3-dde-native.md",
+    "retention_review": {
+      "reason": "Current body ownership checks remain independent of message transport and generic unwind; historical negative proof already retained",
+      "decision": "retain current independent ownership contracts; retire historical build variants",
+      "evidence": "docs/etc/evidence/t484-s3-dde-native.md"
+    },
+    "status": "migrated-delivered"
   }
 }

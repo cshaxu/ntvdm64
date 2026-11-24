@@ -120,7 +120,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P101 creation checkpoint](../etc/evidence/t484-s3-creation-native.md) | Five native bounded contracts pass; real Idle foreground chain fails before delivery. B0166 remains incomplete; no completion-count increment. |
 
-Implementation batches through P100 passed their cached full host build. P73 checks11 raw host inputs
+| [P102 DDE producers](../etc/evidence/t484-s3-dde-native.md) | Current96/38 contracts and four projection comparisons pass; COPYDATA regression, full cached build/cache/publication hashes pass. P101 Idle boundary remains open. |
+
+Completed implementation batches through P102 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
