@@ -1843,3 +1843,5 @@ post-publication targeted checks.
 - [T484 S3 native PIF conventional memory](evidence/t484-s3-pif-memory.md).
 
 - [T484 S3 matrix profile producers](evidence/t484-s3-matrix-profile.md).
+
+- [T484 S3 private native idle forwarding](evidence/t484-s3-idle-forwarding.md).

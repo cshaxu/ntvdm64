@@ -36,45 +36,7 @@ interpreter-free end-to-end acceptance have not completed.
 
 | S3 delivery | Actual result |
 | --- | --- |
-| [P1-P141](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
-
-| [P142 component audit](../etc/evidence/t484-s3-component-audit.md) | Current native static checks pass; obsolete CRT-header assertion removed. Audit-only, no product change. |
-
-| [P143 frontend ownership](../etc/evidence/t484-s3-frontend-audit.md) | 11 native product closures/22 contamination controls and BaseSrv regression pass; shared graph reader; no product change. |
-
-| [P144 cache/boundary audits](../etc/evidence/t484-s3-native-cache-audits.md) | Two CMD cache passes preserve11 images and generated inputs; repaired memory consumer audit and326 A/B object checks pass; publication unchanged. |
-
-| [P145 hook audits](../etc/evidence/t484-s3-hook-audits.md) | Four read-only audits reconciled; shared compiler-dependency reader,104 DLL objects and five maps verified; no product change. |
-
-| [P146 version producer checkpoint](../etc/evidence/t484-s3-version-native.md) | Five native peers and full cached/identity check pass; B0231 remains pending package preparation and actual negative-peer runs. No completion-count increment. |
-
-| [P147 version negatives](../etc/evidence/t484-s3-version-runtime.md) | Native identity writer and five peers/ten real client refusals pass; owned cleanup, cached full and publication identity verified; B0231 completed. |
-
-| [P148 redirector cleanup](../etc/evidence/t484-s3-redir-retirement.md) | Duplicate boundary audit consolidated; obsolete RTL trial removed;104 objects and negative control pass. No product change. |
-
-| [P149 historical audits](../etc/evidence/t484-s3-historical-audits.md) | Two obsolete snapshots removed; current C-VID source and product-map contract passed. No product change. |
-
-| [P150 serial medium](../etc/evidence/t484-s3-serial-medium.md) | Existing normal serial lifecycle fixture moved to CMD/native target and passed; cached full and11/22 identity checks passed unchanged. |
-
-| [P151 broker protocol](../etc/evidence/t484-s3-broker-protocol.md) | Two private JS producers consolidated into CMD/native targets; both unit contracts, maps and cached full/identity checks passed. |
-
-| [P152 thread/WOW audits](../etc/evidence/t484-s3-thread-wow-audits.md) | Current thread contract and80 WOW compiler sources/9 negative controls pass; shared parser replaces old WOW graph scan. |
-
-| [P153 obsolete build closures](../etc/evidence/t484-s3-obsolete-build-closures.md) | Nine obsolete entries and their historical-only closure removed (12 files/441 lines); shared native BuildTree retained. No product change. |
-
-| [P154 retired projections](../etc/evidence/t484-s3-retired-projections.md) | Three historical Bochs manifests/self-test and completed one-shot archive updater retired; assets unchanged. |
-
-| [P155 native import retirement](../etc/evidence/t484-s3-native-import-retirement.md) | Unused image-import wrapper/self-test removed; current package/ABI cases retained; static syntax/caller checks pass. |
-
-| [P156 package identity](../etc/evidence/t484-s3-package-identity.md) | Native fixture/writer pass separate/mixed/missing identities and writer negatives; cached full/11/22 hashes unchanged. Publication orchestration remains S4. |
-
-| [P157 identity reader](../etc/evidence/t484-s3-identity-reader.md) | Shared test resource lookup uses native tool; checked-in identity/cleanup cases and cached full/11+22 hashes passed unchanged. Fresh-stage validation remains open. |
-
-| [P158 fresh package isolation](../etc/evidence/t484-s3-fresh-stage.md) | Native RPC client producer and actual two-package RPC/DOS isolation pass; B0015/B0104 complete,288/355 disposed,67 remain. |
-
-| [P159 idle retirement](../etc/evidence/t484-s3-idle-retirement.md) | Obsolete x86/10s/synchronous-RPC runner and fixture removed; current native5s policy passes.289/355 disposed,66 remain. |
-
-| [P160 cache consolidation](../etc/evidence/t484-s3-cache-consolidation.md) | Duplicate full-build runner retired; two CMD passes,11 PE architectures, intermediate identity and11/22 hashes pass.290/355 disposed,65 remain. |
+| [P1-P160](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
 
 | [P161 native environment reader](../etc/evidence/t484-s3-logon-reader.md) | Three CPU guest callers share native environment query; sign/transfer/ALU positive and negative cases pass.293/355 disposed,62 remain. |
 
@@ -119,6 +81,12 @@ interpreter-free end-to-end acceptance have not completed.
 | [P181 PIF fields](../etc/evidence/t484-s3-pif-memory.md) | Six callers use native PIF memory options; duplicate helper/inline patchers removed; full-byte equivalence and failure checks pass. Configuration/staging remain;315/355 disposed,40 remain. |
 
 | [P182 matrix profiles](../etc/evidence/t484-s3-matrix-profile.md) | Two additional callers use one CMD target; eight witnesses/two paths byte-identical, cache/path checks pass. Frozen census315/355; two supplemental caller chains still need config/staging. |
+
+| [P183 idle forwarding](../etc/evidence/t484-s3-idle-forwarding.md) | Five creation fixtures pass; real private-queue USER forwarding replaces desktop activation. Automatic foreground notification not exercised.316/355 disposed,39 remain, plus two supplemental config/staging chains. |
+
+A fresh global scan found18 further integration scripts with direct NASM
+commands; these await retention/migration reconciliation, as recorded in P183.
+The frozen355 census is not the complete remaining invocation graph.
 
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required

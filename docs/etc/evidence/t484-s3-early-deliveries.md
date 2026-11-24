@@ -226,3 +226,41 @@ Retained completed batch records; active status remains in [Current](../../state
 | [P140 classifier diagnostic cleanup](t484-s3-classifier-retirement.md) | Retired historical raw-ABI probe and absent-header audit; retained actual product-object guard tests on both architectures. |
 
 | [P141 resource attachment](t484-s3-resource-native.md) | Native MIDL/compile/link and nine real RPC cases pass; stale fixture scope/layout corrected, duplicate checks removed. |
+
+| [P142 component audit](t484-s3-component-audit.md) | Current native static checks pass; obsolete CRT-header assertion removed. Audit-only, no product change. |
+
+| [P143 frontend ownership](t484-s3-frontend-audit.md) | 11 native product closures/22 contamination controls and BaseSrv regression pass; shared graph reader; no product change. |
+
+| [P144 cache/boundary audits](t484-s3-native-cache-audits.md) | Two CMD cache passes preserve11 images and generated inputs; repaired memory consumer audit and326 A/B object checks pass; publication unchanged. |
+
+| [P145 hook audits](t484-s3-hook-audits.md) | Four read-only audits reconciled; shared compiler-dependency reader,104 DLL objects and five maps verified; no product change. |
+
+| [P146 version producer checkpoint](t484-s3-version-native.md) | Five native peers and full cached/identity check pass; B0231 remains pending package preparation and actual negative-peer runs. No completion-count increment. |
+
+| [P147 version negatives](t484-s3-version-runtime.md) | Native identity writer and five peers/ten real client refusals pass; owned cleanup, cached full and publication identity verified; B0231 completed. |
+
+| [P148 redirector cleanup](t484-s3-redir-retirement.md) | Duplicate boundary audit consolidated; obsolete RTL trial removed;104 objects and negative control pass. No product change. |
+
+| [P149 historical audits](t484-s3-historical-audits.md) | Two obsolete snapshots removed; current C-VID source and product-map contract passed. No product change. |
+
+| [P150 serial medium](t484-s3-serial-medium.md) | Existing normal serial lifecycle fixture moved to CMD/native target and passed; cached full and11/22 identity checks passed unchanged. |
+
+| [P151 broker protocol](t484-s3-broker-protocol.md) | Two private JS producers consolidated into CMD/native targets; both unit contracts, maps and cached full/identity checks passed. |
+
+| [P152 thread/WOW audits](t484-s3-thread-wow-audits.md) | Current thread contract and80 WOW compiler sources/9 negative controls pass; shared parser replaces old WOW graph scan. |
+
+| [P153 obsolete build closures](t484-s3-obsolete-build-closures.md) | Nine obsolete entries and their historical-only closure removed (12 files/441 lines); shared native BuildTree retained. No product change. |
+
+| [P154 retired projections](t484-s3-retired-projections.md) | Three historical Bochs manifests/self-test and completed one-shot archive updater retired; assets unchanged. |
+
+| [P155 native import retirement](t484-s3-native-import-retirement.md) | Unused image-import wrapper/self-test removed; current package/ABI cases retained; static syntax/caller checks pass. |
+
+| [P156 package identity](t484-s3-package-identity.md) | Native fixture/writer pass separate/mixed/missing identities and writer negatives; cached full/11/22 hashes unchanged. Publication orchestration remains S4. |
+
+| [P157 identity reader](t484-s3-identity-reader.md) | Shared test resource lookup uses native tool; checked-in identity/cleanup cases and cached full/11+22 hashes passed unchanged. Fresh-stage validation remains open. |
+
+| [P158 fresh package isolation](t484-s3-fresh-stage.md) | Native RPC client producer and actual two-package RPC/DOS isolation pass; B0015/B0104 complete,288/355 disposed,67 remain. |
+
+| [P159 idle retirement](t484-s3-idle-retirement.md) | Obsolete x86/10s/synchronous-RPC runner and fixture removed; current native5s policy passes.289/355 disposed,66 remain. |
+
+| [P160 cache consolidation](t484-s3-cache-consolidation.md) | Duplicate full-build runner retired; two CMD passes,11 PE architectures, intermediate identity and11/22 hashes pass.290/355 disposed,65 remain. |

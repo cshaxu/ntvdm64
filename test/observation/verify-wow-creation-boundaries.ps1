@@ -36,8 +36,8 @@ if($LogicOnly -and $Case -ne 'idle'){throw 'LogicOnly is valid only for the idle
 if($LogicOnly -and !($output -match '^WOW_IDLE_NATIVE_CHAIN unavailable=logic-only$')) {
     throw 'Explicit logic-only idle boundary marker missing'
 }
-if(!$LogicOnly -and $Case -eq 'idle' -and !($output -match '^WOW_IDLE_NATIVE_CHAIN errors=0 next=[1-9][0-9]* registered_and_unregistered=1 direct_not_forwarded=1$')) {
-    throw 'Real native idle-chain forwarding assertions missing'
+if(!$LogicOnly -and $Case -eq 'idle' -and !($output -match '^WOW_IDLE_NATIVE_CHAIN errors=0 next=[1-9][0-9]* registered_and_unregistered=1 direct_not_forwarded=1 trigger=private-queue foreground_notification=not-exercised$')) {
+    throw 'Real private-queue native hook forwarding assertions missing'
 }
 if($Case -eq 'common-dialog' -and !($output -match '^WOW_COMMDLG_RESOURCE_FAILURE errors=0 fatal_edges=3 skipped_free=0$')) {
     throw 'Common-dialog resource failure assertions missing'

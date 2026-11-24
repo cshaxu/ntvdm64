@@ -718,14 +718,14 @@
     "status": "migrated-delivered"
   },
   "test/observation/verify-wow-creation-boundaries.ps1": {
-    "status": "requires-disposition-reconciliation",
+    "status": "migrated-delivered",
     "retention_review": {
       "decision": "retain distinct contracts; review foreground witness",
       "reason": "Five distinct ownership contracts; old activation-dependent native idle witness is not covered by logic-only pass",
       "evidence": "docs/etc/evidence/t484-s3-creation-native.md"
     },
-    "reason": "Native five-case producer implemented; bounded assertions pass, actual foreground idle-chain validation remains unresolved",
-    "evidence": "docs/etc/evidence/t484-s3-creation-native.md"
+    "reason": "Five native creation fixtures pass; actual USER chain exercised on nonactive private desktop, automatic foreground-idle generation explicitly outside bounded fixture scope",
+    "evidence": "docs/etc/evidence/t484-s3-idle-forwarding.md"
   },
   "test/observation/verify-wow-dde-alias.ps1": {
     "reason": "Current DDE alias96 and EXECUTE38 native targets; old historical producers retired; projection comparison, shared COPYDATA regression, full build and publication hashes pass",

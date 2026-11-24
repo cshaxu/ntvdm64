@@ -1,16 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
+  "head": "debad5f3743e178f83fe98ae18a9c75647b7f976",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
+    " M docs/etc/evidence/t484-s3-early-deliveries.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/multitask/verify-win31-setup-modes.ps1",
-    " M test/integration/multitask/verify-win95-launch-matrix.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/guest-probes.cmake",
-    "?? docs/etc/evidence/t484-s3-matrix-profile.md",
-    "?? test/build/verify-win31-profile.ps1"
+    " M test/adapter-mvdm-host-out/wow/wow_idle_hook_fixture.c",
+    " M test/observation/verify-wow-creation-boundaries.ps1",
+    "?? docs/etc/evidence/t484-s3-idle-forwarding.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -19,12 +18,12 @@
     "removed": 170
   },
   "disposition_counts": {
-    "migrated-delivered": 112,
+    "migrated-delivered": 113,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 170,
     "retained-native-delegate": 14,
     "pending-producer-migration": 26,
-    "requires-disposition-reconciliation": 14,
+    "requires-disposition-reconciliation": 13,
     "retained-standalone-audit": 16
   },
   "existing_interpreted_candidates_with_command_hits": 147,
@@ -3211,23 +3210,23 @@
       "file": "test/observation/verify-wow-creation-boundaries.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "a5d234fd03cfc6dc3cc72cf1fcb129367703abe1f7883d744163bdb6357bf100",
+      "current_sha256": "bc8c98254386260ba45bd8fa8ec8d278e14349ec8c1f2f4abbc9426df89da215",
       "revisions": [
         "60a333e3c02323a4954b88452e6ab4e321dfdb16"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-creation-native.md"
       ],
-      "completion": "requires-disposition-reconciliation",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "requires-disposition-reconciliation",
+        "status": "migrated-delivered",
         "retention_review": {
           "decision": "retain distinct contracts; review foreground witness",
           "reason": "Five distinct ownership contracts; old activation-dependent native idle witness is not covered by logic-only pass",
           "evidence": "docs/etc/evidence/t484-s3-creation-native.md"
         },
-        "reason": "Native five-case producer implemented; bounded assertions pass, actual foreground idle-chain validation remains unresolved",
-        "evidence": "docs/etc/evidence/t484-s3-creation-native.md"
+        "reason": "Five native creation fixtures pass; actual USER chain exercised on nonactive private desktop, automatic foreground-idle generation explicitly outside bounded fixture scope",
+        "evidence": "docs/etc/evidence/t484-s3-idle-forwarding.md"
       }
     },
     {
@@ -6482,6 +6481,12 @@
     }
   ],
   "commits": {
+    "debad5f3743e178f83fe98ae18a9c75647b7f976": {
+      "subject": "T484 S3 P182 move matrix witnesses to shared CMD producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-matrix-profile.md"
+      ]
+    },
     "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa": {
       "subject": "T484 S3 P181 consolidate native PIF memory preparation",
       "evidence": [

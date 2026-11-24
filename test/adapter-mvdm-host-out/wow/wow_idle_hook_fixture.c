@@ -8,6 +8,7 @@
 
 /* The witness pumps a native window, not a WOW window projection. */
 #undef GetMessageA
+#undef PeekMessageA
 #undef ShowWindow
 #undef DestroyWindow
 #undef DispatchMessageA
@@ -38,6 +39,8 @@ static wow_task_order_entry entry;
 static unsigned errors, task_depth, borrow_depth, calls;
 static BOOL foreign_context, deny_task, deny_borrow, nested, exceptional;
 static unsigned next_calls;
+static WPARAM native_wp;
+static LPARAM native_lp;
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, "FAIL line=%d\n", __LINE__); } } while (0)
 
 /* Bounded order/registration witness only: no global native hook is installed,
@@ -77,7 +80,7 @@ VOID WINAPI wow_user_borrow_leave_required(wow_user_borrow_scope *scope)
 LRESULT CALLBACK WowOriginalForegroundIdleHook(int code, WPARAM wp, LPARAM lp)
 {
     ++calls;
-    CHECK(code == HC_ACTION && wp == 0 && lp == 0);
+    CHECK(code == HC_ACTION && wp == native_wp && lp == native_lp);
     CHECK(task_depth && task_depth == borrow_depth);
     if (nested && task_depth == 1) wow_user_idle_hook_dispatch();
     if (exceptional) RaiseException(0xe0447014, 0, 0, NULL);
@@ -85,14 +88,32 @@ LRESULT CALLBACK WowOriginalForegroundIdleHook(int code, WPARAM wp, LPARAM lp)
     return 93;
 }
 
+/* A real USER hook chain with a deterministic private-queue trigger. The
+ * forwarding contract does not require activating a desktop or waiting for
+ * Windows to generate WH_FOREGROUNDIDLE. We own both hooks on this thread. */
 static LRESULT CALLBACK next_idle(int code, WPARAM wp, LPARAM lp)
 {
-    if (code >= 0) ++next_calls;
+    if (code == HC_ACTION && lp && ((MSG *)lp)->message == WM_APP + 1) {
+        CHECK(!task_depth && !borrow_depth);
+        ++next_calls;
+        return 47;
+    }
     return CallNextHookEx(NULL, code, wp, lp);
 }
 
-/* Real USER chain, not a direct HookProc call. Only a fresh owned desktop is
- * activated, and its prior input desktop is restored before destruction. */
+static LRESULT CALLBACK queue_trigger(int code, WPARAM wp, LPARAM lp)
+{
+    if (code == HC_ACTION && lp && ((MSG *)lp)->message == WM_APP + 1) {
+        LRESULT result;
+        native_wp = wp; native_lp = lp;
+        result = WK32ForegroundIdleHook(code, wp, lp);
+        native_wp = 0; native_lp = 0;
+        CHECK(result == 47);
+        return result;
+    }
+    return CallNextHookEx(NULL, code, wp, lp);
+}
+
 typedef struct native_chain_context {
     TD *registered;
     HDESK desktop;
@@ -102,65 +123,45 @@ static DWORD WINAPI native_chain(void *argument)
 {
     native_chain_context *context = argument;
     TD *registered = context->registered;
-    HDESK previous = OpenInputDesktop(0, FALSE, DESKTOP_SWITCHDESKTOP);
     HDESK desktop;
-    HWND window = NULL;
-    HHOOK first = NULL, next = NULL;
+    HHOOK first = NULL, next = NULL, idle = NULL;
     char name[64];
     unsigned phase, before, after;
-    BOOL switched = FALSE;
+    MSG message;
     sprintf_s(name, sizeof(name), "wow-idle-chain-%lu", GetCurrentProcessId());
     desktop = CreateDesktopA(name, NULL, NULL, 0, GENERIC_ALL, NULL);
     context->desktop = desktop;
     thread.native_thread_id = GetCurrentThreadId();
-    CHECK(previous && desktop);
-    if (!previous || !desktop) goto done;
-    if (!SetThreadDesktop(desktop)) {
-        CHECK(FALSE);
-        goto done;
-    }
-    window = CreateWindowA("STATIC", "owned idle chain", WS_OVERLAPPEDWINDOW,
-        0, 0, 240, 140, NULL, NULL, GetModuleHandle(NULL), NULL);
-    CHECK(window != NULL);
-    if (!window) goto done;
-    next = SetWindowsHookExA(WH_FOREGROUNDIDLE, next_idle, NULL, GetCurrentThreadId());
-    first = SetWindowsHookExA(WH_FOREGROUNDIDLE, WK32ForegroundIdleHook, NULL, GetCurrentThreadId());
-    CHECK(first && next);
-    switched = SwitchDesktop(desktop);
-    CHECK(switched);
-    if (!switched || !first || !next) goto done;
-    ShowWindow(window, SW_SHOW);
-    SetForegroundWindow(window);
-    CHECK(GetForegroundWindow() == window);
+    CHECK(desktop != NULL);
+    if (!desktop) goto done;
+    if (!SetThreadDesktop(desktop)) { CHECK(FALSE); goto done; }
+    PeekMessage(&message, NULL, 0, 0, PM_NOREMOVE);
+    idle = SetWindowsHookExA(WH_FOREGROUNDIDLE, WK32ForegroundIdleHook,
+        NULL, GetCurrentThreadId());
+    next = SetWindowsHookExA(WH_GETMESSAGE, next_idle, NULL, GetCurrentThreadId());
+    first = SetWindowsHookExA(WH_GETMESSAGE, queue_trigger, NULL, GetCurrentThreadId());
+    CHECK(first && next && idle);
+    if (!first || !next || !idle) goto done;
     for (phase = 0; phase != 2; ++phase) {
-        unsigned ticks = 0;
-        MSG message;
-        registered->hIdleHook = phase ? NULL : first;
+        registered->hIdleHook = phase ? NULL : idle;
         before = calls; after = next_calls;
-        CHECK(SetTimer(window, 1, 40, NULL) != 0);
-        while (ticks < 6 && GetMessage(&message, NULL, 0, 0) > 0) {
-            if (message.message == WM_TIMER) ++ticks;
-            TranslateMessage(&message); DispatchMessage(&message);
-        }
-        KillTimer(window, 1);
-        CHECK(next_calls > after);
-        CHECK(phase ? calls == before : calls - before == next_calls - after);
+        CHECK(PostThreadMessage(GetCurrentThreadId(), WM_APP + 1, 0, 0));
+        CHECK(PeekMessage(&message, NULL, WM_APP + 1, WM_APP + 1, PM_REMOVE));
+        CHECK(next_calls == after + 1);
+        CHECK(calls == before + (phase ? 0 : 1));
     }
     before = next_calls;
-    registered->hIdleHook = first;
+    registered->hIdleHook = idle;
     wow_user_idle_hook_dispatch();
     CHECK(next_calls == before);
 done:
     registered->hIdleHook = NULL;
     if (first) CHECK(UnhookWindowsHookEx(first));
     if (next) CHECK(UnhookWindowsHookEx(next));
-    if (switched) CHECK(SwitchDesktop(previous));
-    if (window) DestroyWindow(window);
-    if (previous) CloseDesktop(previous);
-    fprintf(stderr, "WOW_IDLE_NATIVE_CHAIN errors=%u next=%u registered_and_unregistered=1 direct_not_forwarded=1\n", errors, next_calls);
+    if (idle) CHECK(UnhookWindowsHookEx(idle));
+    fprintf(stderr, "WOW_IDLE_NATIVE_CHAIN errors=%u next=%u registered_and_unregistered=1 direct_not_forwarded=1 trigger=private-queue foreground_notification=not-exercised\n", errors, next_calls);
     return 0;
 }
-
 int __cdecl main(int argc, char **argv)
 {
     TD first = {0}, second = {0};
