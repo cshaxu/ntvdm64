@@ -63,3 +63,5 @@ add_custom_target(frontend-library DEPENDS
   "${CMAKE_BINARY_DIR}/frontend-window-library-test.exe"
   "${CMAKE_BINARY_DIR}/frontend-window-keyboard-test.exe")
 include(cpu-preprocess.cmake)
+
+include(object-contracts.cmake)

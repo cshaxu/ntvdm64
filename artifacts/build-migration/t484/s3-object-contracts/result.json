@@ -1,0 +1,311 @@
+{
+  "contracts": [
+    {
+      "runs": [
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+          "pid": 9656,
+          "kind": "native-build",
+          "exit": 0
+        },
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-qevnt-negative\"",
+          "pid": 26144,
+          "kind": "negative-abi-compile",
+          "exit": 2
+        },
+        {
+          "diagnostic_budget_ms": 30000,
+          "pid": 3204,
+          "kind": "fixture",
+          "exit": 0
+        }
+      ],
+      "checks": 37,
+      "callbacks": 8,
+      "invalid_identity_controls": null,
+      "result": "pass",
+      "fixture_sha256": "2480195D35F53C9F9D79724B7F4EAF4F35292DA102D246CDFFF7214040294B0B",
+      "three_vm_reuse": null,
+      "contract": "qevnt"
+    },
+    {
+      "runs": [
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+          "pid": 22612,
+          "kind": "native-build",
+          "exit": 0
+        },
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-ios-negative\"",
+          "pid": 23288,
+          "kind": "negative-abi-compile",
+          "exit": 2
+        },
+        {
+          "diagnostic_budget_ms": 30000,
+          "pid": 29192,
+          "kind": "fixture",
+          "exit": 0
+        }
+      ],
+      "checks": 70,
+      "callbacks": 78,
+      "invalid_identity_controls": null,
+      "result": "pass",
+      "fixture_sha256": "236B5D5E05CD48E023358598A57AA0D5AE2A776FDC276D32CD975FBC9ECBC719",
+      "three_vm_reuse": null,
+      "contract": "ios"
+    },
+    {
+      "runs": [
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+          "pid": 25320,
+          "kind": "native-build",
+          "exit": 0
+        },
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-gfi-negative\"",
+          "pid": 12976,
+          "kind": "negative-abi-compile",
+          "exit": 2
+        },
+        {
+          "diagnostic_budget_ms": 30000,
+          "pid": 27520,
+          "kind": "fixture",
+          "exit": 0
+        }
+      ],
+      "checks": 433,
+      "callbacks": 8,
+      "invalid_identity_controls": null,
+      "result": "pass",
+      "fixture_sha256": "AE335ECEC5C5A242405697F905BF0A72260AF21CBAEE600DC3C3CA5A2DA4500A",
+      "three_vm_reuse": null,
+      "contract": "gfi"
+    },
+    {
+      "runs": [
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+          "pid": 33456,
+          "kind": "native-build",
+          "exit": 0
+        },
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-keycode-negative\"",
+          "pid": 21212,
+          "kind": "negative-abi-compile",
+          "exit": 2
+        },
+        {
+          "diagnostic_budget_ms": 30000,
+          "pid": 28344,
+          "kind": "fixture",
+          "exit": 0
+        }
+      ],
+      "checks": 268322,
+      "callbacks": 1184,
+      "invalid_identity_controls": null,
+      "result": "pass",
+      "fixture_sha256": "39E863E9E52209C2332F347FEBD8546D8A7E851ED87251F2F70903707171A6BA",
+      "three_vm_reuse": null,
+      "contract": "keycode"
+    },
+    {
+      "runs": [
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+          "pid": 8120,
+          "kind": "native-build",
+          "exit": 0
+        },
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-nls-negative\"",
+          "pid": 30616,
+          "kind": "negative-abi-compile",
+          "exit": 2
+        },
+        {
+          "diagnostic_budget_ms": 30000,
+          "pid": 32380,
+          "kind": "fixture",
+          "exit": 0
+        }
+      ],
+      "checks": 3645,
+      "callbacks": 0,
+      "invalid_identity_controls": null,
+      "result": "pass",
+      "fixture_sha256": "ED8596B8EFEC3172B759E2F6DC3779A894A3DE5D19B8228536BC3B44457C310B",
+      "three_vm_reuse": null,
+      "contract": "nls"
+    },
+    {
+      "runs": [
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+          "pid": 27124,
+          "kind": "native-build",
+          "exit": 0
+        },
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-umb-negative\"",
+          "pid": 33544,
+          "kind": "negative-abi-compile",
+          "exit": 2
+        },
+        {
+          "diagnostic_budget_ms": 30000,
+          "pid": 14148,
+          "kind": "fixture",
+          "exit": 0
+        }
+      ],
+      "checks": 4240,
+      "callbacks": 6,
+      "invalid_identity_controls": null,
+      "result": "pass",
+      "fixture_sha256": "5520C34D7D0E1BDA40DD609B4F1BE3823768EACC113F88D09B343660A91FAE20",
+      "three_vm_reuse": null,
+      "contract": "umb"
+    },
+    {
+      "runs": [
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+          "pid": 22064,
+          "kind": "native-build",
+          "exit": 0
+        },
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-vdd-negative\"",
+          "pid": 26176,
+          "kind": "negative-abi-compile",
+          "exit": 2
+        },
+        {
+          "diagnostic_budget_ms": 30000,
+          "pid": 24260,
+          "kind": "fixture",
+          "exit": 0
+        }
+      ],
+      "checks": 305,
+      "callbacks": 82,
+      "invalid_identity_controls": null,
+      "result": "pass",
+      "fixture_sha256": "7F1A7ADCA0BE69646BCE19AE06B5C0D98761E4FB7827C6AC5543199A9B2A24A7",
+      "three_vm_reuse": null,
+      "contract": "vdd"
+    },
+    {
+      "runs": [
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+          "pid": 25644,
+          "kind": "native-build",
+          "exit": 0
+        },
+        {
+          "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-niddb-negative\"",
+          "pid": 21044,
+          "kind": "negative-abi-compile",
+          "exit": 2
+        },
+        {
+          "diagnostic_budget_ms": 30000,
+          "pid": 7036,
+          "kind": "fixture",
+          "exit": 0
+        },
+        {
+          "pid": 29976,
+          "kind": "invalid-stale",
+          "exit": "0xC0000420"
+        },
+        {
+          "pid": 14532,
+          "kind": "invalid-out-of-range",
+          "exit": "0xC0000420"
+        },
+        {
+          "pid": 23708,
+          "kind": "invalid-active-stale",
+          "exit": "0xC0000420"
+        }
+      ],
+      "checks": 15,
+      "callbacks": 3,
+      "invalid_identity_controls": "pass (fixture termination seam)",
+      "result": "pass",
+      "fixture_sha256": "4A7356D0B55BBF98FEE419BE42195BD5FF301C7BAF03C1A1FD4C6E6AFD2E7681",
+      "three_vm_reuse": "pass",
+      "contract": "niddb"
+    }
+  ],
+  "first": {
+    "pid": 27144,
+    "exit": 1,
+    "started": "2026-11-24T01:39:30.0712503+01:00",
+    "finished": "2026-11-24T01:39:56.9384355+01:00"
+  },
+  "current": {
+    "started": "2026-11-24T01:41:20.5445262+01:00",
+    "pid": 31136,
+    "finished": "2026-11-24T01:45:01.6660637+01:00",
+    "exit": 0
+  },
+  "final": {
+    "pid": 23620,
+    "started": "2026-11-24T01:45:37.2480652+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T01:46:39.667014+01:00"
+  },
+  "cache": [
+    {
+      "time": 639310775961920839,
+      "hash": "2480195D35F53C9F9D79724B7F4EAF4F35292DA102D246CDFFF7214040294B0B",
+      "path": "build/.ninja/msvc-x86-release/worker/qevnt-object-contract.exe"
+    },
+    {
+      "time": 639310777035665309,
+      "hash": "236B5D5E05CD48E023358598A57AA0D5AE2A776FDC276D32CD975FBC9ECBC719",
+      "path": "build/.ninja/msvc-x86-release/worker/ios-object-contract.exe"
+    },
+    {
+      "time": 639310777035731860,
+      "hash": "AE335ECEC5C5A242405697F905BF0A72260AF21CBAEE600DC3C3CA5A2DA4500A",
+      "path": "build/.ninja/msvc-x86-release/worker/gfi-object-contract.exe"
+    },
+    {
+      "time": 639310775962195745,
+      "hash": "39E863E9E52209C2332F347FEBD8546D8A7E851ED87251F2F70903707171A6BA",
+      "path": "build/.ninja/msvc-x86-release/worker/keycode-object-contract.exe"
+    },
+    {
+      "time": 639310775963767237,
+      "hash": "ED8596B8EFEC3172B759E2F6DC3779A894A3DE5D19B8228536BC3B44457C310B",
+      "path": "build/.ninja/msvc-x86-release/worker/nls-object-contract.exe"
+    },
+    {
+      "time": 639310777048066285,
+      "hash": "5520C34D7D0E1BDA40DD609B4F1BE3823768EACC113F88D09B343660A91FAE20",
+      "path": "build/.ninja/msvc-x86-release/worker/umb-object-contract.exe"
+    },
+    {
+      "time": 639310775963432612,
+      "hash": "7F1A7ADCA0BE69646BCE19AE06B5C0D98761E4FB7827C6AC5543199A9B2A24A7",
+      "path": "build/.ninja/msvc-x86-release/worker/vdd-object-contract.exe"
+    },
+    {
+      "time": 639310775959793250,
+      "hash": "4A7356D0B55BBF98FEE419BE42195BD5FF301C7BAF03C1A1FD4C6E6AFD2E7681",
+      "path": "build/.ninja/msvc-x86-release/worker/niddb-object-contract.exe"
+    }
+  ]
+}

@@ -47,6 +47,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="softpc-contracts" set "SELECTED=1"
+if "%TARGET%"=="softpc-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="serial-baud" set "SELECTED=1"
 if "%TARGET%"=="serial-baud" if not "%~1"=="x86" exit /b 2
 for %%T in (redirector-remote-name redirector-server-enum) do if "%TARGET%"=="%%T" set "SELECTED=1"
@@ -220,6 +222,7 @@ if "%TARGET%"=="dem-declarations" goto worker
 if "%TARGET%"=="console-contracts" goto worker
 if "%TARGET%"=="host-thread-boundaries" goto worker
 for %%T in (redirector-remote-name redirector-server-enum) do if "%TARGET%"=="%%T" goto worker
+if "%TARGET%"=="softpc-contracts" goto worker
 if "%TARGET%"=="planar-painter" goto worker
 if "%TARGET%"=="dem-directory-reset" goto worker
 if "%TARGET%"=="ccpu-callback" goto worker

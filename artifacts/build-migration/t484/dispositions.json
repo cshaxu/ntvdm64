@@ -646,5 +646,15 @@
     "status": "retired-with-delivery-evidence",
     "evidence": "docs/etc/evidence/t484-s3-rtc-serial.md",
     "reason": "Unused Python generator/compiler wrapper removed; unchanged current12-case fixture directly builds/runs through native serial-baud target"
+  },
+  "test/observation/verify-softpc-object-contract.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-object-contracts.md",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-object-contracts.md",
+      "reason": "Eight distinct real provider contracts; remove historical object overrides and interpreter compiler recipes",
+      "decision": "retain-consolidated"
+    },
+    "reason": "Shared native positive/negative producers; eight actual object contracts and invalid identity controls verified",
+    "status": "migrated-delivered"
   }
 }

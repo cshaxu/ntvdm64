@@ -100,7 +100,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P91 RTC/serial cleanup](../etc/evidence/t484-s3-rtc-serial.md) | Historical RTC investigation retired with known13-failure boundary preserved; serial12 passes via direct native target; two Python wrappers removed. |
 
-Implementation batches through P91 passed their cached full host build. P73 checks11 raw host inputs
+| [P92 shared object contracts](../etc/evidence/t484-s3-object-contracts.md) | Eight native contracts277067 checks, eight ABI rejection controls and NIDDB invalid identities pass; historical override paths removed. |
+
+Implementation batches through P92 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

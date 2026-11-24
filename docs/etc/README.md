@@ -1671,3 +1671,5 @@ post-publication targeted checks.
 - [Redirector producer consolidation](evidence/t484-s3-redirector.md)
 
 - [RTC investigation and serial wrapper retirement](evidence/t484-s3-rtc-serial.md)
+
+- [Shared SoftPC object contracts](evidence/t484-s3-object-contracts.md)

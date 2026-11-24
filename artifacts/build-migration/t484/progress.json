@@ -1,31 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "38ded14cca19b1029fd08bdf2a93ec7e963946c6",
+  "head": "af2ac44fc984ddb13e05da41637435ad5b14b276",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/observation/verify-rtc-bios-contract.py",
-    " D test/observation/verify-serial-baud.py",
+    " M test/observation/verify-softpc-object-contract.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-rtc-serial/",
-    "?? docs/etc/evidence/t484-s3-rtc-serial.md",
-    "?? tools/build/fixtures/serial-baud.cmake"
+    " M tools/build/worker/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-object-contracts/",
+    "?? docs/etc/evidence/t484-s3-object-contracts.md",
+    "?? tools/build/worker/object-contracts.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 104,
-    "unchanged": 125,
+    "changed": 105,
+    "unchanged": 124,
     "removed": 126
   },
   "disposition_counts": {
-    "migrated-delivered": 47,
+    "migrated-delivered": 48,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 126,
     "pending-producer-migration": 53,
     "retained-native-delegate": 10,
-    "requires-disposition-reconciliation": 116,
+    "requires-disposition-reconciliation": 115,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 178,
@@ -2739,8 +2738,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "af2ac44fc984ddb13e05da41637435ad5b14b276"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-rtc-serial.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -2754,8 +2757,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "af2ac44fc984ddb13e05da41637435ad5b14b276"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-rtc-serial.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -2786,12 +2793,21 @@
       "id": "B0153",
       "file": "test/observation/verify-softpc-object-contract.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "71353da2f910eeccea7dca366d25e7dd44d5f2965f59e55214b6f8df603c870b",
+      "state": "changed",
+      "current_sha256": "20c46aed5c54b4590c878da29a0618a26c1f3798fed108e86390bf33367e1d4a",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-object-contracts.md",
+        "retention_review": {
+          "evidence": "docs/etc/evidence/t484-s3-object-contracts.md",
+          "reason": "Eight distinct real provider contracts; remove historical object overrides and interpreter compiler recipes",
+          "decision": "retain-consolidated"
+        },
+        "reason": "Shared native positive/negative producers; eight actual object contracts and invalid identity controls verified",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0154",
@@ -5414,6 +5430,12 @@
     }
   ],
   "commits": {
+    "af2ac44fc984ddb13e05da41637435ad5b14b276": {
+      "subject": "T484 S3 P91 retire historical RTC probe and serial build wrapper",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-rtc-serial.md"
+      ]
+    },
     "38ded14cca19b1029fd08bdf2a93ec7e963946c6": {
       "subject": "T484 S3 P90 consolidate native redirector test producers",
       "evidence": [
@@ -7452,32 +7474,24 @@
       "file": "test/observation/verify-softpc-object-contract.ps1",
       "hits": [
         {
-          "line": 4,
-          "text": "[string]$WorkerBuild = 'build/.ninja/msvc-x86-release/worker',"
+          "line": 9,
+          "text": "$WorkerBuild = Join-Path $repo 'build/.ninja/msvc-x86-release/worker'"
         },
         {
-          "line": 14,
-          "text": "$driver = Join-Path $repo 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'"
+          "line": 12,
+          "text": "$driver = Join-Path $WorkerBuild 'run-ninja-parallel.cmd'"
         },
         {
-          "line": 51,
+          "line": 37,
           "text": "$headers = @('src/mvdm-host/softpc.new/host/inc/host_rrr.h','src/mvdm-host/softpc.new/host/inc/nt_uis.h','src/mvdm-host/softpc.new/obj.vdm/resource.rc') | ForEach-Object { Join-Path $repo $_ }"
         },
         {
-          "line": 54,
+          "line": 40,
           "text": "$extraSources = @(Join-Path $WorkerBuild 'generated/softpc-embedded-roms.rc')"
         },
         {
-          "line": 98,
+          "line": 78,
           "text": "foreach ($path in (@($PSCommandPath, $driver, $source, $original, $object, (Join-Path $WorkerBuild 'build.ninja')) + $headers + $extraObjects + $extraSources)) {"
-        },
-        {
-          "line": 102,
-          "text": "$command = '/d /s /c \"\"' + $driver + '\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS ' + $extraFlags + '\"' + $source + '\" ' + $linkedObjects + ' /Fo:\"' + $fixtureObject + '\" /Fe:\"' + $exe + '\" /link kernel32.lib' + $extraLibraries + '\"'"
-        },
-        {
-          "line": 110,
-          "text": "$negativeCommand = '/d /s /c \"\"' + $driver + '\" cl.exe /nologo /MT /c /D' + $negativeDefine + '=' + $negativeSize + ' ' + $extraFlags + '\"' + $source + '\" /Fo:\"' + (Join-Path $BuildRoot 'negative-abi.obj') + '\"\"'"
         }
       ]
     },
