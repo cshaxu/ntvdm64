@@ -32,30 +32,39 @@ try {
  } finally {$producer.Dispose()}
  $cache="$repo/build/.ninja/fixtures-x86"
  $hostName=if($SharedTasks){'tasks'}else{'workers'}
- Copy-Item "$cache/wow-idle-$hostName.exe" "$root/IDLEHOST.EXE"
+ $prepare=@("$cache/wow-idle-$hostName.exe",'IDLEHOST.EXE')
  $guestSource="$PSScriptRoot/../observation/win16_idle_probe.asm"
  if($PrebuiltGuestRoot){
   $prebuilt=(Resolve-Path -LiteralPath $PrebuiltGuestRoot).Path
   foreach($item in @(@('IDLPROBE.EXE',$PrebuiltProbeSha256),@('IDLPEER.EXE',$PrebuiltPeerSha256))){
    $input=Join-Path $prebuilt $item[0]
    if((Get-FileHash -LiteralPath $input -Algorithm SHA256).Hash -ne $item[1]){throw "Prebuilt guest identity mismatch: $($item[0])"}
-   Copy-Item -LiteralPath $input -Destination "$root/$($item[0])"
+   $prepare+=@($input,$item[0])
   }
  } else {
   $mode=if($SharedTasks){'shared'}else{'separate'}
   foreach($name in @('IDLPROBE.EXE','IDLPEER.EXE','first.lst','peer.lst')){
-   Copy-Item "$cache/guest-probes/idle/$mode/$name" "$root/$name"
+   $prepare+=@("$cache/guest-probes/idle/$mode/$name",$name)
   }
  }
+ $line='/d /s /c ""'+$repo+'/tools/prepare-test-inputs.cmd" "'+$root+'"'
+ foreach($arg in $prepare){$line+=' "'+$arg+'"'}
+ $line+='"'
+ $preparer=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/prepare.txt" -RedirectStandardError "$root/prepare.stderr.txt"
+ try {
+  $null=$preparer.Handle
+  @{pid=$preparer.Id;start=$preparer.StartTime.ToUniversalTime().ToString('o');command=$line;deadlineSeconds=120}|ConvertTo-Json|Set-Content "$root/preparer.json"
+  if(!$preparer.WaitForExit(120000)){$preparer.Kill($true);$preparer.WaitForExit();throw 'Idle preparation deadline'}
+  $preparer.WaitForExit();$preparer.ExitCode|Set-Content "$root/preparer.exit.txt"
+  if($preparer.ExitCode){throw 'Idle input preparation failed'}
+ } finally {$preparer.Dispose()}
  if($BuildOnly){
   @{nativeBuildPassed=$true;guestRuntimeExecuted=$false;sharedTasks=[bool]$SharedTasks;prebuiltGuests=[bool]$PrebuiltGuestRoot}|ConvertTo-Json|Set-Content "$root/build-result.json"
   0|Set-Content "$root/exit.txt"
   return
  }
- $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
+ $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -TestFiles @("$root/IDLEHOST.EXE","$root/IDLPROBE.EXE","$root/IDLPEER.EXE")
  $scope=New-IsolatedPackageScope $runtime
- $null=New-Item -ItemType Directory "$runtime/tests" -Force
- foreach($name in @('IDLEHOST.EXE','IDLPROBE.EXE','IDLPEER.EXE')){Copy-Item "$root/$name" "$runtime/tests/$name"}
  $scope.Paths+="$runtime\tests\IDLEHOST.EXE"
  $inputs=@($source,$guestSource,"$root/IDLEHOST.EXE","$root/IDLPROBE.EXE","$root/IDLPEER.EXE",
    "$runtime/system32/ntvdm.exe","$runtime/system32/WOW32.DLL","$runtime/system32/nthook32.dll",

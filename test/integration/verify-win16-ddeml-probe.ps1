@@ -36,16 +36,16 @@ try {
  Owned assemble $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 win16-probes"') 300
  $variant=if($WindowWordControl){'DDWORD'}else{$probe}
  if($SelfCallbackControl){$variant+='-self'}
- Copy-Item "$repo/build/.ninja/fixtures-x86/guest-probes/win16/$variant.EXE" "$root/$probe.EXE"
+ $probeSource="$repo/build/.ninja/fixtures-x86/guest-probes/win16/$variant.EXE"
  $dll=(Resolve-Path $DdemlImage).Path
  if((Get-FileHash $dll).Hash -ne $ExpectedDdemlSha256){throw 'Original DDEML input differs'}
- $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity
+ Owned prepare $env:ComSpec ('/d /s /c ""'+$repo+'/tools/prepare-test-inputs.cmd" "'+$root+'/prepared" "'+$probeSource+'" "'+$probe+'.EXE" "'+$dll+'" "DDEML.DLL""') 120
+ $probeImage="$root/prepared/$probe.EXE"
+ $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity -TestFiles @($probeImage,"$root/prepared/DDEML.DLL")
  Save-IsolatedPackageManifest $runtime "$root/manifest.json"
  $scope=New-IsolatedPackageScope $runtime
- $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force
- Copy-Item "$root/$probe.EXE" "$tests/$probe.EXE"
- Copy-Item $dll "$tests/DDEML.DLL"
- Get-FileHash $source,$PSCommandPath,$Observer,$assembler,"$root/$probe.EXE",$dll|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ $tests=Join-Path $runtime 'tests'
+ Get-FileHash $source,$PSCommandPath,$Observer,$assembler,$probeImage,$dll|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Get-ChildItem "$runtime/system32" -File|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
  Owned environment-build $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x64 logon-environment"') 300
  . "$PSScriptRoot/../observation/logon-environment.ps1"

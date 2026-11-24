@@ -249,11 +249,7 @@
     "status": "migrated-delivered",
     "reason": "Direct native identity stamping; independent copied packages use fresh complete identities; current Full six plus three worker-substitution scenarios pass"
   },
-  "test/integration/verify-win16-ddeml-probe.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "CMD Win16 probe production and shared native logon reader verified with real init/register cases; shared runtime copy/manifest staging remains S4",
-    "evidence": "docs/etc/evidence/t484-s3-ddeml-native.md"
-  },
+  "test/integration/verify-win16-ddeml-probe.ps1": {"status":"migrated-delivered","reason":"S4 P14 moves named test input copies to shared CMD preparation and final physical TestFiles staging; real guest lifecycle/DDEML and prebuilt identity/negative copy checks pass with recorded scope.","evidence":"docs/etc/evidence/t484-s4-idle-ddeml-preparation.md"},
   "test/integration/verify-win16-discovery.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
     "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
@@ -336,11 +332,7 @@
     "evidence": "docs/etc/evidence/t484-s3-file-cache.md"
   },
   "test/integration/verify-wow-graph-cost.ps1": {"status":"migrated-delivered","reason":"S4 P13 uses one CMD package preparation owner with manifest/input/MAP checks and package-bound diagnostic copies; complete real diagnostic, unit/control and normal-exit cases pass. No production or original guest changes.","evidence":"docs/etc/evidence/t484-s4-wow-diagnostic-preparation.md"},
-  "test/integration/verify-wow-idle-workers.ps1": {
-    "evidence": "docs/etc/evidence/t484-s3-idle.md",
-    "status": "pending-producer-migration",
-    "reason": "P56 local CL/NASM producers migrated; physical runtime/package staging remains pending"
-  },
+  "test/integration/verify-wow-idle-workers.ps1": {"status":"migrated-delivered","reason":"S4 P14 moves named test input copies to shared CMD preparation and final physical TestFiles staging; real guest lifecycle/DDEML and prebuilt identity/negative copy checks pass with recorded scope.","evidence":"docs/etc/evidence/t484-s4-idle-ddeml-preparation.md"},
   "test/integration/verify-wow-mine-gameplay.ps1": {
     "status": "pending-producer-migration",
     "evidence": "docs/etc/evidence/t484-s3-mine.md",

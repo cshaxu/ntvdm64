@@ -39,3 +39,5 @@ set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${NTVDM_STAGE_REPO}/src/lib-win32/process-hook/minhook/LICENSE.txt")
 
 configure_file(prepare-wow-diagnostic.cmd.in prepare-wow-diagnostic.cmd @ONLY NEWLINE_STYLE CRLF)
+
+configure_file(prepare-test-inputs.cmd.in prepare-test-inputs.cmd @ONLY NEWLINE_STYLE CRLF)
