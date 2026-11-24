@@ -1,17 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "dbb9d36c794d0d6f5224c4a61aa2cbaa98d89a42",
+  "head": "531dd5bd599af47c7115563171b166890f184425",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-callback-cost-probe.ps1",
-    " M test/observation/verify-wow-common-dialog-calls.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-common-dialog-native/",
-    "?? docs/etc/evidence/t484-s3-common-dialog-native.md",
-    "?? tools/build/fixtures/wow-common-dialog.cmake"
+    " D test/adapter-mvdm-host-out/wow/wow_cpd_window_normalization_probe.c",
+    " M test/observation/verify-wow-control-boundaries.ps1",
+    " M tools/build/wow-controls/units.cmake",
+    "?? artifacts/build-migration/t484/s3-control-retention/",
+    "?? docs/etc/evidence/t484-s3-control-retention.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -24,8 +22,8 @@
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
-    "retained-native-delegate": 11,
-    "requires-disposition-reconciliation": 107,
+    "retained-native-delegate": 12,
+    "requires-disposition-reconciliation": 106,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3004,10 +3002,12 @@
       "state": "changed",
       "current_sha256": "cc0f48bbc680e91ddcc15be166f6f4538857ef047b724bb31a60b9b68e2cce18",
       "revisions": [
+        "531dd5bd599af47c7115563171b166890f184425",
         "3d217bfeb341d52835d90c326181e66361e82659"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-callback-cost.md"
+        "docs/etc/evidence/t484-s3-callback-cost.md",
+        "docs/etc/evidence/t484-s3-common-dialog-native.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -3027,8 +3027,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "4d52adf404faaf2ba05a2e41433bdbfde1998f0f178f2cc5bc969012f14be685",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "531dd5bd599af47c7115563171b166890f184425"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-common-dialog-native.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "retention_review": {
@@ -3046,15 +3050,24 @@
       "file": "test/observation/verify-wow-control-boundaries.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "cc15d91b865f0e3cb3cc4fb6d3ea091f5170b2d6a18e40a1e337df71a71ceddd",
+      "current_sha256": "06d40eff0af62319f2546d05658291abea6017ee69b1016a66cb56b594fd625d",
       "revisions": [
         "5b950e8f26ccdfda77bc924d1aaae4279302fe79"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-wow-controls.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "status": "retained-native-delegate",
+        "retention_review": {
+          "decision": "retain-consolidated",
+          "reason": "Current control contracts remain; unadopted candidate decoder and selection removed",
+          "evidence": "docs/etc/evidence/t484-s3-control-retention.md"
+        },
+        "reason": "Existing native producer reconciled by38 current default cases; obsolete scratch-window candidate removed",
+        "evidence": "docs/etc/evidence/t484-s3-control-retention.md"
+      }
     },
     {
       "id": "B0165",
@@ -5536,6 +5549,12 @@
     }
   ],
   "commits": {
+    "531dd5bd599af47c7115563171b166890f184425": {
+      "subject": "T484 S3 P98 native common dialog fixtures and recorder retention review",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-common-dialog-native.md"
+      ]
+    },
     "dbb9d36c794d0d6f5224c4a61aa2cbaa98d89a42": {
       "subject": "T484 S3 P97 use native CCPU closure for abort contracts",
       "evidence": [
@@ -7730,11 +7749,11 @@
           "text": "[string]$BuildRoot = 'build/.ninja/msvc-x86-release/call-boundaries-native',"
         },
         {
-          "line": 29,
+          "line": 28,
           "text": "if ($build -ne (BuildPath 'build/.ninja/msvc-x86-release/call-boundaries-native')) {"
         },
         {
-          "line": 73,
+          "line": 72,
           "text": "Get-FileHash -Algorithm SHA256 -LiteralPath \"$build/build.ninja\",$VsDevCmd |"
         }
       ]

@@ -741,5 +741,15 @@
     "evidence": "docs/etc/evidence/t484-s3-common-dialog-native.md",
     "status": "migrated-delivered",
     "reason": "Native current-source projection and boundary/reference fixtures replace interpreter producer"
+  },
+  "test/observation/verify-wow-control-boundaries.ps1": {
+    "status": "retained-native-delegate",
+    "retention_review": {
+      "decision": "retain-consolidated",
+      "reason": "Current control contracts remain; unadopted candidate decoder and selection removed",
+      "evidence": "docs/etc/evidence/t484-s3-control-retention.md"
+    },
+    "reason": "Existing native producer reconciled by38 current default cases; obsolete scratch-window candidate removed",
+    "evidence": "docs/etc/evidence/t484-s3-control-retention.md"
   }
 }

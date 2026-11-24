@@ -1685,3 +1685,5 @@ post-publication targeted checks.
 - [T484 S3 P97 actual CCPU abort](evidence/t484-s3-ccpu-abort.md).
 
 - [T484 S3 P98 common dialog producers](evidence/t484-s3-common-dialog-native.md).
+
+- [T484 S3 P99 control retention](evidence/t484-s3-control-retention.md).

@@ -3,7 +3,6 @@ param(
     [string]$RepositoryRoot = (Join-Path $PSScriptRoot '../..'),
     [string]$BuildRoot = 'build/.ninja/msvc-x86-release/call-boundaries-native',
     [Parameter(Mandatory=$true)][string]$EvidenceRoot,
-    [switch]$CpdWindowResearch,
     [switch]$StyleNotificationResearch,
     [switch]$DialogNativeOwnerResearch,
     [switch]$ClassAddressResearch,
@@ -14,7 +13,7 @@ param(
 # are joined; a failed build never executes stale fixture binaries.
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
-if (([int]$CpdWindowResearch.IsPresent + [int]$StyleNotificationResearch.IsPresent + [int]$DialogNativeOwnerResearch.IsPresent + [int]$ClassAddressResearch.IsPresent) -gt 1) { throw 'Select one research cohort.' }
+if (([int]$StyleNotificationResearch.IsPresent + [int]$DialogNativeOwnerResearch.IsPresent + [int]$ClassAddressResearch.IsPresent) -gt 1) { throw 'Select one research cohort.' }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $allowed = [IO.Path]::GetFullPath((Join-Path $root 'build')) + [IO.Path]::DirectorySeparatorChar
 function BuildPath([string]$path) {
@@ -84,7 +83,6 @@ try {
         $cases += 'wow_dialog_initialization_fixture', 'wow_task_profile_fixture', 'wow_task_profile_existing_fixture'
         $cases += 'wow_edit_lookaside_fixture', 'wow_edit_conversion_fixture'
         $cases += 'wow_def_window_bits_fixture', 'wow_original_dde_free_fixture', 'wow_user_capture_fixture'
-        if ($CpdWindowResearch) { $cases = @('wow_cpd_window_normalization_probe') }
         if ($StyleNotificationResearch) { $cases = @('wow_style_notification_probe') }
         if ($DialogNativeOwnerResearch) { $cases = @('wow_dialog_native_owner_probe') }
         if ($ClassAddressResearch) { $cases = @('wow_class_address_owner_probe') }
