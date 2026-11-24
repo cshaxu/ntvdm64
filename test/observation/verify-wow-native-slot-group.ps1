@@ -44,7 +44,7 @@ try{
     )
     $results=@()
     foreach($row in $rows){
-        $line='-NoProfile -File "'+$repo+'/test/observation/verify-wow-task-lifecycle.ps1" -ProviderBuildRoot "'+$provider+'" -WorkerBuildRoot "'+$worker+'" -BuildRoot "'+$root+'/'+$row.name+'" -Case '+$row.case+' '+$row.arguments
+        $line='-NoProfile -File "'+$repo+'/test/observation/verify-wow-task-lifecycle.ps1" -BuildRoot "'+$root+'/'+$row.name+'" -Case '+$row.case+' '+$row.arguments
         $p=Start-Process $shell -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$($row.name).stdout.txt" -RedirectStandardError "$root/$($row.name).stderr.txt"
         $null=$p.Handle
         $start=$p.StartTime.ToUniversalTime()

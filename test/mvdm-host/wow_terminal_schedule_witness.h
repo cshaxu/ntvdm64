@@ -17,6 +17,15 @@ typedef struct terminal_schedule_test {
 } terminal_schedule_test;
 static terminal_schedule_test *terminal_schedule_active;
 #ifdef WOW_HOOK_GRAPH_OVERLAP
+#include "wow_hook_callback.h"
+void WINAPI wow_hook_capture_context(wow_hook_context *);
+void WINAPI wow_hook_restore_context(const wow_hook_context *);
+BOOL WINAPI wow_hook_query_type(INT, INT *);
+LONG WINAPI WowOriginalStdHookProc(INT, LONG, LONG, INT);
+static const wow_hook_callbacks terminal_hook_callbacks = {
+    wow_hook_capture_context, wow_hook_restore_context,
+    wow_hook_query_type, WowOriginalStdHookProc
+};
 LONG WINAPI WU32StdHookProc(INT,LONG,LONG,INT);
 void __cdecl test_hook_graph_ready(void)
 {
@@ -120,6 +129,10 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     unsigned overlap_before;
 #endif
     t.runtime=main_binding->runtime;
+#ifdef WOW_HOOK_GRAPH_OVERLAP
+    /* The standalone fixture bypasses the production DLL attach binding. */
+    BORROW_CHECK(wow_hook_bind(&terminal_hook_callbacks));
+#endif
     t.session_owner=session_thread_current();
     BORROW_CHECK(t.session_owner != NULL);
     /* Test both caller ownership states on success and on the actual

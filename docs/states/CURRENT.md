@@ -98,7 +98,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P130 dialog producers](../etc/evidence/t484-s3-lifecycle-dialog.md) | Three standalone dialog/publication modes pass; stale include and four producer branches removed; cached full/publication hashes pass. B0195 still has three overlap modes. These are not Full gates. |
 
-Completed implementation batches through P130 passed their cached full host build. P73 checks11 raw host inputs
+| [P131 overlap producers](../etc/evidence/t484-s3-lifecycle-overlap.md) | Three standalone concurrency modes pass after fixing omitted fixture binding; manual compiler path removed; cached full/publication hashes unchanged. Final entry checks and delivery recorded in receipt. |
+
+Completed implementation batches through P131 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

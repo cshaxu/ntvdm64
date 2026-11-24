@@ -1,0 +1,28 @@
+{
+  "publication": {
+    "rawInputs": 11,
+    "republished": false,
+    "publishedCopies": 22,
+    "unchanged": true
+  },
+  "fullGate": false,
+  "fileComplete": true,
+  "validation": {
+    "finished": "2026-11-24T06:17:58.6822849+01:00",
+    "pid": 29748,
+    "started": "2026-11-24T06:16:33.8783622+01:00",
+    "exit": 0
+  },
+  "final": {
+    "pid": 12136,
+    "started": "2026-11-24T06:19:07.8582823+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T06:19:24.3131777+01:00"
+  },
+  "first": {
+    "exit": 1,
+    "finished": "2026-11-24T06:14:22.4243957+01:00",
+    "started": "2026-11-24T06:13:37.4093016+01:00",
+    "pid": 24036
+  }
+}
