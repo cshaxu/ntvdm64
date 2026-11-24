@@ -1919,3 +1919,4 @@ post-publication targeted checks.
 - [T484 S4 isolated package identity refresh](evidence/t484-s4-stage-identity-refresh.md).
 - [T484 S4 physical runtime staging](evidence/t484-s4-physical-stage.md).
 - [T484 S4 WOW application preparation](evidence/t484-s4-wow-app-preparation.md).
+- [T484 S4 independent consumer reconciliation](evidence/t484-s4-independent-consumers.md).

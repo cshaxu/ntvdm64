@@ -1,13 +1,11 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "3776c3208bcfcfa740fcf02da7aeca581d956e33",
+  "head": "d4bc24c68b9670fb77c74ffcc35737e986d082e6",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/Invoke-WowAppProbeBuild.ps1",
-    "?? docs/etc/evidence/t484-s4-wow-app-preparation.md",
-    "?? tools/build-wow-app-probe.cmd"
+    "?? docs/etc/evidence/t484-s4-independent-consumers.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -19,10 +17,10 @@
     "migrated-delivered": 116,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
-    "retained-native-delegate": 14,
+    "retained-native-delegate": 15,
     "pending-producer-migration": 22,
-    "requires-disposition-reconciliation": 3,
-    "retained-standalone-audit": 16
+    "retained-standalone-audit": 17,
+    "requires-disposition-reconciliation": 1
   },
   "existing_interpreted_candidates_with_command_hits": 142,
   "files": [
@@ -564,8 +562,12 @@
       "current_sha256": "29a7c1e36b0b5d3955783adfd8bbfbca32897f759fcc9fbca4fbe33e891ad5a5",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "status": "retained-native-delegate",
+        "reason": "S4 P8 reconciles the complete runner: physical package preparation delegates to P6 CMD; remaining code is observation, assertions and cleanup. Real native/nested-console/nested-window cases pass with actual exit23 and CAF witness.",
+        "evidence": "docs/etc/evidence/t484-s4-independent-consumers.md"
+      }
     },
     {
       "id": "B0028",
@@ -5156,8 +5158,12 @@
       "current_sha256": "fba473d06ed5a74598aafddd2f4b317e85b9af98bf7cf4db13eb6afe03895d69",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "S4 P8 proves this is independent reviewed-output maintenance, not a build/generation/staging/publication prerequisite; only its safety test calls it. Existing28 safety/native-policy assertions pass.",
+        "evidence": "docs/etc/evidence/t484-s4-independent-consumers.md"
+      }
     },
     {
       "id": "B0268",
@@ -6584,6 +6590,12 @@
     }
   ],
   "commits": {
+    "d4bc24c68b9670fb77c74ffcc35737e986d082e6": {
+      "subject": "M0 T484 S4 P7: complete WOW application CMD preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-wow-app-preparation.md"
+      ]
+    },
     "3776c3208bcfcfa740fcf02da7aeca581d956e33": {
       "subject": "M0 T484 S4 P6: prepare physical runtime stages through CMD",
       "evidence": [
