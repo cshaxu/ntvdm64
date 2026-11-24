@@ -102,9 +102,13 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P192 keyboard isolation](../etc/evidence/t484-s3-keyboard-isolation.md) | Removed obsolete private observer and installation/global-cleanup assumptions; real PIF/MEM and four reader outcomes pass. Shared staging remains S4; fixed316/355. |
 
+| [P193 native output preparation](../etc/evidence/t484-s3-native-output-isolation.md) | Removed dynamic BAT generation and flat-layout assumptions. Real simultaneous output loses a marker: strict test fails, recorded separately; no product change or runtime pass claimed. |
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
-The frozen355 census is not the complete remaining invocation graph.
+The frozen355 census is not the complete remaining invocation graph. P193
+adds13 unclassified CL/NASM/Add-Type candidates to the existing ledger;
+retention and build effect are not yet decided.
 
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required

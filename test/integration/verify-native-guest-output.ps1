@@ -2,84 +2,60 @@
 param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$PackageRoot,
-    [Parameter(Mandatory)][string]$ProcessPackageRoot,
     [Parameter(Mandatory)][string]$BuildRoot,
-    [switch]$TraceHandoff,
-    [Parameter(Mandatory)][string]$LogPrefix,
-    [string]$LogRoot='O:\winnt\Logs2'
+    [switch]$TraceHandoff
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
-$build=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
-$physical=(Resolve-Path $ProcessPackageRoot).Path
-$allowed=(Join-Path $repo 'build')+'\'
-if(!$build.StartsWith($allowed,[StringComparison]::OrdinalIgnoreCase) -or
-   !$physical.StartsWith($allowed,[StringComparison]::OrdinalIgnoreCase)){throw 'Use build-only fixture/candidate'}
-if(Test-Path $build){throw 'Use fresh evidence root'}
-if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid prefix'}
-$report=Join-Path (Resolve-Path $LogRoot).Path ($LogPrefix+'.txt')
-if(Test-Path $report){throw 'Use fresh runtime report'}
-$paths=@()
-foreach($name in @('run16.exe','ntcon.exe','ntsrv.exe','ntvdm.exe')){
-    $launch=Join-Path $PackageRoot $name;$actual=Join-Path $physical $name
-    if((Get-FileHash $launch).Hash -ne (Get-FileHash $actual).Hash){throw 'Package identity mismatch'}
-    $paths+=@($launch,$actual)
+$build=[IO.Path]::GetFullPath($BuildRoot)
+if(!$build.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $build)){
+    throw 'Require a fresh build-owned evidence root'
 }
-if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Broker already active'}
-foreach($name in @('CGREADY','CGDONE')){
-    if(Test-Path (Join-Path $physical "tests\$name")){throw 'Existing fixture gate'}
+$observerPath=(Resolve-Path $Observer).Path
+New-Item -ItemType Directory $build|Out-Null
+& "$repo/tools/build-fixtures.cmd" x86 native-guest-output *> "$build/build.log"
+if($LASTEXITCODE){throw 'Native output fixture compile failed'}
+. "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
+$stage=$null;$scope=$null;$saved=@{}
+foreach($name in 'PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_S34_TRACE_PATH'){
+    $saved[$name]=[Environment]::GetEnvironmentVariable($name)
 }
-$null=New-Item -ItemType Directory -Path $build
-# Compiler environment must not leak into original COMMAND's finite startup
-# environment. Keep VsDevCmd in a separate child, not the runtime test shell.
-$producer=Start-Process -FilePath $env:ComSpec -ArgumentList ('/d /s /c ""'+(Join-Path $repo 'tools/build-fixtures.cmd')+'" x86 native-guest-output"') -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $build 'build.log') -RedirectStandardError (Join-Path $build 'build.stderr.log')
 try {
-    "pid=$($producer.Id) started=$($producer.StartTime.ToUniversalTime().ToString('o'))" | Set-Content (Join-Path $build 'producer.txt')
-    if(!$producer.WaitForExit(300000)){
-        $producer.Kill($true)
-        $producer.WaitForExit()
-        throw 'Native guest output producer timed out'
-    }
-    "exit=$($producer.ExitCode)" | Add-Content (Join-Path $build 'producer.txt')
-    if($producer.ExitCode){throw 'Fixture compile failed'}
-} finally {$producer.Dispose()}
-Copy-Item (Join-Path $repo 'build/.ninja/fixtures-x86/native-guest-output.exe') (Join-Path $build 'CG.EXE')
-Copy-Item (Join-Path $build 'CG.EXE') (Join-Path $physical 'tests\CG.EXE')
-$batch=([IO.File]::ReadAllText((Join-Path $PSScriptRoot '../observation/native_guest_output.bat')) -replace '\r?\n',"`r`n")
-$batch=$batch.Replace('@PACKAGE@',$PackageRoot.TrimEnd('\')+'\')
-[IO.File]::WriteAllText((Join-Path $physical 'tests\CG.BAT'),$batch,[Text.Encoding]::ASCII)
-$old=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
-$oldTrace=$env:MVDM_S34_TRACE_PATH
-try {
+    $stage=New-PhysicalRuntimeStage $PackageRoot -FreshPackageIdentity
+    $scope=New-IsolatedPackageScope $stage
+    $binary=Get-PackageBinaryRoot $stage
+    $tests=Join-Path $binary 'tests'
+    New-Item -ItemType Directory $tests -Force|Out-Null
+    Copy-Item "$repo/build/.ninja/fixtures-x86/native-guest-output.exe" "$tests/CG.EXE"
+    Copy-Item "$repo/build/.ninja/fixtures-x86/native-guest-output.bat" "$tests/CG.BAT"
+    $report=Join-Path $build 'observer.txt'
+    $env:PATH="$binary;$env:SystemRoot\System32;$env:SystemRoot"
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
-    if($TraceHandoff){$env:MVDM_S34_TRACE_PATH=$report+'.handoff.txt'}
-    else {Remove-Item Env:MVDM_S34_TRACE_PATH -ErrorAction SilentlyContinue}
-    & $Observer (Join-Path $PackageRoot 'run16.exe') $PackageRoot $report --observation-timeout-ms 60000 tests\CG.EXE ($report+'.native.txt')
+    $env:MVDM_S34_TRACE_PATH=if($TraceHandoff){"$build/handoff.txt"}else{$null}
+    & $observerPath "$binary/run16.exe" $binary $report --observation-timeout-ms 60000 "$tests/CG.EXE" "$build/native.txt"
     if($LASTEXITCODE){throw 'Observer failed'}
     $record=Get-Content $report -Raw
-    $screen=Get-Content ($report+'.console.txt') -Raw
+    $screen=Get-Content "$report.console.txt" -Raw
     if($record -notmatch '(?m)^result=exited\r?$' -or $record -notmatch '(?m)^exit=0x00000025\r?$'){
         throw 'Native/guest completion failed'
     }
     $text=($screen -replace '(?m)^\[\d+\] ','') -replace '\s',''
-    foreach($marker in @('NATIVE-BASE','DOS-INTERVAL','NATIVE-DURING-DOS','DOS-RESUMED','NATIVE-AFTER-DOS','PASSREAL-GUEST-CONCURRENTresult=0')){
+    foreach($marker in 'NATIVE-BASE','DOS-INTERVAL','NATIVE-DURING-DOS','DOS-RESUMED','NATIVE-AFTER-DOS','PASSREAL-GUEST-CONCURRENTresult=0'){
         if(!$text.Contains($marker)){throw "Missing actual visible output: $marker"}
     }
-    'PASS real COMMAND batch plus concurrent native ConPTY output; direct results DOS=0 native=37'
+    'PASS real COMMAND batch plus concurrent native output; DOS=0 native=37'|Set-Content "$build/result.txt"
 } finally {
-    $env:MVDM_OBSERVER_PRIVATE_DESKTOP=$old
-    $env:MVDM_S34_TRACE_PATH=$oldTrace
-    # Close only exact candidate processes after recording the verdict.
-    Get-CimInstance Win32_Process | Where-Object {$_.ExecutablePath -in $paths} | ForEach-Object {
-        $process=Get-Process -Id $_.ProcessId -ErrorAction SilentlyContinue
-        if($process){try {
-            $null=$process.Handle
-            if($process.Path -notin $paths){throw 'Pinned process identity changed'}
-            $process.Kill();$null=$process.WaitForExit(5000)
-        } finally {$process.Dispose()}}
-    }
-    foreach($name in @('CGREADY','CGDONE')){
-        $source=Join-Path $physical "tests\$name"
-        if(Test-Path $source){Move-Item -LiteralPath $source -Destination (Join-Path $build $name)}
+    try {if($scope){Stop-IsolatedPackageScope $scope}} finally {
+        try {
+            if($stage){
+                foreach($name in 'CGREADY','CGDONE'){
+                    $path=Join-Path $stage "system32/tests/$name"
+                    if(Test-Path $path){Copy-Item $path (Join-Path $build $name)}
+                }
+                Remove-PhysicalRuntimeStage $stage
+            }
+        } finally {
+            foreach($name in $saved.Keys){[Environment]::SetEnvironmentVariable($name,$saved[$name])}
+        }
     }
 }

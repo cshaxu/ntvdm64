@@ -1855,3 +1855,5 @@ post-publication targeted checks.
 - [T484 S3 native generic-thunk fixtures](evidence/t484-s3-generic-native.md).
 
 [T484 S3 keyboard isolation](evidence/t484-s3-keyboard-isolation.md) records obsolete-observer removal and retained reader/startup coverage.
+
+[T484 S3 native output isolation](evidence/t484-s3-native-output-isolation.md) records native fixture preparation and a strictly failing concurrent-output witness.

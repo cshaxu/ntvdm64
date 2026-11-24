@@ -1,15 +1,17 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f472f81a5055b389b8fd7b0b867bdb22bf3b74fc",
+  "head": "c5f29a4ea8114f9ba6442194c84966fa7b127785",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-s45-keyboard-shadow.ps1",
-    " M test/mvdm-host/s45_cmdkeyb_shadow_fixture.c",
-    " D test/observation/pif_detached_observer.c",
-    " M tools/build/worker/keyboard-tests.cmake",
-    "?? docs/etc/evidence/t484-s3-keyboard-isolation.md"
+    " M docs/states/TODO.md",
+    " M test/integration/verify-native-guest-output.ps1",
+    " M test/observation/native_guest_output.bat",
+    " M test/observation/native_guest_output_test.c",
+    " M tools/build/fixtures/native-probes.cmake",
+    "?? docs/etc/evidence/t484-s3-native-output-isolation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -690,7 +692,7 @@
       "file": "test/integration/verify-native-guest-output.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "3929b2820fff05a62c79d3f653b61487cc59113be74b097293171b2286673f49",
+      "current_sha256": "5f8ec7880b3876f8db4f8267f56c91d1a3820394652baac693305ca14013b4f4",
       "revisions": [
         "78e2830232fe0ebad2dfe54fc8e2f3bbc446d6c0"
       ],
@@ -700,8 +702,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Native CMD/CMake executable producer verified; runtime batch materialization and staging review remain pending",
-        "evidence": "docs/etc/evidence/t484-s3-native-guest-output.md"
+        "reason": "P193 removes dynamic batch materialization and old flat-package assumptions; CMD/CMake owns the CRLF fixture. Strict runtime reproduces lost native output across DOS handoff; not a runtime pass. Shared staging remains S4, product display defect retained separately.",
+        "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
       }
     },
     {
@@ -808,9 +810,11 @@
       "state": "changed",
       "current_sha256": "0fdd6faf10c5c9042878d1fed2a5296c4d0e7a118763c5247c77ebd4b96f53a8",
       "revisions": [
+        "c5f29a4ea8114f9ba6442194c84966fa7b127785",
         "29b0690b3c85813887eff1580f32c74b983cf98d"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-keyboard-isolation.md",
         "docs/etc/evidence/t484-s3-keyboard-shadow.md"
       ],
       "completion": "pending-producer-migration",
@@ -6484,6 +6488,12 @@
     }
   ],
   "commits": {
+    "c5f29a4ea8114f9ba6442194c84966fa7b127785": {
+      "subject": "M0 T484 S3 P192: retire obsolete keyboard observer and isolate coverage",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-keyboard-isolation.md"
+      ]
+    },
     "f472f81a5055b389b8fd7b0b867bdb22bf3b74fc": {
       "subject": "T484 S3 P191 migrate generic thunk native fixtures",
       "evidence": [
@@ -7988,8 +7998,12 @@
       "file": "test/integration/verify-native-guest-output.ps1",
       "hits": [
         {
-          "line": 46,
-          "text": "Copy-Item (Join-Path $repo 'build/.ninja/fixtures-x86/native-guest-output.exe') (Join-Path $build 'CG.EXE')"
+          "line": 29,
+          "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/native-guest-output.exe\" \"$tests/CG.EXE\""
+        },
+        {
+          "line": 30,
+          "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/native-guest-output.bat\" \"$tests/CG.BAT\""
         }
       ]
     },

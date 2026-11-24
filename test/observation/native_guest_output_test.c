@@ -1,4 +1,4 @@
-/* Authored native parent: write through real ConPTY while original COMMAND
+/* Authored native parent: write through its native Console while original COMMAND
  * is executing a DOS batch. File gates avoid synthetic frontend callbacks. */
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -46,7 +46,7 @@ int main(int argc,char **argv)
     if(argc!=2 || fopen_s(&trace,argv[1],"wx"))return 79;
     GetCurrentDirectoryW(MAX_PATH,directory);
     fprintf(trace,"cwd=%ls\n",directory);fflush(trace);
-    swprintf_s(command,1024,L"run16.exe \"%lsCOMMAND.COM\" /c %lstests\\CG.BAT",directory,directory);
+    swprintf_s(command,1024,L"run16.exe COMMAND.COM /c tests\\CG.BAT");
     if(GetFileAttributesW(L"tests\\CGREADY")!=INVALID_FILE_ATTRIBUTES ||
        GetFileAttributesW(L"tests\\CGDONE")!=INVALID_FILE_ATTRIBUTES)return 80;
     if(!output(L"NATIVE-BASE\r\n"))return 81;

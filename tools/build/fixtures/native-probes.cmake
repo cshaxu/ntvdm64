@@ -19,6 +19,8 @@ foreach(kind IN ITEMS cui gui)
   list(APPEND probes mixed-batch-${kind})
 endforeach()
 if(NTVDM_ARCH STREQUAL "x86")
+  configure_file("${NTVDM_REPO}/test/observation/native_guest_output.bat"
+    "${CMAKE_BINARY_DIR}/native-guest-output.bat" @ONLY NEWLINE_STYLE CRLF)
   fixture(native-guest-output CL test/observation/native_guest_output_test.c)
   set_property(TARGET native-guest-output_objects PROPERTY COMPILE_OPTIONS /nologo /W4)
   set_property(TARGET native-guest-output_objects PROPERTY FIXTURE_LIBRARIES
