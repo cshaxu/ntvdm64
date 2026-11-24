@@ -1,29 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "8373cc9beb63195abde14873d27e9fc1ed59b7f9",
+  "head": "9125ed5e94672ee3de79d10b78407643dafbdacc",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-video7-packed-painter.ps1",
+    " D test/observation/extract-wow-accelerator-alias-fixture.ps1",
+    " D test/observation/extract-wow-accelerator-fixture.ps1",
+    " M test/observation/verify-wow-accelerator-call-fixture.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/worker/observation-tests.cmake",
-    "?? artifacts/build-migration/t484/s3-video7/",
-    "?? docs/etc/evidence/t484-s3-video7.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-accelerator/",
+    "?? docs/etc/evidence/t484-s3-accelerator.md",
+    "?? tools/build/fixtures/wow-accelerator.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 107,
-    "unchanged": 121,
+    "changed": 108,
+    "unchanged": 120,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 50,
+    "migrated-delivered": 51,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 11,
-    "requires-disposition-reconciliation": 111,
+    "requires-disposition-reconciliation": 110,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -2905,8 +2908,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "593f35feb93cca0ea9c998b1b9fb3f6e9d7f3e1c1dd3e46416f3ec5821a90541",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "9125ed5e94672ee3de79d10b78407643dafbdacc"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-video7.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Actual product painter object and profile via CMD/native graph; obsolete compile script removed",
@@ -2923,12 +2930,21 @@
       "id": "B0159",
       "file": "test/observation/verify-wow-accelerator-call-fixture.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "663445cc5c02be59104ccd02933acc20ae5a891f97385030f0edecec9f2440de",
+      "state": "changed",
+      "current_sha256": "1e6f1cfa347b1cf2d8a4e43e48a9db266eae04f0b6b00bb47f44b9dd4be949fb",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "evidence": "docs/etc/evidence/t484-s3-accelerator.md",
+        "reason": "Native projections and two current-source fixtures replace compiler scripts; old extraction helpers deleted",
+        "retention_review": {
+          "evidence": "docs/etc/evidence/t484-s3-accelerator.md",
+          "reason": "Unique conversion/tail and per-task alias retirement coverage; shared source projection replaces two helpers",
+          "decision": "retain-consolidated"
+        }
+      }
     },
     {
       "id": "B0160",
@@ -5477,6 +5493,12 @@
     }
   ],
   "commits": {
+    "9125ed5e94672ee3de79d10b78407643dafbdacc": {
+      "subject": "T484 S3 P94 use native product object for Video7 painter contract",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-video7.md"
+      ]
+    },
     "8373cc9beb63195abde14873d27e9fc1ed59b7f9": {
       "subject": "T484 S3 P93 retire publication wrapper and reconcile native contracts",
       "evidence": [
@@ -7589,20 +7611,12 @@
       "file": "test/observation/verify-wow-accelerator-call-fixture.ps1",
       "hits": [
         {
-          "line": 19,
-          "text": "Invoke-Owned 'compile' ('cl.exe /nologo /TC /c /MT /W4 /WX /I\"'+$out+'\" /Fo\"'+$out+'/fixture.obj\" \"'+$repo+'/test/adapter-mvdm-host-out/wow/wow_accelerator_call_fixture.c\"')"
-        },
-        {
-          "line": 20,
-          "text": "Invoke-Owned 'link' ('link.exe /nologo /machine:x86 /subsystem:console /out:\"'+$out+'/fixture.exe\" \"'+$out+'/fixture.obj\" user32.lib')"
+          "line": 11,
+          "text": "$image=\"$repo/build/.ninja/fixtures-x86/wow-accelerator-$kind.exe\""
         },
         {
           "line": 23,
-          "text": "Invoke-Owned 'alias-compile' ('cl.exe /nologo /TC /c /MT /W4 /WX /I\"'+$out+'\" /Fo\"'+$out+'/alias.obj\" \"'+$repo+'/test/adapter-mvdm-host-out/wow/wow_accelerator_alias_fixture.c\"')"
-        },
-        {
-          "line": 24,
-          "text": "Invoke-Owned 'alias-link' ('link.exe /nologo /machine:x86 /subsystem:console /out:\"'+$out+'/alias.exe\" \"'+$out+'/alias.obj\"')"
+          "text": "Get-FileHash \"$repo/src/mvdm-host/wow32/waccel.c\",\"$repo/build/.ninja/fixtures-x86/accel-create32.inc\",\"$repo/build/.ninja/fixtures-x86/accel-alias.inc\",\"$repo/build/.ninja/fixtures-x86/wow-accelerator-call.exe\",\"$repo/build/.ninja/fixtures-x86/wow-accelerator-alias.exe\"|Select-Object Path,Hash|ConvertTo-Json|Set-Content \"$out/inputs.json\""
         }
       ]
     },

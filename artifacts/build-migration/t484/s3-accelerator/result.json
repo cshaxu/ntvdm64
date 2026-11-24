@@ -1,0 +1,80 @@
+{
+  "first_comparison": {
+    "pid": 22000,
+    "started": "2026-11-24T02:02:31.3493828+01:00",
+    "exit": 1,
+    "finished": "2026-11-24T02:02:31.6099417+01:00"
+  },
+  "publication": {
+    "raw_inputs": 11,
+    "unchanged": true,
+    "published_copies": 22
+  },
+  "x64_rejected": 2,
+  "bodies": [
+    "HACCEL CreateAccel32(VPVOID vpAccel16, DWORD cbAccel16)",
+    "LPACCELALIAS SetupAccelAlias(",
+    "BOOL  DestroyAccelAlias(",
+    "LPACCELALIAS FindAccelAlias("
+  ],
+  "runtime": {
+    "started": "2026-11-24T02:01:40.5161593+01:00",
+    "exit": 0,
+    "pid": 23660,
+    "finished": "2026-11-24T02:01:47.9350383+01:00"
+  },
+  "cache": [
+    {
+      "hash": "CDD6A28B198ADBB1B1562D4155685A13AEBF08E17AEDF6CF9E37ADA4B70E0712",
+      "time": 639310789073269952,
+      "path": "build/.ninja/fixtures-x86/wow-accelerator-call.exe"
+    },
+    {
+      "hash": "C758A1FE6D7EA1C8E759D00710B8C9A2925326FA9CD58E1DFD05905475A66363",
+      "time": 639310789073316777,
+      "path": "build/.ninja/fixtures-x86/wow-accelerator-alias.exe"
+    },
+    {
+      "hash": "18B99FBBC6713A10D976BCFFD87E7A82D5B2BC118C22D64B122D532A907004E9",
+      "time": 639310789053260486,
+      "path": "build/.ninja/fixtures-x86/accel-create32.inc"
+    },
+    {
+      "hash": "4B2B644BFC0DCA8137A6C69C3D9A21979C38D8A9A387A21D9DCD395E0ABC6C8A",
+      "time": 639310789053305270,
+      "path": "build/.ninja/fixtures-x86/accel-alias.inc"
+    }
+  ],
+  "markers": [
+    "WOW_ACCEL_CREATE32 errors=0 entries=2 partial_tail=1",
+    "WOW_ACCEL_ALIAS_RETIRE errors=0 flags=2 destroys=2"
+  ],
+  "final": {
+    "finished": "2026-11-24T02:04:26.3561573+01:00",
+    "started": "2026-11-24T02:03:23.0549462+01:00",
+    "pid": 18332,
+    "exit": 0
+  },
+  "inputs": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\waccel.c",
+      "Hash": "B3677EF2AD59AE352FF4CB9FCBC8EF0CF0DAA35933773274803C0983AB9D312E"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\accel-create32.inc",
+      "Hash": "18B99FBBC6713A10D976BCFFD87E7A82D5B2BC118C22D64B122D532A907004E9"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\accel-alias.inc",
+      "Hash": "4B2B644BFC0DCA8137A6C69C3D9A21979C38D8A9A387A21D9DCD395E0ABC6C8A"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-accelerator-call.exe",
+      "Hash": "CDD6A28B198ADBB1B1562D4155685A13AEBF08E17AEDF6CF9E37ADA4B70E0712"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\wow-accelerator-alias.exe",
+      "Hash": "C758A1FE6D7EA1C8E759D00710B8C9A2925326FA9CD58E1DFD05905475A66363"
+    }
+  ]
+}

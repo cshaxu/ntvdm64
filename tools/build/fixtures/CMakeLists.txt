@@ -367,3 +367,5 @@ include(dpmi-buffer.cmake)
 include(niddb.cmake)
 
 include(serial-baud.cmake)
+
+include(wow-accelerator.cmake)

@@ -696,5 +696,15 @@
       "evidence": "docs/etc/evidence/t484-s3-video7.md",
       "decision": "retain"
     }
+  },
+  "test/observation/verify-wow-accelerator-call-fixture.ps1": {
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-accelerator.md",
+    "reason": "Native projections and two current-source fixtures replace compiler scripts; old extraction helpers deleted",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-accelerator.md",
+      "reason": "Unique conversion/tail and per-task alias retirement coverage; shared source projection replaces two helpers",
+      "decision": "retain-consolidated"
+    }
   }
 }
