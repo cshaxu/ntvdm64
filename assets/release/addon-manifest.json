@@ -1,145 +1,79 @@
-{
-  "schema": 1,
-  "drivers": [
-    {
-      "id": "win101",
-      "file": "MOUSE101.DRV",
-      "sha256": "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
-      "source": "src/addon/mouse101/mouse101.asm",
-      "sourceSha256": "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E",
-      "acceptance": "verified"
-    },
-    {
-      "id": "win31",
-      "file": "MOUSE31.DRV",
-      "sha256": "5FA167B71FB12B69AEE78E9FF8AB46BB82D4A9FED00AAFDE94FAD87592CE9D07",
-      "source": "src/addon/mouse31/mouse31.asm",
-      "sourceSha256": "456111F60E0C1D152574A70EC17117880EC6512D16067431B6266080F3FDD40E",
-      "acceptance": "verified",
-      "verifiedScope": "Win3.1 eight setup profiles, enhanced fullscreen Console and Window input, guest DOS prompt callback isolation, DOSX real-provider and register preservation.",
-      "evidence": "docs/etc/evidence/m0-t481-s14-win95-launch.md"
-    },
-    {
-      "id": "win95-compat",
-      "file": "compat95.sys",
-      "kind": "dos-character-driver",
-      "architecture": "i386-real-mode",
-      "sha256": "49F9219405E08A4DBB35F69AE7836A27A6FF2477F272CCF29D3DD42CEAC5DABC",
-      "source": "src/addon/compat95/compat95.asm",
-      "sourceSha256": "FB198CB2B0D4D74764B22DBB010A7C12577D0F2AC5EAD4265D4E2D292CD5FF11",
-      "sources": [
-        {
-          "name": "compat95.asm",
-          "sha256": "FB198CB2B0D4D74764B22DBB010A7C12577D0F2AC5EAD4265D4E2D292CD5FF11"
-        },
-        {
-          "name": "bootlogo.inc",
-          "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7"
-        },
-        {
-          "name": "root.inc",
-          "sha256": "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D"
-        }
-      ],
-      "acceptance": "candidate"
-    },
-    {
-      "id": "ntvdm64",
-      "file": "ntvdm64.386",
-      "kind": "static-vxd",
-      "architecture": "i386-protected-mode",
-      "source": "src/addon/ntvdm64-386/ntvdm64.asm",
-      "sourceSha256": "B8B37812839D0652A1D87709315D76459F05FAE860779A0A99F20911FBA22643",
-      "sha256": "A2D689BAD411B09AF02B8D8BB0DCEF7F0217BFA23BD1E4A3203758249D8665BB",
-      "acceptance": "candidate",
-      "verifiedScope": "S8 manual-test candidate: Win3.1 EDIT.EXE and EDIT.COM full-screen pointer frames observed; dual-editor normal exit passed without switching. Switch-back input and exit automation and Win95 regression are unverified.",
-      "evidence": "docs/etc/evidence/m0-t481-s8-mouse.md"
-    },
-    {
-      "id": "insignia-niddb",
-      "file": "insignia.386",
-      "kind": "static-vxd",
-      "architecture": "i386-protected-mode",
-      "source": "src/addon/insignia-386/insignia.asm",
-      "sourceSha256": "D3C2E05139B67A9E43FFECBBC987D7D6D469242B1FEF69BD77D4F85E7A4E7A8F",
-      "sha256": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B",
-      "acceptance": "candidate",
-      "verifiedScope": "Win3.1 std/386 DOSONLY 0/1 startup and exit, two-bank font readback, real EDIT.EXE/EDIT.COM with diagnostic host, Full 16/16 on isolated package. Win95 production host native command and diagnostic interactive editor tests passed; normal shutdown unverified.",
-      "evidence": "artifacts/t481-s5/qualification001.json"
-    }
-  ],
-  "utilities": [
-    {
-      "id": "hash",
-      "file": "HASH.EXE",
-      "architecture": "amd64",
-      "sha256": "138781C69EE89355778C50E10B9937D1494D9DABB3B7F0DBEDE47558F940DAE6",
-      "source": "src/addon/hash/hash.c",
-      "sourceSha256": "2C143430F34EA275E0894F66F0F79BE5B894C5078938498F0732E3A594DB5B4B"
-    },
-    {
-      "id": "grp",
-      "file": "GRP.EXE",
-      "architecture": "amd64",
-      "sha256": "59AFC539C18DD295248C6EF4686BE626BCD4373BA9A47EB068704E6AB03BE3F2",
-      "source": "src/addon/grp/grp.c",
-      "sourceSha256": "AD3A04E79358F3A338EE85619A94387CD89B71ED124F1494F4ABB8425C334E90"
-    },
-    {
-      "id": "lnk",
-      "file": "LNK.EXE",
-      "architecture": "amd64",
-      "sha256": "76D2C4F438EEA451722DF64D61DDB3F19302DFAB94F36C0018A00B6B8F79C643",
-      "source": "src/addon/lnk/lnk.c",
-      "sourceSha256": "5E7F5B6554D4A20D5E65C49AD266A17B08DEDAA3CD93690C4D83D822DCCF92B9"
-    },
-    {
-      "id": "szdd",
-      "file": "SZDD.EXE",
-      "architecture": "amd64",
-      "sha256": "935387EAE2DC2A3C4B055CC2B3A6DC3A1CDFA8BC2CC6BF96454CF2C0EED9EF9D",
-      "source": "src/addon/szdd/szdd.c",
-      "sourceSha256": "2CBA06E0F0132C7A24D3EE643E8D29923A873EE294128F145627D1D5FD97E2A0"
-    },
-    {
-      "id": "patch31",
-      "file": "patch31.exe",
-      "architecture": "amd64",
-      "sha256": "5F668F98E187811126B1A63141F1A4A220A3573249231D60384C20FE415DB046",
-      "source": "src/addon/patch31/patch31.c",
-      "sourceSha256": "2CCC44725EBA2594FDA16BC2492CFBEFEC5106A99C018B4CB41B29A4337AE092"
-    },
-    {
-      "id": "path31",
-      "file": "path31.exe",
-      "architecture": "amd64",
-      "sha256": "4EE908499834D5A3BCF63267B85ABFC66D486DD3E6EDC1E603B681CCF9E2D2A9",
-      "source": "src/addon/path31/path31.c",
-      "sourceSha256": "04658CD2D57FB3A4CECA2E46E96E1453F087F3420DCEE6E82E08A63A108E117C"
-    },
-    {
-      "id": "patch95",
-      "file": "patch95.exe",
-      "architecture": "amd64",
-      "sha256": "AF2561B2B5482CABC3B44F793FBDC0FE21F1EE9219B025F93911D3749397697E",
-      "source": "src/addon/patch95/patch95.c",
-      "sourceSha256": "1A4D68BCF90E5560902B5C4F97000FF3A7C7151240F544AE98A7BD85EEC1040E"
-    },
-    {
-      "id": "path95",
-      "file": "path95.exe",
-      "architecture": "amd64",
-      "sha256": "349A97E525B5C64ECE938A3586A7B4AF33631EE3BC59403EF73FB0E3D5D71EF6",
-      "source": "src/addon/path95/path95.c",
-      "sourceSha256": "F814EB02A895F9F2CCC35F81B54215F328F9B1F87841F2287BBE7CF56BCA281E"
-    },
-    {
-      "id": "pif",
-      "file": "PIF.EXE",
-      "architecture": "amd64",
-      "sha256": "53AF04B42D1F17FC99B3DE15CC7767E9FCDC022738D7FBEA843429943F4525F6",
-      "source": "src/addon/pif/pif.c",
-      "sourceSha256": "6890FA165537AC8EE7275B72482E5E257F2ADB24589E7C9CA37E484A655661D0"
-    }
-  ]
-}
+{"schema":1,"drivers":[
+  {
+    "acceptance" : "verified",
+    "file" : "MOUSE101.DRV",
+    "id" : "win101",
+    "sha256" : "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
+    "source" : "src/addon/mouse101/mouse101.asm",
+    "sourceSha256" : "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E"
+  },
+  {
+    "acceptance" : "verified",
+    "evidence" : "docs/etc/evidence/m0-t481-s14-win95-launch.md",
+    "file" : "MOUSE31.DRV",
+    "id" : "win31",
+    "sha256" : "5FA167B71FB12B69AEE78E9FF8AB46BB82D4A9FED00AAFDE94FAD87592CE9D07",
+    "source" : "src/addon/mouse31/mouse31.asm",
+    "sourceSha256" : "456111F60E0C1D152574A70EC17117880EC6512D16067431B6266080F3FDD40E",
+    "verifiedScope" : "Win3.1 eight setup profiles, enhanced fullscreen Console and Window input, guest DOS prompt callback isolation, DOSX real-provider and register preservation."
+  },
+  {
+    "acceptance" : "candidate",
+    "architecture" : "i386-real-mode",
+    "file" : "compat95.sys",
+    "id" : "win95-compat",
+    "kind" : "dos-character-driver",
+    "sha256" : "49F9219405E08A4DBB35F69AE7836A27A6FF2477F272CCF29D3DD42CEAC5DABC",
+    "source" : "src/addon/compat95/compat95.asm",
+    "sourceSha256" : "FB198CB2B0D4D74764B22DBB010A7C12577D0F2AC5EAD4265D4E2D292CD5FF11",
+    "sources" :
+    [
+      {
+        "name" : "compat95.asm",
+        "sha256" : "FB198CB2B0D4D74764B22DBB010A7C12577D0F2AC5EAD4265D4E2D292CD5FF11"
+      },
+      {
+        "name" : "bootlogo.inc",
+        "sha256" : "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7"
+      },
+      {
+        "name" : "root.inc",
+        "sha256" : "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D"
+      }
+    ]
+  },
+  {
+    "acceptance" : "candidate",
+    "architecture" : "i386-protected-mode",
+    "evidence" : "docs/etc/evidence/m0-t481-s8-mouse.md",
+    "file" : "ntvdm64.386",
+    "id" : "ntvdm64",
+    "kind" : "static-vxd",
+    "sha256" : "A2D689BAD411B09AF02B8D8BB0DCEF7F0217BFA23BD1E4A3203758249D8665BB",
+    "source" : "src/addon/ntvdm64-386/ntvdm64.asm",
+    "sourceSha256" : "B8B37812839D0652A1D87709315D76459F05FAE860779A0A99F20911FBA22643",
+    "verifiedScope" : "S8 manual-test candidate: Win3.1 EDIT.EXE and EDIT.COM full-screen pointer frames observed; dual-editor normal exit passed without switching. Switch-back input and exit automation and Win95 regression are unverified."
+  },
+  {
+    "acceptance" : "candidate",
+    "architecture" : "i386-protected-mode",
+    "evidence" : "artifacts/t481-s5/qualification001.json",
+    "file" : "insignia.386",
+    "id" : "insignia-niddb",
+    "kind" : "static-vxd",
+    "sha256" : "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B",
+    "source" : "src/addon/insignia-386/insignia.asm",
+    "sourceSha256" : "D3C2E05139B67A9E43FFECBBC987D7D6D469242B1FEF69BD77D4F85E7A4E7A8F",
+    "verifiedScope" : "Win3.1 std/386 DOSONLY 0/1 startup and exit, two-bank font readback, real EDIT.EXE/EDIT.COM with diagnostic host, Full 16/16 on isolated package. Win95 production host native command and diagnostic interactive editor tests passed; normal shutdown unverified."
+  }
+],"utilities":[
+{"id":"hash","file":"HASH.EXE","architecture":"amd64","sha256":"138781C69EE89355778C50E10B9937D1494D9DABB3B7F0DBEDE47558F940DAE6","source":"src/addon/hash/hash.c","sourceSha256":"2C143430F34EA275E0894F66F0F79BE5B894C5078938498F0732E3A594DB5B4B"}
+,{"id":"grp","file":"GRP.EXE","architecture":"amd64","sha256":"59AFC539C18DD295248C6EF4686BE626BCD4373BA9A47EB068704E6AB03BE3F2","source":"src/addon/grp/grp.c","sourceSha256":"AD3A04E79358F3A338EE85619A94387CD89B71ED124F1494F4ABB8425C334E90"}
+,{"id":"lnk","file":"LNK.EXE","architecture":"amd64","sha256":"76D2C4F438EEA451722DF64D61DDB3F19302DFAB94F36C0018A00B6B8F79C643","source":"src/addon/lnk/lnk.c","sourceSha256":"5E7F5B6554D4A20D5E65C49AD266A17B08DEDAA3CD93690C4D83D822DCCF92B9"}
+,{"id":"szdd","file":"SZDD.EXE","architecture":"amd64","sha256":"935387EAE2DC2A3C4B055CC2B3A6DC3A1CDFA8BC2CC6BF96454CF2C0EED9EF9D","source":"src/addon/szdd/szdd.c","sourceSha256":"2CBA06E0F0132C7A24D3EE643E8D29923A873EE294128F145627D1D5FD97E2A0"}
+,{"id":"patch31","file":"patch31.exe","architecture":"amd64","sha256":"5F668F98E187811126B1A63141F1A4A220A3573249231D60384C20FE415DB046","source":"src/addon/patch31/patch31.c","sourceSha256":"2CCC44725EBA2594FDA16BC2492CFBEFEC5106A99C018B4CB41B29A4337AE092"}
+,{"id":"path31","file":"path31.exe","architecture":"amd64","sha256":"4EE908499834D5A3BCF63267B85ABFC66D486DD3E6EDC1E603B681CCF9E2D2A9","source":"src/addon/path31/path31.c","sourceSha256":"04658CD2D57FB3A4CECA2E46E96E1453F087F3420DCEE6E82E08A63A108E117C"}
+,{"id":"patch95","file":"patch95.exe","architecture":"amd64","sha256":"AF2561B2B5482CABC3B44F793FBDC0FE21F1EE9219B025F93911D3749397697E","source":"src/addon/patch95/patch95.c","sourceSha256":"1A4D68BCF90E5560902B5C4F97000FF3A7C7151240F544AE98A7BD85EEC1040E"}
+,{"id":"path95","file":"path95.exe","architecture":"amd64","sha256":"349A97E525B5C64ECE938A3586A7B4AF33631EE3BC59403EF73FB0E3D5D71EF6","source":"src/addon/path95/path95.c","sourceSha256":"F814EB02A895F9F2CCC35F81B54215F328F9B1F87841F2287BBE7CF56BCA281E"}
+,{"id":"pif","file":"PIF.EXE","architecture":"amd64","sha256":"53AF04B42D1F17FC99B3DE15CC7767E9FCDC022738D7FBEA843429943F4525F6","source":"src/addon/pif/pif.c","sourceSha256":"6890FA165537AC8EE7275B72482E5E257F2ADB24589E7C9CA37E484A655661D0"}
+]}

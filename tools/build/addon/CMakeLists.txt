@@ -184,3 +184,43 @@ file(SHA256 "${NTVDM_NASM}" nasm_hash)
 file(SHA256 "${NTVDM_WLINK}" wlink_hash)
 file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/source-manifest.json" CONTENT
   "{\"sources\":[\n${sources}\n],\"nasmSha256\":\"${nasm_hash}\",\"wlinkSha256\":\"${wlink_hash}\"}\n" @ONLY)
+
+# Publication metadata is declarative. CMD validates built images and owns copies.
+file(READ "${NTVDM_REPO}/assets/release/addon-manifest.json" release_manifest)
+string(JSON release_schema GET "${release_manifest}" schema)
+if(NOT release_schema EQUAL 1)
+  message(FATAL_ERROR "Unsupported addon manifest schema")
+endif()
+string(JSON release_drivers GET "${release_manifest}" drivers)
+string(REGEX REPLACE "[ \t]+\n" "\n" release_drivers "${release_drivers}")
+file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/utility-manifest-prefix.json"
+  CONTENT "{\"schema\":1,\"drivers\":${release_drivers},\"utilities\":[\n" NEWLINE_STYLE UNIX)
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+  "${NTVDM_REPO}/assets/release/addon-manifest.json")
+file(TO_NATIVE_PATH "${NTVDM_REPO}" publish_repo)
+set(driver_checks "")
+string(JSON driver_count LENGTH "${release_drivers}")
+math(EXPR last_driver "${driver_count}-1")
+foreach(index RANGE ${last_driver})
+  string(JSON driver_file GET "${release_drivers}" ${index} file)
+  string(JSON driver_hash GET "${release_drivers}" ${index} sha256)
+  if(NOT driver_file MATCHES "^[A-Za-z0-9_.-]+$" OR
+     NOT driver_hash MATCHES "^[A-Fa-f0-9]+$")
+    message(FATAL_ERROR "Invalid driver identity")
+  endif()
+  string(APPEND driver_checks
+    "call :driver ${driver_file} ${driver_hash}\nif errorlevel 1 goto fail\n")
+endforeach()
+set(publish_calls "")
+foreach(id IN ITEMS hash grp lnk szdd patch31 path31 patch95 path95 pif)
+  set(filename "${id}.exe")
+  if(id MATCHES "^(hash|grp|lnk|szdd|pif)$")
+    string(TOUPPER "${filename}" filename)
+  endif()
+  file(SHA256 "${NTVDM_REPO}/src/addon/${id}/${id}.c" source_hash)
+  string(TOUPPER "${source_hash}" source_hash)
+  string(APPEND publish_calls
+    "call :utility ${id} ${filename} ${source_hash}\nif errorlevel 1 goto fail\n")
+endforeach()
+configure_file(publish-utilities.cmd.in
+  "${CMAKE_BINARY_DIR}/publish-utilities.cmd" @ONLY NEWLINE_STYLE CRLF)

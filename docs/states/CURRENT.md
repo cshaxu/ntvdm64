@@ -43,6 +43,8 @@ S4 P2 replaces the system32 PowerShell package producer with one CMD owner;
 [package comparison and failure evidence](../etc/evidence/t484-s4-system32-cmd.md)
 records whole-package equivalence and expanded failure controls.
 
+S4 P3 replaces addon utility publication with CMD; [publication evidence](../etc/evidence/t484-s4-addon-utility-publication.md) records nine-tool identity checks, preserved driver qualifications and failed-copy handling.
+
 | S3 delivery | Actual result |
 | --- | --- |
 | [P1-P180](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
@@ -52,7 +54,7 @@ records whole-package equivalence and expanded failure controls.
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **324/355 disposed,31 pending**, plus24 supplemental
+Current census: **325/355 disposed,30 pending**, plus24 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;

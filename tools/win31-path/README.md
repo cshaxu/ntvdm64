@@ -29,5 +29,5 @@ The tool directory contains `APPLY.CMD` and `UNAPPLY.CMD`. `path31.exe`,
 `PIF.EXE` and `GRP.EXE` are consumed from `assets\release`, without duplicate
 copies here. path31 only discovers the unique old root; it does not perform
 the repair. Its source is `src/addon/path31/path31.c`; build it with
-`src\addon\path31\BUILD.CMD output-exe` in a build-owned directory and publish
-through `tools/build/Stage-AddonUtilityRelease.ps1 -Path31Build`.
+`tools\build-addon.cmd path31`; publish the complete utility set through
+`tools\publish-addon-utilities.cmd`.

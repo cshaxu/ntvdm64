@@ -1,34 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "a2cd519af9ec131efc650fb7ebcc16648f30b42d",
+  "head": "f9c40e13b51bfa98478934f3f7e912c565d3773a",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
+    " M assets/release/addon-manifest.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/test-native-monitor-package-inputs.ps1",
-    " M test/observation/test-native-worker-package-inputs.ps1",
-    " M test/observation/verify-native-frontend.ps1",
-    " M test/observation/verify-system32-package-staging.ps1",
-    " D tools/build/Stage-System32ProductPackage.ps1",
-    " M tools/build/native/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s4-system32-cmd.md",
-    "?? test/observation/Invoke-System32Stage.ps1",
-    "?? tools/build/native/stage-system32.cmd.in",
-    "?? tools/stage-system32.cmd"
+    " D tools/build/Stage-AddonUtilityRelease.ps1",
+    " M tools/build/addon/CMakeLists.txt",
+    " M tools/win31-path/README.md",
+    " M tools/win31-setup/README.md",
+    "?? docs/etc/evidence/t484-s4-addon-utility-publication.md",
+    "?? test/build/Test-AddonUtilityPublication.ps1",
+    "?? tools/build/addon/publish-utilities.cmd.in",
+    "?? tools/publish-addon-utilities.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 164,
-    "unchanged": 13,
-    "removed": 178
+    "unchanged": 12,
+    "removed": 179
   },
   "disposition_counts": {
     "migrated-delivered": 114,
     "retained-native-declarative": 3,
-    "retired-with-delivery-evidence": 177,
+    "retired-with-delivery-evidence": 178,
     "retained-native-delegate": 14,
     "pending-producer-migration": 26,
-    "requires-disposition-reconciliation": 5,
+    "requires-disposition-reconciliation": 4,
     "retained-standalone-audit": 16
   },
   "existing_interpreted_candidates_with_command_hits": 142,
@@ -6246,12 +6246,16 @@
       "id": "B0338",
       "file": "tools/build/Stage-AddonUtilityRelease.ps1",
       "stage": "S4",
-      "state": "unchanged",
-      "current_sha256": "c9146e8a7dfb7294b79d8dac90065bf91ca802cbc4b2cc58d0a73a51c170ff6d",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "S4 P3 replaces selected PowerShell utility publication with the complete nine-tool CMD publisher, preserving driver metadata and validating all inputs before publication; native hashes, PE checks and failed-copy manifest invalidation are tested.",
+        "evidence": "docs/etc/evidence/t484-s4-addon-utility-publication.md"
+      }
     },
     {
       "id": "B0339",
@@ -6328,12 +6332,14 @@
       "state": "removed",
       "current_sha256": null,
       "revisions": [
+        "f9c40e13b51bfa98478934f3f7e912c565d3773a",
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-direct-package-identity.md"
+        "docs/etc/evidence/t484-s3-direct-package-identity.md",
+        "docs/etc/evidence/t484-s4-system32-cmd.md"
       ],
-      "completion": "migrated-delivered",
+      "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "migrated-delivered",
         "reason": "S4 P2 replaces the PowerShell producer with tools/stage-system32.cmd and a single native-configured CMD template; all four test consumers use assertion-only delegation. Whole-package fixed-UUID comparison and failure cases retained.",
@@ -6566,6 +6572,12 @@
     }
   ],
   "commits": {
+    "f9c40e13b51bfa98478934f3f7e912c565d3773a": {
+      "subject": "M0 T484 S4 P2: move system32 package composition to CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-system32-cmd.md"
+      ]
+    },
     "a2cd519af9ec131efc650fb7ebcc16648f30b42d": {
       "subject": "M0 T484 S4 P1: provide native UUID and package machine checks",
       "evidence": [

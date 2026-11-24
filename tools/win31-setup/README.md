@@ -23,4 +23,4 @@ Both are independent utilities in assets/release, used by APPLY.CMD.
 compressed files directly from their adjacent backups, and deletes the entire
 media `PATCH` directory, including user files. Installed profiles are separate.
 
-Build each utility like PIF/GRP/LNK: `src\addon\szdd\BUILD.CMD output-exe` and `src\addon\patch31\BUILD.CMD output-exe`. Run from a build-owned output directory; publish through `tools\build\Stage-AddonUtilityRelease.ps1`. These tools contain no Microsoft guest binaries. Standard and enhanced modes depend on the actual installed NTVDM runtime; no enhanced-mode fallback is performed.
+Build with `tools\build-addon.cmd all`; publish the complete nine-tool set through `tools\publish-addon-utilities.cmd`. These tools contain no Microsoft guest binaries. Standard and enhanced modes depend on the actual installed NTVDM runtime; no enhanced-mode fallback is performed.

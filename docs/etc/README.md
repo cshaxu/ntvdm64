@@ -1911,3 +1911,5 @@ post-publication targeted checks.
 - [T484 S4 native package primitives](evidence/t484-s4-package-primitives.md).
 
 - [T484 S4 CMD system32 package composition](evidence/t484-s4-system32-cmd.md).
+
+- [T484 S4 CMD addon utility publication](evidence/t484-s4-addon-utility-publication.md).
