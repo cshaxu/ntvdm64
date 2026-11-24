@@ -102,6 +102,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P212 obsolete publishers](../etc/evidence/t484-s3-obsolete-publishers.md) | Removed two uncalled historical single-image publishers and stale normative invocation; coherent current publication remains S4. Frozen318/355 disposed,37 remain;23 supplemental preparation chains remain. |
 
+| [P213 original staging retirement](../etc/evidence/t484-s3-original-stage-retirement.md) | Removed obsolete single-worker staging and its sole self-test; current archive/package media validation retained. Frozen319/355 disposed,36 remain;23 supplemental preparation chains remain. |
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
 The frozen355 census is not the complete remaining invocation graph. P193's13 additional candidates were resolved by P198; P199's broader30

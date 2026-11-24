@@ -1,4 +1,14 @@
 {
+  "tools/build/Stage-OriginalSoftpcRuntime.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "P213 removes obsolete single-worker staging with only a self-test caller; current coherent package and immutable guest manifest gate remain.",
+    "evidence": "docs/etc/evidence/t484-s3-original-stage-retirement.md"
+  },
+  "test/observation/original_runtime_layout_test.mjs": {
+    "status": "supplemental-retired",
+    "reason": "P213 retires the only caller of obsolete single-worker staging; historical outcome retained, current guest-media gate used for archive/path/hash validation.",
+    "evidence": "docs/etc/evidence/t484-s3-original-stage-retirement.md"
+  },
   "tools/build/StageProductExecutable.mjs": {
     "status": "retired-with-delivery-evidence",
     "reason": "P212 removes obsolete single ntvdm32.exe publisher with no current code caller; old alias deletion conflicts with the current coherent host package. Current publication chain remains pending S4.",

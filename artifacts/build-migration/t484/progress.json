@@ -1,31 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "10d0f681a9df1fa49dda192203d91a422a31951c",
+  "head": "64aa44b1bb4977b55b86bd8b79ee2e0b13a6ec36",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
-    " M docs/rules/EXECUTION.md",
+    " M docs/etc/evidence/m0-t427-s5-system32-host-colocation.md",
     " M docs/states/CURRENT.md",
-    " D tools/build/StageProductExecutable.mjs",
-    " D tools/build/StageWow32Provider.mjs",
-    "?? docs/etc/evidence/t484-s3-obsolete-publishers.md"
+    " D test/observation/original_runtime_layout_test.mjs",
+    " D tools/build/Stage-OriginalSoftpcRuntime.mjs",
+    "?? docs/etc/evidence/t484-s3-original-stage-retirement.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 165,
-    "unchanged": 18,
-    "removed": 172
+    "unchanged": 17,
+    "removed": 173
   },
   "disposition_counts": {
     "migrated-delivered": 113,
     "retained-native-declarative": 3,
-    "retired-with-delivery-evidence": 172,
+    "retired-with-delivery-evidence": 173,
     "retained-native-delegate": 14,
     "pending-producer-migration": 26,
-    "requires-disposition-reconciliation": 11,
+    "requires-disposition-reconciliation": 10,
     "retained-standalone-audit": 16
   },
-  "existing_interpreted_candidates_with_command_hits": 145,
+  "existing_interpreted_candidates_with_command_hits": 144,
   "files": [
     {
       "id": "B0001",
@@ -6289,12 +6289,16 @@
       "id": "B0342",
       "file": "tools/build/Stage-OriginalSoftpcRuntime.mjs",
       "stage": "S4",
-      "state": "unchanged",
-      "current_sha256": "f1c8c2dae14d087db77fabea9ffbee2f1dd2fb42ce7210516867680d1a563cd9",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "P213 removes obsolete single-worker staging with only a self-test caller; current coherent package and immutable guest manifest gate remain.",
+        "evidence": "docs/etc/evidence/t484-s3-original-stage-retirement.md"
+      }
     },
     {
       "id": "B0343",
@@ -6336,8 +6340,12 @@
       "stage": "S4",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "64aa44b1bb4977b55b86bd8b79ee2e0b13a6ec36"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-obsolete-publishers.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -6351,8 +6359,12 @@
       "stage": "S4",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "64aa44b1bb4977b55b86bd8b79ee2e0b13a6ec36"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-obsolete-publishers.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -6497,6 +6509,12 @@
     }
   ],
   "commits": {
+    "64aa44b1bb4977b55b86bd8b79ee2e0b13a6ec36": {
+      "subject": "M0 T484 S3 P212: retire obsolete single-image publishers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-obsolete-publishers.md"
+      ]
+    },
     "10d0f681a9df1fa49dda192203d91a422a31951c": {
       "subject": "M0 T484 S3 P211: retire obsolete Run16 entry producer",
       "evidence": [
@@ -10131,36 +10149,6 @@
         {
           "line": 133,
           "text": "$generated = $item.Extension.ToLowerInvariant() -in @('.obj','.o','.lib','.a','.pdb','.map','.res','.ilk','.exp','.tlog','.log','.txt','.json','.jsonl','.csv','.tsv','.xml','.html','.png','.jpg','.bmp','.etl','.dmp','.ninja','.cmd','.bat','.ps1','.mjs','.js','.py','.c','.h','.cpp','.def','.rsp','.exe','.dll','.manifest','.err','.out')"
-        }
-      ]
-    },
-    {
-      "id": "B0342",
-      "file": "tools/build/Stage-OriginalSoftpcRuntime.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';"
-        },
-        {
-          "line": 2,
-          "text": "import { createHash } from 'node:crypto';"
-        },
-        {
-          "line": 3,
-          "text": "import { dirname, isAbsolute, join, resolve } from 'node:path';"
-        },
-        {
-          "line": 4,
-          "text": "import { fileURLToPath } from 'node:url';"
-        },
-        {
-          "line": 41,
-          "text": "throw new Error('usage: node tools/build/Stage-OriginalSoftpcRuntime.mjs --executable <product.exe> --output <directory> [--redirector-dll <VDMREDIR.dll>] [--update --replace-product]');"
-        },
-        {
-          "line": 102,
-          "text": "* opt in after a formal link. Guest and firmware bytes never use this path. */"
         }
       ]
     },

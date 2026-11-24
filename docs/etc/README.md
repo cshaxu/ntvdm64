@@ -1895,3 +1895,5 @@ post-publication targeted checks.
 [T484 S3 Run16 historical entry](evidence/t484-s3-run16-entry-retirement.md) records obsolete producer retirement and current coverage boundaries.
 
 [T484 S3 obsolete publishers](evidence/t484-s3-obsolete-publishers.md) records retirement of historical single-image publication scripts and stale rules.
+
+[T484 S3 original staging retirement](evidence/t484-s3-original-stage-retirement.md) records retirement of an isolated historical staging chain and current media verification.

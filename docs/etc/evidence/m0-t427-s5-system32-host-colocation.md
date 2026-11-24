@@ -44,7 +44,7 @@ Formal VdmTib storage check passes.
 | --- | --- |
 | [common_system_root_test](../../../test/compat/system_root_test.c), r006/root fixture/system32 with expected-root argument | Own-image parent root despite changed CWD/inherited root; joins, capacity/error clearing and invalid relatives pass. |
 | Cache guest-environment-test/application-search-test, fresh r006/search fixture | Bounded projection/host data; directory-first suffix/explicit/drive/empty/Unicode/capacity cases pass. |
-| [original_runtime_layout_test](../../../test/observation/original_runtime_layout_test.mjs), r002/runtime | NTVDM in system32, no flat copy; unique original destinations and source/destination hashes. |
+| `original_runtime_layout_test` (historical source retired by T484 S3), r002/runtime | NTVDM in system32, no flat copy; unique original destinations and source/destination hashes. |
 | New-T310FirmwareResourceNinja r003/resources all-verify | Firmware/media, missing local DLL with CWD impostor, native fallback and WOW boot-environment ownership pass. |
 | [verify-native-host-root](../../../test/integration/verify-native-host-root.ps1), r007, S4/r001/HROOT.EXE | Direct/DOS-native/nested DOS-native retain real host root/APIs; wrong inherited product root ignored. |
 | [verify-win16-directory-probe](../../../test/integration/verify-win16-directory-probe.ps1), r008, S4/r001/DIRP.EXE | Actual guest Windows/System/kernel calls identify Z:/, Z:/SYSTEM and Z:/SYSTEM32/KRNL386.EXE. Original drive-root double separator normalized only by assertion. |
