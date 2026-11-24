@@ -274,6 +274,7 @@ if "%TARGET%"=="command-initialization" set "SELECTED=1"
 if "%TARGET%"=="command-launch" set "SELECTED=1"
 if "%TARGET%"=="worker-diagnostics" set "SELECTED=1"
 if "%TARGET%"=="dos-identity-observer" if "%~1"=="x86" set "SELECTED=1"
+if "%TARGET%"=="vm-continuation-observer" if "%~1"=="x86" set "SELECTED=1"
 if "%TARGET%"=="version-negatives" set "SELECTED=1"
 if "%TARGET%"=="version-negatives" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="native-diagnostics" set "SELECTED=1"
@@ -341,6 +342,7 @@ if "%TARGET%"=="command-launch" goto worker
 if "%TARGET%"=="frontend-library" goto worker
 if "%TARGET%"=="worker-diagnostics" goto worker
 if "%TARGET%"=="dos-identity-observer" goto worker
+if "%TARGET%"=="vm-continuation-observer" goto worker
 if "%TARGET%"=="wow-page-cost" if not "%~3"=="" goto worker_existing
 if "%TARGET%"=="wow-page-cost" goto worker
 if "%TARGET%"=="version-negatives" goto nativediagnostics

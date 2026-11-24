@@ -1,15 +1,17 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "e6b221f53f467c2eb7062e751f5e7bcd5afa6630",
+  "head": "919a1ce7adcd6b79237b0d07ef67a1da29692663",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/Test-PackageIdentityTool.ps1",
-    " M test/integration/win31_runtime_matrix_test.ps1",
-    " M test/observation/isolated_package_cleanup.ps1",
-    " M tools/build/native/stage-runtime.cmd.in",
-    "?? docs/etc/evidence/t484-s4-win31-monitor-preparation.md"
+    " M test/integration/ntvdm64-386/README.md",
+    " M test/observation/verify-system32-package-staging.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/native/stage-system32.cmd.in",
+    " M tools/build/worker/diagnostic-tests.cmake",
+    "?? docs/etc/evidence/t484-s4-continuation-observer.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -18,11 +20,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 133,
+    "migrated-delivered": 134,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 5,
+    "pending-producer-migration": 4,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -474,11 +476,11 @@
         "docs/etc/evidence/t484-s3-win31-editor.md",
         "docs/etc/evidence/t484-s4-win31-editor-preparation.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
-        "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
+        "status": "migrated-delivered",
+        "reason": "P37 and P39 complete CMD editor configuration, controller and diagnostic package production. DOSONLY=0 dual-editor mouse, saves and normal exit pass. Optional ExplicitVmd early exit is recorded separately.",
+        "evidence": "docs/etc/evidence/t484-s4-continuation-observer.md"
       }
     },
     {
@@ -1480,6 +1482,7 @@
       "state": "changed",
       "current_sha256": "e1cf3ee4d4370ea0753888900994ca5a0b1c73224f74f1a0b5b4b5fe7d6c808c",
       "revisions": [
+        "919a1ce7adcd6b79237b0d07ef67a1da29692663",
         "e6b221f53f467c2eb7062e751f5e7bcd5afa6630",
         "9213d542c7c62c253c664d9ba7996a9799f4a9c0",
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
@@ -1489,7 +1492,8 @@
         "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-probe-paths.md",
         "docs/etc/evidence/t484-s3-win31-matrix.md",
-        "docs/etc/evidence/t484-s4-win31-editor-preparation.md"
+        "docs/etc/evidence/t484-s4-win31-editor-preparation.md",
+        "docs/etc/evidence/t484-s4-win31-monitor-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -2074,6 +2078,7 @@
       "state": "changed",
       "current_sha256": "c3a20ff25b3e1d30bcaa43b132a018540c7068f3adfe13b9ecfae73f3ad22a76",
       "revisions": [
+        "919a1ce7adcd6b79237b0d07ef67a1da29692663",
         "9617bb1044d034368c6362ea65cecfbf6cc3498e",
         "9fcf67eee0f6be324819a4ec9972b3107d2e91f5",
         "27b6984b84231813c7221dd841a8205032f4e309",
@@ -2093,7 +2098,8 @@
         "docs/etc/evidence/t484-s4-guest-copy-ownership.md",
         "docs/etc/evidence/t484-s4-native-output-preparation.md",
         "docs/etc/evidence/t484-s4-physical-stage.md",
-        "docs/etc/evidence/t484-s4-stage-identity-refresh.md"
+        "docs/etc/evidence/t484-s4-stage-identity-refresh.md",
+        "docs/etc/evidence/t484-s4-win31-monitor-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -6648,6 +6654,12 @@
     }
   ],
   "commits": {
+    "919a1ce7adcd6b79237b0d07ef67a1da29692663": {
+      "subject": "T484 S4 P38: bind matrix monitor during CMD staging",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-win31-monitor-preparation.md"
+      ]
+    },
     "e6b221f53f467c2eb7062e751f5e7bcd5afa6630": {
       "subject": "T484 S4 P37: prepare Win31 editor and matrix profiles through CMD",
       "evidence": [

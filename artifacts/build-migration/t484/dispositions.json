@@ -205,9 +205,9 @@
     "status": "migrated-delivered"
   },
   "test/integration/ntvdm64-386/verify-win31-editors.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
-    "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
+    "status": "migrated-delivered",
+    "reason": "P37 and P39 complete CMD editor configuration, controller and diagnostic package production. DOSONLY=0 dual-editor mouse, saves and normal exit pass. Optional ExplicitVmd early exit is recorded separately.",
+    "evidence": "docs/etc/evidence/t484-s4-continuation-observer.md"
   },
   "test/integration/ntvdm64-386/verify-win31-identity.ps1": {
     "status": "pending-producer-migration",

@@ -2,12 +2,12 @@
 setlocal EnableExtensions DisableDelayedExpansion
 set "repo=@NTVDM_STAGE_REPO@"
 set "build=%repo%\build"
-for %%N in (BaselineRoot BuildCache Wow32 OutputRoot Vcdex NativeHook NativeHook64 NativeFrontend NativeMonitor NativeLauncher NativeService NativeWorker PackageId) do set "%%N="
+for %%N in (BaselineRoot BuildCache Wow32 OutputRoot Vcdex NativeHook NativeHook64 NativeFrontend NativeMonitor NativeLauncher NativeService NativeWorker PackageId DiagnosticNtvdm) do set "%%N="
 set "owned="
 :arguments
 if "%~1"=="" goto validate
 set "known="
-for %%N in (BaselineRoot BuildCache Wow32 OutputRoot Vcdex NativeHook NativeHook64 NativeFrontend NativeMonitor NativeLauncher NativeService NativeWorker PackageId) do if /i "%~1"=="-%%N" set "known=%%N"
+for %%N in (BaselineRoot BuildCache Wow32 OutputRoot Vcdex NativeHook NativeHook64 NativeFrontend NativeMonitor NativeLauncher NativeService NativeWorker PackageId DiagnosticNtvdm) do if /i "%~1"=="-%%N" set "known=%%N"
 if not defined known exit /b 2
 set "%known%=%~2"
 shift
@@ -27,6 +27,15 @@ set "failure=Require a fresh repository-build staging root"
 call :within "%OutputRoot%"
 if errorlevel 1 goto fail
 if exist "%OutputRoot%" goto fail
+set "guestWorker=%BuildCache%\ntvdm.exe"
+if defined DiagnosticNtvdm for %%I in ("%DiagnosticNtvdm%") do set "DiagnosticNtvdm=%%~fI"
+if defined DiagnosticNtvdm (
+  set "failure=Require a build-owned diagnostic NTVDM image and link map"
+  call :within "%DiagnosticNtvdm%"
+  if errorlevel 1 goto fail
+  if not exist "%DiagnosticNtvdm%.map" goto fail
+  set "guestWorker=%DiagnosticNtvdm%"
+)
 set "failure=Hook64 requires the matching Hook32 package input"
 if defined NativeHook64 if not defined NativeHook goto fail
 set "failure=Native worker requires both Hooks and a build-owned input"
@@ -78,7 +87,10 @@ call :choose ntsrv.exe "%NativeService%"
 if errorlevel 1 goto fail
 call :choose ntcon.exe "%NativeFrontend%"
 if errorlevel 1 goto fail
-call :image ntvdm.exe "%BuildCache%\ntvdm.exe" x86 332
+call :image ntvdm.exe "%guestWorker%" x86 332
+if errorlevel 1 goto fail
+set "failure=Cannot copy diagnostic NTVDM link map"
+if defined DiagnosticNtvdm copy /b /y "%DiagnosticNtvdm%.map" "%system%\ntvdm.exe.map" >nul
 if errorlevel 1 goto fail
 call :choose ntvwm.exe "%NativeWorker%"
 if errorlevel 1 goto fail

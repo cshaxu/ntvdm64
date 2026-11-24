@@ -62,6 +62,8 @@ $negativeCases=@(
  @{name='wrong-worker';key='NativeWorker';value=$Wow32;expected='Wrong PE machine input: ntvwm.exe'},
  @{name='missing-hook64';key='NativeHook64';value='';expected='Native worker requires both Hooks'},
  @{name='outside-worker';key='NativeWorker';value="$repo/assets/release/ntvwm.exe";expected='Native worker requires both Hooks'},
+ @{name='outside-diagnostic';key='DiagnosticNtvdm';value="$repo/assets/release/ntvdm.exe";expected='Require a build-owned diagnostic NTVDM image and link map'},
+ @{name='missing-diagnostic-map';key='DiagnosticNtvdm';value="$run/absent.exe";expected='Require a build-owned diagnostic NTVDM image and link map'},
  @{name='missing-vcdex';key='Vcdex';value="$run/absent.dll";expected='Wrong PE machine input: VCDEX.DLL'},
  @{name='empty-identity';key='PackageId';value='00000000-0000-0000-0000-000000000000';expected='Native package identity write failed'}
 )

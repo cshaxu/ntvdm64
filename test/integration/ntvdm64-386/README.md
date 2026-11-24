@@ -188,11 +188,14 @@ registers, flags and stack. This is not an interactive-input test.
 
 ## Real native unread-input handback
 
-The continuation witnesses execute test-only BOP54:254 markers. They require a
-separately linked host-continuation.c diagnostic executable, not an ordinary
-published NTVDM. Rename the notification entry to mvdm_vm_bridge_bop_direct and
-interpose CmdDispatch in the test-only nt_bop object. Preserve its link map and
-never publish that diagnostic executable. In RealCommand mode, command admission
+The continuation witnesses execute test-only BOP54:254 markers. Build their
+diagnostic worker with `tools\build-fixtures.cmd x86 vm-continuation-observer`.
+The worker graph renames the bridge entry to mvdm_vm_bridge_bop_direct and
+interposes CmdDispatch in the test-only nt_bop object. Supply the resulting
+`diagnostics/vm-continuation/ntvdm.exe` from the x86 worker cache to
+`tools\stage-system32.cmd -DiagnosticNtvdm` with the usual package inputs.
+The staging command preserves the link map and generates a coherent manifest
+in the disposable test package. In RealCommand mode, command admission
 and input BOP16--18 delegate to production; old keyboard diagnostics cannot
 return fabricated success for these requests.
 

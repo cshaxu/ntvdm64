@@ -93,6 +93,32 @@ worker_trace(dos-identity softpc-bindings.lib obj/adapter-softpc/ntvdm_dos_obser
 add_custom_target(dos-identity-observer
   DEPENDS "${CMAKE_BINARY_DIR}/diagnostics/dos-identity/ntvdm.exe")
 
+# The continuation witness interposes two entries while retaining the real
+# worker providers and their original compile flags.
+set(continuation_dir "diagnostics/vm-continuation")
+get_target_property(bridge_flags unit_obj_adapter_softpc_mvdm_vm_bridge_obj COMPILE_FLAGS)
+get_target_property(bop_flags unit_obj_host_nt_bop_obj COMPILE_FLAGS)
+worker_unit("${continuation_dir}/bridge.obj"
+  "${NTVDM_REPO}/src/compat/mvdm_vm_bridge.c"
+  "${bridge_flags} /Dmvdm_vm_bridge_bop=mvdm_vm_bridge_bop_direct")
+worker_unit("${continuation_dir}/bop.obj"
+  "${NTVDM_REPO}/src/mvdm-host/softpc.new/host/src/nt_bop.c"
+  "${bop_flags} /DCmdDispatch=test_cmd_dispatch")
+worker_unit("${continuation_dir}/witness.obj"
+  "${NTVDM_REPO}/test/integration/ntvdm64-386/host-continuation.c"
+  "${bridge_flags} /I\"${NTVDM_REPO}/src/ntvdm-exe/softpc/include\"")
+get_target_property(continuation_inputs image_ntvdm_exe WORKER_LINK_INPUTS)
+get_target_property(continuation_dependencies image_ntvdm_exe WORKER_LINK_DEPENDS)
+get_property(continuation_prefix GLOBAL PROPERTY image_ntvdm_exe_prefix)
+get_property(continuation_suffix GLOBAL PROPERTY image_ntvdm_exe_suffix)
+worker_link("${continuation_dir}/ntvdm.exe"
+  "${continuation_prefix} /implib:${continuation_dir}/ntvdm.lib" "${continuation_suffix}"
+  INPUTS "${continuation_dir}/bop.obj" "${continuation_dir}/bridge.obj"
+    "${continuation_dir}/witness.obj" ${continuation_inputs}
+  DEPENDS ${continuation_dependencies})
+add_custom_target(vm-continuation-observer
+  DEPENDS "${CMAKE_BINARY_DIR}/${continuation_dir}/ntvdm.exe")
+
 # Add the independently authored startup observer to the unmodified product
 # closure, using the same startup-hook sources as the retired producer.
 set(startup_objects)
