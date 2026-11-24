@@ -1067,5 +1067,15 @@
     "status": "retired-with-delivery-evidence",
     "reason": "T412 fake-header compile-only trial superseded by formal source graph; sole-use header also removed",
     "evidence": "docs/etc/evidence/t484-s3-basesrv-audits.md"
+  },
+  "tools/audit/Verify-BrokerOriginalClassifier.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Duplicate old builders removed; native broker-original-fixtures and checked-in runners preserve functional contracts",
+    "evidence": "docs/etc/evidence/t484-s3-broker-native.md"
+  },
+  "tools/audit/Verify-BrokerOriginalLifecycle.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Duplicate old builders removed; native broker-original-fixtures and checked-in runners preserve functional contracts",
+    "evidence": "docs/etc/evidence/t484-s3-broker-native.md"
   }
 }

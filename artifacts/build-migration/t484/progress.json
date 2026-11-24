@@ -1,32 +1,35 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f922100eb641bd46f5da30adfe616402954e3359",
+  "head": "50574aef23a4f2a978be16fc5cedeb28bb475447",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/broker/source_compile_probe.h",
-    " D tools/audit/Verify-BrokerOriginalCompilation.mjs",
-    " M tools/audit/verify-basesrv-source-ownership.ps1",
-    "?? artifacts/build-migration/t484/s3-basesrv-audits/",
-    "?? docs/etc/evidence/t484-s3-basesrv-audits.md"
+    " M test/broker/original_server_lifecycle.c",
+    " D tools/audit/Verify-BrokerOriginalClassifier.mjs",
+    " D tools/audit/Verify-BrokerOriginalLifecycle.mjs",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/worker/units.cmake",
+    "?? artifacts/build-migration/t484/s3-broker-native/",
+    "?? docs/etc/evidence/t484-s3-broker-native.md",
+    "?? test/adapter-basesrv/verify-original-lifecycle.ps1"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 143,
-    "unchanged": 71,
-    "removed": 141
+    "unchanged": 69,
+    "removed": 143
   },
   "disposition_counts": {
     "migrated-delivered": 83,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 141,
+    "retired-with-delivery-evidence": 143,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 57,
+    "requires-disposition-reconciliation": 55,
     "retained-standalone-audit": 5
   },
-  "existing_interpreted_candidates_with_command_hits": 163,
+  "existing_interpreted_candidates_with_command_hits": 161,
   "files": [
     {
       "id": "B0001",
@@ -4075,8 +4078,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "0c02d598f2f4628b554afe6d2a08594d9da79c89965eff25e14f5b8daed47e9c",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "50574aef23a4f2a978be16fc5cedeb28bb475447"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-basesrv-audits.md"
+      ],
       "completion": "retained-standalone-audit",
       "decision": {
         "status": "retained-standalone-audit",
@@ -4088,12 +4095,16 @@
       "id": "B0215",
       "file": "tools/audit/Verify-BrokerOriginalClassifier.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "423972666171fd86b8c1a511b547ea7631684749b943b5af1610fcafa750d628",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Duplicate old builders removed; native broker-original-fixtures and checked-in runners preserve functional contracts",
+        "evidence": "docs/etc/evidence/t484-s3-broker-native.md"
+      }
     },
     {
       "id": "B0216",
@@ -4101,8 +4112,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "50574aef23a4f2a978be16fc5cedeb28bb475447"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-basesrv-audits.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -4114,12 +4129,16 @@
       "id": "B0217",
       "file": "tools/audit/Verify-BrokerOriginalLifecycle.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "30c606caece4e2246dbaec36981c59cb469f8bfced00b6bf719a2080a41aead7",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Duplicate old builders removed; native broker-original-fixtures and checked-in runners preserve functional contracts",
+        "evidence": "docs/etc/evidence/t484-s3-broker-native.md"
+      }
     },
     {
       "id": "B0218",
@@ -6018,6 +6037,12 @@
     }
   ],
   "commits": {
+    "50574aef23a4f2a978be16fc5cedeb28bb475447": {
+      "subject": "T484 S3 P138 reconcile native BaseSrv ownership audits",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-basesrv-audits.md"
+      ]
+    },
     "f922100eb641bd46f5da30adfe616402954e3359": {
       "subject": "T484 S3 P137 retire historical marker compiler chain",
       "evidence": [
@@ -9016,214 +9041,6 @@
         {
           "line": 37,
           "text": "if($Graph.ContainsKey($node)){foreach($item in $Graph[$node]){$pending.Push($item)}}"
-        }
-      ]
-    },
-    {
-      "id": "B0215",
-      "file": "tools/audit/Verify-BrokerOriginalClassifier.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 2,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 3,
-          "text": "import assert from 'node:assert/strict';"
-        },
-        {
-          "line": 4,
-          "text": "import {createHash} from 'node:crypto';"
-        },
-        {
-          "line": 5,
-          "text": "import {spawnSync} from 'node:child_process';"
-        },
-        {
-          "line": 10,
-          "text": "const graph=fs.readFileSync(path.join(ownerBuild || 'build/M0-T412/S1/text-cell-repair/product','build.ninja'),'utf8');"
-        },
-        {
-          "line": 29,
-          "text": "`cl.exe ${flags} /we4013 /Gy /Fo\"${build}/support.obj\" \"${root}/src/compat/opennt_support_rtl.c\"`,"
-        },
-        {
-          "line": 30,
-          "text": "`cl.exe ${flags} /we4013 /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER /Fo\"${build}/client.obj\" \"${root}/src/non-mvdm/base/win32/client/vdm.c\"`,"
-        },
-        {
-          "line": 31,
-          "text": "`cl.exe ${flags} /we4013 /Fo\"${build}/fixture.obj\" \"${root}/test/broker/original_classifier.c\"`,"
-        },
-        {
-          "line": 32,
-          "text": "`cl.exe ${flags} /we4013 /Fo\"${build}/path.obj\" \"${root}/src/compat/base_classifier_path.c\"`,"
-        },
-        {
-          "line": 33,
-          "text": "`cl.exe ${rtlFlags} /Fo\"${build}/error.obj\" \"${root}/src/non-mvdm/base/ntos/rtl/error.c\"`,"
-        },
-        {
-          "line": 34,
-          "text": "'link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map client.obj fixture.obj path.obj support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib'"
-        },
-        {
-          "line": 37,
-          "text": "`cl.exe ${flags} /we4013 /Gy /Fo\"${build}/support.obj\" \"${root}/src/compat/opennt_support_rtl.c\"`,"
-        },
-        {
-          "line": 38,
-          "text": "`cl.exe ${flags} /we4013 /Fo\"${build}/fixture.obj\" \"${root}/test/broker/original_classifier.c\"`,"
-        },
-        {
-          "line": 39,
-          "text": "`cl.exe ${rtlFlags} /Fo\"${build}/error.obj\" \"${root}/src/non-mvdm/base/ntos/rtl/error.c\"`,"
-        },
-        {
-          "line": 40,
-          "text": "`link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map fixture.obj \"${ownerBuild}/opennt-base-client.lib\" \"${ownerBuild}/opennt-base-bindings.lib\" \"${ownerBuild}/common-base-srv-bindings.lib\" support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib`"
-        }
-      ]
-    },
-    {
-      "id": "B0217",
-      "file": "tools/audit/Verify-BrokerOriginalLifecycle.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 2,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 3,
-          "text": "import assert from 'node:assert/strict';"
-        },
-        {
-          "line": 4,
-          "text": "import {createHash} from 'node:crypto';"
-        },
-        {
-          "line": 5,
-          "text": "import {spawnSync} from 'node:child_process';"
-        },
-        {
-          "line": 9,
-          "text": "const graph=fs.readFileSync(path.join(ownerBuild || 'build/M0-T412/S1/text-cell-repair/product','build.ninja'),'utf8');"
-        },
-        {
-          "line": 50,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/command.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_command.c\"`,"
-        },
-        {
-          "line": 51,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/values.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_values.c\"`,"
-        },
-        {
-          "line": 52,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/payload.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_payload.c\"`,"
-        },
-        {
-          "line": 53,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/startup.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_startup.c\"`,"
-        },
-        {
-          "line": 54,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/dispatch.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_dispatch.c\"`,"
-        },
-        {
-          "line": 55,
-          "text": "`cl.exe ${flags} ${includes} /DOPENNT_BASE_NATIVE_RESOURCES /Fo\"${build}/resources.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_resource.c\"`,"
-        },
-        {
-          "line": 56,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/registry.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_process.c\"`,"
-        },
-        {
-          "line": 57,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/request.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_request.c\"`,"
-        },
-        {
-          "line": 58,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/config.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_config.c\"`,"
-        },
-        {
-          "line": 59,
-          "text": "`cl.exe ${flags} /Fo\"${build}/environment-check.obj\" \"${root}/src/non-mvdm/base/win32/client/vdm.c\"`,"
-        },
-        {
-          "line": 60,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/srvvdm.obj\" \"${root}/src/non-mvdm/base/win32/server/srvvdm.c\"`,"
-        },
-        {
-          "line": 61,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/fixture.obj\" \"${root}/test/broker/original_server_lifecycle.c\"`,"
-        },
-        {
-          "line": 62,
-          "text": "`cl.exe ${flags} /Fo\"${build}/process.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_client_process.c\"`,"
-        },
-        {
-          "line": 63,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/interactive.obj\" \"${root}/src/adapter-opennt-host/basesrv/source/base_interactive.c\"`,"
-        },
-        {
-          "line": 64,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/exports.obj\" \"${root}/src/non-mvdm/windows/core/ntuser/server/exports.c\"`,"
-        },
-        {
-          "line": 65,
-          "text": "`cl.exe ${flags} ${includes} /Gz /Fo\"${build}/capture.obj\" \"${root}/src/non-mvdm/base/ntdll/csrutil.c\"`,"
-        },
-        {
-          "line": 66,
-          "text": "`cl.exe ${flags} ${includes} /Gy /DOPENNT_BASE_CLIENT_VDM_COMMANDS /Fo\"${build}/client.obj\" \"${root}/src/non-mvdm/base/win32/client/vdm.c\"`,"
-        },
-        {
-          "line": 67,
-          "text": "`cl.exe ${rtlFlags} /Fo\"${build}/error.obj\" \"${root}/src/non-mvdm/base/ntos/rtl/error.c\"`,"
-        },
-        {
-          "line": 70,
-          "text": "'link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj opennt-base-server.lib opennt-base-client.lib request.obj config.obj process.obj interactive.obj error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib'"
-        },
-        {
-          "line": 76,
-          "text": "`cl.exe ${flags} ${includes} /Fo\"${build}/fixture.obj\" \"${root}/test/broker/original_server_lifecycle.c\"`,"
-        },
-        {
-          "line": 77,
-          "text": "`cl.exe ${rtlFlags} /Fo\"${build}/error.obj\" \"${root}/src/non-mvdm/base/ntos/rtl/error.c\"`,"
-        },
-        {
-          "line": 78,
-          "text": "`link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj \"${ownerBuild}/opennt-base-server.lib\" \"${ownerBuild}/opennt-base-client.lib\" \"${ownerBuild}/opennt-base-bindings.lib\" \"${ownerBuild}/common-base-srv-bindings.lib\" \"${ownerBuild}/original-opennt-rtl-x86.lib\" error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`"
-        },
-        {
-          "line": 82,
-          "text": "commands.unshift(`cl.exe ${flags} ${includes} /Fo\"${build}/streams.obj\" \"${root}/src/compat/base_stream.c\"`);"
-        },
-        {
-          "line": 83,
-          "text": "commands.unshift(`cl.exe ${flags} ${includes} /DOPENNT_BASE_NATIVE_RESOURCES /Fo\"${build}/waits.obj\" \"${root}/src/compat/base_wait.c\"`);"
-        },
-        {
-          "line": 85,
-          "text": "commands.unshift(`cl.exe ${flags} /Gy /Fo\"${build}/support.obj\" \"${root}/src/compat/opennt_support_rtl.c\"`);"
-        },
-        {
-          "line": 88,
-          "text": "commands=commands.map(command=>command.startsWith('link.exe ')?command.replace(' fixture.obj ', ` fixture.obj support.obj \"${transportBuild}/broker-transport.lib\" \"${transportBuild}/common-base-srv-transport.lib\" ${ownerBuild?'':'waits.obj streams.obj registry.obj resources.obj dispatch.obj startup.obj payload.obj values.obj command.obj '}`):command);"
-        },
-        {
-          "line": 108,
-          "text": "assert(!map.includes('_CsrClientCallServer@16'), 'System CSR transport entered the lifecycle link');"
         }
       ]
     },

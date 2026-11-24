@@ -1760,3 +1760,5 @@ post-publication targeted checks.
 - [T484 S3 retired marker compiler chain](evidence/t484-s3-retire-markers.md)
 
 - [T484 S3 BaseSrv audit reconciliation](evidence/t484-s3-basesrv-audits.md)
+
+- [T484 S3 native original broker fixtures](evidence/t484-s3-broker-native.md)

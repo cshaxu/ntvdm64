@@ -285,7 +285,7 @@ NTSTATUS NTAPI NtvdmBaseClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEAD
     uint32_t payloadBytes,requestId;
     BASE_GET_NEXT_VDM_COMMAND_MSG savedGet;
     OPENNT_BASE_GET_COMMAND getCommand={0};
-    unsigned char getRequest[104+16*BROKER_VDM_PAYLOAD_FIELDS];
+    unsigned char getRequest[112+16*BROKER_VDM_PAYLOAD_FIELDS];
     (void)capture;
     if (!scalar_negatives()) return STATUS_INVALID_PARAMETER;
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry)) {
@@ -568,11 +568,26 @@ int main(int argc, char **argv)
     HWND registrationWindow;
     HANDLE sender;
     DWORD senderExit;
+    WCHAR workingDirectory[MAX_PATH],directory[MAX_PATH],dosApp[MAX_PATH],wowApp[MAX_PATH];
+    WCHAR kernelExe[MAX_PATH],dosCommand[MAX_PATH+8];
+    CHAR dosAppA[MAX_PATH],wowAppA[MAX_PATH],kernelBase[MAX_PATH];
     if (argc==2 && !strcmp(argv[1],"--registry-child")) return 0;
     if (argc==2 && !strcmp(argv[1],"--registry-only")) {
         CHECK(registry_setup()==0);
         return registry_finish();
     }
+    /* The runner supplies immutable media in its own directory, never the
+     * user's installed package. Use short paths just as BaseCheckVDM does. */
+    CHECK(GetCurrentDirectoryW(MAX_PATH,directory)>0);
+    CHECK(GetShortPathNameW(directory,workingDirectory,MAX_PATH)>0);
+    CHECK(_snwprintf(dosApp,MAX_PATH,L"%ls\\MEM.EXE",workingDirectory)>0);
+    CHECK(_snwprintf(wowApp,MAX_PATH,L"%ls\\system32\\WRITE.EXE",workingDirectory)>0);
+    CHECK(_snwprintf(kernelExe,MAX_PATH,L"%ls\\system32\\KRNL386.exe",workingDirectory)>0);
+    CHECK(_snwprintf(dosCommand,MAX_PATH+8,L"\"%ls\"  /?",dosApp)>0);
+    CHECK(WideCharToMultiByte(CP_OEMCP,0,dosApp,-1,dosAppA,sizeof(dosAppA),NULL,NULL)>0);
+    CHECK(WideCharToMultiByte(CP_OEMCP,0,wowApp,-1,wowAppA,sizeof(wowAppA),NULL,NULL)>0);
+    CHECK(WideCharToMultiByte(CP_ACP,0,kernelExe,-1,kernelBase,sizeof(kernelBase),NULL,NULL)>0);
+    kernelBase[strlen(kernelBase)-4]=0;
     BaseSrvHeap = GetProcessHeap();
     {
         BASE_API_MSG input={0},target={0},saved;
@@ -618,7 +633,7 @@ int main(int argc, char **argv)
     {
         BASE_API_MSG input={0},decodedInput={0},untouched={0};
         OPENNT_BASE_GET_COMMAND state={0};
-        unsigned char request[232],shortBuffer[232];
+        unsigned char request[112+16*BROKER_VDM_PAYLOAD_FIELDS],shortBuffer[sizeof(request)];
         broker_vdm_get_values values;
         uint32_t bytes,cut;
         /* Only presence is input: encoding must not dereference this output
@@ -632,7 +647,7 @@ int main(int argc, char **argv)
         input.u.GetNextVDMCommand.VDMState=ASKING_FOR_FIRST_COMMAND;
         input.u.GetNextVDMCommand.ExitCode=37;
         memset(shortBuffer,0xa5,sizeof(shortBuffer));
-        CHECK(!OpenNtBaseEncodeGetCommand(&input,4,7,shortBuffer,231,&bytes) && bytes==232);
+        CHECK(!OpenNtBaseEncodeGetCommand(&input,4,7,shortBuffer,sizeof(shortBuffer)-1,&bytes) && bytes==sizeof(request));
         for (cut=0;cut<sizeof(shortBuffer);++cut) CHECK(shortBuffer[cut]==0xa5);
         CHECK(OpenNtBaseEncodeGetCommand(&input,4,7,request,sizeof(request),&bytes));
         memcpy(&values,request+sizeof(broker_vdm_message_header),sizeof(values));
@@ -664,7 +679,7 @@ int main(int argc, char **argv)
         CHECK(!BaseGetVdmConfigInfo(NULL,0,BINARY_TYPE_DOS,&commandLine,&reserve));
         CHECK(commandLine.Buffer==NULL);
         CHECK(OpenNtBaseInitializeVdmConfig(&config,"O:\\package with spaces\\ntvdm.exe",
-            "O:\\winnt\\system32\\KRNL386"));
+            kernelBase));
         CHECK(OpenNtBaseBindVdmConfig(&config)==NULL);
         {
             CHAR small[2]={'x',0};
@@ -680,7 +695,7 @@ int main(int argc, char **argv)
         CHECK(BaseGetVdmConfigInfo(NULL,0x12ab,BINARY_TYPE_DOS,&commandLine,&reserve));
         CHECK(!wcscmp(commandLine.Buffer,L"\"O:\\package with spaces\\ntvdm.exe\" -f -i12ab"));
         CHECK(HeapFree(GetProcessHeap(),0,commandLine.Buffer));
-        CHECK(GetShortPathNameW(L"O:\\winnt\\system32\\KRNL386.exe",shortKernel,MAX_PATH)>0);
+        CHECK(GetShortPathNameW(kernelExe,shortKernel,MAX_PATH)>0);
         CHECK(BaseGetVdmConfigInfo(NULL,0,BINARY_TYPE_WIN16,&commandLine,&reserve));
         CHECK(wcsstr(commandLine.Buffer,L"\" -f -w -a ")!=NULL);
         CHECK(!wcscmp(wcsstr(commandLine.Buffer,L" -a ")+4,shortKernel));
@@ -1212,12 +1227,12 @@ int main(int argc, char **argv)
         launch.lpReserved=L"test reserved";
         launch.dwFlags=STARTF_USESTDHANDLES;
         ZeroMemory(&m,sizeof(m));
-        CHECK(BaseCheckVDM(BINARY_TYPE_DOS|BINARY_TYPE_DOS_EXE,L"O:\\winnt\\MEM.EXE",
-            L"\"O:\\winnt\\MEM.EXE\"  /?",L"O:\\winnt",&env,&m,&task,0,&launch));
+        CHECK(BaseCheckVDM(BINARY_TYPE_DOS|BINARY_TYPE_DOS_EXE,dosApp,
+            dosCommand,workingDirectory,&env,&m,&task,0,&launch));
         CHECK(launchCalls==1 && captures==0 && m.u.CheckVDM.VDMState==VDM_NOT_PRESENT);
         CHECK(BaseSrvGetConsoleRecord((HANDLE)1,&record)==0 && record!=NULL);
         CHECK(!strcmp(record->DOSRecord->lpVDMInfo->CmdLine,"/?\r\n"));
-        CHECK(!strcmp(record->DOSRecord->lpVDMInfo->AppName,"O:\\winnt\\MEM.EXE"));
+        CHECK(!strcmp(record->DOSRecord->lpVDMInfo->AppName,dosAppA));
         CHECK(record->DOSRecord->lpVDMInfo->EnviornmentSize==sizeof(envBytes));
         CHECK(!memcmp(record->DOSRecord->lpVDMInfo->Enviornment,envBytes,sizeof(envBytes)));
         CHECK(!strcmp(record->DOSRecord->lpVDMInfo->Title,"original launch test"));
@@ -1228,7 +1243,7 @@ int main(int argc, char **argv)
         launch.dwFlags=STARTF_USEHOTKEY;
         launch.hStdInput=(HANDLE)42;
         ZeroMemory(&m,sizeof(m));
-        CHECK(BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\winnt\\MEM.EXE",L"MEM.EXE",L"O:\\winnt",&env,&m,&task,0,&launch));
+        CHECK(BaseCheckVDM(BINARY_TYPE_DOS,dosApp,L"MEM.EXE",workingDirectory,&env,&m,&task,0,&launch));
         CHECK(BaseSrvGetConsoleRecord((HANDLE)1,&record)==0 && record!=NULL);
         CHECK(!strcmp(record->DOSRecord->lpVDMInfo->Reserved,"hotkey.42 test reserved"));
         CHECK(!(launch.dwFlags & STARTF_USEHOTKEY) && launch.hStdInput==NULL && captures==0);
@@ -1244,11 +1259,11 @@ int main(int argc, char **argv)
         CHECK(allocations<4096);
         CsrPortHeap=exhaustedHeap;
         ZeroMemory(&m,sizeof(m));
-        CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\winnt\\MEM.EXE",L"MEM.EXE",L"O:\\winnt",&env,&m,&task,0,&launch));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,dosApp,L"MEM.EXE",workingDirectory,&env,&m,&task,0,&launch));
         CHECK(GetLastError()==ERROR_NOT_ENOUGH_MEMORY && launchCalls==before);
         CsrPortHeap=normalHeap;
         CHECK(captures==0 && HeapDestroy(exhaustedHeap));
-        CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,L"O:\\winnt\\MEM.EXE",L"MEM.EXE",L"O:\\winnt",NULL,&m,&task,0,&launch));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_DOS,dosApp,L"MEM.EXE",workingDirectory,NULL,&m,&task,0,&launch));
         CHECK(GetLastError()==ERROR_INVALID_PARAMETER && captures==0 && launchCalls==before);
         puts("PASS: original BaseCheckVDM command/environment/startup capture, server ownership and allocation failure");
     }
@@ -1270,20 +1285,20 @@ int main(int argc, char **argv)
         CHECK(OpenNtBaseBindInteractiveScope(NULL)==&wrong);
         UserTestTokenForInteractive=_UserTestTokenForInteractive;
         ZeroMemory(&m,sizeof(m));
-        CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\winnt\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\winnt",&env,&m,&task,0,&launch));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,wowApp,L"WRITE.EXE",workingDirectory,&env,&m,&task,0,&launch));
         CHECK(GetLastError()==ERROR_ACCESS_DENIED && WOWHead==NULL && captures==0);
         wrong=scope; wrong.AuthenticationId.LowPart^=1;
         CHECK(OpenNtBaseBindInteractiveScope(&wrong)==NULL);
         ZeroMemory(&m,sizeof(m));
-        CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\winnt\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\winnt",&env,&m,&task,0,&launch));
+        CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,wowApp,L"WRITE.EXE",workingDirectory,&env,&m,&task,0,&launch));
         CHECK(GetLastError()==ERROR_ACCESS_DENIED && WOWHead==NULL && captures==0);
         CHECK(OpenNtBaseBindInteractiveScope(&scope)==&wrong);
         ZeroMemory(&m,sizeof(m));
-        CHECK(BaseCheckVDM(BINARY_TYPE_WIN16,L"O:\\winnt\\system32\\WRITE.EXE",L"WRITE.EXE",L"O:\\winnt",&env,&m,&task,0,&launch));
+        CHECK(BaseCheckVDM(BINARY_TYPE_WIN16,wowApp,L"WRITE.EXE",workingDirectory,&env,&m,&task,0,&launch));
         CHECK(WOWHead!=NULL && task!=0 && m.u.CheckVDM.VDMState==VDM_NOT_PRESENT && captures==0);
         CHECK(WOWHead->WOWRecord->iTask==task);
         CHECK(WowAuthId.LowPart==scope.AuthenticationId.LowPart && WowAuthId.HighPart==scope.AuthenticationId.HighPart);
-        CHECK(!strcmp(WOWHead->WOWRecord->lpVDMInfo->AppName,"O:\\winnt\\system32\\WRITE.EXE"));
+        CHECK(!strcmp(WOWHead->WOWRecord->lpVDMInfo->AppName,wowAppA));
         undo=(HANDLE)task;
         CHECK(BaseUpdateVDMEntry(UPDATE_VDM_UNDO_CREATION,&undo,VDM_PARTIALLY_CREATED,BINARY_TYPE_WIN16));
         CHECK(WOWHead==NULL && OpenNtBaseBindInteractiveScope(NULL)==&scope);
@@ -1303,9 +1318,9 @@ int main(int argc, char **argv)
             ULONG task=0, sequence=0x100+i;
             HANDLE console=i?(HANDLE)-1:(HANDLE)1;
             HANDLE wait=GetCurrentProcess();
-            LPCWSTR app=i?L"O:\\winnt\\system32\\WRITE.EXE":L"O:\\winnt\\MEM.EXE";
+            LPCWSTR app=i?wowApp:dosApp;
             ZeroMemory(&m,sizeof(m));
-            CHECK(BaseCheckVDM(types[i],app,app,L"O:\\winnt",&env,&m,&task,0,&launch));
+            CHECK(BaseCheckVDM(types[i],app,app,workingDirectory,&env,&m,&task,0,&launch));
             CHECK(BaseUpdateVDMEntry(UPDATE_VDM_PROCESS_HANDLE,&wait,task,types[i]));
             CHECK(WaitForSingleObject(wait,0)==WAIT_TIMEOUT);
             BaseSrvUpdateVDMSequenceNumber(console,sequence,task);

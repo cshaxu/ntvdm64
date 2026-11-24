@@ -1,0 +1,55 @@
+{
+  "retired": [
+    "B0215",
+    "B0217"
+  ],
+  "validation": {
+    "finished": "2026-11-24T07:04:49.3706526+01:00",
+    "exit": 0,
+    "started": "2026-11-24T07:03:24.1397985+01:00",
+    "pid": 30968
+  },
+  "lifecycle": {
+    "fixture": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-server-lifecycle-test.exe",
+    "exit": 0,
+    "media": [
+      {
+        "sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB",
+        "target": "MEM.EXE",
+        "source": "dos/v86/cmd/mem/mem.exe"
+      },
+      {
+        "sha256": "08EE1659788880FB593815FF9609BFE76743C1182D05E6702764BF3DFF68B30B",
+        "target": "system32/WRITE.EXE",
+        "source": "wow16/write/WRITE.EXE"
+      },
+      {
+        "sha256": "BCED7650A5B5D7AC25955AB2A21BC53FF06DE1C35B25FAD0690390135B093A03",
+        "target": "system32/KRNL386.exe",
+        "source": "wow16/kernel31/retail3/krnl386.exe"
+      }
+    ],
+    "sha256": "AC01E1BADE1C2C0993356A5465BF944658F12D48FE0CE733BC3A82FFF4200F91",
+    "pid": 17552
+  },
+  "fullGate": false,
+  "nativeTarget": "broker-original-fixtures",
+  "classifier": {
+    "fixture": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-classifier-test.exe",
+    "sha256": "A37B5542C89A34AC9C4AD8E151C2D56273BC2FDAB22F570D3A6D353ED6361622",
+    "pid": 33020,
+    "exit": 0,
+    "media": [
+      "O:\\repos.hobby\\ntvdm64\\src\\mvdm-guest\\dos\\v86\\cmd\\mem\\mem.exe",
+      "O:\\repos.hobby\\ntvdm64\\src\\mvdm-guest\\dos\\v86\\cmd\\command\\COMMAND.COM",
+      "O:\\repos.hobby\\ntvdm64\\src\\mvdm-guest\\dos\\v86\\cmd\\qbasic\\edit.com",
+      "O:\\repos.hobby\\ntvdm64\\src\\mvdm-guest\\wow16\\write\\WRITE.EXE"
+    ]
+  },
+  "publication": {
+    "rawInputs": 11,
+    "republished": false,
+    "publishedCopies": 22,
+    "unchanged": true
+  }
+}
