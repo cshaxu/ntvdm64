@@ -31,33 +31,14 @@ function Save-IsolatedPackageManifest([string]$Runtime, [string]$Destination) {
     Copy-Item -LiteralPath $manifest -Destination $Destination
 }
 function Get-IsolatedPackageIdentity([string]$Image) {
-    if(-not ('NtvdmTestPackageIdentity' -as [type])) {
-        Add-Type -TypeDefinition @'
-using System;
-using System.Runtime.InteropServices;
-public static class NtvdmTestPackageIdentity {
-    [DllImport("kernel32.dll", CharSet=CharSet.Unicode, SetLastError=true)] static extern IntPtr LoadLibraryExW(string p, IntPtr f, uint flags);
-    [DllImport("kernel32.dll", CharSet=CharSet.Unicode)] static extern IntPtr FindResourceW(IntPtr m, string n, IntPtr t);
-    [DllImport("kernel32.dll")] static extern uint SizeofResource(IntPtr m, IntPtr r);
-    [DllImport("kernel32.dll")] static extern IntPtr LoadResource(IntPtr m, IntPtr r);
-    [DllImport("kernel32.dll")] static extern IntPtr LockResource(IntPtr r);
-    [DllImport("kernel32.dll")] static extern bool FreeLibrary(IntPtr m);
-    public static string Read(string p) {
-        IntPtr m=LoadLibraryExW(p, IntPtr.Zero, 0x22);
-        if(m==IntPtr.Zero)return null;
-        try {
-            IntPtr r=FindResourceW(m,"NTVDM_PACKAGE_ID",(IntPtr)10);
-            if(r==IntPtr.Zero || SizeofResource(m,r)!=16)return null;
-            IntPtr value=LockResource(LoadResource(m,r));
-            if(value==IntPtr.Zero)return null;
-            byte[] bytes=new byte[16]; Marshal.Copy(value,bytes,0,16);
-            return BitConverter.ToString(bytes).Replace("-","");
-        } finally { FreeLibrary(m); }
+    $reader = Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/ntvdm-package-id.exe'
+    if (!(Test-Path -LiteralPath $reader -PathType Leaf)) {
+        throw 'Build native tools with tools/build/bootstrap.cmd first'
     }
-}
-'@
-    }
-    return [NtvdmTestPackageIdentity]::Read($Image)
+    $identity = & $reader --read $Image
+    if ($LASTEXITCODE -ne 0) { return $null }
+    if ($identity -cnotmatch '^[0-9A-F]{32}$') { throw 'Invalid package identity reader output' }
+    return $identity
 }
 function Get-PhysicalRuntimeStageRoot {
     return 'O:\tmp'

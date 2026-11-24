@@ -1,20 +1,19 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "3d3beb81b545666b52a6164e6cdb244908b3ccb7",
+  "head": "b84e36c23d1d6061364d172317a324142b6010c0",
   "worktree_status": [
-    " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/Set-PackageIdentity.ps1",
-    " M tools/build/worker/units.cmake",
-    "?? artifacts/build-migration/t484/s3-package-identity/",
-    "?? docs/etc/evidence/t484-s3-package-identity.md"
+    " M test/observation/isolated_package_cleanup.ps1",
+    " M test/observation/verify-cleanup-identity.ps1",
+    " M tools/build/native/package-id.c",
+    "?? docs/etc/evidence/t484-s3-identity-reader.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 156,
-    "unchanged": 34,
+    "changed": 157,
+    "unchanged": 33,
     "removed": 165
   },
   "disposition_counts": {
@@ -1910,8 +1909,8 @@
       "id": "B0104",
       "file": "test/observation/isolated_package_cleanup.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "57a816c6303a330fc34d25133cfa7ded2c649b3abe79af1cdab2859ed0e10a06",
+      "state": "changed",
+      "current_sha256": "32b0b9cb16eb944cd469b490e18f6322d4fddc322c06096c3c73dd89edec4c08",
       "revisions": [],
       "evidence": [],
       "completion": "pending-producer-migration",
@@ -6086,8 +6085,12 @@
       "stage": "S4",
       "state": "changed",
       "current_sha256": "073b52189d03831411f9949620e305ceb836302f4ba77e52172e7486b44febf6",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "b84e36c23d1d6061364d172317a324142b6010c0"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-package-identity.md"
+      ],
       "completion": "requires-disposition-reconciliation",
       "decision": null
     },
@@ -6342,6 +6345,12 @@
     }
   ],
   "commits": {
+    "b84e36c23d1d6061364d172317a324142b6010c0": {
+      "subject": "T484 S3 P156 use native package identity writer and fixture",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-package-identity.md"
+      ]
+    },
     "3d3beb81b545666b52a6164e6cdb244908b3ccb7": {
       "subject": "T484 S3 P155 retire unused native image import wrapper",
       "evidence": [
@@ -8429,11 +8438,15 @@
       "file": "test/observation/isolated_package_cleanup.ps1",
       "hits": [
         {
-          "line": 247,
+          "line": 34,
+          "text": "$reader = Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/ntvdm-package-id.exe'"
+        },
+        {
+          "line": 228,
           "text": "throw 'Refuse guest probe cleanup: Git data or link'"
         },
         {
-          "line": 271,
+          "line": 252,
           "text": "# Test-only compatibility for sealed flat baselines and build-link caches."
         }
       ]

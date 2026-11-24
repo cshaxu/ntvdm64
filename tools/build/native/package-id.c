@@ -19,12 +19,37 @@ static DWORD stamp(const wchar_t *path, const GUID *identity)
     return ERROR_SUCCESS;
 }
 
+static DWORD read_identity(const wchar_t *path)
+{
+    HMODULE image = LoadLibraryExW(path, NULL,
+        LOAD_LIBRARY_AS_DATAFILE | LOAD_LIBRARY_AS_IMAGE_RESOURCE);
+    HRSRC resource;
+    const unsigned char *bytes;
+    DWORD error = ERROR_SUCCESS;
+    unsigned int index;
+    if (!image) return GetLastError();
+    resource = FindResourceW(image, L"NTVDM_PACKAGE_ID", MAKEINTRESOURCEW(10));
+    if (!resource) error = GetLastError();
+    else if (SizeofResource(image, resource) != sizeof(GUID)) error = ERROR_INVALID_DATA;
+    else {
+        bytes = (const unsigned char *)LockResource(LoadResource(image, resource));
+        if (!bytes) error = ERROR_INVALID_DATA;
+        else {
+            for (index = 0; index < sizeof(GUID); ++index) printf("%02X", bytes[index]);
+            putchar('\n');
+        }
+    }
+    FreeLibrary(image);
+    return error;
+}
+
 int wmain(int argc, wchar_t **argv)
 {
     GUID identity;
     static const GUID empty = {0};
     wchar_t text[39];
     int index;
+    if (argc == 3 && !wcscmp(argv[1], L"--read")) return (int)read_identity(argv[2]);
     if (argc < 3 || wcslen(argv[1]) != 36) {
         fputws(L"Usage: ntvdm-package-id UUID IMAGE [IMAGE...]\n", stderr);
         return ERROR_INVALID_PARAMETER;

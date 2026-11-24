@@ -1796,3 +1796,5 @@ post-publication targeted checks.
 - [T484 S3 native import retirement](evidence/t484-s3-native-import-retirement.md).
 
 - [T484 S3 native package identity producer](evidence/t484-s3-package-identity.md).
+
+- [T484 S3 native identity reader](evidence/t484-s3-identity-reader.md).
