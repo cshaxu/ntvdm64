@@ -1,0 +1,25 @@
+{
+  "fullGate": false,
+  "first": {
+    "pid": 19888,
+    "finished": "2026-11-24T06:27:48.5382051+01:00",
+    "started": "2026-11-24T06:27:48.2293817+01:00",
+    "exit": 1
+  },
+  "validation": {
+    "finished": "2026-11-24T06:30:02.8863137+01:00",
+    "exit": 0,
+    "pid": 18460,
+    "started": "2026-11-24T06:28:12.6004496+01:00"
+  },
+  "publication": {
+    "unchanged": true,
+    "publishedCopies": 22,
+    "rawInputs": 11,
+    "republished": false
+  },
+  "assertions": {
+    "allocation": 135,
+    "move": 8
+  }
+}

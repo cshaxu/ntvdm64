@@ -1,31 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "31d259294fe004dacb5e12b690d5008c92ace6f5",
+  "head": "44f6cf445fa469bd89bea5540609e289b75f68e4",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
-    " M docs/etc/operations/wow32-recovery-s1-checklist.md",
     " M docs/states/CURRENT.md",
-    " D test/adapter-mvdm-host-out/wow/wow_multimedia_inventory_fixture.c",
-    " M test/observation/verify-wow32-dynamic-host-surface.ps1",
-    " D test/observation/verify-wow32-multimedia-feasibility.ps1",
-    " D test/observation/verify-wow32-s1-formal-graph.ps1",
-    "?? artifacts/build-migration/t484/s3-retire-feasibility/",
-    "?? docs/etc/evidence/t484-s3-retire-feasibility.md"
+    " M test/observation/verify-xms-block-boundaries.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/worker/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-xms-native/",
+    "?? docs/etc/evidence/t484-s3-xms-native.md",
+    "?? tools/build/worker/xms-tests.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 140,
-    "unchanged": 85,
+    "changed": 141,
+    "unchanged": 84,
     "removed": 130
   },
   "disposition_counts": {
-    "migrated-delivered": 81,
+    "migrated-delivered": 82,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 130,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 74,
+    "requires-disposition-reconciliation": 73,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 174,
@@ -3767,8 +3766,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "44f6cf445fa469bd89bea5540609e289b75f68e4"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-feasibility.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -3782,8 +3785,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "44f6cf445fa469bd89bea5540609e289b75f68e4"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-feasibility.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -3795,12 +3802,16 @@
       "id": "B0199",
       "file": "test/observation/verify-xms-block-boundaries.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "c8dc9f2f25dda56993e759a6963d402424a39f352cc5fd679ccd144fe9443f04",
+      "state": "changed",
+      "current_sha256": "3dbc09129a1b17e65b65223fff524a26926806e6fc9d704e38272a998f6a7f61",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Native XMS allocation/move targets use current owner flags and real suballocator; 135/8 assertions pass; manual compiler parser retired",
+        "evidence": "docs/etc/evidence/t484-s3-xms-native.md"
+      }
     },
     {
       "id": "B0200",
@@ -5893,6 +5904,12 @@
     }
   ],
   "commits": {
+    "44f6cf445fa469bd89bea5540609e289b75f68e4": {
+      "subject": "T484 S3 P132 retire obsolete WOW feasibility and graph probes",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-feasibility.md"
+      ]
+    },
     "31d259294fe004dacb5e12b690d5008c92ace6f5": {
       "subject": "T484 S3 P131 finish native lifecycle producers and retire manual builder",
       "evidence": [
@@ -8694,22 +8711,6 @@
         {
           "line": 9,
           "text": "$cache=Join-Path $repo 'build/.ninja/msvc-x86-release/worker'"
-        },
-        {
-          "line": 12,
-          "text": "$graph=Get-Content \"$cache/build.ninja\" -Raw"
-        },
-        {
-          "line": 20,
-          "text": "& $wrapper cl \"@$rsp\" 2>&1 | Out-File \"$out/build.txt\" -Append"
-        },
-        {
-          "line": 26,
-          "text": "& $wrapper link /nologo /OPT:REF @seams \"/OUT:$exe\" \"/MAP:$exe.map\" \"$out/fixture.obj\" \"$out/provider.obj\" \"$cache/original-mvdm-host-suballoc.lib\" kernel32.lib ntdll.lib legacy_stdio_definitions.lib 2>&1 | Out-File \"$out/build.txt\" -Append"
-        },
-        {
-          "line": 27,
-          "text": "if($LASTEXITCODE){throw 'Link failed'}"
         }
       ]
     },

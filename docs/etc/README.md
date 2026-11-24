@@ -1748,3 +1748,5 @@ post-publication targeted checks.
 - [T484 S3 lifecycle overlap producers](evidence/t484-s3-lifecycle-overlap.md)
 
 - [T484 S3 retire expired WOW research tools](evidence/t484-s3-retire-feasibility.md)
+
+- [T484 S3 native XMS boundary producers](evidence/t484-s3-xms-native.md)

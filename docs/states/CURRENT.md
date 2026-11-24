@@ -102,7 +102,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P132 retired research](../etc/evidence/t484-s3-retire-feasibility.md) | Retired the system-only multimedia feasibility fixture and stale S1 graph checker; current production graph unchanged. Build/publication evidence is recorded in receipt. |
 
-Completed implementation batches through P132 passed their cached full host build. P73 checks11 raw host inputs
+| [P133 XMS boundaries](../etc/evidence/t484-s3-xms-native.md) | Native allocation/move targets replace the old Ninja parser/manual builder;135/8 assertions pass. Cached full and publication identity results are in receipt. |
+
+Completed implementation batches through P133 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

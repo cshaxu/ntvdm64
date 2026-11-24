@@ -212,6 +212,8 @@ if "%TARGET%"=="host-thread-boundaries" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="console-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="observation-tools" set "SELECTED=1"
 if "%TARGET%"=="oem-tests" set "SELECTED=1"
+for %%I in (xms-allocation xms-move) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (xms-allocation xms-move) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="oem-tests" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="command-initialization" set "SELECTED=1"
 if "%TARGET%"=="command-launch" set "SELECTED=1"
@@ -255,6 +257,7 @@ for %%I in (wow_capture_native_control wow-message-external wow-message-cross wo
 if "%TARGET%"=="ccpu-header-selection" goto worker_existing
 if "%TARGET%"=="win101-control-fixtures" goto worker_existing
 if "%TARGET%"=="oem-tests" goto worker
+for %%I in (xms-allocation xms-move) do if "%TARGET%"=="%%I" goto worker
 if "%TARGET:~0,12%"=="wow-creation" goto wowcallback
 if "%TARGET%"=="wow-extension-contracts" goto wowcallback
 for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I" goto wowcallback
