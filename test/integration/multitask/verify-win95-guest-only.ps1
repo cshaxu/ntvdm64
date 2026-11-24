@@ -67,9 +67,8 @@ try {
   [Array]::Clear($bytes,$i,128);[Array]::Copy($path,0,$bytes,$i,$path.Length)
   [IO.File]::WriteAllBytes("$dest/PATCH/ONLY.COM",$bytes)
  }
- & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/ONLY.PIF" --title 'Guest DOS' --program "$dest\PATCH\ONLY.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
+ & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/ONLY.PIF" --title 'Guest DOS' --program "$dest\PATCH\ONLY.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
  if($LASTEXITCODE){throw 'Guest-only PIF creation failed'}
- & "$repo/test/integration/ntvdm64-386/Set-Win95ProbePifMemory.ps1" -Path "$dest/PATCH/ONLY.PIF"
  $win="$dest/WIN.INI";$text=$enc.GetString([IO.File]::ReadAllBytes($win))
  $text=[regex]::Replace($text,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\ONLY.PIF")
  [IO.File]::WriteAllBytes($win,$enc.GetBytes($text))

@@ -285,7 +285,7 @@ test-only `host-init-failure.c` link and verifies that a failed driver arm
 rolls back the actual host IRQ and EOI hook; no DOS identity witnesses run.
 Both record process exit without claiming Win95 normal shutdown. The shared
 copy and PIF setup is in `New-Win95ProbeCopy.ps1` and
-`Set-Win95ProbePifMemory.ps1`.
+`PIF.EXE create <file> ... --min-memory 128 --max-memory 640`.
 
 `verify-win95-identity.ps1 -InstanceDriver <insignia.386>` stages the
 instance driver alongside NTVDM64.386 in its disposable copy. With

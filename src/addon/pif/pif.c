@@ -23,8 +23,8 @@ static void usage(void)
 {
     fwprintf(stderr, L"Usage:\n"
                      L"  PIF.EXE show <file>\n"
-                     L"  PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit] [--w386-max-xms N] [--w386-flags N] [--nt31-flags N]\n"
-                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit] [--w386-max-xms N] [--w386-flags N] [--nt31-flags N]\n"
+                     L"  PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit] [--min-memory N] [--max-memory N] [--w386-max-xms N] [--w386-flags N] [--nt31-flags N]\n"
+                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit] [--min-memory N] [--max-memory N] [--w386-max-xms N] [--w386-flags N] [--nt31-flags N]\n"
                      L"  PIF.EXE replace-root <file> --from OLD --to NEW\n");
 }
 
@@ -164,11 +164,17 @@ static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
     const wchar_t *arguments = option(argc, argv, L"--arguments");
     const wchar_t *config = option(argc, argv, L"--config");
     const wchar_t *autoexec = option(argc, argv, L"--autoexec");
-    DWORD max_xms = 0, w386_flags = 0, nt31_flags = 0;
-    BOOL has_max_xms, has_w386_flags, has_nt31_flags;
+    DWORD max_xms = 0, w386_flags = 0, nt31_flags = 0, min_memory = 0, max_memory = 0;
+    BOOL has_max_xms, has_w386_flags, has_nt31_flags, has_min_memory, has_max_memory;
     if (!option_ulong(argc, argv, L"--w386-max-xms", &max_xms, &has_max_xms) ||
         !option_ulong(argc, argv, L"--w386-flags", &w386_flags, &has_w386_flags) ||
         !option_ulong(argc, argv, L"--nt31-flags", &nt31_flags, &has_nt31_flags) ||
+        !option_ulong(argc, argv, L"--min-memory", &min_memory, &has_min_memory) ||
+        !option_ulong(argc, argv, L"--max-memory", &max_memory, &has_max_memory) ||
+        (switch_present(argc, argv, L"--min-memory") && !has_min_memory) ||
+        (switch_present(argc, argv, L"--max-memory") && !has_max_memory) ||
+        (has_min_memory && min_memory > 0xffffu) ||
+        (has_max_memory && max_memory > 0xffffu) ||
         (has_max_xms && (max_xms > 0xffffu || !view->w386)) ||
         (has_w386_flags && !view->w386) || (has_nt31_flags && !view->nt)) return FALSE;
     if ((!title || put_oem(view->standard->appname, sizeof(view->standard->appname), title)) &&
@@ -182,6 +188,14 @@ static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
         if (has_max_xms) view->w386->PfMaxXmsK = (WORD)max_xms;
         if (has_w386_flags) view->w386->PfW386Flags = w386_flags;
         if (has_nt31_flags) view->nt->nt31Prop.dwWNTFlags = nt31_flags;
+        if (has_min_memory) {
+            view->standard->minmem = (WORD)min_memory;
+            if (view->w386) view->w386->PfW386minmem = (WORD)min_memory;
+        }
+        if (has_max_memory) {
+            view->standard->maxmem = (WORD)max_memory;
+            if (view->w386) view->w386->PfW386maxmem = (WORD)max_memory;
+        }
         /* Preserve the legacy no-checksum convention on update.  Creation
          * explicitly seals its new record below. */
         if (view->standard->id != 0) checksum(view);

@@ -86,3 +86,37 @@ if ($ReleaseRoot) {
     }
 }
 'PASS PIF create/show/update and HASH single-file output'
+# Conventional memory is a native format edit, replacing test-owned byte patchers.
+$memory="$BuildRoot/memory.pif"
+$plain="$BuildRoot/memory-plain.pif"
+$updated="$BuildRoot/memory-updated.pif"
+foreach($title in @('VM identity A','VM reuse','Prompt probe B','Guest DOS','Scheduling prompt')){
+ $fields=@('--title',$title,'--program','O:\tmp\FIXTURE\PATCH\A.COM','--directory','O:\tmp\FIXTURE\PATCH','--arguments','','--config','','--autoexec','','--close-on-exit','--w386-flags','0x21002')
+ & $Pif create $plain @fields
+ if($LASTEXITCODE){throw 'Memory reference create failed'}
+ $expected=[IO.File]::ReadAllBytes($plain)
+ $text=[Text.Encoding]::ASCII.GetString($expected)
+ $std=$text.IndexOf('MICROSOFT PIFEX');$header=$text.IndexOf('WINDOWS 386 3.0')
+ $body=[BitConverter]::ToUInt16($expected,$header+18)
+ foreach($offset in @(32,$body)){[Array]::Copy([BitConverter]::GetBytes([uint16]640),0,$expected,$offset,2)}
+ foreach($offset in @(34,($body+2))){[Array]::Copy([BitConverter]::GetBytes([uint16]128),0,$expected,$offset,2)}
+ $sum=0;for($i=2;$i -lt $std;$i++){$sum=($sum+$expected[$i]) -band 255};$expected[1]=[byte]$sum
+ & $Pif create $memory @fields --min-memory 128 --max-memory 640
+ if($LASTEXITCODE -or [Convert]::ToBase64String([IO.File]::ReadAllBytes($memory)) -cne [Convert]::ToBase64String($expected)){throw 'Native memory create differs from former patch'}
+ Copy-Item $plain $updated -Force
+ & $Pif update $updated --min-memory 128 --max-memory 640
+ if($LASTEXITCODE){throw 'Native memory update failed'}
+ # update preserves the documented zero-checksum form, unlike explicit create.
+ if(([IO.File]::ReadAllBytes($plain))[1] -eq 0){$expected[1]=0}
+ if([Convert]::ToBase64String([IO.File]::ReadAllBytes($updated)) -cne [Convert]::ToBase64String($expected)){throw 'Native memory update changed unrelated bytes'}
+ $view=& $Pif show $memory
+ foreach($field in @('STANDARD.MAXMEM_KB=640','STANDARD.MINMEM_KB=128','W386.MAXMEM_KB=640','W386.MINMEM_KB=128')){if($view -notcontains $field){throw "Missing memory field: $field"}}
+}
+foreach($arguments in @(@('--min-memory','65536'),@('--max-memory','-1'),@('--min-memory','bad'),@('--max-memory'))){
+ $before=(Get-FileHash $memory).Hash
+ & $Pif update $memory @arguments 2>$null
+ if(!$LASTEXITCODE -or (Get-FileHash $memory).Hash -ne $before){throw 'Invalid memory option changed file'}
+}
+& $Pif update $legacy --min-memory 128 --max-memory 640
+if($LASTEXITCODE -or ([IO.File]::ReadAllBytes($legacy))[1] -ne 0){throw 'Memory update changed zero-checksum convention'}
+'PASS conventional memory create/update, five complete byte comparisons, invalid-input no-write and legacy checksum'

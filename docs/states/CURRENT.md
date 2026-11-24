@@ -116,6 +116,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P180 DOS identity fields](../etc/evidence/t484-s3-identity-fields.md) | Two runners share native COM preparation; seven real templates/both roles byte-identical and18 rejection cases pass. PIF/config/staging remain;315/355 disposed,40 remain. |
 
+| [P181 PIF fields](../etc/evidence/t484-s3-pif-memory.md) | Six callers use native PIF memory options; duplicate helper/inline patchers removed; full-byte equivalence and failure checks pass. Configuration/staging remain;315/355 disposed,40 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

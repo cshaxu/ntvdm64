@@ -1,15 +1,22 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "dca9832679063ea8f8485fc990c18df9adc8d959",
+  "head": "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/verify-win31-probe-paths.ps1",
+    " M src/addon/pif/README.md",
+    " M src/addon/pif/pif.c",
+    " M test/integration/multitask/verify-win95-guest-only.ps1",
+    " M test/integration/multitask/verify-win95-launch-matrix.ps1",
+    " M test/integration/ntvdm64-386/README.md",
+    " D test/integration/ntvdm64-386/Set-Win95ProbePifMemory.ps1",
+    " M test/integration/ntvdm64-386/verify-win31-editors.ps1",
     " M test/integration/ntvdm64-386/verify-win31-identity.ps1",
+    " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
     " M test/integration/ntvdm64-386/verify-win95-identity.ps1",
-    " M test/observation/win31_probe_paths.c",
-    "?? docs/etc/evidence/t484-s3-identity-fields.md"
+    " M test/integration/pif_hash_tool_test.ps1",
+    "?? docs/etc/evidence/t484-s3-pif-memory.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -463,7 +470,7 @@
       "file": "test/integration/ntvdm64-386/verify-win31-editors.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "8ce5bf31a9fecbc7ed92b09da13329c699262e41738b160ee4594e98ab4c8ccb",
+      "current_sha256": "7375dd46fe57c26c57226b957a516eb5a57d0c9ad62004b3452eb530a806e1a5",
       "revisions": [
         "c2d588bc8c1d3ab8d2c083c38e037aa7603c4f1d"
       ],
@@ -473,8 +480,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "P37 replaces PowerShell assembly composition and NASM invocation with CMD/native include composition;20 valid variants byte-identical,12 invalid variants rejected. Shared runtime matrix and staging producers still require complete-chain reconciliation.",
-        "evidence": "docs/etc/evidence/t484-s3-win31-editor.md"
+        "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
+        "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
       }
     },
     {
@@ -482,20 +489,22 @@
       "file": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "5ab8e02e774af6637ee79742bf857a67690dd812eac707aa8eb45ed5d6600a35",
+      "current_sha256": "e3cade9d28d5e1ecd71ee212d86adf955685e351bdc61ae4314d02d089aa236b",
       "revisions": [
+        "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
         "dca9832679063ea8f8485fc990c18df9adc8d959",
         "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-controller-paths.md",
+        "docs/etc/evidence/t484-s3-identity-fields.md",
         "docs/etc/evidence/t484-s3-vm-identity.md"
       ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Native assembly, controller paths and COM role/command/environment preparation verified byte-identical; remaining PIF/config preparation and shared staging stay pending",
-        "evidence": "docs/etc/evidence/t484-s3-identity-fields.md"
+        "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
+        "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
       }
     },
     {
@@ -503,7 +512,7 @@
       "file": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "17fe0bd724af49fbefd66942bcd8b372d5cd7d4aa80939655fabddec2bc8674d",
+      "current_sha256": "d8e82d34a454d1b3e1ca35c204884a15d456426cf08d4afb5b278a3bcf6a88b0",
       "revisions": [
         "dca9832679063ea8f8485fc990c18df9adc8d959",
         "7e89114b14c4199b138033c3352b530105f8c7fb"
@@ -515,8 +524,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Native assembly and shared controller path binding verified byte-identical; remaining COM fields/config/PIF and shared runtime staging require reconciliation",
-        "evidence": "docs/etc/evidence/t484-s3-controller-paths.md"
+        "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
+        "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
       }
     },
     {
@@ -524,20 +533,22 @@
       "file": "test/integration/ntvdm64-386/verify-win95-identity.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "5900578a0d248fb474caf5502cc5f015ef1a2097fb31e192de427da18d696b30",
+      "current_sha256": "7a4c334939245890b5aa6795e450e2c763ced9f698014977fdb1c736404ecb66",
       "revisions": [
+        "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
         "dca9832679063ea8f8485fc990c18df9adc8d959",
         "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-controller-paths.md",
+        "docs/etc/evidence/t484-s3-identity-fields.md",
         "docs/etc/evidence/t484-s3-vm-identity.md"
       ],
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Native assembly, controller paths and COM role/command/environment preparation verified byte-identical; remaining PIF/config preparation and shared staging stay pending",
-        "evidence": "docs/etc/evidence/t484-s3-identity-fields.md"
+        "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
+        "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
       }
     },
     {
@@ -6469,6 +6480,12 @@
     }
   ],
   "commits": {
+    "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4": {
+      "subject": "T484 S3 P180 unify native DOS identity fixture binding",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-identity-fields.md"
+      ]
+    },
     "dca9832679063ea8f8485fc990c18df9adc8d959": {
       "subject": "T484 S3 P179 share native controller path binding",
       "evidence": [
@@ -7736,11 +7753,11 @@
           "text": "# Run in a background modern pwsh process with a diagnostic host package."
         },
         {
-          "line": 74,
+          "line": 69,
           "text": "$nasm=(Get-Command nasm.exe).Source"
         },
         {
-          "line": 76,
+          "line": 71,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
@@ -7754,15 +7771,15 @@
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
         },
         {
-          "line": 273,
+          "line": 257,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
         },
         {
-          "line": 276,
+          "line": 260,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 278,
+          "line": 262,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
@@ -7772,15 +7789,15 @@
       "file": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
       "hits": [
         {
-          "line": 118,
+          "line": 117,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" --fields \"$task/controller.exe\" '@W31_BOOT_PATH@' \"$dest\\PATCH\\BOOT.BIN\" '@W31_READY_PATH@' \"$dest\\PATCH\\READY.BIN\""
         },
         {
-          "line": 121,
+          "line": 120,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 123,
+          "line": 122,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
@@ -7794,15 +7811,15 @@
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
         },
         {
-          "line": 130,
+          "line": 128,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
         },
         {
-          "line": 133,
+          "line": 131,
           "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
-          "line": 135,
+          "line": 133,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]

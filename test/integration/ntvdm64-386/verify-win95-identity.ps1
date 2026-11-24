@@ -80,9 +80,8 @@ foreach($id in 'A','B'){
  }
  & "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" @binding
  if($LASTEXITCODE){throw 'DOS identity field binding failed'}
- & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "VM identity $id" --program "$dest\PATCH\$id.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
+ & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "VM identity $id" --program "$dest\PATCH\$id.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
  if($LASTEXITCODE){throw 'DOS VM PIF build failed'}
- & "$PSScriptRoot/Set-Win95ProbePifMemory.ps1" -Path "$dest/PATCH/$id.PIF"
 }
 $ini="$dest/WIN.INI"
 $s=$enc.GetString([IO.File]::ReadAllBytes($ini))
@@ -101,9 +100,8 @@ if($InitializationFailure){$defines=@('-DINIT_FAILURE=1')}
 if($Reuse){
  Invoke-VmIdentityBuild "$task/reuse.com" reuse
  Copy-Item -LiteralPath "$task/reuse.com" -Destination "$dest/PATCH/REUSE.COM"
- & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/REUSE.PIF" --title 'VM reuse' --program "$dest\PATCH\REUSE.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
+ & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/REUSE.PIF" --title 'VM reuse' --program "$dest\PATCH\REUSE.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
  if($LASTEXITCODE){throw 'Reuse PIF build failed'}
- & "$PSScriptRoot/Set-Win95ProbePifMemory.ps1" -Path "$dest/PATCH/REUSE.PIF"
  $defines=@('-DREUSE=1')
 }
 if($ShutdownWitness){$defines+=@('-DSHUTDOWN_WITNESS=1')}

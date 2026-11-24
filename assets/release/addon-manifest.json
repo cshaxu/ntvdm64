@@ -70,14 +70,6 @@
   ],
   "utilities": [
     {
-      "id": "pif",
-      "file": "PIF.EXE",
-      "architecture": "amd64",
-      "sha256": "B87B87165235C05CF6DA99BDC20A2413BBC2BE516E939069420A5B4CB30D4EDB",
-      "source": "src/addon/pif/pif.c",
-      "sourceSha256": "42785A3F48E03DF8504AEBA6FE493270FF92C443FC9E31D50CE108FCBF1D09BA"
-    },
-    {
       "id": "hash",
       "file": "HASH.EXE",
       "architecture": "amd64",
@@ -140,6 +132,14 @@
       "sha256": "349A97E525B5C64ECE938A3586A7B4AF33631EE3BC59403EF73FB0E3D5D71EF6",
       "source": "src/addon/path95/path95.c",
       "sourceSha256": "F814EB02A895F9F2CCC35F81B54215F328F9B1F87841F2287BBE7CF56BCA281E"
+    },
+    {
+      "id": "pif",
+      "file": "PIF.EXE",
+      "architecture": "amd64",
+      "sha256": "53AF04B42D1F17FC99B3DE15CC7767E9FCDC022738D7FBEA843429943F4525F6",
+      "source": "src/addon/pif/pif.c",
+      "sourceSha256": "6890FA165537AC8EE7275B72482E5E257F2ADB24589E7C9CA37E484A655661D0"
     }
   ]
 }

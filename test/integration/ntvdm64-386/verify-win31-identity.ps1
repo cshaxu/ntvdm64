@@ -224,25 +224,9 @@ foreach($id in 'A','B'){
  & "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" @binding
  if($LASTEXITCODE){throw 'DOS identity field binding failed'}
  $vmFlags=if($FullscreenVmControl){'0x2100a'}else{'0x21002'}
- & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "VM identity $id" --program "$dest\PATCH\$id.COM" --directory $directory --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags $vmFlags
+ & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "VM identity $id" --program "$dest\PATCH\$id.COM" --directory $directory --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags $vmFlags --min-memory 128 --max-memory 640
  if($LASTEXITCODE){throw 'DOS VM PIF build failed'}
- # Generated fixture only; STDPIF and W386PIF30 from original pif.h.
- # Zero conventional-memory fields leave too little COM load space. Reserve
- # 128 KiB and permit 640 KiB independently of the witness's current size.
- & {
-  $pif=[IO.File]::ReadAllBytes("$dest/PATCH/$id.PIF")
-  $text=[Text.Encoding]::ASCII.GetString($pif)
-  $std=$text.IndexOf('MICROSOFT PIFEX')
-  $hdr=$text.IndexOf('WINDOWS 386 3.0')
-  if($std -lt 36 -or $hdr -lt $std){throw 'Missing generated PIF headers'}
-  if($hdr+22 -gt $pif.Length){throw 'Truncated generated PIF header'}
-  $body=[BitConverter]::ToUInt16($pif,$hdr+18)
-  if($body -lt $hdr+22 -or $body+4 -gt $pif.Length){throw 'Invalid generated PIF memory fields'}
-  foreach($offset in @(32,$body)){[Array]::Copy([BitConverter]::GetBytes([uint16]640),0,$pif,$offset,2)}
-  foreach($offset in @(34,($body+2))){[Array]::Copy([BitConverter]::GetBytes([uint16]128),0,$pif,$offset,2)}
-  $sum=0;for($at=2;$at -lt $std;++$at){$sum=($sum+$pif[$at]) -band 255};$pif[1]=[byte]$sum
-  [IO.File]::WriteAllBytes("$dest/PATCH/$id.PIF",$pif)
- }
+
 }
 $ini="$dest/WIN.INI"
 $s=$enc.GetString([IO.File]::ReadAllBytes($ini))

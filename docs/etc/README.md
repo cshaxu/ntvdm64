@@ -1839,3 +1839,5 @@ post-publication targeted checks.
 - [T484 S3 shared controller path binding](evidence/t484-s3-controller-paths.md).
 
 - [T484 S3 shared DOS identity fields](evidence/t484-s3-identity-fields.md).
+
+- [T484 S3 native PIF conventional memory](evidence/t484-s3-pif-memory.md).

@@ -154,23 +154,23 @@
   },
   "test/integration/ntvdm64-386/verify-win31-editors.ps1": {
     "status": "pending-producer-migration",
-    "reason": "P37 replaces PowerShell assembly composition and NASM invocation with CMD/native include composition;20 valid variants byte-identical,12 invalid variants rejected. Shared runtime matrix and staging producers still require complete-chain reconciliation.",
-    "evidence": "docs/etc/evidence/t484-s3-win31-editor.md"
+    "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
+    "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
   },
   "test/integration/ntvdm64-386/verify-win31-identity.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Native assembly, controller paths and COM role/command/environment preparation verified byte-identical; remaining PIF/config preparation and shared staging stay pending",
-    "evidence": "docs/etc/evidence/t484-s3-identity-fields.md"
+    "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
+    "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
   },
   "test/integration/ntvdm64-386/verify-win95-editors.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Native assembly and shared controller path binding verified byte-identical; remaining COM fields/config/PIF and shared runtime staging require reconciliation",
-    "evidence": "docs/etc/evidence/t484-s3-controller-paths.md"
+    "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
+    "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
   },
   "test/integration/ntvdm64-386/verify-win95-identity.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Native assembly, controller paths and COM role/command/environment preparation verified byte-identical; remaining PIF/config preparation and shared staging stay pending",
-    "evidence": "docs/etc/evidence/t484-s3-identity-fields.md"
+    "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
+    "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
   },
   "test/integration/verify-native-guest-output.ps1": {
     "status": "pending-producer-migration",

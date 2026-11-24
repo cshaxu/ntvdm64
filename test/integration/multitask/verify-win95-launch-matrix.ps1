@@ -50,9 +50,8 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
   $runtimeOptions=@{}
   if($schedule){
    Copy-Item "$PackageRoot/system32/COMMAND.COM" "$dest/PATCH/COMMAND.COM"
-   & "$repo/assets/release/PIF.EXE" create "$dest/DOSCHECK.PIF" --title 'Scheduling prompt' --program "$dest\PATCH\COMMAND.COM" --directory $dest --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
+   & "$repo/assets/release/PIF.EXE" create "$dest/DOSCHECK.PIF" --title 'Scheduling prompt' --program "$dest\PATCH\COMMAND.COM" --directory $dest --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
    if($LASTEXITCODE){throw 'Cannot create interactive scheduling prompt'}
-   & "$repo/test/integration/ntvdm64-386/Set-Win95ProbePifMemory.ps1" -Path "$dest/DOSCHECK.PIF"
    & nasm -f bin "-DW31_INSTALL='$dest'" "$PSScriptRoot/win31-scheduling-child.asm" -o "$dest/SCHED.COM"
    if($LASTEXITCODE){throw 'Scheduling DOS child assembly failed'}
    $controllerOptions=@('-DW31_SCHEDULING_INTERACTIVE')
