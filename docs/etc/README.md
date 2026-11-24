@@ -1667,3 +1667,5 @@ post-publication targeted checks.
 - [NIDDB and diagnostic consolidation](evidence/t484-s3-niddb-retirement.md)
 
 - [Painter contract and duplicate entry retirement](evidence/t484-s3-planar.md)
+
+- [Redirector producer consolidation](evidence/t484-s3-redirector.md)

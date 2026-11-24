@@ -606,5 +606,35 @@
     "evidence": "docs/etc/evidence/t484-s3-planar.md",
     "reason": "Redundant forwarding wrapper with no extra assertions or active callers; shared QEVNT contract retained under B0153",
     "status": "retired-with-delivery-evidence"
+  },
+  "test/observation/verify-redirector-oem-capacity.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+      "decision": "retain",
+      "reason": "Actual selected production providers, distinct capacity/error/cleanup assertions; OEM modes have active family caller"
+    },
+    "status": "retained-native-delegate",
+    "reason": "Native worker owns compilation; current distinct remote/enum/OEM contracts verified"
+  },
+  "test/observation/verify-redirector-remote-name.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+      "decision": "retain",
+      "reason": "Actual selected production providers, distinct capacity/error/cleanup assertions; OEM modes have active family caller"
+    },
+    "status": "migrated-delivered",
+    "reason": "Native worker owns compilation; current distinct remote/enum/OEM contracts verified"
+  },
+  "test/observation/verify-redirector-server-enum.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+      "decision": "retain",
+      "reason": "Actual selected production providers, distinct capacity/error/cleanup assertions; OEM modes have active family caller"
+    },
+    "status": "migrated-delivered",
+    "reason": "Native worker owns compilation; current distinct remote/enum/OEM contracts verified"
   }
 }

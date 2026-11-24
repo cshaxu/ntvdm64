@@ -1,0 +1,140 @@
+{
+  "providers": {
+    "exit_code": 0,
+    "original_providers": true,
+    "executable_sha256": "7CEAE245E43A1BFDABC65D8BF7004C6E393F137D94F02EF38DFF13EDC4029743",
+    "source_hashes": [
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+        "sha256": "AE6483ECF1411CE02AABC41AE8B554F75B1F55F7F4FEDD3D8F872E084738E667"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/compat/mvdm_redirector_guest_copy.c",
+        "sha256": "A68B7735A07B6F7D899AEF8F3731BBC788C5970962F5CAC9C9CAD9ED9BBE7B1A"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/compat/guest_location.c",
+        "sha256": "CC26E195D3E25E128DB407E6BAAD7D0D4BB943DDF71B80912ACE80DFBE5808D7"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/session/session.c",
+        "sha256": "46860D834E2BD5691974EE4DEB4FEADADE05B3906143133361A0B5FE82298E29"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/compat/host_context.c",
+        "sha256": "C2B4E5292C5908A956B4BADA786424827DE12A8C435D377C75D07D7CDFA015DE"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/compat/guest_memory_lease.c",
+        "sha256": "0FA8FB0649198677FEDA3FCA0A156158F4FD28FFF7CEC9B26F41DFAF660D4EB5"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/guest-memory-coordination-core.c",
+        "sha256": "11A90850DD027589965AF4DC6E042994CCE6054341149EB7A3FA45792834A155"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/test/mvdm-host/vdmredir/redirector_netapi_provider_test.c",
+        "sha256": "19B789A0BFBCB7C1810C82AB605548AB71B9799508D10F7F09CD92FE6250CEE7"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/compat/mvdm_redirector_async.c",
+        "sha256": "34B1696C2C31E1621F14BD54B02A953E85E82B725D43B8F25D65F52AB92A15CD"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnetapi.c",
+        "sha256": "481EF3FA15499D2B9B607099CE71B4A3E581CA66E2BCFE558A868AA30F00095D"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vrnmpipe.c",
+        "sha256": "C7EBB43FC67C49E3070763D298275E1A4DE4C79AA7C87B32D26CE4695A3FF5D8"
+      }
+    ]
+  },
+  "enumeration": "SERVER_ENUM checks=37 failures=0",
+  "runtime": {
+    "pid": 5204,
+    "finished": "2026-11-24T01:25:10.1378831+01:00",
+    "exit": 0,
+    "started": "2026-11-24T01:23:34.8415372+01:00"
+  },
+  "capacity": {
+    "exit_code": 0,
+    "original_providers": false,
+    "executable_sha256": "4EE0DEC69A1862F5729B06A7A22FB34E443BDF5F6B3003348CE182248E3A2983",
+    "source_hashes": [
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c",
+        "sha256": "AE6483ECF1411CE02AABC41AE8B554F75B1F55F7F4FEDD3D8F872E084738E667"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/compat/mvdm_redirector_guest_copy.c",
+        "sha256": "A68B7735A07B6F7D899AEF8F3731BBC788C5970962F5CAC9C9CAD9ED9BBE7B1A"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/compat/guest_location.c",
+        "sha256": "CC26E195D3E25E128DB407E6BAAD7D0D4BB943DDF71B80912ACE80DFBE5808D7"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/session/session.c",
+        "sha256": "46860D834E2BD5691974EE4DEB4FEADADE05B3906143133361A0B5FE82298E29"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/compat/host_context.c",
+        "sha256": "C2B4E5292C5908A956B4BADA786424827DE12A8C435D377C75D07D7CDFA015DE"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/src/compat/guest_memory_lease.c",
+        "sha256": "0FA8FB0649198677FEDA3FCA0A156158F4FD28FFF7CEC9B26F41DFAF660D4EB5"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/guest-memory-coordination-core.c",
+        "sha256": "11A90850DD027589965AF4DC6E042994CCE6054341149EB7A3FA45792834A155"
+      },
+      {
+        "path": "O:/repos.hobby/ntvdm64/test/mvdm-host/vdmredir/redirector_oem_capacity_test.c",
+        "sha256": "4A328414EDBC483ED22F344DC95E0ED5122B9AA3FAECF5BA51C212BF620D5A8D"
+      }
+    ]
+  },
+  "remote": {
+    "exit_code": 0,
+    "elapsed_ms": 191,
+    "executable_sha256": "AFF619083D6E8516A4D1E62C99B861E350D7DADF9F5A9323942714B78E9B4455",
+    "scope": "Actual VrRemoteApi and production RTL; controlled NetAPI and unavailable RAP transport, no network/guest execution"
+  },
+  "first_final": {
+    "finished": "2026-11-24T01:26:42.0188869+01:00",
+    "pid": 30512,
+    "exit": 1,
+    "started": "2026-11-24T01:25:40.222513+01:00"
+  },
+  "argument_failure": "redirector-remote-name exit=0\r\nredirector-server-enum exit=0\r\nplanar-painter exit=2\r\n",
+  "final": {
+    "exit": 0,
+    "started": "2026-11-24T01:27:58.545428+01:00",
+    "finished": "2026-11-24T01:29:01.6328909+01:00",
+    "pid": 32904
+  },
+  "cache": [
+    {
+      "time": 639310766398653097,
+      "path": "build/.ninja/msvc-x86-release/worker/remote-computer-name-test.exe",
+      "hash": "AFF619083D6E8516A4D1E62C99B861E350D7DADF9F5A9323942714B78E9B4455"
+    },
+    {
+      "time": 639310766644605855,
+      "path": "build/.ninja/msvc-x86-release/worker/server-enum-test.exe",
+      "hash": "6469FA254EDF1170604BABAE190AD8FCCC957E8042387A8DC57F54ECFAE3D2A1"
+    },
+    {
+      "time": 639310339505651859,
+      "path": "build/.ninja/msvc-x86-release/worker/redirector-oem-capacity-test.exe",
+      "hash": "4EE0DEC69A1862F5729B06A7A22FB34E443BDF5F6B3003348CE182248E3A2983"
+    },
+    {
+      "time": 639310406745590333,
+      "path": "build/.ninja/msvc-x86-release/worker/redirector-netapi-provider-test.exe",
+      "hash": "7CEAE245E43A1BFDABC65D8BF7004C6E393F137D94F02EF38DFF13EDC4029743"
+    }
+  ]
+}

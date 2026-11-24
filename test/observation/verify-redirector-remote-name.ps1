@@ -9,34 +9,10 @@ if (!$out.StartsWith($allowed, [StringComparison]::OrdinalIgnoreCase)) {
 }
 if (Test-Path -LiteralPath $out) { throw 'Use a fresh evidence directory.' }
 New-Item -ItemType Directory -Path $out | Out-Null
-$vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$wrapper = Join-Path $out 'compiler.cmd'
-@('@echo off', ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'),
-    'if errorlevel 1 exit /b %errorlevel%', '%*') |
-    Set-Content -LiteralPath $wrapper -Encoding ASCII
-# Reuse the actual selected translation unit's compiler context.
-$ninja = Get-Content (Join-Path $root 'build/.ninja/msvc-x86-release/worker/build.ninja') -Raw
-$match = [regex]::Match($ninja, '(?m)^build obj/redir/vrremote\.obj:.*\r?\n  cflags = (.*)$')
-if (!$match.Success) { throw 'Missing actual vrremote compiler context; run cached product build first.' }
-$flags = $match.Groups[1].Value.Trim().Replace('$:', ':')
-$sources = @('src/mvdm-host/vdmredir/vrremote.c',
-    'src/compat/opennt_support_rtl.c',
-    'test/mvdm-host/vdmredir/remote_computer_name_test.c')
-$commands = @('@echo off', ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'),
-    'if errorlevel 1 exit /b %errorlevel%')
-$objects = @()
-foreach ($source in $sources) {
-    $object = Join-Path $out ([IO.Path]::GetFileNameWithoutExtension($source) + '.obj')
-    $commands += 'cl /Gy ' + $flags + ' /Fo"' + $object + '" "' + (Join-Path $root $source) + '"'
-    $commands += 'if errorlevel 1 exit /b %errorlevel%'
-    $objects += '"' + $object + '"'
-}
-$exe = Join-Path $out 'remote-computer-name-test.exe'
-$commands += 'link /nologo /OPT:REF /OUT:"' + $exe + '" ' + ($objects -join ' ') + ' kernel32.lib ntdll.lib advapi32.lib legacy_stdio_definitions.lib'
-$commands += 'exit /b %errorlevel%'
-$commands | Set-Content -LiteralPath $wrapper -Encoding ASCII
-& $wrapper 2>&1 | Tee-Object -FilePath (Join-Path $out 'build.txt')
-if ($LASTEXITCODE -ne 0) { throw 'Compile/link failed.' }
+& "$root/tools/build-fixtures.cmd" x86 redirector-remote-name *> "$out/build.txt"
+if($LASTEXITCODE){throw 'Native remote-name build failed'}
+$exe=Join-Path $out 'remote-computer-name-test.exe'
+Copy-Item "$root/build/.ninja/msvc-x86-release/worker/remote-computer-name-test.exe" $exe
 $start = [Diagnostics.ProcessStartInfo]::new()
 $start.FileName = $exe
 $start.UseShellExecute = $false

@@ -1,31 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "8cd4d80d5c5c83e1b7fc9ad455f8599aba463054",
+  "head": "fdc1d735aca5b1cc41971a3043934ba2442a12cd",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/mvdm-host/planar_painter_object_fixture.c",
-    " M test/observation/verify-planar-painter-object-contract.ps1",
-    " D test/observation/verify-qevnt-object-contract.ps1",
+    " M test/observation/verify-redirector-remote-name.ps1",
+    " M test/observation/verify-redirector-server-enum.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/worker/observation-tests.cmake",
-    "?? artifacts/build-migration/t484/s3-planar/",
-    "?? docs/etc/evidence/t484-s3-planar.md"
+    "?? artifacts/build-migration/t484/s3-redirector/",
+    "?? docs/etc/evidence/t484-s3-redirector.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 102,
-    "unchanged": 129,
+    "changed": 104,
+    "unchanged": 127,
     "removed": 124
   },
   "disposition_counts": {
-    "migrated-delivered": 45,
+    "migrated-delivered": 47,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 124,
     "pending-producer-migration": 53,
-    "retained-native-delegate": 9,
-    "requires-disposition-reconciliation": 121,
+    "retained-native-delegate": 10,
+    "requires-disposition-reconciliation": 118,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 180,
@@ -2627,8 +2626,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "2887306a03105f778dbb72651a0b7c0bf57f0e4a6b3a4afd6cede0ec4c245e10",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "fdc1d735aca5b1cc41971a3043934ba2442a12cd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-planar.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-planar.md",
@@ -2642,8 +2645,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "fdc1d735aca5b1cc41971a3043934ba2442a12cd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-planar.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-planar.md",
@@ -2665,30 +2672,57 @@
         "docs/etc/evidence/t484-s3-observation-cmake.md",
         "docs/etc/evidence/t484-s3-redirector-lifecycle.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+        "retention_review": {
+          "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+          "decision": "retain",
+          "reason": "Actual selected production providers, distinct capacity/error/cleanup assertions; OEM modes have active family caller"
+        },
+        "status": "retained-native-delegate",
+        "reason": "Native worker owns compilation; current distinct remote/enum/OEM contracts verified"
+      }
     },
     {
       "id": "B0148",
       "file": "test/observation/verify-redirector-remote-name.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "385ad4afc21b97c0bc9d1449c8ebb2a24b238451d262c0d57007dfbe2a0bb070",
+      "state": "changed",
+      "current_sha256": "b9425c60f1d73a7bf5350f16cb828e45d4dde3894a2cf315392b780fd95c0eb6",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+        "retention_review": {
+          "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+          "decision": "retain",
+          "reason": "Actual selected production providers, distinct capacity/error/cleanup assertions; OEM modes have active family caller"
+        },
+        "status": "migrated-delivered",
+        "reason": "Native worker owns compilation; current distinct remote/enum/OEM contracts verified"
+      }
     },
     {
       "id": "B0149",
       "file": "test/observation/verify-redirector-server-enum.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f9f74fcefd9b31fd00141ec50ac73a24e67be5ff1648841fd43f789ebd705fa6",
+      "state": "changed",
+      "current_sha256": "b294130156e6ea13aa35370e01e71916cafd260b6447a2027e4a57048a86decf",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+        "retention_review": {
+          "evidence": "docs/etc/evidence/t484-s3-redirector.md",
+          "decision": "retain",
+          "reason": "Actual selected production providers, distinct capacity/error/cleanup assertions; OEM modes have active family caller"
+        },
+        "status": "migrated-delivered",
+        "reason": "Native worker owns compilation; current distinct remote/enum/OEM contracts verified"
+      }
     },
     {
       "id": "B0150",
@@ -5363,6 +5397,12 @@
     }
   ],
   "commits": {
+    "fdc1d735aca5b1cc41971a3043934ba2442a12cd": {
+      "subject": "T484 S3 P89 refresh painter contract and retire duplicate wrapper",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-planar.md"
+      ]
+    },
     "8cd4d80d5c5c83e1b7fc9ad455f8599aba463054": {
       "subject": "T484 S3 P88 retire redundant probes and migrate current native contracts",
       "evidence": [
@@ -7359,24 +7399,8 @@
       "file": "test/observation/verify-redirector-remote-name.ps1",
       "hits": [
         {
-          "line": 18,
-          "text": "$ninja = Get-Content (Join-Path $root 'build/.ninja/msvc-x86-release/worker/build.ninja') -Raw"
-        },
-        {
-          "line": 19,
-          "text": "$match = [regex]::Match($ninja, '(?m)^build obj/redir/vrremote\\.obj:.*\\r?\\n  cflags = (.*)$')"
-        },
-        {
-          "line": 30,
-          "text": "$commands += 'cl /Gy ' + $flags + ' /Fo\"' + $object + '\" \"' + (Join-Path $root $source) + '\"'"
-        },
-        {
-          "line": 35,
-          "text": "$commands += 'link /nologo /OPT:REF /OUT:\"' + $exe + '\" ' + ($objects -join ' ') + ' kernel32.lib ntdll.lib advapi32.lib legacy_stdio_definitions.lib'"
-        },
-        {
-          "line": 39,
-          "text": "if ($LASTEXITCODE -ne 0) { throw 'Compile/link failed.' }"
+          "line": 15,
+          "text": "Copy-Item \"$root/build/.ninja/msvc-x86-release/worker/remote-computer-name-test.exe\" $exe"
         }
       ]
     },
@@ -7385,28 +7409,8 @@
       "file": "test/observation/verify-redirector-server-enum.ps1",
       "hits": [
         {
-          "line": 3,
-          "text": "[string]$BuildCache='build/.ninja/msvc-x86-release/worker'"
-        },
-        {
-          "line": 11,
-          "text": "$graph=Get-Content \"$cache/build.ninja\" -Raw"
-        },
-        {
-          "line": 21,
-          "text": "$args | ForEach-Object {'\"'+$_+'\"'} | Set-Content \"$out/link.rsp\""
-        },
-        {
-          "line": 24,
-          "text": "('cl @\"'+$out+'\\original.rsp\"'),'if errorlevel 1 exit /b %errorlevel%',"
-        },
-        {
-          "line": 25,
-          "text": "('cl @\"'+$out+'\\fixture.rsp\"'),'if errorlevel 1 exit /b %errorlevel%',"
-        },
-        {
-          "line": 26,
-          "text": "('link @\"'+$out+'\\link.rsp\"')) | Set-Content \"$out/build.cmd\""
+          "line": 8,
+          "text": "$cache=Join-Path $repo 'build/.ninja/msvc-x86-release/worker'"
         }
       ]
     },

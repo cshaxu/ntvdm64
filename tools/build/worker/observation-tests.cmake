@@ -133,3 +133,33 @@ worker_link("planar-object.exe" "/nologo /opt:ref /out:$out /map:$out.map"
   INPUTS "obj/tests/planar_painter_object_fixture.obj" "obj/host/nt_cga.obj"
     "obj/host/nt_ega.obj" "obj/host/nt_munge.obj")
 worker_group(planar-painter "planar-object.exe")
+
+# Redirector contracts reuse each selected production translation-unit profile.
+get_target_property(remote_flags unit_obj_redir_vrremote_obj COMPILE_FLAGS)
+foreach(source IN ITEMS src/mvdm-host/vdmredir/vrremote.c
+    src/compat/opennt_support_rtl.c
+    test/mvdm-host/vdmredir/remote_computer_name_test.c)
+  get_filename_component(stem "${source}" NAME_WE)
+  worker_unit("obj/tests/remote-name/${stem}.obj" "${NTVDM_REPO}/${source}"
+    "${remote_flags} /Gy")
+endforeach()
+worker_link("remote-computer-name-test.exe" "/nologo /OPT:REF /out:$out /map:$out.map"
+  "kernel32.lib ntdll.lib advapi32.lib legacy_stdio_definitions.lib"
+  INPUTS "obj/tests/remote-name/vrremote.obj"
+    "obj/tests/remote-name/opennt_support_rtl.obj"
+    "obj/tests/remote-name/remote_computer_name_test.obj")
+worker_group(redirector-remote-name "remote-computer-name-test.exe")
+
+get_target_property(enum_flags unit_obj_opennt_xactsrv_apisrv_obj COMPILE_FLAGS)
+worker_unit("obj/tests/server-enum/apisrv-test.obj"
+  "${NTVDM_REPO}/src/non-mvdm/ds/netapi/xactsrv/apisrv.c"
+  "${enum_flags} /Gy /FI\"${NTVDM_REPO}/test/mvdm-host/vdmredir/server_enum_fixture_binding.h\"")
+worker_unit("obj/tests/server-enum/enum-test.obj"
+  "${NTVDM_REPO}/test/mvdm-host/vdmredir/server_enum_test.c" "${enum_flags} /Gy")
+worker_link("server-enum-test.exe" "/nologo /OPT:REF /out:$out /map:$out.map"
+  "netapi32.lib kernel32.lib ntdll.lib advapi32.lib legacy_stdio_definitions.lib"
+  INPUTS "obj/tests/server-enum/enum-test.obj" "obj/tests/server-enum/apisrv-test.obj"
+    "obj/compat/remote_rap.obj" "obj/compat/remote_browser.obj"
+    "original-opennt-xactsrv.lib" "original-opennt-netlib.lib"
+    "original-opennt-rtl-x86.lib" "lib-crt-compat.lib")
+worker_group(redirector-server-enum "server-enum-test.exe")
