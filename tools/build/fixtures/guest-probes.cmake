@@ -24,6 +24,15 @@ guest_probe(win95-guest-only REJECT.COM ../integration/multitask/win95-guest-onl
 get_property(win95_outputs GLOBAL PROPERTY guest_win95-guest-only)
 add_custom_target(win95-guest-only DEPENDS ${win95_outputs} win31-probe-paths)
 
+guest_probe(api EMBTEST.EXE ../integration/wow_embedding_guest.asm)
+guest_probe(api KERNTEST.EXE ../integration/wow_kerning_guest.asm)
+guest_probe(api PALTEST.EXE ../integration/wow_palette_guest.asm)
+guest_probe(api FCBTEST.COM dem_fcb_probe.asm)
+guest_probe(api MSTATE.COM t448_mouse_checksum_probe.asm)
+guest_probe(api CURSOR.COM vga-cursor-registers.asm)
+get_property(api_outputs GLOBAL PROPERTY guest_api)
+add_custom_target(guest-api DEPENDS ${api_outputs})
+
 guest_probe(redir VDMPRDR.COM vdmredir_pipe_open_read.asm)
 guest_probe(redir VDMPTX.COM vdmredir_pipe_transact.asm)
 guest_probe(redir VDMPCAL.COM vdmredir_pipe_call.asm)

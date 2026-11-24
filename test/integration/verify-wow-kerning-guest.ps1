@@ -1,7 +1,7 @@
 param([string]$PackageRoot,[string]$OutputRoot,[string]$Observer='build/t478-s22/observer.exe')
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/support/wow-guest-probe.ps1"
-$probe=Invoke-WowGuestProbe -PackageRoot $PackageRoot -OutputRoot $OutputRoot -Observer $Observer -Source 'test/integration/wow_kerning_guest.asm' -Name KERNTEST
+$probe=Invoke-WowGuestProbe -PackageRoot $PackageRoot -OutputRoot $OutputRoot -Observer $Observer -Name KERNTEST
 $b=$probe.Bytes;$out=$probe.Output
  if($b.Length -ne 12 -or [Text.Encoding]::ASCII.GetString($b,0,4) -ne 'KRN1'){throw 'Invalid guest record'}
  $row=@{errors=[BitConverter]::ToUInt16($b,4);count=[BitConverter]::ToUInt16($b,6);requested=[BitConverter]::ToUInt16($b,8);returned=[BitConverter]::ToUInt16($b,10);package=$probe.Package;wow=$probe.Wow}

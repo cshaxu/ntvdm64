@@ -1317,5 +1317,30 @@
     "status": "retired-with-delivery-evidence",
     "reason": "Standalone interpreted producer retired; live diagnostic driver retained through shared CMD fixture graph, original object/image identical, cache and missing-linker failure verified.",
     "evidence": "docs/etc/evidence/t484-s3-interrupt-observer.md"
+  },
+  "test/integration/support/wow-guest-probe.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
+    "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
+  },
+  "test/integration/verify-dem-fcb-guest.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
+    "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
+  },
+  "test/integration/verify-dlc-provider-boundary.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
+    "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
+  },
+  "test/integration/verify-mouse-state-checksum.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
+    "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
+  },
+  "test/integration/verify-vga-cursor-disable.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
+    "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
   }
 }

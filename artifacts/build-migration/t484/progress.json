@@ -1,16 +1,21 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "e58446de674760b45c88bce991ca3039af44435d",
+  "head": "df6ac7611d3771a4bdeb2aa5fdfc01070997bad0",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/ntvdm64-386/README.md",
-    " D test/integration/ntvdm64-386/build-interrupt-observer.ps1",
+    " M test/integration/support/wow-guest-probe.ps1",
+    " M test/integration/verify-dem-fcb-guest.ps1",
+    " M test/integration/verify-dlc-provider-boundary.ps1",
+    " M test/integration/verify-mouse-state-checksum.ps1",
+    " M test/integration/verify-vga-cursor-disable.ps1",
+    " M test/integration/verify-wow-embedding-guest.ps1",
+    " M test/integration/verify-wow-kerning-guest.ps1",
+    " M test/integration/verify-wow-palette-guest.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-interrupt-observer.md",
-    "?? tools/build/fixtures/interrupt-observer.cmake"
+    " M tools/build/fixtures/guest-probes.cmake",
+    "?? docs/etc/evidence/t484-s3-fixed-probes.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6485,6 +6490,12 @@
     }
   ],
   "commits": {
+    "df6ac7611d3771a4bdeb2aa5fdfc01070997bad0": {
+      "subject": "T484 S3 P186 retire interpreted interrupt observer build",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-interrupt-observer.md"
+      ]
+    },
     "e58446de674760b45c88bce991ca3039af44435d": {
       "subject": "T484 S3 P185 use native Win95 guest witness preparation",
       "evidence": [

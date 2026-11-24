@@ -23,8 +23,9 @@ try{
     New-Item -ItemType Directory $out | Out-Null
     New-Item -ItemType Directory $owned | Out-Null
     $probe=Join-Path $out 'FCBTEST.COM'
-    & nasm -f bin "$PSScriptRoot/../observation/dem_fcb_probe.asm" -o $probe
+    & "$repo/tools/build-fixtures.cmd" x86 guest-api
     if($LASTEXITCODE){throw 'Guest probe assembly failed'}
+    Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/api/FCBTEST.COM" -Destination "$out/FCBTEST.COM"
     Copy-Item $probe (Join-Path $owned 'FCBTEST.COM')
     foreach($name in @('AAA.TST','BBB.TST','CCC.TST')){
         [IO.File]::WriteAllText((Join-Path $owned $name),'AB',[Text.Encoding]::ASCII)

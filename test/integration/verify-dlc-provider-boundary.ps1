@@ -8,9 +8,9 @@ $null=New-Item -ItemType Directory -Force $out
 $runtime=$null;$scope=$null;$process=$null;$saved=@{}
 foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try{
- $source="$repo/test/observation/vdmredir_dlc_probe.asm"
- & nasm -f bin -o "$out/VDMDLC.COM" $source > "$out/assemble.txt" 2>&1
- if($LASTEXITCODE){throw 'Existing independent probe assembly failed'}
+ & "$repo/tools/build-fixtures.cmd" x86 guest-redir > "$out/assemble.txt" 2>&1
+ if($LASTEXITCODE){throw 'Existing independent probe build failed'}
+ Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/redir/VDMDLC.COM" -Destination "$out/VDMDLC.COM"
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
  $scope=New-IsolatedPackageScope $runtime;$binary=Get-PackageBinaryRoot $runtime
  # Do not use this no-provider witness on a configured DLC host.

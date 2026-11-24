@@ -1,7 +1,7 @@
 param([string]$PackageRoot,[string]$OutputRoot,[string]$Observer='build/t478-s24/observer.exe',[switch]$ExpectStall)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/support/wow-guest-probe.ps1"
-$probe=Invoke-WowGuestProbe -PackageRoot $PackageRoot -OutputRoot $OutputRoot -Observer $Observer -Source 'test/integration/wow_embedding_guest.asm' -Name EMBTEST -RequireNoRegistry
+$probe=Invoke-WowGuestProbe -PackageRoot $PackageRoot -OutputRoot $OutputRoot -Observer $Observer -Name EMBTEST -RequireNoRegistry
 $b=$probe.Bytes;$out=$probe.Output
  if($b.Length -notin @(12,24) -or [Text.Encoding]::ASCII.GetString($b,0,4) -ne 'EMB1'){throw 'Invalid guest record'}
  $last=$b.Length-12

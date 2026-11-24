@@ -90,6 +90,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P186 interrupt observer](../etc/evidence/t484-s3-interrupt-observer.md) | Retired interpreted producer; native object/image bytes match, cache and missing-linker failure pass. Fixed316/355;14 of18 newly found NASM callers remain. |
 
+| [P187 fixed-profile probes](../etc/evidence/t484-s3-fixed-probes.md) | Seven authored images share native producers, removing five NASM call sites; runtime assertions unchanged. Fixed316/355; ten supplemental preparation chains pending; nine of18 new NASM candidates remain. |
+
 A fresh global scan found18 further integration scripts with direct NASM
 commands; these await retention/migration reconciliation, as recorded in P183.
 The frozen355 census is not the complete remaining invocation graph.

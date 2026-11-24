@@ -3,15 +3,16 @@
 . "$PSScriptRoot/../../observation/isolated_package_cleanup.ps1"
 function Invoke-WowGuestProbe {
  param([string]$PackageRoot,[string]$OutputRoot,[string]$Observer,
-       [string]$Source,[string]$Name,[switch]$RequireNoRegistry)
+       [ValidateSet('EMBTEST','KERNTEST','PALTEST')][string]$Name,[switch]$RequireNoRegistry)
  $ErrorActionPreference='Stop'
  $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
  Set-Location $repo
  $out=[IO.Path]::GetFullPath((Join-Path $repo $OutputRoot))
  if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Require fresh build evidence directory'}
  $null=New-Item -ItemType Directory $out
- & nasm -f bin (Join-Path $repo $Source) -o "$out/$Name.EXE"
- if($LASTEXITCODE){throw 'NE fixture assembly failed'}
+ & "$repo/tools/build-fixtures.cmd" x86 guest-api
+ if($LASTEXITCODE){throw 'NE fixture build failed'}
+ Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/api/$Name.EXE" -Destination "$out/$Name.EXE"
  $runtime=$null;$scope=$null;$proc=$null;$saved=@{}
  foreach($key in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$key]=[Environment]::GetEnvironmentVariable($key)}
  try {

@@ -13,8 +13,9 @@ if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgn
 $observerPath=(Resolve-Path $Observer).Path
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 New-Item -ItemType Directory -Path $out | Out-Null
-& nasm -f bin "$PSScriptRoot/../observation/vga-cursor-registers.asm" -o "$out/CURSOR.COM"
+& "$repo/tools/build-fixtures.cmd" x86 guest-api
 if($LASTEXITCODE){throw 'Cursor probe assembly failed'}
+Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/api/CURSOR.COM" -Destination "$out/CURSOR.COM"
 $runtime=$null;$scope=$null;$process=$null
 $names=@('PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_INITIAL_GEOMETRY',
     'MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_TEXT_CURSOR','MVDM_TEST_CONSOLE_WIRE_PATH')
