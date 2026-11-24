@@ -1,13 +1,12 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a",
+  "head": "fd421f4de933b81d0fe21dbc3bd3dcf7993a9519",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-s45-keyboard-shadow.ps1",
-    "?? docs/etc/evidence/t484-s4-keyboard-preparation.md",
-    "?? tools/prepare-keyboard-test.cmd"
+    " M test/integration/verify-win16-print-probe.ps1",
+    "?? docs/etc/evidence/t484-s4-print-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -16,11 +15,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 119,
+    "migrated-delivered": 120,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 19,
+    "pending-producer-migration": 18,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -820,12 +819,14 @@
       "state": "changed",
       "current_sha256": "29074c1d47043cd1acb5acffed5ade2ceacdfcaa32e8c5837b34137ace6394fc",
       "revisions": [
+        "fd421f4de933b81d0fe21dbc3bd3dcf7993a9519",
         "c5f29a4ea8114f9ba6442194c84966fa7b127785",
         "29b0690b3c85813887eff1580f32c74b983cf98d"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-keyboard-isolation.md",
-        "docs/etc/evidence/t484-s3-keyboard-shadow.md"
+        "docs/etc/evidence/t484-s3-keyboard-shadow.md",
+        "docs/etc/evidence/t484-s4-keyboard-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -967,18 +968,18 @@
       "file": "test/integration/verify-win16-print-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "b00785f610772323c9f5474f993bb0f5f701b0c12e0d2299e82ac4ea8601a32b",
+      "current_sha256": "d83bfcdb85e6e3ad36e7f05d59c49689dd33d3ca20036dc706577022d5d506cd",
       "revisions": [
         "7773022884e67c2963edcd980db1da8274cf930a"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-print-probe.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "P48 native dynamic output-directory assembly verified through actual runner producer block; shared runtime staging remains pending",
-        "evidence": "docs/etc/evidence/t484-s3-print-probe.md"
+        "status": "migrated-delivered",
+        "reason": "S4 P11 completes CMD canonical print-probe staging and removes an assertion for the callback text reporter retired in c158c342d. Real Win16 PDF normal/cancel, guest callback identity and cleanup assertions pass; exact retired host text chronology is not claimed.",
+        "evidence": "docs/etc/evidence/t484-s4-print-preparation.md"
       }
     },
     {
@@ -6598,6 +6599,12 @@
     }
   ],
   "commits": {
+    "fd421f4de933b81d0fe21dbc3bd3dcf7993a9519": {
+      "subject": "M0 T484 S4 P10: prepare keyboard fixture inputs through CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-keyboard-preparation.md"
+      ]
+    },
     "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a": {
       "subject": "M0 T484 S4 P9: stage device probe inputs through CMD",
       "evidence": [

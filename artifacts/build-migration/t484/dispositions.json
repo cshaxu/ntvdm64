@@ -269,9 +269,9 @@
     "status": "migrated-delivered"
   },
   "test/integration/verify-win16-print-probe.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P48 native dynamic output-directory assembly verified through actual runner producer block; shared runtime staging remains pending",
-    "evidence": "docs/etc/evidence/t484-s3-print-probe.md"
+    "status": "migrated-delivered",
+    "reason": "S4 P11 completes CMD canonical print-probe staging and removes an assertion for the callback text reporter retired in c158c342d. Real Win16 PDF normal/cancel, guest callback identity and cleanup assertions pass; exact retired host text chronology is not claimed.",
+    "evidence": "docs/etc/evidence/t484-s4-print-preparation.md"
   },
   "test/integration/verify-win16-printdlg-cancel.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",

@@ -29,10 +29,10 @@ try {
         $producer.Refresh();if($producer.ExitCode){throw "Print producer failed: $($producer.ExitCode)"}
     }finally{$producer.Dispose()}
     $cache="$repo/build/.ninja/fixtures-x86/guest-probes/win16"
-    Copy-Item "$cache/PRNPROBE.EXE" "$root/PRNPROBE.EXE"
+    $guestProbe="$cache/PRNPROBE.EXE"
     Copy-Item "$cache/PRNPROBE.lst" "$root/probe.lst"
 
-    $runtime = New-PhysicalRuntimeStage (Resolve-Path -LiteralPath $PackageRoot).Path
+    $runtime = New-PhysicalRuntimeStage (Resolve-Path -LiteralPath $PackageRoot).Path -TestFiles @($guestProbe)
     $scope = New-IsolatedPackageScope $runtime
     $binary = Get-PackageBinaryRoot $runtime
     $spool = Join-Path $binary 'WINSPOOL.EXE'
@@ -41,9 +41,7 @@ try {
         throw 'Require the approved immutable WINSPOOL companion in the isolated package'
     }
     $tests = Join-Path $runtime 'tests'
-    $null = New-Item -ItemType Directory -Path $tests -Force
-    Copy-Item -LiteralPath "$root/PRNPROBE.EXE" -Destination "$tests/PRNPROBE.EXE"
-    @($source, "$root/PRNPROBE.EXE", $spool, (Join-Path $binary 'WOW32.DLL')) |
+    @($source, $guestProbe, $spool, (Join-Path $binary 'WOW32.DLL')) |
         Get-FileHash | Select-Object Path, Hash | ConvertTo-Json | Set-Content "$root/inputs.json"
 
     $env:TEMP = $runtime; $env:TMP = $runtime
@@ -82,15 +80,9 @@ try {
     $pdf = [IO.File]::ReadAllBytes("$root/normal.pdf")
     if ($pdf.Length -lt 5 -or [Text.Encoding]::ASCII.GetString($pdf, 0, 5) -ne '%PDF-') { throw 'Normal guest print produced no PDF' }
     if (Test-Path "$root/cancel.pdf") { throw 'Cancelled guest print unexpectedly produced output' }
-    $trace = Get-Content "$root/callbacks.txt" -Raw
-    $entries = [regex]::Matches($trace, '(?m)^(\d+) before ret=0022 .*task=([0-9A-Fa-f]+) ')
-    if ($entries.Count -ne ($last.normalCalls + $last.cancelCalls)) { throw 'Original abort callback count mismatch' }
-    foreach ($entry in $entries) {
-        if ([Convert]::ToInt32($entry.Groups[2].Value, 16) -ne $last.task -or
-                $trace -notmatch ('(?m)^' + $entry.Groups[1].Value + ' after ret=0022 .*task=' + $entry.Groups[2].Value + ' ')) {
-            throw 'Original abort callback did not return on its owning task'
-        }
-    }
+    # The guest AbortProc checks its HDC and GetCurrentTask on every call;
+    # errors=0 above is the retained identity assertion. The former optional
+    # host callback-frame text reporter was removed in T483 S3 P6.
     'PASS real Win16 original HDC print/abort normal-cancel cleanup witness' | Set-Content "$root/result.txt"
     '0' | Set-Content "$root/result.exit"
 } catch {
