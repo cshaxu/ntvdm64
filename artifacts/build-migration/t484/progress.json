@@ -1,21 +1,19 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "6c251889770bb84115d08a8eb8ce1a13468f2089",
+  "head": "9617bb1044d034368c6362ea65cecfbf6cc3498e",
   "worktree_status": [
-    " M assets/release/GRP.EXE",
     " M assets/release/addon-manifest.json",
+    " M assets/release/path95.exe",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M src/addon/grp/grp.c",
-    " M test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1",
+    " M src/addon/path95/README.md",
+    " M src/addon/path95/path95.c",
     " M test/integration/ntvdm64-386/New-Win95ProbeCopy.ps1",
-    " M test/integration/ntvdm64-386/verify-win31-identity.ps1",
-    " M test/observation/isolated_package_cleanup.ps1",
-    " M test/observation/verify-owned-guest-cleanup.ps1",
-    " M tools/win31-path/APPLY.CMD",
-    "?? docs/etc/evidence/t484-s4-guest-copy-ownership.md",
-    "?? tools/copy-guest-probe.cmd",
-    "?? tools/create-guest-probe.cmd"
+    " M test/integration/ntvdm64-386/README.md",
+    " D test/integration/ntvdm64-386/relocate-win95-hive-equal.py",
+    "?? docs/etc/evidence/t484-s4-hive-relocation.md",
+    "?? test/addon/",
+    "?? tools/relocate-guest-hives.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -492,6 +490,7 @@
       "state": "changed",
       "current_sha256": "8a744ad4186d5d12eaec146018ebcbf10fff447e8a37b9a74373f7cf14bf5d7f",
       "revisions": [
+        "9617bb1044d034368c6362ea65cecfbf6cc3498e",
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
         "dca9832679063ea8f8485fc990c18df9adc8d959",
@@ -501,7 +500,8 @@
         "docs/etc/evidence/t484-s3-controller-paths.md",
         "docs/etc/evidence/t484-s3-identity-fields.md",
         "docs/etc/evidence/t484-s3-pif-memory.md",
-        "docs/etc/evidence/t484-s3-vm-identity.md"
+        "docs/etc/evidence/t484-s3-vm-identity.md",
+        "docs/etc/evidence/t484-s4-guest-copy-ownership.md"
       ],
       "completion": "pending-producer-migration",
       "decision": {
@@ -2072,6 +2072,7 @@
       "state": "changed",
       "current_sha256": "66886afdfaa2fbeb865d455cef96b262825a03df74bff08cc8cb528b36606d6a",
       "revisions": [
+        "9617bb1044d034368c6362ea65cecfbf6cc3498e",
         "9fcf67eee0f6be324819a4ec9972b3107d2e91f5",
         "27b6984b84231813c7221dd841a8205032f4e309",
         "000da3d05a87ac283b1762cf9d9bf6a21268a2a1",
@@ -2087,6 +2088,7 @@
         "docs/etc/evidence/t484-s4-clipboard-preparation.md",
         "docs/etc/evidence/t484-s4-device-inputs.md",
         "docs/etc/evidence/t484-s4-fcb-preparation.md",
+        "docs/etc/evidence/t484-s4-guest-copy-ownership.md",
         "docs/etc/evidence/t484-s4-native-output-preparation.md",
         "docs/etc/evidence/t484-s4-physical-stage.md",
         "docs/etc/evidence/t484-s4-stage-identity-refresh.md"
@@ -6644,6 +6646,12 @@
     }
   ],
   "commits": {
+    "9617bb1044d034368c6362ea65cecfbf6cc3498e": {
+      "subject": "T484 S4 P33: regularize guest ownership and historical temporary names",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-guest-copy-ownership.md"
+      ]
+    },
     "6c251889770bb84115d08a8eb8ce1a13468f2089": {
       "subject": "T484 S4 P32: prepare dialog applications and program groups through CMD",
       "evidence": [

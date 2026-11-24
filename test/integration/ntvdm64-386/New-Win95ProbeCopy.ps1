@@ -35,14 +35,8 @@ try {
 if($LASTEXITCODE){throw 'Owned guest installation copy failed'}
 # Relocate only the hives and configuration consumed by this isolated case.
 # Do not run the broad installation migrator over unrelated Win95 PIF formats.
-foreach($hive in 'SYSTEM.DAT','USER.DAT'){
- $path="$dest/$hive"
- $candidate=Join-Path $task "$hive.CANDIDATE"
- & python "$PSScriptRoot/relocate-win95-hive-equal.py" $path $candidate $source $dest | Out-Host
- if($LASTEXITCODE){throw 'Isolated guest hive path relocation failed'}
- [IO.File]::SetAttributes($path,[IO.FileAttributes]::Normal)
- [IO.File]::Copy($candidate,$path,$true)
-}
+& "$repo/tools/relocate-guest-hives.cmd" $dest $source $task *> "$task/hive-relocation.log"
+if($LASTEXITCODE){throw 'Isolated guest hive path relocation failed'}
 foreach($file in Get-ChildItem $dest -Recurse -File | Where-Object {$_.Extension -in '.INI','.CMD','.NT'}) {
  $enc=[Text.Encoding]::GetEncoding(28591)
  $s=$enc.GetString([IO.File]::ReadAllBytes($file.FullName))

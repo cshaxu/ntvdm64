@@ -1963,3 +1963,5 @@ post-publication targeted checks.
 - [T484 S4 memory-transition preparation](evidence/t484-s4-memory-preparation.md)
 - [T484 S4 Video7 preparation](evidence/t484-s4-video7-preparation.md)
 - [T484 S4 ForceDOS preparation](evidence/t484-s4-forcedos-preparation.md)
+
+- [T484 S4 layout-preserving hive preparation](evidence/t484-s4-hive-relocation.md).

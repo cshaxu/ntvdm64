@@ -262,7 +262,7 @@ not DBCS or guest-runtime codepage-switch acceptance.
 disposable Win95 installation copy. Supply the authored NTVDM64.386, INSIGNIA driver,
 test interrupt observer, diagnostic real-command package and console observer.
 The copy path must be an unused short `O:\tmp` path of the same length as the
-source, so `relocate-win95-hive-equal.py` can update copied registry values
+source, so `tools/relocate-guest-hives.cmd` and released `PATH95.EXE replace-equal` can update copied registry values
 without changing their extents. The test leaves the source installation
 unchanged, assigns conventional memory explicitly in its PIFs, and checks
 that native and DOS editor menus belong to different VMs and both commands
