@@ -1,13 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "de7c3e279caa704e8f81da6cde4871d4db97ce5b",
+  "head": "d483cdd4608d21fd9db70514736d56d41bd01102",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/verify-win31-profile.ps1",
-    " M test/integration/verify-wow-logon-gameplay.ps1",
-    "?? docs/etc/evidence/t484-s3-supplemental-producers.md"
+    " M test/integration/verify-wow-edit-tabstop-guest.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s3-tabstop-reader.md",
+    "?? test/observation/tabstop_reader.cs"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6486,6 +6488,12 @@
     }
   ],
   "commits": {
+    "d483cdd4608d21fd9db70514736d56d41bd01102": {
+      "subject": "M0 T484 S3 P194: consolidate supplemental fixture producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-supplemental-producers.md"
+      ]
+    },
     "de7c3e279caa704e8f81da6cde4871d4db97ce5b": {
       "subject": "M0 T484 S3 P193: isolate native output probe and record strict failure",
       "evidence": [

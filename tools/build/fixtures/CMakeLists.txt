@@ -387,21 +387,22 @@ include(wow-parameter-map.cmake)
 include(wow-return-unwind.cmake)
 include(wow-reverse-construction.cmake)
 
-# The existing managed window observer is compiled once by the native compiler,
-# rather than compiled from PowerShell source on every matrix launch.
+# Managed observation declarations use the native compiler and tracked cache.
 if(NTVDM_ARCH STREQUAL "x64")
-  set(window_inspector_compiler "$ENV{SystemRoot}/Microsoft.NET/Framework64/v4.0.30319/csc.exe")
-  file(TO_NATIVE_PATH "${NTVDM_REPO}/test/observation/window_inspector.cs" window_inspector_source)
-  file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/window-inspector.dll" window_inspector_output)
-  add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/window-inspector.dll"
-    COMMAND "${window_inspector_compiler}" /nologo /target:library /platform:anycpu
-      "/out:${window_inspector_output}"
-      "${window_inspector_source}"
-    DEPENDS "${NTVDM_REPO}/test/observation/window_inspector.cs" "${window_inspector_compiler}"
-    VERBATIM)
-  add_custom_target(window-inspector DEPENDS "${CMAKE_BINARY_DIR}/window-inspector.dll")
+  set(observer_compiler "$ENV{SystemRoot}/Microsoft.NET/Framework64/v4.0.30319/csc.exe")
+  foreach(name IN ITEMS window-inspector tabstop-reader)
+    string(REPLACE "-" "_" source_name "${name}")
+    set(source "${NTVDM_REPO}/test/observation/${source_name}.cs")
+    file(TO_NATIVE_PATH "${source}" native_source)
+    file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/${name}.dll" native_output)
+    add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/${name}.dll"
+      COMMAND "${observer_compiler}" /nologo /target:library /platform:anycpu
+        "/out:${native_output}" "${native_source}"
+      DEPENDS "${source}" "${observer_compiler}"
+      VERBATIM)
+    add_custom_target(${name} DEPENDS "${CMAKE_BINARY_DIR}/${name}.dll")
+  endforeach()
 endif()
-
 fixture(win31-probe-paths CL test/observation/win31_probe_paths.c)
 
 if(NTVDM_ARCH STREQUAL "x64")

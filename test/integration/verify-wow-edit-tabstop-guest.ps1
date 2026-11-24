@@ -14,6 +14,9 @@ $null=New-Item -ItemType Directory -Path $out
 function Phase($x){ [IO.File]::AppendAllText((Join-Path $out 'tabstop-snapshot.phase.txt'),([DateTime]::UtcNow.ToString('o')+' '+$x+"`n")) }
 Phase 'start'
 $probe=(Resolve-Path -LiteralPath $ProbePath).Path
+& "$repo/tools/build-fixtures.cmd" x64 tabstop-reader *> "$out/reader-build.log"
+if($LASTEXITCODE){throw 'Tab-stop reader build failed'}
+[void][Reflection.Assembly]::LoadFrom("$repo/build/.ninja/fixtures-x64/tabstop-reader.dll")
 # Bind the raw build DLL to the staged manifest before using its map RVA.
 $mapText=Get-Content $WowMap -Raw
 $baseMatch=[regex]::Match($mapText,'Preferred load address is ([0-9A-Fa-f]+)')
@@ -42,16 +45,7 @@ try {
  Phase 'before-observer'
  $proc=[Diagnostics.Process]::Start($start);$null=$proc.Handle
  Phase ('observer='+$proc.Id)
- Phase 'before-add-type'
- Add-Type -TypeDefinition @"
-using System; using System.Runtime.InteropServices;
-public static class TabstopReader {
- [DllImport("kernel32.dll", SetLastError=true)] public static extern IntPtr OpenProcess(uint access, bool inherit, int pid);
- [DllImport("kernel32.dll", SetLastError=true)] public static extern bool ReadProcessMemory(IntPtr h, IntPtr address, byte[] bytes, UIntPtr count, out UIntPtr got);
- [DllImport("kernel32.dll")] public static extern bool CloseHandle(IntPtr h);
-}
-"@
- Phase 'add-type-done'
+
  $report=Join-Path $tests 'TABTEST.BIN';$snapshots=@()
  foreach($stage in 1,2) {
   $required=if($stage -eq 1){138}else{184};$deadline=[DateTime]::UtcNow.AddSeconds(30)
