@@ -29,14 +29,14 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
-S4 P37 migrates Win31 editor and matrix configuration preparation to CMD, reusing guest-ini and PIF; [evidence](../etc/evidence/t484-s4-win31-editor-preparation.md) records exact restoration and real DOSONLY=0/1 normal exits. Optional monitor preparation and diagnostic editor acceptance remain pending. Census unchanged:348/355 disposed,7 pending, supplemental5.
+S4 P38 closes shared Win31 matrix preparation with CMD monitor copy and identity binding. The isolated guest and live registry snapshot passed. Dual-editor diagnostic acceptance remains pending. [Evidence](../etc/evidence/t484-s4-win31-monitor-preparation.md).
 
 S1 inventory/design and S2 native host migration are closed. The
 [execution plan](../etc/operations/t484-cmd-build-release-plan.md) retains
 the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S6 clean,
 interpreter-free end-to-end acceptance have not completed.
 
-S4 deliveries through P37 are complete; detailed results and limitations remain in
+S4 deliveries through P38 are complete; detailed results and limitations remain in
 these records. Shared primitives alone never close an unverified caller.
 
 | P | Delivered scope and evidence |
@@ -87,7 +87,7 @@ these records. Shared primitives alone never close an unverified caller.
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **348/355 disposed,7 pending**, plus5 supplemental
+Current census: **349/355 disposed,6 pending**, plus5 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;

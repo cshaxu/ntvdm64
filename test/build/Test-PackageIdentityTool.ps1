@@ -219,4 +219,21 @@ foreach($invalid in @($testInput,"$out/missing.dll",$out,"$repo/assets/release/W
  if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw "Invalid/colliding native peer accepted: $invalid"}
 }
 'PASS structured/flat native peer copying and type/path/collision rejection'
+$bound=Join-Path $out 'bound-monitor.exe'
+Copy-Item "$repo/assets/release/ntmon.exe" $bound
+$boundHash=(Get-FileHash $bound).Hash
+$stage=$null
+try {
+ $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity -TestFiles @($bound) -BindTestIdentity
+ $expected=Get-IsolatedPackageIdentity "$stage/system32/ntsrv.exe"
+ if((Get-IsolatedPackageIdentity "$stage/system32/bound-monitor.exe") -ne $expected){throw 'Test attachment identity mismatch'}
+ if((Get-IsolatedPackageIdentity $bound) -eq $expected -or (Get-FileHash $bound).Hash -ne $boundHash){throw 'Test attachment source changed'}
+ if(Test-Path "$stage/stage-identities.tmp"){throw 'Identity write left a staging temporary'}
+} finally {if($stage){Remove-PhysicalRuntimeStage $stage}}
+foreach($options in @(@{TestFiles=@($bound)},@{FreshPackageIdentity=$true},@{FreshPackageIdentity=$true;TestFiles=@($testInput)})){
+ $stage=$null
+ try {$stage=New-PhysicalRuntimeStage $package -BindTestIdentity @options} catch {}
+ if($stage){Remove-PhysicalRuntimeStage $stage;throw 'Invalid identity attachment accepted'}
+}
+'PASS test attachment uses fresh identity, leaves source unchanged and rejects invalid options'
 $global:LASTEXITCODE=0

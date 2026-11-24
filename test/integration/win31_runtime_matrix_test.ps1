@@ -110,6 +110,15 @@ foreach ($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OB
 try {
     & "$repo/tools/prepare-win31-matrix.cmd" prepare $install $output 0 ([int][bool]$AllowUserInstallation)
     if($LASTEXITCODE){throw 'Matrix profile preparation failed'}
+    $attachment=@{}
+    if($WorkerCloseMonitor -or $RegistrySnapshotMonitor) {
+        $monitorSource=if($WorkerCloseMonitor){$WorkerCloseMonitor}else{$RegistrySnapshotMonitor}
+        $monitorSource=(Resolve-Path -LiteralPath $monitorSource).Path
+        # Older diagnostic packages can already carry monitor-rpc-test.exe.
+        & "$repo/tools/prepare-test-inputs.cmd" $output $monitorSource matrix-monitor.exe
+        if($LASTEXITCODE){throw 'Matrix monitor input preparation failed'}
+        $attachment=@{TestFiles=@("$output/matrix-monitor.exe");BindTestIdentity=$true}
+    }
     foreach ($case in @(
         @{Name='std-dosonly0'; Command='WINSTD.CMD'; Enhanced=$false; DosOnly=$false},
         @{Name='std-dosonly1'; Command='WINSTD.CMD'; Enhanced=$false; DosOnly=$true},
@@ -130,14 +139,9 @@ try {
         $scheduledRun16=@()
         $captureCount=0
         try {
-            $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity
+            $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity @attachment
+            if($attachment.Count){$monitor=Join-Path (Get-PackageBinaryRoot $stage) 'matrix-monitor.exe'}
             $scope=New-IsolatedPackageScope $stage
-            if($WorkerCloseMonitor -or $RegistrySnapshotMonitor) {
-                $monitor=Join-Path $stage 'system32/monitor-rpc-test.exe'
-                Copy-Item -LiteralPath $(if($WorkerCloseMonitor){$WorkerCloseMonitor}else{$RegistrySnapshotMonitor}) -Destination $monitor
-                & "$repo/build/.ninja/build-tools/ntvdm-package-id.exe" (([guid](([guid]::new([Convert]::FromHexString((Get-IsolatedPackageIdentity "$stage/system32/ntsrv.exe")))))).ToString()) $monitor
-                if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
-            }
             $pifName=if($PreparedProfile){'WIN.PIF'}elseif($case.Enhanced){'WIN386.PIF'}else{'WINSTD.PIF'}
             [ordered]@{case=$case.Name; package=$package; packageId=(Get-IsolatedPackageIdentity "$stage\system32\ntvdm.exe");
                 ntvdmSha256=(Get-FileHash "$stage\system32\ntvdm.exe").Hash;

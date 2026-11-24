@@ -1971,3 +1971,4 @@ post-publication targeted checks.
 - [T484 S4 guest INI reuse and naming](evidence/t484-s4-guest-ini-reuse.md).
 
 - [T484 S4 Win31 editor and matrix preparation](evidence/t484-s4-win31-editor-preparation.md).
+- [T484 S4 Win31 matrix monitor preparation](evidence/t484-s4-win31-monitor-preparation.md).

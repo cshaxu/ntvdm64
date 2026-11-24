@@ -366,9 +366,9 @@
     "evidence": "docs/etc/evidence/t484-s4-wow-app-preparation.md"
   },
   "test/integration/win31_runtime_matrix_test.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P63 native witnesses, P172 cached inspector and P173 native fixed path binding delivered. Runtime/package preparation still requires complete-chain reconciliation; do not count as closed.",
-    "evidence": "docs/etc/evidence/t484-s3-probe-paths.md"
+    "status": "migrated-delivered",
+    "reason": "P37 and P38 move witness binding, INI and DOSONLY preparation, restoration, and optional monitor staging to CMD/native. Real DOSONLY=0/1 normal exits and a live registry snapshot pass.",
+    "evidence": "docs/etc/evidence/t484-s4-win31-monitor-preparation.md"
   },
   "test/lib-win32/crt-compat/verify-crt-compat.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-crt.md",
