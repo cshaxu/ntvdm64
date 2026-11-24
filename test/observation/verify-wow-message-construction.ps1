@@ -1,6 +1,5 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot,[Parameter(Mandatory)][string]$CompilerDriver,
- [switch]$Transaction,[string]$OriginalDialogSource)
+param([Parameter(Mandatory)][string]$BuildRoot,[switch]$Transaction)
 # Supplementary exact selected original bodies, not a substitute runtime.
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
@@ -11,27 +10,7 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or
  throw 'Fresh disposable build evidence required'
 }
 $null=New-Item -ItemType Directory $root
-$baseline=if($Transaction){'4b8a7c8ae6eaaca3350d640650dd9d57201fd581'}else{'58fa75e55'}
-$steps=[Collections.Generic.List[object]]::new();$selections=@()
-function Read-Source($path,$old){
- if($old){$baselinePath=$path -replace '^src/mvdm-host/','src/mvdm/';$baselinePath=$baselinePath -replace '^src/compat/include/wow_message_lifetime.h$','src/wow32-dll/include/wow_message_lifetime.h' -replace '^src/compat/wow_message_lifetime.c$','src/wow32-dll/source/wow_message_lifetime.c';$value=(& git -C $repo show "${baseline}:$baselinePath") -join "`n";if($LASTEXITCODE){throw "Baseline source $path"};return $value}
- [IO.File]::ReadAllText((Join-Path $repo $path)).Replace("`r`n","`n")
-}
-function Region($text,$start,$end,$label){
- $at=$text.IndexOf($start,[StringComparison]::Ordinal);if($at -lt 0){throw "Missing $label start"}
- $last=$text.IndexOf($end,$at,[StringComparison]::Ordinal);if($last -lt 0){throw "Missing $label end"}
- $script:selections+=@{name=$label;offset=$at;length=$last+$end.Length-$at}
- $text.Substring($at,$last+$end.Length-$at)
-}
-function Body($text,$name){
- $matchesFound=[regex]::Matches($text,'(?m)^(?:BOOL|VOID|DWORD|PVOID|VPVOID|LONG|ULONG|HWND)\s+(?:FASTCALL\s+)?'+[regex]::Escape($name)+'\s*\([^;{}]*\)\s*\{')
- if($matchesFound.Count -ne 1){throw "One exact body required: $name"}
- $m=$matchesFound[0];$at=$m.Index+$m.Length;$depth=1
- while($depth -and $at -lt $text.Length){if($text[$at] -eq '{'){++$depth}elseif($text[$at] -eq '}'){--$depth};++$at}
- if($depth){throw "Unbalanced $name"}
- $script:selections+=@{name=$name;offset=$m.Index;length=$at-$m.Index}
- $text.Substring($m.Index,$at-$m.Index)
-}
+$steps=[Collections.Generic.List[object]]::new()
 function Owned($name,$file,$arguments,$seconds,$expected){
  $start=@{FilePath=$file;WorkingDirectory=$root;WindowStyle='Hidden';PassThru=$true;RedirectStandardOutput="$root/$name.stdout.log";RedirectStandardError="$root/$name.stderr.log"}
  if($arguments.Count){$start.ArgumentList=$arguments}
@@ -43,136 +22,25 @@ function Owned($name,$file,$arguments,$seconds,$expected){
  if($p.ExitCode -ne $expected){throw "$name actual $($p.ExitCode), expected $expected"}
 }
 try{
- $fixture="$PSScriptRoot/wow_message_construction_fixture.c"
- Get-FileHash "$repo/src/mvdm-host/inc/wow.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$repo/src/mvdm-host/wow32/wmdisp32.h","$repo/src/mvdm-host/wow32/wmsg16.c","$repo/src/mvdm-host/wow32/wmsgcb.c","$repo/src/compat/include/wow_control_message_abi.h","$repo/src/mvdm-host/wow32/wparam.c","$repo/src/mvdm-host/wow32/walias.h","$repo/src/compat/include/wow_message_lifetime.h","$repo/src/compat/include/wow_message_progress.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
- Get-FileHash "$repo/src/mvdm-host/wow32/wudlg.c","$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/mvdm-host/wow32/wmdisp32.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
- foreach($kind in @('baseline','candidate')){
-  $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
-  $lifetime=Read-Source 'src/compat/include/wow_message_lifetime.h' ($old -and $Transaction)
-  [IO.File]::WriteAllText("$dir/message_construction_lifetime.h",$lifetime)
-  $wow=Read-Source 'src/mvdm-host/inc/wow.h' $old
-  $header=Read-Source 'src/mvdm-host/wow32/wmdisp32.h' $old
-  $dispatch=Read-Source 'src/mvdm-host/wow32/wmdisp32.c' $old
-  $messages=Read-Source 'src/mvdm-host/wow32/wmsg16.c' $old
-  $map=Read-Source 'src/mvdm-host/wow32/wparam.c' $old
-  $types='#pragma pack(push,1)' + "`n" +
-   (Region $wow 'typedef struct _PARMWP' '} PARM16, *PPARM16;' 'callback-records') + "`n" +
-   (Region $wow 'typedef struct _POINT16' '} POINT16;' 'point16') + "`n" +
-   (Region $wow 'typedef struct _MSG16' '} MSG16;' 'message16') + "`n" +
-   (Region $wow 'typedef struct _CREATESTRUCT16' 'typedef CREATESTRUCT16 UNALIGNED *PCREATESTRUCT16;' 'create16') + "`n" +
-   (Region $wow 'typedef struct _MDICREATESTRUCT16' 'typedef MDICREATESTRUCT16 UNALIGNED *PMDICREATESTRUCT16;' 'mdi16') +
-   "`n" + (Region $wow 'typedef struct _RECT16' 'typedef RECT16 UNALIGNED *PRECT16;' 'rect16') +
-   "`n" + (Region $wow 'typedef struct _DROPSTRUCT16' 'typedef DROPSTRUCT16 UNALIGNED *PDROPSTRUCT16;' 'drop16') +
-   "`n" + (Region $wow 'typedef struct _MOUSEHOOKSTRUCT16' 'typedef MOUSEHOOKSTRUCT16 UNALIGNED *PMOUSEHOOKSTRUCT16;' 'mouse-hook16') +
-   "`ntypedef VPVOID VPCREATESTRUCT16;`n" +
-   (Region $wow 'typedef struct _CBT_CREATEWND16' 'typedef CBT_CREATEWND16 UNALIGNED *PCBT_CREATEWND16;' 'cbt-create16') +
-   "`n" + (Region $wow 'typedef struct _CBTACTIVATESTRUCT16' 'typedef CBTACTIVATESTRUCT16 UNALIGNED *PCBTACTIVATESTRUCT16;' 'cbt-activate16') +
-   (Region $wow 'typedef struct _EVENTMSG16' 'typedef EVENTMSG16 UNALIGNED *PEVENTMSG16;' 'event-message16') +
-   "`n#pragma pack(pop)`n" +
-   (Region $header 'typedef struct _WM32MSGPARAMEX *LPWM32MSGPARAMEX;' '} WM32MSGPARAMEX;' 'message-record')
-  $constant=[regex]::Match($wow,'(?m)^#define WM_QUERYDROPOBJECT[^\n]*')
-  if(!$constant.Success){throw 'Original drag-object message identity missing'}
-  $types+="`n"+$constant.Value
-  if(!$old){
-   foreach($name in @('OLDCBEC_SETCOMBOFOCUS','OLDCBEC_KILLCOMBOFOCUS')){
-    $value=[regex]::Match($wow,'(?m)^#define '+$name+'[^\n]*')
-    if(!$value.Success){throw 'Original combo message constant missing'}
-    $types+="`n"+$value.Value
-   }
-   $types+="`n#include `"$repo/src/compat/include/wow_control_message_abi.h`"`n"
-  }
-  [IO.File]::WriteAllText("$dir/message_construction_types.h",$types)
-  # The original current text owner now uses the actual inline call scratch.
-  $aliases=Read-Source 'src/mvdm-host/wow32/walias.h' $old
-  $start=$aliases.IndexOf('typedef struct _DLGDATA',[StringComparison]::Ordinal)
-  $end=$aliases.IndexOf('#define MSG16NEEDSTHUNKING',$start,[StringComparison]::Ordinal)
-  if($start -lt 0 -or $end -lt 0){throw 'Original message records missing'}
-  [IO.File]::WriteAllText("$dir/message_construction_messages.h",$aliases.Substring($start,$end-$start))
-  [IO.File]::WriteAllText("$dir/message_construction_map_types.h",(Region $map 'typedef struct tagParamNode* LPPARAMNODE;' 'MAPPARAM gParamMap;' 'original-map-records'))
-  $bodies=@(Body (Read-Source 'src/mvdm-host/wow32/walloc16.c' $old) 'stackalloc16')
-  foreach($name in @('FindParamMap','GetParam16','AddParamMap','ParamMapUpdateNode','DeleteParamMap','FreeParamMap')){$bodies+=Body $map $name}
-  foreach($name in @('WM32MDICreate','WM32Create','WM32GetText','WM32SetText','WM32GetDlgCode','WM32AskCBFormatName','WM32WinHelp','WM32SizeClipBoard','WM32DropObject')){$bodies+=Body $dispatch $name}
-  $controls=Read-Source 'src/mvdm-host/wow32/wcntl32.c' $old
-  $bodies+=Body $controls 'WM32CBDir'
-  if($Transaction){
-   foreach($name in @('WM32EMGetRect','WM32EMSetRect','WM32EMReplaceSel','WM32EMGetLine','WM32EMSetTabStops','WM32CBAddString','WM32CBGetLBText','WM32CBGetDropDownControlRect','WM32LBGetText','WM32LBDir','WM32LBGetSelItems','WM32LBSetTabStops','WM32LBGetItemRect','WM32LBAddString')){
-    $body=Body $controls $name
-    # Preserve the original explicit INT-to-WORD assignment, not a source edit
-    # to satisfy a stricter fixture warning policy than the historical owner.
-    if($name -eq 'WM32EMGetLine'){$body="#pragma warning(push)`n#pragma warning(disable:4244)`n"+$body+"`n#pragma warning(pop)"}
-    $bodies+=$body
-   }
-   $bodies+=Body (Read-Source 'src/mvdm-host/wow32/wcommdlg.c' $old) 'WM32msgSHAREVIOLATION'
-   $hooks=Read-Source 'src/mvdm-host/wow32/wowhooks.c' $old
-   foreach($name in @('ThunkCbtHook','GetEventMessage16','ThunkJournalHook','ThunkMouseHook')){$bodies+=Body $hooks $name}
-  }
-  $case=Region $messages '    case WM_SETTEXT:' '    case WM_ACTIVATEAPP:' 'text-thunk-case'
-  $case=$case.Substring(0,$case.LastIndexOf('    case WM_ACTIVATEAPP:'))
-  $releaseAt=$messages.IndexOf('VOID FASTCALL UnThunkWMMsg16(')
-  $release=Region $messages.Substring($releaseAt) '    case WM_SETTEXT:' '    case WM_GETTEXT:' 'text-unthunk-case'
-  $release=$release.Substring(0,$release.LastIndexOf('    case WM_GETTEXT:'))
-  $bodies+='BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex) { LONG lParam=lpmpex->Parm16.WndProc.lParam; PLONG plParamNew=&lpmpex->lParam; switch(lpmpex->Parm16.WndProc.wMsg) {'+"`n"+$case+"`n"+'} return TRUE; }'
-  $bodies+='VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex) { switch(lpmpex->Parm16.WndProc.wMsg) {'+"`n"+$release+"`n"+'} }'
-  if(!$old){
-   $combo=Read-Source 'src/mvdm-host/wow32/wmsgcb.c' $false
-   foreach($name in @('ThunkCBMsg16','UnThunkCBMsg16')){$bodies+=Body $combo $name}
-  }
-  if(!$old -or $Transaction){
-   if($old){$adapter=Read-Source 'src/compat/wow_message_lifetime.c' $true}
-   else {
-    $adapter=Read-Source 'src/mvdm-host/wow32/wmdisp32.c' $false
-    $lifetimeStart=$adapter.IndexOf('#include "compat/include/wow_worker_state.h"')
-    if($lifetimeStart -lt 0){throw 'Missing original-owner message lifetime interval'}
-    $adapter=$adapter.Substring($lifetimeStart)
-   }
-   $bodies+=[regex]::Replace($adapter,'(?m)^#include[^\n]*\n','')
-  }
-  if($Transaction -and !$old){
-   $branch=Region $dispatch '    if (uMsg == EM_SCROLLCARET) {' "        return 0;   // notification message, no return code`n    }" 'native-only-return'
-   $marker='        stack.completed = TRUE; /* DIV-349: successful native-only notification. */'
-   if(!$branch.Contains($marker)){throw 'Successful native-only return must commit, not restore its nested call'}
-   $dialog=Region (Read-Source 'src/mvdm-host/wow32/wcommdlg.c' $false) "UINT APIENTRY`nWCD32CommonDialogProc(" 'ULONG FASTCALL WCD32ChooseColor' 'common-dialog-normal-return'
-   $filter=Region $dialog '            } else if (uMsg == msgWOWCHOOSEFONT) {' '            } else {' 'common-dialog-filter'
-   $filter=$filter.Substring(0,$filter.LastIndexOf('            } else {'))+'            }'
-   $filter=$filter.Replace('            } else if (','            if (')
-   $dialogFinalizer=Region $dialog '    } __finally {' "`n}`n" 'common-dialog-finalizer'
-   $bodies+='static UINT fixture_common_dialog_filter(UINT uMsg,UINT msgWOWCHOOSEFONT) { wow_message_stack stack; WM32MSGPARAMEX wm32mpex = {0}; wow_message_stack_enter(&stack); __try {'+"`n"+$filter+"`n"+'return 1;'+"`n"+$dialogFinalizer
-   $finalizer=Region $dispatch '    } __finally {' "`n}`n" 'wndproc-transaction-finalizer'
-   foreach($variant in @('current','omitted')){
-    $selected=if($variant -eq 'current'){$branch}else{$branch.Replace($marker,'')}
-    $bodies+='static LONG fixture_notification_'+$variant+'(HWND hwnd,UINT uMsg,UINT uParam,LONG lParam) { wow_message_stack stack; WM32MSGPARAMEX wm32mpex = {0}; (void)uParam; (void)lParam; wow_message_stack_enter(&stack); __try {'+"`n"+$selected+"`n"+'return -1;'+"`n"+$finalizer
-   }
-  }
-  if($Transaction -and !$old){
-   $bodies+=Body $messages 'ThunkMsg16'
-   $bodies+=Body (Read-Source 'src/mvdm-host/wow32/wudlg.c' $false) 'W32DialogFunc'
-   $bodies+=Body (Read-Source 'src/mvdm-host/wow32/wudlg.c' $false) 'WU32IsDialogMessage'
-   if($OriginalDialogSource){
-    $originalDialog=[IO.File]::ReadAllText((Resolve-Path $OriginalDialogSource))
-    $bodies+='#define DIALOG_ORIGINAL_CONTROL 1'
-    $bodies+=(Body $originalDialog 'W32DialogFunc').Replace('W32DialogFunc(', 'fixture_original_dialog(')
-    $bodies+=(Body $originalDialog 'WU32IsDialogMessage').Replace('WU32IsDialogMessage(', 'fixture_original_isdialog(')
-    Get-FileHash $OriginalDialogSource | Export-Csv -NoTypeInformation "$root/dialog-original-input.csv"
-   }
-  }
-  [IO.File]::WriteAllText("$dir/message_construction_exact_body.h",($bodies -join "`n`n"))
-  $define=if($old){'/DBASELINE_IMAGE'}else{''}
-  if($Transaction){$define+=' /DTRANSACTION_GROUP'}
-  $command="@echo off`r`ncall `"$CompilerDriver`" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4700 /wd4701 /wd4706 /wd4127 /wd4213 $define /I`"$repo/src`" /I`"$dir`" `"$fixture`" /Fo`"$dir/unit.obj`" /Fe`"$dir/unit.exe`"`r`nexit /b %errorlevel%`r`n"
-  [IO.File]::WriteAllText("$dir/build.cmd",$command)
-  Owned "compile-$kind" cmd.exe @('/d','/c',"`"$dir/build.cmd`"") 180 0
-  Owned "body-$kind" "$dir/unit.exe" @() 30 $(if($old){1}else{0})
-  Get-FileHash "$dir/message_construction_types.h","$dir/message_construction_map_types.h","$dir/message_construction_exact_body.h","$dir/unit.exe"|Export-Csv -NoTypeInformation "$dir/inputs.csv"
+ $sources=@("$repo/src/mvdm-host/inc/wow.h",
+  "$repo/src/compat/include/wow_message_lifetime.h",
+  "$repo/src/compat/include/wow_message_progress.h",
+  "$repo/src/compat/include/wow_control_message_abi.h")
+ foreach($name in 'wmdisp32.c','wmdisp32.h','wmsg16.c','wmsgcb.c','wparam.c',
+  'walias.h','wudlg.c','walloc16.c','wcntl32.c','wcommdlg.c','wowhooks.c'){
+  $sources+="$repo/src/mvdm-host/wow32/$name"
  }
- $negative=Get-Content "$root/body-baseline.stdout.log" -Raw
- if(!$Transaction -and $negative -notmatch 'abi=64 scratch_offset=56 scratch_slots=2 parm=16'){throw 'Baseline ABI mismatch'}
- if($Transaction){
-  foreach($name in @('TRANSACTION_HEAP_ABORT','TRANSACTION_CREATE_COPY_ABORT','TRANSACTION_NESTED_COPY_ABORT','TRANSACTION_GLOBAL_LOCKED_ABORT','TRANSACTION_CONTROL_ABORT','TRANSACTION_CBT_ABORT')){if($negative -notmatch "(?m)^FAIL $name\r?`$"){throw "Missing P21 transaction negative $name"}}
- }else{
- foreach($name in @('GETTEXT_CONSTRUCTOR','MDI_TITLE_OWNERSHIP','NESTED_CREATE_REJECTION','MAP_FAILURE_TEXT','MAP_NULL_ENTRY','CREATE_DEAD_WINDOW_ROLLBACK')){
-  if($negative -notmatch "(?m)^FAIL $name\r?`$"){throw "Missing baseline defect $name"}
- }
- }
+ Get-FileHash $sources|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
+ & "$repo/tools/build-fixtures.cmd" x86 wow-message-construction *> "$root/build.log"
+ if($LASTEXITCODE){throw 'Native construction build failed'}
+ $kind=if($Transaction){'transaction'}else{'construction'}
+ $native="$repo/build/.ninja/fixtures-x86"
+ Copy-Item "$native/wow-message-$kind-contract.exe" "$root/unit.exe"
+ Get-FileHash "$native/message-$kind/*.h","$root/unit.exe",$PSCommandPath,
+  "$repo/test/observation/wow_message_construction_fixture.c",
+  "$repo/tools/build/fixtures/wow-construction.cmake",
+  "$repo/tools/build/SourceProjection.cmake"|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Owned body-candidate "$root/unit.exe" @() 30 0
  $current=Get-Content "$root/body-candidate.stdout.log" -Raw
  if($current -notmatch 'COMBO_DIR modes=4 errors=0 exact_functions=2 guest_proof=0'){throw 'Incomplete exact combo converter proof'}
  if($current -notmatch 'MESSAGE_CONSTRUCTION failures=0 scenarios=\d+ abi=72 scratch_offset=56 scratch_slots=4 parm=16'){throw 'Incomplete candidate ownership/ABI evidence'}
@@ -181,7 +49,7 @@ try{
   $families=@([regex]::Matches($current,'(?m)^TRANSACTION_FAMILY index=(\d+) message=([0-9A-F]+) modes=5 errors=0 copy_fault=([01])\r?$'))
   $hookCases=@([regex]::Matches($current,'(?m)^HOOK_COMPLETION family=([01]) mode=([0-3]) trapped=([01]) restored=([01])\r?$'))
   if($hookCases.Count -ne 8){throw 'Missing journal/mouse completion paths'}
-  $expectedDialogControl=if($OriginalDialogSource){1}else{0}
+  $expectedDialogControl=0
   if($current -notmatch "DIALOG_GROUP errors=0 original_control=$expectedDialogControl guest_proof=0"){throw 'Incomplete exact dialog entry evidence'}
   if(@([regex]::Matches($current,'(?m)^DIALOG_ENTRY original=0 mode=')).Count -ne 5 -or
      @([regex]::Matches($current,'(?m)^ISDIALOG_ENTRY original=0 mode=')).Count -ne 3){throw 'Missing dialog entry cases'}
@@ -191,8 +59,6 @@ try{
    if($i -notin @(4,11,14,16) -and $families[$i].Groups[3].Value -ne '1'){throw 'Missing actual constructor-copy fault'}
   }
  }
- $selections|ConvertTo-Json|Set-Content "$root/selections.json"
- foreach($row in Import-Csv "$root/source-inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Construction source changed during group'}}
- foreach($row in Import-Csv "$root/transaction-inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Transaction source changed during group'}}
- @{passed=$true;baseline=$baseline;negative='six named source defects';scope='exact-body service doubles, not runtime/guest proof';end=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json|Set-Content "$root/result.json"
+ foreach($row in @((Import-Csv "$root/inputs.csv")+(Import-Csv "$root/source-inputs.csv"))){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Construction inputs changed during run'}}
+ @{passed=$true;scope='current exact-body service doubles, not runtime/guest proof';end=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json|Set-Content "$root/result.json"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";exit 1}

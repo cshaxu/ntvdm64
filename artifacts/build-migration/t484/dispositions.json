@@ -846,5 +846,10 @@
     },
     "reason": "Existing native target uses shared CMD entry; x86/x64 default/extended28 observations, full build/cache/publication hash verification pass",
     "status": "retained-native-delegate"
+  },
+  "test/observation/verify-wow-message-construction.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Current native construction/transaction contracts pass; historical builders and fixture-only controls retired; full cached build/cache/publication verified",
+    "evidence": "docs/etc/evidence/t484-s3-construction-native.md"
   }
 }

@@ -1699,3 +1699,5 @@ post-publication targeted checks.
 - [T484 S3 P104 small WOW contracts and retention](evidence/t484-s3-small-wow.md).
 
 - [T484 S3 P105 native capture reconciliation](evidence/t484-s3-capture-native.md).
+
+- [T484 S3 P106 current construction contracts](evidence/t484-s3-construction-native.md).

@@ -1,28 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "99ec7197bee544b7b45af4906d6b97df6b7b1a5d",
+  "head": "75ed23d75e3aefd026543c6174a46a0f87790d05",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-message-capture.ps1",
+    " M test/observation/verify-wow-message-construction.ps1",
+    " M test/observation/wow_message_construction_fixture.c",
     " M tools/build-fixtures.cmd",
-    "?? artifacts/build-migration/t484/s3-capture-native/",
-    "?? docs/etc/evidence/t484-s3-capture-native.md"
+    " M tools/build/SourceProjection.cmake",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-construction-native/",
+    "?? docs/etc/evidence/t484-s3-construction-native.md",
+    "?? tools/build/fixtures/wow-construction.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 119,
-    "unchanged": 109,
+    "changed": 120,
+    "unchanged": 108,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 60,
+    "migrated-delivered": 61,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 98,
+    "requires-disposition-reconciliation": 97,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3286,8 +3290,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "c70c31d6ce6d2b24e2e3247b926649a29f30b5f5494e43cfe22feb7d1ce7616e",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "75ed23d75e3aefd026543c6174a46a0f87790d05"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-capture-native.md"
+      ],
       "completion": "retained-native-delegate",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-capture-native.md",
@@ -3304,12 +3312,16 @@
       "id": "B0175",
       "file": "test/observation/verify-wow-message-construction.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "d14af1cc0fc289e87f467ce3e8d573ec341a230bd66ea6e825d5a8189096d677",
+      "state": "changed",
+      "current_sha256": "9d5311ef9696c6618992a018e260d22522a0e29d84361b7ec9f63875b24cabb6",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Current native construction/transaction contracts pass; historical builders and fixture-only controls retired; full cached build/cache/publication verified",
+        "evidence": "docs/etc/evidence/t484-s3-construction-native.md"
+      }
     },
     {
       "id": "B0176",
@@ -5666,6 +5678,12 @@
     }
   ],
   "commits": {
+    "75ed23d75e3aefd026543c6174a46a0f87790d05": {
+      "subject": "T484 S3 P105 reconcile native capture control with CMD entry",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-capture-native.md"
+      ]
+    },
     "99ec7197bee544b7b45af4906d6b97df6b7b1a5d": {
       "subject": "T484 S3 P104 consolidate GDI probe and migrate small WOW contracts",
       "evidence": [
@@ -8053,20 +8071,20 @@
       "file": "test/observation/verify-wow-message-construction.ps1",
       "hits": [
         {
-          "line": 9,
+          "line": 8,
           "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
         },
         {
-          "line": 91,
-          "text": "[IO.File]::WriteAllText(\"$dir/message_construction_map_types.h\",(Region $map 'typedef struct tagParamNode* LPPARAMNODE;' 'MAPPARAM gParamMap;' 'original-map-records'))"
+          "line": 37,
+          "text": "$native=\"$repo/build/.ninja/fixtures-x86\""
         },
         {
-          "line": 93,
-          "text": "foreach($name in @('FindParamMap','GetParam16','AddParamMap','ParamMapUpdateNode','DeleteParamMap','FreeParamMap')){$bodies+=Body $map $name}"
+          "line": 41,
+          "text": "\"$repo/tools/build/fixtures/wow-construction.cmake\","
         },
         {
-          "line": 161,
-          "text": "$command=\"@echo off`r`ncall `\"$CompilerDriver`\" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4700 /wd4701 /wd4706 /wd4127 /wd4213 $define /I`\"$repo/src`\" /I`\"$dir`\" `\"$fixture`\" /Fo`\"$dir/unit.obj`\" /Fe`\"$dir/unit.exe`\"`r`nexit /b %errorlevel%`r`n\""
+          "line": 42,
+          "text": "\"$repo/tools/build/SourceProjection.cmake\"|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
         }
       ]
     },

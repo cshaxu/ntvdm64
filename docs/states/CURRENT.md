@@ -48,7 +48,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P105 capture entry](../etc/evidence/t484-s3-capture-native.md) | Existing native producer routed through CMD;28 host observations, full cached build/cache/publication hashes pass; no guest acceptance claim. |
 
-Completed implementation batches through P105 passed their cached full host build. P73 checks11 raw host inputs
+| [P106 construction contracts](../etc/evidence/t484-s3-construction-native.md) | Current40/191 cases and shared projection regressions pass; historical builders/fixture branches retired; full cached build/cache/publication hashes pass. |
+
+Completed implementation batches through P106 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

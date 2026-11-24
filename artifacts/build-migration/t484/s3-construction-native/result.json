@@ -1,0 +1,106 @@
+{
+  "scope": "Current exact-body service doubles; not guest or complete runtime acceptance",
+  "cache": [
+    {
+      "path": "build/.ninja/fixtures-x86/wow-message-construction-contract.exe",
+      "hash": "7D940FE7B587287FC946B26BE59E513EF8541C3AF8BCA777974C4401B64ED81E",
+      "time": 639310836544757665
+    },
+    {
+      "path": "build/.ninja/fixtures-x86/wow-message-transaction-contract.exe",
+      "hash": "D0922B3E1888F7B2E193A58C11D435EA0EC85AAC0E6E18C54B78D6248BB4DA22",
+      "time": 639310836544757665
+    }
+  ],
+  "projections": [
+    {
+      "header": "types",
+      "equalIgnoringWhitespace": true,
+      "kind": "construction"
+    },
+    {
+      "header": "messages",
+      "equalIgnoringWhitespace": true,
+      "kind": "construction"
+    },
+    {
+      "header": "map_types",
+      "equalIgnoringWhitespace": true,
+      "kind": "construction"
+    },
+    {
+      "header": "exact_body",
+      "equalIgnoringWhitespace": true,
+      "kind": "construction"
+    },
+    {
+      "header": "types",
+      "equalIgnoringWhitespace": true,
+      "kind": "transaction"
+    },
+    {
+      "header": "messages",
+      "equalIgnoringWhitespace": true,
+      "kind": "transaction"
+    },
+    {
+      "header": "map_types",
+      "equalIgnoringWhitespace": true,
+      "kind": "transaction"
+    },
+    {
+      "header": "exact_body",
+      "equalIgnoringWhitespace": true,
+      "kind": "transaction"
+    }
+  ],
+  "retained_negative": "Current notification completion-marker omission control",
+  "publication": {
+    "unchanged": true,
+    "action": "Existing publication verified; no changed product to republish",
+    "published_copies": 22,
+    "raw_inputs": 11
+  },
+  "final_runner": {
+    "finished": "2026-11-24T03:24:07.2040301+01:00",
+    "pid": 4608,
+    "exit": 0,
+    "started": "2026-11-24T03:23:46.2002404+01:00"
+  },
+  "retired": [
+    "Historical commit source producers",
+    "Optional external original dialog producer",
+    "BASELINE_IMAGE and DIALOG_ORIGINAL_CONTROL fixture branches"
+  ],
+  "cleaned_fixture": {
+    "finished": "2026-11-24T03:21:05.7958442+01:00",
+    "started": "2026-11-24T03:20:43.2626152+01:00",
+    "pid": 404,
+    "exit": 0
+  },
+  "cases": {
+    "isdialog": 3,
+    "dde_alias": 96,
+    "construction": 40,
+    "heap_families": 19,
+    "hook_paths": 8,
+    "dde_execute": 38,
+    "filter_selector": 14,
+    "dialog": 5,
+    "queue_selector": 18,
+    "copydata": 59,
+    "transaction": 191
+  },
+  "final": {
+    "pid": 7944,
+    "started": "2026-11-24T03:21:47.0126483+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T03:23:16.8679851+01:00"
+  },
+  "runtime": {
+    "finished": "2026-11-24T03:19:28.8715672+01:00",
+    "exit": 0,
+    "started": "2026-11-24T03:19:05.848325+01:00",
+    "pid": 33276
+  }
+}

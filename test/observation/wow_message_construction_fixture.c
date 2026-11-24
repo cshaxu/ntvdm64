@@ -133,7 +133,7 @@ static BOOL fixture_native_unlock(HGLOBAL handle){(void)handle;--native_locks;re
 #define GlobalUnlock fixture_native_unlock
 #define LOG_ALWAYS 0
 #define LOGDEBUG(level,args) ((void)0)
-#if defined(TRANSACTION_GROUP) && !defined(BASELINE_IMAGE)
+#ifdef TRANSACTION_GROUP
 #define WOWCLASS_EDIT 4 /* Original walias.h, not a native private class. */
 static BOOL notification_fault;
 static LRESULT CALLBACK notification_proc(HWND w,UINT m,WPARAM p,LPARAM l){
@@ -190,14 +190,8 @@ static void putrect16(VPVOID value,const RECT *rectangle){
 }
 #define PUTRECT16 putrect16
 static void putpaintstruct16(VPVOID value,const PAINTSTRUCT *paint){memcpy(guest_pointer(value),paint,sizeof(*paint));}
-#if defined(TRANSACTION_GROUP) || !defined(BASELINE_IMAGE)
 static BOOL FASTCALL WM32CopyData(LPWM32MSGPARAMEX value){(void)value;++failures;return FALSE;}
-#ifdef BASELINE_IMAGE
-static VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX value){(void)value;++failures;}
-#else
 VOID FASTCALL UnThunkCBMsg16(LPMSGPARAMEX);
-#endif
-#endif
 #ifdef TRANSACTION_GROUP
 typedef struct {DWORD Proc16;INT iHook;} HOOKSTATEDATA,*LPHOOKSTATEDATA;
 typedef DWORD *PVPVOID;
@@ -236,7 +230,7 @@ static BOOL CallBack16(INT id,PARM16 *parameters,VPPROC procedure,PVPVOID result
  *result=0;return !callback_reject;
 }
 #endif
-#if defined(TRANSACTION_GROUP) && !defined(BASELINE_IMAGE)
+#ifdef TRANSACTION_GROUP
 static unsigned dialog_native_calls;
 static BOOL dialog_native_fault,dialog_convert_reject;
 BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX);
@@ -345,13 +339,9 @@ static void mdi_cases(void){
  }
  reset_case();memset(&create,0,sizeof(create));create.lpszClass="outer";create.lpszName="title";
  value=make_message(&create,WM_CREATE,0);value.pww=NULL;dead_window=TRUE;
-#if defined(TRANSACTION_GROUP) || !defined(BASELINE_IMAGE)
  __try { ok=WM32Create(&value); }
  __finally { wow_message_unwind32(&value); }
  expect(!ok && !owned(),"CREATE_DEAD_WINDOW_ROLLBACK");
-#else
- expect(!WM32Create(&value) && !owned(),"CREATE_DEAD_WINDOW_ROLLBACK");
-#endif
 }
 static void map_cases(void){
  MSGPARAMEX value;WM32MSGPARAMEX reverse;DWORD pointer;BOOL free_pointer;
@@ -502,7 +492,6 @@ static void cbt_transactions(void){
   if(mode<2)expect(task.vpCBStack==cursor && (task.dwFlags & TDF_INITCALLBACKSTACK),"TRANSACTION_CBT_FAILED_STACK");
  }
 }
-#ifndef BASELINE_IMAGE
 static void stack_transactions(void){
  wow_message_stack scope;DWORD old;PTD_VALUE other;unsigned mode;
  for(mode=0;mode<2;++mode){
@@ -547,7 +536,6 @@ static void stack_transactions(void){
   wow_message_unwind32(&value);expect(!value.dwTmp[1] && !release_calls && owned()==1,"TRANSACTION_TERMINAL_ABANDON_NOT_FALSE_FREE");}
  reset_case();
 }
-#endif
 static void hook_completion_probe(void) {
  unsigned family,mode;BOOL trapped;DWORD cursor;HOOKSTATEDATA hook={1,WH_JOURNALPLAYBACK};
  for(family=0;family<2;++family)for(mode=0;mode<4;++mode) {
@@ -567,14 +555,11 @@ static void transaction_group(void){
  heap_transactions();create_transactions();global_transactions();cbt_transactions();
  /* All fourteen delegated heap families share the same original call scratch. */
  expect(failures==before,"TRANSACTION_CONTROL_ABORT");
-#ifndef BASELINE_IMAGE
  stack_transactions();
-#endif
  printf("TRANSACTION_GROUP errors=%u heap_families=19 nested=1 global_locks=1 stack=1 cbt=1 guest_proof=0\n",failures-before);
 }
 #endif
 
-#ifndef BASELINE_IMAGE
 static void combo_dir_cases(void){
  unsigned mode,before=failures;MSGPARAMEX value;BOOL trapped;
  for(mode=0;mode<4;++mode){
@@ -603,41 +588,26 @@ static void combo_dir_cases(void){
  }
  printf("COMBO_DIR modes=4 errors=%u exact_functions=2 guest_proof=0\n",failures-before);
 }
-#endif
 
-#if defined(TRANSACTION_GROUP) && !defined(BASELINE_IMAGE)
+#ifdef TRANSACTION_GROUP
 static void dialog_transactions(void){
- unsigned mode,original,control=0,before=failures;DWORD cursor;BOOL trapped;LONG result;char output[16];
- for(original=0;original<2;++original){
-#ifndef DIALOG_ORIGINAL_CONTROL
-  if(original)continue;
-#endif
+ unsigned mode,before=failures;DWORD cursor;BOOL trapped;LONG result;char output[16];
   for(mode=0;mode<5;++mode){
-   if(original)control=1;
    reset_case();words.vpfnDlgProc=1;cursor=task.vpCBStack;
    aw32Msg[WM_GETTEXT].lpfnM32=WM32GetText;
    callback_fault=mode==1 || mode==3;callback_reject=mode==4;
    task.dwWOWCompatFlags=(mode==2 || mode==3)?WOWCF_DSBASEDSTRINGPOINTERS:0;
    result=-1;trapped=FALSE;
    __try {
-#ifdef DIALOG_ORIGINAL_CONTROL
-    if(original)result=fixture_original_dialog((HWND)1,WM_GETTEXT,sizeof(output),(LONG)output);
-    else
-#endif
      result=W32DialogFunc((HWND)1,WM_GETTEXT,sizeof(output),(LONG)output);
    } __except(GetExceptionCode()==fault_code?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){trapped=TRUE;}
    expect(trapped==callback_fault,"DIALOG_EXCEPTION_PROPAGATION");
    if(!trapped)expect(result==0,"DIALOG_NORMAL_RESULT");
-   expect(owned()==(original && mode==1?1u:0u),"DIALOG_HEAP_LIFETIME");
-   if(mode==3)expect((task.vpCBStack==cursor)==!original,"DIALOG_ABORT_STACK");
+   expect(owned()==0,"DIALOG_HEAP_LIFETIME");
+   if(mode==3)expect(task.vpCBStack==cursor,"DIALOG_ABORT_STACK");
    expect(!bad_map&&!bad_foreign,"DIALOG_NO_INVALID_RELEASE");
-   printf("DIALOG_ENTRY original=%u mode=%u trapped=%u live=%u restored=%u\n",original,mode,trapped,owned(),task.vpCBStack==cursor);
+   printf("DIALOG_ENTRY original=0 mode=%u trapped=%u live=%u restored=%u\n",mode,trapped,owned(),task.vpCBStack==cursor);
   }
- }
- for(original=0;original<2;++original){
-#ifndef DIALOG_ORIGINAL_CONTROL
-  if(original)continue;
-#endif
   for(mode=0;mode<3;++mode){
    ISDIALOGMESSAGE16 args={1,0x10002000u};
    reset_case();memset(&dialog_input,0,sizeof(dialog_input));
@@ -646,33 +616,24 @@ static void dialog_transactions(void){
    dialog_native_calls=0;dialog_native_fault=mode==1;dialog_convert_reject=mode==2;
    trapped=FALSE;result=-1;
    __try {
-#ifdef DIALOG_ORIGINAL_CONTROL
-    if(original)result=fixture_original_isdialog(&args);
-    else
-#endif
      result=WU32IsDialogMessage(&args);
    } __except(GetExceptionCode()==fault_code?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){trapped=TRUE;}
    expect(trapped==(mode==1),"ISDIALOG_EXCEPTION_PROPAGATION");
-   expect(dialog_native_calls==(mode==2&&!original?0u:1u),"ISDIALOG_FAILED_CONVERSION");
-   expect(map_live==(mode==1&&original?1u:0u),"ISDIALOG_MAP_LIFETIME");
-   if(!trapped)expect(result==(mode==2&&!original?0:1),"ISDIALOG_RESULT");
-   printf("ISDIALOG_ENTRY original=%u mode=%u trapped=%u live=%u calls=%u\n",original,mode,trapped,map_live,dialog_native_calls);
+   expect(dialog_native_calls==(mode==2?0u:1u),"ISDIALOG_FAILED_CONVERSION");
+   expect(map_live==0,"ISDIALOG_MAP_LIFETIME");
+   if(!trapped)expect(result==(mode==2?0:1),"ISDIALOG_RESULT");
+   printf("ISDIALOG_ENTRY original=0 mode=%u trapped=%u live=%u calls=%u\n",mode,trapped,map_live,dialog_native_calls);
   }
- }
- printf("DIALOG_GROUP errors=%u original_control=%u guest_proof=0\n",failures-before,control);
+ printf("DIALOG_GROUP errors=%u original_control=0 guest_proof=0\n",failures-before);
 }
 #endif
 
 int main(void){
  get_text_cases();mdi_cases();map_cases();adjacent_cases();reset_case();
-#ifndef BASELINE_IMAGE
  combo_dir_cases();
-#endif
 #ifdef TRANSACTION_GROUP
  transaction_group();
-#ifndef BASELINE_IMAGE
  dialog_transactions();
-#endif
 #endif
  printf("MESSAGE_CONSTRUCTION failures=%u scenarios=%u abi=%zu scratch_offset=%zu scratch_slots=%zu parm=%zu\n",
   failures,scenarios,sizeof(WM32MSGPARAMEX),offsetof(WM32MSGPARAMEX,dwTmp),
