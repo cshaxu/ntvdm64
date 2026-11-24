@@ -1,0 +1,40 @@
+{
+  "publication": {
+    "republished": false,
+    "unchanged": true,
+    "publishedCopies": 22,
+    "rawInputs": 11
+  },
+  "callbacks": 11,
+  "scope": "Native PDF provider; not real WOW guest printing acceptance",
+  "fixtureUnchanged": true,
+  "outside": 0,
+  "cancellations": 1,
+  "cache": {
+    "hash": "D05EC1E427B0763EC317DCC726884F420E31D10142135C1ADF1BAE9D7D843B9D",
+    "mtime": "2026-11-24T03:04:53.4547541Z",
+    "wrongArch": 2
+  },
+  "validation": {
+    "exit": 0,
+    "started": "2026-11-24T04:04:39.3381936+01:00",
+    "pid": 18620,
+    "finished": "2026-11-24T04:06:11.5197275+01:00"
+  },
+  "foreign": 0,
+  "queue": {
+    "checked": "2026-11-24T04:06:13.5972467+01:00",
+    "jobs": 0,
+    "queue": "Microsoft Print to PDF"
+  },
+  "probe": {
+    "command": "\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-print-provider\\current/normal.pdf\" \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-print-provider\\current/cancel.pdf\"",
+    "pid": 17876,
+    "start": "2026-11-24T03:04:53.9294144Z",
+    "deadline": "2026-11-24T03:05:23.9294144Z"
+  },
+  "pdf": {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-print-provider\\current\\normal.pdf",
+    "Hash": "2D1988B878C5FC309C1FDF53A9E9393C1B3D3B32B9CA0BD8C166022A2D3F9203"
+  }
+}

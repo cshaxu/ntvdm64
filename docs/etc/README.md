@@ -1713,3 +1713,5 @@ post-publication targeted checks.
 - [T484 S3 owned read and page-cost controls](evidence/t484-s3-owned-read.md).
 
 - [T484 S3 parameter map contract](evidence/t484-s3-parameter-native.md).
+
+- [T484 S3 native print provider](evidence/t484-s3-print-provider.md).

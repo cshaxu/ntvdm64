@@ -62,7 +62,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P112 parameter map](../etc/evidence/t484-s3-parameter-native.md) | Current54 cases/four projections/construction191 pass; historical producers retired; full cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P112 passed their cached full host build. P73 checks11 raw host inputs
+| [P113 print provider](../etc/evidence/t484-s3-print-provider.md) | Native PDF normal/cancel contract and11 callback identities pass; manual producer removed; full cached build/cache/publication hashes pass. |
+
+Completed implementation batches through P113 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

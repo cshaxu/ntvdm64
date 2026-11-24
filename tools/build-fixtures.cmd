@@ -50,6 +50,8 @@ set "SELECTED="
 for %%T in (wow-gdi-alias wow-hard-error-decoder wow-hook-native-binding) do if "%TARGET%"=="%%T" set "SELECTED=1"
 if "%TARGET%"=="wow-hard-error-decoder" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-hook-native-binding" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="wow-print-provider" set "SELECTED=1"
+if "%TARGET%"=="wow-print-provider" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-parameter-map" set "SELECTED=1"
 if "%TARGET%"=="wow-parameter-map" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-owned-read" set "SELECTED=1"

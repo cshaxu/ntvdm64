@@ -896,5 +896,10 @@
     "status": "migrated-delivered",
     "evidence": "docs/etc/evidence/t484-s3-parameter-native.md",
     "reason": "Unchanged54-case current fixture uses native projections; historical source/control and manual producers retired"
+  },
+  "test/observation/verify-wow-print-provider.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-print-provider.md",
+    "status": "migrated-delivered",
+    "reason": "Unchanged native PDF normal/cancel callback contract uses CMD target; duplicate manual compilation removed"
   }
 }
