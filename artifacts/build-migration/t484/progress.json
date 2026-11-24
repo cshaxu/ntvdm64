@@ -1,20 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "15f1442af7cb98242ac9de07c79e9516c0560979",
+  "head": "7173c7a000ecf0a66766d412b9203900127fe0df",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/observation/observe-win101-image.ps1",
-    " D test/observation/observe-win101-setup.ps1",
-    " D test/observation/win101_setup_visual_probe.ps1",
-    " M tools/audit/Verify-T420S37OemGuest.ps1",
-    " M tools/audit/Verify-T420S38DpmiFatal.ps1",
+    " M test/common/native-hook/verify-packet.ps1",
+    " D tools/audit/Build-BrokerCallbackBarrier.mjs",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-final-managed-producers.md",
-    "?? test/observation/fatal_dialog.cs",
-    "?? test/observation/volume_oracle.cs"
+    "?? docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6493,6 +6488,12 @@
     }
   ],
   "commits": {
+    "7173c7a000ecf0a66766d412b9203900127fe0df": {
+      "subject": "M0 T484 S3 P198: retire old visual probes and cache retained interop",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-final-managed-producers.md"
+      ]
+    },
     "15f1442af7cb98242ac9de07c79e9516c0560979": {
       "subject": "M0 T484 S3 P197: migrate session contracts and retire sealed reply research",
       "evidence": [

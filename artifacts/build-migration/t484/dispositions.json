@@ -1452,5 +1452,165 @@
     "status": "supplemental-native-producer-pending-staging",
     "reason": "P198 retires the sealed Win1.01 Z:-mapped investigation chain; retained OEM/fatal C# bodies use shared native CMD compilation unchanged. Host interop checks pass; guest staging/acceptance remains explicitly pending.",
     "evidence": "docs/etc/evidence/t484-s3-final-managed-producers.md"
+  },
+  "test/adapter-mvdm-host-out/wow/verify_clipboard_format_ownership.py": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/adapter-mvdm-host-out/wow/verify_keyboard_boundaries.py": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/build/test-wow32-build-migration.py": {
+    "status": "supplemental-retained-standalone-audit",
+    "reason": "Source review confirms Ninja -t commands only reads the graph; remaining code compares existing input/output bytes and profiles, never compiles or stages artifacts.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-dlc-worker-event.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-redir-async-queue.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-redirector-loader.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-wow-dib-failure-cleanup.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-wow-dib-retirement.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-wow-embedding-root.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-wow-fax-failure.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-wow-font-output.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-wow-palette-output.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-wow-spool-failure.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-wow-spool-loader-failure.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/integration/verify-wow-winsock-rundown.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/ntvdm-exe/softpc/verify-console-font-restore.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/ntvdm-exe/softpc/verify-startup-presentation.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/observation/verify-console-api-late-c.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/observation/verify-console-trace-c.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/observation/verify-dos-style-relay.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/observation/verify-install-guard-c.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/observation/verify-palette-trace-c.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/observation/verify-wow-dde-conversion.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/observation/verify-wow-file-attributes-cleanup.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/observation/verify-wow-known-dll.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/observation/verify-wow-module-filename-boundary.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/opennt-host/netlib/verify.ps1": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "tools/audit/Verify-CcpuEventConsumption.mjs": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "tools/audit/verify-modesw-guards.py": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "tools/audit/Verify-Run16Entry.mjs": {
+    "status": "supplemental-direct-command-review",
+    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "tools/audit/Build-BrokerCallbackBarrier.mjs": {
+    "status": "supplemental-retired",
+    "reason": "P199 removes historical barrier builder referencing deleted src/app/basesrv_entry.c; current packet assertions use shared CMD fixture for both architectures.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "test/common/native-hook/verify-packet.ps1": {
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P199 removes historical barrier builder referencing deleted src/app/basesrv_entry.c; current packet assertions use shared CMD fixture for both architectures.",
+    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
   }
 }

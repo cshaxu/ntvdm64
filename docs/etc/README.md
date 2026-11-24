@@ -1867,3 +1867,5 @@ post-publication targeted checks.
 [T484 S3 WOW session contracts](evidence/t484-s3-wow-session-contracts.md) records native session rollback tests and retirement of sealed original reply research.
 
 [T484 S3 final supplemental producers](evidence/t484-s3-final-managed-producers.md) records old Win1.01 diagnostic retirement and native OEM/fatal interop.
+
+[T484 S3 direct-producer reconciliation](evidence/t484-s3-direct-producer-reconciliation.md) records missed compiler candidates and packet/obsolete-barrier disposition.
