@@ -881,5 +881,15 @@
     "status": "migrated-delivered",
     "evidence": "docs/etc/evidence/t484-s3-native-references.md",
     "reason": "Native reference targets preserve query/import and queue contracts; current object paths, full cached build/cache/publication verified"
+  },
+  "test/observation/verify-wow-owned-view-read.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Current six-body contract native; historical scalar mode and manual producer retired",
+    "evidence": "docs/etc/evidence/t484-s3-owned-read.md"
+  },
+  "test/observation/verify-wow-page-cost-probe.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Existing native page-cost target retained for current protocol control; duplicate manual producer removed",
+    "evidence": "docs/etc/evidence/t484-s3-owned-read.md"
   }
 }

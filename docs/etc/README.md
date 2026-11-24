@@ -1709,3 +1709,5 @@ post-publication targeted checks.
 - [T484 S3 P109 native extension and frame contracts](evidence/t484-s3-extension-native.md).
 
 - [T484 S3 P110 native query and queue references](evidence/t484-s3-native-references.md).
+
+- [T484 S3 owned read and page-cost controls](evidence/t484-s3-owned-read.md).

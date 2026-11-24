@@ -66,14 +66,12 @@ static const mvdm_cpu_access *mvdm_cpu_access_current_fixture(void)
 #include "owned_view_read_body.h"
 #undef mvdm_cpu_access_current
 
-int main(int argc, char **argv)
+int main(void)
 {
     const ULONG first = 0x00010042u, reused = 0x00020042u;
-    ULONG value = 0, before, iteration, expected_scalar;
+    ULONG value = 0, before, iteration;
     BYTE cross[8] = {0};
     mvdm_softpc_wow_window_borrow borrow = {0x2000, 0};
-    if (argc != 2 || (strcmp(argv[1], "--fast") && strcmp(argv[1], "--scalar"))) return 64;
-    expected_scalar = !strcmp(argv[1], "--scalar");
     domain.desktop_handle = 0x00010001;
     domain.guest_desktop_window = 0x1000;
     domain.guest_handle_table = 0x10000;
@@ -97,7 +95,7 @@ int main(int argc, char **argv)
             value == 0x00010001, "public-handle-metadata");
     }
     check(GetLastError() == 0x12345678, "successful-read-preserves-error");
-    check(expected_scalar ? scalar_reads == 640 && !mapped_reads :
+    check(
         !scalar_reads && mapped_reads == 640, "exact-selected-read-operation-counts");
     before = scalar_reads + mapped_reads;
     borrow.retired = 1;
@@ -132,6 +130,6 @@ int main(int argc, char **argv)
     check(fallback_reads == 1 && value == 0x55667788, "cross-page-keeps-original-load-service");
     printf("OWNED_VIEW_READ errors=%d selected=%s generation=1 retirement=1 "
         "metadata=1 fallback=1 LastError=1 scalar=%lu mapped=%lu\n",
-        errors, expected_scalar ? "scalar" : "fast", scalar_reads, mapped_reads);
+        errors, "fast", scalar_reads, mapped_reads);
     return errors ? 1 : 0;
 }

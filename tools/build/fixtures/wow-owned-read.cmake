@@ -1,0 +1,15 @@
+if(NOT NTVDM_ARCH STREQUAL "x86")
+  return()
+endif()
+set(owned_read_bodies "")
+foreach(name IN ITEMS page_domain_copy_owned_ram page_domain_read_owned_word
+    page_domain_window_lookup window_borrow_is_current
+    mvdm_softpc_wow_page_domain_window_handle mvdm_softpc_wow_page_domain_handle_metadata)
+  ntvdm_function_body(body "${NTVDM_REPO}/src/compat/mvdm_softpc_wow_page_domain.c" "${name}")
+  string(APPEND owned_read_bodies "${body}\n\n")
+endforeach()
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/owned_view_read_body.h" CONTENT "${owned_read_bodies}" @ONLY)
+fixture(wow-owned-read CL test/observation/wow_owned_view_read_fixture.c)
+set_property(TARGET wow-owned-read_objects PROPERTY COMPILE_OPTIONS /nologo /TC /O2 /W4 /WX)
+target_include_directories(wow-owned-read_objects PRIVATE "${CMAKE_BINARY_DIR}" "${NTVDM_REPO}/src")
+set_property(TARGET wow-owned-read_objects PROPERTY FIXTURE_LIBRARIES user32.lib)

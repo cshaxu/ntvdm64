@@ -1,0 +1,39 @@
+{
+  "publication": {
+    "rawInputs": 11,
+    "publishedCopies": 22,
+    "republished": false,
+    "unchanged": true
+  },
+  "scope": "Current bounded leaf and diagnostic protocol controls; not actual guest acceptance",
+  "pageControl": {
+    "exit": 0,
+    "started": "2026-11-24T03:55:11.6858648+01:00",
+    "pid": 11008,
+    "finished": "2026-11-24T03:55:34.6176283+01:00"
+  },
+  "alreadyMigratedTargetReview": "Retain wow-page-cost-unit; remove duplicated manual compilation in its remaining caller",
+  "pageCache": {
+    "wrongArch": 2,
+    "projectionFunctions": 6,
+    "mtime": "2026-11-23T20:49:44.0678706Z",
+    "hash": "109EB7962C1C41053CF8CF11AD280D02A2EEAB5F52146B2F877A81B8AAEAC274"
+  },
+  "readCache": {
+    "mtime": "2026-11-24T02:53:13.7653884Z",
+    "hash": "6EDDD620609A1BE012B013BDCB68D2F29EC4CD8949A3209C00CDB796CCAE2836",
+    "wrongArch": 2
+  },
+  "readMarker": "OWNED_VIEW_READ errors=0 selected=fast generation=1 retirement=1 metadata=1 fallback=1 LastError=1 scalar=0 mapped=644",
+  "retired": [
+    "historical scalar comparison mode",
+    "PowerShell current-body generator",
+    "two manual CL producers"
+  ],
+  "validation": {
+    "pid": 576,
+    "started": "2026-11-24T03:52:59.7907654+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T03:54:24.7403487+01:00"
+  }
+}

@@ -1,31 +1,33 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "89918a2759f4102c0b81a50c5b0862a129ff83cd",
+  "head": "e58d20d0d612647e708d7586624d53cda8fb4c20",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-native-query-contract.ps1",
-    " M test/observation/verify-wow-native-queue-order-reference.ps1",
+    " M test/observation/verify-wow-owned-view-read.ps1",
+    " M test/observation/verify-wow-page-cost-probe.ps1",
+    " M test/observation/wow_owned_view_read_fixture.c",
     " M tools/build-fixtures.cmd",
-    " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-native-references/",
-    "?? docs/etc/evidence/t484-s3-native-references.md",
-    "?? tools/build/wow32/native-references.cmake"
+    " M tools/build/SourceProjection.cmake",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-owned-read/",
+    "?? docs/etc/evidence/t484-s3-owned-read.md",
+    "?? tools/build/fixtures/wow-owned-read.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 126,
-    "unchanged": 102,
+    "changed": 128,
+    "unchanged": 100,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 67,
+    "migrated-delivered": 69,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 91,
+    "requires-disposition-reconciliation": 89,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3389,8 +3391,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "e7654acabe94bb6e18530a5adf6cdec5f83d285e12b496d9fcfd316cba3faaa9",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "e58d20d0d612647e708d7586624d53cda8fb4c20"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-native-references.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -3404,8 +3410,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "e216437d88ed54839d50ed78b80938470a6ebbd6db9447d0357132c82cc2ff91",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "e58d20d0d612647e708d7586624d53cda8fb4c20"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-native-references.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -3436,23 +3446,31 @@
       "id": "B0182",
       "file": "test/observation/verify-wow-owned-view-read.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "dce0ef133e7270749598bf06acf96f8e9ed0ca3346c1d51ac57c74d54665df69",
+      "state": "changed",
+      "current_sha256": "870afd47686712c734ccdcae582ce40d1a73b53c78e2cd37e2e65c6375fec233",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Current six-body contract native; historical scalar mode and manual producer retired",
+        "evidence": "docs/etc/evidence/t484-s3-owned-read.md"
+      }
     },
     {
       "id": "B0183",
       "file": "test/observation/verify-wow-page-cost-probe.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "fa39f5fed1cda04b36e773d15b4633444a50f2f501f25c96023005c3410fd835",
+      "state": "changed",
+      "current_sha256": "3774342e4e14e6f271d6472aac32007cd724954234f69dc7581aeb4efba7be3e",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Existing native page-cost target retained for current protocol control; duplicate manual producer removed",
+        "evidence": "docs/etc/evidence/t484-s3-owned-read.md"
+      }
     },
     {
       "id": "B0184",
@@ -5721,6 +5739,12 @@
     }
   ],
   "commits": {
+    "e58d20d0d612647e708d7586624d53cda8fb4c20": {
+      "subject": "T484 S3 P110 unify native query and queue reference producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-native-references.md"
+      ]
+    },
     "89918a2759f4102c0b81a50c5b0862a129ff83cd": {
       "subject": "T484 S3 P109 unify native extension and callback frame test producers",
       "evidence": [
@@ -8232,8 +8256,8 @@
       "file": "test/observation/verify-wow-owned-view-read.ps1",
       "hits": [
         {
-          "line": 32,
-          "text": "$line='/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /TC /O2 /MT /W4 /WX /I\"'+$repo+'/src\" /I\"'+$root+'\" \"'+$fixture+'\" /Fo\"'+$root+'/unit.obj\" /Fe\"'+$root+'/unit.exe\" /link user32.lib\"'"
+          "line": 17,
+          "text": "$native=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
     },
@@ -8242,12 +8266,8 @@
       "file": "test/observation/verify-wow-page-cost-probe.ps1",
       "hits": [
         {
-          "line": 3,
-          "text": "[string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'))"
-        },
-        {
-          "line": 17,
-          "text": "Owned compile $env:ComSpec ('/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /MT /O2 /W4 /D_CRT_SECURE_NO_WARNINGS /Fo\"'+$root+'/fixture.obj\" /Fe\"'+$root+'/ntvdm.exe\" \"'+$PSScriptRoot+'/wow_page_cost_fixture.c\" /link kernel32.lib\"') 120"
+          "line": 18,
+          "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/wow-page-cost-unit.exe\" \"$root/ntvdm.exe\""
         }
       ]
     },

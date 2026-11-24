@@ -1,6 +1,5 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot,
- [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'))
+param([Parameter(Mandatory)][string]$BuildRoot)
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
@@ -13,8 +12,10 @@ function Owned($name,$exe,$line,$seconds){
  $p.WaitForExit();$code=$p.ExitCode;$p.Dispose();$code|Set-Content "$root/$name.exit.txt";if($code){throw "$name failed $code"}
 }
 try{
- Get-FileHash $PSCommandPath,$CompilerDriver,"$PSScriptRoot/wow_page_cost_fixture.c","$PSScriptRoot/wow_page_cost_data.h","$PSScriptRoot/wow_page_cost_probe.h","$PSScriptRoot/wow_page_cost_instrument.h"|Export-Csv -NoTypeInformation "$root/inputs.csv"
- Owned compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /MT /O2 /W4 /D_CRT_SECURE_NO_WARNINGS /Fo"'+$root+'/fixture.obj" /Fe"'+$root+'/ntvdm.exe" "'+$PSScriptRoot+'/wow_page_cost_fixture.c" /link kernel32.lib"') 120
+ Get-FileHash $PSCommandPath,"$PSScriptRoot/wow_page_cost_fixture.c","$PSScriptRoot/wow_page_cost_data.h","$PSScriptRoot/wow_page_cost_probe.h","$PSScriptRoot/wow_page_cost_instrument.h"|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ & "$repo/tools/build-fixtures.cmd" x86 wow-page-cost-unit *> "$root/build.log"
+ if($LASTEXITCODE){throw 'Native page cost fixture build failed'}
+ Copy-Item "$repo/build/.ninja/fixtures-x86/wow-page-cost-unit.exe" "$root/ntvdm.exe"
  Owned fixture "$root/ntvdm.exe" '--control' 15
  if((Get-Content "$root/fixture.stdout.txt" -Raw) -notmatch 'PASS nested inclusive counters, LastError, real read-only snapshot and five rejected diagnostic identities/states'){throw 'Missing complete observer control marker'}
  foreach($input in Import-Csv "$root/inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen fixture input changed'}}
