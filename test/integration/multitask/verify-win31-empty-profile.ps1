@@ -13,8 +13,9 @@ $copy=& "$repo/test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1" `
 $dest=$copy.Destination;$task=$copy.Task
 try {
  [IO.File]::WriteAllBytes("$dest/PROGMAN.INI",[byte[]]@())
- & nasm -f bin "$repo/test/integration/win31_empty_profile_probe.asm" -o "$task/profile.exe"
+ & "$repo/tools/build-fixtures.cmd" x86 win31-matrix
  if($LASTEXITCODE){throw 'Win16 profile witness assembly failed'}
+ Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/win31-matrix/profile.exe" -Destination "$task/profile.exe"
  & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest `
   -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/profile.exe" -Cases $Case
  $result=[IO.File]::ReadAllBytes("$dest/PATCH/APITEST.BIN")

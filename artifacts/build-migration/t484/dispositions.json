@@ -1297,5 +1297,15 @@
     "status": "supplemental-native-producer-pending-staging",
     "reason": "Outside frozen355 census; shared CMD profile target byte-equivalent; native PIF complete; configuration/batch materialization and shared staging remain",
     "evidence": "docs/etc/evidence/t484-s3-matrix-profile.md"
+  },
+  "test/integration/multitask/verify-win31-empty-profile.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Retained focused profile/DDE regression, not direct Full entry. Existing win31-matrix CMD target replaces NASM; exact output bytes and cache verified. Shared runtime preparation remains pending.",
+    "evidence": "docs/etc/evidence/t484-s3-profile-dde.md"
+  },
+  "test/integration/multitask/verify-win31-progman-dde.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Retained focused profile/DDE regression, not direct Full entry. Existing win31-matrix CMD target replaces NASM; exact output bytes and cache verified. Shared runtime preparation remains pending.",
+    "evidence": "docs/etc/evidence/t484-s3-profile-dde.md"
   }
 }

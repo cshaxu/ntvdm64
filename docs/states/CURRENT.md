@@ -84,6 +84,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P183 idle forwarding](../etc/evidence/t484-s3-idle-forwarding.md) | Five creation fixtures pass; real private-queue USER forwarding replaces desktop activation. Automatic foreground notification not exercised.316/355 disposed,39 remain, plus two supplemental config/staging chains. |
 
+| [P184 profile/DDE producers](../etc/evidence/t484-s3-profile-dde.md) | Two focused regression callers reuse the existing CMD target; byte identity and no-op checks pass. Fixed316/355; four supplemental chains await staging;16 of18 newly found NASM callers remain. |
+
 A fresh global scan found18 further integration scripts with direct NASM
 commands; these await retention/migration reconciliation, as recorded in P183.
 The frozen355 census is not the complete remaining invocation graph.

@@ -1,15 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "debad5f3743e178f83fe98ae18a9c75647b7f976",
+  "head": "c94c31690bd0be9f389ae6da0b5fef00b66a1437",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/t484-s3-early-deliveries.md",
     " M docs/states/CURRENT.md",
-    " M test/adapter-mvdm-host-out/wow/wow_idle_hook_fixture.c",
-    " M test/observation/verify-wow-creation-boundaries.ps1",
-    "?? docs/etc/evidence/t484-s3-idle-forwarding.md"
+    " M test/integration/multitask/verify-win31-empty-profile.ps1",
+    " M test/integration/multitask/verify-win31-progman-dde.ps1",
+    " M tools/build/fixtures/guest-probes.cmake",
+    "?? docs/etc/evidence/t484-s3-profile-dde.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -3212,10 +3212,13 @@
       "state": "changed",
       "current_sha256": "bc8c98254386260ba45bd8fa8ec8d278e14349ec8c1f2f4abbc9426df89da215",
       "revisions": [
+        "c94c31690bd0be9f389ae6da0b5fef00b66a1437",
         "60a333e3c02323a4954b88452e6ab4e321dfdb16"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-creation-native.md"
+        "docs/etc/evidence/t484-s3-creation-native.md",
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-idle-forwarding.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -6481,6 +6484,13 @@
     }
   ],
   "commits": {
+    "c94c31690bd0be9f389ae6da0b5fef00b66a1437": {
+      "subject": "T484 S3 P183 verify native idle forwarding without desktop activation",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-idle-forwarding.md"
+      ]
+    },
     "debad5f3743e178f83fe98ae18a9c75647b7f976": {
       "subject": "T484 S3 P182 move matrix witnesses to shared CMD producer",
       "evidence": [

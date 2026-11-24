@@ -14,6 +14,8 @@ endfunction()
 
 guest_probe(win31-matrix W31CHECK.EXE win31_startup_contract.asm)
 guest_probe(win31-matrix W31DOS.COM win31_dosonly_contract.asm)
+guest_probe(win31-matrix PROFILE.EXE ../integration/win31_empty_profile_probe.asm)
+guest_probe(win31-matrix DDE.EXE ../integration/win31_progman_dde_probe.asm)
 get_property(win31_outputs GLOBAL PROPERTY guest_win31-matrix)
 add_custom_target(win31-matrix DEPENDS ${win31_outputs})
 add_custom_target(win31-dosonly DEPENDS "${CMAKE_BINARY_DIR}/guest-probes/win31-matrix/W31DOS.COM")

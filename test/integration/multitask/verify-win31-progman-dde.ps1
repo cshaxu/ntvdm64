@@ -14,8 +14,9 @@ $copy=& "$repo/test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1" `
 $dest=$copy.Destination;$task=$copy.Task
 try {
  [IO.File]::WriteAllBytes("$dest/PROGMAN.INI",[byte[]]@())
- & nasm -f bin "$repo/test/integration/win31_progman_dde_probe.asm" -o "$task/dde.exe"
+ & "$repo/tools/build-fixtures.cmd" x86 win31-matrix
  if($LASTEXITCODE){throw 'Win16 DDE witness assembly failed'}
+ Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/win31-matrix/dde.exe" -Destination "$task/dde.exe"
  & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest `
   -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/dde.exe" -Cases $Case
  $groups=@('DDEMAIN.GRP','DDEACC.GRP','DDEGAME.GRP','DDESTART.GRP')

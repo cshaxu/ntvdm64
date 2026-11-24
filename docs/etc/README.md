@@ -1845,3 +1845,4 @@ post-publication targeted checks.
 - [T484 S3 matrix profile producers](evidence/t484-s3-matrix-profile.md).
 
 - [T484 S3 private native idle forwarding](evidence/t484-s3-idle-forwarding.md).
+- [T484 S3 profile/DDE producers](evidence/t484-s3-profile-dde.md).
