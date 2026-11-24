@@ -1,34 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "5ddfe26a635172dbabde2666510de14116966c16",
+  "head": "f1ca299d4d9e44788c244af3ff687eec0b991634",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
-    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/m0-t480-s1-build-consumers-closure.md",
     " M docs/states/CURRENT.md",
-    " D tools/audit/Export-MvdmWholeClosureInventory.mjs",
-    " D tools/audit/Join-OpenNtRetainedGraphCoverage.ps1",
-    " D tools/audit/collect-host-mirror-build-evidence.py",
-    "?? artifacts/build-migration/t484/s3-retire-census/",
-    "?? docs/etc/evidence/t484-s3-retire-census.md"
+    " D tools/audit/Test-T420S36OriginalXmsCompile.ps1",
+    " D tools/audit/plan-mirror-marker-build.py",
+    " D tools/audit/run-mirror-marker-build.py",
+    " D tools/audit/scan-mirror-compiler-lines.py",
+    " D tools/audit/verify-mirror-marker-preprocessing.py",
+    "?? artifacts/build-migration/t484/s3-retire-markers/",
+    "?? docs/etc/evidence/t484-s3-retire-markers.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 142,
-    "unchanged": 78,
-    "removed": 135
+    "unchanged": 73,
+    "removed": 140
   },
   "disposition_counts": {
     "migrated-delivered": 83,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 135,
+    "retired-with-delivery-evidence": 140,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 65,
+    "requires-disposition-reconciliation": 60,
     "retained-standalone-audit": 3
   },
-  "existing_interpreted_candidates_with_command_hits": 169,
+  "existing_interpreted_candidates_with_command_hits": 164,
   "files": [
     {
       "id": "B0001",
@@ -3896,8 +3896,13 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f1ca299d4d9e44788c244af3ff687eec0b991634"
+      ],
+      "evidence": [
+        "docs/etc/evidence/m0-t480-s1-build-consumers-closure.md",
+        "docs/etc/evidence/t484-s3-retire-census.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -3926,8 +3931,13 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f1ca299d4d9e44788c244af3ff687eec0b991634"
+      ],
+      "evidence": [
+        "docs/etc/evidence/m0-t480-s1-build-consumers-closure.md",
+        "docs/etc/evidence/t484-s3-retire-census.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -3952,8 +3962,13 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f1ca299d4d9e44788c244af3ff687eec0b991634"
+      ],
+      "evidence": [
+        "docs/etc/evidence/m0-t480-s1-build-consumers-closure.md",
+        "docs/etc/evidence/t484-s3-retire-census.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -3965,45 +3980,61 @@
       "id": "B0209",
       "file": "tools/audit/plan-mirror-marker-build.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "5b5a83f2850073f031d980839fe58ce3d6eb42dd0a21b279673c2918ed4eb942",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
+        "status": "retired-with-delivery-evidence",
+        "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
+      }
     },
     {
       "id": "B0210",
       "file": "tools/audit/run-mirror-marker-build.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "120fd770e0ac94e5910cb5f88795d1ab6ed2e9637c6fbe9fa2fde4593870f339",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
+        "status": "retired-with-delivery-evidence",
+        "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
+      }
     },
     {
       "id": "B0211",
       "file": "tools/audit/scan-mirror-compiler-lines.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f8fbef276da9ce9efb65587867037983e97cdd4e259be1cbc4ebbe13dace518b",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
+        "status": "retired-with-delivery-evidence",
+        "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
+      }
     },
     {
       "id": "B0212",
       "file": "tools/audit/Test-T420S36OriginalXmsCompile.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "5a0e58c8610973c09e71a8ab2c246502e3e16a33ca814c09517188aff85b4ada",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
+        "status": "retired-with-delivery-evidence",
+        "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
+      }
     },
     {
       "id": "B0213",
@@ -4166,12 +4197,16 @@
       "id": "B0226",
       "file": "tools/audit/verify-mirror-marker-preprocessing.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "14df552d27c9fca954fdfd9b3b1cbbab903f0cfc0df79991ace6d8293bc81fe6",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
+        "status": "retired-with-delivery-evidence",
+        "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
+      }
     },
     {
       "id": "B0227",
@@ -5953,6 +5988,13 @@
     }
   ],
   "commits": {
+    "f1ca299d4d9e44788c244af3ff687eec0b991634": {
+      "subject": "T484 S3 P136 retire obsolete frozen census tools",
+      "evidence": [
+        "docs/etc/evidence/m0-t480-s1-build-consumers-closure.md",
+        "docs/etc/evidence/t484-s3-retire-census.md"
+      ]
+    },
     "5ddfe26a635172dbabde2666510de14116966c16": {
       "subject": "T484 S3 P135 retire old closure and duplicate accessor research",
       "evidence": [
@@ -8870,146 +8912,6 @@
       ]
     },
     {
-      "id": "B0209",
-      "file": "tools/audit/plan-mirror-marker-build.py",
-      "hits": [
-        {
-          "line": 11,
-          "text": "(\"worker\", \"build/.ninja/t476-s1-worker\", \"ntvdm.exe\", \"x86\"),"
-        },
-        {
-          "line": 12,
-          "text": "(\"redirector\", \"build/.ninja/t476-s1-worker\", \"VDMREDIR.dll\", \"x86\"),"
-        },
-        {
-          "line": 13,
-          "text": "(\"hook32\", \"build/.ninja/t476-s1-worker\", \"nthook32.dll\", \"x86\"),"
-        },
-        {
-          "line": 14,
-          "text": "(\"wow32\", \"build/.ninja/t476-s1/wow32\", \"wow32.dll\", \"x86\"),"
-        },
-        {
-          "line": 15,
-          "text": "(\"worker64\", \"build/.ninja/t476-s1/worker-native\", \"ntvwm.exe\", \"x64\"),"
-        },
-        {
-          "line": 16,
-          "text": "(\"frontend\", \"build/.ninja/t476-s1/frontend\", \"ntcon.exe\", \"x64\"),"
-        },
-        {
-          "line": 17,
-          "text": "(\"monitor\", \"build/.ninja/t476-s1/monitor\", \"ntmon.exe\", \"x64\"),"
-        },
-        {
-          "line": 18,
-          "text": "(\"launcher\", \"build/.ninja/t476-s1/launcher\", \"run16.exe\", \"x64\"),"
-        },
-        {
-          "line": 19,
-          "text": "(\"service\", \"build/.ninja/t476-s1/service\", \"ntsrv.exe\", \"x64\"),"
-        },
-        {
-          "line": 20,
-          "text": "(\"hook64\", \"build/.ninja/t476-s1/hook64\", \"nthook64.dll\", \"x64\"),"
-        },
-        {
-          "line": 24,
-          "text": "def ninja(graph, *args):"
-        },
-        {
-          "line": 25,
-          "text": "return subprocess.check_output([\"ninja\", \"-C\", str(graph), \"-t\", *args], text=True)"
-        },
-        {
-          "line": 39,
-          "text": "ninja_file = graph / \"build.ninja\""
-        },
-        {
-          "line": 41,
-          "text": "commands = ninja(graph, \"commands\", target).splitlines()"
-        },
-        {
-          "line": 43,
-          "text": "compdb = json.loads(ninja(graph, \"compdb\"))"
-        }
-      ]
-    },
-    {
-      "id": "B0210",
-      "file": "tools/audit/run-mirror-marker-build.py",
-      "hits": [
-        {
-          "line": 48,
-          "text": "if hashlib.sha256((root / name / \"build.ninja\").read_bytes()).hexdigest() != expected:"
-        },
-        {
-          "line": 57,
-          "text": "compilers = {arch: shutil.which(\"cl.exe\", path=env.get(\"PATH\", env.get(\"Path\", \"\")))"
-        },
-        {
-          "line": 79,
-          "text": "command, replacements = re.subn(r\"(?i)^cl(?:\\.exe)?\\b\","
-        }
-      ]
-    },
-    {
-      "id": "B0211",
-      "file": "tools/audit/scan-mirror-compiler-lines.py",
-      "hits": [
-        {
-          "line": 17,
-          "text": "(\"redir\", \"build/.ninja/t476-s1-worker\", \"VDMREDIR.dll\","
-        },
-        {
-          "line": 19,
-          "text": "(\"wkman\", \"build/.ninja/t476-s1/wow32\", \"wow32.dll\","
-        },
-        {
-          "line": 21,
-          "text": "(\"wow32\", \"build/.ninja/t476-s1/wow32\", \"wow32.dll\","
-        },
-        {
-          "line": 23,
-          "text": "(\"wuman\", \"build/.ninja/t476-s1/wow32\", \"wow32.dll\","
-        },
-        {
-          "line": 25,
-          "text": "(\"vdm32\", \"build/.ninja/t476-s1-worker\", \"nthook32.dll\","
-        },
-        {
-          "line": 27,
-          "text": "(\"vdm64\", \"build/.ninja/t476-s1/launcher\", \"run16.exe\","
-        },
-        {
-          "line": 54,
-          "text": "commands = set(subprocess.check_output([\"ninja\", \"-C\", str(graph), \"-t\", \"commands\", target],"
-        },
-        {
-          "line": 56,
-          "text": "compdb = json.loads(subprocess.check_output([\"ninja\", \"-C\", str(graph), \"-t\", \"compdb\"],"
-        }
-      ]
-    },
-    {
-      "id": "B0212",
-      "file": "tools/audit/Test-T420S36OriginalXmsCompile.ps1",
-      "hits": [
-        {
-          "line": 8,
-          "text": "$graph = Get-Content (Join-Path $FormalRoot 'build.ninja') -Raw"
-        },
-        {
-          "line": 16,
-          "text": "$command = 'call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe ' +"
-        },
-        {
-          "line": 21,
-          "text": "FormalGraphSha256 = (Get-FileHash (Join-Path $FormalRoot 'build.ninja')).Hash;"
-        }
-      ]
-    },
-    {
       "id": "B0213",
       "file": "tools/audit/verify-base-rpc-client-split.mjs",
       "hits": [
@@ -9528,24 +9430,6 @@
         {
           "line": 87,
           "text": "# CMake's empty object-order phony node names its working directory."
-        }
-      ]
-    },
-    {
-      "id": "B0226",
-      "file": "tools/audit/verify-mirror-marker-preprocessing.py",
-      "hits": [
-        {
-          "line": 33,
-          "text": "if hashlib.sha256((root / name / \"build.ninja\").read_bytes()).hexdigest() != expected:"
-        },
-        {
-          "line": 36,
-          "text": "compilers = {arch: shutil.which(\"cl.exe\", path=env.get(\"PATH\", env.get(\"Path\", \"\")))"
-        },
-        {
-          "line": 60,
-          "text": "command, compiler = re.subn(r'(?i)^cl(?:\\.exe)?\\b', lambda _: f'\"{compilers[item[\"arch\"]]}\"', command, count=1)"
         }
       ]
     },

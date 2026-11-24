@@ -1027,5 +1027,30 @@
     "status": "retained-standalone-audit",
     "reason": "Explicit supplied plan, read-only Ninja deps query and JSON output; no build/generation calls; help only checked",
     "evidence": "docs/etc/evidence/t484-s3-retire-census.md"
+  },
+  "tools/audit/plan-mirror-marker-build.py": {
+    "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
+    "status": "retired-with-delivery-evidence",
+    "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
+  },
+  "tools/audit/run-mirror-marker-build.py": {
+    "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
+    "status": "retired-with-delivery-evidence",
+    "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
+  },
+  "tools/audit/scan-mirror-compiler-lines.py": {
+    "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
+    "status": "retired-with-delivery-evidence",
+    "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
+  },
+  "tools/audit/Test-T420S36OriginalXmsCompile.ps1": {
+    "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
+    "status": "retired-with-delivery-evidence",
+    "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
+  },
+  "tools/audit/verify-mirror-marker-preprocessing.py": {
+    "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
+    "status": "retired-with-delivery-evidence",
+    "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
   }
 }

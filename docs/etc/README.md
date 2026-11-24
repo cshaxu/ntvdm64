@@ -1756,3 +1756,5 @@ post-publication targeted checks.
 - [T484 S3 retire old closure and accessor research](evidence/t484-s3-retire-closure.md)
 
 - [T484 S3 retired census tools and standalone collector](evidence/t484-s3-retire-census.md)
+
+- [T484 S3 retired marker compiler chain](evidence/t484-s3-retire-markers.md)

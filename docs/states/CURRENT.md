@@ -110,7 +110,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P136 census cleanup](../etc/evidence/t484-s3-retire-census.md) | Retired three frozen/obsolete graph tools; retained one read-only header collector outside build scope. Build/publication results recorded in receipt. |
 
-Completed implementation batches through P136 passed their cached full host build. P73 checks11 raw host inputs
+| [P137 retired marker chain](../etc/evidence/t484-s3-retire-markers.md) | Removed five historical marker/preprocessor/trial-compile tools; original evidence retained. Formal build/publication checks recorded in receipt. |
+
+Completed implementation batches through P137 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

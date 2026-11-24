@@ -1,0 +1,23 @@
+{
+  "fullGate": false,
+  "branchReaudit": false,
+  "publication": {
+    "republished": false,
+    "publishedCopies": 22,
+    "unchanged": true,
+    "rawInputs": 11
+  },
+  "validation": {
+    "pid": 19600,
+    "exit": 0,
+    "finished": "2026-11-24T06:48:27.7553803+01:00",
+    "started": "2026-11-24T06:47:28.3497354+01:00"
+  },
+  "retired": [
+    "B0209",
+    "B0210",
+    "B0211",
+    "B0212",
+    "B0226"
+  ]
+}
