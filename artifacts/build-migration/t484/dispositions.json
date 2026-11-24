@@ -952,5 +952,15 @@
     "reason": "Current21 contracts retained via CMD/native target; old commit producer and interpreted extraction retired",
     "evidence": "docs/etc/evidence/t484-s3-reverse-construction.md",
     "status": "migrated-delivered"
+  },
+  "test/observation/verify-wow-shell-callback.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Four current Shell provider contracts pass with actual product profile; manual producer and obsolete ABI experiments retired",
+    "evidence": "docs/etc/evidence/t484-s3-shell-callback.md"
+  },
+  "test/observation/verify-wow-source-registers.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "No live caller; obsolete Ninja cc selector sees zero objects; retired README exception-list policy superseded",
+    "evidence": "docs/etc/evidence/t484-s3-shell-callback.md"
   }
 }

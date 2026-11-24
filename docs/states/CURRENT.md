@@ -76,7 +76,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P119 reverse construction](../etc/evidence/t484-s3-reverse-construction.md) | Current21/forward40 and two projections pass; historical producer retired; full cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P119 passed their cached full host build. P73 checks11 raw host inputs
+| [P120 shell/source audit](../etc/evidence/t484-s3-shell-callback.md) | Four actual Shell provider cases pass; obsolete ABI experiments/manual producer/source audit retired; cached build/cache/publication hashes pass. |
+
+Completed implementation batches through P120 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

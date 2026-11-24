@@ -84,6 +84,8 @@ if "%TARGET%"=="wow-extension-contracts" set "SELECTED=1"
 if "%TARGET%"=="wow-extension-contracts" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="wow-shell-callback" set "SELECTED=1"
+if "%TARGET%"=="wow-shell-callback" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-native-references" set "SELECTED=1"
 if "%TARGET%"=="wow-native-references" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-module-alias" set "SELECTED=1"
@@ -250,6 +252,7 @@ if "%TARGET%"=="oem-tests" goto worker
 if "%TARGET:~0,12%"=="wow-creation" goto wowcallback
 if "%TARGET%"=="wow-extension-contracts" goto wowcallback
 for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I" goto wowcallback
+if "%TARGET%"=="wow-shell-callback" goto wowcallback
 if "%TARGET%"=="wow-native-references" goto wowcallback
 if "%TARGET%"=="wow-module-alias" goto wowcallback
 if "%TARGET%"=="wow-dispatch-exception" goto wowcallback

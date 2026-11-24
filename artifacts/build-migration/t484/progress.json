@@ -1,33 +1,35 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f6488304dfe55db96b1da4991d3d14f9a26ee102",
+  "head": "31044b0450bec4da947188450a3d99610bf0be2c",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-reverse-construction.ps1",
+    " M test/observation/verify-wow-shell-callback.ps1",
+    " D test/observation/verify-wow-source-registers.ps1",
+    " M test/observation/wow_shell_callback_probe.c",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-reverse-construction/",
-    "?? docs/etc/evidence/t484-s3-reverse-construction.md",
-    "?? tools/build/fixtures/wow-reverse-construction.cmake"
+    " M tools/build/wow32/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-shell-callback/",
+    "?? docs/etc/evidence/t484-s3-shell-callback.md",
+    "?? tools/build/wow32/shell-tests.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 137,
-    "unchanged": 91,
-    "removed": 127
+    "changed": 138,
+    "unchanged": 89,
+    "removed": 128
   },
   "disposition_counts": {
-    "migrated-delivered": 78,
+    "migrated-delivered": 79,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 127,
+    "retired-with-delivery-evidence": 128,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 80,
+    "requires-disposition-reconciliation": 78,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 177,
+  "existing_interpreted_candidates_with_command_hits": 176,
   "files": [
     {
       "id": "B0001",
@@ -3651,8 +3653,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "b688ac29ae6fdb86e277a866d450a1334b2a507c5a64db769cc82ba468d577e9",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "31044b0450bec4da947188450a3d99610bf0be2c"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-reverse-construction.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Current21 contracts retained via CMD/native target; old commit producer and interpreted extraction retired",
@@ -3664,23 +3670,31 @@
       "id": "B0193",
       "file": "test/observation/verify-wow-shell-callback.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f8220301d93e253d479ee4812f40eddbc466d0309cefd58ff461a56ba90ffdba",
+      "state": "changed",
+      "current_sha256": "9a63a6078c7f01784a32734ef18045cd3b1c7e7d2a6e757a8ee15944da52cbf5",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Four current Shell provider contracts pass with actual product profile; manual producer and obsolete ABI experiments retired",
+        "evidence": "docs/etc/evidence/t484-s3-shell-callback.md"
+      }
     },
     {
       "id": "B0194",
       "file": "test/observation/verify-wow-source-registers.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "3bbfaf9104b79e669e39654ca38cd58752bec2992dcb92c1a92a9794680aa38b",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "No live caller; obsolete Ninja cc selector sees zero objects; retired README exception-list policy superseded",
+        "evidence": "docs/etc/evidence/t484-s3-shell-callback.md"
+      }
     },
     {
       "id": "B0195",
@@ -5828,6 +5842,12 @@
     }
   ],
   "commits": {
+    "31044b0450bec4da947188450a3d99610bf0be2c": {
+      "subject": "T484 S3 P119 retire historical reverse construction producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-reverse-construction.md"
+      ]
+    },
     "f6488304dfe55db96b1da4991d3d14f9a26ee102": {
       "subject": "T484 S3 P118 consolidate resource fixture producers and retire stale doubles",
       "evidence": [
@@ -8511,38 +8531,8 @@
       "file": "test/observation/verify-wow-shell-callback.ps1",
       "hits": [
         {
-          "line": 33,
-          "text": "$graph=Get-Content \"$AdapterProviderBuildRoot/build.ninja\" -Raw"
-        },
-        {
-          "line": 38,
-          "text": "$arguments='/d /s /c \"call \"'+$vs+'\" -arch=x86 -host_arch=x64 >nul && cl.exe '+$flags+' /O2 /Fo\"'+$root+'/adapter.obj\" \"'+$adapterFixture+'\"'"
-        },
-        {
-          "line": 43,
-          "text": "$arguments='/d /s /c \"call \"'+$vs+'\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /O2 /MT /W4 /WX'+$control+' /Fo\"'+$root+'/probe.obj\" /Fe\"'+$root+'/probe.exe\" \"'+$source+'\"'+$adapterObject+' /link kernel32.lib\"'"
-        }
-      ]
-    },
-    {
-      "id": "B0194",
-      "file": "test/observation/verify-wow-source-registers.ps1",
-      "hits": [
-        {
-          "line": 25,
-          "text": "foreach($line in Get-Content \"$provider/build.ninja\"){"
-        },
-        {
-          "line": 31,
-          "text": "& ninja.exe -C $provider -t deps > \"$out/ninja-deps.txt\""
-        },
-        {
-          "line": 34,
-          "text": "foreach($line in Get-Content \"$out/ninja-deps.txt\"){"
-        },
-        {
-          "line": 98,
-          "text": "$inventory=@(\"$provider/build.ninja\",$manifest)+@($registers.Values)"
+          "line": 24,
+          "text": "$native=\"$repo/build/.ninja/msvc-x86-release/wow32\""
         }
       ]
     },

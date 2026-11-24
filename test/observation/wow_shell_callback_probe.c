@@ -4,12 +4,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include <intrin.h>
-#ifdef TEST_CDECL_CALLBACK
-#define PROBE_CALLBACK_ABI __cdecl
-#else
 #define PROBE_CALLBACK_ABI WINAPI
-#endif
 #ifdef TEST_THIRD_ARGUMENT
 typedef DWORD (PROBE_CALLBACK_ABI *shell_callback)(LPSTR,WORD,LPSTR);
 #else
@@ -64,24 +59,12 @@ static LONG capture_exception(EXCEPTION_POINTERS *info)
     putchar('\n');
     return EXCEPTION_EXECUTE_HANDLER;
 }
-#ifdef TEST_THROW_CONTROL
-static wow_shell_execute_fn control_execute;
-static LPCSTR control_file;
-static LPSTR control_parameters;
-static DWORD WINAPI control_throw(LPSTR command,WORD show,LPSTR directory)
-{
-    (void)command;(void)show;(void)directory;
-    RaiseException(0xe4470003,0,0,NULL);
-    return 0;
-}
-#endif
 static DWORD PROBE_CALLBACK_ABI callback(LPSTR command,WORD show
 #ifdef TEST_THIRD_ARGUMENT
     ,LPSTR third
 #endif
     )
 {
-    BYTE *return_address=(BYTE *)_ReturnAddress();unsigned i;
     ++calls;
     if(GetCurrentThreadId()!=owner_thread)++wrong_thread;
     printf("callback thread=%lu show=%u command=%s result=%lu\n",
@@ -89,23 +72,10 @@ static DWORD PROBE_CALLBACK_ABI callback(LPSTR command,WORD show
 #ifdef TEST_THIRD_ARGUMENT
     printf("callback third=%s\n",third?third:"<null>");
 #endif
-    printf("callback-return bytes[-16..31]=");
-    for(i=0;i!=48;++i)printf("%02x",return_address[(int)i-16]);
-    putchar('\n');
 #ifdef TEST_OUTER_BOUNDARY
     /* W32Dispatch catches outside WS32ShellExecute, not inside a resumed
      * outer Shell callback. Keep this distinct from the nested negative. */
     if(callback_result==43)RaiseException(0xe4470003,0,0,NULL);
-#endif
-#ifdef TEST_THROW_CONTROL
-    if(callback_result==43){
-        __try {
-            (void)control_execute(NULL,"open",control_file,control_parameters,NULL,SW_HIDE,control_throw);
-            ++wrong_thread;
-        } __except(GetExceptionCode()==0xe4470003 ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH){
-            puts("original injected exception caught by outer callback");
-        }
-    }
 #endif
 #ifdef TEST_ADAPTER
     if(ShellProbeCurrentCallback()!=callback)++wrong_thread;
@@ -146,13 +116,10 @@ int main(int argc,char **argv)
     if(!execute){puts("provider export absent");return 5;}
     owner_thread=GetCurrentThreadId();
     if(!AddVectoredExceptionHandler(1,observe_first_chance))return 11;
-#ifdef TEST_THROW_CONTROL
-    control_execute=execute;control_file=self;control_parameters=parameters;
-#endif
     GetModuleFileNameA(module,library,sizeof(library));
     printf("provider=%s caller_thread=%lu\n",library,owner_thread);
     for(test=0;test!=
-#if defined(TEST_ADAPTER) || defined(TEST_THROW_CONTROL) || defined(TEST_OUTER_BOUNDARY)
+#if defined(TEST_ADAPTER) || defined(TEST_OUTER_BOUNDARY)
         3
 #else
         2

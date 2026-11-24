@@ -1,0 +1,42 @@
+{
+  "publication": {
+    "rawInputs": 11,
+    "unchanged": true,
+    "republished": false,
+    "publishedCopies": 22
+  },
+  "cache": {
+    "hash": "AF7672B4264FC51D8ED0A2D15B0DA9599E5E1E6E1C66292505259F3C8FA210FC",
+    "mtime": "2026-11-24T03:41:25.3761264Z",
+    "wrongArch": 2
+  },
+  "cases": {
+    "Adapter": {
+      "exit": 0,
+      "transcript": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=1064\r\ncallback thread=1064 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Adapter/native-fallback.txt\" result=2\r\ncase=0 result=2 error=6 calls=1 foreign_thread=0\r\ncallback thread=1064 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Adapter/native-fallback.txt\" result=42\r\ncase=1 result=42 error=6 calls=1 foreign_thread=0\r\ncallback thread=1064 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Adapter/native-fallback.txt\" result=43\r\ncase=2 result=43 error=6 calls=1 foreign_thread=0\r\nPASS actual adapter exception propagation and inner/outer TLS restoration\r\nPASS actual adapter old two-argument callback and nested invocation\r\nPASS modern WOWShellExecute synchronous callback and success/failure result"
+    },
+    "NativeOuter": {
+      "exit": 0,
+      "transcript": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=24080\r\ncallback thread=24080 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter/native-fallback.txt\" result=2\r\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter\r\ncase=0 result=2 error=6 calls=1 foreign_thread=0\r\ncallback thread=24080 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter/native-fallback.txt\" result=42\r\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter\r\ncase=1 result=42 error=6 calls=1 foreign_thread=0\r\ncallback thread=24080 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter/native-fallback.txt\" result=43\r\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter\r\nexception=e4470003 module=C:\\WINDOWS\\System32\\KERNELBASE.dll rva=0016d674 access=0 address=00000000\r\nfirst-chance: 000006ba e4470003\r\nPASS outer API exception boundary and restored callback TLS\r\ncallback thread=24080 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter/native-fallback.txt\" result=2\r\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\NativeOuter\r\nPASS provider invoked again after outer unwind\r\ncase=2 result=2 error=6 calls=1 foreign_thread=0\r\nPASS modern WOWShellExecute synchronous callback and success/failure result"
+    },
+    "Native": {
+      "exit": 0,
+      "transcript": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=9488\r\ncallback thread=9488 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Native\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Native/native-fallback.txt\" result=2\r\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Native\r\ncase=0 result=2 error=6 calls=1 foreign_thread=0\r\ncallback thread=9488 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Native\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Native/native-fallback.txt\" result=42\r\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\Native\r\ncase=1 result=42 error=6 calls=1 foreign_thread=0\r\nPASS modern WOWShellExecute synchronous callback and success/failure result"
+    },
+    "AdapterOuter": {
+      "exit": 0,
+      "transcript": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=27360\r\ncallback thread=27360 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\AdapterOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\AdapterOuter/native-fallback.txt\" result=2\r\ncase=0 result=2 error=6 calls=1 foreign_thread=0\r\ncallback thread=27360 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\AdapterOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\AdapterOuter/native-fallback.txt\" result=42\r\ncase=1 result=42 error=6 calls=1 foreign_thread=0\r\ncallback thread=27360 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\AdapterOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\AdapterOuter/native-fallback.txt\" result=43\r\nexception=e4470003 module=C:\\WINDOWS\\System32\\KERNELBASE.dll rva=0016d674 access=0 address=00000000\r\nfirst-chance: 000006ba e4470003\r\nPASS outer API exception boundary and restored callback TLS\r\ncallback thread=27360 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\AdapterOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t484-s3-shell-callback\\AdapterOuter/native-fallback.txt\" result=2\r\nPASS provider invoked again after outer unwind\r\ncase=2 result=2 error=6 calls=1 foreign_thread=0\r\nPASS actual adapter old two-argument callback and nested invocation\r\nPASS modern WOWShellExecute synchronous callback and success/failure result"
+    }
+  },
+  "validation": {
+    "exit": 0,
+    "finished": "2026-11-24T04:42:46.9317683+01:00",
+    "pid": 18940,
+    "started": "2026-11-24T04:41:16.9559212+01:00"
+  },
+  "adapterProfile": "/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /O2",
+  "retiredAudit": {
+    "oldSelectorObjects": 0,
+    "currentCmakeObjectRules": 281
+  }
+}

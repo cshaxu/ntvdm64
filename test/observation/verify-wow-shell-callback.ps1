@@ -1,6 +1,6 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot,[switch]$CdeclControl,[switch]$ThirdArgumentControl,[switch]$ThrowControl,[switch]$OuterBoundary,
-    [string]$AdapterProviderBuildRoot)
+param([Parameter(Mandatory)][string]$BuildRoot,
+    [ValidateSet('Adapter','AdapterOuter','Native','NativeOuter')][string]$Case='Adapter')
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
@@ -15,39 +15,24 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds)
  if($p.ExitCode){throw "Failed $name"}
 }
 try {
- $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
  $source="$PSScriptRoot/wow_shell_callback_probe.c"
- $control=if($CdeclControl){' /DTEST_CDECL_CALLBACK'}else{''}
- if($ThirdArgumentControl){$control+=' /DTEST_THIRD_ARGUMENT'}
- if($OuterBoundary){
-    if($CdeclControl -or $ThrowControl -or (!$ThirdArgumentControl -and !$AdapterProviderBuildRoot)){throw 'OuterBoundary requires direct stdcall or actual adapter'}
-    $control+=' /DTEST_OUTER_BOUNDARY'
+ & "$repo/tools/build-fixtures.cmd" x86 wow-shell-callback *> "$root/build.log"
+ if($LASTEXITCODE){throw 'Native shell callback build failed'}
+ $adapter=$Case.StartsWith('Adapter');$outer=$Case.EndsWith('Outer')
+ $kind=if($adapter){'adapter'}else{'native'}
+ if($outer){$kind+='-outer'}
+ $native="$repo/build/.ninja/msvc-x86-release/wow32"
+ Copy-Item "$native/shell-callback-$kind.exe" "$root/probe.exe"
+ if($adapter){
+   Copy-Item "$native/shell-callback-profile.txt" "$root/adapter-profile.txt"
+   Get-FileHash "$repo/src/compat/wow_shell_callback.c","$repo/test/adapter-mvdm-host-out/wow/wow_shell_scope_fixture.c"|Export-Csv -NoTypeInformation "$root/adapter-inputs.csv"
  }
- if($ThrowControl){
-    if(!$ThirdArgumentControl -or $CdeclControl -or $AdapterProviderBuildRoot){throw 'Throw control requires direct three-argument stdcall provider'}
-    $control+=' /DTEST_THROW_CONTROL'
- }
- $adapterObject=''
- if($AdapterProviderBuildRoot){
-    if($CdeclControl -or $ThirdArgumentControl){throw 'Adapter tests the original two-argument stdcall contract'}
-    $graph=Get-Content "$AdapterProviderBuildRoot/build.ninja" -Raw
-    $flags=[regex]::Match($graph,'(?m)^cflags = (.*)\r?$').Groups[1].Value.Trim()
-    if(!$flags.Contains('/DCPU_40_STYLE')){throw 'Require selected provider flags'}
-    $adapterSource="$repo/src/compat/wow_shell_callback.c"
-    $adapterFixture="$repo/test/adapter-mvdm-host-out/wow/wow_shell_scope_fixture.c"
-    $arguments='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe '+$flags+' /O2 /Fo"'+$root+'/adapter.obj" "'+$adapterFixture+'"'
-    Run-Owned 'adapter' 'cmd.exe' $arguments 120
-    Get-FileHash $adapterSource,$adapterFixture | Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root/adapter-input.json"
-    $control+=' /DTEST_ADAPTER';$adapterObject=' "'+$root+'/adapter.obj"'
- }
- $arguments='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /O2 /MT /W4 /WX'+$control+' /Fo"'+$root+'/probe.obj" /Fe"'+$root+'/probe.exe" "'+$source+'"'+$adapterObject+' /link kernel32.lib"'
- Run-Owned 'compile' 'cmd.exe' $arguments 120
  @($source,"$root/probe.exe","$env:SystemRoot/SysWOW64/shell32.dll")|Get-FileHash|
      Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"
  Run-Owned 'probe' "$root/probe.exe" ('"'+$root+'/native-fallback.txt"') 30
  if((Get-Content "$root/probe.out" -Raw) -notmatch 'PASS modern WOWShellExecute'){throw 'Missing provider assertions'}
- if($AdapterProviderBuildRoot -and (Get-Content "$root/probe.out" -Raw) -notmatch 'PASS actual adapter'){throw 'Missing adapter nesting assertions'}
- if($AdapterProviderBuildRoot -and !$OuterBoundary -and (Get-Content "$root/probe.out" -Raw) -notmatch 'PASS actual adapter exception propagation'){throw 'Missing adapter exception/TLS restoration assertions'}
- if($OuterBoundary -and (Get-Content "$root/probe.out" -Raw) -notmatch 'PASS provider invoked again after outer unwind'){throw 'Missing outer-boundary recovery'}
+ if($adapter -and (Get-Content "$root/probe.out" -Raw) -notmatch 'PASS actual adapter'){throw 'Missing adapter nesting assertions'}
+ if($adapter -and !$outer -and (Get-Content "$root/probe.out" -Raw) -notmatch 'PASS actual adapter exception propagation'){throw 'Missing adapter exception/TLS restoration assertions'}
+ if($outer -and (Get-Content "$root/probe.out" -Raw) -notmatch 'PASS provider invoked again after outer unwind'){throw 'Missing outer-boundary recovery'}
  '0'|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw}

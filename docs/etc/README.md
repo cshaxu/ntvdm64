@@ -1727,3 +1727,5 @@ post-publication targeted checks.
 - [T484 S3 resource contracts and retention](evidence/t484-s3-resource-calls.md)
 
 - [T484 S3 reverse construction producer](evidence/t484-s3-reverse-construction.md)
+
+- [T484 S3 shell callback and retired source audit](evidence/t484-s3-shell-callback.md)
