@@ -97,30 +97,8 @@ New-Item -ItemType Directory -Path $output | Out-Null
 # An extended witness must retain the boot/ready record contract below.
 . "$PSScriptRoot/Invoke-Win31ProbeBuild.ps1"
 Invoke-Win31ProbeBuild -OutputRoot $output -WindowsProbeImage $WindowsProbeImage
-$probeBytes = [IO.File]::ReadAllBytes("$output/W31CHECK.EXE")
-foreach ($field in @(@('@W31_BOOT_PATH@',$boot),@('@W31_READY_PATH@',$ready))) {
-    $image = [Text.Encoding]::ASCII.GetString($probeBytes)
-    $offset = $image.IndexOf($field[0],[StringComparison]::Ordinal)
-    if ($offset -lt 0 -or $image.IndexOf($field[0],$offset+1,[StringComparison]::Ordinal) -ge 0) {
-        throw 'Probe path placeholder must occur exactly once'
-    }
-    $bytes = [Text.Encoding]::ASCII.GetBytes($field[1])
-    if ($bytes.Length -ge 128) { throw 'Probe output path exceeds fixed guest field' }
-    [Array]::Clear($probeBytes,$offset,128)
-    [Array]::Copy($bytes,0,$probeBytes,$offset,$bytes.Length)
-}
-[IO.File]::WriteAllBytes("$output/W31CHECK.EXE",$probeBytes)
-$dosBytes = [IO.File]::ReadAllBytes("$output/W31DOS.COM")
-$dosImage = [Text.Encoding]::ASCII.GetString($dosBytes)
-$dosOffset = $dosImage.IndexOf('@W31_DOS_PATH@',[StringComparison]::Ordinal)
-if ($dosOffset -lt 0 -or $dosImage.IndexOf('@W31_DOS_PATH@',$dosOffset+1,[StringComparison]::Ordinal) -ge 0) {
-    throw 'DOS probe path placeholder must occur exactly once'
-}
-$dosPathBytes = [Text.Encoding]::ASCII.GetBytes($dosResult)
-if ($dosPathBytes.Length -ge 128) { throw 'DOS result path exceeds fixed guest field' }
-[Array]::Clear($dosBytes,$dosOffset,128)
-[Array]::Copy($dosPathBytes,0,$dosBytes,$dosOffset,$dosPathBytes.Length)
-[IO.File]::WriteAllBytes("$output/W31DOS.COM",$dosBytes)
+& "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" "$output/W31CHECK.EXE" "$output/W31DOS.COM" $patch
+if($LASTEXITCODE){throw 'Win31 witness path binding failed'}
 . "$repo/test/observation/isolated_package_cleanup.ps1"
 $winBytes = [IO.File]::ReadAllBytes($winIni)
 $configBytes = [IO.File]::ReadAllBytes($config)

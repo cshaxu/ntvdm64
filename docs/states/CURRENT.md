@@ -100,6 +100,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P172 cached inspector](../etc/evidence/t484-s3-window-inspector.md) | Shared window inspector loads a CMD/CMake-built DLL; original C# body unchanged. Compile/load/error/cache checks and cached full11/22 hashes pass. Matrix preparation remains open;311/355,44 remain. |
 
+| [P173 native probe paths](../etc/evidence/t484-s3-probe-paths.md) | Authored Win31 witness fields bind through native fixture; exact bytes and four no-write refusals pass. Cached full and11/22 hashes unchanged. Runtime preparation remains open;311/355,44 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

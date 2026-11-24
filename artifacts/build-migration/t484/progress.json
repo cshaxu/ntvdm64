@@ -1,16 +1,17 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "db0a5456fa8ea228c8a818bd174b2449fd83c614",
+  "head": "658eeace637ecfd3e9790f176ab76919ec006b9e",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/inspect-session-windows.ps1",
+    " M test/integration/Invoke-Win31ProbeBuild.ps1",
+    " M test/integration/win31_runtime_matrix_test.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/README.md",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-window-inspector.md",
-    "?? test/observation/window_inspector.cs"
+    "?? docs/etc/evidence/t484-s3-probe-paths.md",
+    "?? test/build/verify-win31-probe-paths.ps1",
+    "?? test/observation/win31_probe_paths.c"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -1384,7 +1385,7 @@
       "file": "test/integration/win31_runtime_matrix_test.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "04c7ea61e602cd8fd7cebe00e16b0b47e89e91c901092c028a710fad237c7dbf",
+      "current_sha256": "ab44eec4e533ef744e2e077c434a0bece5b86871ec192be5a5a274c0dc494917",
       "revisions": [
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "f39e4635fa105f6deee50abb2640ab8e37dbd7e7"
@@ -1396,8 +1397,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "P63 native witnesses and P172 cached managed inspector delivered; no Add-Type source compilation. Dynamic probe path fields and runtime/package preparation remain for complete-chain reconciliation.",
-        "evidence": "docs/etc/evidence/t484-s3-window-inspector.md"
+        "reason": "P63 native witnesses, P172 cached inspector and P173 native fixed path binding delivered. Runtime/package preparation still requires complete-chain reconciliation; do not count as closed.",
+        "evidence": "docs/etc/evidence/t484-s3-probe-paths.md"
       }
     },
     {
@@ -6439,6 +6440,12 @@
     }
   ],
   "commits": {
+    "658eeace637ecfd3e9790f176ab76919ec006b9e": {
+      "subject": "T484 S3 P172 cache the shared window inspector",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-window-inspector.md"
+      ]
+    },
     "db0a5456fa8ea228c8a818bd174b2449fd83c614": {
       "subject": "T484 S3 P171 retire expired diagnostic branches",
       "evidence": [
@@ -8298,11 +8305,15 @@
       "file": "test/integration/win31_runtime_matrix_test.ps1",
       "hits": [
         {
-          "line": 170,
+          "line": 100,
+          "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" \"$output/W31CHECK.EXE\" \"$output/W31DOS.COM\" $patch"
+        },
+        {
+          "line": 148,
           "text": "& \"$repo/build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid](([guid]::new([Convert]::FromHexString((Get-IsolatedPackageIdentity \"$stage/system32/ntsrv.exe\")))))).ToString()) $monitor"
         },
         {
-          "line": 276,
+          "line": 254,
           "text": "$closeArgs=if($ConsoleClose){@('--close-node','1',\"$($workers[0].ProcessId)\")}else{@('--terminate',\"$($workers[0].ProcessId)\")}"
         }
       ]

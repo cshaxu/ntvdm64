@@ -1825,3 +1825,4 @@ post-publication targeted checks.
 - [T484 S3 build hygiene consolidation](evidence/t484-s3-hygiene-consolidation.md).
 - [T484 S3 expired diagnostic retirement](evidence/t484-s3-expired-diagnostics.md).
 - [T484 S3 cached window inspector](evidence/t484-s3-window-inspector.md).
+- [T484 S3 native witness path binding](evidence/t484-s3-probe-paths.md).

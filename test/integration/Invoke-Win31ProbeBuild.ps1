@@ -12,6 +12,8 @@ function Invoke-Win31ProbeBuild {
         $p.WaitForExit();$p.ExitCode|Set-Content "$OutputRoot/producer.exit.txt"
         if($p.ExitCode){throw 'Win31 witness producer failed'}
     } finally {$p.Dispose()}
+    & "$repo/tools/build-fixtures.cmd" x64 win31-probe-paths | Out-Host
+    if($LASTEXITCODE){throw 'Win31 path binder build failed'}
     $cache="$repo/build/.ninja/fixtures-x86/guest-probes/win31-matrix"
     if(!$WindowsProbeImage){$WindowsProbeImage="$cache/W31CHECK.EXE"}
     Copy-Item -LiteralPath $WindowsProbeImage -Destination "$OutputRoot/W31CHECK.EXE"

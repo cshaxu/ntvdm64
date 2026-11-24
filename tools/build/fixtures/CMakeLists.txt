@@ -401,3 +401,5 @@ if(NTVDM_ARCH STREQUAL "x64")
     VERBATIM)
   add_custom_target(window-inspector DEPENDS "${CMAKE_BINARY_DIR}/window-inspector.dll")
 endif()
+
+fixture(win31-probe-paths CL test/observation/win31_probe_paths.c)

@@ -336,8 +336,8 @@
   },
   "test/integration/win31_runtime_matrix_test.ps1": {
     "status": "pending-producer-migration",
-    "reason": "P63 native witnesses and P172 cached managed inspector delivered; no Add-Type source compilation. Dynamic probe path fields and runtime/package preparation remain for complete-chain reconciliation.",
-    "evidence": "docs/etc/evidence/t484-s3-window-inspector.md"
+    "reason": "P63 native witnesses, P172 cached inspector and P173 native fixed path binding delivered. Runtime/package preparation still requires complete-chain reconciliation; do not count as closed.",
+    "evidence": "docs/etc/evidence/t484-s3-probe-paths.md"
   },
   "test/lib-win32/crt-compat/verify-crt-compat.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-crt.md",
