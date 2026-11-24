@@ -1,0 +1,34 @@
+{
+  "x64_rejected": 2,
+  "marker": [
+    "PASS actual packed painter: 640x480, pitched rows, clipped damage, source end, invalid input, guards",
+    ""
+  ],
+  "fixture": {
+    "passed": true,
+    "fixtureSha256": "EF94D255A8D00D267151FBE52CD0CA8EA8A8D6072962696CBA3732AB77DC8FBD",
+    "sourceSha256": "E02B45A17B7AE8C171A880C2DC4DF3D87E478126A2B8CE1C479667E17B96E03E"
+  },
+  "runtime": {
+    "started": "2026-11-24T01:56:49.391516+01:00",
+    "exit": 0,
+    "pid": 11948,
+    "finished": "2026-11-24T01:57:13.7853176+01:00"
+  },
+  "final": {
+    "started": "2026-11-24T01:57:41.1378325+01:00",
+    "finished": "2026-11-24T01:59:01.0399983+01:00",
+    "exit": 0,
+    "pid": 23152
+  },
+  "publication": {
+    "unchanged": true,
+    "published_copies": 22,
+    "raw_inputs": 11
+  },
+  "cache": {
+    "path": "build/.ninja/msvc-x86-release/worker/video7-packed-painter.exe",
+    "sha256": "36A186ADDF7598DCE06E4C2B7B2495C27238DDB0AF012C54DC55507E8428FAF7",
+    "mtime": 639310786330554576
+  }
+}

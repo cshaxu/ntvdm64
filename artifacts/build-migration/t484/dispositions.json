@@ -686,5 +686,15 @@
       "reason": "Already CMD/native; x86/x64 lifecycle/module binding and rollback verification confirms independent coverage"
     },
     "reason": "Already CMD/native; x86/x64 lifecycle/module binding and rollback verification confirms independent coverage"
+  },
+  "test/observation/verify-video7-packed-painter.ps1": {
+    "reason": "Actual product painter object and profile via CMD/native graph; obsolete compile script removed",
+    "evidence": "docs/etc/evidence/t484-s3-video7.md",
+    "status": "migrated-delivered",
+    "retention_review": {
+      "reason": "Unique packed-pixel pitch/clipping/source-end/guard assertions not covered by CGA/EGA planar contract",
+      "evidence": "docs/etc/evidence/t484-s3-video7.md",
+      "decision": "retain"
+    }
   }
 }

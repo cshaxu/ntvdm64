@@ -104,7 +104,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P93 observer/publication cleanup](../etc/evidence/t484-s3-observer-publication.md) | Redundant publication wrapper retired; observer and previously migrated thread lifecycle contracts pass x86/x64;12 cache identities and publication hashes pass. |
 
-Implementation batches through P93 passed their cached full host build. P73 checks11 raw host inputs
+| [P94 Video7 producer](../etc/evidence/t484-s3-video7.md) | Real packed painter assertions pass via current native object; old compiler recipes removed; full cached build/cache/rejection/publication hashes pass. |
+
+Implementation batches through P94 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

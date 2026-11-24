@@ -1675,3 +1675,5 @@ post-publication targeted checks.
 - [Shared SoftPC object contracts](evidence/t484-s3-object-contracts.md)
 
 - [T484 S3 P93 observer/publication cleanup](evidence/t484-s3-observer-publication.md).
+
+- [T484 S3 P94 Video7 producer](evidence/t484-s3-video7.md).

@@ -163,3 +163,12 @@ worker_link("server-enum-test.exe" "/nologo /OPT:REF /out:$out /map:$out.map"
     "original-opennt-xactsrv.lib" "original-opennt-netlib.lib"
     "original-opennt-rtl-x86.lib" "lib-crt-compat.lib")
 worker_group(redirector-server-enum "server-enum-test.exe")
+
+get_target_property(video7_flags unit_obj_host_nt_vga_obj COMPILE_FLAGS)
+string(REPLACE "/D_NO_CRT_STDIO_INLINE" "" video7_flags "${video7_flags}")
+worker_unit("obj/tests/video7_packed_painter_test.obj"
+  "${NTVDM_REPO}/test/mvdm-host/video7_packed_painter_test.c" "${video7_flags}")
+worker_link("video7-packed-painter.exe" "/nologo /opt:ref /out:$out /map:$out.map"
+  "kernel32.lib user32.lib gdi32.lib"
+  INPUTS "obj/tests/video7_packed_painter_test.obj" "obj/host/nt_vga.obj")
+worker_group(video7-packed-painter "video7-packed-painter.exe")

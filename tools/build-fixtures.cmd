@@ -55,6 +55,8 @@ if "%TARGET%"=="serial-baud" if not "%~1"=="x86" exit /b 2
 for %%T in (redirector-remote-name redirector-server-enum) do if "%TARGET%"=="%%T" set "SELECTED=1"
 if "%TARGET%"=="redirector-remote-name" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="redirector-server-enum" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="video7-packed-painter" set "SELECTED=1"
+if "%TARGET%"=="video7-packed-painter" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="planar-painter" set "SELECTED=1"
 if "%TARGET%"=="planar-painter" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="ntvwm-modern-edit-mouse" set "SELECTED=1"
@@ -224,6 +226,7 @@ if "%TARGET%"=="console-contracts" goto worker
 if "%TARGET%"=="host-thread-boundaries" goto worker
 for %%T in (redirector-remote-name redirector-server-enum) do if "%TARGET%"=="%%T" goto worker
 if "%TARGET%"=="softpc-contracts" goto worker
+if "%TARGET%"=="video7-packed-painter" goto worker
 if "%TARGET%"=="planar-painter" goto worker
 if "%TARGET%"=="dem-directory-reset" goto worker
 if "%TARGET%"=="ccpu-callback" goto worker
