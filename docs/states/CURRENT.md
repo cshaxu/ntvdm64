@@ -116,7 +116,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P139 original broker fixtures](../etc/evidence/t484-s3-broker-native.md) | Two duplicate JS builders removed; native CMD target and bounded runners preserve classifier/lifecycle coverage, repair stale capacity and installed-media assumptions. |
 
-Completed implementation batches through P139 passed their cached full host build. P73 checks11 raw host inputs
+| [P140 classifier diagnostic cleanup](../etc/evidence/t484-s3-classifier-retirement.md) | Retired historical raw-ABI probe and absent-header audit; retained actual product-object guard tests on both architectures. |
+
+Completed implementation batches through P140 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

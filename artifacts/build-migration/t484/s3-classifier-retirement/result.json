@@ -1,0 +1,35 @@
+{
+  "fullGate": false,
+  "validation": {
+    "exit": 0,
+    "pid": 26256,
+    "started": "2026-11-24T07:07:32.0790665+01:00",
+    "finished": "2026-11-24T07:08:51.3813881+01:00"
+  },
+  "publication": {
+    "republished": false,
+    "publishedCopies": 22,
+    "rawInputs": 11,
+    "unchanged": true
+  },
+  "pathCases": [
+    {
+      "compileExit": 0,
+      "output": "CLASSIFIER_PATH failures=0 layout=12 cases=3 successes=2 rejected=1",
+      "architecture": "x86",
+      "pid": 30664,
+      "runExit": 0
+    },
+    {
+      "compileExit": 0,
+      "output": "CLASSIFIER_PATH failures=0 layout=24 cases=3 successes=2 rejected=1",
+      "architecture": "x64",
+      "pid": 6860,
+      "runExit": 0
+    }
+  ],
+  "retired": [
+    "B0218",
+    "B0220"
+  ]
+}

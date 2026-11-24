@@ -1,35 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "50574aef23a4f2a978be16fc5cedeb28bb475447",
+  "head": "e52a5579b70292c850d0b7c437ca2f9652e77f94",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/broker/original_server_lifecycle.c",
-    " D tools/audit/Verify-BrokerOriginalClassifier.mjs",
-    " D tools/audit/Verify-BrokerOriginalLifecycle.mjs",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/worker/units.cmake",
-    "?? artifacts/build-migration/t484/s3-broker-native/",
-    "?? docs/etc/evidence/t484-s3-broker-native.md",
-    "?? test/adapter-basesrv/verify-original-lifecycle.ps1"
+    " D test/broker/path_name_abi.c",
+    " D tools/audit/Verify-BrokerPathNameAbi.mjs",
+    " D tools/audit/verify-classifier-shared-boundary.py",
+    "?? artifacts/build-migration/t484/s3-classifier-retirement/",
+    "?? docs/etc/evidence/t484-s3-classifier-retirement.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 143,
-    "unchanged": 69,
-    "removed": 143
+    "unchanged": 67,
+    "removed": 145
   },
   "disposition_counts": {
     "migrated-delivered": 83,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 143,
+    "retired-with-delivery-evidence": 145,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 55,
+    "requires-disposition-reconciliation": 53,
     "retained-standalone-audit": 5
   },
-  "existing_interpreted_candidates_with_command_hits": 161,
+  "existing_interpreted_candidates_with_command_hits": 159,
   "files": [
     {
       "id": "B0001",
@@ -4097,8 +4094,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "e52a5579b70292c850d0b7c437ca2f9652e77f94"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-broker-native.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -4131,8 +4132,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "e52a5579b70292c850d0b7c437ca2f9652e77f94"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-broker-native.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -4144,12 +4149,16 @@
       "id": "B0218",
       "file": "tools/audit/Verify-BrokerPathNameAbi.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "7d8349dcaca56c0b04ab2ee65e44e18d76d78dd89b77fc08251d34bfc60caf58",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "reason": "Historical raw ABI/removed-header diagnostic superseded by actual product path adapter guard tests and original classifier cases",
+        "status": "retired-with-delivery-evidence",
+        "evidence": "docs/etc/evidence/t484-s3-classifier-retirement.md"
+      }
     },
     {
       "id": "B0219",
@@ -4166,12 +4175,16 @@
       "id": "B0220",
       "file": "tools/audit/verify-classifier-shared-boundary.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "727649d18c45e6aa1b7a038f678e429495fb5ab46a2d12454a57a8f50a18d2ae",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "reason": "Historical raw ABI/removed-header diagnostic superseded by actual product path adapter guard tests and original classifier cases",
+        "status": "retired-with-delivery-evidence",
+        "evidence": "docs/etc/evidence/t484-s3-classifier-retirement.md"
+      }
     },
     {
       "id": "B0221",
@@ -6037,6 +6050,12 @@
     }
   ],
   "commits": {
+    "e52a5579b70292c850d0b7c437ca2f9652e77f94": {
+      "subject": "T484 S3 P139 consolidate original broker fixtures on native CMD build",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-broker-native.md"
+      ]
+    },
     "50574aef23a4f2a978be16fc5cedeb28bb475447": {
       "subject": "T484 S3 P138 reconcile native BaseSrv ownership audits",
       "evidence": [
@@ -9045,36 +9064,6 @@
       ]
     },
     {
-      "id": "B0218",
-      "file": "tools/audit/Verify-BrokerPathNameAbi.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 2,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 3,
-          "text": "import assert from 'node:assert/strict';"
-        },
-        {
-          "line": 4,
-          "text": "import {createHash} from 'node:crypto';"
-        },
-        {
-          "line": 5,
-          "text": "import {spawnSync} from 'node:child_process';"
-        },
-        {
-          "line": 11,
-          "text": "const compile=spawnSync('cmd.exe',['/d','/c',`call \"${env}\" cl.exe /nologo /MT /W4 \"${root}/test/broker/path_name_abi.c\" /Fepath-abi.exe /Fopath-abi.obj /link ntdll.lib`],{cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',log,log],timeout:60000});"
-        }
-      ]
-    },
-    {
       "id": "B0219",
       "file": "tools/audit/Verify-BrokerResourceAttachment.mjs",
       "hits": [
@@ -9121,24 +9110,6 @@
         {
           "line": 28,
           "text": "`link.exe /nologo /out:resource-client.exe client.obj client-stub.obj \"${ownerBuild}/broker-transport.lib\" \"${ownerBuild}/lib-rpc.lib\" \"${ownerBuild}/lib-process-launch.lib\" \"${ownerBuild}/lib-process-observation.lib\" \"${ownerBuild}/lib-handle.lib\" \"${ownerBuild}/common-base-srv-transport.lib\" rpcrt4.lib advapi32.lib kernel32.lib`,"
-        }
-      ]
-    },
-    {
-      "id": "B0220",
-      "file": "tools/audit/verify-classifier-shared-boundary.py",
-      "hits": [
-        {
-          "line": 15,
-          "text": "graph = (graph_dir / \"build.ninja\").read_text(encoding=\"utf-8\")"
-        },
-        {
-          "line": 27,
-          "text": "deps = subprocess.run([\"ninja\", \"-C\", str(graph_dir), \"-t\", \"deps\", obj],"
-        },
-        {
-          "line": 47,
-          "text": "all_deps = subprocess.run([\"ninja\", \"-C\", str(graph_dir), \"-t\", \"deps\"],"
         }
       ]
     },

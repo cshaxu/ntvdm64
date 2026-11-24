@@ -1077,5 +1077,15 @@
     "status": "retired-with-delivery-evidence",
     "reason": "Duplicate old builders removed; native broker-original-fixtures and checked-in runners preserve functional contracts",
     "evidence": "docs/etc/evidence/t484-s3-broker-native.md"
+  },
+  "tools/audit/Verify-BrokerPathNameAbi.mjs": {
+    "reason": "Historical raw ABI/removed-header diagnostic superseded by actual product path adapter guard tests and original classifier cases",
+    "status": "retired-with-delivery-evidence",
+    "evidence": "docs/etc/evidence/t484-s3-classifier-retirement.md"
+  },
+  "tools/audit/verify-classifier-shared-boundary.py": {
+    "reason": "Historical raw ABI/removed-header diagnostic superseded by actual product path adapter guard tests and original classifier cases",
+    "status": "retired-with-delivery-evidence",
+    "evidence": "docs/etc/evidence/t484-s3-classifier-retirement.md"
   }
 }
