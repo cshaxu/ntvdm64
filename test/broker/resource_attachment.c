@@ -4,11 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stddef.h>
 #include "resource_attachment.h"
 #include "rpc_security.h"
+#include "common/base_srv/scope_internal.h"
 #include "compat/include/vdm_receipt.h"
 #include "common/base_srv/vdm_message.h"
-#include "common/protocol/vdm_protocol.h"
 #include "common/protocol/vdm_protocol.h"
 #include "common/base_srv/vdm_payload.h"
 
@@ -20,10 +21,11 @@ static DWORD revoke_remote(handle_t binding,HANDLE process,ULONG fileId,ULONG ev
     if (!fileId && !eventId) return result;
     if (!fileId || !eventId) return ERROR_INVALID_DATA;
     RpcTryExcept {
-        struct {
+        struct check_request {
             broker_vdm_message_header header;
             broker_vdm_check_values values;
             broker_vdm_startup startup;
+            uint32_t console_mode;
             unsigned char payload[128+sizeof("MEM.EXE\r\n")];
         } check={0};
         broker_vdm_payload_input fields[BROKER_VDM_PAYLOAD_FIELDS]={0};
@@ -35,9 +37,9 @@ static DWORD revoke_remote(handle_t binding,HANDLE process,ULONG fileId,ULONG ev
         fields[0].data="MEM.EXE\r\n";
         if (!broker_vdm_payload_encode(fields,check.payload,sizeof(check.payload),&payloadBytes)) result=ERROR_INVALID_DATA;
         check.header.version=BROKER_VDM_MESSAGE_VERSION;
-        check.header.bytes=96+payloadBytes; check.header.operation=BROKER_VDM_CHECK;
+        check.header.bytes=(uint32_t)offsetof(struct check_request,payload)+payloadBytes; check.header.operation=BROKER_VDM_CHECK;
         check.header.request_id=3; check.header.generation=1;
-        check.header.payload_bytes=check.header.bytes-32;
+        check.header.payload_bytes=check.header.bytes-sizeof(check.header);
         check.values.binary_type=0x10; /* Original basevdm.h BINARY_TYPE_DOS. */
         if (Client_CheckAndAbort(binding,process,check.header.bytes,(unsigned char *)&check,&task,&state) ||
             !task || state!=1) result=ERROR_INVALID_DATA; /* Original VDM_NOT_PRESENT. */
@@ -172,7 +174,17 @@ int main(int argc, char **argv)
     RPC_STATUS status;
     RPC_CSTR text = NULL;
     if (argc != 2 && argc != 3) return 1;
-    if (!broker_rpc_capture_scope(&serverScope)) return 5;
+    /* These PID-qualified test endpoints exercise peer logon/session and
+     * resource ownership, not published-package discovery. Capture the real
+     * token with the same provider used by product authorization. */
+    {
+        HANDLE token;
+        BOOL captured;
+        if (!OpenProcessToken(GetCurrentProcess(),TOKEN_QUERY,&token)) return 5;
+        captured=broker_rpc_token_scope(token,&serverScope);
+        CloseHandle(token);
+        if (!captured) return 5;
+    }
     if (argc==3 && !strcmp(argv[2],"deny-scope")) serverScope.logon.LowPart^=1;
     else if (argc==3 && !strcmp(argv[2],"deny-session")) serverScope.session^=1;
     else if (argc == 3) {
@@ -190,16 +202,6 @@ int main(int argc, char **argv)
     if (status != RPC_S_OK) { fprintf(stderr, "server setup=%lu\n", status); return 2; }
     if (test_registration_start()!=0) return 6;
     if (broker_vdm_receipts_initialize(&receipts,1)!=ERROR_SUCCESS) return 8;
-    {
-        uint32_t invalid=123;
-        if (broker_vdm_receipt_accept(&receipts,BROKER_VDM_STDOUT,NULL,&invalid)!=ERROR_INVALID_HANDLE || invalid)
-            return 10;
-        if (broker_vdm_receipt_revoke(&receipts,1,1)!=ERROR_NOT_FOUND) return 11;
-        receipts.issued=UINT32_MAX;
-        if (broker_vdm_receipt_accept(&receipts,BROKER_VDM_PARENT_WAIT,NULL,&invalid)!=ERROR_ARITHMETIC_OVERFLOW || invalid)
-            return 12;
-        receipts.issued=0;
-    }
     {
         uint32_t invalid=123;
         if (broker_vdm_receipt_accept(&receipts,BROKER_VDM_STDOUT,NULL,&invalid)!=ERROR_INVALID_HANDLE || invalid)

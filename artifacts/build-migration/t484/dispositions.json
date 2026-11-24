@@ -1087,5 +1087,10 @@
     "reason": "Historical raw ABI/removed-header diagnostic superseded by actual product path adapter guard tests and original classifier cases",
     "status": "retired-with-delivery-evidence",
     "evidence": "docs/etc/evidence/t484-s3-classifier-retirement.md"
+  },
+  "tools/audit/Verify-BrokerResourceAttachment.mjs": {
+    "status": "migrated-delivered",
+    "reason": "Native CMD resource fixture producer, real nine-case RPC runner retains map/provider assertions; no interpreted compilation",
+    "evidence": "docs/etc/evidence/t484-s3-resource-native.md"
   }
 }

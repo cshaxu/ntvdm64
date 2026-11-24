@@ -1764,3 +1764,5 @@ post-publication targeted checks.
 - [T484 S3 native original broker fixtures](evidence/t484-s3-broker-native.md)
 
 - [T484 S3 historical classifier diagnostics retirement](evidence/t484-s3-classifier-retirement.md)
+
+- [T484 S3 native resource attachment producer](evidence/t484-s3-resource-native.md)

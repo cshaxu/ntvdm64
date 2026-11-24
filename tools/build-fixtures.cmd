@@ -47,6 +47,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="broker-resource-fixtures" set "SELECTED=1"
+if "%TARGET%"=="broker-resource-fixtures" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="broker-original-fixtures" set "SELECTED=1"
 if "%TARGET%"=="broker-original-fixtures" if not "%~1"=="x86" exit /b 2
 for %%T in (wow-gdi-alias wow-hard-error-decoder wow-hook-native-binding) do if "%TARGET%"=="%%T" set "SELECTED=1"
@@ -295,6 +297,7 @@ if "%TARGET%"=="frame-codepage" goto nativediagnostics
 for %%I in (dpmi-contracts ccpu-port-privilege dpmi-swint-selected pm-entry-contract) do if "%TARGET%"=="%%I" goto worker
 for %%I in (cpu-contracts ccpu-neg64 ccpu-neg64-negative ccpu-leaf ccpu-leaf-negative ccpu-notification native-int-prefix) do if "%TARGET%"=="%%I" goto worker
 if "%TARGET%"=="dem-declarations" goto worker
+if "%TARGET%"=="broker-resource-fixtures" goto worker
 if "%TARGET%"=="broker-original-fixtures" goto worker
 if "%TARGET%"=="console-contracts" goto worker
 if "%TARGET%"=="host-thread-boundaries" goto worker

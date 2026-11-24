@@ -1,40 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {spawn, spawnSync} from 'node:child_process';
-const root = process.cwd();
-const build = path.resolve('build/M0-T412/S3/rpc-resource');
+// Runtime/assertion runner only. Build first with the CMD/native target.
+const [binaryRoot, outputRoot] = process.argv.slice(2);
+if (!binaryRoot || !outputRoot) throw Error('Pass native resource-tests directory and fresh output root');
+const binaries = path.resolve(binaryRoot), build = path.resolve(outputRoot);
+if (!build.startsWith(path.resolve('build') + path.sep) || fs.existsSync(build))
+    throw Error('Require a fresh build-owned report directory');
 fs.mkdirSync(build, {recursive: true});
-const environment = path.join(build, 'msvc-mt.cmd');
-fs.writeFileSync(environment, [
-    '@echo off', 'set "RESOURCE_FIXTURE_CWD=%CD%"', 'if defined VSCMD_VER goto ready',
-    'call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul',
-    'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%RESOURCE_FIXTURE_CWD%"', '%*', ''
-].join('\r\n'));
-const source = path.join(root, 'test/broker/resource_attachment.c');
-const idl = path.join(root, 'test/broker/resource_attachment.idl');
-const log = fs.openSync(path.join(build, 'build.log'), 'w');
-const securityInclude = `/I "${root}/src" /I "${root}/src/ntsrv-exe/transport"`;
-const ownerBuild=path.resolve('build/M0-T412/S3/product');
-const ownerGraph=fs.readFileSync(path.join(ownerBuild,'build.ninja'),'utf8');
-const registryFlags=ownerGraph.match(/^build obj\/opennt-base-bindings\/registry.obj:.*\r?\n  cflags = (.*)$/m)[1].replaceAll('$:',':');
-const commands = [
-    `cl.exe ${registryFlags} "${root}/test/broker/resource_registration.c" /Foregistration.obj`,
-    `midl.exe /nologo /env win32 /target NT100 /prefix client Client_ /prefix server Server_ /out . "${idl}"`,
-    `cl.exe /nologo /MT /W4 /DRESOURCE_SERVER /I . ${securityInclude} /c "${source}" /Foserver.obj`,
-    'cl.exe /nologo /MT /W4 /I . /c resource_attachment_s.c /Foserver-stub.obj',
-    `cl.exe /nologo /MT /W4 /I . ${securityInclude} /c "${source}" /Foclient.obj`,
-    'cl.exe /nologo /MT /W4 /I . /c resource_attachment_c.c /Foclient-stub.obj',
-    `link.exe /nologo /opt:ref /out:resource-server.exe /map:resource-server.map server.obj registration.obj "${ownerBuild}/obj/run16/support.obj" "${ownerBuild}/broker-transport.lib" "${ownerBuild}/lib-rpc.lib" "${ownerBuild}/lib-process-launch.lib" "${ownerBuild}/lib-process-observation.lib" "${ownerBuild}/lib-handle.lib" "${ownerBuild}/common-base-srv-transport.lib" "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/common-base-srv-bindings.lib" "${ownerBuild}/original-opennt-rtl-x86.lib" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib ntdll.lib user32.lib legacy_stdio_definitions.lib`,
-    `link.exe /nologo /out:resource-client.exe client.obj client-stub.obj "${ownerBuild}/broker-transport.lib" "${ownerBuild}/lib-rpc.lib" "${ownerBuild}/lib-process-launch.lib" "${ownerBuild}/lib-process-observation.lib" "${ownerBuild}/lib-handle.lib" "${ownerBuild}/common-base-srv-transport.lib" rpcrt4.lib advapi32.lib kernel32.lib`,
-];
-for (const command of commands) {
-    const result = spawnSync('cmd.exe', ['/d', '/c', `call "${environment}" ${command}`],
-        {cwd: build, windowsHide: true, windowsVerbatimArguments: true,
-            stdio: ['ignore', log, log], timeout: 60000});
-    if (result.status !== 0) { fs.closeSync(log); throw Error(`Build failed (${result.status}): ${command}; see ${build}/build.log`); }
-}
-fs.closeSync(log);
-const serverMap=fs.readFileSync(path.join(build,'resource-server.map'),'utf8');
+const serverMap=fs.readFileSync(path.join(binaries,'resource-server.map'),'utf8');
 for (const [symbol,unit] of [['_BaseSrvIsFirstVDM','opennt-base-server:srvvdm.obj'],['_OpenNtBaseDispatchOperation','opennt-base-bindings:dispatch.obj']])
     if (!serverMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes(unit)))
         throw Error(`Original service dispatch provider missing: ${symbol}`);
@@ -45,11 +19,11 @@ for (const symbol of ['_OpenNtBaseRegisterProcess','_OpenNtBaseRemoveProcess','_
     if (!serverMap.split(/\r?\n/).some(line=>line.includes(symbol)&&line.includes('opennt-base-bindings:registry.obj')))
         throw Error(`Formal registered-process provider missing: ${symbol}`);
 for (const name of ['resource-server.exe', 'resource-client.exe']) {
-    const image = fs.readFileSync(path.join(build, name));
+    const image = fs.readFileSync(path.join(binaries, name));
     if (image.readUInt16LE(image.readUInt32LE(0x3c) + 4) !== 0x14c) throw Error('Not x86');
 }
 function launchServer(endpoint, downstream) {
-const server = spawn(path.join(build, 'resource-server.exe'), [endpoint, ...(downstream ? [downstream] : [])],
+const server = spawn(path.join(binaries, 'resource-server.exe'), [endpoint, ...(downstream ? [downstream] : [])],
     {cwd: build, windowsHide: true, stdio: ['ignore', 'pipe', 'pipe']});
 const serverDone = new Promise(resolve => server.once('close', code => resolve(code)));
 let stdout = '', stderr = '';
@@ -91,11 +65,12 @@ try {
     relay = launchServer(endpoint, target ? `${endpoint}-target` :
         mode === 'unavailable' ? `${endpoint}-absent` : mode === 'wrong-scope' ? 'deny-scope' : mode === 'wrong-session' ? 'deny-session' : undefined);
     await relay.ready;
-    const result = spawnSync(path.join(build, 'resource-client.exe'),
+    const result = spawnSync(path.join(binaries, 'resource-client.exe'),
         [endpoint, path.join(build, `${endpoint}.tmp`), ...(mode.endsWith('readonly') ? ['readonly'] :
             mode === 'unavailable' ? ['unavailable'] : mode === 'wrong-peer' ? ['denied', String(process.pid)] : mode.startsWith('wrong-') ? ['denied'] : mode === 'low-auth' ? ['low-auth'] : [])],
         {cwd: build, windowsHide: true, encoding: 'utf8', timeout: 15000});
-    const record = {clientStatus: result.status, clientOutput: result.stdout,
+    const record = {clientPid: result.pid, serverPid: relay.server.pid, targetPid: target?.server.pid,
+        clientStatus: result.status, clientOutput: result.stdout,
         clientError: result.stderr, spawnError: result.error?.message};
     fs.writeFileSync(path.join(build, `${mode}-result.json`), JSON.stringify(record, null, 2));
     if (result.status !== 0) throw Error('Resource attachment fixture failed');

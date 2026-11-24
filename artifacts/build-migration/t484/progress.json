@@ -1,29 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "e52a5579b70292c850d0b7c437ca2f9652e77f94",
+  "head": "ad308a22ba1fe7d1042d31e2853c0f17a1c66d5b",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/broker/path_name_abi.c",
-    " D tools/audit/Verify-BrokerPathNameAbi.mjs",
-    " D tools/audit/verify-classifier-shared-boundary.py",
-    "?? artifacts/build-migration/t484/s3-classifier-retirement/",
-    "?? docs/etc/evidence/t484-s3-classifier-retirement.md"
+    " M test/broker/resource_attachment.c",
+    " M tools/audit/Verify-BrokerResourceAttachment.mjs",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/worker/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-resource-native/",
+    "?? docs/etc/evidence/t484-s3-resource-native.md",
+    "?? tools/build/worker/resource-tests.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 143,
-    "unchanged": 67,
+    "changed": 144,
+    "unchanged": 66,
     "removed": 145
   },
   "disposition_counts": {
-    "migrated-delivered": 83,
+    "migrated-delivered": 84,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 145,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 53,
+    "requires-disposition-reconciliation": 52,
     "retained-standalone-audit": 5
   },
   "existing_interpreted_candidates_with_command_hits": 159,
@@ -4151,8 +4153,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "ad308a22ba1fe7d1042d31e2853c0f17a1c66d5b"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-classifier-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "reason": "Historical raw ABI/removed-header diagnostic superseded by actual product path adapter guard tests and original classifier cases",
@@ -4164,12 +4170,16 @@
       "id": "B0219",
       "file": "tools/audit/Verify-BrokerResourceAttachment.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "2f5415eb6727f28c0681ec3cf7b9a801fd96feaa65c0b0650f173ac7bb01e6d7",
+      "state": "changed",
+      "current_sha256": "8630fa25072f51d87052a9b53d42c1d92644014feee7470b04e06aa5bed7c574",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Native CMD resource fixture producer, real nine-case RPC runner retains map/provider assertions; no interpreted compilation",
+        "evidence": "docs/etc/evidence/t484-s3-resource-native.md"
+      }
     },
     {
       "id": "B0220",
@@ -4177,8 +4187,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "ad308a22ba1fe7d1042d31e2853c0f17a1c66d5b"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-classifier-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "reason": "Historical raw ABI/removed-header diagnostic superseded by actual product path adapter guard tests and original classifier cases",
@@ -6050,6 +6064,12 @@
     }
   ],
   "commits": {
+    "ad308a22ba1fe7d1042d31e2853c0f17a1c66d5b": {
+      "subject": "T484 S3 P140 retire historical classifier diagnostics",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-classifier-retirement.md"
+      ]
+    },
     "e52a5579b70292c850d0b7c437ca2f9652e77f94": {
       "subject": "T484 S3 P139 consolidate original broker fixtures on native CMD build",
       "evidence": [
@@ -9078,38 +9098,6 @@
         {
           "line": 3,
           "text": "import {spawn, spawnSync} from 'node:child_process';"
-        },
-        {
-          "line": 18,
-          "text": "const ownerGraph=fs.readFileSync(path.join(ownerBuild,'build.ninja'),'utf8');"
-        },
-        {
-          "line": 21,
-          "text": "`cl.exe ${registryFlags} \"${root}/test/broker/resource_registration.c\" /Foregistration.obj`,"
-        },
-        {
-          "line": 23,
-          "text": "`cl.exe /nologo /MT /W4 /DRESOURCE_SERVER /I . ${securityInclude} /c \"${source}\" /Foserver.obj`,"
-        },
-        {
-          "line": 24,
-          "text": "'cl.exe /nologo /MT /W4 /I . /c resource_attachment_s.c /Foserver-stub.obj',"
-        },
-        {
-          "line": 25,
-          "text": "`cl.exe /nologo /MT /W4 /I . ${securityInclude} /c \"${source}\" /Foclient.obj`,"
-        },
-        {
-          "line": 26,
-          "text": "'cl.exe /nologo /MT /W4 /I . /c resource_attachment_c.c /Foclient-stub.obj',"
-        },
-        {
-          "line": 27,
-          "text": "`link.exe /nologo /opt:ref /out:resource-server.exe /map:resource-server.map server.obj registration.obj \"${ownerBuild}/obj/run16/support.obj\" \"${ownerBuild}/broker-transport.lib\" \"${ownerBuild}/lib-rpc.lib\" \"${ownerBuild}/lib-process-launch.lib\" \"${ownerBuild}/lib-process-observation.lib\" \"${ownerBuild}/lib-handle.lib\" \"${ownerBuild}/common-base-srv-transport.lib\" \"${ownerBuild}/opennt-base-server.lib\" \"${ownerBuild}/opennt-base-bindings.lib\" \"${ownerBuild}/common-base-srv-bindings.lib\" \"${ownerBuild}/original-opennt-rtl-x86.lib\" server-stub.obj client-stub.obj rpcrt4.lib advapi32.lib kernel32.lib ntdll.lib user32.lib legacy_stdio_definitions.lib`,"
-        },
-        {
-          "line": 28,
-          "text": "`link.exe /nologo /out:resource-client.exe client.obj client-stub.obj \"${ownerBuild}/broker-transport.lib\" \"${ownerBuild}/lib-rpc.lib\" \"${ownerBuild}/lib-process-launch.lib\" \"${ownerBuild}/lib-process-observation.lib\" \"${ownerBuild}/lib-handle.lib\" \"${ownerBuild}/common-base-srv-transport.lib\" rpcrt4.lib advapi32.lib kernel32.lib`,"
         }
       ]
     },

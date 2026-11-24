@@ -1,0 +1,140 @@
+{
+  "product": {
+    "pid": 6376,
+    "exit": 0,
+    "finished": "2026-11-24T07:18:31.5612723+01:00",
+    "started": "2026-11-24T07:17:29.0433554+01:00"
+  },
+  "completed": [
+    "B0219"
+  ],
+  "cases": [
+    {
+      "name": "low-auth-result",
+      "result": {
+        "clientPid": 8028,
+        "serverPid": 17168,
+        "clientStatus": 0,
+        "clientOutput": "PASS: authenticated local RPC file/event attachments, shared position, returned ownership\r\n",
+        "clientError": "",
+        "serverStatus": 0,
+        "observedAuthentication": "requested integrity; server observed WINNT packet privacy"
+      }
+    },
+    {
+      "name": "readonly-result",
+      "result": {
+        "clientPid": 25444,
+        "serverPid": 9972,
+        "clientStatus": 0,
+        "clientOutput": "PASS: read-only resource attachment denies write without signaling or mutation\r\n",
+        "clientError": "",
+        "serverStatus": 0
+      }
+    },
+    {
+      "name": "relay-readonly-result",
+      "result": {
+        "clientPid": 16584,
+        "serverPid": 13024,
+        "targetPid": 5424,
+        "clientStatus": 0,
+        "clientOutput": "PASS: read-only resource attachment denies write without signaling or mutation\r\n",
+        "clientError": "",
+        "serverStatus": 0,
+        "targetStatus": 0
+      }
+    },
+    {
+      "name": "relay-result",
+      "result": {
+        "clientPid": 17336,
+        "serverPid": 12236,
+        "targetPid": 25884,
+        "clientStatus": 0,
+        "clientOutput": "PASS: authenticated local RPC file/event attachments, shared position, returned ownership\r\n",
+        "clientError": "",
+        "serverStatus": 0,
+        "targetStatus": 0
+      }
+    },
+    {
+      "name": "shared-result",
+      "result": {
+        "clientPid": 10668,
+        "serverPid": 33008,
+        "clientStatus": 0,
+        "clientOutput": "PASS: authenticated local RPC file/event attachments, shared position, returned ownership\r\n",
+        "clientError": "",
+        "serverStatus": 0
+      }
+    },
+    {
+      "name": "unavailable-result",
+      "result": {
+        "clientPid": 27912,
+        "serverPid": 15472,
+        "clientStatus": 0,
+        "clientOutput": "PASS: unavailable target fails synchronously without mutation or signaling\r\n",
+        "clientError": "",
+        "serverStatus": 0
+      }
+    },
+    {
+      "name": "wrong-peer-result",
+      "result": {
+        "clientPid": 4808,
+        "serverPid": 25384,
+        "clientStatus": 0,
+        "clientOutput": "PASS: rejected scope or authentication level before resource mutation\r\n",
+        "clientError": "",
+        "serverStatus": "still listening; owned fixture terminated in cleanup"
+      }
+    },
+    {
+      "name": "wrong-scope-result",
+      "result": {
+        "clientPid": 8228,
+        "serverPid": 14428,
+        "clientStatus": 0,
+        "clientOutput": "PASS: rejected scope or authentication level before resource mutation\r\n",
+        "clientError": "",
+        "serverStatus": "still listening; owned fixture terminated in cleanup"
+      }
+    },
+    {
+      "name": "wrong-session-result",
+      "result": {
+        "clientPid": 16180,
+        "serverPid": 9640,
+        "clientStatus": 0,
+        "clientOutput": "PASS: rejected scope or authentication level before resource mutation\r\n",
+        "clientError": "",
+        "serverStatus": "still listening; owned fixture terminated in cleanup"
+      }
+    }
+  ],
+  "publication": {
+    "publishedCopies": 22,
+    "rawInputs": 11,
+    "unchanged": true,
+    "republished": false
+  },
+  "fullGate": false,
+  "runtime": {
+    "pid": 22776,
+    "finished": "2026-11-24T07:19:15.1949666+01:00",
+    "started": "2026-11-24T07:19:14.0489281+01:00",
+    "exit": 0
+  },
+  "images": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\resource-tests\\resource-server.exe",
+      "Hash": "D59C5C55656F105DFF212E1847F7EF56780B7785F001AC4256F85F675B4DF542"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\resource-tests\\resource-client.exe",
+      "Hash": "67675254A85AEC6F49864624A108AEA450C741D87898AF586A1CD4D4469E6FC2"
+    }
+  ]
+}
