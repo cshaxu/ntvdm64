@@ -862,7 +862,11 @@
   "test/observation/verify-wow-message-construction.ps1": {
     "status": "migrated-delivered",
     "reason": "Current native construction/transaction contracts pass; historical builders and fixture-only controls retired; full cached build/cache/publication verified",
-    "evidence": "docs/etc/evidence/t484-s3-construction-native.md"
+    "evidence": "docs/etc/evidence/t484-s3-construction-native.md",
+    "retentionReview": {
+      "result": "retain-current-forward-contracts",
+      "evidence": "docs/etc/evidence/t484-s3-reverse-construction.md"
+    }
   },
   "test/observation/verify-wow-module-alias-bounds.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-module-alias-native.md",
@@ -942,6 +946,11 @@
   "test/observation/verify-wow-resource-call-fixtures.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-resource-calls.md",
     "reason": "Native resource group and unchanged assertions pass; duplicate extractor/manual builder and obsolete stand-ins removed",
+    "status": "migrated-delivered"
+  },
+  "test/observation/verify-wow-reverse-construction.ps1": {
+    "reason": "Current21 contracts retained via CMD/native target; old commit producer and interpreted extraction retired",
+    "evidence": "docs/etc/evidence/t484-s3-reverse-construction.md",
     "status": "migrated-delivered"
   }
 }

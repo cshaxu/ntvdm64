@@ -1,0 +1,38 @@
+{
+  "cAssertionsUnchanged": true,
+  "finalRunner": {
+    "started": "2026-11-24T04:37:58.9527556+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T04:38:26.9469662+01:00",
+    "pid": 5156
+  },
+  "forwardCases": 40,
+  "validation": {
+    "pid": 18580,
+    "finished": "2026-11-24T04:37:39.7792044+01:00",
+    "exit": 0,
+    "started": "2026-11-24T04:36:06.1911623+01:00"
+  },
+  "publication": {
+    "republished": false,
+    "unchanged": true,
+    "rawInputs": 11,
+    "publishedCopies": 22
+  },
+  "projections": [
+    {
+      "file": "reverse_types.h",
+      "identicalIgnoringWhitespace": true
+    },
+    {
+      "file": "reverse_exact.h",
+      "identicalIgnoringWhitespace": true
+    }
+  ],
+  "cache": {
+    "hash": "88BDF0E46BF8A373C944D2D140B97EB8887B8ADB9AC6129C1305B241B879BC90",
+    "mtime": "2026-11-24T03:36:22.3800951Z",
+    "wrongArch": 2
+  },
+  "reverseMarker": "REVERSE_CONSTRUCTION failures=0 scenarios=21 buffer=84 record=148"
+}

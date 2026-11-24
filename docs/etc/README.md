@@ -1725,3 +1725,5 @@ post-publication targeted checks.
 - [T484 S3 required-root capture](evidence/t484-s3-required-root.md).
 
 - [T484 S3 resource contracts and retention](evidence/t484-s3-resource-calls.md)
+
+- [T484 S3 reverse construction producer](evidence/t484-s3-reverse-construction.md)

@@ -1,31 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "05f93faa56d01d5343f0f0e2cc62375f244c9890",
+  "head": "f6488304dfe55db96b1da4991d3d14f9a26ee102",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/adapter-mvdm-host-out/wow/wow_cursor_resource_fixture.c",
-    " D test/observation/extract-wow-cursor-call-fixture.ps1",
-    " M test/observation/verify-wow-resource-call-fixtures.ps1",
+    " M test/observation/verify-wow-reverse-construction.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/wow-boundaries.cmake",
-    "?? artifacts/build-migration/t484/s3-resource-calls/",
-    "?? docs/etc/evidence/t484-s3-resource-calls.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-reverse-construction/",
+    "?? docs/etc/evidence/t484-s3-reverse-construction.md",
+    "?? tools/build/fixtures/wow-reverse-construction.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 136,
-    "unchanged": 92,
+    "changed": 137,
+    "unchanged": 91,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 77,
+    "migrated-delivered": 78,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 81,
+    "requires-disposition-reconciliation": 80,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3335,7 +3334,11 @@
       "decision": {
         "status": "migrated-delivered",
         "reason": "Current native construction/transaction contracts pass; historical builders and fixture-only controls retired; full cached build/cache/publication verified",
-        "evidence": "docs/etc/evidence/t484-s3-construction-native.md"
+        "evidence": "docs/etc/evidence/t484-s3-construction-native.md",
+        "retentionReview": {
+          "result": "retain-current-forward-contracts",
+          "evidence": "docs/etc/evidence/t484-s3-reverse-construction.md"
+        }
       }
     },
     {
@@ -3629,8 +3632,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "32381743c14a30b9ead449d8df55cda2886b9312e6b3d67f85cfefa3f5228dde",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f6488304dfe55db96b1da4991d3d14f9a26ee102"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-resource-calls.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-resource-calls.md",
@@ -3642,12 +3649,16 @@
       "id": "B0192",
       "file": "test/observation/verify-wow-reverse-construction.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "aced772ff774b80e6cfb1b6a15305cfb8b77e7f0c8d0275f2b29953b92ea95dc",
+      "state": "changed",
+      "current_sha256": "b688ac29ae6fdb86e277a866d450a1334b2a507c5a64db769cc82ba468d577e9",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Current21 contracts retained via CMD/native target; old commit producer and interpreted extraction retired",
+        "evidence": "docs/etc/evidence/t484-s3-reverse-construction.md",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0193",
@@ -5817,6 +5828,12 @@
     }
   ],
   "commits": {
+    "f6488304dfe55db96b1da4991d3d14f9a26ee102": {
+      "subject": "T484 S3 P118 consolidate resource fixture producers and retire stale doubles",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-resource-calls.md"
+      ]
+    },
     "05f93faa56d01d5343f0f0e2cc62375f244c9890": {
       "subject": "T484 S3 P117 reuse native capture producer for required root contract",
       "evidence": [
@@ -8484,8 +8501,8 @@
           "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
         },
         {
-          "line": 62,
-          "text": "$cmd=\"@echo off`r`ncall `\"$CompilerDriver`\" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4706 /wd4127 /wd4213 /I`\"$dir`\" `\"$PSScriptRoot/wow_reverse_construction_fixture.c`\" /Fo`\"$dir/unit.obj`\" /Fe`\"$dir/unit.exe`\" /link user32.lib`r`nexit /b %errorlevel%`r`n\""
+          "line": 26,
+          "text": "$native=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
     },
