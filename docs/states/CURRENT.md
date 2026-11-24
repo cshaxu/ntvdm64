@@ -62,6 +62,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P153 obsolete build closures](../etc/evidence/t484-s3-obsolete-build-closures.md) | Nine obsolete entries and their historical-only closure removed (12 files/441 lines); shared native BuildTree retained. No product change. |
 
+| [P154 retired projections](../etc/evidence/t484-s3-retired-projections.md) | Three historical Bochs manifests/self-test and completed one-shot archive updater retired; assets unchanged. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

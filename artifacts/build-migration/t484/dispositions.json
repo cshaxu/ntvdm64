@@ -1242,5 +1242,25 @@
     "status": "retained-native-declarative",
     "reason": "Current shared native cache/tree owner used directly by CMake; existing full build validates unchanged implementation",
     "evidence": "docs/etc/evidence/t484-s3-obsolete-build-closures.md"
+  },
+  "tools/build/t197-s6-cpu5-machine-config-projection.json": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Unused historical configuration or completed fixed-list archive producer; associated obsolete self-test removed; assets unchanged",
+    "evidence": "docs/etc/evidence/t484-s3-retired-projections.md"
+  },
+  "tools/build/t95-s6-msvc-config-projection-manifest-v2.json": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Unused historical configuration or completed fixed-list archive producer; associated obsolete self-test removed; assets unchanged",
+    "evidence": "docs/etc/evidence/t484-s3-retired-projections.md"
+  },
+  "tools/build/t95-s6-msvc-config-projection-manifest.json": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Unused historical configuration or completed fixed-list archive producer; associated obsolete self-test removed; assets unchanged",
+    "evidence": "docs/etc/evidence/t484-s3-retired-projections.md"
+  },
+  "tools/build/update-guest-archive.py": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Unused historical configuration or completed fixed-list archive producer; associated obsolete self-test removed; assets unchanged",
+    "evidence": "docs/etc/evidence/t484-s3-retired-projections.md"
   }
 }
