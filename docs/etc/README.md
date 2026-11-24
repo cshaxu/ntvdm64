@@ -1851,3 +1851,4 @@ post-publication targeted checks.
 - [T484 S3 fixed-profile probes](evidence/t484-s3-fixed-probes.md).
 - [T484 S3 fixed DOS profiles](evidence/t484-s3-guest-profiles.md).
 - [T484 S3 transition producers](evidence/t484-s3-transition-probes.md).
+- [T484 S3 remote enumeration producer](evidence/t484-s3-remote-probe.md).

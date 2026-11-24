@@ -1377,5 +1377,10 @@
     "status": "supplemental-native-producer-pending-staging",
     "reason": "All authored COM/EXE configurations use shared CMD production; memory transition also reuses existing PIF builder and native environment reader, removing CL/C# production. Shared stage/configuration remains.",
     "evidence": "docs/etc/evidence/t484-s3-transition-probes.md"
+  },
+  "test/integration/verify-redirector-remote.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Expected uint32 enumeration status is passed through checked CMD/CMake configuration; source/flags preserved, runtime assertions unchanged. Shared staging remains.",
+    "evidence": "docs/etc/evidence/t484-s3-remote-probe.md"
   }
 }

@@ -10,8 +10,9 @@ $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Use a fresh repository-build evidence directory'}
 $Observer=(Resolve-Path $Observer).Path
 $null=New-Item -ItemType Directory $root
-& nasm -f bin "-DEXPECT_ENUM_STATUS=$ExpectedEnumStatus" -o "$root/RAPTEST.COM" "$PSScriptRoot/../observation/vdmredir_remote_unavailable.asm"
-if($LASTEXITCODE){throw 'Probe assembly failed'}
+& "$repo/tools/build-fixtures.cmd" x86 guest-remote $ExpectedEnumStatus
+if($LASTEXITCODE){throw 'Remote probe build failed'}
+Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/remote/RAPTEST.COM" -Destination "$root/RAPTEST.COM"
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $runtime=New-PhysicalRuntimeStage $PackageRoot
 $scope=New-IsolatedPackageScope $runtime

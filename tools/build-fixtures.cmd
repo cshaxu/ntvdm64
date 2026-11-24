@@ -1,12 +1,14 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="win31-profile" if not "%~2"=="wow-startup-failure" if not "%~2"=="wow-shell-exception" if not "%~2"=="wow-common-return" if not "%~2"=="win101-control-fixtures" if not "%~2"=="ccpu-header-selection" if not "%~2"=="wow-message-transaction" if not "%~2"=="wow-attach-failure" if not "%~2"=="wow-missing-init" if not "%~2"=="wow-callback-abort" if not "%~2"=="media-owner" if not "%~2"=="command-redirection" if not "%~2"=="crt-contracts" if not "%~2"=="crt-missing" if not "%~2"=="crt-duplicate" if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
+if not "%~2"=="guest-remote" if not "%~2"=="win31-profile" if not "%~2"=="wow-startup-failure" if not "%~2"=="wow-shell-exception" if not "%~2"=="wow-common-return" if not "%~2"=="win101-control-fixtures" if not "%~2"=="ccpu-header-selection" if not "%~2"=="wow-message-transaction" if not "%~2"=="wow-attach-failure" if not "%~2"=="wow-missing-init" if not "%~2"=="wow-callback-abort" if not "%~2"=="media-owner" if not "%~2"=="command-redirection" if not "%~2"=="crt-contracts" if not "%~2"=="crt-missing" if not "%~2"=="crt-duplicate" if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
+set "REMOTE_OPTION=-DNTVDM_REMOTE_ENUM_STATUS=0"
 set "WIN31_OPTION=-DNTVDM_WIN31_INSTALL="
 if "%~2"=="win31-profile" if "%~3"=="" exit /b 2
 if "%~2"=="win31-profile" set WIN31_OPTION="-DNTVDM_WIN31_INSTALL=%~3"
 set "MEDIA_OPTION=-DNTVDM_MEDIA_ORIGINAL_ROOT="
+if "%~2"=="guest-remote" goto remote_arguments
 if "%~2"=="media-owner" goto media_arguments
 if "%~2"=="win16-ole-peer" goto ole_arguments
 if "%~2"=="win16-print" goto print_arguments
@@ -20,6 +22,14 @@ if not "%SERIAL_MASK:~3%"=="" exit /b 2
 if not "%SERIAL_MASK%"=="0" if "%SERIAL_MASK:~0,1%"=="0" exit /b 2
 if %SERIAL_MASK% GTR 511 exit /b 2
 set "SERIAL_OPTION=-DNTVDM_SERIAL_MASK=%SERIAL_MASK%"
+goto arguments
+:remote_arguments
+if "%~3"=="" exit /b 2
+for /f "delims=0123456789" %%I in ("%~3") do exit /b 2
+set "REMOTE_STATUS=%~3"
+if not "%REMOTE_STATUS:~10%"=="" exit /b 2
+if not "%REMOTE_STATUS%"=="0" if "%REMOTE_STATUS:~0,1%"=="0" exit /b 2
+set "REMOTE_OPTION=-DNTVDM_REMOTE_ENUM_STATUS=%REMOTE_STATUS%"
 goto arguments
 :message_arguments
 if "%~3"=="" exit /b 2
@@ -147,8 +157,8 @@ if "%TARGET%"=="wow-thunk-nls" set "SELECTED=1"
 if "%TARGET%"=="wow-thunk-nls" if not "%~1"=="x86" exit /b 2
 for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
-for %%I in (win31-matrix win31-dosonly win95-guest-only interrupt-observer guest-api guest-profiles guest-forcedos guest-memory-transition) do if "%TARGET%"=="%%I" set "SELECTED=1"
-for %%I in (win31-matrix win31-dosonly win95-guest-only interrupt-observer guest-api guest-profiles guest-forcedos guest-memory-transition) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
+for %%I in (win31-matrix win31-dosonly win95-guest-only interrupt-observer guest-api guest-profiles guest-forcedos guest-memory-transition guest-remote) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (win31-matrix win31-dosonly win95-guest-only interrupt-observer guest-api guest-profiles guest-forcedos guest-memory-transition guest-remote) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-page-cost-unit" set "SELECTED=1"
@@ -343,7 +353,7 @@ if "%TARGET%"=="wow-controls" goto controls
 if "%TARGET%"=="command-redirection" if not "%~3"=="" goto worker_existing
 if "%TARGET%"=="command-redirection" goto worker
 for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" goto worker
-cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON %SERIAL_OPTION% %MEDIA_OPTION% %WIN31_OPTION%
+cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON %SERIAL_OPTION% %MEDIA_OPTION% %WIN31_OPTION% %REMOTE_OPTION%
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" --target %TARGET%
 exit /b %errorlevel%

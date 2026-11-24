@@ -96,6 +96,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P189 transition producers](../etc/evidence/t484-s3-transition-probes.md) | FORCEDOS/memory profiles use CMD; inline CL and external C# replaced by existing native tools. Ten exact-image/cache checks and environment query pass. Fixed316/355;17 supplemental chains pending; two of18 new NASM candidates remain. |
 
+| [P190 remote enumeration](../etc/evidence/t484-s3-remote-probe.md) | Parameterized remote witness uses checked CMD/CMake producer; existing status semantics retained. Fixed316/355;18 supplemental preparation chains pending; one of18 new NASM candidates remains. |
+
 A fresh global scan found18 further integration scripts with direct NASM
 commands; these await retention/migration reconciliation, as recorded in P183.
 The frozen355 census is not the complete remaining invocation graph.

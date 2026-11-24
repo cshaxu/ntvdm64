@@ -66,6 +66,16 @@ add_custom_target(guest-memory-transition DEPENDS ${transition_outputs}
   "${CMAKE_BINARY_DIR}/guest-probes/cpu-integration/CallReturn.COM"
   ems_pif_builder logon-environment)
 
+set(NTVDM_REMOTE_ENUM_STATUS "0" CACHE STRING "Expected remote enumeration status")
+if(NOT NTVDM_REMOTE_ENUM_STATUS MATCHES "^(0|[1-9][0-9]*)$" OR
+   NTVDM_REMOTE_ENUM_STATUS GREATER 4294967295)
+  message(FATAL_ERROR "Remote enumeration status must be a decimal uint32")
+endif()
+guest_probe(remote RAPTEST.COM vdmredir_remote_unavailable.asm
+  "-DEXPECT_ENUM_STATUS=${NTVDM_REMOTE_ENUM_STATUS}")
+get_property(remote_outputs GLOBAL PROPERTY guest_remote)
+add_custom_target(guest-remote DEPENDS ${remote_outputs})
+
 guest_probe(redir VDMPRDR.COM vdmredir_pipe_open_read.asm)
 guest_probe(redir VDMPTX.COM vdmredir_pipe_transact.asm)
 guest_probe(redir VDMPCAL.COM vdmredir_pipe_call.asm)
