@@ -1,30 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "151e675cd0b07b5642b237afe74b58f9cd41bbb8",
+  "head": "10d0f681a9df1fa49dda192203d91a422a31951c",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
+    " M docs/rules/EXECUTION.md",
     " M docs/states/CURRENT.md",
-    " D test/app/run16_native_child.c",
-    " D tools/audit/Verify-Run16Entry.mjs",
-    "?? docs/etc/evidence/t484-s3-run16-entry-retirement.md"
+    " D tools/build/StageProductExecutable.mjs",
+    " D tools/build/StageWow32Provider.mjs",
+    "?? docs/etc/evidence/t484-s3-obsolete-publishers.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 165,
-    "unchanged": 20,
-    "removed": 170
+    "unchanged": 18,
+    "removed": 172
   },
   "disposition_counts": {
     "migrated-delivered": 113,
     "retained-native-declarative": 3,
-    "retired-with-delivery-evidence": 170,
+    "retired-with-delivery-evidence": 172,
     "retained-native-delegate": 14,
     "pending-producer-migration": 26,
-    "requires-disposition-reconciliation": 13,
+    "requires-disposition-reconciliation": 11,
     "retained-standalone-audit": 16
   },
-  "existing_interpreted_candidates_with_command_hits": 147,
+  "existing_interpreted_candidates_with_command_hits": 145,
   "files": [
     {
       "id": "B0001",
@@ -6333,23 +6334,31 @@
       "id": "B0345",
       "file": "tools/build/StageProductExecutable.mjs",
       "stage": "S4",
-      "state": "unchanged",
-      "current_sha256": "767a760968e5d0953dcdfc69940094aa740d42e1d3d0635a31983fee48b36129",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "P212 removes obsolete single ntvdm32.exe publisher with no current code caller; old alias deletion conflicts with the current coherent host package. Current publication chain remains pending S4.",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-publishers.md"
+      }
     },
     {
       "id": "B0346",
       "file": "tools/build/StageWow32Provider.mjs",
       "stage": "S4",
-      "state": "unchanged",
-      "current_sha256": "379c2b0368c1b6490766c6b8e3aecf67b48054a0eec085c6e6dc3aaf243f9193",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "P212 removes obsolete standalone WOW32 publisher with no current code caller; current coherent manifest publication remains pending S4.",
+        "evidence": "docs/etc/evidence/t484-s3-obsolete-publishers.md"
+      }
     },
     {
       "id": "B0347",
@@ -6488,6 +6497,12 @@
     }
   ],
   "commits": {
+    "10d0f681a9df1fa49dda192203d91a422a31951c": {
+      "subject": "M0 T484 S3 P211: retire obsolete Run16 entry producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-run16-entry-retirement.md"
+      ]
+    },
     "151e675cd0b07b5642b237afe74b58f9cd41bbb8": {
       "subject": "M0 T484 S3 P210: migrate current CCPU consumer contracts",
       "evidence": [
@@ -10156,54 +10171,6 @@
         {
           "line": 85,
           "text": "& \"$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($PackageId)).ToString()) $destination"
-        }
-      ]
-    },
-    {
-      "id": "B0345",
-      "file": "tools/build/StageProductExecutable.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "#!/usr/bin/env node"
-        },
-        {
-          "line": 4,
-          "text": "* This is deliberately a post-link operation: formal build roots remain"
-        },
-        {
-          "line": 8,
-          "text": "import crypto from 'node:crypto';"
-        },
-        {
-          "line": 9,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 10,
-          "text": "import path from 'node:path';"
-        }
-      ]
-    },
-    {
-      "id": "B0346",
-      "file": "tools/build/StageWow32Provider.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "#!/usr/bin/env node"
-        },
-        {
-          "line": 3,
-          "text": "import crypto from 'node:crypto';"
-        },
-        {
-          "line": 4,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 5,
-          "text": "import path from 'node:path';"
         }
       ]
     },

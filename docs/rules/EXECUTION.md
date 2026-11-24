@@ -550,33 +550,21 @@ a configure tree, retry root, object cache, probe, or raw observation log.
 
 ### Product Executable
 
-The legacy monolithic publication row has one executable:
-
-- `build/output/ntvdm32.exe` — the formal Win32/x86 product link.
-
-The active packet may instead select a formal multi-program package and records
-its exact executable set.  Every deployable local package mirrors its selected
-formal executable names at the `O:\winnt` root. Native x64 is retired as a product,
-staging, runtime and acceptance target. Native-x64/cross-width-only source
-differences are removed when the selected original Win32/x86 form composes.
+The active packet selects the coherent host-image package and its exact
+architecture, executable names, manifest and publication destinations. The
+historical ntvdm32.exe-only and standalone WOW32 publishers are retired;
+they must not be used to replace or delete members of the current package.
+Follow the complete-package publication and hash-verification rules above.
+Retiring obsolete tools does not certify completion of the remaining
+staging/publication migration.
 
 `O:\winnt` is a runtime-package root, not a build or diagnostic workspace.
 `O:\winnt\tests\` is the sole runtime location for test artifacts; JSON, TXT,
-LOG, MAP, PDB and other observation/debug records must be written below
-`O:\winnt\logs\`, never beside the product executable or guest media at the
-package root. `O:\winnt\builds\` remains reserved for retained historical
-runtime-package versions only.
-
-A build run may use a descriptive temporary executable name inside its
-disposable `build/<task-id>/<run-id>/` root, but that name is never a product
-publication name. A staging step may replace `ntvdm32.exe` only after the x86
-formal final link succeeds. It must never publish a generic `ntvdm.exe` or a
-task-specific diagnostic executable in its place. The publication record names
-the source run, x86 architecture and staged-file hash.
-
-Use `node tools/build/StageProductExecutable.mjs --architecture x86
---input <formal-final-link.exe>` for staging. The tool reads the PE machine
-field before it writes the destination and rejects a mislabeled input.
+LOG, MAP, PDB and other observation/debug records belong below
+`O:\winnt\logs\`, never beside product executables or guest media.
+`O:\winnt\builds\` is reserved for retained runtime-package history.
+Descriptive diagnostic image names may remain in owned disposable build
+roots, but must never replace a formal product image during publication.
 
 ### Historical Recovery Audit Gate
 

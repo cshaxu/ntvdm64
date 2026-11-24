@@ -100,11 +100,13 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P211 Run16 historical entry](../etc/evidence/t484-s3-run16-entry-retirement.md) | Retired obsolete T412 entry builder and sole child source; current classifier checks retained. All30 P199 supplemental candidates classified; frozen316/355 and23 staging chains remain. |
 
+| [P212 obsolete publishers](../etc/evidence/t484-s3-obsolete-publishers.md) | Removed two uncalled historical single-image publishers and stale normative invocation; coherent current publication remains S4. Frozen318/355 disposed,37 remain;23 supplemental preparation chains remain. |
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
-The frozen355 census is not the complete remaining invocation graph. P193
-adds13 unclassified CL/NASM/Add-Type candidates to the existing ledger;
-retention and build effect are not yet decided.
+The frozen355 census is not the complete remaining invocation graph. P193's13 additional candidates were resolved by P198; P199's broader30
+candidates were classified by P211. Neither supplemental review closes the
+remaining configuration/staging chains.
 
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required

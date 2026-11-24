@@ -1,4 +1,14 @@
 {
+  "tools/build/StageProductExecutable.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "P212 removes obsolete single ntvdm32.exe publisher with no current code caller; old alias deletion conflicts with the current coherent host package. Current publication chain remains pending S4.",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-publishers.md"
+  },
+  "tools/build/StageWow32Provider.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "P212 removes obsolete standalone WOW32 publisher with no current code caller; current coherent manifest publication remains pending S4.",
+    "evidence": "docs/etc/evidence/t484-s3-obsolete-publishers.md"
+  },
   "CMakeLists.txt": {
     "status": "migrated-delivered",
     "reason": "Native root configuration, generator and source graph delivery; final clean gate S5 remains",
