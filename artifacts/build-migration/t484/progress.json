@@ -1,33 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "a944e3517dbbcab6cc7e766db5643cb187807780",
+  "head": "60d414d7f2e75a292241ef09caefb353d16915d8",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M tools/audit/Invoke-ProductVerification.ps1",
-    " M tools/audit/Verify-ProductVersions.mjs",
-    " M tools/build/native/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-version-runtime/",
-    "?? docs/etc/evidence/t484-s3-version-runtime.md",
-    "?? tools/build/native/package-id.c"
+    " M tools/audit/verify-nonworker-compiler-closure.py",
+    " D tools/audit/verify-redirector-shared-boundary.ps1",
+    " D tools/audit/verify-rtlwow-selection.py",
+    "?? artifacts/build-migration/t484/s3-redir-retirement/",
+    "?? docs/etc/evidence/t484-s3-redir-retirement.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 153,
-    "unchanged": 57,
-    "removed": 145
+    "unchanged": 55,
+    "removed": 147
   },
   "disposition_counts": {
     "migrated-delivered": 86,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 145,
+    "retired-with-delivery-evidence": 147,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 42,
+    "requires-disposition-reconciliation": 40,
     "retained-standalone-audit": 13
   },
-  "existing_interpreted_candidates_with_command_hits": 157,
+  "existing_interpreted_candidates_with_command_hits": 155,
   "files": [
     {
       "id": "B0001",
@@ -3950,8 +3949,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "fad1689d554ecfc66aa2f37bcafdf074a177e8c72158f7c5f10f0559bef67156",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "60d414d7f2e75a292241ef09caefb353d16915d8"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-version-runtime.md"
+      ],
       "completion": "requires-disposition-reconciliation",
       "decision": null
     },
@@ -4369,7 +4372,7 @@
       "file": "tools/audit/verify-nonworker-compiler-closure.py",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "b4885d5fd3340d39d99e88f8e44138f36158a4b640525932f5855f079a3130d5",
+      "current_sha256": "4d82366b40155565de80883224652626361f53c97ea171694d06e05c214d47de",
       "revisions": [
         "5305401c40cf14705e5a81f934dbb441953e16ff"
       ],
@@ -4409,10 +4412,12 @@
       "state": "changed",
       "current_sha256": "1678df8a6eadca2be14d03b520eb3aa590046a926ffacad6d73fb86510d674a9",
       "revisions": [
+        "60d414d7f2e75a292241ef09caefb353d16915d8",
         "a944e3517dbbcab6cc7e766db5643cb187807780"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-version-native.md"
+        "docs/etc/evidence/t484-s3-version-native.md",
+        "docs/etc/evidence/t484-s3-version-runtime.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -4425,23 +4430,31 @@
       "id": "B0232",
       "file": "tools/audit/verify-redirector-shared-boundary.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "8e0006ac17df4309874831afed890c9556da846dbbd89fcde939bd06c8207cea",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Duplicate audit consolidated into current nonworker compiler closure; unique provider assertions preserved",
+        "evidence": "docs/etc/evidence/t484-s3-redir-retirement.md"
+      }
     },
     {
       "id": "B0233",
       "file": "tools/audit/verify-rtlwow-selection.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f9cdf71ef50be7739a971bfb4e76485c78a20fd0fc93176581ade3ecff0affb2",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Historical T476 shadow compile trial without live callers; obsolete producer removed",
+        "evidence": "docs/etc/evidence/t484-s3-redir-retirement.md"
+      }
     },
     {
       "id": "B0234",
@@ -6146,6 +6159,12 @@
     }
   ],
   "commits": {
+    "60d414d7f2e75a292241ef09caefb353d16915d8": {
+      "subject": "T484 S3 P147 validate native version-negative package preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-version-runtime.md"
+      ]
+    },
     "a944e3517dbbcab6cc7e766db5643cb187807780": {
       "subject": "T484 S3 P146 build version-negative peers through native service graph",
       "evidence": [
@@ -9315,7 +9334,7 @@
           "text": "for line in (graph_root / \"build.ninja\").read_text(encoding=\"utf-8\").splitlines():"
         },
         {
-          "line": 25,
+          "line": 42,
           "text": "result = subprocess.run([\"ninja\", \"-C\", str(graph_root), \"-t\", \"deps\"],"
         }
       ]
@@ -9361,50 +9380,6 @@
         {
           "line": 37,
           "text": "const stamp=spawnSync(path.join(root,'build/.ninja/build-tools/ntvdm-package-id.exe'),"
-        }
-      ]
-    },
-    {
-      "id": "B0232",
-      "file": "tools/audit/verify-redirector-shared-boundary.ps1",
-      "hits": [
-        {
-          "line": 4,
-          "text": "$graph=Get-Content (Join-Path $WorkerBuildRoot 'build.ninja') -Raw"
-        },
-        {
-          "line": 5,
-          "text": "$link=[regex]::Match($graph,'(?m)^build VDMREDIR\\.dll[^\\r\\n]*')"
-        },
-        {
-          "line": 6,
-          "text": "if(!$link.Success -or $link.Value -notmatch 'common-opennt-compat\\.lib' -or"
-        },
-        {
-          "line": 7,
-          "text": "$link.Value -match 'worker-base\\.lib|softpc-bindings\\.lib|softpc-win32-bindings\\.lib') {"
-        },
-        {
-          "line": 8,
-          "text": "throw 'Private worker static archive listed on VDMREDIR link'"
-        },
-        {
-          "line": 23,
-          "text": "$deps=@(& ninja -C $WorkerBuildRoot -t deps $target 2>&1)"
-        }
-      ]
-    },
-    {
-      "id": "B0233",
-      "file": "tools/audit/verify-rtlwow-selection.py",
-      "hits": [
-        {
-          "line": 36,
-          "text": "graph = root / \"build/.ninja/t476-s1/wow32\""
-        },
-        {
-          "line": 56,
-          "text": "commands = subprocess.check_output([\"ninja\", \"-C\", str(graph), \"-t\", \"commands\","
         }
       ]
     },

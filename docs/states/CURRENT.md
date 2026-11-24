@@ -50,6 +50,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P147 version negatives](../etc/evidence/t484-s3-version-runtime.md) | Native identity writer and five peers/ten real client refusals pass; owned cleanup, cached full and publication identity verified; B0231 completed. |
 
+| [P148 redirector cleanup](../etc/evidence/t484-s3-redir-retirement.md) | Duplicate boundary audit consolidated; obsolete RTL trial removed;104 objects and negative control pass. No product change. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

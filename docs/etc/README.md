@@ -1778,3 +1778,5 @@ post-publication targeted checks.
 - [T484 S3 native version-negative producer checkpoint](evidence/t484-s3-version-native.md): five compiled peers; package preparation/runtime gate still pending.
 
 - [T484 S3 native version-negative acceptance](evidence/t484-s3-version-runtime.md): native GUID resource writer and ten real RPC rejections with isolated cleanup.
+
+- [T484 S3 redirector consolidation and RTL trial retirement](evidence/t484-s3-redir-retirement.md).

@@ -22,6 +22,23 @@ def inspect(graph_root: Path, inject: bool) -> int:
         for output in outputs:
             edges[output] = [] if image and output.endswith(".lib") else inputs
             rules[output] = tokens[0]
+    redir = edges.get("VDMREDIR.dll", [])
+    if "common-opennt-compat.lib" not in redir:
+        raise RuntimeError("VDMREDIR omits shared compatibility archive")
+    pending = ["common-opennt-compat.lib"]
+    seen = set()
+    providers = set()
+    while pending:
+        item = pending.pop()
+        if item in seen:
+            continue
+        seen.add(item)
+        if re.search(r"\.(c|cpp|cxx|asm)$", item):
+            providers.add(item)
+        else:
+            pending.extend(edges.get(item, []))
+    if len(providers) != 1 or not next(iter(providers)).endswith("/src/compat/opennt_support_rtl.c"):
+        raise RuntimeError("Shared compatibility archive must retain its sole RTL provider")
     result = subprocess.run(["ninja", "-C", str(graph_root), "-t", "deps"],
                             capture_output=True, text=True, check=True)
     deps = {}
@@ -53,6 +70,9 @@ def inspect(graph_root: Path, inject: bool) -> int:
             if item in seen:
                 continue
             seen.add(item)
+            if target == "VDMREDIR.dll" and item in (
+                    "worker-base.lib", "softpc-bindings.lib", "softpc-win32-bindings.lib"):
+                raise RuntimeError(f"Private worker archive reached VDMREDIR: {item}")
             stack.extend(edges.get(item, []))
             # Native graphs may copy an object; validate its compiler producer.
             if not item.endswith(".obj") or not any(
