@@ -56,7 +56,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P109 extension/frame contracts](../etc/evidence/t484-s3-extension-native.md) | Four native groups pass, including4 frame/11 abort cases; old producers retired; full cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P109 passed their cached full host build. P73 checks11 raw host inputs
+| [P110 native references](../etc/evidence/t484-s3-native-references.md) | Query231 checks/nine imports and four queue modes pass; stale object paths/manual producers removed; full cached build/cache/publication hashes pass. |
+
+Completed implementation batches through P110 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

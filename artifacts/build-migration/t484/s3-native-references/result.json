@@ -1,0 +1,44 @@
+{
+  "testCSourcesChanged": false,
+  "queryRows": 8,
+  "query": {
+    "deadlineSeconds": 30,
+    "pid": 30592,
+    "image": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-references\\query/probe.exe",
+    "start": "2026-11-24T02:46:00.1671727Z"
+  },
+  "productObjects": 4,
+  "queue": {
+    "deadlineSeconds": 30,
+    "pid": 22372,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-native-references\\queue/reference.exe ",
+    "start": "2026-11-24T02:46:08.9896672Z"
+  },
+  "validation": {
+    "exit": 0,
+    "started": "2026-11-24T03:45:46.5733349+01:00",
+    "finished": "2026-11-24T03:47:32.7262112+01:00",
+    "pid": 19468
+  },
+  "cache": [
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/native-query.exe",
+      "hash": "2B2C9737E6F7A04A2A6E4DA8715BEB2FF514B503E997C24F0FBDF007B712B4DD",
+      "time": 639310851598267373
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/native-queue.exe",
+      "hash": "C56D7238E9E448F02FDE0F2312F220B917A1E11FECF50A05F0194778A07423E1",
+      "time": 639310851589251665
+    }
+  ],
+  "queueModes": 4,
+  "publication": {
+    "rawInputs": 11,
+    "publishedCopies": 22,
+    "unchanged": true
+  },
+  "nativeApiImports": 9,
+  "queryChecks": 231,
+  "scope": "Native USER reference plus current product symbol audit; not guest acceptance"
+}

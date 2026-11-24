@@ -871,5 +871,15 @@
     "evidence": "docs/etc/evidence/t484-s3-extension-native.md",
     "reason": "Native extension/MM/rejection/frame group preserves current contracts; historical producer retired; final runtime/full cached build/cache/publication pass",
     "status": "migrated-delivered"
+  },
+  "test/observation/verify-wow-native-query-contract.ps1": {
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-native-references.md",
+    "reason": "Native reference targets preserve query/import and queue contracts; current object paths, full cached build/cache/publication verified"
+  },
+  "test/observation/verify-wow-native-queue-order-reference.ps1": {
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-native-references.md",
+    "reason": "Native reference targets preserve query/import and queue contracts; current object paths, full cached build/cache/publication verified"
   }
 }

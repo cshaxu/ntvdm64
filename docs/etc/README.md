@@ -1707,3 +1707,5 @@ post-publication targeted checks.
 - [T484 S3 P108 current capture contracts](evidence/t484-s3-capture-contracts.md).
 
 - [T484 S3 P109 native extension and frame contracts](evidence/t484-s3-extension-native.md).
+
+- [T484 S3 P110 native query and queue references](evidence/t484-s3-native-references.md).

@@ -1,11 +1,10 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot,
- [Parameter(Mandatory)][string]$CompilerDriver)
+param([Parameter(Mandatory)][string]$BuildRoot)
 # Pure native USER32 reference; no WOW provider, guest or product acceptance.
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned reference root required'}
-$CompilerDriver=(Resolve-Path $CompilerDriver).Path
+
 $null=New-Item -ItemType Directory $root
 function Owned($name,$exe,$line,$seconds){
  $job=Start-Process $exe -ArgumentList $line -WorkingDirectory $root -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt";$null=$job.Handle
@@ -15,8 +14,10 @@ function Owned($name,$exe,$line,$seconds){
 }
 try{
  $source="$PSScriptRoot/wow_native_queue_order_reference.c"
- Get-FileHash $source,$CompilerDriver,$PSCommandPath|Export-Csv -NoTypeInformation "$root/inputs.csv"
- Owned compile $env:ComSpec ('/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /MT /O2 /W4 /WX "'+$source+'" /Fo"'+$root+'/reference.obj" /Fe"'+$root+'/reference.exe" /link user32.lib"') 120
+ Get-FileHash $source,$PSCommandPath|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ & "$repo/tools/build-fixtures.cmd" x86 wow-native-references *> "$root/build.log"
+ if($LASTEXITCODE){throw 'Native reference build failed'}
+ Copy-Item "$repo/build/.ninja/msvc-x86-release/wow32/native-queue.exe" "$root/reference.exe"
  $bytes=[IO.File]::ReadAllBytes("$root/reference.exe");$pe=[BitConverter]::ToInt32($bytes,60)
  if([BitConverter]::ToUInt16($bytes,$pe+4) -ne 0x14c){throw 'MSVC Win32/x86 reference required'}
  Owned body "$root/reference.exe" '' 30
@@ -26,7 +27,7 @@ try{
  }}
  if(!($output -match '^NATIVE_QUEUE_REFERENCE errors=0 old_first_call_quit_assumption_rejected=4$')){throw 'Native order/reference completion marker missing'}
  foreach($row in Import-Csv "$root/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Frozen native reference source changed'}}
- Get-FileHash "$root/reference.exe","$root/reference.obj"|Export-Csv -NoTypeInformation "$root/artifacts.csv"
+ Get-FileHash "$root/reference.exe"|Export-Csv -NoTypeInformation "$root/artifacts.csv"
  @{nativeOnly=$true;encodings=2;quitProducers=2;ordinaryBeforeQuit=$true;guestUsed=$false;productAcceptance=$false}|ConvertTo-Json|Set-Content "$root/result.json"
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";1|Set-Content "$root/exit.txt";exit 1}
