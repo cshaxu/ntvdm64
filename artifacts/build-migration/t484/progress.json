@@ -1,22 +1,12 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f1d9ffb1a2ae7bc39274153b6ae42773109650bb",
+  "head": "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/broker/verify-package-fresh-stage.ps1",
-    " M test/broker/verify-package-identity.ps1",
-    " M test/integration/verify-client-rpc-wait.ps1",
-    " M test/integration/verify-dos-identity-pair.ps1",
     " M test/integration/verify-s7-rpc-fixtures.ps1",
-    " M test/integration/win31_runtime_matrix_test.ps1",
-    " M test/observation/isolated_package_cleanup.ps1",
-    " M tools/audit/Invoke-ProductVerification.ps1",
-    " D tools/build/Set-PackageIdentity.ps1",
-    " M tools/build/Stage-System32ProductPackage.ps1",
-    " D tools/build/Stage-T228S1GuestExecIntegrationInputs.ps1",
-    "?? docs/etc/evidence/t484-s3-direct-package-identity.md"
+    "?? docs/etc/evidence/t484-s3-rpc-control-identity.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -25,12 +15,12 @@
     "removed": 169
   },
   "disposition_counts": {
-    "migrated-delivered": 105,
+    "migrated-delivered": 106,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 169,
     "retained-native-delegate": 14,
     "pending-producer-migration": 32,
-    "requires-disposition-reconciliation": 16,
+    "requires-disposition-reconciliation": 15,
     "retained-standalone-audit": 16
   },
   "existing_interpreted_candidates_with_command_hits": 148,
@@ -310,8 +300,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "d4c05f226020eb05f68b86b667cf08641e9f753ec88eb497b232368248cd2d5f",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -325,8 +319,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "f38e789565e21f7380cccd27c792e2a9860f8b6f5f153f22bc3af3c82084abd1",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -608,8 +606,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "70542ab501f2d79ee93070af1577834a6e60d5e49e3c3ff5025940709d9894ab",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Direct native identity writer, real reply/connect/disconnect/loss/bootstrap tests pass; no remaining private build producer",
@@ -624,9 +626,11 @@
       "state": "changed",
       "current_sha256": "daa435ca383435297cbd3349da7c00c8fa40e1b9c1474098f4dc74433fc9b27b",
       "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "b5d6368800365cf5920cb3eb09bc705dde282393"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-dos-identity.md"
       ],
       "completion": "pending-producer-migration",
@@ -799,14 +803,18 @@
       "file": "test/integration/verify-s7-rpc-fixtures.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "5b8516d9694095b7427c1401c9ef8bede33c3ef54cd0d50e73b43372e7695972",
-      "revisions": [],
-      "evidence": [],
-      "completion": "requires-disposition-reconciliation",
+      "current_sha256": "def56e30821a156aeb06a797f19f6fb2aa9f6e26458155a3bcc5dad46da25739",
+      "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md"
+      ],
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "P168 removes identity wrapper; syntax/explicit nonzero propagation checked; full control group runtime acceptance still pending",
-        "evidence": "docs/etc/evidence/t484-s3-direct-package-identity.md",
-        "status": "requires-disposition-reconciliation"
+        "evidence": "docs/etc/evidence/t484-s3-rpc-control-identity.md",
+        "status": "migrated-delivered",
+        "reason": "Direct native identity stamping; independent copied packages use fresh complete identities; current Full six plus three worker-substitution scenarios pass"
       }
     },
     {
@@ -1367,9 +1375,11 @@
       "state": "changed",
       "current_sha256": "04c7ea61e602cd8fd7cebe00e16b0b47e89e91c901092c028a710fad237c7dbf",
       "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "f39e4635fa105f6deee50abb2640ab8e37dbd7e7"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-win31-matrix.md"
       ],
       "completion": "pending-producer-migration",
@@ -1953,9 +1963,11 @@
       "state": "changed",
       "current_sha256": "f571b01861d3d57570e6d1f1a948b28c94e7bbbb6c89b907a5726968e5a744cb",
       "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "995bbe44d7ed265740f8288575ad6182fb8157be"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-identity-reader.md"
       ],
       "completion": "migrated-delivered",
@@ -3995,9 +4007,11 @@
       "state": "changed",
       "current_sha256": "e7aa9aeb6f4d435e3a6180d1b186dbed946c8ce726558a8355505191c64ddd2c",
       "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "60d414d7f2e75a292241ef09caefb353d16915d8"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-version-runtime.md"
       ],
       "completion": "requires-disposition-reconciliation",
@@ -6133,9 +6147,11 @@
       "state": "removed",
       "current_sha256": null,
       "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "b84e36c23d1d6061364d172317a324142b6010c0"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-package-identity.md"
       ],
       "completion": "retired-with-delivery-evidence",
@@ -6221,8 +6237,12 @@
       "stage": "S4",
       "state": "changed",
       "current_sha256": "95fa2fef3756a1d62d526fdfe55b5a7c80dcc5ed75c53991a6ac3c6a91da7ffd",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md"
+      ],
       "completion": "requires-disposition-reconciliation",
       "decision": null
     },
@@ -6232,8 +6252,12 @@
       "stage": "S4",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "33374544fc858d7e9d3dadf1e1acd183b7bffbcd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "reason": "Uncalled historical T225 source-built guest fixture assembler; obsolete runner-v8 profile not applicable to immutable current guest",
@@ -6400,6 +6424,12 @@
     }
   ],
   "commits": {
+    "33374544fc858d7e9d3dadf1e1acd183b7bffbcd": {
+      "subject": "T484 S3 P168 remove identity wrapper and expired guest staging",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-direct-package-identity.md"
+      ]
+    },
     "f1d9ffb1a2ae7bc39274153b6ae42773109650bb": {
       "subject": "T484 S3 P167 retire stale image test and fix external message package checks",
       "evidence": [
@@ -7887,12 +7917,12 @@
       "file": "test/integration/verify-s7-rpc-fixtures.ps1",
       "hits": [
         {
-          "line": 48,
-          "text": "& \"$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($packageId)).ToString()) (Join-Path $casePackageRoot $image)"
+          "line": 51,
+          "text": "& \"$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe\" $caseIdentity.ToString() $caseImages"
         },
         {
-          "line": 70,
-          "text": "& \"$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($packageId)).ToString()) (Join-Path $casePackageRoot $image)"
+          "line": 76,
+          "text": "& \"$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe\" $caseIdentity.ToString() $caseImages"
         }
       ]
     },

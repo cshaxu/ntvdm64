@@ -45,7 +45,10 @@ foreach($case in $Cases) {
         foreach($name in @(@($image)+$siblings | Select-Object -Unique)) {
             Copy-Item -LiteralPath (Join-Path $PackageRoot $name) -Destination $casePackageRoot
         }
-        & "$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe" (([guid]($packageId)).ToString()) (Join-Path $casePackageRoot $image)
+        # A separate package root must not reuse a live sibling's RPC endpoint.
+        $caseIdentity=[guid]::NewGuid()
+        $caseImages=@(@($image)+$siblings |Select-Object -Unique|ForEach-Object {Join-Path $casePackageRoot $_})
+        & "$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe" $caseIdentity.ToString() $caseImages
         if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
         Copy-Item -LiteralPath (Join-Path $casePackageRoot $image) -Destination (Join-Path $casePackageRoot 'ntvdm.exe') -Force
     }
@@ -67,7 +70,10 @@ foreach($case in $Cases) {
             if((Get-FileHash -LiteralPath $source).Hash -ne
                (Get-FileHash -LiteralPath $destination).Hash){throw 'Rejection fixture input identity mismatch'}
         }
-        & "$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe" (([guid]($packageId)).ToString()) (Join-Path $casePackageRoot $image)
+        # A separate package root must not reuse a live sibling's RPC endpoint.
+        $caseIdentity=[guid]::NewGuid()
+        $caseImages=@($inputs|Select-Object -Unique|ForEach-Object {Join-Path $casePackageRoot $_})
+        & "$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe" $caseIdentity.ToString() $caseImages
         if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
     }
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)

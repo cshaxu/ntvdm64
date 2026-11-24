@@ -92,6 +92,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P168 direct native identity](../etc/evidence/t484-s3-direct-package-identity.md) | Removed identity wrapper/expired T228 assembler;10 call sites use native writer. Identity negatives, dual-package RPC/DOS and five RPC wait cases pass; cached full/11/22 hashes unchanged.307/355 disposed,48 remain. |
 
+| [P169 RPC control identity](../etc/evidence/t484-s3-rpc-control-identity.md) | Separate copied roots get unique complete native identities; Full six and three substituted-worker cases pass. Cached full/11/22 hashes unchanged;308/355 disposed,47 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
