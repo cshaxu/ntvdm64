@@ -106,7 +106,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P134 USER declarations](../etc/evidence/t484-s3-user-declarations.md) | Positive/native and original overflow-negative compile checks pass;12 independent audit selftests pass without any compiler. Build/publication results in receipt. |
 
-Completed implementation batches through P134 passed their cached full host build. P73 checks11 raw host inputs
+| [P135 retired closure/accessor tools](../etc/evidence/t484-s3-retire-closure.md) | Removed obsolete graph walker and duplicate accessor generator; retained native CCPU contract and build/publication checks recorded in receipt. |
+
+Completed implementation batches through P135 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

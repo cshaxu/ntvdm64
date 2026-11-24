@@ -997,5 +997,15 @@
     "status": "retained-standalone-audit",
     "reason": "Twelve deterministic mocked Ninja audit tests; no actual compiler/generator invocation",
     "evidence": "docs/etc/evidence/t484-s3-user-declarations.md"
+  },
+  "tools/audit/Audit-ProductDependencyClosure.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Historical graph assumptions obsolete; duplicate accessor generator replaced by current native 38x4 CCPU contract",
+    "evidence": "docs/etc/evidence/t484-s3-retire-closure.md"
+  },
+  "tools/audit/AuditCvidAccessorProfile.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Historical graph assumptions obsolete; duplicate accessor generator replaced by current native 38x4 CCPU contract",
+    "evidence": "docs/etc/evidence/t484-s3-retire-closure.md"
   }
 }

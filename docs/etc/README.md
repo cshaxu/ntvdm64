@@ -1752,3 +1752,5 @@ post-publication targeted checks.
 - [T484 S3 native XMS boundary producers](evidence/t484-s3-xms-native.md)
 
 - [T484 S3 USER declaration producer and audit selftest](evidence/t484-s3-user-declarations.md)
+
+- [T484 S3 retire old closure and accessor research](evidence/t484-s3-retire-closure.md)

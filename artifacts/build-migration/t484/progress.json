@@ -1,35 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "5ff82341beacc9ee4cdad7cd6ef5dec21e95a545",
+  "head": "d0bb2021a45eb66e3e1ac82821359933af6e3a56",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/opennt-host/verify-user-declarations.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-user-declarations/",
-    "?? docs/etc/evidence/t484-s3-user-declarations.md",
-    "?? test/opennt-host/user_declarations.c",
-    "?? tools/audit/__pycache__/",
-    "?? tools/build/wow32/declaration-tests.cmake"
+    " D tools/audit/Audit-ProductDependencyClosure.ps1",
+    " D tools/audit/AuditCvidAccessorProfile.mjs",
+    "?? artifacts/build-migration/t484/s3-retire-closure/",
+    "?? docs/etc/evidence/t484-s3-retire-closure.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 142,
-    "unchanged": 83,
-    "removed": 130
+    "unchanged": 81,
+    "removed": 132
   },
   "disposition_counts": {
     "migrated-delivered": 83,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 130,
+    "retired-with-delivery-evidence": 132,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 71,
+    "requires-disposition-reconciliation": 69,
     "retained-standalone-audit": 2
   },
-  "existing_interpreted_candidates_with_command_hits": 174,
+  "existing_interpreted_candidates_with_command_hits": 172,
   "files": [
     {
       "id": "B0001",
@@ -3825,8 +3821,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "d0c8163f17be5c5fd11b21a85cd1a5f59ea65ab35288eb4933d2bd230567c03b",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "d0bb2021a45eb66e3e1ac82821359933af6e3a56"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-user-declarations.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -3853,23 +3853,31 @@
       "id": "B0202",
       "file": "tools/audit/Audit-ProductDependencyClosure.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "2663cff2b6a58e5f3da07be394c39f13fc9b64e7b7a53d2e25216aea27db27ec",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Historical graph assumptions obsolete; duplicate accessor generator replaced by current native 38x4 CCPU contract",
+        "evidence": "docs/etc/evidence/t484-s3-retire-closure.md"
+      }
     },
     {
       "id": "B0203",
       "file": "tools/audit/AuditCvidAccessorProfile.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "71fc5c4b8389b0cc352161b5eb886c74dc5934bf7c706180f480c7d349219dbf",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Historical graph assumptions obsolete; duplicate accessor generator replaced by current native 38x4 CCPU contract",
+        "evidence": "docs/etc/evidence/t484-s3-retire-closure.md"
+      }
     },
     {
       "id": "B0204",
@@ -5918,6 +5926,12 @@
     }
   ],
   "commits": {
+    "d0bb2021a45eb66e3e1ac82821359933af6e3a56": {
+      "subject": "T484 S3 P134 migrate USER declaration checks to native targets",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-user-declarations.md"
+      ]
+    },
     "5ff82341beacc9ee4cdad7cd6ef5dec21e95a545": {
       "subject": "T484 S3 P133 use native XMS boundary test producers",
       "evidence": [
@@ -8759,74 +8773,6 @@
         {
           "line": 41,
           "text": "self.check_unit(\"mvdm_softpc_text_video.c\", \"build/.ninja/msvc-x86-release/worker/generated/text_video_gfx.h\")"
-        }
-      ]
-    },
-    {
-      "id": "B0202",
-      "file": "tools/audit/Audit-ProductDependencyClosure.ps1",
-      "hits": [
-        {
-          "line": 15,
-          "text": "$graph=Join-Path $repository (Join-Path $Root 'build.ninja')"
-        },
-        {
-          "line": 34,
-          "text": "$node=$pending.Pop()"
-        },
-        {
-          "line": 35,
-          "text": "if(!$seen.Add($node)){continue}"
-        },
-        {
-          "line": 36,
-          "text": "foreach($input in $Edges[$node]){"
-        },
-        {
-          "line": 40,
-          "text": "$normalized -match '\\.(c|cpp|asm|rc)$'){"
-        }
-      ]
-    },
-    {
-      "id": "B0203",
-      "file": "tools/audit/AuditCvidAccessorProfile.mjs",
-      "hits": [
-        {
-          "line": 2,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 3,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 4,
-          "text": "import crypto from 'node:crypto';"
-        },
-        {
-          "line": 5,
-          "text": "import {spawnSync} from 'node:child_process';"
-        },
-        {
-          "line": 64,
-          "text": "throw Error('Require --build-graph <current-formal-x86-build.ninja>');"
-        },
-        {
-          "line": 70,
-          "text": "`cl.exe ${flags} /Fo${q(out+'/vglob.obj')} ${q(source)}`,'if errorlevel 1 exit /b %errorlevel%',"
-        },
-        {
-          "line": 71,
-          "text": "`cl.exe ${flags} /Fo${q(out+'/fixture.obj')} ${q(out+'/original-accessor-fixture.c')}`,'if errorlevel 1 exit /b %errorlevel%',"
-        },
-        {
-          "line": 72,
-          "text": "`link.exe /nologo /out:${q(out+'/original-accessor-fixture.exe')} ${q(out+'/vglob.obj')} ${q(out+'/fixture.obj')} kernel32.lib libcmt.lib libvcruntime.lib libucrt.lib legacy_stdio_definitions.lib`,'if errorlevel 1 exit /b %errorlevel%',q(out+'/original-accessor-fixture.exe')];"
-        },
-        {
-          "line": 79,
-          "text": "pre.push(`cl.exe ${f} /Fi${q(out+'/'+path.basename(file)+'.i')} ${q(mirror+'/'+file)}`,'if errorlevel 1 exit /b %errorlevel%');"
         }
       ]
     },
