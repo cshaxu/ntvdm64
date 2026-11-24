@@ -54,7 +54,9 @@ try{
   }
  }}
  if(!$BuildOnly){
-  if((Get-FileHash assets/winnt.zip).Hash -ne '7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7'){throw 'Guest ZIP differs from P13'}
+  $guestManifest=Get-Content assets/winnt-guest-manifest.json -Raw|ConvertFrom-Json
+  if((Get-FileHash assets/winnt.zip).Hash -ne $guestManifest.archive_sha256){throw 'Guest ZIP differs from approved manifest'}
+  $expectedNames=@((Get-Content assets/release/release-manifest.json -Raw|ConvertFrom-Json).name)
   if($PackageRoot){
    $package=(Resolve-Path -LiteralPath $PackageRoot).Path
    if(!$package.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Candidate must be build-owned'}
@@ -64,13 +66,13 @@ try{
      $manifest=@(Get-Content -LiteralPath $ManifestPath -Raw|ConvertFrom-Json)
      # Windows PowerShell 5.1 yields one array object for a top-level JSON
      # array, while PowerShell 7 enumerates it.  Flatten only that parser
-     # representation; do not relax the coherent-13 identity contract.
+     # representation; do not relax the current product identity contract.
      if($manifest.Count -eq 1 -and $manifest[0] -is [array]){$manifest=@($manifest[0])}
-     if($manifest.Count -ne 13 -or @($manifest.name|Sort-Object -Unique).Count -ne 13){throw 'Need coherent13 candidate JSON manifest'}
+     if($manifest.Count -ne $expectedNames.Count -or @($manifest.name|Sort-Object -Unique).Count -ne $manifest.Count -or @(Compare-Object ($manifest.name|Sort-Object) ($expectedNames|Sort-Object)).Count){throw 'Need coherent current candidate JSON manifest'}
      foreach($image in $manifest){if((Get-FileHash "$package/SYSTEM32/$($image.name)").Hash -ne $image.sha256){throw 'Candidate JSON identity mismatch'}}
     }else{
     $manifest=@(Import-Csv -LiteralPath $ManifestPath)
-    if($manifest.Count -lt 13 -or @($manifest.Path|Sort-Object -Unique).Count -ne $manifest.Count){throw 'Need coherent candidate CSV manifest'}
+    if($manifest.Count -lt $expectedNames.Count -or @($manifest.Path|Sort-Object -Unique).Count -ne $manifest.Count){throw 'Need coherent candidate CSV manifest'}
     $system32Root=[IO.Path]::GetFullPath((Join-Path $package 'SYSTEM32'))+'\'
     foreach($image in $manifest){
      $path=[IO.Path]::GetFullPath($image.Path)
@@ -82,7 +84,7 @@ try{
    [IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $repo 'assets/winnt.zip'),"$root/media")
    $package="$root/media/WINNT"
    $manifest=Get-Content assets/release/release-manifest.json -Raw|ConvertFrom-Json
-   if($manifest.Count -ne 13){throw 'Need coherent13 release manifest'}
+   if($manifest.Count -ne $expectedNames.Count -or @($manifest.name|Sort-Object -Unique).Count -ne $manifest.Count){throw 'Need coherent current release manifest'}
    foreach($image in $manifest){
     $source=Join-Path $repo "assets/release/$($image.name)"
     if((Get-FileHash $source).Hash -ne $image.sha256){throw 'Release identity mismatch'}

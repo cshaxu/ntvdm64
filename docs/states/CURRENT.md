@@ -88,6 +88,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P166 DC/dialog chains](../etc/evidence/t484-s3-dialog-native.md) | Existing shared CMD producer and three actual guest contracts pass; cached full/11/22 hashes unchanged.304/355 disposed,51 remain. |
 
+| [P167 external current package](../etc/evidence/t484-s3-external-current-package.md) | Removed obsolete13-image self-test; current11-image local/x86/x64 message groups and cached full/identity checks pass. Default staging still pending;304/355,51 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

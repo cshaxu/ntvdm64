@@ -272,9 +272,9 @@
     "evidence": "docs/etc/evidence/t484-s3-edit-contracts.md"
   },
   "test/integration/verify-wow-external-native.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-external-current-package.md",
     "status": "pending-producer-migration",
-    "reason": "Native message groups replace generated CMD;runtime coherent13 manifest,media staging and shared message helper chain remain",
-    "evidence": "docs/etc/evidence/t484-s3-message-groups.md"
+    "reason": "P167 actual local/external x86/x64 groups pass with current11-image manifest; native producers complete, default archive/package assembly still awaits S4"
   },
   "test/integration/verify-wow-file-cache.ps1": {
     "status": "migrated-delivered",

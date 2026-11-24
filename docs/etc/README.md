@@ -1816,3 +1816,5 @@ post-publication targeted checks.
 - [T484 S3 existing Win16 native chains](evidence/t484-s3-win16-existing-chains.md).
 
 - [T484 S3 DC and dialog native chains](evidence/t484-s3-dialog-native.md).
+
+- [T484 S3 current external-message package contract](evidence/t484-s3-external-current-package.md).

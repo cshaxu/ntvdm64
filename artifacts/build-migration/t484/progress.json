@@ -1,11 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "ddd79486a6c4e49ccd8ac59a3c03fe7958e1f322",
+  "head": "49d0dc45a72589d17ff458dc580d7459c9d24de3",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    "?? docs/etc/evidence/t484-s3-dialog-native.md"
+    " M test/integration/verify-wow-external-native.ps1",
+    " D test/observation/verify-wow-callback-image-root.ps1",
+    "?? docs/etc/evidence/t484-s3-external-current-package.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -1092,7 +1094,7 @@
       "file": "test/integration/verify-wow-external-native.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "90bed54cbd3fcfeaec58f27e0f3b33a4df88bd87028129a200dab74036766fb9",
+      "current_sha256": "4a4a5368e8f35751a4efe8652b071d075d1f25fc032140bae1434f2386330e3d",
       "revisions": [
         "abf51648b9e86a9ac09915335363210685ae9797"
       ],
@@ -1101,9 +1103,9 @@
       ],
       "completion": "pending-producer-migration",
       "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-external-current-package.md",
         "status": "pending-producer-migration",
-        "reason": "Native message groups replace generated CMD;runtime coherent13 manifest,media staging and shared message helper chain remain",
-        "evidence": "docs/etc/evidence/t484-s3-message-groups.md"
+        "reason": "P167 actual local/external x86/x64 groups pass with current11-image manifest; native producers complete, default archive/package assembly still awaits S4"
       }
     },
     {
@@ -6377,6 +6379,12 @@
     }
   ],
   "commits": {
+    "49d0dc45a72589d17ff458dc580d7459c9d24de3": {
+      "subject": "T484 S3 P166 verify native DC and dialog test chains",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-dialog-native.md"
+      ]
+    },
     "ddd79486a6c4e49ccd8ac59a3c03fe7958e1f322": {
       "subject": "T484 S3 P165 verify five existing native Win16 test chains",
       "evidence": [
@@ -7998,55 +8006,55 @@
           "text": "$control=Join-Path $repo \"build/.ninja/msvc-$arch-release/message-probes/MSGDEATH.exe\""
         },
         {
-          "line": 65,
+          "line": 67,
           "text": "# Windows PowerShell 5.1 yields one array object for a top-level JSON"
         },
         {
-          "line": 66,
+          "line": 68,
           "text": "# array, while PowerShell 7 enumerates it.  Flatten only that parser"
         },
         {
-          "line": 92,
+          "line": 94,
           "text": "$observer=Join-Path $repo 'build/.ninja/msvc-x64-release/message-probes/console-startup-observer.exe'"
         },
         {
-          "line": 93,
+          "line": 95,
           "text": "$driver=Join-Path $repo 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'"
         },
         {
-          "line": 94,
+          "line": 96,
           "text": "$localHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOSTLOCAL.dll'"
         },
         {
-          "line": 95,
+          "line": 97,
           "text": "$externalHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOST.dll'"
         },
         {
-          "line": 96,
+          "line": 98,
           "text": "$crossHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOSTCROSS.dll'"
         },
         {
-          "line": 97,
+          "line": 99,
           "text": "$coordinator=Join-Path $repo 'build/.ninja/msvc-x64-release/message-probes/MSGXHOST.exe'"
         },
         {
-          "line": 98,
+          "line": 100,
           "text": "$pendingHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOST_pending.dll'"
         },
         {
-          "line": 106,
+          "line": 108,
           "text": "elseif($kind -ne 'local'){$peer=Join-Path $repo \"build/.ninja/msvc-$kind-release/message-probes/MSGPEER.exe\";$arguments+=@('-ExternalNativePeer',\"`\"$peer`\"\")}"
         },
         {
-          "line": 107,
+          "line": 109,
           "text": "Run-Owned $name $pwsh $arguments 120"
         },
         {
-          "line": 113,
+          "line": 115,
           "text": "$badHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOST_nonblock.dll'"
         },
         {
-          "line": 115,
+          "line": 117,
           "text": "Run-Owned 'nonblock-negative' $pwsh $arguments 120 1"
         }
       ]
