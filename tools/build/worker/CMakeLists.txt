@@ -65,3 +65,4 @@ add_custom_target(frontend-library DEPENDS
 include(cpu-preprocess.cmake)
 
 include(object-contracts.cmake)
+include(lifecycle-tests.cmake)

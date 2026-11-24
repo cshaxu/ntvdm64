@@ -56,6 +56,14 @@ if ($Case -eq 'task-close-result') {
     $result
     return
 }
+$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect') -and !$InitRollback -and !$RetirementLockProbe
+if($nativeCase){
+    $kind=if($Case -eq 'task-lifecycle'){'task'}else{$Case}
+    & "$repo/tools/build-fixtures.cmd" x86 "wow-lifecycle-$kind" *> "$out/build.log"
+    if($LASTEXITCODE){throw 'Native lifecycle graph failed'}
+    Copy-Item "$repo/build/.ninja/msvc-x86-release/wow32/lifecycle-$kind.exe" "$out/fixture.exe"
+    Get-FileHash "$out/fixture.exe"|Export-Csv -NoTypeInformation "$out/artifact.csv"
+}else{
 if(!$ProviderBuildRoot -or !$WorkerBuildRoot){throw 'Remaining lifecycle cases require provider and worker build roots'}
 $vs = (Resolve-Path -LiteralPath $VsDevCmd).Path
 $provider = (Resolve-Path -LiteralPath $ProviderBuildRoot).Path
@@ -693,8 +701,10 @@ Invoke-Build ('link /nologo /NODEFAULTLIB:ntvdm.lib /out:"'+$out+'\fixture.exe" 
 if (!(Test-Path -LiteralPath "$out\fixture.exe" -PathType Leaf)) {
     throw "Task cleanup fixture link produced no executable: $out\fixture.exe"
 }
+}
 $process=Start-Process "$out/fixture.exe" -WindowStyle Hidden -PassThru -RedirectStandardOutput "$out/stdout.txt" -RedirectStandardError "$out/stderr.txt"
 $null=$process.Handle
+@{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');case=$Case;deadlineSeconds=60;executable="$out/fixture.exe"}|ConvertTo-Json|Set-Content "$out/fixture-process.json"
 if(!$process.WaitForExit(60000)) {
     & taskkill /PID $process.Id /T /F
     throw "Task cleanup fixture timeout: case=$Case"

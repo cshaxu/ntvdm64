@@ -86,6 +86,8 @@ for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I"
 for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-winsock-provider" set "SELECTED=1"
 if "%TARGET%"=="wow-winsock-provider" if not "%~1"=="x86" exit /b 2
+for %%I in (wow-lifecycle-task wow-lifecycle-native-send wow-lifecycle-native-reply wow-lifecycle-native-nested wow-lifecycle-native-seen wow-lifecycle-native-identity wow-lifecycle-native-foreign wow-lifecycle-native-indirect) do if "%TARGET%"=="%%I" set "SELECTED=1"
+if "%TARGET:~0,14%"=="wow-lifecycle-" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-task-close-result" set "SELECTED=1"
 if "%TARGET%"=="wow-task-close-result" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-shell-callback" set "SELECTED=1"
@@ -256,6 +258,7 @@ if "%TARGET%"=="oem-tests" goto worker
 if "%TARGET:~0,12%"=="wow-creation" goto wowcallback
 if "%TARGET%"=="wow-extension-contracts" goto wowcallback
 for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I" goto wowcallback
+if "%TARGET:~0,14%"=="wow-lifecycle-" goto lifecycle
 if "%TARGET%"=="wow-task-close-result" goto wowcallback
 if "%TARGET%"=="wow-shell-callback" goto wowcallback
 if "%TARGET%"=="wow-native-references" goto wowcallback
@@ -357,4 +360,13 @@ set "result=%errorlevel%"
 popd
 if not "%result%"=="0" exit /b %result%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-%~1-release" --target %TARGET% --parallel 8
+exit /b %errorlevel%
+:lifecycle
+if not exist "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\wow32\CMakeCache.txt" (
+  call "%NTVDM_ROOT%\tools\build.cmd" x86
+  if errorlevel 1 exit /b 1
+)
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\worker" --target wow-lifecycle-inputs
+if errorlevel 1 exit /b %errorlevel%
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\wow32" --target %TARGET%
 exit /b %errorlevel%

@@ -18,14 +18,14 @@ foreach(kind IN ITEMS native native-outer adapter adapter-outer)
   endif()
   wow_unit(shell_probe_${kind} "${NTVDM_REPO}/test/observation/wow_shell_callback_probe.c" "${flags}")
   set_property(TARGET shell_probe_${kind} PROPERTY EXCLUDE_FROM_ALL TRUE)
-  set(objects "$<TARGET_OBJECTS:shell_probe_${kind}>")
+  set(shell_objects "$<TARGET_OBJECTS:shell_probe_${kind}>")
   if(provider)
-    list(APPEND objects "$<TARGET_OBJECTS:${provider}>")
+    list(APPEND shell_objects "$<TARGET_OBJECTS:${provider}>")
   endif()
   set(output "${CMAKE_BINARY_DIR}/shell-callback-${kind}.exe")
   add_custom_command(OUTPUT "${output}"
-    COMMAND "${CMAKE_C_COMPILER}" /nologo /MT "/Fe${output}" ${objects} /link kernel32.lib
-    DEPENDS shell_probe_${kind} ${provider} ${objects} COMMAND_EXPAND_LISTS VERBATIM)
+    COMMAND "${CMAKE_C_COMPILER}" /nologo /MT "/Fe${output}" ${shell_objects} /link kernel32.lib
+    DEPENDS shell_probe_${kind} ${provider} ${shell_objects} COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(wow-shell-${kind} DEPENDS "${output}")
   list(APPEND shell_targets wow-shell-${kind})
 endforeach()

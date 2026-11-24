@@ -1,0 +1,32 @@
+{
+  "completedNormalCases": 9,
+  "publication": {
+    "rawInputs": 11,
+    "unchanged": true,
+    "republished": false,
+    "publishedCopies": 22
+  },
+  "validation": {
+    "started": "2026-11-24T04:54:55.4273055+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T04:56:51.2549553+01:00",
+    "pid": 19528
+  },
+  "fileComplete": false,
+  "cache": {
+    "wrongArch": 2,
+    "mtime": "2026-11-24T03:55:22.9284056Z",
+    "sha256": "BFEA4755319E861FB7CCE3FC3DB31E1836F51249829DF153D8B08BE4DD8A4640"
+  },
+  "remainingNormalCases": 21,
+  "final": {
+    "exit": 0,
+    "started": "2026-11-24T04:57:32.1613733+01:00",
+    "pid": 18384,
+    "finished": "2026-11-24T04:58:16.4707715+01:00"
+  },
+  "failedAttempts": [
+    27560,
+    15304
+  ]
+}
