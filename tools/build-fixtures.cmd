@@ -50,6 +50,8 @@ set "SELECTED="
 for %%T in (wow-gdi-alias wow-hard-error-decoder wow-hook-native-binding) do if "%TARGET%"=="%%T" set "SELECTED=1"
 if "%TARGET%"=="wow-hard-error-decoder" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-hook-native-binding" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="wow-resource-calls" set "SELECTED=1"
+if "%TARGET%"=="wow-resource-calls" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-reply-payload" set "SELECTED=1"
 if "%TARGET%"=="wow-reply-payload" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-return-unwind" set "SELECTED=1"

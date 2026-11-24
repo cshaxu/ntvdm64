@@ -3,25 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "wow_private_user_compat.h"
-#include "wow_default_message_bindings.h"
-
-/* This fixture links the complete project-owned output translation unit, but
- * observes only its cursor/icon entry point.  These deliberately inert
- * providers satisfy uncalled S3 menu/default-message COMDATs so the linker
- * does not turn the S2 cursor boundary witness into a menu test. */
-BOOL WINAPI wow_default_messages_ready(void) { return FALSE; }
-WORD WINAPI wow_default_messages_merge(PBYTE bits, WORD byte_count)
-{
-    (void)bits;
-    (void)byte_count;
-    return 0;
-}
-HMENU WINAPI CreateMenuFromResource(LPBYTE template_bits)
-{
-    (void)template_bits;
-    return NULL;
-}
-
 /* Standalone native boundary proof with independently generated DIB data.
  * No original guest input is edited, rebuilt, or loaded by this test. */
 

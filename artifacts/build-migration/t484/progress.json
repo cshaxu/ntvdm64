@@ -1,30 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "a24f3c50ddff4a5a0cce760024d2576fbbb7f97f",
+  "head": "05f93faa56d01d5343f0f0e2cc62375f244c9890",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-required-root-capture.ps1",
-    " M test/observation/wow_required_root_capture_fixture.c",
+    " M test/adapter-mvdm-host-out/wow/wow_cursor_resource_fixture.c",
+    " D test/observation/extract-wow-cursor-call-fixture.ps1",
+    " M test/observation/verify-wow-resource-call-fixtures.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/wow-capture.cmake",
-    "?? artifacts/build-migration/t484/s3-required-root/",
-    "?? docs/etc/evidence/t484-s3-required-root.md"
+    " M tools/build/fixtures/wow-boundaries.cmake",
+    "?? artifacts/build-migration/t484/s3-resource-calls/",
+    "?? docs/etc/evidence/t484-s3-resource-calls.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 135,
-    "unchanged": 93,
+    "changed": 136,
+    "unchanged": 92,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 76,
+    "migrated-delivered": 77,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 82,
+    "requires-disposition-reconciliation": 81,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3205,7 +3206,11 @@
           "reason": "Alias lifetime, decoder mapping and hook argument/handle checks are distinct; GDI real brush added to main contract"
         },
         "status": "migrated-delivered",
-        "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass"
+        "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass",
+        "retentionReview": {
+          "result": "retain-current-unique-contract",
+          "evidence": "docs/etc/evidence/t484-s3-resource-calls.md"
+        }
       }
     },
     {
@@ -3230,7 +3235,11 @@
           "reason": "Alias lifetime, decoder mapping and hook argument/handle checks are distinct; GDI real brush added to main contract"
         },
         "status": "migrated-delivered",
-        "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass"
+        "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass",
+        "retentionReview": {
+          "result": "retain-current-unique-contract",
+          "evidence": "docs/etc/evidence/t484-s3-resource-calls.md"
+        }
       }
     },
     {
@@ -3255,7 +3264,11 @@
           "reason": "Alias lifetime, decoder mapping and hook argument/handle checks are distinct; GDI real brush added to main contract"
         },
         "status": "migrated-delivered",
-        "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass"
+        "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass",
+        "retentionReview": {
+          "result": "retain-current-unique-contract",
+          "evidence": "docs/etc/evidence/t484-s3-resource-calls.md"
+        }
       }
     },
     {
@@ -3597,8 +3610,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "50a76fa8feeedeb2688ea2b0120cdc547926761363fb4c7a97c24ece890ce70a",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "05f93faa56d01d5343f0f0e2cc62375f244c9890"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-required-root.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-required-root.md",
@@ -3610,12 +3627,16 @@
       "id": "B0191",
       "file": "test/observation/verify-wow-resource-call-fixtures.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "880ebf49952e0576f3a870eaaf021d6687267a307e9391d1fa2c021783899d89",
+      "state": "changed",
+      "current_sha256": "32381743c14a30b9ead449d8df55cda2886b9312e6b3d67f85cfefa3f5228dde",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-resource-calls.md",
+        "reason": "Native resource group and unchanged assertions pass; duplicate extractor/manual builder and obsolete stand-ins removed",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0192",
@@ -5796,6 +5817,12 @@
     }
   ],
   "commits": {
+    "05f93faa56d01d5343f0f0e2cc62375f244c9890": {
+      "subject": "T484 S3 P117 reuse native capture producer for required root contract",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-required-root.md"
+      ]
+    },
     "a24f3c50ddff4a5a0cce760024d2576fbbb7f97f": {
       "subject": "T484 S3 P116 migrate native reply payload reference producer",
       "evidence": [
@@ -8443,32 +8470,8 @@
       "file": "test/observation/verify-wow-resource-call-fixtures.ps1",
       "hits": [
         {
-          "line": 27,
-          "text": "Build 'cursor-compile' ('cl.exe /nologo /TC /c /MT /W4 /WX /I\"'+$out+'\" /Fo\"'+$out+'/cursor.obj\" \"'+$repo+'/test/adapter-mvdm-host-out/wow/wow_cursor_call_fixture.c\"')"
-        },
-        {
-          "line": 28,
-          "text": "Build 'cursor-link' ('link.exe /nologo /machine:x86 /subsystem:console /out:\"'+$out+'/cursor.exe\" \"'+$out+'/cursor.obj\" user32.lib')"
-        },
-        {
-          "line": 31,
-          "text": "Build 'bitmap-compile' ('cl.exe /nologo /TC /c /MT /W4 /WX /I\"'+$out+'\" /Fo\"'+$out+'/bitmap.obj\" \"'+$repo+'/test/adapter-mvdm-host-out/wow/wow_bitmap_call_fixture.c\"')"
-        },
-        {
-          "line": 32,
-          "text": "Build 'bitmap-link' ('link.exe /nologo /machine:x86 /subsystem:console /out:\"'+$out+'/bitmap.exe\" \"'+$out+'/bitmap.obj\"')"
-        },
-        {
-          "line": 36,
-          "text": "Build 'cursor-resource-compile' ('cl.exe /nologo /TC /c /MT /W4 /WX'+$include+' /Fo\"'+$out+'/cursor-resource.obj\" \"'+$repo+'/test/adapter-mvdm-host-out/wow/wow_cursor_resource_fixture.c\"')"
-        },
-        {
-          "line": 42,
-          "text": "Build 'cursor-binding-compile' ('cl.exe /nologo /TC /c /MT /Gy /W4'+$include+' /Fo\"'+$out+'/cursor-binding.obj\" \"'+$repo+'/src/compat/wow_private_user_compat.c\"')"
-        },
-        {
-          "line": 43,
-          "text": "Build 'cursor-resource-link' ('link.exe /nologo /machine:x86 /subsystem:console /opt:ref /out:\"'+$out+'/cursor-resource.exe\" \"'+$out+'/cursor-resource.obj\" \"'+$out+'/cursor-binding.obj\" user32.lib gdi32.lib kernel32.lib')"
+          "line": 23,
+          "text": "$native=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
     },

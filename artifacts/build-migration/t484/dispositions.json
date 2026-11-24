@@ -800,7 +800,11 @@
       "reason": "Alias lifetime, decoder mapping and hook argument/handle checks are distinct; GDI real brush added to main contract"
     },
     "status": "migrated-delivered",
-    "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass"
+    "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass",
+    "retentionReview": {
+      "result": "retain-current-unique-contract",
+      "evidence": "docs/etc/evidence/t484-s3-resource-calls.md"
+    }
   },
   "test/observation/verify-wow-hard-error-decoder.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
@@ -810,7 +814,11 @@
       "reason": "Alias lifetime, decoder mapping and hook argument/handle checks are distinct; GDI real brush added to main contract"
     },
     "status": "migrated-delivered",
-    "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass"
+    "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass",
+    "retentionReview": {
+      "result": "retain-current-unique-contract",
+      "evidence": "docs/etc/evidence/t484-s3-resource-calls.md"
+    }
   },
   "test/observation/verify-wow-hook-native-binding.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
@@ -820,7 +828,11 @@
       "reason": "Alias lifetime, decoder mapping and hook argument/handle checks are distinct; GDI real brush added to main contract"
     },
     "status": "migrated-delivered",
-    "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass"
+    "reason": "Native current-source boundary producer; runtime/cache/full build/publication hashes pass",
+    "retentionReview": {
+      "result": "retain-current-unique-contract",
+      "evidence": "docs/etc/evidence/t484-s3-resource-calls.md"
+    }
   },
   "test/observation/verify-wow-input-lifetime.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
@@ -926,5 +938,10 @@
     "evidence": "docs/etc/evidence/t484-s3-required-root.md",
     "status": "migrated-delivered",
     "reason": "Reuses current native capture generator; stale source/anchor and manual producer retired; current root and related regressions pass"
+  },
+  "test/observation/verify-wow-resource-call-fixtures.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-resource-calls.md",
+    "reason": "Native resource group and unchanged assertions pass; duplicate extractor/manual builder and obsolete stand-ins removed",
+    "status": "migrated-delivered"
   }
 }

@@ -1,0 +1,40 @@
+{
+  "publication": {
+    "publishedCopies": 22,
+    "unchanged": true,
+    "republished": false,
+    "rawInputs": 11
+  },
+  "markers": {
+    "cursor-resource-public.stdout": "route=public icon=1 bpp=1 core=0 created=1 repeated_same=0\r\nsize=32x32 expected=32x32 hotspot=16,16 color=0 output_bpp=1\r\nroute=public icon=1 bpp=24 core=0 created=1 repeated_same=0\r\npixels_black_white=0\r\nsize=32x32 expected=32x32 hotspot=16,16 color=1 output_bpp=32\r\nroute=public icon=0 bpp=1 core=0 created=1 repeated_same=0\r\nsize=32x32 expected=32x32 hotspot=4,6 color=0 output_bpp=1\r\nroute=public icon=0 bpp=24 core=0 created=1 repeated_same=0\r\npixels_black_white=1\r\nsize=32x32 expected=32x32 hotspot=4,6 color=1 output_bpp=32\r\nroute=public icon=1 bpp=1 core=1 created=1 repeated_same=0\r\nsize=32x32 expected=32x32 hotspot=16,16 color=0 output_bpp=1\r\nroute=public icon=0 bpp=1 core=1 created=1 repeated_same=0\r\nsize=32x32 expected=32x32 hotspot=4,6 color=0 output_bpp=1\r\nstock_shared=1\r\ninvalid_resource_refused=1\r\nWOW_CURSOR_RESOURCE_BOUNDARY_OK",
+    "cursor-resource-binding.stdout": "route=binding icon=1 bpp=1 core=0 created=1 repeated_same=0\r\nsize=32x32 expected=32x32 hotspot=16,16 color=0 output_bpp=1\r\nroute=binding icon=1 bpp=24 core=0 created=1 repeated_same=0\r\npixels_black_white=0\r\nsize=32x32 expected=32x32 hotspot=16,16 color=1 output_bpp=32\r\nroute=binding icon=0 bpp=1 core=0 created=1 repeated_same=0\r\nsize=32x32 expected=32x32 hotspot=4,6 color=0 output_bpp=1\r\nroute=binding icon=0 bpp=24 core=0 created=1 repeated_same=0\r\npixels_black_white=1\r\nsize=32x32 expected=32x32 hotspot=4,6 color=1 output_bpp=32\r\nroute=binding icon=1 bpp=1 core=1 created=1 repeated_same=0\r\nsize=32x32 expected=32x32 hotspot=16,16 color=0 output_bpp=1\r\nroute=binding icon=0 bpp=1 core=1 created=1 repeated_same=0\r\nsize=32x32 expected=32x32 hotspot=4,6 color=0 output_bpp=1\r\nstock_shared=1\r\ninvalid_resource_refused=1\r\nWOW_CURSOR_RESOURCE_BOUNDARY_OK",
+    "bitmap-run.stdout": "WOW_BITMAP_CALL_ORDER errors=0 output=2",
+    "cursor-run.stdout": "WOW_CURSOR_CALL_ORDER errors=0 cases=3 output=3 aliases=3 output_errors=0 alias_errors=0 return_errors=0"
+  },
+  "projections": [
+    {
+      "identicalIgnoringWhitespace": true,
+      "kind": "cursor"
+    },
+    {
+      "identicalIgnoringWhitespace": true,
+      "kind": "bitmap"
+    }
+  ],
+  "firstAttempt": {
+    "reason": "Two removed stand-ins still required by link; resolved with actual compatibility provider",
+    "exit": 1,
+    "pid": 19012
+  },
+  "cache": {
+    "wrongArch": 2,
+    "hash": "201E85D557F84F42F717EA8B4A39614220A680F9B47F19511245E73480444278",
+    "mtime": "2026-11-24T03:31:56.8965394Z"
+  },
+  "validation": {
+    "started": "2026-11-24T04:31:42.5578365+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T04:33:10.6313472+01:00",
+    "pid": 14500
+  }
+}

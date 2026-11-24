@@ -72,7 +72,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P117 required root](../etc/evidence/t484-s3-required-root.md) | Current root/three chain/15 reacquisition cases pass; shared producer replaces stale source path; full cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P117 passed their cached full host build. P73 checks11 raw host inputs
+| [P118 resource contracts](../etc/evidence/t484-s3-resource-calls.md) | Four resource runs/current projections pass; redundant producer and three stand-ins removed; three migrated contracts reviewed; cached build/cache/publication hashes pass. |
+
+Completed implementation batches through P118 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
