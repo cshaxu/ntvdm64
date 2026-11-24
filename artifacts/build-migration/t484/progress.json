@@ -1,31 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "9a7a1fac4c3cb4d8023bcc66b12b75a639159fb5",
+  "head": "dbb9d36c794d0d6f5224c4a61aa2cbaa98d89a42",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/mvdm-host/wow_callback_abort_ccpu_fixture.c",
-    " M test/mvdm-host/wow_callback_abort_tls_fixture.c",
-    " M test/observation/verify-wow-callback-abort-ccpu.ps1",
+    " M test/observation/verify-wow-callback-cost-probe.ps1",
+    " M test/observation/verify-wow-common-dialog-calls.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/worker/observation-tests.cmake",
-    "?? artifacts/build-migration/t484/s3-ccpu-abort/",
-    "?? docs/etc/evidence/t484-s3-ccpu-abort.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-common-dialog-native/",
+    "?? docs/etc/evidence/t484-s3-common-dialog-native.md",
+    "?? tools/build/fixtures/wow-common-dialog.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 110,
-    "unchanged": 118,
+    "changed": 111,
+    "unchanged": 117,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 53,
+    "migrated-delivered": 54,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 11,
-    "requires-disposition-reconciliation": 108,
+    "requires-disposition-reconciliation": 107,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -2979,8 +2979,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "13ca75f617232e7609ed33964254bff4a98ab294d3329bba74d55ae207260d3c",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "dbb9d36c794d0d6f5224c4a61aa2cbaa98d89a42"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-ccpu-abort.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Native actual CCPU closure; old graph parsing and historical source overrides removed",
@@ -2998,7 +3002,7 @@
       "file": "test/observation/verify-wow-callback-cost-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "b0eae919cf0dd931369fc4583aa00af4afcbac7efd83fc9356cf88e3888e47f9",
+      "current_sha256": "cc0f48bbc680e91ddcc15be166f6f4538857ef047b724bb31a60b9b68e2cce18",
       "revisions": [
         "3d217bfeb341d52835d90c326181e66361e82659"
       ],
@@ -3009,19 +3013,33 @@
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-callback-cost.md",
         "reason": "P50 standalone native recorder producer and original assertion runner pass",
-        "status": "migrated-delivered"
+        "status": "migrated-delivered",
+        "retention_review": {
+          "decision": "retain",
+          "evidence": "docs/etc/evidence/t484-s3-common-dialog-native.md",
+          "reason": "Live integration consumer and distinct recorder identity/overflow/read-only contracts; unused compiler parameter removed"
+        }
       }
     },
     {
       "id": "B0163",
       "file": "test/observation/verify-wow-common-dialog-calls.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "bcab9b126ee8b5a5c89b23a3cd5148b41b1e7ddc7025d2c682c967b3293916a9",
+      "state": "changed",
+      "current_sha256": "4d52adf404faaf2ba05a2e41433bdbfde1998f0f178f2cc5bc969012f14be685",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "retention_review": {
+          "decision": "retain",
+          "evidence": "docs/etc/evidence/t484-s3-common-dialog-native.md",
+          "reason": "Seven exact wrapper contracts and independent standard-template native reference"
+        },
+        "evidence": "docs/etc/evidence/t484-s3-common-dialog-native.md",
+        "status": "migrated-delivered",
+        "reason": "Native current-source projection and boundary/reference fixtures replace interpreter producer"
+      }
     },
     {
       "id": "B0164",
@@ -5518,6 +5536,12 @@
     }
   ],
   "commits": {
+    "dbb9d36c794d0d6f5224c4a61aa2cbaa98d89a42": {
+      "subject": "T484 S3 P97 use native CCPU closure for abort contracts",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-ccpu-abort.md"
+      ]
+    },
     "9a7a1fac4c3cb4d8023bcc66b12b75a639159fb5": {
       "subject": "T484 S3 P96 consolidate bitmap producers and retire resource generator",
       "evidence": [
@@ -7682,11 +7706,7 @@
       "file": "test/observation/verify-wow-callback-cost-probe.ps1",
       "hits": [
         {
-          "line": 3,
-          "text": "[string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'))"
-        },
-        {
-          "line": 18,
+          "line": 17,
           "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/wow-callback-cost-unit.exe\" \"$root/fixture.exe\""
         }
       ]
@@ -7696,12 +7716,8 @@
       "file": "test/observation/verify-wow-common-dialog-calls.ps1",
       "hits": [
         {
-          "line": 22,
-          "text": "Owned compile $env:ComSpec ('/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /TC /O2 /MT /W4 /WX /I\"'+$root+'\" \"'+$fixture+'\" /Fo\"'+$root+'/unit.obj\" /Fe\"'+$root+'/unit.exe\" /link user32.lib\"') 180"
-        },
-        {
-          "line": 27,
-          "text": "Owned native-compile $env:ComSpec ('/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /TC /O2 /MT /W4 /WX \"'+$reference+'\" /Fo\"'+$root+'/native.obj\" /Fe\"'+$root+'/native.exe\" /link user32.lib comdlg32.lib\"') 180"
+          "line": 19,
+          "text": "$native=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
     },

@@ -112,7 +112,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P97 actual CCPU abort](../etc/evidence/t484-s3-ccpu-abort.md) | Three actual CPU thread paths, selector/control restoration and map ownership pass; historical overrides removed; full build/cache/publication hashes pass. |
 
-Implementation batches through P97 passed their cached full host build. P73 checks11 raw host inputs
+| [P98 common dialog producer](../etc/evidence/t484-s3-common-dialog-native.md) | Seven/42 boundary scenarios, native two-mode reference and reviewed recorder pass; full build/cache/publication hashes pass. |
+
+Implementation batches through P98 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

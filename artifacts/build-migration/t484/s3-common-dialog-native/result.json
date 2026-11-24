@@ -1,0 +1,58 @@
+{
+  "runtime": {
+    "started": "2026-11-24T02:18:18.8136384+01:00",
+    "finished": "2026-11-24T02:18:32.3141671+01:00",
+    "pid": 23376,
+    "exit": 0
+  },
+  "x64_rejected": 2,
+  "recorder": "CALLBACK_COST_UNIT errors=0 nested=1 exact_result_error=1 rejection=1 exception=1 untracked=1 readonly=1 overflow=1 negative_states=9 negative_identities=3 handles=85/85 phase_tls=1",
+  "final": {
+    "exit": 0,
+    "started": "2026-11-24T02:19:07.196999+01:00",
+    "finished": "2026-11-24T02:20:39.333433+01:00",
+    "pid": 28336
+  },
+  "cache": [
+    {
+      "time": 639310799057935959,
+      "hash": "3E54F31F7BEA7825CAD9978801569A1035B76697F2DDD28905EC095ED8D8BC67",
+      "path": "build/.ninja/fixtures-x86/wow-common-dialog-boundary.exe"
+    },
+    {
+      "time": 639310799056825706,
+      "hash": "50D5F9BB7913C2F120C2861576DDB571DDDEF00D9301AF71068DBFDDF70F5964",
+      "path": "build/.ninja/fixtures-x86/wow-common-dialog-reference.exe"
+    },
+    {
+      "time": 639310799036883662,
+      "hash": "B974104703970858DB1770C3B28F46986A12B44E7E0D8688E07032D3563F1113",
+      "path": "build/.ninja/fixtures-x86/common_dialog_exact_body.h"
+    },
+    {
+      "time": 639310587277003292,
+      "hash": "CFFE9B61AA0030D68E70F885270F5F7E2BA051662D780ACD99B55C8FF4C9D37B",
+      "path": "build/.ninja/fixtures-x86/wow-callback-cost-unit.exe"
+    }
+  ],
+  "native": [
+    "NATIVE_COMMDLG_REFERENCE mode=0 hwnd=003A0464 error=0 extended=0 hooks=1 size=40",
+    "NATIVE_COMMDLG_REFERENCE mode=1 hwnd=003B0464 error=0 extended=0 hooks=2 size=40",
+    "NATIVE_COMMDLG_REFERENCE_RESULT errors=0 modes=2"
+  ],
+  "boundary": [
+    "COMMON_DIALOG_LEAF wow_native_choose_color scenarios=6",
+    "COMMON_DIALOG_LEAF wow_native_choose_font scenarios=6",
+    "COMMON_DIALOG_LEAF wow_native_open_file scenarios=6",
+    "COMMON_DIALOG_LEAF wow_native_save_file scenarios=6",
+    "COMMON_DIALOG_LEAF wow_native_find_text scenarios=6",
+    "COMMON_DIALOG_LEAF wow_native_replace_text scenarios=6",
+    "COMMON_DIALOG_LEAF wow_native_print_dialog scenarios=6",
+    "COMMON_DIALOG_BOUNDARIES errors=0 leaves=7 scenarios=42 guest_proof=0"
+  ],
+  "publication": {
+    "unchanged": true,
+    "raw_inputs": 11,
+    "published_copies": 22
+  }
+}

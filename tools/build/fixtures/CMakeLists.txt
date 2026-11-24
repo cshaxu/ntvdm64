@@ -369,3 +369,5 @@ include(niddb.cmake)
 include(serial-baud.cmake)
 
 include(wow-accelerator.cmake)
+
+include(wow-common-dialog.cmake)

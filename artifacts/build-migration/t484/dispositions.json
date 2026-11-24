@@ -290,7 +290,12 @@
   "test/observation/verify-wow-callback-cost-probe.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-callback-cost.md",
     "reason": "P50 standalone native recorder producer and original assertion runner pass",
-    "status": "migrated-delivered"
+    "status": "migrated-delivered",
+    "retention_review": {
+      "decision": "retain",
+      "evidence": "docs/etc/evidence/t484-s3-common-dialog-native.md",
+      "reason": "Live integration consumer and distinct recorder identity/overflow/read-only contracts; unused compiler parameter removed"
+    }
   },
   "test/integration/verify-wow-clipboard-transfer.ps1": {
     "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
@@ -726,5 +731,15 @@
       "evidence": "docs/etc/evidence/t484-s3-ccpu-abort.md"
     },
     "evidence": "docs/etc/evidence/t484-s3-ccpu-abort.md"
+  },
+  "test/observation/verify-wow-common-dialog-calls.ps1": {
+    "retention_review": {
+      "decision": "retain",
+      "evidence": "docs/etc/evidence/t484-s3-common-dialog-native.md",
+      "reason": "Seven exact wrapper contracts and independent standard-template native reference"
+    },
+    "evidence": "docs/etc/evidence/t484-s3-common-dialog-native.md",
+    "status": "migrated-delivered",
+    "reason": "Native current-source projection and boundary/reference fixtures replace interpreter producer"
   }
 }
