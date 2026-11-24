@@ -1,29 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "531dd5bd599af47c7115563171b166890f184425",
+  "head": "a8f56d718d514d5424abf107285cb0387019b4ba",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/adapter-mvdm-host-out/wow/wow_cpd_window_normalization_probe.c",
-    " M test/observation/verify-wow-control-boundaries.ps1",
-    " M tools/build/wow-controls/units.cmake",
-    "?? artifacts/build-migration/t484/s3-control-retention/",
-    "?? docs/etc/evidence/t484-s3-control-retention.md"
+    " M test/observation/verify-wow-copydata-lifetime.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/SourceProjection.cmake",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-copydata-native/",
+    "?? docs/etc/evidence/t484-s3-copydata-native.md",
+    "?? tools/build/fixtures/wow-copydata.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 111,
-    "unchanged": 117,
+    "changed": 112,
+    "unchanged": 116,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 54,
+    "migrated-delivered": 55,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 12,
-    "requires-disposition-reconciliation": 106,
+    "requires-disposition-reconciliation": 105,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3052,9 +3054,11 @@
       "state": "changed",
       "current_sha256": "06d40eff0af62319f2546d05658291abea6017ee69b1016a66cb56b594fd625d",
       "revisions": [
+        "a8f56d718d514d5424abf107285cb0387019b4ba",
         "5b950e8f26ccdfda77bc924d1aaae4279302fe79"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-control-retention.md",
         "docs/etc/evidence/t484-s3-wow-controls.md"
       ],
       "completion": "retained-native-delegate",
@@ -3073,12 +3077,21 @@
       "id": "B0165",
       "file": "test/observation/verify-wow-copydata-lifetime.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "6fd51f59002a93232abc08a173c5488ac6e8ca7f8631e9cb5a23a56021a5c7aa",
+      "state": "changed",
+      "current_sha256": "e00a089687d33d394de7b0bb3689120ca84d8105adf426774a8b28f2c4355df8",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Native current-source projections and compilation; historical commit producer retired",
+        "retention_review": {
+          "reason": "Independent ownership/rollback contracts; retain59/14/18 current cases without historical source replacement",
+          "decision": "retain-consolidated",
+          "evidence": "docs/etc/evidence/t484-s3-copydata-native.md"
+        },
+        "evidence": "docs/etc/evidence/t484-s3-copydata-native.md",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0166",
@@ -5549,6 +5562,12 @@
     }
   ],
   "commits": {
+    "a8f56d718d514d5424abf107285cb0387019b4ba": {
+      "subject": "T484 S3 P99 retire unused control decoder candidate",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-control-retention.md"
+      ]
+    },
     "531dd5bd599af47c7115563171b166890f184425": {
       "subject": "T484 S3 P98 native common dialog fixtures and recorder retention review",
       "evidence": [
@@ -7763,16 +7782,8 @@
       "file": "test/observation/verify-wow-copydata-lifetime.ps1",
       "hits": [
         {
-          "line": 43,
-          "text": "foreach($name in @('CopyDataAddNode','CopyDataFindData16','CopyDataFindData32','CopyDataDeleteNode')){$bodies+=Body \"$original/wdde.c\" $name}"
-        },
-        {
-          "line": 74,
-          "text": "Owned compile $env:ComSpec ('/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4127 /wd4706 /wd4055 /wd4054 /I\"'+$repo+'/src\" /I\"'+$root+'\" /I\"'+$repo+'/src/wow32-dll/include\" \"'+$fixture+'\" /Fo\"'+$root+'/unit.obj\" /Fe\"'+$root+'/unit.exe\" /link user32.lib\"') 180"
-        },
-        {
-          "line": 91,
-          "text": "Owned negative-compile $env:ComSpec ('/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4127 /wd4706 /wd4055 /wd4054 /I\"'+$negative+'\" /I\"'+$repo+'/src\" /I\"'+$root+'\" /I\"'+$repo+'/src/wow32-dll/include\" \"'+$fixture+'\" /Fo\"'+$negative+'/unit.obj\" /Fe\"'+$negative+'/unit.exe\" /link user32.lib\"') 180"
+          "line": 15,
+          "text": "$native=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
     },

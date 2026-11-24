@@ -116,7 +116,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P99 control retention](../etc/evidence/t484-s3-control-retention.md) | Unadopted scratch-window candidate removed;38 current native cases/cache identities pass; full build/publication hashes pass. |
 
-Implementation batches through P99 passed their cached full host build. P73 checks11 raw host inputs
+| [P100 COPYDATA producer](../etc/evidence/t484-s3-copydata-native.md) | Current59/14/18 cases and old/new projection comparison pass; historical source producer retired; full build/cache/publication hashes pass. |
+
+Implementation batches through P100 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

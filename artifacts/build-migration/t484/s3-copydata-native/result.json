@@ -1,0 +1,62 @@
+{
+  "projections": [
+    {
+      "name": "copydata_exact_body.h",
+      "newHash": "F5B44FD5FB0AFEBC39683E7BBF1021B317E14DD31A67916DF25DC5BFEDCEB270",
+      "whitespace_normalized_equal": true,
+      "oldHash": "A53B713EB45434C1214C85AE7F15E4D5446D52A6F5E086731FD4665E474A9B19"
+    },
+    {
+      "name": "queue_selector_intervals.h",
+      "newHash": "71B98B2A32B1B5B7D8DC7CA7E6240C4D5B4F68E44ECFA0B6C1CC1C9530F55761",
+      "whitespace_normalized_equal": true,
+      "oldHash": "4F49DF07A425D8CC3FAF5D7414904AB0898BD7A961C836B11F95E613531B6C14"
+    }
+  ],
+  "cache": [
+    {
+      "path": "build/.ninja/fixtures-x86/wow-copydata-lifetime.exe",
+      "time": 639310805565773034,
+      "hash": "9487484CE68D485A36C16DDB394D51ECC95CD9368FB61989794C8773236B9AEA"
+    },
+    {
+      "path": "build/.ninja/fixtures-x86/copydata_exact_body.h",
+      "time": 639310805532015223,
+      "hash": "F5B44FD5FB0AFEBC39683E7BBF1021B317E14DD31A67916DF25DC5BFEDCEB270"
+    },
+    {
+      "path": "build/.ninja/fixtures-x86/queue_selector_intervals.h",
+      "time": 639310805532486887,
+      "hash": "71B98B2A32B1B5B7D8DC7CA7E6240C4D5B4F68E44ECFA0B6C1CC1C9530F55761"
+    }
+  ],
+  "runtime": {
+    "exit": 0,
+    "started": "2026-11-24T02:29:07.5750257+01:00",
+    "pid": 28292,
+    "finished": "2026-11-24T02:29:17.1580839+01:00"
+  },
+  "markers": [
+    "FILTER_SELECTOR cases=14 entry_values=2 modes=7 errors=0 guest_proof=0",
+    "QUEUE_SELECTOR cases=18 owners=3 modes=3 errors=0 full_queue_proof=0 guest_proof=0",
+    "COPYDATA_LIFETIME errors=0 scenarios=59 directions=2 stages=4 nested=1 immutable_release=1 exception=2 thread_status=1 hook_roles=2 filter_nested_different=1 embedded_headers=2 filter_output_rollback=1 guest_proof=0"
+  ],
+  "publication": {
+    "published_copies": 22,
+    "raw_inputs": 11,
+    "unchanged": true
+  },
+  "first_comparison": {
+    "exit": 1,
+    "finished": "2026-11-24T02:30:05.5565451+01:00",
+    "started": "2026-11-24T02:29:59.053314+01:00",
+    "pid": 20560
+  },
+  "x64_rejected": 2,
+  "final": {
+    "started": "2026-11-24T02:30:25.4450039+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T02:31:28.1413722+01:00",
+    "pid": 18852
+  }
+}

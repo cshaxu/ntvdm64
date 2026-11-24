@@ -1687,3 +1687,5 @@ post-publication targeted checks.
 - [T484 S3 P98 common dialog producers](evidence/t484-s3-common-dialog-native.md).
 
 - [T484 S3 P99 control retention](evidence/t484-s3-control-retention.md).
+
+- [T484 S3 P100 COPYDATA producer](evidence/t484-s3-copydata-native.md).

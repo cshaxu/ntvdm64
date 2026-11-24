@@ -751,5 +751,15 @@
     },
     "reason": "Existing native producer reconciled by38 current default cases; obsolete scratch-window candidate removed",
     "evidence": "docs/etc/evidence/t484-s3-control-retention.md"
+  },
+  "test/observation/verify-wow-copydata-lifetime.ps1": {
+    "reason": "Native current-source projections and compilation; historical commit producer retired",
+    "retention_review": {
+      "reason": "Independent ownership/rollback contracts; retain59/14/18 current cases without historical source replacement",
+      "decision": "retain-consolidated",
+      "evidence": "docs/etc/evidence/t484-s3-copydata-native.md"
+    },
+    "evidence": "docs/etc/evidence/t484-s3-copydata-native.md",
+    "status": "migrated-delivered"
   }
 }

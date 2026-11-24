@@ -371,3 +371,5 @@ include(serial-baud.cmake)
 include(wow-accelerator.cmake)
 
 include(wow-common-dialog.cmake)
+
+include(wow-copydata.cmake)
