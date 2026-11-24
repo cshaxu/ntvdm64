@@ -1,33 +1,33 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "af2ac44fc984ddb13e05da41637435ad5b14b276",
+  "head": "903f0e36d99f25c42692187beb71cea40fe6ec2f",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-softpc-object-contract.ps1",
+    " M test/observation/verify-softpc-observer-error.ps1",
+    " D test/observation/verify-software-video-publisher.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/worker/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-object-contracts/",
-    "?? docs/etc/evidence/t484-s3-object-contracts.md",
-    "?? tools/build/worker/object-contracts.cmake"
+    " M tools/build/fixtures/console-contracts.cmake",
+    "?? artifacts/build-migration/t484/s3-observer-publication/",
+    "?? docs/etc/evidence/t484-s3-observer-publication.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 105,
-    "unchanged": 124,
-    "removed": 126
+    "changed": 106,
+    "unchanged": 122,
+    "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 48,
+    "migrated-delivered": 49,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 126,
+    "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
-    "retained-native-delegate": 10,
-    "requires-disposition-reconciliation": 115,
+    "retained-native-delegate": 11,
+    "requires-disposition-reconciliation": 112,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 178,
+  "existing_interpreted_candidates_with_command_hits": 177,
   "files": [
     {
       "id": "B0001",
@@ -2795,8 +2795,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "20c46aed5c54b4590c878da29a0618a26c1f3798fed108e86390bf33367e1d4a",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "903f0e36d99f25c42692187beb71cea40fe6ec2f"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-object-contracts.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-object-contracts.md",
@@ -2813,23 +2817,41 @@
       "id": "B0154",
       "file": "test/observation/verify-softpc-observer-error.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f0bf344921c4d6f5c3ef06026f2f1a238c5687f4e8178d0f67006cb2433fd1c4",
+      "state": "changed",
+      "current_sha256": "5623881fd1039aa5c8dd732885bd1ad4a1b0936815e169d02446744325fb7c6e",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+        "status": "migrated-delivered",
+        "retention_review": {
+          "decision": "retain",
+          "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+          "reason": "Four observer modes retain unique caller-error transparency coverage; CMD/native producer replaces compiler recipe"
+        },
+        "reason": "Four observer modes retain unique caller-error transparency coverage; CMD/native producer replaces compiler recipe"
+      }
     },
     {
       "id": "B0155",
       "file": "test/observation/verify-software-video-publisher.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "43fbf143035c6bab3a057ee78a747217e992056b838034df6aadca9c62be7719",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+        "status": "retired-with-delivery-evidence",
+        "retention_review": {
+          "decision": "remove-wrapper",
+          "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+          "reason": "No independent assertions or live callers; unchanged native publication fixture retained directly"
+        },
+        "reason": "No independent assertions or live callers; unchanged native publication fixture retained directly"
+      }
     },
     {
       "id": "B0156",
@@ -2843,8 +2865,17 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-thread-fixtures.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+        "status": "retained-native-delegate",
+        "retention_review": {
+          "decision": "retain",
+          "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+          "reason": "Already CMD/native; x86/x64 lifecycle/module binding and rollback verification confirms independent coverage"
+        },
+        "reason": "Already CMD/native; x86/x64 lifecycle/module binding and rollback verification confirms independent coverage"
+      }
     },
     {
       "id": "B0157",
@@ -5430,6 +5461,12 @@
     }
   ],
   "commits": {
+    "903f0e36d99f25c42692187beb71cea40fe6ec2f": {
+      "subject": "T484 S3 P92 unify native SoftPC object contract producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-object-contracts.md"
+      ]
+    },
     "af2ac44fc984ddb13e05da41637435ad5b14b276": {
       "subject": "T484 S3 P91 retire historical RTC probe and serial build wrapper",
       "evidence": [
@@ -7501,25 +7538,7 @@
       "hits": [
         {
           "line": 13,
-          "text": "& $CompilerDriver cl.exe /nologo /O2 /MT /Gy /W3 /FIwindows.h \"/I$repo/src\" \"/Fo$root/\" \"/Fe$root/probe.exe\" $probe $source /link /OPT:REF *> \"$root/compile.txt\""
-        }
-      ]
-    },
-    {
-      "id": "B0155",
-      "file": "test/observation/verify-software-video-publisher.ps1",
-      "hits": [
-        {
-          "line": 16,
-          "text": "& $wrapper cl.exe /nologo /MT /W4 /WX /O2 /TC \"/I$repo/src\" /c (Join-Path $repo $source) \"/Fo$object\" *> (Join-Path $root ((Split-Path $object -Leaf)+'.log'))"
-        },
-        {
-          "line": 21,
-          "text": "& $wrapper link.exe /nologo \"/out:$exe\" @objects kernel32.lib *> \"$root/link.log\""
-        },
-        {
-          "line": 22,
-          "text": "if($LASTEXITCODE){throw 'Link failed'}"
+          "text": "Copy-Item \"$repo/build/.ninja/fixtures-$Architecture/softpc-observer-error.exe\" \"$root/probe.exe\""
         }
       ]
     },

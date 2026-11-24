@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$BuildRoot,[Parameter(Mandatory)][string]$CompilerDriver)
+param([Parameter(Mandatory)][string]$BuildRoot,[ValidateSet('x86','x64')][string]$Architecture='x86')
 # Invoke only from an owned hidden background supervisor.
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -8,11 +8,9 @@ $null=New-Item -ItemType Directory $root
 try {
  $source="$repo/src/compat/mvdm_softpc_observation.c"
  $probe="$PSScriptRoot/softpc_observer_error_probe.c"
- Push-Location $root
- try {
-  & $CompilerDriver cl.exe /nologo /O2 /MT /Gy /W3 /FIwindows.h "/I$repo/src" "/Fo$root/" "/Fe$root/probe.exe" $probe $source /link /OPT:REF *> "$root/compile.txt"
-  if($LASTEXITCODE){throw 'Observer error probe compile failed'}
- }finally{Pop-Location}
+ & "$repo/tools/build-fixtures.cmd" $Architecture softpc-observer-error *> "$root/compile.txt"
+ if($LASTEXITCODE){throw 'Native observer error build failed'}
+ Copy-Item "$repo/build/.ninja/fixtures-$Architecture/softpc-observer-error.exe" "$root/probe.exe"
  @($source,$probe,"$root/probe.exe")|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"
  foreach($mode in @('disabled','long','missing','enabled')) {
   $trace=if($mode -eq 'missing'){"$root/absent/trace.txt"}else{"$root/$mode.txt"}

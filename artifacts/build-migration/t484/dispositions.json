@@ -656,5 +656,35 @@
     },
     "reason": "Shared native positive/negative producers; eight actual object contracts and invalid identity controls verified",
     "status": "migrated-delivered"
+  },
+  "test/observation/verify-softpc-observer-error.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+    "status": "migrated-delivered",
+    "retention_review": {
+      "decision": "retain",
+      "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+      "reason": "Four observer modes retain unique caller-error transparency coverage; CMD/native producer replaces compiler recipe"
+    },
+    "reason": "Four observer modes retain unique caller-error transparency coverage; CMD/native producer replaces compiler recipe"
+  },
+  "test/observation/verify-software-video-publisher.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+    "status": "retired-with-delivery-evidence",
+    "retention_review": {
+      "decision": "remove-wrapper",
+      "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+      "reason": "No independent assertions or live callers; unchanged native publication fixture retained directly"
+    },
+    "reason": "No independent assertions or live callers; unchanged native publication fixture retained directly"
+  },
+  "test/observation/verify-thread-start-boundary.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+    "status": "retained-native-delegate",
+    "retention_review": {
+      "decision": "retain",
+      "evidence": "docs/etc/evidence/t484-s3-observer-publication.md",
+      "reason": "Already CMD/native; x86/x64 lifecycle/module binding and rollback verification confirms independent coverage"
+    },
+    "reason": "Already CMD/native; x86/x64 lifecycle/module binding and rollback verification confirms independent coverage"
   }
 }

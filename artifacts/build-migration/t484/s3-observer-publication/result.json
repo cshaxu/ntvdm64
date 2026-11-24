@@ -1,0 +1,121 @@
+{
+  "runtime": {
+    "exit": 0,
+    "started": "2026-11-24T01:49:39.2932674+01:00",
+    "finished": "2026-11-24T01:50:20.4147735+01:00",
+    "pid": 536
+  },
+  "final": {
+    "finished": "2026-11-24T01:52:18.5897611+01:00",
+    "exit": 0,
+    "pid": 30348,
+    "started": "2026-11-24T01:50:56.5392963+01:00"
+  },
+  "publication": {
+    "published_copies": 22,
+    "raw_inputs": 11,
+    "unchanged": true
+  },
+  "architectures": [
+    {
+      "thread_markers": [
+        "THREAD_LIFECYCLE uninitialized_rejected=1 repeated_install=1",
+        "THREAD_START_ROLLBACK rejected=4 owner_count=1 no_worker_entry=1",
+        "THREAD_PRE_CCPU original_exit_body=1 unbind_before_cpu=1 once=1",
+        "THREAD_TERMINAL_UNBIND normal=5 once=1 rejected_exit=c0000420",
+        "THREAD_TERMINAL_INTENT terminal=5 ordinary=1 rejected_reset=1 exception_reset=1",
+        "THREAD_MODULE actual_redirector_entry=1 shared_binding=1 same_owner=1"
+      ],
+      "architecture": "x86",
+      "observer_exit": "0",
+      "thread_exit": "0",
+      "publisher_markers": "PASS production publisher: latest of200, >=20ms, no-submit idle, explicit repeat, palette-only change, deferred source capture, forced final drain, resume, sticky failed send, 50 stop/join cycles without handle leaks",
+      "publisher": {
+        "exit": 0,
+        "hash": "1F8698C62942D135B3B668B61A5B22709A888FA0F83F09C360DF89C6B5AB56F8",
+        "finished": "2026-11-24T00:49:54.074865Z"
+      }
+    },
+    {
+      "thread_markers": [
+        "THREAD_LIFECYCLE uninitialized_rejected=1 repeated_install=1",
+        "THREAD_START_ROLLBACK rejected=4 owner_count=1 no_worker_entry=1",
+        "THREAD_PRE_CCPU original_exit_body=1 unbind_before_cpu=1 once=1",
+        "THREAD_TERMINAL_UNBIND normal=5 once=1 rejected_exit=c0000420",
+        "THREAD_TERMINAL_INTENT terminal=5 ordinary=1 rejected_reset=1 exception_reset=1",
+        "THREAD_MODULE actual_redirector_entry=1 shared_binding=1 same_owner=1"
+      ],
+      "architecture": "x64",
+      "observer_exit": "0",
+      "thread_exit": "0",
+      "publisher_markers": "PASS production publisher: latest of200, >=20ms, no-submit idle, explicit repeat, palette-only change, deferred source capture, forced final drain, resume, sticky failed send, 50 stop/join cycles without handle leaks",
+      "publisher": {
+        "exit": 0,
+        "hash": "B3E329ABD14A3CF32020760EF50342D2F7A89314F266A3A6F556C43CEA6C823F",
+        "finished": "2026-11-24T00:50:15.5715201Z"
+      }
+    }
+  ],
+  "cache": [
+    {
+      "time": 639310781859643913,
+      "path": "build/.ninja/fixtures-x86/softpc-observer-error.exe",
+      "hash": "CB71F7969111EA43B340B29C25FC6401B03D5DDF13CE79F8689B2576E7685D24"
+    },
+    {
+      "time": 639310781934762347,
+      "path": "build/.ninja/fixtures-x86/software-video-publisher.exe",
+      "hash": "1F8698C62942D135B3B668B61A5B22709A888FA0F83F09C360DF89C6B5AB56F8"
+    },
+    {
+      "time": 639310428609220432,
+      "path": "build/.ninja/fixtures-x86/thread-start-session-fixture.exe",
+      "hash": "64AD5EA6755B65644642D52FA6ABB981BA54E26D04C0E9897FA858798539B23E"
+    },
+    {
+      "time": 639310428610323719,
+      "path": "build/.ninja/fixtures-x86/thread-module.dll",
+      "hash": "3DE9AB03451F72A791E3EDDEB0F2EE2EF6CF484B86480734EB98DF2C2C6CFA5C"
+    },
+    {
+      "time": 639310427095841686,
+      "path": "build/.ninja/fixtures-x86/nt-thread-alert-fixture.exe",
+      "hash": "5A80BCAE950A2388EA2F0F8EC48F5ADA0698ACD08F56A4CB430284065D6E2644"
+    },
+    {
+      "time": 639310427095741206,
+      "path": "build/.ninja/fixtures-x86/softpc-event-thread-shutdown-fixture.exe",
+      "hash": "7FFC71B7FC6F2F8C81883623B1C3CED3F536F324D8E7E8DA15C1879101EFD127"
+    },
+    {
+      "time": 639310782092632422,
+      "path": "build/.ninja/fixtures-x64/softpc-observer-error.exe",
+      "hash": "0FA5A74055918A8A8ECA6DF54B2CEF8CD958C051F06E917353D4C74EB7E72CB6"
+    },
+    {
+      "time": 639310782150198436,
+      "path": "build/.ninja/fixtures-x64/software-video-publisher.exe",
+      "hash": "B3E329ABD14A3CF32020760EF50342D2F7A89314F266A3A6F556C43CEA6C823F"
+    },
+    {
+      "time": 639310428898530617,
+      "path": "build/.ninja/fixtures-x64/thread-start-session-fixture.exe",
+      "hash": "0BD82903A4C5260322F2B1FE2A817981B325F9A6418F93B5E5ECE05A46A6AD72"
+    },
+    {
+      "time": 639310428899416603,
+      "path": "build/.ninja/fixtures-x64/thread-module.dll",
+      "hash": "5E2FD2E3C104EA95694A119B6ACEB8537B8119563702D76BEBE49CDD89C01A2A"
+    },
+    {
+      "time": 639310427801748817,
+      "path": "build/.ninja/fixtures-x64/nt-thread-alert-fixture.exe",
+      "hash": "A55F33B5E55B435071909C064946215F666CBFAA713D375410FC37CB617DBB02"
+    },
+    {
+      "time": 639310427801905703,
+      "path": "build/.ninja/fixtures-x64/softpc-event-thread-shutdown-fixture.exe",
+      "hash": "BE728A0EC6FA5AE64597874F7B2DCC56C9A0B1AE8138E4EE5AC850B3020C3544"
+    }
+  ]
+}

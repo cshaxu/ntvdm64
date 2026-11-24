@@ -26,3 +26,12 @@ if(NTVDM_ARCH STREQUAL "x64")
   set_property(TARGET ntvwm-modern-edit-mouse_objects PROPERTY COMPILE_OPTIONS /nologo /W4)
   set_property(TARGET ntvwm-modern-edit-mouse_objects PROPERTY FIXTURE_LIBRARIES user32.lib)
 endif()
+
+fixture(softpc-observer-error CL src/compat/mvdm_softpc_observation.c
+  test/observation/softpc_observer_error_probe.c)
+set_property(TARGET softpc-observer-error_objects PROPERTY COMPILE_OPTIONS
+  /nologo /TC /O2 /Gy /W3 /FIwindows.h)
+fixture(software-video-publisher LINK src/compat/publication.c
+  test/compat/software_video_publisher_test.c)
+set_property(TARGET software-video-publisher_objects PROPERTY COMPILE_OPTIONS
+  /nologo /TC /W4 /WX /O2)

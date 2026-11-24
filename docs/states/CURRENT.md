@@ -102,7 +102,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P92 shared object contracts](../etc/evidence/t484-s3-object-contracts.md) | Eight native contracts277067 checks, eight ABI rejection controls and NIDDB invalid identities pass; historical override paths removed. |
 
-Implementation batches through P92 passed their cached full host build. P73 checks11 raw host inputs
+| [P93 observer/publication cleanup](../etc/evidence/t484-s3-observer-publication.md) | Redundant publication wrapper retired; observer and previously migrated thread lifecycle contracts pass x86/x64;12 cache identities and publication hashes pass. |
+
+Implementation batches through P93 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

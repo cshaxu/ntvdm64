@@ -1673,3 +1673,5 @@ post-publication targeted checks.
 - [RTC investigation and serial wrapper retirement](evidence/t484-s3-rtc-serial.md)
 
 - [Shared SoftPC object contracts](evidence/t484-s3-object-contracts.md)
+
+- [T484 S3 P93 observer/publication cleanup](evidence/t484-s3-observer-publication.md).

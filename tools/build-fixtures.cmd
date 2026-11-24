@@ -47,6 +47,7 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+for %%T in (softpc-observer-error software-video-publisher) do if "%TARGET%"=="%%T" set "SELECTED=1"
 if "%TARGET%"=="softpc-contracts" set "SELECTED=1"
 if "%TARGET%"=="softpc-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="serial-baud" set "SELECTED=1"
