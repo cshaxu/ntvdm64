@@ -5,5 +5,5 @@ call "%repo%\tools\build\bootstrap.cmd"
 if errorlevel 1 exit /b %errorlevel%
 call "%repo%\tools\build-addon.cmd" all
 if errorlevel 1 exit /b %errorlevel%
-call "%repo%\build\.ninja\addon\publish-utilities.cmd" %*
+call "%repo%\build\.ninja\addon\publish-addons.cmd" %*
 exit /b %errorlevel%

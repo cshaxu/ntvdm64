@@ -1,0 +1,81 @@
+@echo off
+setlocal EnableExtensions DisableDelayedExpansion
+if not "%~2"=="" exit /b 2
+set "publishing="
+set "repo=@publish_repo@"
+set "build=%repo%\build\.ninja\addon"
+set "output=%~1"
+if not defined output set "output=%repo%\assets\release"
+for %%I in ("%output%") do set "output=%%~fI"
+if not exist "%output%\addon-manifest.json" exit /b 2
+set "stage=%build%\addon-publication"
+if not exist "%stage%" mkdir "%stage%"
+if errorlevel 1 exit /b 1
+set "hash=%build%\hash\hash.exe"
+set "identity=%repo%\build\.ninja\build-tools\ntvdm-package-id.exe"
+set "pending=%stage%\addon-manifest.json"
+>"%pending%" echo {"schema":1,"drivers":[
+if errorlevel 1 exit /b 1
+set "comma="
+@driver_calls@
+>>"%pending%" echo ],"utilities":[
+if errorlevel 1 goto fail
+set "comma="
+@publish_calls@
+>>"%pending%" echo ]}
+if errorlevel 1 goto fail
+rem Invalidate the completion record before replacing any published addon.
+set "publishing=1"
+del /q "%output%\addon-manifest.json"
+if errorlevel 1 goto fail
+for %%I in (@publish_files@) do (
+  copy /b /y "%stage%\%%I" "%output%\%%I" >nul
+  if errorlevel 1 goto fail
+  fc /b "%stage%\%%I" "%output%\%%I" >nul
+  if errorlevel 1 goto fail
+)
+copy /b /y "%pending%" "%output%\addon-manifest.json" >nul
+if errorlevel 1 goto fail
+echo PASS published five drivers and nine AMD64 addon utilities
+exit /b 0
+:driver
+fc /b "%build%\%~1\source-inputs.json" "%build%\%~1\build.inputs.json" >nul
+if errorlevel 1 exit /b 1
+call :stage "%build%\%~1\%~2" "%~2"
+if errorlevel 1 exit /b 1
+set "receipt="
+set /p "receipt=" <"%build%\%~1\build.sha256"
+if /i not "%digest%"=="%receipt%" exit /b 1
+set "metadata=candidate"
+if /i "%digest%"=="%~3" set "metadata=entry"
+if defined comma >>"%pending%" echo ,
+type "%build%\%~1\release-%metadata%.json" >>"%pending%"
+if errorlevel 1 exit /b 1
+>>"%pending%" echo "sha256":"%digest%"}
+if errorlevel 1 exit /b 1
+set "comma=,"
+exit /b 0
+:utility
+"%identity%" --machine x64 "%build%\%~1\%~1.exe"
+if errorlevel 1 exit /b 1
+call :stage "%build%\%~1\%~1.exe" "%~2"
+if errorlevel 1 exit /b 1
+>>"%pending%" echo %comma%{"id":"%~1","file":"%~2","architecture":"amd64","sha256":"%digest%","source":"src/addon/%~1/%~1.c","sourceSha256":"%~3"}
+if errorlevel 1 exit /b 1
+set "comma=,"
+exit /b 0
+:stage
+copy /b /y "%~1" "%stage%\%~2" >nul
+if errorlevel 1 exit /b 1
+fc /b "%~1" "%stage%\%~2" >nul
+if errorlevel 1 exit /b 1
+"%hash%" "%stage%\%~2" >"%stage%\hash.txt"
+if errorlevel 1 exit /b 1
+set "digest="
+set /p "digest=" <"%stage%\hash.txt"
+if not defined digest exit /b 1
+exit /b 0
+:fail
+if defined publishing if exist "%output%\addon-manifest.json" del /q "%output%\addon-manifest.json"
+echo Addon publication failed; no successful delivery recorded. 1>&2
+exit /b 1

@@ -313,7 +313,10 @@ Setup preparation consumes these release artifacts, not a disposable driver
 build directory. Authored installer additions stay in media/PATCH, and installed
 runtime profiles/add-ons stay in installed/PATCH without media/repository
 dependencies. Keep original media unchanged and retain the accepted Win1.01
-original-Setup workflow. Reproducible producer is Stage-MouseDriverRelease.ps1.
+original-Setup workflow. Reproducible publication uses `tools/publish-addons.cmd`.
+It preserves acceptance only for unchanged source and artifact identities;
+changed outputs are candidates. Publication never upgrades acceptance; a
+verified designation requires reviewed, identity-matching runtime evidence.
 
 Independently authored host-side add-on utilities are likewise released beside
 the drivers, but remain outside the ten-host-image manifest. The shared

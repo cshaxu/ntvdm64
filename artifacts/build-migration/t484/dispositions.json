@@ -1,4 +1,6 @@
 {
+  "tools/build/Stage-MouseDriverRelease.ps1": {"status":"migrated-delivered","reason":"S4 P4 consolidates all five driver and nine utility publication into tools/publish-addons.cmd. Native receipts are checked before copying; unchanged source/artifact identities preserve qualification and changed identities become candidates.","evidence":"docs/etc/evidence/t484-s4-addon-driver-publication.md"},
+  "tools/build/Stage-Compat95Release.ps1": {"status":"migrated-delivered","reason":"S4 P4 uses the same CMD publisher and verifies all three Compat95 source inputs through native build receipts. Publication cannot upgrade acceptance; real four-case bootlogo tests remain the evidence owner.","evidence":"docs/etc/evidence/t484-s4-addon-driver-publication.md"},
   "tools/build/Stage-AddonUtilityRelease.ps1": {"status":"migrated-delivered","reason":"S4 P3 replaces selected PowerShell utility publication with the complete nine-tool CMD publisher, preserving driver metadata and validating all inputs before publication; native hashes, PE checks and failed-copy manifest invalidation are tested.","evidence":"docs/etc/evidence/t484-s4-addon-utility-publication.md"},
   "tools/build/Stage-System32ProductPackage.ps1": {"status":"migrated-delivered","reason":"S4 P2 replaces the PowerShell producer with tools/stage-system32.cmd and a single native-configured CMD template; all four test consumers use assertion-only delegation. Whole-package fixed-UUID comparison and failure cases retained.","evidence":"docs/etc/evidence/t484-s4-system32-cmd.md"},
 "tools/build/win31-setup/adapt-retail-dosmgr.ps1": {"status":"retired-with-delivery-evidence","reason":"P217 retires the unused PowerShell setup chain and duplicate tests; current CMD roundtrip owns exact identities, bounded byte changes, rejection, repeat and restore assertions.","evidence":"docs/etc/evidence/t484-s3-win31-retirement.md"},
@@ -129,10 +131,7 @@
     "reason": "CMD owns all native assembly; remaining independent ABI audit is not a producer dependency; background ownership and actual ABI/cache checks verified",
     "evidence": "docs/etc/evidence/t484-s3-mouse-reconcile.md"
   },
-  "tools/build/Stage-Compat95Release.ps1": {
-    "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-    "status": "pending-producer-migration"
-  },
+
   "CMakePresets.json": {
     "reason": "Architecture and cache preset data; no interpreter command; S2 actual builds cover use",
     "status": "retained-native-declarative"

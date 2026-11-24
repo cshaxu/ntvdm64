@@ -30,4 +30,4 @@ The tool directory contains `APPLY.CMD` and `UNAPPLY.CMD`. `path31.exe`,
 copies here. path31 only discovers the unique old root; it does not perform
 the repair. Its source is `src/addon/path31/path31.c`; build it with
 `tools\build-addon.cmd path31`; publish the complete utility set through
-`tools\publish-addon-utilities.cmd`.
+`tools\publish-addons.cmd`.

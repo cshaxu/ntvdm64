@@ -1,71 +1,75 @@
 {"schema":1,"drivers":[
-  {
-    "acceptance" : "verified",
-    "file" : "MOUSE101.DRV",
-    "id" : "win101",
-    "sha256" : "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
-    "source" : "src/addon/mouse101/mouse101.asm",
-    "sourceSha256" : "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E"
-  },
-  {
-    "acceptance" : "verified",
-    "evidence" : "docs/etc/evidence/m0-t481-s14-win95-launch.md",
-    "file" : "MOUSE31.DRV",
-    "id" : "win31",
-    "sha256" : "5FA167B71FB12B69AEE78E9FF8AB46BB82D4A9FED00AAFDE94FAD87592CE9D07",
-    "source" : "src/addon/mouse31/mouse31.asm",
-    "sourceSha256" : "456111F60E0C1D152574A70EC17117880EC6512D16067431B6266080F3FDD40E",
-    "verifiedScope" : "Win3.1 eight setup profiles, enhanced fullscreen Console and Window input, guest DOS prompt callback isolation, DOSX real-provider and register preservation."
-  },
-  {
-    "acceptance" : "candidate",
-    "architecture" : "i386-real-mode",
-    "file" : "compat95.sys",
-    "id" : "win95-compat",
-    "kind" : "dos-character-driver",
-    "sha256" : "49F9219405E08A4DBB35F69AE7836A27A6FF2477F272CCF29D3DD42CEAC5DABC",
-    "source" : "src/addon/compat95/compat95.asm",
-    "sourceSha256" : "FB198CB2B0D4D74764B22DBB010A7C12577D0F2AC5EAD4265D4E2D292CD5FF11",
-    "sources" :
-    [
-      {
-        "name" : "compat95.asm",
-        "sha256" : "FB198CB2B0D4D74764B22DBB010A7C12577D0F2AC5EAD4265D4E2D292CD5FF11"
-      },
-      {
-        "name" : "bootlogo.inc",
-        "sha256" : "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7"
-      },
-      {
-        "name" : "root.inc",
-        "sha256" : "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D"
-      }
-    ]
-  },
-  {
-    "acceptance" : "candidate",
-    "architecture" : "i386-protected-mode",
-    "evidence" : "docs/etc/evidence/m0-t481-s8-mouse.md",
-    "file" : "ntvdm64.386",
-    "id" : "ntvdm64",
-    "kind" : "static-vxd",
-    "sha256" : "A2D689BAD411B09AF02B8D8BB0DCEF7F0217BFA23BD1E4A3203758249D8665BB",
-    "source" : "src/addon/ntvdm64-386/ntvdm64.asm",
-    "sourceSha256" : "B8B37812839D0652A1D87709315D76459F05FAE860779A0A99F20911FBA22643",
-    "verifiedScope" : "S8 manual-test candidate: Win3.1 EDIT.EXE and EDIT.COM full-screen pointer frames observed; dual-editor normal exit passed without switching. Switch-back input and exit automation and Win95 regression are unverified."
-  },
-  {
-    "acceptance" : "candidate",
-    "architecture" : "i386-protected-mode",
-    "evidence" : "artifacts/t481-s5/qualification001.json",
-    "file" : "insignia.386",
-    "id" : "insignia-niddb",
-    "kind" : "static-vxd",
-    "sha256" : "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B",
-    "source" : "src/addon/insignia-386/insignia.asm",
-    "sourceSha256" : "D3C2E05139B67A9E43FFECBBC987D7D6D469242B1FEF69BD77D4F85E7A4E7A8F",
-    "verifiedScope" : "Win3.1 std/386 DOSONLY 0/1 startup and exit, two-bank font readback, real EDIT.EXE/EDIT.COM with diagnostic host, Full 16/16 on isolated package. Win95 production host native command and diagnostic interactive editor tests passed; normal shutdown unverified."
-  }
+{
+  "acceptance" : "verified",
+  "file" : "MOUSE101.DRV",
+  "id" : "win101",
+  "source" : "src/addon/mouse101/mouse101.asm",
+  "sourceSha256" : "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E"
+,
+"sha256":"DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E"}
+,
+{
+  "acceptance" : "verified",
+  "evidence" : "docs/etc/evidence/m0-t481-s14-win95-launch.md",
+  "file" : "MOUSE31.DRV",
+  "id" : "win31",
+  "source" : "src/addon/mouse31/mouse31.asm",
+  "sourceSha256" : "456111F60E0C1D152574A70EC17117880EC6512D16067431B6266080F3FDD40E",
+  "verifiedScope" : "Win3.1 eight setup profiles, enhanced fullscreen Console and Window input, guest DOS prompt callback isolation, DOSX real-provider and register preservation."
+,
+"sha256":"5FA167B71FB12B69AEE78E9FF8AB46BB82D4A9FED00AAFDE94FAD87592CE9D07"}
+,
+{
+  "acceptance" : "candidate",
+  "architecture" : "i386-real-mode",
+  "file" : "compat95.sys",
+  "id" : "win95-compat",
+  "kind" : "dos-character-driver",
+  "source" : "src/addon/compat95/compat95.asm",
+  "sourceSha256" : "3AE1076E487F1B1E77AFC4BC23EFCE95CB1A471978A5FB0F847FFD0625E5CD1A",
+  "sources" :
+  [
+    {
+      "name" : "compat95.asm",
+      "sha256" : "3AE1076E487F1B1E77AFC4BC23EFCE95CB1A471978A5FB0F847FFD0625E5CD1A"
+    },
+    {
+      "name" : "bootlogo.inc",
+      "sha256" : "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7"
+    },
+    {
+      "name" : "root.inc",
+      "sha256" : "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D"
+    }
+  ]
+,
+"sha256":"49F9219405E08A4DBB35F69AE7836A27A6FF2477F272CCF29D3DD42CEAC5DABC"}
+,
+{
+  "acceptance" : "candidate",
+  "architecture" : "i386-protected-mode",
+  "evidence" : "docs/etc/evidence/m0-t481-s8-mouse.md",
+  "file" : "ntvdm64.386",
+  "id" : "ntvdm64",
+  "kind" : "static-vxd",
+  "source" : "src/addon/ntvdm64-386/ntvdm64.asm",
+  "sourceSha256" : "B8B37812839D0652A1D87709315D76459F05FAE860779A0A99F20911FBA22643",
+  "verifiedScope" : "S8 manual-test candidate: Win3.1 EDIT.EXE and EDIT.COM full-screen pointer frames observed; dual-editor normal exit passed without switching. Switch-back input and exit automation and Win95 regression are unverified."
+,
+"sha256":"A2D689BAD411B09AF02B8D8BB0DCEF7F0217BFA23BD1E4A3203758249D8665BB"}
+,
+{
+  "acceptance" : "candidate",
+  "architecture" : "i386-protected-mode",
+  "evidence" : "artifacts/t481-s5/qualification001.json",
+  "file" : "insignia.386",
+  "id" : "insignia-niddb",
+  "kind" : "static-vxd",
+  "source" : "src/addon/insignia-386/insignia.asm",
+  "sourceSha256" : "D3C2E05139B67A9E43FFECBBC987D7D6D469242B1FEF69BD77D4F85E7A4E7A8F",
+  "verifiedScope" : "Win3.1 std/386 DOSONLY 0/1 startup and exit, two-bank font readback, real EDIT.EXE/EDIT.COM with diagnostic host, Full 16/16 on isolated package. Win95 production host native command and diagnostic interactive editor tests passed; normal shutdown unverified."
+,
+"sha256":"BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B"}
 ],"utilities":[
 {"id":"hash","file":"HASH.EXE","architecture":"amd64","sha256":"138781C69EE89355778C50E10B9937D1494D9DABB3B7F0DBEDE47558F940DAE6","source":"src/addon/hash/hash.c","sourceSha256":"2C143430F34EA275E0894F66F0F79BE5B894C5078938498F0732E3A594DB5B4B"}
 ,{"id":"grp","file":"GRP.EXE","architecture":"amd64","sha256":"59AFC539C18DD295248C6EF4686BE626BCD4373BA9A47EB068704E6AB03BE3F2","source":"src/addon/grp/grp.c","sourceSha256":"AD3A04E79358F3A338EE85619A94387CD89B71ED124F1494F4ABB8425C334E90"}

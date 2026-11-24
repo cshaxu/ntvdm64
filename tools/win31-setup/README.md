@@ -23,4 +23,4 @@ Both are independent utilities in assets/release, used by APPLY.CMD.
 compressed files directly from their adjacent backups, and deletes the entire
 media `PATCH` directory, including user files. Installed profiles are separate.
 
-Build with `tools\build-addon.cmd all`; publish the complete nine-tool set through `tools\publish-addon-utilities.cmd`. These tools contain no Microsoft guest binaries. Standard and enhanced modes depend on the actual installed NTVDM runtime; no enhanced-mode fallback is performed.
+Build with `tools\build-addon.cmd all`; publish the complete addon set through `tools\publish-addons.cmd`. These tools contain no Microsoft guest binaries. Standard and enhanced modes depend on the actual installed NTVDM runtime; no enhanced-mode fallback is performed.

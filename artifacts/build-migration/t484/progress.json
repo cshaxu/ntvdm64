@@ -1,34 +1,39 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f9c40e13b51bfa98478934f3f7e912c565d3773a",
+  "head": "0cb95fe5b5dbf49f8db42ebbcc5f44bcb7dfb8eb",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M artifacts/build-migration/t484/progress.json",
     " M assets/release/addon-manifest.json",
     " M docs/etc/README.md",
+    " M docs/rules/EXECUTION.md",
     " M docs/states/CURRENT.md",
-    " D tools/build/Stage-AddonUtilityRelease.ps1",
+    " D test/build/Test-AddonUtilityPublication.ps1",
+    " D tools/build/Stage-Compat95Release.ps1",
+    " D tools/build/Stage-MouseDriverRelease.ps1",
     " M tools/build/addon/CMakeLists.txt",
+    " D tools/build/addon/publish-utilities.cmd.in",
+    " D tools/publish-addon-utilities.cmd",
     " M tools/win31-path/README.md",
     " M tools/win31-setup/README.md",
-    "?? docs/etc/evidence/t484-s4-addon-utility-publication.md",
-    "?? test/build/Test-AddonUtilityPublication.ps1",
-    "?? tools/build/addon/publish-utilities.cmd.in",
-    "?? tools/publish-addon-utilities.cmd"
+    "?? docs/etc/evidence/t484-s4-addon-driver-publication.md",
+    "?? test/build/Test-AddonPublication.ps1",
+    "?? tools/build/addon/publish-addons.cmd.in",
+    "?? tools/publish-addons.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 164,
-    "unchanged": 12,
-    "removed": 179
+    "changed": 163,
+    "unchanged": 11,
+    "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 114,
+    "migrated-delivered": 115,
     "retained-native-declarative": 3,
-    "retired-with-delivery-evidence": 178,
+    "retired-with-delivery-evidence": 179,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 26,
-    "requires-disposition-reconciliation": 4,
+    "pending-producer-migration": 25,
+    "requires-disposition-reconciliation": 3,
     "retained-standalone-audit": 16
   },
   "existing_interpreted_candidates_with_command_hits": 142,
@@ -6248,9 +6253,13 @@
       "stage": "S4",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
-      "completion": "migrated-delivered",
+      "revisions": [
+        "0cb95fe5b5dbf49f8db42ebbcc5f44bcb7dfb8eb"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s4-addon-utility-publication.md"
+      ],
+      "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "migrated-delivered",
         "reason": "S4 P3 replaces selected PowerShell utility publication with the complete nine-tool CMD publisher, preserving driver metadata and validating all inputs before publication; native hashes, PE checks and failed-copy manifest invalidation are tested.",
@@ -6261,30 +6270,35 @@
       "id": "B0339",
       "file": "tools/build/Stage-Compat95Release.ps1",
       "stage": "S4",
-      "state": "changed",
-      "current_sha256": "519a7766136f47a28edfa26b844619053dbc0ff8afd0260cfe861d66fe7ed8e7",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [
         "34b26f76b783bf9ef495f2cce7dbb98caa3553c2"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-addon-cmake.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "Still contains compiler/assembler/linker or staging execution; earlier file modification does not complete migration",
-        "status": "pending-producer-migration"
+        "status": "migrated-delivered",
+        "reason": "S4 P4 uses the same CMD publisher and verifies all three Compat95 source inputs through native build receipts. Publication cannot upgrade acceptance; real four-case bootlogo tests remain the evidence owner.",
+        "evidence": "docs/etc/evidence/t484-s4-addon-driver-publication.md"
       }
     },
     {
       "id": "B0340",
       "file": "tools/build/Stage-MouseDriverRelease.ps1",
       "stage": "S4",
-      "state": "unchanged",
-      "current_sha256": "0b455253fbff486af597654fe78d668e5b95c7f18f11003571c678e6669fe20e",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "S4 P4 consolidates all five driver and nine utility publication into tools/publish-addons.cmd. Native receipts are checked before copying; unchanged source/artifact identities preserve qualification and changed identities become candidates.",
+        "evidence": "docs/etc/evidence/t484-s4-addon-driver-publication.md"
+      }
     },
     {
       "id": "B0341",
@@ -6572,6 +6586,12 @@
     }
   ],
   "commits": {
+    "0cb95fe5b5dbf49f8db42ebbcc5f44bcb7dfb8eb": {
+      "subject": "M0 T484 S4 P3: publish addon utilities through CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-addon-utility-publication.md"
+      ]
+    },
     "f9c40e13b51bfa98478934f3f7e912c565d3773a": {
       "subject": "M0 T484 S4 P2: move system32 package composition to CMD",
       "evidence": [
