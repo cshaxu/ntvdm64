@@ -1529,14 +1529,14 @@
     "evidence": "docs/etc/evidence/t484-s3-wow-provider-contracts.md"
   },
   "test/ntvdm-exe/softpc/verify-console-font-restore.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P205 moves unchanged inline C fixtures and positive/negative controls into native CMD targets; both formal verification gate identities retained through one runner.",
+    "evidence": "docs/etc/evidence/t484-s3-presentation-contracts.md"
   },
   "test/ntvdm-exe/softpc/verify-startup-presentation.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P205 moves unchanged inline C fixtures and positive/negative controls into native CMD targets; both formal verification gate identities retained through one runner.",
+    "evidence": "docs/etc/evidence/t484-s3-presentation-contracts.md"
   },
   "test/observation/verify-console-api-late-c.ps1": {
     "status": "supplemental-direct-command-review",

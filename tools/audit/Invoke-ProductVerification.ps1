@@ -161,10 +161,10 @@ try {
         }
     }
     Invoke-Gate 'startup-presentation' {
-        & "$repo/test/ntvdm-exe/softpc/verify-startup-presentation.ps1" -OutputRoot "$log/startup-presentation" *> "$log/startup-presentation.txt"
+        & "$repo/test/ntvdm-exe/softpc/verify-presentation-contracts.ps1" -Kind startup -OutputRoot "$log/startup-presentation" *> "$log/startup-presentation.txt"
     }
     Invoke-Gate 'console-font-restore' {
-        & "$repo/test/ntvdm-exe/softpc/verify-console-font-restore.ps1" -OutputRoot "$log/console-font-restore" *> "$log/console-font-restore.txt"
+        & "$repo/test/ntvdm-exe/softpc/verify-presentation-contracts.ps1" -Kind font -OutputRoot "$log/console-font-restore" *> "$log/console-font-restore.txt"
     }
     Invoke-Gate 'console-input-batch' {
         # The standalone compiler fixture imports VS environment variables.

@@ -86,6 +86,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P204 WOW provider contracts](../etc/evidence/t484-s3-wow-provider-contracts.md) | Three compiler runners consolidated;497 unchanged assertions and ten source-projection comparisons pass.15 direct candidates remain; frozen316/355 and23 staging chains unchanged. |
 
+| [P205 presentation contracts](../etc/evidence/t484-s3-presentation-contracts.md) | Two formal gates share native production; both current fixtures pass and both regression controls fail as required.13 direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
 The frozen355 census is not the complete remaining invocation graph. P193
