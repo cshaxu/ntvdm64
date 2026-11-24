@@ -43,6 +43,14 @@ interpreter-free end-to-end acceptance have not completed.
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
+Current census: **323/355 disposed,32 pending**, plus24 supplemental
+preparation chains (overlapping scopes, not additive file counts).
+
+P217 retires four superseded Win31 setup scripts and three duplicate tests;
+exact binary adaptation assertions now use the released native tool through
+the current CMD roundtrip. Verification and ledger reconciliation are in
+[the delivery record](../etc/evidence/t484-s3-win31-retirement.md).
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
 The frozen355 census is not the complete remaining invocation graph. P193's13 additional candidates were resolved by P198; P199's broader30
