@@ -377,19 +377,19 @@
     "reason": "P61 retires orphaned Win16 Style mode aggregator; provider and feature removed in T450 db91004e5; current ordinary guest probes retained"
   },
   "test/integration/verify-wow-sol-gameplay.ps1": {
-    "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
-    "status": "pending-producer-migration",
-    "reason": "P62 local producer uses CMD/native fixture; shared physical runtime/package staging remains"
+    "status": "migrated-delivered",
+    "reason": "S4 P7 completes canonical CMD probe build/delivery and shared CMD physical staging; real private-desktop application assertions pass in the complete Userenv logon environment. Inherited-environment failures remain explicit.",
+    "evidence": "docs/etc/evidence/t484-s4-wow-app-preparation.md"
   },
   "test/integration/verify-wow-sol-options.ps1": {
-    "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
-    "status": "pending-producer-migration",
-    "reason": "P62 local producer uses CMD/native fixture; shared physical runtime/package staging remains"
+    "status": "migrated-delivered",
+    "reason": "S4 P7 completes canonical CMD probe build/delivery and shared CMD physical staging; real private-desktop application assertions pass in the complete Userenv logon environment. Inherited-environment failures remain explicit.",
+    "evidence": "docs/etc/evidence/t484-s4-wow-app-preparation.md"
   },
   "test/integration/verify-wow-write-lifecycle.ps1": {
-    "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
-    "status": "pending-producer-migration",
-    "reason": "P62 local producer uses CMD/native fixture; shared physical runtime/package staging remains"
+    "status": "migrated-delivered",
+    "reason": "S4 P7 completes canonical CMD probe build/delivery and shared CMD physical staging; real private-desktop application assertions pass in the complete Userenv logon environment. Inherited-environment failures remain explicit.",
+    "evidence": "docs/etc/evidence/t484-s4-wow-app-preparation.md"
   },
   "test/integration/win31_runtime_matrix_test.ps1": {
     "status": "pending-producer-migration",

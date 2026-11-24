@@ -43,6 +43,8 @@ S4 P2 replaces the system32 PowerShell package producer with one CMD owner;
 [package comparison and failure evidence](../etc/evidence/t484-s4-system32-cmd.md)
 records whole-package equivalence and expanded failure controls.
 
+S4 P7 completes the three SOL/WRITE application preparation chains; [application evidence](../etc/evidence/t484-s4-wow-app-preparation.md) records final cached full build, all three private-desktop Userenv cases, producer rejection checks and unchanged11 raw/22 published hashes. Census330/355,25 pending.
+
 S4 P6 moves shared physical copying and ownership-marker preparation to CMD/native; [physical staging evidence](../etc/evidence/t484-s4-physical-stage.md) records contract passes, identical old/new inherited-environment SOL failure and all three passing Userenv application cases. All11 raw/22 published host hashes are unchanged. Consumer-specific staging remains pending; counts are unchanged.
 
 S4 P5 moves shared fresh-package identity preparation to CMD/native; [identity refresh evidence](../etc/evidence/t484-s4-stage-identity-refresh.md) separates completed UUID/manifest handling from remaining directory/marker preparation. Counts are unchanged.
@@ -60,7 +62,7 @@ S4 P3 replaces addon utility publication with CMD; [publication evidence](../etc
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **327/355 disposed,28 pending**, plus24 supplemental
+Current census: **330/355 disposed,25 pending**, plus24 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;

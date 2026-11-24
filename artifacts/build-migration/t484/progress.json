@@ -1,16 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "629e0bdf4162b212fce97a7dd6f6092f3604c60d",
+  "head": "3776c3208bcfcfa740fcf02da7aeca581d956e33",
   "worktree_status": [
+    " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/Test-PackageIdentityTool.ps1",
-    " M test/observation/isolated_package_cleanup.ps1",
-    " M tools/build/native/CMakeLists.txt",
-    " M tools/build/native/package-id.c",
-    " M tools/build/native/refresh-package.cmd.in",
-    "?? docs/etc/evidence/t484-s4-physical-stage.md",
-    "?? tools/build/native/stage-runtime.cmd.in"
+    " M test/integration/Invoke-WowAppProbeBuild.ps1",
+    "?? docs/etc/evidence/t484-s4-wow-app-preparation.md",
+    "?? tools/build-wow-app-probe.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -19,11 +16,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 113,
+    "migrated-delivered": 116,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 25,
+    "pending-producer-migration": 22,
     "requires-disposition-reconciliation": 3,
     "retained-standalone-audit": 16
   },
@@ -1383,11 +1380,11 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-app-probes.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
-        "status": "pending-producer-migration",
-        "reason": "P62 local producer uses CMD/native fixture; shared physical runtime/package staging remains"
+        "status": "migrated-delivered",
+        "reason": "S4 P7 completes canonical CMD probe build/delivery and shared CMD physical staging; real private-desktop application assertions pass in the complete Userenv logon environment. Inherited-environment failures remain explicit.",
+        "evidence": "docs/etc/evidence/t484-s4-wow-app-preparation.md"
       }
     },
     {
@@ -1402,11 +1399,11 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-app-probes.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
-        "status": "pending-producer-migration",
-        "reason": "P62 local producer uses CMD/native fixture; shared physical runtime/package staging remains"
+        "status": "migrated-delivered",
+        "reason": "S4 P7 completes canonical CMD probe build/delivery and shared CMD physical staging; real private-desktop application assertions pass in the complete Userenv logon environment. Inherited-environment failures remain explicit.",
+        "evidence": "docs/etc/evidence/t484-s4-wow-app-preparation.md"
       }
     },
     {
@@ -1421,11 +1418,11 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-app-probes.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "evidence": "docs/etc/evidence/t484-s3-app-probes.md",
-        "status": "pending-producer-migration",
-        "reason": "P62 local producer uses CMD/native fixture; shared physical runtime/package staging remains"
+        "status": "migrated-delivered",
+        "reason": "S4 P7 completes canonical CMD probe build/delivery and shared CMD physical staging; real private-desktop application assertions pass in the complete Userenv logon environment. Inherited-environment failures remain explicit.",
+        "evidence": "docs/etc/evidence/t484-s4-wow-app-preparation.md"
       }
     },
     {
@@ -2027,6 +2024,7 @@
       "state": "changed",
       "current_sha256": "13a8e903abf19d2c4b178240446e59f8a6024a9dd8873ef535fa5cd08e2b5363",
       "revisions": [
+        "3776c3208bcfcfa740fcf02da7aeca581d956e33",
         "629e0bdf4162b212fce97a7dd6f6092f3604c60d",
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "995bbe44d7ed265740f8288575ad6182fb8157be"
@@ -2034,6 +2032,7 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-identity-reader.md",
+        "docs/etc/evidence/t484-s4-physical-stage.md",
         "docs/etc/evidence/t484-s4-stage-identity-refresh.md"
       ],
       "completion": "migrated-delivered",
@@ -6585,6 +6584,12 @@
     }
   ],
   "commits": {
+    "3776c3208bcfcfa740fcf02da7aeca581d956e33": {
+      "subject": "M0 T484 S4 P6: prepare physical runtime stages through CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-physical-stage.md"
+      ]
+    },
     "629e0bdf4162b212fce97a7dd6f6092f3604c60d": {
       "subject": "M0 T484 S4 P5: refresh isolated package identity through CMD",
       "evidence": [
