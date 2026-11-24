@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <windows.h>
-#include "wow_dll_dialog_provider.h"
 
 #if !defined(_MSC_VER) || !defined(_M_IX86)
 #error This probe requires native MSVC x86.
@@ -42,7 +41,7 @@ int main(void)
     printf("attach=%08lx false_attach=%08lx thread_false=%08lx detach_false=%08lx cleanups=%u\n",
            (unsigned long)attach,(unsigned long)attach_false,(unsigned long)thread_false,
            (unsigned long)detach_false,cleanups);
-    if (!attach || cleanups != 2 || dialog_bindings != 2) return 2;
+    if (!attach || cleanups != 2) return 2;
 #ifdef EXPECT_LEGACY_WIDE_RETURN
     if (attach_false != (int)UINT32_C(0xa55a0000) ||
         thread_false != (int)UINT32_C(0xa55a0000) ||

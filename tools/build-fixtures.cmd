@@ -158,6 +158,8 @@ if "%TARGET%"=="ccpu-alu-oracle" set "SELECTED=1"
 if "%TARGET%"=="ccpu-alu-oracle" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="native-vt-producer" set "SELECTED=1"
 if "%TARGET%"=="serial-port-mask" set "SELECTED=1"
+if "%TARGET%"=="wow-entry-abi" set "SELECTED=1"
+if "%TARGET%"=="wow-entry-abi" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="logon-environment" set "SELECTED=1"
 if "%TARGET%"=="native-modal-probes" set "SELECTED=1"
 if "%TARGET%"=="native-modal-probes" if not "%~1"=="x86" exit /b 2

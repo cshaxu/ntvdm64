@@ -800,9 +800,9 @@
     "reason": "Existing CMD/native producer reviewed and rerun with actual private-desktop membership and expected terminal cleanup"
   },
   "test/observation/verify-wow-dll-entry-boolean.ps1": {
-    "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
-    "status": "requires-disposition-reconciliation",
-    "reason": "Old test header supplies8 of33 current registration calls; reconcile actual complete BOOLEAN/loader witness, not a product failure conclusion"
+    "evidence": "docs/etc/evidence/t484-s3-wow-entry-native.md",
+    "status": "migrated-delivered",
+    "reason": "Retired partial registration mocks; native current return/cleanup projection passes poisoned-EAX BOOLEAN and eight Windows loader cycles; registration lifecycle explicitly outside this witness"
   },
   "test/observation/verify-wow-message-capture.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-capture-native.md",

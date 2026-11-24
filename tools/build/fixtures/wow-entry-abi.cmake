@@ -1,0 +1,22 @@
+# Narrow ABI projection: production return conversion and explicit-unload cleanup.
+# Registration-provider lifecycle is outside this witness.
+if(NOT NTVDM_ARCH STREQUAL "x86")
+  return()
+endif()
+set(bridge "${NTVDM_REPO}/tools/build/wow32/templates/wow32-dll-entry-bridge.c")
+file(READ "${bridge}" text)
+string(REGEX MATCH "extern unsigned char __stdcall W32DllInitialize[^;]*;" declaration "${text}")
+if(NOT declaration)
+  message(FATAL_ERROR "Current bridge BOOLEAN declaration changed")
+endif()
+set(preamble "${declaration}\nvoid __stdcall wow_registry_binding_shutdown(void);\nvoid __stdcall wow_bitmap_bindings_shutdown(void);\nint __stdcall DllMain(void *instance, unsigned long reason, void *reserved)\n{\n    int result;\n")
+ntvdm_source_projection(wow-entry-abi.c "${bridge}" "    result = W32DllInitialize(instance, reason, reserved);" "" "${preamble}" TRUE)
+fixture(wow-entry-boolean CL test/mvdm-host/wow_dll_entry_boolean_fixture.c "${CMAKE_BINARY_DIR}/wow-entry-abi.c")
+set_property(TARGET wow-entry-boolean_objects PROPERTY COMPILE_OPTIONS /nologo /MT /W4)
+fixture(wow-entry-loader CL test/mvdm-host/wow_dll_loader_fixture.c)
+set_property(TARGET wow-entry-loader_objects PROPERTY COMPILE_OPTIONS /nologo /MT /W4)
+add_library(wow-entry-provider SHARED
+  "${NTVDM_REPO}/test/mvdm-host/wow_dll_loader_provider.c" "${CMAKE_BINARY_DIR}/wow-entry-abi.c")
+set_target_properties(wow-entry-provider PROPERTIES EXCLUDE_FROM_ALL TRUE PREFIX "" OUTPUT_NAME "wow-entry-provider")
+target_compile_options(wow-entry-provider PRIVATE /nologo /MT /W4)
+add_custom_target(wow-entry-abi DEPENDS wow-entry-boolean wow-entry-loader wow-entry-provider)

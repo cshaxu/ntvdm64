@@ -1,29 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "67be6eea19e7f52c3b1203ce11437dfc809d4a0c",
+  "head": "9460791b1215641a65a84df9786c2dc3359498f3",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-s45-vcd-serial-discovery.ps1",
+    "D  test/mvdm-host/wow_dll_dialog_provider.h",
+    " M test/mvdm-host/wow_dll_entry_boolean_fixture.c",
+    " M test/mvdm-host/wow_dll_loader_provider.c",
+    " M test/observation/verify-wow-dll-entry-boolean.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-serial-native.md",
-    "?? test/observation/serial_port_mask.c"
+    "?? docs/etc/evidence/t484-s3-wow-entry-native.md",
+    "?? tools/build/fixtures/wow-entry-abi.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 164,
-    "unchanged": 21,
+    "changed": 165,
+    "unchanged": 20,
     "removed": 170
   },
   "disposition_counts": {
-    "migrated-delivered": 111,
+    "migrated-delivered": 112,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 170,
     "retained-native-delegate": 14,
     "pending-producer-migration": 26,
-    "requires-disposition-reconciliation": 15,
+    "requires-disposition-reconciliation": 14,
     "retained-standalone-audit": 16
   },
   "existing_interpreted_candidates_with_command_hits": 147,
@@ -809,9 +812,11 @@
       "state": "changed",
       "current_sha256": "b37d32ee06d58f7f7ad51aecc05d9f9cbf2c144fb11c1a85e64fa8f1761982b9",
       "revisions": [
+        "9460791b1215641a65a84df9786c2dc3359498f3",
         "626a2aed8aeb9d8eaa34f8403b2bbd61714f6753"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-serial-native.md",
         "docs/etc/evidence/t484-s3-serial-probe.md"
       ],
       "completion": "pending-producer-migration",
@@ -3261,15 +3266,15 @@
       "id": "B0169",
       "file": "test/observation/verify-wow-dll-entry-boolean.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "16f85fd40597cb1a8ae46074cb8efc005f44c2d9f233d6d2a83e3070333b7992",
+      "state": "changed",
+      "current_sha256": "32046eb27b54d1b756923d64565cfc74197bac3a882cccb8e6ef4ced80d44032",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
+      "completion": "migrated-delivered",
       "decision": {
-        "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
-        "status": "requires-disposition-reconciliation",
-        "reason": "Old test header supplies8 of33 current registration calls; reconcile actual complete BOOLEAN/loader witness, not a product failure conclusion"
+        "evidence": "docs/etc/evidence/t484-s3-wow-entry-native.md",
+        "status": "migrated-delivered",
+        "reason": "Retired partial registration mocks; native current return/cleanup projection passes poisoned-EAX BOOLEAN and eight Windows loader cycles; registration lifecycle explicitly outside this witness"
       }
     },
     {
@@ -6457,6 +6462,12 @@
     }
   ],
   "commits": {
+    "9460791b1215641a65a84df9786c2dc3359498f3": {
+      "subject": "T484 S3 P177 modernize serial probe production and isolation",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-serial-native.md"
+      ]
+    },
     "67be6eea19e7f52c3b1203ce11437dfc809d4a0c": {
       "subject": "T484 S3 P176 share native DDEML environment reader",
       "evidence": [
@@ -9116,16 +9127,8 @@
           "text": "[string]$WowBuildRoot = 'build/.ninja/msvc-x86-release/wow32'"
         },
         {
-          "line": 21,
-          "text": "$line = 'call \"' + $driver + '\" cl.exe /nologo /MT /W4 /Fo\"' + $root + '/\" /Fe\"' + $exe + '\" \"' + $fixture + '\" \"' + $object + '\"'"
-        },
-        {
-          "line": 44,
-          "text": "cl.exe /nologo /MT /LD /W4 \"$provider\" \"$object\" /Fe\"$dll\""
-        },
-        {
-          "line": 46,
-          "text": "cl.exe /nologo /MT /W4 \"$loader\" /Fe\"$loaderExe\""
+          "line": 14,
+          "text": "$cache=Join-Path $repo 'build/.ninja/fixtures-x86'"
         }
       ]
     },

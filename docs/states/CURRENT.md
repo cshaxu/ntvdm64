@@ -110,6 +110,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P177 serial isolation](../etc/evidence/t484-s3-serial-native.md) | Native namespace oracle and owned runtime replace C# compilation, flat-layout overwrite and global process cleanup. Direct/nested guest cases pass at mask0; B0041 still pending shared staging. |
 
+| [P178 DLL ABI](../etc/evidence/t484-s3-wow-entry-native.md) | Retired incomplete registration mocks; current return/cleanup projection passes BOOLEAN and8 OS loader cycles. Cached full11/22 hashes unchanged;315/355 disposed,40 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
