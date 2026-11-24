@@ -92,6 +92,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P207 WOW file contracts](../etc/evidence/t484-s3-wow-file-contracts.md) | Four compiler runners consolidated; current file/DDE assertions and five source equivalence checks pass. Four direct candidates remain; frozen316/355 and23 staging chains unchanged. |
 
+| [P208 netlib contract](../etc/evidence/t484-s3-netlib-contract.md) | Real product packstr object linked through CMD/native; existing boundary assertions pass. Three direct candidates remain; frozen316/355 and23 staging chains unchanged. |
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
 The frozen355 census is not the complete remaining invocation graph. P193

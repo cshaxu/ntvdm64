@@ -1584,9 +1584,9 @@
     "evidence": "docs/etc/evidence/t484-s3-wow-file-contracts.md"
   },
   "test/opennt-host/netlib/verify.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P208 links unchanged netlib assertions to the actual product-selected packstr object through existing CMD/native worker graph; no caller-supplied compiler driver.",
+    "evidence": "docs/etc/evidence/t484-s3-netlib-contract.md"
   },
   "tools/audit/Verify-CcpuEventConsumption.mjs": {
     "status": "supplemental-direct-command-review",

@@ -1,18 +1,15 @@
-param([Parameter(Mandatory)][string]$BuildRoot,
-      [Parameter(Mandatory)][string]$OutputRoot,
-      [Parameter(Mandatory)][string]$CompilerDriver)
+param([Parameter(Mandatory)][string]$OutputRoot)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
-$build=(Resolve-Path $BuildRoot).Path
-$driver=(Resolve-Path $CompilerDriver).Path
-$out=[IO.Path]::GetFullPath($OutputRoot)
-if(!$out.StartsWith("$repo\build\",[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Fresh repository build output required'}
+$out=[IO.Path]::GetFullPath($OutputRoot,$repo)
+if(!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Fresh repository build output required'}
 New-Item -ItemType Directory $out|Out-Null
-Push-Location $out
+& "$repo/tools/build-fixtures.cmd" x86 netlib-packstr *> "$out/build.log"
+if($LASTEXITCODE){throw 'Original packstr fixture build failed'}
+$p=Start-Process "$repo/build/.ninja/msvc-x86-release/worker/netlib-packstr.exe" -WorkingDirectory $out -WindowStyle Hidden -PassThru -RedirectStandardOutput "$out/result.txt" -RedirectStandardError "$out/result.err"
 try {
- & $driver cl /nologo /MT /TC "$PSScriptRoot/packstr.c" /Fe:packstr-test.exe /link "$build/obj/opennt-netlib/packstr.obj" kernel32.lib
- if($LASTEXITCODE){throw 'Original packstr fixture compile failed'}
- & ./packstr-test.exe
- if($LASTEXITCODE){throw "Original packstr assertion failed: $LASTEXITCODE"}
- '0'|Set-Content result.exit
-} finally {Pop-Location}
+ if(!$p.WaitForExit(10000)){$p.Kill();$p.WaitForExit();throw 'Owned packstr fixture timeout'}
+ $code=$p.ExitCode;Get-Content "$out/result.txt"
+ $code|Set-Content "$out/result.exit"
+ if($code){throw "Original packstr assertions failed: $code"}
+}finally{$p.Dispose()}

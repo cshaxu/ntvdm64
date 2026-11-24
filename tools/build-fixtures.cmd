@@ -132,6 +132,8 @@ if "%TARGET%"=="wow-accelerator" set "SELECTED=1"
 if "%TARGET%"=="wow-accelerator" if not "%~1"=="x86" exit /b 2
 for %%T in (softpc-observer-error software-video-publisher) do if "%TARGET%"=="%%T" set "SELECTED=1"
 if "%TARGET%"=="softpc-contracts" set "SELECTED=1"
+if "%TARGET%"=="netlib-packstr" set "SELECTED=1"
+if "%TARGET%"=="netlib-packstr" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="softpc-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="serial-medium" set "SELECTED=1"
 if "%TARGET%"=="serial-medium" if not "%~1"=="x86" exit /b 2
@@ -352,6 +354,7 @@ if "%TARGET%"=="console-contracts" goto worker
 if "%TARGET%"=="host-thread-boundaries" goto worker
 for %%T in (redirector-remote-name redirector-server-enum) do if "%TARGET%"=="%%T" goto worker
 if "%TARGET%"=="softpc-contracts" goto worker
+if "%TARGET%"=="netlib-packstr" goto worker
 if "%TARGET%"=="video7-packed-painter" goto worker
 if "%TARGET%"=="planar-painter" goto worker
 if "%TARGET%"=="dem-directory-reset" goto worker

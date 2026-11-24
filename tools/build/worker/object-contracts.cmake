@@ -31,3 +31,9 @@ softpc_contract(vdd MVDM_VDD_EXPECT_HANDLER_BYTES 4
 softpc_contract(niddb MVDM_NIDDB_EXPECT_POINTER_BYTES 8 "" "" obj/bios/virtual.obj)
 get_property(softpc_contracts GLOBAL PROPERTY softpc_contracts)
 add_custom_target(softpc-contracts DEPENDS ${softpc_contracts})
+
+# Link the actual product-selected packstr object, not a copied algorithm.
+worker_unit("obj/tests/netlib-packstr.obj" "${NTVDM_REPO}/test/opennt-host/netlib/packstr.c" "/nologo /MT /TC /c")
+worker_link("netlib-packstr.exe" "/nologo /out:$out" "kernel32.lib"
+  INPUTS "obj/tests/netlib-packstr.obj" "obj/opennt-netlib/packstr.obj")
+worker_group(netlib-packstr "netlib-packstr.exe")
