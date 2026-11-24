@@ -1,17 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "c5f29a4ea8114f9ba6442194c84966fa7b127785",
+  "head": "de7c3e279caa704e8f81da6cde4871d4db97ce5b",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
-    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M docs/states/TODO.md",
-    " M test/integration/verify-native-guest-output.ps1",
-    " M test/observation/native_guest_output.bat",
-    " M test/observation/native_guest_output_test.c",
-    " M tools/build/fixtures/native-probes.cmake",
-    "?? docs/etc/evidence/t484-s3-native-output-isolation.md"
+    " M test/build/verify-win31-profile.ps1",
+    " M test/integration/verify-wow-logon-gameplay.ps1",
+    "?? docs/etc/evidence/t484-s3-supplemental-producers.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -694,10 +690,12 @@
       "state": "changed",
       "current_sha256": "5f8ec7880b3876f8db4f8267f56c91d1a3820394652baac693305ca14013b4f4",
       "revisions": [
+        "de7c3e279caa704e8f81da6cde4871d4db97ce5b",
         "78e2830232fe0ebad2dfe54fc8e2f3bbc446d6c0"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-native-guest-output.md"
+        "docs/etc/evidence/t484-s3-native-guest-output.md",
+        "docs/etc/evidence/t484-s3-native-output-isolation.md"
       ],
       "completion": "pending-producer-migration",
       "decision": {
@@ -6488,6 +6486,12 @@
     }
   ],
   "commits": {
+    "de7c3e279caa704e8f81da6cde4871d4db97ce5b": {
+      "subject": "M0 T484 S3 P193: isolate native output probe and record strict failure",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-native-output-isolation.md"
+      ]
+    },
     "c5f29a4ea8114f9ba6442194c84966fa7b127785": {
       "subject": "M0 T484 S3 P192: retire obsolete keyboard observer and isolate coverage",
       "evidence": [

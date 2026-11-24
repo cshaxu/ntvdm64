@@ -1389,9 +1389,9 @@
     "evidence": "docs/etc/evidence/t484-s3-generic-native.md"
   },
   "test/build/verify-win31-profile.ps1": {
-    "status": "supplemental-producer-review",
-    "reason": "P193 expanded scan found direct CL/NASM or Add-Type compilation; retention, current callers and real build effect must be reviewed before deciding retire/consolidate/migrate. Not counted as completed or as a required Full test.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P194 removes the already-completed migration-only direct NASM comparison recipe; retained CMD output/no-op/invalid-path checks pass for eight images and two paths. P182 byte-comparison evidence remains archived.",
+    "evidence": "docs/etc/evidence/t484-s3-supplemental-producers.md"
   },
   "test/integration/verify-wow-edit-tabstop-guest.ps1": {
     "status": "supplemental-producer-review",
@@ -1399,9 +1399,9 @@
     "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
   },
   "test/integration/verify-wow-logon-gameplay.ps1": {
-    "status": "supplemental-producer-review",
-    "reason": "P193 expanded scan found direct CL/NASM or Add-Type compilation; retention, current callers and real build effect must be reviewed before deciding retire/consolidate/migrate. Not counted as completed or as a required Full test.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "P194 replaces duplicate C# environment compilation with the existing native current-token reader. Actual preparation returns the full block; gameplay assertions unchanged. Shared staging remains, no new gameplay acceptance claimed.",
+    "evidence": "docs/etc/evidence/t484-s3-supplemental-producers.md"
   },
   "test/observation/inspect-ne-classification.ps1": {
     "status": "supplemental-producer-review",

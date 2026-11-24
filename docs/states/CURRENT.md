@@ -104,6 +104,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P193 native output preparation](../etc/evidence/t484-s3-native-output-isolation.md) | Removed dynamic BAT generation and flat-layout assumptions. Real simultaneous output loses a marker: strict test fails, recorded separately; no product change or runtime pass claimed. |
 
+| [P194 supplemental consolidation](../etc/evidence/t484-s3-supplemental-producers.md) | Removed migration-only NASM recipe; shared native environment reader replaces duplicate C# producer. Two of13 review candidates classified;11 remain,20 supplemental staging chains remain. |
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
 The frozen355 census is not the complete remaining invocation graph. P193

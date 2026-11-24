@@ -27,28 +27,10 @@ try{
   if(!$prior.WaitForExit(6600000)){throw 'Prerequisite still running; no runtime started'}
  }
  if($PrerequisiteRoot -and (Get-Content "$PrerequisiteRoot/exit.txt" -Raw).Trim() -ne '0'){throw 'Prerequisite failed'}
- Add-Type -OutputAssembly "$root/logon-env.dll" -TypeDefinition @'
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-public static class WowLogonEnvironment {
- [DllImport("userenv.dll",SetLastError=true)] static extern bool CreateEnvironmentBlock(out IntPtr block,IntPtr token,bool inherit);
- [DllImport("userenv.dll",SetLastError=true)] static extern bool DestroyEnvironmentBlock(IntPtr block);
- public static string[] Read(IntPtr token) {
-  IntPtr block;
-  if(!CreateEnvironmentBlock(out block,token,false))throw new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error());
-  try {
-   var entries=new List<string>();IntPtr at=block;
-   while(Marshal.ReadInt16(at)!=0){string value=Marshal.PtrToStringUni(at);entries.Add(value);at=IntPtr.Add(at,(value.Length+1)*2);}
-   return entries.ToArray();
-  }finally{DestroyEnvironmentBlock(block);}
- }
-}
-'@
- Add-Type -Path "$root/logon-env.dll"
- $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
- try{$entries=[WowLogonEnvironment]::Read($logonIdentity.Token)}
- finally{$logonIdentity.Dispose()}
+ & "$repo/tools/build-fixtures.cmd" x64 logon-environment *> "$root/environment-build.log"
+ if($LASTEXITCODE){throw 'Native environment reader build failed'}
+ . "$PSScriptRoot/../observation/logon-environment.ps1"
+ $entries=Read-TestLogonEnvironment "$repo/build/.ninja/fixtures-x64/logon-environment.exe" "$root/environment-process.json"
  $shape=@($entries|ForEach-Object{$split=$_.IndexOf('=',1);[pscustomobject]@{name=$_.Substring(0,$split);characters=$_.Length+1}})
  $shape|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
  @{source='CreateEnvironmentBlock current token inherit=false';entries=$shape.Count;characters=1+($shape|Measure-Object characters -Sum).Sum;filtering=$false;limit='Logon block, not a snapshot of an already-running shell'}|ConvertTo-Json|Set-Content "$root/environment-contract.json"
