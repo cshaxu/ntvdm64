@@ -94,6 +94,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P169 RPC control identity](../etc/evidence/t484-s3-rpc-control-identity.md) | Separate copied roots get unique complete native identities; Full six and three substituted-worker cases pass. Cached full/11/22 hashes unchanged;308/355 disposed,47 remain. |
 
+| [P170 hygiene consolidation](../etc/evidence/t484-s3-hygiene-consolidation.md) | Removed private compiler recipe;28 cleanup/native cache policy checks and existing two-pass CMD cache gate pass.11 raw/22 published hashes unchanged;309/355 disposed,46 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

@@ -114,8 +114,9 @@
     }
   },
   "test/build/Test-BuildHygiene.ps1": {
-    "reason": "Cleanup publisher and native configuration verification caller; reconcile S4/S5 execution with CMD",
-    "status": "pending-producer-migration"
+    "status": "migrated-delivered",
+    "reason": "Private compiler/configure recipe removed; existing CMD stability gate owns production cache verification; 28 cleanup/native policy assertions pass. S4 cleanup tool migration remains separate.",
+    "evidence": "docs/etc/evidence/t484-s3-hygiene-consolidation.md"
   },
   "test/build/wow-message-probes.cmake": {
     "status": "retained-native-declarative",

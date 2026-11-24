@@ -67,74 +67,41 @@ $deleted=@(& $cleaner -Target @($safe,$bad) -OwnershipManifest $manifest -Apply 
 Check (!(Test-Path $safePath) -and !(Test-Path $badPath) -and $deleted.Count -eq 2) 'reviewed generated targets are deleted'
 
 if(!$CleanupOnly){
+    # Production compilation/no-op checks live in verify-generated-input-stability.ps1.
+    # Exercise the shared native policy directly; do not maintain another build recipe.
     $cmake=(Get-Command cmake.exe -ErrorAction Stop).Source
     $ccache=(Get-Command ccache.exe -ErrorAction Stop).Source
-    $ninja=(Get-Command ninja.exe -ErrorAction Stop).Source
-    $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-    function Run-Dev([string]$Architecture,[string]$Command,[string]$Name){
-        $batch=Join-Path $scratch "$Name.cmd"
-        Write-Utf8 $batch ("@echo off`r`ncall `"$vs`" -arch=$Architecture -host_arch=x64 >nul`r`nif errorlevel 1 exit /b %errorlevel%`r`n$Command`r`nexit /b %errorlevel%`r`n")
-        $lines=@(& cmd.exe /d /c $batch 2>&1)
-        $exit=$LASTEXITCODE
-        Write-Utf8 (Join-Path $scratch "$Name.log") ($lines -join "`r`n")
-        if($exit){throw "$Name exit $exit; $($lines | Select-Object -Last 10)"}
-        return $lines
-    }
-    foreach($architecture in @('x86','x64')){
-        $preset="msvc-$architecture-release"
-        $tree=Join-Path $repo "build/.ninja/$preset"
-        $null=Run-Dev $architecture "`"$cmake`" --preset $preset" "$architecture-configure-off"
-        if($architecture -eq 'x86'){
-            $imports='ntvwm.exe ntcon.exe ntmon.exe run16.exe ntsrv.exe'
-            $null=Run-Dev $architecture "`"$ninja`" -C `"$tree/worker`" $imports" 'native-imports'
-            foreach($image in ($imports -split ' ')){
-                if((Get-FileHash "$repo/assets/release/$image").Hash -ne (Get-FileHash "$tree/worker/$image").Hash){throw 'Native import changed verified release input'}
-            }
-            Check $true 'native image imports preserve verified identities through existing PE checks'
-            $unchanged=Run-Dev $architecture "`"$ninja`" -C `"$tree/worker`" $imports" 'native-imports-incremental'
-            Check (($unchanged -join ' ') -match 'no work to do') 'unchanged native imports do not restage'
+    $policy=Join-Path $repo 'tools/build/BuildTree.cmake'
+    $temporaryConfig='build/.ninja/hygiene-policy-check'
+    $tree=Join-Path $repo $temporaryConfig
+    if(Test-Path -LiteralPath $tree){throw "Test policy directory already exists: $tree"}
+    $foreign=Join-Path $scratch 'foreign-cache'
+    $savedDir=$env:CCACHE_DIR; $savedTemp=$env:CCACHE_TEMPDIR; $savedMax=$env:CCACHE_MAXSIZE
+    try{
+        $refusal=@(& $cmake "-DNTVDM_BINARY_DIR=$scratch/outside-ninja" -P $policy 2>&1)
+        Check ($LASTEXITCODE -ne 0 -and ($refusal -join ' ') -match 'strictly below') 'native policy refuses outside-Ninja configuration'
+        $env:CCACHE_DIR=$foreign; $env:CCACHE_TEMPDIR="$foreign/tmp"; $env:CCACHE_MAXSIZE='1M'
+        & $cmake "-DNTVDM_BINARY_DIR=$tree" -DNTVDM_USE_CCACHE=ON "-DNTVDM_CCACHE_EXECUTABLE=$ccache" -P $policy
+        Check ($LASTEXITCODE -eq 0) 'native policy accepts an unconfigured inside-Ninja test prefix'
+        $commandPath=Join-Path $tree 'compiler-command.txt'
+        $command=[IO.File]::ReadAllText($commandPath).Replace('\','/')
+        $root=$repo.Replace('\','/')
+        Check ($command.Contains("CCACHE_DIR=$root/build/.ccache") -and $command.Contains("CCACHE_TEMPDIR=$root/build/.ccache/tmp") -and $command.Contains('CCACHE_MAXSIZE=5G') -and !$command.Contains($foreign.Replace('\','/'))) 'native policy fixes cache settings despite hostile caller environment'
+        $before=Get-Item -LiteralPath $commandPath
+        $ticks=$before.LastWriteTimeUtc.Ticks; $hash=(Get-FileHash -LiteralPath $commandPath).Hash
+        & $cmake "-DNTVDM_BINARY_DIR=$tree" -DNTVDM_USE_CCACHE=ON "-DNTVDM_CCACHE_EXECUTABLE=$ccache" -P $policy
+        Check ($LASTEXITCODE -eq 0 -and (Get-Item -LiteralPath $commandPath).LastWriteTimeUtc.Ticks -eq $ticks -and (Get-FileHash -LiteralPath $commandPath).Hash -eq $hash) 'unchanged native cache command preserves bytes and timestamp'
+        & $cmake "-DNTVDM_BINARY_DIR=$tree" -DNTVDM_USE_CCACHE=OFF -P $policy
+        Check ($LASTEXITCODE -eq 0 -and [IO.File]::ReadAllText($commandPath) -eq 'cl.exe') 'cache-off removes the optional launcher'
+    }finally{
+        $env:CCACHE_DIR=$savedDir; $env:CCACHE_TEMPDIR=$savedTemp; $env:CCACHE_MAXSIZE=$savedMax
+        if(Test-Path -LiteralPath $tree){
+            $inventory=@(& $cleaner -Target $temporaryConfig -Inventory)
+            $owner=@{targets=@(@{path=$temporaryConfig;owner='Build hygiene test';reason='test-owned unconfigured native policy output';inventorySha256=$inventory[-1].InventorySha256});reviewedFiles=@()}
+            & $cleaner -Target $temporaryConfig -OwnershipManifest $owner -Apply -TasksExited | Out-Null
         }
-        $null=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target native-launcher" "$architecture-build-off"
-        $before=@(Get-ChildItem "$tree/CMakeFiles" -Filter '*.obj' -Recurse | ForEach-Object {"$($_.FullName):$($_.LastWriteTimeUtc.Ticks)"})
-        $noWork=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target native-launcher" "$architecture-incremental-off"
-        $after=@(Get-ChildItem "$tree/CMakeFiles" -Filter '*.obj' -Recurse | ForEach-Object {"$($_.FullName):$($_.LastWriteTimeUtc.Ticks)"})
-        Check ($before.Count -gt 0 -and !(Compare-Object $before $after) -and ($noWork -join ' ') -match 'no work to do') "$architecture unchanged incremental does not compile"
-        $null=Run-Dev $architecture "`"$cmake`" --preset $preset-ccache" "$architecture-configure-cache"
-        $foreign=Join-Path $scratch 'foreign-cache'
-        $savedDir=$env:CCACHE_DIR; $savedTemp=$env:CCACHE_TEMPDIR; $savedMax=$env:CCACHE_MAXSIZE
-        try{
-            $env:CCACHE_DIR=$foreign; $env:CCACHE_TEMPDIR="$foreign/tmp"; $env:CCACHE_MAXSIZE='1M'
-            $null=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target native-launcher --verbose" "$architecture-build-cache-hostile-env"
-        }finally{$env:CCACHE_DIR=$savedDir;$env:CCACHE_TEMPDIR=$savedTemp;$env:CCACHE_MAXSIZE=$savedMax}
-        Check (!(Test-Path $foreign)) "$architecture ignores caller's external cache location"
-        $log=Get-Content (Join-Path $scratch "$architecture-build-cache-hostile-env.log") -Raw
-        Check ($log -match 'CCACHE_DIR=.*build/.ccache' -and $log -match 'CCACHE_TEMPDIR=.*build/.ccache/tmp' -and $log -match 'CCACHE_MAXSIZE=5G') "$architecture generated compile command fixes all cache settings"
-        $manifestTree=if($architecture -eq 'x86'){"$tree/worker"}else{"$tree/monitor"}
-        $commands=Get-Content "$manifestTree/build.ninja" -Raw
-        Check ($commands -match 'CCACHE_DIR=.*build/.ccache' -and $commands -match 'CCACHE_TEMPDIR=.*build/.ccache/tmp' -and $commands -match 'CCACHE_MAXSIZE=5G') "$architecture original manifest graph fixes cache routing too"
-        $library=if($architecture -eq 'x86'){'common-root.lib'}else{'common-rpc.lib'}
-        $null=Run-Dev $architecture "`"$ninja`" -C `"$manifestTree`" $library" "$architecture-original-manifest-library"
-        $null=Run-Dev $architecture "`"$cmake`" --build `"$tree`" --target native-launcher" "$architecture-cache-hit-rebuild"
-        $null=Run-Dev $architecture "`"$cmake`" --preset $preset" "$architecture-disable-cache"
-        $cache=Get-Content "$tree/CMakeCache.txt" -Raw
-        Check ($cache -match '(?m)^CMAKE_C_COMPILER_LAUNCHER:STRING=\r?$') "$architecture cache-off clears C launcher in same tree"
-        Check ($commands -notmatch '(?i)/std:c\+\+|/TP(?:\s|$)') "$architecture manifest graph selects no C++ compile mode"
     }
-    $stats=@(& $cmake -E env "CCACHE_DIR=$repo/build/.ccache" "CCACHE_TEMPDIR=$repo/build/.ccache/tmp" "CCACHE_MAXSIZE=5G" $ccache --print-stats)
-    if($LASTEXITCODE){throw 'Repository ccache stats failed'}
-    Write-Utf8 (Join-Path $scratch 'ccache-stats.txt') ($stats -join "`n")
-    $hits=0
-    foreach($line in $stats){if($line -match '^(direct_cache_hit|preprocessed_cache_hit)\s+(\d+)'){$hits += [int]$Matches[2]}}
-    Check ($hits -gt 0) 'actual repository-local ccache hits observed'
-    $refusal=@(& $cmake -S $repo -B "$scratch/outside-ninja" -G Ninja 2>&1)
-    Check ($LASTEXITCODE -ne 0 -and ($refusal -join ' ') -match 'strictly below') 'real CMake refuses outside-Ninja configuration'
-    & $cmake "-DNTVDM_BINARY_DIR=$repo/build/.ninja/reasonable-extra-config" -P "$repo/tools/build/BuildTree.cmake"
-    Check ($LASTEXITCODE -eq 0) 'real configuration allows another stable inside-Ninja tree'
-    $temporaryConfig='build/.ninja/reasonable-extra-config'
-    $configurationInventory=@(& $cleaner -Target $temporaryConfig -Inventory)
-    $configurationOwner=@{targets=@(@{path=$temporaryConfig;owner='Td configuration test';reason='unconfigured test-only prefix, no Ninja graph or CMake cache';inventorySha256=$configurationInventory[-1].InventorySha256});reviewedFiles=@()}
-    & $cleaner -Target $temporaryConfig -OwnershipManifest $configurationOwner -Apply -TasksExited | Out-Null
-    Check (!(Test-Path (Join-Path $repo $temporaryConfig))) 'unconfigured test prefix is removed, not hidden in cache'
+    Check (!(Test-Path -LiteralPath $tree)) 'unconfigured policy prefix is removed, not hidden in cache'
 }
 Write-Utf8 (Join-Path $scratch 'result.json') (@{passed=@($passed);count=$passed.Count;utc=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json -Depth 4)
 "PASS: $($passed.Count) build-hygiene assertions"

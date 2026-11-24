@@ -1822,3 +1822,4 @@ post-publication targeted checks.
 - [T484 S3 direct native package identity](evidence/t484-s3-direct-package-identity.md).
 
 - [T484 S3 isolated RPC control package identities](evidence/t484-s3-rpc-control-identity.md).
+- [T484 S3 build hygiene consolidation](evidence/t484-s3-hygiene-consolidation.md).
