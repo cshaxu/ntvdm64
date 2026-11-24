@@ -1,29 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "6cff183cb3f3514375f908b167e7e3d1e6d046de",
+  "head": "482628bf340ceb12ca4198de8e8db147edb7c2e9",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/Test-BuildHygiene.ps1",
-    "?? docs/etc/evidence/t484-s3-hygiene-consolidation.md"
+    " M test/observation/build-wow-message-transaction-provider.ps1",
+    " D test/observation/prepare-win31-con-trace.ps1",
+    " D test/observation/win31_con_trace.asm",
+    " M tools/build-fixtures.cmd",
+    " D tools/build-wow-message-control.cmd",
+    " M tools/build/fixtures/guest-probes.cmake",
+    "?? docs/etc/evidence/t484-s3-expired-diagnostics.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 162,
+    "changed": 161,
     "unchanged": 24,
-    "removed": 169
+    "removed": 170
   },
   "disposition_counts": {
-    "migrated-delivered": 107,
+    "migrated-delivered": 108,
     "retained-native-declarative": 3,
-    "retired-with-delivery-evidence": 169,
+    "retired-with-delivery-evidence": 170,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 31,
+    "pending-producer-migration": 29,
     "requires-disposition-reconciliation": 15,
     "retained-standalone-audit": 16
   },
-  "existing_interpreted_candidates_with_command_hits": 148,
+  "existing_interpreted_candidates_with_command_hits": 147,
   "files": [
     {
       "id": "B0001",
@@ -380,8 +385,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "b1963d1b0494ac6ad633c1a4590326ba8f9d9e1d6bd559a5b663be9d52f6c4e7",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "482628bf340ceb12ca4198de8e8db147edb7c2e9"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-hygiene-consolidation.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -1905,7 +1914,7 @@
       "file": "test/observation/build-wow-message-transaction-provider.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "21244cc0a45f3d5f0dd3850c84a655378c80e72158ddb64da4e42380c0964090",
+      "current_sha256": "780464bdaa652e31f6965a9f2e700a3181fb97e2836b9b1d70366d2c6a474cdc",
       "revisions": [
         "3f9660eb008754a0f7fd60a6fdf52e1bf631dac5",
         "4ad5cb89e3666f04896c5983beafd1ff26ed3bbb"
@@ -1914,11 +1923,11 @@
         "docs/etc/evidence/t484-s3-message-control.md",
         "docs/etc/evidence/t484-s3-message-transaction.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Current and historical recipes use native producers; exact sealed P21 positive build unverified because its object closure is absent",
-        "evidence": "docs/etc/evidence/t484-s3-message-control.md"
+        "status": "migrated-delivered",
+        "reason": "Current native diagnostic build and TU identity verified; obsolete sealed P21 historical branch and its CMD builder retired, not rebuilt with current objects.",
+        "evidence": "docs/etc/evidence/t484-s3-expired-diagnostics.md"
       }
     },
     {
@@ -2079,19 +2088,19 @@
       "id": "B0110",
       "file": "test/observation/prepare-win31-con-trace.ps1",
       "stage": "S3",
-      "state": "changed",
-      "current_sha256": "6560d898def506c258cf3b864215f076d11d41f68e81ae25bc94cc35168e6c6f",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [
         "2f2a1c10605bc7c0566c870cd931261a8e63f353"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-con-trace.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "retired-with-delivery-evidence",
       "decision": {
-        "reason": "P82 moves NASM to native COM/listing target; all six output files match old preparation. PIF and batch configuration still interpreted, pending S4.",
-        "status": "pending-producer-migration",
-        "evidence": "docs/etc/evidence/t484-s3-con-trace.md"
+        "status": "retired-with-delivery-evidence",
+        "reason": "Expired T436 manual CON-open TSR diagnostic, no current automated contract; script, authored ASM, native target and CMD selection removed together.",
+        "evidence": "docs/etc/evidence/t484-s3-expired-diagnostics.md"
       }
     },
     {
@@ -6427,6 +6436,12 @@
     }
   ],
   "commits": {
+    "482628bf340ceb12ca4198de8e8db147edb7c2e9": {
+      "subject": "T484 S3 P170 consolidate build hygiene verification",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-hygiene-consolidation.md"
+      ]
+    },
     "6cff183cb3f3514375f908b167e7e3d1e6d046de": {
       "subject": "T484 S3 P169 isolate copied RPC control package identities",
       "evidence": [
@@ -8468,27 +8483,11 @@
       "file": "test/observation/build-wow-message-transaction-provider.ps1",
       "hits": [
         {
-          "line": 9,
+          "line": 8,
           "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
         },
         {
           "line": 26,
-          "text": "$link=Get-Content \"$root/link.cmd\" -Raw"
-        },
-        {
-          "line": 27,
-          "text": "$objects=@([regex]::Matches($link,'(?<!\\S)obj/[^\\s\"]+\\.(obj|res)')|ForEach-Object {Join-Path $provider $_.Value}|Select-Object -Unique)"
-        },
-        {
-          "line": 28,
-          "text": "@($PSCommandPath,\"$repo/tools/build-wow-message-control.cmd\",\"$PSScriptRoot/wow_message_transaction_provider.c\",\"$root/message_original_owner.c\",\"$provider/build.ninja\",\"$root/message.obj\")+$objects|Get-FileHash|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
-        },
-        {
-          "line": 37,
-          "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
-        },
-        {
-          "line": 55,
           "text": "@($PSCommandPath,\"$PSScriptRoot/wow_message_transaction_provider.c\",\"$root/message_original_owner.c\",\"$provider/build.ninja\")+$objects|Get-FileHash|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
         }
       ]
@@ -8570,16 +8569,6 @@
         {
           "line": 57,
           "text": "Get-FileHash $PSCommandPath,\"$worker/build.ninja\",$ninja|Select-Object Path,Hash|ConvertTo-Json|Set-Content \"$root/tool-inputs.json\""
-        }
-      ]
-    },
-    {
-      "id": "B0110",
-      "file": "test/observation/prepare-win31-con-trace.ps1",
-      "hits": [
-        {
-          "line": 12,
-          "text": "$native=Join-Path $repo 'build/.ninja/fixtures-x86/guest-probes/win31-con-trace'"
         }
       ]
     },

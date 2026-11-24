@@ -400,9 +400,9 @@
     "reason": "Two native diagnostic projections match old runner; real product profile/order reused through shared one-object provider; export/cache/full-build checks pass"
   },
   "test/observation/build-wow-message-transaction-provider.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Current and historical recipes use native producers; exact sealed P21 positive build unverified because its object closure is absent",
-    "evidence": "docs/etc/evidence/t484-s3-message-control.md"
+    "status": "migrated-delivered",
+    "reason": "Current native diagnostic build and TU identity verified; obsolete sealed P21 historical branch and its CMD builder retired, not rebuilt with current objects.",
+    "evidence": "docs/etc/evidence/t484-s3-expired-diagnostics.md"
   },
   "test/observation/build-wow-sizing-diagnostic.ps1": {
     "status": "migrated-delivered",
@@ -440,9 +440,9 @@
     "evidence": "docs/etc/evidence/t484-s3-dos-identity.md"
   },
   "test/observation/prepare-win31-con-trace.ps1": {
-    "reason": "P82 moves NASM to native COM/listing target; all six output files match old preparation. PIF and batch configuration still interpreted, pending S4.",
-    "status": "pending-producer-migration",
-    "evidence": "docs/etc/evidence/t484-s3-con-trace.md"
+    "status": "retired-with-delivery-evidence",
+    "reason": "Expired T436 manual CON-open TSR diagnostic, no current automated contract; script, authored ASM, native target and CMD selection removed together.",
+    "evidence": "docs/etc/evidence/t484-s3-expired-diagnostics.md"
   },
   "test/observation/rebuild-win101-control-fixtures.ps1": {
     "reason": "P82 delegates three existing native worker targets to CMD; public wrapper build/cache, x64 rejection and real frontend client test pass.",

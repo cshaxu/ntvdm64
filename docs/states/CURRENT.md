@@ -96,6 +96,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P170 hygiene consolidation](../etc/evidence/t484-s3-hygiene-consolidation.md) | Removed private compiler recipe;28 cleanup/native cache policy checks and existing two-pass CMD cache gate pass.11 raw/22 published hashes unchanged;309/355 disposed,46 remain. |
 
+| [P171 expired diagnostics](../etc/evidence/t484-s3-expired-diagnostics.md) | Retired sealed P21 control and CONTRACE including native targets; retained current diagnostic/Win31 fixture builds pass. Cached full and11/22 identities unchanged;311/355 disposed,44 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

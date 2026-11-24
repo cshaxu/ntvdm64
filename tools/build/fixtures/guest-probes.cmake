@@ -81,14 +81,3 @@ get_property(outputs GLOBAL PROPERTY guest_observation)
 add_custom_target(guest-observation DEPENDS ${outputs})
 get_property(outputs GLOBAL PROPERTY guest_outputs)
 add_custom_target(guest-probes DEPENDS ${outputs})
-
-# Console TSR witness retains its listing as an explicit cached output.
-set(con_trace_dir "${CMAKE_BINARY_DIR}/guest-probes/win31-con-trace")
-file(MAKE_DIRECTORY "${con_trace_dir}")
-add_custom_command(OUTPUT "${con_trace_dir}/CONTRACE.COM" "${con_trace_dir}/CONTRACE.lst"
-  COMMAND "${NTVDM_NASM}" -f bin
-    "${NTVDM_REPO}/test/observation/win31_con_trace.asm"
-    -o "${con_trace_dir}/CONTRACE.COM" -l "${con_trace_dir}/CONTRACE.lst"
-  DEPENDS "${NTVDM_REPO}/test/observation/win31_con_trace.asm" "${NTVDM_NASM}" VERBATIM)
-add_custom_target(win31-con-trace DEPENDS "${con_trace_dir}/CONTRACE.COM"
-  "${con_trace_dir}/CONTRACE.lst")
