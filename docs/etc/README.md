@@ -1812,3 +1812,5 @@ post-publication targeted checks.
 - [T484 S3 Win16 native environment dependency](evidence/t484-s3-win16-environment.md).
 
 - [T484 S3 message environment consolidation](evidence/t484-s3-message-environment.md).
+
+- [T484 S3 existing Win16 native chains](evidence/t484-s3-win16-existing-chains.md).

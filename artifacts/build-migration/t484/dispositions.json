@@ -197,9 +197,9 @@
     "evidence": "docs/etc/evidence/t484-s3-win16-probes.md"
   },
   "test/integration/verify-win16-discovery.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Native discovery guest and host-peer production verified; shared package staging production remains pending",
-    "evidence": "docs/etc/evidence/t484-s3-discovery.md"
+    "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
+    "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
+    "status": "migrated-delivered"
   },
   "test/integration/verify-win16-message-probe.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-message-environment.md",
@@ -212,24 +212,24 @@
     "evidence": "docs/etc/evidence/t484-s3-print-probe.md"
   },
   "test/integration/verify-win16-printdlg-cancel.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
-    "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
+    "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
+    "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
+    "status": "migrated-delivered"
   },
   "test/integration/verify-win16-printdlg-default.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
-    "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
+    "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
+    "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
+    "status": "migrated-delivered"
   },
   "test/integration/verify-win16-raw-spool-profile.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
-    "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
+    "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
+    "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
+    "status": "migrated-delivered"
   },
   "test/integration/verify-win16-toolhelp-probe.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
-    "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
+    "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
+    "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
+    "status": "migrated-delivered"
   },
   "test/observation/verify-slave-bios-eoi.py": {
     "status": "migrated-delivered",

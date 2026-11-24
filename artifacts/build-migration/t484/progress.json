@@ -1,12 +1,11 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "4a16e16c5102d10d938f44beb5d7088c45dd53d0",
+  "head": "1b82395128bdb2a5b560db109c17e8129e5490b1",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-win16-message-probe.ps1",
-    "?? docs/etc/evidence/t484-s3-message-environment.md"
+    "?? docs/etc/evidence/t484-s3-win16-existing-chains.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -15,11 +14,11 @@
     "removed": 167
   },
   "disposition_counts": {
-    "migrated-delivered": 97,
+    "migrated-delivered": 102,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 167,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 41,
+    "pending-producer-migration": 36,
     "requires-disposition-reconciliation": 17,
     "retained-standalone-audit": 16
   },
@@ -828,11 +827,11 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-discovery.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native discovery guest and host-peer production verified; shared package staging production remains pending",
-        "evidence": "docs/etc/evidence/t484-s3-discovery.md"
+        "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
+        "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
+        "status": "migrated-delivered"
       }
     },
     {
@@ -842,9 +841,11 @@
       "state": "changed",
       "current_sha256": "dbfd3ad888b9b422e99578b4b141e6013894144e4461649ecdfa820a0bafd27c",
       "revisions": [
+        "1b82395128bdb2a5b560db109c17e8129e5490b1",
         "5df3ff0953f75bbc68a509819ef6d44a6a7515bc"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-message-environment.md",
         "docs/etc/evidence/t484-s3-message-probes.md"
       ],
       "completion": "migrated-delivered",
@@ -906,11 +907,11 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-win16-fixed.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
-        "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
+        "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
+        "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
+        "status": "migrated-delivered"
       }
     },
     {
@@ -925,11 +926,11 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-win16-fixed.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
-        "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
+        "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
+        "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
+        "status": "migrated-delivered"
       }
     },
     {
@@ -944,11 +945,11 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-win16-fixed.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
-        "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
+        "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
+        "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
+        "status": "migrated-delivered"
       }
     },
     {
@@ -984,11 +985,11 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-win16-fixed.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native Win16 executable/listing producer verified through shared delegation; shared package-staging production remains pending",
-        "evidence": "docs/etc/evidence/t484-s3-win16-fixed.md"
+        "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
+        "reason": "Existing shared CMD/native producer audited; actual immutable guest contract passed in normal logon environment; inherited-agent failure retained in evidence",
+        "status": "migrated-delivered"
       }
     },
     {
@@ -6376,6 +6377,12 @@
     }
   ],
   "commits": {
+    "1b82395128bdb2a5b560db109c17e8129e5490b1": {
+      "subject": "T484 S3 P164 reuse native environment in Win16 message tests",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-message-environment.md"
+      ]
+    },
     "4a16e16c5102d10d938f44beb5d7088c45dd53d0": {
       "subject": "T484 S3 P163 share native environment for Win16 timer and hook tests",
       "evidence": [
