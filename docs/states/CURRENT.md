@@ -46,6 +46,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P145 hook audits](../etc/evidence/t484-s3-hook-audits.md) | Four read-only audits reconciled; shared compiler-dependency reader,104 DLL objects and five maps verified; no product change. |
 
+| [P146 version producer checkpoint](../etc/evidence/t484-s3-version-native.md) | Five native peers and full cached/identity check pass; B0231 remains pending package preparation and actual negative-peer runs. No completion-count increment. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

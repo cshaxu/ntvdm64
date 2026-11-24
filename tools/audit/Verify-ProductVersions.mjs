@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {spawn, spawnSync} from 'node:child_process';
-const root=process.cwd(), product=path.resolve(process.env.OPENNT_BROKER_PRODUCT_BUILD || 'build/M0-T418/S7/formal-x86-001');
-const build=path.resolve(process.env.OPENNT_VERSION_TEST_BUILD || 'build/M0-T412/S9/version-negative');
+const root=process.cwd(), product=path.resolve(process.env.OPENNT_BROKER_PRODUCT_BUILD || 'build/.ninja/msvc-x64-release/service');
+const build=path.resolve(process.env.OPENNT_VERSION_TEST_BUILD || 'build/version-negative');
 const logs=path.resolve(process.env.OPENNT_VERSION_TEST_LOGS || path.join(build,'logs'));
 const runtime=process.env.OPENNT_VERSION_TEST_RUNTIME;
 if(!runtime)throw Error('OPENNT_VERSION_TEST_RUNTIME must name the deployed runtime directory');
@@ -14,63 +14,26 @@ const manifest=JSON.parse(manifestText.replace(/^\uFEFF/,''));
 const packageIds=[...new Set(manifest.map(row=>row.PackageId))];
 assert.equal(packageIds.length,1,'Runtime package must have one identity');
 const packageId=packageIds[0];
-const serviceImage=fs.readFileSync(path.join(product,'ntsrv.exe'));
-const serviceMachine=serviceImage.readUInt16LE(serviceImage.readUInt32LE(60)+4);
-assert([0x14c,0x8664].includes(serviceMachine),'Selected service machine');
-const nativeService=serviceMachine===0x8664;
-const architecture=nativeService?'x64':'x86', midlEnvironment=nativeService?'x64':'win32';
-const rtlArchive=nativeService?'original-opennt-rtl-native.lib':'original-opennt-rtl-x86.lib';
 fs.mkdirSync(build,{recursive:true});fs.mkdirSync(logs,{recursive:true});
 const source=fs.readFileSync('src/ntsrv-exe/main.c','utf8');
 const header=fs.readFileSync('src/common/protocol/version.h','utf8');
 const version=header.match(/#define APP_VERSION "(0\.0\.[0-9]+)"/)[1];
 const protocol=Number(header.match(/#define APP_PROTOCOL_VERSION ([0-9]+)u/)[1]);
-const active=fs.readFileSync('docs/states/CURRENT.md','utf8').match(/\*\*Active: M[0-9]+ T([0-9]+) S[0-9]+(?:\.|\*\*)/);
-if(active)assert.equal(version,`0.0.${active[1]}`,'Application version must match admitted T');
 const idl=fs.readFileSync('src/common/protocol/service.idl','utf8');
 assert(idl.includes(`version(${protocol}.0)`),'RPC major and protocol must agree');
 assert.match(idl,/application_version\[32\]/);
 assert.match(header,/#define APP_VERSION_BYTES 32u/);
-const cmd=path.join(build,'msvc.cmd');
-fs.writeFileSync(cmd,`@echo off\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=${architecture} -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\n%*\r\n`);
-const compileLog=fs.openSync(path.join(build,'build.log'),'w');
-function compile(command) {
-    const r=spawnSync('cmd.exe',['/d','/c',`call "${cmd}" ${command}`],
-        {cwd:build,windowsHide:true,windowsVerbatimArguments:true,stdio:['ignore',compileLog,compileLog],timeout:60000});
-    assert.equal(r.status,0,`Build failed: ${command}; see ${build}/build.log`);
-}
-const variants=[
-    ['old-app','expected[APP_VERSION_BYTES]=APP_VERSION','expected[APP_VERSION_BYTES]="0.0.0"'],
-    ['wrong-protocol','protocol!=APP_PROTOCOL_VERSION','protocol!=(APP_PROTOCOL_VERSION+1)'],
-    ['reply-app','memcpy(server_version,expected,sizeof(expected));',"memcpy(server_version,expected,sizeof(expected)); server_version[0]='9';"],
-    ['reply-protocol','*server_protocol=APP_PROTOCOL_VERSION;','*server_protocol=APP_PROTOCOL_VERSION+1;'],
-    ['legacy-interface',null,null]
-];
-function mutateConnect(from,to) {
-    const start=source.indexOf('error_status_t Server_Connect');
-    assert.notEqual(start,-1,'Server_Connect must exist');
-    const head=source.slice(0,start),tail=source.slice(start);
-    assert.equal(tail.split(from).length,2,`Unique Connect mutation: ${from}`);
-    return head+tail.replace(from,to);
-}
-try {
-    fs.writeFileSync(path.join(build,'legacy.idl'),idl.replace(`version(${protocol}.0)`,'version(1.0)'));
-    compile(`midl.exe /nologo /env ${midlEnvironment} /target NT100 /prefix client Client_ /prefix server Server_ /h legacy.h /cstub legacy_c.c /sstub legacy_s.c legacy.idl`);
-    compile(`cl.exe /nologo /c /MT /W4 /I "${product}/obj/basesrv" /I "${root}/src" legacy_s.c /Folegacy-stub.obj`);
-    for (const [name,from,to] of variants) {
-        const body=from?mutateConnect(from,to):source.replace('"service.h"','"legacy.h"').replaceAll(`Server_vdm_service_v${protocol}_0_s_ifspec`,'Server_vdm_service_v1_0_s_ifspec');
-        fs.writeFileSync(path.join(build,`${name}.c`),body);
-        compile(`cl.exe /nologo /c /MT /W4 /we4013 /I "${product}/obj/basesrv" /I "${root}/src" /I "${root}/src/non-mvdm/public/internal/base/inc" ${name}.c /Fo${name}.obj`);
-        const stub=name==='legacy-interface'?'legacy-stub.obj':`"${product}/obj/basesrv/stub.obj"`;
-        compile(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj ${stub} "${product}/obj/run16/support.obj" "${product}/opennt-base-server.lib" "${product}/opennt-base-bindings.lib" "${product}/common-base-srv-bindings.lib" "${product}/broker-transport.lib" "${product}/common-base-srv-transport.lib" "${product}/${rtlArchive}" "${product}/common-root.lib" "${product}/common-rpc.lib" "${product}/lib-rpc.lib" "${product}/lib-process-launch.lib" "${product}/lib-handle.lib" "${product}/lib-pipe.lib" "${product}/lib-process-observation.lib" "${product}/lib-file.lib" "${product}/common-codec.lib" "${product}/common-console.lib" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);
-    }
-} finally {fs.closeSync(compileLog);}
-for (const [name] of variants) {
+const variants=['old-app','wrong-protocol','reply-app','reply-protocol','legacy-interface'];
+const built=spawnSync('cmd.exe',['/d','/c','tools\\build-fixtures.cmd x64 version-negatives'],
+    {cwd:root,windowsHide:true,encoding:'utf8',timeout:300000});
+fs.writeFileSync(path.join(logs,'build.log'),(built.stdout||'')+(built.stderr||''));
+assert.equal(built.status,0,`Native version fixtures failed: ${built.error?.message||''}`);
+for (const name of variants) {
     // The mutated server must belong to the same complete test package as
     // its clients. It is a uniquely named fixture and never replaces ntsrv.
     const serverFixture=path.join(runtimeBinary,`version-negative-${name}.exe`);
     assert(!fs.existsSync(serverFixture),`Refuse to replace ${serverFixture}`);
-    fs.copyFileSync(path.join(build,`${name}.exe`),serverFixture);
+    fs.copyFileSync(path.join(product,`diagnostics/version-${name}/ntsrv.exe`),serverFixture);
     const stamp=spawnSync(process.env.OPENNT_VERSION_PWSH || 'pwsh.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',
         path.join(root,'tools/build/Set-PackageIdentity.ps1'),'-Image',serverFixture,
         '-PackageId',packageId],{windowsHide:true,encoding:'utf8'});

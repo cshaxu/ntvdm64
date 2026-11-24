@@ -1137,5 +1137,10 @@
     "status": "retained-standalone-audit",
     "reason": "Read-only current native compiler/header or map contracts verified with negative controls; no producer",
     "evidence": "docs/etc/evidence/t484-s3-hook-audits.md"
+  },
+  "tools/audit/Verify-ProductVersions.mjs": {
+    "reason": "Five native CMD peers compile; interpreted identity preparation and actual negative-peer runtime acceptance remain",
+    "evidence": "docs/etc/evidence/t484-s3-version-native.md",
+    "status": "pending-producer-migration"
   }
 }

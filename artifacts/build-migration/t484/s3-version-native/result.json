@@ -1,0 +1,16 @@
+{
+  "remaining": "native package identity preparation and five real negative-peer acceptance runs",
+  "fixtureBuild": {
+    "exit": 0,
+    "started": "2026-11-24T07:48:53.3873441+01:00",
+    "finished": "2026-11-24T07:49:07.0703877+01:00",
+    "pid": 1276
+  },
+  "cachedHostAndIdentity": {
+    "finished": "2026-11-24T07:51:06.218913+01:00",
+    "started": "2026-11-24T07:50:05.0889214+01:00",
+    "exit": 0,
+    "pid": 3632
+  },
+  "runtimeValidated": false
+}

@@ -225,6 +225,8 @@ if "%TARGET%"=="command-initialization" set "SELECTED=1"
 if "%TARGET%"=="command-launch" set "SELECTED=1"
 if "%TARGET%"=="worker-diagnostics" set "SELECTED=1"
 if "%TARGET%"=="dos-identity-observer" if "%~1"=="x86" set "SELECTED=1"
+if "%TARGET%"=="version-negatives" set "SELECTED=1"
+if "%TARGET%"=="version-negatives" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="native-diagnostics" set "SELECTED=1"
 if "%TARGET%"=="native-diagnostics" if not "%~1"=="x64" exit /b 2
 for %%I in (dpmi-contracts ccpu-port-privilege dpmi-swint-selected pm-entry-contract) do if "%TARGET%"=="%%I" set "SELECTED=1"
@@ -291,6 +293,7 @@ if "%TARGET%"=="worker-diagnostics" goto worker
 if "%TARGET%"=="dos-identity-observer" goto worker
 if "%TARGET%"=="wow-page-cost" if not "%~3"=="" goto worker_existing
 if "%TARGET%"=="wow-page-cost" goto worker
+if "%TARGET%"=="version-negatives" goto nativediagnostics
 if "%TARGET%"=="native-diagnostics" goto nativediagnostics
 if "%TARGET%"=="frame-codepage" if "%~1"=="x86" goto worker
 if "%TARGET%"=="frame-codepage" goto nativediagnostics
@@ -358,6 +361,8 @@ cmake --preset msvc-x64-release-ccache
 set "result=%errorlevel%"
 popd
 if not "%result%"=="0" exit /b %result%
+if "%TARGET%"=="version-negatives" cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x64-release\service" --target version-negatives
+if "%TARGET%"=="version-negatives" exit /b %errorlevel%
 if "%TARGET%"=="frame-codepage" cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x64-release\frontend" --target frame-codepage
 if "%TARGET%"=="frame-codepage" exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x64-release\frontend" --target native-diagnostics

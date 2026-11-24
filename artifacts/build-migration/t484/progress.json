@@ -1,32 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "753007863b1c37d9a48d5b2a0b589df0b1b982b3",
+  "head": "5305401c40cf14705e5a81f934dbb441953e16ff",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M tools/audit/native-source-graph.ps1",
-    " M tools/audit/verify-guest-memory-boundary.ps1",
-    " M tools/audit/verify-native-hook-context-ownership.ps1",
-    " M tools/audit/verify-native-hook-installer-ownership.ps1",
-    " M tools/audit/verify-nonworker-compiler-closure.py",
-    " M tools/audit/verify-process-hook-product-maps.py",
-    "?? artifacts/build-migration/t484/s3-hook-audits/",
-    "?? docs/etc/evidence/t484-s3-hook-audits.md"
+    " M tools/audit/Verify-ProductVersions.mjs",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/native-family/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-version-native/",
+    "?? docs/etc/evidence/t484-s3-version-native.md",
+    "?? tools/build/native-family/version-negatives.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 151,
-    "unchanged": 59,
+    "changed": 152,
+    "unchanged": 58,
     "removed": 145
   },
   "disposition_counts": {
     "migrated-delivered": 85,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 145,
-    "pending-producer-migration": 53,
+    "pending-producer-migration": 54,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 43,
+    "requires-disposition-reconciliation": 42,
     "retained-standalone-audit": 13
   },
   "existing_interpreted_candidates_with_command_hits": 157,
@@ -4274,9 +4272,11 @@
       "state": "changed",
       "current_sha256": "e3c319948bdcb2b5a82bb91b940631761f23ee84aef05ea4aa693e5aa3bfc8ce",
       "revisions": [
+        "5305401c40cf14705e5a81f934dbb441953e16ff",
         "753007863b1c37d9a48d5b2a0b589df0b1b982b3"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-hook-audits.md",
         "docs/etc/evidence/t484-s3-native-cache-audits.md"
       ],
       "completion": "retained-standalone-audit",
@@ -4332,8 +4332,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "0409ecab0e9d52e64a39b193cc9b9cb4d604bfd4051bac9d345013533d23fbd8",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "5305401c40cf14705e5a81f934dbb441953e16ff"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-hook-audits.md"
+      ],
       "completion": "retained-standalone-audit",
       "decision": {
         "status": "retained-standalone-audit",
@@ -4347,8 +4351,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "132c0594a2be176a357f39b103878a81f0a783c6f583492ee6d1e55af3163676",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "5305401c40cf14705e5a81f934dbb441953e16ff"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-hook-audits.md"
+      ],
       "completion": "retained-standalone-audit",
       "decision": {
         "status": "retained-standalone-audit",
@@ -4362,8 +4370,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "b4885d5fd3340d39d99e88f8e44138f36158a4b640525932f5855f079a3130d5",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "5305401c40cf14705e5a81f934dbb441953e16ff"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-hook-audits.md"
+      ],
       "completion": "retained-standalone-audit",
       "decision": {
         "status": "retained-standalone-audit",
@@ -4377,8 +4389,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "9be478bf80e3fe11c8b53d5cffbd5b22f9758698c1e792e496f8bbf535e9ba3f",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "5305401c40cf14705e5a81f934dbb441953e16ff"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-hook-audits.md"
+      ],
       "completion": "retained-standalone-audit",
       "decision": {
         "status": "retained-standalone-audit",
@@ -4390,12 +4406,16 @@
       "id": "B0231",
       "file": "tools/audit/Verify-ProductVersions.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "e045099fb98d79343ca700506ef15d0e4ef49b5299a452b562c23bcf0f0122e4",
+      "state": "changed",
+      "current_sha256": "4d9295905608700558f61960ead0bbe1adfe682cf0aa6015332453e9df87f912",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "pending-producer-migration",
+      "decision": {
+        "reason": "Five native CMD peers compile; interpreted identity preparation and actual negative-peer runtime acceptance remain",
+        "evidence": "docs/etc/evidence/t484-s3-version-native.md",
+        "status": "pending-producer-migration"
+      }
     },
     {
       "id": "B0232",
@@ -6122,6 +6142,12 @@
     }
   ],
   "commits": {
+    "5305401c40cf14705e5a81f934dbb441953e16ff": {
+      "subject": "T484 S3 P145 reconcile hook ownership audit tools",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-hook-audits.md"
+      ]
+    },
     "753007863b1c37d9a48d5b2a0b589df0b1b982b3": {
       "subject": "T484 S3 P144 delegate cache verification to CMD producer",
       "evidence": [
@@ -9327,19 +9353,11 @@
           "text": "import {spawn, spawnSync} from 'node:child_process';"
         },
         {
-          "line": 59,
-          "text": "compile(`cl.exe /nologo /c /MT /W4 /I \"${product}/obj/basesrv\" /I \"${root}/src\" legacy_s.c /Folegacy-stub.obj`);"
+          "line": 6,
+          "text": "const root=process.cwd(), product=path.resolve(process.env.OPENNT_BROKER_PRODUCT_BUILD || 'build/.ninja/msvc-x64-release/service');"
         },
         {
-          "line": 63,
-          "text": "compile(`cl.exe /nologo /c /MT /W4 /we4013 /I \"${product}/obj/basesrv\" /I \"${root}/src\" /I \"${root}/src/non-mvdm/public/internal/base/inc\" ${name}.c /Fo${name}.obj`);"
-        },
-        {
-          "line": 65,
-          "text": "compile(`link.exe /nologo /opt:ref /out:${name}.exe ${name}.obj ${stub} \"${product}/obj/run16/support.obj\" \"${product}/opennt-base-server.lib\" \"${product}/opennt-base-bindings.lib\" \"${product}/common-base-srv-bindings.lib\" \"${product}/broker-transport.lib\" \"${product}/common-base-srv-transport.lib\" \"${product}/${rtlArchive}\" \"${product}/common-root.lib\" \"${product}/common-rpc.lib\" \"${product}/lib-rpc.lib\" \"${product}/lib-process-launch.lib\" \"${product}/lib-handle.lib\" \"${product}/lib-pipe.lib\" \"${product}/lib-process-observation.lib\" \"${product}/lib-file.lib\" \"${product}/common-codec.lib\" \"${product}/common-console.lib\" rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`);"
-        },
-        {
-          "line": 74,
+          "line": 37,
           "text": "const stamp=spawnSync(process.env.OPENNT_VERSION_PWSH || 'pwsh.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',"
         }
       ]

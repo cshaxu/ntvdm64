@@ -133,6 +133,7 @@ endfunction()
 set(family_flags "/nologo /c /MT /W4 /we4013 /we4311 /we4302 /Gy /showIncludes /DWINNT /D_NO_CRT_STDIO_INLINE /D_WIN32_WINNT=0x0A00")
 include("${NTVDM_COMPONENT}.cmake")
 include(diagnostics.cmake)
+include(version-negatives.cmake)
 get_property(manifest GLOBAL PROPERTY family_manifest)
 list(JOIN manifest ",\n" manifest)
 file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/source-manifest.json"
