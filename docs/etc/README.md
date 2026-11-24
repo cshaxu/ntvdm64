@@ -1905,3 +1905,5 @@ post-publication targeted checks.
 - [T484 S3 historical compiler retirement](evidence/t484-s3-historical-compiler-retirement.md).
 
 - [T484 S3 superseded Win31 setup retirement](evidence/t484-s3-win31-retirement.md).
+
+- [T484 S3 closure and S4 handoff](evidence/t484-s3-closure.md).

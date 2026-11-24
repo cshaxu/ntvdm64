@@ -2,36 +2,36 @@
 
 ## Current Work
 
-**Active: M0 T484 S3** (Ordinary Mode). Owner requested continuous execution
-through T484 closure. S2 host migration is complete; S3 addon/test producers
-are now admitted. Final interpreter-free clean acceptance remains S5.
+**Active: M0 T484 S4** (Ordinary Mode). Owner requested continuous execution
+through T484 closure. S3 addon/test producers are closed; S4 package
+and publication migration is now admitted. Final interpreter-free clean acceptance remains S5.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T484 S3, Ordinary Mode. |
+| Identifier Mode | M0 T484 S4, Ordinary Mode. |
 | Admission And Approval | Owner: 准入新t任务！要求构建脚步去除python powershell javascript 仅使用cmd. |
 | Original Owner Request | Admit unified build/release; CMD-only build scripts, removing Python, PowerShell and JavaScript dependencies. |
-| Objective | Migrate all14 authored addon producers and test-binary production callers to CMD/native declarative targets; retire the old worker generator and interpreted producer chains while preserving actual source/flag/ABI closures. Reaudit already migrated test tools/probes; remove obsolete unused entries and consolidate duplicated setup/coverage instead of preserving migrations for their own sake. |
+| Objective | Migrate required runtime configuration, isolated package preparation, manifests and publication to CMD/native ownership; retire obsolete wrappers and preserve identity, failure and cleanup contracts. |
 | Candidate Proposal | [Unified build/release](../proposals/proposal-unified-build-cmd-release-001.md) |
 | Reference Baseline | T483 closure e74afba09; product P85 9e7eb19c0, package100b16d9-992d-4e2c-8d99-66a4e891dd26. |
-| Files And ABI Surface | Addon/test build entrypoints, native CMake/ASM/RC generation and consumer references; no original guest or product ABI change. |
+| Files And ABI Surface | Build/publication/staging scripts and caller preparation; no product ABI change or original guest rebuild. |
 | Applicable Rules | CMD-only project build scripting, existing layers, source-owner inventories and caches, immutable original guest, truthful failures. |
-| Verification | Reconcile14 addon outputs and live test producers; actual compilation and targeted tests, coherent dual publication for changed products, docs/link/diff gates. Full clean/interpreter-free acceptance remains S5. |
-| Expected Markers | Canonical declarative source groups, CMD entry, generated source identity, native toolchain and cache identity, no forbidden interpreter in the migrated host path. |
+| Verification | Verify actual shared staging, host/addon publication and failure cases; targeted tests, coherent dual release hashes, governance and commit/push. Final clean interpreter-free acceptance remains S5. |
+| Expected Markers | Single package owner, complete manifests, exact image identities, CMD/native production without hidden forbidden interpreters. |
 | Asset Needs | Existing source/toolchains and approved assets only. |
 | Non-goals | No runtime redesign, mirror audit, original guest rebuild or wholesale standalone test/audit language conversion. |
 | Similar-Issue Sweep | Nested interpreters, configure hooks, generated commands, post-link steps, manifest/hash tools, addon/test producers and clean bootstrap. |
 | Reporting Requirements | Separate admission, inventory, implementation and delivery; count remaining forbidden-interpreter build edges and output coverage. |
 | Stop Conditions | No forbidden interpreter behind CMD or another script mode; no parallel build graph or stale output as clean-build proof. |
-| Exit Criteria | All14 authored addons and current test-binary production paths use native/CMD producers; retired callers repaired, required tests/publication/commit/push complete; standalone assertion languages may remain. |
+| Exit Criteria | Required configuration, staging and publication chains use CMD/native; callers repaired, rollback/failure checks pass, coherent dual release verified and delivery pushed. |
 
 ## Current Progress
 
 S1 inventory/design and S2 native host migration are closed. The
 [execution plan](../etc/operations/t484-cmd-build-release-plan.md) retains
-the complete task scope. S3 remains active; S4 publication and S5 clean,
+the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S5 clean,
 interpreter-free end-to-end acceptance have not completed.
 
 | S3 delivery | Actual result |
@@ -62,6 +62,13 @@ and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
 source profiles and delivery identities belong to the linked evidence.
+
+## S3 Closure Record
+
+[S3 closure and S4 handoff](../etc/evidence/t484-s3-closure.md) records
+the delivered addon/test producers through P217, actual validation and32
+unresolved inventory entries plus24 supplemental preparation chains retained
+for S4. Runtime failures remain explicit; final clean acceptance remains S5.
 
 ## S2 Closure Record
 
