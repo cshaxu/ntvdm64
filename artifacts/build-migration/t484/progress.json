@@ -1,15 +1,21 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "d483cdd4608d21fd9db70514736d56d41bd01102",
+  "head": "6d766ea52cc73d5112b68100988ba683edfd47e6",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
+    " M docs/etc/evidence/t484-s3-early-deliveries.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-edit-tabstop-guest.ps1",
+    " D test/adapter-mvdm-host-out/wow/wow_gdi_handle_abi_probe.c",
+    " D test/observation/inspect-ne-classification.ps1",
+    " M test/observation/verify-wow-font-compat.ps1",
+    " D test/observation/verify-wow-gdi-handle-contract.ps1",
+    " D test/observation/verify-wow-glyph-outline-rotation.ps1",
+    " M test/observation/verify-wow-metafile-host.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-tabstop-reader.md",
-    "?? test/observation/tabstop_reader.cs"
+    "?? docs/etc/evidence/t484-s3-wow-host-contracts.md",
+    "?? tools/build/fixtures/wow-host-contracts.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6488,6 +6494,12 @@
     }
   ],
   "commits": {
+    "6d766ea52cc73d5112b68100988ba683edfd47e6": {
+      "subject": "M0 T484 S3 P195: cache tabstop reader through native fixture build",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-tabstop-reader.md"
+      ]
+    },
     "d483cdd4608d21fd9db70514736d56d41bd01102": {
       "subject": "M0 T484 S3 P194: consolidate supplemental fixture producers",
       "evidence": [

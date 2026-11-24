@@ -1861,3 +1861,5 @@ post-publication targeted checks.
 [T484 S3 supplemental producers](evidence/t484-s3-supplemental-producers.md) records retirement of the migration-only NASM comparison and reuse of the native environment reader.
 
 [T484 S3 tab-stop reader](evidence/t484-s3-tabstop-reader.md) records unchanged interop declarations in the shared native C# cache and bounded read/error checks.
+
+[T484 S3 WOW host contracts](evidence/t484-s3-wow-host-contracts.md) records diagnostic retirement and consolidated native font/metafile tests.

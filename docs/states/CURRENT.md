@@ -36,47 +36,7 @@ interpreter-free end-to-end acceptance have not completed.
 
 | S3 delivery | Actual result |
 | --- | --- |
-| [P1-P160](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
-
-| [P161 native environment reader](../etc/evidence/t484-s3-logon-reader.md) | Three CPU guest callers share native environment query; sign/transfer/ALU positive and negative cases pass.293/355 disposed,62 remain. |
-
-| [P162 EMS environment](../etc/evidence/t484-s3-ems-environment.md) | EMS Mapping/CallReturn use shared native reader and pass actual guest checks; two forwarding callers cleaned.294/355 disposed,61 remain. |
-
-| [P163 Win16 environment](../etc/evidence/t484-s3-win16-environment.md) | Timer/cancel,NoTimer and CBT hook use shared native reader and pass real guest checks.296/355 disposed,59 remain. |
-
-| [P164 message environment](../etc/evidence/t484-s3-message-environment.md) | Duplicate C# reader removed; basic and structured actual Win16 messages pass; cached full and11/22 hashes unchanged.297/355 disposed,58 remain. |
-
-| [P165 existing Win16 chains](../etc/evidence/t484-s3-win16-existing-chains.md) | Five existing CMD chains pass actual normal-user-environment contracts; inherited-agent failures retained. Cached full/11/22 hashes pass unchanged.302/355 disposed,53 remain. |
-
-| [P166 DC/dialog chains](../etc/evidence/t484-s3-dialog-native.md) | Existing shared CMD producer and three actual guest contracts pass; cached full/11/22 hashes unchanged.304/355 disposed,51 remain. |
-
-| [P167 external current package](../etc/evidence/t484-s3-external-current-package.md) | Removed obsolete13-image self-test; current11-image local/x86/x64 message groups and cached full/identity checks pass. Default staging still pending;304/355,51 remain. |
-
-| [P168 direct native identity](../etc/evidence/t484-s3-direct-package-identity.md) | Removed identity wrapper/expired T228 assembler;10 call sites use native writer. Identity negatives, dual-package RPC/DOS and five RPC wait cases pass; cached full/11/22 hashes unchanged.307/355 disposed,48 remain. |
-
-| [P169 RPC control identity](../etc/evidence/t484-s3-rpc-control-identity.md) | Separate copied roots get unique complete native identities; Full six and three substituted-worker cases pass. Cached full/11/22 hashes unchanged;308/355 disposed,47 remain. |
-
-| [P170 hygiene consolidation](../etc/evidence/t484-s3-hygiene-consolidation.md) | Removed private compiler recipe;28 cleanup/native cache policy checks and existing two-pass CMD cache gate pass.11 raw/22 published hashes unchanged;309/355 disposed,46 remain. |
-
-| [P171 expired diagnostics](../etc/evidence/t484-s3-expired-diagnostics.md) | Retired sealed P21 control and CONTRACE including native targets; retained current diagnostic/Win31 fixture builds pass. Cached full and11/22 identities unchanged;311/355 disposed,44 remain. |
-
-| [P172 cached inspector](../etc/evidence/t484-s3-window-inspector.md) | Shared window inspector loads a CMD/CMake-built DLL; original C# body unchanged. Compile/load/error/cache checks and cached full11/22 hashes pass. Matrix preparation remains open;311/355,44 remain. |
-
-| [P173 native probe paths](../etc/evidence/t484-s3-probe-paths.md) | Authored Win31 witness fields bind through native fixture; exact bytes and four no-write refusals pass. Cached full and11/22 hashes unchanged. Runtime preparation remains open;311/355,44 remain. |
-
-| [P174 native controls](../etc/evidence/t484-s3-native-controls.md) | Two direct compiler recipes replaced; real MessageBox/ShellAbout returns and Run16 game exit/hidden carrier pass. Cached full11/22 hashes unchanged;313/355 disposed,42 remain. |
-
-| [P175 native VT](../etc/evidence/t484-s3-vt-native.md) | Historical compiler recipe removed; x86/x64 real Console/pixel oracle each230987 checks,0 failures. Cached full and11/22 identity checks pass unchanged;314/355 disposed,41 remain. |
-
-| [P176 DDEML environment](../etc/evidence/t484-s3-ddeml-native.md) | External C# helper replaced by shared native reader; real init/register cases and cached full11/22 identity checks pass. B0043 still pending shared staging;314/355 disposed,41 remain. |
-
-| [P177 serial isolation](../etc/evidence/t484-s3-serial-native.md) | Native namespace oracle and owned runtime replace C# compilation, flat-layout overwrite and global process cleanup. Direct/nested guest cases pass at mask0; B0041 still pending shared staging. |
-
-| [P178 DLL ABI](../etc/evidence/t484-s3-wow-entry-native.md) | Retired incomplete registration mocks; current return/cleanup projection passes BOOLEAN and8 OS loader cycles. Cached full11/22 hashes unchanged;315/355 disposed,40 remain. |
-
-| [P179 controller paths](../etc/evidence/t484-s3-controller-paths.md) | Three runners share native128-byte field binding; six real controller images byte-identical, nine failure cases pass. Remaining COM/config/staging work stays open;315/355 disposed,40 remain. |
-
-| [P180 DOS identity fields](../etc/evidence/t484-s3-identity-fields.md) | Two runners share native COM preparation; seven real templates/both roles byte-identical and18 rejection cases pass. PIF/config/staging remain;315/355 disposed,40 remain. |
+| [P1-P180](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
 
 | [P181 PIF fields](../etc/evidence/t484-s3-pif-memory.md) | Six callers use native PIF memory options; duplicate helper/inline patchers removed; full-byte equivalence and failure checks pass. Configuration/staging remain;315/355 disposed,40 remain. |
 
@@ -107,6 +67,8 @@ interpreter-free end-to-end acceptance have not completed.
 | [P194 supplemental consolidation](../etc/evidence/t484-s3-supplemental-producers.md) | Removed migration-only NASM recipe; shared native environment reader replaces duplicate C# producer. Two of13 review candidates classified;11 remain,20 supplemental staging chains remain. |
 
 | [P195 cached tab-stop reader](../etc/evidence/t484-s3-tabstop-reader.md) | Existing read declarations use shared CMD/CMake production; read/error/cache checks pass, no new guest pass claimed.10 supplemental review candidates and21 staging chains remain. |
+
+| [P196 WOW host contracts](../etc/evidence/t484-s3-wow-host-contracts.md) | Two obsolete diagnostics retired; glyph wrapper consolidated; five font cases and public metafile pass through native targets. Cached full and11/22 hashes unchanged. Five supplemental review candidates and21 staging chains remain. |
 
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.

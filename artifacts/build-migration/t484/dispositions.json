@@ -1404,29 +1404,29 @@
     "evidence": "docs/etc/evidence/t484-s3-supplemental-producers.md"
   },
   "test/observation/inspect-ne-classification.ps1": {
-    "status": "supplemental-producer-review",
-    "reason": "P193 expanded scan found direct CL/NASM or Add-Type compilation; retention, current callers and real build effect must be reviewed before deciding retire/consolidate/migrate. Not counted as completed or as a required Full test.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "status": "supplemental-retired",
+    "reason": "P196 retires obsolete diagnostics or consolidates retained host contracts through CMD/CMake; five font cases and public metafile roundtrip pass. No product or original guest changes.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-host-contracts.md"
   },
   "test/observation/verify-wow-font-compat.ps1": {
-    "status": "supplemental-producer-review",
-    "reason": "P193 expanded scan found direct CL/NASM or Add-Type compilation; retention, current callers and real build effect must be reviewed before deciding retire/consolidate/migrate. Not counted as completed or as a required Full test.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P196 retires obsolete diagnostics or consolidates retained host contracts through CMD/CMake; five font cases and public metafile roundtrip pass. No product or original guest changes.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-host-contracts.md"
   },
   "test/observation/verify-wow-gdi-handle-contract.ps1": {
-    "status": "supplemental-producer-review",
-    "reason": "P193 expanded scan found direct CL/NASM or Add-Type compilation; retention, current callers and real build effect must be reviewed before deciding retire/consolidate/migrate. Not counted as completed or as a required Full test.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "status": "supplemental-retired",
+    "reason": "P196 retires obsolete diagnostics or consolidates retained host contracts through CMD/CMake; five font cases and public metafile roundtrip pass. No product or original guest changes.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-host-contracts.md"
   },
   "test/observation/verify-wow-glyph-outline-rotation.ps1": {
-    "status": "supplemental-producer-review",
-    "reason": "P193 expanded scan found direct CL/NASM or Add-Type compilation; retention, current callers and real build effect must be reviewed before deciding retire/consolidate/migrate. Not counted as completed or as a required Full test.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "status": "supplemental-retired",
+    "reason": "P196 retires obsolete diagnostics or consolidates retained host contracts through CMD/CMake; five font cases and public metafile roundtrip pass. No product or original guest changes.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-host-contracts.md"
   },
   "test/observation/verify-wow-metafile-host.ps1": {
-    "status": "supplemental-producer-review",
-    "reason": "P193 expanded scan found direct CL/NASM or Add-Type compilation; retention, current callers and real build effect must be reviewed before deciding retire/consolidate/migrate. Not counted as completed or as a required Full test.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P196 retires obsolete diagnostics or consolidates retained host contracts through CMD/CMake; five font cases and public metafile roundtrip pass. No product or original guest changes.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-host-contracts.md"
   },
   "test/observation/verify-wow-reply-contract.ps1": {
     "status": "supplemental-producer-review",
