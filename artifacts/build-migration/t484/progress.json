@@ -1,15 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "7173c7a000ecf0a66766d412b9203900127fe0df",
+  "head": "e2c5334a4a1d39b4ffd0f696b43c1aaceef06852",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/common/native-hook/verify-packet.ps1",
-    " D tools/audit/Build-BrokerCallbackBarrier.mjs",
+    " D test/adapter-mvdm-host-out/wow/verify_clipboard_format_ownership.py",
+    " D test/adapter-mvdm-host-out/wow/verify_keyboard_boundaries.py",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    " M tools/build/fixtures/wow-host-contracts.cmake",
+    "?? docs/etc/evidence/t484-s3-controlled-boundaries.md",
+    "?? test/adapter-mvdm-host-out/wow/verify-controlled-boundaries.ps1"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6488,6 +6489,12 @@
     }
   ],
   "commits": {
+    "e2c5334a4a1d39b4ffd0f696b43c1aaceef06852": {
+      "subject": "M0 T484 S3 P199: reconcile missed producers and migrate packet tests",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+      ]
+    },
     "7173c7a000ecf0a66766d412b9203900127fe0df": {
       "subject": "M0 T484 S3 P198: retire old visual probes and cache retained interop",
       "evidence": [

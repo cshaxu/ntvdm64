@@ -1869,3 +1869,5 @@ post-publication targeted checks.
 [T484 S3 final supplemental producers](evidence/t484-s3-final-managed-producers.md) records old Win1.01 diagnostic retirement and native OEM/fatal interop.
 
 [T484 S3 direct-producer reconciliation](evidence/t484-s3-direct-producer-reconciliation.md) records missed compiler candidates and packet/obsolete-barrier disposition.
+
+[T484 S3 controlled WOW boundaries](evidence/t484-s3-controlled-boundaries.md) records shared extraction/build and preserved31-case assertions.
