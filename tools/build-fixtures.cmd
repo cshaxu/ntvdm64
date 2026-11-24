@@ -47,6 +47,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="planar-painter" set "SELECTED=1"
+if "%TARGET%"=="planar-painter" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="ntvwm-modern-edit-mouse" set "SELECTED=1"
 if "%TARGET%"=="ntvwm-modern-edit-mouse" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="niddb-no-retry" set "SELECTED=1"
@@ -212,6 +214,7 @@ for %%I in (cpu-contracts ccpu-neg64 ccpu-neg64-negative ccpu-leaf ccpu-leaf-neg
 if "%TARGET%"=="dem-declarations" goto worker
 if "%TARGET%"=="console-contracts" goto worker
 if "%TARGET%"=="host-thread-boundaries" goto worker
+if "%TARGET%"=="planar-painter" goto worker
 if "%TARGET%"=="dem-directory-reset" goto worker
 if "%TARGET%"=="ccpu-callback" goto worker
 if "%TARGET%"=="wow-controls" goto controls

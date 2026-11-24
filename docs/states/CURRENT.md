@@ -94,7 +94,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P88 NIDDB/diagnostic cleanup](../etc/evidence/t484-s3-niddb-retirement.md) | NIDDB10, actual Edit, consolidated mapping and direct monitor pass; five duplicate/expired files removed. Cached build/publication hash checks pass. |
 
-Implementation batches through P88 passed their cached full host build. P73 checks11 raw host inputs
+| [P89 painter contract](../etc/evidence/t484-s3-planar.md) | Current CHAIN2 oracle corrected;182801 checks and wrong-pixel negative pass; duplicate QEVNT forwarding script retired. |
+
+Implementation batches through P89 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

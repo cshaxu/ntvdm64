@@ -123,3 +123,13 @@ add_custom_target(ccpu-callback DEPENDS "${CMAKE_BINARY_DIR}/original-callback-c
 add_custom_target(command-launch DEPENDS "${CMAKE_BINARY_DIR}/ntvdm-command-launch-test.exe")
 
 worker_group(dem-directory-reset "dem-directory-reset-test.exe")
+# The fixture uses the same header/profile owner as its actual painter objects.
+get_target_property(planar_flags unit_obj_host_nt_ega_obj COMPILE_FLAGS)
+string(REPLACE "/D_NO_CRT_STDIO_INLINE" "" planar_flags "${planar_flags}")
+worker_unit("obj/tests/planar_painter_object_fixture.obj"
+  "${NTVDM_REPO}/test/mvdm-host/planar_painter_object_fixture.c" "${planar_flags}")
+worker_link("planar-object.exe" "/nologo /opt:ref /out:$out /map:$out.map"
+  "kernel32.lib user32.lib gdi32.lib"
+  INPUTS "obj/tests/planar_painter_object_fixture.obj" "obj/host/nt_cga.obj"
+    "obj/host/nt_ega.obj" "obj/host/nt_munge.obj")
+worker_group(planar-painter "planar-object.exe")

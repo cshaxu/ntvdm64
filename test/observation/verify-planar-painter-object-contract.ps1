@@ -1,23 +1,19 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$OutputRoot,[string]$WorkerBuild='build/.ninja/msvc-x86-release/worker')
+param([Parameter(Mandatory)][string]$OutputRoot)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $out=[IO.Path]::GetFullPath((Join-Path $repo $OutputRoot))
 if(!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Fresh build-owned output required'}
-$cache=(Resolve-Path (Join-Path $repo $WorkerBuild)).Path
+$cache=(Resolve-Path (Join-Path $repo 'build/.ninja/msvc-x86-release/worker')).Path
 $null=New-Item -ItemType Directory -Path $out
-$driver=Join-Path $repo 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'
+& "$repo/tools/build-fixtures.cmd" x86 planar-painter *> "$out/build.log"
+if($LASTEXITCODE){throw 'Native painter build failed'}
 $source=Join-Path $repo 'test/mvdm-host/planar_painter_object_fixture.c'
-$graph=[IO.File]::ReadAllLines("$cache/build.ninja")
-$flags=($graph|Where-Object {$_ -like 'host_cflags = *'}).Substring(14).Replace('$:',':').Replace('/D_NO_CRT_STDIO_INLINE','')
-$flags=[regex]::Replace($flags,'(?i)(?<!\S)/(?:c|TC)(?!\S)','')
-if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/DV7VGA')){throw 'Wrong original object profile'}
 $objects=@('nt_cga','nt_ega','nt_munge')|ForEach-Object {Join-Path $cache "obj/host/$_.obj"}
-$inputs=@($PSCommandPath,$source,$driver,"$cache/build.ninja")+$objects+@('nt_cga','nt_ega','nt_munge'|ForEach-Object {Join-Path $repo "src/mvdm-host/softpc.new/host/src/$_.c"})
+$inputs=@($PSCommandPath,$source,"$cache/build.ninja")+$objects+@('nt_cga','nt_ega','nt_munge'|ForEach-Object {Join-Path $repo "src/mvdm-host/softpc.new/host/src/$_.c"})
 Get-FileHash -LiteralPath $inputs|Export-Csv "$out/inputs.csv" -NoTypeInformation
-$linked=($objects|ForEach-Object {'"'+$_+'"'}) -join ' '
-$command='@echo off'+"`r`n"+'call "'+$driver+'" cl.exe /nologo /MT /O2 '+$flags+' "'+$source+'" '+$linked+' /Fo:"'+$out+'/fixture.obj" /Fe:"'+$out+'/planar-object.exe" /link /opt:ref /map:"'+$out+'/planar-object.map" kernel32.lib user32.lib gdi32.lib'+"`r`n"+'exit /b %errorlevel%'+"`r`n"
-[IO.File]::WriteAllText("$out/build.cmd",$command,[Text.Encoding]::ASCII)
+Copy-Item "$cache/planar-object.exe" "$out/planar-object.exe"
+Copy-Item "$cache/planar-object.exe.map" "$out/planar-object.map"
 function RunOwned($name,$image,$arguments,$expected){
     $start=@{FilePath=$image;WindowStyle='Hidden';WorkingDirectory=$repo;RedirectStandardOutput="$out/$name.stdout.txt";RedirectStandardError="$out/$name.stderr.txt";PassThru=$true}
     if($arguments){$start.ArgumentList=$arguments}
@@ -30,7 +26,6 @@ function RunOwned($name,$image,$arguments,$expected){
         if($code -ne $expected){throw "Unexpected $name exit $code"}
     }finally{if(!$p.HasExited){$p.Kill($true);$p.WaitForExit()};$p.Dispose()}
 }
-RunOwned build $env:ComSpec ('/d /s /c ""'+$out+'/build.cmd""') 0
 RunOwned normal "$out/planar-object.exe" '' 0
 RunOwned negative "$out/planar-object.exe" '--wrong-pixel' 1
 $normal=[IO.File]::ReadAllText("$out/normal.stdout.txt")

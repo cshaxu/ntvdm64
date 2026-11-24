@@ -92,7 +92,11 @@ static void cga_case(unsigned sample,unsigned scale,unsigned parity)
     clear_case();
     for(ox=0;ox<len*pixels;++ox){
         int src_pixel=((2*ox+1)*4)/(2*pixels),group=src_pixel/4,bit=6-2*(src_pixel%4);
-        int address=offset+4*(group/2)+(group%2?(parity?3:1):0);
+        /* Standard CGA consumes CHAIN2 lanes: byte pairs are eight bytes
+         * apart in the planar store. Scaled painters retain their packed view. */
+        int address=scale==0
+            ? ((offset/4)*8+offset%4)+8*(group/2)+(group%2?(parity?7:1):0)
+            : offset+4*(group/2)+(group%2?(parity?3:1):0);
         BYTE value=(source[address]>>bit)&3;
         for(r=0;r<(int)(2+scale);++r)expected[GUARD+(top+r)*PITCH+left+ox]=value;
     }

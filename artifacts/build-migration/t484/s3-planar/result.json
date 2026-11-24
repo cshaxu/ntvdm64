@@ -1,0 +1,39 @@
+{
+  "contract": {
+    "result": "pass",
+    "fixture_sha256": "A7E5BBBECDE4842835135FDAB5EFDD8FBB288FDA4CD515280EE4B22E8C2328E9",
+    "callbacks": 26114,
+    "cases": 26114,
+    "scope": "Actual cached original painter/LUT/munge objects; controlled DIB and invalidation sink, fail-fast traps for untested text/mono services, not guest or full rendering lifecycle",
+    "checks": 182801
+  },
+  "first": {
+    "exit": 1,
+    "pid": 26204,
+    "finished": "2026-11-24T01:17:09.4276238+01:00",
+    "started": "2026-11-24T01:16:42.7051981+01:00"
+  },
+  "first_marker": "PLANAR_OBJECT_CONTRACT checks=182801 failures=1024 callbacks=26114 cases=26114 wrong_oracle=0",
+  "current": {
+    "exit": 0,
+    "finished": "2026-11-24T01:19:07.8442539+01:00",
+    "started": "2026-11-24T01:18:41.3385358+01:00",
+    "pid": 18880
+  },
+  "negative": {
+    "exit": 1,
+    "finished": "2026-11-24T00:19:07.7194176Z",
+    "expected": 1
+  },
+  "final": {
+    "finished": "2026-11-24T01:20:59.8277024+01:00",
+    "pid": 11332,
+    "started": "2026-11-24T01:19:39.4535549+01:00",
+    "exit": 0
+  },
+  "cache": {
+    "time": 639310763450269369,
+    "hash": "A7E5BBBECDE4842835135FDAB5EFDD8FBB288FDA4CD515280EE4B22E8C2328E9",
+    "path": "build/.ninja/msvc-x86-release/worker/planar-object.exe"
+  }
+}

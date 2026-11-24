@@ -596,5 +596,15 @@
     "status": "retired",
     "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
     "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
+  },
+  "test/observation/verify-planar-painter-object-contract.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-planar.md",
+    "reason": "Native painter target replaces old compiler recipe; current CHAIN2 oracle and all182801 checks pass",
+    "status": "migrated-delivered"
+  },
+  "test/observation/verify-qevnt-object-contract.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-planar.md",
+    "reason": "Redundant forwarding wrapper with no extra assertions or active callers; shared QEVNT contract retained under B0153",
+    "status": "retired-with-delivery-evidence"
   }
 }

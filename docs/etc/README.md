@@ -1665,3 +1665,5 @@ post-publication targeted checks.
 - [DPMI/native runner reconciliation](evidence/t484-s3-dpmi-reconciliation.md)
 
 - [NIDDB and diagnostic consolidation](evidence/t484-s3-niddb-retirement.md)
+
+- [Painter contract and duplicate entry retirement](evidence/t484-s3-planar.md)

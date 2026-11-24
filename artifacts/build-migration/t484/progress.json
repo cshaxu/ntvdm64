@@ -1,42 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "7c9ead0ef0387f06b98b55e6c34146e4edfd1c70",
+  "head": "8cd4d80d5c5c83e1b7fc9ad455f8599aba463054",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/adapter-mvdm-host-out/physical_alias_empty_fixture.c",
-    " M test/compat/physical_mapping_test.c",
-    " D test/integration/verify-monitor-layout.ps1",
-    " D test/observation/observer_empty_environment_probe.c",
-    " M test/observation/verify-niddb-no-retry.py",
-    " M test/observation/verify-ntvwm-modern-edit-mouse.ps1",
-    " D test/observation/verify-observer-empty-environment.ps1",
-    " D test/observation/verify-physical-alias-empty.ps1",
+    " M test/mvdm-host/planar_painter_object_fixture.c",
+    " M test/observation/verify-planar-painter-object-contract.ps1",
+    " D test/observation/verify-qevnt-object-contract.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    " M tools/build/fixtures/console-contracts.cmake",
-    "?? artifacts/build-migration/t484/s3-niddb/",
-    "?? docs/etc/evidence/t484-s3-niddb-retirement.md",
-    "?? tools/build/fixtures/niddb.cmake"
+    " M tools/build/worker/observation-tests.cmake",
+    "?? artifacts/build-migration/t484/s3-planar/",
+    "?? docs/etc/evidence/t484-s3-planar.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 101,
-    "unchanged": 131,
-    "removed": 123
+    "changed": 102,
+    "unchanged": 129,
+    "removed": 124
   },
   "disposition_counts": {
-    "migrated-delivered": 44,
+    "migrated-delivered": 45,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 120,
+    "retired-with-delivery-evidence": 124,
     "pending-producer-migration": 53,
     "retained-native-delegate": 9,
-    "requires-disposition-reconciliation": 123,
-    "retired": 3,
+    "requires-disposition-reconciliation": 121,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 181,
+  "existing_interpreted_candidates_with_command_hits": 180,
   "files": [
     {
       "id": "B0001",
@@ -626,9 +618,13 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
-      "completion": "retired",
+      "revisions": [
+        "8cd4d80d5c5c83e1b7fc9ad455f8599aba463054"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-niddb-retirement.md"
+      ],
+      "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired",
         "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
@@ -2480,8 +2476,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "6f0024f1e774c42d9b9e92fce4ed90d5bdb65f99b7439af8efb78f86cd8679e9",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "8cd4d80d5c5c83e1b7fc9ad455f8599aba463054"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-niddb-retirement.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -2555,8 +2555,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "907a8a48df8aec36de8872ae8b866e2a391b991b9bace81a1b06cbb99d7288ea",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "8cd4d80d5c5c83e1b7fc9ad455f8599aba463054"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-niddb-retirement.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -2585,9 +2589,13 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
-      "completion": "retired",
+      "revisions": [
+        "8cd4d80d5c5c83e1b7fc9ad455f8599aba463054"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-niddb-retirement.md"
+      ],
+      "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired",
         "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
@@ -2600,9 +2608,13 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
-      "completion": "retired",
+      "revisions": [
+        "8cd4d80d5c5c83e1b7fc9ad455f8599aba463054"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-niddb-retirement.md"
+      ],
+      "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired",
         "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
@@ -2613,23 +2625,31 @@
       "id": "B0145",
       "file": "test/observation/verify-planar-painter-object-contract.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "a72abd935b4af9311c75412448be96c4be35bb018f4810bae5ad9f91d444e55d",
+      "state": "changed",
+      "current_sha256": "2887306a03105f778dbb72651a0b7c0bf57f0e4a6b3a4afd6cede0ec4c245e10",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-planar.md",
+        "reason": "Native painter target replaces old compiler recipe; current CHAIN2 oracle and all182801 checks pass",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0146",
       "file": "test/observation/verify-qevnt-object-contract.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "584e609117014278ef8bd68617d608c4f6528f823497d84e881d1fc0077f7c8e",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-planar.md",
+        "reason": "Redundant forwarding wrapper with no extra assertions or active callers; shared QEVNT contract retained under B0153",
+        "status": "retired-with-delivery-evidence"
+      }
     },
     {
       "id": "B0147",
@@ -5343,6 +5363,12 @@
     }
   ],
   "commits": {
+    "8cd4d80d5c5c83e1b7fc9ad455f8599aba463054": {
+      "subject": "T484 S3 P88 retire redundant probes and migrate current native contracts",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-niddb-retirement.md"
+      ]
+    },
     "7c9ead0ef0387f06b98b55e6c34146e4edfd1c70": {
       "subject": "T484 S3 P87 retire DPMI audit generation and reconcile native runners",
       "evidence": [
@@ -7305,34 +7331,12 @@
       "file": "test/observation/verify-planar-painter-object-contract.ps1",
       "hits": [
         {
-          "line": 2,
-          "text": "param([Parameter(Mandatory)][string]$OutputRoot,[string]$WorkerBuild='build/.ninja/msvc-x86-release/worker')"
+          "line": 7,
+          "text": "$cache=(Resolve-Path (Join-Path $repo 'build/.ninja/msvc-x86-release/worker')).Path"
         },
         {
-          "line": 9,
-          "text": "$driver=Join-Path $repo 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'"
-        },
-        {
-          "line": 11,
-          "text": "$graph=[IO.File]::ReadAllLines(\"$cache/build.ninja\")"
-        },
-        {
-          "line": 16,
-          "text": "$inputs=@($PSCommandPath,$source,$driver,\"$cache/build.ninja\")+$objects+@('nt_cga','nt_ega','nt_munge'|ForEach-Object {Join-Path $repo \"src/mvdm-host/softpc.new/host/src/$_.c\"})"
-        },
-        {
-          "line": 19,
-          "text": "$command='@echo off'+\"`r`n\"+'call \"'+$driver+'\" cl.exe /nologo /MT /O2 '+$flags+' \"'+$source+'\" '+$linked+' /Fo:\"'+$out+'/fixture.obj\" /Fe:\"'+$out+'/planar-object.exe\" /link /opt:ref /map:\"'+$out+'/planar-object.map\" kernel32.lib user32.lib gdi32.lib'+\"`r`n\"+'exit /b %errorlevel%'+\"`r`n\""
-        }
-      ]
-    },
-    {
-      "id": "B0146",
-      "file": "test/observation/verify-qevnt-object-contract.ps1",
-      "hits": [
-        {
-          "line": 4,
-          "text": "[string]$WorkerBuild = 'build/.ninja/msvc-x86-release/worker'"
+          "line": 13,
+          "text": "$inputs=@($PSCommandPath,$source,\"$cache/build.ninja\")+$objects+@('nt_cga','nt_ega','nt_munge'|ForEach-Object {Join-Path $repo \"src/mvdm-host/softpc.new/host/src/$_.c\"})"
         }
       ]
     },
