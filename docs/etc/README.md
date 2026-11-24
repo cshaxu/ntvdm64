@@ -1733,3 +1733,5 @@ post-publication targeted checks.
 - [T484 S3 task-close and Winsock producers](evidence/t484-s3-close-winsock.md)
 
 - [T484 S3 shared lifecycle producer](evidence/t484-s3-lifecycle-native.md)
+
+- [T484 S3 lifecycle contracts and cleanup](evidence/t484-s3-lifecycle-classes.md)

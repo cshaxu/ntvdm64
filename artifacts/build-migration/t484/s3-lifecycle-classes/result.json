@@ -1,0 +1,35 @@
+{
+  "final": {
+    "pid": 3616,
+    "finished": "2026-11-24T05:11:12.6477165+01:00",
+    "started": "2026-11-24T05:09:42.9915911+01:00",
+    "exit": 0
+  },
+  "failedAttempt": {
+    "finished": "2026-11-24T05:03:59.0561454+01:00",
+    "pid": 26592,
+    "started": "2026-11-24T05:03:33.7566036+01:00",
+    "exit": 1
+  },
+  "publication": {
+    "publishedCopies": 22,
+    "republished": false,
+    "rawInputs": 11,
+    "unchanged": true
+  },
+  "validation": {
+    "exit": 0,
+    "pid": 30220,
+    "started": "2026-11-24T05:06:49.1425066+01:00",
+    "finished": "2026-11-24T05:08:41.2704331+01:00"
+  },
+  "completedNormalCases": 17,
+  "obsoleteProducerLinesRemoved": 46,
+  "cache": {
+    "sha256": "BFEA4755319E861FB7CCE3FC3DB31E1836F51249829DF153D8B08BE4DD8A4640",
+    "mtime": "2026-11-24T03:55:22.9284056Z",
+    "wrongArch": 2
+  },
+  "fileComplete": false,
+  "remainingNormalCases": 13
+}

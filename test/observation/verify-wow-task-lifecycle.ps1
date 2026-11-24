@@ -56,7 +56,7 @@ if ($Case -eq 'task-close-result') {
     $result
     return
 }
-$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect') -and !$InitRollback -and !$RetirementLockProbe
+$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime') -and !$InitRollback -and !$RetirementLockProbe
 if($nativeCase){
     $kind=if($Case -eq 'task-lifecycle'){'task'}else{$Case}
     & "$repo/tools/build-fixtures.cmd" x86 "wow-lifecycle-$kind" *> "$out/build.log"
@@ -257,9 +257,7 @@ if ($combinedSeams -eq $compile) { throw 'Combined fixture seam substitution fai
 Invoke-Build ($combinedSeams.Replace('/Gz', '/Gd'))
 $fixtureSupportObjects += Join-Path $out 'combined-seams.obj'
 Invoke-NinjaTarget $provider 'obj/compat/wow_user_task_lifecycle.obj'
-$fixtureName = if ($Case -eq 'class-client') { 'wow_class_client_fixture.c' } else { 'wow_user_task_lifecycle_fixture.c' }
-if ($Case -eq 'original-hook-cleanup') { $fixtureName = 'wow_original_hook_cleanup_fixture.c' }
-if ($Case -eq 'class-lifetime') { $fixtureName = 'wow_window_class_lifetime_fixture.c' }
+$fixtureName = 'wow_user_task_lifecycle_fixture.c'
 if ($Case -eq 'process-retirement') { $fixtureName = 'wow_process_retirement_fixture.c' }
 if ($Case -eq 'native-dispatch-gate') {
     Invoke-NinjaTarget $provider 'obj/compat/wow_window_words_binding.obj'
@@ -273,16 +271,10 @@ if ($Case -eq 'standard-class') {
     Invoke-NinjaTarget $provider 'obj/compat/wow_standard_class_bindings.obj obj/compat/wow_class_words_binding.obj'
     $fixtureName = 'wow_standard_class_fixture.c'
 }
-if ($Case -eq 'class-query') {
-    Invoke-NinjaTarget $provider 'obj/compat/wow_class_client_bindings.obj obj/compat/wow_user_private_access.obj'
-    $fixtureName = 'wow_class_query_fixture.c'
-}
 if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
     Invoke-NinjaTarget $provider 'obj/compat/wow_user_registration_bridge.obj'
     $fixtureName = 'wow_init_notification_fixture.c'
 }
-if ($Case -eq 'task-order') { $fixtureName = 'wow_task_order_fixture.c' }
-if ($Case -eq 'thunk-scope') { $fixtureName = 'wow_user_thunk_scope_fixture.c' }
 if ($Case -eq 'native-creation') { $fixtureName = 'wow_native_creation_binding_fixture.c' }
 $fixturePath = Join-Path $repo ('test/adapter-mvdm-host-out/wow/' + $fixtureName)
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource','page-domain')) { $fixturePath = Join-Path $repo 'test/mvdm-host/wow_page_domain_fixture.c' }
@@ -306,40 +298,6 @@ if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource
 if ($Case -eq 'window-reclaim') { $fixture += ' /DWOW_RECLAIM_FAILURE_FIXTURE' }
 if ($Case -eq 'graph-snapshot') { $fixture += ' /DWOW_GRAPH_SNAPSHOT_FIXTURE' }
 if ($Case -eq 'menu-resource') { $fixture += ' /DWOW_RESOURCE_CLIENT_FIXTURE' }
-if ($Case -eq 'start-notification') { $fixture += ' /DWOW_START_NOTIFICATION_FIXTURE' }
-if ($Case -eq 'menu-cleanup') { $fixture += ' /DWOW_MENU_CLEANUP_FIXTURE' }
-if ($Case -eq 'task-order') { $fixture += ' /we4113 /we4047' }
-if ($Case -in @('native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect')) { $fixture += ' /DWOW_NATIVE_SEND_FIXTURE' }
-if ($Case -eq 'native-indirect') { $fixture += ' /DWOW_NATIVE_INDIRECT_FIXTURE' }
-if ($Case -eq 'native-reply') { $fixture += ' /DWOW_NATIVE_REPLY_FIXTURE' }
-if ($Case -eq 'native-nested') {
-    $fixture += ' /DWOW_NATIVE_NESTED_FIXTURE /I"'+$out+'"'
-    # Compile the actual current production macro, not a handwritten copy of
-    # its exception/finally algorithm. Only the native throwing leaf differs.
-    $nativeOwner = Join-Path $repo 'src/compat/wow_user_task_lifecycle.c'
-    $nativeText = [IO.File]::ReadAllText($nativeOwner).Replace("`r`n","`n")
-    $afterStart = $nativeText.IndexOf('#define WOW_NATIVE_CALL_AFTER(')
-    $afterEnd = $nativeText.IndexOf('#define WOW_NATIVE_CALL_RESULT(', $afterStart)
-    $messageStart = $nativeText.IndexOf('#define WOW_NATIVE_MESSAGE(')
-    $messageEnd = $nativeText.IndexOf('WOW_NATIVE_MESSAGE(SendMessageA,', $messageStart)
-    if ($afterStart -lt 0 -or $afterEnd -le $afterStart -or
-            $messageStart -lt 0 -or $messageEnd -le $messageStart) {
-        throw 'Production native-call macro source shape changed'
-    }
-    $macroText = $nativeText.Substring($afterStart,$afterEnd-$afterStart) +
-        $nativeText.Substring($messageStart,$messageEnd-$messageStart)
-    $macroPath = "$out/wow_native_fixture_call.h"
-    Set-Content -LiteralPath $macroPath -Value $macroText -Encoding ascii
-    @{source=$nativeOwner;sourceSha256=(Get-FileHash $nativeOwner).Hash;
-        macrosSha256=(Get-FileHash $macroPath).Hash;nativeLeaf='native_service_fault'} |
-        ConvertTo-Json | Set-Content "$out/native-exception-source.json"
-}
-if ($Case -eq 'native-seen') { $fixture += ' /DWOW_NATIVE_SEEN_FIXTURE' }
-if ($Case -eq 'native-identity') { $fixture += ' /DWOW_NATIVE_IDENTITY_FIXTURE' }
-if ($Case -eq 'native-foreign') { $fixture += ' /DWOW_NATIVE_FOREIGN_FIXTURE' }
-# The thunk fixture supplies original LPFNW32 callbacks. With this profile's
-# FASTCALL definition they inherit /Gz, exactly like the production provider.
-# Compiling those callbacks as /Gd corrupts the stack at the first invocation.
 if ($Case -eq 'page-domain') {
     # Use the exact object selected by the worker's original standalone test
     # edge; the production provider closure below supplies its current owners.
@@ -350,9 +308,7 @@ if ($Case -eq 'page-domain') {
         (Get-FileHash -LiteralPath (Join-Path $out 'fixture.obj')).Hash) {
         throw 'Worker page-domain fixture copy did not preserve its object bytes'
     }
-} elseif ($Case -eq 'original-hook-cleanup') { Invoke-Build $fixture }
-elseif ($Case -eq 'thunk-scope') { Invoke-Build ($fixture + ' /we4113 /we4047') }
-else { Invoke-Build ($fixture.Replace('/Gz', '/Gd')) }
+} else { Invoke-Build ($fixture.Replace('/Gz', '/Gd')) }
 $staticImports = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\worker-static-imports.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_worker_static_imports.c"')
 if ($staticImports -eq $compile) { throw 'Static import substitution failed' }
 Invoke-Build ($staticImports.Replace('/Gz', '/Gd'))
@@ -433,9 +389,7 @@ if ($Case -in @('menu-resource','page-domain')) {
 if ($Case -notin @('window-borrow','window-reclaim','graph-snapshot','menu-resource','page-domain','native-creation','class-procedure','standard-class','window-procedure')) {
 $parentStub = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\parent-stub.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_page_domain_parent_stub.c"')
 if ($parentStub -eq $compile) { throw 'Parent-stub substitution failed' }
-if ($Case -in @('class-client','class-query','class-lifetime')) { $parentStub += ' /DWOW_CLASS_CLIENT_FIXTURE' }
-else { $parentStub += ' /DWOW_TASK_CLASS_PROJECTION_FIXTURE' }
-if ($Case -eq 'menu-cleanup') { $parentStub += ' /DWOW_MENU_CLEANUP_FIXTURE' }
+$parentStub += ' /DWOW_TASK_CLASS_PROJECTION_FIXTURE'
 Invoke-Build ($parentStub.Replace('/Gz', '/Gd'))
 $parentObjects = @((Join-Path $out 'parent-stub.obj'))
     # These native-only fixtures deliberately replace seven storage leaves.

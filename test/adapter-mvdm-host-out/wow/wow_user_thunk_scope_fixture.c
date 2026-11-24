@@ -2,6 +2,7 @@
 #include "wow_user_borrow_scope.h"
 #include "wow_user_thunk_scope.h"
 #include "../../mvdm-host/wow_thunk_provider.h"
+#include "wow_window_access_fixture_provider.h"
 
 static unsigned errors, calls;
 static HWND window;
@@ -79,6 +80,7 @@ int __cdecl main(void)
     BOOL caught = FALSE;
     wow_thunk_frame view;
     wow_thunk_provider other = thunk_provider;
+    if (!wow_window_access_bind(&wow_fixture_window_access_provider)) return 3;
     CHECK(!wow_thunk_bind(NULL) && GetLastError() == ERROR_INVALID_PARAMETER);
     CHECK(wow_thunk_bind(&thunk_provider) && wow_thunk_bind(&thunk_provider));
     CHECK(!wow_thunk_bind(&other) && GetLastError() == ERROR_ALREADY_INITIALIZED);

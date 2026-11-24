@@ -1,19 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "690bbf119147f428cca0054f850c54da9c20f6bc",
+  "head": "2e08d0c43ceb2296d1936dee8cb82987915b2dc7",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
+    " M test/adapter-mvdm-host-out/wow/wow_user_thunk_scope_fixture.c",
     " M test/observation/verify-wow-task-lifecycle.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/worker/CMakeLists.txt",
-    " M tools/build/wow32/CMakeLists.txt",
-    " M tools/build/wow32/shell-tests.cmake",
-    "?? artifacts/build-migration/t484/s3-lifecycle-native/",
-    "?? docs/etc/evidence/t484-s3-lifecycle-native.md",
-    "?? tools/build/worker/lifecycle-tests.cmake",
-    "?? tools/build/wow32/lifecycle-tests.cmake"
+    " M tools/build/wow32/lifecycle-tests.cmake",
+    "?? artifacts/build-migration/t484/s3-lifecycle-classes/",
+    "?? docs/etc/evidence/t484-s3-lifecycle-classes.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -3710,18 +3707,20 @@
       "file": "test/observation/verify-wow-task-lifecycle.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "a691cfafcfdc33684a7c217b40bb343ffeef23910f3e50ad6d5f14d5f9bb332a",
+      "current_sha256": "bdf34e43de80378134116298f4d2f4e90d8ad876c769485aeca39649b3d17a2e",
       "revisions": [
+        "2e08d0c43ceb2296d1936dee8cb82987915b2dc7",
         "690bbf119147f428cca0054f850c54da9c20f6bc"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-close-winsock.md"
+        "docs/etc/evidence/t484-s3-close-winsock.md",
+        "docs/etc/evidence/t484-s3-lifecycle-native.md"
       ],
       "completion": "requires-disposition-reconciliation",
       "decision": {
         "status": "requires-disposition-reconciliation",
-        "reason": "Partial:9/30 normal cases use native targets; remaining21 and fault variants retain old producer, no completion credit",
-        "evidence": "docs/etc/evidence/t484-s3-lifecycle-native.md"
+        "reason": "Partial:17/30 normal cases use native targets; remaining13 and fault variants retain old producer; obsolete migrated branches removed, no completion credit",
+        "evidence": "docs/etc/evidence/t484-s3-lifecycle-classes.md"
       }
     },
     {
@@ -5867,6 +5866,12 @@
     }
   ],
   "commits": {
+    "2e08d0c43ceb2296d1936dee8cb82987915b2dc7": {
+      "subject": "T484 S3 P122 share native lifecycle fixture build graph",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-lifecycle-native.md"
+      ]
+    },
     "690bbf119147f428cca0054f850c54da9c20f6bc": {
       "subject": "T484 S3 P121 native task-close contract and Winsock producer",
       "evidence": [
@@ -8610,63 +8615,63 @@
           "text": "$commands = & $ninja -C $provider -t commands wow32.dll"
         },
         {
-          "line": 366,
+          "line": 322,
           "text": "$workerCommands = & $ninja -C $worker -t commands softpc-bindings.lib"
         },
         {
-          "line": 388,
+          "line": 344,
           "text": "# link parent-stub definitions beside the selected real CCPU implementation."
         },
         {
-          "line": 407,
+          "line": 363,
           "text": "$workerCommands = & $ninja -C $worker -t commands softpc-bindings.lib"
         },
         {
-          "line": 446,
+          "line": 400,
           "text": "$workerCommands = & $ninja -C $worker -t commands softpc-bindings.lib"
         },
         {
-          "line": 458,
+          "line": 412,
           "text": "# entry instead of allowing duplicate definitions at final link."
         },
         {
-          "line": 482,
+          "line": 436,
           "text": "$link = $commands | Where-Object { $_ -match '/out:wow32\\.dll' } | Select-Object -Last 1"
         },
         {
-          "line": 483,
+          "line": 437,
           "text": "if (!$link) { throw 'Missing production provider link command' }"
         },
         {
-          "line": 485,
+          "line": 439,
           "text": "$objects = @([regex]::Matches($link, '(?<!\\S)obj/[^\\s\"]+\\.obj') |"
         },
         {
-          "line": 502,
+          "line": 456,
           "text": "# Keep command lines below cmd.exe's limit without forcing a DLL link or"
         },
         {
-          "line": 503,
+          "line": 457,
           "text": "# adding unselected source files. Ninja retains normal incremental caching."
         },
         {
-          "line": 631,
+          "line": 585,
           "text": "# or link-order selection remains."
         },
         {
-          "line": 698,
+          "line": 652,
           "text": "# Fault rows above explicitly exclude replaced objects; never let link order"
         },
         {
-          "line": 700,
+          "line": 654,
           "text": "Invoke-Build ('link /nologo /NODEFAULTLIB:ntvdm.lib /out:\"'+$out+'\\fixture.exe\" /map:\"'+$out+'\\fixture.map\" \"'+$out+'\\fixture.obj\" '+(($parentObjects | ForEach-Object { '\"'+$_+'\"' }) -join ' ')+' \"'+$out+'\\provider.lib\" '+((@($workerObjects)+@($fixtureSupportObjects)+@($fixtureLibraries) | ForEach-Object { '\"'+$_+'\"' }) -join ' ')+' legacy-wow-user32.lib legacy-wow-kernel32.lib legacy-wow-ntdll.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib shell32.lib advapi32.lib ntdll.lib oldnames.lib libcmt.lib libvcruntime.lib libucrt.lib')"
         },
         {
-          "line": 702,
+          "line": 656,
           "text": "throw \"Task cleanup fixture link produced no executable: $out\\fixture.exe\""
         },
         {
-          "line": 780,
+          "line": 734,
           "text": "!($fixtureOutput -match '^WOW_WINDOW_CLASS_SHARED_LIFETIME errors=0 callbacks=1 native_failure_retains_node=32$')) {"
         }
       ]

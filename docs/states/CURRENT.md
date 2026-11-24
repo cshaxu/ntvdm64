@@ -82,7 +82,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P122 shared lifecycle](../etc/evidence/t484-s3-lifecycle-native.md) | Eight additional normal cases pass via shared native graph; cached full build/cache/publication hashes pass. B0195 remains partial:9/30 normal cases native. |
 
-Completed implementation batches through P122 passed their cached full host build. P73 checks11 raw host inputs
+| [P123 lifecycle cleanup](../etc/evidence/t484-s3-lifecycle-classes.md) | Eight more contracts native; stale thunk fixture initialization repaired;17 entry regressions pass, old producer branches removed, cached full/publication hashes pass. B0195 remains partial. |
+
+Completed implementation batches through P123 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

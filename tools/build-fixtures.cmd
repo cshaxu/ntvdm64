@@ -86,7 +86,7 @@ for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I"
 for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-winsock-provider" set "SELECTED=1"
 if "%TARGET%"=="wow-winsock-provider" if not "%~1"=="x86" exit /b 2
-for %%I in (wow-lifecycle-task wow-lifecycle-native-send wow-lifecycle-native-reply wow-lifecycle-native-nested wow-lifecycle-native-seen wow-lifecycle-native-identity wow-lifecycle-native-foreign wow-lifecycle-native-indirect) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (wow-lifecycle-task wow-lifecycle-native-send wow-lifecycle-native-reply wow-lifecycle-native-nested wow-lifecycle-native-seen wow-lifecycle-native-identity wow-lifecycle-native-foreign wow-lifecycle-native-indirect wow-lifecycle-original-hook-cleanup wow-lifecycle-task-order wow-lifecycle-thunk-scope wow-lifecycle-start-notification wow-lifecycle-menu-cleanup wow-lifecycle-class-client wow-lifecycle-class-query wow-lifecycle-class-lifetime) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET:~0,14%"=="wow-lifecycle-" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-task-close-result" set "SELECTED=1"
 if "%TARGET%"=="wow-task-close-result" if not "%~1"=="x86" exit /b 2
