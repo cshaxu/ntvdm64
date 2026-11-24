@@ -365,3 +365,5 @@ include(blocked-video.cmake)
 include(console-contracts.cmake)
 include(dpmi-buffer.cmake)
 include(niddb.cmake)
+
+include(serial-baud.cmake)

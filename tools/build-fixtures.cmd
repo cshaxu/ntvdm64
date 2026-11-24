@@ -47,6 +47,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="serial-baud" set "SELECTED=1"
+if "%TARGET%"=="serial-baud" if not "%~1"=="x86" exit /b 2
 for %%T in (redirector-remote-name redirector-server-enum) do if "%TARGET%"=="%%T" set "SELECTED=1"
 if "%TARGET%"=="redirector-remote-name" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="redirector-server-enum" if not "%~1"=="x86" exit /b 2

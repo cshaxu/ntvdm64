@@ -1669,3 +1669,5 @@ post-publication targeted checks.
 - [Painter contract and duplicate entry retirement](evidence/t484-s3-planar.md)
 
 - [Redirector producer consolidation](evidence/t484-s3-redirector.md)
+
+- [RTC investigation and serial wrapper retirement](evidence/t484-s3-rtc-serial.md)

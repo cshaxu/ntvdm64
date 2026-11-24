@@ -1,0 +1,32 @@
+{
+  "rtc_run": {
+    "exit": 1,
+    "pid": 10520,
+    "finished": "2026-11-24T01:32:06.0754613+01:00",
+    "started": "2026-11-24T01:31:59.0027212+01:00"
+  },
+  "serial_run": {
+    "pid": 24924,
+    "started": "2026-11-24T01:33:39.1644404+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T01:33:55.9380464+01:00"
+  },
+  "serial_marker": "PASS baud forwarding, failure ordering and saved state: 12 cases",
+  "serial": {
+    "finished": "2026-11-24T00:33:55.8557919Z",
+    "exit": 0,
+    "hash": "2DE744C6F9B5B8D0D408E47ABF517867F6F3CACB96DB9ACC53EA8B0B7CB4BD4C"
+  },
+  "rtc_failure": "count before=00000000 observed=3cb0ffff expected=ffff3cb0\r\nFAIL line=73: count()==expected\r\ncount before=00000001 observed=3cb00000 expected=ffff3cb1\r\nFAIL line=73: count()==expected\r\nFAIL line=74: !(regb&PIE) && memory[0x1020]==0x80 && memory[rtc_wait_flag]==0\r\ncount before=0000c34f observed=3cb0c34e expected=ffffffff\r\nFAIL line=73: count()==expected\r\nFAIL line=74: !(regb&PIE) && memory[0x1020]==0x80 && memory[rtc_wait_flag]==0\r\ncount before=0000c350 observed=3cb0c34f expected=00000000\r\nFAIL line=73: count()==expected\r\ncount before=0000c351 observed=3cb0c350 expected=00000001\r\nFAIL line=73: count()==expected\r\ncount before=0000ffff observed=3cb0fffe expected=00003caf\r\nFAIL line=73: count()==expected\r\ncount before=00010000 observed=3cb1ffff expected=00003cb0\r\nFAIL line=73: count()==expected\r\nFAIL line=75: (regb&PIE) && memory[0x1020]==0x35 && memory[rtc_wait_flag]==1\r\ncount before=000186a0 observed=3cb1869f expected=0000c350\r\nFAIL line=73: count()==expected\r\ncount before=12345678 observed=4ee45677 expected=12339328\r\nFAIL line=73: count()==expected\r\nFAIL line=77: memory[rtc_wait_flag]==0x83\r\nRTC_BIOS checks=67 failures=13\r\n",
+  "final": {
+    "exit": 0,
+    "started": "2026-11-24T01:34:30.6268865+01:00",
+    "pid": 31044,
+    "finished": "2026-11-24T01:35:35.0732687+01:00"
+  },
+  "cache": {
+    "time": 639310772255308652,
+    "path": "build/.ninja/fixtures-x86/serial-baud.exe",
+    "hash": "2DE744C6F9B5B8D0D408E47ABF517867F6F3CACB96DB9ACC53EA8B0B7CB4BD4C"
+  }
+}

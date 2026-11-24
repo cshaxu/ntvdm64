@@ -636,5 +636,15 @@
     },
     "status": "migrated-delivered",
     "reason": "Native worker owns compilation; current distinct remote/enum/OEM contracts verified"
+  },
+  "test/observation/verify-rtc-bios-contract.py": {
+    "status": "retired-with-delivery-evidence",
+    "evidence": "docs/etc/evidence/t484-s3-rtc-serial.md",
+    "reason": "Completed historical alternate-path investigation; known67/13 failure reproduced, debt and real ROM integration retained"
+  },
+  "test/observation/verify-serial-baud.py": {
+    "status": "retired-with-delivery-evidence",
+    "evidence": "docs/etc/evidence/t484-s3-rtc-serial.md",
+    "reason": "Unused Python generator/compiler wrapper removed; unchanged current12-case fixture directly builds/runs through native serial-baud target"
   }
 }

@@ -1,33 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "fdc1d735aca5b1cc41971a3043934ba2442a12cd",
+  "head": "38ded14cca19b1029fd08bdf2a93ec7e963946c6",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-redirector-remote-name.ps1",
-    " M test/observation/verify-redirector-server-enum.ps1",
+    " D test/observation/verify-rtc-bios-contract.py",
+    " D test/observation/verify-serial-baud.py",
     " M tools/build-fixtures.cmd",
-    " M tools/build/worker/observation-tests.cmake",
-    "?? artifacts/build-migration/t484/s3-redirector/",
-    "?? docs/etc/evidence/t484-s3-redirector.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-rtc-serial/",
+    "?? docs/etc/evidence/t484-s3-rtc-serial.md",
+    "?? tools/build/fixtures/serial-baud.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 104,
-    "unchanged": 127,
-    "removed": 124
+    "unchanged": 125,
+    "removed": 126
   },
   "disposition_counts": {
     "migrated-delivered": 47,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 124,
+    "retired-with-delivery-evidence": 126,
     "pending-producer-migration": 53,
     "retained-native-delegate": 10,
-    "requires-disposition-reconciliation": 118,
+    "requires-disposition-reconciliation": 116,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 180,
+  "existing_interpreted_candidates_with_command_hits": 178,
   "files": [
     {
       "id": "B0001",
@@ -2690,8 +2691,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "b9425c60f1d73a7bf5350f16cb828e45d4dde3894a2cf315392b780fd95c0eb6",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "38ded14cca19b1029fd08bdf2a93ec7e963946c6"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-redirector.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-redirector.md",
@@ -2710,8 +2715,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "b294130156e6ea13aa35370e01e71916cafd260b6447a2027e4a57048a86decf",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "38ded14cca19b1029fd08bdf2a93ec7e963946c6"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-redirector.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-redirector.md",
@@ -2728,23 +2737,31 @@
       "id": "B0150",
       "file": "test/observation/verify-rtc-bios-contract.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "8f356b40250b42d162d7c4da5376151ea31d7aea2e98b47395b9ad20fcee2ae0",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "evidence": "docs/etc/evidence/t484-s3-rtc-serial.md",
+        "reason": "Completed historical alternate-path investigation; known67/13 failure reproduced, debt and real ROM integration retained"
+      }
     },
     {
       "id": "B0151",
       "file": "test/observation/verify-serial-baud.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "ac048a0b9f89b1c4a81477b6f4d2c3e2eadb13d5116ee7e2dc8fb007eacd8c0d",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "evidence": "docs/etc/evidence/t484-s3-rtc-serial.md",
+        "reason": "Unused Python generator/compiler wrapper removed; unchanged current12-case fixture directly builds/runs through native serial-baud target"
+      }
     },
     {
       "id": "B0152",
@@ -5397,6 +5414,12 @@
     }
   ],
   "commits": {
+    "38ded14cca19b1029fd08bdf2a93ec7e963946c6": {
+      "subject": "T484 S3 P90 consolidate native redirector test producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-redirector.md"
+      ]
+    },
     "fdc1d735aca5b1cc41971a3043934ba2442a12cd": {
       "subject": "T484 S3 P89 refresh painter contract and retire duplicate wrapper",
       "evidence": [
@@ -7411,34 +7434,6 @@
         {
           "line": 8,
           "text": "$cache=Join-Path $repo 'build/.ninja/msvc-x86-release/worker'"
-        }
-      ]
-    },
-    {
-      "id": "B0150",
-      "file": "test/observation/verify-rtc-bios-contract.py",
-      "hits": [
-        {
-          "line": 102,
-          "text": "driver=repo/'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'"
-        },
-        {
-          "line": 104,
-          "text": "subprocess.run([str(driver),'cl.exe','/nologo','/MT','/W4','/TC',str(out/'fixture.c'),"
-        }
-      ]
-    },
-    {
-      "id": "B0151",
-      "file": "test/observation/verify-serial-baud.py",
-      "hits": [
-        {
-          "line": 18,
-          "text": "driver = repo / 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'"
-        },
-        {
-          "line": 20,
-          "text": "subprocess.run([str(driver), 'cl.exe', '/nologo', '/W4', '/WX', '/D_CRT_SECURE_NO_WARNINGS', '/TC', '/I' + str(out),"
         }
       ]
     },
