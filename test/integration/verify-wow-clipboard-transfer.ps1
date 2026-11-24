@@ -85,8 +85,9 @@ try {
                     (Get-FileHash -LiteralPath $source).Hash -ne $row[0].Hash){
                 throw "Frozen Clipboard binary is absent or differs from its sealed manifest: $name"
             }
-            Copy-Item -LiteralPath $source -Destination "$root\$name"
         }
+        & "$repo/tools/prepare-test-inputs.cmd" $root "$frozen/CLIPPRB.EXE" CLIPPRB.EXE "$frozen/GENHOST.DLL" GENHOST.DLL
+        if($LASTEXITCODE){throw 'Frozen Clipboard input preparation failed'}
         'PASS reused immutable checked Clipboard probe and native bridge' | Set-Content "$root\frozen-inputs.txt"
     } else {
         $line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-clipboard-probes"'
@@ -99,9 +100,10 @@ try {
         $cache="$repo/build/.ninja/fixtures-x86/guest-probes/clipboard"
         $kind=if($OwnerTaskExit){'exit'}elseif($CallbackReturnOnly){'return'}else{'normal'}
         $dib=[int][bool]$ClipboardDib
-        Copy-Item "$cache/$kind-$dib/CLIPPRB.EXE","$cache/$kind-$dib/clipprobe.lst" $root
-        Copy-Item "$cache/native-$dib/GENHOST.DLL" "$root/GENHOST.DLL"
-        if($OwnerTaskExit){Copy-Item "$cache/CLIPRET.EXE" "$root/CLIPRET.EXE"}
+        $copyArgs=@($root,"$cache/$kind-$dib/CLIPPRB.EXE",'CLIPPRB.EXE',"$cache/$kind-$dib/clipprobe.lst",'clipprobe.lst',"$cache/native-$dib/GENHOST.DLL",'GENHOST.DLL')
+        if($OwnerTaskExit){$copyArgs+=@("$cache/CLIPRET.EXE",'CLIPRET.EXE')}
+        & "$repo/tools/prepare-test-inputs.cmd" @copyArgs
+        if($LASTEXITCODE){throw 'Clipboard input preparation failed'}
     }
     $fixtureInputs=@($PSCommandPath,$assembly,$native,"$root\CLIPPRB.EXE",
         "$root\GENHOST.DLL",$observer,"$package\product-system32-manifest.json") + $packageImages
@@ -113,15 +115,12 @@ try {
     # unrelated root-level games, documents or historical assets into the
     # short physical stage: they are neither loader inputs nor part of the
     # Clipboard contract.
-    $runtime=New-PhysicalRuntimeStage $package -TopLevelNames @('system32','system.ini')
+    $runtime=New-PhysicalRuntimeStage $package -TopLevelNames @('system32','system.ini','product-system32-manifest.json') -TestFiles @("$root/CLIPPRB.EXE") -NativePeers @("$root/GENHOST.DLL")
     $scope=New-IsolatedPackageScope $runtime
-    $null=New-Item -ItemType Directory -Force -Path "$runtime\tests"
-    Copy-Item "$root\CLIPPRB.EXE","$root\GENHOST.DLL" -Destination "$runtime\tests"
     # Original LoadLibraryEx32W resolves its native peer through the worker
-    # system directory.  Keep the same disposable DLL beside the guest input
-    # for provenance and add the loader-visible copy only inside this owned
-    # physical test stage.
-    Copy-Item "$root\GENHOST.DLL" -Destination "$runtime\system32\GENHOST.DLL"
+    # system directory. CMD stages the DLL there without overwriting images;
+    # its sealed evidence copy remains in the build root.
+    Save-IsolatedPackageManifest $runtime "$root/manifest.json"
     # Preserve the original compact child environment used by this fixture.
     # The immutable peer is in the owned package system directory; neither a
     # copied desktop-token environment nor the runner's toolchain PATH is a

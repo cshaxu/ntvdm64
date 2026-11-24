@@ -57,13 +57,15 @@ function New-PhysicalRuntimeStage([string]$PackageRoot,
     [switch]$FreshPackageIdentity,
     [string[]]$TestFiles=@(),
     [string]$TestSubdirectory,
-    [switch]$TestInBinary) {
+    [switch]$TestInBinary,
+    [string[]]$NativePeers=@()) {
     if(!$RuntimeImages.Count){throw 'At least one runtime image is required'}
     $runner=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/stage-runtime.cmd'
     $arguments=@('-PackageRoot',(Resolve-Path -LiteralPath $PackageRoot).Path)
     foreach($name in $RuntimeImages){$arguments+=@('-RuntimeImage',$name)}
     foreach($name in $TopLevelNames){$arguments+=@('-Include',$name)}
     foreach($file in $TestFiles){$arguments+=@('-TestFile',$file)}
+    foreach($file in $NativePeers){$arguments+=@('-NativePeer',$file)}
     if($TestSubdirectory){$arguments+=@('-TestSubdirectory',$TestSubdirectory)}
     if($TestInBinary){$arguments+='-TestInBinary'}
     if($FreshPackageIdentity){$arguments+='-FreshPackageIdentity'}

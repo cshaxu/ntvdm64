@@ -203,4 +203,20 @@ $rejected=$false
 try{$unexpected=New-PhysicalRuntimeStage $package -TestInBinary}catch{$rejected=$true}
 if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw 'Empty binary-directory input accepted'}
 'PASS structured/flat binary-directory input placement and empty-input rejection'
+$peer=Join-Path $out 'test-peer.dll'
+[IO.File]::WriteAllBytes($peer,[byte[]](1,2,3,4))
+foreach($source in @($package,$flat)){
+ $stage=$null
+ try{
+  $stage=New-PhysicalRuntimeStage $source -NativePeers @($peer)
+  $binary=Get-PackageBinaryRoot $stage
+  if((Get-FileHash "$binary/test-peer.dll").Hash -ne (Get-FileHash $peer).Hash){throw 'Native peer changed'}
+ }finally{if($stage){Remove-PhysicalRuntimeStage $stage}}
+}
+foreach($invalid in @($testInput,"$out/missing.dll",$out,"$repo/assets/release/WOW32.DLL","$package/system32/WOW32.DLL")){
+ $rejected=$false
+ try{$unexpected=New-PhysicalRuntimeStage $package -NativePeers @($invalid)}catch{$rejected=$true}
+ if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw "Invalid/colliding native peer accepted: $invalid"}
+}
+'PASS structured/flat native peer copying and type/path/collision rejection'
 $global:LASTEXITCODE=0

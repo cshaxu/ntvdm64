@@ -1,16 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "14bb1b1ee3ee40f72080dcbc6f3aa9149eb1d459",
+  "head": "27b6984b84231813c7221dd841a8205032f4e309",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
     " M test/build/Test-PackageIdentityTool.ps1",
-    " M test/integration/verify-command-native-edit-return.ps1",
-    " M test/integration/verify-native-guest-output.ps1",
+    " M test/integration/verify-wow-clipboard-transfer.ps1",
     " M test/observation/isolated_package_cleanup.ps1",
     " M tools/build/native/stage-runtime.cmd.in",
-    "?? docs/etc/evidence/t484-s4-native-output-preparation.md"
+    "?? docs/etc/evidence/t484-s4-clipboard-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -19,11 +18,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 128,
+    "migrated-delivered": 129,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 10,
+    "pending-producer-migration": 9,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -703,12 +702,14 @@
       "state": "changed",
       "current_sha256": "0652a932350ff0dc8433726605fcb461856e0044a8ec0f4563a5c90c9f9b33d9",
       "revisions": [
+        "27b6984b84231813c7221dd841a8205032f4e309",
         "de7c3e279caa704e8f81da6cde4871d4db97ce5b",
         "78e2830232fe0ebad2dfe54fc8e2f3bbc446d6c0"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-native-guest-output.md",
-        "docs/etc/evidence/t484-s3-native-output-isolation.md"
+        "docs/etc/evidence/t484-s3-native-output-isolation.md",
+        "docs/etc/evidence/t484-s4-native-output-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -1113,18 +1114,18 @@
       "file": "test/integration/verify-wow-clipboard-transfer.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "f655cb432af10e29a400c03833e8c3429709ccfb3dd04506d1f648125a4cec50",
+      "current_sha256": "10c69166824c3ac570f7d821008b1e60d27c8b27f6749afe120ba0ec32c27775",
       "revisions": [
         "edafa6e51575c0fc4e40b0c20f6528b8918f71f3"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-clipboard-probes.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
-        "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
-        "status": "pending-producer-migration"
+        "status": "migrated-delivered",
+        "reason": "CMD alias and native-peer physical staging; cached full build, stage rejection contracts, six real Clipboard cases and sealed-input reuse pass. Failed environment/preparation attempts retained separately.",
+        "evidence": "docs/etc/evidence/t484-s4-clipboard-preparation.md"
       }
     },
     {
@@ -2051,8 +2052,9 @@
       "file": "test/observation/isolated_package_cleanup.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "d4046d82c008004826b4a80c0dd97a1991bbc26690c1a48a57ebd3093195ad3d",
+      "current_sha256": "fe62f13ae6d98d55ae04a764d8c98fdaf74024a5ad35e34ce9e66e32d179835e",
       "revisions": [
+        "27b6984b84231813c7221dd841a8205032f4e309",
         "000da3d05a87ac283b1762cf9d9bf6a21268a2a1",
         "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a",
         "3776c3208bcfcfa740fcf02da7aeca581d956e33",
@@ -2065,6 +2067,7 @@
         "docs/etc/evidence/t484-s3-identity-reader.md",
         "docs/etc/evidence/t484-s4-device-inputs.md",
         "docs/etc/evidence/t484-s4-fcb-preparation.md",
+        "docs/etc/evidence/t484-s4-native-output-preparation.md",
         "docs/etc/evidence/t484-s4-physical-stage.md",
         "docs/etc/evidence/t484-s4-stage-identity-refresh.md"
       ],
@@ -6621,6 +6624,12 @@
     }
   ],
   "commits": {
+    "27b6984b84231813c7221dd841a8205032f4e309": {
+      "subject": "M0 T484 S4 P27: complete native output CMD preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-native-output-preparation.md"
+      ]
+    },
     "14bb1b1ee3ee40f72080dcbc6f3aa9149eb1d459": {
       "subject": "M0 T484 S4 P26: complete ForceDOS CMD preparation",
       "evidence": [
@@ -8703,7 +8712,7 @@
           "text": "# PowerShell 7 enumerates it. Normalize only that serializer shape, then"
         },
         {
-          "line": 99,
+          "line": 100,
           "text": "$cache=\"$repo/build/.ninja/fixtures-x86/guest-probes/clipboard\""
         }
       ]
@@ -9201,15 +9210,15 @@
           "text": "$reader = Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/ntvdm-package-id.exe'"
         },
         {
-          "line": 62,
+          "line": 63,
           "text": "$runner=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/stage-runtime.cmd'"
         },
         {
-          "line": 132,
+          "line": 134,
           "text": "throw 'Refuse guest probe cleanup: Git data or link'"
         },
         {
-          "line": 156,
+          "line": 158,
           "text": "# Test-only compatibility for sealed flat baselines and build-link caches."
         }
       ]

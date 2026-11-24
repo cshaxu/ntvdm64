@@ -302,9 +302,9 @@
     }
   },
   "test/integration/verify-wow-clipboard-transfer.ps1": {
-    "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
-    "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
-    "status": "pending-producer-migration"
+    "status": "migrated-delivered",
+    "reason": "CMD alias and native-peer physical staging; cached full build, stage rejection contracts, six real Clipboard cases and sealed-input reuse pass. Failed environment/preparation attempts retained separately.",
+    "evidence": "docs/etc/evidence/t484-s4-clipboard-preparation.md"
   },
   "test/integration/verify-wow-dc-guest.ps1": {
     "reason": "Existing shared CMD/native Win16 producer; actual DC, ordinary and common-dialog contracts pass in normal user environment",

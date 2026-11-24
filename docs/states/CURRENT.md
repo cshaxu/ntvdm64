@@ -29,6 +29,8 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
+S4 P28 completes Clipboard preparation; [evidence](../etc/evidence/t484-s4-clipboard-preparation.md) records cached full build, shared native-peer contracts, six real cases and frozen reuse after RDP recovery, with unchanged dual publication. Frozen345/355,10 pending; supplemental5.
+
 S4 P27 completes native-output staging and EDIT preparation reconciliation; [evidence](../etc/evidence/t484-s4-native-output-preparation.md) separates passed cached build/staging/EDIT from the retained historical concurrent-output failure. No product repair or all-pass claim. Frozen344/355,11 pending; supplemental6 to5.
 
 S4 P26 completes ForceDOS preparation; [evidence](../etc/evidence/t484-s4-forcedos-preparation.md) records the native parent producer, shared CMD input staging, cached full build, nine real route cases and unchanged dual publication. Frozen343/355,12 pending; supplemental7 to6.
@@ -92,7 +94,7 @@ these records. Shared primitives alone never close an unverified caller.
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **344/355 disposed,11 pending**, plus5 supplemental
+Current census: **345/355 disposed,10 pending**, plus5 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;
