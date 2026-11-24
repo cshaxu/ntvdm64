@@ -3,24 +3,7 @@ param([Parameter(Mandatory)][string]$BuildRoot, [string]$Hook64BuildRoot,
       [string]$NativeBuildRoot)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
-function Read-Graph([string]$Root){
-    $edges=@{}
-    foreach($line in Get-Content (Join-Path $Root 'build.ninja')){
-        if($line -notmatch '^build (.+?):\s+(\S+)\s+(.*)$'){continue}
-         $outputs=$Matches[1]; $rule=$Matches[2]; $inputText=$Matches[3]; $parts=$inputText -split '\s+\|\|?\s+'
-        $inputs=@($parts[0].Trim() -split '\s+')
-        # Real object/archive dependencies of CMake custom link commands are
-        # implicit inputs; order-only prerequisites are not linked providers.
-        if($rule -eq 'CUSTOM_COMMAND' -and $inputText -match '\s\|\s'){
-            $inputs+=@($parts[1].Trim() -split '\s+' | Where-Object {$_ -match '\.(obj|lib)$'})
-        }
-        $inputs=@($inputs | ForEach-Object {$_ -replace '\\','/' -replace '\$:',':'})
-        foreach($output in (($outputs -split '\s+\|\s+')[0] -split '\s+')){
-            $edges[($output -replace '\\','/' -replace '\$:',':')]= $inputs
-        }
-    }
-    return $edges
-}
+. "$PSScriptRoot/native-source-graph.ps1"
 function Assert-NoServiceSources([string]$Target,[hashtable]$Graph){
     if(!$Graph.ContainsKey($Target)){throw "Missing product graph: $Target"}
     $pending=[Collections.Generic.Stack[string]]::new()

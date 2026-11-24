@@ -1097,5 +1097,10 @@
     "reason": "Current static contracts pass on native graphs/maps/imports; obsolete CRT header requirement removed; no producer",
     "evidence": "docs/etc/evidence/t484-s3-component-audit.md",
     "status": "retained-standalone-audit"
+  },
+  "tools/audit/verify-frontend-link-ownership.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-frontend-audit.md",
+    "status": "retained-standalone-audit",
+    "reason": "11 native source closures and 22 contamination controls pass; shared parser excludes legal image imports; obsolete combined-graph snapshots removed"
   }
 }

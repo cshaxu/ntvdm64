@@ -40,6 +40,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P142 component audit](../etc/evidence/t484-s3-component-audit.md) | Current native static checks pass; obsolete CRT-header assertion removed. Audit-only, no product change. |
 
+| [P143 frontend ownership](../etc/evidence/t484-s3-frontend-audit.md) | 11 native product closures/22 contamination controls and BaseSrv regression pass; shared graph reader; no product change. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

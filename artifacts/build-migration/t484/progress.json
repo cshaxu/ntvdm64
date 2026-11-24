@@ -1,20 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "9b2754eb22d60a27f45a1c69e92fd033999cdee6",
+  "head": "ab51e0425ec40d203577e486052e64b44a55945f",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
-    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/t484-s3-early-deliveries.md",
     " M docs/states/CURRENT.md",
-    " M tools/audit/verify-component-minimization.ps1",
-    "?? artifacts/build-migration/t484/s3-component-audit/",
-    "?? docs/etc/evidence/t484-s3-component-audit.md"
+    " M tools/audit/verify-basesrv-source-ownership.ps1",
+    " M tools/audit/verify-frontend-link-ownership.ps1",
+    "?? artifacts/build-migration/t484/s3-frontend-audit/",
+    "?? docs/etc/evidence/t484-s3-frontend-audit.md",
+    "?? tools/audit/native-source-graph.ps1"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 145,
-    "unchanged": 65,
+    "changed": 146,
+    "unchanged": 64,
     "removed": 145
   },
   "disposition_counts": {
@@ -23,10 +23,10 @@
     "retired-with-delivery-evidence": 145,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 51,
-    "retained-standalone-audit": 6
+    "requires-disposition-reconciliation": 50,
+    "retained-standalone-audit": 7
   },
-  "existing_interpreted_candidates_with_command_hits": 159,
+  "existing_interpreted_candidates_with_command_hits": 158,
   "files": [
     {
       "id": "B0001",
@@ -4074,7 +4074,7 @@
       "file": "tools/audit/verify-basesrv-source-ownership.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "0c02d598f2f4628b554afe6d2a08594d9da79c89965eff25e14f5b8daed47e9c",
+      "current_sha256": "e74d45f90dc8024803cf94ae3f6c21354cee1208e93d630d0641d255b13c6c88",
       "revisions": [
         "50574aef23a4f2a978be16fc5cedeb28bb475447"
       ],
@@ -4208,8 +4208,13 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "46efda70e31f5e55e2e93330a04eee938c615ec63ef8ab45467cff7fb898ac49",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "ab51e0425ec40d203577e486052e64b44a55945f"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-component-audit.md",
+        "docs/etc/evidence/t484-s3-early-deliveries.md"
+      ],
       "completion": "retained-standalone-audit",
       "decision": {
         "reason": "Current static contracts pass on native graphs/maps/imports; obsolete CRT header requirement removed; no producer",
@@ -4221,12 +4226,16 @@
       "id": "B0222",
       "file": "tools/audit/verify-frontend-link-ownership.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "6fb35cd358a1738fb2f383a23f005b5997a98fec1d53f3ecbfb1553ae04b1d18",
+      "state": "changed",
+      "current_sha256": "9c78ab0a4df4ca2c08836ca3f866914d7e0b7a42400df62b3c37c2f13086f6db",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-frontend-audit.md",
+        "status": "retained-standalone-audit",
+        "reason": "11 native source closures and 22 contamination controls pass; shared parser excludes legal image imports; obsolete combined-graph snapshots removed"
+      }
     },
     {
       "id": "B0223",
@@ -6070,6 +6079,13 @@
     }
   ],
   "commits": {
+    "ab51e0425ec40d203577e486052e64b44a55945f": {
+      "subject": "T484 S3 P142 reconcile standalone component audit",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-component-audit.md",
+        "docs/etc/evidence/t484-s3-early-deliveries.md"
+      ]
+    },
     "9b2754eb22d60a27f45a1c69e92fd033999cdee6": {
       "subject": "T484 S3 P141 move resource attachment fixture builds to native CMD",
       "evidence": [
@@ -9062,35 +9078,27 @@
       "file": "tools/audit/verify-basesrv-source-ownership.ps1",
       "hits": [
         {
-          "line": 8,
-          "text": "foreach($line in Get-Content (Join-Path $Root 'build.ninja')){"
-        },
-        {
-          "line": 12,
-          "text": "# Real object/archive dependencies of CMake custom link commands are"
-        },
-        {
-          "line": 31,
+          "line": 14,
           "text": "$node=$pending.Pop()"
         },
         {
-          "line": 32,
+          "line": 15,
           "text": "if(!$seen.Add($node)){continue}"
         },
         {
-          "line": 33,
+          "line": 16,
           "text": "if($node -match '(^|/)src/ntsrv-exe/'){"
         },
         {
-          "line": 34,
+          "line": 17,
           "text": "throw \"$Target depends on NTSRV-private source: $node\""
         },
         {
-          "line": 36,
+          "line": 19,
           "text": "if($node -match '\\.(c|cpp|cxx|asm)$'){$sources++}"
         },
         {
-          "line": 37,
+          "line": 20,
           "text": "if($Graph.ContainsKey($node)){foreach($item in $Graph[$node]){$pending.Push($item)}}"
         }
       ]
@@ -9120,52 +9128,6 @@
         {
           "line": 7,
           "text": "$graph=Get-Content -LiteralPath (Join-Path $BuildRoot 'build.ninja') -Raw"
-        }
-      ]
-    },
-    {
-      "id": "B0222",
-      "file": "tools/audit/verify-frontend-link-ownership.ps1",
-      "hits": [
-        {
-          "line": 6,
-          "text": "$graph = Get-Content -LiteralPath (Join-Path $BuildRoot 'build.ninja')"
-        },
-        {
-          "line": 127,
-          "text": "# or link inputs. Only recursively follow object/archive explicit inputs."
-        },
-        {
-          "line": 138,
-          "text": "$node = $pending.Pop()"
-        },
-        {
-          "line": 139,
-          "text": "if (!$seen.Add($node)) { continue }"
-        },
-        {
-          "line": 140,
-          "text": "foreach ($input in $edges[$node]) {"
-        },
-        {
-          "line": 144,
-          "text": "throw 'Retired frontend archive re-entered a production link'"
-        },
-        {
-          "line": 165,
-          "text": "throw 'Hook32 must not compile or link Run16-private implementation'"
-        },
-        {
-          "line": 340,
-          "text": "# Reject a direct Run16 object on the Hook32 product link."
-        },
-        {
-          "line": 405,
-          "text": "# VDMREDIR link-edge regression, not only currently resolved symbols."
-        },
-        {
-          "line": 457,
-          "text": "Write-Output 'PASS frontend link ownership: no native execution/backend/helper, client-only launcher, worker protocol client only; leakage controls rejected. Physical retired-source cleanup is a separate gate.'"
         }
       ]
     },
