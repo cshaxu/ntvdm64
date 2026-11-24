@@ -31,29 +31,9 @@ $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $copy=& "$PSScriptRoot/New-Win95ProbeCopy.ps1" -DriverImage $DriverImage -InstanceDriver $InstanceDriver -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot
 $task=$copy.Task;$source=$copy.Source;$dest=$copy.Destination;$original=$copy.Original
 try {
-$enc=[Text.Encoding]::GetEncoding(28591)
 if($InstallViaLaunch){
- # Only this owned copy is reset to a pre-launch-package state.
- $system="$dest/SYSTEM.INI";$text=$enc.GetString([IO.File]::ReadAllBytes($system))
- $text=[regex]::Replace($text,'(?im)^\s*device\s*=.*(?:ntvdm64\.(?:386|vxd)|insignia\.386)\s*\r*\n','')
- [IO.File]::WriteAllBytes($system,$enc.GetBytes($text))
- foreach($name in 'PIF.EXE','CONFIG.NT','AUTOEXEC.NT','WIN.PIF','WIN.CMD','compat95.sys','SETVER.EXE','INSIGNIA.386','NTVDM64.386','MULTITASK.INI.BAK','MULTITASK.INI.NEW','MULTITASK.HASH','MULTITASK.LAUNCH'){
-  $item="$dest/PATCH/$name";if(Test-Path -LiteralPath $item){Remove-Item -LiteralPath $item}
- }
- if(Test-Path "$dest/PATCH/TEMP"){Remove-Item -LiteralPath "$dest/PATCH/TEMP"}
- if(Test-Path "$dest/SYSTEM/MOUSE.DRV.BAK"){Remove-Item -LiteralPath "$dest/SYSTEM/MOUSE.DRV.BAK"}
- [IO.File]::WriteAllText("$task/launch-input.txt","$dest`r`n0`r`n",[Text.Encoding]::ASCII)
- $savedPath=$env:PATH;$env:PATH="$PackageRoot/system32;$savedPath"
- try {& cmd.exe /d /c "`"$repo/tools/win95-launch/APPLY.CMD`" < `"$task/launch-input.txt`"" *> "$task/launch-apply.log";if($LASTEXITCODE){throw 'Win95 launch preparation failed'}}
- finally {$env:PATH=$savedPath}
- $selector=Join-Path $task 'selector';New-Item -ItemType Directory $selector|Out-Null
- [IO.File]::WriteAllText("$selector/run16.cmd","@echo off`r`nexit /b 0`r`n")
- [IO.File]::WriteAllText("$task/select-input.txt","0`r`n1`r`n")
- $selectPath=$env:PATH;$env:PATH="$selector;$selectPath"
- try {
-  & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" < `"$task/select-input.txt`"" *> "$task/select-launch.log"
-  if($LASTEXITCODE){throw 'Dynamic Win95 profile selection failed'}
- } finally {$env:PATH=$selectPath}
+ & "$repo/tools/reapply-win95-test-launch.cmd" $dest $task $PackageRoot 0 1 *> "$task/select-launch.log"
+ if($LASTEXITCODE){throw 'Win95 launch preparation failed'}
  foreach($name in 'INSIGNIA.386','NTVDM64.386'){
   if((Get-FileHash "$dest/PATCH/$name").Hash -ne (Get-FileHash "$repo/assets/release/$name").Hash){throw "Installed driver differs: $name"}
  }
@@ -83,23 +63,16 @@ foreach($id in 'A','B'){
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "VM identity $id" --program "$dest\PATCH\$id.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
  if($LASTEXITCODE){throw 'DOS VM PIF build failed'}
 }
-$ini="$dest/WIN.INI"
-$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
-$s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
-[IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
-
 }
-else {
- $ini="$dest/WIN.INI"
- $s=$enc.GetString([IO.File]::ReadAllBytes($ini))
- $s=[regex]::Replace($s,'(?im)^load=[^\r\n]*','load=')
- [IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
-}
+$loadCase=if($InitializationFailure){'none'}else{'pair'}
+& "$repo/tools/prepare-guest-witness.cmd" $dest $task - load $loadCase
+if($LASTEXITCODE){throw 'Win95 identity load profile failed'}
 $defines=@()
 if($InitializationFailure){$defines=@('-DINIT_FAILURE=1')}
 if($Reuse){
  Invoke-VmIdentityBuild "$task/reuse.com" reuse
- Copy-Item -LiteralPath "$task/reuse.com" -Destination "$dest/PATCH/REUSE.COM"
+ & "$repo/tools/prepare-test-inputs.cmd" -GuestPatch $dest $task "$task/reuse.com" REUSE.COM
+ if($LASTEXITCODE){throw 'Reuse witness preparation failed'}
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/REUSE.PIF" --title 'VM reuse' --program "$dest\PATCH\REUSE.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
  if($LASTEXITCODE){throw 'Reuse PIF build failed'}
  $defines=@('-DREUSE=1')
@@ -127,6 +100,8 @@ $binding=@('--fields',"$task/controller.exe")
 foreach($field in $fields){$binding+=@($field[0],$field[1])}
 & "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" @binding
 if($LASTEXITCODE){throw 'Controller path binding failed'}
+& "$repo/tools/prepare-guest-witness.cmd" $dest $task "$task/controller.exe" controller
+if($LASTEXITCODE){throw 'Win95 identity controller preparation failed'}
 $keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS','PSExecutionPolicyPreference')
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}
 $env:PATH='C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
@@ -136,10 +111,6 @@ try {
  . "$repo/test/observation/isolated_package_cleanup.ps1"
  $stage=$null;$scope=$null;$process=$null
  New-Item -ItemType Directory "$task/runtime"|Out-Null
- Copy-Item "$task/controller.exe" "$dest/PATCH/VMTEST.EXE"
- $s=$enc.GetString([IO.File]::ReadAllBytes("$dest/WIN.INI"))
- $s=[regex]::Replace($s,'(?im)^run=[^\r\n]*',"run=$dest\PATCH\VMTEST.EXE")
- [IO.File]::WriteAllBytes("$dest/WIN.INI",$enc.GetBytes($s))
  try {
   $stage=New-PhysicalRuntimeStage $PackageRoot -FreshPackageIdentity
   $scope=New-IsolatedPackageScope $stage

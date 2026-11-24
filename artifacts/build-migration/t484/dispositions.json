@@ -220,9 +220,9 @@
     "evidence": "docs/etc/evidence/t484-s4-win95-editor-preparation.md"
   },
   "test/integration/ntvdm64-386/verify-win95-identity.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
-    "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
+    "status": "migrated-delivered",
+    "reason": "P42 completes shared CMD patch reapply and witness configuration. The real InstallViaLaunch/NativeCommand identity pair and native command returns pass.",
+    "evidence": "docs/etc/evidence/t484-s4-win95-identity-preparation.md"
   },
   "test/integration/verify-native-guest-output.ps1": {
     "evidence": "docs/etc/evidence/t484-s4-native-output-preparation.md",
@@ -1337,9 +1337,9 @@
     "evidence": "docs/etc/evidence/t484-s3-profile-dde.md"
   },
   "test/integration/multitask/verify-win95-guest-only.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "Both authored COM profiles use shared CMD target and native bounded path binding; exact bytes and shared binder regression pass. Patch configuration and shared staging remain.",
-    "evidence": "docs/etc/evidence/t484-s3-win95-guest.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P42 completes shared CMD patch reapply, input staging and load configuration. Real DOSONLY=1 executes the DOS witness with no native CUI worker.",
+    "evidence": "docs/etc/evidence/t484-s4-win95-identity-preparation.md"
   },
   "test/integration/ntvdm64-386/build-interrupt-observer.ps1": {
     "status": "retired-with-delivery-evidence",

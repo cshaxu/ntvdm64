@@ -26,7 +26,7 @@ if not "%~4"=="-" copy /b "%DEST%\PATCH\AUTOEXEC.NT"+"%TASK%\editor-autoexec.app
 if errorlevel 1 exit /b 1
 set "WITNESS=none"
 if "%~5"=="1" set "WITNESS=empty"
-call "%~dp0prepare-editor-inputs.cmd" "%DEST%" "%TASK%" "%PACKAGE%" prompts %WITNESS% defer-load
+call "%~dp0prepare-guest-witness.cmd" "%DEST%" "%TASK%" "%PACKAGE%" prompts %WITNESS% defer-load
 if errorlevel 1 exit /b 1
 if not "%~4"=="-" copy /b /y "%~4" "%DEST%\PATCH\MCALL.COM" >nul
 if errorlevel 1 exit /b 1

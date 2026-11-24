@@ -65,7 +65,7 @@ foreach($driver in 'INSIGNIA.386','NTVDM64.386'){
 Copy-Item -LiteralPath "$dest/SYSTEM.INI" -Destination "$task/selected-system.ini"
 
 $witness=if($ReadWriteWitness){'seed'}elseif($SaveWitness){'empty'}else{'none'}
-& "$repo/tools/prepare-editor-inputs.cmd" $dest $task $PackageRoot prompts $witness
+& "$repo/tools/prepare-guest-witness.cmd" $dest $task $PackageRoot prompts $witness
 if($LASTEXITCODE){throw 'Editor prompt preparation failed'}
 if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'COMMAND copy mismatch'}
 $features=@()
@@ -93,7 +93,7 @@ try {
 if($LASTEXITCODE){throw 'Controller path binder build failed'}
 & "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" --fields "$task/controller.exe" '@W31_BOOT_PATH@' "$dest\PATCH\BOOT.BIN" '@W31_READY_PATH@' "$dest\PATCH\READY.BIN"
 if($LASTEXITCODE){throw 'Controller path binding failed'}
-& "$repo/tools/prepare-editor-inputs.cmd" $dest $task "$task/controller.exe" controller
+& "$repo/tools/prepare-guest-witness.cmd" $dest $task "$task/controller.exe" controller
 if($LASTEXITCODE){throw 'Editor controller preparation failed'}
 $keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS','PSExecutionPolicyPreference')
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}

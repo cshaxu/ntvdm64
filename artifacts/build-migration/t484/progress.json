@@ -1,15 +1,17 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "d04c476dcb05efb946d67d3776c3194c3d28ea79",
+  "head": "73ef10b330a858f3b7d92f1fb6f8014b50200df7",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
+    " M test/integration/multitask/verify-win95-guest-only.ps1",
     " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
+    " M test/integration/ntvdm64-386/verify-win95-identity.ps1",
+    "RM tools/prepare-editor-inputs.cmd -> tools/prepare-guest-witness.cmd",
     " M tools/prepare-win31-editors.cmd",
-    "?? docs/etc/evidence/t484-s4-win95-editor-preparation.md",
-    "?? tools/prepare-editor-inputs.cmd",
-    "?? tools/select-guest-launch.cmd"
+    "?? docs/etc/evidence/t484-s4-win95-identity-preparation.md",
+    "?? tools/reapply-win95-test-launch.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -18,11 +20,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 136,
+    "migrated-delivered": 137,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 2,
+    "pending-producer-migration": 1,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -515,8 +517,9 @@
       "file": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "68cd08ced0c12121d158906183efedb68f11e2b72878a7a02c862a10de302d52",
+      "current_sha256": "bf27f2771e3a2d754f4f6f3afe8909d34b5247084c80bdc6a9114fd16b910be3",
       "revisions": [
+        "73ef10b330a858f3b7d92f1fb6f8014b50200df7",
         "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636",
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "dca9832679063ea8f8485fc990c18df9adc8d959",
@@ -527,7 +530,8 @@
         "docs/etc/evidence/t484-s3-early-deliveries.md",
         "docs/etc/evidence/t484-s3-pif-memory.md",
         "docs/etc/evidence/t484-s3-runtime-tool-path.md",
-        "docs/etc/evidence/t484-s3-win95-editor.md"
+        "docs/etc/evidence/t484-s3-win95-editor.md",
+        "docs/etc/evidence/t484-s4-win95-editor-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -541,7 +545,7 @@
       "file": "test/integration/ntvdm64-386/verify-win95-identity.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "9eda3b245ce5ffa24e9f8425be8f14ef032a49a159c9730ef36b0947ae70713a",
+      "current_sha256": "373deeadfd2c2cac98bae7f1bc6d581f174fb09c5579354bb22866fe49407ab1",
       "revisions": [
         "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636",
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
@@ -557,11 +561,11 @@
         "docs/etc/evidence/t484-s3-runtime-tool-path.md",
         "docs/etc/evidence/t484-s3-vm-identity.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
-        "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
+        "status": "migrated-delivered",
+        "reason": "P42 completes shared CMD patch reapply and witness configuration. The real InstallViaLaunch/NativeCommand identity pair and native command returns pass.",
+        "evidence": "docs/etc/evidence/t484-s4-win95-identity-preparation.md"
       }
     },
     {
@@ -6654,6 +6658,12 @@
     }
   ],
   "commits": {
+    "73ef10b330a858f3b7d92f1fb6f8014b50200df7": {
+      "subject": "T484 S4 P41: share CMD launcher and editor fixture preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-win95-editor-preparation.md"
+      ]
+    },
     "d04c476dcb05efb946d67d3776c3194c3d28ea79": {
       "subject": "T484 S4 P40: share CMD launch preparation for the Win31 identity runner",
       "evidence": [
@@ -8456,11 +8466,11 @@
       "file": "test/integration/ntvdm64-386/verify-win95-identity.ps1",
       "hits": [
         {
-          "line": 81,
+          "line": 61,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
         },
         {
-          "line": 128,
+          "line": 101,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
         }
       ]

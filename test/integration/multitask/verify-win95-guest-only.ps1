@@ -14,27 +14,8 @@ $copy=& "$repo/test/integration/ntvdm64-386/New-Win95ProbeCopy.ps1" `
  -InstallSource $InstallSource -InstallRoot 'O:/tmp/q95' -OutputRoot $OutputRoot
 $dest=$copy.Destination;$task=$copy.Task;$savedPath=$env:PATH
 try {
- $enc=[Text.Encoding]::GetEncoding(28591);$ini="$dest/SYSTEM.INI"
- $text=$enc.GetString([IO.File]::ReadAllBytes($ini))
- $text=[regex]::Replace($text,'(?im)^\s*device\s*=.*(?:ntvdm64\.(?:386|vxd)|insignia\.386)\s*\r*\n','')
- [IO.File]::WriteAllBytes($ini,$enc.GetBytes($text))
- foreach($name in 'PIF.EXE','CONFIG.NT','AUTOEXEC.NT','WIN.PIF','WIN.CMD','compat95.sys','SETVER.EXE','INSIGNIA.386','NTVDM64.386','MULTITASK.INI.BAK','MULTITASK.INI.NEW','MULTITASK.HASH','MULTITASK.LAUNCH'){
-  if(Test-Path "$dest/PATCH/$name"){Remove-Item -LiteralPath "$dest/PATCH/$name"}
- }
- if(Test-Path "$dest/PATCH/TEMP"){Remove-Item -LiteralPath "$dest/PATCH/TEMP"}
- if(Test-Path "$dest/SYSTEM/MOUSE.DRV.BAK"){Remove-Item -LiteralPath "$dest/SYSTEM/MOUSE.DRV.BAK"}
- [IO.File]::WriteAllText("$task/input.txt","$dest`r`n1`r`n",[Text.Encoding]::ASCII)
- $env:PATH="$package/system32;$savedPath"
- & cmd.exe /d /c "`"$repo/tools/win95-launch/APPLY.CMD`" < `"$task/input.txt`"" *> "$task/apply.log"
+ & "$repo/tools/reapply-win95-test-launch.cmd" $dest $task $package 1 $Multitask *> "$task/select-launch.log"
  if($LASTEXITCODE){throw 'Guest-only launch preparation failed'}
- $selector=Join-Path $task 'selector';New-Item -ItemType Directory $selector|Out-Null
- [IO.File]::WriteAllText("$selector/run16.cmd","@echo off`r`nexit /b 0`r`n")
- [IO.File]::WriteAllText("$task/select-input.txt","1`r`n$Multitask`r`n")
- $selectPath=$env:PATH;$env:PATH="$selector;$selectPath"
- try {
-  & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" < `"$task/select-input.txt`"" *> "$task/select-launch.log"
-  if($LASTEXITCODE){throw 'Dynamic Win95 profile selection failed'}
- } finally {$env:PATH=$selectPath}
  if((Get-Content "$dest/PATCH/CONFIG.NT" -Raw) -notmatch '(?im)^dosonly\s*$'){throw 'Guest-only profile lacks DOSONLY'}
   $selectedIni=Get-Content "$dest/SYSTEM.INI" -Raw
  if([bool]($selectedIni -match '(?im)^device=.*NTVDM64\.386') -ne [bool]$Multitask -or $selectedIni -notmatch '(?im)^device=.*INSIGNIA\.386'){throw 'Guest-only profile driver selection mismatch'}
@@ -50,22 +31,23 @@ try {
      [BitConverter]::ToString($pe,$stub,14) -ne '0E-1F-BA-0E-00-B4-09-CD-21-B8-01-4C-CD-21'){
    throw 'Rejection witness requires the known DOS refusal stub'
   }
-  Copy-Item -LiteralPath $image -Destination "$dest/PATCH/NATIVE.EXE"
+  & "$repo/tools/prepare-test-inputs.cmd" -GuestPatch $dest $task $image NATIVE.EXE
+  if($LASTEXITCODE){throw 'Native refusal witness preparation failed'}
   Get-FileHash "$dest/PATCH/NATIVE.EXE" | ConvertTo-Json | Set-Content "$task/native-image.json"
   $template='REJECT.COM'
  }
  & "$repo/tools/build-fixtures.cmd" x86 win95-guest-only
  if($LASTEXITCODE){throw 'DOS probe native build failed'}
- Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/win95-guest-only/$template" -Destination "$dest/PATCH/ONLY.COM"
+ & "$repo/tools/prepare-test-inputs.cmd" -GuestPatch $dest $task "$repo/build/.ninja/fixtures-x86/guest-probes/win95-guest-only/$template" ONLY.COM
+ if($LASTEXITCODE){throw 'Guest-only witness preparation failed'}
  $fields=@('--fields',"$dest/PATCH/ONLY.COM",'@OUTPUT@',"$dest\PATCH\ONLY.BIN")
  if($RejectNativeImage){$fields+=@('@NATIVE@',"$dest\PATCH\NATIVE.EXE")}
  & "$repo/build/.ninja/fixtures-x86/win31-probe-paths.exe" @fields
  if($LASTEXITCODE){throw 'DOS probe path binding failed'}
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/ONLY.PIF" --title 'Guest DOS' --program "$dest\PATCH\ONLY.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
  if($LASTEXITCODE){throw 'Guest-only PIF creation failed'}
- $win="$dest/WIN.INI";$text=$enc.GetString([IO.File]::ReadAllBytes($win))
- $text=[regex]::Replace($text,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\ONLY.PIF")
- [IO.File]::WriteAllBytes($win,$enc.GetBytes($text))
+ & "$repo/tools/prepare-guest-witness.cmd" $dest $task - load only
+ if($LASTEXITCODE){throw 'Guest-only load profile preparation failed'}
  . "$repo/test/observation/isolated_package_cleanup.ps1"
  $stage=$null;$scope=$null;$process=$null
  try {
