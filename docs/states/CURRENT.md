@@ -86,7 +86,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P124 lifecycle startup](../etc/evidence/t484-s3-lifecycle-startup.md) | Retirement/startup contracts pass with explicit native variants;16 prior binaries unchanged; full cached/publication/cache checks pass. B0195 remains partial:19/30 normal entries. |
 
-Completed implementation batches through P124 passed their cached full host build. P73 checks11 raw host inputs
+| [P125 dispatch/page producers](../etc/evidence/t484-s3-lifecycle-pages.md) | Four native/actual-CCPU cases pass after stale fixture setup repair;18 prior binaries unchanged; final cached full/publication/cache checks pass. B0195 partial:23/30 normal entries. |
+
+Completed implementation batches through P125 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

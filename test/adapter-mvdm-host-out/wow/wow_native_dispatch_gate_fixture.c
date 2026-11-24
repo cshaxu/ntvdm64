@@ -1,4 +1,5 @@
 #include "wow_window_words_binding.h"
+#include "wow_window_access_fixture_provider.h"
 #include "wow_task_order_bindings.h"
 #include <stdio.h>
 typedef VOID (WINAPI *PFNW32ET)(VOID);
@@ -108,6 +109,7 @@ int __cdecl main(void)
     BOOL caught = FALSE;
     HWND window = CreateWindowExA(0, "STATIC", "", WS_POPUP,
         0, 0, 32, 32, NULL, NULL, GetModuleHandleA(NULL), NULL);
+    if (!wow_window_access_bind(&wow_fixture_window_access_provider)) return 3;
     CHECK(window && wow_window_words_attach(window, &words));
     CHECK(wow_window_dispatch_bound(window, WM_APP, 7, 9,
         (DWORD)(ULONG_PTR)native_callback, NULL, &result));

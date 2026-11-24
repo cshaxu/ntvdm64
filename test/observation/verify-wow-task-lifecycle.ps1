@@ -56,7 +56,7 @@ if ($Case -eq 'task-close-result') {
     $result
     return
 }
-$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime','process-retirement','init-notification') -and !$InitRollback -and !$RetirementLockProbe
+$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime','process-retirement','init-notification','native-dispatch-gate','window-procedure','window-borrow','graph-snapshot') -and !$InitRollback -and !$RetirementLockProbe -and !$OriginalModalOnly -and !$InitialPublicationOnly
 if($nativeCase){
     $kind=if($Case -eq 'task-lifecycle'){'task'}else{$Case}
     & "$repo/tools/build-fixtures.cmd" x86 "wow-lifecycle-$kind" *> "$out/build.log"
@@ -258,14 +258,6 @@ Invoke-Build ($combinedSeams.Replace('/Gz', '/Gd'))
 $fixtureSupportObjects += Join-Path $out 'combined-seams.obj'
 Invoke-NinjaTarget $provider 'obj/compat/wow_user_task_lifecycle.obj'
 $fixtureName = 'wow_user_task_lifecycle_fixture.c'
-if ($Case -eq 'native-dispatch-gate') {
-    Invoke-NinjaTarget $provider 'obj/compat/wow_window_words_binding.obj'
-    $fixtureName = 'wow_native_dispatch_gate_fixture.c'
-}
-if ($Case -eq 'window-procedure') {
-    Invoke-NinjaTarget $provider 'obj/compat/wow_window_words_binding.obj obj/compat/wow_class_words_binding.obj obj/compat/wow_user_private_access.obj'
-    $fixtureName = 'wow_window_procedure_fixture.c'
-}
 if ($Case -eq 'standard-class') {
     Invoke-NinjaTarget $provider 'obj/compat/wow_standard_class_bindings.obj obj/compat/wow_class_words_binding.obj'
     $fixtureName = 'wow_standard_class_fixture.c'
@@ -276,7 +268,7 @@ if ($InitialPublicationOnly) {
 }
 if ($Case -eq 'native-creation') { $fixtureName = 'wow_native_creation_binding_fixture.c' }
 $fixturePath = Join-Path $repo ('test/adapter-mvdm-host-out/wow/' + $fixtureName)
-if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource','page-domain')) { $fixturePath = Join-Path $repo 'test/mvdm-host/wow_page_domain_fixture.c' }
+if ($Case -in @('window-borrow','window-reclaim','menu-resource','page-domain')) { $fixturePath = Join-Path $repo 'test/mvdm-host/wow_page_domain_fixture.c' }
 if ($Case -eq 'native-creation') { $fixturePath = Join-Path $repo 'test/mvdm-host/wow_page_domain_fixture.c' }
 if ($Case -eq 'class-procedure') { $fixturePath = Join-Path $repo 'test/mvdm-host/wow_page_domain_fixture.c' }
 if ($Case -eq 'standard-class') { $fixturePath = Join-Path $repo 'test/mvdm-host/wow_page_domain_fixture.c' }
@@ -293,9 +285,8 @@ if ($TerminalSchedule) { $fixture += ' /DWOW_TERMINAL_SCHEDULE_FIXTURE' }
 if ($CallbackGraphOverlap) { $fixture += ' /DWOW_CALLBACK_GRAPH_OVERLAP' }
 if ($HookGraphOverlap) { $fixture += ' /DWOW_HOOK_GRAPH_OVERLAP' }
 if ($Case -eq 'standard-class') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_STANDARD_CLASS_FIXTURE' }
-if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
+if ($Case -in @('window-borrow','window-reclaim','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
 if ($Case -eq 'window-reclaim') { $fixture += ' /DWOW_RECLAIM_FAILURE_FIXTURE' }
-if ($Case -eq 'graph-snapshot') { $fixture += ' /DWOW_GRAPH_SNAPSHOT_FIXTURE' }
 if ($Case -eq 'menu-resource') { $fixture += ' /DWOW_RESOURCE_CLIENT_FIXTURE' }
 if ($Case -eq 'page-domain') {
     # Use the exact object selected by the worker's original standalone test
@@ -385,7 +376,7 @@ if ($Case -in @('menu-resource','page-domain')) {
     Invoke-Build ($thunkFixture + ' /DWOW_MENU_THUNK_BOUND_FIXTURE /I"'+$out+'"')
     $parentObjects += Join-Path $out 'menu-thunk-fixture.obj'
 }
-if ($Case -notin @('window-borrow','window-reclaim','graph-snapshot','menu-resource','page-domain','native-creation','class-procedure','standard-class','window-procedure')) {
+if ($Case -notin @('window-borrow','window-reclaim','menu-resource','page-domain','native-creation','class-procedure','standard-class')) {
 $parentStub = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\parent-stub.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_page_domain_parent_stub.c"')
 if ($parentStub -eq $compile) { throw 'Parent-stub substitution failed' }
 $parentStub += ' /DWOW_TASK_CLASS_PROJECTION_FIXTURE'
@@ -614,18 +605,6 @@ if ($CreationUnwind) {
     if ($originalCreationObjects.Count -ne 1) { throw 'Expected exactly one production creation owner' }
     $objects = @($objects | Where-Object { $_ -notin $originalCreationObjects })
     $parentObjects += Join-Path $out 'creation-unwind.obj'
-}
-if ($Case -in @('window-procedure','native-dispatch-gate')) {
-    # Keep one real lifecycle provider and one real (inactive here) page domain.
-    # Instrument scope entries without overriding their behavior or linking
-    # the partial parent storage mock beside the actual CCPU owner.
-    $scopeCompile = $compile -replace '/Fo\S+\s+', ('/Fo"'+$out+'\procedure-scope.obj" ')
-    if ($scopeCompile -eq $compile) { throw 'Procedure scope substitution failed' }
-    Invoke-Build ($scopeCompile + ' /Dwow_task_callback_enter=wow_fixture_real_callback_enter /Dwow_task_callback_leave=wow_fixture_real_callback_leave')
-    $scopeObjects = @($objects | Where-Object { $_ -match '[\\/]compat[\\/]wow_user_task_lifecycle\.obj$' })
-    if ($scopeObjects.Count -ne 1) { throw 'Expected exactly one lifecycle owner' }
-    $objects = @($objects | Where-Object { $_ -notin $scopeObjects })
-    $parentObjects += Join-Path $out 'procedure-scope.obj'
 }
 if ($InitRollback) {
     $queueCompile = $commands | Where-Object { $_ -match '/kernel/queue\.c$' } | Select-Object -Last 1

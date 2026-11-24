@@ -1,0 +1,47 @@
+{
+  "failedAttempts": [
+    {
+      "started": "2026-11-24T05:21:14.2295885+01:00",
+      "exit": 1,
+      "pid": 27072,
+      "finished": "2026-11-24T05:21:45.1272494+01:00"
+    },
+    {
+      "pid": 33400,
+      "exit": 1,
+      "started": "2026-11-24T05:22:15.4906896+01:00",
+      "finished": "2026-11-24T05:22:28.7407366+01:00"
+    }
+  ],
+  "completedNormalCases": 23,
+  "priorTargetsDryRun": "no work to do",
+  "final": {
+    "exit": 0,
+    "finished": "2026-11-24T05:27:30.1466777+01:00",
+    "pid": 21968,
+    "started": "2026-11-24T05:25:56.6282701+01:00"
+  },
+  "cache": {
+    "mtime": "2026-11-24T04:23:56.5590227Z",
+    "wrongArch": 2,
+    "sha256": "4738152A88E808D8192637FBB1085593EC803FEFB0604A628E832E67DD002FFE"
+  },
+  "priorNativeExecutablesUnchanged": 18,
+  "validation": {
+    "finished": "2026-11-24T05:25:09.8370399+01:00",
+    "exit": 0,
+    "pid": 8228,
+    "started": "2026-11-24T05:23:36.8138242+01:00"
+  },
+  "publication": {
+    "rawInputs": 11,
+    "publishedCopies": 22,
+    "republished": false,
+    "unchanged": true
+  },
+  "remainingNormalCases": 7,
+  "fileComplete": false,
+  "cleanup": {
+    "removedLines": 21
+  }
+}

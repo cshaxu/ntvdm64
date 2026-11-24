@@ -5,14 +5,11 @@
 #include "wow_task_order_bindings.h"
 #include "wow_user_runtime.h"
 #include "wow_class_client_bindings.h"
+#include "wow_class_client_fixture_provider.h"
+#include "wow_control_entry_fixture_provider.h"
 #include "wow_user_object_bindings.h"
 #include <stdio.h>
 #pragma comment(lib, "comctl32.lib")
-typedef VOID (APIENTRY *PFNW32ET)(VOID);
-#pragma warning(push)
-#pragma warning(disable:4201)
-#include "non-mvdm/public/internal/windows/inc/wowuserp.h"
-#pragma warning(pop)
 static unsigned errors, calls;
 static unsigned unicode_text_calls;
 static unsigned task_enters, task_leaves;
@@ -357,6 +354,9 @@ int __cdecl main(void)
     /* A real runtime carrier with no TDB: scope behavior remains the actual
      * inactive-task branch. Scheduling/guest instructions have separate
      * CCPU coverage. No ownership or dispatch function is success-stubbed. */
+    if (!wow_window_access_bind(&wow_fixture_window_access_provider) ||
+            !wow_class_client_bind(&wow_fixture_class_client_provider) ||
+            !wow_control_entry_bind(&fixture_control_entry_provider)) return 3;
     client.classes = &classes; client.callback = callback; client.thread = &thread;
     process.classes = &classes; process.objects = &objects; thread.ppi = &process;
     CHECK(wow_user_runtime_bind(&runtime_thread, &runtime, &thread, &client));
