@@ -856,5 +856,10 @@
     "evidence": "docs/etc/evidence/t484-s3-module-alias-native.md",
     "status": "migrated-delivered",
     "reason": "Native target reuses actual product alias object/profile; unchanged lifetime fixture and full cached build/cache/publication hashes pass"
+  },
+  "test/observation/verify-wow-native-chain-capture.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-capture-contracts.md",
+    "reason": "Current private-desktop chain/acquisition contracts native; six historical controls retired; projections, regressions, full cached build/cache/publication verified",
+    "status": "migrated-delivered"
   }
 }

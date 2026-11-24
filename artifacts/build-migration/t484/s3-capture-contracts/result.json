@@ -1,0 +1,60 @@
+{
+  "reacquire": {
+    "pid": 27744,
+    "exe": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-capture-contracts\\reacquire/control.exe",
+    "deadlineSeconds": 30,
+    "started": "2026-11-24T02:33:05.2504091Z"
+  },
+  "currentCases": 15,
+  "regression": {
+    "copydata": 59,
+    "ddeAlias": 96,
+    "filter": 14,
+    "ddeExecute": 38,
+    "queue": 18,
+    "transaction": 191
+  },
+  "scope": "Nonactive private desktop real HWND reads; page-domain copy/commit doubled, not guest acceptance",
+  "final": {
+    "exit": 0,
+    "pid": 7676,
+    "started": "2026-11-24T03:33:49.3452967+01:00",
+    "finished": "2026-11-24T03:35:31.1548501+01:00"
+  },
+  "nativeRelationshipFamilies": 3,
+  "projections": {
+    "equalIgnoringWhitespace": true,
+    "headers": 2,
+    "currentCaptureFunctions": 7
+  },
+  "chain": {
+    "pid": 18256,
+    "exe": "O:\\repos.hobby\\ntvdm64\\build\\t484-s3-capture-contracts\\chain/control.exe",
+    "deadlineSeconds": 30,
+    "started": "2026-11-24T02:32:54.6274913Z"
+  },
+  "cache": [
+    {
+      "time": 639310843742810033,
+      "path": "build/.ninja/fixtures-x86/wow-capture-chain.exe",
+      "hash": "97BCB44026C2A479408C59813DBE1061BA62B2EA9D6408FACB5572640ECD1954"
+    },
+    {
+      "time": 639310843743227839,
+      "path": "build/.ninja/fixtures-x86/wow-capture-reacquire.exe",
+      "hash": "9042E6F6D23C2A3A799D95B85717CA6EE7908CA2791E9AFFF6E1A600243EF12C"
+    }
+  ],
+  "retiredHistoricalCases": 6,
+  "publication": {
+    "rawInputs": 11,
+    "unchanged": true,
+    "publishedCopies": 22
+  },
+  "runtime": {
+    "pid": 10452,
+    "exit": 0,
+    "finished": "2026-11-24T03:33:05.4259443+01:00",
+    "started": "2026-11-24T03:32:41.7743293+01:00"
+  }
+}

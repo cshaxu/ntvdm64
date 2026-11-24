@@ -74,7 +74,7 @@ static BOOL WINAPI wow_window_words_project_observed(ULONG count,
 #include "capture_exact_body.h"
 #undef GetWindow
 #undef GetAncestor
-static void run(BOOL baseline,unsigned selected_mode)
+static void run(unsigned selected_mode)
 {
  HWND roots[4];BOOL result;DWORD error;unsigned expected_attempts;
  mode=selected_mode;attempts=commits=commit_calls=injections=0;armed=FALSE;
@@ -82,17 +82,17 @@ static void run(BOOL baseline,unsigned selected_mode)
  a=CreateWindowExA(0,"STATIC","a",selected_edge==2?WS_POPUP:WS_CHILD,0,0,20,20,selected_edge==2?b:parent,NULL,GetModuleHandleA(NULL),NULL);
  check(a && b,"native-create");if(!a || !b)return;
  layout(TRUE);roots[0]=GetDesktopWindow();roots[1]=parent;roots[2]=a;roots[3]=b;
- SetLastError(0x447a);result=baseline?baseline_project_graph(roots,4,NULL,0):project_graph(roots,4,NULL,0);error=GetLastError();
- expected_attempts=!baseline && (mode==ONCE || mode==ALWAYS)?2:1;
+ SetLastError(0x447a);result=project_graph(roots,4,NULL,0);error=GetLastError();
+ expected_attempts=(mode==ONCE || mode==ALWAYS)?2:1;
  check(attempts==expected_attempts,"bounded-acquisition");
- if(mode==NORMAL || (!baseline && mode==ONCE)){
+ if(mode==NORMAL || mode==ONCE){
   check(result && commits==1 && commit_calls==1,"one-complete-commit");check(error==0x447a,"entry-error-preserved");
  }else{
   check(!result && !commits && error==ERROR_INVALID_DATA,"failure-without-publication");
   check(commit_calls==(mode==COMMIT_FAIL?1u:0u),"non-race-failure-not-replayed");
  }
  if(mode==ONCE || mode==ALWAYS)check(injections==(mode==ONCE?1u:expected_attempts),"actual-native-interleaving");
- printf("CAPTURE edge=%u baseline=%u mode=%u result=%u acquisitions=%u commits=%u error=%lu\n",selected_edge,baseline,mode,result,attempts,commits,error);++cases;
+ printf("CAPTURE edge=%u mode=%u result=%u acquisitions=%u commits=%u error=%lu\n",selected_edge,mode,result,attempts,commits,error);++cases;
  if(selected_edge==2){SetWindowLongPtrA(b,GWLP_HWNDPARENT,0);SetWindowLongPtrA(a,GWLP_HWNDPARENT,0);}
  else {SetParent(b,parent);SetParent(a,parent);}
  DestroyWindow(a);DestroyWindow(b);
@@ -105,7 +105,7 @@ int main(void)
  if(!desktop || !SetThreadDesktop(desktop))return 2;
  parent=CreateWindowExA(0,"STATIC","root",WS_OVERLAPPED,0,0,100,100,NULL,NULL,GetModuleHandleA(NULL),NULL);
  if(!parent)return 3;
- for(selected_edge=0;selected_edge<3;++selected_edge){run(TRUE,NORMAL);run(TRUE,ONCE);for(selected=NORMAL;selected<=COMMIT_FAIL;++selected)run(FALSE,selected);}
+ for(selected_edge=0;selected_edge<3;++selected_edge){for(selected=NORMAL;selected<=COMMIT_FAIL;++selected)run(selected);}
  DestroyWindow(parent);SetThreadDesktop(previous);CloseDesktop(desktop);
  printf("CAPTURE_REACQUIRE cases=%u errors=%u production-cause-proven=0\n",cases,errors);return errors?1:0;
 }

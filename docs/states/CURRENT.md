@@ -52,7 +52,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P107 module alias](../etc/evidence/t484-s3-module-alias-native.md) | Actual product owner/profile and alias lifetime contract pass; duplicate manual producer removed; full cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P107 passed their cached full host build. P73 checks11 raw host inputs
+| [P108 capture contracts](../etc/evidence/t484-s3-capture-contracts.md) | Three native relationship families/15 current cases pass; six historical controls retired; shared projection regressions/full cached build/cache/publication hashes pass. |
+
+Completed implementation batches through P108 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

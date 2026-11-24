@@ -378,3 +378,4 @@ include(wow-dde.cmake)
 
 include(wow-boundaries.cmake)
 include(wow-construction.cmake)
+include(wow-capture.cmake)
