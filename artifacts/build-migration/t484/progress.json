@@ -1,33 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "e58d20d0d612647e708d7586624d53cda8fb4c20",
+  "head": "0871e69ae59605841050bbddc67c62c9294c608e",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-owned-view-read.ps1",
-    " M test/observation/verify-wow-page-cost-probe.ps1",
-    " M test/observation/wow_owned_view_read_fixture.c",
+    " M test/observation/verify-wow-parameter-map.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/SourceProjection.cmake",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-owned-read/",
-    "?? docs/etc/evidence/t484-s3-owned-read.md",
-    "?? tools/build/fixtures/wow-owned-read.cmake"
+    "?? artifacts/build-migration/t484/s3-parameter-native/",
+    "?? docs/etc/evidence/t484-s3-parameter-native.md",
+    "?? tools/build/fixtures/wow-parameter-map.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 128,
-    "unchanged": 100,
+    "changed": 129,
+    "unchanged": 99,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 69,
+    "migrated-delivered": 70,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 89,
+    "requires-disposition-reconciliation": 88,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3448,8 +3445,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "870afd47686712c734ccdcae582ce40d1a73b53c78e2cd37e2e65c6375fec233",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0871e69ae59605841050bbddc67c62c9294c608e"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-owned-read.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -3463,8 +3464,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "3774342e4e14e6f271d6472aac32007cd724954234f69dc7581aeb4efba7be3e",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0871e69ae59605841050bbddc67c62c9294c608e"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-owned-read.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -3476,12 +3481,16 @@
       "id": "B0184",
       "file": "test/observation/verify-wow-parameter-map.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "0e383e75b970688ac4a952d33e848ac3a3eab7260cfaf36aa819272067f1ef31",
+      "state": "changed",
+      "current_sha256": "9b958c5f4afaf9f4cad03d714fa3d3ffb810fa6c19cf4fea9827a80124b342e4",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "evidence": "docs/etc/evidence/t484-s3-parameter-native.md",
+        "reason": "Unchanged54-case current fixture uses native projections; historical source/control and manual producers retired"
+      }
     },
     {
       "id": "B0185",
@@ -5739,6 +5748,12 @@
     }
   ],
   "commits": {
+    "0871e69ae59605841050bbddc67c62c9294c608e": {
+      "subject": "T484 S3 P111 consolidate current owned read and page cost producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-owned-read.md"
+      ]
+    },
     "e58d20d0d612647e708d7586624d53cda8fb4c20": {
       "subject": "T484 S3 P110 unify native query and queue reference producers",
       "evidence": [
@@ -8280,16 +8295,8 @@
           "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
         },
         {
-          "line": 45,
-          "text": "$bodies=@();foreach($name in @('FindParamMap','GetParam16','AddParamMap','ParamMapUpdateNode','DeleteParamMap','W32CheckThunkParamFlag','FreeParamMap','InitParamMap')){$bodies+=Body $map $name}"
-        },
-        {
-          "line": 61,
-          "text": "[IO.File]::WriteAllText(\"$dir/build.cmd\",\"@echo off`r`ncall `\"$CompilerDriver`\" cl.exe /nologo /TC /O2 /MT /W4 /WX /wd4706 /wd4127 /wd4213 /wd4306 $define /I`\"$repo/src`\" /I`\"$dir`\" `\"$PSScriptRoot/wow_parameter_map_fixture.c`\" /Fo`\"$dir/unit.obj`\" /Fe`\"$dir/unit.exe`\"`r`nexit /b %errorlevel%`r`n\")"
-        },
-        {
-          "line": 74,
-          "text": "[IO.File]::WriteAllText(\"$dir/cache-preprocess.cmd\",\"@echo off`r`ncall `\"$CompilerDriver`\" cl.exe /nologo /EP /TC `\"$dir/parameter_cache.h`\"`r`nexit /b %errorlevel%`r`n\")"
+          "line": 22,
+          "text": "$native=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
     },

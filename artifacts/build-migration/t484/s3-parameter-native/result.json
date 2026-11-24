@@ -1,0 +1,31 @@
+{
+  "runtime": {
+    "exit": 0,
+    "finished": "2026-11-24T03:59:04.1012235+01:00",
+    "started": "2026-11-24T03:58:49.3547524+01:00",
+    "pid": 11596
+  },
+  "cache": {
+    "wrongArch": 2,
+    "hash": "E6252DE3B3AAAF183554FE4FE6E16E1C8D34FA5051D5BC07235776676E475B74",
+    "mtime": "2026-11-24T02:59:03.5498624Z",
+    "projectionHeaders": 4
+  },
+  "validation": {
+    "started": "2026-11-24T03:59:43.8467026+01:00",
+    "pid": 13140,
+    "finished": "2026-11-24T04:01:07.7987671+01:00",
+    "exit": 0
+  },
+  "publication": {
+    "publishedCopies": 22,
+    "republished": false,
+    "unchanged": true,
+    "rawInputs": 11
+  },
+  "scope": "Current exact selected source contracts and service doubles; not guest acceptance",
+  "constructionRegression": 191,
+  "retiredHistoricalControls": 15,
+  "fixtureUnchanged": true,
+  "scenarios": 54
+}

@@ -60,7 +60,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P111 owned read/page control](../etc/evidence/t484-s3-owned-read.md) | Current contracts and six-body equivalence pass; historical scalar mode and duplicate producers removed; full cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P111 passed their cached full host build. P73 checks11 raw host inputs
+| [P112 parameter map](../etc/evidence/t484-s3-parameter-native.md) | Current54 cases/four projections/construction191 pass; historical producers retired; full cached build/cache/publication hashes pass. |
+
+Completed implementation batches through P112 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

@@ -1711,3 +1711,5 @@ post-publication targeted checks.
 - [T484 S3 P110 native query and queue references](evidence/t484-s3-native-references.md).
 
 - [T484 S3 owned read and page-cost controls](evidence/t484-s3-owned-read.md).
+
+- [T484 S3 parameter map contract](evidence/t484-s3-parameter-native.md).

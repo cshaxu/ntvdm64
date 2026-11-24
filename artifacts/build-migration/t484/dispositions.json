@@ -891,5 +891,10 @@
     "status": "migrated-delivered",
     "reason": "Existing native page-cost target retained for current protocol control; duplicate manual producer removed",
     "evidence": "docs/etc/evidence/t484-s3-owned-read.md"
+  },
+  "test/observation/verify-wow-parameter-map.ps1": {
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-parameter-native.md",
+    "reason": "Unchanged54-case current fixture uses native projections; historical source/control and manual producers retired"
   }
 }
