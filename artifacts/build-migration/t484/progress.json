@@ -1,21 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "6d766ea52cc73d5112b68100988ba683edfd47e6",
+  "head": "a796cd2ceb7eff4d1f00bff289a7b5fbb5361ac8",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/t484-s3-early-deliveries.md",
     " M docs/states/CURRENT.md",
-    " D test/adapter-mvdm-host-out/wow/wow_gdi_handle_abi_probe.c",
-    " D test/observation/inspect-ne-classification.ps1",
-    " M test/observation/verify-wow-font-compat.ps1",
-    " D test/observation/verify-wow-gdi-handle-contract.ps1",
-    " D test/observation/verify-wow-glyph-outline-rotation.ps1",
-    " M test/observation/verify-wow-metafile-host.ps1",
+    " D test/adapter-mvdm-host-out/wow/wow_reply_contract_fixture.c",
+    " D test/observation/verify-wow-reply-contract.ps1",
+    " M test/observation/verify-wow-user-session-binding.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-wow-host-contracts.md",
-    "?? tools/build/fixtures/wow-host-contracts.cmake"
+    " M tools/build/fixtures/wow-host-contracts.cmake",
+    "?? docs/etc/evidence/t484-s3-wow-session-contracts.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6494,6 +6489,13 @@
     }
   ],
   "commits": {
+    "a796cd2ceb7eff4d1f00bff289a7b5fbb5361ac8": {
+      "subject": "M0 T484 S3 P196: consolidate WOW host tests and retire obsolete diagnostics",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-wow-host-contracts.md"
+      ]
+    },
     "6d766ea52cc73d5112b68100988ba683edfd47e6": {
       "subject": "M0 T484 S3 P195: cache tabstop reader through native fixture build",
       "evidence": [

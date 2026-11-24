@@ -1863,3 +1863,5 @@ post-publication targeted checks.
 [T484 S3 tab-stop reader](evidence/t484-s3-tabstop-reader.md) records unchanged interop declarations in the shared native C# cache and bounded read/error checks.
 
 [T484 S3 WOW host contracts](evidence/t484-s3-wow-host-contracts.md) records diagnostic retirement and consolidated native font/metafile tests.
+
+[T484 S3 WOW session contracts](evidence/t484-s3-wow-session-contracts.md) records native session rollback tests and retirement of sealed original reply research.
