@@ -190,4 +190,17 @@ try{$unexpected=New-PhysicalRuntimeStage $package -TestFiles @($testInput) -Test
 if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw 'Existing test subdirectory accepted'}
 if([IO.File]::ReadAllText("$package/tests/DFCB01/keep.txt") -ne 'preserve'){throw 'Source collision changed'}
 'PASS isolated test subdirectory, traversal/empty/collision rejection and source preservation'
+foreach($source in @($package,$flat)){
+ $stage=$null
+ try{
+  $stage=New-PhysicalRuntimeStage $source -TestInBinary -TestSubdirectory INPUTS -TestFiles @($testInput)
+  $binary=Get-PackageBinaryRoot $stage
+  if((Get-FileHash "$binary/tests/INPUTS/probe.bin").Hash -ne (Get-FileHash $testInput).Hash){throw 'Binary-directory input changed'}
+  if($binary -ne $stage -and (Test-Path "$stage/tests/INPUTS/probe.bin")){throw 'Binary input leaked to package root'}
+ }finally{if($stage){Remove-PhysicalRuntimeStage $stage}}
+}
+$rejected=$false
+try{$unexpected=New-PhysicalRuntimeStage $package -TestInBinary}catch{$rejected=$true}
+if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw 'Empty binary-directory input accepted'}
+'PASS structured/flat binary-directory input placement and empty-input rejection'
 $global:LASTEXITCODE=0

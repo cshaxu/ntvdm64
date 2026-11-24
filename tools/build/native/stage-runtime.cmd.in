@@ -6,6 +6,7 @@ set "images="
 set "names="
 set "testfiles="
 set "testsubdir="
+set "testinbinary="
 set "fresh="
 set "owned="
 set "stage="
@@ -13,6 +14,11 @@ set "identity=%repo%\build\.ninja\build-tools\ntvdm-package-id.exe"
 set "hash=%repo%\assets\release\HASH.EXE"
 :arguments
 if "%~1"=="" goto validate
+if /i "%~1"=="-TestInBinary" (
+  set "testinbinary=1"
+  shift
+  goto arguments
+)
 if /i "%~1"=="-FreshPackageIdentity" (
   set "fresh=1"
   shift
@@ -50,6 +56,7 @@ shift
 shift
 goto arguments
 :validate
+if defined testinbinary if not defined testfiles exit /b 2
 if defined testsubdir (
   if "%testsubdir%"=="." exit /b 2
   if "%testsubdir%"==".." exit /b 2
@@ -102,10 +109,16 @@ for %%I in (%names%) do if not exist "%stage%\%%~I" (
   if errorlevel 1 goto fail
 )
 :copied
+set "binary=%stage%"
+if exist "%stage%\system32\run16.exe" (
+  for %%I in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe WOW32.DLL VDMREDIR.DLL) do if exist "%stage%\%%I" goto fail
+  set "binary=%stage%\system32"
+)
 set "testdest=%stage%\tests"
+if defined testinbinary set "testdest=%binary%\tests"
 if defined testsubdir (
-  if exist "%stage%\tests\%testsubdir%" goto fail
-  set "testdest=%stage%\tests\%testsubdir%"
+  if exist "%testdest%\%testsubdir%" goto fail
+  set "testdest=%testdest%\%testsubdir%"
 )
 if defined testfiles if not exist "%testdest%\" mkdir "%testdest%"
 if errorlevel 1 goto fail
@@ -113,11 +126,6 @@ for %%I in (%testfiles%) do (
   copy /b /y "%%~I" "%testdest%\%%~nxI" >nul
   if errorlevel 1 goto fail
 )
-set "binary=%stage%"
-if not exist "%stage%\system32\run16.exe" goto identity
-for %%I in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe WOW32.DLL VDMREDIR.DLL) do if exist "%stage%\%%I" goto fail
-set "binary=%stage%\system32"
-:identity
 if defined fresh call "%repo%\build\.ninja\build-tools\refresh-package.cmd" "%stage%"
 if errorlevel 1 goto fail
 "%identity%" --stage-header "%source%" >"%stage%\.ntvdm64-test-stage.json.new"

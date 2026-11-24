@@ -56,7 +56,8 @@ function New-PhysicalRuntimeStage([string]$PackageRoot,
     [string[]]$TopLevelNames=@(),
     [switch]$FreshPackageIdentity,
     [string[]]$TestFiles=@(),
-    [string]$TestSubdirectory) {
+    [string]$TestSubdirectory,
+    [switch]$TestInBinary) {
     if(!$RuntimeImages.Count){throw 'At least one runtime image is required'}
     $runner=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/stage-runtime.cmd'
     $arguments=@('-PackageRoot',(Resolve-Path -LiteralPath $PackageRoot).Path)
@@ -64,6 +65,7 @@ function New-PhysicalRuntimeStage([string]$PackageRoot,
     foreach($name in $TopLevelNames){$arguments+=@('-Include',$name)}
     foreach($file in $TestFiles){$arguments+=@('-TestFile',$file)}
     if($TestSubdirectory){$arguments+=@('-TestSubdirectory',$TestSubdirectory)}
+    if($TestInBinary){$arguments+='-TestInBinary'}
     if($FreshPackageIdentity){$arguments+='-FreshPackageIdentity'}
     $stage=@(& $runner @arguments)
     if($LASTEXITCODE -or $stage.Count -ne 1){throw "CMD physical staging failed ($LASTEXITCODE)"}

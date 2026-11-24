@@ -34,9 +34,9 @@
     "evidence": "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md"
   },
   "test/integration/verify-command-native-edit-return.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "P215 replaces optional external C# compilation with the shared CMD-built native logon environment reader. Default inherited environment and runtime assertions remain; common staging remains S4.",
-    "evidence": "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md"
+    "evidence": "docs/etc/evidence/t484-s4-native-output-preparation.md",
+    "status": "supplemental-native-producer-delivered",
+    "reason": "CMD staging and native Userenv reader reconciled; actual EDIT screen, Ctrl+Q, CMD echo and DOS return pass."
   },
   "tools/build/Stage-OriginalSoftpcRuntime.mjs": {
     "status": "retired-with-delivery-evidence",
@@ -225,9 +225,9 @@
     "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
   },
   "test/integration/verify-native-guest-output.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P193 removes dynamic batch materialization and old flat-package assumptions; CMD/CMake owns the CRLF fixture. Strict runtime reproduces lost native output across DOS handoff; not a runtime pass. Shared staging remains S4, product display defect retained separately.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "evidence": "docs/etc/evidence/t484-s4-native-output-preparation.md",
+    "status": "migrated-delivered",
+    "reason": "CMD alias and binary-directory physical staging verified; strict concurrent-output test still reproduces recorded product failure, not functional acceptance."
   },
   "test/integration/verify-pic-reset-eoi.ps1": {
     "status": "migrated-delivered",

@@ -31,6 +31,7 @@ try {
     $stage=New-PhysicalRuntimeStage $PackageRoot
     $scope=New-IsolatedPackageScope $stage
     $binary=Get-PackageBinaryRoot $stage
+    Save-IsolatedPackageManifest $stage ($ReportPath+'.manifest.json')
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false
     $start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden

@@ -15,19 +15,19 @@ $observerPath=(Resolve-Path $Observer).Path
 New-Item -ItemType Directory $build|Out-Null
 & "$repo/tools/build-fixtures.cmd" x86 native-guest-output *> "$build/build.log"
 if($LASTEXITCODE){throw 'Native output fixture compile failed'}
+& "$repo/tools/prepare-test-inputs.cmd" $build "$repo/build/.ninja/fixtures-x86/native-guest-output.exe" CG.EXE "$repo/build/.ninja/fixtures-x86/native-guest-output.bat" CG.BAT
+if($LASTEXITCODE){throw 'Native output input preparation failed'}
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $stage=$null;$scope=$null;$saved=@{}
 foreach($name in 'PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_S34_TRACE_PATH'){
     $saved[$name]=[Environment]::GetEnvironmentVariable($name)
 }
 try {
-    $stage=New-PhysicalRuntimeStage $PackageRoot -FreshPackageIdentity
+    $stage=New-PhysicalRuntimeStage $PackageRoot -FreshPackageIdentity -TestInBinary -TestFiles @("$build/CG.EXE","$build/CG.BAT")
     $scope=New-IsolatedPackageScope $stage
     $binary=Get-PackageBinaryRoot $stage
     $tests=Join-Path $binary 'tests'
-    New-Item -ItemType Directory $tests -Force|Out-Null
-    Copy-Item "$repo/build/.ninja/fixtures-x86/native-guest-output.exe" "$tests/CG.EXE"
-    Copy-Item "$repo/build/.ninja/fixtures-x86/native-guest-output.bat" "$tests/CG.BAT"
+    Save-IsolatedPackageManifest $stage "$build/manifest.json"
     $report=Join-Path $build 'observer.txt'
     $env:PATH="$binary;$env:SystemRoot\System32;$env:SystemRoot"
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
@@ -49,7 +49,7 @@ try {
         try {
             if($stage){
                 foreach($name in 'CGREADY','CGDONE'){
-                    $path=Join-Path $stage "system32/tests/$name"
+                    $path=Join-Path $tests $name
                     if(Test-Path $path){Copy-Item $path (Join-Path $build $name)}
                 }
                 Remove-PhysicalRuntimeStage $stage

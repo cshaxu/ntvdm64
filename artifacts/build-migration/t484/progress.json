@@ -1,13 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "e7c1233f416831880158b238c2ae04cfdb4af286",
+  "head": "14bb1b1ee3ee40f72080dcbc6f3aa9149eb1d459",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-forcedos.ps1",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s4-forcedos-preparation.md"
+    " M test/build/Test-PackageIdentityTool.ps1",
+    " M test/integration/verify-command-native-edit-return.ps1",
+    " M test/integration/verify-native-guest-output.ps1",
+    " M test/observation/isolated_package_cleanup.ps1",
+    " M tools/build/native/stage-runtime.cmd.in",
+    "?? docs/etc/evidence/t484-s4-native-output-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -16,11 +19,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 127,
+    "migrated-delivered": 128,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 11,
+    "pending-producer-migration": 10,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -698,7 +701,7 @@
       "file": "test/integration/verify-native-guest-output.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "5f8ec7880b3876f8db4f8267f56c91d1a3820394652baac693305ca14013b4f4",
+      "current_sha256": "0652a932350ff0dc8433726605fcb461856e0044a8ec0f4563a5c90c9f9b33d9",
       "revisions": [
         "de7c3e279caa704e8f81da6cde4871d4db97ce5b",
         "78e2830232fe0ebad2dfe54fc8e2f3bbc446d6c0"
@@ -707,11 +710,11 @@
         "docs/etc/evidence/t484-s3-native-guest-output.md",
         "docs/etc/evidence/t484-s3-native-output-isolation.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "P193 removes dynamic batch materialization and old flat-package assumptions; CMD/CMake owns the CRLF fixture. Strict runtime reproduces lost native output across DOS handoff; not a runtime pass. Shared staging remains S4, product display defect retained separately.",
-        "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+        "evidence": "docs/etc/evidence/t484-s4-native-output-preparation.md",
+        "status": "migrated-delivered",
+        "reason": "CMD alias and binary-directory physical staging verified; strict concurrent-output test still reproduces recorded product failure, not functional acceptance."
       }
     },
     {
@@ -2048,7 +2051,7 @@
       "file": "test/observation/isolated_package_cleanup.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "0fc92abbfb9ef0f4d4267559bbd3612e6e89141cf802c13e74139b8c1a61bff8",
+      "current_sha256": "d4046d82c008004826b4a80c0dd97a1991bbc26690c1a48a57ebd3093195ad3d",
       "revisions": [
         "000da3d05a87ac283b1762cf9d9bf6a21268a2a1",
         "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a",
@@ -6618,6 +6621,12 @@
     }
   ],
   "commits": {
+    "14bb1b1ee3ee40f72080dcbc6f3aa9149eb1d459": {
+      "subject": "M0 T484 S4 P26: complete ForceDOS CMD preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-forcedos-preparation.md"
+      ]
+    },
     "e7c1233f416831880158b238c2ae04cfdb4af286": {
       "subject": "M0 T484 S4 P25: simplify Video7 CMD preparation",
       "evidence": [
@@ -8432,12 +8441,8 @@
       "file": "test/integration/verify-native-guest-output.ps1",
       "hits": [
         {
-          "line": 29,
-          "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/native-guest-output.exe\" \"$tests/CG.EXE\""
-        },
-        {
-          "line": 30,
-          "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/native-guest-output.bat\" \"$tests/CG.BAT\""
+          "line": 18,
+          "text": "& \"$repo/tools/prepare-test-inputs.cmd\" $build \"$repo/build/.ninja/fixtures-x86/native-guest-output.exe\" CG.EXE \"$repo/build/.ninja/fixtures-x86/native-guest-output.bat\" CG.BAT"
         }
       ]
     },
@@ -9196,15 +9201,15 @@
           "text": "$reader = Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/ntvdm-package-id.exe'"
         },
         {
-          "line": 61,
+          "line": 62,
           "text": "$runner=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/stage-runtime.cmd'"
         },
         {
-          "line": 130,
+          "line": 132,
           "text": "throw 'Refuse guest probe cleanup: Git data or link'"
         },
         {
-          "line": 154,
+          "line": 156,
           "text": "# Test-only compatibility for sealed flat baselines and build-link caches."
         }
       ]
