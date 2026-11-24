@@ -119,3 +119,5 @@ include(common-return.cmake)
 include(bitmap-tests.cmake)
 
 include(creation-tests.cmake)
+
+include(dispatch-tests.cmake)

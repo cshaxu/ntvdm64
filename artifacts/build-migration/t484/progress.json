@@ -1,31 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "60a333e3c02323a4954b88452e6ab4e321dfdb16",
+  "head": "316a0187a542b9cb6d5269e05e01acc83fb12b76",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-dde-alias.ps1",
+    " M test/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c",
+    " D test/observation/extract-wow-wndproc-fixture.ps1",
+    " M test/observation/verify-wow-dispatch-exception.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/SourceProjection.cmake",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-dde-native/",
-    "?? docs/etc/evidence/t484-s3-dde-native.md",
-    "?? tools/build/fixtures/wow-dde.cmake"
+    " M tools/build/wow32/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-dispatch-native/",
+    "?? docs/etc/evidence/t484-s3-dispatch-native.md",
+    "?? tools/build/wow32/dispatch-tests.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 114,
-    "unchanged": 114,
+    "changed": 115,
+    "unchanged": 113,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 56,
+    "migrated-delivered": 57,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 12,
-    "requires-disposition-reconciliation": 104,
+    "requires-disposition-reconciliation": 103,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3127,8 +3128,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "0cf1cd115ff1316ff7d33e305061bbad7e706d1e3dfa44d93669dd70d1eb2f9b",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "316a0187a542b9cb6d5269e05e01acc83fb12b76"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-dde-native.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Current DDE alias96 and EXECUTE38 native targets; old historical producers retired; projection comparison, shared COPYDATA regression, full build and publication hashes pass",
@@ -3145,12 +3150,21 @@
       "id": "B0168",
       "file": "test/observation/verify-wow-dispatch-exception.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "533d8d9127ac80a8d9033e0ed4e6dc4a74c4a4ce237d3973a620f2c3eb2bdda7",
+      "state": "changed",
+      "current_sha256": "699c6269b629e3fb626b0e27974d5769bd09641e39622313683786d3c12c9db6",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-dispatch-native.md",
+        "retention_review": {
+          "evidence": "docs/etc/evidence/t484-s3-dispatch-native.md",
+          "decision": "retain independent current boundary; retire old source producer",
+          "reason": "Actual dispatcher/exception boundary is independent from callback CCPU escape and message lifetime; no historical build in ordinary runner"
+        },
+        "status": "migrated-delivered",
+        "reason": "Native actual dispatcher owner and current WndProc projection; eight exception/five scope/debugger/map assertions and final build/cache/publication hashes pass"
+      }
     },
     {
       "id": "B0169",
@@ -5588,6 +5602,12 @@
     }
   ],
   "commits": {
+    "316a0187a542b9cb6d5269e05e01acc83fb12b76": {
+      "subject": "T484 S3 P102 migrate current DDE contracts and retire historical producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-dde-native.md"
+      ]
+    },
     "60a333e3c02323a4954b88452e6ab4e321dfdb16": {
       "subject": "T484 S3 P101 migrate creation producers and record idle validation boundary",
       "evidence": [
@@ -7850,40 +7870,12 @@
       "file": "test/observation/verify-wow-dispatch-exception.ps1",
       "hits": [
         {
-          "line": 12,
-          "text": "$graph=Get-Content \"$ProviderBuildRoot/build.ninja\" -Raw"
-        },
-        {
-          "line": 26,
-          "text": "$childPowerShell = (Get-Process -Id $PID).Path"
+          "line": 22,
+          "text": "$native=\"$repo/build/.ninja/msvc-x86-release/wow32\""
         },
         {
           "line": 27,
-          "text": "Run-Owned 'extract-wndproc' $childPowerShell ('-NoProfile -ExecutionPolicy Bypass -File \"'+$repo+'/test/observation/extract-wow-wndproc-fixture.ps1\" -BuildRoot \"'+$root+'\"') 30"
-        },
-        {
-          "line": 56,
-          "text": "$arguments='/d /s /c \"call \"'+$vs+'\" -arch=x86 -host_arch=x64 >nul && cl.exe '+$flags+' '+$release+$extra+$include+' /Gy /Gw /GL /Fo\"'+$object+'\" \"'+$input+'\"\"'"
-        },
-        {
-          "line": 62,
-          "text": "# derive permissive aliases from a failed link. The map must then prove"
-        },
-        {
-          "line": 84,
-          "text": "$arguments='/d /s /c \"call \"'+$vs+'\" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /LTCG /OPT:REF /out:\"'+$root+'/fixture.exe\" /map:\"'+$root+'/fixture.map\" '+($objects -join ' ')+' '+($aliases -join ' ')+' kernel32.lib user32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib\"'"
-        },
-        {
-          "line": 85,
-          "text": "Run-Owned 'link' 'cmd.exe' $arguments 120"
-        },
-        {
-          "line": 88,
           "text": "throw 'Unrelated original service graph survived fixture link'"
-        },
-        {
-          "line": 104,
-          "text": "@($sources|ForEach-Object {\"$repo/$_\"}) + @(\"$repo/src/compat/include/wow_thunk_provider.h\",\"$repo/test/mvdm-host/wow_thunk_provider.h\",\"$repo/src/mvdm-host/wow32/wmdisp32.c\",\"$root/original-wndproc.inc\",\"$ProviderBuildRoot/build.ninja\") |"
         }
       ]
     },

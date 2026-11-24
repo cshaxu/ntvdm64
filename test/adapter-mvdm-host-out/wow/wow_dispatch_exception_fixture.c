@@ -34,7 +34,7 @@ M32 aw32Msg[1024]; /* Exact original WndProc body only uses the selected slot. *
 BOOL gfIgnoreInputAssertGiven;
 __declspec(noreturn) void __cdecl fixture_unreachable_dependency(void);
 
-/* The selected WndProc function is extracted byte-for-byte at build time from
+/* The selected WndProc function is selected without algorithm changes at build time from
  * the current mirror.  The fixture supplies only its inactive conversion
  * dependencies: this phase uses WM_USER+7, which the original body sends
  * straight to CallBack16.  W32Dispatch/W32Exception themselves are compiled

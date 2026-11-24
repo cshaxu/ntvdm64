@@ -1693,3 +1693,5 @@ post-publication targeted checks.
 - [T484 S3 P101 creation producer checkpoint](evidence/t484-s3-creation-native.md).
 
 - [T484 S3 P102 DDE native producers](evidence/t484-s3-dde-native.md).
+
+- [T484 S3 P103 dispatcher native producer](evidence/t484-s3-dispatch-native.md).

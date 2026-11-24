@@ -781,5 +781,15 @@
       "evidence": "docs/etc/evidence/t484-s3-dde-native.md"
     },
     "status": "migrated-delivered"
+  },
+  "test/observation/verify-wow-dispatch-exception.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-dispatch-native.md",
+    "retention_review": {
+      "evidence": "docs/etc/evidence/t484-s3-dispatch-native.md",
+      "decision": "retain independent current boundary; retire old source producer",
+      "reason": "Actual dispatcher/exception boundary is independent from callback CCPU escape and message lifetime; no historical build in ordinary runner"
+    },
+    "status": "migrated-delivered",
+    "reason": "Native actual dispatcher owner and current WndProc projection; eight exception/five scope/debugger/map assertions and final build/cache/publication hashes pass"
   }
 }

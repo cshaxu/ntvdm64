@@ -1,0 +1,60 @@
+{
+  "initial_comparison": {
+    "pid": 18116,
+    "started": "2026-11-24T02:54:57.087978+01:00",
+    "exit": 1,
+    "finished": "2026-11-24T02:54:57.3404861+01:00"
+  },
+  "publication": {
+    "published_copies": 22,
+    "unchanged": true,
+    "raw_inputs": 11
+  },
+  "runtime": {
+    "started": "2026-11-24T02:53:16.964592+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T02:53:25.6957253+01:00",
+    "pid": 8124
+  },
+  "markers": [
+    "DISPATCH_EXCEPTION phase=0 sets=1 calls=1 dialogs=0 resumed=0",
+    "DISPATCH_EXCEPTION phase=1 sets=0 calls=0 dialogs=1 resumed=0",
+    "DISPATCH_EXCEPTION phase=2 sets=1 calls=1 dialogs=1 resumed=0",
+    "DISPATCH_EXCEPTION phase=3 sets=1 calls=1 dialogs=0 resumed=1",
+    "DISPATCH_EXCEPTION phase=5 sets=1 calls=1 dialogs=1 resumed=0",
+    "DISPATCH_EXCEPTION phase=6 sets=1 calls=1 dialogs=1 resumed=0",
+    "DISPATCH_EXCEPTION phase=7 sets=1 calls=1 dialogs=1 resumed=0",
+    "DISPATCH_EXCEPTION phase=8 sets=1 calls=1 dialogs=1 resumed=0",
+    "DISPATCH_SEARCH debugger-first-chance=1 child-exit=0",
+    "HARD_ERROR_SCOPE mode=0 enter=1 leave=1 dialogs=1 exception=00000000",
+    "HARD_ERROR_SCOPE mode=1 enter=1 leave=1 dialogs=1 exception=00000000",
+    "HARD_ERROR_SCOPE mode=2 enter=1 leave=1 dialogs=1 exception=e4470007",
+    "HARD_ERROR_SCOPE mode=3 enter=1 leave=0 dialogs=0 exception=e4470008",
+    "HARD_ERROR_SCOPE mode=4 enter=1 leave=1 dialogs=1 exception=e4470008",
+    "PASS selected W32Dispatch and W32Exception early/handled/resumable boundaries"
+  ],
+  "final": {
+    "exit": 0,
+    "pid": 24368,
+    "finished": "2026-11-24T02:57:00.9599881+01:00",
+    "started": "2026-11-24T02:55:51.598108+01:00"
+  },
+  "cache": [
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/wow-dispatch-exception.exe",
+      "hash": "849DC23017ED3D21C417373457D07AFE91B26CDE48FF8FE432C8035DA8BDC524",
+      "time": 639310821566348421
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/dispatch/original-wndproc.inc",
+      "hash": "0DCF24D42551AD66FF5CA6B5D9FA3D6EA599CBB01179DDC5D9614CE209B33E36",
+      "time": 639310820018405021
+    }
+  ],
+  "projection": {
+    "line_endings_normalized_equal": true,
+    "source": "EE3C41D3EF9518443863B7F5DBBB14925435168AEF61835E11809FF837D9201F",
+    "projection": "0DCF24D42551AD66FF5CA6B5D9FA3D6EA599CBB01179DDC5D9614CE209B33E36"
+  },
+  "x64_rejected": 2
+}
