@@ -29,6 +29,8 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
+S4 P30 completes optional network-profile preparation; [evidence](../etc/evidence/t484-s4-network-profile-preparation.md) separates corrected preparation failures from passing contracts and real Empty/WfwNet message tests. Cached full build and unchanged dual publication verified. Frozen346/355,9 pending; supplemental5.
+
 S4 P29 completes default external-message package preparation and shared input copying; [evidence](../etc/evidence/t484-s4-external-message-preparation.md) records cached full build, package contracts, three real groups and unchanged dual publication. The child's optional PowerShell network-profile writer is reopened. One closure and one correction leave345/355,10 pending; supplemental5.
 
 S4 P28 completes Clipboard preparation; [evidence](../etc/evidence/t484-s4-clipboard-preparation.md) records cached full build, shared native-peer contracts, six real cases and frozen reuse after RDP recovery, with unchanged dual publication. Frozen345/355,10 pending; supplemental5.
@@ -96,7 +98,7 @@ these records. Shared primitives alone never close an unverified caller.
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **345/355 disposed,10 pending**, plus5 supplemental
+Current census: **346/355 disposed,9 pending**, plus5 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;

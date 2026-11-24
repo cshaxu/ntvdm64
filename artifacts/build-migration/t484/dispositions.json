@@ -256,9 +256,9 @@
     "status": "migrated-delivered"
   },
   "test/integration/verify-win16-message-probe.ps1": {
-    "evidence": "docs/etc/evidence/t484-s4-external-message-preparation.md",
-    "reason": "S4 transitive review reopens completion: native producers are delivered, but optional Empty/WfwNet profile preparation still writes system.ini in PowerShell. Real retained coverage is documented by T483 S3 batch9; do not retire it merely for lacking a suite caller. CMD input staging and three actual message groups pass in P29; the optional profile writer remains pending.",
-    "status": "pending-producer-migration"
+    "evidence": "docs/etc/evidence/t484-s4-network-profile-preparation.md",
+    "reason": "S4 P30 completes optional Empty/WfwNet preparation through CMD/native, preserving existing binary staging. Contract negatives and both real Win16 message/retirement profiles pass; product publication hashes unchanged.",
+    "status": "migrated-delivered"
   },
   "test/integration/verify-win16-print-probe.ps1": {
     "status": "migrated-delivered",

@@ -1,15 +1,17 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "9fcf67eee0f6be324819a4ec9972b3107d2e91f5",
+  "head": "ef090bdde31c139b1a7f50864532fee8165a3709",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
     " M test/integration/verify-win16-message-probe.ps1",
-    " M test/integration/verify-wow-external-native.ps1",
-    " M test/observation/verify-wow-diagnostic-stage.ps1",
-    " M tools/build/native/prepare-wow-diagnostic.cmd.in",
-    "?? docs/etc/evidence/t484-s4-external-message-preparation.md"
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s4-network-profile-preparation.md",
+    "?? test/observation/verify-wow-network-profile.ps1",
+    "?? test/observation/wow_network_profile.c",
+    "?? tools/prepare-wow-network.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -18,11 +20,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 129,
+    "migrated-delivered": 130,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 9,
+    "pending-producer-migration": 8,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -933,20 +935,22 @@
       "file": "test/integration/verify-win16-message-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "c53283370f0c6dcfbc799024a222f31dd73b75c4eae8925882d2800313fa2c98",
+      "current_sha256": "5c699248d8a14b84e434c76e6f0ad3d1da2dd499cbfeeef00dfb316581c3b27b",
       "revisions": [
+        "ef090bdde31c139b1a7f50864532fee8165a3709",
         "1b82395128bdb2a5b560db109c17e8129e5490b1",
         "5df3ff0953f75bbc68a509819ef6d44a6a7515bc"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-message-environment.md",
-        "docs/etc/evidence/t484-s3-message-probes.md"
+        "docs/etc/evidence/t484-s3-message-probes.md",
+        "docs/etc/evidence/t484-s4-external-message-preparation.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "evidence": "docs/etc/evidence/t484-s4-external-message-preparation.md",
-        "reason": "S4 transitive review reopens completion: native producers are delivered, but optional Empty/WfwNet profile preparation still writes system.ini in PowerShell. Real retained coverage is documented by T483 S3 batch9; do not retire it merely for lacking a suite caller. CMD input staging and three actual message groups pass in P29; the optional profile writer remains pending.",
-        "status": "pending-producer-migration"
+        "evidence": "docs/etc/evidence/t484-s4-network-profile-preparation.md",
+        "reason": "S4 P30 completes optional Empty/WfwNet preparation through CMD/native, preserving existing binary staging. Contract negatives and both real Win16 message/retirement profiles pass; product publication hashes unchanged.",
+        "status": "migrated-delivered"
       }
     },
     {
@@ -1194,12 +1198,14 @@
       "state": "changed",
       "current_sha256": "cefdb9997506ee6af24f954019d9ecae2805719adc67bff2a65e2a358a3ceed4",
       "revisions": [
+        "ef090bdde31c139b1a7f50864532fee8165a3709",
         "f1d9ffb1a2ae7bc39274153b6ae42773109650bb",
         "abf51648b9e86a9ac09915335363210685ae9797"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-external-current-package.md",
-        "docs/etc/evidence/t484-s3-message-groups.md"
+        "docs/etc/evidence/t484-s3-message-groups.md",
+        "docs/etc/evidence/t484-s4-external-message-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -6628,6 +6634,12 @@
     }
   ],
   "commits": {
+    "ef090bdde31c139b1a7f50864532fee8165a3709": {
+      "subject": "M0 T484 S4 P29: migrate external message package preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-external-message-preparation.md"
+      ]
+    },
     "9fcf67eee0f6be324819a4ec9972b3107d2e91f5": {
       "subject": "M0 T484 S4 P28: complete Clipboard CMD preparation",
       "evidence": [
@@ -8620,7 +8632,7 @@
           "text": "if(!$path.StartsWith((Join-Path $repo 'build/.ninja')+'\\',[StringComparison]::OrdinalIgnoreCase)){throw 'External peer/host must come from stable Ninja fixture targets'}"
         },
         {
-          "line": 184,
+          "line": 174,
           "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]
