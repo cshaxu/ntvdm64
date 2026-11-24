@@ -9,6 +9,7 @@ set "nativepeers="
 set "testsubdir="
 set "testinbinary="
 set "bindtest="
+set "replacetest="
 set "fresh="
 set "owned="
 set "stage="
@@ -28,6 +29,11 @@ if /i "%~1"=="-FreshPackageIdentity" (
 )
 if /i "%~1"=="-BindTestIdentity" (
   set "bindtest=1"
+  shift
+  goto arguments
+)
+if /i "%~1"=="-ReplaceTestFiles" (
+  set "replacetest=1"
   shift
   goto arguments
 )
@@ -70,7 +76,7 @@ shift
 shift
 goto arguments
 :validate
-if defined bindtest if not defined fresh exit /b 2
+if defined replacetest if not defined bindtest exit /b 2
 if defined bindtest if not defined testfiles exit /b 2
 if defined bindtest if defined testinbinary exit /b 2
 if defined bindtest if defined testsubdir exit /b 2
@@ -98,6 +104,7 @@ for %%I in (%testfiles% %nativepeers%) do (
   if errorlevel 1 exit /b 2
 )
 if defined bindtest for %%I in (%testfiles%) do if /i not "%%~xI"==".exe" exit /b 2
+if defined bindtest for %%I in (%testfiles%) do for %%P in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe) do if /i "%%~nxI"=="%%P" exit /b 2
 if not defined images set "images=run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe"
 for %%I in (%names%) do if not exist "%source%\%%~I" exit /b 2
 if not exist "O:\tmp\" mkdir "O:\tmp" >nul 2>&1
@@ -149,8 +156,11 @@ if defined testsubdir (
 if defined testfiles if not exist "%testdest%\" mkdir "%testdest%"
 if errorlevel 1 goto fail
 for %%I in (%testfiles%) do (
-  if defined bindtest if exist "%testdest%\%%~nxI" goto fail
+  if defined bindtest if exist "%testdest%\%%~nxI\" goto fail
+  if defined bindtest if not defined replacetest if exist "%testdest%\%%~nxI" goto fail
   copy /b /y "%%~I" "%testdest%\%%~nxI" >nul
+  if errorlevel 1 goto fail
+  if defined bindtest fc /b "%%~I" "%testdest%\%%~nxI" >nul
   if errorlevel 1 goto fail
 )
 if defined fresh call "%repo%\build\.ninja\build-tools\refresh-package.cmd" "%stage%"
@@ -177,8 +187,16 @@ exit /b 0
 "%identity%" --manifest "%stage%\product-system32-manifest.json" >"%stage%\stage-identities.tmp"
 if errorlevel 1 exit /b 1
 set "stage_uuid="
-for /f "usebackq tokens=1,3" %%A in ("%stage%\stage-identities.tmp") do if /i "%%A"=="ntsrv.exe" set "stage_uuid=%%B"
+for /f "usebackq tokens=1,3,4" %%A in ("%stage%\stage-identities.tmp") do if /i "%%A"=="ntsrv.exe" (
+  set "stage_uuid=%%B"
+  set "server_hash=%%C"
+)
 if not defined stage_uuid exit /b 1
+"%hash%" "%binary%\ntsrv.exe" >"%stage%\stage-hash.tmp"
+if errorlevel 1 exit /b 1
+set "actual_hash="
+set /p "actual_hash="<"%stage%\stage-hash.tmp"
+if /i not "%actual_hash%"=="%server_hash%" exit /b 1
 for %%I in (%testfiles%) do (
   "%identity%" "%stage_uuid%" "%testdest%\%%~nxI"
   if errorlevel 1 exit /b 1

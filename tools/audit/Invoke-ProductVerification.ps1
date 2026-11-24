@@ -30,7 +30,7 @@ $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $sourceRuntime=(Resolve-Path $RuntimeRoot).Path
 $cache=(Resolve-Path $BuildCache).Path
 $observerPath=(Resolve-Path $Observer).Path
-$Node=(Get-Command $Node -CommandType Application -ErrorAction Stop).Source
+if($Suite -ne 'Product'){$Node=(Get-Command $Node -CommandType Application -ErrorAction Stop).Source}
 $Python=Get-Command $Python -CommandType Application -ErrorAction Stop |
     Select-Object -First 1 -ExpandProperty Source
 $log=[IO.Path]::GetFullPath($LogRoot)
@@ -39,9 +39,32 @@ if(!$log.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path
     throw 'Require a fresh repository-build evidence directory'
 }
 . "$repo/test/observation/isolated_package_cleanup.ps1"
+$attachment=@{}
+if($Suite -ne 'Product'){
+    & "$repo/tools/build-fixtures.cmd" x64 version-negatives
+    if($LASTEXITCODE){throw 'Version test fixture build failed'}
+    $versionBuild=if($env:OPENNT_BROKER_PRODUCT_BUILD){$env:OPENNT_BROKER_PRODUCT_BUILD}else{"$repo/build/.ninja/msvc-x64-release/service"}
+    $inputRoot="$log/control-inputs"
+    $inputs=@()
+    foreach($fixture in 'frontend-request-client-test.exe','broker-frontend-bootstrap-test.exe','monitor-rpc-test.exe','native-gui-startup-probe.exe'){
+        $input=if($fixture -eq 'monitor-rpc-test.exe' -and $MonitorRpc){
+            $MonitorRpc=(Resolve-Path -LiteralPath $MonitorRpc).Path
+            if(!$MonitorRpc.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Management fixture must be build-owned'}
+            $MonitorRpc
+        }else{Join-Path $cache $fixture}
+        $inputs+=@($input,$fixture)
+    }
+    foreach($name in 'old-app','wrong-protocol','reply-app','reply-protocol','legacy-interface'){
+        $inputs+=@("$versionBuild/diagnostics/version-$name/ntsrv.exe","version-negative-$name.exe")
+    }
+    & "$repo/tools/prepare-test-inputs.cmd" $inputRoot @inputs
+    if($LASTEXITCODE){throw 'Control fixture preparation failed'}
+    $testFiles=@(for($i=1;$i -lt $inputs.Count;$i+=2){Join-Path $inputRoot $inputs[$i]})
+    $attachment=@{TestFiles=$testFiles;BindTestIdentity=$true;ReplaceTestFiles=$true}
+}
 $runtime=$null
 try {
-    $runtime=New-PhysicalRuntimeStage $sourceRuntime
+    $runtime=New-PhysicalRuntimeStage $sourceRuntime @attachment
     $runtimeScope=New-IsolatedPackageScope $runtime
     # The cache is an immutable comparison source; no gate launches from it.
     # It therefore has no process-ownership scope.  Requiring it to be a
@@ -51,6 +74,7 @@ try {
     if($runtime){Remove-PhysicalRuntimeStage $runtime}
     throw
 }
+try {
 $runtimeBinary=Get-PackageBinaryRoot $runtime
 if($NativeWorker){
     $NativeWorker=(Resolve-Path -LiteralPath $NativeWorker).Path
@@ -119,8 +143,12 @@ $manifest=foreach($name in $packageNames){
 if($Suite -ne 'Control' -and (!$GuestFixture -or !$WindowObserver -or !$WowBaselineRoots)){
     throw 'Product gate requires guest fixture, Window observer and retained WOW baselines'
 }
-$null=New-Item -ItemType Directory -Path $log
+if(!(Test-Path -LiteralPath $log)){$null=New-Item -ItemType Directory -Path $log}
 $manifest|ConvertTo-Json|Set-Content "$log/runtime-manifest.json"
+} catch {
+    Remove-PhysicalRuntimeStage $runtime
+    throw
+}
 $timings=[Collections.Generic.List[object]]::new()
 $preparationMs=$total.ElapsedMilliseconds
 $variables=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_CAF_OWNED_CONSOLE','MVDM_OBSERVER_CAF_OUTER_COMMAND','MVDM_OBSERVER_SHORT_HISTORY','TEST_RUNTIME_ROOT',
@@ -261,20 +289,6 @@ try {
     }
     if($Suite -ne 'Product'){
         Remove-Item Env:MVDM_OBSERVER_WINDOW_INPUT -ErrorAction SilentlyContinue
-        # These native fixtures create the service through their executable's
-        # sibling path. Use the real System32 package layout, not the flat
-        # linker cache (whose service would derive the wrong Windows root).
-        $packageRows=@((Get-Content -LiteralPath (Join-Path $runtime 'product-system32-manifest.json') -Raw | ConvertFrom-Json))
-        $packageIds=@($packageRows | Select-Object -ExpandProperty PackageId -Unique)
-        if($packageIds.Count -ne 1){throw 'Control fixtures require one package identity'}
-        foreach($fixture in @('frontend-request-client-test.exe','broker-frontend-bootstrap-test.exe',
-            'monitor-rpc-test.exe','native-gui-startup-probe.exe')){
-            $input=if($fixture -eq 'monitor-rpc-test.exe' -and $MonitorRpc){$MonitorRpc}else{Join-Path $cache $fixture};$output=Join-Path $runtimeBinary $fixture
-            Copy-Item -LiteralPath $input -Destination $output -Force
-            if((Get-IsolatedFileSha256 $input) -ne (Get-IsolatedFileSha256 $output)){throw 'Control fixture copy mismatch'}
-            & "$repo/build/.ninja/build-tools/ntvdm-package-id.exe" (([guid](([guid]$packageIds[0]))).ToString()) $output
-            if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
-        }
         Invoke-Gate 'rpc' {
             # native-command/native-registry are in-process archive cases,
             # now run concurrently in verify-service-fixtures, not duplicated here.
@@ -292,16 +306,15 @@ try {
         Invoke-ShortRuntime {
             $env:MVDM_OBSERVER_SHORT_HISTORY='1'
             Invoke-Gate 'version-negatives' {
-                # These configure only the negative-peer builder. Do not
+                # These configure only the version test runner. Do not
                 # leak its long diagnostic paths into later guest requests.
                 # Restore the incoming environment even if Node throws or
                 # reports a failed negative; never strip a caller's values.
-                $versionNames=@('OPENNT_BROKER_PRODUCT_BUILD','OPENNT_VERSION_TEST_BUILD',
+                $versionNames=@('OPENNT_VERSION_TEST_BUILD',
                     'OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME')
                 $versionSaved=@{}
                 foreach($name in $versionNames){$versionSaved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
                 try {
-                    $env:OPENNT_BROKER_PRODUCT_BUILD=if($versionSaved.OPENNT_BROKER_PRODUCT_BUILD){$versionSaved.OPENNT_BROKER_PRODUCT_BUILD}elseif($NativeService){Split-Path $NativeService -Parent}else{$cache}
                     $env:OPENNT_VERSION_TEST_BUILD="$log/version-negative"
                     $env:OPENNT_VERSION_TEST_LOGS="$log/version-negative/logs"
                     $env:OPENNT_VERSION_TEST_RUNTIME=$runtime

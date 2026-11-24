@@ -14,7 +14,7 @@ $calls=@($ast.FindAll({param($node)
 },$true))
 if($calls.Count -ne 1){throw 'Require exactly one version-negative gate'}
 $body=$calls[0].CommandElements[2].ScriptBlock.GetScriptBlock()
-$names=@('OPENNT_BROKER_PRODUCT_BUILD','OPENNT_VERSION_TEST_BUILD',
+$names=@('OPENNT_VERSION_TEST_BUILD',
     'OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME')
 $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
 $savedExit=$global:LASTEXITCODE
@@ -22,7 +22,6 @@ $cache='fixture-cache';$log='fixture-log';$runtime='Z:\';$Node='Test-VersionNode
 $script:checked=0
 function Test-VersionNode([string]$path) {
     if($path -ne "$repo/tools/audit/Verify-ProductVersions.mjs" -or
-       $env:OPENNT_BROKER_PRODUCT_BUILD -ne $cache -or
        $env:OPENNT_VERSION_TEST_BUILD -ne "$log/version-negative" -or
        $env:OPENNT_VERSION_TEST_LOGS -ne "$log/version-negative/logs" -or
        $env:OPENNT_VERSION_TEST_RUNTIME -ne 'Z:\'){throw 'Negative gate configuration missing'}

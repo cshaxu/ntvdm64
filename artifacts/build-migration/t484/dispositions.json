@@ -1588,5 +1588,10 @@
     "status": "supplemental-native-producer-delivered",
     "reason": "P199 removes historical barrier builder referencing deleted src/app/basesrv_entry.c; current packet assertions use shared CMD fixture for both architectures.",
     "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+  },
+  "tools/audit/Invoke-ProductVerification.ps1": {
+    "status": "migrated-delivered",
+    "reason": "P44 routes version-control fixture build, input preparation and package staging through CMD; the complete Control gate passed against byte-identical host images.",
+    "evidence": "docs/etc/evidence/t484-s4-product-control-preparation.md"
   }
 }

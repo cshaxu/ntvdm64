@@ -230,10 +230,17 @@ try {
  if((Get-IsolatedPackageIdentity $bound) -eq $expected -or (Get-FileHash $bound).Hash -ne $boundHash){throw 'Test attachment source changed'}
  if(Test-Path "$stage/stage-identities.tmp"){throw 'Identity write left a staging temporary'}
 } finally {if($stage){Remove-PhysicalRuntimeStage $stage}}
-foreach($options in @(@{TestFiles=@($bound)},@{FreshPackageIdentity=$true},@{FreshPackageIdentity=$true;TestFiles=@($testInput)})){
+$stage=$null
+$serverHash=(Get-FileHash "$package/system32/ntsrv.exe").Hash
+try {
+ $stage=New-PhysicalRuntimeStage $package -TestFiles @($bound) -BindTestIdentity
+ if((Get-FileHash "$stage/system32/ntsrv.exe").Hash -ne $serverHash){throw 'Preserved package image changed'}
+ if((Get-IsolatedPackageIdentity "$stage/system32/bound-monitor.exe") -ne (Get-IsolatedPackageIdentity "$package/system32/ntsrv.exe")){throw 'Preserved identity not applied to attachment'}
+} finally {if($stage){Remove-PhysicalRuntimeStage $stage}}
+foreach($options in @(@{FreshPackageIdentity=$true},@{FreshPackageIdentity=$true;TestFiles=@($testInput)},@{TestFiles=@("$out/run16.exe");ReplaceTestFiles=$true})){
  $stage=$null
  try {$stage=New-PhysicalRuntimeStage $package -BindTestIdentity @options} catch {}
  if($stage){Remove-PhysicalRuntimeStage $stage;throw 'Invalid identity attachment accepted'}
 }
-'PASS test attachment uses fresh identity, leaves source unchanged and rejects invalid options'
+'PASS test attachment supports fresh and preserved package identity, leaves the source unchanged and rejects invalid options'
 $global:LASTEXITCODE=0
