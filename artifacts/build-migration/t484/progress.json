@@ -1,17 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "ef090bdde31c139b1a7f50864532fee8165a3709",
+  "head": "56d8bb725a61149be1480d67b161a0f732912ecd",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-win16-message-probe.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s4-network-profile-preparation.md",
-    "?? test/observation/verify-wow-network-profile.ps1",
-    "?? test/observation/wow_network_profile.c",
-    "?? tools/prepare-wow-network.cmd"
+    " M test/integration/verify-wow-mine-gameplay.ps1",
+    " M test/observation/wow_mine_gameplay_probe.c",
+    "?? docs/etc/evidence/t484-s4-mine-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -20,11 +16,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 130,
+    "migrated-delivered": 131,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 8,
+    "pending-producer-migration": 7,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -937,6 +933,7 @@
       "state": "changed",
       "current_sha256": "5c699248d8a14b84e434c76e6f0ad3d1da2dd499cbfeeef00dfb316581c3b27b",
       "revisions": [
+        "56d8bb725a61149be1480d67b161a0f732912ecd",
         "ef090bdde31c139b1a7f50864532fee8165a3709",
         "1b82395128bdb2a5b560db109c17e8129e5490b1",
         "5df3ff0953f75bbc68a509819ef6d44a6a7515bc"
@@ -944,7 +941,8 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-message-environment.md",
         "docs/etc/evidence/t484-s3-message-probes.md",
-        "docs/etc/evidence/t484-s4-external-message-preparation.md"
+        "docs/etc/evidence/t484-s4-external-message-preparation.md",
+        "docs/etc/evidence/t484-s4-network-profile-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -1283,18 +1281,18 @@
       "file": "test/integration/verify-wow-mine-gameplay.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "cd58129578cf5418bb1a6a9d111ece14c40160a4d9204fa628c7b02a2cfb233c",
+      "current_sha256": "0e58271c381bfc6c155727d854be6f602a156e3df022cbfa3beb893e05d4d82c",
       "revisions": [
         "432bb60a01ee9424cddda8c95f2c9c17c06834bf"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-mine.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "evidence": "docs/etc/evidence/t484-s3-mine.md",
-        "reason": "P57 local native/guest producers migrated; physical runtime and package identity staging remain"
+        "status": "migrated-delivered",
+        "evidence": "docs/etc/evidence/t484-s4-mine-preparation.md",
+        "reason": "S4 P31 completes CMD input and physical staging for all variants; four real gameplay/lifecycle cases pass. Retired callback text checks removed; owned-window sampling now handles negative placement without relaxing pixel assertions."
       }
     },
     {
@@ -6634,6 +6632,12 @@
     }
   ],
   "commits": {
+    "56d8bb725a61149be1480d67b161a0f732912ecd": {
+      "subject": "T484 S4 P30: prepare WOW network profiles through CMD and native fixture",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-network-profile-preparation.md"
+      ]
+    },
     "ef090bdde31c139b1a7f50864532fee8165a3709": {
       "subject": "M0 T484 S4 P29: migrate external message package preparation",
       "evidence": [

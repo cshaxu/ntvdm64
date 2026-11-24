@@ -118,7 +118,13 @@ static BOOL wait_cell(HANDLE process, DWORD before, BOOL equal, const char *phas
 {
     ULONGLONG start=GetTickCount64(); DWORD current;
     do {
+        RECT placement;
         if(WaitForSingleObject(process,0)!=WAIT_TIMEOUT || !IsWindow(mine))return FALSE;
+        if(!GetWindowRect(mine,&placement))return FALSE;
+        if(placement.left<0 || placement.top<0) {
+            printf("sampling-reposition left=%ld top=%ld\n",placement.left,placement.top);
+            if(!SetWindowPos(mine,NULL,0,0,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE))return FALSE;
+        }
         current=region_hash(mine,12,54,14,14);
         if(current && (equal ? current==before : current!=before)) {
             printf("phase=%s elapsed=%llu cell=%08lx reference=%08lx\n",phase,GetTickCount64()-start,current,before); return TRUE;
@@ -253,6 +259,9 @@ int main(int argc,char **argv)
     started=GetTickCount64();deadline=started+10000;
     do {EnumDesktopWindows(desk,find_mine,0);if(mine)break;Sleep(25);}while(GetTickCount64()<deadline && WaitForSingleObject(process,0)==WAIT_TIMEOUT);
     if(!mine || !SendMessageTimeoutW(mine,WM_NULL,0,0,SMTO_ABORTIFHUNG,2000,&reply))return 4;
+    /* Pixel assertions require the owned window to be inside this desktop,
+       independently of the original application's persisted placement. */
+    if(!SetWindowPos(mine,NULL,0,0,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE))return 4;
     printf("window-ready elapsed=%llu inherited-desktop=%u\n",GetTickCount64()-started,inherited_desktop);
     printf("owned-window=%p pid=%lu\n",mine,owner_pid);
     {
@@ -271,7 +280,11 @@ int main(int argc,char **argv)
            (!native_frame)!=(argv[4][0]=='1'))return 16;
         printf("PASS unchanged title and native frame=%u\n",native_frame);
     }
-    if(!wait_board(process,&before,&counter) || !capture(mine,argv[3],"before"))return 5;
+    if(!wait_board(process,&before,&counter)) {
+        capture(mine,argv[3],"not-ready");
+        return 5;
+    }
+    if(!capture(mine,argv[3],"before"))return 5;
     if(argc==6) {
         puts("PASS owned private-desktop game ready; no gameplay or close input");
         CloseHandle(process);CloseDesktop(desk);return 0;
@@ -286,7 +299,10 @@ int main(int argc,char **argv)
     if(!capture(mine,argv[3],"flag"))return 7;
     printf("counter-before=%08lx counter-flag=%08lx\n",counter,region_hash(mine,16,16,40,24));
     if(counter==region_hash(mine,16,16,40,24))return 8;
-    if(!PostMessageW(mine,WM_KEYDOWN,VK_F2,1) || !PostMessageW(mine,WM_KEYUP,VK_F2,0xc0000001) || !wait_cell(process,before,TRUE,"reset"))return 9;
+    if(!PostMessageW(mine,WM_KEYDOWN,VK_F2,1) || !PostMessageW(mine,WM_KEYUP,VK_F2,0xc0000001) || !wait_cell(process,before,TRUE,"reset")) {
+        capture(mine,argv[3],"reset-failed");
+        return 9;
+    }
     if(!capture(mine,argv[3],"reset"))return 10;
     if(!click(WM_LBUTTONDOWN,WM_LBUTTONUP,MK_LBUTTON) || !wait_cell(process,before,FALSE,"open"))return 11;
     if(!capture(mine,argv[3],"open"))return 12;

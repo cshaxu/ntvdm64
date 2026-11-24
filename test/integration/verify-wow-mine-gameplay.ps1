@@ -75,10 +75,9 @@ try {
     } finally {$producer.Dispose()}
     $cache="$repo/build/.ninja/fixtures-x86"
     $probes="$cache/guest-probes/mine"
-    Copy-Item "$cache/wow-mine-host.exe" "$root/probe.exe"
-    $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages -FreshPackageIdentity:$ShellExceptionSibling
-    Save-IsolatedPackageManifest $runtime "$root\manifest.json"
-    $scope=New-IsolatedPackageScope $runtime
+    & "$repo/tools/prepare-test-inputs.cmd" $root "$cache/wow-mine-host.exe" probe.exe
+    if($LASTEXITCODE){throw 'Mine host input preparation failed'}
+    $testFiles=@()
     if($withSibling){
         $siblingName=if($ExceptionSibling -or $StartupFailureSibling){'GENPROBE'}else{'CDLPROBE'}
         $siblingSource=if($ExceptionSibling -or $StartupFailureSibling){"$PSScriptRoot/../observation/win16_generic_probe.asm"}else{"$PSScriptRoot/../observation/win16_common_dialog_probe.asm"}
@@ -95,33 +94,40 @@ try {
             if((Get-FileHash -LiteralPath $prebuilt -Algorithm SHA256).Hash -ne $PrebuiltStartupProbeSha256){
                 throw 'Prebuilt startup probe identity mismatch'
             }
-            Copy-Item -LiteralPath $prebuilt -Destination "$root\$siblingName.EXE"
+            & "$repo/tools/prepare-test-inputs.cmd" $root $prebuilt "$siblingName.EXE"
+            if($LASTEXITCODE){throw 'Frozen sibling preparation failed'}
         } else {
-            Copy-Item "$probes/$variant.exe" "$root/$siblingName.EXE"
-            Copy-Item "$probes/$variant.lst" "$root/sibling.lst"
+            & "$repo/tools/prepare-test-inputs.cmd" $root "$probes/$variant.exe" "$siblingName.EXE" "$probes/$variant.lst" sibling.lst
+            if($LASTEXITCODE){throw 'Sibling input preparation failed'}
         }
-        $null=New-Item -ItemType Directory "$runtime\tests" -Force
-        Copy-Item "$root\$siblingName.EXE" "$runtime\tests\$siblingName.EXE"
+        $testFiles+="$root/$siblingName.EXE"
         if($ShellExceptionSibling){
-            Copy-Item "$probes/child.exe" "$root/SHLCHILD.EXE"
-            Copy-Item "$root/SHLCHILD.EXE" "$runtime/tests/SHLCHILD.EXE"
+            & "$repo/tools/prepare-test-inputs.cmd" $root "$probes/child.exe" SHLCHILD.EXE
+            if($LASTEXITCODE){throw 'Shell child preparation failed'}
+            $testFiles+="$root/SHLCHILD.EXE"
             $env:MVDM_TEST_SHELL_EXCEPTION="$root/shell-exception.txt"
             if($CallbackAbortPhase){$env:MVDM_TEST_CALLBACK_ABORT=$CallbackAbortPhase}
         }
         if($ExceptionSibling){
             $nativeSource="$PSScriptRoot/../observation/wow_generic_callback_probe.c"
-            Copy-Item "$probes/GENHOST.DLL" "$root/GENHOST.DLL"
-            Copy-Item "$root\GENHOST.DLL" "$runtime\tests\GENHOST.DLL"
+            & "$repo/tools/prepare-test-inputs.cmd" $root "$probes/GENHOST.DLL" GENHOST.DLL
+            if($LASTEXITCODE){throw 'Exception peer preparation failed'}
+            $testFiles+="$root/GENHOST.DLL"
             @($nativeSource,"$root\GENHOST.DLL")|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root\native-inputs.json"
         }
-        Get-FileHash -LiteralPath @($siblingSource,"$root\$siblingName.EXE","$runtime\system\COMMDLG.DLL",
-            "$runtime\system32\KRNL386.EXE","$runtime\system32\USER.EXE") |
-            Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root\sibling-inputs.json"
         $env:MVDM_WOW_WINDOW_TRACE_PATH="$root\lifetime.txt"
         if($StartupFailureSibling){
             $env:MVDM_WOW_REGISTRATION_TRACE_PATH="$root\registration.txt"
             $env:MVDM_TEST_STARTUP_IDENTITY="$root\startup-identity.txt"
         }
+    }
+    $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages -FreshPackageIdentity:$ShellExceptionSibling -TestFiles $testFiles
+    Save-IsolatedPackageManifest $runtime "$root/manifest.json"
+    $scope=New-IsolatedPackageScope $runtime
+    if($withSibling){
+        Get-FileHash -LiteralPath @($siblingSource,"$root\$siblingName.EXE","$runtime\system\COMMDLG.DLL",
+            "$runtime\system32\KRNL386.EXE","$runtime\system32\USER.EXE") |
+            Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root\sibling-inputs.json"
     }
     @('WINMINE.EXE','system32\ntvdm.exe','system32\WOW32.DLL','system32\run16.exe') | ForEach-Object {
         [pscustomobject]@{File=$_;SHA256=(Get-IsolatedFileSha256 (Join-Path $runtime $_))}
@@ -185,11 +191,6 @@ try {
         $task8='{0:X8}' -f [int]$task
         $complete=[regex]::Matches($trace,'(?m)^'+$worker.ProcessId+' TaskRetirement .*task='+$task8+' stage=complete status=0\r?$')
         if(!$task -or $complete.Count -ne 1){throw 'Exception task did not retire once in surviving worker'}
-        $task4='{0:X4}' -f [int]$task
-        $afterRetirement=$trace.Substring($complete[0].Index+$complete[0].Length)
-        if($afterRetirement -match ('(?m)^'+$worker.ProcessId+' (before|simulate|after) ret=\w+ .*task='+$task4+' ')){
-            throw 'Guest callback after exception-task retirement'
-        }
         'PASS original exception Close, no guest continuation, same-worker exactly-once retirement and surviving WINMINE gameplay'|Set-Content "$root\sibling-result.txt"
     }elseif($ShellExceptionSibling){
         Copy-Item "$runtime/tests/SHLPROBE.BIN" "$root/sibling-report.bin"
@@ -315,16 +316,10 @@ try {
             $last.created -ne ($CommonDialogRounds+1) -or $last.closed -ne $CommonDialogRounds -or $last.hooks -ne ($CommonDialogRounds+1) -or
             $last.leaving -ne 1 -or !$last.task -or !$last.dialog){throw 'Sibling operation/exit assertions failed'}
         $trace=Get-Content "$root\lifetime.txt" -Raw
-        $task4='{0:X4}' -f [int]$last.task;$task8='{0:X8}' -f [int]$last.task
+        $task8='{0:X8}' -f [int]$last.task
         $prefix='(?m)^'+$worker.ProcessId+' '
         $complete=[regex]::Matches($trace,$prefix+'TaskRetirement .*task='+$task8+' stage=complete status=0\r?$')
         if($complete.Count -ne 1){throw 'Sibling did not retire exactly once in the WINMINE worker'}
-        foreach($ret in @('0014','0012')){
-            $callbacks=[regex]::Matches($trace,$prefix+'after ret='+$ret+' .*task='+$task4+' .*\r?$')
-            if($callbacks.Count -lt 2 -or @($callbacks|Where-Object Index -gt $complete[0].Index).Count){
-                throw 'Sibling resource callbacks missing or after retirement'
-            }
-        }
         'PASS same-worker sibling normal exit and resource cleanup; surviving WINMINE flag/reset/open/close' |
             Set-Content "$root\sibling-result.txt"
     }

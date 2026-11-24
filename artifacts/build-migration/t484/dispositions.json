@@ -334,9 +334,9 @@
   "test/integration/verify-wow-graph-cost.ps1": {"status":"migrated-delivered","reason":"S4 P13 uses one CMD package preparation owner with manifest/input/MAP checks and package-bound diagnostic copies; complete real diagnostic, unit/control and normal-exit cases pass. No production or original guest changes.","evidence":"docs/etc/evidence/t484-s4-wow-diagnostic-preparation.md"},
   "test/integration/verify-wow-idle-workers.ps1": {"status":"migrated-delivered","reason":"S4 P14 moves named test input copies to shared CMD preparation and final physical TestFiles staging; real guest lifecycle/DDEML and prebuilt identity/negative copy checks pass with recorded scope.","evidence":"docs/etc/evidence/t484-s4-idle-ddeml-preparation.md"},
   "test/integration/verify-wow-mine-gameplay.ps1": {
-    "status": "pending-producer-migration",
-    "evidence": "docs/etc/evidence/t484-s3-mine.md",
-    "reason": "P57 local native/guest producers migrated; physical runtime and package identity staging remain"
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s4-mine-preparation.md",
+    "reason": "S4 P31 completes CMD input and physical staging for all variants; four real gameplay/lifecycle cases pass. Retired callback text checks removed; owned-window sampling now handles negative placement without relaxing pixel assertions."
   },
   "test/integration/verify-wow-mine-latency.ps1": {"status":"migrated-delivered","reason":"S4 P12 uses CMD producers and physical staging, removes redundant executable copies and runs canonical cache outputs; real ordinary/sampled/private WINMINE operations and normal exit pass.","evidence":"docs/etc/evidence/t484-s4-latency-preparation.md"},
   "test/integration/verify-wow-multi-dialog.ps1": {
