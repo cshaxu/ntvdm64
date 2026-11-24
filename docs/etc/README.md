@@ -1802,3 +1802,5 @@ post-publication targeted checks.
 - [T484 S3 fresh package isolation](evidence/t484-s3-fresh-stage.md).
 
 - [T484 S3 obsolete idle runner retirement](evidence/t484-s3-idle-retirement.md).
+
+- [T484 S3 cache audit consolidation](evidence/t484-s3-cache-consolidation.md).

@@ -1,30 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "2dabf7fef851e9789fc01ee3c1fa7b0de9aeaae4",
+  "head": "3d40a6f762a69753fce28dca4d0dbca916830424",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    "D  test/broker/ntsrv_idle_test.c",
-    "D  test/broker/verify_ntsrv_idle.mjs",
-    "?? docs/etc/evidence/t484-s3-idle-retirement.md"
+    "D  test/build/Test-FullComponentBuild.ps1",
+    " M tools/audit/verify-generated-input-stability.ps1",
+    "?? docs/etc/evidence/t484-s3-cache-consolidation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 157,
-    "unchanged": 32,
-    "removed": 166
+    "unchanged": 31,
+    "removed": 167
   },
   "disposition_counts": {
     "migrated-delivered": 90,
     "retained-native-declarative": 3,
-    "retired-with-delivery-evidence": 166,
+    "retired-with-delivery-evidence": 167,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 49,
+    "pending-producer-migration": 48,
     "requires-disposition-reconciliation": 17,
     "retained-standalone-audit": 16
   },
-  "existing_interpreted_candidates_with_command_hits": 145,
+  "existing_interpreted_candidates_with_command_hits": 144,
   "files": [
     {
       "id": "B0001",
@@ -331,8 +332,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "3d40a6f762a69753fce28dca4d0dbca916830424"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-idle-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -381,14 +386,15 @@
       "id": "B0020",
       "file": "test/build/Test-FullComponentBuild.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "9e74db1b20eb754d7c57434784acdd9bce6bbfbf963497af3334e69e8ec376a7",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "pending-producer-migration",
+      "completion": "retired-with-delivery-evidence",
       "decision": {
-        "reason": "Coordinates full component builds and generates command scripts; replace production orchestration with CMD",
-        "status": "pending-producer-migration"
+        "status": "retired-with-delivery-evidence",
+        "reason": "Duplicate private build orchestration removed; useful PE/intermediate assertions consolidated into passing current 11-image two-pass CMD stability gate",
+        "evidence": "docs/etc/evidence/t484-s3-cache-consolidation.md"
       }
     },
     {
@@ -4257,7 +4263,7 @@
       "file": "tools/audit/verify-generated-input-stability.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "aa02c3b42741edc7ecafc53e670495412278f861a6592c5ebcbaff613102bd3a",
+      "current_sha256": "20f6ddaedfb48bb5dc59828634dc4305356cb5eb8b6156f39a41e6ba1a3ecbf6",
       "revisions": [
         "753007863b1c37d9a48d5b2a0b589df0b1b982b3",
         "ce4fc0f9c828f549619f8d9f2e64f5494104888a"
@@ -6350,6 +6356,12 @@
     }
   ],
   "commits": {
+    "3d40a6f762a69753fce28dca4d0dbca916830424": {
+      "subject": "T484 S3 P159 retire obsolete broker idle build and fixture",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-idle-retirement.md"
+      ]
+    },
     "2dabf7fef851e9789fc01ee3c1fa7b0de9aeaae4": {
       "subject": "T484 S3 P158 verify native fresh package isolation",
       "evidence": [
@@ -7493,64 +7505,6 @@
         {
           "line": 135,
           "text": "$configurationOwner=@{targets=@(@{path=$temporaryConfig;owner='Td configuration test';reason='unconfigured test-only prefix, no Ninja graph or CMake cache';inventorySha256=$configurationInventory[-1].InventorySha256});reviewedFiles=@()}"
-        }
-      ]
-    },
-    {
-      "id": "B0020",
-      "file": "test/build/Test-FullComponentBuild.ps1",
-      "hits": [
-        {
-          "line": 7,
-          "text": "$output.StartsWith((Join-Path $repo 'build/.ninja'), [StringComparison]::OrdinalIgnoreCase) -or"
-        },
-        {
-          "line": 13,
-          "text": "$cmake = @(Get-Command cmake.exe -All -ErrorAction Stop |"
-        },
-        {
-          "line": 16,
-          "text": "if (!$cmake) {"
-        },
-        {
-          "line": 17,
-          "text": "throw 'Full component build requires a non-MinGW cmake.exe; a MinGW CMake cannot configure the MSVC preset reliably.'"
-        },
-        {
-          "line": 60,
-          "text": "Run-Step \"$Pass-x86\" x86 \"`\"$cmake`\" --build --preset msvc-x86-release-ccache --target wow32 --parallel 12\""
-        },
-        {
-          "line": 61,
-          "text": "$runner = Join-Path $repo 'build/.ninja/msvc-x86-release/worker/run-ninja-parallel.cmd'"
-        },
-        {
-          "line": 63,
-          "text": "Run-Step \"$Pass-x64\" x64 \"`\"$cmake`\" --build --preset msvc-x64-release-ccache --target native-worker native-frontend native-monitor native-launcher native-service hook64 wow_message_observer --parallel 2\""
-        },
-        {
-          "line": 68,
-          "text": "$tree = Join-Path $repo \"build/.ninja/msvc-$architecture-release\""
-        },
-        {
-          "line": 78,
-          "text": "Run-Step \"configure-$architecture\" $architecture \"`\"$cmake`\" --preset msvc-$architecture-release-ccache\""
-        },
-        {
-          "line": 81,
-          "text": "$x86 = Join-Path $repo 'build/.ninja/msvc-x86-release'"
-        },
-        {
-          "line": 82,
-          "text": "$x64 = Join-Path $repo 'build/.ninja/msvc-x64-release'"
-        },
-        {
-          "line": 83,
-          "text": "# The DLL must borrow the worker's existing session/TLS, not link a second"
-        },
-        {
-          "line": 121,
-          "text": "if ($log -notmatch 'ninja: no work to do' -or $log -match '(?m)^\\[\\d+/\\d+\\] (cl |CL |CC |CXX |Building |Linking |LIB |LINK )') {throw \"Second build was not idle: $name\"}"
         }
       ]
     },
@@ -9457,7 +9411,7 @@
           "text": "$files=@('msvc-x86-release/worker/generated/softpc-embedded-roms.rc',"
         },
         {
-          "line": 37,
+          "line": 51,
           "text": "if($LASTEXITCODE -or $plan -notmatch 'ninja: no work to do\\.'){"
         }
       ]

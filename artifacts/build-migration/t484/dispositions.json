@@ -113,10 +113,6 @@
       "evidence": "docs/etc/evidence/t484-s3-console-contracts.md"
     }
   },
-  "test/build/Test-FullComponentBuild.ps1": {
-    "reason": "Coordinates full component builds and generates command scripts; replace production orchestration with CMD",
-    "status": "pending-producer-migration"
-  },
   "test/build/Test-BuildHygiene.ps1": {
     "reason": "Cleanup publisher and native configuration verification caller; reconcile S4/S5 execution with CMD",
     "status": "pending-producer-migration"
@@ -1270,5 +1266,10 @@
     "status": "retired-with-delivery-evidence",
     "reason": "Uncalled obsolete x86/10s/synchronous RPC runner and obsolete private-main fixture removed; current 5s policy native test passed, shared RPC client retained",
     "evidence": "docs/etc/evidence/t484-s3-idle-retirement.md"
+  },
+  "test/build/Test-FullComponentBuild.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Duplicate private build orchestration removed; useful PE/intermediate assertions consolidated into passing current 11-image two-pass CMD stability gate",
+    "evidence": "docs/etc/evidence/t484-s3-cache-consolidation.md"
   }
 }
