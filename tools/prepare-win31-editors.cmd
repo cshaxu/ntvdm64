@@ -18,15 +18,6 @@ if not "%~4"=="-" if not exist "%~4" exit /b 2
 if not exist "%DEST%\PATCH\AUTOEXEC.NT" exit /b 2
 if exist "%TASK%\editor-autoexec.append" exit /b 2
 if exist "%TASK%\editor-autoexec.candidate" exit /b 2
-call "%ROOT%\tools\build-fixtures.cmd" x64 guest-ini
-if errorlevel 1 exit /b 1
-set "INI=%ROOT%\build\.ninja\fixtures-x64\guest-ini.exe"
-set "LOAD=%DEST%\PATCH\A.PIF %DEST%\PATCH\B.PIF"
-if "%~6"=="1" set "LOAD=%DEST%\PATCH\B.PIF"
-"%INI%" "%DEST%\WIN.INI" "%TASK%\editor-win.candidate" set windows load "%LOAD%"
-if errorlevel 1 exit /b 1
-if "%~7"=="1" "%INI%" "%DEST%\SYSTEM.INI" "%TASK%\editor-system.candidate" append 386Enh device *vmd
-if errorlevel 1 exit /b 1
 if not "%~4"=="-" (
  >"%TASK%\editor-autoexec.append" echo(
  >>"%TASK%\editor-autoexec.append" echo %DEST%\PATCH\MCALL.COM
@@ -49,13 +40,7 @@ if not "%~4"=="-" copy /b /y "%~4" "%DEST%\PATCH\MCALL.COM" >nul
 if errorlevel 1 exit /b 1
 if not "%~4"=="-" copy /b /y "%TASK%\editor-autoexec.candidate" "%DEST%\PATCH\AUTOEXEC.NT" >nul
 if errorlevel 1 exit /b 1
-if "%~7"=="1" copy /b /y "%TASK%\editor-system.candidate" "%DEST%\SYSTEM.INI" >nul
-if errorlevel 1 exit /b 1
-copy /b /y "%TASK%\editor-win.candidate" "%DEST%\WIN.INI" >nul
-if errorlevel 1 exit /b 1
-call "%ROOT%\tools\prepare-win31-matrix.cmd" select "%DEST%" "%TASK%" %8 0
-if errorlevel 1 exit /b 1
-rem Use the current single-launcher contract; no legacy WINSTD/WIN386 files.
-"%ROOT%\assets\release\PIF.EXE" create "%DEST%\PATCH\WIN.PIF" --title "Windows 3.1 386 Enhanced" --program "%DEST%\WIN.COM" --directory "%DEST%" --arguments /3 --config "%DEST%\PATCH\CONFIG.NT" --autoexec "%DEST%\PATCH\AUTOEXEC.NT" --close-on-exit --w386-max-xms 65535 --w386-flags 0x1003 --nt31-flags 1
-if errorlevel 1 exit /b 1
-exit /b 0
+set "LOAD_CASE=pair"
+if "%~6"=="1" set "LOAD_CASE=second"
+call "%ROOT%\tools\prepare-win31-matrix.cmd" launch "%DEST%" "%TASK%" %8 0 %LOAD_CASE% %7
+exit /b %errorlevel%

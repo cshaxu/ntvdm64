@@ -29,6 +29,12 @@ try {
   if((Get-Item "$dest/PATCH/$id.TXT").Length){throw 'Save witness not empty'}
  }
  if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'COMMAND changed'}
+ $identityInput="$root/identity-input"
+ $null=New-Item -ItemType Directory $identityInput
+ & "$repo/tools/prepare-test-inputs.cmd" -GuestPatch $dest $identityInput "$PackageRoot/system32/MEM.EXE" MEM.EXE
+ if($LASTEXITCODE -ne 2){throw 'Wrong guest owner accepted'}
+ & "$repo/tools/prepare-test-inputs.cmd" -GuestPatch $dest $copy.Task "$PackageRoot/system32/MEM.EXE" MEM.EXE
+ if($LASTEXITCODE -or (Get-FileHash "$PackageRoot/system32/MEM.EXE").Hash -ne (Get-FileHash "$dest/PATCH/MEM.EXE").Hash){throw 'Guest patch input changed'}
  $matrix="$root/matrix";$null=New-Item -ItemType Directory $matrix
  Invoke-Win31ProbeBuild -OutputRoot $matrix
  $before=@{}
@@ -48,6 +54,16 @@ try {
  if($LASTEXITCODE -ne 2){throw 'Reused preparation accepted'}
  foreach($row in $copy.Original){if((Get-FileHash ($copy.Source+$row.path)).Hash -ne $row.sha256){throw 'Installation source changed'}}
  'PASS editor INI baseline, PIF targets, save witnesses, COMMAND bytes, matrix DOSONLY 0/1/0 and exact restoration'|Set-Content "$root/result.txt"
+} finally {
+ if($copy){Remove-OwnedGuestProbeCopy $dest $copy.Task $copy.Source}
+}
+$copy=$null
+try {
+ $copy=& "$repo/test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1" -DriverImage "$repo/assets/release/ntvdm64.386" -InstallSource $InstallSource -InstallRoot $dest -OutputRoot "$root/empty-load"
+ & "$repo/tools/prepare-win31-matrix.cmd" launch $dest $copy.Task 1 0 none 0 *> "$root/empty-load.log"
+ if($LASTEXITCODE){throw 'Empty load profile preparation failed'}
+ if([IO.File]::ReadAllText("$dest/WIN.INI",$enc) -notmatch '(?im)^load=\r?$' -or
+    [IO.File]::ReadAllText("$dest/PATCH/CONFIG.NT",$enc) -notmatch '(?im)^dosonly\r?$'){throw 'Empty load profile or DOSONLY mismatch'}
 } finally {
  if($copy){Remove-OwnedGuestProbeCopy $dest $copy.Task $copy.Source}
 }

@@ -1,10 +1,15 @@
 @echo off
 rem prepare|case|select|restore INSTALL OUTPUT DOSONLY ALLOW_USER_INSTALLATION
+rem launch INSTALL OWNER DOSONLY 0 pair|second|none ADD_VMD
 setlocal EnableExtensions DisableDelayedExpansion
-if not "%~1"=="prepare" if not "%~1"=="case" if not "%~1"=="select" if not "%~1"=="restore" exit /b 2
+if not "%~1"=="prepare" if not "%~1"=="case" if not "%~1"=="select" if not "%~1"=="restore" if not "%~1"=="launch" exit /b 2
 if not "%~4"=="0" if not "%~4"=="1" exit /b 2
 if not "%~5"=="0" if not "%~5"=="1" exit /b 2
-if not "%~6"=="" exit /b 2
+if not "%~1"=="launch" if not "%~6"=="" exit /b 2
+if "%~1"=="launch" if not "%~5"=="0" exit /b 2
+if "%~1"=="launch" if not "%~6"=="pair" if not "%~6"=="second" if not "%~6"=="none" exit /b 2
+if "%~1"=="launch" if not "%~7"=="0" if not "%~7"=="1" exit /b 2
+if not "%~8"=="" exit /b 2
 for %%I in ("%~dp0..") do set "ROOT=%%~fI"
 set "DEST=%~f2"
 set "TASK=%~f3"
@@ -16,6 +21,20 @@ if not exist "%TASK%\" exit /b 2
 if not exist "%DEST%\PATCH\CONFIG.NT" exit /b 2
 if not exist "%DEST%\PATCH\AUTOEXEC.NT" exit /b 2
 if not exist "%DEST%\WIN.INI" exit /b 2
+set "OWNER="
+if "%~1"=="launch" if not exist "%DEST%\.ntvdm64-guest-owner" exit /b 2
+if "%~1"=="launch" set /p "OWNER="<"%DEST%\.ntvdm64-guest-owner"
+if "%~1"=="launch" if /i not "%OWNER%"=="%TASK%" exit /b 2
+if "%~1"=="launch" call "%ROOT%\tools\build-fixtures.cmd" x64 guest-ini
+if errorlevel 1 exit /b 1
+set "LOAD="
+if "%~6"=="pair" set "LOAD=%DEST%\PATCH\A.PIF %DEST%\PATCH\B.PIF"
+if "%~6"=="second" set "LOAD=%DEST%\PATCH\B.PIF"
+set "INI=%ROOT%\build\.ninja\fixtures-x64\guest-ini.exe"
+if "%~1"=="launch" "%INI%" "%DEST%\WIN.INI" "%TASK%\probe-win.candidate" set windows load "%LOAD%"
+if errorlevel 1 exit /b 1
+if "%~1"=="launch" if "%~7"=="1" "%INI%" "%DEST%\SYSTEM.INI" "%TASK%\probe-system.candidate" append 386Enh device *vmd
+if errorlevel 1 exit /b 1
 set "FAILED="
 if "%~1"=="prepare" (
  for %%F in (win.ini config.nt autoexec.nt) do if exist "%TASK%\matrix-original-%%F" set "FAILED=1"
@@ -62,6 +81,7 @@ if defined FAILED exit /b 1
 set "CONFIG_SOURCE="
 if "%~1"=="case" set "CONFIG_SOURCE=%TASK%\matrix-original-config.nt"
 if "%~1"=="select" set "CONFIG_SOURCE=%DEST%\PATCH\CONFIG.NT"
+if "%~1"=="launch" set "CONFIG_SOURCE=%DEST%\PATCH\CONFIG.NT"
 if defined CONFIG_SOURCE (
  rem CONFIG.NT is DOS text. Filter only the standalone directive; preserve other lines.
  findstr /v /i /r /x /c:"[ 	]*dosonly[ 	]*" "%CONFIG_SOURCE%" >"%TASK%\matrix-config.candidate"
@@ -72,6 +92,12 @@ if defined CONFIG_SOURCE if "%~4"=="1" (
  >>"%TASK%\matrix-config.candidate" echo dosonly
 )
 if defined CONFIG_SOURCE copy /b /y "%TASK%\matrix-config.candidate" "%DEST%\PATCH\CONFIG.NT" >nul
+if errorlevel 1 exit /b 1
+if "%~1"=="launch" "%ROOT%\assets\release\PIF.EXE" create "%DEST%\PATCH\WIN.PIF" --title "Windows 3.1 386 Enhanced" --program "%DEST%\WIN.COM" --directory "%DEST%" --arguments /3 --config "%DEST%\PATCH\CONFIG.NT" --autoexec "%DEST%\PATCH\AUTOEXEC.NT" --close-on-exit --w386-max-xms 65535 --w386-flags 0x1003 --nt31-flags 1
+if errorlevel 1 exit /b 1
+if "%~1"=="launch" if "%~7"=="1" copy /b /y "%TASK%\probe-system.candidate" "%DEST%\SYSTEM.INI" >nul
+if errorlevel 1 exit /b 1
+if "%~1"=="launch" copy /b /y "%TASK%\probe-win.candidate" "%DEST%\WIN.INI" >nul
 if errorlevel 1 exit /b 1
 if "%~1"=="restore" copy /b /y "%TASK%\matrix-original-win.ini" "%DEST%\WIN.INI" >nul
 if errorlevel 1 exit /b 1

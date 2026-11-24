@@ -1973,3 +1973,4 @@ post-publication targeted checks.
 - [T484 S4 Win31 editor and matrix preparation](evidence/t484-s4-win31-editor-preparation.md).
 - [T484 S4 Win31 matrix monitor preparation](evidence/t484-s4-win31-monitor-preparation.md).
 - [T484 S4 Win31 continuation observer](evidence/t484-s4-continuation-observer.md).
+- [T484 S4 Win31 identity preparation](evidence/t484-s4-win31-identity-preparation.md).

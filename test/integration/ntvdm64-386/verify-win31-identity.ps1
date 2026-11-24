@@ -113,23 +113,14 @@ $localOwnedDirectory=$null
 try {
 $enc=[Text.Encoding]::GetEncoding(28591)
 $patch=Join-Path $dest 'PATCH'
-$config=Join-Path $patch 'CONFIG.NT'
-$autoexec=Join-Path $patch 'AUTOEXEC.NT'
-$configText=[regex]::Replace($enc.GetString([IO.File]::ReadAllBytes($config)),
- '(?im)^[ \t]*dosonly[ \t]*(?:\r?\n|$)','')
-if($RuntimeCase -eq '386-dosonly1'){$configText+="`r`ndosonly`r`n"}
-[IO.File]::WriteAllBytes($config,$enc.GetBytes($configText))
-& "$repo/assets/release/PIF.EXE" create "$patch/WIN.PIF" --title 'Windows 3.1 386 Enhanced' `
- --program "$dest\WIN.COM" --directory $dest --arguments /3 --config $config --autoexec $autoexec `
- --close-on-exit --w386-max-xms 65535 --w386-flags 0x1003 --nt31-flags 1 | Out-Host
-if($LASTEXITCODE){throw 'Enhanced probe launch profile creation failed'}
-if($ExplicitVmd){
- $system="$dest/SYSTEM.INI"
- $iniText=$enc.GetString([IO.File]::ReadAllBytes($system))
- if($iniText -notmatch '(?im)^[ \t]*device[ \t]*=[ \t]*\*vmd[ \t]*(?:;[^\r\n]*)?$'){
-  $iniText=[regex]::Replace($iniText,'(?im)^\[386Enh\]','[386Enh]'+"`r`ndevice=*vmd")
-  [IO.File]::WriteAllBytes($system,$enc.GetBytes($iniText))
- }
+$addVmd=$ExplicitVmd -and [IO.File]::ReadAllText("$dest/SYSTEM.INI",$enc) -notmatch '(?im)^[ \t]*device[ \t]*=[ \t]*\*vmd[ \t]*(?:;[^\r\n]*)?$'
+$loadCase=if($InitializationFailure){'none'}else{'pair'}
+& "$repo/tools/prepare-win31-matrix.cmd" launch $dest $task ([int]($RuntimeCase -eq '386-dosonly1')) 0 $loadCase ([int]$addVmd)
+if($LASTEXITCODE){throw 'Identity launch profile preparation failed'}
+
+function Install-IdentityInput([string]$InputFile,[string]$Name) {
+ & "$repo/tools/prepare-test-inputs.cmd" -GuestPatch $dest $task $InputFile $Name
+ if($LASTEXITCODE){throw "Identity input preparation failed: $Name"}
 }
 
 $dosDefines=@()
@@ -147,14 +138,14 @@ if($NestedCommand){$dosDefines+='-DNESTED_COMMAND=1'}
 if($UnreadInputImage){
  $dosDefines+='-DUNREAD_INPUT=1'
  $dosDefines+=('-DUNREAD_MODE='+$UnreadInputMode)
- Copy-Item -LiteralPath $UnreadInputImage -Destination "$dest/PATCH/UNREAD.EXE"
+ Install-IdentityInput $UnreadInputImage 'UNREAD.EXE'
 }
 if($OrderedCommandImage){
  $dosDefines+='-DORDERED_COMMAND=1'
  if($ResizeCommand){$dosDefines+='-DRESIZED_COMMAND=1'}
  if($VisibleResizeCommand){$dosDefines+='-DVISIBLE_RESIZED_COMMAND=1'}
  if($VisibleResizeRoundTrip){$dosDefines+='-DVISIBLE_RESIZE_ROUNDTRIP=1'}
- Copy-Item -LiteralPath $OrderedCommandImage -Destination "$dest/PATCH/ORDER.EXE"
+ Install-IdentityInput $OrderedCommandImage 'ORDER.EXE'
 }
 if($DirectoryYield){$dosDefines+='-DDIRECTORY_YIELD=1'}
 if($DirectoryNetCds){if((Get-FileHash (Join-Path $PackageRoot 'system32/NTDOS.SYS')).Hash -ne '957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84'){throw 'Unexpected NTDOS identity'};$dosDefines+='-DDIRECTORY_NETCDS=1'}
@@ -169,7 +160,8 @@ if($VideoFontEarlyControl){if(!$VideoFontControl -and !$VideoFontDirectControl){
 if($VideoFontDirectControl){$dosDefines+='-DVIDEO_FONT_DIRECT_CONTROL=1'}
 if($VideoFontLinearControl){if(!$VideoFontDirectControl){throw 'Linear control requires direct font control'};$dosDefines+='-DVIDEO_FONT_LINEAR_CONTROL=1'}
 if($DosWitnessImage){
- Copy-Item -LiteralPath (Resolve-Path -LiteralPath $DosWitnessImage).Path -Destination "$task/identity.com"
+ & "$repo/tools/prepare-test-inputs.cmd" $task (Resolve-Path -LiteralPath $DosWitnessImage).Path identity.com
+ if($LASTEXITCODE){throw 'Identity DOS witness input preparation failed'}
 } else {
  Invoke-VmIdentityBuild "$task/identity.com" $(if($RetirementDriver){'retirement'}else{'dos'}) $dosDefines
 }
@@ -183,6 +175,14 @@ if($LocalDirectoryControl){
 }
 & "$repo/tools/build-fixtures.cmd" x64 win31-probe-paths *> "$task/identity-paths-build.log"
 if($LASTEXITCODE){throw 'Identity binder build failed'}
+if($NestedCommand){
+ Install-IdentityInput "$PackageRoot/system32/MEM.EXE" 'MEM.EXE'
+ if((Get-FileHash "$PackageRoot/system32/MEM.EXE").Hash -ne (Get-FileHash "$dest/PATCH/MEM.EXE").Hash){throw 'Nested MEM copy differs'}
+ if($ReentrantCommand){
+  Install-IdentityInput "$PackageRoot/system32/COMMAND.COM" 'COMMAND.COM'
+  if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'Nested COMMAND copy differs'}
+ }
+}
 foreach($id in 'A','B'){
  $directory="$dest\PATCH"
  # Font/application isolation control uses a shared, stable working directory.
@@ -201,12 +201,6 @@ foreach($id in 'A','B'){
   # Give the nested DOS witness an immutable MEM copy in the short guest fixture.
   $commandPath="$PackageRoot\system32;C:\Windows\System32;C:\Windows"
   if($NestedCommand){
-   Copy-Item -LiteralPath "$PackageRoot/system32/MEM.EXE" -Destination "$dest/PATCH/MEM.EXE" -Force
-   if((Get-FileHash "$PackageRoot/system32/MEM.EXE").Hash -ne (Get-FileHash "$dest/PATCH/MEM.EXE").Hash){throw 'Nested MEM copy differs'}
-   if($ReentrantCommand){
-    Copy-Item -LiteralPath "$PackageRoot/system32/COMMAND.COM" -Destination "$dest/PATCH/COMMAND.COM" -Force
-    if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'Nested COMMAND copy differs'}
-   }
    $commandPath="$dest\PATCH;$commandPath"
   }
   $binding+=@('--env',"ROLE=$id",'--env','ROUND=0','--env',"PATH=$commandPath")
@@ -230,19 +224,13 @@ foreach($id in 'A','B'){
  if($LASTEXITCODE){throw 'DOS VM PIF build failed'}
 
 }
-$ini="$dest/WIN.INI"
-$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
-$s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
-if($InitializationFailure){$s=[regex]::Replace($s,'(?im)^load=[^\r\n]*','load=')}
-[IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
-
 $defines=@()
 if($InitializationFailure){$defines=@('-DINIT_FAILURE=1')}
 if($Reuse){
  $reuseDefines=@()
  if($RetireCommand){$reuseDefines+='-DRETIRE_COMMAND=1'}
  Invoke-VmIdentityBuild "$task/reuse.com" reuse $reuseDefines
- Copy-Item -LiteralPath "$task/reuse.com" -Destination "$dest/PATCH/REUSE.COM"
+ Install-IdentityInput "$task/reuse.com" 'REUSE.COM'
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/REUSE.PIF" --title 'VM reuse' --program "$dest\PATCH\REUSE.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002
  if($LASTEXITCODE){throw 'Reuse PIF build failed'}
  $defines=@('-DREUSE=1')
