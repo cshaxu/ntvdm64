@@ -1,12 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "2644f4c7aa360b6f91b71da6ed31a9ae15d3d5a3",
+  "head": "67be6eea19e7f52c3b1203ce11437dfc809d4a0c",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-win16-ddeml-probe.ps1",
-    "?? docs/etc/evidence/t484-s3-ddeml-native.md"
+    " M test/integration/verify-s45-vcd-serial-discovery.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s3-serial-native.md",
+    "?? test/observation/serial_port_mask.c"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -804,7 +807,7 @@
       "file": "test/integration/verify-s45-vcd-serial-discovery.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "c854c55e5fbdf2bca85729a676707f80d9c1ab374ce32c474489ae8403a0fe77",
+      "current_sha256": "b37d32ee06d58f7f7ad51aecc05d9f9cbf2c144fb11c1a85e64fa8f1761982b9",
       "revisions": [
         "626a2aed8aeb9d8eaa34f8403b2bbd61714f6753"
       ],
@@ -814,8 +817,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Native CMD serial probe assembly verified for five masks; historical runtime staging/cleanup and runtime helper remain pending",
-        "evidence": "docs/etc/evidence/t484-s3-serial-probe.md"
+        "reason": "Native host oracle and CMD guest producer verified; isolated direct/nested guest mask0 cases pass; shared runtime copy/manifest staging remains S4",
+        "evidence": "docs/etc/evidence/t484-s3-serial-native.md"
       }
     },
     {
@@ -846,9 +849,11 @@
       "state": "changed",
       "current_sha256": "2def78d61b6ca2b5059ab5b2b63baec4862166f7771eaa4968d71c2e91a22fd3",
       "revisions": [
+        "67be6eea19e7f52c3b1203ce11437dfc809d4a0c",
         "cde4bc13ce1f390f73ed22f074cc2d1607cc5521"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-ddeml-native.md",
         "docs/etc/evidence/t484-s3-win16-probes.md"
       ],
       "completion": "pending-producer-migration",
@@ -6452,6 +6457,12 @@
     }
   ],
   "commits": {
+    "67be6eea19e7f52c3b1203ce11437dfc809d4a0c": {
+      "subject": "T484 S3 P176 share native DDEML environment reader",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-ddeml-native.md"
+      ]
+    },
     "2644f4c7aa360b6f91b71da6ed31a9ae15d3d5a3": {
       "subject": "T484 S3 P175 migrate VT fidelity to native build graph",
       "evidence": [
@@ -7933,8 +7944,20 @@
       "file": "test/integration/verify-s45-vcd-serial-discovery.ps1",
       "hits": [
         {
-          "line": 68,
-          "text": "Copy-Item (Join-Path $repository 'build/.ninja/fixtures-x86/guest-probes/serial-discovery/S45VCD.COM') $probe"
+          "line": 5,
+          "text": "[string]$Observer = \"$PSScriptRoot/../../build/.ninja/fixtures-x64/console-startup-observer.exe\""
+        },
+        {
+          "line": 19,
+          "text": "$maskText=& \"$repository/build/.ninja/fixtures-x64/serial-port-mask.exe\""
+        },
+        {
+          "line": 25,
+          "text": "$probe=\"$repository/build/.ninja/fixtures-x86/guest-probes/serial-discovery/S45VCD.COM\""
+        },
+        {
+          "line": 26,
+          "text": "Get-FileHash $probe,\"$repository/build/.ninja/fixtures-x64/serial-port-mask.exe\",$PSCommandPath,$Observer|Export-Csv -NoTypeInformation \"$build/inputs.csv\""
         }
       ]
     },

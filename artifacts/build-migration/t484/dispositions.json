@@ -189,8 +189,8 @@
   },
   "test/integration/verify-s45-vcd-serial-discovery.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Native CMD serial probe assembly verified for five masks; historical runtime staging/cleanup and runtime helper remain pending",
-    "evidence": "docs/etc/evidence/t484-s3-serial-probe.md"
+    "reason": "Native host oracle and CMD guest producer verified; isolated direct/nested guest mask0 cases pass; shared runtime copy/manifest staging remains S4",
+    "evidence": "docs/etc/evidence/t484-s3-serial-native.md"
   },
   "test/integration/verify-s7-rpc-fixtures.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-rpc-control-identity.md",

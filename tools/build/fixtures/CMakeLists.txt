@@ -412,3 +412,6 @@ endif()
 
 fixture(native-vt-producer CL test/observation/native_vt_fidelity_test.c)
 set_property(TARGET native-vt-producer_objects PROPERTY COMPILE_OPTIONS /nologo /MT /O2 /W4 /we4013 /std:c11 /D_WIN32_WINNT=0x0A00 /DWIN32_LEAN_AND_MEAN /DVT_PRODUCER_ONLY)
+
+fixture(serial-port-mask CL test/observation/serial_port_mask.c)
+set_property(TARGET serial-port-mask_objects PROPERTY COMPILE_OPTIONS /nologo /MT /O2 /W4 /WX /std:c11)
