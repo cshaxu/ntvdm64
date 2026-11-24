@@ -1,14 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "9dbbdc857c707ea412d48b04f177fc234f5a2d7f",
+  "head": "de476911ced09096f0730f866dfeee1a6efae64f",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/opennt-host/netlib/verify.ps1",
+    " D tools/audit/verify-modesw-guards.py",
     " M tools/build-fixtures.cmd",
     " M tools/build/worker/object-contracts.cmake",
-    "?? docs/etc/evidence/t484-s3-netlib-contract.md"
+    "?? docs/etc/evidence/t484-s3-modesw-guards.md",
+    "?? test/mvdm-host/verify-modesw-guards.ps1"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6489,6 +6490,12 @@
     }
   ],
   "commits": {
+    "de476911ced09096f0730f866dfeee1a6efae64f": {
+      "subject": "M0 T484 S3 P208: link netlib contract through native product graph",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-netlib-contract.md"
+      ]
+    },
     "9dbbdc857c707ea412d48b04f177fc234f5a2d7f": {
       "subject": "M0 T484 S3 P207: consolidate native WOW file and conversion contracts",
       "evidence": [

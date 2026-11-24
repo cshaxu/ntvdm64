@@ -37,3 +37,24 @@ worker_unit("obj/tests/netlib-packstr.obj" "${NTVDM_REPO}/test/opennt-host/netli
 worker_link("netlib-packstr.exe" "/nologo /out:$out" "kernel32.lib"
   INPUTS "obj/tests/netlib-packstr.obj" "obj/opennt-netlib/packstr.obj")
 worker_group(netlib-packstr "netlib-packstr.exe")
+
+# Preserve both rejected kernel-i386 boundaries and their original diagnostics.
+set(modesw_source "${NTVDM_REPO}/src/mvdm-host/dpmi32/modesw.c")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${modesw_source}")
+file(READ "${modesw_source}" modesw_text)
+string(REPLACE "\r\n" "\n" modesw_text "${modesw_text}")
+string(REGEX MATCHALL "#line[ \t]+[0-9]+[ \t]*\n#if defined\\(i386\\)[ \t]*\n#error DIVERGENCE MVDM-HOST-DIV-619[^\n]*\n#line[ \t]+[0-9]+[ \t]*\n#else" modesw_guards "${modesw_text}")
+list(LENGTH modesw_guards modesw_count)
+if(NOT modesw_count EQUAL 2)
+  message(FATAL_ERROR "Expected exactly two original modesw i386 guards")
+endif()
+set(modesw_index 0)
+foreach(guard IN LISTS modesw_guards)
+  math(EXPR modesw_index "${modesw_index}+1")
+  set(input "${CMAKE_BINARY_DIR}/generated/modesw-guard-${modesw_index}.c")
+  file(GENERATE OUTPUT "${input}" CONTENT "${guard}\n#endif\n")
+  add_custom_target(modesw-guard-${modesw_index}
+    COMMAND "${CMAKE_C_COMPILER}" /nologo /TC /E "${input}" VERBATIM)
+  add_custom_target(modesw-guard-${modesw_index}-negative
+    COMMAND "${CMAKE_C_COMPILER}" /nologo /TC /E /Di386 "${input}" VERBATIM)
+endforeach()

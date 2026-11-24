@@ -1594,9 +1594,9 @@
     "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
   },
   "tools/audit/verify-modesw-guards.py": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P209 replaces Python source generation and compiler commands with CMD/native modesw targets; preserves both original-line rejections and adds selected-branch positive controls.",
+    "evidence": "docs/etc/evidence/t484-s3-modesw-guards.md"
   },
   "tools/audit/Verify-Run16Entry.mjs": {
     "status": "supplemental-direct-command-review",
