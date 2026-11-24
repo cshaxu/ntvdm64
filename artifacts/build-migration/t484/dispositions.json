@@ -257,14 +257,14 @@
     "status": "pending-producer-migration"
   },
   "test/integration/verify-wow-dc-guest.ps1": {
-    "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
-    "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
-    "status": "pending-producer-migration"
+    "reason": "Existing shared CMD/native Win16 producer; actual DC, ordinary and common-dialog contracts pass in normal user environment",
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-dialog-native.md"
   },
   "test/integration/verify-wow-dialog-guest.ps1": {
-    "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
-    "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
-    "status": "pending-producer-migration"
+    "reason": "Existing shared CMD/native Win16 producer; actual DC, ordinary and common-dialog contracts pass in normal user environment",
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-dialog-native.md"
   },
   "test/integration/verify-wow-edit-tabstop.ps1": {
     "status": "migrated-delivered",

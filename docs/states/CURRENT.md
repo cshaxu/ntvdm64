@@ -86,6 +86,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P165 existing Win16 chains](../etc/evidence/t484-s3-win16-existing-chains.md) | Five existing CMD chains pass actual normal-user-environment contracts; inherited-agent failures retained. Cached full/11/22 hashes pass unchanged.302/355 disposed,53 remain. |
 
+| [P166 DC/dialog chains](../etc/evidence/t484-s3-dialog-native.md) | Existing shared CMD producer and three actual guest contracts pass; cached full/11/22 hashes unchanged.304/355 disposed,51 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

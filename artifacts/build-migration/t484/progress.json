@@ -1,11 +1,11 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "1b82395128bdb2a5b560db109c17e8129e5490b1",
+  "head": "ddd79486a6c4e49ccd8ac59a3c03fe7958e1f322",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    "?? docs/etc/evidence/t484-s3-win16-existing-chains.md"
+    "?? docs/etc/evidence/t484-s3-dialog-native.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -14,11 +14,11 @@
     "removed": 167
   },
   "disposition_counts": {
-    "migrated-delivered": 102,
+    "migrated-delivered": 104,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 167,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 36,
+    "pending-producer-migration": 34,
     "requires-disposition-reconciliation": 17,
     "retained-standalone-audit": 16
   },
@@ -1042,11 +1042,11 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-clipboard-probes.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
-        "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
-        "status": "pending-producer-migration"
+        "reason": "Existing shared CMD/native Win16 producer; actual DC, ordinary and common-dialog contracts pass in normal user environment",
+        "status": "migrated-delivered",
+        "evidence": "docs/etc/evidence/t484-s3-dialog-native.md"
       }
     },
     {
@@ -1061,11 +1061,11 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-clipboard-probes.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "P51 direct guest/native producers migrated and equivalence verified; shared runtime staging remains pending",
-        "evidence": "docs/etc/evidence/t484-s3-clipboard-probes.md",
-        "status": "pending-producer-migration"
+        "reason": "Existing shared CMD/native Win16 producer; actual DC, ordinary and common-dialog contracts pass in normal user environment",
+        "status": "migrated-delivered",
+        "evidence": "docs/etc/evidence/t484-s3-dialog-native.md"
       }
     },
     {
@@ -6377,6 +6377,12 @@
     }
   ],
   "commits": {
+    "ddd79486a6c4e49ccd8ac59a3c03fe7958e1f322": {
+      "subject": "T484 S3 P165 verify five existing native Win16 test chains",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win16-existing-chains.md"
+      ]
+    },
     "1b82395128bdb2a5b560db109c17e8129e5490b1": {
       "subject": "T484 S3 P164 reuse native environment in Win16 message tests",
       "evidence": [
