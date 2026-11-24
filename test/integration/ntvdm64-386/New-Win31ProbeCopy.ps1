@@ -34,20 +34,8 @@ if($MouseDriver){
  if((Get-FileHash -LiteralPath $mousePath).Hash -ne $hash){throw 'Mouse driver staging mismatch'}
  $hash | Set-Content "$task/mouse-driver.sha256"
 }
-foreach($file in Get-ChildItem $dest -Recurse -File | Where-Object {$_.Extension -in '.INI','.CMD','.NT'}) {
- $enc=[Text.Encoding]::GetEncoding(28591)
- $s=$enc.GetString([IO.File]::ReadAllBytes($file.FullName))
- $s=[regex]::Replace($s,[regex]::Escape($source),{param($m) $dest},'IgnoreCase')
- [IO.File]::WriteAllBytes($file.FullName,$enc.GetBytes($s))
-}
-foreach($file in Get-ChildItem $dest -Recurse -Filter '*.PIF'){
- & "$repo/assets/release/PIF.EXE" replace-root $file.FullName --from $source --to $dest | Out-Host
- if($LASTEXITCODE){throw 'PIF rebase failed'}
-}
-foreach($file in Get-ChildItem $dest -Filter '*.GRP'){
- & "$repo/assets/release/GRP.EXE" replace-root $file.FullName --root $dest | Out-Host
- if($LASTEXITCODE){throw 'GRP rebase failed'}
-}
+& "$repo/tools/rebase-guest-paths.cmd" $dest $source $task 31 *> "$task/path-rebase.log"
+if($LASTEXITCODE){throw 'Copied guest path preparation failed'}
 $system="$dest/SYSTEM.INI"
 $enc=[Text.Encoding]::GetEncoding(28591)
 $s=$enc.GetString([IO.File]::ReadAllBytes($system))

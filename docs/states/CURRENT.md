@@ -29,14 +29,14 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
-S4 P34 delivers native equal-length Win95 hive preparation; [evidence](../etc/evidence/t484-s4-hive-relocation.md) records exact old/new hive identities, released-tool negative checks and the actual1166-file preparer. Parent INI/driver chains remain pending:348/355 disposed,7 pending, supplemental5.
+S4 P35 delivers shared CMD copied-guest text/PIF/GRP preparation; [evidence](../etc/evidence/t484-s4-guest-paths.md) records complete Win31/Win95 byte comparisons and corrected failure propagation. Driver/profile chains remain pending:348/355 disposed,7 pending, supplemental5.
 
 S1 inventory/design and S2 native host migration are closed. The
 [execution plan](../etc/operations/t484-cmd-build-release-plan.md) retains
 the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S5 clean,
 interpreter-free end-to-end acceptance have not completed.
 
-S4 deliveries through P34 are complete; detailed results and limitations remain in
+S4 deliveries through P35 are complete; detailed results and limitations remain in
 these records. Shared primitives alone never close an unverified caller.
 
 | P | Delivered scope and evidence |
@@ -75,6 +75,7 @@ these records. Shared primitives alone never close an unverified caller.
 | 32 | [multi dialog preparation](../etc/evidence/t484-s4-multi-dialog-preparation.md) |
 | 33 | [Guest copying and ownership cleanup](../etc/evidence/t484-s4-guest-copy-ownership.md) |
 | 34 | [Native hive preparation](../etc/evidence/t484-s4-hive-relocation.md) |
+| 35 | [Shared copied-guest paths](../etc/evidence/t484-s4-guest-paths.md) |
 
 | S3 delivery | Actual result |
 | --- | --- |

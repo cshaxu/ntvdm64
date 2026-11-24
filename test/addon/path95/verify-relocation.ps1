@@ -37,5 +37,15 @@ foreach($name in 'SYSTEM.DAT','USER.DAT'){
  if(!$LASTEXITCODE -or (Test-Path "$candidate.invalid")){throw 'Truncated hive accepted'}
  if((Get-FileHash $inputFile).Hash -ne $hash){throw 'Source changed'}
 }
-'PASS equal relocation, canonical reverse, default no-op, existing output, unequal paths, truncated input and source identity' | Set-Content "$out/result.txt"
+# Literal configuration mode must preserve arbitrary Latin1 bytes, blank lines,
+# mixed newlines, shell metacharacters and a root immediately before a suffix.
+$enc=[Text.Encoding]::GetEncoding(28591)
+$inputText=";!%&<>`r`n`r`npath=o:\old\SYSTEM`nother=O:\OLDSUFFIX`r`n"+[char]255+[char]0+'o:\OLD'
+[IO.File]::WriteAllBytes("$out/text.input",$enc.GetBytes($inputText))
+$expected=[regex]::Replace($inputText,[regex]::Escape('O:\OLD'),'Q:\LongerRoot','IgnoreCase')
+& $tool replace-text "$out/text.input" "$out/text.output" 'O:\OLD' 'Q:\LongerRoot' *> "$out/text.log"
+if($LASTEXITCODE -or [Convert]::ToBase64String([IO.File]::ReadAllBytes("$out/text.output")) -cne [Convert]::ToBase64String($enc.GetBytes($expected))){throw 'Text byte contract differs'}
+& $tool replace-text (Join-Path $source 'SYSTEM.DAT') "$out/hive-as-text" $source $target *> "$out/hive-as-text.log"
+if(!$LASTEXITCODE -or (Test-Path "$out/hive-as-text")){throw 'Text operation accepted hive'}
+'PASS hive and literal text relocation; negative contracts; source identity' | Set-Content "$out/result.txt"
 $global:LASTEXITCODE=0

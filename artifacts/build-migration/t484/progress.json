@@ -1,6 +1,6 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "9617bb1044d034368c6362ea65cecfbf6cc3498e",
+  "head": "042a8157b2db2498b9c54347cd3c8913a884e69a",
   "worktree_status": [
     " M assets/release/addon-manifest.json",
     " M assets/release/path95.exe",
@@ -8,12 +8,12 @@
     " M docs/states/CURRENT.md",
     " M src/addon/path95/README.md",
     " M src/addon/path95/path95.c",
+    " M test/addon/path95/verify-relocation.ps1",
+    " M test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1",
     " M test/integration/ntvdm64-386/New-Win95ProbeCopy.ps1",
-    " M test/integration/ntvdm64-386/README.md",
-    " D test/integration/ntvdm64-386/relocate-win95-hive-equal.py",
-    "?? docs/etc/evidence/t484-s4-hive-relocation.md",
-    "?? test/addon/",
-    "?? tools/relocate-guest-hives.cmd"
+    "?? docs/etc/evidence/t484-s4-guest-paths.md",
+    "?? test/build/verify-guest-path-preparation.ps1",
+    "?? tools/rebase-guest-paths.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6646,6 +6646,12 @@
     }
   ],
   "commits": {
+    "042a8157b2db2498b9c54347cd3c8913a884e69a": {
+      "subject": "T484 S4 P34: prepare layout-preserving Win95 hives through CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-hive-relocation.md"
+      ]
+    },
     "9617bb1044d034368c6362ea65cecfbf6cc3498e": {
       "subject": "T484 S4 P33: regularize guest ownership and historical temporary names",
       "evidence": [

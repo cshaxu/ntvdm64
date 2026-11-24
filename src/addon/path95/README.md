@@ -14,3 +14,8 @@ The explicit `replace-equal INPUT OUTPUT FROM TO` operation accepts only
 CREG hives and nonempty, equal-length roots. It preserves allocation extents,
 entry padding and free-list metadata; only matched REG_SZ bytes and enabled
 RGDB checksums change. Both replacement operations require a fresh output.
+
+`replace-text INPUT OUTPUT FROM TO` performs literal case-insensitive byte
+replacement without a trailing path boundary, matching copied INI/CMD/NT
+configuration preparation. It preserves other bytes and rejects CREG input.
+Ordinary `replace` retains its existing path-boundary rules.

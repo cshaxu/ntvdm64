@@ -1965,3 +1965,5 @@ post-publication targeted checks.
 - [T484 S4 ForceDOS preparation](evidence/t484-s4-forcedos-preparation.md)
 
 - [T484 S4 layout-preserving hive preparation](evidence/t484-s4-hive-relocation.md).
+
+- [T484 S4 shared guest path preparation](evidence/t484-s4-guest-paths.md).
