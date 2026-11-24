@@ -97,28 +97,19 @@ New-Item -ItemType Directory -Path $output | Out-Null
 # An extended witness must retain the boot/ready record contract below.
 . "$PSScriptRoot/Invoke-Win31ProbeBuild.ps1"
 Invoke-Win31ProbeBuild -OutputRoot $output -WindowsProbeImage $WindowsProbeImage
-& "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" "$output/W31CHECK.EXE" "$output/W31DOS.COM" $patch
-if($LASTEXITCODE){throw 'Win31 witness path binding failed'}
 . "$repo/test/observation/isolated_package_cleanup.ps1"
 $winBytes = [IO.File]::ReadAllBytes($winIni)
 $configBytes = [IO.File]::ReadAllBytes($config)
 $autoBytes = [IO.File]::ReadAllBytes($autoexec)
 $encoding = [Text.Encoding]::GetEncoding(28591)
-$ini = $encoding.GetString($winBytes)
-if (@([regex]::Matches($ini,'(?im)^run=[^\r\n]*')).Count -ne 1) { throw 'Expected exactly one WIN.INI run entry' }
-$baseConfig = $encoding.GetString($configBytes)
-$baseConfig = [regex]::Replace($baseConfig,'(?im)^\s*dosonly\s*\r?\n','')
 $results = [Collections.Generic.List[object]]::new()
 $savedEnv = @{}
 foreach ($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_FULLSCREEN_READY','MVDM_OBSERVER_PROMPT_PAIR')) {
     $savedEnv[$name] = [Environment]::GetEnvironmentVariable($name,'Process')
 }
 try {
-    Copy-Item -LiteralPath "$output/W31CHECK.EXE" -Destination $probe
-    Copy-Item -LiteralPath "$output/W31DOS.COM" -Destination $dosProbe
-    [IO.File]::WriteAllBytes($autoexec,$encoding.GetBytes($encoding.GetString($autoBytes)+"`r`n$dosProbe`r`n"))
-    $ini = [regex]::Replace($ini,'(?im)^run=[^\r\n]*',"run=$probe")
-    [IO.File]::WriteAllBytes($winIni,$encoding.GetBytes($ini))
+    & "$repo/tools/prepare-win31-matrix.cmd" prepare $install $output 0 ([int][bool]$AllowUserInstallation)
+    if($LASTEXITCODE){throw 'Matrix profile preparation failed'}
     foreach ($case in @(
         @{Name='std-dosonly0'; Command='WINSTD.CMD'; Enhanced=$false; DosOnly=$false},
         @{Name='std-dosonly1'; Command='WINSTD.CMD'; Enhanced=$false; DosOnly=$true},
@@ -129,9 +120,8 @@ try {
         if($PreparedProfile) {
             if((($encoding.GetString($configBytes) -match '(?im)^dosonly\s*$')) -ne $case.DosOnly){throw 'Prepared launcher selected the wrong DOSONLY'}
         } else {
-            $text = $baseConfig
-            if ($case.DosOnly) { $text += "`r`ndosonly`r`n" }
-            [IO.File]::WriteAllBytes($config,$encoding.GetBytes($text))
+            & "$repo/tools/prepare-win31-matrix.cmd" case $install $output ([int][bool]$case.DosOnly) ([int][bool]$AllowUserInstallation)
+            if($LASTEXITCODE){throw 'Matrix DOSONLY selection failed'}
         }
         $stage=$null; $scope=$null; $process=$null; $errorText=$null; $serviceLossPassed=$false; $registryCaptured=$false
         $report=Join-Path $output "$($case.Name).observer.txt"
@@ -409,9 +399,13 @@ try {
         Write-Host "$($case.Name): started=$started desktop-and-mode=$valid normal-exit=$exited pass=$pass"
     }
 } finally {
-    [IO.File]::WriteAllBytes($winIni,$winBytes)
-    [IO.File]::WriteAllBytes($config,$configBytes)
-    [IO.File]::WriteAllBytes($autoexec,$autoBytes)
+    if(Test-Path "$output/matrix-prepared"){
+        & "$repo/tools/prepare-win31-matrix.cmd" restore $install $output 0 ([int][bool]$AllowUserInstallation)
+        if($LASTEXITCODE){throw 'Matrix original profile restore failed'}
+        if(![Linq.Enumerable]::SequenceEqual([byte[]][IO.File]::ReadAllBytes($winIni),[byte[]]$winBytes) -or
+           ![Linq.Enumerable]::SequenceEqual([byte[]][IO.File]::ReadAllBytes($config),[byte[]]$configBytes) -or
+           ![Linq.Enumerable]::SequenceEqual([byte[]][IO.File]::ReadAllBytes($autoexec),[byte[]]$autoBytes)){throw 'Matrix restore changed original bytes'}
+    }
     foreach ($path in @($probe,$dosProbe,$dosResult,$boot,$ready)) { if(Test-Path -LiteralPath $path){Remove-Item -LiteralPath $path} }
     foreach ($name in $savedEnv.Keys) {
         if ($null -eq $savedEnv[$name]) { Remove-Item "Env:$name" -ErrorAction SilentlyContinue }

@@ -29,14 +29,14 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
-S4 P36 consolidates driver preparation into the existing profile owner and renames it guest-ini; [evidence](../etc/evidence/t484-s4-guest-ini-reuse.md) records the withdrawn separate candidate, common owner and final-name preparation/runtime checks. Parent configuration chains remain pending:348/355 disposed,7 pending, supplemental5.
+S4 P37 migrates Win31 editor and matrix configuration preparation to CMD, reusing guest-ini and PIF; [evidence](../etc/evidence/t484-s4-win31-editor-preparation.md) records exact restoration and real DOSONLY=0/1 normal exits. Optional monitor preparation and diagnostic editor acceptance remain pending. Census unchanged:348/355 disposed,7 pending, supplemental5.
 
 S1 inventory/design and S2 native host migration are closed. The
 [execution plan](../etc/operations/t484-cmd-build-release-plan.md) retains
 the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S6 clean,
 interpreter-free end-to-end acceptance have not completed.
 
-S4 deliveries through P36 are complete; detailed results and limitations remain in
+S4 deliveries through P37 are complete; detailed results and limitations remain in
 these records. Shared primitives alone never close an unverified caller.
 
 | P | Delivered scope and evidence |

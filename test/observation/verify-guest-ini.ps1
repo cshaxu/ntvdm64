@@ -48,5 +48,23 @@ foreach($case in @(@('missing-enh',"[boot]`r`nmouse.drv=mouse.drv`r`n"),@('dupli
 }
 & "$repo/tools/prepare-guest-ini.cmd" $root Empty
 if($LASTEXITCODE -ne 2){throw 'Unowned stage accepted'}
+foreach($newline in "`r`n","`n"){
+ $file=Join-Path $root ('literal-'+$newline.Length+'.ini')
+ $input="; caf$([char]233)$newline[windows]${newline}load=old${newline}run=${newline}[386Enh]${newline}device=old.386"
+ [IO.File]::WriteAllBytes($file,$encoding.GetBytes($input))
+ & $tool $file "$file.set" set windows load 'O:\tmp\ed\A.PIF O:\tmp\ed\B.PIF'
+ if($LASTEXITCODE -or $encoding.GetString([IO.File]::ReadAllBytes("$file.set")) -cne $input.Replace('load=old','load=O:\tmp\ed\A.PIF O:\tmp\ed\B.PIF')){throw 'Literal set changed unrelated bytes'}
+ & $tool $file "$file.append" append 386Enh device '*vmd'
+ if($LASTEXITCODE -or $encoding.GetString([IO.File]::ReadAllBytes("$file.append")) -cne $input.Replace("[386Enh]$newline","[386Enh]${newline}device=*vmd$newline")){throw 'Literal append lost repeated keys or line endings'}
+ $hash=(Get-FileHash "$file.set").Hash
+ & $tool $file "$file.set" set windows load new
+ if(!$LASTEXITCODE -or (Get-FileHash "$file.set").Hash -ne $hash){throw 'Existing literal candidate overwritten'}
+}
+foreach($case in @(@('missing-key',"[windows]`r`nrun=x`r`n"),@('duplicate-key',"[windows]`r`nload=a`r`nLOAD=b`r`n"),@('duplicate-section',"[windows]`r`nload=a`r`n[WINDOWS]`r`nload=b`r`n"))){
+ $file=Join-Path $root ($case[0]+'.ini')
+ [IO.File]::WriteAllBytes($file,$encoding.GetBytes($case[1]))
+ & $tool $file "$file.candidate" set windows load new
+ if($LASTEXITCODE -ne 2 -or (Test-Path "$file.candidate")){throw "Ambiguous literal edit accepted: $($case[0])"}
+}
 'PASS network and driver profiles, entry ordering, existing-output refusal, unrelated bytes, duplicate/missing/NUL/selection rejection and stage boundary'|Set-Content "$root/result.txt"
 $global:LASTEXITCODE=0

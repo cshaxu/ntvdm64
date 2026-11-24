@@ -1,19 +1,18 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "5f0d0ab42db13ed3194aa13c014421eb33a3881b",
+  "head": "cc465308bd8e888fafeb662d8029d9d52a04115f",
   "worktree_status": [
     " M docs/etc/README.md",
-    " M docs/etc/operations/t484-cmd-build-release-plan.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1",
-    " M test/integration/ntvdm64-386/New-Win95ProbeCopy.ps1",
-    " M test/integration/verify-win16-message-probe.ps1",
-    "RM test/observation/wow_network_profile.c -> test/observation/guest_ini.c",
-    "RM test/observation/verify-wow-network-profile.ps1 -> test/observation/verify-guest-ini.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "RM tools/prepare-wow-network.cmd -> tools/prepare-guest-ini.cmd",
-    "?? docs/etc/evidence/t484-s4-guest-ini-reuse.md"
+    " M test/integration/Invoke-Win31ProbeBuild.ps1",
+    " M test/integration/ntvdm64-386/verify-win31-editors.ps1",
+    " M test/integration/win31_runtime_matrix_test.ps1",
+    " M test/observation/guest_ini.c",
+    " M test/observation/verify-guest-ini.ps1",
+    "?? docs/etc/evidence/t484-s4-win31-editor-preparation.md",
+    "?? test/build/verify-win31-preparation.ps1",
+    "?? tools/prepare-win31-editors.cmd",
+    "?? tools/prepare-win31-matrix.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -467,7 +466,7 @@
       "file": "test/integration/ntvdm64-386/verify-win31-editors.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "7375dd46fe57c26c57226b957a516eb5a57d0c9ad62004b3452eb530a806e1a5",
+      "current_sha256": "40547ebe691ff2a87a92a5e4da0556e5671c668c9c0f5bbb7d6a95960a965866",
       "revisions": [
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "c2d588bc8c1d3ab8d2c083c38e037aa7603c4f1d"
@@ -941,6 +940,7 @@
       "state": "changed",
       "current_sha256": "cf3db7485730ea0211ad001752093ca6aaefab72c6ec0220359497941d3e3641",
       "revisions": [
+        "cc465308bd8e888fafeb662d8029d9d52a04115f",
         "56d8bb725a61149be1480d67b161a0f732912ecd",
         "ef090bdde31c139b1a7f50864532fee8165a3709",
         "1b82395128bdb2a5b560db109c17e8129e5490b1",
@@ -950,6 +950,7 @@
         "docs/etc/evidence/t484-s3-message-environment.md",
         "docs/etc/evidence/t484-s3-message-probes.md",
         "docs/etc/evidence/t484-s4-external-message-preparation.md",
+        "docs/etc/evidence/t484-s4-guest-ini-reuse.md",
         "docs/etc/evidence/t484-s4-network-profile-preparation.md"
       ],
       "completion": "migrated-delivered",
@@ -1478,7 +1479,7 @@
       "file": "test/integration/win31_runtime_matrix_test.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "ab44eec4e533ef744e2e077c434a0bece5b86871ec192be5a5a274c0dc494917",
+      "current_sha256": "79187fa997e0536d3fae375c5be60be06d2bb9dc651f38115e2954bd4f4e41dd",
       "revisions": [
         "9213d542c7c62c253c664d9ba7996a9799f4a9c0",
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
@@ -6646,6 +6647,12 @@
     }
   ],
   "commits": {
+    "cc465308bd8e888fafeb662d8029d9d52a04115f": {
+      "subject": "T484 S4 P36: reuse and rename the guest INI preparation owner",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-guest-ini-reuse.md"
+      ]
+    },
     "5f0d0ab42db13ed3194aa13c014421eb33a3881b": {
       "subject": "T484 S4 P35: consolidate copied guest path preparation in CMD",
       "evidence": [
@@ -8372,11 +8379,11 @@
           "text": "# Run in a background modern pwsh process with a diagnostic host package."
         },
         {
-          "line": 69,
+          "line": 49,
           "text": "$nasm=(Get-Command nasm.exe).Source"
         },
         {
-          "line": 71,
+          "line": 51,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
@@ -9040,15 +9047,11 @@
       "file": "test/integration/win31_runtime_matrix_test.ps1",
       "hits": [
         {
-          "line": 100,
-          "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" \"$output/W31CHECK.EXE\" \"$output/W31DOS.COM\" $patch"
-        },
-        {
-          "line": 148,
+          "line": 138,
           "text": "& \"$repo/build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid](([guid]::new([Convert]::FromHexString((Get-IsolatedPackageIdentity \"$stage/system32/ntsrv.exe\")))))).ToString()) $monitor"
         },
         {
-          "line": 254,
+          "line": 244,
           "text": "$closeArgs=if($ConsoleClose){@('--close-node','1',\"$($workers[0].ProcessId)\")}else{@('--terminate',\"$($workers[0].ProcessId)\")}"
         }
       ]

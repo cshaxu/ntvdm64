@@ -62,6 +62,51 @@ static int driver_entry(HANDLE file,const char *root,const char *name,int leadin
     int n=_snprintf_s(line,sizeof(line),_TRUNCATE,"%sdevice=%s\\PATCH\\%s%s",leading?"\r\n":"",root,name,leading?"":"\r\n");
     return n>=0 && emit(file,line,(size_t)n);
 }
+/* Literal operations on one unambiguous section. Set requires one existing
+   key; append preserves repeated keys such as device. Unrelated bytes and
+   the edited line's terminator are retained. Always write a fresh candidate. */
+static int literal_profile(char *text,const char *output,const char *operation,
+                           const char *section,const char *key,const char *value)
+{
+    char heading[256],*line,*end,*next,*value_start=NULL,*value_end=NULL;
+    char *insertion=NULL;const char *newline="\r\n";
+    size_t key_length=strlen(key),newline_length=2;
+    unsigned matches=0;int selected=0,append=!strcmp(operation,"append"),result=1;
+    HANDLE file;
+    if((!append && strcmp(operation,"set")) || !*section || !key_length ||
+       strpbrk(section,"[]\r\n") || strpbrk(key,"=\r\n") || strpbrk(value,"\r\n") ||
+       _snprintf_s(heading,sizeof(heading),_TRUNCATE,"[%s]",section)<0 ||
+       sections(text,heading)!=1)return 2;
+    for(line=text;*line;line=next){
+        char *content_end;
+        end=line_end(line);next=*end?end+1:end;
+        content_end=end;if(content_end>line && content_end[-1]=='\r')--content_end;
+        if(*line=='['){
+            selected=header(line,end,heading);
+            if(selected){
+                insertion=next;
+                if(*end && (end==line || end[-1]!='\r')){newline="\n";newline_length=1;}
+            }
+        }else if(selected && (size_t)(content_end-line)>key_length &&
+                 !_strnicmp(line,key,key_length) && line[key_length]=='='){
+            ++matches;value_start=line+key_length+1;value_end=content_end;
+        }
+    }
+    if(!append && matches!=1)return 2;
+    file=CreateFileA(output,GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);
+    if(file==INVALID_HANDLE_VALUE)return 1;
+    if(append){
+        if(!emit(file,text,(size_t)(insertion-text)))goto done;
+        if(insertion>text && insertion[-1]!='\n' && !emit(file,newline,newline_length))goto done;
+        if(!emit(file,key,key_length) || !emit(file,"=",1) ||
+           !emit(file,value,strlen(value)) || !emit(file,newline,newline_length) ||
+           !emit(file,insertion,strlen(insertion)))goto done;
+    }else if(!emit(file,text,(size_t)(value_start-text)) ||
+             !emit(file,value,strlen(value)) || !emit(file,value_end,strlen(value_end)))goto done;
+    if(FlushFileBuffers(file))result=0;
+done:
+    CloseHandle(file);if(result)DeleteFileA(output);return result;
+}
 static int driver_profile(char *text,const char *output,const char *root,const char *version,const char *mask)
 {
     unsigned flags;char *last,*line,*end,*next;int mode,enhanced=0,boot=0,boots=0,mouse=0,result=1;
@@ -113,8 +158,8 @@ int main(int argc, char **argv)
     char actual[32];
     char temporary[MAX_PATH];
     int result = 1;
-    if (argc != 3 && argc != 6) return 2;
-    if (argc==6) { /* INI OUTPUT ROOT VERSION FLAGS; candidate only. */ }
+    if (argc != 3 && argc != 6 && argc != 7) return 2;
+    if (argc==6 || argc==7) { /* Candidate operations, never in-place. */ }
     else if (!strcmp(argv[2], "Empty")) value = "";
     else if (!strcmp(argv[2], "WfwNet")) value = "wfwnet.drv";
     else return 2;
@@ -130,6 +175,7 @@ int main(int argc, char **argv)
     fclose(file);
     text[size] = 0;
     if (strlen(text) != (size_t)size) { free(text); return 2; }
+    if(argc==7){result=literal_profile(text,argv[2],argv[3],argv[4],argv[5],argv[6]);free(text);return result;}
     if(argc==6){result=driver_profile(text,argv[2],argv[3],argv[4],argv[5]);free(text);return result;}
     boots=sections(text,"[boot]");
     free(text);

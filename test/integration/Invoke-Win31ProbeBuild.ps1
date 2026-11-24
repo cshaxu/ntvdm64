@@ -16,6 +16,6 @@ function Invoke-Win31ProbeBuild {
     if($LASTEXITCODE){throw 'Win31 path binder build failed'}
     $cache="$repo/build/.ninja/fixtures-x86/guest-probes/win31-matrix"
     if(!$WindowsProbeImage){$WindowsProbeImage="$cache/W31CHECK.EXE"}
-    Copy-Item -LiteralPath $WindowsProbeImage -Destination "$OutputRoot/W31CHECK.EXE"
-    Copy-Item -LiteralPath "$cache/W31DOS.COM" -Destination "$OutputRoot/W31DOS.COM"
+    & "$repo/tools/prepare-test-inputs.cmd" $OutputRoot $WindowsProbeImage W31CHECK.EXE "$cache/W31DOS.COM" W31DOS.COM
+    if($LASTEXITCODE){throw 'Win31 witness input preparation failed'}
 }

@@ -29,30 +29,10 @@ $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $copy=& "$PSScriptRoot/New-Win31ProbeCopy.ps1" -DriverImage $DriverImage -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot -InterruptObserver $InterruptObserver -InstanceDriver $InstanceDriver
 $task=$copy.Task; $dest=$copy.Destination
 try {
-$enc=[Text.Encoding]::GetEncoding(28591)
-if($ExplicitVmd){
- $system="$dest/SYSTEM.INI"
- $iniText=$enc.GetString([IO.File]::ReadAllBytes($system))
- $iniText=[regex]::Replace($iniText,'(?im)^\[386Enh\]','[386Enh]'+"`r`ndevice=*vmd")
- [IO.File]::WriteAllBytes($system,$enc.GetBytes($iniText))
-}
-if($MouseCalloutBridge){
- Copy-Item -LiteralPath $MouseCalloutBridge -Destination "$dest/PATCH/MCALL.COM"
- $auto="$dest/PATCH/AUTOEXEC.NT"
- [IO.File]::AppendAllText($auto,"`r`n$dest\PATCH\MCALL.COM`r`n",$enc)
-}
-if($SaveWitness){foreach($name in 'A.TXT','B.TXT'){[IO.File]::WriteAllBytes("$dest/PATCH/$name",[byte[]]@())}}
-Copy-Item -LiteralPath "$PackageRoot/system32/COMMAND.COM" -Destination "$dest/PATCH/COMMAND.COM"
+$callout=if($MouseCalloutBridge){(Resolve-Path -LiteralPath $MouseCalloutBridge).Path}else{'-'}
+& "$repo/tools/prepare-win31-editors.cmd" $dest $task $PackageRoot $callout ([int][bool]$SaveWitness) ([int][bool]$FirstDosBeforeSecond) ([int][bool]$ExplicitVmd) ([int][bool]$DosOnly)
+if($LASTEXITCODE){throw 'Editor profile preparation failed'}
 if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'COMMAND copy mismatch'}
-foreach($id in 'A','B'){
- & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "Prompt probe $id" --program "$dest\PATCH\COMMAND.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
- if($LASTEXITCODE){throw 'PIF failed'}
-
-}
-$ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
-$load=if($FirstDosBeforeSecond){"$dest\PATCH\B.PIF"}else{"$dest\PATCH\A.PIF $dest\PATCH\B.PIF"}
-$s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$load")
-[IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
 $buildLine='/d /s /c ""'+$repo+'/tools/build-win31-editor.cmd" "'+$task+'/controller.exe" "'+$dest+'" '+[int][bool]$MouseMenu+' '+[int][bool]$DosOnly+' '+[int][bool]$SaveWitness+' '+[int]($FirstExit -eq 'Dos')+' '+[int][bool]$FirstDosBeforeSecond+'"'
 $producer=Start-Process $env:ComSpec -ArgumentList $buildLine -WindowStyle Hidden -PassThru -RedirectStandardOutput "$task/controller-build.stdout.txt" -RedirectStandardError "$task/controller-build.stderr.txt"
 $null=$producer.Handle
@@ -86,7 +66,7 @@ if($RegistrySnapshotMonitor){
  if(!$DosOnly){throw 'No-payload registry assertion requires DOSONLY'}
  $registryArguments=@{RegistrySnapshotMonitor=$RegistrySnapshotMonitor;RegistrySnapshotMarker="$dest/PATCH/EDITORS.BIN"}
 }
-& "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/controller.exe" -TimeoutMs 90000 -Cases $runtimeCase @registryArguments
+& "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/controller.exe" -TimeoutMs 90000 -Cases $runtimeCase -PreparedProfile @registryArguments
 if($LASTEXITCODE){throw 'Prompt matrix failed'}
 
 } finally {
