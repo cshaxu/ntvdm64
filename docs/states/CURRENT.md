@@ -90,7 +90,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P126 creation/reclaim producers](../etc/evidence/t484-s3-lifecycle-creation.md) | Four current contracts pass; nine obsolete producer branches removed;22 prior binaries unchanged; cached full/publication/cache checks pass. B0195 partial:27/30 normal entries. |
 
-Completed implementation batches through P126 passed their cached full host build. P73 checks11 raw host inputs
+| [P127 menu/consolidation](../etc/evidence/t484-s3-lifecycle-menu.md) | Menu native producer and page alias pass; obsolete extractor/branches removed; cached full/publication hashes pass. B0195:28 native+1 consolidated,1 normal and fault variants remain. |
+
+Completed implementation batches through P127 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

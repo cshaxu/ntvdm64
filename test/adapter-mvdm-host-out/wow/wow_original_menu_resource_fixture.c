@@ -233,7 +233,7 @@ int __cdecl wow_original_menu_resource_fixture(void)
 
 #ifdef WOW_RESOURCE_BOUND_FIXTURE
 /* Exact source-selected clients/Unicode cover, generated with provenance by
- * extract-wow-menu-fixture.ps1; no test-defined resource-loading algorithm. */
+ * the native lifecycle source projections; no test-defined resource-loading algorithm. */
 #include "wow_bitmap_bindings.h"
 #define LoadMenuA wow_user_load_menuA
 #define LoadMenuW wow_user_load_menuW

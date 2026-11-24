@@ -1,0 +1,43 @@
+{
+  "nativeNormal": 28,
+  "publication": {
+    "publishedCopies": 22,
+    "rawInputs": 11,
+    "unchanged": true,
+    "republished": false
+  },
+  "failedAttempts": [
+    {
+      "exit": 1,
+      "started": "2026-11-24T05:43:31.5738717+01:00",
+      "finished": "2026-11-24T05:44:02.1950337+01:00",
+      "pid": 21212
+    },
+    {
+      "exit": 1,
+      "started": "2026-11-24T05:45:45.8724932+01:00",
+      "pid": 4004,
+      "finished": "2026-11-24T05:46:21.4493371+01:00"
+    }
+  ],
+  "prior": {
+    "unchanged": 25,
+    "changed": [
+      "window-borrow"
+    ],
+    "changedCaseRerun": "window-borrow via page-domain"
+  },
+  "remainingNormal": 1,
+  "validation": {
+    "started": "2026-11-24T05:49:01.6075824+01:00",
+    "pid": 23676,
+    "exit": 0,
+    "finished": "2026-11-24T05:50:34.5112317+01:00"
+  },
+  "fileComplete": false,
+  "original": {
+    "originalRegionsEqual": 4,
+    "pinnedSourceHashes": 2
+  },
+  "consolidatedNormal": 1
+}
