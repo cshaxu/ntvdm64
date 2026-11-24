@@ -42,28 +42,16 @@ try {
         $producer.WaitForExit();$producer.ExitCode|Set-Content "$root/producer.exit.txt"
         if($producer.ExitCode){throw 'Dialog producer failed'}
     } finally {$producer.Dispose()}
-    Copy-Item "$repo/build/.ninja/fixtures-x86/wow-multi-dialog.exe" "$root/probe.exe"
-    $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages
-    Save-IsolatedPackageManifest $runtime "$root\manifest.json"
-    # Original WOW redirects the Windows-root progman.exe to the native
-    # system shell; an isolated test application must not occupy that path.
-    $guestFixture=Join-Path $runtime 'GUEST'
-    $null=New-Item -ItemType Directory -Path $guestFixture
-    $guestCopy=Join-Path $guestFixture ([IO.Path]::GetFileName($Guest))
-    Copy-Item -LiteralPath $Guest -Destination $guestCopy -Force
-    if ($Mode -eq 'progman') {
-        # The isolated copy owns its INI/group files. Never point the guest at
-        # the installed writable group paths from the source installation.
-        $guestDir=Split-Path -Parent $Guest
-        $groups=@('MAIN.GRP','ACCESSOR.GRP','GAMES.GRP','STARTUP.GRP')
-        $ini=@('[Settings]','Window=64 48 576 384 1','Order= 1 2 3 4','', '[Groups]')
-        for ($i=0; $i -lt $groups.Count; ++$i) {
-            $sourceGroup=Join-Path $guestDir $groups[$i]
-            if (!(Test-Path -LiteralPath $sourceGroup -PathType Leaf)) { throw "Missing isolated fixture group: $sourceGroup" }
-            Copy-Item -LiteralPath $sourceGroup -Destination (Join-Path $runtime $groups[$i]) -Force
-            $ini += ('Group'+($i+1)+'='+ (Join-Path $runtime $groups[$i]))
-        }
-        Set-Content -Encoding ascii -LiteralPath (Join-Path $runtime 'PROGMAN.INI') -Value $ini
+    $leaf=[IO.Path]::GetFileName($Guest)
+    & "$repo/tools/prepare-test-inputs.cmd" $root "$repo/build/.ninja/fixtures-x86/wow-multi-dialog.exe" probe.exe $Guest $leaf
+    if($LASTEXITCODE){throw 'Dialog input preparation failed'}
+    # Keep guest PROGMAN away from the Windows-root native shell redirect.
+    $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages -TestFiles @("$root/$leaf") -TestSubdirectory GUEST
+    Save-IsolatedPackageManifest $runtime "$root/manifest.json"
+    $guestCopy=Join-Path "$runtime/tests/GUEST" $leaf
+    if($Mode -eq 'progman'){
+        & "$repo/tools/prepare-progman-test.cmd" $runtime (Split-Path -Parent $Guest)
+        if($LASTEXITCODE){throw 'Program group preparation failed'}
     }
     $scope=New-IsolatedPackageScope $runtime
     $env:TEMP=$runtime;$env:TMP=$runtime;$env:PATH="$runtime\system32;"+$env:SystemRoot+'\System32'

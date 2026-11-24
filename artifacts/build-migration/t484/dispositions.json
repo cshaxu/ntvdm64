@@ -340,9 +340,9 @@
   },
   "test/integration/verify-wow-mine-latency.ps1": {"status":"migrated-delivered","reason":"S4 P12 uses CMD producers and physical staging, removes redundant executable copies and runs canonical cache outputs; real ordinary/sampled/private WINMINE operations and normal exit pass.","evidence":"docs/etc/evidence/t484-s4-latency-preparation.md"},
   "test/integration/verify-wow-multi-dialog.ps1": {
-    "reason": "P59 local producer migrated; shared runtime/package staging remains",
-    "evidence": "docs/etc/evidence/t484-s3-ui.md",
-    "status": "pending-producer-migration"
+    "reason": "S4 P32 completes CMD input staging and isolated program-group configuration. Six real application paths, final PROGMAN repeat and exact-copy/INI/failure contracts pass; unchanged dual publication verified.",
+    "evidence": "docs/etc/evidence/t484-s4-multi-dialog-preparation.md",
+    "status": "migrated-delivered"
   },
   "test/integration/verify-wow-observer-cost.ps1": {"status":"migrated-delivered","reason":"S4 P13 uses one CMD package preparation owner with manifest/input/MAP checks and package-bound diagnostic copies; complete real diagnostic, unit/control and normal-exit cases pass. No production or original guest changes.","evidence":"docs/etc/evidence/t484-s4-wow-diagnostic-preparation.md"},
   "test/integration/verify-wow-s3-guest-contracts.ps1": {

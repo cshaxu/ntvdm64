@@ -1,13 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "56d8bb725a61149be1480d67b161a0f732912ecd",
+  "head": "ff20fb3fe66c114d2d9b5cb1875ea4b377da9299",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-mine-gameplay.ps1",
-    " M test/observation/wow_mine_gameplay_probe.c",
-    "?? docs/etc/evidence/t484-s4-mine-preparation.md"
+    " M test/integration/verify-wow-multi-dialog.ps1",
+    "?? docs/etc/evidence/t484-s4-multi-dialog-preparation.md",
+    "?? tools/prepare-progman-test.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -16,11 +16,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 131,
+    "migrated-delivered": 132,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 7,
+    "pending-producer-migration": 6,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -1283,10 +1283,12 @@
       "state": "changed",
       "current_sha256": "0e58271c381bfc6c155727d854be6f602a156e3df022cbfa3beb893e05d4d82c",
       "revisions": [
+        "ff20fb3fe66c114d2d9b5cb1875ea4b377da9299",
         "432bb60a01ee9424cddda8c95f2c9c17c06834bf"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-mine.md"
+        "docs/etc/evidence/t484-s3-mine.md",
+        "docs/etc/evidence/t484-s4-mine-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -1323,18 +1325,18 @@
       "file": "test/integration/verify-wow-multi-dialog.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "770eeb0a5aeebe8759ca9bc9c1d152bfb3a4b4c74a4ba7284f68344a20e6ae62",
+      "current_sha256": "e2f72bd21d86abc7cc223dee156df9972b5c04161d2831532dc6b53804a9b247",
       "revisions": [
         "965416bb9508a70c2166d48a78b53c770dfbfbc9"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-ui.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "P59 local producer migrated; shared runtime/package staging remains",
-        "evidence": "docs/etc/evidence/t484-s3-ui.md",
-        "status": "pending-producer-migration"
+        "reason": "S4 P32 completes CMD input staging and isolated program-group configuration. Six real application paths, final PROGMAN repeat and exact-copy/INI/failure contracts pass; unchanged dual publication verified.",
+        "evidence": "docs/etc/evidence/t484-s4-multi-dialog-preparation.md",
+        "status": "migrated-delivered"
       }
     },
     {
@@ -6632,6 +6634,12 @@
     }
   ],
   "commits": {
+    "ff20fb3fe66c114d2d9b5cb1875ea4b377da9299": {
+      "subject": "T484 S4 P31: consolidate WINMINE staging and correct pixel probe placement",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-mine-preparation.md"
+      ]
+    },
     "56d8bb725a61149be1480d67b161a0f732912ecd": {
       "subject": "T484 S4 P30: prepare WOW network profiles through CMD and native fixture",
       "evidence": [
@@ -8930,8 +8938,8 @@
       "file": "test/integration/verify-wow-multi-dialog.ps1",
       "hits": [
         {
-          "line": 45,
-          "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/wow-multi-dialog.exe\" \"$root/probe.exe\""
+          "line": 46,
+          "text": "& \"$repo/tools/prepare-test-inputs.cmd\" $root \"$repo/build/.ninja/fixtures-x86/wow-multi-dialog.exe\" probe.exe $Guest $leaf"
         }
       ]
     },
