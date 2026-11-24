@@ -2,13 +2,13 @@ from pathlib import Path
 import re
 import sys
 
-base = Path(sys.argv[1] if len(sys.argv) > 1 else 'build/.ninja/t475-handle-compare-p')
+base = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parents[2] / 'build/.ninja'
 cases = {
-    'worker-x86/nthook32.dll.map': ('process_hook_payload_write', 'process_hook_payload_take', 'process_hook_startup_attach'),
-    'hook64/nthook64.dll.map': ('process_hook_payload_write', 'process_hook_payload_take', 'process_hook_startup_attach'),
-    'worker-x86/ntvdm.exe.map': ('process_hook_payload_write',),
-    'worker-native/ntvwm.exe.map': ('process_hook_payload_write',),
-    'launcher/run16.exe.map': ('process_hook_payload_take',),
+    'msvc-x86-release/worker/nthook32.dll.map': ('process_hook_payload_write', 'process_hook_payload_take', 'process_hook_startup_attach'),
+    'msvc-x64-release/hook/nthook64.dll.map': ('process_hook_payload_write', 'process_hook_payload_take', 'process_hook_startup_attach'),
+    'msvc-x86-release/worker/ntvdm.exe.map': ('process_hook_payload_write',),
+    'msvc-x64-release/worker/ntvwm.exe.map': ('process_hook_payload_write',),
+    'msvc-x64-release/launcher/run16.exe.map': ('process_hook_payload_take',),
 }
 def check(text, required):
     if re.search(r'detour', text, re.I):

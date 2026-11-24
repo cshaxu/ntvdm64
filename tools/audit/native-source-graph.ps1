@@ -36,3 +36,26 @@ function Get-GraphSources([string]$Target,[hashtable]$Graph) {
     if(!$sources.Count){throw "No source providers reached: $Target"}
     return @($sources | Sort-Object)
 }
+function Get-ProductCompilerDependencies([string]$root,[string]$product,[string]$source) {
+    $graph=Read-Graph $root
+    if(!$graph.ContainsKey($product)){throw "Missing product target: $product"}
+    $selected=[Collections.Generic.HashSet[string]]::new()
+    $pending=[Collections.Generic.Stack[string]]::new()
+    $pending.Push($product)
+    while($pending.Count){
+        $node=$pending.Pop()
+        if($selected.Add($node) -and $graph.ContainsKey($node)){
+            foreach($input in $graph[$node]){$pending.Push($input)}
+        }
+    }
+    $objects=@($selected | Where-Object {
+        $_ -match '\.obj$' -and @($graph[$_] | Where-Object {$_ -like "*/$source"}).Count
+    })
+    if($objects.Count -ne 1){throw "Expected one production compiler for $source; found $($objects.Count)"}
+    $target=$objects[0]
+    $output=@(& ninja -C $root -t deps $target 2>&1)
+    if($LASTEXITCODE -ne 0 -or ($output -join "`n") -notmatch '#deps \d+.*\(VALID\)') {
+        throw "Missing compiler dependency data for $target"
+    }
+    return (($output -join "`n").Replace('\','/'))
+}

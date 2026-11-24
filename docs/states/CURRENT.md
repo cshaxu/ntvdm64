@@ -44,6 +44,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P144 cache/boundary audits](../etc/evidence/t484-s3-native-cache-audits.md) | Two CMD cache passes preserve11 images and generated inputs; repaired memory consumer audit and326 A/B object checks pass; publication unchanged. |
 
+| [P145 hook audits](../etc/evidence/t484-s3-hook-audits.md) | Four read-only audits reconciled; shared compiler-dependency reader,104 DLL objects and five maps verified; no product change. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

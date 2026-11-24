@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$LauncherBuildRoot)
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/native-source-graph.ps1"
 $graph=Get-Content (Join-Path $LauncherBuildRoot 'build.ninja') -Raw
 if($graph -notmatch 'src/common/native-hook/context\.c' -or
    $graph -match 'src/nthook-dll/context\.cpp') {
@@ -10,11 +11,7 @@ $line=[regex]::Match($graph,'(?m)^build run16\.exe[^\r\n]*')
 if(!$line.Success -or $line.Value -notmatch 'common-native-hook-context\.lib'){
     throw 'Launcher does not select the shared context archive'
 }
-$deps=@(& ninja -C $LauncherBuildRoot -t deps obj/run16/frontend_scope.obj 2>&1)
-if($LASTEXITCODE -or ($deps -join "`n") -notmatch '#deps \d+.*\(VALID\)'){
-    throw 'Missing launcher compiler dependencies'
-}
-$text=($deps -join "`n").Replace('\','/')
+$text=Get-ProductCompilerDependencies $LauncherBuildRoot 'run16.exe' 'src/run16-exe/frontend_scope.c'
 function Assert-Boundary([string]$value){
     if($value -notmatch 'src/common/native-hook/context\.h' -or
        $value -match 'src/nthook-dll/hook\.h'){throw 'Private NTHook context reached launcher'}

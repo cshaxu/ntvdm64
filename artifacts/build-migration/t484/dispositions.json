@@ -1117,5 +1117,25 @@
     "evidence": "docs/etc/evidence/t484-s3-native-cache-audits.md",
     "status": "retained-standalone-audit",
     "reason": "Read-only Ninja tools; eight current graphs and 326 A/B object instances pass"
+  },
+  "tools/audit/verify-native-hook-context-ownership.ps1": {
+    "status": "retained-standalone-audit",
+    "reason": "Read-only current native compiler/header or map contracts verified with negative controls; no producer",
+    "evidence": "docs/etc/evidence/t484-s3-hook-audits.md"
+  },
+  "tools/audit/verify-native-hook-installer-ownership.ps1": {
+    "status": "retained-standalone-audit",
+    "reason": "Read-only current native compiler/header or map contracts verified with negative controls; no producer",
+    "evidence": "docs/etc/evidence/t484-s3-hook-audits.md"
+  },
+  "tools/audit/verify-nonworker-compiler-closure.py": {
+    "status": "retained-standalone-audit",
+    "reason": "Read-only current native compiler/header or map contracts verified with negative controls; no producer",
+    "evidence": "docs/etc/evidence/t484-s3-hook-audits.md"
+  },
+  "tools/audit/verify-process-hook-product-maps.py": {
+    "status": "retained-standalone-audit",
+    "reason": "Read-only current native compiler/header or map contracts verified with negative controls; no producer",
+    "evidence": "docs/etc/evidence/t484-s3-hook-audits.md"
   }
 }

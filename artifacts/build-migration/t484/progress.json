@@ -1,19 +1,23 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f340b643e40872391cc22315ded9837aeaf1308b",
+  "head": "753007863b1c37d9a48d5b2a0b589df0b1b982b3",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M tools/audit/verify-generated-input-stability.ps1",
+    " M tools/audit/native-source-graph.ps1",
     " M tools/audit/verify-guest-memory-boundary.ps1",
-    "?? artifacts/build-migration/t484/s3-native-cache-audits/",
-    "?? docs/etc/evidence/t484-s3-native-cache-audits.md"
+    " M tools/audit/verify-native-hook-context-ownership.ps1",
+    " M tools/audit/verify-native-hook-installer-ownership.ps1",
+    " M tools/audit/verify-nonworker-compiler-closure.py",
+    " M tools/audit/verify-process-hook-product-maps.py",
+    "?? artifacts/build-migration/t484/s3-hook-audits/",
+    "?? docs/etc/evidence/t484-s3-hook-audits.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 147,
-    "unchanged": 63,
+    "changed": 151,
+    "unchanged": 59,
     "removed": 145
   },
   "disposition_counts": {
@@ -22,10 +26,10 @@
     "retired-with-delivery-evidence": 145,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 47,
-    "retained-standalone-audit": 9
+    "requires-disposition-reconciliation": 43,
+    "retained-standalone-audit": 13
   },
-  "existing_interpreted_candidates_with_command_hits": 158,
+  "existing_interpreted_candidates_with_command_hits": 157,
   "files": [
     {
       "id": "B0001",
@@ -4249,10 +4253,12 @@
       "state": "changed",
       "current_sha256": "aa02c3b42741edc7ecafc53e670495412278f861a6592c5ebcbaff613102bd3a",
       "revisions": [
+        "753007863b1c37d9a48d5b2a0b589df0b1b982b3",
         "ce4fc0f9c828f549619f8d9f2e64f5494104888a"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s2-worker-cmake.md"
+        "docs/etc/evidence/t484-s2-worker-cmake.md",
+        "docs/etc/evidence/t484-s3-native-cache-audits.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -4266,9 +4272,13 @@
       "file": "tools/audit/verify-guest-memory-boundary.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "cb2b2f15d2eaeb91034858e8296854ed284ee93a13928c6f24981d7ec181cca7",
-      "revisions": [],
-      "evidence": [],
+      "current_sha256": "e3c319948bdcb2b5a82bb91b940631761f23ee84aef05ea4aa693e5aa3bfc8ce",
+      "revisions": [
+        "753007863b1c37d9a48d5b2a0b589df0b1b982b3"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-native-cache-audits.md"
+      ],
       "completion": "retained-standalone-audit",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-native-cache-audits.md",
@@ -4320,45 +4330,61 @@
       "id": "B0227",
       "file": "tools/audit/verify-native-hook-context-ownership.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "f3f12ac44856f59a49e40cee49ae141e4fcf92ac90b4ee136ad12f9efba962dd",
+      "state": "changed",
+      "current_sha256": "0409ecab0e9d52e64a39b193cc9b9cb4d604bfd4051bac9d345013533d23fbd8",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Read-only current native compiler/header or map contracts verified with negative controls; no producer",
+        "evidence": "docs/etc/evidence/t484-s3-hook-audits.md"
+      }
     },
     {
       "id": "B0228",
       "file": "tools/audit/verify-native-hook-installer-ownership.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "cf303cb7db88e55b0e42f57bc3bb304fb785cfa270159aa9cd025a0c21092b8a",
+      "state": "changed",
+      "current_sha256": "132c0594a2be176a357f39b103878a81f0a783c6f583492ee6d1e55af3163676",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Read-only current native compiler/header or map contracts verified with negative controls; no producer",
+        "evidence": "docs/etc/evidence/t484-s3-hook-audits.md"
+      }
     },
     {
       "id": "B0229",
       "file": "tools/audit/verify-nonworker-compiler-closure.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "b97d6158400e09dced79d041b406cda1b5b43dcf78bbbe90424c76d0ebb28afd",
+      "state": "changed",
+      "current_sha256": "b4885d5fd3340d39d99e88f8e44138f36158a4b640525932f5855f079a3130d5",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Read-only current native compiler/header or map contracts verified with negative controls; no producer",
+        "evidence": "docs/etc/evidence/t484-s3-hook-audits.md"
+      }
     },
     {
       "id": "B0230",
       "file": "tools/audit/verify-process-hook-product-maps.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "10d1f7dfc2a317321c726b2205f786aa653ad7093b47c287853b83e4390e0039",
+      "state": "changed",
+      "current_sha256": "9be478bf80e3fe11c8b53d5cffbd5b22f9758698c1e792e496f8bbf535e9ba3f",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Read-only current native compiler/header or map contracts verified with negative controls; no producer",
+        "evidence": "docs/etc/evidence/t484-s3-hook-audits.md"
+      }
     },
     {
       "id": "B0231",
@@ -6096,6 +6122,12 @@
     }
   ],
   "commits": {
+    "753007863b1c37d9a48d5b2a0b589df0b1b982b3": {
+      "subject": "T484 S3 P144 delegate cache verification to CMD producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-native-cache-audits.md"
+      ]
+    },
     "f340b643e40872391cc22315ded9837aeaf1308b": {
       "subject": "T484 S3 P143 simplify native frontend ownership audit",
       "evidence": [
@@ -9177,28 +9209,6 @@
       ]
     },
     {
-      "id": "B0224",
-      "file": "tools/audit/verify-guest-memory-boundary.ps1",
-      "hits": [
-        {
-          "line": 13,
-          "text": "$node=$pending.Pop()"
-        },
-        {
-          "line": 14,
-          "text": "if($selected.Add($node) -and $graph.ContainsKey($node)){"
-        },
-        {
-          "line": 15,
-          "text": "foreach($input in $graph[$node]){$pending.Push($input)}"
-        },
-        {
-          "line": 23,
-          "text": "$output=@(& ninja -C $root -t deps $target 2>&1)"
-        }
-      ]
-    },
-    {
       "id": "B0225",
       "file": "tools/audit/verify-library-build-boundary.py",
       "hits": [
@@ -9241,12 +9251,8 @@
       "file": "tools/audit/verify-native-hook-context-ownership.ps1",
       "hits": [
         {
-          "line": 4,
+          "line": 5,
           "text": "$graph=Get-Content (Join-Path $LauncherBuildRoot 'build.ninja') -Raw"
-        },
-        {
-          "line": 13,
-          "text": "$deps=@(& ninja -C $LauncherBuildRoot -t deps obj/run16/frontend_scope.obj 2>&1)"
         }
       ]
     },
@@ -9255,20 +9261,16 @@
       "file": "tools/audit/verify-native-hook-installer-ownership.ps1",
       "hits": [
         {
-          "line": 14,
+          "line": 15,
           "text": "$graph=Get-Content (Join-Path $case[0] 'build.ninja') -Raw"
         },
         {
-          "line": 15,
+          "line": 16,
           "text": "$link=[regex]::Match($graph,'(?m)^build '+[regex]::Escape($case[2])+'[^\\r\\n]*')"
         },
         {
-          "line": 16,
+          "line": 17,
           "text": "if(!$link.Success -or $link.Value -notmatch 'common-native-hook-installer\\.lib' -or"
-        },
-        {
-          "line": 20,
-          "text": "$deps=@(& ninja -C $case[0] -t deps $case[1] 2>&1)"
         }
       ]
     },
@@ -9296,7 +9298,7 @@
       "hits": [
         {
           "line": 5,
-          "text": "base = Path(sys.argv[1] if len(sys.argv) > 1 else 'build/.ninja/t475-handle-compare-p')"
+          "text": "base = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parents[2] / 'build/.ninja'"
         },
         {
           "line": 29,

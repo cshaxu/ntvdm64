@@ -2,6 +2,7 @@
 param([Parameter(Mandatory)][string]$WorkerX86BuildRoot,
       [Parameter(Mandatory)][string]$WorkerX64BuildRoot)
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/native-source-graph.ps1"
 function Assert-Boundary([string]$text) {
     if($text -notmatch 'src/common/native-hook/installer\.h' -or
        $text -match 'src/nthook-dll/hook\.h'){
@@ -9,19 +10,15 @@ function Assert-Boundary([string]$text) {
     }
 }
 foreach($case in @(
-    @($WorkerX86BuildRoot,'obj/adapter-win32/command_process_compat.obj','ntvdm.exe'),
-    @($WorkerX64BuildRoot,'obj/ntvwm/execution.obj','ntvwm.exe'))) {
+    @($WorkerX86BuildRoot,'src/ntvdm-exe/win32/command_process_compat.c','ntvdm.exe'),
+    @($WorkerX64BuildRoot,'src/ntvwm-exe/execution.c','ntvwm.exe'))) {
     $graph=Get-Content (Join-Path $case[0] 'build.ninja') -Raw
     $link=[regex]::Match($graph,'(?m)^build '+[regex]::Escape($case[2])+'[^\r\n]*')
     if(!$link.Success -or $link.Value -notmatch 'common-native-hook-installer\.lib' -or
         $graph -match 'src/nthook-dll/installer\.cpp'){
         throw "Installer not shared for $($case[2])"
     }
-    $deps=@(& ninja -C $case[0] -t deps $case[1] 2>&1)
-    if($LASTEXITCODE -or ($deps -join "`n") -notmatch '#deps \d+.*\(VALID\)'){
-        throw "Missing compiler dependencies for $($case[1])"
-    }
-    $text=($deps -join "`n").Replace('\','/')
+    $text=Get-ProductCompilerDependencies $case[0] $case[2] $case[1]
     Assert-Boundary $text
     $rejected=$false
     try {Assert-Boundary ($text+"`nsrc/nthook-dll/hook.h")} catch {$rejected=$true}
