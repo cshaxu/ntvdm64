@@ -104,6 +104,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P174 native controls](../etc/evidence/t484-s3-native-controls.md) | Two direct compiler recipes replaced; real MessageBox/ShellAbout returns and Run16 game exit/hidden carrier pass. Cached full11/22 hashes unchanged;313/355 disposed,42 remain. |
 
+| [P175 native VT](../etc/evidence/t484-s3-vt-native.md) | Historical compiler recipe removed; x86/x64 real Console/pixel oracle each230987 checks,0 failures. Cached full and11/22 identity checks pass unchanged;314/355 disposed,41 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

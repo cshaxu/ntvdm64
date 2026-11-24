@@ -409,3 +409,6 @@ if(NTVDM_ARCH STREQUAL "x64")
   set_property(TARGET ntvwm-carrier-game_objects PROPERTY COMPILE_OPTIONS /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS)
   set_property(TARGET ntvwm-carrier-game_objects PROPERTY FIXTURE_LIBRARIES user32.lib)
 endif()
+
+fixture(native-vt-producer CL test/observation/native_vt_fidelity_test.c)
+set_property(TARGET native-vt-producer_objects PROPERTY COMPILE_OPTIONS /nologo /MT /O2 /W4 /we4013 /std:c11 /D_WIN32_WINNT=0x0A00 /DWIN32_LEAN_AND_MEAN /DVT_PRODUCER_ONLY)

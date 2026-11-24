@@ -1,12 +1,12 @@
 param(
     [Parameter(Mandatory=$true)][string]$BuildRoot,
-    [Parameter(Mandatory=$true)][string]$FrontendBuild,
+    [string]$FrontendBuild,
     [Parameter(Mandatory=$true)][string]$Observer,
     [string]$RepositoryRoot=(Split-Path (Split-Path $PSScriptRoot)),
     [string]$VsDevCmd='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
 # Invoke this script only in an owned background process. Dependencies are
-# accepted S1 objects, not newly guessed stand-ins; refuse source drift.
+# current frontend objects from the shared native build graph.
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path $RepositoryRoot).Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
@@ -25,27 +25,16 @@ function Run([string]$name,[string]$exe,[string]$arguments,[int]$seconds) {
     if($p.ExitCode){throw "$name exit $($p.ExitCode)"}
 }
 try {
-    $drift=& git -C $repo diff fb7650ce0 -- src/ntcon-exe src/compat/console_grid.c src/common
-    if($LASTEXITCODE -or $drift){throw 'Accepted frontend dependencies have changed; rebuild their closure'}
-    $dependency=@('obj/frontend/frontend_session.obj','obj/frontend/console_frontend.obj','frontend-base.lib','obj/opennt-abi-host-compat/console_grid.obj','frontend-window.lib')
-    $dependency|ForEach-Object{Get-FileHash (Join-Path $FrontendBuild $_)}|ConvertTo-Json|Set-Content "$root\dependencies.json"
-    $source=@('test/observation/native_vt_fidelity_test.c','src/ntvwm-exe/console_state.c','src/compat/native_console_diagnostics.c','src/compat/native_console_text_frame.c','src/lib-win32/process-observation/console_members.c','src/common/native_process.c','src/lib-win32/process-launch/attributes.c','src/lib-win32/process-launch/process.c','src/common/codec/native_launch.c')
-    $source|ForEach-Object{Get-FileHash (Join-Path $repo $_)}|ConvertTo-Json|Set-Content "$root\sources.json"
+    & "$repo/tools/build.cmd" x64 *> "$root/build-frontend.txt"
+    if($LASTEXITCODE){throw 'Current frontend build failed'}
+    $frontend="$repo/build/.ninja/msvc-x64-release/frontend"
+    & "$frontend/run-ninja.cmd" native-vt-fidelity.exe *> "$root/build-verifier.txt"
+    if($LASTEXITCODE){throw 'VT verifier build failed'}
+    Copy-Item "$frontend/native-vt-fidelity.exe" "$root/verify.exe"
     foreach($arch in @('x64','x86')) {
-        $commands=@('@echo off',('call "'+$VsDevCmd+'" -no_logo -arch='+$arch+' -host_arch=x64'),'if errorlevel 1 exit /b %errorlevel%')
-        $flags='/nologo /MT /O2 /W4 /we4013 /std:c11 /D_WIN32_WINNT=0x0A00 /DWIN32_LEAN_AND_MEAN /I "'+$repo+'\src\lib-nxvm" /I "'+$repo+'\src" /I "'+$repo+'\src\ntcon-exe"'
-        $commands+=('cl.exe '+$flags+' /DVT_PRODUCER_ONLY /Fo"'+$root+'\producer-'+$arch+'.obj" /Fe"'+$root+'\producer-'+$arch+'.exe" "'+$repo+'\test\observation\native_vt_fidelity_test.c" /link /incremental:no')
-        $commands+='if errorlevel 1 exit /b %errorlevel%'
-        if($arch -eq 'x64') {
-            $objects=@();$i=0
-            foreach($s in $source){$obj="$root\unit-$i.obj";$objects+='"'+$obj+'"';$i++
-                $commands+=('cl.exe '+$flags+' /c /Fo"'+$obj+'" "'+(Join-Path $repo $s)+'"');$commands+='if errorlevel 1 exit /b %errorlevel%'}
-            $libraries=($dependency|ForEach-Object{'"'+(Join-Path $FrontendBuild $_)+'"'}) -join ' '
-            $commands+=('link.exe /nologo /machine:x64 /subsystem:console /opt:ref /out:"'+$root+'\verify.exe" '+($objects -join ' ')+' '+$libraries+' kernel32.lib user32.lib gdi32.lib advapi32.lib shell32.lib')
-            $commands+='if errorlevel 1 exit /b %errorlevel%'
-        }
-        $commands+='exit /b 0';$commands|Set-Content "$root\build-$arch.cmd"
-        Run "build-$arch" $env:ComSpec ('/d /c ""'+$root+'\build-'+$arch+'.cmd""') 120
+        & "$repo/tools/build-fixtures.cmd" $arch native-vt-producer *> "$root/build-$arch.txt"
+        if($LASTEXITCODE){throw "$arch VT producer build failed"}
+        Copy-Item "$repo/build/.ninja/fixtures-$arch/native-vt-producer.exe" "$root/producer-$arch.exe"
     }
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     foreach($arch in @('x64','x86')) {

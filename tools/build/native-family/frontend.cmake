@@ -127,3 +127,22 @@ family_unit("obj/tests/console_pointer_dispatch_test.obj" "${NTVDM_REPO}/test/ap
 family_image("console-pointer-contract-test.exe" "/nologo /machine:x64 /subsystem:console /opt:ref"
   "obj/tests/console_pointer_dispatch_test.obj" "frontend-base.lib" "obj/opennt-abi-host-compat/console_grid.obj" "rpcrt4.lib" "ntdll.lib" "kernel32.lib" "shell32.lib" "user32.lib" "gdi32.lib" "advapi32.lib" "legacy_stdio_definitions.lib")
 add_custom_target(product ALL DEPENDS "${CMAKE_BINARY_DIR}/ntcon.exe")
+
+# VT fidelity uses the same current frontend objects as the product.
+set(vt_objects)
+foreach(source IN ITEMS test/observation/native_vt_fidelity_test.c
+    src/ntvwm-exe/console_state.c src/compat/native_console_diagnostics.c
+    src/common/native_process.c src/lib-win32/process-launch/attributes.c
+    src/lib-win32/process-launch/process.c)
+  get_filename_component(stem "${source}" NAME_WE)
+  set(object "obj/tests/vt-${stem}.obj")
+  family_unit("${object}" "${NTVDM_REPO}/${source}"
+    "${native_flags} /std:c11 /DWIN32_LEAN_AND_MEAN /O2" "obj/basesrv/service.h")
+  list(APPEND vt_objects "${object}")
+endforeach()
+family_image("native-vt-fidelity.exe" "/nologo /machine:x64 /subsystem:console /opt:ref"
+  ${vt_objects} "obj/compat/native_console_text_frame.obj"
+  "obj/frontend/frontend_session.obj" "obj/frontend/console_frontend.obj"
+  "frontend-base.lib" "obj/opennt-abi-host-compat/console_grid.obj" "frontend-window.lib"
+  "lib-process-observation.lib" "common-codec.lib"
+  "kernel32.lib" "user32.lib" "gdi32.lib" "advapi32.lib" "shell32.lib" "legacy_stdio_definitions.lib")

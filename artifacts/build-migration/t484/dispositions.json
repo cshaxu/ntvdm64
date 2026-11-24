@@ -133,8 +133,9 @@
     "evidence": "docs/etc/evidence/t484-s3-dos-identity.md"
   },
   "test/integration/verify-native-vt-fidelity.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+    "reason": "Current native frontend graph and x86/x64 CMD producer; real Console/pixel oracle passes both architectures, cached full and published hashes unchanged",
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-vt-native.md"
   },
   "test/integration/verify-ntvwm-carrier-game.ps1": {
     "status": "migrated-delivered",
