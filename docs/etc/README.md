@@ -1907,3 +1907,5 @@ post-publication targeted checks.
 - [T484 S3 superseded Win31 setup retirement](evidence/t484-s3-win31-retirement.md).
 
 - [T484 S3 closure and S4 handoff](evidence/t484-s3-closure.md).
+
+- [T484 S4 native package primitives](evidence/t484-s4-package-primitives.md).

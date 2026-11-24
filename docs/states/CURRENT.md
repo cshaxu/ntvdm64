@@ -34,6 +34,11 @@ S1 inventory/design and S2 native host migration are closed. The
 the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S5 clean,
 interpreter-free end-to-end acceptance have not completed.
 
+S4 P1 adds bounded UUID/PE operations to the existing native package tool;
+[tests and evidence](../etc/evidence/t484-s4-package-primitives.md) retain the
+unchanged32 pending entries and24 supplemental preparation chains. No staging
+caller is counted as migrated merely because these primitives exist.
+
 | S3 delivery | Actual result |
 | --- | --- |
 | [P1-P180](../etc/evidence/t484-s3-early-deliveries.md) | Earlier delivered producer migrations; complete results and evidence links retained in the batch index. |
