@@ -1052,5 +1052,20 @@
     "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
     "status": "retired-with-delivery-evidence",
     "evidence": "docs/etc/evidence/t484-s3-retire-markers.md"
+  },
+  "tools/audit/verify-base-rpc-client-split.mjs": {
+    "status": "retained-standalone-audit",
+    "reason": "Read-only current graph ownership audit; actual positive and negative controls pass; no build production",
+    "evidence": "docs/etc/evidence/t484-s3-basesrv-audits.md"
+  },
+  "tools/audit/verify-basesrv-source-ownership.ps1": {
+    "status": "retained-standalone-audit",
+    "reason": "Read-only current graph ownership audit; actual positive and negative controls pass; no build production",
+    "evidence": "docs/etc/evidence/t484-s3-basesrv-audits.md"
+  },
+  "tools/audit/Verify-BrokerOriginalCompilation.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "T412 fake-header compile-only trial superseded by formal source graph; sole-use header also removed",
+    "evidence": "docs/etc/evidence/t484-s3-basesrv-audits.md"
   }
 }

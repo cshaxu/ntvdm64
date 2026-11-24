@@ -1,34 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f1ca299d4d9e44788c244af3ff687eec0b991634",
+  "head": "f922100eb641bd46f5da30adfe616402954e3359",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D tools/audit/Test-T420S36OriginalXmsCompile.ps1",
-    " D tools/audit/plan-mirror-marker-build.py",
-    " D tools/audit/run-mirror-marker-build.py",
-    " D tools/audit/scan-mirror-compiler-lines.py",
-    " D tools/audit/verify-mirror-marker-preprocessing.py",
-    "?? artifacts/build-migration/t484/s3-retire-markers/",
-    "?? docs/etc/evidence/t484-s3-retire-markers.md"
+    " D test/broker/source_compile_probe.h",
+    " D tools/audit/Verify-BrokerOriginalCompilation.mjs",
+    " M tools/audit/verify-basesrv-source-ownership.ps1",
+    "?? artifacts/build-migration/t484/s3-basesrv-audits/",
+    "?? docs/etc/evidence/t484-s3-basesrv-audits.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 142,
-    "unchanged": 73,
-    "removed": 140
+    "changed": 143,
+    "unchanged": 71,
+    "removed": 141
   },
   "disposition_counts": {
     "migrated-delivered": 83,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 140,
+    "retired-with-delivery-evidence": 141,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 60,
-    "retained-standalone-audit": 3
+    "requires-disposition-reconciliation": 57,
+    "retained-standalone-audit": 5
   },
-  "existing_interpreted_candidates_with_command_hits": 164,
+  "existing_interpreted_candidates_with_command_hits": 163,
   "files": [
     {
       "id": "B0001",
@@ -3982,8 +3980,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f922100eb641bd46f5da30adfe616402954e3359"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-markers.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
@@ -3997,8 +3999,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f922100eb641bd46f5da30adfe616402954e3359"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-markers.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
@@ -4012,8 +4018,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f922100eb641bd46f5da30adfe616402954e3359"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-markers.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
@@ -4027,8 +4037,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f922100eb641bd46f5da30adfe616402954e3359"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-markers.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
@@ -4048,19 +4062,27 @@
       "evidence": [
         "docs/etc/evidence/t484-s2-native-family.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Read-only current graph ownership audit; actual positive and negative controls pass; no build production",
+        "evidence": "docs/etc/evidence/t484-s3-basesrv-audits.md"
+      }
     },
     {
       "id": "B0214",
       "file": "tools/audit/verify-basesrv-source-ownership.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "b929386887a809bd23216ec05ac48467de1cebc8f85d41a3653a73d09ce499ec",
+      "state": "changed",
+      "current_sha256": "0c02d598f2f4628b554afe6d2a08594d9da79c89965eff25e14f5b8daed47e9c",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Read-only current graph ownership audit; actual positive and negative controls pass; no build production",
+        "evidence": "docs/etc/evidence/t484-s3-basesrv-audits.md"
+      }
     },
     {
       "id": "B0215",
@@ -4077,12 +4099,16 @@
       "id": "B0216",
       "file": "tools/audit/Verify-BrokerOriginalCompilation.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "ef349139bac9b93ebc9dcdb998c4488bf9e587996ce12999891905a5b4f2aef9",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "T412 fake-header compile-only trial superseded by formal source graph; sole-use header also removed",
+        "evidence": "docs/etc/evidence/t484-s3-basesrv-audits.md"
+      }
     },
     {
       "id": "B0217",
@@ -4199,8 +4225,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f922100eb641bd46f5da30adfe616402954e3359"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-markers.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "reason": "Historical frozen compiler probe retired; formal source graph and current tests retained",
@@ -5988,6 +6018,12 @@
     }
   ],
   "commits": {
+    "f922100eb641bd46f5da30adfe616402954e3359": {
+      "subject": "T484 S3 P137 retire historical marker compiler chain",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-markers.md"
+      ]
+    },
     "f1ca299d4d9e44788c244af3ff687eec0b991634": {
       "subject": "T484 S3 P136 retire obsolete frozen census tools",
       "evidence": [
@@ -8950,24 +8986,36 @@
       "file": "tools/audit/verify-basesrv-source-ownership.ps1",
       "hits": [
         {
-          "line": 5,
-          "text": "$lines=@(Get-Content (Join-Path $BuildRoot 'build.ninja'))"
+          "line": 8,
+          "text": "foreach($line in Get-Content (Join-Path $Root 'build.ninja')){"
         },
         {
-          "line": 19,
+          "line": 12,
+          "text": "# Real object/archive dependencies of CMake custom link commands are"
+        },
+        {
+          "line": 31,
           "text": "$node=$pending.Pop()"
         },
         {
-          "line": 20,
+          "line": 32,
           "text": "if(!$seen.Add($node)){continue}"
         },
         {
-          "line": 21,
-          "text": "foreach($item in $Graph[$node]){"
+          "line": 33,
+          "text": "if($node -match '(^|/)src/ntsrv-exe/'){"
+        },
+        {
+          "line": 34,
+          "text": "throw \"$Target depends on NTSRV-private source: $node\""
+        },
+        {
+          "line": 36,
+          "text": "if($node -match '\\.(c|cpp|cxx|asm)$'){$sources++}"
         },
         {
           "line": 37,
-          "text": "$path=Join-Path $extra[0] 'build.ninja'"
+          "text": "if($Graph.ContainsKey($node)){foreach($item in $Graph[$node]){$pending.Push($item)}}"
         }
       ]
     },
@@ -9038,40 +9086,6 @@
         {
           "line": 40,
           "text": "`link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map fixture.obj \"${ownerBuild}/opennt-base-client.lib\" \"${ownerBuild}/opennt-base-bindings.lib\" \"${ownerBuild}/common-base-srv-bindings.lib\" support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib`"
-        }
-      ]
-    },
-    {
-      "id": "B0216",
-      "file": "tools/audit/Verify-BrokerOriginalCompilation.mjs",
-      "hits": [
-        {
-          "line": 2,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 3,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 4,
-          "text": "import assert from 'node:assert/strict';"
-        },
-        {
-          "line": 5,
-          "text": "import {createHash} from 'node:crypto';"
-        },
-        {
-          "line": 6,
-          "text": "import {spawnSync} from 'node:child_process';"
-        },
-        {
-          "line": 10,
-          "text": "const graphPath=path.resolve(process.argv[2] ?? 'build/M0-T412/S1/text-cell-repair/product/build.ninja');"
-        },
-        {
-          "line": 30,
-          "text": "command(`cl.exe ${flags} /we4013 /FI \"${root}/test/broker/source_compile_probe.h\" /I \"${build}\" /I \"${root}/src/non-mvdm/base/win32/inc\" /Fo\"${build}/srvvdm.obj\" \"${source}\"`,'compile.log');"
         }
       ]
     },

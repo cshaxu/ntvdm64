@@ -112,7 +112,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P137 retired marker chain](../etc/evidence/t484-s3-retire-markers.md) | Removed five historical marker/preprocessor/trial-compile tools; original evidence retained. Formal build/publication checks recorded in receipt. |
 
-Completed implementation batches through P137 passed their cached full host build. P73 checks11 raw host inputs
+| [P138 BaseSrv audits](../etc/evidence/t484-s3-basesrv-audits.md) | Preserved two live graph audits, updated ownership checks to native graphs, retired obsolete trial compiler/header. |
+
+Completed implementation batches through P138 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

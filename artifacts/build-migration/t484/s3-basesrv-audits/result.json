@@ -1,0 +1,33 @@
+{
+  "fullGate": false,
+  "audits": {
+    "rpcSplit": {
+      "launcherSources": 60,
+      "frontendSources": 68,
+      "negativeControls": 5
+    },
+    "ownership": {
+      "negativeControls": 8,
+      "products": 8
+    }
+  },
+  "standalone": [
+    "B0213",
+    "B0214"
+  ],
+  "validation": {
+    "exit": 0,
+    "pid": 31436,
+    "started": "2026-11-24T06:54:28.2851014+01:00",
+    "finished": "2026-11-24T06:55:37.2475805+01:00"
+  },
+  "publication": {
+    "republished": false,
+    "publishedCopies": 22,
+    "rawInputs": 11,
+    "unchanged": true
+  },
+  "retired": [
+    "B0216"
+  ]
+}
