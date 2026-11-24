@@ -15,11 +15,9 @@ $observerPath=(Resolve-Path $Observer).Path
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 New-Item -ItemType Directory -Path $out | Out-Null
 $fault=$Case -in @('InvalidRange','InvalidDescriptor')
-$source=if($fault){'xms_invalid_transport.asm'}elseif($Case -eq 'Boundaries'){'xms_block_boundaries.asm'}else{'xms_capability.asm'}
-$defines=@(); if($Case -eq 'Existing'){$defines+= '-DDEFAULT_INT15'}
-if($Case -eq 'InvalidDescriptor'){$defines+='-DINVALID_DESCRIPTOR'}
-& nasm @defines -f bin "$PSScriptRoot/../observation/$source" -o "$out/XMSCASE.COM"
-if($LASTEXITCODE){throw 'XMS probe assembly failed'}
+& "$repo/tools/build-fixtures.cmd" x86 guest-profiles
+if($LASTEXITCODE){throw 'XMS probe build failed'}
+Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/XMS-$Case.COM" -Destination "$out/XMSCASE.COM"
 $runtime=$null;$scope=$null;$process=$null;$worker=$null
 $names=@('PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_INITIAL_GEOMETRY')
 $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}

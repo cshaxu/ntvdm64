@@ -9,13 +9,12 @@ $observer=(Resolve-Path $Observer).Path
 if(!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $out)){throw 'Fresh build-owned output required'}
 New-Item -ItemType Directory $out|Out-Null
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
+& "$repo/tools/build-fixtures.cmd" x86 guest-profiles
+if($LASTEXITCODE){throw 'DPMI probe build failed'}
 $results=@()
 foreach($mode in @('low','high')) {
  $probe="$out/$mode.com"
- $asmArgs=@('-f','bin',"$PSScriptRoot/../observation/dpmi_int21_state.asm",'-o',$probe)
- if($mode -eq 'high'){$asmArgs=@('-DHIGH_BUFFER=1')+$asmArgs}
- & nasm @asmArgs
- if($LASTEXITCODE){throw "Probe compilation failed: $mode"}
+ Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/INT21-$mode.COM" -Destination $probe
  foreach($route in @('direct','nested')) {
   $runtime=$null;$scope=$null;$p=$null
   $case="$out/$mode-$route"

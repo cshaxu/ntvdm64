@@ -147,8 +147,8 @@ if "%TARGET%"=="wow-thunk-nls" set "SELECTED=1"
 if "%TARGET%"=="wow-thunk-nls" if not "%~1"=="x86" exit /b 2
 for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
-for %%I in (win31-matrix win31-dosonly win95-guest-only interrupt-observer guest-api) do if "%TARGET%"=="%%I" set "SELECTED=1"
-for %%I in (win31-matrix win31-dosonly win95-guest-only interrupt-observer guest-api) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
+for %%I in (win31-matrix win31-dosonly win95-guest-only interrupt-observer guest-api guest-profiles) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (win31-matrix win31-dosonly win95-guest-only interrupt-observer guest-api guest-profiles) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-page-cost-unit" set "SELECTED=1"

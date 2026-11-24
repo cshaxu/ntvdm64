@@ -14,11 +14,9 @@ if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgn
 $observerPath=(Resolve-Path $Observer).Path
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 New-Item -ItemType Directory -Path $out | Out-Null
-$options=@('-f','bin')
-if($Case -eq 'NoDelete'){$options+='-DNO_DELETE'}
-if($Case -eq 'NoPressure'){$options+='-DNO_PRESSURE'}
-& nasm @options "$PSScriptRoot/../observation/t448_dem_delete_probe.asm" -o "$out/DEMRESET.COM"
-if($LASTEXITCODE){throw 'DEM probe assembly failed'}
+& "$repo/tools/build-fixtures.cmd" x86 guest-profiles
+if($LASTEXITCODE){throw 'DEM probe build failed'}
+Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/DEM-$Case.COM" -Destination "$out/DEMRESET.COM"
 $runtime=$null;$scope=$null;$process=$null
 $names=@('PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_INITIAL_GEOMETRY')
 $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}

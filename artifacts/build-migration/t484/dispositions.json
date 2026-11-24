@@ -1342,5 +1342,30 @@
     "status": "supplemental-native-producer-pending-staging",
     "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
     "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
+  },
+  "test/integration/verify-dem-pressure.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "All existing fixed source/define combinations use shared CMD guest-profiles;13-image equivalence and cache verified across this batch. Runtime configuration/staging remains pending.",
+    "evidence": "docs/etc/evidence/t484-s3-guest-profiles.md"
+  },
+  "test/integration/verify-dpmi-debug-context.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "All existing fixed source/define combinations use shared CMD guest-profiles;13-image equivalence and cache verified across this batch. Runtime configuration/staging remains pending.",
+    "evidence": "docs/etc/evidence/t484-s3-guest-profiles.md"
+  },
+  "test/integration/verify-dpmi-int21-state.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "All existing fixed source/define combinations use shared CMD guest-profiles;13-image equivalence and cache verified across this batch. Runtime configuration/staging remains pending.",
+    "evidence": "docs/etc/evidence/t484-s3-guest-profiles.md"
+  },
+  "test/integration/verify-video7-mode-flags.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "All existing fixed source/define combinations use shared CMD guest-profiles;13-image equivalence and cache verified across this batch. Runtime configuration/staging remains pending.",
+    "evidence": "docs/etc/evidence/t484-s3-guest-profiles.md"
+  },
+  "test/integration/verify-xms-block-guest.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "All existing fixed source/define combinations use shared CMD guest-profiles;13-image equivalence and cache verified across this batch. Runtime configuration/staging remains pending.",
+    "evidence": "docs/etc/evidence/t484-s3-guest-profiles.md"
   }
 }

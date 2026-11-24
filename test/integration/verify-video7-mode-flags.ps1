@@ -25,9 +25,10 @@ if(!(Test-Path -LiteralPath $guestDirectory)){throw 'PIF working directory does 
 $command=(Resolve-Path -LiteralPath $CommandCom).Path
 $process=$null
 try {
-    $defines=@(if($AllModes){'-DVIDEO7_ALL_MODES=1'})
-    & nasm @defines -f bin (Join-Path $PSScriptRoot '../observation/video7_mode_flags.asm') -o (Join-Path $out 'V7FLAGS.COM')
-    if($LASTEXITCODE){throw 'NASM failed'}
+    & "$PSScriptRoot/../../tools/build-fixtures.cmd" x86 guest-profiles
+    if($LASTEXITCODE){throw 'Video7 probe build failed'}
+    $profile=if($AllModes){'all'}else{'default'}
+    Copy-Item -LiteralPath "$PSScriptRoot/../../build/.ninja/fixtures-x86/guest-probes/profiles/VIDEO7-$profile.COM" -Destination (Join-Path $out 'V7FLAGS.COM')
     Copy-Item -LiteralPath (Join-Path $out 'V7FLAGS.COM') -Destination $probe
     $pif=Join-Path $out 'FLAGS.PIF'
     Copy-Item -LiteralPath $inputFile -Destination $pif

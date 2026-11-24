@@ -92,6 +92,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P187 fixed-profile probes](../etc/evidence/t484-s3-fixed-probes.md) | Seven authored images share native producers, removing five NASM call sites; runtime assertions unchanged. Fixed316/355; ten supplemental preparation chains pending; nine of18 new NASM candidates remain. |
 
+| [P188 fixed DOS profiles](../etc/evidence/t484-s3-guest-profiles.md) | All13 existing profiles of five callers share CMD production; exact bytes/cache pass. Fixed316/355;15 supplemental preparation chains pending; four of18 new NASM candidates remain. |
+
 A fresh global scan found18 further integration scripts with direct NASM
 commands; these await retention/migration reconciliation, as recorded in P183.
 The frozen355 census is not the complete remaining invocation graph.

@@ -16,14 +16,14 @@ New-Item -ItemType Directory $out | Out-Null
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $runtime=$null;$scope=$null;$process=$null
 try {
+    & "$repo/tools/build-fixtures.cmd" x86 guest-profiles
+    if($LASTEXITCODE){throw 'DPMI debug probe build failed'}
     # These are project-owned probes, not modified original guest binaries.
     foreach($case in @(@('dpmi_watchpoint','WATCH'),@('dpmi_debug_lifetime','LIFE'))) {
         # Original DOSX status-query inversion is an immutable guest boundary
         # documented in m0-t420-s38-dpmi32-capability-review.md. Exercise actual
         # delivery/removal groups here; do not claim 0B02/0B03 status acceptance.
-        [string[]]$defines=@(if($case[0] -eq 'dpmi_watchpoint'){'-DDELIVERY_GROUPS'})
-        & nasm @defines -f bin "$PSScriptRoot/../observation/$($case[0]).asm" -o "$out/$($case[1]).COM"
-        if($LASTEXITCODE){throw "Probe assembly failed: $($case[0])"}
+        Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/$($case[1]).COM" -Destination "$out/$($case[1]).COM"
     }
     $runtime=New-PhysicalRuntimeStage $package
     Save-IsolatedPackageManifest $runtime "$out/manifest.json"

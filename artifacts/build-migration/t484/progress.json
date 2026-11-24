@@ -1,21 +1,18 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "df6ac7611d3771a4bdeb2aa5fdfc01070997bad0",
+  "head": "b7cb44f9d105127b7540dad143e0a50902188448",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/support/wow-guest-probe.ps1",
-    " M test/integration/verify-dem-fcb-guest.ps1",
-    " M test/integration/verify-dlc-provider-boundary.ps1",
-    " M test/integration/verify-mouse-state-checksum.ps1",
-    " M test/integration/verify-vga-cursor-disable.ps1",
-    " M test/integration/verify-wow-embedding-guest.ps1",
-    " M test/integration/verify-wow-kerning-guest.ps1",
-    " M test/integration/verify-wow-palette-guest.ps1",
+    " M test/integration/verify-dem-pressure.ps1",
+    " M test/integration/verify-dpmi-debug-context.ps1",
+    " M test/integration/verify-dpmi-int21-state.ps1",
+    " M test/integration/verify-video7-mode-flags.ps1",
+    " M test/integration/verify-xms-block-guest.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/guest-probes.cmake",
-    "?? docs/etc/evidence/t484-s3-fixed-probes.md"
+    "?? docs/etc/evidence/t484-s3-guest-profiles.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6490,6 +6487,12 @@
     }
   ],
   "commits": {
+    "b7cb44f9d105127b7540dad143e0a50902188448": {
+      "subject": "T484 S3 P187 consolidate fixed guest probe builds",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-fixed-probes.md"
+      ]
+    },
     "df6ac7611d3771a4bdeb2aa5fdfc01070997bad0": {
       "subject": "T484 S3 P186 retire interpreted interrupt observer build",
       "evidence": [
