@@ -1,12 +1,12 @@
 #include "console_wire_observed.h"
 #include "compat/include/console_transport.h"
-/* The transport moved into common. Observe the real worker call boundary as
- * well; never substitute the shared client or alter its reply/failure. */
+/* Observe the current compatibility service publication boundary; never
+ * substitute the transport or alter its reply/failure. */
 static DWORD observed_worker_exchange(ntcon_worker_client *,console_io_request *,console_io_reply *);
 static DWORD observed_worker_video(ntcon_worker_client *,const console_video_description *,const void *);
 #define ntcon_worker_exchange observed_worker_exchange
 #define ntcon_worker_video observed_worker_video
-#include "../../src/ntvdm-exe/win32/console_client.c"
+#include "../../src/compat/console_services.c"
 #undef ntcon_worker_exchange
 #undef ntcon_worker_video
 #undef WriteFile

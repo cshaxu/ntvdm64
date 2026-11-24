@@ -1,16 +1,14 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "6e903ce7467c7f9d35507a674149821e751a96ea",
+  "head": "000da3d05a87ac283b1762cf9d9bf6a21268a2a1",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/Test-PackageIdentityTool.ps1",
-    " M test/integration/verify-dem-fcb-guest.ps1",
-    " M test/observation/isolated_package_cleanup.ps1",
-    " M tools/build/fixtures/guest-probes.cmake",
-    " M tools/build/native/stage-runtime.cmd.in",
-    "?? docs/etc/evidence/t484-s4-fcb-preparation.md"
+    " M test/integration/verify-vga-cursor-disable.ps1",
+    " M test/observation/console_client_observed.c",
+    " M tools/build/worker/units.cmake",
+    "?? docs/etc/evidence/t484-s4-cursor-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -2053,6 +2051,7 @@
       "state": "changed",
       "current_sha256": "0fc92abbfb9ef0f4d4267559bbd3612e6e89141cf802c13e74139b8c1a61bff8",
       "revisions": [
+        "000da3d05a87ac283b1762cf9d9bf6a21268a2a1",
         "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a",
         "3776c3208bcfcfa740fcf02da7aeca581d956e33",
         "629e0bdf4162b212fce97a7dd6f6092f3604c60d",
@@ -2063,6 +2062,7 @@
         "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-identity-reader.md",
         "docs/etc/evidence/t484-s4-device-inputs.md",
+        "docs/etc/evidence/t484-s4-fcb-preparation.md",
         "docs/etc/evidence/t484-s4-physical-stage.md",
         "docs/etc/evidence/t484-s4-stage-identity-refresh.md"
       ],
@@ -6619,6 +6619,12 @@
     }
   ],
   "commits": {
+    "000da3d05a87ac283b1762cf9d9bf6a21268a2a1": {
+      "subject": "M0 T484 S4 P20: finish isolated FCB input preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-fcb-preparation.md"
+      ]
+    },
     "6e903ce7467c7f9d35507a674149821e751a96ea": {
       "subject": "M0 T484 S4 P19: finish remote redirector preparation",
       "evidence": [

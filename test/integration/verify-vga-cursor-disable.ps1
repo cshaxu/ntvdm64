@@ -15,7 +15,7 @@ $observerPath=(Resolve-Path $Observer).Path
 New-Item -ItemType Directory -Path $out | Out-Null
 & "$repo/tools/build-fixtures.cmd" x86 guest-api
 if($LASTEXITCODE){throw 'Cursor probe assembly failed'}
-Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/api/CURSOR.COM" -Destination "$out/CURSOR.COM"
+$probe="$repo/build/.ninja/fixtures-x86/guest-probes/api/CURSOR.COM"
 $runtime=$null;$scope=$null;$process=$null
 $names=@('PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_INITIAL_GEOMETRY',
     'MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_TEXT_CURSOR','MVDM_TEST_CONSOLE_WIRE_PATH')
@@ -23,16 +23,15 @@ $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentV
 try {
     # Package must contain ntvdm-console-wire-observer.exe under the product
     # name ntvdm.exe; its real production path records text frames for tests.
-    $runtime=New-PhysicalRuntimeStage $PackageRoot
+    $runtime=New-PhysicalRuntimeStage $PackageRoot -TestFiles @($probe)
     $scope=New-IsolatedPackageScope $runtime
-    Copy-Item "$out/CURSOR.COM" "$runtime/CURSOR.COM"
     $env:PATH="$runtime/system32;"+(Join-Path $env:SystemRoot 'System32')
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_INITIAL_GEOMETRY='80,30'
     $env:MVDM_OBSERVER_WINDOW_INPUT='1'
     $env:MVDM_OBSERVER_TEXT_CURSOR='1'
     $env:MVDM_TEST_CONSOLE_WIRE_PATH="$out/cursor"
-    $arguments=@("$runtime/system32/run16.exe",$runtime,"$out/report.txt",'--observation-timeout-ms','60000',"$runtime/CURSOR.COM")
+    $arguments=@("$runtime/system32/run16.exe",$runtime,"$out/report.txt",'--observation-timeout-ms','60000',"$runtime/tests/CURSOR.COM")
     $process=Start-Process -FilePath $observerPath -ArgumentList $arguments -WorkingDirectory $runtime -WindowStyle Hidden -PassThru
     if(!$process.WaitForExit(75000)){ $process.Kill();$process.WaitForExit();throw 'Observer timeout' }
     if($process.ExitCode -ne 0 -or (Get-Content "$out/report.txt" -Raw) -notmatch 'result=exited' -or
