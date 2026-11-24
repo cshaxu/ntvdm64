@@ -1,0 +1,30 @@
+{
+  "retiredInterface": "RetirementProbeSource",
+  "fileComplete": false,
+  "publication": {
+    "republished": false,
+    "publishedCopies": 22,
+    "rawInputs": 11,
+    "unchanged": true
+  },
+  "projection": {
+    "sourceSha256": "AC104F989EE1EBA060EE43226E795C2D25DB6855921F7AACE1EE12456BC6E3EE",
+    "sourceRestoredExactlyAfterRemovingObservation": true
+  },
+  "final": {
+    "finished": "2026-11-24T06:00:14.0887334+01:00",
+    "started": "2026-11-24T06:00:08.6915392+01:00",
+    "pid": 20488,
+    "exit": 0
+  },
+  "cleanup": {
+    "branches": 2,
+    "lines": 35
+  },
+  "validation": {
+    "finished": "2026-11-24T05:59:37.4208067+01:00",
+    "started": "2026-11-24T05:58:28.3895502+01:00",
+    "pid": 19692,
+    "exit": 0
+  }
+}

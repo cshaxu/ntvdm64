@@ -94,7 +94,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P128 failure producers](../etc/evidence/t484-s3-lifecycle-faults.md) | Initialization rollback/creation unwind pass on native graph; seven old build branches removed; cached full/publication hashes pass. B0195 remains partial. |
 
-Completed implementation batches through P128 passed their cached full host build. P73 checks11 raw host inputs
+| [P129 retirement lock](../etc/evidence/t484-s3-lifecycle-lock.md) | Current concurrency witness passes; historical source selector and old generation branches removed; cached full/publication hashes pass. B0195 remains partial. |
+
+Completed implementation batches through P129 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

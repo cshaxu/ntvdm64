@@ -6,7 +6,6 @@ param(
     [switch]$InitRollback,
     [switch]$CreationUnwind,
     [switch]$RetirementLockProbe,
-    [string]$RetirementProbeSource,
     [switch]$OriginalModalOnly,
     [switch]$InitialPublicationOnly,
     [switch]$RealDialogLifecycleOnly,
@@ -26,7 +25,6 @@ if ($Case -eq 'page-domain') { $Case='window-borrow' }
 if ($Case -eq 'dialog-lifecycle') { $Case='window-borrow'; $RealDialogLifecycleOnly=$true }
 if ($InitRollback -and $Case -ne 'task-lifecycle') { throw 'InitRollback requires task-lifecycle' }
 if ($RetirementLockProbe -and ($Case -ne 'task-lifecycle' -or $InitRollback)) { throw 'RetirementLockProbe requires ordinary task-lifecycle' }
-if ($RetirementProbeSource -and !$RetirementLockProbe) { throw 'RetirementProbeSource requires RetirementLockProbe' }
 if ($CreationUnwind -and $Case -ne 'native-creation') { throw 'CreationUnwind requires native-creation' }
 if ($HookGraphOverlap) { $CallbackGraphOverlap = $true }
 if ($CallbackGraphOverlap) { $TerminalSchedule = $true }
@@ -58,9 +56,9 @@ if ($Case -eq 'task-close-result') {
     $result
     return
 }
-$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime','process-retirement','init-notification','native-dispatch-gate','window-procedure','window-borrow','graph-snapshot','standard-class','class-procedure','native-creation','window-reclaim','menu-resource') -and !$RetirementLockProbe -and !$OriginalModalOnly -and !$InitialPublicationOnly
+$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime','process-retirement','init-notification','native-dispatch-gate','window-procedure','window-borrow','graph-snapshot','standard-class','class-procedure','native-creation','window-reclaim','menu-resource') -and !$OriginalModalOnly -and !$InitialPublicationOnly
 if($nativeCase){
-    $kind=if($CreationUnwind){'creation-unwind'}elseif($InitRollback){'init-rollback'}elseif($Case -eq 'task-lifecycle'){'task'}else{$Case}
+    $kind=if($RetirementLockProbe){'retirement-lock'}elseif($CreationUnwind){'creation-unwind'}elseif($InitRollback){'init-rollback'}elseif($Case -eq 'task-lifecycle'){'task'}else{$Case}
     & "$repo/tools/build-fixtures.cmd" x86 "wow-lifecycle-$kind" *> "$out/build.log"
     if($LASTEXITCODE){throw 'Native lifecycle graph failed'}
     Copy-Item "$repo/build/.ninja/msvc-x86-release/wow32/lifecycle-$kind.exe" "$out/fixture.exe"
@@ -272,7 +270,6 @@ if ($Case -in @('window-borrow')) { $fixturePath = Join-Path $repo 'test/mvdm-ho
 $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\fixture.obj" "'+$fixturePath+'"')
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
 
-if ($RetirementLockProbe) { $fixture += ' /DWOW_RETIREMENT_LOCK_PROBE' }
 
 if ($OriginalModalOnly) { $fixture += ' /DWOW_ORIGINAL_MODAL_FIXTURE' }
 if ($InitialPublicationOnly) { $fixture += ' /DWOW_INITIAL_PUBLICATION_FIXTURE' }
@@ -302,7 +299,6 @@ if ($RealDialogLifecycleOnly) {
     Invoke-CompilerCommand $worker $faultCompile
     $parentObjects += Join-Path $out 'dialog-page-faults.obj'
 }
-
 
 if ($Case -notin @('window-borrow')) {
 $parentStub = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\parent-stub.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_page_domain_parent_stub.c"')
@@ -455,40 +451,7 @@ if ($HookGraphOverlap) {
     $objects = @($objects | Where-Object { $_ -notin $original })
     $parentObjects += Join-Path $out 'hook-graph-probe.obj'
 }
-if ($RetirementLockProbe) {
-    # Instrument only a disposable copy of the selected production source.
-    # The other thread tries the real runtime lock inside the real scan.
-    $sourcePath = if ($RetirementProbeSource) {
-        $path = (Resolve-Path -LiteralPath $RetirementProbeSource).Path
-        if (!$path.StartsWith((Join-Path $repo 'build')+'\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Comparison source must be build-owned' }
-        $path
-    } else { Join-Path $repo 'src/compat/wow_user_task_lifecycle.c' }
-    $source = [IO.File]::ReadAllText($sourcePath)
-    $start = $source.IndexOf('static BOOL retire_task(')
-    $finish = $source.IndexOf('BOOL WINAPI wow_user_task_lifecycle_exit(', $start)
-    if ($start -lt 0 -or $finish -le $start) { throw 'Retirement source region missing' }
-    $region = $source.Substring($start, $finish - $start)
-    $needle = 'wow_cleanup_handle *entry = &owner->objects->entries[index];'
-    if (!$region.Contains($needle)) {
-        # The previous implementation performed this scan in its caller.
-        $start = $source.IndexOf('static BOOL WINAPI retire_current_thread(PVOID context)', $finish)
-        $finish = $source.IndexOf('BOOL WINAPI wow_user_task_lifecycle_dispose(', $start)
-        if ($start -lt 0 -or $finish -le $start) { throw 'Previous retirement source region missing' }
-        $region = $source.Substring($start, $finish - $start)
-    }
-    if (($region.Split(@($needle), [StringSplitOptions]::None)).Count -ne 2) { throw 'Expected exactly one retirement scan' }
-    $region = $region.Replace($needle, $needle + "`r`n        if (index == 0) wow_fixture_retirement_lock(binding->runtime);")
-    $source = $source.Substring(0, $start) + 'extern void WINAPI wow_fixture_retirement_lock(wow_user_runtime *);' + "`r`n" + $region + $source.Substring($finish)
-    $instrumented = Join-Path $out 'retirement-lock-probe.c'
-    [IO.File]::WriteAllText($instrumented, $source, [Text.UTF8Encoding]::new($false))
-    $probeCompile = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\retirement-lock-probe.obj" "'+$instrumented+'"')
-    if ($probeCompile -eq $compile) { throw 'Retirement probe compile substitution failed' }
-    Invoke-Build $probeCompile
-    $original = @($objects | Where-Object { $_ -match '[\\/]compat[\\/]wow_user_task_lifecycle\.obj$' })
-    if ($original.Count -ne 1) { throw 'Expected exactly one lifecycle owner' }
-    $objects = @($objects | Where-Object { $_ -notin $original })
-    $parentObjects += Join-Path $out 'retirement-lock-probe.obj'
-}
+
 if ($InitialPublicationOnly) {
     # Preserve the real launch-client library because it provides other
     # selected BaseClient calls.  Redirect only this bridge's notification
