@@ -1,20 +1,19 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "fc4f1c7a9cf63003cdf580dac9939344a0bb86bc",
+  "head": "a9553db754706abe3567c5b60878b7445478bb1c",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/ntvdm-exe/softpc/verify-console-font-restore.ps1",
-    " D test/ntvdm-exe/softpc/verify-startup-presentation.ps1",
-    " M tools/audit/Invoke-ProductVerification.ps1",
+    " M test/observation/verify-console-api-late-c.ps1",
+    " M test/observation/verify-console-trace-c.ps1",
+    " D test/observation/verify-dos-style-relay.ps1",
+    " M test/observation/verify-install-guard-c.ps1",
+    " M test/observation/verify-palette-trace-c.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-presentation-contracts.md",
-    "?? test/ntvdm-exe/softpc/presentation_font.c.in",
-    "?? test/ntvdm-exe/softpc/presentation_startup.c.in",
-    "?? test/ntvdm-exe/softpc/verify-presentation-contracts.ps1",
-    "?? tools/build/fixtures/presentation-contracts.cmake"
+    "?? docs/etc/evidence/t484-s3-observer-contracts.md",
+    "?? tools/build/fixtures/observer-contracts.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -4076,11 +4075,13 @@
       "state": "changed",
       "current_sha256": "677420ef8fc6fcdd1fa1f3cff53d0b1fe602f048ec931625865eb85dc7dc017e",
       "revisions": [
+        "a9553db754706abe3567c5b60878b7445478bb1c",
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "60d414d7f2e75a292241ef09caefb353d16915d8"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-direct-package-identity.md",
+        "docs/etc/evidence/t484-s3-presentation-contracts.md",
         "docs/etc/evidence/t484-s3-version-runtime.md"
       ],
       "completion": "requires-disposition-reconciliation",
@@ -6493,6 +6494,12 @@
     }
   ],
   "commits": {
+    "a9553db754706abe3567c5b60878b7445478bb1c": {
+      "subject": "M0 T484 S3 P205: build presentation contracts through native targets",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-presentation-contracts.md"
+      ]
+    },
     "fc4f1c7a9cf63003cdf580dac9939344a0bb86bc": {
       "subject": "M0 T484 S3 P204: consolidate WOW provider contract producers",
       "evidence": [

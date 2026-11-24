@@ -1539,29 +1539,29 @@
     "evidence": "docs/etc/evidence/t484-s3-presentation-contracts.md"
   },
   "test/observation/verify-console-api-late-c.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P206 retains real observer assertions and moves compilation to shared native targets; retired forced include removed in favor of current library support.",
+    "evidence": "docs/etc/evidence/t484-s3-observer-contracts.md"
   },
   "test/observation/verify-console-trace-c.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P206 retains real observer assertions and moves compilation to shared native targets; retired forced include removed in favor of current library support.",
+    "evidence": "docs/etc/evidence/t484-s3-observer-contracts.md"
   },
   "test/observation/verify-dos-style-relay.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-retired",
+    "reason": "P206 removes obsolete uncalled builder whose test/integration/dos_style_relay_test.c source no longer exists; historical evidence preserved.",
+    "evidence": "docs/etc/evidence/t484-s3-observer-contracts.md"
   },
   "test/observation/verify-install-guard-c.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P206 retains real observer assertions and moves compilation to shared native targets; retired forced include removed in favor of current library support.",
+    "evidence": "docs/etc/evidence/t484-s3-observer-contracts.md"
   },
   "test/observation/verify-palette-trace-c.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P206 retains real observer assertions and moves compilation to shared native targets; retired forced include removed in favor of current library support.",
+    "evidence": "docs/etc/evidence/t484-s3-observer-contracts.md"
   },
   "test/observation/verify-wow-dde-conversion.ps1": {
     "status": "supplemental-direct-command-review",

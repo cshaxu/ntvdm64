@@ -226,6 +226,7 @@ for %%I in (wow-font-contracts wow-metafile-host wow-session-contracts wow-contr
 if "%TARGET%"=="native-guest-output" set "SELECTED=1"
 if "%TARGET%"=="native-guest-output" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="console-api-probes" set "SELECTED=1"
+for %%I in (observer-console observer-palette observer-guard-win101 observer-guard-win31 console-api-late-contract) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="clipboard-epoch" set "SELECTED=1"
 if "%TARGET%"=="cpu-guest-probes" set "SELECTED=1"
 if "%TARGET%"=="cpu-guest-probes" if not "%~1"=="x86" exit /b 2

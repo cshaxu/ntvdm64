@@ -1881,3 +1881,5 @@ post-publication targeted checks.
 [T484 S3 WOW provider contracts](evidence/t484-s3-wow-provider-contracts.md) records497 preserved failure/rundown assertions and native producers.
 
 [T484 S3 presentation contracts](evidence/t484-s3-presentation-contracts.md) records native font/startup positive and negative controls.
+
+[T484 S3 observer contracts](evidence/t484-s3-observer-contracts.md) records native observer regressions and obsolete DOS relay builder retirement.
