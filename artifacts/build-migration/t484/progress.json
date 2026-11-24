@@ -1,13 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "6cd71b33628e27faf02c6d78e62f1859e83b5508",
+  "head": "6e903ce7467c7f9d35507a674149821e751a96ea",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-redirector-remote.ps1",
-    " M tools/build/worker/observation-tests.cmake",
-    "?? docs/etc/evidence/t484-s4-remote-preparation.md"
+    " M test/build/Test-PackageIdentityTool.ps1",
+    " M test/integration/verify-dem-fcb-guest.ps1",
+    " M test/observation/isolated_package_cleanup.ps1",
+    " M tools/build/fixtures/guest-probes.cmake",
+    " M tools/build/native/stage-runtime.cmd.in",
+    "?? docs/etc/evidence/t484-s4-fcb-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -2048,7 +2051,7 @@
       "file": "test/observation/isolated_package_cleanup.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "d7f692ebc8f52b6a544f0d7eda7256c9e36936f2a2b074b0b7cdc173457dfd3e",
+      "current_sha256": "0fc92abbfb9ef0f4d4267559bbd3612e6e89141cf802c13e74139b8c1a61bff8",
       "revisions": [
         "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a",
         "3776c3208bcfcfa740fcf02da7aeca581d956e33",
@@ -6616,6 +6619,12 @@
     }
   ],
   "commits": {
+    "6e903ce7467c7f9d35507a674149821e751a96ea": {
+      "subject": "M0 T484 S4 P19: finish remote redirector preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-remote-preparation.md"
+      ]
+    },
     "6cd71b33628e27faf02c6d78e62f1859e83b5508": {
       "subject": "M0 T484 S4 P18: finish tab-stop and logon preparation",
       "evidence": [
@@ -9152,15 +9161,15 @@
           "text": "$reader = Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/ntvdm-package-id.exe'"
         },
         {
-          "line": 60,
+          "line": 61,
           "text": "$runner=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/stage-runtime.cmd'"
         },
         {
-          "line": 128,
+          "line": 130,
           "text": "throw 'Refuse guest probe cleanup: Git data or link'"
         },
         {
-          "line": 152,
+          "line": 154,
           "text": "# Test-only compatibility for sealed flat baselines and build-link caches."
         }
       ]

@@ -169,4 +169,25 @@ foreach($invalid in @("$out/missing.bin",$out,"$repo/assets/release/PIF.EXE")){
  if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw "Invalid test input accepted: $invalid"}
 }
 'PASS build-owned test input copying and missing/directory/outside-build rejection'
+$stage=$null
+try{
+ $stage=New-PhysicalRuntimeStage $package -TestFiles @($testInput) -TestSubdirectory DFCB01
+ if((Get-FileHash "$stage/tests/DFCB01/probe.bin").Hash -ne (Get-FileHash $testInput).Hash){throw 'Test subdirectory input changed'}
+ if(Test-Path "$stage/tests/probe.bin"){throw 'Subdirectory input leaked into tests root'}
+}finally{if($stage){Remove-PhysicalRuntimeStage $stage}}
+foreach($invalid in @('.','..','../escape','a/b','a\b','a b','C:outside')){
+ $rejected=$false
+ try{$unexpected=New-PhysicalRuntimeStage $package -TestFiles @($testInput) -TestSubdirectory $invalid}catch{$rejected=$true}
+ if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw "Invalid test subdirectory accepted: $invalid"}
+}
+$rejected=$false
+try{$unexpected=New-PhysicalRuntimeStage $package -TestSubdirectory DFCB01}catch{$rejected=$true}
+if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw 'Empty subdirectory input accepted'}
+$null=New-Item -ItemType Directory "$package/tests/DFCB01" -Force
+[IO.File]::WriteAllText("$package/tests/DFCB01/keep.txt",'preserve')
+$rejected=$false
+try{$unexpected=New-PhysicalRuntimeStage $package -TestFiles @($testInput) -TestSubdirectory DFCB01}catch{$rejected=$true}
+if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw 'Existing test subdirectory accepted'}
+if([IO.File]::ReadAllText("$package/tests/DFCB01/keep.txt") -ne 'preserve'){throw 'Source collision changed'}
+'PASS isolated test subdirectory, traversal/empty/collision rejection and source preservation'
 $global:LASTEXITCODE=0

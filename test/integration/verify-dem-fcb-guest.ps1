@@ -16,20 +16,14 @@ $savedPath=$env:PATH
 $savedDesktop=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $savedMilestone=$env:MVDM_OBSERVER_MILESTONE_INPUT
 try{
-    $runtime=New-PhysicalRuntimeStage $package
-    $scope=New-IsolatedPackageScope $runtime
-    $owned=Join-Path $runtime 'tests/DFCB01'
-    if(Test-Path $owned){throw 'Guest directory already exists; cannot claim ownership'}
     New-Item -ItemType Directory $out | Out-Null
-    New-Item -ItemType Directory $owned | Out-Null
-    $probe=Join-Path $out 'FCBTEST.COM'
     & "$repo/tools/build-fixtures.cmd" x86 guest-api
     if($LASTEXITCODE){throw 'Guest probe assembly failed'}
-    Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/api/FCBTEST.COM" -Destination "$out/FCBTEST.COM"
-    Copy-Item $probe (Join-Path $owned 'FCBTEST.COM')
-    foreach($name in @('AAA.TST','BBB.TST','CCC.TST')){
-        [IO.File]::WriteAllText((Join-Path $owned $name),'AB',[Text.Encoding]::ASCII)
-    }
+    $cache="$repo/build/.ninja/fixtures-x86/guest-probes/api"
+    $probe=Join-Path $cache 'FCBTEST.COM'
+    $runtime=New-PhysicalRuntimeStage $package -TestSubdirectory DFCB01 -TestFiles @($probe,"$cache/AAA.TST","$cache/BBB.TST","$cache/CCC.TST")
+    $scope=New-IsolatedPackageScope $runtime
+    $owned=Join-Path $runtime 'tests/DFCB01'
     $env:PATH=(Join-Path $runtime 'system32')+';'+(Join-Path $env:SystemRoot 'System32')
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_MILESTONE_INPUT='1'

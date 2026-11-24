@@ -29,6 +29,8 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
+S4 P20 completes FCB private-directory preparation; [evidence](../etc/evidence/t484-s4-fcb-preparation.md) records cached full build, shared stage default/subdirectory rejection contracts, real FCB receipt37/name/EOF/missing results and unchanged dual publication. Frozen343/355,12 pending; supplemental13 to12.
+
 S4 P19 completes remote redirector preparation; [evidence](../etc/evidence/t484-s4-remote-preparation.md) records cached full build, current native-provider comparison, real DOS failure/local-provider contracts,37 enumeration checks and unchanged dual publication. Frozen343/355,12 pending; supplemental14 to13.
 
 S4 P18 completes tab-stop input and logon staging reconciliation; [evidence](../etc/evidence/t484-s4-tabstop-logon-preparation.md) records cached full build, original probe hash identity, real tab-stop snapshots/records and logon gameplay, with unchanged dual publication. Frozen343/355,12 pending; supplemental16 to14.
@@ -86,7 +88,7 @@ S4 P3 replaces addon utility publication with CMD; [publication evidence](../etc
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **343/355 disposed,12 pending**, plus13 supplemental
+Current census: **343/355 disposed,12 pending**, plus12 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;

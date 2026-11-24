@@ -1939,3 +1939,5 @@ post-publication targeted checks.
 - [T484 S4 tab-stop and logon preparation](evidence/t484-s4-tabstop-logon-preparation.md).
 
 - [T484 S4 remote redirector preparation](evidence/t484-s4-remote-preparation.md).
+
+- [T484 S4 FCB preparation](evidence/t484-s4-fcb-preparation.md).
