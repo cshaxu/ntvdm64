@@ -121,33 +121,9 @@ function New-PhysicalRuntimeStage([string]$PackageRoot,
             # Copying a package deliberately preserves its UUID. Concurrent
             # tests that require a different broker must opt in to creating a
             # complete new test package, without touching the source package.
-            $manifest=Join-Path $stage 'product-system32-manifest.json'
-            $rows=Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json
-            $rows=@($rows)
-            $expected=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
-                'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')
-            if(@($rows | Where-Object Name -eq 'VCDEX.DLL').Count){$expected+='VCDEX.DLL'}
-            if($rows.Count -ne $expected.Count -or
-               @($rows | Select-Object -ExpandProperty Name -Unique).Count -ne $expected.Count) {
-                throw 'Fresh identity requires the complete host-image manifest'
-            }
-            $binary=Get-PackageBinaryRoot $stage
-            $identity=[guid]::NewGuid()
-            foreach($name in $expected) {
-                $row=@($rows | Where-Object {$_.Name -eq $name})
-                if($row.Count -ne 1 -or $row[0].RelativePath -ne ('system32\'+$name)) {
-                    throw "Invalid package manifest entry: $name"
-                }
-                $path=Join-Path $binary $name
-                if((Get-IsolatedFileSha256 $path) -ne $row[0].Sha256) {
-                    throw "Package input differs from manifest: $name"
-                }
-                & "$script:IsolatedPackageCleanupRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe" (([guid]($identity)).ToString()) $path
-                if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
-                $row[0].PackageId=$identity.ToString()
-                $row[0].Sha256=Get-IsolatedFileSha256 $path
-            }
-            $rows | ConvertTo-Json | Set-Content -LiteralPath $manifest -Encoding UTF8
+            $refresh=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/refresh-package.cmd'
+            & $refresh $stage | Out-Null
+            if($LASTEXITCODE){throw "CMD package identity refresh failed ($LASTEXITCODE)"}
         }
         $marker = [ordered]@{
             schema = 1

@@ -1915,3 +1915,5 @@ post-publication targeted checks.
 - [T484 S4 CMD addon utility publication](evidence/t484-s4-addon-utility-publication.md).
 
 - [T484 S4 unified addon driver publication](evidence/t484-s4-addon-driver-publication.md).
+
+- [T484 S4 isolated package identity refresh](evidence/t484-s4-stage-identity-refresh.md).

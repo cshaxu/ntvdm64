@@ -74,12 +74,15 @@ done:
     CloseHandle(file);
     return error;
 }
+DWORD package_manifest_rows(const wchar_t *path);
+
 int wmain(int argc, wchar_t **argv)
 {
     GUID identity;
     static const GUID empty = {0};
     wchar_t text[39];
     int index;
+    if (argc == 3 && !wcscmp(argv[1], L"--manifest")) return (int)package_manifest_rows(argv[2]);
     if (argc == 2 && !wcscmp(argv[1], L"--new")) {
         if (FAILED(CoCreateGuid(&identity)) || !memcmp(&identity, &empty, sizeof(identity)) ||
             !StringFromGUID2(&identity, text, ARRAYSIZE(text))) return ERROR_GEN_FAILURE;

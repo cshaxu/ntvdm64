@@ -43,6 +43,8 @@ S4 P2 replaces the system32 PowerShell package producer with one CMD owner;
 [package comparison and failure evidence](../etc/evidence/t484-s4-system32-cmd.md)
 records whole-package equivalence and expanded failure controls.
 
+S4 P5 moves shared fresh-package identity preparation to CMD/native; [identity refresh evidence](../etc/evidence/t484-s4-stage-identity-refresh.md) separates completed UUID/manifest handling from remaining directory/marker preparation. Counts are unchanged.
+
 S4 P4 consolidates all14 addons into one CMD publisher; [driver publication evidence](../etc/evidence/t484-s4-addon-driver-publication.md) records receipt validation and candidate qualification.
 
 S4 P3 replaces addon utility publication with CMD; [publication evidence](../etc/evidence/t484-s4-addon-utility-publication.md) records nine-tool identity checks, preserved driver qualifications and failed-copy handling.

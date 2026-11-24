@@ -34,4 +34,75 @@ foreach($kind in 'empty','signature','offset','magic'){
 & $tool --machine x86 "$out/missing.exe";if(!$LASTEXITCODE){throw 'Absent image accepted'}
 & $tool '00000000-0000-0000-0000-000000000000' "$out/run16.exe";if(!$LASTEXITCODE){throw 'Empty identity accepted'}
 'PASS UUID, x86/x64, stamp/read, source preservation, malformed/missing/machine rejection'
+$manifest="$repo/assets/release/release-manifest.json"
+$baseline=[IO.File]::ReadAllText($manifest)
+$records=@($baseline|ConvertFrom-Json)
+$lines=@(& $tool --manifest $manifest)
+if($LASTEXITCODE -or $lines.Count -ne 11){throw 'Complete manifest rejected'}
+foreach($record in $records){
+ $expected="$($record.Name) $($record.Machine) $($record.PackageId) $($record.Sha256) $($record.InputSha256)"
+ if($expected -cnotin $lines){throw 'Manifest fields changed'}
+}
+$caseFile="$out/manifest.json"
+$ten=@($records|Where-Object Name -ne 'VCDEX.DLL')|ConvertTo-Json
+[IO.File]::WriteAllText($caseFile,$ten)
+$lines=@(& $tool --manifest $caseFile)
+if($LASTEXITCODE -or $lines.Count -ne 10){throw 'Supported ten-image manifest rejected'}
+[IO.File]::WriteAllText($caseFile,$baseline,[Text.UTF8Encoding]::new($true))
+$lines=@(& $tool --manifest $caseFile)
+if($LASTEXITCODE -or $lines.Count -ne 11){throw 'UTF8 BOM rejected'}
+$cases=@{
+ duplicate=$baseline.Replace('"Name":','"Name":"run16.exe","Name":')
+ unknown=$baseline.Replace('"Name":','"Unknown":')
+ path=$baseline.Replace('system32','..')
+ hash=$baseline.Replace($records[0].Sha256,'not-a-hash')
+ uuid=$baseline.Replace($records[0].PackageId,'00000000-0000-0000-0000-000000000000')
+ mixed=$baseline.Replace('"PackageId": "'+$records[0].PackageId+'"','"PackageId": "'+$id+'"')
+ trailing=$baseline+'x'
+ truncated=$baseline.Substring(0,$baseline.LastIndexOf(']'))
+ duplicateImage=(@($records)+@($records[0])|ConvertTo-Json)
+ missing=(@($records|Select-Object -Skip 2)|ConvertTo-Json)
+ embeddedNull=$baseline+[char]0
+ oversized=' '*16385
+}
+# Change just one UUID to exercise package-level consistency, not UUID syntax.
+$copy=$baseline|ConvertFrom-Json;$copy[0].PackageId=$id
+$cases.mixed=$copy|ConvertTo-Json
+foreach($case in $cases.GetEnumerator()){
+ [IO.File]::WriteAllText($caseFile,[string]$case.Value)
+ $lines=@(& $tool --manifest $caseFile)
+ if(!$LASTEXITCODE -or $lines.Count){throw "Malformed manifest emitted rows: $($case.Key)"}
+}
+'PASS complete manifest fields, ten/eleven images, BOM and atomic malformed rejection'
+$package="$out/package"
+New-Item -ItemType Directory "$package/system32"|Out-Null
+foreach($record in $records){Copy-Item "$repo/assets/release/$($record.Name)" "$package/system32/$($record.Name)"}
+Copy-Item $manifest "$package/product-system32-manifest.json"
+. "$repo/test/observation/isolated_package_cleanup.ps1"
+$stages=@()
+try{
+ foreach($fresh in @($false,$true)){
+  $stage=New-PhysicalRuntimeStage $package -FreshPackageIdentity:$fresh
+  $stages+=,$stage
+  $after=@(Get-Content "$stage/product-system32-manifest.json" -Raw|ConvertFrom-Json)
+  $ids=@($after.PackageId|Select-Object -Unique)
+  if($ids.Count -ne 1 -or (($ids[0] -eq $records[0].PackageId) -eq $fresh)){throw 'Wrong copy/refresh identity'}
+  foreach($row in $after){
+   if((Get-FileHash "$stage/$($row.RelativePath)").Hash -ne $row.Sha256){throw 'Refreshed hash mismatch'}
+   $resource=(& $tool --read "$stage/$($row.RelativePath)").Trim()
+   if($LASTEXITCODE -or $resource -ne [Convert]::ToHexString(([guid]$ids[0]).ToByteArray())){throw 'Refreshed resource mismatch'}
+   $before=$records|Where-Object Name -eq $row.Name
+   if($before.InputSha256 -ne $row.InputSha256 -or $before.Machine -ne $row.Machine){throw 'Refresh changed provenance'}
+  }
+ }
+}finally{foreach($stage in $stages){Remove-PhysicalRuntimeStage $stage}}
+foreach($row in $records){if((Get-FileHash "$package/$($row.RelativePath)").Hash -ne $row.Sha256){throw 'Refresh modified source package'}}
+# Preflight must not stamp even the first image when a later hash is invalid.
+$bad=$baseline|ConvertFrom-Json;$bad[-1].Sha256='0'*64
+$bad|ConvertTo-Json|Set-Content "$package/product-system32-manifest.json"
+& "$repo/build/.ninja/build-tools/refresh-package.cmd" $package
+if(!$LASTEXITCODE){throw 'Refresh accepted bad hash'}
+foreach($row in $records){if((Get-FileHash "$package/$($row.RelativePath)").Hash -ne $row.Sha256){throw 'Preflight partially stamped package'}}
+if(!(Test-Path "$package/product-system32-manifest.json")){throw 'Preflight removed source manifest'}
+'PASS actual shared copy/refresh provider, resource identities, source preservation and all-input preflight'
 $global:LASTEXITCODE=0

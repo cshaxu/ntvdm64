@@ -1,0 +1,82 @@
+@echo off
+setlocal EnableExtensions DisableDelayedExpansion
+if "%~1"=="" exit /b 2
+if not "%~2"=="" exit /b 2
+set "repo=@NTVDM_STAGE_REPO@"
+for %%I in ("%~1") do set "package=%%~fI"
+set "walk=%package%"
+:within
+for %%I in ("%walk%\..") do set "parent=%%~fI"
+if /i "%parent%"=="%repo%\build" goto owned
+if /i "%parent%"=="O:\tmp" goto short
+if /i "%parent%"=="%walk%" exit /b 2
+set "walk=%parent%"
+goto within
+:short
+if /i not "%walk%"=="%package%" exit /b 2
+for %%I in ("%package%") do set "leaf=%%~nxI"
+if /i not "%leaf:~0,1%"=="n" exit /b 2
+if "%leaf:~3,1%"=="" exit /b 2
+if not "%leaf:~4%"=="" exit /b 2
+for /f "delims=0123456789abcdefABCDEF" %%I in ("%leaf:~1%") do exit /b 2
+:owned
+set "identity=%repo%\build\.ninja\build-tools\ntvdm-package-id.exe"
+set "hash=%repo%\assets\release\HASH.EXE"
+set "manifest=%package%\product-system32-manifest.json"
+set "rows=%package%\package-identity.rows"
+set "pending=%package%\package-identity.pending"
+set "started="
+"%identity%" --manifest "%manifest%" >"%rows%"
+if errorlevel 1 goto fail
+for /f "usebackq tokens=1-5" %%A in ("%rows%") do (
+  call :check "%%A" "%%D"
+  if errorlevel 1 goto fail
+)
+"%identity%" --new >"%pending%"
+if errorlevel 1 goto fail
+set "uuid="
+set /p "uuid=" <"%pending%"
+if not defined uuid goto fail
+>"%pending%" echo [
+if errorlevel 1 goto fail
+rem Preflight is complete. A failure during stamping invalidates completion.
+set "started=1"
+del /q "%manifest%"
+if errorlevel 1 goto fail
+set "comma="
+for /f "usebackq tokens=1-5" %%A in ("%rows%") do (
+  call :stamp "%%A" "%%B" "%%E"
+  if errorlevel 1 goto fail
+)
+>>"%pending%" echo ]
+if errorlevel 1 goto fail
+move /y "%pending%" "%manifest%" >nul
+if errorlevel 1 goto fail
+del /q "%rows%" "%package%\package-identity.hash"
+exit /b 0
+:check
+call :digest "%package%\system32\%~1"
+if errorlevel 1 exit /b 1
+if /i not "%value%"=="%~2" exit /b 1
+exit /b 0
+:stamp
+"%identity%" "%uuid%" "%package%\system32\%~1"
+if errorlevel 1 exit /b 1
+call :digest "%package%\system32\%~1"
+if errorlevel 1 exit /b 1
+>>"%pending%" echo %comma%{"Name":"%~1","RelativePath":"system32\\%~1","Sha256":"%value%","Machine":%~2,"PackageId":"%uuid%","InputSha256":"%~3"}
+if errorlevel 1 exit /b 1
+set "comma=,"
+exit /b 0
+:digest
+"%hash%" "%~1" >"%package%\package-identity.hash"
+if errorlevel 1 exit /b 1
+set "value="
+set /p "value=" <"%package%\package-identity.hash"
+if not defined value exit /b 1
+exit /b 0
+:fail
+if defined started if exist "%manifest%" del /q "%manifest%"
+for %%I in ("%rows%" "%pending%" "%package%\package-identity.hash") do if exist "%%~I" del /q "%%~I"
+echo Package identity refresh failed. 1>&2
+exit /b 1
