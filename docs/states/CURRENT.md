@@ -41,6 +41,7 @@ interpreter-free end-to-end acceptance have not completed.
 | [P181-P213](../etc/evidence/t484-s3-early-deliveries.md#p181-p213-deliveries) | Completed producer cleanup and obsolete-tool retirement;319/355 disposed,36 pending, plus23 supplemental preparation chains. |
 | [P214 runtime compiler lookup](../etc/evidence/t484-s3-runtime-tool-path.md) | Removed two obsolete Win95 NASM runtime lookups; cached full build and unchanged dual-publication identities verified. Counts remain319/355 and23 supplemental chains. |
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
+| [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.

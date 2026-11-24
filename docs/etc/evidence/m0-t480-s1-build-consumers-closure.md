@@ -158,7 +158,7 @@ modern-host ABI needs must be retained unless concrete counterevidence exists.
 - [Full command/object/consumer evidence, gzip JSON](../../../artifacts/mvdm-audit/t480-s1-build-evidence.json.gz).
 - [Raw build/preprocessor/graph/MAP receipts](../../../artifacts/mvdm-audit/t480-s1-build-receipts.zip).
 - Historical collector `tools/audit/collect-host-mirror-build-evidence.py` (retired in [T484 cleanup](t484-s3-retire-census.md)) and
-  [focused preprocessor capture](../../../tools/audit/capture-host-mirror-preprocessing.py).
+  historical focused preprocessor capture (`capture-host-mirror-preprocessing.py`, retired in T484).
 
 Reproduce the normal CMake commands from the recorded build-x86.cmd/build-x64.cmd,
 then run the collector with a fresh build/t480-s1 output directory. Run the

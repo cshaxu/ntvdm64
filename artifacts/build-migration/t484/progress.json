@@ -1,17 +1,24 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636",
+  "head": "5c06b5e0dee67f950ca15543f71fcab1d239b323",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
+    " M docs/etc/evidence/m0-t480-s1-build-consumers-closure.md",
+    " M docs/etc/evidence/m0-t480-s2-whitespace-restoration.md",
     " M docs/states/CURRENT.md",
-    " D test/integration/ntvdm64-386/verify-title-native.ps1",
-    " M test/integration/verify-command-native-edit-return.ps1",
-    " M test/integration/verify-win16-ddeml-probe.ps1",
-    " D test/observation/optical_native_toc.ps1",
-    " D test/observation/verify-logon-token-lifetime.ps1",
-    " M tools/audit/Invoke-ProductVerification.ps1",
-    "?? docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md"
+    " D test/observation/verify-dpmi-swint-diagnostic-source.py",
+    " D test/observation/verify-mouse-callback-reentry.py",
+    " D tools/audit/capture-host-mirror-preprocessing.py",
+    " D tools/audit/capture-t480-s3-environment.py",
+    " D tools/audit/capture-t480-s3-objects.py",
+    " D tools/audit/verify-t480-s2-preprocessing.py",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s3-historical-compiler-retirement.md",
+    "?? test/observation/fixtures/mouse_callback_reentry.c",
+    "?? test/observation/verify-mouse-callback-reentry.ps1",
+    "?? tools/build/fixtures/mouse-callback.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -881,11 +888,13 @@
       "state": "changed",
       "current_sha256": "ef3a7dc674355138446f490fc74f1645bd06a78bb77d83a7cc1308139a814406",
       "revisions": [
+        "5c06b5e0dee67f950ca15543f71fcab1d239b323",
         "67be6eea19e7f52c3b1203ce11437dfc809d4a0c",
         "cde4bc13ce1f390f73ed22f074cc2d1607cc5521"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-ddeml-native.md",
+        "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md",
         "docs/etc/evidence/t484-s3-win16-probes.md"
       ],
       "completion": "pending-producer-migration",
@@ -4079,12 +4088,14 @@
       "state": "changed",
       "current_sha256": "58b5d0d5a63cdaa94727b829599a6c71a9f661d50b1855ff692a1b29fa21fb68",
       "revisions": [
+        "5c06b5e0dee67f950ca15543f71fcab1d239b323",
         "a9553db754706abe3567c5b60878b7445478bb1c",
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "60d414d7f2e75a292241ef09caefb353d16915d8"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-direct-package-identity.md",
+        "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md",
         "docs/etc/evidence/t484-s3-presentation-contracts.md",
         "docs/etc/evidence/t484-s3-version-runtime.md"
       ],
@@ -6523,6 +6534,12 @@
     }
   ],
   "commits": {
+    "5c06b5e0dee67f950ca15543f71fcab1d239b323": {
+      "subject": "M0 T484 S3 P215: retire inline compiler probes and reuse native environment",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md"
+      ]
+    },
     "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636": {
       "subject": "M0 T484 S3 P214: remove obsolete runtime compiler lookups",
       "evidence": [

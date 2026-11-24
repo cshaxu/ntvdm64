@@ -74,7 +74,7 @@ preprocessor locations; the actual compiler comparison supplies that evidence.
 Reproducible tooling:
 
 - [Pinned restoration planner/applicator](../../../tools/audit/restore-t480-s2-whitespace.py): fresh output under build/t480-s2, optional --apply after review.
-- [Actual consumer capture](../../../tools/audit/verify-t480-s2-preprocessing.py): matching VS environment, --arch x86/x64, four bounded compiler jobs per environment and180-second per-command deadline.
+- Historical actual consumer capture (`verify-t480-s2-preprocessing.py`, retired in T484): matching VS environment, --arch x86/x64, four bounded compiler jobs per environment and180-second per-command deadline.
 
 ## Delivery verification
 

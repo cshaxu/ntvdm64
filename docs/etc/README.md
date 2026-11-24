@@ -1901,3 +1901,5 @@ post-publication targeted checks.
 - [T484 S3 runtime compiler lookup cleanup](evidence/t484-s3-runtime-tool-path.md).
 
 - [T484 S3 inline compiler retirement](evidence/t484-s3-dynamic-compiler-retirement.md).
+
+- [T484 S3 historical compiler retirement](evidence/t484-s3-historical-compiler-retirement.md).
