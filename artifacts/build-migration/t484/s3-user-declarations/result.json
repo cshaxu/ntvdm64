@@ -1,0 +1,30 @@
+{
+  "first": {
+    "pid": 27132,
+    "finished": "2026-11-24T06:33:25.6834267+01:00",
+    "exit": 1,
+    "started": "2026-11-24T06:33:19.8852004+01:00"
+  },
+  "positive": true,
+  "validation": {
+    "exit": 0,
+    "pid": 16220,
+    "started": "2026-11-24T06:34:49.1515637+01:00",
+    "finished": "2026-11-24T06:36:03.5047156+01:00"
+  },
+  "negativeRejected": true,
+  "second": {
+    "finished": "2026-11-24T06:34:13.98369+01:00",
+    "exit": 1,
+    "started": "2026-11-24T06:34:00.6242498+01:00",
+    "pid": 20880
+  },
+  "publication": {
+    "unchanged": true,
+    "republished": false,
+    "rawInputs": 11,
+    "publishedCopies": 22
+  },
+  "fullGate": false,
+  "auditTests": 12
+}

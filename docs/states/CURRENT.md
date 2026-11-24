@@ -104,7 +104,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P133 XMS boundaries](../etc/evidence/t484-s3-xms-native.md) | Native allocation/move targets replace the old Ninja parser/manual builder;135/8 assertions pass. Cached full and publication identity results are in receipt. |
 
-Completed implementation batches through P133 passed their cached full host build. P73 checks11 raw host inputs
+| [P134 USER declarations](../etc/evidence/t484-s3-user-declarations.md) | Positive/native and original overflow-negative compile checks pass;12 independent audit selftests pass without any compiler. Build/publication results in receipt. |
+
+Completed implementation batches through P134 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

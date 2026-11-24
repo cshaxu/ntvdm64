@@ -1,31 +1,33 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "44f6cf445fa469bd89bea5540609e289b75f68e4",
+  "head": "5ff82341beacc9ee4cdad7cd6ef5dec21e95a545",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-xms-block-boundaries.ps1",
+    " M test/opennt-host/verify-user-declarations.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/worker/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-xms-native/",
-    "?? docs/etc/evidence/t484-s3-xms-native.md",
-    "?? tools/build/worker/xms-tests.cmake"
+    " M tools/build/wow32/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-user-declarations/",
+    "?? docs/etc/evidence/t484-s3-user-declarations.md",
+    "?? test/opennt-host/user_declarations.c",
+    "?? tools/audit/__pycache__/",
+    "?? tools/build/wow32/declaration-tests.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 141,
-    "unchanged": 84,
+    "changed": 142,
+    "unchanged": 83,
     "removed": 130
   },
   "disposition_counts": {
-    "migrated-delivered": 82,
+    "migrated-delivered": 83,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 130,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 73,
-    "retained-standalone-audit": 1
+    "requires-disposition-reconciliation": 71,
+    "retained-standalone-audit": 2
   },
   "existing_interpreted_candidates_with_command_hits": 174,
   "files": [
@@ -3804,8 +3806,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "3dbc09129a1b17e65b65223fff524a26926806e6fc9d704e38272a998f6a7f61",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "5ff82341beacc9ee4cdad7cd6ef5dec21e95a545"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-xms-native.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -3817,12 +3823,16 @@
       "id": "B0200",
       "file": "test/opennt-host/verify-user-declarations.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "3856a3a3fb5ddb1920ce0c63e569511c86b71a41f773df5e628de8b4fb06e62e",
+      "state": "changed",
+      "current_sha256": "d0c8163f17be5c5fd11b21a85cd1a5f59ea65ab35288eb4933d2bd230567c03b",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Native positive USER declarations and original capacity rejection; no interpreted compiler/source generation",
+        "evidence": "docs/etc/evidence/t484-s3-user-declarations.md"
+      }
     },
     {
       "id": "B0201",
@@ -3832,8 +3842,12 @@
       "current_sha256": "0361be8163b5d76a312180405cc80db47fe8c3f65fb79306c8d916bc70fcc429",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Twelve deterministic mocked Ninja audit tests; no actual compiler/generator invocation",
+        "evidence": "docs/etc/evidence/t484-s3-user-declarations.md"
+      }
     },
     {
       "id": "B0202",
@@ -5904,6 +5918,12 @@
     }
   ],
   "commits": {
+    "5ff82341beacc9ee4cdad7cd6ef5dec21e95a545": {
+      "subject": "T484 S3 P133 use native XMS boundary test producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-xms-native.md"
+      ]
+    },
     "44f6cf445fa469bd89bea5540609e289b75f68e4": {
       "subject": "T484 S3 P132 retire obsolete WOW feasibility and graph probes",
       "evidence": [
@@ -8719,12 +8739,8 @@
       "file": "test/opennt-host/verify-user-declarations.ps1",
       "hits": [
         {
-          "line": 19,
-          "text": "& $CompilerDriver cl.exe /nologo /c /we4133 /I \"$repo/src\" /I \"$repo/src/wow32-dll/include\" \"/Fo$out/layout.obj\" \"$out/layout.c\""
-        },
-        {
-          "line": 29,
-          "text": "& $CompilerDriver cl.exe /nologo /P \"/Fi$out/overflow.i\" \"$out/overflow.c\" *> \"$out/overflow.log\""
+          "line": 15,
+          "text": "Get-FileHash \"$repo/src/non-mvdm/windows/core/ntuser/inc/user.h\",\"$repo/test/opennt-host/user_declarations.c\",\"$repo/build/.ninja/msvc-x86-release/wow32/user-capacity-overflow.c\" | Export-Csv -NoTypeInformation \"$out/inputs.csv\""
         }
       ]
     },

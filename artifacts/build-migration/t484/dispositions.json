@@ -987,5 +987,15 @@
     "status": "migrated-delivered",
     "reason": "Native XMS allocation/move targets use current owner flags and real suballocator; 135/8 assertions pass; manual compiler parser retired",
     "evidence": "docs/etc/evidence/t484-s3-xms-native.md"
+  },
+  "test/opennt-host/verify-user-declarations.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Native positive USER declarations and original capacity rejection; no interpreted compiler/source generation",
+    "evidence": "docs/etc/evidence/t484-s3-user-declarations.md"
+  },
+  "test/tools/audit/test_library_build_boundary.py": {
+    "status": "retained-standalone-audit",
+    "reason": "Twelve deterministic mocked Ninja audit tests; no actual compiler/generator invocation",
+    "evidence": "docs/etc/evidence/t484-s3-user-declarations.md"
   }
 }
