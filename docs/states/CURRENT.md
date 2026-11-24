@@ -70,6 +70,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P157 identity reader](../etc/evidence/t484-s3-identity-reader.md) | Shared test resource lookup uses native tool; checked-in identity/cleanup cases and cached full/11+22 hashes passed unchanged. Fresh-stage validation remains open. |
 
+| [P158 fresh package isolation](../etc/evidence/t484-s3-fresh-stage.md) | Native RPC client producer and actual two-package RPC/DOS isolation pass; B0015/B0104 complete,288/355 disposed,67 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

@@ -1798,3 +1798,5 @@ post-publication targeted checks.
 - [T484 S3 native package identity producer](evidence/t484-s3-package-identity.md).
 
 - [T484 S3 native identity reader](evidence/t484-s3-identity-reader.md).
+
+- [T484 S3 fresh package isolation](evidence/t484-s3-fresh-stage.md).

@@ -18,7 +18,7 @@ $packages=@((Resolve-Path $PackageA).Path,(Resolve-Path $PackageB).Path)
 $ids=@($packages | ForEach-Object {
     $rows=@((Get-Content (Join-Path $_ 'product-system32-manifest.json') -Raw | ConvertFrom-Json))
     $values=@($rows | Select-Object -ExpandProperty PackageId -Unique)
-    if($rows.Count -ne 10 -or $values.Count -ne 1){throw "Invalid package manifest: $_"}
+    if($rows.Count -ne 11 -or $values.Count -ne 1){throw "Invalid package manifest: $_"}
     $values[0]
 })
 if($ids[0] -eq $ids[1]){throw 'The packages must have different identities'}

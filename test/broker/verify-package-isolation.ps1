@@ -13,7 +13,7 @@ $packages=@((Resolve-Path -LiteralPath $PackageA).Path,(Resolve-Path -LiteralPat
 $ids=@($packages | ForEach-Object {
     $rows=@((Get-Content -LiteralPath (Join-Path $_ 'product-system32-manifest.json') -Raw | ConvertFrom-Json))
     $values=@($rows | Select-Object -ExpandProperty PackageId -Unique)
-    if($rows.Count -ne 10 -or $values.Count -ne 1){throw "Invalid package identity manifest: $_"}
+    if($rows.Count -ne 11 -or $values.Count -ne 1){throw "Invalid package identity manifest: $_"}
     $values[0]
 })
 if($ids[0] -eq $ids[1]){throw 'The two packages must have different IDs'}

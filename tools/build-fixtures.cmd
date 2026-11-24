@@ -47,6 +47,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="package-rpc-client" set "SELECTED=1"
+if "%TARGET%"=="package-rpc-client" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="package-identity" set "SELECTED=1"
 if "%TARGET%"=="package-identity" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="broker-protocol-fixtures" set "SELECTED=1"
@@ -307,6 +309,7 @@ for %%I in (dpmi-contracts ccpu-port-privilege dpmi-swint-selected pm-entry-cont
 for %%I in (cpu-contracts ccpu-neg64 ccpu-neg64-negative ccpu-leaf ccpu-leaf-negative ccpu-notification native-int-prefix) do if "%TARGET%"=="%%I" goto worker
 if "%TARGET%"=="dem-declarations" goto worker
 if "%TARGET%"=="package-identity" goto worker
+if "%TARGET%"=="package-rpc-client" goto worker
 if "%TARGET%"=="broker-protocol-fixtures" goto worker
 if "%TARGET%"=="broker-resource-fixtures" goto worker
 if "%TARGET%"=="broker-original-fixtures" goto worker

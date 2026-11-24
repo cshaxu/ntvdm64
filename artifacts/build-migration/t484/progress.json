@@ -1,14 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "b84e36c23d1d6061364d172317a324142b6010c0",
+  "head": "995bbe44d7ed265740f8288575ad6182fb8157be",
   "worktree_status": [
-    " M artifacts/build-migration/t484/progress.json",
+    " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/isolated_package_cleanup.ps1",
-    " M test/observation/verify-cleanup-identity.ps1",
-    " M tools/build/native/package-id.c",
-    "?? docs/etc/evidence/t484-s3-identity-reader.md"
+    " M test/broker/verify-package-isolation.ps1",
+    " M test/broker/verify-package-session-isolation.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/worker/units.cmake",
+    "?? docs/etc/evidence/t484-s3-fresh-stage.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -17,10 +18,10 @@
     "removed": 165
   },
   "disposition_counts": {
-    "migrated-delivered": 88,
+    "migrated-delivered": 90,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 165,
-    "pending-producer-migration": 52,
+    "pending-producer-migration": 50,
     "retained-native-delegate": 14,
     "requires-disposition-reconciliation": 17,
     "retained-standalone-audit": 16
@@ -304,10 +305,11 @@
       "current_sha256": "e5e913b9064e9f73fc03745da390edc905d9ac098b2cd7e49a8ee178123022e3",
       "revisions": [],
       "evidence": [],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "Calls physical runtime staging and Set-PackageIdentity.ps1; S4 caller migration required",
-        "status": "pending-producer-migration"
+        "status": "migrated-delivered",
+        "reason": "Native identity read/write and RPC client producer; actual two-package RPC/DOS isolation and owned cleanup passed",
+        "evidence": "docs/etc/evidence/t484-s3-fresh-stage.md"
       }
     },
     {
@@ -1911,13 +1913,17 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "32b0b9cb16eb944cd469b490e18f6322d4fddc322c06096c3c73dd89edec4c08",
-      "revisions": [],
-      "evidence": [],
-      "completion": "pending-producer-migration",
+      "revisions": [
+        "995bbe44d7ed265740f8288575ad6182fb8157be"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-identity-reader.md"
+      ],
+      "completion": "migrated-delivered",
       "decision": {
-        "evidence": "docs/etc/evidence/t484-s3-measurements.md",
-        "status": "pending-producer-migration",
-        "reason": "Standalone cleanup retained; FreshPackageIdentity still invokes interpreted package stamping and manifest staging, to reconcile in S4"
+        "status": "migrated-delivered",
+        "reason": "Native identity read/write and RPC client producer; actual two-package RPC/DOS isolation and owned cleanup passed",
+        "evidence": "docs/etc/evidence/t484-s3-fresh-stage.md"
       }
     },
     {
@@ -6345,6 +6351,12 @@
     }
   ],
   "commits": {
+    "995bbe44d7ed265740f8288575ad6182fb8157be": {
+      "subject": "T484 S3 P157 read isolated package identity with native tool",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-identity-reader.md"
+      ]
+    },
     "b84e36c23d1d6061364d172317a324142b6010c0": {
       "subject": "T484 S3 P156 use native package identity writer and fixture",
       "evidence": [
