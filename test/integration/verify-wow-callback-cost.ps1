@@ -26,9 +26,8 @@ try{
  if(!$published.Count -or $images.Count -ne $published.Count -or @($images.name|Sort-Object -Unique).Count -ne $images.Count -or @(Compare-Object ($images.name|Sort-Object) ($published.name|Sort-Object)).Count){throw 'Coherent current image identities required'}
  $inputs+="$ImageRoot/release-manifest.json"
  foreach($image in $published){$inputs+="$repo/assets/release/$($image.name)"}
- $null=New-Item -ItemType Directory "$root/sealed-images"
- foreach($image in $images){$path="$ImageRoot/$($image.name)";if((Get-FileHash $path).Hash -ne $image.sha256){throw 'Selected image manifest mismatch'};$inputs+=$path;Copy-Item $path "$root/sealed-images/$($image.name)"}
- foreach($pair in @(@('ntvdm.exe',$WorkerBuildRoot),@('WOW32.DLL',$ProviderBuildRoot))){if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (@($images|Where-Object name -eq $pair[0])[0].InputSha256)){throw 'Image/MAP baseline mismatch'};Copy-Item "$($pair[1])/$($pair[0]).map" "$root/sealed-images/$($pair[0]).map"}
+ foreach($image in $images){$path="$ImageRoot/$($image.name)";if((Get-FileHash $path).Hash -ne $image.sha256){throw 'Selected image manifest mismatch'};$inputs+=$path}
+ foreach($pair in @(@('ntvdm.exe',$WorkerBuildRoot),@('WOW32.DLL',$ProviderBuildRoot))){if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (@($images|Where-Object name -eq $pair[0])[0].InputSha256)){throw 'Image/MAP baseline mismatch'}}
  Owned build $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-callback-cost "'+(Resolve-Path $ProviderBuildRoot).Path+'""') 300
  $diagnostic=Join-Path $ProviderBuildRoot 'diagnostics/callback-cost'
  Copy-Item "$diagnostic/callback-profile.c","$diagnostic/WOW32.DLL","$diagnostic/WOW32.DLL.map" $root
@@ -49,11 +48,12 @@ try{
  $rva=[Convert]::ToInt64($symbols[0].Groups[1].Value,16)-$preferred;if($rva -le 0 -or $rva -gt [uint32]::MaxValue){throw 'Invalid diagnostic data RVA'}
  @{symbol='_T447CallbackCosts';version=2;rva=$rva;capacity=64;callbacksPerRun=30;flagPairs=12;revealPairs=3;originalStatementsChanged=$false;phaseMarkersReversible=$true;productionOutputsChanged=$false;limits='Inclusive callback wall time; read-only after measured intervals; one QPC tick cross-thread uncertainty; not physical mouse latency or full S4'}|ConvertTo-Json|Set-Content "$root/diagnostic.json"
  Get-FileHash "$root/callback-profile.c","$root/callback-profile.obj","$root/WOW32.DLL","$root/WOW32.DLL.map"|Export-Csv -NoTypeInformation "$root/diagnostic-inputs.csv"
- Expand-Archive "$repo/assets/winnt.zip" "$root/media";$package="$root/media/WINNT"
- foreach($image in $images){Copy-Item "$root/sealed-images/$($image.name)" "$package/system32/$($image.name)" -Force}
- Owned baseline $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$root+'/sealed-images/ntvdm.exe.map" -WowMap "'+$root+'/sealed-images/WOW32.DLL.map" -ObserverCost -CallbackWorkload') 360
- Copy-Item "$root/WOW32.DLL" "$package/system32/WOW32.DLL" -Force
- Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$root+'/sealed-images/ntvdm.exe.map" -WowMap "'+$root+'/WOW32.DLL.map" -ObserverCost -CallbackCostRva '+$rva.ToString('X8')) 360
+ Owned prepare-baseline $env:ComSpec ('/d /s /c ""'+$repo+'/tools/prepare-wow-diagnostic.cmd" "'+$root+'/media" "'+$ImageRoot+'" "'+$WorkerBuildRoot+'" "'+$ProviderBuildRoot+'""') 120
+ $package="$root/media/WINNT"
+ Owned baseline $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$package+'/system32/ntvdm.exe.map" -WowMap "'+$package+'/system32/WOW32.DLL.map" -ObserverCost -CallbackWorkload') 360
+ Owned prepare-measurement $env:ComSpec ('/d /s /c ""'+$repo+'/tools/prepare-wow-diagnostic.cmd" "'+$root+'/instrumented" "'+$ImageRoot+'" "'+$WorkerBuildRoot+'" "'+$ProviderBuildRoot+'" "'+$diagnostic+'/WOW32.DLL""') 120
+ $package="$root/instrumented/WINNT"
+ Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$package+'/system32/ntvdm.exe.map" -WowMap "'+$package+'/system32/WOW32.DLL.map" -ObserverCost -CallbackCostRva '+$rva.ToString('X8')) 360
  Owned summary $shell ('-NoProfile -File "'+$PSScriptRoot+'/../observation/summarize-wow-callback-cost.ps1" -BuildRoot "'+$root+'"') 60
  foreach($input in Import-Csv "$root/inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen source/runtime input changed'}}
  foreach($input in Import-Csv "$root/diagnostic-inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Diagnostic output changed'}}

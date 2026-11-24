@@ -118,11 +118,7 @@
     "reason": "Required graphics wrapper absent already at fixed migration baseline; no active callers; historical graph/cache producer retired, measurement consumers retained",
     "status": "retired-with-delivery-evidence"
   },
-  "test/integration/verify-wow-page-cost.ps1": {
-    "status": "pending-producer-migration",
-    "evidence": "docs/etc/evidence/t484-s3-page.md",
-    "reason": "P60 native page diagnostic producer and real BuildOnly entry pass; archive/package staging and EMS helper remain"
-  },
+  "test/integration/verify-wow-page-cost.ps1": {"status":"migrated-delivered","reason":"S4 P13 uses one CMD package preparation owner with manifest/input/MAP checks and package-bound diagnostic copies; complete real diagnostic, unit/control and normal-exit cases pass. No production or original guest changes.","evidence":"docs/etc/evidence/t484-s4-wow-diagnostic-preparation.md"},
   "test/observation/build-win101-mouse-driver.ps1": {
     "status": "migrated-delivered",
     "reason": "CMD owns all native assembly; remaining independent ABI audit is not a producer dependency; background ownership and actual ABI/cache checks verified",
@@ -298,11 +294,7 @@
     "reason": "Native PIC/BIOS target owns compilation and linking; Python only invokes CMD and checks provider/runtime assertions",
     "evidence": "docs/etc/evidence/t484-s3-pic-bios.md"
   },
-  "test/integration/verify-wow-callback-cost.ps1": {
-    "evidence": "docs/etc/evidence/t484-s3-callback-cost.md",
-    "reason": "P50 native diagnostic projection and actual product composition verified; downstream measurement/helper production and staging remain pending",
-    "status": "pending-producer-migration"
-  },
+  "test/integration/verify-wow-callback-cost.ps1": {"status":"migrated-delivered","reason":"S4 P13 uses one CMD package preparation owner with manifest/input/MAP checks and package-bound diagnostic copies; complete real diagnostic, unit/control and normal-exit cases pass. No production or original guest changes.","evidence":"docs/etc/evidence/t484-s4-wow-diagnostic-preparation.md"},
   "test/observation/verify-wow-callback-cost-probe.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-callback-cost.md",
     "reason": "P50 standalone native recorder producer and original assertion runner pass",
@@ -343,11 +335,7 @@
     "reason": "Native object import substitution and fixture link select actual production wkfileio;577 original checks pass",
     "evidence": "docs/etc/evidence/t484-s3-file-cache.md"
   },
-  "test/integration/verify-wow-graph-cost.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P58 canonical native latency consumer and shared header projection; diagnostic package staging remains",
-    "evidence": "docs/etc/evidence/t484-s3-latency.md"
-  },
+  "test/integration/verify-wow-graph-cost.ps1": {"status":"migrated-delivered","reason":"S4 P13 uses one CMD package preparation owner with manifest/input/MAP checks and package-bound diagnostic copies; complete real diagnostic, unit/control and normal-exit cases pass. No production or original guest changes.","evidence":"docs/etc/evidence/t484-s4-wow-diagnostic-preparation.md"},
   "test/integration/verify-wow-idle-workers.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-idle.md",
     "status": "pending-producer-migration",
@@ -364,11 +352,7 @@
     "evidence": "docs/etc/evidence/t484-s3-ui.md",
     "status": "pending-producer-migration"
   },
-  "test/integration/verify-wow-observer-cost.ps1": {
-    "reason": "P59 local producer migrated; shared runtime/package staging remains",
-    "evidence": "docs/etc/evidence/t484-s3-ui.md",
-    "status": "pending-producer-migration"
-  },
+  "test/integration/verify-wow-observer-cost.ps1": {"status":"migrated-delivered","reason":"S4 P13 uses one CMD package preparation owner with manifest/input/MAP checks and package-bound diagnostic copies; complete real diagnostic, unit/control and normal-exit cases pass. No production or original guest changes.","evidence":"docs/etc/evidence/t484-s4-wow-diagnostic-preparation.md"},
   "test/integration/verify-wow-s3-guest-contracts.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-style-retirement.md",
     "status": "retired-with-delivery-evidence",

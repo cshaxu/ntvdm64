@@ -43,29 +43,25 @@ try{
  if(!$images.Count -or @($images.name|Sort-Object -Unique).Count -ne $images.Count){throw 'Coherent current manifest required'}
  foreach($image in $images){$path="$repo/assets/release/$($image.name)";if((Get-FileHash $path).Hash -ne $image.sha256){throw 'Release manifest mismatch'};$sources+=$path}
  $sources|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
- $null=New-Item -ItemType Directory "$root/sealed-images"
- foreach($image in $images){Copy-Item "$repo/assets/release/$($image.name)" "$root/sealed-images/$($image.name)"}
  foreach($pair in @(@('ntvdm.exe',$WorkerBuildRoot),@('WOW32.DLL',$ProviderBuildRoot))){
   if((Get-FileHash "$($pair[1])/$($pair[0])").Hash -ne (@($images|Where-Object name -eq $pair[0])[0].InputSha256)){throw 'MAP/build image does not match release input'}
-  Copy-Item "$($pair[1])/$($pair[0]).map" "$root/sealed-images/$($pair[0]).map"
  }
  @{runtimeHead=(& git -C $repo rev-parse HEAD);source='Exact delivered manifest images; diagnostic instrumentation is observer-only';productionChanged=$false;guestChanged=$false;pollingMilliseconds=20;limits='Posted input, native capture and actual sleep wall time; native reference is not a matching VM workload or physical mouse latency. Leaf times may wait on painter/compositor, are not pure overhead and cannot be subtracted into guest CPU time.'}|ConvertTo-Json|Set-Content "$root/contract.json"
  Owned compile $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-observer-probes"') 120
- foreach($kind in 'unit','native'){Copy-Item "$repo/build/.ninja/fixtures-x86/wow-observer-cost-$kind.exe" "$root/$kind.exe"}
- Owned unit "$root/unit.exe" '--control' 15
+ Owned unit "$repo/build/.ninja/fixtures-x86/wow-observer-cost-unit.exe" '--control' 15
  if((Get-Content "$root/unit.stdout.txt" -Raw) -notmatch 'OBSERVER_COST_UNIT errors=0 native_calls=5 exact_args=1 success_failure=1 exact_errors=1 qpc=1 reset=1'){throw 'Incomplete transparent leaf/API/error controls'}
- Expand-Archive "$repo/assets/winnt.zip" "$root/media";$package="$root/media/WINNT"
- foreach($image in $images){Copy-Item "$root/sealed-images/$($image.name)" "$package/system32/$($image.name)" -Force}
- Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$root+'/sealed-images/ntvdm.exe.map" -WowMap "'+$root+'/sealed-images/WOW32.DLL.map" -ObserverCost') 360
+ Owned prepare-measurement $env:ComSpec ('/d /s /c ""'+$repo+'/tools/prepare-wow-diagnostic.cmd" "'+$root+'/media" "'+$repo+'/assets/release" "'+$WorkerBuildRoot+'" "'+$ProviderBuildRoot+'""') 120
+ $package="$root/media/WINNT"
+ Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$package+'/system32/ntvdm.exe.map" -WowMap "'+$package+'/system32/WOW32.DLL.map" -ObserverCost') 360
  $samples=@()
  foreach($environment in @('normal','normal-sampled','private')){$samples+=Read-Samples "$root/measurement/$environment-game.stdout.txt" project $environment}
  foreach($environment in @('normal','private')){
   $name='native-'+$environment;$out="$root/$name";$null=New-Item -ItemType Directory $out
   $desktop=if($environment -eq 'normal'){'-'}else{'NTVDMObserverCost-'+$PID}
-  $native=Start-Owned ($name+'-host') "$root/native.exe" $desktop 45
+  $native=Start-Owned ($name+'-host') "$repo/build/.ninja/fixtures-x86/wow-observer-cost-native.exe" $desktop 45
   $gateName='Local\NTVDMObserverCost-'+$PID+'-'+$environment
   $gate=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::ManualReset,$gateName)
-  $probe=Start-Owned ($name+'-probe') "$root/measurement/latency.exe" ($native.Id.ToString()+' "'+$desktop+'" "'+$out+'/mine" "'+$gateName+'"') 45
+  $probe=Start-Owned ($name+'-probe') "$repo/build/.ninja/fixtures-x86/wow-latency-2.exe" ($native.Id.ToString()+' "'+$desktop+'" "'+$out+'/mine" "'+$gateName+'"') 45
   $deadline=[DateTime]::UtcNow.AddSeconds(20)
   while(!(Test-Path "$out/mine.ready") -and !$probe.HasExited -and !$native.HasExited -and [DateTime]::UtcNow -lt $deadline){Start-Sleep -Milliseconds 50}
   if(!(Test-Path "$out/mine.ready")){
@@ -89,7 +85,7 @@ try{
  }
  $summary|ConvertTo-Json|Set-Content "$root/summary.json"
  foreach($input in Import-Csv "$root/inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen source/runtime input changed'}}
- foreach($image in $images){foreach($dir in @("$repo/assets/release",'O:\winnt\system32',"$root/sealed-images")){if((Get-FileHash "$dir/$($image.name)").Hash -ne $image.sha256){throw 'Delivered/sealed runtime changed during observer-only diagnostic'}}}
+ foreach($image in $images){foreach($dir in @("$repo/assets/release",'O:\winnt\system32',"$package/system32")){if((Get-FileHash "$dir/$($image.name)").Hash -ne $image.sha256){throw 'Delivered/sealed runtime changed during observer-only diagnostic'}}}
  @{operations=60;unit=$true;actualGuest=$true;nativeReference=$true;productionChanged=$false;interpretationPending=$true}|ConvertTo-Json|Set-Content "$root/result.json"
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";1|Set-Content "$root/exit.txt";exit 1}

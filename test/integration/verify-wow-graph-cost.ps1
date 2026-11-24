@@ -47,8 +47,8 @@ try{
  $inputs+=@($deps|ForEach-Object {if($_ -match '^\s+([A-Za-z]:[/\\].*)$' -and (Test-Path $Matches[1])){$Matches[1]}})
  $inputs|Sort-Object -Unique|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Owned unit-build $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 wow-graph-cost-unit"') 180
- Copy-Item "$repo/build/.ninja/fixtures-x86/wow-graph-cost-unit.exe" "$root/unit.exe"
- Owned unit "$root/unit.exe" '' 30
+ $unit="$repo/build/.ninja/fixtures-x86/wow-graph-cost-unit.exe"
+ Owned unit $unit '' 30
  $map=Get-Content "$root/WOW32.DLL.map" -Raw
  if($map -match '\bwow_user_object_bindings\.obj\b'){throw 'Old graph object linked alongside diagnostic'}
  $preferred=[Convert]::ToInt64(([regex]::Match($map,'Preferred load address is ([0-9A-Fa-f]+)')).Groups[1].Value,16)
@@ -64,11 +64,12 @@ try{
   return
  }
  Get-FileHash "$root/graph-profile.c","$root/graph-profile.obj","$root/WOW32.DLL","$root/WOW32.DLL.map","$root/wow_page_cost_probe.h","$PSScriptRoot/verify-wow-mine-latency.ps1"|Export-Csv -NoTypeInformation "$root/diagnostic-inputs.csv"
- Expand-Archive "$repo/assets/winnt.zip" "$root/media";$package="$root/media/WINNT"
- foreach($image in $images){Copy-Item "$repo/assets/release/$($image.name)" "$package/system32/$($image.name)" -Force}
- Owned baseline $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$observer+'" -CompilerDriver "'+$compiler+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$worker+'/ntvdm.exe.map" -WowMap "'+$provider+'/wow32.dll.map"') 360
- Copy-Item "$root/WOW32.DLL" "$package/system32/WOW32.DLL" -Force
- Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$observer+'" -CompilerDriver "'+$compiler+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$worker+'/ntvdm.exe.map" -WowMap "'+$root+'/WOW32.DLL.map" -GraphCost -PageCostRva '+$rva.ToString('X8')) 360
+ Owned prepare-baseline $env:ComSpec ('/d /s /c ""'+$repo+'/tools/prepare-wow-diagnostic.cmd" "'+$root+'/media" "'+$repo+'/assets/release" "'+$worker+'" "'+$provider+'""') 120
+ $package="$root/media/WINNT"
+ Owned baseline $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$observer+'" -CompilerDriver "'+$compiler+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$package+'/system32/ntvdm.exe.map" -WowMap "'+$package+'/system32/wow32.dll.map"') 360
+ Owned prepare-measurement $env:ComSpec ('/d /s /c ""'+$repo+'/tools/prepare-wow-diagnostic.cmd" "'+$root+'/instrumented" "'+$repo+'/assets/release" "'+$worker+'" "'+$provider+'" "'+$diagnostic+'/WOW32.DLL""') 120
+ $package="$root/instrumented/WINNT"
+ Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$observer+'" -CompilerDriver "'+$compiler+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$package+'/system32/ntvdm.exe.map" -WowMap "'+$package+'/system32/WOW32.DLL.map" -GraphCost -PageCostRva '+$rva.ToString('X8')) 360
  foreach($list in @('inputs.csv','diagnostic-inputs.csv')){foreach($input in Import-Csv "$root/$list"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen graph diagnostic input changed'}}}
  @{namedGroupPassed=$true;productionChanged=$false;published=$false;interpretationPending=$true}|ConvertTo-Json|Set-Content "$root/result.json"
  0|Set-Content "$root/exit.txt"

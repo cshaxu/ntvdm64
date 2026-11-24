@@ -44,16 +44,13 @@ try{
  @{rva=$rva;symbol='_T447ProfileData';originalBodiesChanged=$false;productionOutputsChanged=$false;durations='Inclusive nested durations; do not sum across kinds';observer='ReadProcessMemory stable even-sequence snapshot; no target writes'}|ConvertTo-Json|Set-Content "$root/diagnostic.json"
  Get-FileHash "$root/page-domain-profile.c","$root/ntvdm.exe","$root/ntvdm.exe.map","$root/page-domain-profile.obj"|Export-Csv -NoTypeInformation "$root/diagnostic-inputs.csv"
  if($BuildOnly){@{nativeBuildPassed=$true;guestRuntimeExecuted=$false;rva=$rva}|ConvertTo-Json|Set-Content "$root/result.json";0|Set-Content "$root/exit.txt";return}
- Expand-Archive "$repo/assets/winnt.zip" "$root/media"
+ Owned prepare-baseline $env:ComSpec ('/d /s /c ""'+$repo+'/tools/prepare-wow-diagnostic.cmd" "'+$root+'/media" "'+$repo+'/assets/release" "'+$WorkerBuildRoot+'" "'+$ProviderBuildRoot+'""') 120
  $package="$root/media/WINNT"
- foreach($image in Get-Content "$repo/assets/release/release-manifest.json" -Raw|ConvertFrom-Json){
-  if((Get-FileHash "$repo/assets/release/$($image.name)").Hash -ne $image.sha256){throw 'Release baseline mismatch'}
-  Copy-Item "$repo/assets/release/$($image.name)" "$package/system32/$($image.name)" -Force
- }
- Owned baseline $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$WorkerBuildRoot+'/ntvdm.exe.map" -WowMap "'+$ProviderBuildRoot+'/wow32.dll.map"') 300
- Copy-Item "$root/ntvdm.exe" "$package/system32/ntvdm.exe" -Force
+ Owned baseline $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$package+'/system32/ntvdm.exe.map" -WowMap "'+$package+'/system32/wow32.dll.map"') 300
+ Owned prepare-measurement $env:ComSpec ('/d /s /c ""'+$repo+'/tools/prepare-wow-diagnostic.cmd" "'+$root+'/instrumented" "'+$repo+'/assets/release" "'+$WorkerBuildRoot+'" "'+$ProviderBuildRoot+'" "'+$diagnostic+'/ntvdm.exe""') 120
+ $package="$root/instrumented/WINNT"
  Owned ems $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-original-ems-probe.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -BuildRoot "'+$root+'/ems"') 180
- Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$root+'/ntvdm.exe.map" -WowMap "'+$ProviderBuildRoot+'/wow32.dll.map" -PageCostRva '+$rva.ToString('X8')) 300
+ Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$package+'/system32/ntvdm.exe.map" -WowMap "'+$package+'/system32/wow32.dll.map" -PageCostRva '+$rva.ToString('X8')) 300
  foreach($input in Import-Csv "$root/inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen production/diagnostic input changed'}}
  foreach($input in Import-Csv "$root/diagnostic-inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen diagnostic image changed'}}
  0|Set-Content "$root/exit.txt"

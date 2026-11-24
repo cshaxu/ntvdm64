@@ -37,3 +37,5 @@ file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/minhook-license.txt" CONTENT "${minhoo
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${NTVDM_STAGE_REPO}/src/lib-win32/process-hook/LICENSE.win16style"
   "${NTVDM_STAGE_REPO}/src/lib-win32/process-hook/minhook/LICENSE.txt")
+
+configure_file(prepare-wow-diagnostic.cmd.in prepare-wow-diagnostic.cmd @ONLY NEWLINE_STYLE CRLF)
