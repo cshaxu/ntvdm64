@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
- [Parameter(Mandatory)][string]$LogonHelper,
+ [string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
  [ValidateSet('init','register')][string]$Case='init',
  [Parameter(Mandatory)][string]$DdemlImage,
@@ -46,11 +46,13 @@ try {
  $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force
  Copy-Item "$root/$probe.EXE" "$tests/$probe.EXE"
  Copy-Item $dll "$tests/DDEML.DLL"
- Get-FileHash $source,$PSCommandPath,$Observer,$LogonHelper,$assembler,"$root/$probe.EXE",$dll|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Get-FileHash $source,$PSCommandPath,$Observer,$assembler,"$root/$probe.EXE",$dll|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Get-ChildItem "$runtime/system32" -File|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
- Add-Type -Path (Resolve-Path $LogonHelper).Path
- $identity=[Security.Principal.WindowsIdentity]::GetCurrent()
- try{$entries=[WowMessageLogonEnvironment]::Read($identity.Token)}finally{$identity.Dispose()}
+ Owned environment-build $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x64 logon-environment"') 300
+ . "$PSScriptRoot/../observation/logon-environment.ps1"
+ $environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'
+ Get-FileHash $environmentExe,"$PSScriptRoot/../observation/logon-environment.ps1"|Export-Csv -NoTypeInformation "$root/environment-inputs.csv"
+ $entries=Read-TestLogonEnvironment $environmentExe "$root/environment-process.json"
  $info=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
  $info.EnvironmentVariables.Clear()
  foreach($entry in $entries){$at=$entry.IndexOf('=',1);$info.EnvironmentVariables[$entry.Substring(0,$at)]=$entry.Substring($at+1)}

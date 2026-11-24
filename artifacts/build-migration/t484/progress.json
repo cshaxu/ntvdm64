@@ -1,15 +1,12 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "53111166a0d931a1246a0a338d5a2c7b5094167f",
+  "head": "2644f4c7aa360b6f91b71da6ed31a9ae15d3d5a3",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-native-vt-fidelity.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    " M tools/build/native-family/frontend.cmake",
-    "?? docs/etc/evidence/t484-s3-vt-native.md"
+    " M test/integration/verify-win16-ddeml-probe.ps1",
+    "?? docs/etc/evidence/t484-s3-ddeml-native.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -711,8 +708,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "685d962e04043038526cdb267c4e3b6428b2cd2aff7943f65bda8939b6573419",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "2644f4c7aa360b6f91b71da6ed31a9ae15d3d5a3"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-vt-native.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Current native frontend graph and x86/x64 CMD producer; real Console/pixel oracle passes both architectures, cached full and published hashes unchanged",
@@ -843,7 +844,7 @@
       "file": "test/integration/verify-win16-ddeml-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "8cbf6f51d2f58bf3adc49eb720f67a960871be76bed8c07324bbd7f9fb422458",
+      "current_sha256": "2def78d61b6ca2b5059ab5b2b63baec4862166f7771eaa4968d71c2e91a22fd3",
       "revisions": [
         "cde4bc13ce1f390f73ed22f074cc2d1607cc5521"
       ],
@@ -853,8 +854,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "Native Win16 assembly variants verified; shared logon-helper and package staging production remain pending",
-        "evidence": "docs/etc/evidence/t484-s3-win16-probes.md"
+        "reason": "CMD Win16 probe production and shared native logon reader verified with real init/register cases; shared runtime copy/manifest staging remains S4",
+        "evidence": "docs/etc/evidence/t484-s3-ddeml-native.md"
       }
     },
     {
@@ -6451,6 +6452,12 @@
     }
   ],
   "commits": {
+    "2644f4c7aa360b6f91b71da6ed31a9ae15d3d5a3": {
+      "subject": "T484 S3 P175 migrate VT fidelity to native build graph",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-vt-native.md"
+      ]
+    },
     "53111166a0d931a1246a0a338d5a2c7b5094167f": {
       "subject": "T484 S3 P174 migrate native modal and carrier producers",
       "evidence": [
@@ -7956,6 +7963,10 @@
         {
           "line": 40,
           "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/guest-probes/win16/$variant.EXE\" \"$root/$probe.EXE\""
+        },
+        {
+          "line": 53,
+          "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]
     },

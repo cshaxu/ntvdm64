@@ -1829,3 +1829,5 @@ post-publication targeted checks.
 - [T484 S3 native modal/carrier producers](evidence/t484-s3-native-controls.md).
 
 - [T484 S3 native VT fidelity producer](evidence/t484-s3-vt-native.md).
+
+- [T484 S3 shared DDEML environment reader](evidence/t484-s3-ddeml-native.md).

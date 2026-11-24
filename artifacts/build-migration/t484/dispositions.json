@@ -199,8 +199,8 @@
   },
   "test/integration/verify-win16-ddeml-probe.ps1": {
     "status": "pending-producer-migration",
-    "reason": "Native Win16 assembly variants verified; shared logon-helper and package staging production remain pending",
-    "evidence": "docs/etc/evidence/t484-s3-win16-probes.md"
+    "reason": "CMD Win16 probe production and shared native logon reader verified with real init/register cases; shared runtime copy/manifest staging remains S4",
+    "evidence": "docs/etc/evidence/t484-s3-ddeml-native.md"
   },
   "test/integration/verify-win16-discovery.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-win16-existing-chains.md",
