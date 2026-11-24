@@ -4,7 +4,7 @@
 
 **Active: M0 T484 S4** (Ordinary Mode). Owner requested continuous execution
 through T484 closure. S3 addon/test producers are closed; S4 package
-and publication migration is now admitted. Final interpreter-free clean acceptance remains S5.
+and publication migration is now admitted. Final interpreter-free clean acceptance remains S6.
 
 ## Active Packet
 
@@ -18,7 +18,7 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 | Reference Baseline | T483 closure e74afba09; product P85 9e7eb19c0, package100b16d9-992d-4e2c-8d99-66a4e891dd26. |
 | Files And ABI Surface | Build/publication/staging scripts and caller preparation; no product ABI change or original guest rebuild. |
 | Applicable Rules | CMD-only project build scripting, existing layers, source-owner inventories and caches, immutable original guest, truthful failures. |
-| Verification | Verify actual shared staging, host/addon publication and failure cases; targeted tests, coherent dual release hashes, governance and commit/push. Final clean interpreter-free acceptance remains S5. |
+| Verification | Verify actual shared staging, host/addon publication and failure cases; targeted tests, coherent dual release hashes, governance and commit/push. Final clean interpreter-free acceptance remains S6. |
 | Expected Markers | Single package owner, complete manifests, exact image identities, CMD/native production without hidden forbidden interpreters. |
 | Asset Needs | Existing source/toolchains and approved assets only. |
 | Non-goals | No runtime redesign, mirror audit, original guest rebuild or wholesale standalone test/audit language conversion. |
@@ -29,14 +29,14 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
-S4 P35 delivers shared CMD copied-guest text/PIF/GRP preparation; [evidence](../etc/evidence/t484-s4-guest-paths.md) records complete Win31/Win95 byte comparisons and corrected failure propagation. Driver/profile chains remain pending:348/355 disposed,7 pending, supplemental5.
+S4 P36 consolidates driver preparation into the existing profile owner and renames it guest-ini; [evidence](../etc/evidence/t484-s4-guest-ini-reuse.md) records the withdrawn separate candidate, common owner and final-name preparation/runtime checks. Parent configuration chains remain pending:348/355 disposed,7 pending, supplemental5.
 
 S1 inventory/design and S2 native host migration are closed. The
 [execution plan](../etc/operations/t484-cmd-build-release-plan.md) retains
-the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S5 clean,
+the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S6 clean,
 interpreter-free end-to-end acceptance have not completed.
 
-S4 deliveries through P35 are complete; detailed results and limitations remain in
+S4 deliveries through P36 are complete; detailed results and limitations remain in
 these records. Shared primitives alone never close an unverified caller.
 
 | P | Delivered scope and evidence |
@@ -76,6 +76,7 @@ these records. Shared primitives alone never close an unverified caller.
 | 33 | [Guest copying and ownership cleanup](../etc/evidence/t484-s4-guest-copy-ownership.md) |
 | 34 | [Native hive preparation](../etc/evidence/t484-s4-hive-relocation.md) |
 | 35 | [Shared copied-guest paths](../etc/evidence/t484-s4-guest-paths.md) |
+| 36 | [Guest INI reuse and naming](../etc/evidence/t484-s4-guest-ini-reuse.md) |
 
 | S3 delivery | Actual result |
 | --- | --- |
@@ -111,7 +112,7 @@ source profiles and delivery identities belong to the linked evidence.
 [S3 closure and S4 handoff](../etc/evidence/t484-s3-closure.md) records
 the delivered addon/test producers through P217, actual validation and32
 unresolved inventory entries plus24 supplemental preparation chains retained
-for S4. Runtime failures remain explicit; final clean acceptance remains S5.
+for S4. Runtime failures remain explicit; final clean acceptance remains S6.
 
 ## S2 Closure Record
 

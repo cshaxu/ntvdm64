@@ -27,52 +27,20 @@ $original|ConvertTo-Json|Set-Content "$task/original.json"
 try {
 & "$repo/tools/copy-guest-probe.cmd" $source $dest $task *> "$task/copy.log"
 if($LASTEXITCODE){throw 'Owned guest installation copy failed'}
-if($MouseDriver){
- $hash=(Get-FileHash -LiteralPath $MouseDriver).Hash
- $mousePath=Join-Path $dest 'SYSTEM/MOUSE.DRV'
- Copy-Item -LiteralPath $MouseDriver -Destination $mousePath -Force
- if((Get-FileHash -LiteralPath $mousePath).Hash -ne $hash){throw 'Mouse driver staging mismatch'}
- $hash | Set-Content "$task/mouse-driver.sha256"
-}
 & "$repo/tools/rebase-guest-paths.cmd" $dest $source $task 31 *> "$task/path-rebase.log"
 if($LASTEXITCODE){throw 'Copied guest path preparation failed'}
-$system="$dest/SYSTEM.INI"
-$enc=[Text.Encoding]::GetEncoding(28591)
-$s=$enc.GetString([IO.File]::ReadAllBytes($system))
-if([regex]::Matches($s,'(?im)^\[386Enh\]').Count -ne 1){throw 'No unique enhanced section'}
-# The source installation may already load this authored bridge. Replace its
-# copied configuration entry instead of registering the same device twice.
-$s=[regex]::Replace($s,'(?ims)^\[386Enh\]\r?\n(?<body>.*?)(?=^\[|\z)',{
- param($section)
- $body=[regex]::Replace($section.Groups['body'].Value,'(?im)^[ \t]*device[ \t]*=[^\r\n]*(?:\r?\n|$)',{
-  param($entry)
-  $value=($entry.Value -split '=',2)[1].Split(';')[0].Trim().Trim('"')
-  if([IO.Path]::GetFileName($value) -ieq 'NTVDM64.386'){return ''}
-  return $entry.Value
- })
- return "[386Enh]`r`ndevice=$dest\PATCH\NTVDM64.386`r`n"+$body
-})
-[IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
-Copy-Item -LiteralPath $DriverImage -Destination "$dest/PATCH/NTVDM64.386"
+$driverArgs=@($DriverImage,$InstanceDriver,$InterruptObserver,$RetirementDriver,$MouseDriver) | ForEach-Object {if($_){(Resolve-Path -LiteralPath $_).Path}else{'-'}}
+& "$repo/tools/prepare-guest-ini.cmd" $dest Drivers $task 31 @driverArgs *> "$task/driver-preparation.log"
+if($LASTEXITCODE){throw 'Copied guest driver preparation failed'}
+$targets=@('PATCH/NTVDM64.386','PATCH/INSIGNIA.386','PATCH/INTS.386','PATCH/RETIRE.386','SYSTEM/MOUSE.DRV')
+for($i=0;$i -lt $driverArgs.Count;$i++){
+ if($driverArgs[$i] -ne '-' -and (Get-FileHash $driverArgs[$i]).Hash -ne (Get-FileHash (Join-Path $dest $targets[$i])).Hash){throw 'Driver staging mismatch'}
+}
 if($InstanceDriver){
- $instance=(Resolve-Path -LiteralPath $InstanceDriver).Path
- $s=[regex]::Replace($s,'(?im)^[ \t]*device[ \t]*=[^\r\n]*insignia\.386[ \t]*(?:\r?\n|$)','')
- Copy-Item -LiteralPath $instance -Destination "$dest/PATCH/INSIGNIA.386"
- $s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\INSIGNIA.386")
- [IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
- [ordered]@{source=$instance;sha256=(Get-FileHash $instance).Hash;installed=(Get-FileHash "$dest/PATCH/INSIGNIA.386").Hash}|
+ [ordered]@{source=$driverArgs[1];sha256=(Get-FileHash $driverArgs[1]).Hash;installed=(Get-FileHash "$dest/PATCH/INSIGNIA.386").Hash}|
   ConvertTo-Json|Set-Content "$task/instance-driver.json"
 }
-if($InterruptObserver){
- Copy-Item -LiteralPath (Resolve-Path -LiteralPath $InterruptObserver).Path -Destination "$dest/PATCH/INTS.386"
- $s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\INTS.386")
- [IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
-}
-if($RetirementDriver){
- Copy-Item -LiteralPath $RetirementDriver -Destination "$dest/PATCH/RETIRE.386"
- $s=[regex]::Replace($s,'(?im)^\[386Enh\]','[386Enh]' + "`r`ndevice=$dest\PATCH\RETIRE.386")
- [IO.File]::WriteAllBytes($system,$enc.GetBytes($s))
-}
+if($MouseDriver){(Get-FileHash $driverArgs[4]).Hash|Set-Content "$task/mouse-driver.sha256"}
 
 [pscustomobject]@{Task=$task; Source=$source; Destination=$dest; Original=$original}
 } catch {

@@ -1,19 +1,19 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "042a8157b2db2498b9c54347cd3c8913a884e69a",
+  "head": "5f0d0ab42db13ed3194aa13c014421eb33a3881b",
   "worktree_status": [
-    " M assets/release/addon-manifest.json",
-    " M assets/release/path95.exe",
     " M docs/etc/README.md",
+    " M docs/etc/operations/t484-cmd-build-release-plan.md",
     " M docs/states/CURRENT.md",
-    " M src/addon/path95/README.md",
-    " M src/addon/path95/path95.c",
-    " M test/addon/path95/verify-relocation.ps1",
     " M test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1",
     " M test/integration/ntvdm64-386/New-Win95ProbeCopy.ps1",
-    "?? docs/etc/evidence/t484-s4-guest-paths.md",
-    "?? test/build/verify-guest-path-preparation.ps1",
-    "?? tools/rebase-guest-paths.cmd"
+    " M test/integration/verify-win16-message-probe.ps1",
+    "RM test/observation/wow_network_profile.c -> test/observation/guest_ini.c",
+    "RM test/observation/verify-wow-network-profile.ps1 -> test/observation/verify-guest-ini.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "RM tools/prepare-wow-network.cmd -> tools/prepare-guest-ini.cmd",
+    "?? docs/etc/evidence/t484-s4-guest-ini-reuse.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -939,7 +939,7 @@
       "file": "test/integration/verify-win16-message-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "5c699248d8a14b84e434c76e6f0ad3d1da2dd499cbfeeef00dfb316581c3b27b",
+      "current_sha256": "cf3db7485730ea0211ad001752093ca6aaefab72c6ec0220359497941d3e3641",
       "revisions": [
         "56d8bb725a61149be1480d67b161a0f732912ecd",
         "ef090bdde31c139b1a7f50864532fee8165a3709",
@@ -6646,6 +6646,12 @@
     }
   ],
   "commits": {
+    "5f0d0ab42db13ed3194aa13c014421eb33a3881b": {
+      "subject": "T484 S4 P35: consolidate copied guest path preparation in CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-guest-paths.md"
+      ]
+    },
     "042a8157b2db2498b9c54347cd3c8913a884e69a": {
       "subject": "T484 S4 P34: prepare layout-preserving Win95 hives through CMD",
       "evidence": [

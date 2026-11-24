@@ -63,7 +63,7 @@ set "SELECTED="
 if "%TARGET%"=="mouse-callback-reentry" set "SELECTED=1"
 if "%TARGET%"=="mouse-callback-reentry" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="native-hook-packet" set "SELECTED=1"
-if "%TARGET%"=="wow-network-profile" set "SELECTED=1"
+if "%TARGET%"=="guest-ini" set "SELECTED=1"
 for %%I in (volume-oracle fatal-dialog) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (volume-oracle fatal-dialog) do if "%TARGET%"=="%%I" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="package-rpc-client" set "SELECTED=1"
