@@ -391,7 +391,7 @@ include(wow-reverse-construction.cmake)
 # Managed observation declarations use the native compiler and tracked cache.
 if(NTVDM_ARCH STREQUAL "x64")
   set(observer_compiler "$ENV{SystemRoot}/Microsoft.NET/Framework64/v4.0.30319/csc.exe")
-  foreach(name IN ITEMS window-inspector tabstop-reader)
+  foreach(name IN ITEMS window-inspector tabstop-reader volume-oracle fatal-dialog)
     string(REPLACE "-" "_" source_name "${name}")
     set(source "${NTVDM_REPO}/test/observation/${source_name}.cs")
     file(TO_NATIVE_PATH "${source}" native_source)

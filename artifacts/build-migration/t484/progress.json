@@ -1,16 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "a796cd2ceb7eff4d1f00bff289a7b5fbb5361ac8",
+  "head": "15f1442af7cb98242ac9de07c79e9516c0560979",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/adapter-mvdm-host-out/wow/wow_reply_contract_fixture.c",
-    " D test/observation/verify-wow-reply-contract.ps1",
-    " M test/observation/verify-wow-user-session-binding.ps1",
+    " D test/observation/observe-win101-image.ps1",
+    " D test/observation/observe-win101-setup.ps1",
+    " D test/observation/win101_setup_visual_probe.ps1",
+    " M tools/audit/Verify-T420S37OemGuest.ps1",
+    " M tools/audit/Verify-T420S38DpmiFatal.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/wow-host-contracts.cmake",
-    "?? docs/etc/evidence/t484-s3-wow-session-contracts.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s3-final-managed-producers.md",
+    "?? test/observation/fatal_dialog.cs",
+    "?? test/observation/volume_oracle.cs"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6489,6 +6493,12 @@
     }
   ],
   "commits": {
+    "15f1442af7cb98242ac9de07c79e9516c0560979": {
+      "subject": "M0 T484 S3 P197: migrate session contracts and retire sealed reply research",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-wow-session-contracts.md"
+      ]
+    },
     "a796cd2ceb7eff4d1f00bff289a7b5fbb5361ac8": {
       "subject": "M0 T484 S3 P196: consolidate WOW host tests and retire obsolete diagnostics",
       "evidence": [

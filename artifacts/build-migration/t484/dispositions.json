@@ -1439,18 +1439,18 @@
     "evidence": "docs/etc/evidence/t484-s3-wow-session-contracts.md"
   },
   "test/observation/win101_setup_visual_probe.ps1": {
-    "status": "supplemental-producer-review",
-    "reason": "P193 expanded scan found direct CL/NASM or Add-Type compilation; retention, current callers and real build effect must be reviewed before deciding retire/consolidate/migrate. Not counted as completed or as a required Full test.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "status": "supplemental-retired",
+    "reason": "P198 retires the sealed Win1.01 Z:-mapped investigation chain; retained OEM/fatal C# bodies use shared native CMD compilation unchanged. Host interop checks pass; guest staging/acceptance remains explicitly pending.",
+    "evidence": "docs/etc/evidence/t484-s3-final-managed-producers.md"
   },
   "tools/audit/Verify-T420S37OemGuest.ps1": {
-    "status": "supplemental-producer-review",
-    "reason": "P193 expanded scan found direct CL/NASM or Add-Type compilation; retention, current callers and real build effect must be reviewed before deciding retire/consolidate/migrate. Not counted as completed or as a required Full test.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "P198 retires the sealed Win1.01 Z:-mapped investigation chain; retained OEM/fatal C# bodies use shared native CMD compilation unchanged. Host interop checks pass; guest staging/acceptance remains explicitly pending.",
+    "evidence": "docs/etc/evidence/t484-s3-final-managed-producers.md"
   },
   "tools/audit/Verify-T420S38DpmiFatal.ps1": {
-    "status": "supplemental-producer-review",
-    "reason": "P193 expanded scan found direct CL/NASM or Add-Type compilation; retention, current callers and real build effect must be reviewed before deciding retire/consolidate/migrate. Not counted as completed or as a required Full test.",
-    "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "P198 retires the sealed Win1.01 Z:-mapped investigation chain; retained OEM/fatal C# bodies use shared native CMD compilation unchanged. Host interop checks pass; guest staging/acceptance remains explicitly pending.",
+    "evidence": "docs/etc/evidence/t484-s3-final-managed-producers.md"
   }
 }

@@ -26,18 +26,10 @@ function Processes {
 }
 if ((Processes).Count) { throw 'Package in use' }
 if (-not ('S37VolumeOracle' -as [type])) {
-    Add-Type -TypeDefinition @'
-using System;
-using System.Text;
-using System.Runtime.InteropServices;
-public static class S37VolumeOracle {
-    [DllImport("kernel32.dll", CharSet=CharSet.Unicode, SetLastError=true)]
-    public static extern bool GetVolumeInformationW(string root,
-        StringBuilder label, uint labelSize, out uint serial,
-        out uint maxComponent, out uint flags, StringBuilder filesystem,
-        uint filesystemSize);
-}
-'@
+    $repo=(Resolve-Path "$PSScriptRoot/../..").Path
+& "$repo/tools/build-fixtures.cmd" x64 volume-oracle
+if($LASTEXITCODE){throw "Native observation helper build failed"}
+[void][Reflection.Assembly]::LoadFrom("$repo/build/.ninja/fixtures-x64/volume-oracle.dll")
 }
 $volumeLabel = New-Object Text.StringBuilder 261
 $filesystem = New-Object Text.StringBuilder 261

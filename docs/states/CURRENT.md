@@ -72,6 +72,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P197 session contracts](../etc/evidence/t484-s3-wow-session-contracts.md) | Retained rollback/independent-runtime cases use CMD; sealed reply research retired. Three supplemental compiler candidates remain; frozen316/355 and21 staging chains unchanged. |
 
+| [P198 supplemental review complete](../etc/evidence/t484-s3-final-managed-producers.md) | Obsolete Win1.01 diagnostic chain retired; OEM/fatal interop uses native CMD. All13 supplemental candidates classified;23 preparation/staging chains remain. Frozen316/355 unchanged. |
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
 The frozen355 census is not the complete remaining invocation graph. P193

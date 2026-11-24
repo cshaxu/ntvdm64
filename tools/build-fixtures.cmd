@@ -60,6 +60,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+for %%I in (volume-oracle fatal-dialog) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (volume-oracle fatal-dialog) do if "%TARGET%"=="%%I" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="package-rpc-client" set "SELECTED=1"
 if "%TARGET%"=="package-rpc-client" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="package-identity" set "SELECTED=1"
