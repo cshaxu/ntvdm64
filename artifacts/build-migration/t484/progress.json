@@ -1,13 +1,12 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "9849296cd823b6560cd585e707da40652b7103ff",
+  "head": "bf0756e4839ffa0197ac9d178e2d6f679d4066bd",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-memory-transition-guest.ps1",
-    "?? docs/etc/evidence/t484-s4-memory-preparation.md",
-    "?? tools/prepare-ems-test.cmd"
+    " M test/integration/verify-video7-mode-flags.ps1",
+    "?? docs/etc/evidence/t484-s4-video7-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6618,6 +6617,12 @@
     }
   ],
   "commits": {
+    "bf0756e4839ffa0197ac9d178e2d6f679d4066bd": {
+      "subject": "M0 T484 S4 P24: finish memory transition CMD preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-memory-preparation.md"
+      ]
+    },
     "9849296cd823b6560cd585e707da40652b7103ff": {
       "subject": "M0 T484 S4 P23: finish fatal preparation and retire stale allocation probe",
       "evidence": [

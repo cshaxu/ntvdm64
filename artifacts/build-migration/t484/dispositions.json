@@ -1355,9 +1355,9 @@
   "test/integration/verify-dpmi-debug-context.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P15 completes required input aliases and physical placement through existing CMD owners; real DPMI debug/INT21 direct+nested and XMS positive/failure paths pass. Runtime GO.DAT remains test synchronization, not preparation.","evidence":"docs/etc/evidence/t484-s4-dpmi-xms-preparation.md"},
   "test/integration/verify-dpmi-int21-state.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P15 completes required input aliases and physical placement through existing CMD owners; real DPMI debug/INT21 direct+nested and XMS positive/failure paths pass. Runtime GO.DAT remains test synchronization, not preparation.","evidence":"docs/etc/evidence/t484-s4-dpmi-xms-preparation.md"},
   "test/integration/verify-video7-mode-flags.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "All existing fixed source/define combinations use shared CMD guest-profiles;13-image equivalence and cache verified across this batch. Runtime configuration/staging remains pending.",
-    "evidence": "docs/etc/evidence/t484-s3-guest-profiles.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P25 removes unused external PIF/directory scaffolding and uses shared CMD input/staging with the isolated package COMMAND. Actual default/all Video7 modes, preserve/clear/invalid cases and normal exit pass; cached full build and dual release hashes unchanged.",
+    "evidence": "docs/etc/evidence/t484-s4-video7-preparation.md"
   },
   "test/integration/verify-xms-block-guest.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P15 completes required input aliases and physical placement through existing CMD owners; real DPMI debug/INT21 direct+nested and XMS positive/failure paths pass. Runtime GO.DAT remains test synchronization, not preparation.","evidence":"docs/etc/evidence/t484-s4-dpmi-xms-preparation.md"},
   "test/integration/verify-forcedos.ps1": {
