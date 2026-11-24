@@ -1182,5 +1182,15 @@
     "status": "retired-with-delivery-evidence",
     "reason": "Duplicate interpreted producer replaced by shared protocol runner and native CMD targets; original assertions pass",
     "evidence": "docs/etc/evidence/t484-s3-broker-protocol.md"
+  },
+  "tools/audit/verify-worker-thread-boundary.ps1": {
+    "status": "retained-standalone-audit",
+    "reason": "Read-only current ownership contract passes; WOW parser reuses native graph/compiler evidence",
+    "evidence": "docs/etc/evidence/t484-s3-thread-wow-audits.md"
+  },
+  "tools/audit/verify-wow-shared-boundary.ps1": {
+    "status": "retained-standalone-audit",
+    "reason": "Read-only current ownership contract passes; WOW parser reuses native graph/compiler evidence",
+    "evidence": "docs/etc/evidence/t484-s3-thread-wow-audits.md"
   }
 }

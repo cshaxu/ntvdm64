@@ -1,22 +1,18 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "97cddb699f18f6b9d3b99a5bdc6ebb759b5bfca2",
+  "head": "7f442b07eaf2e5b2c31a022417f3986838c26e96",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    "D  tools/audit/Verify-VdmDeliveryJournal.mjs",
-    "D  tools/audit/Verify-VdmPayload.mjs",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/worker/units.cmake",
-    "?? artifacts/build-migration/t484/s3-broker-protocol/",
-    "?? docs/etc/evidence/t484-s3-broker-protocol.md",
-    "?? test/broker/verify-protocol-contracts.ps1"
+    " M tools/audit/verify-wow-shared-boundary.ps1",
+    "?? artifacts/build-migration/t484/s3-thread-wow-audits/",
+    "?? docs/etc/evidence/t484-s3-thread-wow-audits.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 154,
-    "unchanged": 50,
+    "changed": 155,
+    "unchanged": 49,
     "removed": 151
   },
   "disposition_counts": {
@@ -25,10 +21,10 @@
     "retired-with-delivery-evidence": 151,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 34,
-    "retained-standalone-audit": 14
+    "requires-disposition-reconciliation": 32,
+    "retained-standalone-audit": 16
   },
-  "existing_interpreted_candidates_with_command_hits": 151,
+  "existing_interpreted_candidates_with_command_hits": 150,
   "files": [
     {
       "id": "B0001",
@@ -4550,8 +4546,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "7f442b07eaf2e5b2c31a022417f3986838c26e96"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-broker-protocol.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -4565,8 +4565,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "7f442b07eaf2e5b2c31a022417f3986838c26e96"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-broker-protocol.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -4582,19 +4586,27 @@
       "current_sha256": "afc29aa5bfdf368513ff9a2b9c9091357635c578d282741aaa5ab34af1a39521",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Read-only current ownership contract passes; WOW parser reuses native graph/compiler evidence",
+        "evidence": "docs/etc/evidence/t484-s3-thread-wow-audits.md"
+      }
     },
     {
       "id": "B0241",
       "file": "tools/audit/verify-wow-shared-boundary.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "8ef37d776c38fc09185e3b49d2de51f21224ee49827e47a657106bc5366375b9",
+      "state": "changed",
+      "current_sha256": "c3771124c997b2e0c961996479bcbd173f2b4f1962fac1385d32192adf59483e",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Read-only current ownership contract passes; WOW parser reuses native graph/compiler evidence",
+        "evidence": "docs/etc/evidence/t484-s3-thread-wow-audits.md"
+      }
     },
     {
       "id": "B0242",
@@ -6207,6 +6219,12 @@
     }
   ],
   "commits": {
+    "7f442b07eaf2e5b2c31a022417f3986838c26e96": {
+      "subject": "T484 S3 P151 consolidate broker protocol native fixture builds",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-broker-protocol.md"
+      ]
+    },
     "97cddb699f18f6b9d3b99a5bdc6ebb759b5bfca2": {
       "subject": "T484 S3 P150 move serial medium fixture to CMD native build",
       "evidence": [
@@ -9480,20 +9498,6 @@
         {
           "line": 5,
           "text": "$graph=Get-Content (Join-Path $WorkerBuildRoot 'build.ninja') -Raw"
-        }
-      ]
-    },
-    {
-      "id": "B0241",
-      "file": "tools/audit/verify-wow-shared-boundary.ps1",
-      "hits": [
-        {
-          "line": 4,
-          "text": "$graph=Get-Content (Join-Path $WowBuildRoot 'build.ninja') -Raw"
-        },
-        {
-          "line": 9,
-          "text": "$raw=@(& ninja -C $WowBuildRoot -t deps 2>&1)"
         }
       ]
     },

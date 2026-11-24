@@ -58,6 +58,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P151 broker protocol](../etc/evidence/t484-s3-broker-protocol.md) | Two private JS producers consolidated into CMD/native targets; both unit contracts, maps and cached full/identity checks passed. |
 
+| [P152 thread/WOW audits](../etc/evidence/t484-s3-thread-wow-audits.md) | Current thread contract and80 WOW compiler sources/9 negative controls pass; shared parser replaces old WOW graph scan. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

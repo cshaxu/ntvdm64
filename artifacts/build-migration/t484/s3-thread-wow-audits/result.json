@@ -1,0 +1,9 @@
+{
+  "run": {
+    "finished": "2026-11-24T08:23:16.0480612+01:00",
+    "exit": 0,
+    "pid": 33656,
+    "started": "2026-11-24T08:22:34.2520656+01:00"
+  },
+  "output": "PASS VDMREDIR uses the worker-owned thread closure; generic-library negative control passed\r\nPASS 80 selected WOW compiler sources; 9 private-header negative controls; no NTVDM private dependency"
+}
