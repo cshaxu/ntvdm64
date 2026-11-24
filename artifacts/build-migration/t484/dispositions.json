@@ -358,11 +358,7 @@
     "evidence": "docs/etc/evidence/t484-s3-mine.md",
     "reason": "P57 local native/guest producers migrated; physical runtime and package identity staging remain"
   },
-  "test/integration/verify-wow-mine-latency.ps1": {
-    "evidence": "docs/etc/evidence/t484-s3-latency.md",
-    "status": "pending-producer-migration",
-    "reason": "P58 native latency/sampler/environment producers; physical runtime staging remains"
-  },
+  "test/integration/verify-wow-mine-latency.ps1": {"status":"migrated-delivered","reason":"S4 P12 uses CMD producers and physical staging, removes redundant executable copies and runs canonical cache outputs; real ordinary/sampled/private WINMINE operations and normal exit pass.","evidence":"docs/etc/evidence/t484-s4-latency-preparation.md"},
   "test/integration/verify-wow-multi-dialog.ps1": {
     "reason": "P59 local producer migrated; shared runtime/package staging remains",
     "evidence": "docs/etc/evidence/t484-s3-ui.md",

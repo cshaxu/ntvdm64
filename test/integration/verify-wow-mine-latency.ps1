@@ -74,9 +74,9 @@ try{
  if($CallbackCostRva){$mask+=4}
  if($CallbackCostRva -or $CallbackWorkload){$mask+=8}
  if($GraphCost){$mask+=16}
- Copy-Item "$cache/wow-latency-$mask.exe" "$root/latency.exe"
- Copy-Item "$cache/wow-native-sample.exe" "$root/sample.exe"
- Get-FileHash "$root/latency.exe","$root/sample.exe",$environmentExe,"$PSScriptRoot/../observation/logon_environment.c","$repo/tools/build/fixtures/wow-latency.cmake","$repo/tools/build/fixtures/graph-probe.cmake"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"
+ $latencyExe="$cache/wow-latency-$mask.exe"
+ $sampleExe="$cache/wow-native-sample.exe"
+ Get-FileHash $latencyExe,$sampleExe,$environmentExe,"$PSScriptRoot/../observation/logon_environment.c","$repo/tools/build/fixtures/wow-latency.cmake","$repo/tools/build/fixtures/graph-probe.cmake"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"
  # Capture the current-token block in memory only; never log environment values.
  . "$PSScriptRoot/../observation/logon-environment.ps1"
  $entries=Read-TestLogonEnvironment $environmentExe "$root/environment-process.json"
@@ -105,7 +105,7 @@ try{
   $line=$worker.ProcessId.ToString()+' "'+$desktop+'" "'+$out+'/mine" "'+$gateName+'"'
   if($PageCostRva){$line+=' '+$PageCostRva}
   if($CallbackCostRva){$line+=' '+$CallbackCostRva}
-  $game=Start-Owned ($case+'-game') "$root/latency.exe" $line 45
+  $game=Start-Owned ($case+'-game') $latencyExe $line 45
   $deadline=[DateTime]::UtcNow.AddSeconds(20)
   while(!(Test-Path "$out/mine.ready") -and !$game.HasExited -and [DateTime]::UtcNow -lt $deadline){Start-Sleep -Milliseconds 50}
   if(!(Test-Path "$out/mine.ready")){throw 'Actual board not ready'}
@@ -113,7 +113,7 @@ try{
   if($case -eq 'normal-sampled'){
    $sampleLine=$worker.ProcessId.ToString()+' 1000'
    if($null -ne $wordRva){$sampleLine+=' '+$wordRva.ToString('X8')}
-   $sampler=Start-Owned ($case+'-sample') "$root/sample.exe" $sampleLine 30
+   $sampler=Start-Owned ($case+'-sample') $sampleExe $sampleLine 30
   }
   $null=$gate.Set()
   Finish-Owned $game ($case+'-game') 45;$game=$null

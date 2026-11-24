@@ -29,6 +29,8 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
+S4 P12 completes the common WINMINE latency preparation; [evidence](../etc/evidence/t484-s4-latency-preparation.md) records cached full build, unchanged dual release hashes and ordinary/sampled/private real runtime passes. Upper diagnostic wrappers remain pending. Census337/355,18 pending.
+
 S1 inventory/design and S2 native host migration are closed. The
 [execution plan](../etc/operations/t484-cmd-build-release-plan.md) retains
 the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S5 clean,
@@ -70,7 +72,7 @@ S4 P3 replaces addon utility publication with CMD; [publication evidence](../etc
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **336/355 disposed,19 pending**, plus24 supplemental
+Current census: **337/355 disposed,18 pending**, plus24 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;

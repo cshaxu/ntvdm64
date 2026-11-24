@@ -1,12 +1,12 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "fd421f4de933b81d0fe21dbc3bd3dcf7993a9519",
+  "head": "198f53dd882428c42bcd828e6139f79a6139b69b",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-win16-print-probe.ps1",
-    "?? docs/etc/evidence/t484-s4-print-preparation.md"
+    " M test/integration/verify-wow-mine-latency.ps1",
+    "?? docs/etc/evidence/t484-s4-latency-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -15,11 +15,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 120,
+    "migrated-delivered": 121,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 18,
+    "pending-producer-migration": 17,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -970,10 +970,12 @@
       "state": "changed",
       "current_sha256": "d83bfcdb85e6e3ad36e7f05d59c49689dd33d3ca20036dc706577022d5d506cd",
       "revisions": [
+        "198f53dd882428c42bcd828e6139f79a6139b69b",
         "7773022884e67c2963edcd980db1da8274cf930a"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-print-probe.md"
+        "docs/etc/evidence/t484-s3-print-probe.md",
+        "docs/etc/evidence/t484-s4-print-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -1279,7 +1281,7 @@
       "file": "test/integration/verify-wow-mine-latency.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "b632de1a98af1fc6ee71b0df8e07be96d9617080efc83c399333f06363d85797",
+      "current_sha256": "1daa03a273049b13c0aba18ddccdd6f0d13c645582a4d7d50c4b43243bb4c111",
       "revisions": [
         "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "09fa58c230bf56721d4f9fe19367a3e893cf0ef2"
@@ -1288,11 +1290,11 @@
         "docs/etc/evidence/t484-s3-latency.md",
         "docs/etc/evidence/t484-s3-logon-reader.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "evidence": "docs/etc/evidence/t484-s3-latency.md",
-        "status": "pending-producer-migration",
-        "reason": "P58 native latency/sampler/environment producers; physical runtime staging remains"
+        "status": "migrated-delivered",
+        "reason": "S4 P12 uses CMD producers and physical staging, removes redundant executable copies and runs canonical cache outputs; real ordinary/sampled/private WINMINE operations and normal exit pass.",
+        "evidence": "docs/etc/evidence/t484-s4-latency-preparation.md"
       }
     },
     {
@@ -6599,6 +6601,12 @@
     }
   ],
   "commits": {
+    "198f53dd882428c42bcd828e6139f79a6139b69b": {
+      "subject": "M0 T484 S4 P11: complete print staging and retire stale trace assertion",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-print-preparation.md"
+      ]
+    },
     "fd421f4de933b81d0fe21dbc3bd3dcf7993a9519": {
       "subject": "M0 T484 S4 P10: prepare keyboard fixture inputs through CMD",
       "evidence": [
@@ -8772,7 +8780,7 @@
         },
         {
           "line": 79,
-          "text": "Get-FileHash \"$root/latency.exe\",\"$root/sample.exe\",$environmentExe,\"$PSScriptRoot/../observation/logon_environment.c\",\"$repo/tools/build/fixtures/wow-latency.cmake\",\"$repo/tools/build/fixtures/graph-probe.cmake\"|Export-Csv -NoTypeInformation -Append \"$root/inputs.csv\""
+          "text": "Get-FileHash $latencyExe,$sampleExe,$environmentExe,\"$PSScriptRoot/../observation/logon_environment.c\",\"$repo/tools/build/fixtures/wow-latency.cmake\",\"$repo/tools/build/fixtures/graph-probe.cmake\"|Export-Csv -NoTypeInformation -Append \"$root/inputs.csv\""
         }
       ]
     },

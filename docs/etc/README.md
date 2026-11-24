@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T484 S4 latency preparation](evidence/t484-s4-latency-preparation.md) removes redundant probe copies and verifies three real WINMINE paths.
+
 [T484 S3 native probes](evidence/t484-s3-native-probes.md) retires four producers,
 compares12 timestamp-only images and verifies16 bounded probe behaviors.
 
