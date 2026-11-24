@@ -1,6 +1,5 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot,
- [Parameter(Mandatory)][string]$CompilerDriver)
+param([Parameter(Mandatory)][string]$BuildRoot)
 # Whole pure-native reference, including a deliberately wrong-reply control.
 # Invoke in an owned hidden background process. No product DLL is loaded.
 $ErrorActionPreference='Stop'
@@ -10,11 +9,10 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 $null=New-Item -ItemType Directory $root
 . "$PSScriptRoot/wow_reply_payload_report.ps1"
 try{
- Get-FileHash $PSCommandPath,"$PSScriptRoot/wow_reply_payload_control.c","$PSScriptRoot/wow_reply_payload_lifetime.h","$PSScriptRoot/wow_reply_payload_report.ps1",$CompilerDriver|Export-Csv -NoTypeInformation "$root/inputs.csv"
- $arguments=@('cl.exe','/nologo','/TC','/MT','/O2','/W4','/WX',('/Fo'+$root+'/native-control.obj'),"$PSScriptRoot/wow_reply_payload_control.c",'/link',('/OUT:'+ $root+'/native-control.exe'),'/INCREMENTAL:NO','user32.lib')
- @{driver=$CompilerDriver;arguments=$arguments;working=$root;machine='MSVC x86 /MT'}|ConvertTo-Json|Set-Content "$root/compiler-command.json"
- Push-Location $root
- try{& $CompilerDriver @arguments *> "$root/compile.txt";if($LASTEXITCODE){throw 'Pure native reply control compile failed'}}finally{Pop-Location}
+ Get-FileHash $PSCommandPath,"$PSScriptRoot/wow_reply_payload_control.c","$PSScriptRoot/wow_reply_payload_lifetime.h","$PSScriptRoot/wow_reply_payload_report.ps1"|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ & "$repo/tools/build-fixtures.cmd" x86 wow-reply-payload *> "$root/build.log"
+ if($LASTEXITCODE){throw 'Native reply payload build failed'}
+ Copy-Item "$repo/build/.ninja/fixtures-x86/wow-reply-payload.exe" "$root/native-control.exe"
  $observed=foreach($case in @('normal','wrong-reply','timeout')){
   $report="$root/$case.bin";$line='"'+$report+'"';if($case -eq 'wrong-reply'){$line+=' --bad-reply'}
   if($case -eq 'timeout'){$line+=' --timeout'}
@@ -35,7 +33,7 @@ try{
   [pscustomobject]@{case=$case;exit=$code;report=$row;expectedFailure=($case -eq 'wrong-reply')}
  }
  $observed|ConvertTo-Json -Depth 5|Set-Content "$root/results.json"
- Get-FileHash "$root/native-control.exe","$root/native-control.obj"|Export-Csv -NoTypeInformation "$root/artifacts.csv"
+ Get-FileHash "$root/native-control.exe"|Export-Csv -NoTypeInformation "$root/artifacts.csv"
  foreach($input in Import-Csv "$root/inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Native control input changed'}}
  @{nativeReferencePassed=$true;timeoutReferencePassed=$true;negativeRejected=$true;productLoaded=$false;limits='Only owned sender page protected. Actual timeout preserves native status0/error1460 and an entered/live receiver; this is not native API success. No assertion about undocumented USER capture allocation lifetime.'}|ConvertTo-Json|Set-Content "$root/result.json"
  0|Set-Content "$root/exit.txt"

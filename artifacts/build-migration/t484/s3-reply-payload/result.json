@@ -1,0 +1,118 @@
+{
+  "validation": {
+    "started": "2026-11-24T04:19:32.1386599+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T04:20:59.8833891+01:00",
+    "pid": 7868
+  },
+  "fixtureAndAssertionsUnchanged": true,
+  "publication": {
+    "unchanged": true,
+    "publishedCopies": 22,
+    "republished": false,
+    "rawInputs": 11
+  },
+  "contract": {
+    "productLoaded": false,
+    "timeoutReferencePassed": true,
+    "limits": "Only owned sender page protected. Actual timeout preserves native status0/error1460 and an entered/live receiver; this is not native API success. No assertion about undocumented USER capture allocation lifetime.",
+    "nativeReferencePassed": true,
+    "negativeRejected": true
+  },
+  "cases": [
+    {
+      "case": "normal",
+      "exit": 0,
+      "report": {
+        "signature": 1498173522,
+        "errors": 0,
+        "senderThread": 6292,
+        "receiverThread": 18008,
+        "accepted": 1,
+        "replyFlags": 9,
+        "senderReturned": 1,
+        "replyResult": 1148846161,
+        "protected": 1,
+        "unreadable": 1,
+        "continued": 1,
+        "fullReturn": 1,
+        "inputHeader": 25821184,
+        "inputPayload": 25821248,
+        "receiverAlias": 0,
+        "oldProtection": 4,
+        "pageBytes": 4096,
+        "senderWindow": 328762,
+        "receiverWindow": 328762,
+        "receiverHeader": 14481688,
+        "receiverPayload": 10214736
+      },
+      "expectedFailure": false
+    },
+    {
+      "case": "wrong-reply",
+      "exit": 1,
+      "report": {
+        "signature": 1498173522,
+        "errors": 4,
+        "senderThread": 19552,
+        "receiverThread": 27116,
+        "accepted": 1,
+        "replyFlags": 9,
+        "senderReturned": 1,
+        "replyResult": 1148846162,
+        "protected": 0,
+        "unreadable": 0,
+        "continued": 1,
+        "fullReturn": 1,
+        "inputHeader": 13238272,
+        "inputPayload": 13238336,
+        "receiverAlias": 0,
+        "oldProtection": 0,
+        "pageBytes": 4096,
+        "senderWindow": 394298,
+        "receiverWindow": 394298,
+        "receiverHeader": 5240952,
+        "receiverPayload": 1170048
+      },
+      "expectedFailure": true
+    },
+    {
+      "case": "timeout",
+      "exit": 0,
+      "report": {
+        "signature": 1347374420,
+        "errors": 0,
+        "senderThread": 15672,
+        "receiverThread": 13780,
+        "accepted": 1,
+        "replyFlags": 1,
+        "senderReturned": 1,
+        "replyResult": 0,
+        "protected": 1,
+        "unreadable": 1,
+        "continued": 1,
+        "fullReturn": 1,
+        "inputHeader": 17891328,
+        "inputPayload": 17891392,
+        "receiverAlias": 0,
+        "oldProtection": 4,
+        "pageBytes": 4096,
+        "senderWindow": 459834,
+        "receiverWindow": 459834,
+        "receiverHeader": 5504576,
+        "receiverPayload": 4445792,
+        "mode": 1,
+        "sendStatus": 0,
+        "sendError": 1460,
+        "afterFlags": 9,
+        "receiverAlive": 1
+      },
+      "expectedFailure": false
+    }
+  ],
+  "cache": {
+    "hash": "0ACDA699C3451C3EF6598CB5A27106EF141A5ADB65A66B43C421FC8AA4C6CF0C",
+    "mtime": "2026-11-24T03:19:46.6122239Z",
+    "wrongArch": 2
+  }
+}

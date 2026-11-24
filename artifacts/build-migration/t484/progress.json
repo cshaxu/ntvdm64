@@ -1,31 +1,29 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "c7c991033ed59c521f7c474ee77cddb147cd882b",
+  "head": "be672582d39bb1d465ff85ad154f7ba21c925e79",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-public-memory-abi.ps1",
-    " M test/observation/verify-wow-registry-shutdown.ps1",
+    " M test/observation/verify-wow-reply-payload-control.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-abi-registry/",
-    "?? docs/etc/evidence/t484-s3-abi-registry.md",
-    "?? tools/build/wow32/abi-registry-tests.cmake"
+    " M tools/build/fixtures/wow-boundaries.cmake",
+    "?? artifacts/build-migration/t484/s3-reply-payload/",
+    "?? docs/etc/evidence/t484-s3-reply-payload.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 133,
-    "unchanged": 95,
+    "changed": 134,
+    "unchanged": 94,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 74,
+    "migrated-delivered": 75,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 84,
+    "requires-disposition-reconciliation": 83,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3541,8 +3539,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "d5823cd18788da7e4f495f5d894652e652b097ac3f0638198531dfd438b6be85",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "be672582d39bb1d465ff85ad154f7ba21c925e79"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-abi-registry.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -3556,8 +3558,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "1f790c562cd848dcd5d2d8c06b3f83c1aa01e754747e2b4867aa446d234d39ab",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "be672582d39bb1d465ff85ad154f7ba21c925e79"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-abi-registry.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -3569,12 +3575,16 @@
       "id": "B0189",
       "file": "test/observation/verify-wow-reply-payload-control.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "c3703b569f36a07b768e0c7eb7bfeb1d736c74553630f39b7295e935d7f697ff",
+      "state": "changed",
+      "current_sha256": "e7296ff672546d396992a4859bba387f29006e01a9c47924f559791a15bd23e2",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Three native reference cases retain shared report checks; manual compiler producer removed",
+        "evidence": "docs/etc/evidence/t484-s3-reply-payload.md"
+      }
     },
     {
       "id": "B0190",
@@ -5777,6 +5787,12 @@
     }
   ],
   "commits": {
+    "be672582d39bb1d465ff85ad154f7ba21c925e79": {
+      "subject": "T484 S3 P115 use current native owners for ABI and registry tests",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-abi-registry.md"
+      ]
+    },
     "c7c991033ed59c521f7c474ee77cddb147cd882b": {
       "subject": "T484 S3 P114 migrate current return unwind contracts and retire stale test interface",
       "evidence": [
@@ -8392,8 +8408,8 @@
       "file": "test/observation/verify-wow-reply-payload-control.ps1",
       "hits": [
         {
-          "line": 14,
-          "text": "$arguments=@('cl.exe','/nologo','/TC','/MT','/O2','/W4','/WX',('/Fo'+$root+'/native-control.obj'),\"$PSScriptRoot/wow_reply_payload_control.c\",'/link',('/OUT:'+ $root+'/native-control.exe'),'/INCREMENTAL:NO','user32.lib')"
+          "line": 15,
+          "text": "Copy-Item \"$repo/build/.ninja/fixtures-x86/wow-reply-payload.exe\" \"$root/native-control.exe\""
         }
       ]
     },

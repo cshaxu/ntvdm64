@@ -916,5 +916,10 @@
     "status": "migrated-delivered",
     "reason": "Current native owner/profile; manual command parsing/compilation and stale provider path retired",
     "evidence": "docs/etc/evidence/t484-s3-abi-registry.md"
+  },
+  "test/observation/verify-wow-reply-payload-control.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Three native reference cases retain shared report checks; manual compiler producer removed",
+    "evidence": "docs/etc/evidence/t484-s3-reply-payload.md"
   }
 }

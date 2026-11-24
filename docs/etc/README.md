@@ -1719,3 +1719,5 @@ post-publication targeted checks.
 - [T484 S3 return-unwind contracts](evidence/t484-s3-return-unwind.md).
 
 - [T484 S3 public ABI and registry lifecycle](evidence/t484-s3-abi-registry.md).
+
+- [T484 S3 reply payload reference](evidence/t484-s3-reply-payload.md).

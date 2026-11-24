@@ -68,7 +68,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P115 ABI/registry](../etc/evidence/t484-s3-abi-registry.md) | Public ABI compile/registry lifecycle pass with current owners; obsolete profile/path builders removed; full cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P115 passed their cached full host build. P73 checks11 raw host inputs
+| [P116 reply payload](../etc/evidence/t484-s3-reply-payload.md) | Three native reference cases pass with unchanged shared assertions; manual producer removed; full cached build/cache/publication hashes pass. |
+
+Completed implementation batches through P116 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
