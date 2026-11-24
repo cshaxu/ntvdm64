@@ -1346,32 +1346,20 @@
     "reason": "Standalone interpreted producer retired; live diagnostic driver retained through shared CMD fixture graph, original object/image identical, cache and missing-linker failure verified.",
     "evidence": "docs/etc/evidence/t484-s3-interrupt-observer.md"
   },
-  "test/integration/support/wow-guest-probe.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
-    "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
-  },
+  "test/integration/support/wow-guest-probe.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P17 delegates input preparation to existing CMD owners; real mouse checksum, three DEM cases and all three shared WOW callers pass.","evidence":"docs/etc/evidence/t484-s4-mouse-dem-wow-preparation.md"},
   "test/integration/verify-dem-fcb-guest.ps1": {
     "status": "supplemental-native-producer-pending-staging",
     "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
     "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
   },
   "test/integration/verify-dlc-provider-boundary.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P16 uses existing CMD input preparation and physical staging; real DLC status07 and both generic-call cases pass.","evidence":"docs/etc/evidence/t484-s4-dlc-generic-preparation.md"},
-  "test/integration/verify-mouse-state-checksum.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
-    "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
-  },
+  "test/integration/verify-mouse-state-checksum.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P17 delegates input preparation to existing CMD owners; real mouse checksum, three DEM cases and all three shared WOW callers pass.","evidence":"docs/etc/evidence/t484-s4-mouse-dem-wow-preparation.md"},
   "test/integration/verify-vga-cursor-disable.ps1": {
     "status": "supplemental-native-producer-pending-staging",
     "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
     "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
   },
-  "test/integration/verify-dem-pressure.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "All existing fixed source/define combinations use shared CMD guest-profiles;13-image equivalence and cache verified across this batch. Runtime configuration/staging remains pending.",
-    "evidence": "docs/etc/evidence/t484-s3-guest-profiles.md"
-  },
+  "test/integration/verify-dem-pressure.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P17 delegates input preparation to existing CMD owners; real mouse checksum, three DEM cases and all three shared WOW callers pass.","evidence":"docs/etc/evidence/t484-s4-mouse-dem-wow-preparation.md"},
   "test/integration/verify-dpmi-debug-context.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P15 completes required input aliases and physical placement through existing CMD owners; real DPMI debug/INT21 direct+nested and XMS positive/failure paths pass. Runtime GO.DAT remains test synchronization, not preparation.","evidence":"docs/etc/evidence/t484-s4-dpmi-xms-preparation.md"},
   "test/integration/verify-dpmi-int21-state.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P15 completes required input aliases and physical placement through existing CMD owners; real DPMI debug/INT21 direct+nested and XMS positive/failure paths pass. Runtime GO.DAT remains test synchronization, not preparation.","evidence":"docs/etc/evidence/t484-s4-dpmi-xms-preparation.md"},
   "test/integration/verify-video7-mode-flags.ps1": {

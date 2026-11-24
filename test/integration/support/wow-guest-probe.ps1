@@ -12,16 +12,15 @@ function Invoke-WowGuestProbe {
  $null=New-Item -ItemType Directory $out
  & "$repo/tools/build-fixtures.cmd" x86 guest-api
  if($LASTEXITCODE){throw 'NE fixture build failed'}
- Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/api/$Name.EXE" -Destination "$out/$Name.EXE"
+ $probe="$repo/build/.ninja/fixtures-x86/guest-probes/api/$Name.EXE"
  $runtime=$null;$scope=$null;$proc=$null;$saved=@{}
  foreach($key in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$key]=[Environment]::GetEnvironmentVariable($key)}
  try {
-  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity
+  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity -TestFiles @($probe)
   $scope=New-IsolatedPackageScope $runtime
   $binary=Get-PackageBinaryRoot $runtime
   if($RequireNoRegistry -and (Test-Path "$binary/NTVDM.REG")){throw 'Require absent shadow file: no classes, hence no native profile writes'}
-  $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory $tests -Force
-  Copy-Item "$out/$Name.EXE" $tests
+  $tests=Join-Path $runtime 'tests'
   $env:TEMP=$runtime;$env:TMP=$runtime;$env:PATH="$binary;$env:SystemRoot\System32";$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
   $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path);$start.UseShellExecute=$false;$start.CreateNoWindow=$true
   $log="$out/observer.txt"

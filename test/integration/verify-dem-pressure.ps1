@@ -16,15 +16,14 @@ $observerPath=(Resolve-Path $Observer).Path
 New-Item -ItemType Directory -Path $out | Out-Null
 & "$repo/tools/build-fixtures.cmd" x86 guest-profiles
 if($LASTEXITCODE){throw 'DEM probe build failed'}
-Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/DEM-$Case.COM" -Destination "$out/DEMRESET.COM"
+& "$repo/tools/prepare-test-inputs.cmd" $out "$repo/build/.ninja/fixtures-x86/guest-probes/profiles/DEM-$Case.COM" DEMRESET.COM
+if($LASTEXITCODE){throw 'DEM input preparation failed'}
 $runtime=$null;$scope=$null;$process=$null
 $names=@('PATH','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_INITIAL_GEOMETRY')
 $saved=@{};foreach($name in $names){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
-    $runtime=New-PhysicalRuntimeStage $PackageRoot
+    $runtime=New-PhysicalRuntimeStage $PackageRoot -TestFiles @("$out/DEMRESET.COM")
     $scope=New-IsolatedPackageScope $runtime
-    New-Item -ItemType Directory "$runtime/tests" -Force | Out-Null
-    Copy-Item "$out/DEMRESET.COM" "$runtime/tests/DEMRESET.COM"
     $env:PATH="$runtime/system32;"+(Join-Path $env:SystemRoot 'System32')
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:MVDM_OBSERVER_INITIAL_GEOMETRY='80,30'

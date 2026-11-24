@@ -1933,3 +1933,5 @@ post-publication targeted checks.
 - [T484 S4 print preparation](evidence/t484-s4-print-preparation.md).
 
 - [T484 S4 DLC and generic-call preparation](evidence/t484-s4-dlc-generic-preparation.md).
+
+- [T484 S4 mouse, DEM and shared WOW preparation](evidence/t484-s4-mouse-dem-wow-preparation.md).

@@ -1,13 +1,14 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "ce0b2bd2430f452f4388f20d385d6e3d2561977e",
+  "head": "f8ef6ca66103ae319b7a62b20e00780ebb4ba0e5",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-dlc-provider-boundary.ps1",
-    " M test/integration/verify-wow-generic-call.ps1",
-    "?? docs/etc/evidence/t484-s4-dlc-generic-preparation.md"
+    " M test/integration/support/wow-guest-probe.ps1",
+    " M test/integration/verify-dem-pressure.ps1",
+    " M test/integration/verify-mouse-state-checksum.ps1",
+    "?? docs/etc/evidence/t484-s4-mouse-dem-wow-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6616,6 +6617,12 @@
     }
   ],
   "commits": {
+    "f8ef6ca66103ae319b7a62b20e00780ebb4ba0e5": {
+      "subject": "M0 T484 S4 P16: finish DLC and generic-call preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-dlc-generic-preparation.md"
+      ]
+    },
     "ce0b2bd2430f452f4388f20d385d6e3d2561977e": {
       "subject": "M0 T484 S4 P15: finish DPMI and XMS probe preparation",
       "evidence": [
