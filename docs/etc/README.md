@@ -1739,3 +1739,4 @@ post-publication targeted checks.
 - [T484 S3 retirement and startup producers](evidence/t484-s3-lifecycle-startup.md)
 
 - [T484 S3 native dispatch and page producers](evidence/t484-s3-lifecycle-pages.md)
+- [T484 S3 creation and reclaim producers](evidence/t484-s3-lifecycle-creation.md)

@@ -1,0 +1,43 @@
+{
+  "fileComplete": false,
+  "completedNormalCases": 27,
+  "cleanup": {
+    "removedIfNodes": 9,
+    "removedLines": 31
+  },
+  "validation": {
+    "exit": 0,
+    "pid": 18976,
+    "started": "2026-11-24T05:32:02.2691851+01:00",
+    "finished": "2026-11-24T05:33:33.3193696+01:00"
+  },
+  "publication": {
+    "unchanged": true,
+    "rawInputs": 11,
+    "publishedCopies": 22,
+    "republished": false
+  },
+  "remainingNormalCases": 3,
+  "prior": {
+    "rawHashesUnchanged": true,
+    "dryRun": "ninja: no work to do.",
+    "count": 22
+  },
+  "cache": {
+    "wrongArch": 2,
+    "mtime": "2026-11-24T04:32:33.1491577Z",
+    "sha256": "F59C8518554FE7AACF4C2AC80F7140FFF4386339F4807F026525491193DF1C62"
+  },
+  "failedAttempt": {
+    "finished": "2026-11-24T05:31:12.5240448+01:00",
+    "started": "2026-11-24T05:30:38.7034157+01:00",
+    "exit": 1,
+    "pid": 22540
+  },
+  "final": {
+    "started": "2026-11-24T05:37:26.7285682+01:00",
+    "pid": 20528,
+    "exit": 0,
+    "finished": "2026-11-24T05:37:55.1453674+01:00"
+  }
+}

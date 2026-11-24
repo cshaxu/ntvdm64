@@ -4,6 +4,7 @@
 #include "wow_user_runtime.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_class_client_bindings.h"
+#include "wow_user_client_view_layout.h"
 #include <stdio.h>
 
 static unsigned errors, calls;

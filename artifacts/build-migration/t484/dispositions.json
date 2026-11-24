@@ -970,7 +970,7 @@
   },
   "test/observation/verify-wow-task-lifecycle.ps1": {
     "status": "requires-disposition-reconciliation",
-    "reason": "Partial:23/30 normal cases use native targets; remaining7 and fault variants retain old producer; obsolete migrated branches removed, no completion credit",
-    "evidence": "docs/etc/evidence/t484-s3-lifecycle-pages.md"
+    "reason": "Partial:27/30 normal cases use native targets; remaining3 and fault variants retain old producer; obsolete migrated branches removed, no completion credit",
+    "evidence": "docs/etc/evidence/t484-s3-lifecycle-creation.md"
   }
 }
