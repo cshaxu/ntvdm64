@@ -139,11 +139,6 @@
     "status": "pending-producer-migration",
     "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
   },
-  "test/integration/verify-original-ems-probe.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
-    "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
-  },
   "test/integration/verify-native-modal-control.ps1": {
     "status": "pending-producer-migration",
     "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
@@ -1271,5 +1266,10 @@
     "status": "migrated-delivered",
     "reason": "CMD guest/PIF/native environment producers and shared reader; actual CPU40 positive and negative oracle runs pass, no external C# helper",
     "evidence": "docs/etc/evidence/t484-s3-logon-reader.md"
+  },
+  "test/integration/verify-original-ems-probe.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Native COM/PIF and shared CMD/native environment reader; actual INT67 Mapping and CallReturn guests pass; forwarding callers updated",
+    "evidence": "docs/etc/evidence/t484-s3-ems-environment.md"
   }
 }

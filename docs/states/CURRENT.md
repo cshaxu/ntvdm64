@@ -78,6 +78,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P161 native environment reader](../etc/evidence/t484-s3-logon-reader.md) | Three CPU guest callers share native environment query; sign/transfer/ALU positive and negative cases pass.293/355 disposed,62 remain. |
 
+| [P162 EMS environment](../etc/evidence/t484-s3-ems-environment.md) | EMS Mapping/CallReturn use shared native reader and pass actual guest checks; two forwarding callers cleaned.294/355 disposed,61 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

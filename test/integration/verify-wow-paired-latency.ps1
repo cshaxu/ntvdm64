@@ -3,8 +3,7 @@ param([Parameter(Mandatory)][string]$BuildRoot,
  [Parameter(Mandatory)][string]$BaselineRoot,
  [Parameter(Mandatory)][string]$CandidateRoot,
  [Parameter(Mandatory)][string]$Observer,
- [Parameter(Mandatory)][string]$CompilerDriver,
- [Parameter(Mandatory)][string]$LogonHelper)
+ [Parameter(Mandatory)][string]$CompilerDriver)
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned paired evidence required'}
@@ -18,7 +17,7 @@ function Owned($name,$line,$seconds){
 }
 try{
  $baseline=(Resolve-Path $BaselineRoot).Path;$candidate=(Resolve-Path $CandidateRoot).Path
- $inputs=@($PSCommandPath,$Observer,$CompilerDriver,$LogonHelper,"$PSScriptRoot/verify-wow-mine-latency.ps1","$PSScriptRoot/../observation/wow_mine_latency_probe.c","$PSScriptRoot/../observation/wow_mine_gameplay_probe.c","$PSScriptRoot/verify-original-ems-probe.ps1","$repo/assets/winnt.zip")
+ $inputs=@($PSCommandPath,$Observer,$CompilerDriver,"$PSScriptRoot/verify-wow-mine-latency.ps1","$PSScriptRoot/../observation/wow_mine_latency_probe.c","$PSScriptRoot/../observation/wow_mine_gameplay_probe.c","$PSScriptRoot/verify-original-ems-probe.ps1","$repo/assets/winnt.zip")
  foreach($dir in @($baseline,$candidate)){foreach($name in @('ntvdm.exe','WOW32.DLL','ntvdm.exe.map','WOW32.DLL.map')){$inputs+=Join-Path $dir $name}}
  Get-FileHash $inputs|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $sequence=@('baseline','composed','composed-repeat','baseline-repeat')
@@ -30,7 +29,7 @@ try{
   foreach($name in @('ntvdm.exe','WOW32.DLL')){Copy-Item (Join-Path $dir $name) "$package/system32/$name" -Force}
   $null=New-Item -ItemType Directory "$root/$case-inputs"
   Get-ChildItem "$package/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')|Get-FileHash|Export-Csv -NoTypeInformation "$root/$case-inputs/images.csv"
-  Owned ($case+'-ems') ('-NoProfile -File "'+$PSScriptRoot+'/verify-original-ems-probe.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -LogonHelper "'+$LogonHelper+'" -BuildRoot "'+$root+'/'+$case+'-ems"') 180
+  Owned ($case+'-ems') ('-NoProfile -File "'+$PSScriptRoot+'/verify-original-ems-probe.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -BuildRoot "'+$root+'/'+$case+'-ems"') 180
   Owned $case ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/'+$case+'" -WorkerMap "'+$dir+'/ntvdm.exe.map" -WowMap "'+$dir+'/WOW32.DLL.map"') 300
   foreach($environment in @('normal','normal-sampled','private')){
    $rows=@(Import-Csv "$root/$case/$environment/latency.csv"|ForEach-Object {[long]$_.microseconds}|Sort-Object)

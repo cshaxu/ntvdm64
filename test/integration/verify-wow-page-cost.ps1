@@ -4,9 +4,8 @@ param([Parameter(Mandatory)][string]$BuildRoot,
  [string]$ProviderBuildRoot=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32'),
  [Parameter(Mandatory)][string]$Observer,
  [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),
- [string]$LogonHelper,[switch]$BuildOnly)
+ [switch]$BuildOnly)
 $ErrorActionPreference='Stop'
-if(!$BuildOnly -and !$LogonHelper){throw 'Runtime verification requires LogonHelper'}
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned diagnostic root required'}
@@ -20,7 +19,7 @@ function Owned($name,$exe,$line,$seconds,$working=$repo){
 }
 try{
  $source="$repo/src/compat/mvdm_softpc_wow_page_domain.c"
- $inputs=@($source,$PSCommandPath,"$PSScriptRoot/../observation/wow_page_cost_instrument.h","$PSScriptRoot/../observation/wow_page_cost_data.h","$PSScriptRoot/../observation/wow_page_cost_probe.h","$PSScriptRoot/../observation/wow_mine_latency_probe.c","$PSScriptRoot/../observation/wow_mine_gameplay_probe.c","$PSScriptRoot/verify-wow-mine-latency.ps1",$Observer,$CompilerDriver,$LogonHelper,"$repo/assets/winnt.zip","$WorkerBuildRoot/build.ninja","$WorkerBuildRoot/ntvdm.exe","$WorkerBuildRoot/ntvdm.exe.map","$WorkerBuildRoot/ntvdm.lib","$ProviderBuildRoot/wow32.dll","$ProviderBuildRoot/wow32.dll.map")
+ $inputs=@($source,$PSCommandPath,"$PSScriptRoot/../observation/wow_page_cost_instrument.h","$PSScriptRoot/../observation/wow_page_cost_data.h","$PSScriptRoot/../observation/wow_page_cost_probe.h","$PSScriptRoot/../observation/wow_mine_latency_probe.c","$PSScriptRoot/../observation/wow_mine_gameplay_probe.c","$PSScriptRoot/verify-wow-mine-latency.ps1",$Observer,$CompilerDriver,"$repo/assets/winnt.zip","$WorkerBuildRoot/build.ninja","$WorkerBuildRoot/ntvdm.exe","$WorkerBuildRoot/ntvdm.exe.map","$WorkerBuildRoot/ntvdm.lib","$ProviderBuildRoot/wow32.dll","$ProviderBuildRoot/wow32.dll.map")
  $inputs=@($inputs|Where-Object {$_})
  $inputs+=@(Get-ChildItem $WorkerBuildRoot -File -Filter '*.lib').FullName
  $inputs|Sort-Object -Unique|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
@@ -53,7 +52,7 @@ try{
  }
  Owned baseline $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/baseline" -WorkerMap "'+$WorkerBuildRoot+'/ntvdm.exe.map" -WowMap "'+$ProviderBuildRoot+'/wow32.dll.map"') 300
  Copy-Item "$root/ntvdm.exe" "$package/system32/ntvdm.exe" -Force
- Owned ems $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-original-ems-probe.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -LogonHelper "'+$LogonHelper+'" -BuildRoot "'+$root+'/ems"') 180
+ Owned ems $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-original-ems-probe.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -BuildRoot "'+$root+'/ems"') 180
  Owned measurement $shell ('-NoProfile -File "'+$PSScriptRoot+'/verify-wow-mine-latency.ps1" -PackageRoot "'+$package+'" -Observer "'+$Observer+'" -CompilerDriver "'+$CompilerDriver+'" -BuildRoot "'+$root+'/measurement" -WorkerMap "'+$root+'/ntvdm.exe.map" -WowMap "'+$ProviderBuildRoot+'/wow32.dll.map" -PageCostRva '+$rva.ToString('X8')) 300
  foreach($input in Import-Csv "$root/inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen production/diagnostic input changed'}}
  foreach($input in Import-Csv "$root/diagnostic-inputs.csv"){if((Get-FileHash $input.Path).Hash -ne $input.Hash){throw 'Frozen diagnostic image changed'}}

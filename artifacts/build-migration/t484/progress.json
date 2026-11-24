@@ -1,19 +1,14 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "2321affcde2de0800b5030d9036d07fd8d332a48",
+  "head": "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
-    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-ccpu-alu-guest.ps1",
-    " M test/integration/verify-ccpu-sign-flags-guest.ps1",
-    " M test/integration/verify-ccpu-transfer-guest.ps1",
-    " M test/integration/verify-wow-mine-latency.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-logon-reader.md",
-    "?? test/observation/logon-environment.ps1"
+    " M test/integration/verify-original-ems-probe.ps1",
+    " M test/integration/verify-wow-page-cost.ps1",
+    " M test/integration/verify-wow-paired-latency.ps1",
+    "?? docs/etc/evidence/t484-s3-ems-environment.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -22,11 +17,11 @@
     "removed": 167
   },
   "disposition_counts": {
-    "migrated-delivered": 93,
+    "migrated-delivered": 94,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 167,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 45,
+    "pending-producer-migration": 44,
     "requires-disposition-reconciliation": 17,
     "retained-standalone-audit": 16
   },
@@ -543,10 +538,12 @@
       "state": "changed",
       "current_sha256": "9ecc542c8c59a6694665b600d2cedeb52b97014e6be0a656b40bfb37be81807f",
       "revisions": [
+        "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-cpu-guest.md"
+        "docs/etc/evidence/t484-s3-cpu-guest.md",
+        "docs/etc/evidence/t484-s3-logon-reader.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -562,10 +559,12 @@
       "state": "changed",
       "current_sha256": "68d965631aa48d55d3e592ac92b4479d04248e38df01b6d0a1ce6df56ca696fd",
       "revisions": [
+        "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-cpu-guest.md"
+        "docs/etc/evidence/t484-s3-cpu-guest.md",
+        "docs/etc/evidence/t484-s3-logon-reader.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -581,10 +580,12 @@
       "state": "changed",
       "current_sha256": "d78a3a8cdf6dc176a9c06e5142f945fb37398779c1c9a1d38cd221cf825200ef",
       "revisions": [
+        "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-cpu-guest.md"
+        "docs/etc/evidence/t484-s3-cpu-guest.md",
+        "docs/etc/evidence/t484-s3-logon-reader.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -711,18 +712,18 @@
       "file": "test/integration/verify-original-ems-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "c21eae90c54d650dc225eff1c79b5cf3b476d38d3cd888d64f1bbd0029c2919d",
+      "current_sha256": "c16c2465847334fdd2261c4699af6823102078765538df46f38f44e3686d99a2",
       "revisions": [
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-cpu-guest.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
-        "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
+        "status": "migrated-delivered",
+        "reason": "Native COM/PIF and shared CMD/native environment reader; actual INT67 Mapping and CallReturn guests pass; forwarding callers updated",
+        "evidence": "docs/etc/evidence/t484-s3-ems-environment.md"
       }
     },
     {
@@ -1186,10 +1187,12 @@
       "state": "changed",
       "current_sha256": "b632de1a98af1fc6ee71b0df8e07be96d9617080efc83c399333f06363d85797",
       "revisions": [
+        "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "09fa58c230bf56721d4f9fe19367a3e893cf0ef2"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-latency.md"
+        "docs/etc/evidence/t484-s3-latency.md",
+        "docs/etc/evidence/t484-s3-logon-reader.md"
       ],
       "completion": "pending-producer-migration",
       "decision": {
@@ -1241,7 +1244,7 @@
       "file": "test/integration/verify-wow-page-cost.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "26b1c169aa6cfde2a92c9b93aa1bc44c223547e56b924c2cc5e38241eb9c22c8",
+      "current_sha256": "10a40cfe130e8b359a8c35593c01d753e146aa7f84f18c75c89a6b473efa3108",
       "revisions": [
         "2d2598f24a601c5920dd22e531cfe0a9eb5e5cc1",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13",
@@ -6367,6 +6370,12 @@
     }
   ],
   "commits": {
+    "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce": {
+      "subject": "T484 S3 P161 share native environment reader across CPU guest tests",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-logon-reader.md"
+      ]
+    },
     "2321affcde2de0800b5030d9036d07fd8d332a48": {
       "subject": "T484 S3 P160 consolidate cached component build verification",
       "evidence": [
@@ -7726,8 +7735,12 @@
       "file": "test/integration/verify-original-ems-probe.ps1",
       "hits": [
         {
-          "line": 29,
+          "line": 28,
           "text": "$native=Join-Path $repo 'build/.ninja/fixtures-x86'"
+        },
+        {
+          "line": 44,
+          "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]
     },
@@ -8126,11 +8139,11 @@
           "text": "[string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),"
         },
         {
-          "line": 23,
-          "text": "$inputs=@($source,$PSCommandPath,\"$PSScriptRoot/../observation/wow_page_cost_instrument.h\",\"$PSScriptRoot/../observation/wow_page_cost_data.h\",\"$PSScriptRoot/../observation/wow_page_cost_probe.h\",\"$PSScriptRoot/../observation/wow_mine_latency_probe.c\",\"$PSScriptRoot/../observation/wow_mine_gameplay_probe.c\",\"$PSScriptRoot/verify-wow-mine-latency.ps1\",$Observer,$CompilerDriver,$LogonHelper,\"$repo/assets/winnt.zip\",\"$WorkerBuildRoot/build.ninja\",\"$WorkerBuildRoot/ntvdm.exe\",\"$WorkerBuildRoot/ntvdm.exe.map\",\"$WorkerBuildRoot/ntvdm.lib\",\"$ProviderBuildRoot/wow32.dll\",\"$ProviderBuildRoot/wow32.dll.map\")"
+          "line": 22,
+          "text": "$inputs=@($source,$PSCommandPath,\"$PSScriptRoot/../observation/wow_page_cost_instrument.h\",\"$PSScriptRoot/../observation/wow_page_cost_data.h\",\"$PSScriptRoot/../observation/wow_page_cost_probe.h\",\"$PSScriptRoot/../observation/wow_mine_latency_probe.c\",\"$PSScriptRoot/../observation/wow_mine_gameplay_probe.c\",\"$PSScriptRoot/verify-wow-mine-latency.ps1\",$Observer,$CompilerDriver,\"$repo/assets/winnt.zip\",\"$WorkerBuildRoot/build.ninja\",\"$WorkerBuildRoot/ntvdm.exe\",\"$WorkerBuildRoot/ntvdm.exe.map\",\"$WorkerBuildRoot/ntvdm.lib\",\"$ProviderBuildRoot/wow32.dll\",\"$ProviderBuildRoot/wow32.dll.map\")"
         },
         {
-          "line": 36,
+          "line": 35,
           "text": "$directInputs+=@(\"$WorkerBuildRoot/generated/ntvdm-wow32-provider.def\",\"$WorkerBuildRoot/obj/dpmi/dpmiint.obj\",\"$repo/build/.ninja/build-tools/ntvdm-tib.exe\",\"$repo/tools/build/worker/page-cost.cmake\")"
         }
       ]
