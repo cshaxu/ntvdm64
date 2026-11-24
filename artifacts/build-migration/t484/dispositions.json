@@ -1564,24 +1564,24 @@
     "evidence": "docs/etc/evidence/t484-s3-observer-contracts.md"
   },
   "test/observation/verify-wow-dde-conversion.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P207 consolidates current source contracts in native CMD targets; C fixtures unchanged, historical DDE rebuild retired with frozen evidence retained.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-file-contracts.md"
   },
   "test/observation/verify-wow-file-attributes-cleanup.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P207 consolidates current source contracts in native CMD targets; C fixtures unchanged, historical DDE rebuild retired with frozen evidence retained.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-file-contracts.md"
   },
   "test/observation/verify-wow-known-dll.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P207 consolidates current source contracts in native CMD targets; C fixtures unchanged, historical DDE rebuild retired with frozen evidence retained.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-file-contracts.md"
   },
   "test/observation/verify-wow-module-filename-boundary.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P207 consolidates current source contracts in native CMD targets; C fixtures unchanged, historical DDE rebuild retired with frozen evidence retained.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-file-contracts.md"
   },
   "test/opennt-host/netlib/verify.ps1": {
     "status": "supplemental-direct-command-review",

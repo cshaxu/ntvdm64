@@ -1,19 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "a9553db754706abe3567c5b60878b7445478bb1c",
+  "head": "ea26cbe29460872098df22774a382cc91a37740f",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-console-api-late-c.ps1",
-    " M test/observation/verify-console-trace-c.ps1",
-    " D test/observation/verify-dos-style-relay.ps1",
-    " M test/observation/verify-install-guard-c.ps1",
-    " M test/observation/verify-palette-trace-c.ps1",
+    " D test/observation/verify-wow-dde-conversion.ps1",
+    " D test/observation/verify-wow-file-attributes-cleanup.ps1",
+    " D test/observation/verify-wow-known-dll.ps1",
+    " D test/observation/verify-wow-module-filename-boundary.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-observer-contracts.md",
-    "?? tools/build/fixtures/observer-contracts.cmake"
+    " M tools/build/fixtures/wow-dde.cmake",
+    "?? docs/etc/evidence/t484-s3-wow-file-contracts.md",
+    "?? test/observation/verify-wow-file-contracts.ps1",
+    "?? tools/build/fixtures/wow-file-contracts.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6494,6 +6495,12 @@
     }
   ],
   "commits": {
+    "ea26cbe29460872098df22774a382cc91a37740f": {
+      "subject": "M0 T484 S3 P206: migrate observer regressions and retire stale relay builder",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-observer-contracts.md"
+      ]
+    },
     "a9553db754706abe3567c5b60878b7445478bb1c": {
       "subject": "M0 T484 S3 P205: build presentation contracts through native targets",
       "evidence": [

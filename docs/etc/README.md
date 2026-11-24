@@ -1883,3 +1883,5 @@ post-publication targeted checks.
 [T484 S3 presentation contracts](evidence/t484-s3-presentation-contracts.md) records native font/startup positive and negative controls.
 
 [T484 S3 observer contracts](evidence/t484-s3-observer-contracts.md) records native observer regressions and obsolete DOS relay builder retirement.
+
+[T484 S3 WOW file contracts](evidence/t484-s3-wow-file-contracts.md) records five current native fixtures and retired historical DDE recompilation.

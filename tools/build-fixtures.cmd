@@ -221,8 +221,8 @@ for %%I in (wow-callback-abort wow-attach-failure wow-missing-init wow-message-t
 if "%TARGET%"=="window-contracts" set "SELECTED=1"
 if "%TARGET%"=="frontend-library" if "%~1"=="x86" set "SELECTED=1"
 if "%TARGET%"=="native-payload-probes" set "SELECTED=1"
-for %%I in (wow-font-contracts wow-metafile-host wow-session-contracts wow-controlled-boundaries redir-contracts wow-dib-contracts wow-output-contracts wow-provider-contracts presentation-contract-all presentation-contract-font presentation-contract-startup) do if "%TARGET%"=="%%I" set "SELECTED=1"
-for %%I in (wow-font-contracts wow-metafile-host wow-session-contracts wow-controlled-boundaries redir-contracts wow-dib-contracts wow-output-contracts wow-provider-contracts presentation-contract-all presentation-contract-font presentation-contract-startup) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
+for %%I in (wow-font-contracts wow-metafile-host wow-session-contracts wow-controlled-boundaries redir-contracts wow-dib-contracts wow-output-contracts wow-provider-contracts wow-file-contracts presentation-contract-all presentation-contract-font presentation-contract-startup) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (wow-font-contracts wow-metafile-host wow-session-contracts wow-controlled-boundaries redir-contracts wow-dib-contracts wow-output-contracts wow-provider-contracts wow-file-contracts presentation-contract-all presentation-contract-font presentation-contract-startup) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="native-guest-output" set "SELECTED=1"
 if "%TARGET%"=="native-guest-output" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="console-api-probes" set "SELECTED=1"
