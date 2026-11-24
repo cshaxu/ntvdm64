@@ -1818,3 +1818,5 @@ post-publication targeted checks.
 - [T484 S3 DC and dialog native chains](evidence/t484-s3-dialog-native.md).
 
 - [T484 S3 current external-message package contract](evidence/t484-s3-external-current-package.md).
+
+- [T484 S3 direct native package identity](evidence/t484-s3-direct-package-identity.md).

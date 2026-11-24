@@ -272,7 +272,8 @@ try {
             $input=if($fixture -eq 'monitor-rpc-test.exe' -and $MonitorRpc){$MonitorRpc}else{Join-Path $cache $fixture};$output=Join-Path $runtimeBinary $fixture
             Copy-Item -LiteralPath $input -Destination $output -Force
             if((Get-IsolatedFileSha256 $input) -ne (Get-IsolatedFileSha256 $output)){throw 'Control fixture copy mismatch'}
-            & "$repo/tools/build/Set-PackageIdentity.ps1" -Image $output -PackageId ([guid]$packageIds[0])
+            & "$repo/build/.ninja/build-tools/ntvdm-package-id.exe" (([guid](([guid]$packageIds[0]))).ToString()) $output
+            if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
         }
         Invoke-Gate 'rpc' {
             # native-command/native-registry are in-process archive cases,

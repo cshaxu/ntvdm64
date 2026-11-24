@@ -45,7 +45,8 @@ foreach($case in $Cases) {
         foreach($name in @(@($image)+$siblings | Select-Object -Unique)) {
             Copy-Item -LiteralPath (Join-Path $PackageRoot $name) -Destination $casePackageRoot
         }
-        & "$PSScriptRoot/../../tools/build/Set-PackageIdentity.ps1" -Image (Join-Path $casePackageRoot $image) -PackageId $packageId
+        & "$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe" (([guid]($packageId)).ToString()) (Join-Path $casePackageRoot $image)
+        if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
         Copy-Item -LiteralPath (Join-Path $casePackageRoot $image) -Destination (Join-Path $casePackageRoot 'ntvdm.exe') -Force
     }
     if($case -in @('startup-rejections','native-io-error','frontend-instances')) {
@@ -66,7 +67,8 @@ foreach($case in $Cases) {
             if((Get-FileHash -LiteralPath $source).Hash -ne
                (Get-FileHash -LiteralPath $destination).Hash){throw 'Rejection fixture input identity mismatch'}
         }
-        & "$PSScriptRoot/../../tools/build/Set-PackageIdentity.ps1" -Image (Join-Path $casePackageRoot $image) -PackageId $packageId
+        & "$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe" (([guid]($packageId)).ToString()) (Join-Path $casePackageRoot $image)
+        if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
     }
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false

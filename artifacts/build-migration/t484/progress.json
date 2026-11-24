@@ -1,30 +1,39 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "49d0dc45a72589d17ff458dc580d7459c9d24de3",
+  "head": "f1d9ffb1a2ae7bc39274153b6ae42773109650bb",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-external-native.ps1",
-    " D test/observation/verify-wow-callback-image-root.ps1",
-    "?? docs/etc/evidence/t484-s3-external-current-package.md"
+    " M test/broker/verify-package-fresh-stage.ps1",
+    " M test/broker/verify-package-identity.ps1",
+    " M test/integration/verify-client-rpc-wait.ps1",
+    " M test/integration/verify-dos-identity-pair.ps1",
+    " M test/integration/verify-s7-rpc-fixtures.ps1",
+    " M test/integration/win31_runtime_matrix_test.ps1",
+    " M test/observation/isolated_package_cleanup.ps1",
+    " M tools/audit/Invoke-ProductVerification.ps1",
+    " D tools/build/Set-PackageIdentity.ps1",
+    " M tools/build/Stage-System32ProductPackage.ps1",
+    " D tools/build/Stage-T228S1GuestExecIntegrationInputs.ps1",
+    "?? docs/etc/evidence/t484-s3-direct-package-identity.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 157,
-    "unchanged": 31,
-    "removed": 167
+    "changed": 161,
+    "unchanged": 25,
+    "removed": 169
   },
   "disposition_counts": {
-    "migrated-delivered": 104,
+    "migrated-delivered": 105,
     "retained-native-declarative": 3,
-    "retired-with-delivery-evidence": 167,
+    "retired-with-delivery-evidence": 169,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 34,
-    "requires-disposition-reconciliation": 17,
+    "pending-producer-migration": 32,
+    "requires-disposition-reconciliation": 16,
     "retained-standalone-audit": 16
   },
-  "existing_interpreted_candidates_with_command_hits": 144,
+  "existing_interpreted_candidates_with_command_hits": 148,
   "files": [
     {
       "id": "B0001",
@@ -299,8 +308,8 @@
       "id": "B0015",
       "file": "test/broker/verify-package-fresh-stage.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "e5e913b9064e9f73fc03745da390edc905d9ac098b2cd7e49a8ee178123022e3",
+      "state": "changed",
+      "current_sha256": "d4c05f226020eb05f68b86b667cf08641e9f753ec88eb497b232368248cd2d5f",
       "revisions": [],
       "evidence": [],
       "completion": "migrated-delivered",
@@ -314,8 +323,8 @@
       "id": "B0016",
       "file": "test/broker/verify-package-identity.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "78aecd546db403aa96ee176ccc29f847ee05a30ff20dd9850ff184c09500ffd5",
+      "state": "changed",
+      "current_sha256": "f38e789565e21f7380cccd27c792e2a9860f8b6f5f153f22bc3af3c82084abd1",
       "revisions": [],
       "evidence": [],
       "completion": "migrated-delivered",
@@ -597,14 +606,15 @@
       "id": "B0031",
       "file": "test/integration/verify-client-rpc-wait.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "27f77c2f1ddbd5b89292861ac20d5752f19ac5fa2d3264744c758515813285d3",
+      "state": "changed",
+      "current_sha256": "70542ab501f2d79ee93070af1577834a6e60d5e49e3c3ff5025940709d9894ab",
       "revisions": [],
       "evidence": [],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Calls Set-PackageIdentity.ps1; S4 must migrate identity writer and this caller"
+        "reason": "Direct native identity writer, real reply/connect/disconnect/loss/bootstrap tests pass; no remaining private build producer",
+        "evidence": "docs/etc/evidence/t484-s3-direct-package-identity.md",
+        "status": "migrated-delivered"
       }
     },
     {
@@ -612,7 +622,7 @@
       "file": "test/integration/verify-dos-identity-pair.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "fcf2defbb0301709c74a55bab7a9abbc3cefef4d775fa096d63395d27b9ab601",
+      "current_sha256": "daa435ca383435297cbd3349da7c00c8fa40e1b9c1474098f4dc74433fc9b27b",
       "revisions": [
         "b5d6368800365cf5920cb3eb09bc705dde282393"
       ],
@@ -788,14 +798,15 @@
       "id": "B0042",
       "file": "test/integration/verify-s7-rpc-fixtures.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "c24ef7d7417425a51e31ec4557d0dcbc24c86c64eec28739841bde35ed5aacb2",
+      "state": "changed",
+      "current_sha256": "5b8516d9694095b7427c1401c9ef8bede33c3ef54cd0d50e73b43372e7695972",
       "revisions": [],
       "evidence": [],
-      "completion": "pending-producer-migration",
+      "completion": "requires-disposition-reconciliation",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Invokes Set-PackageIdentity.ps1 in staging; S4 producer obligation"
+        "reason": "P168 removes identity wrapper; syntax/explicit nonzero propagation checked; full control group runtime acceptance still pending",
+        "evidence": "docs/etc/evidence/t484-s3-direct-package-identity.md",
+        "status": "requires-disposition-reconciliation"
       }
     },
     {
@@ -1096,9 +1107,11 @@
       "state": "changed",
       "current_sha256": "4a4a5368e8f35751a4efe8652b071d075d1f25fc032140bae1434f2386330e3d",
       "revisions": [
+        "f1d9ffb1a2ae7bc39274153b6ae42773109650bb",
         "abf51648b9e86a9ac09915335363210685ae9797"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-external-current-package.md",
         "docs/etc/evidence/t484-s3-message-groups.md"
       ],
       "completion": "pending-producer-migration",
@@ -1352,7 +1365,7 @@
       "file": "test/integration/win31_runtime_matrix_test.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "40b903ddeb90866c279a2afdd6647da77b84404d84e31e664779319c1d6aee8d",
+      "current_sha256": "04c7ea61e602cd8fd7cebe00e16b0b47e89e91c901092c028a710fad237c7dbf",
       "revisions": [
         "f39e4635fa105f6deee50abb2640ab8e37dbd7e7"
       ],
@@ -1938,7 +1951,7 @@
       "file": "test/observation/isolated_package_cleanup.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "32b0b9cb16eb944cd469b490e18f6322d4fddc322c06096c3c73dd89edec4c08",
+      "current_sha256": "f571b01861d3d57570e6d1f1a948b28c94e7bbbb6c89b907a5726968e5a744cb",
       "revisions": [
         "995bbe44d7ed265740f8288575ad6182fb8157be"
       ],
@@ -3980,7 +3993,7 @@
       "file": "tools/audit/Invoke-ProductVerification.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "fad1689d554ecfc66aa2f37bcafdf074a177e8c72158f7c5f10f0559bef67156",
+      "current_sha256": "e7aa9aeb6f4d435e3a6180d1b186dbed946c8ce726558a8355505191c64ddd2c",
       "revisions": [
         "60d414d7f2e75a292241ef09caefb353d16915d8"
       ],
@@ -6117,16 +6130,20 @@
       "id": "B0337",
       "file": "tools/build/Set-PackageIdentity.ps1",
       "stage": "S4",
-      "state": "changed",
-      "current_sha256": "073b52189d03831411f9949620e305ceb836302f4ba77e52172e7486b44febf6",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [
         "b84e36c23d1d6061364d172317a324142b6010c0"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-package-identity.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "reason": "All10 current call sites directly use existing native writer with GUID conversion and nonzero failure checks; identity negatives and actual dual-package/RPC tests pass",
+        "evidence": "docs/etc/evidence/t484-s3-direct-package-identity.md",
+        "status": "retired-with-delivery-evidence"
+      }
     },
     {
       "id": "B0338",
@@ -6202,8 +6219,8 @@
       "id": "B0343",
       "file": "tools/build/Stage-System32ProductPackage.ps1",
       "stage": "S4",
-      "state": "unchanged",
-      "current_sha256": "49fd1442d2b3954440f16a1f16248c343b0d1e4ea6a80a8ee0b30178fd3dcf5c",
+      "state": "changed",
+      "current_sha256": "95fa2fef3756a1d62d526fdfe55b5a7c80dcc5ed75c53991a6ac3c6a91da7ffd",
       "revisions": [],
       "evidence": [],
       "completion": "requires-disposition-reconciliation",
@@ -6213,12 +6230,16 @@
       "id": "B0344",
       "file": "tools/build/Stage-T228S1GuestExecIntegrationInputs.ps1",
       "stage": "S4",
-      "state": "unchanged",
-      "current_sha256": "e2a42dc314553b2f7bac022d8f4fa65aed3d1db123616862a6789bce6a00209b",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "reason": "Uncalled historical T225 source-built guest fixture assembler; obsolete runner-v8 profile not applicable to immutable current guest",
+        "evidence": "docs/etc/evidence/t484-s3-direct-package-identity.md",
+        "status": "retired-with-delivery-evidence"
+      }
     },
     {
       "id": "B0345",
@@ -6379,6 +6400,12 @@
     }
   ],
   "commits": {
+    "f1d9ffb1a2ae7bc39274153b6ae42773109650bb": {
+      "subject": "T484 S3 P167 retire stale image test and fix external message package checks",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-external-current-package.md"
+      ]
+    },
     "49d0dc45a72589d17ff458dc580d7459c9d24de3": {
       "subject": "T484 S3 P166 verify native DC and dialog test chains",
       "evidence": [
@@ -7450,6 +7477,26 @@
       ]
     },
     {
+      "id": "B0015",
+      "file": "test/broker/verify-package-fresh-stage.ps1",
+      "hits": [
+        {
+          "line": 26,
+          "text": "& \"$repo/build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($identity)).ToString()) $probe"
+        }
+      ]
+    },
+    {
+      "id": "B0016",
+      "file": "test/broker/verify-package-identity.ps1",
+      "hits": [
+        {
+          "line": 24,
+          "text": "& \"$repo/build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($ids[$i])).ToString()) $paths"
+        }
+      ]
+    },
+    {
       "id": "B0018",
       "file": "test/build/test-authored-softpc-profile.py",
       "hits": [
@@ -7700,6 +7747,16 @@
       ]
     },
     {
+      "id": "B0031",
+      "file": "test/integration/verify-client-rpc-wait.ps1",
+      "hits": [
+        {
+          "line": 24,
+          "text": "& \"$repo/build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($ids[0])).ToString()) $image"
+        }
+      ]
+    },
+    {
       "id": "B0032",
       "file": "test/integration/verify-dos-identity-pair.ps1",
       "hits": [
@@ -7712,7 +7769,11 @@
           "text": "$diagnostic=Join-Path $repo 'build/.ninja/msvc-x86-release/worker/diagnostics/dos-identity'"
         },
         {
-          "line": 47,
+          "line": 20,
+          "text": "& \"$repo/build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid](([guid]$entry.PackageId))).ToString()) \"$package/system32/ntvdm.exe\""
+        },
+        {
+          "line": 48,
           "text": "$proc=Start-Process $pwsh -ArgumentList $args -WindowStyle Hidden -PassThru -RedirectStandardOutput \"$out/run.out\" -RedirectStandardError \"$out/run.err\""
         }
       ]
@@ -7818,6 +7879,20 @@
         {
           "line": 68,
           "text": "Copy-Item (Join-Path $repository 'build/.ninja/fixtures-x86/guest-probes/serial-discovery/S45VCD.COM') $probe"
+        }
+      ]
+    },
+    {
+      "id": "B0042",
+      "file": "test/integration/verify-s7-rpc-fixtures.ps1",
+      "hits": [
+        {
+          "line": 48,
+          "text": "& \"$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($packageId)).ToString()) (Join-Path $casePackageRoot $image)"
+        },
+        {
+          "line": 70,
+          "text": "& \"$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($packageId)).ToString()) (Join-Path $casePackageRoot $image)"
         }
       ]
     },
@@ -8204,7 +8279,11 @@
       "file": "test/integration/win31_runtime_matrix_test.ps1",
       "hits": [
         {
-          "line": 275,
+          "line": 170,
+          "text": "& \"$repo/build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid](([guid]::new([Convert]::FromHexString((Get-IsolatedPackageIdentity \"$stage/system32/ntsrv.exe\")))))).ToString()) $monitor"
+        },
+        {
+          "line": 276,
           "text": "$closeArgs=if($ConsoleClose){@('--close-node','1',\"$($workers[0].ProcessId)\")}else{@('--terminate',\"$($workers[0].ProcessId)\")}"
         }
       ]
@@ -8452,11 +8531,15 @@
           "text": "$reader = Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/ntvdm-package-id.exe'"
         },
         {
-          "line": 228,
+          "line": 145,
+          "text": "& \"$script:IsolatedPackageCleanupRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($identity)).ToString()) $path"
+        },
+        {
+          "line": 229,
           "text": "throw 'Refuse guest probe cleanup: Git data or link'"
         },
         {
-          "line": 252,
+          "line": 253,
           "text": "# Test-only compatibility for sealed flat baselines and build-link caches."
         }
       ]
@@ -9382,15 +9465,19 @@
           "text": "& $Python \"$repo/test/observation/verify-ntvdm-export-ordinals.py\" `"
         },
         {
-          "line": 296,
+          "line": 275,
+          "text": "& \"$repo/build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid](([guid]$packageIds[0]))).ToString()) $output"
+        },
+        {
+          "line": 297,
           "text": "# Restore the incoming environment even if Node throws or"
         },
         {
-          "line": 307,
+          "line": 308,
           "text": "& $Node \"$repo/tools/audit/Verify-ProductVersions.mjs\""
         },
         {
-          "line": 340,
+          "line": 341,
           "text": "Invoke-Gate 'dos4gw-nesticle' {& \"$repo/test/integration/verify-dos4gw-nesticle.ps1\" -RuntimeRoot $sourceRuntime -Observer $observerPath -FixtureRoot $Dos4gwFixtureRoot -PifPath $Dos4gwPif -Python $Python -ReportRoot \"$log/dos4gw-nesticle\"}"
         }
       ]
@@ -9706,16 +9793,6 @@
       ]
     },
     {
-      "id": "B0337",
-      "file": "tools/build/Set-PackageIdentity.ps1",
-      "hits": [
-        {
-          "line": 8,
-          "text": "$writer=Join-Path $PSScriptRoot '../../build/.ninja/build-tools/ntvdm-package-id.exe'"
-        }
-      ]
-    },
-    {
       "id": "B0342",
       "file": "tools/build/Stage-OriginalSoftpcRuntime.mjs",
       "hits": [
@@ -9742,6 +9819,16 @@
         {
           "line": 102,
           "text": "* opt in after a formal link. Guest and firmware bytes never use this path. */"
+        }
+      ]
+    },
+    {
+      "id": "B0343",
+      "file": "tools/build/Stage-System32ProductPackage.ps1",
+      "hits": [
+        {
+          "line": 85,
+          "text": "& \"$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($PackageId)).ToString()) $destination"
         }
       ]
     },

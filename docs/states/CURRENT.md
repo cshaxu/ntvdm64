@@ -90,6 +90,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P167 external current package](../etc/evidence/t484-s3-external-current-package.md) | Removed obsolete13-image self-test; current11-image local/x86/x64 message groups and cached full/identity checks pass. Default staging still pending;304/355,51 remain. |
 
+| [P168 direct native identity](../etc/evidence/t484-s3-direct-package-identity.md) | Removed identity wrapper/expired T228 assembler;10 call sites use native writer. Identity negatives, dual-package RPC/DOS and five RPC wait cases pass; cached full/11/22 hashes unchanged.307/355 disposed,48 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

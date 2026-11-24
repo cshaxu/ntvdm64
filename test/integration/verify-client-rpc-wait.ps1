@@ -21,7 +21,8 @@ try {
     $manifest=Get-Content -LiteralPath "$runtime/product-system32-manifest.json" -Raw | ConvertFrom-Json
     $ids=@($manifest.PackageId | Select-Object -Unique)
     if($ids.Count -ne 1){throw 'RPC wait fixture requires one staged package identity'}
-    & "$repo/tools/build/Set-PackageIdentity.ps1" -Image $image -PackageId $ids[0]
+    & "$repo/build/.ninja/build-tools/ntvdm-package-id.exe" (([guid]($ids[0])).ToString()) $image
+    if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
     $scope.Paths+=$image
     @($Fixture,$image,"$runtime\system32\ntsrv.exe")|Get-FileHash|
         Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"

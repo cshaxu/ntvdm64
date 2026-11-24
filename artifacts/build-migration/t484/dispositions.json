@@ -144,8 +144,9 @@
     "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
   },
   "test/integration/verify-client-rpc-wait.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Calls Set-PackageIdentity.ps1; S4 must migrate identity writer and this caller"
+    "reason": "Direct native identity writer, real reply/connect/disconnect/loss/bootstrap tests pass; no remaining private build producer",
+    "evidence": "docs/etc/evidence/t484-s3-direct-package-identity.md",
+    "status": "migrated-delivered"
   },
   "test/integration/ntvdm64-386/verify-win31-editors.ps1": {
     "status": "pending-producer-migration",
@@ -188,8 +189,9 @@
     "evidence": "docs/etc/evidence/t484-s3-serial-probe.md"
   },
   "test/integration/verify-s7-rpc-fixtures.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Invokes Set-PackageIdentity.ps1 in staging; S4 producer obligation"
+    "reason": "P168 removes identity wrapper; syntax/explicit nonzero propagation checked; full control group runtime acceptance still pending",
+    "evidence": "docs/etc/evidence/t484-s3-direct-package-identity.md",
+    "status": "requires-disposition-reconciliation"
   },
   "test/integration/verify-win16-ddeml-probe.ps1": {
     "status": "pending-producer-migration",
@@ -1271,5 +1273,15 @@
     "status": "migrated-delivered",
     "reason": "CMD probe/native environment producers; actual timer/cancel/no-event and CBT hook scenarios passed; external C# dependency removed",
     "evidence": "docs/etc/evidence/t484-s3-win16-environment.md"
+  },
+  "tools/build/Set-PackageIdentity.ps1": {
+    "reason": "All10 current call sites directly use existing native writer with GUID conversion and nonzero failure checks; identity negatives and actual dual-package/RPC tests pass",
+    "evidence": "docs/etc/evidence/t484-s3-direct-package-identity.md",
+    "status": "retired-with-delivery-evidence"
+  },
+  "tools/build/Stage-T228S1GuestExecIntegrationInputs.ps1": {
+    "reason": "Uncalled historical T225 source-built guest fixture assembler; obsolete runner-v8 profile not applicable to immutable current guest",
+    "evidence": "docs/etc/evidence/t484-s3-direct-package-identity.md",
+    "status": "retired-with-delivery-evidence"
   }
 }

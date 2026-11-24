@@ -17,7 +17,8 @@ if(!(Test-Path $package)){
 }
 $manifest=Get-Content "$package/product-system32-manifest.json" -Raw|ConvertFrom-Json
 $entry=$manifest|Where-Object Name -eq 'ntvdm.exe'
-& "$repo/tools/build/Set-PackageIdentity.ps1" -Image "$package/system32/ntvdm.exe" -PackageId ([guid]$entry.PackageId)
+& "$repo/build/.ninja/build-tools/ntvdm-package-id.exe" (([guid](([guid]$entry.PackageId))).ToString()) "$package/system32/ntvdm.exe"
+if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
 $entry.Sha256=(Get-FileHash "$package/system32/ntvdm.exe").Hash
 $manifest|ConvertTo-Json -Depth 5|Set-Content "$package/product-system32-manifest.json"
 $copy=& "$repo/test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1" -DriverImage "$repo/assets/release/ntvdm64.386" -InstallSource 'O:/w31' -InstallRoot $dest -OutputRoot $out

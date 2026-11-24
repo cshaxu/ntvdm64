@@ -167,7 +167,8 @@ try {
             if($WorkerCloseMonitor -or $RegistrySnapshotMonitor) {
                 $monitor=Join-Path $stage 'system32/monitor-rpc-test.exe'
                 Copy-Item -LiteralPath $(if($WorkerCloseMonitor){$WorkerCloseMonitor}else{$RegistrySnapshotMonitor}) -Destination $monitor
-                & "$repo/tools/build/Set-PackageIdentity.ps1" -Image $monitor -PackageId ([guid]::new([Convert]::FromHexString((Get-IsolatedPackageIdentity "$stage/system32/ntsrv.exe"))))
+                & "$repo/build/.ninja/build-tools/ntvdm-package-id.exe" (([guid](([guid]::new([Convert]::FromHexString((Get-IsolatedPackageIdentity "$stage/system32/ntsrv.exe")))))).ToString()) $monitor
+                if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
             }
             $pifName=if($PreparedProfile){'WIN.PIF'}elseif($case.Enhanced){'WIN386.PIF'}else{'WINSTD.PIF'}
             [ordered]@{case=$case.Name; package=$package; packageId=(Get-IsolatedPackageIdentity "$stage\system32\ntvdm.exe");

@@ -23,7 +23,8 @@ try {
         $identity=[guid]$rows[0].PackageId
         $probe=Join-Path $stage 'system32/rpc-probe.exe'
         Copy-Item -LiteralPath $RpcProbe -Destination $probe
-        & "$repo/tools/build/Set-PackageIdentity.ps1" -Image $probe -PackageId $identity
+        & "$repo/build/.ninja/build-tools/ntvdm-package-id.exe" (([guid]($identity)).ToString()) $probe
+        if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
     }
     & "$PSScriptRoot/verify-package-isolation.ps1" -PackageA $stages[0] -PackageB $stages[1] -OutputRoot (Join-Path $output 'rpc')
     & "$PSScriptRoot/verify-package-session-isolation.ps1" -PackageA $stages[0] -PackageB $stages[1] `

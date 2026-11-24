@@ -142,7 +142,8 @@ function New-PhysicalRuntimeStage([string]$PackageRoot,
                 if((Get-IsolatedFileSha256 $path) -ne $row[0].Sha256) {
                     throw "Package input differs from manifest: $name"
                 }
-                & "$script:IsolatedPackageCleanupRoot/../../tools/build/Set-PackageIdentity.ps1" -Image $path -PackageId $identity
+                & "$script:IsolatedPackageCleanupRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe" (([guid]($identity)).ToString()) $path
+                if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
                 $row[0].PackageId=$identity.ToString()
                 $row[0].Sha256=Get-IsolatedFileSha256 $path
             }

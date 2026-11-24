@@ -82,7 +82,8 @@ $manifest=foreach($name in $names){
     Copy-Item -LiteralPath $source -Destination $destination -Force
     $sourceHash=Get-StageFileSha256 $source
     if((Get-StageFileSha256 $destination) -ne $sourceHash){throw 'Staging copy hash mismatch'}
-    & "$PSScriptRoot/Set-PackageIdentity.ps1" -Image $destination -PackageId $PackageId
+    & "$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe" (([guid]($PackageId)).ToString()) $destination
+    if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
     $hash=Get-StageFileSha256 $destination
     # Exact redundant product files only, in the already checked fresh tree.
     $flat=Join-Path $output $name

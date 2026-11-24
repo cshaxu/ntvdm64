@@ -21,7 +21,8 @@ for($i=0;$i -lt 2;$i++) {
         Copy-Item -LiteralPath $source -Destination $path
         $paths+=$path
     }
-    & "$repo/tools/build/Set-PackageIdentity.ps1" -Image $paths -PackageId $ids[$i]
+    & "$repo/build/.ninja/build-tools/ntvdm-package-id.exe" (([guid]($ids[$i])).ToString()) $paths
+    if($LASTEXITCODE){throw "Native package identity write failed ($LASTEXITCODE)"}
     $text=& (Join-Path $dir 'identity-test.exe') accept
     if($LASTEXITCODE){throw "Package $i rejected: $text"}
     $results+=($text -join '')
