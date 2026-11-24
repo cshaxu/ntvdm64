@@ -44,7 +44,7 @@ release bodies/entry prefixes are compared with both pinned source families.
 
 ## Evidence and precise test boundaries
 
-`verify-wow-spool-failure.ps1` compiles five exact source bodies with isolated
+`verify-wow-provider-contracts.ps1` compiles five exact source bodies with isolated
 native printer and Win16 local-carrier providers. Baseline: 82 checks, eight
 failures. Current: 89 checks, zero failures. It covers normal open/close,
 no-profile and failed open, failed StartDoc, failed allocation/lock/mapping,
@@ -52,7 +52,7 @@ returned error preservation and normal/failed close consumption. These are
 forced boundary failures, not an observed hardware/printer incident or proof
 that guest local-memory failure was induced in production.
 
-`verify-wow-spool-loader-failure.ps1` compiles exact entry prefixes through the
+`verify-wow-provider-contracts.ps1` compiles exact entry prefixes through the
 module-load decision for four functions. Its appended sentinel is unreachable
 in the exercised failed-load paths. Baseline: 72 checks, 15 failures. Current:
 72 checks, zero failures. String allocation successes and failures verify that

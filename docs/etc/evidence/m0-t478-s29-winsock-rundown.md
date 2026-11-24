@@ -13,7 +13,7 @@ errors (including WSAEINPROGRESS) do not establish this. Source:
 https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsacancelasyncrequest
 
 The exact task-rundown body is extracted and compiled by
-verify-wow-winsock-rundown.ps1. A controlled provider accepts or rejects cancel;
+verify-wow-provider-contracts.ps1. A controlled provider accepts or rejects cancel;
 allocations are quarantined so premature release is recorded without inducing
 an actual use-after-free. Baseline has ten checks and two failures when cancel
 is rejected with WSAEINPROGRESS and provider ownership remains. Other-task
@@ -63,7 +63,7 @@ bounded ownership limitation, not a new timeout/free or retry mechanism.
 
 ## Focused evidence
 
-`test/integration/verify-wow-winsock-rundown.ps1` extracts the exact current
+`test/integration/verify-wow-provider-contracts.ps1` extracts the exact current
 context declaration and two changed bodies. `focused2/run.txt` reports
 323 checks, zero failures: six cancellation results with and without reentrant
 completion; sibling completion during cancellation; other-task preservation;

@@ -1,25 +1,21 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "398b7a528655de77f001933a5d560f17dfdd2c89",
+  "head": "e3679a91f94be9921baca0aeb4fdff7d183661de",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/m0-t478-s22-font-output.md",
-    " M docs/etc/evidence/m0-t478-s23-palette-output.md",
-    " M docs/etc/evidence/m0-t478-s24-embedding-provider.md",
-    " M docs/etc/evidence/m0-t478-s25-fax-failure.md",
+    " M docs/etc/evidence/m0-t478-s26-spool-failure.md",
+    " M docs/etc/evidence/m0-t478-s29-winsock-rundown.md",
     " M docs/states/CURRENT.md",
-    " D test/integration/verify-wow-embedding-root.ps1",
-    " D test/integration/verify-wow-fax-failure.ps1",
-    " D test/integration/verify-wow-font-output.ps1",
-    " D test/integration/verify-wow-palette-output.ps1",
-    " D test/observation/extract-wow-palette-thunk.py",
+    " D test/integration/verify-wow-spool-failure.ps1",
+    " D test/integration/verify-wow-spool-loader-failure.ps1",
+    " D test/integration/verify-wow-winsock-rundown.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/SourceProjection.cmake",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-wow-output-contracts.md",
-    "?? test/integration/verify-wow-output-contracts.ps1",
-    "?? tools/build/fixtures/wow-output-contracts.cmake"
+    "?? docs/etc/evidence/t484-s3-wow-provider-contracts.md",
+    "?? test/integration/verify-wow-provider-contracts.ps1",
+    "?? tools/build/fixtures/wow-provider-contracts.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6498,6 +6494,16 @@
     }
   ],
   "commits": {
+    "e3679a91f94be9921baca0aeb4fdff7d183661de": {
+      "subject": "M0 T484 S3 P203: consolidate WOW output contract producers",
+      "evidence": [
+        "docs/etc/evidence/m0-t478-s22-font-output.md",
+        "docs/etc/evidence/m0-t478-s23-palette-output.md",
+        "docs/etc/evidence/m0-t478-s24-embedding-provider.md",
+        "docs/etc/evidence/m0-t478-s25-fax-failure.md",
+        "docs/etc/evidence/t484-s3-wow-output-contracts.md"
+      ]
+    },
     "398b7a528655de77f001933a5d560f17dfdd2c89": {
       "subject": "M0 T484 S3 P202: consolidate native DIB resource contracts",
       "evidence": [
