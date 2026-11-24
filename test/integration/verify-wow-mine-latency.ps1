@@ -78,22 +78,8 @@ try{
  Copy-Item "$cache/wow-native-sample.exe" "$root/sample.exe"
  Get-FileHash "$root/latency.exe","$root/sample.exe",$environmentExe,"$PSScriptRoot/../observation/logon_environment.c","$repo/tools/build/fixtures/wow-latency.cmake","$repo/tools/build/fixtures/graph-probe.cmake"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"
  # Capture the current-token block in memory only; never log environment values.
- $environmentInfo=[Diagnostics.ProcessStartInfo]::new($environmentExe)
- $environmentInfo.UseShellExecute=$false;$environmentInfo.CreateNoWindow=$true
- $environmentInfo.RedirectStandardOutput=$true
- $environmentInfo.StandardOutputEncoding=[Text.Encoding]::Unicode
- $environmentProcess=[Diagnostics.Process]::Start($environmentInfo)
- try {
-  $null=$environmentProcess.Handle
-  @{pid=$environmentProcess.Id;start=$environmentProcess.StartTime.ToUniversalTime().ToString('o');image=$environmentInfo.FileName}|ConvertTo-Json|Set-Content "$root/environment-process.json"
-  $read=$environmentProcess.StandardOutput.ReadToEndAsync()
-  if(!$environmentProcess.WaitForExit(10000)){$environmentProcess.Kill();$environmentProcess.WaitForExit();throw 'Environment reader deadline'}
-  $environmentProcess.WaitForExit()
-  if($environmentProcess.ExitCode){throw 'Current-token environment query failed'}
-  $block=$read.GetAwaiter().GetResult()
-  if(!$block.EndsWith([string][char]0+[char]0)){throw 'Invalid environment block terminator'}
-  $entries=@($block.Split([char]0)|Where-Object {$_.Length})
- } finally {$environmentProcess.Dispose()}
+ . "$PSScriptRoot/../observation/logon-environment.ps1"
+ $entries=Read-TestLogonEnvironment $environmentExe "$root/environment-process.json"
  $entries|ForEach-Object {$at=$_.IndexOf('=',1);[pscustomobject]@{name=$_.Substring(0,$at);characters=$_.Length+1}}|Export-Csv -NoTypeInformation "$root/environment-shape.csv"
  foreach($case in @('normal','normal-sampled','private')){
   $out="$root/$case";$null=New-Item -ItemType Directory $out

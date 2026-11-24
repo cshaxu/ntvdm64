@@ -76,6 +76,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P160 cache consolidation](../etc/evidence/t484-s3-cache-consolidation.md) | Duplicate full-build runner retired; two CMD passes,11 PE architectures, intermediate identity and11/22 hashes pass.290/355 disposed,65 remain. |
 
+| [P161 native environment reader](../etc/evidence/t484-s3-logon-reader.md) | Three CPU guest callers share native environment query; sign/transfer/ALU positive and negative cases pass.293/355 disposed,62 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

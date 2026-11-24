@@ -126,21 +126,6 @@
     "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
     "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
   },
-  "test/integration/verify-ccpu-alu-guest.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
-    "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
-  },
-  "test/integration/verify-ccpu-sign-flags-guest.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
-    "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
-  },
-  "test/integration/verify-ccpu-transfer-guest.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
-    "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
-  },
   "test/integration/verify-dos-identity-pair.ps1": {
     "status": "pending-producer-migration",
     "reason": "P81 migrates worker and three guest producers to CMD/native targets, repairs moved fixture/cleanup paths. Historical runtime package/observer, manifest stamping and staging still require S4; no new guest run claimed.",
@@ -1271,5 +1256,20 @@
     "status": "retired-with-delivery-evidence",
     "reason": "Duplicate private build orchestration removed; useful PE/intermediate assertions consolidated into passing current 11-image two-pass CMD stability gate",
     "evidence": "docs/etc/evidence/t484-s3-cache-consolidation.md"
+  },
+  "test/integration/verify-ccpu-alu-guest.ps1": {
+    "status": "migrated-delivered",
+    "reason": "CMD guest/PIF/native environment producers and shared reader; actual CPU40 positive and negative oracle runs pass, no external C# helper",
+    "evidence": "docs/etc/evidence/t484-s3-logon-reader.md"
+  },
+  "test/integration/verify-ccpu-sign-flags-guest.ps1": {
+    "status": "migrated-delivered",
+    "reason": "CMD guest/PIF/native environment producers and shared reader; actual CPU40 positive and negative oracle runs pass, no external C# helper",
+    "evidence": "docs/etc/evidence/t484-s3-logon-reader.md"
+  },
+  "test/integration/verify-ccpu-transfer-guest.ps1": {
+    "status": "migrated-delivered",
+    "reason": "CMD guest/PIF/native environment producers and shared reader; actual CPU40 positive and negative oracle runs pass, no external C# helper",
+    "evidence": "docs/etc/evidence/t484-s3-logon-reader.md"
   }
 }

@@ -1,7 +1,6 @@
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$Observer,
- [Parameter(Mandatory)][string]$LogonHelper,
  [Parameter(Mandatory)][string]$BuildRoot,
  [Parameter(Mandatory)][string]$Oracle,
  [switch]$NegativeOracle)
@@ -50,7 +49,7 @@ try{
  $native=Join-Path $repo 'build/.ninja/fixtures-x86'
  Copy-Item "$native/guest-probes/cpu-integration/$variant.COM" "$root/EMSPROBE.COM"
  $pifBuilder=Join-Path $native 'ems_pif_builder.exe'
- Get-FileHash (Resolve-Path $Oracle).Path,$PSCommandPath,"$PSScriptRoot/../observation/ccpu_alu_probe.asm","$root/EMSPROBE.COM",$Observer,$LogonHelper,$pifBuilder|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Get-FileHash (Resolve-Path $Oracle).Path,$PSCommandPath,"$PSScriptRoot/../observation/ccpu_alu_probe.asm","$root/EMSPROBE.COM",$Observer,$pifBuilder|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $stage=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path;$scope=New-IsolatedPackageScope $stage
  $tests=Join-Path $stage tests;$null=New-Item -ItemType Directory $tests -Force
  # Reuse the existing test PIF producer: original no-PIF defaults deliberately
@@ -62,10 +61,11 @@ try{
  OwnedTool pif-profile $pifBuilder ('"'+$tests+'" --close-on-exit') 30
  Get-FileHash "$PSScriptRoot/../observation/ems_pif_builder.c",$pifBuilder,"$tests/E30.COM","$tests/E30.PIF","$tests/E30.NT","$tests/E30AUTO.NT"|Export-Csv -NoTypeInformation "$root/profile-inputs.csv"
  Get-ChildItem "$stage/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','COMMAND.COM')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
- Add-Type -Path (Resolve-Path $LogonHelper).Path
- $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
- try{$entries=[WowMessageLogonEnvironment]::Read($logonIdentity.Token)}
- finally{$logonIdentity.Dispose()}
+ OwnedTool environment-build $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x64 logon-environment"') 300
+ . "$PSScriptRoot/../observation/logon-environment.ps1"
+ $environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'
+ Get-FileHash $environmentExe,"$PSScriptRoot/../observation/logon-environment.ps1"|Export-Csv -NoTypeInformation -Append "$root/inputs.csv"
+ $entries=Read-TestLogonEnvironment $environmentExe "$root/environment-process.json"
  $info=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
  $info.EnvironmentVariables.Clear()
  foreach($entry in $entries){$at=$entry.IndexOf('=',1);$info.EnvironmentVariables[$entry.Substring(0,$at)]=$entry.Substring($at+1)}

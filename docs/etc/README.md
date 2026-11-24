@@ -1804,3 +1804,5 @@ post-publication targeted checks.
 - [T484 S3 obsolete idle runner retirement](evidence/t484-s3-idle-retirement.md).
 
 - [T484 S3 cache audit consolidation](evidence/t484-s3-cache-consolidation.md).
+
+- [T484 S3 shared native environment reader](evidence/t484-s3-logon-reader.md).

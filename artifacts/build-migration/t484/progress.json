@@ -1,14 +1,19 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "3d40a6f762a69753fce28dca4d0dbca916830424",
+  "head": "2321affcde2de0800b5030d9036d07fd8d332a48",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    "D  test/build/Test-FullComponentBuild.ps1",
-    " M tools/audit/verify-generated-input-stability.ps1",
-    "?? docs/etc/evidence/t484-s3-cache-consolidation.md"
+    " M test/integration/verify-ccpu-alu-guest.ps1",
+    " M test/integration/verify-ccpu-sign-flags-guest.ps1",
+    " M test/integration/verify-ccpu-transfer-guest.ps1",
+    " M test/integration/verify-wow-mine-latency.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s3-logon-reader.md",
+    "?? test/observation/logon-environment.ps1"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -17,11 +22,11 @@
     "removed": 167
   },
   "disposition_counts": {
-    "migrated-delivered": 90,
+    "migrated-delivered": 93,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 167,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 48,
+    "pending-producer-migration": 45,
     "requires-disposition-reconciliation": 17,
     "retained-standalone-audit": 16
   },
@@ -388,8 +393,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "2321affcde2de0800b5030d9036d07fd8d332a48"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-cache-consolidation.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -532,18 +541,18 @@
       "file": "test/integration/verify-ccpu-alu-guest.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "4b878874476d0e8d1bb263829372bbb3a17a94827603710b9dd1f0c07ba97da0",
+      "current_sha256": "9ecc542c8c59a6694665b600d2cedeb52b97014e6be0a656b40bfb37be81807f",
       "revisions": [
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-cpu-guest.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
-        "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
+        "status": "migrated-delivered",
+        "reason": "CMD guest/PIF/native environment producers and shared reader; actual CPU40 positive and negative oracle runs pass, no external C# helper",
+        "evidence": "docs/etc/evidence/t484-s3-logon-reader.md"
       }
     },
     {
@@ -551,18 +560,18 @@
       "file": "test/integration/verify-ccpu-sign-flags-guest.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "c8de4970168c98736efcc95aaab513454910acfbc00d223242e95eb377155287",
+      "current_sha256": "68d965631aa48d55d3e592ac92b4479d04248e38df01b6d0a1ce6df56ca696fd",
       "revisions": [
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-cpu-guest.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
-        "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
+        "status": "migrated-delivered",
+        "reason": "CMD guest/PIF/native environment producers and shared reader; actual CPU40 positive and negative oracle runs pass, no external C# helper",
+        "evidence": "docs/etc/evidence/t484-s3-logon-reader.md"
       }
     },
     {
@@ -570,18 +579,18 @@
       "file": "test/integration/verify-ccpu-transfer-guest.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "f5ea4a9780f4577854c0ff3a20bc4148b6a1c27d179270844097f31dde83db57",
+      "current_sha256": "d78a3a8cdf6dc176a9c06e5142f945fb37398779c1c9a1d38cd221cf825200ef",
       "revisions": [
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-cpu-guest.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "P36 moves NASM and PIF production to cpu-guest-probes CMD/native target. Shared LogonHelper may still compile C#; physical package staging still needs S4 reconciliation. Not a complete interpreter-free chain.",
-        "evidence": "docs/etc/evidence/t484-s3-cpu-guest.md"
+        "status": "migrated-delivered",
+        "reason": "CMD guest/PIF/native environment producers and shared reader; actual CPU40 positive and negative oracle runs pass, no external C# helper",
+        "evidence": "docs/etc/evidence/t484-s3-logon-reader.md"
       }
     },
     {
@@ -1175,7 +1184,7 @@
       "file": "test/integration/verify-wow-mine-latency.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "16f02131db9ed023205e7138e8cd0838d9e9d0d79d94dddeddd119db453d63a5",
+      "current_sha256": "b632de1a98af1fc6ee71b0df8e07be96d9617080efc83c399333f06363d85797",
       "revisions": [
         "09fa58c230bf56721d4f9fe19367a3e893cf0ef2"
       ],
@@ -4265,11 +4274,13 @@
       "state": "changed",
       "current_sha256": "20f6ddaedfb48bb5dc59828634dc4305356cb5eb8b6156f39a41e6ba1a3ecbf6",
       "revisions": [
+        "2321affcde2de0800b5030d9036d07fd8d332a48",
         "753007863b1c37d9a48d5b2a0b589df0b1b982b3",
         "ce4fc0f9c828f549619f8d9f2e64f5494104888a"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s2-worker-cmake.md",
+        "docs/etc/evidence/t484-s3-cache-consolidation.md",
         "docs/etc/evidence/t484-s3-native-cache-audits.md"
       ],
       "completion": "migrated-delivered",
@@ -6356,6 +6367,12 @@
     }
   ],
   "commits": {
+    "2321affcde2de0800b5030d9036d07fd8d332a48": {
+      "subject": "T484 S3 P160 consolidate cached component build verification",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-cache-consolidation.md"
+      ]
+    },
     "3d40a6f762a69753fce28dca4d0dbca916830424": {
       "subject": "T484 S3 P159 retire obsolete broker idle build and fixture",
       "evidence": [
@@ -7597,8 +7614,12 @@
       "file": "test/integration/verify-ccpu-alu-guest.ps1",
       "hits": [
         {
-          "line": 50,
+          "line": 49,
           "text": "$native=Join-Path $repo 'build/.ninja/fixtures-x86'"
+        },
+        {
+          "line": 66,
+          "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]
     },
@@ -7607,8 +7628,12 @@
       "file": "test/integration/verify-ccpu-sign-flags-guest.ps1",
       "hits": [
         {
-          "line": 34,
+          "line": 33,
           "text": "$native=Join-Path $repo 'build/.ninja/fixtures-x86'"
+        },
+        {
+          "line": 49,
+          "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]
     },
@@ -7617,8 +7642,12 @@
       "file": "test/integration/verify-ccpu-transfer-guest.ps1",
       "hits": [
         {
-          "line": 31,
+          "line": 30,
           "text": "$native=Join-Path $repo 'build/.ninja/fixtures-x86'"
+        },
+        {
+          "line": 46,
+          "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]
     },
