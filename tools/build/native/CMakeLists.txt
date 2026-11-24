@@ -25,6 +25,7 @@ get_filename_component(NTVDM_STAGE_REPO "${CMAKE_CURRENT_LIST_DIR}/../../.." ABS
 file(TO_NATIVE_PATH "${NTVDM_STAGE_REPO}" NTVDM_STAGE_REPO)
 configure_file(stage-system32.cmd.in stage-system32.cmd @ONLY NEWLINE_STYLE CRLF)
 configure_file(refresh-package.cmd.in refresh-package.cmd @ONLY NEWLINE_STYLE CRLF)
+configure_file(stage-runtime.cmd.in stage-runtime.cmd @ONLY NEWLINE_STYLE CRLF)
 # Match the published UTF-8 text composition, excluding input BOMs.
 file(READ "${NTVDM_STAGE_REPO}/src/lib-win32/process-hook/LICENSE.win16style" hook_license)
 file(READ "${NTVDM_STAGE_REPO}/src/lib-win32/process-hook/minhook/LICENSE.txt" minhook_license)

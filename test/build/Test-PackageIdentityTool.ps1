@@ -105,4 +105,55 @@ if(!$LASTEXITCODE){throw 'Refresh accepted bad hash'}
 foreach($row in $records){if((Get-FileHash "$package/$($row.RelativePath)").Hash -ne $row.Sha256){throw 'Preflight partially stamped package'}}
 if(!(Test-Path "$package/product-system32-manifest.json")){throw 'Preflight removed source manifest'}
 'PASS actual shared copy/refresh provider, resource identities, source preservation and all-input preflight'
+Copy-Item $manifest "$package/product-system32-manifest.json" -Force
+foreach($name in @('builds','logs','logs2','empty')){New-Item -ItemType Directory "$package/$name"|Out-Null}
+[IO.File]::WriteAllText("$package/hidden.txt",'hidden input')
+(Get-Item "$package/hidden.txt").Attributes=[IO.FileAttributes]::Hidden
+$stage=$null
+try{
+ $stage=New-PhysicalRuntimeStage $package
+ foreach($name in @('builds','logs','logs2')){if(Test-Path "$stage/$name"){throw 'Historical logs copied'}}
+ if(!(Test-Path "$stage/empty") -or [IO.File]::ReadAllText("$stage/hidden.txt") -ne 'hidden input'){throw 'Empty/hidden input lost'}
+ if($stage -notmatch '^O:\\tmp\\n[0-9a-f]{3}$'){throw 'Physical path exceeds legacy budget'}
+ $marker=Get-Content "$stage/.ntvdm64-test-stage.json" -Raw|ConvertFrom-Json
+ if($marker.source -ne [IO.Path]::GetFullPath($package) -or $marker.schema -ne 1 -or @($marker.binaries).Count -ne 5){throw 'Ownership marker mismatch'}
+ $null=[DateTimeOffset]::Parse($marker.createdUtc)
+}finally{if($stage){Remove-PhysicalRuntimeStage $stage}}
+$stage=$null
+try{
+ $stage=New-PhysicalRuntimeStage $package -RuntimeImages @('ntsrv.exe') -TopLevelNames @('system32','system32','product-system32-manifest.json')
+ if(Test-Path "$stage/hidden.txt"){throw 'Unselected input copied'}
+ $marker=Get-Content "$stage/.ntvdm64-test-stage.json" -Raw|ConvertFrom-Json
+ if(@($marker.binaries).Count -ne 1 -or $marker.binaries[0].name -ne 'ntsrv.exe'){throw 'Selected ownership lost'}
+}finally{if($stage){Remove-PhysicalRuntimeStage $stage}}
+foreach($name in @('..','../system32','logs','*','absent')){
+ $rejected=$false
+ try{$unexpected=New-PhysicalRuntimeStage $package -TopLevelNames @($name)}catch{$rejected=$true}
+ if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw "Invalid top-level accepted: $name"}
+}
+$flat="$out/flat";New-Item -ItemType Directory $flat|Out-Null
+foreach($row in $records){Copy-Item "$package/system32/$($row.Name)" $flat}
+Copy-Item $manifest "$flat/product-system32-manifest.json"
+$stage=$null
+try{
+ $stage=New-PhysicalRuntimeStage $flat -FreshPackageIdentity
+ if(Test-Path "$stage/system32"){throw 'Flat layout changed'}
+ $marker=Get-Content "$stage/.ntvdm64-test-stage.json" -Raw|ConvertFrom-Json
+ if(@($marker.binaries).Count -ne 5){throw 'Flat ownership lost'}
+}finally{if($stage){Remove-PhysicalRuntimeStage $stage}}
+Copy-Item "$package/system32/run16.exe" "$package/run16.exe"
+$rejected=$false
+try{$unexpected=New-PhysicalRuntimeStage $package}catch{$rejected=$true}
+if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw 'Mixed layout accepted'}
+Remove-Item -LiteralPath "$package/run16.exe"
+$unicode="$out/测试 source"
+New-Item -ItemType Directory $unicode|Out-Null
+Copy-Item "$package/system32/run16.exe" "$unicode/run16.exe"
+$stage=$null
+try{
+ $stage=New-PhysicalRuntimeStage $unicode -RuntimeImages @('run16.exe')
+ $marker=[IO.File]::ReadAllText("$stage/.ntvdm64-test-stage.json")|ConvertFrom-Json
+ if($marker.source -cne [IO.Path]::GetFullPath($unicode)){throw 'UTF8 marker source changed'}
+}finally{if($stage){Remove-PhysicalRuntimeStage $stage}}
+'PASS selected/hidden/empty copying, legacy flat refresh, exclusions, mixed rejection and UTF8 ownership'
 $global:LASTEXITCODE=0

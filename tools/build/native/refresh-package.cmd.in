@@ -22,6 +22,11 @@ for /f "delims=0123456789abcdefABCDEF" %%I in ("%leaf:~1%") do exit /b 2
 :owned
 set "identity=%repo%\build\.ninja\build-tools\ntvdm-package-id.exe"
 set "hash=%repo%\assets\release\HASH.EXE"
+set "binary=%package%"
+if not exist "%package%\system32\run16.exe" goto layout
+for %%I in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe WOW32.DLL VDMREDIR.DLL) do if exist "%package%\%%I" exit /b 2
+set "binary=%package%\system32"
+:layout
 set "manifest=%package%\product-system32-manifest.json"
 set "rows=%package%\package-identity.rows"
 set "pending=%package%\package-identity.pending"
@@ -55,14 +60,14 @@ if errorlevel 1 goto fail
 del /q "%rows%" "%package%\package-identity.hash"
 exit /b 0
 :check
-call :digest "%package%\system32\%~1"
+call :digest "%binary%\%~1"
 if errorlevel 1 exit /b 1
 if /i not "%value%"=="%~2" exit /b 1
 exit /b 0
 :stamp
-"%identity%" "%uuid%" "%package%\system32\%~1"
+"%identity%" "%uuid%" "%binary%\%~1"
 if errorlevel 1 exit /b 1
-call :digest "%package%\system32\%~1"
+call :digest "%binary%\%~1"
 if errorlevel 1 exit /b 1
 >>"%pending%" echo %comma%{"Name":"%~1","RelativePath":"system32\\%~1","Sha256":"%value%","Machine":%~2,"PackageId":"%uuid%","InputSha256":"%~3"}
 if errorlevel 1 exit /b 1

@@ -1,6 +1,6 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "86b660f461e04fe625dfe81499f971474a8fd873",
+  "head": "629e0bdf4162b212fce97a7dd6f6092f3604c60d",
   "worktree_status": [
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
@@ -8,9 +8,9 @@
     " M test/observation/isolated_package_cleanup.ps1",
     " M tools/build/native/CMakeLists.txt",
     " M tools/build/native/package-id.c",
-    "?? docs/etc/evidence/t484-s4-stage-identity-refresh.md",
-    "?? tools/build/native/package-manifest.c",
-    "?? tools/build/native/refresh-package.cmd.in"
+    " M tools/build/native/refresh-package.cmd.in",
+    "?? docs/etc/evidence/t484-s4-physical-stage.md",
+    "?? tools/build/native/stage-runtime.cmd.in"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -2025,14 +2025,16 @@
       "file": "test/observation/isolated_package_cleanup.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "9254354cdd67468cca254783f27400b4aba8ce7f97ffcfa893f8a71c3b36ceea",
+      "current_sha256": "13a8e903abf19d2c4b178240446e59f8a6024a9dd8873ef535fa5cd08e2b5363",
       "revisions": [
+        "629e0bdf4162b212fce97a7dd6f6092f3604c60d",
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "995bbe44d7ed265740f8288575ad6182fb8157be"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-direct-package-identity.md",
-        "docs/etc/evidence/t484-s3-identity-reader.md"
+        "docs/etc/evidence/t484-s3-identity-reader.md",
+        "docs/etc/evidence/t484-s4-stage-identity-refresh.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -6583,6 +6585,12 @@
     }
   ],
   "commits": {
+    "629e0bdf4162b212fce97a7dd6f6092f3604c60d": {
+      "subject": "M0 T484 S4 P5: refresh isolated package identity through CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-stage-identity-refresh.md"
+      ]
+    },
     "86b660f461e04fe625dfe81499f971474a8fd873": {
       "subject": "M0 T484 S4 P4: unify authored addon publication in CMD",
       "evidence": [
@@ -9031,15 +9039,15 @@
           "text": "$reader = Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/ntvdm-package-id.exe'"
         },
         {
-          "line": 124,
-          "text": "$refresh=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/refresh-package.cmd'"
+          "line": 59,
+          "text": "$runner=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/stage-runtime.cmd'"
         },
         {
-          "line": 205,
+          "line": 126,
           "text": "throw 'Refuse guest probe cleanup: Git data or link'"
         },
         {
-          "line": 229,
+          "line": 150,
           "text": "# Test-only compatibility for sealed flat baselines and build-link caches."
         }
       ]

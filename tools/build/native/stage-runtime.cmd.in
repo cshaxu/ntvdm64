@@ -1,0 +1,136 @@
+@echo off
+setlocal EnableExtensions DisableDelayedExpansion
+set "repo=@NTVDM_STAGE_REPO@"
+set "source="
+set "images="
+set "names="
+set "fresh="
+set "owned="
+set "stage="
+set "identity=%repo%\build\.ninja\build-tools\ntvdm-package-id.exe"
+set "hash=%repo%\assets\release\HASH.EXE"
+:arguments
+if "%~1"=="" goto validate
+if /i "%~1"=="-FreshPackageIdentity" (
+  set "fresh=1"
+  shift
+  goto arguments
+)
+if "%~2"=="" exit /b 2
+if /i "%~1"=="-PackageRoot" (
+  set "source=%~2"
+  goto next
+)
+if /i "%~1"=="-RuntimeImage" (
+  set "valid="
+  for %%I in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe) do if /i "%%I"=="%~2" set "valid=1"
+  if not defined valid exit /b 2
+  set images=%images% %~2
+  goto next
+)
+if /i not "%~1"=="-Include" exit /b 2
+set "item=%~2"
+call :leaf
+if errorlevel 1 exit /b 2
+set names=%names% "%~2"
+:next
+shift
+shift
+goto arguments
+:validate
+if not defined source exit /b 2
+for %%I in ("%source%") do set "source=%%~fI"
+if not exist "%source%\" exit /b 2
+set "walk=%source%"
+:within
+for %%I in ("%walk%\..") do set "parent=%%~fI"
+if /i "%parent%"=="%repo%\build" goto preflight
+if /i "%parent%"=="%walk%" exit /b 2
+set "walk=%parent%"
+goto within
+:preflight
+if not defined images set "images=run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe"
+for %%I in (%names%) do if not exist "%source%\%%~I" exit /b 2
+if not exist "O:\tmp\" mkdir "O:\tmp" >nul 2>&1
+if not exist "O:\tmp\" exit /b 1
+set /a attempts=0 >nul
+:allocate
+set /a attempts+=1 >nul
+if %attempts% GTR 8 goto fail
+set "uuid="
+for /f "delims=" %%I in ('"%identity%" --new') do set "uuid=%%I"
+if not defined uuid goto fail
+set "stage=O:\tmp\n%uuid:~0,3%"
+rem Successful creation, not an existence observation, establishes ownership.
+mkdir "%stage%" >nul 2>&1
+if errorlevel 1 goto allocate
+set "owned=1"
+if defined names goto selected
+for /f "eol=| delims=" %%I in ('dir /b /a "%source%"') do (
+  set "item=%%I"
+  call :copy
+  if errorlevel 1 goto fail
+)
+goto copied
+:selected
+for %%I in (%names%) do if not exist "%stage%\%%~I" (
+  set "item=%%~I"
+  call :copy
+  if errorlevel 1 goto fail
+)
+:copied
+set "binary=%stage%"
+if not exist "%stage%\system32\run16.exe" goto identity
+for %%I in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe WOW32.DLL VDMREDIR.DLL) do if exist "%stage%\%%I" goto fail
+set "binary=%stage%\system32"
+:identity
+if defined fresh call "%repo%\build\.ninja\build-tools\refresh-package.cmd" "%stage%"
+if errorlevel 1 goto fail
+"%identity%" --stage-header "%source%" >"%stage%\.ntvdm64-test-stage.json.new"
+if errorlevel 1 goto fail
+set "comma="
+for %%I in (%images%) do (
+  call :binary "%%I"
+  if errorlevel 1 goto fail
+)
+>>"%stage%\.ntvdm64-test-stage.json.new" echo ]}
+if errorlevel 1 goto fail
+move /y "%stage%\.ntvdm64-test-stage.json.new" "%stage%\.ntvdm64-test-stage.json" >nul
+if errorlevel 1 goto fail
+del /q "%stage%\stage-hash.tmp"
+echo %stage%
+exit /b 0
+:leaf
+set "literal="
+for /f "eol=| delims=*?" %%I in ("%item%") do if "%%I"=="%item%" set "literal=1"
+if not defined literal exit /b 1
+if "%item%"=="." exit /b 1
+if "%item%"==".." exit /b 1
+for %%I in ("%item%") do if not "%%~nxI"=="%item%" exit /b 1
+for %%I in (builds logs logs2) do if /i "%item%"=="%%I" exit /b 1
+exit /b 0
+:copy
+for %%I in (builds logs logs2) do if /i "%item%"=="%%I" exit /b 0
+if exist "%source%\%item%\" (
+  xcopy "%source%\%item%" "%stage%\%item%\" /E /I /H /K /Y >nul
+) else (
+  xcopy "%source%\%item%" "%stage%\" /H /K /Y >nul
+)
+exit /b %errorlevel%
+:binary
+"%hash%" "%binary%\%~1" >"%stage%\stage-hash.tmp"
+if errorlevel 1 exit /b 1
+set "digest="
+set /p "digest=" <"%stage%\stage-hash.tmp"
+if not defined digest exit /b 1
+>>"%stage%\.ntvdm64-test-stage.json.new" echo %comma%{"name":"%~1","sha256":"%digest%"}
+if errorlevel 1 exit /b 1
+set "comma=,"
+exit /b 0
+:fail
+echo Physical runtime staging failed. 1>&2
+if not defined owned exit /b 1
+rem Only this successfully-created direct child can be removed on failure.
+for %%I in ("%stage%\..") do if /i not "%%~fI"=="O:\tmp" exit /b 1
+rmdir /s /q "%stage%"
+exit /b 1

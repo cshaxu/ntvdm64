@@ -74,6 +74,30 @@ done:
     CloseHandle(file);
     return error;
 }
+/* Only the fixed ownership-marker header; callers append validated binaries. */
+static DWORD stage_header(const wchar_t *source)
+{
+    char path[32768];
+    SYSTEMTIME now;
+    int count, i;
+    count = WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, source, -1,
+        path, sizeof(path), NULL, NULL);
+    if (!count) return GetLastError();
+    fputs("{\"schema\":1,\"source\":\"", stdout);
+    for (i = 0; i < count - 1; ++i) {
+        unsigned char c = (unsigned char)path[i];
+        if (c < 32) printf("\\u%04x", (unsigned int)c);
+        else {
+            if (c == '\\' || c == '"') putchar('\\');
+            putchar(c);
+        }
+    }
+    GetSystemTime(&now);
+    printf("\",\"createdUtc\":\"%04u-%02u-%02uT%02u:%02u:%02u.%03uZ\",\"binaries\":[\n",
+        now.wYear, now.wMonth, now.wDay, now.wHour, now.wMinute, now.wSecond,
+        now.wMilliseconds);
+    return ferror(stdout) ? ERROR_WRITE_FAULT : ERROR_SUCCESS;
+}
 DWORD package_manifest_rows(const wchar_t *path);
 
 int wmain(int argc, wchar_t **argv)
@@ -82,6 +106,7 @@ int wmain(int argc, wchar_t **argv)
     static const GUID empty = {0};
     wchar_t text[39];
     int index;
+    if (argc == 3 && !wcscmp(argv[1], L"--stage-header")) return (int)stage_header(argv[2]);
     if (argc == 3 && !wcscmp(argv[1], L"--manifest")) return (int)package_manifest_rows(argv[2]);
     if (argc == 2 && !wcscmp(argv[1], L"--new")) {
         if (FAILED(CoCreateGuid(&identity)) || !memcmp(&identity, &empty, sizeof(identity)) ||

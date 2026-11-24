@@ -56,93 +56,14 @@ function New-PhysicalRuntimeStage([string]$PackageRoot,
     [string[]]$TopLevelNames=@(),
     [switch]$FreshPackageIdentity) {
     if(!$RuntimeImages.Count){throw 'At least one runtime image is required'}
-    $source = (Resolve-Path -LiteralPath $PackageRoot).Path
-    $build = (Resolve-Path "${script:IsolatedPackageCleanupRoot}/../../build").Path + '\'
-    if (!$source.StartsWith($build, [StringComparison]::OrdinalIgnoreCase)) {
-        throw 'Physical test staging requires a repository-build package'
-    }
-    $stageRoot = Get-PhysicalRuntimeStageRoot
-    if (!(Test-Path -LiteralPath $stageRoot -PathType Container)) {
-        $null = New-Item -ItemType Directory -Path $stageRoot
-    }
-    # Some immutable 16-bit WOW fixtures fail before worker registration at
-    # ordinary build-style physical paths.  Keep the stage real (never a
-    # drive alias), but deliberately short.  The marker remains the cleanup
-    # authority, so the compact leaf does not widen deletion scope.
-    $stage = $null
-    foreach($attempt in 1..8) {
-        # Keep the complete physical root within the proven legacy-guest
-        # budget (`O:\tmp\n123` is ten characters), not merely its 8.3 leaf.
-        # This is test containment only; it never aliases or changes a user
-        # installation path.
-        $candidate = Join-Path $stageRoot ('n' + [Guid]::NewGuid().ToString('N').Substring(0,3))
-        if(Test-Path -LiteralPath $candidate) { continue }
-        # Creation, not the preceding observation, establishes ownership.
-        # A concurrent test may claim the same three-hex leaf between those
-        # operations; retain the compact-path constraint and try another leaf
-        # rather than treating another task's stage as ours.
-        try {
-            $null = New-Item -ItemType Directory -Path $candidate -ErrorAction Stop
-            $stage = $candidate
-            break
-        } catch [System.IO.IOException] {
-            continue
-        } catch [System.UnauthorizedAccessException] {
-            continue
-        }
-    }
-    if(!$stage) { throw 'Unable to allocate a short physical test stage' }
-    try {
-        # Copy the complete product package, but never historical build/log
-        # evidence that happens to share the package root.  The product sees
-        # its real physical path; no global drive alias is manufactured.
-        $content = Get-ChildItem -LiteralPath $source -Force | Where-Object {
-            $_.Name -notin @('builds','logs','logs2')
-        }
-        if($TopLevelNames.Count) {
-            foreach($name in $TopLevelNames) {
-                if([IO.Path]::GetFileName($name) -ne $name -or $name -in @('builds','logs','logs2')) {
-                    throw 'Runtime stage top-level content must be a direct non-log package item.'
-                }
-            }
-            $content=@($content | Where-Object { $_.Name -in $TopLevelNames })
-            if($content.Count -ne @($TopLevelNames | Select-Object -Unique).Count) {
-                throw 'Requested runtime stage content is absent from the package.'
-            }
-        }
-        $content | ForEach-Object {
-            # This helper's sole successful pipeline result is the stage
-            # root below.  Do not leak Copy-Item results into the caller's
-            # `$runtime` assignment, which would turn it into an array and
-            # break the ownership check before any product case starts.
-            $null = Copy-Item -LiteralPath $_.FullName -Destination $stage -Recurse -Force
-        }
-        if($FreshPackageIdentity) {
-            # Copying a package deliberately preserves its UUID. Concurrent
-            # tests that require a different broker must opt in to creating a
-            # complete new test package, without touching the source package.
-            $refresh=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/refresh-package.cmd'
-            & $refresh $stage | Out-Null
-            if($LASTEXITCODE){throw "CMD package identity refresh failed ($LASTEXITCODE)"}
-        }
-        $marker = [ordered]@{
-            schema = 1
-            source = $source
-            createdUtc = [DateTime]::UtcNow.ToString('o')
-            # Focused GUI/WOW tests can intentionally omit the text frontend.
-            # This marker proves cleanup ownership, not full-package acceptance.
-            binaries = $RuntimeImages |
-                ForEach-Object {
-                    $path = Join-Path (Get-PackageBinaryRoot $stage) $_
-                    [ordered]@{ name = $_; sha256 = (Get-IsolatedFileSha256 $path) }
-                }
-        }
-        $marker | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath (Join-Path $stage '.ntvdm64-test-stage.json') -Encoding UTF8
-        return (Resolve-Path -LiteralPath $stage).Path
-    } catch {
-        if (Test-Path -LiteralPath $stage) { Remove-Item -LiteralPath $stage -Recurse -Force }
-        throw
-    }
+    $runner=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/stage-runtime.cmd'
+    $arguments=@('-PackageRoot',(Resolve-Path -LiteralPath $PackageRoot).Path)
+    foreach($name in $RuntimeImages){$arguments+=@('-RuntimeImage',$name)}
+    foreach($name in $TopLevelNames){$arguments+=@('-Include',$name)}
+    if($FreshPackageIdentity){$arguments+='-FreshPackageIdentity'}
+    $stage=@(& $runner @arguments)
+    if($LASTEXITCODE -or $stage.Count -ne 1){throw "CMD physical staging failed ($LASTEXITCODE)"}
+    return $stage[0]
 }
 function Remove-PhysicalRuntimeStage([string]$Stage) {
     if (!(Test-PhysicalRuntimeStage $Stage)) { throw 'Refuse to remove a non-stage path' }
