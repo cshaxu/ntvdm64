@@ -47,6 +47,10 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="ntvwm-modern-edit-mouse" set "SELECTED=1"
+if "%TARGET%"=="ntvwm-modern-edit-mouse" if not "%~1"=="x64" exit /b 2
+if "%TARGET%"=="niddb-no-retry" set "SELECTED=1"
+if "%TARGET%"=="niddb-no-retry" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="dpmi-buffer-state" set "SELECTED=1"
 if "%TARGET%"=="dpmi-buffer-state" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="dem-directory-reset" set "SELECTED=1"

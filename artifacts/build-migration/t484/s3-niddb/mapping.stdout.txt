@@ -1,0 +1,2 @@
+physical page binding and observation test passed
+PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1

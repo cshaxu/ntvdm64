@@ -19,3 +19,10 @@ if(NTVDM_ARCH STREQUAL "x86")
   set_property(TARGET console-input-batch_objects PROPERTY FIXTURE_LIBRARIES "${worker_base};user32.lib;gdi32.lib")
   add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/console-input-batch.exe" APPEND DEPENDS "${worker_base}")
 endif()
+if(NTVDM_ARCH STREQUAL "x64")
+  fixture(ntvwm-modern-edit-mouse CL test/observation/ntvwm_modern_edit_mouse_test.c
+    src/ntvwm-exe/console_state.c src/compat/native_console_diagnostics.c
+    src/lib-win32/process-observation/console_members.c)
+  set_property(TARGET ntvwm-modern-edit-mouse_objects PROPERTY COMPILE_OPTIONS /nologo /W4)
+  set_property(TARGET ntvwm-modern-edit-mouse_objects PROPERTY FIXTURE_LIBRARIES user32.lib)
+endif()

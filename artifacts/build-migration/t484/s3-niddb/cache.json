@@ -1,0 +1,17 @@
+[
+  {
+    "time": 639310754250255416,
+    "path": "build/.ninja/fixtures-x86/niddb-no-retry.exe",
+    "hash": "B2B17F42B014BB4FC816E19968E01E627285805FA2CD7DA069094A0E6761F3EB"
+  },
+  {
+    "time": 639310755234989505,
+    "path": "build/.ninja/fixtures-x64/ntvwm-modern-edit-mouse.exe",
+    "hash": "79BD1DB7CD432C1D0A3F17F42CDB59B083826FBA269E132F215D8AD3064D194F"
+  },
+  {
+    "time": 639310756070016609,
+    "path": "build/.ninja/msvc-x86-release/worker/physical-mapping-observation-test.exe",
+    "hash": "CA6EAEFDA3A279FEE9B1F4BA6C57BC3AE7F7237C5066A51AF75AA1367FDA1922"
+  }
+]

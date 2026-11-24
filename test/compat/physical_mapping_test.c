@@ -10,6 +10,8 @@
     fprintf(stderr, "failed line %d: %s\n", __LINE__, #condition); return 1; \
 } } while (0)
 
+static int alias_contract(void);
+
 int main(int argc, char **argv)
 {
     session owner;
@@ -105,5 +107,64 @@ int main(int argc, char **argv)
         CloseHandle(locked_log);
     }
     puts("physical page binding and observation test passed");
+    return alias_contract();
+}
+
+static int unchanged(uint32_t address)
+{
+    uint32_t output = 0xdeadbeefu;
+    SetLastError(0x74478301u);errno = EDOM;
+    CHECK(!mvdm_softpc_physical_mapping_translate(address, &output));
+    CHECK(output == address && GetLastError() == 0x74478301u && errno == EDOM);
+    CHECK(!mvdm_softpc_physical_mapping_translate(address, NULL));
+    CHECK(GetLastError() == 0x74478301u && errno == EDOM);
+    return 0;
+}
+
+static int alias_contract(void)
+{
+    const uint32_t probes[] = {0u, 0xfffffu, 0x100000u, 0x101fffu,
+        0x102000u, 0x7fffffffu, UINT32_MAX};
+    session first, second;
+    uint32_t output, cleanup_count, i;
+    for (i = 0; i < sizeof(probes) / sizeof(probes[0]); ++i)
+        CHECK(unchanged(probes[i]) == 0); /* Empty and unbound. */
+    session_initialize(&first, 44783u);session_initialize(&second, 44784u);
+    CHECK(session_activate(&first) && session_activate(&second));
+    CHECK(session_thread_bind(&first));
+    for (i = 0; i < sizeof(probes) / sizeof(probes[0]); ++i)
+        CHECK(unchanged(probes[i]) == 0);
+    cleanup_count = first.host_context.cleanup_count;
+    first.host_context.cleanup_count = COMPAT_HOST_CLEANUP_LIMIT + 1u;
+    CHECK(unchanged(0x100000u) == 0);
+    first.host_context.cleanup_count = cleanup_count;
+    CHECK(VdmMapDosMemory(0x100u, 0x200u, 2u) == 0);
+    CHECK(unchanged(0xfffffu) == 0 && unchanged(0x102000u) == 0);
+    CHECK(mvdm_softpc_physical_mapping_translate(0x100000u, &output) && output == 0x200000u);
+    CHECK(mvdm_softpc_physical_mapping_translate(0x101fffu, &output) && output == 0x201fffu);
+    cleanup_count = first.host_context.cleanup_count;
+    first.host_context.cleanup_count = COMPAT_HOST_CLEANUP_LIMIT + 1u;
+    CHECK(unchanged(0x100000u) == 0);
+    first.host_context.cleanup_count = cleanup_count;
+    CHECK(session_thread_unbind(&first));
+    CHECK(unchanged(0x100000u) == 0); /* Nonempty, no bound owner. */
+    CHECK(session_thread_bind(&second));
+    CHECK(unchanged(0x100000u) == 0); /* Nonempty, different owner. */
+    CHECK(VdmMapDosMemory(0x500u, 0x600u, 1u) == 0);
+    CHECK(mvdm_softpc_physical_mapping_translate(0x50000fu, &output) && output == 0x60000fu);
+    CHECK(session_thread_unbind(&second) && session_thread_bind(&first));
+    CHECK(unchanged(0x50000fu) == 0);
+    CHECK(VdmMapDosMemory(0x100u, 0x300u, 2u) == 0);
+    CHECK(mvdm_softpc_physical_mapping_translate(0x101fffu, &output) && output == 0x301fffu);
+    CHECK(session_thread_unbind(&first) && session_thread_bind(&second));
+    CHECK(session_dispose(&first)); /* Drops only first's pending alias. */
+    CHECK(unchanged(0x100000u) == 0);
+    CHECK(mvdm_softpc_physical_mapping_translate(0x50000fu, &output) && output == 0x60000fu);
+    CHECK(VdmUnmapDosMemory(0x500u, 1u) == 0);
+    CHECK(VdmUnmapDosMemory(0x500u, 1u) == (int32_t)0xc0000225u);
+    CHECK(unchanged(0x50000fu) == 0);
+    CHECK(session_thread_unbind(&second) && session_dispose(&second));
+    CHECK(unchanged(UINT32_MAX) == 0);
+    puts("PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1");
     return 0;
 }

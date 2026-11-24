@@ -10,20 +10,16 @@ if(!$build.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalI
     throw 'BuildRoot must remain under repository build/'
 }
 $report=[IO.Path]::GetFullPath($ReportPath)
-if([IO.Path]::GetDirectoryName($report) -notin @('O:\winnt\logs','O:\winnt\Logs2')){
+if(!$report.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -and
+    [IO.Path]::GetDirectoryName($report) -notin @('O:\winnt\logs','O:\winnt\Logs2')){
     throw 'ReportPath must be an approved package log'
 }
 if((Test-Path $build) -or (Test-Path $report)){throw 'Use fresh build and report paths'}
-[void](Get-Command cl.exe -ErrorAction Stop)
 [void](New-Item -ItemType Directory -Path $build)
-$exe=Join-Path $build 'ntvwm-modern-edit-mouse.exe'
+$exe=Join-Path $repo 'build/.ninja/fixtures-x64/ntvwm-modern-edit-mouse.exe'
 Push-Location $repo
 try {
-    & cl.exe /nologo /W4 /MT /Isrc `
-        test/observation/ntvwm_modern_edit_mouse_test.c `
-        src/ntvwm-exe/console_state.c src/compat/native_console_diagnostics.c src/lib-win32/process-observation/console_members.c `
-        "/Fo$build\" "/Fe$exe" /link /incremental:no user32.lib `
-        *> (Join-Path $build 'build.log')
+    & "$repo/tools/build-fixtures.cmd" x64 ntvwm-modern-edit-mouse *> "$build/build.log"
     if($LASTEXITCODE){throw "Compile failed: $build/build.log"}
     $process=Start-Process -FilePath $exe -ArgumentList ('"'+$report+'"') `
         -WindowStyle Hidden -PassThru

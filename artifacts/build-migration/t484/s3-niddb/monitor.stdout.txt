@@ -1,0 +1,1 @@
+PASS: aligned mixed tree, exact title/footer, EDIT frame/colors/25 rows, scrolling, stable refresh/selection and production UP/DOWN/DEL/ESC dispatch

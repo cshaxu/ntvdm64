@@ -138,8 +138,9 @@
     "reason": "Native CMake object/executable/library targets, no interpreted source producer"
   },
   "test/integration/verify-monitor-layout.ps1": {
-    "status": "retained-native-delegate",
-    "reason": "Native Ninja target delegate then observer assertions; no ad hoc compiler command"
+    "status": "retired",
+    "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
+    "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
   },
   "test/integration/verify-ccpu-alu-guest.ps1": {
     "status": "pending-producer-migration",
@@ -575,5 +576,25 @@
     "reason": "No producer: runs14 existing native input handoff modes. Current providers inspected; no new execution claimed in this batch.",
     "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
     "status": "retained-native-delegate"
+  },
+  "test/observation/verify-niddb-no-retry.py": {
+    "status": "migrated-delivered",
+    "reason": "Current unique behavior retained; native producer and real assertions verified; legacy compiler orchestration removed.",
+    "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
+  },
+  "test/observation/verify-ntvwm-modern-edit-mouse.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Current unique behavior retained; native producer and real assertions verified; legacy compiler orchestration removed.",
+    "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
+  },
+  "test/observation/verify-observer-empty-environment.ps1": {
+    "status": "retired",
+    "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
+    "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
+  },
+  "test/observation/verify-physical-alias-empty.ps1": {
+    "status": "retired",
+    "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
+    "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
   }
 }

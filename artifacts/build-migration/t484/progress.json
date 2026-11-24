@@ -1,35 +1,42 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "1acce005bc6aaaf73d1898707454d4d7815ec26e",
+  "head": "7c9ead0ef0387f06b98b55e6c34146e4edfd1c70",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
-    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-dpmi-buffer-state.py",
+    " D test/adapter-mvdm-host-out/physical_alias_empty_fixture.c",
+    " M test/compat/physical_mapping_test.c",
+    " D test/integration/verify-monitor-layout.ps1",
+    " D test/observation/observer_empty_environment_probe.c",
+    " M test/observation/verify-niddb-no-retry.py",
+    " M test/observation/verify-ntvwm-modern-edit-mouse.ps1",
+    " D test/observation/verify-observer-empty-environment.ps1",
+    " D test/observation/verify-physical-alias-empty.ps1",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-dpmi-reconcile/",
-    "?? docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
-    "?? test/mvdm-host/dpmi_buffer_state_fixture.c",
-    "?? tools/build/fixtures/dpmi-buffer.cmake"
+    " M tools/build/fixtures/console-contracts.cmake",
+    "?? artifacts/build-migration/t484/s3-niddb/",
+    "?? docs/etc/evidence/t484-s3-niddb-retirement.md",
+    "?? tools/build/fixtures/niddb.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 99,
-    "unchanged": 136,
-    "removed": 120
+    "changed": 101,
+    "unchanged": 131,
+    "removed": 123
   },
   "disposition_counts": {
-    "migrated-delivered": 42,
+    "migrated-delivered": 44,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 120,
     "pending-producer-migration": 53,
-    "retained-native-delegate": 10,
-    "requires-disposition-reconciliation": 127,
+    "retained-native-delegate": 9,
+    "requires-disposition-reconciliation": 123,
+    "retired": 3,
     "retained-standalone-audit": 1
   },
-  "existing_interpreted_candidates_with_command_hits": 184,
+  "existing_interpreted_candidates_with_command_hits": 181,
   "files": [
     {
       "id": "B0001",
@@ -617,14 +624,15 @@
       "id": "B0033",
       "file": "test/integration/verify-monitor-layout.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "3aae80beb14dfff81aae0944d047bb47886e497f28aab88978aee45b1fa4941f",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "retained-native-delegate",
+      "completion": "retired",
       "decision": {
-        "status": "retained-native-delegate",
-        "reason": "Native Ninja target delegate then observer assertions; no ad hoc compiler command"
+        "status": "retired",
+        "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
+        "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
       }
     },
     {
@@ -2310,8 +2318,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "30241263ba1b6e9c6727c112da3c4a6c61bfb3b7224233c88083f1c496bea0d3",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "7c9ead0ef0387f06b98b55e6c34146e4edfd1c70"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-dpmi-reconciliation.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Native bounded current-source projections; obsolete external mirror-format dependency retired;133 unchanged assertions pass.",
@@ -2466,12 +2478,16 @@
       "id": "B0136",
       "file": "test/observation/verify-niddb-no-retry.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "2510ff22d10f92499c62e8b75e85ef040c1eb63d42ac32594ab747353a9a533f",
+      "state": "changed",
+      "current_sha256": "6f0024f1e774c42d9b9e92fce4ed90d5bdb65f99b7439af8efb78f86cd8679e9",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Current unique behavior retained; native producer and real assertions verified; legacy compiler orchestration removed.",
+        "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
+      }
     },
     {
       "id": "B0137",
@@ -2537,12 +2553,16 @@
       "id": "B0141",
       "file": "test/observation/verify-ntvwm-modern-edit-mouse.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "a58633d4da57d8c84e5845cc02fa5e8c2d2671596c06faf2552192a5b364c264",
+      "state": "changed",
+      "current_sha256": "907a8a48df8aec36de8872ae8b866e2a391b991b9bace81a1b06cbb99d7288ea",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Current unique behavior retained; native producer and real assertions verified; legacy compiler orchestration removed.",
+        "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
+      }
     },
     {
       "id": "B0142",
@@ -2563,23 +2583,31 @@
       "id": "B0143",
       "file": "test/observation/verify-observer-empty-environment.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "a05483cd32baa735d5c0f6dddef46b7e6ddfc97aaec674d0b3af836ab38b2ffc",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired",
+      "decision": {
+        "status": "retired",
+        "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
+        "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
+      }
     },
     {
       "id": "B0144",
       "file": "test/observation/verify-physical-alias-empty.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "e85b3075e21c1cf862d050c504cb33ba4c27ed03ae1862d66dc0645e0618e2ac",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired",
+      "decision": {
+        "status": "retired",
+        "reason": "Expired investigation or duplicate wrapper removed; valid alias/monitor assertions remain in existing native targets.",
+        "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
+      }
     },
     {
       "id": "B0145",
@@ -5315,6 +5343,12 @@
     }
   ],
   "commits": {
+    "7c9ead0ef0387f06b98b55e6c34146e4edfd1c70": {
+      "subject": "T484 S3 P87 retire DPMI audit generation and reconcile native runners",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-dpmi-reconciliation.md"
+      ]
+    },
     "1acce005bc6aaaf73d1898707454d4d7815ec26e": {
       "subject": "T484 S3 P86 consolidate Console and DEM native producers",
       "evidence": [
@@ -6267,28 +6301,6 @@
         {
           "line": 47,
           "text": "$proc=Start-Process $pwsh -ArgumentList $args -WindowStyle Hidden -PassThru -RedirectStandardOutput \"$out/run.out\" -RedirectStandardError \"$out/run.err\""
-        }
-      ]
-    },
-    {
-      "id": "B0033",
-      "file": "test/integration/verify-monitor-layout.ps1",
-      "hits": [
-        {
-          "line": 7,
-          "text": "[string]$Ninja='ninja'"
-        },
-        {
-          "line": 20,
-          "text": "if(!(Test-Path -LiteralPath (Join-Path $build 'build.ninja'))) {"
-        },
-        {
-          "line": 21,
-          "text": "throw 'Generate the formal x86 Ninja graph before running this fixture'"
-        },
-        {
-          "line": 25,
-          "text": "& $wrapper $Ninja -C $build monitor-layout-test.exe"
         }
       ]
     },
@@ -7269,32 +7281,12 @@
       "file": "test/observation/verify-niddb-no-retry.py",
       "hits": [
         {
-          "line": 11,
-          "text": "parser.add_argument('--object', default='build/.ninja/msvc-x86-release/worker/obj/bios/virtual.obj')"
+          "line": 14,
+          "text": "original = root / 'build/.ninja/msvc-x86-release/worker/obj/bios/virtual.obj'"
         },
         {
-          "line": 21,
-          "text": "driver = root / 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'"
-        },
-        {
-          "line": 33,
-          "text": "script = out / 'link.cmd'"
-        },
-        {
-          "line": 35,
-          "text": "f'cl.exe /nologo /MT /Od \"{fixture}\" \"{intercepted}\" '"
-        },
-        {
-          "line": 36,
-          "text": "f'/Fo:\"{out / \"fixture.obj\"}\" /Fe:\"{exe}\" /link kernel32.lib\\n')"
-        },
-        {
-          "line": 38,
-          "text": "(out / 'link.log').write_text(linked.stdout + linked.stderr)"
-        },
-        {
-          "line": 40,
-          "text": "raise SystemExit(f'link failed: {linked.returncode}')"
+          "line": 19,
+          "text": "native = root / 'build/.ninja/fixtures-x86'"
         }
       ]
     },
@@ -7303,48 +7295,8 @@
       "file": "test/observation/verify-ntvwm-modern-edit-mouse.ps1",
       "hits": [
         {
-          "line": 17,
-          "text": "[void](Get-Command cl.exe -ErrorAction Stop)"
-        },
-        {
-          "line": 22,
-          "text": "& cl.exe /nologo /W4 /MT /Isrc `"
-        },
-        {
-          "line": 25,
-          "text": "\"/Fo$build\\\" \"/Fe$exe\" /link /incremental:no user32.lib `"
-        }
-      ]
-    },
-    {
-      "id": "B0143",
-      "file": "test/observation/verify-observer-empty-environment.ps1",
-      "hits": [
-        {
-          "line": 10,
-          "text": "& $compiler cl.exe /nologo /MT /W4 /WX \"/Fo$root/probe.obj\" \"/Fe$output\" \"$PSScriptRoot/observer_empty_environment_probe.c\""
-        }
-      ]
-    },
-    {
-      "id": "B0144",
-      "file": "test/observation/verify-physical-alias-empty.ps1",
-      "hits": [
-        {
-          "line": 25,
-          "text": "Get-FileHash $PSCommandPath,$fixture,\"$repo/test/compat/physical_mapping_test.c\",$mapping,\"$worker/build.ninja\",$CompilerDriver,\"$root/physical-mapping.obj\",\"$root/session.lib\"|Export-Csv -NoTypeInformation \"$root/inputs.csv\""
-        },
-        {
-          "line": 26,
-          "text": "$line='/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /c /MT /O2 /W4 /WX /I\"'+$repo+'/src\" /I\"'+$repo+'/src/ntvdm-exe/softpc/include\" /Fo\"'+$root+'/fixture.obj\" \"'+$fixture+'\"\"'"
-        },
-        {
-          "line": 28,
-          "text": "$line='/d /s /c \"call \"'+$CompilerDriver+'\" link.exe /nologo /MACHINE:X86 /OPT:REF /OUT:\"'+$root+'/fixture.exe\" \"'+$root+'/fixture.obj\" \"'+$root+'/physical-mapping.obj\" \"'+$root+'/session.lib\" kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib\"'"
-        },
-        {
-          "line": 29,
-          "text": "Owned link $env:ComSpec $line 120"
+          "line": 19,
+          "text": "$exe=Join-Path $repo 'build/.ninja/fixtures-x64/ntvwm-modern-edit-mouse.exe'"
         }
       ]
     },

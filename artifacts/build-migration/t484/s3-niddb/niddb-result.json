@@ -1,0 +1,23 @@
+{
+  "result": "pass",
+  "exit": 0,
+  "scope": "intercepted object and controlled VxD boundaries, not guest execution",
+  "inputs": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\niddb_no_retry_fixture.c",
+      "sha256": "d22ef7f0b399ec64aab8af2f546216bd9bd80a35e7314a4738687e2329de9623"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj",
+      "sha256": "2d3b72138f303915e98f4e8dce7297c7049068ef100f5075185df59c9fef6db3"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\niddb-intercept.obj",
+      "sha256": "46ecfff462521529ec88a6133cca33db04f0461e0352ef5f10e0f2cee9c5398d"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\niddb-no-retry.exe",
+      "sha256": "b2b17f42b014bb4fc816e19968e01e627285805fa2cd7da069094a0e6761f3eb"
+    }
+  ]
+}

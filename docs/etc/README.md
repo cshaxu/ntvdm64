@@ -1663,3 +1663,5 @@ post-publication targeted checks.
 - [Console and DEM producers](evidence/t484-s3-console-contracts.md)
 
 - [DPMI/native runner reconciliation](evidence/t484-s3-dpmi-reconciliation.md)
+
+- [NIDDB and diagnostic consolidation](evidence/t484-s3-niddb-retirement.md)
