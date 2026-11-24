@@ -386,3 +386,18 @@ include(wow-owned-read.cmake)
 include(wow-parameter-map.cmake)
 include(wow-return-unwind.cmake)
 include(wow-reverse-construction.cmake)
+
+# The existing managed window observer is compiled once by the native compiler,
+# rather than compiled from PowerShell source on every matrix launch.
+if(NTVDM_ARCH STREQUAL "x64")
+  set(window_inspector_compiler "$ENV{SystemRoot}/Microsoft.NET/Framework64/v4.0.30319/csc.exe")
+  file(TO_NATIVE_PATH "${NTVDM_REPO}/test/observation/window_inspector.cs" window_inspector_source)
+  file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/window-inspector.dll" window_inspector_output)
+  add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/window-inspector.dll"
+    COMMAND "${window_inspector_compiler}" /nologo /target:library /platform:anycpu
+      "/out:${window_inspector_output}"
+      "${window_inspector_source}"
+    DEPENDS "${NTVDM_REPO}/test/observation/window_inspector.cs" "${window_inspector_compiler}"
+    VERBATIM)
+  add_custom_target(window-inspector DEPENDS "${CMAKE_BINARY_DIR}/window-inspector.dll")
+endif()

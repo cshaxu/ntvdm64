@@ -1,17 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "482628bf340ceb12ca4198de8e8db147edb7c2e9",
+  "head": "db0a5456fa8ea228c8a818bd174b2449fd83c614",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/build-wow-message-transaction-provider.ps1",
-    " D test/observation/prepare-win31-con-trace.ps1",
-    " D test/observation/win31_con_trace.asm",
+    " M test/observation/inspect-session-windows.ps1",
     " M tools/build-fixtures.cmd",
-    " D tools/build-wow-message-control.cmd",
-    " M tools/build/fixtures/guest-probes.cmake",
-    "?? docs/etc/evidence/t484-s3-expired-diagnostics.md"
+    " M tools/build/README.md",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s3-window-inspector.md",
+    "?? test/observation/window_inspector.cs"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -1397,8 +1396,8 @@
       "completion": "pending-producer-migration",
       "decision": {
         "status": "pending-producer-migration",
-        "reason": "P63 native witnesses migrated; inspector Add-Type, dynamic path fields and runtime/package staging remain",
-        "evidence": "docs/etc/evidence/t484-s3-win31-matrix.md"
+        "reason": "P63 native witnesses and P172 cached managed inspector delivered; no Add-Type source compilation. Dynamic probe path fields and runtime/package preparation remain for complete-chain reconciliation.",
+        "evidence": "docs/etc/evidence/t484-s3-window-inspector.md"
       }
     },
     {
@@ -1916,10 +1915,12 @@
       "state": "changed",
       "current_sha256": "780464bdaa652e31f6965a9f2e700a3181fb97e2836b9b1d70366d2c6a474cdc",
       "revisions": [
+        "db0a5456fa8ea228c8a818bd174b2449fd83c614",
         "3f9660eb008754a0f7fd60a6fdf52e1bf631dac5",
         "4ad5cb89e3666f04896c5983beafd1ff26ed3bbb"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-expired-diagnostics.md",
         "docs/etc/evidence/t484-s3-message-control.md",
         "docs/etc/evidence/t484-s3-message-transaction.md"
       ],
@@ -2091,10 +2092,12 @@
       "state": "removed",
       "current_sha256": null,
       "revisions": [
+        "db0a5456fa8ea228c8a818bd174b2449fd83c614",
         "2f2a1c10605bc7c0566c870cd931261a8e63f353"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-con-trace.md"
+        "docs/etc/evidence/t484-s3-con-trace.md",
+        "docs/etc/evidence/t484-s3-expired-diagnostics.md"
       ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
@@ -6436,6 +6439,12 @@
     }
   ],
   "commits": {
+    "db0a5456fa8ea228c8a818bd174b2449fd83c614": {
+      "subject": "T484 S3 P171 retire expired diagnostic branches",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-expired-diagnostics.md"
+      ]
+    },
     "482628bf340ceb12ca4198de8e8db147edb7c2e9": {
       "subject": "T484 S3 P170 consolidate build hygiene verification",
       "evidence": [

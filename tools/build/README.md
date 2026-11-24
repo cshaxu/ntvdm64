@@ -105,3 +105,9 @@ An admitted fixture may declare `supportSources`, each constrained to a
 and its libraries. This keeps a test-only replacement of a generic mechanical
 callback out of every production library; it is not a second production build
 variant or a component input.
+
+The test-only `window-inspector` fixture uses the existing Windows Framework64
+`v4.0.30319/csc.exe` compiler through CMD/CMake. Its tracked C# source is compiled
+into the stable fixture cache; test runners load the DLL without Add-Type source
+compilation. This compiler is required only when selecting that fixture, and the
+DLL is never a product release input.

@@ -98,6 +98,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P171 expired diagnostics](../etc/evidence/t484-s3-expired-diagnostics.md) | Retired sealed P21 control and CONTRACE including native targets; retained current diagnostic/Win31 fixture builds pass. Cached full and11/22 identities unchanged;311/355 disposed,44 remain. |
 
+| [P172 cached inspector](../etc/evidence/t484-s3-window-inspector.md) | Shared window inspector loads a CMD/CMake-built DLL; original C# body unchanged. Compile/load/error/cache checks and cached full11/22 hashes pass. Matrix preparation remains open;311/355,44 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

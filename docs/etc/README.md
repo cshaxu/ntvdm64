@@ -1824,3 +1824,4 @@ post-publication targeted checks.
 - [T484 S3 isolated RPC control package identities](evidence/t484-s3-rpc-control-identity.md).
 - [T484 S3 build hygiene consolidation](evidence/t484-s3-hygiene-consolidation.md).
 - [T484 S3 expired diagnostic retirement](evidence/t484-s3-expired-diagnostics.md).
+- [T484 S3 cached window inspector](evidence/t484-s3-window-inspector.md).
