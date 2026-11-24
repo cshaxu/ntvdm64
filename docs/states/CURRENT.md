@@ -88,6 +88,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P185 Win95 guest-only](../etc/evidence/t484-s3-win95-guest.md) | Both COM profiles and path binding use native producers; byte equivalence and shared binder regression pass. Fixed316/355; five supplemental preparation chains pending;15 of18 newly found NASM callers remain. |
 
+| [P186 interrupt observer](../etc/evidence/t484-s3-interrupt-observer.md) | Retired interpreted producer; native object/image bytes match, cache and missing-linker failure pass. Fixed316/355;14 of18 newly found NASM callers remain. |
+
 A fresh global scan found18 further integration scripts with direct NASM
 commands; these await retention/migration reconciliation, as recorded in P183.
 The frozen355 census is not the complete remaining invocation graph.

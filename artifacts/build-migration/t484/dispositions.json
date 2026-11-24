@@ -1312,5 +1312,10 @@
     "status": "supplemental-native-producer-pending-staging",
     "reason": "Both authored COM profiles use shared CMD target and native bounded path binding; exact bytes and shared binder regression pass. Patch configuration and shared staging remain.",
     "evidence": "docs/etc/evidence/t484-s3-win95-guest.md"
+  },
+  "test/integration/ntvdm64-386/build-interrupt-observer.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Standalone interpreted producer retired; live diagnostic driver retained through shared CMD fixture graph, original object/image identical, cache and missing-linker failure verified.",
+    "evidence": "docs/etc/evidence/t484-s3-interrupt-observer.md"
   }
 }

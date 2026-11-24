@@ -417,3 +417,4 @@ fixture(serial-port-mask CL test/observation/serial_port_mask.c)
 set_property(TARGET serial-port-mask_objects PROPERTY COMPILE_OPTIONS /nologo /MT /O2 /W4 /WX /std:c11)
 
 include(wow-entry-abi.cmake)
+include(interrupt-observer.cmake)

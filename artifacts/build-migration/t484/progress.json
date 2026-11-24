@@ -1,16 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "d12cc5983cfd35f6efc2141d5335704d26f7658a",
+  "head": "e58446de674760b45c88bce991ca3039af44435d",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/verify-win31-probe-paths.ps1",
-    " M test/integration/multitask/verify-win95-guest-only.ps1",
-    " M test/observation/win31_probe_paths.c",
+    " M test/integration/ntvdm64-386/README.md",
+    " D test/integration/ntvdm64-386/build-interrupt-observer.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/guest-probes.cmake",
-    "?? docs/etc/evidence/t484-s3-win95-guest.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s3-interrupt-observer.md",
+    "?? tools/build/fixtures/interrupt-observer.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6485,6 +6485,12 @@
     }
   ],
   "commits": {
+    "e58446de674760b45c88bce991ca3039af44435d": {
+      "subject": "T484 S3 P185 use native Win95 guest witness preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win95-guest.md"
+      ]
+    },
     "d12cc5983cfd35f6efc2141d5335704d26f7658a": {
       "subject": "T484 S3 P184 share native profile and DDE witness build",
       "evidence": [

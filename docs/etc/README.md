@@ -1847,3 +1847,4 @@ post-publication targeted checks.
 - [T484 S3 private native idle forwarding](evidence/t484-s3-idle-forwarding.md).
 - [T484 S3 profile/DDE producers](evidence/t484-s3-profile-dde.md).
 - [T484 S3 Win95 guest-only preparation](evidence/t484-s3-win95-guest.md).
+- [T484 S3 native interrupt observer](evidence/t484-s3-interrupt-observer.md).

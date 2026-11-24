@@ -80,7 +80,10 @@ and the normal Windows startup/exit checks still apply. No DOS witnesses are
 launched in this negative case. Marker, matrix and API result are all required;
 absence of a functioning driver alone is not a passing failure test.
 
-`build-interrupt-observer.ps1` builds the test-only `interrupt-observer.asm`.
+`tools\build-fixtures.cmd x86 interrupt-observer` builds the test-only
+`interrupt-observer.asm` into
+`build/.ninja/fixtures-x86/interrupt-observer/observer.386`.
+The configured OpenWatcom linker is required; a missing linker fails the target.
 Pass the image as `-InterruptObserver` with a continuation diagnostic host and
 `-TraceContinuation -DeferredContinuation`. It chains reflected IRQ0/IRQ1
 without consuming either. Diagnostic trace operations 1032/1033 identify the
