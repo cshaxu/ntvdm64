@@ -1,12 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "bf0756e4839ffa0197ac9d178e2d6f679d4066bd",
+  "head": "e7c1233f416831880158b238c2ae04cfdb4af286",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-video7-mode-flags.ps1",
-    "?? docs/etc/evidence/t484-s4-video7-preparation.md"
+    " M test/integration/verify-forcedos.ps1",
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s4-forcedos-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6617,6 +6618,12 @@
     }
   ],
   "commits": {
+    "e7c1233f416831880158b238c2ae04cfdb4af286": {
+      "subject": "M0 T484 S4 P25: simplify Video7 CMD preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-video7-preparation.md"
+      ]
+    },
     "bf0756e4839ffa0197ac9d178e2d6f679d4066bd": {
       "subject": "M0 T484 S4 P24: finish memory transition CMD preparation",
       "evidence": [

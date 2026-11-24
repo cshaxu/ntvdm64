@@ -1948,3 +1948,4 @@ post-publication targeted checks.
 - [T484 S4 DPMI fatal preparation](evidence/t484-s4-fatal-preparation.md)
 - [T484 S4 memory-transition preparation](evidence/t484-s4-memory-preparation.md)
 - [T484 S4 Video7 preparation](evidence/t484-s4-video7-preparation.md)
+- [T484 S4 ForceDOS preparation](evidence/t484-s4-forcedos-preparation.md)

@@ -1361,9 +1361,9 @@
   },
   "test/integration/verify-xms-block-guest.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P15 completes required input aliases and physical placement through existing CMD owners; real DPMI debug/INT21 direct+nested and XMS positive/failure paths pass. Runtime GO.DAT remains test synchronization, not preparation.","evidence":"docs/etc/evidence/t484-s4-dpmi-xms-preparation.md"},
   "test/integration/verify-forcedos.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "All authored COM/EXE configurations use shared CMD production; memory transition also reuses existing PIF builder and native environment reader, removing CL/C# production. Shared stage/configuration remains.",
-    "evidence": "docs/etc/evidence/t484-s3-transition-probes.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P26 registers the existing x86 native parent and reuses GENHOST, CMD aliasing and physical staging. Nine actual ANSI/Unicode forced/normal/nested/native and sequence routes pass; cached full build and dual published hashes unchanged.",
+    "evidence": "docs/etc/evidence/t484-s4-forcedos-preparation.md"
   },
   "test/integration/verify-memory-transition-guest.ps1": {
     "status": "supplemental-native-producer-delivered",

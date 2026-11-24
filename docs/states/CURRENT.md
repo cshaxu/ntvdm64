@@ -29,6 +29,8 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
+S4 P26 completes ForceDOS preparation; [evidence](../etc/evidence/t484-s4-forcedos-preparation.md) records the native parent producer, shared CMD input staging, cached full build, nine real route cases and unchanged dual publication. Frozen343/355,12 pending; supplemental7 to6.
+
 S4 P25 simplifies Video7 preparation; [evidence](../etc/evidence/t484-s4-video7-preparation.md) records removed external PIF/directory scaffolding, cached full build, default/all-mode real BIOS passes and unchanged dual publication. Frozen343/355,12 pending; supplemental8 to7.
 
 S4 P24 completes memory-transition preparation; [evidence](../etc/evidence/t484-s4-memory-preparation.md) records cached full build, six real guest cases, EMS rejection contracts, six removed stages and unchanged dual publication. Frozen343/355,12 pending; supplemental9 to8.
@@ -62,32 +64,22 @@ S1 inventory/design and S2 native host migration are closed. The
 the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S5 clean,
 interpreter-free end-to-end acceptance have not completed.
 
-S4 P1 adds bounded UUID/PE operations to the existing native package tool;
-[tests and evidence](../etc/evidence/t484-s4-package-primitives.md) retain the
-unchanged32 pending entries and24 supplemental preparation chains. No staging
-caller is counted as migrated merely because these primitives exist.
+Earlier S4 deliveries are complete; detailed results and limitations remain in
+these records. Shared primitives alone never close an unverified caller.
 
-S4 P2 replaces the system32 PowerShell package producer with one CMD owner;
-[package comparison and failure evidence](../etc/evidence/t484-s4-system32-cmd.md)
-records whole-package equivalence and expanded failure controls.
-
-S4 P11 completes print CMD preparation and removes an assertion for the already-retired callback text reporter; [print evidence](../etc/evidence/t484-s4-print-preparation.md) retains the initial failure and final real Win16 PDF/cancel/identity/cleanup pass. Cached full product inputs and dual-publication hashes are unchanged. Census336/355,19 pending.
-
-S4 P10 completes keyboard reader/PIF/registry CMD preparation; [keyboard evidence](../etc/evidence/t484-s4-keyboard-preparation.md) records cached full build, actual PIF/MEM startup, original-reader outcomes, rejection checks and unchanged11 raw/22 published hashes. Census335/355,20 pending.
-
-S4 P9 completes PIC and serial test-input preparation through the shared CMD stage; [device evidence](../etc/evidence/t484-s4-device-inputs.md) records cached full build, input contracts,24 PIC assertions and actual IRQ0/serial routes. The initial PIC caller-path rejection remains recorded; corrected run passes. Census334/355,21 pending.
-
-S4 P8 reconciles independent cleanup and broker handoff consumers; [classification evidence](../etc/evidence/t484-s4-independent-consumers.md) records28 hygiene assertions and all three real I386 handoff cases passing. No product source changed; census332/355,23 pending.
-
-S4 P7 completes the three SOL/WRITE application preparation chains; [application evidence](../etc/evidence/t484-s4-wow-app-preparation.md) records final cached full build, all three private-desktop Userenv cases, producer rejection checks and unchanged11 raw/22 published hashes. Census330/355,25 pending.
-
-S4 P6 moves shared physical copying and ownership-marker preparation to CMD/native; [physical staging evidence](../etc/evidence/t484-s4-physical-stage.md) records contract passes, identical old/new inherited-environment SOL failure and all three passing Userenv application cases. All11 raw/22 published host hashes are unchanged. Consumer-specific staging remains pending; counts are unchanged.
-
-S4 P5 moves shared fresh-package identity preparation to CMD/native; [identity refresh evidence](../etc/evidence/t484-s4-stage-identity-refresh.md) separates completed UUID/manifest handling from remaining directory/marker preparation. Counts are unchanged.
-
-S4 P4 consolidates all14 addons into one CMD publisher; [driver publication evidence](../etc/evidence/t484-s4-addon-driver-publication.md) records receipt validation and candidate qualification.
-
-S4 P3 replaces addon utility publication with CMD; [publication evidence](../etc/evidence/t484-s4-addon-utility-publication.md) records nine-tool identity checks, preserved driver qualifications and failed-copy handling.
+| P | Delivered scope and evidence |
+| --- | --- |
+| 1 | [Native package primitives](../etc/evidence/t484-s4-package-primitives.md) |
+| 2 | [System32 CMD package owner and failure contracts](../etc/evidence/t484-s4-system32-cmd.md) |
+| 3 | [Addon utility publication](../etc/evidence/t484-s4-addon-utility-publication.md) |
+| 4 | [All14 addon publication](../etc/evidence/t484-s4-addon-driver-publication.md) |
+| 5 | [Fresh package identity](../etc/evidence/t484-s4-stage-identity-refresh.md) |
+| 6 | [Physical staging; inherited-environment limitation retained](../etc/evidence/t484-s4-physical-stage.md) |
+| 7 | [Three SOL/WRITE applications](../etc/evidence/t484-s4-wow-app-preparation.md) |
+| 8 | [Cleanup and broker handoff classification](../etc/evidence/t484-s4-independent-consumers.md) |
+| 9 | [PIC and serial input preparation](../etc/evidence/t484-s4-device-inputs.md) |
+| 10 | [Keyboard PIF/registry preparation](../etc/evidence/t484-s4-keyboard-preparation.md) |
+| 11 | [Print preparation and retired-reporter correction](../etc/evidence/t484-s4-print-preparation.md) |
 
 | S3 delivery | Actual result |
 | --- | --- |
@@ -98,7 +90,7 @@ S4 P3 replaces addon utility publication with CMD; [publication evidence](../etc
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **343/355 disposed,12 pending**, plus7 supplemental
+Current census: **343/355 disposed,12 pending**, plus6 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;

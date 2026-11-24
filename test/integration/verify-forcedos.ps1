@@ -2,8 +2,8 @@ param(
  [Parameter(Mandatory=$true)][string]$PackageRoot,
  [Parameter(Mandatory=$true)][string]$BuildRoot,
  [Parameter(Mandatory=$true)][string]$Observer,
- [Parameter(Mandatory=$true)][string]$NativeParent,
- [Parameter(Mandatory=$true)][string]$GenericHostDll,
+ [string]$NativeParent,
+ [string]$GenericHostDll,
  [ValidateSet('forced','normal','nested','native','sequence')][string]$Case='forced',
  [switch]$Ansi
 )
@@ -12,25 +12,26 @@ $r=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($r+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Use a fresh repository-build evidence directory'}
 $Observer=(Resolve-Path $Observer).Path
-$NativeParent=(Resolve-Path $NativeParent).Path
-$GenericHostDll=(Resolve-Path $GenericHostDll).Path
 $null=New-Item -ItemType Directory $root
 & "$r/tools/build-fixtures.cmd" x86 guest-forcedos
 if($LASTEXITCODE){throw 'FORCEDOS fixture build failed'}
 $cache="$r/build/.ninja/fixtures-x86/guest-probes/forcedos"
+if(!$NativeParent){$NativeParent="$r/build/.ninja/fixtures-x86/forcedos-parent.exe"}
+if(!$GenericHostDll){$GenericHostDll="$r/build/.ninja/fixtures-x86/guest-probes/generic-normal/GENHOST.DLL"}
+$NativeParent=(Resolve-Path $NativeParent).Path
+$GenericHostDll=(Resolve-Path $GenericHostDll).Path
 $template=if($Case.Contains('nested')){'PARENT.EXE'}else{'DUAL.EXE'}
-Copy-Item -LiteralPath "$cache/$template" -Destination "$root/DUAL.EXE"
-if($Case.Contains('nested')){Copy-Item -LiteralPath "$cache/DUAL.EXE" -Destination "$root/FCHILD.EXE"}
+$copyArgs=@($root,"$cache/$template",'DUAL.EXE',$GenericHostDll,'GENHOST.DLL',$NativeParent,'PARENT.EXE')
+$inputs=@("$root/DUAL.EXE","$root/GENHOST.DLL","$root/PARENT.EXE")
+if($Case.Contains('nested')){$copyArgs+=@("$cache/DUAL.EXE",'FCHILD.EXE');$inputs+="$root/FCHILD.EXE"}
+& "$r/tools/prepare-test-inputs.cmd" @copyArgs
+if($LASTEXITCODE){throw 'ForceDOS input preparation failed'}
 . "$r/test/observation/isolated_package_cleanup.ps1"
-$runtime=New-PhysicalRuntimeStage $PackageRoot
+$runtime=New-PhysicalRuntimeStage $PackageRoot -TestFiles $inputs
 $scope=New-IsolatedPackageScope $runtime
 $saved=@{};foreach($n in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$n]=[Environment]::GetEnvironmentVariable($n)}
 try {
- $null=New-Item -ItemType Directory "$runtime/tests" -Force
- Copy-Item "$root/DUAL.EXE" "$runtime/tests"
- if($Case.Contains("nested")){Copy-Item "$root/FCHILD.EXE" "$runtime/tests"}
- Copy-Item $GenericHostDll "$runtime/tests/GENHOST.DLL"
- Copy-Item $NativeParent "$runtime/tests/PARENT.EXE"
+ Save-IsolatedPackageManifest $runtime "$root/manifest.json"
  $target=if($Case.Contains("native")){"$runtime/tests/PARENT.EXE"}else{"$runtime/tests/DUAL.EXE"}
  $flags=if($Case -ne 'normal'){'0x2000'}else{'0'}
  $env:PATH="$runtime/system32;"+$env:SystemRoot+'\System32';$env:TEMP=$runtime;$env:TMP=$runtime;$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
