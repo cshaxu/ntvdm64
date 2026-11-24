@@ -183,8 +183,8 @@ if "%TARGET%"=="window-inspector" set "SELECTED=1"
 if "%TARGET%"=="window-inspector" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="wow-latency-probes" set "SELECTED=1"
 if "%TARGET%"=="wow-latency-probes" if not "%~1"=="x86" exit /b 2
-for %%I in (wow-mine-host wow-mine-probes) do if "%TARGET%"=="%%I" set "SELECTED=1"
-for %%I in (wow-mine-host wow-mine-probes) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
+for %%I in (wow-mine-host wow-mine-probes wow-generic-normal wow-generic-mismatch) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (wow-mine-host wow-mine-probes wow-generic-normal wow-generic-mismatch) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-idle-hosts wow-idle-probes) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (wow-idle-hosts wow-idle-probes) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-file-cache" set "SELECTED=1"

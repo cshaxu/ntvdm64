@@ -2,7 +2,6 @@ param(
  [Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$BuildRoot,
  [Parameter(Mandatory)][string]$Observer,
- [Parameter(Mandatory)][string]$CompilerDriver,
  [ValidateSet('normal','mismatch')][string]$Case='normal'
 )
 $ErrorActionPreference='Stop'
@@ -10,15 +9,12 @@ $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Use a fresh repository-build evidence directory'}
 $Observer=(Resolve-Path $Observer).Path
-$CompilerDriver=(Resolve-Path $CompilerDriver).Path
 $null=New-Item -ItemType Directory $root
-$driver=$CompilerDriver
-& nasm -f bin -o "$root/GENPROBE.EXE" "$PSScriptRoot/../observation/win16_generic_probe.asm"
-if($LASTEXITCODE){throw 'NE build failed'}
-$extra=if($Case -eq 'mismatch'){'/DTEST_GENERIC_CDECL'}else{'/DTEST_GENERIC_NORMAL'}
-$export=if($Case -eq 'mismatch'){'/EXPORT:RunGenericProbe'}else{'/EXPORT:RunGenericProbe=_RunGenericProbe@12'}
-& $driver cl /nologo /LD /O2 /MT $extra "/Fo$root/native.obj" "$PSScriptRoot/../observation/wow_generic_callback_probe.c" /link "/OUT:$root/GENHOST.DLL" "/IMPLIB:$root/native.lib" $export /EXPORT:ResolveGenericSegment=_ResolveGenericSegment@4 *> "$root/build.txt"
-if($LASTEXITCODE){throw 'Native build failed'}
+& "$repo/tools/build-fixtures.cmd" x86 "wow-generic-$Case" *> "$root/build.txt"
+if($LASTEXITCODE){throw 'Generic probe native build failed'}
+$cache="$repo/build/.ninja/fixtures-x86/guest-probes"
+Copy-Item -LiteralPath "$cache/mine/generic.exe" -Destination "$root/GENPROBE.EXE"
+Copy-Item -LiteralPath "$cache/generic-$Case/GENHOST.DLL" -Destination "$root/GENHOST.DLL"
 . "$repo/test/observation/isolated_package_cleanup.ps1"
 $runtime=New-PhysicalRuntimeStage $PackageRoot
 $scope=New-IsolatedPackageScope $runtime

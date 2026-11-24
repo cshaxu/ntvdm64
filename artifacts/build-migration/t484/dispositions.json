@@ -1382,5 +1382,10 @@
     "status": "supplemental-native-producer-pending-staging",
     "reason": "Expected uint32 enumeration status is passed through checked CMD/CMake configuration; source/flags preserved, runtime assertions unchanged. Shared staging remains.",
     "evidence": "docs/etc/evidence/t484-s3-remote-probe.md"
+  },
+  "test/integration/verify-wow-generic-call.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "NE image and normal/cdecl host DLL use shared CMD graph; both real Win16 callbacks pass three phases and release counts. Shared physical staging remains pending.",
+    "evidence": "docs/etc/evidence/t484-s3-generic-native.md"
   }
 }

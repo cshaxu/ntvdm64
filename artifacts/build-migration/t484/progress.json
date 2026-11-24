@@ -1,14 +1,14 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "0b17bc05e8ac5af974ea8cdc26fea93fa6699e9e",
+  "head": "eddce2c53d0a7ff99d56fe60f2115c5a4c4c5ba8",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-redirector-remote.ps1",
+    " M test/integration/verify-wow-generic-call.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/guest-probes.cmake",
-    "?? docs/etc/evidence/t484-s3-remote-probe.md"
+    " M tools/build/fixtures/wow-mine.cmake",
+    "?? docs/etc/evidence/t484-s3-generic-native.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6483,6 +6483,12 @@
     }
   ],
   "commits": {
+    "eddce2c53d0a7ff99d56fe60f2115c5a4c4c5ba8": {
+      "subject": "T484 S3 P190 migrate parameterized remote probe build",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-remote-probe.md"
+      ]
+    },
     "0b17bc05e8ac5af974ea8cdc26fea93fa6699e9e": {
       "subject": "T484 S3 P189 migrate transition probe producer chains",
       "evidence": [

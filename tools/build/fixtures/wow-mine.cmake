@@ -40,14 +40,30 @@ foreach(rounds RANGE 1 32)
     DEPENDS "${source}" "${NTVDM_NASM}" VERBATIM)
   list(APPEND outputs "${root}/dialog-${rounds}.exe" "${root}/dialog-${rounds}.lst")
 endforeach()
-set(source "${NTVDM_REPO}/test/observation/wow_generic_callback_probe.c")
-add_custom_command(OUTPUT "${root}/GENHOST.DLL" "${root}/GENHOST.lib"
-  COMMAND "${CMAKE_C_COMPILER}" /nologo /LD /MT /O2 /DTEST_GUEST_EXCEPTION
-    "/Fo${root}/generic.obj" "${source}" /link "/OUT:${root}/GENHOST.DLL"
-    "/IMPLIB:${root}/GENHOST.lib" /EXPORT:RunGenericProbe=_RunGenericProbe@12
-    /EXPORT:ResolveGenericSegment=_ResolveGenericSegment@4
-  DEPENDS "${source}" "${CMAKE_C_COMPILER}"
-  BYPRODUCTS "${root}/generic.obj" "${root}/GENHOST.exp"
-  WORKING_DIRECTORY "${root}" VERBATIM)
+function(generic_host directory define exported)
+  file(MAKE_DIRECTORY "${directory}")
+  set(source "${NTVDM_REPO}/test/observation/wow_generic_callback_probe.c")
+  add_custom_command(OUTPUT "${directory}/GENHOST.DLL" "${directory}/GENHOST.lib"
+    COMMAND "${CMAKE_C_COMPILER}" /nologo /LD /MT /O2 "/D${define}"
+      "/Fo${directory}/generic.obj" "${source}" /link "/OUT:${directory}/GENHOST.DLL"
+      "/IMPLIB:${directory}/GENHOST.lib" "/EXPORT:${exported}"
+      /EXPORT:ResolveGenericSegment=_ResolveGenericSegment@4
+    DEPENDS "${source}" "${CMAKE_C_COMPILER}"
+    BYPRODUCTS "${directory}/generic.obj" "${directory}/GENHOST.exp"
+    WORKING_DIRECTORY "${directory}" VERBATIM)
+endfunction()
+generic_host("${root}" TEST_GUEST_EXCEPTION "RunGenericProbe=_RunGenericProbe@12")
 add_custom_target(wow-mine-probes DEPENDS wow-mine-host ${outputs}
   "${root}/GENHOST.DLL" "${root}/GENHOST.lib")
+foreach(kind IN ITEMS normal mismatch)
+  set(define TEST_GENERIC_NORMAL)
+  set(exported "RunGenericProbe=_RunGenericProbe@12")
+  if(kind STREQUAL "mismatch")
+    set(define TEST_GENERIC_CDECL)
+    set(exported RunGenericProbe)
+  endif()
+  set(directory "${CMAKE_BINARY_DIR}/guest-probes/generic-${kind}")
+  generic_host("${directory}" "${define}" "${exported}")
+  add_custom_target(wow-generic-${kind} DEPENDS "${root}/generic.exe"
+    "${directory}/GENHOST.DLL" "${directory}/GENHOST.lib")
+endforeach()
