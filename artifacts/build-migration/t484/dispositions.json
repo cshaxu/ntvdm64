@@ -1307,5 +1307,10 @@
     "status": "supplemental-native-producer-pending-staging",
     "reason": "Retained focused profile/DDE regression, not direct Full entry. Existing win31-matrix CMD target replaces NASM; exact output bytes and cache verified. Shared runtime preparation remains pending.",
     "evidence": "docs/etc/evidence/t484-s3-profile-dde.md"
+  },
+  "test/integration/multitask/verify-win95-guest-only.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Both authored COM profiles use shared CMD target and native bounded path binding; exact bytes and shared binder regression pass. Patch configuration and shared staging remain.",
+    "evidence": "docs/etc/evidence/t484-s3-win95-guest.md"
   }
 }

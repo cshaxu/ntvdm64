@@ -38,7 +38,7 @@ try {
  if((Get-Content "$dest/PATCH/CONFIG.NT" -Raw) -notmatch '(?im)^dosonly\s*$'){throw 'Guest-only profile lacks DOSONLY'}
   $selectedIni=Get-Content "$dest/SYSTEM.INI" -Raw
  if([bool]($selectedIni -match '(?im)^device=.*NTVDM64\.386') -ne [bool]$Multitask -or $selectedIni -notmatch '(?im)^device=.*INSIGNIA\.386'){throw 'Guest-only profile driver selection mismatch'}
- $defines=@()
+ $template='ONLY.COM'
  if($RejectNativeImage){
   $image=(Resolve-Path -LiteralPath $RejectNativeImage).Path
   $pe=[IO.File]::ReadAllBytes($image);$header=[BitConverter]::ToInt32($pe,60)
@@ -52,21 +52,15 @@ try {
   }
   Copy-Item -LiteralPath $image -Destination "$dest/PATCH/NATIVE.EXE"
   Get-FileHash "$dest/PATCH/NATIVE.EXE" | ConvertTo-Json | Set-Content "$task/native-image.json"
-  $defines=@('-DREJECT_NATIVE=1')
+  $template='REJECT.COM'
  }
- & nasm -f bin @defines "$PSScriptRoot/win95-guest-only.asm" -o "$dest/PATCH/ONLY.COM"
- if($LASTEXITCODE){throw 'DOS probe assembly failed'}
- $bytes=[IO.File]::ReadAllBytes("$dest/PATCH/ONLY.COM");$i=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@OUTPUT@')
- $path=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\ONLY.BIN")
- if($i -lt 0 -or $path.Length -ge 128){throw 'Invalid DOS probe path'}
- [Array]::Clear($bytes,$i,128);[Array]::Copy($path,0,$bytes,$i,$path.Length);[IO.File]::WriteAllBytes("$dest/PATCH/ONLY.COM",$bytes)
- if($RejectNativeImage){
-  $i=[Text.Encoding]::ASCII.GetString($bytes).IndexOf('@NATIVE@')
-  $path=[Text.Encoding]::ASCII.GetBytes("$dest\PATCH\NATIVE.EXE")
-  if($i -lt 0 -or $path.Length -ge 128){throw 'Invalid native probe path'}
-  [Array]::Clear($bytes,$i,128);[Array]::Copy($path,0,$bytes,$i,$path.Length)
-  [IO.File]::WriteAllBytes("$dest/PATCH/ONLY.COM",$bytes)
- }
+ & "$repo/tools/build-fixtures.cmd" x86 win95-guest-only
+ if($LASTEXITCODE){throw 'DOS probe native build failed'}
+ Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/win95-guest-only/$template" -Destination "$dest/PATCH/ONLY.COM"
+ $fields=@('--fields',"$dest/PATCH/ONLY.COM",'@OUTPUT@',"$dest\PATCH\ONLY.BIN")
+ if($RejectNativeImage){$fields+=@('@NATIVE@',"$dest\PATCH\NATIVE.EXE")}
+ & "$repo/build/.ninja/fixtures-x86/win31-probe-paths.exe" @fields
+ if($LASTEXITCODE){throw 'DOS probe path binding failed'}
  & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/ONLY.PIF" --title 'Guest DOS' --program "$dest\PATCH\ONLY.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
  if($LASTEXITCODE){throw 'Guest-only PIF creation failed'}
  $win="$dest/WIN.INI";$text=$enc.GetString([IO.File]::ReadAllBytes($win))

@@ -122,7 +122,8 @@ int main(int argc, char **argv)
         if ((argc - 3) % 2 || !load(argv[2], &windows)) goto done;
         for (at = 3; at < argc; at += 2) {
             /* Only named path slots in independently authored witnesses. */
-            if ((strncmp(argv[at], "@VM_", 4) && strncmp(argv[at], "@W31_", 5)) ||
+            if ((strncmp(argv[at], "@VM_", 4) && strncmp(argv[at], "@W31_", 5) &&
+                 strcmp(argv[at], "@OUTPUT@") && strcmp(argv[at], "@NATIVE@")) ||
                 argv[at][strlen(argv[at]) - 1] != '@' ||
                 !bind_field(&windows, argv[at], argv[at + 1])) goto done;
         }

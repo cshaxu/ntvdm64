@@ -86,6 +86,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P184 profile/DDE producers](../etc/evidence/t484-s3-profile-dde.md) | Two focused regression callers reuse the existing CMD target; byte identity and no-op checks pass. Fixed316/355; four supplemental chains await staging;16 of18 newly found NASM callers remain. |
 
+| [P185 Win95 guest-only](../etc/evidence/t484-s3-win95-guest.md) | Both COM profiles and path binding use native producers; byte equivalence and shared binder regression pass. Fixed316/355; five supplemental preparation chains pending;15 of18 newly found NASM callers remain. |
+
 A fresh global scan found18 further integration scripts with direct NASM
 commands; these await retention/migration reconciliation, as recorded in P183.
 The frozen355 census is not the complete remaining invocation graph.

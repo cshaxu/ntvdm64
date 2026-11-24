@@ -1,15 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "c94c31690bd0be9f389ae6da0b5fef00b66a1437",
+  "head": "d12cc5983cfd35f6efc2141d5335704d26f7658a",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
-    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/multitask/verify-win31-empty-profile.ps1",
-    " M test/integration/multitask/verify-win31-progman-dde.ps1",
+    " M test/build/verify-win31-probe-paths.ps1",
+    " M test/integration/multitask/verify-win95-guest-only.ps1",
+    " M test/observation/win31_probe_paths.c",
+    " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/guest-probes.cmake",
-    "?? docs/etc/evidence/t484-s3-profile-dde.md"
+    "?? docs/etc/evidence/t484-s3-win95-guest.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6484,6 +6485,12 @@
     }
   ],
   "commits": {
+    "d12cc5983cfd35f6efc2141d5335704d26f7658a": {
+      "subject": "T484 S3 P184 share native profile and DDE witness build",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-profile-dde.md"
+      ]
+    },
     "c94c31690bd0be9f389ae6da0b5fef00b66a1437": {
       "subject": "T484 S3 P183 verify native idle forwarding without desktop activation",
       "evidence": [

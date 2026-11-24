@@ -162,3 +162,23 @@ foreach($case in @('role','unknown','duplicate','path-size','command-size','envi
  if(!$LASTEXITCODE -or (Get-FileHash $output).Hash -ne $beforeHash){throw "COM rejection failed: $case"}
 }
 'PASS seven real COM variants, both roles byte-equivalent; nine COM rejection cases preserve output'
+# Win95 guest-only fixtures use the same bounded path slots.
+& "$repo/tools/build-fixtures.cmd" x86 win95-guest-only *> "$root/win95-build.log"
+if($LASTEXITCODE){throw 'Win95 guest fixture build failed'}
+foreach($name in 'ONLY','REJECT'){
+ $template="$repo/build/.ninja/fixtures-x86/guest-probes/win95-guest-only/$name.COM"
+ $file="$root/win95-$name.COM";Copy-Item $template $file
+ $before=[IO.File]::ReadAllBytes($file)
+ $fields=@(,@('@OUTPUT@',"$directory\ONLY.BIN"))
+ if($name -eq 'REJECT'){$fields+=,@('@NATIVE@',"$directory\NATIVE.EXE")}
+ $args=@('--fields',$file)
+ foreach($field in $fields){$args+=@($field[0],$field[1])}
+ & $Binder @args
+ if($LASTEXITCODE){throw 'Win95 path binding failed'}
+ Same-ExceptFields $before ([IO.File]::ReadAllBytes($file)) $fields
+ Copy-Item $template $file -Force
+ $hash=(Get-FileHash $file).Hash
+ & $Binder --fields $file '@OUTPUT@' "$directory\ONLY.BIN" '@NATIVE@' ('X'*128) 2> "$root/win95-$name.stderr"
+ if(!$LASTEXITCODE -or (Get-FileHash $file).Hash -ne $hash){throw 'Win95 invalid second field modified input'}
+}
+'PASS both real Win95 COM templates and failed second-field no-write behavior'
