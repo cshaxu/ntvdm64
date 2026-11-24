@@ -86,7 +86,7 @@ for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I"
 for %%I in (wow-public-memory-abi wow-registry-shutdown) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-winsock-provider" set "SELECTED=1"
 if "%TARGET%"=="wow-winsock-provider" if not "%~1"=="x86" exit /b 2
-for %%I in (wow-lifecycle-task wow-lifecycle-native-send wow-lifecycle-native-reply wow-lifecycle-native-nested wow-lifecycle-native-seen wow-lifecycle-native-identity wow-lifecycle-native-foreign wow-lifecycle-native-indirect wow-lifecycle-original-hook-cleanup wow-lifecycle-task-order wow-lifecycle-thunk-scope wow-lifecycle-start-notification wow-lifecycle-menu-cleanup wow-lifecycle-class-client wow-lifecycle-class-query wow-lifecycle-class-lifetime) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (wow-lifecycle-task wow-lifecycle-native-send wow-lifecycle-native-reply wow-lifecycle-native-nested wow-lifecycle-native-seen wow-lifecycle-native-identity wow-lifecycle-native-foreign wow-lifecycle-native-indirect wow-lifecycle-original-hook-cleanup wow-lifecycle-task-order wow-lifecycle-thunk-scope wow-lifecycle-start-notification wow-lifecycle-menu-cleanup wow-lifecycle-class-client wow-lifecycle-class-query wow-lifecycle-class-lifetime wow-lifecycle-process-retirement wow-lifecycle-init-notification) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET:~0,14%"=="wow-lifecycle-" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-task-close-result" set "SELECTED=1"
 if "%TARGET%"=="wow-task-close-result" if not "%~1"=="x86" exit /b 2
@@ -366,7 +366,10 @@ if not exist "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\wow32\CMakeCache.txt" (
   call "%NTVDM_ROOT%\tools\build.cmd" x86
   if errorlevel 1 exit /b 1
 )
-cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\worker" --target wow-lifecycle-inputs
+set "LIFECYCLE_INPUTS=wow-lifecycle-inputs"
+if "%TARGET%"=="wow-lifecycle-process-retirement" set "LIFECYCLE_INPUTS=wow-lifecycle-retirement-inputs"
+if "%TARGET%"=="wow-lifecycle-init-notification" set "LIFECYCLE_INPUTS=wow-lifecycle-startup-inputs"
+cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\worker" --target %LIFECYCLE_INPUTS%
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\msvc-x86-release\wow32" --target %TARGET%
 exit /b %errorlevel%

@@ -1,0 +1,37 @@
+{
+  "completedNormalCases": 19,
+  "projection": {
+    "sourceSha256": "5957E427E4A7013AAD9AB0B77BD4A6CC07233A3054B0AB56D39073DA942D4795",
+    "projectionSha256": "E7876391A40F4BADDBFF1980D7251A26425EBF9D78A029F0E91E2288E2477D68",
+    "same": true
+  },
+  "priorNativeExecutablesUnchanged": 16,
+  "remainingNormalCases": 11,
+  "fileComplete": false,
+  "cleanup": {
+    "removedLines": 8
+  },
+  "cache": {
+    "mtime": "2026-11-24T04:15:31.0004518Z",
+    "sha256": "021262F04F7345035C7D7A0FFA75A0C68A689D07E7F6C9F9FD38BF94F2AE4F77",
+    "wrongArch": 2
+  },
+  "publication": {
+    "unchanged": true,
+    "publishedCopies": 22,
+    "rawInputs": 11,
+    "republished": false
+  },
+  "validation": {
+    "finished": "2026-11-24T05:16:30.8280812+01:00",
+    "exit": 0,
+    "started": "2026-11-24T05:14:55.9740505+01:00",
+    "pid": 9160
+  },
+  "final": {
+    "finished": "2026-11-24T05:17:26.9114896+01:00",
+    "pid": 32252,
+    "exit": 0,
+    "started": "2026-11-24T05:17:12.1420496+01:00"
+  }
+}

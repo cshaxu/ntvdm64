@@ -38,6 +38,15 @@ list(REMOVE_ITEM lifecycle_provider "$<TARGET_OBJECTS:original_wkfileio>" "$<TAR
 list(APPEND lifecycle_provider "$<TARGET_OBJECTS:lifecycle_wkfileio>")
 add_library(lifecycle_provider STATIC EXCLUDE_FROM_ALL ${lifecycle_provider})
 set_target_properties(lifecycle_provider PROPERTIES LINKER_LANGUAGE C)
+get_target_property(startup_flags obj_compat_wow_user_registration_bridge_obj COMPILE_FLAGS)
+wow_unit(lifecycle_registration "${NTVDM_REPO}/src/compat/wow_user_registration_bridge.c"
+  "${startup_flags} /DNtvdmReportWowStartup=wow_fixture_NtvdmReportWowStartup")
+set_property(TARGET lifecycle_registration PROPERTY EXCLUDE_FROM_ALL TRUE)
+set(startup_provider ${lifecycle_provider})
+list(REMOVE_ITEM startup_provider "$<TARGET_OBJECTS:obj_compat_wow_user_registration_bridge_obj>")
+list(APPEND startup_provider "$<TARGET_OBJECTS:lifecycle_registration>")
+add_library(lifecycle_startup_provider STATIC EXCLUDE_FROM_ALL ${startup_provider})
+set_target_properties(lifecycle_startup_provider PROPERTIES LINKER_LANGUAGE C)
 file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/lifecycle-provider-objects.txt" CONTENT "$<JOIN:${lifecycle_provider},\n>\n")
 get_filename_component(lifecycle_worker "${NTVDM_PARENT_IMPORT_LIBRARY}" DIRECTORY)
 # The CMD entry builds these exact worker-owned objects before this target.
@@ -45,7 +54,13 @@ if(EXISTS "${lifecycle_worker}/lifecycle-inputs.txt")
   file(STRINGS "${lifecycle_worker}/lifecycle-inputs.txt" lifecycle_worker_inputs)
   set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${lifecycle_worker}/lifecycle-inputs.txt")
   set(lifecycle_cases task native-send native-reply native-nested native-seen native-identity native-foreign native-indirect
-    original-hook-cleanup task-order thunk-scope start-notification menu-cleanup class-client class-query class-lifetime)
+    original-hook-cleanup task-order thunk-scope start-notification menu-cleanup class-client class-query class-lifetime
+    process-retirement init-notification)
+  ntvdm_source_projection("startup-owner.inc" "${NTVDM_REPO}/src/mvdm-host/wow32/wkman.c"
+    "BOOL WINAPI wow_original_task_cleanup_uninitialized(" "VOID WINAPI wow_original_task_retire_async(" "" FALSE)
+  wow_unit(lifecycle_startup_td "${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_startup_td_fixture.c"
+    "${lifecycle_original_flags} /I \"${CMAKE_BINARY_DIR}\"")
+  set_property(TARGET lifecycle_startup_td PROPERTY EXCLUDE_FROM_ALL TRUE)
   ntvdm_source_projection("lifecycle-after.h" "${NTVDM_REPO}/src/compat/wow_user_task_lifecycle.c"
     "#define WOW_NATIVE_CALL_AFTER(" "#define WOW_NATIVE_CALL_RESULT(" "" FALSE)
   ntvdm_source_projection("lifecycle-message.h" "${NTVDM_REPO}/src/compat/wow_user_task_lifecycle.c"
@@ -55,6 +70,20 @@ if(EXISTS "${lifecycle_worker}/lifecycle-inputs.txt")
   foreach(kind IN LISTS lifecycle_cases)
     set(fixture lifecycle_task)
     set(parent lifecycle_parent)
+    set(provider lifecycle_provider)
+    set(worker_inputs ${lifecycle_worker_inputs})
+    set(extra)
+    if(kind STREQUAL "process-retirement" OR kind STREQUAL "init-notification")
+      if(kind STREQUAL "process-retirement")
+        set(profile retirement)
+      else()
+        set(profile startup)
+        set(provider lifecycle_startup_provider)
+        list(APPEND extra "$<TARGET_OBJECTS:lifecycle_startup_td>")
+      endif()
+      file(STRINGS "${lifecycle_worker}/lifecycle-${profile}-inputs.txt" worker_inputs)
+      set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${lifecycle_worker}/lifecycle-${profile}-inputs.txt")
+    endif()
     if(NOT kind STREQUAL "task")
       set(flags "${lifecycle_flags}")
       set(source wow_user_task_lifecycle_fixture.c)
@@ -77,6 +106,10 @@ if(EXISTS "${lifecycle_worker}/lifecycle-inputs.txt")
         set(flags "${lifecycle_original_flags} /we4113 /we4047")
       elseif(kind STREQUAL "start-notification")
         string(APPEND flags " /DWOW_START_NOTIFICATION_FIXTURE")
+      elseif(kind STREQUAL "process-retirement")
+        set(source wow_process_retirement_fixture.c)
+      elseif(kind STREQUAL "init-notification")
+        set(source wow_init_notification_fixture.c)
       elseif(kind STREQUAL "menu-cleanup")
         string(APPEND flags " /DWOW_MENU_CLEANUP_FIXTURE")
         set(parent lifecycle_parent_menu)
@@ -95,18 +128,18 @@ if(EXISTS "${lifecycle_worker}/lifecycle-inputs.txt")
       set_property(TARGET ${fixture} PROPERTY EXCLUDE_FROM_ALL TRUE)
     endif()
     set(output "${CMAKE_BINARY_DIR}/lifecycle-${kind}.exe")
-  set(lifecycle_direct "$<TARGET_OBJECTS:${fixture}>" "$<TARGET_OBJECTS:${parent}>"
+  set(lifecycle_direct ${extra} "$<TARGET_OBJECTS:${fixture}>" "$<TARGET_OBJECTS:${parent}>"
     "$<TARGET_OBJECTS:lifecycle_imports>" "$<TARGET_OBJECTS:lifecycle_seams>"
     "$<TARGET_OBJECTS:obj_wow32-system-import-abi-aliases_obj>"
     "$<TARGET_OBJECTS:obj_wow32-parent-import-abi-aliases_obj>")
   add_custom_command(OUTPUT "${output}"
     COMMAND "${CMAKE_LINKER}" /nologo /NODEFAULTLIB:ntvdm.lib "/out:${output}" "/map:${output}.map"
-      ${lifecycle_direct} "$<TARGET_FILE:lifecycle_provider>" ${lifecycle_worker_inputs}
+      ${lifecycle_direct} "$<TARGET_FILE:${provider}>" ${worker_inputs}
       "${CMAKE_BINARY_DIR}/legacy-wow-user32.lib" "${CMAKE_BINARY_DIR}/legacy-wow-kernel32.lib"
       "${CMAKE_BINARY_DIR}/legacy-wow-ntdll.lib" version.lib comdlg32.lib rpcrt4.lib kernel32.lib
       user32.lib gdi32.lib shell32.lib advapi32.lib ntdll.lib oldnames.lib libcmt.lib libvcruntime.lib libucrt.lib
-    DEPENDS lifecycle_provider ${fixture} ${parent} lifecycle_imports lifecycle_seams wow-imports
-      ${lifecycle_direct} "$<TARGET_FILE:lifecycle_provider>" ${lifecycle_worker_inputs}
+    DEPENDS ${provider} ${fixture} ${parent} lifecycle_imports lifecycle_seams wow-imports
+      ${lifecycle_direct} "$<TARGET_FILE:${provider}>" ${worker_inputs}
     COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(wow-lifecycle-${kind} DEPENDS "${output}")
   endforeach()

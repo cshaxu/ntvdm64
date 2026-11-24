@@ -56,7 +56,7 @@ if ($Case -eq 'task-close-result') {
     $result
     return
 }
-$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime') -and !$InitRollback -and !$RetirementLockProbe
+$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime','process-retirement','init-notification') -and !$InitRollback -and !$RetirementLockProbe
 if($nativeCase){
     $kind=if($Case -eq 'task-lifecycle'){'task'}else{$Case}
     & "$repo/tools/build-fixtures.cmd" x86 "wow-lifecycle-$kind" *> "$out/build.log"
@@ -258,7 +258,6 @@ Invoke-Build ($combinedSeams.Replace('/Gz', '/Gd'))
 $fixtureSupportObjects += Join-Path $out 'combined-seams.obj'
 Invoke-NinjaTarget $provider 'obj/compat/wow_user_task_lifecycle.obj'
 $fixtureName = 'wow_user_task_lifecycle_fixture.c'
-if ($Case -eq 'process-retirement') { $fixtureName = 'wow_process_retirement_fixture.c' }
 if ($Case -eq 'native-dispatch-gate') {
     Invoke-NinjaTarget $provider 'obj/compat/wow_window_words_binding.obj'
     $fixtureName = 'wow_native_dispatch_gate_fixture.c'
@@ -271,7 +270,7 @@ if ($Case -eq 'standard-class') {
     Invoke-NinjaTarget $provider 'obj/compat/wow_standard_class_bindings.obj obj/compat/wow_class_words_binding.obj'
     $fixtureName = 'wow_standard_class_fixture.c'
 }
-if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
+if ($InitialPublicationOnly) {
     Invoke-NinjaTarget $provider 'obj/compat/wow_user_registration_bridge.obj'
     $fixtureName = 'wow_init_notification_fixture.c'
 }
@@ -405,13 +404,6 @@ $parentObjects = @((Join-Path $out 'parent-stub.obj'))
     $replacedLeaves = @('publish_menu','publish_menus','retire_menu',
         'publish_named_class','retire_class','release_class','set_expected_windows_version',
         'exchange_client_context')
-    if ($Case -eq 'process-retirement') { $replacedLeaves += 'handle_metadata' }
-    if ($Case -eq 'init-notification') {
-        # The fixture supplies the pre-registration desktop readiness and
-        # shared-info seam.  Keep the real page-domain owner for every other
-        # entry instead of allowing duplicate definitions at final link.
-        $replacedLeaves += @('client_desktop_ready','guest_shared_info')
-    }
     foreach ($leaf in $replacedLeaves) {
         $symbol = 'mvdm_softpc_wow_page_domain_' + $leaf
         $pageFixture += ' /D' + $symbol + '=wow_fixture_real_page_' + $leaf
@@ -419,7 +411,7 @@ $parentObjects = @((Join-Path $out 'parent-stub.obj'))
     Invoke-CompilerCommand $worker $pageFixture
     $parentObjects += Join-Path $out 'page-native-fixture.obj'
 }
-if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
+if ($InitialPublicationOnly) {
     $startupTd = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\startup-td.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_startup_td_fixture.c"')
     if ($startupTd -eq $compile) { throw 'Startup TD fixture substitution failed' }
     Invoke-NinjaTarget $provider 'obj/compat/wow_task_cleanup_entry.obj'
@@ -578,7 +570,7 @@ if ($RetirementLockProbe) {
     $objects = @($objects | Where-Object { $_ -notin $original })
     $parentObjects += Join-Path $out 'retirement-lock-probe.obj'
 }
-if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
+if ($InitialPublicationOnly) {
     # Preserve the real launch-client library because it provides other
     # selected BaseClient calls.  Redirect only this bridge's notification
     # import to the fixture's authenticated RPC seam; no duplicate definition

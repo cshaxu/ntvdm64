@@ -1735,3 +1735,5 @@ post-publication targeted checks.
 - [T484 S3 shared lifecycle producer](evidence/t484-s3-lifecycle-native.md)
 
 - [T484 S3 lifecycle contracts and cleanup](evidence/t484-s3-lifecycle-classes.md)
+
+- [T484 S3 retirement and startup producers](evidence/t484-s3-lifecycle-startup.md)
