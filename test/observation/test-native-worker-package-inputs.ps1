@@ -9,6 +9,7 @@ param(
  [Parameter(Mandatory)][string]$LogRoot
 )
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/Invoke-System32Stage.ps1"
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $log=[IO.Path]::GetFullPath($LogRoot)
 $build=(Join-Path $repo 'build')+'\'
@@ -26,7 +27,7 @@ foreach($case in $cases) {
  $arguments.NativeWorker=$case.Worker;$arguments.NativeHook64=$case.Hook64
  $arguments.OutputRoot=Join-Path $log $case.Name
  $errorText=$null
- try {& "$repo/tools/build/Stage-System32ProductPackage.ps1" @arguments}catch{$errorText=$_.Exception.Message}
+ try {Invoke-System32Stage $arguments}catch{$errorText=$_.Exception.Message}
  if(!$errorText -or !$errorText.Contains($case.Expected)){throw "Wrong negative result: $($case.Name): $errorText"}
  [pscustomobject]@{Case=$case.Name;Expected=$case.Expected;Actual=$errorText}|
   ConvertTo-Json|Set-Content (Join-Path $log ($case.Name+'.json'))

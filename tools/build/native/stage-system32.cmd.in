@@ -1,0 +1,173 @@
+@echo off
+setlocal EnableExtensions DisableDelayedExpansion
+set "repo=@NTVDM_STAGE_REPO@"
+set "build=%repo%\build"
+for %%N in (BaselineRoot BuildCache Wow32 OutputRoot Vcdex NativeHook NativeHook64 NativeFrontend NativeMonitor NativeLauncher NativeService NativeWorker PackageId) do set "%%N="
+set "owned="
+:arguments
+if "%~1"=="" goto validate
+set "known="
+for %%N in (BaselineRoot BuildCache Wow32 OutputRoot Vcdex NativeHook NativeHook64 NativeFrontend NativeMonitor NativeLauncher NativeService NativeWorker PackageId) do if /i "%~1"=="-%%N" set "known=%%N"
+if not defined known exit /b 2
+set "%known%=%~2"
+shift
+shift
+goto arguments
+:validate
+set "failure=Missing required package input"
+if not defined BaselineRoot goto fail
+if not defined BuildCache goto fail
+if not defined Wow32 goto fail
+if not defined NativeWorker goto fail
+if not defined OutputRoot goto fail
+for %%I in ("%BaselineRoot%") do set "BaselineRoot=%%~fI"
+for %%I in ("%BuildCache%") do set "BuildCache=%%~fI"
+for %%I in ("%OutputRoot%") do set "OutputRoot=%%~fI"
+set "failure=Require a fresh repository-build staging root"
+call :within "%OutputRoot%"
+if errorlevel 1 goto fail
+if exist "%OutputRoot%" goto fail
+set "failure=Hook64 requires the matching Hook32 package input"
+if defined NativeHook64 if not defined NativeHook goto fail
+set "failure=Native worker requires both Hooks and a build-owned input"
+if not defined NativeHook64 goto fail
+call :within "%NativeWorker%"
+if errorlevel 1 goto fail
+set "failure=Native frontend requires the native worker and a build-owned input"
+if defined NativeFrontend call :within "%NativeFrontend%"
+if errorlevel 1 goto fail
+set "failure=Native monitor requires the native frontend and a build-owned input"
+if defined NativeMonitor if not defined NativeFrontend goto fail
+if defined NativeMonitor call :within "%NativeMonitor%"
+if errorlevel 1 goto fail
+set "failure=Native launcher requires the native monitor and a build-owned input"
+if defined NativeLauncher if not defined NativeMonitor goto fail
+if defined NativeLauncher call :within "%NativeLauncher%"
+if errorlevel 1 goto fail
+set "failure=Native service requires the native launcher and a build-owned input"
+if defined NativeService if not defined NativeLauncher goto fail
+if defined NativeService call :within "%NativeService%"
+if errorlevel 1 goto fail
+set "identity=%build%\.ninja\build-tools\ntvdm-package-id.exe"
+set "hash=%build%\.ninja\addon\hash\HASH.EXE"
+if not defined PackageId for /f "delims=" %%G in ('"%identity%" --new') do set "PackageId=%%G"
+set "failure=Package identity must not be empty"
+if not defined PackageId goto fail
+set "failure=Cannot create package staging directory"
+mkdir "%OutputRoot%"
+if errorlevel 1 goto fail
+set "owned=1"
+set "failure=Cannot copy baseline package"
+xcopy "%BaselineRoot%\*" "%OutputRoot%\" /E /I /H /K /Y >nul
+if errorlevel 1 goto fail
+set "manifest=%OutputRoot%\product-system32-manifest.json"
+set "pending=%manifest%.pending"
+if exist "%manifest%" del /q "%manifest%"
+if exist "%pending%" del /q "%pending%"
+set "system=%OutputRoot%\system32"
+set "failure=Baseline lacks original system32 media"
+if not exist "%system%\" goto fail
+if not defined Vcdex set "Vcdex=%BuildCache%\VCDEX.DLL"
+>"%pending%" echo [
+set "comma="
+call :image VCDEX.DLL "%Vcdex%" x86 332
+if errorlevel 1 goto fail
+call :choose run16.exe "%NativeLauncher%"
+if errorlevel 1 goto fail
+call :choose ntsrv.exe "%NativeService%"
+if errorlevel 1 goto fail
+call :choose ntcon.exe "%NativeFrontend%"
+if errorlevel 1 goto fail
+call :image ntvdm.exe "%BuildCache%\ntvdm.exe" x86 332
+if errorlevel 1 goto fail
+call :choose ntvwm.exe "%NativeWorker%"
+if errorlevel 1 goto fail
+call :choose ntmon.exe "%NativeMonitor%"
+if errorlevel 1 goto fail
+call :image WOW32.DLL "%Wow32%" x86 332
+if errorlevel 1 goto fail
+call :image VDMREDIR.DLL "%BuildCache%\VDMREDIR.DLL" x86 332
+if errorlevel 1 goto fail
+if defined NativeHook call :image nthook32.dll "%NativeHook%" x86 332
+if errorlevel 1 goto fail
+if defined NativeHook64 call :image nthook64.dll "%NativeHook64%" x64 34404
+if errorlevel 1 goto fail
+if not exist "%OutputRoot%\NTVDM.REG" goto licenses
+if not exist "%system%\NTVDM.REG" goto registry_move
+set "failure=Conflicting Registry overlays"
+fc /b "%OutputRoot%\NTVDM.REG" "%system%\NTVDM.REG" >nul
+if errorlevel 1 goto fail
+del /q "%OutputRoot%\NTVDM.REG"
+if errorlevel 1 goto fail
+goto licenses
+:registry_move
+move "%OutputRoot%\NTVDM.REG" "%system%\NTVDM.REG" >nul
+if errorlevel 1 goto fail
+:licenses
+if not defined NativeHook goto complete
+set "failure=Cannot copy hook licenses"
+copy /b /y "%build%\.ninja\build-tools\hook-license.txt"+"%build%\.ninja\build-tools\minhook-license.txt" "%system%\nthook32-LICENSE.txt" >nul
+if errorlevel 1 goto fail
+:complete
+>>"%pending%" echo ]
+move "%pending%" "%manifest%" >nul
+if errorlevel 1 goto fail
+echo PASS staged coherent system32 host package
+exit /b 0
+:choose
+if "%~2"=="" goto original
+call :image "%~1" "%~2" x64 34404
+exit /b %errorlevel%
+:original
+call :image "%~1" "%BuildCache%\%~1" x86 332
+exit /b %errorlevel%
+:image
+for %%I in ("%~2") do set "imageSource=%%~fI"
+set "failure=Wrong PE machine input: %~1"
+"%identity%" --machine %~3 "%imageSource%"
+if errorlevel 1 exit /b 1
+set "failure=Cannot hash package input: %~1"
+call :digest "%imageSource%"
+if errorlevel 1 exit /b 1
+set "inputHash=%hashValue%"
+set "failure=Staging copy hash mismatch"
+copy /b /y "%imageSource%" "%system%\%~1" >nul
+if errorlevel 1 exit /b 1
+call :digest "%system%\%~1"
+if errorlevel 1 exit /b 1
+if not "%inputHash%"=="%hashValue%" exit /b 1
+set "failure=Native package identity write failed"
+"%identity%" "%PackageId%" "%system%\%~1"
+if errorlevel 1 exit /b 1
+call :digest "%system%\%~1"
+if errorlevel 1 exit /b 1
+if exist "%OutputRoot%\%~1" del /q "%OutputRoot%\%~1"
+if errorlevel 1 exit /b 1
+>>"%pending%" echo %comma%{"Name":"%~1","RelativePath":"system32\\%~1","Sha256":"%hashValue%","Machine":%~4,"PackageId":"%PackageId%","InputSha256":"%inputHash%"}
+if errorlevel 1 exit /b 1
+set "comma=,"
+exit /b 0
+:digest
+set "hashValue="
+"%hash%" "%~1" >"%OutputRoot%\package-hash.tmp"
+if errorlevel 1 exit /b 1
+set /p "hashValue=" <"%OutputRoot%\package-hash.tmp"
+del /q "%OutputRoot%\package-hash.tmp"
+if not defined hashValue exit /b 1
+exit /b 0
+:within
+for %%I in ("%~1") do set "walk=%%~fI"
+:walk
+for %%I in ("%walk%\..") do set "parent=%%~fI"
+if /i "%parent%"=="%build%" exit /b 0
+if /i "%parent%"=="%walk%" exit /b 1
+set "walk=%parent%"
+goto walk
+:fail
+if not defined failure set "failure=Package staging failed"
+echo %failure% 1>&2
+if not defined owned exit /b 1
+if exist "%OutputRoot%\product-system32-manifest.json" del /q "%OutputRoot%\product-system32-manifest.json"
+if exist "%OutputRoot%\product-system32-manifest.json.pending" del /q "%OutputRoot%\product-system32-manifest.json.pending"
+if exist "%OutputRoot%\package-hash.tmp" del /q "%OutputRoot%\package-hash.tmp"
+exit /b 1

@@ -9,6 +9,7 @@ param(
  [Parameter(Mandatory)][string]$LogRoot
 )
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/Invoke-System32Stage.ps1"
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $build=(Resolve-Path $NativeBuild).Path
 $log=[IO.Path]::GetFullPath($LogRoot)
@@ -61,7 +62,7 @@ foreach($case in @(
 )) {
  $arguments.NativeFrontend=$case.image;$arguments.OutputRoot=Join-Path $log $case.name
  $message=$null
- try {& "$repo/tools/build/Stage-System32ProductPackage.ps1" @arguments}catch{$message=$_.Exception.Message}
+ try {Invoke-System32Stage $arguments}catch{$message=$_.Exception.Message}
  if(!$message -or !$message.Contains($case.expected)){throw "Incorrect negative result: $($case.name)/$message"}
  $results.Add(@{case=$case.name;rejected=$message})
 }

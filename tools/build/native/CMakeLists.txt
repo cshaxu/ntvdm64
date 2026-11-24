@@ -19,3 +19,19 @@ target_compile_options(ntvdm-tib PRIVATE /W4 /WX /EHsc)
 add_executable(ntvdm-package-id package-id.c)
 target_compile_options(ntvdm-package-id PRIVATE /W4 /WX)
 target_link_libraries(ntvdm-package-id PRIVATE ole32)
+
+# CMD CALL-label offsets require CRLF. Authored template remains LF.
+get_filename_component(NTVDM_STAGE_REPO "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
+file(TO_NATIVE_PATH "${NTVDM_STAGE_REPO}" NTVDM_STAGE_REPO)
+configure_file(stage-system32.cmd.in stage-system32.cmd @ONLY NEWLINE_STYLE CRLF)
+# Match the published UTF-8 text composition, excluding input BOMs.
+file(READ "${NTVDM_STAGE_REPO}/src/lib-win32/process-hook/LICENSE.win16style" hook_license)
+file(READ "${NTVDM_STAGE_REPO}/src/lib-win32/process-hook/minhook/LICENSE.txt" minhook_license)
+string(ASCII 239 187 191 utf8_bom)
+string(REGEX REPLACE "^${utf8_bom}" "" hook_license "${hook_license}")
+string(REGEX REPLACE "^${utf8_bom}" "" minhook_license "${minhook_license}")
+file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/hook-license.txt" CONTENT "${hook_license}\n" NEWLINE_STYLE CRLF)
+file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/minhook-license.txt" CONTENT "${minhook_license}" NEWLINE_STYLE UNIX)
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+  "${NTVDM_STAGE_REPO}/src/lib-win32/process-hook/LICENSE.win16style"
+  "${NTVDM_STAGE_REPO}/src/lib-win32/process-hook/minhook/LICENSE.txt")

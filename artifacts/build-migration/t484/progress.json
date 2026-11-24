@@ -1,36 +1,37 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "414aef6657ba7e88f0f21b556d3aa67c7aea9301",
+  "head": "a2cd519af9ec131efc650fb7ebcc16648f30b42d",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/integration/win31_dosmgr_adaptation_test.ps1",
-    " D test/integration/win31_krnl386_adaptation_test.ps1",
-    " D test/integration/win31_setup_apply_idempotence_test.ps1",
-    " M test/integration/win31_setup_cmd_roundtrip_test.ps1",
-    " D tools/build/win31-setup/adapt-retail-dosmgr.ps1",
-    " D tools/build/win31-setup/adapt-retail-krnl386.ps1",
-    " D tools/build/win31-setup/apply-setup.ps1",
-    " D tools/build/win31-setup/package-win31-setup.ps1",
-    "?? docs/etc/evidence/t484-s3-win31-retirement.md"
+    " M test/observation/test-native-monitor-package-inputs.ps1",
+    " M test/observation/test-native-worker-package-inputs.ps1",
+    " M test/observation/verify-native-frontend.ps1",
+    " M test/observation/verify-system32-package-staging.ps1",
+    " D tools/build/Stage-System32ProductPackage.ps1",
+    " M tools/build/native/CMakeLists.txt",
+    "?? docs/etc/evidence/t484-s4-system32-cmd.md",
+    "?? test/observation/Invoke-System32Stage.ps1",
+    "?? tools/build/native/stage-system32.cmd.in",
+    "?? tools/stage-system32.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 165,
+    "changed": 164,
     "unchanged": 13,
-    "removed": 177
+    "removed": 178
   },
   "disposition_counts": {
-    "migrated-delivered": 113,
+    "migrated-delivered": 114,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 177,
     "retained-native-delegate": 14,
     "pending-producer-migration": 26,
-    "requires-disposition-reconciliation": 6,
+    "requires-disposition-reconciliation": 5,
     "retained-standalone-audit": 16
   },
-  "existing_interpreted_candidates_with_command_hits": 143,
+  "existing_interpreted_candidates_with_command_hits": 142,
   "files": [
     {
       "id": "B0001",
@@ -6324,16 +6325,20 @@
       "id": "B0343",
       "file": "tools/build/Stage-System32ProductPackage.ps1",
       "stage": "S4",
-      "state": "changed",
-      "current_sha256": "95fa2fef3756a1d62d526fdfe55b5a7c80dcc5ed75c53991a6ac3c6a91da7ffd",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-direct-package-identity.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "S4 P2 replaces the PowerShell producer with tools/stage-system32.cmd and a single native-configured CMD template; all four test consumers use assertion-only delegation. Whole-package fixed-UUID comparison and failure cases retained.",
+        "evidence": "docs/etc/evidence/t484-s4-system32-cmd.md"
+      }
     },
     {
       "id": "B0344",
@@ -6474,8 +6479,12 @@
       "stage": "S4",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0cb40e7e24fc46611181ccc57aae71e106d198fd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win31-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -6489,8 +6498,12 @@
       "stage": "S4",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0cb40e7e24fc46611181ccc57aae71e106d198fd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win31-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -6504,8 +6517,12 @@
       "stage": "S4",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0cb40e7e24fc46611181ccc57aae71e106d198fd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win31-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -6519,8 +6536,12 @@
       "stage": "S4",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "0cb40e7e24fc46611181ccc57aae71e106d198fd"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win31-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -6545,6 +6566,24 @@
     }
   ],
   "commits": {
+    "a2cd519af9ec131efc650fb7ebcc16648f30b42d": {
+      "subject": "M0 T484 S4 P1: provide native UUID and package machine checks",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-package-primitives.md"
+      ]
+    },
+    "9c7b7830f245cd36480d681b64c11347a5bfa736": {
+      "subject": "M0 T484 S3 P218: close producer migration and admit S4 staging",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-closure.md"
+      ]
+    },
+    "0cb40e7e24fc46611181ccc57aae71e106d198fd": {
+      "subject": "M0 T484 S3 P217: retire superseded Win31 setup chain",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win31-retirement.md"
+      ]
+    },
     "414aef6657ba7e88f0f21b556d3aa67c7aea9301": {
       "subject": "M0 T484 S3 P216: retire historical compiler replay and migrate mouse regression",
       "evidence": [
@@ -10197,16 +10236,6 @@
         {
           "line": 133,
           "text": "$generated = $item.Extension.ToLowerInvariant() -in @('.obj','.o','.lib','.a','.pdb','.map','.res','.ilk','.exp','.tlog','.log','.txt','.json','.jsonl','.csv','.tsv','.xml','.html','.png','.jpg','.bmp','.etl','.dmp','.ninja','.cmd','.bat','.ps1','.mjs','.js','.py','.c','.h','.cpp','.def','.rsp','.exe','.dll','.manifest','.err','.out')"
-        }
-      ]
-    },
-    {
-      "id": "B0343",
-      "file": "tools/build/Stage-System32ProductPackage.ps1",
-      "hits": [
-        {
-          "line": 85,
-          "text": "& \"$PSScriptRoot/../../build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid]($PackageId)).ToString()) $destination"
         }
       ]
     }

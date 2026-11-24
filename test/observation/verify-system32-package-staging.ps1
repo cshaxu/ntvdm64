@@ -8,6 +8,7 @@ param([Parameter(Mandatory)][string]$BaselineRoot,
       [string]$NativeLauncher='', [string]$NativeService='',
       [Parameter(Mandatory)][string]$RunRoot)
 $ErrorActionPreference='Stop'
+$repo=[IO.Path]::GetFullPath("$PSScriptRoot/../..")
 $baseline=(Resolve-Path $BaselineRoot).Path
 $run=[IO.Path]::GetFullPath($RunRoot)
 $build=(Resolve-Path "$PSScriptRoot/../../build").Path+'\'
@@ -22,18 +23,19 @@ $registry=Join-Path $fixture 'NTVDM.REG'
 if(Test-Path $registry){throw 'Use a baseline without user overlay for this fixture'}
 [IO.File]::WriteAllText($registry,'S5-REGISTRY-PRESERVATION-FIXTURE',[Text.Encoding]::ASCII)
 $hash=(Get-FileHash $registry).Hash
-$stage="$PSScriptRoot/../../tools/build/Stage-System32ProductPackage.ps1"
+. "$PSScriptRoot/Invoke-System32Stage.ps1"
 $output=Join-Path $run 'candidate'
 $common=@{BaselineRoot=$fixture;BuildCache=$BuildCache;Wow32=$Wow32;
  NativeWorker=$NativeWorker;NativeHook=$NativeHook;NativeHook64=$NativeHook64;
  NativeFrontend=$NativeFrontend;NativeMonitor=$NativeMonitor;
  NativeLauncher=$NativeLauncher;NativeService=$NativeService}
-& $stage @common -OutputRoot $output
+$common.OutputRoot=$output
+Invoke-System32Stage $common
 $rows=Get-Content -LiteralPath (Join-Path $output 'product-system32-manifest.json') -Raw | ConvertFrom-Json
-if($rows.Count -ne 10 -or @($rows | Select-Object -ExpandProperty PackageId -Unique).Count -ne 1){
- throw 'Expected ten components with one package identity'
+if($rows.Count -ne 11 -or @($rows | Select-Object -ExpandProperty PackageId -Unique).Count -ne 1){
+ throw 'Expected eleven components with one package identity'
 }
-foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')){
+foreach($name in @('VCDEX.DLL','run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')){
  if((Test-Path (Join-Path $output $name)) -or !(Test-Path (Join-Path $output ('system32\'+$name)))){
   throw 'Wrong host layout'
  }
@@ -50,13 +52,34 @@ if(!$mixedRejected){throw 'Mixed test-cleanup layout was accepted'}
 $conflict=Join-Path $fixture 'system32\NTVDM.REG'
 [IO.File]::WriteAllText($conflict,'DIFFERENT-OVERLAY',[Text.Encoding]::ASCII)
 $conflictRejected=$false
-try{& $stage @common -OutputRoot (Join-Path $run 'conflict')}
-catch{$conflictRejected=$_.Exception.Message -eq 'Conflicting Registry overlays'}
+try{$common.OutputRoot=Join-Path $run 'conflict';Invoke-System32Stage $common}
+catch{$conflictRejected=$_.Exception.Message.Contains('Conflicting Registry overlays')}
 if(!$conflictRejected -or (Get-FileHash $registry).Hash -ne $hash){throw 'Conflicting overlays were merged or source mutated'}
 if(Test-Path -LiteralPath (Join-Path $run 'conflict/product-system32-manifest.json')){
  throw 'Failed staging retained a completion manifest'
 }
+$negativeCases=@(
+ @{name='wrong-worker';key='NativeWorker';value=$Wow32;expected='Wrong PE machine input: ntvwm.exe'},
+ @{name='missing-hook64';key='NativeHook64';value='';expected='Native worker requires both Hooks'},
+ @{name='outside-worker';key='NativeWorker';value="$repo/assets/release/ntvwm.exe";expected='Native worker requires both Hooks'},
+ @{name='missing-vcdex';key='Vcdex';value="$run/absent.dll";expected='Wrong PE machine input: VCDEX.DLL'},
+ @{name='empty-identity';key='PackageId';value='00000000-0000-0000-0000-000000000000';expected='Native package identity write failed'}
+)
+foreach($case in $negativeCases){
+ $argsCase=$common.Clone();$argsCase[$case.key]=$case.value
+ $argsCase.OutputRoot=Join-Path $run $case.name
+ # Avoid the intentional registry conflict created by the earlier case.
+ $argsCase.BaselineRoot=$baseline
+ $message=''
+ try {Invoke-System32Stage $argsCase}catch{$message=$_.Exception.Message}
+ if(!$message.Contains($case.expected)){throw "Wrong staging rejection $($case.name): $message"}
+ if(Test-Path (Join-Path $argsCase.OutputRoot 'product-system32-manifest.json')){throw 'Rejected package has completion manifest'}
+}
+$existing=$common.Clone();$existing.OutputRoot=$output
+$beforeManifest=(Get-FileHash (Join-Path $output 'product-system32-manifest.json')).Hash
+$message='';try{Invoke-System32Stage $existing}catch{$message=$_.Exception.Message}
+if(!$message.Contains('fresh repository-build staging root') -or (Get-FileHash (Join-Path $output 'product-system32-manifest.json')).Hash -ne $beforeManifest){throw 'Existing stage was not preserved'}
 [pscustomobject]@{OverlayMovedByteExactly=$true;SourcePreserved=$true;
     MixedLayoutRejected=$mixedRejected;ConflictingOverlaysRejected=$conflictRejected}|
  ConvertTo-Json|Set-Content (Join-Path $run 'results.json')
-'PASS system32 ten-file staging, one package identity, overlay preservation and conflict/mixed-layout negatives'
+'PASS system32 eleven-file staging, one package identity, overlay preservation and conflict/mixed-layout negatives'

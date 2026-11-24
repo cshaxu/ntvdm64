@@ -1909,3 +1909,5 @@ post-publication targeted checks.
 - [T484 S3 closure and S4 handoff](evidence/t484-s3-closure.md).
 
 - [T484 S4 native package primitives](evidence/t484-s4-package-primitives.md).
+
+- [T484 S4 CMD system32 package composition](evidence/t484-s4-system32-cmd.md).

@@ -10,6 +10,7 @@ param(
  [Parameter(Mandatory)][string]$LogRoot
 )
 $ErrorActionPreference='Stop'
+. "$PSScriptRoot/Invoke-System32Stage.ps1"
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $log=[IO.Path]::GetFullPath($LogRoot)
 if(!$log.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $log)){throw 'Require fresh build-only negative evidence'}
@@ -25,7 +26,7 @@ $results=@(foreach($case in @(
  $arguments=@{};foreach($key in $base.Keys){$arguments[$key]=$base[$key]}
  $arguments.NativeMonitor=$case.input;$arguments.OutputRoot=Join-Path $log $case.name
  $errorText=$null
- try {& "$repo/tools/build/Stage-System32ProductPackage.ps1" @arguments}catch{$errorText=$_.Exception.Message}
+ try {Invoke-System32Stage $arguments}catch{$errorText=$_.Exception.Message}
  if(!$errorText -or !$errorText.Contains($case.expected)){throw "Incorrect negative result: $($case.name)/$errorText"}
  [pscustomobject]@{case=$case.name;rejected=$errorText}
 })
