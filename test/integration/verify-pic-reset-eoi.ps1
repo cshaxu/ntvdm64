@@ -74,15 +74,13 @@ if($PackageRoot) {
         "exit=$($producer.ExitCode)" | Add-Content "$out/producer.txt"
         if($producer.ExitCode){throw 'Independent PIC guest probe assembly failed'}
     } finally {$producer.Dispose()}
-    Copy-Item (Join-Path $root 'build/.ninja/fixtures-x86/guest-probes/cpu-integration/PICIRQ.COM') "$out/PICIRQ.COM"
-    Get-FileHash $guestSource,"$out/PICIRQ.COM",$observerPath |
+    $guestProbe=Join-Path $root 'build/.ninja/fixtures-x86/guest-probes/cpu-integration/PICIRQ.COM'
+    Get-FileHash $guestSource,$guestProbe,$observerPath |
         Select-Object Path,Hash | Export-Csv -NoTypeInformation "$out/guest-inputs.csv"
-    $stage=New-PhysicalRuntimeStage (Resolve-Path -LiteralPath $PackageRoot).Path -TopLevelNames @('system32','system.ini')
+    $stage=New-PhysicalRuntimeStage (Resolve-Path -LiteralPath $PackageRoot).Path -TopLevelNames @('system32','system.ini') -TestFiles @($guestProbe)
     $scope=$null;$private=$env:MVDM_OBSERVER_PRIVATE_DESKTOP;$path=$env:PATH
     try {
         $scope=New-IsolatedPackageScope $stage
-        New-Item -ItemType Directory -Path "$stage/tests" | Out-Null
-        Copy-Item "$out/PICIRQ.COM" "$stage/tests/PICIRQ.COM"
         $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
         $env:PATH="$stage/system32;"+(Join-Path $env:SystemRoot 'System32')
         Get-ChildItem "$stage/system32" -File | Where-Object Extension -in @('.exe','.dll','.sys') |

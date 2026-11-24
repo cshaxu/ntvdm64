@@ -1920,3 +1920,4 @@ post-publication targeted checks.
 - [T484 S4 physical runtime staging](evidence/t484-s4-physical-stage.md).
 - [T484 S4 WOW application preparation](evidence/t484-s4-wow-app-preparation.md).
 - [T484 S4 independent consumer reconciliation](evidence/t484-s4-independent-consumers.md).
+- [T484 S4 device test input preparation](evidence/t484-s4-device-inputs.md).

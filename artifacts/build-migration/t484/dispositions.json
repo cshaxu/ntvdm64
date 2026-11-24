@@ -234,9 +234,9 @@
     "evidence": "docs/etc/evidence/t484-s3-native-output-isolation.md"
   },
   "test/integration/verify-pic-reset-eoi.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Native PIC probe producer verified; shared runtime/staging dependencies remain open",
-    "evidence": "docs/etc/evidence/t484-s3-pic-bios.md"
+    "status": "migrated-delivered",
+    "reason": "S4 P9 completes CMD test-file staging using canonical authored COM outputs. Existing native producers and real PIC IRQ0 control/reinit and serial direct/nested routes pass; independent input validation and byte identity are verified.",
+    "evidence": "docs/etc/evidence/t484-s4-device-inputs.md"
   },
   "test/integration/verify-s45-keyboard-shadow.ps1": {
     "status": "pending-producer-migration",
@@ -244,9 +244,9 @@
     "evidence": "docs/etc/evidence/t484-s3-keyboard-isolation.md"
   },
   "test/integration/verify-s45-vcd-serial-discovery.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Native host oracle and CMD guest producer verified; isolated direct/nested guest mask0 cases pass; shared runtime copy/manifest staging remains S4",
-    "evidence": "docs/etc/evidence/t484-s3-serial-native.md"
+    "status": "migrated-delivered",
+    "reason": "S4 P9 completes CMD test-file staging using canonical authored COM outputs. Existing native producers and real PIC IRQ0 control/reinit and serial direct/nested routes pass; independent input validation and byte identity are verified.",
+    "evidence": "docs/etc/evidence/t484-s4-device-inputs.md"
   },
   "test/integration/verify-s7-rpc-fixtures.ps1": {
     "evidence": "docs/etc/evidence/t484-s3-rpc-control-identity.md",

@@ -1,11 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "d4bc24c68b9670fb77c74ffcc35737e986d082e6",
+  "head": "cdaa7e96d1cc9b9f5f9227c4fb84148d209c4258",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    "?? docs/etc/evidence/t484-s4-independent-consumers.md"
+    " M test/build/Test-PackageIdentityTool.ps1",
+    " M test/integration/verify-pic-reset-eoi.ps1",
+    " M test/integration/verify-s45-vcd-serial-discovery.ps1",
+    " M test/observation/isolated_package_cleanup.ps1",
+    " M tools/build/native/stage-runtime.cmd.in",
+    "?? docs/etc/evidence/t484-s4-device-inputs.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -14,11 +19,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 116,
+    "migrated-delivered": 118,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 22,
+    "pending-producer-migration": 20,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -795,18 +800,18 @@
       "file": "test/integration/verify-pic-reset-eoi.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "63cc900bbd4a82a07d1b35a07e0605a1d49e87010d1958ad7c162622686ad939",
+      "current_sha256": "6a56a78add034e306bebabfcb1b391a429da0dbe7ffdb9bb25e0b5246cfb1617",
       "revisions": [
         "aaf160c20b2e4b65fc7df3eaf893734c7e630354"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-pic-bios.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native PIC probe producer verified; shared runtime/staging dependencies remain open",
-        "evidence": "docs/etc/evidence/t484-s3-pic-bios.md"
+        "status": "migrated-delivered",
+        "reason": "S4 P9 completes CMD test-file staging using canonical authored COM outputs. Existing native producers and real PIC IRQ0 control/reinit and serial direct/nested routes pass; independent input validation and byte identity are verified.",
+        "evidence": "docs/etc/evidence/t484-s4-device-inputs.md"
       }
     },
     {
@@ -835,7 +840,7 @@
       "file": "test/integration/verify-s45-vcd-serial-discovery.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "b37d32ee06d58f7f7ad51aecc05d9f9cbf2c144fb11c1a85e64fa8f1761982b9",
+      "current_sha256": "3cf68816330d68900683ad7597565f2d1a22ad9d8c240f38321421fe134611ba",
       "revisions": [
         "9460791b1215641a65a84df9786c2dc3359498f3",
         "626a2aed8aeb9d8eaa34f8403b2bbd61714f6753"
@@ -844,11 +849,11 @@
         "docs/etc/evidence/t484-s3-serial-native.md",
         "docs/etc/evidence/t484-s3-serial-probe.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native host oracle and CMD guest producer verified; isolated direct/nested guest mask0 cases pass; shared runtime copy/manifest staging remains S4",
-        "evidence": "docs/etc/evidence/t484-s3-serial-native.md"
+        "status": "migrated-delivered",
+        "reason": "S4 P9 completes CMD test-file staging using canonical authored COM outputs. Existing native producers and real PIC IRQ0 control/reinit and serial direct/nested routes pass; independent input validation and byte identity are verified.",
+        "evidence": "docs/etc/evidence/t484-s4-device-inputs.md"
       }
     },
     {
@@ -2024,7 +2029,7 @@
       "file": "test/observation/isolated_package_cleanup.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "13a8e903abf19d2c4b178240446e59f8a6024a9dd8873ef535fa5cd08e2b5363",
+      "current_sha256": "d7f692ebc8f52b6a544f0d7eda7256c9e36936f2a2b074b0b7cdc173457dfd3e",
       "revisions": [
         "3776c3208bcfcfa740fcf02da7aeca581d956e33",
         "629e0bdf4162b212fce97a7dd6f6092f3604c60d",
@@ -6590,6 +6595,12 @@
     }
   ],
   "commits": {
+    "cdaa7e96d1cc9b9f5f9227c4fb84148d209c4258": {
+      "subject": "M0 T484 S4 P8: reconcile independent cleanup and handoff consumers",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-independent-consumers.md"
+      ]
+    },
     "d4bc24c68b9670fb77c74ffcc35737e986d082e6": {
       "subject": "M0 T484 S4 P7: complete WOW application CMD preparation",
       "evidence": [
@@ -8375,7 +8386,7 @@
         },
         {
           "line": 77,
-          "text": "Copy-Item (Join-Path $root 'build/.ninja/fixtures-x86/guest-probes/cpu-integration/PICIRQ.COM') \"$out/PICIRQ.COM\""
+          "text": "$guestProbe=Join-Path $root 'build/.ninja/fixtures-x86/guest-probes/cpu-integration/PICIRQ.COM'"
         }
       ]
     },
@@ -9056,15 +9067,15 @@
           "text": "$reader = Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/ntvdm-package-id.exe'"
         },
         {
-          "line": 59,
+          "line": 60,
           "text": "$runner=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/stage-runtime.cmd'"
         },
         {
-          "line": 126,
+          "line": 128,
           "text": "throw 'Refuse guest probe cleanup: Git data or link'"
         },
         {
-          "line": 150,
+          "line": 152,
           "text": "# Test-only compatibility for sealed flat baselines and build-link caches."
         }
       ]

@@ -156,4 +156,17 @@ try{
  if($marker.source -cne [IO.Path]::GetFullPath($unicode)){throw 'UTF8 marker source changed'}
 }finally{if($stage){Remove-PhysicalRuntimeStage $stage}}
 'PASS selected/hidden/empty copying, legacy flat refresh, exclusions, mixed rejection and UTF8 ownership'
+$testInput="$out/probe.bin"
+[IO.File]::WriteAllBytes($testInput,[byte[]](0,1,127,255))
+$stage=$null
+try{
+ $stage=New-PhysicalRuntimeStage $package -TestFiles @($testInput)
+ if((Get-FileHash "$stage/tests/probe.bin").Hash -ne (Get-FileHash $testInput).Hash){throw 'Independent test input changed'}
+}finally{if($stage){Remove-PhysicalRuntimeStage $stage}}
+foreach($invalid in @("$out/missing.bin",$out,"$repo/assets/release/PIF.EXE")){
+ $rejected=$false
+ try{$unexpected=New-PhysicalRuntimeStage $package -TestFiles @($invalid)}catch{$rejected=$true}
+ if(!$rejected){Remove-PhysicalRuntimeStage $unexpected;throw "Invalid test input accepted: $invalid"}
+}
+'PASS build-owned test input copying and missing/directory/outside-build rejection'
 $global:LASTEXITCODE=0

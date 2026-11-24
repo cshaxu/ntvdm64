@@ -4,6 +4,7 @@ set "repo=@NTVDM_STAGE_REPO@"
 set "source="
 set "images="
 set "names="
+set "testfiles="
 set "fresh="
 set "owned="
 set "stage="
@@ -17,6 +18,12 @@ if /i "%~1"=="-FreshPackageIdentity" (
   goto arguments
 )
 if "%~2"=="" exit /b 2
+if /i "%~1"=="-TestFile" (
+  if not exist "%~f2" exit /b 2
+  if exist "%~f2\" exit /b 2
+  set testfiles=%testfiles% "%~f2"
+  goto next
+)
 if /i "%~1"=="-PackageRoot" (
   set "source=%~2"
   goto next
@@ -49,6 +56,11 @@ if /i "%parent%"=="%walk%" exit /b 2
 set "walk=%parent%"
 goto within
 :preflight
+for %%I in (%testfiles%) do (
+  set "walk=%%~fI"
+  call :test_path
+  if errorlevel 1 exit /b 2
+)
 if not defined images set "images=run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe"
 for %%I in (%names%) do if not exist "%source%\%%~I" exit /b 2
 if not exist "O:\tmp\" mkdir "O:\tmp" >nul 2>&1
@@ -79,6 +91,12 @@ for %%I in (%names%) do if not exist "%stage%\%%~I" (
   if errorlevel 1 goto fail
 )
 :copied
+if defined testfiles if not exist "%stage%\tests\" mkdir "%stage%\tests"
+if errorlevel 1 goto fail
+for %%I in (%testfiles%) do (
+  copy /b /y "%%~I" "%stage%\tests\%%~nxI" >nul
+  if errorlevel 1 goto fail
+)
 set "binary=%stage%"
 if not exist "%stage%\system32\run16.exe" goto identity
 for %%I in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe WOW32.DLL VDMREDIR.DLL) do if exist "%stage%\%%I" goto fail
@@ -100,6 +118,12 @@ if errorlevel 1 goto fail
 del /q "%stage%\stage-hash.tmp"
 echo %stage%
 exit /b 0
+:test_path
+for %%I in ("%walk%\..") do set "parent=%%~fI"
+if /i "%parent%"=="%repo%\build" exit /b 0
+if /i "%parent%"=="%walk%" exit /b 1
+set "walk=%parent%"
+goto test_path
 :leaf
 set "literal="
 for /f "eol=| delims=*?" %%I in ("%item%") do if "%%I"=="%item%" set "literal=1"

@@ -24,12 +24,10 @@ try {
     if($LASTEXITCODE){throw 'Serial guest probe build failed'}
     $probe="$repository/build/.ninja/fixtures-x86/guest-probes/serial-discovery/S45VCD.COM"
     Get-FileHash $probe,"$repository/build/.ninja/fixtures-x64/serial-port-mask.exe",$PSCommandPath,$Observer|Export-Csv -NoTypeInformation "$build/inputs.csv"
-    $runtime=New-PhysicalRuntimeStage $RuntimeRoot -FreshPackageIdentity
+    $runtime=New-PhysicalRuntimeStage $RuntimeRoot -FreshPackageIdentity -TestFiles @($probe)
     $scope=New-IsolatedPackageScope $runtime
     Save-IsolatedPackageManifest $runtime "$build/manifest.json"
     $bin=Get-PackageBinaryRoot $runtime
-    $null=New-Item -ItemType Directory "$runtime/tests" -Force
-    Copy-Item $probe "$runtime/tests/S45VCD.COM"
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $route=0
     foreach($arguments in @(@('tests\S45VCD.COM'),@('COMMAND.COM','/c','COMMAND.COM','/c','tests\S45VCD.COM'))){
