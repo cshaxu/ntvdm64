@@ -102,6 +102,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P173 native probe paths](../etc/evidence/t484-s3-probe-paths.md) | Authored Win31 witness fields bind through native fixture; exact bytes and four no-write refusals pass. Cached full and11/22 hashes unchanged. Runtime preparation remains open;311/355,44 remain. |
 
+| [P174 native controls](../etc/evidence/t484-s3-native-controls.md) | Two direct compiler recipes replaced; real MessageBox/ShellAbout returns and Run16 game exit/hidden carrier pass. Cached full11/22 hashes unchanged;313/355 disposed,42 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

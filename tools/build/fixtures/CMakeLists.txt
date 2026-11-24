@@ -403,3 +403,9 @@ if(NTVDM_ARCH STREQUAL "x64")
 endif()
 
 fixture(win31-probe-paths CL test/observation/win31_probe_paths.c)
+
+if(NTVDM_ARCH STREQUAL "x64")
+  fixture(ntvwm-carrier-game CL test/observation/ntvwm_carrier_game_test.c)
+  set_property(TARGET ntvwm-carrier-game_objects PROPERTY COMPILE_OPTIONS /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS)
+  set_property(TARGET ntvwm-carrier-game_objects PROPERTY FIXTURE_LIBRARIES user32.lib)
+endif()

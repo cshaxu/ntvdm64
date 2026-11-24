@@ -1,6 +1,6 @@
 param(
  [Parameter(Mandatory)][string]$Observer,
- [Parameter(Mandatory)][string]$CompilerDriver,
+ [string]$CompilerDriver,
  [Parameter(Mandatory)][string]$BuildRoot
 )
 # Pure native reference for verify-win16-native-modal-probe. Invoke as an
@@ -12,13 +12,10 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 $null=New-Item -ItemType Directory $root
 $observerProcess=$null;$peer=$null;$target=$null
 try{
- Push-Location $root
- try{
-  & $CompilerDriver cl.exe /nologo /MT /O2 /W4 /WX "/Fo$root/control.obj" "/Fe$root/native-modal-control.exe" "$PSScriptRoot/../observation/native_modal_control.c" /link /MACHINE:X86 user32.lib shell32.lib *> "$root/build.txt"
-  if($LASTEXITCODE){throw 'Native control build failed'}
-  & $CompilerDriver cl.exe /nologo /MT /O2 /W4 /WX "/Fo$root/peer.obj" "/Fe$root/peer.exe" "$PSScriptRoot/../observation/wow_native_modal_probe.c" /link /MACHINE:X86 user32.lib *> "$root/peer-build.txt"
-  if($LASTEXITCODE){throw 'Native peer build failed'}
- }finally{Pop-Location}
+ & "$repo/tools/build-fixtures.cmd" x86 native-modal-probes *> "$root/build.txt"
+ if($LASTEXITCODE){throw 'Native modal probe build failed'}
+ Copy-Item "$repo/build/.ninja/fixtures-x86/native-modal-control.exe" "$root/native-modal-control.exe"
+ Copy-Item "$repo/build/.ninja/fixtures-x86/native-modal-peer.exe" "$root/peer.exe"
  Get-FileHash $PSCommandPath,"$PSScriptRoot/../observation/native_modal_control.c","$PSScriptRoot/../observation/wow_native_modal_probe.c","$root/native-modal-control.exe","$root/peer.exe",$Observer|Export-Csv -NoTypeInformation "$root/input-sha256.csv"
  $info=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
  $info.UseShellExecute=$false;$info.CreateNoWindow=$true;$info.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'

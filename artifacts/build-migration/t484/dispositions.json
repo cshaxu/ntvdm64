@@ -137,12 +137,14 @@
     "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
   },
   "test/integration/verify-ntvwm-carrier-game.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+    "status": "migrated-delivered",
+    "reason": "Direct compiler commands replaced by shared CMD/native fixture targets; actual private-desktop modal return or Run16 carrier exit/hidden contract passes, with cached full and unchanged publication hashes.",
+    "evidence": "docs/etc/evidence/t484-s3-native-controls.md"
   },
   "test/integration/verify-native-modal-control.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "Reviewed current source: direct assembly, source generation or compiler/linker invocation remains"
+    "status": "migrated-delivered",
+    "reason": "Direct compiler commands replaced by shared CMD/native fixture targets; actual private-desktop modal return or Run16 carrier exit/hidden contract passes, with cached full and unchanged publication hashes.",
+    "evidence": "docs/etc/evidence/t484-s3-native-controls.md"
   },
   "test/integration/verify-client-rpc-wait.ps1": {
     "reason": "Direct native identity writer, real reply/connect/disconnect/loss/bootstrap tests pass; no remaining private build producer",

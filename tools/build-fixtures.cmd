@@ -157,6 +157,10 @@ for %%I in (wow-multi-dialog wow-observer-probes) do if "%TARGET%"=="%%I" if not
 if "%TARGET%"=="ccpu-alu-oracle" set "SELECTED=1"
 if "%TARGET%"=="ccpu-alu-oracle" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="logon-environment" set "SELECTED=1"
+if "%TARGET%"=="native-modal-probes" set "SELECTED=1"
+if "%TARGET%"=="native-modal-probes" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="ntvwm-carrier-game" set "SELECTED=1"
+if "%TARGET%"=="ntvwm-carrier-game" if not "%~1"=="x64" exit /b 2
 if "%TARGET%"=="win31-probe-paths" set "SELECTED=1"
 if "%TARGET%"=="window-inspector" set "SELECTED=1"
 if "%TARGET%"=="window-inspector" if not "%~1"=="x64" exit /b 2

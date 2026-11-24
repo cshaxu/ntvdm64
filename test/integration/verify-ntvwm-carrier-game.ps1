@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$PackageRoot,[Parameter(Mandatory)][string]$CompilerWrapper,
+param([Parameter(Mandatory)][string]$PackageRoot,[string]$CompilerWrapper,
  [Parameter(Mandatory)][string]$Game,[Parameter(Mandatory)][string]$BuildRoot)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -8,8 +8,9 @@ $null=New-Item -ItemType Directory $root
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
 $stage=$null;$scope=$null
 try {
- & $CompilerWrapper cl.exe /nologo /O2 /MT /W4 /WX /D_CRT_SECURE_NO_WARNINGS "/Fo$root/probe.obj" "/Fe$root/probe.exe" "$PSScriptRoot/../observation/ntvwm_carrier_game_test.c" /link user32.lib *> "$root/compile.txt"
+ & "$repo/tools/build-fixtures.cmd" x64 ntvwm-carrier-game *> "$root/compile.txt"
  if($LASTEXITCODE){throw 'Game probe build failed'}
+ Copy-Item "$repo/build/.ninja/fixtures-x64/ntvwm-carrier-game.exe" "$root/probe.exe"
  $stage=New-PhysicalRuntimeStage $PackageRoot
  $scope=New-IsolatedPackageScope $stage
  $bin=Get-PackageBinaryRoot $stage
