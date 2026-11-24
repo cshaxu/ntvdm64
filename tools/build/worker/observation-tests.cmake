@@ -162,7 +162,14 @@ worker_link("server-enum-test.exe" "/nologo /OPT:REF /out:$out /map:$out.map"
     "obj/compat/remote_rap.obj" "obj/compat/remote_browser.obj"
     "original-opennt-xactsrv.lib" "original-opennt-netlib.lib"
     "original-opennt-rtl-x86.lib" "lib-crt-compat.lib")
-worker_group(redirector-server-enum "server-enum-test.exe")
+worker_unit("obj/tests/server-enum/remote-provider-test.obj"
+  "${NTVDM_REPO}/test/integration/redirector_remote_unavailable_test.c"
+  "/nologo /MT /O2 /Gy /I\"${NTVDM_REPO}/src\"")
+worker_link("remote-provider-test.exe" "/nologo /OPT:REF /out:$out /map:$out.map"
+  "netapi32.lib kernel32.lib legacy_stdio_definitions.lib"
+  INPUTS "obj/tests/server-enum/remote-provider-test.obj"
+    "obj/compat/remote_rap.obj" "obj/compat/remote_browser.obj")
+worker_group(redirector-server-enum "server-enum-test.exe" "remote-provider-test.exe")
 
 get_target_property(video7_flags unit_obj_host_nt_vga_obj COMPILE_FLAGS)
 string(REPLACE "/D_NO_CRT_STDIO_INLINE" "" video7_flags "${video7_flags}")

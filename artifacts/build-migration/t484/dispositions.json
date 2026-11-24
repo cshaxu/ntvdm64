@@ -1378,11 +1378,7 @@
     "reason": "All authored COM/EXE configurations use shared CMD production; memory transition also reuses existing PIF builder and native environment reader, removing CL/C# production. Shared stage/configuration remains.",
     "evidence": "docs/etc/evidence/t484-s3-transition-probes.md"
   },
-  "test/integration/verify-redirector-remote.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "Expected uint32 enumeration status is passed through checked CMD/CMake configuration; source/flags preserved, runtime assertions unchanged. Shared staging remains.",
-    "evidence": "docs/etc/evidence/t484-s3-remote-probe.md"
-  },
+  "test/integration/verify-redirector-remote.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P19 stages through CMD and derives expected enumeration status from existing native provider comparator; real DOS boundary and 37 server-enum checks pass.","evidence":"docs/etc/evidence/t484-s4-remote-preparation.md"},
   "test/integration/verify-wow-generic-call.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P16 uses existing CMD input preparation and physical staging; real DLC status07 and both generic-call cases pass.","evidence":"docs/etc/evidence/t484-s4-dlc-generic-preparation.md"},
   "test/build/verify-win31-profile.ps1": {
     "status": "supplemental-native-producer-delivered",

@@ -1,13 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "b0222a79572b146d9749ed7c8b9ee981cf7bcbb4",
+  "head": "6cd71b33628e27faf02c6d78e62f1859e83b5508",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-edit-tabstop-guest.ps1",
-    " M tools/build/fixtures/guest-probes.cmake",
-    "?? docs/etc/evidence/t484-s4-tabstop-logon-preparation.md"
+    " M test/integration/verify-redirector-remote.ps1",
+    " M tools/build/worker/observation-tests.cmake",
+    "?? docs/etc/evidence/t484-s4-remote-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6616,6 +6616,12 @@
     }
   ],
   "commits": {
+    "6cd71b33628e27faf02c6d78e62f1859e83b5508": {
+      "subject": "M0 T484 S4 P18: finish tab-stop and logon preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-tabstop-logon-preparation.md"
+      ]
+    },
     "b0222a79572b146d9749ed7c8b9ee981cf7bcbb4": {
       "subject": "M0 T484 S4 P17: consolidate mouse DEM and WOW preparation",
       "evidence": [
