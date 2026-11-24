@@ -96,7 +96,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P129 retirement lock](../etc/evidence/t484-s3-lifecycle-lock.md) | Current concurrency witness passes; historical source selector and old generation branches removed; cached full/publication hashes pass. B0195 remains partial. |
 
-Completed implementation batches through P129 passed their cached full host build. P73 checks11 raw host inputs
+| [P130 dialog producers](../etc/evidence/t484-s3-lifecycle-dialog.md) | Three standalone dialog/publication modes pass; stale include and four producer branches removed; cached full/publication hashes pass. B0195 still has three overlap modes. These are not Full gates. |
+
+Completed implementation batches through P130 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

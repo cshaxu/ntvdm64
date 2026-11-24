@@ -1,0 +1,38 @@
+{
+  "publication": {
+    "republished": false,
+    "publishedCopies": 22,
+    "rawInputs": 11,
+    "unchanged": true
+  },
+  "validation": {
+    "finished": "2026-11-24T06:06:37.8094212+01:00",
+    "pid": 29500,
+    "started": "2026-11-24T06:04:54.933695+01:00",
+    "exit": 0
+  },
+  "fileComplete": false,
+  "remainingFaultSwitches": [
+    "TerminalSchedule",
+    "CallbackGraphOverlap",
+    "HookGraphOverlap"
+  ],
+  "fullGate": false,
+  "cleanup": {
+    "lines": 35,
+    "branches": 4
+  },
+  "final": {
+    "finished": "2026-11-24T06:07:52.0009052+01:00",
+    "pid": 25284,
+    "started": "2026-11-24T06:07:12.0086777+01:00",
+    "exit": 0
+  },
+  "normalEntriesResolved": 30,
+  "failedAttempt": {
+    "pid": 14700,
+    "exit": 1,
+    "finished": "2026-11-24T06:04:14.169859+01:00",
+    "started": "2026-11-24T06:03:01.3630527+01:00"
+  }
+}

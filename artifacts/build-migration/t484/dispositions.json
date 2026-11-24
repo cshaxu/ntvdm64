@@ -970,7 +970,7 @@
   },
   "test/observation/verify-wow-task-lifecycle.ps1": {
     "status": "requires-disposition-reconciliation",
-    "reason": "Partial:28 native normal cases plus1 consolidated alias; InitRollback/CreationUnwind/RetirementLockProbe native; dialog-lifecycle and6 other fault switches retain old producer; obsolete branches retired, no file completion credit",
-    "evidence": "docs/etc/evidence/t484-s3-lifecycle-lock.md"
+    "reason": "Partial:all30 normal entries resolved including1 consolidated alias; six fault switches native; terminal/callback/hook overlap retain old producer; standalone contracts are not Full gates; no file completion credit",
+    "evidence": "docs/etc/evidence/t484-s3-lifecycle-dialog.md"
   }
 }

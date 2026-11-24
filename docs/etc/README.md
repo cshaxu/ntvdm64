@@ -1743,3 +1743,4 @@ post-publication targeted checks.
 - [T484 S3 menu producer and page consolidation](evidence/t484-s3-lifecycle-menu.md)
 - [T484 S3 initialization and creation failure producers](evidence/t484-s3-lifecycle-faults.md)
 - [T484 S3 current retirement lock producer](evidence/t484-s3-lifecycle-lock.md)
+- [T484 S3 dialog lifecycle producers](evidence/t484-s3-lifecycle-dialog.md)

@@ -56,9 +56,9 @@ if ($Case -eq 'task-close-result') {
     $result
     return
 }
-$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime','process-retirement','init-notification','native-dispatch-gate','window-procedure','window-borrow','graph-snapshot','standard-class','class-procedure','native-creation','window-reclaim','menu-resource') -and !$OriginalModalOnly -and !$InitialPublicationOnly
+$nativeCase=$Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','original-hook-cleanup','task-order','thunk-scope','start-notification','menu-cleanup','class-client','class-query','class-lifetime','process-retirement','init-notification','native-dispatch-gate','window-procedure','window-borrow','graph-snapshot','standard-class','class-procedure','native-creation','window-reclaim','menu-resource') -and !$TerminalSchedule
 if($nativeCase){
-    $kind=if($RetirementLockProbe){'retirement-lock'}elseif($CreationUnwind){'creation-unwind'}elseif($InitRollback){'init-rollback'}elseif($Case -eq 'task-lifecycle'){'task'}else{$Case}
+    $kind=if($InitialPublicationOnly){'initial-publication'}elseif($RealDialogLifecycleOnly){'dialog-lifecycle'}elseif($OriginalModalOnly){'original-modal'}elseif($RetirementLockProbe){'retirement-lock'}elseif($CreationUnwind){'creation-unwind'}elseif($InitRollback){'init-rollback'}elseif($Case -eq 'task-lifecycle'){'task'}else{$Case}
     & "$repo/tools/build-fixtures.cmd" x86 "wow-lifecycle-$kind" *> "$out/build.log"
     if($LASTEXITCODE){throw 'Native lifecycle graph failed'}
     Copy-Item "$repo/build/.ninja/msvc-x86-release/wow32/lifecycle-$kind.exe" "$out/fixture.exe"
@@ -259,10 +259,6 @@ $fixtureSupportObjects += Join-Path $out 'combined-seams.obj'
 Invoke-NinjaTarget $provider 'obj/compat/wow_user_task_lifecycle.obj'
 $fixtureName = 'wow_user_task_lifecycle_fixture.c'
 
-if ($InitialPublicationOnly) {
-    Invoke-NinjaTarget $provider 'obj/compat/wow_user_registration_bridge.obj'
-    $fixtureName = 'wow_init_notification_fixture.c'
-}
 
 $fixturePath = Join-Path $repo ('test/adapter-mvdm-host-out/wow/' + $fixtureName)
 if ($Case -in @('window-borrow')) { $fixturePath = Join-Path $repo 'test/mvdm-host/wow_page_domain_fixture.c' }
@@ -270,9 +266,8 @@ if ($Case -in @('window-borrow')) { $fixturePath = Join-Path $repo 'test/mvdm-ho
 $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\fixture.obj" "'+$fixturePath+'"')
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
 
-
 if ($OriginalModalOnly) { $fixture += ' /DWOW_ORIGINAL_MODAL_FIXTURE' }
-if ($InitialPublicationOnly) { $fixture += ' /DWOW_INITIAL_PUBLICATION_FIXTURE' }
+
 if ($RealDialogLifecycleOnly) { $fixture += ' /DWOW_REAL_DIALOG_LIFECYCLE_FIXTURE' }
 if ($TerminalSchedule) { $fixture += ' /DWOW_TERMINAL_SCHEDULE_FIXTURE' }
 if ($CallbackGraphOverlap) { $fixture += ' /DWOW_CALLBACK_GRAPH_OVERLAP' }
@@ -326,18 +321,7 @@ $parentObjects = @((Join-Path $out 'parent-stub.obj'))
     Invoke-CompilerCommand $worker $pageFixture
     $parentObjects += Join-Path $out 'page-native-fixture.obj'
 }
-if ($InitialPublicationOnly) {
-    $startupTd = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\startup-td.obj" "'+$repo+'\test\adapter-mvdm-host-out\wow\wow_startup_td_fixture.c"')
-    if ($startupTd -eq $compile) { throw 'Startup TD fixture substitution failed' }
-    Invoke-NinjaTarget $provider 'obj/compat/wow_task_cleanup_entry.obj'
-    $ownerSource=Get-Content "$repo/src/mvdm-host/wow32/wkman.c" -Raw
-    $ownerStart=$ownerSource.IndexOf('BOOL WINAPI wow_original_task_cleanup_uninitialized(')
-    $ownerEnd=$ownerSource.IndexOf('VOID WINAPI wow_original_task_retire_async(', $ownerStart)
-    if($ownerStart -lt 0 -or $ownerEnd -le $ownerStart){throw 'Missing original startup predicate'}
-    [IO.File]::WriteAllText("$out/startup-owner.inc",$ownerSource.Substring($ownerStart,$ownerEnd-$ownerStart))
-    Invoke-Build ($startupTd + ' /I"'+$out+'"')
-    $parentObjects += Join-Path $out 'startup-td.obj'
-}
+
 $lib = Invoke-CompilerCommand $provider 'where lib.exe' -Capture
 $lib = @($lib | Where-Object { Test-Path -LiteralPath $_ })[0]
 $link = $commands | Where-Object { $_ -match '/out:wow32\.dll' } | Select-Object -Last 1
@@ -452,25 +436,6 @@ if ($HookGraphOverlap) {
     $parentObjects += Join-Path $out 'hook-graph-probe.obj'
 }
 
-if ($InitialPublicationOnly) {
-    # Preserve the real launch-client library because it provides other
-    # selected BaseClient calls.  Redirect only this bridge's notification
-    # import to the fixture's authenticated RPC seam; no duplicate definition
-    # or link-order selection remains.
-    $bridgeCompile = $commands | Where-Object {
-        $_ -match 'wow_user_registration_bridge\.c$'
-    } | Select-Object -Last 1
-    if (!$bridgeCompile) { throw 'Missing production registration bridge compile command' }
-    $bridgeFixture = $bridgeCompile -replace '/Fo\S+\s+\S+wow_user_registration_bridge\.c$', ('/Fo"'+$out+'\registration-bridge-fixture.obj" "'+$repo+'\src\compat\wow_user_registration_bridge.c"')
-    if ($bridgeFixture -eq $bridgeCompile) { throw 'Registration bridge fixture substitution failed' }
-    Invoke-Build ($bridgeFixture + ' /DNtvdmReportWowStartup=wow_fixture_NtvdmReportWowStartup')
-    $bridgeObjects = @($objects | Where-Object {
-        $_ -match '[\\/]compat[\\/]wow_user_registration_bridge\.obj$'
-    })
-    if ($bridgeObjects.Count -ne 1) { throw 'Expected exactly one registration bridge owner' }
-    $objects = @($objects | Where-Object { $_ -notin $bridgeObjects })
-    $parentObjects += Join-Path $out 'registration-bridge-fixture.obj'
-}
 # EXE and DLL each own this variable in production. A combined executable
 # must preserve two distinct cells, not merge their independent load state.
 # Recompile only the provider TU with a private test linkage spelling; its
