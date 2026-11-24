@@ -78,6 +78,16 @@ $runtime=$null;$scope=$null;$process=$null
 $assembly="$PSScriptRoot/../observation/win16_message_probe.asm"
 $native="$PSScriptRoot/../observation/wow_message_peer.c"
 
+function Invoke-MessageProducer($name,$architecture,$target,$mask=''){
+ $line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" '+$architecture+' '+$target+' '+$mask+'"'
+ $producer=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$name.txt" -RedirectStandardError "$root/$name.stderr.txt"
+ try {
+  @{pid=$producer.Id;start=$producer.StartTime.ToUniversalTime().ToString('o');command=$line}|ConvertTo-Json|Set-Content "$root/$name-process.json"
+  if(!$producer.WaitForExit(300000)){& taskkill.exe /PID $producer.Id /T /F *> "$root/$name-timeout.txt";throw 'Message producer timeout'}
+  $producer.Refresh();if($producer.ExitCode){throw "Message producer failed: $($producer.ExitCode)"}
+ }finally{$producer.Dispose()}
+}
+
 function Read-GuestReport([string]$path,[string]$name){
  $bytes=[IO.File]::ReadAllBytes($path)
  $recordBytes=if($ThreadClientView){40}else{34}
@@ -113,13 +123,7 @@ try{
   $Construction,$ClassicDde,$ClassicDdeTaskLoss,$SyncDdeDiagnostic,[bool]$TransactionDiagnosticManifest)
  $mask=0;for($i=0;$i -lt $features.Count;$i++){if($features[$i]){$mask=$mask -bor (1 -shl $i)}}
  $target=if($NativeHost){'win16-message-guest'}else{'win16-message'}
- $line='/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 '+$target+' '+$mask+'"'
- $producer=Start-Process $env:ComSpec -ArgumentList $line -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/build.txt" -RedirectStandardError "$root/build.stderr.txt"
- try {
-  @{pid=$producer.Id;start=$producer.StartTime.ToUniversalTime().ToString('o');command=$line}|ConvertTo-Json|Set-Content "$root/producer.json"
-  if(!$producer.WaitForExit(300000)){& taskkill.exe /PID $producer.Id /T /F *> "$root/build-timeout.txt";throw 'Message producer timeout'}
-  $producer.Refresh();if($producer.ExitCode){throw "Message producer failed: $($producer.ExitCode)"}
- }finally{$producer.Dispose()}
+ Invoke-MessageProducer build x86 $target $mask
  $cache="$repo/build/.ninja/fixtures-x86/guest-probes/message/$mask"
  Copy-Item "$cache/MSGSEND.EXE","$cache/MSGRECV.EXE","$cache/SEND.lst","$cache/RECV.lst" $root
  if($NativeHost){
@@ -172,27 +176,11 @@ try{
  @{machine='x86';cpu='original SoftPC CCPU40';guest='unchanged original package plus independent NE probes'}|ConvertTo-Json|Set-Content "$root/profile.json"
  # Complete supported logon environment, not a hand-picked variable allowlist.
  # Known inherited large-environment COMMAND failure is retained separately.
- Add-Type -OutputAssembly "$root/logon-env.dll" -TypeDefinition @'
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-public static class WowMessageLogonEnvironment {
- [DllImport("userenv.dll",SetLastError=true)] static extern bool CreateEnvironmentBlock(out IntPtr block,IntPtr token,bool inherit);
- [DllImport("userenv.dll",SetLastError=true)] static extern bool DestroyEnvironmentBlock(IntPtr block);
- public static string[] Read(IntPtr token) {
-  IntPtr block;
-  if(!CreateEnvironmentBlock(out block,token,false))throw new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error());
-  try { var values=new List<string>();IntPtr at=block;
-   while(Marshal.ReadInt16(at)!=0){string value=Marshal.PtrToStringUni(at);values.Add(value);at=IntPtr.Add(at,(value.Length+1)*2);}
-   return values.ToArray();
-  }finally{DestroyEnvironmentBlock(block);}
- }
-}
-'@
- Add-Type -Path "$root/logon-env.dll"
- $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
- try{$entries=[WowMessageLogonEnvironment]::Read($logonIdentity.Token)}
- finally{$logonIdentity.Dispose()}
+ Invoke-MessageProducer environment-build x64 logon-environment
+ . "$PSScriptRoot/../observation/logon-environment.ps1"
+ $environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'
+ Get-FileHash $environmentExe,"$PSScriptRoot/../observation/logon-environment.ps1"|Export-Csv -NoTypeInformation "$root/environment-inputs.csv"
+ $entries=Read-TestLogonEnvironment $environmentExe "$root/environment-process.json"
  $info=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
  $info.UseShellExecute=$false;$info.CreateNoWindow=$true;$info.EnvironmentVariables.Clear()
  foreach($entry in $entries){$split=$entry.IndexOf('=',1);$info.EnvironmentVariables[$entry.Substring(0,$split)]=$entry.Substring($split+1)}

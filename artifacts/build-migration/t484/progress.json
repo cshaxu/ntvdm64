@@ -1,13 +1,12 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "21d580674d15186a4f9c19954ece674221461a6d",
+  "head": "4a16e16c5102d10d938f44beb5d7088c45dd53d0",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-win16-multimedia-timer-probe.ps1",
-    " M test/integration/verify-win16-shell-hook-probe.ps1",
-    "?? docs/etc/evidence/t484-s3-win16-environment.md"
+    " M test/integration/verify-win16-message-probe.ps1",
+    "?? docs/etc/evidence/t484-s3-message-environment.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -16,11 +15,11 @@
     "removed": 167
   },
   "disposition_counts": {
-    "migrated-delivered": 96,
+    "migrated-delivered": 97,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 167,
     "retained-native-delegate": 14,
-    "pending-producer-migration": 42,
+    "pending-producer-migration": 41,
     "requires-disposition-reconciliation": 17,
     "retained-standalone-audit": 16
   },
@@ -841,18 +840,18 @@
       "file": "test/integration/verify-win16-message-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "563ecaf0a9f27c3a522e49e68f4f5e76fbd8405afb9fdb027643079a42dcbadb",
+      "current_sha256": "dbfd3ad888b9b422e99578b4b141e6013894144e4461649ecdfa820a0bafd27c",
       "revisions": [
         "5df3ff0953f75bbc68a509819ef6d44a6a7515bc"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-message-probes.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "P47 native guest/native-peer composition verified across13 feature groups; logon helper compilation and shared runtime staging remain pending",
-        "evidence": "docs/etc/evidence/t484-s3-message-probes.md"
+        "evidence": "docs/etc/evidence/t484-s3-message-environment.md",
+        "reason": "CMD message and shared native environment producers; real basic and structured/client-view groups pass; duplicated C# compilation removed",
+        "status": "migrated-delivered"
       }
     },
     {
@@ -862,9 +861,11 @@
       "state": "changed",
       "current_sha256": "bd073c121c2c643d4a97b65beef2ff4503b66c29c45187d1333ac49cf9c89d23",
       "revisions": [
+        "4a16e16c5102d10d938f44beb5d7088c45dd53d0",
         "cde4bc13ce1f390f73ed22f074cc2d1607cc5521"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-win16-environment.md",
         "docs/etc/evidence/t484-s3-win16-probes.md"
       ],
       "completion": "migrated-delivered",
@@ -957,10 +958,12 @@
       "state": "changed",
       "current_sha256": "26c916d1d975e8ceadb8876610e437b62c93f8a4fbb292b88b46734f85a1c5fc",
       "revisions": [
+        "4a16e16c5102d10d938f44beb5d7088c45dd53d0",
         "aa169c79bf9a083de4bbd86909fbd717f1c85036"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-shell-probes.md"
+        "docs/etc/evidence/t484-s3-shell-probes.md",
+        "docs/etc/evidence/t484-s3-win16-environment.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -6373,6 +6376,12 @@
     }
   ],
   "commits": {
+    "4a16e16c5102d10d938f44beb5d7088c45dd53d0": {
+      "subject": "T484 S3 P163 share native environment for Win16 timer and hook tests",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-win16-environment.md"
+      ]
+    },
     "21d580674d15186a4f9c19954ece674221461a6d": {
       "subject": "T484 S3 P162 remove EMS runtime CSharp environment dependency",
       "evidence": [
@@ -7814,12 +7823,16 @@
           "text": "[string]$Nasm='nasm.exe',"
         },
         {
-          "line": 123,
+          "line": 127,
           "text": "$cache=\"$repo/build/.ninja/fixtures-x86/guest-probes/message/$mask\""
         },
         {
-          "line": 128,
+          "line": 132,
           "text": "if(!$path.StartsWith((Join-Path $repo 'build/.ninja')+'\\',[StringComparison]::OrdinalIgnoreCase)){throw 'External peer/host must come from stable Ninja fixture targets'}"
+        },
+        {
+          "line": 181,
+          "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]
     },

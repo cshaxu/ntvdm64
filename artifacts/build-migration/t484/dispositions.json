@@ -202,9 +202,9 @@
     "evidence": "docs/etc/evidence/t484-s3-discovery.md"
   },
   "test/integration/verify-win16-message-probe.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P47 native guest/native-peer composition verified across13 feature groups; logon helper compilation and shared runtime staging remain pending",
-    "evidence": "docs/etc/evidence/t484-s3-message-probes.md"
+    "evidence": "docs/etc/evidence/t484-s3-message-environment.md",
+    "reason": "CMD message and shared native environment producers; real basic and structured/client-view groups pass; duplicated C# compilation removed",
+    "status": "migrated-delivered"
   },
   "test/integration/verify-win16-print-probe.ps1": {
     "status": "pending-producer-migration",

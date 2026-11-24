@@ -82,6 +82,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P163 Win16 environment](../etc/evidence/t484-s3-win16-environment.md) | Timer/cancel,NoTimer and CBT hook use shared native reader and pass real guest checks.296/355 disposed,59 remain. |
 
+| [P164 message environment](../etc/evidence/t484-s3-message-environment.md) | Duplicate C# reader removed; basic and structured actual Win16 messages pass; cached full and11/22 hashes unchanged.297/355 disposed,58 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
