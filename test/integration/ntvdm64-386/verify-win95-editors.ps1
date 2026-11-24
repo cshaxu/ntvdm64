@@ -53,23 +53,9 @@ $family=if($Windows31){"Win31"}else{"Win95"}
 $copy=& "$PSScriptRoot/New-${family}ProbeCopy.ps1" @copyArgs
 $task=$copy.Task; $source=$copy.Source; $dest=$copy.Destination; $original=$copy.Original
 try {
-$enc=[Text.Encoding]::GetEncoding(28591)
-# Exercise the shipped dynamic launcher; the shim only suppresses launch while
-# preparing the profile. The observer below runs its real generated PIF.
-$launcher=if($Windows31){"win31-setup"}else{"win95-launch"}
-Copy-Item "$repo/tools/$launcher/WIN.CMD" "$dest/PATCH/WIN.CMD"
-Copy-Item "$repo/assets/release/PIF.EXE" "$dest/PATCH/PIF.EXE"
-& cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" --install"
-if($LASTEXITCODE){throw 'Editor launcher setup failed'}
-$selector=Join-Path $task 'selector';New-Item -ItemType Directory $selector|Out-Null
-[IO.File]::WriteAllText("$selector/run16.cmd","@echo off`r`nexit /b 0`r`n")
-$choices=if($Windows31){"2`r`n$DosOnly`r`n$Multitask`r`n"}else{"$DosOnly`r`n$Multitask`r`n"}
-[IO.File]::WriteAllText("$task/select-input.txt",$choices)
-$selectPath=$env:PATH;$env:PATH="$selector;$selectPath"
-try {
- & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" < `"$task/select-input.txt`"" *> "$task/select.log"
- if($LASTEXITCODE){throw 'Editor launcher profile failed'}
-} finally {$env:PATH=$selectPath}
+$familyNumber=if($Windows31){31}else{95}
+& "$repo/tools/select-guest-launch.cmd" $dest $task $familyNumber $DosOnly $Multitask install *> "$task/select.log"
+if($LASTEXITCODE){throw 'Editor launcher profile failed'}
 if(((Get-Content "$dest/PATCH/CONFIG.NT" -Raw) -match '(?im)^dosonly\s*$') -ne [bool]$DosOnly){throw 'Selected DOSONLY mismatch'}
 $selectedIni=Get-Content "$dest/SYSTEM.INI" -Raw
 foreach($driver in 'INSIGNIA.386','NTVDM64.386'){
@@ -78,19 +64,10 @@ foreach($driver in 'INSIGNIA.386','NTVDM64.386'){
 }
 Copy-Item -LiteralPath "$dest/SYSTEM.INI" -Destination "$task/selected-system.ini"
 
-Copy-Item -LiteralPath "$PackageRoot/system32/COMMAND.COM" -Destination "$dest/PATCH/COMMAND.COM"
+$witness=if($ReadWriteWitness){'seed'}elseif($SaveWitness){'empty'}else{'none'}
+& "$repo/tools/prepare-editor-inputs.cmd" $dest $task $PackageRoot prompts $witness
+if($LASTEXITCODE){throw 'Editor prompt preparation failed'}
 if((Get-FileHash "$PackageRoot/system32/COMMAND.COM").Hash -ne (Get-FileHash "$dest/PATCH/COMMAND.COM").Hash){throw 'COMMAND copy mismatch'}
-if($SaveWitness){foreach($name in 'A.TXT','B.TXT'){
- $seed=if($ReadWriteWitness){if($name -eq 'A.TXT'){'seedA'}else{'seedB'}}else{''}
- [IO.File]::WriteAllBytes("$dest/PATCH/$name",[Text.Encoding]::ASCII.GetBytes($seed))
-}}
-foreach($id in 'A','B'){
- & "$repo/assets/release/PIF.EXE" create "$dest/PATCH/$id.PIF" --title "Prompt probe $id" --program "$dest\PATCH\COMMAND.COM" --directory "$dest\PATCH" --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
- if($LASTEXITCODE){throw 'PIF failed'}
-}
-$ini="$dest/WIN.INI";$s=$enc.GetString([IO.File]::ReadAllBytes($ini))
-$s=[regex]::Replace($s,'(?im)^load=[^\r\n]*',"load=$dest\PATCH\A.PIF $dest\PATCH\B.PIF")
-[IO.File]::WriteAllBytes($ini,$enc.GetBytes($s))
 $features=@()
 if($MouseMenu){$features+='MOUSE_MENU'}
 if($SaveWitness){$features+='SAVE_WITNESS'}
@@ -116,6 +93,8 @@ try {
 if($LASTEXITCODE){throw 'Controller path binder build failed'}
 & "$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe" --fields "$task/controller.exe" '@W31_BOOT_PATH@' "$dest\PATCH\BOOT.BIN" '@W31_READY_PATH@' "$dest\PATCH\READY.BIN"
 if($LASTEXITCODE){throw 'Controller path binding failed'}
+& "$repo/tools/prepare-editor-inputs.cmd" $dest $task "$task/controller.exe" controller
+if($LASTEXITCODE){throw 'Editor controller preparation failed'}
 $keep=@('SystemRoot','WINDIR','COMSPEC','PATHEXT','SYSTEMDRIVE','NUMBER_OF_PROCESSORS','PROCESSOR_ARCHITECTURE','PROCESSOR_IDENTIFIER','OS','PSExecutionPolicyPreference')
 Get-ChildItem Env:|Where-Object {$_.Name -notin $keep}|ForEach-Object{Remove-Item -LiteralPath ('Env:'+ $_.Name)}
 $env:PATH='C:\Windows\System32;C:\Windows';$env:TEMP='O:\tmp';$env:TMP='O:\tmp'
@@ -131,10 +110,6 @@ try {
  . "$repo/test/observation/isolated_package_cleanup.ps1"
  $stage=$null;$scope=$null;$process=$null
  New-Item -ItemType Directory "$task/runtime"|Out-Null
- Copy-Item "$task/controller.exe" "$dest/PATCH/VMTEST.EXE"
- $s=$enc.GetString([IO.File]::ReadAllBytes("$dest/WIN.INI"))
- $s=[regex]::Replace($s,'(?im)^run=[^\r\n]*',"run=$dest\PATCH\VMTEST.EXE")
- [IO.File]::WriteAllBytes("$dest/WIN.INI",$enc.GetBytes($s))
  try {
   $stage=New-PhysicalRuntimeStage $PackageRoot -FreshPackageIdentity
   $stage=[IO.Path]::GetFullPath($stage)

@@ -24,17 +24,9 @@ if not "%~4"=="-" (
 )
 if not "%~4"=="-" copy /b "%DEST%\PATCH\AUTOEXEC.NT"+"%TASK%\editor-autoexec.append" "%TASK%\editor-autoexec.candidate" >nul
 if errorlevel 1 exit /b 1
-copy /b /y "%PACKAGE%\system32\COMMAND.COM" "%DEST%\PATCH\COMMAND.COM" >nul
-if errorlevel 1 exit /b 1
-set "FAILED="
-for %%I in (A B) do if not defined FAILED (
- "%ROOT%\assets\release\PIF.EXE" create "%DEST%\PATCH\%%I.PIF" --title "Prompt probe %%I" --program "%DEST%\PATCH\COMMAND.COM" --directory "%DEST%\PATCH" --arguments "" --config "" --autoexec "" --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
- if errorlevel 1 set "FAILED=1"
-)
-if defined FAILED exit /b 1
-if "%~5"=="1" type nul >"%DEST%\PATCH\A.TXT"
-if errorlevel 1 exit /b 1
-if "%~5"=="1" type nul >"%DEST%\PATCH\B.TXT"
+set "WITNESS=none"
+if "%~5"=="1" set "WITNESS=empty"
+call "%~dp0prepare-editor-inputs.cmd" "%DEST%" "%TASK%" "%PACKAGE%" prompts %WITNESS% defer-load
 if errorlevel 1 exit /b 1
 if not "%~4"=="-" copy /b /y "%~4" "%DEST%\PATCH\MCALL.COM" >nul
 if errorlevel 1 exit /b 1

@@ -1,16 +1,15 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "4af71fb3fdeb634c847a85cdf59b3af0d0301afa",
+  "head": "d04c476dcb05efb946d67d3776c3194c3d28ea79",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/verify-win31-preparation.ps1",
-    " M test/integration/ntvdm64-386/verify-win31-identity.ps1",
-    " M tools/build/native/prepare-test-inputs.cmd.in",
+    " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
     " M tools/prepare-win31-editors.cmd",
-    " M tools/prepare-win31-matrix.cmd",
-    "?? docs/etc/evidence/t484-s4-win31-identity-preparation.md"
+    "?? docs/etc/evidence/t484-s4-win95-editor-preparation.md",
+    "?? tools/prepare-editor-inputs.cmd",
+    "?? tools/select-guest-launch.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -19,11 +18,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 135,
+    "migrated-delivered": 136,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 3,
+    "pending-producer-migration": 2,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -489,6 +488,7 @@
       "state": "changed",
       "current_sha256": "83b592f5a000bd24dc88c48b01ef9e0e7ec5a73147508901eac103543f9d5dda",
       "revisions": [
+        "d04c476dcb05efb946d67d3776c3194c3d28ea79",
         "9617bb1044d034368c6362ea65cecfbf6cc3498e",
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
@@ -500,7 +500,8 @@
         "docs/etc/evidence/t484-s3-identity-fields.md",
         "docs/etc/evidence/t484-s3-pif-memory.md",
         "docs/etc/evidence/t484-s3-vm-identity.md",
-        "docs/etc/evidence/t484-s4-guest-copy-ownership.md"
+        "docs/etc/evidence/t484-s4-guest-copy-ownership.md",
+        "docs/etc/evidence/t484-s4-win31-identity-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -514,7 +515,7 @@
       "file": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "62ec29ed9adec1834a2b579a552af1f835f3c89cda6311f3dbac77559e8c6e3e",
+      "current_sha256": "68cd08ced0c12121d158906183efedb68f11e2b72878a7a02c862a10de302d52",
       "revisions": [
         "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636",
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
@@ -528,11 +529,11 @@
         "docs/etc/evidence/t484-s3-runtime-tool-path.md",
         "docs/etc/evidence/t484-s3-win95-editor.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "Native assembly, applicable controller/COM field preparation and native PIF memory generation verified; remaining configuration and shared staging stay pending",
-        "evidence": "docs/etc/evidence/t484-s3-pif-memory.md"
+        "status": "migrated-delivered",
+        "reason": "P41 delivers CMD launcher selection and prompt/controller input preparation. Eleven inputs match the prior preparation. Old and new editor runs both reach readiness and then time out. Runtime acceptance remains open.",
+        "evidence": "docs/etc/evidence/t484-s4-win95-editor-preparation.md"
       }
     },
     {
@@ -6653,6 +6654,12 @@
     }
   ],
   "commits": {
+    "d04c476dcb05efb946d67d3776c3194c3d28ea79": {
+      "subject": "T484 S4 P40: share CMD launch preparation for the Win31 identity runner",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-win31-identity-preparation.md"
+      ]
+    },
     "4af71fb3fdeb634c847a85cdf59b3af0d0301afa": {
       "subject": "T484 S4 P39: build and stage the VM continuation observer through CMD",
       "evidence": [
@@ -8439,7 +8446,7 @@
       "file": "test/integration/ntvdm64-386/verify-win95-editors.ps1",
       "hits": [
         {
-          "line": 117,
+          "line": 94,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" --fields \"$task/controller.exe\" '@W31_BOOT_PATH@' \"$dest\\PATCH\\BOOT.BIN\" '@W31_READY_PATH@' \"$dest\\PATCH\\READY.BIN\""
         }
       ]
