@@ -1420,9 +1420,9 @@
     "evidence": "docs/etc/evidence/t484-s3-final-managed-producers.md"
   },
   "tools/audit/Verify-T420S37OemGuest.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "P198 retires the sealed Win1.01 Z:-mapped investigation chain; retained OEM/fatal C# bodies use shared native CMD compilation unchanged. Host interop checks pass; guest staging/acceptance remains explicitly pending.",
-    "evidence": "docs/etc/evidence/t484-s3-final-managed-producers.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P22 registers the unchanged independent OEM guest source in the native CMD graph and uses shared CMD alias/staging ownership. Actual direct and twice-nested COMMAND volume/file/environment checks pass; no equivalent replacement was found.",
+    "evidence": "docs/etc/evidence/t484-s4-oem-preparation.md"
   },
   "tools/audit/Verify-T420S38DpmiFatal.ps1": {
     "status": "supplemental-native-producer-pending-staging",

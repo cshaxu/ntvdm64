@@ -29,6 +29,8 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
+S4 P22 completes the retained OEM guest preparation; [evidence](../etc/evidence/t484-s4-oem-preparation.md) records cached full build, real direct/twice-nested COMMAND file/volume/environment checks and unchanged dual publication. Frozen343/355,12 pending; supplemental11 to10.
+
 S4 P21 completes VGA cursor preparation and corrects the stale diagnostic capture owner; [evidence](../etc/evidence/t484-s4-cursor-preparation.md) separates initial failures from final cached build, CAF/register/ordered-frame pass and unchanged dual publication. Frozen343/355,12 pending; supplemental12 to11.
 
 S4 P20 completes FCB private-directory preparation; [evidence](../etc/evidence/t484-s4-fcb-preparation.md) records cached full build, shared stage default/subdirectory rejection contracts, real FCB receipt37/name/EOF/missing results and unchanged dual publication. Frozen343/355,12 pending; supplemental13 to12.
@@ -90,7 +92,7 @@ S4 P3 replaces addon utility publication with CMD; [publication evidence](../etc
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **343/355 disposed,12 pending**, plus11 supplemental
+Current census: **343/355 disposed,12 pending**, plus10 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;

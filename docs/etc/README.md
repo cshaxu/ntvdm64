@@ -1943,3 +1943,5 @@ post-publication targeted checks.
 - [T484 S4 FCB preparation](evidence/t484-s4-fcb-preparation.md).
 
 - [T484 S4 VGA cursor preparation](evidence/t484-s4-cursor-preparation.md).
+
+- [T484 S4 OEM guest preparation](evidence/t484-s4-oem-preparation.md)

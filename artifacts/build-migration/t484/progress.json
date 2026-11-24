@@ -1,14 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "000da3d05a87ac283b1762cf9d9bf6a21268a2a1",
+  "head": "c8650b6514d604a529e5c1206a08db0e956ecc81",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-vga-cursor-disable.ps1",
-    " M test/observation/console_client_observed.c",
-    " M tools/build/worker/units.cmake",
-    "?? docs/etc/evidence/t484-s4-cursor-preparation.md"
+    " M tools/audit/Verify-T420S37OemGuest.ps1",
+    " M tools/build/fixtures/guest-probes.cmake",
+    "?? docs/etc/evidence/t484-s4-oem-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6619,6 +6618,12 @@
     }
   ],
   "commits": {
+    "c8650b6514d604a529e5c1206a08db0e956ecc81": {
+      "subject": "M0 T484 S4 P21: finish cursor preparation and repair observation owner",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-cursor-preparation.md"
+      ]
+    },
     "000da3d05a87ac283b1762cf9d9bf6a21268a2a1": {
       "subject": "M0 T484 S4 P20: finish isolated FCB input preparation",
       "evidence": [
