@@ -1,28 +1,28 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "5305401c40cf14705e5a81f934dbb441953e16ff",
+  "head": "a944e3517dbbcab6cc7e766db5643cb187807780",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
+    " M tools/audit/Invoke-ProductVerification.ps1",
     " M tools/audit/Verify-ProductVersions.mjs",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/native-family/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-version-native/",
-    "?? docs/etc/evidence/t484-s3-version-native.md",
-    "?? tools/build/native-family/version-negatives.cmake"
+    " M tools/build/native/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-version-runtime/",
+    "?? docs/etc/evidence/t484-s3-version-runtime.md",
+    "?? tools/build/native/package-id.c"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 152,
-    "unchanged": 58,
+    "changed": 153,
+    "unchanged": 57,
     "removed": 145
   },
   "disposition_counts": {
-    "migrated-delivered": 85,
+    "migrated-delivered": 86,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 145,
-    "pending-producer-migration": 54,
+    "pending-producer-migration": 53,
     "retained-native-delegate": 14,
     "requires-disposition-reconciliation": 42,
     "retained-standalone-audit": 13
@@ -3948,8 +3948,8 @@
       "id": "B0207",
       "file": "tools/audit/Invoke-ProductVerification.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "a721826bc8934d7235bff33e2e71e01681849f9448a0bfc6e0855bdf98947262",
+      "state": "changed",
+      "current_sha256": "fad1689d554ecfc66aa2f37bcafdf074a177e8c72158f7c5f10f0559bef67156",
       "revisions": [],
       "evidence": [],
       "completion": "requires-disposition-reconciliation",
@@ -4407,14 +4407,18 @@
       "file": "tools/audit/Verify-ProductVersions.mjs",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "4d9295905608700558f61960ead0bbe1adfe682cf0aa6015332453e9df87f912",
-      "revisions": [],
-      "evidence": [],
-      "completion": "pending-producer-migration",
+      "current_sha256": "1678df8a6eadca2be14d03b520eb3aa590046a926ffacad6d73fb86510d674a9",
+      "revisions": [
+        "a944e3517dbbcab6cc7e766db5643cb187807780"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-version-native.md"
+      ],
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "Five native CMD peers compile; interpreted identity preparation and actual negative-peer runtime acceptance remain",
-        "evidence": "docs/etc/evidence/t484-s3-version-native.md",
-        "status": "pending-producer-migration"
+        "status": "migrated-delivered",
+        "evidence": "docs/etc/evidence/t484-s3-version-runtime.md",
+        "reason": "CMD/native five-peer producer and identity stamping; ten real launcher/worker version rejections pass, owned cleanup and cached/publication identity verified"
       }
     },
     {
@@ -6142,6 +6146,12 @@
     }
   ],
   "commits": {
+    "a944e3517dbbcab6cc7e766db5643cb187807780": {
+      "subject": "T484 S3 P146 build version-negative peers through native service graph",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-version-native.md"
+      ]
+    },
     "5305401c40cf14705e5a81f934dbb441953e16ff": {
       "subject": "T484 S3 P145 reconcile hook ownership audit tools",
       "evidence": [
@@ -9103,19 +9113,11 @@
           "text": "# Restore the incoming environment even if Node throws or"
         },
         {
-          "line": 299,
-          "text": "'OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME','OPENNT_VERSION_PWSH')"
-        },
-        {
           "line": 307,
-          "text": "$env:OPENNT_VERSION_PWSH=(Get-Process -Id $PID).Path"
-        },
-        {
-          "line": 308,
           "text": "& $Node \"$repo/tools/audit/Verify-ProductVersions.mjs\""
         },
         {
-          "line": 341,
+          "line": 340,
           "text": "Invoke-Gate 'dos4gw-nesticle' {& \"$repo/test/integration/verify-dos4gw-nesticle.ps1\" -RuntimeRoot $sourceRuntime -Observer $observerPath -FixtureRoot $Dos4gwFixtureRoot -PifPath $Dos4gwPif -Python $Python -ReportRoot \"$log/dos4gw-nesticle\"}"
         }
       ]
@@ -9358,7 +9360,7 @@
         },
         {
           "line": 37,
-          "text": "const stamp=spawnSync(process.env.OPENNT_VERSION_PWSH || 'pwsh.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',"
+          "text": "const stamp=spawnSync(path.join(root,'build/.ninja/build-tools/ntvdm-package-id.exe'),"
         }
       ]
     },

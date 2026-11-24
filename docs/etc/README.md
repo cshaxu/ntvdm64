@@ -1776,3 +1776,5 @@ post-publication targeted checks.
 - [T484 S3 hook ownership audits](evidence/t484-s3-hook-audits.md): native compiler records, shared dependency reader and actual product maps.
 
 - [T484 S3 native version-negative producer checkpoint](evidence/t484-s3-version-native.md): five compiled peers; package preparation/runtime gate still pending.
+
+- [T484 S3 native version-negative acceptance](evidence/t484-s3-version-runtime.md): native GUID resource writer and ten real RPC rejections with isolated cleanup.

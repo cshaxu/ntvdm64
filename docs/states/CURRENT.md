@@ -48,6 +48,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P146 version producer checkpoint](../etc/evidence/t484-s3-version-native.md) | Five native peers and full cached/identity check pass; B0231 remains pending package preparation and actual negative-peer runs. No completion-count increment. |
 
+| [P147 version negatives](../etc/evidence/t484-s3-version-runtime.md) | Native identity writer and five peers/ten real client refusals pass; owned cleanup, cached full and publication identity verified; B0231 completed. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

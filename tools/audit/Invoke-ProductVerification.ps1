@@ -296,7 +296,7 @@ try {
                 # Restore the incoming environment even if Node throws or
                 # reports a failed negative; never strip a caller's values.
                 $versionNames=@('OPENNT_BROKER_PRODUCT_BUILD','OPENNT_VERSION_TEST_BUILD',
-                    'OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME','OPENNT_VERSION_PWSH')
+                    'OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME')
                 $versionSaved=@{}
                 foreach($name in $versionNames){$versionSaved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
                 try {
@@ -304,7 +304,6 @@ try {
                     $env:OPENNT_VERSION_TEST_BUILD="$log/version-negative"
                     $env:OPENNT_VERSION_TEST_LOGS="$log/version-negative/logs"
                     $env:OPENNT_VERSION_TEST_RUNTIME=$runtime
-                    $env:OPENNT_VERSION_PWSH=(Get-Process -Id $PID).Path
                     & $Node "$repo/tools/audit/Verify-ProductVersions.mjs"
                     if($LASTEXITCODE){throw 'Version negative gate failed'}
                 }finally{

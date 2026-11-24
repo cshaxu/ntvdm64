@@ -1,0 +1,119 @@
+{
+  "negativeCases": [
+    {
+      "result": {
+        "status": 1306,
+        "ms": 61,
+        "stdout": "",
+        "stderr": "ntvdm client: version mismatch: local protocol=67 app=0.0.483; broker RPC interface incompatible\r\n"
+      },
+      "name": "legacy-interface-ntvdm.exe.json"
+    },
+    {
+      "result": {
+        "status": 1306,
+        "ms": 50,
+        "stdout": "",
+        "stderr": "ntvdm client: version mismatch: local protocol=67 app=0.0.483; broker RPC interface incompatible\r\n"
+      },
+      "name": "legacy-interface-run16.exe.json"
+    },
+    {
+      "result": {
+        "status": 1306,
+        "ms": 197,
+        "stdout": "",
+        "stderr": "ntvdm client: version mismatch: local protocol=67 app=0.0.483; broker protocol=67 app=0.0.0\r\n"
+      },
+      "name": "old-app-ntvdm.exe.json"
+    },
+    {
+      "result": {
+        "status": 1306,
+        "ms": 145,
+        "stdout": "",
+        "stderr": "ntvdm client: version mismatch: local protocol=67 app=0.0.483; broker protocol=67 app=0.0.0\r\n"
+      },
+      "name": "old-app-run16.exe.json"
+    },
+    {
+      "result": {
+        "status": 1306,
+        "ms": 65,
+        "stdout": "",
+        "stderr": "ntvdm client: version mismatch: local protocol=67 app=0.0.483; broker protocol=67 app=9.0.483\r\n"
+      },
+      "name": "reply-app-ntvdm.exe.json"
+    },
+    {
+      "result": {
+        "status": 1306,
+        "ms": 58,
+        "stdout": "",
+        "stderr": "ntvdm client: version mismatch: local protocol=67 app=0.0.483; broker protocol=67 app=9.0.483\r\n"
+      },
+      "name": "reply-app-run16.exe.json"
+    },
+    {
+      "result": {
+        "status": 1306,
+        "ms": 57,
+        "stdout": "",
+        "stderr": "ntvdm client: version mismatch: local protocol=67 app=0.0.483; broker protocol=68 app=0.0.483\r\n"
+      },
+      "name": "reply-protocol-ntvdm.exe.json"
+    },
+    {
+      "result": {
+        "status": 1306,
+        "ms": 47,
+        "stdout": "",
+        "stderr": "ntvdm client: version mismatch: local protocol=67 app=0.0.483; broker protocol=68 app=0.0.483\r\n"
+      },
+      "name": "reply-protocol-run16.exe.json"
+    },
+    {
+      "result": {
+        "status": 1306,
+        "ms": 62,
+        "stdout": "",
+        "stderr": "ntvdm client: version mismatch: local protocol=67 app=0.0.483; broker protocol=67 app=0.0.483\r\n"
+      },
+      "name": "wrong-protocol-ntvdm.exe.json"
+    },
+    {
+      "result": {
+        "status": 1306,
+        "ms": 67,
+        "stdout": "",
+        "stderr": "ntvdm client: version mismatch: local protocol=67 app=0.0.483; broker protocol=67 app=0.0.483\r\n"
+      },
+      "name": "wrong-protocol-run16.exe.json"
+    }
+  ],
+  "build": {
+    "started": "2026-11-24T07:56:02.5070278+01:00",
+    "finished": "2026-11-24T07:56:07.4874011+01:00",
+    "exit": 0,
+    "pid": 19244
+  },
+  "cases": {
+    "finished": "2026-11-24T07:58:59.9679895+01:00",
+    "pid": 17020,
+    "started": "2026-11-24T07:57:59.4345865+01:00",
+    "exit": 0
+  },
+  "stamp": {
+    "started": "2026-11-24T07:58:28.6159623+01:00",
+    "pid": 12344,
+    "exit": 0,
+    "finished": "2026-11-24T07:58:29.9306477+01:00"
+  },
+  "runtime": {
+    "exit": 0,
+    "finished": "2026-11-24T07:57:37.2091908+01:00",
+    "pid": 5364,
+    "started": "2026-11-24T07:57:13.1461775+01:00",
+    "runtime": "O:\\tmp\\n033"
+  }
+}

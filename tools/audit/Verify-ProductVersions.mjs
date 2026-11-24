@@ -34,9 +34,8 @@ for (const name of variants) {
     const serverFixture=path.join(runtimeBinary,`version-negative-${name}.exe`);
     assert(!fs.existsSync(serverFixture),`Refuse to replace ${serverFixture}`);
     fs.copyFileSync(path.join(product,`diagnostics/version-${name}/ntsrv.exe`),serverFixture);
-    const stamp=spawnSync(process.env.OPENNT_VERSION_PWSH || 'pwsh.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',
-        path.join(root,'tools/build/Set-PackageIdentity.ps1'),'-Image',serverFixture,
-        '-PackageId',packageId],{windowsHide:true,encoding:'utf8'});
+    const stamp=spawnSync(path.join(root,'build/.ninja/build-tools/ntvdm-package-id.exe'),
+        [packageId,serverFixture],{windowsHide:true,encoding:'utf8'});
     if(stamp.status!==0){fs.rmSync(serverFixture,{force:true});throw Error(`Cannot stamp ${name}: ${stamp.error?.message || stamp.stderr}`);}
     const server=spawn(serverFixture,[],{cwd:build,windowsHide:true,
         env:process.env,stdio:['ignore','pipe','pipe']});

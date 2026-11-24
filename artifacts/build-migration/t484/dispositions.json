@@ -1139,8 +1139,8 @@
     "evidence": "docs/etc/evidence/t484-s3-hook-audits.md"
   },
   "tools/audit/Verify-ProductVersions.mjs": {
-    "reason": "Five native CMD peers compile; interpreted identity preparation and actual negative-peer runtime acceptance remain",
-    "evidence": "docs/etc/evidence/t484-s3-version-native.md",
-    "status": "pending-producer-migration"
+    "status": "migrated-delivered",
+    "evidence": "docs/etc/evidence/t484-s3-version-runtime.md",
+    "reason": "CMD/native five-peer producer and identity stamping; ten real launcher/worker version rejections pass, owned cleanup and cached/publication identity verified"
   }
 }
