@@ -23,7 +23,7 @@ about every native GDI failure buffer.
 ## Evidence and limits
 
 [Host fixture](../../../test/integration/wow_font_output_test.c) and
-[extracting runner](../../../test/integration/verify-wow-font-output.ps1)
+[extracting runner](../../../test/integration/verify-wow-output-contracts.ps1)
 compile three exact thunk bodies and original argument declarations with x86
 MSVC /W4 /WX. Guest pointer/handle translation and pair conversion are explicit
 seams; GDI is real except the zero-return kerning provider control. The selected

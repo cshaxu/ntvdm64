@@ -28,7 +28,7 @@ this is native boundary evidence, not another guest test.
 ## Verification
 
 [Native fixture](../../../test/integration/wow_palette_output_test.c) and
-[runner](../../../test/integration/verify-wow-palette-output.ps1) reuse the
+[runner](../../../test/integration/verify-wow-output-contracts.ps1) reuse the
 existing exact-body extractor for both original thunk and converter. Native
 GDI and palette objects are real; guest mapping and allocation contents are
 explicit test seams. Tests cover short, exact, past-end zero and null-handle

@@ -37,7 +37,7 @@ values. This S corrects new legacy writes, not old overlays by migration.
 ## Focused evidence
 
 [Provider/owner fixture](../../../test/integration/wow_embedding_root_test.c)
-and [runner](../../../test/integration/verify-wow-embedding-root.ps1) compile
+and [runner](../../../test/integration/verify-wow-output-contracts.ps1) compile
 the actual parent provider and exact original all-key/parser bodies. The
 product-path seam points only to a fresh build-owned file, created with
 CREATE_NEW. The all-key callback records keys rather than writing native

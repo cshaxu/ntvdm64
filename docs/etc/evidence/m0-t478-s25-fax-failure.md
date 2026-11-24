@@ -40,7 +40,7 @@ MapViewOfFile fails; that path needs no repair.
 
 ## Controlled counterexample and limits
 
-`test/integration/verify-wow-fax-failure.ps1` extracts five exact current or
+`test/integration/verify-wow-output-contracts.ps1` extracts five exact current or
 baseline bodies and compiles them with x86 MSVC. Registry, heap, spooler, file
 copy and resource-string boundaries are isolated providers; the fixture never
 calls a real registry mutation, driver install, printer install or file copy.

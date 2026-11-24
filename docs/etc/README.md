@@ -1875,3 +1875,5 @@ post-publication targeted checks.
 [T484 S3 redirector contracts](evidence/t484-s3-redir-contracts.md) records consolidated producers and the explicit known queue-failure boundary.
 
 [T484 S3 DIB contracts](evidence/t484-s3-dib-contracts.md) records139 native resource assertions and shared source projection.
+
+[T484 S3 WOW output contracts](evidence/t484-s3-wow-output-contracts.md) records205 preserved assertions and four consolidated producers.

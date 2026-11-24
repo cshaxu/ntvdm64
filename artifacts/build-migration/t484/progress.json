@@ -1,20 +1,25 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "3e6c023da2b83cbf9213c8e767045fbc40b6f7ad",
+  "head": "398b7a528655de77f001933a5d560f17dfdd2c89",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/m0-t478-s20-dib-registration.md",
-    " M docs/etc/evidence/m0-t478-s21-dib-retirement.md",
+    " M docs/etc/evidence/m0-t478-s22-font-output.md",
+    " M docs/etc/evidence/m0-t478-s23-palette-output.md",
+    " M docs/etc/evidence/m0-t478-s24-embedding-provider.md",
+    " M docs/etc/evidence/m0-t478-s25-fax-failure.md",
     " M docs/states/CURRENT.md",
-    " D test/integration/verify-wow-dib-failure-cleanup.ps1",
-    " D test/integration/verify-wow-dib-retirement.ps1",
+    " D test/integration/verify-wow-embedding-root.ps1",
+    " D test/integration/verify-wow-fax-failure.ps1",
+    " D test/integration/verify-wow-font-output.ps1",
+    " D test/integration/verify-wow-palette-output.ps1",
+    " D test/observation/extract-wow-palette-thunk.py",
     " M tools/build-fixtures.cmd",
     " M tools/build/SourceProjection.cmake",
     " M tools/build/fixtures/CMakeLists.txt",
-    "?? docs/etc/evidence/t484-s3-dib-contracts.md",
-    "?? test/integration/verify-wow-dib-contracts.ps1",
-    "?? tools/build/fixtures/wow-dib-contracts.cmake"
+    "?? docs/etc/evidence/t484-s3-wow-output-contracts.md",
+    "?? test/integration/verify-wow-output-contracts.ps1",
+    "?? tools/build/fixtures/wow-output-contracts.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6493,6 +6498,14 @@
     }
   ],
   "commits": {
+    "398b7a528655de77f001933a5d560f17dfdd2c89": {
+      "subject": "M0 T484 S3 P202: consolidate native DIB resource contracts",
+      "evidence": [
+        "docs/etc/evidence/m0-t478-s20-dib-registration.md",
+        "docs/etc/evidence/m0-t478-s21-dib-retirement.md",
+        "docs/etc/evidence/t484-s3-dib-contracts.md"
+      ]
+    },
     "3e6c023da2b83cbf9213c8e767045fbc40b6f7ad": {
       "subject": "M0 T484 S3 P201: consolidate native redirector contract producers",
       "evidence": [

@@ -1494,24 +1494,24 @@
     "evidence": "docs/etc/evidence/t484-s3-dib-contracts.md"
   },
   "test/integration/verify-wow-embedding-root.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P203 replaces duplicate compiler/extraction runners with one CMD/native target and shared runner; unchanged current C assertions pass.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-output-contracts.md"
   },
   "test/integration/verify-wow-fax-failure.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P203 replaces duplicate compiler/extraction runners with one CMD/native target and shared runner; unchanged current C assertions pass.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-output-contracts.md"
   },
   "test/integration/verify-wow-font-output.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P203 replaces duplicate compiler/extraction runners with one CMD/native target and shared runner; unchanged current C assertions pass.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-output-contracts.md"
   },
   "test/integration/verify-wow-palette-output.ps1": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P203 replaces duplicate compiler/extraction runners with one CMD/native target and shared runner; unchanged current C assertions pass.",
+    "evidence": "docs/etc/evidence/t484-s3-wow-output-contracts.md"
   },
   "test/integration/verify-wow-spool-failure.ps1": {
     "status": "supplemental-direct-command-review",
