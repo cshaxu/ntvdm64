@@ -1891,3 +1891,5 @@ post-publication targeted checks.
 [T484 S3 modesw guards](evidence/t484-s3-modesw-guards.md) records native positive and negative preprocessing checks at original diagnostic lines.
 
 [T484 S3 CCPU consumers](evidence/t484-s3-ccpu-event-consumers.md) records native event-consumer assertions and source projection boundaries.
+
+[T484 S3 Run16 historical entry](evidence/t484-s3-run16-entry-retirement.md) records obsolete producer retirement and current coverage boundaries.

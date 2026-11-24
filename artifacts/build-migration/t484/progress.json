@@ -1,16 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "da7f25b079a0bd2c8823e7d9a2154f058c2dc6c6",
+  "head": "151e675cd0b07b5642b237afe74b58f9cd41bbb8",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D tools/audit/Verify-CcpuEventConsumption.mjs",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/worker/cpu-tests.cmake",
-    "?? docs/etc/evidence/t484-s3-ccpu-event-consumers.md",
-    "?? test/mvdm-host/ccpu_event_consumers.c",
-    "?? test/mvdm-host/verify-ccpu-event-consumers.ps1"
+    " D test/app/run16_native_child.c",
+    " D tools/audit/Verify-Run16Entry.mjs",
+    "?? docs/etc/evidence/t484-s3-run16-entry-retirement.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6491,6 +6488,12 @@
     }
   ],
   "commits": {
+    "151e675cd0b07b5642b237afe74b58f9cd41bbb8": {
+      "subject": "M0 T484 S3 P210: migrate current CCPU consumer contracts",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-ccpu-event-consumers.md"
+      ]
+    },
     "da7f25b079a0bd2c8823e7d9a2154f058c2dc6c6": {
       "subject": "M0 T484 S3 P209: migrate modesw guard checks to native targets",
       "evidence": [

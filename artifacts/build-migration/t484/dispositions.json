@@ -1599,9 +1599,9 @@
     "evidence": "docs/etc/evidence/t484-s3-modesw-guards.md"
   },
   "tools/audit/Verify-Run16Entry.mjs": {
-    "status": "supplemental-direct-command-review",
-    "reason": "P199 direct command scan finds CL/Add-Type text outside the earlier frozen and supplemental inventories. Must distinguish actual compilation, test expectations, obsolete paths and already native delegation; no automatic completion or retention.",
-    "evidence": "docs/etc/evidence/t484-s3-direct-producer-reconciliation.md"
+    "status": "supplemental-retired",
+    "reason": "P211 retires T412-only x86 image/map assertions and sole child fixture; current Run16 uses frontend/worker request ownership. Existing launch-options, classification, capture and broker I/O tests remain, with fresh classifier checks only in this batch.",
+    "evidence": "docs/etc/evidence/t484-s3-run16-entry-retirement.md"
   },
   "tools/audit/Build-BrokerCallbackBarrier.mjs": {
     "status": "supplemental-retired",

@@ -98,6 +98,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P210 CCPU consumers](../etc/evidence/t484-s3-ccpu-event-consumers.md) | Current consumer assertions use shared native projections; selected PROD and IRQ-hook boundaries retained. One direct candidate remains; frozen316/355 and23 staging chains unchanged. |
 
+| [P211 Run16 historical entry](../etc/evidence/t484-s3-run16-entry-retirement.md) | Retired obsolete T412 entry builder and sole child source; current classifier checks retained. All30 P199 supplemental candidates classified; frozen316/355 and23 staging chains remain. |
+
 P183 found18 additional direct NASM sites; P184-P191 migrate or retire those
 producers. Their shared preparation chains remain explicitly pending.
 The frozen355 census is not the complete remaining invocation graph. P193
