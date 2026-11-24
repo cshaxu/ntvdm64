@@ -50,6 +50,22 @@ guest_probe(profiles VIDEO7-all.COM video7_mode_flags.asm -DVIDEO7_ALL_MODES=1)
 get_property(profile_outputs GLOBAL PROPERTY guest_profiles)
 add_custom_target(guest-profiles DEPENDS ${profile_outputs})
 
+guest_probe(forcedos DUAL.EXE win16_generic_probe.asm -DFORCEDOS_STUB)
+guest_probe(forcedos PARENT.EXE win16_generic_probe.asm -DFORCEDOS_STUB -DFORCEDOS_PARENT)
+get_property(forcedos_outputs GLOBAL PROPERTY guest_forcedos)
+add_custom_target(guest-forcedos DEPENDS ${forcedos_outputs})
+guest_probe(memory-transition interrupt16.COM dpmi_interrupt_return.asm)
+guest_probe(memory-transition interrupt32.COM dpmi_interrupt_return.asm -DCLIENT32)
+guest_probe(memory-transition code32.COM dpmi_interrupt_return.asm -DCLIENT32 -DCODE32)
+guest_probe(memory-transition task-cleanup.COM dpmi_task_cleanup.asm)
+guest_probe(memory-transition xms-failure.COM xms_capability.asm -DFORCED_RELOCATION)
+guest_probe(memory-transition D36N.COM dpmi_suballoc.asm)
+guest_probe(memory-transition D36L.COM dpmi_suballoc.asm -DEXIT_LIVE)
+get_property(transition_outputs GLOBAL PROPERTY guest_memory-transition)
+add_custom_target(guest-memory-transition DEPENDS ${transition_outputs}
+  "${CMAKE_BINARY_DIR}/guest-probes/cpu-integration/CallReturn.COM"
+  ems_pif_builder logon-environment)
+
 guest_probe(redir VDMPRDR.COM vdmredir_pipe_open_read.asm)
 guest_probe(redir VDMPTX.COM vdmredir_pipe_transact.asm)
 guest_probe(redir VDMPCAL.COM vdmredir_pipe_call.asm)

@@ -1367,5 +1367,15 @@
     "status": "supplemental-native-producer-pending-staging",
     "reason": "All existing fixed source/define combinations use shared CMD guest-profiles;13-image equivalence and cache verified across this batch. Runtime configuration/staging remains pending.",
     "evidence": "docs/etc/evidence/t484-s3-guest-profiles.md"
+  },
+  "test/integration/verify-forcedos.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "All authored COM/EXE configurations use shared CMD production; memory transition also reuses existing PIF builder and native environment reader, removing CL/C# production. Shared stage/configuration remains.",
+    "evidence": "docs/etc/evidence/t484-s3-transition-probes.md"
+  },
+  "test/integration/verify-memory-transition-guest.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "All authored COM/EXE configurations use shared CMD production; memory transition also reuses existing PIF builder and native environment reader, removing CL/C# production. Shared stage/configuration remains.",
+    "evidence": "docs/etc/evidence/t484-s3-transition-probes.md"
   }
 }

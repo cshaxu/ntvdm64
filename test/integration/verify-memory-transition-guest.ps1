@@ -2,7 +2,6 @@ param(
     [Parameter(Mandatory)][string]$RuntimeRoot,
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$BuildRoot,
-    [Parameter(Mandatory)][string]$LogonHelper,
     [Parameter(Mandatory)][ValidateSet('interrupt16','interrupt32','code32','task-cleanup','ems-call','xms-failure')][string]$Case
 )
 $ErrorActionPreference='Stop'
@@ -34,21 +33,19 @@ switch($Case){
 }
 New-Item -ItemType Directory -Force (Join-Path $runtime 'tests') | Out-Null
 $probe=Join-Path $runtime 'tests/S6PROBE.COM'
-& nasm -f bin @definitions (Join-Path "$PSScriptRoot/../observation" $source) -o $probe
-if($LASTEXITCODE){throw 'Guest assembly failed'}
+& "$repo/tools/build-fixtures.cmd" x86 guest-memory-transition *> (Join-Path $out 'build.txt')
+if($LASTEXITCODE){throw 'Memory transition fixture build failed'}
+$cache="$repo/build/.ninja/fixtures-x86"
+$template=if($Case -eq 'ems-call'){"$cache/guest-probes/cpu-integration/CallReturn.COM"}else{"$cache/guest-probes/memory-transition/$Case.COM"}
+Copy-Item -LiteralPath $template -Destination $probe
 if($Case -eq 'task-cleanup'){
     foreach($child in @('D36N.COM','D36L.COM')){
-        $defs=@()
-        if($child -eq 'D36L.COM'){$defs+=@('-DEXIT_LIVE')}
-        & nasm -f bin @defs "$PSScriptRoot/../observation/dpmi_suballoc.asm" -o (Join-Path $runtime "tests/$child")
-        if($LASTEXITCODE){throw 'DPMI child assembly failed'}
+        Copy-Item -LiteralPath "$cache/guest-probes/memory-transition/$child" -Destination (Join-Path $runtime "tests/$child")
     }
 }
 if($Case -eq 'ems-call'){
     Copy-Item $probe (Join-Path $binary 'E30.COM')
-    $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-    & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl /nologo /MT /W4 /I"'+$repo+'\src\non-mvdm\public\internal\windows\inc" /Fo"'+$out+'\pif.obj" /Fe"'+$out+'\pif-builder.exe" "'+$PSScriptRoot+'\..\observation\ems_pif_builder.c"') 2>&1 | Tee-Object (Join-Path $out 'build.txt')
-    if($LASTEXITCODE){throw 'EMS profile builder failed'}
+    Copy-Item -LiteralPath "$cache/ems_pif_builder.exe" -Destination (Join-Path $out 'pif-builder.exe')
 }
 Get-FileHash (Join-Path "$PSScriptRoot/../observation" $source),$probe,$PSCommandPath,$observerPath |
     ConvertTo-Json | Set-Content (Join-Path $out 'guest-identity.json')
@@ -74,9 +71,8 @@ try{
     $report=Join-Path $out 'guest.txt'
     $start=[Diagnostics.ProcessStartInfo]::new()
     $start.FileName=$observerPath; $start.UseShellExecute=$false; $start.CreateNoWindow=$true
-    Add-Type -Path (Resolve-Path $LogonHelper).Path
-    $identityToken=[Security.Principal.WindowsIdentity]::GetCurrent()
-    try{$entries=[WowMessageLogonEnvironment]::Read($identityToken.Token)}finally{$identityToken.Dispose()}
+    . "$PSScriptRoot/../observation/logon-environment.ps1"
+    $entries=Read-TestLogonEnvironment "$cache/logon-environment.exe" "$out/environment-process.json"
     $start.EnvironmentVariables.Clear()
     foreach($entry in $entries){$at=$entry.IndexOf('=',1);$start.EnvironmentVariables[$entry.Substring(0,$at)]=$entry.Substring($at+1)}
     $start.EnvironmentVariables['PATH']=$binary+';'+$start.EnvironmentVariables['PATH']

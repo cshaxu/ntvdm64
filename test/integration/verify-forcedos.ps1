@@ -15,11 +15,12 @@ $Observer=(Resolve-Path $Observer).Path
 $NativeParent=(Resolve-Path $NativeParent).Path
 $GenericHostDll=(Resolve-Path $GenericHostDll).Path
 $null=New-Item -ItemType Directory $root
-$defs=@('-DFORCEDOS_STUB');if($Case.Contains('nested')){$defs+='-DFORCEDOS_PARENT'}
-& nasm -f bin @defs -o "$root/DUAL.EXE" "$PSScriptRoot/../observation/win16_generic_probe.asm"
-if($LASTEXITCODE){throw 'Assembly failed'}
-if($Case.Contains('nested')) { & nasm -f bin -DFORCEDOS_STUB -o "$root/FCHILD.EXE" "$PSScriptRoot/../observation/win16_generic_probe.asm" }
-if($LASTEXITCODE){throw 'Assembly failed'}
+& "$r/tools/build-fixtures.cmd" x86 guest-forcedos
+if($LASTEXITCODE){throw 'FORCEDOS fixture build failed'}
+$cache="$r/build/.ninja/fixtures-x86/guest-probes/forcedos"
+$template=if($Case.Contains('nested')){'PARENT.EXE'}else{'DUAL.EXE'}
+Copy-Item -LiteralPath "$cache/$template" -Destination "$root/DUAL.EXE"
+if($Case.Contains('nested')){Copy-Item -LiteralPath "$cache/DUAL.EXE" -Destination "$root/FCHILD.EXE"}
 . "$r/test/observation/isolated_package_cleanup.ps1"
 $runtime=New-PhysicalRuntimeStage $PackageRoot
 $scope=New-IsolatedPackageScope $runtime

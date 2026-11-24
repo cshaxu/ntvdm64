@@ -94,6 +94,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P188 fixed DOS profiles](../etc/evidence/t484-s3-guest-profiles.md) | All13 existing profiles of five callers share CMD production; exact bytes/cache pass. Fixed316/355;15 supplemental preparation chains pending; four of18 new NASM candidates remain. |
 
+| [P189 transition producers](../etc/evidence/t484-s3-transition-probes.md) | FORCEDOS/memory profiles use CMD; inline CL and external C# replaced by existing native tools. Ten exact-image/cache checks and environment query pass. Fixed316/355;17 supplemental chains pending; two of18 new NASM candidates remain. |
+
 A fresh global scan found18 further integration scripts with direct NASM
 commands; these await retention/migration reconciliation, as recorded in P183.
 The frozen355 census is not the complete remaining invocation graph.
