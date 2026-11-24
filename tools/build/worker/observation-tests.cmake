@@ -172,3 +172,18 @@ worker_link("video7-packed-painter.exe" "/nologo /opt:ref /out:$out /map:$out.ma
   "kernel32.lib user32.lib gdi32.lib"
   INPUTS "obj/tests/video7_packed_painter_test.obj" "obj/host/nt_vga.obj")
 worker_group(video7-packed-painter "video7-packed-painter.exe")
+
+# Actual CCPU execution/escape owners, with private TLS inspected only in tests.
+get_target_property(abort_profile unit_obj_ccpu_c_main_obj COMPILE_FLAGS)
+foreach(part IN ITEMS ccpu tls)
+  worker_unit("obj/tests/wow_abort_${part}.obj"
+    "${NTVDM_REPO}/test/mvdm-host/wow_callback_abort_${part}_fixture.c"
+    "${abort_profile} /O2 /Gy /Gw")
+endforeach()
+get_target_property(abort_inputs image_cpu40_descriptor_domain_fixture_exe WORKER_LINK_INPUTS)
+list(REMOVE_ITEM abort_inputs "obj/tests/cpu40_descriptor_domain_fixture.obj")
+worker_link("wow-callback-abort-ccpu.exe" "/nologo /OPT:REF /force:multiple /out:$out /map:$out.map"
+  "kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib"
+  INPUTS "obj/tests/wow_abort_ccpu.obj" "obj/tests/wow_abort_tls.obj"
+    "obj/ccpu/c_main.obj" "obj/tests/callback/lease.obj" ${abort_inputs})
+worker_group(wow-callback-abort-ccpu "wow-callback-abort-ccpu.exe")

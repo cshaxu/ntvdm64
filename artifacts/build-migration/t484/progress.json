@@ -1,33 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "95b865a995f7526aa3914f8b0a6d60eb9a502e03",
+  "head": "9a7a1fac4c3cb4d8023bcc66b12b75a639159fb5",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/observation/new-wow-bitmap-test-resource.ps1",
-    " M test/observation/verify-wow-bitmap-bindings.ps1",
-    " M test/observation/verify-wow32-registration-surface.ps1",
+    " M test/mvdm-host/wow_callback_abort_ccpu_fixture.c",
+    " M test/mvdm-host/wow_callback_abort_tls_fixture.c",
+    " M test/observation/verify-wow-callback-abort-ccpu.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/wow32/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-bitmap/",
-    "?? docs/etc/evidence/t484-s3-bitmap.md",
-    "?? test/adapter-mvdm-host-out/wow/fixture-bitmap.bmp",
-    "?? tools/build/wow32/bitmap-tests.cmake"
+    " M tools/build/worker/observation-tests.cmake",
+    "?? artifacts/build-migration/t484/s3-ccpu-abort/",
+    "?? docs/etc/evidence/t484-s3-ccpu-abort.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 109,
-    "unchanged": 119,
+    "changed": 110,
+    "unchanged": 118,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 52,
+    "migrated-delivered": 53,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 11,
-    "requires-disposition-reconciliation": 109,
+    "requires-disposition-reconciliation": 108,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -2957,8 +2955,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "1e7c367feafcfdf02bdca8e7d1d57bfc0c557de84931e4485c0e3d1faea0914a",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "9a7a1fac4c3cb4d8023bcc66b12b75a639159fb5"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-bitmap.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-bitmap.md",
@@ -2975,12 +2977,21 @@
       "id": "B0161",
       "file": "test/observation/verify-wow-callback-abort-ccpu.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "97ff510c5860acf1beafd07bfd6706aa0f791d4c93f9c04d5a2b6c21878a6135",
+      "state": "changed",
+      "current_sha256": "13ca75f617232e7609ed33964254bff4a98ab294d3329bba74d55ae207260d3c",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Native actual CCPU closure; old graph parsing and historical source overrides removed",
+        "status": "migrated-delivered",
+        "retention_review": {
+          "reason": "Independent actual CPU escape/TLS/selector/control contracts; current objects replace per-run compiler chain",
+          "decision": "retain-consolidated",
+          "evidence": "docs/etc/evidence/t484-s3-ccpu-abort.md"
+        },
+        "evidence": "docs/etc/evidence/t484-s3-ccpu-abort.md"
+      }
     },
     {
       "id": "B0162",
@@ -5507,6 +5518,12 @@
     }
   ],
   "commits": {
+    "9a7a1fac4c3cb4d8023bcc66b12b75a639159fb5": {
+      "subject": "T484 S3 P96 consolidate bitmap producers and retire resource generator",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-bitmap.md"
+      ]
+    },
     "95b865a995f7526aa3914f8b0a6d60eb9a502e03": {
       "subject": "T484 S3 P95 consolidate accelerator projections in native build",
       "evidence": [
@@ -7655,36 +7672,8 @@
       "file": "test/observation/verify-wow-callback-abort-ccpu.ps1",
       "hits": [
         {
-          "line": 12,
-          "text": "$graph=Get-Content \"$worker/build.ninja\" -Raw"
-        },
-        {
-          "line": 13,
-          "text": "$providerGraph=Get-Content \"$ProviderBuildRoot/build.ninja\" -Raw"
-        },
-        {
-          "line": 21,
-          "text": "throw 'WOW32 graph does not compile and link the actual callback frame owner'"
-        },
-        {
-          "line": 27,
-          "text": "$inputs=@($PSCommandPath,\"$worker/build.ninja\",\"$ProviderBuildRoot/build.ninja\","
-        },
-        {
-          "line": 44,
-          "text": "Run-Owned prerequisites cmd.exe ('/d /s /c \"call \"'+$vs+'\" -arch=x86 -host_arch=x64 >nul && cd /d \"'+$worker+'\" && ninja.exe '+$targets+'\"')"
-        },
-        {
-          "line": 62,
-          "text": "$line='/d /s /c \"call \"'+$vs+'\" -arch=x86 -host_arch=x64 >nul && cl.exe '+$item.flags+' /O2 /Gy /Gw /Fo\"'+$root+'/'+$item.name+'.obj\" \"'+$item.source+'\"\"'"
-        },
-        {
-          "line": 68,
-          "text": "$line='/d /s /c \"call \"'+$vs+'\" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /OPT:REF /force:multiple /map:\"'+$root+'/fixture.map\" /out:\"'+$root+'/fixture.exe\" '+($objects -join ' ')+' kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib\"'"
-        },
-        {
-          "line": 69,
-          "text": "Run-Owned link cmd.exe $line"
+          "line": 11,
+          "text": "$worker=\"$repo/build/.ninja/msvc-x86-release/worker\""
         }
       ]
     },

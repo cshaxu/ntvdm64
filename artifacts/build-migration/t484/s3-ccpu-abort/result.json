@@ -1,0 +1,54 @@
+{
+  "runtime": {
+    "exit": 0,
+    "finished": "2026-11-24T02:14:09.0108118+01:00",
+    "started": "2026-11-24T02:13:41.6071266+01:00",
+    "pid": 21256
+  },
+  "cache": {
+    "path": "build/.ninja/msvc-x86-release/worker/wow-callback-abort-ccpu.exe",
+    "mtime": 639310796480878986,
+    "sha256": "C04D9FE5EBB4F172A321504CFFF285FA758AB1B05FE85031C4DB03241DBB0102"
+  },
+  "markers": [
+    "CCPU_CONTROL_OK current-descriptors=1 modes=1 continuation=1 shared-cr3=1 last-error=1",
+    "CCPU_ABORT_OK thread=26020 escaped=1 nested=1 continue=1 normal-fe=1",
+    "CCPU_INTERFACE_OK real-selectors=1 architectural-errors=13,11 normal-reuse=1",
+    "CCPU_ABORT_OK thread=2368 escaped=1 nested=1 continue=1 normal-fe=1",
+    "CCPU_ABORT_OK thread=30196 escaped=1 nested=1 continue=1 normal-fe=1"
+  ],
+  "final": {
+    "pid": 18212,
+    "exit": 0,
+    "finished": "2026-11-24T02:15:43.1601072+01:00",
+    "started": "2026-11-24T02:14:23.4926088+01:00"
+  },
+  "publication": {
+    "raw_inputs": 11,
+    "unchanged": true,
+    "published_copies": 22
+  },
+  "x64_rejected": 2,
+  "inputs": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\wow-callback-abort-ccpu.exe",
+      "Hash": "C04D9FE5EBB4F172A321504CFFF285FA758AB1B05FE85031C4DB03241DBB0102"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\wow-callback-abort-ccpu.exe.map",
+      "Hash": "8B3EDE5DC00591541D6F19C197F36D746C059E68DF626D0C662D6682E11C6868"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\c_main.c",
+      "Hash": "6EF14EB4ABF9CF8B7590C7B5DA8BC5B9AB4EDA8E288A3629FD6A41B878F1FD0D"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\c_xtrn.c",
+      "Hash": "A547B3F45E7ED95ABFFEDC23E73203045D81F5FB8AB8AB466D8AE8BFD09FF669"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\ntthread.c",
+      "Hash": "8DD53012BFAC7FC25B818CE78017766420FEC650772FBDC7C68825B87C82E188"
+    }
+  ]
+}

@@ -716,5 +716,15 @@
     },
     "reason": "Current WOW product profiles/objects and native RC/link; fixed authored bitmap replaces generator",
     "status": "migrated-delivered"
+  },
+  "test/observation/verify-wow-callback-abort-ccpu.ps1": {
+    "reason": "Native actual CCPU closure; old graph parsing and historical source overrides removed",
+    "status": "migrated-delivered",
+    "retention_review": {
+      "reason": "Independent actual CPU escape/TLS/selector/control contracts; current objects replace per-run compiler chain",
+      "decision": "retain-consolidated",
+      "evidence": "docs/etc/evidence/t484-s3-ccpu-abort.md"
+    },
+    "evidence": "docs/etc/evidence/t484-s3-ccpu-abort.md"
   }
 }

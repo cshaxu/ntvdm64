@@ -1681,3 +1681,5 @@ post-publication targeted checks.
 - [T484 S3 P95 accelerator producers](evidence/t484-s3-accelerator.md).
 
 - [T484 S3 P96 bitmap producers](evidence/t484-s3-bitmap.md).
+
+- [T484 S3 P97 actual CCPU abort](evidence/t484-s3-ccpu-abort.md).

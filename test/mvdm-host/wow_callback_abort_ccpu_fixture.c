@@ -1,10 +1,7 @@
 /* Actual CCPU40 execution and original TLS/interface owners. The original
  * files are included in this test TU only to inspect their private state;
  * production exposes no ThreadSimBuf layout or diagnostic getters. */
-#ifndef WOW_TEST_XTRN_SOURCE
-#define WOW_TEST_XTRN_SOURCE "../../src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c"
-#endif
-#include WOW_TEST_XTRN_SOURCE
+#include "../../src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c"
 #include <string.h>
 #include "ntthread.h"
 #include "ntvdm-exe/session/session.h"

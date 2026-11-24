@@ -47,6 +47,8 @@ if not "%~1"=="x86" if not "%~1"=="x64" exit /b 2
 set "TARGET=%~2"
 if not defined TARGET set "TARGET=guest-memory"
 set "SELECTED="
+if "%TARGET%"=="wow-callback-abort-ccpu" set "SELECTED=1"
+if "%TARGET%"=="wow-callback-abort-ccpu" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-bitmap" set "SELECTED=1"
 if "%TARGET%"=="wow-bitmap" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-accelerator" set "SELECTED=1"
@@ -234,6 +236,7 @@ if "%TARGET%"=="softpc-contracts" goto worker
 if "%TARGET%"=="video7-packed-painter" goto worker
 if "%TARGET%"=="planar-painter" goto worker
 if "%TARGET%"=="dem-directory-reset" goto worker
+if "%TARGET%"=="wow-callback-abort-ccpu" goto worker
 if "%TARGET%"=="ccpu-callback" goto worker
 if "%TARGET%"=="wow-controls" goto controls
 if "%TARGET%"=="command-redirection" if not "%~3"=="" goto worker_existing
