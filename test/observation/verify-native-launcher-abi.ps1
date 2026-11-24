@@ -2,8 +2,6 @@
 param(
     [Parameter(Mandatory)][string]$NativeBuild,
     [Parameter(Mandatory)][string]$X86Build,
-    [Parameter(Mandatory)][string]$PreviousLauncher,
-    [Parameter(Mandatory)][string]$Hook64,
     [Parameter(Mandatory)][string]$LogRoot
 )
 $ErrorActionPreference='Stop'
@@ -34,19 +32,5 @@ Run-Fixture $native 'application-search-test.exe' @((Join-Path $log 'search-fixt
 Run-Fixture $native 'run16-image-classification-test.exe' @(
     "$env:WINDIR/System32/notepad.exe", "$env:WINDIR/SysWOW64/cmd.exe",
     "$env:WINDIR/System32/kernel32.dll", "$env:WINDIR/System32/cmd.exe")
-$import=Join-Path $repo 'tools/build/Stage-NativeWorkerImage.ps1'
-foreach($case in @(
-    @{Name='wrong-x86-image';Input=$PreviousLauncher;Pattern='Expected AMD64'},
-    @{Name='dll-not-exe';Input=$Hook64;Pattern='Expected AMD64'},
-    @{Name='outside-build';Input="$env:WINDIR/System32/cmd.exe";Pattern='must stay below build'}
-)){
-    $failure=$null
-    try{& $import -InputFile $case.Input -OutputFile (Join-Path $log ($case.Name+'.exe'))}
-    catch{$failure=$_.Exception.Message}
-    if(!$failure -or $failure -notmatch $case.Pattern){throw "Wrong import rejection: $($case.Name): $failure"}
-    $results.Add([pscustomobject]@{Fixture=$case.Name;Exit=0;Rejection=$failure})
-}
-& $import -InputFile (Join-Path $native 'run16.exe') -OutputFile (Join-Path $log 'accepted-run16.exe')
-if((Get-FileHash (Join-Path $native 'run16.exe')).Hash -ne (Get-FileHash (Join-Path $log 'accepted-run16.exe')).Hash){throw 'Import hash mismatch'}
 $results|ConvertTo-Json|Set-Content (Join-Path $log 'results.json')
-'PASS native launcher capture/environment/scope/search/classification and exact native import/rejections'
+'PASS native launcher capture/environment/scope/search/classification'

@@ -1262,5 +1262,10 @@
     "status": "retired-with-delivery-evidence",
     "reason": "Unused historical configuration or completed fixed-list archive producer; associated obsolete self-test removed; assets unchanged",
     "evidence": "docs/etc/evidence/t484-s3-retired-projections.md"
+  },
+  "tools/build/Stage-NativeWorkerImage.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Native images link directly; old import wrapper only had self-tests, removed with import-only checks; actual ABI/package checks retained",
+    "evidence": "docs/etc/evidence/t484-s3-native-import-retirement.md"
   }
 }

@@ -29,9 +29,5 @@ $results=@(foreach($case in @(
  if(!$errorText -or !$errorText.Contains($case.expected)){throw "Incorrect negative result: $($case.name)/$errorText"}
  [pscustomobject]@{case=$case.name;rejected=$errorText}
 })
-$errorText=$null;$output=Join-Path $log 'wrong-import.exe'
-try {& "$repo/tools/build/Stage-NativeWorkerImage.ps1" -InputFile (Join-Path $BaselineRoot 'system32/ntmon.exe') -OutputFile $output}catch{$errorText=$_.Exception.Message}
-if(!$errorText -or !$errorText.Contains('Expected AMD64 native worker EXE') -or (Test-Path $output)){throw 'Invalid monitor import was not rejected before output'}
-$results+=@{case='formal-import';rejected=$errorText}
 $results|ConvertTo-Json|Set-Content (Join-Path $log 'results.json')
-'PASS four native monitor package/import negatives; no x86 fallback'
+'PASS three native monitor package negatives; no x86 fallback'

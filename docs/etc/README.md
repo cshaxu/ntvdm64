@@ -1792,3 +1792,5 @@ post-publication targeted checks.
 - [T484 S3 obsolete build closures](evidence/t484-s3-obsolete-build-closures.md).
 
 - [T484 S3 retired projections and archive tool](evidence/t484-s3-retired-projections.md).
+
+- [T484 S3 native import retirement](evidence/t484-s3-native-import-retirement.md).

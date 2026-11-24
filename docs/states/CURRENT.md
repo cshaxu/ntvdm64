@@ -64,6 +64,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P154 retired projections](../etc/evidence/t484-s3-retired-projections.md) | Three historical Bochs manifests/self-test and completed one-shot archive updater retired; assets unchanged. |
 
+| [P155 native import retirement](../etc/evidence/t484-s3-native-import-retirement.md) | Unused image-import wrapper/self-test removed; current package/ABI cases retained; static syntax/caller checks pass. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

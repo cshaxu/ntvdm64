@@ -1,0 +1,9 @@
+{
+  "run": {
+    "started": "2026-11-24T08:34:32.1504632+01:00",
+    "pid": 19616,
+    "finished": "2026-11-24T08:34:32.6880439+01:00",
+    "exit": 0
+  },
+  "output": "PASS syntax and retained current callers: test/observation/test-native-worker-package-inputs.ps1\r\nPASS syntax and retained current callers: test/observation/test-native-monitor-package-inputs.ps1\r\nPASS syntax and retained current callers: test/observation/verify-native-launcher-abi.ps1"
+}

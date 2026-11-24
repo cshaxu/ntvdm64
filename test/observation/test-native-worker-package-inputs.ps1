@@ -32,11 +32,5 @@ foreach($case in $cases) {
   ConvertTo-Json|Set-Content (Join-Path $log ($case.Name+'.json'))
  "PASS native worker staging rejection $($case.Name)"
 }
-# Formal graph import rejects the old carrier before writing its output.
-$rejected=Join-Path $log 'rejected-worker.exe'
-$errorText=$null
-try {& "$repo/tools/build/Stage-NativeWorkerImage.ps1" -InputFile (Join-Path $BaselineRoot 'system32\ntvwm.exe') -OutputFile $rejected}catch{$errorText=$_.Exception.Message}
-if(!$errorText -or !$errorText.Contains('Expected AMD64 native worker EXE') -or (Test-Path $rejected)){throw 'Formal worker import admitted an x86 carrier'}
-'PASS formal native worker import rejects I386 before output'
 # Staging copies are test evidence only. No process, endpoint, substitution,
 # deployment or normal-lifecycle cleanup is exercised by these negatives.
