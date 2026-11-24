@@ -122,3 +122,4 @@ include(creation-tests.cmake)
 
 include(dispatch-tests.cmake)
 include(module-alias-test.cmake)
+include(native-extension-tests.cmake)

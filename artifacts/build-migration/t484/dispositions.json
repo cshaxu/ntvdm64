@@ -861,5 +861,15 @@
     "evidence": "docs/etc/evidence/t484-s3-capture-contracts.md",
     "reason": "Current private-desktop chain/acquisition contracts native; six historical controls retired; projections, regressions, full cached build/cache/publication verified",
     "status": "migrated-delivered"
+  },
+  "test/observation/verify-wow-native-extension-boundaries.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-extension-native.md",
+    "reason": "Native extension/MM/rejection/frame group preserves current contracts; historical producer retired; final runtime/full cached build/cache/publication pass",
+    "status": "migrated-delivered"
+  },
+  "test/observation/verify-wow-original-callback-frame.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-extension-native.md",
+    "reason": "Native extension/MM/rejection/frame group preserves current contracts; historical producer retired; final runtime/full cached build/cache/publication pass",
+    "status": "migrated-delivered"
   }
 }

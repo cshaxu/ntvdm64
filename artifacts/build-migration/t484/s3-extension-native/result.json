@@ -1,0 +1,61 @@
+{
+  "projection": "Current wcall16 owner suffix equal ignoring whitespace",
+  "final": {
+    "exit": 0,
+    "pid": 6288,
+    "started": "2026-11-24T03:40:56.8767262+01:00",
+    "finished": "2026-11-24T03:42:00.3637748+01:00"
+  },
+  "cache": [
+    {
+      "hash": "AD843971432973544928113646BF543E74A94D9884C788CA15C99BBA22C2F1DC",
+      "path": "build/.ninja/msvc-x86-release/wow32/extension-extension.exe",
+      "time": 639310847632096656
+    },
+    {
+      "hash": "3AA6AEE7B26B4D544F4B504C5F51290AA5680F54149A1F65C114DF6756E40AB0",
+      "path": "build/.ninja/msvc-x86-release/wow32/extension-mm-body.exe",
+      "time": 639310847632678219
+    },
+    {
+      "hash": "9BF98C549FC40302E1ABE7D2C277F67D0D11411CBD3AA5F3BCF29ECEA01FA3CF",
+      "path": "build/.ninja/msvc-x86-release/wow32/extension-rejection.exe",
+      "time": 639310847633681494
+    },
+    {
+      "hash": "E1D767AEAD7D53AB098B24AAC57E500C4332B28B80BAC5A6676E219A5C652307",
+      "path": "build/.ninja/msvc-x86-release/wow32/extension-original-frame.exe",
+      "time": 639310848201733802
+    }
+  ],
+  "publication": {
+    "unchanged": true,
+    "rawInputs": 11,
+    "publishedCopies": 22
+  },
+  "runtime": {
+    "exit": 0,
+    "started": "2026-11-24T03:40:14.8068951+01:00",
+    "finished": "2026-11-24T03:40:26.5237738+01:00",
+    "pid": 5732
+  },
+  "scope": "Native ownership/service-double contracts; not guest/CPU acceptance",
+  "priorAttempts": {
+    "launcherOutcome": "No test: missing dash in ExecutionPolicy parameter",
+    "firstRuntime": {
+      "exit": 1,
+      "started": "2026-11-24T03:39:14.5048353+01:00",
+      "pid": 12940,
+      "finished": "2026-11-24T03:39:30.5684727+01:00"
+    },
+    "launcherPid": 6744,
+    "firstRuntimeOutcome": "All runtime groups passed, final hash guard rejected regenerated build.ninja; corrected source/build-identity separation"
+  },
+  "phases": {
+    "abort": 11,
+    "extension": "WOW_NATIVE_EXTENSION_BOUNDARY errors=0 inline_pairs=21 callbacks=11 ready_entries=4 resource_entries=9 unwind=1 reject=1 result_error=1 native_loader=1 tid32_native_sync=1 mm_private_exports=11",
+    "mm": "WOW_ORIGINAL_MM_EXTENSION errors=0 actual_body=1 five_args=1 directory_order=1 zero_target=1 exception=1 tid32_through_original=1\r\nWOW_NATIVE_EXTENSION_BOUNDARY errors=0 inline_pairs=27 callbacks=11 ready_entries=4 resource_entries=9 unwind=1 reject=1 result_error=1 native_loader=1 tid32_native_sync=1 mm_private_exports=11",
+    "originalFrame": 4,
+    "rejection": "WOW_PUBLIC_CALLBACK_REJECTION errors=0 dword_zero=1 bool_false=1 original_store=1 invalid_size_untouched=1 no_guest_entry=1"
+  }
+}

@@ -1705,3 +1705,5 @@ post-publication targeted checks.
 - [T484 S3 P107 native module alias contract](evidence/t484-s3-module-alias-native.md).
 
 - [T484 S3 P108 current capture contracts](evidence/t484-s3-capture-contracts.md).
+
+- [T484 S3 P109 native extension and frame contracts](evidence/t484-s3-extension-native.md).
