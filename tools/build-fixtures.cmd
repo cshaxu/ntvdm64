@@ -113,7 +113,7 @@ for %%I in (wow-idle-hosts wow-idle-probes) do if "%TARGET%"=="%%I" set "SELECTE
 for %%I in (wow-idle-hosts wow-idle-probes) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-file-cache" set "SELECTED=1"
 if "%TARGET%"=="wow-file-cache" if not "%~1"=="x86" exit /b 2
-for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%TARGET%"=="%%I" set "SELECTED=1"
+for %%I in (wow_capture_native_control wow-message-external wow-message-cross wow-message-pending) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="wow-edit-contracts" set "SELECTED=1"
 if "%TARGET%"=="wow-edit-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-clipboard-probes" set "SELECTED=1"
@@ -215,7 +215,7 @@ if "%TARGET%"=="window-contracts" call "%~dp0build\bootstrap.cmd"
 if "%TARGET%"=="window-contracts" if errorlevel 1 exit /b %errorlevel%
 call "%NTVDM_VSDEVCMD%" -arch=%~1 -host_arch=x64 >nul
 if errorlevel 1 exit /b %errorlevel%
-for %%I in (wow-message-external wow-message-cross wow-message-pending) do if "%TARGET%"=="%%I" goto message_native
+for %%I in (wow_capture_native_control wow-message-external wow-message-cross wow-message-pending) do if "%TARGET%"=="%%I" goto message_native
 if "%TARGET%"=="ccpu-header-selection" goto worker_existing
 if "%TARGET%"=="win101-control-fixtures" goto worker_existing
 if "%TARGET%"=="oem-tests" goto worker

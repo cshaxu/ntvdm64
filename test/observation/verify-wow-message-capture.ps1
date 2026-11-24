@@ -1,6 +1,5 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$EvidenceRoot,
- [string]$VsDevCmd='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat')
+param([Parameter(Mandatory)][string]$EvidenceRoot)
 # Raw USER observation, not production/WOW acceptance. A protected alias is
 # recorded without a dereference; a completed observation does not prove capture.
 # Invoke as an owned hidden background process; all outputs are disposable.
@@ -38,6 +37,7 @@ try{
  $sources|Get-FileHash|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
  foreach($arch in @('x86','x64')){
   $build="$repo/build/.ninja/msvc-$arch-release"
+  Owned "build-$arch" $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" '+$arch+' wow_capture_native_control"') 1200
   if(!(Test-Path "$build/build.ninja")){throw 'Configured stable Ninja tree required'}
   $commands=@(& ninja.exe -C $build -t commands message-probes/MSGCAPTURE.exe)
   if($LASTEXITCODE){throw 'Cannot recover actual native probe graph'}
@@ -48,8 +48,7 @@ try{
    throw 'Require native-only Release/MT strict probe graph'
   }
   $commands|Set-Content "$root/$arch-commands.txt"
-  $line='/d /s /c "call "'+$VsDevCmd+'" -arch='+$arch+' -host_arch=x64 >nul && cmake --build "'+$build+'" --target wow_capture_native_control"'
-  Owned "build-$arch" 'cmd.exe' $line 1200
+
   $exe="$build/message-probes/MSGCAPTURE.exe"
   $bytes=[IO.File]::ReadAllBytes($exe);$pe=[BitConverter]::ToInt32($bytes,60)
   if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $(if($arch -eq 'x86'){0x14c}else{0x8664})){throw 'Probe width mismatch'}

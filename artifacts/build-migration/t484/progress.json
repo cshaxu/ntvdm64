@@ -1,26 +1,19 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "7c341f84a952ab3df0ad7a1a5c4992888b4fa003",
+  "head": "99ec7197bee544b7b45af4906d6b97df6b7b1a5d",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
-    " M docs/etc/evidence/t484-s3-early-deliveries.md",
     " M docs/states/CURRENT.md",
-    " M test/compat/wow_gdi_alias_fixture.c",
-    " D test/compat/wow_gdi_class_brush_boundary.c",
-    " M test/observation/verify-wow-gdi-alias.ps1",
-    " M test/observation/verify-wow-hard-error-decoder.ps1",
-    " M test/observation/verify-wow-hook-native-binding.ps1",
+    " M test/observation/verify-wow-message-capture.ps1",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/CMakeLists.txt",
-    "?? artifacts/build-migration/t484/s3-small-wow/",
-    "?? docs/etc/evidence/t484-s3-small-wow.md",
-    "?? tools/build/fixtures/wow-boundaries.cmake"
+    "?? artifacts/build-migration/t484/s3-capture-native/",
+    "?? docs/etc/evidence/t484-s3-capture-native.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 118,
-    "unchanged": 110,
+    "changed": 119,
+    "unchanged": 109,
     "removed": 127
   },
   "disposition_counts": {
@@ -28,8 +21,8 @@
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
-    "retained-native-delegate": 13,
-    "requires-disposition-reconciliation": 99,
+    "retained-native-delegate": 14,
+    "requires-disposition-reconciliation": 98,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3194,8 +3187,13 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "18c6980fd3e6be2e768a7059131dc0e2fe6b17afe8a3e076c92d2ff016a25520",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "99ec7197bee544b7b45af4906d6b97df6b7b1a5d"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-small-wow.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
@@ -3214,8 +3212,13 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "aa69a946d196ec006b402278336f13fa436c3d413fc339a198138ca2937c9f29",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "99ec7197bee544b7b45af4906d6b97df6b7b1a5d"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-small-wow.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
@@ -3234,8 +3237,13 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "5ec7ccff31751862aea06b717a2e0220a6c7afe1866d67aa40574c66416896cb",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "99ec7197bee544b7b45af4906d6b97df6b7b1a5d"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-small-wow.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
@@ -3276,12 +3284,21 @@
       "id": "B0174",
       "file": "test/observation/verify-wow-message-capture.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "9427b9b0a6c4c75a08543c0bb365ae745a923fdb6d6dafc57d2096d81908aedb",
+      "state": "changed",
+      "current_sha256": "c70c31d6ce6d2b24e2e3247b926649a29f30b5f5494e43cfe22feb7d1ce7616e",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-capture-native.md",
+        "retention_review": {
+          "reason": "Independent host USER capture/early-reply reference; not a product or guest acceptance gate; old toolchain selector removed",
+          "evidence": "docs/etc/evidence/t484-s3-capture-native.md",
+          "decision": "retain opt-in native prerequisite observation"
+        },
+        "reason": "Existing native target uses shared CMD entry; x86/x64 default/extended28 observations, full build/cache/publication hash verification pass",
+        "status": "retained-native-delegate"
+      }
     },
     {
       "id": "B0175",
@@ -5649,6 +5666,13 @@
     }
   ],
   "commits": {
+    "99ec7197bee544b7b45af4906d6b97df6b7b1a5d": {
+      "subject": "T484 S3 P104 consolidate GDI probe and migrate small WOW contracts",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-early-deliveries.md",
+        "docs/etc/evidence/t484-s3-small-wow.md"
+      ]
+    },
     "7c341f84a952ab3df0ad7a1a5c4992888b4fa003": {
       "subject": "T484 S3 P103 use native dispatcher contract and retire old extractor",
       "evidence": [
@@ -7999,15 +8023,15 @@
       "file": "test/observation/verify-wow-message-capture.ps1",
       "hits": [
         {
-          "line": 11,
+          "line": 10,
           "text": "$root.StartsWith($repo+'\\build\\.ninja\\',[StringComparison]::OrdinalIgnoreCase) -or"
         },
         {
-          "line": 37,
+          "line": 36,
           "text": "\"$repo/test/build/wow-message-probes.cmake\")"
         },
         {
-          "line": 40,
+          "line": 39,
           "text": "$build=\"$repo/build/.ninja/msvc-$arch-release\""
         },
         {
@@ -8019,11 +8043,7 @@
           "text": "$commands=@(& ninja.exe -C $build -t commands message-probes/MSGCAPTURE.exe)"
         },
         {
-          "line": 51,
-          "text": "$line='/d /s /c \"call \"'+$VsDevCmd+'\" -arch='+$arch+' -host_arch=x64 >nul && cmake --build \"'+$build+'\" --target wow_capture_native_control\"'"
-        },
-        {
-          "line": 56,
+          "line": 55,
           "text": "Get-FileHash $exe,\"$build/build.ninja\",\"$build/CMakeCache.txt\"|Export-Csv -NoTypeInformation \"$root/$arch-artifact-inputs.csv\""
         }
       ]

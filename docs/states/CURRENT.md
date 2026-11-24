@@ -46,7 +46,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P104 small WOW contracts](../etc/evidence/t484-s3-small-wow.md) | Three native producers and already-native input lifetime pass; duplicate GDI probe consolidated; full build/cache/publication hashes pass. B0169 provider mismatch remains pending. |
 
-Completed implementation batches through P104 passed their cached full host build. P73 checks11 raw host inputs
+| [P105 capture entry](../etc/evidence/t484-s3-capture-native.md) | Existing native producer routed through CMD;28 host observations, full cached build/cache/publication hashes pass; no guest acceptance claim. |
+
+Completed implementation batches through P105 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

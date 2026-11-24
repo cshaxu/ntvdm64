@@ -836,5 +836,15 @@
     "evidence": "docs/etc/evidence/t484-s3-small-wow.md",
     "status": "requires-disposition-reconciliation",
     "reason": "Old test header supplies8 of33 current registration calls; reconcile actual complete BOOLEAN/loader witness, not a product failure conclusion"
+  },
+  "test/observation/verify-wow-message-capture.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-capture-native.md",
+    "retention_review": {
+      "reason": "Independent host USER capture/early-reply reference; not a product or guest acceptance gate; old toolchain selector removed",
+      "evidence": "docs/etc/evidence/t484-s3-capture-native.md",
+      "decision": "retain opt-in native prerequisite observation"
+    },
+    "reason": "Existing native target uses shared CMD entry; x86/x64 default/extended28 observations, full build/cache/publication hash verification pass",
+    "status": "retained-native-delegate"
   }
 }

@@ -1,0 +1,55 @@
+{
+  "publication": {
+    "raw_inputs": 11,
+    "published_copies": 22,
+    "unchanged": true
+  },
+  "runtime": {
+    "started": "2026-11-24T03:07:49.5207639+01:00",
+    "finished": "2026-11-24T03:08:26.1338772+01:00",
+    "exit": 0,
+    "pid": 3600
+  },
+  "final_entry": {
+    "pid": 24156,
+    "exit": 0,
+    "started": "2026-11-24T03:11:30.5150791+01:00",
+    "finished": "2026-11-24T03:12:02.362688+01:00"
+  },
+  "observation": {
+    "extendedCases": 20,
+    "limit": "Observed current USER build only; alias is not silently declared safe or a product pass",
+    "allExtendedOutputsHavePrivateStorage": true,
+    "host": {
+      "os": "10.0.26300.0",
+      "user32Version": "10.0.26100.8117 (WinBuild.160101.0800)",
+      "user32Sha256": "6F756DBAE7C699A8B909BE2C27DA94B427CC7927272B8187C90076E65B941F3B",
+      "wowUser32Version": "10.0.26100.8117 (WinBuild.160101.0800)",
+      "wowUser32Sha256": "242BDD94985CC875292CF20FE55BC84C7B41F83D20720C66810D6D99A7BBADB3"
+    },
+    "retainedDefaultCases": 8,
+    "runtimeAcceptance": false,
+    "nativeObservationComplete": true,
+    "unprovedDirectOutput": []
+  },
+  "final": {
+    "exit": 0,
+    "started": "2026-11-24T03:09:32.2050043+01:00",
+    "pid": 668,
+    "finished": "2026-11-24T03:11:02.9761978+01:00"
+  },
+  "cache": [
+    {
+      "path": "build/.ninja/msvc-x86-release/message-probes/MSGCAPTURE.exe",
+      "time": 639310828932772102,
+      "hash": "BA0379605235989439D185962ABD452B7ABE6D6A752F644E24A35F9AFB51E096",
+      "arch": "x86"
+    },
+    {
+      "path": "build/.ninja/msvc-x64-release/message-probes/MSGCAPTURE.exe",
+      "time": 639310829054819963,
+      "hash": "A86AAE764E8C015B3AA958720A687A4953E6A606063F01C359BD3DA1B62080C1",
+      "arch": "x64"
+    }
+  ]
+}
