@@ -157,7 +157,7 @@ modern-host ABI needs must be retained unless concrete counterevidence exists.
 - [All block classifications and physical coordinates](../../../artifacts/mvdm-audit/t480-s1-hunk-classification.json).
 - [Full command/object/consumer evidence, gzip JSON](../../../artifacts/mvdm-audit/t480-s1-build-evidence.json.gz).
 - [Raw build/preprocessor/graph/MAP receipts](../../../artifacts/mvdm-audit/t480-s1-build-receipts.zip).
-- [Collector](../../../tools/audit/collect-host-mirror-build-evidence.py) and
+- Historical collector `tools/audit/collect-host-mirror-build-evidence.py` (retired in [T484 cleanup](t484-s3-retire-census.md)) and
   [focused preprocessor capture](../../../tools/audit/capture-host-mirror-preprocessing.py).
 
 Reproduce the normal CMake commands from the recorded build-x86.cmd/build-x64.cmd,

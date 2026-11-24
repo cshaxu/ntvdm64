@@ -1754,3 +1754,5 @@ post-publication targeted checks.
 - [T484 S3 USER declaration producer and audit selftest](evidence/t484-s3-user-declarations.md)
 
 - [T484 S3 retire old closure and accessor research](evidence/t484-s3-retire-closure.md)
+
+- [T484 S3 retired census tools and standalone collector](evidence/t484-s3-retire-census.md)

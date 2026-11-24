@@ -1007,5 +1007,25 @@
     "status": "retired-with-delivery-evidence",
     "reason": "Historical graph assumptions obsolete; duplicate accessor generator replaced by current native 38x4 CCPU contract",
     "evidence": "docs/etc/evidence/t484-s3-retire-closure.md"
+  },
+  "tools/audit/collect-host-mirror-build-evidence.py": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Frozen historical census and obsolete graph assumptions; no current producer/test caller; reports retained",
+    "evidence": "docs/etc/evidence/t484-s3-retire-census.md"
+  },
+  "tools/audit/Export-MvdmWholeClosureInventory.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Frozen historical census and obsolete graph assumptions; no current producer/test caller; reports retained",
+    "evidence": "docs/etc/evidence/t484-s3-retire-census.md"
+  },
+  "tools/audit/Join-OpenNtRetainedGraphCoverage.ps1": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Frozen historical census and obsolete graph assumptions; no current producer/test caller; reports retained",
+    "evidence": "docs/etc/evidence/t484-s3-retire-census.md"
+  },
+  "tools/audit/collect-mirror-header-consumers.py": {
+    "status": "retained-standalone-audit",
+    "reason": "Explicit supplied plan, read-only Ninja deps query and JSON output; no build/generation calls; help only checked",
+    "evidence": "docs/etc/evidence/t484-s3-retire-census.md"
   }
 }

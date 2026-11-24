@@ -1,31 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "d0bb2021a45eb66e3e1ac82821359933af6e3a56",
+  "head": "5ddfe26a635172dbabde2666510de14116966c16",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
+    " M docs/etc/evidence/m0-t480-s1-build-consumers-closure.md",
     " M docs/states/CURRENT.md",
-    " D tools/audit/Audit-ProductDependencyClosure.ps1",
-    " D tools/audit/AuditCvidAccessorProfile.mjs",
-    "?? artifacts/build-migration/t484/s3-retire-closure/",
-    "?? docs/etc/evidence/t484-s3-retire-closure.md"
+    " D tools/audit/Export-MvdmWholeClosureInventory.mjs",
+    " D tools/audit/Join-OpenNtRetainedGraphCoverage.ps1",
+    " D tools/audit/collect-host-mirror-build-evidence.py",
+    "?? artifacts/build-migration/t484/s3-retire-census/",
+    "?? docs/etc/evidence/t484-s3-retire-census.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 142,
-    "unchanged": 81,
-    "removed": 132
+    "unchanged": 78,
+    "removed": 135
   },
   "disposition_counts": {
     "migrated-delivered": 83,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 132,
+    "retired-with-delivery-evidence": 135,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 69,
-    "retained-standalone-audit": 2
+    "requires-disposition-reconciliation": 65,
+    "retained-standalone-audit": 3
   },
-  "existing_interpreted_candidates_with_command_hits": 172,
+  "existing_interpreted_candidates_with_command_hits": 169,
   "files": [
     {
       "id": "B0001",
@@ -3855,8 +3858,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "5ddfe26a635172dbabde2666510de14116966c16"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-closure.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -3870,8 +3877,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "5ddfe26a635172dbabde2666510de14116966c16"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-closure.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -3883,12 +3894,16 @@
       "id": "B0204",
       "file": "tools/audit/collect-host-mirror-build-evidence.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "883907b36fad3e3cb59f53a90e22358df3de33422e1412a41a03633ad36223ef",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Frozen historical census and obsolete graph assumptions; no current producer/test caller; reports retained",
+        "evidence": "docs/etc/evidence/t484-s3-retire-census.md"
+      }
     },
     {
       "id": "B0205",
@@ -3898,19 +3913,27 @@
       "current_sha256": "bb991643528726718ac35aff244aa8052e10298615d70f88fb59a3979cea660d",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Explicit supplied plan, read-only Ninja deps query and JSON output; no build/generation calls; help only checked",
+        "evidence": "docs/etc/evidence/t484-s3-retire-census.md"
+      }
     },
     {
       "id": "B0206",
       "file": "tools/audit/Export-MvdmWholeClosureInventory.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "32700849fe845ae0ba82778099513e563bdbedd595058cbfee6160052f3c4c4e",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Frozen historical census and obsolete graph assumptions; no current producer/test caller; reports retained",
+        "evidence": "docs/etc/evidence/t484-s3-retire-census.md"
+      }
     },
     {
       "id": "B0207",
@@ -3927,12 +3950,16 @@
       "id": "B0208",
       "file": "tools/audit/Join-OpenNtRetainedGraphCoverage.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "5a96ecedeee89bb552bbfb4bbc25933f50a1fd7f1da86f541156e06acf6b4470",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Frozen historical census and obsolete graph assumptions; no current producer/test caller; reports retained",
+        "evidence": "docs/etc/evidence/t484-s3-retire-census.md"
+      }
     },
     {
       "id": "B0209",
@@ -5926,6 +5953,12 @@
     }
   ],
   "commits": {
+    "5ddfe26a635172dbabde2666510de14116966c16": {
+      "subject": "T484 S3 P135 retire old closure and duplicate accessor research",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-retire-closure.md"
+      ]
+    },
     "d0bb2021a45eb66e3e1ac82821359933af6e3a56": {
       "subject": "T484 S3 P134 migrate USER declaration checks to native targets",
       "evidence": [
@@ -8777,124 +8810,12 @@
       ]
     },
     {
-      "id": "B0204",
-      "file": "tools/audit/collect-host-mirror-build-evidence.py",
-      "hits": [
-        {
-          "line": 1,
-          "text": "\"\"\"Bind the T480 host-only census to actual built product Ninja dependencies."
-        },
-        {
-          "line": 41,
-          "text": "def ninja(graph, *args):"
-        },
-        {
-          "line": 42,
-          "text": "return subprocess.check_output([\"ninja\", \"-C\", str(graph), \"-t\", *args],"
-        },
-        {
-          "line": 60,
-          "text": "graph = ROOT / \"build/.ninja\" / relative"
-        },
-        {
-          "line": 62,
-          "text": "rawdeps = ninja(graph, \"deps\")"
-        },
-        {
-          "line": 73,
-          "text": "graphs[relative] = {\"sha256\": sha(graph / \"build.ninja\"),"
-        },
-        {
-          "line": 74,
-          "text": "\"deps\": deps, \"compdb\": json.loads(ninja(graph, \"compdb\"))}"
-        },
-        {
-          "line": 76,
-          "text": "closure = ninja(graph, \"commands\", target)"
-        },
-        {
-          "line": 81,
-          "text": "# of the final link and librarian commands for actual link inputs."
-        },
-        {
-          "line": 85,
-          "text": "tool = re.search(r'(?i)\\b(?:link|lib)(?:\\.exe)?\\s', command)"
-        },
-        {
-          "line": 88,
-          "text": "# cmd /s /c wraps the entire NTVDM link command in one quote pair;"
-        },
-        {
-          "line": 102,
-          "text": "raise SystemExit(\"no final link operands: \" + target)"
-        },
-        {
-          "line": 135,
-          "text": "\"link_query\": ninja(graph, \"query\", target),"
-        }
-      ]
-    },
-    {
       "id": "B0205",
       "file": "tools/audit/collect-mirror-header-consumers.py",
       "hits": [
         {
           "line": 29,
           "text": "data = subprocess.check_output([\"ninja\", \"-C\", directory, \"-t\", \"deps\"],"
-        }
-      ]
-    },
-    {
-      "id": "B0206",
-      "file": "tools/audit/Export-MvdmWholeClosureInventory.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "import { createHash } from 'node:crypto';"
-        },
-        {
-          "line": 2,
-          "text": "import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';"
-        },
-        {
-          "line": 3,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 4,
-          "text": "import { fileURLToPath } from 'node:url';"
-        },
-        {
-          "line": 8,
-          "text": "if (outputIndex < 0 || !process.argv[outputIndex + 1]) throw new Error('usage: node Export-MvdmWholeClosureInventory.mjs --output build/t473-s1/name');"
-        },
-        {
-          "line": 26,
-          "text": "if (entry.isSymbolicLink()) throw new Error(`symbolic link is not an inventory input: ${full}`);"
-        },
-        {
-          "line": 77,
-          "text": "if (!productLine) throw new Error(`missing product link edge for ${product}: ${graph}`);"
-        },
-        {
-          "line": 83,
-          "text": "const workerRule = lines.find((line) => line.startsWith('  command = link.exe ') && line.includes('/out:$out'));"
-        },
-        {
-          "line": 102,
-          "text": "const workerGraph = path.join(repo, 'build/.ninja/msvc-x86-release/worker/build.ninja');"
-        },
-        {
-          "line": 103,
-          "text": "const wow32Graph = path.join(repo, 'build/.ninja/msvc-x86-release/wow32/build.ninja');"
-        },
-        {
-          "line": 129,
-          "text": "if (/\\.(lib|exe|dll|pdb|res|exp|lnk|ico|rom|ram|com|sys|hlp|ppd|inf|spc|gi|cl[3-6]|skl|std|old|bar|rcv)$/.test(leaf)) return 'retained-historical-binary-or-build-artifact';"
-        },
-        {
-          "line": 148,
-          "text": "const summary = { rows: rows.length, upstream_origin: counts('upstream_origin'), current_identity: counts('current_identity'), graph_compile_selection: counts('graph_compile_selection'), product_link_selection: counts('product_link_selection'), audit_disposition: counts('audit_disposition'), limitation: 'Identity, full Ninja-graph compile-edge, and selected product-link-source inventory only. NTVDM product selection relies on the explicit original-library whole-archive contract; direct product selection does not prove load, dispatch, teardown, or behavioral reachability.' };"
         }
       ]
     },
@@ -8945,40 +8866,6 @@
         {
           "line": 341,
           "text": "Invoke-Gate 'dos4gw-nesticle' {& \"$repo/test/integration/verify-dos4gw-nesticle.ps1\" -RuntimeRoot $sourceRuntime -Observer $observerPath -FixtureRoot $Dos4gwFixtureRoot -PifPath $Dos4gwPif -Python $Python -ReportRoot \"$log/dos4gw-nesticle\"}"
-        }
-      ]
-    },
-    {
-      "id": "B0208",
-      "file": "tools/audit/Join-OpenNtRetainedGraphCoverage.ps1",
-      "hits": [
-        {
-          "line": 5,
-          "text": "'build/M0-T404/S5/r014-dpmi-vector-observation/build.ninja',"
-        },
-        {
-          "line": 6,
-          "text": "'build/M0-T404/S5/r015-wow32-provider/build.ninja'"
-        },
-        {
-          "line": 39,
-          "text": "# Deliberately scoped to these generated cc/cc_* and rc rules, not a"
-        },
-        {
-          "line": 40,
-          "text": "# general Ninja parser or proof of linked symbol reachability."
-        },
-        {
-          "line": 41,
-          "text": "if ($line -notmatch '^build .*: (cc\\w*|rc) (.+)$') { continue }"
-        },
-        {
-          "line": 65,
-          "text": "if ($row.path -match '\\.(c|cpp|cxx|asm|rc)$') { $classification = 'not-selected-in-retained-graphs' }"
-        },
-        {
-          "line": 75,
-          "text": "compile_edges=$edges.Count;output=$output;limitation='Retained compile membership only; no link, runtime or header-use claim.'} | ConvertTo-Json"
         }
       ]
     },

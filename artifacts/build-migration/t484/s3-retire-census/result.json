@@ -1,0 +1,22 @@
+{
+  "fullGate": false,
+  "publication": {
+    "unchanged": true,
+    "publishedCopies": 22,
+    "rawInputs": 11,
+    "republished": false
+  },
+  "validation": {
+    "pid": 14016,
+    "exit": 0,
+    "started": "2026-11-24T06:43:11.9052003+01:00",
+    "finished": "2026-11-24T06:44:11.6542829+01:00"
+  },
+  "standalone": "B0205",
+  "retired": [
+    "B0204",
+    "B0206",
+    "B0208"
+  ],
+  "collectorExecution": "help only, no census acceptance"
+}
