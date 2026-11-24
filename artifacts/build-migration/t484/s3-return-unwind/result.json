@@ -1,0 +1,40 @@
+{
+  "validation": {
+    "started": "2026-11-24T04:10:18.2009857+01:00",
+    "finished": "2026-11-24T04:11:45.3923501+01:00",
+    "exit": 0,
+    "pid": 27928
+  },
+  "publication": {
+    "rawInputs": 11,
+    "republished": false,
+    "publishedCopies": 22,
+    "unchanged": true
+  },
+  "projection": {
+    "passed": true,
+    "comparison": "prior current selector vs native; comments/whitespace ignored",
+    "headers": 2
+  },
+  "initial": {
+    "pid": 12196,
+    "exit": 1,
+    "finished": "2026-11-24T04:09:15.110653+01:00",
+    "started": "2026-11-24T04:08:59.638111+01:00"
+  },
+  "cache": [
+    {
+      "hash": "866B1CAE264DFA44CCF5CA24F5E2EB86DB99A964C15AC25CE84C52F246ED9BE3",
+      "path": "build/.ninja/fixtures-x86/wow-unwind-class_copy.exe",
+      "time": 639310866323814557
+    },
+    {
+      "hash": "8B2203CC93784F90C885A8BAB501F847BB6F4D17FA8A62DA9BA55924E01F27E6",
+      "path": "build/.ninja/fixtures-x86/wow-unwind-native_wait_publication.exe",
+      "time": 639310866312645999
+    }
+  ],
+  "classCopy": "CLASS_COPY_BODY_UNWIND errors=0 normal=1 bool_failure=1 exception=1 allocation_fallback=1 menu=1 cold=1",
+  "publicationBody": "NATIVE_WAIT_PUBLICATION_BODY errors=0 no_debt=1 native_continuation=1 discharged_once=1 ordinary_return=1 failure_retained=1 exception_retained=1 last_error=1",
+  "scope": "Current helper contracts with lower-service doubles; not scheduler or guest acceptance"
+}

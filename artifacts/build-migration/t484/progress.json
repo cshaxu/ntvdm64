@@ -1,29 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "abd2a6e6fcfad50693436461a577b2e5fc240dc9",
+  "head": "6e73b7adb1ee44a8e741fa0291d49acafb2a3709",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-print-provider.ps1",
+    " M test/observation/verify-wow-projection-return-unwind.ps1",
+    " M test/observation/wow_class_copy_unwind_fixture.c",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/wow-boundaries.cmake",
-    "?? artifacts/build-migration/t484/s3-print-provider/",
-    "?? docs/etc/evidence/t484-s3-print-provider.md"
+    " M tools/build/fixtures/CMakeLists.txt",
+    "?? artifacts/build-migration/t484/s3-return-unwind/",
+    "?? docs/etc/evidence/t484-s3-return-unwind.md",
+    "?? tools/build/fixtures/wow-return-unwind.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 130,
-    "unchanged": 98,
+    "changed": 131,
+    "unchanged": 97,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 71,
+    "migrated-delivered": 72,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 87,
+    "requires-disposition-reconciliation": 86,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3501,8 +3503,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "c4706c13182e3d0d04fe9e748239cba09d3ddc0fb49324390d80e4ffc61520b4",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "6e73b7adb1ee44a8e741fa0291d49acafb2a3709"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-print-provider.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-print-provider.md",
@@ -3514,12 +3520,16 @@
       "id": "B0186",
       "file": "test/observation/verify-wow-projection-return-unwind.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "fa5729f909fa11e5da1f7c94902e68801bcec3cf7a91196f0f1eb28f86caf7a5",
+      "state": "changed",
+      "current_sha256": "3cbddf4db1ed86f47cebe9e604657e1c16a4c10677ee3fffa2cf73ed4005c959",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-return-unwind.md",
+        "status": "migrated-delivered",
+        "reason": "Current two cleanup contracts native; obsolete fixture link interface and historical/manual producer removed"
+      }
     },
     {
       "id": "B0187",
@@ -5755,6 +5765,12 @@
     }
   ],
   "commits": {
+    "6e73b7adb1ee44a8e741fa0291d49acafb2a3709": {
+      "subject": "T484 S3 P113 migrate native print provider contract producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-print-provider.md"
+      ]
+    },
     "abd2a6e6fcfad50693436461a577b2e5fc240dc9": {
       "subject": "T484 S3 P112 migrate current parameter map contract and retire historical producer",
       "evidence": [
@@ -8328,8 +8344,8 @@
       "file": "test/observation/verify-wow-projection-return-unwind.ps1",
       "hits": [
         {
-          "line": 68,
-          "text": "$line='/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /TC /O2 /MT /W4 /WX /I\"'+$repo+'/src\" /I\"'+$dir+'\" \"'+$fixture+'\" /Fo\"'+$dir+'/unit.obj\" /Fe\"'+$dir+'/unit.exe\" /link user32.lib\"'"
+          "line": 26,
+          "text": "$native=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
     },

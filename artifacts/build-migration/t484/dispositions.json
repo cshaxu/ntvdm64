@@ -901,5 +901,10 @@
     "evidence": "docs/etc/evidence/t484-s3-print-provider.md",
     "status": "migrated-delivered",
     "reason": "Unchanged native PDF normal/cancel callback contract uses CMD target; duplicate manual compilation removed"
+  },
+  "test/observation/verify-wow-projection-return-unwind.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-return-unwind.md",
+    "status": "migrated-delivered",
+    "reason": "Current two cleanup contracts native; obsolete fixture link interface and historical/manual producer removed"
   }
 }

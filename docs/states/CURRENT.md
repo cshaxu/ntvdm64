@@ -64,7 +64,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P113 print provider](../etc/evidence/t484-s3-print-provider.md) | Native PDF normal/cancel contract and11 callback identities pass; manual producer removed; full cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P113 passed their cached full host build. P73 checks11 raw host inputs
+| [P114 return unwind](../etc/evidence/t484-s3-return-unwind.md) | Two current cleanup contracts and projection checks pass after repairing stale fixture interface; full cached build/cache/publication hashes pass. |
+
+Completed implementation batches through P114 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

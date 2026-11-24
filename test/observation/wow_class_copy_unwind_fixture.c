@@ -37,8 +37,13 @@ static BOOL tracked_free(HANDLE heap,DWORD flags,void *value)
     if(result){live=NULL;++frees;}SetLastError(0x4472ffff);return result;
 }
 static int page_domain_menu_context(void){return 1;}
-static mvdm_softpc_wow_window_borrow **window_borrow_link(ULONG backing)
-{(void)backing;return &window_borrows;}
+static mvdm_softpc_wow_window_borrow *window_borrow_find(ULONG backing)
+{
+    mvdm_softpc_wow_window_borrow *borrow;
+    for(borrow=window_borrows;borrow;borrow=borrow->next)
+        if(borrow->backing==backing)return borrow;
+    return NULL;
+}
 static int window_borrow_is_current(const mvdm_softpc_wow_window_borrow *borrow)
 {return borrow!=NULL;}
 static int copy_window_projection(ULONG backing,
