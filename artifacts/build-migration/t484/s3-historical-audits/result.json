@@ -1,0 +1,26 @@
+{
+  "output": {
+    "public_slots": 154,
+    "private_slots": 55,
+    "quick_event_slot": "c_cpu_calc_q_ev_inst_for_time",
+    "ccpu_effective_address": "direct-c_effective_addr",
+    "original_startup_binding_order": true,
+    "setup_bind": true,
+    "quick_event_restart_owner": "system/qevnt.c::qevJumpRestart",
+    "gdp_initializer": "cvidc/ev_glue.c",
+    "gdp_map_verified": true,
+    "unsupported_clear_hw_int": "null"
+  },
+  "source": {
+    "pid": 28472,
+    "started": "2026-11-24T08:08:08.3360932+01:00",
+    "finished": "2026-11-24T08:08:08.4799647+01:00",
+    "exit": 0
+  },
+  "map": {
+    "finished": "2026-11-24T08:09:26.9910356+01:00",
+    "exit": 0,
+    "started": "2026-11-24T08:09:26.8485638+01:00",
+    "pid": 9048
+  }
+}

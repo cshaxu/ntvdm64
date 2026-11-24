@@ -52,6 +52,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P148 redirector cleanup](../etc/evidence/t484-s3-redir-retirement.md) | Duplicate boundary audit consolidated; obsolete RTL trial removed;104 objects and negative control pass. No product change. |
 
+| [P149 historical audits](../etc/evidence/t484-s3-historical-audits.md) | Two obsolete snapshots removed; current C-VID source and product-map contract passed. No product change. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

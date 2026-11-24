@@ -1,32 +1,31 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "60d414d7f2e75a292241ef09caefb353d16915d8",
+  "head": "f6d401b3f0a15f7d06d46306dddc495ebe32a9f1",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M tools/audit/verify-nonworker-compiler-closure.py",
-    " D tools/audit/verify-redirector-shared-boundary.ps1",
-    " D tools/audit/verify-rtlwow-selection.py",
-    "?? artifacts/build-migration/t484/s3-redir-retirement/",
-    "?? docs/etc/evidence/t484-s3-redir-retirement.md"
+    "D  tools/audit/Verify-SoftpcConventionalDeviceCohort.mjs",
+    "D  tools/audit/Verify-T420S23GraphicsDisposition.mjs",
+    "?? artifacts/build-migration/t484/s3-historical-audits/",
+    "?? docs/etc/evidence/t484-s3-historical-audits.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 153,
-    "unchanged": 55,
-    "removed": 147
+    "unchanged": 53,
+    "removed": 149
   },
   "disposition_counts": {
     "migrated-delivered": 86,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 147,
+    "retired-with-delivery-evidence": 149,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 40,
-    "retained-standalone-audit": 13
+    "requires-disposition-reconciliation": 37,
+    "retained-standalone-audit": 14
   },
-  "existing_interpreted_candidates_with_command_hits": 155,
+  "existing_interpreted_candidates_with_command_hits": 153,
   "files": [
     {
       "id": "B0001",
@@ -4374,10 +4373,12 @@
       "state": "changed",
       "current_sha256": "4d82366b40155565de80883224652626361f53c97ea171694d06e05c214d47de",
       "revisions": [
+        "f6d401b3f0a15f7d06d46306dddc495ebe32a9f1",
         "5305401c40cf14705e5a81f934dbb441953e16ff"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-hook-audits.md"
+        "docs/etc/evidence/t484-s3-hook-audits.md",
+        "docs/etc/evidence/t484-s3-redir-retirement.md"
       ],
       "completion": "retained-standalone-audit",
       "decision": {
@@ -4432,8 +4433,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f6d401b3f0a15f7d06d46306dddc495ebe32a9f1"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-redir-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -4447,8 +4452,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f6d401b3f0a15f7d06d46306dddc495ebe32a9f1"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-redir-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -4460,12 +4469,16 @@
       "id": "B0234",
       "file": "tools/audit/Verify-SoftpcConventionalDeviceCohort.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "6fbf9396c3e924c3df9585242bd9d3035a3dbd9075c0bf77979f96e12bd5c7e1",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Historical phase snapshot without live callers; obsolete cache/absence contract removed",
+        "evidence": "docs/etc/evidence/t484-s3-historical-audits.md"
+      }
     },
     {
       "id": "B0235",
@@ -4479,19 +4492,27 @@
       "evidence": [
         "docs/etc/evidence/t484-s2-native-generators.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "status": "retained-standalone-audit",
+        "reason": "Current source and actual native product map contract passes; no build ownership",
+        "evidence": "docs/etc/evidence/t484-s3-historical-audits.md"
+      }
     },
     {
       "id": "B0236",
       "file": "tools/audit/Verify-T420S23GraphicsDisposition.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "376b238b33698244973764327727f438775d51fe8aa00d31da02d3b40d8a366a",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Historical phase snapshot without live callers; obsolete cache/absence contract removed",
+        "evidence": "docs/etc/evidence/t484-s3-historical-audits.md"
+      }
     },
     {
       "id": "B0237",
@@ -6159,6 +6180,12 @@
     }
   ],
   "commits": {
+    "f6d401b3f0a15f7d06d46306dddc495ebe32a9f1": {
+      "subject": "T484 S3 P148 consolidate redirector audit and retire RTL trial",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-redir-retirement.md"
+      ]
+    },
     "60d414d7f2e75a292241ef09caefb353d16915d8": {
       "subject": "T484 S3 P147 validate native version-negative package preparation",
       "evidence": [
@@ -9384,24 +9411,6 @@
       ]
     },
     {
-      "id": "B0234",
-      "file": "tools/audit/Verify-SoftpcConventionalDeviceCohort.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 2,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 13,
-          "text": "const graph = read('build/M0-T362/S2/x86/build.ninja');"
-        }
-      ]
-    },
-    {
       "id": "B0235",
       "file": "tools/audit/Verify-T411CvidcVectorContract.mjs",
       "hits": [
@@ -9412,28 +9421,6 @@
         {
           "line": 2,
           "text": "import path from 'node:path';"
-        }
-      ]
-    },
-    {
-      "id": "B0236",
-      "file": "tools/audit/Verify-T420S23GraphicsDisposition.mjs",
-      "hits": [
-        {
-          "line": 3,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 4,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 5,
-          "text": "import assert from 'node:assert/strict';"
-        },
-        {
-          "line": 21,
-          "text": "const graph = read('build/M0-T420/S23/formal-x86-cvid-r7/build.ninja');"
         }
       ]
     },

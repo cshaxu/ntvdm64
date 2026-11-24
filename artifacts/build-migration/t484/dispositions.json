@@ -1152,5 +1152,20 @@
     "status": "retired-with-delivery-evidence",
     "reason": "Historical T476 shadow compile trial without live callers; obsolete producer removed",
     "evidence": "docs/etc/evidence/t484-s3-redir-retirement.md"
+  },
+  "tools/audit/Verify-SoftpcConventionalDeviceCohort.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Historical phase snapshot without live callers; obsolete cache/absence contract removed",
+    "evidence": "docs/etc/evidence/t484-s3-historical-audits.md"
+  },
+  "tools/audit/Verify-T420S23GraphicsDisposition.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Historical phase snapshot without live callers; obsolete cache/absence contract removed",
+    "evidence": "docs/etc/evidence/t484-s3-historical-audits.md"
+  },
+  "tools/audit/Verify-T411CvidcVectorContract.mjs": {
+    "status": "retained-standalone-audit",
+    "reason": "Current source and actual native product map contract passes; no build ownership",
+    "evidence": "docs/etc/evidence/t484-s3-historical-audits.md"
   }
 }
