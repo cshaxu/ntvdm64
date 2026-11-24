@@ -1,0 +1,4 @@
+attached_focus=1 attached_caret=1
+reverse=0 conflict_focus_owner=0 conflict_capture_owner=0 conflict_caret_owner=0
+reverse=1 conflict_focus_owner=0 conflict_capture_owner=0 conflict_caret_owner=0
+WOW_NATIVE_INPUT_FOCUS errors=0 private_desktop=1 capture=1 callbacks=0

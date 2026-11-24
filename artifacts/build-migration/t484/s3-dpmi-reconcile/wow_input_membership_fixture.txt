@@ -1,0 +1,1 @@
+WOW_INPUT_MEMBERSHIP errors=0 original_fixed_point=1 pre_tdb=1 explicit_edge=1 release=1 rejoin=1

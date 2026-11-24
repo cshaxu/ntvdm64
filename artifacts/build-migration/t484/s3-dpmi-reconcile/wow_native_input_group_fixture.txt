@@ -1,0 +1,6 @@
+middle_exit_remaining_shared=1
+maintained=0 after_new_join_peer_shared=0 newcomer_shared=1
+middle_exit_remaining_shared=1
+maintained=1 after_new_join_peer_shared=1 newcomer_shared=1
+duplicate_attach_after_one_detach_shared=1
+WOW_NATIVE_INPUT_GROUP errors=0 isolated=2 shared=1 self_reject=1 peer_exit=1 naive_join_split=1 maintained_join=1 repeated=1

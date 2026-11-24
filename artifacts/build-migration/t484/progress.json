@@ -1,33 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "676e69df30aa34278a52b96234f3041af9139441",
+  "head": "1acce005bc6aaaf73d1898707454d4d7815ec26e",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-console-graphics-publication.ps1",
-    " M test/observation/verify-console-input-batch.ps1",
-    " M test/observation/verify-dem-directory-reset.ps1",
+    " M test/observation/verify-dpmi-buffer-state.py",
     " M tools/build-fixtures.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    " M tools/build/worker/observation-tests.cmake",
-    "?? artifacts/build-migration/t484/s3-console-contracts/",
-    "?? docs/etc/evidence/t484-s3-console-contracts.md",
-    "?? tools/build/fixtures/console-contracts.cmake"
+    "?? artifacts/build-migration/t484/s3-dpmi-reconcile/",
+    "?? docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+    "?? test/mvdm-host/dpmi_buffer_state_fixture.c",
+    "?? tools/build/fixtures/dpmi-buffer.cmake"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 98,
-    "unchanged": 137,
+    "changed": 99,
+    "unchanged": 136,
     "removed": 120
   },
   "disposition_counts": {
-    "migrated-delivered": 41,
+    "migrated-delivered": 42,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 120,
     "pending-producer-migration": 53,
-    "retained-native-delegate": 6,
-    "requires-disposition-reconciliation": 132,
+    "retained-native-delegate": 10,
+    "requires-disposition-reconciliation": 127,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 184,
@@ -358,7 +357,12 @@
       "completion": "retained-native-delegate",
       "decision": {
         "status": "retained-native-delegate",
-        "reason": "Read-only ninja -t commands query; does not execute compiler output"
+        "reason": "Read-only ninja -t commands query; does not execute compiler output",
+        "retention_review": {
+          "reason": "Actual current544 product command profiles checked; live architectural macro isolation contract, no producer.",
+          "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+          "decision": "retain"
+        }
       }
     },
     {
@@ -2247,8 +2251,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "208f1891231d265cc362a00e27920f08d284eeacbc197b43b4637daf1cbc6c16",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "1acce005bc6aaaf73d1898707454d4d7815ec26e"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-console-contracts.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Current behavior retained; compiler orchestration replaced by shared CMD/native targets. Runtime, cache and full product build passed.",
@@ -2262,8 +2270,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "046c5f86d59e764d794fc42a53ac75d81ec49ada4051cdeedddc19e771b80d53",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "1acce005bc6aaaf73d1898707454d4d7815ec26e"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-console-contracts.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "reason": "Current behavior retained; compiler orchestration replaced by shared CMD/native targets. Runtime, cache and full product build passed.",
@@ -2278,9 +2290,11 @@
       "state": "changed",
       "current_sha256": "6e9ec77cef5f4bd66454b0a3fe7cffe086a4a274fb5e1c28fe63397d1560fefc",
       "revisions": [
+        "1acce005bc6aaaf73d1898707454d4d7815ec26e",
         "6ddd46112ff732a1e6a4461e4b8a92df8608c031"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-console-contracts.md",
         "docs/etc/evidence/t484-s3-observation-cmake.md"
       ],
       "completion": "migrated-delivered",
@@ -2294,12 +2308,16 @@
       "id": "B0126",
       "file": "test/observation/verify-dpmi-buffer-state.py",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "1df2102e95e8ce726234d11f5444a861ad8a3b49528bfd1427a9881b3987e043",
+      "state": "changed",
+      "current_sha256": "30241263ba1b6e9c6727c112da3c4a6c61bfb3b7224233c88083f1c496bea0d3",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "reason": "Native bounded current-source projections; obsolete external mirror-format dependency retired;133 unchanged assertions pass.",
+        "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+        "status": "migrated-delivered"
+      }
     },
     {
       "id": "B0127",
@@ -2313,8 +2331,12 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-dpmi-contracts.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "reason": "Current independent behavior contract, existing native producer or direct native runtime; actual assertions pass in this batch.",
+        "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+        "status": "retained-native-delegate"
+      }
     },
     {
       "id": "B0128",
@@ -2324,8 +2346,12 @@
       "current_sha256": "a8a7535c172083e0ef0ef7f5c605eae85dff8815082865c943cef9743379902c",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "reason": "No producer: runs14 existing native input handoff modes. Current providers inspected; no new execution claimed in this batch.",
+        "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+        "status": "retained-native-delegate"
+      }
     },
     {
       "id": "B0129",
@@ -2350,8 +2376,12 @@
       "current_sha256": "9a2f1ba5cafaae808f07136cddcb7d05c3520afb0a9cc622407c6f1a3017a269",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "reason": "Current independent behavior contract, existing native producer or direct native runtime; actual assertions pass in this batch.",
+        "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+        "status": "retained-native-delegate"
+      }
     },
     {
       "id": "B0131",
@@ -2395,8 +2425,12 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-native-input.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-native-delegate",
+      "decision": {
+        "reason": "Current independent behavior contract, existing native producer or direct native runtime; actual assertions pass in this batch.",
+        "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+        "status": "retained-native-delegate"
+      }
     },
     {
       "id": "B0134",
@@ -5281,6 +5315,12 @@
     }
   ],
   "commits": {
+    "1acce005bc6aaaf73d1898707454d4d7815ec26e": {
+      "subject": "T484 S3 P86 consolidate Console and DEM native producers",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-console-contracts.md"
+      ]
+    },
     "676e69df30aa34278a52b96234f3041af9139441": {
       "subject": "T484 S3 P85 consolidate CCPU runners and retire expired trace assertions",
       "evidence": [
@@ -7175,12 +7215,8 @@
       "file": "test/observation/verify-dpmi-buffer-state.py",
       "hits": [
         {
-          "line": 143,
-          "text": "driver = repo / 'build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'"
-        },
-        {
-          "line": 144,
-          "text": "command = [str(driver), 'cl', '/nologo', '/W3', '/MT', '/TC', '/Od',"
+          "line": 20,
+          "text": "exe = repo / 'build/.ninja/fixtures-x86/dpmi-buffer-state.exe'"
         }
       ]
     },

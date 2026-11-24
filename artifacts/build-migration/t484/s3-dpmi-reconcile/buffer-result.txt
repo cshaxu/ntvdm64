@@ -1,0 +1,1 @@
+PASS 133 controlled original buffer/state checks; exhaustion sentinel retained

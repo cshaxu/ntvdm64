@@ -1661,3 +1661,5 @@ post-publication targeted checks.
 - [T484 S3 CCPU call and privilege runners](evidence/t484-s3-callf.md).
 
 - [Console and DEM producers](evidence/t484-s3-console-contracts.md)
+
+- [DPMI/native runner reconciliation](evidence/t484-s3-dpmi-reconciliation.md)

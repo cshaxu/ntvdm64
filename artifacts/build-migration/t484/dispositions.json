@@ -84,7 +84,12 @@
   },
   "test/build/test-authored-softpc-profile.py": {
     "status": "retained-native-delegate",
-    "reason": "Read-only ninja -t commands query; does not execute compiler output"
+    "reason": "Read-only ninja -t commands query; does not execute compiler output",
+    "retention_review": {
+      "reason": "Actual current544 product command profiles checked; live architectural macro isolation contract, no producer.",
+      "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+      "decision": "retain"
+    }
   },
   "test/adapter-mvdm-host-out/wow/verify_clipboard_epoch.py": {
     "evidence": "docs/etc/evidence/t484-s3-clipboard-epoch.md",
@@ -545,5 +550,30 @@
     "reason": "Current behavior retained; compiler orchestration replaced by shared CMD/native targets. Runtime, cache and full product build passed.",
     "evidence": "docs/etc/evidence/t484-s3-console-contracts.md",
     "status": "migrated-delivered"
+  },
+  "test/observation/verify-dpmi-buffer-state.py": {
+    "reason": "Native bounded current-source projections; obsolete external mirror-format dependency retired;133 unchanged assertions pass.",
+    "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+    "status": "migrated-delivered"
+  },
+  "test/observation/verify-dpmi-swint-selected.ps1": {
+    "reason": "Current independent behavior contract, existing native producer or direct native runtime; actual assertions pass in this batch.",
+    "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+    "status": "retained-native-delegate"
+  },
+  "test/observation/verify-keyboard-controller-pic.ps1": {
+    "reason": "Current independent behavior contract, existing native producer or direct native runtime; actual assertions pass in this batch.",
+    "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+    "status": "retained-native-delegate"
+  },
+  "test/observation/verify-native-input-services.ps1": {
+    "reason": "Current independent behavior contract, existing native producer or direct native runtime; actual assertions pass in this batch.",
+    "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+    "status": "retained-native-delegate"
+  },
+  "test/observation/verify-input-source-handoff.ps1": {
+    "reason": "No producer: runs14 existing native input handoff modes. Current providers inspected; no new execution claimed in this batch.",
+    "evidence": "docs/etc/evidence/t484-s3-dpmi-reconciliation.md",
+    "status": "retained-native-delegate"
   }
 }

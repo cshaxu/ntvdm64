@@ -1,0 +1,18 @@
+[
+  {
+    "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dpmi32\\buffer.c",
+    "sha256": "6123c2acefa990be5bf87600a232a32feb1b7435ea0c2f346aa174b56ca37abc"
+  },
+  {
+    "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dpmi32\\savestat.c",
+    "sha256": "59efaecefb32f3c1bd839cbf602587f0fb65ffd360c5e12ea807a255b06781de"
+  },
+  {
+    "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\dpmi_buffer_state_fixture.c",
+    "sha256": "1178cfaf60363d036397a5814405545f35d9906e49f2ee21b1b6d80fa66bd229"
+  },
+  {
+    "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x86\\dpmi-buffer-state.exe",
+    "sha256": "e186275f3d0c1dd038f27207f1f367d541eb3087ca5bec4062782d20a7ac505a"
+  }
+]

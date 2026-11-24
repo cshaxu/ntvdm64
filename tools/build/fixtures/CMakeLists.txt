@@ -363,3 +363,4 @@ include(base-contracts.cmake)
 
 include(blocked-video.cmake)
 include(console-contracts.cmake)
+include(dpmi-buffer.cmake)
