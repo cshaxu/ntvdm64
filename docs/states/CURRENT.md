@@ -54,6 +54,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P149 historical audits](../etc/evidence/t484-s3-historical-audits.md) | Two obsolete snapshots removed; current C-VID source and product-map contract passed. No product change. |
 
+| [P150 serial medium](../etc/evidence/t484-s3-serial-medium.md) | Existing normal serial lifecycle fixture moved to CMD/native target and passed; cached full and11/22 identity checks passed unchanged. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

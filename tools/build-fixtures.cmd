@@ -111,6 +111,8 @@ if "%TARGET%"=="wow-accelerator" if not "%~1"=="x86" exit /b 2
 for %%T in (softpc-observer-error software-video-publisher) do if "%TARGET%"=="%%T" set "SELECTED=1"
 if "%TARGET%"=="softpc-contracts" set "SELECTED=1"
 if "%TARGET%"=="softpc-contracts" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="serial-medium" set "SELECTED=1"
+if "%TARGET%"=="serial-medium" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="serial-baud" set "SELECTED=1"
 if "%TARGET%"=="serial-baud" if not "%~1"=="x86" exit /b 2
 for %%T in (redirector-remote-name redirector-server-enum) do if "%TARGET%"=="%%T" set "SELECTED=1"

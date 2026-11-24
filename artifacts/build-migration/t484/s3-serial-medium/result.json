@@ -1,0 +1,15 @@
+{
+  "output": "T420_S30_NT_COM_MOCK_OPEN_WRITE_READ_CLOSE_OK",
+  "build_and_identity": {
+    "exit": 0,
+    "pid": 21120,
+    "started": "2026-11-24T08:13:21.7866548+01:00",
+    "finished": "2026-11-24T08:14:21.8412965+01:00"
+  },
+  "fixture": {
+    "started": "2026-11-24T08:12:31.8004744+01:00",
+    "finished": "2026-11-24T08:12:48.267272+01:00",
+    "exit": 0,
+    "pid": 9556
+  }
+}

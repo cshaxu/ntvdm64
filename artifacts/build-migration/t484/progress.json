@@ -1,28 +1,29 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f6d401b3f0a15f7d06d46306dddc495ebe32a9f1",
+  "head": "848dfb31ee01deb0d8de717050db937a9149cbe9",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    "D  tools/audit/Verify-SoftpcConventionalDeviceCohort.mjs",
-    "D  tools/audit/Verify-T420S23GraphicsDisposition.mjs",
-    "?? artifacts/build-migration/t484/s3-historical-audits/",
-    "?? docs/etc/evidence/t484-s3-historical-audits.md"
+    " M tools/audit/Verify-T420S30ComMock.ps1",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/serial-baud.cmake",
+    "?? artifacts/build-migration/t484/s3-serial-medium/",
+    "?? docs/etc/evidence/t484-s3-serial-medium.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 153,
-    "unchanged": 53,
+    "changed": 154,
+    "unchanged": 52,
     "removed": 149
   },
   "disposition_counts": {
-    "migrated-delivered": 86,
+    "migrated-delivered": 87,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 149,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 37,
+    "requires-disposition-reconciliation": 36,
     "retained-standalone-audit": 14
   },
   "existing_interpreted_candidates_with_command_hits": 153,
@@ -4471,8 +4472,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "848dfb31ee01deb0d8de717050db937a9149cbe9"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-historical-audits.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -4505,8 +4510,12 @@
       "stage": "S3",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "848dfb31ee01deb0d8de717050db937a9149cbe9"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-historical-audits.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -4518,12 +4527,16 @@
       "id": "B0237",
       "file": "tools/audit/Verify-T420S30ComMock.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "bd4da3fe32a9a94dd5b2f870d36627b778917cf2463aa44740e07f73d003ccd8",
+      "state": "changed",
+      "current_sha256": "63f6699d9f68546b20f97a7872a281bb1552c47342449bfb8506925b03bbf213",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "status": "migrated-delivered",
+        "reason": "Useful normal serial-medium fixture uses CMD/native target; build and original assertions pass",
+        "evidence": "docs/etc/evidence/t484-s3-serial-medium.md"
+      }
     },
     {
       "id": "B0238",
@@ -6180,6 +6193,12 @@
     }
   ],
   "commits": {
+    "848dfb31ee01deb0d8de717050db937a9149cbe9": {
+      "subject": "T484 S3 P149 retire obsolete phase audits and verify vector contract",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-historical-audits.md"
+      ]
+    },
     "f6d401b3f0a15f7d06d46306dddc495ebe32a9f1": {
       "subject": "T484 S3 P148 consolidate redirector audit and retire RTL trial",
       "evidence": [
@@ -9429,12 +9448,8 @@
       "file": "tools/audit/Verify-T420S30ComMock.ps1",
       "hits": [
         {
-          "line": 37,
-          "text": "'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',"
-        },
-        {
-          "line": 42,
-          "text": "'/link /OPT:REF /OUT:\"' + $exe + '\" kernel32.lib user32.lib libcmt.lib libvcruntime.lib libucrt.lib'"
+          "line": 9,
+          "text": "$exe = \"$repo/build/.ninja/fixtures-x86/serial-medium.exe\""
         }
       ]
     },

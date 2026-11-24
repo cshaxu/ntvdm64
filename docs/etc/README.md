@@ -1782,3 +1782,5 @@ post-publication targeted checks.
 - [T484 S3 redirector consolidation and RTL trial retirement](evidence/t484-s3-redir-retirement.md).
 
 - [T484 S3 historical audit disposition](evidence/t484-s3-historical-audits.md).
+
+- [T484 S3 serial medium producer](evidence/t484-s3-serial-medium.md).

@@ -1167,5 +1167,10 @@
     "status": "retained-standalone-audit",
     "reason": "Current source and actual native product map contract passes; no build ownership",
     "evidence": "docs/etc/evidence/t484-s3-historical-audits.md"
+  },
+  "tools/audit/Verify-T420S30ComMock.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Useful normal serial-medium fixture uses CMD/native target; build and original assertions pass",
+    "evidence": "docs/etc/evidence/t484-s3-serial-medium.md"
   }
 }
