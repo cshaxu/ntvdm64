@@ -109,6 +109,7 @@ $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $copy=& "$PSScriptRoot/New-Win31ProbeCopy.ps1" -DriverImage $DriverImage -InstallSource $InstallSource -InstallRoot $InstallRoot -OutputRoot $OutputRoot -InterruptObserver $InterruptObserver -RetirementDriver $RetirementDriver -InstanceDriver $InstanceDriver -MouseDriver $MouseDriver
 $task=$copy.Task; $source=$copy.Source; $dest=$copy.Destination; $original=$copy.Original
+$localOwnedDirectory=$null
 try {
 $enc=[Text.Encoding]::GetEncoding(28591)
 $patch=Join-Path $dest 'PATCH'
@@ -174,10 +175,11 @@ if($DosWitnessImage){
 }
 $directoryRoot="$dest\PATCH"
 if($LocalDirectoryControl){
- $directoryRoot=Join-Path ([IO.Path]::GetTempPath()) ([IO.Path]::GetFileName($dest))
+ $directoryRoot=Join-Path ([IO.Path]::Combine([Environment]::GetFolderPath('LocalApplicationData'),'Temp')) ([IO.Path]::GetFileName($dest))
  if($directoryRoot -notmatch '^C:\\' -or (Test-Path $directoryRoot) -or $directoryRoot.Length -gt 55){throw 'Fresh short C: temporary directory required'}
- New-Item -ItemType Directory $directoryRoot|Out-Null
- [IO.File]::WriteAllText("$directoryRoot/.t479-owner",$task)
+ & "$repo/tools/create-guest-probe.cmd" $directoryRoot $task --local
+ if($LASTEXITCODE){throw 'Local directory creation failed'}
+ $localOwnedDirectory=$directoryRoot
 }
 & "$repo/tools/build-fixtures.cmd" x64 win31-probe-paths *> "$task/identity-paths-build.log"
 if($LASTEXITCODE){throw 'Identity binder build failed'}
@@ -472,4 +474,5 @@ try {
 } finally {
  . "$repo/test/observation/isolated_package_cleanup.ps1"
  Remove-OwnedGuestProbeCopy $dest $task $source
+ if($localOwnedDirectory){Remove-OwnedGuestProbeCopy $localOwnedDirectory $task $source -LocalDirectory}
 }

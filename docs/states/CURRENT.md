@@ -29,54 +29,14 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
-S4 P32 completes multi-dialog CMD preparation; [evidence](../etc/evidence/t484-s4-multi-dialog-preparation.md) records six real application passes, final PROGMAN repeat and negative contracts. Cached full build and unchanged dual publication verified. Frozen348/355,7 pending; supplemental5.
-
-S4 P31 completes WINMINE CMD staging; [evidence](../etc/evidence/t484-s4-mine-preparation.md) records four final real passes, obsolete reporter checks removed and negative-window-position sampling corrected. Cached full build and unchanged dual publication verified. Frozen347/355,8 pending; supplemental5.
-
-S4 P30 completes optional network-profile preparation; [evidence](../etc/evidence/t484-s4-network-profile-preparation.md) separates corrected preparation failures from passing contracts and real Empty/WfwNet message tests. Cached full build and unchanged dual publication verified. Frozen346/355,9 pending; supplemental5.
-
-S4 P29 completes default external-message package preparation and shared input copying; [evidence](../etc/evidence/t484-s4-external-message-preparation.md) records cached full build, package contracts, three real groups and unchanged dual publication. The child's optional PowerShell network-profile writer is reopened. One closure and one correction leave345/355,10 pending; supplemental5.
-
-S4 P28 completes Clipboard preparation; [evidence](../etc/evidence/t484-s4-clipboard-preparation.md) records cached full build, shared native-peer contracts, six real cases and frozen reuse after RDP recovery, with unchanged dual publication. Frozen345/355,10 pending; supplemental5.
-
-S4 P27 completes native-output staging and EDIT preparation reconciliation; [evidence](../etc/evidence/t484-s4-native-output-preparation.md) separates passed cached build/staging/EDIT from the retained historical concurrent-output failure. No product repair or all-pass claim. Frozen344/355,11 pending; supplemental6 to5.
-
-S4 P26 completes ForceDOS preparation; [evidence](../etc/evidence/t484-s4-forcedos-preparation.md) records the native parent producer, shared CMD input staging, cached full build, nine real route cases and unchanged dual publication. Frozen343/355,12 pending; supplemental7 to6.
-
-S4 P25 simplifies Video7 preparation; [evidence](../etc/evidence/t484-s4-video7-preparation.md) records removed external PIF/directory scaffolding, cached full build, default/all-mode real BIOS passes and unchanged dual publication. Frozen343/355,12 pending; supplemental8 to7.
-
-S4 P24 completes memory-transition preparation; [evidence](../etc/evidence/t484-s4-memory-preparation.md) records cached full build, six real guest cases, EMS rejection contracts, six removed stages and unchanged dual publication. Frozen343/355,12 pending; supplemental9 to8.
-
-S4 P23 completes DPMI fatal preparation and retires the obsolete PM-allocation injection; [evidence](../etc/evidence/t484-s4-fatal-preparation.md) records final cached full build, eight real fault/Ignore/Terminate cases,15 diagnostic ownership checks and unchanged dual publication. Frozen343/355,12 pending; supplemental10 to9.
-
-S4 P22 completes the retained OEM guest preparation; [evidence](../etc/evidence/t484-s4-oem-preparation.md) records cached full build, real direct/twice-nested COMMAND file/volume/environment checks and unchanged dual publication. Frozen343/355,12 pending; supplemental11 to10.
-
-S4 P21 completes VGA cursor preparation and corrects the stale diagnostic capture owner; [evidence](../etc/evidence/t484-s4-cursor-preparation.md) separates initial failures from final cached build, CAF/register/ordered-frame pass and unchanged dual publication. Frozen343/355,12 pending; supplemental12 to11.
-
-S4 P20 completes FCB private-directory preparation; [evidence](../etc/evidence/t484-s4-fcb-preparation.md) records cached full build, shared stage default/subdirectory rejection contracts, real FCB receipt37/name/EOF/missing results and unchanged dual publication. Frozen343/355,12 pending; supplemental13 to12.
-
-S4 P19 completes remote redirector preparation; [evidence](../etc/evidence/t484-s4-remote-preparation.md) records cached full build, current native-provider comparison, real DOS failure/local-provider contracts,37 enumeration checks and unchanged dual publication. Frozen343/355,12 pending; supplemental14 to13.
-
-S4 P18 completes tab-stop input and logon staging reconciliation; [evidence](../etc/evidence/t484-s4-tabstop-logon-preparation.md) records cached full build, original probe hash identity, real tab-stop snapshots/records and logon gameplay, with unchanged dual publication. Frozen343/355,12 pending; supplemental16 to14.
-
-S4 P17 completes mouse-state, DEM and shared WOW input preparation; [evidence](../etc/evidence/t484-s4-mouse-dem-wow-preparation.md) records cached full build, seven real guest cases, unchanged dual publication and shared-caller coverage. Frozen census343/355,12 pending; supplemental pending19 to16.
-
-S4 P16 completes DLC and generic-call preparation; [evidence](../etc/evidence/t484-s4-dlc-generic-preparation.md) records cached full build, real DLC status07 and both generic cases passing, and unchanged dual-publication hashes. Frozen census343/355,12 pending; supplemental pending21 to19.
-
-S4 P15 completes three supplemental DPMI/XMS preparation chains; [evidence](../etc/evidence/t484-s4-dpmi-xms-preparation.md) records real debug, four INT21 routes and four XMS normal/fault cases, cached full build and unchanged dual publication. Frozen census343/355,12 pending; supplemental pending24→21.
-
-S4 P14 completes idle and DDEML input preparation through shared CMD copying and physical staging; [evidence](../etc/evidence/t484-s4-idle-ddeml-preparation.md) records cached full build, real guest results, prebuilt identity/rejection checks and unchanged dual publication. Census343/355,12 pending;24 supplemental chains remain.
-
-S4 P13 completes four WOW diagnostic preparation chains with one CMD owner; [evidence](../etc/evidence/t484-s4-wow-diagnostic-preparation.md) records preparation failures and corrections, final real graph/page/callback/observer passes, unchanged11 raw/22 published hashes and scoped contracts. Census341/355,14 pending;24 supplemental chains remain.
-
-S4 P12 completes the common WINMINE latency preparation; [evidence](../etc/evidence/t484-s4-latency-preparation.md) records cached full build, unchanged dual release hashes and ordinary/sampled/private real runtime passes. Upper diagnostic wrappers remain pending. Census337/355,18 pending.
+S4 P33 delivers shared guest copying and ownership regularization; [evidence](../etc/evidence/t484-s4-guest-copy-ownership.md) records1390 exact copied files, local-directory cleanup, negative contracts, GRP/path-repair checks and CMD addon publication. Parent configuration chains remain pending:348/355 disposed,7 pending, supplemental5.
 
 S1 inventory/design and S2 native host migration are closed. The
 [execution plan](../etc/operations/t484-cmd-build-release-plan.md) retains
 the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S5 clean,
 interpreter-free end-to-end acceptance have not completed.
 
-Earlier S4 deliveries are complete; detailed results and limitations remain in
+S4 deliveries through P32 are complete; detailed results and limitations remain in
 these records. Shared primitives alone never close an unverified caller.
 
 | P | Delivered scope and evidence |
@@ -92,6 +52,27 @@ these records. Shared primitives alone never close an unverified caller.
 | 9 | [PIC and serial input preparation](../etc/evidence/t484-s4-device-inputs.md) |
 | 10 | [Keyboard PIF/registry preparation](../etc/evidence/t484-s4-keyboard-preparation.md) |
 | 11 | [Print preparation and retired-reporter correction](../etc/evidence/t484-s4-print-preparation.md) |
+| 12 | [latency preparation](../etc/evidence/t484-s4-latency-preparation.md) |
+| 13 | [wow diagnostic preparation](../etc/evidence/t484-s4-wow-diagnostic-preparation.md) |
+| 14 | [idle ddeml preparation](../etc/evidence/t484-s4-idle-ddeml-preparation.md) |
+| 15 | [dpmi xms preparation](../etc/evidence/t484-s4-dpmi-xms-preparation.md) |
+| 16 | [dlc generic preparation](../etc/evidence/t484-s4-dlc-generic-preparation.md) |
+| 17 | [mouse dem wow preparation](../etc/evidence/t484-s4-mouse-dem-wow-preparation.md) |
+| 18 | [tabstop logon preparation](../etc/evidence/t484-s4-tabstop-logon-preparation.md) |
+| 19 | [remote preparation](../etc/evidence/t484-s4-remote-preparation.md) |
+| 20 | [fcb preparation](../etc/evidence/t484-s4-fcb-preparation.md) |
+| 21 | [cursor preparation](../etc/evidence/t484-s4-cursor-preparation.md) |
+| 22 | [oem preparation](../etc/evidence/t484-s4-oem-preparation.md) |
+| 23 | [fatal preparation](../etc/evidence/t484-s4-fatal-preparation.md) |
+| 24 | [memory preparation](../etc/evidence/t484-s4-memory-preparation.md) |
+| 25 | [video7 preparation](../etc/evidence/t484-s4-video7-preparation.md) |
+| 26 | [forcedos preparation](../etc/evidence/t484-s4-forcedos-preparation.md) |
+| 27 | [native output preparation](../etc/evidence/t484-s4-native-output-preparation.md) |
+| 28 | [clipboard preparation](../etc/evidence/t484-s4-clipboard-preparation.md) |
+| 29 | [external message preparation](../etc/evidence/t484-s4-external-message-preparation.md) |
+| 30 | [network profile preparation](../etc/evidence/t484-s4-network-profile-preparation.md) |
+| 31 | [mine preparation](../etc/evidence/t484-s4-mine-preparation.md) |
+| 32 | [multi dialog preparation](../etc/evidence/t484-s4-multi-dialog-preparation.md) |
 
 | S3 delivery | Actual result |
 | --- | --- |

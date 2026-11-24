@@ -33,7 +33,7 @@ set "RESULT=0"
 goto done
 
 :repair_ini
-set "SOURCE=%~1" & set "WORK=%~1.T438"
+set "SOURCE=%~1" & set "WORK=%~1.path-repair.tmp"
 findstr /i /c:"%OLD_ROOT%" "%SOURCE%" >nul || exit /b 0
 findstr /c:"!" "%SOURCE%" >nul && (echo Cannot safely rewrite ^! in INI: %~nx1& set "FAILED=1"& exit /b 1)
 call :rewrite_ini "%SOURCE%" "%WORK%" || (set "FAILED=1"& exit /b 1)

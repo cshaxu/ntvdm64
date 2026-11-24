@@ -1,13 +1,21 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "ff20fb3fe66c114d2d9b5cb1875ea4b377da9299",
+  "head": "6c251889770bb84115d08a8eb8ce1a13468f2089",
   "worktree_status": [
-    " M artifacts/build-migration/t484/dispositions.json",
+    " M assets/release/GRP.EXE",
+    " M assets/release/addon-manifest.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-wow-multi-dialog.ps1",
-    "?? docs/etc/evidence/t484-s4-multi-dialog-preparation.md",
-    "?? tools/prepare-progman-test.cmd"
+    " M src/addon/grp/grp.c",
+    " M test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1",
+    " M test/integration/ntvdm64-386/New-Win95ProbeCopy.ps1",
+    " M test/integration/ntvdm64-386/verify-win31-identity.ps1",
+    " M test/observation/isolated_package_cleanup.ps1",
+    " M test/observation/verify-owned-guest-cleanup.ps1",
+    " M tools/win31-path/APPLY.CMD",
+    "?? docs/etc/evidence/t484-s4-guest-copy-ownership.md",
+    "?? tools/copy-guest-probe.cmd",
+    "?? tools/create-guest-probe.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -482,7 +490,7 @@
       "file": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "e3cade9d28d5e1ecd71ee212d86adf955685e351bdc61ae4314d02d089aa236b",
+      "current_sha256": "8a744ad4186d5d12eaec146018ebcbf10fff447e8a37b9a74373f7cf14bf5d7f",
       "revisions": [
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
@@ -1327,10 +1335,12 @@
       "state": "changed",
       "current_sha256": "e2f72bd21d86abc7cc223dee156df9972b5c04161d2831532dc6b53804a9b247",
       "revisions": [
+        "6c251889770bb84115d08a8eb8ce1a13468f2089",
         "965416bb9508a70c2166d48a78b53c770dfbfbc9"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-ui.md"
+        "docs/etc/evidence/t484-s3-ui.md",
+        "docs/etc/evidence/t484-s4-multi-dialog-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -2060,7 +2070,7 @@
       "file": "test/observation/isolated_package_cleanup.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "fe62f13ae6d98d55ae04a764d8c98fdaf74024a5ad35e34ce9e66e32d179835e",
+      "current_sha256": "66886afdfaa2fbeb865d455cef96b262825a03df74bff08cc8cb528b36606d6a",
       "revisions": [
         "9fcf67eee0f6be324819a4ec9972b3107d2e91f5",
         "27b6984b84231813c7221dd841a8205032f4e309",
@@ -6634,6 +6644,12 @@
     }
   ],
   "commits": {
+    "6c251889770bb84115d08a8eb8ce1a13468f2089": {
+      "subject": "T484 S4 P32: prepare dialog applications and program groups through CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-multi-dialog-preparation.md"
+      ]
+    },
     "ff20fb3fe66c114d2d9b5cb1875ea4b377da9299": {
       "subject": "T484 S4 P31: consolidate WINMINE staging and correct pixel probe placement",
       "evidence": [
@@ -8350,19 +8366,19 @@
       "file": "test/integration/ntvdm64-386/verify-win31-identity.ps1",
       "hits": [
         {
-          "line": 224,
+          "line": 226,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
         },
         {
-          "line": 257,
+          "line": 259,
           "text": "& \"$repo/build/.ninja/fixtures-x64/win31-probe-paths.exe\" @binding"
-        },
-        {
-          "line": 260,
-          "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
         },
         {
           "line": 262,
+          "text": "$nasm=(Get-Command nasm.exe -CommandType Application | Select-Object -First 1).Source"
+        },
+        {
+          "line": 264,
           "text": "$env:PATH=(Split-Path $nasm)+';C:\\Windows\\System32;C:\\Windows';$env:TEMP='O:\\tmp';$env:TMP='O:\\tmp'"
         }
       ]
@@ -9248,11 +9264,11 @@
           "text": "$runner=Join-Path $script:IsolatedPackageCleanupRoot '../../build/.ninja/build-tools/stage-runtime.cmd'"
         },
         {
-          "line": 134,
+          "line": 135,
           "text": "throw 'Refuse guest probe cleanup: Git data or link'"
         },
         {
-          "line": 158,
+          "line": 159,
           "text": "# Test-only compatibility for sealed flat baselines and build-link caches."
         }
       ]

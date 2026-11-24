@@ -93,13 +93,14 @@ function Remove-PhysicalRuntimeStage([string]$Stage) {
     if($active.Count){throw 'Test stage still has running processes; stop the owned scope before removal'}
     Remove-Item -LiteralPath $root -Recurse -Force
 }
-function Remove-OwnedGuestProbeCopy([string]$Destination,[string]$Task,[string]$Source) {
+function Remove-OwnedGuestProbeCopy([string]$Destination,[string]$Task,[string]$Source,[switch]$LocalDirectory) {
     if(!(Test-Path -LiteralPath $Destination)){return}
     $root=(Resolve-Path -LiteralPath $Destination).Path
     $taskRoot=(Resolve-Path -LiteralPath $Task).Path
     $buildRoot=(Resolve-Path "${script:IsolatedPackageCleanupRoot}/../../build").Path.TrimEnd('\')+'\'
-    $tempRoot=(Resolve-Path -LiteralPath 'O:\tmp').Path.TrimEnd('\')
-    if($tempRoot -ine 'O:\tmp' -or !$root.StartsWith($tempRoot+'\',[StringComparison]::OrdinalIgnoreCase) -or
+    $temporary=if($LocalDirectory){[IO.Path]::Combine([Environment]::GetFolderPath('LocalApplicationData'),'Temp')}else{'O:\tmp'}
+    $tempRoot=(Resolve-Path -LiteralPath $temporary).Path.TrimEnd('\')
+    if(!$root.StartsWith($tempRoot+'\',[StringComparison]::OrdinalIgnoreCase) -or
        !$taskRoot.StartsWith($buildRoot,[StringComparison]::OrdinalIgnoreCase)) {
         throw 'Refuse guest probe cleanup: invalid target or task root'
     }
@@ -115,7 +116,7 @@ function Remove-OwnedGuestProbeCopy([string]$Destination,[string]$Task,[string]$
         $cursor=$cursor.Parent
         if(!$cursor){break}
     }
-    $owner=Join-Path $root '.t479-owner'
+    $owner=Join-Path $root '.ntvdm64-guest-owner'
     if(!(Test-Path -LiteralPath $owner -PathType Leaf) -or
        (Get-Content -LiteralPath $owner -Raw).Trim() -ine $taskRoot) {
         throw 'Refuse guest probe cleanup: owner mismatch'

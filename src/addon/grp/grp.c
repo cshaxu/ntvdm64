@@ -46,7 +46,7 @@ static BOOL write_atomic(const wchar_t *path, const BYTE *bytes, DWORD length)
     DWORD written = 0;
     BOOL ok;
 
-    if (swprintf_s(temporary, MAX_PATH, L"%ls.T438", path) < 0) return FALSE;
+    if (swprintf_s(temporary, MAX_PATH, L"%ls.grp-tmp", path) < 0) return FALSE;
     file = CreateFileW(temporary, GENERIC_WRITE, 0, NULL, CREATE_ALWAYS,
                        FILE_ATTRIBUTE_NORMAL, NULL);
     ok = file != INVALID_HANDLE_VALUE &&

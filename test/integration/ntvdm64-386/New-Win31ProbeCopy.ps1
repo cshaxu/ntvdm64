@@ -24,10 +24,9 @@ New-Item -ItemType Directory $task|Out-Null
 # desktop/scope and normal guest shutdown, never foreground input automation.
 $original=@(Get-ChildItem $source -Force -Recurse -File | ForEach-Object {[ordered]@{path=$_.FullName.Substring($source.Length);sha256=(Get-FileHash $_.FullName).Hash}})
 $original|ConvertTo-Json|Set-Content "$task/original.json"
-New-Item -ItemType Directory $dest|Out-Null
-[IO.File]::WriteAllText("$dest/.t479-owner",$task)
 try {
-Get-ChildItem $source -Force|Where-Object Name -ne '.t479-owner'|Copy-Item -Destination $dest -Recurse
+& "$repo/tools/copy-guest-probe.cmd" $source $dest $task *> "$task/copy.log"
+if($LASTEXITCODE){throw 'Owned guest installation copy failed'}
 if($MouseDriver){
  $hash=(Get-FileHash -LiteralPath $MouseDriver).Hash
  $mousePath=Join-Path $dest 'SYSTEM/MOUSE.DRV'

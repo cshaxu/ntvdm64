@@ -10,10 +10,17 @@ New-Item -ItemType Directory $source|Out-Null
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
 $dest='O:\tmp\g'+[Guid]::NewGuid().ToString('N').Substring(0,6)
 if(Test-Path -LiteralPath $dest){throw 'Fresh test target required'}
-New-Item -ItemType Directory $dest|Out-Null
-[IO.File]::WriteAllText((Join-Path $dest '.t479-owner'),$task)
-$child=$null;$nestedParent=$null;$nested=$null;$failedDest=$null;$failedTask=$null;$failed95=$null;$task95=$null
+& "$repo/tools/create-guest-probe.cmd" $dest $task
+if($LASTEXITCODE){throw 'Owned directory creation failed'}
+$local=$null;$child=$null;$nestedParent=$null;$nested=$null;$failedDest=$null;$failedTask=$null;$failed95=$null;$task95=$null
 try {
+ $local=Join-Path ([IO.Path]::Combine([Environment]::GetFolderPath('LocalApplicationData'),'Temp')) ([IO.Path]::GetFileName($dest))
+ & "$repo/tools/create-guest-probe.cmd" $local $task --local
+ if($LASTEXITCODE){throw 'Local owned directory creation failed'}
+ $savedTemp=$env:TEMP
+ try {$env:TEMP='O:\tmp';Remove-OwnedGuestProbeCopy $local $task $source -LocalDirectory}finally{$env:TEMP=$savedTemp}
+ if(Test-Path $local){throw 'Local owned directory retained after TEMP changed'}
+ $local=$null
  $wrong=Join-Path $task 'wrong';New-Item -ItemType Directory $wrong|Out-Null
  $rejected=$false;try{Remove-OwnedGuestProbeCopy $dest $wrong $source}catch{$rejected=$true}
  if(!$rejected -or !(Test-Path $dest)){throw 'Wrong owner was not rejected'}
@@ -43,7 +50,7 @@ try {
  if(Test-Path -LiteralPath $nestedParent){throw 'Fresh nested parent required'}
  New-Item -ItemType Directory $nestedParent|Out-Null
  New-Item -ItemType Directory $nested|Out-Null
- [IO.File]::WriteAllText((Join-Path $nested '.t479-owner'),$task)
+ [IO.File]::WriteAllText((Join-Path $nested '.ntvdm64-guest-owner'),$task)
  Remove-OwnedGuestProbeCopy $nested $task $source
  if(Test-Path -LiteralPath $nested){throw 'Nested owned copy was not removed'}
  Remove-Item -LiteralPath $nestedParent
@@ -62,6 +69,7 @@ try {
  if(!$rejected -or (Test-Path -LiteralPath $failed95)){throw 'Failed Win95 preparation did not clean its owned copy'}
  'PASS wrong owner, Git, link and active process refused; witness retained and owned copies removed'
 } finally {
+ if($local -and (Test-Path $local)){Remove-OwnedGuestProbeCopy $local $task $source -LocalDirectory}
  if($child){if(!$child.HasExited){$child.Kill();$child.WaitForExit()};$child.Dispose()}
  if(Test-Path -LiteralPath $dest){Remove-OwnedGuestProbeCopy $dest $task $source}
  if($nested -and (Test-Path -LiteralPath $nested)){Remove-OwnedGuestProbeCopy $nested $task $source}
@@ -69,3 +77,4 @@ try {
  if($failedDest -and (Test-Path -LiteralPath $failedDest)){Remove-OwnedGuestProbeCopy $failedDest $failedTask $source}
  if($failed95 -and (Test-Path -LiteralPath $failed95)){Remove-OwnedGuestProbeCopy $failed95 $task95 $source}
 }
+$global:LASTEXITCODE=0

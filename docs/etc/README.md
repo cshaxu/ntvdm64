@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T484 S4 guest-copy ownership](evidence/t484-s4-guest-copy-ownership.md) records shared copying, stable ownership, local-directory cleanup and task-suffix regularization.
+
 [T484 S4 multi-dialog preparation](evidence/t484-s4-multi-dialog-preparation.md) records six real paths and CMD program-group contracts.
 
 [T484 S4 WINMINE preparation](evidence/t484-s4-mine-preparation.md) records CMD staging, retired diagnostics, window-position evidence and four real passes.
