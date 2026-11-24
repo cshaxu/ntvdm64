@@ -851,5 +851,10 @@
     "status": "migrated-delivered",
     "reason": "Current native construction/transaction contracts pass; historical builders and fixture-only controls retired; full cached build/cache/publication verified",
     "evidence": "docs/etc/evidence/t484-s3-construction-native.md"
+  },
+  "test/observation/verify-wow-module-alias-bounds.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-module-alias-native.md",
+    "status": "migrated-delivered",
+    "reason": "Native target reuses actual product alias object/profile; unchanged lifetime fixture and full cached build/cache/publication hashes pass"
   }
 }

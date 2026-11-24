@@ -121,3 +121,4 @@ include(bitmap-tests.cmake)
 include(creation-tests.cmake)
 
 include(dispatch-tests.cmake)
+include(module-alias-test.cmake)
