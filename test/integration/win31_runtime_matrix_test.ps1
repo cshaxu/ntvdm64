@@ -143,7 +143,7 @@ try {
             if($attachment.Count){$monitor=Join-Path (Get-PackageBinaryRoot $stage) 'matrix-monitor.exe'}
             $scope=New-IsolatedPackageScope $stage
             $pifName=if($PreparedProfile){'WIN.PIF'}elseif($case.Enhanced){'WIN386.PIF'}else{'WINSTD.PIF'}
-            [ordered]@{case=$case.Name; package=$package; packageId=(Get-IsolatedPackageIdentity "$stage\system32\ntvdm.exe");
+            [ordered]@{case=$case.Name; package=$package; stage=$stage; packageId=(Get-IsolatedPackageIdentity "$stage\system32\ntvdm.exe");
                 ntvdmSha256=(Get-FileHash "$stage\system32\ntvdm.exe").Hash;
                 pifSha256=(Get-FileHash (Join-Path $patch $pifName)).Hash;
                 configSha256=(Get-FileHash $config).Hash; autoexecSha256=(Get-FileHash $autoexec).Hash;

@@ -180,9 +180,9 @@
     "evidence": "docs/etc/evidence/t484-s3-niddb-retirement.md"
   },
   "test/integration/verify-dos-identity-pair.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P81 migrates worker and three guest producers to CMD/native targets, repairs moved fixture/cleanup paths. Historical runtime package/observer, manifest stamping and staging still require S4; no new guest run claimed.",
-    "evidence": "docs/etc/evidence/t484-s3-dos-identity.md"
+    "status": "migrated-delivered",
+    "reason": "P43 moves diagnostic package and guest preparation to CMD. Both real DOSONLY cases collect the established task-pair evidence. The diagnostic still does not establish normal retirement.",
+    "evidence": "docs/etc/evidence/t484-s4-dos-identity-preparation.md"
   },
   "test/integration/verify-native-vt-fidelity.ps1": {
     "reason": "Current native frontend graph and x86/x64 CMD producer; real Console/pixel oracle passes both architectures, cached full and published hashes unchanged",

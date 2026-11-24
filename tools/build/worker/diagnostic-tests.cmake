@@ -89,7 +89,7 @@ worker_trace(command-client base-rpc-client-launch.lib obj/run16/rpc_client_laun
 # Preserve the existing DOS identity witness without scraping generated Ninja.
 # The diagnostic archive replaces exactly the observer member in product order.
 worker_trace(dos-identity softpc-bindings.lib obj/adapter-softpc/ntvdm_dos_observer.obj
-  dos_identity_observed "DOS_IDENTITY_LOG=\"${CMAKE_BINARY_DIR}/diagnostics/dos-identity/events.log\"")
+  dos_identity_observed)
 add_custom_target(dos-identity-observer
   DEPENDS "${CMAKE_BINARY_DIR}/diagnostics/dos-identity/ntvdm.exe")
 

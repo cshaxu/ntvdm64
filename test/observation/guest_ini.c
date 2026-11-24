@@ -56,6 +56,24 @@ static int emit(HANDLE file,const char *text,size_t length)
     DWORD written;
     return length<=MAXDWORD && WriteFile(file,text,(DWORD)length,&written,NULL) && written==length;
 }
+static int file_entry(const char *line,const char *end,const char *key,const char *name)
+{
+    const char *base,*comment,*p;
+    size_t key_length=strlen(key);
+    trim(&line,&end);
+    if(line<end && *line==';'){++line;trim(&line,&end);}
+    if((size_t)(end-line)<=key_length || _strnicmp(line,key,key_length))return 0;
+    line+=key_length;trim(&line,&end);
+    if(line==end || *line!='=')return 0;
+    ++line;
+    comment=memchr(line,';',(size_t)(end-line));
+    if(comment)end=comment;
+    trim(&line,&end);
+    if(end-line>=2 && *line=='"' && end[-1]=='"'){++line;--end;}
+    base=line;
+    for(p=line;p<end;++p)if(*p=='\\' || *p=='/')base=p+1;
+    return (size_t)(end-base)==strlen(name) && !_strnicmp(base,name,(size_t)(end-base));
+}
 static int driver_entry(HANDLE file,const char *root,const char *name,int leading)
 {
     char line[MAX_PATH+64];
@@ -71,10 +89,11 @@ static int literal_profile(char *text,const char *output,const char *operation,
     char heading[256],*line,*end,*next,*value_start=NULL,*value_end=NULL;
     char *insertion=NULL;const char *newline="\r\n";
     size_t key_length=strlen(key),newline_length=2;
-    unsigned matches=0;int selected=0,append=!strcmp(operation,"append"),result=1;
+    unsigned matches=0;int selected=0,append=!strcmp(operation,"append"),drop=!strcmp(operation,"drop-file"),result=1;
     HANDLE file;
-    if((!append && strcmp(operation,"set")) || !*section || !key_length ||
+    if((!append && !drop && strcmp(operation,"set")) || !*section || !key_length ||
        strpbrk(section,"[]\r\n") || strpbrk(key,"=\r\n") || strpbrk(value,"\r\n") ||
+       (drop && (!*value || strpbrk(value,"\\/:;"))) ||
        _snprintf_s(heading,sizeof(heading),_TRUNCATE,"[%s]",section)<0 ||
        sections(text,heading)!=1)return 2;
     for(line=text;*line;line=next){
@@ -92,10 +111,18 @@ static int literal_profile(char *text,const char *output,const char *operation,
             ++matches;value_start=line+key_length+1;value_end=content_end;
         }
     }
-    if(!append && matches!=1)return 2;
+    if(!append && !drop && matches!=1)return 2;
     file=CreateFileA(output,GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);
     if(file==INVALID_HANDLE_VALUE)return 1;
-    if(append){
+    if(drop){
+        selected=0;
+        for(line=text;*line;line=next){
+            end=line_end(line);next=*end?end+1:end;
+            if(*line=='[')selected=header(line,end,heading);
+            if(selected && file_entry(line,end,key,value))continue;
+            if(!emit(file,line,(size_t)(next-line)))goto done;
+        }
+    }else if(append){
         if(!emit(file,text,(size_t)(insertion-text)))goto done;
         if(insertion>text && insertion[-1]!='\n' && !emit(file,newline,newline_length))goto done;
         if(!emit(file,key,key_length) || !emit(file,"=",1) ||

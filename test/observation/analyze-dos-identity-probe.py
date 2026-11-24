@@ -1,10 +1,18 @@
 """Assert the observed identity failure; this is not a product-pass verdict."""
 from pathlib import Path
+import argparse
 import json, re, struct, hashlib
 root=Path(__file__).resolve().parents[2]
 base=root/'build/side-dos-identity'
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--run', help='Analyze this run label for both DOSONLY cases.')
+args=parser.parse_args()
+if args.run and not re.fullmatch(r'[A-Za-z0-9_-]+', args.run):
+    parser.error('Invalid run label.')
+cases=[f'dos{mode}-{args.run}' for mode in (1,0)] if args.run else ['dos1-b','dos0-a']
+report=base/(f'findings-{args.run}.json' if args.run else 'findings.json')
 summary=[]
-for case in ['dos1-b','dos0-a']:
+for case in cases:
     folder=base/case
     witnesses={r:struct.unpack('<BHH',(folder/f'{r}.RUN').read_bytes()) for r in 'AB'}
     assert witnesses['A'][0]==ord('A') and witnesses['B'][0]==ord('B')
@@ -48,5 +56,5 @@ for case in ['dos1-b','dos0-a']:
     item['evidence_sha256']={p.name:hashlib.sha256(p.read_bytes()).hexdigest()
         for p in folder.iterdir() if p.is_file() and p.suffix in ['.log','.RUN','.END','.json']}
     summary.append(item)
-(base/'findings.json').write_text(json.dumps(summary,indent=2)+'\n')
+report.write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')
 print(json.dumps(summary,indent=2))

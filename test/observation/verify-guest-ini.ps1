@@ -66,5 +66,19 @@ foreach($case in @(@('missing-key',"[windows]`r`nrun=x`r`n"),@('duplicate-key',"
  & $tool $file "$file.candidate" set windows load new
  if($LASTEXITCODE -ne 2 -or (Test-Path "$file.candidate")){throw "Ambiguous literal edit accepted: $($case[0])"}
 }
-'PASS network and driver profiles, entry ordering, existing-output refusal, unrelated bytes, duplicate/missing/NUL/selection rejection and stage boundary'|Set-Content "$root/result.txt"
+$dropInput="$root/drop.ini"
+$entries=@(
+ '[boot]', 'device=outside\NTVDM64.386', '[386Enh]',
+ ' device = "O:\path\NTVDM64.386" ; enabled',
+ '; DEVICE = O:/path/ntvdm64.386', 'device=prefixntvdm64.386',
+ '; keep this', 'device=INSIGNIA.386'
+)
+[IO.File]::WriteAllLines($dropInput,$entries,$encoding)
+& $tool $dropInput "$dropInput.candidate" drop-file 386Enh device NTVDM64.386
+if($LASTEXITCODE){throw 'Driver removal failed'}
+$expected=$entries[0..2]+$entries[5..7]
+if([IO.File]::ReadAllText("$dropInput.candidate",$encoding) -cne (($expected -join "`r`n")+"`r`n")){throw 'Unrelated driver entries changed'}
+& $tool $dropInput "$dropInput.invalid" drop-file 386Enh device 'O:\NTVDM64.386'
+if($LASTEXITCODE -ne 2 -or (Test-Path "$dropInput.invalid")){throw 'Non-leaf filename accepted'}
+'PASS network and driver profiles, entry ordering, exact driver removal, existing-output refusal, unrelated bytes, duplicate/missing/NUL/selection rejection and stage boundary'|Set-Content "$root/result.txt"
 $global:LASTEXITCODE=0

@@ -11,24 +11,27 @@ claim that instrumentation has zero timing or translation-cache effect.
 
 - `tools/build-fixtures.cmd x86 dos-identity-observer` builds the diagnostic
   worker through its native product graph, replacing only the observer archive
-  member. Its events.log resides in the worker cache's diagnostics/dos-identity
-  directory; run only one identity probe against that cache at a time.
+  member. The runner sets the log destination inside its owned guest copy and
+  retains separate event snapshots for each run. Shared build targets still
+  require serial execution.
 - `tools/build-dos-identity.cmd <fresh-repo-build-directory> <guest-install>`
   builds controller.exe, A.COM and B.COM using native CMake/NASM targets. The
   CMD producer accepts no existing output directory and changes no original
   guest. Execute builds and tests as owned background runs.
-- The integration runner is `test/integration/verify-dos-identity-pair.ps1`.
-  Its native producers are migrated, but its historical staging/manifest and
-  observer paths still require S4 reconciliation before a new runtime verdict.
-- `verify-dos-identity-pair.ps1 -DosOnly 1 -Run b` and `-DosOnly 0 -Run a` use
-  independent O:/tmp/i311 and i310 copies, disable both addon device entries,
+- Run `test/integration/verify-dos-identity-pair.ps1` with `-BaselineRoot`
+  pointing to the approved guest-media package and `-Observer` pointing to
+  the current console startup observer. It builds and stages a fresh
+  manifest-bound diagnostic package and prepares the guest copy through CMD.
+- Run `-DosOnly 1 -Run <label>` and `-DosOnly 0 -Run <label>` serially. Each uses
+  its own O:/tmp/i311 or i310 copy, disables both addon device entries,
   and reuse the existing private-desktop Win31 matrix runner. The independent
   Win16 controller opens two interactive COMMAND prompts and types A.COM then
   B.COM. The independent DOS fixtures report role, PSP and INT2F/1683 VM ID.
   A is released first; B remains live until its separate release file appears.
-- `analyze-dos-identity-probe.py` asserts the actual collision against both
-  guest witnesses and host event records. It writes findings.json with evidence
-  hashes under build/side-dos-identity.
+- `analyze-dos-identity-probe.py --run <label>` asserts the actual collision
+  against both guest witnesses and host event records. It writes a report
+  for that label under build/side-dos-identity. The unlabelled command
+  continues to analyze the original two historical runs below.
 
 ## Actual results
 

@@ -1,17 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "73ef10b330a858f3b7d92f1fb6f8014b50200df7",
+  "head": "625fe244e5149cc30770ff784c1d6f0516ecc649",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/multitask/verify-win95-guest-only.ps1",
-    " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
-    " M test/integration/ntvdm64-386/verify-win95-identity.ps1",
-    "RM tools/prepare-editor-inputs.cmd -> tools/prepare-guest-witness.cmd",
-    " M tools/prepare-win31-editors.cmd",
-    "?? docs/etc/evidence/t484-s4-win95-identity-preparation.md",
-    "?? tools/reapply-win95-test-launch.cmd"
+    " M test/integration/verify-dos-identity-pair.ps1",
+    " M test/integration/win31_runtime_matrix_test.ps1",
+    " M test/observation/analyze-dos-identity-probe.py",
+    " M test/observation/dos-identity-probe.md",
+    " M test/observation/dos_identity_observed.c",
+    " M test/observation/guest_ini.c",
+    " M test/observation/verify-guest-ini.ps1",
+    " M tools/build/worker/diagnostic-tests.cmake",
+    "?? docs/etc/evidence/t484-s4-dos-identity-preparation.md",
+    "?? tools/prepare-dos-identity.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -20,11 +23,10 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 137,
+    "migrated-delivered": 138,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 1,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -519,6 +521,7 @@
       "state": "changed",
       "current_sha256": "bf27f2771e3a2d754f4f6f3afe8909d34b5247084c80bdc6a9114fd16b910be3",
       "revisions": [
+        "625fe244e5149cc30770ff784c1d6f0516ecc649",
         "73ef10b330a858f3b7d92f1fb6f8014b50200df7",
         "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636",
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
@@ -531,7 +534,8 @@
         "docs/etc/evidence/t484-s3-pif-memory.md",
         "docs/etc/evidence/t484-s3-runtime-tool-path.md",
         "docs/etc/evidence/t484-s3-win95-editor.md",
-        "docs/etc/evidence/t484-s4-win95-editor-preparation.md"
+        "docs/etc/evidence/t484-s4-win95-editor-preparation.md",
+        "docs/etc/evidence/t484-s4-win95-identity-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -547,6 +551,7 @@
       "state": "changed",
       "current_sha256": "373deeadfd2c2cac98bae7f1bc6d581f174fb09c5579354bb22866fe49407ab1",
       "revisions": [
+        "625fe244e5149cc30770ff784c1d6f0516ecc649",
         "41b0d8e05bb119c553bcf3fc3f5cd3adaced2636",
         "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
@@ -559,7 +564,8 @@
         "docs/etc/evidence/t484-s3-identity-fields.md",
         "docs/etc/evidence/t484-s3-pif-memory.md",
         "docs/etc/evidence/t484-s3-runtime-tool-path.md",
-        "docs/etc/evidence/t484-s3-vm-identity.md"
+        "docs/etc/evidence/t484-s3-vm-identity.md",
+        "docs/etc/evidence/t484-s4-win95-identity-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -670,7 +676,7 @@
       "file": "test/integration/verify-dos-identity-pair.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "daa435ca383435297cbd3349da7c00c8fa40e1b9c1474098f4dc74433fc9b27b",
+      "current_sha256": "cc02781012c165fba16c8d45ea0babe6cb6140161702f78400adcffba082fd1e",
       "revisions": [
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
         "b5d6368800365cf5920cb3eb09bc705dde282393"
@@ -679,11 +685,11 @@
         "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-dos-identity.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "P81 migrates worker and three guest producers to CMD/native targets, repairs moved fixture/cleanup paths. Historical runtime package/observer, manifest stamping and staging still require S4; no new guest run claimed.",
-        "evidence": "docs/etc/evidence/t484-s3-dos-identity.md"
+        "status": "migrated-delivered",
+        "reason": "P43 moves diagnostic package and guest preparation to CMD. Both real DOSONLY cases collect the established task-pair evidence. The diagnostic still does not establish normal retirement.",
+        "evidence": "docs/etc/evidence/t484-s4-dos-identity-preparation.md"
       }
     },
     {
@@ -1484,7 +1490,7 @@
       "file": "test/integration/win31_runtime_matrix_test.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "e1cf3ee4d4370ea0753888900994ca5a0b1c73224f74f1a0b5b4b5fe7d6c808c",
+      "current_sha256": "86fffc0a4bb9adb712814186516efc00de1cc34ef1036889faa22978c3044a9a",
       "revisions": [
         "919a1ce7adcd6b79237b0d07ef67a1da29692663",
         "e6b221f53f467c2eb7062e751f5e7bcd5afa6630",
@@ -6658,6 +6664,12 @@
     }
   ],
   "commits": {
+    "625fe244e5149cc30770ff784c1d6f0516ecc649": {
+      "subject": "T484 S4 P42: move Win95 identity and guest-only preparation to CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-win95-identity-preparation.md"
+      ]
+    },
     "73ef10b330a858f3b7d92f1fb6f8014b50200df7": {
       "subject": "T484 S4 P41: share CMD launcher and editor fixture preparation",
       "evidence": [
@@ -8546,19 +8558,19 @@
       "file": "test/integration/verify-dos-identity-pair.ps1",
       "hits": [
         {
-          "line": 8,
+          "line": 13,
           "text": "$pwsh=(Get-Process -Id $PID).Path"
         },
         {
-          "line": 12,
-          "text": "$diagnostic=Join-Path $repo 'build/.ninja/msvc-x86-release/worker/diagnostics/dos-identity'"
+          "line": 17,
+          "text": "$cache=\"$repo/build/.ninja/msvc-x86-release/worker\""
         },
         {
-          "line": 20,
-          "text": "& \"$repo/build/.ninja/build-tools/ntvdm-package-id.exe\" (([guid](([guid]$entry.PackageId))).ToString()) \"$package/system32/ntvdm.exe\""
+          "line": 26,
+          "text": "& \"$repo/tools/stage-system32.cmd\" -BaselineRoot $BaselineRoot -BuildCache $cache -Wow32 \"$repo/build/.ninja/msvc-x86-release/wow32/wow32.dll\" -OutputRoot $package -NativeHook \"$cache/nthook32.dll\" -NativeHook64 \"$repo/assets/release/nthook64.dll\" -NativeWorker \"$cache/ntvwm.exe\" -NativeFrontend \"$cache/ntcon.exe\" -NativeMonitor \"$cache/ntmon.exe\" -NativeLauncher \"$cache/run16.exe\" -NativeService \"$cache/ntsrv.exe\" -DiagnosticNtvdm $diagnostic *> \"$out/diagnostic-stage.log\""
         },
         {
-          "line": 48,
+          "line": 34,
           "text": "$proc=Start-Process $pwsh -ArgumentList $args -WindowStyle Hidden -PassThru -RedirectStandardOutput \"$out/run.out\" -RedirectStandardError \"$out/run.err\""
         }
       ]

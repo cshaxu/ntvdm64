@@ -15,13 +15,19 @@ static PFNVDD_UTERMINATE original_exit;
 static void identity_record(const char *event, USHORT psp)
 {
     DWORD saved = GetLastError();
+    char path[MAX_PATH];
+    DWORD length = GetEnvironmentVariableA("MVDM_DOS_IDENTITY_LOG", path, sizeof(path));
+    if (!length || length >= sizeof(path)) {
+        SetLastError(saved);
+        return;
+    }
     uint32_t linear = (uint32_t)psp << 4, physical = linear;
     uint8_t access = (c_getCPL() == 3 ? 2 : 0) | (c_getVM() ? 4 : 0);
     int mapped = !c_getPG() || xtrn2phy(linear, access, &physical);
     ntvdm_dos_occurrence *slot = registered ? active_psp(registered, psp) : NULL;
     unsigned char header[48] = {0};
     int readable = guest_copy(psp, 0, header, sizeof(header));
-    FILE *file = fopen(DOS_IDENTITY_LOG, "a");
+    FILE *file = fopen(path, "a");
     if (file) {
         fprintf(file, "%s pid=%lu psp=%04x parent=%04x env=%04x cr0=%08x cr3=%08x linear=%08x mapped=%d physical=%08x occurrence=%llu direct=%llu\n",
             event, GetCurrentProcessId(), psp, readable ? word(header+0x16) : 0,
