@@ -72,6 +72,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P158 fresh package isolation](../etc/evidence/t484-s3-fresh-stage.md) | Native RPC client producer and actual two-package RPC/DOS isolation pass; B0015/B0104 complete,288/355 disposed,67 remain. |
 
+| [P159 idle retirement](../etc/evidence/t484-s3-idle-retirement.md) | Obsolete x86/10s/synchronous-RPC runner and fixture removed; current native5s policy passes.289/355 disposed,66 remain. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

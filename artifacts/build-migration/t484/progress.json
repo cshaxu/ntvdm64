@@ -1,32 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "995bbe44d7ed265740f8288575ad6182fb8157be",
+  "head": "2dabf7fef851e9789fc01ee3c1fa7b0de9aeaae4",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/broker/verify-package-isolation.ps1",
-    " M test/broker/verify-package-session-isolation.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/worker/units.cmake",
-    "?? docs/etc/evidence/t484-s3-fresh-stage.md"
+    "D  test/broker/ntsrv_idle_test.c",
+    "D  test/broker/verify_ntsrv_idle.mjs",
+    "?? docs/etc/evidence/t484-s3-idle-retirement.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 157,
-    "unchanged": 33,
-    "removed": 165
+    "unchanged": 32,
+    "removed": 166
   },
   "disposition_counts": {
     "migrated-delivered": 90,
     "retained-native-declarative": 3,
-    "retired-with-delivery-evidence": 165,
-    "pending-producer-migration": 50,
+    "retired-with-delivery-evidence": 166,
     "retained-native-delegate": 14,
+    "pending-producer-migration": 49,
     "requires-disposition-reconciliation": 17,
     "retained-standalone-audit": 16
   },
-  "existing_interpreted_candidates_with_command_hits": 146,
+  "existing_interpreted_candidates_with_command_hits": 145,
   "files": [
     {
       "id": "B0001",
@@ -331,14 +329,15 @@
       "id": "B0017",
       "file": "test/broker/verify_ntsrv_idle.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "72521d64f1a7f2091a9e81d4cb631098faa5b5594b613d2d14b034a9672c727a",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "pending-producer-migration",
+      "completion": "retired-with-delivery-evidence",
       "decision": {
-        "reason": "Builds idle test/client via CL and links; runtime assertions may remain",
-        "status": "pending-producer-migration"
+        "status": "retired-with-delivery-evidence",
+        "reason": "Uncalled obsolete x86/10s/synchronous RPC runner and obsolete private-main fixture removed; current 5s policy native test passed, shared RPC client retained",
+        "evidence": "docs/etc/evidence/t484-s3-idle-retirement.md"
       }
     },
     {
@@ -6351,6 +6350,12 @@
     }
   ],
   "commits": {
+    "2dabf7fef851e9789fc01ee3c1fa7b0de9aeaae4": {
+      "subject": "T484 S3 P158 verify native fresh package isolation",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-fresh-stage.md"
+      ]
+    },
     "995bbe44d7ed265740f8288575ad6182fb8157be": {
       "subject": "T484 S3 P157 read isolated package identity with native tool",
       "evidence": [
@@ -7364,60 +7369,6 @@
         {
           "line": 33,
           "text": "result = subprocess.run([str(repo/'build/.ninja'/('fixtures-'+args.architecture)/'clipboard-epoch.exe')], cwd=repo, capture_output=True,"
-        }
-      ]
-    },
-    {
-      "id": "B0017",
-      "file": "test/broker/verify_ntsrv_idle.mjs",
-      "hits": [
-        {
-          "line": 3,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 4,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 5,
-          "text": "import assert from 'node:assert/strict';"
-        },
-        {
-          "line": 6,
-          "text": "import {spawn,spawnSync} from 'node:child_process';"
-        },
-        {
-          "line": 10,
-          "text": "const ninja=process.argv[3];"
-        },
-        {
-          "line": 11,
-          "text": "assert.ok(ninja,'Pass native Ninja executable as third argument');"
-        },
-        {
-          "line": 44,
-          "text": "const buildResult=spawnSync(ninja,['-j4','ntsrv.exe','obj/worker/stub.obj'],"
-        },
-        {
-          "line": 46,
-          "text": "assert.equal(buildResult.status,0,`Ninja failed: ${buildResult.error||''}; see idle-build.log`);"
-        },
-        {
-          "line": 48,
-          "text": "compile(`cl.exe ${flags} \"${root}/test/broker/ntsrv_idle_test.c\" /Foidle-test.obj`);"
-        },
-        {
-          "line": 49,
-          "text": "compile('link.exe /nologo /opt:ref /out:idle-test.exe idle-test.obj obj/basesrv/stub.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib common-base-srv-bindings.lib broker-transport.lib common-base-srv-transport.lib original-opennt-rtl-x86.lib rpcrt4.lib ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib');"
-        },
-        {
-          "line": 50,
-          "text": "compile(`cl.exe ${flags} \"${root}/test/broker/ntsrv_idle_client.c\" /Foidle-client.obj`);"
-        },
-        {
-          "line": 51,
-          "text": "compile('link.exe /nologo /opt:ref /out:idle-client.exe idle-client.obj obj/worker/stub.obj broker-transport.lib common-base-srv-transport.lib rpcrt4.lib advapi32.lib kernel32.lib');"
         }
       ]
     },

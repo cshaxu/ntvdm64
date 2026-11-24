@@ -102,10 +102,6 @@
       "evidence": "docs/etc/evidence/t484-s3-console-contracts.md"
     }
   },
-  "test/broker/verify_ntsrv_idle.mjs": {
-    "reason": "Builds idle test/client via CL and links; runtime assertions may remain",
-    "status": "pending-producer-migration"
-  },
   "test/build/test_host_cpu_endian.py": {
     "status": "migrated-delivered",
     "delivery": "658e4de250f1780412e43100414a9f301faae4a7",
@@ -1269,5 +1265,10 @@
     "status": "migrated-delivered",
     "reason": "Native identity read/write and RPC client producer; actual two-package RPC/DOS isolation and owned cleanup passed",
     "evidence": "docs/etc/evidence/t484-s3-fresh-stage.md"
+  },
+  "test/broker/verify_ntsrv_idle.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Uncalled obsolete x86/10s/synchronous RPC runner and obsolete private-main fixture removed; current 5s policy native test passed, shared RPC client retained",
+    "evidence": "docs/etc/evidence/t484-s3-idle-retirement.md"
   }
 }
