@@ -70,7 +70,9 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P116 reply payload](../etc/evidence/t484-s3-reply-payload.md) | Three native reference cases pass with unchanged shared assertions; manual producer removed; full cached build/cache/publication hashes pass. |
 
-Completed implementation batches through P116 passed their cached full host build. P73 checks11 raw host inputs
+| [P117 required root](../etc/evidence/t484-s3-required-root.md) | Current root/three chain/15 reacquisition cases pass; shared producer replaces stale source path; full cached build/cache/publication hashes pass. |
+
+Completed implementation batches through P117 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,

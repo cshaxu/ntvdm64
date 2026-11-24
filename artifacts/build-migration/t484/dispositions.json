@@ -921,5 +921,10 @@
     "status": "migrated-delivered",
     "reason": "Three native reference cases retain shared report checks; manual compiler producer removed",
     "evidence": "docs/etc/evidence/t484-s3-reply-payload.md"
+  },
+  "test/observation/verify-wow-required-root-capture.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-required-root.md",
+    "status": "migrated-delivered",
+    "reason": "Reuses current native capture generator; stale source/anchor and manual producer retired; current root and related regressions pass"
   }
 }

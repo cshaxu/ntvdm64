@@ -1,29 +1,30 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "be672582d39bb1d465ff85ad154f7ba21c925e79",
+  "head": "a24f3c50ddff4a5a0cce760024d2576fbbb7f97f",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/observation/verify-wow-reply-payload-control.ps1",
+    " M test/observation/verify-wow-required-root-capture.ps1",
+    " M test/observation/wow_required_root_capture_fixture.c",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/wow-boundaries.cmake",
-    "?? artifacts/build-migration/t484/s3-reply-payload/",
-    "?? docs/etc/evidence/t484-s3-reply-payload.md"
+    " M tools/build/fixtures/wow-capture.cmake",
+    "?? artifacts/build-migration/t484/s3-required-root/",
+    "?? docs/etc/evidence/t484-s3-required-root.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 134,
-    "unchanged": 94,
+    "changed": 135,
+    "unchanged": 93,
     "removed": 127
   },
   "disposition_counts": {
-    "migrated-delivered": 75,
+    "migrated-delivered": 76,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 127,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 83,
+    "requires-disposition-reconciliation": 82,
     "retained-standalone-audit": 1
   },
   "existing_interpreted_candidates_with_command_hits": 177,
@@ -3577,8 +3578,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "e7296ff672546d396992a4859bba387f29006e01a9c47924f559791a15bd23e2",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "a24f3c50ddff4a5a0cce760024d2576fbbb7f97f"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-reply-payload.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -3590,12 +3595,16 @@
       "id": "B0190",
       "file": "test/observation/verify-wow-required-root-capture.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "077138b6a275b0e00b02b5ebada0f50a61afd4ee027c1da987b630a4344156d4",
+      "state": "changed",
+      "current_sha256": "50a76fa8feeedeb2688ea2b0120cdc547926761363fb4c7a97c24ece890ce70a",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-required-root.md",
+        "status": "migrated-delivered",
+        "reason": "Reuses current native capture generator; stale source/anchor and manual producer retired; current root and related regressions pass"
+      }
     },
     {
       "id": "B0191",
@@ -5787,6 +5796,12 @@
     }
   ],
   "commits": {
+    "a24f3c50ddff4a5a0cce760024d2576fbbb7f97f": {
+      "subject": "T484 S3 P116 migrate native reply payload reference producer",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-reply-payload.md"
+      ]
+    },
     "be672582d39bb1d465ff85ad154f7ba21c925e79": {
       "subject": "T484 S3 P115 use current native owners for ABI and registry tests",
       "evidence": [
@@ -8418,8 +8433,8 @@
       "file": "test/observation/verify-wow-required-root-capture.ps1",
       "hits": [
         {
-          "line": 38,
-          "text": "$line='/d /s /c \"call \"'+$CompilerDriver+'\" cl.exe /nologo /TC /O2 /MT /W4 /WX /I\"'+$repo+'/src\" /I\"'+$root+'\" \"'+$fixture+'\" /Fo\"'+$root+'/unit.obj\" /Fe\"'+$root+'/unit.exe\" /link user32.lib\"'"
+          "line": 17,
+          "text": "$native=\"$repo/build/.ninja/fixtures-x86\""
         }
       ]
     },

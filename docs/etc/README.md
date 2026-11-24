@@ -1721,3 +1721,5 @@ post-publication targeted checks.
 - [T484 S3 public ABI and registry lifecycle](evidence/t484-s3-abi-registry.md).
 
 - [T484 S3 reply payload reference](evidence/t484-s3-reply-payload.md).
+
+- [T484 S3 required-root capture](evidence/t484-s3-required-root.md).

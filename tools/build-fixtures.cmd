@@ -60,6 +60,8 @@ if "%TARGET%"=="wow-parameter-map" set "SELECTED=1"
 if "%TARGET%"=="wow-parameter-map" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-owned-read" set "SELECTED=1"
 if "%TARGET%"=="wow-owned-read" if not "%~1"=="x86" exit /b 2
+if "%TARGET%"=="wow-capture-required-root" set "SELECTED=1"
+if "%TARGET%"=="wow-capture-required-root" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-capture-contracts" set "SELECTED=1"
 if "%TARGET%"=="wow-capture-contracts" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-message-construction" set "SELECTED=1"

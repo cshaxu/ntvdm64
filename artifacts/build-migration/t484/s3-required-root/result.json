@@ -1,0 +1,23 @@
+{
+  "chain": "edge=0 same-pid=1 valid-native-interleave=1 mixed-rejected=1 error=13 live-accepted=1\r\nedge=1 same-pid=1 valid-native-interleave=1 mixed-rejected=1 error=13 live-accepted=1\r\nedge=2 same-pid=1 valid-native-interleave=1 mixed-rejected=1 error=13 live-accepted=1\r\nNATIVE_CHAIN_CONTROL errors=0 production-cause-proven=0",
+  "publication": {
+    "publishedCopies": 22,
+    "rawInputs": 11,
+    "unchanged": true,
+    "republished": false
+  },
+  "validation": {
+    "pid": 27540,
+    "exit": 0,
+    "finished": "2026-11-24T04:25:32.5685626+01:00",
+    "started": "2026-11-24T04:23:39.9720067+01:00"
+  },
+  "cache": {
+    "mtime": "2026-11-24T03:23:54.7407556Z",
+    "hash": "341F2869656C70CCA6154F32B0D456CD6FC27F9F9EEFCF95B410D4C0A8C18BB5",
+    "wrongArch": 2
+  },
+  "assertionsUnchanged": true,
+  "reacquire": "CAPTURE edge=0 mode=0 result=1 acquisitions=1 commits=1 error=17530\r\nCAPTURE edge=0 mode=1 result=1 acquisitions=2 commits=1 error=17530\r\nCAPTURE edge=0 mode=2 result=0 acquisitions=2 commits=0 error=13\r\nCAPTURE edge=0 mode=3 result=0 acquisitions=1 commits=0 error=13\r\nCAPTURE edge=0 mode=4 result=0 acquisitions=1 commits=0 error=13\r\nCAPTURE edge=1 mode=0 result=1 acquisitions=1 commits=1 error=17530\r\nCAPTURE edge=1 mode=1 result=1 acquisitions=2 commits=1 error=17530\r\nCAPTURE edge=1 mode=2 result=0 acquisitions=2 commits=0 error=13\r\nCAPTURE edge=1 mode=3 result=0 acquisitions=1 commits=0 error=13\r\nCAPTURE edge=1 mode=4 result=0 acquisitions=1 commits=0 error=13\r\nCAPTURE edge=2 mode=0 result=1 acquisitions=1 commits=1 error=17530\r\nCAPTURE edge=2 mode=1 result=1 acquisitions=2 commits=1 error=17530\r\nCAPTURE edge=2 mode=2 result=0 acquisitions=2 commits=0 error=13\r\nCAPTURE edge=2 mode=3 result=0 acquisitions=1 commits=0 error=13\r\nCAPTURE edge=2 mode=4 result=0 acquisitions=1 commits=0 error=13\r\nCAPTURE_REACQUIRE cases=15 errors=0 production-cause-proven=0",
+  "rootMarker": "REQUIRED_ROOT_CAPTURE errors=0 overwritten_read=0 final_fresh=1 generation=1 failure_atomic=1 payload=1 external=1 last_error=1"
+}

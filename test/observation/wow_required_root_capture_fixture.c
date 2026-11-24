@@ -32,7 +32,7 @@ static BOOL fixture_is_window(HWND window)
     native_row *row=fixture_find((ULONG)(ULONG_PTR)window);
     return row && row->alive;
 }
-static BOOL capture_window(HWND window,window_observation *value)
+static BOOL wow_native_window_capture(HWND window,window_observation *value)
 {
     native_row *row=fixture_find((ULONG)(ULONG_PTR)window);
     if (row) ++row->captures;

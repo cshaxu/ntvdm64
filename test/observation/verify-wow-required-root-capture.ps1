@@ -1,13 +1,9 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$BuildRoot,
- [Parameter(Mandatory)][string]$CompilerDriver,[string]$SourceFile)
+param([Parameter(Mandatory)][string]$BuildRoot)
 # Exact project_graph/put/normalization body; lower services are stand-ins.
 $ErrorActionPreference='Stop'
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'));$root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned evidence required'}
-if(!$SourceFile){$SourceFile="$repo/src/compat/wow_user_object_bindings.c"}
-$SourceFile=(Resolve-Path $SourceFile).Path;$CompilerDriver=(Resolve-Path $CompilerDriver).Path
-if(!$SourceFile.StartsWith($repo+'\',[StringComparison]::OrdinalIgnoreCase)){throw 'Project or sealed source required'}
 $null=New-Item -ItemType Directory $root
 function Owned($name,$exe,$line,$seconds){
  $job=Start-Process $exe -ArgumentList $line -WorkingDirectory $root -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt";$null=$job.Handle
@@ -16,30 +12,16 @@ function Owned($name,$exe,$line,$seconds){
  $job.WaitForExit();$code=$job.ExitCode;$job.Dispose();$code|Set-Content "$root/$name.exit.txt";return $code
 }
 try{
- $text=[IO.File]::ReadAllText($SourceFile).Replace("`r`n","`n")
- $sources=@($SourceFile)
- if($SourceFile -eq "$repo\src\wow32-dll\source\wow_user_object_bindings.c"){
-  $capture="$repo/src/compat/wow_window_capture.c"
-  $native=[IO.File]::ReadAllText($capture).Replace("`r`n","`n")
-  $at=$native.IndexOf('BOOL WINAPI wow_native_window_observation_put(')
-  $transaction=$text.IndexOf('static BOOL project_graph_attempt(')
-  if($at -lt 0 -or $transaction -lt 0){throw 'Current split transaction boundaries missing'}
-  $text=$native.Substring($at)+"`n"+$text.Substring($transaction)
-  # Preserve the sealed-source fixture's lower-service name; helper bodies
-  # and transaction order are extracted unchanged from the current owners.
-  $text=$text.Replace('wow_native_window_capture','capture_window')
-  $start=0;$sources+=,$capture
- }else{$start=$text.IndexOf('static BOOL put_observation(')}
- $end=$text.IndexOf('BOOL WINAPI wow_user_window_project_graph(',[Math]::Max(0,$start))
- if($start -lt 0 -or $end -le $start){throw 'Exact transaction body boundaries missing'}
- $header="$root/required_root_capture_body.h";$fixture="$PSScriptRoot/wow_required_root_capture_fixture.c"
- [IO.File]::WriteAllText($header,$text.Substring($start,$end-$start),[Text.UTF8Encoding]::new($false))
- Get-FileHash ($sources+@($fixture,$header,$CompilerDriver,$PSCommandPath))|Export-Csv -NoTypeInformation "$root/inputs.csv"
- $line='/d /s /c "call "'+$CompilerDriver+'" cl.exe /nologo /TC /O2 /MT /W4 /WX /I"'+$repo+'/src" /I"'+$root+'" "'+$fixture+'" /Fo"'+$root+'/unit.obj" /Fe"'+$root+'/unit.exe" /link user32.lib"'
- if((Owned compile $env:ComSpec $line 120)){throw 'Exact root-body fixture compile failed'}
+ & "$repo/tools/build-fixtures.cmd" x86 wow-capture-required-root *> "$root/build.log"
+ if($LASTEXITCODE){throw 'Native required-root contract build failed'}
+ $native="$repo/build/.ninja/fixtures-x86"
+ $sources=@("$repo/src/compat/wow_user_object_bindings.c","$repo/src/compat/wow_window_capture.c")
+ $fixture="$PSScriptRoot/wow_required_root_capture_fixture.c";$header="$native/required_root_capture_body.h"
+ Get-FileHash ($sources+@($fixture,$header,$PSCommandPath))|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Copy-Item "$native/wow-capture-required-root.exe" "$root/unit.exe"
  $bytes=[IO.File]::ReadAllBytes("$root/unit.exe");$pe=[BitConverter]::ToInt32($bytes,60)
  if([BitConverter]::ToUInt16($bytes,$pe+4) -ne 0x14c){throw 'MSVC Win32/x86 required'}
- Get-FileHash "$root/unit.exe","$root/unit.obj"|Export-Csv -NoTypeInformation "$root/artifacts.csv"
+ Get-FileHash "$root/unit.exe"|Export-Csv -NoTypeInformation "$root/artifacts.csv"
  $code=Owned body "$root/unit.exe" '' 30
  foreach($row in Import-Csv "$root/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Frozen body input changed'}}
  $code|Set-Content "$root/exit.txt"
