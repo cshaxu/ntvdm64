@@ -1172,5 +1172,15 @@
     "status": "migrated-delivered",
     "reason": "Useful normal serial-medium fixture uses CMD/native target; build and original assertions pass",
     "evidence": "docs/etc/evidence/t484-s3-serial-medium.md"
+  },
+  "tools/audit/Verify-VdmDeliveryJournal.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Duplicate interpreted producer replaced by shared protocol runner and native CMD targets; original assertions pass",
+    "evidence": "docs/etc/evidence/t484-s3-broker-protocol.md"
+  },
+  "tools/audit/Verify-VdmPayload.mjs": {
+    "status": "retired-with-delivery-evidence",
+    "reason": "Duplicate interpreted producer replaced by shared protocol runner and native CMD targets; original assertions pass",
+    "evidence": "docs/etc/evidence/t484-s3-broker-protocol.md"
   }
 }

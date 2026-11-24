@@ -201,8 +201,13 @@ worker_archive("common-base-srv-transport.lib"
 worker_archive("broker-transport.lib"
   "obj/broker-transport/rpc_security.obj" "obj/broker-transport/vdm_receipt.obj" "obj/broker-transport/vdm_delivery.obj")
 worker_unit("obj/tests/vdm_protocol_test.obj" "${NTVDM_REPO}/test/common/base_srv/vdm_payload_test.c" "${profile_42}")
-worker_link("vdm-protocol-test.exe" "/nologo /out:$out" "libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib"
+worker_link("vdm-protocol-test.exe" "/nologo /out:$out /map:vdm-protocol-test.exe.map" "libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib"
   INPUTS "obj/tests/vdm_protocol_test.obj" "common-base-srv-transport.lib")
+worker_unit("obj/tests/delivery_journal.obj" "${NTVDM_REPO}/test/broker/delivery_journal.c" "${profile_42}")
+worker_link("delivery-journal-test.exe" "/nologo /out:$out /map:delivery-journal-test.exe.map"
+  "libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib"
+  INPUTS "obj/tests/delivery_journal.obj" "broker-transport.lib")
+worker_group("broker-protocol-fixtures" "vdm-protocol-test.exe" "delivery-journal-test.exe")
 worker_group("opennt-broker-owners" "opennt-base-client.lib" "opennt-base-server.lib" "opennt-base-bindings.lib" "common-base-srv-bindings.lib" "broker-transport.lib" "common-base-srv-transport.lib")
 worker_unit("obj/tests/base_reservation_test.obj" "${NTVDM_REPO}/test/adapter-basesrv/base_reservation_test.c" "${profile_43}")
 worker_link("basesrv-reservation-test.exe" "/nologo /out:$out" "libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib"

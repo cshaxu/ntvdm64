@@ -1,0 +1,15 @@
+{
+  "build_identity": {
+    "started": "2026-11-24T08:19:11.6118319+01:00",
+    "pid": 15264,
+    "finished": "2026-11-24T08:20:11.8704959+01:00",
+    "exit": 0
+  },
+  "output": "PASS: receipt ownership handoff preserves wait/stream identity, alias, inheritability and pipe EOF; drain does not double-close\r\nPASS: partial acquisition rollback, unknown/retry retention, successful ownership commit and sender survival\r\nPASS: eleven operation envelopes, version/length/direction/generation negatives and explicit reply status\r\nPASS: all eight copied VDM fields, independent presence/capacity, short-output nonmutation, truncation/overlap/overflow rejection",
+  "tests": {
+    "pid": 15012,
+    "started": "2026-11-24T08:18:14.5888795+01:00",
+    "exit": 0,
+    "finished": "2026-11-24T08:18:40.8700888+01:00"
+  }
+}

@@ -56,6 +56,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P150 serial medium](../etc/evidence/t484-s3-serial-medium.md) | Existing normal serial lifecycle fixture moved to CMD/native target and passed; cached full and11/22 identity checks passed unchanged. |
 
+| [P151 broker protocol](../etc/evidence/t484-s3-broker-protocol.md) | Two private JS producers consolidated into CMD/native targets; both unit contracts, maps and cached full/identity checks passed. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

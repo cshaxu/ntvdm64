@@ -1784,3 +1784,5 @@ post-publication targeted checks.
 - [T484 S3 historical audit disposition](evidence/t484-s3-historical-audits.md).
 
 - [T484 S3 serial medium producer](evidence/t484-s3-serial-medium.md).
+
+- [T484 S3 broker protocol consolidation](evidence/t484-s3-broker-protocol.md).

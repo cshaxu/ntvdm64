@@ -1,32 +1,34 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "848dfb31ee01deb0d8de717050db937a9149cbe9",
+  "head": "97cddb699f18f6b9d3b99a5bdc6ebb759b5bfca2",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M tools/audit/Verify-T420S30ComMock.ps1",
+    "D  tools/audit/Verify-VdmDeliveryJournal.mjs",
+    "D  tools/audit/Verify-VdmPayload.mjs",
     " M tools/build-fixtures.cmd",
-    " M tools/build/fixtures/serial-baud.cmake",
-    "?? artifacts/build-migration/t484/s3-serial-medium/",
-    "?? docs/etc/evidence/t484-s3-serial-medium.md"
+    " M tools/build/worker/units.cmake",
+    "?? artifacts/build-migration/t484/s3-broker-protocol/",
+    "?? docs/etc/evidence/t484-s3-broker-protocol.md",
+    "?? test/broker/verify-protocol-contracts.ps1"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 154,
-    "unchanged": 52,
-    "removed": 149
+    "unchanged": 50,
+    "removed": 151
   },
   "disposition_counts": {
     "migrated-delivered": 87,
     "retained-native-declarative": 2,
-    "retired-with-delivery-evidence": 149,
+    "retired-with-delivery-evidence": 151,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 36,
+    "requires-disposition-reconciliation": 34,
     "retained-standalone-audit": 14
   },
-  "existing_interpreted_candidates_with_command_hits": 153,
+  "existing_interpreted_candidates_with_command_hits": 151,
   "files": [
     {
       "id": "B0001",
@@ -4529,8 +4531,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "63f6699d9f68546b20f97a7872a281bb1552c47342449bfb8506925b03bbf213",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "97cddb699f18f6b9d3b99a5bdc6ebb759b5bfca2"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-serial-medium.md"
+      ],
       "completion": "migrated-delivered",
       "decision": {
         "status": "migrated-delivered",
@@ -4542,23 +4548,31 @@
       "id": "B0238",
       "file": "tools/audit/Verify-VdmDeliveryJournal.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "39977ba23f3b1e8f0a6a066625f12307c5f9038cefbc3fb2dd60e25a6cdfbb42",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Duplicate interpreted producer replaced by shared protocol runner and native CMD targets; original assertions pass",
+        "evidence": "docs/etc/evidence/t484-s3-broker-protocol.md"
+      }
     },
     {
       "id": "B0239",
       "file": "tools/audit/Verify-VdmPayload.mjs",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "988467ea93194ef6e336230ad6f703eb0972926d40c6d4a1f4cdd3a0239cce7d",
+      "state": "removed",
+      "current_sha256": null,
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retired-with-delivery-evidence",
+      "decision": {
+        "status": "retired-with-delivery-evidence",
+        "reason": "Duplicate interpreted producer replaced by shared protocol runner and native CMD targets; original assertions pass",
+        "evidence": "docs/etc/evidence/t484-s3-broker-protocol.md"
+      }
     },
     {
       "id": "B0240",
@@ -6193,6 +6207,12 @@
     }
   ],
   "commits": {
+    "97cddb699f18f6b9d3b99a5bdc6ebb759b5bfca2": {
+      "subject": "T484 S3 P150 move serial medium fixture to CMD native build",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-serial-medium.md"
+      ]
+    },
     "848dfb31ee01deb0d8de717050db937a9149cbe9": {
       "subject": "T484 S3 P149 retire obsolete phase audits and verify vector contract",
       "evidence": [
@@ -9450,58 +9470,6 @@
         {
           "line": 9,
           "text": "$exe = \"$repo/build/.ninja/fixtures-x86/serial-medium.exe\""
-        }
-      ]
-    },
-    {
-      "id": "B0238",
-      "file": "tools/audit/Verify-VdmDeliveryJournal.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 2,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 3,
-          "text": "import {spawnSync} from 'node:child_process';"
-        },
-        {
-          "line": 4,
-          "text": "import assert from 'node:assert/strict';"
-        },
-        {
-          "line": 12,
-          "text": "`cl.exe /nologo /MT /W4 /I \"${root}/src\" /I \"${root}/src/ntsrv-exe/transport\" \"${root}/test/broker/delivery_journal.c\" \"${archive}\" /Fejournal.exe /link /map:journal.map\\r\\n`);"
-        }
-      ]
-    },
-    {
-      "id": "B0239",
-      "file": "tools/audit/Verify-VdmPayload.mjs",
-      "hits": [
-        {
-          "line": 1,
-          "text": "import fs from 'node:fs';"
-        },
-        {
-          "line": 2,
-          "text": "import path from 'node:path';"
-        },
-        {
-          "line": 3,
-          "text": "import assert from 'node:assert/strict';"
-        },
-        {
-          "line": 4,
-          "text": "import {spawnSync} from 'node:child_process';"
-        },
-        {
-          "line": 10,
-          "text": "`cl.exe /nologo /MT /W4 /I \"${root}/src\" \"${root}/test/common/base_srv/vdm_payload_test.c\" \"${ownerBuild}/common-base-srv-transport.lib\" /Fepayload.exe /link /map:payload.map\\r\\n`);"
         }
       ]
     },
