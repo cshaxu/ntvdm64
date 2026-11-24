@@ -1,16 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "cdaa7e96d1cc9b9f5f9227c4fb84148d209c4258",
+  "head": "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/Test-PackageIdentityTool.ps1",
-    " M test/integration/verify-pic-reset-eoi.ps1",
-    " M test/integration/verify-s45-vcd-serial-discovery.ps1",
-    " M test/observation/isolated_package_cleanup.ps1",
-    " M tools/build/native/stage-runtime.cmd.in",
-    "?? docs/etc/evidence/t484-s4-device-inputs.md"
+    " M test/integration/verify-s45-keyboard-shadow.ps1",
+    "?? docs/etc/evidence/t484-s4-keyboard-preparation.md",
+    "?? tools/prepare-keyboard-test.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -19,11 +16,11 @@
     "removed": 181
   },
   "disposition_counts": {
-    "migrated-delivered": 118,
+    "migrated-delivered": 119,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 181,
     "retained-native-delegate": 15,
-    "pending-producer-migration": 20,
+    "pending-producer-migration": 19,
     "retained-standalone-audit": 17,
     "requires-disposition-reconciliation": 1
   },
@@ -802,10 +799,12 @@
       "state": "changed",
       "current_sha256": "6a56a78add034e306bebabfcb1b391a429da0dbe7ffdb9bb25e0b5246cfb1617",
       "revisions": [
+        "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a",
         "aaf160c20b2e4b65fc7df3eaf893734c7e630354"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-pic-bios.md"
+        "docs/etc/evidence/t484-s3-pic-bios.md",
+        "docs/etc/evidence/t484-s4-device-inputs.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -819,7 +818,7 @@
       "file": "test/integration/verify-s45-keyboard-shadow.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "0fdd6faf10c5c9042878d1fed2a5296c4d0e7a118763c5247c77ebd4b96f53a8",
+      "current_sha256": "29074c1d47043cd1acb5acffed5ade2ceacdfcaa32e8c5837b34137ace6394fc",
       "revisions": [
         "c5f29a4ea8114f9ba6442194c84966fa7b127785",
         "29b0690b3c85813887eff1580f32c74b983cf98d"
@@ -828,11 +827,11 @@
         "docs/etc/evidence/t484-s3-keyboard-isolation.md",
         "docs/etc/evidence/t484-s3-keyboard-shadow.md"
       ],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "status": "pending-producer-migration",
-        "reason": "P192 removes the obsolete detached observer, reuses scoped private-desktop observation and verifies real PIF/MEM plus four deterministic original-reader outcomes. Two CMD helpers remain; shared physical staging belongs to S4.",
-        "evidence": "docs/etc/evidence/t484-s3-keyboard-isolation.md"
+        "status": "migrated-delivered",
+        "reason": "S4 P10 completes CMD reader/PIF/registry preparation in the owned runtime. Real PIF/MEM startup, original reader outcomes, range/repeat rejection and artifact identity pass.",
+        "evidence": "docs/etc/evidence/t484-s4-keyboard-preparation.md"
       }
     },
     {
@@ -842,12 +841,14 @@
       "state": "changed",
       "current_sha256": "3cf68816330d68900683ad7597565f2d1a22ad9d8c240f38321421fe134611ba",
       "revisions": [
+        "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a",
         "9460791b1215641a65a84df9786c2dc3359498f3",
         "626a2aed8aeb9d8eaa34f8403b2bbd61714f6753"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-serial-native.md",
-        "docs/etc/evidence/t484-s3-serial-probe.md"
+        "docs/etc/evidence/t484-s3-serial-probe.md",
+        "docs/etc/evidence/t484-s4-device-inputs.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -2031,6 +2032,7 @@
       "state": "changed",
       "current_sha256": "d7f692ebc8f52b6a544f0d7eda7256c9e36936f2a2b074b0b7cdc173457dfd3e",
       "revisions": [
+        "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a",
         "3776c3208bcfcfa740fcf02da7aeca581d956e33",
         "629e0bdf4162b212fce97a7dd6f6092f3604c60d",
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
@@ -2039,6 +2041,7 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-identity-reader.md",
+        "docs/etc/evidence/t484-s4-device-inputs.md",
         "docs/etc/evidence/t484-s4-physical-stage.md",
         "docs/etc/evidence/t484-s4-stage-identity-refresh.md"
       ],
@@ -6595,6 +6598,12 @@
     }
   ],
   "commits": {
+    "360f5ae08ceeab97c552d3e0e9d9a192f23f6b7a": {
+      "subject": "M0 T484 S4 P9: stage device probe inputs through CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-device-inputs.md"
+      ]
+    },
     "cdaa7e96d1cc9b9f5f9227c4fb84148d209c4258": {
       "subject": "M0 T484 S4 P8: reconcile independent cleanup and handoff consumers",
       "evidence": [
@@ -8395,11 +8404,7 @@
       "file": "test/integration/verify-s45-keyboard-shadow.ps1",
       "hits": [
         {
-          "line": 17,
-          "text": "$cache=\"$repository/build/.ninja/msvc-x86-release/worker\""
-        },
-        {
-          "line": 22,
+          "line": 18,
           "text": "if(!$Observer){$Observer=\"$repository/build/.ninja/fixtures-x64/console-startup-observer.exe\"}"
         }
       ]

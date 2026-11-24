@@ -14,11 +14,7 @@ $package=(Resolve-Path $RuntimeRoot).Path
 New-Item -ItemType Directory $build|Out-Null
 & "$repository/tools/build-fixtures.cmd" x86 command-keyboard-shadow *> "$build/build.log"
 if($LASTEXITCODE){throw 'Keyboard fixtures failed to build'}
-$cache="$repository/build/.ninja/msvc-x86-release/worker"
-$builder="$cache/s45-keyboard-profile-builder.exe"
-New-Item -ItemType Directory (Join-Path $build 'system32')|Out-Null
 $reader=Join-Path $build 'system32/s45-cmdkeyb-shadow-fixture.exe'
-Copy-Item "$cache/s45-cmdkeyb-shadow-fixture.exe" $reader
 if(!$Observer){$Observer="$repository/build/.ninja/fixtures-x64/console-startup-observer.exe"}
 $observerPath=(Resolve-Path $Observer).Path
 . "$PSScriptRoot/../observation/isolated_package_cleanup.ps1"
@@ -31,10 +27,8 @@ try {
     $scope=New-IsolatedPackageScope $stage
     $binary=Get-PackageBinaryRoot $stage
     $tests=Join-Path $binary 'KTEST'
-    New-Item -ItemType Directory $tests|Out-Null
-    & $builder $tests (Join-Path $binary 'MEM.EXE')
-    if($LASTEXITCODE){throw 'Keyboard PIF generation failed'}
-    Copy-Item "$repository/test/mvdm-host/fixtures/S45-KEYBOARD-NTVDM.REG" (Join-Path $binary 'NTVDM.REG') -Force
+    & "$repository/tools/prepare-keyboard-test.cmd" $stage $build
+    if($LASTEXITCODE){throw 'CMD keyboard test preparation failed'}
     $trace=Join-Path $build 'registry.log'
     $report=Join-Path $build 'observer.txt'
     $env:PATH="$binary;$env:SystemRoot\System32;$env:SystemRoot"

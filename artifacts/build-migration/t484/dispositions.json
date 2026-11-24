@@ -239,9 +239,9 @@
     "evidence": "docs/etc/evidence/t484-s4-device-inputs.md"
   },
   "test/integration/verify-s45-keyboard-shadow.ps1": {
-    "status": "pending-producer-migration",
-    "reason": "P192 removes the obsolete detached observer, reuses scoped private-desktop observation and verifies real PIF/MEM plus four deterministic original-reader outcomes. Two CMD helpers remain; shared physical staging belongs to S4.",
-    "evidence": "docs/etc/evidence/t484-s3-keyboard-isolation.md"
+    "status": "migrated-delivered",
+    "reason": "S4 P10 completes CMD reader/PIF/registry preparation in the owned runtime. Real PIF/MEM startup, original reader outcomes, range/repeat rejection and artifact identity pass.",
+    "evidence": "docs/etc/evidence/t484-s4-keyboard-preparation.md"
   },
   "test/integration/verify-s45-vcd-serial-discovery.ps1": {
     "status": "migrated-delivered",
