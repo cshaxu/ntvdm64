@@ -1,0 +1,18 @@
+{
+  "finalBoundaryRun": {
+    "started": "2026-11-24T07:38:42.4049069+01:00",
+    "finished": "2026-11-24T07:38:50.2783623+01:00",
+    "exit": 0,
+    "pid": 26156
+  },
+  "unchangedRawImages": 11,
+  "buildPhase": "Two CMD passes passed; subsequent stale object-path audit failed",
+  "buildRun": {
+    "pid": 29856,
+    "started": "2026-11-24T07:34:47.2411651+01:00",
+    "exit": 1,
+    "finished": "2026-11-24T07:36:49.45691+01:00"
+  },
+  "libraryObjectInstances": 326,
+  "unchangedPublishedHashes": 22
+}

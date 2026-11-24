@@ -1,30 +1,29 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "ab51e0425ec40d203577e486052e64b44a55945f",
+  "head": "f340b643e40872391cc22315ded9837aeaf1308b",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M tools/audit/verify-basesrv-source-ownership.ps1",
-    " M tools/audit/verify-frontend-link-ownership.ps1",
-    "?? artifacts/build-migration/t484/s3-frontend-audit/",
-    "?? docs/etc/evidence/t484-s3-frontend-audit.md",
-    "?? tools/audit/native-source-graph.ps1"
+    " M tools/audit/verify-generated-input-stability.ps1",
+    " M tools/audit/verify-guest-memory-boundary.ps1",
+    "?? artifacts/build-migration/t484/s3-native-cache-audits/",
+    "?? docs/etc/evidence/t484-s3-native-cache-audits.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 146,
-    "unchanged": 64,
+    "changed": 147,
+    "unchanged": 63,
     "removed": 145
   },
   "disposition_counts": {
-    "migrated-delivered": 84,
+    "migrated-delivered": 85,
     "retained-native-declarative": 2,
     "retired-with-delivery-evidence": 145,
     "pending-producer-migration": 53,
     "retained-native-delegate": 14,
-    "requires-disposition-reconciliation": 50,
-    "retained-standalone-audit": 7
+    "requires-disposition-reconciliation": 47,
+    "retained-standalone-audit": 9
   },
   "existing_interpreted_candidates_with_command_hits": 158,
   "files": [
@@ -4076,10 +4075,12 @@
       "state": "changed",
       "current_sha256": "e74d45f90dc8024803cf94ae3f6c21354cee1208e93d630d0641d255b13c6c88",
       "revisions": [
+        "f340b643e40872391cc22315ded9837aeaf1308b",
         "50574aef23a4f2a978be16fc5cedeb28bb475447"
       ],
       "evidence": [
-        "docs/etc/evidence/t484-s3-basesrv-audits.md"
+        "docs/etc/evidence/t484-s3-basesrv-audits.md",
+        "docs/etc/evidence/t484-s3-frontend-audit.md"
       ],
       "completion": "retained-standalone-audit",
       "decision": {
@@ -4228,8 +4229,12 @@
       "stage": "S3",
       "state": "changed",
       "current_sha256": "9c78ab0a4df4ca2c08836ca3f866914d7e0b7a42400df62b3c37c2f13086f6db",
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "f340b643e40872391cc22315ded9837aeaf1308b"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-frontend-audit.md"
+      ],
       "completion": "retained-standalone-audit",
       "decision": {
         "evidence": "docs/etc/evidence/t484-s3-frontend-audit.md",
@@ -4242,26 +4247,34 @@
       "file": "tools/audit/verify-generated-input-stability.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "b4be462e85139c497759817aa2db59cc24e68fc9172258bd2a2a8c2cc3e2ba2a",
+      "current_sha256": "aa02c3b42741edc7ecafc53e670495412278f861a6592c5ebcbaff613102bd3a",
       "revisions": [
         "ce4fc0f9c828f549619f8d9f2e64f5494104888a"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s2-worker-cmake.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "migrated-delivered",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-native-cache-audits.md",
+        "status": "migrated-delivered",
+        "reason": "Two supported CMD producer passes preserve 11 images and generated input bytes/timestamps; all eight graphs no-op"
+      }
     },
     {
       "id": "B0224",
       "file": "tools/audit/verify-guest-memory-boundary.ps1",
       "stage": "S3",
-      "state": "unchanged",
-      "current_sha256": "5da1367aa2a96404d0eb807f67a6f529078aa904a342c3278d06538d6f3dc0bd",
+      "state": "changed",
+      "current_sha256": "cb2b2f15d2eaeb91034858e8296854ed284ee93a13928c6f24981d7ec181cca7",
       "revisions": [],
       "evidence": [],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-native-cache-audits.md",
+        "status": "retained-standalone-audit",
+        "reason": "Read-only compiler dependency check repaired to select real product objects; shared header and three negative controls pass"
+      }
     },
     {
       "id": "B0225",
@@ -4277,8 +4290,12 @@
         "docs/etc/evidence/t484-s2-hook-cmake.md",
         "docs/etc/evidence/t484-s2-native-family.md"
       ],
-      "completion": "requires-disposition-reconciliation",
-      "decision": null
+      "completion": "retained-standalone-audit",
+      "decision": {
+        "evidence": "docs/etc/evidence/t484-s3-native-cache-audits.md",
+        "status": "retained-standalone-audit",
+        "reason": "Read-only Ninja tools; eight current graphs and 326 A/B object instances pass"
+      }
     },
     {
       "id": "B0226",
@@ -6079,6 +6096,12 @@
     }
   ],
   "commits": {
+    "f340b643e40872391cc22315ded9837aeaf1308b": {
+      "subject": "T484 S3 P143 simplify native frontend ownership audit",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-frontend-audit.md"
+      ]
+    },
     "ab51e0425ec40d203577e486052e64b44a55945f": {
       "subject": "T484 S3 P142 reconcile standalone component audit",
       "evidence": [
@@ -9136,15 +9159,19 @@
       "file": "tools/audit/verify-generated-input-stability.ps1",
       "hits": [
         {
-          "line": 13,
-          "text": "$files=@('generated/softpc-embedded-roms.rc','generated/ntvdm-wow32-provider.def')"
+          "line": 2,
+          "text": "param([string]$NinjaExecutable='ninja')"
         },
         {
-          "line": 19,
-          "text": "& (Join-Path $BuildRoot 'msvc-x86.cmd') cmake -S (Join-Path $repo 'tools/build/worker') -B $BuildRoot"
+          "line": 5,
+          "text": "$native=Join-Path $repo 'build/.ninja'"
         },
         {
-          "line": 28,
+          "line": 15,
+          "text": "$files=@('msvc-x86-release/worker/generated/softpc-embedded-roms.rc',"
+        },
+        {
+          "line": 37,
           "text": "if($LASTEXITCODE -or $plan -notmatch 'ninja: no work to do\\.'){"
         }
       ]
@@ -9154,7 +9181,19 @@
       "file": "tools/audit/verify-guest-memory-boundary.ps1",
       "hits": [
         {
-          "line": 6,
+          "line": 13,
+          "text": "$node=$pending.Pop()"
+        },
+        {
+          "line": 14,
+          "text": "if($selected.Add($node) -and $graph.ContainsKey($node)){"
+        },
+        {
+          "line": 15,
+          "text": "foreach($input in $graph[$node]){$pending.Push($input)}"
+        },
+        {
+          "line": 23,
           "text": "$output=@(& ninja -C $root -t deps $target 2>&1)"
         }
       ]

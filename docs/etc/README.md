@@ -1770,3 +1770,5 @@ post-publication targeted checks.
 - [T484 S3 component audit](evidence/t484-s3-component-audit.md): current native static contracts; obsolete header assertion removed.
 
 - [T484 S3 frontend ownership audit](evidence/t484-s3-frontend-audit.md): native product closures, legal imports and shared graph reader.
+
+- [T484 S3 native cache and boundary audits](evidence/t484-s3-native-cache-audits.md): two CMD cache passes and current compiler dependency contracts.

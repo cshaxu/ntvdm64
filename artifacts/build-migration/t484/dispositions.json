@@ -1102,5 +1102,20 @@
     "evidence": "docs/etc/evidence/t484-s3-frontend-audit.md",
     "status": "retained-standalone-audit",
     "reason": "11 native source closures and 22 contamination controls pass; shared parser excludes legal image imports; obsolete combined-graph snapshots removed"
+  },
+  "tools/audit/verify-generated-input-stability.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-native-cache-audits.md",
+    "status": "migrated-delivered",
+    "reason": "Two supported CMD producer passes preserve 11 images and generated input bytes/timestamps; all eight graphs no-op"
+  },
+  "tools/audit/verify-guest-memory-boundary.ps1": {
+    "evidence": "docs/etc/evidence/t484-s3-native-cache-audits.md",
+    "status": "retained-standalone-audit",
+    "reason": "Read-only compiler dependency check repaired to select real product objects; shared header and three negative controls pass"
+  },
+  "tools/audit/verify-library-build-boundary.py": {
+    "evidence": "docs/etc/evidence/t484-s3-native-cache-audits.md",
+    "status": "retained-standalone-audit",
+    "reason": "Read-only Ninja tools; eight current graphs and 326 A/B object instances pass"
   }
 }

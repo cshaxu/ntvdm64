@@ -1,32 +1,42 @@
 [CmdletBinding()]
-param(
-    [Parameter(Mandatory)][string]$BuildRoot,
-    [Parameter(Mandatory)][string]$NinjaExecutable
-)
+param([string]$NinjaExecutable='ninja')
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
-$BuildRoot=(Resolve-Path -LiteralPath $BuildRoot).Path
-if(!$BuildRoot.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){
-    throw 'Use a prebuilt repository build cache'
-}
-$targets=@('run16.exe','ntcon.exe','ntsrv.exe','ntvdm.exe','ntmon.exe','VDMREDIR.dll')
-$files=@('generated/softpc-embedded-roms.rc','generated/ntvdm-wow32-provider.def')
+$native=Join-Path $repo 'build/.ninja'
+$products=@(
+    @('msvc-x86-release/worker','ntvdm.exe','VCDEX.DLL','VDMREDIR.dll','nthook32.dll'),
+    @('msvc-x86-release/wow32','wow32.dll'),
+    @('msvc-x64-release/launcher','run16.exe'),
+    @('msvc-x64-release/frontend','ntcon.exe'),
+    @('msvc-x64-release/worker','ntvwm.exe'),
+    @('msvc-x64-release/monitor','ntmon.exe'),
+    @('msvc-x64-release/service','ntsrv.exe'),
+    @('msvc-x64-release/hook','nthook64.dll'))
+$files=@('msvc-x86-release/worker/generated/softpc-embedded-roms.rc',
+    'msvc-x86-release/worker/generated/ntvdm-wow32-provider.def')
+foreach($product in $products){foreach($target in $product[1..($product.Count-1)]){
+    $files+=($product[0]+'/'+$target)
+}}
 $before=@($files | ForEach-Object {
-    $path=Join-Path $BuildRoot $_
+    $path=Join-Path $native $_
     [pscustomobject]@{Path=$path;Hash=(Get-FileHash $path).Hash;Ticks=(Get-Item $path).LastWriteTimeUtc.Ticks}
 })
 for($iteration=0;$iteration -lt 2;$iteration++){
-    & (Join-Path $BuildRoot 'msvc-x86.cmd') cmake -S (Join-Path $repo 'tools/build/worker') -B $BuildRoot
-    if($LASTEXITCODE){throw 'Graph configuration failed'}
+    # The test drives the supported producer; it owns no compiler/configure recipe.
+    & (Join-Path $repo 'tools/build.cmd')
+    if($LASTEXITCODE){throw 'CMD production build failed'}
     foreach($entry in $before){
         if((Get-FileHash $entry.Path).Hash -ne $entry.Hash -or
             (Get-Item $entry.Path).LastWriteTimeUtc.Ticks -ne $entry.Ticks){
-            throw ('Unchanged generated input was rewritten: '+$entry.Path)
+            throw ('Unchanged input/image was rewritten: '+$entry.Path)
         }
     }
-    $plan=(& $NinjaExecutable -C $BuildRoot -n @targets 2>&1 | Out-String)
-    if($LASTEXITCODE -or $plan -notmatch 'ninja: no work to do\.'){
-        throw ('Prebuilt production graph is not a no-op: '+$plan)
+    foreach($product in $products){
+        $targets=$product[1..($product.Count-1)]
+        $plan=(& $NinjaExecutable -C (Join-Path $native $product[0]) -n @targets 2>&1 | Out-String)
+        if($LASTEXITCODE -or $plan -notmatch 'ninja: no work to do\.'){
+            throw ('Prebuilt production graph is not a no-op: '+$plan)
+        }
     }
 }
-Write-Output 'PASS two graph generations preserve ROM/DEF bytes and timestamps, with no production rebuild'
+'PASS two CMD builds preserve ROM/DEF and 11 image bytes/timestamps; all eight graphs are no-op'
