@@ -10,13 +10,12 @@ foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[
 try{
  & "$repo/tools/build-fixtures.cmd" x86 guest-redir > "$out/assemble.txt" 2>&1
  if($LASTEXITCODE){throw 'Existing independent probe build failed'}
- Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/redir/VDMDLC.COM" -Destination "$out/VDMDLC.COM"
- $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
+ $probe="$repo/build/.ninja/fixtures-x86/guest-probes/redir/VDMDLC.COM"
+ $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -TestFiles @($probe)
  $scope=New-IsolatedPackageScope $runtime;$binary=Get-PackageBinaryRoot $runtime
  # Do not use this no-provider witness on a configured DLC host.
  foreach($p in @("$binary/DLCAPI.DLL","$env:WINDIR/SysWOW64/DLCAPI.DLL")){if(Test-Path $p){throw 'DLC provider present; no-provider assumption invalid'}}
- $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory -Force $tests
- Copy-Item "$out/VDMDLC.COM" "$tests/VDMDLC.COM"
+ $tests=Join-Path $runtime 'tests'
  $env:TEMP=$runtime;$env:TMP=$runtime;$env:PATH="$binary;"+$env:SystemRoot+'\System32';$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
  $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path);$start.UseShellExecute=$false;$start.CreateNoWindow=$true
  foreach($arg in @("$binary/run16.exe",$tests,"$out/observer.txt",'--wait',"$tests/VDMDLC.COM",'--observation-timeout-ms','30000')){$start.ArgumentList.Add($arg)}
@@ -26,7 +25,7 @@ try{
  if($process.ExitCode -or $observation -notmatch 'result=exited' -or $observation -notmatch 'exit=0x00000000'){throw 'DLC witness did not exit successfully; inspect actual launcher status'}
  $console=[IO.File]::ReadAllText("$out/observer.txt.console.txt").Replace([string][char]0,'')
  if($console -notmatch 'DLC-REAL-RESULT=\s*07'){throw 'Expected original provider-unavailable result missing'}
- $inputs=@($source,"$out/VDMDLC.COM","$binary/VDMREDIR.DLL")|Get-FileHash|Select-Object Path,Hash
+ $inputs=@("$repo/test/observation/vdmredir_dlc_probe.asm",$probe,"$binary/VDMREDIR.DLL")|Get-FileHash|Select-Object Path,Hash
  @{result='pass';status='07';meaning='Original loader boundary only; no DLC worker or adapter execution';inputs=$inputs}|ConvertTo-Json -Depth 5|Set-Content "$out/result.json"
  'PASS real DOS DLC returns original unavailable-provider status 07'
 }finally{

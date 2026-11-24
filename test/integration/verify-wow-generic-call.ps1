@@ -13,16 +13,14 @@ $null=New-Item -ItemType Directory $root
 & "$repo/tools/build-fixtures.cmd" x86 "wow-generic-$Case" *> "$root/build.txt"
 if($LASTEXITCODE){throw 'Generic probe native build failed'}
 $cache="$repo/build/.ninja/fixtures-x86/guest-probes"
-Copy-Item -LiteralPath "$cache/mine/generic.exe" -Destination "$root/GENPROBE.EXE"
-Copy-Item -LiteralPath "$cache/generic-$Case/GENHOST.DLL" -Destination "$root/GENHOST.DLL"
+& "$repo/tools/prepare-test-inputs.cmd" $root "$cache/mine/generic.exe" GENPROBE.EXE "$cache/generic-$Case/GENHOST.DLL" GENHOST.DLL
+if($LASTEXITCODE){throw 'Generic input preparation failed'}
 . "$repo/test/observation/isolated_package_cleanup.ps1"
-$runtime=New-PhysicalRuntimeStage $PackageRoot
+$runtime=New-PhysicalRuntimeStage $PackageRoot -TestFiles @("$root/GENPROBE.EXE","$root/GENHOST.DLL")
 $scope=New-IsolatedPackageScope $runtime
 $saved=@{}
 foreach($n in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$n]=[Environment]::GetEnvironmentVariable($n)}
 try {
- $null=New-Item -ItemType Directory "$runtime/tests" -Force
- Copy-Item "$root/GENPROBE.EXE","$root/GENHOST.DLL" "$runtime/tests"
  $env:PATH="$runtime/system32;"+$env:SystemRoot+'\System32'
  $env:TEMP=$runtime;$env:TMP=$runtime;$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
  & $Observer "$runtime/system32/run16.exe" "$runtime/tests" "$root/observer.txt" --wait "$runtime/tests/GENPROBE.EXE" --observation-timeout-ms 30000

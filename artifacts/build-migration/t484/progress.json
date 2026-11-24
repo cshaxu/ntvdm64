@@ -1,14 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "def8e5946b4fbe1872fa0f26b24585a5bac40e29",
+  "head": "ce0b2bd2430f452f4388f20d385d6e3d2561977e",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/verify-dpmi-debug-context.ps1",
-    " M test/integration/verify-dpmi-int21-state.ps1",
-    " M test/integration/verify-xms-block-guest.ps1",
-    "?? docs/etc/evidence/t484-s4-dpmi-xms-preparation.md"
+    " M test/integration/verify-dlc-provider-boundary.ps1",
+    " M test/integration/verify-wow-generic-call.ps1",
+    "?? docs/etc/evidence/t484-s4-dlc-generic-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6617,6 +6616,12 @@
     }
   ],
   "commits": {
+    "ce0b2bd2430f452f4388f20d385d6e3d2561977e": {
+      "subject": "M0 T484 S4 P15: finish DPMI and XMS probe preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-dpmi-xms-preparation.md"
+      ]
+    },
     "def8e5946b4fbe1872fa0f26b24585a5bac40e29": {
       "subject": "M0 T484 S4 P14: prepare idle and DDEML test inputs through CMD",
       "evidence": [

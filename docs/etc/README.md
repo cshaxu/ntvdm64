@@ -1931,3 +1931,5 @@ post-publication targeted checks.
 - [T484 S4 device test input preparation](evidence/t484-s4-device-inputs.md).
 - [T484 S4 keyboard test preparation](evidence/t484-s4-keyboard-preparation.md).
 - [T484 S4 print preparation](evidence/t484-s4-print-preparation.md).
+
+- [T484 S4 DLC and generic-call preparation](evidence/t484-s4-dlc-generic-preparation.md).

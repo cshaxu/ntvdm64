@@ -29,6 +29,8 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
+S4 P16 completes DLC and generic-call preparation; [evidence](../etc/evidence/t484-s4-dlc-generic-preparation.md) records cached full build, real DLC status07 and both generic cases passing, and unchanged dual-publication hashes. Frozen census343/355,12 pending; supplemental pending21 to19.
+
 S4 P15 completes three supplemental DPMI/XMS preparation chains; [evidence](../etc/evidence/t484-s4-dpmi-xms-preparation.md) records real debug, four INT21 routes and four XMS normal/fault cases, cached full build and unchanged dual publication. Frozen census343/355,12 pending; supplemental pending24→21.
 
 S4 P14 completes idle and DDEML input preparation through shared CMD copying and physical staging; [evidence](../etc/evidence/t484-s4-idle-ddeml-preparation.md) records cached full build, real guest results, prebuilt identity/rejection checks and unchanged dual publication. Census343/355,12 pending;24 supplemental chains remain.
@@ -78,7 +80,7 @@ S4 P3 replaces addon utility publication with CMD; [publication evidence](../etc
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **343/355 disposed,12 pending**, plus21 supplemental
+Current census: **343/355 disposed,12 pending**, plus19 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;

@@ -1356,11 +1356,7 @@
     "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
     "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
   },
-  "test/integration/verify-dlc-provider-boundary.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
-    "evidence": "docs/etc/evidence/t484-s3-fixed-probes.md"
-  },
+  "test/integration/verify-dlc-provider-boundary.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P16 uses existing CMD input preparation and physical staging; real DLC status07 and both generic-call cases pass.","evidence":"docs/etc/evidence/t484-s4-dlc-generic-preparation.md"},
   "test/integration/verify-mouse-state-checksum.ps1": {
     "status": "supplemental-native-producer-pending-staging",
     "reason": "Fixed authored probe generation uses shared CMD graph; runtime assertions retained. Shared physical staging remains pending; not a new guest runtime acceptance.",
@@ -1399,11 +1395,7 @@
     "reason": "Expected uint32 enumeration status is passed through checked CMD/CMake configuration; source/flags preserved, runtime assertions unchanged. Shared staging remains.",
     "evidence": "docs/etc/evidence/t484-s3-remote-probe.md"
   },
-  "test/integration/verify-wow-generic-call.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "NE image and normal/cdecl host DLL use shared CMD graph; both real Win16 callbacks pass three phases and release counts. Shared physical staging remains pending.",
-    "evidence": "docs/etc/evidence/t484-s3-generic-native.md"
-  },
+  "test/integration/verify-wow-generic-call.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P16 uses existing CMD input preparation and physical staging; real DLC status07 and both generic-call cases pass.","evidence":"docs/etc/evidence/t484-s4-dlc-generic-preparation.md"},
   "test/build/verify-win31-profile.ps1": {
     "status": "supplemental-native-producer-delivered",
     "reason": "P194 removes the already-completed migration-only direct NASM comparison recipe; retained CMD output/no-op/invalid-path checks pass for eight images and two paths. P182 byte-comparison evidence remains archived.",
