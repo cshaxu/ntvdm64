@@ -30,6 +30,7 @@ guest_probe(api PALTEST.EXE ../integration/wow_palette_guest.asm)
 guest_probe(api FCBTEST.COM dem_fcb_probe.asm)
 guest_probe(api MSTATE.COM t448_mouse_checksum_probe.asm)
 guest_probe(api CURSOR.COM vga-cursor-registers.asm)
+guest_probe(api TABTEST.EXE ../../artifacts/mvdm-audit/shard-2/tabstop-guest-snapshot.asm)
 get_property(api_outputs GLOBAL PROPERTY guest_api)
 add_custom_target(guest-api DEPENDS ${api_outputs})
 

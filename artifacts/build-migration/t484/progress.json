@@ -1,14 +1,13 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f8ef6ca66103ae319b7a62b20e00780ebb4ba0e5",
+  "head": "b0222a79572b146d9749ed7c8b9ee981cf7bcbb4",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/support/wow-guest-probe.ps1",
-    " M test/integration/verify-dem-pressure.ps1",
-    " M test/integration/verify-mouse-state-checksum.ps1",
-    "?? docs/etc/evidence/t484-s4-mouse-dem-wow-preparation.md"
+    " M test/integration/verify-wow-edit-tabstop-guest.ps1",
+    " M tools/build/fixtures/guest-probes.cmake",
+    "?? docs/etc/evidence/t484-s4-tabstop-logon-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6617,6 +6616,12 @@
     }
   ],
   "commits": {
+    "b0222a79572b146d9749ed7c8b9ee981cf7bcbb4": {
+      "subject": "M0 T484 S4 P17: consolidate mouse DEM and WOW preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-mouse-dem-wow-preparation.md"
+      ]
+    },
     "f8ef6ca66103ae319b7a62b20e00780ebb4ba0e5": {
       "subject": "M0 T484 S4 P16: finish DLC and generic-call preparation",
       "evidence": [

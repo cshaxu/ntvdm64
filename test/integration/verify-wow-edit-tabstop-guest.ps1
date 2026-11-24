@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$ProbePath,
+param([string]$ProbePath,
       [Parameter(Mandatory)][string]$OutputRoot,
       [Parameter(Mandatory)][string]$PackageRoot,
       [Parameter(Mandatory)][string]$Observer,
@@ -13,14 +13,21 @@ if(!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgn
 $null=New-Item -ItemType Directory -Path $out
 function Phase($x){ [IO.File]::AppendAllText((Join-Path $out 'tabstop-snapshot.phase.txt'),([DateTime]::UtcNow.ToString('o')+' '+$x+"`n")) }
 Phase 'start'
+if(!$ProbePath){
+ & "$repo/tools/build-fixtures.cmd" x86 guest-api *> "$out/guest-build.log"
+ if($LASTEXITCODE){throw 'Tab-stop guest build failed'}
+ $ProbePath="$repo/build/.ninja/fixtures-x86/guest-probes/api/TABTEST.EXE"
+}
 $probe=(Resolve-Path -LiteralPath $ProbePath).Path
+& "$repo/tools/prepare-test-inputs.cmd" $out $probe TABTEST.EXE
+if($LASTEXITCODE){throw 'Tab-stop input preparation failed'}
 & "$repo/tools/build-fixtures.cmd" x64 tabstop-reader *> "$out/reader-build.log"
 if($LASTEXITCODE){throw 'Tab-stop reader build failed'}
 [void][Reflection.Assembly]::LoadFrom("$repo/build/.ninja/fixtures-x64/tabstop-reader.dll")
 # Bind the raw build DLL to the staged manifest before using its map RVA.
 $mapText=Get-Content $WowMap -Raw
 $baseMatch=[regex]::Match($mapText,'Preferred load address is ([0-9A-Fa-f]+)')
-$symbol=[regex]::Match($mapText,'(?m)^\s*[0-9A-Fa-f]+:[0-9A-Fa-f]+\s+_W32WordBreakProc\s+([0-9A-Fa-f]+)\s+wuman.obj')
+$symbol=[regex]::Match($mapText,'(?m)^\s*[0-9A-Fa-f]+:[0-9A-Fa-f]+\s+_W32WordBreakProc\s+([0-9A-Fa-f]+)\s+wuman(?:\.c)?\.obj\s*$')
 if(!$baseMatch.Success -or !$symbol.Success){throw 'Expected exact word-break provider map'}
 $rva=[Convert]::ToInt64($symbol.Groups[1].Value,16)-[Convert]::ToInt64($baseMatch.Groups[1].Value,16)
 $manifest=@(Get-Content "$PackageRoot/product-system32-manifest.json" -Raw|ConvertFrom-Json)
@@ -31,12 +38,11 @@ $runtime=$null;$scope=$null;$proc=$null;$saved=@{}
 foreach($name in @('TEMP','TMP','PATH','MVDM_OBSERVER_PRIVATE_DESKTOP')){$saved[$name]=[Environment]::GetEnvironmentVariable($name)}
 try {
  Phase 'before-stage'
- $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity
+ $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path -FreshPackageIdentity -TestFiles @("$out/TABTEST.EXE")
  Phase ('stage='+$runtime)
  $scope=New-IsolatedPackageScope $runtime
  Phase 'scope-ready'
- $tests=Join-Path $runtime 'tests';$null=New-Item -ItemType Directory -Path $tests -Force
- Copy-Item -LiteralPath $probe -Destination (Join-Path $tests 'TABTEST.EXE')
+ $tests=Join-Path $runtime 'tests'
  $env:TEMP=$runtime;$env:TMP=$runtime;$env:PATH="$(Get-PackageBinaryRoot $runtime);$env:SystemRoot\System32";$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
  $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
  $start.UseShellExecute=$false;$start.CreateNoWindow=$true

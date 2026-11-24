@@ -1389,16 +1389,8 @@
     "reason": "P194 removes the already-completed migration-only direct NASM comparison recipe; retained CMD output/no-op/invalid-path checks pass for eight images and two paths. P182 byte-comparison evidence remains archived.",
     "evidence": "docs/etc/evidence/t484-s3-supplemental-producers.md"
   },
-  "test/integration/verify-wow-edit-tabstop-guest.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "P195 extracts the three existing P/Invoke declarations unchanged into the shared CMD/CMake C# target; bounded read/failure/cache checks pass. Original guest-stage assertions unchanged, no new guest runtime pass. Shared staging remains S4.",
-    "evidence": "docs/etc/evidence/t484-s3-tabstop-reader.md"
-  },
-  "test/integration/verify-wow-logon-gameplay.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "P194 replaces duplicate C# environment compilation with the existing native current-token reader. Actual preparation returns the full block; gameplay assertions unchanged. Shared staging remains, no new gameplay acceptance claimed.",
-    "evidence": "docs/etc/evidence/t484-s3-supplemental-producers.md"
-  },
+  "test/integration/verify-wow-edit-tabstop-guest.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P18 completes tab-stop default native guest input and CMD staging; logon caller already uses shared CMD staging. Real tab-stop records/snapshots and isolated logon gameplay pass.","evidence":"docs/etc/evidence/t484-s4-tabstop-logon-preparation.md"},
+  "test/integration/verify-wow-logon-gameplay.ps1": {"status":"supplemental-native-producer-delivered","reason":"S4 P18 completes tab-stop default native guest input and CMD staging; logon caller already uses shared CMD staging. Real tab-stop records/snapshots and isolated logon gameplay pass.","evidence":"docs/etc/evidence/t484-s4-tabstop-logon-preparation.md"},
   "test/observation/inspect-ne-classification.ps1": {
     "status": "supplemental-retired",
     "reason": "P196 retires obsolete diagnostics or consolidates retained host contracts through CMD/CMake; five font cases and public metafile roundtrip pass. No product or original guest changes.",
