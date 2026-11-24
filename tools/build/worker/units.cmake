@@ -207,6 +207,11 @@ worker_unit("obj/tests/delivery_journal.obj" "${NTVDM_REPO}/test/broker/delivery
 worker_link("delivery-journal-test.exe" "/nologo /out:$out /map:delivery-journal-test.exe.map"
   "libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib"
   INPUTS "obj/tests/delivery_journal.obj" "broker-transport.lib")
+worker_unit("obj/tests/package_identity.obj" "${NTVDM_REPO}/test/broker/package_identity_test.c" "${profile_42}")
+worker_link("package-identity-test.exe" "/nologo /out:$out"
+  "libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib advapi32.lib"
+  INPUTS "obj/tests/package_identity.obj" "common-base-srv-transport.lib")
+worker_group("package-identity" "package-identity-test.exe")
 worker_group("broker-protocol-fixtures" "vdm-protocol-test.exe" "delivery-journal-test.exe")
 worker_group("opennt-broker-owners" "opennt-base-client.lib" "opennt-base-server.lib" "opennt-base-bindings.lib" "common-base-srv-bindings.lib" "broker-transport.lib" "common-base-srv-transport.lib")
 worker_unit("obj/tests/base_reservation_test.obj" "${NTVDM_REPO}/test/adapter-basesrv/base_reservation_test.c" "${profile_43}")

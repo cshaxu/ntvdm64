@@ -1,34 +1,32 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "0cbd1b90b35814860f80c8bf891398676a826ded",
+  "head": "3d3beb81b545666b52a6164e6cdb244908b3ccb7",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    "D  test/integration/native_service_build_inputs.ps1",
-    " M test/observation/test-native-monitor-package-inputs.ps1",
-    " M test/observation/test-native-worker-package-inputs.ps1",
-    " M test/observation/verify-native-launcher-abi.ps1",
-    "D  tools/build/Stage-NativeWorkerImage.ps1",
-    "?? artifacts/build-migration/t484/s3-native-import-retirement/",
-    "?? docs/etc/evidence/t484-s3-native-import-retirement.md"
+    " M tools/build-fixtures.cmd",
+    " M tools/build/Set-PackageIdentity.ps1",
+    " M tools/build/worker/units.cmake",
+    "?? artifacts/build-migration/t484/s3-package-identity/",
+    "?? docs/etc/evidence/t484-s3-package-identity.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
-    "changed": 155,
-    "unchanged": 35,
+    "changed": 156,
+    "unchanged": 34,
     "removed": 165
   },
   "disposition_counts": {
-    "migrated-delivered": 87,
+    "migrated-delivered": 88,
     "retained-native-declarative": 3,
     "retired-with-delivery-evidence": 165,
-    "pending-producer-migration": 53,
+    "pending-producer-migration": 52,
     "retained-native-delegate": 14,
     "requires-disposition-reconciliation": 17,
     "retained-standalone-audit": 16
   },
-  "existing_interpreted_candidates_with_command_hits": 145,
+  "existing_interpreted_candidates_with_command_hits": 146,
   "files": [
     {
       "id": "B0001",
@@ -321,10 +319,11 @@
       "current_sha256": "78aecd546db403aa96ee176ccc29f847ee05a30ff20dd9850ff184c09500ffd5",
       "revisions": [],
       "evidence": [],
-      "completion": "pending-producer-migration",
+      "completion": "migrated-delivered",
       "decision": {
-        "reason": "Calls interpreted package identity writer; S4 caller migration required",
-        "status": "pending-producer-migration"
+        "status": "migrated-delivered",
+        "reason": "Unchanged identity contract uses CMD/native fixture and native resource writer; positive/mixed/missing cases pass",
+        "evidence": "docs/etc/evidence/t484-s3-package-identity.md"
       }
     },
     {
@@ -6085,8 +6084,8 @@
       "id": "B0337",
       "file": "tools/build/Set-PackageIdentity.ps1",
       "stage": "S4",
-      "state": "unchanged",
-      "current_sha256": "e1498def7677dd3a9f63d9b6936749613a11671aef905bb4e05ac34a23985916",
+      "state": "changed",
+      "current_sha256": "073b52189d03831411f9949620e305ceb836302f4ba77e52172e7486b44febf6",
       "revisions": [],
       "evidence": [],
       "completion": "requires-disposition-reconciliation",
@@ -6138,8 +6137,12 @@
       "stage": "S2",
       "state": "removed",
       "current_sha256": null,
-      "revisions": [],
-      "evidence": [],
+      "revisions": [
+        "3d3beb81b545666b52a6164e6cdb244908b3ccb7"
+      ],
+      "evidence": [
+        "docs/etc/evidence/t484-s3-native-import-retirement.md"
+      ],
       "completion": "retired-with-delivery-evidence",
       "decision": {
         "status": "retired-with-delivery-evidence",
@@ -6339,6 +6342,12 @@
     }
   ],
   "commits": {
+    "3d3beb81b545666b52a6164e6cdb244908b3ccb7": {
+      "subject": "T484 S3 P155 retire unused native image import wrapper",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-native-import-retirement.md"
+      ]
+    },
     "0cbd1b90b35814860f80c8bf891398676a826ded": {
       "subject": "T484 S3 P154 remove retired projections and one-shot archive updater",
       "evidence": [
@@ -9670,6 +9679,16 @@
         {
           "line": 133,
           "text": "$generated = $item.Extension.ToLowerInvariant() -in @('.obj','.o','.lib','.a','.pdb','.map','.res','.ilk','.exp','.tlog','.log','.txt','.json','.jsonl','.csv','.tsv','.xml','.html','.png','.jpg','.bmp','.etl','.dmp','.ninja','.cmd','.bat','.ps1','.mjs','.js','.py','.c','.h','.cpp','.def','.rsp','.exe','.dll','.manifest','.err','.out')"
+        }
+      ]
+    },
+    {
+      "id": "B0337",
+      "file": "tools/build/Set-PackageIdentity.ps1",
+      "hits": [
+        {
+          "line": 8,
+          "text": "$writer=Join-Path $PSScriptRoot '../../build/.ninja/build-tools/ntvdm-package-id.exe'"
         }
       ]
     },

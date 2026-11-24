@@ -1,0 +1,16 @@
+{
+  "fixture": {
+    "finished": "2026-11-24T08:39:06.8008684+01:00",
+    "pid": 19540,
+    "exit": 0,
+    "started": "2026-11-24T08:38:37.5808743+01:00"
+  },
+  "fixture_output": "identity=b99dd7ed1f79b34bac42819e248c2fae endpoint=ntvdm-basesrv-6-00000001-22925a2d-b99dd7ed1f79b34bac42819e248c2fae\r\nidentity=905f62114bde224094afe9cf2132fa09 endpoint=ntvdm-basesrv-6-00000001-22925a2d-905f62114bde224094afe9cf2132fa09\r\nPASS separate package IDs, mixed-component rejection, missing-resource rejection",
+  "negative_output": "PASS writer negative and unchanged input: empty\r\nPASS writer negative and unchanged input: missing\r\nPASS writer negative and unchanged input: locked",
+  "negatives_build_identity": {
+    "finished": "2026-11-24T08:40:33.3381918+01:00",
+    "pid": 21732,
+    "exit": 0,
+    "started": "2026-11-24T08:39:34.6781952+01:00"
+  }
+}

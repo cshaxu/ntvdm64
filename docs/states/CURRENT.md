@@ -66,6 +66,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P155 native import retirement](../etc/evidence/t484-s3-native-import-retirement.md) | Unused image-import wrapper/self-test removed; current package/ABI cases retained; static syntax/caller checks pass. |
 
+| [P156 package identity](../etc/evidence/t484-s3-package-identity.md) | Native fixture/writer pass separate/mixed/missing identities and writer negatives; cached full/11/22 hashes unchanged. Publication orchestration remains S4. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

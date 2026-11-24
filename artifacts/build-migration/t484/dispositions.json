@@ -106,10 +106,6 @@
     "reason": "Calls physical runtime staging and Set-PackageIdentity.ps1; S4 caller migration required",
     "status": "pending-producer-migration"
   },
-  "test/broker/verify-package-identity.ps1": {
-    "reason": "Calls interpreted package identity writer; S4 caller migration required",
-    "status": "pending-producer-migration"
-  },
   "test/broker/verify_ntsrv_idle.mjs": {
     "reason": "Builds idle test/client via CL and links; runtime assertions may remain",
     "status": "pending-producer-migration"
@@ -1267,5 +1263,10 @@
     "status": "retired-with-delivery-evidence",
     "reason": "Native images link directly; old import wrapper only had self-tests, removed with import-only checks; actual ABI/package checks retained",
     "evidence": "docs/etc/evidence/t484-s3-native-import-retirement.md"
+  },
+  "test/broker/verify-package-identity.ps1": {
+    "status": "migrated-delivered",
+    "reason": "Unchanged identity contract uses CMD/native fixture and native resource writer; positive/mixed/missing cases pass",
+    "evidence": "docs/etc/evidence/t484-s3-package-identity.md"
   }
 }
