@@ -15,7 +15,6 @@ variants = {
     "exception": ["dpmi_exception_trace"],
     "dpmi": ["dpmi_dispatch_trace"],
     "dpmi-lifecycle": ["dpmi_dispatch_trace"],
-    "pm-allocation-failure": ["dpmi_pm_allocation_failure"],
     "dpmi-pointer": ["dpmi_pointer_trace"],
     "dpmi-ioctl": ["dpmi_ioctl_boundary"],
     "dpmi-xmem-failure": ["dpmi_xmem_failure", "dpmi_dispatch_trace"],

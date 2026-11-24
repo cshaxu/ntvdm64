@@ -82,7 +82,6 @@ worker_trace(thread-exit compat-worker-thread.lib obj/compat/thread_start.obj wo
 worker_trace(exception original-softpc-host-roots.lib obj/host/nt_inthk.obj dpmi_exception_trace)
 worker_trace(dpmi original-mvdm-dpmi32.lib obj/dpmi/dpmi32.obj dpmi_dispatch_trace)
 worker_trace(dpmi-lifecycle original-mvdm-dpmi32.lib obj/dpmi/dpmi32.obj dpmi_dispatch_trace DPMI_TRACE_LIFECYCLE_ONLY)
-worker_trace(pm-allocation-failure original-mvdm-dpmi32.lib obj/dpmi/dpmiint.obj dpmi_pm_allocation_failure)
 worker_trace(dpmi-pointer original-mvdm-dpmi32.lib obj/dpmi/int21map.obj dpmi_pointer_trace)
 worker_trace(dpmi-ioctl original-mvdm-dpmi32.lib obj/dpmi/int21map.obj dpmi_ioctl_boundary)
 worker_trace(dpmi-xmem-failure original-mvdm-dpmi32.lib obj/dpmi/xmem.obj dpmi_xmem_failure)

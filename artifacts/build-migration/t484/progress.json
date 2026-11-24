@@ -1,13 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "c8650b6514d604a529e5c1206a08db0e956ecc81",
+  "head": "5e59c8ebafe9fda492e4c4e7446f9997d50debe1",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M tools/audit/Verify-T420S37OemGuest.ps1",
+    " M test/build/test-worker-diagnostics.py",
+    " D test/observation/dpmi_pm_allocation_failure.c",
+    " M tools/audit/Verify-T420S38DpmiFatal.ps1",
     " M tools/build/fixtures/guest-probes.cmake",
-    "?? docs/etc/evidence/t484-s4-oem-preparation.md"
+    " M tools/build/worker/diagnostic-tests.cmake",
+    "?? docs/etc/evidence/t484-s4-fatal-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6618,6 +6621,12 @@
     }
   ],
   "commits": {
+    "5e59c8ebafe9fda492e4c4e7446f9997d50debe1": {
+      "subject": "M0 T484 S4 P22: complete OEM guest CMD preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-oem-preparation.md"
+      ]
+    },
     "c8650b6514d604a529e5c1206a08db0e956ecc81": {
       "subject": "M0 T484 S4 P21: finish cursor preparation and repair observation owner",
       "evidence": [

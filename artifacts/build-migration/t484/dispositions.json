@@ -1425,9 +1425,9 @@
     "evidence": "docs/etc/evidence/t484-s4-oem-preparation.md"
   },
   "tools/audit/Verify-T420S38DpmiFatal.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "P198 retires the sealed Win1.01 Z:-mapped investigation chain; retained OEM/fatal C# bodies use shared native CMD compilation unchanged. Host interop checks pass; guest staging/acceptance remains explicitly pending.",
-    "evidence": "docs/etc/evidence/t484-s3-final-managed-producers.md"
+    "status": "supplemental-native-producer-delivered",
+    "reason": "P23 moves fatal probe preparation to existing CMD alias/staging owners; eight actual 16/32-bit direct/nested Terminate/Ignore cases pass. Retires PM allocation injection, its diagnostic target and exclusive options because commit74344f75b removed the intercepted product allocation.",
+    "evidence": "docs/etc/evidence/t484-s4-fatal-preparation.md"
   },
   "test/adapter-mvdm-host-out/wow/verify_clipboard_format_ownership.py": {
     "status": "supplemental-native-producer-delivered",

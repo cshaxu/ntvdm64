@@ -3,41 +3,44 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$Probe,
     [Parameter(Mandatory)][string]$LogPrefix,
-    [ValidatePattern('^[0-9A-F]{8}$')][string]$FaultIp,
-    [string]$PmAllocationLog,
-    [switch]$AllocationIgnore,
-    [string]$PackageRoot = 'V:\D38TRACE',
-    [string]$LogRoot = 'O:\winnt\logs',
+    [Parameter(Mandatory)][ValidatePattern('^[0-9A-F]{8}$')][string]$FaultIp,
+    [Parameter(Mandatory)][string]$PackageRoot,
+    [string]$LogRoot,
     [switch]$Nested,
     [switch]$IgnoreFirst
 )
 $ErrorActionPreference = 'Stop'
-if ($AllocationIgnore -and !$PmAllocationLog) { throw 'AllocationIgnore requires allocation injection' }
-if ($PmAllocationLog) {
-    if ($FaultIp -or $IgnoreFirst) { throw 'Allocation failure is separate from GP/Ignore verification' }
-    $expectedDialog = [regex]::Escape('The memory resources needed by NTVDM could not be allocated.')
-    if (Test-Path -LiteralPath $PmAllocationLog) { throw 'Use a fresh allocation injection log' }
-} else {
-    if (!$FaultIp) { throw 'FaultIp is required for GP verification' }
-    $expectedDialog = "X#=0D, CS=[0-9A-F]{4} IP=$FaultIp"
-}
+$expectedDialog = "X#=0D, CS=[0-9A-F]{4} IP=$FaultIp"
 $Observer = (Resolve-Path -LiteralPath $Observer).Path
 $Probe = (Resolve-Path -LiteralPath $Probe).Path
 $PackageRoot = (Resolve-Path -LiteralPath $PackageRoot).Path
 if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid log prefix' }
+$repo=(Resolve-Path "$PSScriptRoot/../..").Path
+. "$repo/test/observation/isolated_package_cleanup.ps1"
+$out=Join-Path $repo "build/dpmi-fatal-$LogPrefix"
+if(Test-Path -LiteralPath $out){throw 'Use a fresh prefix'}
+& "$repo/tools/prepare-test-inputs.cmd" $out $Probe D38F.COM
+if($LASTEXITCODE){throw 'DPMI probe preparation failed'}
+if(!$LogRoot){$LogRoot=$out}
+$LogRoot=(Resolve-Path -LiteralPath $LogRoot).Path
 $report = Join-Path $LogRoot "$LogPrefix.txt"
 if (Test-Path -LiteralPath $report) { throw 'Use a fresh log prefix' }
-$packagePaths = @('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object { Join-Path $PackageRoot $_ }
 function PackageProcesses {
     @(Get-CimInstance Win32_Process -Filter "Name='run16.exe' OR Name='ntvdm.exe' OR Name='ntsrv.exe'" |
         Where-Object { $_.ExecutablePath -in $packagePaths })
 }
-if ((PackageProcesses).Count) { throw 'Isolated package already in use' }
-$repo=(Resolve-Path "$PSScriptRoot/../..").Path
 & "$repo/tools/build-fixtures.cmd" x64 fatal-dialog
 if($LASTEXITCODE){throw "Native observation helper build failed"}
 [void][Reflection.Assembly]::LoadFrom("$repo/build/.ninja/fixtures-x64/fatal-dialog.dll")
-Copy-Item -LiteralPath $Probe -Destination "$PackageRoot\tests\D38F.COM"
+$runtime=$null
+$scope=$null
+try {
+$runtime=New-PhysicalRuntimeStage $PackageRoot -TestFiles @("$out/D38F.COM")
+$scope=New-IsolatedPackageScope $runtime
+$PackageRoot=$runtime
+$binaryRoot=Get-PackageBinaryRoot $runtime
+$packagePaths = @('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object { Join-Path $binaryRoot $_ }
+Save-IsolatedPackageManifest $runtime (Join-Path $out 'manifest.json')
 $arguments = @('tests\D38F.COM')
 if ($Nested) { $arguments = @('COMMAND.COM','/c','COMMAND.COM','/c') + $arguments }
 $observation = $null
@@ -45,7 +48,7 @@ $workerId = 0
 $dialogText = ''
 try {
     $observation = Start-Process -FilePath $Observer -ArgumentList (
-        @($packagePaths[0],$PackageRoot,$report) + $arguments + @('--observation-timeout-ms','20000')
+        @($packagePaths[0],$PackageRoot,$report,'--wait') + $arguments + @('--observation-timeout-ms','20000')
     ) -WorkingDirectory $PackageRoot -WindowStyle Hidden -PassThru
     $deadline = [DateTime]::UtcNow.AddSeconds(15)
     $dialog = [IntPtr]::Zero
@@ -80,25 +83,21 @@ try {
         if ($secondThread -eq 0 -or $secondThread -eq $firstThread -or
             $dialogText -notmatch "X#=0D, CS=[0-9A-F]{4} IP=$FaultIp") { throw 'Ignore did not produce a new exact-fault dialog' }
     }
-    $button = if ($AllocationIgnore) { 102 } else { 100 }
-    if (![S38FatalDialog]::Click($dialog,$button)) { throw 'Original dialog action failed' }
+    if (![S38FatalDialog]::Click($dialog,100)) { throw 'Original dialog action failed' }
     if (!$worker.WaitForExit(10000)) { throw 'Worker survived Terminate' }
     if (!$observation.WaitForExit(10000)) { throw 'Observer/launcher remains live' }
     $record = Get-Content -LiteralPath $report -Raw
     if ($record -notmatch '(?m)^result=exited\r?$') { throw 'Launcher did not exit' }
-    if ($PmAllocationLog) {
-        $injection = Get-Content -LiteralPath $PmAllocationLog -Raw
-        if ($injection -notmatch 'S38_PM_ALLOCATION_REFUSED size=36 address=0' -or
-            $injection -match 'S38_FAIL_PM_PUBLICATION_RETURNED') { throw 'Allocation failure did not stop publication' }
-    }
     @{ Dialog=$dialogText; WorkerId=$workerId; WorkerExited=$true; Nested=[bool]$Nested;
-       IgnoreFirst=[bool]$IgnoreFirst; AllocationIgnore=[bool]$AllocationIgnore; PmAllocationLog=$PmAllocationLog; FirstDialogThread=$firstThread; SecondDialogThread=$secondThread;
+       IgnoreFirst=[bool]$IgnoreFirst; FirstDialogThread=$firstThread; SecondDialogThread=$secondThread;
        ProbeSha256=(Get-FileHash $Probe).Hash; WorkerSha256=(Get-FileHash $packagePaths[1]).Hash;
        Report=$report } | ConvertTo-Json | Set-Content -LiteralPath "$LogRoot\$LogPrefix.result.json"
     Write-Host "PASS S38 original failure dialog and Terminate: $LogPrefix"
 } finally {
-    # Only processes from the isolated, initially unused test package.
-    foreach ($process in (PackageProcesses)) { Stop-Process -Id $process.ProcessId -Force -ErrorAction SilentlyContinue }
     if ($observation -and !$observation.HasExited) { $observation.Kill(); $observation.WaitForExit() }
     @{ Dialog=$dialogText; WorkerId=$workerId } | ConvertTo-Json | Set-Content -LiteralPath "$LogRoot\$LogPrefix.dialog.json"
+}
+} finally {
+    try {if($scope){Stop-IsolatedPackageScope $scope}}
+    finally {if($runtime){Remove-PhysicalRuntimeStage $runtime}}
 }
