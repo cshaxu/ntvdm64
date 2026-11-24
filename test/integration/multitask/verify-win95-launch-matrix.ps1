@@ -31,7 +31,12 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
  $copy=& "$repo/test/integration/ntvdm64-386/New-Win95ProbeCopy.ps1" -DriverImage "$repo/assets/release/ntvdm64.386" -InstanceDriver "$repo/assets/release/insignia.386" -MouseDriver "$repo/assets/release/MOUSE31.DRV" -InstallSource $InstallSource -InstallRoot O:/tmp/q95 -OutputRoot $task
  $dest=$copy.Destination
  try {
-  foreach($file in 'PIF.EXE','INSIGNIA.386','NTVDM64.386'){Copy-Item "$repo/assets/release/$file" "$dest/PATCH/$file"}
+ if($schedule){
+ & "$repo/tools/build-fixtures.cmd" x86 win31-profile $dest *> "$task/profile-build.log"
+ if($LASTEXITCODE){throw 'Matrix witness build failed'}
+ $profileCache="$repo/build/.ninja/fixtures-x86/guest-probes/win31-profile"
+ }
+ foreach($file in 'PIF.EXE','INSIGNIA.386','NTVDM64.386'){Copy-Item "$repo/assets/release/$file" "$dest/PATCH/$file"}
   Copy-Item "$repo/tools/win95-launch/WIN.CMD" "$dest/PATCH/WIN.CMD"
   & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" --install" *> "$task/install.log"
   if($LASTEXITCODE){throw 'Dynamic launcher installation failed'}
@@ -52,8 +57,7 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
    Copy-Item "$PackageRoot/system32/COMMAND.COM" "$dest/PATCH/COMMAND.COM"
    & "$repo/assets/release/PIF.EXE" create "$dest/DOSCHECK.PIF" --title 'Scheduling prompt' --program "$dest\PATCH\COMMAND.COM" --directory $dest --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
    if($LASTEXITCODE){throw 'Cannot create interactive scheduling prompt'}
-   & nasm -f bin "-DW31_INSTALL='$dest'" "$PSScriptRoot/win31-scheduling-child.asm" -o "$dest/SCHED.COM"
-   if($LASTEXITCODE){throw 'Scheduling DOS child assembly failed'}
+  Copy-Item "$profileCache/SCHED.COM" "$dest/SCHED.COM" -Force
    $controllerOptions=@('-DW31_SCHEDULING_INTERACTIVE')
    $expectedScheduling='nonblocking';$route='SCHED.COM'
    if($NativeScheduling){
@@ -67,8 +71,8 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
     $controllerOptions=@();$route='cmd.exe'
     if(!$multitask){$expectedScheduling='blocking'}
    }
-   & nasm -f bin -DW31_PROMPT_CHECK -DW31_SCHEDULING_CHECK @controllerOptions "-DW31_INSTALL='$dest'" "$repo/test/observation/win31_startup_contract.asm" -o "$task/controller.exe"
-   if($LASTEXITCODE){throw 'Scheduling controller assembly failed'}
+  $controllerName=if($controllerOptions.Count){'INTERACT.EXE'}else{'SCHEDULE.EXE'}
+  Copy-Item "$profileCache/$controllerName" "$task/controller.exe" -Force
    $runtimeOptions=@{WindowsProbeImage="$task/controller.exe";Scheduling=$expectedScheduling;ScheduledRun16Command=$route;MouseProbeRoot=$mouseTools}
   }
   & "$repo/test/integration/win31_runtime_matrix_test.ps1" -Windows95 -Win95ExitBoundary -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot "$task/startup" -Cases "386-dosonly$dos" -TimeoutMs 90000 @runtimeOptions

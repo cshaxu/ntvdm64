@@ -1841,3 +1841,5 @@ post-publication targeted checks.
 - [T484 S3 shared DOS identity fields](evidence/t484-s3-identity-fields.md).
 
 - [T484 S3 native PIF conventional memory](evidence/t484-s3-pif-memory.md).
+
+- [T484 S3 matrix profile producers](evidence/t484-s3-matrix-profile.md).

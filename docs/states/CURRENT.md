@@ -118,6 +118,8 @@ interpreter-free end-to-end acceptance have not completed.
 
 | [P181 PIF fields](../etc/evidence/t484-s3-pif-memory.md) | Six callers use native PIF memory options; duplicate helper/inline patchers removed; full-byte equivalence and failure checks pass. Configuration/staging remain;315/355 disposed,40 remain. |
 
+| [P182 matrix profiles](../etc/evidence/t484-s3-matrix-profile.md) | Two additional callers use one CMD target; eight witnesses/two paths byte-identical, cache/path checks pass. Frozen census315/355; two supplemental caller chains still need config/staging. |
+
 Completed implementation batches through P141 passed their cached full host build. P73 checks11 raw host inputs
 and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts

@@ -1,22 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
+  "head": "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M src/addon/pif/README.md",
-    " M src/addon/pif/pif.c",
-    " M test/integration/multitask/verify-win95-guest-only.ps1",
+    " M test/integration/multitask/verify-win31-setup-modes.ps1",
     " M test/integration/multitask/verify-win95-launch-matrix.ps1",
-    " M test/integration/ntvdm64-386/README.md",
-    " D test/integration/ntvdm64-386/Set-Win95ProbePifMemory.ps1",
-    " M test/integration/ntvdm64-386/verify-win31-editors.ps1",
-    " M test/integration/ntvdm64-386/verify-win31-identity.ps1",
-    " M test/integration/ntvdm64-386/verify-win95-editors.ps1",
-    " M test/integration/ntvdm64-386/verify-win95-identity.ps1",
-    " M test/integration/pif_hash_tool_test.ps1",
-    "?? docs/etc/evidence/t484-s3-pif-memory.md"
+    " M tools/build-fixtures.cmd",
+    " M tools/build/fixtures/guest-probes.cmake",
+    "?? docs/etc/evidence/t484-s3-matrix-profile.md",
+    "?? test/build/verify-win31-profile.ps1"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -472,9 +466,11 @@
       "state": "changed",
       "current_sha256": "7375dd46fe57c26c57226b957a516eb5a57d0c9ad62004b3452eb530a806e1a5",
       "revisions": [
+        "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "c2d588bc8c1d3ab8d2c083c38e037aa7603c4f1d"
       ],
       "evidence": [
+        "docs/etc/evidence/t484-s3-pif-memory.md",
         "docs/etc/evidence/t484-s3-win31-editor.md"
       ],
       "completion": "pending-producer-migration",
@@ -491,6 +487,7 @@
       "state": "changed",
       "current_sha256": "e3cade9d28d5e1ecd71ee212d86adf955685e351bdc61ae4314d02d089aa236b",
       "revisions": [
+        "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
         "dca9832679063ea8f8485fc990c18df9adc8d959",
         "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd"
@@ -498,6 +495,7 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-controller-paths.md",
         "docs/etc/evidence/t484-s3-identity-fields.md",
+        "docs/etc/evidence/t484-s3-pif-memory.md",
         "docs/etc/evidence/t484-s3-vm-identity.md"
       ],
       "completion": "pending-producer-migration",
@@ -514,11 +512,13 @@
       "state": "changed",
       "current_sha256": "d8e82d34a454d1b3e1ca35c204884a15d456426cf08d4afb5b278a3bcf6a88b0",
       "revisions": [
+        "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "dca9832679063ea8f8485fc990c18df9adc8d959",
         "7e89114b14c4199b138033c3352b530105f8c7fb"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-controller-paths.md",
+        "docs/etc/evidence/t484-s3-pif-memory.md",
         "docs/etc/evidence/t484-s3-win95-editor.md"
       ],
       "completion": "pending-producer-migration",
@@ -535,6 +535,7 @@
       "state": "changed",
       "current_sha256": "7a4c334939245890b5aa6795e450e2c763ced9f698014977fdb1c736404ecb66",
       "revisions": [
+        "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa",
         "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4",
         "dca9832679063ea8f8485fc990c18df9adc8d959",
         "81ed4b6f95b90effb2e3f8e6f4aad1b86a5c07bd"
@@ -542,6 +543,7 @@
       "evidence": [
         "docs/etc/evidence/t484-s3-controller-paths.md",
         "docs/etc/evidence/t484-s3-identity-fields.md",
+        "docs/etc/evidence/t484-s3-pif-memory.md",
         "docs/etc/evidence/t484-s3-vm-identity.md"
       ],
       "completion": "pending-producer-migration",
@@ -6480,6 +6482,12 @@
     }
   ],
   "commits": {
+    "3f62eb22d1f63120c3ae3da775f5a5abd17dd2fa": {
+      "subject": "T484 S3 P181 consolidate native PIF memory preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s3-pif-memory.md"
+      ]
+    },
     "c3c2d1980fe0a755545d1741f3d388c4a8dc3ed4": {
       "subject": "T484 S3 P180 unify native DOS identity fixture binding",
       "evidence": [

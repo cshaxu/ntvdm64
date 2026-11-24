@@ -1287,5 +1287,15 @@
     "reason": "Uncalled historical T225 source-built guest fixture assembler; obsolete runner-v8 profile not applicable to immutable current guest",
     "evidence": "docs/etc/evidence/t484-s3-direct-package-identity.md",
     "status": "retired-with-delivery-evidence"
+  },
+  "test/integration/multitask/verify-win31-setup-modes.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Outside frozen355 census; shared CMD profile target byte-equivalent; native PIF complete; configuration/batch materialization and shared staging remain",
+    "evidence": "docs/etc/evidence/t484-s3-matrix-profile.md"
+  },
+  "test/integration/multitask/verify-win95-launch-matrix.ps1": {
+    "status": "supplemental-native-producer-pending-staging",
+    "reason": "Outside frozen355 census; shared CMD profile target byte-equivalent; native PIF complete; configuration/batch materialization and shared staging remain",
+    "evidence": "docs/etc/evidence/t484-s3-matrix-profile.md"
   }
 }

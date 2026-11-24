@@ -30,7 +30,10 @@ foreach($mode in 0,1){
   -InstallSource $InstallSource -InstallRoot 'O:/tmp/q31' -OutputRoot $task -MouseDriver $MouseDriver
  $dest=$copy.Destination
  try {
-  # Remove only the two exact entries and files added by the copy helper.
+ & "$repo/tools/build-fixtures.cmd" x86 win31-profile $dest *> "$task/profile-build.log"
+ if($LASTEXITCODE){throw 'Matrix witness build failed'}
+ $profileCache="$repo/build/.ninja/fixtures-x86/guest-probes/win31-profile"
+ # Remove only the two exact entries and files added by the copy helper.
   $ini="$dest/SYSTEM.INI";$enc=[Text.Encoding]::GetEncoding(28591)
   $text=$enc.GetString([IO.File]::ReadAllBytes($ini))
   foreach($name in 'INSIGNIA.386','NTVDM64.386'){
@@ -85,13 +88,12 @@ foreach($mode in 0,1){
   if(Test-Path $nativeScript){throw 'Native command fixture already exists'}
   [IO.File]::WriteAllText($nativeScript,"@echo off`r`nver >$dest\PATCH\SCHED.RUN`r`n:wait`r`nif not exist $dest\PATCH\SCHED.GO goto wait`r`nver >$receipt.tmp`r`nmove /y $receipt.tmp $receipt >nul`r`necho done>$dest\PATCH\SCHED.END`r`n",[Text.Encoding]::ASCII)
   $scheduleChild=Join-Path $dest 'SCHED.COM'
-  & nasm -f bin "-DW31_INSTALL='$dest'" "$PSScriptRoot/win31-scheduling-child.asm" -o $scheduleChild
-  if($LASTEXITCODE){throw 'Scheduling DOS child assembly failed'}
+  Copy-Item "$profileCache/SCHED.COM" $scheduleChild -Force
   $controller=Join-Path $task 'prompt-check.exe'
   $controllerOptions=@()
   if($DosReentry){$controllerOptions+= '-DW31_SCHEDULING_INTERACTIVE'}
-  & nasm -f bin -DW31_PROMPT_CHECK -DW31_SCHEDULING_CHECK @controllerOptions "-DW31_INSTALL='$dest'" "$repo/test/observation/win31_startup_contract.asm" -o $controller
-  if($LASTEXITCODE){throw 'Prompt controller assembly failed'}
+  $controllerName=if($controllerOptions.Count){'INTERACT.EXE'}else{'SCHEDULE.EXE'}
+  Copy-Item "$profileCache/$controllerName" $controller -Force
   foreach($case in 'std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'){
    if($DosReentry -and $case -ne '386-dosonly0'){continue}
    $out=Join-Path $task $case
@@ -143,8 +145,7 @@ foreach($mode in 0,1){
   }
   if($DosReentry){continue}
   # Enhanced DOSONLY=1 schedules guest prompts with either payload selection.
-  & nasm -f bin -DW31_PROMPT_CHECK "-DW31_INSTALL='$dest'" "$repo/test/observation/win31_startup_contract.asm" -o $controller
-  if($LASTEXITCODE){throw 'Interactive controller assembly failed'}
+  Copy-Item "$profileCache/PROMPT.EXE" $controller -Force
   # Preserve the single-prompt source flags except for windowed/background.
   $description=& "$repo/assets/release/PIF.EXE" show $profile
   $flagsLine=$description | Select-String '^W386\.FLAGS=0x([0-9a-f]+)$'
@@ -152,8 +153,7 @@ foreach($mode in 0,1){
   $flags=([Convert]::ToUInt32($flagsLine.Matches[0].Groups[1].Value,16) -band (-bnot 8)) -bor 2
   $program="$dest\FULLKEY.COM"
   if(Test-Path $program){throw 'Fullscreen fixture path already in use'}
-  & nasm -f bin "-DW31_INSTALL='$dest'" "$repo/test/observation/win31_fullscreen_key.asm" -o $program
-  if($LASTEXITCODE){throw 'Fullscreen guest fixture assembly failed'}
+  Copy-Item "$profileCache/FULLKEY.COM" $program
   & "$repo/assets/release/PIF.EXE" update $profile --arguments "/c $program" --w386-flags $flags
   if($LASTEXITCODE){throw 'Cannot configure windowed DOS prompt for Alt+Enter'}
   foreach($case in '386-dosonly1','386-dosonly0'){
@@ -179,14 +179,12 @@ foreach($mode in 0,1){
    foreach($path in $program,"$dest\PATCH\$id.RUN","$dest\PATCH\$id.END"){
     if(Test-Path $path){throw "Guest pair fixture already exists: $path"}
    }
-   & nasm -f bin "-DW31_INSTALL='$dest'" "-DROLE='$id'" "-DPEER='$peer'" "$repo/test/observation/win31_dos_pair.asm" -o $program
-   if($LASTEXITCODE){throw 'DOS pair assembly failed'}
+   Copy-Item "$profileCache/RUN$id.COM" $program
    & "$repo/assets/release/PIF.EXE" update $pif --title "S14 prompt $id" --w386-flags $flags --arguments "/c $program"
    if($LASTEXITCODE){throw 'Cannot configure windowed DOS prompt'}
   }
   $controller=Join-Path $task 'prompt-pair.exe'
-  & nasm -f bin -DW31_PROMPT_CHECK -DW31_PROMPT_PAIR "-DW31_INSTALL='$dest'" "$repo/test/observation/win31_startup_contract.asm" -o $controller
-  if($LASTEXITCODE){throw 'DOS pair controller assembly failed'}
+  Copy-Item "$profileCache/PAIR.EXE" $controller
   Select-LaunchProfile '386-dosonly1'
   $out=Join-Path $task '386-dosonly1-pair'
   try {

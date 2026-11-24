@@ -1,8 +1,11 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 if not "%~4"=="" exit /b 2
-if not "%~2"=="wow-startup-failure" if not "%~2"=="wow-shell-exception" if not "%~2"=="wow-common-return" if not "%~2"=="win101-control-fixtures" if not "%~2"=="ccpu-header-selection" if not "%~2"=="wow-message-transaction" if not "%~2"=="wow-attach-failure" if not "%~2"=="wow-missing-init" if not "%~2"=="wow-callback-abort" if not "%~2"=="media-owner" if not "%~2"=="command-redirection" if not "%~2"=="crt-contracts" if not "%~2"=="crt-missing" if not "%~2"=="crt-duplicate" if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
+if not "%~2"=="win31-profile" if not "%~2"=="wow-startup-failure" if not "%~2"=="wow-shell-exception" if not "%~2"=="wow-common-return" if not "%~2"=="win101-control-fixtures" if not "%~2"=="ccpu-header-selection" if not "%~2"=="wow-message-transaction" if not "%~2"=="wow-attach-failure" if not "%~2"=="wow-missing-init" if not "%~2"=="wow-callback-abort" if not "%~2"=="media-owner" if not "%~2"=="command-redirection" if not "%~2"=="crt-contracts" if not "%~2"=="crt-missing" if not "%~2"=="crt-duplicate" if not "%~2"=="wow-page-cost" if not "%~2"=="serial-discovery" if not "%~2"=="win16-message" if not "%~2"=="win16-message-guest" if not "%~2"=="win16-print" if not "%~2"=="win16-ole-peer" if not "%~2"=="wow-callback-cost" if not "%~2"=="wow-graph-cost" if not "%~3"=="" exit /b 2
 set "SERIAL_OPTION="
+set "WIN31_OPTION=-DNTVDM_WIN31_INSTALL="
+if "%~2"=="win31-profile" if "%~3"=="" exit /b 2
+if "%~2"=="win31-profile" set WIN31_OPTION="-DNTVDM_WIN31_INSTALL=%~3"
 set "MEDIA_OPTION=-DNTVDM_MEDIA_ORIGINAL_ROOT="
 if "%~2"=="media-owner" goto media_arguments
 if "%~2"=="win16-ole-peer" goto ole_arguments
@@ -270,6 +273,7 @@ if "%TARGET%"=="ccpu-header-selection" if "%~1"=="x86" set "SELECTED=1"
 if "%TARGET%"=="win101-control-fixtures" if "%~1"=="x86" set "SELECTED=1"
 for %%I in (base-classifier-path base-resource base-vdm-config) do if "%TARGET%"=="%%I" set "SELECTED=1"
 if "%TARGET%"=="blocked-video-tick" set "SELECTED=1"
+if "%TARGET%"=="win31-profile" if "%~1"=="x86" set "SELECTED=1"
 if not defined SELECTED exit /b 2
 if "%TARGET%"=="xms-mapped" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="xms-startup" if not "%~1"=="x86" exit /b 2
@@ -339,7 +343,7 @@ if "%TARGET%"=="wow-controls" goto controls
 if "%TARGET%"=="command-redirection" if not "%~3"=="" goto worker_existing
 if "%TARGET%"=="command-redirection" goto worker
 for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" goto worker
-cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON %SERIAL_OPTION% %MEDIA_OPTION%
+cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON %SERIAL_OPTION% %MEDIA_OPTION% %WIN31_OPTION%
 if errorlevel 1 exit /b %errorlevel%
 cmake --build "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" --target %TARGET%
 exit /b %errorlevel%
