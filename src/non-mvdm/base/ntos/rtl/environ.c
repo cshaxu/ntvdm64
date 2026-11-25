@@ -19,19 +19,17 @@ Revision History:
 --*/
 
 #include "ntrtlp.h"
-#line 22
-#include <zwapi.h>
-#line 23
-#include <nturtl.h>
-#include <string.h>
+#include "zwapi.h"
+#include "nturtl.h"
+#include "string.h"
+#include "ntrtlpath.h"
 
-#line 26
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
-#line 27
 #error Unsupported excluded original configuration
-#line 32
-#endif
 #line 33
+#endif
+
+BOOLEAN RtlpEnvironCacheValid;
 
 NTSTATUS
 RtlCreateEnvironment(
@@ -62,10 +60,10 @@ createEmptyEnvironment:
                                         );
         if (NT_SUCCESS( Status )) {
             *Environment = pNew;
-            }
+        }
 
         return( Status );
-        }
+    }
 
     //
     // Acquire the Peb Lock for the duration while we munge the environment
@@ -83,63 +81,65 @@ createEmptyEnvironment:
     if (pOld == NULL) {
         RtlReleasePebLock();
         goto createEmptyEnvironment;
-        }
+    }
 
     try {
-        //
-        // Query the current size of the current process's environment
-        // variable block.  Return status if failure.
-        //
+        try {
+            //
+            // Query the current size of the current process's environment
+            // variable block.  Return status if failure.
+            //
 
-        Status = ZwQueryVirtualMemory( NtCurrentProcess(),
-                                       pOld,
-                                       MemoryBasicInformation,
-                                       &MemoryInformation,
-                                       sizeof( MemoryInformation ),
-                                       NULL
-                                     );
-        if (!NT_SUCCESS( Status )) {
-            return( Status );
+            Status = ZwQueryVirtualMemory( NtCurrentProcess(),
+                                           pOld,
+                                           MemoryBasicInformation,
+                                           &MemoryInformation,
+                                           sizeof( MemoryInformation ),
+                                           NULL
+                                         );
+            if (!NT_SUCCESS( Status )) {
+                leave;
             }
 
-        //
-        // Allocate memory to contain a copy of the current process's
-        // environment variable block.  Return status if failure.
-        //
+            //
+            // Allocate memory to contain a copy of the current process's
+            // environment variable block.  Return status if failure.
+            //
 
-        Status = ZwAllocateVirtualMemory( NtCurrentProcess(),
-                                          &pNew,
-                                          0,
-                                          &MemoryInformation.RegionSize,
-                                          MEM_COMMIT,
-                                          PAGE_READWRITE
-                                        );
-        if (!NT_SUCCESS( Status )) {
-            return( Status );
+            Status = ZwAllocateVirtualMemory( NtCurrentProcess(),
+                                              &pNew,
+                                              0,
+                                              &MemoryInformation.RegionSize,
+                                              MEM_COMMIT,
+                                              PAGE_READWRITE
+                                            );
+            if (!NT_SUCCESS( Status )) {
+                leave;
             }
 
-        //
-        // Copy the current process's environment to the allocated memory
-        // and return a pointer to the copy.
-        //
+            //
+            // Copy the current process's environment to the allocated memory
+            // and return a pointer to the copy.
+            //
 
-        RtlMoveMemory( pNew, pOld, MemoryInformation.RegionSize );
-        *Environment = pNew;
+            RtlCopyMemory( pNew, pOld, MemoryInformation.RegionSize );
+            *Environment = pNew;
+        } except (EXCEPTION_EXECUTE_HANDLER) {
+              Status = STATUS_ACCESS_VIOLATION;
         }
-    finally {
-        if (AbnormalTermination()) {
-            Status = STATUS_ACCESS_VIOLATION;
+    } finally {
+        if (Status == STATUS_ACCESS_VIOLATION) {
             if (pNew != NULL) {
                 ZwFreeVirtualMemory( NtCurrentProcess(),
                                      &pNew,
                                      &MemoryInformation.RegionSize,
                                      MEM_RELEASE
                                    );
-                }
             }
+        }
 
         RtlReleasePebLock();
-        }
+    }
 
     return( Status );
 }
@@ -156,6 +156,8 @@ RtlDestroyEnvironment(
     //
     // Free the specified environment variable block.
     //
+
+    RtlpEnvironCacheValid = FALSE;
 
     RegionSize = 0;
     Status = ZwFreeVirtualMemory( NtCurrentProcess(),
@@ -185,6 +187,8 @@ RtlSetCurrentEnvironment(
     // variable storage block.
     //
 
+    RtlpEnvironCacheValid = FALSE;
+
     RtlAcquirePebLock();
 
     Status = STATUS_SUCCESS;
@@ -213,14 +217,11 @@ RtlSetCurrentEnvironment(
         if (ARGUMENT_PRESENT( PreviousEnvironment )) {
             *PreviousEnvironment = pOld;
             pOld = NULL;
-            }
         }
-    finally {
-        if (AbnormalTermination()) {
-            Status = STATUS_ACCESS_VIOLATION;
-            pOld = NULL;
-            }
-        }
+    } except (EXCEPTION_EXECUTE_HANDLER) {
+          Status = STATUS_ACCESS_VIOLATION;
+          pOld = NULL;
+    }
 
     //
     // Release the Peb Lock
@@ -244,7 +245,6 @@ RtlSetCurrentEnvironment(
     return( Status );
 }
 
-BOOLEAN RtlpEnvironCacheValid;
 UNICODE_STRING RtlpEnvironCacheName;
 UNICODE_STRING RtlpEnvironCacheValue;
 
@@ -260,6 +260,7 @@ RtlQueryEnvironmentVariable_U(
     UNICODE_STRING CurrentValue;
     PWSTR p;
     PPEB Peb;
+    BOOLEAN PebLockLocked = FALSE;
 
     Status = STATUS_VARIABLE_NOT_FOUND;
     Peb = NtCurrentPeb();
@@ -269,8 +270,8 @@ RtlQueryEnvironmentVariable_U(
             p = Environment;
             if (*p == UNICODE_NULL) {
                 leave;
-                }
             }
+        }
         else {
             //
             // Acquire the Peb Lock for the duration while we munge the
@@ -278,6 +279,7 @@ RtlQueryEnvironmentVariable_U(
             //
 
             RtlAcquirePebLock();
+            PebLockLocked = TRUE;
 
             //
             // Capture the pointer to the current process's environment variable
@@ -286,14 +288,7 @@ RtlQueryEnvironmentVariable_U(
 
             p = Peb->ProcessParameters->Environment;
 
-            }
-#line 288
-#if DBG
-#line 289
-#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
-#line 293
-#endif
-#line 294
+        }
 
         if ( RtlpEnvironCacheValid && p == Peb->ProcessParameters->Environment ) {
             if (RtlEqualUnicodeString( Name, &RtlpEnvironCacheName, TRUE )) {
@@ -310,7 +305,7 @@ RtlQueryEnvironmentVariable_U(
 
                 Value->Length = RtlpEnvironCacheValue.Length;
                 if (Value->MaximumLength >= RtlpEnvironCacheValue.Length) {
-                    RtlMoveMemory( Value->Buffer,
+                    RtlCopyMemory( Value->Buffer,
                                    RtlpEnvironCacheValue.Buffer,
                                    RtlpEnvironCacheValue.Length
                                  );
@@ -320,16 +315,16 @@ RtlQueryEnvironmentVariable_U(
 
                     if (Value->MaximumLength > RtlpEnvironCacheValue.Length) {
                         Value->Buffer[ RtlpEnvironCacheValue.Length/sizeof(WCHAR) ] = L'\0';
-                        }
+                    }
 
                     Status = STATUS_SUCCESS;
-                    }
+                }
                 else {
                     Status = STATUS_BUFFER_TOO_SMALL;
-                    }
-                goto environcachehit;
                 }
+                leave;
             }
+        }
 
         //
         // The environment variable block consists of zero or more null
@@ -362,7 +357,7 @@ RtlQueryEnvironmentVariable_U(
 
                     while(*p) {
                         p++;
-                        }
+                    }
                     CurrentValue.Length = (USHORT)(p - CurrentValue.Buffer)*sizeof(WCHAR);
                     CurrentValue.MaximumLength = (USHORT)(CurrentValue.Length+sizeof(WCHAR));
 
@@ -372,11 +367,11 @@ RtlQueryEnvironmentVariable_U(
                     // do the compare.
                     //
                     break;
-                    }
+                }
                 else {
                     p++;
-                    }
                 }
+            }
 
             //
             // Skip over the terminating null character for this name=value
@@ -403,7 +398,7 @@ RtlQueryEnvironmentVariable_U(
 
                 Value->Length = CurrentValue.Length;
                 if (Value->MaximumLength >= CurrentValue.Length) {
-                    RtlMoveMemory( Value->Buffer,
+                    RtlCopyMemory( Value->Buffer,
                                    CurrentValue.Buffer,
                                    CurrentValue.Length
                                  );
@@ -419,41 +414,90 @@ RtlQueryEnvironmentVariable_U(
                         RtlpEnvironCacheValid = TRUE;
                         RtlpEnvironCacheName = CurrentName;
                         RtlpEnvironCacheValue = CurrentValue;
-                        }
+                    }
 
                     Status = STATUS_SUCCESS;
-                    }
+                }
                 else {
                     Status = STATUS_BUFFER_TOO_SMALL;
-                    }
+                }
                 break;
+            }
+        }
+
+        // If it's not in the real env block, let's see if it's a pseudo environment variable
+        if (Status == STATUS_VARIABLE_NOT_FOUND) {
+            static const UNICODE_STRING CurrentWorkingDirectoryPseudoVariable = RTL_CONSTANT_STRING(L"__CD__");
+            static const UNICODE_STRING ApplicationDirectoryPseudoVariable = RTL_CONSTANT_STRING(L"__APPDIR__");
+
+            if (RtlEqualUnicodeString(Name, &CurrentWorkingDirectoryPseudoVariable, TRUE)) {
+                // Get the PEB lock if we don't already have it.
+                if (!PebLockLocked) {
+                    RtlAcquirePebLock();
+                    PebLockLocked = TRUE;
+                }
+
+                // get cdw here...
+                CurrentValue = NtCurrentPeb()->ProcessParameters->CurrentDirectory.DosPath;
+                Status = STATUS_SUCCESS;
+            } else if (RtlEqualUnicodeString(Name, &ApplicationDirectoryPseudoVariable, TRUE)) {
+                USHORT PrefixLength = 0;
+
+                if (!PebLockLocked) {
+                    RtlAcquirePebLock();
+                    PebLockLocked = TRUE;
+                }
+
+                // get appdir here 
+                CurrentValue = NtCurrentPeb()->ProcessParameters->ImagePathName;
+
+                Status = RtlFindCharInUnicodeString(
+                                RTL_FIND_CHAR_IN_UNICODE_STRING_START_AT_END,
+                                &CurrentValue,
+                                &RtlDosPathSeperatorsString,
+                                &PrefixLength);
+                if (NT_SUCCESS(Status)) {
+                    CurrentValue.Length = PrefixLength + sizeof(WCHAR);
+                } else if (Status == STATUS_NOT_FOUND) {
+                    // Use the whole thing; just translate the status to successs.
+                    Status = STATUS_SUCCESS;
                 }
             }
-environcachehit:;
-        }
-    finally {
-        //
-        // If abnormally terminating, assume access violation.
-        //
 
-        if (AbnormalTermination()) {
-            Status = STATUS_ACCESS_VIOLATION;
-            }
+            if (NT_SUCCESS(Status)) {
+                Value->Length = CurrentValue.Length;
+                if (Value->MaximumLength >= CurrentValue.Length) {
+                    RtlCopyMemory(Value->Buffer, CurrentValue.Buffer, CurrentValue.Length);
 
-        //
-        // Release the Peb lock.
-        //
+                    //
+                    // Null terminate returned string if there is room.
+                    //
 
-        if (!ARGUMENT_PRESENT( Environment )) {
-            RtlReleasePebLock();
+                    if (Value->MaximumLength > CurrentValue.Length)
+                        Value->Buffer[ CurrentValue.Length/sizeof(WCHAR) ] = L'\0';
+                }
             }
         }
+
+
+
+    } except (EXCEPTION_EXECUTE_HANDLER) {
+        Status = STATUS_ACCESS_VIOLATION;
+    }
+
+
+    //
+    // Release the Peb lock.
+    //
+
+    if (PebLockLocked)
+        RtlReleasePebLock();
 
     //
     // Return status.
     //
 
-    return( Status );
+    return Status;
 }
 
 
@@ -473,6 +517,7 @@ RtlSetEnvironmentVariable(
     SIZE_T NewSize;
     LONG CompareResult;
     PWSTR p, pStart, pEnd;
+    PWSTR InsertionPoint;
 
     //
     // Validate passed in name and reject if zero length or anything but the first
@@ -481,25 +526,24 @@ RtlSetEnvironmentVariable(
     n = Name->Length / sizeof( WCHAR );
     if (n == 0) {
         return STATUS_INVALID_PARAMETER;
-        }
+    }
 
     try {
         p = Name->Buffer;
         while (--n) {
             if (*++p == L'=') {
                 return STATUS_INVALID_PARAMETER;
-                }
             }
         }
-    except (EXCEPTION_EXECUTE_HANDLER) {
+    } except (EXCEPTION_EXECUTE_HANDLER) {
         return GetExceptionCode();
-        }
+    }
 
     RtlpEnvironCacheValid = FALSE;
     Status = STATUS_VARIABLE_NOT_FOUND;
     if (ARGUMENT_PRESENT( Environment )) {
         pOld = *Environment;
-        }
+    }
     else {
         //
         // Acquire the Peb Lock for the duration while we munge the
@@ -514,117 +558,248 @@ RtlSetEnvironmentVariable(
         //
 
         pOld = NtCurrentPeb()->ProcessParameters->Environment;
-        }
+    }
+
+
     pNew = NULL;
+    InsertionPoint = NULL;
 
     try {
-        //
-        // The environment variable block consists of zero or more null
-        // terminated UNICODE strings.  Each string is of the form:
-        //
-        //      name=value
-        //
-        // where the null termination is after the value.
-        //
+        try {
 
-        p = pOld;
-        pEnd = NULL;
-        if (p != NULL) while (*p) {
             //
-            // Determine the size of the name and value portions of
-            // the current string of the environment variable block.
+            // The environment variable block consists of zero or more null
+            // terminated UNICODE strings.  Each string is of the form:
+            //
+            //      name=value
+            //
+            // where the null termination is after the value.
             //
 
-            CurrentName.Buffer = p;
-            CurrentName.Length = 0;
-            CurrentName.MaximumLength = 0;
-            while (*p) {
+            p = pOld;
+            pEnd = NULL;
+            if (p != NULL) while (*p) {
                 //
-                // If we see an equal sign, then compute the size of
-                // the name portion and scan for the end of the value.
+                // Determine the size of the name and value portions of
+                // the current string of the environment variable block.
                 //
 
-                if (*p == L'=' && p != CurrentName.Buffer) {
-                    CurrentName.Length = (USHORT)(p - CurrentName.Buffer) * sizeof(WCHAR);
-                    CurrentName.MaximumLength = (USHORT)(CurrentName.Length+sizeof(WCHAR));
-                    CurrentValue.Buffer = ++p;
+                CurrentName.Buffer = p;
+                CurrentName.Length = 0;
+                CurrentName.MaximumLength = 0;
+                while (*p) {
+                    //
+                    // If we see an equal sign, then compute the size of
+                    // the name portion and scan for the end of the value.
+                    //
 
-                    while(*p) {
-                        p++;
+                    if (*p == L'=' && p != CurrentName.Buffer) {
+                        CurrentName.Length = (USHORT)(p - CurrentName.Buffer) * sizeof(WCHAR);
+                        CurrentName.MaximumLength = (USHORT)(CurrentName.Length+sizeof(WCHAR));
+                        CurrentValue.Buffer = ++p;
+
+                        while(*p) {
+                            p++;
                         }
-                    CurrentValue.Length = (USHORT)(p - CurrentValue.Buffer) * sizeof(WCHAR);
-                    CurrentValue.MaximumLength = (USHORT)(CurrentValue.Length+sizeof(WCHAR));
+                        CurrentValue.Length = (USHORT)(p - CurrentValue.Buffer) * sizeof(WCHAR);
+                        CurrentValue.MaximumLength = (USHORT)(CurrentValue.Length+sizeof(WCHAR));
 
-                    //
-                    // At this point we have the length of both the name
-                    // and value portions, so exit the loop so we can
-                    // do the compare.
-                    //
-                    break;
+                        //
+                        // At this point we have the length of both the name
+                        // and value portions, so exit the loop so we can
+                        // do the compare.
+                        //
+                        break;
                     }
-                else {
-                    p++;
+                    else {
+                        p++;
                     }
                 }
 
-            //
-            // Skip over the terminating null character for this name=value
-            // pair in preparation for the next iteration of the loop.
-            //
-
-            p++;
-
-            //
-            // Compare the current name with the one requested, ignore
-            // case.
-            //
-
-            if (!(CompareResult = RtlCompareUnicodeString( Name, &CurrentName, TRUE ))) {
                 //
-                // Names are equal.  Now find the end of the current
-                // environment variable block.
+                // Skip over the terminating null character for this name=value
+                // pair in preparation for the next iteration of the loop.
                 //
 
-                pEnd = p;
-                while (*pEnd) {
-                    while (*pEnd++) {
+                p++;
+
+                //
+                // Compare the current name with the one requested, ignore
+                // case.
+                //
+
+                if (!(CompareResult = RtlCompareUnicodeString( Name, &CurrentName, TRUE ))) {
+                    //
+                    // Names are equal.  Now find the end of the current
+                    // environment variable block.
+                    //
+
+                    pEnd = p;
+                    while (*pEnd) {
+                        while (*pEnd++) {
                         }
                     }
-                pEnd++;
+                    pEnd++;
 
-                if (!ARGUMENT_PRESENT( Value )) {
-                    //
-                    // If the caller did not specify a new value, then delete
-                    // the entire name=value pair by copying up the remainder
-                    // of the environment variable block.
-                    //
+                    if (!ARGUMENT_PRESENT( Value )) {
+                        //
+                        // If the caller did not specify a new value, then delete
+                        // the entire name=value pair by copying up the remainder
+                        // of the environment variable block.
+                        //
 
-                    RtlMoveMemory( CurrentName.Buffer,
-                                   p,
-                                   (ULONG) ((pEnd - p)*sizeof(WCHAR))
-                                 );
-                    Status = STATUS_SUCCESS;
+                        RtlMoveMemory( CurrentName.Buffer,
+                                       p,
+                                       (ULONG) ((pEnd - p)*sizeof(WCHAR))
+                                     );
+                        Status = STATUS_SUCCESS;
                     }
+                    else
+                    if (Value->Length <= CurrentValue.Length) {
+                        //
+                        // New value is smaller, so copy new value, then null
+                        // terminate it, and then move up the remainder of the
+                        // variable block so it is immediately after the new
+                        // null terminated value.
+                        //
+
+                        pStart = CurrentValue.Buffer;
+                        RtlMoveMemory( pStart, Value->Buffer, Value->Length );
+                        pStart += Value->Length/sizeof(WCHAR);
+                        *pStart++ = L'\0';
+
+                        RtlMoveMemory( pStart, p,(ULONG)((pEnd - p)*sizeof(WCHAR)) );
+                        Status = STATUS_SUCCESS;
+                    }
+                    else {
+                        //
+                        // New value is larger, so query the current size of the
+                        // environment variable block.  Return status if failure.
+                        //
+
+                        Status = ZwQueryVirtualMemory( NtCurrentProcess(),
+                                                       pOld,
+                                                       MemoryBasicInformation,
+                                                       &MemoryInformation,
+                                                       sizeof( MemoryInformation ),
+                                                       NULL
+                                                     );
+                        if (!NT_SUCCESS( Status )) {
+                            leave;
+                        }
+
+                        //
+                        // See if there is room for new, larger value.  If not
+                        // allocate a new copy of the environment variable
+                        // block.
+                        //
+
+                        NewSize = (pEnd - (PWSTR)pOld)*sizeof(WCHAR) +
+                                    Value->Length - CurrentValue.Length;
+                        if (NewSize >= MemoryInformation.RegionSize) {
+                            //
+                            // Allocate memory to contain a copy of the current
+                            // process's environment variable block.  Return
+                            // status if failure.
+                            //
+
+                            Status = ZwAllocateVirtualMemory( NtCurrentProcess(),
+                                                              &pNew,
+                                                              0,
+                                                              &NewSize,
+                                                              MEM_COMMIT,
+                                                              PAGE_READWRITE
+                                                            );
+                            if (!NT_SUCCESS( Status )) {
+                                leave;
+                            }
+
+                            //
+                            // Copy the current process's environment to the allocated memory
+                            // inserting the new value as we do the copy.
+                            //
+
+                            Size = (ULONG) (CurrentValue.Buffer - (PWSTR)pOld);
+                            RtlMoveMemory( pNew, pOld, Size*sizeof(WCHAR) );
+                            pStart = (PWSTR)pNew + Size;
+                            RtlMoveMemory( pStart, Value->Buffer, Value->Length );
+                            pStart += Value->Length/sizeof(WCHAR);
+                            *pStart++ = L'\0';
+                            RtlMoveMemory( pStart, p,(ULONG)((pEnd - p)*sizeof(WCHAR)));
+    			            if (ARGUMENT_PRESENT( Environment ))
+    			                *Environment = pNew;
+                            else {
+    			                NtCurrentPeb()->ProcessParameters->Environment = pNew;
+                                NtCurrentPeb()->EnvironmentUpdateCount += 1;
+                            }
+
+    			            ZwFreeVirtualMemory( NtCurrentProcess(),
+                                         &pOld,
+                                         &MemoryInformation.RegionSize,
+                                         MEM_RELEASE
+                                       );
+                            pNew = pOld;
+                        }
+                        else {
+                            pStart = CurrentValue.Buffer + Value->Length/sizeof(WCHAR) + 1;
+                            RtlMoveMemory( pStart, p,(ULONG)((pEnd - p)*sizeof(WCHAR)));
+                            *--pStart = L'\0';
+
+                            RtlMoveMemory( pStart - Value->Length/sizeof(WCHAR),
+                                           Value->Buffer,
+                                           Value->Length
+                                         );
+                        }
+                    }
+
+                    break;
+                }
                 else
-                if (Value->Length <= CurrentValue.Length) {
+                if (CompareResult < 0) {
                     //
-                    // New value is smaller, so copy new value, then null
-                    // terminate it, and then move up the remainder of the
-                    // variable block so it is immediately after the new
-                    // null terminated value.
+                    // Requested name is less than the current name.  Save this
+                    // spot in case the variable is not in a sorted position.
+                    // The insertion point for the new variable is before the
+                    // variable just examined.
                     //
 
-                    pStart = CurrentValue.Buffer;
-                    RtlMoveMemory( pStart, Value->Buffer, Value->Length );
-                    pStart += Value->Length/sizeof(WCHAR);
-                    *pStart++ = L'\0';
-
-                    RtlMoveMemory( pStart, p,(ULONG)((pEnd - p)*sizeof(WCHAR)) );
-                    Status = STATUS_SUCCESS;
+                    if (InsertionPoint == NULL) {
+                        InsertionPoint = CurrentName.Buffer;
                     }
-                else {
+                }
+            }
+
+            //
+            // If we found an insertion point, reset the string
+            // pointer back to it.
+            //
+
+            if (InsertionPoint != NULL) {
+                p = InsertionPoint;
+            }
+
+            //
+            // If variable name not found and a new value parameter was specified
+            // then insert the new variable name and its value at the appropriate
+            // place in the environment variable block (i.e. where p points to).
+            //
+
+            if (pEnd == NULL && ARGUMENT_PRESENT( Value )) {
+                if (p != NULL) {
                     //
-                    // New value is larger, so query the current size of the
+                    // Name not found.  Now find the end of the current
+                    // environment variable block.
+                    //
+
+                    pEnd = p;
+                    while (*pEnd) {
+                        while (*pEnd++) {
+                        }
+                    }
+                    pEnd++;
+
+                    //
+                    // New value is present, so query the current size of the
                     // environment variable block.  Return status if failure.
                     //
 
@@ -636,8 +811,8 @@ RtlSetEnvironmentVariable(
                                                    NULL
                                                  );
                     if (!NT_SUCCESS( Status )) {
-                        return( Status );
-                        }
+                        leave;
+                    }
 
                     //
                     // See if there is room for new, larger value.  If not
@@ -645,218 +820,101 @@ RtlSetEnvironmentVariable(
                     // block.
                     //
 
-                    NewSize = (pEnd - (PWSTR)pOld)*sizeof(WCHAR) +
-                                Value->Length - CurrentValue.Length;
-                    if (NewSize >= MemoryInformation.RegionSize) {
-                        //
-                        // Allocate memory to contain a copy of the current
-                        // process's environment variable block.  Return
-                        // status if failure.
-                        //
+                    NewSize = (pEnd - (PWSTR)pOld) * sizeof(WCHAR) +
+                              Name->Length +
+                              sizeof(WCHAR) +
+                              Value->Length +
+                              sizeof(WCHAR);
+                }
+                else {
+                    NewSize = Name->Length +
+                              sizeof(WCHAR) +
+                              Value->Length +
+                              sizeof(WCHAR);
+                    MemoryInformation.RegionSize = 0;
+                }
 
-                        Status = ZwAllocateVirtualMemory( NtCurrentProcess(),
-                                                          &pNew,
-                                                          0,
-                                                          &NewSize,
-                                                          MEM_COMMIT,
-                                                          PAGE_READWRITE
-                                                        );
-                        if (!NT_SUCCESS( Status )) {
-                            return( Status );
-                            }
+                if (NewSize >= MemoryInformation.RegionSize) {
+                    //
+                    // Allocate memory to contain a copy of the current
+                    // process's environment variable block.  Return
+                    // status if failure.
+                    //
 
-                        //
-                        // Copy the current process's environment to the allocated memory
-                        // inserting the new value as we do the copy.
-                        //
+                    Status = ZwAllocateVirtualMemory( NtCurrentProcess(),
+                                                      &pNew,
+                                                      0,
+                                                      &NewSize,
+                                                      MEM_COMMIT,
+                                                      PAGE_READWRITE
+                                                    );
+                    if (!NT_SUCCESS( Status )) {
+                        leave;
+                    }
 
-                        Size = (ULONG) (CurrentValue.Buffer - (PWSTR)pOld);
+                    //
+                    // Copy the current process's environment to the allocated memory
+                    // inserting the new value as we do the copy.
+                    //
+
+                    if (p != NULL) {
+                        Size = (ULONG)(p - (PWSTR)pOld);
                         RtlMoveMemory( pNew, pOld, Size*sizeof(WCHAR) );
-                        pStart = (PWSTR)pNew + Size;
-                        RtlMoveMemory( pStart, Value->Buffer, Value->Length );
-                        pStart += Value->Length/sizeof(WCHAR);
-                        *pStart++ = L'\0';
-                        RtlMoveMemory( pStart, p,(ULONG)((pEnd - p)*sizeof(WCHAR)));
-			if (ARGUMENT_PRESENT( Environment ))
-			    *Environment = pNew;
-                        else {
-			    NtCurrentPeb()->ProcessParameters->Environment = pNew;
-                            NtCurrentPeb()->EnvironmentUpdateCount += 1;
-                            }
-
-			ZwFreeVirtualMemory( NtCurrentProcess(),
-                                     &pOld,
-                                     &MemoryInformation.RegionSize,
-                                     MEM_RELEASE
-                                   );
-                        pNew = pOld;
-                        }
+                    }
                     else {
-                        pStart = CurrentValue.Buffer + Value->Length/sizeof(WCHAR) + 1;
-                        RtlMoveMemory( pStart, p,(ULONG)((pEnd - p)*sizeof(WCHAR)));
-                        *--pStart = L'\0';
-
-                        RtlMoveMemory( pStart - Value->Length/sizeof(WCHAR),
-                                       Value->Buffer,
-                                       Value->Length
-                                     );
-                        }
+                        Size = 0;
+                    }
+                    pStart = (PWSTR)pNew + Size;
+                    RtlMoveMemory( pStart, Name->Buffer, Name->Length );
+                    pStart += Name->Length/sizeof(WCHAR);
+                    *pStart++ = L'=';
+                    RtlMoveMemory( pStart, Value->Buffer, Value->Length );
+                    pStart += Value->Length/sizeof(WCHAR);
+                    *pStart++ = L'\0';
+                    if (p != NULL) {
+                        RtlMoveMemory( pStart, p,(ULONG)((pEnd - p)*sizeof(WCHAR)) );
                     }
 
-                break;
+    		        if (ARGUMENT_PRESENT( Environment )) {
+    		            *Environment = pNew;
+                    }
+                    else {
+    		            NtCurrentPeb()->ProcessParameters->Environment = pNew;
+                        NtCurrentPeb()->EnvironmentUpdateCount += 1;
+                    }
+                    ZwFreeVirtualMemory( NtCurrentProcess(),
+                                         &pOld,
+                                         &MemoryInformation.RegionSize,
+                                         MEM_RELEASE
+                                       );
                 }
-            else
-            if (CompareResult < 0) {
-                //
-                // Request name is less than current name, then look no
-                // further as we will not find it in our sorted list.
-                // The insertion point for the new variable is before the
-                // variable just examined.
-                //
-
-                p = CurrentName.Buffer;
-                break;
-                }
-            }
-
-        //
-        // If variable name not found and a new value parameter was specified
-        // then insert the new variable name and its value at the appropriate
-        // place in the environment variable block (i.e. where p points to).
-        //
-
-        if (pEnd == NULL && ARGUMENT_PRESENT( Value )) {
-            if (p != NULL) {
-                //
-                // Name not found.  Now find the end of the current
-                // environment variable block.
-                //
-
-                pEnd = p;
-                while (*pEnd) {
-                    while (*pEnd++) {
-                        }
-                    }
-                pEnd++;
-
-                //
-                // New value is present, so query the current size of the
-                // environment variable block.  Return status if failure.
-                //
-
-                Status = ZwQueryVirtualMemory( NtCurrentProcess(),
-                                               pOld,
-                                               MemoryBasicInformation,
-                                               &MemoryInformation,
-                                               sizeof( MemoryInformation ),
-                                               NULL
-                                             );
-                if (!NT_SUCCESS( Status )) {
-                    return( Status );
-                    }
-
-                //
-                // See if there is room for new, larger value.  If not
-                // allocate a new copy of the environment variable
-                // block.
-                //
-
-                NewSize = (pEnd - (PWSTR)pOld) * sizeof(WCHAR) +
-                          Name->Length +
-                          sizeof(WCHAR) +
-                          Value->Length +
-                          sizeof(WCHAR);
-                }
-            else {
-                NewSize = Name->Length +
-                          sizeof(WCHAR) +
-                          Value->Length +
-                          sizeof(WCHAR);
-                MemoryInformation.RegionSize = 0;
-                }
-
-            if (NewSize >= MemoryInformation.RegionSize) {
-                //
-                // Allocate memory to contain a copy of the current
-                // process's environment variable block.  Return
-                // status if failure.
-                //
-
-                Status = ZwAllocateVirtualMemory( NtCurrentProcess(),
-                                                  &pNew,
-                                                  0,
-                                                  &NewSize,
-                                                  MEM_COMMIT,
-                                                  PAGE_READWRITE
-                                                );
-                if (!NT_SUCCESS( Status )) {
-                    return( Status );
-                    }
-
-                //
-                // Copy the current process's environment to the allocated memory
-                // inserting the new value as we do the copy.
-                //
-
-                if (p != NULL) {
-                    Size = (ULONG)(p - (PWSTR)pOld);
-                    RtlMoveMemory( pNew, pOld, Size*sizeof(WCHAR) );
-                    }
                 else {
-                    Size = 0;
-                    }
-                pStart = (PWSTR)pNew + Size;
-                RtlMoveMemory( pStart, Name->Buffer, Name->Length );
-                pStart += Name->Length/sizeof(WCHAR);
-                *pStart++ = L'=';
-                RtlMoveMemory( pStart, Value->Buffer, Value->Length );
-                pStart += Value->Length/sizeof(WCHAR);
-                *pStart++ = L'\0';
-                if (p != NULL) {
+                    pStart = p + Name->Length/sizeof(WCHAR) + 1 + Value->Length/sizeof(WCHAR) + 1;
                     RtlMoveMemory( pStart, p,(ULONG)((pEnd - p)*sizeof(WCHAR)) );
+                    RtlMoveMemory( p, Name->Buffer, Name->Length );
+                    p += Name->Length/sizeof(WCHAR);
+                    *p++ = L'=';
+                    RtlMoveMemory( p, Value->Buffer, Value->Length );
+                    p += Value->Length/sizeof(WCHAR);
+                    *p++ = L'\0';
                     }
-
-		if (ARGUMENT_PRESENT( Environment ))
-		    *Environment = pNew;
-                else {
-		    NtCurrentPeb()->ProcessParameters->Environment = pNew;
-                    NtCurrentPeb()->EnvironmentUpdateCount += 1;
-                    }
-                ZwFreeVirtualMemory( NtCurrentProcess(),
-                                     &pOld,
-                                     &MemoryInformation.RegionSize,
-                                     MEM_RELEASE
-                                   );
-                }
-            else {
-                pStart = p + Name->Length/sizeof(WCHAR) + 1 + Value->Length/sizeof(WCHAR) + 1;
-                RtlMoveMemory( pStart, p,(ULONG)((pEnd - p)*sizeof(WCHAR)) );
-                RtlMoveMemory( p, Name->Buffer, Name->Length );
-                p += Name->Length/sizeof(WCHAR);
-                *p++ = L'=';
-                RtlMoveMemory( p, Value->Buffer, Value->Length );
-                p += Value->Length/sizeof(WCHAR);
-                *p++ = L'\0';
-                }
             }
+        } except(EXCEPTION_EXECUTE_HANDLER) {
+              //
+              // If abnormally terminating, assume access violation.
+              //
+
+              Status = STATUS_ACCESS_VIOLATION;
         }
-    finally {
+    } finally {
         //
         // Release the Peb lock.
         //
 
         if (!ARGUMENT_PRESENT( Environment )) {
             RtlReleasePebLock();
-            }
-
-        //
-        // If abnormally terminating, assume access violation.
-        //
-
-        if (AbnormalTermination()) {
-            return (STATUS_ACCESS_VIOLATION);
-            }
         }
+    }
 
     //
     // Return status.

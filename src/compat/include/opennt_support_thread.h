@@ -11,6 +11,7 @@ typedef struct _OPENNT_SUPPORT_CURDIR {
 typedef struct _OPENNT_SUPPORT_PROCESS_PARAMETERS {
     OPENNT_SUPPORT_CURDIR CurrentDirectory;
     PVOID Environment;
+    UNICODE_STRING ImagePathName;
     HANDLE ConsoleHandle;
     /* DIVERGENCE(ADAPTER-WIN32-059): BaseCheckVDM reads only these original
      * process-start fields; values come from public startup/std-handle APIs. */
@@ -39,6 +40,7 @@ typedef struct _OPENNT_SUPPORT_TEB {
      * This private TLS field is the finite observable carrier; it does not
      * expose or reinterpret the modern host TEB. */
     NTSTATUS LastStatusValue;
+    ULONG LastErrorValue;
     /* Reached historical TEB field: imported x86 DPMI sources locate their
      * per-thread VDM TIB through this spelling. The value is assigned only
      * by the monitor's bound-thread carrier and is never a guest value. */

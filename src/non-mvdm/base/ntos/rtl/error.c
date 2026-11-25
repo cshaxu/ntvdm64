@@ -19,17 +19,14 @@ Revision History:
 
 --*/
 
-#include "ntrtlp.h"
-#include <winerror.h>
+#include <ntrtlp.h>
+#include "winerror.h"
 #include "error.h"
 
-#line 26
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
-#line 27
 #error Unsupported excluded original configuration
-#line 28
+#line 33
 #endif
-#line 29
 
 //
 // Ensure that the Registry ERROR_SUCCESS error code and the
@@ -37,10 +34,8 @@ Revision History:
 //
 
 #if ERROR_SUCCESS != 0 || NO_ERROR != 0
-#line 36
 #error Invalid value for ERROR_SUCCESS.
 #endif
-#line 38
 
 ULONG
 RtlNtStatusToDosError (
@@ -68,9 +63,13 @@ Return Value:
     PTEB Teb;
 
     Teb = NtCurrentTeb();
-    if ( Teb ) {
-    Teb->LastStatusValue = Status;
+
+    if (Teb) {
+        try {
+            Teb->LastStatusValue = Status;
+        } except (EXCEPTION_EXECUTE_HANDLER) {
         }
+    }
 
     return RtlNtStatusToDosErrorNoTeb( Status );
 }
@@ -178,13 +177,71 @@ Return Value:
         return ((ULONG)Status & 0xFFFF);
     }
 
-#line 175
 #ifndef NTOS_KERNEL_RUNTIME
-#line 176
-#error Unsupported excluded original configuration
-#line 184
+    DbgPrint("RTL: RtlNtStatusToDosError(0x%lx): No Valid Win32 Error Mapping\n",Status);
+    DbgPrint("RTL: Edit ntos\\rtl\\generr.c to correct the problem\n");
+    DbgPrint("RTL: ERROR_MR_MID_NOT_FOUND is being returned\n");
+
+#if DBG
+    DbgBreakPoint();
+#endif // DBG
+
 #endif // NTOS_KERNEL_RUNTIME
-#line 185
 
     return ERROR_MR_MID_NOT_FOUND;
+}
+
+NTSTATUS
+NTAPI
+RtlGetLastNtStatus(
+	VOID
+	)
+{
+	return NtCurrentTeb()->LastStatusValue;
+}
+
+LONG
+NTAPI
+RtlGetLastWin32Error(
+	VOID
+	)
+{
+	return NtCurrentTeb()->LastErrorValue;
+}
+
+VOID
+NTAPI
+RtlSetLastWin32ErrorAndNtStatusFromNtStatus(
+	NTSTATUS Status
+	)
+{
+	//
+	// RtlNtStatusToDosError stores into NtCurrentTeb()->LastStatusValue.
+	//
+	RtlSetLastWin32Error(RtlNtStatusToDosError(Status));
+}
+
+VOID
+NTAPI
+RtlSetLastWin32Error(
+	LONG Win32Error
+	)
+{
+//
+// Arguably this should clear or reset the last nt status, but it does not
+// touch it.
+//
+	NtCurrentTeb()->LastErrorValue = Win32Error;
+}
+
+VOID
+NTAPI
+RtlRestoreLastWin32Error(
+	LONG Win32Error
+	)
+{
+#if DBG
+	if ((LONG)NtCurrentTeb()->LastErrorValue != Win32Error)
+#endif
+		NtCurrentTeb()->LastErrorValue = Win32Error;
 }

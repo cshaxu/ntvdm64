@@ -27,6 +27,7 @@ typedef struct _OPENNT_SUPPORT_THREAD_STATE {
     OPENNT_SUPPORT_PROCESS_PARAMETERS Parameters;
     OPENNT_SUPPORT_PEB Peb;
     WCHAR CurrentDirectory[MAX_PATH + 2];
+    WCHAR ImagePath[32767];
 } OPENNT_SUPPORT_THREAD_STATE;
 
 static __declspec(thread) OPENNT_SUPPORT_THREAD_STATE opennt_support_thread_state;
@@ -86,12 +87,18 @@ static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void)
     OPENNT_SUPPORT_THREAD_STATE *state = &opennt_support_thread_state;
     if (state->Peb.ProcessParameters == NULL) {
         STARTUPINFOW startup;
+        DWORD imageCharacters;
         GetStartupInfoW(&startup);
         state->Teb.StaticUnicodeString.Buffer = state->StaticBuffer;
         state->Teb.StaticUnicodeBuffer = state->StaticBuffer;
         state->Teb.StaticUnicodeString.MaximumLength = (USHORT)sizeof(state->StaticBuffer);
         state->Parameters.CurrentDirectory.DosPath.Buffer = state->CurrentDirectory;
         state->Parameters.CurrentDirectory.DosPath.MaximumLength = (USHORT)sizeof(state->CurrentDirectory);
+        state->Parameters.ImagePathName.Buffer = state->ImagePath;
+        state->Parameters.ImagePathName.MaximumLength = (USHORT)sizeof(state->ImagePath);
+        imageCharacters = GetModuleFileNameW(NULL, state->ImagePath, ARRAYSIZE(state->ImagePath));
+        if (imageCharacters < ARRAYSIZE(state->ImagePath))
+            state->Parameters.ImagePathName.Length = (USHORT)(imageCharacters * sizeof(WCHAR));
         state->Parameters.ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
         state->Parameters.WindowFlags = startup.dwFlags;
         if (state->Parameters.Environment == NULL) (void)OpenNtRtlRefreshEnvironmentSnapshot();

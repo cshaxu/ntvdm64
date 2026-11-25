@@ -41,7 +41,7 @@ family_unit("obj/broker-transport/vdm_payload.obj" "${NTVDM_REPO}/src/common/bas
 family_unit("obj/broker-transport/vdm_message.obj" "${NTVDM_REPO}/src/common/base_srv/vdm_message.c" "${native_flags} /we4013 /O2" "obj/basesrv/service.h")
 family_archive("common-base-srv-transport.lib"
   "obj/broker-transport/rpc_scope.obj" "obj/broker-transport/vdm_payload.obj" "obj/broker-transport/vdm_message.obj")
-family_unit("obj/opennt-rtl/error.obj" "${NTVDM_REPO}/src/non-mvdm/base/ntos/rtl/error.c" "${native_flags} /DNTOS_KERNEL_RUNTIME /DNTOS_KERNEL_RUNTIME /FI \"${NTVDM_REPO}/src/non-mvdm/public/sdk/inc/nt.h\" /O2" "obj/basesrv/service.h")
+family_unit("obj/opennt-rtl/error.obj" "${NTVDM_REPO}/src/non-mvdm/base/ntos/rtl/error.c" "${native_flags} /I \"${NTVDM_REPO}/build/.ninja/build-tools/rtl\" /DNTOS_KERNEL_RUNTIME /DNTOS_KERNEL_RUNTIME /FI \"${NTVDM_REPO}/src/non-mvdm/public/sdk/inc/nt.h\" /O2" "obj/basesrv/service.h" "${NTVDM_REPO}/build/.ninja/build-tools/rtl/error.h")
 family_unit("obj/opennt-rtl/environ.obj" "${NTVDM_REPO}/src/non-mvdm/base/ntos/rtl/environ.c" "${native_flags} /DNTOS_KERNEL_RUNTIME /FI \"${NTVDM_REPO}/src/non-mvdm/public/sdk/inc/nt.h\" /O2" "obj/basesrv/service.h")
 family_archive("original-opennt-rtl-native.lib"
   "obj/opennt-rtl/error.obj" "obj/opennt-rtl/environ.obj")

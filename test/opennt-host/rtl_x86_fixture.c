@@ -118,6 +118,19 @@ int main(void)
     status = RtlCreateEnvironment(FALSE, &environment);
     result = expect(NT_SUCCESS(status) && environment != NULL, 8);
     if (result != 0) return result;
+    /* XP pseudo variables remain source-owned; exercise both supplied fields. */
+    RtlInitUnicodeString(&fixture_parameters()->CurrentDirectory.DosPath, L"C:\\WORK");
+    RtlInitUnicodeString(&fixture_parameters()->ImagePathName, L"C:\\APP\\RUN.EXE");
+    value.Buffer = queryBuffer;
+    value.MaximumLength = sizeof(queryBuffer);
+    value.Length = 0;
+    RtlInitUnicodeString(&name, L"__CD__");
+    status = RtlQueryEnvironmentVariable_U(NULL, &name, &value);
+    if (!NT_SUCCESS(status) || value.Length != 14 || wcscmp(queryBuffer, L"C:\\WORK")) return 110;
+    RtlInitUnicodeString(&name, L"__APPDIR__");
+    status = RtlQueryEnvironmentVariable_U(NULL, &name, &value);
+    if (!NT_SUCCESS(status) || value.Length != 14 || wcscmp(queryBuffer, L"C:\\APP\\")) return 111;
+    if (RtlNtStatusToDosError((NTSTATUS)0xC0000225L) != ERROR_NOT_FOUND) return 112;
     RtlInitUnicodeString(&name, L"RTL_FIXTURE");
     RtlInitUnicodeString(&value, L"one");
     status = RtlSetEnvironmentVariable(&environment, &name, &value);
