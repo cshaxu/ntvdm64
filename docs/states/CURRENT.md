@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T485 S3** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. Both installed locations match the twelve-image manifest. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). H009 BIOS brings the total to 9/159. H010 CCPU is next. See the [H009 receipt](../etc/evidence/t485-s1/h009.md).
+**Active: M0 T485 S3** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. Both installed locations match the twelve-image manifest. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). H009 BIOS and H010 CCPU bring the total to 10/159. H011 communications is next. See the [H009 receipt](../etc/evidence/t485-s1/h009.md) and [H010 receipt](../etc/evidence/t485-s1/h010.md).
 
 ## Active Packet
 
@@ -29,7 +29,7 @@
 
 ## Current Technical Baseline
 
-The S3 product23 package is installed. S2 product22 at 574d526e0 is the H009 rollback baseline. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. The owner approved local source use on the OpenNT basis. The owner selected English x86 Professional SP3 media. The 61 direct matches were independently verified on the selected disc. Source/media ABI compatibility is verified per batch. The project owner has approved XP source use and ordinary project delivery for all T485 batches. H001 build ownership is traced.
+The S3 product24 package is installed. Product23 at 857a4d42b is the H010 rollback baseline. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. The owner approved local source use on the OpenNT basis. The owner selected English x86 Professional SP3 media. The 61 direct matches were independently verified on the selected disc. Source/media ABI compatibility is verified per batch. The project owner has approved XP source use and ordinary project delivery for all T485 batches. H001 build ownership is traced.
 
 ## Recent Governance
 
