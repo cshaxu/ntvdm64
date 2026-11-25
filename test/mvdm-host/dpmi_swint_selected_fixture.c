@@ -10,6 +10,12 @@ HANDLER DpmiInterruptHandlers[256];
 typedef struct { USHORT CsSelector, SsSelector; ULONG Eip, Esp, Flags; } FAULT_HANDLER;
 FAULT_HANDLER DpmiFaultHandlers[32];
 extern BOOL __cdecl DpmiSwIntHandler(ULONG);
+extern BOOL __cdecl DpmiHwIntHandler(ULONG);
+void *Idt;
+ULONG Cpu40GdtShadowAddress;
+static ULONG active_gdt, active_ldt;
+ULONG c_getGDT_BASE(void) { return active_gdt; }
+ULONG c_getLDT_BASE(void) { return active_ldt; }
 extern BOOL __cdecl DpmiFaultHandler(ULONG, ULONG);
 extern void __cdecl DpmiFaultHandlerIret32(void);
 extern void __cdecl DpmiIntHandlerIret32(void);
@@ -125,6 +131,22 @@ void mvdm_softpc_report_dpmi_iret16(USHORT bits,USHORT a,USHORT b,USHORT c,USHOR
 int main(int argc, char **argv){
   unsigned mode, depth, order;
   ULONG before_fault_maps, before_fault_dispatches;
+  if(argc==2 && !strcmp(argv[1],"--hardware-owner")) {
+    msw=1; flags=0x302; sp=0x100; ip=0x30;
+    Cpu40GdtShadowAddress=active_gdt=0x1000;
+    Cpu40LdtShadowAddress=active_ldt=0x2000;
+    for(mode=0;mode<4;mode++) {
+      Ldt=mode==0 ? NULL : descriptors;
+      Idt=mode==1 ? NULL : descriptors;
+      active_gdt=mode==2 ? 0x3000 : 0x1000;
+      active_ldt=mode==3 ? 0x4000 : 0x2000;
+      CHECK(!DpmiHwIntHandler(8));
+      CHECK(flags==0x302 && sp==0x100 && ip==0x30 && dispatches==0 &&
+            LockedPMStackCount==0 && mappings==0);
+    }
+    puts("DPMI_HARDWARE_OWNER_OK absent_tables=2 changed_tables=2 unchanged_cpu=1");
+    return 0;
+  }
   if(argc==2 && !strcmp(argv[1],"--wow-signature-mode")) {
     msw=1; flags=0x23302; mock_eax=mock_ebp=0xf0f0f0f1u;
     CHECK(!DpmiSwIntHandler(0x2a));

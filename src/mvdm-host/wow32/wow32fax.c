@@ -1203,7 +1203,8 @@ VOID AddPrinterThread(PWOWADDPRINTER pWowAddPrinter)
         pWowAddPrinter->bRet = TRUE;
     }
     else {
-        if (GetLastError() == ERROR_PRINTER_ALREADY_EXISTS) {
+        if (GetLastError() == (pWowAddPrinter->iCode == WOW_AddPrinterDriver ?
+                               ERROR_PRINTER_DRIVER_ALREADY_INSTALLED : ERROR_PRINTER_ALREADY_EXISTS)) {
             pWowAddPrinter->bRet = TRUE;
         }
         else {
@@ -1358,14 +1359,7 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
             // Install the printer driver.
             DriverInfo.cVersion = 1;
             DriverInfo.pName = "Windows 3.1 Compatible Fax Driver";
-            if ((bRetVal = DoAddPrinterStuff((LPVOID)&DriverInfo,
-                                             WOW_AddPrinterDriver)) == FALSE) {
-
-                // if the driver is already installed, it won't hurt to install
-                // it a second time.  This might be necessary if the user is
-                // upgrading from WinFax Lite to WinFax Pro.
-                bRetVal = (GetLastError() == ERROR_PRINTER_DRIVER_ALREADY_INSTALLED);
-            }
+            bRetVal = DoAddPrinterStuff((LPVOID)&DriverInfo, WOW_AddPrinterDriver);
 
             if (bRetVal) {
                 // Parse out the printer name.

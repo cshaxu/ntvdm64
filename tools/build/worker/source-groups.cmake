@@ -199,7 +199,7 @@ foreach(name IN LISTS names)
   list(APPEND redir_objects "${object}")
 endforeach()
 
-worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/xms.486/sources")
+worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/xms.486/sources.inc")
 list(APPEND names "xmsmemr.c")
 list(REMOVE_DUPLICATES names)
 set(xms_objects)

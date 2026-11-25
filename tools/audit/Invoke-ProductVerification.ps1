@@ -5,6 +5,8 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$LogRoot,
     [ValidateSet('Product','Control','Full')][string]$Suite='Full',
+    [string]$Win31InstallRoot='O:\w31',
+    [string]$Win95InstallRoot='O:\WINDOWS',
     [string]$GuestFixture,
     [switch]$XpGuestMedia,
     [string]$Dos4gwFixtureRoot='O:\WINNT',
@@ -192,11 +194,25 @@ function Invoke-ShortRuntime([scriptblock]$Body) {
 try {
     if ($Suite -ne 'Control') {
         Invoke-Gate 'guest-media' {
-            $receipt=if($XpGuestMedia){"$repo/docs/etc/evidence/t485-s1/h001-h008-package22.csv"}
+            $receipt=if($XpGuestMedia){@("$repo/docs/etc/evidence/t485-s1/h001-h008-package22.csv","$repo/docs/etc/evidence/t485-s1/h032-guest.csv")}
             & $Python "$repo/test/observation/verify-guest-media.py" `
                 $runtime "$repo/assets/winnt-guest-manifest.json" @($receipt | Where-Object {$_}) *> "$log/guest-media.txt"
             if($LASTEXITCODE){throw 'Guest media contract failed; inspect guest-media.txt'}
         }
+    }
+    if ($Suite -eq 'Full') {
+        $desktopFailures=@()
+        foreach ($desktop in 'win31-standard','win31-enhanced','win95') {
+            try {
+                Invoke-Gate $desktop {
+                    $install=if($desktop -eq 'win95'){$Win95InstallRoot}else{$Win31InstallRoot}
+                    & "$repo/test/integration/verify-guest-desktop-startup.ps1" -Case $desktop -InstallSource $install -PackageRoot $sourceRuntime -Observer $observerPath -OutputRoot "$log/$desktop"
+                }
+            } catch {
+                $desktopFailures+="${desktop}: $($_.Exception.Message)"
+            }
+        }
+        if($desktopFailures.Count){throw ($desktopFailures -join [Environment]::NewLine)}
     }
     Invoke-Gate 'startup-presentation' {
         & "$repo/test/ntvdm-exe/softpc/verify-presentation-contracts.ps1" -Kind startup -OutputRoot "$log/startup-presentation" *> "$log/startup-presentation.txt"

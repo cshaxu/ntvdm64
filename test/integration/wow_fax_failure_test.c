@@ -100,6 +100,7 @@ static PSZ pszSystemDirectory="X:\\fixture";
 #define LoadString load_string
 #define StrDup duplicate
 /* Preserve exact source, including original assignment-in-condition idioms. */
+#define WOW32_stricmp _stricmp
 #include "fax_exact.h"
 static void list_case(int which) {
     UINT count=99; LPSTR *list=NULL; DWORD exception=0;

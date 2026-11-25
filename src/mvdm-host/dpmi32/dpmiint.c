@@ -615,6 +615,14 @@ Return Value:
     } else {
         PUCHAR VdmStackPointer;
 
+        extern ULONG c_getGDT_BASE(void);
+        extern ULONG c_getLDT_BASE(void);
+
+        if (!Ldt || !Idt || getMODE() != VDM_PM ||
+            !Cpu40GdtShadowAddress || c_getGDT_BASE() != Cpu40GdtShadowAddress ||
+            !Cpu40LdtShadowAddress || c_getLDT_BASE() != Cpu40LdtShadowAddress)
+            return FALSE;
+
         SaveEFLAGS = getEFLAGS();
         //BUGBUG turn off task bits
         SaveEFLAGS &= ~0x4000;

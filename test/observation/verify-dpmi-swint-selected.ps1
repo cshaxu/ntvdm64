@@ -51,4 +51,8 @@ if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/pm-fault-result.txt" -S
 @($source, $fixture, "$worker/obj/tests/dpmi-swint-owner.obj", $exe, "$exe.map") |
     Get-FileHash -Algorithm SHA256 | Export-Csv -NoTypeInformation "$out/inputs.csv"
 
+& $exe --hardware-owner | Tee-Object -FilePath "$out/hardware-owner.txt"
+if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/hardware-owner.txt" -SimpleMatch 'DPMI_HARDWARE_OWNER_OK absent_tables=2 changed_tables=2 unchanged_cpu=1')) {
+    throw 'DPMI hardware interrupt ownership fixture failed'
+}
 exit 0

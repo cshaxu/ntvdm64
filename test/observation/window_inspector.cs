@@ -17,7 +17,8 @@ public static class WindowInspector {
  [DllImport("user32.dll")] static extern bool IsWindowEnabled(IntPtr w);
  [DllImport("user32.dll")] static extern bool IsWindow(IntPtr w);
  static string Text(IntPtr w){var s=new StringBuilder(2048);GetWindowText(w,s,s.Capacity);return s.ToString();}
- public static string Read(int[] ids,string desktop,bool ignoreSerial,bool ignoreDisk,bool ignoreIllegalOpcode){var result=new StringBuilder();
+ public static string Read(int[] ids,string desktop,bool ignoreSerial,bool ignoreDisk,bool ignoreIllegalOpcode){return Read(ids,desktop,ignoreSerial,ignoreDisk,ignoreIllegalOpcode,false);}
+ public static string Read(int[] ids,string desktop,bool ignoreSerial,bool ignoreDisk,bool ignoreIllegalOpcode,bool closeSerial){var result=new StringBuilder();
   Visit visit=(w,p)=>{uint pid;GetWindowThreadProcessId(w,out pid);if(Array.IndexOf(ids,(int)pid)<0)return true;
    result.AppendLine("PID="+pid+" visible="+IsWindowVisible(w)+" title="+Text(w));
    bool serial=false,disk=false,illegalOpcode=false;
@@ -26,6 +27,7 @@ public static class WindowInspector {
     if(text.Contains("An application has attempted to directly access the hard disk, which cannot be supported. This may cause the application to function incorrectly."))disk=true;
     if(text.Contains("The NTVDM CPU has encountered an illegal instruction."))illegalOpcode=true;
     return true;};EnumChildWindows(w,child,IntPtr.Zero);
+   if(closeSerial && serial && desktop.StartsWith("NTVDMConsoleTest-")){IntPtr button=GetDlgItem(w,100),reply; if(button!=IntPtr.Zero && Text(button)=="&Terminate" && IsWindowVisible(button) && IsWindowEnabled(button)) result.AppendLine("serial-close="+(SendMessageTimeout(button,0xF5,IntPtr.Zero,IntPtr.Zero,2,2000,out reply)!=IntPtr.Zero));}
    if((ignoreSerial && serial) || (ignoreDisk && disk) || (ignoreIllegalOpcode && illegalOpcode)){IntPtr button=GetDlgItem(w,102),reply;
     if(button!=IntPtr.Zero && Text(button)=="&Ignore"){string action=serial ? "serial-ignore=" : (disk ? "denied-disk-ignore=" : "illegal-opcode-ignore=");
      bool visible=IsWindowVisible(button),enabled=IsWindowEnabled(button);

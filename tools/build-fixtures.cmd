@@ -178,7 +178,8 @@ if "%TARGET%"=="wow-thunk-nls" if not "%~1"=="x86" exit /b 2
 for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (crt-contracts crt-missing crt-duplicate) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (win31-matrix win31-dosonly win95-guest-only interrupt-observer guest-api guest-profiles guest-forcedos guest-memory-transition guest-remote) do if "%TARGET%"=="%%I" set "SELECTED=1"
-for %%I in (win31-matrix win31-dosonly win95-guest-only interrupt-observer guest-api guest-profiles guest-forcedos guest-memory-transition guest-remote) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
+rem W31CHECK and W31DOS are NASM flat binaries, independent of the host tool architecture.
+for %%I in (win95-guest-only interrupt-observer guest-api guest-profiles guest-forcedos guest-memory-transition guest-remote) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" set "SELECTED=1"
 for %%I in (wow-sol-gameplay wow-sol-options wow-write-lifecycle) do if "%TARGET%"=="%%I" if not "%~1"=="x86" exit /b 2
 if "%TARGET%"=="wow-page-cost-unit" set "SELECTED=1"

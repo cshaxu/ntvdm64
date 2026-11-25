@@ -21,6 +21,8 @@ static LONG query(HKEY h,LPCSTR name,LPDWORD reserved,LPDWORD type,LPBYTE data,L
 #define RegQueryValueEx query
 static DWORD GetFileAttributesOem(LPCSTR p){(void)p;return 0xffffffff;}
 static BOOL SetFileAttributesOem(LPCSTR p,DWORD a){(void)p;(void)a;CHECK(0);return FALSE;}
+#define WOW32_strchr strchr
+#define WOW32_strlwr _strlwr
 #include THUNK_SOURCE
 int main(void){
  for(mode=0;mode<3;++mode){

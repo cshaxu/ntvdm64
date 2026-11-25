@@ -694,7 +694,7 @@ DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
 #endif // !DBCS
 
 
-    if (pedgi->dwOptions & RMB_EDIT) {
+    if (!VDMForWOW || (pedgi->dwOptions & RMB_EDIT)) {
         if (pedgi->hWndCon != HWND_DESKTOP) {
             SetForegroundWindow(pedgi->hWndCon);
             }

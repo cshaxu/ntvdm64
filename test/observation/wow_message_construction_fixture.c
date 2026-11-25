@@ -7,11 +7,11 @@
 #include <stddef.h>
 #define FASTCALL __stdcall
 typedef WORD HAND16,HMEM16,HMENU16,HWND16,HDC16,HTASK16,HMIDIIN16,HMIDIOUT16,HWAVEIN16,HWAVEOUT16,BOOL16;
-typedef DWORD VPVOID,VPBYTE,VPSZ,VPPROC,VPINT16,VPRECT16;
+typedef DWORD VPWNDPROC,VPVOID,VPBYTE,VPSZ,VPPROC,VPINT16,VPRECT16;
 #define GlobalLock16 WOWGlobalLockSize16
 #define GlobalUnlockFree16 WOWGlobalUnlockFree16
 typedef LPSTR LPSZ;
-typedef struct {DWORD dwExStyle,dwStyle,vpfnDlgProc;int iClass;} WW,*PWW;
+typedef struct {DWORD ExStyle,style,vpfnDlgProc;int iClass;} WW,*PWW;
 #include "message_construction_types.h"
 typedef MSG16 *PMSG16;
 typedef struct {DWORD unused;} BLKCACHE,*PBLKCACHE;
@@ -23,7 +23,7 @@ typedef struct {DWORD unused;} BLKCACHE,*PBLKCACHE;
 #include "message_construction_messages.h"
 #include "message_construction_lifetime.h"
 BOOL DeleteParamMap(DWORD,UINT,BOOL *);
-typedef struct _TD {DWORD dwWOWCompatFlags;HAND16 htask16;DWORD vpStack,vpCBStack,dwFlags;} PTD_VALUE,*PTD;
+typedef struct _TD {DWORD dwWOWCompatFlags;HAND16 htask16;DWORD vpStack,vpCBStack,dwFlags;int cStackAlloc16;} PTD_VALUE,*PTD;
 typedef struct {WORD cbData;BYTE data[14];} HLP,*LPHLP;
 #define WOWCF_DSBASEDSTRINGPOINTERS 1
 #define CURRENTPTD() current_task
@@ -150,6 +150,8 @@ static LRESULT CALLBACK notification_proc(HWND w,UINT m,WPARAM p,LPARAM l){
 #define WOW32ASSERTMSG(x,s) ((void)0)
 #undef GetWindowLong
 #define GetWindowLong(w,i) fixture_window_words()
+#define GETICLASS(window,handle) ((window)->iClass)
+#define UnMarkWOWProc(value,result) ((result)=((value)&0x3fffffffu)|(((value)&0x00060000u)<<13)|0x00060000u)
 #define GWL_WOWWORDS (-100)
 #define GETHWND16(v) ((WORD)(ULONG_PTR)(v))
 #define GETHINST16(v) ((WORD)(ULONG_PTR)(v))
@@ -174,7 +176,7 @@ static LRESULT CALLBACK notification_proc(HWND w,UINT m,WPARAM p,LPARAM l){
 #define FETCHWORD(v) ((WORD)(v))
 #define FETCHDWORD(v) ((DWORD)(v))
 #define FETCHLONG(v) ((LONG)(v))
-#define stackfree16(v) ((void)(v))
+#define stackfree16(v,cb) ((void)(v),(void)(cb))
 #undef RtlFillMemory
 #define RtlFillMemory fill_memory
 #undef RegisterWindowMessage
@@ -202,7 +204,7 @@ static struct { BOOL (FASTCALL *lpfnM32)(LPWM32MSGPARAMEX); } aw32Msg[WM_USER];
 static BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX p){(void)p;return TRUE;}
 static void BlockWOWIdle(BOOL block){(void)block;}
 #define WOWCLASS_UNKNOWN 0
-static PWW FindPWW(HWND window,int cls){(void)window;(void)cls;return dead_window ? NULL : &words;}
+static PWW FindPWW(HWND window){(void)window;return dead_window ? NULL : &words;}
 static LRESULT fixture_send_message(HWND window,UINT message,WPARAM wp,LPARAM lp){(void)window;(void)message;(void)wp;(void)lp;return 3;}
 #undef SendMessage
 #define SendMessage fixture_send_message
@@ -320,7 +322,7 @@ static void mdi_cases(void){
  for(stage=1;stage<=5;++stage){
   reset_case();mdi=mdi_input();memset(&create,0,sizeof(create));
   create.lpszClass="outer";create.lpszName="outer title";create.lpCreateParams=&mdi;
-  words.dwExStyle=WS_EX_MDICHILD;fail_at=stage;value=make_message(&create,WM_CREATE,0);
+  words.ExStyle=WS_EX_MDICHILD;fail_at=stage;value=make_message(&create,WM_CREATE,0);
   ok=WM32Create(&value);expect(!ok,"NESTED_CREATE_REJECTION");
   if(ok){value.fThunk=FALSE;(void)WM32Create(&value);}
   expect(!owned() && !bad_foreign,"NESTED_CREATE_ROLLBACK");
@@ -329,11 +331,11 @@ static void mdi_cases(void){
   PCREATESTRUCT16 guest_create;PMDICREATESTRUCT16 guest_mdi;
   reset_case();mdi=mdi_input();memset(&create,0,sizeof(create));
   create.lpszClass="outer";create.lpszName="outer title";create.lpCreateParams=&mdi;
-  words.dwExStyle=WS_EX_MDICHILD;value=make_message(&create,WM_CREATE,0);
+  words.ExStyle=WS_EX_MDICHILD;value=make_message(&create,WM_CREATE,0);
   expect(WM32Create(&value) && owned()==5,"NESTED_NORMAL_CONSTRUCT");
   guest_create=guest_pointer(value.Parm16.WndProc.lParam);guest_mdi=guest_pointer(guest_create->vpCreateParams);
   if(mode==1)guest_mdi->vpszTitle=allocate_guest(32,3);
-  if(mode==2){words.dwExStyle=0;value.pww=NULL;dead_window=TRUE;}
+  if(mode==2){words.ExStyle=0;value.pww=NULL;dead_window=TRUE;}
   if(mode==3){foreign=allocate_guest(sizeof(MDICREATESTRUCT16),3);guest_create->vpCreateParams=foreign;}
   value.fThunk=FALSE;expect(WM32Create(&value) && !owned() && !bad_foreign,"NESTED_CAPTURED_OWNERSHIP");
  }
@@ -448,7 +450,7 @@ static void create_transactions(void){
  unsigned nested,stage;CREATESTRUCT create;MDICREATESTRUCT mdi;WM32MSGPARAMEX value;BOOL trapped;
  for(nested=0;nested<2;++nested)for(stage=1;stage<=(nested ? 6u : 3u);++stage){
   reset_case();mdi=mdi_input();memset(&create,0,sizeof(create));create.lpszClass="outer";create.lpszName="title";
-  if(nested){words.dwExStyle=WS_EX_MDICHILD;create.lpCreateParams=&mdi;}
+  if(nested){words.ExStyle=WS_EX_MDICHILD;create.lpCreateParams=&mdi;}
   value=make_message(&create,WM_CREATE,0);value.lpfnM32=WM32Create;fault_at=stage;trapped=FALSE;
   __try{__try{(void)WM32Create(&value);}__finally{wow_message_unwind32(&value);}}
   __except(fault_filter(GetExceptionCode())){trapped=TRUE;}
@@ -599,7 +601,7 @@ static void dialog_transactions(void){
    task.dwWOWCompatFlags=(mode==2 || mode==3)?WOWCF_DSBASEDSTRINGPOINTERS:0;
    result=-1;trapped=FALSE;
    __try {
-     result=W32DialogFunc((HWND)1,WM_GETTEXT,sizeof(output),(LONG)output);
+     result=W32Win16DlgProcEx((HWND)1,WM_GETTEXT,sizeof(output),(LONG)output,words.vpfnDlgProc,&words);
    } __except(GetExceptionCode()==fault_code?EXCEPTION_EXECUTE_HANDLER:EXCEPTION_CONTINUE_SEARCH){trapped=TRUE;}
    expect(trapped==callback_fault,"DIALOG_EXCEPTION_PROPAGATION");
    if(!trapped)expect(result==0,"DIALOG_NORMAL_RESULT");

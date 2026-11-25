@@ -23,6 +23,7 @@ static BOOL track(PDDECONVERSION c,HAND16 t,HAND16 f,HAND16 h,HANDLE n,PDDEINFO 
 static void rollback(PDDECONVERSION c,HAND16 t,HAND16 f){(void)t;(void)f;while(c->count)free32(c->h[--c->count]);}
 #define LOGDEBUG(level,args) ((void)0)
 #define WOW32ASSERT(x) ((void)0)
+#define WOWGLOBALALLOC GlobalAlloc
 #define GlobalAlloc alloc32
 #define GlobalLock lock32
 #define GlobalUnlock(h) ((void)(h))

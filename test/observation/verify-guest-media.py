@@ -8,8 +8,8 @@ import zipfile
 
 
 def main():
-    if len(sys.argv) not in (3, 4):
-        raise SystemExit("usage: verify-guest-media.py PACKAGE_ROOT MANIFEST [PACKAGE_RECEIPT]")
+    if len(sys.argv) < 3:
+        raise SystemExit("usage: verify-guest-media.py PACKAGE_ROOT MANIFEST [PACKAGE_RECEIPT ...]")
     root = Path(sys.argv[1]).resolve(strict=True)
     manifest = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
     if manifest.get("schema") != "ntvdm64.guest-archive.v1" or not manifest.get("files"):
@@ -47,8 +47,8 @@ def main():
         host_hash = row["Sha256"]
     failures = []
     guest_hashes = {}
-    if len(sys.argv) == 4:
-        with Path(sys.argv[3]).open(encoding="utf-8-sig", newline="") as receipt:
+    for receipt_path in sys.argv[3:]:
+        with Path(receipt_path).open(encoding="utf-8-sig", newline="") as receipt:
             for row in csv.DictReader(receipt):
                 if row["role"] == "guest":
                     key = row["path"].replace("\\", "/").casefold()

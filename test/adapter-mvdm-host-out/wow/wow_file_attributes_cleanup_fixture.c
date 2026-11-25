@@ -31,7 +31,7 @@ static HLOCAL free_owned(HLOCAL p){++frees;return LocalFree(p);}
 static void run(char *path,int pipe,int nf,int sf,WORD attributes,ULONG expected,int n,int s,int f) {
  ARGS args={0,0,attributes};ULONG result;
  input=path;pipe_case=pipe;normalize_failure=nf;set_failure=sf;normalizes=sets=frees=0;seen_attributes=0;
- result=WK32FileSetAttributes(&args);
+ result=WK32WOWFileSetAttributes(&args);
  CHECK(result==expected);CHECK(normalizes==n);CHECK(sets==s);CHECK(frees==f);
  if(s)CHECK(seen_attributes==((attributes?attributes:FILE_ATTRIBUTE_NORMAL)&DOS_ATTR_MASK));
 }

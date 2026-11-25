@@ -36,7 +36,7 @@ foreach(name IN ITEMS DDEAddhandle DDEDeletehandle DDEFindPair16 DDEFindPair32
 endforeach()
 ntvdm_function_body(post "${dde_source}/wumsg.c" WU32PostMessage)
 string(FIND "${post}" "DWORD error = GetLastError();" begin)
-string(FIND "${post}" "\n    }\n#line 1492" finish)
+string(FIND "${post}" "\n    }\n#line " finish REVERSE)
 if(begin LESS 0 OR finish LESS begin)
   message(FATAL_ERROR "DDE PostMessage cleanup boundary changed")
 endif()

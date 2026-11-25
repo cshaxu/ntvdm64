@@ -27,7 +27,9 @@ int main(void){
  for(i=0;i<32;++i){dx=0;ax=0xdead;xmsAllocBlock();CHECK(ax==BASE/1024);CHECK(freebytes()==initial);}
  CHECK(commits==0 && decommits==0 && moves==0);
  dx=8;xmsAllocBlock();block=ax;CHECK(block==BASE/1024);memset(bytes,0x5a,8192);CHECK(freebytes()==initial-8192);
- /* Original HIMEM returns before BOP for equal old/new sizes. */
+ /* HIMEM normally handles equal sizes before the BOP. Exercise the XP host entry directly. */
+ ax=block;dx=8;bx=8;cx=0;xmsReallocBlock();
+ CHECK(cx==block);CHECK(freebytes()==initial-8192);
  dx=0;xmsAllocBlock();CHECK(ax==BASE/1024);CHECK(freebytes()==initial-8192);
  ax=BASE/1024;dx=0;bx=1;xmsReallocBlock();grown=cx;CHECK(grown!=0 && grown!=block);CHECK(freebytes()==initial-9216);CHECK(bytes[0]==0x5a && bytes[8191]==0x5a);
  ax=grown;dx=1;xmsFreeBlock();CHECK(ax==1);ax=block;dx=8;xmsFreeBlock();CHECK(ax==1);CHECK(freebytes()==initial);

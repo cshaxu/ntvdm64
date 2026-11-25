@@ -21,6 +21,7 @@ param(
     [switch]$PromptPair,
     [ValidateSet('blocking','nonblocking')][string]$Scheduling,
     [string]$ScheduledRun16Command,
+    [switch]$CloseSerialWarning,
     [switch]$CaptureWindows,
     [string]$SurfaceObserver,
     [ValidateRange(10000,600000)][int]$TimeoutMs = 60000,
@@ -280,7 +281,7 @@ try {
                         if ($row.ParentProcessId -in $known -and $row.ProcessId -notin $known) { $known += $row.ProcessId }
                     }
                 }
-                try { $observation = [WindowInspector]::Read([int[]]$known,$desktop,$true,$false,$false) }
+                try { $observation = [WindowInspector]::Read([int[]]$known,$desktop,(!$CloseSerialWarning),$false,$false,[bool]$CloseSerialWarning) }
                 catch [System.ComponentModel.Win32Exception] {
                     if ($_.Exception.NativeErrorCode -ne 2) { throw }
                     continue # The observer has not created its desktop yet.
@@ -296,7 +297,7 @@ try {
                         }
                     }
                 }
-                if ($observation -match 'serial-ignore=True') {
+                if ($observation -match 'serial-(ignore|close)=True') {
                     [IO.File]::AppendAllText((Join-Path $output "$($case.Name).serial-dialogs.txt"),$observation)
                 }
             }
@@ -397,6 +398,7 @@ try {
         $exitAccepted=$exited -or $exitBoundary
         $terminal=if($ServiceLossMarkers){$serviceLossPassed -and $observation -match '(?m)^result=exited\r?$'}else{$exitAccepted}
         $pass=$started -and $valid -and $terminal -and !$errorText
+        if($CloseSerialWarning){$pass=(Test-Path "$output/$($case.Name).serial-dialogs.txt") -and ((Get-Content "$output/$($case.Name).serial-dialogs.txt" -Raw) -match "serial-close=True") -and ($observation -match "(?m)^result=exited\r?$") -and ($observation -notmatch "(?m)^exit=0x00000078\r?$") -and !$errorText}
         $results.Add([pscustomobject]@{case=$case.Name;dosonly=$case.DosOnly;enhanced=$case.Enhanced;
             probeStarted=$started;progmanAndMode=$valid;flags=$flags;hwnd=$hwnd;observedDosOnly=$observedDosOnly;normalExit=$exited;serviceLoss=($serviceLossPassed -and !$WorkerCloseMonitor);workerClose=($serviceLossPassed -and [bool]$WorkerCloseMonitor -and !$ConsoleClose);consoleClose=($serviceLossPassed -and [bool]$ConsoleClose);
             exitAccepted=$exitAccepted;knownExitOne=$exitBoundary;passed=$pass;error=$errorText;observer=$report})

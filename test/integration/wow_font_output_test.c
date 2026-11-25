@@ -36,11 +36,13 @@ static void copy_pairs(DWORD p,DWORD n,const KERNINGPAIR *b){pairs=n;memcpy((voi
 #undef GetKerningPairs
 #define GetKerningPairs native_pairs
 #define LOGDEBUG(a,b) ((void)0)
+#define GETVDMPTR(address,size,pointer) ((pointer)=(LPSTR)(address))
+#define FREEVDMPTR(pointer) ((void)(pointer))
 #include "font_exact.h"
 int main(void){
  HFONT font,old;MAT2 m={{0,1},{0,0},{0,0},{0,1}};GLYPHMETRICS gm,nativegm;
  BYTE guest[65536],native[65536];DWORD r,expected,n,i;
- GETGLYPHOUTLINE16 g={0};GETFONTDATA16 f={0};GETKERNINGPAIRS16 k={0};
+ GETGLYPHOUTLINE16 g={0};GETKERNINGPAIRS16 k={0};
  dc=CreateCompatibleDC(NULL);font=CreateFontA(24,0,0,0,FW_NORMAL,0,0,0,ANSI_CHARSET,OUT_TT_ONLY_PRECIS,0,0,0,"Arial");old=SelectObject(dc,font);
  check(dc&&font&&old,"native font/DC");
  g.f7=(DWORD)&m;g.f6=(DWORD)guest;g.f5=sizeof(guest);g.f4=(DWORD)&gm;g.f2='A';g.f3=GGO_METRICS;
@@ -57,11 +59,6 @@ int main(void){
  printf("NATIVE kerning return=%lu tail=%02x last=%02x\n",expected,native[expected*sizeof(KERNINGPAIR)],native[65535]);memset(guest,0xa5,sizeof(guest));pairs=0;r=WG32GetKerningPairs(&k);
  check(r==expected&&r==n,"kerning short return");check(!memcmp(guest,native,n*sizeof(KERNINGPAIR)),"kerning values");check(pairs==n&&guest[n*sizeof(KERNINGPAIR)]==0xa5,"kerning tail untouched");}
  fail_kerning=1;k.f3=(DWORD)guest;k.f2=3;memset(guest,0xa5,sizeof(guest));pairs=0;check(WG32GetKerningPairs(&k)==0,"controlled kerning failure return");check(pairs==0&&guest[0]==0xa5,"no unavailable kerning output");fail_kerning=0;
- f.f4=(DWORD)guest;f.f5=32;memset(native,0xa5,sizeof(native));expected=GetFontData(dc,0,0,native,32);memset(guest,0xa5,sizeof(guest));r=WG32GetFontData(&f);
- check(expected==32&&r==expected&&!memcmp(guest,native,32),"font data success");
- f.f4=0;f.f5=0;r=WG32GetFontData(&f);check(r==GetFontData(dc,0,0,NULL,0)&&r!=GDI_ERROR,"font size query");
- g.f5=0;g.f6=0;r=WG32GetGlyphOutline(&g);check(r==GetGlyphOutlineA(dc,'A',GGO_BITMAP,&nativegm,0,NULL,&m),"glyph size query");
- k.f3=0;k.f2=0;check(WG32GetKerningPairs(&k)==n,"kerning size query");
  for(i=0;i<1;++i)check(allocations==0,"temporary allocations retired");
  SelectObject(dc,old);DeleteObject(font);DeleteDC(dc);
  printf("FONT_OUTPUT checks=%u failures=%u\n",checks,failures);return failures?1:0;

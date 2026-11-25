@@ -40,7 +40,7 @@ extern UINT VdmExitCode;
 VOID xmsAllocBlock (VOID)
 {
 BOOL Success;
-ULONG BaseAddress = 1024 * 1024 + 64 * 1024;
+ULONG BaseAddress;
 ULONG size;
 
     size = getDX() * 1024;
@@ -61,6 +61,8 @@ ULONG size;
             return;
         }
     }
+    else
+	BaseAddress = 1024 * 1024 + 64 * 1024;
 
     ASSERT((USHORT)(BaseAddress / 1024) < 65535);
     setAX((USHORT)(BaseAddress / 1024));
@@ -151,6 +153,10 @@ ULONG NewSize;
             return;
         }
     }
+    else
+    {
+	NewAddress = BaseAddress;
+    }
 
     ASSERT((NewAddress / 1024) < 65535);
     setCX((USHORT)(NewAddress / 1024));
@@ -192,7 +198,7 @@ ULONG MoveInfoAddress = ((ULONG)getSS() << 4) + getBP();
     }
 
     pExtMoveInfo = MoveInfo + sizeof(MoveInfo);
-#line 183
+#line 189
     (ULONG)pExtMoveInfo = (ULONG)pExtMoveInfo -4;
     cbTransfer = (FETCHDWORD(*(PULONG)pExtMoveInfo));
     cbTransfer *= 2;					// Get in bytes
@@ -205,24 +211,24 @@ ULONG MoveInfoAddress = ((ULONG)getSS() << 4) + getBP();
     // but XMS spec wants memcpy behaviour.
 
 #ifdef i386
-#line 195
+#line 201
 #error DIVERGENCE MVDM-HOST-DIV-594: historical i386 XMS path is not selected
 #else
-#line 197
+#line 203
     if (cbTransfer && (!mvdm_softpc_guest_memory_range_valid((ULONG)pSrc, cbTransfer, 0) ||
             !mvdm_softpc_guest_memory_range_valid((ULONG)pDst, cbTransfer, 1)))
         goto invalid_address;
     if (cbTransfer) c_sas_move_bytes_forward((ULONG)pSrc, (ULONG)pDst, cbTransfer);
 
 #endif
-#line 209
+#line 215
     setAX(1);
     return;
 
 invalid_address:
     VdmExitCode = ERROR_INVALID_ADDRESS;
     TerminateVDM();
-#line 211
+#line 217
 }
 
 /* xmsQueryExtMem - Process query extended memory

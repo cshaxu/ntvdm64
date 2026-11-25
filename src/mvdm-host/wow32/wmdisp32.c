@@ -45,13 +45,16 @@ BOOL W32Win16DlgProcEx(HWND hdlg, UINT uMsg, UINT uParam, LONG lParam,
 {
     BOOL fSuccess;
     register PTD ptd;
-    WM32MSGPARAMEX wm32mpex;
+    WM32MSGPARAMEX wm32mpex = {0};
+    wow_message_stack stack;
     BOOL   fMessageNeedsThunking;
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
     DWORD dwTics;
 #endif
 
+    wow_message_stack_enter(&stack);
+    __try {
     ptd = CURRENTPTD();
 
     WOW32ASSERT(vpDlgProc16);
@@ -162,6 +165,7 @@ BOOL W32Win16DlgProcEx(HWND hdlg, UINT uMsg, UINT uParam, LONG lParam,
     if (!fSuccess)
         goto Error;
 
+    stack.completed = TRUE;
 Done:
 
     return wm32mpex.lReturn;
@@ -170,6 +174,9 @@ Error:
     LOGDEBUG(6,("    W32Win16DlgProcEx WARNING: cannot call back, using default message handling\n"));
     wm32mpex.lReturn = 0;
     goto Done;
+    } __finally {
+        wow_message_finish32(&wm32mpex, &stack);
+    }
 }
 
 

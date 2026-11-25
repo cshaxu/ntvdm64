@@ -14,7 +14,7 @@ set(owner "${NTVDM_REPO}/src/mvdm-host/wow32")
 construction_read(wow "${NTVDM_REPO}/src/mvdm-host/inc/wow.h")
 construction_read(aliases "${owner}/walias.h")
 construction_region(parm "${wow}" "typedef struct _PARMWP" "} PARM16, *PPARM16;")
-reverse_slice(records "${aliases}" "typedef struct _DLGDATA" "#define MSG16NEEDSTHUNKING")
+reverse_slice(records "${aliases}" "typedef struct _THUNKTEXTDWORD" "#define MSG16NEEDSTHUNKING")
 file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/reverse_types.h"
   CONTENT "#pragma pack(push,1)\n${parm}\n#pragma pack(pop)\n${records}" @ONLY)
 construction_read(structures "${owner}/wstruc.h")

@@ -13,7 +13,7 @@ construction_region(body "${wow}" "typedef struct _PARMWP" "} PARM16, *PPARM16;"
 set(types "#pragma pack(push,1)\n${body}\n")
 construction_region(body "${user}" "typedef struct _SETWINDOWTEXT16" "typedef SETWINDOWTEXT16 UNALIGNED *PSETWINDOWTEXT16;")
 string(APPEND types "${body}\n#pragma pack(pop)\n")
-construction_region(body "${aliases}" "typedef struct _DLGDATA" "} MSGPARAMEX;")
+construction_region(body "${aliases}" "typedef struct _THUNKTEXTDWORD" "} MSGPARAMEX;")
 string(APPEND types "${body}\n")
 construction_region(body "${forward}" "typedef struct _WM32MSGPARAMEX *LPWM32MSGPARAMEX;" "} WM32MSGPARAMEX;")
 string(APPEND types "${body}\n")

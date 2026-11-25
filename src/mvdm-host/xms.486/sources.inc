@@ -13,27 +13,21 @@ Abstract:
     compiler switches and libraries that are unique for the component being
     built.
 
-
-History:
-    Created 15-May-1991 by Sudeep Bharati (sudeepb)
-    from template created 12-Apr-1990 by Steve Wood (stevewo)
-
-
-NOTE:   Commented description of this file is in \nt\public\oak\bin\sources.tpl
-
 !ENDIF
 
 MAJORCOMP=mvdm
 MINORCOMP=xms
 
 TARGETNAME=xms486
-TARGETPATH=\nt\public\sdk\lib
+TARGETPATH=obj
 TARGETTYPE=LIBRARY
-TARGETLIBS=
 
-SOFTPC_TREE=$(BASEDIR)\private\mvdm\softpc.new
+SOFTPC_TREE=$(PROJECT_ROOT)\mvdm\softpc.new
 
-INCLUDES=..\inc;$(SOFTPC_TREE)\base\inc
+INCLUDES=\
+    ..;\
+    ..\..\inc;\
+    $(SOFTPC_TREE)\base\inc
 
 !IF $(ALPHA) || $(MIPS)
 GPSIZE=0
@@ -41,18 +35,18 @@ GPSIZE=0
 GPSIZE=32
 !ENDIF
 
+SOURCES=..\xms.c       \
+        ..\xmsa20.c    \
+        ..\xmsblock.c  \
+        ..\xmsdisp.c   \
+        ..\xmsmisc.c   \
+        ..\xmsumb.c
 
-NTPROFILEINPUT=YES
-
-SOURCES=xms.c       \
-        xmsa20.c    \
-        xmsblock.c  \
-        xmsdisp.c   \
-        xmsmisc.c   \
-        xmsumb.c
+i386_SOURCES=..\i386\xmsmem86.c
+MIPS_SOURCES=..\xmsmemr.c
+ALPHA_SOURCES=..\xmsmemr.c
+PPC_SOURCES=..\xmsmemr.c
 
 C_DEFINES=-DWIN_32
 
 UMTYPE=console
-UMTEST=
-UMLIBS=

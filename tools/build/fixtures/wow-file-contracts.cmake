@@ -2,15 +2,15 @@ if(NOT NTVDM_ARCH STREQUAL "x86")
   return()
 endif()
 set(owner "${NTVDM_REPO}/src/mvdm-host/wow32")
-foreach(spec IN ITEMS "file_attributes_cleanup|wkfileio.c|ULONG FASTCALL WK32FileSetAttributes(|ULONG FASTCALL WK32FileGetDateTime("
-    "known_dll|wkman.c|VOID WK32InitWowIsKnownDLL(|ULONG FASTCALL WK32WowIsKnownDLL("
-    "module_filename_boundary|wkernel.c|ULONG FASTCALL WK32GetModuleFileName(|ULONG FASTCALL WK32FreeResource(")
+foreach(spec IN ITEMS "file_attributes_cleanup|wkfileio.c|WK32WOWFileSetAttributes"
+    "known_dll|wkman.c|WK32InitWowIsKnownDLL"
+    "module_filename_boundary|wkernel.c|WK32GetModuleFileName")
   string(REPLACE "|" ";" parts "${spec}")
   list(GET parts 0 name)
   list(GET parts 1 source)
-  list(GET parts 2 begin)
-  list(GET parts 3 end)
-  ntvdm_source_projection("wow-${name}.inc" "${owner}/${source}" "${begin}" "${end}" "" FALSE)
+  list(GET parts 2 function_name)
+  ntvdm_function_body(body "${owner}/${source}" "${function_name}")
+  file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/wow-${name}.inc" CONTENT "${body}" @ONLY)
   fixture(wow-file-${name} CL "test/adapter-mvdm-host-out/wow/wow_${name}_fixture.c")
   set_property(TARGET wow-file-${name}_objects PROPERTY COMPILE_OPTIONS /nologo /TC /O2)
   target_compile_definitions(wow-file-${name}_objects PRIVATE "THUNK_SOURCE=\"wow-${name}.inc\"")

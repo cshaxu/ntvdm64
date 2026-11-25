@@ -36,6 +36,7 @@ static VOID UpdateEmbeddingKey(LPSTR name){check(!strcmp(name,"Alpha")||!strcmp(
 #define RegSetValue wow_registry_set_value
 #define RegCloseKey wow_registry_close_key
 static char szServerKey[]="protocol\\StdFileEditing\\server";
+#define WOW32_strchr strchr
 #include "embedding_exact.h"
 static void enumeration(HKEY handle){calls=updated=0;enum_override=handle;if(!setjmp(budget)){UpdateEmbeddingAllKeys();check(calls==4&&updated==2,"original skip-too-long then end");}else check(0,"original enumeration terminates");}
 int main(void){
