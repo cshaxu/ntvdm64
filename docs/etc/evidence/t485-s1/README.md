@@ -187,3 +187,20 @@ XP-only components belong to a later T. Admit a minimum dependency into the requ
 These are confirmed current interfaces and future joint-check candidates. Move a companion early only when qualification shows the current batch needs it. Each batch remains unstarted. Record its exact input blobs, affected output or historical-only disposition, companion files, compatibility test and rollback package before integration.
 
 For 66 unmatched current paths the file ledger also lists a relocation lead. The search retains a unique candidate matching a trailing directory plus filename (or a longer trailing path) across the XP NT catalogue. Verify the original owner and interface before promoting any lead. The exact-path counts above exclude these hints.
+
+## Three-way migration decision
+
+Compare old upstream, the pinned local tree and XP. The old_tree, old_path and old_blob columns identify the old Git file. The old tree revisions are OpenNT 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c, OpenNT-4.5 98bd914d250dd72a85e351da1ec3aa88433aac35 and opennt-src-2 5e4619ab61c2aa76151e03973cce340be2933e61. Resolve MVDM package selection using the T274 S1 union ledger (including its six OpenNT-primary conflicts) and the T301 S1 supplement manifest. Non-MVDM uses its original relative path or the recorded NT tree layout. The two root README files are local divergence documentation.
+
+| Old / local / XP result at original path | Files | Batch action |
+| --- | ---: | --- |
+| All identical | 163 | Keep exact bytes. |
+| Only upstream changed | 923 | Qualify the XP version. |
+| Only local changed | 898 | Review the existing local diff against unchanged upstream. |
+| Both changed | 757 | Compare both deltas against old upstream and carry only justified adaptations. |
+| Old upstream exists, XP original path absent | 1243 | Resolve move, replacement or removal for this component. |
+| Project-owned documentation | 2 | Reconcile local governance separately. |
+
+After migrating a directory, remove any old file confirmed absent from its XP component. If XP moved the implementation, qualify it at its XP location and retire the obsolete path. Resolve active consumers, build inputs, assets and tests before closing the batch. The 66 filename/suffix hints are search leads only; even generic makefiles can match an unrelated component.
+
+The [XP directory review](xp-directory-review.csv) contains 3,348 XP files absent locally at those exact paths in directories already owning local files. It is a reverse membership check, not an import list. Review these entries for replacements and necessary dependencies only. Catalogue new subdirectories when qualifying an existing component's build inputs. Unrelated new components remain assigned to the next T. Directory ownership, semantic equivalence, packaging rights and runtime validity require separate evidence.
