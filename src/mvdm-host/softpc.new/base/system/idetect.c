@@ -204,29 +204,56 @@ void idle_tick();
 #line 203
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
+#include "vdm.h"
 #line 216
   
 /*  NTVDM
  *  Some of our static global variables are located in 16 bit memory area
  *  so we reference as pointers, inititializaed by kb_setup_vectors
  */
+#if defined(NEC_98)
+#line 222
+#error Unsupported NEC PC-98 configuration
+#endif   //NEC_98
+#line 226
 word minFailedPolls = 8;
 word ienabled = 0;
 word ShortIdle=0;
 word IdleNoActivity = 0;
 
 
+#if defined(NEC_98)
+#line 233
+#error Unsupported NEC PC-98 configuration
+#else    //NEC_98
+#line 235
 word *pICounter;
+#endif   //NEC_98
+#line 237
 #define i_counter (*pICounter)
 
+#if defined(NEC_98)
+#line 240
+#error Unsupported NEC PC-98 configuration
+#else    //NEC_98
+#line 242
 word *pCharPollsPerTick;
+#endif   //NEC_98
+#line 244
 #define nCharPollsPerTick (*pCharPollsPerTick)
 
+#if defined(NEC_98)
+#line 247
+#error Unsupported NEC PC-98 configuration
+#else    //NEC_98
+#line 249
 word *pMinConsecutiveTicks;
+#endif   //NEC_98
+#line 251
 #define minConsecutiveTicks (*pMinConsecutiveTicks)
 
 #endif  /* NTVDM */
-#line 237
+#line 254
 
 /* [5.2.2 INTERNAL PROCEDURE DEFINITIONS]                               */
 
@@ -240,10 +267,10 @@ PURPOSE         :       called from keyboard BIOS as result of
 
 
 #ifndef NTVDM
-#line 250
+#line 267
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
-#line 284
+#line 301
 
 #ifdef NTVDM
 /*
@@ -279,10 +306,10 @@ void idle_kybd_poll(void)
 	nCharPollsPerTick++;
 }
 #else
-#line 319
+#line 336
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 334
+#line 351
 
 /*
 ======================================================================
@@ -306,10 +333,10 @@ void idle_tick(void)
 	    ExternalWaitRequest = FALSE;
 	}
 #ifdef MONITOR
-#line 357
+#line 374
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 363
+#line 380
         if (IdleNoActivity)
         {
             /* no graphics or comms/lpt activity has occurred...
@@ -342,10 +369,10 @@ void idle_tick(void)
 }
 
 #else  /* NTVDM */
-#line 395
+#line 412
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 420
+#line 437
 
 /*
 7.INTERMODULE INTERFACE IMPLEMENTATION :
@@ -361,10 +388,10 @@ void idetect (event)
 int event;
 {
 #ifndef NTVDM
-#line 435
+#line 452
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 438
+#line 455
 
 	switch (event)
 	{
@@ -372,18 +399,18 @@ int event;
 	case IDLE_WAITIO:
 #ifdef NTVDM
 #ifdef MONITOR
-#line 445
+#line 462
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 447
+#line 464
 		IdleNoActivity = 1;
                 PrioWaitIfIdle(10);
 		break;
 #else
-#line 451
+#line 468
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 453
+#line 470
 		/* fall thru to idle init */
 
 	/* initialise flags and counter */
@@ -393,10 +420,10 @@ int event;
 #ifdef NTVDM
                 IdleNoActivity = 1;
 #else
-#line 462
+#line 479
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 466
+#line 483
 		break;
 
 	/* application polling for keyboard input */
@@ -415,10 +442,10 @@ void idle_set (minpoll, minperiod)
 int minpoll, minperiod;
 {
 	if (minperiod > 0)
-		minConsecutiveTicks = minperiod;
+		minConsecutiveTicks = (word)minperiod;
 
 	if (minpoll > 0)
-		minFailedPolls = minpoll;
+		minFailedPolls = (word)minpoll;
 }
 
 void idle_ctl (flag)
@@ -426,19 +453,19 @@ int flag;
 {
 #ifdef NTVDM
 #ifdef PIG
-#line 495
+#line 512
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
-#line 497
+#line 514
     if (IdleDisabledFromPIF)    /* configured setting overrides normal control*/
 	ienabled = 0;
     else
-	ienabled = flag;
+	ienabled = (word)flag;
 #endif /* PIG */
-#line 502
+#line 519
 #else
-#line 503
+#line 520
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
-#line 505
+#line 522
 }

@@ -47,8 +47,9 @@ foreach(name IN LISTS names)
   list(APPEND keymouse_objects "${object}")
 endforeach()
 
-worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/system/sources")
+worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/system/sources.inc")
 list(REMOVE_DUPLICATES names)
+list(REMOVE_ITEM names "system.c") # XP PC-98 only
 set(system_objects)
 foreach(name IN LISTS names)
   set(flags "${profile_1}")

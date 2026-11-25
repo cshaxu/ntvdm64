@@ -16,12 +16,7 @@
 */
 
 #include <stdio.h>
-#line 19
-#if defined(NTVDM) && defined(MONITOR)
-#line 20
-#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
-#endif
-#line 22
+#include <malloc.h>
 
 #include TypesH
 #include MemoryH
@@ -44,24 +39,30 @@
 #ifdef CCPU
 #include "ccpusas4.h"
 #else	/* ! CCPU */
-#line 44
+#line 42
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif	/* ! CCPU */
-#line 46
+#line 44
 #endif	/* CPU_40_STYLE */
+
+#if defined(NEC_98)
+#line 47
+#error Unsupported NEC PC-98 configuration
+#else    //NEC_98
+#line 60
 
 #ifndef BIOS1ROM_FILENAME
 #define	BIOS1ROM_FILENAME	"bios1.rom"
 #endif /* BIOS1ROM_FILENAME */
 
 #ifndef BIOS2ROM_FILENAME
-#ifdef	CPU_40_STYLE
+#if defined(CPU_40_STYLE) || defined(ARCX86)
 #define	BIOS2ROM_FILENAME	"bios4.rom"
 #else	/* CPU_40_STYLE */
-#line 56
+#line 69
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 58
+#line 71
 #endif /* BIOS2ROM_FILENAME */
 
 #ifndef EGAROM_FILENAME
@@ -76,12 +77,15 @@
 #define	V7VGAROM_FILENAME	"v7vga.rom"
 #endif /* V7VGAROM_FILENAME */
 
-#line 72
+#endif   //NEC_98
+#line 86
+
+#line 87
 #ifdef 	GISP_SVGA
-#line 73
+#line 88
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif
-#line 77
+#line 92
 
 #ifndef ADAPTOR_ROM_START
 #define ADAPTOR_ROM_START	0xc8000
@@ -105,20 +109,26 @@
 
 #define	ROM_SIGNATURE		0xaa55
 
+#if defined(NEC_98)
+#line 116
+#error Unsupported NEC PC-98 configuration
+#endif   //NEC_98
+#line 119
+
 /* Current SoftPC verion number */
 #define MAJOR_VER	0x03
 #define MINOR_VER	0x00
 
 #if defined(macintosh) && defined(A2CPU)
-#line 105
+#line 125
 #error Excluded unsupported A2CPU configuration
 
 #else
-#line 108
+#line 128
 	/* Using sas_scratch_buffer - will get 64K anyway. */
 #define ROM_BUFFER_SIZE 1024*64
 #endif
-#line 111
+#line 131
 
 LOCAL LONG read_rom IPT2(char *, name, sys_addr, address);
 LOCAL	half_word	do_rom_checksum IPT1(sys_addr, addr);
@@ -126,10 +136,18 @@ LOCAL	half_word	do_rom_checksum IPT1(sys_addr, addr);
 #ifdef ANSI
 extern long host_read_resource (int, char *, host_addr, int ,int);
 #else
-#line 118
+#line 138
 #error Unsupported excluded original configuration
 #endif
-#line 120
+#line 140
+
+extern void host_simulate();
+
+#if defined(NEC_98)
+#line 144
+#error Unsupported NEC PC-98 configuration
+#endif   //NEC_98
+#line 149
 
 /*(
  *=========================== patchCheckSum ================================
@@ -171,12 +189,12 @@ patchCheckSum IFN3(PHY_ADDR, start, PHY_ADDR, length, PHY_ADDR, offset)
 	roundedLength = (length + 511) & (~511);
 	sas_connect_memory(start, start + roundedLength - 1, SAS_RAM);
 
-#line 161
+#line 190
 #ifndef PROD
-#line 162
+#line 191
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 178
+#line 207
 
 	signature = sas_PR16(start);
 	if (signature != 0xaa55) {
@@ -187,7 +205,7 @@ patchCheckSum IFN3(PHY_ADDR, start, PHY_ADDR, length, PHY_ADDR, offset)
 	indicatedLength = sas_PR8(start + 2) * 512;
 	if (indicatedLength != roundedLength) {
 		always_trace3("ROM at 0x%.5lx has incorrect length 0x%.8lx (actually 0x%.8lx)", start, indicatedLength, roundedLength);
-		sas_PW8(start + 2, roundedLength / 512);
+		sas_PW8(start + 2, (IU8)(roundedLength / 512));
 	}
 
 
@@ -221,11 +239,12 @@ OUTPUT:		None.
 )*/
 GLOBAL void read_video_rom IFN0()
 {
+#ifndef NEC_98
 #ifdef REAL_VGA
-#line 223
+#line 253
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else /* REAL_VGA */
-#line 225
+#line 255
 	PHY_ADDR romLength = 0;
 
 	switch ((ULONG) config_inquire(C_GFX_ADAPTER, NULL))
@@ -236,10 +255,10 @@ GLOBAL void read_video_rom IFN0()
 #ifdef V7VGA
 		romLength = read_rom (V7VGAROM_FILENAME, EGA_ROM_START);
 #else	/* V7VGA */
-#line 235
+#line 269
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif  /* V7VGA */
-#line 237
+#line 274
 		break;
 #endif	/* VGG */
 
@@ -254,10 +273,10 @@ GLOBAL void read_video_rom IFN0()
 		break;
 
 #else			/* GISP_SVGA */
-#line 251
+#line 288
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */	
-#line 259
+#line 296
 
 	}
 
@@ -277,11 +296,18 @@ GLOBAL void read_video_rom IFN0()
 		patchCheckSum(EGA_ROM_START, romLength, 5);
 	}
 #endif	/* not REAL_VGA */
-#line 278
+#endif   //NEC_98
+#line 316
 }
 
 GLOBAL void rom_init IFN0()
 {
+#if defined(NEC_98)
+#line 321
+#error Unsupported NEC PC-98 configuration
+#else    //NEC_98
+#line 341
+
 #if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )
 	 /*
      * Fill up all of ROM (Intel C0000 upwards) with bad op-codes.
@@ -291,20 +317,20 @@ GLOBAL void rom_init IFN0()
      */
 
 #ifdef GISP_SVGA
-#line 291
+#line 351
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else		/* GISP_SVGA */
-#line 293
+#line 353
 #if	defined(macintosh) && defined(A2CPU)
-#line 294
+#line 354
 #error Excluded unsupported A2CPU configuration
 #else
-#line 296
+#line 356
 	sas_fills( ROM_START, BAD_OP, PC_MEM_SIZE - ROM_START);
 #endif		/* macintosh && A2CPU */
-#line 298
+#line 358
 #endif		/* GISP_SVGA */
-#line 299
+#line 359
 
 	/*
 	 * emm386 needs a hole to put it's page frame in.
@@ -318,28 +344,36 @@ GLOBAL void rom_init IFN0()
     
 	/* load the rom bios */
 #ifdef GISP_SVGA
-#line 312
+#line 372
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else		/* GISP_SVGA */
-#line 324
+#line 384
 
 	read_rom (BIOS1ROM_FILENAME, BIOS_START);
 	read_rom (BIOS2ROM_FILENAME, BIOS2_START);
 
 #endif		/* GISP_SVGA */
-#line 329
+#line 389
 
 #else	/* !NTVDM | (NTVDM & !X86GFX) */
-#line 331
+#line 391
 #error Unsupported excluded original configuration
 #endif /* !NTVDM | (NTVDM & !X86GFX) */
-#line 343
+#line 416
 
 	host_rom_init();
+#endif   //NEC_98
+#line 419
 }
 
 LOCAL LONG read_rom IFN2(char *, name, sys_addr, address)
 {
+#if defined(NEC_98)
+#line 424
+#error Unsupported NEC PC-98 configuration
+#else    //NEC_98
+#line 453
+
 #if !(defined(NTVDM) && defined(MONITOR))
 	host_addr tmp;
 	long size = 0;
@@ -348,13 +382,13 @@ LOCAL LONG read_rom IFN2(char *, name, sys_addr, address)
     /* BIOS rom first. 														*/
 	/* Mac on 2.0 cpu doesn't want to use sas scratch buffer. 				*/
 #if defined(macintosh) && defined(A2CPU)
-#line 357
+#line 462
 #error Excluded unsupported A2CPU configuration
 #else
-#line 359
+#line 464
 	tmp = (host_addr)sas_scratch_address(ROM_BUFFER_SIZE);
 #endif
-#line 361
+#line 466
 
     if (!tmp)
     {
@@ -369,18 +403,25 @@ LOCAL LONG read_rom IFN2(char *, name, sys_addr, address)
     }
 
 #if defined(macintosh) && defined(A2CPU)
-#line 375
+#line 480
 #error Excluded unsupported A2CPU configuration
 #endif
-#line 377
+#line 482
 
     return( size );
 #else
-#line 380
+#line 505
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* !(NTVDM && MONITOR) */
-#line 382
+#endif   //NEC_98
+#line 513
 }
+
+#if defined(NEC_98)
+#line 516
+#error Unsupported NEC PC-98 configuration
+#endif   //NEC_98
+#line 543
 
 LOCAL	half_word	do_rom_checksum IFN1(sys_addr, addr)
 {
@@ -392,7 +433,7 @@ LOCAL	half_word	do_rom_checksum IFN1(sys_addr, addr)
 	for (; addr<last_byte_addr; addr++)
 		sum += sas_hw_at(addr);
 
-	return( sum % 0x100 );
+	return( (half_word)(sum % 0x100) );
 }
 
 LOCAL	VOID	do_search_for_roms IFN3(sys_addr, start_addr,
@@ -423,8 +464,8 @@ LOCAL	VOID	do_search_for_roms IFN3(sys_addr, start_addr,
 				push_word( 0x95a );
 				savedCS = getCS();
 				savedIP = getIP();
-				setCS((addr & 0xf0000) >> 4);
-				setIP((addr & 0xffff));
+				setCS((UCHAR)((addr & 0xf0000) >> 4));
+				setIP((USHORT)((addr & 0xffff)));
 				host_simulate();
 				setCS(savedCS);
 				setIP(savedIP);
@@ -488,10 +529,10 @@ GLOBAL VOID patch_rom IFN2(sys_addr, addr, half_word, val)
 	 */
 
 #ifdef macintosh
-#line 490
+#line 650
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #endif /* macintosh */
-#line 504
+#line 664
  
 	/* The page might not be present (Arrggghhhh!!!!!)
 	** so we can't do anything sensible and must give
@@ -536,14 +577,14 @@ GLOBAL VOID patch_rom IFN2(sys_addr, addr, half_word, val)
 #endif /* GISP_SVGA */
 
 #else	/* CPU_40_STYLE */
-#line 548
+#line 708
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 586
+#line 746
 
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
-#line 514
-#line 588
+#line 674
+#line 748
 }
 
 #ifndef GISP_SVGA
@@ -574,14 +615,18 @@ GLOBAL void copyROM IFN0()
 #ifndef GISP_SVGA
 LOCAL sys_addr  cur_loc = DOS_SCRATCH_PAD;
 #else		/* GISP_SVGA */
-#line 618
+#line 778
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */
-#line 621
+#line 781
 
 GLOBAL void display_string IFN1(char *, string_ptr)
 {
-#if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )
+#if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) ) || defined(ARCX86)
+#ifdef ARCX86
+  if (UseEmulationROM)
+#endif
+  {
 	/*
 	 * Put the message "*string_ptr" in the ROM
 	 * scratch area where the drivers know where
@@ -625,10 +670,10 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 	if (((endLinAddr ^ DOS_SCRATCH_PAD) > 0xfff) || (endLinAddr > DOS_SCRATCH_PAD_END))
 	{
 #ifndef PROD
-#line 668
+#line 832
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 670
+#line 834
 		if ((DOS_SCRATCH_PAD_END ^ DOS_SCRATCH_PAD) > 0xfff)
 		{
 			/* The defined DOS scratch pad crosses a page
@@ -654,11 +699,11 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 	*IncCpuPtrLS8(hostPtr) = '$';
 	*IncCpuPtrLS8(hostPtr) = '\0';
 #else /* CPU_40_STYLE */
-#line 695
+#line 859
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
-#line 705
-#endif	/* !NTVDM | !MONITOR */
+  }
+#endif	/* !NTVDM | !MONITOR | ARCX86 */
 	cur_loc+=strlen(string_ptr);
 }
 

@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T485 S3** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. The S2 receipt identifies its twelve host images. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). H019 brings the total to 19/159. H020 is next. See the [H019 receipt](../etc/evidence/t485-s1/h019.md).
+**Active: M0 T485 S3** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. The S2 receipt identifies its twelve host images. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). H020 and H021 bring the total to 21/159. H022 video is next. See the [directory and release receipt](../etc/evidence/t485-s1/h020-h021.md).
 
 ## Active Packet
 
@@ -29,7 +29,7 @@
 
 ## Current Technical Baseline
 
-The S3 product31 package contains thirteen host images, including VJOY.DLL. Commit d9614441e contains the previous product30 package. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. The owner approved local source use on the OpenNT basis. The owner selected English x86 Professional SP3 media. The 61 direct matches were independently verified on the selected disc. Source/media ABI compatibility is verified per batch. The project owner has approved XP source use and ordinary project delivery for all T485 batches. H001 build ownership is traced.
+The S3 product32 package contains thirteen host images, including VJOY.DLL. Commit d111f24fc contains the previous product31 package. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. The owner approved local source use on the OpenNT basis. The owner selected English x86 Professional SP3 media. The 61 direct matches were independently verified on the selected disc. Source/media ABI compatibility is verified per batch. The project owner has approved XP source use and ordinary project delivery for all T485 batches. H001 build ownership is traced.
 
 ## Recent Governance
 

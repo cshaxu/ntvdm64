@@ -95,7 +95,7 @@ void time_strobe()
 #line 87
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 98
+#line 100
 
         /*
          * Check to see if the screen is currently enabled.
@@ -114,11 +114,11 @@ void time_strobe()
                 video_off = TRUE;
             }
         }
-#line 116
+#line 118
 #ifdef	EGA_DUMP
-#line 117
+#line 119
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
-#line 119
+#line 121
 }
 

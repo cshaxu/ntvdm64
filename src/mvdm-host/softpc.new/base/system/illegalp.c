@@ -105,11 +105,11 @@ void illegal_op_int()
 #line 100
 #error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #else /* NTVDM */
-#line 113
+#line 108
 #ifdef PROD
-#if define(MONITOR) || define(CPU_40_STYLE)
+#if defined(MONITOR) || defined(CPU_40_STYLE)
 #line 110
-#error Unsupported excluded original configuration
+        host_error(EG_BAD_OP, ERR_QU_CO_RE, string);
 #else
 #line 112
         ea = effective_addr(cs, ip);
@@ -130,12 +130,12 @@ void illegal_op_int()
 	/* we don't know how many bytes this instr should be, so guess 1 */
 	if (ip == 0xffff) {
 		cs ++;
-		sas_store (stack+2, cs & 0xff);
-		sas_store (stack+3, (cs >> 8) & 0xff);
+		sas_store (stack+2, (IU8)(cs & 0xff));
+		sas_store (stack+3, (IU8)((cs >> 8) & 0xff));
 	}
 	ip ++;
-	sas_store (stack , ip & 0xff);
-	sas_store (stack+1, (ip >> 8) & 0xff);
+	sas_store (stack , (IU8)(ip & 0xff));
+	sas_store (stack+1, (IU8)((ip >> 8) & 0xff));
 	unexpected_int();
 }
 

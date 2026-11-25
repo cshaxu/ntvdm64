@@ -92,3 +92,4 @@ void unexpected_int()
    /* Set Bios data area up with interrupt cause */
    sas_store(BIOS_VAR_START + INTR_FLAG, m_isr);
 }
+
