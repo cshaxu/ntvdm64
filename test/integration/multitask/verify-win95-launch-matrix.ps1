@@ -40,6 +40,9 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
  }
   & "$repo/tools/select-guest-launch.cmd" $dest $task 95 $dos $multitask install *> "$task/select.log"
   if($LASTEXITCODE){throw 'Dynamic launcher installation or selection failed'}
+  foreach($file in 'PIF.EXE','INI.EXE'){
+   if((Get-FileHash "$dest/PATCH/$file").Hash -ne (Get-FileHash "$repo/assets/release/$file").Hash){throw "Wrong released launcher tool: $file"}
+  }
   $ini=Get-Content "$dest/SYSTEM.INI" -Raw
   foreach($file in 'INSIGNIA.386','NTVDM64.386'){
    $pattern='(?im)^device='+[regex]::Escape("$dest\PATCH\$file")+'\s*$'

@@ -50,3 +50,28 @@ No original guest source or winnt.zip changed against the T484 baseline.
 
 The [recorded acceptance summary](../../../artifacts/build-migration/t484/s6/acceptance-core.json) preserves the hash, graph and Full timing evidence. Raw receipts and runtime logs are under build/t484-s6. Remaining live Win31 and Win95 launcher matrices are
 recorded after their runners complete.
+
+## Live launcher matrices and S6 closeout
+
+The real Win31 matrix passed 14 of 14 cases. It includes six interactive
+profiles, two Standard startup and exit controls, two enhanced DOS window
+pairs and four fullscreen keyboard cases. All fourteen reached normal
+exit. The installation shim and exact coverage are identified in the
+runner receipts.
+
+The owned Win95 selector now stages the released INI.EXE alongside PIF.EXE.
+The live test checks both installed utility hashes before launch. All four
+Win95 combinations passed desktop startup and the accepted exit criterion
+with the established return-code-1 boundary. The DOSONLY=1, multitask-on
+case reached the desktop but initially timed out before exit. A focused
+repeat using the same released package and test assertions exited with
+the accepted return code. Seven effective launch and probe input hashes
+also match the previous passing run, including SYSTEM.INI and the PIF.
+The disposable runtime stamp is different. The timeout is retained as an
+observed intermittent result. These Win95 controls cover startup and exit,
+with separate historical boundaries for scheduling and editor interaction.
+
+Both published host sets and the fifteen addon hashes were rechecked after
+the matrices. No host or addon image changed in this test-preparation batch.
+The [launcher matrix receipts](../../../artifacts/build-migration/t484/s6/launcher-matrices.json)
+retain the individual cases, first timeout, retry and final hash check.

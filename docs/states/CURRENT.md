@@ -2,35 +2,35 @@
 
 ## Current Work
 
-**Active: M0 T484 S6** (Ordinary Mode). S5 closed at P5 d2c25de2b
-with shared PIF and INI owners verified. S6 is the final CMD migration
-acceptance step. S7 remains queued within T484.
+**Active: M0 T484 S7** (Ordinary Mode). S6 clean CMD acceptance and the
+live launcher matrices are complete. S7 is the final Window fault-dialog
+mouse-capture task.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T484 S6, Ordinary Mode. |
-| Admission And Approval | Continuous T484 execution was approved. [Sequenced acceptance](../etc/operations/t484-cmd-build-release-plan.md). |
-| Original Owner Request | Remove Python, PowerShell and JavaScript build dependencies. Use CMD for actual project build, generator, fixture and publication entry points. |
-| Objective | Independently validate clean and cached CMD-only builds, input invalidation, failure handling, coherent publication, and applicable runtime regression on the final consolidated graph. |
-| Candidate Proposal | [Unified build/release](../proposals/proposal-unified-build-cmd-release-001.md). |
-| Reference Baseline | S5 P5 d2c25de2b. Current published host identity and the fifteen-file addon manifest are comparison inputs. |
-| Files And ABI Surface | Build, code generation, fixture production, staging, publication, and their test/evidence paths. Product ABI, mirrored source and original guest files stay fixed. |
-| Applicable Rules | CMD-only project scripts, source-first checks, release consistency, existing test ownership, and LF for authored text. |
-| Verification | Clean bootstrap and all eleven host images and authored addons; no-op and changed-input rebuilds; sanitized tool environment and child command evidence; outside-root invocation, missing prerequisite and failed publication cases; relevant runtime gates and both publication hashes. |
-| Expected Markers | Independent clean receipts and cache measurements, explicit failure exits, matching source/artifact identities, reviewed toolchain trace and actual test witnesses. |
-| Asset Needs | Existing published addons, approved guest fixtures, native compiler/assembler/toolchain, and an owned short build root. |
-| Non-goals | No original guest rebuild, unrelated runtime change, mirror rewrite, or S7 implementation. |
-| Similar-Issue Sweep | All actual producer and publication paths, including nested native graph invocations and test addons. |
-| Reporting Requirements | Record exact tool commands, graph roots, timestamps/hashes, failure and runtime gate results, limitations, and pushed commit. |
-| Stop Conditions | Preserve unrelated changes; investigate any mismatch or missing gate and keep the acceptance open until resolved or explicitly scoped. |
-| Exit Criteria | Clean and cached build, publication, failure checks and applicable runtime regression independently verified against current source, committed and pushed. |
+| Identifier Mode | M0 T484 S7, Ordinary Mode. |
+| Admission And Approval | Owner approved the S7 work in the [T484 execution plan](../etc/operations/t484-cmd-build-release-plan.md#s7-release-captured-mouse-before-fault-dialogs). |
+| Original Owner Request | Release a captured mouse in Window mode before displaying a fault dialog that requires the user's decision. |
+| Objective | Acknowledge release on the actual window thread before the modal UI appears. Keep capture unavailable during the prompt and use the established input policy afterward. |
+| Candidate Proposal | [Unified build/release and final task context](../proposals/proposal-unified-build-cmd-release-001.md). |
+| Reference Baseline | S6 P1 8dc74fbcb and [S6 closure evidence](../etc/evidence/t484-s6-clean-cmd-acceptance.md). |
+| Files And ABI Surface | Original DOS error-dialog call boundary, worker/NTCON control route and existing KVM Window capture owner. Preserve original guest and existing prompt semantics. |
+| Applicable Rules | Preserve layer direction, existing cross-thread ownership and minimal mirror differences. Use CMD for build and release operations. |
+| Verification | Controlled dialog with actual capture and confinement; release before visibility; mouse selection for Ignore and Terminate; repeated and already-uncaptured cases; Console preservation and real continued input or teardown. |
+| Expected Markers | Window-thread acknowledgement, real modal mouse witnesses, current build and artifact hashes, tests, commit and push. |
+| Asset Needs | Current published package, existing private-desktop observers and authored fixture inputs. |
+| Non-goals | No original guest changes, unrelated focus/input policy changes or parallel capture state machine. |
+| Similar-Issue Sweep | Actionable fault prompts sharing the same DOS dialog path and any existing equivalent capture-release controls. |
+| Reporting Requirements | Record actual ownership/thread handoff, witness for release ordering, action outcomes, scoped mirror changes and published identities. |
+| Stop Conditions | Resolve unsafe acknowledgement, lost release or changed dialog behavior before delivery. |
+| Exit Criteria | Focused live acceptance, applicable regression, coherent publication and pushed delivery. Then audit all T484 stage completion. |
 
 
 ## Current Progress
 
-S6 P1 verifies the clean and cached host/addon builds, selected fixture graphs, staged manifests and negative cases. The same-source-path x86 control reduces both path-sensitive comparisons to PE timestamps. Full passed 20/20 on the current release. Live launcher matrices remain in progress. [Evidence](../etc/evidence/t484-s6-clean-cmd-acceptance.md).
+S6 P1 verifies the clean and cached host/addon builds, selected fixture graphs, staged manifests and negative cases. The same-source-path x86 control reduces both path-sensitive comparisons to PE timestamps. Full passed 20/20 on the current release. The live launcher matrices are recorded below. [Evidence](../etc/evidence/t484-s6-clean-cmd-acceptance.md).
 
 S5 P5 promotes the existing guest INI editor to INI.EXE and removes both launch scripts' duplicate INI writers. The released tool passed Win31 six-profile, Win95 four-profile and apply/unapply package verification. [Evidence](../etc/evidence/t484-s5-shared-ini.md).
 
@@ -43,6 +43,15 @@ S5 P2 consolidates pure DOS and XMS through the same CMD/PIF owner and retires t
 S5 P1 consolidates EMS profile generation through the current PIF editor and CMD. Native field tests, byte equivalence, two real EMS cases and a released-tool EMS case passed. All fourteen addons were verified and only PIF.EXE changed. The two host publication sets retained all eleven hashes. [Evidence](../etc/evidence/t484-s5-ems-pif-consolidation.md).
 
 Earlier S4 preparation deliveries are indexed in [supporting material](../etc/README.md). The [S3 P181–P213 delivery record](../etc/evidence/t484-s3-early-deliveries.md#p181-p213-deliveries) retains those batch results. The [S4 closure record](#s4-closure-record) identifies the final batch and runtime boundaries.
+
+## S6 Closure Record
+
+[Clean build and live acceptance](../etc/evidence/t484-s6-clean-cmd-acceptance.md)
+records the independent clean and cached CMD builds, Full 20/20, Win31 14/14
+and the four Win95 startup and exit cases. One Win95 exit timeout remains
+in the evidence beside its successful focused retry and the existing
+return-code-1 boundary. Both host locations and the addon release were
+hash-verified. S7 now owns the remaining product change.
 
 ## S5 Closure Record
 

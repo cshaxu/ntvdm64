@@ -18,8 +18,8 @@ The workspace was clean at admission; this delivery changes documents only.
 | S3 (complete) | Authored addon producers and dependent test-binary compilation; shared setup consolidation. | Every addon output accounted for; no original guest rebuild or test binary in release. |
 | S4 (complete) | CMD staging, manifests, hashes and publication; retire migrated wrappers and repair callers. | Complete host/addon sets, nonzero failures and no mixed package reported successful. |
 | S5 (complete) | Consolidate native preparation tools: reuse PIF.EXE, unify INI editing, remove superseded producers and build targets. | Fewer duplicate implementations/executables; callers and basic coverage preserved; post-cleanup CMD-only build/publication evidence and reviewed delivery. |
-| S6 (active) | Clean/cached end-to-end validation and migration acceptance. | Clean bootstrap, no-op/changed-input rebuilds, outside-repo invocation, prerequisite/component/publication failure cases, relevant regression, verified publication and pushed delivery. |
-| S7 (owner-approved, planned) | Release captured mouse before a Window-mode fault decision dialog. | Ignore/Terminate dialogs are mouse-accessible; capture is released before display; focused lifecycle verification and normal product delivery complete. |
+| S6 (complete) | Clean/cached end-to-end validation and migration acceptance. | Clean bootstrap, no-op/changed-input rebuilds, outside-repo invocation, prerequisite/component/publication failure cases, relevant regression, verified publication and pushed delivery. |
+| S7 (active) | Release captured mouse before a Window-mode fault decision dialog. | Ignore/Terminate dialogs are mouse-accessible; capture is released before display; focused lifecycle verification and normal product delivery complete. |
 
 Later stages are planned, not simultaneously active. Move complete producers
 and callers together. Preserve existing source-owner inventories and actual
@@ -82,7 +82,7 @@ merge INI handling, and do not replace scattered scripts with scattered C
 programs. Owner reordered the stages: complete this cleanup as S5 before
 S6 final migration acceptance. The mouse-dialog work remains S7.
 S4 closed with [P46](../evidence/t484-s4-matrix-preparation.md).
-S5 closed with the [shared INI editor](../evidence/t484-s5-shared-ini.md), PIF consolidation and final package verification. S6 is active.
+S5 closed with the [shared INI editor](../evidence/t484-s5-shared-ini.md), PIF consolidation and final package verification. S6 closed with the [clean build and live acceptance record](../evidence/t484-s6-clean-cmd-acceptance.md). S7 is active.
 
 ### Scope and execution order
 

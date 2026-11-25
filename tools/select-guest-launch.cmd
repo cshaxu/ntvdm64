@@ -29,7 +29,7 @@ if exist "%SELECTOR%" exit /b 2
 if exist "%INPUT%" exit /b 2
 set "LAUNCHER=win31-setup"
 if "%~3"=="95" set "LAUNCHER=win95-launch"
-if "%~6"=="install" call "%~dp0prepare-test-inputs.cmd" -GuestPatch "%DEST%" "%TASK%" "%~dp0%LAUNCHER%\WIN.CMD" WIN.CMD "%~dp0..\assets\release\PIF.EXE" PIF.EXE
+if "%~6"=="install" call "%~dp0prepare-test-inputs.cmd" -GuestPatch "%DEST%" "%TASK%" "%~dp0%LAUNCHER%\WIN.CMD" WIN.CMD "%~dp0..\assets\release\PIF.EXE" PIF.EXE "%~dp0..\assets\release\INI.EXE" INI.EXE
 if errorlevel 1 exit /b 1
 if "%~6"=="install" call "%DEST%\PATCH\WIN.CMD" --install >"%TASK%\install.log" 2>&1
 if errorlevel 1 exit /b 1

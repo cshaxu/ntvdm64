@@ -1,0 +1,230 @@
+{
+  "win31": [
+    {
+      "case": "mode0\\386-dosonly0",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode0\\386-dosonly0-fullscreen",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode0\\386-dosonly1",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode0\\386-dosonly1-fullscreen",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode0\\386-dosonly1-pair",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode0\\std-dosonly0",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode0\\std-dosonly1",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode1\\386-dosonly0",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode1\\386-dosonly0-fullscreen",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode1\\386-dosonly1",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode1\\386-dosonly1-fullscreen",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode1\\386-dosonly1-pair",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode1\\std-dosonly0",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    },
+    {
+      "case": "mode1\\std-dosonly1",
+      "passed": true,
+      "startup": true,
+      "normalExit": true
+    }
+  ],
+  "win95": [
+    {
+      "dosonly": 0,
+      "instanceDriver": true,
+      "multitask": 0,
+      "startup": true,
+      "normalExit": false,
+      "exitAccepted": true,
+      "knownExitOne": true,
+      "restartVerified": false,
+      "interaction": "pending",
+      "passed": false
+    },
+    {
+      "dosonly": 0,
+      "instanceDriver": true,
+      "multitask": 1,
+      "startup": true,
+      "normalExit": false,
+      "exitAccepted": true,
+      "knownExitOne": true,
+      "restartVerified": false,
+      "interaction": "pending",
+      "passed": false
+    },
+    {
+      "dosonly": 1,
+      "instanceDriver": true,
+      "multitask": 0,
+      "startup": true,
+      "normalExit": false,
+      "exitAccepted": true,
+      "knownExitOne": true,
+      "restartVerified": false,
+      "interaction": "pending",
+      "passed": false
+    },
+    {
+      "dosonly": 1,
+      "instanceDriver": true,
+      "multitask": 1,
+      "startup": true,
+      "normalExit": false,
+      "exitAccepted": true,
+      "knownExitOne": true,
+      "restartVerified": false,
+      "interaction": "pending",
+      "passed": false
+    }
+  ],
+  "firstWin95Timeout": {
+    "dosonly": 1,
+    "instanceDriver": true,
+    "multitask": 1,
+    "startup": true,
+    "normalExit": false,
+    "exitAccepted": false,
+    "restartVerified": false,
+    "interaction": "pending",
+    "passed": false,
+    "error": "Win31 runtime matrix did not pass all selected cases"
+  },
+  "matchingRetry": {
+    "case": {
+      "dosonly": 1,
+      "instanceDriver": true,
+      "multitask": 1,
+      "startup": true,
+      "normalExit": false,
+      "exitAccepted": true,
+      "knownExitOne": true,
+      "restartVerified": false,
+      "interaction": "pending",
+      "passed": false
+    },
+    "pid": 7616,
+    "exit": 0,
+    "finish": "2026-11-25T03:22:36.9319028+01:00",
+    "start": "2026-11-25T03:21:22.2168588+01:00"
+  },
+  "inputComparison": [
+    {
+      "input": "ntvdmSha256",
+      "previous": "722A8BD1ED8EDC971216823720FEE01C141405FD59C5DB70CF7DB777055624CE",
+      "current": "08728592BD847089DE4F387028E2BF980BF914287850570AE54DC4E0CC0E8D3A",
+      "identical": false
+    },
+    {
+      "input": "pifSha256",
+      "previous": "F33B2852E92C4174BCBB3C28F9CCAA6ED60D7D6862B3CCE54BE3E070245F7C48",
+      "current": "F33B2852E92C4174BCBB3C28F9CCAA6ED60D7D6862B3CCE54BE3E070245F7C48",
+      "identical": true
+    },
+    {
+      "input": "configSha256",
+      "previous": "BF27FB0DCA02A537E0780C088531980C74D9A298D91FE029C2B9B8AE3EBAF881",
+      "current": "BF27FB0DCA02A537E0780C088531980C74D9A298D91FE029C2B9B8AE3EBAF881",
+      "identical": true
+    },
+    {
+      "input": "autoexecSha256",
+      "previous": "E447F74E347CFF0639BBB3E1C986CF50B079B68EC36C6BEB3F0211A353BF190C",
+      "current": "E447F74E347CFF0639BBB3E1C986CF50B079B68EC36C6BEB3F0211A353BF190C",
+      "identical": true
+    },
+    {
+      "input": "systemIniSha256",
+      "previous": "B48E945322FE3727E0DC358144BD74D794E8CBD86B3B42AA78A3289655C2909E",
+      "current": "B48E945322FE3727E0DC358144BD74D794E8CBD86B3B42AA78A3289655C2909E",
+      "identical": true
+    },
+    {
+      "input": "winIniSha256",
+      "previous": "D7603287AD2A206009604EA9D988DEC9A74927627541DB326F3E5FD25D1E412F",
+      "current": "D7603287AD2A206009604EA9D988DEC9A74927627541DB326F3E5FD25D1E412F",
+      "identical": true
+    },
+    {
+      "input": "dosProbeSha256",
+      "previous": "D14281E01B6F3A13ED958281C76452BAA59EDBE2EA541152127A4F429AB97C6A",
+      "current": "D14281E01B6F3A13ED958281C76452BAA59EDBE2EA541152127A4F429AB97C6A",
+      "identical": true
+    },
+    {
+      "input": "windowsProbeSha256",
+      "previous": "6598EE6A5179BCBEE520CC73B07F1A70D832D6B2D37FC8685EECAA8936B51A05",
+      "current": "6598EE6A5179BCBEE520CC73B07F1A70D832D6B2D37FC8685EECAA8936B51A05",
+      "identical": true
+    }
+  ],
+  "testInputs": [
+    {
+      "path": "tools/select-guest-launch.cmd",
+      "sha256": "FCC3E9AE053D49A7D5082CE63347A78BDD211EDD4C337F7C1854A46CD613C1A2"
+    },
+    {
+      "path": "test/integration/multitask/verify-win95-launch-matrix.ps1",
+      "sha256": "3CFBCC365F4AAA46C53041C97DB1513441C210E293D6AF5D2E95A115720753F4"
+    }
+  ],
+  "publishedHostHashMatches": 22,
+  "publishedAddonHashMatches": 15
+}
