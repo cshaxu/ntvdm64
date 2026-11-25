@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T485 S3** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. Both installed locations match the twelve-image manifest. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). H011 communications brings the total to 11/159. H012 is next. See the [H011 receipt](../etc/evidence/t485-s1/h011.md).
+**Active: M0 T485 S3** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. Both installed locations match the twelve-image manifest. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). H012 and H013 bring the total to 13/159. H014 debug is next. See the [H012–H013 receipt](../etc/evidence/t485-s1/h012-h013.md).
 
 ## Active Packet
 
