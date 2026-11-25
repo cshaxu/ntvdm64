@@ -35,6 +35,13 @@ try {
  if($LASTEXITCODE -ne 2){throw 'Wrong guest owner accepted'}
  & "$repo/tools/prepare-test-inputs.cmd" -GuestPatch $dest $copy.Task "$PackageRoot/system32/MEM.EXE" MEM.EXE
  if($LASTEXITCODE -or (Get-FileHash "$PackageRoot/system32/MEM.EXE").Hash -ne (Get-FileHash "$dest/PATCH/MEM.EXE").Hash){throw 'Guest patch input changed'}
+ $rootWitness="$dest/STAGED.COM"
+ if(Test-Path $rootWitness){throw 'Root witness already exists'}
+ & "$repo/tools/prepare-test-inputs.cmd" -GuestRoot $dest $identityInput "$PackageRoot/system32/MEM.EXE" STAGED.COM
+ if($LASTEXITCODE -ne 2 -or (Test-Path $rootWitness)){throw 'Wrong guest owner accepted for root staging'}
+ & "$repo/tools/prepare-test-inputs.cmd" -GuestRoot $dest $copy.Task "$PackageRoot/system32/MEM.EXE" STAGED.COM
+ if($LASTEXITCODE -or (Get-FileHash "$PackageRoot/system32/MEM.EXE").Hash -ne (Get-FileHash $rootWitness).Hash -or
+    (Test-Path "$dest/PATCH/STAGED.COM")){throw 'Root staging destination or file bytes changed'}
  $matrix="$root/matrix";$null=New-Item -ItemType Directory $matrix
  Invoke-Win31ProbeBuild -OutputRoot $matrix
  $before=@{}
@@ -53,7 +60,7 @@ try {
  & "$repo/tools/prepare-win31-matrix.cmd" prepare $dest $matrix 0 0
  if($LASTEXITCODE -ne 2){throw 'Reused preparation accepted'}
  foreach($row in $copy.Original){if((Get-FileHash ($copy.Source+$row.path)).Hash -ne $row.sha256){throw 'Installation source changed'}}
- 'PASS editor INI baseline, PIF targets, save witnesses, COMMAND bytes, matrix DOSONLY 0/1/0 and exact restoration'|Set-Content "$root/result.txt"
+ 'PASS editor INI baseline, PIF targets, save witnesses, COMMAND bytes, owned patch/root staging, matrix DOSONLY 0/1/0 and exact restoration'|Set-Content "$root/result.txt"
 } finally {
  if($copy){Remove-OwnedGuestProbeCopy $dest $copy.Task $copy.Source}
 }

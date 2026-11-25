@@ -1,11 +1,12 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
 rem Build-owned output followed by pairs: source file, destination leaf.
-rem -GuestPatch INSTALL OWNER pairs copies to an explicitly owned guest PATCH.
+rem -GuestPatch or -GuestRoot INSTALL OWNER pairs copies to the owned guest directory.
 if "%~3"=="" exit /b 2
 set "repo=@NTVDM_STAGE_REPO@"
 set "guest="
 if /i "%~1"=="-GuestPatch" goto guest
+if /i "%~1"=="-GuestRoot" goto guest
 set "output=%~f1"
 set "walk=%output%"
 :within
@@ -24,7 +25,8 @@ set "actual="
 set /p "actual="<"%install%\.ntvdm64-guest-owner"
 if /i not "%actual%"=="%owner%" exit /b 2
 if not exist "%owner%\" exit /b 2
-set "output=%install%\PATCH"
+set "output=%install%"
+if /i "%~1"=="-GuestPatch" set "output=%install%\PATCH"
 if not exist "%output%\" exit /b 2
 set "guest=1"
 shift

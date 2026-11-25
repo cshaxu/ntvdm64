@@ -1317,14 +1317,14 @@
     "status": "retired-with-delivery-evidence"
   },
   "test/integration/multitask/verify-win31-setup-modes.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "Outside frozen355 census; shared CMD profile target byte-equivalent; native PIF complete; configuration/batch materialization and shared staging remain",
-    "evidence": "docs/etc/evidence/t484-s3-matrix-profile.md"
+    "status": "migrated-delivered",
+    "reason": "P46 delegates configuration and shared staging to CMD/native tools and verifies real matrix preparation and runtime boundaries. Outside the frozen 355-file census.",
+    "evidence": "docs/etc/evidence/t484-s4-matrix-preparation.md"
   },
   "test/integration/multitask/verify-win95-launch-matrix.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "Outside frozen355 census; shared CMD profile target byte-equivalent; native PIF complete; configuration/batch materialization and shared staging remain",
-    "evidence": "docs/etc/evidence/t484-s3-matrix-profile.md"
+    "status": "migrated-delivered",
+    "reason": "P46 delegates configuration and shared staging to CMD/native tools and verifies real matrix preparation and runtime boundaries. Outside the frozen 355-file census.",
+    "evidence": "docs/etc/evidence/t484-s4-matrix-preparation.md"
   },
   "test/integration/multitask/verify-win31-empty-profile.ps1": {
     "status": "migrated-delivered",

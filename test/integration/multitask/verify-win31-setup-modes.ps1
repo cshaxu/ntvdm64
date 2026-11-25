@@ -13,7 +13,6 @@ if(!$MouseDriver){$MouseDriver=Join-Path $repo 'assets/release/MOUSE31.DRV'}
 $output=[IO.Path]::GetFullPath($OutputRoot)
 if(!$output.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $output)){throw 'Fresh build-owned output required'}
 New-Item -ItemType Directory $output|Out-Null
-$savedPath=$env:PATH;$savedPause=$env:NTVDM_SETUP_TEST_NO_PAUSE
 $mouseTools=Join-Path $repo 'build/.ninja/fixtures-x64/mouse-tools'
 $build=Start-Process $env:ComSpec -ArgumentList ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x64 private-mouse-tools"') -WindowStyle Hidden -PassThru -RedirectStandardOutput "$output/mouse-build.log" -RedirectStandardError "$output/mouse-build.err"
 try{
@@ -32,42 +31,18 @@ foreach($mode in 0,1){
  try {
  & "$repo/tools/build-fixtures.cmd" x86 win31-profile $dest *> "$task/profile-build.log"
  if($LASTEXITCODE){throw 'Matrix witness build failed'}
- $profileCache="$repo/build/.ninja/fixtures-x86/guest-probes/win31-profile"
- # Remove only the two exact entries and files added by the copy helper.
-  $ini="$dest/SYSTEM.INI";$enc=[Text.Encoding]::GetEncoding(28591)
-  $text=$enc.GetString([IO.File]::ReadAllBytes($ini))
-  foreach($name in 'INSIGNIA.386','NTVDM64.386'){
-   $line='(?im)^device='+[regex]::Escape("$dest\PATCH\$name")+'\r*\n'
-   if([regex]::Matches($text,$line).Count -ne 1){throw "Expected one copied driver entry: $name"}
-   $text=[regex]::Replace($text,$line,'')
-   if((Get-FileHash "$dest/PATCH/$name").Hash -ne (Get-FileHash "$repo/assets/release/$name").Hash){throw "Unexpected copied driver: $name"}
-   Remove-Item -LiteralPath "$dest/PATCH/$name"
-  }
-  [IO.File]::WriteAllBytes($ini,$enc.GetBytes($text))
-  foreach($name in 'CONFIG.NT','AUTOEXEC.NT','WINSTD.PIF','WIN386.PIF','WINSTD.CMD','WIN386.CMD'){
-   $path=Join-Path "$dest/PATCH" $name;if(Test-Path -LiteralPath $path){Remove-Item -LiteralPath $path}
-  }
+ $outputLine=Select-String -LiteralPath "$task/profile-build.log" -Pattern '^NTVDM_PROFILE_BIN=(.+)$'
+ if(!$outputLine){throw 'Profile build did not report its output directory'}
+ $profileCache=$outputLine.Matches[0].Groups[1].Value
   $guest=@{};foreach($name in 'WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE'){$guest[$name]=(Get-FileHash "$dest/$name").Hash}
-  $media=Join-Path $task 'media/PATCH';$shim=Join-Path $task 'shim'
-  New-Item -ItemType Directory -Path $media,$shim|Out-Null
-  foreach($name in 'SETUP.CMD','WIN.CMD'){Copy-Item "$repo/tools/win31-setup/$name" "$media/$name"}
-  foreach($name in 'PIF.EXE','INSIGNIA.386','NTVDM64.386'){Copy-Item "$repo/assets/release/$name" "$media/$name"}
-  [IO.File]::WriteAllText("$shim/run16.cmd","@echo off`r`nexit /b 0`r`n",[Text.Encoding]::ASCII)
-  [IO.File]::WriteAllText("$task/input.txt","$dest`r`n",[Text.Encoding]::ASCII)
-  $env:PATH="$shim;$savedPath";$env:NTVDM_SETUP_TEST_NO_PAUSE='1'
-  & cmd.exe /d /c "`"$media/SETUP.CMD`" < `"$task/input.txt`"" *> "$task/setup.log"
+  & "$repo/tools/prepare-win31-matrix.cmd" setup $dest $task *> "$task/setup.log"
   if($LASTEXITCODE){throw 'Setup finalization failed'}
-  $env:PATH=$savedPath
-  function Select-LaunchProfile([string]$case) {
+  function Select-LaunchProfile([string]$case,[string]$label=$case) {
    $enhanced=$case.StartsWith('386-');$dos=[int]$case.EndsWith('dosonly1')
-   $selection="$(if($enhanced){2}else{1})`r`n$dos`r`n"
-   if($enhanced){$selection+="$([int]($mode -eq 0))`r`n"}
-   [IO.File]::WriteAllText("$task/input.txt",$selection)
-   $env:PATH="$shim;$savedPath"
-   try {
-    & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" < `"$task/input.txt`"" *> "$task/select-$case.log"
-    if($LASTEXITCODE){throw "Launcher selection failed: $case"}
-   } finally {$env:PATH=$savedPath}
+   $winMode=if($enhanced){2}else{1}
+   $multitask=[int]($enhanced -and $mode -eq 0)
+   & "$repo/tools/select-guest-launch.cmd" $dest $task 31 $dos $multitask select $winMode $label *> "$task/select-$label.log"
+   if($LASTEXITCODE){throw "Launcher selection failed: $label"}
    foreach($name in 'INSIGNIA.386','NTVDM64.386'){
     if((Get-FileHash "$dest/PATCH/$name").Hash -ne (Get-FileHash "$repo/assets/release/$name").Hash){throw "Wrong driver $name"}
    }
@@ -80,20 +55,22 @@ foreach($mode in 0,1){
   $profile=Join-Path $dest 'DOSCHECK.PIF'
   $receipt=Join-Path $dest 'PATCH\EXEC.TXT'
   if((Test-Path $profile) -or (Test-Path $receipt)){throw 'Prompt fixture path already in use'}
-  Copy-Item -LiteralPath "$dest/DOSPRMPT.PIF" -Destination $profile
+  & "$repo/tools/prepare-test-inputs.cmd" -GuestRoot $dest $task "$dest/DOSPRMPT.PIF" DOSCHECK.PIF
+  if($LASTEXITCODE){throw 'Cannot stage the scheduling prompt'}
   $nativeCmd=Join-Path ([Environment]::SystemDirectory) 'cmd.exe'
   $hostVersion=(& $nativeCmd /d /c ver | Out-String).Trim()
   if($LASTEXITCODE -or !$hostVersion){throw 'Cannot obtain native CMD version for comparison'}
   $nativeScript=Join-Path $dest 'S14.CMD'
   if(Test-Path $nativeScript){throw 'Native command fixture already exists'}
-  [IO.File]::WriteAllText($nativeScript,"@echo off`r`nver >$dest\PATCH\SCHED.RUN`r`n:wait`r`nif not exist $dest\PATCH\SCHED.GO goto wait`r`nver >$receipt.tmp`r`nmove /y $receipt.tmp $receipt >nul`r`necho done>$dest\PATCH\SCHED.END`r`n",[Text.Encoding]::ASCII)
   $scheduleChild=Join-Path $dest 'SCHED.COM'
-  Copy-Item "$profileCache/SCHED.COM" $scheduleChild -Force
+  & "$repo/tools/prepare-test-inputs.cmd" -GuestRoot $dest $task "$PSScriptRoot/scheduling-witness.cmd" S14.CMD "$profileCache/SCHED.COM" SCHED.COM
+  if($LASTEXITCODE){throw 'Cannot stage scheduling witnesses'}
   $controller=Join-Path $task 'prompt-check.exe'
   $controllerOptions=@()
   if($DosReentry){$controllerOptions+= '-DW31_SCHEDULING_INTERACTIVE'}
   $controllerName=if($controllerOptions.Count){'INTERACT.EXE'}else{'SCHEDULE.EXE'}
-  Copy-Item "$profileCache/$controllerName" $controller -Force
+  & "$repo/tools/prepare-test-inputs.cmd" $task "$profileCache/$controllerName" prompt-check.exe
+  if($LASTEXITCODE){throw 'Cannot stage Windows scheduling witness'}
   foreach($case in 'std-dosonly0','std-dosonly1','386-dosonly0','386-dosonly1'){
    if($DosReentry -and $case -ne '386-dosonly0'){continue}
    $out=Join-Path $task $case
@@ -145,7 +122,9 @@ foreach($mode in 0,1){
   }
   if($DosReentry){continue}
   # Enhanced DOSONLY=1 schedules guest prompts with either payload selection.
-  Copy-Item "$profileCache/PROMPT.EXE" $controller -Force
+  $controller=Join-Path $task 'prompt-fullscreen.exe'
+  & "$repo/tools/prepare-test-inputs.cmd" $task "$profileCache/PROMPT.EXE" prompt-fullscreen.exe
+  if($LASTEXITCODE){throw 'Cannot stage fullscreen Windows witness'}
   # Preserve the single-prompt source flags except for windowed/background.
   $description=& "$repo/assets/release/PIF.EXE" show $profile
   $flagsLine=$description | Select-String '^W386\.FLAGS=0x([0-9a-f]+)$'
@@ -153,11 +132,12 @@ foreach($mode in 0,1){
   $flags=([Convert]::ToUInt32($flagsLine.Matches[0].Groups[1].Value,16) -band (-bnot 8)) -bor 2
   $program="$dest\FULLKEY.COM"
   if(Test-Path $program){throw 'Fullscreen fixture path already in use'}
-  Copy-Item "$profileCache/FULLKEY.COM" $program
+  & "$repo/tools/prepare-test-inputs.cmd" -GuestRoot $dest $task "$profileCache/FULLKEY.COM" FULLKEY.COM
+  if($LASTEXITCODE){throw 'Cannot stage fullscreen DOS witness'}
   & "$repo/assets/release/PIF.EXE" update $profile --arguments "/c $program" --w386-flags $flags
   if($LASTEXITCODE){throw 'Cannot configure windowed DOS prompt for Alt+Enter'}
   foreach($case in '386-dosonly1','386-dosonly0'){
-   Select-LaunchProfile $case
+   Select-LaunchProfile $case "$case-fullscreen"
    $out=Join-Path $task "$case-fullscreen"
    try {
     & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases $case -MouseProbeRoot $mouseTools -FullscreenKey
@@ -172,20 +152,23 @@ foreach($mode in 0,1){
   }
   $second=Join-Path $dest 'DOSPAIR.PIF'
   if(Test-Path $second){throw 'Second prompt fixture already exists'}
-  Copy-Item $profile $second
+  & "$repo/tools/prepare-test-inputs.cmd" -GuestRoot $dest $task $profile DOSPAIR.PIF
+  if($LASTEXITCODE){throw 'Cannot stage second DOS prompt'}
   foreach($pair in @(@('A','B',$profile),@('B','A',$second))){
    $id,$peer,$pif=$pair
    $program="$dest\RUN$id.COM"
    foreach($path in $program,"$dest\PATCH\$id.RUN","$dest\PATCH\$id.END"){
     if(Test-Path $path){throw "Guest pair fixture already exists: $path"}
    }
-   Copy-Item "$profileCache/RUN$id.COM" $program
+   & "$repo/tools/prepare-test-inputs.cmd" -GuestRoot $dest $task "$profileCache/RUN$id.COM" "RUN$id.COM"
+   if($LASTEXITCODE){throw 'Cannot stage guest pair witness'}
    & "$repo/assets/release/PIF.EXE" update $pif --title "S14 prompt $id" --w386-flags $flags --arguments "/c $program"
    if($LASTEXITCODE){throw 'Cannot configure windowed DOS prompt'}
   }
   $controller=Join-Path $task 'prompt-pair.exe'
-  Copy-Item "$profileCache/PAIR.EXE" $controller
-  Select-LaunchProfile '386-dosonly1'
+  & "$repo/tools/prepare-test-inputs.cmd" $task "$profileCache/PAIR.EXE" prompt-pair.exe
+  if($LASTEXITCODE){throw 'Cannot stage Windows pair witness'}
+  Select-LaunchProfile '386-dosonly1' '386-dosonly1-pair'
   $out=Join-Path $task '386-dosonly1-pair'
   try {
    & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot $out -WindowsProbeImage $controller -Cases '386-dosonly1' -MouseProbeRoot $mouseTools -PromptPair
@@ -205,7 +188,6 @@ foreach($mode in 0,1){
    }
   }
  } finally {
-  $env:PATH=$savedPath;$env:NTVDM_SETUP_TEST_NO_PAUSE=$savedPause
   try {
    if(@(Get-ChildItem $copy.Source -Force -Recurse -File).Count -ne $copy.Original.Count){throw 'Source installation inventory changed'}
    foreach($row in $copy.Original){if((Get-FileHash ($copy.Source+$row.path)).Hash -ne $row.sha256){throw "Source installation changed: $($row.path)"}}

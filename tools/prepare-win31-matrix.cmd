@@ -2,6 +2,7 @@
 rem prepare|case|select|restore INSTALL OUTPUT DOSONLY ALLOW_USER_INSTALLATION
 rem launch INSTALL OWNER DOSONLY 0 pair|second|none ADD_VMD
 setlocal EnableExtensions DisableDelayedExpansion
+if "%~1"=="setup" goto setup
 if not "%~1"=="prepare" if not "%~1"=="case" if not "%~1"=="select" if not "%~1"=="restore" if not "%~1"=="launch" exit /b 2
 if not "%~4"=="0" if not "%~4"=="1" exit /b 2
 if not "%~5"=="0" if not "%~5"=="1" exit /b 2
@@ -107,3 +108,50 @@ if "%~1"=="restore" for %%F in (config.nt autoexec.nt) do if not defined FAILED 
 )
 if defined FAILED exit /b 1
 exit /b 0
+
+:setup
+rem Reapply the real Setup finalization to a disposable installation.
+if not "%~4"=="" exit /b 2
+for %%I in ("%~dp0..") do set "ROOT=%%~fI"
+set "DEST=%~f2"
+set "TASK=%~f3"
+for %%I in ("%DEST%\..") do if /i not "%%~fI"=="O:\tmp" exit /b 2
+if not exist "%DEST%\.ntvdm64-guest-owner" exit /b 2
+set "OWNER="
+set /p "OWNER="<"%DEST%\.ntvdm64-guest-owner"
+if /i not "%OWNER%"=="%TASK%" exit /b 2
+if not exist "%TASK%\" exit /b 2
+if exist "%TASK%\setup-shim" exit /b 2
+call "%ROOT%\tools\build-fixtures.cmd" x64 guest-ini
+if errorlevel 1 exit /b 1
+set "INI=%ROOT%\build\.ninja\fixtures-x64\guest-ini.exe"
+set "PATCH=%DEST%\PATCH"
+for %%D in (INSIGNIA.386 NTVDM64.386) do (
+ fc /b "%PATCH%\%%D" "%ROOT%\assets\release\%%D" >nul
+ if errorlevel 1 exit /b 1
+)
+"%INI%" "%DEST%\SYSTEM.INI" "%TASK%\setup-no-insignia.ini" drop-file 386Enh device INSIGNIA.386
+if errorlevel 1 exit /b 1
+"%INI%" "%TASK%\setup-no-insignia.ini" "%TASK%\setup-system.ini" drop-file 386Enh device NTVDM64.386
+if errorlevel 1 exit /b 1
+for %%F in (INSIGNIA.386 NTVDM64.386 CONFIG.NT AUTOEXEC.NT WINSTD.PIF WIN386.PIF WINSTD.CMD WIN386.CMD) do if exist "%PATCH%\%%F\" exit /b 2
+for %%F in (INSIGNIA.386 NTVDM64.386 CONFIG.NT AUTOEXEC.NT WINSTD.PIF WIN386.PIF WINSTD.CMD WIN386.CMD) do if exist "%PATCH%\%%F" (
+ del /q "%PATCH%\%%F"
+ if errorlevel 1 exit /b 1
+)
+copy /b /y "%TASK%\setup-system.ini" "%DEST%\SYSTEM.INI" >nul || exit /b 1
+set "MEDIA=%TASK%\media\PATCH"
+call "%ROOT%\tools\prepare-test-inputs.cmd" "%MEDIA%" "%ROOT%\tools\win31-setup\SETUP.CMD" SETUP.CMD "%ROOT%\tools\win31-setup\WIN.CMD" WIN.CMD "%ROOT%\assets\release\PIF.EXE" PIF.EXE "%ROOT%\assets\release\INSIGNIA.386" INSIGNIA.386 "%ROOT%\assets\release\NTVDM64.386" NTVDM64.386
+if errorlevel 1 exit /b 1
+mkdir "%TASK%\setup-shim" || exit /b 1
+(
+ echo @echo off
+ echo exit /b 0
+) >"%TASK%\setup-shim\run16.cmd"
+if errorlevel 1 exit /b 1
+>"%TASK%\setup-input.txt" echo %DEST%
+if errorlevel 1 exit /b 1
+set "PATH=%TASK%\setup-shim;%PATH%"
+set "NTVDM_SETUP_TEST_NO_PAUSE=1"
+call "%MEDIA%\SETUP.CMD" <"%TASK%\setup-input.txt"
+exit /b %errorlevel%

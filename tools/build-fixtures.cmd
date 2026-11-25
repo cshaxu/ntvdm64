@@ -5,8 +5,19 @@ if not "%~2"=="guest-remote" if not "%~2"=="win31-profile" if not "%~2"=="wow-st
 set "SERIAL_OPTION="
 set "REMOTE_OPTION=-DNTVDM_REMOTE_ENUM_STATUS=0"
 set "WIN31_OPTION=-DNTVDM_WIN31_INSTALL="
+set "PROFILE_PATH="
 if "%~2"=="win31-profile" if "%~3"=="" exit /b 2
-if "%~2"=="win31-profile" set WIN31_OPTION="-DNTVDM_WIN31_INSTALL=%~3"
+if "%~2"=="win31-profile" goto profile_arguments
+goto other_arguments
+:profile_arguments
+set "PROFILE_PATH=%~3"
+if not "%PROFILE_PATH:~1,2%"==":\" if not "%PROFILE_PATH:~1,2%"==":/" exit /b 2
+for /f "delims=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_ .:/\-" %%I in ("%PROFILE_PATH%") do exit /b 2
+set "PROFILE_PATH=%~f3"
+if "%PROFILE_PATH:~3%"=="" exit /b 2
+if not "%PROFILE_PATH:~100,1%"=="" exit /b 2
+set WIN31_OPTION="-DNTVDM_WIN31_INSTALL=%PROFILE_PATH%"
+:other_arguments
 set "MEDIA_OPTION=-DNTVDM_MEDIA_ORIGINAL_ROOT="
 if "%~2"=="guest-remote" goto remote_arguments
 if "%~2"=="media-owner" goto media_arguments
@@ -372,10 +383,14 @@ if "%TARGET%"=="wow-controls" goto controls
 if "%TARGET%"=="command-redirection" if not "%~3"=="" goto worker_existing
 if "%TARGET%"=="command-redirection" goto worker
 for %%I in (redirector-providers redirector-capacity) do if "%TARGET%"=="%%I" goto worker
-cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON %SERIAL_OPTION% %MEDIA_OPTION% %WIN31_OPTION% %REMOTE_OPTION%
+set "FIXTURE_BUILD=%NTVDM_ROOT%\build\.ninja\fixtures-%~1"
+if defined PROFILE_PATH set "FIXTURE_BUILD=%NTVDM_ROOT%\build\.ninja\fixture-profiles-%~1\%PROFILE_PATH:~0,1%\%PROFILE_PATH:~3%"
+cmake -S "%NTVDM_ROOT%\tools\build\fixtures" -B "%FIXTURE_BUILD%" -G Ninja -DCMAKE_BUILD_TYPE=Release -DNTVDM_ARCH=%~1 -DNTVDM_USE_CCACHE=ON %SERIAL_OPTION% %MEDIA_OPTION% %WIN31_OPTION% %REMOTE_OPTION%
 if errorlevel 1 exit /b %errorlevel%
-cmake --build "%NTVDM_ROOT%\build\.ninja\fixtures-%~1" --target %TARGET%
-exit /b %errorlevel%
+cmake --build "%FIXTURE_BUILD%" --target %TARGET%
+if errorlevel 1 exit /b %errorlevel%
+if defined PROFILE_PATH echo NTVDM_PROFILE_BIN=%FIXTURE_BUILD%\guest-probes\win31-profile
+exit /b 0
 :worker
 pushd "%NTVDM_ROOT%"
 if errorlevel 1 exit /b %errorlevel%

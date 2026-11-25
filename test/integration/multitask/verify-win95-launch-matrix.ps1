@@ -24,7 +24,7 @@ try{
  if($build.ExitCode){throw 'Mouse tools build failed'}
 }finally{$build.Dispose()}
 }
-$rows=@();$savedPath=$env:PATH
+$rows=@()
 foreach($dos in 0,1){foreach($multitask in 0,1){
  if($schedule -and $dos){continue}
  $name="dos$dos-multitask$multitask";$task=Join-Path $output $name
@@ -34,19 +34,12 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
  if($schedule){
  & "$repo/tools/build-fixtures.cmd" x86 win31-profile $dest *> "$task/profile-build.log"
  if($LASTEXITCODE){throw 'Matrix witness build failed'}
- $profileCache="$repo/build/.ninja/fixtures-x86/guest-probes/win31-profile"
+ $outputLine=Select-String -LiteralPath "$task/profile-build.log" -Pattern '^NTVDM_PROFILE_BIN=(.+)$'
+ if(!$outputLine){throw 'Profile build did not report its output directory'}
+ $profileCache=$outputLine.Matches[0].Groups[1].Value
  }
- foreach($file in 'PIF.EXE','INSIGNIA.386','NTVDM64.386'){Copy-Item "$repo/assets/release/$file" "$dest/PATCH/$file"}
-  Copy-Item "$repo/tools/win95-launch/WIN.CMD" "$dest/PATCH/WIN.CMD"
-  & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" --install" *> "$task/install.log"
-  if($LASTEXITCODE){throw 'Dynamic launcher installation failed'}
-  $shim=Join-Path $task 'selector';New-Item -ItemType Directory $shim|Out-Null
-  [IO.File]::WriteAllText("$shim/run16.cmd","@echo off`r`nexit /b 0`r`n")
-  [IO.File]::WriteAllText("$task/input.txt","$dos`r`n$multitask`r`n")
-  $env:PATH="$shim;$savedPath"
-  & cmd.exe /d /c "`"$dest/PATCH/WIN.CMD`" < `"$task/input.txt`"" *> "$task/select.log"
-  if($LASTEXITCODE){throw 'Dynamic launcher selection failed'}
-  $env:PATH=$savedPath
+  & "$repo/tools/select-guest-launch.cmd" $dest $task 95 $dos $multitask install *> "$task/select.log"
+  if($LASTEXITCODE){throw 'Dynamic launcher installation or selection failed'}
   $ini=Get-Content "$dest/SYSTEM.INI" -Raw
   foreach($file in 'INSIGNIA.386','NTVDM64.386'){
    $pattern='(?im)^device='+[regex]::Escape("$dest\PATCH\$file")+'\s*$'
@@ -54,10 +47,12 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
   }
   $runtimeOptions=@{}
   if($schedule){
-   Copy-Item "$PackageRoot/system32/COMMAND.COM" "$dest/PATCH/COMMAND.COM"
+   & "$repo/tools/prepare-test-inputs.cmd" -GuestPatch $dest $task "$PackageRoot/system32/COMMAND.COM" COMMAND.COM
+   if($LASTEXITCODE){throw 'Cannot stage scheduling COMMAND.COM'}
    & "$repo/assets/release/PIF.EXE" create "$dest/DOSCHECK.PIF" --title 'Scheduling prompt' --program "$dest\PATCH\COMMAND.COM" --directory $dest --arguments '' --config '' --autoexec '' --close-on-exit --w386-flags 0x21002 --min-memory 128 --max-memory 640
    if($LASTEXITCODE){throw 'Cannot create interactive scheduling prompt'}
-  Copy-Item "$profileCache/SCHED.COM" "$dest/SCHED.COM" -Force
+   & "$repo/tools/prepare-test-inputs.cmd" -GuestRoot $dest $task "$profileCache/SCHED.COM" SCHED.COM
+   if($LASTEXITCODE){throw 'Cannot stage DOS scheduling witness'}
    $controllerOptions=@('-DW31_SCHEDULING_INTERACTIVE')
    $expectedScheduling='nonblocking';$route='SCHED.COM'
    if($NativeScheduling){
@@ -65,14 +60,16 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
     $hostVersion=(& $nativeCmd /d /c ver | Out-String).Trim()
     if($LASTEXITCODE -or !$hostVersion){throw 'Cannot obtain host CMD version'}
     $nativeScript="$dest\SCHED.CMD"
-    [IO.File]::WriteAllText($nativeScript,"@echo off`r`nver >$dest\PATCH\SCHED.RUN`r`n:wait`r`nif not exist $dest\PATCH\SCHED.GO goto wait`r`nver >$dest\PATCH\EXEC.TXT`r`necho done>$dest\PATCH\SCHED.END`r`n",[Text.Encoding]::ASCII)
+    & "$repo/tools/prepare-test-inputs.cmd" -GuestRoot $dest $task "$PSScriptRoot/scheduling-witness.cmd" SCHED.CMD
+    if($LASTEXITCODE){throw 'Cannot stage native scheduling witness'}
     & "$repo/assets/release/PIF.EXE" update "$dest/DOSCHECK.PIF" --arguments "/c $nativeCmd /d /c $nativeScript"
     if($LASTEXITCODE){throw 'Cannot configure explicit native scheduling command'}
     $controllerOptions=@();$route='cmd.exe'
     if(!$multitask){$expectedScheduling='blocking'}
    }
   $controllerName=if($controllerOptions.Count){'INTERACT.EXE'}else{'SCHEDULE.EXE'}
-  Copy-Item "$profileCache/$controllerName" "$task/controller.exe" -Force
+   & "$repo/tools/prepare-test-inputs.cmd" $task "$profileCache/$controllerName" controller.exe
+   if($LASTEXITCODE){throw 'Cannot stage Windows scheduling witness'}
    $runtimeOptions=@{WindowsProbeImage="$task/controller.exe";Scheduling=$expectedScheduling;ScheduledRun16Command=$route;MouseProbeRoot=$mouseTools}
   }
   & "$repo/test/integration/win31_runtime_matrix_test.ps1" -Windows95 -Win95ExitBoundary -PreparedProfile -PackageRoot $PackageRoot -InstallRoot $dest -Observer $Observer -OutputRoot "$task/startup" -Cases "386-dosonly$dos" -TimeoutMs 90000 @runtimeOptions
@@ -89,7 +86,6 @@ foreach($dos in 0,1){foreach($multitask in 0,1){
   $observed=if(Test-Path "$task/startup/matrix-results.json"){Get-Content "$task/startup/matrix-results.json" -Raw|ConvertFrom-Json}else{$null}
   $rows+= [pscustomobject]@{dosonly=$dos;instanceDriver=$true;multitask=$multitask;startup=[bool]($observed.probeStarted -and $observed.progmanAndMode);normalExit=[bool]$observed.normalExit;exitAccepted=$false;restartVerified=$false;interaction='pending';passed=$false;error=$failure}
  } finally {
-  $env:PATH=$savedPath
   if($NativeScheduling -and (Test-Path "$dest/PATCH/SCHED.RUN") -and (Test-Path "$dest/PATCH/EXEC.TXT")){
    $started=(Get-Content "$dest/PATCH/SCHED.RUN" -Raw).Trim()
    $completed=(Get-Content "$dest/PATCH/EXEC.TXT" -Raw).Trim()

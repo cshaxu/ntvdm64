@@ -1,16 +1,20 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "958b969b582f1422c8873f68173d601323018b77",
+  "head": "014f2e622f0c7cc645db4297a56d440bb573cacf",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/integration/multitask/verify-win31-empty-profile.ps1",
-    " M test/integration/multitask/verify-win31-progman-dde.ps1",
+    " M test/build/verify-win31-preparation.ps1",
+    " M test/build/verify-win31-profile.ps1",
+    " M test/integration/multitask/verify-win31-setup-modes.ps1",
     " M test/integration/multitask/verify-win95-launch-matrix.ps1",
-    " M tools/prepare-guest-witness.cmd",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/native/prepare-test-inputs.cmd.in",
+    " M tools/prepare-win31-matrix.cmd",
     " M tools/select-guest-launch.cmd",
-    "?? docs/etc/evidence/t484-s4-win31-profile-preparation.md"
+    "?? docs/etc/evidence/t484-s4-matrix-preparation.md",
+    "?? test/integration/multitask/scheduling-witness.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -6673,6 +6677,12 @@
     }
   ],
   "commits": {
+    "014f2e622f0c7cc645db4297a56d440bb573cacf": {
+      "subject": "T484 S4 P45: share Win31 profile test preparation",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-win31-profile-preparation.md"
+      ]
+    },
     "958b969b582f1422c8873f68173d601323018b77": {
       "subject": "T484 S4 P44: prepare Product Control fixtures through CMD",
       "evidence": [
