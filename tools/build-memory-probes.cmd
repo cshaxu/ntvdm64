@@ -54,7 +54,7 @@ for %%F in (E30.COM D30.COM P30.COM) do (
   copy /b /y "%PROBES%\ems\%%F" "%OUTPUT%\%%F" >nul
   if errorlevel 1 exit /b 1
 )
-"%CACHE%\ems_pif_builder.exe" "%RUNTIME%"
+call "%~dp0prepare-memory-pif.cmd" "%RUNTIME%"
 if errorlevel 1 exit /b %errorlevel%
 "%CACHE%\pure_dos_pif_builder.exe" "%RUNTIME%"
 exit /b %errorlevel%

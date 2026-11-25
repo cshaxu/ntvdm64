@@ -1,20 +1,27 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "014f2e622f0c7cc645db4297a56d440bb573cacf",
+  "head": "f29c60bf6ac382566385234d7b2752ed30e1752a",
   "worktree_status": [
-    " M artifacts/build-migration/t484/dispositions.json",
+    " M assets/release/PIF.EXE",
+    " M assets/release/addon-manifest.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/verify-win31-preparation.ps1",
-    " M test/build/verify-win31-profile.ps1",
-    " M test/integration/multitask/verify-win31-setup-modes.ps1",
-    " M test/integration/multitask/verify-win95-launch-matrix.ps1",
-    " M tools/build-fixtures.cmd",
-    " M tools/build/native/prepare-test-inputs.cmd.in",
-    " M tools/prepare-win31-matrix.cmd",
-    " M tools/select-guest-launch.cmd",
-    "?? docs/etc/evidence/t484-s4-matrix-preparation.md",
-    "?? test/integration/multitask/scheduling-witness.cmd"
+    " M src/addon/pif/README.md",
+    " M src/addon/pif/pif.c",
+    " M test/integration/verify-ccpu-alu-guest.ps1",
+    " M test/integration/verify-ccpu-sign-flags-guest.ps1",
+    " M test/integration/verify-ccpu-transfer-guest.ps1",
+    " M test/integration/verify-original-ems-probe.ps1",
+    " D test/observation/ems_pif_builder.c",
+    " M tools/README.md",
+    " M tools/build-memory-probes.cmd",
+    " M tools/build/fixtures/CMakeLists.txt",
+    " M tools/build/fixtures/cpu-guest-probes.cmake",
+    " M tools/build/fixtures/guest-probes.cmake",
+    " M tools/prepare-ems-test.cmd",
+    "?? docs/etc/evidence/t484-s5-ems-pif-consolidation.md",
+    "?? test/observation/fixtures/memory-profile.pif",
+    "?? tools/prepare-memory-pif.cmd"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -593,7 +600,7 @@
       "file": "test/integration/verify-ccpu-alu-guest.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "9ecc542c8c59a6694665b600d2cedeb52b97014e6be0a656b40bfb37be81807f",
+      "current_sha256": "172662a8119a98ce056f4e6a6f10d8bab7cedee6f29bac43ad6217d9b0ce5bc4",
       "revisions": [
         "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
@@ -614,7 +621,7 @@
       "file": "test/integration/verify-ccpu-sign-flags-guest.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "68d965631aa48d55d3e592ac92b4479d04248e38df01b6d0a1ce6df56ca696fd",
+      "current_sha256": "427ce138628ee89ab23ab6847ccd9b45ce9b6067aa0181fdb67f3365d387c965",
       "revisions": [
         "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
@@ -635,7 +642,7 @@
       "file": "test/integration/verify-ccpu-transfer-guest.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "d78a3a8cdf6dc176a9c06e5142f945fb37398779c1c9a1d38cd221cf825200ef",
+      "current_sha256": "21725ea25860e8edc78877bcc25daa8c9eb0f4f406866d9f31d571595fdfb660",
       "revisions": [
         "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
@@ -797,7 +804,7 @@
       "file": "test/integration/verify-original-ems-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "c16c2465847334fdd2261c4699af6823102078765538df46f38f44e3686d99a2",
+      "current_sha256": "ddf30347b8066773e646e72682a7ac18c293143d4888b4148a41bf23f43f6496",
       "revisions": [
         "21d580674d15186a4f9c19954ece674221461a6d",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
@@ -6677,6 +6684,16 @@
     }
   ],
   "commits": {
+    "f29c60bf6ac382566385234d7b2752ed30e1752a": {
+      "subject": "T484: close S4 and admit S5 preparation consolidation",
+      "evidence": []
+    },
+    "5b88ee331e1573d0c05b33e9570e59138270332e": {
+      "subject": "T484 S4 P46: unify guest matrix preparation through CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-matrix-preparation.md"
+      ]
+    },
     "014f2e622f0c7cc645db4297a56d440bb573cacf": {
       "subject": "T484 S4 P45: share Win31 profile test preparation",
       "evidence": [

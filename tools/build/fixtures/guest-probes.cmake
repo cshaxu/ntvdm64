@@ -71,7 +71,7 @@ guest_probe(memory-transition D36L.COM dpmi_suballoc.asm -DEXIT_LIVE)
 get_property(transition_outputs GLOBAL PROPERTY guest_memory-transition)
 add_custom_target(guest-memory-transition DEPENDS ${transition_outputs}
   "${CMAKE_BINARY_DIR}/guest-probes/cpu-integration/CallReturn.COM"
-  ems_pif_builder logon-environment)
+  logon-environment)
 
 set(NTVDM_REMOTE_ENUM_STATUS "0" CACHE STRING "Expected remote enumeration status")
 if(NOT NTVDM_REMOTE_ENUM_STATUS MATCHES "^(0|[1-9][0-9]*)$" OR

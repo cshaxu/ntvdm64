@@ -106,16 +106,18 @@ Run the PIF caller in a short working directory; its separate
 `--expect-long-startdir` case verifies the original64-byte rejection boundary.
 
 `build-memory-probes.cmd ems <new-build-output> <runtime-test-root>` builds
-the three EMS/DOS probes and writes their PIF/configuration files using the
-existing native generators. The runtime test directory must already exist.
+the three EMS/DOS probes and writes their PIF/configuration files. EMS uses
+prepare-memory-pif.cmd and the existing PIF editor, with an authored test
+template that preserves the prior record fields. The runtime test directory
+must already exist.
 `build-memory-probes.cmd xms <new-build-output> <runtime-test-root>
 [default|default-low|reserved] [normal|fault]` selects the XMS/INT15 and
 startup-fault variants. Reserved INT15 keeps its original low-DOS behavior.
 The output directory must be new and below this repository's build directory.
 Runtime paths keep the caller's original spelling and must fit the original
 PIF64-byte path fields. These commands do not launch the tests or edit guest
-installation files. Native generator tools remain available through the
-`memory-profiles` fixture group for their additional existing test options.
+installation files. The remaining pure DOS and XMS writers are available
+through the `memory-profiles` fixture group.
 
 | Directory | Responsibility |
 | --- | --- |

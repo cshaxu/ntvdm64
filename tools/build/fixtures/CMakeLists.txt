@@ -163,13 +163,13 @@ if(NTVDM_ARCH STREQUAL "x86")
   endforeach()
   add_custom_target(command-tools DEPENDS S34N S34E command-stream-observer)
   add_dependencies(guest-keymouse keymouse-capability-observer)
-  foreach(name IN ITEMS ems_pif_builder pure_dos_pif_builder xms_profile_builder)
+  foreach(name IN ITEMS pure_dos_pif_builder xms_profile_builder)
     fixture(${name} CL "test/observation/${name}.c")
     set_property(TARGET ${name}_objects PROPERTY COMPILE_OPTIONS /nologo /TC /W4)
     target_include_directories(${name}_objects PRIVATE
       "${NTVDM_REPO}/src/non-mvdm/public/internal/windows/inc")
   endforeach()
-  add_custom_target(memory-profiles DEPENDS ems_pif_builder pure_dos_pif_builder
+  add_custom_target(memory-profiles DEPENDS pure_dos_pif_builder
     xms_profile_builder guest-ems guest-xms-common guest-xms-default
     guest-xms-reserved guest-xms-normal guest-xms-fault)
 endif()

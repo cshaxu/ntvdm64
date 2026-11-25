@@ -23,8 +23,8 @@ static void usage(void)
 {
     fwprintf(stderr, L"Usage:\n"
                      L"  PIF.EXE show <file>\n"
-                     L"  PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit] [--min-memory N] [--max-memory N] [--w386-max-xms N] [--w386-flags N] [--nt31-flags N]\n"
-                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit] [--min-memory N] [--max-memory N] [--w386-max-xms N] [--w386-flags N] [--nt31-flags N]\n"
+                     L"  PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit] [--min-memory N] [--max-memory N] [--w386-max-xms N] [--w386-min-xms N] [--w386-max-ems N] [--w386-min-ems N] [--w386-flags N] [--nt31-flags N]\n"
+                     L"  PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit] [--min-memory N] [--max-memory N] [--w386-max-xms N] [--w386-min-xms N] [--w386-max-ems N] [--w386-min-ems N] [--w386-flags N] [--nt31-flags N]\n"
                      L"  PIF.EXE replace-root <file> --from OLD --to NEW\n");
 }
 
@@ -156,6 +156,30 @@ static BOOL option_ulong(int argc, wchar_t **argv, const wchar_t *name,
     return TRUE;
 }
 
+static BOOL set_w386_memory(W386PIF30 *profile, int argc, wchar_t **argv)
+{
+    static const wchar_t *const options[] = {
+        L"--w386-max-xms", L"--w386-min-xms", L"--w386-max-ems", L"--w386-min-ems"
+    };
+    WORD *const fields[] = {
+        profile ? &profile->PfMaxXmsK : NULL,
+        profile ? &profile->PfMinXmsK : NULL,
+        profile ? &profile->PfMaxEMMK : NULL,
+        profile ? &profile->PfMinEMMK : NULL
+    };
+    for (size_t i = 0; i < ARRAYSIZE(options); ++i) {
+        DWORD value;
+        BOOL present;
+        if (!option_ulong(argc, argv, options[i], &value, &present) ||
+            (switch_present(argc, argv, options[i]) && !present)) return FALSE;
+        if (present) {
+            if (!fields[i] || value > 0xffffu) return FALSE;
+            *fields[i] = (WORD)value;
+        }
+    }
+    return TRUE;
+}
+
 static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
 {
     const wchar_t *title = option(argc, argv, L"--title");
@@ -164,9 +188,9 @@ static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
     const wchar_t *arguments = option(argc, argv, L"--arguments");
     const wchar_t *config = option(argc, argv, L"--config");
     const wchar_t *autoexec = option(argc, argv, L"--autoexec");
-    DWORD max_xms = 0, w386_flags = 0, nt31_flags = 0, min_memory = 0, max_memory = 0;
-    BOOL has_max_xms, has_w386_flags, has_nt31_flags, has_min_memory, has_max_memory;
-    if (!option_ulong(argc, argv, L"--w386-max-xms", &max_xms, &has_max_xms) ||
+    DWORD w386_flags = 0, nt31_flags = 0, min_memory = 0, max_memory = 0;
+    BOOL has_w386_flags, has_nt31_flags, has_min_memory, has_max_memory;
+    if (!set_w386_memory(view->w386, argc, argv) ||
         !option_ulong(argc, argv, L"--w386-flags", &w386_flags, &has_w386_flags) ||
         !option_ulong(argc, argv, L"--nt31-flags", &nt31_flags, &has_nt31_flags) ||
         !option_ulong(argc, argv, L"--min-memory", &min_memory, &has_min_memory) ||
@@ -175,7 +199,6 @@ static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
         (switch_present(argc, argv, L"--max-memory") && !has_max_memory) ||
         (has_min_memory && min_memory > 0xffffu) ||
         (has_max_memory && max_memory > 0xffffu) ||
-        (has_max_xms && (max_xms > 0xffffu || !view->w386)) ||
         (has_w386_flags && !view->w386) || (has_nt31_flags && !view->nt)) return FALSE;
     if ((!title || put_oem(view->standard->appname, sizeof(view->standard->appname), title)) &&
         (!program || put_oem(view->standard->startfile, sizeof(view->standard->startfile), program)) &&
@@ -185,7 +208,6 @@ static BOOL set_values(PIF_VIEW *view, int argc, wchar_t **argv)
         (!config || (view->nt && put_oem(view->nt->nt31Prop.achConfigFile, sizeof(view->nt->nt31Prop.achConfigFile), config))) &&
         (!autoexec || (view->nt && put_oem(view->nt->nt31Prop.achAutoexecFile, sizeof(view->nt->nt31Prop.achAutoexecFile), autoexec)))) {
         if (switch_present(argc, argv, L"--close-on-exit")) view->standard->MSflags |= 0x10u;
-        if (has_max_xms) view->w386->PfMaxXmsK = (WORD)max_xms;
         if (has_w386_flags) view->w386->PfW386Flags = w386_flags;
         if (has_nt31_flags) view->nt->nt31Prop.dwWNTFlags = nt31_flags;
         if (has_min_memory) {

@@ -5,8 +5,8 @@ installation decisions.
 
 ```text
 PIF.EXE show <file>
-PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit] [--min-memory N] [--max-memory N] [--w386-max-xms N] [--w386-flags N] [--nt31-flags N]
-PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit] [--min-memory N] [--max-memory N] [--w386-max-xms N] [--w386-flags N] [--nt31-flags N]
+PIF.EXE create <file> --title T --program P --directory D --arguments A --config C --autoexec E [--close-on-exit] [--min-memory N] [--max-memory N] [--w386-max-xms N] [--w386-min-xms N] [--w386-max-ems N] [--w386-min-ems N] [--w386-flags N] [--nt31-flags N]
+PIF.EXE update <file> [--title T] [--program P] [--directory D] [--arguments A] [--config C] [--autoexec E] [--close-on-exit] [--min-memory N] [--max-memory N] [--w386-max-xms N] [--w386-min-xms N] [--w386-max-ems N] [--w386-min-ems N] [--w386-flags N] [--nt31-flags N]
 ```
 
 `show` writes the stored fields as `KEY=value` lines, and validates every
@@ -22,10 +22,10 @@ is recomputed after the edit.
 Use it only for a generated PIF whose calling script waits for the launched
 session to end.  It is intentionally not the default for generic PIF files.
 
-The three numeric options edit existing documented extension fields without
-inventing a new PIF record: `--w386-max-xms` is a KiB value from 0 to 65535;
+`--w386-min-xms`, `--w386-max-xms`, `--w386-min-ems` and `--w386-max-ems`
+edit the existing Windows 386 extension fields in KiB, from 0 to 65535.
 `--w386-flags` and `--nt31-flags` accept decimal or `0x`-prefixed DWORDs.
-They are optional and leave the corresponding fields unchanged when omitted.
+Omitted options leave the corresponding fields unchanged.
 
 `--min-memory` and `--max-memory` set conventional memory in KiB (0..65535)
 in the standard record and the Windows 386 record when present. Omitted

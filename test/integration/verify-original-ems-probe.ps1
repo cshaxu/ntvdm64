@@ -27,8 +27,8 @@ try{
  OwnedTool probe-build $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x86 cpu-guest-probes"') 300
  $native=Join-Path $repo 'build/.ninja/fixtures-x86'
  Copy-Item "$native/guest-probes/cpu-integration/$variant.COM" "$root/EMSPROBE.COM"
- $pifBuilder=Join-Path $native 'ems_pif_builder.exe'
- Get-FileHash $PSCommandPath,$probeSource,"$root/EMSPROBE.COM",$Observer,$pifBuilder|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ $pifPreparation=Join-Path $repo 'tools/prepare-memory-pif.cmd'
+ Get-FileHash $PSCommandPath,$probeSource,"$root/EMSPROBE.COM",$Observer,$pifPreparation|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $stage=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path;$scope=New-IsolatedPackageScope $stage
  $tests=Join-Path $stage tests;$null=New-Item -ItemType Directory $tests -Force
  # Reuse the existing test PIF producer: original no-PIF defaults deliberately
@@ -36,8 +36,8 @@ try{
  # config and original guest binaries stay unchanged. The older memory-transition
  # runner requires SUBST and foreground compilation, so reuse its producer only.
  Copy-Item "$root/EMSPROBE.COM" "$tests/E30.COM"
- OwnedTool pif-profile $pifBuilder ('"'+$tests+'" --close-on-exit') 30
- Get-FileHash "$PSScriptRoot/../observation/ems_pif_builder.c",$pifBuilder,"$tests/E30.COM","$tests/E30.PIF","$tests/E30.NT","$tests/E30AUTO.NT"|Export-Csv -NoTypeInformation "$root/profile-inputs.csv"
+ OwnedTool pif-profile $env:ComSpec ('/d /s /c ""'+$pifPreparation+'" "'+$tests+'" --close-on-exit"') 30
+ Get-FileHash "$repo/test/observation/fixtures/memory-profile.pif",$pifPreparation,"$tests/E30.COM","$tests/E30.PIF","$tests/E30.NT","$tests/E30AUTO.NT"|Export-Csv -NoTypeInformation "$root/profile-inputs.csv"
  Get-ChildItem "$stage/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','COMMAND.COM')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
  OwnedTool environment-build $env:ComSpec ('/d /s /c ""'+$repo+'/tools/build-fixtures.cmd" x64 logon-environment"') 300
  . "$PSScriptRoot/../observation/logon-environment.ps1"
