@@ -35,7 +35,7 @@ S1 establishes the component inventory, candidate provenance and feasibility. Th
 
 ## Current Technical Baseline
 
-The T484 S7 package in the active packet remains the runtime baseline. T485 S1 P1 catalogues 159 migration batches and 3,986 tracked files.
+The T484 S7 package in the active packet remains the runtime baseline. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. Integration awaits a qualified source and matching guest media.
 
 ## Recent Governance
 
