@@ -3319,7 +3319,7 @@ in non-mvdm, not an adapter implementation. The S38 build, five real rejection c
 Full16/16 pass; see the S38 evidence for bounded coverage.
 
 MVDM-HOST-DIV-886 (T478 S41): recover original standalone
-vdd/samples/mscdex/vdd VCDEX source/headers/definition/manifest. Declare only
+vdd/mscdex/vdd VCDEX source/headers/definition/manifest. Declare only
 VDDInitialize as WINAPI for the modern cdecl compilation; a diagnostic original
 link reports LNK4086 for the implicit-cdecl DLL entry. Original VDD init/dispatch,
 optical algorithms, buffers, hook ownership and original failure limits stay

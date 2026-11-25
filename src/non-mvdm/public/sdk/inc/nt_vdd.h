@@ -258,4 +258,8 @@ BOOL   VDDReleaseDosHandle (ULONG pPDB, SHORT hFile);
 HANDLE VDDRetrieveNtHandle (ULONG pPDB, SHORT hFile, PVOID* ppSFT, PVOID* ppJFT);
 
 
+#ifndef MSW_PE
+#define MSW_PE 0x1
+#endif
+
 #endif	// ifndef _NT_VDD

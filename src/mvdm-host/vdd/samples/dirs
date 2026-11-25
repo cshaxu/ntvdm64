@@ -20,10 +20,5 @@ NOTE:   Commented description of this file is in \nt\public\oak\bin\dirs.tpl
 
 !ENDIF
 
-DIRS=mscdex
-
 OPTIONAL_DIRS=sample1  \
-              sample2  \
-              adlibvdd \
-              hpscan   \
-              vsbd
+              sample2

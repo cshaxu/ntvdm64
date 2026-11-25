@@ -1,9 +1,9 @@
 # Explicit admitted composition; no cached graph is read.
-worker_unit("obj/vcdex/vcdex.obj" "${NTVDM_REPO}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c" "${profile_18}")
-worker_resource("obj/vcdex/vcdex.res" "${NTVDM_REPO}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.rc" "/nologo")
-worker_link("VCDEX.DLL" "/alternatename:_setAX@4=setAX /nologo /dll /machine:x86 /entry:VDDInitialize@12 /base:0x2000000 /map:$out.map /def:${NTVDM_REPO}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.def /implib:$out.lib /out:$out" "kernel32.lib user32.lib"
+worker_unit("obj/vcdex/vcdex.obj" "${NTVDM_REPO}/src/mvdm-host/vdd/mscdex/vdd/vcdex.c" "${profile_18}")
+worker_resource("obj/vcdex/vcdex.res" "${NTVDM_REPO}/src/mvdm-host/vdd/mscdex/vdd/vcdex.rc" "/nologo")
+worker_link("VCDEX.DLL" "/alternatename:_setAX@4=setAX /nologo /dll /machine:x86 /entry:VDDInitialize@12 /base:0x2000000 /map:$out.map /def:${NTVDM_REPO}/src/mvdm-host/vdd/mscdex/vdd/vcdex.def /implib:$out.lib /out:$out" "kernel32.lib user32.lib"
   INPUTS "obj/vcdex/vcdex.obj" "obj/vcdex/vcdex.res" "ntvdm.lib" "common-root.lib"
-  DEPENDS "${NTVDM_REPO}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.def")
+  DEPENDS "${NTVDM_REPO}/src/mvdm-host/vdd/mscdex/vdd/vcdex.def")
 worker_unit("obj/cvidc/vglob.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c" "${profile_5}")
 worker_unit("obj/ntvdm/session/session.obj" "${NTVDM_REPO}/src/ntvdm-exe/session/session.c" "${profile_19}")
 worker_unit("obj/tests/cpu40_descriptor_domain_fixture.obj" "${NTVDM_REPO}/test/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c" "${profile_12}")
