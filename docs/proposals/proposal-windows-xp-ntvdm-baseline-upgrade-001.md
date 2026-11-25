@@ -4,8 +4,7 @@
 
 Upgrade the project's NTVDM baseline to Windows XP, support audio and long file
 names (LFN), update all guest components, and implement necessary modern-host
-compatibility repairs. This is an unnumbered candidate; its position is governed
-by [Queue](../states/QUEUE.md), and it does not change the active task.
+compatibility repairs. Admitted as M0 T485 under [Current](../states/CURRENT.md).
 
 ## Scope
 
