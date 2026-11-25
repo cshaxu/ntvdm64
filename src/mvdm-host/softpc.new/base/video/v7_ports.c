@@ -86,6 +86,7 @@ io_addr         port;
 half_word       value;
 
 {
+#ifndef NEC_98
 	NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"seq(6,%#x)\n",value);)
 	note_entrance2("vga_seq_extn_control(%x,%x)", port, value);
 
@@ -93,6 +94,8 @@ half_word       value;
 		sequencer.extensions_control.as_bfld.extension_enable = 1;
 	else if (value == 0xae)
 		sequencer.extensions_control.as_bfld.extension_enable = 0;
+#endif  //NEC_98
+#line 101
 }
 
 GLOBAL VOID
@@ -102,6 +105,7 @@ UTINY *rd_bank;
 UTINY *wrt_bank;
 
 {
+#ifndef NEC_98
 	if( get_seq_chain4_mode() && get_chain4_mode() ) {
 		set_v7_bank_for_seq_chain4( rd_bank, wrt_bank );
 	}
@@ -121,6 +125,8 @@ UTINY *wrt_bank;
 		*rd_bank=(extensions_controller.ram_bank_select.as_bfld.cpu_read_bank_select&1);
 		*wrt_bank=(extensions_controller.ram_bank_select.as_bfld.cpu_write_bank_select&1);
 	}
+#endif  //NEC_98
+#line 131
 }
 
 /*(
@@ -149,6 +155,7 @@ io_addr         port;
 half_word       value;
 
 {
+#ifndef NEC_98
 	half_word	old_value;
 
 	note_entrance2("vga_extn_outb(%x,%x)", port, value);
@@ -216,7 +223,7 @@ half_word       value;
 			break;
 		case 0xa5:
 			note_entrance0("cursor attributes");
-			old_value=extensions_controller.cursor_attrs.as.abyte;
+			old_value=(half_word)extensions_controller.cursor_attrs.as.abyte;
 			extensions_controller.cursor_attrs.as.abyte = value;
 
 			/*
@@ -229,8 +236,7 @@ half_word       value;
 
 			/* Not doing cursor mode stuff (whatever that means) */
 
-			if ((value & 0x80) != (old_value & 0x80)) {
-#line 236
+                        if ((value&0x80) != (old_value&0x80)) {
 				host_start_update ();
 				if (value & 0x80) {
 					/* Enable hardware graphics pointer */ 
@@ -405,7 +411,7 @@ half_word       value;
 				extensions_controller.compatibility_control.as.abyte = value;
 				set_seq_chain4_mode(extensions_controller.compatibility_control.as_bfld.sequential_chain4);
 				set_seq_chain_mode(extensions_controller.compatibility_control.as_bfld.sequential_chain);
-				if (get_chain4_mode() && (now_seqchain4 != get_seq_chain4_mode()))
+				if (get_chain4_mode() && (now_seqchain4 != (BOOL)get_seq_chain4_mode()))
 				{
 					/* do we need to change the read/write routines here?? */
 					ega_read_routines_update();
@@ -445,6 +451,8 @@ half_word       value;
 			        sequencer.address.as.abyte);)
 			break;
 	}
+#endif  //NEC_98
+#line 456
 }
 
 /*(
@@ -471,12 +479,13 @@ vga_extn_inb(port, value)
 io_addr         port;
 half_word       *value;
 {
+#ifndef NEC_98
 	note_entrance1("vga_extn_inb(%x)", port);
 
 	switch (sequencer.address.as.abyte) {
 
 		case 0x83:
-			*value = attribute_controller.address.as.abyte;
+			*value = (half_word)attribute_controller.address.as.abyte;
 			break;
 		case 0x8e:
 		case 0x8f:
@@ -487,13 +496,13 @@ half_word       *value;
 			*value = extensions_controller.pointer_pattern;
 			break;
 		case 0x9c:
-			*value = extensions_controller.ptr_horiz_posn_hi.as.abyte;
+			*value = (half_word)extensions_controller.ptr_horiz_posn_hi.as.abyte;
 			break;
 		case 0x9d:
 			*value = extensions_controller.ptr_horiz_posn_lo;
 			break;
 		case 0x9e:
-			*value = extensions_controller.ptr_vert_posn_hi.as.abyte;
+			*value = (half_word)extensions_controller.ptr_vert_posn_hi.as.abyte;
 			break;
 		case 0x9f:
 			*value = extensions_controller.ptr_vert_posn_lo;
@@ -515,7 +524,7 @@ half_word       *value;
 			*value = get_latch3;
 			break;
 		case 0xa4:
-			*value = extensions_controller.clock_select.as.abyte;
+			*value = (half_word)extensions_controller.clock_select.as.abyte;
 			break;
 		case 0xa5:
 			*value = extensions_controller.cursor_attrs.as.abyte & 0x89;
@@ -526,10 +535,10 @@ half_word       *value;
 		*/
 
 		case 0xc1:
-			*value=extensions_controller.dac_control.as.abyte;	
+			*value = (half_word)extensions_controller.dac_control.as.abyte;	
 			break;
 		case 0xeb:
-			*value = extensions_controller.emulation_control.as.abyte;
+			*value = (half_word)extensions_controller.emulation_control.as.abyte;
 			break;
 		case 0xec:
 			*value = extensions_controller.foreground_latch_0;
@@ -562,7 +571,7 @@ half_word       *value;
 			extensions_controller.fast_latch_load_state.as_bfld.fg_latch_load_state = 0;
 			break;
 		case 0xf1:
-			*value = extensions_controller.fast_latch_load_state.as.abyte;
+			*value = (half_word)extensions_controller.fast_latch_load_state.as.abyte;
 			break;
 		case 0xf2:
 			switch (extensions_controller.fast_latch_load_state.as_bfld.bg_latch_load_state)
@@ -592,34 +601,34 @@ half_word       *value;
 			*value = extensions_controller.fg_bg_pattern;
 			break;
 		case 0xf6:
-			*value = extensions_controller.ram_bank_select.as.abyte;
+			*value = (half_word)extensions_controller.ram_bank_select.as.abyte;
 			break;
 		case 0xf7:
 			*value = extensions_controller.switch_readback;
 			break;
 		case 0xf8:
-			*value = extensions_controller.clock_control.as.abyte;
+			*value = (half_word)extensions_controller.clock_control.as.abyte;
 			break;
 		case 0xf9:
-			*value = extensions_controller.page_select.as_bfld.extended_page_select;
+			*value = (half_word)extensions_controller.page_select.as_bfld.extended_page_select;
 			break;
 		case 0xfa:
-			*value = extensions_controller.foreground_color.as.abyte;
+			*value = (half_word)extensions_controller.foreground_color.as.abyte;
 			break;
 		case 0xfb:
-			*value = extensions_controller.background_color.as.abyte;
+			*value = (half_word)extensions_controller.background_color.as.abyte;
 			break;
 		case 0xfc:
-			*value = extensions_controller.compatibility_control.as.abyte;
+			*value = (half_word)extensions_controller.compatibility_control.as.abyte;
 			break;
 		case 0xfd:
-			*value = extensions_controller.timing_select.as.abyte;
+			*value = (half_word)extensions_controller.timing_select.as.abyte;
 			break;
 		case 0xfe:
 			*value = extensions_controller.fg_bg_control.as.abyte & 0xe;
 			break;
 		case 0xff:
-			*value = extensions_controller.interface_control.as.abyte;
+			*value = (half_word)extensions_controller.interface_control.as.abyte;
 			break;
 		default:
 			NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)
@@ -634,6 +643,8 @@ half_word       *value;
 
 	}
 	note_entrance1("returning %x",*value);
+#endif //NEC_98
+#line 647
 }
 
 /*(
@@ -657,6 +668,7 @@ Output:
 GLOBAL VOID
 draw_v7ptr()
 {
+#ifndef NEC_98
 	sys_addr pattern;
 
 	if (extensions_controller.cursor_attrs.as_bfld.pointer_enable)
@@ -709,6 +721,8 @@ draw_v7ptr()
 
 		(*paint_v7ptr)(pattern, curr_v7ptr_x, curr_v7ptr_y);
 	}
+#endif  //NEC_98
+#line 724
 }
 
 GLOBAL	VOID	remove_v7ptr IFN0()
@@ -733,6 +747,7 @@ GLOBAL	BOOL	v7ptr_between_lines IFN2(int, start_line, int, end_line)
  */
 GLOBAL void set_v7_fg_latch_byte IFN2(IU8, index, IU8, value)
 {
+#ifndef NEC_98
 	IU32 v7latch;
 
 	/* get current value */
@@ -763,6 +778,8 @@ GLOBAL void set_v7_fg_latch_byte IFN2(IU8, index, IU8, value)
 
 	/* update v7 latches */
 	setVideov7_fg_latches(v7latch);
+#endif  //NEC_98
+#line 780
 }
 #endif	/* CPU_40_STYLE */
 

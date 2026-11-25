@@ -102,7 +102,7 @@ rgb_struct *rgb;
 	unsigned int grey;
 
 	grey = (30*rgb->red+59*rgb->green+11*rgb->blue)/100;
-	rgb->red = rgb->green = rgb->blue = grey;
+        rgb->red = rgb->green = rgb->blue = (unsigned char)grey;
 }
 
 static void set_dac(dac,rgb)
@@ -110,20 +110,26 @@ half_word dac;
 rgb_struct *rgb;
 {
 	if(is_GREY())greyify(rgb);
+#ifndef NEC_98
 	outb(VGA_DAC_WADDR,dac);
 	outb(VGA_DAC_DATA,rgb->red);
 	outb(VGA_DAC_DATA,rgb->green);
 	outb(VGA_DAC_DATA,rgb->blue);
+#endif  //NEC_98
+#line 120
 }
 
 static void get_dac(dac,rgb)
 half_word dac;
 rgb_struct *rgb;
 {
+#ifndef NEC_98
 	outb(VGA_DAC_RADDR,dac);
 	inb(VGA_DAC_DATA,&(rgb->red));
 	inb(VGA_DAC_DATA,&(rgb->green));
 	inb(VGA_DAC_DATA,&(rgb->blue));
+#endif  //NEC_98
+#line 132
 }
 
 
@@ -137,15 +143,16 @@ rgb_struct *rgb;
 void init_vga_dac(table)
 int table;	/* Which table to use */
 {
+#ifndef NEC_98
     int loop;
     byte *dac;
     rgb_struct rgb;
 
 #ifdef	macintosh
-#line 146
+#line 151
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else	/* macintosh */
-#line 155
+#line 160
 
     switch (table)
     {
@@ -163,7 +170,7 @@ int table;	/* Which table to use */
     }
 
 #endif	/* macintosh */
-#line 172
+#line 177
 
     for(loop = 0; loop < 0x100; loop++) 
 	{
@@ -173,16 +180,18 @@ int table;	/* Which table to use */
     }
 
 #ifdef	macintosh
-#line 181
+#line 186
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #endif	/* macintosh */
-#line 186
+#endif  //NEC_98
+#line 192
 }
 
 /***** Routines to handle VGA 256 colour modes, called from video.c **********/
 GLOBAL VOID vga_graphics_write_char 
 	IFN6( LONG, col, LONG, row, LONG, ch, IU8, colour, LONG, page, LONG, nchs)
 {
+#ifndef NEC_98
 	register sys_addr char_addr;
 	register long screen_offset;
 	register int i,j,k,char_height,len;
@@ -235,18 +244,21 @@ GLOBAL VOID vga_graphics_write_char
 	 * Set read/write banks to last value in case someone relies on this side-effect
 	 */
 
-	bank = ( screen_offset - ( scan_length - ( nchs << 3 ))) >> 16;
+        bank = (byte)(( screen_offset - ( scan_length - ( nchs << 3 ))) >> 16);
 	set_banking( bank, bank ); 
+#endif  //NEC_98
+#line 254
 }
 
 GLOBAL VOID vga_write_dot 
 	IFN4(LONG, colour, LONG, page, LONG, pixcol, LONG, row)
 {
+#ifndef NEC_98
 #ifdef REAL_VGA
-#line 252
+#line 261
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-#line 257
+#line 266
 	long screen_offset;
 	UTINY bank;
 	
@@ -254,18 +266,20 @@ GLOBAL VOID vga_write_dot
 
 	screen_offset = (8*row*sas_w_at_no_check(VID_COLS)+pixcol);
 
-	bank = screen_offset >> 16;
+        bank = (UTINY)(screen_offset >> 16);
 	set_banking( bank, bank ); 
 
-	EGA_plane0123[screen_offset] = colour;
+        EGA_plane0123[screen_offset] = (UCHAR)colour;
 	(*update_alg.mark_byte)(screen_offset);
 #endif	/* REAL_VGA */
-#line 270
+#endif  //NEC_98
+#line 280
 }
 
 GLOBAL VOID vga_sensible_graph_scroll_up 
 	IFN6( LONG, row, LONG, col, LONG, rowsdiff, LONG, colsdiff, LONG, lines, LONG, attr)
 {
+#ifndef NEC_98
 	register int col_incr = 8*sas_w_at_no_check(VID_COLS);
 	register int i;
 	register long source,dest;
@@ -277,10 +291,10 @@ GLOBAL VOID vga_sensible_graph_scroll_up
 	rowsdiff *= char_height;
 	lines *= char_height;
 #ifdef REAL_VGA
-#line 286
+#line 297
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-#line 302
+#line 313
 	dest = sas_w_at_no_check(VID_ADDR)+ row*col_incr*char_height+col;
 	source = dest+lines*col_incr;
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */
@@ -302,12 +316,14 @@ GLOBAL VOID vga_sensible_graph_scroll_up
 		dest += col_incr;
 	}
 #endif	/* REAL_VGA */
-#line 323
+#endif  //NEC_98
+#line 335
 }
 
 GLOBAL VOID vga_sensible_graph_scroll_down 
 	IFN6( LONG, row, LONG, col, LONG, rowsdiff, LONG, colsdiff, LONG, lines, LONG, attr)
 {
+#ifndef NEC_98
 	register int col_incr = 8*sas_w_at_no_check(VID_COLS);
 	register int i;
 	register long source,dest;
@@ -319,10 +335,10 @@ GLOBAL VOID vga_sensible_graph_scroll_down
 	rowsdiff *= char_height;
 	lines *= char_height;
 #ifdef REAL_VGA
-#line 339
+#line 352
 #error Excluded unsupported REAL_VGA configuration
 #else
-#line 356
+#line 369
 	dest = sas_w_at_no_check(VID_ADDR)+ row*col_incr*char_height+col;
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */
 	if(screen_updated)
@@ -345,11 +361,13 @@ GLOBAL VOID vga_sensible_graph_scroll_down
 		dest -= col_incr;
 	}
 #endif	/* REAL_VGA */
-#line 378
+#endif  //NEC_98
+#line 392
 }
 
 GLOBAL VOID vga_read_attrib_char IFN3(LONG, col, LONG, row, LONG, page)
 {
+#ifndef NEC_98
 	byte the_char[256];
 	register host_addr screen;
 	register int i,k;
@@ -363,13 +381,13 @@ GLOBAL VOID vga_read_attrib_char IFN3(LONG, col, LONG, row, LONG, page)
 	col,row,page);*/
 /* VGA 256 colour mode has only one page, so ignore 'page' */
 #ifdef REAL_VGA
-#line 395
+#line 410
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-#line 397
+#line 412
 	screen = &EGA_plane0123[row*scan_length*char_height+8*col];
 #endif  /* REAL_VGA */
-#line 399
+#line 414
 	for(i=0;i<char_height;i++)
 	{
 		mask = 0x80;
@@ -383,34 +401,42 @@ GLOBAL VOID vga_read_attrib_char IFN3(LONG, col, LONG, row, LONG, page)
 		screen += scan_length - 8;
 	}
 	search_font((char *)the_char,(int)char_height);
+#endif  //NEC_98
+#line 428
 }
 
 GLOBAL VOID vga_read_dot IFN3(LONG, page, LONG, pixcol, LONG, row)
 {
+#ifndef NEC_98
 	register host_addr screen;
 	
 	UNUSED(page);
 	
 /*printf("vga_read_dot(%d,%d,%d)\n",page,col,row);*/
 #ifdef REAL_VGA
-#line 422
+#line 439
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-#line 424
+#line 441
 	screen = &EGA_plane0123[8*row*sas_w_at_no_check(VID_COLS)+pixcol];
 #endif  /* REAL_VGA */
-#line 426
+#line 443
 	setAL(*screen) ; /* WOW - that's easy!! */
+#endif  //NEC_98
+#line 445
 }
 
 /****** Routines to handle BIOS functions new to VGA *******/
 void vga_set_palette()
 {
+#ifndef NEC_98
 	/*
 	 * Called via INT 10 AH=10, AL='not understood by ega_set_palette()'
 	 * Sets/reads VGA DACs.
 	 */
-	int i,dac;
+        UCHAR i;
+    word i2;
+    int dac;
 	byte temp; /* For inb()s. */
 	byte mode_reg;
 	rgb_struct rgb_dac;
@@ -456,7 +482,7 @@ void vga_set_palette()
 		case 0x12:	/* Set block of DACs */
 			ptr = effective_addr(getES(),getDX());
 			dac = getBX();
-			for(i=0;i<getCX();i++)
+                        for(i2=0;i2<getCX();i2++)
 			{
 			   rgb_dac.red = sas_hw_at_no_check(ptr);
 			   rgb_dac.green = sas_hw_at_no_check(ptr+1);
@@ -474,7 +500,7 @@ void vga_set_palette()
 			if(getBL()==0)
 			{  /* Select paging mode */
 			   outb(EGA_AC_INDEX_DATA,
-				(mode_reg & 0x7f) | (getBH()<<7));
+                                (IU8)((mode_reg & 0x7f) | (getBH()<<7)));
 			}
 			else /* Select a palette page */
 			{
@@ -486,7 +512,7 @@ void vga_set_palette()
 			     outb(EGA_AC_INDEX_DATA,getBH());
 			   else
 			    /* 64 entry palette - only bits 2-3 relevent */
-			     outb(EGA_AC_INDEX_DATA,getBH()<<2);
+                             outb(EGA_AC_INDEX_DATA,(IU8)(getBH()<<2));
 			}
 			inb(EGA_IPSTAT1_REG,&temp);
 			outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);
@@ -501,7 +527,7 @@ void vga_set_palette()
 		case 0x17:
 			ptr = effective_addr(getES(),getDX());
 			dac = getBX();
-			for(i=0;i<getCX();i++)
+                        for(i2=0;i2<getCX();i2++)
 			{
 			   get_dac(dac,&rgb_dac);
 			   sas_store(ptr, rgb_dac.red);
@@ -537,7 +563,7 @@ void vga_set_palette()
 			break;
 		case 0x1b:	/* Convert set of DACs to grey scale. */
 			dac = getBX();
-			for(i=0;i<getCX();i++)
+                        for(i2=0;i2<getCX();i2++)
 			{
 				get_dac(dac,&rgb_dac);
 				greyify(&rgb_dac);
@@ -549,6 +575,8 @@ void vga_set_palette()
 			assert1(FALSE,"Bad set palette submode %#x",getAL());
 			break;
 	}
+#endif  //NEC_98
+#line 597
 }
 
 /* 
@@ -558,6 +586,7 @@ void vga_set_palette()
  */
 void vga_func_12()
 {
+#ifndef NEC_98
 	half_word	seq_clock;
 
 	switch(getBL())
@@ -588,13 +617,13 @@ void vga_func_12()
 			{
 				outb(EGA_SEQ_INDEX, 1);
 				inb(EGA_SEQ_DATA, &seq_clock);
-				outb(EGA_SEQ_DATA, seq_clock & ~DISABLE_REFRESH);
+                                outb(EGA_SEQ_DATA, (IU8)(seq_clock & ~DISABLE_REFRESH));
 			}
 			else
 			{
 				outb(EGA_SEQ_INDEX, 1);
 				inb(EGA_SEQ_DATA, &seq_clock);
-				outb(EGA_SEQ_DATA, seq_clock | DISABLE_REFRESH);
+                                outb(EGA_SEQ_DATA, (IU8)(seq_clock | DISABLE_REFRESH));
 			}
 			setAL(0x12);
 			break;
@@ -606,9 +635,12 @@ void vga_func_12()
 			setAL(0);	/* Function not supported */
 			break;
 	}
+#endif  //NEC_98
+#line 656
 }
 void vga_disp_comb()
 {
+#ifndef NEC_98
 	/* check that we really are a VGA */
 	if (video_adapter != VGA)
 	{
@@ -628,10 +660,13 @@ void vga_disp_comb()
 		setBL(VGA_COLOUR); /* VGA with colour monitor. (7 for mono) */
 	}
 	setAX(0x1A); /* Tell him we coped. */
+#endif  //NEC_98
+#line 680
 }
 
 void vga_disp_func()
 {
+#ifndef NEC_98
 	/* 
 	 * This function returns masses of info. about the current 
 	 * display and screen mode.
@@ -644,19 +679,19 @@ void vga_disp_func()
 	byte temp,mode_reg, video_mode;
 
 #if defined(NTVDM) && defined(X86GFX)
-#line 670
+#line 697
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
-#line 672
+#line 699
 
 	/* check that we really are a VGA */
 #ifndef HERC 
 	if (video_adapter != VGA)
 #else
-#line 677
+#line 704
 #error DIVERGENCE MVDM-HOST-DIV-523: HERC alternative is not selected; see mirror register.
 #endif	/* HERC */
-#line 679
+#line 706
 	{
 		/* we are not -so this function is not implemented */
 		not_imp();
@@ -664,10 +699,10 @@ void vga_disp_func()
 	}
 
 #ifdef HERC 
-#line 686
+#line 713
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif	/* HERC */
-#line 689
+#line 716
 	video_mode = sas_hw_at_no_check(vd_video_mode);
 #ifdef V7VGA
 	if ((video_mode == 1) && extensions_controller.foreground_latch_1)
@@ -681,14 +716,14 @@ void vga_disp_func()
  * x86 it has to live in ntio.sys.
  */
 #if defined(NTVDM) && defined(X86GFX)
-#line 702
+#line 729
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
-#line 705
+#line 732
 	sas_storew(buf,INT10_1B_DATA);
 	sas_storew(buf+2,EGA_SEG);
 #endif	/* NTVDM & X86GFX */
-#line 708
+#line 735
 
 	sas_store(buf+0x4, video_mode);	/* Current video mode */
 	sas_storew(buf+5,sas_w_at_no_check(VID_COLS)); /* Cols on screen */
@@ -700,7 +735,7 @@ void vga_disp_func()
 	sas_storew(buf+0x1E,sas_w_at_no_check(VID_INDEX));
 	sas_store(buf+0x20, sas_hw_at_no_check(vd_crt_mode));
 	sas_store(buf+0x21, sas_hw_at_no_check(vd_crt_palette));
-	sas_store(buf+0x22, sas_hw_at_no_check(vd_rows_on_screen)+1);
+        sas_store(buf+0x22, (IU8)(sas_hw_at_no_check(vd_rows_on_screen)+1));
 	sas_storew(buf+0x23,sas_w_at_no_check(ega_char_height));
 	sas_store(buf+0x25, VGA_COLOUR);	/* Active display */
 	sas_store(buf+0x26, 0);		/* Inactive display (none) */
@@ -721,17 +756,16 @@ void vga_disp_func()
 		sas_store(buf+0x29, vd_mode_table[video_mode].npages);
 	}
 #else
-#line 740
+#line 767
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
-#line 743
-	sas_store(buf+0x2A, get_scanlines());
+        sas_store(buf+0x2A, (IU8)(get_scanlines()));
 
 	outb(EGA_SEQ_INDEX,3);
 	inb(EGA_SEQ_DATA,&temp);	/* Character Font select reg. */
-	sas_store(buf+0x2B, (temp & 3)|((temp & 0x10)>>2));
+        sas_store(buf+0x2B, (IU8)((temp & 3)|((temp & 0x10)>>2)));
 			 /* extract bits 410 - font B */
-	sas_store(buf+0x2C, ((temp & 0xC)>>2)|((temp & 0x20)>>3));
+        sas_store(buf+0x2C, (IU8)(((temp & 0xC)>>2)|((temp & 0x20)>>3)));
 			/* extract bits 532 - font A */
 
 	temp = 1;			/* All modes on all displays active */
@@ -749,16 +783,19 @@ void vga_disp_func()
 	sas_store(buf+0x31, 3);		/* 256KB video memory */
 	setAX(0x1B); /* We did it! */
 #ifdef HERC 
-#line 767
+#line 794
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif	/* HERC */
-#line 805
+#endif  //NEC_98
+#line 833
 }
 
 void vga_int_1C()
 {
+#ifndef NEC_98
 sys_addr buff = effective_addr(getES(),getBX());
-int i;
+UCHAR i;
+int i2;
 word states;
 half_word temp;
 rgb_struct rgb_dac;
@@ -847,10 +884,10 @@ static byte const5[] = { 1,0,0xff };
 			buff += 16;
 			outb(EGA_CRTC_INDEX,R11_CURS_END);
 			inb(EGA_CRTC_DATA,&temp);
-			sas_store(buff++, temp & 0x1F);
+                        sas_store(buff++, (IU8)(temp & 0x1F));
 			outb(EGA_CRTC_INDEX,R10_CURS_START);
 			inb(EGA_CRTC_DATA,&temp);
-			sas_store(buff++, temp & 0x1F);
+                        sas_store(buff++, (IU8)(temp & 0x1F));
 			sas_store(buff++, sas_hw_at_no_check(vd_current_page));
 			sas_storew(buff,sas_w_at_no_check(VID_INDEX));
 			buff += 2;
@@ -873,9 +910,9 @@ static byte const5[] = { 1,0,0xff };
 		{
 			for(i=0;i<sizeof(const5);i++)
 				sas_store(buff++, const5[i]);
-			for(i=0;i<256;i++)
+                        for(i2=0;i2<256;i2++)
 			{
-				get_dac(i, &rgb_dac);
+                                get_dac(i2, &rgb_dac);
 				sas_store(buff++, rgb_dac.red);
 				sas_store(buff++, rgb_dac.green);
 				sas_store(buff++, rgb_dac.blue);
@@ -950,12 +987,12 @@ static byte const5[] = { 1,0,0xff };
 		if( states&4 )  /* VGA DAC values  */
 		{
 			buff += sizeof(const5);
-			for(i=0;i<256;i++)
+                        for(i2=0;i2<256;i2++)
 			{
 				rgb_dac.red = sas_hw_at_no_check(buff++);
 				rgb_dac.green = sas_hw_at_no_check(buff++);
 				rgb_dac.blue = sas_hw_at_no_check(buff++);
-				set_dac(i,&rgb_dac); 
+                                set_dac(i2,&rgb_dac);
 			}
 		}
 		break;
@@ -964,9 +1001,8 @@ static byte const5[] = { 1,0,0xff };
 		not_imp();
 		break;
 	}
+#endif  //NEC_98
+#line 1047
 }
 
 #endif  /* VGG */
-
-
-

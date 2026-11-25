@@ -1,3 +1,6 @@
+#if (defined(JAPAN) || defined(KOREA)) && !defined(i386)
+#include <windows.h>
+#endif // (JAPAN || KOREA)&& !i386
 #include "insignia.h"
 #include "host_def.h"
 /*
@@ -41,6 +44,7 @@
  */
 
 
+#ifndef NEC_98
 #ifdef SEGMENTATION
 #error Excluded unsupported SEGMENTATION configuration
 
@@ -49,6 +53,8 @@
 
 
 #endif
+#endif // !NEC_98
+#line 57
 
 
 /*
@@ -90,16 +96,28 @@
 #include "host_gfx.h"
 #include "cpu_vid.h"
 #include "ga_defs.h"
+#if defined(JAPAN) || defined(KOREA)
+#include <conapi.h>
+#include "nt_graph.h" // for SetConsoleEUDC()
+#include "egagraph.h" // for SetVram()
+#endif // JAPAN || KOREA
+
+#if defined(NEC_98)
+#line 105
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 107
 
 #ifdef	EGG
 #define	VD_ROWS_ON_SCREEN	sas_hw_at_no_check(vd_rows_on_screen)
 #else
-#line 97
+#line 111
 #error DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register.
 #endif	/* EGG */
-#line 99
+#line 113
 
 
+#ifndef NEC_98
 #ifdef NTVDM
 short		stream_io_dirty_count_32 = 0;
 half_word  *	stream_io_buffer = NULL;
@@ -111,6 +129,8 @@ sys_addr	stream_io_bios_busy_sysaddr;
 #endif
 
 #endif
+#endif // !NEC_98
+#line 128
 
 
 
@@ -124,10 +144,47 @@ sys_addr	stream_io_bios_busy_sysaddr;
  * This was done to fix "dots on screen" problem with EGA-PICS, which changes screen
  * mode behind the BIOS's back.
  */
+#if defined(NEC_98)
+#line 142
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 144
 GLOBAL sys_addr video_pc_low_regen,video_pc_high_regen;
+#endif // !NEC_98
+#line 146
 
+#if defined(JAPAN) || defined(KOREA)
+GLOBAL byte Int10Flag[80*50];
+GLOBAL byte NtInt10Flag[80*50];
+
+GLOBAL word DosvVramSeg;
+GLOBAL word DosvVramOff;
+GLOBAL word DosvModeSeg;
+GLOBAL word DosvModeOff;
+GLOBAL word NtConsoleFlagSeg;
+GLOBAL word NtConsoleFlagOff;
+GLOBAL word DispInitSeg;
+GLOBAL word DispInitOff;
+GLOBAL word FullScreenResumeOff;
+GLOBAL word FullScreenResumeSeg;
+GLOBAL sys_addr DosvVramPtr;
+GLOBAL sys_addr DosvModePtr;
+GLOBAL sys_addr NtConsoleFlagPtr;
+GLOBAL sys_addr SetModeFlagPtr;
+GLOBAL int PrevCP = 437;                  // default CP
+GLOBAL int DosvVramSize;
+#define DOSV_VRAM_SIZE 8000               // 8/6/1993 V-KazuyS
+GLOBAL word textAttr;                   // for screen attributes
+#endif
+
+#ifdef JAPAN
+GLOBAL int  Int10FlagCnt = 0;
+
+// #4183: status line of oakv(DOS/V FEP) doesn't disappear -yasuho
+GLOBAL half_word IMEStatusLines;
+#endif
 #define vd_text_mode() (vd_mode_table[sas_hw_at_no_check(vd_video_mode)])
-#line 127
+#line 177
 
 /*
  * ============================================================================
@@ -136,7 +193,11 @@ GLOBAL sys_addr video_pc_low_regen,video_pc_high_regen;
  */
 
 /* internal function declarations */
-#line 135
+#if defined(NEC_98)
+#line 186
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 264
 LOCAL sys_addr 	extend_addr IPT1(sys_addr,addr);
 LOCAL half_word fgcolmask IPT1(word, rawchar);
 LOCAL word 	expand_byte IPT1(word, lobyte);
@@ -144,11 +205,11 @@ GLOBAL void 	graphics_write_char IPT5(half_word, x, half_word, y, half_word, wch
 LOCAL void 	M6845_reg_init IPT2(half_word, mode, word, base);
 LOCAL void 	vd_dummy IPT0();
 
-#line 142
+#line 271
 #ifdef HERC
-#line 143
+#line 272
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
-#line 146
+#line 275
 #endif /* HERC */
 
 void (*video_func[]) () = {
@@ -169,15 +230,15 @@ void (*video_func[]) () = {
 				vd_write_teletype,
 				vd_get_mode,
 				vd_dummy,
-#line 166
+#line 295
 #ifdef HERC
-#line 167
+#line 296
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
-#line 169
+#line 298
 #else /* !HERC */
 				vd_dummy,
 				vd_dummy,
-#line 172
+#line 301
 #endif /* HERC */
 				vd_write_string,
 				vd_dummy,
@@ -187,18 +248,21 @@ void (*video_func[]) () = {
 				vd_dummy,
 				vd_dummy,
 				vd_dummy,
-#line 181
+#line 310
 #ifdef VGG
 				vga_disp_func,
-#line 183
+#line 312
 #else /* !VGG */
-#line 184
+#line 313
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
-#line 186
+#line 315
 				vd_dummy,
 			   };
+#endif // !NEC_98
+#line 318
 
+#ifndef NEC_98
 unsigned char   valid_modes[] =
         {
                 ALL_MODES,              /* Mode 0. */
@@ -303,6 +367,8 @@ LOCAL void sensible_graph_scroll_up IPT6(int, t_row, int, l_col, int, rowsdiff, 
 LOCAL void sensible_graph_scroll_down IPT6(int, t_row, int, l_col, int, rowsdiff, int, colsdiff, int, lines, int, attr);
 LOCAL void kinky_scroll_up IPT7(int, t_row, int, l_col, int, rowsdiff, int, colsdiff, int, lines, int, attr, int, vd_cols_on_screen);
 LOCAL void kinky_scroll_down IPT7(int, t_row, int, l_col, int, rowsdiff, int, colsdiff, int, lines, int, attr, int, vd_cols_on_screen);
+#endif // !NEC_98
+#line 425
 
 /*
  * ============================================================================
@@ -310,15 +376,260 @@ LOCAL void kinky_scroll_down IPT7(int, t_row, int, l_col, int, rowsdiff, int, co
  * ============================================================================
  */
 
+#ifdef JAPAN
+GLOBAL int dbcs_first[0x100] = {
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 0x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 1x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 2x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 3x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 4x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 5x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 6x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 7x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  // 8x
+		TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,
+		TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  // 9x
+		TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // Ax
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // Bx
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // Cx
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // Dx
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+#if defined(NEC_98)
+#line 463
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 466
+		TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  // Ex
+		TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,
+#endif // !NEC_98
+#line 469
+		TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  // Fx
+		TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  FALSE, FALSE, FALSE
+	};
+#elif defined(KOREA) // JAPAN
+GLOBAL int dbcs_first[0x100] = {
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 0x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 1x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 2x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 3x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 4x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 5x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 6x
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+		FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 7x
+                FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+                FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 8x
+                FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+                FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, // 9x
+                FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+                FALSE, TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  // Ax
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  // Bx
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  // Cx
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  // Dx
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  // Ex
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  // Fx
+                TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  TRUE,  FALSE
+        };
+#endif // KOREA
+
+#if defined(JAPAN) || defined(KOREA)
+GLOBAL int BOPFromDispFlag = FALSE;
+GLOBAL int BOPFromNtDisp1Flag = FALSE;
+GLOBAL sys_addr DBCSVectorAddr = 0;
+GLOBAL word SaveDBCSVector[20];
+GLOBAL int DBCSVectorLen = 0;
+
+int is_us_mode()
+{
+#if defined(NEC_98)
+#line 519
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 521
+    if ( ( BOPFromDispFlag == TRUE ) &&  DBCSVectorAddr != 0 &&
+	 ( sas_w_at_no_check(DBCSVectorAddr) != 0x00 ) )
+        return FALSE;   // Not US mode
+    else
+        return TRUE;    // US mode
+#endif // !NEC_98
+#line 527
+}
+
+#ifndef NEC_98
+void SetDBCSVector( int CP )
+{
+    int i, j;
+    sys_addr ptr;
+
+#ifdef JAPAN_DBG
+    DbgPrint( " SetDBCSVector(%d) BOPFromDispFlag=%d, BOPFromNtDisp1Flag=%d\n", CP, BOPFromDispFlag, BOPFromNtDisp1Flag );
+#endif
+
+    if ( !BOPFromDispFlag && !BOPFromNtDisp1Flag )
+        return;
+
+    ptr = DBCSVectorAddr;
+
+    if ( CP == 437 ) {
+        for ( i = 0; i < DBCSVectorLen; i++ ) {
+	    sas_storew_no_check( ptr, 0x0000 );
+            ptr += 2;
+        }
+        for ( i = 0; i < 0x100; i++ ) {
+            dbcs_first[i] = FALSE;
+        }
+        // Set cursor mode
+        if ( !SetConsoleCursorMode( sc.OutputHandle,
+                                    TRUE,             // Bringing
+                                    FALSE             //  No double byte cursor
+                                         ) ) {
+            DbgPrint( "NTVDM: SetConsoleCursorMode Error\n" );
+        }
+    }
+    else { // CP == 932
+        for ( i = 0; i < DBCSVectorLen; i++ ) {
+            sas_storew_no_check( ptr, SaveDBCSVector[i] );
+            ptr += 2;
+        }
+        for ( i = 0, j = 0; i < DBCSVectorLen; i++ ) {
+            //DbgPrint( "...%02x.", LOBYTE(SaveDBCSVector[i]) );
+            for ( ; j < LOBYTE(SaveDBCSVector[i]); j++ ) {
+                dbcs_first[j] = FALSE;
+            }
+            //DbgPrint( "...%02x.", HIBYTE(SaveDBCSVector[i]) );
+            for ( ; j <= HIBYTE(SaveDBCSVector[i]); j++ ) {
+                dbcs_first[j] = TRUE;
+            }
+        }
+        for ( ; j < 0x100; j++ ) {
+            dbcs_first[j] = FALSE;
+        }
+        // Set cursor mode
+        if ( !SetConsoleCursorMode( sc.OutputHandle,
+                                    FALSE,            //  No bringing
+                                    FALSE             //  No double byte cursor
+                                         ) ) {
+            DbgPrint( "NTVDM: SetConsoleCursorMode Error\n" );
+        }
+    }
+
+}
+
+void SetVram()
+{
+
+#ifdef i386
+    if ( !is_us_mode() ) {
+        // set_up_screen_ptr() vga_mode.c
+        set_screen_ptr( (byte *)DosvVramPtr );
+        // low_set_mode() ega_vide.c
+        video_pc_low_regen = DosvVramPtr;
+        video_pc_high_regen = DosvVramPtr + DosvVramSize - 1;
+        // vga_gc_misc() vga_prts.c
+        gvi_pc_low_regen = DosvVramPtr;
+        gvi_pc_high_regen = DosvVramPtr + DosvVramSize - 1;
+        sas_connect_memory(gvi_pc_low_regen,gvi_pc_high_regen,(half_word)SAS_VIDEO);
+        // recalc_screen_params() gvi.c
+        set_screen_length( DosvVramSize );
+
+#ifdef JAPAN_DBG
+        DbgPrint( "NTVDM: SetVram() video_pc_low_regen %x, high %x, gvi_pc_low_regen %x, high %x len%d\n", video_pc_low_regen, video_pc_high_regen, gvi_pc_low_regen, gvi_pc_high_regen, get_screen_length() );
+#endif
+    }
+    else {
+        // set_up_screen_ptr() vga_mode.c
+        set_screen_ptr( (IU8*)0xB8000 );
+        // low_set_mode() ega_vide.c
+        video_pc_low_regen = vd_mode_table[sas_hw_at_no_check(vd_video_mode)].start_addr;
+        video_pc_high_regen = vd_mode_table[sas_hw_at_no_check(vd_video_mode)].end_addr;
+        // vga_gc_misc() vga_prts.c
+        gvi_pc_low_regen = 0xB8000;
+        gvi_pc_high_regen = 0xBFFFF;
+        sas_connect_memory(gvi_pc_low_regen,gvi_pc_high_regen,(half_word)SAS_VIDEO);
+        // recalc_screen_params() gvi.c
+        set_screen_length(get_offset_per_line()*get_screen_height()/get_char_height());
+
+#ifdef JAPAN_DBG
+        DbgPrint( "NTVDM: SetVram() video_pc_low_regen %x, high %x, gvi_pc_low_regen %x, high %x len%d\n", video_pc_low_regen, video_pc_high_regen, gvi_pc_low_regen, gvi_pc_high_regen, get_screen_length() );
+#endif
+    }
+#endif // i386
+}
+
+// IME will change status line with set mode
+void SetModeForIME()
+{
+    word CS_save, IP_save, AX_save;
+    half_word video_mode;
+    extern UINT ConsoleOutputCP;
+#ifdef X86GFX
+    extern word int10_seg, int10_caller;
+#endif // X86GFX
+
+    if (!BOPFromDispFlag)
+        return;
+
+    video_mode = sas_hw_at_no_check(vd_video_mode);
+
+    if (video_mode == 0x03 && (UINT)PrevCP != ConsoleOutputCP) {
+
+        /* Call int10 handler */
+        CS_save = getCS();          /* Save current CS,IP settings */
+        IP_save = getIP();
+        AX_save = getAX();
+        sas_store_no_check( SetModeFlagPtr, 1 );
+        setAX((word)video_mode);    /* IME expects setmode */
+#ifdef X86GFX
+        exec_sw_interrupt( int10_seg, int10_caller );
+#else // !X86GFX
+        setCS(VIDEO_IO_SEGMENT);
+        setIP(VIDEO_IO_RE_ENTRY);
+        host_simulate();
+#endif // !X86GFX
+        sas_store_no_check( SetModeFlagPtr, 0 );
+        setCS(CS_save);             /* Restore CS,IP */
+        setIP(IP_save);
+        setAX(AX_save);
+    }
+    PrevCP = ConsoleOutputCP;
+}
+#endif // !NEC_98
+#line 668
+#endif // JAPAN || KOREA
+
+#ifndef NEC_98
 GLOBAL VOID
 simple_bios_byte_wrt IFN2(ULONG, ch, ULONG, ch_addr)
 {
 	*(IU8 *)(getVideoscreen_ptr() + ch_addr) = (UTINY)ch;
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
-#line 305
+#line 676
 #error Unsupported excluded original configuration
 #endif	/* not EGG or C_VID or A_VID */
-#line 307
+#line 678
 }
 
 GLOBAL VOID
@@ -327,10 +638,10 @@ simple_bios_word_wrt IFN2(ULONG, ch_attr, ULONG, ch_addr)
 	*(IU8 *)(getVideoscreen_ptr() + ch_addr) = (UTINY)ch_attr;
 	*(IU8 *)(getVideoscreen_ptr() + ch_addr + 1) = (UTINY)(ch_attr >> 8);
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
-#line 315
+#line 686
 #error Unsupported excluded original configuration
 #endif	/* not EGG or C_VID or A_VID */
-#line 317
+#line 688
 }
 
 /*
@@ -345,7 +656,7 @@ GLOBAL void vd_set_mode IFN0()
     half_word pag;
     EQUIPMENT_WORD equip_flag;
     word page_size,vd_addr_6845,vd_cols_on_screen;
-    SHORT current_video_mode = getAL();
+    UCHAR current_video_mode = getAL();
 
     if (is_bad_vid_mode(current_video_mode))
     {
@@ -360,10 +671,10 @@ GLOBAL void vd_set_mode IFN0()
     if ((half_word)current_video_mode > VD_MAX_MODE ||
 	vd_mode_table[current_video_mode].mode_control_val == VD_BAD_MODE) {
 #ifndef PROD
-#line 346
+#line 717
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 348
+#line 719
         return;
     }
     if (equip_flag.bits.video_mode == VIDEO_MODE_80X25_BW) {
@@ -387,14 +698,14 @@ GLOBAL void vd_set_mode IFN0()
 	     * Clear the video area
 	     */
 #ifdef REAL_VGA
-#line 371
+#line 742
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
-#line 374
+#line 745
 #else
 	    sas_fillsw(video_pc_low_regen,
 				vd_mode_table[sas_hw_at_no_check(vd_video_mode)].clear_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
-#line 378
+#line 749
 #endif
 
 	    /*
@@ -402,21 +713,21 @@ GLOBAL void vd_set_mode IFN0()
 	     */
 	    outb(M6845_MODE_REG, card_mode);
 	    outb(M6845_MODE_REG,
-		vd_mode_table[sas_hw_at_no_check(vd_video_mode)].mode_control_val | VIDEO_ENABLE);
+		(IU8)(vd_mode_table[sas_hw_at_no_check(vd_video_mode)].mode_control_val | VIDEO_ENABLE));
 	    /*
 	     * Turn off the video until another mode command is given
 	     */
 	    outb(M6845_MODE_REG,
-		vd_mode_table[sas_hw_at_no_check(vd_video_mode)].mode_control_val & ~VIDEO_ENABLE);
+		(IU8)(vd_mode_table[sas_hw_at_no_check(vd_video_mode)].mode_control_val & ~VIDEO_ENABLE));
 	    return;
 	}
         sas_store_no_check (vd_video_mode , current_video_mode);
     }
 
-#line 396
+#line 767
 #ifdef EGG
     sas_store_no_check(vd_rows_on_screen, 24);
-#line 398
+#line 769
 #endif
     sas_store_no_check (vd_current_page , 0);
 
@@ -436,22 +747,22 @@ GLOBAL void vd_set_mode IFN0()
      * ... now overwrite the dynamic registers, eg cursor position
      */
 
-    outb(vd_addr_6845, R14_CURS_ADDRH);
-    outb(vd_addr_6845+1, 0);
-    outb(vd_addr_6845, R15_CURS_ADDRL);
-    outb(vd_addr_6845+1, 0);
+    outb(M6845_INDEX_REG, R14_CURS_ADDRH);
+    outb(M6845_DATA_REG, 0);
+    outb(M6845_INDEX_REG, R15_CURS_ADDRL);
+    outb(M6845_DATA_REG, 0);
     /*
      * Clear the video area
      */
-#line 424
+#line 795
 #ifdef REAL_VGA
-#line 425
+#line 796
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
-#line 427
+#line 798
 #else
     sas_fillsw(video_pc_low_regen, vd_mode_table[sas_hw_at_no_check(vd_video_mode)].clear_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
-#line 430
+#line 801
 #endif
 
     /*
@@ -498,10 +809,10 @@ GLOBAL void vd_set_cursor_mode IFN0()
     io_addr vd_addr_6845;
 
     vd_addr_6845 = sas_w_at_no_check(VID_INDEX);
-    outb(vd_addr_6845, R10_CURS_START);
-    outb(vd_addr_6845+1, getCH());
-    outb(vd_addr_6845, R11_CURS_END);
-    outb(vd_addr_6845+1, getCL());
+    outb(M6845_INDEX_REG, R10_CURS_START);
+    outb(M6845_DATA_REG, getCH());
+    outb(M6845_INDEX_REG, R11_CURS_END);
+    outb(M6845_DATA_REG, getCL());
 
     /*
      * Update BIOS data variables
@@ -534,7 +845,21 @@ GLOBAL void vd_set_cursor_position IFN0()
     vd_addr_6845 = sas_w_at_no_check(VID_INDEX);
     vd_cols_on_screen = sas_w_at_no_check(VID_COLS);
 
+#if defined(JAPAN) || defined(KOREA)
+    // for assist calc installer
+    // assist calc installer doesn't set BH register to 0
+    // In MS-DOS/V it was only support page number == 0
+    // I think $DISP.SYS check to see if BH == 0 or to set BH=0
+    // in all Int10 function.
+    // Therefore you must check BH register value.
+
+    if ( !is_us_mode() )
+        sas_storew_no_check(VID_CURPOS, getDX()); // same as BH == 0
+    else
     sas_storew_no_check(VID_CURPOS+(getBH()*2), getDX());
+#else // !JAPAN && !KOREA
+    sas_storew_no_check(VID_CURPOS+(getBH()*2), getDX());
+#endif // !JAPAN && !KOREA
 
     if (sas_hw_at_no_check(vd_current_page) == getBH()) {           /* display if this page */
 
@@ -548,10 +873,10 @@ GLOBAL void vd_set_cursor_position IFN0()
         /*
          * tell the 6845 all about the change 
          */
-        outb(vd_addr_6845, R14_CURS_ADDRH);
-        outb(vd_addr_6845+1,  cur_pos >> 8);
-        outb(vd_addr_6845, R15_CURS_ADDRL);
-        outb(vd_addr_6845+1,  cur_pos & 0xff);
+        outb(M6845_INDEX_REG, R14_CURS_ADDRH);
+        outb(M6845_DATA_REG,  (IU8)(cur_pos >> 8));
+        outb(M6845_INDEX_REG, R15_CURS_ADDRL);
+        outb(M6845_DATA_REG,  (IU8)(cur_pos & 0xff));
     }
 }
 
@@ -604,12 +929,12 @@ GLOBAL void vd_get_light_pen IFN0()
 	return;
     }
     else {		        /* not supported */
-#line 582
+#line 967
 #ifndef PROD
-#line 583
+#line 968
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 585
+#line 970
     }
 }
 
@@ -674,9 +999,9 @@ GLOBAL void vd_set_active_page IFN0()
      */
 
     outb(CGA_INDEX_REG, CGA_R12_START_ADDRH);
-    outb(CGA_DATA_REG, vd_crt_start >> 8);
+    outb(CGA_DATA_REG, (IU8)(vd_crt_start >> 8));
     outb(CGA_INDEX_REG, CGA_R13_START_ADDRL);
-    outb(CGA_DATA_REG, vd_crt_start  & 0xff);
+    outb(CGA_DATA_REG, (IU8)(vd_crt_start  & 0xff));
 
     /*
      * Swap to cursor for this page 
@@ -691,10 +1016,10 @@ GLOBAL void vd_set_active_page IFN0()
 
     cur_pos = (sas_w_at_no_check(VID_ADDR)+vd_page_offset( vd_cursor_col, vd_cursor_row)) / 2;
 
-    outb(vd_addr_6845, R14_CURS_ADDRH);
-    outb(vd_addr_6845+1,  cur_pos >> 8);
-    outb(vd_addr_6845, R15_CURS_ADDRL);
-    outb(vd_addr_6845+1,  cur_pos & 0xff);
+    outb(M6845_INDEX_REG, R14_CURS_ADDRH);
+    outb(M6845_DATA_REG,  (IU8)(cur_pos >> 8));
+    outb(M6845_INDEX_REG, R15_CURS_ADDRL);
+    outb(M6845_DATA_REG,  (IU8)(cur_pos & 0xff));
 
 }
 
@@ -718,6 +1043,9 @@ GLOBAL void vd_scroll_up IFN0()
     word vd_cols_on_screen;
     int t_row,b_row,l_col,r_col,lines,attr;
     int rowsdiff,colsdiff;
+#ifdef JAPAN
+    int text_flag = 0;
+#endif // JAPAN
 
     /* Load internal variables with the values stored in BIOS
      * data area.
@@ -731,11 +1059,27 @@ GLOBAL void vd_scroll_up IFN0()
     lines = getAL();
     attr = getBH();
 
+#ifdef	JAPAN
+    // #4183: status line of oakv(DOS/V FEP) doesn't disappear -yasuho
+    // $disp.sys is also be able to scroll in IME status lines.
+    if (!is_us_mode()) {
+	if(b_row > VD_ROWS_ON_SCREEN + IMEStatusLines)
+	    b_row = VD_ROWS_ON_SCREEN + IMEStatusLines;
+	if(t_row > VD_ROWS_ON_SCREEN + IMEStatusLines)
+	    t_row = VD_ROWS_ON_SCREEN + IMEStatusLines;
+    } else {
+	if(b_row > VD_ROWS_ON_SCREEN)
+	    b_row = VD_ROWS_ON_SCREEN;
+	if(t_row > VD_ROWS_ON_SCREEN)
+	    t_row = VD_ROWS_ON_SCREEN;
+    }
+#else // !JAPAN
     if(b_row > VD_ROWS_ON_SCREEN)
 		b_row = VD_ROWS_ON_SCREEN; /* trim to screen size */
 
     if(t_row > VD_ROWS_ON_SCREEN)
 		t_row = VD_ROWS_ON_SCREEN; /* trim to screen size */
+#endif // !JAPAN
 
     if (r_col < l_col)		/* some dipstick has got their left & right mixed up */
     {
@@ -744,6 +1088,12 @@ GLOBAL void vd_scroll_up IFN0()
 	r_col = colsdiff;
     }
 
+#ifdef JAPAN
+    // for HANAKO v2 installer, it sets DL to 0x80 ( >=vd_cols_on_screen)
+    // And when app set DL=0x4f, text_scroll should be run
+    if ( r_col == 0x80 || r_col == 0x4f)
+        text_flag = 1;
+#endif // JAPAN
     if ( r_col >= vd_cols_on_screen )
     	r_col = vd_cols_on_screen-1;
 
@@ -754,7 +1104,12 @@ GLOBAL void vd_scroll_up IFN0()
     {
 	lines = rowsdiff;
     }
+#ifdef JAPAN
+    // for HANAKO v2 installer, it sets DL to 0x80 ( >=vd_cols_on_screen )
+    if(r_col == vd_cols_on_screen-1 && !text_flag)
+#else // !JAPAN
     if(r_col == vd_cols_on_screen-1)
+#endif // !JAPAN
     {
 #ifdef EGG
 	if(ega_mode())
@@ -782,17 +1137,22 @@ GLOBAL void vd_scroll_up IFN0()
 	else
     		sensible_graph_scroll_up(t_row,l_col,rowsdiff,colsdiff,lines,attr);
 #ifdef EGA_DUMP
-#line 757
+#line 1172
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
-#line 759
+#line 1174
 #endif
-#line 760
+#line 1175
     /*
      * re-enable video for this mode, if on a CGA adaptor (fixes ROUND42 bug).
      */
 	if(video_adapter == CGA)
     	outb(CGA_CONTROL_REG, vd_mode_table[sas_hw_at_no_check(vd_video_mode)].mode_control_val);
     }
+#ifdef	JAPAN
+    // mskkbug#2757 works2.5 garbage remains after exiting install -yasuho
+    // We need flush screen when scroll the screen.
+    Int10FlagCnt++;
+#endif // JAPAN
 }
 
 /*
@@ -802,24 +1162,62 @@ GLOBAL void vd_scroll_up IFN0()
 LOCAL void sensible_text_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, int, colsdiff, int, lines, int, attr)
 {
     register sys_addr	source, dest;
+#if !defined(i386) && defined(JAPAN)
+    register sys_addr sourceV, destV;
+    int                 linesdiff;
+    word attrW = (word)((attr << 8)|' ');
+#endif // !i386 && JAPAN
     register int	col_incr,i;
     boolean 		screen_updated = FALSE;
     int			vd_cols_on_screen = sas_w_at_no_check(VID_COLS);
+#ifdef JAPAN
+    // for mskkbug #875
+    byte *p = &Int10Flag[t_row * vd_cols_on_screen + l_col];
+#endif // JAPAN
 
 
 	/* Set origin of data movement for calculating screen refresh */
 
-    source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + vd_text_mode().start_addr;
+#if defined(JAPAN) && defined(i386)
+    // mode73h support
+    if ( !is_us_mode() && ( sas_hw_at_no_check (DosvModePtr) == 0x73 ) ) {
+       source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row)*2 + video_pc_low_regen;
+
+       col_incr = sas_w_at_no_check(VID_COLS) * 4;	/* offset to next line */
+    }
+    else {
+    source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + video_pc_low_regen;
     col_incr = sas_w_at_no_check(VID_COLS) * 2;	/* offset to next line */
+    }
+#else // !JAPAN || !i386
+    source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + vd_text_mode().start_addr;
+#if !defined(i386) && defined(JAPAN)
+    sourceV = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + DosvVramPtr;
+#endif // !i386 && JAPAN
+    col_incr = sas_w_at_no_check(VID_COLS) * 2;	/* offset to next line */
+#endif // !JAPAN || !i386
 
 	/* Try to scroll the adaptor memory & host screen. */
 
 	if( source >= get_screen_base() )
 	{
+#if defined(JAPAN) && defined(i386)
+	    // mode73h support
+	    if ( !is_us_mode() && ( sas_hw_at_no_check (DosvModePtr) == 0x73 ) ) {
+                screen_updated = (*update_alg.scroll_up)(source,4*colsdiff,rowsdiff,attr,lines,0);
+            }
+            else {
 	    screen_updated = (*update_alg.scroll_up)(source,2*colsdiff,rowsdiff,attr,lines,0);
+            }
+#else // !JAPAN || !i386
+	    screen_updated = (*update_alg.scroll_up)(source,2*colsdiff,rowsdiff,attr,lines,0);
+#endif // !JAPAN || i386
 	}
 
     dest = source;
+#if !defined(i386) && defined(JAPAN)
+    destV = sourceV;
+#endif // !i386 && JAPAN
 /*
  * We dont need to move data which would be scrolled off the
  * window. So point source at the first line which needs to
@@ -829,35 +1227,127 @@ LOCAL void sensible_text_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, i
  * terminate immediately.
  */
     source += lines*col_incr;	
+#if !defined(i386) && defined(JAPAN)
+    sourceV += lines*col_incr;
+    linesdiff = vd_cols_on_screen * lines;
+#endif // !i386 && JAPAN
     for(i = 0; i < rowsdiff-lines; i++)
     {
-#line 804
+#line 1266
 #ifdef REAL_VGA
-#line 805
+#line 1267
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
+#ifdef JAPAN
+		// for RAID #875
+		if( !screen_updated ) {
+		    // mode73h support
+#ifdef i386
+		    if ( !is_us_mode() && (sas_hw_at_no_check(DosvModePtr) == 0x73 ) ) {
+	  	        sas_move_bytes_forward (source, dest, colsdiff*4);
+                    }
+                    else {
+	  	        sas_move_bytes_forward (source, dest, colsdiff*2);
+                    }
+
+#else // !i386
+	    sas_move_bytes_forward (source, dest, colsdiff*2);
+	    if ( !is_us_mode() )
+	      sas_move_bytes_forward (sourceV, destV, colsdiff*2);
+#endif // !i386
+                    {
+                        register int i;
+
+                        for ( i = 0; i < colsdiff; i++ ) {
+#ifdef i386
+                            p[i] = ( p[i+vd_cols_on_screen] | INT10_CHANGED );
+#else // !i386
+//I think this is correct!!
+                            p[i] = ( p[i+linesdiff] | INT10_CHANGED );
+#endif // !i386
+                        }
+                    }
+                }
+#else // !JAPAN
 		if( !screen_updated )
 			sas_move_bytes_forward (source, dest, colsdiff*2);
+#endif // !JAPAN
 #endif
 
 		/* next line */
 		source += col_incr;
 		dest += col_incr;
+#ifdef JAPAN
+#if !defined(i386)
+		sourceV += col_incr;
+		destV += col_incr;
+#endif // !i386
+                p += vd_cols_on_screen;
+#endif // JAPAN
     }
 
 /* moved all the data we were going to move - blank the cleared region */
 
+#if !defined(i386) && defined(JAPAN)
+    if( sas_hw_at_no_check(DosvModePtr) == 0x73 )
+      attrW = 0;
+#endif // !i386 && JAPAN
+
     while(lines--)
     {
 #ifdef REAL_VGA
-#line 821
+#line 1327
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-#line 823
+#ifdef JAPAN
+		// for mskkbug #875
+		if( !screen_updated ) {
+		// mode73h support
+#ifdef i386
+		    if ( !is_us_mode() && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) ) {
+                        unsigned long *destptr = (unsigned long *)dest;
+                        int i;
+
+                        for ( i = 0; i < colsdiff; i++ ) {
+                            *destptr++ = (attr << 8)|' ';
+                        }
+                    }
+                    else {
+		        sas_fillsw(dest, (attr << 8)|' ', colsdiff);
+                    }
+#else // !i386
+                    sas_fillsw(dest, (attr << 8)|' ', colsdiff);
+		    //add Apr. 18 1994 DosvVram holds extended attributes
+		    if ( !is_us_mode() )
+		      sas_fillsw(destV, attrW, colsdiff);
+#endif // !i386
+#ifdef i386
+// "p" (Int10Flag) is on 32 bit address space, so we must no use "sas" function
+// to access 32 bit address.
+                    sas_fills( (sys_addr)p, ( INT10_SBCS | INT10_CHANGED ), colsdiff );
+#else // !i386
+                    {
+		      register int i = colsdiff;
+		      register byte *pp = p;
+		      while( i-- ){
+			*pp++ = ( INT10_SBCS | INT10_CHANGED );
+		      }
+		    }
+#endif // !i386
+                }
+#else // !JAPAN
+#line 1366
 		if( !screen_updated )
-			sas_fillsw(dest, (attr << 8)|' ', colsdiff);
+			sas_fillsw(dest, (IU16)((attr << 8)|' '), colsdiff);
+#endif // !JAPAN
 #endif
 		dest += col_incr;
+#ifdef JAPAN
+#if !defined(i386)
+		destV += col_incr;
+#endif // !i386
+                p += vd_cols_on_screen;
+#endif // JAPAN
     }
 }
 
@@ -908,7 +1398,7 @@ LOCAL void sensible_graph_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, 
 	for(i = 0; i < rowsdiff-lines; i++)
 	{
 #ifdef REAL_VGA
-#line 877
+#line 1427
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 		sas_move_bytes_forward (source,dest, colsdiff);
@@ -917,7 +1407,7 @@ LOCAL void sensible_graph_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, 
 		 * graphics mode has to cope with odd bank as well
 		 */
 #ifdef REAL_VGA
-#line 885
+#line 1435
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 		sas_move_bytes_forward (source+ODD_OFF,dest+ODD_OFF, colsdiff);
@@ -931,13 +1421,12 @@ LOCAL void sensible_graph_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, 
 	while( lines-- )
 	{
 #ifdef REAL_VGA
-#line 898
+#line 1448
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
-#line 900
+#line 1450
 #else
-		sas_fills(dest, attr, colsdiff);
-		sas_fills(dest+ODD_OFF, attr, colsdiff);
-#line 903
+		sas_fills(dest, (IU8)attr, colsdiff);
+		sas_fills(dest+ODD_OFF, (IU8)attr, colsdiff);
 #endif
 		dest += SCAN_LINE_LENGTH;
 	}
@@ -969,7 +1458,13 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 	is_alpha = FALSE;
 	rowsdiff *= 4;		/* 8 scans per char - 4 per bank */
 	lines *= 4;		/* scan lines */
-
+#ifdef NTVDM
+	/* mode 4 and 5 have 40 rows with 4 pixels/byte while
+	 * mode 6 has 80 rows with 8 pixels/byte.
+	 * They have the same line increment value
+	 */
+	col_incr = SCAN_LINE_LENGTH;
+#endif
 	if (sas_hw_at_no_check(vd_video_mode) != 6) {
 	    colsdiff *= 2;		/* 4 pixels/byte */
 	    /* set origin of data movement for calculating screen refresh */
@@ -981,9 +1476,9 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 	break;
 
     default:
-#line 946
+#line 1502
 #ifndef PROD
-#line 947
+#line 1503
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	;
@@ -1003,7 +1498,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
     if (is_alpha) {
 	    for(i = 0; i < rowsdiff-lines; i++) {
 #ifdef REAL_VGA
-#line 966
+#line 1522
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 		sas_move_bytes_forward (source,dest, colsdiff*2);
@@ -1016,7 +1511,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
      else {
 	    for(i = 0; i < rowsdiff-lines; i++) {
 #ifdef REAL_VGA
-#line 978
+#line 1534
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 		sas_move_bytes_forward (source,dest, colsdiff);
@@ -1025,7 +1520,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 	         * graphics mode has to cope with odd bank as well
 	         */
 #ifdef REAL_VGA
-#line 986
+#line 1542
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 		sas_move_bytes_forward (source+ODD_OFF,dest+ODD_OFF, colsdiff);
@@ -1044,11 +1539,10 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 		lines = 0; /* force termination */
 	    }
 #ifdef REAL_VGA
-#line 1004
+#line 1560
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-#line 1006
-	    sas_fillsw(dest, (attr << 8)|' ', colsdiff);
+	    sas_fillsw(dest, (IU16)((attr << 8)|' '), colsdiff);
 #endif
 	    dest += col_incr;
         }
@@ -1057,13 +1551,12 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 
 	while( lines-- ) {
 #ifdef REAL_VGA
-#line 1015
+#line 1571
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
-#line 1017
+#line 1573
 #else
-	    sas_fills(dest, attr, colsdiff);
-	    sas_fills(dest+ODD_OFF, attr, colsdiff);
-#line 1020
+	    sas_fills(dest, (IU8)attr, colsdiff);
+	    sas_fills(dest+ODD_OFF, (IU8)attr, colsdiff);
 #endif
 	    dest += SCAN_LINE_LENGTH;
 	}
@@ -1092,6 +1585,9 @@ GLOBAL void vd_scroll_down IFN0()
     word vd_cols_on_screen;
     int t_row,b_row,l_col,r_col,lines,attr;
     int rowsdiff,colsdiff;
+#ifdef JAPAN
+    int text_flag = 0;
+#endif // JAPAN
 
     /* Load internal variables with the values stored in BIOS
      * data area.
@@ -1105,11 +1601,27 @@ GLOBAL void vd_scroll_down IFN0()
     lines = getAL();
     attr = getBH();
 
+#ifdef	JAPAN
+    // #4183: status line of oakv(DOS/V FEP) doesn't disappear 12/11/93 yasuho
+    // $disp.sys is also be able to scroll in IME status lines.
+    if (!is_us_mode()) {
+	if(b_row > VD_ROWS_ON_SCREEN + IMEStatusLines)
+	    b_row = VD_ROWS_ON_SCREEN + IMEStatusLines;
+	if(t_row > VD_ROWS_ON_SCREEN + IMEStatusLines)
+	    t_row = VD_ROWS_ON_SCREEN + IMEStatusLines;
+    } else {
+	if(b_row > VD_ROWS_ON_SCREEN)
+	    b_row = VD_ROWS_ON_SCREEN;
+	if(t_row > VD_ROWS_ON_SCREEN)
+	    t_row = VD_ROWS_ON_SCREEN;
+    }
+#else // !JAPAN
     if(b_row > VD_ROWS_ON_SCREEN)
 		b_row = VD_ROWS_ON_SCREEN; /* trim to screen size */
 
     if(t_row > VD_ROWS_ON_SCREEN)
 		t_row = VD_ROWS_ON_SCREEN; /* trim to screen size */
+#endif // !JAPAN
 
     if (r_col < l_col)		/* some dipstick has got their left & right mixed up */
     {
@@ -1118,6 +1630,12 @@ GLOBAL void vd_scroll_down IFN0()
 	r_col = colsdiff;
     }
 
+#ifdef JAPAN
+    // for HANAKO v2 installer, it sets DL to 0x80 ( >=vd_cols_on_screen)
+    // And when app set DL=0x4f, text_scroll should be run
+    if ( r_col == 0x80 || r_col == 0x4f)
+        text_flag = 1;
+#endif // JAPAN
     if ( r_col >= vd_cols_on_screen )
     	r_col = vd_cols_on_screen-1;
 
@@ -1128,105 +1646,243 @@ GLOBAL void vd_scroll_down IFN0()
     {
 	lines = rowsdiff;
     }
+#ifdef JAPAN
+    // for HANAKO v2 installer
+    if(r_col == vd_cols_on_screen-1 && !text_flag)
+#else // !JAPAN
     if(r_col == vd_cols_on_screen-1)
-#line 1085
+#endif // !JAPAN
+#line 1671
 #ifdef EGG
 	if(ega_mode())
     		ega_sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
-#line 1088
+#line 1674
 #  ifdef VGG
 	else if(vga_256_mode())
     		vga_sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
-#line 1091
+#line 1677
 #  endif
 	else
-#line 1093
+#line 1679
 #endif
     	kinky_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr,vd_cols_on_screen);
     else
     {
 	if(alpha_num_mode())
     		sensible_text_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
-#line 1099
+#line 1685
 #ifdef EGG
 	else if(ega_mode())
     		ega_sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
-#line 1102
+#line 1688
 #  ifdef VGG
 	else if(vga_256_mode())
     		vga_sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
-#line 1105
+#line 1691
 #  endif
-#line 1106
+#line 1692
 #endif
 	else
     		sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
-#line 1109
+#line 1695
 #ifdef EGA_DUMP
-#line 1110
+#line 1696
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
-#line 1112
+#line 1698
 #endif
-#line 1113
+#line 1699
     /*
      * re-enable video for this mode, if on a CGA adaptor (fixes ROUND42 bug).
      */
 	if(video_adapter == CGA)
     	outb(CGA_CONTROL_REG, vd_mode_table[sas_hw_at_no_check(vd_video_mode)].mode_control_val);
     }
+#ifdef	JAPAN
+    // mskkbug#2757: works2.5: garbage remains after exiting install -yasuho
+    // We need flush screen when scroll the screen.
+    Int10FlagCnt++;
+#endif // JAPAN
 }
 
 LOCAL void sensible_text_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff, int, colsdiff, int, lines, int, attr)
 {
     register sys_addr	source, dest;
+#if !defined(i386) && defined(JAPAN)
+    register sys_addr	sourceV, destV;
+    int                 linesdiff;
+    word attrW = (word)((attr << 8)|' ');
+#endif // !i386 && JAPAN
     register int	col_incr;
     register int	i;
     boolean		screen_updated = FALSE;
     int			vd_cols_on_screen = sas_w_at_no_check(VID_COLS);
+#ifdef JAPAN
+    // for mskkbug #875
+    byte *p = &Int10Flag[ (t_row+rowsdiff-1) * vd_cols_on_screen + l_col];
+#endif // JAPAN
 
+#if defined(JAPAN) && defined(i386)
+    // mode73h support
+    if ( !is_us_mode() && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) ) {
+       source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row)*2 + video_pc_low_regen;
+
+       col_incr = sas_w_at_no_check(VID_COLS) * 4;	/* offset to next line */
+    }
+    else {
+       source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + video_pc_low_regen;
+       col_incr = sas_w_at_no_check(VID_COLS) * 2;	/* offset to next line */
+    }
+#else // !JAPAN || !i386
 	source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + vd_text_mode().start_addr;
 	col_incr = sas_w_at_no_check(VID_COLS) * 2;
+#if !defined(i386) && defined(JAPAN)
+	sourceV = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + DosvVramPtr;
+#endif // !i386 && JAPAN
+#endif // !386 || !JAPAN
 
 	/* Try to scroll the adaptor memory & host screen. */
 
 	if( source >= get_screen_base() )
 	{
+#if defined(JAPAN) && defined(i386)
+            // mode73h support
+	    if ( !is_us_mode() && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) ) {
+                screen_updated = (*update_alg.scroll_up)(source,4*colsdiff,rowsdiff,attr,lines,0);
+            }
+            else {
+                screen_updated = (*update_alg.scroll_up)(source,2*colsdiff,rowsdiff,attr,lines,0);
+            }
+#else // !JAPAN || !i386
 	    screen_updated = (*update_alg.scroll_down)(source,2*colsdiff,rowsdiff,attr,lines,0);
+#endif // !JAPAN || !i386
 	}
 
     dest = source + (rowsdiff-1)*col_incr;
     source = dest - lines*col_incr;
+#if !defined(i386) && defined(JAPAN)
+    destV = sourceV + (rowsdiff-1)*col_incr;
+    sourceV = destV - lines*col_incr;
+    linesdiff = vd_cols_on_screen * lines;
+#endif // !i386 && JAPAN
 /*
  * NB if we are just doing a clear area, the scrolling 'for' loop will terminate immediately
  */
 
 	for(i = 0; i < rowsdiff-lines; i++)
 	{
-#line 1147
+#line 1778
 #ifdef REAL_VGA
-#line 1148
+#line 1779
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
+#ifdef JAPAN
+		// for mskkbug #875
+		if( !screen_updated ) {
+		// mode73h support
+#ifdef i386
+		    if ( !is_us_mode() && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) ) {
+	  	        sas_move_bytes_forward (source, dest, colsdiff*4);
+                    }
+                    else {
+		        sas_move_bytes_forward (source, dest, colsdiff*2);
+                    }
+
+#else // !i386
+		    sas_move_bytes_forward (source, dest, colsdiff*2);
+		    if ( !is_us_mode())
+		      sas_move_bytes_forward( sourceV, destV, colsdiff*2);
+#endif // !i386
+                    {
+                        register int i;
+
+                        for ( i = 0; i < colsdiff; i++ ) {
+#ifdef i386
+                            p[i] = ( p[i - vd_cols_on_screen] | INT10_CHANGED );
+#else // !i386
+			    //I think this is correct!!
+                            p[i] = ( p[i - linesdiff] | INT10_CHANGED );
+#endif // !i386
+                        }
+                    }
+                }
+#else // !JAPAN
 		if( !screen_updated )
 			sas_move_bytes_forward (source, dest, colsdiff*2);
+#endif // !JAPAN
 #endif
 		source -= col_incr;
 		dest -= col_incr;
+#ifdef JAPAN
+#if !defined(i386)
+		sourceV -= col_incr;
+		destV -= col_incr;
+#endif // !i386
+                p -= vd_cols_on_screen;
+#endif // JAPAN
 	}
 
     /* moved all the data we were going to move - blank the cleared region */
 
+#if !defined(i386) && defined(JAPAN)
+    if( sas_hw_at_no_check(DosvModePtr) == 0x73 )
+      attrW = 0;
+#endif // !i386 && JAPAN
+
 	while(lines--)
 	{
 #ifdef REAL_VGA
-#line 1162
+#line 1837
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-#line 1164
+#ifdef JAPAN
+		// for mskkbug #875
+		if( !screen_updated ) {
+		// mode73h support
+#ifdef i386
+//"dest" is on DOS address space, so we must use "sas" function to access it.
+		    if ( !is_us_mode() && (sas_hw_at_no_check(DosvModePtr) == 0x73 ) ) {
+                        unsigned long *destptr = (unsigned long*)dest;
+                        int i;
+
+                        for ( i = 0; i < colsdiff; i++ ) {
+                            *destptr++ = (attr << 8)|' ';
+                        }
+                    }
+                    else {
+ 		        sas_fillsw(dest, (attr << 8)|' ', colsdiff);
+                    }
+#else // !i386
+		        sas_fillsw(dest, (attr << 8)|' ', colsdiff);
+                    if ( !is_us_mode() )
+		        sas_fillsw(destV, attrW, colsdiff);
+#endif // !i386
+#ifdef i386
+// "p" (Int10Flag) is on 32 bit address space, so we must no use "sas" function
+// to access 32 bit address.
+                    sas_fills( (sys_addr)p, ( INT10_SBCS | INT10_CHANGED ), colsdiff );
+#else // !i386
+                    {	
+		      register int i = colsdiff;
+		      register byte *pp = p;
+		      while( i-- ){
+			*pp++ = ( INT10_SBCS | INT10_CHANGED );
+		      }
+		    }
+#endif // !i386
+                }
+#else // !JAPAN
+#line 1876
 		if( !screen_updated )
-			sas_fillsw(dest, (attr << 8)|' ', colsdiff);
+			sas_fillsw(dest, (IU16)((attr << 8)|' '), colsdiff);
+#endif // !JAPAN
 #endif
 		dest -= col_incr;
+#ifdef JAPAN
+#if !defined(i386)
+		destV -= col_incr;
+#endif // !i386
+                p -= vd_cols_on_screen;
+#endif // JAPAN
 	}
 }
 
@@ -1274,13 +1930,13 @@ LOCAL void sensible_graph_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff
 		 */
 
 #ifdef REAL_VGA
-#line 1215
+#line 1934
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
-#line 1217
+#line 1936
 #else
 		sas_move_bytes_forward (source, dest, colsdiff);
 		sas_move_bytes_forward (source+ODD_OFF, dest+ODD_OFF, colsdiff);
-#line 1220
+#line 1939
 #endif
 		source -= SCAN_LINE_LENGTH;
 		dest -= SCAN_LINE_LENGTH;
@@ -1290,15 +1946,14 @@ LOCAL void sensible_graph_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff
 
 	while( lines-- )
 	{
-#line 1229
+#line 1948
 #ifdef REAL_VGA
-#line 1230
+#line 1949
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
-#line 1232
+#line 1951
 #else
-		sas_fills(dest, attr, colsdiff);
-		sas_fills(dest+ODD_OFF, attr, colsdiff);
-#line 1235
+		sas_fills(dest, (IU8)attr, colsdiff);
+		sas_fills(dest+ODD_OFF, (IU8)attr, colsdiff);
 #endif
 		dest -= SCAN_LINE_LENGTH;
 	}
@@ -1334,12 +1989,12 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 	break;
 
     default:
-#line 1270
+#line 1989
 #ifndef PROD
-#line 1271
+#line 1990
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1273
+#line 1992
 	;
     }
 
@@ -1355,7 +2010,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 	if (is_alpha) {
 	    for(i = 0; i < rowsdiff-lines; i++) {
 #ifdef REAL_VGA
-#line 1288
+#line 2007
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 		sas_move_bytes_forward (source, dest, colsdiff*2);
@@ -1367,7 +2022,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 	else {
 	    for(i = 0; i < rowsdiff-lines; i++) {
 #ifdef REAL_VGA
-#line 1299
+#line 2018
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 		sas_move_bytes_forward (source, dest, colsdiff);
@@ -1376,7 +2031,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 	         * graphics mode has to do odd & even banks
 	         */
 #ifdef REAL_VGA
-#line 1307
+#line 2026
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 		sas_move_bytes_forward (source+ODD_OFF, dest+ODD_OFF, colsdiff);
@@ -1391,10 +2046,10 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
     if (is_alpha) {		/* alpha blank */
 	while(lines--) {
 #ifdef REAL_VGA
-#line 1321
+#line 2040
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-	    sas_fillsw(dest, (attr << 8)|' ', colsdiff);
+	    sas_fillsw(dest, (IU16)((attr << 8)|' '), colsdiff);
 #endif
 	    dest -= col_incr;
         }
@@ -1403,13 +2058,12 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 
 	while(lines--) {
 #ifdef REAL_VGA
-#line 1332
+#line 2051
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
-#line 1334
+#line 2053
 #else
-	    sas_fills(dest, attr, colsdiff);
-	    sas_fills(dest+ODD_OFF, attr, colsdiff);
-#line 1337
+	    sas_fills(dest, (IU8)attr, colsdiff);
+	    sas_fills(dest+ODD_OFF, (IU8)attr, colsdiff);
 #endif
 	    dest -= col_incr;
 	}
@@ -1446,29 +2100,34 @@ GLOBAL void vd_read_attrib_char IFN0()
     vd_cursor_row = sas_hw_at_no_check(VID_CURPOS + getBH()*2 + 1);
 
    if (alpha_num_mode()) {		/* alpha */
+#if defined(JAPAN) && defined(i386)
+      // mode73h support
+      if ( ( !is_us_mode() ) && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) )
+        cpos = video_pc_low_regen + vd_cursor_offset(getBH()) * 2;
+      else
+#endif // JAPAN && i386
 	cpos = vd_text_mode().start_addr + vd_cursor_offset(getBH());
-#line 1374
 #ifdef A2CPU
-#line 1375
+#line 2100
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
-#line 1378
+#line 2103
 #else
 	sas_loadw(cpos,&chattr);
-#line 1380
+#line 2105
 #endif /* A2CPU */
 	setAX(chattr);			/* hmm that was easy */
     }
-#line 1383
+#line 2108
 #ifdef EGG
     else if(ega_mode())
 	ega_read_attrib_char(vd_cursor_col,vd_cursor_row,getBH());
-#line 1386
+#line 2111
 #  ifdef VGG
     else if(vga_256_mode())
 	vga_read_attrib_char(vd_cursor_col,vd_cursor_row,getBH());
-#line 1389
+#line 2114
 #  endif
-#line 1390
+#line 2115
 #endif
     else {
 	/*
@@ -1510,18 +2169,18 @@ GLOBAL void vd_read_attrib_char IFN0()
 		cpos += 80;
 	    }
 	}
-#line 1431
+#line 2156
 #ifdef EGG
 	if(video_adapter == EGA || video_adapter == VGA)
 	    cgen = extend_addr(EGA_FONT_INT*4);
 	else
 	    cgen = CHAR_GEN_ADDR;			/* match in char generator */
-#line 1436
+#line 2161
 #else
-#line 1437
+#line 2162
 #error DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register.
 #endif
-#line 1439
+#line 2164
 	if (cgen != 0)
 		for(i = 0; i < CHARS_IN_GEN; i++) {
 			sas_loads (cgen, tmp, sizeof(tmp));
@@ -1549,7 +2208,7 @@ GLOBAL void vd_read_attrib_char IFN0()
 		ext_no = CHARS_IN_GEN;
 
 	    if (ext_no < CHARS_IN_GEN)		/* match found... */
-		setAL(ext_no + CHARS_IN_GEN);
+		setAL((UCHAR)(ext_no + CHARS_IN_GEN));
 	    else
 		setAL(0);			/* no match, return 0 */
 	}
@@ -1575,6 +2234,10 @@ GLOBAL void vd_write_char_attrib IFN0()
     register word i, cpos;
     word vd_cols_on_screen;
     half_word vd_cursor_col, vd_cursor_row;
+#ifdef JAPAN
+    word vram_addr;
+    static int DBCSState = FALSE;
+#endif // JAPAN
 
     /* Load internal variables with the values stored in BIOS
      * data area.
@@ -1585,23 +2248,41 @@ GLOBAL void vd_write_char_attrib IFN0()
 
     if (alpha_num_mode())
     {
+#ifdef JAPAN
+	    // stress test sets cursor over 25line
+            if ( !is_us_mode() ) {
+                if ( vd_cursor_row > 25 )
+                    return; // we can't write VRAM!!
+            }
+#ifdef i386
+	    // mode73h support
+	    if ( ( !is_us_mode() ) && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) )
+                cpos = vd_cursor_offset(getBH()) * 2;
+            else
+#endif // !i386
+#endif // JAPAN
 		cpos = vd_cursor_offset(getBH());
 
+#ifdef JAPAN
+		// Int10Flag set
+                Int10FlagCnt++;
+                vram_addr = vd_page_offset(vd_cursor_col,vd_cursor_row)/2;
+#endif // JAPAN
 		/* place in memory */
 
 #ifdef REAL_VGA
-#line 1507
+#line 2254
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 		for(i = 0; i < getCX(); i++)
 		{
-#line 1511
+#line 2258
 #if ( defined(NTVDM) && defined(MONITOR) ) || defined(GISP_SVGA)/* No Ega planes... */
 #if !defined(MVDM_STANDALONE_SAS_VIDEO) || defined(GISP_SVGA)
-#line 1512
+#line 2259
 #error Excluded unsupported original monitor or GISP video pointer
 #endif
-#line 1514
+#line 2261
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
 #ifdef CPU_40_STYLE
@@ -1612,14 +2293,37 @@ GLOBAL void vd_write_char_attrib IFN0()
 			else
 #endif	/* EGG */
 				(*bios_ch2_word_wrt_fn)( (getBL() << 8) | getAL(), cpos );
-#line 1513
+#line 2260
 #else
-#line 1514
+#line 2261
 #error Excluded unsupported non-monitor video profile
-#line 1524
+#line 2271
 #endif	/* NTVDM & MONITOR */
-#line 1525
+#if defined(JAPAN) && defined(i386)
+		    // mode73h support
+		    if ( ( !is_us_mode() ) && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) )
+                        cpos += 4;
+                    else
+#endif // JAPAN && i386
+#line 2278
 			cpos += 2;
+#ifdef JAPAN
+		        // Int10Flag set
+#if 0
+                        DbgPrint( "vd_write_char_attrib: Int10Flag Offset=%04X\n", vram_addr );
+#endif
+                        if ( DBCSState ) {
+                            Int10Flag[vram_addr] = INT10_DBCS_TRAILING | INT10_CHANGED;
+                            DBCSState = FALSE;
+                        }
+                        else if ( DBCSState = is_dbcs_first( getAL() ) ) {
+                            Int10Flag[vram_addr] = INT10_DBCS_LEADING | INT10_CHANGED;
+                        }
+                        else {
+                            Int10Flag[vram_addr] = INT10_SBCS | INT10_CHANGED;
+                        }
+                        vram_addr++;
+#endif // JAPAN
 		}
 #endif
     }
@@ -1653,6 +2357,10 @@ GLOBAL void vd_write_char IFN0()
     register word i, cpos;
     word vd_cols_on_screen;
     half_word vd_cursor_col, vd_cursor_row;
+#ifdef JAPAN
+    static int DBCSState = FALSE;
+    word vram_addr;
+#endif // JAPAN
 
     /* Load internal variables with the values stored in BIOS
      * data area.
@@ -1667,41 +2375,83 @@ GLOBAL void vd_write_char IFN0()
 
 	if (alpha_num_mode())
 	{
+#ifdef JAPAN
+	    // stress test sets cursor over 25line
+            if ( !is_us_mode() ) {
+                if ( vd_cursor_row > 25 )
+                    return; // we can't write VRAM!!
+            }
+#ifdef i386
+	    // mode73h support
+	    if ( ( !is_us_mode() ) && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) )
+                cpos = vd_cursor_offset(getBH()) * 2;
+            else
+#endif // i386
+#endif // JAPAN
 		cpos = vd_cursor_offset(getBH());
+#ifdef JAPAN
+	        // Int10Flag set
+                Int10FlagCnt++;
+                //vram_addr = vd_cursor_offset(getBH()) >> 1;
+                vram_addr = vd_page_offset(vd_cursor_col,vd_cursor_row)/2; //7/23/1993 V-KazuyS
+#endif // JAPAN
 
 		/* store in memory, skipping attribute bytes */
 
 		for(i = 0; i < getCX(); i++)
 		{
-#line 1579
+#line 2372
 #if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )
 #if !defined(MVDM_STANDALONE_SAS_VIDEO) || defined(GISP_SVGA)
-#line 1580
+#line 2373
 #error Excluded unsupported original monitor or GISP video pointer
 #endif
-#line 1582
+#line 2375
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
-#line 1584
+#line 2377
 #ifdef CPU_40_STYLE
 				|| (getVM())	/* if we are in V86 mode, the memory may be mapped... */
-#line 1586
+#line 2379
 #endif
 				)
 				sas_store(vd_text_mode().start_addr + cpos, getAL());
 			else
-#line 1590
+#line 2383
 #endif	/* EGG */
-#line 1591
+#line 2384
 				(*bios_ch2_byte_wrt_fn)( getAL(), cpos );
-#line 1581
+#line 2374
 #else
-#line 1582
+#line 2375
 #error Excluded unsupported non-monitor video profile
-#line 1592
+#line 2385
 #endif	/* NTVDM & MONITOR */
-#line 1593
+#if defined(JAPAN) && defined(i386)
+		    // mode73h support
+		    if ( ( !is_us_mode() ) && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) )
+                        cpos += 4;
+                    else
+#endif // JAPAN && i386
+#line 2392
 			cpos += 2;
+#ifdef JAPAN
+			// Int10Flag set
+#if 0
+                        DbgPrint( "vd_write_char(%d,%d): Int10Flag Offset=%04X\n", vd_cursor_row, vd_cursor_col, vram_addr );
+#endif
+                        if ( DBCSState ) {
+                            Int10Flag[vram_addr] = INT10_DBCS_TRAILING | INT10_CHANGED;
+                            DBCSState = FALSE;
+                        }
+                        else if ( DBCSState = is_dbcs_first( getAL() ) ) {
+                            Int10Flag[vram_addr] = INT10_DBCS_LEADING | INT10_CHANGED;
+                        }
+                        else {
+                            Int10Flag[vram_addr] = INT10_SBCS | INT10_CHANGED;
+                        }
+                        vram_addr++;
+#endif // JAPAN
 		}
 	}
 
@@ -1712,17 +2462,17 @@ GLOBAL void vd_write_char IFN0()
      * problems then we'll need to do a vd_read_char_attr here and then pass the
      * attribute gleaned from that.
      */
-#line 1604
+#line 2420
 #ifdef EGG
     else if(ega_mode())
 	ega_graphics_write_char(vd_cursor_col,vd_cursor_row,getAL(),getBL(),getBH(),getCX());
-#line 1607
+#line 2423
 #  ifdef VGG
     else if(vga_256_mode())
 	vga_graphics_write_char(vd_cursor_col,vd_cursor_row,getAL(),getBL(),getBH(),getCX());
-#line 1610
+#line 2426
 #  endif
-#line 1611
+#line 2427
 #endif
     else
 	graphics_write_char(vd_cursor_col, vd_cursor_row, getAL(), getBL(), getCX());
@@ -1746,12 +2496,12 @@ GLOBAL void vd_set_colour_palette IFN0()
      */
 
     if (getBH() == 1) {		/* use low bit of BL */
-	sas_store_no_check (vd_crt_palette, sas_hw_at_no_check(vd_crt_palette) & 0xDF);
+	sas_store_no_check (vd_crt_palette, (IU8)(sas_hw_at_no_check(vd_crt_palette) & 0xDF));
 	if (getBL() & 1)
-	    sas_store_no_check (vd_crt_palette ,sas_hw_at_no_check(vd_crt_palette) | 0x20);
+	    sas_store_no_check (vd_crt_palette, (IU8)(sas_hw_at_no_check(vd_crt_palette) | 0x20));
     }
     else
-	sas_store_no_check (vd_crt_palette, (sas_hw_at_no_check(vd_crt_palette) & 0xE0) | (getBL() & 0x1F));
+	sas_store_no_check (vd_crt_palette, (IU8)((sas_hw_at_no_check(vd_crt_palette) & 0xE0) | (getBL() & 0x1F)));
 
     /* now tell the 6845 */
     outb(CGA_COLOUR_REG, sas_hw_at_no_check(vd_crt_palette));
@@ -1775,23 +2525,23 @@ GLOBAL void vd_write_dot IFN0()
     int	dotpos, lsb;			/* dot posn in memory */
     half_word  right_just, bitmask;
 
-#line 1663
+#line 2479
 #ifdef EGG
     if(ega_mode())
     {
 	ega_write_dot(getAL(),getBH(),getCX(),getDX());
 	return;
     }
-#line 1669
+#line 2485
 #  ifdef VGG
     else if(vga_256_mode())
     {
 	vga_write_dot(getAL(),getBH(),getCX(),getDX());
 	return;
     }
-#line 1675
+#line 2491
 #  endif
-#line 1676
+#line 2492
 #endif
     dotpos = getDL();			/* row */
 
@@ -1817,7 +2567,7 @@ GLOBAL void vd_write_dot IFN0()
 		dotval = (dotval & 3) << (6-right_just);
 		bitmask = (0xC0 >> right_just); /* bits of interest */
 
-#line 1701
+#line 2517
 #ifdef EGG
 		/*
 		 * EGA & VGA can be told which byte has changed, CGA is
@@ -1826,7 +2576,7 @@ GLOBAL void vd_write_dot IFN0()
 		if ( video_adapter != CGA )
     			(*update_alg.mark_byte) ( dotpos );
 		else
-#line 1709
+#line 2525
 #endif
 			setVideodirty_total(getVideodirty_total() + 2);
 
@@ -1837,7 +2587,7 @@ GLOBAL void vd_write_dot IFN0()
 
 		if( getAL() & 0x80 )
 		{
-#line 1719
+#line 2535
 #ifdef	EGG
 			if( video_adapter != CGA )
 			{
@@ -1849,7 +2599,7 @@ GLOBAL void vd_write_dot IFN0()
 				EGA_planes[dotpos] =  data ^ dotval;
 			}
 			else
-#line 1730
+#line 2546
 #endif	/* EGG */
 			{
 				data = *(UTINY *) get_screen_ptr( dotpos );	
@@ -1859,7 +2609,7 @@ GLOBAL void vd_write_dot IFN0()
 		}
 		else
 		{
-#line 1739
+#line 2555
 #ifdef	EGG
 			if( video_adapter != CGA )
 			{
@@ -1872,7 +2622,7 @@ GLOBAL void vd_write_dot IFN0()
 					dotval;
 			}
 			else
-#line 1751
+#line 2567
 #endif	/* EGG */
 			{
 				data = *(UTINY *) get_screen_ptr( dotpos );	
@@ -1891,7 +2641,7 @@ GLOBAL void vd_write_dot IFN0()
 		dotval = (dotval & 1) << (7-right_just);
 		bitmask = (0x80 >> right_just);
 
-#line 1769
+#line 2585
 #ifdef EGG
 		/*
 		 * EGA & VGA can be told which byte has changed, CGA is
@@ -1900,7 +2650,7 @@ GLOBAL void vd_write_dot IFN0()
 		if ( video_adapter != CGA )
     			(*update_alg.mark_byte) ( dotpos );
 		else
-#line 1777
+#line 2593
 #endif
 			setVideodirty_total(getVideodirty_total() + 2);
 
@@ -1911,7 +2661,7 @@ GLOBAL void vd_write_dot IFN0()
 
 		if( getAL() & 0x80 )
 		{
-#line 1787
+#line 2603
 #ifdef	EGG
 			if( video_adapter != CGA )
 			{
@@ -1919,7 +2669,7 @@ GLOBAL void vd_write_dot IFN0()
 				EGA_planes[dotpos << 2] =  data ^ dotval;
 			}
 			else
-#line 1794
+#line 2610
 #endif	/* EGG */
 			{
 				data = *(UTINY *) get_screen_ptr( dotpos );	
@@ -1929,7 +2679,7 @@ GLOBAL void vd_write_dot IFN0()
 		}
 		else
 		{
-#line 1803
+#line 2619
 #ifdef	EGG
 			if( video_adapter != CGA )
 			{
@@ -1938,7 +2688,7 @@ GLOBAL void vd_write_dot IFN0()
 					dotval;
 			}
 			else
-#line 1811
+#line 2627
 #endif	/* EGG */
 			{
 				data = *(UTINY *) get_screen_ptr( dotpos );	
@@ -1949,7 +2699,7 @@ GLOBAL void vd_write_dot IFN0()
     }
 }
 
-
+extern void ega_read_dot (int, int, int);
 
 GLOBAL void vd_read_dot IFN0()
 {
@@ -1965,23 +2715,23 @@ GLOBAL void vd_read_dot IFN0()
     int	dotpos;			/* dot posn in memory */
     half_word  right_just, bitmask, data;
 
-#line 1837
+#line 2653
 #ifdef EGG
     if(ega_mode())
     {
 	ega_read_dot(getBH(),getCX(),getDX());
 	return;
     }
-#line 1843
+#line 2659
 #  ifdef VGG
     else if(vga_256_mode())
     {
 	vga_read_dot(getBH(),getCX(),getDX());
 	return;
     }
-#line 1849
+#line 2665
 #  endif
-#line 1850
+#line 2666
 #endif
     dotpos = getDL();			/* row */
     if (dotpos & 1)			/* set up for odd or even banks */
@@ -2009,23 +2759,23 @@ GLOBAL void vd_read_dot IFN0()
      */
 
 	sas_load(video_pc_low_regen+dotpos, &data);	
-    setAL(( data >> right_just) & bitmask);
+    setAL((UCHAR)(( data >> right_just) & bitmask));
 }
 
 
-#line 1881
+#line 2697
 #ifdef CPU_40_STYLE
 
 /* Optimisations are not possible, IO virtualisation may be active. */
 #define OUTB(port, val) outb(port, val)
 
-#line 1886
+#line 2702
 #else
-#line 1887
+#line 2703
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#line 1895
+#line 2711
 #endif /* CPU_40_STYLE */
-#line 1896
+#line 2712
 
 GLOBAL void vd_write_teletype IFN0()
 {
@@ -2048,16 +2798,20 @@ GLOBAL void vd_write_teletype IFN0()
 #ifdef ANSI
      IMPORT VOID (**get_outb_ptr(io_addr))(io_addr address, half_word value);
 #else
-#line 1918
+#line 2734
 #error Unsupported excluded original configuration
 #endif
-#line 1920
+#line 2736
 #ifdef NTVDM
      void (** hack)(io_addr address, half_word value);
 #endif
 
     unsigned short savedAX, savedBX, savedCX, savedIP, savedCS, savedDX;
     unsigned short re_entrant = FALSE;
+#ifdef JAPAN
+    static short dbcs_status = FALSE;
+    half_word	 move_cursor_lines = 0;
+#endif // JAPAN
 
     /* Load internal variables with the values stored in BIOS
      * data area.
@@ -2083,14 +2837,38 @@ GLOBAL void vd_write_teletype IFN0()
                 re_entrant = (sas_w_at_no_check(0x42) != int10_seg);
         }
 #else
-#line 1951
+#line 2780
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
-#line 1953
+#line 2783
 
     vd_cursor_col = sas_hw_at_no_check(current_cursor_col);
     vd_cursor_row = sas_hw_at_no_check(current_cursor_row);
 
+#ifdef JAPAN
+	if ( dbcs_status == FALSE ) {
+	    if ( is_dbcs_first(ch) ) {
+		if ( vd_cursor_col + 1 == vd_cols_on_screen ) {
+		    savedAX = getAX();
+		    savedBX = getBX();
+		    setAL( 0x20 );            /* space */
+		    vd_write_teletype();
+		    setBX( savedBX );
+		    setAX( savedAX );
+		    // get new col and row
+		    vd_cursor_col = sas_hw_at_no_check(current_cursor_col);
+		    vd_cursor_row = sas_hw_at_no_check(current_cursor_row);
+	        }
+		dbcs_status = TRUE;
+		goto write_char;
+	    }
+	}
+	else {			/* if kanji second byte then write */
+	    dbcs_status = FALSE;
+	    goto write_char;
+	}
+
+#endif // JAPAN
     /*
      * First check to see if it is a control character and if so action
      * it here rather than call the write char function.
@@ -2112,6 +2890,20 @@ GLOBAL void vd_write_teletype IFN0()
 	/* Row only should be checked for == (25-1), so in principle
 	 * it ignores LF off the top of the screen.
 	 */
+#ifdef JAPAN
+	// scroll problem when start VDM 24line with $IAS.SYS
+#ifdef JAPAN_DBG
+// DbgPrint("LF---vd_row=%d, VD_ROWS=%d\n", vd_cursor_row, VD_ROWS_ON_SCREEN );
+#endif
+	if (vd_cursor_row > VD_ROWS_ON_SCREEN) {
+                move_cursor_lines = vd_cursor_row - VD_ROWS_ON_SCREEN;
+                if ( move_cursor_lines >= VD_ROWS_ON_SCREEN )   // 8/28/1993
+                    move_cursor_lines =  0; //VD_ROWS_ON_SCREEN - 1; // Stress test
+                vd_cursor_row = VD_ROWS_ON_SCREEN;
+		scroll_required = TRUE;
+        }
+        else
+#endif // JAPAN
 	if (vd_cursor_row == VD_ROWS_ON_SCREEN)
 		scroll_required = TRUE;
 	else
@@ -2123,6 +2915,9 @@ GLOBAL void vd_write_teletype IFN0()
         return;			/* after all, shouldn't cause a scroll */
 
     default:
+#ifdef JAPAN
+write_char:
+#endif // JAPAN
         /*
          * It's a real character, place it in the regen buffer.
          */
@@ -2151,9 +2946,9 @@ GLOBAL void vd_write_teletype IFN0()
                         exec_sw_interrupt( int10_seg, int10_caller );
                 }
 #else
-#line 2017
+#line 2888
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
-#line 2021
+#line 2892
 #endif	/* NTVDM & MONITOR */
 
 		/*
@@ -2167,42 +2962,58 @@ GLOBAL void vd_write_teletype IFN0()
             } 
             else
 	    {
+#if defined(JAPAN) && defined(i386)
+	// alpha always uses EGA plane.
+	// mode73h support
+	if( !is_us_mode() && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) ) {
+#ifdef JAPAN_DBG
+                 DbgPrint( "@" );
+#endif
+	         ch_addr = sas_w_at_no_check(VID_ADDR) +
+                              vd_page_offset(vd_cursor_col,vd_cursor_row) * 2;
+        }
+        else {
 	         ch_addr = sas_w_at_no_check(VID_ADDR) +
                               vd_page_offset(vd_cursor_col,vd_cursor_row);
+        }
+#else // !JAPAN || !i386
+	         ch_addr = sas_w_at_no_check(VID_ADDR) +
+                              vd_page_offset(vd_cursor_col,vd_cursor_row);
+#endif // !JAPAN && !i386
 
 		/*
 		 *	Call the C code to do the biz rather than brothel
 		 *	around in SAS.
 		 */
 
-#line 2042
+#line 2929
 #if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )
 #if !defined(MVDM_STANDALONE_SAS_VIDEO) || defined(GISP_SVGA)
-#line 2043
+#line 2930
 #error Excluded unsupported original monitor or GISP video pointer
 #endif
-#line 2045
+#line 2932
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
-#line 2047
+#line 2934
 #ifdef CPU_40_STYLE
 				|| (getVM())	/* if we are in V86 mode, the memory may be mapped... */
-#line 2049
+#line 2936
 #endif
 				)
 				sas_store(vd_text_mode().start_addr + ch_addr, ch);
 			else
-#line 2053
+#line 2940
 #endif	/* EGG */
-#line 2054
+#line 2941
 				(*bios_ch2_byte_wrt_fn)( ch, ch_addr );
-#line 2044
+#line 2931
 #else
-#line 2045
+#line 2932
 #error Excluded unsupported non-monitor video profile
-#line 2055
+#line 2942
 #endif	/* ( NTVDM & MONITOR ) | GISP_SVGA */
-#line 2056
+#line 2943
 	    }
 	}
 #ifdef EGG
@@ -2228,6 +3039,20 @@ GLOBAL void vd_write_teletype IFN0()
 	    /* Row only should be checked for == (25-1) and
 	     * only if there was a line wrap.
 	     */
+#ifdef JAPAN
+	    // scroll problem when start VDM 24line with $IAS.SYS
+#ifdef JAPAN_DBG
+// DbgPrint("col==80 --vd_row=%d, VD_ROWS=%d\n", vd_cursor_row, VD_ROWS_ON_SCREEN );
+#endif
+	    if (vd_cursor_row > VD_ROWS_ON_SCREEN) {
+                move_cursor_lines = vd_cursor_row - VD_ROWS_ON_SCREEN;
+                if ( move_cursor_lines >= VD_ROWS_ON_SCREEN )   // 8/28/1993
+                    move_cursor_lines =  0; //VD_ROWS_ON_SCREEN - 1; // Stress test
+                vd_cursor_row = VD_ROWS_ON_SCREEN;
+		scroll_required = TRUE;
+            }
+            else
+#endif // JAPAN
 	    if (vd_cursor_row == VD_ROWS_ON_SCREEN)
 		scroll_required = TRUE;
 	    else
@@ -2252,9 +3077,9 @@ GLOBAL void vd_write_teletype IFN0()
     if(alpha_num_mode())
     {
 #ifdef REAL_VGA
-#line 2105
+#line 3006
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
-#line 2119
+#line 3020
 #else
 	if(re_entrant)
         {
@@ -2269,7 +3094,7 @@ GLOBAL void vd_write_teletype IFN0()
              setDH(vd_cursor_row);
              setDL(vd_cursor_col);
 
-#line 2133
+#line 3034
 #if defined(NTVDM) && defined(X86GFX)
                 /*
                 ** Tim August 92 Microsoft. INT 10 caller code is now
@@ -2280,11 +3105,11 @@ GLOBAL void vd_write_teletype IFN0()
 
                         exec_sw_interrupt( int10_seg, int10_caller );
                 }
-#line 2143
+#line 3044
 #else
-#line 2144
+#line 3045
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
-#line 2148
+#line 3049
 #endif	/* NTVDM & MONITOR */
 
 		/*
@@ -2307,10 +3132,10 @@ GLOBAL void vd_write_teletype IFN0()
 		cur_pos = (sas_w_at_no_check(VID_ADDR) +
 			vd_page_offset(vd_cursor_col, vd_cursor_row)) >> 1;
 
-		OUTB(vd_addr_6845, R14_CURS_ADDRH);
-		OUTB(vd_addr_6845+1,  cur_pos >> 8);
-		OUTB(vd_addr_6845, R15_CURS_ADDRL);
-		OUTB(vd_addr_6845+1,  cur_pos & 0xff);
+		OUTB(M6845_INDEX_REG, R14_CURS_ADDRH);
+		OUTB(M6845_DATA_REG,  (IU8)(cur_pos >> 8));
+		OUTB(M6845_INDEX_REG, R15_CURS_ADDRL);
+		OUTB(M6845_DATA_REG,  (IU8)(cur_pos & 0xff));
 
 		/*
 		* store the new cursor position in the
@@ -2321,7 +3146,7 @@ GLOBAL void vd_write_teletype IFN0()
 		sas_store_no_check (current_cursor_row , vd_cursor_row);
 
         }
-#line 2184
+#line 3085
 #endif
     }
     else {
@@ -2339,40 +3164,54 @@ GLOBAL void vd_write_teletype IFN0()
 	 * Update the memory to be scrolled
 	 */
 	if (alpha_num_mode()) {
-#line 2201
+#line 3102
 #ifdef A2CPU
-#line 2202
+#line 3103
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
-#line 2205
+#line 3106
 #else
 		sas_load( vd_text_mode().start_addr + sas_w_at_no_check(VID_ADDR)+vd_page_offset(vd_cursor_col,vd_cursor_row) + 1, &attrib);
-#line 2207
+#line 3108
 #endif /* A2CPU */
 
+#ifdef JAPAN
+#ifdef JAPAN_DBG
+//               DbgPrint("Scroll_required!!!\n" );
+#endif
+		sensible_text_scroll_up( 0, 0,
+                                    VD_ROWS_ON_SCREEN + 1 + move_cursor_lines,
+                                    vd_cols_on_screen,
+                                    1 + move_cursor_lines,
+                                    attrib);
+		// #3920: CR+LFs are needed when using 32bit cmd in command.com
+		// 12/9/93 yasuho
+		Int10FlagCnt++;
+#else // !JAPAN
 		sensible_text_scroll_up(0,0, VD_ROWS_ON_SCREEN+1,vd_cols_on_screen,1,attrib);
+#endif // !JAPAN
 
 	}
-#line 2212
+#line 3127
 #ifdef EGG
 	else if(ega_mode())
 		ega_sensible_graph_scroll_up(0,0, VD_ROWS_ON_SCREEN+1,vd_cols_on_screen,1,0);
-#line 2215
+#line 3130
 #  ifdef VGG
 	else if(vga_256_mode())
 		vga_sensible_graph_scroll_up(0,0, VD_ROWS_ON_SCREEN+1,vd_cols_on_screen,1,0);
-#line 2218
+#line 3133
 #  endif
-#line 2219
+#line 3134
 #endif
 	else 	/* graphics mode */
 
 		sensible_graph_scroll_up(0,0, VD_ROWS_ON_SCREEN+1,vd_cols_on_screen,1,0);
 
-#line 2224
+#line 3139
 #ifdef EGA_DUMP
-#line 2225
+#line 3140
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
-#line 2228
+#line 3143
 #endif
 
     }
@@ -2394,19 +3233,29 @@ GLOBAL void vd_write_string IFN0()
      *  NB. This routine behaves very strangely wrt line feeds etc - 
      *  These ALWAYS affect the current page!!!!!
      */
-	int i,op,col,row,len;
-	int save_col,save_row;
+	int i,op;
+    UCHAR col,row;
+    USHORT len;
+	UCHAR save_col,save_row;
 	sys_addr ptr;
 	boolean ctl;
-#line 2253
+#line 3170
 #ifdef NTVDM
 	word	count, avail;
-#line 2255
+#line 3172
 #endif
+#ifdef JAPAN
+	// Big fix for multiplan
+	// ntraid:mskkbug#2784: Title of VJE-PEN is strange
+	// ntraid:mskkbug#3014: VJE-PEN: function keys don't work on windowed
+	// 11/5/93 yasuho
+	// Don't broken AX, BX, DX register !!
+        IU16 saveAX, saveBX, saveDX;
+#endif // JAPAN
 
 	op = getAL();
 
-#line 2259
+#line 3184
 #ifdef NTVDM
         if (op == 0xff)                 /* Special for MS */
         {
@@ -2463,18 +3312,202 @@ GLOBAL void vd_write_string IFN0()
             return;
         }
 
-#line 2315
+#line 3240
 #ifdef X86GFX
     else if (op == 0xfe) {
 	    disable_stream_io();
 	    return;
 	}
-#line 2320
+#line 3245
 #endif
 
-#line 2322
+#line 3247
 #endif	/* NTVDM */
 
+#ifdef JAPAN
+	// DOS/V function support
+	if ( op == 0x10 ) {
+	    unsigned short *Offset;
+	    int i;
+	    unsigned long addr;
+
+	    // DbgPrint( "\nNTVDM: INT 10 AH=13, AL=%02x\n", op );
+	    addr = ( getES() << 4 ) + getBP();
+	    col = getDL();
+	    row = getDH();
+	    len = getCX();
+
+            // mode73h support
+#ifdef i386
+	    if ( !is_us_mode() && (sas_hw_at_no_check(DosvModePtr) == 0x73) )
+                Offset = (unsigned short*)get_screen_ptr( row * get_bytes_per_line()*2 + (col * 4) );
+            else
+                Offset = (unsigned short*)get_screen_ptr( row * get_bytes_per_line() + (col * 2) );
+#else // !i386
+	    if( is_us_mode() )
+	      return;          //In us mode, do nothing
+
+	    Offset = get_screen_ptr( row * get_bytes_per_line()*2 + (col * 4) );
+#endif  // !i386
+
+	    //assert1( len >= 0, "vd_write_string len=%x\n", len );
+	    //DbgPrint( "\nread_str len=%d ADDR:%04x ", len, addr );
+	    for ( i = len; i > 0; i-- ) {
+		sas_storew_no_check( addr, *Offset );
+		//DbgPrint( " %04x", (*Offset) );
+		addr += 2;
+#ifdef i386
+		if ( !is_us_mode() && (sas_hw_at_no_check(DosvModePtr) == 0x73) )
+                    Offset += 2;
+                else
+		    Offset++;
+#else // !i386
+                Offset += 2;
+#endif  // !i386
+	    }
+	    return;
+	}
+	else if ( op == 0x11 ) {
+	    // copy from op == 0x10
+	    unsigned short *Offset;
+	    int i;
+	    unsigned long addr;
+
+#ifdef i386
+	    if ( sas_hw_at_no_check(DosvModePtr) != 0x73 || is_us_mode() )
+#else // !i386
+            if ( is_us_mode() )
+	        // In us mode, videomode 73h has no meaning.
+#endif  // !i386     REAL DOS/V acts like this.
+                return;
+
+	    // DbgPrint( "\nNTVDM: INT 10 AH=13, AL=%02x\n", op );
+	    addr = ( getES() << 4 ) + getBP();
+	    col = getDL();
+	    row = getDH();
+	    len = getCX();
+
+	    Offset = (unsigned short*) get_screen_ptr( row * (get_bytes_per_line()*2) + (col * 4) );
+	    assert1( len >= 0, "vd_write_string len=%x\n", len );
+	    //DbgPrint( "\nread_str len=%d ADDR:%04x ", len, addr );
+	    for ( i = len; i > 0; i-- ) {
+		sas_storew_no_check( addr, *Offset ); // char, attr1
+		addr += 2;
+		Offset++;
+		sas_storew_no_check( addr, *Offset ); // attr2, attr3
+		addr += 2;
+		Offset++;
+	    }
+	    return;
+	}
+	else if ( op == 0x20 ) {
+	    // copy from original routine, and delete ctl check
+#ifndef i386
+	    if( is_us_mode() )
+	      return;        // In us mode, do nothing.
+
+#endif // !i386
+	    ptr = effective_addr( getES(), getBP() );
+	    col = getDL();
+	    row = getDH();
+	    len = getCX();
+            saveAX = getAX();
+            saveBX = getBX();
+	    saveDX = getDX();
+	    vd_get_cursor_position();
+	    save_col = getDL(); save_row = getDH();
+	    setCX( 1 );
+	    setDL( col ); setDH( row );
+	    for( i = len; i > 0; i-- ) {
+		vd_set_cursor_position();
+		setAL( sas_hw_at_no_check( ptr++ ) );
+		setBL( sas_hw_at_no_check( ptr++ ) );
+		vd_write_char_attrib();
+
+		if( ++col >= sas_w_at_no_check(VID_COLS) ) {
+			if(++row > VD_ROWS_ON_SCREEN ) {
+				//setAL( 0xa );
+				//vd_write_teletype();
+				row--;
+			}
+			col = 0;
+		}
+		setDL( col ); setDH( row );
+	    }
+	    // restore cursor position
+	    setDL( save_col ); setDH( save_row );
+	    vd_set_cursor_position();
+            setCX( len );
+	    setDX( saveDX );
+            setAX( saveAX );
+            setBX( saveBX );
+	    return;
+	}
+	else if ( op == 0x21 ) {
+	    // 5/27/1993 V-KazuyS
+	    // copy from 0x20 routine
+
+	    unsigned short *Offset;
+
+#ifdef i386
+	    if ( sas_hw_at_no_check(DosvModePtr) != 0x73 || is_us_mode() )
+	        return;
+#else // !i386
+	    register sys_addr Vptr = DosvVramPtr;
+	    if( is_us_mode() ) //In us mode, videomode 73h is meanless.
+                return;
+#endif // !i386
+
+	    ptr = effective_addr( getES(), getBP() );
+	    col = getDL();
+	    row = getDH();
+	    len = getCX();
+            saveAX = getAX();
+            saveBX = getBX();
+	    saveDX = getDX();
+	    Offset = (unsigned short*)get_screen_ptr( row * (get_bytes_per_line()*2) + (col * 4) );
+#ifndef i386
+	    // we now use DosvVram to hold extended attribute
+	    Vptr += row * get_bytes_per_line() + (col *2);
+#endif // !i386
+	    vd_get_cursor_position();
+	    save_col = getDL(); save_row = getDH();
+	    setCX( 1 );
+	    setDL( col ); setDH( row );
+	    for( i = len; i > 0; i-- ) {
+		vd_set_cursor_position();
+		setAL( sas_hw_at_no_check( ptr++ ) );
+		setBL( sas_hw_at_no_check( ptr++ ) );
+		vd_write_char_attrib();
+
+                // V-KazuyS copy ext. attrib
+                Offset++;
+                *Offset = sas_w_at_no_check( ptr );
+#ifndef i386
+		sas_move_bytes_forward(ptr, Vptr, 2);
+		Vptr += 2;
+#endif // !i386
+                ptr += 2;                      // Attrib 2 byte
+                Offset++;
+
+		if( ++col >= sas_w_at_no_check(VID_COLS) ) {
+			if(++row > VD_ROWS_ON_SCREEN ) {
+				row--;
+			}
+			col = 0;
+		}
+		setDL( col ); setDH( row );
+	    }
+	    // restore cursor position
+	    setDL( save_col ); setDH( save_row );
+	    vd_set_cursor_position();
+            setCX( len );
+	    setDX( saveDX );
+            setAX( saveAX );
+            setBX( saveBX );
+            return;
+	}
+#endif // JAPAN
 	ptr =  effective_addr(getES(),getBP()) ;
 	col = getDL();
 	row = getDH();
@@ -2542,7 +3575,7 @@ GLOBAL void vd_get_mode IFN0()
 	video_mode = sas_hw_at_no_check(vd_video_mode);
 
     setAL(video_mode);
-    setAH(vd_cols_on_screen);
+    setAH((UCHAR)vd_cols_on_screen);
     setBH(sas_hw_at_no_check(vd_current_page));
 }
 
@@ -2590,7 +3623,7 @@ LOCAL half_word fgcolmask IFN1(word, rawchar)
 		onoff = (onoff << 1) | 1;	/* set this bit */
 	    mask >>= 2;
 	} while(mask);		/* 8 times thru loop */
-	return(onoff);
+	return((half_word)onoff);
 }
 
 
@@ -2636,12 +3669,12 @@ GLOBAL void graphics_write_char IFN5(half_word, x, half_word, y, half_word, wcha
     {   /* must be in user installed extended char set */
         if ( (char_addr = extend_addr(4*BIOS_EXTEND_CHAR)) == 0)
         {
-#line 2485
+#line 3594
 #ifndef PROD
-#line 2486
+#line 3595
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 2488
+#line 3597
             return;
         }
         else
@@ -2664,7 +3697,7 @@ GLOBAL void graphics_write_char IFN5(half_word, x, half_word, y, half_word, wcha
 	    for(i = 0; i < 4; i++) {		/* 8 bytes per char */
 		if (xor) {		/* XOR in char */
 		    sas_load(cpos, &current);	/* even bank */
-		    sas_store(cpos, current ^ sas_hw_at_no_check(char_addr + i*2));
+		    sas_store(cpos, (IU8)(current ^ sas_hw_at_no_check(char_addr + i*2)));
 		    sas_load(cpos+ODD_OFF, &current);
 		    current ^= sas_hw_at_no_check(char_addr + i*2+1);
 		}
@@ -2706,13 +3739,13 @@ GLOBAL void graphics_write_char IFN5(half_word, x, half_word, y, half_word, wcha
 		colword &= colmask;
 		if (xor) {			          /* XOR in char */
 		    sas_load(iopos, &current);
-		    sas_store(iopos++, current ^ (colword >> 8));
+		    sas_store(iopos++, (IU8)(current ^ (colword >> 8)));
 		    sas_load(iopos, &current);
-		    sas_store(iopos, current ^ (colword & 0xFF));
+		    sas_store(iopos, (IU8)(current ^ (colword & 0xFF)));
 		}
 		else {					  /* just store char */
-		    sas_store(iopos++, (colword >> 8));
-		    sas_store(iopos, (colword & 0xFF));
+		    sas_store(iopos++, (IU8)((colword >> 8)));
+		    sas_store(iopos, (IU8)((colword & 0xFF)));
 		}
 	    }
 	}
@@ -2727,7 +3760,7 @@ GLOBAL void graphics_write_char IFN5(half_word, x, half_word, y, half_word, wcha
 
 LOCAL void M6845_reg_init IFN2(half_word, mode, word, base)
 {
-    word i, table_index;
+    UCHAR i, table_index;
 
     switch(mode)
     {
@@ -2753,7 +3786,7 @@ LOCAL void M6845_reg_init IFN2(half_word, mode, word, base)
 	 */
 
 	outb(base, i);
-	outb(base + 1, sas_hw_at_no_check(VID_PARMS+table_index + i));
+	outb((IU16)(base + 1), (IU8)(sas_hw_at_no_check(VID_PARMS+table_index + i)));
     }
 }
 
@@ -2762,14 +3795,14 @@ LOCAL void vd_dummy IFN0()
 }
 
 #ifdef REAL_VGA
-#line 2608
+#line 3717
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
-#line 2633
+#line 3742
 #endif
 
-#line 2635
+#line 3744
 #ifdef SEGMENTATION
-#line 2636
+#line 3745
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -2780,14 +3813,14 @@ LOCAL void vd_dummy IFN0()
 
 GLOBAL void video_init IFN0()
 {
-    int mode;
+    UCHAR mode;
     word vd_addr_6845;
     word curmod;
 #ifdef HERC
-#line 2650
+#line 3759
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */    
-#line 2652
+#line 3761
 
 
     /*
@@ -2805,11 +3838,11 @@ GLOBAL void video_init IFN0()
 		video_pc_high_regen = MDA_REGEN_END;
 		break;
 #ifdef HERC
-#line 2669
+#line 3778
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
-#line 2681
+#line 3790
 #endif /* HERC */
-#line 2682
+#line 3791
 #ifdef EGG
     	case EGA:
     	case VGA:
@@ -2822,7 +3855,7 @@ GLOBAL void video_init IFN0()
 		ega_video_init();
 		return;
 		break;
-#line 2694
+#line 3803
 #endif
 	default:	/* Presumably CGA */
 		video_pc_low_regen = CGA_REGEN_START;
@@ -2841,45 +3874,986 @@ GLOBAL void video_init IFN0()
     (video_func[SET_MODE])();
 }
 
-#line 2712
+#line 3821
 #ifdef HERC
-#line 2713
+#line 3822
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
-#line 2829
+#line 3938
 #endif /* HERC */
-#line 2647
+#line 3939
 
-#line 2831
+#line 3940
 #ifdef NTVDM
-#line 2832
+#line 3941
 void enable_stream_io(void)
 {
 #ifdef MONITOR
-#line 2835
+#line 3944
 /* for non RISC machine the buffer is from 16bits code bop from spckbd.asm */
     host_enable_stream_io();
     stream_io_enabled = TRUE;
 #else
-#line 2839
+#line 3948
 #error Excluded unsupported original non-MONITOR stream buffer allocation
-#line 2847
+#line 3956
 #endif
-#line 2848
+#line 3957
 
 }
 
-#line 2851
+#line 3960
 void disable_stream_io(void)
 {
 
     stream_io_update();
     stream_io_enabled = FALSE;
     host_disable_stream_io();
-#line 2857
+#line 3966
 #ifndef MONITOR
-#line 2858
+#line 3967
 #error Excluded unsupported original non-MONITOR stream buffer release
 #endif
-#line 2860
+#line 3969
 }
 #endif
+
+#if defined(JAPAN) || defined(KOREA)
+
+//;;;;;;;;;;;;;;;;;;; MS-DOS/V BOP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+#ifdef i386
+#define CONSOLE_BUFSIZE (80*50*2*2)
+GLOBAL byte FromConsoleOutput[CONSOLE_BUFSIZE];
+
+GLOBAL int FromConsoleOutputFlag=FALSE;
+
+GLOBAL byte SaveDosvVram[DOSV_VRAM_SIZE];
+#endif // i386
+
+// use GetStringBitmap()
+#define BITMAPBUFSIZ 128
+extern HDC hdcVDM;
+extern HFONT hFont24;
+extern HFONT hFont16;
+
+extern BOOL VDMForWOW;
+
+// For GetStringBitmap()
+typedef struct tagSTRINGBITMAP
+{
+    UINT uiWidth;
+    UINT uiHeight;
+    BYTE ajBits[1];
+} STRINGBITMAP, *LPSTRINGBITMAP;
+
+typedef struct
+{
+    BYTE ajBits[19];
+} FONTBITMAP8x19;
+
+typedef struct
+{
+    BYTE ajBits[16];
+} FONTBITMAP8x16;
+
+typedef struct
+{
+    BYTE ajBits[48];
+} FONTBITMAP12x24;
+
+typedef struct
+{
+    BYTE ajBits[32];
+} FONTBITMAP16x16;
+
+typedef struct
+{
+    BYTE ajBits[72];
+} FONTBITMAP24x24;
+
+typedef struct
+{
+    BYTE is_used[189];
+    FONTBITMAP16x16 font16x16[189];
+} FONT16CACHE, *PFONT16CACHE;
+
+typedef struct
+{
+    BYTE is_used[189];
+    FONTBITMAP24x24 font24x24[189];
+} FONT24CACHE, *PFONT24CACHE;
+
+FONTBITMAP8x19  font8x19[256];
+FONTBITMAP8x16  font8x16[256];
+FONTBITMAP12x24  font12x24[256];
+
+BYTE            font16table[256];
+HLOCAL          hFont16mem[128];
+HLOCAL          hFont24mem[128];
+
+#define USED (1)
+#define NOT_USED (0)
+
+void GetVerticallineFlag( int *VFlag );
+
+UINT
+GetStringBitmapA(
+    HDC             hdc,
+    LPSTR           pc,
+    UINT            cch,
+    UINT            cbData,
+    LPSTRINGBITMAP  pSB
+);
+
+void LoadBitmapFont()
+{
+    char code[3];
+    static char sb[BITMAPBUFSIZ];
+    LPSTRINGBITMAP psb;
+    int i, j;
+    int n;
+    int VFlag[256];
+
+    // first 8x16, 8x19 font
+#ifdef JAPAN_DBG
+    DbgPrint( "NTVDM:Loading NTFONT 8x16,8x19\n" );
+#endif
+    GetVerticallineFlag( VFlag );
+    SelectObject( hdcVDM, hFont16 );
+    psb = (LPSTRINGBITMAP)sb;
+    code[1] = '\0';
+    for ( i = 0; i < 256; i++ ) {
+        code[0] = (char)i;
+
+        GetStringBitmapA( hdcVDM, code, 1, BITMAPBUFSIZ, psb );
+
+        RtlCopyMemory( &(font8x16[i].ajBits[0]), &(psb->ajBits[0]), 16 );
+
+        for ( j = 0; j < (19-18) * 1; j++ ) {
+            if ( VFlag[i] )
+                font8x19[i].ajBits[0] = psb->ajBits[0];
+            else
+                font8x19[i].ajBits[0] = 0x00;
+        }
+        RtlCopyMemory( &(font8x19[i].ajBits[1]), &(psb->ajBits[0]), 18 );
+    }
+
+    // second 12x24 font
+#ifdef JAPAN_DBG
+    DbgPrint( "NTVDM:Loading NTFONT 12x24\n" );
+#endif
+    SelectObject( hdcVDM, hFont24 );
+    psb = (LPSTRINGBITMAP)sb;
+    code[1] = '\0';
+    for ( i = 0; i < 256; i++ ) {
+        code[0] = (char)i;
+        GetStringBitmapA( hdcVDM, code, 1, BITMAPBUFSIZ, psb );
+
+        // 12x24 dot font is console 12x27 font.
+        RtlCopyMemory( &(font12x24[i].ajBits[0]), &(psb->ajBits[2]), 48 );
+    }
+
+
+
+    // make table
+    for ( i = 0, n = 0; i < 256; i++ ) {  // Leading byte
+        if ( is_dbcs_first(i) ) {
+            font16table[i] = n++;
+        }
+    }
+#ifdef JAPAN_DBG
+    DbgPrint( "NTVDM:Loading font... end\n" );
+#endif
+}
+
+// This is only stub routine
+// finally, this information gets from registry
+void GetVerticallineFlag( int *VFlag )
+{
+    int i;
+
+    for ( i = 0; i < 256; i++ ) {
+        VFlag[i] = FALSE;
+    }
+    VFlag[0x03] = TRUE;
+    VFlag[0x04] = TRUE;
+    VFlag[0x05] = TRUE;
+    VFlag[0x10] = TRUE;
+    VFlag[0x15] = TRUE;
+    VFlag[0x17] = TRUE;
+    VFlag[0x19] = TRUE;
+    VFlag[0x1d] = TRUE;
+
+    return;
+}
+
+
+
+void GetBitmap()
+{
+    sys_addr ptr;
+    int i;
+    int width, height;
+    char code[3];
+    static char sb[BITMAPBUFSIZ];
+    LPSTRINGBITMAP psb;
+    int index;
+    PFONT16CACHE pCache16;
+    PFONT24CACHE pCache24;
+
+#ifdef JAPAN_DBG
+    DbgPrint( "NTFONT BOP 02\n" );
+    DbgPrint( "ES:SI=%x:%x\n", getES(), getSI() );
+    DbgPrint( "BH,BL=%x,%x\n", getBH(), getBL() );
+    DbgPrint( "CH,CL=%x,%x\n", getCH(), getCL() );
+#endif
+
+    width = getBH();
+    height = getBL();
+    ptr =  effective_addr(getES(),getSI());
+
+    if ( getCH() == 0 ) {
+        if ( ( width == 8 ) && ( height == 16 ) ) {
+	    sas_stores_from_transbuf(ptr,
+				     (host_addr)&(font8x16[getCL()].ajBits[0]),
+				     (sys_addr)16 );
+            setAX(0);
+        }
+        else if ( ( width == 8 ) && ( height == 19 ) ) {
+	    sas_stores_from_transbuf(ptr,
+				     (host_addr)&(font8x19[getCL()].ajBits[0]),
+				     (sys_addr)19 );
+            setAX(0);
+        }
+        else if ( ( width == 12 ) && ( height == 24 ) ) {
+	    sas_stores_from_transbuf(ptr,
+				     (host_addr)&(font12x24[getCL()].ajBits[0]),
+				     (sys_addr)48 );
+            setAX(0);
+        }
+        else {
+            DbgPrint( "Illegal Fontsize %xh, %xh\n", getBH(), getBL() );
+            setAH(1);
+        }
+    }
+    else {
+        if ( !is_dbcs_first( getCH() ) ) {
+            setAH( 5 );
+            return;
+        }
+        if ( getCL() < 0x40 || getCL() > 0xfc || getCL() == 0x7f ) {
+            setAH( 5 );
+            return;
+        }
+        if (width == 16 && height == 16) {
+            index = font16table[getCH()];
+
+            if (!hFont16mem[index])
+                hFont16mem[index] = LocalAlloc(LHND, sizeof(FONT16CACHE));
+
+            pCache16 = LocalLock( hFont16mem[index] );
+            if (pCache16->is_used[getCL()-0x40] != USED) {
+                 code[0] = getCH();
+                 code[1] = getCL();
+                 code[2] = '\0';
+                 psb = (LPSTRINGBITMAP)sb;
+                 SelectObject( hdcVDM, hFont16 );
+                 GetStringBitmapA(hdcVDM, code, 2, BITMAPBUFSIZ, psb);
+
+                 RtlCopyMemory(&(pCache16->font16x16[getCL()-0x40].ajBits[0]),
+                               &(psb->ajBits[0]),
+                               32);
+                 pCache16->is_used[getCL()-0x40] = USED;
+            }
+            sas_stores_from_transbuf(ptr,
+                   (host_addr)&(pCache16->font16x16[getCL()-0x40].ajBits[0]),
+                                     (sys_addr)32);
+            LocalUnlock( hFont16mem[index] );
+
+            setAX(0);
+        }
+        else if (width == 24 && height == 24) {
+            index = font16table[getCH()];
+            if (!hFont24mem[index])
+                hFont24mem[index] = LocalAlloc(LHND, sizeof(FONT24CACHE));
+
+            pCache24 = LocalLock( hFont24mem[index] );
+            if (pCache24->is_used[getCL()-0x40] != USED) {
+                code[0] = getCH();
+                code[1] = getCL();
+                code[2] = '\0';
+                psb = (LPSTRINGBITMAP)sb;
+                SelectObject( hdcVDM, hFont24 );
+                GetStringBitmapA( hdcVDM, code, 2, BITMAPBUFSIZ, psb );
+
+                RtlCopyMemory(&(pCache24->font24x24[getCL()-0x40].ajBits[0]),
+                              &(psb->ajBits[0]),
+                              72 );
+                pCache24->is_used[getCL()-0x40] = USED;
+            }
+            sas_stores_from_transbuf(ptr,
+                     (host_addr)&(pCache24->font24x24[getCL()-0x40].ajBits[0]),
+				     (sys_addr)72 );
+            LocalUnlock( hFont24mem[index] );
+
+            setAX(0);
+        }
+        else {
+            DbgPrint("Illegal Fontsize %xh, %xh\n", getBH(), getBL());
+            setAH(1);
+        }
+    } // bouble byte case
+}
+
+// SetBitmap() save the font image to cache,
+// and call SetConsoleLocalEUDC() to display in windowed.
+void SetBitmap()
+{
+    sys_addr ptr;
+    int i;
+    SHORT width, height;
+    int index;
+    PFONT16CACHE pCache16;
+    PFONT24CACHE pCache24;
+    COORD cFontSize;
+
+#ifdef JAPAN_DBG
+    DbgPrint( "NTFONT BOP 03\n" );
+    DbgPrint( "ES:SI=%x:%x\n", getES(), getSI() );
+    DbgPrint( "BH,BL=%x,%x\n", getBH(), getBL() );
+    DbgPrint( "CH,CL=%x,%x\n", getCH(), getCL() );
+#endif
+
+    width = getBH();
+    height = getBL();
+    ptr =  effective_addr(getES(),getSI());
+
+    if ( getCH() == 0 ) {
+        if ( ( width == 8 ) && ( height == 16 ) ) {
+	    sas_loads_to_transbuf(ptr,
+				  (host_addr)&(font8x16[getCL()].ajBits[0]),
+				  (sys_addr)16 );
+            setAL(0);
+        }
+        else if ( ( width == 8 ) && ( height == 19 ) ) {
+	    sas_loads_to_transbuf(ptr,
+				  (host_addr)&(font8x19[getCL()].ajBits[0]),
+				  (sys_addr)19 );
+            setAL(0);
+        }
+        else if ( ( width == 12 ) && ( height == 24 ) ) {
+	    sas_loads_to_transbuf(ptr,
+		(host_addr)&(font12x24[getCL()].ajBits[0]),
+	        (sys_addr)48 );
+            setAL(0);
+        }
+        else {
+            DbgPrint( "Illegal Fontsize %xh, %xh\n", getBH(), getBL() );
+            setAL(1);
+        }
+    }
+    else {
+        if ( !is_dbcs_first( getCH() ) ) {
+            setAL( 5 );
+            return;
+        }
+        if ( getCL() < 0x40 || getCL() > 0xfc || getCL() == 0x7f ) {
+            setAL( 5 );
+            return;
+        }
+        if ((width == 16) && (height == 16)) {
+            index = font16table[getCH()];
+            if (!hFont16mem[index])
+                hFont16mem[index] = LocalAlloc(LHND, sizeof(FONT16CACHE));
+
+            pCache16 = LocalLock(hFont16mem[index]);
+            sas_loads_to_transbuf(ptr,
+                    (host_addr)&(pCache16->font16x16[getCL()-0x40].ajBits[0]),
+		    (sys_addr)32);
+            pCache16->is_used[getCL()-0x40] = USED;
+            LocalUnlock(hFont16mem[index]);
+            cFontSize.X = width;
+            cFontSize.Y = height;
+
+            if (!SetConsoleLocalEUDC(sc.OutputHandle,
+                                     getCX(),
+                                     cFontSize,
+                      (PCHAR)(pCache16->font16x16[getCL()-0x40].ajBits)))
+                DbgPrint("NTVDM: SetConsoleEUDC() Error. CodePoint=%04x\n",
+                         getCX());
+            setAL(0);
+        }
+        else if ((width == 24) && (height == 24)) {
+            index = font16table[getCH()];
+            if (!hFont24mem[index])
+                hFont24mem[index] = LocalAlloc(LHND, sizeof(FONT24CACHE));
+
+            pCache24 = LocalLock(hFont24mem[index]);
+            sas_loads_to_transbuf(ptr,
+                    (host_addr)&(pCache24->font24x24[getCL()-0x40].ajBits[0]),
+                    (sys_addr)72 );
+            pCache24->is_used[getCL()-0x40] = USED;
+            LocalUnlock( hFont24mem[index] );
+            cFontSize.X = width;
+            cFontSize.Y = height;
+
+            if (!SetConsoleLocalEUDC(sc.OutputHandle,
+                                     getCX(),
+                                     cFontSize,
+                       (PCHAR)(pCache24->font24x24[getCL()-0x40].ajBits)))
+                DbgPrint("NTVDM: SetConsoleEUDC() Error. CodePoint=%04x\n",
+                         getCX() );
+            setAL(0);
+        }
+        else {
+            DbgPrint("Illegal Fontsize %xh, %xh\n", getBH(), getBL());
+            setAL(1);
+        }
+    }
+}
+
+// ntraid:mskkbug#3167: works2.5: character corrupted -yasuho
+// generate single byte charset
+void GenerateBitmap()
+{
+	sys_addr	ptr;
+	int		size, nchars, offset;
+	char		mode;
+
+	mode = sas_hw_at_no_check(DosvModePtr);
+	if (is_us_mode() || (mode != 0x03 && mode != 0x73))
+		return;
+	ptr =  effective_addr(getES(), getBP());
+	size = getBH();
+	nchars = getCX();
+	offset = getDX();
+	if (nchars + offset > 0x100) {
+		setCF(1);
+		return;
+	}
+        if (size == 16) {
+                sas_loads_to_transbuf(ptr,
+				      (host_addr)&(font8x16[offset].ajBits[0]),
+				      (sys_addr)(nchars * size));
+		setCF(0);
+        } else if (size == 19) {
+                sas_loads_to_transbuf(ptr,
+				      (host_addr)&(font8x19[offset].ajBits[0]),
+				      (sys_addr)(nchars * size));
+		setCF(0);
+        } else if (size == 24) {
+                sas_loads_to_transbuf(ptr,
+				      (host_addr)&(font12x24[offset].ajBits[0]),
+				      (sys_addr)(nchars * size));
+		setCF(0);
+        } else {
+		DbgPrint("Illegal Fontsize %xh\n", size);
+		setCF(1);
+        }
+}
+
+
+/*
+ * MS_DosV_bop()
+ *
+ * The type of operation is coded into the AH register.
+ *
+ *  AH = 00 - ff 	for $NTFONT.SYS
+ *     = 10		DBCS vector adress(DS:SI)
+ *     = 11 - 1f	reserved
+ *     = 20		Window information packet adress(DS:SI)
+ *     = 21		Text Vram save & restore
+ *     = 22		palette and DAC registers operations
+ *     = 23		monitoring IME status lines
+ *     = 24 - ff     reserved
+ *
+ */
+#if defined(JAPAN)
+void MS_DosV_bop IFN0()
+#else // JAPAN
+void MS_HDos_bop IFN0()
+#endif // KOREA
+{
+    int op;
+
+    op = getAH();
+    switch ( op ) {
+	case 0x00:
+
+// inquery font type
+//
+// input
+//   ES:SI pointer of buffer
+//   CX    buffersize
+// output
+//   CX    number of font element
+//   AL    if CX < N(number of element) then 1
+//   ES:SI --> x0, y0(byte)  -- font size
+//             x1, y1
+//             ......
+//             x(N-1), y(N-1)
+
+	    {
+		sys_addr ptr;
+                int bufsize;
+                int N;
+                int i;
+#ifdef JAPAN_DBG
+                DbgPrint( "NTFONT BOP 00\n" );
+                DbgPrint( "ES:SI=%x:%x\n", getES(), getSI() );
+                DbgPrint( "CX=%x\n", getCX() );
+#endif
+                if ( VDMForWOW ) {
+                    setCF(1);
+                    return;
+                }
+		ptr =  effective_addr(getES(),getSI());
+                bufsize = getCX();
+
+                // now only 8x16, 8,19, 16x16 font -- July 13 V-KazuyS
+                N = 5;
+
+                if ( N > bufsize ) {
+                    N = bufsize;
+                    setAL(1);
+                }
+                else {
+                    setAL(0);
+                }
+                setCX((IU16)N);
+
+                sas_store_no_check( ptr++,  8 );  // x
+                sas_store_no_check( ptr++, 16 );  // y
+                sas_store_no_check( ptr++,  8 );  // x
+                sas_store_no_check( ptr++, 19 );  // y
+                sas_store_no_check( ptr++, 12 );  // x
+                sas_store_no_check( ptr++, 24 );  // y
+                sas_store_no_check( ptr++, 16 );  // x
+                sas_store_no_check( ptr++, 16 );  // y
+                sas_store_no_check( ptr++, 24 );  // x
+                sas_store_no_check( ptr++, 24 );  // y
+            }
+            break;
+
+	case 0x01:
+	    // Load font image from Gre
+#ifdef JAPAN_DBG
+            DbgPrint( "NTFONT BOP 01\n" );
+#endif
+            if ( VDMForWOW ) {
+                setCF(1);
+                return;
+            }
+            LoadBitmapFont();
+            break;
+
+	case 0x02:
+	    // Read font image
+            if ( VDMForWOW ) {
+                setCF(1);
+                return;
+            }
+            GetBitmap();
+            break;
+
+	case 0x03:
+#ifdef JAPAN_DBG
+            //DbgPrint( "NTFONT BOP 03 CH:CL=%02x:%02x\n", getCH(), getCL() );
+#endif
+            if ( VDMForWOW ) {
+                setCF(1);
+                return;
+            }
+            SetBitmap();
+            break;
+
+
+	case 0x10:
+#ifdef JAPAN_DBG
+	    DbgPrint( "NTVDM: DBCS vector address=%04x:%04x\n", getDS(), getSI() );
+#endif
+	    {
+		// NOTE: This routine is called ONLY ONE from $NtDisp1.sys !
+		sys_addr ptr;
+		word vector;
+		extern UINT ConsoleInputCP;
+		extern UINT ConsoleOutputCP;
+
+   	    	DBCSVectorAddr =  effective_addr(getDS(),getSI());
+	    	// Save DBCS vector
+		DBCSVectorLen = 0;
+	   	for ( ptr = DBCSVectorAddr;
+			vector = sas_w_at_no_check( ptr ); ptr += 2 ) {
+	            SaveDBCSVector[DBCSVectorLen] = vector;
+	            DBCSVectorLen++;
+	        }
+                assert0( ConsoleInputCP == ConsoleOutputCP, "InputCP != OutputCP" );
+
+	        BOPFromNtDisp1Flag = TRUE;
+
+#ifdef JAPAN_DBG
+                DbgPrint( "BOP from $NTDISP1\n" );
+#endif
+	    }
+	    break;
+
+	case 0x20:
+#ifdef JAPAN_DBG
+	    DbgPrint( "NTVDM: Information packet address=%04x:%04x\n", getDS(), getSI() );
+#endif
+	    /* information packet is
+	     *
+	     *   offset	bytes	mode	information
+	     *   +0x0	2       r	packet length
+	     *   +0x2   4   	r	virtual text VRAM address seg:off
+	     *   +0x6   4   	r	MS-DOS/V display mode address seg:off
+	     *   +0xa   4	w	Windowed or Fullscreen flag address seg:	     *   +0xe   4	r	NT console mode flag address seg:off
+	     *                          when VDM terminate, this flag == 1
+	     *   +0x12  4	r	Switch to FullScreen subroutine address seg:	     */
+	    {
+		sys_addr ptr;
+		extern UINT ConsoleInputCP;
+		extern UINT ConsoleOutputCP;
+#ifdef i386
+		extern word useHostInt10;
+		extern word int10_seg;
+#endif
+
+		ptr =  effective_addr(getDS(),getSI());
+
+                DosvVramOff = sas_w_at_no_check( ptr+0x02 );
+                DosvVramSeg = sas_w_at_no_check( ptr+0x04 );
+                DosvVramPtr = effective_addr( DosvVramSeg, DosvVramOff );
+
+		// disp_win.sys don't know VramSize.
+		// because $disp.sys doesn't have get_vram_size function, now.
+                DosvVramSize = DOSV_VRAM_SIZE;
+#ifdef JAPAN_DBG
+                DbgPrint( "NTVDM:DosvVirtualTextVRAM addr = %04x:%04x\n", DosvVramSeg, DosvVramOff );
+#endif
+
+                DosvModeOff = sas_w_at_no_check( ptr+0x06 );
+                DosvModeSeg = sas_w_at_no_check( ptr+0x08 );
+                DosvModePtr = effective_addr( DosvModeSeg, DosvModeOff );
+#ifdef JAPAN_DBG
+                DbgPrint( "NTVDM:DosvVideoMode addr = %04x:%04x\n", DosvModeSeg, DosvModeOff );
+#endif
+
+#ifndef i386	// !!! remeber to change DISP_WIN.SYS since it relies on this.
+		sas_storew_no_check( ptr+0x0a, 0 );
+		sas_storew_no_check( ptr+0x0c, 0 );
+#else
+	        sas_storew_no_check( ptr+0x0a, useHostInt10 );
+	        sas_storew_no_check( ptr+0x0c, int10_seg );
+#endif
+
+
+                NtConsoleFlagOff = sas_w_at_no_check( ptr+0x0e );
+                NtConsoleFlagSeg = sas_w_at_no_check( ptr+0x10 );
+                NtConsoleFlagPtr = effective_addr( NtConsoleFlagSeg, NtConsoleFlagOff );
+#ifdef JAPAN_DBG
+                DbgPrint( "NTVDM:ConsoleFlagAddr = %04x:%04x\n", NtConsoleFlagSeg, NtConsoleFlagOff );
+#endif
+
+#ifdef i386
+// RISC never use following value.
+// Swtich to fullscreen, call these address..
+                DispInitOff = sas_w_at_no_check( ptr+0x12 );
+                DispInitSeg = sas_w_at_no_check( ptr+0x14 );
+#ifdef JAPAN_DBG
+                DbgPrint( "NTVDM:Disp Init Addr = %04x:%04x\n", DispInitSeg, DispInitOff );
+#endif
+
+		FullScreenResumeOff = sas_w_at_no_check(ptr + 0x16);
+		FullScreenResumeSeg = sas_w_at_no_check(ptr + 0x18);
+#endif // !i386
+                SetModeFlagPtr = effective_addr(
+                                       sas_w_at_no_check( ptr+0x1c ),
+                                       sas_w_at_no_check( ptr+0x1a ));
+		if ( BOPFromNtDisp1Flag )
+		    BOPFromDispFlag = TRUE;
+
+                SetDBCSVector( ConsoleInputCP );
+                PrevCP = ConsoleOutputCP;
+
+#ifdef JAPAN_DBG
+                DbgPrint( "BOP from $NTDISP2\n" );
+#endif
+	    }
+	    break;
+
+#ifdef i386
+        case 0x21:
+		// Vram save restore function
+		// AL == 00 save
+		// AL == 01 restore
+		// AL == 02 GetConsoleBuffer
+		// AL == 03 Get FromConsoleOutput
+            {
+		sys_addr ptr;
+                int op;
+                int count;
+                int i;
+
+                op = getAL();
+		ptr =  effective_addr(getES(),getDI());
+                count = getCX();
+
+                if ( op == 0x02 ) {
+                    if ( count > DOSV_VRAM_SIZE )
+                        count = DOSV_VRAM_SIZE;
+                    //for ( i = 0; i < 2; i++ ) {
+                        if ( FromConsoleOutputFlag ) {
+#ifdef JAPAN_DBG
+                            DbgPrint( "NTVDM: MS-DOS/V BOP 21\n" );
+#endif
+#ifdef i386
+//FromConsoleOutput is on 32bit address space not on DOS address space.
+			    sas_move_bytes_forward((sys_addr) FromConsoleOutput,
+						   (sys_addr) ptr,
+						   (sys_addr) count
+						  );
+#else
+			    sas_stores_from_transbuf(ptr,
+					       (host_addr) FromConsoleOutput,
+					       (sys_addr) count
+						  );
+#endif
+                            FromConsoleOutputFlag = FALSE;
+                            break;
+                        }
+                        else {
+                            DbgPrint( "NTVDM: MS-DOS/V BOP 21 can't get console screen data!! \n" );
+                            //Sleep( 1000L );
+                        }
+                    //}
+                    break;
+                }
+
+                if ( count > DOSV_VRAM_SIZE )
+                    count = DOSV_VRAM_SIZE;
+
+                if ( op == 0x00 ) {       // save function
+#ifdef JAPAN_DBG
+                    DbgPrint( "NTVDM:MS_DOSV_BOP 0x21, %02x %04x:%04x(%04x)\n", op, getES(), getDI(), count );
+#endif
+//SaveDosvVram is on 32bit address space not on DOS address space.
+		    sas_loads_to_transbuf(ptr,
+					  (host_addr)SaveDosvVram,
+					  (sys_addr)count
+					  );
+
+                }
+                else if ( op == 0x01 ) {  // restore function
+#ifdef JAPAN_DBG
+                    DbgPrint( "NTVDM:MS_DOSV_BOP 0x21, %02x %04x:%04x(%04x)\n", op, getES(), getDI(), count );
+#endif
+// DEC-J comment
+// SaveDosvVram is on 32bit address space not on DOS address space.
+// for C7 PWB.
+// This is internal bop
+// It doesn't need check memory type.
+		    RtlCopyMemory( (void*)ptr,
+				   (void*)SaveDosvVram,
+				   (unsigned long)count
+				 );
+                }
+		// #3086: VDM crash when exit 16bit apps of video mode 11h
+		// 12/2/93 yasuho
+		else if ( op == 0x03 ) { // Get from FromConsoleOutput
+		    RtlCopyMemory( (void*)ptr,
+				   (void*)FromConsoleOutput,
+					     (unsigned long) count
+					     );
+                }
+            }
+            break;
+#endif // i386
+
+	case 0x22:
+	    // #3176: vz display white letter on white screen
+	    // 12/1/93 yasuho (reviewed by williamh)
+	    // palette and DAC registers operations
+	    // Input	AH = 22H
+	    //		AL = 00H : get from simulated value for windowed
+	    //		ES:DI = ptr to palette/DAC buffer
+	    {
+		sys_addr	ptr;
+		byte		op;
+		static void	get_cur_pal_and_DAC(sys_addr);
+
+		op = getAL();
+		ptr = effective_addr(getES(), getDI());
+#ifdef	VGG
+		if (op == 0x00) { // get from simulated value for windowed
+			get_cur_pal_and_DAC(ptr);
+		}
+#endif	//VGG
+	    }
+	    break;
+
+#if !defined(KOREA)
+	case 0x23:
+	    // #4183: status line of oakv(DOS/V FEP) doesn't disappear
+	    // 12/11/93 yasuho
+	    // monitoring IME status lines
+	    // Input	AH = 23H
+	    //		AL = number of IME status lines
+	    {
+		IMEStatusLines = getAL();
+	    }
+	    break;
+#endif
+
+        // kksuzuka #6168 screen attributes for DOS fullscreen
+	case 0x24:
+	    // set console attributes for fullscreen
+            // Input	AH = 23H
+	    //		AL = none
+            // Output	AL 4-7 bit = back ground color
+	    //		AL 0-3 bit = fore ground color
+	    {
+		setAX(textAttr);
+	    }
+	    break;
+
+#if !defined(KOREA)
+        case 0xff:
+            // Int10 Function FF
+            // ES: Vram seg, DI: Vram Off, CX:counter
+            {
+                register int i;
+                register int vram_addr;
+                int DBCSState = FALSE;
+                register  char *p;
+#ifndef i386
+	        register sys_addr V_vram = effective_addr(getES(),getDI());
+#endif // !i386
+
+                if ( is_us_mode() ) {
+                    setCF(1);
+                    return;
+                }
+		if ( sas_hw_at_no_check(DosvModePtr) != 0x03 ) {
+#ifdef JAPAN_DBG
+                    DbgPrint( "NTVDM: mode != 0x03, int10 FF not support\n" );
+#endif
+                    setCF(1);
+                    return;
+                }
+#if 0
+                DbgPrint( "Addr %04x:%04x, CX=%x, ", getES(), getDI(), getCX() );
+                DbgPrint( "%d, %d, CX=%d\n", getDI() < 160 ? 0 : getDI()/160,
+                      getDI() < 160 ? 0 : (getDI() - (getDI()/160)*160)/2, getCX() );
+#endif
+                Int10FlagCnt++;
+                vram_addr = getDI() >> 1;
+#ifdef i386
+                p = get_screen_ptr( getDI() );
+#else // !i386 uses the EGA plane.
+                p = get_screen_ptr( getDI()<<1 );
+
+		// for speed up!!
+                i = getCX();
+                if( vram_addr + i > DOSV_VRAM_SIZE / 2 ){
+                    i = DOSV_VRAM_SIZE / 2 - vram_addr;
+#ifdef JAPAN_DBG
+                    DbgPrint("NTVDM:Int10 FF over VRAM(DI)=%04x\n", getDI() );
+#endif
+                }
+#endif // !i386
+
+#ifdef i386
+                for ( i = 0; i < getCX(); i++ ) {
+                        if ( vram_addr >= DOSV_VRAM_SIZE/2 ) {
+                            DbgPrint("NTVDM:Int10 FF over VRAM(DI)=%04x\n", getDI() );
+                            break;
+                        }
+                        else if ( DBCSState ) {
+#else // !i386
+		//for speed up!!
+                while( i-- ) {
+		  sas_loadw(V_vram++, (word *)p);
+		  V_vram++;
+		  setVideodirty_total(getVideodirty_total() + 2);
+                        if ( DBCSState ) {
+#endif // !i386
+                            Int10Flag[vram_addr] = INT10_DBCS_TRAILING | INT10_CHANGED;
+                            DBCSState = FALSE;
+                        }
+                        else if ( DBCSState = is_dbcs_first( *p ) ) {
+                            Int10Flag[vram_addr] = INT10_DBCS_LEADING | INT10_CHANGED;
+                        }
+                        else {
+                            Int10Flag[vram_addr] = INT10_SBCS | INT10_CHANGED;
+                        }
+                        vram_addr++;
+#ifdef i386
+                        p += 2;
+#else // !i386 uses the EGA plane.
+			p += 4;
+#endif  // !i386
+                }
+                // Last char check! for Vz
+                if ( DBCSState && ( vram_addr % 80 != 0 ) )
+                    Int10Flag[vram_addr] = INT10_DBCS_TRAILING | INT10_CHANGED;
+
+            }
+            break;
+#endif
+
+	default:
+		DbgPrint("NTVDM: Not support MS-DOS/V BOP:%d\n", op );
+	        setCF(1);
+		return;
+    }
+    setCF(0);
+}
+
+// mskkbug #3176 vz display white letter on white screen -yasuho
+#ifdef	VGG
+static void get_cur_pal_and_DAC(ptr)
+	sys_addr	ptr;
+{
+	register	i;
+	byte		temp;
+	struct _rgb {
+		byte	red, green, blue;
+	} rgb;
+
+	// get palette and overscan
+	for(i = 0; i < 16; i++) {
+		outb(EGA_AC_INDEX_DATA, (IU8)i); /* set index */
+		inb(EGA_AC_SECRET, &temp);
+		sas_store(ptr, temp);
+		inb(EGA_IPSTAT1_REG, &temp);
+		ptr++;
+	}
+	outb(EGA_AC_INDEX_DATA, 17); /* overscan index */
+	inb(EGA_AC_SECRET, &temp);
+	sas_store(ptr++, temp);
+	inb(EGA_IPSTAT1_REG, &temp);
+	outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);
+	// get DAC registers
+	for(i = 0; i < 256; i++)
+	{
+		outb(VGA_DAC_RADDR, (IU8)i);
+		inb(VGA_DAC_DATA, &rgb.red);
+		inb(VGA_DAC_DATA, &rgb.green);
+		inb(VGA_DAC_DATA, &rgb.blue);
+		sas_store(ptr++, rgb.red);
+		sas_store(ptr++, rgb.green);
+		sas_store(ptr++, rgb.blue);
+	}
+}
+#endif	//VGG
+
+//;;;;;;;;;;;;;;;;;;; end of MS-DOS/V BOP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#endif // JAPAN
+
+#endif // !NEC_98
+#line 4907
+#if defined(NEC_98)
+#line 4908
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98

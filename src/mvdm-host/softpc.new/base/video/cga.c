@@ -65,6 +65,7 @@
  *    O/S include files.
  */
 #include <stdio.h>
+#include <malloc.h>
 #include TypesH
 #include StringH
 #include FCntlH
@@ -91,20 +92,20 @@
 IMPORT void setWritePointers IPT0();
 IMPORT void setReadPointers IPT1(IUH, readset);
 #ifdef	EGG
-#line 90
+#line 91
 #include "egacpu.h"
 #endif	/* EGG */
 #include "video.h"
 #include "ckmalloc.h"
 
 #ifdef REAL_VGA
-#line 96
+#line 97
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-#line 98
+#line 99
 #include "host_gfx.h"
 #endif
-#line 100
+#line 101
 
 
 /*
@@ -126,10 +127,10 @@ static int current_mode = -1;	/* Value of Mode Select at last call    */
  */
 
 #ifdef HUNTER
-#line 121
+#line 122
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
-#line 124
+#line 125
 
 static half_word index_reg = 00 ;	/* Index register	 */
 
@@ -178,23 +179,23 @@ static void update_cursor_shape	IPT0();
 
 
 #ifdef A3CPU
-#line 172
+#line 173
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #else
-#line 174
+#line 175
 IMPORT MEM_HANDLERS Glue_writes;
 #endif /* A3CPU */
-#line 176
+#line 177
 IMPORT WRT_POINTERS simple_writes;
 IMPORT READ_POINTERS Glue_reads;
 IMPORT READ_POINTERS read_glue_ptrs;
 IMPORT READ_POINTERS simple_reads;
 
 #ifdef	A2CPU
-#line 182
+#line 183
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif	/* A2CPU */
-#line 205
+#line 206
 
 /*
  *==========================================================================
@@ -216,6 +217,7 @@ reg regen_start;		/* Regen start address                   */
 void cga_inb	IFN2(io_addr, address, half_word *, value)
 {
 
+#ifndef NEC_98
 static int cga_state = 0;	/* current cga status state */
 static long state_count = 1;    /* position in that state */
 static int sub_state = 0;	/* sub state for cga state 2 */
@@ -362,6 +364,8 @@ else
 	 */
 
 	*value = 0x00;
+#endif   //NEC_98
+#line 375
 } 
 
 
@@ -417,10 +421,10 @@ switch (address) {
     case 0x3D5:
     case 0x3D7:
 #ifdef HUNTER
-#line 427
+#line 430
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
-#line 429
+#line 432
 
 /*
  * This is the data register, the function to be performed depends on the
@@ -617,10 +621,10 @@ switch (address) {
 		{
                     Ra_cursor_start = value;
 #ifdef REAL_VGA
-#line 625
+#line 628
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
-#line 627
+#line 630
 		    update_cursor_shape();
 		}
 		break;
@@ -630,10 +634,10 @@ switch (address) {
 		{
                     Rb_cursor_end = (value & CURSOR_USED_BITS);
 #ifdef REAL_VGA
-#line 636
+#line 639
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
-#line 638
+#line 641
 		    update_cursor_shape();
 		}
                 break;
@@ -654,10 +658,10 @@ switch (address) {
 			screen_refresh_required();
 		}
 #ifdef REAL_VGA
-#line 658
+#line 661
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
-#line 660
+#line 663
                 break;
 
             case 0x0D:
@@ -673,10 +677,10 @@ switch (address) {
 			screen_refresh_required();
 		}
 #ifdef REAL_VGA
-#line 675
+#line 678
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
-#line 677
+#line 680
                 break;
 
             /*
@@ -693,7 +697,7 @@ switch (address) {
 		    if(get_cga_mode() == TEXT)
 		        host_cga_cursor_has_moved(get_cur_x(), get_cur_y());
                     cur_offset = (value << 8) | Rf_cursor_loc_low;
-                    cur_offset -= get_screen_start();
+		    cur_offset -= (word) get_screen_start();
                     set_cur_y( cur_offset / get_chars_per_line() );
                     set_cur_x( cur_offset % get_chars_per_line() );
 
@@ -711,7 +715,7 @@ switch (address) {
 		    if(get_cga_mode() == TEXT)
 		        host_cga_cursor_has_moved(get_cur_x(), get_cur_y());
                     cur_offset =  (Re_cursor_loc_high << 8) | value;
-                    cur_offset -= get_screen_start();
+		    cur_offset -= (word) get_screen_start();
                     set_cur_y( cur_offset / get_chars_per_line());
                     set_cur_x( cur_offset % get_chars_per_line());
 
@@ -741,10 +745,10 @@ switch (address) {
          */
 
 #ifdef HUNTER
-#line 741
+#line 744
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
-#line 743
+#line 746
         timer_video_enabled = (boolean) (value & VIDEO_ENABLE);
 
         if (value != current_mode) {
@@ -885,6 +889,7 @@ switch (address) {
 
 static void set_cga_palette	IFN2(int, screen_mode, int, res)
 {
+#ifndef NEC_98
     /*
      * palette for color text - 16 colors for FG and BG
      * These tables are also used to set some graphic mode palette entries
@@ -1087,10 +1092,13 @@ static void set_cga_palette	IFN2(int, screen_mode, int, res)
 
 	host_set_palette(cga_graph_high,2);
     }
+#endif   //NEC_98
+#line 1090
 }
 
 static void update_cursor_shape	IFN0()
 {
+#ifndef NEC_98
 	/*
 	 *	This function actions a change to the cursor shape
 	 *	when either the cursor start or cursor end registers
@@ -1134,16 +1142,18 @@ static void update_cursor_shape	IFN0()
 
 	host_cursor_size_changed(Ra_cursor_start, Rb_cursor_end);
 
+#endif   //NEC_98
+#line 1139
 }
 
 #if !defined(EGG) && !defined(A3CPU) && !defined(A2CPU) && !defined(C_VID) && !defined(A_VID)
-#line 1135
+#line 1142
 #error Unsupported excluded CGA-only configuration
 #endif /* not EGG or A3CPU or A2CPU or C_VID or A_VID */
-#line 1325
+#line 1344
 
 #ifdef SEGMENTATION
-#line 1327
+#line 1346
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -1151,20 +1161,21 @@ static void update_cursor_shape	IFN0()
 
 
 #endif
-#line 1334
+#line 1353
 
 void cga_init()
 {
+#ifndef NEC_98
 IMPORT void Glue_set_vid_rd_ptrs IPT1(READ_POINTERS *, handler );
 IMPORT void Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler );
 
 io_addr i;
 
 #ifdef HUNTER
-#line 1343
+#line 1363
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
-#line 1346
+#line 1366
 
 
 /*
@@ -1193,14 +1204,14 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 /* GISP CPU physically cannot perform read and/or write checks */
 
 #ifdef	JOKER
-#line 1374
+#line 1394
 #error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #else	/* not JOKER */
-#line 1380
+#line 1400
 
 
 #ifdef A3CPU 
-#line 1383
+#line 1403
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 
 
@@ -1208,39 +1219,39 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 
 
 #else	/* not A3CPU */
-#line 1393
+#line 1413
 #ifdef A2CPU
-#line 1394
+#line 1414
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #else
-#line 1397
+#line 1417
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
-#line 1398
+#line 1418
 #error Unsupported excluded CGA-only configuration
 #else
-#line 1400
+#line 1420
    	gmi_define_mem(SAS_VIDEO, &Glue_writes);
 	read_pointers = Glue_reads;
 	Glue_set_vid_wrt_ptrs( &simple_writes ); 
 	Glue_set_vid_rd_ptrs( &simple_reads );
 #endif /* not EGG or C_VID or A_VID */
-#line 1405
+#line 1425
 #endif /* A2CPU */
-#line 1406
+#line 1426
 #endif /* A3CPU */
-#line 1407
+#line 1427
 
 #endif /* JOKER */
-#line 1409
+#line 1429
 #endif /* GISP_CPU */
-#line 1410
+#line 1430
 
 #ifdef CPU_40_STYLE
 	setVideochain(3);
 	SetWritePointers();
 	SetReadPointers(3);
 #endif	/* CPU_40_STYLE */
-#line 1416
+#line 1436
 
 	sas_connect_memory(gvi_pc_low_regen,gvi_pc_high_regen,(half_word)SAS_VIDEO);
 
@@ -1270,10 +1281,13 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 
 	bios_ch2_byte_wrt_fn = simple_bios_byte_wrt;
 	bios_ch2_word_wrt_fn = simple_bios_word_wrt;
+#endif   //NEC_98
+#line 1466
 }
 
 void cga_term	IFN0()
 {
+#ifndef NEC_98
     io_addr i;
 
     /*
@@ -1292,13 +1306,15 @@ void cga_term	IFN0()
 	host_free(cga_screen_buf);
 	cga_screen_buf = 0;
     }
+#endif   //NEC_98
+#line 1490
 }
 
 
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
-#line 1471
+#line 1494
 #error Unsupported excluded CGA-only configuration
 #endif	/* not EGG or C_VID or A_VID */
-#line 1490
+#line 1515
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
-#line 1456
+#line 1478

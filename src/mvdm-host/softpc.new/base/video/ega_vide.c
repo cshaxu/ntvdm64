@@ -1,3 +1,6 @@
+#if !defined(i386) && defined(JAPAN)
+#include <windows.h>
+#endif
 #include "insignia.h"
 #include "host_def.h"
 /*			INSIGNIA (SUB)MODULE SPECIFICATION
@@ -112,17 +115,20 @@ DESCRIPTION	  : 	describe what (not how) function does
 #include "host_gfx.h"
 #include "idetect.h"
 #ifndef PROD
-#line 115
+#line 118
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 117
+#line 120
 #include "host.h"
 
 #ifdef  GISP_SVGA 
-#line 120
+#line 123
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
-#line 123
+#if defined(JAPAN) || defined(KOREA)
+#include <conapi.h>
+#endif // JAPAN || KOREA
+#line 129
 
 /* [3.1.2 DECLARATIONS]                                                 */
 
@@ -131,10 +137,10 @@ GLOBAL IU8 Currently_emulated_video_mode = 0;	/* Holds last video mode
 						 * set through bios */
 
 #if defined(NTVDM) && defined(X86GFX)
-#line 131
+#line 137
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
-#line 134
+#line 140
 
 #ifdef NTVDM
 IMPORT int soft_reset;
@@ -148,22 +154,28 @@ IMPORT void mouse_video_mode_changed(int new_video_mode);
 #ifdef CPU_40_STYLE
 GLOBAL IBOOL forceVideoRmSemantics = FALSE;
 #endif
+#ifdef JAPAN
+// mskkbug #3167 works2.5 character corrupted 11/8/93 yasuho
+// generate single byte charset for JAPAN
+IMPORT GLOBAL void GenerateBitmap();
+#endif // JAPAN
 
 /*
 5.MODULE INTERNALS   :   (not visible externally, global internally)]     
 
 [5.1 LOCAL DECLARATIONS]						*/
 
+#ifndef NEC_98
 #ifdef ANSI
 GLOBAL void ega_set_mode(void),ega_char_gen(void);
 static void ega_set_palette(void),ega_alt_sel(void);
 GLOBAL void ega_set_cursor_mode(void);
 static void ega_emul_set_palette(void);
 #else
-#line 159
+#line 171
 #error Unsupported excluded non-ANSI EGA declarations
 #endif /* ANSI */
-#line 164
+#line 176
 static void (*ega_video_func[]) () = {
 				ega_set_mode,
 				ega_set_cursor_mode, 
@@ -197,6 +209,8 @@ static void (*ega_video_func[]) () = {
 				vga_int_1C,	/* Save/Restore Video State */
 #endif
 			   };
+#endif  //NEC_98
+#line 210
 
 static int v7_mode_64_munge[4] ={0, 3, 12, 15};
 IMPORT half_word bg_col_mask;
@@ -251,15 +265,15 @@ UTINY	vga_cursor16_start[17][17] = {
 	};
 
 #ifdef	USE_CURSOR_END_TABLES
-#line 251
+#line 264
 #error Unsupported excluded cursor-table configuration
 #endif	/* USE_CURSOR_END_TABLES */
-#line 292
+#line 305
 #endif	/* VGG */
 
 /* [5.1.1 #DEFINES]							*/
 #ifdef SEGMENTATION
-#line 296
+#line 309
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -267,7 +281,7 @@ UTINY	vga_cursor16_start[17][17] = {
 
 
 #endif
-#line 303
+#line 316
 
 /* [5.1.2 TYPEDEF, STRUCTURE, ENUM DECLARATIONS]			*/
 
@@ -380,8 +394,11 @@ void not_imp IFN0()
 
 static void do_outb IFN3(int, index,int, ega_reg, byte, value)
 {
-	outb(index,ega_reg);
-	outb(index+1,value);
+#ifndef NEC_98
+        outb((IU16)index,(IU8)ega_reg);
+        outb((IU16)(index+1),value);
+#endif  //NEC_98
+#line 432
 }
 
 sys_addr video_effective_addr IFN2(IU16, seg, IU16, offset)
@@ -411,6 +428,7 @@ sys_addr follow_ptr IFN1(sys_addr, addr)
 
 void low_set_mode IFN1(int, mode)
 {
+#ifndef NEC_98
 	int i;
 	sys_addr save_addr,params_addr,palette_addr;
 	word temp_word;
@@ -423,10 +441,10 @@ void low_set_mode IFN1(int, mode)
 #ifndef REAL_VGA
 	do_outb(EGA_SEQ_INDEX,0,1);	/* Synchronous reset - turn off Sequencer */
 #else
-#line 458
+#line 474
 #error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
-#line 460
+#line 476
 	do_outb(EGA_CRTC_INDEX,0x11,0);
 	for(i=0;i<EGA_PARMS_SEQ_SIZE;i++)
 	{
@@ -456,7 +474,7 @@ void low_set_mode IFN1(int, mode)
 	inb(EGA_IPSTAT1_REG, (half_word *)&temp_word);
 	for(i=0;i<EGA_PARMS_ATTR_SIZE;i++)
 	{
-		outb(EGA_AC_INDEX_DATA,i);
+                outb(EGA_AC_INDEX_DATA,(IU8)i);
 		outb(EGA_AC_INDEX_DATA,sas_hw_at_no_check(params_addr+EGA_PARMS_ATTR+i));
 	}
 /* setup graphics chips */
@@ -588,10 +606,10 @@ void low_set_mode IFN1(int, mode)
     	video_pc_high_regen = vd_mode_table[video_mode].end_addr;
 	}
 #else
-#line 621
+#line 637
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
-#line 624
+#line 640
 
 #ifdef VGG
     if (video_adapter == VGA) {
@@ -615,6 +633,8 @@ void low_set_mode IFN1(int, mode)
 	outb(EGA_AC_INDEX_DATA, 0);  /* Use first block of 64 in DACs */
     }
 #endif
+#endif  //NEC_98
+#line 664
 }
 
 /* Load part of a font into EGA font memory. */
@@ -627,11 +647,12 @@ void load_font IFN5
    int, nbytes		/* Number of bytes per character */
    )
 {
-#if !(defined(NTVDM) && defined(X86GFX))
+#ifndef NEC_98
+#if !(defined(NTVDM) && defined(X86GFX)) || defined(ARCX86)
 	int i,j;
 	sys_addr font_addr;
 	sys_addr data_addr;
-#endif /* !(NTVDM && X86GFX) */
+#endif /* !(NTVDM && X86GFX) || ARCX86 */
 	half_word temp_word;
 	half_word video_mode;
 	static word font_off[] = { 0, 0x4000, 0x8000, 0xc000, 0x2000, 0x6000, 0xa000, 0xe000 };
@@ -641,15 +662,15 @@ void load_font IFN5
 
 
 #if defined(NTVDM) && defined(X86GFX)
-#line 673
+#line 710
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
-#line 676
+#line 717
 #ifdef GISP_SVGA
-#line 677
+#line 718
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else /* GISP_SVGA */
-#line 686
+#line 727
 
 
 	/* Work out where to put the font. */
@@ -668,9 +689,9 @@ void load_font IFN5
 		font_addr += (FONT_MAX_HEIGHT - nbytes);
 	}
 #endif	/* GISP_SVGA */
-#line 704
+#line 745
 #endif	/* NTVDM && X86GFX */
-#line 705
+#line 746
 
 /* Finally switch back to the BIOS mode */
 	video_mode = sas_hw_at_no_check(vd_video_mode);
@@ -685,10 +706,13 @@ void load_font IFN5
 	low_set_mode(video_mode);
 	inb(EGA_IPSTAT1_REG,&temp_word);
 	outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);	/* re-enable video */
+#endif  //NEC_98
+#line 761
 }
 
 void recalc_text IFN1(int, height)
 {
+#ifndef NEC_98
 	int scan_lines;
 	half_word video_mode;
 	word screen_height;
@@ -697,6 +721,10 @@ void recalc_text IFN1(int, height)
 #ifdef NTVDM
     MAX_SCAN_LINE   crtc_reg9;
 #endif
+#ifdef JAPAN
+        // mskkbug #2784 Title of VJE-PEN is strange 11/5/93 yasuho
+        word length;
+#endif // JAPAN
 
 	video_mode = sas_hw_at_no_check(vd_video_mode);
 #ifdef V7VGA
@@ -721,32 +749,41 @@ void recalc_text IFN1(int, height)
 		scan_lines = low | ((overflow & 2) << 7) | ((overflow & 0x40) << 3);
 		scan_lines = ((scan_lines + 1) << ((control >> 2) & 1)) + 1;
 	}
-#line 743
+#line 790
 	else
 		scan_lines = get_screen_height() + 1;
 
-	sas_store_no_check(ega_char_height, height);
-	sas_store_no_check(vd_rows_on_screen, scan_lines/height - 1);
+        sas_store_no_check(ega_char_height, (IU8)height);
+        sas_store_no_check(vd_rows_on_screen, (IU8)(scan_lines/height - 1));
+#ifdef JAPAN
+        // mskkbug #2784 Title of VJE-PEN is strange 11/5/93 yasuho
+        // Adjust video length
+        length = (sas_hw_at_no_check(vd_rows_on_screen) + 1) *
+                sas_w_at_no_check(VID_COLS) * 2;
+        if (!is_us_mode() && sas_hw_at_no_check(DosvModePtr) == 0x73)
+                length *= 2;
+        sas_storew_no_check(VID_LEN, length);
+#else // !JAPAN
 	if ( video_mode < 4 &&  scan_lines/height == 25 )
-		sas_storew_no_check(VID_LEN, video_mode<2 ? 0x800 : 0x1000);
+                sas_storew_no_check(VID_LEN, (IU16)(video_mode<2 ? 0x800 : 0x1000));
 	else
-		sas_storew_no_check(VID_LEN,(sas_hw_at_no_check(vd_rows_on_screen)+1)*sas_w_at_no_check(VID_COLS)*2);
+                sas_storew_no_check(VID_LEN, (IU16)((sas_hw_at_no_check(vd_rows_on_screen)+1)*sas_w_at_no_check(VID_COLS)*2));
+#endif // !JAPAN
 #ifdef NTVDM
     /* preserve other bits in register 9 for VGA */
     if (video_adapter == VGA) {
         outb(EGA_CRTC_INDEX, 9);
         inb(EGA_CRTC_DATA, (half_word *) &crtc_reg9);
         crtc_reg9.as_bfld.maximum_scan_line = height -1;
-        outb(EGA_CRTC_DATA, crtc_reg9.as.abyte);
+        outb(EGA_CRTC_DATA, (IU8)crtc_reg9.as.abyte);
     }
     else
-        do_outb(EGA_CRTC_INDEX,9,height-1); /* Character height */
+        do_outb(EGA_CRTC_INDEX,9,(IU8)(height-1)); /* Character height */
 #else
-#line 763
+#line 820
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 765
-	do_outb(EGA_CRTC_INDEX,0xA,height-1);	/* Cursor start */
+        do_outb(EGA_CRTC_INDEX,0xA,(IU8)(height-1));    /* Cursor start */
 	do_outb(EGA_CRTC_INDEX,0xB,0);		/* Cursor end */
 
 	/* 
@@ -795,14 +832,14 @@ void recalc_text IFN1(int, height)
 			oflo &= ~0x40;
 		if ((protect & 0x80) == 0x80)    /* overflow reg protected */
 		{
-			do_outb(EGA_CRTC_INDEX, 0x11, protect & 0x7f); /* enable writes */
+                        do_outb(EGA_CRTC_INDEX, 0x11, (IU8)(protect & 0x7f)); /* enable writes */
 			do_outb(EGA_CRTC_INDEX, 7, oflo);	/* overflow reg */
 			do_outb(EGA_CRTC_INDEX, 0x11, protect); /* put back old value */
 		}
 		else
 			do_outb(EGA_CRTC_INDEX, 7, oflo);	/* overflow reg */
 		
-		do_outb(EGA_CRTC_INDEX,0x12, screen_height & 0xff); /* Vertical display end = scan lines */
+                do_outb(EGA_CRTC_INDEX,0x12, (IU8)(screen_height & 0xff)); /* Vertical display end = scan lines */
 	}
 	else
 	if (video_adapter == EGA)
@@ -815,22 +852,25 @@ void recalc_text IFN1(int, height)
 		else
 			oflo &= ~2;
 		do_outb(EGA_CRTC_INDEX, 7, oflo);	/* overflow reg */
-		do_outb(EGA_CRTC_INDEX, 0x12, screen_height & 0xff); /* Vertical display end = scan lines */
+                do_outb(EGA_CRTC_INDEX, 0x12, (IU8)(screen_height & 0xff)); /* Vertical display end = scan lines */
 	}
 	else
 	{
 		assert1(NO, "Bad video adapter (%d) in recalc_text", video_adapter);
 	}
 
-	do_outb(EGA_CRTC_INDEX,0x14,height); /* Underline scan line - ie no underline */
+        do_outb(EGA_CRTC_INDEX,0x14,(IU8)height); /* Underline scan line - ie no underline */
+#endif  //NEC_98
+#line 900
 }
 
 static void set_graph_font IFN1(int, height)
 {
+#ifndef NEC_98
 	switch (getBL())
 	{
 		case 0:
-			sas_store_no_check(vd_rows_on_screen, getDL()-1);
+                        sas_store_no_check(vd_rows_on_screen, (IU8)(getDL()-1));
 			break;
 		case 1:
 			sas_store_no_check(vd_rows_on_screen, 13);
@@ -844,13 +884,16 @@ static void set_graph_font IFN1(int, height)
 		default:
 			assert2(FALSE,"Illegal char gen sub-function %#x:%#x",getAL(),getBL());
 	}
-	sas_store_no_check(ega_char_height, height);
+        sas_store_no_check(ega_char_height, (IU8)height);
+#endif  //NEC_98
+#line 924
 }
 
 LOCAL VOID
 write_ch_set IFN5(sys_addr, char_addr, int, screen_off,
 	int, colour, int, nchs, int, scan_length)
 {
+#ifndef NEC_98
 	unsigned int i, j, colourmask, data, temp, char_height;
 	unsigned int *screen;
 	register sys_addr font;
@@ -911,15 +954,17 @@ write_ch_set IFN5(sys_addr, char_addr, int, screen_off,
 		}
 	}
 #else
-#line 930
+#line 991
 #error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
-#line 932
+#endif  //NEC_98
+#line 994
 }
 
 void write_ch_xor IFN5(sys_addr, char_addr, int, screen_off,
 	int, colour, int, nchs, int, scan_length)
 {
+#ifndef NEC_98
 	unsigned int i, j, colourmask, data, temp, char_height;
 	unsigned int *screen;
 	register sys_addr font;
@@ -978,14 +1023,16 @@ void write_ch_xor IFN5(sys_addr, char_addr, int, screen_off,
 		}
 	}
 #else
-#line 995
+#line 1058
 #error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
-#line 997
+#endif  //NEC_98
+#line 1061
 }
 
 GLOBAL void ega_set_mode IFN0()
 {
+#ifndef NEC_98
 	int pag;
 	sys_addr save_addr,font_addr;
 	int font_offset;
@@ -997,16 +1044,16 @@ GLOBAL void ega_set_mode IFN0()
 #endif /* V7VGA */
 
 #ifndef PROD
-#line 1012
+#line 1077
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1014
+#line 1079
 
 #ifdef GISP_SVGA
-#line 1016
+#line 1081
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
-#line 1042
+#line 1107
 
 #ifdef V7VGA
 	/*
@@ -1022,6 +1069,27 @@ GLOBAL void ega_set_mode IFN0()
 	}
 #endif
 
+#ifdef JAPAN
+        // mode73h support 5/26/1993 V-KazuyS
+        // when it's not US mode, ntvdm maps mode 73 to mode 3.
+#ifdef JAPAN_DBG
+        DbgPrint( "NTVDM: ega_set_mode() setting video mode %x\n", getAL() );
+#endif
+        if ( !is_us_mode() ) {
+#ifdef i386
+            if ( getAL() == 0x73 ) {
+                sas_store(DosvModePtr, getAL());
+                setAL( 0x03 );
+#else // !i386
+            if( (getAL() & 0x7f) == 0x73 ) {
+                setAL( (getAL() & 0x83) );
+#endif // !i386
+            }
+#if !defined(i386) && defined(JAPAN_DBG)
+        DbgPrint( " NTVDM: DosvMode %x\n", sas_hw_at_no_check(DosvModePtr));
+#endif
+        }
+#endif // JAPAN
 	if (is_bad_vid_mode(getAL()))
 	{
 #ifdef V7VGA
@@ -1078,9 +1146,58 @@ GLOBAL void ega_set_mode IFN0()
 	if (sas_hw_at_no_check(BIOS_VIRTUALISING_BYTE) == 0)
 		Video_mode = video_mode;
 
-	sas_store_no_check(vd_video_mode, getAL() & 0x7F); /* get rid of top bit - indicates clear or not */
- 	sas_store_no_check(ega_info, (sas_hw_at_no_check(ega_info) & 0x7F ) | (getAL() & 0x80)); /* update screen clear flag in ega_info */ 
+        sas_store_no_check(vd_video_mode, (IU8)(getAL() & 0x7F)); /* get rid of top bit - indicates clear or not */
+        sas_store_no_check(ega_info, (IU8)((sas_hw_at_no_check(ega_info) & 0x7F ) | (getAL() & 0x80))); /* update screen clear flag in ega_info */
 
+#ifdef JAPAN
+    // In JP mode, if video mode != jp mode, set US mode.
+    if (    ( video_mode != 0x03 )
+         && ( video_mode != 0x11 )
+         && ( video_mode != 0x12 )
+         && ( video_mode != 0x72 )
+         && ( video_mode != 0x73 ) ) {
+#ifdef JAPAN_DBG
+        DbgPrint( "VideoMode(%02x) != jp mode, setCP 437\n", getAL() );
+#endif
+        SetConsoleCP( 437 );
+        SetConsoleOutputCP( 437 );
+        SetDBCSVector( 437 );
+    }
+
+    // notice video format to console
+
+    VDMConsoleOperation(VDM_SET_VIDEO_MODE,
+                        (LPVOID)((sas_hw_at_no_check(DosvModePtr) == 0x73) ? TRUE : FALSE));
+
+    // Int10Flag initialize
+    {
+        register byte *p = Int10Flag;
+        register int i;
+        int count = 80*50;
+
+#ifdef JAPAN_DBG
+        DbgPrint( "NTVDM: ega_set_mode() Int10Flag Initialize\n" );
+#endif
+        for ( i = 0; i < count; i++ )
+            *p++ = INT10_SBCS | INT10_CHANGED;        // init == all space
+        Int10FlagCnt++;
+    }
+
+#elif defined(KOREA) // JAPAN
+    // In KO mode, if video mode != ko mode, set US mode.
+    if (    ( video_mode != 0x03 )
+         && ( video_mode != 0x11 )
+         && ( video_mode != 0x12 )
+         && ( video_mode != 0x72 ) ) {
+
+        SetConsoleCP( 437 );
+        SetConsoleOutputCP( 437 );
+        SetDBCSVector( 437 );
+    }
+
+    // notice video format to console
+    VDMConsoleOperation(VDM_SET_VIDEO_MODE, (LPVOID)FALSE);
+#endif // KOREA
 #ifdef CPU_40_STYLE
 	if (forceVideoRmSemantics && (!get_EGA_no_clear()))
 	{
@@ -1090,18 +1207,18 @@ GLOBAL void ega_set_mode IFN0()
 #endif
 
 #ifdef MSWDVR
-#line 1125
+#line 1260
 #error Unsupported excluded MSWDVR video configuration
 #endif /* MSWDVR */
-#line 1141
+#line 1276
 
 	Currently_emulated_video_mode = video_mode;
 
 #if defined(NTVDM) && defined(X86GFX)
-#line 1145
+#line 1280
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif  /* NTVDM & X86GFX */
-#line 1161
+#line 1296
 
 	save_addr = follow_ptr(EGA_SAVEPTR);
 	if(alpha_num_mode())
@@ -1169,12 +1286,41 @@ GLOBAL void ega_set_mode IFN0()
 					load_font(follow_ptr(font_addr+6),sas_w_at_no_check(font_addr+2),sas_w_at_no_check(font_addr+4), sas_hw_at_no_check(font_addr+1), sas_hw_at_no_check(font_addr));
 					recalc_text(sas_hw_at_no_check(font_addr));
 					if(sas_hw_at_no_check(font_addr+10) != 0xff)
-						sas_store_no_check(vd_rows_on_screen, sas_hw_at_no_check(font_addr+10)-1);
+                                                sas_store_no_check(vd_rows_on_screen, (IU8)(sas_hw_at_no_check(font_addr+10)-1));
 			   break;
 			}
 				font_offset++;
 			} while(mode_byte != 0xff);
 		   }
+#if defined(JAPAN) || defined(KOREA)
+        // change Vram addres to DosVramPtr from B8000.
+        // Don't call SetVram().
+        if ( !is_us_mode() ) {
+#ifdef i386
+            // set_up_screen_ptr() vga_mode.c
+            set_screen_ptr( (byte *)DosvVramPtr );
+            // low_set_mode() ega_vide.c
+            video_pc_low_regen = DosvVramPtr;
+            video_pc_high_regen = DosvVramPtr + DosvVramSize - 1;
+            // vga_gc_misc() vga_prts.c
+            gvi_pc_low_regen = DosvVramPtr;
+            gvi_pc_high_regen = DosvVramPtr + DosvVramSize - 1;
+            sas_connect_memory(gvi_pc_low_regen,gvi_pc_high_regen,(half_word)SAS_VIDEO);
+            // recalc_screen_params() gvi.c
+            set_screen_length( DosvVramSize );
+#ifdef JAPAN_DBG
+            DbgPrint( "NTVDM:   ega_set_mode() sets VRAM %x, size=%d\n", DosvVramPtr, DosvVramSize );
+#endif
+#endif // i386
+            // copy from calcScreenParams()
+            set_screen_height_recal( 474 ); /* set scanline */
+            recalc_text(19);                /* char Height == 19 */
+
+        }
+#ifdef JAPAN_DBG
+            DbgPrint( "NTVDM:   video_pc_low_regen %x, high %x, gvi_pc_low_regen %x, high %x\n", video_pc_low_regen, video_pc_high_regen, gvi_pc_low_regen, gvi_pc_high_regen );
+#endif
+#endif // JAPAN || KOREA
 		}
 	else
 	{
@@ -1202,7 +1348,7 @@ GLOBAL void ega_set_mode IFN0()
 				mode_byte = sas_hw_at_no_check(font_addr + font_offset);
 				if(mode_byte == video_mode)
 			{
-					sas_store_no_check(vd_rows_on_screen, sas_hw_at_no_check(font_addr)-1);
+                                        sas_store_no_check(vd_rows_on_screen, (IU8)(sas_hw_at_no_check(font_addr)-1));
 					sas_store_no_check(ega_char_height, sas_hw_at_no_check(font_addr+1));
 					sas_move_bytes_forward(font_addr+3, 4*EGA_FONT_INT, 4);
 			   break;
@@ -1247,12 +1393,94 @@ GLOBAL void ega_set_mode IFN0()
 	if(!get_EGA_no_clear())
 	{
 #ifdef REAL_VGA
-#line 1306
+#line 1470
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else /* REAL_VGA */
-#line 1309
+#ifdef JAPAN
+   // mode73h support
+#ifdef i386
+        // "video_pc_low_regen" is in DOS address space.
+        // Direct access is prohibited.
+        // We must use sas function to access DOS address space.
+        if ( !is_us_mode() && ( sas_hw_at_no_check(DosvModePtr) == 0x73 ) ) {
+            unsigned long *p;
+            unsigned long value = (unsigned long)vd_mode_table[0x03].clear_char;
+            int  len = (video_pc_high_regen - video_pc_low_regen) / 4 + 1;
+#ifdef JAPAN_DBG
+            DbgPrint( "NTVDM: Set mode 73H\n" );
+#endif
+            p = (unsigned long *)video_pc_low_regen;
+            while ( len-- ) {
+                *p++ = value;
+            }
+        }
+        else {
+            // kksuzuka #6168 screen attributes
+            extern word textAttr;
+
+            sas_fillsw(video_pc_low_regen,
+          ((textAttr << 8) | (vd_mode_table[video_mode].clear_char & 0x00FF)),
+                         (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+        }
+#else // !i386
+        if( !is_us_mode() ) {
+          register int len = DosvVramSize/4;
+          register long *planes = (long *)get_screen_ptr(0);
+          extern word textAttr;
+
+          if( sas_hw_at_no_check(DosvModePtr) == 0x73 )
+              sas_fillsw(DosvVramPtr, 0, DosvVramSize/2); // Apr. 18 1994 TakeS
+          else
+              // kksuzuka #6168 screen attributes
+              sas_fillsw(DosvVramPtr, (textAttr << 8) | 0x20, DosvVramSize/2);
+
+          while( len-- ){
+            // kksuzuka #6168 screen attributes
+            *planes++ = (textAttr << 8) | 0x00000020; //extended attr clear
+          ((textAttr << 8) | (vd_mode_table[video_mode].clear_char & 0x00FF));
+          }
+        }
+
+#line 1518
     	    sas_fillsw(video_pc_low_regen, vd_mode_table[video_mode].clear_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+#endif // !i386
+#elif defined(KOREA)
+#ifdef i386
+        // "video_pc_low_regen" is in DOS address space.
+        // Direct access is prohibited.
+        // We must use sas function to access DOS address space.
+
+        // kksuzuka #6168 screen attributes
+        extern word textAttr;
+
+        sas_fillsw(video_pc_low_regen,
+        ((textAttr << 8) | (vd_mode_table[video_mode].clear_char & 0x00FF)),
+                           (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+#else // !i386
+#ifdef LATER // Do we really need this?. Fix for stress failure.
+        if( !is_us_mode() ) {
+          register int len = DosvVramSize/4;
+          register long *planes = (long *)get_screen_ptr(0);
+          extern word textAttr;
+
+          // kksuzuka #6168 screen attributes
+          sas_fillsw(DosvVramPtr, (textAttr << 8) | 0x20, DosvVramSize/2);
+
+          while( len-- ){
+            // kksuzuka #6168 screen attributes
+            *planes++ = (textAttr << 8) | 0x00000020; //extended attr clear
+          ((textAttr << 8) | (vd_mode_table[video_mode].clear_char & 0x00FF));
+          }
+        }
+#endif
+        sas_fillsw(video_pc_low_regen, vd_mode_table[video_mode].clear_char,
+                   (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+#endif // !i386
+#else // !JAPAN & KOREA
+            sas_fillsw(video_pc_low_regen, vd_mode_table[video_mode].clear_char,
+                                 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+#endif // !JAPAN
 #ifdef NTVDM
 	    /*
 	     * Need to call host clear screen on NT because text windows don't
@@ -1262,11 +1490,22 @@ GLOBAL void ega_set_mode IFN0()
 	    host_mark_screen_refresh();
 #endif /* NTVDM */
 #endif /* REAL_VGA */
-#line 1320
+#line 1566
 	}
     }
     inb(EGA_IPSTAT1_REG,&temp_word);
     outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);	/* re-enable video */
+#if defined(JAPAN) || defined(KOREA)
+    if (BOPFromDispFlag) {
+        // mode73h support  set video mode to VGA BIOS work area
+        if ( !is_us_mode() ) {
+            sas_store_no_check(vd_video_mode, sas_hw_at_no_check(DosvModePtr));
+        }
+        else {
+            sas_store_no_check(DosvModePtr, sas_hw_at_no_check(vd_video_mode));
+        }
+    }
+#endif // JAPAN || KOREA
 #if defined(NTVDM) && !defined(X86GFX)
     /*  tell mouse that video mode is changed so it can update its own
      *  EGA registers(for EGA.SYS interface). Only do this on RISC machine.
@@ -1276,10 +1515,11 @@ GLOBAL void ega_set_mode IFN0()
     mouse_video_mode_changed(video_mode);
 #endif
 #ifndef PROD
-#line 1333
+#line 1590
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1335
+#endif  //NEC_98
+#line 1593
 }
 
 /*
@@ -1294,6 +1534,7 @@ GLOBAL void ega_set_mode IFN0()
 
 GLOBAL void ega_set_cursor_mode IFN0()  
 { 
+#ifndef NEC_98
     /*
      * Set cursor mode
      * Parameters:
@@ -1323,6 +1564,43 @@ GLOBAL void ega_set_cursor_mode IFN0()
 	sure_sub_note_trace2(CURSOR_VERBOSE,"emulate CGA cursor using EGA cursor, CGA vals; start=%d, end = %d",start,end);
 
 	char_height = sas_hw_at_no_check(ega_char_height);
+#ifdef JAPAN
+        // support Dosv cursor
+        if ( !is_us_mode() ) {
+            char_height = 8;
+
+            if ( start > (char_height-1) )
+                start = char_height - 1;
+            if ( end > (char_height-1) )
+                end = char_height - 1;
+
+            if ( start <= end ) {
+                if ( !( (end == char_height - 1) || (start == char_height - 2) )
+                     && ( end > 3 ) ) {
+                    if ( start + 2 >= end ) {
+                        start = start - end + char_height - 1;
+                        end = char_height - 1;
+                        if ( char_height >= 14 ) {
+                            start--;
+                            end--;
+                        }
+                    }
+                    else if ( start <= 2 ) {
+                        end = char_height - 1;
+                    }
+                    else {
+                        start = char_height / 2;
+                        end = char_height - 1;
+                    }
+                }
+            }
+            else if ( end != 0 ) {
+                start = end;
+                end = char_height - 1;
+            }
+        }
+        else
+#endif // JAPAN
 
 #ifdef	VGG
 	if (video_adapter == VGA) {
@@ -1337,15 +1615,15 @@ GLOBAL void ega_set_cursor_mode IFN0()
 	    * No more guessing, take the exact values from a real VGA:
 	    */
 
-	   saved_start = start;
+           saved_start = (UTINY)start;
 
 	   if ( char_height >= 16 ) {
 	   	start = vga_cursor16_start[end][start];
 #ifdef	USE_CURSOR_END_TABLES
-#line 1397
+#line 1693
 #error Unsupported excluded cursor-table configuration
 #else
-#line 1399
+#line 1695
 	   	if ( end && (end > 3 || saved_start > end) )
 	   		if ( end != 0xF && end >= saved_start
 	   				&& end <= saved_start + 2 )
@@ -1353,19 +1631,19 @@ GLOBAL void ega_set_cursor_mode IFN0()
 	   		else
 	   			end = 0xF;
 #endif
-#line 1406
+#line 1702
 	   } else {
 	   	start = vga_cursor8_start[end][start];
 #ifdef	USE_CURSOR_END_TABLES
-#line 1409
+#line 1705
 #error Unsupported excluded cursor-table configuration
 #else
-#line 1411
+#line 1707
 	   	if ( end && (end > 3 || saved_start > end)
 	   		 && !(saved_start==6 && end==6) )
 	   		end = 7;
 #endif
-#line 1415
+#line 1711
 	   }
 	} else {
 #endif	/* VGG */
@@ -1394,8 +1672,8 @@ GLOBAL void ega_set_cursor_mode IFN0()
 
     /* actually set the EGA registers */
     sure_sub_note_trace2(CURSOR_VERBOSE,"ega_cur mode start %d end %d", start,end);
-    do_outb(EGA_CRTC_INDEX, R10_CURS_START, start);
-    do_outb(EGA_CRTC_INDEX, R11_CURS_END, end);
+    do_outb(EGA_CRTC_INDEX, R10_CURS_START, (IU8)start);
+    do_outb(EGA_CRTC_INDEX, R11_CURS_END, (IU8)end);
 
     /*
      * Update BIOS data variables
@@ -1403,6 +1681,8 @@ GLOBAL void ega_set_cursor_mode IFN0()
 
     sas_storew_no_check((sys_addr)VID_CURMOD, getCX());
     setAH(0);
+#endif  //NEC_98
+#line 1749
 }
 
 /* This routine is an approximate conversion of the corresponding IBM BIOS routine.
@@ -1410,6 +1690,7 @@ GLOBAL void ega_set_cursor_mode IFN0()
  */
 static void ega_emul_set_palette IFN0()
 {
+#ifndef NEC_98
 	sys_addr save_table;
 	half_word work_BL;
 	byte temp;
@@ -1420,7 +1701,7 @@ static void ega_emul_set_palette IFN0()
 	work_BL = getBL();
 	if(getBH() == 0)
 	{
-		sas_store_no_check(vd_crt_palette, (sas_hw_at_no_check(vd_crt_palette) & 0xe0) | (work_BL & 0x1f));
+                sas_store_no_check(vd_crt_palette, (IU8)((sas_hw_at_no_check(vd_crt_palette) & 0xe0) | (work_BL & 0x1f)));
 	   work_BL = (work_BL & 7) | ((work_BL<<1) & 0x10);
 	   if(!alpha_num_mode())
 	   {
@@ -1443,7 +1724,7 @@ static void ega_emul_set_palette IFN0()
 /* Now do BH = 1 stuff. */
 	if(!alpha_num_mode())
 	{
-		sas_store_no_check(vd_crt_palette, (sas_hw_at_no_check(vd_crt_palette) & 0xdf) | ((work_BL<<5) & 0x20));
+                sas_store_no_check(vd_crt_palette, (IU8)((sas_hw_at_no_check(vd_crt_palette) & 0xdf) | ((work_BL<<5) & 0x20)));
 		work_BL = work_BL | (sas_hw_at_no_check(vd_crt_palette) & 0x10) | 2;
 	   outb(EGA_AC_INDEX_DATA,1);
 	   outb(EGA_AC_INDEX_DATA,work_BL);
@@ -1461,11 +1742,14 @@ static void ega_emul_set_palette IFN0()
 			sas_store_no_check(save_table+16, work_BL);
 	}
 	outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);	/* re-enable video */
+#endif  //NEC_98
+#line 1809
 }
 
 static void ega_set_palette IFN0()
 {
-	int i;
+#ifndef NEC_98
+        IU8 i;
 	byte temp;
 	sys_addr save_table, palette_table;
 	half_word old_mask;
@@ -1511,7 +1795,7 @@ static void ega_set_palette IFN0()
 			outb(EGA_AC_INDEX_DATA,16); /* mode control index */
 			inb(EGA_AC_SECRET,&temp);  /* Old value */
 			outb(EGA_AC_INDEX_DATA,
-				(temp & 0xf7) | ((getBL() & 1)<<3));
+                                (IU8)((temp & 0xf7) | ((getBL() & 1)<<3)));
 			inb(EGA_IPSTAT1_REG,&temp);
 			outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);
 /*<REAL_VGA>*/
@@ -1542,16 +1826,19 @@ static void ega_set_palette IFN0()
 				not_imp();
 			}
 #else
-#line 1591
+#line 1891
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif
-#line 1594
+#line 1894
 			break;
 	}
+#endif  //NEC_98
+#line 1897
 }
 
 GLOBAL void ega_char_gen IFN0()
 {
+#ifndef NEC_98
 	switch (getAL())
 	{
 		case 3:
@@ -1559,15 +1846,28 @@ GLOBAL void ega_char_gen IFN0()
 			break;
 		case 0:
 		case 0x10:
+#ifdef JAPAN
+                        // ntraid:mskkbug#3167: works2.5: character corrupted
+                        // 11/8/93 yasuho
+                        // generate single byte charset for DOS/V
+                        // #4247: DOSSHELL,WORKS: screen lines are not enough
+                        // 12/14/93 yasuho
+                        // In Japanese mode, we don't necessary load_font,
+                        // recalc_text and so on.
+                        if (!is_us_mode()) {
+                        GenerateBitmap();
+                                break;
+                        }
+#endif // JAPAN
 			load_font(video_effective_addr(getES(),getBP()),getCX(),getDX(),getBL(),getBH());
 			if(getAL()==0x10)
 				recalc_text(getBH());
 
 #if defined(NTVDM) && defined(X86GFX)
-#line 1612
+#line 1927
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM && X86GFX */
-#line 1619
+#line 1934
 			break;
 		case 1:
 		case 0x11:
@@ -1576,10 +1876,10 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(14);
 
 #if defined(NTVDM) && defined(X86GFX)
-#line 1627
+#line 1942
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
-#line 1629
+#line 1944
 			break;
 		case 2:
 		case 0x12:
@@ -1588,10 +1888,10 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(8);
 
 #if defined(NTVDM) && defined(X86GFX)
-#line 1637
+#line 1952
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
-#line 1639
+#line 1954
 			break;
 #ifdef VGG
 		case 4:
@@ -1601,10 +1901,10 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(16);
 
 #if defined(NTVDM) && defined(X86GFX)
-#line 1648
+#line 1963
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
-#line 1650
+#line 1965
 			break;
 #endif	/* VGG */
 		case 0x20:
@@ -1618,39 +1918,39 @@ GLOBAL void ega_char_gen IFN0()
 			break;
 		case 0x22:
 #if defined(NTVDM) && defined(X86GFX)
-#line 1663
+#line 1983
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
-#line 1666
+#line 1991
 			sas_storew_no_check(EGA_FONT_INT*4,EGA_CGMN_OFF);
 			sas_storew_no_check(EGA_FONT_INT*4+2,EGA_SEG);
 #endif	/* NTVDM & X86GFX */
-#line 1669
+#line 1994
 			set_graph_font(14);
 			break;
 		case 0x23:
 #if defined(NTVDM) && defined(X86GFX)
-#line 1673
+#line 2003
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
-#line 1676
+#line 2011
 			sas_storew_no_check(EGA_FONT_INT*4,EGA_CGDDOT_OFF);
 			sas_storew_no_check(EGA_FONT_INT*4+2,EGA_SEG);
 #endif	/* NTVDM & X86GFX */
-#line 1679
+#line 2014
 			set_graph_font(8);
 			break;
 #ifdef VGG
 		case 0x24:
 #if defined(NTVDM) && defined(X86GFX)
-#line 1684
+#line 2024
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
-#line 1687
+#line 2032
 			sas_storew_no_check(EGA_FONT_INT*4,EGA_HIFONT_OFF);
 			sas_storew_no_check(EGA_FONT_INT*4+2,EGA_SEG);
 #endif	/* NTVDM & X86GFX */
-#line 1690
+#line 2035
 			set_graph_font(16);
 			break;
 #endif
@@ -1669,10 +1969,10 @@ GLOBAL void ega_char_gen IFN0()
 					break;
 
 #if defined(NTVDM) && defined(X86GFX)
-#line 1708
+#line 2053
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else	/* NTVDM & X86GFX */
-#line 1738
+#line 2140
 
 				case 2:
 					setBP(EGA_CGMN_OFF);
@@ -1699,7 +1999,7 @@ GLOBAL void ega_char_gen IFN0()
 					break;
 #endif	/* VGG */
 #endif	/* NTVDM & X86GFX */
-#line 1764
+#line 2166
 				default:
 					assert2(FALSE,"Illegal char_gen subfunction %#x %#x",getAL(),getBH());
 			}
@@ -1707,17 +2007,20 @@ GLOBAL void ega_char_gen IFN0()
 		default:
 			assert1(FALSE,"Illegal char_gen %#x",getAL());
 	}
+#endif  //NEC_98
+#line 2174
 }
 
 static void ega_alt_sel IFN0()
 {
+#ifndef NEC_98
 	switch (getBL())
 	{
 	   case 0x10:
-		setBH( get_EGA_disp() );
-		setBL( get_EGA_mem() );
-		setCH( get_EGA_feature() );
-		setCL( get_EGA_switches() );
+                setBH( (UCHAR)(get_EGA_disp()) );
+                setBL( (UCHAR)(get_EGA_mem()) );
+                setCH( (UCHAR)(get_EGA_feature()) );
+                setCL( (UCHAR)(get_EGA_switches()) );
 		break;
 	   case 0x20:
 	/* Was "enable Print Screen that can do variables lines on screen."
@@ -1738,6 +2041,8 @@ static void ega_alt_sel IFN0()
 		    assert1(FALSE,"Illegal alt_sel %#x",getBL());
 		}
 	}
+#endif  //NEC_98
+#line 2207
 }
 
 
@@ -1751,6 +2056,7 @@ static void ega_alt_sel IFN0()
 
 void ega_video_init IFN0()
 {
+#ifndef NEC_98
 	EQUIPMENT_WORD equip_flag;
 
 	/*
@@ -1768,7 +2074,11 @@ void ega_video_init IFN0()
 	equip_flag.bits.video_mode = VIDEO_MODE_80X25_COLOUR;
 	sas_storew_no_check(EQUIP_FLAG, equip_flag.all);
 
-#if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )
+#if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) ) || defined(ARCX86)
+#ifdef ARCX86
+    if (UseEmulationROM)
+#endif
+    {
 /* Initialize the INTs */
 	sas_storew_no_check(BIOS_EXTEND_CHAR*4, EGA_INT1F_OFF);
 	sas_storew_no_check(BIOS_EXTEND_CHAR*4+2, EGA_SEG);
@@ -1782,25 +2092,26 @@ void ega_video_init IFN0()
 	else 
 	    sas_storew_no_check(EGA_SAVEPTR,EGA_PARMS_OFFSET);
 	sas_storew_no_check(EGA_SAVEPTR+2,EGA_SEG);
-#endif	/* !NTVDM | (NTVDM & !X86GFX) */
+    }
+#endif  /* !NTVDM | (NTVDM & !X86GFX) | ARCX86 */
 #if defined(NTVDM) && defined(X86GFX)
-#line 1848
+#line 2259
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
-#line 1850
+#line 2261
 #ifdef V7VGA
 	if ( video_adapter == VGA )
 		sas_store_no_check(ega_info, 0x70);   /* Clear on mode change, 256K, Extensions allowed, EGA active, emulate cursor */
 	else
 		sas_store_no_check(ega_info, 0x60);   /* Clear on mode change, 256K, EGA active, emulate cursor */
 #else	/* V7VGA  -- Macs don't have V7 */
-#line 1856
+#line 2267
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
-#line 1858
+#line 2269
 
 #endif /* NTVDM & X86GFX */
-#line 1860
+#line 2271
 #if !(defined(NTVDM) && defined(X86GFX))
 	/* Some VGA cards eg ET4000, store info here needed for sync.
 	 * Inherit that info from page 0 copy.
@@ -1815,11 +2126,14 @@ void ega_video_init IFN0()
 
 /* Set the default mode */
 	ega_set_mode();
+#endif  //NEC_98
+#line 2286
 }
 
 void ega_video_io IFN0()
 {
 
+#ifndef NEC_98
 
 #if defined(NTVDM) && !defined(X86GFX)
     if (stream_io_enabled && getAH()!= 0x0E &&  getAX() != 0x13FF)
@@ -1836,10 +2150,10 @@ void ega_video_io IFN0()
 #ifdef V7VGA
 #define check_video_func(AH)	((AH >= 0 && AH < EGA_FUNC_SIZE) || (AH == 0x6f && video_adapter == VGA))
 #else
-#line 1895
+#line 2308
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif
-#line 1897
+#line 2310
 
     if (getAH() != 0xff)
 	assert1(check_video_func(getAH()),"Illegal EGA VIO:%#x",getAH());
@@ -1856,12 +2170,15 @@ void ega_video_io IFN0()
     }
     else
         setCF(1);
+#endif  //NEC_98
+#line 2327
 }
 
 /***** Routines to handle the EGA graphics modes,called from video.c **********/
 void ega_graphics_write_char IFN6(int, col, int, row, int, ch,
 	int, colour, int, page, int, nchs)
 {
+#ifndef NEC_98
 	sys_addr char_addr;
 	register int i;
 	int screen_off;
@@ -1901,10 +2218,13 @@ void ega_graphics_write_char IFN6(int, col, int, row, int, ch,
 		}
 	}
 #endif
+#endif  //NEC_98
+#line 2374
 }
 
 void ega_write_dot IFN4(int, colour, int, page, int, pixcol, int, row)
 {
+#ifndef NEC_98
 	register int screen_off,pixmask,setmask,colourmask,temp;
 
 	screen_off = page*sas_w_at_no_check(VID_LEN)+(row*sas_w_at_no_check(VID_COLS)&0xFFFF)+pixcol/8;
@@ -1947,15 +2267,17 @@ void ega_write_dot IFN4(int, colour, int, page, int, pixcol, int, row)
 
 	(*update_alg.mark_byte)(screen_off);
 #else
-#line 2004
+#line 2421
 #error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
-#line 2006
+#endif  //NEC_98
+#line 2424
 }
 
 void ega_sensible_graph_scroll_up IFN6(int, row,
 	int, col, int, rowsdiff, int, colsdiff, int, lines, int, attr)
 {
+#ifndef NEC_98
 	register int col_incr = sas_w_at_no_check(VID_COLS);
 	register int i,source,dest;
 	byte char_height;
@@ -1967,10 +2289,10 @@ void ega_sensible_graph_scroll_up IFN6(int, row,
 	lines *= char_height;
 	source = dest+lines*col_incr;
 #ifdef REAL_VGA
-#line 2022
+#line 2441
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-#line 2024
+#line 2443
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */
 
 	if(screen_updated)
@@ -1998,12 +2320,14 @@ void ega_sensible_graph_scroll_up IFN6(int, row,
 		dest += col_incr;
 	}
 #endif
-#line 2051
+#endif  //NEC_98
+#line 2471
 }
 
 void ega_sensible_graph_scroll_down IFN6(int, row,
 	int, col, int, rowsdiff, int, colsdiff, int, lines, int, attr)
 {
+#ifndef NEC_98
 	register int col_incr = sas_w_at_no_check(VID_COLS);
 	register int i,source,dest;
 	byte char_height;
@@ -2014,10 +2338,10 @@ void ega_sensible_graph_scroll_down IFN6(int, row,
 	rowsdiff *= char_height;
 	lines *= char_height;
 #ifdef REAL_VGA
-#line 2066
+#line 2487
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
-#line 2070
+#line 2491
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */
 	if(screen_updated)
 		screen_updated = (*update_alg.scroll_down)(dest,colsdiff,rowsdiff,attr,lines,0);
@@ -2046,12 +2370,14 @@ void ega_sensible_graph_scroll_down IFN6(int, row,
 		dest -= col_incr;
 	}
 #endif
-#line 2098
+#endif  //NEC_98
+#line 2520
 }
 
 /* This is called from vga_video.c as well. */
 void search_font IFN2(char *, the_char,int, height)
 {
+#ifndef NEC_98
 	register int i;
 	register host_addr scratch_addr;
 	register sys_addr font_addr;
@@ -2066,13 +2392,16 @@ void search_font IFN2(char *, the_char,int, height)
 		font_addr += height;
 	}
 	if(i<256)
-		setAL(i);
+                setAL((UCHAR)i);
 	else
 		setAL(0); /* Didn't find a character */
+#endif  //NEC_98
+#line 2544
 }
 
 void ega_read_attrib_char IFN3(int, col, int, row, int, page)
 {
+#ifndef NEC_98
 	byte the_char[256], char_height;
 	int screen_off;
 	int i, data;
@@ -2092,25 +2421,28 @@ void ega_read_attrib_char IFN3(int, col, int, row, int, page)
 		screen_off += sas_w_at_no_check(VID_COLS);
 	}
 #else
-#line 2143
+#line 2568
 #error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
-#line 2145
+#line 2570
 	/* Now search the font */
 	search_font((char *)the_char,(int)char_height);
+#endif  //NEC_98
+#line 2573
 }
 void ega_read_dot IFN3(int, page, int, col, int, row)
 {
+#ifndef NEC_98
 	int screen_off;
 	int shift;
 	unsigned int data;
 	byte val;
 	byte mask;
 #ifdef	REAL_VGA
-#line 2156
+#line 2583
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
-#line 2158
+#line 2585
 
 
 	/*
@@ -2146,11 +2478,13 @@ void ega_read_dot IFN3(int, page, int, col, int, row)
 	val |= ((data & mask) >> shift) << 3;
 
 #else
-#line 2193
+#line 2620
 #error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
-#line 2195
+#line 2622
 	setAL(val);
+#endif  //NEC_98
+#line 2624
 }
 
 /*
@@ -2161,6 +2495,11 @@ void ega_read_dot IFN3(int, page, int, col, int, row)
 sys_addr find_mode_table IFN2(int, mode, sys_addr *, save_addr)
 {
 	sys_addr params_addr;
+#if defined(NEC_98)
+#line 2635
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 2637
 /*  get address of the SAVEPTR table, and hence the video params table. */
 	*save_addr = follow_ptr(EGA_SAVEPTR);
 	params_addr = follow_ptr(*save_addr) + mode*EGA_PARMS_SIZE;
@@ -2221,13 +2560,15 @@ sys_addr find_mode_table IFN2(int, mode, sys_addr *, save_addr)
 			params_addr += 19*EGA_PARMS_SIZE;
 	}
 
-#line 2266
+#line 2697
 #if defined(NTVDM) && defined(X86GFX)
-#line 2267
+#line 2698
 #error X86GFX EGA mode table path is not supported
 #endif	/* NTVDM & X86GFX */
-#line 2323
+#line 2754
 
+#endif  //NEC_98
+#line 2756
 	return params_addr;
 }
 
@@ -2245,6 +2586,11 @@ sys_addr find_mode_table IFN2(int, mode, sys_addr *, save_addr)
 int get_scanlines IFN0()
 {
 	int scanlines,res;
+#if defined(NEC_98)
+#line 2774
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 2776
 
 	scanlines = sas_hw_at_no_check(ega_char_height) * sas_hw_at_no_check(vd_rows_on_screen);
 
@@ -2257,6 +2603,8 @@ int get_scanlines IFN0()
 	else 
 		res = RS480;
 
+#endif  //NEC_98
+#line 2789
 	return (res);
 }
 

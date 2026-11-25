@@ -132,6 +132,8 @@ ERROR RECOVERY	  :	describe how procedure reacts to errors
 
 /* [3.1.1 #INCLUDES]                                                    */
 
+IMPORT VOID fill_alternate_bytes IPT3( IS8 *, start, IS8 *, end, IS8, value);
+IMPORT VOID fill_both_bytes IPT3( IU16, data, IU16 *, dest, ULONG, len );
 
 #ifdef EGG
 
@@ -177,11 +179,11 @@ typedef	union {
 	unsigned short	as_word;
 	struct {
 #ifdef	BIGEND
-#line 180
-#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #line 182
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
+#line 184
 #else
-#line 183
+#line 185
 		unsigned char	lo_byte;
 		unsigned char	hi_byte;
 #endif
@@ -208,22 +210,22 @@ typedef	union {
 /*
 [7.1 INTERMODULE DATA DEFINITIONS]				*/
 
-#line 209
+#line 211
 #ifdef A_VID
-#line 210
+#line 212
 #error Excluded unsupported original A_VID writer-table profile
-#line 263
+#line 265
 #else
-#line 264
+#line 266
 #if defined(CPU_40_STYLE)
 WRT_POINTERS mode0_copy_handlers, mode0_gen_handlers;
 #else
-#line 264
+#line 266
 #error Excluded unsupported non-CPU40 writer-table profile
 #endif
-#line 317
+#line 319
 #endif /* A_VID */
-#line 318
+#line 320
 
 /*
 [7.2 INTERMODULE PROCEDURE DEFINITIONS]				*/
@@ -243,6 +245,7 @@ byte rotate IFN2(byte, value, int, nobits)
 	return double_num.as_bytes.lo_byte;
 }
 
+#ifndef NEC_98
 VOID
 ega_copy_b_write IFN2(ULONG, value, ULONG, offset )
 {
@@ -255,7 +258,7 @@ ega_copy_b_write IFN2(ULONG, value, ULONG, offset )
 	offset = (offset & ~1u) << 2;
 	offset |= lsb;
 
-	*(IU8 *)(getVideowplane() + offset) = value;
+	*(IU8 *)(getVideowplane() + offset) = (IU8)value;
 }
 
 VOID
@@ -274,13 +277,13 @@ ega_copy_w_write IFN2(ULONG, value, ULONG, offset )
 
 	if( lsb )
 	{
-		*(planes + 1) = value;
-		*(planes + 8) = value >> 8;
+		*(planes + 1) = (UTINY)value;
+		*(planes + 8) = (UTINY)(value >> 8);
 	}
 	else
 	{
-		*planes = value;
-		*(planes + 1) = value >> 8;
+		*planes = (UTINY)value;
+		*(planes + 1) = (UTINY)(value >> 8);
 	}
 }
 
@@ -315,32 +318,35 @@ ega_copy_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 		inc ^= 2;
 	}
 }
+#endif  //NEC_98
+#line 413
 
 #ifdef  BIGEND
-#line 411
+#line 415
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
-#line 413
+#line 417
 #else
 #define first_half(wd)      ((wd) & 0xff)
 #define sec_half(wd)        (((wd) & 0xff00) >> 8)
-#line 416
+#line 420
 #endif
 
-#line 418
+#ifndef NEC_98
+#line 423
 VOID
 ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 {
     ULONG lsb;
-#line 422
+#line 427
     USHORT *planes;
 
 	note_entrance0("ega_copy_w_fill");
 
 #ifdef BIGEND
-#line 427
+#line 432
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
-#line 429
+#line 434
 
     count >>= 1;
 
@@ -354,9 +360,9 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 
     if( lsb )
     {
-        word swapped = ((value >> 8) & 0xff) | ((value << 8) & 0xff00);
+        word swapped = (word)(((value >> 8) & 0xff) | ((value << 8) & 0xff00));
 
-        *((UTINY *) planes + 1) = first_half(value);
+        *((UTINY *) planes + 1) = (UTINY) first_half(value);
 
         count--;
         planes += 2;
@@ -367,19 +373,19 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
             planes += 2;
         }
 
-        *((UTINY *) planes) = sec_half(value);
+        *((UTINY *) planes) = (UTINY) sec_half(value);
     }
     else
     {
         while( count-- )
         {
-            *planes = value;
+            *planes = (USHORT)value;
             planes += 2;
         }
     }
 }
 
-#line 467
+#line 472
 LOCAL VOID
 ega_copy_move IFN6(UTINY *, dst, UTINY *, eas, ULONG, count, ULONG, src_flag,
 	ULONG, w, IBOOL, forward )
@@ -436,10 +442,10 @@ ega_copy_move IFN6(UTINY *, dst, UTINY *, eas, ULONG, count, ULONG, src_flag,
 		{
 			dst += w;
 #ifdef BACK_M
-#line 523
+#line 528
 #error Excluded original BACK_M graphics storage profile
 #else
-#line 525
+#line 530
 			eas += w;
 #endif
 		}
@@ -449,10 +455,10 @@ ega_copy_move IFN6(UTINY *, dst, UTINY *, eas, ULONG, count, ULONG, src_flag,
 		if(forward)
 		{
 #ifdef BACK_M
-#line 534
+#line 539
 #error Excluded original BACK_M graphics storage profile
 #else
-#line 536
+#line 541
 			easinc = 1;
 #endif
 			dstinc = lsbdst ? 3 : 1;
@@ -460,10 +466,10 @@ ega_copy_move IFN6(UTINY *, dst, UTINY *, eas, ULONG, count, ULONG, src_flag,
 		else
 		{
 #ifdef BACK_M
-#line 543
+#line 548
 #error Excluded original BACK_M graphics storage profile
 #else
-#line 545
+#line 550
 			easinc = -1;
 #endif
 			dstinc = lsbdst ? -1 : -3;
@@ -525,7 +531,7 @@ ega_copy_w_move_bwd IFN4(ULONG,  offset, ULONG, eas, ULONG, count,
 	ega_copy_move( (UTINY *)offset, (UTINY *)eas, count << 1, src_flag, 1, FALSE );
 }
 
-#line 606
+#line 611
 VOID
 ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 {
@@ -556,7 +562,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 			{
 				value = *((UTINY *) &EGA_CPU.sr_value + 1);
 				value = do_logicals( value, get_latch1 ); 
-				EGA_plane01[offset] = value;
+				EGA_plane01[offset] = (byte) value;
 			}
 			else
 			{
@@ -565,9 +571,9 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 				 */
 
 				if( getVideorotate() > 0 )
-					value = rotate( value, getVideorotate() );
+					value = rotate( (byte) value, getVideorotate() );
 
-				EGA_plane01[offset] = do_logicals( value, get_latch1 );
+				EGA_plane01[offset] = (byte) do_logicals( value, get_latch1 );
 			}
 		}
 
@@ -585,7 +591,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 			{
 				value = *((UTINY *) &EGA_CPU.sr_value + 3);
 				value = do_logicals( value, get_latch3 );
-				EGA_plane23[offset] = value;
+				EGA_plane23[offset] = (byte)value;
 			}
 			else
 			{
@@ -594,9 +600,9 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 				 */
 
 				if( getVideorotate() > 0 )
-					value = rotate( value, getVideorotate() );
+					value = rotate( (byte) value, getVideorotate() );
 
-				EGA_plane23[offset] = do_logicals( value, get_latch3 );
+				EGA_plane23[offset] = (byte) do_logicals( value, get_latch3 );
 			}
 		}
 	}
@@ -617,7 +623,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 			{
 				value = *((UTINY *) &EGA_CPU.sr_value);
 				value = do_logicals( value, get_latch0 );
-				EGA_plane01[offset] = value;
+				EGA_plane01[offset] = (byte) value;
 			}
 			else
 			{
@@ -626,9 +632,9 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 				 */
 
 				if( getVideorotate() > 0 )
-					value = rotate( value, getVideorotate() );
+					value = rotate( (byte)value, getVideorotate() );
 
-				EGA_plane01[offset] = do_logicals( value, get_latch0 );
+				EGA_plane01[offset] = (byte) do_logicals( value, get_latch0 );
 			}
 		}
 
@@ -647,7 +653,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 			{
 				value = *((UTINY *) &EGA_CPU.sr_value + 2);
 				value = do_logicals( value, get_latch2 );
-				EGA_plane23[offset] = value;
+				EGA_plane23[offset] = (byte) value;
 			}
 			else
 			{
@@ -656,9 +662,9 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 				 */
 
 				if( getVideorotate() > 0 )
-					value = rotate( value, getVideorotate() );
+					value = rotate( (byte) value, getVideorotate() );
 
-				EGA_plane23[offset] = do_logicals( value, get_latch2 );
+				EGA_plane23[offset] = (byte) do_logicals( value, get_latch2 );
 			}
 		}
 	}
@@ -708,7 +714,7 @@ ega_mode0_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value = rotate( value, getVideorotate() );
+				value = rotate( (byte) value, getVideorotate() );
 			}
 
 			value = do_logicals( value, get_latch0 );
@@ -724,7 +730,7 @@ ega_mode0_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value = rotate( value, getVideorotate() );
+				value = rotate( (byte) value, getVideorotate() );
 			}
 
 			value = do_logicals( value, get_latch1 );
@@ -740,7 +746,7 @@ ega_mode0_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value1 = rotate( value, getVideorotate() );
+				value1 = rotate( (byte) value, getVideorotate() );
 			}
 
 			if (EGA_CPU.sr_enable & 2)
@@ -749,14 +755,14 @@ ega_mode0_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value2 = rotate(value,getVideorotate());
+				value2 = rotate((byte) value,getVideorotate());
 			}
 
 			value = value1 | value2 << 8;
 			value = do_logicals( value, get_latch01 );
 			value = (value << 8) | (value >> 8);
 
-			fill_both_bytes( value, (USHORT *)&EGA_plane01[offset], count >> 1 );
+			fill_both_bytes( (IU16) value, (USHORT *)&EGA_plane01[offset], count >> 1 );
 			break;
 	}	/* end of switch on plane01 enabled */
 
@@ -769,7 +775,7 @@ ega_mode0_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value = rotate( value, getVideorotate() );
+				value = rotate( (byte) value, getVideorotate() );
 			}
 
 			value = do_logicals( value, get_latch2 );
@@ -785,7 +791,7 @@ ega_mode0_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value = rotate( value, getVideorotate() );
+				value = rotate( (byte) value, getVideorotate() );
 			}
 
 			value = do_logicals( value, get_latch3 );
@@ -801,7 +807,7 @@ ega_mode0_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value1 = rotate( value, getVideorotate() );
+				value1 = rotate( (byte) value, getVideorotate() );
 			}
 
 			if (EGA_CPU.sr_enable & 8)
@@ -810,14 +816,14 @@ ega_mode0_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value2 = rotate( value, getVideorotate() );
+				value2 = rotate( (byte) value, getVideorotate() );
 			}
 
 			value = value1 | value2 << 8;
 			value = do_logicals( value, get_latch23 );
 			value = (value << 8) | (value >> 8);
 
-			fill_both_bytes( value, (USHORT *)&EGA_plane01[offset], count >> 1 );
+			fill_both_bytes( (IU16)value, (USHORT *)&EGA_plane01[offset], count >> 1 );
 			break;
 	}
 }
@@ -862,13 +868,13 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value1 = odd ? value >> 8 : value;
+				value1 = (UTINY)(odd ? value >> 8 : value);
 
 				if( getVideorotate() > 0 )
 					value1 = rotate( value1, getVideorotate() );
 			}
 
-			value1 = do_logicals( value1, get_latch0 );
+			value1 = (UTINY) do_logicals( value1, get_latch0 );
 			fill_alternate_bytes((IS8 *)&EGA_plane01[offset],
 					     (IS8 *)&EGA_plane01[high_offset],
 					     (IS8)value1 );
@@ -882,13 +888,13 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value1 = odd ? value : value >> 8;
+				value1 = (UTINY)(odd ? value : value >> 8);
 
 				if( getVideorotate() > 0 )
 					value1 = rotate( value1, getVideorotate() );
 			}
 
-			value1 = do_logicals( value1, get_latch1 );
+			value1 = (UTINY)(do_logicals( value1, get_latch1 ));
 			fill_alternate_bytes((IS8 *)&EGA_plane01[offset + 1],
 					     (IS8 *)&EGA_plane01[high_offset],
 					     (IS8)value1 );
@@ -902,7 +908,7 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value1 = odd ? value >> 8 : value;
+				value1 = (UTINY)(odd ? value >> 8 : value);
 
 				if( getVideorotate() > 0 )
 					value1 = rotate( value1, getVideorotate() );
@@ -914,7 +920,7 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value2 = odd ? value : value >> 8;
+				value2 = (UTINY)(odd ? value : value >> 8);
 
 				if( getVideorotate() > 0 )
 					value2 = rotate( value2, getVideorotate() );
@@ -923,7 +929,7 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			value = value1 | value2 << 8;
 			value = do_logicals( value, get_latch01 );
 
-			fill_both_bytes( value, (USHORT *)&EGA_plane01[offset], count >> 1 );
+			fill_both_bytes( (IU16)value, (USHORT *)&EGA_plane01[offset], count >> 1 );
 
 			break;
 
@@ -938,13 +944,13 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value1 = odd ? value >> 8 : value;
+				value1 = (UTINY)(odd ? value >> 8 : value);
 
 				if( getVideorotate() > 0 )
 					value1 = rotate( value1, getVideorotate() );
 			}
 
-			value1 = do_logicals( value1, get_latch2 );
+			value1 = (UTINY) do_logicals( value1, get_latch2 );
 			fill_alternate_bytes((IS8 *)&EGA_plane23[offset],
 					     (IS8 *)&EGA_plane23[high_offset],
 					     (IS8)value1 );
@@ -958,13 +964,13 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value2 = odd ? value : value >> 8;
+				value2 = (UTINY)(odd ? value : value >> 8);
 
 				if( getVideorotate() > 0 )
 					value2 = rotate( value2, getVideorotate() );
 			}
 
-			value2 = do_logicals( value2, get_latch3 );
+			value2 = (UTINY) do_logicals( value2, get_latch3 );
 			fill_alternate_bytes((IS8 *)&EGA_plane23[offset + 1],
 					     (IS8 *)&EGA_plane23[high_offset],
 					     (IS8)value2 );
@@ -978,7 +984,7 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value1 = odd ? value >> 8 : value;
+				value1 = (UTINY)(odd ? value >> 8 : value);
 
 				if( getVideorotate() > 0 )
 					value1 = rotate( value1, getVideorotate() );
@@ -990,7 +996,7 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			}
 			else
 			{
-				value2 = odd ? value : value >> 8;
+				value2 = (UTINY)(odd ? value : value >> 8);
 
 				if( getVideorotate() > 0 )
 					value2 = rotate( value2, getVideorotate() );
@@ -999,13 +1005,13 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 			value = value1 | value2 << 8;
 			value = do_logicals( value, get_latch23 );
 
-			fill_both_bytes( value, (USHORT *)&EGA_plane01[offset], count >> 1 );
+			fill_both_bytes( (IU16)value, (USHORT *)&EGA_plane01[offset], count >> 1 );
 
 			break;
 	}
 }
 
-#line 1085
+#line 1090
 LOCAL VOID
 ega_mode0_chn_move_ram_src IFN5(UTINY *, eas, LONG, count, UTINY *, ead,
 	UTINY *, EGA_plane, ULONG, plane )
@@ -1021,10 +1027,10 @@ ega_mode0_chn_move_ram_src IFN5(UTINY *, eas, LONG, count, UTINY *, ead,
 	if(( offset & 1 ) != ( plane & 1 ))
 	{
 #ifdef BACK_M
-#line 1100
+#line 1105
 #error Excluded original BACK_M graphics storage profile
 #else
-#line 1102
+#line 1107
 		src_offset++;
 #endif
 		offset++;
@@ -1032,10 +1038,10 @@ ega_mode0_chn_move_ram_src IFN5(UTINY *, eas, LONG, count, UTINY *, ead,
 	}
 
 #ifdef BACK_M
-#line 1109
+#line 1114
 #error Excluded original BACK_M graphics storage profile
 #else
-#line 1111
+#line 1116
 	srcinc = 2;
 #endif
 
@@ -1055,7 +1061,7 @@ ega_mode0_chn_move_ram_src IFN5(UTINY *, eas, LONG, count, UTINY *, ead,
 		{
 			count -= 2;
 
-			EGA_plane[offset] = do_logicals( value, get_latch(plane) );
+			EGA_plane[offset] = (byte) do_logicals( value, get_latch(plane) );
 			offset += 4;
 		}
 	}
@@ -1074,7 +1080,7 @@ ega_mode0_chn_move_ram_src IFN5(UTINY *, eas, LONG, count, UTINY *, ead,
 			if( getVideorotate() > 0 )
 				value = rotate( value, getVideorotate() );
 
-			value = do_logicals( value, get_latch(plane) );
+			value = (UTINY) do_logicals( value, get_latch(plane) );
 			EGA_plane[offset] = value;
 			offset += 4;
 		}
@@ -1098,10 +1104,10 @@ ega_mode0_chn_move_vid_src IFN7(UTINY *, eas, LONG, count, UTINY *, ead,
 	{
 		eas++;
 #ifdef BACK_M
-#line 1173
+#line 1178
 #error Excluded original BACK_M graphics storage profile
 #else
-#line 1175
+#line 1180
 		scratch++;
 #endif
 		offset++;
@@ -1111,10 +1117,10 @@ ega_mode0_chn_move_vid_src IFN7(UTINY *, eas, LONG, count, UTINY *, ead,
 	src_offset = (ULONG) eas;
 
 #ifdef BACK_M
-#line 1184
+#line 1189
 #error Excluded original BACK_M graphics storage profile
 #else
-#line 1186
+#line 1191
 	srcinc = 2;
 #endif
 	inc = 4;
@@ -1142,7 +1148,7 @@ ega_mode0_chn_move_vid_src IFN7(UTINY *, eas, LONG, count, UTINY *, ead,
 			count -= 2;
 			valsrc = *source;
 			source += inc;
-			EGA_plane[offset] = do_logicals( value, valsrc );
+			EGA_plane[offset] = (byte) do_logicals( value, valsrc );
 			offset += inc;
 		}
 	}
@@ -1165,12 +1171,14 @@ ega_mode0_chn_move_vid_src IFN7(UTINY *, eas, LONG, count, UTINY *, ead,
 			if( getVideorotate() > 0 )
 				value = rotate( value, getVideorotate() );
 
-			value = do_logicals( value, valsrc );
+			value = (UTINY) do_logicals( value, valsrc );
 			EGA_plane[offset] = value;
 			offset += inc;
 		}
 	}
 }
+
+#pragma warning(disable:4146)       // unary minus operator applied to unsigned type
 
 VOID
 ega_mode0_chn_move IFN6(UTINY, w, UTINY *, ead, UTINY *, eas, ULONG, count,
@@ -1190,10 +1198,10 @@ ega_mode0_chn_move IFN6(UTINY, w, UTINY *, ead, UTINY *, eas, ULONG, count,
 		 */
 
 #ifdef BACK_M
-#line 1261
+#line 1268
 #error Excluded original BACK_M graphics storage profile
 #else
-#line 1263
+#line 1270
 		scratch = getVideoscratch();
 #endif
 
@@ -1222,10 +1230,10 @@ ega_mode0_chn_move IFN6(UTINY, w, UTINY *, ead, UTINY *, eas, ULONG, count,
 		if( !forwards )
 		{
 #ifdef BACK_M
-#line 1291
+#line 1298
 #error Excluded original BACK_M graphics storage profile
 #else
-#line 1293
+#line 1300
 			eas += - count + 1 + w;
 #endif
 			ead += - count + 1 + w;
@@ -1288,7 +1296,7 @@ ega_mode0_chn_w_move_bwd IFN4(ULONG, ead, ULONG, eas, ULONG, count,
 	ega_mode0_chn_move(1,(UTINY *)ead, (UTINY *)eas, count << 1, src_flag, FALSE );
 }
 
-#line 1355
+#line 1362
 VOID
 ega_mode0_chn_w_write IFN2(ULONG, value, ULONG, offset )
 {
@@ -1298,8 +1306,9 @@ ega_mode0_chn_w_write IFN2(ULONG, value, ULONG, offset )
    ega_mode0_chn_b_write( value >> 8, offset + 1 );
 }
 
-#line 1364
+#endif  //NEC_98
+#line 1372
 #endif
 
-#line 1366
+#line 1374
 #endif	/* !(NTVDM && MONITOR) */

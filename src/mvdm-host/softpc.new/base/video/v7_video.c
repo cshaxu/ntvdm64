@@ -44,14 +44,12 @@
 #include CpuH
 #include "sas.h"
 
-
-#line 48
 #ifdef SEGMENTATION
-#line 49
+#line 48
 #error Excluded unsupported SEGMENTATION configuration
-#line 55
+#line 54
 #endif
-#line 56
+#line 55
 
 
 IMPORT	struct	sequencer sequencer;
@@ -105,6 +103,7 @@ Output:
 GLOBAL VOID
 v7vga_func_6f()
 {
+#ifndef NEC_98
 	byte al;
 
 	note_entrance0("v7vga_func_6f");
@@ -114,6 +113,8 @@ v7vga_func_6f()
 	else
 		setAH(2);
 		/* setCF(1) ?? */
+#endif  //NEC_98
+#line 119
 }
 
 /*(
@@ -137,10 +138,13 @@ Output:
 GLOBAL VOID
 v7vga_inquire()
 {
+#ifndef NEC_98
 	note_entrance0("v7vga_inquire");
 
 	setAX(0x6f6f);
 	setBX(0x5637);
+#endif  //NEC_98
+#line 148
 }
 
 /*(
@@ -165,12 +169,15 @@ Output:
 GLOBAL VOID
 v7vga_get_info()
 {
+#ifndef NEC_98
 	note_entrance0("v7vga_get_info");
 
 	/* Reserved */
 	setAL(0x10); /* This is what our V7VGA puts there */
 	/* Status register information */
 	setAH(0x04); /* Bit 5 = 0 -> colour. Bit 4 = 0 -> hi-res. Bit 0 = 0 -> display enabled. */
+#endif  //NEC_98
+#line 180
 }
 
 /*(
@@ -220,6 +227,7 @@ Output:
 GLOBAL VOID
 v7vga_get_mode_and_screen_res()
 {
+#ifndef NEC_98
 	half_word video_mode;
 
 	note_entrance0("v7vga_get_mode_and_screen_res");
@@ -245,6 +253,8 @@ v7vga_get_mode_and_screen_res()
 		else
 			setCX(get_screen_height()/get_pc_pix_height());
 	}
+#endif  //NEC_98
+#line 256
 }
 
 /*(
@@ -268,6 +278,7 @@ Output:
 GLOBAL VOID
 v7vga_extended_set_mode()
 {
+#ifndef NEC_98
 	UTINY pag;
 	sys_addr save_addr,font_addr;
 	half_word temp_word;
@@ -276,20 +287,20 @@ v7vga_extended_set_mode()
 	ULONG font_offset;
 	word clr_char;
 #ifndef PROD
-#line 280
+#line 288
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 282
+#line 290
 	set_host_pix_height(1);
 	set_banking( 0, 0 );
 
 	if (is_bad_vid_mode(getBL()) && !is_v7vga_mode((getBL() & 0x7F)))
-#line 286
+#line 294
 		return;
 
 	video_mode = getBL() & 0x7F; /* get rid of top bit - indicates clear or not */
 
-#line 290
+#line 298
 	/*
 	 * The method of storing an extended video mode according to a real BIOS is
 	 * if it is an text mode then put 1 in the BIOS mode variable and store
@@ -297,7 +308,7 @@ v7vga_extended_set_mode()
 	 * If it is a graphics mode then store (mode - 4C) in the mode variable.
 	 */
 
-#line 297
+#line 305
 	if (video_mode < 0x40)
 	{
 		sas_store_no_check(vd_video_mode, video_mode);
@@ -448,26 +459,27 @@ v7vga_extended_set_mode()
 		else
 			clr_char = vd_mode_table[video_mode].clear_char;
 #ifdef REAL_VGA
-#line 447
+#line 455
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
-#line 449
+#line 457
 #else
-#line 450
+#line 458
     	sas_fillsw(video_pc_low_regen, clr_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
 #endif
-#line 453
+#line 461
     }
     inb(EGA_IPSTAT1_REG,&temp_word);
     outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);	/* re-enable video */
-#line 457
+#line 465
     mouse_video_mode_changed(video_mode);
-#line 456
+#line 464
 #ifndef PROD
-#line 457
+#line 465
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 459
+#endif  //NEC_98
+#line 468
 }
 
 /*(
@@ -492,12 +504,15 @@ Output:
 GLOBAL VOID
 v7vga_select_autoswitch_mode()
 {
+#ifndef NEC_98
 	note_entrance0("v7vga_select_autoswitch_mode");
 
 /***
 	I reckon we shouldn't support this
 ***/
 	setAH(0x2);
+#endif  //NEC_98
+#line 500
 }
 
 /*(
@@ -525,11 +540,14 @@ Output:
 GLOBAL VOID
 v7vga_get_memory_configuration()
 {
+#ifndef NEC_98
 	note_entrance0("v7vga_get_memory_configuration");
 
 	setAX(0x826f);
 	setBX(0x7070);
 	setCX(0x0);
+#endif  //NEC_98
+#line 534
 }
 
 #endif /* V7VGA */

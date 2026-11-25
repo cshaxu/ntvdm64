@@ -390,12 +390,13 @@ LOCAL void	ega_feat_outb IPT2(io_addr, port, half_word, value);
 LOCAL void	ega_ipstat0_inb IPT2(io_addr, port, half_word *, value);
 LOCAL void	ega_ipstat1_inb IPT2(io_addr, port, half_word *, value);
 
+
 /* [5.1.1 #DEFINES]							*/
 #ifdef SEGMENTATION
-#line 391
+#line 392
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 398
+#line 399
 
 GLOBAL VOID ega_gc_outw IPT2(io_addr, port, word, outval);
 
@@ -407,10 +408,10 @@ GLOBAL VOID ega_gc_outw IPT2(io_addr, port, word, outval);
 
 /* [5.1.2 TYPEDEF, STRUCTURE, ENUM DECLARATIONS]			*/
 #ifdef BIT_ORDER1
-#line 409
+#line 410
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
-#line 721
+#line 722
 #ifdef BIT_ORDER2
 typedef	union
 {
@@ -750,10 +751,10 @@ static	INPUT_STAT_REG1	input_status_register_one;
 
 /* The Sequencer Registers */
 #ifdef BIT_ORDER1
-#line 1060
+#line 1061
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
-#line 1280
+#line 1281
 
 #ifdef BIT_ORDER2
 static struct
@@ -1114,6 +1115,7 @@ RETURN PARAMS   :	None
 
 LOCAL void	do_new_cursor IFN0()
 {
+#ifndef NEC_98
 
 	note_entrance0("do_new_cursor()");
 
@@ -1129,7 +1131,7 @@ LOCAL void	do_new_cursor IFN0()
 					crt_controller.cursor_end.as_bfld.cursor_end);
     } else {
 #endif
-	if (crt_controller.cursor_start.as_bfld.cursor_start >= get_char_height() ) {
+	if (crt_controller.cursor_start.as_bfld.cursor_start >= (unsigned)get_char_height() ) {
 		note_entrance0("No cursor");
 		set_cursor_visible(FALSE);
 		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start | 0x20,
@@ -1165,7 +1167,7 @@ LOCAL void	do_new_cursor IFN0()
 		host_cursor_size_changed(crt_controller.cursor_start.as_bfld.cursor_start,
 					crt_controller.cursor_end.as_bfld.cursor_end);
 	}
-	else if (crt_controller.cursor_end.as_bfld.cursor_end - 1 >= get_char_height()) {
+	else if (crt_controller.cursor_end.as_bfld.cursor_end - 1 >= (unsigned)get_char_height()) {
 		note_entrance0("block cursor");
 		set_cursor_start(0);
 		set_cursor_height(get_char_height());
@@ -1200,6 +1202,8 @@ LOCAL void	do_new_cursor IFN0()
 	}
 
 	base_cursor_shape_changed();
+#endif   //NEC_98
+#line 1729
 }
 
 /*
@@ -1221,6 +1225,7 @@ RETURN PARAMS   :	None
 
 LOCAL void	do_chain_majority_decision IFN0()
 {
+#ifndef NEC_98
 	static	int	current_votes=0;
 	int		new_votes;
 
@@ -1257,6 +1262,8 @@ LOCAL void	do_chain_majority_decision IFN0()
 		}
 
 	current_votes = new_votes;
+#endif   //NEC_98
+#line 1788
 }
 
 
@@ -1271,7 +1278,14 @@ LOCAL void	do_chain_majority_decision IFN0()
  */
 
 struct	EGA_GLOBALS	EGA_GRAPH;
+#if defined(NEC_98)
+#line 1803
+#error Unsupported NEC PC-98 configuration
+#else    //NEC_98
+#line 1805
 struct	EGA_CPU_GLOBALS	EGA_CPU;
+#endif   //NEC_98
+#line 1807
 
 byte 	*EGA_planes;
 
@@ -1286,12 +1300,13 @@ GLOBAL UTINY *ega_gc_outb_index_addr;
 GLOBAL void
 set_banking IFN2(UTINY, rd_bank, UTINY, wrt_bank)
 {
+#ifndef NEC_98
 	ULONG roffs, woffs;
 #ifdef PIG
-#line 1814
+#line 1824
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
-#line 1816
+#line 1826
 
 #ifdef V7VGA
 	if( get_seq_chain4_mode() && get_chain4_mode() )
@@ -1305,16 +1320,16 @@ set_banking IFN2(UTINY, rd_bank, UTINY, wrt_bank)
 		woffs = (ULONG)wrt_bank << 18;
 	}
 #else
-#line 1829
+#line 1839
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif
-#line 1834
+#line 1844
 
 #ifdef PIG
-#line 1836
+#line 1846
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
-#line 1838
+#line 1848
 	setVideorplane(EGA_planes + roffs);
 	setVideowplane(EGA_planes + woffs);
 
@@ -1326,31 +1341,42 @@ set_banking IFN2(UTINY, rd_bank, UTINY, wrt_bank)
 		setVideov7_bank_vid_copy_off(woffs >> 4);
 
 #ifdef GORE
-#line 1849
+#line 1859
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
-#line 1851
+#endif   //NEC_98
+#line 1862
 }
 
 GLOBAL void
 update_banking IFN0()
 {
+#ifndef NEC_98
 	UTINY rd_bank, wrt_bank;
 
 #ifdef V7VGA
 	v7_get_banks( &rd_bank, &wrt_bank );
 #else
-#line 1861
+#line 1873
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif
-#line 1863
+#line 1875
 
 	set_banking( rd_bank, wrt_bank );
+#endif  //NEC_98
+#line 1878
 }
+
+#if defined(NEC_98)
+#line 1881
+#error Unsupported NEC PC-98 configuration
+#endif  //NEC_98
+#line 1899
 
 VOID
 init_vga_globals IFN0()
 {
+#ifndef NEC_98
 	setVideov7_bank_vid_copy_off(0);
 	setVideosr_lookup(sr_lookup);
 	setVideovideo_copy(&video_copy[0]);
@@ -1359,21 +1385,24 @@ init_vga_globals IFN0()
 	setVideorotate(0);
 #if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))
 #ifndef CPU_40_STYLE	/* EVID */
-#line 1878
+#line 1912
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
-#line 1882
+#line 1916
 	SetMarkPointers(0);
 #endif	/* CPU_40_STYLE - EVID */
-#line 1884
+#line 1918
 #endif
 
 
 	update_banking();
+#endif  //NEC_98
+#line 1923
 }
 
 void	ega_init IFN0()
 {
+#ifndef NEC_98
 	note_entrance0("ega_init");
 	/*
 	 * Define sequencer's ports
@@ -1403,10 +1432,10 @@ void	ega_init IFN0()
 	io_define_out_routines(EGA_GC_ADAP_INDEX, ega_gc_outb_index, ega_gc_outw, NULL, NULL);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-#line 1921
+#line 1957
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
-#line 1923
+#line 1959
 
 	io_define_outb(EGA_GC_ADAP_DATA,ega_gc_set_reset);
 	Cpu_define_outb(EGA_GC_ADAP_DATA,NULL);
@@ -1532,10 +1561,13 @@ void	ega_init IFN0()
 	/* prevent copyright message mysteriously disappearing */
 	timer_video_enabled = TRUE;
 
+#endif  //NEC_98
+#line 2085
 }
 
 void	ega_term IFN0()
 {
+#ifndef NEC_98
 
 int	index;
 
@@ -1604,10 +1636,13 @@ int	index;
 	/* Disable CPU read processing */
 	ega_read_term();
 	ega_write_term();
+#endif  //NEC_98
+#line 2159
 }
 
 LOCAL void	ega_seq_outb_index IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 #ifdef PROD
 	UNUSED(port);
 #endif
@@ -1615,10 +1650,13 @@ LOCAL void	ega_seq_outb_index IFN2(io_addr, port, half_word, value)
 	assert1(value<5,"Bad seq index %d",value);
 	NON_PROD(sequencer.address.as.abyte = value);
 	io_redefine_outb(EGA_SEQ_ADAP_DATA,ega_seq_regs[value & 7]);
+#endif  //NEC_98
+#line 2172
 }
 
 void	ega_seq_reset IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 #ifdef PROD
 	UNUSED(port);
 #endif
@@ -1634,11 +1672,14 @@ void	ega_seq_reset IFN2(io_addr, port, half_word, value)
 		 set_bit_display_disabled(SYNC_RESET);
 	else
 		 clear_bit_display_disabled(SYNC_RESET);
+#endif  //NEC_98
+#line 2193
 }
 
 void	ega_seq_clock IFN2(io_addr, port, half_word, value)
 {
-register int dot_clock;
+#ifndef NEC_98
+register unsigned dot_clock;
 
 #ifdef PROD
 	UNUSED(port);
@@ -1662,10 +1703,13 @@ register int dot_clock;
 		}
 		flag_mode_change_required();
 	}
+#endif  //NEC_98
+#line 2223
 }
 
 void	ega_seq_map_mask IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 #ifdef PROD
 	UNUSED(port);
 #endif
@@ -1681,14 +1725,17 @@ void	ega_seq_map_mask IFN2(io_addr, port, half_word, value)
 	setVideoplane_enable(value & 0xf);
 	setVideoplane_enable_mask(sr_lookup[value & 0xf]);
 	write_state.pe = ((value & 0xf) == 0xf) ? 1 : 0;
-	setVideowrstate(EGA_CPU.ega_state.mode_0.lookup);
+	setVideowrstate((IU8)EGA_CPU.ega_state.mode_0.lookup);
 
 	ega_write_routines_update(PLANES_ENABLED);
+#endif  //NEC_98
+#line 2247
 }
 
 void	ega_seq_char_map IFN2(io_addr, port, half_word, value)
 {
-register int map_selects;
+#ifndef NEC_98
+register unsigned map_selects;
 
 #ifdef PROD
 	UNUSED(port);
@@ -1714,10 +1761,13 @@ register int map_selects;
 		host_select_fonts(get_prim_font_index(), get_sec_font_index());
 		flag_mode_change_required();
 	}
+#endif  //NEC_98
+#line 2279
 }
 
 void	ega_seq_mem_mode IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 #ifdef PROD
 	UNUSED(port);
 #endif
@@ -1739,10 +1789,13 @@ void	ega_seq_mem_mode IFN2(io_addr, port, half_word, value)
 	do_chain_majority_decision();
 
 	assert1(sequencer.memory_mode.as_bfld.extended_memory == 1,"Someone is trying to set extended memory to 0 (reg=%x)",value);
+#endif  //NEC_98
+#line 2306
 }
 
 LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 	SHORT offset;
 	struct {	/* avoid alignment problems with casts */
 		unsigned value : 8;
@@ -1808,10 +1861,10 @@ LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 						set_screen_height_med_recal(
 							((CRTC_OVERFLOW*)&new)->as_bfld.vertical_display_enab_end_bit_8 );
 #else
-#line 2324
+#line 2376
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif
-#line 2327
+#line 2379
 						flag_mode_change_required();
 					}
 					if (crt_controller.crtc_overflow.as_bfld.line_compare_bit_8 != 
@@ -1913,7 +1966,7 @@ LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 						crt_controller.cursor_location_high = value;
 
 						offset = (value<<8) | crt_controller.cursor_location_low;
-						offset -= get_screen_start();
+						offset -= (short)get_screen_start();
 
 						set_cur_x(offset % crt_controller.horizontal_display_end);
 						set_cur_y(offset / crt_controller.horizontal_display_end);
@@ -1931,7 +1984,7 @@ LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 						crt_controller.cursor_location_low = value;
 
 						offset = value | (crt_controller.cursor_location_high<<8);
-						offset -= get_screen_start();
+						offset -= (short)get_screen_start();
 
 						set_cur_x(offset % crt_controller.horizontal_display_end);
 						set_cur_y(offset / crt_controller.horizontal_display_end);
@@ -2045,21 +2098,24 @@ LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 			assert1(NO,"Bad port passed %x", port );
 			break;
 	}
+#endif  //NEC_98
+#line 2613
 }
 
 LOCAL void	ega_crtc_inb IFN2(io_addr, port, half_word *, value)
 {
+#ifndef NEC_98
 #ifdef PROD
 	UNUSED(port);
 #endif
 	note_entrance3("ega_crtc_inb(%x,%x) index %d", port, value, crt_controller.address.as_bfld.index);
 	switch(crt_controller.address.as_bfld.index) {
 		case	10:
-			*value = crt_controller.cursor_start.as.abyte ;
+			*value = (half_word)crt_controller.cursor_start.as.abyte ;
 			note_entrance1("cursor start %d",*value);
 			break;
 		case	11:
-			*value = crt_controller.cursor_end.as.abyte ;
+			*value = (half_word)crt_controller.cursor_end.as.abyte ;
 			note_entrance1("cursor end %d",*value);
 			break;
 		case	12:
@@ -2091,11 +2147,14 @@ LOCAL void	ega_crtc_inb IFN2(io_addr, port, half_word *, value)
 			*value = IO_EMPTY_PORT_BYTE_VALUE;
 			break;
 	}
+#endif  //NEC_98
+#line 2661
 }
 
 
 void	ega_gc_outb_index IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 #ifdef PROD
 	UNUSED(port);
 #endif
@@ -2105,6 +2164,8 @@ void	ega_gc_outb_index IFN2(io_addr, port, half_word, value)
 
 	io_redefine_outb(EGA_GC_ADAP_DATA,ega_gc_regs[value & 15]);
 	Cpu_define_outb(EGA_GC_ADAP_DATA,ega_gc_regs_cpu[value & 15]);
+#endif  //NEC_98
+#line 2677
 }
 
 
@@ -2118,6 +2179,7 @@ void	ega_gc_outb_index IFN2(io_addr, port, half_word, value)
 )*/
 GLOBAL VOID ega_gc_outw IFN2(io_addr, port, word, outval)
 {
+#ifndef NEC_98
 	reg     temp;
 	INT		value;
 
@@ -2133,7 +2195,9 @@ GLOBAL VOID ega_gc_outw IFN2(io_addr, port, word, outval)
 	io_redefine_outb(EGA_GC_ADAP_DATA,ega_gc_regs[value]);
 	Cpu_define_outb(EGA_GC_ADAP_DATA,ega_gc_regs_cpu[value]);
 
-	(*(ega_gc_regs[value]))(port+1, temp.byte.high);
+	(*(ega_gc_regs[value]))((IU16)(port+1), temp.byte.high);
+#endif  //NEC_98
+#line 2708
 }
 
 
@@ -2142,7 +2206,8 @@ GLOBAL VOID ega_gc_outw IFN2(io_addr, port, word, outval)
 
 void	ega_gc_set_reset IFN2(io_addr, port, half_word, value)
 {
-register int set_reset;
+#ifndef NEC_98
+register unsigned set_reset;
 
 #ifdef PROD
 	UNUSED(port);
@@ -2157,11 +2222,14 @@ register int set_reset;
 		EGA_CPU.set_reset = graphics_controller.set_or_reset.as_bfld.set_or_reset;
 		ega_write_routines_update(SET_RESET);
 	}
+#endif  //NEC_98
+#line 2733
 }
 
 void	ega_gc_enable_set IFN2(io_addr, port, half_word, value)
 {
-register int en_set_reset;
+#ifndef NEC_98
+register unsigned en_set_reset;
 
 #ifdef PROD
 	UNUSED(port);
@@ -2175,14 +2243,17 @@ register int en_set_reset;
 	{
 		EGA_CPU.sr_enable = graphics_controller.enable_set_or_reset.as_bfld.enable_set_or_reset;
 		write_state.sr = graphics_controller.enable_set_or_reset.as_bfld.enable_set_or_reset==0?0:1;
-		setVideowrstate(EGA_CPU.ega_state.mode_0.lookup);
+		setVideowrstate((IU8)EGA_CPU.ega_state.mode_0.lookup);
 		ega_write_routines_update(ENABLE_SET_RESET);
 	}
+#endif  //NEC_98
+#line 2756
 }
 
 void	ega_gc_compare IFN2(io_addr, port, half_word, value)
 {
-register int colour_compare;
+#ifndef NEC_98
+register unsigned colour_compare;
 
 #ifdef PROD
 	UNUSED(port);
@@ -2192,13 +2263,16 @@ register int colour_compare;
 	graphics_controller.color_compare.as.abyte = value;
 	if (graphics_controller.color_compare.as_bfld.color_compare != colour_compare)
 	{
-		read_state.colour_compare = graphics_controller.color_compare.as_bfld.color_compare;
+		read_state.colour_compare = (unsigned char)graphics_controller.color_compare.as_bfld.color_compare;
 		if (read_state.mode == 1) ega_read_routines_update();
 	}
+#endif  //NEC_98
+#line 2775
 }
 
 void	ega_gc_rotate IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 	struct {
 		unsigned value : 8;
 	} new;
@@ -2218,15 +2292,18 @@ void	ega_gc_rotate IFN2(io_addr, port, half_word, value)
 	if (graphics_controller.data_rotate.as_bfld.function_select != ((DATA_ROTATE*)&new)->as_bfld.function_select)
 	{
 		write_state.func = ((DATA_ROTATE*)&new)->as_bfld.function_select;
-		setVideowrstate(EGA_CPU.ega_state.mode_0.lookup);
+		setVideowrstate((IU8)EGA_CPU.ega_state.mode_0.lookup);
 		ega_write_routines_update(FUNCTION);
 	}
 	EGA_CPU.fun_or_protection = (value != 0) || write_state.bp;
 	graphics_controller.data_rotate.as.abyte = value;
+#endif  //NEC_98
+#line 2805
 }
 
 void	ega_gc_read_map IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 #ifdef PROD
 	UNUSED(port);
 #endif
@@ -2235,10 +2312,13 @@ void	ega_gc_read_map IFN2(io_addr, port, half_word, value)
 	setVideoread_mapped_plane(value & 3);
 
 	update_shift_count();
+#endif  //NEC_98
+#line 2819
 }
 
 void	ega_gc_mode IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 MODE new_mode;
 
 #ifdef PROD
@@ -2252,7 +2332,7 @@ MODE new_mode;
 		 * write mode change
 		 */
 
-		EGA_CPU.write_mode = new_mode.as_bfld.write_mode;
+		EGA_CPU.write_mode = (unsigned char)new_mode.as_bfld.write_mode;
 		setVideowrmode(EGA_CPU.write_mode);
 		ega_write_routines_update(WRITE_MODE);
 	}
@@ -2285,11 +2365,14 @@ MODE new_mode;
 	do_chain_majority_decision();
 
 	assert0(graphics_controller.mode.as_bfld.test_condition == 0,"Test conditon set");
+#endif  //NEC_98
+#line 2871
 }
 
 void	ega_gc_misc IFN2(io_addr, port, half_word, value)
 {
-register int memory_map;
+#ifndef NEC_98
+register unsigned memory_map;
 
 #ifdef PROD
 	UNUSED(port);
@@ -2347,11 +2430,14 @@ register int memory_map;
 	 */
 
 	do_chain_majority_decision();
+#endif  //NEC_98
+#line 2935
 }
 
 void	ega_gc_dont_care IFN2(io_addr, port, half_word, value)
 {
-register int colour_dont_care;
+#ifndef NEC_98
+register unsigned colour_dont_care;
 
 #ifdef PROD
 	UNUSED(port);
@@ -2361,9 +2447,11 @@ register int colour_dont_care;
 	graphics_controller.color_dont_care.as.abyte = value;
 	if (graphics_controller.color_dont_care.as_bfld.color_dont_care != colour_dont_care)
 	{
-		read_state.colour_dont_care = graphics_controller.color_dont_care.as_bfld.color_dont_care;
+		read_state.colour_dont_care = (unsigned char)graphics_controller.color_dont_care.as_bfld.color_dont_care;
 		if (read_state.mode == 1) ega_read_routines_update();
 	}
+#endif  //NEC_98
+#line 2954
 }
 
 /*
@@ -2392,11 +2480,12 @@ register int colour_dont_care;
 **
 )*/
 #include	"cpu_vid.h"
-IMPORT VOID Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler);
+IMPORT void Glue_set_vid_wrt_ptrs (WRT_POINTERS * handler );
 
-#line 2908
+#line 2985
 GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 {
+#ifndef NEC_98
 	ULONG				state;
 	SAVED IU8			masks[] = {0x1f, 0x01, 0x0f, 0x0f};
 	IMPORT WRT_POINTERS	*mode_chain_handler_table[];
@@ -2405,7 +2494,7 @@ GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 #endif
 
 	write_state.bp = gotBitProtection;
-	setVideowrstate(EGA_CPU.ega_state.mode_0.lookup);
+	setVideowrstate((IU8)EGA_CPU.ega_state.mode_0.lookup);
 	EGA_CPU.fun_or_protection = (gotBitProtection || (graphics_controller.data_rotate.as.abyte != 0));
 
 	/* Check that we're not trying to handle any pathological cases here...
@@ -2428,18 +2517,20 @@ GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 	state = EGA_CPU.ega_state.mode_0.lookup & masks[EGA_CPU.write_mode];
 
 #ifdef A3CPU
-#line 2941
+#line 3019
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #else
-#line 2413
+#line 3025
 #if !(defined(NTVDM) && defined(MONITOR))
-#line 2948
+#line 3026
 	Glue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);
 #endif /* !(NTVDM && MONITOR) */
 #endif /* A3CPU */
-#line 2951
+#line 3029
 
 	EGA_CPU.saved_state = state;
+#endif  //NEC_98
+#line 3032
 }
 
 
@@ -2450,12 +2541,13 @@ GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 
 LOCAL void	ega_gc_mask IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 	register unsigned int mask;
 
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 2968
+#line 3048
 	note_entrance2("ega_gc_mask(%x,%x)", port, value);
 
 	/*
@@ -2469,43 +2561,46 @@ LOCAL void	ega_gc_mask IFN2(io_addr, port, half_word, value)
 	setVideolatch_xor_mask(EGA_CPU.calc_latch_xor & mask);
 	if( value == 0xff )
 	{
-#line 2981
+#line 3061
 #ifndef	USE_OLD_MASK_CODE
 		ega_mask_register_changed(/*bit protection :=*/0);
 #else
-#line 2984
+#line 3064
 #error Unsupported excluded old EGA mask configuration
 #endif	/* USE_OLD_MASK_CODE */
-#line 2989
+#line 3069
 
 		/* Alter the function table used by ega_gc_index */
 		ega_gc_regs[8] = ega_gc_mask_ff;
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-#line 2994
+#line 3074
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
-#line 2999
+#line 3079
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,ega_gc_mask_ff);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-#line 3003
+#line 3083
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
-#line 3005
+#line 3085
 	}
+#endif  //NEC_98
+#line 3087
 }
 
 /* This version isn't called so often */
 void	ega_gc_mask_ff IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 	register unsigned int mask;
 
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 3016
+#line 3098
 	note_entrance2("ega_gc_mask(%x,%x)", port, value);
 
 	/*
@@ -2519,47 +2614,53 @@ void	ega_gc_mask_ff IFN2(io_addr, port, half_word, value)
 		setVideobit_prot_mask(mask);
 		setVideodata_xor_mask(~(EGA_CPU.calc_data_xor & mask));
 		setVideolatch_xor_mask(EGA_CPU.calc_latch_xor & mask);
-#line 3029
+#line 3111
 #ifndef	USE_OLD_MASK_CODE
 		ega_mask_register_changed(/*bit protection :=*/1);
 #else
-#line 3032
+#line 3114
 #error Unsupported excluded old EGA mask configuration
 #endif	/* USE_OLD_MASK_CODE*/
-#line 3037
+#line 3119
 
 		/* Alter the function table used by ega_gc_index */
 		ega_gc_regs[8] = ega_gc_mask;
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-#line 3042
+#line 3124
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
-#line 3047
+#line 3129
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,ega_gc_mask);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-#line 3051
+#line 3133
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
-#line 3053
+#line 3135
 	}
+#endif  //NEC_98
+#line 3137
 }
 
 LOCAL void	ega_index_invalid IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 #ifdef PROD
 	UNUSED(port);
 	UNUSED(value);
 #endif
-#line 3062
+#line 3146
 	note_entrance2("ega_index_invalid(%x,%x)", port, value);
 	assert1(NO,"Invalid index %d",graphics_controller.address.as_bfld.index);
+#endif  //NEC_98
+#line 3149
 }
 
 LOCAL void	ega_ac_outb IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 	struct {
 		unsigned value : 8;
 	} new;
@@ -2567,7 +2668,7 @@ LOCAL void	ega_ac_outb IFN2(io_addr, port, half_word, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 3075
+#line 3161
 	note_entrance2("ega_ac_outb(%x,%x)", port, value);
 	assert1( port == EGA_AC_INDEX_DATA || port == EGA_AC_SECRET, "Bad port %x", port);
 	new.value = value;
@@ -2674,16 +2775,19 @@ LOCAL void	ega_ac_outb IFN2(io_addr, port, half_word, value)
 			break;
 		}
 	}
+#endif  //NEC_98
+#line 3268
 }
 
 LOCAL void	ega_misc_outb IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 MISC_OUTPUT_REG new;
 
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 3190
+#line 3278
 	note_entrance2("ega_misc_outb(%x,%x)", port, value);
 	assert1(port==EGA_MISC_REG,"Bad port %x",port);
 	new.as.abyte = value;
@@ -2724,25 +2828,31 @@ MISC_OUTPUT_REG new;
 	 * register value used by ipsr0 to find out the index into the switches
 	 * so that correct switch setting can be returned.
 	 */
+#endif  //NEC_98
+#line 3319
 }
 
 LOCAL void	ega_feat_outb IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
 #ifdef PROD
 	UNUSED(port);
 	UNUSED(value);
 #endif
-#line 3238
+#line 3328
 	note_entrance2("ega_feat_outb(%x,%x)", port, value);
 	NON_PROD(feature_control_register.as.abyte = value);
+#endif  //NEC_98
+#line 3331
 }
 
 LOCAL void	ega_ipstat0_inb IFN2(io_addr, port, half_word *, value)
 {
+#ifndef NEC_98
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 3247
+#line 3339
 	note_entrance1("ega_ipstat0_inb(%x)", port);
 	input_status_register_zero.as_bfld.switch_sense = 
 	
@@ -2751,12 +2861,15 @@ LOCAL void	ega_ipstat0_inb IFN2(io_addr, port, half_word *, value)
 	** but the function expects no argument so it was removed.
 	*/
 	get_ega_switch_setting();
-	*value = input_status_register_zero.as.abyte;
+	*value = (half_word)input_status_register_zero.as.abyte;
 	note_entrance1("returning %x",*value);
+#endif  //NEC_98
+#line 3350
 }
 
 LOCAL void	ega_ipstat1_inb IFN2(io_addr, port, half_word *, value)
 {
+#ifndef NEC_98
 
 	/*
 	 * The whole of this routine has been nicked from the cga without modification
@@ -2819,7 +2932,7 @@ LOCAL void	ega_ipstat1_inb IFN2(io_addr, port, half_word *, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
-#line 3323
+#line 3417
 	note_entrance1("ega_ipstat1_inb(%x)", port);
     note_entrance2("ega_ipstat1_inb(%x,%x)", port, value);
 
@@ -2887,10 +3000,13 @@ LOCAL void	ega_ipstat1_inb IFN2(io_addr, port, half_word *, value)
 	break;
     }
     note_entrance1("returning %x",*value);
+#endif  //NEC_98
+#line 3485
 }
 
 LOCAL	void	vote_ega_mode IFN0()
 {
+#ifndef NEC_98
 	static	int	old_votes = 3;
 	int	votes;
 
@@ -2911,14 +3027,16 @@ LOCAL	void	vote_ega_mode IFN0()
 		flag_mode_change_required();
 	}
 	old_votes = votes;
+#endif  //NEC_98
+#line 3511
 }
 
 #ifdef HUNTER
-#line 3417
+#line 3514
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 3458
+#line 3557
 #endif /* EGG */
-#line 2880
+#line 3558
 #endif /* REAL_VGA */
-#line 2881
+#line 2956

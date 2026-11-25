@@ -335,6 +335,7 @@ rdm0_byte_ch2 IFN1(ULONG, offset )
 {
 	IU32 lsb;
 	UTINY temp;
+#ifndef NEC_98
 
 	lsb = offset & 0x1;
 	offset = ( offset >> 1 ) << 2;
@@ -347,7 +348,8 @@ rdm0_byte_ch2 IFN1(ULONG, offset )
 #ifdef C_VID
 	EasVal = temp;
 #endif
-#line 441
+#endif  //NEC_98
+#line 443
 	return( temp );
 }
 
@@ -357,6 +359,7 @@ GLOBAL IU32
 rdm0_word_ch2 IFN1(ULONG, offset )
 {
 	IU32 temp;
+#ifndef NEC_98
 	IU32 lsb;
 
 	setVideolatches(*(IU32 *)( EGA_planes +
@@ -379,7 +382,8 @@ rdm0_word_ch2 IFN1(ULONG, offset )
 #ifdef C_VID
 	EasVal = temp;
 #endif
-#line 472
+#endif  //NEC_98
+#line 476
 	return( temp );
 }
 
@@ -388,6 +392,7 @@ rdm0_word_ch2 IFN1(ULONG, offset )
 GLOBAL void
 rdm0_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )
 {
+#ifndef NEC_98
 	ULONG lsb;
 	ULONG inc;
 	UTINY *planes;
@@ -413,16 +418,18 @@ rdm0_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )
     while( count-- )
     {
 #ifdef BACK_M
-#line 505
+#line 510
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
-#line 507
+#line 512
         *dest++ = *(planes + offset);
 #endif
-#line 509
+#line 514
 		offset += inc;
 		inc ^= 0x2;
     }
+#endif  //NEC_98
+#line 518
 }
 
 /* Used to correct writes to M when in mode 1 */
@@ -430,6 +437,11 @@ rdm0_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )
 GLOBAL IU32
 rdm1_byte_ch2 IFN1(ULONG, offset )
 {
+#if defined(NEC_98)
+#line 526
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 528
 	IU32 temp, lsb;
 
 	lsb = offset & 0x1;
@@ -452,13 +464,20 @@ rdm1_byte_ch2 IFN1(ULONG, offset )
 #ifdef C_VID
 	EasVal = temp;
 #endif
-#line 541
+#line 550
 	return( temp );
+#endif  //NEC_98
+#line 552
 }
 
 GLOBAL IU32
 rdm1_word_ch2 IFN1(ULONG, offset )		/* used to correct writes to M when in mode 1 */
 {
+#if defined(NEC_98)
+#line 558
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 560
 	IU32 temp1, temp2, lsb;
 
 	setVideolatches(*(IU32 *)( EGA_planes + ((( offset + 1 ) >> 1 ) << 2 )));
@@ -491,25 +510,28 @@ rdm1_word_ch2 IFN1(ULONG, offset )		/* used to correct writes to M when in mode 
 #ifdef C_VID
 	EasVal = temp1;
 #endif
-#line 579
+#line 592
 	return( temp1 );
+#endif  //NEC_98
+#line 594
 }
 
 GLOBAL void
 rdm1_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )	/* used to correct writes to M when in mode 1 */
 {
+#ifndef NEC_98
 	UTINY *p01, *p23;
 	ULONG tcount, lsb;
 
 #ifdef BACK_M
-#line 589
+#line 604
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
-#line 592
+#line 607
 #define	PLUS +
 #define	MINUS -
 #endif
-#line 595
+#line 610
 
 	if( getDF() )
 		setVideolatches(*(IU32 *)( EGA_planes + (( offset >> 1 ) << 2 )));
@@ -530,8 +552,8 @@ rdm1_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )	/* used to cor
 
 	if( lsb )
 	{
-		*(dest MINUS count) = (( *(p01 + 1) ^ comp1 ) | dont_care1 )
-							& (( *(p23 + 1) ^ comp3 ) | dont_care3 );
+		*(dest MINUS count) = (UTINY)((( *(p01 + 1) ^ comp1 ) | dont_care1 )
+   							        & (( *(p23 + 1) ^ comp3 ) | dont_care3 ));
 		count--;
 		offset += 4;
 	}
@@ -540,27 +562,29 @@ rdm1_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )	/* used to cor
 
 	while( tcount-- )
 	{
-		*(dest MINUS tcount) = (( *(p01 + offset) ^ comp0) | dont_care0 )
-							& (( *(p23 + offset) ^ comp2 ) | dont_care2 );
+		*(dest MINUS tcount) = (UTINY)((( *(p01 + offset) ^ comp0) | dont_care0 )
+							        & (( *(p23 + offset) ^ comp2 ) | dont_care2 ));
 
 		tcount--;
 		offset += 1;
 
-		*(dest MINUS tcount) = (( *(p01 + offset) ^ comp1) | dont_care1 )
-							& (( *(p23 + offset) ^ comp3 ) | dont_care3 );
+		*(dest MINUS tcount) = (UTINY)((( *(p01 + offset) ^ comp1) | dont_care1 )
+							        & (( *(p23 + offset) ^ comp3 ) | dont_care3 ));
 
 		offset += 3;
 	}	
 
 	if( count & 1 )
 	{
-		*(dest MINUS count) = (( *(p01 + offset) ^ comp0 ) | dont_care0 )
-							& (( *(p23 + offset) ^ comp2 ) | dont_care2 );
+		*(dest MINUS count) = (UTINY)((( *(p01 + offset) ^ comp0 ) | dont_care0 )
+							        & (( *(p23 + offset) ^ comp2 ) | dont_care2 ));
 	}
+#endif  //NEC_98
+#line 658
 }
 
 #ifdef SEGMENTATION
-#line 645
+#line 661
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -568,24 +592,26 @@ rdm1_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )	/* used to cor
 
 
 #endif
-#line 652
+#line 668
 
 #if !(defined(NTVDM) && defined(MONITOR))
 GLOBAL void
 Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 {
-#line 657
+#ifndef NEC_98
+#line 674
 #ifndef CPU_40_STYLE	/* EVID */
-#line 658
+#line 675
 #error Non-CPU40 video glue is not supported
 #endif	/* CPU_40_STYLE - EVID */
-#line 693
+#endif // NEC_98
+#line 711
 }	
 #endif /* !(NTVDM && MONITOR) */
-#line 505
+#line 713
 
 #ifdef SEGMENTATION
-#line 697
+#line 715
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -593,12 +619,13 @@ Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 
 
 #endif
-#line 704
+#line 722
 
 GLOBAL void
 update_shift_count IFN0()
 
 {
+#ifndef NEC_98
 	switch( EGA_CPU.chain )
 	{
 		case UNCHAINED:
@@ -608,13 +635,13 @@ update_shift_count IFN0()
  			 */
 
 #ifdef BIGEND
-#line 718
+#line 737
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
-#line 720
+#line 739
  			setVideoread_shift_count(getVideoread_mapped_plane() << 3);
 #endif /* BIGEND */
-#line 722
+#line 741
 
 
 			break;
@@ -639,14 +666,17 @@ update_shift_count IFN0()
 
 			break;
 #endif	/* VGG */
-#line 746
+#line 765
 	}
+#endif  //NEC_98
+#line 767
 }
 
 void
 ega_read_routines_update IFN0()
 
 {
+#ifndef NEC_98
 	LOCAL BOOL ram_off = TRUE;	/* optimised to avoid updates if ram disabled */
 	LOCAL READ_POINTERS *read_ptrs;
 
@@ -660,10 +690,10 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 		SetReadPointers(2);
 #else  /* CPU_40_STYLE */
-#line 766
+#line 787
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif  /* CPU_40_STYLE */
-#line 785
+#line 806
 
 		ram_off = TRUE;	/* prevent recalcs until ram enabled again */
 
@@ -682,20 +712,20 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(0);
 #else  /* CPU_40_STYLE */
-#line 803
+#line 824
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 810
+#line 831
 				break;
 				
 			case CHAIN2:
 #ifdef CPU_40_STYLE
 				SetReadPointers(0);
 #else  /* CPU_40_STYLE */
-#line 816
+#line 837
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 822
+#line 843
 				EGA_CPU.read_mapped_plane_ch2 = EGA_planes +
 							(getVideoread_mapped_plane() & 2)*EGA_PLANE_SIZE;
 				break;
@@ -705,13 +735,13 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(0);
 #else  /* CPU_40_STYLE */
-#line 831
+#line 852
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 839
+#line 860
 				break;
 #endif	/* VGG */
-#line 841
+#line 862
 		}
 	}
 	else   /* read mode 1 */
@@ -727,10 +757,10 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(1);
 #else  /* CPU_40_STYLE */
-#line 856
+#line 877
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 863
+#line 884
 				break;
 
 			case CHAIN2:
@@ -747,10 +777,10 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(1);
 #else  /* CPU_40_STYLE */
-#line 879
+#line 900
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 886
+#line 907
 
 				break;
 
@@ -762,13 +792,13 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(1);
 #else  /* CPU_40_STYLE */
-#line 897
+#line 918
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 904
+#line 925
 				break;
 #endif	/* VGG */
-#line 906
+#line 927
 		}
 	}
 
@@ -776,16 +806,18 @@ ega_read_routines_update IFN0()
 	update_banking();
 
 #ifndef CPU_40_STYLE
-#line 913
+#line 934
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 925
+#endif  //NEC_98
+#line 947
 }
 
 void
 ega_read_init IFN0()
 
 {
+#ifndef NEC_98
 	read_state.mode = 0;
 	read_state.colour_compare = 0x0f;		/* looking for bright white */
 	read_state.colour_dont_care = 0xf;		/* all planes significant */
@@ -793,37 +825,39 @@ ega_read_init IFN0()
 #ifdef CPU_40_STYLE
 	SetReadPointers(2);
 #else  /* CPU_40_STYLE */
-#line 938
+#line 961
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 944
+#line 967
 
 	setVideoread_mapped_plane(0);
 
 	ega_read_routines_update();			/* initialise M */
 
 #if defined(EGA_DUMP) || defined(EGA_STAT)
-#line 950
+#line 973
 #error Unsupported excluded EGA diagnostics configuration
 #endif
-#line 952
+#line 975
 
 #if !defined(EGATEST) && !defined(A3CPU)
 	read_pointers = Glue_reads;
 #endif /* EGATEST */
-#line 705
+#line 979
 
 #ifndef CPU_40_STYLE
-#line 958
+#line 981
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 971
+#endif  //NEC_98
+#line 995
 }
 
 void
 ega_read_term IFN0()
 
 {
+#ifndef NEC_98
 	/*
 	 *	Turn off read calculations for non EGA/VGA adaptors
 	 */
@@ -831,16 +865,17 @@ ega_read_term IFN0()
 #ifdef CPU_40_STYLE
 		SetReadPointers(3);
 #else  /* CPU_40_STYLE */
-#line 984
+#line 1009
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 997
+#endif  //NEC_98
+#line 1023
 }
 
 #endif /* REAL_VGA */
-#line 727
+#line 1026
 #endif /* EGG */
-#line 728
+#line 1027
 
 #endif	/* !(NTVDM && MONITOR) */
-#line 730
+#line 749

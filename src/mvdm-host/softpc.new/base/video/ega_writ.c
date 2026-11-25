@@ -172,15 +172,15 @@ WRT_POINTERS dth_md3_writes;
 #endif	/* CPU_40_STYLE - EVID */
 #line 330
 
-IMPORT VOID ega_copy_b_write();
-IMPORT VOID ega_mode0_chn_b_write();
-IMPORT VOID ega_mode1_chn_b_write();
-IMPORT VOID ega_mode2_chn_b_write();
+IMPORT VOID ega_copy_b_write(ULONG, ULONG);
+IMPORT VOID ega_mode0_chn_b_write(ULONG, ULONG);
+IMPORT VOID ega_mode1_chn_b_write(ULONG, ULONG);
+IMPORT VOID ega_mode2_chn_b_write(ULONG, ULONG);
 
-IMPORT VOID ega_copy_w_write();
-IMPORT VOID ega_mode0_chn_w_write();
-IMPORT VOID ega_mode1_chn_w_write();
-IMPORT VOID ega_mode2_chn_w_write();
+IMPORT VOID ega_copy_w_write(ULONG, ULONG);
+IMPORT VOID ega_mode0_chn_w_write(ULONG, ULONG);
+IMPORT VOID ega_mode1_chn_w_write(ULONG, ULONG);
+IMPORT VOID ega_mode2_chn_w_write(ULONG, ULONG);
 
 /* Handy array to extract all 4 plane values in one go. */
 
@@ -193,7 +193,7 @@ ULONG sr_lookup[16] =
 	0xff000000,0xff0000ff,0xff00ff00,0xff00ffff,
 	0xffff0000,0xffff00ff,0xffffff00,0xffffffff
 #endif
-#line 147
+#line 351
 #ifdef BIGEND
 #line 352
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
@@ -237,7 +237,7 @@ Glue_set_vid_wrt_ptrs IFN1(WRT_POINTERS *, handler )
 #line 443
 }
 #endif /* !(NTVDM && MONITOR) */
-#line 213
+#line 445
 
 #ifdef SEGMENTATION
 #line 447
@@ -255,6 +255,7 @@ Glue_set_vid_wrt_ptrs IFN1(WRT_POINTERS *, handler )
 VOID
 ega_write_init IFN0()
 {
+#ifndef NEC_98
 	WRT_POINTERS *handler;
 
 	note_entrance0("ega_write_init");
@@ -272,27 +273,27 @@ ega_write_init IFN0()
 	/* ensure correct write mode in place for initial font writes */
 	SetWritePointers();
 #endif
-#line 245
+#line 478
 
 #ifdef	JOKER
-#line 479
+#line 480
 #error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #else	/* not JOKER */
-#line 483
+#line 484
 
 #if defined(EGA_DUMP) || defined(EGA_STAT)
-#line 485
+#line 486
 #error Unsupported excluded EGA diagnostics configuration
 #else
-#line 487
-#ifdef EGATEST
 #line 488
+#ifdef EGATEST
+#line 489
 #error DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register.
 #else
-#line 490
+#line 491
 #ifndef GISP_CPU
 #ifdef A3CPU
-#line 492
+#line 493
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 
 
@@ -300,19 +301,19 @@ ega_write_init IFN0()
 
 
 #else
-#line 499
+#line 500
 	gmi_define_mem(VIDEO,&Glue_writes);
 	Glue_set_vid_wrt_ptrs( handler );
 #endif /* A3CPU */
-#line 502
+#line 503
 #endif /* GISP_CPU */
-#line 264
-#endif /* EGATEST */
 #line 504
-#endif /* EGA_DUMP || EGA_STAT */
+#endif /* EGATEST */
 #line 505
-#endif /* JOKER */
+#endif /* EGA_DUMP || EGA_STAT */
 #line 506
+#endif /* JOKER */
+#line 507
 
 	ega_write_routines_update(WRITE_MODE);
 	ega_write_routines_update(RAM_MOVED);
@@ -320,11 +321,14 @@ ega_write_init IFN0()
 	ega_write_routines_update(SET_RESET);
 	ega_write_routines_update(ENABLE_SET_RESET);
 	ega_write_routines_update(FUNCTION);
+#endif  //NEC_98
+#line 515
 }
 
 VOID
 ega_write_term IFN0()
 {
+#ifndef NEC_98
 	/*
 	 * ensure that if you are an EGA and then change to a VGA (or vice
 	 * versa) the write mode will be changed by the new adaptor. Otherwise
@@ -337,6 +341,8 @@ ega_write_term IFN0()
 	setVideowrmode(EGA_CPU.write_mode);
 
 	ega_write_routines_update(WRITE_MODE);
+#endif  //NEC_98
+#line 534
 }
 
 
@@ -345,14 +351,15 @@ ega_write_term IFN0()
 VOID
 ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 {
+#ifndef NEC_98
 	ULONG state;
 	ULONG mode_and_chain;
 	WRT_POINTERS *handler;
 #ifndef PROD
-#line 542
+#line 547
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 544
+#line 549
 
 	note_entrance1("ega_write_routines_update(%d)",reason);
 
@@ -496,7 +503,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 				 */
 				SetWritePointers();
 #endif
-#line 687
+#line 692
 				always_trace3("Possible unsupported data rotate mode %d chain %d rotate by %d",
 				               EGA_CPU.write_mode,
 					       EGA_CPU.chain, getVideorotate());
@@ -531,9 +538,9 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 			state = EGA_CPU.ega_state.mode_3.lookup;
 			break;
 #endif /* VGG */
-#line 482
+#line 726
 
-#line 722
+#line 727
 		default:
 			assert1( NO, "Bad write mode %d\n", EGA_CPU.write_mode );
 			break;
@@ -542,17 +549,17 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef VGG
 	mode_and_chain = (EGA_CPU.chain << 2) + EGA_CPU.write_mode;
 #else
-#line 730
+#line 735
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
-#line 732
+#line 737
 
 	if(( EGA_CPU.saved_mode_chain != mode_and_chain ) 
 		|| ( EGA_CPU.saved_state != state )
 #ifdef V7VGA
 		|| ( Last_v7_fg_bg != fg_bg_control)
 #endif /* V7VGA */
-#line 738
+#line 743
 		)
 	{
 		setVideowrmode(EGA_CPU.write_mode);	/* reset for 'copy case' below */
@@ -567,7 +574,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef CPU_40_STYLE
 						setVideowrmode(4);	/* indicate 'copy case' */
 #endif	/* CPU_40_STYLE */
-#line 752
+#line 757
 						bios_ch2_byte_wrt_fn = ega_copy_b_write;
 						bios_ch2_word_wrt_fn = ega_copy_w_write;
 					}
@@ -628,7 +635,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 			}
 			else
 #endif	/* V7VGA */
-#line 812
+#line 817
 				setVideodither(0);	/* disable Evid dither fns */
 
 				handler = &mode_chain_handler_table[mode_and_chain][state];
@@ -637,16 +644,16 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef CPU_40_STYLE
 		SetWritePointers();
 #else  /* CPU_40_STYLE */
-#line 820
+#line 825
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 844
+#line 849
 
 #ifndef PROD
-#line 846
+#line 851
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 848
+#line 853
 
 		set_mark_funcs();
 
@@ -655,14 +662,16 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef V7VGA
 		Last_v7_fg_bg = fg_bg_control;
 #endif
-#line 595
-#line 856
+#line 600
+#line 861
 	}
+#endif  //NEC_98
+#line 863
 }
 #endif /* REAL VGA */
-#line 598
+#line 865
 #endif /* EGG */
-#line 599
+#line 866
 
 #endif	/* !(NTVDM && MONITOR) */
-#line 601
+#line 606

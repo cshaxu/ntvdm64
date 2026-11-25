@@ -16,11 +16,13 @@
  */
 
 
+#ifndef NEC_98
 #ifdef SEGMENTATION
-#line 20
+#line 21
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 27
+#endif // !NEC_98
+#line 29
 
 
 /*
@@ -39,6 +41,12 @@
 
 #include "debug.h"
 #include "idetect.h"
+
+#if defined(NEC_98)
+#line 49
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 96
 
 #define check_video_func(AH)	(AH < EGA_FUNC_SIZE)
 
@@ -65,3 +73,4 @@ void video_io()
 	(*video_func[getAH()])();
     }
 }
+#endif // !NEC_98

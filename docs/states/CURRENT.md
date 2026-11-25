@@ -2,18 +2,18 @@
 
 ## Current Work
 
-**Active: M0 T485 S3** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. The S2 receipt identifies its twelve host images. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). H020 and H021 bring the total to 21/159. H022 video is next. See the [directory and release receipt](../etc/evidence/t485-s1/h020-h021.md).
+**Active: M0 T485 S4** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. The S2 receipt identifies its twelve host images. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). S3 delivered H009–H022, bringing the total to 22/159. S4 starts with H023 host headers. See the [S3 closure and H022 release receipt](../etc/evidence/t485-s1/h022.md).
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T485 S3, Ordinary Mode |
+| Identifier Mode | M0 T485 S4, Ordinary Mode |
 | Admission And Approval | Owner approved use of the pinned XP SP1 source throughout the [migration sequence](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md), including delivery to the existing origin. |
 | Host binary acceptance | Ship the locally compiled host components, including NTVDMD.DLL and necessary project adaptations. Use the selected SP3 binaries for ABI and behavior comparisons. Verify both installed copies against the manifest of the project build. |
-| Objective and scope | Migrate H009–H022 in inventory order. Reconcile the SoftPC base directories and necessary providers against OpenNT, current product code and pinned XP SP1. |
-| Inputs | S1 file ledger, pinned XP source, S2 product22 runtime and selected immutable SP3 media. |
-| Verification and closure | Compile supported targets, test affected CPU/DPMI and display/input boundaries, publish the paired package, verify hashes, commit and push. Record directory membership, preserved adaptations and rollback. |
+| Objective and scope | Migrate H023–H036 in inventory order. Reconcile the SoftPC host, VDD, redirector, WOW32 and XMS directories against OpenNT, current product code and pinned XP SP1. |
+| Inputs | S1 file ledger, pinned XP source, S3 product34 runtime and selected immutable SP3 media. |
+| Verification and closure | Compile supported targets, test affected host bindings and paired guest interfaces, publish the paired package, verify hashes, commit and push. Record directory membership, preserved adaptations and rollback. |
 | Constraints | Preserve guest binaries, approved archive membership and unrelated files. Independent new XP components remain queued. |
 
 ## S1 Closure Record
@@ -29,7 +29,7 @@
 
 ## Current Technical Baseline
 
-The S3 product32 package contains thirteen host images, including VJOY.DLL. Commit d111f24fc contains the previous product31 package. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. The owner approved local source use on the OpenNT basis. The owner selected English x86 Professional SP3 media. The 61 direct matches were independently verified on the selected disc. Source/media ABI compatibility is verified per batch. The project owner has approved XP source use and ordinary project delivery for all T485 batches. H001 build ownership is traced.
+The S3 product34 package contains thirteen host images, including VJOY.DLL. Commit 38cd6ad9a contains the previous product32 package. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. The owner approved local source use on the OpenNT basis. The owner selected English x86 Professional SP3 media. The 61 direct matches were independently verified on the selected disc. Source/media ABI compatibility is verified per batch. The project owner has approved XP source use and ordinary project delivery for all T485 batches. H001 build ownership is traced.
 
 ## Recent Governance
 

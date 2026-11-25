@@ -88,8 +88,9 @@ foreach(name IN LISTS names)
   list(APPEND support_objects "${object}")
 endforeach()
 
-worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/video/sources")
+worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/video/sources.inc")
 list(REMOVE_DUPLICATES names)
+list(REMOVE_ITEM names "tgdc.c" "crtc.c" "cg.c" "ggdc.c") # XP PC-98 video devices
 set(video_objects)
 foreach(name IN LISTS names)
   set(flags "${profile_5}")

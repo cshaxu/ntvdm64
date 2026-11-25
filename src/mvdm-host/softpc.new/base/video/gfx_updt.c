@@ -121,15 +121,26 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #endif
 #line 123
 
+#if defined(NEC_98)
+#line 125
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 127
 #if	defined(PROD) || (!defined(EGG))
 #define	init_dirty_recs()		dirty_next = 0
 #else
-#line 127
+#line 130
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
-#line 130
+#endif  //NEC_98
+#line 134
 
 #define	get_dirty_rec_total()		(dirty_next)
+#if defined(NEC_98)
+#line 137
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 146
 #ifdef VGG
 #if	defined(PROD) || (!defined(EGG))
 #define	add_dirty_rec(line,st,len,off,fr)	{	dirty[dirty_next].line_no = (line); \
@@ -140,42 +151,56 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 						dirty_next++; \
 					}
 #else
-#line 142
+#line 156
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
-#line 156
+#line 170
 #else /* VGG */
-#line 157
+#line 171
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
-#line 179
+#endif  //NEC_98
+#line 194
 
 #define	get_dirty_line(ind)	(dirty[(ind)].line_no)
 #define	get_dirty_start(ind)	(dirty[(ind)].start)
 #define	get_dirty_end(ind)	(dirty[(ind)].end)
 #define	get_dirty_offset(ind)	(dirty[(ind)].video_copy_offset)
+#if defined(NEC_98)
+#line 200
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 206
 #define clear_dirty()		{setVideodirty_total(0);setVideodirty_low(0x80001);setVideodirty_high(-1);}
+#endif  //NEC_98
+#line 208
 
 #ifdef	NO_STRING_OPERATIONS
-#line 187
+#line 210
 #error Unsupported excluded original configuration
 #else
-#line 163
-#line 189
+#line 177
+#line 212
 #define	SET_VGLOBS_MARK_STRING(func)	setVideomark_string(func);
 #endif	/* NO_STRING_OPERATIONS */
-#line 191
+#line 214
 
 
 /* Parts of update and paint routines assume start of screen memory is on
 a 4-byte boundary. This macro makes this true and reports if it wasn't. */
+#if defined(NEC_98)
+#line 219
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 221
 #ifdef PROD
 #define ALIGN_SCREEN_START(start) (start &= ~3L)
 #else
-#line 198
+#line 224
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif	/* PROD */
-#line 202
+#endif  //NEC_98
+#line 229
 
 GLOBAL LONG dirty_curs_offs = -1;		/* GLOBAL for JOKER */
 GLOBAL LONG dirty_curs_x;
@@ -188,14 +213,14 @@ GLOBAL LONG dirty_curs_y;
 /* [5.1.3 PROCEDURE() DECLARATIONS]					*/
 
 	LOCAL boolean simple_update IPT0();
-#line 214
+#line 241
 	boolean	dummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,
 			int,dummy4,int,dummy5,int,dummy6);
 #if defined(NTVDM) && defined(MONITOR)
-#line 217
+#line 244
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM & MONITOR */
-#line 220
+#line 247
 
 	LOCAL VOID save_gfx_update_routines IPT0();
 	LOCAL VOID inhibit_gfx_update_routines IPT0();
@@ -210,16 +235,16 @@ GLOBAL LONG dirty_curs_y;
 
 
 #ifdef	HOST_SCREEN_UPDATES
-#line 234
+#line 261
 #error Unsupported excluded original configuration
 #else	/* HOST_SCREEN_UPDATES */
 
-#line 240
+#line 267
 #define	HostUpdatedVGA()	FALSE
 #define	HostUpdatedEGA()	FALSE
 
 #endif	/* HOST_SCREEN_UPDATES */
-#line 244
+#line 271
 
 
 /* -----------------------------------------------------------------------
@@ -227,6 +252,11 @@ GLOBAL LONG dirty_curs_y;
 
    [5.2.1 INTERNAL DATA DEFINITIONS 					*/
 
+#if defined(NEC_98)
+#line 279
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 288
 byte *video_copy;		/* video_copy is now allocated in host_init_screen()'s */
 
 #ifndef macintosh
@@ -234,20 +264,21 @@ byte *video_copy;		/* video_copy is now allocated in host_init_screen()'s */
 #ifdef V7VGA
 static	DIRTY_PARTS	dirty[768];
 #else
-#line 258
+#line 295
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
-#line 260
+#line 297
 #else
-#line 261
+#line 298
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif
-#line 263
+#line 300
 #else
-#line 264
+#line 301
 #error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register.
 #endif
-#line 266
+#endif  //NEC_98
+#line 304
 
 IMPORT half_word bg_col_mask;
 static	int	dirty_next=0;
@@ -257,6 +288,7 @@ static	int	dirty_next=0;
 static	int	search_video_copy IFN3(int, start_line,
 	int, end_line, int, start_offset)
 {
+#ifndef NEC_98
 	register	byte	*ptr,*k;
 	register	int	j;
 	register	int	quarter_opl = get_offset_per_line()>>2;
@@ -282,10 +314,10 @@ static	int	search_video_copy IFN3(int, start_line,
 		add_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,
 		              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j,0);
 #else
-#line 300
+#line 339
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
-#line 303
+#line 342
 
 		ptr += quarter_opl - j;
 		/*
@@ -293,6 +325,8 @@ static	int	search_video_copy IFN3(int, start_line,
 		 */
 	}
 	*end_ptr = save;
+#endif  //NEC_98
+#line 350
 	return( get_dirty_rec_total() );
 }
 
@@ -308,6 +342,7 @@ static	int	search_video_copy IFN3(int, start_line,
 static	int	v7_search_video_copy IFN3(int, start_line,
 	int, end_line, int, start_offset)
 {
+#ifndef NEC_98
 	register	byte	*ptr,*k;
 	register	int	j;
 	register	int	half_opl = get_offset_per_line()>>1;
@@ -372,6 +407,8 @@ static	int	v7_search_video_copy IFN3(int, start_line,
 		 */
 	}
 	*end_ptr = save;
+#endif  //NEC_98
+#line 431
 	return( get_dirty_rec_total() );
 }
 #endif /* VGG */
@@ -379,6 +416,7 @@ static	int	v7_search_video_copy IFN3(int, start_line,
 static	int	search_video_copy_aligned IFN3(int, start_line,
 	int, end_line, int, start_offset)
 {
+#ifndef NEC_98
 	register	unsigned int *ptr4;
 	register	byte	*ptr,*k;
 	register	int	j;
@@ -408,21 +446,24 @@ static	int	search_video_copy_aligned IFN3(int, start_line,
 		add_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,
 		              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j,0);
 #else
-#line 425
+#line 468
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
-#line 428
+#line 471
 		ptr += quarter_opl - j;
 		/*
 		 * Don't clear out the marked area in case the plane wraps
 		 */
 	}
 	*end_ptr = save;
+#endif  //NEC_98
+#line 478
 	return( get_dirty_rec_total() );
 }
 
 static	void	paint_records IFN2(int, start_rec, int, end_rec)
 {
+#ifndef NEC_98
 	register	DIRTY_PARTS	*i,*end_ptr;
 #ifdef VGG
 	int dirty_frig;
@@ -486,10 +527,10 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 			cur_start<<3, first_line, cur_end-cur_start,
 			last_line-first_line+1);
 #else
-#line 502
+#line 547
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
-#line 507
+#line 552
 	}
 	/* Clear out video copy */
 	for(i = &dirty[start_rec];i<end_ptr;i++)
@@ -499,36 +540,39 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 #ifdef VGG
 		j =  &video_copy[ i->video_copy_offset+(i->start>>2)+i->v7frig];
 #else
-#line 516
+#line 561
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
-#line 518
+#line 563
 		do *j++ = 0; while(j<end);
 	}
+#endif  //NEC_98
+#line 566
 }
 
 #ifdef BIGEND
-#line 523
+#line 569
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
-#line 525
+#line 571
 #define get_char_attr(unsigned_long_ptr)     (((*(unsigned_long_ptr)) & 0xffff))
 #endif
-#line 527
+#line 573
 
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 531
+#line 577
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 533
+#line 579
 
 static	int	ega_text_find_dirty_lines IFN5(byte *, vcopy, byte *, planes,
 	int, start_line, int, end_line, int, screen_start)
 {
+#ifndef NEC_98
 	register	int	i,j,k;
-	register	unsigned short	shorts_per_line=get_chars_per_line();
+	register	unsigned short	shorts_per_line=(unsigned short)get_chars_per_line();
 	register	int	offset,cur_y;
 	register	int	char_height=get_host_char_height();
 	register	int	opl=get_offset_per_line();
@@ -559,19 +603,22 @@ static	int	ega_text_find_dirty_lines IFN5(byte *, vcopy, byte *, planes,
 #ifdef VGG
 				add_dirty_rec(cur_y,j<<2,(k<<1)+2,screen_start+(offset<<1),0);
 #else
-#line 569
+#line 616
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
-#line 571
+#line 618
 				break;	/* onto next line */
 			}
 		}
 	}
+#endif  //NEC_98
+#line 623
 	return( get_dirty_rec_total() );
 }
 
 static	void	ega_text_paint_dirty_recs IFN2(int, start_rec, int, end_rec)
 {
+#ifndef NEC_98
 	register	int	char_wid = get_pix_char_width()>>1;
 	register	int	i;
 	register	int	length;
@@ -596,20 +643,23 @@ static	void	ega_text_paint_dirty_recs IFN2(int, start_rec, int, end_rec)
 			from += 4;			/* skip over the planes 2,3 */
 		}
 	}
+#endif  //NEC_98
+#line 654
 }
 
 #endif /* EGG */
 
 #ifdef SEGMENTATION 			/* See note with first use of this flag */
-#line 609
+#line 659
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 611
+#line 661
 
 #endif /* REAL_VGA */
 
 VOID remove_old_cursor IFN0()
 {
+#ifndef NEC_98
 	if( dirty_curs_offs >= 0 )
 	{
 		sub_note_trace2( ALL_ADAPT_VERBOSE,
@@ -620,20 +670,28 @@ VOID remove_old_cursor IFN0()
 
 		dirty_curs_offs = -1;
 	}
+#endif  //NEC_98
+#line 678
 }
 
 
 GLOBAL VOID
 simple_handler IFN0()
 {
+#ifndef NEC_98
 	setVideodirty_total(getVideodirty_total() + 1);
+#endif  //NEC_98
+#line 687
 }
 
 LOCAL	boolean simple_update IFN0()
 {
+#ifndef NEC_98
 	setVideodirty_total(getVideodirty_total() + 1);
+#endif  //NEC_98
+#line 694
 	return( FALSE );
-#line 639
+#line 695
 }
 
 LOCAL VOID simple_update_b_move IFN4(UTINY *, laddr, UTINY *, haddr, 
@@ -644,7 +702,10 @@ LOCAL VOID simple_update_b_move IFN4(UTINY *, laddr, UTINY *, haddr,
 	UNUSED(src);
 	UNUSED(src_type);
 
+#ifndef NEC_98
 	setVideodirty_total(getVideodirty_total() + 1);
+#endif  //NEC_98
+#line 708
 }
 
 MEM_HANDLERS vid_handlers =
@@ -738,13 +799,14 @@ void	reset_paint_routines IFN0()
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 743
+#line 801
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 745
+#line 803
 
 void	ega_wrap_split_text_update IFN0()
 {
+#ifndef NEC_98
 	register int i;				/* Loop counter		*/
 	register USHORT *from,*to;
 	register int cur_ypos;
@@ -899,10 +961,13 @@ void	ega_wrap_split_text_update IFN0()
 	host_end_update();
 
 	setVideodirty_total(0);
+#endif  //NEC_98
+#line 962
 }
 
 void	ega_split_text_update IFN0()
 {
+#ifndef NEC_98
 	register int i;				/* Loop counter		*/
 	register USHORT *from,*to;
 	register int cur_ypos;
@@ -993,10 +1058,13 @@ void	ega_split_text_update IFN0()
 	host_end_update();
 
 	setVideodirty_total(0);
+#endif  //NEC_98
+#line 1058
 }
 
 void ega_wrap_text_update IFN0()
 {
+#ifndef NEC_98
 	register int i;				/* Loop counter		*/
 	register USHORT *from,*to;
 	register int cur_ypos;
@@ -1102,10 +1170,13 @@ void ega_wrap_text_update IFN0()
 	host_end_update();
 
 	setVideodirty_total(0);
+#endif  //NEC_98
+#line 1169
 }
 
 void ega_text_update IFN0()
 {
+#ifndef NEC_98
 	register int i;				/* Loop counter		*/
 	register USHORT *from,*to;
 	register int cur_ypos;
@@ -1172,14 +1243,16 @@ void ega_text_update IFN0()
 	}
 
 	host_end_update();
+#endif  //NEC_98
+#line 1241
 }
 #endif /* EGG */
 
 #ifdef SEGMENTATION 			/* See note with first use of this flag */
-#line 1179
+#line 1245
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 1181
+#line 1247
 
 /*
  * Update the window to look like the regen buffer says it should
@@ -1187,6 +1260,7 @@ void ega_text_update IFN0()
 
 void text_update IFN0()
 {
+#ifndef NEC_98
 
     register int i;	/* Loop counters		*/
     register int j,k;
@@ -1289,6 +1363,8 @@ void text_update IFN0()
     }
 
     host_end_update();
+#endif  //NEC_98
+#line 1358
 }
 
 /*
@@ -1298,6 +1374,7 @@ void text_update IFN0()
 LOCAL VOID
 cga_graph_update_unchained IFN0()
 {
+#ifndef NEC_98
     LONG i, j, k, l;	/* Loop counters		*/
     IU32 *from,*to;
     LONG cur_ypos;
@@ -1423,12 +1500,15 @@ cga_graph_update_unchained IFN0()
     host_end_update();
 
     setVideodirty_total(0);
+#endif  //NEC_98
+#line 1494
 }
 
 #ifdef	EGG
 LOCAL VOID
 cga_graph_update_chain2 IFN0()
 {
+#ifndef NEC_98
     LONG i, j, k, l;	/* Loop counters		*/
     USHORT *from,*to;
     LONG cur_ypos;
@@ -1477,8 +1557,8 @@ cga_graph_update_chain2 IFN0()
 		 * Start and end line represent the lines within the 8 K video
 		 * memory blocks, NOT the lines as they appear on screen.
 		 */
-		start_line = (getVideodirty_low() / SCAN_LINE_LENGTH);
-		end_line = (getVideodirty_high() / SCAN_LINE_LENGTH) + 1;
+		start_line = (short)(getVideodirty_low() / SCAN_LINE_LENGTH);
+		end_line = (short)((getVideodirty_high() / SCAN_LINE_LENGTH) + 1);
 
 		/* AJO 6/1/92
 		 * Can get start/end lines past end of screen since video bank
@@ -1587,11 +1667,14 @@ cga_graph_update_chain2 IFN0()
 	clear_dirty();
 
     host_end_update();
+#endif  //NEC_98
+#line 1660
 }
 
 LOCAL VOID
 cga_graph_update_chain4 IFN0()
 {
+#ifndef NEC_98
     LONG i, j, k, l;		/* Loop counters		*/
     UTINY *from,*to;
     LONG cur_ypos;
@@ -1640,8 +1723,8 @@ cga_graph_update_chain4 IFN0()
 		 * start and end line represent the lines within the 8 K video
 		 * memory blocks, NOT the lines as they appear on screen.
 		 */
-		start_line = (getVideodirty_low() / SCAN_LINE_LENGTH);
-		end_line = (getVideodirty_high() / SCAN_LINE_LENGTH) + 1;
+		start_line = (short)(getVideodirty_low() / SCAN_LINE_LENGTH);
+		end_line = (short)((getVideodirty_high() / SCAN_LINE_LENGTH) + 1);
 	
 		/* AJO 6/1/92
 		 * Can get start/end lines past end of screen since video bank
@@ -1747,6 +1830,8 @@ cga_graph_update_chain4 IFN0()
 	clear_dirty();
 
     host_end_update();
+#endif  //NEC_98
+#line 1822
 }
 #endif	/* EGG */
 
@@ -1754,6 +1839,7 @@ GLOBAL VOID
 cga_med_graph_update IFN0()
 
 {
+#ifndef NEC_98
 
 	/*
 	 *	The med res CGA graphics mode ( mode 4 ) is an EGA CHAIN2 mode !!
@@ -1767,12 +1853,15 @@ cga_med_graph_update IFN0()
 	else
 #endif
 		cga_graph_update_unchained( );
+#endif  //NEC_98
+#line 1844
 }
 
 GLOBAL VOID
 cga_hi_graph_update IFN0()
 
 {
+#ifndef NEC_98
 
 	/*
 	 *	The hi res CGA graphics mode ( mode 6 ) is an EGA CHAIN4 mode !!
@@ -1786,18 +1875,21 @@ cga_hi_graph_update IFN0()
 	else
 #endif
 		cga_graph_update_unchained( );
+#endif  //NEC_98
+#line 1865
 }
 
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 1792
+#line 1870
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 1794
+#line 1872
 
 void	ega_wrap_split_graph_update IFN0()
 {
+#ifndef NEC_98
 	register	int	bpl; 
 	register	int	quarter_opl;
 	register	int	screen_split;
@@ -1862,10 +1954,13 @@ void	ega_wrap_split_graph_update IFN0()
 	clear_dirty();
 
     	host_end_update();
+#endif  //NEC_98
+#line 1941
 }
 
 void	ega_split_graph_update IFN0()
 {
+#ifndef NEC_98
 	register	int	bpl; 
 	register	int	quarter_opl;
 	register	int	screen_split;
@@ -1914,12 +2009,15 @@ void	ega_split_graph_update IFN0()
 	clear_dirty();
 
     	host_end_update();
+#endif  //NEC_98
+#line 1995
 }
 
 #ifdef VGG
 /* again v similar to ega version but works on 1 large plane instead of 4 */
 static	void	vga_paint_records IFN2(int, start_rec, int, end_rec)
 {
+#ifndef NEC_98
 	register	DIRTY_PARTS	*i,*end_ptr;
 	int dirty_frig;
 
@@ -1986,12 +2084,15 @@ static	void	vga_paint_records IFN2(int, start_rec, int, end_rec)
 		j =  &video_copy[ i->video_copy_offset+(i->start>>2) + i->v7frig];
 		do *j++ = 0; while(j<end);
 	}
+#endif  //NEC_98
+#line 2069
 }
 
 
 /* dramatically similar to ega graph update but calls vga-ish paint interface */
 void	vga_graph_update IFN0()
 {
+#ifndef NEC_98
 	register	int	opl = get_offset_per_line();
 	register	int	bpl = get_bytes_per_line();
 	int		screen_height = get_screen_height()/
@@ -2072,10 +2173,13 @@ void	vga_graph_update IFN0()
 	clear_dirty();
 
 	host_end_update();
+#endif  //NEC_98
+#line 2157
 }
 
 void	vga_split_graph_update IFN0()
 {
+#ifndef NEC_98
 	register	int	bpl; 
 	register	int	quarter_opl;
 	register	int	screen_split;
@@ -2126,12 +2230,15 @@ void	vga_split_graph_update IFN0()
 	clear_dirty();
 
     	host_end_update();
+#endif  //NEC_98
+#line 2213
 }
 
 #endif /* VGG */
 
 void	ega_graph_update IFN0()
 {
+#ifndef NEC_98
 	register	int	opl = get_offset_per_line();
 	register	int	bpl = get_bytes_per_line();
 
@@ -2196,11 +2303,14 @@ void	ega_graph_update IFN0()
 #endif /* V7VGA */
 
 	host_end_update();
+#endif  //NEC_98
+#line 2285
 }
 
 
 void	ega_wrap_graph_update IFN0()
 {
+#ifndef NEC_98
 	register	int	opl = get_offset_per_line();
 	register	int	bpl = get_bytes_per_line();
 
@@ -2291,15 +2401,17 @@ void	ega_wrap_graph_update IFN0()
 	clear_dirty();
 
     	host_end_update();
+#endif  //NEC_98
+#line 2382
 }
 
 #endif /* EGG */
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 2295
+#line 2387
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 2297
+#line 2389
 
 /*---------------------  Scrolling routines --------------------------*/
 
@@ -2310,6 +2422,7 @@ LOCAL VOID
 adjust_cursor IFN7(ULONG, dirn, ULONG, tlx, ULONG, tly, ULONG, width,
 	ULONG, height, ULONG, lines, ULONG, bpl )
 {
+#ifndef NEC_98
 
 	/*
 	 * We must not adjust dirty_curs_offset here if it is -1, as this tells
@@ -2318,8 +2431,8 @@ adjust_cursor IFN7(ULONG, dirn, ULONG, tlx, ULONG, tly, ULONG, width,
 	 * with spurious data.  JJS - 29/6/95.
 	 */
 	if (dirty_curs_offs != -1)
-		if(( dirty_curs_x >= tlx ) && ( dirty_curs_x < ( tlx + width )))
-			if(( dirty_curs_y >= tly ) && ( dirty_curs_y < ( tly + height )))
+		if(( dirty_curs_x >= (LONG)tlx ) && ( dirty_curs_x < (LONG)(( tlx + width ))))
+			if(( dirty_curs_y >= (LONG)tly ) && ( dirty_curs_y < (LONG)(( tly + height ))))
 			{
 				switch( dirn )
 				{
@@ -2335,12 +2448,15 @@ adjust_cursor IFN7(ULONG, dirn, ULONG, tlx, ULONG, tly, ULONG, width,
 				}
 				setVideodirty_total(getVideodirty_total() + 1);
 			}
+#endif  //NEC_98
+#line 2426
 }
 
 /*ARGSUSED5*/
 boolean text_scroll_up IFN6(int, start, int, width, int, height,
 	int, attr, int, lines, int, dummy_arg)
 {
+#ifndef NEC_98
     short blank_word, *ptr, *top_left_ptr,*top_right_ptr, *bottom_right_ptr;
     unsigned short dummy;
     unsigned char *p;
@@ -2388,17 +2504,17 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
  */
 
 #ifdef DUMB_TERMINAL
-#line 2385
+#line 2480
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
-#line 2388
+#line 2483
 
 		/* originally dummy was char [2] */
 		/* unfortunately doing (short) *dummy */
 		/* causes a bus error on M88K */
 		p = (unsigned char *) &dummy;
 		p [0] = ' ';
-		p [1] = attr;
+		p [1] = (unsigned char)attr;
 	    blank_word = dummy;
 
 	    words_per_line   = get_chars_per_line();
@@ -2424,10 +2540,10 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 	    }
 	    width = (int)(top_right_ptr - top_left_ptr + 4);
 #ifdef DUMB_TERMINAL
-#line 2420
+#line 2515
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
-#line 2422
+#line 2517
 
 	/* Do the host stuff */
 
@@ -2458,7 +2574,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 		/* Can do the whole thing in one go */
 
 		memcpy(dest,src,(width>>1)*(height-lines));
-		fwd_word_fill( (' '<<8) | attr, dest+(width>>1)*(height-lines),(width>>1)*lines/2);
+		fwd_word_fill( (short)((' '<<8) | attr), dest+(width>>1)*(height-lines),(width>>1)*lines/2);
 	}
 	else
 	{
@@ -2474,7 +2590,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 
 		for(i=0;i<lines;i++)
 		{
-			fwd_word_fill( (' '<<8) | attr, dest,width>>2);
+			fwd_word_fill( (short)((' '<<8) | attr), dest,width>>2);
 			dest += bpl;
 		}
 	}
@@ -2504,13 +2620,13 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 	/* Fill exposed area of buffer */
 
 #ifdef BIGEND
-#line 2498
+#line 2593
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
-#line 2500
+#line 2595
 	data = (attr << 8) | ' ';
 #endif
-#line 2502
+#line 2597
 
 	for(i=0;i<lines;i++)
 	{
@@ -2528,6 +2644,8 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 2615
 	return TRUE;
 }
 
@@ -2535,6 +2653,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 boolean text_scroll_down IFN6(int, start, int, width, int, height,
 	int, attr, int, lines,int,dummy_arg)
 {
+#ifndef NEC_98
 	int i,tlx,tly,htlx,htly,colour;
 	int bpl = 2*get_chars_per_line();
 	long start_offset;
@@ -2596,7 +2715,7 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,
 		src = video_copy + start - gvi_pc_low_regen;
 		dest = src + lines * bpl;
 		memcpy(dest,src,(width>>1)*(height-lines));
-		fwd_word_fill( (' '<<8) | attr, src,(width>>1)*lines/2);
+		fwd_word_fill( (short)((' '<<8) | attr), src,(width>>1)*lines/2);
 	}
 	else
 	{
@@ -2614,7 +2733,7 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,
 
 		for(i=0;i<lines;i++)
 		{
-			fwd_word_fill( (' '<<8) | attr, dest,width>>2);
+			fwd_word_fill( (short)((' '<<8) | attr), dest,width>>2);
 			dest -= bpl;
 		}
 	}
@@ -2644,13 +2763,13 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,
 	/* Fill exposed area of buffer */
 
 #ifdef BIGEND
-#line 2635
+#line 2732
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
-#line 2637
+#line 2734
 	data = (attr << 8) | ' ';
 #endif
-#line 2639
+#line 2736
 
 	for(i=0;i<lines;i++)
 	{
@@ -2668,6 +2787,8 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 2754
 	return TRUE;
 }
 
@@ -2677,6 +2798,7 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,
 boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 	int, attr, int, lines,int,dummy_arg)
 {
+#ifndef NEC_98
     short blank_word, *ptr, *top_left_ptr,*top_right_ptr, *bottom_right_ptr;
     unsigned short dummy;
     unsigned char *p;
@@ -2721,17 +2843,17 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
  */
 
 #ifdef DUMB_TERMINAL
-#line 2709
+#line 2808
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
-#line 2712
+#line 2811
 
 		/* originally dummy was char [2] */
 		/* unfortunately doing (short) *dummy */
 		/* causes a bus error on M88K */
 		p = (unsigned char *) &dummy;
 		p [0] = ' ';
-		p [1] = attr;
+		p [1] = (unsigned char)attr;
 	    blank_word = dummy;
 
 	    words_per_line   = get_chars_per_line();
@@ -2757,10 +2879,10 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 	    }
 	    width = (int)(top_right_ptr - top_left_ptr + 1) << 1;
 #ifdef DUMB_TERMINAL
-#line 2744
+#line 2843
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
-#line 2746
+#line 2845
 
 	/* do the host stuff */
 	start_offset = start - get_screen_start()*2 - gvi_pc_low_regen;
@@ -2789,7 +2911,7 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 	{
 		/* Can do the whole thing in one go */
 		memcpy(dest,src,width*(height-lines));
-		fwd_word_fill( (' '<<8) | attr, dest+width*(height-lines),width*lines/2);
+		fwd_word_fill( (short)((' '<<8) | attr), dest+width*(height-lines),width*lines/2);
 	}
 	else
 	{
@@ -2805,7 +2927,7 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 
 		for(i=0;i<lines;i++)
 		{
-			fwd_word_fill( (' '<<8) | attr, dest,width/2);
+			fwd_word_fill( (short)((' '<<8) | attr), dest,width/2);
 			dest += bpl;
 		}
 	}
@@ -2825,19 +2947,22 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 
 	for(i=0;i<lines;i++)
 	{
-		fwd_word_fill( (' '<<8) | attr, dest,width/2);
+		fwd_word_fill( (short)((' '<<8) | attr), dest,width/2);
 		dest += bpl;
 	}
 
 	host_scroll_complete();
 
 	return TRUE;
+#endif  //NEC_98
+#line 2917
 }
 
 /*ARGSUSED5*/
 boolean cga_text_scroll_down IFN6(int, start, int, width, int, height,
 	int, attr, int, lines,int,dummy_arg)
 {
+#ifndef NEC_98
 	int i,tlx,tly,colour;
 	int bpl = 2*get_chars_per_line();
 	long start_offset;
@@ -2895,7 +3020,7 @@ boolean cga_text_scroll_down IFN6(int, start, int, width, int, height,
 		src = video_copy + start - gvi_pc_low_regen;
 		dest = src + lines * bpl;
 		memcpy(dest,src,width*(height-lines));
-		fwd_word_fill( (' '<<8) | attr, src,width*lines/2);
+		fwd_word_fill( (short)((' '<<8) | attr), src,width*lines/2);
 	}
 	else
 	{
@@ -2913,7 +3038,7 @@ boolean cga_text_scroll_down IFN6(int, start, int, width, int, height,
 
 		for(i=0;i<lines;i++)
 		{
-			fwd_word_fill( (' '<<8) | attr, dest,width/2);
+			fwd_word_fill( (short)((' '<<8) | attr), dest,width/2);
 			dest -= bpl;
 		}
 	}
@@ -2933,18 +3058,21 @@ boolean cga_text_scroll_down IFN6(int, start, int, width, int, height,
 
 	for(i=0;i<lines;i++)
 	{
-		fwd_word_fill( (' '<<8) | attr, dest,width/2);
+		fwd_word_fill( (short)((' '<<8) | attr), dest,width/2);
 		dest -= bpl;
 	}
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 3026
 	return TRUE;
 }
 
 boolean cga_graph_scroll_up IFN6(int, start, int, width, int, height,
 	int, attr, int, lines, int, colour)
 {
+#ifndef NEC_98
 	int i,tlx,tly;
 	long start_offset;
 	half_word *src,*dest;
@@ -3041,12 +3169,15 @@ boolean cga_graph_scroll_up IFN6(int, start, int, width, int, height,
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 3130
 	return TRUE;
 }
 
 boolean cga_graph_scroll_down IFN6(int, start, int, width, int, height,
 	int, attr, int, lines, int, colour)
 {
+#ifndef NEC_98
 	int i,tlx,tly;
 	long start_offset;
 	register half_word *src,*dest;
@@ -3145,6 +3276,8 @@ boolean cga_graph_scroll_down IFN6(int, start, int, width, int, height,
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 3236
 	return TRUE;
 }
 
@@ -3155,6 +3288,11 @@ boolean vga_graph_scroll_up IFN6(int, start, int, width, int, height,
 {
 	int start_offset,tlx,tly;
 	boolean status;
+#if defined(NEC_98)
+#line 3247
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 3249
 
 	UNUSED(dummy);
 	
@@ -3172,6 +3310,8 @@ boolean vga_graph_scroll_up IFN6(int, start, int, width, int, height,
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 3267
 	return(status);
 
 }
@@ -3182,6 +3322,11 @@ boolean vga_graph_scroll_down IFN6(int, start, int, width, int, height,
 {
 	int start_offset,tlx,tly;
 	boolean status;
+#if defined(NEC_98)
+#line 3278
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 3280
 
 	UNUSED(dummy_arg);
 	
@@ -3199,6 +3344,8 @@ boolean vga_graph_scroll_down IFN6(int, start, int, width, int, height,
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 3298
 	return(status);
 
 }
@@ -3210,6 +3357,7 @@ boolean v7vga_graph_scroll_up IFN6(int, start, int, width, int, height,
 {
 	int start_offset,tlx,tly;
 	boolean status;
+#ifndef NEC_98
 
 	UNUSED(dummy);
 	
@@ -3227,6 +3375,8 @@ boolean v7vga_graph_scroll_up IFN6(int, start, int, width, int, height,
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 3328
 	return(status);
 }
 
@@ -3236,6 +3386,7 @@ boolean v7vga_graph_scroll_down IFN6(int, start, int, width, int, height,
 {
 	int start_offset,tlx,tly;
 	boolean status;
+#ifndef NEC_98
 
 	UNUSED(dummy_arg);
 	
@@ -3253,6 +3404,8 @@ boolean v7vga_graph_scroll_down IFN6(int, start, int, width, int, height,
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 3356
 	return(status);
 }
 #endif /* V7VGA */
@@ -3261,10 +3414,10 @@ boolean v7vga_graph_scroll_down IFN6(int, start, int, width, int, height,
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 3246
+#line 3364
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 3253
+#line 3371
 
 /*ARGSUSED5*/
 boolean ega_graph_scroll_up IFN6(int, start, int, width, int, height,
@@ -3272,6 +3425,11 @@ boolean ega_graph_scroll_up IFN6(int, start, int, width, int, height,
 {
 	int start_offset,tlx,tly;
 	boolean status;
+#if defined(NEC_98)
+#line 3379
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 3381
 
 	UNUSED(dummy);
 	
@@ -3290,6 +3448,8 @@ boolean ega_graph_scroll_up IFN6(int, start, int, width, int, height,
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 3400
 	return(status);
 
 }
@@ -3300,6 +3460,11 @@ boolean ega_graph_scroll_down IFN6(int, start, int, width, int, height,
 {
 	int start_offset,tlx,tly;
 	boolean status;
+#if defined(NEC_98)
+#line 3411
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 3413
 	
 	UNUSED(dummy_arg);
 	
@@ -3319,16 +3484,18 @@ boolean ega_graph_scroll_down IFN6(int, start, int, width, int, height,
 
 	host_scroll_complete();
 
+#endif  //NEC_98
+#line 3433
 	return(status);
 
 }
 #endif /* EGG */
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 3313
+#line 3439
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 3315
+#line 3441
 
 #endif /* REAL_VGA */
 
@@ -3351,10 +3518,10 @@ boolean	dummy_scroll IFN6(int,dummy1,int,dummy2,int,dummy3,int,
 /*---------------------  End of scrolling routines --------------------------*/
 
 #ifdef GORE
-#line 3337
+#line 3463
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
-#line 3430
+#line 3556
 
 #ifdef	EGG
 /*
@@ -3365,6 +3532,7 @@ boolean	dummy_scroll IFN6(int,dummy1,int,dummy2,int,dummy3,int,
 
 GLOBAL VOID cga_mark_byte IFN1(int, addr)
 {
+#ifndef NEC_98
 	register	int	offset = BANK_OFFSET(addr);
 	
 	if(offset < getVideodirty_low())
@@ -3374,10 +3542,13 @@ GLOBAL VOID cga_mark_byte IFN1(int, addr)
 		setVideodirty_high(offset);
 
 	setVideodirty_total(getVideodirty_total() + 1);
+#endif  //NEC_98
+#line 3577
 }
 
 GLOBAL VOID cga_mark_word IFN1(int, addr)
 {
+#ifndef NEC_98
 	register	int	offset1 = BANK_OFFSET(addr);
 	register	int	offset2 = offset1 + 1;
 
@@ -3388,10 +3559,13 @@ GLOBAL VOID cga_mark_word IFN1(int, addr)
 		setVideodirty_high(offset2);
 
 	setVideodirty_total(getVideodirty_total() + 2);
+#endif  //NEC_98
+#line 3593
 }
 
 GLOBAL VOID cga_mark_string IFN2(int, laddr, int, haddr)
 {
+#ifndef NEC_98
 	register	int	offset1 = BANK_OFFSET(laddr);
 	register	int	offset2 = BANK_OFFSET(haddr);
 
@@ -3402,21 +3576,24 @@ GLOBAL VOID cga_mark_string IFN2(int, laddr, int, haddr)
 		setVideodirty_high(offset2);
 
 	setVideodirty_total(getVideodirty_total() + offset2-offset1+1);
+#endif  //NEC_98
+#line 3609
 }
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 3480
+#line 3612
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 3482
+#line 3614
 
 GLOBAL VOID ega_mark_byte IFN1(int, off_in)
 {
+#ifndef NEC_98
 #ifdef GORE
-#line 3486
+#line 3619
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
-#line 3488
+#line 3621
 	register int offset = off_in>>2;
 
 	video_copy[offset] = 1;
@@ -3429,17 +3606,19 @@ GLOBAL VOID ega_mark_byte IFN1(int, off_in)
 
 	setVideodirty_total(getVideodirty_total() + 1);
 #endif /* GORE */
-#line 3500
+#endif  //NEC_98
+#line 3634
 }
 
 GLOBAL VOID ega_mark_word IFN1(int, addr)
 {
+#ifndef NEC_98
 #ifdef GORE
-#line 3505
+#line 3640
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 
-#line 3508
+#line 3643
 	register	int	offset1 = addr >> 2;
 	register	int	offset2 = (addr+1) >> 2;
 
@@ -3454,17 +3633,19 @@ GLOBAL VOID ega_mark_word IFN1(int, addr)
 
 	setVideodirty_total(getVideodirty_total() + 2);
 #endif /* GORE */
-#line 3522
+#endif  //NEC_98
+#line 3658
 }
 
 GLOBAL VOID ega_mark_wfill IFN3(int, laddr, int, haddr, int, col)
 {
+#ifndef NEC_98
 #ifdef GORE
-#line 3527
+#line 3664
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 
-#line 3530
+#line 3667
 	register	int	offset1 = laddr >> 2;
 	register	int	offset2 = haddr >> 2;
 
@@ -3480,16 +3661,18 @@ GLOBAL VOID ega_mark_wfill IFN3(int, laddr, int, haddr, int, col)
 
 	setVideodirty_total(getVideodirty_total() + offset2-offset1+1);
 #endif /* GORE */
-#line 3545
+#endif  //NEC_98
+#line 3683
 }
 
 GLOBAL VOID ega_mark_string IFN2(int, laddr, int, haddr)
 {
+#ifndef NEC_98
 #ifdef GORE
-#line 3550
+#line 3689
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
-#line 3552
+#line 3691
 	register	int	offset1 = laddr >> 2;
 	register	int	offset2 = haddr >> 2;
 
@@ -3503,44 +3686,51 @@ GLOBAL VOID ega_mark_string IFN2(int, laddr, int, haddr)
 
 	setVideodirty_total(getVideodirty_total() + offset2-offset1+1);
 #endif /* GORE */
-#line 3565
+#endif  //NEC_98
+#line 3705
 }
 
 #endif /* EGG */
-#line 3442
+#line 3708
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 3570
+#line 3710
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 3572
+#line 3712
 
 GLOBAL VOID screen_refresh_required IFN0()
 {
 
 #ifdef GORE
-#line 3577
+#line 3717
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
-#line 3579
+#line 3719
 
+#if defined(NEC_98)
+#line 3721
+#error Unsupported NEC PC-98 configuration
+#else   //NEC_98
+#line 3724
 #ifndef CPU_40_STYLE
-#line 3581
+#line 3725
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
-#line 3589
+#line 3733
 	setVideodirty_total(1000000L);
 #endif	/* CPU_40_STYLE */
-#line 3591
+#endif  //      NEC_98
+#line 3736
 }
 
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 3596
+#line 3741
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 3598
+#line 3743
 
 LOCAL MARKING_TYPE curr_mark_type;
 
@@ -3558,65 +3748,68 @@ set_mark_funcs IFN0()
 			update_alg.mark_wfill = (T_mark_wfill)simple_update;
 			update_alg.mark_string = (T_mark_string)simple_update;
 
+#ifndef NEC_98
 #ifndef CPU_40_STYLE	/* EVID */
-#line 3616
+#line 3762
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
-#line 3621
+#line 3767
 			SetMarkPointers(0);
 #endif	/* CPU_40_STYLE - EVID */
-#line 3623
+#endif  //NEC_98
+#line 3770
 			break;
 
+#ifndef NEC_98
 		case	CGA_GRAPHICS_MARKING:
-			update_alg.mark_byte = (boolean(*)())cga_mark_byte;
-			update_alg.mark_word = (boolean(*)())cga_mark_word;
-			update_alg.mark_fill = (boolean(*)())cga_mark_string;
-			update_alg.mark_wfill = (boolean(*)())cga_mark_string;
-			update_alg.mark_string = (boolean(*)())cga_mark_string;
+			update_alg.mark_byte = (T_mark_byte)cga_mark_byte;
+			update_alg.mark_word = (T_mark_word)cga_mark_word;
+			update_alg.mark_fill = (T_mark_fill)cga_mark_string;
+			update_alg.mark_wfill = (T_mark_wfill)cga_mark_string;
+			update_alg.mark_string = (T_mark_string)cga_mark_string;
 
 #ifndef CPU_40_STYLE	/* EVID */
-#line 3633
+#line 3781
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
-#line 3638
+#line 3786
 			SetMarkPointers(1);
 #endif	/* CPU_40_STYLE - EVID */
-#line 3640
+#line 3788
 
 			break;
 
 		case	EGA_GRAPHICS_MARKING:
 #ifdef GORE
-#line 3645
+#line 3793
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
-#line 3654
+#line 3802
 
-			update_alg.mark_byte = (boolean(*)())ega_mark_byte;
-			update_alg.mark_word = (boolean(*)())ega_mark_word;
-			update_alg.mark_fill = (boolean(*)())ega_mark_string;
-			update_alg.mark_wfill = (boolean(*)())ega_mark_wfill;
-			update_alg.mark_string = (boolean(*)())ega_mark_string;
+			update_alg.mark_byte = (T_mark_byte)ega_mark_byte;
+			update_alg.mark_word = (T_mark_word)ega_mark_word;
+			update_alg.mark_fill = (T_mark_fill)ega_mark_string;
+			update_alg.mark_wfill = (T_mark_wfill)ega_mark_wfill;
+			update_alg.mark_string = (T_mark_string)ega_mark_string;
 
 			switch( EGA_CPU.chain )
 			{
 				case UNCHAINED:
 #ifdef GORE
-#line 3665
+#line 3813
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
-#line 3522
+#line 3818
 #ifndef CPU_40_STYLE	/* EVID */
-#line 3671
+#line 3819
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
-#line 3676
+#line 3824
 					SetMarkPointers(2);
 #endif	/* CPU_40_STYLE - EVID */
-#line 3678
+#line 3826
 #endif /* GORE */
-#line 3679
+#line 3827
 					break;
 
 				case CHAIN2:
@@ -3627,41 +3820,43 @@ set_mark_funcs IFN0()
 #ifdef	VGG
 				case CHAIN4:
 #ifdef GORE
-#line 3689
+#line 3837
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 #ifndef CPU_40_STYLE	/* EVID */
-#line 3695
+#line 3843
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
-#line 3700
+#line 3848
 					SetMarkPointers(3);
 #endif	/* CPU_40_STYLE - EVID */
-#line 3702
+#line 3850
 #endif /* GORE */
-#line 3703
+#line 3851
 					break;
 #endif	/* VGG */
-#line 3548
-#line 3705
+#line 3686
+#line 3853
 			}
 
 			break;
 
 		default:
-#line 3710
+#line 3858
 			assert1(NO,"Unknown marking type %d", (int) curr_mark_type);
 			break;
+#endif  //NEC_98
+#line 3861
 	}
 }
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
-#line 3558
+#line 3864
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 3717
+#line 3866
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 3719
+#line 3868
 
 GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 		MARKING_TYPE, marking_type, SCROLL_TYPE, scroll_type)
@@ -3673,16 +3868,17 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 			update_alg.scroll_up = dummy_scroll;
 			update_alg.scroll_down = dummy_scroll;
 			break;
+#ifndef NEC_98
 		case	TEXT_SCROLL:
 #if defined(NTVDM) && defined(MONITOR)
-#line 3732
+#line 3882
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
-#line 3735
+#line 3885
 			update_alg.scroll_up = text_scroll_up;
 			update_alg.scroll_down = text_scroll_down;
 #endif	/* NTVDM & MONITOR */
-#line 3738
+#line 3888
 			break;
 #if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )	/* remove unneeded code */
 		case	CGA_GRAPH_SCROLL:
@@ -3705,9 +3901,10 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 			break;
 #endif /* V7VGA */
 #endif /* VGG */
-#line 3602
+#line 3910
 #endif /* !NTVDM | (NTVDM & !X86GFX) */
-#line 3761
+#endif  //NEC_98
+#line 3912
 	}
 
 	curr_mark_type = marking_type;
@@ -3731,10 +3928,10 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 		inhibit_gfx_update_routines();
 }
 #endif /* EGG */
-#line 3784
+#line 3935
 
 #endif /* REAL_VGA */
-#line 3786
+#line 3937
 
 #ifndef cursor_changed
 void cursor_changed IFN2(int, x, int, y)
@@ -3743,12 +3940,15 @@ void cursor_changed IFN2(int, x, int, y)
 	UNUSED(x);
 	UNUSED(y);
 	
+#ifndef NEC_98
 	setVideodirty_total(getVideodirty_total() + 1);
+#endif  //NEC_98
+#line 3948
 #else
-#line 3796
+#line 3949
 #error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
-#line 3802
+#line 3955
 } 
 #endif
 
@@ -3766,18 +3966,18 @@ void base_cursor_shape_changed IFN0()
 
 #ifndef REAL_VGA
 #ifdef HERC
-#line 3819
+#line 3972
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
-#line 4041
+#line 4194
 
 #if defined(VGG) || defined(EGG)
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 4045
+#line 4198
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 4047
+#line 4200
 
 /* ============================================================================
  * The following routines enable and disable the GFX update routines
@@ -3862,10 +4062,10 @@ GLOBAL void enable_gfx_update_routines IFN0()
 
 #endif /* VGG */
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#line 4131
+#line 4284
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 4133
+#line 4286
 
 #ifdef NTVDM
 
@@ -3877,10 +4077,10 @@ int RectDefined;
 int RectTop, RectBottom, RectLeft, RectRight;
 
 #ifdef MONITOR
-#line 4144
+#line 4297
 #error Unsupported excluded original configuration
 #endif	/* MONITOR */
-#line 4613
+#line 5362
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::: Text handling routines :::::::::::::::::::::::::::*/
@@ -3899,14 +4099,18 @@ int BaseL, BaseR;
 
 void init_text_rect()
 {
+#ifndef NEC_98
     RectDefined = FALSE;       /* No rectangle defined yet */
     ExpandCount = 0;
+#endif  //NEC_98
+#line 5384
 }
 
 /* Add coordinates to rectangle */
 
 void add_to_rect(int screen_start, register int x, register int y, int len)
 {
+#ifndef NEC_98
     int endx = x + len - 1;
 
     /* printf("add rect - (%d,%d) len %d\n", x, y, len); */
@@ -3917,8 +4121,13 @@ void add_to_rect(int screen_start, register int x, register int y, int len)
     {
 	/* Validate X variation and Y coord */
 
+#if defined(JAPAN) || defined(KOREA)
+	if( ( BaseL == x ) &&
+	    ( BaseR == endx )  &&
+#else
 	if(abs(BaseL - x) <= MAX_LEFT_VARIATION &&
 	   abs(BaseR - endx) <= MAX_RIGHT_VARIATION &&
+#endif
 	   RectBottom+1 >= y)
 	{
 	    /* Expand rectangle */
@@ -3950,6 +4159,8 @@ void add_to_rect(int screen_start, register int x, register int y, int len)
 
     RectBottom = y;
     RectRight = endx;
+#endif  //NEC_98
+#line 5440
 }
 
 
@@ -3957,14 +4168,15 @@ void add_to_rect(int screen_start, register int x, register int y, int len)
 
 void paint_text_rect(int screen_start)
 {
+#ifndef NEC_98
 #ifdef MONITOR
-#line 4690
+#line 5457
 #error Unsupported excluded original configuration
 #else
-#line 4692
+#line 5460
     int offset = (RectTop * (get_offset_per_line()<<1)) + (RectLeft<<2);
 #endif
-#line 4694
+#line 5462
 
     /* Is there a rectangled defined */
     if(!RectDefined) return;
@@ -3975,21 +4187,379 @@ void paint_text_rect(int screen_start)
 
     (*paint_screen)(offset + screen_start,			/* Start Offset */
 #ifdef MONITOR
-#line 4704
+#line 5472
 #error Unsupported excluded original configuration
 #else
-#line 4706
+#line 5474
 		   RectLeft*get_pix_char_width(),RectTop*get_host_char_height(),
 #endif
-#line 4708
+#line 5476
 		    (RectRight - RectLeft +1)*2,		/* Len */
 		    RectBottom - RectTop +1);			/* Height */
 
     RectDefined = FALSE;	/* Rectangle painted */
     ExpandCount = 0;
+#endif  //NEC_98
+#line 5482
 }
 
 #ifndef MONITOR
+#ifdef JAPAN
+// This routine provides the same functionality as mon_text_update_03().
+void jazz_text_update_jp();
+
+void jazz_text_update_jp()
+{
+
+    register int i;	/* Loop counters		*/
+    register int j,k;
+    register unsigned short *from,*to;
+    register int chars_per_line = get_offset_per_line()>>1;
+    int lines_per_screen;
+    int	offset,len,x,screen_start;
+    unsigned short *wfrom;
+    unsigned short *wto;
+
+    byte *pInt10Flag;
+    static NtInt10FlagUse = FALSE;
+    IMPORT sys_addr DosvVramPtr;
+    register sys_addr ptr = DosvVramPtr;
+    register int skip;
+
+
+    if (getVideodirty_total() == 0 || get_display_disabled() )
+	return;
+
+    if ( get_offset_per_line() == 0 ){
+        lines_per_screen = 25;
+    }
+    else {
+        lines_per_screen = get_screen_length()/get_offset_per_line();
+    }
+
+    host_start_update();
+
+    screen_start=get_screen_start()<<2;
+    ALIGN_SCREEN_START(screen_start);
+
+    // mode 03h and 73h use same plane  Aug. 6 TakeS
+    to = (unsigned short *)&video_copy[get_screen_start()<<1];
+    from = (unsigned short *) get_screen_ptr(screen_start);
+
+    skip = 2;
+
+    if(getVideodirty_total() >1500)	/* paint the whole lot */
+    {
+        for(i=get_screen_length()>>1;i>0;i--)
+	{
+	    *to++ = *from;	/* char and attribute bytes */
+            from++;
+	    sas_loadw(ptr, from);
+	    from++;
+	    ptr += skip;
+	    // from += 2;		/* planes 2,3 interleaved */
+	}
+
+	while ( NtInt10FlagUse ) {
+#ifdef JAPAN_DBG
+	    DbgPrint( "NtInt10Flag busy\n" );
+#endif
+	    Sleep( 100L );
+	}
+        NtInt10FlagUse = TRUE;
+	memcpy( NtInt10Flag, Int10Flag, 80*50 );
+        {
+	register int i = 80*50;
+	register byte *p = Int10Flag;
+	
+	while(i--){
+	  *p++ &= (~INT10_CHANGED); // reset
+	  }
+        }
+
+        (*paint_screen)(screen_start, 0, 0, get_bytes_per_line(),
+		        lines_per_screen);
+
+        NtInt10FlagUse = FALSE;
+    }
+    else
+    {
+      if( Int10FlagCnt )
+	{
+	  Int10FlagCnt = 0;
+	
+	  /* Screen changed, calculate position of first variation */
+	
+	  init_text_rect();
+	
+	  while ( NtInt10FlagUse ) {
+#ifdef JAPAN_DBG
+	    DbgPrint( "NtInt10Flag busy\n" );
+#endif
+	    Sleep( 100L );
+	  }
+	  NtInt10FlagUse = TRUE;
+	    memcpy( NtInt10Flag, Int10Flag, 80*50 );
+	  {
+	    register int i = 80*50;
+	    register byte *p = Int10Flag;
+	
+	    while(i--){
+	      *p++ &= (~INT10_CHANGED); // reset
+	      }
+	  }
+	
+	  pInt10Flag = NtInt10Flag;
+	
+	  for(i=0;i<lines_per_screen;i++, pInt10Flag += chars_per_line )
+	    {
+              for(j=0;j<chars_per_line;j++, to++, from +=2, ptr += skip )
+		{
+		  if ( pInt10Flag[j] & INT10_CHANGED )
+		    break;
+		}
+	      if ( j == chars_per_line )
+		continue;             // not change goto next line
+		
+		  for ( k = chars_per_line - 1; k >= j; k-- ) {
+		    if ( pInt10Flag[k] & INT10_CHANGED )
+		      break;
+		  }
+	
+		// ntraid:mskkbug#3297,3515: some character does not display
+		// 11/6/93 yasuho
+		// Repaint the incomplete DBCS character
+		if (j && (pInt10Flag[j] & INT10_DBCS_TRAILING) &&
+		    (pInt10Flag[j-1] == INT10_DBCS_LEADING)) {
+			j--;
+			pInt10Flag[j] |= INT10_CHANGED;
+		}
+
+	      len = k - j + 1;
+	      x = j;
+	
+		add_to_rect(screen_start, x, i, len);
+	
+	      /*.................. transfer data painted to video copy */
+	
+	      for( k = j; k < chars_per_line; k++ ){
+		*to++ = *from;
+		from++;
+		sas_loadw(ptr, from);
+		from++;
+		ptr += skip;
+		// from += 2;
+	      }
+	    }
+	}
+      /* End of screen, flush any outstanding text update rectangles */
+	paint_text_rect(screen_start);
+
+      NtInt10FlagUse = FALSE;
+  }
+
+  setVideodirty_total(0);
+
+  /*:::::::::::::::::::::::::::::::::::::::::::::::::: Repaint cursor */
+
+  if (is_cursor_visible())
+    {
+      half_word attr;
+
+      dirty_curs_x = get_cur_x();
+      dirty_curs_y = get_cur_y();
+
+      dirty_curs_offs = screen_start+dirty_curs_y * (get_offset_per_line()<<1) + (dirty_curs_x<<2);
+      attr = *(get_screen_ptr(dirty_curs_offs + 1));
+
+      host_paint_cursor( dirty_curs_x, dirty_curs_y, attr );
+    }
+
+  host_end_update();
+}
+#endif // JAPAN
+#if defined(KOREA)
+void jazz_text_update_ko()
+{
+
+    register int i;	/* Loop counters		*/
+    register int j,k;
+    register unsigned short *from,*to;
+    register int chars_per_line = get_offset_per_line()>>1;
+    int lines_per_screen;
+    int	offset,len,x,screen_start;
+    unsigned short *wfrom;
+    unsigned short *wto;
+
+    unsigned char *flag_from, *flag_to;
+    boolean  DBCSState1 = FALSE;
+    boolean  DBCSState2 = FALSE;
+
+    if (getVideodirty_total() == 0 || get_display_disabled() )
+	return;
+
+    lines_per_screen = get_screen_length()/get_offset_per_line();
+
+    host_start_update();
+
+    screen_start=get_screen_start()<<2;
+    ALIGN_SCREEN_START(screen_start);
+
+    to = (unsigned short *)&video_copy[get_screen_start()<<1];
+    from = (unsigned short *) get_screen_ptr(screen_start);
+
+    if(getVideodirty_total() >1500)	/* paint the whole lot */
+    {
+	for(i=get_screen_length()>>1;i>0;i--)
+	{
+	    *to++ = *from;	/* char and attribute bytes */
+	    from += 2;		/* planes 2,3 interleaved */
+	}
+
+	(*paint_screen)(screen_start, 0, 0, get_bytes_per_line(),
+			lines_per_screen);
+    }
+    else
+    {
+	init_text_rect();
+
+        flag_from = (unsigned char*)Int10Flag;
+        flag_to   = (unsigned char*)NtInt10Flag;
+        wfrom = (unsigned short *)from;
+        wto   = (unsigned short *)to;
+        for(i=0;i<lines_per_screen;i++)
+        {
+         for(j=0;j<chars_per_line;j++)
+         {
+             if (DBCSState1)
+             {
+                 *flag_from++ = INT10_DBCS_TRAILING;
+                 DBCSState1 = FALSE;
+             }
+             else if (DBCSState1 = is_dbcs_first(LOBYTE(*wfrom)))
+                 *flag_from++ = INT10_DBCS_LEADING;
+             else
+                 *flag_from++ = INT10_SBCS;
+             wfrom+=2;
+
+             if (DBCSState2)
+             {
+                 *flag_to++ = INT10_DBCS_TRAILING;
+                 DBCSState2 = FALSE;
+             }
+             else if (DBCSState2 = is_dbcs_first(LOBYTE(*wto)))
+                 *flag_to++ = INT10_DBCS_LEADING;
+             else
+                 *flag_to++ = INT10_SBCS;
+             wto++;
+         }
+        }
+
+        flag_from = (unsigned char*)Int10Flag;
+        flag_to   = (unsigned char*)NtInt10Flag;
+
+	for(i=0;i<lines_per_screen;i++)
+	{
+	    for(j=0;j<chars_per_line;j++)
+	    {
+                flag_from++;
+                flag_to++;
+		if(*to != *from)
+		{
+		    k=chars_per_line-1-j;
+		    wfrom = from + k*2;
+		    wto   = to + k;
+
+		    for(;*wto== *wfrom;k--,wto--,wfrom-=2){};
+		    /*
+		     * Note: For text mode there is one char for every word.
+		     * no of bytes into screen=line*bytes_per_line + ints_into_line*4
+		     * x_coord=width_of_one_char*(no_of_ints_into_line*2)
+		     * y_coord=height_of_one_char*2*line
+		     * length=no_of_ints*4+4     the plus 4 is to counteract the k--
+		     * The host y co-ords are doubled
+		     */
+
+		    /* one or more ints of data are now selected
+		       but refine difference to words (i.e. characters),
+		       to avoid a glitch on the screen when typing in to
+ 		       a dumb terminal  */
+
+		    offset = (i * (get_offset_per_line()<<1)) + (j<<2);
+                    len    = (k<<2) + 4;
+                    x      = j;
+
+                    if ( (*flag_from & INT10_DBCS_TRAILING) ||
+                         (*flag_to   & INT10_DBCS_TRAILING)   )
+                    {
+                        x--;
+                        len += 4;
+                    }
+
+		    wfrom = from + (k<<1);
+		    wto   = to + k;
+		    if (*wfrom == *wto)
+		    {
+                        if (*(flag_from+k) & INT10_DBCS_LEADING)
+                        {
+                            len += 4;
+                        }
+                        else if ( !(*(flag_from+k) & INT10_DBCS_TRAILING) &&
+                                  !(*(flag_to+k)   & INT10_DBCS_TRAILING)   )
+                        {
+			    len -= 4;
+                        }
+                    }
+                    else if ( (*(flag_from+k) & INT10_DBCS_LEADING) ||
+                              (*(flag_to+k)   & INT10_DBCS_LEADING)   )
+                    {
+                        len += 4;
+                    }
+
+                    add_to_rect(screen_start, x, i, len/4);
+
+		    for(k=j;k<chars_per_line;k++)
+		    {
+			*to++ = *from;
+			from+=2;
+		    }
+
+                    flag_from += (chars_per_line-j);
+                    flag_to   += (chars_per_line-j);
+
+		    break;	/* onto next line */
+		}
+		else
+		{
+		    to++; from +=2;
+		}
+	    }
+	}
+	  /* End of screen, flush any outstanding text update rectangles */
+	  paint_text_rect(screen_start);
+    }
+
+	setVideodirty_total(0);
+
+	/*:::::::::::::::::::::::::::::::::::::::::::::::::: Repaint cursor */
+
+	if (is_cursor_visible())
+	{
+		half_word attr;
+
+		dirty_curs_x = get_cur_x();
+		dirty_curs_y = get_cur_y();
+
+		dirty_curs_offs = screen_start+dirty_curs_y * (get_offset_per_line()<<1) + (dirty_curs_x<<2);
+		attr = *(get_screen_ptr(dirty_curs_offs + 1));
+
+		host_paint_cursor( dirty_curs_x, dirty_curs_y, attr );
+	}
+
+	host_end_update();
+}
+#endif // KOREA
+
 void jazz_text_update()
 {
 
@@ -4002,6 +4572,23 @@ void jazz_text_update()
     unsigned short *wfrom;
     unsigned short *wto;
 
+#ifdef JAPAN
+    byte vmode = sas_hw_at_no_check(DosvModePtr);
+    if (BOPFromDispFlag &&
+        (sas_w_at_no_check(DBCSVectorAddr) != 0) &&
+        (vmode == 0x03 || vmode == 0x73)) {
+        jazz_text_update_jp();
+        return;
+    }
+#elif defined(KOREA) // JAPAN
+    byte vmode = sas_hw_at_no_check(DosvModePtr);
+    if (BOPFromDispFlag &&
+        (sas_w_at_no_check(DBCSVectorAddr) != 0) &&
+        (vmode == 0x03)) {
+        jazz_text_update_ko();
+        return;
+    }
+#endif // KOREA
     if (getVideodirty_total() == 0 || get_display_disabled() )
 	return;
 
@@ -4096,22 +4683,25 @@ void jazz_text_update()
 	host_end_update();
 }
 #endif /* MONITOR */
-#line 4434
+#line 5964
 #endif /* NTVDM */
-#line 4435
+#line 5965
 #endif /* REAL_VGA */
-#line 4436
+#line 5966
 
+extern void host_stream_io_update(half_word *, word);
+
+#ifndef NEC_98
 #ifdef NTVDM
-#line 4826
+#line 5971
 void stream_io_update(void)
 {
 
 #ifdef MONITOR
-#line 4830
+#line 5975
 #error Unsupported excluded original configuration
 #endif
-#line 4835
+#line 5980
 
     if (*stream_io_dirty_count_ptr) {
         host_start_update();
@@ -4123,3 +4713,10 @@ void stream_io_update(void)
 
 }
 #endif
+#endif // !NEC_98
+#line 5992
+
+#if defined(NEC_98)
+#line 5994
+#error Unsupported NEC PC-98 configuration
+#endif  //NEC_98
