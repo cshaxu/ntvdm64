@@ -20,7 +20,8 @@ set "BINARY=%STAGE%"
 if exist "%STAGE%\system32\run16.exe" set "BINARY=%STAGE%\system32"
 set "CACHE=%ROOT%\build\.ninja\msvc-x86-release\worker"
 if not exist "%BINARY%\MEM.EXE" exit /b 2
-if not exist "%CACHE%\s45-keyboard-profile-builder.exe" exit /b 2
+set "PIF=%ROOT%\assets\release\PIF.EXE"
+if not exist "%PIF%" exit /b 2
 if not exist "%CACHE%\s45-cmdkeyb-shadow-fixture.exe" exit /b 2
 if exist "%BINARY%\KTEST" exit /b 2
 if exist "%OUTPUT%\system32\s45-cmdkeyb-shadow-fixture.exe" exit /b 2
@@ -30,7 +31,10 @@ copy /b "%CACHE%\s45-cmdkeyb-shadow-fixture.exe" "%OUTPUT%\system32\s45-cmdkeyb-
 if errorlevel 1 exit /b 1
 mkdir "%BINARY%\KTEST"
 if errorlevel 1 exit /b 1
-"%CACHE%\s45-keyboard-profile-builder.exe" "%BINARY%\KTEST" "%BINARY%\MEM.EXE"
+set "PROFILE=%BINARY%\KTEST\S45KEY.PIF"
+copy /b "%ROOT%\test\observation\fixtures\keyboard-profile.pif" "%PROFILE%.stage" >nul || exit /b 1
+"%PIF%" update "%PROFILE%.stage" --program "%BINARY%\MEM.EXE" --config "%BINARY%\config.nt" --autoexec "%BINARY%\autoexec.nt"
 if errorlevel 1 exit /b %errorlevel%
+move /y "%PROFILE%.stage" "%PROFILE%" >nul || exit /b 1
 copy /b /y "%ROOT%\test\mvdm-host\fixtures\S45-KEYBOARD-NTVDM.REG" "%BINARY%\NTVDM.REG" >nul
 exit /b %errorlevel%

@@ -29,12 +29,21 @@ try {
     $tests=Join-Path $binary 'KTEST'
     & "$repository/tools/prepare-keyboard-test.cmd" $stage $build
     if($LASTEXITCODE){throw 'CMD keyboard test preparation failed'}
+    $profile=Join-Path $tests 'S45KEY.PIF'
+    $fields=@(& "$repository/assets/release/PIF.EXE" show $profile)
+    if($LASTEXITCODE -or 'W386.FLAGS=0x00001000' -notin $fields -or
+        "PROGRAM=$binary\MEM.EXE" -notin $fields -or
+        "CONFIG=$binary\config.nt" -notin $fields -or
+        "AUTOEXEC=$binary\autoexec.nt" -notin $fields){
+        throw 'Keyboard PIF lost its polling policy or runtime paths'
+    }
+    $fields | Set-Content "$build/pif.txt"
     $trace=Join-Path $build 'registry.log'
     $report=Join-Path $build 'observer.txt'
     $env:PATH="$binary;$env:SystemRoot\System32;$env:SystemRoot"
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     $env:NTVDM_SHADOW_REGISTRY_TRACE=$trace
-    & $observerPath (Join-Path $binary 'run16.exe') $binary $report --wait (Join-Path $tests 'S45KEY.PIF') --observation-timeout-ms 30000
+    & $observerPath (Join-Path $binary 'run16.exe') $binary $report --wait $profile --observation-timeout-ms 30000
     if($LASTEXITCODE){throw 'Keyboard guest observer failed'}
     $screen=Get-Content "$report.console.txt" -Raw
     # The native Console layout query may legitimately fail: original COMMAND

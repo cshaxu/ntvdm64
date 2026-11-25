@@ -30,6 +30,8 @@ interpreter-free acceptance stage.
 
 ## Current Progress
 
+S5 P3 consolidates the keyboard profile through the released PIF editor. Byte equivalence and the real DOS keyboard startup and reader checks passed. [Evidence](../etc/evidence/t484-s5-keyboard-pif-consolidation.md).
+
 S5 P2 consolidates pure DOS and XMS through the same CMD/PIF owner and retires two native writers. Five variants are byte-identical and two differ only in unused legacy string tails. Actual pure DOS and XMS cases passed. The cached host build and host/addon hashes match the existing release. [Evidence](../etc/evidence/t484-s5-pure-xms-pif-consolidation.md).
 
 S5 P1 consolidates EMS profile generation through the current PIF editor and CMD. Native field tests, byte equivalence, two real EMS cases and a released-tool EMS case passed. All fourteen addons were verified and only PIF.EXE changed. The two host publication sets retained all eleven hashes. [Evidence](../etc/evidence/t484-s5-ems-pif-consolidation.md).

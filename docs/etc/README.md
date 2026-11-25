@@ -1982,3 +1982,4 @@ post-publication targeted checks.
 - [T484 S4 Win31 and Win95 matrix preparation](evidence/t484-s4-matrix-preparation.md).
 - [T484 S5 EMS PIF consolidation](evidence/t484-s5-ems-pif-consolidation.md).
 - [T484 S5 pure DOS and XMS PIF consolidation](evidence/t484-s5-pure-xms-pif-consolidation.md).
+- [T484 S5 keyboard PIF consolidation](evidence/t484-s5-keyboard-pif-consolidation.md).
