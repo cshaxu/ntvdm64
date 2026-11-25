@@ -63,7 +63,6 @@ PCSR_CAPTURE_HEADER
 NTAPI
 CsrAllocateCaptureBuffer(
     IN ULONG CountMessagePointers,
-    IN ULONG CountCapturePointers,
     IN ULONG Size
     );
 

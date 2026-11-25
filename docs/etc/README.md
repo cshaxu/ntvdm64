@@ -1992,3 +1992,37 @@ post-publication targeted checks.
 [T484 delivery reconciliation](evidence/t484-delivery-reconciliation.md) records the build and release baseline inherited by T485.
 
 [T484 S7 DOS error dialog](evidence/t484-s7-dos-error-dialog-mouse.md) records the accepted mouse behavior in that package.
+
+## T485 migration receipts
+
+- [h001-sas-lifetime](evidence/t485-s1/h001-sas-lifetime.md).
+- [h002-h004](evidence/t485-s1/h002-h004.md).
+- [h005-h008](evidence/t485-s1/h005-h008.md).
+- [h009](evidence/t485-s1/h009.md).
+- [h010](evidence/t485-s1/h010.md).
+- [h011](evidence/t485-s1/h011.md).
+- [h012-h013](evidence/t485-s1/h012-h013.md).
+- [h014](evidence/t485-s1/h014.md).
+- [h015](evidence/t485-s1/h015.md).
+- [h016](evidence/t485-s1/h016.md).
+- [h017](evidence/t485-s1/h017.md).
+- [h018](evidence/t485-s1/h018.md).
+- [h019](evidence/t485-s1/h019.md).
+- [h020-h021](evidence/t485-s1/h020-h021.md).
+- [h022](evidence/t485-s1/h022.md).
+- [h023-h024](evidence/t485-s1/h023-h024.md).
+- [h024-full-checkpoint](evidence/t485-s1/h024-full-checkpoint.md).
+- [h025](evidence/t485-s1/h025.md).
+- [h026](evidence/t485-s1/h026.md).
+- [h027](evidence/t485-s1/h027.md).
+- [h028](evidence/t485-s1/h028.md).
+- [h029](evidence/t485-s1/h029.md).
+- [h030](evidence/t485-s1/h030.md).
+- [h031](evidence/t485-s1/h031.md).
+- [h032](evidence/t485-s1/h032.md).
+- [h033-startup-repair](evidence/t485-s1/h033-startup-repair.md).
+- [h033-write](evidence/t485-s1/h033-write.md).
+- [h033](evidence/t485-s1/h033.md).
+- [h034](evidence/t485-s1/h034.md).
+- [n001](evidence/t485-s1/n001.md).
+- [s4-closure](evidence/t485-s1/s4-closure.md).

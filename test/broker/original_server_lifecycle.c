@@ -706,18 +706,18 @@ int main(int argc, char **argv)
     CsrPortHeap=HeapCreate(0,0,0);
     CHECK(CsrPortHeap!=NULL && captures==0);
     {
-        PCSR_CAPTURE_HEADER capture=CsrAllocateCaptureBuffer(3,0,5);
+        PCSR_CAPTURE_HEADER capture=CsrAllocateCaptureBuffer(3, 5);
         PVOID first=NULL,empty=(PVOID)1,last=NULL;
         CHECK(capture!=NULL && captures==1);
         CHECK(CsrAllocateMessagePointer(capture,1,&first)==4);
         CHECK(CsrAllocateMessagePointer(capture,0,&empty)==0 && empty==NULL);
         CHECK(CsrAllocateMessagePointer(capture,3,&last)==4 && (PCHAR)last==(PCHAR)first+4);
-        CHECK(capture->CountMessagePointers==3 && capture->CountCapturePointers==0);
+        CHECK(capture->CountMessagePointers==3);
         CHECK(capture->MessagePointerOffsets[0]==(ULONG)&first && capture->MessagePointerOffsets[1]==0);
         CHECK(capture->MessagePointerOffsets[2]==(ULONG)&last);
         CHECK(capture->FreeSpace<=(PCHAR)capture+capture->Length);
         CsrFreeCaptureBuffer(capture);
-        CHECK(captures==0 && CsrAllocateCaptureBuffer(1,0,MAXLONG)==NULL && captures==0);
+        CHECK(captures==0 && CsrAllocateCaptureBuffer(1, MAXLONG)==NULL && captures==0);
     }
     CHECK(NtCurrentPeb()->ImageBaseAddress==GetModuleHandleW(NULL));
     CHECK(RtlProcessHeap()==GetProcessHeap());
@@ -1109,8 +1109,10 @@ int main(int argc, char **argv)
     RegisterWowExec(registrationWindow);
     CHECK(hwndWowExec == registrationWindow && ulWowExecProcessSequenceNumber == 1);
     CHECK(DestroyWindow(registrationWindow));
-    RegisterWowExec(NULL);
-    CHECK(hwndWowExec == NULL);
+    CHECK(RegisterWowExec(NULL) == STATUS_INVALID_HANDLE);
+    CHECK(hwndWowExec == registrationWindow);
+    /* No WOWHead was created by this registration-only fixture. */
+    hwndWowExec = NULL;
 
     ZeroMemory(&m,sizeof(m));
     m.u.UpdateVDMEntry.ConsoleHandle = (HANDLE)1;

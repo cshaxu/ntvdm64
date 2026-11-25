@@ -15,12 +15,12 @@ int main(void)
 {
     unsigned count,index,round;DWORD before,after;
     CHECK(sizeof(*((PCSR_CAPTURE_HEADER)0)->MessagePointerOffsets)==sizeof(void *));
-    CHECK(sizeof(CSR_CAPTURE_HEADER)==(sizeof(void *)==8 ? 48 : 28));
+    CHECK(sizeof(CSR_CAPTURE_HEADER)==(sizeof(void *)==8 ? 40 : 20));
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
     if(!opennt_base_capture_heap_begin())return 1;
     CHECK(CsrPortHeap!=NULL);
     for(round=0;round<16;++round)for(count=1;count<=9;++count) {
-        PCSR_CAPTURE_HEADER capture=CsrAllocateCaptureBuffer(count,0,256);
+        PCSR_CAPTURE_HEADER capture=CsrAllocateCaptureBuffer(count, 256);
         PVOID values[9]={0};
         CHECK(capture!=NULL);if(!capture)continue;
         CHECK(((ULONG_PTR)capture->FreeSpace%sizeof(void *))==0);

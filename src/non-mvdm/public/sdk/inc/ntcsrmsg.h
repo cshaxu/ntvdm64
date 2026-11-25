@@ -96,10 +96,8 @@ typedef struct _CSR_CAPTURE_HEADER {
     ULONG Length;
     struct _CSR_CAPTURE_HEADER *RelatedCaptureBuffer;
     ULONG CountMessagePointers;
-    ULONG CountCapturePointers;
-    PULONG_PTR MessagePointerOffsets;   // Offsets within CSR_API_MSG of pointers
-    PULONG_PTR CapturePointerOffsets;   // Offsets within CaptureBuffer of pointers
     PCHAR FreeSpace;
+    ULONG_PTR MessagePointerOffsets[1]; // Offsets within CSR_API_MSG of pointers
 } CSR_CAPTURE_HEADER, *PCSR_CAPTURE_HEADER;
 
 typedef ULONG CSR_API_NUMBER;

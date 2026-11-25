@@ -26,12 +26,10 @@ Revision History:
 #include "compat/include/base_capture_heap.h"
 #define MAKE_CSRPORT_TAG(tag) 0
 #define CAPTURE_TAG 0
-#line 265
-
+#line 244
 PCSR_CAPTURE_HEADER
 CsrAllocateCaptureBuffer(
     IN ULONG CountMessagePointers,
-    IN ULONG CountCapturePointers,
     IN ULONG Size
     )
 
@@ -51,10 +49,6 @@ Arguments:
     CountMessagePointers - Number of pointers within the request message
         that will point to locations within the allocated capture buffer.
 
-    CountCapturePointers - Number of pointers within the capture buffer
-        that will point to other locations within the allocated capture
-        buffer.
-
     Size - Total size of the data that will be captured into the capture
         buffer.
 
@@ -72,7 +66,7 @@ Return Value:
     // Calculate the total number of pointers that will be passed
     //
 
-    CountPointers = CountMessagePointers + CountCapturePointers;
+    CountPointers = CountMessagePointers;
 
     //
     // Calculate the total size of the capture buffer.  This includes the
@@ -87,10 +81,8 @@ Return Value:
         //
         return NULL;
         }
-    Size += sizeof( CSR_CAPTURE_HEADER ) + (CountPointers * sizeof( PVOID ));
-#line 326
+    Size += FIELD_OFFSET(CSR_CAPTURE_HEADER, MessagePointerOffsets) + (CountPointers * sizeof( PVOID ));
     Size = (Size + ((sizeof(PVOID)-1) * (CountPointers+1))) & ~(sizeof(PVOID)-1);
-#line 327
 
     //
     // Allocate the capture buffer from the Port Memory Heap.
@@ -113,7 +105,6 @@ Return Value:
 
     CaptureBuffer->Length = Size;
     CaptureBuffer->CountMessagePointers = 0;
-    CaptureBuffer->CountCapturePointers = 0;
 
     //
     // If there are pointers being passed then initialize the arrays of
@@ -123,26 +114,12 @@ Return Value:
     // part of the header.
     //
 
-    if (CountPointers != 0) {
-#line 360
-        CaptureBuffer->MessagePointerOffsets = (PULONG_PTR)(CaptureBuffer + 1);
-#line 361
+    RtlZeroMemory( CaptureBuffer->MessagePointerOffsets,
+                   CountPointers * sizeof( ULONG_PTR )
+                 );
 
-        CaptureBuffer->CapturePointerOffsets =
-            CaptureBuffer->MessagePointerOffsets + CountMessagePointers;
-
-        RtlZeroMemory( CaptureBuffer->MessagePointerOffsets,
-                       CountPointers * sizeof( ULONG_PTR )
-                     );
-
-        CaptureBuffer->FreeSpace = (PCHAR)
-            (CaptureBuffer->CapturePointerOffsets + CountCapturePointers);
-        }
-    else {
-        CaptureBuffer->MessagePointerOffsets = NULL;
-        CaptureBuffer->CapturePointerOffsets = NULL;
-        CaptureBuffer->FreeSpace = (PCHAR)(CaptureBuffer + 1);
-        }
+    CaptureBuffer->FreeSpace = (PCHAR)
+        (CaptureBuffer->MessagePointerOffsets + CountPointers);
 
     //
     // Returned the address of the capture buffer.
@@ -151,7 +128,7 @@ Return Value:
     return( CaptureBuffer );
 }
 
-
+#line 346
 VOID
 CsrFreeCaptureBuffer(
     IN PCSR_CAPTURE_HEADER CaptureBuffer
@@ -182,7 +159,7 @@ Return Value:
     RtlFreeHeap( CsrPortHeap, 0, CaptureBuffer );
 }
 
-
+#line 377
 ULONG
 CsrAllocateMessagePointer(
     IN OUT PCSR_CAPTURE_HEADER CaptureBuffer,
@@ -241,9 +218,7 @@ Return Value:
             return 0;
             }
 
-#line 475
         Length = (Length + sizeof(PVOID)-1) & ~(sizeof(PVOID)-1);
-#line 476
 
         //
         // Update the free space pointer to point to the next available byte
@@ -270,7 +245,7 @@ Return Value:
     return( Length );
 }
 
-#line 572
+#line 463
 VOID
 CsrCaptureMessageBuffer(
     IN OUT PCSR_CAPTURE_HEADER CaptureBuffer,
@@ -283,8 +258,7 @@ CsrCaptureMessageBuffer(
 
 Routine Description:
 
-    This function captures an ASCII string into a counted string data
-    structure located in an API request message.
+    This function captures a buffer of bytes in an API request message.
 
 Arguments:
 
@@ -292,13 +266,11 @@ Arguments:
         CsrAllocateCaptureBuffer.
 
     Buffer - Optional pointer to the buffer.  If this parameter is
-        not present, then the counted string data structure is set to
-        the null string and no space is allocated from the capture
-        buffer.
+        not present, then no data is copied into capture buffer.
 
     Length - Length of the buffer.
 
-    CaptureString - Pointer to the field in the message that will
+    CapturedBuffer - Pointer to the field in the message that will
         be filled in to point to the capture buffer.
 
 Return Value:
@@ -336,6 +308,7 @@ Return Value:
     return;
 }
 
+#line 525
 VOID
 CsrCaptureMessageString(
     IN OUT PCSR_CAPTURE_HEADER CaptureBuffer,
@@ -359,17 +332,17 @@ Arguments:
 
     String - Optional pointer to the ASCII string.  If this parameter is
         not present, then the counted string data structure is set to
-        the null string and no space is allocated from the capture
-        buffer.
+        the null string.
 
-    Length - Length of the ASCII string.
+    Length - Length of the ASCII string, ignored if String is NULL.
 
     MaximumLength - Maximum length of the string.  Different for null
         terminated strings, where Length does not include the null and
-        MaximumLength does.
+        MaximumLength does. This is always how much space is allocated
+        from the capture buffer.
 
     CaptureString - Pointer to the counted string data structure that will
-        be filled in to point to the capture ASCII string.
+        be filled in to point to the captured ASCII string.
 
 Return Value:
 
@@ -378,6 +351,7 @@ Return Value:
 --*/
 
 {
+    ASSERT(CapturedString != NULL);
     //
     // If String parameter is not present, then set the captured string
     // to be the null string and returned.
@@ -390,6 +364,12 @@ Return Value:
                                    MaximumLength,
                                    (PVOID *)&CapturedString->Buffer
                                  );
+        //
+        // Make it nul terminated if there is any room.
+        //
+        if (MaximumLength != 0) {
+            CapturedString->Buffer[0] = 0;
+            }
         return;
         }
 
@@ -411,16 +391,15 @@ Return Value:
 
     if (Length != 0) {
         RtlMoveMemory( CapturedString->Buffer, String, MaximumLength );
-        if (CapturedString->Length < CapturedString->MaximumLength) {
-            CapturedString->Buffer[ CapturedString->Length ] = '\0';
-            }
+        }
+    if (CapturedString->Length < CapturedString->MaximumLength) {
+        CapturedString->Buffer[ CapturedString->Length ] = '\0';
         }
 
     return;
 }
 
-
-
+#line 741
 PLARGE_INTEGER
 CsrCaptureTimeout(
     IN ULONG MilliSeconds,

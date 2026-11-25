@@ -23,7 +23,7 @@ BOOL BaseCheckForVDM(HANDLE, LPDWORD);
  * Original callers, parameters and NTAPI convention remain unchanged. */
 #define CsrClientCallServer NtvdmBaseClientCallServer
 NTSTATUS NTAPI CsrClientCallServer(struct _CSR_API_MSG *, struct _CSR_CAPTURE_HEADER *, ULONG, ULONG);
-struct _CSR_CAPTURE_HEADER * NTAPI CsrAllocateCaptureBuffer(ULONG, ULONG, ULONG);
+struct _CSR_CAPTURE_HEADER * NTAPI CsrAllocateCaptureBuffer(ULONG, ULONG);
 VOID NTAPI CsrFreeCaptureBuffer(struct _CSR_CAPTURE_HEADER *);
 ULONG NTAPI CsrAllocateMessagePointer(struct _CSR_CAPTURE_HEADER *, ULONG, PVOID *);
 BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);

@@ -8,10 +8,10 @@ DLL target versus the one `ntvdm.exe` worker?
 
 ## Inputs
 
-- [`src/mvdm/vdmredir/sources`](../../../src/mvdm-host/vdmredir/sources),
+- `src/mvdm-host/vdmredir/sources` (historical path; retired during T485),
   [`vdmredir.def`](../../../src/mvdm-host/vdmredir/vdmredir.def), and the 15
   selected original C bodies beneath that same canonical mirror path.
-- [`src/mvdm/wow32/sources`](../../../src/mvdm-host/wow32/sources) and
+- `src/mvdm-host/wow32/sources` (historical path; retired during T485) and
   [`wow32.def`](../../../src/mvdm-host/wow32/wow32.def): the original manifest
   declares 86 C bodies, one resource and `W32DllInitialize`.
 - Fresh generated graph

@@ -107,7 +107,7 @@ Outstanding work, each assigned below:
 
 ## Capability scope and architecture boundary
 
-The original [sources manifest](../../src/mvdm-host/wow32/sources) selects 77 C
+The original `src/mvdm-host/wow32/sources` (historical path; retired during T485) selects 77 C
 translation units; [wowtbl.c](../../src/mvdm-host/wow32/wowtbl.c) assembles ten
 dispatch-table families. The scope includes initialization/BOP/thunk dispatch,
 16/32-bit structures and aliases, callbacks, KERNEL/DOS and module/memory/file

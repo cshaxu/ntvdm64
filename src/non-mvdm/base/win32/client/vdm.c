@@ -603,7 +603,7 @@ Return Value:
 	nPointers++;
 	}
 
-    CaptureBuffer = CsrAllocateCaptureBuffer(nPointers, 0, Len);
+    CaptureBuffer = CsrAllocateCaptureBuffer(nPointers, Len);
     if (CaptureBuffer == NULL) {
         BaseSetLastNTError( STATUS_NO_MEMORY );
         return FALSE;
@@ -928,7 +928,7 @@ SetVDMCurrentDirectories(
     if (cchCurDirs && lpszzCurDirs) {
 	// get capture buffer, one pointer in the message
 
-	CaptureBuffer = CsrAllocateCaptureBuffer(1, 0, cchCurDirs);
+	CaptureBuffer = CsrAllocateCaptureBuffer(1, cchCurDirs);
         if (CaptureBuffer == NULL) {
             BaseSetLastNTError( STATUS_NO_MEMORY );
             return FALSE;
@@ -1011,7 +1011,7 @@ GetVDMCurrentDirectories(
 	return 0L;
     }
     if (cchCurDirs && lpszzCurDirs) {
-	CaptureBuffer = CsrAllocateCaptureBuffer(1, 0, cchCurDirs);
+	CaptureBuffer = CsrAllocateCaptureBuffer(1, cchCurDirs);
         if (CaptureBuffer == NULL) {
             BaseSetLastNTError( STATUS_NO_MEMORY );
             return FALSE;
@@ -1859,7 +1859,7 @@ Return Value:
 
 
         // capture message buffer
-        CaptureBuffer = CsrAllocateCaptureBuffer(bufPointers, 0, Len);
+        CaptureBuffer = CsrAllocateCaptureBuffer(bufPointers, Len);
         if (CaptureBuffer == NULL) {
             BaseSetLastNTError( STATUS_NO_MEMORY );
             goto BCVTryExit;

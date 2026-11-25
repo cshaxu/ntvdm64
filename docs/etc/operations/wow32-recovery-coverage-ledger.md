@@ -109,7 +109,7 @@ successor capability is marked complete by this audit ledger.
 
 ## Source coverage seed
 
-Exact manifest: [sources](../../../src/mvdm-host/wow32/sources), SHA-256
+Exact manifest: `src/mvdm-host/wow32/sources` (historical path; retired during T485), SHA-256
 D24767FF50C4C7017E6FCF5F550E120DB0F580F7C07C77CBE7E99E4432F52B36.
 The active SOURCES block contains 77 C files plus wow32.rc; disabled !IF 0
 tables are not active inputs. EH reports those 77 compiled, not all accepted.
