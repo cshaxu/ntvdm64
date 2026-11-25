@@ -1,0 +1,57 @@
+H001–H036 XP SP1 非排除镜像差异审计
+
+结论：不通过“所有剩余 diff 都必要且最小”的验收。
+全部 4,550 个快照点位已有逐点审查处置（见 point-decisions.csv/json）；这不表示每一点均已取得运行证明。证据不足、候选恢复、最小性未证明均是不予无条件保留的审计结论。
+审计未修改生产源码、未发布、未提交。实验文件只在 build/h-series-xp-audit-nonexcluded。
+
+一、11 个文件的排除配对
+1. dpmi32/dpmi32.c：XP _X86_ 原体 305–308 对应当前 i386 307–308。体可配对，guard 改名是非排除 diff；旧 #line 必须修正。
+2. dpmi32/dpmiint.c：四个 kernel arm 按所属 handler 配对；DBG 的当前 573 不能错配到 XP129，应对应 XP556。CCPU guard 不能从非排除统计抹掉。审计中新增的 DpmiOwnsContext 已另行核对。
+3. dpmi32/modesw.c：当前把原 software-first 两处改为 kernel-first。恢复原顺序并保留 CPU40 选择，正式配置预处理对照等价。object-contracts.cmake 对倒置顺序的断言也需随之修正，不能让测试固定非原版结构。
+4. inc/wowusr.h：47 个 NULLSTRUCT arm 按 typedef 和相邻结构重新配对；GETMESSAGEPOS16 不是 GETFOCUS16。存在旧逻辑行锚偏移，不能据此误认原代码被删除。
+5. keymouse/mouse_io.c：1615 是新增硬件 VESA 排除，不是原有 arm；3517 只对应 XP3774–3777 内层 MONITOR 体。删除六处会吞掉实际软件鼠标代码的重叠 mask，保留 MOUSE_16_BIT 内层排除。重写的框架计入非排除 diff。
+6. video/video.c：三处 MVDM_STANDALONE_SAS_VIDEO guard 是新增软件地址适配，没有原 arm 可配；SAS/CHAIN2 实际分派必须独立审核。
+7. host/inc/host_def.h：新 !CPU40 guard 无原 arm；cpu.h/cpu4.h 的后端选择是适配 diff，不能当排除体免费消失。
+8. host/src/copy_fnc.c：#if0 体可配对，但 #error 后仍有 l_addr 可执行语句，不符合 error-only 规则；其后的字节计数修复另算，不能混删。
+9. host/src/nt_fulsc.c：新 #if0 不等于原 !NEC_98 / JAPAN||KOREA，必须恢复原条件框架。X86GFX 排除须在 getNtScreenState 两侧切开，这个 getter 仍是实际软件状态查询。
+10. obj.vdm/ntvdm.c：新增 MONITOR guard 替换了原无条件 TEB Vdm 版本字写入，没有原排除 arm。当前 Vdm 是实际绑定指针，恢复原版本字写入会破坏它；保留适配但如实登记。
+11. wow32/wkgthunk.c：XP416–455 对应当前 helper body；WOW_X86_GENERIC_CALL 是实际 i386/callpr32.asm 已链接的 ABI 选择，guard 单独计 diff。RISC arm 的 #line 必须正确。
+
+reviewed-pair-mappings.json 是精确配对表；check-ranges.py 对 1,039 个文件检查未发现重叠 mask。无重叠不等于所有 #line 已正确或所有排除政策已满足。
+
+二、必须优先处理的发现
+[P1] c_seg.c:253 硬编码 selector==0040，覆盖合法 guest GDT 描述符。
+实际 CPU 探针：GDT0040 指定 base=50000/limit=1234；当前得到 base=400/limit=ffff；只移除该分支的对照恢复正确值。
+历史 DOSX FSTI 早期启动确有固定0040兼容需求，因此不能简单删除；应由明确的 DOSX 初始化上下文/所有者限定适用范围，不能仅看 selector 数值。
+证据：selector40-control/results.json、源码、rsp、map、日志。
+
+[P2] dpmiint.c:1033 复制 BuildStackFrame 算法。
+中断处理程序位宽和 SS.B 区别真实存在，修复需要保留；但应在 stack.c 原所有者参数化位宽并保留旧入口，避免第二份近80行算法。最新并发修改已收敛 ownership gate、延迟 flag 提交，但尚未消除这份重复。
+
+[P2] 条件结构/排除规则仍有缺口。
+除上述11文件，还包括 nt_sb.c/nt_sbfm.c 新 !CCPU 内完整旧体、dpmiselr.c 的新 !CCPU flush 分支、sim32.c 的缓存分支；reset.c 两处 !CPU_30_STYLE 被留成空壳；WOW DEBUG_MEMLEAK 框架删除和 W32TryCall 反向分支复制。
+注意 egawrtm0.c/egwrtm12.c 的非CPU40表体已实际核实有 #error/#line，不列为遗漏。
+
+[P2] 无法证明必要/最小的改变，不应凭“现在能编译/未接入”放行。
+包括历史 DIRS/SOURCES 清单删减；WOW TU-wide _X86_ undef/redefine；cpu_createthread 第二参数删除而旧声明/stub仍是两参数；未被当前 thunk 消费的额外参数帧；原声明/include/EOF标记删除；VDD 注册表错误全部静默；system.ini shadow 失败后退回宿主裸名。
+各项具体保留边界、恢复候选和证据限制见 CSV 的 necessity/minimality 字段。候选恢复不等于可不经编译立即批量覆盖。
+
+三、实际对照，不是静态统计
+1. 45个C文件恢复原缩进：正式配置预处理对照一致，覆盖1,307点。
+2. 77个C文件恢复分组格式片段：正式配置预处理 token 一致，覆盖1,545点；保留字符串及展开后的 __LINE__，仅归一化实验输入文件路径的 __FILE__。
+3. mouse_io 14个整函数恢复原写法：正式配置 token 对照一致，覆盖37点。
+以上合计2,889点证明特定正式配置下格式恢复等价；不等于所有未选择配置/所有运行行为均已认证。
+4. modesw 原分支顺序恢复：当前配置预处理非空行一致。
+5. H001 两处原声明恢复：6个编译单元及 DLL 链接成功。反之，用全局 /Gz 替代8个 WINAPI，编译虽通过，链接报24个修饰符引用错误，不能这样省 diff。
+6. OEM：当前 DBCS fixture 成功；原 XP default / FE_SB 两个控制分别在首个容量断言失败。必须保留实际容量修复，不能连格式一起回退。控制遇首错即停止，不声称逐个API都被独立击穿。
+7. x87布局：当前fixture成功，恢复XP布局有14项断言失败。大小端布局修复必要。
+8. CHAIN2：新编译当前 sevid000 与当前真实 fixture，通过；将其中25点整组恢复XP，预期44332211、实际00000083，退出1。证明该组不可整体撤掉，不表示25点每一点都独立做过失败实验。
+9. selector0040：实际CPU反例证明现有兼容分支作用域过大，见上。
+实验使用现有 fixture 的外部宿主 seams 和库；fresh provider/fixture 编译与来源存于各控制目录。没有冒充整产品端到端验收。
+
+四、快照与并发变化
+审计 HEAD：6e3e88b53bc57e7f047c9438cae741df5dd14694。
+XP pin：a2f6d7c93aa4f11efc51147566d5961c59a8ef89。
+1039个文件哈希复核只有 dpmiint.c 在审计期间变化；该增量另存 latest-dpmiint-delta.patch 并复审。
+CSV 的 current_line/xp_line 是审计快照行锚，可能受原 #line/并发修改影响；定位时用 path + old/new 内容，不能盲目套最新行号。
+其余会话的源码、发布制品和文档改动全部保留，未代为提交。

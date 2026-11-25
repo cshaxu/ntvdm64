@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T485 H-series repair plan](operations/m0-t485-h-repair-plan.md) inserts ROI-ordered S6-S13 before N004; the [audit handoff](evidence/t485-h-repair/README.md) preserves every file/point assignment and experimental limits.
+
 [T485 S1 migration batches](evidence/t485-s1/README.md) indexes the three existing mirror components and their pinned file-level XP path matches.
 
 [T484 S4 guest-copy ownership](evidence/t484-s4-guest-copy-ownership.md) records shared copying, stable ownership, local-directory cleanup and task-suffix regularization.

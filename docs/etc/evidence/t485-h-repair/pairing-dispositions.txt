@@ -1,0 +1,53 @@
+# H001–H036 corrected exclusion pairing audit
+
+Scope: exclusions remain #error plus correct #line; non-excluded differences require independent necessity/minimality proof. No production edits.
+
+## dpmi32/dpmi32.c
+
+XP _X86_ body 305–308 maps to current i386 body 307–308. Guard rename is not excluded; obsolete #line must be corrected.
+
+## dpmi32/dpmiint.c
+
+Four kernel bodies paired by handlers and surrounding calls. Corrected an additional false DBG match: current 573 belongs to XP 556, not 129. Keep CCPU guard changes counted.
+
+## dpmi32/modesw.c
+
+Current kernel-first branches reverse XP emulator-first branches. Body pairs are 110–133→109–110 and 172–195→157–158. Restore original branch order with equivalent CPU40 selection; update object-contract textual expectation, retain proven RF/NT-before-PE fix.
+
+## inc/wowusr.h
+
+All 47 NULLSTRUCT arms paired by neighboring typedef and structural order. GETMESSAGEPOS16 is XP1656, not GETFOCUS16 XP1554. Stale logical anchors are not proof of deletion.
+
+## softpc.new/base/keymouse/mouse_io.c
+
+1615 is a new guard over originally unconditional hardware VESA code: do not mask. 3517 pairs only XP nested MONITOR body3774–3777. Removed six overlapping masks that hid retained software-cursor code. These framework changes need non-excluded review.
+
+## softpc.new/base/video/video.c
+
+Three new standalone-SAS guards have no original equivalent arm. Do not mask them. Profile6 MONITOR/X86GFX needs software SAS routing; review actual adapter changes separately.
+
+## softpc.new/host/inc/host_def.h
+
+New !CPU40 exclusion is not an XP arm. CpuH selection is counted as non-excluded backend adaptation.
+
+## softpc.new/host/src/copy_fnc.c
+
+Same #if0 arm pairs XP116–117→current97–98. Current excluded body still contains l_addr assignment after #error; violates error-only rule. Remove residual statement and fix diagnostic mapping; retain separate byte-count correctness fix for review.
+
+## softpc.new/host/src/nt_fulsc.c
+
+Current #if0 replaces XP !NEC then JAPAN||KOREA; restore original condition framework with excluded body marker. Split X86GFX masks around retained getNtScreenState; original getter2111–2121 must not be hidden. Framework split remains non-excluded diff.
+
+## softpc.new/obj.vdm/ntvdm.c
+
+New MONITOR guard replaces XP unconditional TEB Vdm version-word write. No original excluded arm: count modification. Current Vdm stores bound pointer, so original write would corrupt it; minimal replacement still requires review.
+
+## wow32/wkgthunk.c
+
+XP416–455 helper body pairs current410. Added WOW_X86_GENERIC_CALL selection remains counted; validate actual asm/C caller ABI separately.
+
+## Evidence and limits
+
+`reviewed-pair-mappings.json` contains exact body ranges. `check-ranges.py` found no overlapping masks across 1,039 examined files. `reviewed-points.json` retains changed guards and original-less local guards. Recount is 4,550 points / 27,276 added+deleted lines; this is inventory, NOT semantic approval. `classified-points.json` has 1,506 semantic-review points; same-token hunks are not automatically safe.
+
+H001 experimental evidence: `h001-unused-declarations/result.json` exit0 restores exact XP data.c and dbgdll.h and compiles/links. Those two declaration deletions lack build necessity. `h001-convention/result.json` exit3 compiles six files without eight WINAPI additions using /Gz but fails link with 24 decorated-symbol references. Global calling-convention substitution is not a valid minimal fix. Neither probe was published or runtime-certified.
