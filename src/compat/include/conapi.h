@@ -32,6 +32,7 @@ BOOL WINAPI MvdmGetCursorPos(LPPOINT);
 BOOL WINAPI MvdmSetCursorPos(int,int);
 BOOL WINAPI MvdmGetClipCursor(LPRECT);
 BOOL WINAPI MvdmClipCursor(const RECT *);
+INT_PTR WINAPI MvdmDosFaultDialog(INT_PTR abort_result, HINSTANCE, LPCSTR, HWND, DLGPROC, LPARAM);
 #define GetCursorPos MvdmGetCursorPos
 #define SetCursorPos MvdmSetCursorPos
 #define GetClipCursor MvdmGetClipCursor

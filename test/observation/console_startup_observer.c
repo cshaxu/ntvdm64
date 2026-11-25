@@ -2059,6 +2059,105 @@ static BOOL observer_graphics_escape_witness(const char *launcher,const char *re
     return TRUE;
 }
 
+static BOOL CALLBACK find_dos_error_panel(HWND window, LPARAM found)
+{
+    char klass[32];
+    if (!IsWindowVisible(window) ||
+        !GetClassNameA(window, klass, sizeof(klass)) || strcmp(klass, "#32770") ||
+        !GetDlgItem(window, 100) || !GetDlgItem(window, 102)) return TRUE;
+    *(HWND *)found = window;
+    return FALSE;
+}
+
+/* C29.COM opens no configured COM medium. The original DOS error panel
+ * supplies ID 100 (Terminate) and 102 (Ignore) in nt_uis.h. */
+static BOOL observe_dos_error_mouse(HANDLE input, HANDLE output, const char *report_path,
+                                   const char *profile, const char *prompt,
+                                   const char *runtime)
+{
+    char desktop[96], path[MAX_PATH];
+    DWORD needed, window_thread = 0;
+    DWORD_PTR result;
+    GUITHREADINFO gui = { sizeof(gui) };
+    RECT original_clip, captured_clip, prompt_clip;
+    HWND window = NULL, panel = NULL, button;
+    BOOL window_mode = strcmp(profile, "console") != 0;
+    BOOL capture = !strcmp(profile, "captured") || !strcmp(profile, "terminate");
+    BOOL terminate = !strcmp(profile, "terminate");
+    BOOL ok = FALSE;
+    ULONGLONG deadline;
+    FILE *report;
+    char command[MAX_PATH];
+    const char *phase = "prompt";
+
+    if (!GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()), UOI_NAME,
+        desktop, sizeof(desktop), &needed) || strncmp(desktop, "NTVDMConsoleTest-", 17))
+        return FALSE;
+    snprintf(path, sizeof(path), "%s.dos-dialog.txt", report_path);
+    report = fopen(path, "w");
+    if (!report) return FALSE;
+    if (!wait_for_console_prompt(output, OBSERVATION_INPUT_READY_TIMEOUT_MS, prompt)) goto done;
+    if (window_mode) {
+        phase = "caf";
+        if (!console_caf_return(input, report_path, NULL) ||
+            !(window = scripted_input_window()) ||
+            !(window_thread = GetWindowThreadProcessId(window, NULL))) goto done;
+    }
+    if (capture) {
+        phase = "capture";
+        if (!GetClipCursor(&original_clip) ||
+            !SendMessageTimeoutW(window, WM_LBUTTONDOWN, MK_LBUTTON, MAKELPARAM(30, 30),
+                SMTO_ABORTIFHUNG, 3000, &result) ||
+            !GetGUIThreadInfo(window_thread, &gui) || gui.hwndCapture != window ||
+            !GetClipCursor(&captured_clip) || EqualRect(&captured_clip, &original_clip)) goto done;
+        fprintf(report, "captured=1 clip-changed=1\n");
+    }
+    phase = "launch-fixture";
+    if (snprintf(command, sizeof(command), "%s\\tests\\C29.COM\r", runtime) >= (int)sizeof(command) ||
+        !write_console_input_text(input, command, 0, output, NULL)) goto done;
+    phase = "observe-panel";
+    deadline = GetTickCount64() + 8000;
+    do {
+        EnumWindows(find_dos_error_panel, (LPARAM)&panel);
+        if (panel) break;
+        Sleep(10);
+    } while (GetTickCount64() < deadline);
+    if (!panel) {
+        observer_text_view view;
+        if (observer_text_read(output, window, scripted_window_frontend, &view)) {
+            for (unsigned row = 0; row < view.rows; ++row)
+                fprintf(report, "%.*s\n", (int)view.columns, view.cells + row * view.columns);
+        }
+        goto done;
+    }
+    phase = "release-at-visibility";
+    if (window && (!GetGUIThreadInfo(window_thread, &gui) || gui.hwndCapture == window))
+        goto done;
+    if (capture && (!GetClipCursor(&prompt_clip) || !EqualRect(&prompt_clip, &original_clip)))
+        goto done;
+    fprintf(report, "panel-visible=1 window-capture=0 selection=%s\n",
+        terminate ? "terminate" : "ignore");
+    phase = "click";
+    button = GetDlgItem(panel, terminate ? 100 : 102);
+    if (!button || !IsWindowVisible(button) ||
+        !PostMessageW(button, WM_LBUTTONDOWN, MK_LBUTTON, MAKELPARAM(5, 5)) ||
+        !PostMessageW(button, WM_LBUTTONUP, 0, MAKELPARAM(5, 5))) goto done;
+    phase = "outcome";
+    if (terminate) {
+        ok = scripted_target_process &&
+            WaitForSingleObject(scripted_target_process, 10000) == WAIT_OBJECT_0;
+    } else {
+        ok = wait_input_milestone(output, NULL, "S29_COMMS_OK", NULL, FALSE) &&
+            write_console_input_text(input, "mem\r", 0, output, NULL) &&
+            wait_input_milestone(output, NULL, "bytes total conventional memory", NULL, FALSE) &&
+            write_console_input_text(input, "exit\r", 0, output, NULL);
+    }
+done:
+    fprintf(report, "result=%s phase=%s win32=%lu\n", ok ? "pass" : "fail", phase, GetLastError());
+    fclose(report);
+    return ok;
+}
+
 int main(int argc, char **argv)
 {
     STARTUPINFOA startup = { sizeof(startup) };
@@ -2936,6 +3035,13 @@ int main(int argc, char **argv)
 managed_close_done: ;
         }
         }
+    }
+    {
+        char profile[16];
+        DWORD size = GetEnvironmentVariableA("MVDM_OBSERVER_DOS_DIALOG_MOUSE", profile, sizeof(profile));
+        if (size && (size >= sizeof(profile) ||
+            !observe_dos_error_mouse(input, output, argv[3], profile,
+                scripted_console_input_marker, argv[2]))) report_failed = 1;
     }
     if(GetEnvironmentVariableA("MVDM_OBSERVER_TEXT_CURSOR",NULL,0)) {
         HWND window;DWORD_PTR result;

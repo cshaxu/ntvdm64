@@ -8,6 +8,9 @@ struct mvdm_vm_io {
     char *console_title; /* full API title; caption publication cannot truncate it */
     mvdm_vm_input input;
     uint32_t input_mode;
+    DWORD modal_holds;
+    mvdm_vm_modal_fn modal;
+    void *modal_context;
 };
 
 DWORD mvdm_vm_io_create(ntvdm_vm_text *text, mvdm_vm_continuation *continuation,
@@ -36,6 +39,11 @@ DWORD mvdm_vm_io_create(ntvdm_vm_text *text, mvdm_vm_continuation *continuation,
     *output = io;
     return ERROR_SUCCESS;
 }
+void mvdm_vm_io_bind_modal(mvdm_vm_io *io,mvdm_vm_modal_fn modal,void *context)
+{
+    io->modal=modal;
+    io->modal_context=context;
+}
 HANDLE mvdm_vm_io_ready(mvdm_vm_io *io) { return io ? io->input.ready : NULL; }
 mvdm_vm_input *mvdm_vm_io_input(mvdm_vm_io *io) { return &io->input; }
 
@@ -53,6 +61,18 @@ DWORD mvdm_vm_io_dispatch(mvdm_vm_io *io, const HANDLE cancellation[4],
     if (!io || !cancellation || !request || !reply) return ERROR_INVALID_PARAMETER;
     reply->bytes = 0; ZeroMemory(&reply->state, sizeof(reply->state));
     switch (request->operation) {
+    case CONSOLE_IO_WINDOW_MODAL: {
+        DWORD count=request->state.count;
+        BOOL acquire=request->state.mode!=0;
+        if(request->bytes || request->state.mode>1 || !count ||
+            (acquire && count>MAXDWORD-io->modal_holds) ||
+            (!acquire && count>io->modal_holds)) {
+            error=ERROR_INVALID_PARAMETER; break;
+        }
+        error=io->modal ? io->modal(io->modal_context,acquire,count) : ERROR_SUCCESS;
+        if(!error)io->modal_holds=acquire ? io->modal_holds+count : io->modal_holds-count;
+        break;
+    }
     case CONSOLE_IO_SET_TITLE_A: {
         char *copy;
         if (!request->data || !request->bytes || request->bytes > CONSOLE_IO_TILE_BYTES ||
@@ -133,5 +153,7 @@ DWORD mvdm_vm_io_dispatch(mvdm_vm_io *io, const HANDLE cancellation[4],
 
 void mvdm_vm_io_finish(mvdm_vm_io *io)
 {
+    if(io->modal_holds && io->modal) (void)io->modal(io->modal_context,FALSE,io->modal_holds);
+    io->modal_holds=0;
     ntvdm_vm_text_disconnect(io->text);
 }

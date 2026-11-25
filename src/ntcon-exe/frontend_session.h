@@ -60,6 +60,7 @@ void frontend_session_snapshot_end(frontend_session *);
 BOOL frontend_session_text_frame_required(frontend_session *);
 /* Caller holds the frontend I/O lock through console dispatch enter/leave. */
 BOOL frontend_session_window_clip_owned(frontend_session *);
+DWORD frontend_session_window_modal(frontend_session *,BOOL acquire,DWORD count);
 /* Caller holds the active channel's I/O lock; copied data only. */
 DWORD frontend_session_read_text_configuration(frontend_session *,DWORD,DWORD,console_io_reply *);
 /* Borrowed readiness; data operations require the successful enter lock. */

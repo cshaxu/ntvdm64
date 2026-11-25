@@ -48,6 +48,10 @@ lib_status kvm_window_freeze(kvm_window *window);
  * frozen-to-unfrozen transition requests activation once; repeated unfreeze
  * does not request focus again. Activation remains subject to host policy. */
 lib_status kvm_window_unfreeze(kvm_window *window);
+/* Apply the existing freeze control before returning. The caller owns the
+ * Window lifetime and serializes its controls. Call from outside the
+ * Window input and failure sinks. */
+lib_status kvm_window_set_frozen(kvm_window *window, lib_bool frozen);
 lib_status kvm_window_release_mouse(kvm_window *window);
 
 #endif

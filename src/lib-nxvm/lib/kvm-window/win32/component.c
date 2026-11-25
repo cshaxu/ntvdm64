@@ -27,6 +27,7 @@ static lib_bool kvm_window_apply_title(lib_win32_hwnd window, const char *title)
 #define WIN32_WINDOW_DEFAULT_HEIGHT 560
 #define WIN32_WINDOW_CURSOR_BLINK_INTERVAL_MS 250u
 #define WIN32_WINDOW_CURSOR_TIMER 1u
+#define WIN32_WINDOW_CONTROL_TIMEOUT_MS 10000u
 
 typedef struct kvm_win32_window_context {
     kvm_window *component;
@@ -715,7 +716,8 @@ static lib_win32_lresult LIB_WIN32_CALLBACK win32_window_proc(lib_win32_hwnd win
         if (!win32_window_accepting_input(context))
             lib_win32_send_message_a(window, LIB_WIN32_WM_CANCELMODE, 0, 0);
         context->consuming = LIB_FALSE;
-        return 0;
+        return wparam && win32_window_accepting_input(context) &&
+            context->frozen == (lparam != 0);
     case WIN32_WINDOW_MOUSE_READY:
         win32_window_flush_mouse(context);
         return 0;
@@ -1075,6 +1077,24 @@ lib_status kvm_window_worker_start(kvm_window *component)
         return startup_status;
     }
     return LIB_STATUS_OK;
+}
+
+lib_status kvm_window_set_frozen(kvm_window *window, lib_bool frozen)
+{
+    kvm_window_win32_state *state;
+    lib_status status;
+    lib_win32_dword_ptr acknowledged = 0;
+
+    if (window == LIB_NULL) return LIB_STATUS_INVALID_ARGUMENT;
+    state = (kvm_window_win32_state *)window->worker_state;
+    if (state == LIB_NULL) return LIB_STATUS_INVALID_STATE;
+    status = frozen ? kvm_window_freeze(window) : kvm_window_unfreeze(window);
+    if (status != LIB_STATUS_OK) return status;
+    return lib_win32_send_message_timeout_w(state->context.window,
+        WIN32_WINDOW_MAILBOX_READY, 1, frozen != LIB_FALSE,
+        LIB_WIN32_SMTO_ABORT_IF_HUNG, WIN32_WINDOW_CONTROL_TIMEOUT_MS,
+        &acknowledged) && acknowledged ?
+        LIB_STATUS_OK : LIB_STATUS_IO_ERROR;
 }
 
 lib_status kvm_window_worker_join(kvm_window *component)

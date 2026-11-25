@@ -73,7 +73,7 @@ static DWORD dispatch(void *context,const frontend_base_cancel *channel_cancel,c
     if(request->version!=CONSOLE_IO_VERSION)return ERROR_REVISION_MISMATCH;
     if(!entry->wire_generation || request->generation!=entry->wire_generation)return ERROR_ACCESS_DENIED;
     if(!request->sequence || entry->sequence==UINT32_MAX || request->sequence!=entry->sequence+1 ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PRESENT_BARRIER ||
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_WINDOW_MODAL ||
         request->operation==38)return ERROR_INVALID_DATA;
     entry->sequence=request->sequence;
     if(WaitForSingleObject(entry->invalidated,0)==WAIT_OBJECT_0)return ERROR_OPERATION_ABORTED;

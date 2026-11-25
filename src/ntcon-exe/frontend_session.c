@@ -1266,6 +1266,8 @@ BOOL frontend_session_text_frame_required(frontend_session *frontend)
 }
 BOOL frontend_session_window_clip_owned(frontend_session *frontend)
 { return frontend->window_active; }
+DWORD frontend_session_window_modal(frontend_session *frontend,BOOL acquire,DWORD count)
+{ return frontend_window_modal(frontend->window,acquire,count); }
 DWORD frontend_session_read_text_configuration(frontend_session *frontend,
     DWORD offset,DWORD revision,console_io_reply *reply)
 {

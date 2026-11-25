@@ -5,6 +5,8 @@
 #include "compat/include/mvdm_vm_text.h"
 
 typedef struct mvdm_vm_io mvdm_vm_io;
+typedef DWORD (*mvdm_vm_modal_fn)(void *,BOOL,DWORD);
+void mvdm_vm_io_bind_modal(mvdm_vm_io *,mvdm_vm_modal_fn,void *);
 /* Borrow model/continuation until registry retirement joins all callbacks.
  * Title is copied ANSI handoff metadata, not a guest address. The caller owns
  * VM identity and registration; this provider performs no lifecycle RPC. */

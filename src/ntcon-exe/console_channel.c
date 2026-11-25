@@ -14,6 +14,7 @@ struct frontend_io_channel {
     BOOL snapshot_held;
     HANDLE publication_surface;
     DWORD publication_terminal_error;
+    DWORD modal_holds;
     SMALL_RECT publication_window;
     frontend_video committed_video;
     char title[CONSOLE_IO_TITLE_BYTES];
@@ -205,6 +206,16 @@ static BOOL window_clip_owned(void *context)
     frontend_io_channel *channel=context;
     return frontend_session_window_clip_owned(channel->root);
 }
+static DWORD window_modal(void *context,BOOL acquire,DWORD count)
+{
+    frontend_io_channel *channel=context;
+    DWORD error;
+    if(acquire && count>MAXDWORD-channel->modal_holds)return ERROR_ARITHMETIC_OVERFLOW;
+    if(!acquire && count>channel->modal_holds)return ERROR_INVALID_PARAMETER;
+    error=frontend_session_window_modal(channel->root,acquire,count);
+    if(!error)channel->modal_holds=acquire ? channel->modal_holds+count : channel->modal_holds-count;
+    return error;
+}
 static void title_changed(void *context)
 {
     frontend_io_channel *channel=context;
@@ -371,6 +382,11 @@ DWORD frontend_io_channel_stop(frontend_io_channel *channel)
     error=frontend_base_channel_stop(channel->base);
     if(error)return error;
     frontend_session_forget(channel->root,channel);
+    if(channel->modal_holds) {
+        frontend_session_snapshot_begin(channel->root);
+        (void)frontend_session_window_modal(channel->root,FALSE,channel->modal_holds);
+        frontend_session_snapshot_end(channel->root);
+    }
     frontend_video_dispose(&channel->console.video);
     frontend_video_dispose(&channel->committed_video);
     if(channel->console.input && channel->console.input!=INVALID_HANDLE_VALUE)CloseHandle(channel->console.input);
@@ -405,6 +421,7 @@ DWORD frontend_io_channel_start_request(const common_frontend_key *key,DWORD req
     channel->console.publication=publication;
     channel->console.text_frame_required=text_frame_required;
     channel->console.window_clip_owned=window_clip_owned;
+    channel->console.window_modal=window_modal;
     channel->console.title_changed=title_changed;
     channel->console.publish_title=publish_title;
     channel->console.handoff_title=handoff_title;

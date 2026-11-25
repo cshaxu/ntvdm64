@@ -355,7 +355,22 @@ static lib_win32_bool LIB_WIN32_WINAPI capture_title(lib_win32_hwnd w,lib_win32_
 #define lib_win32_release_srwlock_exclusive registration_unlock
 #include "lib/kvm-window/win32/mouse.c"
 #include "lib/kvm-window/win32/geometry.c"
+static lib_win32_lresult LIB_WIN32_WINAPI send_window_control(lib_win32_hwnd window,
+    lib_win32_uint message, lib_win32_wparam wparam, lib_win32_lparam lparam,
+    lib_win32_uint flags, lib_win32_uint timeout, lib_win32_pdword_ptr result);
+#undef lib_win32_send_message_timeout_w
+#define lib_win32_send_message_timeout_w send_window_control
 #include "lib/kvm-window/win32/component.c"
+
+static lib_win32_lresult LIB_WIN32_WINAPI send_window_control(lib_win32_hwnd window,
+    lib_win32_uint message, lib_win32_wparam wparam, lib_win32_lparam lparam,
+    lib_win32_uint flags, lib_win32_uint timeout, lib_win32_pdword_ptr result)
+{
+    lib_test_assert(flags==LIB_WIN32_SMTO_ABORT_IF_HUNG &&
+        timeout==WIN32_WINDOW_CONTROL_TIMEOUT_MS);
+    *result=(lib_win32_dword_ptr)win32_window_proc(window,message,wparam,lparam);
+    return 1;
+}
 
 static void notify_loss(void) { win32_window_proc((lib_win32_hwnd)1,LIB_WIN32_WM_CAPTURECHANGED,0,0); }
 static void size_notification(void) { win32_window_proc((lib_win32_hwnd)1,LIB_WIN32_WM_SIZE,0,0); }
@@ -901,6 +916,16 @@ int main(int argc, char **argv)
     lib_test_assert(kvm_window_unfreeze(&window)==LIB_STATUS_OK);
     lib_test_assert(win32_window_consume_mailboxes((lib_win32_hwnd)1,&c));
     lib_test_assert(focus_requests==1 && foreground_requests==1 && !c.mouse.captured);
+    kvm_window_win32_state acknowledged = {0};
+    acknowledged.context.window = (lib_win32_hwnd)1;
+    window.worker_state = &acknowledged;
+    lib_test_assert(kvm_win32_mouse_capture(&c.mouse,(lib_win32_hwnd)1)==LIB_STATUS_OK);
+    focus_requests=foreground_requests=0;
+    lib_test_assert(kvm_window_set_frozen(&window,LIB_TRUE)==LIB_STATUS_OK);
+    lib_test_assert(c.frozen && !c.mouse.captured);
+    lib_test_assert(kvm_window_set_frozen(&window,LIB_FALSE)==LIB_STATUS_OK);
+    lib_test_assert(!c.frozen && !c.mouse.captured && focus_requests==1 && foreground_requests==1);
+    window.worker_state = LIB_NULL;
     c.client_width=320; c.client_height=240; client_ok=0;
     win32_window_capture_client_size((lib_win32_hwnd)1,&c);
     lib_test_assert(c.client_width==320 && c.client_height==240 && window.base.stopping);

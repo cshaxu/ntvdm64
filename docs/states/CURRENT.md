@@ -30,6 +30,12 @@ mouse-capture task.
 
 ## Current Progress
 
+S7 P1 passed the cached full build, Full 20/20 and five isolated DOS dialog
+trials. Package `0b82f7de-640f-43e1-962e-73f904c0bf60` matches all eleven
+images at each publication destination. [S7 evidence](../etc/evidence/t484-s7-dos-error-dialog-mouse.md)
+and the [T484 delivery reconciliation](../etc/evidence/t484-delivery-reconciliation.md)
+record the final verification and retained boundaries.
+
 S6 P1 verifies the clean and cached host/addon builds, selected fixture graphs, staged manifests and negative cases. The same-source-path x86 control reduces both path-sensitive comparisons to PE timestamps. Full passed 20/20 on the current release. The live launcher matrices are recorded below. [Evidence](../etc/evidence/t484-s6-clean-cmd-acceptance.md).
 
 S5 P5 promotes the existing guest INI editor to INI.EXE and removes both launch scripts' duplicate INI writers. The released tool passed Win31 six-profile, Win95 four-profile and apply/unapply package verification. [Evidence](../etc/evidence/t484-s5-shared-ini.md).

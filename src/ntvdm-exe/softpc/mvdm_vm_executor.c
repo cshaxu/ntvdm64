@@ -1,4 +1,6 @@
 #include "mvdm_vm_executor.h"
+#include "compat/include/console_endpoint.h"
+#include "compat/include/host_context.h"
 
 typedef struct command_job {
     mvdm_vm_input_job input_job;
@@ -99,6 +101,11 @@ static VOID CALLBACK execute(PTP_CALLBACK_INSTANCE instance, void *context)
     ReleaseSRWLockExclusive(&owner->rundown.lock);
 }
 
+static DWORD relay_modal(void *endpoint,BOOL acquire,DWORD count)
+{
+    return compat_console_window_modal(endpoint,acquire,count);
+}
+
 DWORD mvdm_vm_executor_submit(mvdm_vm_executor *owner, uint32_t vm,
     ntvdm_command_launch *launch, ntvdm_vm_text *text, uint64_t *token)
 {
@@ -116,7 +123,11 @@ DWORD mvdm_vm_executor_submit(mvdm_vm_executor *owner, uint32_t vm,
     if (!error) job->input_job.generation = mvdm_vm_continuation_generation(job->continuation);
     if (!error)
         error = mvdm_vm_io_create(text, job->continuation, "VM command", &job->io);
-    if (!error) job->input_job.input = mvdm_vm_io_input(job->io);
+    if (!error) {
+        compat_host_context *context=compat_host_context_current();
+        mvdm_vm_io_bind_modal(job->io,relay_modal,context ? context->console_endpoint : NULL);
+        job->input_job.input = mvdm_vm_io_input(job->io);
+    }
     if (!error) {
         AcquireSRWLockExclusive(&owner->rundown.lock);
         if (owner->rundown.closing) error = ERROR_OPERATION_ABORTED;

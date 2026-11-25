@@ -29,6 +29,7 @@ typedef struct frontend_console {
     BOOL (*text_frame_required)(void *);
     /* The Window presentation, not DOS, owns the host pointer clip. */
     BOOL (*window_clip_owned)(void *);
+    DWORD (*window_modal)(void *,BOOL,DWORD);
     /* A successful DOS Console title change wakes NTCON presentation. */
     void (*title_changed)(void *);
     /* Copied caption metadata, not a SetConsoleTitle on the root Console. */

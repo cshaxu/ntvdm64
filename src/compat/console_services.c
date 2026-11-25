@@ -45,6 +45,30 @@ static BOOL state_operation(compat_console_endpoint *client,DWORD operation,
     return ok;
 }
 
+DWORD compat_console_window_modal(compat_console_endpoint *client, BOOL acquire, DWORD count)
+{
+    console_io_state state={0};
+    DWORD error;
+    if (!client) return ERROR_SUCCESS;
+    state.mode=acquire!=FALSE;
+    state.count=count;
+    if (state_operation(client,CONSOLE_IO_WINDOW_MODAL,&state,NULL))return ERROR_SUCCESS;
+    error=GetLastError();
+    return error ? error : ERROR_GEN_FAILURE;
+}
+
+INT_PTR WINAPI MvdmDosFaultDialog(INT_PTR abort_result,HINSTANCE module,LPCSTR resource,
+    HWND parent,DLGPROC procedure,LPARAM parameter)
+{
+    compat_console_endpoint *client=current_endpoint();
+    INT_PTR result;
+    if(compat_console_window_modal(client,TRUE,1))return -1;
+    result=DialogBoxParamA(module,resource,parent,procedure,parameter);
+    if(result!=-1 && result!=abort_result && compat_console_window_modal(client,FALSE,1))
+        return -1;
+    return result;
+}
+
 static UINT console_code_page(BOOL input)
 {
     compat_console_endpoint *client=current_endpoint();

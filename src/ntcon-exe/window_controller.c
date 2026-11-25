@@ -15,6 +15,7 @@ struct frontend_window_controller {
     HANDLE wake;
     volatile LONG failure,requested_console,requested_mouse_release;
     LONG epoch;
+    DWORD modal_holds;
     frontend_display_mode display;
     BOOL graphics,frame_valid,frame_dirty,route_known,route_window,route_graphics;
     char title[KVM_WINDOW_TITLE_CAPACITY];
@@ -125,6 +126,7 @@ static DWORD apply(frontend_window_controller *owner)
         options.component.failure_context=owner;
         options.component.failure_sink=window_failure;
         options.initial_title=owner->title;
+        options.initial_frozen=owner->modal_holds!=0;
         kvm_hotkey_registry_initialize(&options.component.hotkeys);
         error=status_error(kvm_hotkey_registry_register(&options.component.hotkeys,
             'F',BASE_KEY_MODIFIER_CONTROL|BASE_KEY_MODIFIER_ALT,"console"));
@@ -192,6 +194,24 @@ DWORD frontend_window_poll(frontend_window_controller *owner)
     if(requested && requested==owner->epoch)owner->display=FRONTEND_DISPLAY_CONSOLE;
     return apply(owner);
 }
+DWORD frontend_window_modal(frontend_window_controller *window,BOOL acquire,DWORD count)
+{
+    DWORD holds,error;
+    if(!window || !count)return ERROR_INVALID_PARAMETER;
+    if(acquire && count>MAXDWORD-window->modal_holds)return ERROR_ARITHMETIC_OVERFLOW;
+    if(!acquire && count>window->modal_holds)return ERROR_INVALID_PARAMETER;
+    holds=acquire ? window->modal_holds+count : window->modal_holds-count;
+    if(window->window && ((holds!=0)!=(window->modal_holds!=0))) {
+        error=status_error(kvm_window_set_frozen(window->window,holds!=0));
+        if(error) {
+            fail(window,error);
+            return error;
+        }
+    }
+    window->modal_holds=holds;
+    return ERROR_SUCCESS;
+}
+
 DWORD frontend_window_select(frontend_window_controller *owner,frontend_display_mode display)
 {
     DWORD error;

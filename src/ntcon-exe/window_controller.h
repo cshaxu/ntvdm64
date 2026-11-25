@@ -24,6 +24,7 @@ typedef struct frontend_window_callbacks {
 DWORD frontend_window_create(frontend_window_controller **,
     const frontend_window_callbacks *,const char *title);
 HANDLE frontend_window_wake(frontend_window_controller *);
+DWORD frontend_window_modal(frontend_window_controller *,BOOL acquire,DWORD count);
 DWORD frontend_window_select(frontend_window_controller *,frontend_display_mode);
 /* Raster carrier != DOS graphics: native Console rasters pass FALSE. */
 /* Fill only the current writer, then commit. Do not retain it after present. */

@@ -20,6 +20,7 @@ typedef struct compat_console_endpoint {
     struct compat_console_activation *activation;
 } compat_console_endpoint;
 
+DWORD compat_console_window_modal(compat_console_endpoint *, BOOL acquire, DWORD count);
 compat_console_endpoint *compat_console_output_endpoint(HANDLE output);
 compat_console_endpoint *compat_console_input_endpoint(HANDLE input);
 DWORD compat_console_send_video(compat_console_endpoint *endpoint, const console_video_description *description,

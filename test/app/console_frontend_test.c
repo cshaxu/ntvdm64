@@ -12,7 +12,16 @@ static DWORD begin_error,end_error,screen_begins,screen_ends,screen_leaves;
 static BOOL screen_written;
 static DWORD title_notifications;
 static DWORD published_titles;
+static DWORD modal_holds,modal_calls;
 static char last_published_title[CONSOLE_IO_TITLE_BYTES];
+static DWORD window_modal(void *context,BOOL acquire,DWORD count)
+{
+    (void)context;
+    ++modal_calls;
+    if(!acquire && count>modal_holds)return ERROR_INVALID_PARAMETER;
+    modal_holds=acquire ? modal_holds+count : modal_holds-count;
+    return ERROR_SUCCESS;
+}
 static DWORD handoff_title(void *context,char *title,DWORD capacity)
 {
     (void)context;
@@ -116,6 +125,32 @@ int main(void)
     CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result);
     CHECK(reply.state.width>=8 && reply.state.height>=4 && reply.sequence==1);
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA && owner.sequence==1);
+    operation(&owner,CONSOLE_IO_WINDOW_MODAL);
+    request.state.count=1;
+    request.state.mode=1;
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && !reply.result &&
+        reply.error==ERROR_NOT_SUPPORTED);
+    owner.window_modal=window_modal;
+    operation(&owner,CONSOLE_IO_WINDOW_MODAL);
+    request.state.count=1;
+    request.state.mode=2;
+    CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA && !modal_calls);
+    operation(&owner,CONSOLE_IO_WINDOW_MODAL);
+    request.state.mode=1;
+    CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA && !modal_calls);
+    operation(&owner,CONSOLE_IO_WINDOW_MODAL);
+    request.state.count=1;
+    request.state.mode=1;
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result &&
+        modal_calls==1 && modal_holds==1);
+    operation(&owner,CONSOLE_IO_WINDOW_MODAL);
+    request.state.count=2;
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && !reply.result &&
+        reply.error==ERROR_INVALID_PARAMETER && modal_holds==1);
+    operation(&owner,CONSOLE_IO_WINDOW_MODAL);
+    request.state.count=1;
+    CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result &&
+        modal_calls==3 && !modal_holds);
     operation(&owner,CONSOLE_IO_SET_MODE);
     request.state.mode=ENABLE_PROCESSED_OUTPUT|ENABLE_WRAP_AT_EOL_OUTPUT;
     CHECK(!frontend_console_dispatch(&owner,&request,&reply) && reply.result);

@@ -8,7 +8,7 @@
 /* Direct worker/frontend wire header; no pointers or native resource
  * identities cross the pipe.  Local payload pointers below are explicitly
  * process-local staging only.  Peers are authenticated by BaseSrv attachment. */
-#define CONSOLE_IO_VERSION 31u
+#define CONSOLE_IO_VERSION 32u
 /* One-hop worker -> launcher stream routing, not an authorization token.
  * Versioned name; three low bits designate worker-local interactive endpoints.
  * File/pipe handles remain actual inherited resources. Consume before launch. */
@@ -109,7 +109,9 @@ enum console_io_operation {
     /* Final native-CUI handoff only. state.mode is the complete VIDEO frame
      * serial that must have been committed by NTCON's presentation thread.
      * It deliberately is not the ordinary logical CONSOLE_IO_BARRIER. */
-    CONSOLE_IO_PRESENT_BARRIER
+    CONSOLE_IO_PRESENT_BARRIER,
+    /* state.mode selects acquire/release; state.count is the number of holds. */
+    CONSOLE_IO_WINDOW_MODAL
 };
 enum console_io_window_query {
     CONSOLE_WINDOW_ICONIC=1,

@@ -99,7 +99,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     if (!request->sequence || owner->sequence==UINT32_MAX ||
         request->sequence!=owner->sequence+1 || request->bytes>CONSOLE_IO_MAX_DATA_BYTES ||
         (request->bytes && !request->data) ||
-        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_PRESENT_BARRIER ||
+        request->operation<CONSOLE_IO_WRITE || request->operation>CONSOLE_IO_WINDOW_MODAL ||
         request->operation==38) /* Retired peer activation, never a data operation. */
         return ERROR_INVALID_DATA;
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
@@ -128,6 +128,8 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         (s->count>CONSOLE_IO_INPUT_CAPACITY || request->bytes!=s->count*sizeof(console_io_input)))
         return ERROR_INVALID_DATA;
     if(request->operation==CONSOLE_IO_PRESENT_BARRIER && !s->mode)
+        return ERROR_INVALID_DATA;
+    if(request->operation==CONSOLE_IO_WINDOW_MODAL && (s->mode>1 || !s->count))
         return ERROR_INVALID_DATA;
     if ((request->operation==CONSOLE_IO_READ_INPUT || request->operation==CONSOLE_IO_PEEK_INPUT) &&
         (s->count>CONSOLE_IO_INPUT_CAPACITY || s->mode>CONSOLE_IO_INPUT_RETURNABLE))
@@ -246,6 +248,12 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         if (ok) { reply->state.x=size.X;reply->state.y=size.Y; }
         break;
     }
+    case CONSOLE_IO_WINDOW_MODAL:
+        mode=owner->window_modal ?
+            owner->window_modal(owner->io_context,s->mode!=0,s->count) : ERROR_NOT_SUPPORTED;
+        ok=mode==ERROR_SUCCESS;
+        SetLastError(mode);
+        break;
     case CONSOLE_IO_GET_POINTER: {
         POINT point;
         ok=GetCursorPos(&point);

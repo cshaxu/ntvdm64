@@ -689,7 +689,7 @@ DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
             SetForegroundWindow(pedgi->hWndCon);
             }
 
-        i = DialogBoxParam(GetModuleHandle(NULL),
+        i = MvdmDosFaultDialog(RMB_ABORT, GetModuleHandle(NULL),
                            "ERRORPANEL",
                            GetDesktopWindow(),
                            (DLGPROC) ErrorDialogEvents,
