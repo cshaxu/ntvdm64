@@ -2,31 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T484 S5** (Ordinary Mode). S4 closed after P46
-`5b88ee331` was pushed with both final matrix preparation chains verified.
-S5 consolidates native preparation ownership. S6 remains the clean
-interpreter-free acceptance stage.
+**Active: M0 T484 S6** (Ordinary Mode). S5 closed at P5 d2c25de2b
+with shared PIF and INI owners verified. S6 is the final CMD migration
+acceptance step. S7 remains queued within T484.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T484 S5, Ordinary Mode. |
-| Admission And Approval | Owner approved continuous T484 execution and directed reuse of the existing PIF and SYSTEM.INI utilities. [Sequenced S5 scope](../etc/operations/t484-cmd-build-release-plan.md#s5-consolidate-native-preparation-tools). |
-| Original Owner Request | Use CMD for build scripting and consolidate native preparation tools by extending the existing editors instead of creating duplicate tools. |
-| Objective | Retire redundant native fixture producers and use the existing PIF and guest INI owners for their formats. Preserve observable fixture behavior and real callers. |
-| Candidate Proposal | [Unified build/release](../proposals/proposal-unified-build-cmd-release-001.md) |
-| Reference Baseline | P46 `5b88ee331`, [final S4 evidence](../etc/evidence/t484-s4-matrix-preparation.md), and the delivered S4 native package and INI preparation changes. |
-| Files And ABI Surface | Authored PIF and INI editors, CMD preparation, selected test fixtures and their build targets. Preserve product ABI and original guest images. |
-| Applicable Rules | CMD-only build scripting, LF for authored files, source and architecture rules, and verification of actual product-facing changes. |
-| Verification | Record the DIR-ordered producers and active callers. Verify retained PIF layouts and fields, INI byte/section behavior, dependent focused runtime cases, cached full build, publication hashes and delivery. |
-| Expected Markers | One normal writer per format, malformed or separately meaningful layout fixtures explicitly scoped, superseded targets and callers removed, and no new interpreter dependency. |
-| Asset Needs | Existing released tools, project-written fixtures and a coherent published product package. |
-| Non-goals | No original guest rebuild, broad guest runtime redesign, general scripting in a native tool or forced merger of unrelated binary-binding contracts. |
-| Similar-Issue Sweep | Existing and newly migrated PIF/INI producers, fixed CONFIG.NT/AUTOEXEC.NT generation, and native binary-binding fixtures. |
-| Reporting Requirements | Report before/after executable, parser, source line, build target and caller counts, along with retained unique fixture coverage and validation limits. |
-| Stop Conditions | Pause changes that would alter a fixture's intentional format coverage or require unapproved changes to mirror code or production behavior. |
-| Exit Criteria | Consolidated owners exercise their actual consumers; redundant implementations and references are removed; applicable tests, cached build, publication and push are verified. |
+| Identifier Mode | M0 T484 S6, Ordinary Mode. |
+| Admission And Approval | Continuous T484 execution was approved. [Sequenced acceptance](../etc/operations/t484-cmd-build-release-plan.md). |
+| Original Owner Request | Remove Python, PowerShell and JavaScript build dependencies. Use CMD for actual project build, generator, fixture and publication entry points. |
+| Objective | Independently validate clean and cached CMD-only builds, input invalidation, failure handling, coherent publication, and applicable runtime regression on the final consolidated graph. |
+| Candidate Proposal | [Unified build/release](../proposals/proposal-unified-build-cmd-release-001.md). |
+| Reference Baseline | S5 P5 d2c25de2b. Current published host identity and the fifteen-file addon manifest are comparison inputs. |
+| Files And ABI Surface | Build, code generation, fixture production, staging, publication, and their test/evidence paths. Product ABI, mirrored source and original guest files stay fixed. |
+| Applicable Rules | CMD-only project scripts, source-first checks, release consistency, existing test ownership, and LF for authored text. |
+| Verification | Clean bootstrap and all eleven host images and authored addons; no-op and changed-input rebuilds; sanitized tool environment and child command evidence; outside-root invocation, missing prerequisite and failed publication cases; relevant runtime gates and both publication hashes. |
+| Expected Markers | Independent clean receipts and cache measurements, explicit failure exits, matching source/artifact identities, reviewed toolchain trace and actual test witnesses. |
+| Asset Needs | Existing published addons, approved guest fixtures, native compiler/assembler/toolchain, and an owned short build root. |
+| Non-goals | No original guest rebuild, unrelated runtime change, mirror rewrite, or S7 implementation. |
+| Similar-Issue Sweep | All actual producer and publication paths, including nested native graph invocations and test addons. |
+| Reporting Requirements | Record exact tool commands, graph roots, timestamps/hashes, failure and runtime gate results, limitations, and pushed commit. |
+| Stop Conditions | Preserve unrelated changes; investigate any mismatch or missing gate and keep the acceptance open until resolved or explicitly scoped. |
+| Exit Criteria | Clean and cached build, publication, failure checks and applicable runtime regression independently verified against current source, committed and pushed. |
+
 
 ## Current Progress
 
@@ -41,6 +41,17 @@ S5 P2 consolidates pure DOS and XMS through the same CMD/PIF owner and retires t
 S5 P1 consolidates EMS profile generation through the current PIF editor and CMD. Native field tests, byte equivalence, two real EMS cases and a released-tool EMS case passed. All fourteen addons were verified and only PIF.EXE changed. The two host publication sets retained all eleven hashes. [Evidence](../etc/evidence/t484-s5-ems-pif-consolidation.md).
 
 Earlier S4 preparation deliveries are indexed in [supporting material](../etc/README.md). The [S3 P181–P213 delivery record](../etc/evidence/t484-s3-early-deliveries.md#p181-p213-deliveries) retains those batch results. The [S4 closure record](#s4-closure-record) identifies the final batch and runtime boundaries.
+
+## S5 Closure Record
+
+[Existing INI editor consolidation](../etc/evidence/t484-s5-shared-ini.md)
+and the [last PIF producer delivery](../etc/evidence/t484-s5-pif-layouts.md)
+close S5 at d2c25de2b. Six native PIF writers were retired. The one existing
+INI owner was promoted and two duplicate CMD writers were removed. Current
+launcher/package tests and cached builds passed, both host sets were checked
+and the addon release now has fifteen verified files. Runtime acceptance and
+clean dependency tracing continue in S6.
+
 
 ## S4 Closure Record
 
