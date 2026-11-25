@@ -1,9 +1,7 @@
 if(NTVDM_ARCH STREQUAL "x86")
   set(dpmi "${NTVDM_REPO}/src/mvdm-host/dpmi32")
-  ntvdm_source_projection(dpmi-buffer-before.inc "${dpmi}/buffer.c"
-    "PUCHAR\nDpmiMapAndCopyBuffer(" "USHORT\nDpmiSegmentToSelector(" "" TRUE)
-  ntvdm_source_projection(dpmi-buffer-after.inc "${dpmi}/buffer.c"
-    "PUCHAR\nDpmiAllocateBuffer(" "" "" TRUE)
+  ntvdm_source_projection(dpmi-buffer.inc "${dpmi}/buffer.c"
+    "PUCHAR\nDpmiMapAndCopyBuffer(" "" "" TRUE)
   ntvdm_source_projection(dpmi-state.inc "${dpmi}/savestat.c"
     "typedef struct _SavedState {" "" "" TRUE)
   fixture(dpmi-buffer-state CL test/mvdm-host/dpmi_buffer_state_fixture.c)

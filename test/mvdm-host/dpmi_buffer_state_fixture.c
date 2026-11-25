@@ -28,14 +28,15 @@ static ULONG esp;
 #define setFS(v) (regs[3]=(v))
 #define setGS(v) (regs[4]=(v))
 #define setESP(v) (esp=(v))
-#define GET_SELECTOR_LIMIT(seg, limit) ((limit)=selectorLimit)
-static PUCHAR Sim32GetVDMPointer(ULONG p, ULONG n, BOOL pm)
-{ (void)p; (void)n; (void)pm; return mapped; }
+#define DECLARE_LocalVdmContext
+#define GET_SHADOW_SELECTOR_LIMIT(seg, limit) ((limit)=selectorLimit)
+#define VDM_PM 1
+static PUCHAR VdmMapFlat(USHORT seg, ULONG offset, BOOL pm)
+{ (void)seg; (void)offset; return pm == VDM_PM ? mapped : NULL; }
 PUCHAR DpmiAllocateBuffer(USHORT);
 VOID DpmiFreeBuffer(PUCHAR, USHORT);
 
-#include "dpmi-buffer-before.inc"
-#include "dpmi-buffer-after.inc"
+#include "dpmi-buffer.inc"
 #include "dpmi-state.inc"
 
 static unsigned checks;
@@ -65,7 +66,7 @@ int main(void) {
     CHECK(high[7]==0x81 && !SmallBufferInUse);
     a=DpmiMapAndCopyBuffer(high,4096);
     CHECK(a==LargeXlatBuffer && !memcmp(a,high,4096));
-    DpmiUnmapBuffer(a,4096); CHECK(!LargeBufferInUseCount);
+    DpmiFreeBuffer(a,4096); CHECK(!LargeBufferInUseCount);
     a=DpmiAllocateBuffer(8192); CHECK(a==LargeXlatBuffer && LargeBufferInUseCount==8192);
     b=DpmiAllocateBuffer(128); CHECK(b==SmallXlatBuffer);
     c=DpmiAllocateBuffer(1); CHECK(c==(PUCHAR)0xf00df00d);
@@ -75,9 +76,9 @@ int main(void) {
     mapped=high; selectorLimit=255; memset(high,0,256); memcpy(high,"ABC",3);
     a=DpmiMapString(8,0,&length);
     CHECK(length==8 && !memcmp(a,high,length));
-    DpmiUnmapString(a,length); CHECK(!SmallBufferInUse);
+    DpmiFreeBuffer(a,length); CHECK(!SmallBufferInUse);
     a=DpmiMapAndCopyBuffer(IntelBase+MAX_V86_ADDRESS-128,128);
-    CHECK(a==SmallXlatBuffer); DpmiUnmapBuffer(a,128);
+    CHECK(a==SmallXlatBuffer); DpmiFreeBuffer(a,128);
     for(i=0;i<16;i++) {
         for(j=0;j<5;j++) regs[j]=(USHORT)(i*8+j);
         esp=0x12340000+i;

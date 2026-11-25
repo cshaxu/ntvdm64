@@ -1,3 +1,8 @@
+#if defined(NEC_98)
+#line 2
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 3
 
 #include "insignia.h"
 #include "host_def.h"
@@ -21,12 +26,12 @@
  */
 
 #ifdef SCCSID
-#line 24
+#line 26
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
-#line 28
+#line 30
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 
@@ -35,17 +40,17 @@
  *    O/S include files.
  */
 #ifdef PRINTER
-#line 41
+#line 43
 #include <stdio.h>
 
 #include TypesH
 
-#line 45
+#line 47
 #ifdef SYSTEMV
-#line 46
+#line 48
 #error DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register.
 #endif
-#line 48
+#line 50
 
 /*
  * SoftPC include files
@@ -62,12 +67,12 @@
 #include "host_lpt.h"
 #include "idetect.h"
 
-#line 64
+#line 66
 #if defined(NTVDM) && defined(MONITOR)
-#line 65
+#line 67
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
-#line 67
+#line 69
 
 #if defined(NTVDM)
 void    printer_bop_openclose (int);
@@ -88,10 +93,10 @@ static sys_addr timeout_address[] = {
 #endif /* PRINTER */
 
 #if defined(NTVDM) && defined(MONITOR)
-#line 87
+#line 89
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
-#line 89
+#line 91
 /*
  * The printer bios consists of three functions:
  *
@@ -108,7 +113,7 @@ void printer_io()
 {
 #ifdef PRINTER
 
-#line 105
+#line 107
     half_word time_out, status;
     word printer_io_address, printer_io_reg, printer_status_reg, printer_control_reg;
     boolean printer_busy = TRUE;
@@ -120,16 +125,16 @@ void printer_io()
 
     switch (bopsubfunction) {
 #ifdef MONITOR
-#line 116
+#line 118
 #error Excluded unsupported MONITOR printer BOP profile
 #endif
 
-#line 122
+#line 124
         case 1:
         case 2:
             /* this is the bop to track a DOS open/close on LPTn */
             printer_bop_openclose (bopsubfunction);
-#line 126
+#line 128
             return;
    }
 #endif
@@ -202,14 +207,17 @@ void printer_io()
 	}
     }
 #endif
-#line 198
+#line 200
 }
 
+extern  void  host_lpt_dos_open(int);
+extern  void  host_lpt_dos_close(int);
+
 #if defined(NTVDM) && defined(MONITOR)
-#line 201
+#line 206
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
-#line 224
+#line 227
 
 #if defined(NTVDM)
 void printer_bop_openclose(int func)
@@ -229,3 +237,4 @@ void printer_bop_openclose(int func)
 #endif
 }
 #endif
+#endif // !NEC_98

@@ -60,17 +60,25 @@ static half_word value;
 
 static void return_status()
 {
-	inb(port + (io_addr) RS232_LSR, &value);
+#if defined(NEC_98)
+#line 61
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 63
+	inb((io_addr)(port + RS232_LSR), (IU8 *)&value);
 	setAH(value);
-	inb(port + (io_addr) RS232_MSR, &value);
+	inb((io_addr)(port + RS232_MSR), (IU8 *)&value);
 	setAL(value);
+#endif // !NEC_98
+#line 68
 }
 
 
 void rs232_io()
 {
+#ifndef NEC_98
 #ifdef BIT_ORDER2
-#line 70
+#line 75
    union {
       half_word all;
       struct {
@@ -81,12 +89,12 @@ void rs232_io()
       } bit;
    } parameters;
 #endif
-#line 80
+#line 85
 #ifdef BIT_ORDER1
-#line 81
+#line 86
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
-#line 91
+#line 96
 
    DIVISOR_LATCH divisor_latch;
    int j;
@@ -133,24 +141,24 @@ void rs232_io()
        * Initialise the communication port
        */
       value = 0x80;   /* set DLAB */
-      outb(port + (io_addr) RS232_LCR, value);
+      outb((io_addr)(port + RS232_LCR), (IU8)value);
       /*
        * Set baud rate
        */
       parameters.all = getAL();
       divisor_latch.all = divisors[parameters.bit.baud_rate];
-      outb(port + (io_addr) RS232_IER, divisor_latch.byte.MSByte);
-      outb(port + (io_addr) RS232_TX_RX, divisor_latch.byte.LSByte);
+      outb((io_addr)(port + RS232_IER), (IU8)(divisor_latch.byte.MSByte));
+      outb((io_addr)(port + RS232_TX_RX), (IU8)(divisor_latch.byte.LSByte));
       /*
        * Set word length, stop bits and parity
        */
       parameters.bit.baud_rate = 0;
-      outb(port + (io_addr) RS232_LCR, parameters.all);
+      outb((io_addr)(port + RS232_LCR), parameters.all);
       /*
        * Disable interrupts
        */
       value = 0;
-      outb(port + (io_addr) RS232_IER, value);
+      outb((io_addr)(port + RS232_IER), (IU8)value);
       return_status();
       break;
 
@@ -162,7 +170,7 @@ void rs232_io()
       /*
        * Set DTR and RTS
        */
-      outb(port + (io_addr) RS232_MCR, 3);
+      outb((io_addr)(port + RS232_MCR), (IU8)3);
       /*
        * Real BIOS checks CTS and DSR - we know DSR ok.
        * Real BIOS check THRE - we know it's ok.
@@ -174,18 +182,18 @@ void rs232_io()
       sas_load(timeout_location, &timeout);
       for ( j = 0; j < timeout; j++)
       {
-	  	inb(port + (io_addr) RS232_MSR, &value);
+	  	inb((io_addr)(port + RS232_MSR), (IU8 *)&value);
 		if(value & 0x10)break;	/* CTS High, all is well */
       }
 	  if(j < timeout)
 	  {
-      	outb(port + (io_addr) RS232_TX_RX, getAL());	/* Send byte */
-		inb(port + (io_addr) RS232_LSR, &value);
+      	outb((io_addr)(port + RS232_TX_RX), getAL());	/* Send byte */
+		inb((io_addr)(port + RS232_LSR), (IU8 *)&value);
 		setAH(value);									/* Return Line Status Reg in AH */
 	  }
       else
 	  {
-	    setAH(value | 0x80);	/* Indicate time out */
+	    setAH((UCHAR)(value | 0x80));	/* Indicate time out */
 	  }
       break;
 
@@ -197,7 +205,7 @@ void rs232_io()
        * Set DTR
        */
       value = 1;
-      outb(port + (io_addr) RS232_MCR, value);
+      outb((io_addr)(port + RS232_MCR), (IU8)value);
       /*
        * Real BIOS checks DSR - we know it's ok.
        */
@@ -208,7 +216,7 @@ void rs232_io()
       sas_load(timeout_location, &timeout);
       for ( j = 0; j < timeout; j++)
 	 {
-	 inb(port + (io_addr) RS232_LSR, &value);
+	 inb((io_addr)(port + RS232_LSR), (IU8 *)&value);
 	 if ( (value & 1) == 1 )
 	    {
 	    /*
@@ -217,9 +225,9 @@ void rs232_io()
 	    value &= 0x1e;   /* keep error bits only */
 	    setAH(value);
                
-	    inb(port + (io_addr) RS232_TX_RX, &value);
+	    inb((io_addr)(port + RS232_TX_RX), (IU8 *)&value);
 	    setAL(value);
-#line 223
+#line 228
 	    return;
 	    }
 	 }
@@ -242,7 +250,7 @@ void rs232_io()
        * EXTENDED (PS/2) Initialise the communication port
        */
 	value = 0x80;   /* set DLAB */
-	outb(port + (io_addr) RS232_LCR, value);
+	outb((io_addr)(port + RS232_LCR), (IU8)value);
 	parameters.bit.word_length = getCH();
 	parameters.bit.stop_bit = getBL();
 	parameters.bit.parity = getBH();
@@ -252,18 +260,18 @@ void rs232_io()
         	Set baud rate
 	*/
       divisor_latch.all = divisors[parameters.bit.baud_rate];
-      outb(port + (io_addr) RS232_IER, divisor_latch.byte.MSByte);
-      outb(port + (io_addr) RS232_TX_RX, divisor_latch.byte.LSByte);
+      outb((io_addr)(port + RS232_IER), (IU8)(divisor_latch.byte.MSByte));
+      outb((io_addr)(port + RS232_TX_RX), (IU8)(divisor_latch.byte.LSByte));
       /*
        * Set word length, stop bits and parity
        */
       parameters.bit.baud_rate = 0;
-      outb(port + (io_addr) RS232_LCR, parameters.all);
+      outb((io_addr)(port + RS232_LCR), parameters.all);
       /*
        * Disable interrupts
        */
       value = 0;
-      outb(port + (io_addr) RS232_IER, value);
+      outb((io_addr)(port + RS232_IER), (IU8)value);
       return_status();
       break;
    
@@ -271,11 +279,11 @@ void rs232_io()
 	switch( getAL() )
 	{
 		case 0:	/* Read modem control register */
-			inb( port + (io_addr) RS232_MCR, &value);
+			inb( (io_addr)(port + RS232_MCR), (IU8 *)&value);
 			setBL(value);
 			break;
 		case 1: /* Write modem control register */
-			outb( port + (io_addr) RS232_MCR, getBL());
+			outb( (io_addr)(port + RS232_MCR), getBL());
 			break;
 	}
 	/*
@@ -287,9 +295,10 @@ void rs232_io()
 	/*
 	** Yes both XT and AT BIOS's really do this.
 	*/
-	setAH( getAH()-3 );
+	setAH( (UCHAR)(getAH()-3) );
       	break;
    }
-#line 293
+#endif // !NEC_98
+#line 299
 }
 

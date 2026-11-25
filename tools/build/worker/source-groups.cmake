@@ -122,7 +122,7 @@ foreach(name IN LISTS names)
   list(APPEND cvidc_objects "${object}")
 endforeach()
 
-worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/comms/sources")
+worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/comms/sources.inc")
 list(REMOVE_DUPLICATES names)
 set(comms_objects)
 foreach(name IN LISTS names)
