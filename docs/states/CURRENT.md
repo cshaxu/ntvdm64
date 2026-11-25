@@ -35,7 +35,7 @@ S1 establishes the component inventory, candidate provenance and feasibility. Th
 
 ## Current Technical Baseline
 
-The T484 S7 package in the active packet remains the runtime baseline. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. Integration awaits a qualified source and matching guest media.
+The T484 S7 package in the active packet remains the runtime baseline. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. The owner approved local source use on the OpenNT basis. Matching immutable XP guest media and third-party distribution evidence remain outstanding. H001 build ownership is traced.
 
 ## Recent Governance
 
