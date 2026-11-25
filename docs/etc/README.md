@@ -1985,3 +1985,4 @@ post-publication targeted checks.
 - [T484 S5 keyboard PIF consolidation](evidence/t484-s5-keyboard-pif-consolidation.md).
 - [T484 S5 standard and NT-only PIF layouts](evidence/t484-s5-pif-layouts.md).
 - [T484 S5 shared Windows launch INI editor](evidence/t484-s5-shared-ini.md).
+- [T484 S6 clean CMD build and Full acceptance](evidence/t484-s6-clean-cmd-acceptance.md).

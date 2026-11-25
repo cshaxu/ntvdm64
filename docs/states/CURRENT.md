@@ -30,6 +30,8 @@ acceptance step. S7 remains queued within T484.
 
 ## Current Progress
 
+S6 P1 verifies the clean and cached host/addon builds, selected fixture graphs, staged manifests and negative cases. The same-source-path x86 control reduces both path-sensitive comparisons to PE timestamps. Full passed 20/20 on the current release. Live launcher matrices remain in progress. [Evidence](../etc/evidence/t484-s6-clean-cmd-acceptance.md).
+
 S5 P5 promotes the existing guest INI editor to INI.EXE and removes both launch scripts' duplicate INI writers. The released tool passed Win31 six-profile, Win95 four-profile and apply/unapply package verification. [Evidence](../etc/evidence/t484-s5-shared-ini.md).
 
 S5 P4 replaces the standard and NT-only native PIF writers with authored layouts and the existing PIF editor. Both layouts and the x86/x64 native payload checks passed. [Evidence](../etc/evidence/t484-s5-pif-layouts.md).

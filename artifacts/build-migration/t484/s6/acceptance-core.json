@@ -1,0 +1,748 @@
+{
+  "revision": "f86e70841a3164d15bb0f9c3574ab3c0ab5b483b",
+  "sourceArchiveSha256": "21C409DC87ED555927B58F4D789C019161E79B994DEB19B72C77A82F3E5E9333",
+  "nativePathWitnessCount": 7,
+  "hostAndAddon": {
+    "coldPass": true,
+    "fixturePass": true,
+    "snapshotPublication": [
+      {
+        "name": "VCDEX.DLL",
+        "rawSha256": "5B6D0393634D003EB8CBE25F15C4739B6784FB640D2F7ED1B59E3F4A99B5883D",
+        "releasedRawSha256": "9F6070764ECD16AC24857BEC9B40539E2465AC89C7A236D403B74D396D88930F",
+        "stagedSha256": "7E98E58328712240557CFCBD9D61A82D86F428BF96FCDC5164AED78F676B9FAA",
+        "releasedSha256": "84A5C3E1E47C09D64389EE4E495600F72C48B2C0D8994E4E3615F6FF0EF160DD"
+      },
+      {
+        "name": "run16.exe",
+        "rawSha256": "C524F9BBEF36CCF570B572BE8C48C9AE89AC490644360EEECE512A5963997868",
+        "releasedRawSha256": "A59AEAA33FD8B2B42150D63B96024C6B4761F98F46D71F4C09073731B6C35031",
+        "stagedSha256": "A59B2C1E503A8ECC317E8D81943C7108A7451A54802A9B1A978DB4C23FED4463",
+        "releasedSha256": "78CD7A25F1DE67D6BD2308C8298C352AF1B6B86DA95B0F3CD7A9DAA2E9468904"
+      },
+      {
+        "name": "ntsrv.exe",
+        "rawSha256": "DDCE338D2219DD0F785B5FD94C5FEFA53AFBF9ED9D9BBCE26ADCC5714BFA13D9",
+        "releasedRawSha256": "DB3DF7B9F6F92522A53FCB6033AD76D1A548517EA7762E00D29208F21044F761",
+        "stagedSha256": "AA7E88298E1A1BF9777B0510ABAAFB912D4866B59B9FA14884B7A4BCFB6C227A",
+        "releasedSha256": "003D521E80FC041661668587B5B19F30ADF0B1569F48CBEE325298B26905E5FD"
+      },
+      {
+        "name": "ntcon.exe",
+        "rawSha256": "982CF203A2C011EE59B8BAAAA0DA3A25C30B9643613AFDFA95BA022B29CFD7DF",
+        "releasedRawSha256": "A764D839D92C1A29F3E53098C89B35AD691F8E4DF83D3ACDB09E7BF1FEA9A946",
+        "stagedSha256": "DBDCE089CE80F14C1DD72220FB2EAD559D87D1CDEE5E4D25A35F93684E2263D9",
+        "releasedSha256": "FABC3F01048BEE630826845BA28F7DB2FE80264A0F1DAD822A4109E4FA7DDC6B"
+      },
+      {
+        "name": "ntvdm.exe",
+        "rawSha256": "183D06AC2999B1B1DD496EEF854C756F725BBDE4B7554801A2BF9101C80DE053",
+        "releasedRawSha256": "7BAAB1E8830798F7F44BD258C6EB7F602E8A2960D6089BC05D08136AB1D23268",
+        "stagedSha256": "73A1A8B33E0CEFF2C9D071FA71A3595A816ACC6DADAC72CF6D6C5E0A4E338AB8",
+        "releasedSha256": "A47093EB36B009D476BC4037AC904C1B6A3CC7F6069F779B6A93237F2D4ECCE7"
+      },
+      {
+        "name": "ntvwm.exe",
+        "rawSha256": "879DF6EB72F3E07315B25BC281AA57A47440881444DD84D7A218BA57EC143B55",
+        "releasedRawSha256": "42F7B8C8B4329750AA6CFF531AF1A81382583C88E19912792B95E02979BF38D6",
+        "stagedSha256": "1243CC94CE6AAC44DCF6A1CADBDE53FD02521E472A5BC7E312305BBA52CB2E51",
+        "releasedSha256": "C6671D574B92717B1088DDB4137FE2F9CC5221746FF662F556ED46F7D0D605D5"
+      },
+      {
+        "name": "ntmon.exe",
+        "rawSha256": "0C44A4421AF908D985A71F1DEEFCC8255CC0DB4A393032EF0DCB3BE9385FF800",
+        "releasedRawSha256": "E18D050B5BE8257D9461CCAD3260AAC10759EE77750B99909C88933FA1F44012",
+        "stagedSha256": "7AD5BE20EB6A6E6F3F0D8DADEFDD479697DCD4F8F4F1291D5AA5B50ACCBB849D",
+        "releasedSha256": "0F2CE2EDAEC84FE319A64457AE84BE43BB6649F47D81CA03CC97EB59C339F3C0"
+      },
+      {
+        "name": "WOW32.DLL",
+        "rawSha256": "D479D6697A378C6A6E152B13C9A2FE3C3CD7A94A62777449AB403D0A95E990A9",
+        "releasedRawSha256": "EB1143FABA9148E9A9CE2C59172968A7F2C6BD807E454198ED896E0E78E9901C",
+        "stagedSha256": "524A4558B0FED3FBA46D5721A8BCF4DF998026FC09E305C20D7EEB912AC0ECF5",
+        "releasedSha256": "ED9A749E4BCE8BDBD3D090D7084A1BF430DD82FE963D822E201BB18508529B6E"
+      },
+      {
+        "name": "VDMREDIR.DLL",
+        "rawSha256": "3A72AB8B985C85EACE741BC9C2D186DACDA3C53361AEE73823F2503395217EFA",
+        "releasedRawSha256": "C6157E1E97B7849AD66152BA03E3C72FC03B760166759C3F3A92EBE904D6C42F",
+        "stagedSha256": "BB240816A270F33FEF42A57743D0E2ADAD407BF0C4883B41A494E8BD524C940D",
+        "releasedSha256": "52AC3BE64953D0363EFE86517D66000099CCDA864B468A8DD02A2DF393D2D5DD"
+      },
+      {
+        "name": "nthook32.dll",
+        "rawSha256": "527F1B699EB1F4E3D9095B29DA541566A7446988519C5719AD12E159D5CFC977",
+        "releasedRawSha256": "28C39F64D15FEF6D6D7EE170329AD606F95008A23007E1318AC4C05B7A9865D4",
+        "stagedSha256": "CB268EA09CD210EB11570448E713B6A662F1C97588282BECC0DDE2CA22563A03",
+        "releasedSha256": "B994F722510E9109F6868C547C38996A6A6FE707D415EE660FA464DCD705F19B"
+      },
+      {
+        "name": "nthook64.dll",
+        "rawSha256": "3F724D8441C1385290B87FEB115E0512B60C8439E62E08C2CB3EF1459DE09A7D",
+        "releasedRawSha256": "3ABDD8D2C02CED6121F587ABA34AD5635FA935F2FDC61278B5485D03FAF59EEA",
+        "stagedSha256": "CB57FDB11E61A07D983DD56673DD8A12B975F23F9F18A7D910CDC0B63B83D3C9",
+        "releasedSha256": "A446E267C747BF338D6F3F267E595E03480FDC66F74BCF11DEF5240CCE9DE5AC"
+      }
+    ],
+    "addonManifest": [
+      {
+        "name": "MOUSE101.DRV",
+        "cleanSha256": "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
+        "releaseSha256": "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E"
+      },
+      {
+        "name": "MOUSE31.DRV",
+        "cleanSha256": "5FA167B71FB12B69AEE78E9FF8AB46BB82D4A9FED00AAFDE94FAD87592CE9D07",
+        "releaseSha256": "5FA167B71FB12B69AEE78E9FF8AB46BB82D4A9FED00AAFDE94FAD87592CE9D07"
+      },
+      {
+        "name": "compat95.sys",
+        "cleanSha256": "49F9219405E08A4DBB35F69AE7836A27A6FF2477F272CCF29D3DD42CEAC5DABC",
+        "releaseSha256": "49F9219405E08A4DBB35F69AE7836A27A6FF2477F272CCF29D3DD42CEAC5DABC"
+      },
+      {
+        "name": "ntvdm64.386",
+        "cleanSha256": "A2D689BAD411B09AF02B8D8BB0DCEF7F0217BFA23BD1E4A3203758249D8665BB",
+        "releaseSha256": "A2D689BAD411B09AF02B8D8BB0DCEF7F0217BFA23BD1E4A3203758249D8665BB"
+      },
+      {
+        "name": "insignia.386",
+        "cleanSha256": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B",
+        "releaseSha256": "BB964D70FC5FFBE65466E597D0180C614B75FA7A604523CF5F8BC60CB3C3613B"
+      },
+      {
+        "name": "HASH.EXE",
+        "cleanSha256": "23574608522876185DC515D808947DF9BD1966E08587838E6E0B26788EEAA047",
+        "releaseSha256": "138781C69EE89355778C50E10B9937D1494D9DABB3B7F0DBEDE47558F940DAE6"
+      },
+      {
+        "name": "GRP.EXE",
+        "cleanSha256": "853E5D9C6DFEB25F4E50A876D05F916D02950BF220FC1070C3B07C8D0F9E270B",
+        "releaseSha256": "BA83448A48EBDFC9F682F3D95A93045EE7ED765022FF078BCAF46FE7C45C6BB9"
+      },
+      {
+        "name": "INI.EXE",
+        "cleanSha256": "82602E874C5DDA92DCA8DA650BD52051E846BF490B3703D914A330BA004A2258",
+        "releaseSha256": "904AD071338C21423E9BC2EFD53E630BCA2706B663F8DC58C6E21749CECD1862"
+      },
+      {
+        "name": "LNK.EXE",
+        "cleanSha256": "874BEA4780BACDB9208931F401EF9A016CCE57DDAAA063C776F4C1FC6CA887EB",
+        "releaseSha256": "76D2C4F438EEA451722DF64D61DDB3F19302DFAB94F36C0018A00B6B8F79C643"
+      },
+      {
+        "name": "SZDD.EXE",
+        "cleanSha256": "EDA30555BA6B00BE26604BB14FF2ABB1726CB8031E8DE14642B42CFE9C0316D7",
+        "releaseSha256": "935387EAE2DC2A3C4B055CC2B3A6DC3A1CDFA8BC2CC6BF96454CF2C0EED9EF9D"
+      },
+      {
+        "name": "patch31.exe",
+        "cleanSha256": "403CF06911B7A9354153B0C45C17EA1B870A6BB7A1DF3C94150B0DF4CED101B9",
+        "releaseSha256": "5F668F98E187811126B1A63141F1A4A220A3573249231D60384C20FE415DB046"
+      },
+      {
+        "name": "path31.exe",
+        "cleanSha256": "DB53908551F27594E94E8D7D5EEEE693C591E85649B635162449C70B65757794",
+        "releaseSha256": "4EE908499834D5A3BCF63267B85ABFC66D486DD3E6EDC1E603B681CCF9E2D2A9"
+      },
+      {
+        "name": "patch95.exe",
+        "cleanSha256": "FDAD37B70D13CEFF558ABA172ABCC8D3657EE48F34E68D9C113C0B2215947E08",
+        "releaseSha256": "AF2561B2B5482CABC3B44F793FBDC0FE21F1EE9219B025F93911D3749397697E"
+      },
+      {
+        "name": "path95.exe",
+        "cleanSha256": "551B6DC40F8F4077D7871214DD4D78F50FA4425B530DC2690EAD7E1CB9508F70",
+        "releaseSha256": "B884F6D1AFCA2ADB7B4356E0A386F681188FD5215381E47062E3694960C45AAB"
+      },
+      {
+        "name": "PIF.EXE",
+        "cleanSha256": "381A404CDCE10E2B920732880DC8672FAE949BD0ACB4F35AB1C68B96D3D19110",
+        "releaseSha256": "08B4F2CA568DF5DD0E488E0A35BE9B99D3E5DE06FD8095453828AD51DDD411F6"
+      }
+    ]
+  },
+  "commandGraphs": [
+    {
+      "generatedCommandRows": 3,
+      "graph": "msvc-x86-release",
+      "executionLogRows": 15,
+      "targets": [
+        "wow32"
+      ]
+    },
+    {
+      "generatedCommandRows": 1208,
+      "graph": "msvc-x86-release/worker",
+      "executionLogRows": 1872,
+      "targets": [
+        "ntvdm.exe",
+        "VCDEX.DLL",
+        "VDMREDIR.dll",
+        "nthook32.dll",
+        "ntvwm.exe",
+        "ntcon.exe",
+        "ntmon.exe",
+        "run16.exe",
+        "ntsrv.exe"
+      ]
+    },
+    {
+      "generatedCommandRows": 235,
+      "graph": "msvc-x86-release/wow32",
+      "executionLogRows": 240,
+      "targets": [
+        "wow32.dll"
+      ]
+    },
+    {
+      "generatedCommandRows": 6,
+      "graph": "msvc-x64-release",
+      "executionLogRows": 25,
+      "targets": [
+        "native-worker",
+        "native-frontend",
+        "native-monitor",
+        "native-launcher",
+        "native-service",
+        "hook64"
+      ]
+    },
+    {
+      "generatedCommandRows": 159,
+      "graph": "msvc-x64-release/worker",
+      "executionLogRows": 257,
+      "targets": [
+        "ntvwm.exe"
+      ]
+    },
+    {
+      "generatedCommandRows": 152,
+      "graph": "msvc-x64-release/frontend",
+      "executionLogRows": 243,
+      "targets": [
+        "ntcon.exe"
+      ]
+    },
+    {
+      "generatedCommandRows": 38,
+      "graph": "msvc-x64-release/monitor",
+      "executionLogRows": 72,
+      "targets": [
+        "ntmon.exe"
+      ]
+    },
+    {
+      "generatedCommandRows": 143,
+      "graph": "msvc-x64-release/launcher",
+      "executionLogRows": 232,
+      "targets": [
+        "run16.exe"
+      ]
+    },
+    {
+      "generatedCommandRows": 147,
+      "graph": "msvc-x64-release/service",
+      "executionLogRows": 237,
+      "targets": [
+        "ntsrv.exe"
+      ]
+    },
+    {
+      "generatedCommandRows": 28,
+      "graph": "msvc-x64-release/hook",
+      "executionLogRows": 35,
+      "targets": [
+        "nthook64.dll"
+      ]
+    },
+    {
+      "generatedCommandRows": 9,
+      "graph": "build-tools",
+      "executionLogRows": 10,
+      "targets": [
+        "all"
+      ]
+    },
+    {
+      "generatedCommandRows": 32,
+      "graph": "addon",
+      "executionLogRows": 82,
+      "targets": [
+        "all"
+      ]
+    },
+    {
+      "generatedCommandRows": 19,
+      "graph": "fixtures-x86",
+      "executionLogRows": 42,
+      "targets": [
+        "native-payload-probes",
+        "memory-profiles"
+      ]
+    },
+    {
+      "generatedCommandRows": 20,
+      "graph": "fixtures-x64",
+      "executionLogRows": 49,
+      "targets": [
+        "native-payload-probes",
+        "dos-observation-probes"
+      ]
+    }
+  ],
+  "incrementalChecks": {
+    "finish": "2026-11-25T02:56:40.6457359+01:00",
+    "exit": 0,
+    "cleanHostSha256": "0C44A4421AF908D985A71F1DEEFCC8255CC0DB4A393032EF0DCB3BE9385FF800",
+    "start": "2026-11-25T02:56:18.5777416+01:00",
+    "lastSuccessfulEditSha256": "3BB3AE0A450A6F6A239C4BA02BB6F61B85AFE0BB7373D6032374078128B0FEE1",
+    "pid": 20496,
+    "restoredHostSha256": "59A8995DDA95A39026DD12AEB6A5B70B7F5C0F6FF90CB0E3A31E7A8A36B9BD5B",
+    "hostRows": 11,
+    "addonRows": 15
+  },
+  "cleanBinaryComparison": {
+    "host": [
+      {
+        "name": "VCDEX.DLL",
+        "clean_bytes": 10240,
+        "released_bytes": 10240,
+        "clean_sha256": "7e98e58328712240557cfcbd9d61a82d86f428bf96fcdc5164aed78f676b9faa",
+        "released_sha256": "84a5c3e1e47c09d64389ee4e495600f72c48b2c0d8994e4e3615f6ff0ef160dd",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "run16.exe",
+        "clean_bytes": 311808,
+        "released_bytes": 311808,
+        "clean_sha256": "a59b2c1e503a8ecc317e8d81943c7108a7451a54802a9b1a978db4c23fed4463",
+        "released_sha256": "78cd7a25f1de67d6bd2308c8298c352af1b6b86da95b0f3cd7a9daa2e9468904",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "ntsrv.exe",
+        "clean_bytes": 412160,
+        "released_bytes": 412160,
+        "clean_sha256": "aa7e88298e1a1bf9777b0510abaafb912d4866b59b9fa14884b7a4bcfb6c227a",
+        "released_sha256": "003d521e80fc041661668587b5b19f30adf0b1569f48cbee325298b26905e5fd",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "ntcon.exe",
+        "clean_bytes": 357888,
+        "released_bytes": 357888,
+        "clean_sha256": "dbdce089ce80f14c1dd72220fb2ead559d87d1cdee5e4d25a35f93684e2263d9",
+        "released_sha256": "fabc3f01048bee630826845ba28f7db2fe80264a0f1dad822a4109e4fa7ddc6b",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "ntvdm.exe",
+        "clean_bytes": 2118144,
+        "released_bytes": 2118144,
+        "clean_sha256": "73a1a8b33e0ceff2c9d071fa71a3595a816acc6dadac72cf6d6c5e0a4e338ab8",
+        "released_sha256": "a47093eb36b009d476bc4037ac904c1b6a3cc7f6069f779b6a93237f2d4ecce7",
+        "differing_bytes": 38301,
+        "classification": "other-equal-size-differences",
+        "first_non_timestamp_offsets": [
+          400,
+          408,
+          444,
+          448,
+          472,
+          480,
+          576,
+          696,
+          4694,
+          7894,
+          22151,
+          22152,
+          23379,
+          24998,
+          25050,
+          28375,
+          28477,
+          28484,
+          82062,
+          82095,
+          82164,
+          82224,
+          82826,
+          85812
+        ]
+      },
+      {
+        "name": "ntvwm.exe",
+        "clean_bytes": 327680,
+        "released_bytes": 327680,
+        "clean_sha256": "1243cc94ce6aac44dcf6a1cadbde53fd02521e472a5bc7e312305bba52cb2e51",
+        "released_sha256": "c6671d574b92717b1088ddb4137fe2f9cc5221746ff662f556ed46f7d0d605d5",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "ntmon.exe",
+        "clean_bytes": 169984,
+        "released_bytes": 169984,
+        "clean_sha256": "7ad5be20eb6a6e6f3f0d8dadefdd479697dcd4f8f4f1291d5aa5b50accbb849d",
+        "released_sha256": "0f2ce2edaec84fe319a64457ae84be43bb6649f47d81ca03cc97eb59c339f3c0",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "WOW32.DLL",
+        "clean_bytes": 709120,
+        "released_bytes": 709120,
+        "clean_sha256": "524a4558b0fed3fba46d5721a8bcf4df998026fc09e305c20d7eeb912ac0ecf5",
+        "released_sha256": "ed9a749e4bce8bdbd3d090d7084a1bf430dd82fe963d822e201bb18508529b6e",
+        "differing_bytes": 49215,
+        "classification": "other-equal-size-differences",
+        "first_non_timestamp_offsets": [
+          416,
+          424,
+          460,
+          464,
+          488,
+          496,
+          592,
+          712,
+          3782,
+          5041,
+          8086,
+          8662,
+          8790,
+          10694,
+          19318,
+          19319,
+          20502,
+          20503,
+          40454,
+          45798,
+          47686,
+          48342,
+          48343,
+          48502
+        ]
+      },
+      {
+        "name": "VDMREDIR.DLL",
+        "clean_bytes": 207872,
+        "released_bytes": 207872,
+        "clean_sha256": "bb240816a270f33fef42a57743d0e2adad407bf0c4883b41a494e8bd524c940d",
+        "released_sha256": "52ac3be64953d0363efe86517d66000099ccda864b468a8dd02a2df393d2d5dd",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "nthook32.dll",
+        "clean_bytes": 216064,
+        "released_bytes": 216064,
+        "clean_sha256": "cb268ea09cd210eb11570448e713b6a662f1c97588282becc0dde2ca22563a03",
+        "released_sha256": "b994f722510e9109f6868c547c38996a6a6fe707d415ee660fa464dcd705f19b",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "nthook64.dll",
+        "clean_bytes": 261632,
+        "released_bytes": 261632,
+        "clean_sha256": "cb57fdb11e61a07d983dd56673dd8a12b975f23f9f18a7d910cdc0b63b83d3c9",
+        "released_sha256": "a446e267c747bf338d6f3f267e595e03480fdc66f74bcf11def5240cce9de5ac",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      }
+    ],
+    "addon": [
+      {
+        "name": "MOUSE101.DRV",
+        "clean_bytes": 624,
+        "released_bytes": 624,
+        "clean_sha256": "dc01039b0fc2b7e9244f31a42a4aaa9ed10613291557b4b6e2695ece1ba5666e",
+        "released_sha256": "dc01039b0fc2b7e9244f31a42a4aaa9ed10613291557b4b6e2695ece1ba5666e",
+        "classification": "raw-identical"
+      },
+      {
+        "name": "MOUSE31.DRV",
+        "clean_bytes": 1304,
+        "released_bytes": 1304,
+        "clean_sha256": "5fa167b71fb12b69aee78e9ff8ab46bb82d4a9fed00aafde94fad87592ce9d07",
+        "released_sha256": "5fa167b71fb12b69aee78e9ff8ab46bb82d4a9fed00aafde94fad87592ce9d07",
+        "classification": "raw-identical"
+      },
+      {
+        "name": "compat95.sys",
+        "clean_bytes": 5235,
+        "released_bytes": 5235,
+        "clean_sha256": "49f9219405e08a4dbb35f69ae7836a27a6ff2477f272ccf29d3dd42ceac5dabc",
+        "released_sha256": "49f9219405e08a4dbb35f69ae7836a27a6ff2477f272ccf29d3dd42ceac5dabc",
+        "classification": "raw-identical"
+      },
+      {
+        "name": "ntvdm64.386",
+        "clean_bytes": 9323,
+        "released_bytes": 9323,
+        "clean_sha256": "a2d689bad411b09af02b8d8bb0dcef7f0217bfa23bd1e4a3203758249d8665bb",
+        "released_sha256": "a2d689bad411b09af02b8d8bb0dcef7f0217bfa23bd1e4a3203758249d8665bb",
+        "classification": "raw-identical"
+      },
+      {
+        "name": "insignia.386",
+        "clean_bytes": 4714,
+        "released_bytes": 4714,
+        "clean_sha256": "bb964d70fc5ffbe65466e597d0180c614b75fa7a604523cf5f8bc60cb3c3613b",
+        "released_sha256": "bb964d70fc5ffbe65466e597d0180c614b75fa7a604523cf5f8bc60cb3c3613b",
+        "classification": "raw-identical"
+      },
+      {
+        "name": "HASH.EXE",
+        "clean_bytes": 136192,
+        "released_bytes": 136192,
+        "clean_sha256": "23574608522876185dc515d808947df9bd1966e08587838e6e0b26788eeaa047",
+        "released_sha256": "138781c69ee89355778c50e10b9937d1494d9dabb3b7f0dbede47558f940dae6",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "GRP.EXE",
+        "clean_bytes": 155648,
+        "released_bytes": 155648,
+        "clean_sha256": "853e5d9c6dfeb25f4e50a876d05f916d02950bf220fc1070c3b07c8d0f9e270b",
+        "released_sha256": "ba83448a48ebdfc9f682f3d95a93045ee7ed765022ff078bcaf46fe7c45c6bb9",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "INI.EXE",
+        "clean_bytes": 164352,
+        "released_bytes": 164352,
+        "clean_sha256": "82602e874c5dda92dca8da650bd52051e846bf490b3703d914a330ba004a2258",
+        "released_sha256": "904ad071338c21423e9bc2efd53e630bca2706b663f8dc58c6e21749cecd1862",
+        "differing_bytes": 4,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "LNK.EXE",
+        "clean_bytes": 154624,
+        "released_bytes": 154624,
+        "clean_sha256": "874bea4780bacdb9208931f401ef9a016cce57ddaaa063c776f4c1fc6ca887eb",
+        "released_sha256": "76d2c4f438eea451722df64d61ddb3f19302dfab94f36c0018a00b6b8f79c643",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "SZDD.EXE",
+        "clean_bytes": 137216,
+        "released_bytes": 137216,
+        "clean_sha256": "eda30555ba6b00be26604bb14ff2abb1726cb8031e8de14642b42cfe9c0316d7",
+        "released_sha256": "935387eae2dc2a3c4b055cc2b3a6dc3a1cdfa8bc2cc6bf96454cf2c0eed9ef9d",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "patch31.exe",
+        "clean_bytes": 152576,
+        "released_bytes": 152576,
+        "clean_sha256": "403cf06911b7a9354153b0c45c17ea1b870a6bb7a1df3c94150b0df4ced101b9",
+        "released_sha256": "5f668f98e187811126b1a63141f1a4a220a3573249231d60384c20fe415db046",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "path31.exe",
+        "clean_bytes": 154112,
+        "released_bytes": 154112,
+        "clean_sha256": "db53908551f27594e94e8d7d5eeee693c591e85649b635162449c70b65757794",
+        "released_sha256": "4ee908499834d5a3bcf63267b85abfc66d486dd3e6edc1e603b681ccf9e2d2a9",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "patch95.exe",
+        "clean_bytes": 178688,
+        "released_bytes": 178688,
+        "clean_sha256": "fdad37b70d13ceff558aba172abcc8d3657ee48f34e68d9c113c0b2215947e08",
+        "released_sha256": "af2561b2b5482cabc3b44f793fbdc0fe21f1ee9219b025f93911d3749397697e",
+        "differing_bytes": 6,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "path95.exe",
+        "clean_bytes": 151552,
+        "released_bytes": 151552,
+        "clean_sha256": "551b6dc40f8f4077d7871214dd4d78f50fa4425b530dc2690ead7e1cb9508f70",
+        "released_sha256": "b884f6d1afca2adb7b4356e0a386f681188fd5215381e47062e3694960c45aab",
+        "differing_bytes": 4,
+        "classification": "pe-timestamps-only"
+      },
+      {
+        "name": "PIF.EXE",
+        "clean_bytes": 152064,
+        "released_bytes": 152064,
+        "clean_sha256": "381a404cdce10e2b920732880dc8672fae949bd0acb4f35ab1c68b96d3d19110",
+        "released_sha256": "08b4f2ca568df5dd0e488e0a35be9b99d3e5de06fd8095453828ad51ddd411f6",
+        "differing_bytes": 4,
+        "classification": "pe-timestamps-only"
+      }
+    ]
+  },
+  "sameSourcePathControl": [
+    {
+      "name": "ntvdm.exe",
+      "clean_bytes": 2118144,
+      "released_bytes": 2118144,
+      "clean_sha256": "a3b72205e80bb0498ff7cec44caf8f110ff419b217713da7eccb8266d0b5e39a",
+      "released_sha256": "7baab1e8830798f7f44bd258c6eb7f602e8a2960d6089bc05d08136ab1d23268",
+      "differing_bytes": 6,
+      "classification": "pe-timestamps-only"
+    },
+    {
+      "name": "WOW32.DLL",
+      "clean_bytes": 708608,
+      "released_bytes": 708608,
+      "clean_sha256": "a93e194564157d1a25e1e4a7637fbcf8936417f5f8c8a2e32c1c2eb613249772",
+      "released_sha256": "eb1143faba9148e9a9ce2c59172968a7f2c6bd807e454198ed896e0e78e9901c",
+      "differing_bytes": 6,
+      "classification": "pe-timestamps-only"
+    }
+  ],
+  "runtime": {
+    "package": "d8983d2b-3fe1-4d18-8ea9-64613c84346c",
+    "runtime": "O:\\repos.hobby\\ntvdm64\\build\\t484-s2-worker-cmake\\candidate-final",
+    "hashMatches": 33,
+    "hostImages": 11
+  },
+  "runtimeTimings": {
+    "Suite": "Full",
+    "ElapsedMs": 436002,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 22607,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1437,
+        "CleanupMs": 300,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 27100,
+        "CleanupMs": 348,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 17315,
+        "CleanupMs": 277,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 17348,
+        "CleanupMs": 259,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 185,
+        "CleanupMs": 233,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 64688,
+        "CleanupMs": 317,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 41952,
+        "CleanupMs": 309,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 38907,
+        "CleanupMs": 266,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14097,
+        "CleanupMs": 302,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 18856,
+        "CleanupMs": 251,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 3311,
+        "CleanupMs": 271,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12388,
+        "CleanupMs": 270,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 34072,
+        "CleanupMs": 281,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 40261,
+        "CleanupMs": 300,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3779,
+        "CleanupMs": 331,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7560,
+        "CleanupMs": 331,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9799,
+        "CleanupMs": 323,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 25743,
+        "CleanupMs": 336,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7935,
+        "CleanupMs": 275,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20478,
+        "CleanupMs": 232,
+        "Passed": true
+      }
+    ]
+  },
+  "releaseAssetUnchanged": true
+}
