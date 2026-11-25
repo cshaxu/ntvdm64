@@ -26,12 +26,12 @@ set "OWNER="
 if "%~1"=="launch" if not exist "%DEST%\.ntvdm64-guest-owner" exit /b 2
 if "%~1"=="launch" set /p "OWNER="<"%DEST%\.ntvdm64-guest-owner"
 if "%~1"=="launch" if /i not "%OWNER%"=="%TASK%" exit /b 2
-if "%~1"=="launch" call "%ROOT%\tools\build-fixtures.cmd" x64 guest-ini
+if "%~1"=="launch" call "%ROOT%\tools\build-addon.cmd" ini
 if errorlevel 1 exit /b 1
 set "LOAD="
 if "%~6"=="pair" set "LOAD=%DEST%\PATCH\A.PIF %DEST%\PATCH\B.PIF"
 if "%~6"=="second" set "LOAD=%DEST%\PATCH\B.PIF"
-set "INI=%ROOT%\build\.ninja\fixtures-x64\guest-ini.exe"
+set "INI=%ROOT%\build\.ninja\addon\ini\ini.exe"
 if "%~1"=="launch" "%INI%" "%DEST%\WIN.INI" "%TASK%\probe-win.candidate" set windows load "%LOAD%"
 if errorlevel 1 exit /b 1
 if "%~1"=="launch" if "%~7"=="1" "%INI%" "%DEST%\SYSTEM.INI" "%TASK%\probe-system.candidate" append 386Enh device *vmd
@@ -49,11 +49,11 @@ if "%~1"=="restore" if not exist "%TASK%\matrix-prepared" exit /b 2
 set "SNAPSHOT_OWNER="
 if exist "%TASK%\matrix-prepared" set /p "SNAPSHOT_OWNER="<"%TASK%\matrix-prepared"
 if defined SNAPSHOT_OWNER if /i not "%SNAPSHOT_OWNER%"=="%DEST%" exit /b 2
-if "%~1"=="prepare" call "%ROOT%\tools\build-fixtures.cmd" x64 guest-ini
+if "%~1"=="prepare" call "%ROOT%\tools\build-addon.cmd" ini
 if errorlevel 1 exit /b 1
 if "%~1"=="prepare" "%ROOT%\build\.ninja\fixtures-x64\win31-probe-paths.exe" "%TASK%\W31CHECK.EXE" "%TASK%\W31DOS.COM" "%DEST%\PATCH"
 if errorlevel 1 exit /b 1
-if "%~1"=="prepare" "%ROOT%\build\.ninja\fixtures-x64\guest-ini.exe" "%DEST%\WIN.INI" "%TASK%\matrix-win.candidate" set windows run "%DEST%\PATCH\W31CHECK.EXE"
+if "%~1"=="prepare" "%ROOT%\build\.ninja\addon\ini\ini.exe" "%DEST%\WIN.INI" "%TASK%\matrix-win.candidate" set windows run "%DEST%\PATCH\W31CHECK.EXE"
 if errorlevel 1 exit /b 1
 if "%~1"=="prepare" copy /b "%DEST%\WIN.INI" "%TASK%\matrix-original-win.ini" >nul
 if errorlevel 1 exit /b 1
@@ -122,9 +122,9 @@ set /p "OWNER="<"%DEST%\.ntvdm64-guest-owner"
 if /i not "%OWNER%"=="%TASK%" exit /b 2
 if not exist "%TASK%\" exit /b 2
 if exist "%TASK%\setup-shim" exit /b 2
-call "%ROOT%\tools\build-fixtures.cmd" x64 guest-ini
+call "%ROOT%\tools\build-addon.cmd" ini
 if errorlevel 1 exit /b 1
-set "INI=%ROOT%\build\.ninja\fixtures-x64\guest-ini.exe"
+set "INI=%ROOT%\build\.ninja\addon\ini\ini.exe"
 set "PATCH=%DEST%\PATCH"
 for %%D in (INSIGNIA.386 NTVDM64.386) do (
  fc /b "%PATCH%\%%D" "%ROOT%\assets\release\%%D" >nul
@@ -141,7 +141,7 @@ for %%F in (INSIGNIA.386 NTVDM64.386 CONFIG.NT AUTOEXEC.NT WINSTD.PIF WIN386.PIF
 )
 copy /b /y "%TASK%\setup-system.ini" "%DEST%\SYSTEM.INI" >nul || exit /b 1
 set "MEDIA=%TASK%\media\PATCH"
-call "%ROOT%\tools\prepare-test-inputs.cmd" "%MEDIA%" "%ROOT%\tools\win31-setup\SETUP.CMD" SETUP.CMD "%ROOT%\tools\win31-setup\WIN.CMD" WIN.CMD "%ROOT%\assets\release\PIF.EXE" PIF.EXE "%ROOT%\assets\release\INSIGNIA.386" INSIGNIA.386 "%ROOT%\assets\release\NTVDM64.386" NTVDM64.386
+call "%ROOT%\tools\prepare-test-inputs.cmd" "%MEDIA%" "%ROOT%\tools\win31-setup\SETUP.CMD" SETUP.CMD "%ROOT%\tools\win31-setup\WIN.CMD" WIN.CMD "%ROOT%\assets\release\PIF.EXE" PIF.EXE "%ROOT%\assets\release\INI.EXE" INI.EXE "%ROOT%\assets\release\INSIGNIA.386" INSIGNIA.386 "%ROOT%\assets\release\NTVDM64.386" NTVDM64.386
 if errorlevel 1 exit /b 1
 mkdir "%TASK%\setup-shim" || exit /b 1
 (

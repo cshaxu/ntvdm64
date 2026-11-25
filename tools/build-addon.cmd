@@ -6,7 +6,7 @@ if not "%~2"=="" exit /b 2
 set "component=%~1"
 if not defined component set "component=all"
 set "selected="
-for %%I in (all grp hash lnk patch31 patch95 path31 path95 pif szdd compat95 compat95-control mouse101 mouse31 mouse101-tests mouse31-tests insignia ntvdm64) do if "%component%"=="%%I" set "selected=1"
+for %%I in (all grp hash ini lnk patch31 patch95 path31 path95 pif szdd compat95 compat95-control mouse101 mouse31 mouse101-tests mouse31-tests insignia ntvdm64) do if "%component%"=="%%I" set "selected=1"
 if not defined selected (
   echo Unknown addon target: "%component%" 1>&2
   exit /b 2

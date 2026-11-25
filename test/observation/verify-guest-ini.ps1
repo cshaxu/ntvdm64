@@ -4,9 +4,9 @@ $repo=[IO.Path]::GetFullPath("$PSScriptRoot/../..")
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned evidence required'}
 $null=New-Item -ItemType Directory $root
-& "$repo/tools/build-fixtures.cmd" x64 guest-ini *> "$root/build.log"
-if($LASTEXITCODE){throw 'Network profile tool build failed'}
-$tool="$repo/build/.ninja/fixtures-x64/guest-ini.exe"
+& "$repo/tools/build-addon.cmd" ini *> "$root/build.log"
+if($LASTEXITCODE){throw 'INI editor build failed'}
+$tool="$repo/build/.ninja/addon/ini/ini.exe"
 $encoding=[Text.Encoding]::GetEncoding(28591)
 $original="; caf$([char]233)`r`n[other]`r`nnetwork.drv=untouched`r`n[boot]`r`nshell=progman.exe`r`nnetwork.drv=original.drv`r`n[tail]`r`nx=y`r`n"
 foreach($mode in 'Empty','WfwNet'){
@@ -80,5 +80,25 @@ $expected=$entries[0..2]+$entries[5..7]
 if([IO.File]::ReadAllText("$dropInput.candidate",$encoding) -cne (($expected -join "`r`n")+"`r`n")){throw 'Unrelated driver entries changed'}
 & $tool $dropInput "$dropInput.invalid" drop-file 386Enh device 'O:\NTVDM64.386'
 if($LASTEXITCODE -ne 2 -or (Test-Path "$dropInput.invalid")){throw 'Non-leaf filename accepted'}
+foreach($newline in "`r`n","`n"){
+ $file=Join-Path $root ('file-selection-'+$newline.Length+'.ini')
+ $input="; keep !$([char]233)$newline[386Enh]${newline}device=other.386${newline}[boot]${newline}device=outside\A.386"
+ $entries=@('386Enh','device','off','O:\test\A.386','on','O:\test\B.386')
+ [IO.File]::WriteAllBytes($file,$encoding.GetBytes($input))
+ & $tool $file "$file.install" install-files @entries
+ $expected=$input.Replace("[386Enh]$newline","[386Enh]${newline};device=O:\test\A.386${newline}device=O:\test\B.386$newline")
+ if($LASTEXITCODE -or [IO.File]::ReadAllText("$file.install",$encoding) -cne $expected){throw 'Installed order or unrelated bytes changed'}
+ $entries[2]='on';$entries[4]='off'
+ & $tool "$file.install" "$file.select" select-files @entries
+ $expected=$expected.Replace(';device=O:\test\A.386','device=O:\test\A.386').Replace('device=O:\test\B.386',';device=O:\test\B.386')
+ if($LASTEXITCODE -or [IO.File]::ReadAllText("$file.select",$encoding) -cne $expected){throw 'Selected state or order changed'}
+ & $tool "$file.select" "$file.remove" remove-files @entries
+ if($LASTEXITCODE -or [IO.File]::ReadAllText("$file.remove",$encoding) -cne $input){throw 'Removal changed unrelated bytes'}
+ & $tool $file "$file.no-selection" select-files @entries
+ if($LASTEXITCODE -ne 2 -or (Test-Path "$file.no-selection")){throw 'Missing required entries were accepted'}
+ [IO.File]::WriteAllText("$file.duplicate",$expected.Replace('device=O:\test\A.386',"device=O:\test\A.386${newline}device=O:\old\A.386"),$encoding)
+ & $tool "$file.duplicate" "$file.no-duplicate" select-files @entries
+ if($LASTEXITCODE -ne 2 -or (Test-Path "$file.no-duplicate")){throw 'Duplicate required entries were accepted'}
+}
 'PASS network and driver profiles, entry ordering, exact driver removal, existing-output refusal, unrelated bytes, duplicate/missing/NUL/selection rejection and stage boundary'|Set-Content "$root/result.txt"
 $global:LASTEXITCODE=0

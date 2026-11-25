@@ -17,11 +17,11 @@ for %%F in ("%TARGET%\WIN.COM" "%SYSTEM%\VMM32.VXD" "%SYSTEM%\KRNL386.EXE" "%TAR
   echo Missing Win95 installation file: %%~F
   exit /b 2
 )
-for %%F in (patch95.exe compat95.sys PIF.EXE MOUSE31.DRV SETVER.EXE INSIGNIA.386 NTVDM64.386) do if not exist "%RELEASE%\%%F" (
+for %%F in (patch95.exe compat95.sys PIF.EXE INI.EXE MOUSE31.DRV SETVER.EXE INSIGNIA.386 NTVDM64.386) do if not exist "%RELEASE%\%%F" (
   echo Missing released component: %RELEASE%\%%F
   exit /b 3
 )
-for %%F in (PIF.EXE CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys SETVER.EXE VMM32.W95NEW KERNEL.W95NEW MULTITASK.LAUNCH MULTITASK.INI.BAK MULTITASK.INI.NEW MULTITASK.HASH INSIGNIA.386 NTVDM64.386 TEMP) do if exist "%PATCH%\%%F" (
+for %%F in (PIF.EXE INI.EXE CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys SETVER.EXE VMM32.W95NEW KERNEL.W95NEW MULTITASK.LAUNCH MULTITASK.INI.BAK MULTITASK.INI.NEW MULTITASK.HASH INSIGNIA.386 NTVDM64.386 TEMP) do if exist "%PATCH%\%%F" (
   echo Refusing to overwrite pre-existing PATCH content: %%F
   exit /b 5
 )
@@ -84,7 +84,7 @@ move /y "%MOUSE_PATH%" "%MOUSE_PATH%.BAK" >nul || goto fail
 set "NEW_MOUSE_BACKUP=1"
 copy /y "%RELEASE%\MOUSE31.DRV" "%MOUSE_PATH%" >nul || goto fail
 
-for %%F in (PIF.EXE INSIGNIA.386 NTVDM64.386) do copy /y "%RELEASE%\%%F" "%PATCH%\%%F" >nul || goto fail
+for %%F in (PIF.EXE INI.EXE INSIGNIA.386 NTVDM64.386) do copy /y "%RELEASE%\%%F" "%PATCH%\%%F" >nul || goto fail
 copy /y "%~dp0WIN.CMD" "%PATCH%\WIN.CMD" >nul || goto fail
 call "%PATCH%\WIN.CMD" --install || goto fail
 echo Win95 launcher prepared: %PATCH%\WIN.CMD
@@ -140,7 +140,7 @@ if defined NEW_VMM_BACKUP if exist "%SYSTEM%\VMM32.VXD.W95LAUNCH.BAK" (
   del /q "%SYSTEM%\VMM32.VXD" >nul 2>nul
   move /y "%SYSTEM%\VMM32.VXD.W95LAUNCH.BAK" "%SYSTEM%\VMM32.VXD" >nul
 )
-for %%F in (PIF.EXE INSIGNIA.386 NTVDM64.386 VMM32.W95NEW KERNEL.W95NEW SETVER.EXE CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys) do if exist "%PATCH%\%%F" del /q "%PATCH%\%%F" >nul 2>nul
+for %%F in (PIF.EXE INI.EXE INSIGNIA.386 NTVDM64.386 VMM32.W95NEW KERNEL.W95NEW SETVER.EXE CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys) do if exist "%PATCH%\%%F" del /q "%PATCH%\%%F" >nul 2>nul
 if defined NEW_TEMP rmdir "%PATCH%\TEMP" 2>nul
 if defined NEW_PATCH rmdir "%PATCH%" 2>nul
 exit /b 5

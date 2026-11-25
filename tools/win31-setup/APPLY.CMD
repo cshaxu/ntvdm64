@@ -8,7 +8,7 @@ if not defined TARGET (set "RESULT=64"& goto done)
 for %%I in ("%TARGET%") do set "TARGET=%%~fI"
 for %%F in (SETUP.EXE DOSX.EX_ KRNL386.EX_ WIN386.EX_ MOUSE.DR_) do if not exist "%TARGET%\%%F" (echo Missing media file: %%F& set "RESULT=2"& goto done)
 for %%F in (SETUP.CMD WIN.CMD) do if not exist "%~dp0%%F" (echo Missing tool file: %%F& set "RESULT=3"& goto done)
-for %%F in (HASH.EXE MOUSE31.DRV PIF.EXE SZDD.EXE patch31.exe INSIGNIA.386 NTVDM64.386) do if not exist "%RELEASE%\%%F" (echo Missing release file: %%F& set "RESULT=3"& goto done)
+for %%F in (HASH.EXE MOUSE31.DRV PIF.EXE INI.EXE SZDD.EXE patch31.exe INSIGNIA.386 NTVDM64.386) do if not exist "%RELEASE%\%%F" (echo Missing release file: %%F& set "RESULT=3"& goto done)
 set "PATCH=%TARGET%\PATCH"
 set "WORK=%PATCH%\W31STAGE"
 if exist "%WORK%\" (echo Preserve existing staging directory: %WORK%& set "RESULT=5"& goto done)
@@ -19,7 +19,7 @@ for %%F in (SETUP.CMD WIN.CMD) do if exist "%PATCH%\%%F" (
 )
 if exist "%PATCH%\MOUSE31.DRV" fc /b "%PATCH%\MOUSE31.DRV" "%RELEASE%\MOUSE31.DRV" >nul || (echo Preserve unrecognised PATCH\MOUSE31.DRV& set "RESULT=5"& goto cleanup)
 if exist "%PATCH%\PIF.EXE" fc /b "%PATCH%\PIF.EXE" "%RELEASE%\PIF.EXE" >nul || (echo Preserve unrecognised PATCH\PIF.EXE& set "RESULT=5"& goto cleanup)
-for %%F in (HASH.EXE INSIGNIA.386 NTVDM64.386) do if exist "%PATCH%\%%F" fc /b "%PATCH%\%%F" "%RELEASE%\%%F" >nul || (echo Preserve unrecognised PATCH\%%F& set "RESULT=5"& goto cleanup)
+for %%F in (HASH.EXE INI.EXE INSIGNIA.386 NTVDM64.386) do if exist "%PATCH%\%%F" fc /b "%PATCH%\%%F" "%RELEASE%\%%F" >nul || (echo Preserve unrecognised PATCH\%%F& set "RESULT=5"& goto cleanup)
 copy /y "%TARGET%\MOUSE.DR_" "%WORK%\MOUSE-CURRENT.DR_" >nul || (set "RESULT=6"& goto cleanup)
 if exist "%TARGET%\MOUSE.DR_.BAK" (
   expand.exe "%TARGET%\MOUSE.DR_.BAK" "%WORK%\MOUSE-RETAIL.DRV" >nul || (set "RESULT=6"& goto cleanup)
@@ -75,7 +75,7 @@ for %%F in (KRNL386 WIN386) do (
 )
 for %%F in (SETUP.CMD WIN.CMD) do copy /y "%~dp0%%F" "%PATCH%\%%F" >nul || (set "RESULT=6"& goto rollback)
 copy /y "%RELEASE%\PIF.EXE" "%PATCH%\PIF.EXE" >nul || (set "RESULT=6"& goto rollback)
-for %%F in (HASH.EXE INSIGNIA.386 NTVDM64.386) do copy /y "%RELEASE%\%%F" "%PATCH%\%%F" >nul || (set "RESULT=6"& goto rollback)
+for %%F in (HASH.EXE INI.EXE INSIGNIA.386 NTVDM64.386) do copy /y "%RELEASE%\%%F" "%PATCH%\%%F" >nul || (set "RESULT=6"& goto rollback)
 for %%F in (KRNL386 WIN386) do if exist "%PATCH%\%%F.EX_.BAK" del /q "%PATCH%\%%F.EX_.BAK" || (set "RESULT=6"& goto cleanup)
 set "RESULT=0"
 echo Prepared %PATCH%\SETUP.CMD

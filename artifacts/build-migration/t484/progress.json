@@ -1,16 +1,41 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "e940c54c18726e3c5a6809636b337b6f4434ce01",
+  "head": "81420afbc7f50d6079bc1064be68b9d77ef6b348",
   "worktree_status": [
+    " M artifacts/build-migration/t484/dispositions.json",
+    " M artifacts/build-migration/t484/progress.json",
+    " M assets/release/addon-manifest.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " D test/observation/dos_observation_pif.c",
-    " D test/observation/mixed_batch_pif.c",
-    " M test/observation/verify-native-payload-probes.ps1",
-    " M tools/build/fixtures/native-probes.cmake",
-    "?? docs/etc/evidence/t484-s5-pif-layouts.md",
-    "?? test/observation/fixtures/nt31-profile.pif",
-    "?? test/observation/fixtures/standard-profile.pif"
+    " M test/build/Test-AddonPublication.ps1",
+    " M test/integration/verify-win16-message-probe.ps1",
+    " M test/integration/win31_setup_cmd_roundtrip_test.ps1",
+    " M test/integration/win31_setup_package_test.ps1",
+    " M test/integration/win31_setup_profile_generation_test.ps1",
+    " M test/integration/win95_launch_profile_generation_test.ps1",
+    " D test/observation/guest_ini.c",
+    " M test/observation/verify-guest-ini.ps1",
+    " M tools/build-addon.cmd",
+    " M tools/build-fixtures.cmd",
+    " M tools/build/addon/CMakeLists.txt",
+    " M tools/build/addon/publish-addons.cmd.in",
+    " M tools/build/fixtures/CMakeLists.txt",
+    " M tools/prepare-dos-identity.cmd",
+    " M tools/prepare-guest-ini.cmd",
+    " M tools/prepare-guest-witness.cmd",
+    " M tools/prepare-win31-matrix.cmd",
+    " M tools/reapply-win95-test-launch.cmd",
+    " M tools/win31-setup/APPLY.CMD",
+    " M tools/win31-setup/README.md",
+    " M tools/win31-setup/README.txt",
+    " M tools/win31-setup/SETUP.CMD",
+    " M tools/win31-setup/WIN.CMD",
+    " M tools/win95-launch/APPLY.CMD",
+    " M tools/win95-launch/README.md",
+    " M tools/win95-launch/WIN.CMD",
+    "?? assets/release/INI.EXE",
+    "?? docs/etc/evidence/t484-s5-shared-ini.md",
+    "?? src/addon/ini/"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -956,7 +981,7 @@
       "file": "test/integration/verify-win16-message-probe.ps1",
       "stage": "S3",
       "state": "changed",
-      "current_sha256": "cf3db7485730ea0211ad001752093ca6aaefab72c6ec0220359497941d3e3641",
+      "current_sha256": "c5803af62e2f2238e6657d8131708b74aaab7da1530321f68670204d13370824",
       "revisions": [
         "cc465308bd8e888fafeb662d8029d9d52a04115f",
         "56d8bb725a61149be1480d67b161a0f732912ecd",
@@ -6683,6 +6708,12 @@
     }
   ],
   "commits": {
+    "81420afbc7f50d6079bc1064be68b9d77ef6b348": {
+      "subject": "T484 S5 P4: consolidate standard and NT-only PIF fixtures",
+      "evidence": [
+        "docs/etc/evidence/t484-s5-pif-layouts.md"
+      ]
+    },
     "e940c54c18726e3c5a6809636b337b6f4434ce01": {
       "subject": "T484 S5 P3: restore valid migration tracker JSON",
       "evidence": []
@@ -8809,7 +8840,7 @@
           "text": "if(!$path.StartsWith((Join-Path $repo 'build/.ninja')+'\\',[StringComparison]::OrdinalIgnoreCase)){throw 'External peer/host must come from stable Ninja fixture targets'}"
         },
         {
-          "line": 174,
+          "line": 175,
           "text": "$environmentExe=Join-Path $repo 'build/.ninja/fixtures-x64/logon-environment.exe'"
         }
       ]

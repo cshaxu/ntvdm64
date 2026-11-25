@@ -18,7 +18,7 @@ if defined DRIVERS if not exist "%STAGE%\.ntvdm64-guest-owner" exit /b 2
 set "OWNER="
 if defined DRIVERS set /p "OWNER="<"%STAGE%\.ntvdm64-guest-owner"
 if defined DRIVERS if /i not "%OWNER%"=="%TASK%" exit /b 2
-set "TOOL=%ROOT%\build\.ninja\fixtures-x64\guest-ini.exe"
+set "TOOL=%ROOT%\build\.ninja\addon\ini\ini.exe"
 if not defined DRIVERS if not exist "%TOOL%" exit /b 2
 set "HASH="
 if "%~2"=="WfwNet" for /f "delims=" %%H in ('call "%ROOT%\assets\release\HASH.EXE" "%STAGE%\system\WFWNET.DRV"') do set "HASH=%%H"
@@ -36,7 +36,7 @@ if not "%~6"=="-" set /a FLAGS+=1 >nul
 if not "%~7"=="-" set /a FLAGS+=2 >nul
 if not "%~8"=="-" set /a FLAGS+=4 >nul
 if not "%~9"=="-" set /a FLAGS+=8 >nul
-call "%ROOT%\tools\build-fixtures.cmd" x64 guest-ini
+call "%ROOT%\tools\build-addon.cmd" ini
 if errorlevel 1 exit /b 1
 "%TOOL%" "%STAGE%\SYSTEM.INI" "%TASK%\driver-profile.candidate" "%STAGE%" "%~4" %FLAGS%
 if errorlevel 1 exit /b 1

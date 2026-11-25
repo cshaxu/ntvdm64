@@ -4,7 +4,7 @@ Use `APPLY.CMD` and enter the path of a **copy** of the Windows 3.1 installation
 
 If a media copy still contains an older package, use its `UNAPPLY.CMD` recovery workflow before applying this version; APPLY preserves unrecognized existing helper files.
 
-Run `<target>\PATCH\SETUP.CMD` from CMD with `run16` on PATH. After Setup succeeds, enter the selected Windows installation directory. Finalization always copies `INSIGNIA.386`, `NTVDM64.386`, `PIF.EXE` and the single `WIN.CMD` launcher into its `PATCH`. The two device entries in `[386Enh]` start commented out. Original installed guest binaries are not patched again.
+Run `<target>\PATCH\SETUP.CMD` from CMD with `run16` on PATH. After Setup succeeds, enter the selected Windows installation directory. Finalization always copies `INSIGNIA.386`, `NTVDM64.386`, `PIF.EXE`, `INI.EXE` and the single `WIN.CMD` launcher into its `PATCH`. The two device entries in `[386Enh]` start commented out. Original installed guest binaries are not patched again.
 
 Run the installed `PATCH\WIN.CMD` to select Standard or 386 Enhanced, then DOSONLY (`0` host commands, `1` guest DOS). Enhanced mode always loads INSIGNIA.386 for base VM/mouse support and offers a switch only for NTVDM64.386 multitask payloads. Standard mode leaves both entries commented. The launcher generates `CONFIG.NT`, `AUTOEXEC.NT` and one `WIN.PIF` each time, and enables/disables only its two device entries. There is no template PIF, second installer, PowerShell runtime dependency or permanent configuration backup. Other SYSTEM.INI entries are preserved. Invalid choices or configuration errors stop before launch; temporary configuration staging is removed. Do not reconfigure an installation while its Windows instance is running.
 

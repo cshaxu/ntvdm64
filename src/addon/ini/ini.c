@@ -174,7 +174,96 @@ static int driver_profile(char *text,const char *output,const char *root,const c
 done:
     CloseHandle(file);if(result)DeleteFileA(output);return result;
 }
-/* Test preparation only: existing network operation or driver candidate. */
+typedef struct file_setting {
+    const char *path;
+    const char *leaf;
+    int enabled;
+    unsigned matches;
+} file_setting;
+
+static int emit_file_setting(HANDLE file,const char *key,const file_setting *setting,
+                             const char *ending,size_t ending_length)
+{
+    return (setting->enabled || emit(file,";",1)) &&
+           emit(file,key,strlen(key)) && emit(file,"=",1) &&
+           emit(file,setting->path,strlen(setting->path)) && emit(file,ending,ending_length);
+}
+
+/* Update repeated file-valued entries by leaf name within one section.
+   Installation inserts the supplied order; selection keeps the existing order. */
+static int file_profile(char *text,int argc,char **argv)
+{
+    const char *operation=argv[3],*section=argv[4],*key=argv[5];
+    const int install=!strcmp(operation,"install-files");
+    const int remove=!strcmp(operation,"remove-files");
+    size_t count=(size_t)(argc-6)/2,i,j;
+    char heading[256],*line,*end,*next;
+    file_setting *settings;
+    int selected=0,matched,result=2;
+    HANDLE file=INVALID_HANDLE_VALUE;
+
+    if(argc<8 || (argc-6)%2 || (!install && !remove && strcmp(operation,"select-files")) ||
+       !*section || !*key || strpbrk(section,"[]\r\n") || strpbrk(key,"=;\r\n") ||
+       _snprintf_s(heading,sizeof(heading),_TRUNCATE,"[%s]",section)<0 ||
+       sections(text,heading)!=1)return 2;
+    settings=calloc(count,sizeof(*settings));
+    if(!settings)return 1;
+    for(i=0;i<count;++i){
+        const char *state=argv[6+2*i],*path=argv[7+2*i],*p;
+        if(strcmp(state,"on") && strcmp(state,"off"))goto done;
+        if(!*path || strpbrk(path,";\r\n\""))goto done;
+        settings[i].enabled=!strcmp(state,"on");
+        settings[i].path=path;
+        settings[i].leaf=path;
+        for(p=path;*p;++p)if(*p=='\\' || *p=='/')settings[i].leaf=p+1;
+        if(!*settings[i].leaf || strpbrk(settings[i].leaf,":="))goto done;
+        for(j=0;j<i;++j)if(!_stricmp(settings[i].leaf,settings[j].leaf))goto done;
+    }
+    if(!install && !remove){
+        for(line=text;*line;line=*end?end+1:end){
+            end=line_end(line);
+            if(*line=='[')selected=header(line,end,heading);
+            if(selected)for(i=0;i<count;++i)
+                if(file_entry(line,end,key,settings[i].leaf))++settings[i].matches;
+        }
+        for(i=0;i<count;++i)if(settings[i].matches!=1)goto done;
+    }
+
+    result=1;
+    file=CreateFileA(argv[2],GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);
+    if(file==INVALID_HANDLE_VALUE)goto done;
+    selected=0;
+    for(line=text;*line;line=next){
+        const char *ending;
+        end=line_end(line);next=*end?end+1:end;
+        ending=end;
+        if(ending>line && ending[-1]=='\r')--ending;
+        if(*line=='[')selected=header(line,end,heading);
+        matched=0;
+        if(selected)for(i=0;i<count;++i)if(file_entry(line,end,key,settings[i].leaf)){
+            matched=1;
+            if(!install && !remove && !emit_file_setting(file,key,&settings[i],ending,(size_t)(next-ending)))goto done;
+            break;
+        }
+        if(matched)continue;
+        if(!emit(file,line,(size_t)(next-line)))goto done;
+        if(install && selected && *line=='['){
+            size_t ending_length=(size_t)(next-ending);
+            if(!ending_length){
+                ending="\r\n";ending_length=2;
+                if(!emit(file,ending,ending_length))goto done;
+            }
+            for(i=0;i<count;++i)
+                if(!emit_file_setting(file,key,&settings[i],ending,ending_length))goto done;
+        }
+    }
+    if(FlushFileBuffers(file))result=0;
+done:
+    if(file!=INVALID_HANDLE_VALUE){CloseHandle(file);if(result)DeleteFileA(argv[2]);}
+    free(settings);
+    return result;
+}
+/* Existing network operation or a fresh INI candidate. */
 int main(int argc, char **argv)
 {
     FILE *file;
@@ -185,8 +274,8 @@ int main(int argc, char **argv)
     char actual[32];
     char temporary[MAX_PATH];
     int result = 1;
-    if (argc != 3 && argc != 6 && argc != 7) return 2;
-    if (argc==6 || argc==7) { /* Candidate operations, never in-place. */ }
+    if (argc != 3 && argc < 6) return 2;
+    if (argc>=6) { /* Candidate operations, never in-place. */ }
     else if (!strcmp(argv[2], "Empty")) value = "";
     else if (!strcmp(argv[2], "WfwNet")) value = "wfwnet.drv";
     else return 2;
@@ -202,6 +291,7 @@ int main(int argc, char **argv)
     fclose(file);
     text[size] = 0;
     if (strlen(text) != (size_t)size) { free(text); return 2; }
+    if(argc>=8){result=file_profile(text,argc,argv);free(text);return result;}
     if(argc==7){result=literal_profile(text,argv[2],argv[3],argv[4],argv[5],argv[6]);free(text);return result;}
     if(argc==6){result=driver_profile(text,argv[2],argv[3],argv[4],argv[5]);free(text);return result;}
     boots=sections(text,"[boot]");

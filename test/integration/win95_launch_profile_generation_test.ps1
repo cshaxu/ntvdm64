@@ -6,7 +6,7 @@ if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIg
 $bin=Join-Path $root 'bin';$install=Join-Path $root 'W';$patch=Join-Path $install 'PATCH'
 New-Item -ItemType Directory -Path $patch,$bin,(Join-Path $install 'SYSTEM')|Out-Null
 Copy-Item "$repo/tools/win95-launch/WIN.CMD" "$patch/WIN.CMD"
-foreach($n in 'PIF.EXE','INSIGNIA.386','NTVDM64.386'){Copy-Item "$repo/assets/release/$n" "$patch/$n"}
+foreach($n in 'PIF.EXE','INI.EXE','INSIGNIA.386','NTVDM64.386'){Copy-Item "$repo/assets/release/$n" "$patch/$n"}
 [IO.File]::WriteAllText("$bin/run16.cmd","@echo off`r`necho %*>>`"$root/launched.txt`"`r`nexit /b 0`r`n")
 $before=@{}
 foreach($name in 'WIN.COM','SYSTEM/VMM32.VXD','SYSTEM/KRNL386.EXE','SYSTEM/MOUSE.DRV'){

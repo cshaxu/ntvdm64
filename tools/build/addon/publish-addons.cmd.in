@@ -36,7 +36,7 @@ for %%I in (@publish_files@) do (
 )
 copy /b /y "%pending%" "%output%\addon-manifest.json" >nul
 if errorlevel 1 goto fail
-echo PASS published five drivers and nine AMD64 addon utilities
+echo PASS published five drivers and ten AMD64 addon utilities
 exit /b 0
 :driver
 fc /b "%build%\%~1\source-inputs.json" "%build%\%~1\build.inputs.json" >nul

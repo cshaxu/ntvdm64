@@ -31,7 +31,7 @@ if "%~4"=="prompts" for %%I in (A B) do if not defined FAILED (
 if defined FAILED exit /b 1
 if "%~4"=="prompts" if "%~6"=="defer-load" exit /b 0
 if "%~4"=="prompts" if not "%~6"=="" exit /b 2
-call "%~dp0build-fixtures.cmd" x64 guest-ini
+call "%~dp0build-addon.cmd" ini
 if errorlevel 1 exit /b 1
 set "KEY=run"
 set "VALUE=%DEST%\PATCH\VMTEST.EXE"
@@ -39,7 +39,7 @@ if not "%~4"=="controller" set "KEY=load"
 if not "%~4"=="controller" set "VALUE=%DEST%\PATCH\A.PIF %DEST%\PATCH\B.PIF"
 if "%~4"=="load" if "%~5"=="none" set "VALUE="
 if "%~4"=="load" if "%~5"=="only" set "VALUE=%DEST%\PATCH\ONLY.PIF"
-"%ROOT%\build\.ninja\fixtures-x64\guest-ini.exe" "%DEST%\WIN.INI" "%TASK%\editor-%KEY%.candidate" set windows "%KEY%" "%VALUE%"
+"%ROOT%\build\.ninja\addon\ini\ini.exe" "%DEST%\WIN.INI" "%TASK%\editor-%KEY%.candidate" set windows "%KEY%" "%VALUE%"
 if errorlevel 1 exit /b 1
 copy /b /y "%TASK%\editor-%KEY%.candidate" "%DEST%\WIN.INI" >nul
 exit /b %errorlevel%

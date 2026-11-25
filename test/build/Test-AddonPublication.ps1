@@ -10,7 +10,7 @@ foreach($driver in $prior.drivers){Copy-Item "$repo/assets/release/$($driver.fil
 & "$repo/tools/publish-addons.cmd" $root *> "$root/publication.log"
 if($LASTEXITCODE){throw 'CMD publication failed'}
 $current=Get-Content "$root/addon-manifest.json" -Raw|ConvertFrom-Json
-if($current.schema -ne 1 -or $current.utilities.Count -ne 9){throw 'Incomplete addon manifest'}
+if($current.schema -ne 1 -or $current.utilities.Count -ne 10){throw 'Incomplete addon manifest'}
 function Assert-Equivalent($expected,$actual){
  if($null -eq $expected){if($null -ne $actual){throw 'Unexpected metadata'};return}
  if($expected -is [pscustomobject]){
@@ -79,5 +79,5 @@ try{
  if(!$LASTEXITCODE){throw 'Locked destination reported success'}
  if(Test-Path "$root/addon-manifest.json"){throw 'Failed copy retained completion manifest'}
 }finally{$lock.Dispose()}
-@{utilities=9;drivers=5;sourceHashes=$true;driverMetadataPreserved=$true;invalidReceiptRejected=$true;changedDriverCandidate=$true;missingDestinationRejected=$true}|ConvertTo-Json|Set-Content "$root/result.json"
+@{utilities=10;drivers=5;sourceHashes=$true;driverMetadataPreserved=$true;invalidReceiptRejected=$true;changedDriverCandidate=$true;missingDestinationRejected=$true}|ConvertTo-Json|Set-Content "$root/result.json"
 'PASS addon publication and preflight rejection'

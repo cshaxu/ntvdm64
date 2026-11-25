@@ -47,9 +47,9 @@ for %%I in ("%INSTALLROOT%") do set "INSTALLROOT=%%~fI"
 set "DEST=%INSTALLROOT%\PATCH"
 if not exist "%~dp0PIF.EXE" (echo Missing PIF.EXE.& exit /b 3)
 for %%F in (SYSTEM\DOSX.EXE SYSTEM\KRNL386.EXE SYSTEM\WIN386.EXE SYSTEM.INI) do if not exist "%INSTALLROOT%\%%F" (echo Missing installed file: %%F& exit /b 5)
-for %%F in (WIN.CMD PIF.EXE INSIGNIA.386 NTVDM64.386) do if not exist "%~dp0%%F" (echo Missing setup component: %%F& exit /b 3)
+for %%F in (WIN.CMD PIF.EXE INI.EXE INSIGNIA.386 NTVDM64.386) do if not exist "%~dp0%%F" (echo Missing setup component: %%F& exit /b 3)
 if not exist "%DEST%\" mkdir "%DEST%" || exit /b 4
-for %%F in (WIN.CMD PIF.EXE INSIGNIA.386 NTVDM64.386) do copy /y "%~dp0%%F" "%DEST%\%%F" >nul || exit /b 5
+for %%F in (WIN.CMD PIF.EXE INI.EXE INSIGNIA.386 NTVDM64.386) do copy /y "%~dp0%%F" "%DEST%\%%F" >nul || exit /b 5
 call "%DEST%\WIN.CMD" --install
 set "patch_result=%errorlevel%"
 if "%patch_result%"=="0" for %%F in (WINSTD.CMD WIN386.CMD WINSTD.PIF WIN386.PIF) do if exist "%DEST%\%%F" del /q "%DEST%\%%F" || exit /b 5

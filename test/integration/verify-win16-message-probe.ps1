@@ -156,7 +156,8 @@ try{
  $scope=New-IsolatedPackageScope $runtime
  if($NetworkDriver -ne 'Package'){
   $profile=Join-Path $runtime 'system.ini'
-  Invoke-MessageProducer network-build x64 guest-ini
+  & "$repo/tools/build-addon.cmd" ini *> "$root/network-build.log"
+  if($LASTEXITCODE){throw "INI editor build failed"}
   & "$repo/tools/prepare-guest-ini.cmd" $runtime $NetworkDriver
   if($LASTEXITCODE){throw 'Network profile preparation failed'}
   @{selection=$NetworkDriver;profileHash=(Get-FileHash $profile).Hash;scope='Fresh isolated runtime configuration; original guest bytes unchanged'}|ConvertTo-Json|Set-Content "$root/network-profile.json"

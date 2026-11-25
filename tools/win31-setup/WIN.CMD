@@ -4,7 +4,7 @@ for %%I in ("%~dp0..") do set "ROOT=%%~fI"
 set "PATCH=%~dp0"
 set "INI=%ROOT%\SYSTEM.INI"
 for %%F in (WIN.COM SYSTEM.INI) do if not exist "%ROOT%\%%F" (echo Missing %%F.& exit /b 2)
-for %%F in (PIF.EXE INSIGNIA.386 NTVDM64.386) do if not exist "%PATCH%%%F" (echo Missing %%F.& exit /b 2)
+for %%F in (PIF.EXE INI.EXE INSIGNIA.386 NTVDM64.386) do if not exist "%PATCH%%%F" (echo Missing %%F.& exit /b 2)
 set "MODE=1"
 set "DOSMODE=0"
 set "MULTITASK=0"
@@ -22,55 +22,13 @@ rem One short-lived staging directory also rejects overlapping reconfiguration.
 set "WORK=%PATCH%WINCFG"
 mkdir "%WORK%" 2>nul || (echo Cannot create configuration staging directory.& exit /b 5)
 set "RESULT=5"
-findstr /l /c:"!" "%INI%" >nul && (echo Unsupported exclamation mark in SYSTEM.INI.& goto cleanup)
-setlocal EnableDelayedExpansion
-set "IN386="
-set "FOUND=0"
-set "DRIVERCOUNT=0"
-set "SEEN_INSIGNIA.386="
-set "SEEN_NTVDM64.386="
-set "COMMENT_NTVDM64.386=;"
-if "%MULTITASK%"=="1" set "COMMENT_NTVDM64.386="
-set "COMMENT_INSIGNIA.386="
-if "%MODE%"=="1" set "COMMENT_INSIGNIA.386=;"
->"%WORK%\SYSTEM.INI" (
-  for /f "delims=" %%A in ('findstr /n "^" "%INI%"') do (
-    set "LINE=%%A"
-    set "LINE=!LINE:*:=!"
-    if "!LINE:~0,1!"=="[" set "IN386="
-    if /i "!LINE!"=="[386Enh]" set "IN386=1"
-    set "SKIP="
-    if defined IN386 (
-      set "ENTRY=!LINE!"
-      if "!ENTRY:~0,1!"==";" set "ENTRY=!ENTRY:~1!"
-      for /f "tokens=1,* delims==" %%K in ("!ENTRY!") do (
-        set "KEY=%%K"
-        set "KEY=!KEY: =!"
-        if /i "!KEY!"=="device" for %%F in ("%%L") do (
-          if /i "%%~nxF"=="INSIGNIA.386" set "SKIP=INSIGNIA.386"
-          if /i "%%~nxF"=="NTVDM64.386" set "SKIP=NTVDM64.386"
-        )
-      )
-    )
-    if defined SKIP (
-      set /a DRIVERCOUNT+=1
-      set "SEEN_!SKIP!=1"
-      if /i not "%~1"=="--install" for %%D in (!SKIP!) do echo(!COMMENT_%%D!device=!ROOT!\PATCH\%%D
-    ) else echo(!LINE!
-    if /i "!LINE!"=="[386Enh]" (
-      set /a FOUND+=1
-      if /i "%~1"=="--install" (
-        echo(;device=!ROOT!\PATCH\INSIGNIA.386
-        echo(;device=!ROOT!\PATCH\NTVDM64.386
-      )
-    )
-  )
-)
-if not "!FOUND!"=="1" (endlocal & echo Exactly one [386Enh] section is required.& goto cleanup)
-if /i not "%~1"=="--install" if not "!DRIVERCOUNT!"=="2" (endlocal & echo Expected two installed driver entries.& goto cleanup)
-if /i not "%~1"=="--install" if not defined SEEN_INSIGNIA.386 (endlocal & echo Missing INSIGNIA.386 entry.& goto cleanup)
-if /i not "%~1"=="--install" if not defined SEEN_NTVDM64.386 (endlocal & echo Missing NTVDM64.386 entry.& goto cleanup)
-endlocal
+set "INI_ACTION=select-files"
+set "BASE_DRIVER=on"
+set "MULTITASK_DRIVER=off"
+if "%MULTITASK%"=="1" set "MULTITASK_DRIVER=on"
+if /i "%~1"=="--install" set "INI_ACTION=install-files"
+if "%MODE%"=="1" set "BASE_DRIVER=off"
+"%PATCH%INI.EXE" "%INI%" "%WORK%\SYSTEM.INI" %INI_ACTION% 386Enh device %BASE_DRIVER% "%ROOT%\PATCH\INSIGNIA.386" %MULTITASK_DRIVER% "%ROOT%\PATCH\NTVDM64.386" || (echo Cannot configure drivers in SYSTEM.INI.& goto cleanup)
 if /i "%~1"=="--install" goto install_ini
 set "ARG=/S"
 set "TITLE=Windows 3.1 Standard"

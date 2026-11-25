@@ -18,10 +18,11 @@ if exist "%TASK%\launch-input.txt" exit /b 2
 set "PATCH=%DEST%\PATCH"
 if not exist "%PATCH%\" exit /b 2
 copy /b /y "%~dp0win95-launch\WIN.CMD" "%PATCH%\WIN.CMD" >nul || exit /b 1
+copy /b /y "%~dp0..\assets\release\INI.EXE" "%PATCH%\INI.EXE" >nul || exit /b 1
 call "%PATCH%\WIN.CMD" --remove >"%TASK%\launch-reset.log" 2>&1
 if errorlevel 1 exit /b 1
 set "FAILED="
-for %%F in (PIF.EXE CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys SETVER.EXE INSIGNIA.386 NTVDM64.386 MULTITASK.INI.BAK MULTITASK.INI.NEW MULTITASK.HASH MULTITASK.LAUNCH) do if exist "%PATCH%\%%F" (
+for %%F in (PIF.EXE INI.EXE CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys SETVER.EXE INSIGNIA.386 NTVDM64.386 MULTITASK.INI.BAK MULTITASK.INI.NEW MULTITASK.HASH MULTITASK.LAUNCH) do if exist "%PATCH%\%%F" (
  if exist "%PATCH%\%%F\" exit /b 2
  del /q "%PATCH%\%%F"
  if errorlevel 1 set "FAILED=1"

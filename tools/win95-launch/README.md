@@ -1,7 +1,7 @@
 # Win95 launch tools
 
 `APPLY.CMD` prompts for the installed Windows 95 directory and prepares it.
-It always copies `INSIGNIA.386`, `NTVDM64.386`, `PIF.EXE` and one `WIN.CMD`
+It always copies `INSIGNIA.386`, `NTVDM64.386`, `PIF.EXE`, `INI.EXE` and one `WIN.CMD`
 into `PATCH`. INSIGNIA.386 is enabled as base VM/mouse support; NTVDM64.386 starts disabled.
 
 Run the installed `PATCH\WIN.CMD` to choose DOSONLY (`0` host commands,
@@ -13,7 +13,7 @@ Unrelated SYSTEM.INI entries are preserved. Invalid choices or configuration
 errors stop before launch. Do not reconfigure a running installation.
 
 Package runtime uses only CMD and released addon tools. Materials come from
-`assets/release`: `patch95.exe`, `compat95.sys`, `PIF.EXE`, `MOUSE31.DRV`,
+`assets/release`: `patch95.exe`, `compat95.sys`, `PIF.EXE`, `INI.EXE`, `MOUSE31.DRV`,
 `SETVER.EXE` and the two drivers. The existing identity-checked preparation of
 `SYSTEM\VMM32.VXD` and `SYSTEM\KRNL386.EXE`, their adjacent
 `.W95LAUNCH.BAK` recovery copies, and patched `PATCH\SETVER.EXE` are retained.

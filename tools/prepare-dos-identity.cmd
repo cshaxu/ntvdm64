@@ -14,7 +14,7 @@ if not exist "%TASK%\" exit /b 2
 if exist "%TASK%\identity-prompt.txt" exit /b 2
 for %%I in ("%~dp0..") do set "ROOT=%%~fI"
 set "PIF=%ROOT%\assets\release\PIF.EXE"
-set "INI=%ROOT%\build\.ninja\fixtures-x64\guest-ini.exe"
+set "INI=%ROOT%\build\.ninja\addon\ini\ini.exe"
 "%PIF%" show "%DEST%\DOSPRMPT.PIF" >"%TASK%\identity-prompt.txt"
 if errorlevel 1 exit /b 1
 set "FLAGS="
@@ -22,7 +22,7 @@ for /f "usebackq tokens=1,2 delims==" %%A in ("%TASK%\identity-prompt.txt") do i
 if not defined FLAGS exit /b 2
 set /a "FLAGS=(FLAGS & ~8) | 2" >nul
 if errorlevel 1 exit /b 2
-call "%~dp0build-fixtures.cmd" x64 guest-ini
+call "%~dp0build-addon.cmd" ini
 if errorlevel 1 exit /b 1
 "%INI%" "%DEST%\SYSTEM.INI" "%TASK%\identity-no-insignia.ini" drop-file 386Enh device INSIGNIA.386
 if errorlevel 1 exit /b 1
