@@ -130,9 +130,6 @@ ntvdm_shadow_reg_enum_key
 opennt_exit_thread=_opennt_exit_thread@4
 mvdm_softpc_effective_address
 mvdm_softpc_protected_address
-setEFLAGS=_ntvdm_debug_setEFLAGS@4
-setEIP=_ntvdm_debug_setEIP@4
-VdmDbgAttach
-VdmMapFlat=_VdmMapFlat@12
-VdmParametersInfo
-VdmGetParametersInfoError
+ExpVdmTib=VdmTib DATA
+VdmFlushCache
+VdmUnmapFlat

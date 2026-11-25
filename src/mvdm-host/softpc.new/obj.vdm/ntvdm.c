@@ -2,8 +2,9 @@
 #include <ntrtl.h>
 #include <nturtl.h>
 #include <windows.h>
-#include "host_def.h"
+#include <vdm.h>
 #include "insignia.h"
+#include "host_def.h"
 #include <stdlib.h>
 #include "xt.h"
 #include "error.h"
@@ -14,7 +15,7 @@
 
 
 
-#line 16
+#line 17
 void CpuEnvInit(void);
 
 typedef struct _CpuEnvironmentVariable {
@@ -25,17 +26,17 @@ typedef struct _CpuEnvironmentVariable {
 
 PCPUENVVAR CpuEnvVarListHead=NULL;
 
-#line 26
-#if DBG
 #line 27
+#if DBG
+#line 28
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 29
+#line 30
 
 
 INT host_main(INT *argc, CHAR **argv);  // located in base\support\main.c
 
-_CRTAPI1 mvdm_softpc_prepare(int *argc, CHAR ** argv)
+int __cdecl mvdm_softpc_prepare(int *argc, CHAR ** argv)
 {
    int ret=-1;
 
@@ -79,7 +80,7 @@ _CRTAPI1 mvdm_softpc_prepare(int *argc, CHAR ** argv)
 //
 
 VOID NTAPI
-#line 77
+#line 78
 DbgBreakPoint(
     VOID
     )
@@ -118,12 +119,12 @@ DWORD       dw;
                   sizeof(MyDebugPort),
                   NULL );
      if (!NT_SUCCESS(dw) || MyDebugPort == NULL)  {
-#line 115
-#ifndef PROD
 #line 116
+#ifndef PROD
+#line 117
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 118
+#line 119
            return;
           }
 
@@ -247,6 +248,11 @@ CpuEnvInit(
 
 
 
+
+#ifdef MONITOR
+#error Kernel VDM monitor initialization is excluded from the CCPU worker
+#endif
+
     KeyValueInfo = (PKEY_VALUE_FULL_INFORMATION) NameDataBuffer;
 
 #ifndef MONITOR
@@ -323,12 +329,12 @@ CpuEnvInit(
 
     NtClose(CpuEnvKey);
 
-#line 317
+#line 327
 #if DBG
-#line 318
+#line 328
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 324
+#line 334
 
 }
 
@@ -338,7 +344,7 @@ CpuEnvInit(
  * In order to catch all references, we define our own
  * version of the CRT getenv, which does the mapping.
  */
-char * _CRTAPI1 getenv(const char *Name)
+char * __cdecl getenv(const char *Name)
 {
   PCPUENVVAR CpuEnvVar;
   char *Value = NULL;
@@ -352,12 +358,12 @@ char * _CRTAPI1 getenv(const char *Name)
      CpuEnvVar = CpuEnvVar->Next;
      }
 
-#line 347
+#line 356
 #if DBG
-#line 348
+#line 357
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 352
+#line 361
 
   return Value;
 }
