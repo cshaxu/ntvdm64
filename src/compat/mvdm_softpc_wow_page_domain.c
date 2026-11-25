@@ -647,6 +647,16 @@ int mvdm_softpc_wow_page_domain_reenter_protected(void)
     return 1;
 }
 
+int mvdm_softpc_wow_page_domain_owns_gdt(unsigned long dosx_gdt)
+{
+    return domain.active && domain.wow_context_selected &&
+        domain.owner == compat_host_context_current() &&
+        domain.dosx_gdt == dosx_gdt &&
+        mvdm_cpu_access_current()->gdt_base() == domain.wow_gdt &&
+        mvdm_cpu_access_current()->cr3() == domain.directory &&
+        (mvdm_cpu_access_current()->cr0() & MVDM_SOFTPC_CR0_PG) != 0u;
+}
+
 int mvdm_softpc_wow_page_domain_active(void)
 {
     return domain.active;

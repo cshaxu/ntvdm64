@@ -48,6 +48,7 @@ extern VOID IN8(PULONG, ULONG), IN16(PULONG, ULONG), IN32(PULONG, ULONG);
 extern VOID OUT8(ULONG, ULONG), OUT16(ULONG, ULONG), OUT32(ULONG, ULONG);
 extern void ccpu386CompleteInstruction(void);
 #include "compat/include/monitor_context.h"
+#include "compat/include/mvdm_softpc_wow_page_domain.h"
 /* DIVERGENCE: original TIB storage/projections remain with its DPMI owner. */
 VDM_TIB VdmTib = {0};
 static void monitor_printer_view(mvdm_monitor_printer_view *view)
@@ -491,6 +492,17 @@ Notes:
 #endif
 }
 
+/* DOSX initialization alone does not grant ownership of a guest VMM's CPU. */
+static BOOL
+DpmiOwnsContext(VOID)
+{
+    extern ULONG c_getGDT_BASE(void), c_getLDT_BASE(void);
+    return Ldt && Idt && getMODE() == VDM_PM &&
+        Cpu40GdtShadowAddress && (c_getGDT_BASE() == Cpu40GdtShadowAddress ||
+            mvdm_softpc_wow_page_domain_owns_gdt(Cpu40GdtShadowAddress)) &&
+        Cpu40LdtShadowAddress && c_getLDT_BASE() == Cpu40LdtShadowAddress;
+}
+
 static BOOL BuildStackFrameWithWidth(ULONG, BOOL, PUCHAR *, ULONG *);
 BOOL
 DpmiSwIntHandler(
@@ -537,6 +549,8 @@ Return Value:
 
     } else {
         PUCHAR VdmStackPointer;
+
+        if (!DpmiOwnsContext()) return FALSE;
 
         // Protect mode
         SaveEFLAGS = getEFLAGS();
@@ -615,18 +629,11 @@ Return Value:
     } else {
         PUCHAR VdmStackPointer;
 
-        extern ULONG c_getGDT_BASE(void);
-        extern ULONG c_getLDT_BASE(void);
-
-        if (!Ldt || !Idt || getMODE() != VDM_PM ||
-            !Cpu40GdtShadowAddress || c_getGDT_BASE() != Cpu40GdtShadowAddress ||
-            !Cpu40LdtShadowAddress || c_getLDT_BASE() != Cpu40LdtShadowAddress)
-            return FALSE;
+        if (!DpmiOwnsContext()) return FALSE;
 
         SaveEFLAGS = getEFLAGS();
         //BUGBUG turn off task bits
         SaveEFLAGS &= ~0x4000;
-        setEFLAGS(SaveEFLAGS & ~(EFLAGS_IF_MASK | EFLAGS_TF_MASK));
 
         BeginUseLockedPMStack();
 
@@ -634,6 +641,8 @@ Return Value:
             EndUseLockedPMStack();
             return FALSE;
         }
+
+        setEFLAGS(SaveEFLAGS & ~(EFLAGS_IF_MASK | EFLAGS_TF_MASK));
 
         if (Frame32) {
             *(PDWORD16)(VdmStackPointer-4) = SaveEFLAGS;
@@ -871,18 +880,16 @@ Return Value:
         EmulateV86Int((UCHAR)IntNumber);
         return TRUE;
     }
+    if (!DpmiOwnsContext()) return FALSE;
+
     SaveSS = getSS();
     SaveESP = getESP();
     SaveEFLAGS = getEFLAGS();
     SaveEIP = getEIP();
     SaveCS  = getCS();
     if ((IntNumber == 13 || IntNumber == 6) && DpmiEmulateInstruction()) return TRUE;
-    setEFLAGS(SaveEFLAGS & ~(EFLAGS_IF_MASK | EFLAGS_TF_MASK));
 
     if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) { 
-#if defined(CPU_40_STYLE) && defined(CCPU)
-        setEFLAGS(SaveEFLAGS);
-#endif
         return FALSE;
     }
 
@@ -908,10 +915,11 @@ Return Value:
 #if defined(CPU_40_STYLE) && defined(CCPU)
         /* EndUseLockedPMStack restores the outer stack only at depth 0. */
         setESP(SaveESP);
-        setEFLAGS(SaveEFLAGS);
 #endif
         return FALSE;
     }
+
+    setEFLAGS(SaveEFLAGS & ~(EFLAGS_IF_MASK | EFLAGS_TF_MASK));
 
     if (Frame32) {
         *(PDWORD16)(VdmStackPointer-4) = SaveSS;
@@ -1271,8 +1279,6 @@ Return Value:
     BOOL bReturn = FALSE;
 
     /* Validate instruction prefixes and operands before dispatching side effects. */
-    if (!(getMSW() & MSW_PE) || c_getVM())
-        return FALSE;
     for (;;) {
         if (!DpmiNextCodeByte(Offset, &Length, &Opcode))
             return FALSE;

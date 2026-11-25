@@ -1,0 +1,84 @@
+{
+  "before": {
+    "metric": {
+      "blocks": 40,
+      "added": 254,
+      "deleted": 55
+    },
+    "pairs": [
+      {
+        "xp": 116,
+        "current": 153
+      },
+      {
+        "xp": 470,
+        "current": 489
+      },
+      {
+        "xp": 555,
+        "current": 572
+      },
+      {
+        "xp": 682,
+        "current": 700
+      },
+      {
+        "xp": 725,
+        "current": 718
+      },
+      {
+        "xp": 791,
+        "current": 783
+      },
+      {
+        "xp": 824,
+        "current": 795
+      },
+      {
+        "xp": 969,
+        "current": 940
+      }
+    ]
+  },
+  "after": {
+    "metric": {
+      "blocks": 44,
+      "added": 261,
+      "deleted": 56
+    },
+    "pairs": [
+      {
+        "xp": 116,
+        "current": 154
+      },
+      {
+        "xp": 470,
+        "current": 490
+      },
+      {
+        "xp": 555,
+        "current": 586
+      },
+      {
+        "xp": 682,
+        "current": 709
+      },
+      {
+        "xp": 725,
+        "current": 727
+      },
+      {
+        "xp": 791,
+        "current": 792
+      },
+      {
+        "xp": 824,
+        "current": 804
+      },
+      {
+        "xp": 969,
+        "current": 948
+      }
+    ]
+  }
+}

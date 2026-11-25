@@ -1253,6 +1253,67 @@ static BOOL fullscreen_prompt_chord(const char *ready_path,const char *token)
     scripted_window_frontend=0;
     return sent;
 }
+/* Verify the rendered mode of this observer's owned frontend, not key delivery. */
+static BOOL wait_roundtrip_surface(BOOL graphics)
+{
+    ULONGLONG deadline=GetTickCount64()+20000;
+    do {
+        HWND window=find_owned_kvm_window(); DWORD pid=0; HANDLE process;
+        observed_window_frame frame; BOOL ok=FALSE;
+        if(window && IsWindowVisible(window)) {
+            GetWindowThreadProcessId(window,&pid);
+            process=OpenProcess(PROCESS_VM_READ|SYNCHRONIZE,FALSE,pid);
+            if(process) {
+                ok=observer_window_frame_read(process,window,&frame) &&
+                    (graphics ? frame.frame.graphics!=0 : frame.frame.text!=0);
+                CloseHandle(process);
+            }
+            if(ok){scripted_window_frontend=pid;return TRUE;}
+        }
+        Sleep(25);
+    } while(GetTickCount64()<deadline);
+    return FALSE;
+}
+static BOOL roundtrip_key(WORD key)
+{
+    INPUT_RECORD records[2]={0};
+    records[0].EventType=records[1].EventType=KEY_EVENT;
+    records[0].Event.KeyEvent.bKeyDown=TRUE;
+    records[0].Event.KeyEvent.wRepeatCount=1;
+    records[0].Event.KeyEvent.wVirtualKeyCode=key;
+    records[0].Event.KeyEvent.wVirtualScanCode=(WORD)MapVirtualKeyA(key,MAPVK_VK_TO_VSC);
+    records[1]=records[0];records[1].Event.KeyEvent.bKeyDown=FALSE;
+    return write_window_key_records(records,2);
+}
+static BOOL roundtrip_start(const char *install)
+{
+    char path[MAX_PATH];
+    snprintf(path,sizeof(path),"%s\\PATCH\\WINDOW.BIN",install);
+    return wait_for_report_marker_after(path,"WND1",0,20000) &&
+        wait_roundtrip_surface(TRUE) && roundtrip_key('W');
+}
+static BOOL roundtrip_return(const char *install,const char *report_path)
+{
+    char ready[MAX_PATH],receipt[MAX_PATH],path[MAX_PATH];FILE *report;HWND window;
+    snprintf(ready,sizeof(ready),"%s\\PATCH\\FULL.RUN",install);
+    snprintf(receipt,sizeof(receipt),"%s\\PATCH\\RETURN.KEY",install);
+    if(!wait_roundtrip_surface(FALSE) || !fullscreen_prompt_chord(ready,"READY") ||
+       !wait_roundtrip_surface(TRUE))return FALSE;
+    snprintf(path,sizeof(path),"%s\\PATCH\\RETURN.REQ",install);
+    report=fopen(path,"w");if(!report)return FALSE;
+    if(fclose(report))return FALSE;
+    snprintf(path,sizeof(path),"%s\\PATCH\\RETURN.FOC",install);
+    if(!wait_for_report_marker_after(path,"WND1",0,20000) || !roundtrip_key('R') ||
+       !wait_for_report_marker_after(receipt,"READY",0,20000))return FALSE;
+    window=find_owned_kvm_window();
+    if(!window || !fullscreen_prompt_chord(ready,"READY") ||
+       !wait_roundtrip_surface(FALSE) || !IsWindowVisible(window) ||
+       find_owned_kvm_window()!=window)return FALSE;
+    snprintf(path,sizeof(path),"%s.roundtrip.txt",report_path);
+    report=fopen(path,"w");if(!report)return FALSE;
+    fprintf(report,"window-input=1 fullscreen-text=1 returned-window-input=1 second-fullscreen=1 same-window=1\n");
+    return fclose(report)==0;
+}
 static BOOL milestone_input;
 static unsigned milestone_waits;
 static ULONGLONG milestone_wait_ms;
@@ -3058,7 +3119,9 @@ managed_close_done: ;
     {
         char ready_path[MAX_PATH];
         DWORD length=GetEnvironmentVariableA("MVDM_OBSERVER_FULLSCREEN_READY",ready_path,sizeof(ready_path));
-        if(length && (length>=sizeof(ready_path) || !fullscreen_prompt_chord(ready_path,
+        if(length && GetEnvironmentVariableA("MVDM_OBSERVER_FULLSCREEN_ROUNDTRIP",NULL,0) &&
+           !roundtrip_start(argv[2]))report_failed=1;
+        if(length && (report_failed || length>=sizeof(ready_path) || !fullscreen_prompt_chord(ready_path,
             GetEnvironmentVariableA("MVDM_OBSERVER_PROMPT_PAIR",NULL,0) ? "B" : "READY")))report_failed=1;
     }
     if(graphics_handshake)
@@ -3135,6 +3198,9 @@ managed_close_done: ;
                   !GetEnvironmentVariableA("MVDM_OBSERVER_WINDOW_INPUT",NULL,0)) || console_caf_return(input,argv[3],NULL));
             record_performance("route-ready", scripted_window_frontend ? "Window" : "Console",
                 0, scripted_console_input_delivered);
+            if(scripted_console_input_delivered &&
+               GetEnvironmentVariableA("MVDM_OBSERVER_FULLSCREEN_ROUNDTRIP",NULL,0))
+                scripted_console_input_delivered=roundtrip_return(argv[2],argv[3]);
             if (scripted_console_input_delivered)
                 scripted_console_input_delivered = console_screen_fingerprint(output,
                     &scripted_console_screen_after_input);

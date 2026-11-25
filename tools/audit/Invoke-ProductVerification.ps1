@@ -206,7 +206,7 @@ try {
             try {
                 Invoke-Gate $desktop {
                     $install=if($desktop -eq 'win95'){$Win95InstallRoot}else{$Win31InstallRoot}
-                    & "$repo/test/integration/verify-guest-desktop-startup.ps1" -Case $desktop -InstallSource $install -PackageRoot $sourceRuntime -Observer $observerPath -OutputRoot "$log/$desktop"
+                    & "$repo/test/integration/verify-guest-desktop-startup.ps1" -Case $desktop -InstallSource $install -PackageRoot $sourceRuntime -Observer $observerPath -OutputRoot "$log/$desktop" -DosFullscreenRoundtrip:($desktop -ne 'win31-standard')
                 }
             } catch {
                 $desktopFailures+="${desktop}: $($_.Exception.Message)"

@@ -14,7 +14,7 @@ static DWORD present_fixture(frontend_window_controller *owner,
 
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line %d error %lu: %s\n",__LINE__,GetLastError(),#x); return __LINE__; } } while(0)
 typedef struct observations {
-    LONG retired; DWORD routes; BOOL window,graphics; DWORD consumer_thread;
+    LONG retired; DWORD routes,console_routes; BOOL window,graphics; DWORD consumer_thread;
     unsigned enter_down,enter_up,alt_down,alt_up,chord_sequence;
     HANDLE native_input;frontend_keyboard_delivery keyboard;
 } observations;
@@ -49,7 +49,7 @@ static lib_bool input(void *context,const frontend_window_input *copied)
 static DWORD route(void *context,BOOL window,BOOL graphics)
 {
     observations *seen=context;
-    ++seen->routes;seen->window=window;seen->graphics=graphics;
+    ++seen->routes;if(!window)++seen->console_routes;seen->window=window;seen->graphics=graphics;
     return ERROR_SUCCESS;
 }
 static BOOL CALLBACK find_window(HWND window,LPARAM parameter)
@@ -324,9 +324,25 @@ int main(int argc,char **argv)
     CHECK(first.retired==3);
     CHECK(!frontend_window_select(a,FRONTEND_DISPLAY_WINDOW));
     CHECK(frontend_window_visible(a));
-    CHECK(!frontend_window_clear(a) && !frontend_window_visible(a));
-    CHECK(frontend_window_mode(a)==FRONTEND_DISPLAY_WINDOW);
-    CHECK(!present_fixture(a,frame,FALSE) && frontend_window_visible(a));
+    {
+        LONG retired=first.retired;DWORD console_routes=first.console_routes;
+        CHECK(!present_fixture(a,frame,TRUE));
+        wa=lookup("Frontend controller A");CHECK(wa);
+        CHECK(!frontend_window_clear(a) && frontend_window_visible(a));
+        CHECK(frontend_window_mode(a)==FRONTEND_DISPLAY_WINDOW);
+        CHECK(IsWindow(wa) && lookup("Frontend controller A")==wa);
+        CHECK(first.retired==retired && first.console_routes==console_routes);
+        CHECK(!present_fixture(a,frame,FALSE) && frontend_window_visible(a));
+        CHECK(lookup("Frontend controller A")==wa && first.retired==retired);
+        CHECK(first.console_routes==console_routes);
+        CHECK(!frontend_window_clear(a));
+        CHECK(!frontend_window_select(a,FRONTEND_DISPLAY_CONSOLE));
+        CHECK(!frontend_window_visible(a) && !IsWindow(wa));
+        CHECK(first.retired==retired+1 && first.console_routes==console_routes+1);
+        CHECK(!present_fixture(a,frame,FALSE) && !frontend_window_visible(a));
+        CHECK(!frontend_window_select(a,FRONTEND_DISPLAY_WINDOW));
+        puts("PASS Window policy survives graphics/empty/text without Console route or HWND retirement; explicit Console selection closes");
+    }
     {
         char ansi[KVM_WINDOW_TITLE_CAPACITY];WCHAR expected[KVM_WINDOW_TITLE_CAPACITY],actual[KVM_WINDOW_TITLE_CAPACITY];
         unsigned attempt;DWORD error;

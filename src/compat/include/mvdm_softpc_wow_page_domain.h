@@ -19,6 +19,9 @@ int __cdecl mvdm_softpc_wow_page_domain_reenter_protected(void);
  * completed. The caller remains responsible for original WOW dispatch. */
 int __cdecl mvdm_softpc_wow_page_domain_activate_wow_context(void);
 
+/* Recognize the active descriptor view derived from this DOSX GDT. */
+int __cdecl mvdm_softpc_wow_page_domain_owns_gdt(unsigned long dosx_gdt);
+
 /* The remaining client-view addresses are exposed only to the worker's
  * original WOW32 provider and its narrow native object companion.  They are
  * guest-linear addresses, never host USER pointers. */

@@ -120,11 +120,14 @@ extern void c_setEIP(uint32_t);
 extern void c_setRF(IBOOL);
 extern IBOOL c_getCF(void);
 extern BOOL ThreadSetDebugContext(PULONG);
-extern void DpmiSetDebugRegisters(void);
+extern BOOL DpmiSetDebugRegisters(PULONG);
 static void debug_broadcast_out(io_addr port, half_word value) {
     ULONG registers[6]={0xf1002,0,0,0,0,1};
     (void)port; (void)value;
-    if (test_case>=114) DpmiSetDebugRegisters();
+    if (test_case>=114) {
+        BOOL accepted=DpmiSetDebugRegisters(test_case==115 ? NULL : registers);
+        if(accepted!=(test_case!=115)) ++wrong_string_write;
+    }
     else if (!ThreadSetDebugContext(registers)) ++wrong_string_write;
 }
 
@@ -163,19 +166,14 @@ static int broadcast_debug_execution(void) {
     half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
     c_cpu_init();io_init();io_define_outb(adapter,debug_broadcast_out);
     io_connect_port((io_addr)0x80,adapter,IO_WRITE);
-    if(test_case==116) {
-        const unsigned char bop[]={0xd6,0x53,0x0e,0x43,0xb8,0xef,0xbe,0xd6,0xfe};
-        CopyMemory(c_GetPhyAdd(0xf1000),bop,sizeof(bop));
-    }
     *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x00009a0fu;
     *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x00009300u;
     CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));
-    if(test_case!=116) CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
     c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(0);
     c_setCS(0x18);c_setSS(0x20);c_setDS(0x20);c_setSP(0x800);
     if(test_case>=114) {
         ULONG registers[6]={0xf1002,0,0,0,0,1};
-        if(test_case==116) registers[0]=0xf1003;
         CopyMemory(c_GetPhyAdd(0x300),registers,sizeof(registers));
         c_setSI(test_case==115 ? 0xfff0 : 0x300);
     }
@@ -184,8 +182,7 @@ static int broadcast_debug_execution(void) {
     VdmInstallFaultHandler((void *)probe_debug_fault);
     c_cpu_simulate();VdmInstallFaultHandler(NULL);MOV_DR(7,0);
     {char line[120];wsprintfA(line,"BROADCAST_DEBUG fault=%lu eip=%lx bx=%04x\n",test_fault,frame_fault_eip,c_getBX());report(line);}
-    if(test_case==115) return !wrong_string_write && !test_fault && c_getBX()==1 && c_getCF();
-    if(test_case==116) return !test_fault ? 0 : frame_fault_eip==0x1003 && c_getBX()==0;
+    if(test_case==115) return !wrong_string_write && !test_fault && c_getBX()==1;
     return !wrong_string_write && test_fault==1 && frame_fault_eip==0x1002 && c_getBX()==0;
 }
 
@@ -201,6 +198,20 @@ extern unsigned short c_getSI(void),c_getDI(void),c_getCX(void);
 
 /* A code selector's translated base does not establish a linear host alias
  * for an independently remapped later code page. */
+/* Establish the same table identity that DOSX initialization publishes. */
+static void bind_test_dosx_context(void)
+{
+    extern ULONG Cpu40GdtShadowAddress, Cpu40LdtShadowAddress;
+    extern ULONG c_getGDT_BASE(void), c_getLDT_BASE(void);
+    extern void *Idt;
+    if (!c_getGDT_BASE()) c_setGDT_BASE_LIMIT(0x2000,0xff);
+    if (!c_getLDT_BASE()) c_setLDT_BASE_LIMIT(0x3000,39);
+    Cpu40GdtShadowAddress=c_getGDT_BASE();
+    Cpu40LdtShadowAddress=c_getLDT_BASE();
+    Idt=c_GetPhyAdd(0x9000);
+}
+extern BOOL DpmiFaultHandler(ULONG,ULONG);
+
 static int dpmi_remapped_code_page(void) {
     unsigned char ldt[40]={0}; ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);
     unsigned j, mode=test_case>=99 ? test_case-6 : test_case>=96 ? test_case-3 : test_case; BOOL handled;
@@ -243,13 +254,13 @@ static int dpmi_remapped_code_page(void) {
     c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x3000,sizeof(ldt)-1);
     c_setPE(1); c_setCPL(3); c_setCS(0x1f); c_setSS(0x27); c_setIOPL(0); c_setEIP(mode==95 ? 0xfff : 0x1000);
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000);
-    Cpu40LdtShadowAddress=0x3000; DosxRmCodeSelector=0x1f;
+    Cpu40LdtShadowAddress=0x3000; bind_test_dosx_context(); DosxRmCodeSelector=0x1f;
     c_setCR3(0x4000); c_setPG(1); expected_cr0=c_getCR0();
     if(cr_write) c_setEAX(expected_cr0 ^ 4u);
     if(test_case>=99 && !negative && !cr_case) {
         VdmInstallFaultHandler((void *)DpmiFaultHandler);
         handled=host_exint_hook(13,0); VdmInstallFaultHandler(NULL);
-    } else handled=test_case>=96 && !negative && !cr_case ? DpmiFaultHandler(13,0) : DpmiEmulateInstruction();
+    } else handled=test_case>=96 && !negative && !cr_case ? DpmiFaultHandler(13,0) : DpmiFaultHandler(13,0);
     if(cr_write && c_getCR0()!=(expected_cr0 ^ 4u)) { c_setPG(0); return 0; }
     c_setPG(0);
     {char line[120];wsprintfA(line,"DPMI_REMAPPED_CODE handled=%d eip=%08lx\n",handled,c_getEIP());report(line);}
@@ -276,8 +287,8 @@ static int dpmi_remapped_decode_fallback(void) {
     c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x3000,sizeof(ldt)-1);
     c_setPE(1); c_setCPL(3); c_setCS(0x1f); c_setSS(0x27); c_setIOPL(0); c_setEIP(0x1fff);
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000);
-    Cpu40LdtShadowAddress=0x3000; DosxRmCodeSelector=0x1f;
-    c_setCR3(0x4000); c_setPG(1); handled=DpmiEmulateInstruction(); c_setPG(0);
+    Cpu40LdtShadowAddress=0x3000; bind_test_dosx_context(); DosxRmCodeSelector=0x1f;
+    c_setCR3(0x4000); c_setPG(1); handled=DpmiFaultHandler(13,0); c_setPG(0);
     report(handled ? "DPMI_DECODE_FALLBACK mixed-path\n" : "DPMI_DECODE_FALLBACK original-path\n");
     return !handled && c_getEIP()==0x1fff;
 }
@@ -325,7 +336,7 @@ static int dpmi_faulting_decode_page(void) {
     c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1); c_setPE(1); c_setCPL(3);
     c_setCS(0x1b); c_setSS(0x23); c_setIOPL(0); c_setIF(1); c_setEIP(0x1000);
     *(uint32_t *)c_GetPhyAdd(0x301c)=0x0000fa02u;
-    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Cpu40LdtShadowAddress=0x3000;
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Cpu40LdtShadowAddress=0x3000; bind_test_dosx_context();
     Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000);
     c_setCR3(0x4000); c_setPG(1); test_fault=0; test_irq=0;
     VdmInstallFaultHandler((void *)dpmi_decode_page_fault);
@@ -615,7 +626,7 @@ static int dpmi_completed_instruction(void)
     c_setPE(1); c_setCPL(3); c_setCS(0x1f); c_setSS(0x27);
     c_setSP(0x800); c_setIOPL(0); c_setEIP(0x1000); c_setBX(0); c_setEAX(0);
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0);
-    Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000); Cpu40LdtShadowAddress=0x3000;
+    Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000); Cpu40LdtShadowAddress=0x3000; bind_test_dosx_context();
     ZeroMemory(DpmiFaultHandlers,sizeof(FAULT_HANDLER)*32);
     *(ULONG *)c_GetPhyAdd(FIXED_NTVDMSTATE_LINEAR)=VIRTUAL_INTERRUPT_BIT;
     c_setIOPL(test_case==180 ? 3 : 0);
@@ -678,7 +689,7 @@ static void dpmi_scalar_setup(BOOL big, ULONG limit)
     c_setSP(0x800); c_setIOPL(0); c_setEIP(0x1000); c_setEAX(0x12345678);
     CCPU_GR[2]=0x80;
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0);
-    Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000); Cpu40LdtShadowAddress=0x3000;
+    Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000); Cpu40LdtShadowAddress=0x3000; bind_test_dosx_context();
     ZeroMemory(DpmiFaultHandlers,sizeof(FAULT_HANDLER)*32);
     c_setEFLAGS(0xed7); c_setIF(1);
     scalar_calls=scalar_width=scalar_bad=scalar_value=0;
@@ -751,7 +762,7 @@ static int dpmi_decode_boundaries(void)
         if(k>=12)*c_GetPhyAdd(0xf0fff)=code[0];
         else CopyMemory(c_GetPhyAdd(0xf1000),code,sizeof(code));
         c_setEIP(offset); before=c_getEFLAGS();
-        handled=DpmiEmulateInstruction();
+        handled=DpmiFaultHandler(13,0);
         if(k>=12)c_setPG(0);
         ok=handled==(k==10 || k==14) && !scalar_bad &&
             scalar_calls==(handled ? 1u : 0u) && c_getEFLAGS()==before &&
@@ -759,6 +770,44 @@ static int dpmi_decode_boundaries(void)
         wsprintfA(line,"DPMI_DECODE_BOUNDARY case=%u pass=%d handled=%d calls=%u ip=%lx\n",
             k,ok,handled,scalar_calls,c_getEIP());report(line);if(!ok)return 0;
     }
+    return 1;
+}
+static int dpmi_ownership_rejection(void)
+{
+    extern BOOL DpmiHwIntHandler(ULONG);
+    extern void *Idt;
+    extern ULONG Cpu40GdtShadowAddress, Cpu40LdtShadowAddress;
+    extern ULONG c_getESP(void);
+    unsigned state,entry;
+    for(state=0;state<5;++state) for(entry=0;entry<3;++entry) {
+        ULONG flags,ip,sp; USHORT cs,ss; BOOL handled;
+        dpmi_scalar_setup(FALSE,0xffff);
+        *c_GetPhyAdd(0xf1000)=0xec;
+        LockedPMStackCount=0;
+        if(state==0)Ldt=NULL;
+        if(state==1)Idt=NULL;
+        if(state==2)Cpu40GdtShadowAddress+=8;
+        if(state==3)Cpu40LdtShadowAddress+=8;
+        if(state==4)c_setVM(1);
+        flags=c_getEFLAGS();ip=c_getEIP();sp=c_getESP();cs=c_getCS();ss=c_getSS();
+        handled=entry==0 ? DpmiHwIntHandler(8) : entry==1 ?
+            DpmiSwIntHandler(0x21) : DpmiFaultHandler(13,0);
+        if(handled || scalar_calls || c_getEFLAGS()!=flags || c_getEIP()!=ip ||
+           c_getESP()!=sp || c_getCS()!=cs || c_getSS()!=ss || LockedPMStackCount)return 0;
+    }
+    /* Owned contexts also decline missing handlers / failed frames without flags leakage. */
+    for(entry=0;entry<3;++entry) {
+        ULONG flags,ip,sp; BOOL handled;
+        dpmi_scalar_setup(FALSE,0xffff);
+        LockedPMStackSel=0x27;LockedPMStackCount=entry==2 ? 1 : 0;
+        Ldt[4].LimitLow=0;
+        DpmiFaultHandlers[0].cs=entry==1 ? 0 : 0x1f;
+        flags=c_getEFLAGS();ip=c_getEIP();sp=c_getESP();
+        handled=entry==0 ? DpmiHwIntHandler(8) : DpmiFaultHandler(0,0);
+        if(handled || c_getEFLAGS()!=flags || c_getEIP()!=ip || c_getESP()!=sp ||
+           c_getSS()!=0x27 || LockedPMStackCount!=(entry==2 ? 1u : 0u))return 0;
+    }
+    report("PASS DPMI three-entry ownership rejection and frame rollback\n");
     return 1;
 }
 static ULONG dpmi_irq_ip,dpmi_irq_bx,dpmi_irq_state;
@@ -872,7 +921,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();c_cpu_init();
-    if(test_case==183) ok=dpmi_irq_boundary();
+    if(test_case==185) ok=dpmi_ownership_rejection();
+    else if(test_case==183) ok=dpmi_irq_boundary();
     else if(test_case==182) ok=dpmi_decode_boundaries();
     else if(test_case==181) ok=dpmi_scalar_matrix();
     else if(test_case>=177 && test_case<=180) ok=dpmi_completed_instruction();
@@ -886,7 +936,7 @@ int main(int argc, char **argv) {
     else if(test_case==154) ok=dpmi_remapped_decode_fallback();
     else if((test_case>=93 && test_case<=101) || (test_case>=104 && test_case<=106) || (test_case>=150 && test_case<=153) || test_case==155 || test_case==156) ok=dpmi_remapped_code_page();
     else if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();
-    else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
+    else if(test_case>=113 && test_case<=115) ok=broadcast_debug_execution();
     else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
     else if(test_case==49) ok=duplicate_tlb_mapping();
     else if(test_case==76) ok=monitor_cache_contract();

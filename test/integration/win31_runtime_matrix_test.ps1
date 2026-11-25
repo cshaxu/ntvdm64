@@ -18,6 +18,7 @@ param(
     [switch]$Win95ExitBoundary,
     [string]$MouseProbeRoot,
     [switch]$FullscreenKey,
+    [switch]$FullscreenRoundtrip,
     [switch]$PromptPair,
     [ValidateSet('blocking','nonblocking')][string]$Scheduling,
     [string]$ScheduledRun16Command,
@@ -105,7 +106,7 @@ $autoBytes = [IO.File]::ReadAllBytes($autoexec)
 $encoding = [Text.Encoding]::GetEncoding(28591)
 $results = [Collections.Generic.List[object]]::new()
 $savedEnv = @{}
-foreach ($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_FULLSCREEN_READY','MVDM_OBSERVER_PROMPT_PAIR')) {
+foreach ($name in @('PATH','TEMP','TMP','MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_FULLSCREEN_READY','MVDM_OBSERVER_PROMPT_PAIR','MVDM_OBSERVER_FULLSCREEN_ROUNDTRIP')) {
     $savedEnv[$name] = [Environment]::GetEnvironmentVariable($name,'Process')
 }
 try {
@@ -166,8 +167,9 @@ try {
             # Console-close legitimately interrupts the outer test batch too.
             # Answer only its observed CMD confirmation, never inject into a VM.
             if($ConsoleClose){$observerArgs+=@('--observe-console-input-marker','(Y/N)?','--observe-console-input-escaped','y\r')}
-            Remove-Item Env:MVDM_OBSERVER_PROMPT_PAIR,Env:MVDM_OBSERVER_FULLSCREEN_READY -ErrorAction SilentlyContinue
-            if($FullscreenKey -or $PromptPair){
+            Remove-Item Env:MVDM_OBSERVER_PROMPT_PAIR,Env:MVDM_OBSERVER_FULLSCREEN_READY,Env:MVDM_OBSERVER_FULLSCREEN_ROUNDTRIP -ErrorAction SilentlyContinue
+            if($FullscreenKey -or $PromptPair -or $FullscreenRoundtrip){
+                if($FullscreenRoundtrip){$env:MVDM_OBSERVER_FULLSCREEN_ROUNDTRIP='1'}
                 $env:MVDM_OBSERVER_WINDOW_INPUT='1'
                 $env:MVDM_OBSERVER_FULLSCREEN_READY=Join-Path $patch 'FULL.RUN'
                 if($PromptPair){

@@ -3580,3 +3580,9 @@ sole original VdmTib and typed synchronous printer projections. B keeps
 thread binding and printer behavior without C private headers. F installs
 the provider before entry. Non-error30points/180lines ->30points/209lines;
 R2743. No DPMI algorithm, guest or diagnostic mapping is changed.
+
+T485 S5 P4: dpmi32/dpmiint.c shares one DOSX-context check across the three
+protected dispatch entries and defers FLAGS changes until frame acceptance.
+Original guest dispatch, stack rollback and instruction validation remain.
+Non-error XP mirror increment: 4 points / 8 difference lines. See the
+[ownership receipt](../../docs/etc/evidence/t485-s1/s5-p4-dpmi-ownership.md).

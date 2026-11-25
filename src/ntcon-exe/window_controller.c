@@ -114,8 +114,12 @@ static DWORD close_window(frontend_window_controller *owner)
 static DWORD apply(frontend_window_controller *owner)
 {
     DWORD error;
-    BOOL want=owner->frame_valid &&
-        (owner->display==FRONTEND_DISPLAY_WINDOW || owner->graphics);
+    /* A temporary gap between video modes is not a request to return the
+     * Console. Keep an existing explicitly selected Window until the next
+     * frame, an explicit Console selection or frontend teardown. */
+    BOOL want=owner->display==FRONTEND_DISPLAY_WINDOW ?
+        (owner->frame_valid || owner->window!=NULL) :
+        (owner->frame_valid && owner->graphics);
     if(!want)return close_window(owner);
     if(!owner->window) {
         kvm_window_options options={0};
@@ -255,7 +259,7 @@ DWORD frontend_window_clear(frontend_window_controller *owner)
 {
     if(!owner)return ERROR_INVALID_PARAMETER;
     kvm_frame_exchange_invalidate(owner->frames);
-    owner->frame_valid=FALSE;
+    owner->frame_valid=owner->frame_dirty=FALSE;
     owner->graphics=FALSE;
     return frontend_window_poll(owner);
 }

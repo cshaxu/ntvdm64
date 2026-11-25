@@ -113,6 +113,53 @@ push word 1
 api 1,166                        ; WinExec
 cmp ax,32
 jb fatal
+%ifdef W31_FULLSCREEN_ROUNDTRIP
+.window_ready:
+api 1,29
+push word 0
+push word 0
+push ds
+push word round_title-data
+api 2,50
+ test ax,ax
+jz .window_ready
+mov [round_hwnd-data],ax
+push ax
+api 2,49
+ test ax,ax
+jz .window_ready
+push word [round_hwnd-data]
+api 2,31
+ test ax,ax
+jnz .window_ready
+push word [round_hwnd-data]
+api 2,45
+push word [round_hwnd-data]
+api 2,59
+api 1,29
+api 2,60
+cmp ax,[round_hwnd-data]
+jne .window_ready
+push word [round_hwnd-data]
+push ds
+push word round_rect-data
+api 2,32
+push ds
+push word round_ready-data
+push word 0
+api 1,83
+cmp ax,-1
+je fatal
+push ax
+push ax
+push ds
+push word round_record-data
+push word round_end-round_record
+api 1,86
+cmp ax,round_end-round_record
+jne fatal
+api 1,81
+%endif
 %ifdef W31_SCHEDULING_CHECK
 %ifdef W31_SCHEDULING_INTERACTIVE
 ; Use the interactive COMMAND prompt, not COMMAND /c's SingleCom path.
@@ -344,7 +391,51 @@ mov bx,first_done-data
 %else
 mov bx,receipt_name-data
 %endif
+%ifdef W31_FULLSCREEN_ROUNDTRIP
+push bx
+mov bx,round_request-data
 call .wait_file
+.round_focus:
+api 1,29
+push word [round_hwnd-data]
+api 2,45
+push word [round_hwnd-data]
+api 2,59
+api 1,29
+api 2,60
+cmp ax,[round_hwnd-data]
+jne .round_focus
+push ds
+push word round_focused-data
+push word 0
+api 1,83
+cmp ax,-1
+je fatal
+push ax
+push ax
+push ds
+push word round_record-data
+push word round_end-round_record
+api 1,86
+cmp ax,round_end-round_record
+jne fatal
+api 1,81
+pop bx
+%endif
+call .wait_file
+%ifdef W31_FULLSCREEN_ROUNDTRIP
+; The receipt precedes DOS termination; await actual window retirement.
+.round_retired:
+api 1,29
+push word 0
+push word 0
+push ds
+push word round_title-data
+api 2,50
+test ax,ax
+jnz .round_retired
+jmp .finished
+%endif
 push ds
 push word app_name-data
 push word 1
@@ -487,6 +578,16 @@ ready_name: db '@W31_READY_PATH@',0
 times 128-($-ready_name) db 0
 %ifdef W31_PROMPT_CHECK
 prompt_name: db W31_INSTALL,'\DOSCHECK.PIF',0
+%ifdef W31_FULLSCREEN_ROUNDTRIP
+round_title: db 'DOS fullscreen roundtrip',0
+round_ready: db W31_INSTALL,'\PATCH\WINDOW.BIN',0
+round_request: db W31_INSTALL,'\PATCH\RETURN.REQ',0
+round_focused: db W31_INSTALL,'\PATCH\RETURN.FOC',0
+round_record: db 'WND1'
+round_hwnd: dw 0
+round_rect: times 4 dw 0
+round_end:
+%endif
 %ifdef W31_SCHEDULING_CHECK
 heartbeat_name: db W31_INSTALL,'\PATCH\SCHED.HB',0
 schedule_done: db W31_INSTALL,'\PATCH\SCHED.END',0
